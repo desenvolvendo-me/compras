@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset="utf-8">
+    <%= csrf_meta_tag %>
+
+    <title>Sistema Tributário</title>
+
+    <%= stylesheet_link_tag 'report', :media => :all %>
+  </head>
+
+  <body>
+    <% if current_prefecture %>
+      <div class="header">
+        <div class="yui3-g">
+          <div class="yui3-u-1-5 logo">
+            <%= image_tag current_prefecture.image if current_prefecture.image? %></p>
+          </div>
+
+          <div class="yui3-u-3-5 prefecture">
+            <p class="center"><%= current_prefecture.name %> | CNPJ: <%= current_prefecture.cnpj %></p>
+            <p class="center">E-mail: <%= current_prefecture.email %> | Telefone: <%= current_prefecture.phone %> | Fax: <%= current_prefecture.fax %></p>
+          </div>
+
+          <div class="yui3-u-1-5 links hide-from-print">
+            <ul>
+              <li>
+                <%= link_to 'Imprimir', print_path, :class => 'button primary' %>
+              </li>
+
+              <li>
+                <%= link_to 'Voltar', back_path, :class => 'button secondary' %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

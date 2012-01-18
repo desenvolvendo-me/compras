@@ -1,0 +1,11 @@
+<%- attributes.each do |attribute| -%>
+<dl>
+  <dt><%%= resource_class.human_attribute_name :<%= attribute.name %> %></dt>
+  <%- if attribute.type == :boolean -%>
+  <dd><%%= t resource.<%= attribute.name %>.to_s %></dd>
+  <%- else -%>
+  <dd><%%= resource.<%= attribute.name %> %></dd>
+  <%- end -%>
+</dl>
+
+<%- end -%>

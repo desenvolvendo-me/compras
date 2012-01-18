@@ -1,0 +1,24 @@
+<fieldset>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :name, :input_html => { :size => 30, :disabled => f.object.has_object_registrations? } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :description, :input_html => { :size => 30, :disabled => f.object.has_object_registrations? } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :mask, :input_html => { :size => 20, :disabled => f.object.has_object_registrations? } %>
+    </div>
+
+    <%= f.input :id, :as => 'hidden' %>
+    <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+  </div>
+
+  <% unless f.object.has_object_registrations? %>
+    <p>
+      <input type="button" class="button negative remove-field" value="Remover">
+    </p>
+  <% end %>
+</fieldset>

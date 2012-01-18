@@ -1,0 +1,74 @@
+pt-BR:
+  flash:
+    male: &male
+      create:
+        notice: "%{resource_name} criado com sucesso."
+
+      update:
+        notice: "%{resource_name} editado com sucesso."
+
+      destroy:
+        notice: "%{resource_name} apagado com sucesso."
+        alert: "%{resource_name} não pode ser apagado."
+
+    female: &female
+      create:
+        notice: "%{resource_name} criada com sucesso."
+
+      update:
+        notice: "%{resource_name} editada com sucesso."
+
+      destroy:
+        notice: "%{resource_name} apagada com sucesso."
+        alert: "%{resource_name} não pode ser apagada."
+
+    actions:
+      <<: *male
+
+    agencies:
+      <<: *female
+
+    branch_classifications:
+      <<: *female
+
+    cities:
+      <<: *female
+
+    contribution_improvement_situations:
+      <<: *female
+
+    contribution_improvements:
+      <<: *female
+
+    currencies:
+      <<: *female
+
+    fiscal_execution_movimentations:
+      <<: *female
+
+    fiscal_executions:
+      <<: *female
+
+    judicial_class_processes:
+      <<: *female
+
+    judicial_districts:
+      <<: *female
+
+    parcels:
+      <<: *female
+
+    prefectures:
+      <<: *female
+
+    property_settings:
+      <<: *female
+
+    reference_units:
+      <<: *female
+
+    section_streets:
+      <<: *female
+
+    settings:
+      <<: *female

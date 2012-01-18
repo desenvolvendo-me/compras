@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      installment_term:
+        one: "Termo de Parcelamento"
+        other: "Termos de Parcelamento"
+
+    attributes:
+      installment_term:
+        year: "Ano"
+        person: "Contribuinte"
+
+  simple_form:
+    hints:
+      instalment_term:
+        year: "Exemplo: 2005-2007; 2011;"

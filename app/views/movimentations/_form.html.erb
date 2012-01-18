@@ -1,0 +1,12 @@
+<fieldset>
+  <%= f.input :movimentation_date %>
+  <%= f.input :situation, :collection => FiscalNotificationSituation.to_a %>
+  <%= f.input :opinion %>
+
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <p>
+    <input type="button" class="button negative remove-movimentation" value="Remover Movimentação">
+  </p>
+</fieldset>

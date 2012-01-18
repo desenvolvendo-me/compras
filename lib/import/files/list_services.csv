@@ -1,0 +1,239 @@
+code;name;order;aliquot
+1.00;Serviços de informática e congêneres.;10;3.00
+1.01;Análise e desenvolvimento de sistemas.;20;3.00
+1.02;Programação.;30;3.00
+1.03;Processamento de dados e congêneres.;40;3.00
+1.04;Elaboração de programas de computadores, inclusive de jogos eletrônicos.;50;3.00
+1.05;Licenciamento ou cessão de direito de uso de programas de computação.;60;3.00
+1.06;Assessoria e consultoria em informática.;70;3.00
+1.07;Suporte técnico em informática, inclusive instalação, configuração e manutenção de programas de computação e bancos de dados.;80;3.00
+1.08;Planejamento, confecção, manutenção e atualização de páginas eletrônicas.;90;3.00
+2.00;Serviços de pesquisas e desenvolvimento de qualquer natureza.;100;3.00
+2.01;Serviços de pesquisas e desenvolvimento de qualquer natureza.;110;3.00
+3.00;Serviços prestados mediante locação, cessão de direito de uso e congêneres.;120;3.00
+3.01;(VETADO) - Locação de bens móveis.;130;3.00
+3.02;Cessão de direito de uso de marcas e de sinais de propaganda.;140;3.00
+3.03;Exploração de salões de festas, centro de convenções, escritórios virtuais, stands, quadras esportivas, estádios, ginásios, auditórios, casas de espetáculos, parques de diversões, canchas e congêneres, para realização de eventos ou negócios de qualquer natureza.;150;3.00
+3.04;Locação, sublocação, arrendamento, direito de passagem ou permissão de uso, compartilhado ou não, de ferrovia, rodovia, postes, cabos, dutos e condutos de qualquer natureza.;160;3.00
+3.05;Cessão de andaimes, palcos, coberturas e outras estruturas de uso temporário.;170;3.00
+4.00;Serviços de saúde, assistência médica e congêneres.;180;3.00
+4.01;Medicina e biomedicina.;190;3.00
+4.02;Análises clínicas, patologia, eletricidade médica, radioterapia, quimioterapia, ultra-sonografia, ressonância magnética, radiologia, tomografia e congêneres.;200;3.00
+4.03;Hospitais, clínicas, laboratórios, sanatórios, manicômios, casas de saúde, prontos-socorros, ambulatórios e congêneres.;210;3.00
+4.04;Instrumentação cirúrgica.;220;3.00
+4.05;Acupuntura.;230;3.00
+4.06;Enfermagem, inclusive serviços auxiliares.;240;3.00
+4.07;Serviços farmacêuticos.;250;3.00
+4.08;Terapia ocupacional, fisioterapia e fonoaudiologia.;260;3.00
+4.09;Terapias de qualquer espécie destinadas ao tratamento físico, orgânico e mental.;270;3.00
+4.10;Nutrição.;280;3.00
+4.11;Obstetrícia.;290;3.00
+4.12;Odontologia.;300;3.00
+4.13;Ortóptica.;310;3.00
+4.14;Próteses sob encomenda.;320;3.00
+4.15;Psicanálise.;330;3.00
+4.16;Psicologia.;340;3.00
+4.17;Casas de repouso e de recuperação, creches, asilos e congêneres.;350;3.00
+4.18;Inseminação artificial, fertilização in vitro e congêneres.;360;3.00
+4.19;Bancos de sangue, leite, pele, olhos, óvulos, sêmen e congêneres.;370;3.00
+4.20;Coleta de sangue, leite, tecidos, sêmen, órgãos e materiais biológicos de qualquer espécie.;380;3.00
+4.21;Unidade de atendimento, assistência ou tratamento móvel e congêneres.;390;3.00
+4.22;Planos de medicina de grupo ou individual e convênios para prestação de assistência médica, hospitalar, odontológica e congêneres.;400;3.00
+4.23;Outros planos de saúde que se cumpram através de serviços de terceiros contratados, credenciados, cooperados ou apenas pagos pelo operador do plano mediante indicação do beneficiário.;410;3.00
+5.00;Serviços de medicina e assistência veterinária e congêneres.;420;3.00
+5.01;Medicina veterinária e zootecnia.;430;3.00
+5.02;Hospitais, clínicas, ambulatórios, prontos-socorros e congêneres, na área veterinária.;440;3.00
+5.03;Laboratórios de análise na área veterinária.;450;3.00
+5.04;Inseminação artificial, fertilização in vitro e congêneres.;460;3.00
+5.05;Bancos de sangue e de órgãos e congêneres.;470;3.00
+5.06;Coleta de sangue, leite, tecidos, sêmen, órgãos e materiais biológicos de qualquer espécie.;480;3.00
+5.07;Unidade de atendimento, assistência ou tratamento móvel e congêneres.;490;3.00
+5.08;Guarda, tratamento, amestramento, embelezamento, alojamento e congêneres.;500;3.00
+5.09;Planos de atendimento e assistência médico-veterinária.;510;3.00
+6.00;Serviços de cuidados pessoais, estética, atividades físicas e congêneres.;520;3.00
+6.01;Barbearia, cabeleireiros, manicuros, pedicuros e congêneres.;530;3.00
+6.02;Esteticistas, tratamento de pele, depilação e congêneres.;540;3.00
+6.03;Banhos, duchas, sauna, massagens e congêneres.;550;3.00
+6.04;Ginástica, dança, esportes, natação, artes marciais e demais atividades físicas.;560;3.00
+6.05;Centros de emagrecimento, spa e congêneres.;570;3.00
+7.00;Serviços relativos a engenharia, arquitetura, geologia, urbanismo, construção civil, manutenção, limpeza, meio ambiente, saneamento e congêneres.;580;3.00
+7.01;Engenharia, agronomia, agrimensura, arquitetura, geologia, urbanismo, paisagismo e congêneres.;590;3.00
+7.02;Execução, por administração, empreitada ou subempreitada, de obras de construção civil, hidráulica ou elétrica e de outras obras semelhantes, inclusive sondagem, perfuração de poços, escavação, drenagem e irrigação, terraplanagem, pavimentação, concretagem e a instalação e montagem de produtos, peças e equipamentos (exceto o fornecimento de mercadorias produzidas pelo prestador de serviços fora do local da prestação dos se\x0Arviços, que fica sujeito ao ICMS).;600;3.00
+7.03;Elaboração de planos diretores, estudos de viabilidade, estudos organizacionais e outros, relacionados com obras e serviços de engenharia;610;3.00
+7.04;Demolição.;620;3.00
+7.05;Reparação, conservação e reforma de edifícios, estradas, pontes, portos e congêneres (exceto o fornecimento de mercadorias produzidas pelo prestador dos serviços, fora do local da prestação dos serviços, que fica sujeito ao ICMS).;630;3.00
+7.06;Colocação e instalação de tapetes, carpetes, assoalhos, cortinas, revestimentos de parede, vidros, divisórias, placas de gesso e congêneres, com material fornecido pelo tomador do serviço.;640;3.00
+7.07;Recuperação, raspagem, polimento e lustração de pisos e congêneres.;650;3.00
+7.08;Calafetação.;660;3.00
+7.09;Varrição, coleta, remoção, incineração, tratamento, reciclagem, separação e destinação final de lixo, rejeitos e outros resíduos quaisquer.;670;3.00
+7.10;Limpeza, manutenção e conservação de vias e logradouros públicos, imóveis, chaminés, piscinas, parques, jardins e congêneres.;680;3.00
+7.11;Decoração e jardinagem, inclusive corte e poda de árvores.;690;3.00
+7.12;Controle e tratamento de efluentes de qualquer natureza e de agentes físicos, químicos e biológicos.;700;3.00
+7.13;Dedetização, desinfecção, desinsetização, imunização, higienização, desratização, pulverização e congêneres.;710;3.00
+7.14;(VETADO) - Saneamento ambiental, inclusive purificação, tratamento, esgotamento sanitário e congêneres.;720;3.00
+7.15;(VETADO) - Tratamento e purificação de água.;730;3.00
+7.16;Florestamento, reflorestamento, semeadura, adubação e congêneres.;740;3.00
+7.17;Escoramento, contenção de encostas e serviços congêneres.;750;3.00
+7.18;Limpeza e dragagem de rios, portos, canais, baías, lagos, lagoas, represas, açudes e congêneres.;760;3.00
+7.19;Acompanhamento e fiscalização da execução de obras de engenharia, arquitetura e urbanismo.;770;3.00
+7.20;Aerofotogrametria (inclusive interpretação), cartografia, mapeamento, levantamentos topográficos, batimétricos, geográficos, geodésicos, geológicos, geofísicos e congêneres.;780;3.00
+7.21;Pesquisa, perfuração, cimentação, mergulho, perfilagem, concretação, testemunhagem, pescaria, estimulação e outros serviços relacionados com a exploração e explotação de petróleo, gás natural e de outros recursos minerais.;790;3.00
+7.22;Nucleação e bombardeamento de nuvens e congêneres.;800;3.00
+8.00;Serviços de educação, ensino, orientação pedagógica e educacional, instrução, treinamento e avaliação pessoal de qualquer grau ou natureza.;810;3.00
+8.01;Ensino regular pré-escolar, fundamental, médio e superior.;820;3.00
+8.02;Instrução, treinamento, orientação pedagógica e educacional, avaliação de conhecimentos de qualquer natureza.;830;3.00
+9.00;Serviços relativos a hospedagem, turismo, viagens e congêneres.;840;3.00
+9.01;Hospedagem de qualquer natureza em hotéis, apart-service condominiais, flat, apart-hotéis, hotéis residência, residence-service, suite service, hotelaria marítima, motéis, pensões e congêneres;850;3.00
+17.14;Advocacia.;1770;3.00
+9.02;Agenciamento, organização, promoção, intermediação e execução de programas de turismo, passeios, viagens, excursões, hospedagens e congêneres.;860;3.00
+9.03;Guias de turismo.;870;3.00
+10.00;Serviços de intermediação e congêneres.;880;3.00
+10.01;Agenciamento, corretagem ou intermediação de câmbio, de seguros, de cartões de crédito, de planos de saúde e de planos de previdência privada.;890;3.00
+10.02;Agenciamento, corretagem ou intermediação de títulos em geral, valores mobiliários e contratos quaisquer.;900;3.00
+10.03;Agenciamento, corretagem ou intermediação de direitos de propriedade industrial, artística ou literária.;910;3.00
+10.04;Agenciamento, corretagem ou intermediação de contratos de arrendamento mercantil (leasing), de franquia (franchising) e de faturização (factoring).;920;3.00
+10.05;Agenciamento, corretagem ou intermediação de bens móveis ou imóveis, não abrangidos em outros itens ou subitens, inclusive aqueles realizados no âmbito de Bolsas de Mercadorias e Futuros, por quaisquer meios.;930;3.00
+10.06;Agenciamento marítimo.;940;3.00
+10.07;Agenciamento de notícias.;950;3.00
+10.08;Agenciamento de publicidade e propaganda, inclusive o agenciamento de veiculação por quaisquer meios.;960;3.00
+10.09;Representação de qualquer natureza, inclusive comercial.;970;3.00
+10.10;Distribuição de bens de terceiros.;980;3.00
+11.00;Serviços de guarda, estacionamento, armazenamento, vigilância e congêneres.;990;3.00
+11.01;Guarda e estacionamento de veículos terrestres automotores, de aeronaves e de embarcações.;1000;3.00
+11.02;Vigilância, segurança ou monitoramento de bens e pessoas.;1010;3.00
+11.03;Escolta, inclusive de veículos e cargas.;1020;3.00
+11.04;Armazenamento, depósito, carga, descarga, arrumação e guarda de bens de qualquer espécie.;1030;3.00
+12.00;Serviços de diversões, lazer, entretenimento e congêneres.;1040;3.00
+12.01;Espetáculos teatrais.;1050;3.00
+12.02;Exibições cinematográficas.;1060;3.00
+12.03;Espetáculos circenses.;1070;3.00
+12.04;Programas de auditório.;1080;3.00
+12.05;Parques de diversões, centros de lazer e congêneres.;1090;3.00
+12.06;Boates, taxi-dancing e congêneres.;1100;3.00
+12.07;Shows, ballet, danças, desfiles, bailes, óperas, concertos, recitais, festivais e congêneres.;1110;3.00
+12.08;Feiras, exposições, congressos e congêneres.;1120;3.00
+12.09;Bilhares, boliches e diversões eletrônicas ou não.;1130;3.00
+12.10;Corridas e competições de animais.;1140;3.00
+12.11;Competições esportivas ou de destreza física ou intelectual, com ou sem a participação do espectador.;1150;3.00
+12.12;Execução de música.;1160;3.00
+12.13;Produção, mediante ou sem encomenda prévia, de eventos, espetáculos, entrevistas, shows, ballet, danças, desfiles, bailes, teatros, óperas, concertos, recitais, festivais e congêneres.;1170;3.00
+12.14;Fornecimento de música para ambientes fechados ou não, mediante transmissão por qualquer processo.;1180;3.00
+12.15;Desfiles de blocos carnavalescos ou folclóricos, trios elétricos e congêneres.;1190;3.00
+12.16;Exibição de filmes, entrevistas, musicais, espetáculos, shows, concertos, desfiles, óperas, competições esportivas, de destreza intelectual ou congêneres.;1200;3.00
+12.17;Recreação e animação, inclusive em festas e eventos de qualquer natureza.;1210;3.00
+13.00;Serviços relativos a fonografia, fotografia, cinematografia e reprografia.;1220;3.00
+13.01;(VETADO) - Produção, gravação, edição, legendagem e distribuição de filmes, video-tapes, discos, fitas cassete, compact disc, digital video disc e congêneres.;1230;3.00
+13.02;Fonografia ou gravação de sons, inclusive trucagem, dublagem, mixagem e congêneres.;1240;3.00
+13.03;Fotografia e cinematografia, inclusive revelação, ampliação, cópia, reprodução, trucagem e congêneres.;1250;3.00
+13.04;Reprografia, microfilmagem e digitalização.;1260;3.00
+13.05;Composição gráfica, fotocomposição, clicheria, zincografia, litografia, fotolitografia.;1270;3.00
+14.00;Serviços relativos a bens de terceiros.;1280;3.00
+14.01;Lubrificação, limpeza, lustração, revisão, carga e recarga, conserto, restauração, blindagem, manutenção e conservação de máquinas, veículos, aparelhos, equipamentos, motores, elevadores ou de qualquer objeto (exceto peças e partes empregadas, que ficam sujeitas ao ICMS).;1290;3.00
+14.02;Assistência técnica.;1300;3.00
+14.03;Recondicionamento de motores (exceto peças e partes empregadas, que ficam sujeitas ao ICMS).;1310;3.00
+14.04;Recauchutagem ou regeneração de pneus.;1320;3.00
+14.05;Restauração, recondicionamento, acondicionamento, pintura, beneficiamento, lavagem, secagem, tingimento, galvanoplastia, anodização, corte, recorte, polimento, plastificação e congêneres, de objetos quaisquer.;1330;3.00
+14.06;Instalação e montagem de aparelhos, máquinas e equipamentos, inclusive montagem industrial, prestados ao usuário final, exclusivamente com material por ele fornecido.;1340;3.00
+14.07;Colocação de molduras e congêneres.;1350;3.00
+14.08;Encadernação, gravação e douração de livros, revistas e congêneres.;1360;3.00
+14.09;Alfaiataria e costura, quando o material for fornecido pelo usuário final, exceto aviamento.;1370;3.00
+14.10;Tinturaria e lavanderia.;1380;3.00
+14.11;Tapeçaria e reforma de estofamentos em geral.;1390;3.00
+14.12;Funilaria e lanternagem.;1400;3.00
+14.13;Carpintaria e serralheria.;1410;3.00
+15.00;Serviços relacionados ao setor bancário ou financeiro, inclusive aqueles prestados por instituições financeiras autorizadas a funcionar pela União ou por quem de direito.;1420;3.00
+15.01;Administração de fundos quaisquer, de consórcio, de cartão de crédito ou débito e congêneres, de carteira de clientes, de cheques pré-datados e congêneres.;1430;3.00
+15.02;Abertura de contas em geral, inclusive conta-corrente, conta de investimentos e aplicação e caderneta de poupança, no País e no exterior, bem como a manutenção das referidas contas ativas e inativas.;1440;3.00
+15.03;Locação e manutenção de cofres particulares, de terminais eletrônicos, de terminais de atendimento e de bens e equipamentos em geral.;1450;3.00
+15.04;Fornecimento ou emissão de atestados em geral, inclusive atestado de idoneidade, atestado de capacidade financeira e congêneres.;1460;3.00
+15.05;Cadastro, elaboração de ficha cadastral, renovação cadastral e congêneres, inclusão ou exclusão no Cadastro de Emitentes de Cheques sem Fundos;1470;3.00
+15.06;Emissão, reemissão e fornecimento de avisos, comprovantes e documentos em geral;1480;3.00
+15.07;Acesso, movimentação, atendimento e consulta a contas em geral, por qualquer meio ou processo, inclusive por telefone, fac-símile, internet e telex, acesso a terminais de atendimento, inclusive vinte e quatro horas;1490;3.00
+15.08;Emissão, reemissão, alteração, cessão, substituição, cancelamento e registro de contrato de crédito;1500;3.00
+15.09;Arrendamento mercantil (leasing) de quaisquer bens, inclusive cessão de direitos e obrigações, substituição de garantia, alteração, cancelamento e registro de contrato, e demais serviços relacionados ao arrendamento mercantil (leasing).;1510;3.00
+15.10;Serviços relacionados a cobranças, recebimentos ou pagamentos em geral, de títulos quaisquer, de contas ou carnês, de câmbio, de tributos e por conta de terceiros, inclusive os efetuados por meio eletrônico, automático ou por máquinas de atendimento;1520;3.00
+15.11;Devolução de títulos, protesto de títulos, sustação de protesto, manutenção de títulos, reapresentação de títulos, e demais serviços a eles relacionados.;1530;3.00
+15.12;Custódia em geral, inclusive de títulos e valores mobiliários.;1540;3.00
+15.13;Serviços relacionados a operações de câmbio em geral, edição, alteração, prorrogação, cancelamento e baixa de contrato de câmbio;1550;3.00
+15.14;Fornecimento, emissão, reemissão, renovação e manutenção de cartão magnético, cartão de crédito, cartão de débito, cartão salário e congêneres.;1560;3.00
+15.15;Compensação de cheques e títulos quaisquer;1570;3.00
+15.16;Emissão, reemissão, liquidação, alteração, cancelamento e baixa de ordens de pagamento, ordens de crédito e similares, por qualquer meio ou processo;1580;3.00
+17.08;Franquia (franchising).;1710;3.00
+15.17;Emissão, fornecimento, devolução, sustação, cancelamento e oposição de cheques quaisquer, avulso ou por talão.;1590;3.00
+15.18;Serviços relacionados a crédito imobiliário, avaliação e vistoria de imóvel ou obra, análise técnica e jurídica, emissão, reemissão, alteração, transferência e renegociação de contrato, emissão e reemissão do termo de quitação e demais serviços relacionados a crédito imobiliário.;1600;3.00
+16.00;Serviços de transporte de natureza municipal.;1610;3.00
+16.01;Serviços de transporte de natureza municipal.;1620;3.00
+17.00;Serviços de apoio técnico, administrativo, jurídico, contábil, comercial e congêneres.;1630;3.00
+17.01;Assessoria ou consultoria de qualquer natureza, não contida em outros itens desta lista;1640;3.00
+17.02;Datilografia, digitação, estenografia, expediente, secretaria em geral, resposta audível, redação, edição, interpretação, revisão, tradução, apoio e infra-estrutura administrativa e congêneres.;1650;3.00
+17.03;Planejamento, coordenação, programação ou organização técnica, financeira ou administrativa.;1660;3.00
+17.04;Recrutamento, agenciamento, seleção e colocação de mão-de-obra.;1670;3.00
+17.05;Fornecimento de mão-de-obra, mesmo em caráter temporário, inclusive de empregados ou trabalhadores, avulsos ou temporários, contratados pelo prestador de serviço.;1680;3.00
+17.06;Propaganda e publicidade, inclusive promoção de vendas, planejamento de campanhas ou sistemas de publicidade, elaboração de desenhos, textos e demais materiais publicitários.;1690;3.00
+17.07;(VETADO) - Veiculação e divulgação de textos, desenhos e outros materiais de propaganda e publicidade, por qualquer meio.;1700;3.00
+17.09;Perícias, laudos, exames técnicos e análises técnicas.;1720;3.00
+17.10;Planejamento, organização e administração de feiras, exposições, congressos e congêneres.;1730;3.00
+17.11;Organização de festas e recepções;1740;3.00
+17.12;Administração em geral, inclusive de bens e negócios de terceiros.;1750;3.00
+17.13;Leilão e congêneres.;1760;3.00
+17.15;Arbitragem de qualquer espécie, inclusive jurídica.;1780;3.00
+17.16;Auditoria.;1790;3.00
+17.17;Análise de Organização e Métodos.;1800;3.00
+17.18;Atuária e cálculos técnicos de qualquer natureza.;1810;3.00
+17.19;Contabilidade, inclusive serviços técnicos e auxiliares.;1820;3.00
+17.20;Consultoria e assessoria econômica ou financeira.;1830;3.00
+17.21;Estatística.;1840;3.00
+17.22;Cobrança em geral.;1850;3.00
+17.23;Assessoria, análise, avaliação, atendimento, consulta, cadastro, seleção, gerenciamento de informações, administração de contas a receber ou a pagar e em geral, relacionados a operações de faturização (factoring).;1860;3.00
+17.24;Apresentação de palestras, conferências, seminários e congêneres.;1870;3.00
+18.00;Serviços de regulação de sinistros vinculados a contratos de seguros;1880;3.00
+18.01;Serviços de regulação de sinistros vinculados a contratos de seguros;1890;3.00
+19.00;Serviços de distribuição e venda de bilhetes e demais produtos de loteria, bingos, cartões, pules ou cupons de apostas, sorteios, prêmios, inclusive os decorrentes de títulos de capitalização e congêneres.;1900;3.00
+19.01;Serviços de distribuição e venda de bilhetes e demais produtos de loteria, bingos, cartões, pules ou cupons de apostas, sorteios, prêmios, inclusive os decorrentes de títulos de capitalização e congêneres.;1910;3.00
+20.00;Serviços portuários, aeroportuários, ferroportuários, de terminais rodoviários, ferroviários e metroviários.;1920;3.00
+20.01;Serviços portuários, ferroportuários, utilização de porto, movimentação de passageiros, reboque de embarcações, rebocador escoteiro, atracação, desatracação, serviços de praticagem, capatazia, armazenagem de qualquer natureza, serviços acessórios, movimentação de mercadorias, serviços de apoio marítimo, de movimentação ao largo, serviços de armadores, estiva, conferência, logística e congêneres.;1930;3.00
+20.02;Serviços aeroportuários, utilização de aeroporto, movimentação de passageiros, armazenagem de qualquer natureza, capatazia, movimentação de aeronaves, serviços de apoio aeroportuários, serviços acessórios, movimentação de mercadorias, logística e congêneres.;1940;3.00
+20.03;Serviços de terminais rodoviários, ferroviários, metroviários, movimentação de passageiros, mercadorias, inclusive     suas operações, logística e congêneres.;1950;3.00
+21.00;Serviços de registros públicos, cartorários e notariais.;1960;3.00
+21.01;Serviços de registros públicos, cartorários e notariais.;1970;3.00
+22.00;Serviços de exploração de rodovia.;1980;3.00
+23.00;Serviços de programação e comunicação visual, desenho industrial e congêneres.;1990;3.00
+22.01;Serviços de exploração de rodovia mediante cobrança de preço ou pedágio dos usuários, envolvendo execução de serviços de conservação, manutenção, melhoramentos para adequação de capacidade e segurança de trânsito, operação, monitoração, assistência aos usuários e outros serviços definidos em contratos, atos de concessão ou de permissão ou em      normas oficiais.;2000;3.00
+23.01;Serviços de programação e comunicação visual, desenho industrial e congêneres.;2010;3.00
+24.00;Serviços de chaveiros, confecção de carimbos, placas, sinalização visual, banners, adesivos e congêneres.;2020;3.00
+24.01;Serviços de chaveiros, confecção de carimbos, placas, sinalização visual, banners, adesivos e congêneres.;2030;3.00
+25.00;Serviços funerários.;2040;3.00
+25.01;Funerais, inclusive fornecimento de caixão, urna ou esquifes;2050;3.00
+25.02;Cremação de corpos e partes de corpos cadavéricos.;2060;3.00
+25.03;Planos ou convênio funerários.;2070;3.00
+25.04;Manutenção e conservação de jazigos e cemitérios.;2080;3.00
+26.00;Serviços de coleta, remessa ou entrega de correspondências, documentos, objetos, bens ou valores, inclusive pelos correios e suas agências franqueadas;2090;3.00
+26.01;Serviços de coleta, remessa ou entrega de correspondências, documentos, objetos, bens ou valores, inclusive pelos correios e suas agências franqueadas;2100;3.00
+27.00;Serviços de assistência social.;2110;3.00
+27.01;Serviços de assistência social.;2120;3.00
+28.00;Serviços de avaliação de bens e serviços de qualquer natureza.;2130;3.00
+28.01;Serviços de avaliação de bens e serviços de qualquer natureza.;2140;3.00
+29.00;Serviços de biblioteconomia.;2150;3.00
+29.01;Serviços de biblioteconomia.;2160;3.00
+30.00;Serviços de biologia, biotecnologia e química.;2170;3.00
+30.01;Serviços de biologia, biotecnologia e química.;2180;3.00
+31.00;Serviços técnicos em edificações, eletrônica, eletrotécnica, mecânica, telecomunicações e congêneres.;2190;3.00
+31.01;Serviços técnicos em edificações, eletrônica, eletrotécnica, mecânica, telecomunicações e congêneres.;2200;3.00
+32.00;Serviços de desenhos técnicos.;2210;3.00
+32.01;Serviços de desenhos técnicos.;2220;3.00
+33.00;Serviços de desembaraço aduaneiro, comissários, despachantes e congêneres.;2230;3.00
+33.01;Serviços de desembaraço aduaneiro, comissários, despachantes e congêneres.;2240;3.00
+34.00;Serviços de investigações particulares, detetives e congêneres.;2250;3.00
+34.01;Serviços de investigações particulares, detetives e congêneres.;2260;3.00
+35.00;Serviços de reportagem, assessoria de imprensa, jornalismo e relações públicas.;2270;3.00
+35.01;Serviços de reportagem, assessoria de imprensa, jornalismo e relações públicas.;2280;3.00
+36.00;Serviços de meteorologia.;2290;3.00
+36.01;Serviços de meteorologia.;2300;3.00
+37.00;Serviços de artistas, atletas, modelos e manequins.;2310;3.00
+37.01;Serviços de artistas, atletas, modelos e manequins.;2320;3.00
+38.00;Serviços de museologia.;2330;3.00
+38.01;Serviços de museologia.;2340;3.00
+39.00;Serviços de ourivesaria e lapidação.;2350;3.00
+39.01;Serviços de ourivesaria e lapidação (quando o material for fornecido pelo tomador do serviço).;2360;3.00
+40.00;Serviços relativos a obras de arte sob encomenda.;2370;3.00
+40.01;Obras de arte sob encomenda.;2380;3.00

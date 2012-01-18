@@ -1,0 +1,31 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th><%= Address.human_attribute_name :neighborhood %></th>
+      <th><%= Address.human_attribute_name :zip_code %></th>
+      <th><%= Address.human_attribute_name :street %></th>
+      <th><%= Address.human_attribute_name :complement %></th>
+      <th><%= Address.human_attribute_name :district %></th>
+      <th><%= Address.human_attribute_name :land_subdivision %></th>
+      <th><%= Address.human_attribute_name :condominium %></th>
+      <th><%= Address.human_attribute_name :number %></th>
+      <th><%= Address.human_attribute_name :block %></th>
+      <th><%= Address.human_attribute_name :room %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= address.neighborhood %></td>
+      <td><%= address.zip_code %></td>
+      <td><%= address.street %></td>
+      <td><%= address.complement %></td>
+      <td><%= address.district %></td>
+      <td><%= address.land_subdivision %></td>
+      <td><%= address.condominium %></td>
+      <td><%= address.number %></td>
+      <td><%= address.block %></td>
+      <td><%= address.room %></td>
+    </tr>
+  </tbody>
+</table>

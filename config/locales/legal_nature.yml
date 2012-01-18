@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      legal_nature:
+        one: "Natureza Jurídica"
+        other: "Naturezas Jurídicas"
+
+    attributes:
+      legal_nature:
+        code: "Código"
+        name: "Nome"
+        parent: "Natureza jurídica principal"

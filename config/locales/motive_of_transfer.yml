@@ -1,0 +1,13 @@
+pt-BR:
+  enumerations:
+    motive_of_transfer:
+      assignment_of_rights: "Cessão de direitos"
+      makes_or_replacement: "Toma ou reposição"
+      remission: "Remissão"
+      auction_or_procurement_auction: "Arrematação ou ajudiação em leilão"
+      exchange: "Permuta"
+      payment_in_kind: "Dação em pagamento"
+      transfer_of_ownership: "Transferência de posse"
+      promise_of_sale: "Promessa de compra e venda"
+      buying_and_selling: "Compra e venda"
+

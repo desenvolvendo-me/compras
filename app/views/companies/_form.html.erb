@@ -1,0 +1,76 @@
+<%= f.association :personable, :collection => f.object.personable.is_a?(Company) ? f.object.personable.localized : Company.new do |c| %>
+  <div class="tabs">
+    <ul>
+      <li><a href="#company">Contribuinte</a></li>
+      <li><a href="#company_contact">Contato</a></li>
+      <li><a href="#company_address">Endereço</a></li>
+    </ul>
+
+    <div id="company">
+      <%= f.input :name %>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= c.input :cnpj, :input_html => { :size => 18 } %>
+        </div>
+
+        <div class="yui3-u-1-2">
+          <%= c.input :state_registration, :input_html => { :size => 15 } %>
+        </div>
+      </div>
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= c.input :commercial_registration_number, :input_html => { :size => 10 } %>
+        </div>
+
+        <div class="yui3-u-1-2">
+          <%= c.input :commercial_registration_date %>
+        </div>
+      </div>
+
+      <%= c.input :legal_nature %>
+      <%= c.input :responsible %>
+      <%= c.input :responsible_role %>
+      <%= c.input :choose_simple %>
+    </div>
+
+    <div id="company_contact">
+      <div class="yui3-g">
+        <div class="yui3-u-1-3">
+          <%= f.input :phone, :as => :string %>
+        </div>
+
+        <div class="yui3-u-1-3">
+          <%= f.input :mobile, :as => :string %>
+        </div>
+
+        <div class="yui3-u-1-3">
+          <%= f.input :fax, :as => :string %>
+        </div>
+      </div>
+
+      <%= f.input :email %>
+    </div>
+
+    <div id="company_address">
+      <%= c.association :address, :collection => c.object.address || Address.new do |a| %>
+        <%= render "addresses/address", :a => a %>
+      <% end %>
+
+      <%= render "addresses/correspondence", :f => c %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+</script>

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      currency:
+        one: "Moeda"
+        other: "Moedas"
+
+    attributes:
+      currency:
+        name: "Nome"
+        acronym: "Sigla"

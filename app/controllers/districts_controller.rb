@@ -1,0 +1,2 @@
+class DistrictsController < CrudController
+end

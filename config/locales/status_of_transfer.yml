@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    status_of_transfer:
+      open: "Aberto"
+      canceled: "Cancelado"
+      calculated: "Calculado"
+      transfered: "Transferido"
+

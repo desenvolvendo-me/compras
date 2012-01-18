@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    correspondence_address_type:
+      person_address: "Endereço do contribuinte"
+      person_correspondence_address: "Endereço de correspondência do contribuinte"
+      own_address: "Próprio endereço"

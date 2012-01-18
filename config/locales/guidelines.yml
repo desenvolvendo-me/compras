@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    guidelines:
+      with_tax: "Com fisco"
+      no_tax: "Sem fisco"
+      tax_evasion: "Sonegação fiscal"

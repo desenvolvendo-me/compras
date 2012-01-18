@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      property_benefited:
+        one: "Imóveis Beneficiados Pela Obra"
+        other: "Imóveis Beneficiados Pelas Obras"
+
+    attributes:
+      property_benefited:
+        contribution_improvement: "Contribuição de melhoria"
+        property: "Imóvel"
+        base_value1: "Valor base 1"
+        base_value2: "Valor base 2"
+        base_value3: "Valor base 3"
+        base_value4: "Valor base 4"
+        agreement: "Adesão"
+        agreement_date: "Data da adesão"
+        number_of_plots: "Número de parcelas"
+        first_due_date: "Primeiro vencimento"
+        range_due_dates: "Intervalo entre vencimentos"
+

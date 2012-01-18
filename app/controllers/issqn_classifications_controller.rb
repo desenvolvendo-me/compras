@@ -1,0 +1,2 @@
+class IssqnClassificationsController < CrudController
+end

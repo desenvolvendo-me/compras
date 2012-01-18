@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      registration_term:
+        one: "Termo de Inscrição de Dívida Ativa"
+        other: "Termos de Inscrição de Dívida Ativa"
+
+    attributes:
+      registration_term:
+        year: "Ano"
+        person: "Contribuinte"
+
+  simple_form:
+    hints:
+      registration_term:
+        year: "Exemplo: 2005-2007; 2011;"

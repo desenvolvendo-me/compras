@@ -1,0 +1,40 @@
+.pagination {
+  margin-bottom: 1em;
+  text-align: right;
+}
+
+.pagination em {
+  font-style: normal;
+}
+
+.pagination a {
+  text-decoration: none;
+}
+
+.pagination span, .pagination em, .pagination a {
+  display: inline-block;
+  padding: 3px 5px;
+  vertical-align: middle;
+}
+
+.pagination em.current {
+  background: #F9F9F9;
+  background: -webkit-linear-gradient(#f9f9f9, #d9d9d9);
+  border: 1px solid #C3C3C3;
+  border-radius: 3px;
+}
+
+.pagination .previous_page, .pagination .next_page {
+  height: 14px;
+  overflow: hidden;
+  text-indent: 20px;
+  width: 10px;
+}
+
+.pagination .previous_page {
+  background: url(<%= image_path 'left.png' %>) no-repeat;
+}
+
+.pagination .next_page {
+  background: url(<%= image_path 'right.png' %>) no-repeat;
+}

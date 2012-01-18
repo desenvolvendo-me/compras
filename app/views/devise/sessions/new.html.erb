@@ -1,0 +1,25 @@
+<%= simple_form_for resource, :as => resource_name, :url => session_path(resource_name) do |f| %>
+  <%= f.input :login, :required => false, :hint => false %>
+  <%= f.input :password, :required => false, :hint => false %>
+
+  <div class="buttons right">
+    <%= f.button :submit, 'Login' %>
+  </div>
+<% end %>
+
+<script>
+  (function () {
+    var login = document.getElementById("user_login"),
+        password = document.getElementById("user_password");
+
+    if (!login.value) {
+      login.focus();
+    } else {
+      password.focus();
+    }
+  })();
+</script>
+
+<% content_for :footer do %>
+  <p>Esqueceu sua senha? <%= link_to 'Clique aqui', new_password_path(resource_name) %> para recuperá-la.
+<% end %>

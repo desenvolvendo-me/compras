@@ -1,0 +1,93 @@
+.simple_form fieldset {
+  padding-top: 1em;
+}
+
+.simple_form legend {
+  color: #555;
+  font-size: 123.1%;
+}
+
+.simple_form abbr {
+  color: #FF2F2F;
+  border-bottom: 0;
+}
+
+.simple_form .input {
+  margin-bottom: 1em;
+}
+
+.simple_form label {
+  color: #666;
+  display: block;
+  font-size: 123.1%;
+  margin-bottom: 0.5em;
+}
+
+.simple_form label.boolean, .simple_form label.collection_radio, .simple_form label.collection_check_boxes {
+  display: inline;
+}
+
+.simple_form label.collection_radio {
+  margin-right: 1em;
+}
+
+.simple_form input.string, .simple_form input.numeric, .simple_form input.password, .simple_form textarea.text {
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  color: #222;
+  font-size: 131%;
+  max-width: 80%;
+  outline: 0;
+  padding: 10px;
+  width: auto;
+}
+
+.simple_form textarea.text {
+  height: 125px;
+}
+
+.simple_form input.modal {
+  background-image: url(<%= image_path 'zoom.png' %>);
+  background-repeat: no-repeat;
+  background-position: 98% center;
+  padding-right: 29px;
+}
+
+.simple_form input.boolean, .simple_form input.radio {
+  margin-right: 5px;
+}
+
+.simple_form .field_with_errors input.string, .simple_form .field_with_errors input.numeric, .simple_form .field_with_errors input.password, .simple_form .field_with_errors textarea.text {
+  background-color: #FFDADA;
+  border: 1px solid #FF2F2F;
+  box-shadow: none;
+  color: #CC0A0A;
+}
+
+.simple_form p.error {
+  color: #BD0000;
+  margin-top: 0.5em;
+}
+
+.simple_form p.hint {
+  color: #ABABAB;
+  margin-top: 0.5em;
+}
+
+.simple_form .buttons .button {
+  margin-right: 1em;
+}
+
+.simple_form .buttons .button:last-child {
+  margin-right: 0;
+}
+
+.simple_form .buttons .negative {
+  float: right;
+}
+
+.simple_form .buttons .negative {
+  float: right;
+  margin-right: 0;
+}

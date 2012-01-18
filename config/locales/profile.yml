@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      profile:
+        one: "Perfil"
+        other: "Perfis"
+
+    attributes:
+      profile:
+        name: "Nome"
+        roles: "Permissões"

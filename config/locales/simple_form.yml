@@ -1,0 +1,8 @@
+pt-BR:
+  simple_form:
+    "yes": "Sim"
+    "no": "Não"
+
+    required:
+      text: "obrigatório"
+      mark: "*"

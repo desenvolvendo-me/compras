@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      fiscal_year:
+        one: "Exercício Fiscal"
+        other: "Exercícios Fiscais"
+
+    attributes:
+      fiscal_year:
+        year: "Ano"

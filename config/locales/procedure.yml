@@ -1,0 +1,6 @@
+pt-BR:
+  activemodel:
+    attributes:
+      procedure:
+        name: "Nome"
+        source: "Código"

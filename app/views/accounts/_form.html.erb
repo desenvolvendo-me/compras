@@ -1,0 +1,25 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :name %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :login %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :email %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <div class="yui3-g">
+      <div class="yui3-u-1-2">
+        <%= f.input :password, :required => resource.password_required? %>
+      </div>
+
+      <div class="yui3-u-1-2">
+        <%= f.input :password_confirmation, :required => resource.password_required? %>
+      </div>
+    </div>
+  </div>
+</div>

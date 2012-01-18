@@ -1,0 +1,25 @@
+/*
+ * Widget containers
+ *
+ * http://docs.jquery.com/UI/Theming/API
+ */
+
+.ui-widget {
+  box-shadow: 0 0 10px #333;
+}
+
+.ui-widget-header {
+  background: #F4F4F4;
+  background: -o-linear-gradient(#F4F4F4, #D7D7D7);
+  background: -moz-linear-gradient(#F4F4F4, #D7D7D7);
+  background: -webkit-linear-gradient(#F4F4F4, #D7D7D7);
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  color: #333;
+  display: block;
+  padding: 1em;
+}
+
+.ui-widget-content {
+  background: #FFF;
+}

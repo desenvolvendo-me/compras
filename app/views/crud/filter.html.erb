@@ -1,0 +1,6 @@
+<h2><%= t "#{controller_name}.filter", :resource => plural, :cascade => true %></h2>
+
+<%= simple_form_for resource.localized, :as => 'filter', :url => collection_path(current_scopes), :method => 'get' do |f| %>
+  <%= render 'filter_form', :f => f %>
+  <%= render 'filter_buttons', :f => f %>
+<% end %>

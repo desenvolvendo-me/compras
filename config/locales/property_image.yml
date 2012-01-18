@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      property_image:
+        one: "Imagem do Imóvel"
+        other: "Imagens do Imóvel"
+
+    attributes:
+      property_image:
+        image: "Imagem"

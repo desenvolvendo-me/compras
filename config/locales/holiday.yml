@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      holiday:
+        one: "Feriado"
+        other: "Feriados"
+
+    attributes:
+      holiday:
+        name: "Nome do Feriado"
+        year: "Ano"
+        month: "Mês"
+        day: "Dia"
+        recurrent: "Esse feriado é recorrente?"
+        date: "Data"

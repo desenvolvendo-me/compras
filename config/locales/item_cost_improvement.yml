@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      item_cost_improvement:
+        one: "Item de Custo da Melhoria"
+        other: "Itens de Custos das Melhorias"
+
+    attributes:
+      item_cost_improvement:
+        name: "Nome"
+        reference_unit: "Unidade de referência"
+        value: "Valor"
+        percentage: "Percentual"
+        unit_value: "Valor unitário"
+        quantity: "Quantidade"
+        contribution_improvement: "Contribuição de melhoria"

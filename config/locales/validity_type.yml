@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    validity_type:
+      days: "Dias"
+      months: "Meses"
+      years: "Anos"

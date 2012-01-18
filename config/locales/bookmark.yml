@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      bookmark: "Favoritos"
+
+    attributes:
+      bookmark:
+        links: "Cadastros"
+
+  simple_form:
+    hints:
+      bookmark:
+        links: "Mantenha a tecla control pressionada para selecionar vários cadastros."

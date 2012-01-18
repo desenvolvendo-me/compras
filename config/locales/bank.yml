@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      bank:
+        one: "Banco"
+        other: "Bancos"
+
+    attributes:
+      bank:
+        name: "Nome"
+        code: "Código"
+        acronym: "Sigla"

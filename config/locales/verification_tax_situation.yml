@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    verification_tax_situation:
+      in_calculating: "Em apuração"
+      closed: "Encerrada"

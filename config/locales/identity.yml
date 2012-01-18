@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      identity:
+        one: "Identidade"
+        other: "Identidades"
+
+    attributes:
+      identity:
+        number: "Número"
+        issuer: "Orgão emissor"
+        state: "Estado"
+        issue: "Data de emissão"

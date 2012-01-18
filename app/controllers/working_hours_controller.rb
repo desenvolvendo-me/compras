@@ -1,0 +1,2 @@
+class WorkingHoursController < CrudController
+end

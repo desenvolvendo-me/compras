@@ -1,0 +1,40 @@
+<%= a.input :addressable_id, :as => :hidden %>
+<%= a.input :addressable_type, :as => :hidden %>
+<%= a.input :street, :hint => false %>
+<%= a.input :number, :input_html => { :size => 6 } %>
+<%= a.input :block %>
+<%= a.input :room, :input_html => { :size => 6 } %>
+<%= a.input :complement %>
+<%= a.input :neighborhood, :url => modal_neighborhoods_path(:street_id => a.object.street_id), :disabled => a.object.street.nil? %>
+<%= a.input :condominium %>
+<%= a.input :land_subdivision %>
+<%= a.input :district %>
+<%= a.input :city, :disabled => true %>
+<%= a.input :zip_code, :input_html => { :size => 6 } %>
+<%= a.input :state, :disabled => true %>
+
+<script>
+  $("#<%= a.sanitized_object_name %>_street").change(function (event, data) {
+    if (data) {
+      var record = data.record;
+
+      $("#<%= a.sanitized_object_name %>_neighborhood").data("modal-url", "<%= modal_neighborhoods_path %>?street_id=" + record.data("value")).val("");
+      $("#<%= a.sanitized_object_name %>_neighborhood_id").val("");
+    }
+
+    if ($(this).val()) {
+      $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", false);
+    } else {
+      $("#<%= a.sanitized_object_name %>_neighborhood").attr("disabled", true);
+    }
+  }).change();
+
+  $("#<%= a.sanitized_object_name %>_neighborhood_id").change(function (event, data) {
+    if (data) {
+      var neighborhood = data.record;
+
+      $("#<%= a.sanitized_object_name %>_city").val(neighborhood.data("city"));
+      $("#<%= a.sanitized_object_name %>_state").val(neighborhood.data("state"));
+    }
+  });
+</script>

@@ -1,0 +1,2 @@
+class LandSubdivisionsController < CrudController
+end

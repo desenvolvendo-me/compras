@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      cnae:
+        one: "CNAE"
+        other: "CNAES"
+
+    attributes:
+      cnae:
+        name: "Descrição"
+        code: "Código"
+        risk_degree: "Grau de risco"

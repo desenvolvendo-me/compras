@@ -1,0 +1,23 @@
+<div class="breadcrumb">
+  <ul>
+    <li><%= plural %></li>
+    <li><%= t "#{controller_name}.index", :resource => plural, :cascade => true %></li>
+  </ul>
+</div>
+
+<%= render 'help' %>
+
+<div class="actions">
+  <ul>
+    <% if can?(:create, controller_name) && respond_to?("new_#{controller_name.singularize}_path") %>
+      <li><%= link_to_new %></li>
+    <% end %>
+    <li><%= link_to_filter %></li>
+  </ul>
+</div>
+
+<%= paginate %>
+
+<%= render 'list' %>
+
+<%= paginate %>

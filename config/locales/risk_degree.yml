@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      risk_degree:
+        one: "Grau de Risco"
+        other: "Grau de Riscos"
+
+    attributes:
+      risk_degree:
+        name: "Nome"
+        level: "Nível"

@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    delivery_way:
+      mail: "Corrêio"
+      in_the_hands: "Em mãos"
+      notice: "Edital"

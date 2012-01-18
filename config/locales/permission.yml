@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    permission:
+      deny: "Sem acesso"
+      read: "Somente leitura"
+      modify: "Cadastrar"
+      access: "Cadastrar e apagar"

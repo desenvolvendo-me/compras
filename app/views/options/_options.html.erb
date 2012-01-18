@@ -1,0 +1,36 @@
+<div id="options">
+  <p>
+    <input type="button" class="button affirmative add-option" value="Adicionar nova opção">
+  </p>
+
+  <%= f.association :options do |p| %>
+    <%= render 'options/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'option-template' do %>
+  <%= f.association :options_attributes, :collection => f.object.options.build, :index => '{{uuid_option}}' do |p| %>
+    <%= render 'options/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $('#<%= f.sanitized_object_name %>_field_type').live('change', function () {
+    if (this.value == "<%= FieldType::COLLECTION %>") {
+      $("#options").show();
+      $('.destroy').val(false);
+    } else {
+      $("#options").hide();
+      $('.destroy').val(true);
+    }
+  }).change();
+
+  $("#option-template").nestedForm({
+    add: '.add-option',
+    remove: '.remove-option',
+    fieldToRemove: '.option',
+    target: '#options',
+    uuid: 'uuid_option',
+    right: true
+  });
+</script>

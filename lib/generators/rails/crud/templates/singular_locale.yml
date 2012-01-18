@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      <%= singular_name %>:
+        one: "<%= singular %>"
+        other: "<%= plural %>"
+
+    attributes:
+      <%= singular_name %>:
+      <%- fields.each do |name, i18n| -%>
+        <%= name %>: "<%= i18n %>"
+      <%- end -%>

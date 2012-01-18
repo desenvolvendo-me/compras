@@ -1,0 +1,32 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :key %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :value %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% collection.each do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.value %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,20 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+.logo, .prefecture {
+  vertical-align: middle;
+}
+
+.links {
+  text-align: right;
+}
+
+.links ul {
+  margin: 0;
+}
+
+.links li {
+  display: inline-block;
+  margin-left: 1em;
+}

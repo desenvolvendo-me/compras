@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      individual:
+        one: "Pessoa"
+        other: "Pessoas"
+
+    attributes:
+      individual:
+        cpf: "CPF"
+        name: "Nome"
+        mother: "Mãe"
+        father: "Pai"
+        birthdate: "Data de nascimento"
+        gender: "Sexo"
+        identity: "Identidade"

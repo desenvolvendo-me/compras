@@ -1,0 +1,25 @@
+pt-BR:
+  errors:
+    tributario:
+      messages:
+        property_setting_not_found: "Não possui Configuração da Inscrição Imobiliária para este ano. Por favor, cadastre primeiro antes de cadastrar os imóveis."
+        property_setting_without_fields: "A Configuração da Inscrição Imobiliária deste ano não têm campos."
+        agreement_operation_cant_be_updated: "Geração de acordos de dívida ativa não pôde ser atualizada pois já foi executada."
+        property_setting_cant_be_updated: "A Configuração da Inscrição Imobiliária não pôde ser atualizada pois ela já foi incluída num Cadastro Imobiliário."
+        property_setting_cant_be_destroyed: "A Configuração da Inscrição Imobiliária não pôde ser apagada pois ela já foi incluída num Cadastro Imobiliário."
+        property_variable_setting_cant_be_updated: "O Dado Variável do Cadastro Imobiliário não pôde ser atualizado pois ele já foi incluído num Cadastro Imobiliário."
+        property_variable_setting_cant_be_destroyed: "O Dado Variável do Cadastro Imobiliário não pôde ser apagado pois ele já foi incluído num Cadastro Imobiliário."
+        property_market_value: "Não possui Configuração do Valor venal do imóvel para este ano. Por favor, cadastre primeiro antes de cadastrar os imóveis."
+        property_terrain_market_value: "Não possui Configuração do Valor venal do terreno para este ano. Por favor, cadastre primeiro antes de cadastrar os imóveis."
+        property_market_value_without_decimal: "A Configuração Valor venal do imóvel para este ano deve ser do tipo Decimal. Por favor, altere antes de cadastrar os imóveis."
+        property_terrain_market_value_without_decimal: "A Configuração Valor venal do terreno para este ano deve ser do tipo Decimal. Por favor, altere antes de cadastrar os imóveis."
+        missing_rate_property_transfer_setting: "Não possui configuração de alíquota de transferência. Por favor, cadastre primeiro antes de transferir imóveis."
+        missing_rate_property_transfer_funded_setting: "Não possui configuração de alíquota de transfência financiada. Por favor, cadastre primeiro antes de transferir imóveis."
+        missing_default_interest_setting: "Não possui configuração de Juros padrão. Por favor, cadastre primeiro antes de criar uma baixa de pagamento."
+        missing_default_penalty_setting: "Não possui configuração de Multa padrão. Por favor, cadastre primeiro antes de criar uma baixa de pagamento."
+  other:
+    tributario:
+      messages:
+        copy_of_document: "Segunda via"
+        fiscal_execution_without_movimentations: "Esta execução fiscal não possui movimentações"
+        more_information: "Mais informações"

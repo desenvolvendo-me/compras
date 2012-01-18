@@ -1,0 +1,18 @@
+<%= f.input :name %>
+<%= f.input :bank, :as => :modal, :hidden_field => :bank_id %>
+<%= f.input :agency %>
+<%= f.input :account_number, :input_html => { :size => 10 } %>
+<%= f.input :originator, :input_html => { :size => 10 } %>
+<%= f.input :number_agreement, :input_html => { :size => 10 } %>
+
+<script>
+  $("#bank_account_bank_id").change(function () {
+    $("#bank_account_agency").data('modal-url', "<%= modal_agencies_path %>?bank_id=" + this.value);
+
+    if (this.value) {
+      $("#bank_account_agency").attr('disabled', false);
+    } else {
+      $("#bank_account_agency").attr('disabled', true);
+    }
+  }).change();
+</script>

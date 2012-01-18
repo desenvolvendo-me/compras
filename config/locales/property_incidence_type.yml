@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    property_incidence_type:
+      taxable: "Tributável"
+      free: "Isento"
+      immune: "Imune"

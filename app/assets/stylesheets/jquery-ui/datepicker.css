@@ -1,0 +1,43 @@
+/*
+ * jQuery UI Datepicker
+ *
+ * http://docs.jquery.com/UI/Datepicker#theming
+ */
+
+.ui-datepicker {
+  border: 1px solid #DDD;
+  box-shadow: none;
+  display: none;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+  position: absolute;
+}
+
+.ui-datepicker-prev {
+  left: 1em;
+}
+
+.ui-datepicker-next {
+  right: 1em;
+}
+
+.ui-datepicker-title {
+  text-align: center;
+}
+
+.ui-datepicker table {
+  margin: 0.5em;
+}
+
+.ui-datepicker th, .ui-datepicker td {
+  border: 0;
+}
+
+.ui-datepicker th {
+  font-weight: normal;
+}
+
+.ui-datepicker td {
+  text-align: center;
+}

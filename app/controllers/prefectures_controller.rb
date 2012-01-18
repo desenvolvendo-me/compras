@@ -1,0 +1,2 @@
+class PrefecturesController < CrudController
+end

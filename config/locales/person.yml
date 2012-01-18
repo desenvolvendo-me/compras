@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      person:
+        one: "Contribuinte"
+        other: "Contribuintes"
+
+    attributes:
+      person:
+        name: "Nome"
+        personable: "Contribuinte"
+        personable_type: "Tipo de contribuinte"
+        phone: "Telefone"
+        mobile: "Celular"
+        email: "E-mail"
+        cpf: "CPF"
+        cnpj: "CNPJ"

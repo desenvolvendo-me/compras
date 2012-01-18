@@ -1,0 +1,24 @@
+<div id="<%= f.sanitized_object_name%>_movimentations">
+  <p>
+    <input type="button" class="button affirmative add-movimentations" value="Adicionar Movimentação">
+  </p>
+
+  <%= f.association :movimentations, :collection => localized(f.object.movimentations) do |p| %>
+    <%= render 'movimentations/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache "#{f.sanitized_object_name}_movimentations_template" do %>
+  <%= f.association :movimentations_attributes, :collection => f.object.movimentations.build, :index => '{{uuid_movimentation}}' do |p| %>
+    <%= render 'movimentations/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#<%= f.sanitized_object_name %>_movimentations_template").nestedForm({
+    add: '.add-movimentations',
+    remove: '.remove-movimentation',
+    target: '#<%= f.sanitized_object_name %>_movimentations',
+    uuid: 'uuid_movimentation'
+  });
+</script>

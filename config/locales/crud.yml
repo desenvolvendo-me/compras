@@ -1,0 +1,10 @@
+pt-BR:
+  filter: "Filtrar %{resource}"
+  modal: "Pesquisar %{resource}"
+  search: "Pesquisar"
+  index: "Listar %{resource}"
+  new: "Criar %{resource}"
+  edit: "Editar %{resource}"
+  destroy: "Apagar %{resource}"
+  are_you_sure: "Você tem certeza?"
+  cancel: "Cancelar"

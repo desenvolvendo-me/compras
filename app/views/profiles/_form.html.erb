@@ -1,0 +1,21 @@
+<%= f.input :name %>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>Cadastro Geral</th>
+      <th class="small"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= f.association :roles do |r| %>
+      <tr>
+        <td><%= r.object.controller_name %></td>
+        <td>
+          <%= r.hidden_field :controller %>
+          <%= r.select :permission, Permission.to_a %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

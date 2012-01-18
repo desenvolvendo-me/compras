@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      address:
+        one: "Endereço"
+        other: "Endereços"
+
+    attributes:
+      address:
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        street: "Logradouro"
+        district: "Distrito"
+        land_subdivision: "Loteamento"
+        condominium: "Condomínio"
+        complement: "Complemento"
+        zip_code: "CEP"
+        number: "Número"
+        block: "Bloco"
+        room: "Sala/Apartamento"
+        correspondence: "Endereço de correspondência?"

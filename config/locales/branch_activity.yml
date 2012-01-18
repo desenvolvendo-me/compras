@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      branch_activity:
+        one: "Ramo de Atividade"
+        other: "Ramos de Atividades"
+
+    attributes:
+      branch_activity:
+        name: "Nome"
+        cnae: "CNAE"
+        branch_classification: "Classificação do ramo de atividade"

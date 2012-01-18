@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      issqn_classification:
+        one: "Enquadramento ISSQN"
+        other: "Enquadramentos ISSQN"
+
+    attributes:
+      issqn_classification:
+        name: "Nome"

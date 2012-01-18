@@ -1,0 +1,11 @@
+pt-BR:
+  enumerations:
+    types:
+      integer: "Inteiro"
+      decimal: "Decimal"
+      text: "Texto"
+      date: "Data"
+      datetime: "Date e hora"
+      collection: "Coleção"
+      boolean: "Boleano"
+

@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      land_subdivision:
+        one: "Loteamento"
+        other: "Loteamentos"
+
+    attributes:
+      land_subdivision:
+        name: "Nome"

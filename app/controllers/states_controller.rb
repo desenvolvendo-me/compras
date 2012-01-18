@@ -1,0 +1,2 @@
+class StatesController < CrudController
+end

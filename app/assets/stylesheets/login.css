@@ -1,0 +1,44 @@
+html {
+  background: #EFEFEF;
+}
+
+#header {
+  margin-top: 10em;
+  text-align: center;
+}
+
+#header h1 {
+  font-size: 100%;
+}
+
+#header a {
+  color: #666;
+  text-decoration: none;
+}
+
+#content {
+  background: #FFF;
+  border-radius: 10px;
+  margin: 0 auto 1em;
+  padding: 30px;
+  width: 480px;
+}
+
+.simple_form input.string, .simple_form input.password {
+  background: #F8F8F8;
+  border: 1px solid #D1D1D1;
+  border-bottom: 0;
+  border: 0;
+  box-shadow: inset 0 1px 1px #D1D1D1;
+  max-width: none;
+  width: 460px;
+}
+
+#footer {
+  color: #AAA;
+  text-align: center;
+}
+
+#footer a {
+  color: #0079E3;
+}

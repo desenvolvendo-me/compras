@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      district:
+        one: "Distrito"
+        other: "Distritos"
+
+    attributes:
+      district:
+        name: "Nome"
+        city: "Cidade"

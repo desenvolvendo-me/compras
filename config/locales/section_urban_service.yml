@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      section_urban_service:
+        one: "Equipamentos Urbanos na Seção"
+        other: "Equipamentos Urbanos nas Seções"
+
+    attributes:
+      section_urban_service:
+        value_section_street: "Valor da seção do logradouro"
+        urban_service: "Equipamento urbano"
+        reference_unit: "Unidade"
+        value: "Valor"

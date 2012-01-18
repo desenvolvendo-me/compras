@@ -1,0 +1,45 @@
+/*
+ * jQuery UI Tabs
+ *
+ * http://docs.jquery.com/UI/Tabs#theming
+ */
+
+.ui-tabs {
+  box-shadow: none;
+  border: 1px solid #CCC;
+  margin-bottom: 1em;
+}
+
+.ui-tabs ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.ui-tabs li {
+  float: left;
+  list-style: none;
+}
+
+.ui-tabs .ui-tabs-nav a {
+  color: #333;
+  display: block;
+  padding: 1em;
+}
+
+.ui-tabs li.ui-tabs-selected a {
+  background: #E7E7E7;
+  background: -o-linear-gradient(#E7E7E7, #CACACA);
+  background: -moz-linear-gradient(#E7E7E7, #CACACA);
+  background: -webkit-linear-gradient(#E7E7E7, #CACACA);
+  text-decoration: none;
+}
+
+.ui-tabs-panel {
+  background-color: #FCFCFC;
+  padding: 1em;
+}
+
+.ui-tabs-hide {
+  display: none;
+}

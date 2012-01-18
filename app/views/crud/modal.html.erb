@@ -1,0 +1,9 @@
+<h2><%= t "#{controller_name}.modal", :resource => plural, :cascade => true %></h2>
+
+<%= simple_form_for resource.localized, :as => 'filter', :url => modal_resources_path({ :attributes => params[:attributes] }.merge(current_scopes)), :remote => true, :method => 'get' do |f| %>
+  <%= render 'modal_form', :f => f %>
+  <%= render 'modal_buttons', :f => f %>
+<% end %>
+
+<div class="ui-modal-records" id="<%= resource_instance_name %>_records">
+</div>

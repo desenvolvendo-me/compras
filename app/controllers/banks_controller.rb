@@ -1,0 +1,2 @@
+class BanksController < CrudController
+end

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      street_type:
+        one: "Tipo de Logradouro"
+        other: "Tipos de Logradouros"
+
+    attributes:
+      street_type:
+        name: "Nome"
+        acronym: "Sigla"

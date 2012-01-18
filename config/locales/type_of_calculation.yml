@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    type_of_calculation:
+      money: "Real"
+      percentage: "Porcentagem"

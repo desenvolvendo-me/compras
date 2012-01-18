@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset="utf-8">
+    <%= csrf_meta_tag %>
+
+    <title>Tributário</title>
+
+    <%= stylesheet_link_tag 'devise' %>
+  </head>
+
+  <body>
+    <div id="header">
+      <h1><%= link_to 'Sistema Tributário', root_path %></h1>
+    </div>
+
+    <div id="content">
+      <% if alert %>
+        <div class="alert"><%= alert %></div>
+      <% end %>
+
+      <% if notice %>
+        <div class="notice"><%= notice %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <div id="footer">
+      <%= yield :footer %>
+    </div>
+  </body>
+</html>

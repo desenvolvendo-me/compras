@@ -1,0 +1,49 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :name %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :initial %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :beginning_interval %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :end_of_interval %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :final %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource.name, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= l resource.initial, :format => :hour %>
+        </td>
+        <td>
+          <%= l resource.beginning_interval, :format => :hour if resource.beginning_interval %>
+        </td>
+        <td>
+          <%= l resource.end_of_interval, :format => :hour if resource.end_of_interval %>
+        </td>
+        <td>
+          <%= l resource.final, :format => :hour %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

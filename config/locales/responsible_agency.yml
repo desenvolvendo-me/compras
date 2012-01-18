@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      responsible_agency:
+        one: "Orgão Responsável"
+        other: "Orgãos Responsáveis"
+
+    attributes:
+      responsible_agency:
+        name: "Nome"
+        description: "Descrição"

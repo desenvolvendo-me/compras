@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      prefecture:
+        one: "Prefeitura"
+        other: "Prefeituras"
+
+    attributes:
+      prefecture:
+        name: "Nome"
+        cnpj: "CNPJ"
+        phone: "Telefone"
+        fax: "Fax"
+        email: "E-mail"
+        mayor_name: "Prefeito"
+        image: "Logotipo"
+        remove_image: "Apagar logotipo"

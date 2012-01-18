@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      public_service_calculation:
+        one: "Serviço Público"
+        other: "Serviços Públicos"
+
+    attributes:
+      public_service_calculation:
+        name: "Nome"
+        value: "Valor"
+        reference_unit: "Unidade de referência"

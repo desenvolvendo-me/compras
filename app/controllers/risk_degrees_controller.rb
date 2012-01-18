@@ -1,0 +1,2 @@
+class RiskDegreesController < CrudController
+end

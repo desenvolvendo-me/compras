@@ -1,0 +1,31 @@
+.breadcrumb {
+  background: #E4E4E4;
+  background: -o-linear-gradient(#FFF, #E4E4E4);
+  background: -webkit-linear-gradient(#FFF, #E4E4E4);
+  background: -moz-linear-gradient(#FFF, #E4E4E4);
+  border-bottom: 1px solid #D3D3D3;
+  color: #A6A6A6;
+  font-size: 85%;
+  left: 0;
+  line-height: 25px;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+  width: 100%;
+}
+
+.breadcrumb ul {
+  margin: 0 0 0 1em;
+}
+
+.breadcrumb li {
+  background: url(<%= image_path 'breadcrumb-arrow.png' %>) right center no-repeat;
+  float: left;
+  list-style: none;
+  margin-right: 5px;
+  padding-right: 15px;
+}
+
+.breadcrumb li:last-child {
+  background: none;
+}

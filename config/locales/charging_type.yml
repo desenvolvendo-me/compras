@@ -1,0 +1,4 @@
+pt-BR:
+  enumerations:
+    charging_type:
+      building: "Predial"

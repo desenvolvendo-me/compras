@@ -1,0 +1,2 @@
+class StreetTypesController < CrudController
+end

@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      user:
+        one: "Usuário"
+        other: "Usuários"
+
+    attributes:
+      user:
+        name: "Nome"
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirme a senha"
+        profile: "Perfil"
+
+  simple_form:
+    hints:
+      user:
+        email: "Será usado para recuperar a senha caso você esqueça."
+        login: "Somente letras, números e ponto (ex: jose.silva)"
+        password: "6 caracteres ou mais. Use letras e números por segurança."

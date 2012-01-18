@@ -1,0 +1,17 @@
+pt-BR:
+  errors:
+    messages:
+      not_found: "não encontramos nenhum usuário com esse e-mail"
+
+  devise:
+    failure:
+      unauthenticated: "Por favor, efetue seu login."
+      invalid: "Login ou senha inválidos."
+
+    sessions:
+      signed_in: "Login efetuado com sucesso."
+      signed_out: "Logout efetuado com sucesso."
+
+    passwords:
+      send_instructions: "Você receberá um e-mail com instruções sobre como redefinir sua senha em alguns minutos."
+      updated: "Sua senha foi alterada com sucesso."

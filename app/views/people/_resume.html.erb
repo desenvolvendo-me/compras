@@ -1,0 +1,17 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th><%= resource_class.human_attribute_name :name %></th>
+      <th><%= resource_class.human_attribute_name :cpf %></th>
+      <th><%= resource_class.human_attribute_name :cnpj %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= resource.name %></td>
+      <td><%= resource.cpf %></td>
+      <td><%= resource.cnpj %></td>
+    </tr>
+  </tbody>
+</table>

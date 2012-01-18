@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      city:
+        one: "Cidade"
+        other: "Cidades"
+
+    attributes:
+      city:
+        name: "Nome"
+        state: "Estado"
+        code: "Código"

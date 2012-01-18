@@ -1,0 +1,20 @@
+pt-BR:
+  enumerations:
+    status_of_movimentation:
+      mail: "Correio"
+      bailiff: "Oficial de justiça"
+      notice: "Edital"
+      other: "Outros"
+      coming: "Procedente"
+      unfounded: "Improcedente"
+      partially_upheld: "Parcialmente procedente"
+      returned: "Devolvido"
+      laden: "Em carga"
+      observation: "Observação"
+      note_expedient: "Nota de expediente"
+      request: "Pedido"
+      deferred: "Deferido"
+      refused: "Indeferido"
+      letter: "Carta"
+      official: "Oficial"
+

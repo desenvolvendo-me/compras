@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      property_variable_setting_option:
+        one: "Opção de Preenchimento"
+        other: "Opções de Preenchimento"
+
+    attributes:
+      property_variable_setting_option:
+        name: "Nome"

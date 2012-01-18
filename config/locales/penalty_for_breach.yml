@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    penalty_for_breach:
+      difference_calculated: "Sobre o valor original da diferença apurada"
+      difference_calculated_with_monetary_correction: "Sobre o valor original da diferença apurada + correção monetária"

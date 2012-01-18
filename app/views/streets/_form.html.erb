@@ -1,0 +1,32 @@
+<fieldset>
+  <%= f.input :name %>
+  <%= f.input :street_type %>
+  <%= f.input :tax_zone, :input_html => { :size => 3 } %>
+  
+  <div class="modal-finder" >
+    <%= f.input :neighborhood, :as => :modal , :input_html => { 'data-modal-url' => modal_neighborhoods_path }, :hidden_field => false  %>
+  </div>
+
+  <table class="records" >
+    <thead>
+      <tr>
+        <th>
+          <%= Neighborhood.human_attribute_name :name %>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="<%= f.sanitized_object_name %>_neighborhood_records">
+      <%= f.association :neighborhoods do |n| %>
+        <%= render 'neighborhood_item', :id => n.object.id, :name => n.object.name, :f => f  %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "#{f.sanitized_object_name}_neighborhood_template" do %>
+    <%= f.association :neighborhoods, :collection => f.object.neighborhoods.build do |n| %>
+      <%= render 'neighborhood_item', :f => f, :id => '{{value}}', :name => '{{label}}' %>
+    <% end %>
+  <% end %>
+</fieldset>

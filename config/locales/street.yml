@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      street:
+        one: "Logradouro"
+        other: "Logradouros"
+
+    attributes:
+      street:
+        name: "Nome do logradouro"
+        street_type: "Tipo do logradouro"
+        tax_zone: "Zona fiscal"
+        neighborhood: "Bairro"
+
+  simple_form:
+    hints:
+      street:
+        neighborhoods: "Mantenha a tecla control pressionada para selecionar vários bairros."

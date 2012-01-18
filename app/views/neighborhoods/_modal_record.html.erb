@@ -1,0 +1,5 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-city="<%= record.city %>" data-state="<%= record.state %>">
+  <% attributes.each do |attribute| %>
+    <td><%= record.send attribute %></td>
+  <% end %>
+</tr>

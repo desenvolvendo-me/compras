@@ -1,0 +1,5 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-cpf="<%= record.cpf %>" data-phone="<%= record.phone %>" data-mobile="<%= record.mobile %>" data-address="<%= record.address %>" data-type="<%= record.class.to_s %>" data-modal-info-url="/people/<%= record.id %>.js">
+  <% attributes.each do |attribute| %>
+    <td><%= record.send attribute %></td>
+  <% end %>
+</tr>

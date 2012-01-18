@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      movimentation:
+        one: "Movimentação Fiscal"
+        other: "Movimentações Fiscais"
+
+    attributes:
+      movimentation:
+        movimentation_date: "Data da movimentação"
+        situation: "Situação"
+        opinion: "Parecer do fiscal"

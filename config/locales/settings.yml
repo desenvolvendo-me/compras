@@ -1,0 +1,9 @@
+pt-BR:
+  settings:
+    default_city: "Cidade padrão"
+    default_currency: "Moeda corrente"
+    transfer_property_with_opened_payment_resources: "Permitir a ITBI com débitos em aberto"
+    rate_property_transfer: "Alíquota de transferência"
+    rate_property_transfer_funded: "Alíquota da transferência financiada"
+    default_interest: "Juros padrão"
+    default_penalty: "Multa padrão"

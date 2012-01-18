@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      bank_account:
+        one: "Conta Bancária / Convênio"
+        other: "Contas Bancárias / Convênios"
+
+    attributes:
+      bank_account:
+        name: "Nome"
+        bank: "Banco"
+        agency: "Agência"
+        account_number: "Número da conta corrente"
+        originator: "Código do cedente"
+        number_agreement: "Número do contrato"

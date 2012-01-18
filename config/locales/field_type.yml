@@ -1,0 +1,10 @@
+pt-BR:
+  enumerations:
+    field_type:
+      integer: "Inteiro"
+      decimal: "Decimal"
+      text: "Texto"
+      date: "Data"
+      datetime: "Data e Hora"
+      collection: "Opções"
+      boolean: "Sim ou Não"

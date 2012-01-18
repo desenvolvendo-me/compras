@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      agency:
+        one: "Agência"
+        other: "Agências"
+
+    attributes:
+      agency:
+        name: "Nome"
+        number: "Número"
+        digit: "Dígito"
+        city: "Cidade"
+        bank: "Banco"
+        phone: "Telefone"
+        fax: "Fax"
+        email: "E-mail"

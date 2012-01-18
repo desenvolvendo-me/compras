@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset="utf-8">
+    <%= csrf_meta_tag %>
+
+    <title>Sistema Tributário</title>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'application' %>
+
+    <% if Rails.env.production? %>
+      <script>
+        window._inform = window._inform || {};
+        window._inform['_setAccount'] = 'IN-88a2f158a508';
+
+        (function () {
+          inscript = document.createElement('script');
+          inscript.type = 'text/javascript';
+          inscript.async = true;
+
+          inscript.src = location.protocol + '//inform.forwardtechnology.co.uk/javascripts/capture.js';
+          s = document.getElementsByTagName('script')[0];
+          s.parentNode.appendChild(inscript)
+        })();
+      </script>
+    <% end %>
+  </head>
+
+  <body>
+    <div id="header">
+      <h1><%= link_to 'Sistema Tributário', root_path %></h1>
+    </div>
+
+    <div id="account">
+      <ul>
+        <li>
+          <%= link_to current_user, edit_account_path %>
+        </li>
+        <li>
+          <%= link_to t('logout'), destroy_user_session_path, :method => :delete, :class => 'logout' %>
+        </li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li>
+          <%= link_to 'Cadastros Diversos', dashboard_general_path %>
+        </li>
+        <li>
+          <%= link_to 'Parâmetros para Cálculos', dashboard_calculation_path %>
+        </li>
+        <li>
+          <%= link_to 'Cadastro Econômico', dashboard_economic_path %>
+        </li>
+        <li>
+          <%= link_to 'Administração', dashboard_management_path %>
+        </li>
+      </ul>
+    </div>
+
+    <div id="container">
+      <div id="sidebar">
+        <%= render 'sidebar' %>
+      </div>
+
+      <div id="content" class="<%= content_classes %>">
+
+        <div class="flash">
+          <%= render 'layouts/flash' %>
+        </div>
+
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

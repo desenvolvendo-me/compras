@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      field:
+        one: "Campo do Cadastro"
+        other: "Campos dos Cadastros"
+
+    attributes:
+      field:
+        name: "Nome"
+        description: "Descrição"
+        mask: "Formato"

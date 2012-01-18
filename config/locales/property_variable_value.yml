@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      property_variable_value:
+        one: "Informações do Terreno"
+        other: "Informações do Terreno"
+
+    attributes:
+      property_variable_value:
+        value: "Valor a informar"
+        property: "Imóvel"
+        property_variable_setting: "Itens do boletim"
+        name: "Nome"
+        reference_unit: "Unidade de referência"
+

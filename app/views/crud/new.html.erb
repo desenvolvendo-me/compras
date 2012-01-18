@@ -1,0 +1,12 @@
+<div class="breadcrumb">
+  <ul>
+    <li><%= plural %></li>
+    <li><%= t "#{controller_name}.new", :resource => singular, :cascade => true %></li>
+  </ul>
+</div>
+
+<div class="title">
+  <%= t "#{controller_name}.new", :resource => singular, :cascade => true %>
+</div>
+
+<%= render 'form_wrapper' %>

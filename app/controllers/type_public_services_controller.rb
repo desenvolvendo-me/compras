@@ -1,0 +1,2 @@
+class TypePublicServicesController < CrudController
+end

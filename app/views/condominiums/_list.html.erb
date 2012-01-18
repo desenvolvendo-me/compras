@@ -1,0 +1,43 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :name %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :built_area %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :area_common_user %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :construction_year %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource.name, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= area_field(resource.built_area) %>
+        </td>
+        <td>
+          <%= area_field(resource.area_common_user) %>
+        </td>
+        <td>
+          <%= resource.construction_year %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

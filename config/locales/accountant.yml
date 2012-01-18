@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      accountant:
+        one: Contador
+        other: Contadores
+
+    attributes:
+      accountant:
+        crc: "CRC"
+        person: "Nome"

@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      neighborhood:
+        one: "Bairro"
+        other: "Bairros"
+
+    attributes:
+      neighborhood:
+        name: "Nome"
+        city: "Cidade"
+
+
+

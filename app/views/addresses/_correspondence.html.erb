@@ -1,0 +1,27 @@
+<p>
+  <input type="button" class="button affirmative add-correspondence-address" value="<%= t 'button.address.add_correspondence' %>" />
+</p>
+
+<div id="correspondence-address">
+</div>
+
+<%= mustache 'correspondence-address-template' do %>
+  <fieldset>
+    <legend>Endereço de Correspondência</legend>
+
+    <%= f.input :correspondence_address, :collection => f.object.correspondence_address || Address.new do |a| %>
+      <%= render "addresses/address", :a => a %>
+    <% end %>
+  </fieldset>
+<% end %>
+
+<script>
+  $(".add-correspondence-address").click(function () {
+    $("#correspondence-address").html($("#correspondence-address-template").mustache());
+    $(".add-correspondence-address").hide();
+  });
+
+  <% if f.object.correspondence_address %>
+    $(".add-correspondence-address").click();
+  <% end %>
+</script>
