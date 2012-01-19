@@ -16,12 +16,10 @@ module Dashboard::GeneralHelper
       m.condominiums
       m.condominium_types
       m.people
-      m.accountants
       m.banks
       m.agencies
       m.bank_accounts
       m.prefectures
-      m.holidays
       m.settings
       m.fiscal_years
     end
