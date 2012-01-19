@@ -12,6 +12,7 @@ pt-BR:
         password: "Senha"
         password_confirmation: "Confirme a senha"
         profile: "Perfil"
+        employee: "Funcionário"
 
   simple_form:
     hints:

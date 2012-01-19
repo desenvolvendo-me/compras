@@ -2,6 +2,7 @@ class Employee < ActiveRecord::Base
   attr_accessible :person_id, :registration
 
   belongs_to :person
+  has_one :user
 
   validates :person_id, :registration, :presence => true, :uniqueness => true
 

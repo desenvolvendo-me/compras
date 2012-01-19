@@ -1,7 +1,7 @@
 module Helpers
   def self.included(receiver)
     receiver.let!(:current_user) do
-      User.make!(:sobrinho)
+      User.make!(:sobrinho_as_admin)
     end
   end
 

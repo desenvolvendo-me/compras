@@ -7,6 +7,7 @@ feature "Users" do
   end
 
   scenario 'create a new user' do
+    Employee.make!(:wenderson)
     Profile.make!(:manager)
 
     click_link 'Administração'
@@ -15,7 +16,11 @@ feature "Users" do
 
     click_link 'Criar Usuário'
 
-    fill_in 'Nome', :with => 'Wenderson Malheiros'
+    within_modal 'Funcionário' do
+      click_button 'Pesquisar'
+      click_record 'Wenderson Malheiros'
+    end
+
     fill_in 'Login', :with => 'wenderson.malheiros'
     fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     fill_in 'Senha', :with => '123456'
@@ -27,9 +32,9 @@ feature "Users" do
 
     page.should have_notice 'Usuário criado com sucesso.'
 
-    click_link 'Wenderson Malheiros'
+    click_link 'wenderson.malheiros'
 
-    page.should have_field 'Nome', :with => 'Wenderson Malheiros'
+    page.should have_field 'Funcionário', :with => 'Wenderson Malheiros'
     page.should have_field 'Login', :with => 'wenderson.malheiros'
     page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     page.should have_field 'Senha', :with => ''
@@ -37,25 +42,30 @@ feature "Users" do
   end
 
   scenario 'update an user' do
+    Employee.make!(:sobrinho)
+
     click_link 'Administração'
 
     click_link 'Usuários'
 
     within_records do
-      click_link 'Gabriel Sobrinho'
+      click_link 'sobrinho'
     end
 
-    fill_in 'Nome', :with => 'Gabriel Campos Sobrinho'
+    within_modal 'Funcionário' do
+      click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
 
     click_button 'Atualizar Usuário'
 
     page.should have_notice 'Usuário editado com sucesso.'
 
     within_records do
-      click_link 'Gabriel Campos Sobrinho'
+      click_link 'sobrinho'
     end
 
-    page.should have_field 'Nome', :with => 'Gabriel Campos Sobrinho'
+    page.should have_field 'Funcionário', :with => 'Gabriel Sobrinho'
   end
 
   scenario 'destroy an user' do
@@ -65,7 +75,7 @@ feature "Users" do
 
     click_link 'Usuários'
 
-    click_link 'Wenderson Malheiros'
+    click_link 'wenderson.malheiros'
 
     click_link 'Apagar Wenderson Malheiros', :confirm => true
 

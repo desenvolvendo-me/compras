@@ -20,10 +20,10 @@
           <%= resource.id %>
         </td>
         <td>
-          <%= link_to resource.name, edit_resource_path(resource) %>
+          <%= resource.name %>
         </td>
         <td>
-          <%= resource.login %>
+          <%= link_to resource.login, edit_resource_path(resource) %>
         </td>
       </tr>
     <% end %>

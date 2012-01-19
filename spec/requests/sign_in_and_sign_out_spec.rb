@@ -3,7 +3,7 @@ require 'spec_helper'
 
 feature "SignInAndSignOut" do
   background do
-    User.make!(:sobrinho)
+    User.make!(:sobrinho_as_admin)
   end
 
   scenario 'sign in with invalid credentials' do

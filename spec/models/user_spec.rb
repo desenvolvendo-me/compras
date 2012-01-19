@@ -4,8 +4,8 @@ require 'app/models/bookmark'
 
 describe User do
   it "return name on to_s" do
-    subject.name = 'Gabriel Sobrinho'
-    subject.name.should eq subject.to_s
+    subject.stub_chain(:employee, :name).and_return('Gabriel Sobrino')
+    subject.to_s.should eq 'Gabriel Sobrino'
   end
 
   it "require password" do
@@ -34,7 +34,6 @@ describe User do
   it { should have_one :bookmark }
   it { should belong_to :profile }
 
-  it { should validate_presence_of :name }
   it { should validate_presence_of :login }
 
   it "shoud not validate presence of profile when user is an admin" do
@@ -45,5 +44,10 @@ describe User do
   it "shoud validate presence of profile when user is not an admin" do
     subject.stub(:administrator?).and_return(false)
     subject.should validate_presence_of :profile
+  end
+
+  it "shoud validate presence of employee when user is not an admin" do
+    subject.stub(:administrator?).and_return(false)
+    subject.should validate_presence_of :employee
   end
 end

@@ -3,7 +3,8 @@ User.blueprint(:sobrinho) do
   email         { 'gabriel.sobrinho@gmail.com' }
   password      { '123456' }
   login         { 'gabriel.sobrinho' }
-  administrator { true }
+  profile       { Profile.make!(:manager) }
+  employee      { Employee.make!(:sobrinho) }
 end
 
 User.blueprint(:wenderson) do
@@ -12,4 +13,13 @@ User.blueprint(:wenderson) do
   login    { 'wenderson.malheiros'}
   password { '123456' }
   profile  { Profile.make!(:manager) }
+  employee { Employee.make!(:wenderson) }
+end
+
+User.blueprint(:sobrinho_as_admin) do
+  name          { 'Gabriel Sobrinho' }
+  email         { 'gabriel.sobrinho@gmail.com' }
+  password      { '123456' }
+  login         { 'gabriel.sobrinho' }
+  administrator { true }
 end
