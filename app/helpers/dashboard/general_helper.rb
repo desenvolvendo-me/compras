@@ -23,6 +23,7 @@ module Dashboard::GeneralHelper
       m.prefectures
       m.settings
       m.fiscal_years
+      m.reference_units
     end
   end
 end

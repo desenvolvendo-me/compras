@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      reference_unit:
+        one: "Unidade de Referência"
+        other: "Unidades de Referência"
+
+    attributes:
+      reference_unit:
+        name: "Nome"
+        acronym: "Sigla"
