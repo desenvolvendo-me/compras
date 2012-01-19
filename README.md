@@ -1,12 +1,12 @@
-# Tributário
+# Compras e Licitações
 
-Gestão do lançamento e arrecadação do município onde incluem gerenciamento de receitas, cálculos, lançamentos e arrecadação de tributos.
+Gestão de compras e licitações do município.
 
 ## Configuração
 
 ### Git
 
-    $ git clone git@github.com:nohupbrasil/tributario.git
+    $ git clone git@github.com:nohupbrasil/compras.git
 
 ### Bundler
 
@@ -14,7 +14,7 @@ Gestão do lançamento e arrecadação do município onde incluem gerenciamento 
 
 ### PostgreSQL
 
-Crie um usuário chamado tributario com permissão para criar banco de dados.
+Crie um usuário chamado `compras` com permissão para criar banco de dados.
 
     $ cp config/database.sample.yml config/database.yml
     $ bundle exec rake db:create db:migrate db:test:prepare db:seed
