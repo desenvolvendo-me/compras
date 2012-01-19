@@ -1,17 +1,17 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: tributario_development
+  database: compras_development
   pool: 5
   min_messages: warning
-  username: tributario
-  password: tributario
+  username: compras
+  password: compras
 
 test:
   adapter: postgresql
   encoding: unicode
-  database: tributario_test
+  database: compras_test
   pool: 5
   min_messages: warning
-  username: tributario
-  password: tributario
+  username: compras
+  password: compras
