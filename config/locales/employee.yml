@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      employee:
+        one: "Funcionário"
+        other: "Funcionários"
+
+    attributes:
+      employee:
+        person: "Pessoa"
+        registration: "Matrícula"

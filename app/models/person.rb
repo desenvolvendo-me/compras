@@ -5,6 +5,7 @@ class Person < ActiveRecord::Base
   attr_modal :name, :cpf, :cnpj
 
   belongs_to :personable, :polymorphic => true, :autosave => true, :dependent => :destroy
+  has_one :employee
 
   validates :name, :personable, :presence => true
   validates :personable, :associated => true

@@ -5,6 +5,7 @@ module Dashboard::GeneralHelper
 
   def links
     simple_menu do |m|
+      m.employees
       m.countries
       m.states
       m.cities

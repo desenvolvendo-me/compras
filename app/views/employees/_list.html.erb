@@ -1,0 +1,25 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :person %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :registration %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= link_to resource.person, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.registration %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

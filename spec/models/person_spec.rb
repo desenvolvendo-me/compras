@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/person'
+require 'app/models/employee'
 
 describe Person do
   it "return name when call to_s" do
@@ -41,6 +42,7 @@ describe Person do
     end
 
     it { should belong_to :personable }
+    it { should have_one :employee }
 
     it { should validate_presence_of :name }
     it { should validate_presence_of :personable }
