@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      delivery_location:
+        one: "Local de Entrega"
+        other: "Locais de Entrega"
+
+    attributes:
+      delivery_location:
+        name: "Nome"
+        address: "Endereço"

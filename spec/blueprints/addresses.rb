@@ -33,3 +33,15 @@ Address.blueprint(:general) do
   number { 0666 }
   addressable { nil }
 end
+
+Address.blueprint(:education) do
+  neighborhood { Neighborhood.make!(:portugal) }
+  street { Street.make!(:amazonas) }
+  district { District.make!(:norte) }
+  land_subdivision { LandSubdivision.make!(:horizonte_a_vista) }
+  condominium { Condominium.make!(:tambuata) }
+  complement { "Logo ali" }
+  zip_code { "33600-500" }
+  number { 3524 }
+  addressable { nil }
+end

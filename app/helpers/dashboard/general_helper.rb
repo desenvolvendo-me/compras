@@ -24,6 +24,7 @@ module Dashboard::GeneralHelper
       m.settings
       m.fiscal_years
       m.reference_units
+      m.delivery_locations
     end
   end
 end
