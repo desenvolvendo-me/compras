@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      condominium:
+        one: "Condomínio"
+        other: "Condomínios"
+
+    attributes:
+      condominium:
+        name: "Nome"
+        quantity_garages: "Número de garagens"
+        quantity_units: "Número de unidades"
+        quantity_blocks: "Número de blocos"
+        quantity_elevators: "Número de elevadores"
+        quantity_rooms: "Número de salas"
+        quantity_floors: "Número de pavimentos"
+        built_area: "Área edificada"
+        area_common_user: "Área de uso comum"
+        construction_year: "Ano da construção"
+        condominium_type: "Tipo de condomínio"
+        street: "Rua"
