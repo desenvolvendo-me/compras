@@ -7,11 +7,11 @@ module Matchers
     end
 
     failure_message_for_should do |page|
-      "expected #{page.html.inspect} to have disabled field #{field.inspect}"
+      "expected #{page.text.inspect} to have disabled field #{field.inspect}"
     end
 
     failure_message_for_should_not do |page|
-      "expected #{page.html.inspect} not to have disabled field #{field.inspect}"
+      "expected #{page.text.inspect} not to have disabled field #{field.inspect}"
     end
   end
 
@@ -21,11 +21,11 @@ module Matchers
     end
 
     failure_message_for_should do |page|
-      "expected #{page.html.inspect} to have disabled button #{field.inspect}"
+      "expected #{page.text.inspect} to have disabled button #{field.inspect}"
     end
 
     failure_message_for_should_not do |page|
-      "expected #{page.html.inspect} not to have disabled button #{field.inspect}"
+      "expected #{page.text.inspect} not to have disabled button #{field.inspect}"
     end
   end
 
@@ -35,11 +35,11 @@ module Matchers
     end
 
     failure_message_for_should do |page|
-      "expected #{page.html.inspect} to have notice #{notice.inspect}"
+      "expected #{page.text.inspect} to have notice #{notice.inspect}"
     end
 
     failure_message_for_should_not do |page|
-      "expected #{page.html.inspect} not to have notice #{notice.inspect}"
+      "expected #{page.text.inspect} not to have notice #{notice.inspect}"
     end
   end
 
@@ -49,11 +49,11 @@ module Matchers
     end
 
     failure_message_for_should do |page|
-      "expected #{page.html.inspect} to have alert #{alert.inspect}"
+      "expected #{page.text.inspect} to have alert #{alert.inspect}"
     end
 
     failure_message_for_should_not do |page|
-      "expected #{page.html.inspect} not to have alert #{alert.inspect}"
+      "expected #{page.text.inspect} not to have alert #{alert.inspect}"
     end
   end
 end
