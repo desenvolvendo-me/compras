@@ -1,3 +1,6 @@
+# test environment
+export RAILS_ENV="test"
+
 # makes bash exit immediately if any command fails
 set -e
 
@@ -8,7 +11,7 @@ set -x
 (bundle check || bundle install) > /dev/null
 
 # migrate database
-bundle exec rake db:migrate db:test:load > /dev/null
+bundle exec rake db:migrate > /dev/null
 
 # execute specs
 bundle exec rspec spec/business
