@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2'
 
 platform :jruby do
   gem 'jruby-openssl', '0.7.4'
