@@ -6,7 +6,7 @@ require 'app/models/land_subdivision'
 describe Neighborhood do
   it 'delegate state to city' do
     city = mock('city', :state => 'Minas Gerais')
-    subject.should_receive(:city).and_return(city)
+    subject.stub(:city).and_return(city)
 
     subject.state.should eq 'Minas Gerais'
   end
