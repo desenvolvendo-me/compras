@@ -250,6 +250,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :service_types do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :side_streets do
     collection do
       get :modal

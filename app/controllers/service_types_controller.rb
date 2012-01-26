@@ -1,0 +1,2 @@
+class ServiceTypesController < CrudController
+end

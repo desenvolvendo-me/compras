@@ -1,0 +1,11 @@
+pt-BR:
+  enumerations:
+    service_goal:
+      bank_loan: "Empréstimos bancários"
+      purchase_of_goods: "Compras de bens"
+      public_works: "Obras públicas"
+      location: "Locação"
+      technical_cooperation: "Cooperação técnica"
+      contract_management: "Contrato de gestão"
+      trainees: "Estagiário"
+      service_delivery: "Prestação de serviço"
