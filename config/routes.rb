@@ -103,6 +103,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :communication_sources do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :condominium_types do
     collection do
       get :modal

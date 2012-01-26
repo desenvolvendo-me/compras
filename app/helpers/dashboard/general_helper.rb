@@ -8,6 +8,7 @@ module Dashboard::GeneralHelper
       m.employees
       m.countries
       m.states
+      m.communication_sources
       m.cities
       m.districts
       m.neighborhoods
