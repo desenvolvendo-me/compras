@@ -25,6 +25,7 @@ module Dashboard::GeneralHelper
       m.fiscal_years
       m.reference_units
       m.delivery_locations
+      m.materials_groups
     end
   end
 end

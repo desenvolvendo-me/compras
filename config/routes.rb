@@ -1,4 +1,12 @@
 Tributario::Application.routes.draw do
+  resources :materials_groups do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+
   resources :fiscal_years do
     collection do
       get :filter

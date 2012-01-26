@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      materials_group:
+        one: "Grupo de Materiais"
+        other: "Grupos de Materiais"
+
+    attributes:
+      materials_group:
+        group: "Grupo"
+        name: "Nome"
