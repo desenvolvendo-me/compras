@@ -1,11 +1,4 @@
 Tributario::Application.routes.draw do
-  resources :materials_groups do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
 
   resources :fiscal_years do
     collection do
@@ -183,6 +176,13 @@ Tributario::Application.routes.draw do
 
   resources :legal_natures, :only => :index do
     collection do
+      get :modal
+    end
+  end
+
+  resources :materials_groups do
+    collection do
+      get :filter
       get :modal
     end
   end
