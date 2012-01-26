@@ -29,6 +29,7 @@ module Dashboard::GeneralHelper
       m.reference_units
       m.delivery_locations
       m.materials_groups
+      m.materials_classes
     end
   end
 end

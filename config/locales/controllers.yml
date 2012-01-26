@@ -19,6 +19,8 @@ pt-BR:
     employees: "Funcionários"
     issqn_classifications: "Enquadramentos ISSQN"
     land_subdivisions: "Loteamentos"
+    materials_classes: "Classes de Materiais"
+    materials_groups: "Grupos de Materiais"
     neighborhoods: "Bairros"
     people: "Contribuintes"
     prefectures: "Prefeituras"
@@ -35,4 +37,3 @@ pt-BR:
     users: "Usuários"
     working_hours: "Horários de Funcionamento das Atividades Econômicas"
     fiscal_years: "Exercícios Fiscais"
-    materials_groups: "Grupos de Materiais"
