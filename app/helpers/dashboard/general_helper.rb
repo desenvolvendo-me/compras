@@ -30,6 +30,7 @@ module Dashboard::GeneralHelper
       m.delivery_locations
       m.materials_groups
       m.materials_classes
+      m.type_of_administractive_acts
     end
   end
 end

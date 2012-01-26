@@ -317,6 +317,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :type_of_administractive_acts do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :users do
     collection do
       get :filter

@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      type_of_administractive_act:
+        one: "Tipo de Ato Administrativo"
+        other: "Tipos de Ato Administrativo"
+
+    attributes:
+      type_of_administractive_act:
+        description: "Descrição"

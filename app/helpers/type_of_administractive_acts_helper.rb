@@ -1,0 +1,2 @@
+module TypeOfAdministractiveActsHelper
+end
