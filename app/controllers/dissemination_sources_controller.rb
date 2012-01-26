@@ -1,0 +1,2 @@
+class DisseminationSourcesController < CrudController
+end

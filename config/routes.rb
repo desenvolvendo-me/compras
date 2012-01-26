@@ -160,6 +160,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :dissemination_sources do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :employees do
     collection do
       get :filter

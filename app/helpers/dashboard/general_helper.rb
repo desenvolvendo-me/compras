@@ -11,6 +11,7 @@ module Dashboard::GeneralHelper
       m.communication_sources
       m.cities
       m.districts
+      m.dissemination_sources
       m.neighborhoods
       m.streets
       m.street_types

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      dissemination_source:
+        one: "Fonte de Divulgação"
+        other: "Fontes de Divulgação"
+
+    attributes:
+      dissemination_source:
+        description: "Descrição"
+        communication_source: "Fonte de comunicação"
