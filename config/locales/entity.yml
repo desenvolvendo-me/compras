@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      entity:
+        one: "Entidade"
+        other: "Entidades"
+
+    attributes:
+      entity:
+        name: "Nome"

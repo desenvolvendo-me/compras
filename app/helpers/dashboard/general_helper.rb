@@ -32,6 +32,7 @@ module Dashboard::GeneralHelper
       m.materials_classes
       m.materials
       m.type_of_administractive_acts
+      m.entities
     end
   end
 end
