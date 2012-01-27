@@ -2,10 +2,10 @@ require 'model_helper'
 require 'app/models/communication_source'
 
 describe CommunicationSource do
-  it 'should return to_s as description' do
-    subject.description = 'Jornal'
+  it 'should return to_s as name' do
+    subject.name = 'Jornal'
     subject.to_s.should eq 'Jornal'
   end
 
-  it { should validate_presence_of :description }
+  it { should validate_presence_of :name }
 end

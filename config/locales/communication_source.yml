@@ -7,4 +7,4 @@ pt-BR:
 
     attributes:
       communication_source:
-        description: "Descrição"
+        name: "Nome"
