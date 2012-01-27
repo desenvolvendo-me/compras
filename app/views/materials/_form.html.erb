@@ -1,0 +1,19 @@
+<%= f.input :materials_group %>
+<%= f.input :materials_class %>
+<%= f.input :code %>
+<%= f.input :name %>
+<%= f.input :description %>
+<%= f.input :minimum_stock_balance %>
+<%= f.input :stock_balance, :disabled => true %>
+<%= f.input :unit_price, :disabled => true %>
+<%= f.input :cash_balance, :disabled => true %>
+<%= f.input :reference_unit %>
+<%= f.input :manufacturer %>
+<%= f.input :perishable %>
+<%= f.input :storable %>
+<%= f.input :combustible %>
+<%= f.input :material_characteristic, :as => :select, :collection => MaterialCharacteristic %>
+<%= f.input :service_type %>
+<%= f.input :material_type, :as => :select, :collection => MaterialType %>
+<%= f.input :stn_ordinance %>
+<%= f.input :expense_element %>

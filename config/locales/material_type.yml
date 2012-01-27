@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    material_type:
+      permanent: "Permanente"
+      consumption: "De consumo"

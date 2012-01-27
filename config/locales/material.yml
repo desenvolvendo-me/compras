@@ -1,0 +1,28 @@
+pt-BR:
+  activerecord:
+    models:
+      material:
+        one: "Material"
+        other: "Materiais"
+
+    attributes:
+      material:
+        materials_group: "Grupo"
+        materials_class: "Classe"
+        code: "Código"
+        name: "Nome"
+        description: "Descrição"
+        minimum_stock_balance: "Estoque mínimo"
+        stock_balance: "Saldo físico em estoque"
+        unit_price: "Preço unitário"
+        cash_balance: "Saldo financeiro"
+        reference_unit: "Unidade de medida"
+        manufacturer: "Referência do fabricante"
+        perishable: "Material perecível"
+        storable: "Material estocável"
+        combustible: "Material Combustível"
+        material_characteristic: "Característica"
+        service_type: "Tipo de serviço"
+        material_type: "Tipo de Material"
+        stn_ordinance: "Portaria STN"
+        expense_element: "Elemento de despesa"
