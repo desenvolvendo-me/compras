@@ -1,3 +1,3 @@
 TypeOfAdministractiveAct.blueprint(:lei) do
-  description { 'Lei' }
+  name { 'Lei' }
 end

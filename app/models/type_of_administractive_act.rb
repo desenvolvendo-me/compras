@@ -1,12 +1,12 @@
 class TypeOfAdministractiveAct < ActiveRecord::Base
-  attr_accessible :description
+  attr_accessible :name
 
-  validates :description, :presence => true
+  validates :name, :presence => true
 
   filterize
-  orderize :description
+  orderize
 
   def to_s
-    description
+    name
   end
 end
