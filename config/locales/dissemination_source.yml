@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       dissemination_source:
-        description: "Descrição"
+        name: "Nome"
         communication_source: "Fonte de comunicação"
