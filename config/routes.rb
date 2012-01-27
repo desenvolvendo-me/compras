@@ -48,6 +48,13 @@ Tributario::Application.routes.draw do
 
   resources :addresses
 
+  resources :administractive_acts do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :agencies do
     collection do
       get :modal

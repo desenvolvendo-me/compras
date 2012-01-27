@@ -1,0 +1,55 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :act_number %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :type_of_administractive_act %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :creation_date %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :publication_date %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :vigor_date %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :end_date %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.type_of_administractive_act %>
+        </td>
+        <td>
+          <%= resource.creation_date %>
+        </td>
+        <td>
+          <%= resource.publication_date %>
+        </td>
+        <td>
+          <%= resource.vigor_date %>
+        </td>
+        <td>
+          <%= resource.end_date %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

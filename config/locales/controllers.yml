@@ -1,6 +1,7 @@
 pt-BR:
   controllers:
     addresses: "Endereços"
+    administractive_acts: "Atos Administrativos"
     agencies: "Agências"
     bank_accounts: "Contas Bancárias / Convênios"
     banks: "Bancos"

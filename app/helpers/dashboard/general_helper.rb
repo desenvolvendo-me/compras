@@ -33,6 +33,7 @@ module Dashboard::GeneralHelper
       m.materials
       m.type_of_administractive_acts
       m.entities
+      m.administractive_acts
     end
   end
 end
