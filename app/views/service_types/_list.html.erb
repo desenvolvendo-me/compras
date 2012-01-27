@@ -2,10 +2,10 @@
   <thead>
     <tr>
       <th>
-        <%= resource_class.human_attribute_name :tce_code %>
+        <%= resource_class.human_attribute_name :name %>
       </th>
       <th>
-        <%= resource_class.human_attribute_name :name %>
+        <%= resource_class.human_attribute_name :tce_code %>
       </th>
       <th>
         <%= resource_class.human_attribute_name :service_goal %>
@@ -20,7 +20,7 @@
           <%= link_to resource, edit_resource_path(resource) %>
         </td>
         <td>
-          <%= resource.name %>
+          <%= resource.tce_code %>
         </td>
         <td>
           <%= resource.service_goal_humanize %>
