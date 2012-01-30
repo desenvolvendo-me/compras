@@ -32,6 +32,10 @@ feature "AdministractiveActs" do
       fill_in 'Valor autorizado da dívida', :with => '7000,00'
     end
 
+    within_tab 'Fontes de divulgação' do
+      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Município'
+    end
+
     click_button 'Criar Ato Administrativo'
 
     page.should have_notice 'Ato Administrativo criado com sucesso.'
@@ -54,12 +58,17 @@ feature "AdministractiveActs" do
       page.should have_field '% antecipação da receita', :with => '3,00'
       page.should have_field 'Valor autorizado da dívida', :with => '7000,00'
     end
+
+    within_tab 'Fontes de divulgação' do
+      page.should have_content 'Jornal Oficial do Município'
+    end
   end
 
   scenario 'update an existent administractive_act' do
     make_dependencies!
     TypeOfAdministractiveAct.make!(:emenda)
     AdministractiveAct.make!(:sopa)
+    DisseminationSource.make!(:jornal_bairro)
 
     click_link 'Cadastros Diversos'
 
@@ -84,6 +93,10 @@ feature "AdministractiveActs" do
       fill_in 'Valor autorizado da dívida', :with => '17000,00'
     end
 
+    within_tab 'Fontes de divulgação' do
+      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Bairro'
+    end
+
     click_button 'Atualizar Ato Administrativo'
 
     page.should have_notice 'Ato Administrativo editado com sucesso.'
@@ -105,6 +118,10 @@ feature "AdministractiveActs" do
       page.should have_field '% lei orçamentária', :with => '15,00'
       page.should have_field '% antecipação da receita', :with => '13,00'
       page.should have_field 'Valor autorizado da dívida', :with => '17000,00'
+    end
+
+    within_tab 'Fontes de divulgação' do
+      page.should have_content 'Jornal Oficial do Bairro'
     end
   end
 
@@ -157,5 +174,6 @@ feature "AdministractiveActs" do
 
   def make_dependencies!
     TypeOfAdministractiveAct.make!(:lei)
+    DisseminationSource.make!(:jornal_municipal)
   end
 end
