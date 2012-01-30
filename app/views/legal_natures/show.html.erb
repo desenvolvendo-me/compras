@@ -1,0 +1,13 @@
+<h2><%= t "#{controller_name}.show", :resource => resource, :cascade => true %></h2>
+
+<div class="record" id="<%= dom_id resource %>">
+  <%= render 'show' %>
+</div>
+
+<div class="actions">
+  <ul>
+    <% if can? :read, resource %>
+      <li><%= link_to_index %></li>
+    <% end %>
+  </ul>
+</div>
