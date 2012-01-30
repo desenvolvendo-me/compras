@@ -3,6 +3,8 @@ class CommunicationSource < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  has_many :dissemination_sources
+
   filterize
   orderize
 
