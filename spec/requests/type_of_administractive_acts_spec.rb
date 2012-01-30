@@ -24,6 +24,24 @@ feature "TypeOfAdministractiveActs" do
     page.should have_field 'Nome', :with => 'Lei'
   end
 
+  scenario 'validates uniqueness of name' do
+    TypeOfAdministractiveAct.make!(:lei)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Tipos de Ato Administrativo'
+
+    click_link 'Criar Tipo de Ato Administrativo'
+
+    fill_in 'Nome', :with => 'Lei'
+
+    click_button 'Criar Tipo de Ato Administrativo'
+
+    page.should_not have_notice 'Tipo de Ato Administrativo criado com sucesso.'
+
+    page.should have_content 'já está em uso'
+  end
+
   scenario 'update an existent type_of_administractive_act' do
     TypeOfAdministractiveAct.make!(:lei)
 
