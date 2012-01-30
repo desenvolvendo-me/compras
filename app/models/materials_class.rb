@@ -1,15 +1,15 @@
 class MaterialsClass < ActiveRecord::Base
-  attr_accessible :materials_group_id, :name, :description
+  attr_accessible :materials_group_id, :class_number, :name, :description
 
   belongs_to :materials_group
 
-  validates :materials_group_id, :name, :presence => true
-  validates :name, :uniqueness => true
+  validates :materials_group_id, :class_number, :name, :presence => true
+  validates :class_number, :name, :uniqueness => true
 
   orderize
   filterize
 
   def to_s
-    name
+    "#{class_number} - #{name}"
   end
 end

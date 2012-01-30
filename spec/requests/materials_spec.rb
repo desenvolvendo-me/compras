@@ -38,7 +38,7 @@ feature "Materials" do
     click_link 'Caixa'
 
     page.should have_field 'Grupo', :with => '01 - Generos alimenticios'
-    page.should have_field 'Classe', :with => 'Hortifrutigranjeiros'
+    page.should have_field 'Classe', :with => '01 - Hortifrutigranjeiros'
     page.should have_field 'Código', :with => '01'
     page.should have_field 'Nome', :with => 'Caixa'
     page.should have_field 'Descrição', :with => 'description'
@@ -92,7 +92,7 @@ feature "Materials" do
     click_link 'Parafuso'
 
     page.should have_field 'Grupo', :with => '02 - Limpeza'
-    page.should have_field 'Classe', :with => 'Peças'
+    page.should have_field 'Classe', :with => '02 - Peças'
     page.should have_field 'Nome', :with => 'Parafuso'
     page.should have_field 'Descrição', :with => 'de rosca'
     page.should have_field 'Estoque mínimo', :with => '20'

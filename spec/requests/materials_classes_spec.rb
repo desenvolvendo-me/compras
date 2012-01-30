@@ -16,6 +16,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo de materiais', :with => '01', :field => 'Grupo'
+    fill_in 'Classe', :with => '01'
     fill_in 'Nome', :with => 'Materiais de Escritório'
     fill_in 'Descrição', :with => 'materiais para escritório'
 
@@ -26,6 +27,7 @@ feature "MaterialsClasses" do
     click_link 'Materiais de Escritório'
 
     page.should have_field 'Grupo de materiais', :with => '01 - Generos alimenticios'
+    page.should have_field 'Classe', :with => '01'
     page.should have_field 'Nome', :with => 'Materiais de Escritório'
     page.should have_field 'Descrição', :with => 'materiais para escritório'
   end
@@ -43,6 +45,7 @@ feature "MaterialsClasses" do
     click_link 'Hortifrutigranjeiros'
 
     fill_modal 'Grupo de materiais', :with => '02', :field => 'Grupo'
+    fill_in 'Classe', :with => '02'
     fill_in 'Nome', :with => 'Novo nome'
     fill_in 'Descrição', :with => 'descricao'
 
@@ -53,6 +56,7 @@ feature "MaterialsClasses" do
     click_link 'Novo nome'
 
     page.should have_field 'Grupo de materiais', :with => '02 - Limpeza'
+    page.should have_field 'Classe', :with => '02'
     page.should have_field 'Nome', :with => 'Novo nome'
     page.should have_field 'Descrição', :with => 'descricao'
   end
@@ -65,13 +69,31 @@ feature "MaterialsClasses" do
 
     click_link 'Hortifrutigranjeiros'
 
-    click_link 'Apagar Hortifrutigranjeiros', :confirm => true
+    click_link 'Apagar 01 - Hortifrutigranjeiros', :confirm => true
 
     page.should have_notice 'Classe de Materiais apagado com sucesso.'
 
     page.should_not have_content '01 - Generos alimenticios'
     page.should_not have_content 'Hortifrutigranjeiros'
     page.should_not have_content 'detalhamento de classe do material'
+  end
+
+  scenario 'should validate uniqueness of class_number' do
+    make_dependencies!
+    MaterialsClass.make!(:hortifrutigranjeiros)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Classes de Materiais'
+
+    click_link 'Criar Classe de Materiais'
+
+    fill_modal 'Grupo de materiais', :with => '01', :field => 'Grupo'
+    fill_in 'Classe', :with => '01'
+
+    click_button 'Criar Classe de Materiais'
+
+    page.should have_content 'já está em uso'
   end
 
   scenario 'should validate uniqueness of name' do
