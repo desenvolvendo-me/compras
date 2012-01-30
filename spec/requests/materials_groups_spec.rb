@@ -27,7 +27,7 @@ feature "MaterialsGroups" do
   end
 
   scenario 'update an existent materials_group' do
-    MaterialsGroup.make!(:first)
+    MaterialsGroup.make!(:alimenticios)
 
     click_link 'Cadastros Diversos'
 
@@ -49,7 +49,7 @@ feature "MaterialsGroups" do
   end
 
   scenario 'destroy an existent materials_group' do
-    MaterialsGroup.make!(:first)
+    MaterialsGroup.make!(:alimenticios)
     click_link 'Cadastros Diversos'
 
     click_link 'Grupos de Materiais'
@@ -65,7 +65,7 @@ feature "MaterialsGroups" do
   end
 
   scenario 'should validate uniqueness of group' do
-    MaterialsGroup.make!(:first)
+    MaterialsGroup.make!(:alimenticios)
     click_link 'Cadastros Diversos'
 
     click_link 'Grupos de Materiais'
@@ -80,7 +80,7 @@ feature "MaterialsGroups" do
   end
 
   scenario 'should validate uniqueness of name' do
-    MaterialsGroup.make!(:first)
+    MaterialsGroup.make!(:alimenticios)
     click_link 'Cadastros Diversos'
 
     click_link 'Grupos de Materiais'

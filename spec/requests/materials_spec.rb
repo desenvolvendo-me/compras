@@ -156,7 +156,7 @@ feature "Materials" do
   end
 
   def make_dependencies!
-    MaterialsGroup.make!(:first)
+    MaterialsGroup.make!(:alimenticios)
     MaterialsClass.make!(:hortifrutigranjeiros)
     ReferenceUnit.make!(:unidade)
     ServiceType.make!(:trainees)

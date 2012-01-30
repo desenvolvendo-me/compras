@@ -1,4 +1,4 @@
-MaterialsGroup.blueprint(:first) do
+MaterialsGroup.blueprint(:alimenticios) do
   group { "01" }
   name { "Generos alimenticios" }
 end

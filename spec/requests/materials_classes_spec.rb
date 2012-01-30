@@ -93,6 +93,6 @@ feature "MaterialsClasses" do
   end
 
   def make_dependencies!
-    MaterialsGroup.make!(:first)
+    MaterialsGroup.make!(:alimenticios)
   end
 end

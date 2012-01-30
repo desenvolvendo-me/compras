@@ -1,5 +1,5 @@
 Material.blueprint(:manga) do
-  materials_group { MaterialsGroup.make!(:first) }
+  materials_group { MaterialsGroup.make!(:alimenticios) }
   materials_class { MaterialsClass.make!(:hortifrutigranjeiros) }
   code { "01" }
   name { "Manga" }
