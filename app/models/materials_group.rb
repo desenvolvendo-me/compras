@@ -11,6 +11,6 @@ class MaterialsGroup < ActiveRecord::Base
   validates :group, :name, :presence => true, :uniqueness => true
 
   def to_s
-    group
+    "#{group} - #{name}"
   end
 end

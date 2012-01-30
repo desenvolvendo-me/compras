@@ -25,7 +25,7 @@ feature "MaterialsClasses" do
 
     click_link 'Materiais de Escritório'
 
-    page.should have_field 'Grupo de materiais', :with => '01'
+    page.should have_field 'Grupo de materiais', :with => '01 - Generos alimenticios'
     page.should have_field 'Nome', :with => 'Materiais de Escritório'
     page.should have_field 'Descrição', :with => 'materiais para escritório'
   end
@@ -52,7 +52,7 @@ feature "MaterialsClasses" do
 
     click_link 'Novo nome'
 
-    page.should have_field 'Grupo de materiais', :with => '02'
+    page.should have_field 'Grupo de materiais', :with => '02 - Limpeza'
     page.should have_field 'Nome', :with => 'Novo nome'
     page.should have_field 'Descrição', :with => 'descricao'
   end
@@ -69,7 +69,7 @@ feature "MaterialsClasses" do
 
     page.should have_notice 'Classe de Materiais apagado com sucesso.'
 
-    page.should_not have_content '01'
+    page.should_not have_content '01 - Generos alimenticios'
     page.should_not have_content 'Hortifrutigranjeiros'
     page.should_not have_content 'detalhamento de classe do material'
   end
