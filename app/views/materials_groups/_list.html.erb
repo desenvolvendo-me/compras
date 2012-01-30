@@ -2,6 +2,9 @@
   <thead>
     <tr>
       <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
         <%= resource_class.human_attribute_name :group %>
       </th>
       <th>
@@ -13,6 +16,9 @@
   <tbody>
     <% localized(collection) do |resource| %>
       <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
         <td>
           <%= link_to resource, edit_resource_path(resource) %>
         </td>
