@@ -24,6 +24,24 @@ feature "CommunicationSources" do
     page.should have_field 'Nome', :with => 'Jornal de Circulação Municipal'
   end
 
+  scenario 'validates uniqueness of name' do
+    CommunicationSource.make!(:jornal_municipal)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Fontes de Comunicação'
+
+    click_link 'Criar Fonte de Comunicação'
+
+    fill_in 'Nome', :with => 'Jornal de Circulação Municipal'
+
+    click_button 'Criar Fonte de Comunicação'
+
+    page.should_not have_notice 'Fonte de Comunicação criado com sucesso.'
+
+    page.should have_content 'já está em uso'
+  end
+
   scenario 'update an existent communication_source' do
     CommunicationSource.make!(:jornal_municipal)
 
