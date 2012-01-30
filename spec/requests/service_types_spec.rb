@@ -28,6 +28,24 @@ feature "ServiceType" do
     page.should have_select 'Finalidade', :with => 'Estagiário'
   end
 
+  scenario 'validates uniqueness of name' do
+    ServiceType.make!(:trainees)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Tipos de Serviço'
+
+    click_link 'Criar Tipo de Serviço'
+
+    fill_in 'Nome', :with => 'Contratação de estagiários'
+
+    click_button 'Criar Tipo de Serviço'
+
+    page.should_not have_notice 'Tipo de Serviço criado com sucesso.'
+
+    page.should have_content 'já está em uso'
+  end
+
   scenario 'update an existent service' do
     ServiceType.make!(:trainees)
 
