@@ -1,0 +1,31 @@
+<div class="yui3-g modal-finder">
+  <div class="yui3-u-1-2">
+    <%= f.input :dissemination_source, :as => :modal, :input_html => { 'data-modal-url' => modal_dissemination_sources_path(:roots => true) }, :hidden_field => false %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[dissemination_source_ids][]" />
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= DisseminationSource.human_attribute_name :name %>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_dissemination_source_records">
+    <%= f.association :dissemination_sources do |p| %>
+      <%= render 'dissemination_sources/list_form', :name => p.object.name, :id => p.object.id, :f => f %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_dissemination_source_template" do %>
+  <%= f.association :dissemination_sources, :collection => f.object.dissemination_sources.build do |p| %>
+    <%= render 'dissemination_sources/list_form', :name => '{{name}}', :id => '{{id}}', :f => f %>
+  <% end %>
+<% end %>
