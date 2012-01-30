@@ -28,6 +28,24 @@ feature "DisseminationSources" do
     page.should have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
   end
 
+  scenario 'validates uniqueness of name' do
+    DisseminationSource.make!(:jornal_municipal)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Fontes de Divulgação'
+
+    click_link 'Criar Fonte de Divulgação'
+
+    fill_in 'Nome', :with => 'Jornal Oficial do Município'
+
+    click_button 'Criar Fonte de Divulgação'
+
+    page.should_not have_notice 'Fonte de Divulgação criado com sucesso.'
+
+    page.should have_content 'já está em uso'
+  end
+
   scenario 'update an existent dissemination_source' do
     DisseminationSource.make!(:jornal_municipal)
 

@@ -6,6 +6,7 @@ class DisseminationSource < ActiveRecord::Base
   has_and_belongs_to_many :administractive_acts
 
   validates :name, :communication_source, :presence => true
+  validates :name, :uniqueness => true
 
   filterize
   orderize
