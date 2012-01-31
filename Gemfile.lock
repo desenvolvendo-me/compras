@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/MarceloCajueiro/mask_validator.git
+  revision: f3e171ebaa4c5a4d90ac8a809193c934429604d7
+  specs:
+    mask_validator (0.2)
+      activemodel (>= 3.0)
+      activerecord (>= 3.0)
+
   remote: git://github.com/carlosantoniodasilva/i18n_alchemy.git
   revision: a7be2dd294f3107ad9f641a65854f346447274e2
   specs:
@@ -19,15 +26,6 @@ GIT
   branch: 2.0
   specs:
     cancan (2.0.0.alpha)
-
-GIT
-  remote: git://github.com/tomas-stefano/mask_validator.git
-  revision: b9bc10b5e31a5c28d69903cca9f9006092054f3c
-  specs:
-    mask_validator (0.1)
-      activemodel (~> 3.0)
-      activerecord (~> 3.0)
-      activesupport (~> 3.0)
 
 GEM
   remote: http://rubygems.org/
