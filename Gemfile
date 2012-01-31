@@ -55,7 +55,7 @@ end
 
 group :test do
   gem 'shoulda-matchers', '1.0.0'
-  gem 'machinist', :git => 'git://github.com/notahat/machinist.git'
+  gem 'machinist', '2.0'
   gem 'machinist-caching', '0.0.1'
   gem 'capybara', '1.1.2'
   gem 'capybara-webkit', '0.7.2'
