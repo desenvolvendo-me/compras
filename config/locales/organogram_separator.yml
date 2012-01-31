@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    organogram_separator:
+      point: "Ponto"
+      hyphen: "Hífem"
+      slash: "Barra"

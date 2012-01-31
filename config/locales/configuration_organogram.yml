@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      configuration_organogram:
+        one: "Configuração de Organograma"
+        other: "Configurações de Organograma"
+
+    attributes:
+      configuration_organogram:
+        entity: "Entidade"
+        administractive_act: "Ato Administrativo"
+        name: "Nome"
+        mask: "Máscara"

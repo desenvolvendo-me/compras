@@ -1,0 +1,25 @@
+<%= f.input :name %>
+<%= f.input :entity %>
+<%= f.input :administractive_act %>
+<%= f.input :mask, :disabled => true %>
+<%= render 'organogram_levels', :f => f %>
+
+<script>
+  function calculeMask() {
+    var levels = [];
+    var mask = '';
+    $('#organogram_levels').children('fieldset:visible').each(function(){
+      var level = $(this).find('.yui3-g .yui3-u-1-4 input').attr('value');
+      var digits = $(this).find('.yui3-g .yui3-u-1-4 input[type=text]:last').attr('value');;
+      var separator = $(this).find('.yui3-g .yui3-u-1-4 option:selected').attr('value');
+      levels.push([level, digits, separator]);
+    });
+    levels = levels.sort(function(a, b){ return a[0] > b[0] });
+    $.each(levels, function(index){
+      for(i = 1; i <= this[1]; i++) { mask += '9'; };
+      if((index+1) < levels.length) { mask += this[2]; }
+    });
+    $('#configuration_organogram_mask').attr('value', mask);
+  }
+  $('#organogram_levels').change(calculeMask);
+</script>

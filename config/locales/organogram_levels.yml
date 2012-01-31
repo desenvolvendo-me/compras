@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      organogram_level:
+        one: "Nível de Organograma"
+        other: "Níveis de Organograma"
+
+    attributes:
+      organogram_level:
+        level: "Nível"
+        name: "Nome do Campo"
+        digits: "Dígitos"
+        organogram_separator: "Separador"
