@@ -1,8 +1,4 @@
 require 'model_helper'
-require 'app/models/materials_group'
-require 'app/models/materials_class'
-require 'app/models/reference_unit'
-require 'app/models/service_type'
 require 'app/models/material'
 
 describe Material do
