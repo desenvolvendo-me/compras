@@ -55,6 +55,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :administration_types do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :agencies do
     collection do
       get :modal
@@ -93,6 +100,13 @@ Tributario::Application.routes.draw do
   resource :bookmark do
     member do
       get :empty
+    end
+  end
+
+  resources :budget_allocations do
+    collection do
+      get :filter
+      get :modal
     end
   end
 

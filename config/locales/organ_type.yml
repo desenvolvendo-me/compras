@@ -1,0 +1,12 @@
+pt-BR:
+  enumerations:
+    organ_type:
+      executive_power: "Órgão do poder executivo"
+      legislative_power: "Órgão do poder legislativo"
+      special_found: "Fundo especial"
+      foresight_own_regime: "Regime próprio de previdência"
+      autharchy: "Autarquia"
+      public_foundation: "Fundação pública"
+      public_company: "Empresa pública"
+      mixed_economy_society: "Sociedade de economia mista"
+      dependent_state_owned_company: "Empresa estatal dependente"

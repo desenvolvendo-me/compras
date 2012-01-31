@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      budget_allocation:
+        one: "Dotação Orçamentária"
+        other: "Dotações Orçamentárias"
+
+    attributes:
+      budget_allocation:
+        name: "Nome"

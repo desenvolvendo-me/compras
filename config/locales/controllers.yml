@@ -2,11 +2,13 @@ pt-BR:
   controllers:
     addresses: "Endereços"
     administractive_acts: "Atos Administrativos"
+    administration_types: "Tipos de Administração"
     agencies: "Agências"
     bank_accounts: "Contas Bancárias / Convênios"
     banks: "Bancos"
     branch_activities: "Ramos de Atividades"
     branch_classifications: "Classificações dos Ramos de Atividades"
+    budget_allocations: "Dotações Orçamentárias"
     cities: "Cidades"
     cnaes: "CNAES"
     communication_sources: "Fontes de Comunicação"

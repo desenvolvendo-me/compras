@@ -1,0 +1,2 @@
+class AdministrationTypesController < CrudController
+end

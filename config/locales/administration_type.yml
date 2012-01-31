@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      administration_type:
+        one: "Tipo de Administração"
+        other: "Tipos de Administração"
+
+    attributes:
+      administration_type:
+        code: "Código"
+        name: "Nome"
+        administration: "Administração"
+        organ_type: "Tipo do órgão"
+        legal_nature: "Natureza jurídica"
