@@ -6,8 +6,9 @@ GIT
       activemodel (>= 3.0)
       activerecord (>= 3.0)
 
+GIT
   remote: git://github.com/carlosantoniodasilva/i18n_alchemy.git
-  revision: a7be2dd294f3107ad9f641a65854f346447274e2
+  revision: 9ce227d1c7bcfb9f051b74665b8ac068ebb674f8
   specs:
     i18n_alchemy (0.0.1)
       activerecord (~> 3.0)
