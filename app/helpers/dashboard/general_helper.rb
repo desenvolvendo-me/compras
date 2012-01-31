@@ -35,6 +35,7 @@ module Dashboard::GeneralHelper
       m.entities
       m.administractive_acts
       m.administration_types
+      m.budget_allocations
     end
   end
 end
