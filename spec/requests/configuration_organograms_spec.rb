@@ -56,7 +56,6 @@ feature "ConfigurationOrganograms" do
   end
 
   scenario 'calculate mask with javascript' do
-    pending 'is not calculating on webkit, but works on selenium' do
     click_link 'Cadastros Diversos'
 
     click_link 'Configurações de Organograma'
@@ -80,7 +79,6 @@ feature "ConfigurationOrganograms" do
     end
 
     page.should have_field 'Máscara', :with => '999.99'
-    end
   end
 
   scenario 'update an existent configuration_organogram' do

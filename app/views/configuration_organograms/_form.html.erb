@@ -14,8 +14,10 @@
       var separator = $(this).find('.yui3-g .yui3-u-1-4 option:selected').attr('value');
       levels.push([level, digits, separator]);
     });
-    levels = levels.sort(function(a, b){ return a[0] > b[0] });
-    $.each(levels, function(index){
+    var ordered_levels = levels.sort(function(a, b){
+      return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
+    })
+    $.each(ordered_levels, function(index){
       for(i = 1; i <= this[1]; i++) { mask += '9'; };
       if((index+1) < levels.length) { mask += this[2]; }
     });
