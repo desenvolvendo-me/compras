@@ -84,14 +84,16 @@ feature "PurchaseSolicitations" do
 
     click_link 'Novas mesas'
 
-    page.should have_field 'Ano contábil', :with => '2013'
-    page.should have_field 'Data da solicitação', :with => '01/02/2013'
-    page.should have_field 'Responsável', :with => 'Wenderson Malheiros', :field => 'Matrícula'
-    page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-    page.should have_field 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Nome'
-    page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde', :field => 'Nome'
-    page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
-    page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
+    within_tab 'Dados gerais' do
+      page.should have_field 'Ano contábil', :with => '2013'
+      page.should have_field 'Data da solicitação', :with => '01/02/2013'
+      page.should have_field 'Responsável', :with => 'Wenderson Malheiros', :field => 'Matrícula'
+      page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
+      page.should have_field 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Nome'
+      page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde', :field => 'Nome'
+      page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
+      page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
+    end
   end
 
   scenario 'destroy an existent purchase_solicitation' do
