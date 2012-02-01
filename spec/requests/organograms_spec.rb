@@ -9,6 +9,7 @@ feature "Organograms" do
   scenario 'create a new organogram' do
     ConfigurationOrganogram.make!(:detran_sopa)
     TypeOfAdministractiveAct.make!(:lei)
+    Address.make!(:general)
 
     click_link 'Cadastros Diversos'
 
@@ -16,13 +17,21 @@ feature "Organograms" do
 
     click_link 'Criar Organograma'
 
-    fill_in 'Nome', :with => 'Secretaria de Educação'
-    fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
-    fill_in 'Organograma', :with => '02.00'
-    fill_in 'Código TCE', :with => '051'
-    fill_in 'Sigla', :with => 'SEMUEDU'
-    fill_modal 'Tipo de administração', :with => 'Lei'
-    fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
+    within_tab 'Informações' do
+      fill_in 'Nome', :with => 'Secretaria de Educação'
+      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
+      fill_in 'Organograma', :with => '02.00'
+      fill_in 'Código TCE', :with => '051'
+      fill_in 'Sigla', :with => 'SEMUEDU'
+      fill_modal 'Tipo de administração', :with => 'Lei'
+      fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
+    end
+
+    within_tab 'Endereços' do
+      fill_modal 'Logradouro', :with => 'Girassol'
+      fill_modal 'Bairro', :with => 'São Francisco'
+      fill_in 'CEP', :with => "33400-500"
+    end
 
     click_button 'Criar Organograma'
 
@@ -48,13 +57,15 @@ feature "Organograms" do
 
     click_link 'Secretaria de Educação'
 
-    fill_in 'Nome', :with => 'Secretaria de Transporte'
-    fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
-    fill_in 'Organograma', :with => '02.11'
-    fill_in 'Código TCE', :with => '081'
-    fill_in 'Sigla', :with => 'SEMUTRA'
-    fill_modal 'Tipo de administração', :with => 'Lei'
-    fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
+    within_tab 'Informações' do
+      fill_in 'Nome', :with => 'Secretaria de Transporte'
+      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
+      fill_in 'Organograma', :with => '02.11'
+      fill_in 'Código TCE', :with => '081'
+      fill_in 'Sigla', :with => 'SEMUTRA'
+      fill_modal 'Tipo de administração', :with => 'Lei'
+      fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
+    end
 
     click_button 'Atualizar Organograma'
 

@@ -1,0 +1,20 @@
+<%= f.input :name %>
+<%= f.input :configuration_organogram %>
+<%= f.input :organogram %>
+<%= f.input :tce_code %>
+<%= f.input :acronym %>
+<%= f.input :type_of_administractive_act %>
+<%= f.input :performance_field %>
+
+<script>
+  function rebuildMask() {
+    var configuration_organogram_id = $('#organogram_configuration_organogram_id').attr('value');
+    if(configuration_organogram_id != '') {
+      $.getJSON('/configuration_organograms/'+configuration_organogram_id, function(data){
+        $('#organogram_organogram').mask(data.mask);
+      });
+    }
+  }
+  rebuildMask();
+  $('#organogram_configuration_organogram_id').change(rebuildMask);
+</script>

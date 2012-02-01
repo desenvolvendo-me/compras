@@ -7,4 +7,5 @@ Organogram.blueprint(:secretaria_de_educacao) do
   acronym { 'SEMUEDU' }
   type_of_administractive_act { TypeOfAdministractiveAct.make!(:lei) }
   performance_field { 'Desenvolvimento Educacional' }
+  address { Address.make!(:general) }
 end

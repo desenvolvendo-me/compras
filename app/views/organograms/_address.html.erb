@@ -1,0 +1,3 @@
+<%= f.association :address, :collection => f.object.address || Address.new do |a| %>
+  <%= render "addresses/address", :a => a %>
+<% end %>
