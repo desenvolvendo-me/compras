@@ -1,9 +1,9 @@
 from fabric.api import env, local, run
 
-env.roledefs["production"] = ["integragrp@nobesistemas.com.br"]
+env.roledefs["staging"] = ["compras@nobesistemas.com.br"]
 
-env.repository = "git@github.com:nohupbrasil/tributario.git"
-env.path = "$HOME/integragrp"
+env.repository = "git@github.com:nohupbrasil/compras.git"
+env.path = "$HOME/compras"
 env.shared_path = "$HOME/shared"
 env.symlinks = ["config/database.yml", "config/newrelic.yml", "config/initializers/airbrake.rb"]
 
@@ -27,7 +27,7 @@ def deploy():
 
 " unicorn "
 def unicorn_start():
-    run("cd %(path)s && bundle exec unicorn -c config/unicorn.rb -E production -D" % env)
+    run("cd %(path)s && bundle exec unicorn -c config/unicorn.rb -E staging -D" % env)
 
 def unicorn_stop():
     run("kill $(cat %(path)s/tmp/pids/unicorn.pid)" % env)
@@ -48,13 +48,13 @@ def _make_symlinks():
         run("ln -sf %s/%s %s/%s" % (env.shared_path, symlink, env.path, symlink))
 
 def _create_database():
-    run("cd %(path)s && bundle exec rake db:create RAILS_ENV=production" % env)
+    run("cd %(path)s && bundle exec rake db:create RAILS_ENV=staging" % env)
 
 def _update_code():
     run("cd %(path)s && git fetch origin && git reset --hard origin/master" % env)
 
 def _compile_assets():
-    run("cd %(path)s && bundle exec rake assets:precompile RAILS_ENV=production" % env)
+    run("cd %(path)s && bundle exec rake assets:precompile RAILS_ENV=staging" % env)
 
 def _migrate_database():
-    run("cd %(path)s && bundle exec rake db:migrate RAILS_ENV=production" % env)
+    run("cd %(path)s && bundle exec rake db:migrate RAILS_ENV=staging" % env)
