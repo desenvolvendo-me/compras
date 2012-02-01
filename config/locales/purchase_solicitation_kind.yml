@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    purchase_solicitation_kind:
+      products: "Produtos"
+      goods: "Bens"
+      services: "Serviços"

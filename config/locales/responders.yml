@@ -64,6 +64,9 @@ pt-BR:
     property_settings:
       <<: *female
 
+    purchase_solicitations:
+      <<: *female
+
     reference_units:
       <<: *female
 

@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    purchase_solicitation_service_status:
+      pending: "Pendente"
+      liberated: "Liberada"
+      not_liberated: "Não liberada"
+      attended: "Atendida"

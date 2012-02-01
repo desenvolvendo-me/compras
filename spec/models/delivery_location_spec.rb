@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/delivery_location'
+require 'app/models/purchase_solicitation'
 
 describe DeliveryLocation do
   context "#to_s" do
@@ -16,5 +17,6 @@ describe DeliveryLocation do
 
   context "associations" do
     it { should belong_to :address }
+    it { should have_many :purchase_solicitations }
   end
 end

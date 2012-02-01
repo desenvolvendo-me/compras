@@ -1,0 +1,23 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation:
+        one: "Solicitação de Compra"
+        other: "Solicitações de Compra"
+
+    attributes:
+      purchase_solicitation:
+        accounting_year: "Ano contábil"
+        request_date: "Data da solicitação"
+        responsible: "Responsável"
+        justification: "Justificativa da solicitação"
+        budget_allocation: "Dotação orçamentária"
+        allocation_amount: "Saldo da dotação"
+        delivery_location: "Local para entrega"
+        kind: "Tipo de solicitação"
+        general_observations: "Observações gerais"
+        service_status: "Status de atendimento"
+        liberation_date: "Liberação"
+        liberator: "Liberador"
+        service_observations: "Observações do atendimento"
+        no_service_justification: "Justificativa para não atendimento"

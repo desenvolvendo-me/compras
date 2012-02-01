@@ -2,3 +2,7 @@
 BudgetAllocation.blueprint(:alocacao) do
   name { "Alocação" }
 end
+
+BudgetAllocation.blueprint(:alocacao_extra) do
+  name { "Alocação extra" }
+end
