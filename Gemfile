@@ -44,7 +44,7 @@ group :assets do
   gem 'uglifier', '1.2.1'
 end
 
-group :production do
+group :production, :staging do
   gem 'airbrake', '3.0.9'
   gem 'newrelic_rpm', '3.3.1'
 end
