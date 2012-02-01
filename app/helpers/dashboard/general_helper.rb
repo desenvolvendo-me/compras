@@ -39,6 +39,7 @@ module Dashboard::GeneralHelper
       m.administration_types
       m.budget_allocations
       m.purchase_solicitations
+      m.legal_natures
     end
   end
 end

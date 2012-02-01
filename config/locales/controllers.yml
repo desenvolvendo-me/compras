@@ -24,6 +24,7 @@ pt-BR:
     entities: "Entidades"
     issqn_classifications: "Enquadramentos ISSQN"
     land_subdivisions: "Loteamentos"
+    legal_natures: "Naturezas Jurídicas"
     materials: "Materiais"
     materials_classes: "Classes de Materiais"
     materials_groups: "Grupos de Materiais"
