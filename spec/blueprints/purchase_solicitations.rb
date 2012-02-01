@@ -14,4 +14,5 @@ PurchaseSolicitation.blueprint(:reparo) do
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }
   no_service_justification { "n/a" }
+  items { [PurchaseSolicitationItem.make!(:item)]}
 end

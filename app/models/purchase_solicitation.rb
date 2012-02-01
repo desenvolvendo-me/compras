@@ -1,6 +1,6 @@
 class PurchaseSolicitation < ActiveRecord::Base
   attr_accessible :accounting_year, :request_date, :responsible_id, :justification, :budget_allocation_id,
-                  :delivery_location_id, :kind, :general_observations
+                  :delivery_location_id, :kind, :general_observations, :items_attributes
 
   attr_protected :allocation_amount, :service_status, :liberation_date, :liberator, :service_observations,
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location
@@ -9,6 +9,8 @@ class PurchaseSolicitation < ActiveRecord::Base
   belongs_to :budget_allocation
   belongs_to :delivery_location
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
+  has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :destroy
+
 
   validates :accounting_year, :request_date, :budget_allocation_id, :responsible_id,
             :delivery_location, :kind, :delivery_location_id, :presence => true
@@ -17,6 +19,8 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   orderize :request_date
   filterize
+
+  accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true

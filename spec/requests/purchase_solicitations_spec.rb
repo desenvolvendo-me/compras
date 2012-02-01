@@ -32,6 +32,19 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      page.should have_disabled_field "Agrupado"
+      page.should have_disabled_field "Número do processo de compra"
+      page.should have_disabled_field "Status"
+
+      fill_modal 'Material', :with => "Cadeira"
+      fill_in 'Quantidade', :with => "5"
+      fill_in 'Preço unitário', :with => "100,00"
+      fill_in 'Preço total estimado', :with => "500,00"
+    end
+
     click_button 'Criar Solicitação de Compra'
 
     page.should have_notice 'Solicitação de Compra criada com sucesso.'
@@ -51,6 +64,14 @@ feature "PurchaseSolicitations" do
       # Testing the pending status applied automatically
       page.should have_select 'Status de atendimento', :selected => 'Pendente'
     end
+
+    within_tab 'Itens' do
+      page.should have_field 'Material', :with => "02 - Cadeira"
+      page.should have_field 'Quantidade', :with => "5"
+      page.should have_field 'Preço unitário', :with => "100,00"
+      page.should have_field 'Preço total estimado', :with => "500,00"
+      page.should have_select 'Status', :selected => 'Pendente'
+    end
   end
 
   scenario 'update an existent purchase_solicitation' do
@@ -60,6 +81,7 @@ feature "PurchaseSolicitations" do
     Employee.make!(:wenderson)
     BudgetAllocation.make!(:alocacao_extra)
     DeliveryLocation.make!(:health)
+    Material.make!(:manga)
 
     click_link 'Cadastros Diversos'
 
@@ -78,6 +100,17 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
+    within_tab 'Itens' do
+      click_button "Remover Item"
+
+      click_button "Adicionar Item"
+
+      fill_modal 'Material', :with => "Manga"
+      fill_in 'Quantidade', :with => "500"
+      fill_in 'Preço unitário', :with => "2,00"
+      fill_in 'Preço total estimado', :with => "1000,00"
+    end
+
     click_button 'Atualizar Solicitação de Compra'
 
     page.should have_notice 'Solicitação de Compra editada com sucesso.'
@@ -93,6 +126,14 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde', :field => 'Nome'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
       page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
+    end
+
+    within_tab 'Itens' do
+      page.should have_field 'Material', :with => "01 - Manga"
+      page.should have_field 'Quantidade', :with => "500"
+      page.should have_field 'Preço unitário', :with => "2,00"
+      page.should have_field 'Preço total estimado', :with => "1.000,00"
+      page.should have_select 'Status', :selected => 'Pendente'
     end
   end
 
@@ -119,5 +160,6 @@ feature "PurchaseSolicitations" do
     Employee.make!(:sobrinho)
     BudgetAllocation.make!(:alocacao)
     DeliveryLocation.make!(:education)
+    Material.make!(:cadeira)
   end
 end

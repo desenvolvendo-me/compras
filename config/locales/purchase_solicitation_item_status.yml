@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    purchase_solicitation_item_status:
+      liberated: "Liberado"
+      grouped: "Agrupado/Licitando"
+      not_attended: "Não atendido"
+      pending: "Pendente"

@@ -5,6 +5,8 @@ class Material < ActiveRecord::Base
 
   attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_class, :reference_unit, :service_type
 
+  attr_modal :name
+
   belongs_to :materials_group
   belongs_to :materials_class
   belongs_to :reference_unit
