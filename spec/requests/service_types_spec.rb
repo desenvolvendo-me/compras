@@ -13,7 +13,7 @@ feature "ServiceType" do
 
     click_link 'Criar Tipo de Serviço'
 
-    fill_in 'Código TCE', :with => '123'
+    fill_in 'Código do TCE', :with => '123'
     fill_in 'Nome', :with => 'Contratação de estagiários'
     select 'Estagiário', :from => 'Finalidade'
 
@@ -23,7 +23,7 @@ feature "ServiceType" do
 
     click_link 'Contratação de estagiários'
 
-    page.should have_field 'Código TCE', :with => '123'
+    page.should have_field 'Código do TCE', :with => '123'
     page.should have_field 'Nome', :with => 'Contratação de estagiários'
     page.should have_select 'Finalidade', :with => 'Estagiário'
   end
@@ -63,7 +63,7 @@ feature "ServiceType" do
 
     click_link 'Contratação de 10 estagiários'
 
-    page.should have_field 'Código TCE', :with => '123'
+    page.should have_field 'Código do TCE', :with => '123'
     page.should have_field 'Nome', :with => 'Contratação de 10 estagiários'
     page.should have_select 'Finalidade', :with => 'Estagiário'
   end
