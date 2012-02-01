@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      organogram:
+        one: "Organograma"
+        other: "Organogramas"
+
+    attributes:
+      organogram:
+        configuration_organogram: "Configuração de organograma"
+        organogram: "Organograma"
+        tce_code: "Código TCE"
+        name: "Nome"
+        acronym: "Sigla"
+        type_of_administractive_act: "Tipo de administração"
+        performance_field: "Área de atuação"

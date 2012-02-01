@@ -4,6 +4,8 @@ class ConfigurationOrganogram < ActiveRecord::Base
 
   attr_readonly :mask
 
+  attr_modal :name, :entity_id, :administractive_act_id
+
   belongs_to :administractive_act
   belongs_to :entity
   has_many :organogram_levels, :order => 'level asc', :dependent => :destroy
@@ -31,6 +33,10 @@ class ConfigurationOrganogram < ActiveRecord::Base
       m += organogram_level.organogram_separator unless organogram_level.blank? or (idx+1) == organogram_levels.size
     end
     m
+  end
+
+  def as_json(options = {})
+    super.merge(:mask => mask)
   end
 
   def organogram_separator_for_organogram_levels
