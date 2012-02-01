@@ -1,14 +1,20 @@
-<%= f.input :accounting_year %>
-<%= f.input :request_date %>
-<%= f.input :responsible %>
-<%= f.input :justification %>
-<%= f.input :budget_allocation %>
-<%= f.input :allocation_amount %>
-<%= f.input :delivery_location %>
-<%= f.input :kind, :collection => PurchaseSolicitationKind.to_a %>
-<%= f.input :general_observations %>
-<%= f.input :service_status, :collection => PurchaseSolicitationServiceStatus.to_a, :disabled => true %>
-<%= f.input :liberation_date, :disabled => true %>
-<%= f.input :liberator, :disabled => true  %>
-<%= f.input :service_observations, :disabled => true  %>
-<%= f.input :no_service_justification, :disabled => true  %>
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Dados gerais</a></li>
+  </ul>
+  <div id="general">
+    <%= render 'general', :f => f %>
+  </div>
+</div>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    },
+  });
+</script>
