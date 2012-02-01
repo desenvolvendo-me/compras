@@ -1,5 +1,5 @@
 preload_app true
-worker_processes 8
+worker_processes 2
 
 pid File.expand_path("../../tmp/pids/unicorn.pid", __FILE__)
 listen File.expand_path("../../tmp/sockets/unicorn.sock", __FILE__)
