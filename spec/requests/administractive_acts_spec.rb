@@ -27,8 +27,8 @@ feature "AdministractiveActs" do
     end
 
     within_tab "Complementar" do
-      fill_in '% lei orçamentária', :with => '5,00'
-      fill_in '% antecipação da receita', :with => '3,00'
+      fill_in 'Porcentagem de lei orçamentária', :with => '5,00'
+      fill_in 'Porcentagem de antecipação da receita', :with => '3,00'
       fill_in 'Valor autorizado da dívida', :with => '7.000,00'
     end
 
@@ -54,8 +54,8 @@ feature "AdministractiveActs" do
     end
 
     within_tab 'Complementar' do
-      page.should have_field '% lei orçamentária', :with => '5,00'
-      page.should have_field '% antecipação da receita', :with => '3,00'
+      page.should have_field 'Porcentagem de lei orçamentária', :with => '5,00'
+      page.should have_field 'Porcentagem de antecipação da receita', :with => '3,00'
       page.should have_field 'Valor autorizado da dívida', :with => '7.000,00'
     end
 
@@ -88,8 +88,8 @@ feature "AdministractiveActs" do
     end
 
     within_tab 'Complementar' do
-      fill_in '% lei orçamentária', :with => '15,00'
-      fill_in '% antecipação da receita', :with => '13,00'
+      fill_in 'Porcentagem de lei orçamentária', :with => '15,00'
+      fill_in 'Porcentagem de antecipação da receita', :with => '13,00'
       fill_in 'Valor autorizado da dívida', :with => '17.000,00'
     end
 
@@ -115,8 +115,8 @@ feature "AdministractiveActs" do
     end
 
     within_tab 'Complementar' do
-      page.should have_field '% lei orçamentária', :with => '15,00'
-      page.should have_field '% antecipação da receita', :with => '13,00'
+      page.should have_field 'Porcentagem de lei orçamentária', :with => '15,00'
+      page.should have_field 'Porcentagem de antecipação da receita', :with => '13,00'
       page.should have_field 'Valor autorizado da dívida', :with => '17.000,00'
     end
 
