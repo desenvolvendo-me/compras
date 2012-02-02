@@ -43,6 +43,9 @@ pt-BR:
     currencies:
       <<: *female
 
+    entities:
+      <<: *female
+
     fiscal_execution_movimentations:
       <<: *female
 

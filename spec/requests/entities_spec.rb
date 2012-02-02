@@ -17,7 +17,7 @@ feature "Entities" do
 
     click_button 'Criar Entidade'
 
-    page.should have_notice 'Entidade criado com sucesso.'
+    page.should have_notice 'Entidade criada com sucesso.'
 
     click_link 'Denatran'
 
@@ -37,7 +37,7 @@ feature "Entities" do
 
     click_button 'Atualizar Entidade'
 
-    page.should have_notice 'Entidade editado com sucesso.'
+    page.should have_notice 'Entidade editada com sucesso.'
 
     click_link 'Contran'
 
@@ -54,7 +54,7 @@ feature "Entities" do
 
     click_link 'Apagar Detran', :confirm => true
 
-    page.should have_notice 'Entidade apagado com sucesso.'
+    page.should have_notice 'Entidade apagada com sucesso.'
 
     page.should_not have_content 'Detran'
   end
