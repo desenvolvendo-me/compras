@@ -20,7 +20,7 @@ feature "ConfigurationOrganograms" do
 
     fill_modal 'Entidade', :with => 'Detran'
 
-    fill_modal 'Ato Administrativo', :with => '01', :field => 'Número'
+    fill_modal 'Ato administrativo', :with => '01', :field => 'Número'
 
     click_button 'Adicionar Estrutura'
 
@@ -40,7 +40,7 @@ feature "ConfigurationOrganograms" do
 
     page.should have_field 'Entidade', :with => 'Detran'
 
-    page.should have_field 'Ato Administrativo', :with => '01'
+    page.should have_field 'Ato administrativo', :with => '01'
 
     page.should have_field 'Máscara', :with => '99'
 
@@ -99,7 +99,7 @@ feature "ConfigurationOrganograms" do
     click_link 'Outro Nome da Configuração'
 
     page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Ato Administrativo', :with => '01'
+    page.should have_field 'Ato administrativo', :with => '01'
     page.should have_field 'Nome', :with => 'Outro Nome da Configuração'
   end
 

@@ -8,6 +8,6 @@ pt-BR:
     attributes:
       configuration_organogram:
         entity: "Entidade"
-        administractive_act: "Ato Administrativo"
+        administractive_act: "Ato administrativo"
         name: "Nome"
         mask: "Máscara"
