@@ -16,8 +16,6 @@ class PurchaseSolicitation < ActiveRecord::Base
   validates :accounting_year, :request_date, :responsible_id,
             :delivery_location, :kind, :delivery_location_id, :presence => true
 
-  before_create :set_status_to_pending
-
   orderize :request_date
   filterize
 
@@ -30,11 +28,5 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   def to_s
     justification
-  end
-
-  protected
-
-  def set_status_to_pending
-    self.service_status = 'pending'
   end
 end
