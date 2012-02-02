@@ -3,12 +3,12 @@ class PurchaseSolicitationItem < ActiveRecord::Base
 
   attr_protected :grouped, :material, :process_number
 
-  attr_accessor :reference_unit
-
   belongs_to :purchase_solicitation
   belongs_to :material
 
   has_enumeration_for :status, :with => PurchaseSolicitationItemStatus
 
   validates :material_id, :quantity, :unit_price, :estimated_total_price, :presence => true
+
+  delegate :reference_unit, :to => :material, :allow_nil => true
 end
