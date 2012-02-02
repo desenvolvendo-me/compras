@@ -1,0 +1,9 @@
+<tr class="record">
+  <td>
+    <%= name %>
+  </td>
+  <td>
+    <input id="budget_allocation_purchase_solicitation_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[budget_allocation_ids][]" value="<%= id %>" />
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>

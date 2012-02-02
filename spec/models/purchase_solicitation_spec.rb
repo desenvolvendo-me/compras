@@ -13,10 +13,10 @@ describe PurchaseSolicitation do
   it {should belong_to :budget_allocation }
   it {should belong_to :delivery_location }
   it {should belong_to :liberator }
+  it {should have_and_belong_to_many :budget_allocations }
 
   it { should validate_presence_of :accounting_year }
   it { should validate_presence_of :request_date }
-  it { should validate_presence_of :budget_allocation_id }
   it { should validate_presence_of :delivery_location_id }
   it { should validate_presence_of :responsible_id }
   it { should validate_presence_of :kind }

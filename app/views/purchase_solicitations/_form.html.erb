@@ -2,12 +2,16 @@
   <ul>
     <li><a href="#general">Dados gerais</a></li>
     <li><a href="#items">Itens</a></li>
+    <li><a href="#budget-allocations">Dotações orçamentárias</a></li>
   </ul>
   <div id="general">
     <%= render 'general', :f => f %>
   </div>
   <div id="items">
     <%= render 'items', :f => f %>
+  </div>
+  <div id="budget-allocations">
+    <%= render 'budget_allocations', :f => f %>
   </div>
 </div>
 
@@ -20,5 +24,15 @@
         $(this).tabs('select', tabWithError);
       }
     },
+  });
+
+  $("#bt_allocation").change(function(){
+    if ($(this).value != ''){
+      $('#budget_allocations').hide();
+      $('#message-no-extra-allocations').show();
+    } else {
+      $('#budget_allocations').show();
+      $('#message-no-extra-allocations').hide();
+    }
   });
 </script>

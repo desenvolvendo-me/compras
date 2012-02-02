@@ -10,6 +10,5 @@ describe BudgetAllocation do
     subject.to_s.should eq("Dotação")
   end
 
-  it { should have_many :purchase_solicitations }
   it { should validate_presence_of :name }
 end

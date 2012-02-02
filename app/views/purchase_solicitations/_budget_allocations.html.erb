@@ -1,0 +1,37 @@
+<div id="message-no-extra-allocations" style="display:none;">
+  <p><%= I18n.translate('other.tributario.messages.no_extra_allocations') %></p>
+</div>
+
+<div id="budget_allocations">
+  <div class="yui3-g modal-finder">
+    <div class="yui3-u-1-2">
+      <%= f.input :budget_allocation, :as => :modal, :input_html => { 'data-modal-url' => modal_budget_allocations_path(:roots => true) }, :hidden_field => false %>
+    </div>
+  </div>
+
+  <input type="hidden" name="<%= f.sanitized_object_name %>[budget_allocation_ids][]" />
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= DisseminationSource.human_attribute_name :name %>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody class="<%= f.sanitized_object_name %>_budget_allocation_records">
+      <%= f.association :budget_allocations do |p| %>
+        <%= render 'budget_allocations/list_form', :name => p.object.name, :id => p.object.id, :f => f %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= mustache "#{f.sanitized_object_name}_budget_allocation_template" do %>
+    <%= f.association :budget_allocations, :collection => f.object.budget_allocations.build do |p| %>
+      <%= render 'budget_allocations/list_form', :name => '{{name}}', :id => '{{id}}', :f => f %>
+    <% end %>
+  <% end %>
+</div>

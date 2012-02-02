@@ -2,7 +2,7 @@
 <%= f.input :request_date %>
 <%= f.input :responsible %>
 <%= f.input :justification %>
-<%= f.input :budget_allocation %>
+<%= f.input :budget_allocation, :input_html => { :id => 'bt_allocation' } %>
 <%= f.input :allocation_amount %>
 <%= f.input :delivery_location %>
 <%= f.input :kind, :collection => PurchaseSolicitationKind.to_a %>

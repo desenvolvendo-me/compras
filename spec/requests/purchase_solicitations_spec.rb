@@ -26,7 +26,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Data da solicitação', :with => '01/02/2012'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'bt_allocation', :with => 'Alocação', :field => 'Nome'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Nome'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -71,6 +71,66 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Preço unitário', :with => "100,00"
       page.should have_field 'Preço total estimado', :with => "500,00"
       page.should have_select 'Status', :selected => 'Pendente'
+    end
+  end
+
+  scenario 'showing a message for no extra allocation when allocation is selected on general tab' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'bt_allocation', :with => 'Alocação'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+    end
+  end
+
+  scenario 'create a new purchase_solicitation using budget_allocations_tab' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      fill_in 'Ano contábil', :with => '2012'
+      fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Nome'
+      select 'Bens', :from => 'Tipo de solicitação'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      fill_modal 'purchase_solicitation_budget_allocation', :with => 'Alocação'
+    end
+
+    click_button 'Criar Solicitação de Compra'
+
+    page.should have_notice 'Solicitação de Compra criada com sucesso.'
+
+    click_link 'Novas cadeiras'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Ano contábil', :with => '2012'
+      page.should have_field 'Data da solicitação', :with => '01/02/2012'
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
+      page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação', :field => 'Nome'
+      page.should have_select 'Tipo de solicitação', :with => 'Bens'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content 'Alocação'
     end
   end
 
