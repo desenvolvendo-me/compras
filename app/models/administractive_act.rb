@@ -19,10 +19,13 @@ class AdministractiveAct < ActiveRecord::Base
   validates :act_number, :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
   validates :act_number, :content, :uniqueness => true
+  validates :budget_law_percent, :revenue_antecipation_percent, :numericality => true
 
   validate :vigor_date_cannot_be_small_than_creation_date
   validate :publication_date_cannot_be_small_than_creation_date
   validate :publication_date_cannot_be_greater_than_vigor_date
+  validate :budget_law_percent_cannot_be_greater_than_100
+  validate :revenue_antecipation_percent_cannot_be_greater_than_100
 
   def to_s
     act_number
@@ -45,6 +48,18 @@ class AdministractiveAct < ActiveRecord::Base
   def publication_date_cannot_be_greater_than_vigor_date
     if publication_date && vigor_date && self.publication_date > self.vigor_date
       errors.add(:publication_date, I18n.translate('errors.messages.cannot_be_greater_than_vigor_date'))
+    end
+  end
+
+  def budget_law_percent_cannot_be_greater_than_100
+    if budget_law_percent && budget_law_percent > 100.00
+      errors.add(:budget_law_percent, I18n.translate('errors.messages.cannot_be_greater_than_100_percent'))
+    end
+  end
+
+  def revenue_antecipation_percent_cannot_be_greater_than_100
+    if revenue_antecipation_percent && revenue_antecipation_percent > 100.00
+      errors.add(:revenue_antecipation_percent, I18n.translate('errors.messages.cannot_be_greater_than_100_percent'))
     end
   end
 end

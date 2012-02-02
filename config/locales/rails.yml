@@ -200,6 +200,7 @@ pt-BR:
       duplicated_formulas: "não podem haver duas fórmulas com o mesmo ano."
       cannot_be_small_than_creation_date: "não pode ser menor que a data de criação"
       cannot_be_greater_than_vigor_date: "não pode ser maior que a data a vigorar"
+      cannot_be_greater_than_100_percent: "não pode ser maior que 100%"
 
   activerecord:
     errors:

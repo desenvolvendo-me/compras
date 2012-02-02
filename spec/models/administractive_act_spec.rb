@@ -19,6 +19,8 @@ describe AdministractiveAct do
   it { should validate_presence_of :budget_law_percent }
   it { should validate_presence_of :revenue_antecipation_percent }
   it { should validate_presence_of :authorized_debt_value }
+  it { should validate_numericality_of :budget_law_percent }
+  it { should validate_numericality_of :revenue_antecipation_percent }
 
   it "should not have vigor_date less than creation_date" do
     subject.creation_date = Date.current
@@ -45,5 +47,21 @@ describe AdministractiveAct do
     subject.should_not be_valid
 
     subject.errors[:publication_date].should include("não pode ser maior que a data a vigorar")
+  end
+
+  it "should not have budget_law_percent greater than 100" do
+    subject.budget_law_percent = 100.01
+
+    subject.should_not be_valid
+
+    subject.errors[:budget_law_percent].should include("não pode ser maior que 100%")
+  end
+
+  it "should not have revenue_antecipation_percent greater than 100" do
+    subject.revenue_antecipation_percent = 100.01
+
+    subject.should_not be_valid
+
+    subject.errors[:revenue_antecipation_percent].should include("não pode ser maior que 100%")
   end
 end
