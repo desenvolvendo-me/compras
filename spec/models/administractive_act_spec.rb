@@ -55,7 +55,7 @@ describe AdministractiveAct do
 
     subject.should_not be_valid
 
-    subject.errors[:budget_law_percent].should include("não pode ser maior que 100%")
+    subject.errors[:budget_law_percent].should include("deve ser menor ou igual a 100")
   end
 
   it "should not have revenue_antecipation_percent greater than 100" do
@@ -63,6 +63,6 @@ describe AdministractiveAct do
 
     subject.should_not be_valid
 
-    subject.errors[:revenue_antecipation_percent].should include("não pode ser maior que 100%")
+    subject.errors[:revenue_antecipation_percent].should include("deve ser menor ou igual a 100")
   end
 end
