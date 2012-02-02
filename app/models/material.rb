@@ -15,13 +15,22 @@ class Material < ActiveRecord::Base
   orderize
   filterize
 
-  validates :materials_group_id, :materials_class_id, :code, :name, :reference_unit_id, :service_type_id, :material_characteristic, :material_type, :presence => true
+  validates :materials_group_id, :materials_class_id, :code, :name, :reference_unit_id, :service_type_id, :material_characteristic, :presence => true
   validates :code, :name, :uniqueness => true
+  validate :should_have_material_type_when_characteristic_is_material
 
   has_enumeration_for :material_characteristic, :create_helpers => true
   has_enumeration_for :material_type, :create_helpers => true
 
   def to_s
     "#{code} - #{name}"
+  end
+
+  protected
+
+  def should_have_material_type_when_characteristic_is_material
+    if material_characteristic && material_characteristic == MaterialCharacteristic::MATERIAL && material_type.empty?
+      errors.add(:material_type, :blank)
+    end
   end
 end
