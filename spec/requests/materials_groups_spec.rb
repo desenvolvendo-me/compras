@@ -56,7 +56,7 @@ feature "MaterialsGroups" do
 
     click_link '01 - Generos alimenticios'
 
-    click_link 'Apagar 01', :confirm => true
+    click_link 'Apagar 01 - Generos alimenticios', :confirm => true
 
     page.should have_notice 'Grupo de Materiais apagado com sucesso.'
 
