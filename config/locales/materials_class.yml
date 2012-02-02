@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       materials_class:
-        materials_group: "Grupo de materiais"
+        materials_group: "Grupo"
         class_number: "Classe"
         name: "Nome"
         description: "Descrição"
