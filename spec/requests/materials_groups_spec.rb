@@ -20,7 +20,7 @@ feature "MaterialsGroups" do
 
     page.should have_notice 'Grupo de Materiais criado com sucesso.'
 
-    click_link '01 - Generos alimenticios'
+    click_link 'Generos alimenticios'
 
     page.should have_field 'Grupo', :with => '01'
     page.should have_field 'Nome', :with => 'Generos alimenticios'
@@ -33,7 +33,7 @@ feature "MaterialsGroups" do
 
     click_link 'Grupos de Materiais'
 
-    click_link '01 - Generos alimenticios'
+    click_link 'Generos alimenticios'
 
     fill_in 'Grupo', :with => '02'
     fill_in 'Nome', :with => 'Materiais de escritorio'
@@ -42,7 +42,7 @@ feature "MaterialsGroups" do
 
     page.should have_notice 'Grupo de Materiais editado com sucesso.'
 
-    click_link '02 - Materiais de escritorio'
+    click_link 'Materiais de escritorio'
 
     page.should have_field 'Grupo', :with => '02'
     page.should have_field 'Nome', :with => 'Materiais de escritorio'
@@ -54,7 +54,7 @@ feature "MaterialsGroups" do
 
     click_link 'Grupos de Materiais'
 
-    click_link '01 - Generos alimenticios'
+    click_link 'Generos alimenticios'
 
     click_link 'Apagar 01 - Generos alimenticios', :confirm => true
 
