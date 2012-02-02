@@ -97,7 +97,7 @@ feature "AdministrationTypes" do
     page.should have_content 'já está em uso'
   end
 
-  scenario 'validates uniqueness of code' do
+  scenario 'validates uniqueness of name' do
     AdministrationType.make!(:publica)
 
     click_link 'Cadastros Diversos'
