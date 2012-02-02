@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/type_of_administractive_act'
 require 'app/models/administractive_act'
 
 describe AdministractiveAct do
