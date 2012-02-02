@@ -1,18 +1,18 @@
 class AdministrationType < ActiveRecord::Base
-  attr_accessible :code, :name, :administration, :organ_type, :legal_nature_id
+  attr_accessible :name, :administration, :organ_type, :legal_nature_id
 
   belongs_to :legal_nature
 
   orderize
   filterize
 
-  validates :code, :name, :administration, :organ_type, :legal_nature_id, :presence => true
-  validates :code, :name, :uniqueness => true
+  validates :name, :administration, :organ_type, :legal_nature_id, :presence => true
+  validates :name, :uniqueness => true
 
   has_enumeration_for :administration, :create_helpers => true
   has_enumeration_for :organ_type, :create_helpers => true
 
   def to_s
-    "#{code} - #{name}"
+    name
   end
 end

@@ -15,7 +15,6 @@ feature "AdministrationTypes" do
 
     click_link 'Criar Tipo de Administração'
 
-    fill_in 'Código', :with => '01'
     fill_in 'Nome', :with => 'Pública'
     select 'Direta', :from => 'Administração'
     select 'Autarquia', :from => 'Tipo do órgão'
@@ -27,7 +26,6 @@ feature "AdministrationTypes" do
 
     click_link 'Pública'
 
-    page.should have_field 'Código', :with => '01'
     page.should have_field 'Nome', :with => 'Pública'
     page.should have_select 'Administração', :with => 'Direta'
     page.should have_select 'Tipo do órgão', :with => 'Autarquia'
@@ -46,7 +44,6 @@ feature "AdministrationTypes" do
 
     click_link 'Pública'
 
-    fill_in 'Código', :with => '02'
     fill_in 'Nome', :with => 'Privada'
     select 'Indireta', :from => 'Administração'
     select 'Fundo especial', :from => 'Tipo do órgão'
@@ -58,7 +55,6 @@ feature "AdministrationTypes" do
 
     click_link 'Privada'
 
-    page.should have_field 'Código', :with => '02'
     page.should have_field 'Nome', :with => 'Privada'
     page.should have_select 'Administração', :with => 'Indireta'
     page.should have_select 'Tipo do órgão', :with => 'Fundo especial'
@@ -73,28 +69,11 @@ feature "AdministrationTypes" do
 
     click_link 'Pública'
 
-    click_link 'Apagar 01 - Pública', :confirm => true
+    click_link 'Apagar Pública', :confirm => true
 
     page.should have_notice 'Tipo de Administração apagado com sucesso.'
 
-    page.should_not have_content '01'
     page.should_not have_content 'Pública'
-  end
-
-  scenario 'validates uniqueness of code' do
-    AdministrationType.make!(:publica)
-
-    click_link 'Cadastros Diversos'
-
-    click_link 'Tipos de Administração'
-
-    click_link 'Criar Tipo de Administração'
-
-    fill_in 'Código', :with => '01'
-
-    click_button 'Criar Tipo de Administração'
-
-    page.should have_content 'já está em uso'
   end
 
   scenario 'validates uniqueness of name' do

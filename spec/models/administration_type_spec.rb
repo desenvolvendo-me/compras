@@ -4,14 +4,12 @@ require 'app/models/administration_type'
 
 describe AdministrationType do
   it 'should return code and name as to_s method' do
-    subject.code = '01'
     subject.name = 'Privada'
 
-    subject.to_s.should eq '01 - Privada'
+    subject.to_s.should eq 'Privada'
   end
 
   it {should belong_to :legal_nature }
-  it {should validate_presence_of :code }
   it {should validate_presence_of :name }
   it {should validate_presence_of :administration }
   it {should validate_presence_of :organ_type }

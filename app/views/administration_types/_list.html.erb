@@ -8,9 +8,6 @@
         <%= resource_class.human_attribute_name :name %>
       </th>
       <th>
-        <%= resource_class.human_attribute_name :code %>
-      </th>
-      <th>
         <%= resource_class.human_attribute_name :administration %>
       </th>
       <th>
@@ -30,9 +27,6 @@
         </td>
         <td>
           <%= link_to resource.name, edit_resource_path(resource) %>
-        </td>
-        <td>
-          <%= resource.code %>
         </td>
         <td>
           <%= resource.administration_humanize %>
