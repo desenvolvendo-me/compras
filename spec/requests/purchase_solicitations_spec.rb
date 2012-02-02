@@ -56,8 +56,8 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
-      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação', :field => 'Nome'
+      page.should have_field 'Dotação orçamentária', :with => 'Alocação'
+      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :with => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
 
@@ -106,7 +106,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Data da solicitação', :with => '01/02/2012'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Nome'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação'
       select 'Bens', :from => 'Tipo de solicitação'
     end
 
@@ -125,7 +125,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação', :field => 'Nome'
+      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :with => 'Bens'
     end
 
@@ -154,8 +154,8 @@ feature "PurchaseSolicitations" do
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Nome'
-      fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => 'Nome'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Saúde'
       select 'Serviços', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
@@ -182,8 +182,8 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Data da solicitação', :with => '01/02/2013'
       page.should have_field 'Responsável', :with => 'Wenderson Malheiros', :field => 'Matrícula'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Nome'
-      page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde', :field => 'Nome'
+      page.should have_field 'Dotação orçamentária', :with => 'Alocação extra'
+      page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
       page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
