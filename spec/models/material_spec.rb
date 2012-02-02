@@ -15,7 +15,6 @@ describe Material do
   it { should validate_presence_of :name }
   it { should validate_presence_of :material_characteristic }
   it { should validate_presence_of :reference_unit_id }
-  it { should validate_presence_of :service_type_id }
 
   it "should validate presence of material_type only if material_characteristic is material" do
     subject.material_characteristic = MaterialCharacteristic::MATERIAL
@@ -24,5 +23,14 @@ describe Material do
     subject.should_not be_valid
 
     subject.errors[:material_type].should include("não pode ficar em branco")
+  end
+
+  it "should validate presence of service_type only if material_characteristic is material" do
+    subject.material_characteristic = MaterialCharacteristic::SERVICE
+    subject.service_type_id = nil
+
+    subject.should_not be_valid
+
+    subject.errors[:service_type_id].should include("não pode ficar em branco")
   end
 end
