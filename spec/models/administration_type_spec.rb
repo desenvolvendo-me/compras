@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/administration_type'
-require 'app/models/legal_nature'
 
 describe AdministrationType do
   it 'should return code and name as to_s method' do
