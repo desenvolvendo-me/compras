@@ -6,7 +6,7 @@ class Organogram < ActiveRecord::Base
   validates :name, :organogram, :tce_code, :acronym, :presence => true
   validates :performance_field, :configuration_organogram_id, :presence => true
   validates :type_of_administractive_act_id, :presence => true
-  validate :validate_mask_with_configutation_organogram
+  validates :organogram, :mask => :mask
 
   has_one :address, :as => :addressable, :dependent => :destroy
   belongs_to :configuration_organogram
@@ -18,13 +18,6 @@ class Organogram < ActiveRecord::Base
   filterize
 
   delegate :mask, :to => :configuration_organogram, :allow_nil => true
-
-  def validate_mask_with_configutation_organogram
-    if configuration_organogram
-      MaskValidator.new({ :with => mask, :attributes => 'organogram' }).
-        validate_each(self, :organogram, organogram)
-    end
-  end
 
   def to_s
     name
