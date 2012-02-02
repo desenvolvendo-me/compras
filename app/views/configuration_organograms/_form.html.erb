@@ -23,5 +23,13 @@
     });
     $('#configuration_organogram_mask').attr('value', mask);
   }
-  $('#organogram_levels').change(calculeMask);
+
+  function applyKeyupCallbackToInput() {
+    $('#organogram_levels').find('input:visible.numeric').bind('keyup', calculeMask);
+    $('#organogram_levels').find('select').bind('change', calculeMask);
+    calculeMask();
+  }
+
+  $('.add-organogram_level,.remove-organogram_level').live('click', applyKeyupCallbackToInput);
+  applyKeyupCallbackToInput();
 </script>
