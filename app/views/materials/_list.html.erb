@@ -19,12 +19,6 @@
       <th>
         <%= resource_class.human_attribute_name :material_characteristic %>
       </th>
-      <th>
-        <%= resource_class.human_attribute_name :service_type %>
-      </th>
-      <th>
-        <%= resource_class.human_attribute_name :material_type %>
-      </th>
     </tr>
   </thead>
 
@@ -48,12 +42,6 @@
         </td>
         <td>
           <%= resource.material_characteristic_humanize %>
-        </td>
-        <td>
-          <%= resource.service_type %>
-        </td>
-        <td>
-          <%= resource.material_type_humanize %>
         </td>
       </tr>
     <% end %>
