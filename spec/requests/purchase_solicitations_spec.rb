@@ -43,6 +43,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
       fill_in 'Preço total estimado', :with => "500,00"
+      page.should have_select 'Status', :selected => 'Pendente'
     end
 
     click_button 'Criar Solicitação de Compra'

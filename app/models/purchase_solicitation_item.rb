@@ -11,12 +11,4 @@ class PurchaseSolicitationItem < ActiveRecord::Base
   has_enumeration_for :status, :with => PurchaseSolicitationItemStatus
 
   validates :material_id, :quantity, :unit_price, :estimated_total_price, :presence => true
-
-  before_create :set_status_to_pending
-
-  protected
-
-  def set_status_to_pending
-    self.status = 'pending'
-  end
 end
