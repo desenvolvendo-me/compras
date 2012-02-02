@@ -26,13 +26,14 @@
     },
   });
 
-  $("#bt_allocation").change(function(){
-    if ($(this).value != ''){
+  (function toggleBudgetAllocations(){
+    if ($("#bt_allocation").attr('value') != ''){
       $('#budget_allocations').hide();
       $('#message-no-extra-allocations').show();
-    } else {
+    }else{
       $('#budget_allocations').show();
       $('#message-no-extra-allocations').hide();
     }
-  });
+    $("#bt_allocation").change(toggleBudgetAllocations);
+  })();
 </script>
