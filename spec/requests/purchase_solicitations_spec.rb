@@ -24,6 +24,7 @@ feature "PurchaseSolicitations" do
 
       fill_in 'Ano contábil', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'bt_allocation', :with => 'Alocação', :field => 'Nome'
@@ -57,6 +58,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Ano contábil', :with => '2012'
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
+      page.should have_field 'Unidade orçamentária', :with => 'Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       page.should have_field 'Dotação orçamentária', :with => 'Alocação'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
@@ -145,6 +147,7 @@ feature "PurchaseSolicitations" do
     BudgetAllocation.make!(:alocacao_extra)
     DeliveryLocation.make!(:health)
     Material.make!(:manga)
+    Organogram.make!(:secretaria_de_desenvolvimento)
 
     click_link 'Cadastros Diversos'
 
@@ -156,6 +159,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Ano contábil', :with => '2013'
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
+      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Desenvolvimento'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde'
@@ -185,6 +189,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Ano contábil', :with => '2013'
       page.should have_field 'Data da solicitação', :with => '01/02/2013'
       page.should have_field 'Responsável', :with => 'Wenderson Malheiros', :field => 'Matrícula'
+      page.should have_field 'Unidade orçamentária', :with => 'Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       page.should have_field 'Dotação orçamentária', :with => 'Alocação extra'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
@@ -225,5 +230,6 @@ feature "PurchaseSolicitations" do
     BudgetAllocation.make!(:alocacao)
     DeliveryLocation.make!(:education)
     Material.make!(:cadeira)
+    Organogram.make!(:secretaria_de_educacao)
   end
 end
