@@ -17,9 +17,11 @@ class Organogram < ActiveRecord::Base
   orderize
   filterize
 
+  delegate :mask, :to => :configuration_organogram, :allow_nil => true
+
   def validate_mask_with_configutation_organogram
     if configuration_organogram
-      MaskValidator.new({ :with => configuration_organogram.mask, :attributes => 'organogram' }).
+      MaskValidator.new({ :with => mask, :attributes => 'organogram' }).
         validate_each(self, :organogram, organogram)
     end
   end
