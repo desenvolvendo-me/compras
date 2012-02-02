@@ -20,7 +20,7 @@ module Tributario
       return unless has_validators?
 
       mask_validator = find_mask_validator or return
-      mask_validator.options[:with]
+      mask_validator.mask_value_for(object)
     end
 
     def find_mask_validator
