@@ -13,7 +13,7 @@ feature "MaterialsGroups" do
 
     click_link 'Criar Grupo de Materiais'
 
-    fill_in 'Grupo', :with => '01'
+    fill_in 'Número do grupo', :with => '01'
     fill_in 'Nome', :with => 'Generos alimenticios'
 
     click_button 'Criar Grupo de Materiais'
@@ -22,7 +22,7 @@ feature "MaterialsGroups" do
 
     click_link 'Generos alimenticios'
 
-    page.should have_field 'Grupo', :with => '01'
+    page.should have_field 'Número do grupo', :with => '01'
     page.should have_field 'Nome', :with => 'Generos alimenticios'
   end
 
@@ -35,7 +35,7 @@ feature "MaterialsGroups" do
 
     click_link 'Generos alimenticios'
 
-    fill_in 'Grupo', :with => '02'
+    fill_in 'Número do grupo', :with => '02'
     fill_in 'Nome', :with => 'Materiais de escritorio'
 
     click_button 'Atualizar Grupo de Materiais'
@@ -44,7 +44,7 @@ feature "MaterialsGroups" do
 
     click_link 'Materiais de escritorio'
 
-    page.should have_field 'Grupo', :with => '02'
+    page.should have_field 'Número do grupo', :with => '02'
     page.should have_field 'Nome', :with => 'Materiais de escritorio'
   end
 
@@ -72,7 +72,7 @@ feature "MaterialsGroups" do
 
     click_link 'Criar Grupo de Materiais'
 
-    fill_in 'Grupo', :with => '01'
+    fill_in 'Número do grupo', :with => '01'
 
     click_button 'Criar Grupo de Materiais'
 

@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       materials_group:
-        group: "Grupo"
+        group: "Número do grupo"
         name: "Nome"
