@@ -40,6 +40,7 @@ feature "PurchaseSolicitations" do
       page.should have_disabled_field "Status"
 
       fill_modal 'Material', :with => "Cadeira"
+      page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
       fill_in 'Preço total estimado', :with => "500,00"
@@ -68,6 +69,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Itens' do
       page.should have_field 'Material', :with => "02 - Cadeira"
+      page.should have_field 'Unidade de referência', :with => "Unidade"
       page.should have_field 'Quantidade', :with => "5"
       page.should have_field 'Preço unitário', :with => "100,00"
       page.should have_field 'Preço total estimado', :with => "500,00"
@@ -167,6 +169,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Item"
 
       fill_modal 'Material', :with => "Manga"
+      page.should have_field 'Unidade de referência', :with => "Quilos"
       fill_in 'Quantidade', :with => "500"
       fill_in 'Preço unitário', :with => "2,00"
       fill_in 'Preço total estimado', :with => "1000,00"

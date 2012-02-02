@@ -27,3 +27,8 @@ ReferenceUnit.blueprint(:data) do
   name { 'Data' }
   acronym { 'D'}
 end
+
+ReferenceUnit.blueprint(:quilos) do
+  name { 'Quilos' }
+  acronym { 'KG' }
+end

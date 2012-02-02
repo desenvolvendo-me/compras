@@ -5,7 +5,7 @@ Material.blueprint(:manga) do
   name { "Manga" }
   description { "Fruta manga" }
   minimum_stock_balance { 100 }
-  reference_unit { ReferenceUnit.make!(:unidade) }
+  reference_unit { ReferenceUnit.make!(:quilos) }
   manufacturer { "Plantador" }
   perishable { true }
   storable { true }
