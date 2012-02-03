@@ -3,9 +3,9 @@ class MaterialsClass < ActiveRecord::Base
 
   belongs_to :materials_group
 
-  validates :materials_group_id, :class_number, :name, :presence => true
-  validates :class_number, :name, :uniqueness => true
-  validates :class_number, :numericality => true
+  validates :materials_group_id, :presence => true
+  validates :name, :presence => true, :uniqueness => true
+  validates :class_number, :presence => true, :uniqueness => true, :mask => "99"
 
   orderize
   filterize
