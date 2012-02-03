@@ -21,11 +21,9 @@
 <script>
   (function toggleTypes(){
     if ($("#material_material_characteristic").attr('value') == 'material'){
-      $("#material_service_type").val('');
       $("#material_service_type").parent().hide();
       $("#material_material_type").parent().show();
     } else if ($("#material_material_characteristic").attr('value') == 'service') {
-      $("#material_material_type").val('');
       $("#material_material_type").parent().hide();
       $("#material_service_type").parent().show();
     }

@@ -23,7 +23,19 @@ class Material < ActiveRecord::Base
   has_enumeration_for :material_characteristic, :create_helpers => true
   has_enumeration_for :material_type, :create_helpers => true
 
+  before_save :clean_unnecessary_type
+
   def to_s
     "#{code} - #{name}"
+  end
+
+  protected
+
+  def clean_unnecessary_type
+    if self.material_characteristic == MaterialCharacteristic::MATERIAL
+      self.service_type_id = nil
+    elsif material_characteristic == MaterialCharacteristic::SERVICE
+      self.material_type = nil
+    end
   end
 end

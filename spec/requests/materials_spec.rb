@@ -166,6 +166,38 @@ feature "Materials" do
     page.should have_content 'já está em uso'
   end
 
+  scenario 'should clean the unnecessary type of material or service depending on characteristic' do
+    Material.make!(:manga)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Manga'
+
+    select 'Material', :from => "Característica"
+
+    select 'De consumo', :from => 'Tipo de material'
+
+    click_button 'Atualizar Material'
+
+    click_link 'Manga'
+
+    select 'Serviço', :from => "Característica"
+
+    page.should have_field 'Tipo de serviço', :with => ''
+
+    fill_modal 'Tipo de serviço', :with => 'Reparos'
+
+    click_button 'Atualizar Material'
+
+    click_link 'Manga'
+
+    select 'Material', :from => "Característica"
+
+    page.should have_select 'Tipo de material', :with => ''
+  end
+
   def make_dependencies!
     MaterialsGroup.make!(:alimenticios)
     MaterialsClass.make!(:hortifrutigranjeiros)
