@@ -225,6 +225,30 @@ feature "PurchaseSolicitations" do
     page.should_not have_content 'Bens'
   end
 
+  scenario 'remove budget allocation from an existent purchase_solicitation' do
+    PurchaseSolicitation.make!(:conserto)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Remover'
+    end
+
+    click_button 'Atualizar Solicitação de Compra'
+
+    page.should have_notice 'Solicitação de Compra editada com sucesso.'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dotações orçamentárias' do
+      page.should_not have_content 'Alocação'
+    end
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     BudgetAllocation.make!(:alocacao)

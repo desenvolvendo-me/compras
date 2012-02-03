@@ -23,8 +23,8 @@
     </thead>
 
     <tbody class="<%= f.sanitized_object_name %>_budget_allocation_records">
-      <%= f.association :budget_allocations do |p| %>
-        <%= render 'budget_allocations/list_form', :name => p.object.name, :id => p.object.id, :f => f %>
+      <% f.object.budget_allocations.each do |budget_allocation| %>
+        <%= render 'budget_allocations/list_form', :name => budget_allocation.name, :id => budget_allocation.id, :f => f %>
       <% end %>
     </tbody>
   </table>
