@@ -173,6 +173,30 @@ feature "AdministractiveActs" do
     page.should have_content 'já está em uso'
   end
 
+  scenario 'remove dissemination source from an existent administractive_act' do
+    AdministractiveAct.make!(:sopa)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Atos Administrativos'
+
+    click_link '1234'
+
+    within_tab 'Fontes de divulgação' do
+      click_button 'Remover'
+    end
+
+    click_button 'Atualizar Ato Administrativo'
+
+    page.should have_notice 'Ato Administrativo editado com sucesso.'
+
+    click_link '1234'
+
+    within_tab 'Fontes de divulgação' do
+      page.should_not have_content 'Jornal Oficial do Bairro'
+    end
+  end
+
   def make_dependencies!
     TypeOfAdministractiveAct.make!(:lei)
     DisseminationSource.make!(:jornal_municipal)

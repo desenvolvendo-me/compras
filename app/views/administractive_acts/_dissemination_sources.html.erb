@@ -18,8 +18,8 @@
   </thead>
 
   <tbody class="<%= f.sanitized_object_name %>_dissemination_source_records">
-    <%= f.association :dissemination_sources do |p| %>
-      <%= render 'dissemination_sources/list_form', :name => p.object.name, :id => p.object.id, :f => f %>
+    <% f.object.dissemination_sources.each do |dissemination_source| %>
+      <%= render 'dissemination_sources/list_form', :name => dissemination_source.name, :id => dissemination_source.id, :f => f %>
     <% end %>
   </tbody>
 </table>

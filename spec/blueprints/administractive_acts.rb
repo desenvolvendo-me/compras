@@ -11,6 +11,7 @@ AdministractiveAct.blueprint(:sopa) do
   budget_law_percent { "5.00" }
   revenue_antecipation_percent { "3.00" }
   authorized_debt_value { "7000.00" }
+  dissemination_sources { [DisseminationSource.make!(:jornal_bairro)] }
 end
 
 AdministractiveAct.blueprint(:emenda) do
