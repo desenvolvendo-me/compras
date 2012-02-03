@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    organogram_kind:
+      analytical: Analítico
+      synthetic: Sintético

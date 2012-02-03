@@ -21,6 +21,7 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       fill_in 'Nome', :with => 'Secretaria de Educação'
+      select 'Analítico', :from => 'Tipo'
       fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
       fill_in 'Organograma', :with => '02.00'
       fill_in 'Código TCE', :with => '051'
@@ -53,6 +54,7 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       page.should have_field 'Nome', :with => 'Secretaria de Educação'
+      page.should have_select 'Tipo', :selected => 'Analítico'
       page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.00'
       page.should have_field 'Código TCE', :with => '051'
@@ -91,6 +93,7 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       fill_in 'Nome', :with => 'Secretaria de Transporte'
+      select 'Sintético', :from => 'Tipo'
       fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
       fill_in 'Organograma', :with => '02.11'
       fill_in 'Código TCE', :with => '081'
@@ -121,6 +124,7 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       page.should have_field 'Nome', :with => 'Secretaria de Transporte'
+      page.should have_select 'Tipo', :selected => 'Sintético'
       page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.11'
       page.should have_field 'Código TCE', :with => '081'

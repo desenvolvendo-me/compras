@@ -28,6 +28,7 @@ describe Organogram do
   it { should validate_presence_of :performance_field }
   it { should validate_presence_of :configuration_organogram_id }
   it { should validate_presence_of :type_of_administractive_act_id }
+  it { should validate_presence_of :organogram_kind }
 
   it { should have_one :address }
   it { should have_many :organogram_responsibles }

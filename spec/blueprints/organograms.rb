@@ -4,6 +4,7 @@ Organogram.blueprint(:secretaria_de_educacao) do
   organogram { '02.00' }
   tce_code { '051' }
   name { 'Secretaria de Educação' }
+  organogram_kind { OrganogramKind::ANALYTICAL }
   acronym { 'SEMUEDU' }
   type_of_administractive_act { TypeOfAdministractiveAct.make!(:lei) }
   performance_field { 'Desenvolvimento Educacional' }
@@ -16,6 +17,7 @@ Organogram.blueprint(:secretaria_de_desenvolvimento) do
   organogram { '02.00' }
   tce_code { '051' }
   name { 'Secretaria de Desenvolvimento' }
+  organogram_kind { OrganogramKind::ANALYTICAL }
   acronym { 'SEMUDES' }
   type_of_administractive_act { TypeOfAdministractiveAct.make!(:lei) }
   performance_field { 'Desenvolvimento Educacional' }

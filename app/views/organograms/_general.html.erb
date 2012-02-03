@@ -1,4 +1,5 @@
 <%= f.input :name %>
+<%= f.input :organogram_kind, :collection => OrganogramKind.to_a %>
 <%= f.input :configuration_organogram %>
 <%= f.input :organogram, :input_html => { :"date-mask" => f.object.mask } %>
 <%= f.input :tce_code %>
