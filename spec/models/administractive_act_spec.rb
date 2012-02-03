@@ -9,6 +9,7 @@ describe AdministractiveAct do
   end
 
   it { should belong_to :type_of_administractive_act }
+  it { should belong_to :legal_texts_nature }
   it { should have_and_belong_to_many :dissemination_sources}
   it { should validate_presence_of :act_number }
   it { should validate_presence_of :type_of_administractive_act_id }
@@ -20,6 +21,7 @@ describe AdministractiveAct do
   it { should validate_presence_of :budget_law_percent }
   it { should validate_presence_of :revenue_antecipation_percent }
   it { should validate_presence_of :authorized_debt_value }
+  it { should validate_presence_of :legal_texts_nature_id }
   it { should validate_numericality_of :budget_law_percent }
   it { should validate_numericality_of :revenue_antecipation_percent }
 

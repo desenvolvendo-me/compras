@@ -18,7 +18,7 @@ feature "AdministractiveActs" do
     within_tab "Principal" do
       fill_in 'Número', :with => '1234'
       fill_modal 'Tipo', :with => 'Lei', :field => 'Nome'
-      fill_in 'Natureza legal do texto jurídico', :with => 'natureza'
+      fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Cívica'
       fill_in 'Data da criação', :with => '01/01/2012'
       fill_in 'Data da publicação', :with => '02/01/2012'
       fill_in 'Data a vigorar', :with => '03/01/2012'
@@ -45,7 +45,7 @@ feature "AdministractiveActs" do
     within_tab 'Principal' do
       page.should have_field 'Número', :with => '1234'
       page.should have_field 'Tipo', :with => 'Lei'
-      page.should have_field 'Natureza legal do texto jurídico', :with => 'natureza'
+      page.should have_field 'Natureza legal do texto jurídico', :with => 'Natureza Cívica'
       page.should have_field 'Data da criação', :with => '01/01/2012'
       page.should have_field 'Data da publicação', :with => '02/01/2012'
       page.should have_field 'Data a vigorar', :with => '03/01/2012'
@@ -69,6 +69,7 @@ feature "AdministractiveActs" do
     TypeOfAdministractiveAct.make!(:emenda)
     AdministractiveAct.make!(:sopa)
     DisseminationSource.make!(:jornal_bairro)
+    LegalTextsNature.make!(:trabalhista)
 
     click_link 'Cadastros Diversos'
 
@@ -79,7 +80,7 @@ feature "AdministractiveActs" do
     within_tab 'Principal' do
       fill_in 'Número', :with => '6789'
       fill_modal 'Tipo', :with => 'Emenda constitucional', :field => 'Nome'
-      fill_in 'Natureza legal do texto jurídico', :with => 'nova natureza'
+      fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Trabalhista'
       fill_in 'Data da criação', :with => '01/01/2013'
       fill_in 'Data da publicação', :with => '02/01/2013'
       fill_in 'Data a vigorar', :with => '03/01/2013'
@@ -106,7 +107,7 @@ feature "AdministractiveActs" do
     within_tab 'Principal' do
       page.should have_field 'Número', :with => '6789'
       page.should have_field 'Tipo', :with => 'Emenda constitucional'
-      page.should have_field 'Natureza legal do texto jurídico', :with => 'nova natureza'
+      page.should have_field 'Natureza legal do texto jurídico', :with => 'Natureza Trabalhista'
       page.should have_field 'Data da criação', :with => '01/01/2013'
       page.should have_field 'Data da publicação', :with => '02/01/2013'
       page.should have_field 'Data a vigorar', :with => '03/01/2013'
@@ -175,5 +176,6 @@ feature "AdministractiveActs" do
   def make_dependencies!
     TypeOfAdministractiveAct.make!(:lei)
     DisseminationSource.make!(:jornal_municipal)
+    LegalTextsNature.make!(:civica)
   end
 end

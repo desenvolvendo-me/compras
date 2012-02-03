@@ -2,7 +2,7 @@
 AdministractiveAct.blueprint(:sopa) do
   act_number { "1234" }
   type_of_administractive_act { TypeOfAdministractiveAct.make!(:lei) }
-  text_legal_nature { "natureza" }
+  legal_texts_nature { LegalTextsNature.make!(:civica) }
   creation_date { "01/01/2012" }
   publication_date { "02/01/2012" }
   vigor_date { "03/01/2012" }
@@ -16,7 +16,7 @@ end
 AdministractiveAct.blueprint(:emenda) do
   act_number { "4567" }
   type_of_administractive_act { TypeOfAdministractiveAct.make!(:emenda) }
-  text_legal_nature { "natureza" }
+  legal_texts_nature { LegalTextsNature.make!(:civica) }
   creation_date { "01/01/2012" }
   publication_date { "02/01/2012" }
   vigor_date { "03/01/2012" }

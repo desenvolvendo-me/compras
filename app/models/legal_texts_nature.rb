@@ -3,6 +3,8 @@ class LegalTextsNature < ActiveRecord::Base
 
   attr_modal :name
 
+  has_many :administractive_acts
+
   validates :name, :presence => true, :uniqueness => true
 
   orderize

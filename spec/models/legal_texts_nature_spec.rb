@@ -5,6 +5,8 @@ require 'app/models/legal_texts_nature'
 describe LegalTextsNature do
   it { should validate_presence_of :name }
 
+  it { should have_many :administractive_acts }
+
   it "should return name as to_s method" do
     subject.name = "Natureza Cívica"
 

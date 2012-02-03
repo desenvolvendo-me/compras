@@ -9,7 +9,7 @@ pt-BR:
       administractive_act:
         act_number: "Número"
         type_of_administractive_act: "Tipo"
-        text_legal_nature: "Natureza legal do texto jurídico"
+        legal_texts_nature: "Natureza legal do texto jurídico"
         creation_date: "Data da criação"
         publication_date: "Data da publicação"
         vigor_date: "Data a vigorar"
