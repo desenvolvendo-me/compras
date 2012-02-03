@@ -71,7 +71,7 @@ feature "Organograms" do
 
     within_tab 'Responsáveis' do
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Ato administrativo', :with => '01'
+      page.should have_field 'Ato administrativo', :with => '1234'
       page.should have_field 'Data de início', :with => '01/02/2012'
       page.should have_field 'Data de término', :with => '10/02/2012'
       page.should have_select 'Status', :selected => 'Ativo'
@@ -110,7 +110,7 @@ feature "Organograms" do
 
     within_tab 'Responsáveis' do
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Ato administrativo', :with => '123', :field => 'Número'
+      fill_modal 'Ato administrativo', :with => '4567', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
       fill_in 'Data de término', :with => '10/02/2012'
       select 'Inativo', :from => 'Status'
@@ -142,7 +142,7 @@ feature "Organograms" do
     within_tab 'Responsáveis' do
       sleep 5
       page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
-      page.should have_field 'Ato administrativo', :with => '123'
+      page.should have_field 'Ato administrativo', :with => '4567'
       page.should have_field 'Data de início', :with => '01/02/2012'
       page.should have_field  'Data de término', :with => '10/02/2012'
       page.should have_select 'Status', :selected => 'Inativo'

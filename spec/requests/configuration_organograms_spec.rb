@@ -20,7 +20,7 @@ feature "ConfigurationOrganograms" do
 
     fill_modal 'Entidade', :with => 'Detran'
 
-    fill_modal 'Ato administrativo', :with => '01', :field => 'Número'
+    fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
 
     click_button 'Adicionar Estrutura'
 
@@ -40,7 +40,7 @@ feature "ConfigurationOrganograms" do
 
     page.should have_field 'Entidade', :with => 'Detran'
 
-    page.should have_field 'Ato administrativo', :with => '01'
+    page.should have_field 'Ato administrativo', :with => '1234'
 
     page.should have_field 'Máscara', :with => '99'
 
@@ -99,7 +99,7 @@ feature "ConfigurationOrganograms" do
     click_link 'Outro Nome da Configuração'
 
     page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Ato administrativo', :with => '01'
+    page.should have_field 'Ato administrativo', :with => '1234'
     page.should have_field 'Nome', :with => 'Outro Nome da Configuração'
   end
 
@@ -117,7 +117,7 @@ feature "ConfigurationOrganograms" do
     page.should have_notice 'Configuração de Organograma apagado com sucesso.'
 
     page.should_not have_content 'Detran'
-    page.should_not have_content '01'
+    page.should_not have_content '1234'
     page.should_not have_content 'Configuração do Detran'
   end
 end

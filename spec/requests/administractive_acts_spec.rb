@@ -16,7 +16,7 @@ feature "AdministractiveActs" do
     click_link 'Criar Ato Administrativo'
 
     within_tab "Principal" do
-      fill_in 'Número', :with => '01'
+      fill_in 'Número', :with => '1234'
       fill_modal 'Tipo', :with => 'Lei', :field => 'Nome'
       fill_in 'Natureza legal do texto jurídico', :with => 'natureza'
       fill_in 'Data da criação', :with => '01/01/2012'
@@ -40,10 +40,10 @@ feature "AdministractiveActs" do
 
     page.should have_notice 'Ato Administrativo criado com sucesso.'
 
-    click_link '01'
+    click_link '1234'
 
     within_tab 'Principal' do
-      page.should have_field 'Número', :with => '01'
+      page.should have_field 'Número', :with => '1234'
       page.should have_field 'Tipo', :with => 'Lei'
       page.should have_field 'Natureza legal do texto jurídico', :with => 'natureza'
       page.should have_field 'Data da criação', :with => '01/01/2012'
@@ -74,10 +74,10 @@ feature "AdministractiveActs" do
 
     click_link 'Atos Administrativos'
 
-    click_link '01'
+    click_link '1234'
 
     within_tab 'Principal' do
-      fill_in 'Número', :with => '02'
+      fill_in 'Número', :with => '6789'
       fill_modal 'Tipo', :with => 'Emenda constitucional', :field => 'Nome'
       fill_in 'Natureza legal do texto jurídico', :with => 'nova natureza'
       fill_in 'Data da criação', :with => '01/01/2013'
@@ -101,10 +101,10 @@ feature "AdministractiveActs" do
 
     page.should have_notice 'Ato Administrativo editado com sucesso.'
 
-    click_link '02'
+    click_link '6789'
 
     within_tab 'Principal' do
-      page.should have_field 'Número', :with => '02'
+      page.should have_field 'Número', :with => '6789'
       page.should have_field 'Tipo', :with => 'Emenda constitucional'
       page.should have_field 'Natureza legal do texto jurídico', :with => 'nova natureza'
       page.should have_field 'Data da criação', :with => '01/01/2013'
@@ -131,13 +131,13 @@ feature "AdministractiveActs" do
 
     click_link 'Atos Administrativos'
 
-    click_link '01'
+    click_link '1234'
 
-    click_link 'Apagar 01', :confirm => true
+    click_link 'Apagar 1234', :confirm => true
 
     page.should have_notice 'Ato Administrativo apagado com sucesso.'
 
-    page.should_not have_link '01'
+    page.should_not have_link '1234'
   end
 
   scenario 'should validate uniqueness of act_number' do
@@ -149,7 +149,7 @@ feature "AdministractiveActs" do
 
     click_link 'Criar Ato Administrativo'
 
-    fill_in 'Número', :with => '01'
+    fill_in 'Número', :with => '1234'
 
     click_button 'Criar Ato Administrativo'
 

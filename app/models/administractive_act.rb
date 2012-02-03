@@ -16,9 +16,10 @@ class AdministractiveAct < ActiveRecord::Base
 
   accepts_nested_attributes_for :dissemination_sources
 
-  validates :act_number, :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date,
+  validates :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
-  validates :act_number, :content, :uniqueness => true
+  validates :content, :uniqueness => true
+  validates :act_number, :presence => true, :uniqueness => true, :mask => "9999"
   validates_numericality_of :budget_law_percent, :less_than_or_equal_to => 100
   validates_numericality_of :revenue_antecipation_percent, :less_than_or_equal_to => 100
 
