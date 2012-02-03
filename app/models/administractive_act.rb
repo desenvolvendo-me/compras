@@ -7,6 +7,8 @@ class AdministractiveAct < ActiveRecord::Base
 
   attr_accessor :dissemination_source
 
+  attr_modal :act_number, :type_of_administractive_act, :legal_texts_nature
+
   belongs_to :type_of_administractive_act
   belongs_to :legal_texts_nature
 
