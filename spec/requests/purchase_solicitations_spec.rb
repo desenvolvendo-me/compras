@@ -79,6 +79,88 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'create a new purchase_solicitation with multiple budget_allocations' do
+    make_dependencies!
+    BudgetAllocation.make!(:alocacao_extra)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Liberação'
+      page.should have_disabled_field 'Liberador'
+      page.should have_disabled_field 'Observações do atendimento'
+      page.should have_disabled_field 'Justificativa para não atendimento'
+      page.should have_disabled_field 'Status de atendimento'
+
+      fill_in 'Ano contábil', :with => '2012'
+      fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Nome'
+      select 'Bens', :from => 'Tipo de solicitação'
+      fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+    end
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      page.should have_disabled_field "Agrupado"
+      page.should have_disabled_field "Número do processo de compra"
+      page.should have_disabled_field "Status"
+
+      fill_modal 'Material', :with => "Cadeira"
+      page.should have_field 'Unidade de referência', :with => "Unidade"
+      fill_in 'Quantidade', :with => "5"
+      fill_in 'Preço unitário', :with => "100,00"
+      fill_in 'Preço total estimado', :with => "500,00"
+      page.should have_select 'Status', :selected => 'Pendente'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      fill_modal 'Dotação orçamentária', :with => 'Alocação'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+    end
+
+    click_button 'Criar Solicitação de Compra'
+
+    page.should have_notice 'Solicitação de Compra criada com sucesso.'
+
+    click_link 'Novas cadeiras'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Ano contábil', :with => '2012'
+      page.should have_field 'Data da solicitação', :with => '01/02/2012'
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
+      page.should have_field 'Unidade orçamentária', :with => 'Secretaria de Educação'
+      page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
+      page.should have_select 'Tipo de solicitação', :with => 'Bens'
+      page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+
+      # Testing the pending status applied automatically
+      page.should have_select 'Status de atendimento', :selected => 'Pendente'
+    end
+
+    within_tab 'Itens' do
+      page.should have_field 'Material', :with => "02 - Cadeira"
+      page.should have_field 'Unidade de referência', :with => "Unidade"
+      page.should have_field 'Quantidade', :with => "5"
+      page.should have_field 'Preço unitário', :with => "100,00"
+      page.should have_field 'Preço total estimado', :with => "500,00"
+      page.should have_select 'Status', :selected => 'Pendente'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content 'Alocação'
+      page.should have_content 'Alocação extra'
+    end
+  end
+
   scenario 'showing a message for no extra allocation when allocation is selected on general tab' do
     make_dependencies!
 
@@ -246,6 +328,33 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should_not have_content 'Alocação'
+    end
+  end
+
+  scenario 'add budget allocation from an existent purchase_solicitation' do
+    PurchaseSolicitation.make!(:conserto)
+    BudgetAllocation.make!(:alocacao_extra)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dotações orçamentárias' do
+      fill_modal 'Dotação orçamentária', :with => 'Alocação'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+    end
+
+    click_button 'Atualizar Solicitação de Compra'
+
+    page.should have_notice 'Solicitação de Compra editada com sucesso.'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content 'Alocação'
+      page.should have_content 'Alocação extra'
     end
   end
 
