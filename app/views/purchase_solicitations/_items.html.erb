@@ -1,12 +1,10 @@
-<div id="items">
-  <p>
-    <input type="button" class="button affirmative add-purchase-solicitation-item" value="Adicionar Item">
-  </p>
+<p>
+  <input type="button" class="button affirmative add-purchase-solicitation-item" value="Adicionar Item">
+</p>
 
-  <%= f.association :items, :collection => localized(f.object.items) do |p| %>
-    <%= render 'purchase_solicitation_items/form', :f => p %>
-  <% end %>
-</div>
+<%= f.association :items, :collection => localized(f.object.items) do |p| %>
+  <%= render 'purchase_solicitation_items/form', :f => p %>
+<% end %>
 
 <%= mustache 'purchase-solicitation-items-template' do %>
   <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid_purchase_solicitation_item}}' do |p| %>
