@@ -7,6 +7,9 @@ class PurchaseSolicitation < ActiveRecord::Base
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
                  :organogram
 
+  has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
+  has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
+
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :budget_allocation
   belongs_to :delivery_location
@@ -25,9 +28,6 @@ class PurchaseSolicitation < ActiveRecord::Base
   accepts_nested_attributes_for :budget_allocations
 
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
-
-  has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
-  has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
 
   def to_s
     justification
