@@ -1,21 +1,11 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/organogram'
-require 'app/models/organogram_level'
-require 'app/enumerations/organogram_separator'
 require 'app/models/address'
 require 'app/models/purchase_solicitation'
 require 'app/models/organogram_responsible'
-require 'app/models/configuration_organogram'
 
 describe Organogram do
-  let :configuration_organogram do
-    ConfigurationOrganogram.new(:organogram_levels => [
-      OrganogramLevel.new(:level => 1, :digits => 2, :organogram_separator => OrganogramSeparator::POINT),
-      OrganogramLevel.new(:level => 2, :digits => 2, :organogram_separator => OrganogramSeparator::POINT)
-    ])
-  end
-
   it 'should respond to to_s with name' do
     subject.name = 'Secretaria de Educação'
     subject.to_s.should eq 'Secretaria de Educação'
@@ -38,15 +28,15 @@ describe Organogram do
 
   context 'should validate mask' do
     it 'and should not be valid with wrong mask' do
+      subject.stub(:mask => '99.99')
       subject.organogram = '8.8'
-      subject.configuration_organogram = configuration_organogram
       subject.should_not be_valid
       subject.errors[:organogram].should include 'não é válido'
     end
 
-    it 'and should be valid with wrong mask' do
+    it 'and should be valid with correct mask' do
+      subject.stub(:mask => '99.99')
       subject.organogram = '81.81'
-      subject.configuration_organogram = configuration_organogram
       subject.valid?
       subject.errors[:organogram].should_not include 'não é válido'
     end
