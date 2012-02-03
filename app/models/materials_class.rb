@@ -5,6 +5,7 @@ class MaterialsClass < ActiveRecord::Base
 
   validates :materials_group_id, :class_number, :name, :presence => true
   validates :class_number, :name, :uniqueness => true
+  validates :class_number, :numericality => true
 
   orderize
   filterize
