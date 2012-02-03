@@ -4,6 +4,7 @@ require 'app/models/organogram'
 require 'app/models/organogram_level'
 require 'app/enumerations/organogram_separator'
 require 'app/models/address'
+require 'app/models/purchase_solicitation'
 require 'app/models/configuration_organogram'
 
 describe Organogram do
