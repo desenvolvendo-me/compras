@@ -10,6 +10,8 @@ feature "Organograms" do
     ConfigurationOrganogram.make!(:detran_sopa)
     TypeOfAdministractiveAct.make!(:lei)
     Address.make!(:general)
+    Employee.make!(:sobrinho)
+    AdministractiveAct.make!(:sopa)
 
     click_link 'Cadastros Diversos'
 
@@ -33,6 +35,16 @@ feature "Organograms" do
       fill_in 'CEP', :with => "33400-500"
     end
 
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_modal 'Ato administrativo', :with => '01', :field => 'Número'
+      fill_in 'Data de início', :with => '01/02/2012'
+      fill_in 'Data de término', :with => '10/02/2012'
+      select 'Ativo', :from => 'Status'
+    end
+
     click_button 'Criar Organograma'
 
     page.should have_notice 'Organograma criado com sucesso.'
@@ -54,12 +66,22 @@ feature "Organograms" do
       page.should have_field 'Bairro', :with => 'São Francisco'
       page.should have_field 'CEP', :with => '33400-500'
     end
+
+    within_tab 'Responsáveis' do
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Ato administrativo', :with => '01'
+      page.should have_field 'Data de início', :with => '01/02/2012'
+      page.should have_field 'Data de término', :with => '10/02/2012'
+      page.should have_select 'Status', :selected => 'Ativo'
+    end
   end
 
   scenario 'update an existent organogram' do
     Organogram.make!(:secretaria_de_educacao)
     Address.make!(:education)
     TypeOfAdministractiveAct.make!(:emenda)
+    Employee.make!(:wenderson)
+    AdministractiveAct.make!(:emenda)
 
     click_link 'Cadastros Diversos'
 
@@ -83,6 +105,14 @@ feature "Organograms" do
       fill_in 'CEP', :with => '33600-500'
     end
 
+    within_tab 'Responsáveis' do
+      fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
+      fill_modal 'Ato administrativo', :with => '123', :field => 'Número'
+      fill_in 'Data de início', :with => '01/02/2012'
+      fill_in 'Data de término', :with => '10/02/2012'
+      select 'Inativo', :from => 'Status'
+    end
+
     click_button 'Atualizar Organograma'
 
     page.should have_notice 'Organograma editado com sucesso.'
@@ -103,6 +133,15 @@ feature "Organograms" do
       page.should have_field 'Logradouro', :with => 'Amazonas'
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field 'CEP', :with => '33600-500'
+    end
+
+    within_tab 'Responsáveis' do
+      sleep 5
+      page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
+      page.should have_field 'Ato administrativo', :with => '123'
+      page.should have_field 'Data de início', :with => '01/02/2012'
+      page.should have_field  'Data de término', :with => '10/02/2012'
+      page.should have_select 'Status', :selected => 'Inativo'
     end
   end
 

@@ -2,6 +2,7 @@ class Organogram < ActiveRecord::Base
   attr_accessible :name, :organogram, :tce_code, :acronym
   attr_accessible :performance_field, :configuration_organogram_id
   attr_accessible :type_of_administractive_act_id, :address_attributes
+  attr_accessible :organogram_responsibles_attributes
 
   attr_modal :name
 
@@ -14,8 +15,10 @@ class Organogram < ActiveRecord::Base
   belongs_to :configuration_organogram
   belongs_to :type_of_administractive_act
   has_many :purchase_solicitations
+  has_many :organogram_responsibles, :dependent => :destroy
 
   accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :organogram_responsibles, :reject_if => :all_blank, :allow_destroy => true
 
   orderize
   filterize

@@ -1,0 +1,14 @@
+<fieldset>
+  <%= f.input :responsible %>
+  <%= f.input :administractive_act %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :status, :collection => Status.to_a %>
+
+  <%= f.input :id, :as => :hidden %>
+  <%= f.input :_destroy, :as => :hidden, :input_html => { :class => :destroy } %>
+
+  <p>
+    <input type="button" class="button negative remove-organogram-responsible" value="Remover Responsável">
+  </p>
+</fieldset>

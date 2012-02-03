@@ -8,6 +8,7 @@ Organogram.blueprint(:secretaria_de_educacao) do
   type_of_administractive_act { TypeOfAdministractiveAct.make!(:lei) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
+  organogram_responsibles { [OrganogramResponsible.make!(:sobrinho)] }
 end
 
 Organogram.blueprint(:secretaria_de_desenvolvimento) do
@@ -19,4 +20,5 @@ Organogram.blueprint(:secretaria_de_desenvolvimento) do
   type_of_administractive_act { TypeOfAdministractiveAct.make!(:lei) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
+  organogram_responsibles { [OrganogramResponsible.make!(:sobrinho)] }
 end

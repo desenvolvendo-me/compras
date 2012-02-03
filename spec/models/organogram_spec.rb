@@ -5,6 +5,7 @@ require 'app/models/organogram_level'
 require 'app/enumerations/organogram_separator'
 require 'app/models/address'
 require 'app/models/purchase_solicitation'
+require 'app/models/organogram_responsible'
 require 'app/models/configuration_organogram'
 
 describe Organogram do
@@ -29,6 +30,7 @@ describe Organogram do
   it { should validate_presence_of :type_of_administractive_act_id }
 
   it { should have_one :address }
+  it { should have_many :organogram_responsibles }
   it { should have_many :purchase_solicitations }
   it { should belong_to :configuration_organogram }
   it { should belong_to :type_of_administractive_act }

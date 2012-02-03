@@ -1,0 +1,24 @@
+<div id="organogram-responsibles">
+  <p>
+    <input type="button" class="button affirmative add-organogram-responsible" value="Adicionar Responsável">
+  </p>
+
+  <%= f.association :organogram_responsibles, :collection => localized(f.object.organogram_responsibles) do |p| %>
+    <%= render 'organogram_responsibles/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'organogram-responsibles-template' do %>
+  <%= f.association :organogram_responsibles_attributes, :collection => f.object.organogram_responsibles.build, :index => '{{uuid_organogram_responsible}}' do |p| %>
+    <%= render 'organogram_responsibles/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#organogram-responsibles-template").nestedForm({
+    add: '.add-organogram-responsible',
+    remove: '.remove-organogram-responsible',
+    target: '#organogram-responsibles',
+    uuid: 'uuid_organogram_responsible'
+  });
+</script>
