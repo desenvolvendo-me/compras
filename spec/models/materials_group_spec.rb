@@ -10,10 +10,6 @@ describe MaterialsGroup do
   end
 
   it { should validate_presence_of :group }
+  it { should validate_numericality_of :group }
   it { should validate_presence_of :name }
-
-  it { should allow_value("01").for(:group) }
-  it { should_not allow_value("ab").for(:group) }
-  it { should_not allow_value("1").for(:group) }
-  it { should_not allow_value("001").for(:group) }
 end
