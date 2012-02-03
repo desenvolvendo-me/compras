@@ -8,7 +8,8 @@ class MaterialsGroup < ActiveRecord::Base
   orderize
   filterize
 
-  validates :group, :name, :presence => true, :uniqueness => true
+  validates :name, :presence => true, :uniqueness => true
+  validates :group, :presence => true, :uniqueness => true, :mask => "99"
 
   def to_s
     "#{group} - #{name}"
