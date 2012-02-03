@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       material:
         materials_group: "Grupo"
-        materials_class: "Classe"
+        materials_class: "Número da Classe"
         code: "Código"
         name: "Nome"
         description: "Descrição"
