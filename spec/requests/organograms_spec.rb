@@ -40,7 +40,7 @@ feature "Organograms" do
       click_button 'Adicionar Responsável'
 
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_modal 'Ato administrativo', :with => '01', :field => 'Número'
+      fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
       fill_in 'Data de término', :with => '10/02/2012'
       select 'Ativo', :from => 'Status'
