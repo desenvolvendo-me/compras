@@ -25,8 +25,6 @@ class PurchaseSolicitation < ActiveRecord::Base
   orderize :request_date
   filterize
 
-  accepts_nested_attributes_for :budget_allocations
-
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
 
   def to_s

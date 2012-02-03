@@ -15,8 +15,6 @@ class AdministractiveAct < ActiveRecord::Base
   orderize :act_number
   filterize
 
-  accepts_nested_attributes_for :dissemination_sources
-
   validates :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date, :legal_texts_nature_id,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
   validates :content, :uniqueness => true
