@@ -22,31 +22,11 @@ class AdministractiveAct < ActiveRecord::Base
   validates_numericality_of :budget_law_percent, :less_than_or_equal_to => 100
   validates_numericality_of :revenue_antecipation_percent, :less_than_or_equal_to => 100
 
-  validate :vigor_date_cannot_be_small_than_creation_date
-  validate :publication_date_cannot_be_small_than_creation_date
-  validate :publication_date_cannot_be_greater_than_vigor_date
+  validates :vigor_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
+  validates :publication_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
+  validates :publication_date, :timeliness => { :on_or_before => :vigor_date, :type => :date }
 
   def to_s
     act_number
-  end
-
-  protected
-
-  def vigor_date_cannot_be_small_than_creation_date
-    if vigor_date && creation_date && self.vigor_date < self.creation_date
-      errors.add(:vigor_date, I18n.translate('errors.messages.cannot_be_small_than_creation_date'))
-    end
-  end
-
-  def publication_date_cannot_be_small_than_creation_date
-    if publication_date && creation_date && self.publication_date < self.creation_date
-      errors.add(:publication_date, I18n.translate('errors.messages.cannot_be_small_than_creation_date'))
-    end
-  end
-
-  def publication_date_cannot_be_greater_than_vigor_date
-    if publication_date && vigor_date && self.publication_date > self.vigor_date
-      errors.add(:publication_date, I18n.translate('errors.messages.cannot_be_greater_than_vigor_date'))
-    end
   end
 end

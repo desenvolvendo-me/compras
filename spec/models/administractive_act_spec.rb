@@ -32,7 +32,7 @@ describe AdministractiveAct do
 
     subject.should_not be_valid
 
-    subject.errors[:vigor_date].should include("não pode ser menor que a data de criação")
+    subject.errors[:vigor_date].should include("deve ser em ou depois de #{I18n.l subject.creation_date}")
   end
 
   it "should not have publication_date less than creation_date" do
@@ -41,7 +41,7 @@ describe AdministractiveAct do
 
     subject.should_not be_valid
 
-    subject.errors[:publication_date].should include("não pode ser menor que a data de criação")
+    subject.errors[:publication_date].should include("deve ser em ou depois de #{I18n.l subject.creation_date}")
   end
 
   it "should not have publication_date greater than vigor_date" do
@@ -50,7 +50,7 @@ describe AdministractiveAct do
 
     subject.should_not be_valid
 
-    subject.errors[:publication_date].should include("não pode ser maior que a data a vigorar")
+    subject.errors[:publication_date].should include("deve ser em ou antes de #{I18n.l subject.vigor_date}")
   end
 
   it "should not have budget_law_percent greater than 100" do
