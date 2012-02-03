@@ -25,6 +25,7 @@ pt-BR:
     issqn_classifications: "Enquadramentos ISSQN"
     land_subdivisions: "Loteamentos"
     legal_natures: "Naturezas Jurídicas"
+    legal_texts_natures: "Naturezas de Textos Jurídicos"
     materials: "Materiais"
     materials_classes: "Classes de Materiais"
     materials_groups: "Grupos de Materiais"

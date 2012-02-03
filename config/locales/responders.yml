@@ -58,6 +58,9 @@ pt-BR:
     judicial_districts:
       <<: *female
 
+    legal_texts_natures:
+      <<: *female
+
     parcels:
       <<: *female
 

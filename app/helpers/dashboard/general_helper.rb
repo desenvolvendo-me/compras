@@ -40,6 +40,7 @@ module Dashboard::GeneralHelper
       m.budget_allocations
       m.purchase_solicitations
       m.legal_natures
+      m.legal_texts_natures
     end
   end
 end

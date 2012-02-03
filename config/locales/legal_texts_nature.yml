@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      legal_texts_nature:
+        one: "Natureza de Textos Jurídicos"
+        other: "Naturezas de Textos Jurídicos"
+
+    attributes:
+      legal_texts_nature:
+        name: "Nome"
