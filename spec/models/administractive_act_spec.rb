@@ -24,12 +24,7 @@ describe AdministractiveAct do
   it { should validate_presence_of :legal_texts_nature_id }
   it { should validate_numericality_of :budget_law_percent }
   it { should validate_numericality_of :revenue_antecipation_percent }
-
-  it { should allow_value("0001").for(:act_number) }
-  it { should allow_value("1234").for(:act_number) }
-  it { should_not allow_value("12345").for(:act_number) }
-  it { should_not allow_value("abcd").for(:act_number) }
-  it { should_not allow_value("12ab").for(:act_number) }
+  it { should validate_numericality_of :act_number }
 
   it "should not have vigor_date less than creation_date" do
     subject.creation_date = Date.current

@@ -20,7 +20,7 @@ class AdministractiveAct < ActiveRecord::Base
   validates :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date, :legal_texts_nature_id,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
   validates :content, :uniqueness => true
-  validates :act_number, :presence => true, :uniqueness => true, :mask => "9999"
+  validates :act_number, :presence => true, :uniqueness => true, :numericality => true
   validates_numericality_of :budget_law_percent, :less_than_or_equal_to => 100
   validates_numericality_of :revenue_antecipation_percent, :less_than_or_equal_to => 100
 
