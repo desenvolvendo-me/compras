@@ -39,17 +39,27 @@ feature "Organograms" do
 
     click_link 'Secretaria de Educação'
 
-    page.should have_field 'Nome', :with => 'Secretaria de Educação'
-    page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
-    page.should have_field 'Organograma', :with => '02.00'
-    page.should have_field 'Código TCE', :with => '051'
-    page.should have_field 'Sigla', :with => 'SEMUEDU'
-    page.should have_field 'Tipo de administração', :with => 'Lei'
-    page.should have_field 'Área de atuação', :with => 'Desenvolvimento Educacional'
+    within_tab 'Informações' do
+      page.should have_field 'Nome', :with => 'Secretaria de Educação'
+      page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
+      page.should have_field 'Organograma', :with => '02.00'
+      page.should have_field 'Código TCE', :with => '051'
+      page.should have_field 'Sigla', :with => 'SEMUEDU'
+      page.should have_field 'Tipo de administração', :with => 'Lei'
+      page.should have_field 'Área de atuação', :with => 'Desenvolvimento Educacional'
+    end
+
+    within_tab 'Endereços' do
+      page.should have_field 'Logradouro', :with => 'Girassol'
+      page.should have_field 'Bairro', :with => 'São Francisco'
+      page.should have_field 'CEP', :with => '33400-500'
+    end
   end
 
   scenario 'update an existent organogram' do
     Organogram.make!(:secretaria_de_educacao)
+    Address.make!(:education)
+    TypeOfAdministractiveAct.make!(:emenda)
 
     click_link 'Cadastros Diversos'
 
@@ -63,8 +73,14 @@ feature "Organograms" do
       fill_in 'Organograma', :with => '02.11'
       fill_in 'Código TCE', :with => '081'
       fill_in 'Sigla', :with => 'SEMUTRA'
-      fill_modal 'Tipo de administração', :with => 'Lei'
+      fill_modal 'Tipo de administração', :with => 'Emenda constitucional'
       fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
+    end
+
+    within_tab 'Endereços' do
+      fill_modal 'Logradouro', :with => 'Amazonas'
+      fill_modal 'Bairro', :with => 'Portugal'
+      fill_in 'CEP', :with => '33600-500'
     end
 
     click_button 'Atualizar Organograma'
@@ -73,13 +89,21 @@ feature "Organograms" do
 
     click_link 'Secretaria de Transporte'
 
-    page.should have_field 'Nome', :with => 'Secretaria de Transporte'
-    page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
-    page.should have_field 'Organograma', :with => '02.11'
-    page.should have_field 'Código TCE', :with => '081'
-    page.should have_field 'Sigla', :with => 'SEMUTRA'
-    page.should have_field 'Tipo de administração', :with => 'Lei'
-    page.should have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
+    within_tab 'Informações' do
+      page.should have_field 'Nome', :with => 'Secretaria de Transporte'
+      page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
+      page.should have_field 'Organograma', :with => '02.11'
+      page.should have_field 'Código TCE', :with => '081'
+      page.should have_field 'Sigla', :with => 'SEMUTRA'
+      page.should have_field 'Tipo de administração', :with => 'Emenda constitucional'
+      page.should have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
+    end
+
+    within_tab 'Endereços' do
+      page.should have_field 'Logradouro', :with => 'Amazonas'
+      page.should have_field 'Bairro', :with => 'Portugal'
+      page.should have_field 'CEP', :with => '33600-500'
+    end
   end
 
   scenario 'destroy an existent organogram' do
