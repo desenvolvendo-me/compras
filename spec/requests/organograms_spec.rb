@@ -140,7 +140,6 @@ feature "Organograms" do
     end
 
     within_tab 'Responsáveis' do
-      sleep 5
       page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
       page.should have_field 'Ato administrativo', :with => '4567'
       page.should have_field 'Data de início', :with => '01/02/2012'
