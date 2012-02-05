@@ -3,7 +3,7 @@ pt-BR:
     models:
       organogram_responsible:
         one: "Responsável"
-        other: "Responsável"
+        other: "Responsáveis"
 
     attributes:
       organogram_responsible:
