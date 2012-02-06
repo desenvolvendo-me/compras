@@ -22,17 +22,4 @@ describe PurchaseSolicitation do
   it { should validate_presence_of :delivery_location_id }
   it { should validate_presence_of :responsible_id }
   it { should validate_presence_of :kind }
-
-  context 'including duplicated items' do
-    let :items do
-      [PurchaseSolicitationItem.new(:material_id => 1), PurchaseSolicitationItem.new(:material_id => 1)]
-    end
-
-    it "should should not accept more than once item with the same material" do
-      subject.items << items
-      subject.valid?
-
-      subject.items.first.errors.messages[:material].should include("Não é permitido adicionar mais de um item com o mesmo material.")
-    end
-  end
 end
