@@ -1,4 +1,4 @@
-class ServiceType < ActiveRecord::Base
+class ServiceOrContractType < ActiveRecord::Base
   attr_accessible :description, :tce_code, :service_goal
 
   validates :description, :tce_code, :service_goal, :presence => true

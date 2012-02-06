@@ -22,7 +22,7 @@ pt-BR:
         storable: "Material estocável"
         combustible: "Material combustível"
         material_characteristic: "Característica"
-        service_type: "Tipo de serviço"
+        service_or_contract_type: "Tipo de serviço ou Contrato"
         material_type: "Tipo de material"
         stn_ordinance: "Portaria STN"
         expense_element: "Elemento de despesa"

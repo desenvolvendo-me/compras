@@ -237,6 +237,6 @@ feature "Materials" do
     MaterialsGroup.make!(:alimenticios)
     MaterialsClass.make!(:hortifrutigranjeiros)
     ReferenceUnit.make!(:unidade)
-    ServiceType.make!(:trainees)
+    ServiceOrContractType.make!(:trainees)
   end
 end

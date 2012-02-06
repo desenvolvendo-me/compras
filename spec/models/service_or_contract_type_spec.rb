@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/service_type'
+require 'app/models/service_or_contract_type'
 
-describe ServiceType do
+describe ServiceOrContractType do
   it 'should return description as to_s method' do
     subject.description = 'Contratação de estagiários'
     subject.to_s.should eq 'Contratação de estagiários'

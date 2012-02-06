@@ -24,7 +24,7 @@ module Dashboard::GeneralHelper
       m.agencies
       m.bank_accounts
       m.prefectures
-      m.service_types
+      m.service_or_contract_types
       m.settings
       m.fiscal_years
       m.reference_units

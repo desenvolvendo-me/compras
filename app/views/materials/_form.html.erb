@@ -13,7 +13,7 @@
 <%= f.input :storable %>
 <%= f.input :combustible %>
 <%= f.input :material_characteristic, :as => :select, :collection => MaterialCharacteristic %>
-<%= f.input :service_type %>
+<%= f.input :service_or_contract_type %>
 <%= f.input :material_type, :as => :select, :collection => MaterialType %>
 <%= f.input :stn_ordinance %>
 <%= f.input :expense_element %>
@@ -21,11 +21,11 @@
 <script>
   (function toggleTypes(){
     if ($("#material_material_characteristic").attr('value') == 'material'){
-      $("#material_service_type").parent().hide();
+      $("#material_service_or_contract_type").parent().hide();
       $("#material_material_type").parent().show();
     } else if ($("#material_material_characteristic").attr('value') == 'service') {
       $("#material_material_type").parent().hide();
-      $("#material_service_type").parent().show();
+      $("#material_service_or_contract_type").parent().show();
     }
     $("#material_material_characteristic").change(toggleTypes);
   })();

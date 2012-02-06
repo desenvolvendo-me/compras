@@ -334,7 +334,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :service_types do
+  resources :service_or_contract_types do
     collection do
       get :filter
       get :modal

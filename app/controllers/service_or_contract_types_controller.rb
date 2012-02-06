@@ -1,0 +1,2 @@
+class ServiceOrContractTypesController < CrudController
+end

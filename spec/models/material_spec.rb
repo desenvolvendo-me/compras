@@ -24,11 +24,11 @@ describe Material do
     subject.should validate_presence_of(:material_type)
   end
 
-  it "should validate presence of service_type only if material_characteristic is service" do
-    subject.should_not validate_presence_of(:service_type)
+  it "should validate presence of service_or_contract_type only if material_characteristic is service" do
+    subject.should_not validate_presence_of(:service_or_contract_type)
 
     subject.material_characteristic = MaterialCharacteristic::SERVICE
 
-    subject.should validate_presence_of(:service_type)
+    subject.should validate_presence_of(:service_or_contract_type)
   end
 end
