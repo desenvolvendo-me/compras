@@ -10,7 +10,7 @@ class Organogram < ActiveRecord::Base
 
   validates :name, :organogram, :tce_code, :acronym, :presence => true
   validates :performance_field, :configuration_organogram_id, :presence => true
-  validates :administration_type_id, :organogram_kind, :presence => true
+  validates :administration_type, :organogram_kind, :presence => true
   validates :organogram, :mask => :mask
 
   has_one :address, :as => :addressable, :dependent => :destroy
