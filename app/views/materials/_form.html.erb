@@ -3,20 +3,64 @@
 <%= f.input :code %>
 <%= f.input :name %>
 <%= f.input :description %>
-<%= f.input :minimum_stock_balance %>
-<%= f.input :stock_balance, :disabled => true %>
-<%= f.input :unit_price, :disabled => true %>
-<%= f.input :cash_balance, :disabled => true %>
-<%= f.input :reference_unit %>
-<%= f.input :manufacturer %>
-<%= f.input :perishable %>
-<%= f.input :storable %>
-<%= f.input :combustible %>
-<%= f.input :material_characteristic, :as => :select, :collection => MaterialCharacteristic %>
-<%= f.input :service_or_contract_type %>
-<%= f.input :material_type, :as => :select, :collection => MaterialType %>
-<%= f.input :stn_ordinance %>
-<%= f.input :expense_element %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :unit_price, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :minimum_stock_balance %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :stock_balance, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :cash_balance, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :reference_unit %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :manufacturer %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :perishable %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :storable %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :material_characteristic, :as => :select, :collection => MaterialCharacteristic %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :service_or_contract_type %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :material_type, :as => :select, :collection => MaterialType %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :combustible %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :stn_ordinance %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :expense_element %>
+  </div>
+</div>
 
 <script>
   (function toggleTypes(){
