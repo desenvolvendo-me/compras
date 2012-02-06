@@ -1,4 +1,15 @@
 <%= f.input :name %>
-<%= f.input :administration, :as => :select, :collection => Administration %>
-<%= f.input :organ_type, :as => :select, :collection => OrganType %>
-<%= f.input :legal_nature %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :administration, :as => :select, :collection => Administration %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :organ_type, :as => :select, :collection => OrganType %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :legal_nature %>
+  </div>
+</div>
