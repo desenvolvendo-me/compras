@@ -5,7 +5,7 @@
         <%= resource_class.human_attribute_name :id %>
       </th>
       <th>
-        <%= resource_class.human_attribute_name :group %>
+        <%= resource_class.human_attribute_name :group_number %>
       </th>
       <th>
         <%= resource_class.human_attribute_name :name %>
@@ -20,7 +20,7 @@
           <%= resource.id %>
         </td>
         <td>
-          <%= resource.group %>
+          <%= resource.group_number %>
         </td>
         <td>
           <%= link_to resource.name, edit_resource_path(resource) %>

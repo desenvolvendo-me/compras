@@ -1,7 +1,7 @@
 class MaterialsGroup < ActiveRecord::Base
-  attr_accessible :group, :name
+  attr_accessible :group_number, :name
 
-  attr_modal :group, :name
+  attr_modal :group_number, :name
 
   has_many :materials_classes
 
@@ -9,9 +9,9 @@ class MaterialsGroup < ActiveRecord::Base
   filterize
 
   validates :name, :presence => true, :uniqueness => true
-  validates :group, :presence => true, :uniqueness => true, :numericality => true
+  validates :group_number, :presence => true, :uniqueness => true, :numericality => true
 
   def to_s
-    "#{group} - #{name}"
+    "#{group_number} - #{name}"
   end
 end
