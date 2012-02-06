@@ -198,6 +198,7 @@ pt-BR:
       hundred_percent: "o total das porcentagens deve ser 100%."
       exclusion_of_person_correspondence_address: "não está disponível pois o Contribuinte não tem endereço de correspondência cadastrado."
       duplicated_formulas: "não podem haver duas fórmulas com o mesmo ano."
+      cannot_have_more_than_once_item_with_the_same_material: "Não é permitido adicionar mais de um item com o mesmo material."
 
   activerecord:
     errors:

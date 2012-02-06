@@ -21,6 +21,7 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   validates :accounting_year, :request_date, :responsible_id,
             :delivery_location, :kind, :delivery_location_id, :presence => true
+  validate :cannot_have_more_than_once_item_with_the_same_material
 
   orderize :request_date
   filterize
@@ -29,5 +30,20 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   def to_s
     justification
+  end
+
+  protected
+
+  def cannot_have_more_than_once_item_with_the_same_material
+    counter = Hash.new(0)
+    items.each do |item|
+      counter[item.material_id] += 1
+    end
+
+    items.each do |item|
+      if counter[item.material_id] > 1
+        item.errors.add(:material, I18n.translate('errors.messages.cannot_have_more_than_once_item_with_the_same_material'))
+      end
+    end
   end
 end

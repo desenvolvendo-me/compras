@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/purchase_solicitation'
+require 'app/models/purchase_solicitation_item'
 
 describe PurchaseSolicitation do
   it 'should return the id in to_s method' do
@@ -21,4 +22,17 @@ describe PurchaseSolicitation do
   it { should validate_presence_of :delivery_location_id }
   it { should validate_presence_of :responsible_id }
   it { should validate_presence_of :kind }
+
+  context 'including duplicated items' do
+    let :items do
+      [PurchaseSolicitationItem.new(:material_id => 1), PurchaseSolicitationItem.new(:material_id => 1)]
+    end
+
+    it "should should not accept more than once item with the same material" do
+      subject.items << items
+      subject.valid?
+
+      subject.items.first.errors.messages[:material].should include("Não é permitido adicionar mais de um item com o mesmo material.")
+    end
+  end
 end
