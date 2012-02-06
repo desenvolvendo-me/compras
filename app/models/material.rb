@@ -16,8 +16,9 @@ class Material < ActiveRecord::Base
   orderize
   filterize
 
-  validates :materials_group_id, :materials_class_id, :code, :name, :reference_unit_id, :material_characteristic, :presence => true
-  validates :code, :name, :uniqueness => true
+  validates :materials_group_id, :materials_class_id, :reference_unit_id, :material_characteristic, :presence => true
+  validates :code, :presence => true, :uniqueness => true, :numericality => true
+  validates :name, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?
   validates :service_or_contract_type, :presence => true, :if => :service?
 

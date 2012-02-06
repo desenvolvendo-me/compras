@@ -15,6 +15,7 @@ describe Material do
   it { should validate_presence_of :name }
   it { should validate_presence_of :material_characteristic }
   it { should validate_presence_of :reference_unit_id }
+  it { should validate_numericality_of :code }
 
   it "should validate presence of material_type only if material_characteristic is material" do
     subject.should_not validate_presence_of(:material_type)
