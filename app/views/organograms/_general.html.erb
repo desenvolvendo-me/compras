@@ -1,9 +1,26 @@
-<%= f.input :acronym %>
-<%= f.input :name %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :name %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :acronym %>
+  </div>
+</div>
+
 <%= f.input :configuration_organogram %>
 <%= f.input :organogram, :input_html => { :"date-mask" => f.object.mask } %>
-<%= f.input :tce_code %>
-<%= f.input :organogram_kind, :collection => OrganogramKind.to_a %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :organogram_kind, :collection => OrganogramKind.to_a %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :tce_code %>
+  </div>
+</div>
+
 <%= f.input :administration_type %>
 <%= f.input :performance_field %>
 

@@ -21,11 +21,11 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       fill_in 'Nome', :with => 'Secretaria de Educação'
-      select 'Analítico', :from => 'Tipo'
+      fill_in 'Sigla', :with => 'SEMUEDU'
       fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
       fill_in 'Organograma', :with => '02.00'
+      select 'Analítico', :from => 'Tipo'
       fill_in 'Código TCE', :with => '051'
-      fill_in 'Sigla', :with => 'SEMUEDU'
       fill_modal 'Tipo de administração', :with => 'Pública'
       fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
@@ -54,11 +54,11 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       page.should have_field 'Nome', :with => 'Secretaria de Educação'
-      page.should have_select 'Tipo', :selected => 'Analítico'
+      page.should have_field 'Sigla', :with => 'SEMUEDU'
       page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.00'
+      page.should have_select 'Tipo', :selected => 'Analítico'
       page.should have_field 'Código TCE', :with => '051'
-      page.should have_field 'Sigla', :with => 'SEMUEDU'
       page.should have_field 'Tipo de administração', :with => 'Pública'
       page.should have_field 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
@@ -93,12 +93,12 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       fill_in 'Nome', :with => 'Secretaria de Transporte'
-      select 'Sintético', :from => 'Tipo'
+      fill_in 'Sigla', :with => 'SEMUTRA'
       fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
       fill_in 'Organograma', :with => '02.11'
+      select 'Sintético', :from => 'Tipo'
       fill_in 'Código TCE', :with => '081'
-      fill_in 'Sigla', :with => 'SEMUTRA'
-      fill_modal 'Tipo de administração', :with => 'Executivo'
+      fill_modal 'Tipo de administração', :with => 'Emenda constitucional'
       fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 
@@ -124,12 +124,12 @@ feature "Organograms" do
 
     within_tab 'Informações' do
       page.should have_field 'Nome', :with => 'Secretaria de Transporte'
-      page.should have_select 'Tipo', :selected => 'Sintético'
+      page.should have_field 'Sigla', :with => 'SEMUTRA'
       page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.11'
+      page.should have_select 'Tipo', :selected => 'Sintético'
       page.should have_field 'Código TCE', :with => '081'
-      page.should have_field 'Sigla', :with => 'SEMUTRA'
-      page.should have_field 'Tipo de administração', :with => 'Executivo'
+      page.should have_field 'Tipo de administração', :with => 'Emenda constitucional'
       page.should have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 
@@ -194,7 +194,7 @@ feature "Organograms" do
     page.should_not have_content '02.00'
     page.should_not have_content '051'
     page.should_not have_content 'SEMUEDU'
-    page.should_not have_content 'Lei'
+    page.should_not have_content 'Pública'
     page.should_not have_content 'Desenvolvimento Educacional'
   end
 end
