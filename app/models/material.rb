@@ -34,9 +34,9 @@ class Material < ActiveRecord::Base
   protected
 
   def clean_unnecessary_type
-    if self.material_characteristic == MaterialCharacteristic::MATERIAL
+    if material?
       self.service_or_contract_type_id = nil
-    elsif material_characteristic == MaterialCharacteristic::SERVICE
+    elsif service?
       self.material_type = nil
     end
   end
