@@ -35,15 +35,16 @@ class PurchaseSolicitation < ActiveRecord::Base
   protected
 
   def cannot_have_more_than_once_item_with_the_same_material
-    counter = Hash.new(0)
-    items.each do |item|
-      counter[item.material_id] += 1
-    end
+   materials = items.pluck(:material_id).flatten
+   single_materials = []
 
-    items.each do |item|
-      if counter[item.material_id] > 1
-        item.errors.add(:material, I18n.translate('errors.messages.cannot_have_more_than_once_item_with_the_same_material'))
-      end
-    end
+   items.each do |item|
+     if single_materials.include?(item.material_id)
+       # FIXME: the command below (errors.add(:items)) should not be necessary
+       errors.add(:items)
+       item.errors.add(:material_id, :cannot_have_more_than_once_item_with_the_same_material)
+     end
+     single_materials << item.material_id
+   end
   end
 end

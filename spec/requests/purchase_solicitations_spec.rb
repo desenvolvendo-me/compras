@@ -358,6 +358,32 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'cannot save with the same material selected more than once on items' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      fill_modal 'purchase_solicitation_items_attributes_fresh-0_material', :with => "Cadeira"
+
+      click_button "Adicionar Item"
+
+      fill_modal 'purchase_solicitation_items_attributes_fresh-1_material', :with => "Cadeira"
+    end
+
+    click_button 'Criar Solicitação de Compra'
+
+    within_tab 'Itens' do
+      page.should have_content "não é permitido adicionar mais de um item com o mesmo material"
+    end
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     BudgetAllocation.make!(:alocacao)
