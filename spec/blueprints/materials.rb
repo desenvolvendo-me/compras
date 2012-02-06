@@ -30,7 +30,7 @@ Material.blueprint(:cadeira) do
   storable { true }
   combustible { false }
   material_characteristic { "material" }
-  serviceor_contract__type { ServiceOrContractType.make!(:reparos) }
+  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
   stn_ordinance { "portaria" }
   expense_element { "elemento" }
