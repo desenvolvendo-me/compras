@@ -17,14 +17,14 @@ describe Organogram do
   it { should validate_presence_of :acronym }
   it { should validate_presence_of :performance_field }
   it { should validate_presence_of :configuration_organogram_id }
-  it { should validate_presence_of :type_of_administractive_act_id }
+  it { should validate_presence_of :administration_type }
   it { should validate_presence_of :organogram_kind }
 
   it { should have_one :address }
   it { should have_many :organogram_responsibles }
   it { should have_many :purchase_solicitations }
   it { should belong_to :configuration_organogram }
-  it { should belong_to :type_of_administractive_act }
+  it { should belong_to :administration_type }
 
   context 'should validate mask' do
     it 'and should not be valid with wrong mask' do

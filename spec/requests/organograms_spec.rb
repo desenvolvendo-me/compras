@@ -8,7 +8,7 @@ feature "Organograms" do
 
   scenario 'create a new organogram' do
     ConfigurationOrganogram.make!(:detran_sopa)
-    TypeOfAdministractiveAct.make!(:lei)
+    AdministrationType.make!(:publica)
     Address.make!(:general)
     Employee.make!(:sobrinho)
     AdministractiveAct.make!(:sopa)
@@ -26,7 +26,7 @@ feature "Organograms" do
       fill_in 'Organograma', :with => '02.00'
       fill_in 'Código TCE', :with => '051'
       fill_in 'Sigla', :with => 'SEMUEDU'
-      fill_modal 'Tipo de administração', :with => 'Lei'
+      fill_modal 'Tipo de administração', :with => 'Pública'
       fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
 
@@ -59,7 +59,7 @@ feature "Organograms" do
       page.should have_field 'Organograma', :with => '02.00'
       page.should have_field 'Código TCE', :with => '051'
       page.should have_field 'Sigla', :with => 'SEMUEDU'
-      page.should have_field 'Tipo de administração', :with => 'Lei'
+      page.should have_field 'Tipo de administração', :with => 'Pública'
       page.should have_field 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
 
@@ -81,7 +81,7 @@ feature "Organograms" do
   scenario 'update an existent organogram' do
     Organogram.make!(:secretaria_de_educacao)
     Address.make!(:education)
-    TypeOfAdministractiveAct.make!(:emenda)
+    AdministrationType.make!(:executivo)
     Employee.make!(:wenderson)
     AdministractiveAct.make!(:emenda)
 
@@ -98,7 +98,7 @@ feature "Organograms" do
       fill_in 'Organograma', :with => '02.11'
       fill_in 'Código TCE', :with => '081'
       fill_in 'Sigla', :with => 'SEMUTRA'
-      fill_modal 'Tipo de administração', :with => 'Emenda constitucional'
+      fill_modal 'Tipo de administração', :with => 'Executivo'
       fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 
@@ -129,7 +129,7 @@ feature "Organograms" do
       page.should have_field 'Organograma', :with => '02.11'
       page.should have_field 'Código TCE', :with => '081'
       page.should have_field 'Sigla', :with => 'SEMUTRA'
-      page.should have_field 'Tipo de administração', :with => 'Emenda constitucional'
+      page.should have_field 'Tipo de administração', :with => 'Executivo'
       page.should have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 
