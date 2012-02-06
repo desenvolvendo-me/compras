@@ -1,8 +1,17 @@
 <fieldset>
   <%= f.input :responsible %>
   <%= f.input :administractive_act %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :start_date %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :end_date %>
+    </div>
+  </div>
+
   <%= f.input :status, :collection => Status.to_a %>
 
   <%= f.input :id, :as => :hidden %>
