@@ -148,6 +148,34 @@ feature "Organograms" do
     end
   end
 
+  scenario 'remove a responsible' do
+    Organogram.make!(:secretaria_de_educacao)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Organogramas'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      click_button 'Remover Responsável'
+    end
+
+    click_button 'Atualizar Organograma'
+
+    page.should have_notice 'Organograma editado com sucesso.'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      page.should_not have_field 'Responsável', :with => 'Wenderson Malheiros'
+      page.should_not have_field 'Ato administrativo', :with => '4567'
+      page.should_not have_field 'Data de início', :with => '01/02/2012'
+      page.should_not have_field  'Data de término', :with => '10/02/2012'
+      page.should_not have_select 'Status', :selected => 'Inativo'
+    end
+  end
+
   scenario 'destroy an existent organogram' do
     Organogram.make!(:secretaria_de_educacao)
 
