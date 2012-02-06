@@ -1,10 +1,20 @@
-<fieldset>
-  <%= f.input :act_number %>
-  <%= f.input :type_of_administractive_act %>
-  <%= f.input :legal_texts_nature %>
-  <%= f.input :creation_date %>
-  <%= f.input :publication_date %>
-  <%= f.input :vigor_date %>
-  <%= f.input :end_date %>
-  <%= f.input :content %>
-</fieldset>
+<%= f.input :act_number %>
+<%= f.input :type_of_administractive_act %>
+<%= f.input :legal_texts_nature %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :creation_date %>
+  </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :publication_date %>
+  </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :vigor_date %>
+  </div>
+  <div class="yui3-u-1-4">
+    <%= f.input :end_date %>
+  </div>
+</div>
+
+<%= f.input :content %>
