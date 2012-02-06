@@ -35,7 +35,6 @@ class PurchaseSolicitation < ActiveRecord::Base
   protected
 
   def cannot_have_more_than_once_item_with_the_same_material
-   materials = items.pluck(:material_id).flatten
    single_materials = []
 
    items.each do |item|
