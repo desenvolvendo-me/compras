@@ -98,7 +98,7 @@ feature "Organograms" do
       fill_in 'Organograma', :with => '02.11'
       select 'Sintético', :from => 'Tipo'
       fill_in 'Código TCE', :with => '081'
-      fill_modal 'Tipo de administração', :with => 'Emenda constitucional'
+      fill_modal 'Tipo de administração', :with => 'Executivo'
       fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 
@@ -129,7 +129,7 @@ feature "Organograms" do
       page.should have_field 'Organograma', :with => '02.11'
       page.should have_select 'Tipo', :selected => 'Sintético'
       page.should have_field 'Código TCE', :with => '081'
-      page.should have_field 'Tipo de administração', :with => 'Emenda constitucional'
+      page.should have_field 'Tipo de administração', :with => 'Executivo'
       page.should have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 
