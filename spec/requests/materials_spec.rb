@@ -16,7 +16,7 @@ feature "Materials" do
     click_link 'Criar Material'
 
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
-    fill_modal 'Número da Classe', :with => 'Hortifrutigranjeiros', :field => 'Nome'
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Nome'
     fill_in 'Código', :with => '01'
     fill_in 'Nome', :with => 'Caixa'
     fill_in 'Descrição', :with => 'description'
@@ -45,7 +45,7 @@ feature "Materials" do
     click_link 'Caixa'
 
     page.should have_field 'Grupo', :with => '01 - Generos alimenticios'
-    page.should have_field 'Número da Classe', :with => '01 - Hortifrutigranjeiros'
+    page.should have_field 'Classe', :with => '01 - Hortifrutigranjeiros'
     page.should have_field 'Código', :with => '01'
     page.should have_field 'Nome', :with => 'Caixa'
     page.should have_field 'Descrição', :with => 'description'
@@ -77,7 +77,7 @@ feature "Materials" do
     click_link 'Manga'
 
     fill_modal 'Grupo', :with => 'Limpeza', :field => 'Nome'
-    fill_modal 'Número da Classe', :with => 'Peças', :field => 'Nome'
+    fill_modal 'Classe', :with => 'Peças', :field => 'Nome'
     fill_in 'Nome', :with => 'Parafuso'
     fill_in 'Descrição', :with => 'de rosca'
     fill_in 'Estoque mínimo', :with => '20'
@@ -103,7 +103,7 @@ feature "Materials" do
     click_link 'Parafuso'
 
     page.should have_field 'Grupo', :with => '02 - Limpeza'
-    page.should have_field 'Número da Classe', :with => '02 - Peças'
+    page.should have_field 'Classe', :with => '02 - Peças'
     page.should have_field 'Nome', :with => 'Parafuso'
     page.should have_field 'Descrição', :with => 'de rosca'
     page.should have_field 'Estoque mínimo', :with => '20'
