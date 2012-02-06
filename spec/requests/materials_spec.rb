@@ -198,6 +198,41 @@ feature "Materials" do
     page.should have_select 'Tipo de material', :with => ''
   end
 
+  it 'should show selected group on class modal' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Criar Material'
+
+    page.should have_disabled_field 'Classe'
+
+    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
+
+    page.should_not have_disabled_field 'Classe'
+
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros' do
+      page.should have_field 'filter_materials_group', :with => '01 - Generos alimenticios'
+    end
+  end
+
+  it 'should not have the class disabled when editing material' do
+    make_dependencies!
+
+    Material.make!(:manga)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Manga'
+
+    page.should_not have_disabled_field 'Classe'
+  end
+
+
   def make_dependencies!
     MaterialsGroup.make!(:alimenticios)
     MaterialsClass.make!(:hortifrutigranjeiros)

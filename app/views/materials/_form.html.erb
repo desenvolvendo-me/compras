@@ -1,5 +1,5 @@
 <%= f.input :materials_group %>
-<%= f.input :materials_class %>
+<%= f.input :materials_class, :disabled => true %>
 <%= f.input :code %>
 <%= f.input :name %>
 <%= f.input :description %>
@@ -28,5 +28,12 @@
       $("#material_service_type").parent().show();
     }
     $("#material_material_characteristic").change(toggleTypes);
+  })();
+
+  (function enableClass(){
+    if ($('#material_materials_group').attr('value') != ''){
+      $('#material_materials_class').attr('disabled', false);
+    }
+    $('#material_materials_group').change(enableClass);
   })();
 </script>

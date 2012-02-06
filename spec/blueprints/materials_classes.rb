@@ -7,7 +7,7 @@ MaterialsClass.blueprint(:hortifrutigranjeiros) do
 end
 
 MaterialsClass.blueprint(:pecas) do
-  materials_group { MaterialsGroup.make!(:alimenticios) }
+  materials_group { MaterialsGroup.make!(:limpeza) }
   class_number { "02" }
   name { "Peças" }
   description { "detalhamento da classe material" }

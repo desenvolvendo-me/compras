@@ -1,6 +1,8 @@
 class MaterialsClass < ActiveRecord::Base
   attr_accessible :materials_group_id, :class_number, :name, :description
 
+  attr_modal :materials_group_id, :class_number, :name
+
   belongs_to :materials_group
 
   validates :materials_group_id, :presence => true
