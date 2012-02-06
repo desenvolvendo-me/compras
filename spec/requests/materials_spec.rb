@@ -34,7 +34,7 @@ feature "Materials" do
     page.should_not have_field 'Tipo de material'
     #end of javascript test
 
-    fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Nome'
+    fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_in 'Portaria STN', :with => 'stn_ordinance'
     fill_in 'Elemento de despesa', :with => 'expense_element'
 
@@ -187,7 +187,7 @@ feature "Materials" do
 
     page.should have_field 'Tipo de serviço', :with => ''
 
-    fill_modal 'Tipo de serviço', :with => 'Reparos'
+    fill_modal 'Tipo de serviço', :with => 'Reparos', :field => 'Descrição'
 
     click_button 'Atualizar Material'
 

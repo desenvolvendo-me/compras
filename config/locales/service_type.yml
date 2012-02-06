@@ -8,5 +8,5 @@ pt-BR:
     attributes:
       service_type:
         tce_code: "Código do TCE"
-        name: "Nome"
+        description: "Descrição"
         service_goal: "Finalidade"
