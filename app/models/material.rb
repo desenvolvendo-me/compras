@@ -11,6 +11,7 @@ class Material < ActiveRecord::Base
   belongs_to :materials_class
   belongs_to :reference_unit
   belongs_to :service_type
+  has_many :purchase_solicitation_items
 
   orderize
   filterize
