@@ -1,17 +1,15 @@
-<fieldset>
-  <%= f.input :material, :input_html => { :class => 'material' } %>
-  <%= f.input :reference_unit, :disabled => true %>
-  <%= f.input :quantity %>
-  <%= f.input :unit_price %>
-  <%= f.input :estimated_total_price %>
-  <%= f.input :grouped, :disabled => true %>
-  <%= f.input :process_number, :disabled => true %>
-  <%= f.input :status, :as => :select, :collection => PurchaseSolicitationItemStatus, :selected => PurchaseSolicitationItemStatus::PENDING, :disabled => true %>
+<%= f.input :material, :input_html => { :class => 'material' } %>
+<%= f.input :reference_unit, :disabled => true %>
+<%= f.input :quantity %>
+<%= f.input :unit_price %>
+<%= f.input :estimated_total_price %>
+<%= f.input :grouped, :disabled => true %>
+<%= f.input :process_number, :disabled => true %>
+<%= f.input :status, :as => :select, :collection => PurchaseSolicitationItemStatus, :selected => PurchaseSolicitationItemStatus::PENDING, :disabled => true %>
 
-  <%= f.input :id, :as => 'hidden' %>
-  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+<%= f.input :id, :as => 'hidden' %>
+<%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <p>
-    <input type="button" class="button negative remove-purchase-solicitation-item" value="Remover Item">
-  </p>
-</fieldset>
+<p>
+  <input type="button" class="button negative remove-purchase-solicitation-item" value="Remover Item">
+</p>
