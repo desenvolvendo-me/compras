@@ -19,6 +19,8 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   has_and_belongs_to_many :budget_allocations
 
+  before_save :clean_extra_budget_allocations
+
   validates :accounting_year, :request_date, :responsible_id,
             :delivery_location, :kind, :delivery_location_id, :presence => true
   validate :cannot_have_more_than_once_item_with_the_same_material
@@ -33,6 +35,12 @@ class PurchaseSolicitation < ActiveRecord::Base
   end
 
   protected
+
+  def clean_extra_budget_allocations
+    if budget_allocation.present?
+      self.budget_allocation_ids = []
+    end
+  end
 
   def cannot_have_more_than_once_item_with_the_same_material
    single_materials = []

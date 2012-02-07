@@ -30,6 +30,7 @@
     if ($("#bt_allocation").attr('value') != ''){
       $('#budget_allocations_selector').hide();
       $('#message-no-extra-allocations').show();
+      $('table.records').find('tr.record').remove();
       $('table.records').append('<tr class="record"><td>' + $('#bt_allocation').attr('value') + '</td><td></td></tr>');
     }else{
       $('#budget_allocations_selector').show();

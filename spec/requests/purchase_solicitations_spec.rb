@@ -83,6 +83,31 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'clear extra budget_allocations on new view' do
+    make_dependencies!
+    BudgetAllocation.make!(:conserto)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dotações orçamentárias' do
+      fill_modal 'Dotação orçamentária', :with => 'Conserto'
+    end
+
+    within_tab 'Dados gerais' do
+      fill_modal 'bt_allocation', :with => 'Alocação'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+      page.should have_content 'Alocação'
+      page.should_not have_content 'Conserto'
+    end
+  end
+
   scenario 'create a new purchase_solicitation with multiple budget_allocations' do
     make_dependencies!
     BudgetAllocation.make!(:alocacao_extra)
@@ -290,6 +315,34 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Preço unitário', :with => "2,00"
       page.should have_field 'Preço total estimado', :with => "1.000,00"
       page.should have_select 'Status', :selected => 'Pendente'
+    end
+  end
+
+  scenario 'change multiple budget_allocations with one budget_allocation' do
+    make_dependencies!
+    PurchaseSolicitation.make!(:conserto)
+    BudgetAllocation.make!(:conserto)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'bt_allocation', :with => 'Conserto'
+    end
+
+    click_button 'Atualizar Solicitação de Compra'
+
+    page.should have_notice 'Solicitação de Compra editada com sucesso.'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+      page.should_not have_content 'Alocação'
+      page.should have_content 'Conserto'
     end
   end
 
