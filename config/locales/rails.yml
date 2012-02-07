@@ -199,6 +199,7 @@ pt-BR:
       exclusion_of_person_correspondence_address: "não está disponível pois o Contribuinte não tem endereço de correspondência cadastrado."
       duplicated_formulas: "não podem haver duas fórmulas com o mesmo ano."
       cannot_have_more_than_once_item_with_the_same_material: "não é permitido adicionar mais de um item com o mesmo material."
+      materials_class_must_belong_to_group: "não faz parte do grupo selecionado"
 
   activerecord:
     errors:

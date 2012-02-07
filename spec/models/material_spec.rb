@@ -32,4 +32,20 @@ describe Material do
 
     subject.should validate_presence_of(:service_or_contract_type)
   end
+
+  it "must be valid if class and group are related" do
+    subject.stub(:materials_group_id).and_return 1
+    subject.stub(:materials_class).and_return double("Class", :materials_group_id => 1)
+
+    subject.valid?
+    subject.errors.messages[:materials_class_id].should_not include "não faz parte do grupo selecionado"
+  end
+
+  it "must be invalid if class and group are not related" do
+    subject.stub(:materials_group_id).and_return 2
+    subject.stub(:materials_class).and_return double("Class", :materials_group_id => 1)
+
+    subject.valid?
+    subject.errors.messages[:materials_class_id].should include "não faz parte do grupo selecionado"
+  end
 end

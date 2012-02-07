@@ -21,6 +21,7 @@ class Material < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?
   validates :service_or_contract_type, :presence => true, :if => :service?
+  validate  :class_must_belong_to_group
 
   has_enumeration_for :material_characteristic, :create_helpers => true
   has_enumeration_for :material_type, :create_helpers => true
@@ -38,6 +39,12 @@ class Material < ActiveRecord::Base
       self.service_or_contract_type_id = nil
     elsif service?
       self.material_type = nil
+    end
+  end
+
+  def class_must_belong_to_group
+    if materials_class && materials_class.materials_group_id != materials_group_id
+      errors.add(:materials_class_id, :materials_class_must_belong_to_group)
     end
   end
 end
