@@ -16,7 +16,7 @@ feature "ConfigurationOrganograms" do
 
     click_link 'Criar Configuração de Organograma'
 
-    fill_in 'Nome', :with => 'Nome da Configuração'
+    fill_in 'Descrição', :with => 'Nome da Configuração'
 
     fill_modal 'Entidade', :with => 'Detran'
 
@@ -44,7 +44,7 @@ feature "ConfigurationOrganograms" do
 
     page.should have_field 'Máscara', :with => '99'
 
-    page.should have_field 'Nome', :with => 'Nome da Configuração'
+    page.should have_field 'Descrição', :with => 'Nome da Configuração'
 
     page.should have_field 'Nível', :with => '1'
 
@@ -90,7 +90,7 @@ feature "ConfigurationOrganograms" do
 
     click_link 'Configuração do Detran'
 
-    fill_in 'Nome', :with => 'Outro Nome da Configuração'
+    fill_in 'Descrição', :with => 'Outro Nome da Configuração'
 
     click_button 'Atualizar Configuração de Organograma'
 
@@ -100,7 +100,7 @@ feature "ConfigurationOrganograms" do
 
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Ato administrativo', :with => '1234'
-    page.should have_field 'Nome', :with => 'Outro Nome da Configuração'
+    page.should have_field 'Descrição', :with => 'Outro Nome da Configuração'
   end
 
   scenario 'destroy an existent configuration_organogram' do

@@ -5,12 +5,12 @@ require 'app/models/organogram_level'
 require 'app/enumerations/organogram_separator'
 
 describe ConfigurationOrganogram do
-  it 'should respond to to_s as name' do
-    subject.name = 'Organograma 2012'
+  it 'should respond to to_s as description' do
+    subject.description = 'Organograma 2012'
     subject.to_s.should eq 'Organograma 2012'
   end
 
-  it { should validate_presence_of :name }
+  it { should validate_presence_of :description }
   it { should validate_presence_of :administractive_act_id }
   it { should validate_presence_of :entity_id }
 

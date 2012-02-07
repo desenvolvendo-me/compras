@@ -1,10 +1,10 @@
 class ConfigurationOrganogram < ActiveRecord::Base
-  attr_accessible :name, :entity_id, :administractive_act_id, :organogram_levels
+  attr_accessible :description, :entity_id, :administractive_act_id, :organogram_levels
   attr_accessible :organogram_levels_attributes
 
   attr_readonly :mask
 
-  attr_modal :name, :entity_id, :administractive_act_id
+  attr_modal :description, :entity_id, :administractive_act_id
 
   belongs_to :administractive_act
   belongs_to :entity
@@ -12,14 +12,14 @@ class ConfigurationOrganogram < ActiveRecord::Base
 
   accepts_nested_attributes_for :organogram_levels, :reject_if => :all_blank, :allow_destroy => true
 
-  validates :name, :entity_id, :administractive_act_id, :presence => true
+  validates :description, :entity_id, :administractive_act_id, :presence => true
   validate :organogram_separator_for_organogram_levels
 
-  orderize
+  orderize :description
   filterize
 
   def to_s
-    name
+    description
   end
 
   def ordered_organogram_levels

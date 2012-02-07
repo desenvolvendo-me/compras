@@ -9,5 +9,5 @@ pt-BR:
       configuration_organogram:
         entity: "Entidade"
         administractive_act: "Ato administrativo"
-        name: "Nome"
+        description: "Descrição"
         mask: "Máscara"
