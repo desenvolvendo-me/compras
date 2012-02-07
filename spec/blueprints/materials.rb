@@ -18,7 +18,7 @@ Material.blueprint(:manga) do
 end
 
 Material.blueprint(:cadeira) do
-  materials_group { MaterialsGroup.make!(:escritorio) }
+  materials_group { MaterialsGroup.make!(:limpeza) }
   materials_class { MaterialsClass.make!(:pecas) }
   code { "02" }
   name { "Cadeira" }
