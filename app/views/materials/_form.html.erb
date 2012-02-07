@@ -1,6 +1,8 @@
 <%= f.input :materials_group %>
 <%= f.input :materials_class, :disabled => true %>
-<%= f.input :code %>
+<% if f.object.persisted? %>
+  <%= f.input :code, :disabled => true %>
+<% end %>
 <%= f.input :name %>
 <%= f.input :description %>
 

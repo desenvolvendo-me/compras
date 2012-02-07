@@ -17,7 +17,6 @@ feature "Materials" do
 
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Nome'
-    fill_in 'Código', :with => '01'
     fill_in 'Nome', :with => 'Caixa'
     fill_in 'Descrição', :with => 'description'
     fill_in 'Estoque mínimo', :with => '10'
@@ -46,7 +45,6 @@ feature "Materials" do
 
     page.should have_field 'Grupo', :with => '01 - Generos alimenticios'
     page.should have_field 'Classe', :with => '01 - Hortifrutigranjeiros'
-    page.should have_field 'Código', :with => '01'
     page.should have_field 'Nome', :with => 'Caixa'
     page.should have_field 'Descrição', :with => 'description'
     page.should have_field 'Estoque mínimo', :with => '10'
@@ -60,6 +58,38 @@ feature "Materials" do
     page.should_not have_field 'Tipo de material'
     page.should have_field 'Portaria STN', :with => 'stn_ordinance'
     page.should have_field 'Elemento de despesa', :with => 'expense_element'
+  end
+
+  scenario 'generate code' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Criar Material'
+
+    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Nome'
+    fill_in 'Nome', :with => 'Caixa'
+    fill_in 'Descrição', :with => 'description'
+    fill_in 'Estoque mínimo', :with => '10'
+    fill_modal 'Unidade de medida', :with => 'Unidade', :field => 'Nome'
+    fill_in 'Referência do fabricante', :with => 'manufacturer'
+    check 'Material perecível'
+    check 'Material estocável'
+
+    select 'Serviço', :from => 'Característica'
+
+    fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
+    fill_in 'Portaria STN', :with => 'stn_ordinance'
+    fill_in 'Elemento de despesa', :with => 'expense_element'
+
+    click_button 'Criar Material'
+
+    page.should have_notice 'Material criado com sucesso.'
+
+    page.should have_content '01011'
   end
 
   scenario 'update an existent material' do
@@ -132,22 +162,6 @@ feature "Materials" do
     page.should have_notice 'Material apagado com sucesso.'
 
     page.should_not have_content 'Manga'
-  end
-
-  scenario 'should validate uniqueness of code' do
-    Material.make!(:manga)
-
-    click_link 'Cadastros Diversos'
-
-    click_link 'Materiais'
-
-    click_link 'Criar Material'
-
-    fill_in 'Código', :with => '01'
-
-    click_button 'Criar Material'
-
-    page.should have_content 'já está em uso'
   end
 
   scenario 'should validate uniqueness of name' do

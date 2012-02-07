@@ -3,6 +3,8 @@ class Material < ActiveRecord::Base
                   :reference_unit_id, :manufacturer, :perishable, :storable, :combustible,
                   :material_characteristic, :service_or_contract_type_id, :material_type, :stn_ordinance, :expense_element
 
+  attr_readonly :code
+
   attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_class, :reference_unit, :service_or_contract_type
 
   attr_modal :name
