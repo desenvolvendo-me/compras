@@ -39,7 +39,7 @@
       displayFirstLabel();
     }
 
-    $(options.target).delegate(options.add, 'click', function () {
+    $('body').delegate(options.add, 'click', function () {
       var binds = {};
       binds[options.uuid] = _.uniqueId('fresh-');
 
