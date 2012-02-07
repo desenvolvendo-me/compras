@@ -11,7 +11,6 @@ feature "Organograms" do
     AdministrationType.make!(:publica)
     Address.make!(:general)
     Employee.make!(:sobrinho)
-    AdministractiveAct.make!(:sopa)
 
     click_link 'Cadastros Diversos'
 
