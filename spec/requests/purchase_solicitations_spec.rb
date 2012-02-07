@@ -77,6 +77,10 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Preço total estimado', :with => "500,00"
       page.should have_select 'Status', :selected => 'Pendente'
     end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content 'Alocação'
+    end
   end
 
   scenario 'create a new purchase_solicitation with multiple budget_allocations' do
@@ -176,6 +180,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+      page.should have_content 'Alocação'
     end
   end
 
