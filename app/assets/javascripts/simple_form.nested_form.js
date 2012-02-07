@@ -25,8 +25,8 @@
     var options = $.extend({}, defaults, options);
 
     var displayFirstLabel = function() {
-      $('.nested input:visible:first').closest('.nested').find('label').show();
-      $('.nested input:visible:first').closest('.nested').find('.nested-remove').css('padding-top', '30px');
+      $(".nested:first").find("label").show();
+      $(".nested:first").find(".nested-remove").css('padding-top', '30px');
     }
 
     var hideLabel = function(label) {
@@ -46,10 +46,12 @@
       $(options.target).append(template.mustache(binds));
       if (options.right) {
         displayFirstLabel();
-        var labels = $('.nested label:visible');
-        if (labels.length > 0) {
+        var labels = $('.nested label:visible'),
+            max_labels = $(".nested:first").find("label").length;
+
+        if (labels.length > max_labels) {
           $.each(labels, function(index, value) {
-            if ( index != 0) {
+            if ( index > (max_labels - 1)) {
               hideLabel(this);
             }
           });
