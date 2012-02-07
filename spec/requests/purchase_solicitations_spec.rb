@@ -102,7 +102,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_content "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+      page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
       page.should have_content 'Alocação'
       page.should_not have_content 'Conserto'
     end
@@ -204,7 +204,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_content "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+      page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
       page.should have_content 'Alocação'
     end
   end
@@ -340,7 +340,7 @@ feature "PurchaseSolicitations" do
     click_link 'Reparo nas instalações'
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_content "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+      page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
       page.should_not have_content 'Alocação'
       page.should have_content 'Conserto'
     end

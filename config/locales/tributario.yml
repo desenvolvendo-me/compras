@@ -23,4 +23,4 @@ pt-BR:
         copy_of_document: "Segunda via"
         fiscal_execution_without_movimentations: "Esta execução fiscal não possui movimentações"
         more_information: "Mais informações"
-        no_extra_allocations: "Já foi selecionada uma Dotação na aba 'Dados Gerais'. Não é necessário adicionar dotações extras."
+        no_extra_allocations: "Já foi selecionada uma Dotação na aba \"Dados gerais\"."
