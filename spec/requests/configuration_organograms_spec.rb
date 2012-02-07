@@ -22,7 +22,7 @@ feature "ConfigurationOrganograms" do
 
     fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
 
-    click_button 'Adicionar Estrutura'
+    click_button 'Adicionar'
 
     fill_in 'Nível', :with => '1'
 
@@ -62,15 +62,15 @@ feature "ConfigurationOrganograms" do
 
     click_link 'Criar Configuração de Organograma'
 
-    click_button 'Adicionar Estrutura'
+    click_button 'Adicionar'
 
     fill_in 'Nível', :with => '2'
 
     fill_in 'Dígitos', :with => '2'
 
-    click_button 'Adicionar Estrutura'
+    click_button 'Adicionar'
 
-    within 'fieldset:last' do
+    within '.organogram-level:last' do
       fill_in 'Nível', :with => '1'
 
       fill_in 'Dígitos', :with => '3'
