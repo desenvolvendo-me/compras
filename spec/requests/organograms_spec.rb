@@ -21,7 +21,7 @@ feature "Organograms" do
     within_tab 'Informações' do
       fill_in 'Nome', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
-      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
+      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
       fill_in 'Organograma', :with => '02.00'
       select 'Analítico', :from => 'Tipo'
       fill_in 'Código TCE', :with => '051'
@@ -93,7 +93,7 @@ feature "Organograms" do
     within_tab 'Informações' do
       fill_in 'Nome', :with => 'Secretaria de Transporte'
       fill_in 'Sigla', :with => 'SEMUTRA'
-      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran'
+      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
       fill_in 'Organograma', :with => '02.11'
       select 'Sintético', :from => 'Tipo'
       fill_in 'Código TCE', :with => '081'
