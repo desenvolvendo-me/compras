@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       reference_unit:
-        name: "Nome"
+        name: "Descrição"
         acronym: "Sigla"

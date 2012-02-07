@@ -13,7 +13,7 @@ feature "ReferenceUnits" do
 
     click_link 'Criar Unidade de Referência'
 
-    fill_in 'Nome', :with => 'Reais'
+    fill_in 'Descrição', :with => 'Reais'
     fill_in 'Sigla', :with => 'R$'
 
     click_button 'Criar Unidade de Referência'
@@ -22,7 +22,7 @@ feature "ReferenceUnits" do
 
     click_link 'Reais'
 
-    page.should have_field 'Nome', :with => 'Reais'
+    page.should have_field 'Descrição', :with => 'Reais'
     page.should have_field 'Sigla', :with => 'R$'
   end
 
@@ -35,7 +35,7 @@ feature "ReferenceUnits" do
 
     click_link 'Metro'
 
-    fill_in 'Nome', :with => 'Centímetro'
+    fill_in 'Descrição', :with => 'Centímetro'
     fill_in 'Sigla', :with => 'cm'
 
     click_button 'Atualizar Unidade de Referência'
@@ -44,7 +44,7 @@ feature "ReferenceUnits" do
 
     click_link 'Centímetro'
 
-    page.should have_field 'Nome', :with => 'Centímetro'
+    page.should have_field 'Descrição', :with => 'Centímetro'
     page.should have_field 'Sigla', :with => 'cm'
   end
 
