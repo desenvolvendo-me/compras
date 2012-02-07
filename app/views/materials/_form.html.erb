@@ -74,10 +74,17 @@
     $("#material_material_characteristic").change(toggleTypes);
   })();
 
-  (function enableClass(){
-    if ($('#material_materials_group').attr('value') != ''){
+  (function enableClass() {
+    if ($('#material_materials_group').attr('value') != '') {
       $('#material_materials_class').attr('disabled', false);
+    } else {
+      $('#material_materials_class').attr('disabled', true);
     }
     $('#material_materials_group').change(enableClass);
   })();
+
+  $('#material_materials_group').change(function(){
+    $('#material_materials_class').val('');
+    $('#material_materials_class_id').val('');
+  });
 </script>

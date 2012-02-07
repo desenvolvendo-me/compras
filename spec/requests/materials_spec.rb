@@ -232,6 +232,23 @@ feature "Materials" do
     page.should_not have_disabled_field 'Classe'
   end
 
+  it 'should disable and empty class when group are removed' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Criar Material'
+
+    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
+
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros'
+
+    fill_in 'Grupo', :with => ''
+
+    page.should have_disabled_field 'Classe', :with => ''
+  end
 
   def make_dependencies!
     MaterialsGroup.make!(:alimenticios)
