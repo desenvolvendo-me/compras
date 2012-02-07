@@ -8,10 +8,10 @@
   function calculeMask() {
     var levels = [];
     var mask = '';
-    $('#organogram_levels').children('fieldset:visible').each(function(){
-      var level = $(this).find('.yui3-g .yui3-u-1-4 input').attr('value');
-      var digits = $(this).find('.yui3-g .yui3-u-1-4 input[type=text]:last').attr('value');;
-      var separator = $(this).find('.yui3-g .yui3-u-1-4 option:selected').attr('value');
+    $('#organogram_levels').children('.organogram-level').each(function(){
+      var level = $(this).find('input.level').attr('value');
+      var digits = $(this).find('input.digits').attr('value');;
+      var separator = $(this).find('select.separator').attr('value');
       levels.push([level, digits, separator]);
     });
     var ordered_levels = levels.sort(function(a, b){
@@ -24,12 +24,7 @@
     $('#configuration_organogram_mask').attr('value', mask);
   }
 
-  function applyKeyupCallbackToInput() {
-    $('#organogram_levels').find('input:visible.numeric').bind('keyup', calculeMask);
-    $('#organogram_levels').find('select').bind('change', calculeMask);
-    calculeMask();
-  }
+  $('#organogram_levels').delegate('input:visible.numeric', 'keyup', calculeMask);
+  $('#organogram_levels').delegate('select', 'change', calculeMask);
 
-  $('.add-organogram_level,.remove-organogram_level').live('click', applyKeyupCallbackToInput);
-  applyKeyupCallbackToInput();
 </script>

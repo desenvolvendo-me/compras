@@ -1,12 +1,17 @@
-<div id="organogram_levels">
-  <p>
-    <input type="button" class="button affirmative add-organogram_level" value="Adicionar Estrutura">
-  </p>
+<fieldset>
+  <legend>
+    Estrutura
+  </legend>
 
-  <%= f.association :organogram_levels, :collection => localized(f.object.organogram_levels) do |p| %>
-    <%= render 'organogram_levels/form', :f => p %>
-  <% end %>
-</div>
+  <div id="organogram_levels">
+    <%= f.association :organogram_levels, :collection => localized(f.object.organogram_levels) do |p| %>
+      <%= render 'organogram_levels/form', :f => p %>
+    <% end %>
+  </div>
+  <p>
+    <input type="button" class="button affirmative add-organogram-level" value="Adicionar">
+  </p>
+</fieldset>
 
 <%= mustache 'organogram_levels-template' do %>
   <%= f.association :organogram_levels_attributes, :collection => f.object.organogram_levels.build, :index => '{{uuid_organogram_level}}' do |p| %>
@@ -16,9 +21,11 @@
 
 <script>
   $("#organogram_levels-template").nestedForm({
-    add: '.add-organogram_level',
-    remove: '.remove-organogram_level',
+    add: '.add-organogram-level',
+    remove: '.remove-organogram-level',
     target: '#organogram_levels',
     uuid: 'uuid_organogram_level',
+    fieldToRemove: '.organogram-level',
+    right: true
   });
 </script>
