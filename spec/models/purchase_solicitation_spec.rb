@@ -17,6 +17,12 @@ describe PurchaseSolicitation do
   it {should belong_to :liberator }
   it {should belong_to :organogram }
 
+  it "must delegate the amount to budget_allocation" do
+    subject.stub(:budget_allocation).and_return double("Allocation", :amount  => '400,00')
+
+    subject.budget_allocation_amount.should eq("400,00")
+  end
+
   context "validations" do
     it { should validate_presence_of :accounting_year }
     it { should validate_presence_of :request_date }

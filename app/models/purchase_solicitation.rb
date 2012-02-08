@@ -9,6 +9,8 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   attr_accessor :total_estimated_items, :total_estimated_allocations
 
+  delegate :amount, :to => :budget_allocation, :prefix => 'budget_allocation', :allow_nil => true
+
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
 

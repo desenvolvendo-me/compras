@@ -28,6 +28,12 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'bt_allocation', :with => 'Alocação', :field => 'Nome'
+
+      # testing javascript getting amount of allocation
+      page.should have_disabled_field 'Saldo da dotação orçamentária'
+      page.should have_field 'Saldo da dotação orçamentária', :with => '500,00'
+      # end of javascript test
+
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Nome'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'

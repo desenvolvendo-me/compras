@@ -4,6 +4,7 @@
 <%= f.input :responsible %>
 <%= f.input :justification %>
 <%= f.input :budget_allocation, :input_html => { :id => 'bt_allocation' } %>
+<%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
 <%= f.input :delivery_location %>
 <%= f.input :kind, :collection => PurchaseSolicitationKind.to_a %>
 <%= f.input :general_observations %>
@@ -12,3 +13,12 @@
 <%= f.input :liberator, :disabled => true  %>
 <%= f.input :service_observations, :disabled => true  %>
 <%= f.input :no_service_justification, :disabled => true  %>
+
+<script>
+  $("#bt_allocation").change(function (event, data) {
+    if (data){
+      var record = data.record;
+      $('#purchase_solicitation_budget_allocation_amount').val(record.data("amount"));
+    }
+  });
+</script>
