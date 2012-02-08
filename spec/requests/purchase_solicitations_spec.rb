@@ -152,7 +152,8 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       # testing javascript total items calculation
-      page.should have_disabled_field 'Total previsto dos items', :with => '500,00'
+      page.should have_field 'Total previsto dos itens', :with => '500,00'
+      page.should have_disabled_field 'Total previsto dos itens'
 
       click_button "Adicionar"
 
@@ -173,7 +174,8 @@ feature "PurchaseSolicitations" do
       end
 
       # testing javascript total allocations calculation
-      page.should have_disabled_field 'Total', :with => '500,00'
+      page.should have_field 'Soma dos valores das dotações', :with => '500,00'
+      page.should have_disabled_field 'Soma dos valores das dotações'
     end
 
     click_button 'Criar Solicitação de Compra'
