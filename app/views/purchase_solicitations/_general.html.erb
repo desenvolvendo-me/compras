@@ -1,16 +1,51 @@
-<%= f.input :accounting_year %>
-<%= f.input :request_date %>
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :id, :disabled => true %>
+  </div>
+  <div class="yui3-u-1-3">
+    <%= f.input :accounting_year %>
+  </div>
+  <div class="yui3-u-1-3">
+    <%= f.input :request_date %>
+  </div>
+</div>
+
 <%= f.input :organogram %>
 <%= f.input :responsible %>
 <%= f.input :justification %>
-<%= f.input :budget_allocation, :input_html => { :id => 'bt_allocation' } %>
-<%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
-<%= f.input :delivery_location %>
-<%= f.input :kind, :collection => PurchaseSolicitationKind.to_a %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocation, :input_html => { :id => 'bt_allocation' } %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :delivery_location %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :kind, :collection => PurchaseSolicitationKind.to_a %>
+  </div>
+</div>
+
 <%= f.input :general_observations %>
-<%= f.input :service_status, :collection => PurchaseSolicitationServiceStatus.to_a, :disabled => true %>
-<%= f.input :liberation_date, :disabled => true %>
-<%= f.input :liberator, :disabled => true  %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :service_status, :collection => PurchaseSolicitationServiceStatus.to_a, :disabled => true %>
+  </div>
+  <div class="yui3-u-1-3">
+    <%= f.input :liberation_date, :disabled => true %>
+  </div>
+  <div class="yui3-u-1-3">
+    <%= f.input :liberator, :disabled => true  %>
+  </div>
+</div>
+
 <%= f.input :service_observations, :disabled => true  %>
 <%= f.input :no_service_justification, :disabled => true  %>
 
