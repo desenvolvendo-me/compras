@@ -14,7 +14,13 @@
   </div>
 
   <div id="budget-allocations">
-    <%= render 'budget_allocations', :f => f %>
+    <div id="budget_allocations_wrapper">
+      <%= render 'budget_allocations', :f => f %>
+    </div>
+
+    <div id="budget_allocation_wrapper">
+      <%= render 'budget_allocation', :f => f %>
+    </div>
   </div>
 </div>
 
@@ -26,20 +32,24 @@
       if (tabWithError) {
         $(this).tabs('select', tabWithError);
       }
-    },
+    }
   });
 
-  (function toggleBudgetAllocations(){
-    if ($("#bt_allocation").attr('value') != ''){
-      $('#budget_allocations_selector').hide();
-      $('#message-no-extra-allocations').show();
-      $('#budget_allocations_selector').find('.purchase-solicitation-budget-allocation').remove();
-    }else{
-      $('#budget_allocations_selector').show();
-      $('#message-no-extra-allocations').hide();
+  $("#purchase_solicitation_budget_allocation_id").change(function (event, data) {
+    if (data) {
+      var record = data.record;
+
+      $("#allocation").html($('#budget-allocation-template').mustache({budget_allocation_id: record.data("value"), budget_allocation_name: record.data("label")}));
     }
-    $("#bt_allocation").change(toggleBudgetAllocations);
-  })();
+
+    if (!$(this).val()) {
+      $("#budget_allocations_wrapper").show();
+      $("#budget_allocation_wrapper").hide();
+    } else {
+      $("#budget_allocations_wrapper").hide();
+      $("#budget_allocation_wrapper").show();
+    }
+  }).change();
 
   function budgetAllocationsTotalValue() {
     var total = 0,

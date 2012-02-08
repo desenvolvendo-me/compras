@@ -35,6 +35,14 @@ class PurchaseSolicitation < ActiveRecord::Base
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
 
+  def budget_allocation_name
+    budget_allocation.try(:name)
+  end
+
+  def budget_allocation_id
+    budget_allocation.try(:id)
+  end
+
   def to_s
     justification
   end

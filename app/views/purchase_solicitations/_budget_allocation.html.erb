@@ -1,0 +1,27 @@
+<fieldset>
+  <legend>
+    Dotação selecionada na aba "Dados gerais"
+  </legend>
+
+  <div id="allocation">
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        <%= f.input :budget_allocation_id, :disabled => true, :input_html => { :size => 2 } %>
+      </div>
+      <div class="yui3-u-1-6">
+        <%= f.input :budget_allocation_name, :disabled => true, :required => false %>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<%= mustache 'budget-allocation-template' do %>
+  <div class="yui3-g" id="single-budget-allocation">
+    <div class="yui3-u-1-6">
+      <%= f.input :budget_allocation_id, :disabled => true, :input_html => { :value => "{{budget_allocation_id}}", :size => 2 } %>
+    </div>
+    <div class="yui3-u-1-6">
+      <%= f.input :budget_allocation_name, :disabled => true, :required => false, :input_html => { :value => "{{budget_allocation_name}}" } %>
+    </div>
+  </div>
+<% end %>

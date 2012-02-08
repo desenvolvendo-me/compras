@@ -27,7 +27,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'bt_allocation', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
 
       # testing javascript getting amount of allocation
       page.should have_disabled_field 'Saldo da dotação'
@@ -100,12 +100,14 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dados gerais' do
-      fill_modal 'bt_allocation', :with => 'Alocação'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação'
     end
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
+      page.should have_content 'Dotação selecionada na aba "Dados gerais"'
       page.should_not have_content 'Conserto'
+      page.should_not have_content 'Total previsto dos itens'
+      page.should_not have_content 'Soma dos valores das dotações'
     end
   end
 
@@ -232,11 +234,11 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dados gerais' do
-      fill_modal 'bt_allocation', :with => 'Alocação'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação'
     end
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
+      page.should have_content 'Dotação selecionada na aba "Dados gerais"'
     end
   end
 
@@ -318,7 +320,7 @@ feature "PurchaseSolicitations" do
     click_link 'Reparo nas instalações'
 
     within_tab 'Dados gerais' do
-      fill_modal 'bt_allocation', :with => 'Conserto'
+      fill_modal 'Dotação orçamentária', :with => 'Conserto'
     end
 
     click_button 'Atualizar Solicitação de Compra'
@@ -328,7 +330,7 @@ feature "PurchaseSolicitations" do
     click_link 'Reparo nas instalações'
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
+      page.should have_content 'Dotação selecionada na aba "Dados gerais"'
       page.should_not have_content 'Alocação'
     end
   end
