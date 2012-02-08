@@ -16,7 +16,7 @@ feature "Materials" do
     click_link 'Criar Material'
 
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Nome'
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
     fill_in 'Nome', :with => 'Caixa'
     fill_in 'Descrição', :with => 'description'
     fill_in 'Estoque mínimo', :with => '10'
@@ -70,7 +70,7 @@ feature "Materials" do
     click_link 'Criar Material'
 
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Nome'
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
     fill_in 'Nome', :with => 'Caixa'
     fill_in 'Descrição', :with => 'description'
     fill_in 'Estoque mínimo', :with => '10'
@@ -107,7 +107,7 @@ feature "Materials" do
     click_link 'Manga'
 
     fill_modal 'Grupo', :with => 'Limpeza', :field => 'Nome'
-    fill_modal 'Classe', :with => 'Peças', :field => 'Nome'
+    fill_modal 'Classe', :with => 'Peças', :field => 'Descrição'
     fill_in 'Nome', :with => 'Parafuso'
     fill_in 'Descrição', :with => 'de rosca'
     fill_in 'Estoque mínimo', :with => '20'
@@ -244,7 +244,7 @@ feature "Materials" do
 
     page.should_not have_disabled_field 'Classe'
 
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros' do
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição' do
       page.should have_field 'filter_materials_group', :with => '01 - Generos alimenticios'
     end
   end
@@ -274,7 +274,7 @@ feature "Materials" do
 
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
 
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros'
+    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
 
     fill_in 'Grupo', :with => ''
 

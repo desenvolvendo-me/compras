@@ -9,5 +9,5 @@ pt-BR:
       materials_class:
         materials_group: "Grupo"
         class_number: "Número da Classe"
-        name: "Nome"
         description: "Descrição"
+        details: "Detalhamento"

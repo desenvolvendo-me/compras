@@ -8,13 +8,13 @@
         <%= resource_class.human_attribute_name :class_number %>
       </th>
       <th>
-        <%= resource_class.human_attribute_name :name %>
+        <%= resource_class.human_attribute_name :description %>
       </th>
       <th>
         <%= resource_class.human_attribute_name :materials_group %>
       </th>
       <th>
-        <%= resource_class.human_attribute_name :description %>
+        <%= resource_class.human_attribute_name :details %>
       </th>
     </tr>
   </thead>
@@ -29,13 +29,13 @@
           <%= resource.class_number %>
         </td>
         <td>
-          <%= link_to resource.name, edit_resource_path(resource) %>
+          <%= link_to resource.description, edit_resource_path(resource) %>
         </td>
         <td>
           <%= resource.materials_group %>
         </td>
         <td>
-          <%= resource.description %>
+          <%= resource.details %>
         </td>
       </tr>
     <% end %>

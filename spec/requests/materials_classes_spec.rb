@@ -17,8 +17,8 @@ feature "MaterialsClasses" do
 
     fill_modal 'Grupo', :with => '01', :field => 'Número do grupo'
     fill_in 'Classe', :with => '01'
-    fill_in 'Nome', :with => 'Materiais de Escritório'
-    fill_in 'Descrição', :with => 'materiais para escritório'
+    fill_in 'Descrição', :with => 'Materiais de Escritório'
+    fill_in 'Detalhamento', :with => 'materiais para escritório'
 
     click_button 'Criar Classe de Materiais'
 
@@ -28,8 +28,8 @@ feature "MaterialsClasses" do
 
     page.should have_field 'Grupo', :with => '01 - Generos alimenticios'
     page.should have_field 'Classe', :with => '01'
-    page.should have_field 'Nome', :with => 'Materiais de Escritório'
-    page.should have_field 'Descrição', :with => 'materiais para escritório'
+    page.should have_field 'Descrição', :with => 'Materiais de Escritório'
+    page.should have_field 'Detalhamento', :with => 'materiais para escritório'
   end
 
   scenario 'update an existent materials_class' do
@@ -46,8 +46,8 @@ feature "MaterialsClasses" do
 
     fill_modal 'Grupo', :with => '02', :field => 'Número do grupo'
     fill_in 'Classe', :with => '02'
-    fill_in 'Nome', :with => 'Novo nome'
-    fill_in 'Descrição', :with => 'descricao'
+    fill_in 'Descrição', :with => 'Novo nome'
+    fill_in 'Detalhamento', :with => 'descricao'
 
     click_button 'Atualizar Classe de Materiais'
 
@@ -57,8 +57,8 @@ feature "MaterialsClasses" do
 
     page.should have_field 'Grupo', :with => '02 - Limpeza'
     page.should have_field 'Classe', :with => '02'
-    page.should have_field 'Nome', :with => 'Novo nome'
-    page.should have_field 'Descrição', :with => 'descricao'
+    page.should have_field 'Descrição', :with => 'Novo nome'
+    page.should have_field 'Detalhamento', :with => 'descricao'
   end
 
   scenario 'destroy an existent materials_class' do
@@ -107,7 +107,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo', :with => '01', :field => 'Número do grupo'
-    fill_in 'Nome', :with => 'Hortifrutigranjeiros'
+    fill_in 'Descrição', :with => 'Hortifrutigranjeiros'
 
     click_button 'Criar Classe de Materiais'
 
