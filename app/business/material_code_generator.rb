@@ -18,12 +18,18 @@ class MaterialCodeGenerator
   end
 
   def generate!
-    [@group_number, @class_number, next_value].join
+    [group_number, class_number, next_value].join
   end
 
   def next_value
-    if @materials_group and @materials_class
-      @material_storage.where(:materials_group_id => @materials_group.id, :materials_class_id => @materials_class.id).count + 1
+    group_id = materials_class.id
+    class_id = materials_group.id
+    previous = material_storage.order { id }.where { materials_group_id.eq(group_id) & materials_class_id.eq(class_id) }.last
+
+    if previous
+      return previous.code.gsub("#{group_number}#{class_number}", '').to_i + 1
+    else
+      return 1
     end
   end
 end

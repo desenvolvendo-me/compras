@@ -1,7 +1,9 @@
 class MaterialsController < CrudController
   def create
     object = build_resource
-    object.code = MaterialCodeGenerator.new(object).generate!
+    if object.valid?
+      object.code = MaterialCodeGenerator.new(object).generate!
+    end
 
     super
   end

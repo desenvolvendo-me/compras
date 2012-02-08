@@ -164,6 +164,23 @@ feature "Materials" do
     page.should_not have_content 'Manga'
   end
 
+  scenario 'should validate uniqueness of code' do
+    Material.make!(:manga)
+    Material.make!(:cadeira)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Manga'
+
+    fill_in 'Código', :with => '02'
+
+    click_button 'Atualizar Material'
+
+    page.should have_content 'já está em uso'
+  end
+
   scenario 'should validate uniqueness of name' do
     Material.make!(:manga)
 
