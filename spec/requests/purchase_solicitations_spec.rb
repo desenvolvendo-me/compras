@@ -77,10 +77,6 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Preço total estimado', :with => "500,00"
       page.should have_select 'Status', :selected => 'Pendente'
     end
-
-    within_tab 'Dotações orçamentárias' do
-      page.should have_content 'Alocação'
-    end
   end
 
   scenario 'clear extra budget_allocations on new view' do
@@ -94,7 +90,8 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dotações orçamentárias' do
-      fill_modal 'Dotação orçamentária', :with => 'Conserto'
+      click_button 'Adicionar'
+      fill_modal 'Dotação', :with => 'Conserto'
     end
 
     within_tab 'Dados gerais' do
@@ -103,7 +100,6 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
-      page.should have_content 'Alocação'
       page.should_not have_content 'Conserto'
     end
   end
@@ -151,8 +147,29 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+      # testing javascript total items calculation
+      page.should have_disabled_field 'Total previsto dos items', :with => '500,00'
+
+      click_button "Adicionar"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => 'Alocação'
+        fill_in 'Compl. do el. da despesa', :with => '50,00'
+        fill_in 'Valor previsto', :with => '200,00'
+        select "Não", :from => "Bloquear"
+      end
+
+      click_button "Adicionar"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => 'Alocação extra'
+        fill_in 'Compl. do el. da despesa', :with => '50,00'
+        fill_in 'Valor previsto', :with => '300,00'
+        select "Não", :from => "Bloquear"
+      end
+
+      # testing javascript total allocations calculation
+      page.should have_disabled_field 'Total', :with => '500,00'
     end
 
     click_button 'Criar Solicitação de Compra'
@@ -185,8 +202,17 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_content 'Alocação'
-      page.should have_content 'Alocação extra'
+      within '.purchase-solicitation-budget-allocation:first' do
+        page.should have_field "Dotação", :with => 'Alocação'
+        page.should have_field 'Compl. do el. da despesa', :with => '50,00'
+        page.should have_field "Valor previsto", :with => '200,00'
+      end
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        page.should have_field "Dotação", :with => 'Alocação extra'
+        page.should have_field 'Compl. do el. da despesa', :with => '50,00'
+        page.should have_field "Valor previsto", :with => '300,00'
+      end
     end
   end
 
@@ -205,49 +231,6 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
-      page.should have_content 'Alocação'
-    end
-  end
-
-  scenario 'create a new purchase_solicitation using budget_allocations_tab' do
-    make_dependencies!
-
-    click_link 'Cadastros Diversos'
-
-    click_link 'Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    within_tab 'Dados gerais' do
-      fill_in 'Ano contábil', :with => '2012'
-      fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Local para entrega', :with => 'Secretaria da Educação'
-      select 'Bens', :from => 'Tipo de solicitação'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      fill_modal 'purchase_solicitation_budget_allocation', :with => 'Alocação'
-    end
-
-    click_button 'Criar Solicitação de Compra'
-
-    page.should have_notice 'Solicitação de Compra criada com sucesso.'
-
-    click_link 'Novas cadeiras'
-
-    within_tab 'Dados gerais' do
-      page.should have_field 'Ano contábil', :with => '2012'
-      page.should have_field 'Data da solicitação', :with => '01/02/2012'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
-      page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
-      page.should have_select 'Tipo de solicitação', :with => 'Bens'
-    end
-
-    within_tab 'Dotações orçamentárias' do
-      page.should have_content 'Alocação'
     end
   end
 
@@ -342,7 +325,6 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'Já foi selecionada uma Dotação na aba "Dados gerais".'
       page.should_not have_content 'Alocação'
-      page.should have_content 'Conserto'
     end
   end
 
@@ -386,59 +368,6 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should_not have_content 'Alocação'
-    end
-  end
-
-  scenario 'add budget allocation from an existent purchase_solicitation' do
-    PurchaseSolicitation.make!(:conserto)
-    BudgetAllocation.make!(:alocacao_extra)
-
-    click_link 'Cadastros Diversos'
-
-    click_link 'Solicitações de Compra'
-
-    click_link 'Reparo nas instalações'
-
-    within_tab 'Dotações orçamentárias' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
-    end
-
-    click_button 'Atualizar Solicitação de Compra'
-
-    page.should have_notice 'Solicitação de Compra editada com sucesso.'
-
-    click_link 'Reparo nas instalações'
-
-    within_tab 'Dotações orçamentárias' do
-      page.should have_content 'Alocação'
-      page.should have_content 'Alocação extra'
-    end
-  end
-
-  scenario 'cannot save with the same material selected more than once on items' do
-    make_dependencies!
-
-    click_link 'Cadastros Diversos'
-
-    click_link 'Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    within_tab 'Itens' do
-      click_button "Adicionar Item"
-
-      fill_modal 'purchase_solicitation_items_attributes_fresh-0_material', :with => "Cadeira"
-
-      click_button "Adicionar Item"
-
-      fill_modal 'purchase_solicitation_items_attributes_fresh-1_material', :with => "Cadeira"
-    end
-
-    click_button 'Criar Solicitação de Compra'
-
-    within_tab 'Itens' do
-      page.should have_content "não é permitido adicionar mais de um item com o mesmo material"
     end
   end
 

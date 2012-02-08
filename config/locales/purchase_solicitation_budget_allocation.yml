@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation_budget_allocation:
+        one: "Dotação da Solicitação de Compra"
+        other: "Dotaçoes da Solicitação de Compra"
+
+    attributes:
+      purchase_solicitation_budget_allocation:
+        budget_allocation_id: "Código"
+        budget_allocation: "Dotação"
+        expense_complement: "Compl. do el. da despesa"
+        estimated_value: "Valor previsto"
+        blocked: "Bloquear"

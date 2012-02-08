@@ -1,37 +1,67 @@
-<div id="message-no-extra-allocations" style="display:none;">
-  <p><%= I18n.translate('other.tributario.messages.no_extra_allocations') %></p>
+<div id="message-no-extra-allocations">
+  Já foi selecionada uma Dotação na aba "Dados gerais".
 </div>
 
-<div id="budget_allocations">
-  <div id="budget_allocations_selector" class="yui3-g modal-finder">
+<fieldset id="budget_allocations_selector">
+  <legend>
+    Dotações da Solicitação de Compras
+  </legend>
+
+  <div class="yui3-g">
     <div class="yui3-u-1-2">
-      <%= f.input :budget_allocation, :as => :modal, :input_html => { 'data-modal-url' => modal_budget_allocations_path }, :hidden_field => false %>
+      <%= f.input :total_estimated_items, :disabled => true, :input_html => { :size => 12 } %>
+    </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :total_estimated_allocations, :disabled => true %>
     </div>
   </div>
 
-  <input type="hidden" name="<%= f.sanitized_object_name %>[budget_allocation_ids][]" />
-
-  <table class="records">
-    <thead>
-      <tr>
-        <th>
-          <%= BudgetAllocation.human_attribute_name :name %>
-        </th>
-        <th>
-        </th>
-      </tr>
-    </thead>
-
-    <tbody class="<%= f.sanitized_object_name %>_budget_allocation_records">
-      <% f.object.budget_allocations.each do |budget_allocation| %>
-        <%= render 'budget_allocations/list_form', :name => budget_allocation.name, :id => budget_allocation.id, :f => f %>
-      <% end %>
-    </tbody>
-  </table>
-
-  <%= mustache "#{f.sanitized_object_name}_budget_allocation_template" do %>
-    <%= f.association :budget_allocations, :collection => f.object.budget_allocations.build do |p| %>
-      <%= render 'budget_allocations/list_form', :name => '{{name}}', :id => '{{id}}', :f => f %>
+  <div id="allocations">
+    <%= f.association :purchase_solicitation_budget_allocations, :collection => localized(f.object.purchase_solicitation_budget_allocations) do |p| %>
+      <%= render 'purchase_solicitation_budget_allocations/form', :f => p %>
     <% end %>
+  </div>
+  <p>
+    <input type="button" class="button affirmative add-purchase-solicitation-budget-allocation" value="Adicionar">
+  </p>
+</fieldset>
+
+
+<%= mustache 'purchase-solicitation-budget-allocations-template' do %>
+  <%= f.association :purchase_solicitation_budget_allocations_attributes, :collection => f.object.purchase_solicitation_budget_allocations.build, :index => '{{uuid_purchase_solicitation_budget_allocation}}' do |p| %>
+    <%= render 'purchase_solicitation_budget_allocations/form', :f => p %>
   <% end %>
-</div>
+<% end %>
+
+<script>
+  $("#purchase-solicitation-budget-allocations-template").nestedForm({
+    add: '.add-purchase-solicitation-budget-allocation',
+    remove: '.remove-purchase-solicitation-budget-allocation',
+    target: '#allocations',
+    uuid: 'uuid_purchase_solicitation_budget_allocation',
+    fieldToRemove: '.purchase-solicitation-budget-allocation',
+    right: true
+  });
+
+  $(".budget-allocation").live('change', function (event, data) {
+    if (data){
+      var record = data.record,
+          inputs = $(this).closest('div.nested').find(':input');
+      $(inputs[2]).val(record.data("id"));
+    }
+  });
+
+  function calculateTotalAllocations() {
+    var total = 0,
+        value;
+    $.each($('.allocation-price'), function(){
+      value = $(this).attr('value')
+      if (value != ''){
+        total += parsePtBrFloat(value);
+      }
+    });
+    $('#purchase_solicitation_total_estimated_allocations').val(floatToPtBrString(total))
+  }
+  calculateTotalAllocations();
+  $('.allocation-price').live('keyup', calculateTotalAllocations);
+</script>

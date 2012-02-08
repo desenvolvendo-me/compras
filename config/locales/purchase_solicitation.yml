@@ -22,3 +22,5 @@ pt-BR:
         liberator: "Liberador"
         service_observations: "Observações do atendimento"
         no_service_justification: "Justificativa para não atendimento"
+        total_estimated_items: "Total previsto dos items"
+        total_estimated_allocations: "Total"

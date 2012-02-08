@@ -22,7 +22,9 @@ PurchaseSolicitation.blueprint(:conserto) do
   request_date { "2012-01-31" }
   responsible { Employee.make!(:sobrinho) }
   justification { "Reparo nas instalações" }
-  budget_allocations { [BudgetAllocation.make!(:alocacao)] }
+  purchase_solicitation_budget_allocations {
+    [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria),
+     PurchaseSolicitationBudgetAllocation.make!(:alocacao_secundaria)] }
   allocation_amount { "9.99" }
   delivery_location { DeliveryLocation.make!(:education) }
   kind { "goods" }

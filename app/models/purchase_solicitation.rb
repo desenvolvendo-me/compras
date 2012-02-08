@@ -1,11 +1,13 @@
 class PurchaseSolicitation < ActiveRecord::Base
   attr_accessible :accounting_year, :request_date, :responsible_id, :justification, :budget_allocation_id,
-                  :delivery_location_id, :kind, :general_observations, :items_attributes, :budget_allocation_ids,
+                  :delivery_location_id, :kind, :general_observations, :items_attributes, :purchase_solicitation_budget_allocations_attributes,
                   :organogram_id
 
   attr_protected :allocation_amount, :service_status, :liberation_date, :liberator, :service_observations,
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
                  :organogram
+
+  attr_accessor :total_estimated_items, :total_estimated_allocations
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
@@ -16,19 +18,22 @@ class PurchaseSolicitation < ActiveRecord::Base
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
   belongs_to :organogram
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :destroy, :inverse_of => :purchase_solicitation
-
-  has_and_belongs_to_many :budget_allocations
+  has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation
+  has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations
 
   before_save :clean_extra_budget_allocations
 
   validates :accounting_year, :request_date, :responsible_id,
             :delivery_location, :kind, :delivery_location_id, :presence => true
   validate :cannot_have_more_than_once_item_with_the_same_material
+  validate :cannot_have_duplicated_budget_allocations
+  validate :sum_of_items_must_be_equal_to_sum_of_allocations
 
   orderize :request_date
   filterize
 
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
 
   def to_s
     justification
@@ -50,6 +55,27 @@ class PurchaseSolicitation < ActiveRecord::Base
         item.errors.add(:material_id, :cannot_have_more_than_once_item_with_the_same_material)
       end
       single_materials << item.material_id
+    end
+  end
+
+  def cannot_have_duplicated_budget_allocations
+   single_allocations = []
+
+   purchase_solicitation_budget_allocations.each do |allocation|
+     if single_allocations.include?(allocation.budget_allocation_id)
+       allocation.errors.add(:budget_allocation_id, :taken)
+     end
+     single_allocations << allocation.budget_allocation_id
+   end
+  end
+
+  def sum_of_items_must_be_equal_to_sum_of_allocations
+    unless budget_allocation_id
+      items_total = items.collect{ |item| item.estimated_total_price || 0 }.sum
+      allocations_total = purchase_solicitation_budget_allocations.collect{ |allocation| allocation.estimated_value || 0 }.sum
+      if items_total != allocations_total
+        errors.add(:total_estimated_allocations, 'deve ser igual ao valor previsto dos items')
+      end
     end
   end
 end

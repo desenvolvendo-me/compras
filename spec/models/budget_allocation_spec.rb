@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/budget_allocation'
-require 'app/models/purchase_solicitation'
 
 describe BudgetAllocation do
   it 'should return name as to_s method' do

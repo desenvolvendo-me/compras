@@ -30,12 +30,25 @@
     if ($("#bt_allocation").attr('value') != ''){
       $('#budget_allocations_selector').hide();
       $('#message-no-extra-allocations').show();
-      $('table.records').find('tr.record').remove();
-      $('table.records').append('<tr class="record"><td>' + $('#bt_allocation').attr('value') + '</td><td></td></tr>');
+      $('#budget_allocations_selector').find('.purchase-solicitation-budget-allocation').remove();
     }else{
       $('#budget_allocations_selector').show();
       $('#message-no-extra-allocations').hide();
     }
     $("#bt_allocation").change(toggleBudgetAllocations);
   })();
+
+  function calculateTotalItems() {
+    var total = 0,
+        value;
+    $.each($('.item-price'), function(){
+      value = $(this).attr('value');
+      if (value != ''){
+        total += parsePtBrFloat(value);
+      }
+    });
+    $('#purchase_solicitation_total_estimated_items').val(floatToPtBrString(total))
+  }
+  calculateTotalItems()
+  $('a[href$="#budget-allocations"]').click(calculateTotalItems);
 </script>

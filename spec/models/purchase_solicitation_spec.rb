@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_item'
+require 'app/models/purchase_solicitation_budget_allocation'
 
 describe PurchaseSolicitation do
   it 'should return the id in to_s method' do
@@ -15,7 +16,6 @@ describe PurchaseSolicitation do
   it {should belong_to :delivery_location }
   it {should belong_to :liberator }
   it {should belong_to :organogram }
-  it {should have_and_belong_to_many :budget_allocations }
 
   context "validations" do
     it { should validate_presence_of :accounting_year }
@@ -42,6 +42,44 @@ describe PurchaseSolicitation do
 
       item_one.errors.messages[:material_id].should be_nil
       item_two.errors.messages[:material_id].should be_nil
+    end
+
+    it "the duplicated budget_allocations should be invalid except the first" do
+      item_one = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 1)
+      item_two = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 1)
+
+      subject.valid?
+
+      item_one.errors.messages[:budget_allocation_id].should be_nil
+      item_two.errors.messages[:budget_allocation_id].should include "já está em uso"
+    end
+
+    it "the diferent budget_allocations should be valid" do
+      item_one = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 1)
+      item_two = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 2)
+
+      subject.valid?
+
+      item_one.errors.messages[:budget_allocation_id].should be_nil
+      item_two.errors.messages[:budget_allocation_id].should be_nil
+    end
+
+    it 'should validate that total of items is equal to total of allocations' do
+      item = PurchaseSolicitationItem.new(:estimated_total_price => 100)
+      allocation = PurchaseSolicitationBudgetAllocation.new(:estimated_value => 100);
+
+      subject.stub(:items).and_return([item, item])
+      subject.stub(:purchase_solicitation_budget_allocations).and_return([allocation, allocation])
+
+      subject.valid?
+
+      subject.errors.messages[:total_estimated_allocations].should be_nil
+
+      subject.stub(:purchase_solicitation_budget_allocations).and_return([allocation])
+
+      subject.valid?
+
+      subject.errors.messages[:total_estimated_allocations].should include "deve ser igual ao valor previsto dos items"
     end
   end
 end

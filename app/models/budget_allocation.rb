@@ -3,7 +3,7 @@ class BudgetAllocation < ActiveRecord::Base
 
   has_many :purchase_solicitations
 
-  has_and_belongs_to_many :purchase_solicitations
+  has_many :purchase_solicitation_budget_allocations
 
   orderize
   filterize
