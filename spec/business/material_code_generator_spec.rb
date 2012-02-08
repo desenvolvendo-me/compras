@@ -3,6 +3,24 @@ require 'active_support/time'
 require 'app/business/material_code_generator'
 
 describe MaterialCodeGenerator do
+  context 'empty material' do
+    # Prevent empty form and still use materials code validation
+    let :material_storage do
+      double('Material')
+    end
+
+    let :material do
+      double('Material', :materials_group => nil, :materials_class => nil)
+    end
+
+    it 'next_value should be 1' do
+      MaterialCodeGenerator.new(material, material_storage).next_value.should eq 1
+    end
+
+    it 'should generate code to 1' do
+      MaterialCodeGenerator.new(material, material_storage).generate!.should eq '1'
+    end
+  end
   context 'without previous material' do
     let :material_storage do
       double('Material', :order => double(:where => []))
