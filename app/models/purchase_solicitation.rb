@@ -15,7 +15,7 @@ class PurchaseSolicitation < ActiveRecord::Base
   belongs_to :delivery_location
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
   belongs_to :organogram
-  has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :destroy
+  has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :destroy, :inverse_of => :purchase_solicitation
 
   has_and_belongs_to_many :budget_allocations
 
@@ -43,15 +43,13 @@ class PurchaseSolicitation < ActiveRecord::Base
   end
 
   def cannot_have_more_than_once_item_with_the_same_material
-   single_materials = []
+    single_materials = []
 
-   items.each do |item|
-     if single_materials.include?(item.material_id)
-       # FIXME: the command below (errors.add(:items)) should not be necessary
-       errors.add(:items)
-       item.errors.add(:material_id, :cannot_have_more_than_once_item_with_the_same_material)
-     end
-     single_materials << item.material_id
-   end
+    items.each do |item|
+      if single_materials.include?(item.material_id)
+        item.errors.add(:material_id, :cannot_have_more_than_once_item_with_the_same_material)
+      end
+      single_materials << item.material_id
+    end
   end
 end
