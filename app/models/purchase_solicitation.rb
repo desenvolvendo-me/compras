@@ -7,8 +7,6 @@ class PurchaseSolicitation < ActiveRecord::Base
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
                  :organogram
 
-  attr_accessor :total_estimated_items, :total_estimated_allocations
-
   delegate :amount, :to => :budget_allocation, :prefix => 'budget_allocation', :allow_nil => true
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
@@ -39,6 +37,14 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   def to_s
     justification
+  end
+
+  def budget_allocations_total_value
+    purchase_solicitation_budget_allocations.collect { |item| item.estimated_value || 0 }.sum
+  end
+
+  def items_total_value
+    items.collect { |item| item.estimated_total_price || 0 }.sum
   end
 
   protected

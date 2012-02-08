@@ -11,6 +11,32 @@ describe PurchaseSolicitation do
     subject.to_s.should eq 'Precisamos de mais cadeiras'
   end
 
+  context "#items_total_value" do
+    it "should sum the estimated total price of the items" do
+      subject.stub(:items).
+              and_return([
+                double(:estimated_total_price => 100),
+                double(:estimated_total_price => 200),
+                double(:estimated_total_price => nil)
+              ])
+
+      subject.items_total_value.should eq(300)
+    end
+  end
+
+  context "#budget_allocations_total_value" do
+    it "should sum the estimated value of the purchase solicitation budget allocations" do
+      subject.stub(:purchase_solicitation_budget_allocations).
+              and_return([
+                double(:estimated_value => 100),
+                double(:estimated_value => 200),
+                double(:estimated_value => nil)
+              ])
+
+      subject.budget_allocations_total_value.should eq(300)
+    end
+  end
+
   it {should belong_to :responsible }
   it {should belong_to :budget_allocation }
   it {should belong_to :delivery_location }

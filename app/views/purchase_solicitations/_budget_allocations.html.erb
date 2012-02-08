@@ -2,20 +2,19 @@
   Já foi selecionada uma Dotação na aba "Dados gerais".
 </div>
 
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :items_total_value, :input_html => { :value => number_to_currency(f.object.items_total_value, :format => "%n"), :size => 12 }, :disabled => true %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocations_total_value, :input_html => { :value => number_to_currency(f.object.budget_allocations_total_value, :format => "%n"), :size => 12 }, :disabled => true %>
+  </div>
+</div>
+
 <fieldset id="budget_allocations_selector">
   <legend>
     Dotações da Solicitação de Compras
   </legend>
-
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :total_estimated_items, :disabled => true, :input_html => { :size => 12 } %>
-    </div>
-    <div class="yui3-u-1-2">
-      <%= f.input :total_estimated_allocations, :disabled => true %>
-    </div>
-  </div>
-
   <div id="allocations">
     <%= f.association :purchase_solicitation_budget_allocations, :collection => localized(f.object.purchase_solicitation_budget_allocations) do |p| %>
       <%= render 'purchase_solicitation_budget_allocations/form', :f => p %>
@@ -60,7 +59,7 @@
         total += parsePtBrFloat(value);
       }
     });
-    $('#purchase_solicitation_total_estimated_allocations').val(floatToPtBrString(total))
+    $('#purchase_solicitation_budget_allocations_total_value').val(floatToPtBrString(total))
   }
   calculateTotalAllocations();
   $('.allocation-price').live('keyup', calculateTotalAllocations);
