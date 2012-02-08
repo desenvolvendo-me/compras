@@ -18,7 +18,7 @@ class MaterialCodeGenerator
   end
 
   def generate!
-    [group_number, class_number, next_value].join
+    material.code = [group_number, class_number, next_value].join
   end
 
   def next_value

@@ -17,8 +17,9 @@ describe MaterialCodeGenerator do
       MaterialCodeGenerator.new(material, material_storage).next_value.should eq 1
     end
 
-    it 'should generate code to 1' do
-      MaterialCodeGenerator.new(material, material_storage).generate!.should eq '1'
+    it 'should change code to 1' do
+      material.should_receive(:code=).with('1')
+      MaterialCodeGenerator.new(material, material_storage).generate!
     end
   end
   context 'without previous material' do
@@ -43,7 +44,8 @@ describe MaterialCodeGenerator do
     end
 
     it 'should generate code to 211331' do
-      MaterialCodeGenerator.new(material, material_storage).generate!.should eq '211331'
+      material.should_receive(:code=).with('211331')
+      MaterialCodeGenerator.new(material, material_storage).generate!
     end
   end
 
@@ -73,7 +75,8 @@ describe MaterialCodeGenerator do
     end
 
     it 'should generate code to 2113326' do
-      MaterialCodeGenerator.new(material, material_storage).generate!.should eq '2113326'
+      material.should_receive(:code=).with('2113326')
+      MaterialCodeGenerator.new(material, material_storage).generate!
     end
   end
 end
