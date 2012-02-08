@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      economic_classification_of_expenditure:
+        one: "Classificação econômica das despesas"
+        other: "Classificações econômica das despesas"
+
+    attributes:
+      economic_classification_of_expenditure:
+        entity: "Entidade"
+        administractive_act: "Ato administrativo"
+        economic_classification_of_expenditure: "Classificação da natureza da despesa"
+        kind: "Tipo"
+        description: "Descrição"
+        docket: "Súmula"

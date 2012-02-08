@@ -1,0 +1,55 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :economic_classification_of_expenditure %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :entity %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :administractive_act %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :kind %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :description %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :docket %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.entity %>
+        </td>
+        <td>
+          <%= resource.administractive_act %>
+        </td>
+        <td>
+          <%= resource.kind_humanize %>
+        </td>
+        <td>
+          <%= resource.description %>
+        </td>
+        <td>
+          <%= resource.docket %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

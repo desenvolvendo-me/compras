@@ -1,0 +1,2 @@
+class EconomicClassificationOfExpendituresController < CrudController
+end

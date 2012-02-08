@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    economic_classification_of_expenditure_kind:
+      analytical: Analítico
+      synthetic: Sintético
+      both: Ambos

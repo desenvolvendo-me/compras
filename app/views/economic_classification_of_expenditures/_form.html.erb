@@ -1,0 +1,12 @@
+<%= f.input :entity %>
+<%= f.input :administractive_act %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :economic_classification_of_expenditure %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :kind, :collection => EconomicClassificationOfExpenditureKind.to_a %>
+  </div>
+</div>
+<%= f.input :description %>
+<%= f.input :docket %>
