@@ -1,5 +1,5 @@
 class BudgetAllocation < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :amount
 
   has_many :purchase_solicitations
 

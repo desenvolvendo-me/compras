@@ -15,6 +15,8 @@ feature "BudgetAllocations" do
 
     fill_in 'Nome', :with => 'Alocação'
 
+    fill_in 'Saldo', :with => '500,00'
+
     click_button 'Criar Dotação Orçamentária'
 
     page.should have_notice 'Dotação Orçamentária criado com sucesso.'
@@ -22,6 +24,8 @@ feature "BudgetAllocations" do
     click_link 'Alocação'
 
     page.should have_field 'Nome', :with => 'Alocação'
+
+    page.should have_field 'Saldo', :with => '500,00'
   end
 
   scenario 'update an existent budget_allocation' do
@@ -35,6 +39,8 @@ feature "BudgetAllocations" do
 
     fill_in 'Nome', :with => 'Novo nome'
 
+    fill_in 'Saldo', :with => '800,00'
+
     click_button 'Atualizar Dotação Orçamentária'
 
     page.should have_notice 'Dotação Orçamentária editado com sucesso.'
@@ -42,6 +48,8 @@ feature "BudgetAllocations" do
     click_link 'Novo nome'
 
     page.should have_field 'Nome', :with => 'Novo nome'
+
+    page.should have_field 'Saldo', :with => '800,00'
   end
 
   scenario 'destroy an existent budget_allocation' do

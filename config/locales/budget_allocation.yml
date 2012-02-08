@@ -8,3 +8,4 @@ pt-BR:
     attributes:
       budget_allocation:
         name: "Nome"
+        amount: "Saldo"

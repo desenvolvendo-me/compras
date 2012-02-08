@@ -7,6 +7,9 @@
       <th>
         <%= resource_class.human_attribute_name :name %>
       </th>
+      <th>
+        <%= resource_class.human_attribute_name :amount %>
+      </th>
     </tr>
   </thead>
 
@@ -18,6 +21,9 @@
         </td>
         <td>
           <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.amount %>
         </td>
       </tr>
     <% end %>
