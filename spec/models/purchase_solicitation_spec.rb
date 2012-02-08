@@ -65,7 +65,7 @@ describe PurchaseSolicitation do
     end
 
     it 'should validate that total of items is equal to total of allocations' do
-      item = PurchaseSolicitationItem.new(:estimated_total_price => 100)
+      item = PurchaseSolicitationItem.new(:quantity => 2, :unit_price => 50)
       allocation = PurchaseSolicitationBudgetAllocation.new(:estimated_value => 100);
 
       subject.stub(:items).and_return([item, item])

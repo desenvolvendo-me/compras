@@ -44,7 +44,6 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
-      fill_in 'Preço total estimado', :with => "500,00"
       page.should have_select 'Status', :selected => 'Pendente'
     end
 
@@ -142,7 +141,6 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
-      fill_in 'Preço total estimado', :with => "500,00"
       page.should have_select 'Status', :selected => 'Pendente'
     end
 
@@ -271,7 +269,6 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Unidade de referência', :with => "Quilos"
       fill_in 'Quantidade', :with => "500"
       fill_in 'Preço unitário', :with => "2,00"
-      fill_in 'Preço total estimado', :with => "1000,00"
     end
 
     click_button 'Atualizar Solicitação de Compra'
@@ -395,6 +392,24 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Itens' do
       page.should have_content "não é permitido adicionar mais de um item com o mesmo material"
+    end
+  end
+
+  scenario 'calculate total item price via javascript' do
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      fill_in 'Quantidade', :with => "5"
+      fill_in 'Preço unitário', :with => "100,00"
+
+      page.should have_disabled_field 'Preço total estimado'
+      page.should have_field 'Preço total estimado', :with => '500,00'
     end
   end
 

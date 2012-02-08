@@ -27,4 +27,16 @@
       $(inputs[2]).val(record.data("reference-unit"));
     }
   });
+
+  $('form').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
+    var fieldset, itemQuantity, itemUnitPrice, total;
+
+    fieldset = $(this).closest('fieldset'),
+    itemQuantity = parsePtBrFloat(fieldset.find('.item-quantity').val() || '0'),
+    itemUnitPrice = parsePtBrFloat(fieldset.find('.item-unit-price').val() || '0');
+
+    total = floatToPtBrString(itemQuantity * itemUnitPrice);
+
+    fieldset.find('.item-price').attr('value', total);
+  });
 </script>
