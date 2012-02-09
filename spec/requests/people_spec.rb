@@ -12,13 +12,13 @@ feature "People" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Contribuintes'
+    click_link 'Pessoas'
 
-    click_link 'Criar Contribuinte'
+    click_link 'Criar Pessoa'
 
     choose 'Pessoa Física'
 
-    within_tab "Contribuinte" do
+    within_tab "Pessoa" do
       fill_in 'Nome', :with => 'Wenderson Malheiros'
       choose 'Masculino'
       fill_in 'Mãe', :with => 'Alaine Agnes'
@@ -56,13 +56,13 @@ feature "People" do
       end
     end
 
-    click_button 'Criar Contribuinte'
+    click_button 'Criar Pessoa'
 
-    page.should have_notice 'Contribuinte criado com sucesso.'
+    page.should have_notice 'Pessoa criada com sucesso.'
 
     click_link 'Wenderson Malheiros'
 
-    within_tab "Contribuinte" do
+    within_tab "Pessoa" do
       page.should have_field 'Nome', :with => 'Wenderson Malheiros'
       page.should have_checked_field 'Masculino'
       page.should have_field 'Mãe', :with => 'Alaine Agnes'
@@ -104,14 +104,14 @@ feature "People" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Contribuintes'
+    click_link 'Pessoa'
 
     click_link 'Wenderson'
 
     page.should_not have_field 'Pessoa Física'
     page.should_not have_field 'Pessoa Jurídica'
 
-    within_tab "Contribuinte" do
+    within_tab "Pessoa" do
       fill_in 'Nome', :with => 'Gabriel Sobrinho'
     end
 
@@ -120,15 +120,15 @@ feature "People" do
       fill_in 'Complemento', :with => "Apto das alfalfas"
     end
 
-    click_button 'Atualizar Contribuinte'
+    click_button 'Atualizar Pessoa'
 
-    page.should have_notice 'Contribuinte editado com sucesso.'
+    page.should have_notice 'Pessoa editada com sucesso.'
 
     within_records do
       click_link 'Gabriel Sobrinho'
     end
 
-    within_tab "Contribuinte" do
+    within_tab "Pessoa" do
       page.should have_field 'Nome', :with => 'Gabriel Sobrinho'
     end
 
@@ -143,13 +143,13 @@ feature "People" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Contribuintes'
+    click_link 'Pessoa'
 
     click_link 'Wenderson Malheiros'
 
     click_link 'Apagar Wenderson Malheiros', :confirm => true
 
-    page.should have_notice 'Contribuinte apagado com sucesso.'
+    page.should have_notice 'Pessoa apagada com sucesso.'
 
     page.should_not have_content 'Wenderson Malheiros'
   end

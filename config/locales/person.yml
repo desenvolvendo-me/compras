@@ -2,14 +2,14 @@ pt-BR:
   activerecord:
     models:
       person:
-        one: "Contribuinte"
-        other: "Contribuintes"
+        one: "Pessoa"
+        other: "Pessoas"
 
     attributes:
       person:
         name: "Nome"
-        personable: "Contribuinte"
-        personable_type: "Tipo de contribuinte"
+        personable: "Pessoa"
+        personable_type: "Tipo de pessoa"
         phone: "Telefone"
         mobile: "Celular"
         email: "E-mail"

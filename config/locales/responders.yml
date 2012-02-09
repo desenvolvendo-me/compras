@@ -64,6 +64,9 @@ pt-BR:
     parcels:
       <<: *female
 
+    people:
+      <<: *female
+
     prefectures:
       <<: *female
 
