@@ -17,7 +17,7 @@ class Material < ActiveRecord::Base
   filterize
 
   validates :materials_group_id, :materials_class_id, :reference_unit_id, :material_characteristic, :presence => true
-  validates :code, :presence => true, :uniqueness => true, :numericality => true
+  validates :code, :presence => true, :uniqueness => true
   validates :description, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?
   validates :service_or_contract_type, :presence => true, :if => :service?
@@ -30,6 +30,14 @@ class Material < ActiveRecord::Base
 
   def to_s
     "#{code} - #{description}"
+  end
+
+  def self.last_by_materials_class_and_group(params = {})
+    record = scoped
+    record = record.where { materials_group_id.eq(params.fetch(:materials_group_id)) }
+    record = record.where { materials_class_id.eq(params.fetch(:materials_class_id)) }
+    record = record.order { code }.last
+    record
   end
 
   protected

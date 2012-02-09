@@ -1,7 +1,7 @@
 Material.blueprint(:manga) do
   materials_group { MaterialsGroup.make!(:alimenticios) }
   materials_class { MaterialsClass.make!(:hortifrutigranjeiros) }
-  code { "01011" }
+  code { "01.01.00001" }
   description { "Manga" }
   detailed_description { "Fruta manga" }
   minimum_stock_balance { 100 }
@@ -20,7 +20,7 @@ end
 Material.blueprint(:cadeira) do
   materials_group { MaterialsGroup.make!(:limpeza) }
   materials_class { MaterialsClass.make!(:pecas) }
-  code { "02021" }
+  code { "02.02.00001" }
   description { "Cadeira" }
   detailed_description { "Cadeira de escritorio" }
   minimum_stock_balance { 100 }
@@ -39,7 +39,7 @@ end
 Material.blueprint(:balde) do
   materials_group { MaterialsGroup.make!(:limpeza) }
   materials_class { MaterialsClass.make!(:pecas) }
-  code { "02022" }
+  code { "02.02.00002" }
   description { "Balde" }
   minimum_stock_balance { 100 }
   reference_unit { ReferenceUnit.make!(:unidade) }

@@ -75,7 +75,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => "02021 - Cadeira"
+      page.should have_field 'Material', :with => "02.02.00001 - Cadeira"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       page.should have_field 'Quantidade', :with => "5"
       page.should have_field 'Preço unitário', :with => "100,00"
@@ -202,7 +202,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => "02021 - Cadeira"
+      page.should have_field 'Material', :with => "02.02.00001 - Cadeira"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       page.should have_field 'Quantidade', :with => "5"
       page.should have_field 'Preço unitário', :with => "100,00"
@@ -302,7 +302,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => "01011 - Manga", :field => "Descrição"
+      page.should have_field 'Material', :with => "01.01.00001 - Manga", :field => "Descrição"
       page.should have_field 'Quantidade', :with => "500"
       page.should have_field 'Preço unitário', :with => "2,00"
       page.should have_field 'Preço total estimado', :with => "1.000,00"

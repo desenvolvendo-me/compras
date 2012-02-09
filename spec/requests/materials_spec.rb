@@ -89,7 +89,7 @@ feature "Materials" do
 
     page.should have_notice 'Material criado com sucesso.'
 
-    page.should have_content '01011'
+    page.should have_content '01.01.00001'
   end
 
   scenario 'update an existent material' do
@@ -140,7 +140,7 @@ feature "Materials" do
 
     page.should have_field 'Grupo', :with => '02 - Limpeza'
     page.should have_field 'Classe', :with => '02 - Peças'
-    page.should have_field 'Código', :with => '02023'
+    page.should have_field 'Código', :with => '02.02.00003'
     page.should have_field 'Descrição', :with => 'Parafuso'
     page.should have_field 'Descrição detalhada', :with => 'de rosca'
     page.should have_field 'Estoque mínimo', :with => '20'
@@ -164,7 +164,7 @@ feature "Materials" do
 
     click_link 'Manga'
 
-    click_link 'Apagar 01011 - Manga', :confirm => true
+    click_link 'Apagar 01.01.00001 - Manga', :confirm => true
 
     page.should have_notice 'Material apagado com sucesso.'
 
