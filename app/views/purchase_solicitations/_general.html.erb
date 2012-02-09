@@ -51,7 +51,7 @@
 <%= f.input :no_service_justification, :disabled => true  %>
 
 <script>
-  $("#bt_allocation").change(function (event, data) {
+  $("#purchase_solicitation_budget_allocation_id").change(function (event, data) {
     if (data){
       var record = data.record;
       $('#purchase_solicitation_budget_allocation_amount').val(record.data("amount"));
