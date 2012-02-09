@@ -79,12 +79,10 @@ class PurchaseSolicitation < ActiveRecord::Base
   end
 
   def sum_of_items_must_be_equal_to_sum_of_allocations
-    unless budget_allocation_id
-      items_total = items.collect{ |item| item.estimated_total_price || 0 }.sum
-      allocations_total = purchase_solicitation_budget_allocations.collect{ |allocation| allocation.estimated_value || 0 }.sum
-      if items_total != allocations_total
-        errors.add(:budget_allocations_total_value, :must_be_equal_to_items_total_value)
-      end
+    return if budget_allocation_id?
+
+    if items_total_value != budget_allocations_total_value
+      errors.add(:budget_allocations_total_value, :must_be_equal_to_items_total_value)
     end
   end
 end

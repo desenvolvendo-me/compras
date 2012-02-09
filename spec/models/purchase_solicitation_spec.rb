@@ -96,22 +96,34 @@ describe PurchaseSolicitation do
       item_two.errors.messages[:budget_allocation_id].should be_nil
     end
 
-    it 'should validate that total of items is equal to total of allocations' do
-      item = PurchaseSolicitationItem.new(:quantity => 2, :unit_price => 50)
-      allocation = PurchaseSolicitationBudgetAllocation.new(:estimated_value => 100);
+    context "budget allocations total value" do
+      it "should not have error when the budget_allocation_id is assigned" do
+        subject.budget_allocation_id = 1
 
-      subject.stub(:items).and_return([item, item])
-      subject.stub(:purchase_solicitation_budget_allocations).and_return([allocation, allocation])
+        subject.stub(:budget_allocations_total_value => 200, :items_total_value => 100)
 
-      subject.valid?
+        subject.errors.messages[:budget_allocations_total_value].should be_nil
+      end
 
-      subject.errors.messages[:total_estimated_allocations].should be_nil
+      context "when the budget_allocation_id is not assigned" do
+        before do
+          subject.budget_allocation_id = nil
+        end
 
-      subject.stub(:purchase_solicitation_budget_allocations).and_return([allocation])
+        it "should not have error when the budget allocations total value is equal to items total value" do
+          subject.stub(:budget_allocations_total_value => 100, :items_total_value => 100)
+          subject.valid?
 
-      subject.valid?
+          subject.errors.messages[:budget_allocations_total_value].should be_nil
+        end
 
-      subject.errors.messages[:total_estimated_allocations].should include "deve ser igual ao valor previsto dos items"
+        it "should have error when the budget allocations total value is not equal to items total value" do
+          subject.stub(:budget_allocations_total_value => 200, :items_total_value => 100)
+          subject.valid?
+
+          subject.errors.messages[:budget_allocations_total_value].should include "deve ser igual ao valor total previsto dos itens"
+        end
+      end
     end
   end
 end
