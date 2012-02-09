@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'model_helper'
 require 'app/models/materials_class'
 
@@ -13,5 +14,15 @@ describe MaterialsClass do
     subject.description = 'Hortifrutigranjeiros'
 
     subject.to_s.should eq '01 - Hortifrutigranjeiros'
+  end
+
+  it 'should validate mask on class_number' do
+    subject.class_number = 'ab'
+    subject.valid?
+    subject.errors[:class_number].should include 'não é válido'
+
+    subject.class_number = '01'
+    subject.valid?
+    subject.errors[:class_number].should_not include 'não é válido'
   end
 end

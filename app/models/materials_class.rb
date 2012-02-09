@@ -7,7 +7,7 @@ class MaterialsClass < ActiveRecord::Base
 
   validates :materials_group_id, :presence => true
   validates :description, :presence => true, :uniqueness => { :scope => :materials_group_id }
-  validates :class_number, :presence => true, :uniqueness => { :scope => :materials_group_id }, :numericality => true
+  validates :class_number, :presence => true, :uniqueness => { :scope => :materials_group_id }, :numericality => true, :mask => "99"
 
   orderize :description
   filterize
