@@ -15,16 +15,17 @@
   <legend>
     Dotações da Solicitação de Compras
   </legend>
+
   <div id="allocations">
     <%= f.association :purchase_solicitation_budget_allocations, :collection => localized(f.object.purchase_solicitation_budget_allocations) do |p| %>
       <%= render 'purchase_solicitation_budget_allocations/form', :f => p %>
     <% end %>
   </div>
+
   <p>
     <input type="button" class="button affirmative add-purchase-solicitation-budget-allocation" value="Adicionar">
   </p>
 </fieldset>
-
 
 <%= mustache 'purchase-solicitation-budget-allocations-template' do %>
   <%= f.association :purchase_solicitation_budget_allocations_attributes, :collection => f.object.purchase_solicitation_budget_allocations.build, :index => '{{uuid_purchase_solicitation_budget_allocation}}' do |p| %>
