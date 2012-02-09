@@ -7,7 +7,7 @@ class PurchaseSolicitation < ActiveRecord::Base
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
                  :organogram
 
-  delegate :amount, :to => :budget_allocation, :prefix => 'budget_allocation', :allow_nil => true
+  delegate :amount, :to => :budget_allocation, :prefix => true, :allow_nil => true
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
