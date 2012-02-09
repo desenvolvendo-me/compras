@@ -6,8 +6,8 @@ class MaterialsClass < ActiveRecord::Base
   belongs_to :materials_group
 
   validates :materials_group_id, :presence => true
-  validates :description, :presence => true, :uniqueness => true
-  validates :class_number, :presence => true, :uniqueness => true, :numericality => true
+  validates :description, :presence => true, :uniqueness => { :scope => :materials_group_id }
+  validates :class_number, :presence => true, :uniqueness => { :scope => :materials_group_id }, :numericality => true
 
   orderize :description
   filterize

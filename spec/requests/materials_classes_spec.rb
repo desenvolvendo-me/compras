@@ -78,7 +78,7 @@ feature "MaterialsClasses" do
     page.should_not have_content 'detalhamento de classe do material'
   end
 
-  scenario 'should validate uniqueness of class_number' do
+  scenario 'should validate uniqueness of class_number scoped to materials_group' do
     make_dependencies!
     MaterialsClass.make!(:hortifrutigranjeiros)
 
@@ -96,7 +96,26 @@ feature "MaterialsClasses" do
     page.should have_content 'já está em uso'
   end
 
-  scenario 'should validate uniqueness of name' do
+  scenario 'should not validate uniqueness of class_number when not scoped to materials_group' do
+    make_dependencies!
+    MaterialsClass.make!(:hortifrutigranjeiros)
+    MaterialsGroup.make!(:limpeza)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Classes de Materiais'
+
+    click_link 'Criar Classe de Materiais'
+
+    fill_modal 'Grupo', :with => '02', :field => 'Número do grupo'
+    fill_in 'Classe', :with => '01'
+
+    click_button 'Criar Classe de Materiais'
+
+    page.should_not have_content 'já está em uso'
+  end
+
+  scenario 'should validate uniqueness of description scoped to materials_class' do
     make_dependencies!
     MaterialsClass.make!(:hortifrutigranjeiros)
 
@@ -112,6 +131,25 @@ feature "MaterialsClasses" do
     click_button 'Criar Classe de Materiais'
 
     page.should have_content 'já está em uso'
+  end
+
+  scenario 'should not validate uniqueness of description when is not scoped to materials_class' do
+    make_dependencies!
+    MaterialsClass.make!(:hortifrutigranjeiros)
+    MaterialsGroup.make!(:limpeza)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Classes de Materiais'
+
+    click_link 'Criar Classe de Materiais'
+
+    fill_modal 'Grupo', :with => '02', :field => 'Número do grupo'
+    fill_in 'Descrição', :with => 'Hortifrutigranjeiros'
+
+    click_button 'Criar Classe de Materiais'
+
+    page.should_not have_content 'já está em uso'
   end
 
   def make_dependencies!
