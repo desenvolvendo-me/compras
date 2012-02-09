@@ -6,9 +6,12 @@ class MaterialsController < CrudController
     super
   end
 
-  def update
-    object = resource
-    MaterialCodeGenerator.new(resource).generate!
+  protected
+
+  def update_resource(object, attributes)
+    object.localized.assign_attributes(*attributes)
+
+    MaterialCodeGenerator.new(object).generate!
 
     super
   end

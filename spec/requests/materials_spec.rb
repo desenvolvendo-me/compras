@@ -95,7 +95,13 @@ feature "Materials" do
   scenario 'update an existent material' do
     make_dependencies!
 
+    # Ensure the update of code
+    # begin (do not change this order)
+    Material.make!(:balde)
     Material.make!(:manga)
+    Material.make!(:cadeira)
+    # end
+
     ReferenceUnit.make!(:metro)
     MaterialsGroup.make!(:limpeza)
     MaterialsClass.make!(:pecas)
@@ -134,6 +140,7 @@ feature "Materials" do
 
     page.should have_field 'Grupo', :with => '02 - Limpeza'
     page.should have_field 'Classe', :with => '02 - Peças'
+    page.should have_field 'Código', :with => '02023'
     page.should have_field 'Nome', :with => 'Parafuso'
     page.should have_field 'Descrição', :with => 'de rosca'
     page.should have_field 'Estoque mínimo', :with => '20'
@@ -157,7 +164,7 @@ feature "Materials" do
 
     click_link 'Manga'
 
-    click_link 'Apagar 01 - Manga', :confirm => true
+    click_link 'Apagar 01011 - Manga', :confirm => true
 
     page.should have_notice 'Material apagado com sucesso.'
 

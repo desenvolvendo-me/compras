@@ -26,7 +26,7 @@ class MaterialCodeGenerator
 
     group_id = materials_group.id
     class_id = materials_class.id
-    previous = material_storage.order { id }.where { materials_group_id.eq(group_id) & materials_class_id.eq(class_id) }.last
+    previous = material_storage.order { code }.where { materials_group_id.eq(group_id) & materials_class_id.eq(class_id) }.last
 
     if previous
       return previous.code.gsub("#{group_number}#{class_number}", '').to_i + 1

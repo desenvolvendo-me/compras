@@ -1,7 +1,7 @@
 Material.blueprint(:manga) do
   materials_group { MaterialsGroup.make!(:alimenticios) }
   materials_class { MaterialsClass.make!(:hortifrutigranjeiros) }
-  code { "01" }
+  code { "01011" }
   name { "Manga" }
   description { "Fruta manga" }
   minimum_stock_balance { 100 }
@@ -20,12 +20,29 @@ end
 Material.blueprint(:cadeira) do
   materials_group { MaterialsGroup.make!(:limpeza) }
   materials_class { MaterialsClass.make!(:pecas) }
-  code { "02" }
+  code { "02021" }
   name { "Cadeira" }
   description { "Cadeira de escritorio" }
   minimum_stock_balance { 100 }
   reference_unit { ReferenceUnit.make!(:unidade) }
   manufacturer { "Moveis" }
+  perishable { true }
+  storable { true }
+  combustible { false }
+  material_characteristic { "material" }
+  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  material_type { 'consumption' }
+  stn_ordinance { "portaria" }
+  expense_element { "elemento" }
+end
+
+Material.blueprint(:balde) do
+  materials_group { MaterialsGroup.make!(:limpeza) }
+  materials_class { MaterialsClass.make!(:pecas) }
+  code { "02022" }
+  name { "Balde" }
+  minimum_stock_balance { 100 }
+  reference_unit { ReferenceUnit.make!(:unidade) }
   perishable { true }
   storable { true }
   combustible { false }
