@@ -51,6 +51,7 @@ describe PurchaseSolicitation do
 
   context "validations" do
     it { should validate_presence_of :accounting_year }
+    it { should validate_numericality_of :accounting_year }
     it { should validate_presence_of :request_date }
     it { should validate_presence_of :delivery_location_id }
     it { should validate_presence_of :responsible_id }
