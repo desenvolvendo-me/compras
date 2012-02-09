@@ -19,7 +19,7 @@ feature "Organograms" do
     click_link 'Criar Organograma'
 
     within_tab 'Informações' do
-      fill_in 'Nome', :with => 'Secretaria de Educação'
+      fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
       fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
       fill_in 'Organograma', :with => '02.00'
@@ -52,7 +52,7 @@ feature "Organograms" do
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
-      page.should have_field 'Nome', :with => 'Secretaria de Educação'
+      page.should have_field 'Descrição', :with => 'Secretaria de Educação'
       page.should have_field 'Sigla', :with => 'SEMUEDU'
       page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.00'
@@ -91,7 +91,7 @@ feature "Organograms" do
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
-      fill_in 'Nome', :with => 'Secretaria de Transporte'
+      fill_in 'Descrição', :with => 'Secretaria de Transporte'
       fill_in 'Sigla', :with => 'SEMUTRA'
       fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
       fill_in 'Organograma', :with => '02.11'
@@ -122,7 +122,7 @@ feature "Organograms" do
     click_link 'Secretaria de Transporte'
 
     within_tab 'Informações' do
-      page.should have_field 'Nome', :with => 'Secretaria de Transporte'
+      page.should have_field 'Descrição', :with => 'Secretaria de Transporte'
       page.should have_field 'Sigla', :with => 'SEMUTRA'
       page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.11'

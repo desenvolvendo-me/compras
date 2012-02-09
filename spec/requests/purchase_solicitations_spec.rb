@@ -24,7 +24,7 @@ feature "PurchaseSolicitations" do
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação'
+      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
@@ -131,7 +131,7 @@ feature "PurchaseSolicitations" do
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação'
+      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -264,7 +264,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Ano', :with => '2013'
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento'
+      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"

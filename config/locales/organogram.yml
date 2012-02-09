@@ -11,7 +11,7 @@ pt-BR:
         organogram: "Organograma"
         organogram_kind: "Tipo"
         tce_code: "Código TCE"
-        name: "Nome"
+        description: "Descrição"
         acronym: "Sigla"
         administration_type: "Tipo de administração"
         performance_field: "Área de atuação"

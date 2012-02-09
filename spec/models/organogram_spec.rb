@@ -6,12 +6,12 @@ require 'app/models/purchase_solicitation'
 require 'app/models/organogram_responsible'
 
 describe Organogram do
-  it 'should respond to to_s with name' do
-    subject.name = 'Secretaria de Educação'
+  it 'should respond to to_s with description' do
+    subject.description = 'Secretaria de Educação'
     subject.to_s.should eq 'Secretaria de Educação'
   end
 
-  it { should validate_presence_of :name }
+  it { should validate_presence_of :description }
   it { should validate_presence_of :organogram }
   it { should validate_presence_of :tce_code }
   it { should validate_presence_of :acronym }
