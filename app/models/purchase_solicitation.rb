@@ -7,7 +7,7 @@ class PurchaseSolicitation < ActiveRecord::Base
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
                  :organogram
 
-  delegate :amount, :to => :budget_allocation, :prefix => true, :allow_nil => true
+  delegate :amount, :name, :id, :to => :budget_allocation, :prefix => true, :allow_nil => true
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
@@ -34,14 +34,6 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
-
-  def budget_allocation_name
-    budget_allocation.try(:name)
-  end
-
-  def budget_allocation_id
-    budget_allocation.try(:id)
-  end
 
   def to_s
     justification
