@@ -57,6 +57,9 @@ describe PurchaseSolicitation do
     it { should validate_presence_of :responsible_id }
     it { should validate_presence_of :kind }
 
+    it { should_not allow_value('a2012').for(:accounting_year) }
+    it { should allow_value('2012').for(:accounting_year) }
+
     it "the items with the same material should be invalid except the first" do
       item_one = subject.items.build(:material_id => 1)
       item_two = subject.items.build(:material_id => 1)
