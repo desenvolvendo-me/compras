@@ -27,7 +27,7 @@ class PurchaseSolicitation < ActiveRecord::Base
             :delivery_location, :kind, :delivery_location_id, :presence => true
   validate :cannot_have_more_than_once_item_with_the_same_material
   validate :cannot_have_duplicated_budget_allocations
-  validate :sum_of_items_must_be_equal_to_sum_of_allocations
+  validate :budget_allocations_total_value_must_be_equal_to_items_total_value
 
   orderize :request_date
   filterize
@@ -78,7 +78,7 @@ class PurchaseSolicitation < ActiveRecord::Base
    end
   end
 
-  def sum_of_items_must_be_equal_to_sum_of_allocations
+  def budget_allocations_total_value_must_be_equal_to_items_total_value
     return if budget_allocation_id?
 
     if items_total_value != budget_allocations_total_value
