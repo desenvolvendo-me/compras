@@ -24,6 +24,13 @@ module Helpers
     page.execute_script %{document.getElementById('#{field[:id]}').value = '#{options[:with]}'}
   end
 
+  def clear_modal(locator)
+    page.should have_field locator
+
+    field = page.find_field(locator)
+    page.execute_script %{ $('##{field[:id]}').modal('clear') }
+  end
+
   # Open a modal dialog and search the record
   #
   # ==== Examples
