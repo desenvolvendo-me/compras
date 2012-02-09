@@ -34,7 +34,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Saldo da dotação', :with => '500,00'
       # end of javascript test
 
-      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Nome'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
@@ -134,7 +134,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Nome'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
@@ -267,7 +267,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
-      fill_modal 'Local para entrega', :with => 'Secretaria da Saúde'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end

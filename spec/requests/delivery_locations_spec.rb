@@ -15,7 +15,7 @@ feature "DeliveryLocations" do
 
     click_link 'Criar Local de Entrega'
 
-    fill_in 'Nome', :with => 'Secretaria da Educação'
+    fill_in 'Descrição', :with => 'Secretaria da Educação'
     fill_modal 'Logradouro', :with => 'Girassol'
     fill_in 'Número', :with => '13'
     fill_in 'Bloco', :with => '20'
@@ -38,7 +38,7 @@ feature "DeliveryLocations" do
 
     click_link 'Secretaria da Educação'
 
-    page.should have_field 'Nome', :with => 'Secretaria da Educação'
+    page.should have_field 'Descrição', :with => 'Secretaria da Educação'
     page.should have_field 'Logradouro', :with => 'Girassol'
     page.should have_field 'Número', :with => '13'
     page.should have_field 'Bloco', :with => '20'
@@ -63,7 +63,7 @@ feature "DeliveryLocations" do
 
     click_link 'Secretaria da Educação'
 
-    fill_in 'Nome', :with => 'Secretaria da Saúde'
+    fill_in 'Descrição', :with => 'Secretaria da Saúde'
     fill_modal 'Logradouro', :with => 'Girassol'
     fill_in 'Número', :with => '13'
     fill_in 'Bloco', :with => '20'
@@ -86,7 +86,7 @@ feature "DeliveryLocations" do
 
     click_link 'Secretaria da Saúde'
 
-    page.should have_field 'Nome', :with => 'Secretaria da Saúde'
+    page.should have_field 'Descrição', :with => 'Secretaria da Saúde'
     page.should have_field 'Logradouro', :with => 'Girassol'
     page.should have_field 'Número', :with => '13'
     page.should have_field 'Bloco', :with => '20'
@@ -126,7 +126,7 @@ feature "DeliveryLocations" do
 
     click_link 'Criar Local de Entrega'
 
-    fill_in 'Nome', :with => 'Secretaria da Saúde'
+    fill_in 'Descrição', :with => 'Secretaria da Saúde'
     fill_modal 'Logradouro', :with => 'Girassol'
     fill_in 'Número', :with => '13'
     fill_in 'Bloco', :with => '20'

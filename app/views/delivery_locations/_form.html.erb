@@ -1,4 +1,4 @@
-<%= f.input :name %>
+<%= f.input :description %>
 
 <%= f.association :address, :collection => f.object.address do |a| %>
   <%= render "addresses/address", :a => a %>

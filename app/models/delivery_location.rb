@@ -1,20 +1,20 @@
 class DeliveryLocation < ActiveRecord::Base
-  attr_accessible :address_attributes, :name
+  attr_accessible :address_attributes, :description
 
-  attr_modal :name
+  attr_modal :description
 
   belongs_to :address
   has_many :purchase_solicitations
 
   accepts_nested_attributes_for :address
 
-  validates :address, :name, :presence => true
-  validates :name, :uniqueness => true
+  validates :address, :description, :presence => true
+  validates :description, :uniqueness => true
 
-  orderize
+  orderize :description
   filterize
 
   def to_s
-    name
+    description
   end
 end

@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       delivery_location:
-        name: "Nome"
+        description: "Descrição"
         address: "Endereço"
