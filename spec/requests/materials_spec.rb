@@ -15,7 +15,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
+    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
     fill_in 'Nome', :with => 'Caixa'
     fill_in 'Descrição', :with => 'description'
@@ -69,7 +69,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
+    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
     fill_in 'Nome', :with => 'Caixa'
     fill_in 'Descrição', :with => 'description'
@@ -112,7 +112,7 @@ feature "Materials" do
 
     click_link 'Manga'
 
-    fill_modal 'Grupo', :with => 'Limpeza', :field => 'Nome'
+    fill_modal 'Grupo', :with => 'Limpeza', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Peças', :field => 'Descrição'
     fill_in 'Nome', :with => 'Parafuso'
     fill_in 'Descrição', :with => 'de rosca'
@@ -230,7 +230,7 @@ feature "Materials" do
 
     page.should have_disabled_field 'Classe'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
+    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
 
     page.should_not have_disabled_field 'Classe'
 
@@ -262,7 +262,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Nome'
+    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
 
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
 
