@@ -41,17 +41,35 @@
     $("#bt_allocation").change(toggleBudgetAllocations);
   })();
 
-  function calculateTotalItems() {
+  function budgetAllocationsTotalValue() {
     var total = 0,
         value;
+    $.each($('.allocation-price'), function(){
+      value = $(this).attr('value')
+      if (value != ''){
+        total += parsePtBrFloat(value);
+      }
+    });
+    return floatToPtBrString(total);
+  }
+
+  function itemsTotalValue() {
+    var total = 0,
+    value;
     $.each($('.item-price'), function(){
       value = $(this).attr('value');
       if (value != ''){
         total += parsePtBrFloat(value);
       }
     });
-    $('#purchase_solicitation_items_total_value').val(floatToPtBrString(total))
+    return floatToPtBrString(total);
   }
-  calculateTotalItems()
-  $('a[href$="#budget-allocations"]').click(calculateTotalItems);
+
+  $('a[href$="#budget-allocations"]').click(function(){
+    $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
+  });
+
+  $('.allocation-price').live('keyup', function(){
+    $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
+  });
 </script>

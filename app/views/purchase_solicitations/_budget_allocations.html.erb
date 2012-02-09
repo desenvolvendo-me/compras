@@ -50,18 +50,4 @@
       $(inputs[2]).val(record.data("id"));
     }
   });
-
-  function calculateTotalAllocations() {
-    var total = 0,
-        value;
-    $.each($('.allocation-price'), function(){
-      value = $(this).attr('value')
-      if (value != ''){
-        total += parsePtBrFloat(value);
-      }
-    });
-    $('#purchase_solicitation_budget_allocations_total_value').val(floatToPtBrString(total))
-  }
-  calculateTotalAllocations();
-  $('.allocation-price').live('keyup', calculateTotalAllocations);
 </script>
