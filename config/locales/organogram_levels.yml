@@ -8,6 +8,6 @@ pt-BR:
     attributes:
       organogram_level:
         level: "Nível"
-        name: "Nome do Campo"
+        description: "Nome do Campo"
         digits: "Dígitos"
         organogram_separator: "Separador"
