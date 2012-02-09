@@ -17,8 +17,8 @@ feature "Materials" do
 
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
-    fill_in 'Nome', :with => 'Caixa'
-    fill_in 'Descrição', :with => 'description'
+    fill_in 'Descrição', :with => 'Caixa'
+    fill_in 'Descrição detalhada', :with => 'Uma caixa'
     fill_in 'Estoque mínimo', :with => '10'
     fill_modal 'Unidade de medida', :with => 'Unidade', :field => 'Descrição'
     fill_in 'Referência do fabricante', :with => 'manufacturer'
@@ -45,8 +45,8 @@ feature "Materials" do
 
     page.should have_field 'Grupo', :with => '01 - Generos alimenticios'
     page.should have_field 'Classe', :with => '01 - Hortifrutigranjeiros'
-    page.should have_field 'Nome', :with => 'Caixa'
-    page.should have_field 'Descrição', :with => 'description'
+    page.should have_field 'Descrição', :with => 'Caixa'
+    page.should have_field 'Descrição detalhada', :with => 'Uma caixa'
     page.should have_field 'Estoque mínimo', :with => '10'
     page.should have_field 'Unidade de medida', :with => 'Unidade'
     page.should have_field 'Referência do fabricante', :with => 'manufacturer'
@@ -71,8 +71,8 @@ feature "Materials" do
 
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
-    fill_in 'Nome', :with => 'Caixa'
-    fill_in 'Descrição', :with => 'description'
+    fill_in 'Descrição', :with => 'Caixa'
+    fill_in 'Descrição detalhada', :with => 'Outra descrição'
     fill_in 'Estoque mínimo', :with => '10'
     fill_modal 'Unidade de medida', :with => 'Unidade', :field => 'Descrição'
     fill_in 'Referência do fabricante', :with => 'manufacturer'
@@ -114,8 +114,8 @@ feature "Materials" do
 
     fill_modal 'Grupo', :with => 'Limpeza', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Peças', :field => 'Descrição'
-    fill_in 'Nome', :with => 'Parafuso'
-    fill_in 'Descrição', :with => 'de rosca'
+    fill_in 'Descrição', :with => 'Parafuso'
+    fill_in 'Descrição detalhada', :with => 'de rosca'
     fill_in 'Estoque mínimo', :with => '20'
     fill_modal 'Unidade de medida', :with => 'Metro', :field => 'Descrição'
     fill_in 'Referência do fabricante', :with => 'outro fabricante'
@@ -141,8 +141,8 @@ feature "Materials" do
     page.should have_field 'Grupo', :with => '02 - Limpeza'
     page.should have_field 'Classe', :with => '02 - Peças'
     page.should have_field 'Código', :with => '02023'
-    page.should have_field 'Nome', :with => 'Parafuso'
-    page.should have_field 'Descrição', :with => 'de rosca'
+    page.should have_field 'Descrição', :with => 'Parafuso'
+    page.should have_field 'Descrição detalhada', :with => 'de rosca'
     page.should have_field 'Estoque mínimo', :with => '20'
     page.should have_field 'Unidade de medida', :with => 'Metro', :field => 'Descrição'
     page.should have_field 'Referência do fabricante', :with => 'outro fabricante'
@@ -180,7 +180,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_in 'Nome', :with => 'Manga'
+    fill_in 'Descrição', :with => 'Manga'
 
     click_button 'Criar Material'
 

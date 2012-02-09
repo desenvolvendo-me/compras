@@ -46,7 +46,7 @@ feature "PurchaseSolicitations" do
       page.should have_disabled_field "Número do processo de compra"
       page.should have_disabled_field "Status"
 
-      fill_modal 'Material', :with => "Cadeira"
+      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
@@ -146,7 +146,7 @@ feature "PurchaseSolicitations" do
       page.should have_disabled_field "Número do processo de compra"
       page.should have_disabled_field "Status"
 
-      fill_modal 'Material', :with => "Cadeira"
+      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
@@ -277,7 +277,7 @@ feature "PurchaseSolicitations" do
 
       click_button "Adicionar Item"
 
-      fill_modal 'Material', :with => "Manga"
+      fill_modal 'Material', :with => "Manga", :field => "Descrição"
       page.should have_field 'Unidade de referência', :with => "Quilos"
       fill_in 'Quantidade', :with => "500"
       fill_in 'Preço unitário', :with => "2,00"
@@ -302,7 +302,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => "01011 - Manga"
+      page.should have_field 'Material', :with => "01011 - Manga", :field => "Descrição"
       page.should have_field 'Quantidade', :with => "500"
       page.should have_field 'Preço unitário', :with => "2,00"
       page.should have_field 'Preço total estimado', :with => "1.000,00"
@@ -395,7 +395,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Itens' do
       click_button "Adicionar Item"
 
-      fill_modal 'purchase_solicitation_items_attributes_fresh-0_material', :with => "Cadeira"
+      fill_modal 'purchase_solicitation_items_attributes_fresh-0_material', :with => "Cadeira", :field => "Descrição"
       fill_in 'purchase_solicitation_items_attributes_fresh-0_quantity', :with => "5"
       fill_in 'purchase_solicitation_items_attributes_fresh-0_unit_price', :with => "100,00"
       fill_in 'purchase_solicitation_items_attributes_fresh-0_estimated_total_price', :with => "500,00"

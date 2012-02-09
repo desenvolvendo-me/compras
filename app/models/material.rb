@@ -1,11 +1,11 @@
 class Material < ActiveRecord::Base
-  attr_accessible :materials_group_id, :materials_class_id, :code, :name, :description, :minimum_stock_balance,
+  attr_accessible :materials_group_id, :materials_class_id, :code, :description, :detailed_description, :minimum_stock_balance,
                   :reference_unit_id, :manufacturer, :perishable, :storable, :combustible,
                   :material_characteristic, :service_or_contract_type_id, :material_type, :stn_ordinance, :expense_element
 
   attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_class, :reference_unit, :service_or_contract_type
 
-  attr_modal :name
+  attr_modal :description
 
   belongs_to :materials_group
   belongs_to :materials_class
@@ -13,12 +13,12 @@ class Material < ActiveRecord::Base
   belongs_to :service_or_contract_type
   has_many :purchase_solicitation_items
 
-  orderize
+  orderize :description
   filterize
 
   validates :materials_group_id, :materials_class_id, :reference_unit_id, :material_characteristic, :presence => true
   validates :code, :presence => true, :uniqueness => true, :numericality => true
-  validates :name, :presence => true, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?
   validates :service_or_contract_type, :presence => true, :if => :service?
   validate  :class_must_belong_to_group
@@ -29,7 +29,7 @@ class Material < ActiveRecord::Base
   before_save :clean_unnecessary_type
 
   def to_s
-    "#{code} - #{name}"
+    "#{code} - #{description}"
   end
 
   protected
