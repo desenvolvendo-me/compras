@@ -9,7 +9,7 @@ class MaterialsGroup < ActiveRecord::Base
   filterize
 
   validates :description, :presence => true, :uniqueness => true
-  validates :group_number, :presence => true, :uniqueness => true, :numericality => true
+  validates :group_number, :presence => true, :uniqueness => true, :numericality => true, :mask => '99'
 
   def to_s
     "#{group_number} - #{description}"

@@ -12,4 +12,8 @@ describe MaterialsGroup do
   it { should validate_presence_of :group_number }
   it { should validate_numericality_of :group_number }
   it { should validate_presence_of :description }
+
+  it { should_not allow_value('a2').for(:group_number) }
+  it { should_not allow_value('902').for(:group_number) }
+  it { should allow_value('02').for(:group_number) }
 end
