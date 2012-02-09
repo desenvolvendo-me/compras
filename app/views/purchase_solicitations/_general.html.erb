@@ -54,6 +54,8 @@
     if (data){
       var record = data.record;
       $('#purchase_solicitation_budget_allocation_amount').val(record.data("amount"));
+    } else {
+      $('#purchase_solicitation_budget_allocation_amount').val('');
     }
   });
 </script>

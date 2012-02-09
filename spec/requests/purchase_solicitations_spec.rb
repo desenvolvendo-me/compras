@@ -426,6 +426,10 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'clean the budget amount when removing budget allocation' do
+    pending
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     BudgetAllocation.make!(:alocacao)
