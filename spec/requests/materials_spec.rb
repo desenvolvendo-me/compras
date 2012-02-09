@@ -27,10 +27,10 @@ feature "Materials" do
 
     # testing javascript
     select 'Material', :from => 'Característica'
-    page.should_not have_field 'Tipo de serviço'
+    page.should have_disabled_field 'Tipo de serviço'
 
     select 'Serviço', :from => 'Característica'
-    page.should_not have_field 'Tipo de material'
+    page.should have_disabled_field 'Tipo de material'
     #end of javascript test
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
@@ -55,7 +55,7 @@ feature "Materials" do
     page.should_not have_checked_field 'Material combustível'
     page.should have_select 'Característica', :with => 'Material'
     page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
-    page.should_not have_field 'Tipo de material'
+    page.should have_disabled_field 'Tipo de material'
     page.should have_field 'Portaria STN', :with => 'stn_ordinance'
     page.should have_field 'Elemento de despesa', :with => 'expense_element'
   end
@@ -119,7 +119,7 @@ feature "Materials" do
     select 'Material', :from => 'Característica'
 
     # testing javascript
-    page.should_not have_field 'Tipo de serviço'
+    page.should have_disabled_field 'Tipo de serviço'
     # end of javascript test
 
     select 'De consumo', :from => 'Tipo de material'
@@ -143,7 +143,7 @@ feature "Materials" do
     page.should_not have_checked_field 'Material estocável'
     page.should have_checked_field 'Material combustível'
     page.should have_select 'Característica', :with => 'Serviço'
-    page.should_not have_field 'Tipo de serviço'
+    page.should have_disabled_field 'Tipo de serviço'
     page.should have_select 'Tipo de material', :with => 'De consumo'
     page.should have_field 'Portaria STN', :with => 'outro'
     page.should have_field 'Elemento de despesa', :with => 'outro elemento'
