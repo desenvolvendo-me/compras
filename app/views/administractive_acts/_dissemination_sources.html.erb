@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th>
-        <%= DisseminationSource.human_attribute_name :name %>
+        <%= DisseminationSource.human_attribute_name :description %>
       </th>
       <th>
       </th>
@@ -19,13 +19,13 @@
 
   <tbody class="<%= f.sanitized_object_name %>_dissemination_source_records">
     <% f.object.dissemination_sources.each do |dissemination_source| %>
-      <%= render 'dissemination_sources/list_form', :name => dissemination_source.name, :id => dissemination_source.id, :f => f %>
+      <%= render 'dissemination_sources/list_form', :description => dissemination_source.description, :id => dissemination_source.id, :f => f %>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache "#{f.sanitized_object_name}_dissemination_source_template" do %>
   <%= f.association :dissemination_sources, :collection => f.object.dissemination_sources.build do |p| %>
-    <%= render 'dissemination_sources/list_form', :name => '{{name}}', :id => '{{id}}', :f => f %>
+    <%= render 'dissemination_sources/list_form', :description => '{{description}}', :id => '{{id}}', :f => f %>
   <% end %>
 <% end %>

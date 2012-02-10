@@ -15,7 +15,7 @@ feature "DisseminationSources" do
 
     click_link 'Criar Fonte de Divulgação'
 
-    fill_in 'Nome', :with => 'Jornal Oficial do Município'
+    fill_in 'Descrição', :with => 'Jornal Oficial do Município'
     fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal', :field => 'Nome'
 
     click_button 'Criar Fonte de Divulgação'
@@ -24,11 +24,11 @@ feature "DisseminationSources" do
 
     click_link 'Jornal Oficial do Município'
 
-    page.should have_field 'Nome', :with => 'Jornal Oficial do Município'
+    page.should have_field 'Descrição', :with => 'Jornal Oficial do Município'
     page.should have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
   end
 
-  scenario 'validates uniqueness of name' do
+  scenario 'validates uniqueness of description' do
     DisseminationSource.make!(:jornal_municipal)
 
     click_link 'Cadastros Diversos'
@@ -37,7 +37,7 @@ feature "DisseminationSources" do
 
     click_link 'Criar Fonte de Divulgação'
 
-    fill_in 'Nome', :with => 'Jornal Oficial do Município'
+    fill_in 'Descrição', :with => 'Jornal Oficial do Município'
 
     click_button 'Criar Fonte de Divulgação'
 
@@ -55,7 +55,7 @@ feature "DisseminationSources" do
 
     click_link 'Jornal Oficial do Município'
 
-    fill_in 'Nome', :with => 'Jornal Não Oficial do Município'
+    fill_in 'Descrição', :with => 'Jornal Não Oficial do Município'
 
     click_button 'Atualizar Fonte de Divulgação'
 
@@ -63,7 +63,7 @@ feature "DisseminationSources" do
 
     click_link 'Jornal Não Oficial do Município'
 
-    page.should have_field 'Nome', :with => 'Jornal Não Oficial do Município'
+    page.should have_field 'Descrição', :with => 'Jornal Não Oficial do Município'
     page.should have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
   end
 

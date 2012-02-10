@@ -33,7 +33,7 @@ feature "AdministractiveActs" do
     end
 
     within_tab 'Fontes de divulgação' do
-      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Município'
+      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
     end
 
     click_button 'Criar Ato Administrativo'
@@ -95,7 +95,7 @@ feature "AdministractiveActs" do
     end
 
     within_tab 'Fontes de divulgação' do
-      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Bairro'
+      fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Bairro', :field => 'Descrição'
     end
 
     click_button 'Atualizar Ato Administrativo'
