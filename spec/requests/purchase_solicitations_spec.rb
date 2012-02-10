@@ -164,7 +164,6 @@ feature "PurchaseSolicitations" do
         fill_modal 'Dotação', :with => 'Alocação'
         fill_in 'Compl. do el. da despesa', :with => '50,00'
         fill_in 'Valor previsto', :with => '200,00'
-        select "Não", :from => "Bloquear"
       end
 
       click_button "Adicionar"
@@ -173,7 +172,6 @@ feature "PurchaseSolicitations" do
         fill_modal 'Dotação', :with => 'Alocação extra'
         fill_in 'Compl. do el. da despesa', :with => '50,00'
         fill_in 'Valor previsto', :with => '300,00'
-        select "Não", :from => "Bloquear"
       end
 
       # testing javascript total allocations calculation
