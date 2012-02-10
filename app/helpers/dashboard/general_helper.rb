@@ -42,6 +42,7 @@ module Dashboard::GeneralHelper
       m.purchase_solicitations
       m.legal_natures
       m.legal_text_natures
+      m.currencies
     end
   end
 end
