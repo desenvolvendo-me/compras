@@ -15,6 +15,9 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
+    page.should have_disabled_field 'Tipo de material'
+    page.should have_disabled_field 'Tipo de serviço'
+
     fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Caixa'
