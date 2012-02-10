@@ -17,7 +17,7 @@ feature "AdministractiveActs" do
 
     within_tab "Principal" do
       fill_in 'Número', :with => '1234'
-      fill_modal 'Tipo', :with => 'Lei', :field => 'Nome'
+      fill_modal 'Tipo', :with => 'Lei', :field => 'Descrição'
       fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Cívica', :field => 'Descrição'
       fill_in 'Data da criação', :with => '01/01/2012'
       fill_in 'Data da publicação', :with => '02/01/2012'
@@ -79,7 +79,7 @@ feature "AdministractiveActs" do
 
     within_tab 'Principal' do
       fill_in 'Número', :with => '6789'
-      fill_modal 'Tipo', :with => 'Emenda constitucional', :field => 'Nome'
+      fill_modal 'Tipo', :with => 'Emenda constitucional', :field => 'Descrição'
       fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Trabalhista', :field => 'Descrição'
       fill_in 'Data da criação', :with => '01/01/2013'
       fill_in 'Data da publicação', :with => '02/01/2013'

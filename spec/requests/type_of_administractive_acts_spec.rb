@@ -13,7 +13,7 @@ feature "TypeOfAdministractiveActs" do
 
     click_link 'Criar Tipo de Ato Administrativo'
 
-    fill_in 'Nome', :with => 'Lei'
+    fill_in 'Descrição', :with => 'Lei'
 
     click_button 'Criar Tipo de Ato Administrativo'
 
@@ -21,10 +21,10 @@ feature "TypeOfAdministractiveActs" do
 
     click_link 'Lei'
 
-    page.should have_field 'Nome', :with => 'Lei'
+    page.should have_field 'Descrição', :with => 'Lei'
   end
 
-  scenario 'validates uniqueness of name' do
+  scenario 'validates uniqueness of description' do
     TypeOfAdministractiveAct.make!(:lei)
 
     click_link 'Cadastros Diversos'
@@ -33,7 +33,7 @@ feature "TypeOfAdministractiveActs" do
 
     click_link 'Criar Tipo de Ato Administrativo'
 
-    fill_in 'Nome', :with => 'Lei'
+    fill_in 'Descrição', :with => 'Lei'
 
     click_button 'Criar Tipo de Ato Administrativo'
 
@@ -51,7 +51,7 @@ feature "TypeOfAdministractiveActs" do
 
     click_link 'Lei'
 
-    fill_in 'Nome', :with => 'Outra Lei'
+    fill_in 'Descrição', :with => 'Outra Lei'
 
     click_button 'Atualizar Tipo de Ato Administrativo'
 
@@ -59,7 +59,7 @@ feature "TypeOfAdministractiveActs" do
 
     click_link 'Outra Lei'
 
-    page.should have_field 'Nome', :with => 'Outra Lei'
+    page.should have_field 'Descrição', :with => 'Outra Lei'
   end
 
   scenario 'destroy an existent type_of_administractive_act' do

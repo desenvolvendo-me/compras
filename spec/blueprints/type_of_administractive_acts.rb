@@ -1,7 +1,7 @@
 TypeOfAdministractiveAct.blueprint(:lei) do
-  name { 'Lei' }
+  description { 'Lei' }
 end
 
 TypeOfAdministractiveAct.blueprint(:emenda) do
-  name { 'Emenda constitucional' }
+  description { 'Emenda constitucional' }
 end
