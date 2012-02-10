@@ -16,7 +16,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo', :with => '01', :field => 'Número do grupo'
-    fill_in 'Classe', :with => '01'
+    fill_in 'Número da classe', :with => '01'
     fill_in 'Descrição', :with => 'Materiais de Escritório'
     fill_in 'Detalhamento', :with => 'materiais para escritório'
 
@@ -27,7 +27,7 @@ feature "MaterialsClasses" do
     click_link 'Materiais de Escritório'
 
     page.should have_field 'Grupo', :with => '01 - Generos alimenticios'
-    page.should have_field 'Classe', :with => '01'
+    page.should have_field 'Número da classe', :with => '01'
     page.should have_field 'Descrição', :with => 'Materiais de Escritório'
     page.should have_field 'Detalhamento', :with => 'materiais para escritório'
   end
@@ -45,7 +45,7 @@ feature "MaterialsClasses" do
     click_link 'Hortifrutigranjeiros'
 
     fill_modal 'Grupo', :with => '02', :field => 'Número do grupo'
-    fill_in 'Classe', :with => '02'
+    fill_in 'Número da classe', :with => '02'
     fill_in 'Descrição', :with => 'Novo nome'
     fill_in 'Detalhamento', :with => 'descricao'
 
@@ -56,7 +56,7 @@ feature "MaterialsClasses" do
     click_link 'Novo nome'
 
     page.should have_field 'Grupo', :with => '02 - Limpeza'
-    page.should have_field 'Classe', :with => '02'
+    page.should have_field 'Número da classe', :with => '02'
     page.should have_field 'Descrição', :with => 'Novo nome'
     page.should have_field 'Detalhamento', :with => 'descricao'
   end
@@ -89,7 +89,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo', :with => '01', :field => 'Número do grupo'
-    fill_in 'Classe', :with => '01'
+    fill_in 'Número da classe', :with => '01'
 
     click_button 'Criar Classe de Materiais'
 
@@ -108,7 +108,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo', :with => '02', :field => 'Número do grupo'
-    fill_in 'Classe', :with => '01'
+    fill_in 'Número da classe', :with => '01'
 
     click_button 'Criar Classe de Materiais'
 
