@@ -374,7 +374,7 @@ feature "PurchaseSolicitations" do
 
     page.should_not have_content '2012'
     page.should_not have_content '31/01/2012'
-    page.should_not have_content 'Gabriel Sobrinho'
+    page.should_not have_content 'Wenderson Malheiros'
     page.should_not have_content 'Reparo nas instalações'
     page.should_not have_content 'Bens'
   end

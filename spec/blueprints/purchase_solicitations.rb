@@ -19,7 +19,7 @@ end
 PurchaseSolicitation.blueprint(:conserto) do
   accounting_year { "2012" }
   request_date { "2012-01-31" }
-  responsible { Employee.make!(:sobrinho) }
+  responsible { Employee.make!(:wenderson) }
   justification { "Reparo nas instalações" }
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria),
