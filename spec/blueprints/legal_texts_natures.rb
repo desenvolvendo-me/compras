@@ -1,8 +1,8 @@
 # encoding: utf-8
 LegalTextsNature.blueprint(:civica) do
-  name { "Natureza Cívica" }
+  description { "Natureza Cívica" }
 end
 
 LegalTextsNature.blueprint(:trabalhista) do
-  name { "Natureza Trabalhista" }
+  description { "Natureza Trabalhista" }
 end

@@ -1,16 +1,16 @@
 class LegalTextsNature < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :description
 
-  attr_modal :name
+  attr_modal :description
 
   has_many :administractive_acts
 
-  validates :name, :presence => true, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => true
 
-  orderize
+  orderize :description
   filterize
 
   def to_s
-    name
+    description
   end
 end

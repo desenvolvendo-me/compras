@@ -13,7 +13,7 @@ feature "LegalTextsNatures" do
 
     click_link 'Criar Natureza de Textos Jurídicos'
 
-    fill_in 'Nome', :with => 'Natureza Cívica'
+    fill_in 'Descrição', :with => 'Natureza Cívica'
 
     click_button 'Criar Natureza de Textos Jurídicos'
 
@@ -21,7 +21,7 @@ feature "LegalTextsNatures" do
 
     click_link 'Natureza Cívica'
 
-    page.should have_field 'Nome', :with => 'Natureza Cívica'
+    page.should have_field 'Descrição', :with => 'Natureza Cívica'
   end
 
   scenario 'update an existent legal_texts_nature' do
@@ -33,7 +33,7 @@ feature "LegalTextsNatures" do
 
     click_link 'Natureza Cívica'
 
-    fill_in 'Nome', :with => 'Natureza Jurídica'
+    fill_in 'Descrição', :with => 'Natureza Jurídica'
 
     click_button 'Atualizar Natureza de Textos Jurídicos'
 
@@ -41,7 +41,7 @@ feature "LegalTextsNatures" do
 
     click_link 'Natureza Jurídica'
 
-    page.should have_field 'Nome', :with => 'Natureza Jurídica'
+    page.should have_field 'Descrição', :with => 'Natureza Jurídica'
   end
 
   scenario 'destroy an existent legal_texts_nature' do
@@ -68,7 +68,7 @@ feature "LegalTextsNatures" do
 
     click_link 'Criar Natureza de Textos Jurídicos'
 
-    fill_in 'Nome', :with => 'Natureza Cívica'
+    fill_in 'Descrição', :with => 'Natureza Cívica'
 
     click_button 'Criar Natureza de Textos Jurídicos'
 
