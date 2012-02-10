@@ -9,7 +9,6 @@ describe Material do
     subject.to_s.should eq '01 - Manga'
   end
 
-  it { should validate_presence_of :materials_group_id }
   it { should validate_presence_of :materials_class_id }
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
