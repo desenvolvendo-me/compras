@@ -3,6 +3,7 @@ class PurchaseSolicitationsController < CrudController
     object = build_resource
     object.service_status = PurchaseSolicitationServiceStatus::PENDING
     object.request_date = Date.current
+    object.accounting_year = Date.current.year
 
     super
   end
