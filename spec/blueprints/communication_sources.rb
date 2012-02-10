@@ -1,4 +1,8 @@
 # encoding: utf-8
 CommunicationSource.blueprint(:jornal_municipal) do
-  name { 'Jornal de Circulação Municipal' }
+  description { 'Jornal de Circulação Municipal' }
+end
+
+CommunicationSource.blueprint(:jornal_estadual) do
+  description { 'Jornal de Circulação Estadual' }
 end

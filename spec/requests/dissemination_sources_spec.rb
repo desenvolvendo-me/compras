@@ -16,7 +16,7 @@ feature "DisseminationSources" do
     click_link 'Criar Fonte de Divulgação'
 
     fill_in 'Descrição', :with => 'Jornal Oficial do Município'
-    fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal', :field => 'Nome'
+    fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal', :field => 'Descrição'
 
     click_button 'Criar Fonte de Divulgação'
 

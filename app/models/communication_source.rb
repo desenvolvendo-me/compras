@@ -1,15 +1,14 @@
 class CommunicationSource < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :description
 
   has_many :dissemination_sources
 
-  validates :name, :presence => true
-  validates :name, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => true
 
   filterize
-  orderize
+  orderize :description
 
   def to_s
-    name
+    description
   end
 end
