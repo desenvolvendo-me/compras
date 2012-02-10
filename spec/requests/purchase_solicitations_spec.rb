@@ -2,6 +2,10 @@
 require 'spec_helper'
 
 feature "PurchaseSolicitations" do
+  let :current_user do
+    User.make!(:sobrinho_as_admin_and_employee)
+  end
+
   background do
     sign_in
   end
@@ -329,6 +333,18 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Preço unitário', :with => "2,00"
       page.should have_field 'Preço total estimado', :with => "1.000,00"
       page.should have_select 'Status', :selected => 'Pendente'
+    end
+  end
+
+  scenario 'should be current_user employee attribute as default responsible' do
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
     end
   end
 
