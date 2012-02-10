@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       organogram:
-        configuration_organogram: "Configuração de organograma"
+        organogram_configuration: "Configuração de organograma"
         organogram: "Organograma"
         organogram_kind: "Tipo"
         tce_code: "Código TCE"

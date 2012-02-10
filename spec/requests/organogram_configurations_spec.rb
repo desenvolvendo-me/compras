@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "ConfigurationOrganograms" do
+feature "OrganogramConfigurations" do
   background do
     sign_in
   end
 
-  scenario 'create a new configuration_organogram' do
+  scenario 'create a new organogram_configuration' do
     Entity.make!(:detran)
     AdministractiveAct.make!(:sopa)
 
@@ -81,8 +81,8 @@ feature "ConfigurationOrganograms" do
     page.should have_field 'Máscara', :with => '999.99'
   end
 
-  scenario 'update an existent configuration_organogram' do
-    ConfigurationOrganogram.make!(:detran_sopa)
+  scenario 'update an existent organogram_configuration' do
+    OrganogramConfiguration.make!(:detran_sopa)
 
     click_link 'Cadastros Diversos'
 
@@ -103,8 +103,8 @@ feature "ConfigurationOrganograms" do
     page.should have_field 'Descrição', :with => 'Outro Nome da Configuração'
   end
 
-  scenario 'destroy an existent configuration_organogram' do
-    ConfigurationOrganogram.make!(:detran_sopa)
+  scenario 'destroy an existent organogram_configuration' do
+    OrganogramConfiguration.make!(:detran_sopa)
 
     click_link 'Cadastros Diversos'
 

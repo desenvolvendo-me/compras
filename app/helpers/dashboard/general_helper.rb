@@ -9,7 +9,7 @@ module Dashboard::GeneralHelper
       m.countries
       m.states
       m.communication_sources
-      m.configuration_organograms
+      m.organogram_configurations
       m.cities
       m.districts
       m.dissemination_sources

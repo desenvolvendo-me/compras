@@ -1,4 +1,4 @@
-<%= f.input :configuration_organogram %>
+<%= f.input :organogram_configuration %>
 <%= f.input :organogram, :input_html => { :"date-mask" => f.object.mask } %>
 
 <div class="yui3-g">
@@ -26,9 +26,9 @@
 
 <script>
   $('#organogram_configuration_organogram_id').change(function() {
-    var configuration_organogram_id = $('#organogram_configuration_organogram_id').attr('value');
-    if(configuration_organogram_id != '') {
-      $.getJSON('/configuration_organograms/'+configuration_organogram_id, function(data){
+    var organogram_configuration_id = $('#organogram_configuration_organogram_id').attr('value');
+    if(organogram_configuration_id != '') {
+      $.getJSON('/organogram_configurations/'+organogram_configuration_id, function(data){
         $('#organogram_organogram').mask(data.mask);
       });
     }

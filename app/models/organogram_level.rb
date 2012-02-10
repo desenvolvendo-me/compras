@@ -1,7 +1,7 @@
 class OrganogramLevel < ActiveRecord::Base
-  attr_accessible :level, :description, :digits, :organogram_separator, :configuration_organogram_id
+  attr_accessible :level, :description, :digits, :organogram_separator, :organogram_configuration_id
 
-  belongs_to :configuration_organogram
+  belongs_to :organogram_configuration
 
   validates :description, :level, :digits, :presence => true
 

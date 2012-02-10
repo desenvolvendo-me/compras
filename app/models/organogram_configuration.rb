@@ -1,4 +1,4 @@
-class ConfigurationOrganogram < ActiveRecord::Base
+class OrganogramConfiguration < ActiveRecord::Base
   attr_accessible :description, :entity_id, :administractive_act_id, :organogram_levels
   attr_accessible :organogram_levels_attributes
 

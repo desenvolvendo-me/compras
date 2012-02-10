@@ -145,7 +145,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :configuration_organograms do
+  resources :organogram_configurations do
     collection do
       get :filter
       get :modal

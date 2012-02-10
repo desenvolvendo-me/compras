@@ -1,5 +1,5 @@
 # encoding: utf-8
-ConfigurationOrganogram.blueprint(:detran_sopa) do
+OrganogramConfiguration.blueprint(:detran_sopa) do
   entity { Entity.make!(:detran) }
   administractive_act { AdministractiveAct.make!(:sopa) }
   description { 'Configuração do Detran' }

@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      configuration_organogram:
+      organogram_configuration:
         one: "Configuração de Organograma"
         other: "Configurações de Organograma"
 
     attributes:
-      configuration_organogram:
+      organogram_configuration:
         entity: "Entidade"
         administractive_act: "Ato administrativo"
         description: "Descrição"

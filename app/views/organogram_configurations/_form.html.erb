@@ -21,7 +21,7 @@
       for(i = 1; i <= this[1]; i++) { mask += '9'; };
       if((index+1) < levels.length) { mask += this[2]; }
     });
-    $('#configuration_organogram_mask').attr('value', mask);
+    $('#organogram_configuration_mask').attr('value', mask);
   }
 
   $('#organogram_levels').delegate('input:visible.numeric', 'keyup', calculeMask);

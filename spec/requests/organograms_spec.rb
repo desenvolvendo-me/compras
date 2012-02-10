@@ -7,7 +7,7 @@ feature "Organograms" do
   end
 
   scenario 'create a new organogram' do
-    ConfigurationOrganogram.make!(:detran_sopa)
+    OrganogramConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
     Employee.make!(:sobrinho)
