@@ -31,8 +31,7 @@ class MaterialCodeGenerator
   end
 
   def previous_material
-   @previous_material ||= material_storage.last_by_materials_class_and_group(:materials_group_id => materials_group.id,
-                                                                             :materials_class_id => materials_class.id)
+   @previous_material ||= material_storage.last_by_materials_class_and_group(:materials_class_id => materials_class.id)
   end
 
   def materials_code_can_changed?

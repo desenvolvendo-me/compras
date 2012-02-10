@@ -1,11 +1,13 @@
 class Material < ActiveRecord::Base
-  attr_accessible :materials_group_id, :materials_class_id, :code, :description, :detailed_description, :minimum_stock_balance,
+  attr_accessible :materials_class_id, :code, :description, :detailed_description, :minimum_stock_balance,
                   :reference_unit_id, :manufacturer, :perishable, :storable, :combustible,
                   :material_characteristic, :service_or_contract_type_id, :material_type, :stn_ordinance, :expense_element
 
-  attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_class, :reference_unit, :service_or_contract_type
+  attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_group_id, :materials_class, :reference_unit, :service_or_contract_type
 
   attr_modal :description
+
+  delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
 
   belongs_to :materials_group
   belongs_to :materials_class
@@ -34,7 +36,6 @@ class Material < ActiveRecord::Base
 
   def self.last_by_materials_class_and_group(params = {})
     record = scoped
-    record = record.where { materials_group_id.eq(params.fetch(:materials_group_id)) }
     record = record.where { materials_class_id.eq(params.fetch(:materials_class_id)) }
     record = record.order { code }.last
     record
