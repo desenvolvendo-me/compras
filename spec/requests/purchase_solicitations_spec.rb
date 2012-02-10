@@ -223,6 +223,18 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'should show date current as request date' do
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Data da solicitação', :with => I18n.l(Date.current)
+    end
+  end
+
   scenario 'showing a message for no extra allocation when allocation is selected on general tab' do
     pending "Don't work with hidden alements"
     make_dependencies!
