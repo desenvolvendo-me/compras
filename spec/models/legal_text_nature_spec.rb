@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/legal_texts_nature'
+require 'app/models/legal_text_nature'
 
-describe LegalTextsNature do
+describe LegalTextNature do
   it { should validate_presence_of :description }
 
   it { should have_many :administractive_acts }

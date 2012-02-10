@@ -1,4 +1,4 @@
-class LegalTextsNature < ActiveRecord::Base
+class LegalTextNature < ActiveRecord::Base
   attr_accessible :description
 
   attr_modal :description

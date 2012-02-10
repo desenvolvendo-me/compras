@@ -1,0 +1,2 @@
+class LegalTextNaturesController < CrudController
+end

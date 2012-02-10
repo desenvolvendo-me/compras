@@ -1,23 +1,23 @@
 class AdministractiveAct < ActiveRecord::Base
-  attr_accessible :act_number, :type_of_administractive_act_id, :creation_date, :legal_texts_nature_id,
+  attr_accessible :act_number, :type_of_administractive_act_id, :creation_date, :legal_text_nature_id,
                   :publication_date, :vigor_date, :end_date, :content, :budget_law_percent,
                   :revenue_antecipation_percent, :authorized_debt_value, :dissemination_source_ids
 
-  attr_protected :type_of_administractive_act, :legal_texts_nature
+  attr_protected :type_of_administractive_act, :legal_text_nature
 
   attr_accessor :dissemination_source
 
-  attr_modal :act_number, :type_of_administractive_act, :legal_texts_nature
+  attr_modal :act_number, :type_of_administractive_act, :legal_text_nature
 
   belongs_to :type_of_administractive_act
-  belongs_to :legal_texts_nature
+  belongs_to :legal_text_nature
 
   has_and_belongs_to_many :dissemination_sources
 
   orderize :act_number
   filterize
 
-  validates :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date, :legal_texts_nature_id,
+  validates :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date, :legal_text_nature_id,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
   validates :content, :uniqueness => true
   validates :act_number, :presence => true, :uniqueness => true, :numericality => true

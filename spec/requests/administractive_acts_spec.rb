@@ -69,7 +69,7 @@ feature "AdministractiveActs" do
     TypeOfAdministractiveAct.make!(:emenda)
     AdministractiveAct.make!(:sopa)
     DisseminationSource.make!(:jornal_bairro)
-    LegalTextsNature.make!(:trabalhista)
+    LegalTextNature.make!(:trabalhista)
 
     click_link 'Cadastros Diversos'
 
@@ -200,6 +200,6 @@ feature "AdministractiveActs" do
   def make_dependencies!
     TypeOfAdministractiveAct.make!(:lei)
     DisseminationSource.make!(:jornal_municipal)
-    LegalTextsNature.make!(:civica)
+    LegalTextNature.make!(:civica)
   end
 end

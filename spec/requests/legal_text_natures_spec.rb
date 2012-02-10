@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "LegalTextsNatures" do
+feature "LegalTextNatures" do
   background do
     sign_in
   end
@@ -25,7 +25,7 @@ feature "LegalTextsNatures" do
   end
 
   scenario 'update an existent legal_texts_nature' do
-    LegalTextsNature.make!(:civica)
+    LegalTextNature.make!(:civica)
 
     click_link 'Cadastros Diversos'
 
@@ -45,7 +45,7 @@ feature "LegalTextsNatures" do
   end
 
   scenario 'destroy an existent legal_texts_nature' do
-    LegalTextsNature.make!(:civica)
+    LegalTextNature.make!(:civica)
     click_link 'Cadastros Diversos'
 
     click_link 'Naturezas de Textos Jurídicos'
@@ -60,7 +60,7 @@ feature "LegalTextsNatures" do
   end
 
   scenario 'validate uniqueness of name' do
-    LegalTextsNature.make!(:civica)
+    LegalTextNature.make!(:civica)
 
     click_link 'Cadastros Diversos'
 
