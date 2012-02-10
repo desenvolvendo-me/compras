@@ -7,7 +7,7 @@ feature "DisseminationSources" do
   end
 
   scenario 'create a new dissemination_source' do
-    CommunicationSource.make!(:jornal_municipal)
+    make_dependencies!
 
     click_link 'Cadastros Diversos'
 
@@ -48,6 +48,7 @@ feature "DisseminationSources" do
 
   scenario 'update an existent dissemination_source' do
     DisseminationSource.make!(:jornal_municipal)
+    CommunicationSource.make!(:jornal_estadual)
 
     click_link 'Cadastros Diversos'
 
@@ -57,6 +58,8 @@ feature "DisseminationSources" do
 
     fill_in 'Descrição', :with => 'Jornal Não Oficial do Município'
 
+    fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Estadual', :field => 'Descrição'
+
     click_button 'Atualizar Fonte de Divulgação'
 
     page.should have_notice 'Fonte de Divulgação editado com sucesso.'
@@ -64,7 +67,8 @@ feature "DisseminationSources" do
     click_link 'Jornal Não Oficial do Município'
 
     page.should have_field 'Descrição', :with => 'Jornal Não Oficial do Município'
-    page.should have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
+
+    page.should have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Estadual'
   end
 
   scenario 'destroy an existent dissemination_source' do
@@ -81,5 +85,9 @@ feature "DisseminationSources" do
 
     page.should_not have_content 'Jornal Oficial do Município'
     page.should_not have_content 'Jornal de Circulação Municipal'
+  end
+
+  def make_dependencies!
+    CommunicationSource.make!(:jornal_municipal)
   end
 end
