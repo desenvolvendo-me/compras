@@ -25,7 +25,7 @@ feature "Organograms" do
       fill_in 'Organograma', :with => '02.00'
       select 'Analítico', :from => 'Tipo'
       fill_in 'Código TCE', :with => '051'
-      fill_modal 'Tipo de administração', :with => 'Pública'
+      fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
       fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
 
@@ -97,7 +97,7 @@ feature "Organograms" do
       fill_in 'Organograma', :with => '02.11'
       select 'Sintético', :from => 'Tipo'
       fill_in 'Código TCE', :with => '081'
-      fill_modal 'Tipo de administração', :with => 'Executivo'
+      fill_modal 'Tipo de administração', :with => 'Executivo', :field => 'Descrição'
       fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 

@@ -15,7 +15,7 @@ feature "AdministrationTypes" do
 
     click_link 'Criar Tipo de Administração'
 
-    fill_in 'Nome', :with => 'Pública'
+    fill_in 'Descrição', :with => 'Pública'
     select 'Direta', :from => 'Administração'
     select 'Autarquia', :from => 'Tipo do órgão'
     fill_modal 'Natureza jurídica', :with => 'Administração Pública', :field => 'Nome'
@@ -26,7 +26,7 @@ feature "AdministrationTypes" do
 
     click_link 'Pública'
 
-    page.should have_field 'Nome', :with => 'Pública'
+    page.should have_field 'Descrição', :with => 'Pública'
     page.should have_select 'Administração', :with => 'Direta'
     page.should have_select 'Tipo do órgão', :with => 'Autarquia'
     page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
@@ -44,7 +44,7 @@ feature "AdministrationTypes" do
 
     click_link 'Pública'
 
-    fill_in 'Nome', :with => 'Privada'
+    fill_in 'Descrição', :with => 'Privada'
     select 'Indireta', :from => 'Administração'
     select 'Fundo especial', :from => 'Tipo do órgão'
     fill_modal 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal', :field => 'Nome'
@@ -55,7 +55,7 @@ feature "AdministrationTypes" do
 
     click_link 'Privada'
 
-    page.should have_field 'Nome', :with => 'Privada'
+    page.should have_field 'Descrição', :with => 'Privada'
     page.should have_select 'Administração', :with => 'Indireta'
     page.should have_select 'Tipo do órgão', :with => 'Fundo especial'
     page.should have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
@@ -76,7 +76,7 @@ feature "AdministrationTypes" do
     page.should_not have_content 'Pública'
   end
 
-  scenario 'validates uniqueness of name' do
+  scenario 'validates uniqueness of description' do
     AdministrationType.make!(:publica)
 
     click_link 'Cadastros Diversos'
@@ -85,7 +85,7 @@ feature "AdministrationTypes" do
 
     click_link 'Criar Tipo de Administração'
 
-    fill_in 'Nome', :with => 'Pública'
+    fill_in 'Descrição', :with => 'Pública'
 
     click_button 'Criar Tipo de Administração'
 

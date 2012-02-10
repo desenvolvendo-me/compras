@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       administration_type:
         code: "Código"
-        name: "Nome"
+        description: "Descrição"
         administration: "Administração"
         organ_type: "Tipo do órgão"
         legal_nature: "Natureza jurídica"
