@@ -1,7 +1,16 @@
-<%= f.input :description %>
 <%= f.input :entity %>
 <%= f.input :administractive_act %>
-<%= f.input :mask, :disabled => true %>
+
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :description %>
+  </div>
+  <div class="yui3-u-1-2">
+    <%= f.input :mask, :disabled => true %>
+  </div>
+</div>
+
 <%= render 'organogram_levels', :f => f %>
 
 <script>
