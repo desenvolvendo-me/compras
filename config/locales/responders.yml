@@ -84,3 +84,6 @@ pt-BR:
 
     settings:
       <<: *female
+
+    stn_ordinances:
+      <<: *female

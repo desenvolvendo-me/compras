@@ -43,6 +43,7 @@ module Dashboard::GeneralHelper
       m.legal_natures
       m.legal_text_natures
       m.currencies
+      m.stn_ordinances
     end
   end
 end

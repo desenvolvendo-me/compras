@@ -1,0 +1,2 @@
+class StnOrdinancesController < CrudController
+end
