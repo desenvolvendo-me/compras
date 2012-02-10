@@ -1,5 +1,4 @@
 Material.blueprint(:manga) do
-  materials_group { MaterialsGroup.make!(:alimenticios) }
   materials_class { MaterialsClass.make!(:hortifrutigranjeiros) }
   code { "01.01.00001" }
   description { "Manga" }
@@ -18,7 +17,6 @@ Material.blueprint(:manga) do
 end
 
 Material.blueprint(:cadeira) do
-  materials_group { MaterialsGroup.make!(:limpeza) }
   materials_class { MaterialsClass.make!(:pecas) }
   code { "02.02.00001" }
   description { "Cadeira" }
@@ -37,7 +35,6 @@ Material.blueprint(:cadeira) do
 end
 
 Material.blueprint(:balde) do
-  materials_group { MaterialsGroup.make!(:limpeza) }
   materials_class { MaterialsClass.make!(:pecas) }
   code { "02.02.00002" }
   description { "Balde" }
