@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/reference_unit'
+require 'app/models/material'
 
 describe ReferenceUnit do
   it 'return name when converted to string' do
@@ -20,6 +21,8 @@ describe ReferenceUnit do
     subject.acronym = 'U'
     subject.should be_valid
   end
+
+  it { should have_many(:materials).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :acronym }

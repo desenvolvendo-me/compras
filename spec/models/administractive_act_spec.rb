@@ -1,6 +1,9 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/administractive_act'
+require 'app/models/economic_classification_of_expenditure'
+require 'app/models/organogram_configuration'
+require 'app/models/organogram_responsible'
 
 describe AdministractiveAct do
   it 'should return act_number as to_s method' do
@@ -10,6 +13,10 @@ describe AdministractiveAct do
 
   it { should belong_to :type_of_administractive_act }
   it { should belong_to :legal_text_nature }
+  it { should have_many(:economic_classification_of_expenditures).dependent(:restrict) }
+  it { should have_many(:organogram_configurations).dependent(:restrict) }
+  it { should have_many(:organogram_responsibles).dependent(:restrict) }
+
   it { should have_and_belong_to_many :dissemination_sources}
   it { should validate_presence_of :act_number }
   it { should validate_presence_of :type_of_administractive_act_id }

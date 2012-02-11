@@ -2,6 +2,7 @@ class AdministrationType < ActiveRecord::Base
   attr_accessible :description, :administration, :organ_type, :legal_nature_id
 
   belongs_to :legal_nature
+  has_many :organograms, :dependent => :restrict
 
   orderize :description
   filterize

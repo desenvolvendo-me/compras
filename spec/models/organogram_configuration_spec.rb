@@ -3,12 +3,15 @@ require 'model_helper'
 require 'app/models/organogram_configuration'
 require 'app/models/organogram_level'
 require 'app/enumerations/organogram_separator'
+require 'app/models/organogram'
 
 describe OrganogramConfiguration do
   it 'should respond to to_s as description' do
     subject.description = 'Organograma 2012'
     subject.to_s.should eq 'Organograma 2012'
   end
+
+  it { should have_many(:organograms).dependent(:restrict) }
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :administractive_act_id }

@@ -4,6 +4,7 @@ class Employee < ActiveRecord::Base
   belongs_to :person
   has_one :user
   has_many :purchase_solicitations, :as => :responsible
+  has_many :organogram_responsibles, :as => :responsible
 
   validates :person_id, :registration, :presence => true, :uniqueness => true
 

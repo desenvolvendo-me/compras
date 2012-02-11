@@ -11,7 +11,9 @@ class AdministractiveAct < ActiveRecord::Base
 
   belongs_to :type_of_administractive_act
   belongs_to :legal_text_nature
-
+  has_many :economic_classification_of_expenditures, :dependent => :restrict
+  has_many :organogram_configurations, :dependent => :restrict
+  has_many :organogram_responsibles, :dependent => :restrict
   has_and_belongs_to_many :dissemination_sources
 
   orderize :act_number
