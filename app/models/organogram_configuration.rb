@@ -37,6 +37,8 @@ class OrganogramConfiguration < ActiveRecord::Base
     super.merge(:mask => mask)
   end
 
+  protected
+
   def organogram_separator_for_organogram_levels
     ordered_organogram_levels.each_with_index do |organogram_level, idx|
       if organogram_level.organogram_separator.blank? and (idx+1) < organogram_levels.size
