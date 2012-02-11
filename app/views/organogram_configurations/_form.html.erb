@@ -20,7 +20,7 @@
 
     $('#organogram_levels').children('.organogram-level').each(function() {
       var level = $(this).find('input.level').attr('value');
-      var digits = $(this).find('input.digits').attr('value');;
+      var digits = $(this).find('input.digits').attr('value');
       var separator = $(this).find('select.separator').attr('value');
 
       levels.push([level, digits, separator]);
@@ -31,7 +31,7 @@
     })
 
     $.each(ordered_levels, function(index) {
-      for(i = 1; i <= this[1]; i++) { mask += '9'; };
+      for(i = 1; i <= this[1]; i++) { mask += '9'; }
       if((index+1) < levels.length) { mask += this[2]; }
     });
 
