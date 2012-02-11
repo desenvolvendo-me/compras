@@ -19,9 +19,9 @@
     var mask = '';
 
     $('#organogram_levels').children('.organogram-level').each(function() {
-      var level = $(this).find('input.level').attr('value');
-      var digits = $(this).find('input.digits').attr('value');
-      var separator = $(this).find('select.separator').attr('value');
+      var level     = $(this).find('input.level').val(),
+          digits    = $(this).find('input.digits').val(),
+          separator = $(this).find('select.separator').val();
 
       levels.push([level, digits, separator]);
     });
