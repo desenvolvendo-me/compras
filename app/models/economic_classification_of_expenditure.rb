@@ -3,14 +3,13 @@ class EconomicClassificationOfExpenditure < ActiveRecord::Base
   attr_accessible :economic_classification_of_expenditure, :kind
   attr_accessible :description, :docket
 
-  validates :economic_classification_of_expenditure, :kind, :description, :presence => true
-  validates :economic_classification_of_expenditure, :mask => '9.9.99.99.99.99.99.99'
-
   has_enumeration_for :kind, :with => EconomicClassificationOfExpenditureKind, :create_helpers => true
-
 
   belongs_to :entity
   belongs_to :administractive_act
+
+  validates :economic_classification_of_expenditure, :kind, :description, :presence => true
+  validates :economic_classification_of_expenditure, :mask => '9.9.99.99.99.99.99.99'
 
   orderize :description
   filterize
