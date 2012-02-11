@@ -19,7 +19,7 @@ class PurchaseSolicitation < ActiveRecord::Base
   belongs_to :organogram
   has_many :items, :class_name => 'PurchaseSolicitationItem', :dependent => :destroy, :inverse_of => :purchase_solicitation
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation
-  has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations
+  has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
 
   before_save :clean_extra_budget_allocations
 

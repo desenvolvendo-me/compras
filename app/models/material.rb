@@ -13,7 +13,7 @@ class Material < ActiveRecord::Base
   belongs_to :materials_class
   belongs_to :reference_unit
   belongs_to :service_or_contract_type
-  has_many :purchase_solicitation_items
+  has_many :purchase_solicitation_items, :dependent => :restrict
 
   orderize :description
   filterize

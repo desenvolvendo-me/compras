@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/materials_group'
+require 'app/models/materials_class'
 
 describe MaterialsGroup do
   it 'should return group followed by name on to_s method' do
@@ -8,6 +9,8 @@ describe MaterialsGroup do
 
     subject.to_s.should eq("01 - Grupo de materiais")
   end
+
+  it { should have_many(:materials_classes).dependent(:restrict) }
 
   it { should validate_presence_of :group_number }
   it { should validate_numericality_of :group_number }

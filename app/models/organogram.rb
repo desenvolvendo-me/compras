@@ -16,7 +16,7 @@ class Organogram < ActiveRecord::Base
   has_one :address, :as => :addressable, :dependent => :destroy
   belongs_to :organogram_configuration
   belongs_to :administration_type
-  has_many :purchase_solicitations
+  has_many :purchase_solicitations, :dependent => :restrict
   has_many :organogram_responsibles, :dependent => :destroy
 
   accepts_nested_attributes_for :address

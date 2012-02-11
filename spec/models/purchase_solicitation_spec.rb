@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_item'
 require 'app/models/purchase_solicitation_budget_allocation'
+require 'app/models/budget_allocation'
 
 describe PurchaseSolicitation do
   it 'should return the id in to_s method' do
@@ -36,6 +37,8 @@ describe PurchaseSolicitation do
       subject.budget_allocations_total_value.should eq(300)
     end
   end
+
+  it { should have_many(:budget_allocations).dependent(:restrict) }
 
   it {should belong_to :responsible }
   it {should belong_to :budget_allocation }

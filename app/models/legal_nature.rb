@@ -5,7 +5,7 @@ class LegalNature < ActiveRecord::Base
 
   acts_as_nested_set
 
-  has_many :administration_types
+  has_many :administration_types, :dependent => :restrict
 
   validates :name, :code, :presence => true
 

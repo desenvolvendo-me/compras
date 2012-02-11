@@ -3,7 +3,7 @@ class MaterialsGroup < ActiveRecord::Base
 
   attr_modal :group_number, :description
 
-  has_many :materials_classes
+  has_many :materials_classes, :dependent => :restrict
 
   orderize :description
   filterize

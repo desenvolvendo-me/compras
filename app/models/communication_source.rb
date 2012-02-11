@@ -1,7 +1,7 @@
 class CommunicationSource < ActiveRecord::Base
   attr_accessible :description
 
-  has_many :dissemination_sources
+  has_many :dissemination_sources, :dependent => :restrict
 
   validates :description, :presence => true, :uniqueness => true
 

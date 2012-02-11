@@ -9,7 +9,7 @@ describe LegalNature do
     subject.to_s.should eq subject.name
   end
 
-  it { should have_many :administration_types }
+  it { should have_many(:administration_types).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :code }
