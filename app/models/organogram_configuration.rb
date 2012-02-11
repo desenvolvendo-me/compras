@@ -2,8 +2,6 @@ class OrganogramConfiguration < ActiveRecord::Base
   attr_accessible :description, :entity_id, :administractive_act_id, :organogram_levels
   attr_accessible :organogram_levels_attributes
 
-  attr_readonly :mask
-
   attr_modal :description, :entity_id, :administractive_act_id
 
   belongs_to :administractive_act
