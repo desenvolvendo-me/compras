@@ -168,7 +168,7 @@ feature "PurchaseSolicitations" do
 
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => 'Alocação'
-        fill_in 'Compl. do el. da despesa', :with => '50,00'
+        fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '200,00'
       end
 
@@ -176,7 +176,7 @@ feature "PurchaseSolicitations" do
 
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => 'Alocação extra'
-        fill_in 'Compl. do el. da despesa', :with => '50,00'
+        fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '300,00'
       end
 
@@ -217,13 +217,13 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
         page.should have_field "Dotação", :with => 'Alocação'
-        page.should have_field 'Compl. do el. da despesa', :with => '50,00'
+        page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '200,00'
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
         page.should have_field "Dotação", :with => 'Alocação extra'
-        page.should have_field 'Compl. do el. da despesa', :with => '50,00'
+        page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '300,00'
       end
     end
