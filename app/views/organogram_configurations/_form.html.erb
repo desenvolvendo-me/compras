@@ -31,10 +31,10 @@
     })
 
     $.each(ordered_levels, function(index) {
-      for(var i = 1; i <= this[1]; i++) {
+      for (var i = 1; i <= this[1]; i++) {
         mask += '9';
       }
-      if((index+1) < levels.length) {
+      if ((index+1) < levels.length) {
         mask += this[2];
       }
     });
