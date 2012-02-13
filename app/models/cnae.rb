@@ -6,7 +6,6 @@ class Cnae < ActiveRecord::Base
   acts_as_nested_set
 
   belongs_to :risk_degree
-  has_many :branch_activities, :dependent => :restrict
 
   validates :name, :code, :presence => true
 

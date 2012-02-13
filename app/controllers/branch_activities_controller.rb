@@ -1,2 +1,0 @@
-class BranchActivitiesController < CrudController
-end
