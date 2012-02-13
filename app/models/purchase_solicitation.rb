@@ -73,6 +73,7 @@ class PurchaseSolicitation < ActiveRecord::Base
 
    purchase_solicitation_budget_allocations.each do |allocation|
      if single_allocations.include?(allocation.budget_allocation_id)
+       errors.add(:purchase_solicitation_budget_allocations)
        allocation.errors.add(:budget_allocation_id, :taken)
      end
      single_allocations << allocation.budget_allocation_id
