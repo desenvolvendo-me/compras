@@ -1,6 +1,7 @@
 # encoding: utf-8
 EconomicClassificationOfExpenditure.blueprint(:vencimento_e_salarios) do
   entity { Entity.make!(:detran) }
+  stn_ordinance { StnOrdinance.make!(:geral) }
   administractive_act { AdministractiveAct.make!(:sopa) }
   economic_classification_of_expenditure { '3.1.90.11.01.00.00.00' }
   kind { EconomicClassificationOfExpenditureKind::ANALYTICAL }
@@ -10,6 +11,7 @@ end
 
 EconomicClassificationOfExpenditure.blueprint(:compra_de_material) do
   entity { Entity.make!(:detran) }
+  stn_ordinance { StnOrdinance.make!(:geral) }
   administractive_act { AdministractiveAct.make!(:sopa) }
   economic_classification_of_expenditure { '2.2.22.11.01.00.00.00' }
   kind { EconomicClassificationOfExpenditureKind::ANALYTICAL }
