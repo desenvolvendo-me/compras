@@ -25,12 +25,11 @@
 <%= f.input :performance_field %>
 
 <script>
-  $('#organogram_organogram_configuration_id').change(function() {
-    var organogram_configuration_id = $('#organogram_organogram_configuration_id').attr('value');
-    if(organogram_configuration_id != '') {
-      $.getJSON('/organogram_configurations/' + organogram_configuration_id, function(data){
-        $('#organogram_organogram').mask(data.mask);
-      });
+  $('#organogram_organogram_configuration_id').change(function(event, data) {
+    if (data) {
+      var record = data.record;
+
+      $('#organogram_organogram').attr("data-mask", record.data("mask"));
     }
   });
 </script>
