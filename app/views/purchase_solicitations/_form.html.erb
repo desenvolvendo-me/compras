@@ -93,4 +93,42 @@
       $('#purchase_solicitation_budget_allocation_amount').val('');
     }
   });
+
+  function allocationAmount(){
+    var amount = $('#purchase_solicitation_budget_allocation_amount').attr('value');
+    if (amount != '') {
+      return parsePtBrFloat(amount);
+    }
+    return null;
+  }
+
+  function itemsValue(){
+    return parsePtBrFloat(itemsTotalValue());
+  }
+
+  function getConfirmation(){
+    return confirm("<%= I18n.translate('other.tributario.messages.question_purchase_solicitation_budget_allocation_amount') %>");
+  }
+
+  var previousAllocation = $('#purchase_solicitation_budget_allocation_id').attr('value'),
+      actionIsEdit = <%= f.object.persisted? %>;
+
+  function allocationChanged(){
+    actualAllocation = $('#purchase_solicitation_budget_allocation_id').attr('value');
+    return (actualAllocation != previousAllocation);
+  }
+
+  function canVerify(){
+    return (!actionIsEdit || (actionIsEdit && allocationChanged()));
+  }
+
+  $('form').submit(function (e) {
+    var amount = allocationAmount();
+
+    if (canVerify() && amount && amount < itemsValue()){
+      if (!getConfirmation()){
+        e.preventDefault();
+      }
+    }
+  });
 </script>

@@ -473,6 +473,80 @@ feature "PurchaseSolicitations" do
     pending
   end
 
+  scenario 'create a new purchase_solicitation with budget amount less than total items value' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      select 'Bens', :from => 'Tipo de solicitação'
+      fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+    end
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      page.should have_disabled_field "Agrupado"
+      page.should have_disabled_field "Número do processo de compra"
+      page.should have_disabled_field "Status"
+
+      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+      page.should have_field 'Unidade de referência', :with => "Unidade"
+      fill_in 'Quantidade', :with => "5"
+      fill_in 'Preço unitário', :with => "1000,00"
+      page.should have_select 'Status', :selected => 'Pendente'
+    end
+
+    # trying to submit, but without confirmation
+    click_button 'Criar Solicitação de Compra', :confirm => ''
+
+    page.should_not have_notice 'Solicitação de Compra criada com sucesso.'
+
+    click_button 'Criar Solicitação de Compra', :confirm => "O saldo da dotação orçamentária selecionada é inferior ao valor total dos produtos. Deseja salvar?"
+
+    page.should have_notice 'Solicitação de Compra criada com sucesso.'
+  end
+
+  scenario 'update an existent purchase_solicitation changing budget allocation to less than total of items' do
+    make_dependencies!
+
+    PurchaseSolicitation.make!(:reparo)
+    BudgetAllocation.make!(:alocacao_extra)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+    end
+
+    within_tab 'Itens' do
+      fill_in 'Quantidade', :with => "500"
+      fill_in 'Preço unitário', :with => "2,00"
+    end
+
+    # trying to submit, but without confirmation
+    click_button 'Atualizar Solicitação de Compra', :confirm => ''
+
+    page.should_not have_notice 'Solicitação de Compra editada com sucesso.'
+
+    click_button 'Atualizar Solicitação de Compra', :confirm => "O saldo da dotação orçamentária selecionada é inferior ao valor total dos produtos. Deseja salvar?"
+
+    page.should have_notice 'Solicitação de Compra editada com sucesso.'
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     BudgetAllocation.make!(:alocacao)
