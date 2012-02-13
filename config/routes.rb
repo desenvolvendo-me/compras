@@ -406,11 +406,4 @@ Tributario::Application.routes.draw do
       get :filter
     end
   end
-
-  resources :working_hours do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
 end

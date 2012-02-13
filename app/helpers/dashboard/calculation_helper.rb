@@ -5,7 +5,6 @@ module Dashboard::CalculationHelper
 
   def links
     simple_menu do |m|
-      m.working_hours
     end
   end
 end
