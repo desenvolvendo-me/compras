@@ -7,7 +7,7 @@ feature "DisseminationSources" do
   end
 
   scenario 'create a new dissemination_source' do
-    make_dependencies!
+    CommunicationSource.make!(:jornal_municipal)
 
     click_link 'Cadastros Diversos'
 
@@ -85,9 +85,5 @@ feature "DisseminationSources" do
 
     page.should_not have_content 'Jornal Oficial do Município'
     page.should_not have_content 'Jornal de Circulação Municipal'
-  end
-
-  def make_dependencies!
-    CommunicationSource.make!(:jornal_municipal)
   end
 end
