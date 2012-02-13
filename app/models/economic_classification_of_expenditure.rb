@@ -7,6 +7,7 @@ class EconomicClassificationOfExpenditure < ActiveRecord::Base
 
   belongs_to :entity
   belongs_to :administractive_act
+  has_many :purchase_solicitations, :dependent => :restrict
 
   validates :economic_classification_of_expenditure, :kind, :description, :presence => true
   validates :economic_classification_of_expenditure, :mask => '9.9.99.99.99.99.99.99'

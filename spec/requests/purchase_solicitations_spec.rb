@@ -32,6 +32,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'Classificação econômica da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
 
       # testing javascript getting amount of allocation
       page.should have_disabled_field 'Saldo da dotação'
@@ -73,6 +74,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :with => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+      page.should have_field 'Classificação econômica da despesa', :with => '3.1.90.11.01.00.00.00'
 
       # Testing the pending status applied automatically
       page.should have_select 'Status de atendimento', :selected => 'Pendente'
@@ -279,6 +281,7 @@ feature "PurchaseSolicitations" do
     DeliveryLocation.make!(:health)
     Material.make!(:manga)
     Organogram.make!(:secretaria_de_desenvolvimento)
+    EconomicClassificationOfExpenditure.make!(:compra_de_material)
 
     click_link 'Cadastros Diversos'
 
@@ -293,6 +296,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+      fill_modal 'Classificação econômica da despesa', :with => 'Compra de Material', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
@@ -322,6 +326,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       page.should have_field 'Dotação orçamentária', :with => 'Alocação extra'
+      page.should have_field 'Classificação econômica da despesa', :with => '2.2.22.11.01.00.00.00'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
       page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
@@ -474,5 +479,6 @@ feature "PurchaseSolicitations" do
     DeliveryLocation.make!(:education)
     Material.make!(:cadeira)
     Organogram.make!(:secretaria_de_educacao)
+    EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
   end
 end

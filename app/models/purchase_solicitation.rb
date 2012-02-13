@@ -1,17 +1,18 @@
 class PurchaseSolicitation < ActiveRecord::Base
   attr_accessible :accounting_year, :request_date, :responsible_id, :justification, :budget_allocation_id,
                   :delivery_location_id, :kind, :general_observations, :items_attributes, :purchase_solicitation_budget_allocations_attributes,
-                  :organogram_id
+                  :organogram_id, :economic_classification_of_expenditure_id
 
   attr_protected :allocation_amount, :service_status, :liberation_date, :liberator, :service_observations,
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
-                 :organogram
+                 :organogram, :economic_classification_of_expenditure
 
   delegate :amount, :name, :id, :to => :budget_allocation, :prefix => true, :allow_nil => true
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
 
+  belongs_to :economic_classification_of_expenditure
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :budget_allocation
   belongs_to :delivery_location

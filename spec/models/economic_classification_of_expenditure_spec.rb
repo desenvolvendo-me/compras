@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/economic_classification_of_expenditure'
+require 'app/models/purchase_solicitation'
 
 describe EconomicClassificationOfExpenditure do
   it 'should return economic_classification_of_expenditure as to_s method' do
@@ -10,6 +11,7 @@ describe EconomicClassificationOfExpenditure do
 
   it { should belong_to :administractive_act }
   it { should belong_to :entity }
+  it { should have_many(:purchase_solicitations).dependent(:restrict) }
 
   it { should validate_presence_of :economic_classification_of_expenditure }
   it { should validate_presence_of :kind }
