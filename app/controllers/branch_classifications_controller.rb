@@ -1,2 +1,0 @@
-class BranchClassificationsController < CrudController
-end
