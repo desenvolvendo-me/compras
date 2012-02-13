@@ -557,6 +557,51 @@ feature "PurchaseSolicitations" do
     page.should have_notice 'Solicitação de Compra editada com sucesso.'
   end
 
+  scenario 'trying to create a new purchase_solicitation with duplicated items to ensure the error' do
+    make_dependencies!
+    BudgetAllocation.make!(:alocacao_extra)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
+      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      select 'Bens', :from => 'Tipo de solicitação'
+      fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+    end
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+      fill_in 'Quantidade', :with => "2"
+      fill_in 'Preço unitário', :with => "100,00"
+
+      click_button "Adicionar Item"
+
+      within 'fieldset:last' do
+        fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+        fill_in 'Quantidade', :with => "3"
+        fill_in 'Preço unitário', :with => "100,00"
+      end
+    end
+
+    click_button 'Criar Solicitação de Compra'
+
+    within_tab 'Itens' do
+      page.should have_content 'não é permitido adicionar mais de um item com o mesmo material.'
+    end
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     BudgetAllocation.make!(:alocacao)

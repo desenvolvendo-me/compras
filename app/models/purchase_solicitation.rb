@@ -61,8 +61,8 @@ class PurchaseSolicitation < ActiveRecord::Base
 
     items.each do |item|
       if single_materials.include?(item.material_id)
-        item.errors.add(:material_id, :cannot_have_more_than_once_item_with_the_same_material)
         errors.add(:items)
+        item.errors.add(:material_id, :cannot_have_more_than_once_item_with_the_same_material)
       end
       single_materials << item.material_id
     end
