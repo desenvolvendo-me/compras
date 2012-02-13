@@ -15,6 +15,7 @@ describe EconomicClassificationOfExpenditure do
   it { should belong_to :stn_ordinance }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
+  it { should have_many(:materials).dependent(:restrict) }
 
   it { should validate_presence_of :economic_classification_of_expenditure }
   it { should validate_presence_of :kind }

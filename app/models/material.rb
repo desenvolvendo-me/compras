@@ -1,9 +1,11 @@
 class Material < ActiveRecord::Base
   attr_accessible :materials_class_id, :code, :description, :detailed_description, :minimum_stock_balance,
                   :reference_unit_id, :manufacturer, :perishable, :storable, :combustible,
-                  :material_characteristic, :service_or_contract_type_id, :material_type, :stn_ordinance, :expense_element
+                  :material_characteristic, :service_or_contract_type_id, :material_type, :stn_ordinance,
+                  :economic_classification_of_expenditure_id
 
-  attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_group_id, :materials_class, :reference_unit, :service_or_contract_type
+  attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_group_id, :materials_class,
+                 :reference_unit, :service_or_contract_type, :economic_classification_of_expenditure
 
   attr_modal :description
 
@@ -13,12 +15,14 @@ class Material < ActiveRecord::Base
   belongs_to :materials_class
   belongs_to :reference_unit
   belongs_to :service_or_contract_type
+  belongs_to :economic_classification_of_expenditure
   has_many :purchase_solicitation_items, :dependent => :restrict
 
   orderize :description
   filterize
 
   validates :materials_group_id, :materials_class_id, :reference_unit_id, :material_characteristic, :presence => true
+  validates :economic_classification_of_expenditure_id, :presence => true
   validates :code, :presence => true, :uniqueness => true
   validates :description, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?

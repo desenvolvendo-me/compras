@@ -10,6 +10,7 @@ class EconomicClassificationOfExpenditure < ActiveRecord::Base
   belongs_to :stn_ordinance
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
+  has_many :materials, :dependent => :restrict
 
   validates :economic_classification_of_expenditure, :kind, :description, :presence => true
   validates :economic_classification_of_expenditure, :mask => '9.9.99.99.99.99.99.99'

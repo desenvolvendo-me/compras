@@ -13,7 +13,7 @@ Material.blueprint(:manga) do
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
   stn_ordinance { "portaria" }
-  expense_element { "elemento" }
+  economic_classification_of_expenditure { EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios) }
 end
 
 Material.blueprint(:cadeira) do
@@ -31,7 +31,7 @@ Material.blueprint(:cadeira) do
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
   stn_ordinance { "portaria" }
-  expense_element { "elemento" }
+  economic_classification_of_expenditure { EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios) }
 end
 
 Material.blueprint(:balde) do
@@ -47,5 +47,5 @@ Material.blueprint(:balde) do
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
   stn_ordinance { "portaria" }
-  expense_element { "elemento" }
+  economic_classification_of_expenditure { EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios) }
 end

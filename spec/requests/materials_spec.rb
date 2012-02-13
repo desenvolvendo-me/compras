@@ -38,7 +38,7 @@ feature "Materials" do
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_in 'Portaria STN', :with => 'stn_ordinance'
-    fill_in 'Elemento de despesa', :with => 'expense_element'
+    fill_modal 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Criar Material'
 
@@ -60,7 +60,7 @@ feature "Materials" do
     page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
     page.should have_disabled_field 'Tipo de material'
     page.should have_field 'Portaria STN', :with => 'stn_ordinance'
-    page.should have_field 'Elemento de despesa', :with => 'expense_element'
+    page.should have_field 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00'
   end
 
   scenario 'generate code' do
@@ -86,7 +86,7 @@ feature "Materials" do
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_in 'Portaria STN', :with => 'stn_ordinance'
-    fill_in 'Elemento de despesa', :with => 'expense_element'
+    fill_modal 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Criar Material'
 
@@ -108,6 +108,7 @@ feature "Materials" do
     ReferenceUnit.make!(:metro)
     MaterialsGroup.make!(:limpeza)
     MaterialsClass.make!(:pecas)
+    EconomicClassificationOfExpenditure.make!(:compra_de_material)
 
     click_link 'Cadastros Diversos'
 
@@ -133,7 +134,7 @@ feature "Materials" do
 
     select 'De consumo', :from => 'Tipo de material'
     fill_in 'Portaria STN', :with => 'outro'
-    fill_in 'Elemento de despesa', :with => 'outro elemento'
+    fill_modal 'Elemento de despesa', :with => '2.2.22.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Atualizar Material'
 
@@ -156,7 +157,7 @@ feature "Materials" do
     page.should have_disabled_field 'Tipo de serviço'
     page.should have_select 'Tipo de material', :with => 'De consumo'
     page.should have_field 'Portaria STN', :with => 'outro'
-    page.should have_field 'Elemento de despesa', :with => 'outro elemento'
+    page.should have_field 'Elemento de despesa', :with => '2.2.22.11.01.00.00.00'
   end
 
   scenario 'destroy an existent material' do
@@ -298,5 +299,6 @@ feature "Materials" do
     MaterialsClass.make!(:hortifrutigranjeiros)
     ReferenceUnit.make!(:unidade)
     ServiceOrContractType.make!(:trainees)
+    EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
   end
 end
