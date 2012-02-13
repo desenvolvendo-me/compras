@@ -1,5 +1,5 @@
 <%= f.input :materials_group %>
-<%= f.input :materials_class, :disabled => true %>
+<%= f.input :materials_class, :disabled => f.object.materials_group.blank? %>
 <% if f.object.persisted? %>
   <%= f.input :code, :disabled => true %>
 <% end %>
@@ -44,11 +44,11 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :service_or_contract_type, :disabled => true %>
+    <%= f.input :service_or_contract_type, :disabled => !f.object.service? %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :material_type, :as => :select, :collection => MaterialType, :disabled => true %>
+    <%= f.input :material_type, :as => :select, :collection => MaterialType, :disabled => !f.object.material? %>
   </div>
 
   <div class="yui3-u-1-2">
@@ -65,27 +65,23 @@
 </div>
 
 <script>
-  (function toggleTypes(){
-    if ($("#material_material_characteristic").attr('value') == 'material'){
+  $("#material_material_characteristic").change(function() {
+    if (this.value == 'material') {
       $("#material_service_or_contract_type").attr('disabled', true);
       $("#material_material_type").attr('disabled', false);
-    } else if ($("#material_material_characteristic").attr('value') == 'service') {
+    } else if (this.value == 'service') {
       $("#material_material_type").attr('disabled', true);
       $("#material_service_or_contract_type").attr('disabled', false);
     }
-    $("#material_material_characteristic").change(toggleTypes);
-  })();
+  });
 
-  (function enableClass() {
-    if ($('#material_materials_group').attr('value') != '') {
+  $('#material_materials_group_id').change(function() {
+    if (this.value) {
       $('#material_materials_class').attr('disabled', false);
     } else {
       $('#material_materials_class').attr('disabled', true);
     }
-    $('#material_materials_group').change(enableClass);
-  })();
 
-  $('#material_materials_group').change(function(){
     $('#material_materials_class').val('');
     $('#material_materials_class_id').val('');
   });
