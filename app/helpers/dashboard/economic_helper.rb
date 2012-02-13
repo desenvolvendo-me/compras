@@ -9,7 +9,6 @@ module Dashboard::EconomicHelper
       m.cnaes
       m.branch_activities
       m.branch_classifications
-      m.issqn_classifications
     end
   end
 end

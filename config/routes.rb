@@ -216,13 +216,6 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :issqn_classifications do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
-
   resources :land_subdivisions do
     collection do
       get :modal
