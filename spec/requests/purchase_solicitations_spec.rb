@@ -463,8 +463,24 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'clean the budget amount when removing budget allocation' do
-    pending
+  scenario 'getting and cleaning budget amount depending on budget allocation field' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+
+      page.should have_disabled_field 'Saldo da dotação'
+      page.should have_field 'Saldo da dotação', :with => '500,00'
+
+      clear_modal 'Dotação orçamentária'
+      page.should have_field 'Saldo da dotação', :with => ''
+    end
   end
 
   scenario 'create a new purchase_solicitation with budget amount less than total items value' do
