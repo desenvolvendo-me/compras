@@ -52,11 +52,11 @@ module Capybara
         end
       end
 
-      # Finds a link by id or text and clicks it. Also looks at image alt text inside the link.
+      # Finds a button by id or text and clicks it
       #
-      # You can confirm a javascript dialog using the confirm option:
+      # You can confirm a javascript dialog using the confirmation message:
       #
-      #   click_link 'Destroy', :confirm => true
+      #   click_button 'Update', :confirm => 'Save changes?'
       def click_button(locator, options = {})
         confirm = options.delete(:confirm)
 
