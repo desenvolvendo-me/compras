@@ -2,9 +2,11 @@
   <div class="yui3-u-1-3">
     <%= f.input :id, :disabled => true, :input_html => { :size => 3 } %>
   </div>
+
   <div class="yui3-u-1-3">
     <%= f.input :accounting_year %>
   </div>
+
   <div class="yui3-u-1-3">
     <%= f.input :request_date %>
   </div>
@@ -18,6 +20,7 @@
   <div class="yui3-u-1-2">
     <%= f.input :budget_allocation %>
   </div>
+
   <div class="yui3-u-1-2">
     <%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
   </div>
@@ -29,6 +32,7 @@
   <div class="yui3-u-1-2">
     <%= f.input :delivery_location %>
   </div>
+
   <div class="yui3-u-1-2">
     <%= f.input :kind, :collection => PurchaseSolicitationKind.to_a %>
   </div>
@@ -40,9 +44,11 @@
   <div class="yui3-u-1-3">
     <%= f.input :service_status, :collection => PurchaseSolicitationServiceStatus.to_a, :disabled => true %>
   </div>
+
   <div class="yui3-u-1-3">
     <%= f.input :liberation_date, :disabled => true %>
   </div>
+
   <div class="yui3-u-1-3">
     <%= f.input :liberator, :disabled => true  %>
   </div>
