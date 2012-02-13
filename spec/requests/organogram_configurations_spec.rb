@@ -26,7 +26,7 @@ feature "OrganogramConfigurations" do
 
     fill_in 'Nível', :with => '1'
 
-    fill_in 'Nome do Campo', :with => 'Orgão'
+    fill_in 'organogram_configuration_organogram_levels_attributes_fresh-0_description', :with => 'Orgão'
 
     fill_in 'Dígitos', :with => '2'
 
@@ -48,7 +48,7 @@ feature "OrganogramConfigurations" do
 
     page.should have_field 'Nível', :with => '1'
 
-    page.should have_field 'Nome do Campo', :with => 'Orgão'
+    page.should have_field 'organogram_configuration_organogram_levels_attributes_0_description', :with => 'Orgão'
 
     page.should have_field 'Dígitos', :with => '2'
 
