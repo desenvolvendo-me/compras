@@ -16,11 +16,19 @@ module Tributario
     end
 
     def input(attribute_name, options = {}, &block)
+      return super if options[:as]
+
       if find_association_reflection(attribute_name)
         association(attribute_name, options, &block)
+      elsif find_enumeration_reflection(attribute_name)
+        enumeration(attribute_name, options, &block)
       else
         super
       end
+    end
+
+    def find_enumeration_reflection(attribute_name)
+      object.class.enumerations[attribute_name]
     end
 
     def association(association, options = {}, &block)
@@ -30,6 +38,13 @@ module Tributario
       options[:collection] = [] if options[:as] == :modal
 
       super
+    end
+
+    def enumeration(attribute_name, options = {}, &block)
+      options[:as]         ||= :select
+      options[:collection] ||= find_enumeration_reflection(attribute_name).to_a
+
+      input(attribute_name, options, &block)
     end
 
     def submit_button(value = nil, options = {})
