@@ -11,20 +11,14 @@ describe MaterialsClass do
   it { should validate_numericality_of :class_number }
   it { should validate_presence_of :description }
 
+  it { should_not allow_value('ab').for(:class_number) }
+  it { should_not allow_value('123').for(:class_number) }
+  it { should allow_value('01').for(:class_number) }
+
   it 'should return class_number and description as to_s method' do
     subject.class_number = '01'
     subject.description = 'Hortifrutigranjeiros'
 
     subject.to_s.should eq '01 - Hortifrutigranjeiros'
-  end
-
-  it 'should validate mask on class_number' do
-    subject.class_number = 'ab'
-    subject.valid?
-    subject.errors[:class_number].should include 'não é válido'
-
-    subject.class_number = '01'
-    subject.valid?
-    subject.errors[:class_number].should_not include 'não é válido'
   end
 end
