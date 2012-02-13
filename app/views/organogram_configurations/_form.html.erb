@@ -1,11 +1,11 @@
 <%= f.input :entity %>
 <%= f.input :administractive_act %>
 
-
 <div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :description %>
   </div>
+
   <div class="yui3-u-1-2">
     <%= f.input :mask, :disabled => true %>
   </div>
@@ -44,5 +44,4 @@
 
   $('#organogram_levels').delegate('input:visible.numeric', 'keyup', calculeMask);
   $('#organogram_levels').delegate('select', 'change', calculeMask);
-
 </script>
