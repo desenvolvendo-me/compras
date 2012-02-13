@@ -33,12 +33,6 @@ feature "PurchaseSolicitations" do
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
       fill_modal 'Classificação econômica da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-
-      # testing javascript getting amount of allocation
-      page.should have_disabled_field 'Saldo da dotação'
-      page.should have_field 'Saldo da dotação', :with => '500,00'
-      # end of javascript test
-
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
