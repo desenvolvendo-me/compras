@@ -24,7 +24,11 @@ module Tributario
     end
 
     def association(association, options = {}, &block)
-      options[:as] ||= 'modal'
+      # FIXME: refactoring, code smell
+      # do not fetch records using modal input
+      options[:as] = options.fetch(:as, :modal) unless block_given?
+      options[:collection] = [] if options[:as] == :modal
+
       super
     end
 
