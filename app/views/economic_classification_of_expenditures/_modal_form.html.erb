@@ -1,0 +1,11 @@
+<% attributes.each do |attribute| %>
+  <%= f.input attribute, :required => false, :hint => false %>
+<% end %>
+
+<script>
+  var stnOrdnanceName = $('#material_stn_ordinance').attr('value'),
+      stnOrdinanceId   = $('#material_stn_ordinance_id').attr('value');
+  $('#filter_stn_ordinance').val(stnOrdnanceName);
+  $('#filter_stn_ordinance_id').val(stnOrdinanceId);
+  $('#filter_stn_ordinance').attr('disabled', true);
+</script>

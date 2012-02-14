@@ -60,7 +60,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :economic_classification_of_expenditure %>
+    <%= f.input :economic_classification_of_expenditure, :disabled => f.object.stn_ordinance.blank? %>
   </div>
 </div>
 
@@ -84,5 +84,16 @@
 
     $('#material_materials_class').val('');
     $('#material_materials_class_id').val('');
+  });
+
+  $('#material_stn_ordinance_id').change(function() {
+    if (this.value) {
+      $('#material_economic_classification_of_expenditure').attr('disabled', false);
+    } else {
+      $('#material_economic_classification_of_expenditure').attr('disabled', true);
+    }
+
+    $('#material_economic_classification_of_expenditure').val('');
+    $('#material_economic_classification_of_expenditure_id').val('');
   });
 </script>

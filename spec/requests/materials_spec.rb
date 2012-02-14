@@ -37,6 +37,7 @@ feature "Materials" do
     #end of javascript test
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
+    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
     fill_modal 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Criar Material'
@@ -58,6 +59,7 @@ feature "Materials" do
     page.should have_select 'Característica', :with => 'Material'
     page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
     page.should have_disabled_field 'Tipo de material'
+    page.should have_field 'Portaria STN', :with => 'Portaria Geral'
     page.should have_field 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00'
   end
 
@@ -83,6 +85,7 @@ feature "Materials" do
     select 'Serviço', :from => 'Característica'
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
+    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
     fill_modal 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Criar Material'
@@ -106,6 +109,7 @@ feature "Materials" do
     MaterialsGroup.make!(:limpeza)
     MaterialsClass.make!(:pecas)
     EconomicClassificationOfExpenditure.make!(:compra_de_material)
+    StnOrdinance.make!(:interministerial)
 
     click_link 'Cadastros Diversos'
 
@@ -130,6 +134,7 @@ feature "Materials" do
     # end of javascript test
 
     select 'De consumo', :from => 'Tipo de material'
+    fill_modal 'Portaria STN', :with => 'Portaria Interministerial', :field => 'Descrição'
     fill_modal 'Elemento de despesa', :with => '2.2.22.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Atualizar Material'
@@ -152,6 +157,7 @@ feature "Materials" do
     page.should have_select 'Característica', :with => 'Serviço'
     page.should have_disabled_field 'Tipo de serviço'
     page.should have_select 'Tipo de material', :with => 'De consumo'
+    page.should have_field 'Portaria STN', :with => 'Portaria Interministerial'
     page.should have_field 'Elemento de despesa', :with => '2.2.22.11.01.00.00.00'
   end
 
@@ -289,11 +295,85 @@ feature "Materials" do
     page.should have_field 'Classe', :with => ''
   end
 
+  it 'should show selected stn ordinance on economic classification of expediture modal' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Criar Material'
+
+    page.should have_disabled_field 'Elemento de despesa'
+
+    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+
+    page.should_not have_disabled_field 'Elemento de despesa'
+
+    fill_modal 'Elemento de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição' do
+      page.should have_field 'filter_stn_ordinance', :with => 'Portaria Geral'
+    end
+  end
+
+  it 'should not have the economic classification of expenditure disabled when editing material' do
+    make_dependencies!
+
+    Material.make!(:manga)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Manga'
+
+    page.should_not have_disabled_field 'Elemento de despesa'
+  end
+
+  it 'should disable and empty the economic classification of expenditure when the stn ordinance is removed' do
+    make_dependencies!
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Criar Material'
+
+    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+
+    fill_modal 'Elemento de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+
+    clear_modal 'Portaria STN'
+
+    page.should have_disabled_field 'Elemento de despesa'
+    page.should have_field 'Elemento de despesa', :with => ''
+  end
+
+  it 'should empty the economic classification of expenditure when the stn ordinance are changed' do
+    make_dependencies!
+
+    StnOrdinance.make!(:interministerial)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Materiais'
+
+    click_link 'Criar Material'
+
+    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+
+    fill_modal 'Elemento de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+
+    fill_modal 'Portaria STN', :with => 'Portaria Interministerial', :field => 'Descrição'
+
+    page.should have_field 'Elemento de despesa', :with => ''
+  end
+
   def make_dependencies!
     MaterialsGroup.make!(:alimenticios)
     MaterialsClass.make!(:hortifrutigranjeiros)
     ReferenceUnit.make!(:unidade)
     ServiceOrContractType.make!(:trainees)
     EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
+    StnOrdinance.make!(:geral)
   end
 end

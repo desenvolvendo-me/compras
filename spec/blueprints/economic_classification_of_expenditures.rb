@@ -11,7 +11,7 @@ end
 
 EconomicClassificationOfExpenditure.blueprint(:compra_de_material) do
   entity { Entity.make!(:detran) }
-  stn_ordinance { StnOrdinance.make!(:geral) }
+  stn_ordinance { StnOrdinance.make!(:interministerial) }
   administractive_act { AdministractiveAct.make!(:sopa) }
   economic_classification_of_expenditure { '2.2.22.11.01.00.00.00' }
   kind { EconomicClassificationOfExpenditureKind::ANALYTICAL }
