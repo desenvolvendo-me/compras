@@ -1,0 +1,2 @@
+class ClassificationOfTypesOfAdministractiveActsController < CrudController
+end

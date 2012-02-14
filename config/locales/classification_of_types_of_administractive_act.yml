@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      classification_of_types_of_administractive_act:
+        one: "Classificação de Tipos de Ato Administrativo"
+        other: "Classificações de Tipo de Ato Administrativo"
+
+    attributes:
+      classification_of_types_of_administractive_act:
+        description: "Descrição"

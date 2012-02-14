@@ -109,6 +109,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :classification_of_types_of_administractive_acts do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :cities do
     collection do
       get :modal
