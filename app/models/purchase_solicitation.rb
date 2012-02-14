@@ -3,6 +3,8 @@ class PurchaseSolicitation < ActiveRecord::Base
                   :delivery_location_id, :kind, :general_observations, :items_attributes, :purchase_solicitation_budget_allocations_attributes,
                   :organogram_id, :economic_classification_of_expenditure_id
 
+  attr_modal :accounting_year, :kind, :delivery_location_id, :organogram_id
+
   attr_protected :allocation_amount, :service_status, :liberation_date, :liberator, :service_observations,
                  :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
                  :organogram, :economic_classification_of_expenditure
