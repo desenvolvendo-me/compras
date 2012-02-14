@@ -7,7 +7,7 @@ feature "RiskDegrees" do
   end
 
   scenario 'create a new risk_degree' do
-    click_link 'Cadastro Econômico'
+    click_link 'Cadastros Diversos'
 
     click_link 'Grau de Riscos'
 
@@ -29,7 +29,7 @@ feature "RiskDegrees" do
   scenario 'update an existent risk_degree' do
     risk_degree = RiskDegree.make!(:leve)
 
-    click_link 'Cadastro Econômico'
+    click_link 'Cadastros Diversos'
 
     click_link 'Grau de Riscos'
 
@@ -51,7 +51,7 @@ feature "RiskDegrees" do
   scenario 'destroy an existent risk_degree' do
     risk_degree = RiskDegree.make!(:grave)
 
-    click_link 'Cadastro Econômico'
+    click_link 'Cadastros Diversos'
 
     click_link 'Grau de Riscos'
 

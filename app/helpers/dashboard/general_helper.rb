@@ -45,6 +45,7 @@ module Dashboard::GeneralHelper
       m.currencies
       m.stn_ordinances
       m.cnaes
+      m.risk_degrees
     end
   end
 end
