@@ -278,6 +278,7 @@ feature "Materials" do
   end
 
   it 'should empty the class when the group are changed' do
+    MaterialsGroup.make!(:limpeza)
     make_dependencies!
 
     click_link 'Cadastros Diversos'
@@ -290,7 +291,7 @@ feature "Materials" do
 
     fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Limpeza', :field => 'Descrição'
 
     page.should have_field 'Classe', :with => ''
   end

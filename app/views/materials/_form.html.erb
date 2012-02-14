@@ -67,6 +67,9 @@
 </div>
 
 <script>
+  var stn_ordinance_id = $('#material_stn_ordinance_id').val(),
+      materials_group_id = $('#material_materials_group_id').val();
+
   $("#material_material_characteristic").change(function() {
     if (this.value == 'material') {
       $("#material_service_or_contract_type").attr('disabled', true);
@@ -80,20 +83,68 @@
   $('#material_materials_group_id').change(function() {
     if (this.value) {
       $('#material_materials_class').attr('disabled', false);
+      $('#material_materials_class').attr('data-modal-url', materialsClassModalUrl);
     } else {
       $('#material_materials_class').attr('disabled', true);
     }
 
-    $('#material_materials_class').modal('clear');
-  });
+    clearMaterialsClass();
+  }).change();
 
   $('#material_stn_ordinance_id').change(function() {
     if (this.value) {
       $('#material_economic_classification_of_expenditure').attr('disabled', false);
+      $('#material_economic_classification_of_expenditure').attr('data-modal-url', economicClassificationOfExpenditureModalUrl);
     } else {
       $('#material_economic_classification_of_expenditure').attr('disabled', true);
     }
 
-    $('#material_economic_classification_of_expenditure').modal('clear');
-  });
+    clearEconomicClassificationOfExpenditure();
+  }).change();
+
+  function clearMaterialsClass() {
+    if ($('#material_materials_group_id').val() != materials_group_id) {
+      materials_group_id = $('#material_materials_group_id').val();
+
+      $('#material_materials_class').val('');
+      $('#material_materials_class_id').val('');
+    }
+  }
+
+  function clearEconomicClassificationOfExpenditure() {
+    if ($('#material_stn_ordinance_id').val() != stn_ordinance_id) {
+      stn_ordinance_id = $('#material_stn_ordinance_id').val();
+
+      $('#material_economic_classification_of_expenditure').val('');
+      $('#material_economic_classification_of_expenditure_id').val('');
+    }
+  }
+
+  function materialsClassModalUrl() {
+    var url = "<%= modal_materials_classes_path %>?",
+        params = {
+          locked_fields: ["materials_group"],
+          materials_class: {
+            materials_group_id: $('#material_materials_group_id').val()
+          }
+        };
+
+    url += jQuery.param(params);
+
+    return url;
+  }
+
+  function economicClassificationOfExpenditureModalUrl() {
+    var url = "<%= modal_economic_classification_of_expenditures_path %>?",
+        params = {
+          locked_fields: ["stn_ordinance"],
+          economic_classification_of_expenditure: {
+            stn_ordinance_id: $('#material_stn_ordinance_id').val()
+          }
+        };
+
+    url += jQuery.param(params);
+
+    return url;
+  }
 </script>
