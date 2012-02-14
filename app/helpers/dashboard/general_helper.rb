@@ -44,6 +44,7 @@ module Dashboard::GeneralHelper
       m.legal_text_natures
       m.currencies
       m.stn_ordinances
+      m.cnaes
     end
   end
 end

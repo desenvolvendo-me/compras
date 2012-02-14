@@ -9,7 +9,7 @@ feature "Cnaes" do
   scenario 'create a new cnae' do
     RiskDegree.make!(:leve)
 
-    click_link 'Cadastro Econômico'
+    click_link 'Cadastros Diversos'
 
     click_link 'CNAES'
 
@@ -34,7 +34,7 @@ feature "Cnaes" do
     RiskDegree.make!(:medio)
     Cnae.make!(:aluguel)
 
-    click_link 'Cadastro Econômico'
+    click_link 'Cadastros Diversos'
 
     click_link 'CNAES'
 
@@ -58,7 +58,7 @@ feature "Cnaes" do
   scenario 'destroy an existent cnae' do
     Cnae.make!(:aluguel)
 
-    click_link 'Cadastro Econômico'
+    click_link 'Cadastros Diversos'
 
     click_link 'CNAES'
 

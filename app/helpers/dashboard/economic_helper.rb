@@ -6,7 +6,6 @@ module Dashboard::EconomicHelper
   def links
     simple_menu do |m|
       m.risk_degrees
-      m.cnaes
     end
   end
 end
