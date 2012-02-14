@@ -8,4 +8,4 @@ pt-BR:
     attributes:
       type_of_administractive_act:
         description: "Descrição"
-        classification_of_types_of_administractive_act: "Classificação de tipo de ato administrativo"
+        classification_of_types_of_administractive_act: "Classificação do tipo de ato administrativo"
