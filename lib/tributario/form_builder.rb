@@ -28,7 +28,7 @@ module Tributario
     end
 
     def find_enumeration_reflection(attribute_name)
-      object.class.enumerations[attribute_name]
+      object.class.enumerations[attribute_name.to_sym]
     end
 
     def association(association, options = {}, &block)
