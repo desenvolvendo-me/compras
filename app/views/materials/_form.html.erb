@@ -1,8 +1,10 @@
 <%= f.input :materials_group, :as => :modal, :hidden_field => :materials_group_id %>
 <%= f.input :materials_class, :disabled => f.object.materials_group.blank? %>
+
 <% if f.object.persisted? %>
   <%= f.input :code, :disabled => true %>
 <% end %>
+
 <%= f.input :description %>
 <%= f.input :detailed_description %>
 
