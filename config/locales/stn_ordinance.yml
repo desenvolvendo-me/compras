@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       stn_ordinance:
-        one: "Portaria STN"
-        other: "Portarias STN"
+        one: "Portaria do STN"
+        other: "Portarias do STN"
 
     attributes:
       stn_ordinance:

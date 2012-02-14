@@ -9,15 +9,15 @@ feature "StnOrdinances" do
   scenario 'create a new stn_ordinance' do
     click_link 'Cadastros Diversos'
 
-    click_link 'Portarias STN'
+    click_link 'Portarias do STN'
 
-    click_link 'Criar Portaria STN'
+    click_link 'Criar Portaria do STN'
 
     fill_in 'Descrição', :with => 'Portaria Geral'
 
-    click_button 'Criar Portaria STN'
+    click_button 'Criar Portaria do STN'
 
-    page.should have_notice 'Portaria STN criada com sucesso.'
+    page.should have_notice 'Portaria do STN criada com sucesso.'
 
     click_link 'Portaria Geral'
 
@@ -29,15 +29,15 @@ feature "StnOrdinances" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Portarias STN'
+    click_link 'Portarias do STN'
 
     click_link 'Portaria Geral'
 
     fill_in 'Descrição', :with => 'Portarial Alternativa'
 
-    click_button 'Atualizar Portaria STN'
+    click_button 'Atualizar Portaria do STN'
 
-    page.should have_notice 'Portaria STN editada com sucesso.'
+    page.should have_notice 'Portaria do STN editada com sucesso.'
 
     click_link 'Portarial Alternativa'
 
@@ -48,13 +48,13 @@ feature "StnOrdinances" do
     StnOrdinance.make!(:geral)
     click_link 'Cadastros Diversos'
 
-    click_link 'Portarias STN'
+    click_link 'Portarias do STN'
 
     click_link 'Portaria Geral'
 
     click_link 'Apagar Portaria Geral', :confirm => true
 
-    page.should have_notice 'Portaria STN apagada com sucesso.'
+    page.should have_notice 'Portaria do STN apagada com sucesso.'
 
     page.should_not have_content 'description'
   end
@@ -64,13 +64,13 @@ feature "StnOrdinances" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Portarias STN'
+    click_link 'Portarias do STN'
 
-    click_link 'Criar Portaria STN'
+    click_link 'Criar Portaria do STN'
 
     fill_in 'Descrição', :with => 'Portaria Geral'
 
-    click_button 'Criar Portaria STN'
+    click_button 'Criar Portaria do STN'
 
     page.should have_content 'já está em uso'
   end
