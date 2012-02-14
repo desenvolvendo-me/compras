@@ -1,3 +1,3 @@
 <% attributes.each do |attribute| %>
-  <%= f.input attribute, :required => false, :hint => false, :disabled => @locked_fields.include?(attribute.to_s) %>
+  <%= f.input attribute, :required => false, :hint => false, :disabled => params[:locked_fields].try(:include?, attribute.to_s) %>
 <% end %>

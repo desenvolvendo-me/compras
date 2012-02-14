@@ -37,8 +37,6 @@ class CrudController < ApplicationController
   def modal
     build_resource
 
-    @locked_fields = params[:locked_fields] || []
-
     render :layout => false
   end
 
