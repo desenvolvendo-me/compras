@@ -335,6 +335,94 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'update an existent purchase_solicitation with multiple budget_allocations' do
+    make_dependencies!
+
+    PurchaseSolicitation.make!(:conserto)
+    Employee.make!(:wenderson)
+    BudgetAllocation.make!(:alocacao_extra)
+    DeliveryLocation.make!(:health)
+    Material.make!(:manga)
+    Organogram.make!(:secretaria_de_desenvolvimento)
+    EconomicClassificationOfExpenditure.make!(:compra_de_material)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Reparo nas instalações'
+
+    within_tab 'Dados gerais' do
+      fill_in 'Ano', :with => '2013'
+      fill_in 'Data da solicitação', :with => '01/02/2013'
+      fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
+      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
+      fill_modal 'Classificação econômica da despesa', :with => 'Compra de Material', :field => 'Descrição'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => 'Descrição'
+      select 'Serviços', :from => 'Tipo de solicitação'
+      fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
+    end
+
+    within_tab 'Itens' do
+      click_button 'Remover Item'
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Manga', :field => 'Descrição'
+      page.should have_field 'Unidade de referência', :with => 'Quilos'
+      fill_in 'Quantidade', :with => '500'
+      fill_in 'Preço unitário', :with => '2,00'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+        fill_in 'Valor previsto ', :with => '1020,00'
+      end
+    end
+
+    click_button 'Atualizar Solicitação de Compra'
+
+    page.should have_notice 'Solicitação de Compra editada com sucesso.'
+
+    click_link 'Novas mesas'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Ano', :with => '2013'
+      page.should have_field 'Data da solicitação', :with => '01/02/2013'
+      page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento'
+      page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
+      page.should have_field 'Classificação econômica da despesa', :with => '2.2.22.11.01.00.00.00'
+      page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
+      page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
+      page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
+    end
+
+    within_tab 'Itens' do
+      page.should have_field 'Material', :with => '01.01.00001 - Manga'
+      page.should have_field 'Quantidade', :with => '500'
+      page.should have_field 'Preço unitário', :with => '2,00'
+      page.should have_field 'Preço total estimado', :with => '1.000,00'
+      page.should have_select 'Status', :selected => 'Pendente'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        page.should have_field 'Dotação', :with => 'Alocação extra'
+        page.should have_field 'Compl. do el. da despesa', :with => '2.2.22.11.01.00.00.00'
+        page.should have_field 'Valor previsto ', :with => '30,00'
+      end
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        page.should have_field 'Dotação', :with => 'Alocação'
+        page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
+        page.should have_field 'Valor previsto', :with => '1.020,00'
+      end
+    end
+  end
+
   scenario 'should be current_user employee attribute as default responsible' do
     click_link 'Cadastros Diversos'
 
