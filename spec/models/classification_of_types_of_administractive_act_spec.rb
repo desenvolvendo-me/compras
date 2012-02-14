@@ -1,4 +1,7 @@
-require 'spec_helper'
+# encoding: utf-8
+require 'model_helper'
+require 'app/models/classification_of_types_of_administractive_act'
+require 'app/models/type_of_administractive_act'
 
 describe ClassificationOfTypesOfAdministractiveAct do
   it 'should return description as to_s method' do
