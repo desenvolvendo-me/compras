@@ -7,4 +7,6 @@ describe ClassificationOfTypesOfAdministractiveAct do
   end
 
   it { should validate_presence_of(:description) }
+
+  it { should have_many(:type_of_administractive_acts).dependent(:restrict) }
 end
