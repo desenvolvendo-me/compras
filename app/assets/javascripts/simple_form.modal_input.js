@@ -74,7 +74,7 @@
         modal.remove();
       });
 
-      modal.load(element.data('modal-url')).dialog({modal: true, width: 700, height: 450});
+      modal.load(element.attr('data-modal-url')).dialog({modal: true, width: 700, height: 450});
     }
   });
 
