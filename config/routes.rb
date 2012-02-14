@@ -29,7 +29,6 @@ Tributario::Application.routes.draw do
   # Keep routes sorted alphabetically
   root :to => 'bookmarks#show'
 
-  get 'dashboard/calculation'      => 'dashboard/calculation#index'
   get 'dashboard/general'          => 'dashboard/general#index'
   get 'dashboard/economic'         => 'dashboard/economic#index'
   get 'dashboard/lower'            => 'dashboard/lower#index'
