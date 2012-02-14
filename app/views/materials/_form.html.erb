@@ -40,7 +40,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :material_characteristic, :as => :select, :collection => MaterialCharacteristic %>
+    <%= f.input :material_characteristic %>
   </div>
 
   <div class="yui3-u-1-2">
@@ -48,7 +48,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :material_type, :as => :select, :collection => MaterialType, :disabled => !f.object.material? %>
+    <%= f.input :material_type, :disabled => !f.object.material? %>
   </div>
 
   <div class="yui3-u-1-2">

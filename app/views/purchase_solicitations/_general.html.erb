@@ -34,7 +34,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :kind, :collection => PurchaseSolicitationKind.to_a %>
+    <%= f.input :kind %>
   </div>
 </div>
 
@@ -42,7 +42,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :service_status, :collection => PurchaseSolicitationServiceStatus.to_a, :disabled => true %>
+    <%= f.input :service_status, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-3">
