@@ -3,7 +3,8 @@ class EconomicClassificationOfExpenditure < ActiveRecord::Base
   attr_accessible :economic_classification_of_expenditure, :kind
   attr_accessible :description, :docket, :stn_ordinance_id
 
-  attr_modal :kind, :description, :stn_ordinance_id, :economic_classification_of_expenditure
+  attr_modal :economic_classification_of_expenditure, :description, :entity_id,
+             :administractive_act_id, :stn_ordinance_id, :kind
 
   has_enumeration_for :kind, :with => EconomicClassificationOfExpenditureKind, :create_helpers => true
 
