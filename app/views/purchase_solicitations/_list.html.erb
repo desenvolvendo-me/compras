@@ -26,10 +26,10 @@
     <% localized(collection) do |resource| %>
       <tr id="<%= dom_id resource %>">
         <td>
-          <%= resource.id %>
+          <%= link_to resource, edit_resource_path(resource) %>
         </td>
         <td>
-          <%= link_to resource.justification, edit_resource_path(resource) %>
+          <%= resource.justification %>
         </td>
         <td>
           <%= resource.request_date %>

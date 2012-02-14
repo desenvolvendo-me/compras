@@ -56,7 +56,9 @@ feature "PurchaseSolicitations" do
 
     page.should have_notice 'Solicitação de Compra criada com sucesso.'
 
-    click_link 'Novas cadeiras'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       page.should have_field 'Ano', :with => '2012'
@@ -183,7 +185,9 @@ feature "PurchaseSolicitations" do
 
     page.should have_notice 'Solicitação de Compra criada com sucesso.'
 
-    click_link 'Novas cadeiras'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       page.should have_field 'Ano', :with => '2012'
@@ -281,7 +285,9 @@ feature "PurchaseSolicitations" do
 
     click_link 'Solicitações de Compra'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       fill_in 'Ano', :with => '2013'
@@ -311,7 +317,9 @@ feature "PurchaseSolicitations" do
 
     page.should have_notice 'Solicitação de Compra editada com sucesso.'
 
-    click_link 'Novas mesas'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       page.should have_field 'Ano', :with => '2013'
@@ -350,7 +358,9 @@ feature "PurchaseSolicitations" do
 
     click_link 'Solicitações de Compra'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       fill_in 'Ano', :with => '2013'
@@ -386,7 +396,9 @@ feature "PurchaseSolicitations" do
 
     page.should have_notice 'Solicitação de Compra editada com sucesso.'
 
-    click_link 'Novas mesas'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       page.should have_field 'Ano', :with => '2013'
@@ -445,7 +457,9 @@ feature "PurchaseSolicitations" do
 
     click_link 'Solicitações de Compra'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       fill_modal 'Dotação orçamentária', :with => 'Conserto'
@@ -455,7 +469,9 @@ feature "PurchaseSolicitations" do
 
     page.should have_notice 'Solicitação de Compra editada com sucesso.'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'Dotação selecionada na aba "Dados gerais"'
@@ -469,9 +485,11 @@ feature "PurchaseSolicitations" do
 
     click_link 'Solicitações de Compra'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
-    click_link 'Apagar Reparo nas instalações', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Solicitação de Compra apagada com sucesso.'
 
@@ -489,7 +507,9 @@ feature "PurchaseSolicitations" do
 
     click_link 'Solicitações de Compra'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dotações orçamentárias' do
       click_button 'Remover'
@@ -499,7 +519,9 @@ feature "PurchaseSolicitations" do
 
     page.should have_notice 'Solicitação de Compra editada com sucesso.'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dotações orçamentárias' do
       page.should_not have_content 'Alocação'
@@ -515,7 +537,9 @@ feature "PurchaseSolicitations" do
 
     click_link 'Solicitações de Compra'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Itens' do
       click_button "Adicionar Item"
@@ -624,7 +648,9 @@ feature "PurchaseSolicitations" do
 
     click_link 'Solicitações de Compra'
 
-    click_link 'Reparo nas instalações'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       fill_modal 'Dotação orçamentária', :with => 'Alocação extra'

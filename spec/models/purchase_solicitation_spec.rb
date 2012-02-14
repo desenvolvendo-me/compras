@@ -7,9 +7,9 @@ require 'app/models/budget_allocation'
 
 describe PurchaseSolicitation do
   it 'should return the id in to_s method' do
-    subject.justification = 'Precisamos de mais cadeiras'
+    subject.id = 1
 
-    subject.to_s.should eq 'Precisamos de mais cadeiras'
+    subject.to_s.should eq '1'
   end
 
   context "#items_total_value" do
