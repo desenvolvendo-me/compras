@@ -13,10 +13,8 @@ class Material < ActiveRecord::Base
   delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
   delegate :stn_ordinance, :stn_ordinance_id, :to => :economic_classification_of_expenditure, :allow_nil => true
 
-  belongs_to :materials_group
   belongs_to :materials_class
   belongs_to :reference_unit
-  belongs_to :stn_ordinance
   belongs_to :service_or_contract_type
   belongs_to :economic_classification_of_expenditure
   has_many :purchase_solicitation_items, :dependent => :restrict

@@ -1,4 +1,4 @@
-<%= f.input :materials_group %>
+<%= f.input :materials_group, :as => :modal, :hidden_field => :materials_group_id %>
 <%= f.input :materials_class, :disabled => f.object.materials_group.blank? %>
 <% if f.object.persisted? %>
   <%= f.input :code, :disabled => true %>
@@ -56,7 +56,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :stn_ordinance %>
+    <%= f.input :stn_ordinance, :as => :modal, :hidden_field => :stn_ordinance_id %>
   </div>
 
   <div class="yui3-u-1-2">
