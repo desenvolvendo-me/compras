@@ -1,7 +1,7 @@
 class Material < ActiveRecord::Base
   attr_accessible :materials_class_id, :code, :description, :detailed_description, :minimum_stock_balance,
                   :reference_unit_id, :manufacturer, :perishable, :storable, :combustible,
-                  :material_characteristic, :service_or_contract_type_id, :material_type, :stn_ordinance,
+                  :material_characteristic, :service_or_contract_type_id, :material_type,
                   :economic_classification_of_expenditure_id
 
   attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_group_id, :materials_class,
