@@ -37,7 +37,7 @@ feature "Materials" do
     #end of javascript test
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
-    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+    fill_modal 'Portaria do STN', :with => 'Portaria Geral', :field => 'Descrição'
     fill_modal 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Criar Material'
@@ -59,7 +59,7 @@ feature "Materials" do
     page.should have_select 'Característica', :with => 'Material'
     page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
     page.should have_disabled_field 'Tipo de material'
-    page.should have_field 'Portaria STN', :with => 'Portaria Geral'
+    page.should have_field 'Portaria do STN', :with => 'Portaria Geral'
     page.should have_field 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00'
   end
 
@@ -85,7 +85,7 @@ feature "Materials" do
     select 'Serviço', :from => 'Característica'
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
-    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+    fill_modal 'Portaria do STN', :with => 'Portaria Geral', :field => 'Descrição'
     fill_modal 'Elemento de despesa', :with => '3.1.90.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Criar Material'
@@ -134,7 +134,7 @@ feature "Materials" do
     # end of javascript test
 
     select 'De consumo', :from => 'Tipo de material'
-    fill_modal 'Portaria STN', :with => 'Portaria Interministerial', :field => 'Descrição'
+    fill_modal 'Portaria do STN', :with => 'Portaria Interministerial', :field => 'Descrição'
     fill_modal 'Elemento de despesa', :with => '2.2.22.11.01.00.00.00', :field => 'Classificação da natureza da despesa'
 
     click_button 'Atualizar Material'
@@ -157,7 +157,7 @@ feature "Materials" do
     page.should have_select 'Característica', :with => 'Serviço'
     page.should have_disabled_field 'Tipo de serviço'
     page.should have_select 'Tipo de material', :with => 'De consumo'
-    page.should have_field 'Portaria STN', :with => 'Portaria Interministerial'
+    page.should have_field 'Portaria do STN', :with => 'Portaria Interministerial'
     page.should have_field 'Elemento de despesa', :with => '2.2.22.11.01.00.00.00'
   end
 
@@ -306,7 +306,7 @@ feature "Materials" do
 
     page.should have_disabled_field 'Elemento de despesa'
 
-    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+    fill_modal 'Portaria do STN', :with => 'Portaria Geral', :field => 'Descrição'
 
     page.should_not have_disabled_field 'Elemento de despesa'
 
@@ -338,11 +338,11 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+    fill_modal 'Portaria do STN', :with => 'Portaria Geral', :field => 'Descrição'
 
     fill_modal 'Elemento de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
 
-    clear_modal 'Portaria STN'
+    clear_modal 'Portaria do STN'
 
     page.should have_disabled_field 'Elemento de despesa'
     page.should have_field 'Elemento de despesa', :with => ''
@@ -359,11 +359,11 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Portaria STN', :with => 'Portaria Geral', :field => 'Descrição'
+    fill_modal 'Portaria do STN', :with => 'Portaria Geral', :field => 'Descrição'
 
     fill_modal 'Elemento de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
 
-    fill_modal 'Portaria STN', :with => 'Portaria Interministerial', :field => 'Descrição'
+    fill_modal 'Portaria do STN', :with => 'Portaria Interministerial', :field => 'Descrição'
 
     page.should have_field 'Elemento de despesa', :with => ''
   end
