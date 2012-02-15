@@ -31,16 +31,23 @@
   margin-right: 1em;
 }
 
-.simple_form input.string, .simple_form input.numeric, .simple_form input.password, .simple_form textarea.text {
+.simple_form select.select[multiple], .simple_form input.string, .simple_form input.numeric, .simple_form input.password, .simple_form textarea.text {
   background-color: #FFF;
   border: 1px solid #DDD;
   border-radius: 5px;
   color: #222;
-  font-size: 131%;
   max-width: 80%;
   outline: 0;
   padding: 10px;
   width: auto;
+}
+
+.simple_form input.string, .simple_form input.numeric, .simple_form input.password, .simple_form textarea.text {
+  font-size: 131%;
+}
+
+.simple_form select.select {
+  min-width: 50px;
 }
 
 .simple_form textarea.text {
@@ -90,4 +97,8 @@
 .simple_form .buttons .negative {
   float: right;
   margin-right: 0;
+}
+
+.simple_form div.spacing {
+  margin-bottom: 1em;
 }
