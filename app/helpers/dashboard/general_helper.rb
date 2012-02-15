@@ -5,31 +5,31 @@ module Dashboard::GeneralHelper
 
   def links
     simple_menu do |m|
-      m.employees
-      m.countries
-      m.states
-      m.cities
-      m.districts
-      m.economic_classification_of_expenditures
-      m.neighborhoods
-      m.streets
-      m.street_types
-      m.land_subdivisions
-      m.condominiums
-      m.condominium_types
-      m.people
-      m.banks
       m.agencies
-      m.bank_accounts
-      m.prefectures
-      m.settings
-      m.fiscal_years
-      m.reference_units
-      m.legal_natures
-      m.currencies
-      m.stn_ordinances
+      m.neighborhoods
+      m.banks
+      m.cities
+      m.economic_classification_of_expenditures
       m.cnaes
+      m.condominiums
+      m.settings
+      m.bank_accounts
+      m.districts
+      m.states
+      m.fiscal_years
+      m.employees
       m.risk_degrees
+      m.streets
+      m.land_subdivisions
+      m.currencies
+      m.legal_natures
+      m.countries
+      m.people
+      m.stn_ordinances
+      m.prefectures
+      m.condominium_types
+      m.street_types
+      m.reference_units
     end
   end
 end
