@@ -202,4 +202,60 @@ feature "Organograms" do
     page.should_not have_content 'Pública'
     page.should_not have_content 'Desenvolvimento Educacional'
   end
+
+  scenario 'trying to create an Organogram with duplicated responsibles as the only error to ensure that it will not be saved' do
+    OrganogramConfiguration.make!(:detran_sopa)
+    AdministrationType.make!(:publica)
+    Address.make!(:general)
+    Employee.make!(:sobrinho)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Organogramas'
+
+    click_link 'Criar Organograma'
+
+    within_tab 'Informações' do
+      fill_in 'Descrição', :with => 'Secretaria de Educação'
+      fill_in 'Sigla', :with => 'SEMUEDU'
+      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_in 'Organograma', :with => '02.00'
+      select 'Analítico', :from => 'Tipo'
+      fill_in 'Código TCE', :with => '051'
+      fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
+      fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
+    end
+
+    within_tab 'Endereços' do
+      fill_modal 'Logradouro', :with => 'Girassol'
+      fill_modal 'Bairro', :with => 'São Francisco'
+      fill_in 'CEP', :with => "33400-500"
+    end
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
+      fill_in 'Data de início', :with => '01/02/2012'
+      fill_in 'Data de término', :with => '10/02/2012'
+      select 'Ativo', :from => 'Status'
+
+      click_button 'Adicionar Responsável'
+
+      within 'fieldset:last' do
+        fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+        fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
+        fill_in 'Data de início', :with => '01/02/2012'
+        fill_in 'Data de término', :with => '10/02/2012'
+        select 'Ativo', :from => 'Status'
+      end
+    end
+
+    click_button 'Criar Organograma'
+
+    within_tab 'Responsáveis' do
+      page.should have_content 'já está em uso'
+    end
+  end
 end

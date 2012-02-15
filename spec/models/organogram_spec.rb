@@ -41,4 +41,26 @@ describe Organogram do
       subject.errors[:organogram].should_not include 'não é válido'
     end
   end
+
+  context 'validating duplicated responsibles' do
+    it "duplicated organogram_responsibles should be invalid except the first" do
+      responsible_one = subject.organogram_responsibles.build(:responsible_id => 1)
+      responsible_two = subject.organogram_responsibles.build(:responsible_id => 1)
+
+      subject.valid?
+
+      responsible_one.errors.messages[:responsible_id].should be_nil
+      responsible_two.errors.messages[:responsible_id].should include "já está em uso"
+    end
+
+    it "the diferent organogram_responsibles should be valid" do
+      responsible_one = subject.organogram_responsibles.build(:responsible_id => 1)
+      responsible_two = subject.organogram_responsibles.build(:responsible_id => 2)
+
+      subject.valid?
+
+      responsible_one.errors.messages[:responsible_id].should be_nil
+      responsible_two.errors.messages[:responsible_id].should be_nil
+    end
+  end
 end

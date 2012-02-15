@@ -18,6 +18,7 @@ class Organogram < ActiveRecord::Base
   validates :performance_field, :organogram_configuration_id, :presence => true
   validates :administration_type, :organogram_kind, :presence => true
   validates :organogram, :mask => :mask
+  validate :cannot_have_duplicated_responsibles
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :organogram_responsibles, :reject_if => :all_blank, :allow_destroy => true
@@ -29,5 +30,19 @@ class Organogram < ActiveRecord::Base
 
   def to_s
     description
+  end
+
+  protected
+
+  def cannot_have_duplicated_responsibles
+   single_responsibles = []
+
+   organogram_responsibles.each do |organogram_responsible|
+     if single_responsibles.include?(organogram_responsible.responsible_id)
+       errors.add(:organogram_responsibles)
+       organogram_responsible.errors.add(:responsible_id, :taken)
+     end
+     single_responsibles << organogram_responsible.responsible_id
+   end
   end
 end
