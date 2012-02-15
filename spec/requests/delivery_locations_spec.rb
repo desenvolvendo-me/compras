@@ -9,7 +9,7 @@ feature "DeliveryLocations" do
   scenario 'create a new delivery_location' do
     Address.make!(:general)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Locais de Entrega'
 
@@ -57,7 +57,7 @@ feature "DeliveryLocations" do
     Address.make!(:general)
     DeliveryLocation.make!(:education)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Locais de Entrega'
 
@@ -104,7 +104,7 @@ feature "DeliveryLocations" do
   scenario 'destroy an existent delivery_location' do
     DeliveryLocation.make!(:education)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Locais de Entrega'
 
@@ -120,7 +120,7 @@ feature "DeliveryLocations" do
   scenario 'create a new delivery_location' do
     DeliveryLocation.make!(:health)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Locais de Entrega'
 

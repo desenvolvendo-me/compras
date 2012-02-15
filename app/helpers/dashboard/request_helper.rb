@@ -14,6 +14,7 @@ module Dashboard::RequestHelper
       m.communication_sources
       m.dissemination_sources
       m.service_or_contract_types
+      m.delivery_locations
     end
   end
 end
