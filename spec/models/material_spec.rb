@@ -51,4 +51,16 @@ describe Material do
     subject.valid?
     subject.errors.messages[:materials_class_id].should include "não faz parte do grupo selecionado"
   end
+
+  it "should have false as the default value of perishable" do
+    subject.perishable.should eq false
+  end
+
+  it "should have false as the default value of storable" do
+    subject.storable.should eq false
+  end
+
+  it "should have false as the default value of combustible" do
+    subject.combustible.should eq false
+  end
 end
