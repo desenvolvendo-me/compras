@@ -24,6 +24,24 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
     page.should have_field 'Descrição', :with => 'description'
   end
 
+  scenario 'validates uniqueness of description' do
+    ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Classificações de Tipo de Ato Administrativo'
+
+    click_link 'Criar Classificação de Tipos de Ato Administrativo'
+
+    fill_in 'Descrição', :with => 'Tipo 01'
+
+    click_button 'Criar Classificação de Tipos de Ato Administrativo'
+
+    page.should_not have_notice 'Classificação Tipos de Ato Administrativo criado com sucesso.'
+
+    page.should have_content 'já está em uso'
+  end
+
   scenario 'update an existent classification_of_types_of_administractive_act' do
     ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
 

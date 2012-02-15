@@ -3,7 +3,7 @@ class ClassificationOfTypesOfAdministractiveAct < ActiveRecord::Base
 
   has_many :type_of_administractive_acts, :dependent => :restrict
 
-  validates :description, :presence => true
+  validates :description, :uniqueness => true, :presence => true
 
   orderize :description
   filterize
