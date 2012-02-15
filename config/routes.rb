@@ -30,6 +30,7 @@ Tributario::Application.routes.draw do
   root :to => 'bookmarks#show'
 
   get 'dashboard/general'          => 'dashboard/general#index'
+  get 'dashboard/request'          => 'dashboard/request#index'
   get 'dashboard/lower'            => 'dashboard/lower#index'
   get 'dashboard/management'       => 'dashboard/management#index'
 
