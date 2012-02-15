@@ -8,16 +8,16 @@ class Organogram < ActiveRecord::Base
 
   has_enumeration_for :organogram_kind, :create_helpers => true
 
-  validates :description, :organogram, :tce_code, :acronym, :presence => true
-  validates :performance_field, :organogram_configuration_id, :presence => true
-  validates :administration_type, :organogram_kind, :presence => true
-  validates :organogram, :mask => :mask
-
   has_one :address, :as => :addressable, :dependent => :destroy
   belongs_to :organogram_configuration
   belongs_to :administration_type
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :organogram_responsibles, :dependent => :destroy
+
+  validates :description, :organogram, :tce_code, :acronym, :presence => true
+  validates :performance_field, :organogram_configuration_id, :presence => true
+  validates :administration_type, :organogram_kind, :presence => true
+  validates :organogram, :mask => :mask
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :organogram_responsibles, :reject_if => :all_blank, :allow_destroy => true
