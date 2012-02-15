@@ -4,10 +4,6 @@ class Material < ActiveRecord::Base
                   :material_characteristic, :service_or_contract_type_id, :material_type,
                   :economic_classification_of_expenditure_id
 
-  attr_protected :stock_balance, :unit_price, :cash_balance, :materials_group, :materials_group_id, :materials_class,
-                 :reference_unit, :service_or_contract_type, :economic_classification_of_expenditure,
-                 :stn_ordinance, :stn_ordinance_id
-
   attr_modal :description
 
   delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true

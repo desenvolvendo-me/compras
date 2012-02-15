@@ -5,10 +5,6 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   attr_modal :accounting_year, :kind, :delivery_location_id, :organogram_id
 
-  attr_protected :allocation_amount, :service_status, :liberation_date, :liberator, :service_observations,
-                 :no_service_justification, :responsible, :liberator_id, :budget_allocation, :delivery_location,
-                 :organogram, :economic_classification_of_expenditure
-
   delegate :amount, :name, :id, :to => :budget_allocation, :prefix => true, :allow_nil => true
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true

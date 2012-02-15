@@ -1,8 +1,6 @@
 class PurchaseSolicitationItem < ActiveRecord::Base
   attr_accessible :material_id, :quantity, :unit_price, :status
 
-  attr_protected :grouped, :material, :process_number
-
   belongs_to :purchase_solicitation
   belongs_to :material
 
