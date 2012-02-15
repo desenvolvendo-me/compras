@@ -8,7 +8,6 @@ module Dashboard::GeneralHelper
       m.employees
       m.countries
       m.states
-      m.communication_sources
       m.cities
       m.districts
       m.dissemination_sources
@@ -32,7 +31,6 @@ module Dashboard::GeneralHelper
       m.materials_classes
       m.materials
       m.entities
-      m.purchase_solicitations
       m.legal_natures
       m.currencies
       m.stn_ordinances
