@@ -11,14 +11,14 @@ module Dashboard::RequestHelper
 
   def dependencies_links
     simple_menu do |m|
+      m.materials_classes
+      m.entities
       m.communication_sources
       m.dissemination_sources
-      m.service_or_contract_types
+      m.materials_groups
       m.delivery_locations
       m.materials
-      m.materials_classes
-      m.materials_groups
-      m.entities
+      m.service_or_contract_types
     end
   end
 end
