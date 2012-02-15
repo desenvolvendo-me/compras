@@ -18,4 +18,8 @@ describe PurchaseSolicitationItem do
 
     subject.estimated_total_price.should eq(500)
   end
+
+  it "should have false as the default value of grouped" do
+    subject.grouped.should eq false
+  end
 end
