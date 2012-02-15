@@ -32,7 +32,6 @@ module Dashboard::GeneralHelper
       m.materials_groups
       m.materials_classes
       m.materials
-      m.classification_of_types_of_administractive_acts
       m.type_of_administractive_acts
       m.entities
       m.administractive_acts

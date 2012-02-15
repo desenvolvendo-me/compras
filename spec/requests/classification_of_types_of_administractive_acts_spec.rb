@@ -7,7 +7,7 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
   end
 
   scenario 'create a new classification_of_types_of_administractive_act' do
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Classificações de Tipo de Ato Administrativo'
 
@@ -27,7 +27,7 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
   scenario 'validates uniqueness of description' do
     ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Classificações de Tipo de Ato Administrativo'
 
@@ -45,7 +45,7 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
   scenario 'update an existent classification_of_types_of_administractive_act' do
     ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Classificações de Tipo de Ato Administrativo'
 
@@ -65,7 +65,7 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
   scenario 'destroy an existent classification_of_types_of_administractive_act' do
     ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Classificações de Tipo de Ato Administrativo'
 

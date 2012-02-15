@@ -7,6 +7,7 @@ module Dashboard::AccountancyHelper
     simple_menu do |m|
       m.organogram_configurations
       m.organograms
+      m.classification_of_types_of_administractive_acts
     end
   end
 end
