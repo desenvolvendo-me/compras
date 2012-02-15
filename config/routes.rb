@@ -33,6 +33,7 @@ Tributario::Application.routes.draw do
   get 'dashboard/request'          => 'dashboard/request#index'
   get 'dashboard/lower'            => 'dashboard/lower#index'
   get 'dashboard/management'       => 'dashboard/management#index'
+  get 'dashboard/accountancy'       => 'dashboard/accountancy#index'
 
   devise_for :users
 
