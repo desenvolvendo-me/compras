@@ -1,6 +1,6 @@
 <div class="yui3-g modal-finder">
   <div class="yui3-u-1-2">
-    <%= f.input :dissemination_source, :as => :modal, :input_html => { 'data-modal-url' => modal_dissemination_sources_path(:roots => true) }, :hidden_field => false %>
+    <%= f.input :dissemination_sources, :as => :modal, :hidden_field => false, :input_html => { :value => nil } %>
   </div>
 </div>
 
@@ -17,14 +17,14 @@
     </tr>
   </thead>
 
-  <tbody class="<%= f.sanitized_object_name %>_dissemination_source_records">
+  <tbody class="<%= f.sanitized_object_name %>_dissemination_sources_records">
     <% f.object.dissemination_sources.each do |dissemination_source| %>
       <%= render 'dissemination_sources/list_form', :description => dissemination_source.description, :id => dissemination_source.id, :f => f %>
     <% end %>
   </tbody>
 </table>
 
-<%= mustache "#{f.sanitized_object_name}_dissemination_source_template" do %>
+<%= mustache "#{f.sanitized_object_name}_dissemination_sources_template" do %>
   <%= f.association :dissemination_sources, :collection => f.object.dissemination_sources.build do |p| %>
     <%= render 'dissemination_sources/list_form', :description => '{{description}}', :id => '{{id}}', :f => f %>
   <% end %>

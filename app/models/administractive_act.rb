@@ -3,8 +3,6 @@ class AdministractiveAct < ActiveRecord::Base
                   :publication_date, :vigor_date, :end_date, :content, :budget_law_percent,
                   :revenue_antecipation_percent, :authorized_debt_value, :dissemination_source_ids
 
-  attr_accessor :dissemination_source
-
   attr_modal :act_number, :type_of_administractive_act, :legal_text_nature
 
   belongs_to :type_of_administractive_act
