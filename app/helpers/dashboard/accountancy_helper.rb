@@ -9,6 +9,7 @@ module Dashboard::AccountancyHelper
       m.organograms
       m.classification_of_types_of_administractive_acts
       m.type_of_administractive_acts
+      m.administractive_acts
     end
   end
 end

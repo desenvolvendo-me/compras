@@ -9,7 +9,7 @@ feature "AdministractiveActs" do
   scenario 'create a new administractive_act' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Atos Administrativos'
 
@@ -71,7 +71,7 @@ feature "AdministractiveActs" do
     DisseminationSource.make!(:jornal_bairro)
     LegalTextNature.make!(:trabalhista)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Atos Administrativos'
 
@@ -128,7 +128,7 @@ feature "AdministractiveActs" do
 
   scenario 'destroy an existent administractive_act' do
     AdministractiveAct.make!(:sopa)
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Atos Administrativos'
 
@@ -144,7 +144,7 @@ feature "AdministractiveActs" do
   scenario 'should validate uniqueness of act_number' do
     AdministractiveAct.make!(:sopa)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Atos Administrativos'
 
@@ -160,7 +160,7 @@ feature "AdministractiveActs" do
   scenario 'should validate uniqueness of content' do
     AdministractiveAct.make!(:sopa)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Atos Administrativos'
 
@@ -176,7 +176,7 @@ feature "AdministractiveActs" do
   scenario 'remove dissemination source from an existent administractive_act' do
     AdministractiveAct.make!(:sopa)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Atos Administrativos'
 
