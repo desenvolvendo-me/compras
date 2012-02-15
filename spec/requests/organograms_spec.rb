@@ -12,7 +12,7 @@ feature "Organograms" do
     Address.make!(:general)
     Employee.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Organogramas'
 
@@ -90,7 +90,7 @@ feature "Organograms" do
     Employee.make!(:wenderson)
     AdministractiveAct.make!(:emenda)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Organogramas'
 
@@ -156,7 +156,7 @@ feature "Organograms" do
   scenario 'remove a responsible' do
     Organogram.make!(:secretaria_de_educacao)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Organogramas'
 
@@ -184,7 +184,7 @@ feature "Organograms" do
   scenario 'destroy an existent organogram' do
     Organogram.make!(:secretaria_de_educacao)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Organogramas'
 
@@ -209,7 +209,7 @@ feature "Organograms" do
     Address.make!(:general)
     Employee.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Organogramas'
 
