@@ -10,7 +10,7 @@ feature "OrganogramConfigurations" do
     Entity.make!(:detran)
     AdministractiveAct.make!(:sopa)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Configurações de Organograma'
 
@@ -56,7 +56,7 @@ feature "OrganogramConfigurations" do
   end
 
   scenario 'calculate mask with javascript' do
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Configurações de Organograma'
 
@@ -84,7 +84,7 @@ feature "OrganogramConfigurations" do
   scenario 'update an existent organogram_configuration' do
     OrganogramConfiguration.make!(:detran_sopa)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Configurações de Organograma'
 
@@ -106,7 +106,7 @@ feature "OrganogramConfigurations" do
   scenario 'destroy an existent organogram_configuration' do
     OrganogramConfiguration.make!(:detran_sopa)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Configurações de Organograma'
 

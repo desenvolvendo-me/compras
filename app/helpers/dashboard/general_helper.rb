@@ -8,7 +8,7 @@ module Dashboard::GeneralHelper
       m.employees
       m.countries
       m.states
-      m.organogram_configurations
+      m.communication_sources
       m.cities
       m.districts
       m.dissemination_sources

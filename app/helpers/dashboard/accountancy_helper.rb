@@ -5,6 +5,7 @@ module Dashboard::AccountancyHelper
 
   def links
     simple_menu do |m|
+      m.organogram_configurations
     end
   end
 end
