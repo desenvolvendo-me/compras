@@ -8,4 +8,10 @@ module Dashboard::RequestHelper
       m.purchase_solicitations
     end
   end
+
+  def dependencies_links
+    simple_menu do |m|
+      m.communication_sources
+    end
+  end
 end

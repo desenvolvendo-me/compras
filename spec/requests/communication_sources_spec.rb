@@ -7,7 +7,7 @@ feature "CommunicationSources" do
   end
 
   scenario 'create a new communication_source' do
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Fontes de Comunicação'
 
@@ -27,7 +27,7 @@ feature "CommunicationSources" do
   scenario 'validates uniqueness of description' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Fontes de Comunicação'
 
@@ -45,7 +45,7 @@ feature "CommunicationSources" do
   scenario 'update an existent communication_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Fontes de Comunicação'
 
@@ -65,7 +65,7 @@ feature "CommunicationSources" do
   scenario 'destroy an existent communication_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Fontes de Comunicação'
 
