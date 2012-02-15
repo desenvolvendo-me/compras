@@ -18,6 +18,7 @@ module Dashboard::RequestHelper
       m.materials
       m.materials_classes
       m.materials_groups
+      m.entities
     end
   end
 end

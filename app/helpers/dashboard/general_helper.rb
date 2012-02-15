@@ -25,7 +25,6 @@ module Dashboard::GeneralHelper
       m.settings
       m.fiscal_years
       m.reference_units
-      m.entities
       m.legal_natures
       m.currencies
       m.stn_ordinances
