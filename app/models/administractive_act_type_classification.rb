@@ -1,4 +1,4 @@
-class ClassificationOfTypesOfAdministractiveAct < ActiveRecord::Base
+class AdministractiveActTypeClassification < ActiveRecord::Base
   attr_accessible :description
 
   has_many :type_of_administractive_acts, :dependent => :restrict

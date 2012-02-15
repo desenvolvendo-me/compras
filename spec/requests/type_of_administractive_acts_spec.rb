@@ -7,7 +7,7 @@ feature "TypeOfAdministractiveActs" do
   end
 
   scenario 'create a new type_of_administractive_act' do
-    ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
+    AdministractiveActTypeClassification.make!(:primeiro_tipo)
 
     click_link 'Contabilidade'
 
@@ -48,7 +48,7 @@ feature "TypeOfAdministractiveActs" do
 
   scenario 'update an existent type_of_administractive_act' do
     TypeOfAdministractiveAct.make!(:lei)
-    ClassificationOfTypesOfAdministractiveAct.make!(:segundo_tipo)
+    AdministractiveActTypeClassification.make!(:segundo_tipo)
 
     click_link 'Contabilidade'
 

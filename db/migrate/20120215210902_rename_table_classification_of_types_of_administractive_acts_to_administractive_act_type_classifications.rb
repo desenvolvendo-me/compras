@@ -1,0 +1,5 @@
+class RenameTableClassificationOfTypesOfAdministractiveActsToAdministractiveActTypeClassifications < ActiveRecord::Migration
+  def change
+    rename_table :classification_of_types_of_administractive_acts, :administractive_act_type_classifications
+  end
+end

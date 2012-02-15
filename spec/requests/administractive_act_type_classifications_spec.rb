@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "ClassificationOfTypesOfAdministractiveActs" do
+feature "AdministractiveActTypeClassifications" do
   background do
     sign_in
   end
 
-  scenario 'create a new classification_of_types_of_administractive_act' do
+  scenario 'create a new administractive_act_type_classification' do
     click_link 'Contabilidade'
 
     click_link 'Classificações de Tipo de Ato Administrativo'
@@ -25,7 +25,7 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
   end
 
   scenario 'validates uniqueness of description' do
-    ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
+    AdministractiveActTypeClassification.make!(:primeiro_tipo)
 
     click_link 'Contabilidade'
 
@@ -42,8 +42,8 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
     page.should have_content 'já está em uso'
   end
 
-  scenario 'update an existent classification_of_types_of_administractive_act' do
-    ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
+  scenario 'update an existent administractive_act_type_classification' do
+    AdministractiveActTypeClassification.make!(:primeiro_tipo)
 
     click_link 'Contabilidade'
 
@@ -62,8 +62,8 @@ feature "ClassificationOfTypesOfAdministractiveActs" do
     page.should have_field 'Descrição', :with => 'Segundo Tipo'
   end
 
-  scenario 'destroy an existent classification_of_types_of_administractive_act' do
-    ClassificationOfTypesOfAdministractiveAct.make!(:primeiro_tipo)
+  scenario 'destroy an existent administractive_act_type_classification' do
+    AdministractiveActTypeClassification.make!(:primeiro_tipo)
 
     click_link 'Contabilidade'
 

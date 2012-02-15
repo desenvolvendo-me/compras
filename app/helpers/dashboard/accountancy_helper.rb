@@ -6,7 +6,7 @@ module Dashboard::AccountancyHelper
   def links
     simple_menu do |m|
       m.administractive_acts
-      m.classification_of_types_of_administractive_acts
+      m.administractive_act_type_classifications
       m.expense_economic_classifications
       m.organogram_configurations
       m.budget_allocations

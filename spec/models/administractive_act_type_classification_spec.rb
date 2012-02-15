@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/classification_of_types_of_administractive_act'
+require 'app/models/administractive_act_type_classification'
 require 'app/models/type_of_administractive_act'
 
-describe ClassificationOfTypesOfAdministractiveAct do
+describe AdministractiveActTypeClassification do
   it 'should return description as to_s method' do
     subject.description = 'Classification of Types'
     subject.to_s.should eq 'Classification of Types'

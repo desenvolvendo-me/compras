@@ -110,7 +110,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :classification_of_types_of_administractive_acts do
+  resources :administractive_act_type_classifications do
     collection do
       get :filter
       get :modal

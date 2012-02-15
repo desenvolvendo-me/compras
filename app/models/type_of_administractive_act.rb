@@ -1,12 +1,12 @@
 class TypeOfAdministractiveAct < ActiveRecord::Base
-  attr_accessible :description, :classification_of_types_of_administractive_act_id
+  attr_accessible :description, :administractive_act_type_classification_id
 
-  belongs_to :classification_of_types_of_administractive_act
+  belongs_to :administractive_act_type_classification
 
   has_many :administractive_acts, :dependent => :restrict
 
   validates :description, :presence => true, :uniqueness => true
-  validates :classification_of_types_of_administractive_act_id, :presence => true
+  validates :administractive_act_type_classification_id, :presence => true
 
   filterize
   orderize :description
