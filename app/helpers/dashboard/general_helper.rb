@@ -33,7 +33,6 @@ module Dashboard::GeneralHelper
       m.materials_classes
       m.materials
       m.entities
-      m.administration_types
       m.budget_allocations
       m.legal_natures
       m.legal_text_natures

@@ -9,7 +9,7 @@ feature "AdministrationTypes" do
   scenario 'create a new administration_type' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Tipos de Administração'
 
@@ -38,7 +38,7 @@ feature "AdministrationTypes" do
     AdministrationType.make!(:publica)
     LegalNature.make!(:executivo_federal)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Tipos de Administração'
 
@@ -63,7 +63,7 @@ feature "AdministrationTypes" do
 
   scenario 'destroy an existent administration_type' do
     AdministrationType.make!(:publica)
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Tipos de Administração'
 
@@ -79,7 +79,7 @@ feature "AdministrationTypes" do
   scenario 'validates uniqueness of description' do
     AdministrationType.make!(:publica)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Tipos de Administração'
 
