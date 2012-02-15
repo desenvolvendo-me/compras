@@ -1,19 +1,19 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "EconomicClassificationOfExpenditures" do
+feature "ExpenseEconomicClassifications" do
   background do
     sign_in
   end
 
-  scenario 'create a new economic_classification_of_expenditure' do
+  scenario 'create a new expense_economic_classification' do
     Entity.make!(:detran)
     AdministractiveAct.make!(:sopa)
     StnOrdinance.make!(:geral)
 
     click_link 'Contabilidade'
 
-    click_link 'Classificações Econômica das Despesas'
+    click_link 'Classificações Econômicas das Despesas'
 
     click_link 'Criar Classificação econômica das despesas'
 
@@ -40,15 +40,15 @@ feature "EconomicClassificationOfExpenditures" do
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
   end
 
-  scenario 'update an existent economic_classification_of_expenditure' do
-    EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
+  scenario 'update an existent expense_economic_classification' do
+    ExpenseEconomicClassification.make!(:vencimento_e_salarios)
     Entity.make!(:secretaria_de_educacao)
     AdministractiveAct.make!(:emenda)
     StnOrdinance.make!(:interministerial)
 
     click_link 'Contabilidade'
 
-    click_link 'Classificações Econômica das Despesas'
+    click_link 'Classificações Econômicas das Despesas'
 
     click_link '3.1.90.11.01.00.00.00'
 
@@ -75,12 +75,12 @@ feature "EconomicClassificationOfExpenditures" do
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
   end
 
-  scenario 'destroy an existent economic_classification_of_expenditure' do
-    EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
+  scenario 'destroy an existent expense_economic_classification' do
+    ExpenseEconomicClassification.make!(:vencimento_e_salarios)
 
     click_link 'Contabilidade'
 
-    click_link 'Classificações Econômica das Despesas'
+    click_link 'Classificações Econômicas das Despesas'
 
     click_link '3.1.90.11.01.00.00.00'
 

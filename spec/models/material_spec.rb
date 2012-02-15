@@ -11,14 +11,14 @@ describe Material do
   end
 
   it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
-  it { should belong_to :economic_classification_of_expenditure }
+  it { should belong_to :expense_economic_classification }
 
   it { should validate_presence_of :materials_class_id }
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
   it { should validate_presence_of :material_characteristic }
   it { should validate_presence_of :reference_unit_id }
-  it { should validate_presence_of :economic_classification_of_expenditure_id }
+  it { should validate_presence_of :expense_economic_classification_id }
 
   it "should validate presence of material_type only if material_characteristic is material" do
     subject.should_not validate_presence_of(:material_type)

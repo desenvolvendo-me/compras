@@ -9,7 +9,6 @@ module Dashboard::GeneralHelper
       m.neighborhoods
       m.banks
       m.cities
-      m.economic_classification_of_expenditures
       m.cnaes
       m.condominiums
       m.settings

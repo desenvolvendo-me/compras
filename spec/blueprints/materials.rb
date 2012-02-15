@@ -12,7 +12,7 @@ Material.blueprint(:manga) do
   material_characteristic { "material" }
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
-  economic_classification_of_expenditure { EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios) }
+  expense_economic_classification { ExpenseEconomicClassification.make!(:vencimento_e_salarios) }
 end
 
 Material.blueprint(:cadeira) do
@@ -29,7 +29,7 @@ Material.blueprint(:cadeira) do
   material_characteristic { "material" }
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
-  economic_classification_of_expenditure { EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios) }
+  expense_economic_classification { ExpenseEconomicClassification.make!(:vencimento_e_salarios) }
 end
 
 Material.blueprint(:balde) do
@@ -44,5 +44,5 @@ Material.blueprint(:balde) do
   material_characteristic { "material" }
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
-  economic_classification_of_expenditure { EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios) }
+  expense_economic_classification { ExpenseEconomicClassification.make!(:vencimento_e_salarios) }
 end

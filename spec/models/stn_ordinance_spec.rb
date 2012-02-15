@@ -10,5 +10,5 @@ describe StnOrdinance do
 
   it { should validate_presence_of :description }
 
-  it { should have_many(:economic_classification_of_expenditures).dependent(:restrict) }
+  it { should have_many(:expense_economic_classifications).dependent(:restrict) }
 end

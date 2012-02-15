@@ -25,4 +25,4 @@ pt-BR:
         service_or_contract_type: "Tipo de serviço ou Contrato"
         material_type: "Tipo de material"
         stn_ordinance: "Portaria do STN"
-        economic_classification_of_expenditure: "Elemento de despesa"
+        expense_economic_classification: "Elemento de despesa"

@@ -2,24 +2,24 @@ class Material < ActiveRecord::Base
   attr_accessible :materials_class_id, :code, :description, :detailed_description, :minimum_stock_balance,
                   :reference_unit_id, :manufacturer, :perishable, :storable, :combustible,
                   :material_characteristic, :service_or_contract_type_id, :material_type,
-                  :economic_classification_of_expenditure_id
+                  :expense_economic_classification_id
 
   attr_modal :description
 
   delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
-  delegate :stn_ordinance, :stn_ordinance_id, :to => :economic_classification_of_expenditure, :allow_nil => true
+  delegate :stn_ordinance, :stn_ordinance_id, :to => :expense_economic_classification, :allow_nil => true
 
   belongs_to :materials_class
   belongs_to :reference_unit
   belongs_to :service_or_contract_type
-  belongs_to :economic_classification_of_expenditure
+  belongs_to :expense_economic_classification
   has_many :purchase_solicitation_items, :dependent => :restrict
 
   orderize :description
   filterize
 
   validates :materials_group_id, :materials_class_id, :reference_unit_id, :material_characteristic, :presence => true
-  validates :economic_classification_of_expenditure_id, :presence => true
+  validates :expense_economic_classification_id, :presence => true
   validates :code, :presence => true, :uniqueness => true
   validates :description, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?

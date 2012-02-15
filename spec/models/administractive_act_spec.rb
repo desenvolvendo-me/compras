@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/administractive_act'
-require 'app/models/economic_classification_of_expenditure'
+require 'app/models/expense_economic_classification'
 require 'app/models/organogram_configuration'
 require 'app/models/organogram_responsible'
 
@@ -13,7 +13,7 @@ describe AdministractiveAct do
 
   it { should belong_to :type_of_administractive_act }
   it { should belong_to :legal_text_nature }
-  it { should have_many(:economic_classification_of_expenditures).dependent(:restrict) }
+  it { should have_many(:expense_economic_classifications).dependent(:restrict) }
   it { should have_many(:organogram_configurations).dependent(:restrict) }
   it { should have_many(:organogram_responsibles).dependent(:restrict) }
 

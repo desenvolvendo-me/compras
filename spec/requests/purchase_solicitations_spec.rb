@@ -279,7 +279,7 @@ feature "PurchaseSolicitations" do
     DeliveryLocation.make!(:health)
     Material.make!(:manga)
     Organogram.make!(:secretaria_de_desenvolvimento)
-    EconomicClassificationOfExpenditure.make!(:compra_de_material)
+    ExpenseEconomicClassification.make!(:compra_de_material)
 
     click_link 'Solicitações'
 
@@ -352,7 +352,7 @@ feature "PurchaseSolicitations" do
     DeliveryLocation.make!(:health)
     Material.make!(:manga)
     Organogram.make!(:secretaria_de_desenvolvimento)
-    EconomicClassificationOfExpenditure.make!(:compra_de_material)
+    ExpenseEconomicClassification.make!(:compra_de_material)
 
     click_link 'Solicitações'
 
@@ -775,6 +775,6 @@ feature "PurchaseSolicitations" do
     DeliveryLocation.make!(:education)
     Material.make!(:cadeira)
     Organogram.make!(:secretaria_de_educacao)
-    EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
+    ExpenseEconomicClassification.make!(:vencimento_e_salarios)
   end
 end

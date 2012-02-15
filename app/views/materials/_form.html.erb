@@ -62,7 +62,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :economic_classification_of_expenditure, :disabled => f.object.stn_ordinance.blank? %>
+    <%= f.input :expense_economic_classification, :disabled => f.object.stn_ordinance.blank? %>
   </div>
 </div>
 
@@ -93,13 +93,13 @@
 
   $('#material_stn_ordinance_id').change(function() {
     if (this.value) {
-      $('#material_economic_classification_of_expenditure').attr('disabled', false);
-      $('#material_economic_classification_of_expenditure').attr('data-modal-url', economicClassificationOfExpenditureModalUrl);
+      $('#material_expense_economic_classification').attr('disabled', false);
+      $('#material_expense_economic_classification').attr('data-modal-url', expenseEconomicClassificationModalUrl);
     } else {
-      $('#material_economic_classification_of_expenditure').attr('disabled', true);
+      $('#material_expense_economic_classification').attr('disabled', true);
     }
 
-    clearEconomicClassificationOfExpenditure();
+    clearExpenseEconomicClassification();
   }).change();
 
   function clearMaterialsClass() {
@@ -111,12 +111,12 @@
     }
   }
 
-  function clearEconomicClassificationOfExpenditure() {
+  function clearExpenseEconomicClassification() {
     if ($('#material_stn_ordinance_id').val() != stn_ordinance_id) {
       stn_ordinance_id = $('#material_stn_ordinance_id').val();
 
-      $('#material_economic_classification_of_expenditure').val('');
-      $('#material_economic_classification_of_expenditure_id').val('');
+      $('#material_expense_economic_classification').val('');
+      $('#material_expense_economic_classification_id').val('');
     }
   }
 
@@ -134,11 +134,11 @@
     return url;
   }
 
-  function economicClassificationOfExpenditureModalUrl() {
-    var url = "<%= modal_economic_classification_of_expenditures_path %>?",
+  function expenseEconomicClassificationModalUrl() {
+    var url = "<%= modal_expense_economic_classifications_path %>?",
         params = {
           locked_fields: ["stn_ordinance"],
-          economic_classification_of_expenditure: {
+          expense_economic_classification: {
             stn_ordinance_id: $('#material_stn_ordinance_id').val()
           }
         };

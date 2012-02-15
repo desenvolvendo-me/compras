@@ -39,7 +39,7 @@ describe PurchaseSolicitation do
   end
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
-  it {should belong_to :economic_classification_of_expenditure }
+  it {should belong_to :expense_economic_classification }
   it {should belong_to :responsible }
   it {should belong_to :budget_allocation }
   it {should belong_to :delivery_location }

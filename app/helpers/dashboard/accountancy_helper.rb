@@ -7,7 +7,7 @@ module Dashboard::AccountancyHelper
     simple_menu do |m|
       m.administractive_acts
       m.classification_of_types_of_administractive_acts
-      m.economic_classification_of_expenditures
+      m.expense_economic_classifications
       m.organogram_configurations
       m.budget_allocations
       m.legal_text_natures

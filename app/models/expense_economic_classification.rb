@@ -1,12 +1,12 @@
-class EconomicClassificationOfExpenditure < ActiveRecord::Base
+class ExpenseEconomicClassification < ActiveRecord::Base
   attr_accessible :entity_id, :administractive_act_id
-  attr_accessible :economic_classification_of_expenditure, :kind
+  attr_accessible :expense_economic_classification, :kind
   attr_accessible :description, :docket, :stn_ordinance_id
 
-  attr_modal :economic_classification_of_expenditure, :description, :entity_id,
+  attr_modal :expense_economic_classification, :description, :entity_id,
              :administractive_act_id, :stn_ordinance_id, :kind
 
-  has_enumeration_for :kind, :with => EconomicClassificationOfExpenditureKind, :create_helpers => true
+  has_enumeration_for :kind, :with => ExpenseEconomicClassificationKind, :create_helpers => true
 
   belongs_to :entity
   belongs_to :administractive_act
@@ -15,14 +15,14 @@ class EconomicClassificationOfExpenditure < ActiveRecord::Base
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :materials, :dependent => :restrict
 
-  validates :economic_classification_of_expenditure, :kind, :description, :presence => true
-  validates :economic_classification_of_expenditure, :mask => '9.9.99.99.99.99.99.99'
+  validates :expense_economic_classification, :kind, :description, :presence => true
+  validates :expense_economic_classification, :mask => '9.9.99.99.99.99.99.99'
   validates :stn_ordinance_id, :presence => true
 
   orderize :description
   filterize
 
   def to_s
-    economic_classification_of_expenditure
+    expense_economic_classification
   end
 end

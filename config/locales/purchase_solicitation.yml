@@ -14,7 +14,7 @@ pt-BR:
         responsible: "Responsável pela solicitação"
         justification: "Justificativa da solicitação"
         budget_allocation: "Dotação orçamentária"
-        economic_classification_of_expenditure: "Classificação econômica da despesa"
+        expense_economic_classification: "Classificação econômica da despesa"
         budget_allocation_amount: "Saldo da dotação"
         delivery_location: "Local para entrega"
         kind: "Tipo de solicitação"

@@ -108,7 +108,7 @@ feature "Materials" do
     ReferenceUnit.make!(:metro)
     MaterialsGroup.make!(:limpeza)
     MaterialsClass.make!(:pecas)
-    EconomicClassificationOfExpenditure.make!(:compra_de_material)
+    ExpenseEconomicClassification.make!(:compra_de_material)
     StnOrdinance.make!(:interministerial)
 
     click_link 'Solicitações'
@@ -317,7 +317,7 @@ feature "Materials" do
     end
   end
 
-  it 'should not have the economic classification of expenditure disabled when editing material' do
+  it 'should not have the expense economic classification disabled when editing material' do
     make_dependencies!
 
     Material.make!(:manga)
@@ -331,7 +331,7 @@ feature "Materials" do
     page.should_not have_disabled_field 'Elemento de despesa'
   end
 
-  it 'should disable and empty the economic classification of expenditure when the stn ordinance is removed' do
+  it 'should disable and empty the expense economic classification when the stn ordinance is removed' do
     make_dependencies!
 
     click_link 'Solicitações'
@@ -350,7 +350,7 @@ feature "Materials" do
     page.should have_field 'Elemento de despesa', :with => ''
   end
 
-  it 'should empty the economic classification of expenditure when the stn ordinance are changed' do
+  it 'should empty the expense economic classification when the stn ordinance are changed' do
     make_dependencies!
 
     StnOrdinance.make!(:interministerial)
@@ -375,7 +375,7 @@ feature "Materials" do
     MaterialsClass.make!(:hortifrutigranjeiros)
     ReferenceUnit.make!(:unidade)
     ServiceOrContractType.make!(:trainees)
-    EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
+    ExpenseEconomicClassification.make!(:vencimento_e_salarios)
     StnOrdinance.make!(:geral)
   end
 end
