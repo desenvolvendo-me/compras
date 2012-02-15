@@ -12,5 +12,5 @@ describe TypeOfAdministractiveAct do
   it { should belong_to :classification_of_types_of_administractive_act }
 
   it { should validate_presence_of :description }
-  it { should validate_presence_of :classification_of_types_of_administractive_act }
+  it { should validate_presence_of :classification_of_types_of_administractive_act_id }
 end
