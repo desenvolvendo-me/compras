@@ -33,7 +33,7 @@ module Dashboard::GeneralHelper
       m.materials_classes
       m.materials
       m.entities
-      m.budget_allocations
+      m.purchase_solicitations
       m.legal_natures
       m.legal_text_natures
       m.currencies

@@ -7,7 +7,7 @@ feature "BudgetAllocations" do
   end
 
   scenario 'create a new budget_allocation' do
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Dotações Orçamentárias'
 
@@ -31,7 +31,7 @@ feature "BudgetAllocations" do
   scenario 'update an existent budget_allocation' do
     BudgetAllocation.make!(:alocacao)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Dotações Orçamentárias'
 
@@ -54,7 +54,7 @@ feature "BudgetAllocations" do
 
   scenario 'destroy an existent budget_allocation' do
     BudgetAllocation.make!(:alocacao)
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Dotações Orçamentárias'
 
@@ -70,7 +70,7 @@ feature "BudgetAllocations" do
   scenario 'validates uniqueness of name' do
     BudgetAllocation.make!(:alocacao)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Dotações Orçamentárias'
 

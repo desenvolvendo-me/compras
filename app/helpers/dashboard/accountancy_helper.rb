@@ -11,6 +11,7 @@ module Dashboard::AccountancyHelper
       m.type_of_administractive_acts
       m.administractive_acts
       m.administration_types
+      m.budget_allocations
     end
   end
 end
