@@ -12,7 +12,6 @@ module Dashboard::GeneralHelper
       m.cities
       m.districts
       m.dissemination_sources
-      m.economic_classification_of_expenditures
       m.neighborhoods
       m.streets
       m.street_types

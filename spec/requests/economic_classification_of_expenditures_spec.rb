@@ -11,7 +11,7 @@ feature "EconomicClassificationOfExpenditures" do
     AdministractiveAct.make!(:sopa)
     StnOrdinance.make!(:geral)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Classificações Econômica das Despesas'
 
@@ -46,7 +46,7 @@ feature "EconomicClassificationOfExpenditures" do
     AdministractiveAct.make!(:emenda)
     StnOrdinance.make!(:interministerial)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Classificações Econômica das Despesas'
 
@@ -78,7 +78,7 @@ feature "EconomicClassificationOfExpenditures" do
   scenario 'destroy an existent economic_classification_of_expenditure' do
     EconomicClassificationOfExpenditure.make!(:vencimento_e_salarios)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Classificações Econômica das Despesas'
 

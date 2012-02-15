@@ -13,6 +13,7 @@ module Dashboard::AccountancyHelper
       m.administration_types
       m.budget_allocations
       m.legal_text_natures
+      m.economic_classification_of_expenditures
     end
   end
 end
