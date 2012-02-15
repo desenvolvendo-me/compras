@@ -12,6 +12,7 @@ module Dashboard::RequestHelper
   def dependencies_links
     simple_menu do |m|
       m.communication_sources
+      m.dissemination_sources
     end
   end
 end

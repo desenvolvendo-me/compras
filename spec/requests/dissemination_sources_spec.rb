@@ -9,7 +9,7 @@ feature "DisseminationSources" do
   scenario 'create a new dissemination_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Fontes de Divulgação'
 
@@ -31,7 +31,7 @@ feature "DisseminationSources" do
   scenario 'validates uniqueness of description' do
     DisseminationSource.make!(:jornal_municipal)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Fontes de Divulgação'
 
@@ -50,7 +50,7 @@ feature "DisseminationSources" do
     DisseminationSource.make!(:jornal_municipal)
     CommunicationSource.make!(:jornal_estadual)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Fontes de Divulgação'
 
@@ -73,7 +73,8 @@ feature "DisseminationSources" do
 
   scenario 'destroy an existent dissemination_source' do
     DisseminationSource.make!(:jornal_municipal)
-    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações'
 
     click_link 'Fontes de Divulgação'
 
