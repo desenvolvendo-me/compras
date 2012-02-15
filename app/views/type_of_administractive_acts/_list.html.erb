@@ -7,6 +7,9 @@
       <th>
         <%= resource_class.human_attribute_name :description %>
       </th>
+      <th>
+        <%= resource_class.human_attribute_name :classification_of_types_of_administractive_act %>
+      </th>
     </tr>
   </thead>
 
@@ -18,6 +21,9 @@
         </td>
         <td>
           <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.classification_of_types_of_administractive_act %>
         </td>
       </tr>
     <% end %>
