@@ -7,7 +7,7 @@ feature "ServiceOrContractType" do
   end
 
   scenario 'create a new service' do
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Tipos de Serviço'
 
@@ -31,7 +31,7 @@ feature "ServiceOrContractType" do
   scenario 'validates uniqueness of description' do
     ServiceOrContractType.make!(:trainees)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Tipos de Serviço'
 
@@ -49,7 +49,7 @@ feature "ServiceOrContractType" do
   scenario 'update an existent service' do
     ServiceOrContractType.make!(:trainees)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Tipos de Serviço'
 
@@ -71,7 +71,7 @@ feature "ServiceOrContractType" do
   scenario 'destroy an existent service' do
     ServiceOrContractType.make!(:trainees)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Tipos de Serviço'
 
