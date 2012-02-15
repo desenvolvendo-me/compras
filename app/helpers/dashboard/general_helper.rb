@@ -40,7 +40,6 @@ module Dashboard::GeneralHelper
       m.administractive_acts
       m.administration_types
       m.budget_allocations
-      m.purchase_solicitations
       m.legal_natures
       m.legal_text_natures
       m.currencies

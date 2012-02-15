@@ -13,7 +13,7 @@ feature "PurchaseSolicitations" do
   scenario 'create a new purchase_solicitation' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -91,7 +91,7 @@ feature "PurchaseSolicitations" do
     make_dependencies!
     BudgetAllocation.make!(:conserto)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -118,7 +118,7 @@ feature "PurchaseSolicitations" do
     make_dependencies!
     BudgetAllocation.make!(:alocacao_extra)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -228,7 +228,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'should show date current as request date' do
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -240,7 +240,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'should show current year as default accounting year' do
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -255,7 +255,7 @@ feature "PurchaseSolicitations" do
     pending "Don't work with hidden alements"
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -281,7 +281,7 @@ feature "PurchaseSolicitations" do
     Organogram.make!(:secretaria_de_desenvolvimento)
     EconomicClassificationOfExpenditure.make!(:compra_de_material)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -354,7 +354,7 @@ feature "PurchaseSolicitations" do
     Organogram.make!(:secretaria_de_desenvolvimento)
     EconomicClassificationOfExpenditure.make!(:compra_de_material)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -436,7 +436,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'should be current_user employee attribute as default responsible' do
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -453,7 +453,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:conserto)
     BudgetAllocation.make!(:conserto)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -481,7 +481,8 @@ feature "PurchaseSolicitations" do
 
   scenario 'destroy an existent purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo)
-    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -503,7 +504,7 @@ feature "PurchaseSolicitations" do
   scenario 'remove budget allocation from an existent purchase_solicitation' do
     PurchaseSolicitation.make!(:conserto)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -533,7 +534,7 @@ feature "PurchaseSolicitations" do
 
     PurchaseSolicitation.make!(:conserto)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -558,7 +559,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'calculate total item price via javascript' do
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -578,7 +579,7 @@ feature "PurchaseSolicitations" do
   scenario 'getting and cleaning budget amount depending on budget allocation field' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -598,7 +599,7 @@ feature "PurchaseSolicitations" do
   scenario 'create a new purchase_solicitation with budget amount less than total items value' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -644,7 +645,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     BudgetAllocation.make!(:alocacao_extra)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -675,7 +676,7 @@ feature "PurchaseSolicitations" do
     make_dependencies!
     BudgetAllocation.make!(:alocacao_extra)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 
@@ -720,7 +721,7 @@ feature "PurchaseSolicitations" do
     make_dependencies!
     BudgetAllocation.make!(:alocacao_extra)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
 

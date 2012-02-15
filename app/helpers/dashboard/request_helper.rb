@@ -5,6 +5,7 @@ module Dashboard::RequestHelper
 
   def links
     simple_menu do |m|
+      m.purchase_solicitations
     end
   end
 end
