@@ -17,6 +17,7 @@ module Dashboard::RequestHelper
       m.delivery_locations
       m.materials
       m.materials_classes
+      m.materials_groups
     end
   end
 end
