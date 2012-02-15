@@ -35,7 +35,6 @@ module Dashboard::GeneralHelper
       m.entities
       m.purchase_solicitations
       m.legal_natures
-      m.legal_text_natures
       m.currencies
       m.stn_ordinances
       m.cnaes

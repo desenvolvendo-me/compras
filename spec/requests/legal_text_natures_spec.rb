@@ -7,7 +7,7 @@ feature "LegalTextNatures" do
   end
 
   scenario 'create a new legal_texts_nature' do
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Naturezas de Textos Jurídicos'
 
@@ -27,7 +27,7 @@ feature "LegalTextNatures" do
   scenario 'update an existent legal_texts_nature' do
     LegalTextNature.make!(:civica)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Naturezas de Textos Jurídicos'
 
@@ -46,7 +46,7 @@ feature "LegalTextNatures" do
 
   scenario 'destroy an existent legal_texts_nature' do
     LegalTextNature.make!(:civica)
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Naturezas de Textos Jurídicos'
 
@@ -62,7 +62,7 @@ feature "LegalTextNatures" do
   scenario 'validate uniqueness of name' do
     LegalTextNature.make!(:civica)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Contabilidade'
 
     click_link 'Naturezas de Textos Jurídicos'
 

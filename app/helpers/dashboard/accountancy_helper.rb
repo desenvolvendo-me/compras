@@ -12,6 +12,7 @@ module Dashboard::AccountancyHelper
       m.administractive_acts
       m.administration_types
       m.budget_allocations
+      m.legal_text_natures
     end
   end
 end
