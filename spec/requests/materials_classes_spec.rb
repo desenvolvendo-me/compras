@@ -9,7 +9,7 @@ feature "MaterialsClasses" do
   scenario 'create a new materials_class' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Classes de Materiais'
 
@@ -38,7 +38,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:hortifrutigranjeiros)
     MaterialsGroup.make!(:limpeza)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Classes de Materiais'
 
@@ -63,7 +63,8 @@ feature "MaterialsClasses" do
 
   scenario 'destroy an existent materials_class' do
     MaterialsClass.make!(:hortifrutigranjeiros)
-    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações'
 
     click_link 'Classes de Materiais'
 
@@ -82,7 +83,7 @@ feature "MaterialsClasses" do
     make_dependencies!
     MaterialsClass.make!(:hortifrutigranjeiros)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Classes de Materiais'
 
@@ -101,7 +102,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:hortifrutigranjeiros)
     MaterialsGroup.make!(:limpeza)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Classes de Materiais'
 
@@ -119,7 +120,7 @@ feature "MaterialsClasses" do
     make_dependencies!
     MaterialsClass.make!(:hortifrutigranjeiros)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Classes de Materiais'
 
@@ -138,7 +139,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:hortifrutigranjeiros)
     MaterialsGroup.make!(:limpeza)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Classes de Materiais'
 

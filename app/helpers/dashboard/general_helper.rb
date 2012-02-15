@@ -26,7 +26,6 @@ module Dashboard::GeneralHelper
       m.fiscal_years
       m.reference_units
       m.materials_groups
-      m.materials_classes
       m.entities
       m.legal_natures
       m.currencies

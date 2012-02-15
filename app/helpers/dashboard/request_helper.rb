@@ -16,6 +16,7 @@ module Dashboard::RequestHelper
       m.service_or_contract_types
       m.delivery_locations
       m.materials
+      m.materials_classes
     end
   end
 end
