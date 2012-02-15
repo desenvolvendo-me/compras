@@ -27,7 +27,6 @@ module Dashboard::GeneralHelper
       m.reference_units
       m.materials_groups
       m.materials_classes
-      m.materials
       m.entities
       m.legal_natures
       m.currencies

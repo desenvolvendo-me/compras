@@ -9,7 +9,7 @@ feature "Materials" do
   scenario 'create a new material' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -66,7 +66,7 @@ feature "Materials" do
   scenario 'generate code' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -111,7 +111,7 @@ feature "Materials" do
     EconomicClassificationOfExpenditure.make!(:compra_de_material)
     StnOrdinance.make!(:interministerial)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -163,7 +163,8 @@ feature "Materials" do
 
   scenario 'destroy an existent material' do
     Material.make!(:manga)
-    click_link 'Cadastros Diversos'
+
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -179,7 +180,7 @@ feature "Materials" do
   scenario 'should validate uniqueness of name' do
     Material.make!(:manga)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -195,7 +196,7 @@ feature "Materials" do
   scenario 'should clean the unnecessary type of material or service depending on characteristic' do
     Material.make!(:manga)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -227,7 +228,7 @@ feature "Materials" do
   it 'should show selected group on class modal' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -249,7 +250,7 @@ feature "Materials" do
 
     Material.make!(:manga)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -261,7 +262,7 @@ feature "Materials" do
   it 'should disable and empty the class when the group is removed' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -281,7 +282,7 @@ feature "Materials" do
     MaterialsGroup.make!(:limpeza)
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -299,7 +300,7 @@ feature "Materials" do
   it 'should show selected stn ordinance on economic classification of expediture modal' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -321,7 +322,7 @@ feature "Materials" do
 
     Material.make!(:manga)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -333,7 +334,7 @@ feature "Materials" do
   it 'should disable and empty the economic classification of expenditure when the stn ordinance is removed' do
     make_dependencies!
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 
@@ -354,7 +355,7 @@ feature "Materials" do
 
     StnOrdinance.make!(:interministerial)
 
-    click_link 'Cadastros Diversos'
+    click_link 'Solicitações'
 
     click_link 'Materiais'
 

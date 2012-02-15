@@ -15,6 +15,7 @@ module Dashboard::RequestHelper
       m.dissemination_sources
       m.service_or_contract_types
       m.delivery_locations
+      m.materials
     end
   end
 end
