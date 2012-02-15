@@ -5,15 +5,15 @@ module Dashboard::AccountancyHelper
 
   def links
     simple_menu do |m|
-      m.organogram_configurations
-      m.organograms
-      m.classification_of_types_of_administractive_acts
-      m.type_of_administractive_acts
       m.administractive_acts
-      m.administration_types
+      m.classification_of_types_of_administractive_acts
+      m.economic_classification_of_expenditures
+      m.organogram_configurations
       m.budget_allocations
       m.legal_text_natures
-      m.economic_classification_of_expenditures
+      m.organograms
+      m.administration_types
+      m.type_of_administractive_acts
     end
   end
 end
