@@ -1,0 +1,2 @@
+class BudgetAllocationTypesController < CrudController
+end

@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      budget_allocation_type:
+        one: "Tipo de Dotação"
+        other: "Tipos de Dotação"
+
+    attributes:
+      budget_allocation_type:
+        description: "Descrição"
