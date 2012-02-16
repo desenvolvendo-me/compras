@@ -4,6 +4,7 @@ class Entity < ActiveRecord::Base
   has_many :expense_economic_classifications, :dependent => :restrict
   has_many :organogram_configurations, :dependent => :restrict
   has_many :capabilities, :dependent => :restrict
+  has_many :government_programs, :dependent => :restrict
 
   orderize
   filterize

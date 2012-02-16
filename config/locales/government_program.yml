@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      government_program:
+        one: "Programa do Governo"
+        other: "Programas do Governo"
+
+    attributes:
+      government_program:
+        entity: "Entidade"
+        year: "Exercício"
+        description: "Descrição"
+        status: "Status"
