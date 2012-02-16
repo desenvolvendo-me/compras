@@ -13,6 +13,7 @@ module Dashboard::AccountancyHelper
       m.functions
       m.legal_text_natures
       m.organograms
+      m.government_actions
       m.government_programs
       m.capabilities
       m.subfunctions
