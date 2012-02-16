@@ -19,6 +19,7 @@ module Dashboard::AccountancyHelper
       m.administration_types
       m.budget_allocation_types
       m.management_units
+      m.government_actions
     end
   end
 end

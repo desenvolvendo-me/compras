@@ -253,6 +253,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :government_actions do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :land_subdivisions do
     collection do
       get :modal

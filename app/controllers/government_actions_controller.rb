@@ -1,0 +1,2 @@
+class GovernmentActionsController < CrudController
+end

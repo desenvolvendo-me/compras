@@ -55,6 +55,9 @@ pt-BR:
     functions:
       <<: *female
 
+    government_actions:
+      <<: *female
+
     judicial_class_processes:
       <<: *female
 

@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    government_action_status:
+      active: "Ativo"
+      inactive: "Desativado"
