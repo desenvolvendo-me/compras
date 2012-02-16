@@ -52,6 +52,9 @@ pt-BR:
     fiscal_executions:
       <<: *female
 
+    functions:
+      <<: *female
+
     judicial_class_processes:
       <<: *female
 

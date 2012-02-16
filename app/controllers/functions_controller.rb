@@ -1,0 +1,2 @@
+class FunctionsController < CrudController
+end

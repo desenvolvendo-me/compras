@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      function:
+        one: "Função"
+        other: "Funções"
+
+    attributes:
+      function:
+        code: "Código"
+        description: "Descrição"
+        administractive_act: "Ato Administrativo"

@@ -15,6 +15,7 @@ module Dashboard::AccountancyHelper
       m.administration_types
       m.administractive_act_types
       m.management_units
+      m.functions
     end
   end
 end
