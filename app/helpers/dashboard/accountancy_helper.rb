@@ -19,7 +19,10 @@ module Dashboard::AccountancyHelper
       m.functions
       m.subfunctions
       m.capabilities
-      m.type_of_administractive_acts
+      m.administractive_act_types
+      m.management_units
+      m.functions
+      m.subfunctions
     end
   end
 end
