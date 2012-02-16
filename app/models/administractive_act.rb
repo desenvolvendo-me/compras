@@ -1,11 +1,11 @@
 class AdministractiveAct < ActiveRecord::Base
-  attr_accessible :act_number, :type_of_administractive_act_id, :creation_date, :legal_text_nature_id,
+  attr_accessible :act_number, :administractive_act_type_id, :creation_date, :legal_text_nature_id,
                   :publication_date, :vigor_date, :end_date, :content, :budget_law_percent,
                   :revenue_antecipation_percent, :authorized_debt_value, :dissemination_source_ids
 
-  attr_modal :act_number, :type_of_administractive_act, :legal_text_nature
+  attr_modal :act_number, :administractive_act_type, :legal_text_nature
 
-  belongs_to :type_of_administractive_act
+  belongs_to :administractive_act_type
   belongs_to :legal_text_nature
   has_many :expense_economic_classifications, :dependent => :restrict
   has_many :organogram_configurations, :dependent => :restrict
@@ -15,7 +15,7 @@ class AdministractiveAct < ActiveRecord::Base
   orderize :act_number
   filterize
 
-  validates :type_of_administractive_act_id, :creation_date, :publication_date, :vigor_date, :end_date, :legal_text_nature_id,
+  validates :administractive_act_type_id, :creation_date, :publication_date, :vigor_date, :end_date, :legal_text_nature_id,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
   validates :content, :uniqueness => true
   validates :act_number, :presence => true, :uniqueness => true, :numericality => true

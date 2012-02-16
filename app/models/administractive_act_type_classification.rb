@@ -1,7 +1,7 @@
 class AdministractiveActTypeClassification < ActiveRecord::Base
   attr_accessible :description
 
-  has_many :type_of_administractive_acts, :dependent => :restrict
+  has_many :administractive_act_types, :dependent => :restrict
 
   validates :description, :uniqueness => true, :presence => true
 

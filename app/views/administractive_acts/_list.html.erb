@@ -8,7 +8,7 @@
         <%= resource_class.human_attribute_name :act_number %>
       </th>
       <th>
-        <%= resource_class.human_attribute_name :type_of_administractive_act %>
+        <%= resource_class.human_attribute_name :administractive_act_type %>
       </th>
       <th>
         <%= resource_class.human_attribute_name :creation_date %>
@@ -35,7 +35,7 @@
           <%= link_to resource, edit_resource_path(resource) %>
         </td>
         <td>
-          <%= resource.type_of_administractive_act %>
+          <%= resource.administractive_act_type %>
         </td>
         <td>
           <%= resource.creation_date %>

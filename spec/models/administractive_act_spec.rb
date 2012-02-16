@@ -11,7 +11,7 @@ describe AdministractiveAct do
     subject.to_s.should eq '01'
   end
 
-  it { should belong_to :type_of_administractive_act }
+  it { should belong_to :administractive_act_type }
   it { should belong_to :legal_text_nature }
   it { should have_many(:expense_economic_classifications).dependent(:restrict) }
   it { should have_many(:organogram_configurations).dependent(:restrict) }
@@ -19,7 +19,7 @@ describe AdministractiveAct do
 
   it { should have_and_belong_to_many :dissemination_sources}
   it { should validate_presence_of :act_number }
-  it { should validate_presence_of :type_of_administractive_act_id }
+  it { should validate_presence_of :administractive_act_type_id }
   it { should validate_presence_of :creation_date }
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :vigor_date }

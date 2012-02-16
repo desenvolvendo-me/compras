@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "TypeOfAdministractiveActs" do
+feature "AdministractiveActTypes" do
   background do
     sign_in
   end
 
-  scenario 'create a new type_of_administractive_act' do
+  scenario 'create a new administractive_act_type' do
     AdministractiveActTypeClassification.make!(:primeiro_tipo)
 
     click_link 'Contabilidade'
@@ -29,7 +29,7 @@ feature "TypeOfAdministractiveActs" do
   end
 
   scenario 'validates uniqueness of description' do
-    TypeOfAdministractiveAct.make!(:lei)
+    AdministractiveActType.make!(:lei)
 
     click_link 'Contabilidade'
 
@@ -46,8 +46,8 @@ feature "TypeOfAdministractiveActs" do
     page.should have_content 'já está em uso'
   end
 
-  scenario 'update an existent type_of_administractive_act' do
-    TypeOfAdministractiveAct.make!(:lei)
+  scenario 'update an existent administractive_act_type' do
+    AdministractiveActType.make!(:lei)
     AdministractiveActTypeClassification.make!(:segundo_tipo)
 
     click_link 'Contabilidade'
@@ -69,8 +69,8 @@ feature "TypeOfAdministractiveActs" do
     page.should have_field 'Descrição', :with => 'Outra Lei'
   end
 
-  scenario 'destroy an existent type_of_administractive_act' do
-    TypeOfAdministractiveAct.make!(:lei)
+  scenario 'destroy an existent administractive_act_type' do
+    AdministractiveActType.make!(:lei)
 
     click_link 'Contabilidade'
 

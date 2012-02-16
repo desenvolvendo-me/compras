@@ -1,4 +1,4 @@
-class TypeOfAdministractiveAct < ActiveRecord::Base
+class AdministractiveActType < ActiveRecord::Base
   attr_accessible :description, :administractive_act_type_classification_id
 
   belongs_to :administractive_act_type_classification

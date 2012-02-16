@@ -1,7 +1,7 @@
 # encoding: utf-8
 AdministractiveAct.blueprint(:sopa) do
   act_number { "1234" }
-  type_of_administractive_act { TypeOfAdministractiveAct.make!(:lei) }
+  administractive_act_type { AdministractiveActType.make!(:lei) }
   legal_text_nature { LegalTextNature.make!(:civica) }
   creation_date { "01/01/2012" }
   publication_date { "02/01/2012" }
@@ -16,7 +16,7 @@ end
 
 AdministractiveAct.blueprint(:emenda) do
   act_number { "4567" }
-  type_of_administractive_act { TypeOfAdministractiveAct.make!(:emenda) }
+  administractive_act_type { AdministractiveActType.make!(:emenda) }
   legal_text_nature { LegalTextNature.make!(:civica) }
   creation_date { "01/01/2012" }
   publication_date { "02/01/2012" }

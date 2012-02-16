@@ -13,7 +13,7 @@ module Dashboard::AccountancyHelper
       m.legal_text_natures
       m.organograms
       m.administration_types
-      m.type_of_administractive_acts
+      m.administractive_act_types
     end
   end
 end
