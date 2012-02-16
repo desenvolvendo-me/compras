@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      capability:
+        one: "Recurso"
+        other: "Recursos"
+
+    attributes:
+      capability:
+        entity: "Entidade"
+        year: "Exercício"
+        description: "Descrição"
+        goal: "Finalidade"
+        kind: "Tipo"

@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    capability_kind:
+      ordinary: Ordinário
+      linked: Vinculado
