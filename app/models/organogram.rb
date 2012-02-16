@@ -35,14 +35,14 @@ class Organogram < ActiveRecord::Base
   protected
 
   def cannot_have_duplicated_responsibles
-   single_responsibles = []
+    single_responsibles = []
 
-   organogram_responsibles.each do |organogram_responsible|
-     if single_responsibles.include?(organogram_responsible.responsible_id)
-       errors.add(:organogram_responsibles)
-       organogram_responsible.errors.add(:responsible_id, :taken)
-     end
-     single_responsibles << organogram_responsible.responsible_id
-   end
+    organogram_responsibles.each do |organogram_responsible|
+      if single_responsibles.include?(organogram_responsible.responsible_id)
+        errors.add(:organogram_responsibles)
+        organogram_responsible.errors.add(:responsible_id, :taken)
+      end
+      single_responsibles << organogram_responsible.responsible_id
+    end
   end
 end
