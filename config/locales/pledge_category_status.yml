@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    pledge_category_status:
+      active: "Ativo"
+      inactive: "Desativado"

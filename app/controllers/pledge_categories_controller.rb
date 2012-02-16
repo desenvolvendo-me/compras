@@ -1,0 +1,2 @@
+class PledgeCategoriesController < CrudController
+end

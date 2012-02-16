@@ -22,6 +22,7 @@ module Dashboard::AccountancyHelper
       m.budget_allocation_types
       m.management_units
       m.government_actions
+      m.pledge_categories
     end
   end
 end

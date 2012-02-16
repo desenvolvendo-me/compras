@@ -76,6 +76,9 @@ pt-BR:
     people:
       <<: *female
 
+    pledge_categories:
+      <<: *female
+
     prefectures:
       <<: *female
 

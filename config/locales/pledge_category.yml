@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_category:
+        one: "Categoria de Empenho"
+        other: "Categorias de Empenho"
+
+    attributes:
+      pledge_category:
+        description: "Descrição"
+        status: "Status"
