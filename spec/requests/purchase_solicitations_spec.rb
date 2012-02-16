@@ -31,7 +31,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
       fill_modal 'Classificação econômica da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
@@ -66,7 +66,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Dotação orçamentária', :with => 'Alocação'
+      page.should have_field 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :with => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -99,11 +99,11 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar'
-      fill_modal 'Dotação', :with => 'Conserto'
+      fill_modal 'Dotação', :with => 'Conserto', :field => 'Descrição'
     end
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -163,7 +163,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => 'Alocação'
+        fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
         fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '200,00'
       end
@@ -171,7 +171,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => 'Alocação extra'
+        fill_modal 'Dotação', :with => 'Alocação extra', :field => 'Descrição'
         fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '300,00'
       end
@@ -214,13 +214,13 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
-        page.should have_field "Dotação", :with => 'Alocação'
+        page.should have_field "Dotação", :with => 'Alocação', :field => 'Descrição'
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '200,00'
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
-        page.should have_field "Dotação", :with => 'Alocação extra'
+        page.should have_field "Dotação", :with => 'Alocação extra', :field => 'Descrição'
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '300,00'
       end
@@ -262,7 +262,7 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -295,7 +295,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Descrição'
       fill_modal 'Classificação econômica da despesa', :with => 'Compra de Material', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
@@ -327,7 +327,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Dotação orçamentária', :with => 'Alocação extra'
+      page.should have_field 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Descrição'
       page.should have_field 'Classificação econômica da despesa', :with => '2.2.22.11.01.00.00.00'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
@@ -428,7 +428,7 @@ feature "PurchaseSolicitations" do
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
-        page.should have_field 'Dotação', :with => 'Alocação'
+        page.should have_field 'Dotação', :with => 'Alocação', :field => 'Descrição'
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field 'Valor previsto', :with => '1.020,00'
       end
@@ -462,7 +462,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Conserto'
+      fill_modal 'Dotação orçamentária', :with => 'Conserto', :field => 'Descrição'
     end
 
     click_button 'Atualizar Solicitação de Compra'
@@ -586,7 +586,7 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
 
       page.should have_disabled_field 'Saldo da dotação'
       page.should have_field 'Saldo da dotação', :with => '500,00'
@@ -608,7 +608,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Dados gerais' do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
 
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
@@ -654,7 +654,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação extra'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Descrição'
     end
 
     within_tab 'Itens' do
@@ -688,7 +688,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Nome'
+      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -749,14 +749,14 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       click_button "Adicionar"
 
-      fill_modal 'Dotação', :with => 'Alocação'
+      fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
       fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       fill_in 'Valor previsto', :with => '200,00'
 
       click_button "Adicionar"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => 'Alocação'
+        fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
         fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '300,00'
       end

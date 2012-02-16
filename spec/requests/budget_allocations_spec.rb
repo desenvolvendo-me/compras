@@ -13,7 +13,7 @@ feature "BudgetAllocations" do
 
     click_link 'Criar Dotação Orçamentária'
 
-    fill_in 'Nome', :with => 'Alocação'
+    fill_in 'Descrição', :with => 'Alocação'
 
     fill_in 'Saldo', :with => '500,00'
 
@@ -23,7 +23,7 @@ feature "BudgetAllocations" do
 
     click_link 'Alocação'
 
-    page.should have_field 'Nome', :with => 'Alocação'
+    page.should have_field 'Descrição', :with => 'Alocação'
 
     page.should have_field 'Saldo', :with => '500,00'
   end
@@ -37,7 +37,7 @@ feature "BudgetAllocations" do
 
     click_link 'Alocação'
 
-    fill_in 'Nome', :with => 'Novo nome'
+    fill_in 'Descrição', :with => 'Novo nome'
 
     fill_in 'Saldo', :with => '800,00'
 
@@ -47,7 +47,7 @@ feature "BudgetAllocations" do
 
     click_link 'Novo nome'
 
-    page.should have_field 'Nome', :with => 'Novo nome'
+    page.should have_field 'Descrição', :with => 'Novo nome'
 
     page.should have_field 'Saldo', :with => '800,00'
   end
@@ -76,7 +76,7 @@ feature "BudgetAllocations" do
 
     click_link 'Criar Dotação Orçamentária'
 
-    fill_in 'Nome', :with => 'Alocação'
+    fill_in 'Descrição', :with => 'Alocação'
 
     click_button 'Criar Dotação Orçamentária'
 
