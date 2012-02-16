@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_historic:
+        one: "Histórico de Empenho"
+        other: "Históricos de Empenho"
+
+    attributes:
+      pledge_historic:
+        description: "Descrição"
+        entity: "Entidade"

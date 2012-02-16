@@ -24,6 +24,7 @@ module Dashboard::AccountancyHelper
       m.management_units
       m.government_actions
       m.pledge_categories
+      m.pledge_historics
     end
   end
 end
