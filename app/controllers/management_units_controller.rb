@@ -1,0 +1,2 @@
+class ManagementUnitsController < CrudController
+end

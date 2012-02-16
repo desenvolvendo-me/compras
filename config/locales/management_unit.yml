@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      management_unit:
+        one: "Unidade Gestora"
+        other: "Unidades Gestoras"
+
+    attributes:
+      management_unit:
+        description: "Descrição"
+        acronym: "Sigla"
+        status: "Status"
