@@ -154,6 +154,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :commitment_types do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :communication_sources do
     collection do
       get :filter

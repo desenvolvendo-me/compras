@@ -1,0 +1,2 @@
+class CommitmentTypesController < CrudController
+end

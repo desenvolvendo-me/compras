@@ -20,6 +20,7 @@ module Dashboard::AccountancyHelper
       m.administractive_act_types
       m.administration_types
       m.budget_allocation_types
+      m.commitment_types
       m.management_units
       m.government_actions
       m.pledge_categories
