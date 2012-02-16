@@ -1,0 +1,37 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :code %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :description %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :function %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource.code, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.description %>
+        </td>
+        <td>
+          <%= resource.function %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

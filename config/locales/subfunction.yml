@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      subfunction:
+        one: "Subfunção"
+        other: "Subfunções"
+
+    attributes:
+      subfunction:
+        code: "Código"
+        description: "Descrição"
+        function: "Função"

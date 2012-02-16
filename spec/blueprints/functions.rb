@@ -4,3 +4,9 @@ Function.blueprint(:administracao) do
   administractive_act { AdministractiveAct.make!(:sopa) }
   description { "Administração" }
 end
+
+Function.blueprint(:execucao) do
+  code { "05" }
+  administractive_act { AdministractiveAct.make!(:sopa) }
+  description { "Execução" }
+end

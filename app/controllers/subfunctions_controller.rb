@@ -1,0 +1,2 @@
+class SubfunctionsController < CrudController
+end

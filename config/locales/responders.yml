@@ -93,3 +93,6 @@ pt-BR:
 
     stn_ordinances:
       <<: *female
+
+    subfunctions:
+      <<: *female
