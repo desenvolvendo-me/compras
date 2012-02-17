@@ -79,7 +79,6 @@ feature "Capabilities" do
     page.should_not have_content 'Detran'
     page.should_not have_content '2012'
     page.should_not have_content 'Reforma e Ampliação'
-    page.should_not have_content 'Otimizar o atendimento a todos os municípios'
     page.should_not have_content 'Ordinário'
   end
 end
