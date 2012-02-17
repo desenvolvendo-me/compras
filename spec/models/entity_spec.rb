@@ -16,6 +16,7 @@ describe Entity do
   it { should have_many(:capabilities).dependent(:restrict) }
   it { should have_many(:government_programs).dependent(:restrict) }
   it { should have_many(:government_actions).dependent(:restrict) }
+  it { should have_many(:pledge_historics).dependent(:restrict) }
 
   it { should validate_presence_of :name }
 end

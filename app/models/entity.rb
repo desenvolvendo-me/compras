@@ -6,6 +6,7 @@ class Entity < ActiveRecord::Base
   has_many :capabilities, :dependent => :restrict
   has_many :government_programs, :dependent => :restrict
   has_many :government_actions, :dependent => :restrict
+  has_many :pledge_historics, :dependent => :restrict
 
   orderize
   filterize
