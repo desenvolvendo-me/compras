@@ -8,8 +8,9 @@ class LicitationModality < ActiveRecord::Base
   orderize :description
   filterize
 
-  validates :description, :presence => true
-  validates :initial_value, :numericality => { :less_than => :final_value }
+  validates :description, :administractive_act_id, :presence => true
+  validates :initial_value, :presence => true, :numericality => { :less_than => :final_value }
+  validates :final_value, :presence => true, :numericality => true
 
   def to_s
     description

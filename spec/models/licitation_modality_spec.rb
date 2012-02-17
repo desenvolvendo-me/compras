@@ -6,6 +6,11 @@ describe LicitationModality do
   it { should belong_to :administractive_act }
 
   it { should validate_presence_of :description }
+  it { should validate_presence_of :administractive_act_id }
+  it { should validate_presence_of :initial_value }
+  it { should validate_presence_of :final_value }
+  it { should validate_numericality_of :initial_value }
+  it { should validate_numericality_of :final_value }
 
   it 'should have initial value less than final value' do
     subject.final_value = 100.00
