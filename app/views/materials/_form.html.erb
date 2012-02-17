@@ -91,35 +91,6 @@
     clearMaterialsClass();
   }).change();
 
-  $('#material_stn_ordinance_id').change(function() {
-    if (this.value) {
-      $('#material_expense_economic_classification').attr('disabled', false);
-      $('#material_expense_economic_classification').attr('data-modal-url', expenseEconomicClassificationModalUrl);
-    } else {
-      $('#material_expense_economic_classification').attr('disabled', true);
-    }
-
-    clearExpenseEconomicClassification();
-  }).change();
-
-  function clearMaterialsClass() {
-    if ($('#material_materials_group_id').val() != materials_group_id) {
-      materials_group_id = $('#material_materials_group_id').val();
-
-      $('#material_materials_class').val('');
-      $('#material_materials_class_id').val('');
-    }
-  }
-
-  function clearExpenseEconomicClassification() {
-    if ($('#material_stn_ordinance_id').val() != stn_ordinance_id) {
-      stn_ordinance_id = $('#material_stn_ordinance_id').val();
-
-      $('#material_expense_economic_classification').val('');
-      $('#material_expense_economic_classification_id').val('');
-    }
-  }
-
   function materialsClassModalUrl() {
     var url = "<%= modal_materials_classes_path %>?",
         params = {
@@ -134,6 +105,26 @@
     return url;
   }
 
+  function clearMaterialsClass() {
+    if ($('#material_materials_group_id').val() != materials_group_id) {
+      materials_group_id = $('#material_materials_group_id').val();
+
+      $('#material_materials_class').val('');
+      $('#material_materials_class_id').val('');
+    }
+  }
+
+  $('#material_stn_ordinance_id').change(function() {
+    if (this.value) {
+      $('#material_expense_economic_classification').attr('disabled', false);
+      $('#material_expense_economic_classification').attr('data-modal-url', expenseEconomicClassificationModalUrl);
+    } else {
+      $('#material_expense_economic_classification').attr('disabled', true);
+    }
+
+    clearExpenseEconomicClassification();
+  }).change();
+
   function expenseEconomicClassificationModalUrl() {
     var url = "<%= modal_expense_economic_classifications_path %>?",
         params = {
@@ -146,5 +137,14 @@
     url += jQuery.param(params);
 
     return url;
+  }
+
+  function clearExpenseEconomicClassification() {
+    if ($('#material_stn_ordinance_id').val() != stn_ordinance_id) {
+      stn_ordinance_id = $('#material_stn_ordinance_id').val();
+
+      $('#material_expense_economic_classification').val('');
+      $('#material_expense_economic_classification_id').val('');
+    }
   }
 </script>
