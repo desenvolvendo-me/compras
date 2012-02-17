@@ -26,6 +26,7 @@ pt-BR:
     expense_economic_classifications: "Classificações Econômicas das Despesas"
     employees: "Funcionários"
     entities: "Entidades"
+    expense_kinds: "Tipos de Despesas"
     functions: "Funções"
     government_actions: "Ações do Governo"
     government_programs: "Programas do Governo"

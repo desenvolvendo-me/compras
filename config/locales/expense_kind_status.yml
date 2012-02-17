@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    expense_kind_status:
+      active: "Ativo"
+      inactive: "Desativado"

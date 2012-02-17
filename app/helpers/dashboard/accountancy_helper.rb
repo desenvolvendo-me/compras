@@ -26,6 +26,7 @@ module Dashboard::AccountancyHelper
       m.pledge_categories
       m.pledge_historics
       m.licitation_modalities
+      m.expense_kinds
     end
   end
 end
