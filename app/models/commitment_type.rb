@@ -5,7 +5,8 @@ class CommitmentType < ActiveRecord::Base
 
   validates :code, :numericality => { :less_than_or_equal_to => 999 }
   validates :code, :uniqueness => true
-  validates :description, :presence => true, :uniqueness => true
+  validates :description, :presence => true
+  validates :description, :uniqueness => true
 
   filterize
   orderize :description
