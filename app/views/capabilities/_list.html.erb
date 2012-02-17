@@ -16,6 +16,9 @@
       <th>
         <%= resource_class.human_attribute_name :kind %>
       </th>
+      <th>
+        <%= resource_class.human_attribute_name :status %>
+      </th>
     </tr>
   </thead>
 
@@ -36,6 +39,9 @@
         </td>
         <td>
           <%= resource.kind_humanize %>
+        </td>
+        <td>
+          <%= resource.status_humanize %>
         </td>
       </tr>
     <% end %>

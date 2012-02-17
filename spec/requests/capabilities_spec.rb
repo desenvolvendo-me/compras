@@ -20,6 +20,7 @@ feature "Capabilities" do
     fill_in 'Descrição', :with => 'Reforma e Ampliação'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     select 'Ordinário', :from => 'Tipo'
+    select 'Ativo', :from => 'Status'
 
     click_button 'Criar Recurso'
 
@@ -32,6 +33,7 @@ feature "Capabilities" do
     page.should have_field 'Descrição', :with => 'Reforma e Ampliação'
     page.should have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     page.should have_select 'Tipo', :selected => 'Ordinário'
+    page.should have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent capability' do
@@ -49,6 +51,7 @@ feature "Capabilities" do
     fill_in 'Descrição', :with => 'Reforma e Ampliação do Posto'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios no posto'
     select 'Vinculado', :from => 'Tipo'
+    select 'Inativo', :from => 'Status'
 
     click_button 'Atualizar Recurso'
 
@@ -61,6 +64,7 @@ feature "Capabilities" do
     page.should have_field 'Descrição', :with => 'Reforma e Ampliação do Posto'
     page.should have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios no posto'
     page.should have_select 'Tipo', :selected => 'Vinculado'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent capability' do
@@ -80,5 +84,6 @@ feature "Capabilities" do
     page.should_not have_content '2012'
     page.should_not have_content 'Reforma e Ampliação'
     page.should_not have_content 'Ordinário'
+    page.should_not have_content 'Ativo'
   end
 end
