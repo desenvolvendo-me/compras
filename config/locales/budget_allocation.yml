@@ -8,4 +8,4 @@ pt-BR:
     attributes:
       budget_allocation:
         description: "Descrição"
-        amount: "Saldo"
+        amount: "Valor"
