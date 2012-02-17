@@ -1,5 +1,5 @@
 pt-BR:
   enumerations:
-    capability_source:
+    source:
       default: "Default"
       manual: "Manual"

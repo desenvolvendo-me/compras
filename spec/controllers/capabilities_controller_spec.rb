@@ -9,6 +9,6 @@ describe CapabilitiesController do
   it 'uses manual as default value for source' do
     get :new
 
-    assigns(:capability).source.should eq CapabilitySource::MANUAL
+    assigns(:capability).source.should eq Source::MANUAL
   end
 end

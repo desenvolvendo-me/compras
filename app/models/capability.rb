@@ -9,7 +9,7 @@ class Capability < ActiveRecord::Base
   validates :status, :presence => true
 
   has_enumeration_for :status, :create_helpers => true, :with => CapabilityStatus
-  has_enumeration_for :source, :create_helpers => true, :with => CapabilitySource
+  has_enumeration_for :source, :create_helpers => true
 
   orderize :description
   filterize
