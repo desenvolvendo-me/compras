@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_modality:
+        one: "Modalidade de Licitação"
+        other: "Modalidades de Licitação"
+
+    attributes:
+      licitation_modality:
+        administractive_act: "Ato regulamentador"
+        administractive_act_publication_date: "Data da publicação"
+        description: "Modalidade"
+        initial_value: "Valor inicial"
+        final_value: "Valor final"

@@ -1,0 +1,2 @@
+class LicitationModalitiesController < CrudController
+end

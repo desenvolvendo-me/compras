@@ -294,6 +294,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :licitation_modalities do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :management_units do
     collection do
       get :filter

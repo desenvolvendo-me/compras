@@ -67,6 +67,9 @@ pt-BR:
     legal_text_natures:
       <<: *female
 
+    licitation_modalities:
+      <<: *female
+
     management_units:
       <<: *female
 

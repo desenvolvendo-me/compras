@@ -25,6 +25,7 @@ module Dashboard::AccountancyHelper
       m.government_actions
       m.pledge_categories
       m.pledge_historics
+      m.licitation_modalities
     end
   end
 end
