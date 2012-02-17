@@ -3,7 +3,7 @@ class CommitmentType < ActiveRecord::Base
 
   validates :code, :presence => true
 
-  validates :code, :numericality => { :less_than_or_equal_to => 999 }
+  validates :code, :length => { :is => 3 }
   validates :code, :uniqueness => true
   validates :description, :presence => true
   validates :description, :uniqueness => true
