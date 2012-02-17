@@ -25,7 +25,7 @@ describe LicitationModality do
 
     subject.valid?
 
-    subject.errors.messages[:final_value].should include "deve ser maior ou igual a 100.01"
+    subject.errors.messages[:final_value].should include "não pode ser menor que o valor inicial"
   end
 
   it 'should return description as to_s method' do

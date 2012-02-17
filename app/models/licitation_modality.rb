@@ -10,7 +10,9 @@ class LicitationModality < ActiveRecord::Base
 
   validates :description, :administractive_act_id, :presence => true
   validates :initial_value, :presence => true, :numericality => true
-  validates :final_value, :presence => true, :numericality => { :greater_than_or_equal_to => :initial_value }
+  validates :final_value, :presence => true
+  validates :final_value, :numericality => true
+  validates :final_value, :numericality => { :greater_than_or_equal_to => :initial_value, :message => :should_not_be_less_than_initial_value }
 
   def to_s
     description
