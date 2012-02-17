@@ -6,7 +6,7 @@ class Subfunction < ActiveRecord::Base
   orderize :code
   filterize
 
-  validates :code, :presence => true, :uniqueness => true
+  validates :code, :presence => true, :uniqueness => true, :numericality => true
   validates :description, :function_id, :presence => true
 
   def to_s
