@@ -12,3 +12,4 @@ pt-BR:
         description: "Descrição"
         goal: "Finalidade"
         kind: "Tipo"
+        status: "Status"
