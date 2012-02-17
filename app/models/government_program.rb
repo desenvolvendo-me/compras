@@ -2,6 +2,7 @@ class GovernmentProgram < ActiveRecord::Base
   attr_accessible :entity_id, :year, :description, :status
 
   belongs_to :entity
+  has_many :budget_allocations, :dependent => :restrict
 
   has_enumeration_for :status
 

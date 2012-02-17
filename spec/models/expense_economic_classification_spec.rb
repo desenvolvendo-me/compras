@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/expense_economic_classification'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
+require 'app/models/budget_allocation'
 
 describe ExpenseEconomicClassification do
   it 'should return expense_economic_classification as to_s method' do
@@ -16,6 +17,7 @@ describe ExpenseEconomicClassification do
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:materials).dependent(:restrict) }
+  it { should have_many(:budget_allocations).dependent(:restrict) }
 
   it { should validate_presence_of :expense_economic_classification }
   it { should validate_presence_of :kind }

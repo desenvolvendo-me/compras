@@ -1,6 +1,8 @@
 class BudgetAllocationType < ActiveRecord::Base
   attr_accessible :description
 
+  has_many :budget_allocations, :dependent => :restrict
+
   orderize :description
   filterize
 

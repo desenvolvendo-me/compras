@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    debt_type:
+      nothing: Nenhuma
+      contract: Contrato
+      secutities: Mobiliária

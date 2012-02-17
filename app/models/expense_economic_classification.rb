@@ -14,6 +14,7 @@ class ExpenseEconomicClassification < ActiveRecord::Base
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :materials, :dependent => :restrict
+  has_many :budget_allocations, :dependent => :restrict
 
   validates :expense_economic_classification, :kind, :description, :presence => true
   validates :expense_economic_classification, :mask => '9.9.99.99.99.99.99.99'

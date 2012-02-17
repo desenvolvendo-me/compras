@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/organogram'
 require 'app/models/address'
+require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/organogram_responsible'
 
@@ -21,6 +22,7 @@ describe Organogram do
   it { should validate_presence_of :organogram_kind }
 
   it { should have_one :address }
+  it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many :organogram_responsibles }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should belong_to :organogram_configuration }

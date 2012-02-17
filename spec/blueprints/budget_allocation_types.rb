@@ -2,3 +2,7 @@
 BudgetAllocationType.blueprint(:administrativa) do
   description { "Dotação Administrativa" }
 end
+
+BudgetAllocationType.blueprint(:presidencial) do
+  description { "Dotação Presidencial" }
+end

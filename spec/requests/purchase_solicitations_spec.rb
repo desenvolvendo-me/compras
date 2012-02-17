@@ -11,6 +11,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'create a new purchase_solicitation' do
+    budget_allocation = BudgetAllocation.make!(:alocacao)
     make_dependencies!
 
     click_link 'Solicitações'
@@ -66,7 +67,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :with => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -116,7 +117,8 @@ feature "PurchaseSolicitations" do
 
   scenario 'create a new purchase_solicitation with multiple budget_allocations' do
     make_dependencies!
-    BudgetAllocation.make!(:alocacao_extra)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    budget_allocation_extra = BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Solicitações'
 
@@ -214,13 +216,13 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
-        page.should have_field "Dotação", :with => 'Alocação', :field => 'Descrição'
+        page.should have_field "Dotação", :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '200,00'
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
-        page.should have_field "Dotação", :with => 'Alocação extra', :field => 'Descrição'
+        page.should have_field "Dotação", :with => "#{budget_allocation_extra.id}/2012", :field => 'Descrição'
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '300,00'
       end
@@ -275,7 +277,7 @@ feature "PurchaseSolicitations" do
 
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
-    BudgetAllocation.make!(:alocacao_extra)
+    budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     DeliveryLocation.make!(:health)
     Material.make!(:manga)
     Organogram.make!(:secretaria_de_desenvolvimento)
@@ -327,7 +329,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Descrição'
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
       page.should have_field 'Classificação econômica da despesa', :with => '2.2.22.11.01.00.00.00'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
@@ -348,7 +350,8 @@ feature "PurchaseSolicitations" do
 
     PurchaseSolicitation.make!(:conserto)
     Employee.make!(:wenderson)
-    BudgetAllocation.make!(:alocacao_extra)
+    budget_allocation_extra = BudgetAllocation.make!(:alocacao_extra)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
     DeliveryLocation.make!(:health)
     Material.make!(:manga)
     Organogram.make!(:secretaria_de_desenvolvimento)
@@ -422,13 +425,13 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
-        page.should have_field 'Dotação', :with => 'Alocação extra'
+        page.should have_field 'Dotação', :with => "#{budget_allocation_extra.id}/2012"
         page.should have_field 'Compl. do el. da despesa', :with => '2.2.22.11.01.00.00.00'
         page.should have_field 'Valor previsto ', :with => '30,00'
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
-        page.should have_field 'Dotação', :with => 'Alocação', :field => 'Descrição'
+        page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field 'Valor previsto', :with => '1.020,00'
       end
@@ -502,6 +505,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'remove budget allocation from an existent purchase_solicitation' do
+    budget_allocation = BudgetAllocation.make!(:alocacao)
     PurchaseSolicitation.make!(:conserto)
 
     click_link 'Solicitações'
@@ -525,7 +529,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentárias' do
-      page.should_not have_content 'Alocação'
+      page.should_not have_content "#{budget_allocation.id}/2012"
     end
   end
 
@@ -578,6 +582,7 @@ feature "PurchaseSolicitations" do
 
   scenario 'getting and cleaning budget amount depending on budget allocation field' do
     make_dependencies!
+    budget_allocation = BudgetAllocation.make!(:alocacao)
 
     click_link 'Solicitações'
 
@@ -598,6 +603,7 @@ feature "PurchaseSolicitations" do
 
   scenario 'create a new purchase_solicitation with budget amount less than total items value' do
     make_dependencies!
+    budget_allocation = BudgetAllocation.make!(:alocacao)
 
     click_link 'Solicitações'
 
@@ -643,7 +649,7 @@ feature "PurchaseSolicitations" do
     make_dependencies!
 
     PurchaseSolicitation.make!(:reparo)
-    BudgetAllocation.make!(:alocacao_extra)
+    budget_allocation = BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Solicitações'
 
@@ -674,6 +680,7 @@ feature "PurchaseSolicitations" do
 
   scenario 'trying to create a new purchase_solicitation with duplicated items to ensure the error' do
     make_dependencies!
+    BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Solicitações'
@@ -719,6 +726,7 @@ feature "PurchaseSolicitations" do
 
   scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
     make_dependencies!
+    BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Solicitações'
@@ -771,7 +779,6 @@ feature "PurchaseSolicitations" do
 
   def make_dependencies!
     Employee.make!(:sobrinho)
-    BudgetAllocation.make!(:alocacao)
     DeliveryLocation.make!(:education)
     Material.make!(:cadeira)
     Organogram.make!(:secretaria_de_educacao)

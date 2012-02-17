@@ -2,6 +2,7 @@ class Subfunction < ActiveRecord::Base
   attr_accessible :code, :description, :function_id
 
   belongs_to :function
+  has_many :budget_allocations, :dependent => :restrict
 
   orderize :code
   filterize

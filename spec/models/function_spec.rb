@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/function'
+require 'app/models/budget_allocation'
 
 describe Function do
   it "should return the code and description as to_s method" do
@@ -15,4 +16,5 @@ describe Function do
   it { should validate_numericality_of :code }
 
   it { should have_many(:subfunctions).dependent(:restrict) }
+  it { should have_many(:budget_allocations).dependent(:restrict) }
 end

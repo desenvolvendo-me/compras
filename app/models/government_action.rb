@@ -5,6 +5,7 @@ class GovernmentAction < ActiveRecord::Base
   filterize
 
   belongs_to :entity
+  has_many :budget_allocations, :dependent => :restrict
 
   validates :description, :status, :entity_id, :presence => true
   validates :year, :presence => true, :numericality => true, :mask => '9999'

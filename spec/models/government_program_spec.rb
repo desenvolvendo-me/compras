@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/government_program'
+require 'app/models/budget_allocation'
 
 describe GovernmentProgram do
   it 'should return description' do
@@ -9,6 +10,7 @@ describe GovernmentProgram do
   end
 
   it { should belong_to :entity }
+  it { should have_many(:budget_allocations).dependent(:restrict) }
 
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }

@@ -7,3 +7,12 @@ Capability.blueprint(:reforma) do
   kind { CapabilityKind::ORDINARY }
   status { CapabilityStatus::ACTIVE }
 end
+
+Capability.blueprint(:construcao) do
+  entity { Entity.make!(:detran) }
+  year { 2012 }
+  description { 'Construção' }
+  goal { 'Duplicar o atendimento a todos' }
+  kind { CapabilityKind::ORDINARY }
+  status { CapabilityStatus::ACTIVE }
+end

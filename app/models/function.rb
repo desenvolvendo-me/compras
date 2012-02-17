@@ -5,7 +5,7 @@ class Function < ActiveRecord::Base
   filterize
 
   belongs_to :administractive_act
-
+  has_many :budget_allocations, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
 
   validates :code, :presence => true, :uniqueness => true, :numericality => true

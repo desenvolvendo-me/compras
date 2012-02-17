@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/government_action'
+require 'app/models/budget_allocation'
 
 describe GovernmentAction do
   it "should return the description ad to_s method" do
@@ -10,6 +11,7 @@ describe GovernmentAction do
   end
 
   it { should belong_to :entity }
+  it { should have_many(:budget_allocations).dependent(:restrict) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :description }

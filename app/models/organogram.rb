@@ -11,6 +11,7 @@ class Organogram < ActiveRecord::Base
   has_one :address, :as => :addressable, :dependent => :destroy
   belongs_to :organogram_configuration
   belongs_to :administration_type
+  has_many :budget_allocations, :dependent => :restrict
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :organogram_responsibles, :dependent => :destroy
 

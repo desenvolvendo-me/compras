@@ -4,6 +4,7 @@ class Capability < ActiveRecord::Base
   has_enumeration_for :kind, :with => CapabilityKind
 
   belongs_to :entity
+  has_many :budget_allocations, :dependent => :restrict
 
   validates :year, :mask => '9999'
   validates :status, :presence => true

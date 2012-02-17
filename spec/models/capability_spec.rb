@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/capability'
+require 'app/models/budget_allocation'
 
 describe Capability do
   it 'should return to_s as description' do
@@ -9,6 +10,7 @@ describe Capability do
   end
 
   it { should belong_to :entity }
+  it { should have_many(:budget_allocations).dependent(:restrict) }
 
   it { should validate_presence_of :status }
   it { should allow_value('1999').for(:year) }
