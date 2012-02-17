@@ -6,6 +6,8 @@ class Function < ActiveRecord::Base
 
   belongs_to :administractive_act
 
+  has_many :subfunctions, :dependent => :restrict
+
   validates :code, :presence => true, :uniqueness => true
   validates :description, :presence => true
 
