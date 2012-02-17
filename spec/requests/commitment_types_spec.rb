@@ -13,7 +13,7 @@ feature "CommitmentTypes" do
 
     click_link 'Criar Tipo de Empenho'
 
-    fill_in 'Código', :with => '66'
+    fill_in 'Código', :with => '066'
     fill_in 'Descrição', :with => 'Tipo 01'
 
     click_button 'Criar Tipo de Empenho'
@@ -22,7 +22,7 @@ feature "CommitmentTypes" do
 
     click_link '66'
 
-    page.should have_field 'Código', :with => '66'
+    page.should have_field 'Código', :with => '066'
     page.should have_field 'Descrição', :with => 'Tipo 01'
   end
 
