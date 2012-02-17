@@ -15,6 +15,9 @@ feature "Capabilities" do
 
     click_link 'Criar Recurso'
 
+    page.should have_disabled_field 'Fonte'
+    page.should have_select 'Fonte', :selected => 'Manual'
+
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => '2012'
     fill_in 'Descrição', :with => 'Reforma e Ampliação'
@@ -34,6 +37,8 @@ feature "Capabilities" do
     page.should have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     page.should have_select 'Tipo', :selected => 'Ordinário'
     page.should have_select 'Status', :selected => 'Ativo'
+    page.should have_disabled_field 'Fonte'
+    page.should have_select 'Fonte', :selected => 'Manual'
   end
 
   scenario 'update an existent capability' do

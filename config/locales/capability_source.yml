@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    capability_source:
+      default: "Default"
+      manual: "Manual"
