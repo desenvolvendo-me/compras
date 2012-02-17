@@ -10,6 +10,8 @@ describe Subfunction do
     subject.to_s.should eq '01 - Subfunção'
   end
 
+  it { should belong_to :function }
+
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
   it { should validate_presence_of :function_id }
