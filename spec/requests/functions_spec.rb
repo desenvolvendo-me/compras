@@ -16,7 +16,7 @@ feature "Functions" do
     click_link 'Criar Função'
 
     fill_in 'Código', :with => '04'
-    fill_modal 'Ato Administrativo', :with => '1234', :field => 'Número'
+    fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
     fill_in 'Descrição', :with => 'Administração'
 
     click_button 'Criar Função'
@@ -27,7 +27,7 @@ feature "Functions" do
 
     page.should have_field 'Código', :with => '04'
     page.should have_field 'Descrição', :with => 'Administração'
-    page.should have_field 'Ato Administrativo', :with => '1234'
+    page.should have_field 'Ato administrativo', :with => '1234'
   end
 
   scenario 'update an existent function' do
@@ -41,7 +41,7 @@ feature "Functions" do
     click_link '04'
 
     fill_in 'Código', :with => '05'
-    fill_modal 'Ato Administrativo', :with => '4567', :field => 'Número'
+    fill_modal 'Ato administrativo', :with => '4567', :field => 'Número'
     fill_in 'Descrição', :with => 'Execução'
 
     click_button 'Atualizar Função'
@@ -52,7 +52,7 @@ feature "Functions" do
 
     page.should have_field 'Código', :with => '05'
     page.should have_field 'Descrição', :with => 'Execução'
-    page.should have_field 'Ato Administrativo', :with => '4567'
+    page.should have_field 'Ato administrativo', :with => '4567'
   end
 
   scenario 'destroy an existent function' do
