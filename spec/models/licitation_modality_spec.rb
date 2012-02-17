@@ -12,13 +12,20 @@ describe LicitationModality do
   it { should validate_numericality_of :initial_value }
   it { should validate_numericality_of :final_value }
 
-  it 'should have initial value less than final value' do
+  it 'should have final value greater or equal to initial value' do
+    subject.final_value = 100.00
+    subject.initial_value = 100.00
+
+    subject.valid?
+
+    subject.errors.messages[:final_value].should be_nil
+
     subject.final_value = 100.00
     subject.initial_value = 100.01
 
     subject.valid?
 
-    subject.errors.messages[:initial_value].should include "deve ser menor que 100.0"
+    subject.errors.messages[:final_value].should include "deve ser maior ou igual a 100.01"
   end
 
   it 'should return description as to_s method' do
