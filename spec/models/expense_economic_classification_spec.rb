@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/expense_economic_classification'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
+require 'app/models/material'
 require 'app/models/budget_allocation'
 
 describe ExpenseEconomicClassification do
