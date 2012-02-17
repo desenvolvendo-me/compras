@@ -6,7 +6,8 @@ class GovernmentAction < ActiveRecord::Base
 
   belongs_to :entity
 
-  validates :year, :description, :status, :entity_id, :presence => true
+  validates :description, :status, :entity_id, :presence => true
+  validates :year, :presence => true, :numericality => true, :mask => '9999'
 
   has_enumeration_for :status, :create_helpers => true, :with => GovernmentActionStatus
 
