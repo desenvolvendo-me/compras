@@ -9,6 +9,8 @@ describe GovernmentAction do
     subject.to_s.should eq "Ação Governamental"
   end
 
+  it { should belong_to :entity }
+
   it { should validate_presence_of :year }
   it { should validate_presence_of :description }
   it { should validate_presence_of :status }
