@@ -4,6 +4,8 @@ require 'app/models/expense_economic_classification'
 require 'app/models/organogram_configuration'
 require 'app/models/capability'
 require 'app/models/government_program'
+require 'app/models/government_action'
+require 'app/models/pledge_historic'
 require 'app/models/budget_allocation'
 
 describe Entity do
