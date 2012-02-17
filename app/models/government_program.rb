@@ -5,7 +5,7 @@ class GovernmentProgram < ActiveRecord::Base
 
   has_enumeration_for :status
 
-  validates :entity, :year, :description, :presence => true
+  validates :entity, :year, :description, :status, :presence => true
   validates :year, :mask => '9999'
 
   filterize

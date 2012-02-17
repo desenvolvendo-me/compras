@@ -13,6 +13,7 @@ describe GovernmentProgram do
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
   it { should validate_presence_of :description }
+  it { should validate_presence_of :status }
 
   it { should allow_value('1999').for(:year) }
   it { should_not allow_value('201a').for(:year) }
