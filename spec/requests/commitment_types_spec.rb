@@ -80,4 +80,20 @@ feature "CommitmentTypes" do
     page.should_not have_content '123'
     page.should_not have_content 'Empenho 01'
   end
+
+  scenario 'validate uniqueness of description' do
+    CommitmentType.make!(:primeiro_empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Tipos de Empenho'
+
+    click_link 'Criar Tipo de Empenho'
+
+    fill_in 'Descrição', :with => 'Empenho 01'
+
+    click_button 'Criar Tipo de Empenho'
+
+    page.should have_content 'já está em uso'
+  end
 end
