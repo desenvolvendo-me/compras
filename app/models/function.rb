@@ -8,7 +8,7 @@ class Function < ActiveRecord::Base
 
   has_many :subfunctions, :dependent => :restrict
 
-  validates :code, :presence => true, :uniqueness => true
+  validates :code, :presence => true, :uniqueness => true, :numericality => true
   validates :description, :presence => true
 
   def to_s
