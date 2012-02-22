@@ -9,6 +9,7 @@ class Subfunction < ActiveRecord::Base
 
   validates :code, :presence => true, :uniqueness => true, :numericality => true
   validates :description, :function_id, :presence => true
+  validates :description, :uniqueness => true
 
   def to_s
     "#{code} - #{description}"

@@ -87,4 +87,20 @@ feature "Subfunctions" do
 
     page.should have_content 'já está em uso'
   end
+
+  scenario 'validate uniqueness of code' do
+    Subfunction.make!(:geral)
+
+    click_link 'Contabilidade'
+
+    click_link 'Subfunções'
+
+    click_link 'Criar Subfunção'
+
+    fill_in 'Descrição', :with => 'Administração Geral'
+
+    click_button 'Criar Subfunção'
+
+    page.should have_content 'já está em uso'
+  end
 end
