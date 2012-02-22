@@ -1,6 +1,8 @@
 class Function < ActiveRecord::Base
   attr_accessible :code, :administractive_act_id, :description
 
+  delegate :vigor_date, :to => :administractive_act, :allow_nil => true, :prefix => true
+
   orderize :code
   filterize
 

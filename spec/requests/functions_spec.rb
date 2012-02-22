@@ -87,4 +87,26 @@ feature "Functions" do
 
     page.should have_content 'já está em uso'
   end
+
+  scenario 'should get and clean the vigor date depending on administractive act' do
+    AdministractiveAct.make!(:sopa)
+
+    click_link 'Contabilidade'
+
+    click_link 'Funções'
+
+    click_link 'Criar Função'
+
+    page.should have_disabled_field 'Data da vigência do ato'
+
+    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
+    page.should have_disabled_field 'Data da vigência do ato'
+    page.should have_field 'Data da vigência do ato', :with => '03/01/2012'
+
+    clear_modal 'Ato regulamentador'
+
+    page.should have_disabled_field 'Data da vigência do ato'
+    page.should have_field 'Data da vigência do ato', :with => ''
+  end
 end
