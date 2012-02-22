@@ -3,7 +3,6 @@ BudgetAllocation.blueprint(:alocacao) do
   entity { Entity.make!(:detran) }
   year { 2012 }
   organogram { Organogram.make!(:secretaria_de_educacao) }
-  function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
@@ -27,7 +26,6 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   entity { Entity.make!(:detran) }
   year { 2012 }
   organogram { Organogram.make!(:secretaria_de_educacao) }
-  function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
@@ -51,7 +49,6 @@ BudgetAllocation.blueprint(:conserto) do
   entity { Entity.make!(:detran) }
   year { 2012 }
   organogram { Organogram.make!(:secretaria_de_educacao) }
-  function { Function.make!(:administracao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }

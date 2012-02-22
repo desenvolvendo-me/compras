@@ -200,6 +200,7 @@ pt-BR:
       duplicated_formulas: "não podem haver duas fórmulas com o mesmo ano."
       cannot_have_more_than_once_item_with_the_same_material: "não é permitido adicionar mais de um item com o mesmo material."
       materials_class_must_belong_to_group: "não faz parte do grupo selecionado"
+      subfunction_must_belongs_to_function: "não faz parte da função selecionada"
       must_be_equal_to_items_total_value: "deve ser igual ao valor total previsto dos itens"
       should_not_be_less_than_initial_value: "não pode ser menor que o valor inicial"
 

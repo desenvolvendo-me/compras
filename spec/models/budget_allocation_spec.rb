@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
+require 'app/models/subfunction'
 
 describe BudgetAllocation do
   it 'should return description as to_s id/year' do
@@ -15,7 +16,6 @@ describe BudgetAllocation do
   it { should validate_presence_of :description }
 
   it { should belong_to(:organogram) }
-  it { should belong_to(:function) }
   it { should belong_to(:subfunction) }
   it { should belong_to(:government_program) }
   it { should belong_to(:government_action) }
@@ -26,4 +26,20 @@ describe BudgetAllocation do
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
+
+  it 'should be valid if subfunction and function are related' do
+    subject.stub(:function).and_return double(:id => 1)
+    subject.stub(:subfunction).and_return double(:function_id => 1)
+
+    subject.valid?
+    subject.errors.messages[:function].should be_nil
+  end
+
+  it 'should be invalid if subfunction and function are not related' do
+    subject.stub(:function).and_return double(:id => 2)
+    subject.stub(:subfunction).and_return double(:function_id => 1)
+
+    subject.valid?
+    subject.errors.messages[:function].should include 'não faz parte da função selecionada'
+  end
 end

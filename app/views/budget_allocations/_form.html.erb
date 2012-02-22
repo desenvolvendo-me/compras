@@ -12,11 +12,11 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :function %>
+    <%= f.input :function, :as => :modal, :hidden_field => :function_id %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :subfunction %>
+    <%= f.input :subfunction, :disabled => f.object.function.blank? %>
   </div>
 </div>
 
@@ -82,3 +82,41 @@
     <%= f.input :amount %>
   </div>
 </div>
+<script>
+  var function_id = $('#budget_allocation_function_id').val();
+
+  $('#budget_allocation_function_id').change(function() {
+    if (this.value) {
+      $('#budget_allocation_subfunction').attr('disabled', false);
+      $('#budget_allocation_subfunction').attr('data-modal-url', subfunctionModalUrl);
+    } else {
+      $('#budget_allocation_subfunction').attr('disabled', true);
+    }
+
+    clearFunction();
+  }).change();
+
+  function clearFunction() {
+    if ($('#budget_allocation_function_id').val() != function_id) {
+      function_id = $('#budget_allocation_function_id').val();
+
+      $('#budget_allocation_subfunction').val('');
+      $('#budget_allocation_subfunction_id').val('');
+    }
+  }
+
+  function subfunctionModalUrl() {
+    var url = "<%= modal_subfunctions_path %>?",
+
+        params = {
+          locked_fields: ["function"],
+          subfunction: {
+            function_id: $('#budget_allocation_function_id').val()
+          }
+        };
+
+    url += jQuery.param(params);
+
+    return url;
+  }
+</script>

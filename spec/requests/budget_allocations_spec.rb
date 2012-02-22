@@ -9,7 +9,6 @@ feature "BudgetAllocations" do
   scenario 'create a new budget_allocation' do
     Organogram.make!(:secretaria_de_educacao)
     Entity.make!(:detran)
-    Function.make!(:administracao)
     Subfunction.make!(:geral)
     GovernmentProgram.make!(:habitacao)
     GovernmentAction.make!(:governamental)
@@ -73,7 +72,6 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     Organogram.make!(:secretaria_de_desenvolvimento)
     Entity.make!(:secretaria_de_educacao)
-    Function.make!(:execucao)
     Subfunction.make!(:gerente)
     GovernmentProgram.make!(:educacao)
     GovernmentAction.make!(:nacional)
@@ -90,7 +88,7 @@ feature "BudgetAllocations" do
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Exercício', :with => '2013'
     fill_modal 'Organograma', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
-    fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
+    fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
     fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
     fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
     fill_modal 'Ação do governo', :with => 'Ação Nacional', :field => 'Descrição'
@@ -114,7 +112,7 @@ feature "BudgetAllocations" do
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Exercício', :with => '2013'
     page.should have_field 'Organograma', :with => 'Secretaria de Desenvolvimento'
-    page.should have_field 'Função', :with => '05 - Execução'
+    page.should have_field 'Função', :with => '04 - Administração'
     page.should have_field 'Subfunção', :with => '02 - Gerente Geral'
     page.should have_field 'Programa do governo', :with => 'Educação'
     page.should have_field 'Ação do governo', :with => 'Ação Nacional'
@@ -132,6 +130,75 @@ feature "BudgetAllocations" do
     page.should_not have_checked_field 'Pessoal'
     page.should have_field 'Data', :with => '01/02/2012'
     page.should have_field 'Valor', :with => '800,00'
+  end
+
+  it 'should show selected function on subfunction modal' do
+    Subfunction.make!(:geral)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Criar Dotação Orçamentária'
+
+    page.should have_disabled_field 'Subfunção'
+
+    fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
+    fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
+
+    page.should_not have_disabled_field 'Subfunção'
+
+    fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição' do
+      page.should have_field 'filter_function', :with => '04 - Administração'
+    end
+  end
+
+  it 'should not have the subfunction disabled when editing budget_allocation with subfunction' do
+    BudgetAllocation.make!(:alocacao)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Alocação'
+
+    page.should_not have_disabled_field 'Subfunção'
+  end
+
+  it 'should disable and empty the subfunction when the function is removed' do
+    BudgetAllocation.make!(:alocacao)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Alocação'
+
+    fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
+    fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
+
+    clear_modal 'Função'
+
+    page.should have_disabled_field 'Subfunção'
+    page.should have_field 'Função', :with => ''
+  end
+
+  it 'should empty the subfunction when the function are changed' do
+    Subfunction.make!(:geral)
+    Function.make!(:execucao)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Criar Dotação Orçamentária'
+
+    fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
+    fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
+
+    fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
+
+    page.should have_field 'Subfunção', :with => ''
   end
 
   scenario 'destroy an existent budget_allocation' do
