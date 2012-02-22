@@ -150,7 +150,7 @@ feature "Pledges" do
       page.should have_field 'Subfunção', :with => '01 - Administração Geral'
       page.should have_field 'Programa', :with => 'Habitação'
       page.should have_field 'Ação', :with => 'Ação Governamental'
-      page.should have_field 'Organograma', :with => 'Secretaria de Educação'
+      page.should have_field 'Organograma', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Natureza da despesa', :with => '3.1.90.11.01.00.00.00'
 
       clear_modal 'Dotação'
