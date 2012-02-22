@@ -30,7 +30,7 @@ class Organogram < ActiveRecord::Base
   delegate :mask, :to => :organogram_configuration, :allow_nil => true
 
   def to_s
-    description
+    "#{organogram} - #{description}"
   end
 
   protected

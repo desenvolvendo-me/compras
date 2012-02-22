@@ -190,7 +190,7 @@ feature "Organograms" do
 
     click_link 'Secretaria de Educação'
 
-    click_link 'Apagar Secretaria de Educação', :confirm => true
+    click_link 'Apagar 02.00 - Secretaria de Educação', :confirm => true
 
     page.should have_notice 'Organograma apagado com sucesso.'
 

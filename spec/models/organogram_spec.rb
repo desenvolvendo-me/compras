@@ -8,8 +8,9 @@ require 'app/models/organogram_responsible'
 
 describe Organogram do
   it 'should respond to to_s with description' do
+    subject.organogram = '99/00'
     subject.description = 'Secretaria de Educação'
-    subject.to_s.should eq 'Secretaria de Educação'
+    subject.to_s.should eq '99/00 - Secretaria de Educação'
   end
 
   it { should validate_presence_of :description }
