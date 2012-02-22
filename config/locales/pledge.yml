@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge:
+        one: "Empenho"
+        other: "Empenhos"
+
+    attributes:
+      pledge:
+        entity: "Entidade"
+        year: "Exercício"
+        management_unit: "Unidade gestora"
+        emission_date: "Data de emissão"
+        commitment_type: "Tipo de empenho"
+        budget_allocation: "Dotação"
+        value: "Valor"
+        pledge_category: "Categoria"
+        budget_allocation_amount: "Saldo da dotação"
+        budget_allocation_function: "Função"
+        budget_allocation_subfunction: "Subfunção"
+        budget_allocation_government_program: "Programa"
+        budget_allocation_government_action: "Ação"
+        budget_allocation_organogram: "Organograma"
+        budget_allocation_expense_economic_classification: "Natureza da despesa"
