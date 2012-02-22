@@ -4,9 +4,8 @@ class CommitmentType < ActiveRecord::Base
   validates :code, :presence => true
 
   validates :code, :length => { :is => 3 }
-  validates :code, :uniqueness => true
-  validates :description, :presence => true
-  validates :description, :uniqueness => true
+  validates :code, :description, :presence => true
+  validates :code, :description, :uniqueness => true
 
   filterize
   orderize :description
