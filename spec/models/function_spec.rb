@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/function'
+require 'app/models/subfunction'
 
 describe Function do
   it "should return the code and description as to_s method" do
