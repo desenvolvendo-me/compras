@@ -16,35 +16,23 @@ module Tributario
     end
 
     def input(attribute_name, options = {}, &block)
-      return super if options[:as]
+      if reflection = find_association_reflection(attribute_name)
+        if reflection.macro == :belongs_to
+          attribute_name = reflection.options[:foreign_key] || :"#{reflection.name}_id"
+        else
+          raise "#{reflection.macro.inspect} associations are not supported by f.input"
+        end
 
-      if find_association_reflection(attribute_name)
-        association(attribute_name, options, &block)
-      elsif find_enumeration_reflection(attribute_name)
-        enumeration(attribute_name, options, &block)
-      else
-        super
+        options.reverse_merge!(:as => :modal, :reflection => reflection)
+      elsif collection = find_enumeration_reflection(attribute_name)
+        options.reverse_merge!(:as => :select, :collection => collection)
       end
-    end
-
-    def find_enumeration_reflection(attribute_name)
-      object.class.enumerations[attribute_name.to_sym]
-    end
-
-    def association(association, options = {}, &block)
-      # FIXME: refactoring, code smell
-      # do not fetch records using modal input
-      options[:as] = options.fetch(:as, :modal) unless block_given?
-      options[:collection] = [] if options[:as] == :modal
 
       super
     end
 
-    def enumeration(attribute_name, options = {}, &block)
-      options[:as]         ||= :select
-      options[:collection] ||= find_enumeration_reflection(attribute_name).to_a
-
-      input(attribute_name, options, &block)
+    def find_enumeration_reflection(attribute_name)
+      object.class.enumerations[attribute_name.to_sym] if object.class.respond_to?(:enumerations)
     end
 
     def submit_button(value = nil, options = {})

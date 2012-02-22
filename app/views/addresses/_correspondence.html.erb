@@ -9,7 +9,7 @@
   <fieldset>
     <legend>Endereço de Correspondência</legend>
 
-    <%= f.input :correspondence_address, :collection => f.object.correspondence_address || Address.new do |a| %>
+    <%= f.association :correspondence_address, :collection => f.object.correspondence_address || Address.new do |a| %>
       <%= render "addresses/address", :a => a %>
     <% end %>
   </fieldset>
