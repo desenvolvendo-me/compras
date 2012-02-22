@@ -47,7 +47,7 @@ feature "BudgetAllocations" do
 
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Exercício', :with => '2012'
-    page.should have_field 'Organogram', :with => 'Secretaria de Educação'
+    page.should have_field 'Organogram', :with => '02.00 - Secretaria de Educação'
     page.should have_field 'Função', :with => '04 - Administração'
     page.should have_field 'Subfunção', :with => '01 - Administração Geral'
     page.should have_field 'Programa do governo', :with => 'Habitação'
@@ -111,7 +111,7 @@ feature "BudgetAllocations" do
 
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Exercício', :with => '2013'
-    page.should have_field 'Organograma', :with => 'Secretaria de Desenvolvimento'
+    page.should have_field 'Organograma', :with => '02.00 - Secretaria de Desenvolvimento'
     page.should have_field 'Função', :with => '04 - Administração'
     page.should have_field 'Subfunção', :with => '02 - Gerente Geral'
     page.should have_field 'Programa do governo', :with => 'Educação'
