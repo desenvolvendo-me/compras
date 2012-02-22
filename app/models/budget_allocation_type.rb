@@ -8,6 +8,8 @@ class BudgetAllocationType < ActiveRecord::Base
 
   validates :description, :presence => true, :uniqueness => true
 
+  has_enumeration_for :source, :create_helpers => true
+
   def to_s
     description
   end
