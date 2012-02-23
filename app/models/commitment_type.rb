@@ -4,7 +4,7 @@ class CommitmentType < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
 
   validates :code, :description, :presence => true, :uniqueness => true
-  validates :code, :length => { :is => 3 }, :numericality => true
+  validates :code, :mask => '999'
 
   filterize
   orderize :description
