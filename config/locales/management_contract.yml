@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      management_contract:
+        one: "Contrato de Gestão"
+        other: "Contratos de Gestão"
+
+    attributes:
+      management_contract:
+        year: "Exercício"
+        entity: "Entidade"
+        contract_number: "Número do contrato"
+        process_number: "Número do processo"
+        signature_date: "Data da assinatura"
+        end_date: "Data do término"
+        description: "Objeto"

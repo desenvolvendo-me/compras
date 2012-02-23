@@ -11,6 +11,7 @@ class Entity < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
   has_many :management_units, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
+  has_many :management_contracts, :dependent => :restrict
 
   orderize
   filterize

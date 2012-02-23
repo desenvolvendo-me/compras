@@ -23,6 +23,7 @@ module Dashboard::AccountancyHelper
       m.materials_types
       m.budget_allocation_types
       m.commitment_types
+      m.management_contracts
       m.management_units
       m.government_actions
       m.pledge_categories

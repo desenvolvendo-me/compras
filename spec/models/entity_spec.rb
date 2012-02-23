@@ -25,6 +25,7 @@ describe Entity do
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:management_units).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
+  it { should have_many(:management_contracts).dependent(:restrict) }
 
   it { should validate_presence_of :name }
 end

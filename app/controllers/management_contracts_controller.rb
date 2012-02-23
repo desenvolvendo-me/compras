@@ -1,0 +1,2 @@
+class ManagementContractsController < CrudController
+end
