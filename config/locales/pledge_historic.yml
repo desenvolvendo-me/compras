@@ -9,3 +9,4 @@ pt-BR:
       pledge_historic:
         description: "Descrição"
         entity: "Entidade"
+        year: "Exercício"

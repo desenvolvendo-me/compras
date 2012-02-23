@@ -17,6 +17,7 @@ feature "PledgeHistorics" do
 
     fill_in 'Descrição', :with => 'Mensal'
     fill_modal 'Entidade', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
 
     click_button 'Criar Histórico de Empenho'
 
@@ -26,6 +27,7 @@ feature "PledgeHistorics" do
 
     page.should have_field 'Descrição', :with => 'Mensal'
     page.should have_field 'Entidade', :with => 'Detran'
+    page.should have_field 'Exercício', :with => '2012'
   end
 
   scenario 'update an existent pledge_historic' do
@@ -40,6 +42,7 @@ feature "PledgeHistorics" do
 
     fill_in 'Descrição', :with => 'Anual'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
+    fill_in 'Exercício', :with => '2013'
 
     click_button 'Atualizar Histórico de Empenho'
 
@@ -49,6 +52,7 @@ feature "PledgeHistorics" do
 
     page.should have_field 'Descrição', :with => 'Anual'
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
+    page.should have_field 'Exercício', :with => '2013'
   end
 
   scenario 'destroy an existent pledge_historic' do
