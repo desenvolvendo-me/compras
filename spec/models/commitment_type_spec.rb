@@ -13,6 +13,8 @@ describe CommitmentType do
   it { should validate_presence_of :description }
 
   it { should allow_value('012').for(:code) }
+  it { should_not allow_value('a12').for(:code) }
+  it { should_not allow_value('abc').for(:code) }
   it { should_not allow_value('12').for(:code) }
   it { should_not allow_value('2012').for(:code) }
 
