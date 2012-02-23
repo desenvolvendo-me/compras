@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      materials_type:
+        one: "Tipo de Bem"
+        other: "Tipos de Bens"
+
+    attributes:
+      materials_type:
+        description: "Descrição"

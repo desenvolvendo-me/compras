@@ -1,0 +1,2 @@
+class MaterialsTypesController < CrudController
+end
