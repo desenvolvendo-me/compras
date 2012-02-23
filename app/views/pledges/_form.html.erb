@@ -1,10 +1,15 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Principal</a></li>
+    <li><a href="#complement">Complementar</a></li>
   </ul>
 
   <div id="general">
     <%= render 'general', :f => f %>
+  </div>
+
+  <div id="complement">
+    <%= render 'complement', :f => f %>
   </div>
 </div>
 
@@ -36,6 +41,16 @@
       $('#pledge_budget_allocation_government_action').val('');
       $('#pledge_budget_allocation_organogram').val('');
       $('#pledge_budget_allocation_expense_economic_classification').val('');
+    }
+  });
+
+  $("#pledge_management_contract_id").change(function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $('#pledge_management_contract_signature_date').val(record.data("signature-date"));
+    } else {
+      $('#pledge_management_contract_signature_date').val('');
     }
   });
 </script>

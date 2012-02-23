@@ -7,4 +7,15 @@ Pledge.blueprint(:empenho) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { "9.99" }
   pledge_category { PledgeCategory.make!(:geral) }
+  expense_kind { ExpenseKind.make!(:pagamentos) }
+  pledge_historic { PledgeHistoric.make!(:semestral) }
+  management_contract { ManagementContract.make!(:primeiro_contrato) }
+  licitation_modality { LicitationModality.make!(:publica) }
+  licitation_number { '001' }
+  licitation_year { '2012' }
+  licitation { '001/2012' }
+  process_number { '002' }
+  process_year { '2013' }
+  process { '002/2013' }
+  description { 'Descricao' }
 end

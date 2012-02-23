@@ -4,6 +4,7 @@ class LicitationModality < ActiveRecord::Base
   delegate :publication_date, :to => :administractive_act, :prefix => true, :allow_nil => true
 
   belongs_to :administractive_act
+  has_many :pledges, :dependent => :restrict
 
   orderize :description
   filterize

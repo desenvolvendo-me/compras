@@ -9,6 +9,7 @@ describe PledgeHistoric do
   end
 
   it { should belong_to :entity }
+  it { should have_many(:pledges).dependent(:restrict) }
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :entity }

@@ -4,6 +4,8 @@ class ExpenseKind < ActiveRecord::Base
   orderize :description
   filterize
 
+  has_many :pledges, :dependent => :restrict
+
   validates :description, :presence => true, :uniqueness => true
   validates :status, :presence => true
 

@@ -12,6 +12,8 @@ describe LicitationModality do
   it { should validate_numericality_of :initial_value }
   it { should validate_numericality_of :final_value }
 
+  it { should have_many(:pledges).dependent(:restrict) }
+
   it 'should have final value greater or equal to initial value' do
     subject.final_value = 100.00
     subject.initial_value = 100.00

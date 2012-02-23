@@ -1,0 +1,28 @@
+<%= f.input :expense_kind %>
+<%= f.input :pledge_historic %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :licitation_modality %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :licitation, :input_html => { :value => (f.object.joined_licitation if f.object.persisted?) } %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :process, :input_html => { :value => (f.object.joined_process if f.object.persisted?) } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :management_contract %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :management_contract_signature_date, :disabled => true, :input_html => { :value => (l(f.object.management_contract_signature_date) if f.object.management_contract_signature_date) } %>
+  </div>
+</div>
+
+<%= f.input :description %>

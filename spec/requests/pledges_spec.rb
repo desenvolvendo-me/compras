@@ -12,6 +12,10 @@ feature "Pledges" do
     CommitmentType.make!(:primeiro_empenho)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     PledgeCategory.make!(:geral)
+    ExpenseKind.make!(:pagamentos)
+    PledgeHistoric.make!(:semestral)
+    LicitationModality.make!(:publica)
+    management_contract = ManagementContract.make!(:primeiro_contrato)
 
     click_link 'Contabilidade'
 
@@ -28,6 +32,16 @@ feature "Pledges" do
       fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
       fill_in 'Valor', :with => '300,00'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
+    end
+
+    within_tab 'Complementar' do
+      fill_modal 'Tipo de despesa', :with => 'Pagamentos', :field => 'Descrição'
+      fill_modal 'Histórico', :with => 'Semestral', :field => 'Descrição'
+      fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
+      fill_in 'Número da licitação', :with => '001/2012'
+      fill_in 'Número do processo', :with => '002/2013'
+      fill_modal 'Contrato', :with => '001', :field => 'Número do contrato'
+      fill_in 'Objeto', :with => 'Objeto de empenho'
     end
 
     click_button 'Criar Empenho'
@@ -48,6 +62,16 @@ feature "Pledges" do
       page.should have_field 'Valor', :with => '300,00'
       page.should have_field 'Categoria', :with => 'Geral'
     end
+
+    within_tab 'Complementar' do
+      page.should have_field 'Tipo de despesa', :with => 'Pagamentos'
+      page.should have_field 'Histórico', :with => 'Semestral'
+      page.should have_field 'Modalidade', :with => 'Pública'
+      page.should have_field 'Número da licitação', :with => '001/2012'
+      page.should have_field 'Número do processo', :with => '002/2013'
+      page.should have_field 'Contrato', :with => "#{management_contract.id}/2012"
+      page.should have_field 'Objeto', :with => 'Objeto de empenho'
+    end
   end
 
   scenario 'update an existent pledge' do
@@ -57,6 +81,10 @@ feature "Pledges" do
     CommitmentType.make!(:segundo_empenho)
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     PledgeCategory.make!(:auxiliar)
+    ExpenseKind.make!(:alojamento)
+    PledgeHistoric.make!(:anual)
+    LicitationModality.make!(:privada)
+    management_contract = ManagementContract.make!(:segundo_contrato)
 
     click_link 'Contabilidade'
 
@@ -77,6 +105,16 @@ feature "Pledges" do
       fill_modal 'Categoria', :with => 'Auxiliar', :field => 'Descrição'
     end
 
+    within_tab 'Complementar' do
+      fill_modal 'Tipo de despesa', :with => 'Alojamento', :field => 'Descrição'
+      fill_modal 'Histórico', :with => 'Anual', :field => 'Descrição'
+      fill_modal 'Modalidade', :with => 'Privada', :field => 'Modalidade'
+      fill_in 'Número da licitação', :with => '003/2014'
+      fill_in 'Número do processo', :with => '004/2015'
+      fill_modal 'Contrato', :with => '002', :field => 'Número do contrato'
+      fill_in 'Objeto', :with => 'Objeto de empenho'
+    end
+
     click_button 'Atualizar Empenho'
 
     page.should have_notice 'Empenho editado com sucesso.'
@@ -94,6 +132,16 @@ feature "Pledges" do
       page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
       page.should have_field 'Valor', :with => '400,00'
       page.should have_field 'Categoria', :with => 'Auxiliar'
+    end
+
+    within_tab 'Complementar' do
+      page.should have_field 'Tipo de despesa', :with => 'Alojamento'
+      page.should have_field 'Histórico', :with => 'Anual'
+      page.should have_field 'Modalidade', :with => 'Privada'
+      page.should have_field 'Número da licitação', :with => '003/2014'
+      page.should have_field 'Número do processo', :with => '004/2015'
+      page.should have_field 'Contrato', :with => "#{management_contract.id}/2013"
+      page.should have_field 'Objeto', :with => 'Objeto de empenho'
     end
   end
 
@@ -162,6 +210,29 @@ feature "Pledges" do
       page.should have_field 'Ação', :with => ''
       page.should have_field 'Organograma', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
+    end
+  end
+
+  scenario 'getting and cleaning signature date depending on contract' do
+    ManagementContract.make!(:primeiro_contrato)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Complementar' do
+      page.should have_disabled_field 'Data do contrato'
+      page.should have_field 'Data do contrato', :with => ''
+
+      fill_modal 'Contrato', :with => '001', :field => 'Número do contrato'
+
+      page.should have_field 'Data do contrato', :with => "23/02/2012"
+
+      clear_modal 'Contrato'
+
+      page.should have_field 'Data do contrato', :with => ''
     end
   end
 end

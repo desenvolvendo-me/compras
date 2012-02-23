@@ -5,6 +5,7 @@ class PledgeHistoric < ActiveRecord::Base
   filterize
 
   belongs_to :entity
+  has_many :pledges, :dependent => :restrict
 
   validates :description, :entity, :year, :presence => true
   validates :year, :mask => "9999"
