@@ -357,13 +357,6 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :materials_types do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :neighborhoods do
     collection do
       get :modal
