@@ -15,4 +15,6 @@ describe CommitmentType do
   it { should allow_value('012').for(:code) }
   it { should_not allow_value('12').for(:code) }
   it { should_not allow_value('2012').for(:code) }
+
+  it { should have_many(:pledges).dependent(:restrict) }
 end

@@ -23,6 +23,7 @@ describe BudgetAllocation do
   it { should belong_to(:capability) }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
+  it { should have_many(:pledges).dependent(:restrict) }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }

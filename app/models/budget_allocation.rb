@@ -19,6 +19,7 @@ class BudgetAllocation < ActiveRecord::Base
   belongs_to :budget_allocation_type
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
+  has_many :pledges, :dependent => :restrict
 
   has_enumeration_for :debt_type
 

@@ -4,6 +4,8 @@ class ManagementUnit < ActiveRecord::Base
   orderize :description
   filterize
 
+  has_many :pledges, :dependent => :restrict
+
   has_enumeration_for :status, :create_helpers => true, :with => ManagementUnitStatus
 
   def to_s

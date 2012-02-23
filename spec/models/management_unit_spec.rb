@@ -7,4 +7,6 @@ describe ManagementUnit do
 
     subject.to_s.should eq "Central Unit"
   end
+
+  it { should have_many(:pledges).dependent(:restrict) }
 end
