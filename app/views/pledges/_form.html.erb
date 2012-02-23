@@ -23,9 +23,11 @@
       }
     }
   });
+
   $("#pledge_budget_allocation_id").change(function (event, data) {
     if (data){
       var record = data.record;
+
       $('#pledge_budget_allocation_amount').val(record.data("amount"));
       $('#pledge_budget_allocation_function').val(record.data("function"));
       $('#pledge_budget_allocation_subfunction').val(record.data("subfunction"));
