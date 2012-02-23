@@ -1,0 +1,61 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :year %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :entity %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :contract_number %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :process_number %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :signed_date %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :end_date %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :description %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.entity_id %>
+        </td>
+        <td>
+          <%= resource.year %>
+        </td>
+        <td>
+          <%= resource.entity %>
+        </td>
+        <td>
+          <%= link_to resource.contract_number, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.process_number %>
+        </td>
+        <td>
+          <%= resource.signed_date %>
+        </td>
+        <td>
+          <%= resource.end_date %>
+        </td>
+        <td>
+          <%= resource.description %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

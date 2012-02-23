@@ -260,6 +260,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :founded_debt_contracts do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :functions do
     collection do
       get :filter

@@ -9,6 +9,7 @@ module Dashboard::AccountancyHelper
       m.administractive_act_type_classifications
       m.expense_economic_classifications
       m.organogram_configurations
+      m.founded_debt_contracts
       m.budget_allocations
       m.functions
       m.legal_text_natures
