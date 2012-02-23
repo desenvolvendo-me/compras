@@ -26,20 +26,4 @@ describe BudgetAllocation do
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
-
-  it 'should be valid if subfunction and function are related' do
-    subject.stub(:function).and_return double(:id => 1)
-    subject.stub(:subfunction).and_return double(:function_id => 1)
-
-    subject.valid?
-    subject.errors.messages[:function].should be_nil
-  end
-
-  it 'should be invalid if subfunction and function are not related' do
-    subject.stub(:function).and_return double(:id => 2)
-    subject.stub(:subfunction).and_return double(:function_id => 1)
-
-    subject.valid?
-    subject.errors.messages[:function].should include 'não faz parte da função selecionada'
-  end
 end

@@ -19,7 +19,6 @@ class BudgetAllocation < ActiveRecord::Base
   belongs_to :budget_allocation_type
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
-  validate  :subfunction_must_belongs_to_function
 
   has_enumeration_for :debt_type
 
@@ -34,13 +33,5 @@ class BudgetAllocation < ActiveRecord::Base
 
   def to_s
     "#{id}/#{year}"
-  end
-
-  protected
-
-  def subfunction_must_belongs_to_function
-    if function.present? && subfunction.function_id.present?
-      errors.add(:function, :subfunction_must_belongs_to_function) if function.id != subfunction.function_id
-    end
   end
 end
