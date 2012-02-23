@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      creditor:
+        one: "Credor"
+        other: "Credores"
+
+    attributes:
+      creditor:
+        name: "Nome"
+        entity: "Entidade"
+        status: "Status"

@@ -182,6 +182,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :creditors do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :organogram_configurations do
     collection do
       get :filter
