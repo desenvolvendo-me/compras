@@ -5,4 +5,12 @@ class PledgesController < CrudController
 
     super
   end
+
+  def edit
+    object = resource
+    object.licitation = object.joined_licitation
+    object.process = object.joined_process
+
+    super
+  end
 end
