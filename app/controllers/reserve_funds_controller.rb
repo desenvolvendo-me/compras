@@ -1,0 +1,2 @@
+class ReserveFundsController < CrudController
+end

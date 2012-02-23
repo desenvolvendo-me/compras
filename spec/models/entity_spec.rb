@@ -7,6 +7,7 @@ require 'app/models/government_program'
 require 'app/models/government_action'
 require 'app/models/pledge_historic'
 require 'app/models/budget_allocation'
+require 'app/models/reserve_fund'
 
 describe Entity do
   it 'should return the name as to_s method' do
@@ -23,6 +24,7 @@ describe Entity do
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:management_units).dependent(:restrict) }
+  it { should have_many(:reserve_funds).dependent(:restrict) }
 
   it { should validate_presence_of :name }
 end

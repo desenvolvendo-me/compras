@@ -1,0 +1,43 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :year %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :entity %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :budget_allocation %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :value %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource.year, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.entity %>
+        </td>
+        <td>
+          <%= resource.budget_allocation %>
+        </td>
+        <td>
+          <%= resource.value %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

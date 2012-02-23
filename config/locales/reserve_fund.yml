@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      reserve_fund:
+        one: "Reserva de Dotação"
+        other: "Reservas de Dotação"
+
+    attributes:
+      reserve_fund:
+        year: "Exercício"
+        entity: "Entidade"
+        budget_allocation: "Dotação orçamentária"
+        value: "Valor"

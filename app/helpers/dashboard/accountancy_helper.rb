@@ -16,6 +16,7 @@ module Dashboard::AccountancyHelper
       m.government_actions
       m.government_programs
       m.capabilities
+      m.reserve_funds
       m.subfunctions
       m.administractive_act_types
       m.administration_types
