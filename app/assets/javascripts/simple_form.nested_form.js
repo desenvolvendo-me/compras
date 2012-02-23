@@ -24,19 +24,12 @@
     };
     var options = $.extend({}, defaults, options);
 
-    var displayFirstLabel = function() {
-      $(".nested:first").find("label").show();
-      $(".nested:first").find(".nested-remove").css('padding-top', '30px');
-    }
+    var displayFirstLabels = function() {
+      $('.nested label').hide();
+      $('.nested label').closest('.nested').find('.nested-remove').css('padding-top', '4px');
 
-    var hideLabel = function(label) {
-      $(label).hide();
-      $(label).closest('.nested').find('.nested-remove').css('padding-top', '4px');
-    }
-
-    if (options.right) {
-      hideLabel($('.nested label'));
-      displayFirstLabel();
+      $(".nested:visible:first label").show();
+      $(".nested:visible:first .nested-remove").css('padding-top', '30px');
     }
 
     $('body').delegate(options.add, 'click', function () {
@@ -44,26 +37,18 @@
       binds[options.uuid] = _.uniqueId('fresh-');
 
       $(options.target).append(template.mustache(binds));
-      if (options.right) {
-        displayFirstLabel();
-        var labels = $('.nested label:visible'),
-            max_labels = $(".nested:first").find("label").length;
 
-        if (labels.length > max_labels) {
-          $.each(labels, function(index, value) {
-            if ( index > (max_labels - 1)) {
-              hideLabel(this);
-            }
-          });
-        }
+      if (options.right) {
+        displayFirstLabels();
       }
     });
 
     $(options.target).delegate(options.remove, 'click', function () {
-      if (options.right) {
-        displayFirstLabel();
-      }
       $(this).closest(options.fieldToRemove).hide().find(options.hiddenDestroyInput).val('true');
+
+      if (options.right) {
+        displayFirstLabels();
+      }
     });
   };
 })(jQuery);
