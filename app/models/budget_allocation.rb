@@ -27,8 +27,7 @@ class BudgetAllocation < ActiveRecord::Base
   orderize :description
   filterize
 
-  validates :description, :presence => true
-  validates :description, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => true
   validates :year, :mask => '9999'
 
   def to_s
