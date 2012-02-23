@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/commitment_type'
+require 'app/models/pledge'
 
 describe CommitmentType do
   it 'should return code and description as to_s' do
