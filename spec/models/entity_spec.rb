@@ -7,6 +7,8 @@ require 'app/models/government_program'
 require 'app/models/government_action'
 require 'app/models/pledge_historic'
 require 'app/models/budget_allocation'
+require 'app/models/pledge'
+require 'app/models/management_unit'
 require 'app/models/reserve_fund'
 
 describe Entity do
