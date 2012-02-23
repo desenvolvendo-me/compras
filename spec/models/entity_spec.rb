@@ -22,6 +22,7 @@ describe Entity do
   it { should have_many(:pledge_historics).dependent(:restrict) }
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
+  it { should have_many(:management_units).dependent(:restrict) }
 
   it { should validate_presence_of :name }
 end

@@ -10,3 +10,5 @@ pt-BR:
         description: "Descrição"
         acronym: "Sigla"
         status: "Status"
+        entity: "Entidade"
+        year: "Exercício"

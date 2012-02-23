@@ -9,6 +9,7 @@ class Entity < ActiveRecord::Base
   has_many :pledge_historics, :dependent => :restrict
   has_many :budget_allocations, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
+  has_many :management_units, :dependent => :restrict
 
   orderize
   filterize
