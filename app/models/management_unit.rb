@@ -8,7 +8,7 @@ class ManagementUnit < ActiveRecord::Base
   belongs_to :entity
 
   validates :year, :mask => "9999"
-  validates :entity, :year, :presence => true
+  validates :entity, :year, :description, :acronym, :status, :presence => true
 
   has_enumeration_for :status, :create_helpers => true, :with => ManagementUnitStatus
 
