@@ -6,7 +6,8 @@ class BudgetAllocationType < ActiveRecord::Base
   orderize :description
   filterize
 
-  validates :description, :status, :presence => true, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => true
+  validates :status, :presence => true
 
   has_enumeration_for :source, :create_helpers => true
   has_enumeration_for :status, :create_helpers => true
