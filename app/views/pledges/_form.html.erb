@@ -23,6 +23,14 @@
       }
     }
   });
+  $("#pledge_reserve_fund_id").change(function (event, data) {
+    if (data){
+      var record = data.record;
+      $('#pledge_reserve_fund_value').val(record.data("reserve-fund-value"));
+    } else {
+      $('#pledge_reserve_fund_value').val('');
+    }
+  });
 
   $("#pledge_budget_allocation_id").change(function (event, data) {
     if (data){

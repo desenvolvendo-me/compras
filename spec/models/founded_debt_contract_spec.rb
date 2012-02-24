@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/founded_debt_contract'
+require 'app/models/pledge'
 
 describe FoundedDebtContract do
   it 'should return to_s as id/year' do
@@ -9,6 +10,8 @@ describe FoundedDebtContract do
   end
 
   it { should belong_to :entity }
+  it { should have_many(:pledges).dependent(:restrict) }
+
   it { should validate_presence_of :year }
   it { should validate_presence_of :entity }
   it { should validate_presence_of :contract_number }

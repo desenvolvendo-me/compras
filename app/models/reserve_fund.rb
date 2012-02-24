@@ -4,6 +4,7 @@ class ReserveFund < ActiveRecord::Base
 
   belongs_to :entity
   belongs_to :budget_allocation
+  has_many :pledges, :dependent => :restrict
 
   validates :entity, :budget_allocation, :value, :presence => true
   validates :year, :presence => true, :mask => '9999'

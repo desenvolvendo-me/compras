@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/creditor'
+require 'app/models/pledge'
 
 describe Creditor do
   it 'should return to_s as name' do
@@ -8,6 +9,7 @@ describe Creditor do
   end
 
   it { should belong_to :entity }
+  it { should have_many(:pledges).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :status }

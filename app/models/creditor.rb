@@ -4,6 +4,7 @@ class Creditor < ActiveRecord::Base
   has_enumeration_for :status
 
   belongs_to :entity
+  has_many :pledges, :dependent => :restrict
 
   orderize
   filterize

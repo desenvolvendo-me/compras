@@ -1,7 +1,8 @@
 class Pledge < ActiveRecord::Base
   attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :commitment_type_id,
                   :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id, :pledge_historic_id,
-                  :management_contract_id, :licitation_modality_id, :description, :licitation, :process
+                  :management_contract_id, :licitation_modality_id, :description, :licitation, :process,
+                  :reserve_fund_id, :material_kind, :founded_debt_contract_id, :creditor_id
 
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
 
@@ -13,7 +14,14 @@ class Pledge < ActiveRecord::Base
   delegate :amount, :function, :subfunction, :government_program, :government_action, :organogram, :expense_economic_classification,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
+  delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
+
+  has_enumeration_for :material_kind
+
+  belongs_to :creditor
+  belongs_to :founded_debt_contract
   belongs_to :entity
+  belongs_to :reserve_fund
   belongs_to :management_unit
   belongs_to :commitment_type
   belongs_to :budget_allocation

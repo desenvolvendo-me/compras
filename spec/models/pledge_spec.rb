@@ -12,6 +12,9 @@ describe Pledge do
   it { should belong_to :pledge_historic }
   it { should belong_to :management_contract }
   it { should belong_to :licitation_modality }
+  it { should belong_to :reserve_fund }
+  it { should belong_to :creditor }
+  it { should belong_to :founded_debt_contract }
 
   it { should validate_presence_of :licitation }
   it { should validate_presence_of :process }

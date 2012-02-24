@@ -3,6 +3,7 @@ class FoundedDebtContract < ActiveRecord::Base
   attr_accessible :signed_date, :end_date, :description
 
   belongs_to :entity
+  has_many :pledges, :dependent => :restrict
 
   orderize :year
   filterize

@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/reserve_fund'
+require 'app/models/pledge'
 
 describe ReserveFund do
   it 'should return to_s as id/year' do
@@ -11,6 +12,7 @@ describe ReserveFund do
 
   it { should belong_to :entity }
   it { should belong_to :budget_allocation }
+  it { should have_many(:pledges).dependent(:restrict) }
 
   it { should validate_presence_of :entity }
   it { should validate_presence_of :budget_allocation }

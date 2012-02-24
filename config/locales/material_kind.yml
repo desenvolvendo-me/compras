@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    material_kind:
+      non_patrimonial: "Não patrimonial"
+      patrimonial: "Patrimonial"
+      public: "Domínio público"
