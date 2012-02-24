@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'model_helper'
+require 'app/models/founded_debt_contract'
 
 describe FoundedDebtContract do
   it 'should return to_s as id/year' do
