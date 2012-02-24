@@ -15,6 +15,8 @@ class LicitationModality < ActiveRecord::Base
   validates :final_value, :numericality => true
   validates :final_value, :numericality => { :greater_than_or_equal_to => :initial_value, :message => :should_not_be_less_than_initial_value }
 
+  validates :initial_value, :uniqueness => { :scope => :final_value, :message => :initial_and_final_value_range_taken }
+
   def to_s
     description
   end

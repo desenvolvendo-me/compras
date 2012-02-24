@@ -113,4 +113,21 @@ feature "LicitationModalities" do
     page.should have_disabled_field 'Data da publicação'
     page.should have_field 'Data da publicação', :with => ''
   end
+
+  scenario 'should validate initial and final value range taken' do
+    LicitationModality.make!(:publica)
+
+    click_link 'Contabilidade'
+
+    click_link 'Modalidades de Licitação'
+
+    click_link 'Criar Modalidade de Licitação'
+
+    fill_in 'Valor inicial', :with => '500,00'
+    fill_in 'Valor final', :with => '700,00'
+
+    click_button 'Criar Modalidade de Licitação'
+
+    page.should have_content 'esta combinação de valor inicial e valor final já está em uso'
+  end
 end
