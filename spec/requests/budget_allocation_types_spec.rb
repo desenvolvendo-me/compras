@@ -14,6 +14,7 @@ feature "BudgetAllocationTypes" do
     click_link 'Criar Tipo de Dotação'
 
     fill_in 'Descrição', :with => 'Administrativa'
+    select 'Ativo', :from => 'Status'
 
     click_button 'Criar Tipo de Dotação'
 
@@ -22,6 +23,7 @@ feature "BudgetAllocationTypes" do
     click_link 'Administrativa'
 
     page.should have_field 'Descrição', :with => 'Administrativa'
+    page.should have_select 'Status', :with => 'Ativo'
   end
 
   scenario 'update an existent budget_allocation_type' do
@@ -34,6 +36,7 @@ feature "BudgetAllocationTypes" do
     click_link 'Administrativa'
 
     fill_in 'Descrição', :with => 'Executiva'
+    select 'Inativo', :from => 'Status'
 
     click_button 'Atualizar Tipo de Dotação'
 
@@ -42,6 +45,7 @@ feature "BudgetAllocationTypes" do
     click_link 'Executiva'
 
     page.should have_field 'Descrição', :with => 'Executiva'
+    page.should have_select 'Status', :with => 'Inativo'
   end
 
   scenario 'destroy an existent budget_allocation_type' do
