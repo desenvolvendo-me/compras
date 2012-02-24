@@ -76,6 +76,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :whatever
 
   has_many :cars
+  has_many :motorcycles
 
   has_one :wife
 
