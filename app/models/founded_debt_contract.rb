@@ -2,6 +2,8 @@ class FoundedDebtContract < ActiveRecord::Base
   attr_accessible :year, :entity_id, :contract_number, :process_number
   attr_accessible :signed_date, :end_date, :description
 
+  attr_modal :year, :entity, :contract_number, :process_number
+
   belongs_to :entity
   has_many :pledges, :dependent => :restrict
 
