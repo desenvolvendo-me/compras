@@ -9,7 +9,7 @@ class LicitationModality < ActiveRecord::Base
   orderize :description
   filterize
 
-  validates :description, :administractive_act_id, :presence => true
+  validates :description, :administractive_act, :presence => true
   validates :initial_value, :presence => true, :numericality => true
   validates :final_value, :presence => true
   validates :final_value, :numericality => true

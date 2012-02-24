@@ -6,7 +6,7 @@ class MaterialsClass < ActiveRecord::Base
   belongs_to :materials_group
   has_many :materials, :dependent => :restrict
 
-  validates :materials_group_id, :presence => true
+  validates :materials_group, :presence => true
   validates :description, :presence => true, :uniqueness => { :scope => :materials_group_id }
   validates :class_number, :presence => true, :uniqueness => { :scope => :materials_group_id }, :numericality => true, :mask => "99"
 

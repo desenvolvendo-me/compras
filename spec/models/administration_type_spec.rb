@@ -16,5 +16,5 @@ describe AdministrationType do
   it {should validate_presence_of :description }
   it {should validate_presence_of :administration }
   it {should validate_presence_of :organ_type }
-  it {should validate_presence_of :legal_nature_id }
+  it {should validate_presence_of :legal_nature }
 end

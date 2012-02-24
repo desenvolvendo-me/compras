@@ -3,8 +3,8 @@ require 'model_helper'
 require 'app/models/organogram_responsible'
 
 describe OrganogramResponsible do
-  it { should validate_presence_of :responsible_id }
-  it { should validate_presence_of :administractive_act_id }
+  it { should validate_presence_of :responsible }
+  it { should validate_presence_of :administractive_act }
   it { should validate_presence_of :start_date }
   it { should validate_presence_of :end_date }
   it { should validate_presence_of :status }

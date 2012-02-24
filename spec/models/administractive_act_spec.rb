@@ -20,7 +20,7 @@ describe AdministractiveAct do
 
   it { should have_and_belong_to_many :dissemination_sources}
   it { should validate_presence_of :act_number }
-  it { should validate_presence_of :administractive_act_type_id }
+  it { should validate_presence_of :administractive_act_type }
   it { should validate_presence_of :creation_date }
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :vigor_date }
@@ -29,7 +29,7 @@ describe AdministractiveAct do
   it { should validate_presence_of :budget_law_percent }
   it { should validate_presence_of :revenue_antecipation_percent }
   it { should validate_presence_of :authorized_debt_value }
-  it { should validate_presence_of :legal_text_nature_id }
+  it { should validate_presence_of :legal_text_nature }
   it { should validate_numericality_of :budget_law_percent }
   it { should validate_numericality_of :revenue_antecipation_percent }
   it { should validate_numericality_of :act_number }

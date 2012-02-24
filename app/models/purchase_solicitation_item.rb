@@ -6,7 +6,7 @@ class PurchaseSolicitationItem < ActiveRecord::Base
 
   has_enumeration_for :status, :with => PurchaseSolicitationItemStatus
 
-  validates :material_id, :quantity, :unit_price, :presence => true
+  validates :material, :quantity, :unit_price, :presence => true
 
   delegate :reference_unit, :to => :material, :allow_nil => true
 

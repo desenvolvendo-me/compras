@@ -18,8 +18,8 @@ class Material < ActiveRecord::Base
   orderize :description
   filterize
 
-  validates :materials_group_id, :materials_class_id, :reference_unit_id, :material_characteristic, :presence => true
-  validates :expense_economic_classification_id, :presence => true
+  validates :materials_group, :materials_class, :reference_unit, :material_characteristic, :presence => true
+  validates :expense_economic_classification, :presence => true
   validates :code, :presence => true, :uniqueness => true
   validates :description, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?

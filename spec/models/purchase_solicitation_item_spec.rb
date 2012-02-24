@@ -6,7 +6,7 @@ describe PurchaseSolicitationItem do
   it { should belong_to :purchase_solicitation }
   it { should belong_to :material }
 
-  it { should validate_presence_of :material_id }
+  it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
   it { should validate_presence_of :unit_price }
 

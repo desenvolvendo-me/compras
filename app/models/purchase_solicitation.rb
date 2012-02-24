@@ -22,7 +22,7 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   before_save :clean_extra_budget_allocations
 
-  validates :request_date, :responsible_id, :delivery_location, :kind, :delivery_location_id, :presence => true
+  validates :request_date, :responsible, :delivery_location, :kind, :delivery_location, :presence => true
   validates :accounting_year, :presence => true, :numericality => true, :mask => '9999'
   validate :cannot_have_more_than_once_item_with_the_same_material
   validate :cannot_have_duplicated_budget_allocations

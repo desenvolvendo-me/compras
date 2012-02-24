@@ -14,8 +14,8 @@ describe OrganogramConfiguration do
   it { should have_many(:organograms).dependent(:restrict) }
 
   it { should validate_presence_of :description }
-  it { should validate_presence_of :administractive_act_id }
-  it { should validate_presence_of :entity_id }
+  it { should validate_presence_of :administractive_act }
+  it { should validate_presence_of :entity }
 
   context 'get mask' do
     let :level1 do

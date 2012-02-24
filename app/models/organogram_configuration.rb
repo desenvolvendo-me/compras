@@ -11,7 +11,7 @@ class OrganogramConfiguration < ActiveRecord::Base
 
   accepts_nested_attributes_for :organogram_levels, :reject_if => :all_blank, :allow_destroy => true
 
-  validates :description, :entity_id, :administractive_act_id, :presence => true
+  validates :description, :entity, :administractive_act, :presence => true
   validate :organogram_separator_for_organogram_levels
 
   orderize :description

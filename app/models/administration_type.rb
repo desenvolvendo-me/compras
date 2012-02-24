@@ -10,7 +10,7 @@ class AdministrationType < ActiveRecord::Base
   orderize :description
   filterize
 
-  validates :administration, :organ_type, :legal_nature_id, :presence => true
+  validates :administration, :organ_type, :legal_nature, :presence => true
   validates :description, :presence => true, :uniqueness => true
 
   def to_s

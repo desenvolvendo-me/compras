@@ -18,7 +18,7 @@ class ExpenseEconomicClassification < ActiveRecord::Base
 
   validates :expense_economic_classification, :kind, :description, :presence => true
   validates :expense_economic_classification, :mask => '9.9.99.99.99.99.99.99'
-  validates :stn_ordinance_id, :presence => true
+  validates :stn_ordinance, :presence => true
 
   orderize :description
   filterize

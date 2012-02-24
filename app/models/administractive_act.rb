@@ -16,7 +16,7 @@ class AdministractiveAct < ActiveRecord::Base
   orderize :act_number
   filterize
 
-  validates :administractive_act_type_id, :creation_date, :publication_date, :vigor_date, :end_date, :legal_text_nature_id,
+  validates :administractive_act_type, :creation_date, :publication_date, :vigor_date, :end_date, :legal_text_nature,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
   validates :content, :uniqueness => true
   validates :act_number, :presence => true, :uniqueness => true, :numericality => true

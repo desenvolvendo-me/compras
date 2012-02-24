@@ -56,8 +56,8 @@ describe PurchaseSolicitation do
     it { should validate_presence_of :accounting_year }
     it { should validate_numericality_of :accounting_year }
     it { should validate_presence_of :request_date }
-    it { should validate_presence_of :delivery_location_id }
-    it { should validate_presence_of :responsible_id }
+    it { should validate_presence_of :delivery_location }
+    it { should validate_presence_of :responsible }
     it { should validate_presence_of :kind }
 
     it { should_not allow_value('a2012').for(:accounting_year) }

@@ -10,7 +10,7 @@ class Subfunction < ActiveRecord::Base
   filterize
 
   validates :code, :presence => true, :uniqueness => true, :numericality => true
-  validates :description, :entity, :year, :function_id, :presence => true
+  validates :description, :entity, :year, :function, :presence => true
   validates :description, :uniqueness => true
   validates :year, :mask => '9999'
 

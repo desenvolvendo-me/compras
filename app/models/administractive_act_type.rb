@@ -6,7 +6,7 @@ class AdministractiveActType < ActiveRecord::Base
   has_many :administractive_acts, :dependent => :restrict
 
   validates :description, :presence => true, :uniqueness => true
-  validates :administractive_act_type_classification_id, :presence => true
+  validates :administractive_act_type_classification, :presence => true
 
   filterize
   orderize :description

@@ -16,7 +16,7 @@ class Organogram < ActiveRecord::Base
   has_many :organogram_responsibles, :dependent => :destroy
 
   validates :description, :organogram, :tce_code, :acronym, :presence => true
-  validates :performance_field, :organogram_configuration_id, :presence => true
+  validates :performance_field, :organogram_configuration, :presence => true
   validates :administration_type, :organogram_kind, :presence => true
   validates :organogram, :mask => :mask
   validate :cannot_have_duplicated_responsibles
