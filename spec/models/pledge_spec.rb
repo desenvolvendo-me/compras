@@ -5,7 +5,6 @@ require 'app/models/pledge'
 describe Pledge do
   it { should belong_to :entity }
   it { should belong_to :management_unit }
-  it { should belong_to :commitment_type }
   it { should belong_to :budget_allocation }
   it { should belong_to :pledge_category }
   it { should belong_to :expense_kind }

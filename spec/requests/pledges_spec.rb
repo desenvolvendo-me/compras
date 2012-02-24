@@ -9,7 +9,6 @@ feature "Pledges" do
   scenario 'create a new pledge' do
     Entity.make!(:detran)
     ManagementUnit.make!(:unidade_central)
-    CommitmentType.make!(:primeiro_empenho)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     reserve_fund = ReserveFund.make!(:detran_2012)
     PledgeCategory.make!(:geral)
@@ -32,7 +31,7 @@ feature "Pledges" do
       fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
-      fill_modal 'Tipo de empenho', :with => 'Empenho 01', :field => 'Descrição'
+      select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
       fill_in 'Valor', :with => '300,00'
       select 'Patrimonial', :from => 'Tipo de bem'
@@ -65,7 +64,7 @@ feature "Pledges" do
       page.should have_field 'Reserva de dotação', :with => "#{reserve_fund.id}/2012"
       page.should have_field 'Unidade gestora', :with => 'Unidade Central'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-      page.should have_field 'Tipo de empenho', :with => '123 - Empenho 01'
+      page.should have_select 'Tipo de empenho', :selected => 'Global'
       page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
       page.should have_field 'Valor', :with => '300,00'
       page.should have_field 'Categoria', :with => 'Geral'
@@ -89,7 +88,6 @@ feature "Pledges" do
     Pledge.make!(:empenho)
     Entity.make!(:secretaria_de_educacao)
     ManagementUnit.make!(:unidade_auxiliar)
-    CommitmentType.make!(:segundo_empenho)
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     reserve_fund = ReserveFund.make!(:educacao_2011)
     PledgeCategory.make!(:auxiliar)
@@ -114,7 +112,7 @@ feature "Pledges" do
       fill_modal 'Reserva de dotação', :with => '2011', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Auxiliar', :field => 'Descrição'
       fill_in 'Data de emissão', :with => I18n.l(Date.current + 1)
-      fill_modal 'Tipo de empenho', :with => 'Empenho 02', :field => 'Descrição'
+      select 'Estimativo', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => 'Alocação extra', :field => 'Descrição'
       fill_in 'Valor', :with => '400,00'
       select 'Domínio público', :from => 'Tipo de bem'
@@ -147,7 +145,7 @@ feature "Pledges" do
       page.should have_field 'Reserva de dotação', :with => "#{reserve_fund.id}/2011"
       page.should have_field 'Unidade gestora', :with => 'Unidade Auxiliar'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current + 1)
-      page.should have_field 'Tipo de empenho', :with => '456 - Empenho 02'
+      page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
       page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
       page.should have_field 'Valor', :with => '400,00'
       page.should have_field 'Categoria', :with => 'Auxiliar'

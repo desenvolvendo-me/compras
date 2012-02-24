@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    pledge_type:
+      ordinary: "Ordinário"
+      global: "Global"
+      estimated: "Estimativo"

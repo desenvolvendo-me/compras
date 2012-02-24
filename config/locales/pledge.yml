@@ -13,7 +13,7 @@ pt-BR:
         reserve_fund_value: "Saldo reserva"
         management_unit: "Unidade gestora"
         emission_date: "Data de emissão"
-        commitment_type: "Tipo de empenho"
+        pledge_type: "Tipo de empenho"
         budget_allocation: "Dotação"
         value: "Valor"
         material_kind: "Tipo de bem"

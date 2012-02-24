@@ -1,5 +1,5 @@
 class Pledge < ActiveRecord::Base
-  attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :commitment_type_id,
+  attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :pledge_type,
                   :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id, :pledge_historic_id,
                   :management_contract_id, :licitation_modality_id, :description, :licitation, :process,
                   :reserve_fund_id, :material_kind, :founded_debt_contract_id, :creditor_id
@@ -17,13 +17,13 @@ class Pledge < ActiveRecord::Base
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
 
   has_enumeration_for :material_kind
+  has_enumeration_for :pledge_type
 
   belongs_to :creditor
   belongs_to :founded_debt_contract
   belongs_to :entity
   belongs_to :reserve_fund
   belongs_to :management_unit
-  belongs_to :commitment_type
   belongs_to :budget_allocation
   belongs_to :pledge_category
   belongs_to :expense_kind

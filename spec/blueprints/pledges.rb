@@ -4,7 +4,7 @@ Pledge.blueprint(:empenho) do
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { I18n.l(Date.current) }
-  commitment_type { CommitmentType.make!(:primeiro_empenho) }
+  pledge_type { PledgeType::GLOBAL }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { "9.99" }
   material_kind { MaterialKind::PUBLIC }
