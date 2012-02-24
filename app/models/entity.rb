@@ -14,6 +14,7 @@ class Entity < ActiveRecord::Base
   has_many :management_contracts, :dependent => :restrict
   has_many :founded_debt_contracts, :dependent => :restrict
   has_many :creditors, :dependent => :restrict
+  has_many :subfunctions, :dependent => :restrict
 
   orderize
   filterize
