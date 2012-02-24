@@ -1,16 +1,17 @@
 class ManagementUnit < ActiveRecord::Base
   attr_accessible :description, :acronym, :status, :entity_id, :year
 
-  orderize :description
-  filterize
+  has_enumeration_for :status, :create_helpers => true, :with => ManagementUnitStatus
 
-  has_many :pledges, :dependent => :restrict
   belongs_to :entity
 
-  validates :year, :mask => "9999"
-  validates :entity, :year, :description, :acronym, :status, :presence => true
+  has_many :pledges, :dependent => :restrict
 
-  has_enumeration_for :status, :create_helpers => true, :with => ManagementUnitStatus
+  validates :entity, :year, :description, :acronym, :status, :presence => true
+  validates :year, :mask => "9999"
+
+  orderize :description
+  filterize
 
   def to_s
     description
