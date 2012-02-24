@@ -2,7 +2,7 @@ class Pledge < ActiveRecord::Base
   attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :pledge_type,
                   :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id, :pledge_historic_id,
                   :management_contract_id, :licitation_modality_id, :description, :licitation, :process,
-                  :reserve_fund_id, :material_kind, :founded_debt_contract_id, :creditor_id
+                  :reserve_fund_id, :material_kind, :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
 
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
 
@@ -30,11 +30,17 @@ class Pledge < ActiveRecord::Base
   belongs_to :pledge_historic
   belongs_to :management_contract
   belongs_to :licitation_modality
+  has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge
 
   validates :year, :mask => '9999'
   validates :emission_date, :timeliness => { :on_or_after => Date.current, :type => :date }
   validates :licitation, :process, :presence => true
   validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
+
+  validate :items_total_value_must_be_equal_to_value
+  validate :cannot_have_more_than_once_item_with_the_same_material
+
+  accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
 
   def to_s
     id.to_s
@@ -50,6 +56,10 @@ class Pledge < ActiveRecord::Base
 
   before_save :parse_licitation, :parse_process
 
+  def items_total_value
+    pledge_items.collect { |item| item.estimated_total_price || 0 }.sum
+  end
+
   protected
 
   def parse_licitation
@@ -62,5 +72,23 @@ class Pledge < ActiveRecord::Base
     parser = NumberYearParser.new(process)
     self.process_number = parser.number
     self.process_year = parser.year
+  end
+
+  def items_total_value_must_be_equal_to_value
+    if items_total_value != value
+      errors.add(:items_total_value, :must_be_equal_to_pledge_value)
+    end
+  end
+
+  def cannot_have_more_than_once_item_with_the_same_material
+    single_materials = []
+
+    pledge_items.each do |item|
+      if single_materials.include?(item.material_id)
+        errors.add(:pledge_items)
+        item.errors.add(:material_id, :taken)
+      end
+      single_materials << item.material_id
+    end
   end
 end

@@ -18,6 +18,7 @@ feature "Pledges" do
     management_contract = ManagementContract.make!(:primeiro_contrato)
     Creditor.make!(:nohup)
     founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
+    Material.make!(:cadeira)
 
     click_link 'Contabilidade'
 
@@ -48,6 +49,28 @@ feature "Pledges" do
       fill_in 'Número do processo', :with => '002/2013'
       fill_modal 'Contrato', :with => '001', :field => 'Número do contrato'
       fill_in 'Objeto', :with => 'Objeto de empenho'
+    end
+
+    within_tab 'Itens' do
+      # should get the value informed on the general tab
+      page.should have_disabled_field 'Valor'
+      page.should have_field 'Valor', :with => "300,00"
+
+      click_button "Adicionar Item"
+
+      page.should have_disabled_field "U. medida"
+
+      fill_modal 'Item', :with => "Cadeira", :field => "Descrição"
+      fill_in 'Quantidade', :with => "3"
+      fill_in 'Valor unitário', :with => "100,00"
+
+      # getting the reference unit and description via javascript
+      page.should have_field 'U. medida', :with => "Unidade"
+      page.should have_field 'Descrição', :with => "Cadeira"
+
+      # calculating total item price via javascript
+      page.should have_disabled_field 'Valor total'
+      page.should have_field 'Valor total', :with => "300,00"
     end
 
     click_button 'Criar Empenho'
@@ -82,6 +105,15 @@ feature "Pledges" do
       page.should have_field 'Contrato', :with => "#{management_contract.id}/2012"
       page.should have_field 'Objeto', :with => 'Objeto de empenho'
     end
+
+    within_tab 'Itens' do
+      page.should have_field 'Item', :with => "02.02.00001 - Cadeira"
+      page.should have_field 'Quantidade', :with => "3"
+      page.should have_field 'Valor unitário', :with => "100,00"
+      page.should have_field 'U. medida', :with => "Unidade"
+      page.should have_field 'Descrição', :with => "Cadeira"
+      page.should have_field 'Valor total', :with => "300,00"
+    end
   end
 
   scenario 'update an existent pledge' do
@@ -97,6 +129,7 @@ feature "Pledges" do
     management_contract = ManagementContract.make!(:segundo_contrato)
     Creditor.make!(:nobe)
     founded_debt_contract = FoundedDebtContract.make!(:contrato_educacao)
+    Material.make!(:manga)
 
     click_link 'Contabilidade'
 
@@ -131,6 +164,13 @@ feature "Pledges" do
       fill_in 'Objeto', :with => 'Objeto de empenho'
     end
 
+    within_tab 'Itens' do
+      fill_modal 'Item', :with => "Manga", :field => "Descrição"
+      page.should have_field 'U. medida', :with => "Quilos"
+      fill_in 'Quantidade', :with => "200"
+      fill_in 'Valor unitário', :with => "2,00"
+    end
+
     click_button 'Atualizar Empenho'
 
     page.should have_notice 'Empenho editado com sucesso.'
@@ -162,6 +202,18 @@ feature "Pledges" do
       page.should have_field 'Número do processo', :with => '004/2015'
       page.should have_field 'Contrato', :with => "#{management_contract.id}/2013"
       page.should have_field 'Objeto', :with => 'Objeto de empenho'
+    end
+
+    within_tab 'Itens' do
+      page.should have_field 'Valor', :with => "400,00"
+      page.should have_field 'Item', :with => "01.01.00001 - Manga"
+
+      # should not change the description because it is readonly
+      page.should have_field 'Descrição', :with => "desc cadeiras"
+      page.should have_field 'U. medida', :with => "Quilos"
+      page.should have_field 'Quantidade', :with => "200"
+      page.should have_field 'Valor unitário', :with => "2,00"
+      page.should have_field 'Valor total', :with => "400,00"
     end
   end
 
@@ -276,6 +328,65 @@ feature "Pledges" do
       clear_modal 'Contrato'
 
       page.should have_field 'Data do contrato', :with => ''
+    end
+  end
+
+  scenario 'trying to create a new pledge with duplicated items to ensure the error' do
+    Entity.make!(:detran)
+    ManagementUnit.make!(:unidade_central)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    PledgeCategory.make!(:geral)
+    ExpenseKind.make!(:pagamentos)
+    PledgeHistoric.make!(:semestral)
+    LicitationModality.make!(:publica)
+    management_contract = ManagementContract.make!(:primeiro_contrato)
+    Material.make!(:cadeira)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Entidade', :with => 'Detran'
+      fill_in 'Exercício', :with => '2012'
+      fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      select 'Global', :from => 'Tipo de empenho'
+      fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
+      fill_in 'Valor', :with => '300,00'
+      fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
+    end
+
+    within_tab 'Complementar' do
+      fill_modal 'Tipo de despesa', :with => 'Pagamentos', :field => 'Descrição'
+      fill_modal 'Histórico', :with => 'Semestral', :field => 'Descrição'
+      fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
+      fill_in 'Número da licitação', :with => '001/2012'
+      fill_in 'Número do processo', :with => '002/2013'
+      fill_modal 'Contrato', :with => '001', :field => 'Número do contrato'
+      fill_in 'Objeto', :with => 'Objeto de empenho'
+    end
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      fill_modal 'Item', :with => "Cadeira", :field => "Descrição"
+      fill_in 'Quantidade', :with => "1"
+      fill_in 'Valor unitário', :with => "100,00"
+
+      click_button "Adicionar Item"
+
+      fill_modal 'pledge_pledge_items_attributes_fresh-1_material', :with => "Cadeira", :field => "Descrição"
+      fill_in 'pledge_pledge_items_attributes_fresh-1_quantity', :with => "2"
+      fill_in 'pledge_pledge_items_attributes_fresh-1_unit_price', :with => "100,00"
+    end
+
+    click_button 'Criar Empenho'
+
+    within_tab 'Itens' do
+      page.should have_content 'já está em uso'
     end
   end
 end

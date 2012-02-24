@@ -12,6 +12,7 @@ describe Material do
 
   it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
   it { should belong_to :expense_economic_classification }
+  it { should have_many :pledge_items }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }

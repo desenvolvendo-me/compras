@@ -35,3 +35,4 @@ pt-BR:
         description: "Objeto"
         creditor: "Credor"
         founded_debt_contract: "Contrato de dívida fundada"
+        items_total_value: "Valor total dos items"

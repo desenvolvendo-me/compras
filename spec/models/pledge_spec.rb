@@ -14,6 +14,7 @@ describe Pledge do
   it { should belong_to :reserve_fund }
   it { should belong_to :creditor }
   it { should belong_to :founded_debt_contract }
+  it { should have_many :pledge_items }
 
   it { should validate_presence_of :licitation }
   it { should validate_presence_of :process }
@@ -51,5 +52,50 @@ describe Pledge do
     subject.valid?
 
     subject.errors[:emission_date].should include("deve ser em ou depois de #{I18n.l Date.current}")
+  end
+
+  it "should sum the estimated total price of the items" do
+    subject.stub(:pledge_items).
+            and_return([
+              double(:estimated_total_price => 100),
+              double(:estimated_total_price => 200),
+              double(:estimated_total_price => nil)
+            ])
+
+    subject.items_total_value.should eq(300)
+  end
+
+  it "the items with the same material should be invalid except the first" do
+    item_one = subject.pledge_items.build(:material_id => 1)
+    item_two = subject.pledge_items.build(:material_id => 1)
+
+    subject.valid?
+
+    item_one.errors.messages[:material_id].should be_nil
+    item_two.errors.messages[:material_id].should include "já está em uso"
+  end
+
+  it "the items with the different material should be valid" do
+    item_one = subject.pledge_items.build(:material_id => 1)
+    item_two = subject.pledge_items.build(:material_id => 2)
+
+    subject.valid?
+
+    item_one.errors.messages[:material_id].should be_nil
+    item_two.errors.messages[:material_id].should be_nil
+  end
+
+  it "should not have error when the value is equal to items total value" do
+    subject.stub(:value => 100, :items_total_value => 100)
+    subject.valid?
+
+    subject.errors.messages[:items_total_value].should be_nil
+  end
+
+  it "should have error when the value is not equal to items total value" do
+    subject.stub(:value => 200, :items_total_value => 100)
+    subject.valid?
+
+    subject.errors.messages[:items_total_value].should include "deve ser igual ao valor do empenho"
   end
 end

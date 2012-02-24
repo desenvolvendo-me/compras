@@ -22,4 +22,5 @@ Pledge.blueprint(:empenho) do
   description { 'Descricao' }
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
+  pledge_items { [PledgeItem.make!(:item)]}
 end

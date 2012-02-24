@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_item:
+        one: "Item"
+        other: "Itens"
+
+    attributes:
+      pledge_item:
+        material: "Item"
+        description: "Descrição"
+        reference_unit: "U. medida"
+        quantity: "Quantidade"
+        unit_price: "Valor unitário"
+        estimated_total_price: "Valor total"
