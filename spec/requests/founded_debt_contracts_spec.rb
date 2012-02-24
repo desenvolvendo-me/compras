@@ -90,6 +90,5 @@ feature "FoundedDebtContracts" do
     page.should_not have_field 'Número do processo', :with => '10'
     page.should_not have_field 'Data da assinatura', :with => '23/02/2012'
     page.should_not have_field 'Data do término', :with => '23/02/2013'
-    page.should_not have_field 'Descrição', :with => 'Contrato'
   end
 end
