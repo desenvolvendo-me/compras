@@ -1,9 +1,9 @@
 PledgeCategory.blueprint(:geral) do
   description { "Geral" }
-  status { "active" }
+  status { PledgeCategoryStatus::ACTIVE }
 end
 
 PledgeCategory.blueprint(:auxiliar) do
   description { "Auxiliar" }
-  status { "active" }
+  status { PledgeCategoryStatus::ACTIVE }
 end
