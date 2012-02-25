@@ -57,7 +57,7 @@ class Pledge < ActiveRecord::Base
   before_save :parse_licitation, :parse_process
 
   def items_total_value
-    pledge_items.collect { |item| item.estimated_total_price || 0 }.sum
+    pledge_items.map(&:estimated_total_price).compact.sum
   end
 
   protected
