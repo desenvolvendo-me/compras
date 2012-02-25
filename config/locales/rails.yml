@@ -202,7 +202,7 @@ pt-BR:
       must_be_equal_to_items_total_value: "deve ser igual ao valor total previsto dos itens"
       should_not_be_less_than_initial_value: "não pode ser menor que o valor inicial"
       initial_and_final_value_range_taken: "esta combinação de valor inicial e valor final já está em uso"
-      must_be_equal_to_pledge_value: "deve ser igual ao valor do empenho"
+      should_not_be_greater_than_pledge_value: "não pode ser superior ao valor do empenho"
 
   activerecord:
     errors:

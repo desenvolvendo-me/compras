@@ -37,7 +37,7 @@ class Pledge < ActiveRecord::Base
   validates :licitation, :process, :presence => true
   validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
 
-  validate :items_total_value_must_be_equal_to_value
+  validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
 
   accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
@@ -74,9 +74,9 @@ class Pledge < ActiveRecord::Base
     self.process_year = parser.year
   end
 
-  def items_total_value_must_be_equal_to_value
-    if items_total_value != value
-      errors.add(:items_total_value, :must_be_equal_to_pledge_value)
+  def items_total_value_should_not_be_greater_than_value
+    if value && items_total_value > value
+      errors.add(:items_total_value, :should_not_be_greater_than_pledge_value)
     end
   end
 
