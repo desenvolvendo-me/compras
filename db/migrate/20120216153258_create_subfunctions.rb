@@ -7,6 +7,7 @@ class CreateSubfunctions < ActiveRecord::Migration
 
       t.timestamps
     end
+
     add_index :subfunctions, :function_id
     add_foreign_key :subfunctions, :functions
   end
