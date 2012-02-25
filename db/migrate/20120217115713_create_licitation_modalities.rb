@@ -8,6 +8,7 @@ class CreateLicitationModalities < ActiveRecord::Migration
 
       t.timestamps
     end
+
     add_index :licitation_modalities, :administractive_act_id
     add_foreign_key :licitation_modalities, :administractive_acts
   end
