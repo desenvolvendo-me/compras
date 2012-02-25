@@ -15,19 +15,11 @@ describe LicitationModality do
   it { should have_many(:pledges).dependent(:restrict) }
 
   it 'should have final value greater or equal to initial value' do
-    subject.final_value = 100.00
     subject.initial_value = 100.00
 
-    subject.valid?
-
-    subject.errors.messages[:final_value].should be_nil
-
-    subject.final_value = 100.00
-    subject.initial_value = 100.01
-
-    subject.valid?
-
-    subject.errors.messages[:final_value].should include "não pode ser menor que o valor inicial"
+    subject.should allow_value(100.00).for(:final_value)
+    subject.should allow_value(100.01).for(:final_value)
+    subject.should_not allow_value(99.99).for(:final_value).with_message("não pode ser menor que o valor inicial")
   end
 
   it 'should return description as to_s method' do
