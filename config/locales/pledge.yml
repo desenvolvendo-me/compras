@@ -36,3 +36,9 @@ pt-BR:
         creditor: "Credor"
         founded_debt_contract: "Contrato de dívida fundada"
         items_total_value: "Valor total dos itens"
+
+  simple_form:
+    hints:
+      pledge:
+        licitation: 'Exemplo: "39/2011"'
+        process: 'Exemplo: "39/2011"'
