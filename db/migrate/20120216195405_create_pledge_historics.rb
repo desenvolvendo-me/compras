@@ -6,6 +6,7 @@ class CreatePledgeHistorics < ActiveRecord::Migration
 
       t.timestamps
     end
+
     add_index :pledge_historics, :entity_id
     add_foreign_key :pledge_historics, :entities
   end
