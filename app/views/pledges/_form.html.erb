@@ -32,7 +32,7 @@
     }
   });
   $("#pledge_reserve_fund_id").change(function (event, data) {
-    if (data){
+    if (data) {
       var record = data.record;
       $('#pledge_reserve_fund_value').val(record.data("reserve-fund-value"));
     } else {
@@ -41,7 +41,7 @@
   });
 
   $("#pledge_budget_allocation_id").change(function (event, data) {
-    if (data){
+    if (data) {
       var record = data.record;
 
       $('#pledge_budget_allocation_amount').val(record.data("amount"));
@@ -63,7 +63,7 @@
   });
 
   $("#pledge_management_contract_id").change(function (event, data) {
-    if (data){
+    if (data) {
       var record = data.record;
 
       $('#pledge_management_contract_signature_date').val(record.data("signature-date"));
@@ -75,20 +75,20 @@
   function pledgeItemsTotalValue() {
     var total = 0,
         value;
-    $.each($('.item-price:visible'), function(){
+    $.each($('.item-price:visible'), function() {
       value = $(this).attr('value')
-      if (value != ''){
+      if (value != '') {
         total += parsePtBrFloat(value);
       }
     });
     return floatToPtBrString(total);
   }
 
-  $('.item-quantity, .item-unit-price').live('keyup', function(){
+  $('.item-quantity, .item-unit-price').live('keyup', function() {
     $('#pledge_items_total_value').val(pledgeItemsTotalValue);
   });
 
-  $('.remove-pledge-item').live('click', function(){
+  $('.remove-pledge-item').live('click', function() {
     $('#pledge_items_total_value').val(pledgeItemsTotalValue);
   });
 </script>
