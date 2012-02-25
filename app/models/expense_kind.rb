@@ -1,15 +1,15 @@
 class ExpenseKind < ActiveRecord::Base
   attr_accessible :description, :status
 
-  orderize :description
-  filterize
+  has_enumeration_for :status, :create_helpers => true, :with => ExpenseKindStatus
 
   has_many :pledges, :dependent => :restrict
 
   validates :description, :presence => true, :uniqueness => true
   validates :status, :presence => true
 
-  has_enumeration_for :status, :create_helpers => true, :with => ExpenseKindStatus
+  orderize :description
+  filterize
 
   def to_s
     description
