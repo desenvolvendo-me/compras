@@ -69,8 +69,8 @@ feature "Pledges" do
       page.should have_field 'Descrição', :with => "Cadeira"
 
       # calculating total item price via javascript
-      page.should have_disabled_field 'Valor total'
-      page.should have_field 'Valor total', :with => "300,00"
+      page.should have_disabled_field 'Valor total dos itens'
+      page.should have_field 'Valor total dos itens', :with => "300,00"
     end
 
     click_button 'Criar Empenho'
@@ -403,18 +403,18 @@ feature "Pledges" do
       fill_in 'Quantidade', :with => "3"
       fill_in 'Valor unitário', :with => "100,00"
 
-      page.should have_field 'Valor total', :with => "300,00"
+      page.should have_field 'Valor total dos itens', :with => "300,00"
 
       click_button "Adicionar Item"
 
       fill_in 'pledge_pledge_items_attributes_fresh-1_quantity', :with => "4"
       fill_in 'pledge_pledge_items_attributes_fresh-1_unit_price', :with => "20,00"
 
-      page.should have_field 'Valor total', :with => "380,00"
+      page.should have_field 'Valor total dos itens', :with => "380,00"
 
       click_button 'Remover Item'
 
-      page.should have_field 'Valor total', :with => "80,00"
+      page.should have_field 'Valor total dos itens', :with => "80,00"
     end
   end
 end
