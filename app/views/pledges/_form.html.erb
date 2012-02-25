@@ -75,7 +75,7 @@
   function pledgeItemsTotalValue() {
     var total = 0,
         value;
-    $.each($('.item-price'), function(){
+    $.each($('.item-price:visible'), function(){
       value = $(this).attr('value')
       if (value != ''){
         total += parsePtBrFloat(value);
@@ -85,6 +85,10 @@
   }
 
   $('.item-quantity, .item-unit-price').live('keyup', function(){
+    $('#pledge_items_total_value').val(pledgeItemsTotalValue);
+  });
+
+  $('.remove-pledge-item').live('click', function(){
     $('#pledge_items_total_value').val(pledgeItemsTotalValue);
   });
 </script>

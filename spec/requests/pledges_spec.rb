@@ -389,4 +389,32 @@ feature "Pledges" do
       page.should have_content 'já está em uso'
     end
   end
+
+  scenario 'should recalculate the total of items on item exclusion' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      fill_in 'Quantidade', :with => "3"
+      fill_in 'Valor unitário', :with => "100,00"
+
+      page.should have_field 'Valor total', :with => "300,00"
+
+      click_button "Adicionar Item"
+
+      fill_in 'pledge_pledge_items_attributes_fresh-1_quantity', :with => "4"
+      fill_in 'pledge_pledge_items_attributes_fresh-1_unit_price', :with => "20,00"
+
+      page.should have_field 'Valor total', :with => "380,00"
+
+      click_button 'Remover Item'
+
+      page.should have_field 'Valor total', :with => "80,00"
+    end
+  end
 end
