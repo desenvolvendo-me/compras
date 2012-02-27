@@ -777,6 +777,43 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'it should re-calculate the total of items when removing an item' do
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Itens' do
+      click_button 'Adicionar Item'
+
+      fill_in 'Quantidade', :with => 5
+      fill_in 'Preço unitário', :with => '10,00'
+
+      click_button 'Adicionar Item'
+
+      within 'fieldset:last' do
+        fill_in 'Quantidade', :with => 5
+        fill_in 'Preço unitário', :with => '15,00'
+      end
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_field 'Total previsto dos itens', :with => '125,00'
+    end
+
+    within_tab 'Itens' do
+      within 'fieldset:last' do
+        click_button 'Remover Item'
+      end
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_field 'Total previsto dos itens', :with => '50,00'
+    end
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)

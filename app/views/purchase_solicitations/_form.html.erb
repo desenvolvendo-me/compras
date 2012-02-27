@@ -66,7 +66,7 @@
   function itemsTotalValue() {
     var total = 0,
     value;
-    $.each($('.item-price'), function(){
+    $.each($('.item-price:visible'), function(){
       value = $(this).attr('value');
       if (value != ''){
         total += parsePtBrFloat(value);
@@ -75,7 +75,11 @@
     return floatToPtBrString(total);
   }
 
-  $('a[href$="#budget-allocations"]').click(function(){
+  $('.item-quantity, .item-unit-price').live('keyup', function() {
+    $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
+  });
+
+  $('.remove-purchase-solicitation-item').live('click', function() {
     $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
   });
 
