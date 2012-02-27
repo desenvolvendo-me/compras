@@ -10,6 +10,7 @@ describe Creditor do
 
   it { should belong_to :entity }
   it { should have_many(:pledges).dependent(:restrict) }
+  it { should have_many(:reserve_funds).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :status }

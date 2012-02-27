@@ -5,6 +5,7 @@ class Creditor < ActiveRecord::Base
 
   belongs_to :entity
   has_many :pledges, :dependent => :restrict
+  has_many :reserve_funds, :dependent => :restrict
 
   orderize
   filterize

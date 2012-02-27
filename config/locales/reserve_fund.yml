@@ -10,4 +10,18 @@ pt-BR:
         year: "Exercício"
         entity: "Entidade"
         budget_allocation: "Dotação orçamentária"
+        budget_allocation_amount: "Saldo orçamentário"
         value: "Valor"
+        reserve_allocation_type: "Tipo"
+        licitation_modality: "Modalidade"
+        creditor: "Favorecido"
+        date: "Data"
+        historic: "Histórico"
+        licitation: "Número da licitação"
+        process: "Número do processo"
+
+  simple_form:
+    hints:
+      reserve_fund:
+        licitation: 'Exemplo: "39/2011"'
+        process: 'Exemplo: "39/2011"'

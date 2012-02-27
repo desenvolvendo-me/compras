@@ -1,0 +1,42 @@
+<div id="record">
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= resource_class.human_attribute_name :entity %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :year %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :description %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :date %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :amount %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.entity %>
+        </td>
+        <td>
+          <%= resource.year %>
+        </td>
+        <td>
+          <%= resource.description %>
+        </td>
+        <td>
+          <%= resource.date %>
+        </td>
+        <td>
+          <%= resource.amount %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

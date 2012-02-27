@@ -3,6 +3,8 @@ class ReserveAllocationType < ActiveRecord::Base
 
   has_enumeration_for :status
 
+  has_many :reserve_funds, :dependent => :restrict
+
   validates :description, :status, :presence => true
   validates :description, :uniqueness => true
 

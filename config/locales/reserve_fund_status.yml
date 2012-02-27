@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    reserve_fund_status:
+      reserved: Reservado
+      annulled: Anulado
