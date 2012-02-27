@@ -31,7 +31,7 @@ describe ReserveFundsController do
 
     get :edit, :id => reserve_fund.id
 
-    assigns(:reserve_fund).licitation.should eq '001/2011'
+    assigns(:reserve_fund).licitation.should eq '001/2012'
   end
 
   it 'show the informed process when informed process is not nil' do
@@ -47,6 +47,6 @@ describe ReserveFundsController do
 
     get :edit, :id => reserve_fund.id
 
-    assigns(:reserve_fund).process.should eq '002/2012'
+    assigns(:reserve_fund).process.should eq '002/2013'
   end
 end
