@@ -23,7 +23,7 @@ feature "ReserveAllocationTypes" do
     click_link 'Reserva para Educação'
 
     page.should have_field 'Descrição', :with => 'Reserva para Educação'
-    page.should have_select 'Status', :with => 'Ativo'
+    page.should have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent reserve_allocation_type' do
@@ -45,7 +45,7 @@ feature "ReserveAllocationTypes" do
     click_link 'Descrição do Tipo'
 
     page.should have_field 'Descrição', :with => 'Descrição do Tipo'
-    page.should have_select 'Status', :with => 'Inativo'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent reserve_allocation_type' do
@@ -62,7 +62,7 @@ feature "ReserveAllocationTypes" do
     page.should have_notice 'Tipo de Reserva de Dotação apagado com sucesso.'
 
     page.should_not have_field 'Descrição', :with => 'Reserva para Educação'
-    page.should_not have_select 'Status', :with => 'Ativo'
+    page.should_not have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'validate uniqueness of code' do
