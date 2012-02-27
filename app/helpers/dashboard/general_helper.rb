@@ -8,6 +8,7 @@ module Dashboard::GeneralHelper
       m.agencies
       m.neighborhoods
       m.banks
+      m.positions
       m.cities
       m.cnaes
       m.condominiums

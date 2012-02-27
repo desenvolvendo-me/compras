@@ -1,0 +1,2 @@
+class PositionsController < CrudController
+end
