@@ -54,7 +54,7 @@
   function budgetAllocationsTotalValue() {
     var total = 0,
         value;
-    $.each($('.allocation-price'), function(){
+    $.each($('.allocation-price:visible'), function(){
       value = $(this).attr('value')
       if (value != ''){
         total += parsePtBrFloat(value);
@@ -84,6 +84,10 @@
   });
 
   $('.allocation-price').live('keyup', function(){
+    $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
+  });
+
+  $('.remove-purchase-solicitation-budget-allocation').live('click', function() {
     $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
   });
 

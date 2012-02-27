@@ -814,6 +814,35 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'it should re-calculate the total when removing budget allocations' do
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Adicionar'
+
+      fill_in 'Valor previsto', :with => '300,00'
+
+      click_button 'Adicionar'
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_in 'Valor previsto', :with => '200,00'
+      end
+
+      page.should have_field 'Soma dos valores das dotações', :with => '500,00'
+
+      within '.purchase-solicitation-budget-allocation:first' do
+        click_button 'Remover'
+      end
+
+      page.should have_field 'Soma dos valores das dotações', :with => '200,00'
+    end
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
