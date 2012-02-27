@@ -110,7 +110,6 @@ Tributario::Application.routes.draw do
     end
   end
 
-
   resources :budget_allocation_types do
     collection do
       get :filter
@@ -124,7 +123,6 @@ Tributario::Application.routes.draw do
       get :modal
     end
   end
-
 
   resources :administractive_act_type_classifications do
     collection do
