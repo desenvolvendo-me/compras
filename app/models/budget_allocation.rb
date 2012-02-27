@@ -1,13 +1,14 @@
 class BudgetAllocation < ActiveRecord::Base
-  attr_accessible :entity_id, :year, :description, :organogram_id
-  attr_accessible :subfunction_id, :government_program_id
-  attr_accessible :government_action_id
-  attr_accessible :expense_economic_classification_id, :capability_id
-  attr_accessible :description, :goal, :debt_type, :budget_allocation_type_id
-  attr_accessible :refinancing, :health, :alienation_appeal, :education
-  attr_accessible :foresight, :personal, :date, :amount
+  attr_accessible :entity_id, :year, :description, :organogram_id, :date
+  attr_accessible :subfunction_id, :government_program_id, :amount, :personal
+  attr_accessible :government_action_id, :foresight, :education, :description
+  attr_accessible :expense_economic_classification_id, :capability_id, :goal
+  attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
+  attr_accessible :alienation_appeal
 
-  delegate :function, :function_id, :to => :subfunction, :allow_nil => true
+  attr_modal :year, :description
+
+  has_enumeration_for :debt_type
 
   belongs_to :entity
   belongs_to :organogram
@@ -17,20 +18,19 @@ class BudgetAllocation < ActiveRecord::Base
   belongs_to :expense_economic_classification
   belongs_to :capability
   belongs_to :budget_allocation_type
+
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
 
-  has_enumeration_for :debt_type
-
-  attr_modal :year, :description
-
-  orderize :description
-  filterize
+  delegate :function, :function_id, :to => :subfunction, :allow_nil => true
 
   validates :description, :presence => true, :uniqueness => true
   validates :year, :mask => '9999'
+
+  orderize :description
+  filterize
 
   def to_s
     "#{id}/#{year}"
