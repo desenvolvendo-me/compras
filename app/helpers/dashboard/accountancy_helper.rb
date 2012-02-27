@@ -23,6 +23,7 @@ module Dashboard::AccountancyHelper
       m.administractive_act_types
       m.administration_types
       m.budget_allocation_types
+      m.reserve_allocation_types
       m.management_contracts
       m.management_units
       m.government_actions

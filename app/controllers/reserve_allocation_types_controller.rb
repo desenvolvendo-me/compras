@@ -1,0 +1,2 @@
+class ReserveAllocationTypesController < CrudController
+end
