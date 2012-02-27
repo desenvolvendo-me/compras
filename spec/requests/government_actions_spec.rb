@@ -45,7 +45,7 @@ feature "GovernmentActions" do
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Exercício', :with => '2011'
     fill_in 'Descrição', :with => 'Ação Estatal'
-    select 'Desativado', :from => 'Status'
+    select 'Inativo', :from => 'Status'
 
     click_button 'Atualizar Ação do Governo'
 
@@ -56,7 +56,7 @@ feature "GovernmentActions" do
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Exercício', :with => '2011'
     page.should have_field 'Descrição', :with => 'Ação Estatal'
-    page.should have_select 'Status', :selected => 'Desativado'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent government_action' do
