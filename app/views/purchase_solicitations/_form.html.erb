@@ -54,9 +54,9 @@
   function budgetAllocationsTotalValue() {
     var total = 0,
         value;
-    $.each($('.allocation-price:visible'), function(){
+    $.each($('.allocation-price:visible'), function() {
       value = $(this).attr('value')
-      if (value != ''){
+      if (value != '') {
         total += parsePtBrFloat(value);
       }
     });
@@ -66,9 +66,9 @@
   function itemsTotalValue() {
     var total = 0,
     value;
-    $.each($('.item-price:visible'), function(){
+    $.each($('.item-price:visible'), function() {
       value = $(this).attr('value');
-      if (value != ''){
+      if (value != '') {
         total += parsePtBrFloat(value);
       }
     });
@@ -83,7 +83,7 @@
     $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
   });
 
-  $('.allocation-price').live('keyup', function(){
+  $('.allocation-price').live('keyup', function() {
     $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
   });
 
@@ -94,7 +94,7 @@
   $('.item-quantity').onlyNumbers();
 
   $("#purchase_solicitation_budget_allocation_id").change(function (event, data) {
-    if (data){
+    if (data) {
       var record = data.record;
       $('#purchase_solicitation_budget_allocation_amount').val(record.data("amount"));
     } else {
@@ -102,7 +102,7 @@
     }
   });
 
-  function allocationAmount(){
+  function allocationAmount() {
     var amount = $('#purchase_solicitation_budget_allocation_amount').attr('value');
     if (amount != '') {
       return parsePtBrFloat(amount);
@@ -110,31 +110,31 @@
     return null;
   }
 
-  function itemsValue(){
+  function itemsValue() {
     return parsePtBrFloat(itemsTotalValue());
   }
 
-  function getConfirmation(){
+  function getConfirmation() {
     return confirm("<%= I18n.translate('other.tributario.messages.question_purchase_solicitation_budget_allocation_amount') %>");
   }
 
   var previousAllocation = $('#purchase_solicitation_budget_allocation_id').attr('value'),
       actionIsEdit = <%= f.object.persisted? %>;
 
-  function allocationChanged(){
+  function allocationChanged() {
     actualAllocation = $('#purchase_solicitation_budget_allocation_id').attr('value');
     return (actualAllocation != previousAllocation);
   }
 
-  function canVerify(){
+  function canVerify() {
     return (!actionIsEdit || (actionIsEdit && allocationChanged()));
   }
 
   $('form').submit(function (e) {
     var amount = allocationAmount();
 
-    if (canVerify() && amount && amount < itemsValue()){
-      if (!getConfirmation()){
+    if (canVerify() && amount && amount < itemsValue()) {
+      if (!getConfirmation()) {
         e.preventDefault();
       }
     }
