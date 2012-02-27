@@ -1,7 +1,7 @@
 class ExpenseKind < ActiveRecord::Base
   attr_accessible :description, :status
 
-  has_enumeration_for :status, :create_helpers => true, :with => ExpenseKindStatus
+  has_enumeration_for :status, :create_helpers => true
 
   has_many :pledges, :dependent => :restrict
 

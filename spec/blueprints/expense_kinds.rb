@@ -1,9 +1,9 @@
 ExpenseKind.blueprint(:pagamentos) do
   description { "Pagamentos" }
-  status { "active" }
+  status { Status::ACTIVE }
 end
 
 ExpenseKind.blueprint(:alojamento) do
   description { "Alojamento" }
-  status { "active" }
+  status { Status::ACTIVE }
 end

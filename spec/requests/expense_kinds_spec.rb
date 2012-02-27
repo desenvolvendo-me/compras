@@ -36,7 +36,7 @@ feature "ExpenseKinds" do
     click_link 'Pagamentos'
 
     fill_in 'Descrição', :with => 'Limpeza'
-    select 'Desativado', :from => 'Status'
+    select 'Inativo', :from => 'Status'
 
     click_button 'Atualizar Tipo de Despesa'
 
@@ -45,7 +45,7 @@ feature "ExpenseKinds" do
     click_link 'Limpeza'
 
     page.should have_field 'Descrição', :with => 'Limpeza'
-    page.should have_select 'Status', :selected => 'Desativado'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent expense_kind' do
