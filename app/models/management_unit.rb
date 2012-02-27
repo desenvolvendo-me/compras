@@ -1,7 +1,7 @@
 class ManagementUnit < ActiveRecord::Base
   attr_accessible :description, :acronym, :status, :entity_id, :year
 
-  has_enumeration_for :status, :create_helpers => true, :with => ManagementUnitStatus
+  has_enumeration_for :status, :create_helpers => true
 
   belongs_to :entity
 

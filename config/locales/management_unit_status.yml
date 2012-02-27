@@ -1,5 +1,0 @@
-pt-BR:
-  enumerations:
-    management_unit_status:
-      active: "Ativo"
-      inactive: "Desativado"

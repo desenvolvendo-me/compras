@@ -48,7 +48,7 @@ feature "ManagementUnits" do
     fill_in 'Exercício', :with => '2013'
     fill_in 'Descrição', :with => 'Unidade Auxiliar'
     fill_in 'Sigla', :with => 'UGA'
-    select 'Desativado', :from => 'Status'
+    select 'Inativo', :from => 'Status'
 
     click_button 'Atualizar Unidade Gestora'
 
@@ -60,7 +60,7 @@ feature "ManagementUnits" do
     page.should have_field 'Exercício', :with => '2013'
     page.should have_field 'Descrição', :with => 'Unidade Auxiliar'
     page.should have_field 'Sigla', :with => 'UGA'
-    page.should have_select 'Status', :selected => 'Desativado'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent management_unit' do
