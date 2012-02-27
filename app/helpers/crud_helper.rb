@@ -31,8 +31,8 @@ module CrudHelper
     end.compact
   end
 
-  def link_to_modal_info(id)
-    link_to I18n.translate("other.tributario.messages.more_information"), "#", :id => id.concat('_info_link'), :class => 'modal_info'
+  def link_to_modal_info(id, href="#")
+    link_to I18n.translate("other.tributario.messages.more_information"), href, :id => id.concat('_info_link'), :class => 'modal_info'
   end
 
   def link_to_new
