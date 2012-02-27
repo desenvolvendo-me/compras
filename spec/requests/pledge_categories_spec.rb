@@ -36,7 +36,7 @@ feature "PledgeCategories" do
     click_link 'Geral'
 
     fill_in 'Descrição', :with => 'Municipal'
-    select 'Desativado', :from => 'Status'
+    select 'Inativo', :from => 'Status'
 
     click_button 'Atualizar Categoria de Empenho'
 
@@ -45,7 +45,7 @@ feature "PledgeCategories" do
     click_link 'Municipal'
 
     page.should have_field 'Descrição', :with => 'Municipal'
-    page.should have_select 'Status', :selected => 'Desativado'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent pledge_category' do
