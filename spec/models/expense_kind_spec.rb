@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/expense_kind'
+require 'app/models/pledge'
 
 describe ExpenseKind do
   it 'should return description as to_s method' do
