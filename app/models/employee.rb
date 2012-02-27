@@ -1,7 +1,9 @@
 class Employee < ActiveRecord::Base
-  attr_accessible :person_id, :registration
+  attr_accessible :person_id, :position_id, :registration
 
   belongs_to :person
+  belongs_to :position
+
   has_one :user
   has_many :purchase_solicitations, :as => :responsible
   has_many :organogram_responsibles, :as => :responsible

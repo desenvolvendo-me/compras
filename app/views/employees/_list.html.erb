@@ -5,6 +5,9 @@
         <%= resource_class.human_attribute_name :person %>
       </th>
       <th>
+        <%= resource_class.human_attribute_name :position %>
+      </th>
+      <th>
         <%= resource_class.human_attribute_name :registration %>
       </th>
     </tr>
@@ -15,6 +18,9 @@
       <tr id="<%= dom_id resource %>">
         <td>
           <%= link_to resource.person, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.position %>
         </td>
         <td>
           <%= resource.registration %>

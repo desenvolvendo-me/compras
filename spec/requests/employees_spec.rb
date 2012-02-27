@@ -8,6 +8,7 @@ feature "Employees" do
 
   scenario 'create a new employee' do
     Person.make!(:sobrinho)
+    Position.make!(:gerente)
 
     click_link 'Cadastros Diversos'
 
@@ -16,6 +17,7 @@ feature "Employees" do
     click_link 'Criar Funcionário'
 
     fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+    fill_modal 'Cargo', :with => 'Gerente'
     fill_in 'Matrícula', :with => '958473'
 
     click_button 'Criar Funcionário'
@@ -27,12 +29,14 @@ feature "Employees" do
     end
 
     page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+    page.should have_field 'Cargo', :with => 'Gerente'
     page.should have_field 'Matrícula', :with => '958473'
   end
 
   scenario 'update an existent employee' do
     Person.make!(:wenderson)
     Employee.make!(:sobrinho)
+    Position.make!(:supervisor)
 
     click_link 'Cadastros Diversos'
 
@@ -43,6 +47,7 @@ feature "Employees" do
     end
 
     fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+    fill_modal 'Cargo', :with => 'Supervisor'
     fill_in 'Matrícula', :with => '123456'
 
     click_button 'Atualizar Funcionário'
@@ -52,6 +57,7 @@ feature "Employees" do
     click_link 'Wenderson Malheiros'
 
     page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+    page.should have_field 'Cargo', :with => 'Supervisor'
     page.should have_field 'Matrícula', :with => '123456'
   end
 

@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/position'
+require 'app/models/employee'
 
 describe Position do
   it 'should return name as to_s' do
@@ -8,4 +9,6 @@ describe Position do
   end
 
   it { should validate_presence_of :name }
+
+  it { should have_many(:employees).dependent(:restrict) }
 end
