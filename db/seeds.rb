@@ -4,3 +4,7 @@ ActiveRecord::Base.transaction do
     user.administrator = true
   end
 end
+
+Dir['db/seeds/*.rb'].each do |file|
+  require File.expand_path(file)
+end
