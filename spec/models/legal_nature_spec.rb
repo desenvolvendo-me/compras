@@ -10,6 +10,7 @@ describe LegalNature do
   end
 
   it { should have_many(:administration_types).dependent(:restrict) }
+  it { should have_many(:providers).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :code }

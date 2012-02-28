@@ -4,6 +4,10 @@ require 'app/models/provider'
 
 describe Provider do
   it { should belong_to :person }
+  it { should belong_to :agency }
+  it { should belong_to :legal_nature }
+  it { should belong_to :cnae }
+  it { should belong_to :property }
 
   it { should validate_presence_of :person }
 

@@ -1,2 +1,57 @@
-<%= f.input :person %>
-<%= link_to_modal_info 'provider_person', f.object.person %>
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Principal</a></li>
+  </ul>
+
+  <div id="general">
+    <%= render 'general', :f => f %>
+  </div>
+</div>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+
+  var bank_id = $('#provider_bank_id').val();
+
+  $('#provider_bank_id').change(function() {
+    if (this.value) {
+      $('#provider_agency').attr('disabled', false);
+      $('#provider_agency').attr('data-modal-url', agencyModalUrl);
+    } else {
+      $('#provider_agency').attr('disabled', true);
+    }
+
+    clearAgency();
+  }).change();
+
+  function agencyModalUrl() {
+    var url = "<%= modal_agencies_path %>?",
+        params = {
+          locked_fields: ["bank"],
+          agency: {
+            bank_id: $('#provider_bank_id').val()
+          }
+        };
+
+    url += jQuery.param(params);
+
+    return url;
+  }
+
+  function clearAgency() {
+    if ($('#provider_bank_id').val() != bank_id) {
+      bank_id = $('#provider_bank_id').val();
+
+      $('#provider_agency').val('');
+      $('#provider_agency_id').val('');
+    }
+  }
+</script>

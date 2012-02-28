@@ -7,6 +7,8 @@ class Cnae < ActiveRecord::Base
 
   belongs_to :risk_degree
 
+  has_many :providers, :dependent => :restrict
+
   validates :name, :code, :presence => true
 
   filterize

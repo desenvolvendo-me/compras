@@ -17,6 +17,7 @@ describe Agency do
   it { should belong_to :city }
   it { should belong_to :bank }
   it { should have_many :bank_accounts }
+  it { should have_many(:providers).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :number }

@@ -9,6 +9,7 @@ describe Cnae do
   end
 
   it { should belong_to :risk_degree }
+  it { should have_many(:providers).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :code }
