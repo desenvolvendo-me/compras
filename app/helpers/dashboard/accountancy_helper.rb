@@ -14,6 +14,7 @@ module Dashboard::AccountancyHelper
       m.budget_allocations
       m.functions
       m.legal_text_natures
+      m.legal_references
       m.organograms
       m.government_programs
       m.government_actions

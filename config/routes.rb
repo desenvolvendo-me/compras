@@ -299,6 +299,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :legal_references do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :legal_text_natures do
     collection do
       get :filter

@@ -1,0 +1,49 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :description %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :law %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :article %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :paragraph %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :sections %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.law %>
+        </td>
+        <td>
+          <%= resource.article %>
+        </td>
+        <td>
+          <%= resource.paragraph %>
+        </td>
+        <td>
+          <%= resource.sections %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

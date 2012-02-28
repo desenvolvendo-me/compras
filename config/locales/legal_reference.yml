@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      legal_reference:
+        one: "Referência Legal"
+        other: "Referências Legais"
+
+    attributes:
+      legal_reference:
+        description: "Descrição"
+        law: "Lei"
+        article: "Artigo"
+        paragraph: "Parágrafo"
+        sections: "Incisos"
+        synopsis: "Sinopse"

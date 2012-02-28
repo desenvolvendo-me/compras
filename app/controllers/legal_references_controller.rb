@@ -1,0 +1,2 @@
+class LegalReferencesController < CrudController
+end
