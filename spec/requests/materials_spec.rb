@@ -56,7 +56,7 @@ feature "Materials" do
     page.should have_checked_field 'Material perecível'
     page.should have_checked_field 'Material estocável'
     page.should_not have_checked_field 'Material combustível'
-    page.should have_select 'Característica', :with => 'Material'
+    page.should have_select 'Característica', :selected => 'Serviço'
     page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
     page.should have_disabled_field 'Tipo de material'
     page.should have_field 'Portaria do STN', :with => 'Portaria Geral'
@@ -154,9 +154,9 @@ feature "Materials" do
     page.should_not have_checked_field 'Material perecível'
     page.should_not have_checked_field 'Material estocável'
     page.should have_checked_field 'Material combustível'
-    page.should have_select 'Característica', :with => 'Serviço'
+    page.should have_select 'Característica', :selected => 'Material'
     page.should have_disabled_field 'Tipo de serviço'
-    page.should have_select 'Tipo de material', :with => 'De consumo'
+    page.should have_select 'Tipo de material', :selected => 'De consumo'
     page.should have_field 'Portaria do STN', :with => 'Portaria Interministerial'
     page.should have_field 'Elemento de despesa', :with => '2.2.22.11.01.00.00.00'
   end
@@ -222,7 +222,7 @@ feature "Materials" do
 
     select 'Material', :from => "Característica"
 
-    page.should have_select 'Tipo de material', :with => ''
+    page.should have_select 'Tipo de material', :selected => ''
   end
 
   it 'should show selected group on class modal' do

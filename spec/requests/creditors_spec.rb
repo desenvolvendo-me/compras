@@ -27,7 +27,7 @@ feature "Creditors" do
 
     page.should have_field 'Nome', :with => 'Nohup LTDA.'
     page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_select 'Status', :with => 'Ativo'
+    page.should have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent creditor' do
@@ -52,7 +52,7 @@ feature "Creditors" do
 
     page.should have_field 'Nome', :with => 'Nobe'
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-    page.should have_select 'Status', :with => 'Inativo'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent creditor' do
@@ -70,6 +70,6 @@ feature "Creditors" do
 
     page.should_not have_field 'Nome', :with => 'Nohup LTDA.'
     page.should_not have_field 'Entidade', :with => 'Detran'
-    page.should_not have_select 'Status', :with => 'Ativo'
+    page.should_not have_select 'Status', :selected => 'Ativo'
   end
 end

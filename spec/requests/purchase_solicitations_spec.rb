@@ -69,7 +69,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
-      page.should have_select 'Tipo de solicitação', :with => 'Bens'
+      page.should have_select 'Tipo de solicitação', :selected => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
       page.should have_field 'Classificação econômica da despesa', :with => '3.1.90.11.01.00.00.00'
 
@@ -198,7 +198,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
-      page.should have_select 'Tipo de solicitação', :with => 'Bens'
+      page.should have_select 'Tipo de solicitação', :selected => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
 
       # Testing the pending status applied automatically

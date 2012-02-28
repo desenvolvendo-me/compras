@@ -23,7 +23,7 @@ feature "BudgetAllocationTypes" do
     click_link 'Administrativa'
 
     page.should have_field 'Descrição', :with => 'Administrativa'
-    page.should have_select 'Status', :with => 'Ativo'
+    page.should have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent budget_allocation_type' do
@@ -45,7 +45,7 @@ feature "BudgetAllocationTypes" do
     click_link 'Executiva'
 
     page.should have_field 'Descrição', :with => 'Executiva'
-    page.should have_select 'Status', :with => 'Inativo'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent budget_allocation_type' do

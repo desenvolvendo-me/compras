@@ -27,8 +27,8 @@ feature "AdministrationTypes" do
     click_link 'Pública'
 
     page.should have_field 'Descrição', :with => 'Pública'
-    page.should have_select 'Administração', :with => 'Direta'
-    page.should have_select 'Tipo do órgão', :with => 'Autarquia'
+    page.should have_select 'Administração', :selected => 'Direta'
+    page.should have_select 'Tipo do órgão', :selected => 'Autarquia'
     page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
   end
 
@@ -56,8 +56,8 @@ feature "AdministrationTypes" do
     click_link 'Privada'
 
     page.should have_field 'Descrição', :with => 'Privada'
-    page.should have_select 'Administração', :with => 'Indireta'
-    page.should have_select 'Tipo do órgão', :with => 'Fundo especial'
+    page.should have_select 'Administração', :selected => 'Indireta'
+    page.should have_select 'Tipo do órgão', :selected => 'Fundo especial'
     page.should have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
   end
 

@@ -25,7 +25,7 @@ feature "ServiceOrContractType" do
 
     page.should have_field 'Código do TCE', :with => '123'
     page.should have_field 'Descrição', :with => 'Contratação de estagiários'
-    page.should have_select 'Finalidade', :with => 'Estagiário'
+    page.should have_select 'Finalidade', :selected => 'Estagiário'
   end
 
   scenario 'validates uniqueness of description' do
@@ -65,7 +65,7 @@ feature "ServiceOrContractType" do
 
     page.should have_field 'Código do TCE', :with => '123'
     page.should have_field 'Descrição', :with => 'Contratação de 10 estagiários'
-    page.should have_select 'Finalidade', :with => 'Estagiário'
+    page.should have_select 'Finalidade', :selected => 'Estagiário'
   end
 
   scenario 'destroy an existent service' do

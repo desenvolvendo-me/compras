@@ -52,7 +52,7 @@ feature "OrganogramConfigurations" do
 
     page.should have_field 'Dígitos', :with => '2'
 
-    page.should have_select 'Separador', :with => 'Ponto'
+    page.should have_select 'Separador', :selected => 'Ponto'
   end
 
   scenario 'calculate mask with javascript' do
