@@ -32,7 +32,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
       fill_modal 'Classificação econômica da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
@@ -104,7 +104,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -165,7 +165,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
+        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
         fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '200,00'
       end
@@ -173,7 +173,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => 'Alocação extra', :field => 'Descrição'
+        fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
         fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '300,00'
       end
@@ -222,7 +222,7 @@ feature "PurchaseSolicitations" do
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
-        page.should have_field "Dotação", :with => "#{budget_allocation_extra.id}/2012", :field => 'Descrição'
+        page.should have_field "Dotação", :with => "#{budget_allocation_extra.id}/2011"
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '300,00'
       end
@@ -297,7 +297,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
       fill_modal 'Classificação econômica da despesa', :with => 'Compra de Material', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
@@ -329,7 +329,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011", :field => 'Descrição'
       page.should have_field 'Classificação econômica da despesa', :with => '2.2.22.11.01.00.00.00'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
@@ -425,7 +425,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
-        page.should have_field 'Dotação', :with => "#{budget_allocation_extra.id}/2012"
+        page.should have_field 'Dotação', :with => "#{budget_allocation_extra.id}/2011"
         page.should have_field 'Compl. do el. da despesa', :with => '2.2.22.11.01.00.00.00'
         page.should have_field 'Valor previsto ', :with => '30,00'
       end
@@ -465,7 +465,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Conserto', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
     end
 
     click_button 'Atualizar Solicitação de Compra'
@@ -591,7 +591,7 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
 
       page.should have_disabled_field 'Saldo da dotação'
       page.should have_field 'Saldo da dotação', :with => '500,00'
@@ -614,7 +614,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Dados gerais' do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
 
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
@@ -660,7 +660,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dados gerais' do
-      fill_modal 'Dotação orçamentária', :with => 'Alocação extra', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
     end
 
     within_tab 'Itens' do
@@ -681,7 +681,6 @@ feature "PurchaseSolicitations" do
   scenario 'trying to create a new purchase_solicitation with duplicated items to ensure the error' do
     make_dependencies!
     BudgetAllocation.make!(:alocacao)
-    BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Solicitações'
 
@@ -695,7 +694,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Dotação orçamentária', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -727,7 +726,6 @@ feature "PurchaseSolicitations" do
   scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
     make_dependencies!
     BudgetAllocation.make!(:alocacao)
-    BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Solicitações'
 
@@ -757,14 +755,14 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       click_button "Adicionar"
 
-      fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       fill_in 'Valor previsto', :with => '200,00'
 
       click_button "Adicionar"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
+        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
         fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '300,00'
       end

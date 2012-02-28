@@ -24,7 +24,7 @@ end
 
 BudgetAllocation.blueprint(:alocacao_extra) do
   entity { Entity.make!(:detran) }
-  year { 2012 }
+  year { 2011 }
   organogram { Organogram.make!(:secretaria_de_educacao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }

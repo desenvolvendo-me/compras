@@ -33,7 +33,7 @@ feature "Pledges" do
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       fill_in 'Valor', :with => '300,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
@@ -146,7 +146,7 @@ feature "Pledges" do
       fill_modal 'Unidade gestora', :with => 'Unidade Auxiliar', :field => 'Descrição'
       fill_in 'Data de emissão', :with => I18n.l(Date.current + 1)
       select 'Estimativo', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => 'Alocação extra', :field => 'Descrição'
+      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
       fill_in 'Valor', :with => '400,00'
       select 'Domínio público', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Auxiliar', :field => 'Descrição'
@@ -186,7 +186,7 @@ feature "Pledges" do
       page.should have_field 'Unidade gestora', :with => 'Unidade Auxiliar'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current + 1)
       page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
-      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
+      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2011"
       page.should have_field 'Valor', :with => '400,00'
       page.should have_field 'Categoria', :with => 'Auxiliar'
       page.should have_select 'Tipo de bem', :selected => 'Domínio público'
@@ -286,7 +286,7 @@ feature "Pledges" do
       page.should have_field 'Organograma', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
 
-      fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
 
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Função', :with => '04 - Administração'
@@ -354,7 +354,7 @@ feature "Pledges" do
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => 'Alocação', :field => 'Descrição'
+      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       fill_in 'Valor', :with => '300,00'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
     end
