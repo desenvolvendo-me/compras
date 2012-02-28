@@ -8,12 +8,13 @@ class Employee < ActiveRecord::Base
   has_many :purchase_solicitations, :as => :responsible
   has_many :organogram_responsibles, :as => :responsible
 
+  delegate :to_s, :to => :person
+  delegate :name, :to => :person
+
   validates :person_id, :registration, :uniqueness => true
   validates :person, :registration, :presence => true
 
   filterize
-  scope :ordered, joins { person }.order(:person => :name)
 
-  delegate :to_s, :to => :person
-  delegate :name, :to => :person
+  scope :ordered, joins { person }.order(:person => :name)
 end

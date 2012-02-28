@@ -16,11 +16,11 @@ class Entity < ActiveRecord::Base
   has_many :creditors, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
 
-  orderize
-  filterize
-
   validates :name, :presence => true
   validates :name, :uniqueness => true
+
+  orderize
+  filterize
 
   def to_s
     name

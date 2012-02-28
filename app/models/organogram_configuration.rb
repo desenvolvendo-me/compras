@@ -1,11 +1,12 @@
 class OrganogramConfiguration < ActiveRecord::Base
-  attr_accessible :description, :entity_id, :administractive_act_id, :organogram_levels
-  attr_accessible :organogram_levels_attributes
+  attr_accessible :description, :entity_id, :administractive_act_id
+  attr_accessible :organogram_levels, :organogram_levels_attributes
 
   attr_modal :description, :entity_id, :administractive_act_id
 
   belongs_to :administractive_act
   belongs_to :entity
+
   has_many :organogram_levels, :order => 'level asc', :dependent => :destroy
   has_many :organograms, :dependent => :restrict
 

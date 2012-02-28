@@ -1,5 +1,6 @@
 class OrganogramResponsible < ActiveRecord::Base
-  attr_accessible :responsible_id, :administractive_act_id, :start_date, :end_date, :status
+  attr_accessible :responsible_id, :administractive_act_id, :start_date
+  attr_accessible :end_date, :status
 
   has_enumeration_for :status
 

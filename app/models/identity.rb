@@ -7,7 +7,6 @@ class Identity < ActiveRecord::Base
   belongs_to :state
 
   validates :number, :issuer, :state, :issue, :presence => true
-
   validates :issue, :timeliness => { :before => :today, :type => :date }
 
   def to_s

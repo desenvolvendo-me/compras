@@ -1,5 +1,6 @@
 class OrganogramLevel < ActiveRecord::Base
-  attr_accessible :level, :description, :digits, :organogram_separator, :organogram_configuration_id
+  attr_accessible :level, :description, :digits, :organogram_separator
+  attr_accessible :organogram_configuration_id
 
   belongs_to :organogram_configuration
 

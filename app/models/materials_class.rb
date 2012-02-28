@@ -4,6 +4,7 @@ class MaterialsClass < ActiveRecord::Base
   attr_modal :materials_group_id, :class_number, :description
 
   belongs_to :materials_group
+
   has_many :materials, :dependent => :restrict
 
   validates :materials_group, :presence => true

@@ -1,5 +1,6 @@
 class LicitationModality < ActiveRecord::Base
-  attr_accessible :administractive_act_id, :description, :initial_value, :final_value
+  attr_accessible :administractive_act_id, :description, :initial_value
+  attr_accessible :final_value
 
   belongs_to :administractive_act
 
