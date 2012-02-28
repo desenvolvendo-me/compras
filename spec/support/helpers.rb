@@ -65,7 +65,7 @@ module Helpers
     page.execute_script %{ $('##{field[:id]}').modal({autoOpen: true}) }
 
     ignoring_scopes do
-      within '.ui-modal' do
+      within '.ui-dialog:nth-last-of-type(2)' do
         yield
       end
     end
