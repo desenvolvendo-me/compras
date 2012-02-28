@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'model_helper'
 require 'app/models/reserve_fund'
 require 'app/models/pledge'
@@ -10,14 +9,14 @@ describe ReserveFund do
     subject.to_s.should eql '1/2012'
   end
 
-  it 'should return false for is_type_licitation when type is not Licitação' do
-    subject.stub(:reserve_allocation_type).and_return(double(:description => "Comum"))
+  it 'should return false for is_type_licitation when type is not licitation' do
+    subject.stub(:reserve_allocation_type).and_return(double(:is_licitation? => false))
 
     subject.is_type_licitation?.should be_false
   end
 
-  it 'should return true for is_type_licitation when type is Licitação' do
-    subject.stub(:reserve_allocation_type).and_return(double(:description => "Licitação"))
+  it 'should return true for is_type_licitation when type is licitation' do
+    subject.stub(:reserve_allocation_type).and_return(double(:is_licitation? => true))
 
     subject.is_type_licitation?.should be_true
   end

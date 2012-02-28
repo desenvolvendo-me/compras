@@ -1,4 +1,3 @@
-# encoding: utf-8
 class ReserveFund < ActiveRecord::Base
   attr_accessible :entity_id, :budget_allocation_id, :year
   attr_accessible :value, :reserve_allocation_type_id, :reserve_allocation_type_id
@@ -41,7 +40,7 @@ class ReserveFund < ActiveRecord::Base
   end
 
   def is_type_licitation?
-    if reserve_allocation_type && reserve_allocation_type.description == "Licitação"
+    if reserve_allocation_type && reserve_allocation_type.is_licitation?
       true
     else
       false

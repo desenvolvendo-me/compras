@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ReserveAllocationType < ActiveRecord::Base
   attr_accessible :description, :status
 
@@ -13,5 +14,9 @@ class ReserveAllocationType < ActiveRecord::Base
 
   def to_s
     description
+  end
+
+  def is_licitation?
+    description == "Licitação"
   end
 end
