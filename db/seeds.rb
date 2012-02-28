@@ -6,5 +6,5 @@ ActiveRecord::Base.transaction do
 end
 
 Dir[Rails.root.join("db/seeds/*.rb")].each do |file|
-  require File.expand_path(file)
+  require file
 end
