@@ -70,4 +70,27 @@ feature "Providers" do
 
     page.should_not have_content 'Wenderson Malheiros'
   end
+
+  scenario 'show modal info of person' do
+    Person.make!(:wenderson)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    click_link 'Criar Fornecedor'
+
+    fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+
+    click_link 'provider_person_info_link'
+
+    within '#record' do
+      page.should have_content 'Wenderson Malheiros'
+      page.should have_content '003.149.513-34'
+      page.should have_content '(33) 3333-3333'
+      page.should have_content '(33) 3333-3334'
+      page.should have_content '(99) 9999-9999'
+      page.should have_content 'wenderson.malheiros@gmail.com'
+    end
+  end
 end
