@@ -23,6 +23,7 @@ http://yuilibrary.com/license/
 .yui3-u-4-5,
 .yui3-u-1-6,
 .yui3-u-5-6,
+.yui3-u-1-7,
 .yui3-u-1-8,
 .yui3-u-3-8,
 .yui3-u-5-8,
@@ -92,6 +93,10 @@ http://yuilibrary.com/license/
 
 .yui3-u-5-6 {
     width: 83.33%;
+}
+
+.yui3-u-1-7 {
+    width: 14.2857%;
 }
 
 .yui3-u-1-8 {

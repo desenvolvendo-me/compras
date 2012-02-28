@@ -2,31 +2,31 @@
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <div class="yui3-u-1-8">
+  <div class="yui3-u-1-7">
     <%= f.input :material, :input_html => { :class => 'material' } %>
   </div>
 
-  <div class="yui3-u-1-8">
+  <div class="yui3-u-1-7">
     <%= f.input :description %>
   </div>
 
-  <div class="yui3-u-1-8">
+  <div class="yui3-u-1-7">
     <%= f.input :reference_unit, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-8">
+  <div class="yui3-u-1-7">
     <%= f.input :quantity, :input_html => { :class => 'item-quantity' } %>
   </div>
 
-  <div class="yui3-u-1-8">
+  <div class="yui3-u-1-7">
     <%= f.input :unit_price, :input_html => { :class => 'item-unit-price' } %>
   </div>
 
-  <div class="yui3-u-1-8">
+  <div class="yui3-u-1-7">
     <%= f.input :estimated_total_price, :disabled => true, :input_html => { :class => 'item-price', :value => number_with_precision(f.object.estimated_total_price) } %>
   </div>
 
-  <div class="yui3-u-1-8 nested-remove">
+  <div class="yui3-u-1-7 nested-remove">
     <input type="button" class="button negative remove-pledge-item" value="Remover Item">
   </div>
 </div>
