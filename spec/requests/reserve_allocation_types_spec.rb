@@ -27,13 +27,13 @@ feature "ReserveAllocationTypes" do
   end
 
   scenario 'update an existent reserve_allocation_type' do
-    ReserveAllocationType.make!(:educacao)
+    ReserveAllocationType.make!(:comum)
 
     click_link 'Contabilidade'
 
     click_link 'Tipos de Reserva de Dotação'
 
-    click_link 'Reserva para Educação'
+    click_link 'Comum'
 
     fill_in 'Descrição', :with => 'Descrição do Tipo'
     select 'Inativo', :from => 'Status'
@@ -49,15 +49,15 @@ feature "ReserveAllocationTypes" do
   end
 
   scenario 'destroy an existent reserve_allocation_type' do
-    ReserveAllocationType.make!(:educacao)
+    ReserveAllocationType.make!(:comum)
 
     click_link 'Contabilidade'
 
     click_link 'Tipos de Reserva de Dotação'
 
-    click_link 'Reserva para Educação'
+    click_link 'Comum'
 
-    click_link 'Apagar Reserva para Educação', :confirm => true
+    click_link 'Apagar Comum', :confirm => true
 
     page.should have_notice 'Tipo de Reserva de Dotação apagado com sucesso.'
 
@@ -65,8 +65,8 @@ feature "ReserveAllocationTypes" do
     page.should_not have_select 'Status', :selected => 'Ativo'
   end
 
-  scenario 'validate uniqueness of code' do
-    ReserveAllocationType.make!(:educacao)
+  scenario 'validate uniqueness of description' do
+    ReserveAllocationType.make!(:comum)
 
     click_link 'Contabilidade'
 
@@ -74,7 +74,7 @@ feature "ReserveAllocationTypes" do
 
     click_link 'Criar Tipo de Reserva de Dotação'
 
-    fill_in 'Descrição', :with => 'Reserva para Educação'
+    fill_in 'Descrição', :with => 'Comum'
 
     click_button 'Criar Tipo de Reserva de Dotação'
 
