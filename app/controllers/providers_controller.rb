@@ -1,0 +1,2 @@
+class ProvidersController < CrudController
+end

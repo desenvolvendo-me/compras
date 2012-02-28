@@ -43,6 +43,7 @@ describe Person do
 
     it { should belong_to :personable }
     it { should have_one :employee }
+    it { should have_many(:providers).dependent(:restrict) }
 
     it { should validate_presence_of :name }
     it { should validate_presence_of :personable }
