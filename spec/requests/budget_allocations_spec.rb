@@ -232,4 +232,144 @@ feature "BudgetAllocations" do
 
     page.should have_content 'já está em uso'
   end
+
+  scenario 'should filter by organogram' do
+    BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Filtrar Dotações Orçamentárias'
+
+    fill_modal 'Organogram', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+
+    click_button 'Pesquisar'
+
+    page.should have_content 'Manutenção e Reparo'
+    page.should have_content '3.000,00'
+    page.should_not have_content 'Alocação'
+    page.should_not have_content '500,00'
+  end
+
+  scenario 'should filter by year' do
+    BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Filtrar Dotações Orçamentárias'
+
+    fill_in 'Exercício', :with => '2011'
+
+    click_button 'Pesquisar'
+
+    page.should have_content 'Manutenção e Reparo'
+    page.should have_content '3.000,00'
+    page.should_not have_content 'Alocação'
+    page.should_not have_content '500,00'
+  end
+
+  scenario 'should filter by subfunction' do
+    BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Filtrar Dotações Orçamentárias'
+
+    fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
+
+    click_button 'Pesquisar'
+
+    page.should have_content 'Manutenção e Reparo'
+    page.should have_content '3.000,00'
+    page.should_not have_content 'Alocação'
+    page.should_not have_content '500,00'
+  end
+
+  scenario 'should filter by government program' do
+    BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Filtrar Dotações Orçamentárias'
+
+    fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
+
+    click_button 'Pesquisar'
+
+    page.should have_content 'Manutenção e Reparo'
+    page.should have_content '3.000,00'
+    page.should_not have_content 'Alocação'
+    page.should_not have_content '500,00'
+  end
+
+  scenario 'should filter by government action' do
+    BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Filtrar Dotações Orçamentárias'
+
+    fill_modal 'Ação do governo', :with => 'Ação Nacional', :field => 'Descrição'
+
+    click_button 'Pesquisar'
+
+    page.should have_content 'Manutenção e Reparo'
+    page.should have_content '3.000,00'
+    page.should_not have_content 'Alocação'
+    page.should_not have_content '500,00'
+  end
+
+  scenario 'should filter by expense economic classification' do
+    BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Filtrar Dotações Orçamentárias'
+
+    fill_modal 'Classificação econômica das despesas', :with => 'Compra de Material', :field => 'Descrição'
+
+    click_button 'Pesquisar'
+
+    page.should have_content 'Manutenção e Reparo'
+    page.should have_content '3.000,00'
+    page.should_not have_content 'Alocação'
+    page.should_not have_content '500,00'
+  end
+
+  scenario 'should filter by function' do
+    BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Filtrar Dotações Orçamentárias'
+
+    fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
+
+    click_button 'Pesquisar'
+
+    page.should have_content 'Manutenção e Reparo'
+    page.should have_content '3.000,00'
+    page.should_not have_content 'Alocação'
+    page.should_not have_content '500,00'
+  end
 end

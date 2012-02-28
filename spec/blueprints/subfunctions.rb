@@ -14,3 +14,11 @@ Subfunction.blueprint(:gerente) do
   entity { Entity.make!(:detran) }
   function { Function.make!(:administracao) }
 end
+
+Subfunction.blueprint(:supervisor) do
+  code { "02" }
+  description { "Supervisor" }
+  year { 2011 }
+  entity { Entity.make!(:detran) }
+  function { Function.make!(:execucao) }
+end
