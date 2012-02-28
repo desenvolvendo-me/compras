@@ -9,6 +9,7 @@ module Dashboard::GeneralHelper
       m.neighborhoods
       m.banks
       m.positions
+      m.company_sizes
       m.cities
       m.cnaes
       m.condominiums

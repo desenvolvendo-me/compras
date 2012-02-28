@@ -1,0 +1,2 @@
+class CompanySizesController < CrudController
+end

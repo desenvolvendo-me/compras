@@ -2,31 +2,59 @@
   <table class="records">
     <thead>
       <tr>
-        <th><%= resource_class.human_attribute_name :name %></th>
+        <th>
+          <%= resource_class.human_attribute_name :name %>
+        </th>
         <% if resource.personable_type == "Individual" %>
-          <th><%= resource_class.human_attribute_name :cpf %></th>
+          <th>
+            <%= resource_class.human_attribute_name :cpf %>
+          </th>
         <% elsif resource.personable_type == "Company" %>
-          <th><%= resource_class.human_attribute_name :cnpj %></th>
+          <th>
+            <%= resource_class.human_attribute_name :cnpj %>
+          </th>
         <% end %>
-        <th><%= resource_class.human_attribute_name :phone %></th>
-        <th><%= resource_class.human_attribute_name :fax %></th>
-        <th><%= resource_class.human_attribute_name :mobile %></th>
-        <th><%= resource_class.human_attribute_name :email %></th>
+        <th>
+          <%= resource_class.human_attribute_name :phone %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :fax %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :mobile %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :email %>
+        </th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td><%= resource.name %></td>
+        <td>
+          <%= resource.name %>
+        </td>
         <% if resource.personable_type == "Individual" %>
-          <td><%= resource.cpf %></td>
+          <td>
+            <%= resource.cpf %>
+          </td>
         <% elsif resource.personable_type == "Company" %>
-          <td><%= resource.cnpj %></td>
+          <td>
+            <%= resource.cnpj %>
+          </td>
         <% end %>
-        <td><%= resource.phone %></td>
-        <td><%= resource.fax %></td>
-        <td><%= resource.mobile %></td>
-        <td><%= resource.email %></td>
+        <td>
+          <%= resource.phone %>
+        </td>
+        <td>
+          <%= resource.fax %>
+        </td>
+        <td>
+          <%= resource.mobile %>
+        </td>
+        <td>
+          <%= resource.email %>
+        </td>
       </tr>
     </tbody>
   </table>

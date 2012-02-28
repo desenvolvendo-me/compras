@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      company_size:
+        one: "Porte da Empresa"
+        other: "Portes das Empresas"
+
+    attributes:
+      company_size:
+        name: "Nome"
+        acronym: "Sigla"
+        number: "Número"

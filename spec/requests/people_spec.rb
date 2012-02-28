@@ -153,4 +153,132 @@ feature "People" do
 
     page.should_not have_content 'Wenderson Malheiros'
   end
+
+  scenario "create a new person as company" do
+    LegalNature.make!(:administracao_publica)
+    CompanySize.make!(:micro_empresa)
+    Street.make!(:bento_goncalves)
+    Person.make!(:wenderson)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Pessoas'
+
+    click_link 'Criar Pessoa'
+
+    choose "Pessoa Jurídica"
+
+    within_tab "Contribuinte" do
+      fill_in 'Nome', :with => 'Nohup'
+      fill_in 'CNPJ', :with => '00.000.000/9983-03'
+      fill_in 'Inscrição estadual', :with => '01237070'
+      fill_in 'Número do registro na junta comercial', :with => '1234909034'
+      fill_mask 'Data do registro na junta comercial', :with => '30/06/2011'
+      fill_modal "Natureza jurídica", :with => 'Administração Pública'
+      fill_modal "Pessoa responsável pela empresa", :with => "Wenderson"
+      fill_in 'Função do responsável', :with => 'Administrador'
+      fill_modal 'Porte da empresa', :with => 'Microempresa'
+      check 'Optante pelo Simples'
+    end
+
+    within_tab 'Contato' do
+      fill_mask 'Telefone', :with => '(11) 7070-6432'
+      fill_mask 'Celular', :with => '(11) 9090-3334'
+      fill_mask 'Fax', :with => '(99) 1111-2222'
+      fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+    end
+
+    within_tab 'Endereço' do
+      fill_modal 'Logradouro', :with => 'Bento Gonçalves'
+      fill_in 'Complemento', :with => 'Setor 7, Sala 2'
+      fill_modal 'Bairro', :with => 'Portugal'
+      fill_mask "CEP", :with => "31600-223"
+
+      click_button 'Adicionar Endereço de Correspondência'
+
+      within_fieldset 'Endereço de Correspondência' do
+        fill_modal 'Logradouro', :with => 'Bento Gonçalves'
+        fill_in 'Complemento', :with => 'Setor 7, Sala 2'
+        fill_modal 'Bairro', :with => 'Portugal'
+        fill_mask "CEP", :with => "31600-223"
+      end
+    end
+
+    click_button 'Criar Pessoa'
+
+    page.should have_notice 'Pessoa criada com sucesso.'
+
+    click_link 'Nohup'
+
+    within_tab "Contribuinte" do
+      page.should have_field 'Nome', :with => 'Nohup'
+      page.should have_field 'CNPJ', :with => '00.000.000/9983-03'
+      page.should have_field 'Inscrição estadual', :with => '01237070'
+      page.should have_field 'Número do registro na junta comercial', :with => '1234909034'
+      page.should have_field 'Data do registro na junta comercial', :with => '30/06/2011'
+      page.should have_field "Natureza jurídica", :with => 'Administração Pública'
+      page.should have_field "Pessoa responsável pela empresa", :with => "Wenderson Malheiros"
+      page.should have_field 'Função do responsável', :with => 'Administrador'
+      page.should have_field 'Porte da empresa', :with => 'Microempresa'
+      page.should have_checked_field 'Optante pelo Simples'
+    end
+
+    within_tab 'Contato' do
+      page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+      page.should have_field 'Telefone', :with => '(11) 7070-6432'
+      page.should have_field 'Celular', :with => '(11) 9090-3334'
+      page.should have_field 'Fax', :with => '(99) 1111-2222'
+    end
+
+    within_tab 'Endereço' do
+      page.should have_field 'Logradouro', :with => 'Bento Gonçalves'
+      page.should have_field 'Complemento', :with => 'Setor 7, Sala 2'
+      page.should have_field 'Bairro', :with => 'Portugal'
+      page.should have_field "CEP", :with => "31600-223"
+
+      within_fieldset 'Endereço de Correspondência' do
+        page.should have_field 'Logradouro', :with => 'Bento Gonçalves'
+        page.should have_field 'Complemento', :with => 'Setor 7, Sala 2'
+        page.should have_field 'Bairro', :with => 'Portugal'
+        page.should have_field "CEP", :with => "31600-223"
+      end
+    end
+  end
+
+  scenario 'update an existent person as company' do
+    Person.make!(:nohup)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Pessoas'
+
+    click_link 'Nohup'
+
+    page.should_not have_field 'Pessoa Física'
+    page.should_not have_field 'Pessoa Jurídica'
+
+    within_tab "Contribuinte" do
+      fill_in 'Nome', :with => 'MoneyLabs'
+    end
+
+    within_tab 'Endereço' do
+      fill_in 'CEP', :with => '55554-333'
+      fill_in 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
+    end
+
+    click_button 'Atualizar Pessoa'
+
+    page.should have_notice 'Pessoa editada com sucesso.'
+
+    click_link 'MoneyLabs'
+
+    within_tab "Contribuinte" do
+      page.should have_field 'Nome', :with => 'MoneyLabs'
+    end
+
+    within_tab 'Endereço' do
+      page.should have_field 'CEP', :with => '55554-333'
+      page.should have_field 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
+    end
+  end
 end

@@ -124,6 +124,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :company_sizes do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+
   resources :administractive_act_type_classifications do
     collection do
       get :filter
