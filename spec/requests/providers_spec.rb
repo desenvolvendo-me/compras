@@ -201,7 +201,7 @@ feature "Providers" do
     page.should_not have_content 'Wenderson Malheiros'
   end
 
-  scenario 'show modal info of person' do
+  scenario 'show modal info of person - Individual' do
     Person.make!(:wenderson)
 
     click_link 'Contabilidade'
@@ -216,11 +216,49 @@ feature "Providers" do
 
     within '#record' do
       page.should have_content 'Wenderson Malheiros'
-      page.should have_content '003.149.513-34'
       page.should have_content '(33) 3333-3333'
       page.should have_content '(33) 3333-3334'
       page.should have_content '(99) 9999-9999'
+      page.should have_content '003.149.513-34'
       page.should have_content 'wenderson.malheiros@gmail.com'
+      page.should have_content 'Girassol, 9874 - São Francisco'
+      page.should have_content '003.149.513-34'
+      page.should have_content 'Masculino'
+      page.should have_content 'Alaine Agnes'
+      page.should have_content '21/03/1973'
+      page.should have_content 'MG23912702'
+    end
+  end
+
+  scenario 'show modal info of person - Company' do
+    Person.make!(:nohup)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    click_link 'Criar Fornecedor'
+
+    fill_modal 'Pessoa', :with => 'Nohup'
+
+    click_link 'provider_person_info_link'
+
+    within '#record' do
+      page.should have_content 'Nohup'
+      page.should have_content '(11) 7070-9999'
+      page.should have_content '(11) 7070-8888'
+      page.should have_content '(33) 7070-7777'
+      page.should have_content 'wenderson@gmail.com'
+      page.should have_content 'Girassol, 9874 - São Francisco'
+      page.should have_content '00.000.000/9999-62'
+      page.should have_content 'SP'
+      page.should have_content '099901'
+      page.should have_content '29/06/2011'
+      page.should have_content 'Administrador'
+      page.should have_content 'Não'
+      page.should have_content 'Administração Pública'
+      page.should have_content 'Wenderson Malheiros'
+      page.should have_content 'Microempresa'
     end
   end
 

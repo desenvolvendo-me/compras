@@ -5,15 +5,6 @@
         <th>
           <%= resource_class.human_attribute_name :name %>
         </th>
-        <% if resource.personable_type == "Individual" %>
-          <th>
-            <%= resource_class.human_attribute_name :cpf %>
-          </th>
-        <% elsif resource.personable_type == "Company" %>
-          <th>
-            <%= resource_class.human_attribute_name :cnpj %>
-          </th>
-        <% end %>
         <th>
           <%= resource_class.human_attribute_name :phone %>
         </th>
@@ -26,6 +17,12 @@
         <th>
           <%= resource_class.human_attribute_name :email %>
         </th>
+        <th>
+          <%= resource_class.human_attribute_name :address %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :correspondence_address %>
+        </th>
       </tr>
     </thead>
 
@@ -34,15 +31,6 @@
         <td>
           <%= resource.name %>
         </td>
-        <% if resource.personable_type == "Individual" %>
-          <td>
-            <%= resource.cpf %>
-          </td>
-        <% elsif resource.personable_type == "Company" %>
-          <td>
-            <%= resource.cnpj %>
-          </td>
-        <% end %>
         <td>
           <%= resource.phone %>
         </td>
@@ -55,8 +43,142 @@
         <td>
           <%= resource.email %>
         </td>
+        <td>
+          <%= resource.address %>
+        </td>
+        <td>
+          <%= resource.correspondence_address %>
+        </td>
       </tr>
     </tbody>
   </table>
 
+  <% if resource.personable_type == "Individual" %>
+    <table class="records">
+      <thead>
+        <tr>
+          <th>
+            <%= Individual.human_attribute_name :cpf %>
+          </th>
+          <th>
+            <%= Individual.human_attribute_name :gender %>
+          </th>
+          <th>
+            <%= Individual.human_attribute_name :mother %>
+          </th>
+          <th>
+            <%= Individual.human_attribute_name :father %>
+          </th>
+          <th>
+            <%= Individual.human_attribute_name :birthdate %>
+          </th>
+          <th>
+            <%= Individual.human_attribute_name :identity %>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>
+            <%= resource.personable.cpf %>
+          </td>
+          <td>
+            <%= resource.personable.gender_humanize %>
+          </td>
+          <td>
+            <%= resource.personable.mother %>
+          </td>
+          <td>
+            <%= resource.personable.father %>
+          </td>
+          <td>
+            <%= I18n.l(resource.personable.birthdate) if resource.personable.birthdate %>
+          </td>
+          <td>
+            <%= resource.personable.identity %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  <% elsif resource.personable_type == "Company" %>
+    <table class="records">
+      <thead>
+        <tr>
+          <th>
+            <%= Company.human_attribute_name :cnpj %>
+          </th>
+          <th>
+            <%= Company.human_attribute_name :state_registration %>
+          </th>
+          <th>
+            <%= Company.human_attribute_name :commercial_registration_number %>
+          </th>
+          <th>
+            <%= Company.human_attribute_name :commercial_registration_date %>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>
+            <%= resource.personable.cnpj %>
+          </td>
+          <td>
+            <%= resource.personable.state_registration %>
+          </td>
+          <td>
+            <%= resource.personable.commercial_registration_number %>
+          </td>
+          <td>
+            <%= I18n.l(resource.personable.commercial_registration_date) if resource.personable.commercial_registration_date %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="records">
+      <thead>
+        <tr>
+          <th>
+            <%= Company.human_attribute_name :responsible_role %>
+          </th>
+          <th>
+            <%= Company.human_attribute_name :choose_simple %>
+          </th>
+          <th>
+            <%= Company.human_attribute_name :legal_nature %>
+          </th>
+          <th>
+            <%= Company.human_attribute_name :responsible %>
+          </th>
+          <th>
+            <%= Company.human_attribute_name :company_size %>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>
+            <%= resource.personable.responsible_role %>
+          </td>
+          <td>
+            <%= I18n.t(resource.personable.choose_simple.to_s) %>
+          </td>
+          <td>
+            <%= resource.personable.legal_nature %>
+          </td>
+          <td>
+            <%= resource.personable.responsible %>
+          </td>
+          <td>
+            <%= resource.personable.company_size %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
 </div>
