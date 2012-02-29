@@ -1,12 +1,14 @@
 class Property < ActiveRecord::Base
-  attr_accessible :property_registration, :owner_id
+  attr_readonly :property_registration
 
   attr_modal :property_registration, :owner
 
   has_many :owners, :dependent => :restrict
   has_many :providers, :dependent => :restrict
 
-  orderize :owner_id
+  delegate :id, :to => :owner, :prefix => true, :allow_nil => true
+
+  orderize :property_registration
   filterize
 
   def owner

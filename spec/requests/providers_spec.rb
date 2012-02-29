@@ -146,4 +146,18 @@ feature "Providers" do
       page.should have_content 'wenderson.malheiros@gmail.com'
     end
   end
+
+  scenario 'should fill person as property owner when select property' do
+    Property.make!(:propriedade_1)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    click_link 'Criar Fornecedor'
+
+    fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
+
+    page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+  end
 end

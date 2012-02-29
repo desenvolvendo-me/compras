@@ -19,6 +19,14 @@
     }
   });
 
+  $('#provider_property_id').change(function(event, data) {
+    if (data) {
+      var record = data.record;
+      $('#provider_person').val(record.data('owner'));
+      $('#provider_person_id').val(record.data('owner-id'));
+    }
+  }).change();
+
   var bank_id = $('#provider_bank_id').val();
 
   $('#provider_bank_id').change(function() {
