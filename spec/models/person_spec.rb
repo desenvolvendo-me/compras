@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/person'
 require 'app/models/provider'
+require 'app/models/economic_registration'
 
 describe Person do
   it "return name when call to_s" do
@@ -19,6 +20,7 @@ describe Person do
   it { should belong_to :personable }
 
   it { should have_many(:providers).dependent(:restrict) }
+  it { should have_many(:economic_registrations).dependent(:restrict) }
 
   context "validations" do
     it "should validates phone" do

@@ -7,6 +7,7 @@ class Person < ActiveRecord::Base
   belongs_to :personable, :polymorphic => true, :autosave => true, :dependent => :destroy
 
   has_many :providers, :dependent => :restrict
+  has_many :economic_registrations, :dependent => :restrict
 
   has_one :employee
 
