@@ -17,6 +17,7 @@ class ReserveFund < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
 
   delegate :amount, :to => :budget_allocation, :allow_nil => true, :prefix => true
+  delegate :licitation?, :to => :reserve_allocation_type, :allow_nil => true
 
   validates :entity, :budget_allocation, :value, :year, :reserve_allocation_type, :date, :presence => true
   validates :year, :presence => true, :mask => '9999'
@@ -37,14 +38,6 @@ class ReserveFund < ActiveRecord::Base
 
   def joined_process
     "#{process_number}/#{process_year}" if process_number && process_year
-  end
-
-  def is_type_licitation?
-    if reserve_allocation_type && reserve_allocation_type.is_licitation?
-      true
-    else
-      false
-    end
   end
 
   protected

@@ -9,18 +9,6 @@ describe ReserveFund do
     subject.to_s.should eql '1/2012'
   end
 
-  it 'should return false for is_type_licitation when type is not licitation' do
-    subject.stub(:reserve_allocation_type).and_return(double(:is_licitation? => false))
-
-    subject.is_type_licitation?.should be_false
-  end
-
-  it 'should return true for is_type_licitation when type is licitation' do
-    subject.stub(:reserve_allocation_type).and_return(double(:is_licitation? => true))
-
-    subject.is_type_licitation?.should be_true
-  end
-
   it { should belong_to :entity }
   it { should belong_to :budget_allocation }
   it { should belong_to :reserve_allocation_type }

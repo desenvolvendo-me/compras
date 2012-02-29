@@ -16,7 +16,7 @@ class ReserveAllocationType < ActiveRecord::Base
     description
   end
 
-  def is_licitation?
+  def licitation?
     description == "Licitação"
   end
 end
