@@ -3,7 +3,11 @@ class Individual < ActiveRecord::Base
   attr_accessible :identity_attributes, :address_attributes, :cpf
   attr_accessible :correspondence_address_attributes
 
+  attr_modal :person, :mother, :father, :birthdate, :gender, :cpf
+
   has_enumeration_for :gender
+
+  has_many :provider_partners, :dependent => :restrict
 
   has_one :address, :as => :addressable, :conditions => { :correspondence => false }, :dependent => :destroy
   has_one :correspondence_address, :as => :addressable, :conditions => { :correspondence => true }, :class_name => 'Address', :dependent => :destroy
@@ -20,7 +24,7 @@ class Individual < ActiveRecord::Base
   validates :birthdate, :timeliness => { :before => :today, :type => :date }, :allow_blank => true
 
   filterize
-  orderize
+  orderize :birthdate
 
   def to_s
     person.name

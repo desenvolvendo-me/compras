@@ -8,6 +8,7 @@ feature "Providers" do
 
   scenario 'create a new provider' do
     Person.make!(:wenderson)
+    Person.make!(:sobrinho)
     Property.make!(:propriedade_1)
     Agency.make!(:itau)
     LegalNature.make!(:administracao_publica)
@@ -19,18 +20,28 @@ feature "Providers" do
 
     click_link 'Criar Fornecedor'
 
-    fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
-    fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-    fill_in 'Data do cadastramento', :with => '15/02/2012'
-    fill_modal 'Banco', :with => 'Itaú'
-    fill_modal 'Agência', :with => 'Agência Itaú'
-    fill_in 'C/C', :with => '123456'
-    fill_in 'Número', :with => '456789'
-    fill_in 'Data da inscrição', :with => '26/02/2012'
-    fill_in 'Data de validade', :with => '27/02/2012'
-    fill_in 'Data da renovação', :with => '28/02/2012'
-    fill_modal 'Natureza jurídica', :with => 'Administração Pública'
-    fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
+    within_tab 'Principal'do
+      fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+      fill_in 'Data do cadastramento', :with => '15/02/2012'
+      fill_modal 'Banco', :with => 'Itaú'
+      fill_modal 'Agência', :with => 'Agência Itaú'
+      fill_in 'C/C', :with => '123456'
+      fill_in 'Número', :with => '456789'
+      fill_in 'Data da inscrição', :with => '26/02/2012'
+      fill_in 'Data de validade', :with => '27/02/2012'
+      fill_in 'Data da renovação', :with => '28/02/2012'
+      fill_modal 'Natureza jurídica', :with => 'Administração Pública'
+      fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      click_button 'Adicionar'
+
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      select 'Membro do quadro societário', :from => 'Função'
+      fill_in 'Data', :with => '25/02/2012'
+    end
 
     click_button 'Criar Fornecedor'
 
@@ -40,19 +51,27 @@ feature "Providers" do
       page.find('a').click
     end
 
-    page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
-    page.should have_field 'Cadastro econômico', :with => '123'
-    page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
-    page.should have_field 'Data do cadastramento', :with => '15/02/2012'
-    page.should have_field 'Banco', :with => 'Itaú'
-    page.should have_field 'Agência', :with => 'Agência Itaú'
-    page.should have_field 'C/C', :with => '123456'
-    page.should have_field 'Número', :with => '456789'
-    page.should have_field 'Data da inscrição', :with => '26/02/2012'
-    page.should have_field 'Data de validade', :with => '27/02/2012'
-    page.should have_field 'Data da renovação', :with => '28/02/2012'
-    page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
-    page.should have_field 'CNAE', :with => 'Aluguel de outras máquinas'
+    within_tab 'Principal'do
+      page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+      page.should have_field 'Cadastro econômico', :with => '123'
+      page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+      page.should have_field 'Data do cadastramento', :with => '15/02/2012'
+      page.should have_field 'Banco', :with => 'Itaú'
+      page.should have_field 'Agência', :with => 'Agência Itaú'
+      page.should have_field 'C/C', :with => '123456'
+      page.should have_field 'Número', :with => '456789'
+      page.should have_field 'Data da inscrição', :with => '26/02/2012'
+      page.should have_field 'Data de validade', :with => '27/02/2012'
+      page.should have_field 'Data da renovação', :with => '28/02/2012'
+      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
+      page.should have_field 'CNAE', :with => 'Aluguel de outras máquinas'
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      page.should have_select 'Função', :selected => 'Membro do quadro societário'
+      page.should have_field 'Data', :with => '25/02/2012'
+    end
   end
 
   scenario 'update an existent provider' do
@@ -71,18 +90,26 @@ feature "Providers" do
       page.find('a').click
     end
 
-    fill_modal 'Cadastro econômico', :with => '456', :field => 'Inscrição imobiliária'
-    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-    fill_in 'Data do cadastramento', :with => '15/02/2013'
-    fill_modal 'Banco', :with => 'Santander'
-    fill_modal 'Agência', :with => 'Agência Santander'
-    fill_in 'C/C', :with => '456789'
-    fill_in 'Número', :with => '147258'
-    fill_in 'Data da inscrição', :with => '26/02/2013'
-    fill_in 'Data de validade', :with => '27/02/2013'
-    fill_in 'Data da renovação', :with => '28/02/2013'
-    fill_modal 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
-    fill_modal 'CNAE', :with => 'Comércio varejista de mercadorias em geral', :field => 'Descrição'
+    within_tab 'Principal'do
+      fill_modal 'Cadastro econômico', :with => '456', :field => 'Inscrição imobiliária'
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      fill_in 'Data do cadastramento', :with => '15/02/2013'
+      fill_modal 'Banco', :with => 'Santander'
+      fill_modal 'Agência', :with => 'Agência Santander'
+      fill_in 'C/C', :with => '456789'
+      fill_in 'Número', :with => '147258'
+      fill_in 'Data da inscrição', :with => '26/02/2013'
+      fill_in 'Data de validade', :with => '27/02/2013'
+      fill_in 'Data da renovação', :with => '28/02/2013'
+      fill_modal 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
+      fill_modal 'CNAE', :with => 'Comércio varejista de mercadorias em geral', :field => 'Descrição'
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+      select 'Representante legal', :from => 'Função'
+      fill_in 'Data', :with => '25/02/2013'
+    end
 
     click_button 'Atualizar Fornecedor'
 
@@ -92,22 +119,31 @@ feature "Providers" do
       page.find('a').click
     end
 
-    page.should have_field 'Cadastro econômico', :with => '456'
-    page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Data do cadastramento', :with => '15/02/2013'
-    page.should have_field 'Banco', :with => 'Santander'
-    page.should have_field 'Agência', :with => 'Agência Santander'
-    page.should have_field 'C/C', :with => '456789'
-    page.should have_field 'Número', :with => '147258'
-    page.should have_field 'Data da inscrição', :with => '26/02/2013'
-    page.should have_field 'Data de validade', :with => '27/02/2013'
-    page.should have_field 'Data da renovação', :with => '28/02/2013'
-    page.should have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
-    page.should have_field 'CNAE', :with => 'Comércio varejista de mercadorias em geral'
+    within_tab 'Principal'do
+      page.should have_field 'Cadastro econômico', :with => '456'
+      page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Data do cadastramento', :with => '15/02/2013'
+      page.should have_field 'Banco', :with => 'Santander'
+      page.should have_field 'Agência', :with => 'Agência Santander'
+      page.should have_field 'C/C', :with => '456789'
+      page.should have_field 'Número', :with => '147258'
+      page.should have_field 'Data da inscrição', :with => '26/02/2013'
+      page.should have_field 'Data de validade', :with => '27/02/2013'
+      page.should have_field 'Data da renovação', :with => '28/02/2013'
+      page.should have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
+      page.should have_field 'CNAE', :with => 'Comércio varejista de mercadorias em geral'
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+      page.should have_select 'Função', :selected => 'Representante legal'
+      page.should have_field 'Data', :with => '25/02/2013'
+    end
   end
 
   scenario 'destroy an existent provider' do
     Provider.make!(:wenderson_sa)
+    Person.make!(:sobrinho)
 
     click_link 'Contabilidade'
 
@@ -117,7 +153,7 @@ feature "Providers" do
       page.find('a').click
     end
 
-    click_link 'Apagar', :confirm => true
+    click_link "Apagar", :confirm => true
 
     page.should have_notice 'Fornecedor apagado com sucesso.'
 
@@ -159,5 +195,57 @@ feature "Providers" do
     fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
 
     page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+  end
+
+  scenario 'ensure the error when duplicated partners is de only error' do
+    Person.make!(:wenderson)
+    Person.make!(:sobrinho)
+    Property.make!(:propriedade_1)
+    Agency.make!(:itau)
+    LegalNature.make!(:administracao_publica)
+    Cnae.make!(:aluguel)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    click_link 'Criar Fornecedor'
+
+    within_tab 'Principal'do
+      fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+      fill_in 'Data do cadastramento', :with => '15/02/2012'
+      fill_modal 'Banco', :with => 'Itaú'
+      fill_modal 'Agência', :with => 'Agência Itaú'
+      fill_in 'C/C', :with => '123456'
+      fill_in 'Número', :with => '456789'
+      fill_in 'Data da inscrição', :with => '26/02/2012'
+      fill_in 'Data de validade', :with => '27/02/2012'
+      fill_in 'Data da renovação', :with => '28/02/2012'
+      fill_modal 'Natureza jurídica', :with => 'Administração Pública'
+      fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      click_button 'Adicionar'
+
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      select 'Membro do quadro societário', :from => 'Função'
+      fill_in 'Data', :with => '25/02/2012'
+
+      click_button 'Adicionar'
+
+      within '.provider-partner:last' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+        select 'Membro do quadro societário', :from => 'Função'
+        fill_in 'Data', :with => '25/02/2012'
+      end
+    end
+
+    click_button 'Criar Fornecedor'
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      page.should have_content 'já está em uso'
+    end
   end
 end

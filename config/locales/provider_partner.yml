@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      provider_partner:
+        one: "Sócio"
+        other: "Sócios"
+
+    attributes:
+      provider_partner:
+        individual: "Pessoa"
+        function: "Função"
+        date: "Data"

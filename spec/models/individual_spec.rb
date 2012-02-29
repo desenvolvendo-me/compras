@@ -32,6 +32,7 @@ describe Individual do
   it { should have_one(:correspondence_address).conditions(:correspondence => true) }
   it { should have_one :identity }
   it { should have_one :person }
+  it { should have_many(:provider_partners).dependent(:restrict) }
 
   it { should validate_presence_of :cpf }
   it { should validate_presence_of :mother }

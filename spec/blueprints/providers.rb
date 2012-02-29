@@ -10,4 +10,5 @@ Provider.blueprint(:wenderson_sa) do
   crc_registration_date { '26/02/2012' }
   crc_renewal_date { '27/02/2012' }
   crc_expiration_date { '28/02/2012' }
+  provider_partners { [ProviderPartner.make!(:sobrinho)] }
 end
