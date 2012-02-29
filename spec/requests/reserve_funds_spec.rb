@@ -161,6 +161,7 @@ feature "ReserveFunds" do
       page.should have_content '3.1.90.11.01.00.00.00'
       page.should have_content 'Reforma e Ampliação'
       page.should have_content 'Manutenção da Unidade Administrativa'
+      page.should have_content 'Nenhuma'
       page.should have_content 'Dotação Administrativa'
     end
   end
