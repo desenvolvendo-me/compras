@@ -193,4 +193,27 @@ feature "ReserveFunds" do
     page.should have_disabled_field 'Modalidade'
     page.should have_disabled_field 'Número da licitação'
   end
+
+  scenario 'should clean licitation modality and licitation number/year when changing type to diferent of licitation' do
+    ReserveFund.make!(:detran_2012)
+    ReserveAllocationType.make!(:comum)
+
+    click_link 'Contabilidade'
+
+    click_link 'Reservas de Dotação'
+
+    click_link '2012'
+
+    page.should have_field 'Modalidade', :with => 'Pública'
+    page.should have_field 'Número da licitação', :with => '001/2012'
+
+    fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
+
+    click_button 'Atualizar Reserva de Dotação'
+
+    click_link '2012'
+
+    page.should have_field 'Modalidade', :with => ''
+    page.should have_field 'Número da licitação', :with => ''
+  end
 end

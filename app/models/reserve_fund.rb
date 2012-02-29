@@ -23,7 +23,7 @@ class ReserveFund < ActiveRecord::Base
   validates :year, :presence => true, :mask => '9999'
   validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
 
-  before_save :parse_licitation, :parse_process
+  before_save :parse_licitation, :parse_process, :clear_licitation_dependent_field_if_is_not_licitation
 
   orderize :year
   filterize
@@ -55,6 +55,14 @@ class ReserveFund < ActiveRecord::Base
       parser = NumberYearParser.new(process)
       self.process_number = parser.number
       self.process_year = parser.year
+    end
+  end
+
+  def clear_licitation_dependent_field_if_is_not_licitation
+    unless licitation?
+      self.licitation_modality_id = nil
+      self.licitation_number = nil
+      self.licitation_year = nil
     end
   end
 end
