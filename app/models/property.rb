@@ -1,7 +1,7 @@
 class Property < ActiveRecord::Base
   attr_readonly :property_registration
 
-  attr_modal :property_registration, :owner
+  attr_modal :property_registration
 
   has_many :owners, :dependent => :restrict
   has_many :providers, :dependent => :restrict
