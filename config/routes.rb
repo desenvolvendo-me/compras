@@ -237,6 +237,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :document_types do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :expense_economic_classifications do
     collection do
       get :filter

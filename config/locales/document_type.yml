@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      document_type:
+        one: "Tipo de Documento"
+        other: "Tipos de Documento"
+
+    attributes:
+      document_type:
+        validity: "Validade em dias"
+        description: "Descrição"
