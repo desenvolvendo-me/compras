@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/person'
+require 'app/models/provider'
 
 describe Person do
   it "return name when call to_s" do
@@ -14,6 +15,10 @@ describe Person do
       subject.correspondence_address?.should be_true
     end
   end
+
+  it { should belong_to :personable }
+
+  it { should have_many(:providers).dependent(:restrict) }
 
   context "validations" do
     it "should validates phone" do
@@ -39,9 +44,6 @@ describe Person do
       subject.should_not be_valid
       subject.errors[:mobile].should include 'não é válido'
     end
-
-    it { should belong_to :personable }
-    it { should have_many(:providers).dependent(:restrict) }
 
     it { should validate_presence_of :name }
     it { should validate_presence_of :personable }
