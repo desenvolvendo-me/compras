@@ -9,6 +9,9 @@
   </div>
 
   <div id="partners">
+    <div id="msg-no-partners">
+    </div>
+
     <%= render 'partners', :f => f %>
   </div>
 </div>
@@ -67,4 +70,24 @@
       $('#provider_agency_id').val('');
     }
   }
+
+  function togglePartners(personableType) {
+    if (personableType == "Individual") {
+      $('#msg-no-partners').html("<%= I18n.translate('other.tributario.messages.msg_no_provider_partners') %>").show();
+      $('#partners_selector').hide();
+    } else {
+      $('#msg-no-partners').html('').hide();
+      $('#partners_selector').show();
+    }
+  }
+
+  $('#provider_person_id').change(function(event, data) {
+    var type = ''
+    if (data) {
+      type = data.record.data('personable-type');
+    }
+    togglePartners(type);
+  });
+
+  togglePartners("<%= f.object.personable_type %>");
 </script>

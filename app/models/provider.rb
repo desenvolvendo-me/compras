@@ -12,6 +12,7 @@ class Provider < ActiveRecord::Base
   has_many :provider_partners, :dependent => :destroy
 
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
+  delegate :personable_type, :to => :person, :allow_nil => true
 
   validates :person, :presence => true
 
