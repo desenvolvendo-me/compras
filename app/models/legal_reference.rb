@@ -4,7 +4,7 @@ class LegalReference < ActiveRecord::Base
   attr_modal :description, :law, :article, :paragraph, :sections, :synopsis
 
   validates :description, :law, :article, :presence => true
-  validates :law, :article, :paragraph, :numericality => true
+  validates :law, :article, :paragraph, :numericality => true, :allow_blank => true
 
   orderize :description
   filterize
