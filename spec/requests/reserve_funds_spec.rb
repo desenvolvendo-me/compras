@@ -153,7 +153,15 @@ feature "ReserveFunds" do
       page.should have_content 'Detran'
       page.should have_content '2012'
       page.should have_content 'Alocação'
+      page.should have_content '02.00 - Secretaria de Educação'
+      page.should have_content '01 - Administração Geral'
+      page.should have_content 'Habitação'
       page.should have_content '500,00'
+      page.should have_content 'Ação Governamental'
+      page.should have_content '3.1.90.11.01.00.00.00'
+      page.should have_content 'Reforma e Ampliação'
+      page.should have_content 'Manutenção da Unidade Administrativa'
+      page.should have_content 'Dotação Administrativa'
     end
   end
 

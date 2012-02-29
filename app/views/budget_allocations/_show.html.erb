@@ -12,10 +12,16 @@
           <%= resource_class.human_attribute_name :description %>
         </th>
         <th>
+          <%= resource_class.human_attribute_name :organogram %>
+        </th>
+        <th>
           <%= resource_class.human_attribute_name :date %>
         </th>
         <th>
-          <%= resource_class.human_attribute_name :amount %>
+          <%= resource_class.human_attribute_name :subfunction %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :government_program %>
         </th>
       </tr>
     </thead>
@@ -31,10 +37,116 @@
           <%= resource.description %>
         </td>
         <td>
+          <%= resource.organogram %>
+        </td>
+        <td>
           <%= resource.date %>
         </td>
         <td>
+          <%= resource.subfunction %>
+        </td>
+        <td>
+          <%= resource.government_program %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= resource_class.human_attribute_name :amount %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :personal %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :government_action %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :foresight %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :education %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :expense_economic_classification %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
           <%= resource.amount %>
+        </td>
+        <td>
+          <%= I18n.t(resource.personal.to_s) %>
+        </td>
+        <td>
+          <%= resource.government_action %>
+        </td>
+        <td>
+          <%= I18n.t(resource.foresight.to_s) %>
+        </td>
+        <td>
+          <%= I18n.t(resource.education.to_s) %>
+        </td>
+        <td>
+          <%= resource.expense_economic_classification %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= resource_class.human_attribute_name :capability %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :goal %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :debt_type %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :budget_allocation_type %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :refinancing %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :health %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :alienation_appeal %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.capability %>
+        </td>
+        <td>
+          <%= resource.goal %>
+        </td>
+        <td>
+          <%= resource.debt_type %>
+        </td>
+        <td>
+          <%= resource.budget_allocation_type %>
+        </td>
+        <td>
+          <%= I18n.t(resource.refinancing.to_s) %>
+        </td>
+        <td>
+          <%= I18n.t(resource.health.to_s) %>
+        </td>
+        <td>
+          <%= I18n.t(resource.alienation_appeal.to_s) %>
         </td>
       </tr>
     </tbody>
