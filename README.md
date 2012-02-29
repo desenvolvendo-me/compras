@@ -55,7 +55,7 @@ Nesse exemplo geral mostra o padrão para a ordem das definições e espaçament
 
 ```ruby
 class Person < ActiveRecord::Base
-  attr_accessible :name, :birthdate, :address, :parent, :chindren, :grandpa
+  attr_accessible :name, :birthdate, :address_attributes, :parent, :chindren, :grandpa
   attr_accessible :cousin, :grandson, :nephew, :work_id
 
   attr_readonly :document
@@ -66,7 +66,7 @@ class Person < ActiveRecord::Base
 
   attr_reader :last_name
 
-  attr_modal :name, :birthdate, :address, :parent, :chindren, :grandpa
+  attr_modal :name, :birthdate, :parent, :chindren, :grandpa
 
   has_enumeration_for :status, :with => PersonStatus
   has_enumeration_for :gender # Classe do enumeration também é Gender, logo, não precisa ser definido com o :with
@@ -79,6 +79,8 @@ class Person < ActiveRecord::Base
   has_many :motorcycles
 
   has_one :wife
+
+  accepts_nested_attributes_for :address
 
   delegate :company_name, :to => :work
 
