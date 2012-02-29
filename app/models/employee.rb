@@ -12,7 +12,7 @@ class Employee < ActiveRecord::Base
   delegate :name, :to => :person
 
   validates :person_id, :registration, :uniqueness => true
-  validates :person, :registration, :presence => true
+  validates :person, :registration, :position, :presence => true
 
   filterize
 

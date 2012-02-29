@@ -4,8 +4,11 @@ require 'app/models/purchase_solicitation'
 
 describe Employee do
   it { should belong_to :person }
+  it { should belong_to :position }
+
   it { should have_many :purchase_solicitations }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration }
+  it { should validate_presence_of :position }
 end
