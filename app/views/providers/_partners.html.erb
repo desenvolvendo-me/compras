@@ -1,13 +1,13 @@
 <fieldset id="partners_selector">
-  <p>
-    <input type="button" class="button affirmative add-provider-partner" value="Adicionar">
-  </p>
-
   <div id="provider-partners">
     <%= f.association :provider_partners, :collection => localized(f.object.provider_partners) do |p| %>
       <%= render 'provider_partners/form', :f => p %>
     <% end %>
   </div>
+
+  <p>
+    <input type="button" class="button affirmative add-provider-partner" value="Adicionar">
+  </p>
 </fieldset>
 
 <%= mustache 'provider-partners-template' do %>
