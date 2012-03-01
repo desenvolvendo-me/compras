@@ -1,0 +1,7 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-id="<%= record.id %>" data-description="<%= record.description %>" data-number="<%= record.class_number %>">
+  <% attributes.each do |attribute| %>
+    <td>
+      <%= record.send attribute %>
+    </td>
+  <% end %>
+</tr>

@@ -5,6 +5,8 @@ class MaterialsClass < ActiveRecord::Base
 
   belongs_to :materials_group
 
+  has_and_belongs_to_many :providers
+
   has_many :materials, :dependent => :restrict
 
   validates :materials_group, :presence => true

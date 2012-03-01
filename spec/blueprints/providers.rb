@@ -12,4 +12,5 @@ Provider.blueprint(:wenderson_sa) do
   crc_expiration_date { '28/02/2012' }
   provider_partners { [ProviderPartner.make!(:sobrinho)] }
   materials_groups { [MaterialsGroup.make!(:alimenticios)] }
+  materials_classes { [MaterialsClass.make!(:hortifrutigranjeiros)] }
 end

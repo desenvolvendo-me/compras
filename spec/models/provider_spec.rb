@@ -9,6 +9,7 @@ describe Provider do
   it { should belong_to :cnae }
   it { should belong_to :economic_registration }
   it { should have_and_belong_to_many :materials_groups }
+  it { should have_and_belong_to_many :materials_classes }
 
   it { should have_many(:provider_partners).dependent(:destroy) }
 

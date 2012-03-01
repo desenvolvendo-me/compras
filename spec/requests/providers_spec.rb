@@ -14,6 +14,7 @@ feature "Providers" do
     LegalNature.make!(:administracao_publica)
     Cnae.make!(:aluguel)
     MaterialsGroup.make!(:alimenticios)
+    MaterialsClass.make!(:hortifrutigranjeiros)
 
     click_link 'Contabilidade'
 
@@ -38,6 +39,7 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       fill_modal 'Grupo de materiais', :with => 'Generos alimenticios', :field => 'Descrição'
+      fill_modal 'Classe de materiais', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
     end
 
     click_button 'Criar Fornecedor'
@@ -66,6 +68,7 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should have_content 'Generos alimenticios'
+      page.should have_content 'Hortifrutigranjeiros'
     end
   end
 
@@ -78,6 +81,7 @@ feature "Providers" do
     Cnae.make!(:varejo)
     EconomicRegistration.make!(:nobe)
     MaterialsGroup.make!(:limpeza)
+    MaterialsClass.make!(:pecas)
 
     click_link 'Contabilidade'
 
@@ -104,6 +108,7 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       fill_modal 'Grupo de materiais', :with => 'Limpeza', :field => 'Descrição'
+      fill_modal 'Classe de materiais', :with => 'Peças', :field => 'Descrição'
     end
 
     click_button 'Atualizar Fornecedor'
@@ -131,6 +136,7 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should have_content 'Limpeza'
+      page.should have_content 'Peças'
     end
   end
 
@@ -432,6 +438,35 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should_not have_content 'Generos alimenticios'
+    end
+  end
+
+  scenario 'remove materials class from an existent provider' do
+    Provider.make!(:wenderson_sa)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should have_content 'Hortifrutigranjeiros'
+      click_button 'Remover classe'
+    end
+
+    click_button 'Atualizar Fornecedor'
+
+    page.should have_notice 'Fornecedor editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should_not have_content 'Hortifrutigranjeiros'
     end
   end
 end
