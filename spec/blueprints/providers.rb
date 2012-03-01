@@ -1,6 +1,6 @@
 Provider.blueprint(:wenderson_sa) do
+  economic_registration { EconomicRegistration.make!(:nohup) }
   person { Person.make!(:wenderson) }
-  property { Property.make!(:propriedade_1) }
   agency { Agency.make!(:itau) }
   legal_nature { LegalNature.make!(:administracao_publica) }
   cnae { Cnae.make!(:aluguel) }

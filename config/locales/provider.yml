@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       provider:
         person: "Pessoa"
-        property: "Cadastro econômico"
+        economic_registration: "Cadastro econômico"
         bank: "Banco"
         agency: "Agência"
         legal_nature: "Natureza jurídica"

@@ -9,7 +9,6 @@ describe Property do
   end
 
   it { should have_many(:owners).dependent(:restrict) }
-  it { should have_many(:providers).dependent(:restrict) }
 
   context 'should returm owner as first owner' do
     let :primary_owner do

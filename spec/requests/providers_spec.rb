@@ -9,7 +9,7 @@ feature "Providers" do
   scenario 'create a new provider' do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
-    Property.make!(:propriedade_1)
+    EconomicRegistration.make!(:nohup)
     Agency.make!(:itau)
     LegalNature.make!(:administracao_publica)
     Cnae.make!(:aluguel)
@@ -21,7 +21,7 @@ feature "Providers" do
     click_link 'Criar Fornecedor'
 
     within_tab 'Principal'do
-      fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
+      fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
       fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
       fill_in 'Data do cadastramento', :with => '15/02/2012'
       fill_modal 'Banco', :with => 'Itaú'
@@ -45,7 +45,7 @@ feature "Providers" do
 
     within_tab 'Principal'do
       page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
-      page.should have_field 'Cadastro econômico', :with => '123'
+      page.should have_field 'Cadastro econômico', :with => '00001'
       page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
       page.should have_field 'Data do cadastramento', :with => '15/02/2012'
       page.should have_field 'Banco', :with => 'Itaú'
@@ -67,6 +67,7 @@ feature "Providers" do
     Agency.make!(:santander)
     LegalNature.make!(:executivo_federal)
     Cnae.make!(:varejo)
+    EconomicRegistration.make!(:nobe)
 
     click_link 'Contabilidade'
 
@@ -77,7 +78,7 @@ feature "Providers" do
     end
 
     within_tab 'Principal'do
-      fill_modal 'Cadastro econômico', :with => '456', :field => 'Inscrição imobiliária'
+      fill_modal 'Cadastro econômico', :with => '00002', :field => 'Inscrição'
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       fill_in 'Data do cadastramento', :with => '15/02/2013'
       fill_modal 'Banco', :with => 'Santander'
@@ -100,7 +101,7 @@ feature "Providers" do
     end
 
     within_tab 'Principal'do
-      page.should have_field 'Cadastro econômico', :with => '456'
+      page.should have_field 'Cadastro econômico', :with => '00002'
       page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
       page.should have_field 'Data do cadastramento', :with => '15/02/2013'
       page.should have_field 'Banco', :with => 'Santander'
@@ -116,9 +117,8 @@ feature "Providers" do
   end
 
   scenario 'create a new provider with Company person and partners' do
-    Person.make!(:nohup)
     Person.make!(:sobrinho)
-    Property.make!(:propriedade_1)
+    EconomicRegistration.make!(:nohup_office)
     Agency.make!(:itau)
     LegalNature.make!(:administracao_publica)
     Cnae.make!(:aluguel)
@@ -130,7 +130,7 @@ feature "Providers" do
     click_link 'Criar Fornecedor'
 
     within_tab 'Principal'do
-      fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
+      fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
       fill_modal 'Pessoa', :with => 'Nohup'
       fill_in 'Data do cadastramento', :with => '15/02/2012'
       fill_modal 'Banco', :with => 'Itaú'
@@ -161,7 +161,7 @@ feature "Providers" do
     end
 
     within_tab 'Principal'do
-      page.should have_field 'Cadastro econômico', :with => '123'
+      page.should have_field 'Cadastro econômico', :with => '00001'
       page.should have_field 'Pessoa', :with => 'Nohup'
       page.should have_field 'Data do cadastramento', :with => '15/02/2012'
       page.should have_field 'Banco', :with => 'Itaú'
@@ -262,8 +262,8 @@ feature "Providers" do
     end
   end
 
-  scenario 'should fill person as property owner when select property' do
-    Property.make!(:propriedade_1)
+  scenario 'should fill person as economic registration person when select' do
+    EconomicRegistration.make!(:nohup)
 
     click_link 'Contabilidade'
 
@@ -271,15 +271,48 @@ feature "Providers" do
 
     click_link 'Criar Fornecedor'
 
-    fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
+    fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
 
     page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+  end
+
+  scenario 'should clear economic_registration when change person' do
+    EconomicRegistration.make!(:nohup)
+    Person.make!(:sobrinho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    click_link 'Criar Fornecedor'
+
+    fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
+
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+
+    page.should have_field 'Cadastro econômico', :with => ''
+  end
+
+  scenario 'should not clear economic_registration when person is equal' do
+    EconomicRegistration.make!(:nohup)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    click_link 'Criar Fornecedor'
+
+    fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
+
+    fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+
+    page.should have_field 'Cadastro econômico', :with => '00001'
   end
 
   scenario 'ensure the error when duplicated partners is de only error' do
     Person.make!(:nohup)
     Person.make!(:sobrinho)
-    Property.make!(:propriedade_1)
+    EconomicRegistration.make!(:nohup_office)
     Agency.make!(:itau)
     LegalNature.make!(:administracao_publica)
     Cnae.make!(:aluguel)
@@ -291,7 +324,7 @@ feature "Providers" do
     click_link 'Criar Fornecedor'
 
     within_tab 'Principal'do
-      fill_modal 'Cadastro econômico', :with => '123', :field => 'Inscrição imobiliária'
+      fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
       fill_modal 'Pessoa', :with => 'Nohup'
       fill_in 'Data do cadastramento', :with => '15/02/2012'
       fill_modal 'Banco', :with => 'Itaú'

@@ -4,7 +4,6 @@ class Property < ActiveRecord::Base
   attr_modal :property_registration
 
   has_many :owners, :dependent => :restrict
-  has_many :providers, :dependent => :restrict
 
   delegate :id, :to => :owner, :prefix => true, :allow_nil => true
 

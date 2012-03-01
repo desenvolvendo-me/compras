@@ -27,15 +27,8 @@
     }
   });
 
-  $('#provider_property_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#provider_person').val(record.data('owner'));
-      $('#provider_person_id').val(record.data('owner-id'));
-    }
-  }).change();
-
   var bank_id = $('#provider_bank_id').val();
+  var person_id = $('#provider_person_id').val();
 
   $('#provider_bank_id').change(function() {
     if (this.value) {
@@ -46,6 +39,27 @@
     }
 
     clearAgency();
+  }).change();
+
+  $('#provider_person_id').change(function(event, data) {
+    if (data) {
+      var record = data.record;
+      $('#provider_person_id').val()
+      if ($('#provider_person_id').val() != person_id) {
+        $('#provider_economic_registration').val('');
+        $('#provider_economic_registration_id').val('');
+        person_id = record.data('value');
+      }
+    }
+  }).change();
+
+  $('#provider_economic_registration_id').change(function(event, data) {
+    if (data) {
+      var record = data.record;
+      $('#provider_person').val(record.data('person'));
+      $('#provider_person_id').val(record.data('person-id'));
+      person_id = record.data('person-id');
+    }
   }).change();
 
   function agencyModalUrl() {

@@ -5,6 +5,9 @@ class EconomicRegistration < ActiveRecord::Base
 
   belongs_to :person
 
+  orderize :registration
+  filterize
+
   def to_s
     registration
   end
