@@ -34,13 +34,13 @@ class BudgetAllocation < ActiveRecord::Base
 
   def self.filter(options={})
     relation = scoped
-    relation = relation.where { year == options[:year] } if options[:year].present?
-    relation = relation.where { organogram_id == options[:organogram_id] } if options[:organogram_id].present?
-    relation = relation.where { subfunction_id == options[:subfunction_id] } if options[:subfunction_id].present?
-    relation = relation.where { government_program_id == options[:government_program_id] } if options[:government_program_id].present?
-    relation = relation.where { government_action_id == options[:government_action_id] } if options[:government_action_id].present?
-    relation = relation.where { expense_economic_classification_id == options[:expense_economic_classification_id] } if options[:expense_economic_classification_id].present?
-    relation = relation.joins(:subfunction).where { subfunctions.function_id == options[:function_id] } if options[:function_id].present?
+    relation = relation.where { year.eq(options[:year]) } if options[:year].present?
+    relation = relation.where { organogram_id.eq(options[:organogram_id]) } if options[:organogram_id].present?
+    relation = relation.where { subfunction_id.eq(options[:subfunction_id]) } if options[:subfunction_id].present?
+    relation = relation.where { government_program_id.eq(options[:government_program_id]) } if options[:government_program_id].present?
+    relation = relation.where { government_action_id.eq(options[:government_action_id]) } if options[:government_action_id].present?
+    relation = relation.where { expense_economic_classification_id.eq(options[:expense_economic_classification_id]) } if options[:expense_economic_classification_id].present?
+    relation = relation.joins(:subfunction).where { subfunctions.function_id.eq(options[:function_id]) } if options[:function_id].present?
     relation
   end
 
