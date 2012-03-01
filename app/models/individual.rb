@@ -23,10 +23,8 @@ class Individual < ActiveRecord::Base
   validates :cpf, :cpf => true, :mask => '999.999.999-99', :uniqueness => true, :allow_blank => true
   validates :birthdate, :timeliness => { :before => :today, :type => :date }, :allow_blank => true
 
+  delegate :to_s, :to => :person, :allow_nil => true
+
   filterize
   orderize :birthdate
-
-  def to_s
-    person.name
-  end
 end

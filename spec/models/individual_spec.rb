@@ -6,7 +6,7 @@ require 'app/models/individual'
 require 'app/models/identity'
 
 describe Individual do
-  it "return name when converted to string" do
+  it "delegate to person to_s method" do
     subject.build_person
     subject.person.name = 'Gabriel Sobrinho'
     subject.person.name.should eq subject.to_s
