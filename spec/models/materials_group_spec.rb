@@ -11,6 +11,7 @@ describe MaterialsGroup do
   end
 
   it { should have_many(:materials_classes).dependent(:restrict) }
+  it { should have_and_belong_to_many :providers }
 
   it { should validate_presence_of :group_number }
   it { should validate_numericality_of :group_number }

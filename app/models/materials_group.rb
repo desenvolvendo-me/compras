@@ -3,6 +3,8 @@ class MaterialsGroup < ActiveRecord::Base
 
   attr_modal :group_number, :description
 
+  has_and_belongs_to_many :providers
+
   has_many :materials_classes, :dependent => :restrict
 
   validates :description, :group_number, :presence => true, :uniqueness => true

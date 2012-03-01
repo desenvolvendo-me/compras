@@ -13,6 +13,7 @@ feature "Providers" do
     Agency.make!(:itau)
     LegalNature.make!(:administracao_publica)
     Cnae.make!(:aluguel)
+    MaterialsGroup.make!(:alimenticios)
 
     click_link 'Contabilidade'
 
@@ -33,6 +34,10 @@ feature "Providers" do
       fill_in 'Data da renovação', :with => '28/02/2012'
       fill_modal 'Natureza jurídica', :with => 'Administração Pública'
       fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      fill_modal 'Grupo de materiais', :with => 'Generos alimenticios', :field => 'Descrição'
     end
 
     click_button 'Criar Fornecedor'
@@ -58,6 +63,10 @@ feature "Providers" do
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
       page.should have_field 'CNAE', :with => 'Aluguel de outras máquinas'
     end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should have_content 'Generos alimenticios'
+    end
   end
 
   scenario 'update an existent provider' do
@@ -68,6 +77,7 @@ feature "Providers" do
     LegalNature.make!(:executivo_federal)
     Cnae.make!(:varejo)
     EconomicRegistration.make!(:nobe)
+    MaterialsGroup.make!(:limpeza)
 
     click_link 'Contabilidade'
 
@@ -92,6 +102,10 @@ feature "Providers" do
       fill_modal 'CNAE', :with => 'Comércio varejista de mercadorias em geral', :field => 'Descrição'
     end
 
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      fill_modal 'Grupo de materiais', :with => 'Limpeza', :field => 'Descrição'
+    end
+
     click_button 'Atualizar Fornecedor'
 
     page.should have_notice 'Fornecedor editado com sucesso.'
@@ -113,6 +127,10 @@ feature "Providers" do
       page.should have_field 'Data da renovação', :with => '28/02/2013'
       page.should have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
       page.should have_field 'CNAE', :with => 'Comércio varejista de mercadorias em geral'
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should have_content 'Limpeza'
     end
   end
 
@@ -385,6 +403,35 @@ feature "Providers" do
 
     within_tab 'Sócios/Responsáveis pela empresa' do
       page.should_not have_content 'Foi selecionada uma pessoa física na aba "Principal". Não é necessário cadastrar sócios.'
+    end
+  end
+
+  scenario 'remove materials group from an existent provider' do
+    Provider.make!(:wenderson_sa)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should have_content 'Generos alimenticios'
+      click_button 'Remover grupo'
+    end
+
+    click_button 'Atualizar Fornecedor'
+
+    page.should have_notice 'Fornecedor editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should_not have_content 'Generos alimenticios'
     end
   end
 end

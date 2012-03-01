@@ -1,13 +1,15 @@
 class Provider < ActiveRecord::Base
   attr_accessible :person_id, :agency_id, :legal_nature_id, :cnae_id, :registration_date
   attr_accessible :bank_account, :crc_number, :crc_registration_date, :crc_expiration_date, :crc_renewal_date
-  attr_accessible :provider_partners_attributes, :economic_registration_id
+  attr_accessible :provider_partners_attributes, :economic_registration_id, :materials_group_ids
 
   belongs_to :person
   belongs_to :economic_registration
   belongs_to :agency
   belongs_to :legal_nature
   belongs_to :cnae
+
+  has_and_belongs_to_many :materials_groups
 
   has_many :provider_partners, :dependent => :destroy
 

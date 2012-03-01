@@ -1,0 +1,34 @@
+<div class="yui3-g modal-finder">
+  <div class="yui3-u-1-2">
+    <%= f.association :materials_groups, :as => :modal, :hidden_field => false, :input_html => { :value => nil } %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[materials_group_ids][]" />
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= MaterialsGroup.human_attribute_name :group_number %>
+      </th>
+      <th>
+        <%= MaterialsGroup.human_attribute_name :description %>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_materials_groups_records">
+    <% f.object.materials_groups.each do |materials_group| %>
+      <%= render 'materials_groups/list_form', :description => materials_group.description, :id => materials_group.id, :group_number => materials_group.group_number, :f => f %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_materials_groups_template" do %>
+  <%= f.association :materials_groups, :collection => f.object.materials_groups.build do |p| %>
+    <%= render 'materials_groups/list_form', :group_number => '{{number}}', :description => '{{description}}', :id => '{{id}}', :f => f %>
+  <% end %>
+<% end %>
