@@ -4,6 +4,7 @@ require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/reserve_fund'
+require 'app/models/pledge'
 
 describe BudgetAllocation do
   it 'should return description as to_s id/year' do
