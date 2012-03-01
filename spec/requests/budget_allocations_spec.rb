@@ -100,7 +100,6 @@ feature "BudgetAllocations" do
     fill_modal 'Tipo de dotação', :with => 'Dotação Presidencial', :field => 'Descrição'
     uncheck 'Refinanciamento'
     check 'Saúde'
-    fill_in 'Data', :with => '01/02/2012'
     fill_in 'Valor', :with => '800,00'
 
     click_button 'Atualizar Dotação Orçamentária'
@@ -128,7 +127,6 @@ feature "BudgetAllocations" do
     page.should_not have_checked_field 'Educação'
     page.should_not have_checked_field 'Previdência'
     page.should_not have_checked_field 'Pessoal'
-    page.should have_field 'Data', :with => '01/02/2012'
     page.should have_field 'Valor', :with => '800,00'
   end
 
@@ -199,6 +197,18 @@ feature "BudgetAllocations" do
     fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
 
     page.should have_field 'Subfunção', :with => ''
+  end
+
+  it 'should have date disabled when editing budget_allocation' do
+    BudgetAllocation.make!(:alocacao)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentárias'
+
+    click_link 'Alocação'
+
+    page.should have_disabled_field 'Data'
   end
 
   scenario 'destroy an existent budget_allocation' do
