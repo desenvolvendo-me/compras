@@ -14,4 +14,5 @@ Provider.blueprint(:wenderson_sa) do
   materials_groups { [MaterialsGroup.make!(:alimenticios)] }
   materials_classes { [MaterialsClass.make!(:hortifrutigranjeiros)] }
   materials { [Material.make!(:cadeira)] }
+  provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
 end

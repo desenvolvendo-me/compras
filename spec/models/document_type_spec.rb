@@ -12,4 +12,6 @@ describe DocumentType do
   it { should validate_presence_of :validity }
   it { should validate_numericality_of :validity }
   it { should validate_presence_of :description }
+
+  it { should have_many(:provider_licitation_documents).dependent(:restrict) }
 end

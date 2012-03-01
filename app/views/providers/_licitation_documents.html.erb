@@ -1,0 +1,26 @@
+<div id="provider-licitation-documents">
+  <%= f.association :provider_licitation_documents, :collection => localized(f.object.provider_licitation_documents) do |p| %>
+    <%= render 'provider_licitation_documents/form', :f => p %>
+  <% end %>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-provider-licitation-document" value="Adicionar">
+</p>
+
+<%= mustache 'provider-licitation-documents-template' do %>
+  <%= f.association :provider_licitation_documents_attributes, :collection => f.object.provider_licitation_documents.build, :index => '{{uuid_provider_licitation_document}}' do |p| %>
+    <%= render 'provider_licitation_documents/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#provider-licitation-documents-template").nestedForm({
+    add: '.add-provider-licitation-document',
+    remove: '.remove-provider-licitation-document',
+    target: '#provider-licitation-documents',
+    uuid: 'uuid_provider_licitation_document',
+    fieldToRemove: '.provider-licitation-document',
+    right: true
+  });
+</script>

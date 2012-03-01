@@ -16,6 +16,7 @@ feature "Providers" do
     MaterialsGroup.make!(:alimenticios)
     MaterialsClass.make!(:hortifrutigranjeiros)
     Material.make!(:cadeira)
+    DocumentType.make!(:fiscal)
 
     click_link 'Contabilidade'
 
@@ -42,6 +43,15 @@ feature "Providers" do
       fill_modal 'Grupo de materiais', :with => 'Generos alimenticios', :field => 'Descrição'
       fill_modal 'Classe de materiais', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
       fill_modal 'Material', :with => 'Cadeira', :field => 'Descrição'
+    end
+
+    within_tab 'Documentação para licitações' do
+      click_button 'Adicionar'
+
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+      fill_in 'Número do documento', :with => '123456'
+      fill_in 'Data de emissão', :with => '22/02/2012'
+      fill_in 'Data de validade', :with => '22/03/2012'
     end
 
     click_button 'Criar Fornecedor'
@@ -73,6 +83,13 @@ feature "Providers" do
       page.should have_content 'Hortifrutigranjeiros'
       page.should have_content 'Cadeira'
     end
+
+    within_tab 'Documentação para licitações' do
+      page.should have_field 'Tipo de documento', :with => 'Fiscal'
+      page.should have_field 'Número do documento', :with => '123456'
+      page.should have_field 'Data de emissão', :with => '22/02/2012'
+      page.should have_field 'Data de validade', :with => '22/03/2012'
+    end
   end
 
   scenario 'update an existent provider' do
@@ -86,6 +103,7 @@ feature "Providers" do
     MaterialsGroup.make!(:limpeza)
     MaterialsClass.make!(:pecas)
     Material.make!(:balde)
+    DocumentType.make!(:oficial)
 
     click_link 'Contabilidade'
 
@@ -116,6 +134,13 @@ feature "Providers" do
       fill_modal 'Material', :with => 'Balde', :field => 'Descrição'
     end
 
+    within_tab 'Documentação para licitações' do
+      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+      fill_in 'Número do documento', :with => '2222222'
+      fill_in 'Data de emissão', :with => '22/02/2013'
+      fill_in 'Data de validade', :with => '22/03/2013'
+    end
+
     click_button 'Atualizar Fornecedor'
 
     page.should have_notice 'Fornecedor editado com sucesso.'
@@ -143,6 +168,13 @@ feature "Providers" do
       page.should have_content 'Limpeza'
       page.should have_content 'Peças'
       page.should have_content 'Balde'
+    end
+
+    within_tab 'Documentação para licitações' do
+      page.should have_field 'Tipo de documento', :with => 'Oficial'
+      page.should have_field 'Número do documento', :with => '2222222'
+      page.should have_field 'Data de emissão', :with => '22/02/2013'
+      page.should have_field 'Data de validade', :with => '22/03/2013'
     end
   end
 
@@ -502,6 +534,42 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should_not have_content 'Cadeira'
+    end
+  end
+
+  scenario 'remove licitation document from an existent provider' do
+    Provider.make!(:wenderson_sa)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Documentação para licitações' do
+      page.should have_field 'Tipo de documento', :with => 'Fiscal'
+      page.should have_field 'Número do documento', :with => '123456'
+      page.should have_field 'Data de emissão', :with => '22/02/2012'
+      page.should have_field 'Data de validade', :with => '22/03/2012'
+
+      click_button 'Remover'
+    end
+
+    click_button 'Atualizar Fornecedor'
+
+    page.should have_notice 'Fornecedor editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Documentação para licitações' do
+      page.should_not have_field 'Tipo de documento', :with => 'Fiscal'
+      page.should_not have_field 'Número do documento', :with => '123456'
+      page.should_not have_field 'Data de emissão', :with => '22/02/2012'
+      page.should_not have_field 'Data de validade', :with => '22/03/2012'
     end
   end
 end
