@@ -5,13 +5,14 @@ class AdministrationType < ActiveRecord::Base
   has_enumeration_for :organ_type, :create_helpers => true
 
   belongs_to :legal_nature
-  has_many :organograms, :dependent => :restrict
 
-  orderize :description
-  filterize
+  has_many :organograms, :dependent => :restrict
 
   validates :administration, :organ_type, :legal_nature, :presence => true
   validates :description, :presence => true, :uniqueness => true
+
+  orderize :description
+  filterize
 
   def to_s
     description

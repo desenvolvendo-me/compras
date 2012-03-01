@@ -6,6 +6,7 @@ class Capability < ActiveRecord::Base
   has_enumeration_for :source, :create_helpers => true
 
   belongs_to :entity
+
   has_many :budget_allocations, :dependent => :restrict
 
   validates :year, :mask => '9999'

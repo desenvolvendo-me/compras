@@ -8,15 +8,16 @@ class Condominium < ActiveRecord::Base
   attr_modal :quantity_elevators, :quantity_rooms, :quantity_floors
 
   belongs_to :condominium_type
-  has_one :address, :as => :addressable, :dependent => :destroy
 
-  accepts_nested_attributes_for :address
+  has_one :address, :as => :addressable, :dependent => :destroy
 
   validates :name, :built_area, :area_common_user, :construction_year, :condominium_type, :presence => true
   validates :construction_year, :numericality => true
 
   filterize
   orderize
+
+  accepts_nested_attributes_for :address
 
   def to_s
     name.to_s

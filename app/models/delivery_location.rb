@@ -4,15 +4,16 @@ class DeliveryLocation < ActiveRecord::Base
   attr_modal :description
 
   belongs_to :address
-  has_many :purchase_solicitations, :dependent => :restrict
 
-  accepts_nested_attributes_for :address
+  has_many :purchase_solicitations, :dependent => :restrict
 
   validates :address, :description, :presence => true
   validates :description, :uniqueness => true
 
   orderize :description
   filterize
+
+  accepts_nested_attributes_for :address
 
   def to_s
     description

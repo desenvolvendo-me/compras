@@ -5,6 +5,7 @@ class Agency < ActiveRecord::Base
 
   belongs_to :city
   belongs_to :bank
+
   has_many :bank_accounts, :dependent => :restrict
   has_many :providers, :dependent => :restrict
 
@@ -12,10 +13,10 @@ class Agency < ActiveRecord::Base
   validates :email, :mail => true, :allow_blank => true
   validates :phone, :fax, :mask => "(99) 9999-9999", :allow_blank => true, :allow_nil => true
 
-  scope :bank_id, lambda { |bank_id| where(:bank_id => bank_id) }
-
   filterize
   orderize
+
+  scope :bank_id, lambda { |bank_id| where(:bank_id => bank_id) }
 
   def to_s
     name

@@ -4,6 +4,7 @@ class City < ActiveRecord::Base
   attr_modal :name, :state_id
 
   belongs_to :state
+
   has_many :agencies, :dependent => :restrict
   has_many :neighborhoods, :dependent => :restrict
   has_many :districts, :dependent => :restrict
