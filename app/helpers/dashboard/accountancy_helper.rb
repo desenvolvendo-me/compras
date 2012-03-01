@@ -11,7 +11,6 @@ module Dashboard::AccountancyHelper
       m.organogram_configurations
       m.founded_debt_contracts
       m.creditors
-      m.document_types
       m.budget_allocations
       m.functions
       m.legal_text_natures
@@ -24,6 +23,7 @@ module Dashboard::AccountancyHelper
       m.subfunctions
       m.administractive_act_types
       m.administration_types
+      m.document_types
       m.budget_allocation_types
       m.reserve_allocation_types
       m.management_contracts
