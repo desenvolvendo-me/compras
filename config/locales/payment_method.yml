@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      payment_method:
+        one: "Forma de Pagamento"
+        other: "Formas de Pagamento"
+
+    attributes:
+      payment_method:
+        description: "Descrição"

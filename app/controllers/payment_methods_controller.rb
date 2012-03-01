@@ -1,0 +1,2 @@
+class PaymentMethodsController < CrudController
+end

@@ -29,6 +29,7 @@ module Dashboard::AccountancyHelper
       m.management_contracts
       m.management_units
       m.government_actions
+      m.payment_methods
       m.pledge_categories
       m.pledge_historics
       m.pledges

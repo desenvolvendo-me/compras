@@ -76,6 +76,9 @@ pt-BR:
     management_units:
       <<: *female
 
+    payment_methods:
+      <<: *female
+
     parcels:
       <<: *female
 
