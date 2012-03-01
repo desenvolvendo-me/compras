@@ -15,6 +15,8 @@ class Material < ActiveRecord::Base
   belongs_to :service_or_contract_type
   belongs_to :expense_economic_classification
 
+  has_and_belongs_to_many :providers
+
   has_many :purchase_solicitation_items, :dependent => :restrict
   has_many :pledge_items, :dependent => :restrict
 

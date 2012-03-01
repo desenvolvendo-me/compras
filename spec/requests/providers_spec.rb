@@ -15,6 +15,7 @@ feature "Providers" do
     Cnae.make!(:aluguel)
     MaterialsGroup.make!(:alimenticios)
     MaterialsClass.make!(:hortifrutigranjeiros)
+    Material.make!(:cadeira)
 
     click_link 'Contabilidade'
 
@@ -40,6 +41,7 @@ feature "Providers" do
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       fill_modal 'Grupo de materiais', :with => 'Generos alimenticios', :field => 'Descrição'
       fill_modal 'Classe de materiais', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
+      fill_modal 'Material', :with => 'Cadeira', :field => 'Descrição'
     end
 
     click_button 'Criar Fornecedor'
@@ -69,6 +71,7 @@ feature "Providers" do
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should have_content 'Generos alimenticios'
       page.should have_content 'Hortifrutigranjeiros'
+      page.should have_content 'Cadeira'
     end
   end
 
@@ -82,6 +85,7 @@ feature "Providers" do
     EconomicRegistration.make!(:nobe)
     MaterialsGroup.make!(:limpeza)
     MaterialsClass.make!(:pecas)
+    Material.make!(:balde)
 
     click_link 'Contabilidade'
 
@@ -109,6 +113,7 @@ feature "Providers" do
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       fill_modal 'Grupo de materiais', :with => 'Limpeza', :field => 'Descrição'
       fill_modal 'Classe de materiais', :with => 'Peças', :field => 'Descrição'
+      fill_modal 'Material', :with => 'Balde', :field => 'Descrição'
     end
 
     click_button 'Atualizar Fornecedor'
@@ -137,6 +142,7 @@ feature "Providers" do
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should have_content 'Limpeza'
       page.should have_content 'Peças'
+      page.should have_content 'Balde'
     end
   end
 
@@ -467,6 +473,35 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should_not have_content 'Hortifrutigranjeiros'
+    end
+  end
+
+  scenario 'remove material from an existent provider' do
+    Provider.make!(:wenderson_sa)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should have_content 'Cadeira'
+      click_button 'Remover material'
+    end
+
+    click_button 'Atualizar Fornecedor'
+
+    page.should have_notice 'Fornecedor editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Grupos/Classes/Materiais fornecidos' do
+      page.should_not have_content 'Cadeira'
     end
   end
 end

@@ -13,4 +13,5 @@ Provider.blueprint(:wenderson_sa) do
   provider_partners { [ProviderPartner.make!(:sobrinho)] }
   materials_groups { [MaterialsGroup.make!(:alimenticios)] }
   materials_classes { [MaterialsClass.make!(:hortifrutigranjeiros)] }
+  materials { [Material.make!(:cadeira)] }
 end

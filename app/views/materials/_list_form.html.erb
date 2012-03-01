@@ -1,0 +1,12 @@
+<tr class="record">
+  <td>
+    <%= code %>
+  </td>
+  <td>
+    <%= description %>
+  </td>
+  <td>
+    <input id="provider_materials_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[material_ids][]" value="<%= id %>" />
+    <button class="button negative modal-finder-remove">Remover material</button>
+  </td>
+</tr>
