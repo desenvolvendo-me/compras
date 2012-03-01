@@ -29,4 +29,19 @@ describe BudgetAllocation do
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
+
+  context 'validating date' do
+    before(:each) do
+      BudgetAllocation.stub(:last).and_return(double(:date => Date.new(2011, 12, 31)))
+      BudgetAllocation.stub(:any?).and_return(true)
+    end
+
+    it 'should be valid when budget allocation is equal to last' do
+      subject.should allow_value('2011-12-31').for(:date)
+    end
+
+    it 'should not be valid when budget allocation is greather than last' do
+      subject.should_not allow_value('2011-12-21').for(:date).with_message("deve ser maior ou igual a data da última dotação (31/12/2011)")
+    end
+  end
 end

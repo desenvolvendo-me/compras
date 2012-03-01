@@ -31,6 +31,12 @@ class BudgetAllocation < ActiveRecord::Base
   validates :description, :presence => true, :uniqueness => true
   validates :year, :mask => '9999'
 
+  validates :date, :timeliness => {
+    :on_or_after => lambda { last.date },
+    :on_or_after_message => :must_be_greather_or_equal_to_last_date,
+    :type => :date
+  }, :allow_blank => true, :if => :any_budget_allocation?
+
   orderize :description
   filterize
 
@@ -48,5 +54,11 @@ class BudgetAllocation < ActiveRecord::Base
 
   def to_s
     "#{id}/#{year}"
+  end
+
+  private
+
+  def any_budget_allocation?
+    self.class.any?
   end
 end

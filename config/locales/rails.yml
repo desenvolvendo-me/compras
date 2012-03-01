@@ -203,6 +203,7 @@ pt-BR:
       should_not_be_less_than_initial_value: "não pode ser menor que o valor inicial"
       initial_and_final_value_range_taken: "esta combinação de valor inicial e valor final já está em uso"
       should_not_be_greater_than_pledge_value: "não pode ser superior ao valor do empenho"
+      must_be_greather_or_equal_to_last_date: "deve ser maior ou igual a data da última dotação (%{restriction})"
 
   activerecord:
     errors:
