@@ -12,6 +12,7 @@ module Dashboard::AccountancyHelper
       m.founded_debt_contracts
       m.creditors
       m.budget_allocations
+      m.payment_methods
       m.functions
       m.legal_text_natures
       m.legal_references
@@ -29,7 +30,6 @@ module Dashboard::AccountancyHelper
       m.management_contracts
       m.management_units
       m.government_actions
-      m.payment_methods
       m.pledge_categories
       m.pledge_historics
       m.pledges
