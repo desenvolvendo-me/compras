@@ -7,7 +7,8 @@ class ManagementContract < ActiveRecord::Base
 
   has_many :pledges, :dependent => :restrict
 
-  validates :year, :entity, :contract_number, :process_number, :signature_date, :end_date, :description, :presence => true
+  validates :year, :entity, :contract_number, :process_number, :presence => true
+  validates :signature_date, :end_date, :description, :presence => true
   validates :year, :mask => "9999"
 
   orderize :contract_number

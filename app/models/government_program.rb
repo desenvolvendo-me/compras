@@ -10,8 +10,8 @@ class GovernmentProgram < ActiveRecord::Base
   validates :entity, :year, :description, :status, :presence => true
   validates :year, :mask => '9999'
 
-  filterize
   orderize :description
+  filterize
 
   def to_s
     description

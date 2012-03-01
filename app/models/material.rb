@@ -32,15 +32,15 @@ class Material < ActiveRecord::Base
   orderize :description
   filterize
 
-  def to_s
-    "#{code} - #{description}"
-  end
-
   def self.last_by_materials_class_and_group(params = {})
     record = scoped
     record = record.where { materials_class_id.eq(params.fetch(:materials_class_id)) }
     record = record.order { code }.last
     record
+  end
+
+  def to_s
+    "#{code} - #{description}"
   end
 
   protected

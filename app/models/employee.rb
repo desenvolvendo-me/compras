@@ -5,16 +5,16 @@ class Employee < ActiveRecord::Base
   belongs_to :position
 
   has_one :user
+
   has_many :purchase_solicitations, :as => :responsible
   has_many :organogram_responsibles, :as => :responsible
 
-  delegate :to_s, :to => :person
-  delegate :name, :to => :person
+  delegate :to_s, :name, :to => :person
 
   validates :person_id, :registration, :uniqueness => true
   validates :person, :registration, :position, :presence => true
 
   filterize
 
-  scope :ordered, joins { person }.order(:person => :name)
+  scope :ordered, joins { person }.order { person.name }
 end
