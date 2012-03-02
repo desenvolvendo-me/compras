@@ -63,7 +63,7 @@
         person_id = record.data('value');
       }
     }
-  }).change();
+  });
 
   $('#provider_economic_registration_id').change(function(event, data) {
     if (data) {
@@ -72,7 +72,7 @@
       $('#provider_person_id').val(record.data('person-id'));
       person_id = record.data('person-id');
     }
-  }).change();
+  });
 
   function agencyModalUrl() {
     var url = "<%= modal_agencies_path %>?",
