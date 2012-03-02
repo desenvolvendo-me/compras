@@ -14,6 +14,7 @@ module Dashboard::AccountancyHelper
       m.budget_allocations
       m.payment_methods
       m.functions
+      m.modality_limits
       m.legal_text_natures
       m.legal_references
       m.organograms

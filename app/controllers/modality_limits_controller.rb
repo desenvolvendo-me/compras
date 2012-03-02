@@ -1,0 +1,2 @@
+class ModalityLimitsController < CrudController
+end

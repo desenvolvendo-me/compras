@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      modality_limit:
+        one: "Limite por Modalidade"
+        other: "Limites por Modalidade"
+
+    attributes:
+      modality_limit:
+        validity_beginning: "Início da validade"
+        ordinance_number: "Número da portaria"
+        published_date: "Data de publicação"
+        without_bidding: "Dispensa de licitação"
+        invitation_letter: "Carta convite"
+        taken_price: "Tomada de preço"
+        public_competition: "Concorrência pública"
+        work_without_bidding: "Dispensa de licitação"
+        work_invitation_letter: "Carta convite"
+        work_taken_price: "Tomada de preço"
+        work_public_competition: "Concorrência pública"

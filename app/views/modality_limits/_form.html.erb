@@ -1,0 +1,26 @@
+<%= f.input :validity_beginning %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :ordinance_number %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :published_date %>
+  </div>
+</div>
+
+<fieldset>
+  <legend>Compras e serviços</legend>
+  <%= f.input :without_bidding %>
+  <%= f.input :invitation_letter %>
+  <%= f.input :taken_price %>
+  <%= f.input :public_competition %>
+</fieldset>
+
+<fieldset>
+  <legend>Obras e serviços de engenharia</legend>
+  <%= f.input :work_without_bidding %>
+  <%= f.input :work_invitation_letter %>
+  <%= f.input :work_taken_price %>
+  <%= f.input :work_public_competition %>
+</fieldset>
