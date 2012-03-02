@@ -25,11 +25,11 @@
     var options = $.extend({}, defaults, options);
 
     var displayFirstLabels = function() {
-      $('.nested label').hide();
-      $('.nested label').closest('.nested').find('.nested-remove').css('padding-top', '4px');
+      $(options.target + ' .nested label').hide();
+      $(options.target + ' .nested label').closest('.nested').find('.nested-remove').css('padding-top', '4px');
 
-      $(".nested:visible:first label").show();
-      $(".nested:visible:first .nested-remove").css('padding-top', '30px');
+      $(options.target + " .nested:visible:first label").show();
+      $(options.target + " .nested:visible:first .nested-remove").css('padding-top', '30px');
     }
 
     $('body').delegate(options.add, 'click', function () {
@@ -50,5 +50,9 @@
         displayFirstLabels();
       }
     });
+
+    if (options.right) {
+      displayFirstLabels();
+    }
   };
 })(jQuery);
