@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_object:
+        one: "Objeto de Licitação"
+        other: "Objetos de Licitação"
+
+    attributes:
+      licitation_object:
+        description: "Descrição"
+        year: "Ano"
+        purchase_licitation_exemption: "Dispensa de licitação"
+        purchase_invitation_letter: "Carta convite"
+        purchase_taking_price: "Tomada de preço"
+        purchase_public_concurrency: "Concorrencia pública"
+        build_licitation_exemption: "Dispensa de licitação"
+        build_invitation_letter: "Carta convite"
+        build_taking_price: "Tomada de preço"
+        build_public_concurrency: "Concorrencia pública"
+        special_auction: "Leilão"
+        special_unenforceability: "Inexigibilidade"
+        special_contest: "Concurso"

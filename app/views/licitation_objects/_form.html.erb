@@ -1,0 +1,45 @@
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Principal</a></li>
+    <li><a href="#purchase">Total acumulado de compras e serviços</a></li>
+    <li><a href="#build">Total acumulado de obras e engenharia</a></li>
+    <li><a href="#special">Total acumulado de modalidades especiais</a></li>
+  </ul>
+
+  <div id="general">
+    <%= f.input :description %>
+    <%= f.input :year %>
+  </div>
+
+  <div id="purchase">
+    <%= f.input :purchase_licitation_exemption %>
+    <%= f.input :purchase_invitation_letter %>
+    <%= f.input :purchase_taking_price %>
+    <%= f.input :purchase_public_concurrency %>
+  </div>
+
+  <div id="build">
+    <%= f.input :build_licitation_exemption %>
+    <%= f.input :build_invitation_letter %>
+    <%= f.input :build_taking_price %>
+    <%= f.input :build_public_concurrency %>
+  </div>
+
+  <div id="special">
+    <%= f.input :special_auction %>
+    <%= f.input :special_unenforceability %>
+    <%= f.input :special_contest %>
+  </div>
+</div>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+</script>

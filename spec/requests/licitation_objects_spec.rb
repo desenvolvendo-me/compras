@@ -1,0 +1,176 @@
+# encoding: utf-8
+require 'spec_helper'
+
+feature "LicitationObjects" do
+  background do
+    sign_in
+  end
+
+  scenario 'create a new licitation_object' do
+    click_link 'Contabilidade'
+
+    click_link 'Objetos de Licitação'
+
+    click_link 'Criar Objeto de Licitação'
+
+    within_tab 'Principal' do
+      fill_in 'Descrição', :with => 'Ponte'
+      fill_in 'Ano', :with => '2012'
+    end
+
+    within_tab 'Total acumulado de compras e serviços' do
+      fill_in 'Dispensa de licitação', :with => '1,99'
+      fill_in 'Carta convite', :with => '2,99'
+      fill_in 'Tomada de preço', :with => '3,99'
+      fill_in 'Concorrencia pública', :with => '4,99'
+    end
+
+    within_tab 'Total acumulado de obras e engenharia' do
+      fill_in 'Dispensa de licitação', :with => '5,99'
+      fill_in 'Carta convite', :with => '6,99'
+      fill_in 'Tomada de preço', :with => '7,99'
+      fill_in 'Concorrencia pública', :with => '8,99'
+    end
+
+    within_tab 'Total acumulado de modalidades especiais' do
+      fill_in 'Leilão', :with => '9,99'
+      fill_in 'Inexigibilidade', :with => '10,99'
+      fill_in 'Concurso', :with => '11,99'
+    end
+
+    click_button 'Criar Objeto de Licitação'
+
+    page.should have_notice 'Objeto de Licitação criado com sucesso.'
+
+    click_link 'Ponte'
+
+    within_tab 'Principal' do
+      page.should have_field 'Descrição', :with => 'Ponte'
+      page.should have_field 'Ano', :with => '2012'
+    end
+
+    within_tab 'Total acumulado de compras e serviços' do
+      page.should have_field 'Dispensa de licitação', :with => '1,99'
+      page.should have_field 'Carta convite', :with => '2,99'
+      page.should have_field 'Tomada de preço', :with => '3,99'
+      page.should have_field 'Concorrencia pública', :with => '4,99'
+    end
+
+    within_tab 'Total acumulado de obras e engenharia' do
+      page.should have_field 'Dispensa de licitação', :with => '5,99'
+      page.should have_field 'Carta convite', :with => '6,99'
+      page.should have_field 'Tomada de preço', :with => '7,99'
+      page.should have_field 'Concorrencia pública', :with => '8,99'
+    end
+
+    within_tab 'Total acumulado de modalidades especiais' do
+      page.should have_field 'Leilão', :with => '9,99'
+      page.should have_field 'Inexigibilidade', :with => '10,99'
+      page.should have_field 'Concurso', :with => '11,99'
+    end
+  end
+
+  scenario 'update an existent licitation_object' do
+    LicitationObject.make!(:ponte)
+
+    click_link 'Contabilidade'
+
+    click_link 'Objetos de Licitação'
+
+    click_link 'Ponte'
+
+    within_tab 'Principal' do
+      fill_in 'Descrição', :with => 'Viaduto'
+      fill_in 'Ano', :with => '2013'
+    end
+
+    within_tab 'Total acumulado de compras e serviços' do
+      fill_in 'Dispensa de licitação', :with => '11,99'
+      fill_in 'Carta convite', :with => '12,99'
+      fill_in 'Tomada de preço', :with => '13,99'
+      fill_in 'Concorrencia pública', :with => '14,99'
+    end
+
+    within_tab 'Total acumulado de obras e engenharia' do
+      fill_in 'Dispensa de licitação', :with => '15,99'
+      fill_in 'Carta convite', :with => '16,99'
+      fill_in 'Tomada de preço', :with => '17,99'
+      fill_in 'Concorrencia pública', :with => '18,99'
+    end
+
+    within_tab 'Total acumulado de modalidades especiais' do
+      fill_in 'Leilão', :with => '19,99'
+      fill_in 'Inexigibilidade', :with => '20,99'
+      fill_in 'Concurso', :with => '21,99'
+    end
+
+    click_button 'Atualizar Objeto de Licitação'
+
+    page.should have_notice 'Objeto de Licitação editado com sucesso.'
+
+    click_link 'Viaduto'
+
+    within_tab 'Principal' do
+      page.should have_field 'Descrição', :with => 'Viaduto'
+      page.should have_field 'Ano', :with => '2013'
+    end
+
+    within_tab 'Total acumulado de compras e serviços' do
+      page.should have_field 'Dispensa de licitação', :with => '11,99'
+      page.should have_field 'Carta convite', :with => '12,99'
+      page.should have_field 'Tomada de preço', :with => '13,99'
+      page.should have_field 'Concorrencia pública', :with => '14,99'
+    end
+
+    within_tab 'Total acumulado de obras e engenharia' do
+      page.should have_field 'Dispensa de licitação', :with => '15,99'
+      page.should have_field 'Carta convite', :with => '16,99'
+      page.should have_field 'Tomada de preço', :with => '17,99'
+      page.should have_field 'Concorrencia pública', :with => '18,99'
+    end
+
+    within_tab 'Total acumulado de modalidades especiais' do
+      page.should have_field 'Leilão', :with => '19,99'
+      page.should have_field 'Inexigibilidade', :with => '20,99'
+      page.should have_field 'Concurso', :with => '21,99'
+    end
+  end
+
+  scenario 'destroy an existent licitation_object' do
+    LicitationObject.make!(:ponte)
+
+    click_link 'Contabilidade'
+
+    click_link 'Objetos de Licitação'
+
+    click_link 'Ponte'
+
+    click_link 'Apagar Ponte', :confirm => true
+
+    page.should have_notice 'Objeto de Licitação apagado com sucesso.'
+
+    page.should_not have_content 'Ponte'
+    page.should_not have_content '2012'
+  end
+
+  scenario 'validate uniqueness of description and year together' do
+    LicitationObject.make!(:ponte)
+
+    click_link 'Contabilidade'
+
+    click_link 'Objetos de Licitação'
+
+    click_link 'Criar Objeto de Licitação'
+
+    within_tab 'Principal' do
+      fill_in 'Descrição', :with => 'Ponte'
+      fill_in 'Ano', :with => '2012'
+    end
+
+    click_button 'Criar Objeto de Licitação'
+
+    within_tab 'Principal' do
+      page.should have_content 'já existe para o ano informado'
+    end
+  end
+end

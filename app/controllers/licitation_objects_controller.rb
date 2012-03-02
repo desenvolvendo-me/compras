@@ -1,0 +1,2 @@
+class LicitationObjectsController < CrudController
+end
