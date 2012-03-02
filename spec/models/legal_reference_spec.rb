@@ -16,4 +16,6 @@ describe LegalReference do
   it { should validate_numericality_of :law }
   it { should validate_numericality_of :article }
   it { should validate_numericality_of :paragraph }
+
+  it { should have_many(:direct_purchases).dependent(:restrict) }
 end

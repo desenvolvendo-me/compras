@@ -43,6 +43,9 @@ pt-BR:
     currencies:
       <<: *female
 
+    direct_purchases:
+      <<: *female
+
     entities:
       <<: *female
 

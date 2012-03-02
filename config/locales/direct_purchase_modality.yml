@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    direct_purchase_modality:
+      material_or_service: Material ou serviços
+      engineering_works: Obras de engenharia

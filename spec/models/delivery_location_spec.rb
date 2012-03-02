@@ -18,5 +18,6 @@ describe DeliveryLocation do
   context "associations" do
     it { should belong_to :address }
     it { should have_many(:purchase_solicitations).dependent(:restrict) }
+    it { should have_many(:direct_purchases).dependent(:restrict) }
   end
 end

@@ -223,6 +223,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :direct_purchases do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :districts do
     collection do
       get :modal

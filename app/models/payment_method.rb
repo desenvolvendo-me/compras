@@ -1,6 +1,8 @@
 class PaymentMethod < ActiveRecord::Base
   attr_accessible :description
 
+  has_many :direct_purchases, :dependent => :restrict
+
   validates :description, :presence => true
   validates :description, :uniqueness => true
 

@@ -5,6 +5,8 @@ class LicitationObject < ActiveRecord::Base
 
   attr_modal :description, :year
 
+  has_many :direct_purchases, :dependent => :restrict
+
   validates :description, :year, :purchase_licitation_exemption, :purchase_invitation_letter, :purchase_taking_price,
             :purchase_public_concurrency, :build_licitation_exemption, :build_invitation_letter, :build_taking_price,
             :build_public_concurrency, :special_auction, :special_unenforceability, :special_contest, :presence => true

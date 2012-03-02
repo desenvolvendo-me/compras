@@ -28,6 +28,7 @@ describe Organogram do
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should belong_to :organogram_configuration }
   it { should belong_to :administration_type }
+  it { should have_many(:direct_purchases).dependent(:restrict) }
 
   context 'should validate mask' do
     it 'and should not be valid with wrong mask' do

@@ -16,6 +16,7 @@ class Organogram < ActiveRecord::Base
   has_many :budget_allocations, :dependent => :restrict
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :organogram_responsibles, :dependent => :destroy
+  has_many :direct_purchases, :dependent => :restrict
 
   delegate :mask, :to => :organogram_configuration, :allow_nil => true
 

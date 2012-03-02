@@ -8,4 +8,6 @@ describe PaymentMethod do
 
     subject.to_s.should eq 'Dinheiro'
   end
+
+  it { should have_many(:direct_purchases).dependent(:restrict) }
 end

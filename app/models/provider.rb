@@ -4,6 +4,8 @@ class Provider < ActiveRecord::Base
   attr_accessible :provider_partners_attributes, :economic_registration_id, :materials_group_ids, :materials_class_ids
   attr_accessible :material_ids, :provider_licitation_documents_attributes
 
+  attr_modal :crc_number
+
   belongs_to :person
   belongs_to :economic_registration
   belongs_to :agency
@@ -16,6 +18,7 @@ class Provider < ActiveRecord::Base
 
   has_many :provider_partners, :dependent => :destroy
   has_many :provider_licitation_documents, :dependent => :destroy, :inverse_of => :provider
+  has_many :direct_purchases, :dependent => :restrict
 
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
   delegate :personable_type, :to => :person, :allow_nil => true

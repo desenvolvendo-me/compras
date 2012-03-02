@@ -6,6 +6,7 @@ class DeliveryLocation < ActiveRecord::Base
   belongs_to :address
 
   has_many :purchase_solicitations, :dependent => :restrict
+  has_many :direct_purchases, :dependent => :restrict
 
   validates :address, :description, :presence => true
   validates :description, :uniqueness => true

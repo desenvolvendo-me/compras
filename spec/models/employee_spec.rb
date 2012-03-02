@@ -7,6 +7,7 @@ describe Employee do
   it { should belong_to :position }
 
   it { should have_many :purchase_solicitations }
+  it { should have_many(:direct_purchases).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration }
