@@ -15,6 +15,7 @@ describe BudgetAllocation do
   end
 
   it { should validate_presence_of :description }
+  it { should validate_presence_of :date }
 
   it { should belong_to(:organogram) }
   it { should belong_to(:subfunction) }

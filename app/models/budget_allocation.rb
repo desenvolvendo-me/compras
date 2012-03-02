@@ -30,6 +30,7 @@ class BudgetAllocation < ActiveRecord::Base
 
   validates :description, :presence => true, :uniqueness => true
   validates :year, :mask => '9999'
+  validates :date, :presence => true
 
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
