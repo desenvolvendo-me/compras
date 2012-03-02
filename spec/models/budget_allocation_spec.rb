@@ -32,8 +32,8 @@ describe BudgetAllocation do
 
   context 'validating date' do
     before(:each) do
-      BudgetAllocation.stub(:last).and_return(double(:date => Date.new(2011, 12, 31)))
-      BudgetAllocation.stub(:any?).and_return(true)
+      described_class.stub(:last).and_return(double(:date => Date.new(2011, 12, 31)))
+      described_class.stub(:any?).and_return(true)
     end
 
     it 'should be valid when budget allocation is equal to last' do
