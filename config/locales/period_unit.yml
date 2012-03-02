@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    period_unit:
+      day: "Dia"
+      month: "Mês"
+      year: "Ano"

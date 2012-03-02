@@ -423,6 +423,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :periods do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :people do
     collection do
       get :modal

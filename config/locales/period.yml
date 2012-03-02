@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      period:
+        one: "Prazo"
+        other: "Prazo"
+
+    attributes:
+      period:
+        unit: "Unidade"
+        amount: "Quantidade"
