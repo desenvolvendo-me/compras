@@ -6,5 +6,5 @@ class ProviderPartner < ActiveRecord::Base
   belongs_to :provider
   belongs_to :individual
 
-  validates :individual_id, :function, :date, :presence => true
+  validates :individual, :function, :date, :presence => true
 end
