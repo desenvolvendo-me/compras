@@ -18,6 +18,8 @@ describe Person do
   end
 
   it { should belong_to :personable }
+  it { should have_one :employee }
+  it { should have_many(:providers).dependent(:restrict) }
 
   it { should have_many(:providers).dependent(:restrict) }
   it { should have_many(:economic_registrations).dependent(:restrict) }
