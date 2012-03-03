@@ -8,7 +8,7 @@ describe CompanySize do
     subject.to_s.should eq subject.name
   end
 
-  it { should have_many :companies }
+  it { should have_many(:companies).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :number }
