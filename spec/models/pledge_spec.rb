@@ -88,13 +88,6 @@ describe Pledge do
     subject.errors.messages[:items_total_value].should be_nil
   end
 
-  it "should not have error when the value is greater then items total value" do
-    subject.stub(:value => 200, :items_total_value => 100)
-    subject.valid?
-
-    subject.errors.messages[:items_total_value].should be_nil
-  end
-
   it "should have error when the value is less than items total value" do
     subject.stub(:value => 200, :items_total_value => 201)
     subject.valid?
