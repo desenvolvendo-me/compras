@@ -25,4 +25,22 @@ describe ReserveFund do
 
   it { should allow_value('2009').for(:year) }
   it { should_not allow_value('209').for(:year) }
+
+  it 'should return licitation_number/year as licitation method' do
+    subject.licitation.should eq nil
+
+    subject.licitation_number = '001'
+    subject.licitation_year = '2012'
+
+    subject.joined_licitation.should eq '001/2012'
+  end
+
+  it 'should return process_number/year as process method' do
+    subject.process.should eq nil
+
+    subject.process_number = '002'
+    subject.process_year = '2013'
+
+    subject.joined_process.should eq '002/2013'
+  end
 end
