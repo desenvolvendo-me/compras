@@ -371,7 +371,7 @@ feature "Providers" do
     page.should have_field 'Cadastro econômico', :with => '00001'
   end
 
-  scenario 'ensure the error when duplicated partners is de only error' do
+  scenario 'ensure the error when duplicated partners is the only error' do
     Person.make!(:nohup)
     Person.make!(:sobrinho)
     EconomicRegistration.make!(:nohup_office)
