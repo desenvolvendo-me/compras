@@ -47,11 +47,11 @@ class Pledge < ActiveRecord::Base
   end
 
   def joined_licitation
-    "#{licitation_number}/#{licitation_year}" if licitation_number && licitation_year
+    "#{licitation_number}/#{licitation_year}" if licitation?
   end
 
   def joined_process
-    "#{process_number}/#{process_year}" if process_number && process_year
+    "#{process_number}/#{process_year}" if process?
   end
 
   before_save :parse_licitation, :parse_process
@@ -90,5 +90,13 @@ class Pledge < ActiveRecord::Base
       end
       single_materials << item.material_id
     end
+  end
+
+  def licitation?
+    licitation_number && licitation_year
+  end
+
+  def process?
+    process_number && process_year
   end
 end
