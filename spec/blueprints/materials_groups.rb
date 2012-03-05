@@ -1,15 +1,15 @@
 # encoding: utf-8
-MaterialsGroup.blueprint(:alimenticios) do
+MaterialsGroup.blueprint(:informatica) do
   group_number { "01" }
-  description { "Generos alimenticios" }
+  description { "Informática" }
 end
 
-MaterialsGroup.blueprint(:limpeza) do
+MaterialsGroup.blueprint(:ferro_aco) do
   group_number { "02" }
-  description { "Limpeza" }
+  description { "Ferro e Aço" }
 end
 
-MaterialsGroup.blueprint(:escritorio) do
+MaterialsGroup.blueprint(:comp_eletricos_eletronicos) do
   group_number { "03" }
-  description { "Escritório" }
+  description { "Componentes elétricos e eletrônicos" }
 end

@@ -18,7 +18,7 @@ feature "Pledges" do
     management_contract = ManagementContract.make!(:primeiro_contrato)
     Creditor.make!(:nohup)
     founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
-    Material.make!(:cadeira)
+    Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
 
@@ -60,13 +60,13 @@ feature "Pledges" do
 
       page.should have_disabled_field "U. medida"
 
-      fill_modal 'Item', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'Item', :with => "Arame farpado", :field => "Descrição"
       fill_in 'Quantidade', :with => "3"
       fill_in 'Valor unitário', :with => "100,00"
 
       # getting the reference unit and description via javascript
       page.should have_field 'U. medida', :with => "Unidade"
-      page.should have_field 'Descrição', :with => "Cadeira"
+      page.should have_field 'Descrição', :with => "Arame farpado"
 
       # calculating total item price via javascript
       page.should have_disabled_field 'Valor total dos itens'
@@ -107,11 +107,11 @@ feature "Pledges" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Item', :with => "02.02.00001 - Cadeira"
+      page.should have_field 'Item', :with => "02.02.00001 - Arame farpado"
       page.should have_field 'Quantidade', :with => "3"
       page.should have_field 'Valor unitário', :with => "100,00"
       page.should have_field 'U. medida', :with => "Unidade"
-      page.should have_field 'Descrição', :with => "Cadeira"
+      page.should have_field 'Descrição', :with => "Arame farpado"
       page.should have_field 'Valor total', :with => "300,00"
     end
   end
@@ -129,7 +129,7 @@ feature "Pledges" do
     management_contract = ManagementContract.make!(:segundo_contrato)
     Creditor.make!(:nobe)
     founded_debt_contract = FoundedDebtContract.make!(:contrato_educacao)
-    Material.make!(:manga)
+    Material.make!(:antivirus)
 
     click_link 'Contabilidade'
 
@@ -165,8 +165,8 @@ feature "Pledges" do
     end
 
     within_tab 'Itens' do
-      fill_modal 'Item', :with => "Manga", :field => "Descrição"
-      page.should have_field 'U. medida', :with => "Quilos"
+      fill_modal 'Item', :with => "Antivirus", :field => "Descrição"
+      page.should have_field 'U. medida', :with => "Unidade"
       fill_in 'Quantidade', :with => "200"
       fill_in 'Valor unitário', :with => "2,00"
     end
@@ -206,11 +206,11 @@ feature "Pledges" do
 
     within_tab 'Itens' do
       page.should have_field 'Valor', :with => "400,00"
-      page.should have_field 'Item', :with => "01.01.00001 - Manga"
+      page.should have_field 'Item', :with => "01.01.00001 - Antivirus"
 
       # should not change the description because it is readonly
       page.should have_field 'Descrição', :with => "desc cadeiras"
-      page.should have_field 'U. medida', :with => "Quilos"
+      page.should have_field 'U. medida', :with => "Unidade"
       page.should have_field 'Quantidade', :with => "200"
       page.should have_field 'Valor unitário', :with => "2,00"
       page.should have_field 'Valor total', :with => "400,00"
@@ -333,7 +333,7 @@ feature "Pledges" do
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
     management_contract = ManagementContract.make!(:primeiro_contrato)
-    Material.make!(:cadeira)
+    Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
 
@@ -365,13 +365,13 @@ feature "Pledges" do
     within_tab 'Itens' do
       click_button "Adicionar Item"
 
-      fill_modal 'Item', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'Item', :with => "Arame farpado", :field => "Descrição"
       fill_in 'Quantidade', :with => "1"
       fill_in 'Valor unitário', :with => "100,00"
 
       click_button "Adicionar Item"
 
-      fill_modal 'pledge_pledge_items_attributes_fresh-1_material', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'pledge_pledge_items_attributes_fresh-1_material', :with => "Arame farpado", :field => "Descrição"
       fill_in 'pledge_pledge_items_attributes_fresh-1_quantity', :with => "2"
       fill_in 'pledge_pledge_items_attributes_fresh-1_unit_price', :with => "100,00"
     end

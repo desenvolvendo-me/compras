@@ -46,7 +46,7 @@ feature "PurchaseSolicitations" do
       page.should have_disabled_field "Número do processo de compra"
       page.should have_disabled_field "Status"
 
-      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'Material', :with => "Arame farpado", :field => "Descrição"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
@@ -78,7 +78,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => "02.02.00001 - Cadeira"
+      page.should have_field 'Material', :with => "02.02.00001 - Arame farpado"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       page.should have_field 'Quantidade', :with => "5"
       page.should have_field 'Preço unitário', :with => "100,00"
@@ -150,7 +150,7 @@ feature "PurchaseSolicitations" do
       page.should have_disabled_field "Número do processo de compra"
       page.should have_disabled_field "Status"
 
-      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'Material', :with => "Arame farpado", :field => "Descrição"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
@@ -206,7 +206,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => "02.02.00001 - Cadeira"
+      page.should have_field 'Material', :with => "02.02.00001 - Arame farpado"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       page.should have_field 'Quantidade', :with => "5"
       page.should have_field 'Preço unitário', :with => "100,00"
@@ -279,7 +279,7 @@ feature "PurchaseSolicitations" do
     Employee.make!(:wenderson)
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     DeliveryLocation.make!(:health)
-    Material.make!(:manga)
+    Material.make!(:antivirus)
     Organogram.make!(:secretaria_de_desenvolvimento)
     ExpenseEconomicClassification.make!(:compra_de_material)
 
@@ -309,8 +309,8 @@ feature "PurchaseSolicitations" do
 
       click_button "Adicionar Item"
 
-      fill_modal 'Material', :with => "Manga", :field => "Descrição"
-      page.should have_field 'Unidade de referência', :with => "Quilos"
+      fill_modal 'Material', :with => "Antivirus", :field => "Descrição"
+      page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "500"
       fill_in 'Preço unitário', :with => "2,00"
     end
@@ -337,7 +337,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => "01.01.00001 - Manga", :field => "Descrição"
+      page.should have_field 'Material', :with => "01.01.00001 - Antivirus", :field => "Descrição"
       page.should have_field 'Quantidade', :with => "500"
       page.should have_field 'Preço unitário', :with => "2,00"
       page.should have_field 'Preço total estimado', :with => "1.000,00"
@@ -353,7 +353,7 @@ feature "PurchaseSolicitations" do
     budget_allocation_extra = BudgetAllocation.make!(:alocacao_extra)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     DeliveryLocation.make!(:health)
-    Material.make!(:manga)
+    Material.make!(:antivirus)
     Organogram.make!(:secretaria_de_desenvolvimento)
     ExpenseEconomicClassification.make!(:compra_de_material)
 
@@ -382,8 +382,8 @@ feature "PurchaseSolicitations" do
 
       click_button 'Adicionar Item'
 
-      fill_modal 'Material', :with => 'Manga', :field => 'Descrição'
-      page.should have_field 'Unidade de referência', :with => 'Quilos'
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      page.should have_field 'Unidade de referência', :with => 'Unidade'
       fill_in 'Quantidade', :with => '500'
       fill_in 'Preço unitário', :with => '2,00'
     end
@@ -416,7 +416,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Itens' do
-      page.should have_field 'Material', :with => '01.01.00001 - Manga'
+      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Quantidade', :with => '500'
       page.should have_field 'Preço unitário', :with => '2,00'
       page.should have_field 'Preço total estimado', :with => '1.000,00'
@@ -549,7 +549,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Itens' do
       click_button "Adicionar Item"
 
-      fill_modal 'purchase_solicitation_items_attributes_fresh-0_material', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'purchase_solicitation_items_attributes_fresh-0_material', :with => "Arame farpado", :field => "Descrição"
       fill_in 'purchase_solicitation_items_attributes_fresh-0_quantity', :with => "5"
       fill_in 'purchase_solicitation_items_attributes_fresh-0_unit_price', :with => "100,00"
       fill_in 'purchase_solicitation_items_attributes_fresh-0_estimated_total_price', :with => "500,00"
@@ -628,7 +628,7 @@ feature "PurchaseSolicitations" do
       page.should have_disabled_field "Número do processo de compra"
       page.should have_disabled_field "Status"
 
-      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'Material', :with => "Arame farpado", :field => "Descrição"
       page.should have_field 'Unidade de referência', :with => "Unidade"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "1000,00"
@@ -703,14 +703,14 @@ feature "PurchaseSolicitations" do
     within_tab 'Itens' do
       click_button "Adicionar Item"
 
-      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'Material', :with => "Arame farpado", :field => "Descrição"
       fill_in 'Quantidade', :with => "2"
       fill_in 'Preço unitário', :with => "100,00"
 
       click_button "Adicionar Item"
 
       within 'fieldset:last' do
-        fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+        fill_modal 'Material', :with => "Arame farpado", :field => "Descrição"
         fill_in 'Quantidade', :with => "3"
         fill_in 'Preço unitário', :with => "100,00"
       end
@@ -747,7 +747,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Itens' do
       click_button "Adicionar Item"
 
-      fill_modal 'Material', :with => "Cadeira", :field => "Descrição"
+      fill_modal 'Material', :with => "Arame farpado", :field => "Descrição"
       fill_in 'Quantidade', :with => "5"
       fill_in 'Preço unitário', :with => "100,00"
     end
@@ -844,7 +844,7 @@ feature "PurchaseSolicitations" do
   def make_dependencies!
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
-    Material.make!(:cadeira)
+    Material.make!(:arame_farpado)
     Organogram.make!(:secretaria_de_educacao)
     ExpenseEconomicClassification.make!(:vencimento_e_salarios)
   end

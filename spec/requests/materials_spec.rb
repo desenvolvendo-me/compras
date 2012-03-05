@@ -18,8 +18,8 @@ feature "Materials" do
     page.should have_disabled_field 'Tipo de material'
     page.should have_disabled_field 'Tipo de serviço'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
+    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Caixa'
     fill_in 'Descrição detalhada', :with => 'Uma caixa'
     fill_in 'Estoque mínimo', :with => '10'
@@ -46,8 +46,8 @@ feature "Materials" do
 
     click_link 'Caixa'
 
-    page.should have_field 'Grupo', :with => '01 - Generos alimenticios'
-    page.should have_field 'Classe', :with => '01 - Hortifrutigranjeiros'
+    page.should have_field 'Grupo', :with => '01 - Informática'
+    page.should have_field 'Classe', :with => '01 - Software'
     page.should have_field 'Descrição', :with => 'Caixa'
     page.should have_field 'Descrição detalhada', :with => 'Uma caixa'
     page.should have_field 'Estoque mínimo', :with => '10'
@@ -72,8 +72,8 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
+    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Caixa'
     fill_in 'Descrição detalhada', :with => 'Outra descrição'
     fill_in 'Estoque mínimo', :with => '10'
@@ -100,14 +100,14 @@ feature "Materials" do
 
     # Ensure the update of code
     # begin (do not change this order)
-    Material.make!(:balde)
-    Material.make!(:manga)
-    Material.make!(:cadeira)
+    Material.make!(:arame_comum)
+    Material.make!(:antivirus)
+    Material.make!(:arame_farpado)
     # end
 
     ReferenceUnit.make!(:metro)
-    MaterialsGroup.make!(:limpeza)
-    MaterialsClass.make!(:pecas)
+    MaterialsGroup.make!(:ferro_aco)
+    MaterialsClass.make!(:arames)
     ExpenseEconomicClassification.make!(:compra_de_material)
     StnOrdinance.make!(:interministerial)
 
@@ -115,10 +115,10 @@ feature "Materials" do
 
     click_link 'Materiais'
 
-    click_link 'Manga'
+    click_link 'Antivirus'
 
-    fill_modal 'Grupo', :with => 'Limpeza', :field => 'Descrição'
-    fill_modal 'Classe', :with => 'Peças', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Ferro e Aço', :field => 'Descrição'
+    fill_modal 'Classe', :with => 'Arames', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Parafuso'
     fill_in 'Descrição detalhada', :with => 'de rosca'
     fill_in 'Estoque mínimo', :with => '20'
@@ -143,8 +143,8 @@ feature "Materials" do
 
     click_link 'Parafuso'
 
-    page.should have_field 'Grupo', :with => '02 - Limpeza'
-    page.should have_field 'Classe', :with => '02 - Peças'
+    page.should have_field 'Grupo', :with => '02 - Ferro e Aço'
+    page.should have_field 'Classe', :with => '02 - Arames'
     page.should have_field 'Código', :with => '02.02.00003'
     page.should have_field 'Descrição', :with => 'Parafuso'
     page.should have_field 'Descrição detalhada', :with => 'de rosca'
@@ -162,23 +162,23 @@ feature "Materials" do
   end
 
   scenario 'destroy an existent material' do
-    Material.make!(:manga)
+    Material.make!(:antivirus)
 
     click_link 'Solicitações'
 
     click_link 'Materiais'
 
-    click_link 'Manga'
+    click_link 'Antivirus'
 
-    click_link 'Apagar 01.01.00001 - Manga', :confirm => true
+    click_link 'Apagar 01.01.00001 - Antivirus', :confirm => true
 
     page.should have_notice 'Material apagado com sucesso.'
 
-    page.should_not have_content 'Manga'
+    page.should_not have_content 'Antivirus'
   end
 
   scenario 'should validate uniqueness of name' do
-    Material.make!(:manga)
+    Material.make!(:antivirus)
 
     click_link 'Solicitações'
 
@@ -186,7 +186,7 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_in 'Descrição', :with => 'Manga'
+    fill_in 'Descrição', :with => 'Antivirus'
 
     click_button 'Criar Material'
 
@@ -194,13 +194,13 @@ feature "Materials" do
   end
 
   scenario 'should clean the unnecessary type of material or service depending on characteristic' do
-    Material.make!(:manga)
+    Material.make!(:antivirus)
 
     click_link 'Solicitações'
 
     click_link 'Materiais'
 
-    click_link 'Manga'
+    click_link 'Antivirus'
 
     select 'Material', :from => "Característica"
 
@@ -208,7 +208,7 @@ feature "Materials" do
 
     click_button 'Atualizar Material'
 
-    click_link 'Manga'
+    click_link 'Antivirus'
 
     select 'Serviço', :from => "Característica"
 
@@ -218,7 +218,7 @@ feature "Materials" do
 
     click_button 'Atualizar Material'
 
-    click_link 'Manga'
+    click_link 'Antivirus'
 
     select 'Material', :from => "Característica"
 
@@ -236,25 +236,25 @@ feature "Materials" do
 
     page.should have_disabled_field 'Classe'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
 
     page.should_not have_disabled_field 'Classe'
 
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição' do
-      page.should have_field 'filter_materials_group', :with => '01 - Generos alimenticios'
+    fill_modal 'Classe', :with => 'Software', :field => 'Descrição' do
+      page.should have_field 'filter_materials_group', :with => '01 - Informática'
     end
   end
 
   it 'should not have the class disabled when editing material' do
     make_dependencies!
 
-    Material.make!(:manga)
+    Material.make!(:antivirus)
 
     click_link 'Solicitações'
 
     click_link 'Materiais'
 
-    click_link 'Manga'
+    click_link 'Antivirus'
 
     page.should_not have_disabled_field 'Classe'
   end
@@ -268,9 +268,9 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
 
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
+    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
 
     clear_modal 'Grupo'
 
@@ -279,7 +279,7 @@ feature "Materials" do
   end
 
   it 'should empty the class when the group are changed' do
-    MaterialsGroup.make!(:limpeza)
+    MaterialsGroup.make!(:ferro_aco)
     make_dependencies!
 
     click_link 'Solicitações'
@@ -288,11 +288,11 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    fill_modal 'Grupo', :with => 'Generos alimenticios', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
 
-    fill_modal 'Classe', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
+    fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
 
-    fill_modal 'Grupo', :with => 'Limpeza', :field => 'Descrição'
+    fill_modal 'Grupo', :with => 'Ferro e Aço', :field => 'Descrição'
 
     page.should have_field 'Classe', :with => ''
   end
@@ -320,13 +320,13 @@ feature "Materials" do
   it 'should not have the expense economic classification disabled when editing material' do
     make_dependencies!
 
-    Material.make!(:manga)
+    Material.make!(:antivirus)
 
     click_link 'Solicitações'
 
     click_link 'Materiais'
 
-    click_link 'Manga'
+    click_link 'Antivirus'
 
     page.should_not have_disabled_field 'Elemento de despesa'
   end
@@ -371,8 +371,8 @@ feature "Materials" do
   end
 
   def make_dependencies!
-    MaterialsGroup.make!(:alimenticios)
-    MaterialsClass.make!(:hortifrutigranjeiros)
+    MaterialsGroup.make!(:informatica)
+    MaterialsClass.make!(:software)
     ReferenceUnit.make!(:unidade)
     ServiceOrContractType.make!(:trainees)
     ExpenseEconomicClassification.make!(:vencimento_e_salarios)

@@ -13,9 +13,9 @@ feature "Providers" do
     Agency.make!(:itau)
     LegalNature.make!(:administracao_publica)
     Cnae.make!(:aluguel)
-    MaterialsGroup.make!(:alimenticios)
-    MaterialsClass.make!(:hortifrutigranjeiros)
-    Material.make!(:cadeira)
+    MaterialsGroup.make!(:informatica)
+    MaterialsClass.make!(:software)
+    Material.make!(:antivirus)
     DocumentType.make!(:fiscal)
 
     click_link 'Contabilidade'
@@ -40,9 +40,9 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      fill_modal 'Grupo de materiais', :with => 'Generos alimenticios', :field => 'Descrição'
-      fill_modal 'Classe de materiais', :with => 'Hortifrutigranjeiros', :field => 'Descrição'
-      fill_modal 'Material', :with => 'Cadeira', :field => 'Descrição'
+      fill_modal 'Grupo de materiais', :with => 'Informática', :field => 'Descrição'
+      fill_modal 'Classe de materiais', :with => 'Software', :field => 'Descrição'
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
     end
 
     within_tab 'Documentação para licitações' do
@@ -79,9 +79,9 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should have_content 'Generos alimenticios'
-      page.should have_content 'Hortifrutigranjeiros'
-      page.should have_content 'Cadeira'
+      page.should have_content 'Informática'
+      page.should have_content 'Software'
+      page.should have_content 'Antivirus'
     end
 
     within_tab 'Documentação para licitações' do
@@ -99,9 +99,9 @@ feature "Providers" do
     LegalNature.make!(:executivo_federal)
     Cnae.make!(:varejo)
     EconomicRegistration.make!(:nobe)
-    MaterialsGroup.make!(:limpeza)
-    MaterialsClass.make!(:pecas)
-    Material.make!(:balde)
+    MaterialsGroup.make!(:ferro_aco)
+    MaterialsClass.make!(:arames)
+    Material.make!(:arame_comum)
     DocumentType.make!(:oficial)
 
     click_link 'Contabilidade'
@@ -128,9 +128,9 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      fill_modal 'Grupo de materiais', :with => 'Limpeza', :field => 'Descrição'
-      fill_modal 'Classe de materiais', :with => 'Peças', :field => 'Descrição'
-      fill_modal 'Material', :with => 'Balde', :field => 'Descrição'
+      fill_modal 'Grupo de materiais', :with => 'Ferro e Aço', :field => 'Descrição'
+      fill_modal 'Classe de materiais', :with => 'Arames', :field => 'Descrição'
+      fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
     end
 
     within_tab 'Documentação para licitações' do
@@ -164,9 +164,9 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should have_content 'Limpeza'
-      page.should have_content 'Peças'
-      page.should have_content 'Balde'
+      page.should have_content 'Ferro e Aço'
+      page.should have_content 'Arames'
+      page.should have_content 'Arame comum'
     end
 
     within_tab 'Documentação para licitações' do
@@ -461,7 +461,7 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should have_content 'Generos alimenticios'
+      page.should have_content 'Informática'
       click_button 'Remover grupo'
     end
 
@@ -474,7 +474,7 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should_not have_content 'Generos alimenticios'
+      page.should_not have_content 'Informática'
     end
   end
 
@@ -490,7 +490,7 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should have_content 'Hortifrutigranjeiros'
+      page.should have_content 'Software'
       click_button 'Remover classe'
     end
 
@@ -503,7 +503,7 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should_not have_content 'Hortifrutigranjeiros'
+      page.should_not have_content 'Software'
     end
   end
 
@@ -519,7 +519,7 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should have_content 'Cadeira'
+      page.should have_content 'Antivirus'
       click_button 'Remover material'
     end
 
@@ -532,7 +532,7 @@ feature "Providers" do
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
-      page.should_not have_content 'Cadeira'
+      page.should_not have_content 'Antivirus'
     end
   end
 

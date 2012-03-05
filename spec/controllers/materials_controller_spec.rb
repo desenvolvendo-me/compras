@@ -15,7 +15,7 @@ describe MaterialsController do
 
   describe 'PUT update' do
     it 'should update code' do
-      material = Material.make!(:manga)
+      material = Material.make!(:antivirus)
       Material.should_receive(:find).and_return(material)
 
       MaterialCodeGenerator.any_instance.should_receive(:generate!)

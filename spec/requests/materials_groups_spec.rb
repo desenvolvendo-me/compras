@@ -14,26 +14,26 @@ feature "MaterialsGroups" do
     click_link 'Criar Grupo de Materiais'
 
     fill_in 'Número do grupo', :with => '01'
-    fill_in 'Descrição', :with => 'Generos alimenticios'
+    fill_in 'Descrição', :with => 'Informática'
 
     click_button 'Criar Grupo de Materiais'
 
     page.should have_notice 'Grupo de Materiais criado com sucesso.'
 
-    click_link 'Generos alimenticios'
+    click_link 'Informática'
 
     page.should have_field 'Número do grupo', :with => '01'
-    page.should have_field 'Descrição', :with => 'Generos alimenticios'
+    page.should have_field 'Descrição', :with => 'Informática'
   end
 
   scenario 'update an existent materials_group' do
-    MaterialsGroup.make!(:alimenticios)
+    MaterialsGroup.make!(:informatica)
 
     click_link 'Solicitações'
 
     click_link 'Grupos de Materiais'
 
-    click_link 'Generos alimenticios'
+    click_link 'Informática'
 
     fill_in 'Número do grupo', :with => '02'
     fill_in 'Descrição', :with => 'Materiais de escritorio'
@@ -49,24 +49,24 @@ feature "MaterialsGroups" do
   end
 
   scenario 'destroy an existent materials_group' do
-    MaterialsGroup.make!(:alimenticios)
+    MaterialsGroup.make!(:informatica)
 
     click_link 'Solicitações'
 
     click_link 'Grupos de Materiais'
 
-    click_link 'Generos alimenticios'
+    click_link 'Informática'
 
-    click_link 'Apagar 01 - Generos alimenticios', :confirm => true
+    click_link 'Apagar 01 - Informática', :confirm => true
 
     page.should have_notice 'Grupo de Materiais apagado com sucesso.'
 
     page.should_not have_content '01'
-    page.should_not have_content 'Generos alimenticios'
+    page.should_not have_content 'Informática'
   end
 
   scenario 'should validate uniqueness of group' do
-    MaterialsGroup.make!(:alimenticios)
+    MaterialsGroup.make!(:informatica)
 
     click_link 'Solicitações'
 
@@ -82,7 +82,7 @@ feature "MaterialsGroups" do
   end
 
   scenario 'should validate uniqueness of name' do
-    MaterialsGroup.make!(:alimenticios)
+    MaterialsGroup.make!(:informatica)
 
     click_link 'Solicitações'
 
@@ -90,7 +90,7 @@ feature "MaterialsGroups" do
 
     click_link 'Criar Grupo de Materiais'
 
-    fill_in 'Descrição', :with => 'Generos alimenticios'
+    fill_in 'Descrição', :with => 'Informática'
 
     click_button 'Criar Grupo de Materiais'
 
