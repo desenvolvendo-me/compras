@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       direct_purchase:
-        one: "Compra Direta"
-        other: "Compras Diretas"
+        one: "Solicitação de Compra Direta"
+        other: "Solitações de Compra Direta"
 
     attributes:
       direct_purchase:

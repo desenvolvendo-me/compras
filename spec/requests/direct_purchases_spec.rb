@@ -18,9 +18,9 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações'
 
-    click_link 'Compras Diretas'
+    click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Compra Direta'
+    click_link 'Criar Solicitação de Compra Direta'
 
     fill_in 'Ano', :with => '2012'
     fill_in 'Data da compra', :with => '19/03/2012'
@@ -37,7 +37,7 @@ feature "DirectPurchases" do
     fill_in 'Reg. de preços', :with => '88'
     fill_in 'Observações gerais', :with => 'obs'
 
-    click_button 'Criar Compra Direta'
+    click_button 'Criar Solicitação de Compra Direta'
 
     page.should have_notice 'Compra Direta criada com sucesso.'
 
@@ -74,7 +74,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações'
 
-    click_link 'Compras Diretas'
+    click_link 'Solicitações de Compra Direta'
 
     within_records do
       page.find('a').click
@@ -95,7 +95,7 @@ feature "DirectPurchases" do
     fill_in 'Reg. de preços', :with => '66'
     fill_in 'Observações gerais', :with => 'nova obs'
 
-    click_button 'Atualizar Compra Direta'
+    click_button 'Atualizar Solicitação de Compra Direta'
 
     page.should have_notice 'Compra Direta editada com sucesso.'
 
@@ -124,7 +124,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações'
 
-    click_link 'Compras Diretas'
+    click_link 'Solicitações de Compra Direta'
 
     within_records do
       page.find('a').click
