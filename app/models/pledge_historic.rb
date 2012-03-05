@@ -1,7 +1,7 @@
 class PledgeHistoric < ActiveRecord::Base
   attr_accessible :description, :entity_id, :year
 
-  has_enumeration_for :source, :create_helpers => true
+  has_enumeration_for :source
 
   belongs_to :entity
 

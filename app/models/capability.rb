@@ -3,7 +3,7 @@ class Capability < ActiveRecord::Base
 
   has_enumeration_for :kind, :with => CapabilityKind
   has_enumeration_for :status, :create_helpers => true
-  has_enumeration_for :source, :create_helpers => true
+  has_enumeration_for :source
 
   belongs_to :entity
 

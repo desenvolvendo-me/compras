@@ -1,7 +1,7 @@
 class BudgetAllocationType < ActiveRecord::Base
   attr_accessible :description, :status
 
-  has_enumeration_for :source, :create_helpers => true
+  has_enumeration_for :source
   has_enumeration_for :status, :create_helpers => true
 
   has_many :budget_allocations, :dependent => :restrict
