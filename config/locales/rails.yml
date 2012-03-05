@@ -205,6 +205,7 @@ pt-BR:
       should_not_be_greater_than_pledge_value: "não pode ser superior ao valor do empenho"
       must_be_greather_or_equal_to_last_date: "deve ser maior ou igual a data da última dotação (%{restriction})"
       taken_for_informed_year: "já existe para o ano informado"
+      taken_for_administractive_act: "já existe para o ato regulamentador informado"
 
   activerecord:
     errors:

@@ -7,7 +7,8 @@ class Function < ActiveRecord::Base
 
   delegate :vigor_date, :to => :administractive_act, :allow_nil => true, :prefix => true
 
-  validates :code, :presence => true, :uniqueness => true, :numericality => true
+  validates :code, :presence => true, :numericality => true
+  validates :code, :uniqueness => { :scope => :administractive_act_id, :message => :taken_for_administractive_act }
   validates :description, :presence => true
 
   orderize :code

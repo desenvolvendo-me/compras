@@ -72,7 +72,7 @@ feature "Functions" do
     page.should_not have_content '1234'
   end
 
-  scenario 'validate uniqueness of code' do
+  scenario 'have error when have duplicated code of same administractive_act' do
     Function.make!(:administracao)
 
     click_link 'Contabilidade'
@@ -82,10 +82,29 @@ feature "Functions" do
     click_link 'Criar Função'
 
     fill_in 'Código', :with => '04'
+    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
     click_button 'Criar Função'
 
-    page.should have_content 'já está em uso'
+    page.should have_content 'já existe para o ato regulamentador informado'
+  end
+
+  scenario 'have not error when have duplicated code of other administractive_act' do
+    Function.make!(:administracao)
+    AdministractiveAct.make!(:emenda)
+
+    click_link 'Contabilidade'
+
+    click_link 'Funções'
+
+    click_link 'Criar Função'
+
+    fill_in 'Código', :with => '04'
+    fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
+
+    click_button 'Criar Função'
+
+    page.should_not have_content 'já existe para o ato regulamentador informado'
   end
 
   scenario 'should get and clean the vigor date depending on administractive act' do
