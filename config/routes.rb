@@ -458,7 +458,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :pledges do
+  resources :pledges, :except => [:destroy] do
     collection do
       get :filter
       get :modal

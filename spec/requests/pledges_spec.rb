@@ -217,8 +217,8 @@ feature "Pledges" do
     end
   end
 
-  scenario 'destroy an existent pledge' do
-    Pledge.make!(:empenho)
+  scenario 'should not have a button to destroy an existent pledge' do
+    pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
 
@@ -228,14 +228,7 @@ feature "Pledges" do
       page.find('a').click
     end
 
-    click_link 'Apagar', :confirm => true
-
-    page.should have_notice 'Empenho apagado com sucesso.'
-
-    page.should_not have_content 'Detran'
-    page.should_not have_content '2012'
-    page.should_not have_content I18n.l(Date.current)
-    page.should_not have_content '9,99'
+    page.should_not have_link "Apagar #{pledge.id}"
   end
 
   scenario 'clear reserve_fund_value field when clear' do
