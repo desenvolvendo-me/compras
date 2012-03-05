@@ -494,13 +494,6 @@ Tributario::Application.routes.draw do
 
   resources :property_variable_setting_options, :only => :index
 
-  resources :properties, :only => [] do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :providers do
     collection do
       get :filter
