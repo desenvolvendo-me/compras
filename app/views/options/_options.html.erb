@@ -15,7 +15,7 @@
 <% end %>
 
 <script>
-  $('#<%= f.sanitized_object_name %>_field_type').live('change', function () {
+  $('form').delegate('#<%= f.sanitized_object_name %>_field_type', 'change', function () {
     if (this.value == "<%= FieldType::COLLECTION %>") {
       $("#options").show();
       $('.destroy').val(false);

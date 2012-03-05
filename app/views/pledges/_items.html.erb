@@ -31,7 +31,7 @@
     right: true
   });
 
-  $(".material").live('change', function (event, data) {
+  $('form').delegate('.material', 'change', function (event, data) {
     if (data){
       var record = data.record,
           inputs = $(this).closest('.pledge-item').find(':input');

@@ -39,7 +39,7 @@
     right: true
   });
 
-  $(".budget-allocation").live('change', function (event, data) {
+  $('form').delegate('.budget-allocation', 'change', function (event, data) {
     if (data){
       var record = data.record,
           inputs = $(this).closest('div.nested').find(':input');

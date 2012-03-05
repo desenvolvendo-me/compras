@@ -75,19 +75,19 @@
     return floatToPtBrString(total);
   }
 
-  $('.item-quantity, .item-unit-price').live('keyup', function() {
+  $('form').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
     $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
   });
 
-  $('.remove-purchase-solicitation-item').live('click', function() {
+  $('form').delegate('.remove-purchase-solicitation-item', 'click', function() {
     $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
   });
 
-  $('.allocation-price').live('keyup', function() {
+  $('form').delegate('.allocation-price', 'keyup', function() {
     $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
   });
 
-  $('.remove-purchase-solicitation-budget-allocation').live('click', function() {
+  $('form').delegate('.remove-purchase-solicitation-budget-allocation', 'click', function() {
     $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
   });
 
