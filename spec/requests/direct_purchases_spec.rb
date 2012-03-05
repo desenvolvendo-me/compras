@@ -16,7 +16,7 @@ feature "DirectPurchases" do
     PaymentMethod.make!(:dinheiro)
     Period.make!(:um_ano)
 
-    click_link 'Contabilidade'
+    click_link 'Solicitações'
 
     click_link 'Compras Diretas'
 
@@ -72,7 +72,7 @@ feature "DirectPurchases" do
     PaymentMethod.make!(:cheque)
     Period.make!(:tres_meses)
 
-    click_link 'Contabilidade'
+    click_link 'Solicitações'
 
     click_link 'Compras Diretas'
 
@@ -122,7 +122,7 @@ feature "DirectPurchases" do
   scenario 'destroy an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
-    click_link 'Contabilidade'
+    click_link 'Solicitações'
 
     click_link 'Compras Diretas'
 

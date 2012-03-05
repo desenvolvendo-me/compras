@@ -11,7 +11,6 @@ module Dashboard::AccountancyHelper
       m.organogram_configurations
       m.founded_debt_contracts
       m.creditors
-      m.direct_purchases
       m.budget_allocations
       m.payment_methods
       m.functions
