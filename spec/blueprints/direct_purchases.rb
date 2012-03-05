@@ -12,4 +12,5 @@ DirectPurchase.blueprint(:compra) do
   price_collection { "9,99" }
   price_registration { "8,88" }
   observation { "Observacoes" }
+  period { Period.make!(:um_ano) }
 end

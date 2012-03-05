@@ -1,7 +1,7 @@
 class DirectPurchase < ActiveRecord::Base
   attr_accessible :year, :date, :legal_reference_id, :modality, :provider_id, :organogram_id
   attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
-  attr_accessible :price_collection, :price_registration, :observation
+  attr_accessible :price_collection, :price_registration, :observation, :period_id
 
   attr_modal :year, :date, :modality
 
@@ -14,6 +14,7 @@ class DirectPurchase < ActiveRecord::Base
   belongs_to :delivery_location
   belongs_to :employee
   belongs_to :payment_method
+  belongs_to :period
 
   validates :year, :mask => "9999"
 

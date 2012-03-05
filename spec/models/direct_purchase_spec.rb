@@ -16,4 +16,5 @@ describe DirectPurchase do
   it { should belong_to :delivery_location }
   it { should belong_to :employee }
   it { should belong_to :payment_method }
+  it { should belong_to :period }
 end

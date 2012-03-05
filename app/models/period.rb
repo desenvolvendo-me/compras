@@ -3,6 +3,8 @@ class Period < ActiveRecord::Base
 
   has_enumeration_for :unit, :with => PeriodUnit
 
+  has_many :direct_purchases, :dependent => :restrict
+
   validates :unit, :amount, :presence => true
 
   orderize :unit

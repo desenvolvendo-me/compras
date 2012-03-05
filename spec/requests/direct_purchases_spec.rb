@@ -14,6 +14,7 @@ feature "DirectPurchases" do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
+    Period.make!(:um_ano)
 
     click_link 'Contabilidade'
 
@@ -30,6 +31,7 @@ feature "DirectPurchases" do
     fill_modal 'Código do objeto', :with => 'Ponte', :field => 'Descrição'
     fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+    fill_modal 'Prazo', :with => '1', :field => 'Quantidade'
     fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
     fill_in 'Coleta de preços', :with => '99'
     fill_in 'Reg. de preços', :with => '88'
@@ -52,6 +54,7 @@ feature "DirectPurchases" do
     page.should have_field 'Código do objeto', :with => 'Ponte'
     page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    page.should have_field 'Prazo', :with => '1 - Ano'
     page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
     page.should have_field 'Coleta de preços', :with => '99'
     page.should have_field 'Reg. de preços', :with => '88'
@@ -67,6 +70,7 @@ feature "DirectPurchases" do
     DeliveryLocation.make!(:health)
     Employee.make!(:wenderson)
     PaymentMethod.make!(:cheque)
+    Period.make!(:tres_meses)
 
     click_link 'Contabilidade'
 
@@ -85,6 +89,7 @@ feature "DirectPurchases" do
     fill_modal 'Código do objeto', :with => 'Viaduto', :field => 'Descrição'
     fill_modal 'Local de entrega', :with => 'Secretaria da Saúde', :field => 'Descrição'
     fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
+    fill_modal 'Prazo', :with => '3', :field => 'Quantidade'
     fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
     fill_in 'Coleta de preços', :with => '77'
     fill_in 'Reg. de preços', :with => '66'
@@ -107,6 +112,7 @@ feature "DirectPurchases" do
     page.should have_field 'Código do objeto', :with => 'Viaduto'
     page.should have_field 'Local de entrega', :with => 'Secretaria da Saúde'
     page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
+    page.should have_field 'Prazo', :with => '3 - Mês'
     page.should have_field 'Forma de pagamento', :with => 'Cheque'
     page.should have_field 'Coleta de preços', :with => '77'
     page.should have_field 'Reg. de preços', :with => '66'

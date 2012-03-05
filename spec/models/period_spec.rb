@@ -10,4 +10,6 @@ describe Period do
 
   it { should validate_presence_of :unit }
   it { should validate_presence_of :amount }
+
+  it { should have_many(:direct_purchases).dependent(:restrict) }
 end
