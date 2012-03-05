@@ -95,7 +95,6 @@ feature "Providers" do
   scenario 'update an existent provider' do
     Provider.make!(:wenderson_sa)
     Person.make!(:sobrinho)
-    Property.make!(:propriedade_2)
     Agency.make!(:santander)
     LegalNature.make!(:executivo_federal)
     Cnae.make!(:varejo)
