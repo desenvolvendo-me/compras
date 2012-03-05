@@ -1,14 +1,14 @@
 class PurchaseSolicitationItem < ActiveRecord::Base
   attr_accessible :material_id, :quantity, :unit_price, :status
 
+  has_enumeration_for :status, :with => PurchaseSolicitationItemStatus
+
   belongs_to :purchase_solicitation
   belongs_to :material
 
-  has_enumeration_for :status, :with => PurchaseSolicitationItemStatus
+  delegate :reference_unit, :to => :material, :allow_nil => true
 
   validates :material, :quantity, :unit_price, :presence => true
-
-  delegate :reference_unit, :to => :material, :allow_nil => true
 
   def estimated_total_price
     if (quantity && unit_price)

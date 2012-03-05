@@ -6,9 +6,13 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :recoverable, :validatable
 
-  has_one :bookmark, :dependent => :destroy
   belongs_to :profile
   belongs_to :employee
+
+  has_one :bookmark, :dependent => :destroy
+
+  delegate :roles, :to => :profile, :allow_nil => true
+  delegate :name, :to => :employee, :allow_nil => true
 
   validates :login, :presence => true
   validates :employee, :profile, :presence => true, :unless => :administrator?
@@ -16,9 +20,6 @@ class User < ActiveRecord::Base
 
   filterize
   orderize
-
-  delegate :roles, :to => :profile, :allow_nil => true
-  delegate :name, :to => :employee, :allow_nil => true
 
   def password_required?
     !persisted? || password.present? || password_confirmation.present?

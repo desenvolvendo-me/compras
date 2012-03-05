@@ -11,15 +11,15 @@ class Person < ActiveRecord::Base
 
   has_one :employee
 
+  delegate :address, :to => 'personable'
+  delegate :correspondence_address, :to => 'personable'
+
   validates :name, :personable, :presence => true
   validates :personable, :associated => true
   validates :email, :mail => true, :allow_blank => true
   validates :phone, :fax, :mobile, :mask => '(99) 9999-9999', :allow_blank => true
 
   orderize
-
-  delegate :address, :to => 'personable'
-  delegate :correspondence_address, :to => 'personable'
 
   def self.filter(params = {})
     relation = scoped

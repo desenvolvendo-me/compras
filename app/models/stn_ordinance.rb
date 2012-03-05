@@ -1,12 +1,12 @@
 class StnOrdinance < ActiveRecord::Base
   attr_accessible :description
 
-  orderize :description
-  filterize
+  has_many :expense_economic_classifications, :dependent => :restrict
 
   validates :description, :presence => true, :uniqueness => true
 
-  has_many :expense_economic_classifications, :dependent => :restrict
+  orderize :description
+  filterize
 
   def to_s
     description

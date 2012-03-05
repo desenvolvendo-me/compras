@@ -1,8 +1,9 @@
 class Provider < ActiveRecord::Base
   attr_accessible :person_id, :agency_id, :legal_nature_id, :cnae_id, :registration_date
-  attr_accessible :bank_account, :crc_number, :crc_registration_date, :crc_expiration_date, :crc_renewal_date
-  attr_accessible :provider_partners_attributes, :economic_registration_id, :materials_group_ids, :materials_class_ids
-  attr_accessible :material_ids, :provider_licitation_documents_attributes
+  attr_accessible :bank_account, :crc_number, :crc_registration_date, :crc_expiration_date
+  attr_accessible :crc_renewal_date, :provider_partners_attributes, :economic_registration_id
+  attr_accessible :materials_group_ids, :materials_class_ids, :material_ids
+  attr_accessible :provider_licitation_documents_attributes
 
   attr_modal :crc_number
 
@@ -20,6 +21,9 @@ class Provider < ActiveRecord::Base
   has_many :provider_licitation_documents, :dependent => :destroy, :inverse_of => :provider
   has_many :direct_purchases, :dependent => :restrict
 
+  accepts_nested_attributes_for :provider_partners, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :provider_licitation_documents, :reject_if => :all_blank, :allow_destroy => true
+
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
   delegate :personable_type, :to => :person, :allow_nil => true
 
@@ -29,9 +33,6 @@ class Provider < ActiveRecord::Base
 
   orderize :person_id
   filterize
-
-  accepts_nested_attributes_for :provider_partners, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :provider_licitation_documents, :reject_if => :all_blank, :allow_destroy => true
 
   def to_s
     id.to_s

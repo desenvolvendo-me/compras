@@ -1,20 +1,11 @@
 class Pledge < ActiveRecord::Base
-  attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :pledge_type,
-                  :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id, :pledge_historic_id,
-                  :management_contract_id, :licitation_modality_id, :description, :licitation, :process,
-                  :reserve_fund_id, :material_kind, :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
-
-  delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
+  attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :pledge_type
+  attr_accessible :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id
+  attr_accessible :pledge_historic_id, :management_contract_id, :licitation_modality_id
+  attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
+  attr_accessible :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
 
   attr_accessor :licitation, :process
-
-  orderize :emission_date
-  filterize
-
-  delegate :amount, :function, :subfunction, :government_program, :government_action, :organogram, :expense_economic_classification,
-           :to => :budget_allocation, :allow_nil => true, :prefix => true
-
-  delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
 
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type
@@ -30,7 +21,16 @@ class Pledge < ActiveRecord::Base
   belongs_to :pledge_historic
   belongs_to :management_contract
   belongs_to :licitation_modality
+
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge
+
+  accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
+
+  delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
+  delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
+  delegate :amount, :function, :subfunction, :government_program, :government_action,
+           :organogram, :expense_economic_classification,
+           :to => :budget_allocation, :allow_nil => true, :prefix => true
 
   validates :year, :mask => '9999'
   validates :emission_date, :timeliness => { :on_or_after => Date.current, :type => :date }
@@ -40,7 +40,10 @@ class Pledge < ActiveRecord::Base
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
 
-  accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
+  before_save :parse_licitation, :parse_process
+
+  orderize :emission_date
+  filterize
 
   def to_s
     id.to_s
@@ -53,8 +56,6 @@ class Pledge < ActiveRecord::Base
   def joined_process
     "#{process_number}/#{process_year}" if process?
   end
-
-  before_save :parse_licitation, :parse_process
 
   def items_total_value
     pledge_items.map(&:estimated_total_price).compact.sum

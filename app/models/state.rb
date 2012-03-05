@@ -4,6 +4,7 @@ class State < ActiveRecord::Base
   attr_modal :name
 
   belongs_to :country
+
   has_many :cities, :dependent => :destroy
 
   validates :name, :acronym, :presence => true, :uniqueness => { :allow_blank => true }
