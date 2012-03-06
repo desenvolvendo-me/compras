@@ -85,6 +85,14 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Preço total estimado', :with => "500,00"
       page.should have_select 'Status', :selected => 'Pendente'
     end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_disabled_field 'Id'
+      page.should have_field 'Id', :with => "#{budget_allocation.id}"
+
+      page.should have_disabled_field 'Dotação orçamentária'
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012"
+    end
   end
 
   scenario 'clear extra budget_allocations on new view' do
