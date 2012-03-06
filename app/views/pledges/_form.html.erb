@@ -91,4 +91,13 @@
   $('form').delegate('.remove-pledge-item', 'click', function() {
     $('#pledge_items_total_value').val(pledgeItemsTotalValue);
   });
+
+  (function() {
+    if(<%= f.object.persisted? %>) {
+      $('form.pledge input, select, textarea').attr('disabled', true);
+      $('form.pledge .add-pledge-item').hide();
+      $('form.pledge .remove-pledge-item').hide();
+      $('form.pledge .hint').hide();
+    }
+  })();
 </script>

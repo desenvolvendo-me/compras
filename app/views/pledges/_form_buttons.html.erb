@@ -1,4 +1,4 @@
 <div class="buttons">
-  <%= f.button :submit %>
+  <%= f.button :submit unless f.object.persisted? %>
   <%= f.button :cancel %>
 </div>

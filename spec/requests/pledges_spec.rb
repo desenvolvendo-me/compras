@@ -116,20 +116,8 @@ feature "Pledges" do
     end
   end
 
-  scenario 'update an existent pledge' do
+  scenario 'should have all fields disabled when editing an existent pledge' do
     Pledge.make!(:empenho)
-    Entity.make!(:secretaria_de_educacao)
-    ManagementUnit.make!(:unidade_auxiliar)
-    budget_allocation = BudgetAllocation.make!(:alocacao_extra)
-    reserve_fund = ReserveFund.make!(:educacao_2011)
-    PledgeCategory.make!(:auxiliar)
-    ExpenseKind.make!(:alojamento)
-    PledgeHistoric.make!(:anual)
-    LicitationModality.make!(:privada)
-    management_contract = ManagementContract.make!(:segundo_contrato)
-    Creditor.make!(:nobe)
-    founded_debt_contract = FoundedDebtContract.make!(:contrato_educacao)
-    Material.make!(:antivirus)
 
     click_link 'Contabilidade'
 
@@ -139,81 +127,41 @@ feature "Pledges" do
       page.find('a').click
     end
 
+    should_not have_button 'Criar Empenho'
+
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_in 'Exercício', :with => '2013'
-      fill_modal 'Reserva de dotação', :with => '2011', :field => 'Exercício'
-      fill_modal 'Unidade gestora', :with => 'Unidade Auxiliar', :field => 'Descrição'
-      fill_in 'Data de emissão', :with => I18n.l(Date.current + 1)
-      select 'Estimativo', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
-      fill_in 'Valor', :with => '400,00'
-      select 'Domínio público', :from => 'Tipo de bem'
-      fill_modal 'Categoria', :with => 'Auxiliar', :field => 'Descrição'
-      fill_modal 'Contrato de dívida fundada', :with => '2011', :field => 'Exercício'
-      fill_modal 'Credor', :with => 'Nobe'
+      page.should have_disabled_field 'Entidade'
+      page.should have_disabled_field 'Exercício'
+      page.should have_disabled_field 'Reserva de dotação'
+      page.should have_disabled_field 'Unidade gestora'
+      page.should have_disabled_field 'Data de emissão'
+      page.should have_disabled_field 'Tipo de empenho'
+      page.should have_disabled_field 'Dotação'
+      page.should have_disabled_field 'Valor'
+      page.should have_disabled_field 'Categoria'
+      page.should have_disabled_field 'Tipo de bem'
+      page.should have_disabled_field 'Contrato de dívida fundada'
+      page.should have_disabled_field 'Credor'
     end
 
     within_tab 'Complementar' do
-      fill_modal 'Tipo de despesa', :with => 'Alojamento', :field => 'Descrição'
-      fill_modal 'Histórico', :with => 'Anual', :field => 'Descrição'
-      fill_modal 'Modalidade', :with => 'Privada', :field => 'Modalidade'
-      fill_in 'Número da licitação', :with => '003/2014'
-      fill_in 'Número do processo', :with => '004/2015'
-      fill_modal 'Contrato', :with => '002', :field => 'Número do contrato'
-      fill_in 'Objeto', :with => 'Objeto de empenho'
+      page.should have_disabled_field 'Tipo de despesa'
+      page.should have_disabled_field 'Histórico'
+      page.should have_disabled_field 'Modalidade'
+      page.should have_disabled_field 'Número da licitação'
+      page.should have_disabled_field 'Número do processo'
+      page.should have_disabled_field 'Contrato'
+      page.should have_disabled_field 'Objeto'
     end
 
     within_tab 'Itens' do
-      fill_modal 'Item', :with => "Antivirus", :field => "Descrição"
-      page.should have_field 'U. medida', :with => "Unidade"
-      fill_in 'Quantidade', :with => "200"
-      fill_in 'Valor unitário', :with => "2,00"
-    end
-
-    click_button 'Atualizar Empenho'
-
-    page.should have_notice 'Empenho editado com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-      page.should have_field 'Exercício', :with => '2013'
-      page.should have_field 'Reserva de dotação', :with => "#{reserve_fund.id}/2011"
-      page.should have_field 'Unidade gestora', :with => 'Unidade Auxiliar'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.current + 1)
-      page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
-      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2011"
-      page.should have_field 'Valor', :with => '400,00'
-      page.should have_field 'Categoria', :with => 'Auxiliar'
-      page.should have_select 'Tipo de bem', :selected => 'Domínio público'
-      page.should have_field 'Contrato de dívida fundada', :with => "#{founded_debt_contract.id}/2011"
-      page.should have_field 'Credor', :with => 'Nobe'
-    end
-
-    within_tab 'Complementar' do
-      page.should have_field 'Tipo de despesa', :with => 'Alojamento'
-      page.should have_field 'Histórico', :with => 'Anual'
-      page.should have_field 'Modalidade', :with => 'Privada'
-      page.should have_field 'Número da licitação', :with => '003/2014'
-      page.should have_field 'Número do processo', :with => '004/2015'
-      page.should have_field 'Contrato', :with => "#{management_contract.id}/2013"
-      page.should have_field 'Objeto', :with => 'Objeto de empenho'
-    end
-
-    within_tab 'Itens' do
-      page.should have_field 'Valor', :with => "400,00"
-      page.should have_field 'Item', :with => "01.01.00001 - Antivirus"
-
-      # should not change the description because it is readonly
-      page.should have_field 'Descrição', :with => "desc cadeiras"
-      page.should have_field 'U. medida', :with => "Unidade"
-      page.should have_field 'Quantidade', :with => "200"
-      page.should have_field 'Valor unitário', :with => "2,00"
-      page.should have_field 'Valor total', :with => "400,00"
+      page.should have_disabled_field 'Valor'
+      page.should have_disabled_field 'Item'
+      page.should have_disabled_field 'Descrição'
+      page.should have_disabled_field 'U. medida'
+      page.should have_disabled_field 'Quantidade'
+      page.should have_disabled_field 'Valor unitário'
+      page.should have_disabled_field 'Valor total'
     end
   end
 
