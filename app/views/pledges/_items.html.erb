@@ -31,7 +31,7 @@
     right: true
   });
 
-  $('form').delegate('.material', 'change', function (event, data) {
+  $('form.pledge').delegate('.material', 'change', function (event, data) {
     if (data){
       var record = data.record,
           inputs = $(this).closest('.pledge-item').find(':input');
@@ -40,7 +40,7 @@
     }
   });
 
-  $('form').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
+  $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
     var itemDiv = $(this).closest('.pledge-item'),
         itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
         itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),

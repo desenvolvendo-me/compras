@@ -20,7 +20,7 @@
     uuid: 'uuid_purchase_solicitation_item'
   });
 
-  $('form').delegate('.material', 'change', function (event, data) {
+  $('form.purchase_solicitation').delegate('.material', 'change', function (event, data) {
     if (data){
       var record = data.record,
           inputs = $(this).closest('fieldset').find(':input');
@@ -28,7 +28,7 @@
     }
   });
 
-  $('form').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
+  $('form.purchase_solicitation').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
     var fieldset = $(this).closest('fieldset'),
         itemQuantity = parsePtBrFloat(fieldset.find('.item-quantity').val() || '0'),
         itemUnitPrice = parsePtBrFloat(fieldset.find('.item-unit-price').val() || '0'),

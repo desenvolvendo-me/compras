@@ -84,11 +84,11 @@
     return floatToPtBrString(total);
   }
 
-  $('form').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
+  $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
     $('#pledge_items_total_value').val(pledgeItemsTotalValue);
   });
 
-  $('form').delegate('.remove-pledge-item', 'click', function() {
+  $('form.pledge').delegate('.remove-pledge-item', 'click', function() {
     $('#pledge_items_total_value').val(pledgeItemsTotalValue);
   });
 
