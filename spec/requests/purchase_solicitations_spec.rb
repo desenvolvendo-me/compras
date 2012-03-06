@@ -229,30 +229,6 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'should show date current as request date' do
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    within_tab 'Dados gerais' do
-      page.should have_field 'Data da solicitação', :with => I18n.l(Date.current)
-    end
-  end
-
-  scenario 'should show current year as default accounting year' do
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    within_tab 'Dados gerais' do
-      page.should have_field 'Ano', :with => "#{Date.current.year}"
-    end
-  end
-
   scenario 'showing a message for no extra allocation when allocation is selected on general tab' do
     pending "Don't work with hidden alements"
     make_dependencies!
@@ -435,18 +411,6 @@ feature "PurchaseSolicitations" do
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field 'Valor previsto', :with => '1.020,00'
       end
-    end
-  end
-
-  scenario 'should be current_user employee attribute as default responsible' do
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    within_tab 'Dados gerais' do
-      page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
     end
   end
 
