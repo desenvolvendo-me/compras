@@ -1,44 +1,46 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :year %>
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Dados gerais</a></li>
+    <li><a href="#items">Itens</a></li>
+  </ul>
+
+  <div id="general">
+    <%= render 'general', :f => f %>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :date %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :legal_reference %>
-  </div>
-</div>
-
-<%= f.input :modality %>
-<%= f.input :provider %>
-<%= f.input :organogram %>
-<%= f.input :licitation_object %>
-<%= f.input :delivery_location %>
-<%= f.input :employee %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :period %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :payment_method %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :price_collection %>
+  <div id="items">
+    <%= render 'items', :f => f %>
   </div>
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :observation %>
-  </div>
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
 
-  <div class="yui3-u-1-2">
-    <%= f.input :price_registration %>
-  </div>
-</div>
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+
+  function directPurchaseItemsTotalValue() {
+    var total = 0,
+        value;
+    $.each($('.item-price:visible'), function() {
+      value = $(this).attr('value')
+      if (value != '') {
+        total += parsePtBrFloat(value);
+      }
+    });
+    return floatToPtBrString(total);
+  }
+
+  $('form.direct_purchase').delegate('.item-quantity, .item-unit-price, .item-price', 'keyup', function() {
+    $('#direct_purchase_items_total_value').val(directPurchaseItemsTotalValue);
+  });
+
+  $('form.direct_purchase').delegate('.remove-direct-purchase-item', 'click', function() {
+    $('#direct_purchase_items_total_value').val(directPurchaseItemsTotalValue);
+  });
+</script>

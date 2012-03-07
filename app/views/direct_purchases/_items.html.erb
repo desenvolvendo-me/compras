@@ -1,0 +1,56 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :items_total_value, :input_html => { :value => number_to_currency(f.object.items_total_value, :format => "%n"), :size => 12 }, :disabled => true %>
+  </div>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-direct-purchase-item" value="Adicionar Item">
+</p>
+
+<%= f.association :direct_purchase_items, :collection => localized(f.object.direct_purchase_items) do |p| %>
+  <%= render 'direct_purchase_items/form', :f => p %>
+<% end %>
+
+<%= mustache 'direct-purchase-items-template' do %>
+  <%= f.association :direct_purchase_items_attributes, :collection => f.object.direct_purchase_items.build, :index => '{{uuid_direct_purchase_item}}' do |p| %>
+    <%= render 'direct_purchase_items/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#direct-purchase-items-template").nestedForm({
+    add: '.add-direct-purchase-item',
+    remove: '.remove-direct-purchase-item',
+    target: '#items',
+    uuid: 'uuid_direct_purchase_item',
+    fieldToRemove: '.direct-purchase-item',
+    right: true
+  });
+
+  $('form.direct_purchase').delegate('.material', 'change', function (event, data) {
+    if (data){
+      var record = data.record,
+          inputs = $(this).closest('.direct-purchase-item').find(':input');
+      $(inputs[4]).val(record.data("reference-unit"));
+    }
+  });
+
+  $('form.direct_purchase').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
+    var itemDiv = $(this).closest('.direct-purchase-item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
+        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+
+    itemDiv.find('.item-price').attr('value', total);
+  });
+
+  $('form.direct_purchase').delegate('.item-price', 'keyup', function(){
+    var itemDiv = $(this).closest('.direct-purchase-item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemPrice = parsePtBrFloat(itemDiv.find('.item-price').val() || '0'),
+        unitPrice = floatToPtBrString(itemPrice / itemQuantity);
+
+    itemDiv.find('.item-unit-price').attr('value', unitPrice);
+  });
+</script>
