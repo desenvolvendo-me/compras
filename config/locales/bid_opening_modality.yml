@@ -1,0 +1,18 @@
+pt-BR:
+  enumerations:
+    bid_opening_modality:
+      making_cost_for_constructions_and_engineering_services: "Tomada de preço para obras de egenharia e serviço"
+      making_cost_for_purchases_and_services: "Tomada de preços para compras e serviços"
+      invitation_for_constructions_engineering_services: "Convite para obras e serviços de engenharia"
+      invitation_for_purchases_and_engineering_services: "Convite para compras e serviços de engenharia"
+      competition_for_constructions_and_engineering_services: "Concorrência para obras e serviços de engenharia"
+      competition_for_purchases_and_services: "Concorrência para compras e serviços"
+      presence_trading: "Pregão presencial"
+      electronic_trading: "Pregão eletrônico"
+      auction: "Leilão"
+      exemption_for_constructions_and_engineering_services: "Dispensa para obras e serviços de engenharia"
+      exemption_for_purchases_and_services: "Dispensa para compras e serviços"
+      unenforceability: "Inexigibilidade"
+      competition: "Concurso"
+      competition_for_grants: "Concorrência para concessões"
+      other_modalities: "Outras modalidades"

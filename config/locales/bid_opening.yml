@@ -1,0 +1,23 @@
+pt-BR:
+  activerecord:
+    models:
+      bid_opening:
+        one: "Abertura de Licitação"
+        other: "Aberturas de Licitação"
+
+    attributes:
+      bid_opening:
+        process: "Processo"
+        year: "Ano"
+        date: "Data do processo"
+        protocol: "Número do protocolo"
+        organogram: "Unidade orçamentária"
+        value_estimated: "Valor estimado"
+        budget_allocation: "Dotação utilizada"
+        modality: "Modalidade"
+        item: "Inciso"
+        object_type: "Tipo de objeto"
+        description: "Objeto do processo licitatório"
+        responsible: "Responsável"
+        bid_opening_status: "Status do processo administrativo"
+        delivery_date: "Data de liberação"

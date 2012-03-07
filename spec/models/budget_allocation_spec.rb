@@ -5,6 +5,7 @@ require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/reserve_fund'
 require 'app/models/pledge'
+require 'app/models/bid_opening'
 
 describe BudgetAllocation do
   it 'should return description as to_s id/year' do
@@ -27,6 +28,7 @@ describe BudgetAllocation do
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
+  it { should have_many(:bid_openings).dependent(:restrict) }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }

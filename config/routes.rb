@@ -84,6 +84,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :bid_openings do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :branch_activities do
     collection do
       get :modal

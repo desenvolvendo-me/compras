@@ -5,6 +5,7 @@ module Dashboard::AdministractiveProcessHelper
 
   def links
     simple_menu do |m|
+      m.bid_openings
     end
   end
 end

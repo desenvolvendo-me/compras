@@ -5,6 +5,7 @@ require 'app/models/address'
 require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/organogram_responsible'
+require 'app/models/bid_opening'
 
 describe Organogram do
   it 'should respond to to_s with description' do
@@ -29,6 +30,7 @@ describe Organogram do
   it { should belong_to :organogram_configuration }
   it { should belong_to :administration_type }
   it { should have_many(:direct_purchases).dependent(:restrict) }
+  it { should have_many(:bid_openings).dependent(:restrict) }
 
   context 'should validate mask' do
     it 'and should not be valid with wrong mask' do

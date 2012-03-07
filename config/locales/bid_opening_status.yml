@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    bid_opening_status:
+      waiting: "Aguardando"
+      released: "Liberado"
+      canceled: "Cancelado"

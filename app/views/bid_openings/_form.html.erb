@@ -1,0 +1,37 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :process, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :year, :disabled => f.object.persisted? %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :date %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :protocol %>
+  </div>
+</div>
+
+<%= f.input :organogram %>
+<%= f.input :value_estimated %>
+<%= f.input :budget_allocation %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :modality %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :item %>
+  </div>
+</div>
+
+<%= f.input :object_type %>
+<%= f.input :description %>
+<%= f.input :responsible %>
+<%= f.input :bid_opening_status %>
+<%= f.input :delivery_date %>
