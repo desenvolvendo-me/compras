@@ -1,15 +1,10 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Dados gerais</a></li>
-    <li><a href="#items">Itens</a></li>
   </ul>
 
   <div id="general">
     <%= render 'general', :f => f %>
-  </div>
-
-  <div id="items">
-    <%= render 'items', :f => f %>
   </div>
 </div>
 
@@ -22,25 +17,5 @@
         $(this).tabs('select', tabWithError);
       }
     }
-  });
-
-  function directPurchaseItemsTotalValue() {
-    var total = 0,
-        value;
-    $.each($('.item-price:visible'), function() {
-      value = $(this).attr('value')
-      if (value != '') {
-        total += parsePtBrFloat(value);
-      }
-    });
-    return floatToPtBrString(total);
-  }
-
-  $('form.direct_purchase').delegate('.item-quantity, .item-unit-price, .item-price', 'keyup', function() {
-    $('#direct_purchase_items_total_value').val(directPurchaseItemsTotalValue);
-  });
-
-  $('form.direct_purchase').delegate('.remove-direct-purchase-item', 'click', function() {
-    $('#direct_purchase_items_total_value').val(directPurchaseItemsTotalValue);
   });
 </script>
