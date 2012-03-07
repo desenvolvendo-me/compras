@@ -13,7 +13,7 @@ feature "MaterialsGroups" do
 
     click_link 'Criar Grupo de Materiais'
 
-    fill_in 'Número do grupo', :with => '01'
+    fill_in 'Código', :with => '01'
     fill_in 'Descrição', :with => 'Informática'
 
     click_button 'Criar Grupo de Materiais'
@@ -22,7 +22,7 @@ feature "MaterialsGroups" do
 
     click_link 'Informática'
 
-    page.should have_field 'Número do grupo', :with => '01'
+    page.should have_field 'Código', :with => '01'
     page.should have_field 'Descrição', :with => 'Informática'
   end
 
@@ -35,7 +35,7 @@ feature "MaterialsGroups" do
 
     click_link 'Informática'
 
-    fill_in 'Número do grupo', :with => '02'
+    fill_in 'Código', :with => '02'
     fill_in 'Descrição', :with => 'Materiais de escritorio'
 
     click_button 'Atualizar Grupo de Materiais'
@@ -44,7 +44,7 @@ feature "MaterialsGroups" do
 
     click_link 'Materiais de escritorio'
 
-    page.should have_field 'Número do grupo', :with => '02'
+    page.should have_field 'Código', :with => '02'
     page.should have_field 'Descrição', :with => 'Materiais de escritorio'
   end
 
@@ -74,7 +74,7 @@ feature "MaterialsGroups" do
 
     click_link 'Criar Grupo de Materiais'
 
-    fill_in 'Número do grupo', :with => '01'
+    fill_in 'Código', :with => '01'
 
     click_button 'Criar Grupo de Materiais'
 

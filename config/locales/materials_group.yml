@@ -7,5 +7,5 @@ pt-BR:
 
     attributes:
       materials_group:
-        group_number: "Número do grupo"
+        group_number: "Código"
         description: "Descrição"
