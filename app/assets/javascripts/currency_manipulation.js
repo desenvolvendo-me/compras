@@ -3,5 +3,5 @@ function floatToPtBrString(value){
 }
 
 function parsePtBrFloat(value){
-  return parseFloat(value.replace('.','').replace(',','.'));
+  return parseFloat(value.replace(/\./gi,'').replace(/\,/,'.'));
 }
