@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
+require 'app/models/direct_purchase_budget_allocation'
 
 describe DirectPurchase do
   it 'should return id as to_s method' do
