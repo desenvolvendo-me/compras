@@ -23,7 +23,7 @@ gem 'will_paginate', '3.0.3'
 
 gem 'squeel', '0.9.5'
 gem 'carrierwave', '0.5.8'
-gem 'awesome_nested_set', '2.0.2'
+gem 'awesome_nested_set', '2.1.2'
 
 gem 'mail_validator', '0.2.0'
 gem 'cnpj_validator', '0.3.1'
