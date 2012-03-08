@@ -13,7 +13,7 @@ pt-BR:
         modality: "Modalidade"
         provider: "Fornecedor"
         organogram: "Unidade orçamentária"
-        licitation_object: "Código do objeto"
+        licitation_object: "Objeto da licitação"
         delivery_location: "Local de entrega"
         employee: "Responsável"
         payment_method: "Forma de pagamento"
