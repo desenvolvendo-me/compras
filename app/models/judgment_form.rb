@@ -4,6 +4,8 @@ class JudgmentForm < ActiveRecord::Base
   has_enumeration_for :kind, :with => JudgmentFormKind
   has_enumeration_for :licitation_kind, :with => LicitationKind
 
+  has_many :bid_openings, :dependent => :restrict
+
   validates :description, :kind, :licitation_kind, :presence => true
   validates :description, :uniqueness => true
 

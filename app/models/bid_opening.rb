@@ -2,6 +2,7 @@ class BidOpening < ActiveRecord::Base
   attr_accessible :organogram_id, :budget_allocation_id, :responsible_id
   attr_accessible :process, :year, :date, :value_estimated, :modality
   attr_accessible :protocol, :object_type, :bid_opening_status, :description, :delivery_date
+  attr_accessible :judgment_form_id
 
   attr_readonly :process, :year
 
@@ -12,10 +13,11 @@ class BidOpening < ActiveRecord::Base
   belongs_to :organogram
   belongs_to :budget_allocation
   belongs_to :responsible, :class_name => 'Employee'
+  belongs_to :judgment_form
 
   validates :year, :date, :organogram, :value_estimated, :presence => true
   validates :budget_allocation, :modality, :object_type, :presence => true
-  validates :description, :presence => true
+  validates :description, :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
 
   before_create :set_process

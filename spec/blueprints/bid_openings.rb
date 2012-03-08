@@ -9,6 +9,7 @@ BidOpening.blueprint(:compra_de_cadeiras) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   modality { BidOpeningModality::AUCTION }
   object_type { BidOpeningObjectType::PURCHASE_AND_SERVICES }
+  judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   bid_opening_status { BidOpeningStatus::WAITING }

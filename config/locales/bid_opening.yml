@@ -17,6 +17,7 @@ pt-BR:
         modality: "Modalidade"
         item: "Inciso"
         object_type: "Tipo de objeto"
+        judgment_form: "Forma de julgamento"
         description: "Objeto do processo licitatório"
         responsible: "Responsável"
         bid_opening_status: "Status do processo administrativo"

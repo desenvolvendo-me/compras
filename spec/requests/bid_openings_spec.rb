@@ -9,6 +9,7 @@ feature "BidOpenings" do
   scenario 'create a new bid_opening' do
     organogram = Organogram.make!(:secretaria_de_educacao)
     budget_allocation = BudgetAllocation.make!(:alocacao)
+    JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
 
     click_link 'Processos Administrativos'
@@ -25,6 +26,7 @@ feature "BidOpenings" do
     fill_modal 'Dotação utilizada', :with => '2012', :field => 'Exercício'
     select 'Leilão', :from => 'Modalidade'
     select 'Compras e serviços', :from => 'Tipo de objeto'
+    fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
     fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     select 'Aguardando', :from => 'Status do processo administrativo'
@@ -49,6 +51,7 @@ feature "BidOpenings" do
     page.should have_field 'Dotação utilizada', :with => "#{budget_allocation.id}/2012"
     page.should have_select 'Modalidade', :selected => 'Leilão'
     page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+    page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
     page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
     page.should have_select 'Status do processo administrativo', :with => 'Aguardando'
@@ -58,6 +61,7 @@ feature "BidOpenings" do
   scenario 'update an existent bid_opening' do
     organogram = Organogram.make!(:secretaria_de_desenvolvimento)
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:wenderson)
     BidOpening.make!(:compra_de_cadeiras)
 
@@ -76,6 +80,7 @@ feature "BidOpenings" do
     fill_modal 'Dotação utilizada', :with => '2011', :field => 'Exercício'
     select 'Outras modalidades', :from => 'Modalidade'
     select 'Alienação de bens', :from => 'Tipo de objeto'
+    fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
     fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de cadeiras da Secretaria'
     fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
     select 'Cancelado', :from => 'Status do processo administrativo'
@@ -98,6 +103,7 @@ feature "BidOpenings" do
     page.should have_field 'Dotação utilizada', :with => "#{budget_allocation.id}/2011"
     page.should have_select 'Modalidade', :selected => 'Outras modalidades'
     page.should have_select 'Tipo de objeto', :selected => 'Alienação de bens'
+    page.should have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
     page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de cadeiras da Secretaria'
     page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
     page.should have_select 'Status do processo administrativo', :with => 'Cancelado'
