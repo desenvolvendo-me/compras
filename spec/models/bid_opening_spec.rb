@@ -1,4 +1,9 @@
-require 'spec_helper'
+# encoding: utf-8
+require 'model_helper'
+require 'app/models/bid_opening'
+require 'app/models/budget_allocation'
+require 'app/models/organogram'
+require 'app/models/employee'
 
 describe BidOpening do
   it 'should return process/year as to_s' do
