@@ -6,5 +6,5 @@ class ProviderLicitationDocument < ActiveRecord::Base
 
   validates :document_type, :document_number, :emission_date, :expiration_date, :presence => true
   validates :document_number, :numericality => true
-  validates :emission_date, :timeliness => { :on_or_after => Date.current, :type => :date }
+  validates :emission_date, :timeliness => { :on_or_before => Date.current, :type => :date }
 end

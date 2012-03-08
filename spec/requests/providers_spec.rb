@@ -136,7 +136,7 @@ feature "Providers" do
     within_tab 'Documentação para licitações' do
       fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
       fill_in 'Número do documento', :with => '2222222'
-      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      fill_in 'Data de emissão', :with => I18n.l(Date.yesterday)
       fill_in 'Data de validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
@@ -172,7 +172,7 @@ feature "Providers" do
     within_tab 'Documentação para licitações' do
       page.should have_field 'Tipo de documento', :with => 'Oficial'
       page.should have_field 'Número do documento', :with => '2222222'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
       page.should have_field 'Data de validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
   end

@@ -15,7 +15,7 @@ describe ProviderLicitationDocument do
 
   it { should validate_numericality_of :document_number }
 
-  it "should not have emission_date less than today" do
-    subject.should_not allow_value(Date.yesterday).for(:emission_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
+  it "should not have emission_date greater than today" do
+    subject.should_not allow_value(Date.tomorrow).for(:emission_date).with_message("deve ser em ou antes de #{I18n.l Date.current}")
   end
 end
