@@ -182,7 +182,7 @@ feature "DirectPurchases" do
       page.should have_select 'Modalidade', :selected => 'Obras de engenharia'
       page.should have_field 'Fornecedor', :with => provider.id.to_s
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Desenvolvimento'
-      page.should have_field 'Código do objeto', :with => 'Viaduto'
+      page.should have_field 'Objeto da licitação', :with => 'Viaduto'
       page.should have_field 'Local de entrega', :with => 'Secretaria da Saúde'
       page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
       page.should have_field 'Prazo', :with => '3 - Mês'
@@ -252,7 +252,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
-      fill_modal 'Código do objeto', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Prazo', :with => '1', :field => 'Quantidade'
