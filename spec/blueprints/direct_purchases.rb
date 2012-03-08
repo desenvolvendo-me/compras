@@ -14,4 +14,5 @@ DirectPurchase.blueprint(:compra) do
   observation { "Observacoes" }
   period { Period.make!(:um_ano) }
   direct_purchase_items { [DirectPurchaseItem.make!(:item)] }
+  status { DirectPurchaseStatus::AUTHORIZED }
 end
