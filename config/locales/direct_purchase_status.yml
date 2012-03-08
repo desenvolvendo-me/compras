@@ -2,4 +2,4 @@ pt-BR:
   enumerations:
     direct_purchase_status:
       authorized: Autorizado
-      unauthorized: Ainda não autorizado
+      unauthorized: Não autorizado
