@@ -2,11 +2,12 @@ class DirectPurchase < ActiveRecord::Base
   attr_accessible :year, :date, :legal_reference_id, :modality, :provider_id, :organogram_id
   attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :price_collection, :price_registration, :observation, :period_id
-  attr_accessible :direct_purchase_items_attributes
+  attr_accessible :direct_purchase_items_attributes, :status
 
   attr_modal :year, :date, :modality
 
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
+  has_enumeration_for :status, :with => DirectPurchaseStatus
 
   belongs_to :legal_reference
   belongs_to :provider
@@ -22,6 +23,7 @@ class DirectPurchase < ActiveRecord::Base
   accepts_nested_attributes_for :direct_purchase_items, :reject_if => :all_blank, :allow_destroy => true
 
   validates :year, :mask => "9999"
+  validates :status, :presence => true
 
   validate :cannot_have_more_than_once_item_with_the_same_material
 

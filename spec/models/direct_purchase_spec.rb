@@ -17,6 +17,9 @@ describe DirectPurchase do
   it { should belong_to :employee }
   it { should belong_to :payment_method }
   it { should belong_to :period }
+
+  it { should validate_presence_of :status }
+
   it { should have_many(:direct_purchase_items).dependent(:destroy).order(:id) }
 
   it "should sum the estimated total price of the items" do
