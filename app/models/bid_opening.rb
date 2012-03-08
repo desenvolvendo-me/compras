@@ -1,7 +1,7 @@
 class BidOpening < ActiveRecord::Base
   attr_accessible :organogram_id, :budget_allocation_id, :responsible_id
   attr_accessible :process, :year, :date, :value_estimated, :modality
-  attr_accessible :protocol, :object_type, :bid_opening_status, :description, :delivery_date
+  attr_accessible :protocol, :object_type, :bid_opening_status, :description
   attr_accessible :judgment_form_id
 
   attr_readonly :process, :year

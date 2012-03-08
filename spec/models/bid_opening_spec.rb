@@ -32,4 +32,6 @@ describe BidOpening do
   it { should_not allow_value('2a12').for(:year) }
 
   it { should have_db_index([:process, :year]).unique(true) }
+
+  it { should_not allow_mass_assignment_of(:delivery_date) }
 end

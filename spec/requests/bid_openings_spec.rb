@@ -30,7 +30,6 @@ feature "BidOpenings" do
     fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     select 'Aguardando', :from => 'Status do processo administrativo'
-    fill_in 'Data de liberação', :with => '07/03/2012'
 
     click_button 'Criar Abertura de Licitação'
 
@@ -55,7 +54,7 @@ feature "BidOpenings" do
     page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
     page.should have_select 'Status do processo administrativo', :with => 'Aguardando'
-    page.should have_field 'Data de liberação', :with => '07/03/2012'
+    page.should have_disabled_field 'Data de liberação'
   end
 
   scenario 'update an existent bid_opening' do
@@ -84,7 +83,6 @@ feature "BidOpenings" do
     fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de cadeiras da Secretaria'
     fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
     select 'Cancelado', :from => 'Status do processo administrativo'
-    fill_in 'Data de liberação', :with => '12/12/2011'
 
     click_button 'Atualizar Abertura de Licitação'
 
@@ -107,7 +105,6 @@ feature "BidOpenings" do
     page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de cadeiras da Secretaria'
     page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
     page.should have_select 'Status do processo administrativo', :with => 'Cancelado'
-    page.should have_field 'Data de liberação', :with => '12/12/2011'
   end
 
   scenario 'destroy an existent bid_opening' do

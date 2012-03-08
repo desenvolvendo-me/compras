@@ -13,5 +13,4 @@ BidOpening.blueprint(:compra_de_cadeiras) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   bid_opening_status { BidOpeningStatus::WAITING }
-  delivery_date { '2012-03-07' }
 end
