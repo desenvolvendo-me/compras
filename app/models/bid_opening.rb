@@ -20,6 +20,8 @@ class BidOpening < ActiveRecord::Base
   validates :description, :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
 
+  validate :validate_modality
+
   before_create :set_process
 
   orderize :year
@@ -38,6 +40,16 @@ class BidOpening < ActiveRecord::Base
       self.process = last.process.to_i + 1
     else
       self.process = 1
+    end
+  end
+
+  def validate_modality(verificator = BidOpeningModalitiesByObjectType.new)
+    return unless object_type?
+
+    if modality.blank?
+      errors.add(:modality, :blank)
+    elsif !verificator.verify_modality(object_type, modality)
+      errors.add(:modality, :inclusion)
     end
   end
 end

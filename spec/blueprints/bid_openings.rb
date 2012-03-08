@@ -7,8 +7,8 @@ BidOpening.blueprint(:compra_de_cadeiras) do
   organogram { Organogram.make!(:secretaria_de_educacao) }
   value_estimated { "500,50" }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
-  modality { BidOpeningModality::AUCTION }
   object_type { BidOpeningObjectType::PURCHASE_AND_SERVICES }
+  modality { BidOpeningModality::PRESENCE_TRADING }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
