@@ -29,6 +29,7 @@ describe BudgetAllocation do
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:bid_openings).dependent(:restrict) }
+  it { should have_many(:direct_purchase_budget_allocations).dependent(:restrict) }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }

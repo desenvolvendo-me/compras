@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      direct_purchase_budget_allocation:
+        one: "Dotação"
+        other: "Dotações"
+
+    attributes:
+      direct_purchase_budget_allocation:
+        budget_allocation: "Dotação orçamentária"
+        expense_economic_classification: "Classificação econômica de despesa"
+        amount: "Saldo da dotação"
+        pledge_type: "Tipo do empenho"

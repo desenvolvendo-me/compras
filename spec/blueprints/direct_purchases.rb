@@ -14,4 +14,5 @@ DirectPurchase.blueprint(:compra) do
   observation { "Observacoes" }
   period { Period.make!(:um_ano) }
   status { DirectPurchaseStatus::AUTHORIZED }
+  direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra)] }
 end

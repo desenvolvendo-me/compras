@@ -14,6 +14,7 @@ describe Material do
   it { should belong_to :expense_economic_classification }
   it { should have_many :pledge_items }
   it { should have_and_belong_to_many :providers }
+  it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }

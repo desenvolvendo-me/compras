@@ -1,0 +1,33 @@
+<p>
+  <input type="button" class="button affirmative add-direct-purchase-budget-allocation" value="Adicionar Dotação">
+</p>
+
+<%= f.association :direct_purchase_budget_allocations, :collection => localized(f.object.direct_purchase_budget_allocations) do |p| %>
+  <%= render 'direct_purchase_budget_allocations/form', :f => p %>
+<% end %>
+
+<%= mustache 'direct-purchase-budget-allocations-template' do %>
+  <%= f.association :direct_purchase_budget_allocations_attributes, :collection => f.object.direct_purchase_budget_allocations.build, :index => '{{uuid_direct_purchase_budget_allocation}}' do |p| %>
+    <%= render 'direct_purchase_budget_allocations/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#direct-purchase-budget-allocations-template").nestedForm({
+    add: '.add-direct-purchase-budget-allocation',
+    remove: '.remove-direct-purchase-budget-allocation',
+    target: '#allocations',
+    uuid: 'uuid_direct_purchase_budget_allocation',
+    fieldToRemove: '.direct-purchase-budget-allocation',
+    right: true
+  });
+
+  $('form').delegate('.budget-allocation', 'change', function (event, data) {
+    if (data){
+      var record = data.record,
+          inputs = $(this).closest('fieldset.nested').find(':input');
+      $(inputs[4]).val(record.data("expense_economic_classification"));
+      $(inputs[5]).val(record.data("amount"));
+    }
+  });
+</script>
