@@ -21,23 +21,38 @@ describe DirectPurchase do
   it { should belong_to :period }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
 
-  it "the duplicated budget_allocations should be invalid except the first" do
-    allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)
-    allocation_two = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)
+  context "validations" do
+    it "the duplicated budget_allocations should be invalid except the first" do
+      allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)
+      allocation_two = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)
 
-    subject.valid?
+      subject.valid?
 
-    allocation_one.errors.messages[:budget_allocation_id].should be_nil
-    allocation_two.errors.messages[:budget_allocation_id].should include "já está em uso"
-  end
+      allocation_one.errors.messages[:budget_allocation_id].should be_nil
+      allocation_two.errors.messages[:budget_allocation_id].should include "já está em uso"
+    end
 
-  it "the diferent budget_allocations should be valid" do
-    allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)
-    allocation_two = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 2)
+    it "the diferent budget_allocations should be valid" do
+      allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)
+      allocation_two = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 2)
 
-    subject.valid?
+      subject.valid?
 
-    allocation_one.errors.messages[:budget_allocation_id].should be_nil
-    allocation_two.errors.messages[:budget_allocation_id].should be_nil
+      allocation_one.errors.messages[:budget_allocation_id].should be_nil
+      allocation_two.errors.messages[:budget_allocation_id].should be_nil
+    end
+
+    it { should validate_presence_of :status }
+    it { should validate_presence_of :year }
+    it { should validate_presence_of :date }
+    it { should validate_presence_of :legal_reference }
+    it { should validate_presence_of :modality }
+    it { should validate_presence_of :organogram }
+    it { should validate_presence_of :licitation_object }
+    it { should validate_presence_of :delivery_location }
+    it { should validate_presence_of :provider }
+    it { should validate_presence_of :employee }
+    it { should validate_presence_of :payment_method }
+    it { should validate_presence_of :period }
   end
 end

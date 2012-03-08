@@ -23,7 +23,9 @@ class DirectPurchase < ActiveRecord::Base
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
 
   validates :year, :mask => "9999"
-  validates :status, :presence => true
+  validates :status, :year, :date, :legal_reference, :modality, :presence => true
+  validates :organogram, :licitation_object, :delivery_location, :presence => true
+  validates :provider, :employee, :payment_method, :period, :presence => true
 
   validate :cannot_have_duplicated_budget_allocations
 
