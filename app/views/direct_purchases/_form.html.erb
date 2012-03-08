@@ -23,4 +23,8 @@
       }
     }
   });
+
+  <% if f.object.persisted? %>
+    $('form.direct_purchase input, select, textarea').attr('disabled', true);
+  <% end %>
 </script>

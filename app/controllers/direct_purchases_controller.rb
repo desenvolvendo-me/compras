@@ -1,4 +1,6 @@
 class DirectPurchasesController < CrudController
+  actions :all, :except => [:update, :destroy]
+
   def new
     object = build_resource
     object.employee = current_user.employee
