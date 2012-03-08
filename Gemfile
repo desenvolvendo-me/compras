@@ -19,7 +19,7 @@ gem 'devise', '2.0.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
 gem 'simple_form', '1.5.2'
-gem 'will_paginate', '3.0.2'
+gem 'will_paginate', '3.0.3'
 
 gem 'squeel', '0.9.3'
 gem 'carrierwave', '0.5.8'
