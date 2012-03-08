@@ -12,8 +12,8 @@ class City < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => { :scope => [:state_id] }
   validates :state, :presence => true
 
-  filterize
   orderize
+  filterize
 
   def to_s
     name

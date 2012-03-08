@@ -8,8 +8,8 @@ class District < ActiveRecord::Base
   validates :name, :city, :presence => true
   validates :name, :uniqueness => true, :allow_blank => true
 
-  filterize
   orderize
+  filterize
 
   def to_s
     name

@@ -14,8 +14,8 @@ class Condominium < ActiveRecord::Base
   validates :name, :built_area, :area_common_user, :construction_year, :condominium_type, :presence => true
   validates :construction_year, :numericality => true
 
-  filterize
   orderize
+  filterize
 
   accepts_nested_attributes_for :address
 

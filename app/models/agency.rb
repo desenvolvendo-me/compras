@@ -13,8 +13,8 @@ class Agency < ActiveRecord::Base
   validates :email, :mail => true, :allow_blank => true
   validates :phone, :fax, :mask => "(99) 9999-9999", :allow_blank => true, :allow_nil => true
 
-  filterize
   orderize
+  filterize
 
   scope :bank_id, lambda { |bank_id| where(:bank_id => bank_id) }
 

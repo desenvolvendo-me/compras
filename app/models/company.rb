@@ -17,8 +17,8 @@ class Company < ActiveRecord::Base
   validates :cnpj, :company_size, :address, :presence => true
   validates :responsible_role, :legal_nature, :responsible, :presence => true
 
-  filterize
   orderize
+  filterize
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :correspondence_address

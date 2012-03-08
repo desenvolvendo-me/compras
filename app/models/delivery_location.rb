@@ -11,10 +11,10 @@ class DeliveryLocation < ActiveRecord::Base
   validates :address, :description, :presence => true
   validates :description, :uniqueness => true
 
+  accepts_nested_attributes_for :address
+
   orderize :description
   filterize
-
-  accepts_nested_attributes_for :address
 
   def to_s
     description
