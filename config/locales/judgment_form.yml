@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      judgment_form:
+        one: "Forma de Julgamento de Licitação"
+        other: "Formas de Julgamento das Licitações"
+
+    attributes:
+      judgment_form:
+        description: "Descrição"
+        kind: "Tipo de julgamento"
+        licitation_kind: "Tipo de licitação"

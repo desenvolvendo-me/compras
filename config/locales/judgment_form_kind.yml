@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    judgment_form_kind:
+      item: Por item
+      part: Por lote
+      global: Global

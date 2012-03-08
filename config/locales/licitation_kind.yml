@@ -1,0 +1,9 @@
+pt-BR:
+  enumerations:
+    licitation_kind:
+      lowest_price: "Menor preço"
+      best_technique: "Melhor técnica"
+      technical_and_price: "Técnica e preço"
+      best_auction_or_offer: "Melhor lançe ou desconto"
+      higher_discount_on_item: "Maior desconto s/ o item"
+      higher_discount: "Maior desconto sobre"

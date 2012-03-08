@@ -1,0 +1,2 @@
+class JudgmentFormsController < CrudController
+end
