@@ -35,7 +35,7 @@ gem 'inherited_resources', '1.3.0'
 gem 'has_scope', '0.5.1'
 gem 'responders', '0.6.4'
 
-gem 'foreigner', '1.1.1'
+gem 'foreigner', '1.1.4'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
 gem 'enumerate_it', '0.7.10'
