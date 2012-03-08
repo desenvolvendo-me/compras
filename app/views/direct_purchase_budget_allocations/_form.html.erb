@@ -1,22 +1,22 @@
-<fieldset class="yui3-g direct-purchase-budget-allocation nested contrasted">
-  <%= f.input :id, :as => 'hidden' %>
-  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+<fieldset class="direct-purchase-budget-allocation nested contrasted">
+  <div class="yui3-g">
+    <%= f.input :id, :as => 'hidden' %>
+    <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :budget_allocation, :input_html => { :size => 10, :class => 'budget-allocation' } %>
+    <div class="yui3-u-1-3">
+      <%= f.input :budget_allocation, :input_html => { :size => 10, :class => 'budget-allocation' } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :expense_economic_classification, :disabled => true, :input_html => {  } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :amount, :disabled => true, :input_html => { :class => 'item-price', :value => number_with_precision(f.object.amount) } %>
+    </div>
   </div>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :expense_economic_classification, :disabled => true, :input_html => {  } %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= f.input :amount, :disabled => true, :input_html => { :class => 'item-price', :value => number_with_precision(f.object.amount) } %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= f.input :pledge_type %>
-  </div>
+  <%= f.input :pledge_type %>
 
   <div id="items-<%= f.nested_identifier %>">
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
