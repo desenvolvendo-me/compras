@@ -15,7 +15,7 @@ end
 
 gem 'activerecord-connections', '0.0.3'
 
-gem 'devise', '1.5.3'
+gem 'devise', '2.0.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
 gem 'simple_form', '1.5.2'
