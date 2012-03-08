@@ -14,8 +14,8 @@ feature "LicitationObjects" do
     click_link 'Criar Objeto de Licitação'
 
     within_tab 'Principal' do
-      fill_in 'Descrição', :with => 'Ponte'
       fill_in 'Ano', :with => '2012'
+      fill_in 'Descrição', :with => 'Ponte'
     end
 
     within_tab 'Total acumulado de compras e serviços' do
@@ -45,8 +45,8 @@ feature "LicitationObjects" do
     click_link 'Ponte'
 
     within_tab 'Principal' do
-      page.should have_field 'Descrição', :with => 'Ponte'
       page.should have_field 'Ano', :with => '2012'
+      page.should have_field 'Descrição', :with => 'Ponte'
     end
 
     within_tab 'Total acumulado de compras e serviços' do
@@ -80,8 +80,8 @@ feature "LicitationObjects" do
     click_link 'Ponte'
 
     within_tab 'Principal' do
-      fill_in 'Descrição', :with => 'Viaduto'
       fill_in 'Ano', :with => '2013'
+      fill_in 'Descrição', :with => 'Viaduto'
     end
 
     within_tab 'Total acumulado de compras e serviços' do
@@ -111,8 +111,8 @@ feature "LicitationObjects" do
     click_link 'Viaduto'
 
     within_tab 'Principal' do
-      page.should have_field 'Descrição', :with => 'Viaduto'
       page.should have_field 'Ano', :with => '2013'
+      page.should have_field 'Descrição', :with => 'Viaduto'
     end
 
     within_tab 'Total acumulado de compras e serviços' do
@@ -163,8 +163,8 @@ feature "LicitationObjects" do
     click_link 'Criar Objeto de Licitação'
 
     within_tab 'Principal' do
-      fill_in 'Descrição', :with => 'Ponte'
       fill_in 'Ano', :with => '2012'
+      fill_in 'Descrição', :with => 'Ponte'
     end
 
     click_button 'Criar Objeto de Licitação'
