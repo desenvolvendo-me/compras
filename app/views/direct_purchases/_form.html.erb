@@ -26,5 +26,7 @@
 
   <% if f.object.persisted? %>
     $('form.direct_purchase input, select, textarea').attr('disabled', true);
+    $('.button.negative').hide();
+    $('.button.affirmative').hide();
   <% end %>
 </script>

@@ -148,6 +148,10 @@ feature "DirectPurchases" do
       page.should have_disabled_field 'Quantidade'
       page.should have_disabled_field 'Valor unitário'
       page.should have_disabled_field 'Valor total'
+      page.should_not have_button 'Adicionar Dotação'
+      page.should_not have_button 'Remover Dotação'
+      page.should_not have_button 'Adicionar Item'
+      page.should_not have_button 'Remover Item'
     end
   end
 
