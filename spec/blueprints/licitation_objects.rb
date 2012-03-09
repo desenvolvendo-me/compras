@@ -12,6 +12,7 @@ LicitationObject.blueprint(:ponte) do
   special_auction { "9.99" }
   special_unenforceability { "10.99" }
   special_contest { "11.99" }
+  materials { [Material.make!(:antivirus)] }
 end
 
 LicitationObject.blueprint(:viaduto) do

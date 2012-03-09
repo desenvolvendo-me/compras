@@ -30,6 +30,7 @@ class DirectPurchase < ActiveRecord::Base
 
   validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation
+  validate :material_must_have_same_licitation_object
 
   orderize :year
 
@@ -75,6 +76,17 @@ class DirectPurchase < ActiveRecord::Base
     if direct_purchase_budget_allocations.empty?
       errors.add(:direct_purchase_budget_allocations)
       direct_purchase_budget_allocations.build.valid?
+    end
+  end
+
+  def material_must_have_same_licitation_object
+    self.direct_purchase_budget_allocations.each do |dpba|
+      dpba.items.each do |item|
+        if item.material && !item.material.licitation_object_ids.include?(self.licitation_object_id)
+          errors.add(:direct_purchase_budget_allocations)
+          item.errors.add(:material, :must_be_equal_as_licitation_object)
+        end
+      end
     end
   end
 end
