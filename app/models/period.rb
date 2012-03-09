@@ -11,6 +11,16 @@ class Period < ActiveRecord::Base
   filterize
 
   def to_s
-    "#{amount} - #{unit_humanize}"
+    "#{amount} #{pluralized_unit}"
+  end
+
+  protected
+
+  def pluralized_unit
+    if amount > 1
+      I18n.t("datetime.prompts_plural.#{unit}")
+    else
+      unit_humanize
+    end
   end
 end

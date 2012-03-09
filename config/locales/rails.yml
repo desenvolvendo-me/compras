@@ -81,6 +81,11 @@ pt-BR:
       minute: "Minuto"
       second: "Segundo"
 
+    prompts_plural:
+      year:   "Anos"
+      month:  "Meses"
+      day:    "Dias"
+
   number:
     format:
       precision: 2

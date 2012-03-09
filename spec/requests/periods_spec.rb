@@ -65,7 +65,7 @@ feature "Periods" do
       page.find('a').click
     end
 
-    click_link 'Apagar 1 - Ano', :confirm => true
+    click_link 'Apagar 1 Ano', :confirm => true
 
     page.should have_notice 'Prazo apagado com sucesso.'
 
