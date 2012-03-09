@@ -42,10 +42,8 @@ feature "SupplyAuthorizations" do
     click_link 'Criar Autorização de Fornecimento'
 
     within_modal 'Solicitação de compra direta' do
-      click_button 'Pesquisar'
-
-      page.should have_content '11/11/2011'
-      page.should_not have_content '01/12/2012'
+      page.should have_disabled_field 'Status'
+      page.should have_select 'Status', :selected => 'Não autorizado'
     end
   end
 
