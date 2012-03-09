@@ -28,4 +28,5 @@ LicitationObject.blueprint(:viaduto) do
   special_auction { "9.99" }
   special_unenforceability { "10.99" }
   special_contest { "11.99" }
+  materials { [Material.make!(:arame_comum)] }
 end

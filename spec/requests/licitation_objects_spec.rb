@@ -7,6 +7,8 @@ feature "LicitationObjects" do
   end
 
   scenario 'create a new licitation_object' do
+    Material.make!(:antivirus)
+
     click_link 'Contabilidade'
 
     click_link 'Objetos de Licitação'
@@ -38,6 +40,10 @@ feature "LicitationObjects" do
         fill_in 'Inexigibilidade', :with => '10,99'
         fill_in 'Concurso', :with => '11,99'
       end
+    end
+
+    within_tab 'Material' do
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
     end
 
     click_button 'Criar Objeto de Licitação'
@@ -72,10 +78,34 @@ feature "LicitationObjects" do
         page.should have_field 'Concurso', :with => '11,99'
       end
     end
+
+    within_tab 'Material' do
+      page.should have_content 'Antivirus'
+    end
+  end
+
+  scenario 'should remove material' do
+    LicitationObject.make!(:viaduto)
+
+    click_link 'Contabilidade'
+
+    click_link 'Objetos de Licitação'
+
+    click_link 'Viaduto'
+
+    within_tab 'Material' do
+      page.should have_content 'Arame comum'
+      click_button 'Remover material'
+    end
+
+    within_tab 'Material' do
+      page.should_not have_content 'Arame comum'
+    end
   end
 
   scenario 'update an existent licitation_object' do
     LicitationObject.make!(:ponte)
+    Material.make!(:arame_comum)
 
     click_link 'Contabilidade'
 
@@ -110,6 +140,10 @@ feature "LicitationObjects" do
     end
     end
 
+    within_tab 'Material' do
+      fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
+    end
+
     click_button 'Atualizar Objeto de Licitação'
 
     page.should have_notice 'Objeto de Licitação editado com sucesso.'
@@ -141,6 +175,10 @@ feature "LicitationObjects" do
       page.should have_field 'Inexigibilidade', :with => '20,99'
       page.should have_field 'Concurso', :with => '21,99'
     end
+    end
+
+    within_tab 'Material' do
+      page.should have_content 'Arame comum'
     end
   end
 

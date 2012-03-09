@@ -26,5 +26,7 @@ describe LicitationObject do
   it { should_not allow_value('a2012').for(:year) }
   it { should allow_value('2012').for(:year) }
 
+  it { should have_and_belong_to_many :materials }
+
   it { should have_many(:direct_purchases).dependent(:restrict) }
 end
