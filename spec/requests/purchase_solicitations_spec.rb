@@ -748,7 +748,6 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'it should re-calculate the total of items when removing an item' do
-
     click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
@@ -785,7 +784,6 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'it should re-calculate the total when removing budget allocations' do
-
     click_link 'Solicitações'
 
     click_link 'Solicitações de Compra'
