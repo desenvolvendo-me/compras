@@ -1,4 +1,6 @@
 class BidOpeningsController < CrudController
+  actions :all, :except => [:update, :destroy]
+
   def new
     object = build_resource
     object.date = Date.current

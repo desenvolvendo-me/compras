@@ -66,4 +66,8 @@
     $("#bid_opening_object_type").change(filterModalities).change();
     $("#bid_opening_modality").val("<%= f.object.modality %>");
   })();
+
+  <% if f.object.persisted? %>
+    $('form.bid_opening :input').attr('disabled', true);
+  <% end %>
 </script>

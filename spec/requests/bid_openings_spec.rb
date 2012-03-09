@@ -57,36 +57,12 @@ feature "BidOpenings" do
     page.should have_disabled_field 'Data de liberação'
   end
 
-  scenario 'update an existent bid_opening' do
-    organogram = Organogram.make!(:secretaria_de_desenvolvimento)
-    budget_allocation = BudgetAllocation.make!(:alocacao_extra)
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
-    Employee.make!(:wenderson)
+  scenario 'should have all fields disabled when editing an existent bid_opening' do
     BidOpening.make!(:compra_de_cadeiras)
 
     click_link 'Processos Administrativos'
 
     click_link 'Aberturas de Licitação'
-
-    within_records do
-      page.find('a').click
-    end
-
-    fill_in 'Data do processo', :with => '12/12/2011'
-    fill_in 'Número do protocolo', :with => '00099/2011'
-    fill_modal 'Unidade orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
-    fill_in 'Valor estimado', :with => '1500,50'
-    fill_modal 'Dotação utilizada', :with => '2011', :field => 'Exercício'
-    select 'Alienação de bens', :from => 'Tipo de objeto'
-    select 'Leilão', :from => 'Modalidade'
-    fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
-    fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de cadeiras da Secretaria'
-    fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
-    select 'Cancelado', :from => 'Status do processo administrativo'
-
-    click_button 'Atualizar Abertura de Licitação'
-
-    page.should have_notice 'Abertura de Licitação editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -94,37 +70,16 @@ feature "BidOpenings" do
 
     page.should have_disabled_field 'Processo'
     page.should have_disabled_field 'Ano'
-    page.should have_field 'Data do processo', :with => '12/12/2011'
-    page.should have_field 'Número do protocolo', :with => '00099/2011'
-    page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Desenvolvimento'
-    page.should have_field 'Valor estimado', :with => '1.500,50'
-    page.should have_field 'Dotação utilizada', :with => "#{budget_allocation.id}/2011"
-    page.should have_select 'Tipo de objeto', :selected => 'Alienação de bens'
-    page.should have_select 'Modalidade', :selected => 'Leilão'
-    page.should have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
-    page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de cadeiras da Secretaria'
-    page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
-    page.should have_select 'Status do processo administrativo', :with => 'Cancelado'
-  end
-
-  scenario 'destroy an existent bid_opening' do
-    BidOpening.make!(:compra_de_cadeiras)
-
-    click_link 'Processos Administrativos'
-
-    click_link 'Aberturas de Licitação'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apagar 1/2012', :confirm => true
-
-    page.should have_notice 'Abertura de Licitação apagado com sucesso.'
-
-    page.should_not have_field '2012'
-    page.should_not have_field '07/03/2012'
-    page.should_not have_field '00099/2012'
-    page.should_not have_select 'Leilão'
+    page.should have_disabled_field 'Data do processo'
+    page.should have_disabled_field 'Número do protocolo'
+    page.should have_disabled_field 'Unidade orçamentária'
+    page.should have_disabled_field 'Valor estimado'
+    page.should have_disabled_field 'Dotação utilizada'
+    page.should have_disabled_field 'Tipo de objeto'
+    page.should have_disabled_field 'Modalidade'
+    page.should have_disabled_field 'Forma de julgamento'
+    page.should have_disabled_field 'Objeto do processo licitatório'
+    page.should have_disabled_field 'Responsável'
+    page.should have_disabled_field 'Status do processo administrativo'
   end
 end

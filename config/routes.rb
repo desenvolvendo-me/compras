@@ -91,7 +91,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :bid_openings do
+  resources :bid_openings, :except => [:update, :destroy] do
     collection do
       get :filter
       get :modal
