@@ -813,6 +813,44 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'update an existent purchase_solicitation with single budget allocation to multiple budget_allocations' do
+    PurchaseSolicitation.make!(:reparo)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      clear_modal 'Dotação orçamentária'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Adicionar'
+      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_in 'Valor previsto', :with => '50,00'
+    end
+
+    click_button 'Atualizar Solicitação de Compra'
+
+    page.should have_notice 'Solicitação de Compra editada com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Dotação orçamentária', :with => ''
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_field 'Valor previsto', :with => '50,00'
+    end
+  end
+
   def make_dependencies!
     Employee.make!(:sobrinho)
     DeliveryLocation.make!(:education)
