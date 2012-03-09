@@ -14,10 +14,10 @@
     <% localized(collection) do |resource| %>
       <tr id="<%= dom_id resource %>">
         <td>
-          <%= link_to resource, edit_resource_path(resource) %>
+          <%= resource.id %>
         </td>
         <td>
-          <%= resource.person %>
+          <%= link_to resource, edit_resource_path(resource) %>
         </td>
       </tr>
     <% end %>

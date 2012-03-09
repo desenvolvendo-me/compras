@@ -8,7 +8,7 @@ feature "DirectPurchases" do
 
   scenario 'create a new direct_purchase' do
     LegalReference.make!(:referencia)
-    provider = Provider.make!(:wenderson_sa)
+    Provider.make!(:wenderson_sa)
     Organogram.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)
@@ -80,7 +80,7 @@ feature "DirectPurchases" do
       page.should have_field 'Data da compra', :with => '19/03/2012'
       page.should have_field 'Referencia legal', :with => 'Referencia legal'
       page.should have_select 'Modalidade', :selected => 'Material ou serviços'
-      page.should have_field 'Fornecedor', :with => provider.id.to_s
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Objeto da licitação', :with => 'Ponte'
       page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
@@ -171,7 +171,7 @@ feature "DirectPurchases" do
 
   scenario 'asserting that duplicated budget allocations cannot be saved' do
     LegalReference.make!(:referencia)
-    provider = Provider.make!(:wenderson_sa)
+    Provider.make!(:wenderson_sa)
     Organogram.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)

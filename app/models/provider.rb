@@ -39,7 +39,7 @@ class Provider < ActiveRecord::Base
   filterize
 
   def to_s
-    id.to_s
+    person.to_s
   end
 
   protected

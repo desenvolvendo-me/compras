@@ -29,10 +29,10 @@ describe Provider do
   it { should validate_presence_of :legal_nature }
   it { should validate_presence_of :cnae }
 
-  it 'should return the id as to_s method' do
-    subject.id = 1
+  it 'should return person as to_s method' do
+    subject.stub(:person => double(:to_s => 'Fulano'))
 
-    subject.to_s.should eq '1'
+    subject.to_s.should eq 'Fulano'
   end
 
   it "should have partners with the same individual invalid except the first" do
