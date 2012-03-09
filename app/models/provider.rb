@@ -27,9 +27,13 @@ class Provider < ActiveRecord::Base
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
   delegate :personable_type, :to => :person, :allow_nil => true
 
-  validates :person, :presence => true
+  validates :person, :registration_date, :agency, :bank_account, :presence => true
+  validates :legal_nature, :cnae, :presence => true
 
   validate :cannot_have_duplicated_partners
+  validate :must_have_at_least_one_partner
+
+  before_save :clean_extra_partners
 
   orderize :person_id
   filterize
@@ -50,5 +54,24 @@ class Provider < ActiveRecord::Base
       end
       single_individuals << partner.individual_id
     end
+  end
+
+  def must_have_at_least_one_partner
+    if company? && provider_partners.empty?
+      errors.add(:provider_partners)
+      provider_partners.build.valid?
+    end
+  end
+
+  def clean_extra_partners
+    unless company?
+      self.provider_partners.each do |partner|
+        partner.destroy
+      end
+    end
+  end
+
+  def company?
+    person && person.personable.class == Company
   end
 end

@@ -23,6 +23,11 @@ describe Provider do
   it { should have_many(:direct_purchases).dependent(:restrict) }
 
   it { should validate_presence_of :person }
+  it { should validate_presence_of :registration_date }
+  it { should validate_presence_of :agency }
+  it { should validate_presence_of :bank_account }
+  it { should validate_presence_of :legal_nature }
+  it { should validate_presence_of :cnae }
 
   it 'should return the id as to_s method' do
     subject.id = 1
@@ -48,5 +53,13 @@ describe Provider do
 
     partner_one.errors.messages[:individual_id].should be_nil
     partner_two.errors.messages[:individual_id].should be_nil
+  end
+
+  it 'should have at least one partner when person is Company' do
+    subject.stub(:company? => true)
+
+    subject.valid?
+
+    subject.provider_partners.first.errors[:individual].should include 'não pode ficar em branco'
   end
 end
