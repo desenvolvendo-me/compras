@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
 require 'app/models/direct_purchase_budget_allocation'
+require 'app/models/supply_authorization'
 
 describe DirectPurchase do
   it 'should return id as to_s method' do
@@ -20,6 +21,7 @@ describe DirectPurchase do
   it { should belong_to :payment_method }
   it { should belong_to :period }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
+  it { should have_one(:supply_authorization).dependent(:restrict) }
 
   context "validations" do
     it "the duplicated budget_allocations should be invalid except the first" do

@@ -1,6 +1,8 @@
 class DirectPurchasesController < CrudController
   actions :all, :except => [:update, :destroy]
 
+  has_scope :authorized, :type => :boolean
+
   def new
     object = build_resource
     object.employee = current_user.employee

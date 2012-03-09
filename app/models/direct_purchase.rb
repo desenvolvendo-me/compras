@@ -19,6 +19,7 @@ class DirectPurchase < ActiveRecord::Base
   belongs_to :period
 
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :inverse_of => :direct_purchase, :order => :id
+  has_one :supply_authorization, :dependent => :restrict
 
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
 
@@ -30,7 +31,26 @@ class DirectPurchase < ActiveRecord::Base
   validate :cannot_have_duplicated_budget_allocations
 
   orderize :year
-  filterize
+
+  def self.filter params={}
+    relation = scoped
+    relation = relation.where{ year.eq(params[:year]) } unless params[:year].blank?
+    relation = relation.where{ date.eq(params[:date]) } unless params[:date].blank?
+    relation = relation.where{ modality.eq(params[:modality]) } unless params[:modality].blank?
+    relation = relation.by_status(params[:by_status]) unless params[:by_status].blank?
+    relation
+  end
+
+  def self.by_status status = ''
+    relation = scoped
+    if status == 'authorized'
+      relation = relation.joins(:supply_authorization)
+    elsif status == 'unauthorized'
+      relation = relation.where('direct_purchases.id not in (select direct_purchase_id from supply_authorizations)')
+    end
+
+    relation
+  end
 
   def to_s
     id.to_s

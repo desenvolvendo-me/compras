@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      supply_authorization:
+        one: "Autorização de Fornecimento"
+        other: "Autorizações de Fornecimento"
+
+    attributes:
+      supply_authorization:
+        year: "Exercício"
+        code: "Código"
+        direct_purchase: "Solicitação de compra direta"

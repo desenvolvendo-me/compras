@@ -12,6 +12,7 @@ module Dashboard::RequestHelper
 
   def dependencies_links
     simple_menu do |m|
+      m.supply_authorizations
       m.materials_classes
       m.entities
       m.communication_sources
