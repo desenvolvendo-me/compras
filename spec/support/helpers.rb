@@ -28,7 +28,7 @@ module Helpers
     page.should have_field locator
 
     field = page.find_field(locator)
-    page.execute_script %{ $('##{field[:id]}').modal('clear') }
+    page.execute_script %{ $('##{field[:id]}').modal({autoClear: true}) }
   end
 
   # Open a modal dialog and search the record

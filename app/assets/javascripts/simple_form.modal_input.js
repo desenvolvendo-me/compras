@@ -8,6 +8,14 @@
     _init: function () {
       if (this.options.autoOpen) {
         this.open();
+
+        delete this.options.autoOpen;
+      }
+
+      if (this.options.autoClear) {
+        this.clear();
+
+        delete this.options.autoClear;
       }
     },
 
