@@ -8,4 +8,11 @@ class BidOpeningsController < CrudController
 
     super
   end
+
+  def create
+    object = build_resource
+    object.bid_opening_status = BidOpeningStatus::WAITING
+
+    super
+  end
 end

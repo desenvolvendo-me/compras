@@ -30,4 +30,12 @@ describe BidOpeningsController do
       assigns(:bid_opening).responsible.should eq controller.current_user.employee
     end
   end
+
+  context 'POST #create' do
+    it 'uses waiting as default value for status' do
+      post :create
+
+      assigns(:bid_opening).bid_opening_status.should eq BidOpeningStatus::WAITING
+    end
+  end
 end
