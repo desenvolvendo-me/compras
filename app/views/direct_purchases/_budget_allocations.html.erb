@@ -1,22 +1,24 @@
+<div id="budget-allocations">
+  <%= f.association :direct_purchase_budget_allocations, :collection => localized(f.object.direct_purchase_budget_allocations) do |p| %>
+    <%= render 'direct_purchase_budget_allocations/form', :f => p %>
+  <% end %>
+
+  <%= mustache 'direct-purchase-budget-allocations-template' do %>
+    <%= f.association :direct_purchase_budget_allocations_attributes, :collection => f.object.direct_purchase_budget_allocations.build, :index => '{{uuid_direct_purchase_budget_allocation}}' do |p| %>
+      <%= render 'direct_purchase_budget_allocations/form', :f => p %>
+    <% end %>
+  <% end %>
+</div>
+
 <p>
   <input type="button" class="button affirmative add-direct-purchase-budget-allocation" value="Adicionar Dotação">
 </p>
-
-<%= f.association :direct_purchase_budget_allocations, :collection => localized(f.object.direct_purchase_budget_allocations) do |p| %>
-  <%= render 'direct_purchase_budget_allocations/form', :f => p %>
-<% end %>
-
-<%= mustache 'direct-purchase-budget-allocations-template' do %>
-  <%= f.association :direct_purchase_budget_allocations_attributes, :collection => f.object.direct_purchase_budget_allocations.build, :index => '{{uuid_direct_purchase_budget_allocation}}' do |p| %>
-    <%= render 'direct_purchase_budget_allocations/form', :f => p %>
-  <% end %>
-<% end %>
 
 <script>
   $("#direct-purchase-budget-allocations-template").nestedForm({
     add: '.add-direct-purchase-budget-allocation',
     remove: '.remove-direct-purchase-budget-allocation',
-    target: '#allocations',
+    target: '#budget-allocations',
     uuid: 'uuid_direct_purchase_budget_allocation'
   });
 
