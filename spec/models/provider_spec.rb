@@ -1,6 +1,12 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/provider'
+require 'app/models/provider_partner'
+require 'app/models/provider_licitation_document'
+require 'app/models/direct_purchase'
+require 'app/models/person'
+require 'app/models/company'
+require 'app/models/individual'
 
 describe Provider do
   it { should belong_to :person }
