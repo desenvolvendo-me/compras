@@ -17,6 +17,12 @@ describe DirectPurchasesController do
     assigns(:direct_purchase).status.should eq DirectPurchaseStatus::UNAUTHORIZED
   end
 
+  it 'show today as default value for date' do
+    get :new
+
+    assigns(:direct_purchase).date.should eq Date.current
+  end
+
   describe 'POST create' do
     it 'should set unauthorized as status' do
       DirectPurchase.any_instance.should_receive(:status=).with(DirectPurchaseStatus::UNAUTHORIZED)
