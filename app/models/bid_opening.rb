@@ -17,6 +17,7 @@ class BidOpening < ActiveRecord::Base
 
   validates :year, :date, :organogram, :value_estimated, :presence => true
   validates :budget_allocation, :modality, :object_type, :presence => true
+  validates :responsible, :bid_opening_status, :presence => true
   validates :description, :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
 
