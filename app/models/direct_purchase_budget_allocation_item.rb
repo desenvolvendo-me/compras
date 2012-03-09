@@ -7,6 +7,8 @@ class DirectPurchaseBudgetAllocationItem < ActiveRecord::Base
 
   delegate :reference_unit, :to => :material, :allow_nil => true
 
+  validates :material, :quantity, :unit_price, :presence => true
+
   def estimated_total_price
     if (quantity && unit_price)
       quantity * unit_price

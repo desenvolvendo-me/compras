@@ -56,5 +56,13 @@ describe DirectPurchase do
     it { should validate_presence_of :employee }
     it { should validate_presence_of :payment_method }
     it { should validate_presence_of :period }
+
+    it 'should have at least one budget allocation' do
+      subject.direct_purchase_budget_allocations.should be_empty
+
+      subject.valid?
+
+      subject.direct_purchase_budget_allocations.first.errors[:budget_allocation].should include 'não pode ficar em branco'
+    end
   end
 end

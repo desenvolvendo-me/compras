@@ -11,4 +11,16 @@ class DirectPurchaseBudgetAllocation < ActiveRecord::Base
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
 
   delegate :expense_economic_classification, :amount, :to => :budget_allocation, :allow_nil => true
+
+  validates :budget_allocation, :pledge_type, :presence => true
+  validate :must_have_at_least_one_item
+
+  protected
+
+  def must_have_at_least_one_item
+    if items.empty?
+      errors.add(:items)
+      items.build.valid?
+    end
+  end
 end

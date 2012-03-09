@@ -16,4 +16,8 @@ describe DirectPurchaseBudgetAllocationItem do
 
     subject.estimated_total_price.should eq 50
   end
+
+  it { should validate_presence_of :material }
+  it { should validate_presence_of :quantity }
+  it { should validate_presence_of :unit_price }
 end

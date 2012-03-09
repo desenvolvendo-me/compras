@@ -29,6 +29,7 @@ class DirectPurchase < ActiveRecord::Base
   validates :provider, :employee, :payment_method, :period, :presence => true
 
   validate :cannot_have_duplicated_budget_allocations
+  validate :must_have_at_least_budget_allocation
 
   orderize :year
 
@@ -68,5 +69,12 @@ class DirectPurchase < ActiveRecord::Base
      end
      single_allocations << allocation.budget_allocation_id
    end
+  end
+
+  def must_have_at_least_budget_allocation
+    if direct_purchase_budget_allocations.empty?
+      errors.add(:direct_purchase_budget_allocations)
+      direct_purchase_budget_allocations.build.valid?
+    end
   end
 end
