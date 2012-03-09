@@ -17,8 +17,8 @@ class Provider < ActiveRecord::Base
   has_and_belongs_to_many :materials_classes
   has_and_belongs_to_many :materials
 
-  has_many :provider_partners, :dependent => :destroy
-  has_many :provider_licitation_documents, :dependent => :destroy, :inverse_of => :provider
+  has_many :provider_partners, :dependent => :destroy, :order => :id
+  has_many :provider_licitation_documents, :dependent => :destroy, :inverse_of => :provider, :order => :id
   has_many :direct_purchases, :dependent => :restrict
 
   accepts_nested_attributes_for :provider_partners, :reject_if => :all_blank, :allow_destroy => true

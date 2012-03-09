@@ -12,6 +12,7 @@ describe OrganogramConfiguration do
   end
 
   it { should have_many(:organograms).dependent(:restrict) }
+  it { should have_many(:organogram_levels).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :administractive_act }

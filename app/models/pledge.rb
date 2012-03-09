@@ -22,7 +22,7 @@ class Pledge < ActiveRecord::Base
   belongs_to :management_contract
   belongs_to :licitation_modality
 
-  has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge
+  has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
 
   accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
 

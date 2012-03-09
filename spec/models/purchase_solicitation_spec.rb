@@ -39,6 +39,8 @@ describe PurchaseSolicitation do
   end
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
+  it { should have_many(:items).dependent(:destroy).order(:id) }
+  it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it {should belong_to :expense_economic_classification }
   it {should belong_to :responsible }
   it {should belong_to :budget_allocation }

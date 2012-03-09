@@ -25,7 +25,7 @@ describe Organogram do
 
   it { should have_one :address }
   it { should have_many(:budget_allocations).dependent(:restrict) }
-  it { should have_many :organogram_responsibles }
+  it { should have_many(:organogram_responsibles).dependent(:destroy).order(:id) }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should belong_to :organogram_configuration }
   it { should belong_to :administration_type }

@@ -18,8 +18,8 @@ describe Provider do
   it { should have_and_belong_to_many :materials_classes }
   it { should have_and_belong_to_many :materials }
 
-  it { should have_many(:provider_partners).dependent(:destroy) }
-  it { should have_many(:provider_licitation_documents).dependent(:destroy) }
+  it { should have_many(:provider_partners).dependent(:destroy).order(:id) }
+  it { should have_many(:provider_licitation_documents).dependent(:destroy).order(:id) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
 
   it { should validate_presence_of :person }

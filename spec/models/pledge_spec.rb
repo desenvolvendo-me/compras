@@ -14,7 +14,7 @@ describe Pledge do
   it { should belong_to :reserve_fund }
   it { should belong_to :creditor }
   it { should belong_to :founded_debt_contract }
-  it { should have_many :pledge_items }
+  it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :licitation }
   it { should validate_presence_of :process }

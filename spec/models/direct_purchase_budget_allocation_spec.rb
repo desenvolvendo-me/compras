@@ -8,7 +8,7 @@ describe DirectPurchaseBudgetAllocation do
   it { should belong_to :direct_purchase }
   it { should belong_to :budget_allocation }
 
-  it { should have_many(:items).dependent(:destroy) }
+  it { should have_many(:items).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :pledge_type }
