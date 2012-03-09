@@ -22,7 +22,6 @@ describe Material do
   it { should validate_presence_of :description }
   it { should validate_presence_of :material_characteristic }
   it { should validate_presence_of :reference_unit }
-  it { should validate_presence_of :expense_economic_classification }
 
   it "should validate presence of material_type only if material_characteristic is material" do
     subject.should_not validate_presence_of(:material_type)

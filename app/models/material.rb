@@ -26,7 +26,7 @@ class Material < ActiveRecord::Base
   delegate :stn_ordinance, :stn_ordinance_id, :to => :expense_economic_classification, :allow_nil => true
 
   validates :materials_group, :materials_class, :reference_unit, :presence => true
-  validates :expense_economic_classification, :material_characteristic, :presence => true
+  validates :material_characteristic, :presence => true
   validates :code, :description, :presence => true, :uniqueness => true
   validates :material_type, :presence => true, :if => :material?
   validates :service_or_contract_type, :presence => true, :if => :service?
