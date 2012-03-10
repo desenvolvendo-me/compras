@@ -409,15 +409,15 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
-        page.should have_field 'Dotação', :with => "#{budget_allocation_extra.id}/2011"
-        page.should have_field 'Compl. do el. da despesa', :with => '2.2.22.11.01.00.00.00'
-        page.should have_field 'Valor previsto ', :with => '30,00'
-      end
-
-      within '.purchase-solicitation-budget-allocation:last' do
         page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field 'Valor previsto', :with => '1.020,00'
+      end
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        page.should have_field 'Dotação', :with => "#{budget_allocation_extra.id}/2011"
+        page.should have_field 'Compl. do el. da despesa', :with => '2.2.22.11.01.00.00.00'
+        page.should have_field 'Valor previsto ', :with => '30,00'
       end
     end
   end
