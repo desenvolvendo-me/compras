@@ -13,7 +13,7 @@ feature "Periods" do
 
     click_link 'Criar Prazo'
 
-    select 'Ano', :from => 'Unidade'
+    select 'ano', :from => 'Unidade'
     fill_in 'Quantidade', :with => '1'
 
     click_button 'Criar Prazo'
@@ -25,7 +25,7 @@ feature "Periods" do
     end
 
     page.should have_field 'Quantidade', :with => '1'
-    page.should have_select 'Unidade', :selected => 'Ano'
+    page.should have_select 'Unidade', :selected => 'ano'
   end
 
   scenario 'update an existent period' do
@@ -39,7 +39,7 @@ feature "Periods" do
       page.find('a').click
     end
 
-    select 'Dia', :from => 'Unidade'
+    select 'dia', :from => 'Unidade'
     fill_in 'Quantidade', :with => '30'
 
     click_button 'Atualizar Prazo'
@@ -51,7 +51,7 @@ feature "Periods" do
     end
 
     page.should have_field 'Quantidade', :with => '30'
-    page.should have_select 'Unidade', :selected => 'Dia'
+    page.should have_select 'Unidade', :selected => 'dia'
   end
 
   scenario 'destroy an existent period' do
@@ -65,11 +65,11 @@ feature "Periods" do
       page.find('a').click
     end
 
-    click_link 'Apagar 1 Ano', :confirm => true
+    click_link 'Apagar 1 ano', :confirm => true
 
     page.should have_notice 'Prazo apagado com sucesso.'
 
     page.should_not have_content 1
-    page.should_not have_content 'Ano'
+    page.should_not have_content 'ano'
   end
 end

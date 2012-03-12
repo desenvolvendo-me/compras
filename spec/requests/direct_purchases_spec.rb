@@ -85,7 +85,7 @@ feature "DirectPurchases" do
       page.should have_field 'Objeto da licitação', :with => 'Ponte'
       page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Prazo', :with => '1 Ano'
+      page.should have_field 'Prazo', :with => '1 ano'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Coleta de preços', :with => '99'
       page.should have_field 'Reg. de preços', :with => '88'

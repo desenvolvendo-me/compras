@@ -18,7 +18,7 @@ class Period < ActiveRecord::Base
 
   def pluralized_unit
     if amount > 1
-      I18n.t("datetime.prompts_plural.#{unit}")
+      I18n.t("enumerations.period_unit_plural.#{unit}")
     else
       unit_humanize
     end
