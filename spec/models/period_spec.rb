@@ -7,26 +7,26 @@ describe Period do
     subject.unit = PeriodUnit::YEAR
 
     subject.amount = '1'
-    subject.to_s.should eq '1 Ano'
+    subject.to_s.should eq '1 ano'
 
     subject.amount = '2'
-    subject.to_s.should eq '2 Anos'
+    subject.to_s.should eq '2 anos'
 
     subject.unit = PeriodUnit::MONTH
 
     subject.amount = '1'
-    subject.to_s.should eq '1 Mês'
+    subject.to_s.should eq '1 mês'
 
     subject.amount = '2'
-    subject.to_s.should eq '2 Meses'
+    subject.to_s.should eq '2 meses'
 
     subject.unit = PeriodUnit::DAY
 
     subject.amount = '1'
-    subject.to_s.should eq '1 Dia'
+    subject.to_s.should eq '1 dia'
 
     subject.amount = '2'
-    subject.to_s.should eq '2 Dias'
+    subject.to_s.should eq '2 dias'
   end
 
   it { should validate_presence_of :unit }
