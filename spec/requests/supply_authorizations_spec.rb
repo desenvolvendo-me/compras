@@ -31,6 +31,19 @@ feature "SupplyAuthorizations" do
     page.should have_field 'Solicitação de compra direta', :with => "#{direct_purchase.id}"
   end
 
+  scenario 'should use unauthorized as status to search direct_purchases' do
+    click_link 'Solicitações'
+
+    click_link 'Autorizações de Fornecimento'
+
+    click_link 'Criar Autorização de Fornecimento'
+
+    within_modal 'Solicitação de compra direta' do
+      page.should have_disabled_field 'Status'
+      page.should have_select 'Status', :selected => 'Não autorizado'
+    end
+  end
+
   scenario 'should filter only by unauthorized' do
     SupplyAuthorization.make!(:compra_2012)
     DirectPurchase.make!(:compra_2011)
@@ -42,8 +55,10 @@ feature "SupplyAuthorizations" do
     click_link 'Criar Autorização de Fornecimento'
 
     within_modal 'Solicitação de compra direta' do
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Não autorizado'
+      click_button 'Pesquisar'
+
+      page.should have_content '11/11/2011'
+      page.should_not have_content '01/12/2012'
     end
   end
 
