@@ -12,12 +12,22 @@ class ModalityLimit < ActiveRecord::Base
   validates :work_public_competition, :presence => true
   validates :validity_beginning, :mask => '99/9999', :allow_blank => true
   validates :ordinance_number, :uniqueness => true
-  validates :ordinance_number, :mask => '9999', :allow_blank => true
+  validates :ordinance_number, :numericality => true, :allow_blank => true
+  validate :validate_validity_beginning_month
 
   orderize :published_date
   filterize
 
   def to_s
     ordinance_number
+  end
+
+  protected
+
+  def validate_validity_beginning_month
+    if validity_beginning.present?
+      month = validity_beginning.split('/').first.to_i
+      errors.add(:validity_beginning, :invalid) unless (1..12).include? month
+    end
   end
 end
