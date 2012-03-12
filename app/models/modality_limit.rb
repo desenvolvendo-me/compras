@@ -25,9 +25,9 @@ class ModalityLimit < ActiveRecord::Base
   protected
 
   def validate_validity_beginning_month
-    if validity_beginning.present?
-      month = validity_beginning.split('/').first.to_i
-      errors.add(:validity_beginning, :invalid) unless (1..12).include? month
-    end
+    return unless validity_beginning
+
+    month = validity_beginning.split('/').first.to_i
+    errors.add(:validity_beginning, :invalid) unless (1..12).include? month
   end
 end
