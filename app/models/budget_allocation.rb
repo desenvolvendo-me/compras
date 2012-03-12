@@ -6,8 +6,6 @@ class BudgetAllocation < ActiveRecord::Base
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
   attr_accessible :alienation_appeal
 
-  attr_readonly :date
-
   attr_modal :year, :description
 
   has_enumeration_for :debt_type
@@ -34,12 +32,6 @@ class BudgetAllocation < ActiveRecord::Base
   validates :year, :mask => '9999'
   validates :date, :presence => true
 
-  validates :date, :timeliness => {
-    :on_or_after => lambda { last.date },
-    :on_or_after_message => :must_be_greather_or_equal_to_last_date,
-    :type => :date
-  }, :allow_blank => true, :if => :any_budget_allocation?
-
   orderize :description
   filterize
 
@@ -57,11 +49,5 @@ class BudgetAllocation < ActiveRecord::Base
 
   def to_s
     "#{id}/#{year}"
-  end
-
-  private
-
-  def any_budget_allocation?
-    self.class.any?
   end
 end
