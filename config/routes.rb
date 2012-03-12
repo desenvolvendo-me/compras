@@ -494,12 +494,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :prefectures do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
+  resource :prefecture, :except => :destroy
 
   resources :procedures, :only => %w(index show) do
     collection do

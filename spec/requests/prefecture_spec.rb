@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "Prefectures" do
+feature "Prefecture" do
   background do
     sign_in
   end
@@ -11,9 +11,7 @@ feature "Prefectures" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Prefeituras'
-
-    click_link 'Criar Prefeitura'
+    click_link 'Prefeitura'
 
     within_tab 'Prefeitura' do
       fill_in 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
@@ -34,8 +32,6 @@ feature "Prefectures" do
     click_button 'Criar Prefeitura'
 
     page.should have_notice 'Prefeitura criada com sucesso.'
-
-    click_link 'Prefeitura Municipal de Porto Alegre'
 
     within_tab 'Prefeitura' do
       page.should have_field 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
@@ -60,9 +56,7 @@ feature "Prefectures" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Prefeituras'
-
-    click_link 'Belo Horizonte'
+    click_link 'Prefeitura'
 
     within_tab 'Prefeitura' do
       fill_in 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
@@ -86,8 +80,6 @@ feature "Prefectures" do
 
     page.should have_notice 'Prefeitura editada com sucesso.'
 
-    click_link 'Prefeitura Municipal de Porto Alegre'
-
     within_tab 'Prefeitura' do
       page.should have_field 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
 
@@ -107,21 +99,5 @@ feature "Prefectures" do
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field 'CEP', :with => '33400-500'
     end
-  end
-
-  scenario 'destroy an existent prefecture' do
-    Prefecture.make!(:belo_horizonte)
-
-    click_link 'Cadastros Diversos'
-
-    click_link 'Prefeituras'
-
-    click_link 'Belo Horizonte'
-
-    click_link 'Apagar Belo Horizonte', :confirm => true
-
-    page.should have_notice 'Prefeitura apagada com sucesso.'
-
-    page.should_not have_content 'Belo Horizonte'
   end
 end

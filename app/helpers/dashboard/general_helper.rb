@@ -28,7 +28,7 @@ module Dashboard::GeneralHelper
       m.periods
       m.people
       m.stn_ordinances
-      m.prefectures
+      m.prefecture
       m.condominium_types
       m.street_types
       m.reference_units

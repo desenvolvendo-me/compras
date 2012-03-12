@@ -12,9 +12,7 @@ feature "Addresses" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Prefeituras'
-
-    click_link 'Criar Prefeitura'
+    click_link 'Prefeitura'
 
     within_tab 'Endereço' do
       page.should have_disabled_field "Bairro"
@@ -43,9 +41,7 @@ feature "Addresses" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Prefeituras'
-
-    click_link 'Belo Horizonte'
+    click_link 'Prefeitura'
 
     within_tab 'Endereço' do
       page.should have_field 'Cidade', :with => 'Curitiba'
