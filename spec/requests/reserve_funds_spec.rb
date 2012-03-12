@@ -70,7 +70,6 @@ feature "ReserveFunds" do
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Exercício', :with => '2011'
     fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
-    fill_in 'Data', :with => '23/02/2012'
     fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
     fill_in 'Valor', :with => '199,00'
     fill_in 'Número do processo', :with => '005/2015'
@@ -86,7 +85,7 @@ feature "ReserveFunds" do
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Exercício', :with => '2011'
     page.should have_field  'Tipo', :with => 'Comum'
-    page.should have_field 'Data', :with => '23/02/2012'
+    page.should have_disabled_field 'Data'
     page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011"
     page.should have_field 'Valor', :with => '199,00'
     page.should have_field 'Número do processo', :with => '005/2015'

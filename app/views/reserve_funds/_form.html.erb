@@ -10,7 +10,7 @@
 
 <%= f.input :status, :disabled => true %>
 <%= f.input :reserve_allocation_type %>
-<%= f.input :date %>
+<%= f.input :date, :disabled => f.object.persisted? %>
 <%= f.input :budget_allocation %>
 <%= link_to_modal_info 'reserve_fund_budget_allocation', f.object.budget_allocation %>
 <%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>

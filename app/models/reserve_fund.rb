@@ -4,6 +4,8 @@ class ReserveFund < ActiveRecord::Base
   attr_accessible :licitation_modality_id, :creditor_id, :status, :date, :historic
   attr_accessible :licitation, :process
 
+  attr_readonly :date
+
   attr_modal :licitation_modality_id, :creditor_id, :status
   attr_modal :entity_id, :year, :budget_allocation_id, :reserve_allocation_type_id
 
@@ -25,6 +27,11 @@ class ReserveFund < ActiveRecord::Base
   validates :entity, :budget_allocation, :value, :year, :reserve_allocation_type, :date, :presence => true
   validates :year, :presence => true, :mask => '9999'
   validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
+  validates :date, :timeliness => {
+    :on_or_after => lambda { last.date },
+    :on_or_after_message => :must_be_greather_or_equal_to_last_date,
+    :type => :date
+  }, :allow_blank => true, :if => :any_reserve_fund?
 
   before_save :parse_licitation, :parse_process, :clear_licitation_dependent_field_if_is_not_licitation
 
@@ -67,5 +74,9 @@ class ReserveFund < ActiveRecord::Base
       self.licitation_number = nil
       self.licitation_year = nil
     end
+  end
+
+  def any_reserve_fund?
+    self.class.any?
   end
 end

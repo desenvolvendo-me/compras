@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'model_helper'
 require 'app/models/reserve_fund'
 require 'app/models/pledge'
@@ -42,5 +43,20 @@ describe ReserveFund do
     subject.process_year = '2013'
 
     subject.joined_process.should eq '002/2013'
+  end
+
+  context 'validating date' do
+    before(:each) do
+      described_class.stub(:last).and_return(double(:date => Date.new(2011, 12, 31)))
+      described_class.stub(:any?).and_return(true)
+    end
+
+    it 'should be valid when date is equal to last' do
+      subject.should allow_value('2011-12-31').for(:date)
+    end
+
+    it 'should not be valid when date is greather than last' do
+      subject.should_not allow_value('2011-12-21').for(:date).with_message("deve ser maior ou igual a data da última reserva (31/12/2011)")
+    end
   end
 end
