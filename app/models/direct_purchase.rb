@@ -48,7 +48,7 @@ class DirectPurchase < ActiveRecord::Base
     if status == 'authorized'
       relation = relation.joins(:supply_authorization)
     elsif status == 'unauthorized'
-      relation = relation.where('direct_purchases.id not in (select direct_purchase_id from supply_authorizations)')
+      relation = relation.joins { supply_authorization.outer }.where { supply_authorization.id.eq(nil) }
     end
 
     relation
