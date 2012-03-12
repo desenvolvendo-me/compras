@@ -25,9 +25,9 @@ describe DirectPurchasesController do
 
   describe 'POST create' do
     it 'should set unauthorized as status' do
-      DirectPurchase.any_instance.should_receive(:status=).with(DirectPurchaseStatus::UNAUTHORIZED)
-
       post :create
+
+      assigns(:direct_purchase).status.should eq DirectPurchaseStatus::UNAUTHORIZED
     end
   end
 end
