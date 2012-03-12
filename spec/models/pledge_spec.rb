@@ -18,6 +18,13 @@ describe Pledge do
 
   it { should validate_presence_of :licitation }
   it { should validate_presence_of :process }
+  it { should validate_presence_of :entity }
+  it { should validate_presence_of :year }
+  it { should validate_presence_of :management_unit }
+  it { should validate_presence_of :emission_date }
+  it { should validate_presence_of :pledge_type }
+  it { should validate_presence_of :value }
+  it { should validate_presence_of :creditor }
 
   it 'should return id as to_s method' do
     subject.id = '1'

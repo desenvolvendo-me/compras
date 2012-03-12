@@ -34,7 +34,8 @@ class Pledge < ActiveRecord::Base
 
   validates :year, :mask => '9999'
   validates :emission_date, :timeliness => { :on_or_after => Date.current, :type => :date }
-  validates :licitation, :process, :presence => true
+  validates :licitation, :process, :entity, :year, :management_unit, :presence => true
+  validates :emission_date, :pledge_type, :value, :creditor, :presence => true
   validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
 
   validate :items_total_value_should_not_be_greater_than_value
