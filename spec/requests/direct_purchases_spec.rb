@@ -250,7 +250,7 @@ feature "DirectPurchases" do
     click_button 'Criar Solicitação de Compra Direta'
 
     within_tab 'Dotações' do
-      page.should have_content 'deve ter o mesmo objeto da licitação selecionado na primeira aba'
+      page.should have_content 'deve pertencer ao objeto de licitação selecionado'
     end
   end
 

@@ -211,7 +211,7 @@ pt-BR:
       must_be_greather_or_equal_to_last_date: "deve ser maior ou igual a data da última dotação (%{restriction})"
       taken_for_informed_year: "já existe para o ano informado"
       taken_for_administractive_act: "já existe para o ato regulamentador informado"
-      must_be_equal_as_licitation_object: "deve ter o mesmo objeto da licitação selecionado na primeira aba"
+      must_be_equal_as_licitation_object: "deve pertencer ao objeto de licitação selecionado"
 
   activerecord:
     errors:
