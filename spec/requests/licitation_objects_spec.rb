@@ -42,7 +42,7 @@ feature "LicitationObjects" do
       end
     end
 
-    within_tab 'Material' do
+    within_tab 'Materiais' do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
     end
 
@@ -79,7 +79,7 @@ feature "LicitationObjects" do
       end
     end
 
-    within_tab 'Material' do
+    within_tab 'Materiais' do
       page.should have_content 'Antivirus'
     end
   end
@@ -93,12 +93,12 @@ feature "LicitationObjects" do
 
     click_link 'Viaduto'
 
-    within_tab 'Material' do
+    within_tab 'Materiais' do
       page.should have_content 'Arame comum'
       click_button 'Remover material'
     end
 
-    within_tab 'Material' do
+    within_tab 'Materiais' do
       page.should_not have_content 'Arame comum'
     end
   end
@@ -140,7 +140,7 @@ feature "LicitationObjects" do
       end
     end
 
-    within_tab 'Material' do
+    within_tab 'Materiais' do
       fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
     end
 
@@ -177,7 +177,7 @@ feature "LicitationObjects" do
       end
     end
 
-    within_tab 'Material' do
+    within_tab 'Materiais' do
       page.should have_content 'Arame comum'
     end
   end
