@@ -34,7 +34,7 @@ class DirectPurchase < ActiveRecord::Base
 
   orderize :year
 
-  def self.filter params={}
+  def self.filter(params={})
     relation = scoped
     relation = relation.where{ year.eq(params[:year]) } unless params[:year].blank?
     relation = relation.where{ date.eq(params[:date]) } unless params[:date].blank?
@@ -43,7 +43,7 @@ class DirectPurchase < ActiveRecord::Base
     relation
   end
 
-  def self.by_status status = ''
+  def self.by_status(status = '')
     relation = scoped
     if status == 'authorized'
       relation = relation.joins(:supply_authorization)
