@@ -1,5 +1,5 @@
 pt-BR:
   enumerations:
     direct_purchase_status:
-      authorized: Autorizado
-      unauthorized: Não autorizado
+      authorized: "Autorizado"
+      unauthorized: "Não autorizado"
