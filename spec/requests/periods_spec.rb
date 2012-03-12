@@ -7,7 +7,7 @@ feature "Periods" do
   end
 
   scenario 'create a new period' do
-    click_link 'Contabilidade'
+    click_link 'Cadastros Diversos'
 
     click_link 'Prazo'
 
@@ -31,7 +31,7 @@ feature "Periods" do
   scenario 'update an existent period' do
     Period.make!(:um_ano)
 
-    click_link 'Contabilidade'
+    click_link 'Cadastros Diversos'
 
     click_link 'Prazo'
 
@@ -57,7 +57,7 @@ feature "Periods" do
   scenario 'destroy an existent period' do
     Period.make!(:um_ano)
 
-    click_link 'Contabilidade'
+    click_link 'Cadastros Diversos'
 
     click_link 'Prazo'
 

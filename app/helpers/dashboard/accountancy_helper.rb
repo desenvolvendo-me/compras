@@ -19,7 +19,6 @@ module Dashboard::AccountancyHelper
       m.legal_references
       m.organograms
       m.licitation_objects
-      m.periods
       m.government_programs
       m.government_actions
       m.capabilities

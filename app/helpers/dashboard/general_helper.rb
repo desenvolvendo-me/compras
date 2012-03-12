@@ -25,6 +25,7 @@ module Dashboard::GeneralHelper
       m.currencies
       m.legal_natures
       m.countries
+      m.periods
       m.people
       m.stn_ordinances
       m.prefectures
