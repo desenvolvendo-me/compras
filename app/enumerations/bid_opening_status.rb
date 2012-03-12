@@ -1,5 +1,5 @@
 class BidOpeningStatus < EnumerateIt::Base
   associate_values :waiting,
-    :released,
-    :canceled
+                   :released,
+                   :canceled
 end
