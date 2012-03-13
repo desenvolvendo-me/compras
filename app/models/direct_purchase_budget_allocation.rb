@@ -15,6 +15,10 @@ class DirectPurchaseBudgetAllocation < ActiveRecord::Base
   validates :budget_allocation, :pledge_type, :presence => true
   validate :must_have_at_least_one_item
 
+  def total_items_value
+    items.collect(&:estimated_total_price).sum
+  end
+
   protected
 
   def must_have_at_least_one_item

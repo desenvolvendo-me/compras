@@ -343,4 +343,68 @@ feature "DirectPurchases" do
     page.should have_content '11/11/2011'
     page.should_not have_content '01/12/2012'
   end
+
+  scenario 'calculate total value of items' do
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    click_link 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should have_disabled_field 'Total em itens'
+
+      click_button 'Adicionar Dotação'
+
+      within 'fieldset:first' do
+        click_button 'Adicionar Item'
+
+        within '.item:first' do
+          fill_in 'Quantidade', :with => 3
+          fill_in 'Valor unitário', :with => '10,00'
+          page.should have_field 'Valor total', :with => '30,00'
+        end
+
+        click_button 'Adicionar Item'
+
+        within '.item:last' do
+          fill_in 'Quantidade', :with => 5
+          fill_in 'Valor unitário', :with => '2,00'
+          page.should have_field 'Valor total', :with => '10,00'
+        end
+      end
+
+      click_button 'Adicionar Dotação'
+
+      within 'fieldset:last' do
+        click_button 'Adicionar Item'
+
+        within '.item:first' do
+          fill_in 'Quantidade', :with => 10
+          fill_in 'Valor total', :with => '50,00'
+          page.should have_field 'Valor unitário', :with => '5,00'
+        end
+      end
+
+      page.should have_field 'Total em itens', :with => '90,00'
+
+      # removing an item
+
+      within 'fieldset:first' do
+        within '.item:last' do
+          click_button 'Remover Item'
+        end
+      end
+
+      page.should have_field 'Total em itens', :with => '80,00'
+
+      # removing an entire budget allocation
+
+      within 'fieldset:last' do
+        click_button 'Remover Dotação'
+      end
+
+      page.should have_field 'Total em itens', :with => '30,00'
+    end
+  end
 end

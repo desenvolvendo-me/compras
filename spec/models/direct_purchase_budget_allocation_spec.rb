@@ -20,4 +20,14 @@ describe DirectPurchaseBudgetAllocation do
 
     subject.items.first.errors[:material].should include 'não pode ficar em branco'
   end
+
+  it 'should calculate the total value of items' do
+    subject.stub(:items).and_return([
+      double(:estimated_total_price => 10),
+      double(:estimated_total_price => 20),
+      double(:estimated_total_price => 15)
+    ])
+
+    subject.total_items_value.should eq 45
+  end
 end

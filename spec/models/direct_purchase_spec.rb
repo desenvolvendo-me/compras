@@ -23,6 +23,16 @@ describe DirectPurchase do
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_one(:supply_authorization).dependent(:restrict) }
 
+  it 'should return total items value of all budget allocations' do
+    subject.stub(:direct_purchase_budget_allocations).and_return([
+      double(:total_items_value => 20),
+      double(:total_items_value => 30),
+      double(:total_items_value => 45)
+    ])
+
+    subject.total_allocations_items_value.should eq 95
+  end
+
   context "validations" do
     it "the duplicated budget_allocations should be invalid except the first" do
       allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)

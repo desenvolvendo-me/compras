@@ -34,6 +34,10 @@ class DirectPurchase < ActiveRecord::Base
 
   orderize :year
 
+  def total_allocations_items_value
+    direct_purchase_budget_allocations.collect(&:total_items_value).sum
+  end
+
   def self.filter(params={})
     relation = scoped
     relation = relation.where{ year.eq(params[:year]) } unless params[:year].blank?

@@ -29,4 +29,57 @@
     $('.button.negative').hide();
     $('.button.affirmative').hide();
   <% end %>
+
+  $('form').delegate('.budget-allocation', 'change', function (event, data) {
+    if (data){
+      var record = data.record,
+          inputs = $(this).closest('fieldset.direct-purchase-budget-allocation').find(':input');
+      $(inputs[4]).val(record.data("expense_economic_classification"));
+      $(inputs[5]).val(record.data("amount"));
+    }
+  });
+
+  $('form.direct_purchase').delegate('.material', 'change', function (event, data) {
+    if (data){
+      var record = data.record,
+          inputs = $(this).closest('.item').find(':input');
+      $(inputs[4]).val(record.data("reference-unit"));
+    }
+  });
+
+  function calculateItemsTotalValue() {
+    var total = 0,
+    value;
+    $.each($('.item-price:visible'), function() {
+      value = $(this).attr('value');
+      if (value != '') {
+        total += parsePtBrFloat(value);
+      }
+    });
+    $('#direct_purchase_total_allocations_items_value').val(floatToPtBrString(total));
+  }
+
+  $('form.direct_purchase').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
+        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+
+    itemDiv.find('.item-price').val(total);
+    calculateItemsTotalValue();
+  });
+
+  $('form.direct_purchase').delegate('.item-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemPrice = parsePtBrFloat(itemDiv.find('.item-price').val() || '0'),
+        unitPrice = floatToPtBrString(itemPrice / itemQuantity);
+
+    itemDiv.find('.item-unit-price').val(unitPrice);
+    calculateItemsTotalValue();
+  });
+
+  $('form.direct_purchase').delegate('.remove-direct-purchase-budget-allocation, .remove-item', 'click', function() {
+    calculateItemsTotalValue();
+  });
 </script>
