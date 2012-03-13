@@ -43,4 +43,14 @@ describe PledgesController do
 
     assigns(:pledge).process.should eq '002/2013'
   end
+
+  it 'should call the budget allocation amount subtractor on action create' do
+    Pledge.any_instance.stub(:licitation).and_return('39/2011')
+    Pledge.any_instance.stub(:process).and_return('39/2011')
+    Pledge.any_instance.stub(:valid?).and_return(true)
+
+    PledgeBudgetAllocationSubtractor.any_instance.should_receive(:subtract_budget_allocation_amount!)
+
+    post :create
+  end
 end
