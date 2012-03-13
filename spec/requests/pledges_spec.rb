@@ -34,7 +34,7 @@ feature "Pledges" do
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-      fill_in 'Valor', :with => '300,00'
+      fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
@@ -54,15 +54,15 @@ feature "Pledges" do
     within_tab 'Itens' do
       # should get the value informed on the general tab
       page.should have_disabled_field 'Valor'
-      page.should have_field 'Valor', :with => "300,00"
+      page.should have_field 'Valor', :with => "10,00"
 
       click_button "Adicionar Item"
 
       page.should have_disabled_field "U. medida"
 
       fill_modal 'Item', :with => "Arame farpado", :field => "Descrição"
-      fill_in 'Quantidade', :with => "3"
-      fill_in 'Valor unitário', :with => "100,00"
+      fill_in 'Quantidade', :with => "2"
+      fill_in 'Valor unitário', :with => "5,00"
 
       # getting the reference unit and description via javascript
       page.should have_field 'U. medida', :with => "Unidade"
@@ -70,7 +70,7 @@ feature "Pledges" do
 
       # calculating total item price via javascript
       page.should have_disabled_field 'Valor total dos itens'
-      page.should have_field 'Valor total dos itens', :with => "300,00"
+      page.should have_field 'Valor total dos itens', :with => "10,00"
     end
 
     click_button 'Criar Empenho'
@@ -89,7 +89,7 @@ feature "Pledges" do
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
       page.should have_select 'Tipo de empenho', :selected => 'Global'
       page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
-      page.should have_field 'Valor', :with => '300,00'
+      page.should have_field 'Valor', :with => '10,00'
       page.should have_field 'Categoria', :with => 'Geral'
       page.should have_select 'Tipo de bem', :selected => 'Patrimonial'
       page.should have_field 'Contrato de dívida fundada', :with => "#{founded_debt_contract.id}/2012"
@@ -108,11 +108,11 @@ feature "Pledges" do
 
     within_tab 'Itens' do
       page.should have_field 'Item', :with => "02.02.00001 - Arame farpado"
-      page.should have_field 'Quantidade', :with => "3"
-      page.should have_field 'Valor unitário', :with => "100,00"
+      page.should have_field 'Quantidade', :with => "2"
+      page.should have_field 'Valor unitário', :with => "5,00"
       page.should have_field 'U. medida', :with => "Unidade"
       page.should have_field 'Descrição', :with => "Arame farpado"
-      page.should have_field 'Valor total', :with => "300,00"
+      page.should have_field 'Valor total', :with => "10,00"
     end
   end
 
