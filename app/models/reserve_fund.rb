@@ -33,6 +33,8 @@ class ReserveFund < ActiveRecord::Base
     :type => :date
   }, :allow_blank => true, :if => :any_reserve_fund?
 
+  validate :value_should_not_exceed_available_reserve
+
   before_save :parse_licitation, :parse_process, :clear_licitation_dependent_field_if_is_not_licitation
 
   orderize :year
@@ -51,6 +53,14 @@ class ReserveFund < ActiveRecord::Base
   end
 
   protected
+
+  def value_should_not_exceed_available_reserve
+    return unless budget_allocation
+
+    if budget_allocation_reserved_value + value > budget_allocation_amount
+      errors.add(:value, :should_not_exceed_reserved_value)
+    end
+  end
 
   def parse_licitation
     if licitation

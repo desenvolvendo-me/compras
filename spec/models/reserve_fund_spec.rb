@@ -59,4 +59,21 @@ describe ReserveFund do
       subject.should_not allow_value('2011-12-21').for(:date).with_message("deve ser maior ou igual a data da última reserva (31/12/2011)")
     end
   end
+
+  it 'should validate that the value not exceed available reserve' do
+    budget_allocation = double(:amount => 500, :reserved_value => 300)
+    subject.stub(:budget_allocation).and_return(budget_allocation)
+
+    subject.value = 200
+
+    subject.valid?
+
+    subject.errors.messages[:value].should be_nil
+
+    subject.value = 201
+
+    subject.valid?
+
+    subject.errors.messages[:value].should include 'está acima do valor disponível para a dotação selecionada'
+  end
 end
