@@ -26,6 +26,16 @@ describe Pledge do
   it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :value }
   it { should validate_presence_of :creditor }
+  it { should validate_presence_of :budget_allocation }
+
+  it 'validate value based on real_amount' do
+    subject.stub(:budget_allocation_amount).and_return(100)
+    subject.stub(:reserve_fund_value).and_return(1)
+
+    should allow_value(1).for(:value)
+    should allow_value(99).for(:value)
+    should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação')
+  end
 
   it 'should return id as to_s method' do
     subject.id = '1'

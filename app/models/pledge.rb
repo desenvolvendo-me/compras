@@ -39,6 +39,7 @@ class Pledge < ActiveRecord::Base
   validates :budget_allocation, :presence => true
   validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
 
+  validate :value_should_not_be_greater_than_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
 
@@ -63,6 +64,12 @@ class Pledge < ActiveRecord::Base
     pledge_items.map(&:estimated_total_price).compact.sum
   end
 
+  def real_amount
+    return 0 unless budget_allocation_amount && reserve_fund_value
+
+    budget_allocation_amount - reserve_fund_value
+  end
+
   protected
 
   def parse_licitation
@@ -75,6 +82,12 @@ class Pledge < ActiveRecord::Base
     parser = NumberYearParser.new(process)
     self.process_number = parser.number
     self.process_year = parser.year
+  end
+
+  def value_should_not_be_greater_than_real_amount
+    return unless value
+
+    errors.add(:value, :must_not_be_greather_than_real_amount) if value > real_amount
   end
 
   def items_total_value_should_not_be_greater_than_value
