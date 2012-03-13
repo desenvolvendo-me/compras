@@ -179,6 +179,42 @@ feature "Pledges" do
     page.should_not have_link "Apagar #{pledge.id}"
   end
 
+  scenario 'Fill budget allocation when select reserve fund' do
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    reserve_fund = ReserveFund.make!(:detran_2012)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+
+      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
+    end
+  end
+
+  scenario 'should clear reserve fund when select other budget allocation' do
+    BudgetAllocation.make!(:alocacao_extra)
+    reserve_fund = ReserveFund.make!(:detran_2012)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+
+      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+      page.should have_field 'Reserva de dotação', :with => ''
+    end
+  end
+
   scenario 'clear reserve_fund_value field when clear' do
     reserve_fund = ReserveFund.make!(:detran_2012)
 
