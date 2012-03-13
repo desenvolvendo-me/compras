@@ -50,8 +50,8 @@ feature "Providers" do
 
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
       fill_in 'Número do documento', :with => '123456'
-      fill_in 'Data de emissão', :with => I18n.l(Date.today)
-      fill_in 'Data de validade', :with => I18n.l(Date.today + 5.days)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de validade', :with => I18n.l(Date.current + 5.days)
     end
 
     click_button 'Criar Fornecedor'
@@ -87,8 +87,8 @@ feature "Providers" do
     within_tab 'Documentação para licitações' do
       page.should have_field 'Tipo de documento', :with => 'Fiscal'
       page.should have_field 'Número do documento', :with => '123456'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.today)
-      page.should have_field 'Data de validade', :with => I18n.l(Date.today + 5.days)
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+      page.should have_field 'Data de validade', :with => I18n.l(Date.current + 5.days)
     end
   end
 
@@ -550,8 +550,8 @@ feature "Providers" do
     within_tab 'Documentação para licitações' do
       page.should have_field 'Tipo de documento', :with => 'Fiscal'
       page.should have_field 'Número do documento', :with => '123456'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.today)
-      page.should have_field 'Data de validade', :with => I18n.l(Date.today + 5.days)
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+      page.should have_field 'Data de validade', :with => I18n.l(Date.current + 5.days)
 
       click_button 'Remover'
     end
@@ -567,8 +567,8 @@ feature "Providers" do
     within_tab 'Documentação para licitações' do
       page.should_not have_field 'Tipo de documento', :with => 'Fiscal'
       page.should_not have_field 'Número do documento', :with => '123456'
-      page.should_not have_field 'Data de emissão', :with => I18n.l(Date.today)
-      page.should_not have_field 'Data de validade', :with => I18n.l(Date.today + 5.days)
+      page.should_not have_field 'Data de emissão', :with => I18n.l(Date.current)
+      page.should_not have_field 'Data de validade', :with => I18n.l(Date.current + 5.days)
     end
   end
 end
