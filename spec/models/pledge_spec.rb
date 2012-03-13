@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/pledge'
+require 'app/models/pledge_item'
 
 describe Pledge do
   it { should belong_to :entity }
