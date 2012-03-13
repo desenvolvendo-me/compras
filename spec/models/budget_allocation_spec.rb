@@ -6,6 +6,7 @@ require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/reserve_fund'
 require 'app/models/pledge'
 require 'app/models/bid_opening'
+require 'app/models/direct_purchase_budget_allocation'
 
 describe BudgetAllocation do
   it 'should return description as to_s id/year' do
@@ -33,4 +34,14 @@ describe BudgetAllocation do
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
+
+  it 'should calculate reserved value' do
+    subject.reserved_value.should eq 0
+
+    fund1 = double(:value => 3200)
+    fund2 = double(:value => 2500)
+    subject.stub(:reserve_funds).and_return([fund1, fund2])
+
+    subject.reserved_value.should eq 5700
+  end
 end

@@ -28,7 +28,7 @@ feature "ReserveFunds" do
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
     fill_in 'Data', :with => '22/02/2012'
     fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-    fill_in 'Valor', :with => '10,00'
+    fill_in 'reserve_fund_value', :with => '10,00'
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
     fill_in 'Número da licitação', :with => '001/2012'
     fill_in 'Número do processo', :with => '002/2013'
@@ -46,7 +46,7 @@ feature "ReserveFunds" do
     page.should have_field  'Tipo', :with => 'Licitação'
     page.should have_field 'Data', :with => '22/02/2012'
     page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012"
-    page.should have_field 'Valor', :with => '10,00'
+    page.should have_field 'reserve_fund_value', :with => '10,00'
     page.should have_field 'Modalidade', :with => 'Pública'
     page.should have_field 'Número da licitação', :with => '001/2012'
     page.should have_field 'Número do processo', :with => '002/2013'
@@ -71,7 +71,7 @@ feature "ReserveFunds" do
     fill_in 'Exercício', :with => '2011'
     fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
     fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
-    fill_in 'Valor', :with => '199,00'
+    fill_in 'reserve_fund_value', :with => '199,00'
     fill_in 'Número do processo', :with => '005/2015'
     fill_modal 'Favorecido', :with => 'Nobe'
     fill_in 'Histórico', :with => 'Novo histórico'
@@ -87,7 +87,7 @@ feature "ReserveFunds" do
     page.should have_field  'Tipo', :with => 'Comum'
     page.should have_disabled_field 'Data'
     page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011"
-    page.should have_field 'Valor', :with => '199,00'
+    page.should have_field 'reserve_fund_value', :with => '199,00'
     page.should have_field 'Número do processo', :with => '005/2015'
     page.should have_field 'Favorecido', :with => 'Nobe'
     page.should have_field 'Histórico', :with => 'Novo histórico'
@@ -215,5 +215,45 @@ feature "ReserveFunds" do
 
     page.should have_field 'Modalidade', :with => ''
     page.should have_field 'Número da licitação', :with => ''
+  end
+
+  scenario 'should calculate reserved value' do
+    ReserveFund.make!(:detran_2012)
+
+    click_link 'Contabilidade'
+
+    click_link 'Reservas de Dotação'
+
+    click_link 'Criar Reserva de Dotação'
+
+    fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+
+    page.should have_field 'Valor reservado', :with => '10,50'
+
+    fill_in 'reserve_fund_value', :with => '10,00'
+
+    page.should have_field 'Valor reservado', :with => '20,50'
+  end
+
+  scenario 'should calculate reserved value when editing a reserve fund' do
+    ReserveFund.make!(:detran_2012)
+    BudgetAllocation.make!(:alocacao_extra)
+
+    click_link 'Contabilidade'
+
+    click_link 'Reservas de Dotação'
+
+    click_link '2012'
+
+    fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
+
+    fill_in 'reserve_fund_value', :with => '20,00'
+
+    page.should have_field 'Valor reservado', :with => '20,00'
+
+    # re-selecting the same budget allocation
+    fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+
+    page.should have_field 'Valor reservado', :with => '20,00'
   end
 end

@@ -21,7 +21,7 @@ class ReserveFund < ActiveRecord::Base
 
   has_many :pledges, :dependent => :restrict
 
-  delegate :amount, :to => :budget_allocation, :allow_nil => true, :prefix => true
+  delegate :amount, :reserved_value, :to => :budget_allocation, :allow_nil => true, :prefix => true
   delegate :licitation?, :to => :reserve_allocation_type, :allow_nil => true
 
   validates :entity, :budget_allocation, :value, :year, :reserve_allocation_type, :date, :presence => true

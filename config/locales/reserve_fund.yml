@@ -11,6 +11,7 @@ pt-BR:
         entity: "Entidade"
         budget_allocation: "Dotação orçamentária"
         budget_allocation_amount: "Saldo orçamentário"
+        budget_allocation_reserved_value: "Valor reservado"
         value: "Valor"
         reserve_allocation_type: "Tipo"
         licitation_modality: "Modalidade"

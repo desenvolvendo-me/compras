@@ -47,6 +47,10 @@ class BudgetAllocation < ActiveRecord::Base
     relation
   end
 
+  def reserved_value
+    reserve_funds.collect(&:value).sum
+  end
+
   def to_s
     "#{id}/#{year}"
   end

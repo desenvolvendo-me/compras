@@ -13,7 +13,17 @@
 <%= f.input :date, :disabled => f.object.persisted? %>
 <%= f.input :budget_allocation %>
 <%= link_to_modal_info 'reserve_fund_budget_allocation', f.object.budget_allocation %>
-<%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocation_reserved_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_reserved_value) } %>
+  </div>
+</div>
+
 <%= f.input :value %>
 
 <div class="yui3-g">
@@ -35,15 +45,43 @@
 <%= f.input :historic %>
 
 <script>
+  var savedValue = parsePtBrFloat('<%= f.object.value %>'),
+      savedAllocation = '<%= f.object.budget_allocation_id %>',
+      reservedValue = <%= f.object.budget_allocation_reserved_value || 0 %>,
+      persisted = <%= f.object.persisted? %>;
+
+  function calculateTotalReservedValue() {
+    var actualValue = (parsePtBrFloat($('#reserve_fund_value').val()) || 0),
+        total = reservedValue + actualValue;
+
+    // when editing, if user change the budget allocation, and re-select the same later,
+    // it must subtract the saved value of the reserve and sum with the informed value
+    if(persisted && savedAllocation != '' && savedAllocation == $('#reserve_fund_budget_allocation_id').val()) {
+      total -= savedValue;
+    }
+
+    $('#reserve_fund_budget_allocation_reserved_value').val(floatToPtBrString(total));
+  }
+
+  $('form.reserve_fund').delegate('#reserve_fund_value', 'keyup', function() {
+    calculateTotalReservedValue();
+  });
+
   $("#reserve_fund_budget_allocation_id").change(function (event, data) {
     if (data) {
       var record = data.record;
 
       $('#reserve_fund_budget_allocation_amount').val(record.data("amount"));
+      reservedValue = record.data('reserved-value');
     } else {
       $('#reserve_fund_budget_allocation_amount').val('');
+      reservedValue = 0;
     }
+
+    calculateTotalReservedValue();
   });
+
+  calculateTotalReservedValue();
 
   $("#reserve_fund_reserve_allocation_type_id").change(function (event, data) {
     if (data && data.record.data("label") == "Licitação") {
