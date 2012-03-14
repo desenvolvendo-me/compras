@@ -44,4 +44,16 @@ describe BudgetAllocation do
 
     subject.reserved_value.should eq 5700
   end
+
+  context '#real_amount' do
+    it 'should calculate the right real value when the amount is not nil' do
+      subject.stub(:amount => 400.0, :reserved_value => 200.0)
+      subject.real_amount.should eq(200.0)
+    end
+
+    it 'should calculate the right real value when the amount is nil' do
+      subject.stub(:amount => nil, :reserved_value => 200.0)
+      subject.real_amount.should eq(-200.0)
+    end
+  end
 end

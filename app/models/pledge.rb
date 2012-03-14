@@ -28,7 +28,7 @@ class Pledge < ActiveRecord::Base
 
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
-  delegate :amount, :function, :subfunction, :government_program, :government_action,
+  delegate :amount, :real_amount, :function, :subfunction, :government_program, :government_action,
            :organogram, :expense_economic_classification,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
@@ -39,7 +39,7 @@ class Pledge < ActiveRecord::Base
   validates :budget_allocation, :presence => true
   validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
 
-  validate :value_should_not_be_greater_than_real_amount
+  validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
 
@@ -64,12 +64,6 @@ class Pledge < ActiveRecord::Base
     pledge_items.map(&:estimated_total_price).compact.sum
   end
 
-  def real_amount
-    return 0 unless budget_allocation_amount && reserve_fund_value
-
-    budget_allocation_amount - reserve_fund_value
-  end
-
   protected
 
   def parse_licitation
@@ -84,10 +78,10 @@ class Pledge < ActiveRecord::Base
     self.process_year = parser.year
   end
 
-  def value_should_not_be_greater_than_real_amount
-    return unless value
+  def value_should_not_be_greater_than_budget_allocation_real_amount
+    return unless value && budget_allocation_real_amount
 
-    errors.add(:value, :must_not_be_greather_than_real_amount) if value > real_amount
+    errors.add(:value, :must_not_be_greather_than_budget_allocation_real_amount) if value > budget_allocation_real_amount
   end
 
   def items_total_value_should_not_be_greater_than_value

@@ -51,6 +51,10 @@ class BudgetAllocation < ActiveRecord::Base
     reserve_funds.collect(&:value).sum
   end
 
+  def real_amount
+    (amount || 0) - reserved_value
+  end
+
   def to_s
     "#{id}/#{year}"
   end

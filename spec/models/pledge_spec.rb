@@ -28,9 +28,8 @@ describe Pledge do
   it { should validate_presence_of :creditor }
   it { should validate_presence_of :budget_allocation }
 
-  it 'validate value based on real_amount' do
-    subject.stub(:budget_allocation_amount).and_return(100)
-    subject.stub(:reserve_fund_value).and_return(1)
+  it 'validate value based on budeget_allocation_real_amount' do
+    subject.stub(:budget_allocation_real_amount).and_return(99)
 
     should allow_value(1).for(:value)
     should allow_value(99).for(:value)
