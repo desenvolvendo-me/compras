@@ -6,9 +6,9 @@ class Employee < ActiveRecord::Base
 
   has_one :user
 
-  has_many :purchase_solicitations, :as => :responsible
-  has_many :organogram_responsibles, :as => :responsible
-  has_many :bid_openings, :as => :responsible, :dependent => :restrict
+  has_many :purchase_solicitations, :foreign_key => :responsible_id, :dependent => :restrict
+  has_many :organogram_responsibles, :foreign_key => :responsible_id, :dependent => :restrict
+  has_many :bid_openings, :foreign_key => :responsible_id, :dependent => :restrict
   has_many :direct_purchases, :dependent => :restrict
 
   delegate :to_s, :name, :to => :person
