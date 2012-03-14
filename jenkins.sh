@@ -15,6 +15,7 @@ bundle exec rake db:migrate > /dev/null
 
 # execute specs
 bundle exec rspec spec/business
+bundle exec rspec spec/presenters
 #bundle exec rspec spec/reports
 bundle exec rspec spec/lib
 bundle exec rspec spec/models
