@@ -18,6 +18,9 @@ feature "BidOpenings" do
 
     click_link 'Criar Abertura de Licitação'
 
+    page.should have_disabled_field 'Status do processo administrativo'
+    page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+
     fill_in 'Ano', :with => '2012'
     fill_in 'Data do processo', :with => '07/03/2012'
     fill_in 'Número do protocolo', :with => '00099/2012'
