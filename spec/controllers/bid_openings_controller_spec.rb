@@ -9,7 +9,7 @@ describe BidOpeningsController do
     it 'uses waiting as default value for status' do
       get :new
 
-      assigns(:bid_opening).bid_opening_status.should eq BidOpeningStatus::WAITING
+      assigns(:bid_opening).status.should eq BidOpeningStatus::WAITING
     end
 
     it 'uses current date as default value for date' do
@@ -35,7 +35,7 @@ describe BidOpeningsController do
     it 'uses waiting as default value for status' do
       post :create
 
-      assigns(:bid_opening).bid_opening_status.should eq BidOpeningStatus::WAITING
+      assigns(:bid_opening).status.should eq BidOpeningStatus::WAITING
     end
   end
 end

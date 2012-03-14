@@ -12,5 +12,5 @@ BidOpening.blueprint(:compra_de_cadeiras) do
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
-  bid_opening_status { BidOpeningStatus::WAITING }
+  status { BidOpeningStatus::WAITING }
 end

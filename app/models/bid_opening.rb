@@ -1,14 +1,14 @@
 class BidOpening < ActiveRecord::Base
   attr_accessible :organogram_id, :budget_allocation_id, :responsible_id
   attr_accessible :process, :year, :date, :value_estimated, :modality
-  attr_accessible :protocol, :object_type, :bid_opening_status, :description
+  attr_accessible :protocol, :object_type, :status, :description
   attr_accessible :judgment_form_id
 
   attr_readonly :process, :year
 
   has_enumeration_for :modality, :with => BidOpeningModality
   has_enumeration_for :object_type, :with => BidOpeningObjectType
-  has_enumeration_for :bid_opening_status, :with => BidOpeningStatus
+  has_enumeration_for :status, :with => BidOpeningStatus
 
   belongs_to :organogram
   belongs_to :budget_allocation
@@ -17,7 +17,7 @@ class BidOpening < ActiveRecord::Base
 
   validates :year, :date, :organogram, :value_estimated, :presence => true
   validates :budget_allocation, :modality, :object_type, :presence => true
-  validates :responsible, :bid_opening_status, :presence => true
+  validates :responsible, :status, :presence => true
   validates :description, :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
 

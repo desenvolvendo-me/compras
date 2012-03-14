@@ -20,5 +20,5 @@ pt-BR:
         judgment_form: "Forma de julgamento"
         description: "Objeto do processo licitatório"
         responsible: "Responsável"
-        bid_opening_status: "Status do processo administrativo"
+        status: "Status do processo administrativo"
         delivery_date: "Data de liberação"

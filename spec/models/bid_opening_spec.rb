@@ -30,7 +30,7 @@ describe BidOpening do
   it { should validate_presence_of :description }
   it { should validate_presence_of :judgment_form }
   it { should validate_presence_of :responsible }
-  it { should validate_presence_of :bid_opening_status }
+  it { should validate_presence_of :status }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('212').for(:year) }
