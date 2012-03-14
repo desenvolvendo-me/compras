@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/models/employee'
 require 'app/models/purchase_solicitation'
+require 'app/models/direct_purchase'
 
 describe Employee do
   it { should belong_to :person }
