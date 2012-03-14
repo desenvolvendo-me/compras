@@ -8,21 +8,19 @@ class PledgesController < CrudController
     super
   end
 
-  def create
-    object = build_resource
-
-    if object.valid?
-      PledgeBudgetAllocationSubtractor.new(object).subtract_budget_allocation_amount!
-    end
-
-    super
-  end
-
   def edit
     object = resource
     object.licitation = object.joined_licitation
     object.process = object.joined_process
 
     super
+  end
+
+  protected
+
+  def create_resource(object)
+    if super
+      PledgeBudgetAllocationSubtractor.new(object).subtract_budget_allocation_amount!
+    end
   end
 end
