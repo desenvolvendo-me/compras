@@ -9,7 +9,7 @@ pt-BR:
       direct_purchase:
         year: "Ano"
         date: "Data da compra"
-        legal_reference: "Referencia legal"
+        legal_reference: "Referência legal"
         modality: "Modalidade"
         provider: "Fornecedor"
         organogram: "Unidade orçamentária"
@@ -18,7 +18,7 @@ pt-BR:
         employee: "Responsável"
         payment_method: "Forma de pagamento"
         price_collection: "Coleta de preços"
-        price_registration: "Reg. de preços"
+        price_registration: "Registro de preços"
         observation: "Observações gerais"
         period: "Prazo"
         total_allocations_items_value: "Total em itens"

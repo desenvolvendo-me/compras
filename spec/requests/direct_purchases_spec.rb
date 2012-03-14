@@ -27,7 +27,7 @@ feature "DirectPurchases" do
     within_tab 'Dados gerais' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da compra', :with => '19/03/2012'
-      fill_modal 'Referencia legal', :with => 'Referencia legal', :field => 'Descrição'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -37,7 +37,7 @@ feature "DirectPurchases" do
       fill_modal 'Prazo', :with => '1', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
-      fill_in 'Reg. de preços', :with => '88'
+      fill_in 'Registro de preços', :with => '88'
       fill_in 'Observações gerais', :with => 'obs'
     end
 
@@ -78,7 +78,7 @@ feature "DirectPurchases" do
     within_tab 'Dados gerais' do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da compra', :with => '19/03/2012'
-      page.should have_field 'Referencia legal', :with => 'Referencia legal'
+      page.should have_field 'Referência legal', :with => 'Referencia legal'
       page.should have_select 'Modalidade', :selected => 'Material ou serviços'
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
@@ -88,7 +88,7 @@ feature "DirectPurchases" do
       page.should have_field 'Prazo', :with => '1 ano'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Coleta de preços', :with => '99'
-      page.should have_field 'Reg. de preços', :with => '88'
+      page.should have_field 'Registro de preços', :with => '88'
       page.should have_field 'Observações gerais', :with => 'obs'
     end
 
@@ -123,7 +123,7 @@ feature "DirectPurchases" do
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Ano'
       page.should have_disabled_field 'Data da compra'
-      page.should have_disabled_field 'Referencia legal'
+      page.should have_disabled_field 'Referência legal'
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Fornecedor'
       page.should have_disabled_field 'Unidade orçamentária'
@@ -133,7 +133,7 @@ feature "DirectPurchases" do
       page.should have_disabled_field 'Prazo'
       page.should have_disabled_field 'Forma de pagamento'
       page.should have_disabled_field 'Coleta de preços'
-      page.should have_disabled_field 'Reg. de preços'
+      page.should have_disabled_field 'Registro de preços'
       page.should have_disabled_field 'Observações gerais'
     end
 
@@ -190,7 +190,7 @@ feature "DirectPurchases" do
     within_tab 'Dados gerais' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da compra', :with => '19/03/2012'
-      fill_modal 'Referencia legal', :with => 'Referencia legal', :field => 'Descrição'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -200,7 +200,7 @@ feature "DirectPurchases" do
       fill_modal 'Prazo', :with => '1', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
-      fill_in 'Reg. de preços', :with => '88'
+      fill_in 'Registro de preços', :with => '88'
       fill_in 'Observações gerais', :with => 'obs'
     end
 
