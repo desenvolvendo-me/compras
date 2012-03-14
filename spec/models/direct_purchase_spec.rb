@@ -89,5 +89,20 @@ describe DirectPurchase do
 
       subject.direct_purchase_budget_allocations.first.errors[:budget_allocation].should include 'não pode ficar em branco'
     end
+
+    it 'should not have total of items exceeding licitation object exemption' do
+      subject.stub(:licitation_exemption => 1000)
+      subject.stub(:total_allocations_items_value => 1000)
+
+      subject.valid?
+
+      subject.errors.messages[:total_allocations_items_value].should be_nil
+
+      subject.stub(:total_allocations_items_value => 1001)
+
+      subject.valid?
+
+      subject.errors.messages[:total_allocations_items_value].should include 'não pode ser superior à dispensa de licitação'
+    end
   end
 end

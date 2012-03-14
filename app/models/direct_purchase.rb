@@ -31,6 +31,7 @@ class DirectPurchase < ActiveRecord::Base
   validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation
   validate :material_must_have_same_licitation_object
+  validate :total_of_items_should_not_exceed_licitation_object_exemption
 
   orderize :year
 
@@ -97,6 +98,12 @@ class DirectPurchase < ActiveRecord::Base
           item.errors.add(:material, :must_be_equal_as_licitation_object)
         end
       end
+    end
+  end
+
+  def total_of_items_should_not_exceed_licitation_object_exemption
+    if total_allocations_items_value > licitation_exemption
+      errors.add(:total_allocations_items_value, :cannot_be_greater_than_licitation_exemption)
     end
   end
 end
