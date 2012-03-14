@@ -53,7 +53,7 @@ feature "BidOpenings" do
     page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
     page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_select 'Status do processo administrativo', :with => 'Aguardando'
+    page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
     page.should have_disabled_field 'Data de liberação'
   end
 

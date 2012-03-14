@@ -35,7 +35,7 @@ feature "ExpenseEconomicClassifications" do
     page.should have_field 'Portaria do STN', :with => 'Portaria Geral'
     page.should have_field 'Ato administrativo', :with => '1234'
     page.should have_field 'Classificação da natureza da despesa', :with => '3.1.90.11.01.00.00.00'
-    page.should have_select 'Tipo', :with => 'Ambos'
+    page.should have_select 'Tipo', :selected => 'Ambos'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários'
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
   end
@@ -70,7 +70,7 @@ feature "ExpenseEconomicClassifications" do
     page.should have_field 'Portaria do STN', :with => 'Portaria Interministerial'
     page.should have_field 'Ato administrativo', :with => '4567'
     page.should have_field 'Classificação da natureza da despesa', :with => '1.2.34.56.78.90.12.34'
-    page.should have_select 'Tipo', :with => 'Analítico'
+    page.should have_select 'Tipo', :selected => 'Analítico'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
   end
