@@ -8,6 +8,6 @@ pt-BR:
     attributes:
       direct_purchase_budget_allocation:
         budget_allocation: "Dotação orçamentária"
-        expense_economic_classification: "Classificação econômica de despesa"
+        expense_economic_classification: "Classificação econômica da despesa"
         amount: "Saldo da dotação"
         pledge_type: "Tipo do empenho"
