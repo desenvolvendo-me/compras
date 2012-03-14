@@ -34,6 +34,12 @@ class DirectPurchase < ActiveRecord::Base
 
   orderize :year
 
+  def licitation_exemption
+    return 0 if licitation_object.nil? || modality.empty?
+
+    licitation_object.licitation_exemption(modality)
+  end
+
   def total_allocations_items_value
     direct_purchase_budget_allocations.collect(&:total_items_value).sum
   end

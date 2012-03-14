@@ -21,6 +21,15 @@ class LicitationObject < ActiveRecord::Base
   orderize :description
   filterize
 
+  def licitation_exemption(modality)
+    case modality
+    when DirectPurchaseModality::MATERIAL_OR_SERVICE
+      purchase_licitation_exemption
+    when DirectPurchaseModality::ENGINEERING_WORKS
+      build_licitation_exemption
+    end
+  end
+
   def to_s
     description
   end

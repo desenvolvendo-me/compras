@@ -82,4 +82,47 @@
   $('form.direct_purchase').delegate('.remove-direct-purchase-budget-allocation, .remove-item', 'click', function() {
     calculateItemsTotalValue();
   });
+
+  // Licitation exemptions
+
+  var purchaseLicitationExemption = '0,00',
+      buildLicitationExemption = '0,00';
+
+  <% if f.object.licitation_object %>
+    purchaseLicitationExemption = floatToPtBrString(<%= f.object.licitation_object.purchase_licitation_exemption %>);
+    buildLicitationExemption = floatToPtBrString(<%= f.object.licitation_object.build_licitation_exemption %>);
+  <% end %>
+
+  function setLicitationExemption() {
+    var modality = $('#direct_purchase_modality').attr('value');
+
+    switch(modality) {
+      case '<%= DirectPurchaseModality::MATERIAL_OR_SERVICE %>':
+        $('#direct_purchase_licitation_exemption').val(purchaseLicitationExemption);
+        break;
+      case '<%= DirectPurchaseModality::ENGINEERING_WORKS %>':
+        $('#direct_purchase_licitation_exemption').val(buildLicitationExemption);
+        break;
+      default:
+        $('#direct_purchase_licitation_exemption').val('0,00');
+    }
+  }
+
+  $('form.direct_purchase').delegate('#direct_purchase_licitation_object_id', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      purchaseLicitationExemption = record.data('purchase-licitation-exemption');
+      buildLicitationExemption = record.data('build-licitation-exemption');
+    } else {
+      purchaseLicitationExemption = 0;
+      buildLicitationExemption = 0;
+    }
+
+    setLicitationExemption();
+  });
+
+  $('form.direct_purchase').delegate('#direct_purchase_modality', 'change', function (event, data) {
+    setLicitationExemption();
+  });
 </script>

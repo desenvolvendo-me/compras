@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
 require 'app/models/direct_purchase_budget_allocation'
+require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/supply_authorization'
 
 describe DirectPurchase do
@@ -31,6 +32,20 @@ describe DirectPurchase do
     ])
 
     subject.total_allocations_items_value.should eq 95
+  end
+
+  it 'should return 0 for licitation_exemption when no licitation object' do
+    subject.licitation_exemption.should eq 0
+  end
+
+  it 'should propagate licitation_exemption method to licitation object passing modality' do
+    licitation_object = double
+    subject.stub(:licitation_object => licitation_object)
+    subject.stub(:modality => DirectPurchaseModality::MATERIAL_OR_SERVICE)
+
+    licitation_object.should_receive(:licitation_exemption).with(DirectPurchaseModality::MATERIAL_OR_SERVICE)
+
+    subject.licitation_exemption
   end
 
   context "validations" do

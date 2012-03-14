@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_object'
+require 'app/models/direct_purchase'
 
 describe LicitationObject do
   it 'should return description as to_s method' do
@@ -29,4 +30,12 @@ describe LicitationObject do
   it { should have_and_belong_to_many :materials }
 
   it { should have_many(:direct_purchases).dependent(:restrict) }
+
+  it 'should return the correct licitation exemption depending on modality' do
+    subject.purchase_licitation_exemption = 1000
+    subject.build_licitation_exemption = 2000
+
+    subject.licitation_exemption(DirectPurchaseModality::MATERIAL_OR_SERVICE).should eq 1000
+    subject.licitation_exemption(DirectPurchaseModality::ENGINEERING_WORKS).should eq 2000
+  end
 end
