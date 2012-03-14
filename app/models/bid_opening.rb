@@ -45,11 +45,9 @@ class BidOpening < ActiveRecord::Base
   end
 
   def validate_modality(verificator = BidOpeningModalitiesByObjectType.new)
-    return unless object_type?
+    return unless (object_type.present? && modality.present?)
 
-    if modality.blank?
-      errors.add(:modality, :blank)
-    elsif !verificator.verify_modality(object_type, modality)
+    unless verificator.verify_modality(object_type, modality)
       errors.add(:modality, :inclusion)
     end
   end
