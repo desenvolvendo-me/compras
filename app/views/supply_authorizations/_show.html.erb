@@ -1,0 +1,90 @@
+<h1>Autorização de Fornecimento</h1>
+<p>Número da autorização: <%= resource %></p>
+<p>Compra direta: <%= "#{resource.direct_purchase.id}/#{resource.direct_purchase.year}" %></p>
+<p>Data da compra: <%= l resource.direct_purchase.date %></p>
+<p>Fornecedor: <%= resource.direct_purchase.provider %></p>
+<p>Endereço: <%= resource.direct_purchase.provider.person.address %></p>
+<p>Cidade: <%= resource.direct_purchase.provider.person.address.city %></p>
+<p>CEP: <%= resource.direct_purchase.provider.person.address.zip_code %></p>
+<p>CNPJ: MISSING</p>
+<p>Inscrição estadual: MISSING</p>
+<p>Telefone: <%= resource.direct_purchase.provider.person.phone %></p>
+<p>Fax: <%= resource.direct_purchase.provider.person.fax %></p>
+<p>Conta: <%= resource.direct_purchase.provider.bank_account %></p>
+<p>Agência: <%= resource.direct_purchase.provider.agency %></p>
+<p>Banco: <%= resource.direct_purchase.provider.agency.bank %></p>
+<p>Prezados Senhores,<br> <%= resource.presenter.message %></p>
+<p>Unidade orçamentária: <%= resource.direct_purchase.organogram %></p>
+<p>Condições de Pagamento: <%= resource.direct_purchase.payment_method %></p>
+<p>Prazo de entrega: <%= resource.direct_purchase.period %></p>
+<p>Local de entrega: <%= resource.direct_purchase.delivery_location %></p>
+<p>Objeto da compra: <%= resource.direct_purchase.licitation_object %></p>
+<p>Observações: <%= resource.direct_purchase.observation %></p>
+
+<h1>Dotações orçamentárias</h1>
+
+<% resource.direct_purchase.direct_purchase_budget_allocations.each_with_index do |dpba, idx| %>
+  <h2><%= idx + 1 %> - <%= dpba.budget_allocation.description %></h2>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          Item
+        </th>
+        <th>
+          Quantidade
+        </th>
+        <th>
+          Unidade
+        </th>
+        <th>
+          Especificação
+        </th>
+        <th>
+          Marca
+        </th>
+        <th>
+          Preço unitário
+        </th>
+        <th>
+          Preço total
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% localized(dpba.items).each_with_index do |item, idx| %>
+        <tr id="<%= dom_id item %>">
+          <td>
+            <%= idx + 1 %>
+          </td>
+          <td>
+            <%= item.quantity %>
+          </td>
+          <td>
+            <%= item.material.reference_unit %>
+          </td>
+          <td>
+            <%= item.material.description %>
+          </td>
+          <td>
+            <%= item.brand %>
+          </td>
+          <td>
+            <%= item.unit_price %>
+          </td>
+          <td>
+            <%= number_with_precision item.estimated_total_price %>
+          </td>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <div>
+    <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
+  </div>
+
+  <div>
+    Responsável pelo setor de compras
+  </div>

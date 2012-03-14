@@ -15,6 +15,10 @@ class SupplyAuthorization < ActiveRecord::Base
 
   before_create :set_code
 
+  def items_count
+    direct_purchase.direct_purchase_budget_allocations.map(&:items).flatten.count
+  end
+
   protected
 
   def set_code
