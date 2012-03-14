@@ -22,9 +22,9 @@ class DirectPurchaseBudgetAllocation < ActiveRecord::Base
   protected
 
   def must_have_at_least_one_item
-    if items.empty?
-      errors.add(:items)
-      items.build.valid?
-    end
+    return unless items.empty?
+
+    errors.add(:items)
+    items.build.valid?
   end
 end
