@@ -571,4 +571,24 @@ feature "Providers" do
       page.should_not have_field 'Data de validade', :with => I18n.l(Date.current + 5.days)
     end
   end
+
+  scenario 'show error message when is company and have no partners' do
+    EconomicRegistration.make!(:nohup_office)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    click_link 'Criar Fornecedor'
+
+    within_tab 'Principal'do
+      fill_modal 'Pessoa', :with => 'Nohup'
+    end
+
+    click_button 'Criar Fornecedor'
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      page.should have_content 'Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável'
+    end
+  end
 end

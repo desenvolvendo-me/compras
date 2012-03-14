@@ -60,6 +60,7 @@ describe Provider do
 
     subject.valid?
 
-    subject.provider_partners.first.errors[:individual].should include 'não pode ficar em branco'
+    subject.errors[:provider_partners].should include 'Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável'
+  end
   end
 end

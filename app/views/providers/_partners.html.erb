@@ -1,4 +1,10 @@
 <fieldset id="partners_selector">
+  <% if f.object.errors.messages[:provider_partners] %>
+    <p class="error">
+      <%= f.object.errors.messages[:provider_partners].first %>
+    </p>
+  <% end %>
+
   <div id="provider-partners">
     <%= f.association :provider_partners, :collection => localized(f.object.provider_partners) do |p| %>
       <%= render 'provider_partners/form', :f => p %>

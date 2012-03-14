@@ -57,10 +57,9 @@ class Provider < ActiveRecord::Base
   end
 
   def must_have_at_least_one_partner
-    if company? && provider_partners.empty?
-      errors.add(:provider_partners)
-      provider_partners.build.valid?
-    end
+    return unless company? && provider_partners.empty?
+
+    errors.add(:provider_partners, :must_have_at_least_one_partner)
   end
 
   def clean_extra_partners
