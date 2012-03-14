@@ -65,9 +65,9 @@ feature "JudgmentForms" do
 
     page.should have_notice 'Forma de Julgamento de Licitação apagado com sucesso.'
 
-    page.should_not have_field 'Descrição', :with => 'Forma Global com Menor Preço'
-    page.should_not have_select 'Tipo de julgamento', :selected => 'Global'
-    page.should_not have_select 'Tipo de licitação', :selected => 'Menor preço'
+    page.should_not have_content 'Forma Global com Menor Preço'
+    page.should_not have_content 'Global'
+    page.should_not have_content 'Menor preço'
   end
 
   scenario 'should validate uniqueness of description' do
