@@ -98,6 +98,12 @@ feature "LicitationObjects" do
       click_button 'Remover material'
     end
 
+    click_button 'Atualizar Objeto de Licitação'
+
+    page.should have_notice 'Objeto de Licitação editado com sucesso.'
+
+    click_link 'Viaduto'
+
     within_tab 'Materiais' do
       page.should_not have_content 'Arame comum'
     end
