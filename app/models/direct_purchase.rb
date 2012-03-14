@@ -18,7 +18,7 @@ class DirectPurchase < ActiveRecord::Base
   belongs_to :payment_method
   belongs_to :period
 
-  has_many :direct_purchase_budget_allocations, :dependent => :destroy, :inverse_of => :direct_purchase, :order => :id
+  has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
   has_one :supply_authorization, :dependent => :restrict
 
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :reject_if => :all_blank, :allow_destroy => true

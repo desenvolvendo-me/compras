@@ -6,7 +6,7 @@ class DirectPurchaseBudgetAllocation < ActiveRecord::Base
   belongs_to :direct_purchase
   belongs_to :budget_allocation
 
-  has_many :items, :class_name => 'DirectPurchaseBudgetAllocationItem', :dependent => :destroy, :inverse_of => :direct_purchase_budget_allocation, :order => :id
+  has_many :items, :class_name => 'DirectPurchaseBudgetAllocationItem', :dependent => :destroy, :order => :id
 
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
 
