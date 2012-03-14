@@ -91,9 +91,9 @@ class DirectPurchase < ActiveRecord::Base
   end
 
   def material_must_have_same_licitation_object
-    self.direct_purchase_budget_allocations.each do |dpba|
+    direct_purchase_budget_allocations.each do |dpba|
       dpba.items.each do |item|
-        if item.material && !item.material.licitation_object_ids.include?(self.licitation_object_id)
+        if item.material && !item.material.licitation_object_ids.include?(licitation_object_id)
           errors.add(:direct_purchase_budget_allocations)
           item.errors.add(:material, :must_be_equal_as_licitation_object)
         end
