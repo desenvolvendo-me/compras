@@ -8,6 +8,7 @@ class Employee < ActiveRecord::Base
 
   has_many :purchase_solicitations, :as => :responsible
   has_many :organogram_responsibles, :as => :responsible
+  has_many :bid_openings, :as => :responsible, :dependent => :restrict
   has_many :direct_purchases, :dependent => :restrict
 
   delegate :to_s, :name, :to => :person
