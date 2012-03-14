@@ -30,7 +30,7 @@
     $('.button.affirmative').hide();
   <% end %>
 
-  $('form').delegate('.budget-allocation', 'change', function (event, data) {
+  $('form.direct_purchase').delegate('.budget-allocation', 'change', function (event, data) {
     if (data){
       var record = data.record,
           inputs = $(this).closest('fieldset.direct-purchase-budget-allocation').find(':input');
