@@ -65,7 +65,8 @@ describe Pledge do
   it { should_not allow_value('201a').for(:year) }
 
   it "should not have emission_date less than today" do
-    subject.should_not allow_value(Date.yesterday).for(:emission_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
+    subject.should_not allow_value(Date.yesterday).
+      for(:emission_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
   end
 
   it "should sum the estimated total price of the items" do
