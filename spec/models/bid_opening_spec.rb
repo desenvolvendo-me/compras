@@ -41,11 +41,7 @@ describe BidOpening do
   it { should_not allow_mass_assignment_of(:delivery_date) }
 
   it "should validate the modality depending on object_type" do
-    modality_enum = BidOpeningModality
-
     def test_type(type, modalities_for_type)
-      modality_enum = BidOpeningModality
-
       subject.object_type = type
       modalities_for_type.each do |modality|
         subject.modality = modality
@@ -54,7 +50,7 @@ describe BidOpening do
         subject.errors[:modality].should_not include(I18n.translate('errors.messages.inclusion'))
       end
 
-      (modality_enum.to_a - modalities_for_type).each do |modality|
+      (BidOpeningModality.to_a - modalities_for_type).each do |modality|
         subject.modality = modality
 
         subject.valid?
