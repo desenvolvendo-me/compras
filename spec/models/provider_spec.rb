@@ -62,5 +62,25 @@ describe Provider do
 
     subject.errors[:provider_partners].should include 'Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável'
   end
+
+  it 'should clean extra partners when is not company' do
+    partner1 = double('partner', :individual_id => 1)
+    partner2 = double('partner', :individual_id => 2)
+    subject.stub(:provider_partners => [partner1, partner2])
+    subject.stub(:valid? => true)
+
+    subject.stub(:company? => false)
+
+    partner1.should_receive(:destroy)
+    partner2.should_receive(:destroy)
+
+    subject.save
+
+    subject.stub(:company? => true)
+
+    partner1.should_receive(:destroy).never
+    partner2.should_receive(:destroy).never
+
+    subject.save
   end
 end

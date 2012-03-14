@@ -63,11 +63,9 @@ class Provider < ActiveRecord::Base
   end
 
   def clean_extra_partners
-    unless company?
-      self.provider_partners.each do |partner|
-        partner.destroy
-      end
-    end
+    return if company?
+
+    provider_partners.each(&:destroy)
   end
 
   def company?
