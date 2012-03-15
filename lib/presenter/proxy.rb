@@ -21,7 +21,11 @@ module Presenter
     attr_accessor :object, :routes, :helpers
 
     def initialize(object, routes = ::Rails.application.routes.url_helpers, helpers = ::ApplicationController.helpers)
-      self.object = object
+      self.object = if object.respond_to?(:localized)
+                      object.localized
+                    else
+                      object
+                    end
       self.routes = routes
       self.helpers = helpers
     end
