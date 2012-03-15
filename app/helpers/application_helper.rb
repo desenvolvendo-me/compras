@@ -82,10 +82,6 @@ module ApplicationHelper
     end
   end
 
-  def macro_tmpl(*arguments)
-    raise "macro_tmpl was removed in favor of mustache"
-  end
-
   def mustache(name, &block)
     content_tag(:script, :id => name, :type => 'text/x-mustache') do
       content = capture(&block)
