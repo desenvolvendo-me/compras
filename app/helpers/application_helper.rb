@@ -11,10 +11,6 @@ module ApplicationHelper
     [controller_name, action_name].join(' ')
   end
 
-  # Override this helper if you want a sidebar menu
-  def sidebar_menu
-  end
-
   def simple_menu(&block)
     SimpleMenu.new(self, &block).render
   end
