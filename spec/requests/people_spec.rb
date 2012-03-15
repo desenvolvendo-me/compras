@@ -281,4 +281,35 @@ feature "People" do
       page.should have_field 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
     end
   end
+
+  scenario 'neighborhoods must be filtered by the selected street' do
+    Street.make!(:amazonas)
+    Street.make!(:cristiano_machado)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Pessoas'
+
+    click_link 'Criar Pessoa'
+
+    within_tab "Endereço" do
+      fill_modal 'Logradouro', :with => 'Amazonas', :field => 'Nome do logradouro'
+
+      fill_modal 'Bairro', :with => '' do
+        click_button 'Pesquisar'
+
+        page.should have_content 'Portugal'
+        page.should_not have_content 'Centro'
+      end
+
+      fill_modal 'Logradouro', :with => 'Cristiano Machado', :field => 'Nome do logradouro'
+
+      fill_modal 'Bairro', :with => '' do
+        click_button 'Pesquisar'
+
+        page.should have_content 'Centro'
+        page.should_not have_content 'Portugal'
+      end
+    end
+  end
 end

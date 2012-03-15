@@ -18,7 +18,7 @@
     if (data) {
       var record = data.record;
 
-      $("#<%= a.sanitized_object_name %>_neighborhood").data("modal-url", "<%= modal_neighborhoods_path %>?street_id=" + record.data("value")).val("");
+      $("#<%= a.sanitized_object_name %>_neighborhood").attr("data-modal-url", "<%= modal_neighborhoods_path %>?street_id=" + record.data("value")).val("");
       $("#<%= a.sanitized_object_name %>_neighborhood_id").val("");
     }
 
