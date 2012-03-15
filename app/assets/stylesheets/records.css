@@ -11,9 +11,13 @@ table.records a {
   font-size: 123.1%;
 }
 
-table.records td {
+table.records td, table.records th {
   border: solid 1px #E8EAEE;
   padding: 1em;
+}
+
+table.records th {
+  background: #F8F8F8;
 }
 
 table.records tr:nth-child(odd) td {
