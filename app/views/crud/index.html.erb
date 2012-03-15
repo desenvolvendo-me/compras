@@ -5,8 +5,6 @@
   </ul>
 </div>
 
-<%= render 'help' %>
-
 <div class="actions">
   <ul>
     <% if can?(:create, controller_name) && respond_to?("new_#{controller_name.singularize}_path") %>

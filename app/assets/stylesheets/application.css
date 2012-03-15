@@ -9,7 +9,6 @@
  *= require sidebar
  *= require content
  *= require breadcrumb
- *= require help
  *= require will_paginate
  *= require records
  *= require dashboard
