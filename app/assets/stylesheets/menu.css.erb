@@ -1,0 +1,33 @@
+#menu {
+  background: #356598;
+  background: -moz-linear-gradient(#356598, #4D79A5);
+  background: -webkit-linear-gradient(#356598, #4D79A5);
+  font-size: 123.1%;
+  line-height: 2;
+}
+
+#menu ul {
+  margin: 0;
+}
+
+#menu li {
+  display: inline-block;
+  margin: 0.45em 0.25em 0;
+}
+
+#menu li.current, #menu li:hover {
+  background: url(<%= image_path 'menu-active-left.gif' %>) left top no-repeat,
+              url(<%= image_path 'menu-active-right.gif' %>) right top no-repeat,
+              #FFF;
+}
+
+#menu a {
+  color: #FFF;
+  display: block;
+  padding: 0 1em;
+  text-decoration: none;
+}
+
+#menu li:hover a {
+  color: #37638E;
+}

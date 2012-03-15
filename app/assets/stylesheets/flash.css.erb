@@ -1,0 +1,21 @@
+#flash .notice, #flash .alert {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #746F6F;
+  font-size: 138.5%;
+  margin-bottom: 1em;
+  padding: 1em;
+  text-indent: 38px;
+}
+
+#flash .notice {
+  background: #E8FFEA url(<%= image_path 'notice.gif' %>) center left no-repeat;
+  border: solid 1px #E8EAEE;
+}
+
+#flash .alert {
+  background: #FAEDED url(<%= image_path 'alert.gif' %>) center left no-repeat;
+  border: solid 1px #F9B4B4;
+}

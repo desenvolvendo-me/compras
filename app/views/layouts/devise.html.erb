@@ -7,28 +7,28 @@
 
     <title>Compras e Licitações</title>
 
-    <%= stylesheet_link_tag 'devise' %>
+    <%= stylesheet_link_tag 'application' %>
   </head>
 
   <body>
-    <div id="header">
-      <h1><%= link_to 'Sistema de Compras e Licitações', root_path %></h1>
-    </div>
+    <div id="container">
+      <div id="header">
+        <h1><%= link_to 'Sistema de Compras e Licitações', root_path %></h1>
 
-    <div id="content">
-      <% if alert %>
-        <div class="alert"><%= alert %></div>
-      <% end %>
+        <div id="menu">
+          &nbsp;
+        </div>
+      </div>
 
-      <% if notice %>
-        <div class="notice"><%= notice %></div>
-      <% end %>
+      <div id="flash">
+        <%= render 'layouts/flash' %>
+      </div>
+
+      <h2>
+        <%= current_prefecture %>
+      </h2>
 
       <%= yield %>
-    </div>
-
-    <div id="footer">
-      <%= yield :footer %>
     </div>
   </body>
 </html>

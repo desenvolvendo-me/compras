@@ -7,10 +7,6 @@ module ApplicationHelper
     super(object, *(args << options), &block)
   end
 
-  def content_classes
-    [controller_name, action_name].join(' ')
-  end
-
   def simple_menu(&block)
     SimpleMenu.new(self, &block).render
   end

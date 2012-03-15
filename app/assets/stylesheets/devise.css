@@ -1,8 +1,17 @@
-/*
- *= require yui
- *= require layout
- *= require flash
- *= require simple_form
- *= require buttons
- *= require login
- */
+#content.devise h2 {
+  text-align: center;
+}
+
+#content.devise .banner {
+  float: none;
+  text-align: center;
+}
+
+#content.devise .user {
+  margin: 0 auto;
+  width: 300px;
+}
+
+#content.devise .buttons {
+  float: right;
+}

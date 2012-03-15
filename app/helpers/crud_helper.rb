@@ -36,10 +36,10 @@ module CrudHelper
   end
 
   def link_to_new
-    link_to t("#{controller_name}.new", :resource => singular, :cascade => true), new_resource_path, :class => 'button primary new'
+    link_to t("#{controller_name}.new", :resource => singular, :cascade => true), new_resource_path
   end
 
   def link_to_filter
-    link_to t("#{controller_name}.filter", :resource => plural, :cascade => true), filter_resources_path(current_scopes), :class => 'button secondary filter'
+    link_to t("#{controller_name}.filter", :resource => plural, :cascade => true), filter_resources_path(current_scopes)
   end
 end

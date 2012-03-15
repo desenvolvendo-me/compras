@@ -1,0 +1,35 @@
+#account {
+  font-size: 108%;
+  position: absolute;
+  right: 1em;
+  top: 0.5em;
+}
+
+#account ul {
+  margin: 0;
+}
+
+#account li {
+  display: inline;
+}
+
+#account a {
+  border-left: solid 1px #000;
+  color: #D7ECF6;
+  margin-left: 0.8em;
+  padding-left: 1em;
+  text-decoration: none;
+}
+
+#account a:hover {
+  text-decoration: underline;
+}
+
+#account a.current_user {
+  border-left: 0;
+  color: #FFF;
+  margin-left: 0;
+  padding-left: 0;
+  font-weight: bold;
+  text-decoration: none;
+}
