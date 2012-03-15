@@ -8,7 +8,6 @@
  *= require header
  *= require sidebar
  *= require content
- *= require breadcrumb
  *= require will_paginate
  *= require records
  *= require dashboard
