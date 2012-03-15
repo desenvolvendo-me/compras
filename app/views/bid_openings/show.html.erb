@@ -1,0 +1,32 @@
+<h1>Processo Administrativo</h1>
+<p>Número: <%= resource %></p>
+<p>Protocolo número: <%= resource.protocol %></p>
+<p>Data da solicitação: <%=  resource.presenter.date %></p>
+<h1>Solicitação de Abertura de Processo Licitatório</h1>
+<p>Excelentíssimo Sr. <%= current_prefecture.mayor_name %></p>
+<p>
+  No uso das atribuições do meu cargo, venho respeitosamente, requerer que V. Excia. autorize a abertura de procedimento licitatório, conforme especificações relacionadas abaixo. A existência de recursos orçamentários foi confirmada pelo parecer contábil, expedido pelo setor de contabilidade, estado tudo de acordo com a legislação vigente.
+</p>
+<p>Unidade orçamentária: <%= resource.organogram %></p>
+<p>Valor estimado: <%= resource.presenter.value_estimated %></p>
+<p>Dotação utilizada: <%= resource.budget_allocation %></p>
+<p>Modalidade: <%= resource.modality_humanize %></p>
+<p>Tipo de objeto: <%= resource.object_type_humanize %></p>
+<p>Forma de julgamento: <%= resource.judgment_form %></p>
+<p>Descrição do objeto: <%= resource.description %></p>
+
+<div>
+  <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
+</div>
+
+<div>
+  Responsável pela solicitação
+</div>
+
+<div>
+  Autorizado
+</div>
+
+<div>
+  Prefeito municipal
+</div>

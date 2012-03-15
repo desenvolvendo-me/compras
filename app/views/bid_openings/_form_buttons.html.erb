@@ -1,4 +1,8 @@
 <div class="buttons">
-  <%= f.button :submit unless f.object.persisted? %>
+  <% if f.object.new_record? %>
+    <%= f.button :submit %>
+  <% else %>
+    <%= link_to "Imprimir", resource_path(resource), :class => 'clear button neutral' %>
+  <% end %>
   <%= f.button :cancel %>
 </div>
