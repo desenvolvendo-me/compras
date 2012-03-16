@@ -109,7 +109,7 @@
   });
 
   <% if f.object.persisted? %>
-    $('form.pledge input, select, textarea').attr('disabled', true);
+    $('form.pledge :input').attr('disabled', true);
     $('form.pledge .add-pledge-item').hide();
     $('form.pledge .remove-pledge-item').hide();
     $('form.pledge .hint').hide();
