@@ -1,4 +1,6 @@
 class MaterialsController < CrudController
+  has_scope :licitation_object_id
+
   def create
     object = build_resource
     MaterialCodeGenerator.new(object).generate!

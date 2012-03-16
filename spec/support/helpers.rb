@@ -62,7 +62,7 @@ module Helpers
     page.should have_field locator
 
     field = page.find_field(locator)
-    page.execute_script %{ $('##{field[:id]}').modal({autoOpen: true}) }
+    page.execute_script %{ $('##{field[:id]}').trigger('focus').modal({autoOpen: true}) }
 
     ignoring_scopes do
       within '.ui-dialog:nth-last-of-type(2)' do

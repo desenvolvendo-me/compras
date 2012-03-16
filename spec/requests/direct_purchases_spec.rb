@@ -225,35 +225,6 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'material must have same licitation object' do
-    LicitationObject.make!(:ponte)
-    Material.make!(:arame_farpado)
-
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra Direta'
-
-    click_link 'Criar Solicitação de Compra Direta'
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
-    end
-
-    within_tab 'Dotações' do
-      click_button 'Adicionar Dotação'
-
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
-    end
-
-    click_button 'Criar Solicitação de Compra Direta'
-
-    within_tab 'Dotações' do
-      page.should have_content 'deve pertencer ao objeto de licitação selecionado'
-    end
-  end
-
   scenario 'should filter by year' do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
@@ -433,6 +404,46 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dispensa de licitação', :with => '2.000,00'
+    end
+  end
+
+  scenario 'filtering materials on items by licitation object' do
+    LicitationObject.make!(:ponte)
+    LicitationObject.make!(:viaduto)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    click_link 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => '', :field => 'Descrição' do
+        click_button 'Pesquisar'
+
+        page.should have_content 'Antivirus'
+        page.should_not have_content 'Arame comum'
+      end
+    end
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Objeto da licitação', :with => 'Viaduto', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações' do
+      fill_modal 'Material', :with => '', :field => 'Descrição' do
+        click_button 'Pesquisar'
+
+        page.should have_content 'Arame comum'
+        page.should_not have_content 'Antivirus'
+      end
     end
   end
 end

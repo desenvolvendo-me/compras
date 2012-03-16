@@ -125,4 +125,12 @@
   $('form.direct_purchase').delegate('#direct_purchase_modality', 'change', function (event, data) {
     setLicitationExemption();
   });
+
+  // filtering materials on items by licitation_object_id
+
+  $('form.direct_purchase').delegate('.material', 'focus', function() {
+    var licitationObjectId = $("#direct_purchase_licitation_object_id").val();
+
+    $(this).attr("data-modal-url", "<%= modal_materials_path %>?licitation_object_id=" + licitationObjectId);
+  });
 </script>

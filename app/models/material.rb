@@ -36,6 +36,10 @@ class Material < ActiveRecord::Base
   orderize :description
   filterize
 
+  scope :licitation_object_id, lambda { |licitation_object_id|
+    joins(:licitation_objects).where { licitation_objects.id.eq(licitation_object_id) }
+  }
+
   def self.last_by_materials_class_and_group(params = {})
     record = scoped
     record = record.where { materials_class_id.eq(params.fetch(:materials_class_id)) }
