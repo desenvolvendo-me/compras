@@ -3,9 +3,9 @@ ActiveRecord::Base.transaction do
   descriptions = ["Comum", "Adiantamento", "Subvenção Social", "Auxilio","Contribuição", "Convênios", "Outras Antecipações"]
 
   descriptions.each do |description|
-    ph = PledgeHistoric.new
-    ph.description = description
-    ph.source = Source::DEFAULT
-    ph.save!
+    pledge_historic = PledgeHistoric.new
+    pledge_historic.description = description
+    pledge_historic.source = Source::DEFAULT
+    pledge_historic.save!
   end
 end
