@@ -21,6 +21,12 @@ describe DirectPurchaseBudgetAllocation do
     subject.errors[:items].should include 'é necessário cadastrar pelo menos um item'
   end
 
+  it 'should return 0 as the total value of items when have no items' do
+    subject.items.should be_empty
+
+    subject.total_items_value.should eq 0
+  end
+
   it 'should calculate the total value of items' do
     subject.stub(:items).and_return([
       double(:estimated_total_price => 10),
