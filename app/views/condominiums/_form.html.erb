@@ -1,25 +1,4 @@
 <fieldset>
   <%= f.input :name %>
   <%= f.input :condominium_type %>
-  <%= f.input :built_area, :input_html => { :class => :number_values } %>
-  <%= f.input :area_common_user, :input_html => { :class => :number_values } %>
-  <%= f.input :construction_year, :as => :string, :input_html => { :class => :number_values } %>
-  <%= f.input :quantity_garages, :as => :string, :input_html => { :class => :number_values } %>
-  <%= f.input :quantity_units, :as => :string, :input_html => { :class => :number_values } %>
-  <%= f.input :quantity_blocks, :as => :string, :input_html => { :class => :number_values } %>
-  <%= f.input :quantity_elevators, :as => :string, :input_html => { :class => :number_values } %>
-  <%= f.input :quantity_rooms, :as => :string, :input_html => { :class => :number_values } %>
-  <%= f.input :quantity_floors, :as => :string, :input_html => { :class => :number_values } %>
 </fieldset>
-
-<fieldset>
-  <legend>Endereço do Condomínio</legend>
-
-  <%= f.association :address do |a| %>
-    <%= render "addresses/address", :a => a %>
-  <% end %>
-</fieldset>
-
-<script>
-  $("#condominium_address_attributes_room, #condominium_address_attributes_block, #condominium_address_attributes_condominium").closest(".input").hide();
-</script>

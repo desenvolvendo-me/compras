@@ -10,14 +10,5 @@ describe Condominium do
     subject.name.should eq subject.to_s
   end
 
-  it { should belong_to :condominium_type }
-  it { should have_one :address }
-
   it { should validate_presence_of :name }
-  it { should validate_presence_of :built_area }
-  it { should validate_presence_of :area_common_user }
-  it { should validate_presence_of :construction_year }
-  it { should validate_presence_of :condominium_type }
-  it { should validate_numericality_of :construction_year }
-
 end

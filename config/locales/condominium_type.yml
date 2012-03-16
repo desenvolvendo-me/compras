@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    condominium_type:
+      vertical: "Vertical"
+      horizontal: "Horizontal"
+      industrial: "Industrial"
