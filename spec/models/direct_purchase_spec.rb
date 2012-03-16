@@ -24,6 +24,12 @@ describe DirectPurchase do
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_one(:supply_authorization).dependent(:restrict) }
 
+  it 'should return 0 for total items value of all budget allocations when have no allocations' do
+    subject.direct_purchase_budget_allocations.should be_empty
+
+    subject.total_allocations_items_value.should eq 0
+  end
+
   it 'should return total items value of all budget allocations' do
     subject.stub(:direct_purchase_budget_allocations).and_return([
       double(:total_items_value => 20),
