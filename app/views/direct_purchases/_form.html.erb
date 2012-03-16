@@ -32,18 +32,18 @@
 
   $('form.direct_purchase').delegate('.budget-allocation', 'change', function (event, data) {
     if (data){
-      var record = data.record,
-          inputs = $(this).closest('fieldset.direct-purchase-budget-allocation').find(':input');
-      $(inputs[4]).val(record.data("expense_economic_classification"));
-      $(inputs[5]).val(record.data("amount"));
+      var record = data.record;
+
+      $(this).closest('fieldset').find('.classification').val(record.data("expense_economic_classification"));
+      $(this).closest('fieldset').find('.amount').val(record.data("amount"));
     }
   });
 
   $('form.direct_purchase').delegate('.material', 'change', function (event, data) {
     if (data){
-      var record = data.record,
-          inputs = $(this).closest('.item').find(':input');
-      $(inputs[4]).val(record.data("reference-unit"));
+      var record = data.record;
+
+      $(this).closest('.item').find('.reference-unit').val(record.data("reference-unit"));
     }
   });
 
@@ -52,7 +52,7 @@
     value;
     $.each($('.item-price:visible'), function() {
       value = $(this).attr('value');
-      if (value != '') {
+      if (value) {
         total += parsePtBrFloat(value);
       }
     });
