@@ -18,7 +18,7 @@ describe DirectPurchaseBudgetAllocation do
 
     subject.valid?
 
-    subject.items.first.errors[:material].should include 'não pode ficar em branco'
+    subject.errors[:items].should include 'é necessário cadastrar pelo menos um item'
   end
 
   it 'should calculate the total value of items' do

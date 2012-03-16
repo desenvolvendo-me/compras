@@ -476,4 +476,30 @@ feature "DirectPurchases" do
       end
     end
   end
+
+  scenario 'it must have at least one budget allocation with at least one item' do
+    BudgetAllocation.make!(:alocacao)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    click_link 'Criar Solicitação de Compra Direta'
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should have_content 'é necessário cadastrar pelo menos uma dotação'
+
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should have_content 'é necessário cadastrar pelo menos um item'
+    end
+  end
 end

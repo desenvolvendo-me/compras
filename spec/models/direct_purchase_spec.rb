@@ -87,7 +87,7 @@ describe DirectPurchase do
 
       subject.valid?
 
-      subject.direct_purchase_budget_allocations.first.errors[:budget_allocation].should include 'não pode ficar em branco'
+      subject.errors[:direct_purchase_budget_allocations].should include 'é necessário cadastrar pelo menos uma dotação'
     end
 
     it 'should not have total of items exceeding licitation object exemption' do

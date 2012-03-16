@@ -18,6 +18,8 @@
 
   <%= f.input :pledge_type %>
 
+  <%= f.error :items %>
+
   <div id="items-<%= f.nested_identifier %>">
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
       <%= render 'direct_purchase_budget_allocation_items/form', :f => p %>

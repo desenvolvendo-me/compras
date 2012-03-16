@@ -87,10 +87,9 @@ class DirectPurchase < ActiveRecord::Base
   end
 
   def must_have_at_least_budget_allocation
-    return unless direct_purchase_budget_allocations.empty?
-
-    errors.add(:direct_purchase_budget_allocations)
-    direct_purchase_budget_allocations.build.valid?
+    if direct_purchase_budget_allocations.empty?
+      errors.add(:direct_purchase_budget_allocations, :must_have_at_least_one_budget_allocation)
+    end
   end
 
   def material_must_have_same_licitation_object
