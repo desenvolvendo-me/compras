@@ -75,14 +75,15 @@
             <%= number_with_precision item.estimated_total_price %>
           </td>
         <% end %>
-      </tbody>
-    </table>
-  <% end %>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
 
-  <div>
-    <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
-  </div>
+<div>
+  <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
+</div>
 
-  <div>
-    Responsável pelo setor de compras
-  </div>
+<div>
+  Responsável pelo setor de compras
+</div>
