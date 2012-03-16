@@ -1,6 +1,6 @@
 <h1>Autorização de Fornecimento</h1>
 <p>Número da autorização: <%= resource %></p>
-<p>Compra direta: <%= "#{resource.direct_purchase.id}/#{resource.direct_purchase.year}" %></p>
+<p>Compra direta: <%= resource.presenter.direct_purchase %></p>
 <p>Data da compra: <%= resource.presenter.date %></p>
 <p>Fornecedor: <%= resource.provider %></p>
 <p>Endereço: <%= resource.address %></p>

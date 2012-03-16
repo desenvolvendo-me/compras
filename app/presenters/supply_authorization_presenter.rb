@@ -4,6 +4,10 @@ class SupplyAuthorizationPresenter < Presenter::Proxy
     helpers.l object.date
   end
 
+  def direct_purchase
+    "#{object.direct_purchase.id}/#{object.direct_purchase.year}"
+  end
+
   def message
     if items_count > 1
       'Pedimos fornecer-nos os materiais e ou execução dos serviços abaixo discriminados, respeitando as especificações e condições constantes nesta autorização de fornecimento.'

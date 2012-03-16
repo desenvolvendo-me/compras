@@ -7,6 +7,10 @@ describe SupplyAuthorizationPresenter do
     described_class.new(supply_authorization, nil, helpers)
   end
 
+  let :direct_purchase do
+    double(:id => 1, :year => 2012)
+  end
+
   let :supply_authorization do
     double('SupplyAuthorization')
   end
@@ -19,6 +23,11 @@ describe SupplyAuthorizationPresenter do
     double.tap do |helpers|
       helpers.stub(:l).with(date).and_return('01/12/2012')
     end
+  end
+
+  it 'should return formatted direct_purchase' do
+    subject.stub(:direct_purchase).and_return(direct_purchase)
+    subject.direct_purchase.should eq '1/2012'
   end
 
   it 'should return localized direct_purchase date' do
