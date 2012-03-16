@@ -24,6 +24,7 @@ class Individual < ActiveRecord::Base
   validates :birthdate, :timeliness => { :before => :today, :type => :date }, :allow_blank => true
 
   delegate :to_s, :to => :person, :allow_nil => true
+  delegate :city, :zip_code, :to => :address, :allow_nil => true
 
   filterize
   orderize :birthdate

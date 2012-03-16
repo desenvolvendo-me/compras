@@ -11,8 +11,7 @@ class Person < ActiveRecord::Base
 
   has_one :employee
 
-  delegate :address, :to => 'personable'
-  delegate :correspondence_address, :to => 'personable'
+  delegate :address, :city, :zip_code, :correspondence_address, :to => 'personable'
 
   validates :name, :personable, :presence => true
   validates :personable, :associated => true

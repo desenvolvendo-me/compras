@@ -25,7 +25,8 @@ class Provider < ActiveRecord::Base
   accepts_nested_attributes_for :provider_licitation_documents, :reject_if => :all_blank, :allow_destroy => true
 
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
-  delegate :personable_type, :to => :person, :allow_nil => true
+  delegate :personable_type, :phone, :fax, :to => :person, :allow_nil => true
+  delegate :address, :city, :zip_code, :to => :person, :allow_nil => true
 
   validates :person, :registration_date, :agency, :bank_account, :presence => true
   validates :legal_nature, :cnae, :presence => true
