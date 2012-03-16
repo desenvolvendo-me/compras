@@ -408,8 +408,6 @@ feature "DirectPurchases" do
   end
 
   scenario 'filtering materials on items by licitation object' do
-    pending "cant' focus on material field"
-
     LicitationObject.make!(:ponte)
     LicitationObject.make!(:viaduto)
 

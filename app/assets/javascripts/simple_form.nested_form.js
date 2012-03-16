@@ -36,7 +36,7 @@
       var binds = {};
       binds[options.uuid] = _.uniqueId('fresh-');
 
-      $(options.target).append(template.mustache(binds));
+      $(options.target).append(template.mustache(binds)).change();
 
       if (options.right) {
         displayFirstLabels();

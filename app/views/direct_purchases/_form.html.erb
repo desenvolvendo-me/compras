@@ -128,9 +128,20 @@
 
   // filtering materials on items by licitation_object_id
 
-  $('form.direct_purchase').delegate('.material', 'focus', function() {
+  function setMaterialsModalUrl() {
     var licitationObjectId = $("#direct_purchase_licitation_object_id").val();
+    var materialFields = $('.material');
 
-    $(this).attr("data-modal-url", "<%= modal_materials_path %>?licitation_object_id=" + licitationObjectId);
+    $.each(materialFields, function(){
+      $(this).attr("data-modal-url", "<%= modal_materials_path %>?licitation_object_id=" + licitationObjectId);
+    });
+  }
+
+  $('form.direct_purchase').delegate('#budget-allocations', 'change', function() {
+    setMaterialsModalUrl();
+  });
+
+  $('#direct_purchase_licitation_object_id').change(function() {
+    setMaterialsModalUrl();
   });
 </script>
