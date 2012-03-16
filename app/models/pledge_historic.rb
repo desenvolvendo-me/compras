@@ -7,7 +7,9 @@ class PledgeHistoric < ActiveRecord::Base
 
   has_many :pledges, :dependent => :restrict
 
-  validates :description, :entity, :year, :presence => true
+  validates :description, :presence => true
+  validates :entity, :presence => true, :unless => Proc.new { |ph| ph.source == Source::DEFAULT }
+  validates :year, :presence => true, :unless => Proc.new { |ph| ph.source == Source::DEFAULT }
   validates :year, :mask => "9999"
 
   orderize :description

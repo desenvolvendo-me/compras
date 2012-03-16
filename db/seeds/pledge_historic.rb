@@ -1,8 +1,11 @@
 # encoding: utf-8
 ActiveRecord::Base.transaction do
-  entity = Entity.create!(:name => "Entidade Teste")
+  descriptions = ["Comum", "Adiantamento", "Subvenção Social", "Auxilio","Contribuição", "Convênios", "Outras Antecipações"]
 
-  ["Comum", "Adiantamento", "Subvenção Social", "Auxilio","Contribuição", "Convênios", "Outras Antecipações"].each do |description|
-    PledgeHistoric.create!(:description => description, :entity_id => entity.id, :year => Date.current.year, :source => Source::DEFAULT)
+  descriptions.each do |description|
+    ph = PledgeHistoric.new
+    ph.description = description
+    ph.source = Source::DEFAULT
+    ph.save!
   end
 end
