@@ -13,7 +13,7 @@ class ModalityLimit < ActiveRecord::Base
   validates :validity_beginning, :mask => '99/9999', :allow_blank => true
   validates :ordinance_number, :uniqueness => true
   validates :ordinance_number, :numericality => true, :allow_blank => true
-  validate :validate_validity_beginning_month
+  validate :check_validity_beginning_month
 
   orderize :published_date
   filterize
@@ -24,7 +24,7 @@ class ModalityLimit < ActiveRecord::Base
 
   protected
 
-  def validate_validity_beginning_month
+  def check_validity_beginning_month
     return unless validity_beginning
 
     month = validity_beginning.split('/').first.to_i
