@@ -18,7 +18,7 @@ pt-BR:
         value: "Valor"
         material_kind: "Tipo de bem"
         pledge_category: "Categoria"
-        budget_allocation_amount: "Saldo da dotação"
+        budget_allocation_real_amount: "Saldo da dotação"
         budget_allocation_function: "Função"
         budget_allocation_subfunction: "Subfunção"
         budget_allocation_government_program: "Programa"

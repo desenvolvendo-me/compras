@@ -40,7 +40,7 @@
       $('#pledge_reserve_fund_value').val(record.data("reserve-fund-value"));
       $('#pledge_budget_allocation').val(record.data("budget-allocation"));
       $('#pledge_budget_allocation_id').val(record.data("budget-allocation-id"));
-      $('#pledge_budget_allocation_amount').val(record.data("amount"));
+      $('#pledge_budget_allocation_real_amount').val(record.data("real-amount"));
       $('#pledge_budget_allocation_function').val(record.data("function"));
       $('#pledge_budget_allocation_subfunction').val(record.data("subfunction"));
       $('#pledge_budget_allocation_government_program').val(record.data("government_program"));
@@ -60,7 +60,7 @@
         $('#pledge_reserve_fund_id').val('');
         $('#pledge_reserve_fund').val('');
       }
-      $('#pledge_budget_allocation_amount').val(record.data("amount"));
+      $('#pledge_budget_allocation_real_amount').val(record.data("real-amount"));
       $('#pledge_budget_allocation_function').val(record.data("function"));
       $('#pledge_budget_allocation_subfunction').val(record.data("subfunction"));
       $('#pledge_budget_allocation_government_program').val(record.data("government_program"));
@@ -68,7 +68,7 @@
       $('#pledge_budget_allocation_organogram').val(record.data("organogram"));
       $('#pledge_budget_allocation_expense_economic_classification').val(record.data("expense_economic_classification"));
     } else {
-      $('#pledge_budget_allocation_amount').val('');
+      $('#pledge_budget_allocation_real_amount').val('');
       $('#pledge_budget_allocation_function').val('');
       $('#pledge_budget_allocation_subfunction').val('');
       $('#pledge_budget_allocation_government_program').val('');
