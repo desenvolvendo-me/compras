@@ -10,7 +10,7 @@ describe CityImporter do
   let :null_storage do
     storage = double.as_null_object
 
-    storage.stub(:transaction) do |block|
+    storage.stub(:transaction) do |&block|
       block.call
     end
 
