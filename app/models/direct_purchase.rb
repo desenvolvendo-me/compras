@@ -68,6 +68,10 @@ class DirectPurchase < ActiveRecord::Base
     relation
   end
 
+  def authorized?
+    supply_authorization.present?
+  end
+
   def to_s
     id.to_s
   end

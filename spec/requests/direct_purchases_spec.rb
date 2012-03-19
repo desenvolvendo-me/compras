@@ -155,6 +155,83 @@ feature "DirectPurchases" do
     end
   end
 
+  scenario 'it should print when authorized' do
+    direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
+    SupplyAuthorization.make!(:compra_2012)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_link 'Imprimir autorização de fornecimento'
+
+    click_link 'Imprimir autorização de fornecimento'
+
+    page.should have_content 'Autorização de Fornecimento'
+    page.should have_content "Compra direta: #{direct_purchase.id}/2012"
+    page.should have_content 'Data da compra: 01/12/2012'
+    page.should have_content 'Fornecedor: Wenderson Malheiros'
+    page.should have_content 'Endereço: Girassol, 9874 - São Francisco'
+    page.should have_content 'Cidade: Curitiba'
+    page.should have_content 'CEP: 33400-500'
+    page.should have_content 'Telefone: (33) 3333-3333'
+    page.should have_content 'Fax: (33) 3333-3334'
+    page.should have_content 'Conta: 123456'
+    page.should have_content 'Agência: Agência Itaú'
+    page.should have_content 'Banco: Itaú'
+    page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+    page.should have_content 'Unidade orçamentária: 02.00 - Secretaria de Educação'
+    page.should have_content 'Condições de Pagamento: Dinheiro'
+    page.should have_content 'Prazo de entrega: 1 ano'
+    page.should have_content 'Local de entrega: Secretaria da Educação'
+    page.should have_content 'Objeto da compra: Ponte'
+    page.should have_content 'Observações: Compra de 2012 ainda não autorizada'
+    page.should have_content 'Antivirus'
+    page.should have_content 'Norton'
+  end
+
+  scenario 'it should generate supply authorization' do
+    direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_button 'Gerar autorização de fornecimento'
+
+    click_button 'Gerar autorização de fornecimento'
+
+    page.should have_content 'Autorização de Fornecimento'
+    page.should have_content "Compra direta: #{direct_purchase.id}/2012"
+    page.should have_content 'Data da compra: 01/12/2012'
+    page.should have_content 'Fornecedor: Wenderson Malheiros'
+    page.should have_content 'Endereço: Girassol, 9874 - São Francisco'
+    page.should have_content 'Cidade: Curitiba'
+    page.should have_content 'CEP: 33400-500'
+    page.should have_content 'Telefone: (33) 3333-3333'
+    page.should have_content 'Fax: (33) 3333-3334'
+    page.should have_content 'Conta: 123456'
+    page.should have_content 'Agência: Agência Itaú'
+    page.should have_content 'Banco: Itaú'
+    page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+    page.should have_content 'Unidade orçamentária: 02.00 - Secretaria de Educação'
+    page.should have_content 'Condições de Pagamento: Dinheiro'
+    page.should have_content 'Prazo de entrega: 1 ano'
+    page.should have_content 'Local de entrega: Secretaria da Educação'
+    page.should have_content 'Objeto da compra: Ponte'
+    page.should have_content 'Observações: Compra de 2012 ainda não autorizada'
+    page.should have_content 'Antivirus'
+    page.should have_content 'Norton'
+  end
+
   scenario 'should not have destroy button when edit an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 

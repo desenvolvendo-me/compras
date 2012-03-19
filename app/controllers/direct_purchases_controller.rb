@@ -1,5 +1,5 @@
 class DirectPurchasesController < CrudController
-  actions :all, :except => [:update, :destroy]
+  actions :all, :except => :destroy
 
   has_scope :authorized, :type => :boolean
 
@@ -17,5 +17,10 @@ class DirectPurchasesController < CrudController
     object.status = DirectPurchaseStatus::UNAUTHORIZED
 
     super
+  end
+
+  def update
+    supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
+    redirect_to supply_authorization
   end
 end

@@ -238,7 +238,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :direct_purchases, :except => [:update, :destroy] do
+  resources :direct_purchases, :except => :destroy do
     collection do
       get :filter
       get :modal

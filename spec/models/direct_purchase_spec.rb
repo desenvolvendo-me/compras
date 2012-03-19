@@ -88,6 +88,18 @@ describe DirectPurchase do
     it { should validate_presence_of :payment_method }
     it { should validate_presence_of :period }
 
+    context '#authorized?' do
+      it 'should return true when associated with supply_authorization' do
+        subject.stub(:supply_authorization).and_return(double)
+        subject.should be_authorized
+      end
+
+      it 'should return false when not associated with supply_authorization' do
+        subject.stub(:supply_authorization).and_return(nil)
+        subject.should_not be_authorized
+      end
+    end
+
     it 'should have at least one budget allocation' do
       subject.direct_purchase_budget_allocations.should be_empty
 
