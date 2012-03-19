@@ -1,11 +1,10 @@
 class Address < ActiveRecord::Base
-  attr_accessible :street_id, :neighborhood_id, :district_id, :land_subdivision_id
-  attr_accessible :condominium_id, :addressable_id, :addressable_type, :complement
+  attr_accessible :street_id, :neighborhood_id, :land_subdivision_id, :complement
+  attr_accessible :condominium_id, :addressable_id, :addressable_type
   attr_accessible :addressable, :zip_code, :block, :number, :correspondence, :room
 
   belongs_to :neighborhood
   belongs_to :street
-  belongs_to :district
   belongs_to :land_subdivision
   belongs_to :condominium
   belongs_to :addressable, :polymorphic => true

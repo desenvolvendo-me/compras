@@ -24,7 +24,6 @@ feature "DeliveryLocations" do
     fill_modal 'Bairro', :with => 'São Francisco'
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
-    fill_modal 'Distrito', :with => 'Sul'
 
     page.should have_field "Cidade", :with => 'Curitiba'
 
@@ -47,7 +46,6 @@ feature "DeliveryLocations" do
     page.should have_field 'Bairro', :with => 'São Francisco'
     page.should have_field 'Condomínio', :with => 'Parque das Flores'
     page.should have_field 'Loteamento', :with => 'Solar da Serra'
-    page.should have_field 'Distrito', :with => 'Sul'
     page.should have_field "Cidade", :with => 'Curitiba'
     page.should have_field 'CEP', :with => '88900-000'
     page.should have_field "Estado", :with => 'Parana'
@@ -72,7 +70,6 @@ feature "DeliveryLocations" do
     fill_modal 'Bairro', :with => 'São Francisco'
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
-    fill_modal 'Distrito', :with => 'Sul'
 
     page.should have_field "Cidade", :with => 'Curitiba'
 
@@ -95,7 +92,6 @@ feature "DeliveryLocations" do
     page.should have_field 'Bairro', :with => 'São Francisco'
     page.should have_field 'Condomínio', :with => 'Parque das Flores'
     page.should have_field 'Loteamento', :with => 'Solar da Serra'
-    page.should have_field 'Distrito', :with => 'Sul'
     page.should have_field "Cidade", :with => 'Curitiba'
     page.should have_field 'CEP', :with => '88900-000'
     page.should have_field "Estado", :with => 'Parana'
@@ -135,7 +131,6 @@ feature "DeliveryLocations" do
     fill_modal 'Bairro', :with => 'São Francisco'
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
-    fill_modal 'Distrito', :with => 'Sul'
     fill_mask 'CEP', :with => '88900-000'
 
     click_button 'Criar Local de Entrega'

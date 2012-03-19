@@ -11,7 +11,6 @@ pt-BR:
         city: "Cidade"
         state: "Estado"
         street: "Logradouro"
-        district: "Distrito"
         land_subdivision: "Loteamento"
         condominium: "Condomínio"
         complement: "Complemento"

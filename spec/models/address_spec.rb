@@ -15,7 +15,6 @@ describe Address do
 
   it { should belong_to :neighborhood }
   it { should belong_to :street }
-  it { should belong_to :district }
   it { should belong_to :land_subdivision }
   it { should belong_to :condominium }
   it { should belong_to :addressable }
