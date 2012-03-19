@@ -27,7 +27,7 @@ describe SupplyAuthorizationGenerator do
   it 'should generate supply_authorization' do
     direct_purchase_object.stub(:authorized?).and_return(false)
 
-    supply_authorization_storage.should_receive(:create).with(
+    supply_authorization_storage.should_receive(:create!).with(
       :direct_purchase_id => direct_purchase_object.id,
       :year => 2012
     ).and_return(supply_authorization_object)

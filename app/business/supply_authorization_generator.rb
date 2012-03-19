@@ -7,16 +7,17 @@ class SupplyAuthorizationGenerator
   end
 
   def generate!
-    return direct_purchase_object.supply_authorization if direct_purchase_object.authorized?
-
-    return authorize!
+    if direct_purchase_object.authorized?
+      direct_purchase_object.supply_authorization
+    else
+      authorize!
+    end
   end
 
   def authorize!
-    supply_authorization = supply_authorization_storage.create(
+    supply_authorization = supply_authorization_storage.create!(
       :direct_purchase_id => direct_purchase_object.id,
       :year => direct_purchase_object.year,
     )
-    return supply_authorization
   end
 end
