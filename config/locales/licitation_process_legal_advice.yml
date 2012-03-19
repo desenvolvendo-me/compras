@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    licitation_process_legal_advice:
+      favorable: "Favorável"
+      contrary: "Contrário"

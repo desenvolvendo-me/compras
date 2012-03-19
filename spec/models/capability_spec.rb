@@ -11,6 +11,7 @@ describe Capability do
 
   it { should belong_to :entity }
   it { should have_many(:budget_allocations).dependent(:restrict) }
+  it { should have_many(:licitation_processes).dependent(:restrict) }
 
   it { should validate_presence_of :status }
   it { should allow_value('1999').for(:year) }

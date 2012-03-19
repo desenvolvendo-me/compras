@@ -8,6 +8,7 @@ class Capability < ActiveRecord::Base
   belongs_to :entity
 
   has_many :budget_allocations, :dependent => :restrict
+  has_many :licitation_processes, :dependent => :restrict
 
   validates :year, :mask => '9999'
   validates :status, :presence => true

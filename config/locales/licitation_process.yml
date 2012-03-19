@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process:
+        one: "Processo Licitatório"
+        other: "Processos Licitatórios"
+
+    attributes:
+      licitation_process:
+        year: "Ano"
+        process_date: "Data do processo"
+        bid_opening: "Número do processo administrativo"
+        object_description: "Detalhamento do objeto"
+        capability: "Fonte de recurso"
+        expiration: "Validade da proposta"
+        readjustment_index: "Índice de reajuste"
+        period: "Prazo de entrega"
+        payment_method: "Forma de pagamento"
+        caution_value: "Valor da caução"
+        legal_advice: "Parecer jurídico"
+        legal_advice_date: "Data do parecer"
+        contract_date: "Data do contrato"
+        contract_expiration: "Validade do contrato (meses)"
+        observations: "Observações gerais"

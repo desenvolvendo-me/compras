@@ -383,6 +383,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :licitation_processes do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :management_contracts do
     collection do
       get :filter

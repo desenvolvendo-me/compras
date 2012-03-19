@@ -1,0 +1,49 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :year %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :process_date %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :bid_opening %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :capability %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :period %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.year %>
+        </td>
+        <td>
+          <%= resource.process_date %>
+        </td>
+        <td>
+          <%= resource.bid_opening %>
+        </td>
+        <td>
+          <%= resource.capability %>
+        </td>
+        <td>
+          <%= resource.period %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

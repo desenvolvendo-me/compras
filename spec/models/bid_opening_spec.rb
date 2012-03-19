@@ -20,6 +20,8 @@ describe BidOpening do
   it { should belong_to :responsible }
   it { should belong_to :judgment_form }
 
+  it { should have_many(:licitation_processes).dependent(:restrict) }
+
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }
   it { should validate_presence_of :organogram }

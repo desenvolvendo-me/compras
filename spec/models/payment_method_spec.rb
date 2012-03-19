@@ -10,4 +10,5 @@ describe PaymentMethod do
   end
 
   it { should have_many(:direct_purchases).dependent(:restrict) }
+  it { should have_many(:licitation_processes).dependent(:restrict) }
 end

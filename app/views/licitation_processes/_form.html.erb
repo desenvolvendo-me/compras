@@ -1,0 +1,21 @@
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Dados gerais</a></li>
+  </ul>
+
+  <div id="general">
+    <%= render 'general', :f => f %>
+  </div>
+</div>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+</script>

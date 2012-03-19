@@ -15,6 +15,8 @@ class BidOpening < ActiveRecord::Base
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
 
+  has_many :licitation_processes, :dependent => :restrict
+
   validates :year, :date, :organogram, :value_estimated, :presence => true
   validates :budget_allocation, :modality, :object_type, :presence => true
   validates :responsible, :status, :presence => true
