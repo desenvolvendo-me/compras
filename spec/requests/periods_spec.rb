@@ -9,7 +9,7 @@ feature "Periods" do
   scenario 'create a new period' do
     click_link 'Cadastros Diversos'
 
-    click_link 'Prazo'
+    click_link 'Prazos'
 
     click_link 'Criar Prazo'
 
@@ -33,7 +33,7 @@ feature "Periods" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Prazo'
+    click_link 'Prazos'
 
     within_records do
       page.find('a').click
@@ -59,7 +59,7 @@ feature "Periods" do
 
     click_link 'Cadastros Diversos'
 
-    click_link 'Prazo'
+    click_link 'Prazos'
 
     within_records do
       page.find('a').click

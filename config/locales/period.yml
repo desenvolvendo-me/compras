@@ -3,7 +3,7 @@ pt-BR:
     models:
       period:
         one: "Prazo"
-        other: "Prazo"
+        other: "Prazos"
 
     attributes:
       period:
