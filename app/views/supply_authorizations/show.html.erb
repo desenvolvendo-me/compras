@@ -23,7 +23,7 @@
 <p>Objeto da compra: <%= resource.licitation_object %></p>
 <p>Observações: <%= resource.observation %></p>
 
-<h1>Dotações orçamentárias</h1>
+<h1>Dotações Orçamentárias</h1>
 <% resource.direct_purchase.direct_purchase_budget_allocations.each_with_index do |dpba, idx| %>
   <h2><%= idx + 1 %> - <%= dpba.budget_allocation.description %></h2>
   <h3>Itens da Dotação</h3>
