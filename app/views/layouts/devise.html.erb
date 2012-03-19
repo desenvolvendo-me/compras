@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <%= csrf_meta_tag %>
 
-    <title>Compras e Licitações</title>
+    <title>Sistema de Compras e Licitações</title>
 
     <%= stylesheet_link_tag 'application' %>
   </head>
 
   <body>
     <div id="container">
+
       <div id="header">
         <h1><%= link_to 'Sistema de Compras e Licitações', root_path %></h1>
 
@@ -24,11 +25,17 @@
         <%= render 'layouts/flash' %>
       </div>
 
-      <h2>
-        <%= current_prefecture %>
-      </h2>
+      <div id="content" class="devise">
+        <div class="banner">
+          <%= image_tag 'prefecture.jpg' %>
+        </div>
 
-      <%= yield %>
+        <h2>
+          <%= current_prefecture %>
+        </h2>
+
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

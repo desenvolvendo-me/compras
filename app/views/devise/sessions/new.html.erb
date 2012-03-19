@@ -2,9 +2,12 @@
   <%= f.input :login, :required => false, :hint => false %>
   <%= f.input :password, :required => false, :hint => false %>
 
-  <div class="buttons right">
+  <div class="buttons">
     <%= f.button :submit, 'Login' %>
   </div>
+  <p>
+    <%= link_to 'Esqueci minha senha.', new_password_path(resource_name) %>	
+  </p>
 <% end %>
 
 <script>
@@ -20,6 +23,3 @@
   })();
 </script>
 
-<% content_for :footer do %>
-  <p>Esqueceu sua senha? <%= link_to 'Clique aqui', new_password_path(resource_name) %> para recuperá-la.
-<% end %>

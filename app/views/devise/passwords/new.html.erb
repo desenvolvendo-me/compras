@@ -1,18 +1,13 @@
-<div class="notice">Nós enviaremos um link que você poderá usar para alterar sua senha.</div>
-
 <%= simple_form_for resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => 'post' } do |f| %>
+  <p>Digite seu e-mail abaixo e nós enviaremos um código para criação de uma nova senha.</p>
+
   <%= f.input :email, :required => false, :hint => false %>
 
   <div class="buttons">
     <%= f.button :submit, 'Enviar' %>
-    <%= f.button :cancel, :href => new_user_session_path %>
   </div>
 <% end %>
 
 <script>
   document.getElementById("user_email").focus();
 </script>
-
-<% content_for :footer do %>
-  <p>Lembrou? <%= link_to 'Clique aqui', new_user_session_path %> para voltar à tela de login.</p>
-<% end %>
