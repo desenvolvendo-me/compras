@@ -106,7 +106,7 @@ feature "BidOpenings" do
     page.should have_content "Data da solicitação: 07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
     page.should have_content "Unidade orçamentária: 02.00 - Secretaria de Educação"
-    page.should have_content "Valor estimado: 500,00"
+    page.should have_content "Valor estimado: R$ 500,00"
     page.should have_content "Dotação utilizada: #{budget_allocation}"
     page.should have_content "Modalidade: Pregão presencial"
     page.should have_content "Tipo de objeto: Compras e serviços"
