@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    bid_opening_object_type:
+    administrative_process_object_type:
       purchase_and_services: "Compras e serviços"
       construction_and_engineering_services: "Obras e serviços de engenharia"
       disposals_of_assets: "Alienação de bens"

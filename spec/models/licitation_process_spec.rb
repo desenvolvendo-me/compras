@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process'
-require 'app/models/bid_opening'
+require 'app/models/administrative_process'
 require 'app/models/capability'
 require 'app/models/period'
 require 'app/models/payment_method'
@@ -13,7 +13,7 @@ describe LicitationProcess do
     subject.to_s.should eq '1'
   end
 
-  it { should belong_to :bid_opening }
+  it { should belong_to :administrative_process }
   it { should belong_to :capability }
   it { should belong_to :period }
   it { should belong_to :payment_method }
@@ -21,7 +21,7 @@ describe LicitationProcess do
 
   it { should validate_presence_of  :year }
   it { should validate_presence_of :process_date }
-  it { should validate_presence_of :bid_opening }
+  it { should validate_presence_of :administrative_process }
   it { should validate_presence_of :object_description }
   it { should validate_presence_of :capability }
   it { should validate_presence_of :expiration }

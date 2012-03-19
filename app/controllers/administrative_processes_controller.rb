@@ -1,11 +1,11 @@
-class BidOpeningsController < CrudController
+class AdministrativeProcessesController < CrudController
   actions :all, :except => [:update, :destroy]
 
   def new
     object = build_resource
     object.date = Date.current
     object.year = Date.current.year
-    object.status = BidOpeningStatus::WAITING
+    object.status = AdministrativeProcessStatus::WAITING
     object.responsible = current_user.employee
 
     super
@@ -13,7 +13,7 @@ class BidOpeningsController < CrudController
 
   def create
     object = build_resource
-    object.status = BidOpeningStatus::WAITING
+    object.status = AdministrativeProcessStatus::WAITING
 
     super
   end

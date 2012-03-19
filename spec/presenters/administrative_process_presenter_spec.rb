@@ -1,13 +1,13 @@
 # encoding: utf-8
 require 'presenter_helper'
-require 'app/presenters/bid_opening_presenter'
+require 'app/presenters/administrative_process_presenter'
 
-describe BidOpeningPresenter do
+describe AdministrativeProcessPresenter do
   subject do
-    described_class.new(bid_opening, nil, helpers)
+    described_class.new(administrative_process, nil, helpers)
   end
 
-  let :bid_opening do
+  let :administrative_process do
     double(:value_estimated => 500)
   end
 

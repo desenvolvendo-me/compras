@@ -1,7 +1,7 @@
 LicitationProcess.blueprint(:processo_licitatorio) do
   year { 2012 }
   process_date { "2012-03-19" }
-  bid_opening { BidOpening.make!(:compra_de_cadeiras) }
+  administrative_process { AdministrativeProcess.make!(:compra_de_cadeiras) }
   object_description { "Descricao" }
   capability { Capability.make!(:reforma) }
   expiration { "10 dias" }

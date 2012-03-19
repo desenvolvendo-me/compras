@@ -9,7 +9,7 @@ pt-BR:
       licitation_process:
         year: "Ano"
         process_date: "Data do processo"
-        bid_opening: "Número do processo administrativo"
+        administrative_process: "Número do processo administrativo"
         object_description: "Detalhamento do objeto"
         capability: "Fonte de recurso"
         expiration: "Validade da proposta"

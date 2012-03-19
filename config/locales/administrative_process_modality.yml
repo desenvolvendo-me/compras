@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    bid_opening_modality:
+    administrative_process_modality:
       making_cost_for_constructions_and_engineering_services: "Tomada de preço para obras de egenharia e serviço"
       making_cost_for_purchases_and_services: "Tomada de preços para compras e serviços"
       invitation_for_constructions_engineering_services: "Convite para obras e serviços de engenharia"

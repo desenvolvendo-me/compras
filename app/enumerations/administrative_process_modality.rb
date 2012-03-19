@@ -1,4 +1,4 @@
-class BidOpeningModality < EnumerateIt::Base
+class AdministrativeProcessModality < EnumerateIt::Base
   associate_values :making_cost_for_constructions_and_engineering_services,
                    :making_cost_for_purchases_and_services,
                    :invitation_for_constructions_engineering_services,

@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "BidOpenings" do
+feature "AdministrativeProcesses" do
   background do
     sign_in
   end
 
-  scenario 'create a new bid_opening' do
+  scenario 'create a new administrative_process' do
     organogram = Organogram.make!(:secretaria_de_educacao)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     JudgmentForm.make!(:global_com_menor_preco)
@@ -14,9 +14,11 @@ feature "BidOpenings" do
 
     click_link 'Processos Administrativos'
 
-    click_link 'Aberturas de Licitação'
+    within '.links' do
+      click_link 'Processos Administrativos'
+    end
 
-    click_link 'Criar Abertura de Licitação'
+    click_link 'Criar Processo Administrativo'
 
     page.should have_disabled_field 'Status do processo administrativo'
     page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
@@ -34,9 +36,9 @@ feature "BidOpenings" do
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     select 'Aguardando', :from => 'Status do processo administrativo'
 
-    click_button 'Criar Abertura de Licitação'
+    click_button 'Criar Processo Administrativo'
 
-    page.should have_notice 'Abertura de Licitação criado com sucesso.'
+    page.should have_notice 'Processo Administrativo criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -60,12 +62,14 @@ feature "BidOpenings" do
     page.should have_disabled_field 'Data de liberação'
   end
 
-  scenario 'should have all fields disabled when editing an existent bid_opening' do
-    BidOpening.make!(:compra_de_cadeiras)
+  scenario 'should have all fields disabled when editing an existent administrative_process' do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
 
     click_link 'Processos Administrativos'
 
-    click_link 'Aberturas de Licitação'
+    within '.links' do
+      click_link 'Processos Administrativos'
+    end
 
     within_records do
       page.find('a').click
@@ -89,11 +93,13 @@ feature "BidOpenings" do
   scenario 'should be printable' do
     Prefecture.make!(:belo_horizonte)
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    bid_opening = BidOpening.make!(:compra_de_cadeiras)
+    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
 
     click_link 'Processos Administrativos'
 
-    click_link 'Aberturas de Licitação'
+    within '.links' do
+      click_link 'Processos Administrativos'
+    end
 
     within_records do
       page.find('a').click
@@ -101,7 +107,7 @@ feature "BidOpenings" do
 
     click_link 'Imprimir'
 
-    page.should have_content "Número: #{bid_opening}"
+    page.should have_content "Número: #{administrative_process}"
     page.should have_content "Protocolo número: 00099/2012"
     page.should have_content "Data da solicitação: 07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"

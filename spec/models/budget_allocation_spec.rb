@@ -5,7 +5,7 @@ require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/reserve_fund'
 require 'app/models/pledge'
-require 'app/models/bid_opening'
+require 'app/models/administrative_process'
 require 'app/models/direct_purchase_budget_allocation'
 
 describe BudgetAllocation do
@@ -29,7 +29,7 @@ describe BudgetAllocation do
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
-  it { should have_many(:bid_openings).dependent(:restrict) }
+  it { should have_many(:administrative_processes).dependent(:restrict) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:restrict) }
 
   it { should allow_value('2012').for(:year) }

@@ -1,6 +1,6 @@
 require 'model_helper'
 require 'app/models/judgment_form'
-require 'app/models/bid_opening'
+require 'app/models/administrative_process'
 
 describe JudgmentForm do
   it 'should return description as to_s' do
@@ -12,5 +12,5 @@ describe JudgmentForm do
   it { should validate_presence_of :kind }
   it { should validate_presence_of :licitation_kind }
 
-  it { should have_many(:bid_openings).dependent(:restrict) }
+  it { should have_many(:administrative_processes).dependent(:restrict) }
 end

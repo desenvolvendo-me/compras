@@ -7,7 +7,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'create a new licitation_process' do
-    BidOpening.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_de_cadeiras)
     Capability.make!(:reforma)
     Period.make!(:um_ano)
     PaymentMethod.make!(:dinheiro)
@@ -65,7 +65,7 @@ feature "LicitationProcesses" do
 
   scenario 'update an existent licitation_process' do
     LicitationProcess.make!(:processo_licitatorio)
-    BidOpening.make!(:compra_de_computadores)
+    AdministrativeProcess.make!(:compra_de_computadores)
     Capability.make!(:construcao)
     Period.make!(:tres_meses)
     PaymentMethod.make!(:cheque)

@@ -47,35 +47,35 @@
 
 <script>
   (function () {
-    var modalitiesGroups = <%= BidOpeningModalitiesByObjectType.new.modalities_groups.to_json.html_safe %>,
-        modalitiesOptions = _(<%= BidOpeningModality.to_a.to_json.html_safe %>);
+    var modalitiesGroups = <%= AdministrativeProcessModalitiesByObjectType.new.modalities_groups.to_json.html_safe %>,
+        modalitiesOptions = _(<%= AdministrativeProcessModality.to_a.to_json.html_safe %>);
 
     function filterModalities () {
       var options = _(modalitiesGroups[this.value]);
 
       if (options.isUndefined()) {
-        $("#bid_opening_modality").empty().closest("div.input").hide();
+        $("#administrative_process_modality").empty().closest("div.input").hide();
         return;
       }
 
-      $("#bid_opening_modality").html("<option></option>").closest("div.input").show();
+      $("#administrative_process_modality").html("<option></option>").closest("div.input").show();
 
       modalitiesOptions.each(function (option) {
         if (!options.include(option[1])) {
           return;
         }
 
-        $("#bid_opening_modality").append(function () {
+        $("#administrative_process_modality").append(function () {
           return $("<option>").text(option[0]).val(option[1]);
         });
       })
     }
 
-    $("#bid_opening_object_type").change(filterModalities).change();
-    $("#bid_opening_modality").val("<%= f.object.modality %>");
+    $("#administrative_process_object_type").change(filterModalities).change();
+    $("#administrative_process_modality").val("<%= f.object.modality %>");
   })();
 
   <% if f.object.persisted? %>
-    $('form.bid_opening :input').attr('disabled', true);
+    $('form.administrative_process :input').attr('disabled', true);
   <% end %>
 </script>

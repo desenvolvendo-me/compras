@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BidOpeningsController do
+describe AdministrativeProcessesController do
   before do
     sign_in User.make!(:sobrinho_as_admin_and_employee)
   end
@@ -9,25 +9,25 @@ describe BidOpeningsController do
     it 'uses waiting as default value for status' do
       get :new
 
-      assigns(:bid_opening).status.should eq BidOpeningStatus::WAITING
+      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
     end
 
     it 'uses current date as default value for date' do
       get :new
 
-      assigns(:bid_opening).date.should eq Date.current
+      assigns(:administrative_process).date.should eq Date.current
     end
 
     it 'uses current year as default value for year' do
       get :new
 
-      assigns(:bid_opening).year.should eq Date.current.year
+      assigns(:administrative_process).year.should eq Date.current.year
     end
 
     it 'uses current employee as default value for employee' do
       get :new
 
-      assigns(:bid_opening).responsible.should eq controller.current_user.employee
+      assigns(:administrative_process).responsible.should eq controller.current_user.employee
     end
   end
 
@@ -35,7 +35,7 @@ describe BidOpeningsController do
     it 'uses waiting as default value for status' do
       post :create
 
-      assigns(:bid_opening).status.should eq BidOpeningStatus::WAITING
+      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
     end
   end
 end

@@ -23,7 +23,7 @@ class BudgetAllocation < ActiveRecord::Base
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
-  has_many :bid_openings, :dependent => :restrict
+  has_many :administrative_processes, :dependent => :restrict
   has_many :direct_purchase_budget_allocations, :dependent => :restrict
 
   delegate :function, :function_id, :to => :subfunction, :allow_nil => true

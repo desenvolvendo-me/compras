@@ -1,4 +1,4 @@
-class BidOpening < ActiveRecord::Base
+class AdministrativeProcess < ActiveRecord::Base
   attr_accessible :organogram_id, :budget_allocation_id, :responsible_id
   attr_accessible :process, :year, :date, :value_estimated, :modality
   attr_accessible :protocol, :object_type, :status, :description
@@ -6,9 +6,9 @@ class BidOpening < ActiveRecord::Base
 
   attr_readonly :process, :year
 
-  has_enumeration_for :modality, :with => BidOpeningModality
-  has_enumeration_for :object_type, :with => BidOpeningObjectType
-  has_enumeration_for :status, :with => BidOpeningStatus
+  has_enumeration_for :modality, :with => AdministrativeProcessModality
+  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
+  has_enumeration_for :status, :with => AdministrativeProcessStatus
 
   belongs_to :organogram
   belongs_to :budget_allocation
@@ -46,7 +46,7 @@ class BidOpening < ActiveRecord::Base
     end
   end
 
-  def validate_modality(verificator = BidOpeningModalitiesByObjectType.new)
+  def validate_modality(verificator = AdministrativeProcessModalitiesByObjectType.new)
     return unless object_type.present? && modality.present?
 
     unless verificator.verify_modality(object_type, modality)

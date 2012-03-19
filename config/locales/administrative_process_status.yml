@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    bid_opening_status:
+    administrative_process_status:
       waiting: "Aguardando"
       released: "Liberado"
       canceled: "Cancelado"

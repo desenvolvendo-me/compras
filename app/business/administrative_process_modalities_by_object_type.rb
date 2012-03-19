@@ -1,7 +1,7 @@
-class BidOpeningModalitiesByObjectType
+class AdministrativeProcessModalitiesByObjectType
   attr_accessor :modality, :object_type
 
-  def initialize(modality = BidOpeningModality, object_type = BidOpeningObjectType)
+  def initialize(modality = AdministrativeProcessModality, object_type = AdministrativeProcessObjectType)
     self.modality = modality
     self.object_type = object_type
   end

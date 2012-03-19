@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      bid_opening:
-        one: "Abertura de Licitação"
-        other: "Aberturas de Licitação"
+      administrative_process:
+        one: "Processo Administrativo"
+        other: "Processos Administrativos"
 
     attributes:
-      bid_opening:
+      administrative_process:
         process: "Processo"
         year: "Ano"
         date: "Data do processo"
