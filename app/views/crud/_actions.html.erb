@@ -1,10 +1,15 @@
 <div class="actions">
   <ul>
-    <li>
-      <%= link_to_filter %>
-    </li>
-    <li>
-      <%= link_to_new %>
-    </li>
+    <% if filter? %>
+      <li>
+        <%= filter_link %>
+      </li>
+    <% end %>
+
+    <% if create? %>
+      <li>
+        <%= create_link %>
+      </li>
+    <% end %>
   </ul>
 </div>
