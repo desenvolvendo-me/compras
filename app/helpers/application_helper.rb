@@ -89,4 +89,12 @@ module ApplicationHelper
   def back_path
     url_for(:action => :new)
   end
+
+  def prefecture_image
+    if current_prefecture && current_prefecture.image?
+      image_tag current_prefecture.image.url
+    else
+      image_tag 'prefecture.jpg'
+    end
+  end
 end
