@@ -2,6 +2,8 @@
 <p>Número da autorização: <%= resource %></p>
 <p>Compra direta: <%= resource.presenter.direct_purchase %></p>
 <p>Data da compra: <%= resource.presenter.date %></p>
+
+<h1>Dados do Fornecedor</h1>
 <p>Fornecedor: <%= resource.provider %></p>
 <p>Endereço: <%= resource.address %></p>
 <p>Cidade: <%= resource.city %></p>
@@ -12,6 +14,8 @@
 <p>Agência: <%= resource.agency %></p>
 <p>Banco: <%= resource.bank %></p>
 <p>Prezados Senhores,<br> <%= resource.presenter.message %></p>
+
+<h1>Identificação da Despesa</h1>
 <p>Unidade orçamentária: <%= resource.organogram %></p>
 <p>Condições de Pagamento: <%= resource.payment_method %></p>
 <p>Prazo de entrega: <%= resource.period %></p>
@@ -20,9 +24,9 @@
 <p>Observações: <%= resource.observation %></p>
 
 <h1>Dotações orçamentárias</h1>
-
 <% resource.direct_purchase.direct_purchase_budget_allocations.each_with_index do |dpba, idx| %>
   <h2><%= idx + 1 %> - <%= dpba.budget_allocation.description %></h2>
+  <h3>Itens da Dotação</h3>
   <table class="records">
     <thead>
       <tr>
