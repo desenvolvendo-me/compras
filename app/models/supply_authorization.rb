@@ -30,7 +30,7 @@ class SupplyAuthorization < ActiveRecord::Base
     last = self.class.where(:year => year).last
 
     if last
-      self.code = last.code.to_i + 1
+      self.code = last.code.succ
     else
       self.code = 1
     end
