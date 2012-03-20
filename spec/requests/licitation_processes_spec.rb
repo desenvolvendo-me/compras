@@ -94,6 +94,11 @@ feature "LicitationProcesses" do
       page.should have_field 'Validade do contrato (meses)', :with => '5'
       page.should have_field 'Observações gerais', :with => 'observacoes'
 
+      # testing fields of licitation number
+      page.should have_field 'Número da licitação', :with => '1'
+      page.should have_field 'Ano', :with => '2012'
+      page.should have_field 'Abrev. modalidade', :with => 'PP'
+
       # testing that delegated fields are cleaned when administrative proccess is cleaned
       clear_modal 'Número do processo administrativo'
 
@@ -186,7 +191,7 @@ feature "LicitationProcesses" do
     page.should_not have_content '1 ano'
   end
 
-  scenario 'creating another licitation with the same year to test process number' do
+  scenario 'creating another licitation with the same year to test process number and licitation number' do
     LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos Administrativos'
@@ -219,7 +224,11 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    page.should have_link '1/2012'
-    page.should have_link '2/2012'
+    click_link '2/2012'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Processo', :with => '2'
+      page.should have_field 'Número da licitação', :with => '2'
+    end
   end
 end

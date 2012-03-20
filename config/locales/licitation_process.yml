@@ -30,3 +30,5 @@ pt-BR:
         administrative_process_description: "Objeto do processo licitatório"
         administrative_process_responsible: "Responsável"
         administrative_process_item: "Inciso"
+        licitation_number: "Número da licitação"
+        modality: "Abrev. modalidade"

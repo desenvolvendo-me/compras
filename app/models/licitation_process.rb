@@ -6,6 +6,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_readonly :process, :year
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
+  has_enumeration_for :modality, :with => AbreviatedProcessModality
 
   belongs_to :administrative_process
   belongs_to :capability
@@ -25,7 +26,7 @@ class LicitationProcess < ActiveRecord::Base
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
 
-  before_create :set_process
+  before_create :set_process, :set_modality, :set_licitation_number
 
   orderize :id
   filterize
@@ -43,6 +44,20 @@ class LicitationProcess < ActiveRecord::Base
       self.process = last.process.to_i + 1
     else
       self.process = 1
+    end
+  end
+
+  def set_modality
+    self.modality = administrative_process.modality
+  end
+
+  def set_licitation_number
+    last = self.class.where(:year => year, :administrative_process_id => administrative_process_id).last
+
+    if last
+      self.licitation_number = last.licitation_number.to_i + 1
+    else
+      self.licitation_number = 1
     end
   end
 end

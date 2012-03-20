@@ -62,8 +62,29 @@
   </div>
 </div>
 
-<%= f.input :period %>
-<%= f.input :payment_method %>
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :licitation_number, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :year, :disabled => true, :input_html => { :id => nil, :name => '' } %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :modality, :disabled => true, :as => :string, :input_html => { :value => f.object.modality_humanize } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :period %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :payment_method %>
+  </div>
+</div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-5">
