@@ -33,7 +33,7 @@ class Pledge < ActiveRecord::Base
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
   validates :year, :mask => '9999'
-  validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date }
+  validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
   validates :licitation, :process, :entity, :year, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :creditor, :presence => true
   validates :budget_allocation, :presence => true
