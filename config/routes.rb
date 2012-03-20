@@ -29,13 +29,6 @@ Tributario::Application.routes.draw do
   # Keep routes sorted alphabetically
   root :to => 'bookmarks#show'
 
-  get 'dashboard/general'                 => 'dashboard/general#index'
-  get 'dashboard/request'                 => 'dashboard/request#index'
-  get 'dashboard/lower'                   => 'dashboard/lower#index'
-  get 'dashboard/management'              => 'dashboard/management#index'
-  get 'dashboard/accountancy'             => 'dashboard/accountancy#index'
-  get 'dashboard/administractive_process' => 'dashboard/administractive_process#index'
-
   devise_for :users
 
   resource :account, :only => %w(edit update)

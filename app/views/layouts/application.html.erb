@@ -45,23 +45,7 @@
         </div>
 
         <div id="menu">
-          <ul>
-            <li>
-              <%= link_to 'Cadastros Diversos', dashboard_general_path %>
-            </li>
-            <li>
-              <%= link_to 'Solicitações', dashboard_request_path %>
-            </li>
-            <li>
-              <%= link_to 'Contabilidade', dashboard_accountancy_path %>
-            </li>
-            <li>
-              <%= link_to 'Processos Administrativos', dashboard_administractive_process_path %>
-            </li>
-            <li>
-              <%= link_to 'Administração', dashboard_management_path %>
-            </li>
-          </ul>
+          <%= render 'layouts/menu' %>
         </div>
 
       </div>
