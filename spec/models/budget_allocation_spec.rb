@@ -9,11 +9,12 @@ require 'app/models/administrative_process'
 require 'app/models/direct_purchase_budget_allocation'
 
 describe BudgetAllocation do
-  it 'should return description as to_s id/year' do
+  it 'should return "id/year - description" as to_s' do
     subject.id = '1'
     subject.year = 2012
+    subject.description = 'Manutenção e Reparo'
 
-    subject.to_s.should eq '1/2012'
+    subject.to_s.should eq '1/2012 - Manutenção e Reparo'
   end
 
   it { should validate_presence_of :description }

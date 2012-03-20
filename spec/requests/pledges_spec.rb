@@ -88,7 +88,7 @@ feature "Pledges" do
       page.should have_field 'Unidade gestora', :with => 'Unidade Central'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
       page.should have_select 'Tipo de empenho', :selected => 'Global'
-      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
+      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
       page.should have_field 'Valor', :with => '10,00'
       page.should have_field 'Categoria', :with => 'Geral'
       page.should have_select 'Tipo de bem', :selected => 'Patrimonial'
@@ -192,7 +192,7 @@ feature "Pledges" do
     within_tab 'Principal' do
       fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
 
-      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012"
+      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
     end
   end
 

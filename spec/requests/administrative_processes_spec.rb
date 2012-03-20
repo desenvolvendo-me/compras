@@ -52,7 +52,7 @@ feature "AdministrativeProcesses" do
     page.should have_field 'Número do protocolo', :with => '00099/2012'
     page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
     page.should have_field 'Valor estimado', :with => '500,50'
-    page.should have_field 'Dotação utilizada', :with => "#{budget_allocation.id}/2012"
+    page.should have_field 'Dotação utilizada', :with => "#{budget_allocation.id}/2012 - Alocação"
     page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
     page.should have_select 'Modalidade', :selected => 'Pregão presencial'
     page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'

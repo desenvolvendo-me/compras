@@ -67,7 +67,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :selected => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -91,7 +91,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Id', :with => "#{budget_allocation.id}"
 
       page.should have_disabled_field 'Dotação orçamentária'
-      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012"
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
     end
   end
 
@@ -224,13 +224,13 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
-        page.should have_field "Dotação", :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
+        page.should have_field "Dotação", :with => "#{budget_allocation.id}/2012 - Alocação"
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '200,00'
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
-        page.should have_field "Dotação", :with => "#{budget_allocation_extra.id}/2011"
+        page.should have_field "Dotação", :with => "#{budget_allocation_extra.id}/2011 - Alocação extra"
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field "Valor previsto", :with => '300,00'
       end
@@ -313,7 +313,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011", :field => 'Descrição'
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011 - Alocação extra"
       page.should have_field 'Classificação econômica da despesa', :with => '2.2.22.11.01.00.00.00'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
@@ -409,13 +409,13 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       within '.purchase-solicitation-budget-allocation:first' do
-        page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012", :field => 'Descrição'
+        page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
         page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
         page.should have_field 'Valor previsto', :with => '1.020,00'
       end
 
       within '.purchase-solicitation-budget-allocation:last' do
-        page.should have_field 'Dotação', :with => "#{budget_allocation_extra.id}/2011"
+        page.should have_field 'Dotação', :with => "#{budget_allocation_extra.id}/2011 - Alocação extra"
         page.should have_field 'Compl. do el. da despesa', :with => '2.2.22.11.01.00.00.00'
         page.should have_field 'Valor previsto ', :with => '30,00'
       end

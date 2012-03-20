@@ -45,7 +45,7 @@ feature "ReserveFunds" do
     page.should have_field 'Exercício', :with => '2012'
     page.should have_field  'Tipo', :with => 'Licitação'
     page.should have_field 'Data', :with => '22/02/2012'
-    page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012"
+    page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
     page.should have_field 'Valor *', :with => '10,00'
     page.should have_field 'Modalidade', :with => 'Pública'
     page.should have_field 'Número da licitação', :with => '001/2012'
@@ -86,7 +86,7 @@ feature "ReserveFunds" do
     page.should have_field 'Exercício', :with => '2011'
     page.should have_field  'Tipo', :with => 'Comum'
     page.should have_disabled_field 'Data'
-    page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011"
+    page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011 - Alocação extra"
     page.should have_field 'Valor *', :with => '199,00'
     page.should have_field 'Número do processo', :with => '005/2015'
     page.should have_field 'Favorecido', :with => 'Nobe'
@@ -109,7 +109,7 @@ feature "ReserveFunds" do
 
     page.should_not have_content '2012'
     page.should_not have_content 'Detran'
-    page.should_not have_content "#{budget_allocation.id}/2012"
+    page.should_not have_content "#{budget_allocation.id}/2012 - Alocação"
     page.should_not have_content '10,00'
   end
 

@@ -56,6 +56,6 @@ class BudgetAllocation < ActiveRecord::Base
   end
 
   def to_s
-    "#{id}/#{year}"
+    "#{id}/#{year} - #{description}"
   end
 end

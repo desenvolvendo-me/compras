@@ -93,7 +93,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012"
+      page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_select 'Tipo do empenho', :selected => 'Global'
