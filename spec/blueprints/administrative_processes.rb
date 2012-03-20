@@ -13,6 +13,7 @@ AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
   status { AdministrativeProcessStatus::WAITING }
+  item { 'Item 1' }
 end
 
 AdministrativeProcess.blueprint(:compra_de_computadores) do
@@ -29,4 +30,5 @@ AdministrativeProcess.blueprint(:compra_de_computadores) do
   description { 'Licitação para compra de computadores' }
   responsible { Employee.make!(:sobrinho) }
   status { AdministrativeProcessStatus::WAITING }
+  item { 'Item 2' }
 end

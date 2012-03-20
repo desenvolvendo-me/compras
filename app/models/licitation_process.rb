@@ -22,6 +22,9 @@ class LicitationProcess < ActiveRecord::Base
   validates :period,                 :presence => true
   validates :payment_method,         :presence => true
 
+  delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
+           :item, :to => :administrative_process, :allow_nil => true, :prefix => true
+
   before_create :set_process
 
   orderize :id

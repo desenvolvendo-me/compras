@@ -20,10 +20,27 @@ feature "LicitationProcesses" do
 
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
+      page.should have_disabled_field 'Unidade orçamentária'
+      page.should have_disabled_field 'Modalidade'
+      page.should have_disabled_field 'Tipo de objeto'
+      page.should have_disabled_field 'Forma de julgamento'
+      page.should have_disabled_field 'Objeto do processo licitatório'
+      page.should have_disabled_field 'Responsável'
+      page.should have_disabled_field 'Inciso'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
       fill_modal 'Número do processo administrativo', :with => '1', :field => 'Processo'
+
+      # testing delegated fields of administrative process (filled by javascript)
+      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Modalidade', :with => 'Pregão presencial'
+      page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
+      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Inciso', :with => 'Item 1'
+
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
@@ -54,6 +71,16 @@ feature "LicitationProcesses" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '21/03/2012'
       page.should have_field 'Número do processo administrativo', :with => '1/2012'
+
+      # testing delegated fields of administrative process
+      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Modalidade', :with => 'Pregão presencial'
+      page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
+      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Inciso', :with => 'Item 1'
+
       page.should have_field 'Detalhamento do objeto', :with => 'detalhamento'
       page.should have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       page.should have_field 'Validade da proposta', :with => '5 dias'
@@ -66,6 +93,17 @@ feature "LicitationProcesses" do
       page.should have_field 'Data do contrato', :with => '31/03/2012'
       page.should have_field 'Validade do contrato (meses)', :with => '5'
       page.should have_field 'Observações gerais', :with => 'observacoes'
+
+      # testing that delegated fields are cleaned when administrative proccess is cleaned
+      clear_modal 'Número do processo administrativo'
+
+      page.should have_field 'Unidade orçamentária', :with => ''
+      page.should have_field 'Modalidade', :with => ''
+      page.should have_field 'Tipo de objeto', :with => ''
+      page.should have_field 'Forma de julgamento', :with => ''
+      page.should have_field 'Objeto do processo licitatório', :with => ''
+      page.should have_field 'Responsável', :with => ''
+      page.should have_field 'Inciso', :with => ''
     end
   end
 

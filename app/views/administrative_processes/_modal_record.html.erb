@@ -1,0 +1,7 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-organogram="<%= record.organogram %>" data-modality="<%= record.modality_humanize %>" data-object-type="<%= record.object_type_humanize %>" data-judgment-form="<%= record.judgment_form %>" data-description="<%= record.description %>" data-responsible="<%= record.responsible %>" data-item="<%= record.item %>">
+  <% attributes.each do |attribute| %>
+    <td>
+      <%= record.send attribute %>
+    </td>
+  <% end %>
+</tr>
