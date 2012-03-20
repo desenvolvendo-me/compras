@@ -7,10 +7,10 @@ require 'app/models/period'
 require 'app/models/payment_method'
 
 describe LicitationProcess do
-  it 'should return id as to_s method' do
-    subject.id = 1
-
-    subject.to_s.should eq '1'
+  it 'should return process/year as to_s' do
+    subject.process = '1'
+    subject.year = '2012'
+    subject.to_s.should eq '1/2012'
   end
 
   it { should belong_to :administrative_process }
