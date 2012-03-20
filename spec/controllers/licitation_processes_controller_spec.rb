@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe LicitationProcessesController do
   before do
-    sign_in User.make!(:sobrinho_as_admin_and_employee)
+    controller.stub(:authenticate_user!)
+    controller.stub(:authorize_resource!)
   end
 
   it 'uses current year as default value for year' do
