@@ -47,7 +47,7 @@ feature "DirectPurchases" do
       fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
 
       # getting data from modal
-      page.should have_field 'Classificação econômica da despesa', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '500,00'
 
       select 'Global', :from => 'Tipo do empenho'
@@ -94,7 +94,7 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012"
-      page.should have_field 'Classificação econômica da despesa', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_select 'Tipo do empenho', :selected => 'Global'
 
@@ -139,7 +139,7 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações' do
       page.should have_disabled_field 'Dotação orçamentária'
-      page.should have_disabled_field 'Classificação econômica da despesa'
+      page.should have_disabled_field 'Compl. do elemento'
       page.should have_disabled_field 'Saldo da dotação'
       page.should have_disabled_field 'Tipo do empenho'
       page.should have_disabled_field 'Material'
