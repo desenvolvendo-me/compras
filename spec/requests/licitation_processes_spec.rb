@@ -14,7 +14,7 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     allocation = BudgetAllocation.make!(:alocacao)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 
@@ -164,7 +164,7 @@ feature "LicitationProcesses" do
     DocumentType.make!(:oficial)
     allocation = BudgetAllocation.make!(:alocacao_extra)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 
@@ -260,7 +260,7 @@ feature "LicitationProcesses" do
   scenario 'destroy an existent licitation_process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 
@@ -281,7 +281,7 @@ feature "LicitationProcesses" do
   scenario 'creating another licitation with the same year to test process number and licitation number' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 

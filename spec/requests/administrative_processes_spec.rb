@@ -12,7 +12,7 @@ feature "AdministrativeProcesses" do
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     within '.links' do
       click_link 'Processos Administrativos'
@@ -65,7 +65,7 @@ feature "AdministrativeProcesses" do
   scenario 'should have all fields disabled when editing an existent administrative_process' do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     within '.links' do
       click_link 'Processos Administrativos'
@@ -95,7 +95,7 @@ feature "AdministrativeProcesses" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     within '.links' do
       click_link 'Processos Administrativos'
