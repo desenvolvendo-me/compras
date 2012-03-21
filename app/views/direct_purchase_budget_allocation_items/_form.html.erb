@@ -2,35 +2,39 @@
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <div class="yui3-u-1-7">
-    <%= f.input :order, :disabled => true, :input_html => { :class => :order, :value => 0 } %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :order, :disabled => true, :input_html => { :class => :order, :value => 0 } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :material, :url => modal_materials_path(:licitation_object_id => f.object.licitation_object_id), :input_html => { :class => 'material' } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :brand %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :reference_unit, :disabled => true, :input_html => { :class => 'reference-unit' } %>
+    </div>
   </div>
 
-  <div class="yui3-u-1-7">
-    <%= f.input :material, :url => modal_materials_path(:licitation_object_id => f.object.licitation_object_id), :input_html => { :class => 'material' } %>
-  </div>
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :quantity, :input_html => { :class => 'item-quantity' } %>
+    </div>
 
-  <div class="yui3-u-1-7">
-    <%= f.input :reference_unit, :disabled => true, :input_html => { :class => 'reference-unit' } %>
-  </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :unit_price, :input_html => { :class => 'item-unit-price' } %>
+    </div>
 
-  <div class="yui3-u-1-7">
-    <%= f.input :brand %>
-  </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => number_with_precision(f.object.estimated_total_price) } %>
+    </div>
 
-  <div class="yui3-u-1-7">
-    <%= f.input :quantity, :input_html => { :class => 'item-quantity' } %>
-  </div>
-
-  <div class="yui3-u-1-7">
-    <%= f.input :unit_price, :input_html => { :class => 'item-unit-price' } %>
-  </div>
-
-  <div class="yui3-u-1-7">
-    <%= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => number_with_precision(f.object.estimated_total_price) } %>
-  </div>
-
-  <div class="yui3-u-1-7 nested-remove">
-    <input type="button" class="button negative remove-item" value="Remover Item">
+    <div class="yui3-u-1-4 nested-remove">
+      <input type="button" class="button negative remove-item" value="Remover Item">
+    </div>
   </div>
 </div>
