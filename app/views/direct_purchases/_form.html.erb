@@ -137,7 +137,7 @@
     });
   }
 
-  $('form.direct_purchase').delegate('#budget-allocations', 'change', function() {
+  $('form.direct_purchase').bind('append.mustache', function(){
     setMaterialsModalUrl();
   });
 
