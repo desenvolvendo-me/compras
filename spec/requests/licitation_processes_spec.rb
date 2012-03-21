@@ -46,7 +46,9 @@ feature "LicitationProcesses" do
       fill_in 'Validade da proposta', :with => '5 dias'
       fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora', :with => '14:00'
+      fill_in 'Hora da entrega', :with => '14:00'
+      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_in 'Hora da abertura', :with => '14:00'
       fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Prazo de entrega', :with => '1', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -89,7 +91,9 @@ feature "LicitationProcesses" do
       page.should have_field 'Validade da proposta', :with => '5 dias'
       page.should have_field 'Índice de reajuste', :with => 'XPTO'
       page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      page.should have_field 'Hora', :with => '14:00'
+      page.should have_field 'Hora da entrega', :with => '14:00'
+      page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Hora da abertura', :with => '14:00'
       page.should have_field 'Prazo de entrega', :with => '1 ano'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Valor da caução', :with => '50,00'
@@ -140,7 +144,9 @@ feature "LicitationProcesses" do
       fill_in 'Validade da proposta', :with => '10 dias'
       fill_in 'Índice de reajuste', :with => 'IPC'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora', :with => '15:00'
+      fill_in 'Hora da entrega', :with => '15:00'
+      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_in 'Hora da abertura', :with => '15:00'
       fill_modal 'Prazo de entrega', :with => '3', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '60,00'
@@ -167,7 +173,9 @@ feature "LicitationProcesses" do
       page.should have_field 'Validade da proposta', :with => '10 dias'
       page.should have_field 'Índice de reajuste', :with => 'IPC'
       page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
-      page.should have_field 'Hora', :with => '15:00'
+      page.should have_field 'Hora da entrega', :with => '15:00'
+      page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      page.should have_field 'Hora da abertura', :with => '15:00'
       page.should have_field 'Prazo de entrega', :with => '3 meses'
       page.should have_field 'Forma de pagamento', :with => 'Cheque'
       page.should have_field 'Valor da caução', :with => '60,00'
@@ -201,7 +209,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'creating another licitation with the same year to test process number and licitation number' do
-    LicitationProcess.make!(:processo_licitatorio)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos Administrativos'
 
@@ -219,8 +227,10 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
       fill_in 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora', :with => '15:00'
+      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_in 'Hora da entrega', :with => '15:00'
+      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_in 'Hora da abertura', :with => '15:00'
       fill_modal 'Prazo de entrega', :with => '1', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
@@ -235,9 +245,8 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    new_licitation_link = (licitation_process.id+1).to_s
+    click_link new_licitation_link
 
     within_tab 'Dados gerais' do
       page.should have_field 'Processo', :with => '2'

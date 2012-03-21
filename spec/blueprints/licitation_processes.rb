@@ -8,6 +8,8 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
+  envelope_opening_date { I18n.l(Date.tomorrow) }
+  envelope_opening_time { "14:00" }
   period { Period.make!(:um_ano) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }

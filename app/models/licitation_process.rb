@@ -2,7 +2,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :administrative_process_id, :capability_id, :period_id, :payment_method_id, :year, :process_date
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
-  attr_accessible :envelope_delivery_time
+  attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time
 
   attr_readonly :process, :year
 
@@ -15,9 +15,11 @@ class LicitationProcess < ActiveRecord::Base
   belongs_to :payment_method
 
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :readjustment_index,
-            :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date,   :presence => true
+            :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date, :envelope_opening_date,
+            :envelope_opening_time, :presence => true
   validates :year, :mask => "9999"
   validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date }
+  validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date }
 
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
