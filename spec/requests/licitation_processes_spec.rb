@@ -40,6 +40,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
       page.should have_field 'Inciso', :with => 'Item 1'
+      page.should have_field 'Abrev. modalidade', :with => 'PP'
 
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -118,6 +119,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Objeto do processo licitatório', :with => ''
       page.should have_field 'Responsável', :with => ''
       page.should have_field 'Inciso', :with => ''
+      page.should have_field 'Abrev. modalidade', :with => ''
     end
   end
 

@@ -19,17 +19,31 @@
     }
   });
 
+
+  function abreviatedProcessModality(modality) {
+    var abreviations = <%= AbreviatedProcessModality.to_a.to_json.html_safe %>,
+        index;
+
+    for (index in abreviations) {
+      if (abreviations[index][1] == modality) {
+        return abreviations[index][0];
+      }
+    }
+  }
+
   $("#licitation_process_administrative_process_id").change(function (event, data) {
     if (data) {
       var record = data.record;
 
       $('#licitation_process_administrative_process_organogram').val(record.data("organogram"));
-      $('#licitation_process_administrative_process_modality_humanize').val(record.data("modality"));
+      $('#licitation_process_administrative_process_modality_humanize').val(record.data("modality-humanize"));
       $('#licitation_process_administrative_process_object_type_humanize').val(record.data("object-type"));
       $('#licitation_process_administrative_process_judgment_form').val(record.data("judgment-form"));
       $('#licitation_process_administrative_process_description').val(record.data("description"));
       $('#licitation_process_administrative_process_responsible').val(record.data("responsible"));
       $('#licitation_process_administrative_process_item').val(record.data("item"));
+      $('#licitation_process_modality').val(abreviatedProcessModality(record.data("modality")));
+
     } else {
       $('#licitation_process_administrative_process_organogram').val('');
       $('#licitation_process_administrative_process_modality_humanize').val('');
@@ -38,6 +52,7 @@
       $('#licitation_process_administrative_process_description').val('');
       $('#licitation_process_administrative_process_responsible').val('');
       $('#licitation_process_administrative_process_item').val('');
+      $('#licitation_process_modality').val('');
     }
   });
 </script>
