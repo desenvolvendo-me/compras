@@ -11,7 +11,7 @@
         <%= resource_class.human_attribute_name :status %>
       </th>
       <th>
-        <%= resource_class.human_attribute_name :entity_id %>
+        <%= resource_class.human_attribute_name :entity %>
       </th>
     </tr>
   </thead>
@@ -29,7 +29,7 @@
           <%= resource.status %>
         </td>
         <td>
-          <%= resource.entity_id %>
+          <%= resource.entity.name %>
         </td>
       </tr>
     <% end %>
