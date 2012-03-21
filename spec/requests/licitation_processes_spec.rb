@@ -27,6 +27,8 @@ feature "LicitationProcesses" do
       page.should have_disabled_field 'Objeto do processo licitatório'
       page.should have_disabled_field 'Responsável'
       page.should have_disabled_field 'Inciso'
+      page.should have_disabled_field 'Data da homologação'
+      page.should have_disabled_field 'Data da adjudicação'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
