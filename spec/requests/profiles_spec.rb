@@ -57,6 +57,8 @@ feature "Profiles" do
 
     page.should have_notice 'Perfil apagado com sucesso.'
 
-    page.should_not have_content 'Gestor'
+    within_records do
+      page.should_not have_content 'Gestor'
+    end
   end
 end
