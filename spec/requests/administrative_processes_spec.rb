@@ -7,16 +7,14 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'create a new administrative_process' do
-    organogram = Organogram.make!(:secretaria_de_educacao)
     budget_allocation = BudgetAllocation.make!(:alocacao)
+    Organogram.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
 
     click_link 'Processos'
 
-    within '.links' do
-      click_link 'Processos Administrativos'
-    end
+    click_link 'Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
 
@@ -67,9 +65,7 @@ feature "AdministrativeProcesses" do
 
     click_link 'Processos'
 
-    within '.links' do
-      click_link 'Processos Administrativos'
-    end
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -97,9 +93,7 @@ feature "AdministrativeProcesses" do
 
     click_link 'Processos'
 
-    within '.links' do
-      click_link 'Processos Administrativos'
-    end
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
