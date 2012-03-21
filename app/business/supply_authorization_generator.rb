@@ -15,7 +15,7 @@ class SupplyAuthorizationGenerator
   end
 
   def authorize!
-    supply_authorization = supply_authorization_storage.create!(
+    supply_authorization_storage.create!(
       :direct_purchase_id => direct_purchase_object.id,
       :year => direct_purchase_object.year,
     )
