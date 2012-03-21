@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      additional_credit_opening:
+        one: "Abertura de Créditos Suplementares"
+        other: "Aberturas de Créditos Suplementares"
+
+    attributes:
+      additional_credit_opening:
+        entity: "Entidade"
+        year: "Exercício"
+        credit_type: "Tipo de crédito"

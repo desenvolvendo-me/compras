@@ -6,6 +6,7 @@ module Dashboard::AccountancyHelper
   def links
     simple_menu do |m|
       m.administractive_acts
+      m.additional_credit_openings
       m.administractive_act_type_classifications
       m.expense_economic_classifications
       m.organogram_configurations

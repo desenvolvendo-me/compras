@@ -1,0 +1,37 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :entity %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :year %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :credit_type %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(collection) do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td>
+          <%= resource.id %>
+        </td>
+        <td>
+          <%= link_to resource, edit_resource_path(resource) %>
+        </td>
+        <td>
+          <%= resource.year %>
+        </td>
+        <td>
+          <%= resource.credit_type_humanize %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
