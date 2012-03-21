@@ -14,17 +14,10 @@ class LicitationProcess < ActiveRecord::Base
   belongs_to :period
   belongs_to :payment_method
 
-  validates :year,                   :presence => true, :mask => "9999"
-  validates :process_date,           :presence => true
-  validates :administrative_process, :presence => true
-  validates :object_description,     :presence => true
-  validates :capability,             :presence => true
-  validates :expiration,             :presence => true
-  validates :readjustment_index,     :presence => true
-  validates :period,                 :presence => true
-  validates :payment_method,         :presence => true
-  validates :envelope_delivery_date, :presence => true, :timeliness => { :on_or_after => :today, :type => :date }
-  validates :envelope_delivery_time, :presence => true
+  validates :process_date, :administrative_process, :object_description, :capability, :expiration, :readjustment_index,
+            :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date,   :presence => true
+  validates :year, :mask => "9999"
+  validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date }
 
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
