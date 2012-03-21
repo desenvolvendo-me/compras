@@ -6,6 +6,8 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   capability { Capability.make!(:reforma) }
   expiration { "10 dias" }
   readjustment_index { "XPTO" }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "14:00" }
   period { Period.make!(:um_ano) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }

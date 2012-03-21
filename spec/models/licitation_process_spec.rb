@@ -28,6 +28,13 @@ describe LicitationProcess do
   it { should validate_presence_of :readjustment_index }
   it { should validate_presence_of :period }
   it { should validate_presence_of :payment_method }
+  it { should validate_presence_of :envelope_delivery_date }
+  it { should validate_presence_of :envelope_delivery_time }
+
+  it "should not have envelope_delivery_date less than today" do
+    subject.should_not allow_value(Date.yesterday).
+      for(:envelope_delivery_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
+  end
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201').for(:year) }

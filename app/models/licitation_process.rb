@@ -1,7 +1,8 @@
 class LicitationProcess < ActiveRecord::Base
   attr_accessible :administrative_process_id, :capability_id, :period_id, :payment_method_id, :year, :process_date
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
-  attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations
+  attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
+  attr_accessible :envelope_delivery_time
 
   attr_readonly :process, :year
 
@@ -22,6 +23,8 @@ class LicitationProcess < ActiveRecord::Base
   validates :readjustment_index,     :presence => true
   validates :period,                 :presence => true
   validates :payment_method,         :presence => true
+  validates :envelope_delivery_date, :presence => true, :timeliness => { :on_or_after => :today, :type => :date }
+  validates :envelope_delivery_time, :presence => true
 
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true

@@ -15,6 +15,8 @@ pt-BR:
         capability: "Fonte de recurso"
         expiration: "Validade da proposta"
         readjustment_index: "Índice de reajuste"
+        envelope_delivery_date: "Data da entrega dos envelopes"
+        envelope_delivery_time: "Hora"
         period: "Prazo de entrega"
         payment_method: "Forma de pagamento"
         caution_value: "Valor da caução"
