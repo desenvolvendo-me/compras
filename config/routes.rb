@@ -49,6 +49,13 @@ Tributario::Application.routes.draw do
 
   resources :addresses
 
+  resources :additional_credit_opening_natures do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :administractive_acts do
     collection do
       get :filter

@@ -1,6 +1,7 @@
 pt-BR:
   controllers:
     addresses: "Endereços"
+    additional_credit_opening_natures: "Naturezas de Abertura de Créditos Suplementares"
     administractive_acts: "Atos Administrativos"
     administration_types: "Tipos de Administração"
     administrative_processes: "Processos Administrativos"

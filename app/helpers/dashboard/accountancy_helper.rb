@@ -16,6 +16,7 @@ module Dashboard::AccountancyHelper
       m.functions
       m.modality_limits
       m.legal_text_natures
+      m.additional_credit_opening_natures
       m.legal_references
       m.organograms
       m.licitation_objects
