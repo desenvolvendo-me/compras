@@ -1,9 +1,9 @@
-body {
-  margin: 1em;
+#footer {
+  text-align: right;
 }
 
 @media print {
-  .hide-from-print {
+  #footer {
     display: none;
   }
 }

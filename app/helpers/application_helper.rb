@@ -82,14 +82,6 @@ module ApplicationHelper
     end
   end
 
-  def print_path
-    'javascript:window.print()'
-  end
-
-  def back_path
-    url_for(:action => :new)
-  end
-
   def prefecture_image
     if current_prefecture && current_prefecture.image?
       image_tag current_prefecture.image.url
