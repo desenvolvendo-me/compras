@@ -235,7 +235,9 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    click_link '2/2012'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Dados gerais' do
       page.should have_field 'Processo', :with => '2'

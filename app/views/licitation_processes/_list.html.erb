@@ -26,7 +26,7 @@
     <% localized(collection) do |resource| %>
       <tr id="<%= dom_id resource %>">
         <td>
-          <%= link_to resource, edit_resource_path(resource) %>
+          <%= link_to resource.id, edit_resource_path(resource) %>
         </td>
         <td>
           <%= resource.year %>
