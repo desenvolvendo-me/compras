@@ -7,7 +7,7 @@ feature "JudgmentForms" do
   end
 
   scenario 'create a new judgment_form' do
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Formas de Julgamento das Licitações'
 
@@ -31,7 +31,7 @@ feature "JudgmentForms" do
   scenario 'update an existent judgment_form' do
     JudgmentForm.make!(:global_com_menor_preco)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Formas de Julgamento das Licitações'
 
@@ -55,7 +55,7 @@ feature "JudgmentForms" do
   scenario 'destroy an existent judgment_form' do
     JudgmentForm.make!(:global_com_menor_preco)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Formas de Julgamento das Licitações'
 
@@ -73,7 +73,7 @@ feature "JudgmentForms" do
   scenario 'should validate uniqueness of description' do
     JudgmentForm.make!(:global_com_menor_preco)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Formas de Julgamento das Licitações'
 
