@@ -11,6 +11,7 @@ feature "LicitationProcesses" do
     Capability.make!(:reforma)
     Period.make!(:um_ano)
     PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
 
     click_link 'Processos Administrativos'
 
@@ -61,6 +62,10 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2012'
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
     end
 
     click_button 'Criar Processo Licitatório'
@@ -123,6 +128,11 @@ feature "LicitationProcesses" do
       page.should have_field 'Inciso', :with => ''
       page.should have_field 'Abrev. modalidade', :with => ''
     end
+
+    within_tab 'Documentos' do
+      page.should have_content 'Fiscal'
+      page.should have_content '10'
+    end
   end
 
   scenario 'update an existent licitation_process' do
@@ -131,6 +141,7 @@ feature "LicitationProcesses" do
     Capability.make!(:construcao)
     Period.make!(:tres_meses)
     PaymentMethod.make!(:cheque)
+    DocumentType.make!(:oficial)
 
     click_link 'Processos Administrativos'
 
@@ -161,6 +172,12 @@ feature "LicitationProcesses" do
       fill_in 'Observações gerais', :with => 'novas observacoes'
     end
 
+    within_tab 'Documentos' do
+      click_button 'Remover'
+
+      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+    end
+
     click_button 'Atualizar Processo Licitatório'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
@@ -188,6 +205,14 @@ feature "LicitationProcesses" do
       page.should have_field 'Data do contrato', :with => '31/03/2013'
       page.should have_field 'Validade do contrato (meses)', :with => '6'
       page.should have_field 'Observações gerais', :with => 'novas observacoes'
+    end
+
+    within_tab 'Documentos' do
+      page.should_not have_content 'Fiscal'
+      page.should_not have_content '10'
+
+      page.should have_content 'Oficial'
+      page.should have_content '20'
     end
   end
 

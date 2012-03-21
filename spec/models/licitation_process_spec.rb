@@ -17,6 +17,7 @@ describe LicitationProcess do
   it { should belong_to :capability }
   it { should belong_to :period }
   it { should belong_to :payment_method }
+  it { should have_and_belong_to_many(:document_types) }
 
 
   it { should validate_presence_of  :year }

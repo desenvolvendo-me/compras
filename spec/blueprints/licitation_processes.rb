@@ -18,4 +18,5 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   contract_date { "2012-03-19" }
   contract_expiration { 3 }
   observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
 end

@@ -2,7 +2,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :administrative_process_id, :capability_id, :period_id, :payment_method_id, :year, :process_date
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
-  attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time
+  attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
 
   attr_readonly :process, :year
 
@@ -13,6 +13,8 @@ class LicitationProcess < ActiveRecord::Base
   belongs_to :capability
   belongs_to :period
   belongs_to :payment_method
+
+  has_and_belongs_to_many :document_types
 
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :readjustment_index,
             :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date, :envelope_opening_date,

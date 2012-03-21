@@ -1,0 +1,15 @@
+<tr class="record">
+  <td>
+    <%= id %>
+  </td>
+  <td>
+    <%= description %>
+  </td>
+  <td>
+    <%= validity %>
+  </td>
+  <td>
+    <input id="licitation_process_document_types_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[document_type_ids][]" value="<%= id %>" />
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>

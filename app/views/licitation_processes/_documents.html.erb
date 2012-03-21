@@ -1,0 +1,37 @@
+<div class="yui3-g modal-finder">
+  <div class="yui3-u-1-2">
+    <%= f.association :document_types, :as => :modal, :hidden_field => false, :input_html => { :value => nil } %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[document_type_ids][]" />
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= DocumentType.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= DocumentType.human_attribute_name :description %>
+      </th>
+      <th>
+        <%= DocumentType.human_attribute_name :validity %>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_document_types_records">
+    <% f.object.document_types.each do |document_type| %>
+      <%= render 'document_types/list_form', :description => document_type.description, :id => document_type.id, :validity => document_type.validity, :f => f %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_document_types_template" do %>
+  <%= f.association :document_types, :collection => f.object.document_types.build do |p| %>
+    <%= render 'document_types/list_form', :validity => '{{validity}}', :description => '{{description}}', :id => '{{id}}', :f => f %>
+  <% end %>
+<% end %>

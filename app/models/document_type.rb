@@ -1,6 +1,8 @@
 class DocumentType < ActiveRecord::Base
   attr_accessible :validity, :description
 
+  has_and_belongs_to_many :licitation_processes
+
   has_many :provider_licitation_documents, :dependent => :restrict
 
   validates :validity, :description, :presence => true
