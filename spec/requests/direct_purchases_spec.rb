@@ -104,6 +104,8 @@ feature "DirectPurchases" do
       page.should have_field 'Quantidade', :with => '3'
       page.should have_field 'Valor unitário', :with => '200,00'
       page.should have_field 'Valor total', :with => '600,00'
+
+      page.should have_field 'Item', :with => '1'
     end
   end
 
@@ -483,6 +485,50 @@ feature "DirectPurchases" do
       end
 
       page.should have_field 'Total em itens', :with => '30,00'
+    end
+  end
+
+  scenario 'set sequencial item order' do
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    click_link 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+
+      within 'fieldset:first' do
+        click_button 'Adicionar Item'
+
+        within '.item:first' do
+          page.should have_field 'Item', :with => '1'
+        end
+
+        click_button 'Adicionar Item'
+
+        within '.item:last' do
+          page.should have_field 'Item', :with => '2'
+        end
+      end
+
+      click_button 'Adicionar Dotação'
+
+      within 'fieldset:last' do
+        click_button 'Adicionar Item'
+
+        within '.item:first' do
+          page.should have_field 'Item', :with => '1'
+        end
+      end
+
+      within 'fieldset:first' do
+        within '.item:first' do
+          click_button 'Remover Item'
+        end
+
+        page.should have_field 'Item', :with => '1'
+      end
     end
   end
 

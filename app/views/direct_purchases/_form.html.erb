@@ -47,6 +47,14 @@
     }
   });
 
+  function calcItemOrder() {
+    $('fieldset.direct-purchase-budget-allocation').each(function(index, item){
+      $(this).find('.item .destroy[value=false]').each(function(index, item){
+        $(this).parent().find('.order').val(index+1);
+      });
+    });
+  }
+
   function calculateItemsTotalValue() {
     var total = 0,
     value;
@@ -81,6 +89,7 @@
 
   $('form.direct_purchase').delegate('.remove-direct-purchase-budget-allocation, .remove-item', 'click', function() {
     calculateItemsTotalValue();
+    calcItemOrder();
   });
 
   // Licitation exemptions
@@ -139,9 +148,12 @@
 
   $('form.direct_purchase').bind('append.mustache', function(){
     setMaterialsModalUrl();
+    calcItemOrder();
   });
 
   $('#direct_purchase_licitation_object_id').change(function() {
     setMaterialsModalUrl();
   });
+
+  calcItemOrder();
 </script>
