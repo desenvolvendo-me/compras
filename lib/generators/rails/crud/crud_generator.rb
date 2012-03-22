@@ -106,7 +106,7 @@ module Rails
       end
 
       def available_views
-        %w(_form.html.erb _list.html.erb)
+        %w(_form.html.erb)
       end
 
       def associations?
