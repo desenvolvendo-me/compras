@@ -17,6 +17,7 @@ describe AdditionalCreditOpening do
   it { should validate_presence_of :credit_type }
   it { should validate_presence_of :administractive_act }
   it { should validate_presence_of :credit_date }
+  it { should validate_presence_of :additional_credit_opening_nature }
 
   context 'validating credit date' do
     context 'with last' do

@@ -9,6 +9,7 @@ feature "AdditionalCreditOpenings" do
   scenario 'create a new additional_credit_opening' do
     Entity.make!(:detran)
     AdministractiveAct.make!(:sopa)
+    AdditionalCreditOpeningNature.make!(:abre_credito)
 
     click_link 'Contabilidade'
 
@@ -19,6 +20,7 @@ feature "AdditionalCreditOpenings" do
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => 2012
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+    fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
     fill_in 'Data crédito', :with => '01/03/2012'
 
     select 'Especial', :from => 'Tipo de crédito'
@@ -35,6 +37,8 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Ato regulamentador', :with => '1234'
     page.should have_field 'Tipo de ato regulamentador', :with => 'Lei'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
+    page.should have_field 'Natureza de crédito', :with => 'Abre crédito suplementar'
+    page.should have_field 'Classificação da natureza de crédito', :with => 'Outros'
     page.should have_field 'Data crédito', :with => '01/03/2012'
   end
 
@@ -53,10 +57,25 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Data de publicação', :with => '02/01/2012'
   end
 
+  scenario 'when fill additional credit opening should fill kind too' do
+    AdditionalCreditOpeningNature.make!(:abre_credito)
+
+    click_link 'Contabilidade'
+
+    click_link 'Aberturas de Créditos Suplementares'
+
+    click_link 'Criar Abertura de Créditos Suplementares'
+
+    fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
+
+    page.should have_field 'Classificação da natureza de crédito', :with => 'Outros'
+  end
+
   scenario 'update an existent additional_credit_opening' do
     Entity.make!(:secretaria_de_educacao)
     AdministractiveAct.make!(:emenda)
     AdditionalCreditOpening.make!(:detran_2012)
+    AdditionalCreditOpeningNature.make!(:abre_credito_de_transferencia)
 
     click_link 'Contabilidade'
 
@@ -68,6 +87,7 @@ feature "AdditionalCreditOpenings" do
     fill_in 'Exercício', :with => 2011
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     select 'Suplementar', :from => 'Tipo de crédito'
+    fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar de transferência', :field => 'Descrição'
     fill_in 'Data crédito', :with => '21/03/2012'
 
     click_button 'Atualizar Abertura de Créditos Suplementares'
@@ -81,6 +101,8 @@ feature "AdditionalCreditOpenings" do
     page.should have_select 'Tipo de crédito', :selected => 'Suplementar'
     page.should have_field 'Ato regulamentador', :with => '4567'
     page.should have_field 'Tipo de ato regulamentador', :with => 'Emenda constitucional'
+    page.should have_field 'Natureza de crédito', :with => 'Abre crédito suplementar de transferência'
+    page.should have_field 'Classificação da natureza de crédito', :with => 'Transferência'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
     page.should have_field 'Data crédito', :with => '21/03/2012'
   end

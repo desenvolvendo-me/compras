@@ -23,6 +23,17 @@
 </div>
 
 <%= f.input :credit_type %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :additional_credit_opening_nature %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :kind, :disabled => true, :input_html => { :value => f.object.kind_humanize } %>
+  </div>
+</div>
+
 <%= f.input :credit_date %>
 
 <script type="text/javascript">
@@ -31,6 +42,13 @@
       var record = data.record;
       $('#additional_credit_opening_administractive_act_type').val(record.data('administractive-act-type'));
       $('#additional_credit_opening_publication_date').val(record.data('publication-date'));
+    }
+  });
+
+  $('form.additional_credit_opening').delegate('#additional_credit_opening_additional_credit_opening_nature_id', 'change', function (event, data) {
+    if (data) {
+      var record = data.record;
+      $('#additional_credit_opening_kind').val(record.data('kind'));
     }
   });
 </script>
