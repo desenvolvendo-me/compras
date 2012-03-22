@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_budget_allocation:
+        one: "Dotação"
+        other: "Dotações"
+
+    attributes:
+      licitation_process_budget_allocation:
+        budget_allocation: "Dotação orçamentária"
+        description: "Descrição"
+        expense_economic_classification: "Compl. do elemento"
+        amount: "Saldo da dotação"
+        estimated_value: "Valor previsto"
+        pledge_type: "Tipo de empenho"

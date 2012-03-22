@@ -1,0 +1,28 @@
+<fieldset class="licitation-process-budget-allocation contrasted">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <%= f.input :budget_allocation, :input_html => { :size => 40, :class => 'budget-allocation' } %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :expense_economic_classification, :disabled => true, :input_html => { :class => 'classification' } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+    <%= f.input :amount, :disabled => true, :input_html => { :class => 'amount', :value => number_with_precision(f.object.amount) } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+    <%= f.input :estimated_value %>
+    </div>
+
+    <div class="yui3-u-1-4">
+    <%= f.input :pledge_type %>
+    </div>
+  </div>
+
+  <div class="nested-remove">
+    <input type="button" class="button negative remove-licitation-process-budget-allocation" value="Remover Dotação">
+  </div>
+</fieldset>

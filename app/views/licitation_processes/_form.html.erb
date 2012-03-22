@@ -2,6 +2,7 @@
   <ul>
     <li><a href="#general">Dados gerais</a></li>
     <li><a href="#documents">Documentos</a></li>
+    <li><a href="#budget_allocations">Dotações orçamentárias</a></li>
   </ul>
 
   <div id="general">
@@ -10,6 +11,10 @@
 
   <div id="documents">
     <%= render 'documents', :f => f %>
+  </div>
+
+  <div id="budget_allocations">
+    <%= render 'budget_allocations', :f => f %>
   </div>
 </div>
 
@@ -58,6 +63,15 @@
       $('#licitation_process_administrative_process_responsible').val('');
       $('#licitation_process_administrative_process_item').val('');
       $('#licitation_process_modality').val('');
+    }
+  });
+
+  $('form.licitation_process').delegate('.budget-allocation', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $(this).closest('fieldset').find('.classification').val(record.data("expense_economic_classification"));
+      $(this).closest('fieldset').find('.amount').val(record.data("amount"));
     }
   });
 </script>

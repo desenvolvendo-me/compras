@@ -12,6 +12,7 @@ feature "LicitationProcesses" do
     Period.make!(:um_ano)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
+    allocation = BudgetAllocation.make!(:alocacao)
 
     click_link 'Processos Administrativos'
 
@@ -66,6 +67,17 @@ feature "LicitationProcesses" do
 
     within_tab 'Documentos' do
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+      fill_in 'Valor previsto', :with => '50,00'
+      select 'Global', :from => 'Tipo de empenho'
+
+      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
     end
 
     click_button 'Criar Processo Licitatório'
@@ -133,6 +145,14 @@ feature "LicitationProcesses" do
       page.should have_content 'Fiscal'
       page.should have_content '10'
     end
+
+    within_tab 'Dotações' do
+      page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2012 - Alocação"
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Valor previsto', :with => '50,00'
+      page.should have_select 'Tipo de empenho', :selecte => 'Global'
+    end
   end
 
   scenario 'update an existent licitation_process' do
@@ -142,6 +162,7 @@ feature "LicitationProcesses" do
     Period.make!(:tres_meses)
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
+    allocation = BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Processos Administrativos'
 
@@ -176,6 +197,18 @@ feature "LicitationProcesses" do
       click_button 'Remover'
 
       fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações' do
+      click_button 'Remover Dotação'
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
+      fill_in 'Valor previsto', :with => '70,00'
+      select 'Ordinário', :from => 'Tipo de empenho'
+
+      page.should have_field 'Saldo da dotação', :with => '200,00'
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
     end
 
     click_button 'Atualizar Processo Licitatório'
@@ -213,6 +246,14 @@ feature "LicitationProcesses" do
 
       page.should have_content 'Oficial'
       page.should have_content '20'
+    end
+
+    within_tab 'Dotações' do
+      page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2011 - Alocação extra"
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Saldo da dotação', :with => '200,00'
+      page.should have_field 'Valor previsto', :with => '70,00'
+      page.should have_select 'Tipo de empenho', :selecte => 'Ordinário'
     end
   end
 

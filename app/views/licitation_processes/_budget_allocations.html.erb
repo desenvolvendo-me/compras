@@ -1,0 +1,24 @@
+<div id="budget-allocations">
+  <%= f.association :licitation_process_budget_allocations, :collection => localized(f.object.licitation_process_budget_allocations) do |p| %>
+    <%= render 'licitation_process_budget_allocations/form', :f => p %>
+  <% end %>
+
+  <%= mustache 'licitation-process-budget-allocations-template' do %>
+    <%= f.association :licitation_process_budget_allocations_attributes, :collection => f.object.licitation_process_budget_allocations.build, :index => '{{uuid_licitation_process_budget_allocation}}' do |p| %>
+      <%= render 'licitation_process_budget_allocations/form', :f => p %>
+    <% end %>
+  <% end %>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-licitation-process-budget-allocation" value="Adicionar Dotação">
+</p>
+
+<script>
+  $("#licitation-process-budget-allocations-template").nestedForm({
+    add: '.add-licitation-process-budget-allocation',
+    remove: '.remove-licitation-process-budget-allocation',
+    target: '#budget-allocations',
+    uuid: 'uuid_licitation_process_budget_allocation'
+  });
+</script>
