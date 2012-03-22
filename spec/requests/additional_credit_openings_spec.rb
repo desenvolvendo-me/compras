@@ -82,7 +82,7 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Ato regulamentador', :with => '4567'
     page.should have_field 'Tipo de ato regulamentador', :with => 'Emenda constitucional'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
-    # page.should have_field 'Data crédito', :with => '01/04/2012'
+    page.should have_field 'Data crédito', :with => '21/03/2012'
   end
 
   scenario 'validate uniqueness of administractive act' do
