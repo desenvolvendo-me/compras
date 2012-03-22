@@ -13,6 +13,7 @@ require 'app/models/reserve_fund'
 require 'app/models/founded_debt_contract'
 require 'app/models/creditor'
 require 'app/models/subfunction'
+require 'app/models/management_contract'
 require 'app/models/additional_credit_opening'
 
 describe Entity do
