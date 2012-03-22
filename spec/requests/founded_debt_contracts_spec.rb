@@ -27,7 +27,7 @@ feature "FoundedDebtContracts" do
 
     page.should have_notice 'Contrato de Dívida Fundada criado com sucesso.'
 
-    click_link '101'
+    click_link '2012'
 
     page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Entidade', :with => 'Detran'
@@ -39,14 +39,14 @@ feature "FoundedDebtContracts" do
   end
 
   scenario 'update an existent founded_debt_contract' do
-    FoundedDebtContract.make!(:contrato_detran)
+    founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
     Entity.make!(:secretaria_de_educacao)
 
     click_link 'Contabilidade'
 
     click_link 'Contratos de Dívida Fundada'
 
-    click_link '101'
+    click_link '2012'
 
     fill_in 'Exercício', :with => '2011'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
@@ -60,7 +60,7 @@ feature "FoundedDebtContracts" do
 
     page.should have_notice 'Contrato de Dívida Fundada editado com sucesso.'
 
-    click_link '100'
+    click_link "#{founded_debt_contract.id}/2011"
 
     page.should have_field 'Exercício', :with => '2011'
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
@@ -78,7 +78,7 @@ feature "FoundedDebtContracts" do
 
     click_link 'Contratos de Dívida Fundada'
 
-    click_link '101'
+    click_link "#{founded_debt_contract.id}/#{founded_debt_contract.year}"
 
     click_link "Apagar #{founded_debt_contract.id}/2012", :confirm => true
 

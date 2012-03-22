@@ -3,9 +3,9 @@ require 'app/models/user'
 require 'app/models/bookmark'
 
 describe User do
-  it "return name on to_s" do
-    subject.stub_chain(:employee, :name).and_return('Gabriel Sobrino')
-    subject.to_s.should eq 'Gabriel Sobrino'
+  it "return login on to_s" do
+    subject.stub(:login).and_return('gabriel.sobrinho')
+    subject.to_s.should eq 'gabriel.sobrinho'
   end
 
   it "require password" do

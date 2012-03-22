@@ -315,12 +315,11 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    new_licitation_link = (licitation_process.id+1).to_s
-    click_link new_licitation_link
+    click_link "#{licitation_process.process}/2012"
 
     within_tab 'Dados gerais' do
-      page.should have_field 'Processo', :with => '2'
-      page.should have_field 'Número da licitação', :with => '2'
+      page.should have_field 'Processo', :with => licitation_process.process.to_s
+      page.should have_field 'Número da licitação', :with => licitation_process.licitation_number.to_s
     end
   end
 end

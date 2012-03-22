@@ -335,8 +335,8 @@ feature "DirectPurchases" do
   end
 
   scenario 'should filter by year' do
-    DirectPurchase.make!(:compra_nao_autorizada)
-    DirectPurchase.make!(:compra_2011)
+    year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
+    year_2011 = DirectPurchase.make!(:compra_2011)
 
     click_link 'Solicitações'
 
@@ -348,13 +348,15 @@ feature "DirectPurchases" do
 
     click_button 'Pesquisar'
 
-    page.should have_content '11/11/2011'
-    page.should_not have_content '01/12/2012'
+    within_records do
+      page.should have_content year_2011.id
+      page.should_not have_content year_2012.id
+    end
   end
 
   scenario 'should filter by date' do
-    DirectPurchase.make!(:compra_nao_autorizada)
-    DirectPurchase.make!(:compra_2011)
+    year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
+    year_2011 = DirectPurchase.make!(:compra_2011)
 
     click_link 'Solicitações'
 
@@ -366,13 +368,15 @@ feature "DirectPurchases" do
 
     click_button 'Pesquisar'
 
-    page.should have_content '11/11/2011'
-    page.should_not have_content '01/12/2012'
+    within_records do
+      page.should have_content year_2011.id
+      page.should_not have_content year_2012.id
+    end
   end
 
   scenario 'should filter by modality' do
-    DirectPurchase.make!(:compra_nao_autorizada)
-    DirectPurchase.make!(:compra_2011)
+    year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
+    year_2011 = DirectPurchase.make!(:compra_2011)
 
     click_link 'Solicitações'
 
@@ -384,13 +388,16 @@ feature "DirectPurchases" do
 
     click_button 'Pesquisar'
 
-    page.should have_content '11/11/2011'
-    page.should_not have_content '01/12/2012'
+    within_records do
+      page.should have_content year_2011.id
+      page.should_not have_content year_2012.id
+    end
   end
 
   scenario 'should filter by status when authorized' do
     SupplyAuthorization.make!(:compra_2012)
-    DirectPurchase.make!(:compra_2011)
+    year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
+    year_2011 = DirectPurchase.make!(:compra_2011)
 
     click_link 'Solicitações'
 
@@ -402,13 +409,16 @@ feature "DirectPurchases" do
 
     click_button 'Pesquisar'
 
-    page.should_not have_content '11/11/2011'
-    page.should have_content '01/12/2012'
+    within_records do
+      page.should_not have_content year_2011.id
+      page.should have_content year_2012.id
+    end
   end
 
   scenario 'should filter by status when not authorized' do
     SupplyAuthorization.make!(:compra_2012)
-    DirectPurchase.make!(:compra_2011)
+    year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
+    year_2011 = DirectPurchase.make!(:compra_2011)
 
     click_link 'Solicitações'
 
@@ -420,8 +430,10 @@ feature "DirectPurchases" do
 
     click_button 'Pesquisar'
 
-    page.should have_content '11/11/2011'
-    page.should_not have_content '01/12/2012'
+    within_records do
+      page.should have_content year_2011.id
+      page.should_not have_content year_2012.id
+    end
   end
 
   scenario 'calculate total value of items' do

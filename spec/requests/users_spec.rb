@@ -77,7 +77,7 @@ feature "Users" do
 
     click_link 'wenderson.malheiros'
 
-    click_link 'Apagar Wenderson Malheiros', :confirm => true
+    click_link 'Apagar wenderson.malheiros', :confirm => true
 
     page.should have_notice 'Usuário apagado com sucesso.'
 
