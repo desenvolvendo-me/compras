@@ -85,8 +85,8 @@
 
   function calcItemOrder() {
     $('fieldset.licitation-process-budget-allocation').each(function(index, item){
-      $(this).find('.item .destroy[value=false]').each(function(index, item){
-        $(this).parent().find('.order').val(index+1);
+      $(this).find('.item .hidden .destroy[value=false]').each(function(index, item){
+        $(this).parent().parent().find('.order').val(index + 1);
       });
     });
   }
