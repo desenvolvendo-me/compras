@@ -24,7 +24,6 @@ class Material < ActiveRecord::Base
   has_many :licitation_process_budget_allocation_items, :dependent => :restrict
 
   delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
-  delegate :stn_ordinance, :stn_ordinance_id, :to => :expense_economic_classification, :allow_nil => true
 
   validates :materials_group, :materials_class, :reference_unit, :presence => true
   validates :material_characteristic, :presence => true
