@@ -17,7 +17,7 @@ feature "Creditors" do
 
     fill_in 'Nome', :with => 'Nohup LTDA.'
     fill_modal 'Entidade', :with => 'Detran'
-    select 'Ativo', :from => 'Estado'
+    select 'Ativo', :from => 'Status'
 
     click_button 'Criar Credor'
 
@@ -27,7 +27,7 @@ feature "Creditors" do
 
     page.should have_field 'Nome', :with => 'Nohup LTDA.'
     page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_select 'Estado', :selected => 'Ativo'
+    page.should have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent creditor' do
@@ -42,7 +42,7 @@ feature "Creditors" do
 
     fill_in 'Nome', :with => 'Nobe'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    select 'Inativo', :from => 'Estado'
+    select 'Inativo', :from => 'Status'
 
     click_button 'Atualizar Credor'
 
@@ -52,7 +52,7 @@ feature "Creditors" do
 
     page.should have_field 'Nome', :with => 'Nobe'
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-    page.should have_select 'Estado', :selected => 'Inativo'
+    page.should have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent creditor' do
@@ -70,6 +70,6 @@ feature "Creditors" do
 
     page.should_not have_field 'Nome', :with => 'Nohup LTDA.'
     page.should_not have_field 'Entidade', :with => 'Detran'
-    page.should_not have_select 'Estado', :selected => 'Ativo'
+    page.should_not have_select 'Status', :selected => 'Ativo'
   end
 end
