@@ -15,6 +15,7 @@ class Entity < ActiveRecord::Base
   has_many :founded_debt_contracts, :dependent => :restrict
   has_many :creditors, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
+  has_many :additional_credit_openings, :dependent => :restrict
 
   validates :name, :presence => true
   validates :name, :uniqueness => true
