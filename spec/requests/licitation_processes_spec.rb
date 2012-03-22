@@ -13,6 +13,7 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     allocation = BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
 
     click_link 'Processos'
 
@@ -78,6 +79,19 @@ feature "LicitationProcesses" do
 
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      # getting data from modal
+      page.should have_field 'Unidade', :with => 'Unidade'
+
+      fill_in 'Quantidade', :with => '3'
+      fill_in 'Valor unitário', :with => '200,00'
+
+      # asserting calculated total price of the item
+      page.should have_field 'Valor total', :with => '600,00'
     end
 
     click_button 'Criar Processo Licitatório'
@@ -152,6 +166,14 @@ feature "LicitationProcesses" do
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '50,00'
       page.should have_select 'Tipo de empenho', :selecte => 'Global'
+
+      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Quantidade', :with => '3'
+      page.should have_field 'Valor unitário', :with => '200,00'
+      page.should have_field 'Valor total', :with => '600,00'
+
+      page.should have_field 'Item', :with => '1'
     end
   end
 
@@ -163,6 +185,7 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
     allocation = BudgetAllocation.make!(:alocacao_extra)
+    Material.make!(:arame_farpado)
 
     click_link 'Processos'
 
@@ -209,6 +232,19 @@ feature "LicitationProcesses" do
 
       page.should have_field 'Saldo da dotação', :with => '200,00'
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
+
+      # getting data from modal
+      page.should have_field 'Unidade', :with => 'Unidade'
+
+      fill_in 'Quantidade', :with => '100'
+      fill_in 'Valor total', :with => '200,00'
+
+      # asserting calculated unit price of the item
+      page.should have_field 'Valor unitário', :with => '2,00'
     end
 
     click_button 'Atualizar Processo Licitatório'
@@ -254,6 +290,14 @@ feature "LicitationProcesses" do
       page.should have_field 'Saldo da dotação', :with => '200,00'
       page.should have_field 'Valor previsto', :with => '70,00'
       page.should have_select 'Tipo de empenho', :selecte => 'Ordinário'
+
+      page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Quantidade', :with => '100'
+      page.should have_field 'Valor unitário', :with => '2,00'
+      page.should have_field 'Valor total', :with => '200,00'
+
+      page.should have_field 'Item', :with => '1'
     end
   end
 
