@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     models:
       additional_credit_opening:
-        one: "Abertura de Créditos Suplementares"
+        one: "Abertura de Crédito Suplementar"
         other: "Aberturas de Créditos Suplementares"
 
     attributes:

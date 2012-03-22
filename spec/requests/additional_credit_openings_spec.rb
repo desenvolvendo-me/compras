@@ -15,7 +15,7 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Aberturas de Créditos Suplementares'
 
-    click_link 'Criar Abertura de Créditos Suplementares'
+    click_link 'Criar Abertura de Crédito Suplementar'
 
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => 2012
@@ -25,9 +25,9 @@ feature "AdditionalCreditOpenings" do
 
     select 'Especial', :from => 'Tipo de crédito'
 
-    click_button 'Criar Abertura de Créditos Suplementares'
+    click_button 'Criar Abertura de Crédito Suplementar'
 
-    page.should have_notice 'Abertura de Créditos Suplementares criado com sucesso.'
+    page.should have_notice 'Abertura de Crédito Suplementar criado com sucesso.'
 
     click_link '2012'
 
@@ -49,7 +49,7 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Aberturas de Créditos Suplementares'
 
-    click_link 'Criar Abertura de Créditos Suplementares'
+    click_link 'Criar Abertura de Crédito Suplementar'
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
@@ -64,7 +64,7 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Aberturas de Créditos Suplementares'
 
-    click_link 'Criar Abertura de Créditos Suplementares'
+    click_link 'Criar Abertura de Crédito Suplementar'
 
     fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
 
@@ -90,9 +90,9 @@ feature "AdditionalCreditOpenings" do
     fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar de transferência', :field => 'Descrição'
     fill_in 'Data crédito', :with => '21/03/2012'
 
-    click_button 'Atualizar Abertura de Créditos Suplementares'
+    click_button 'Atualizar Abertura de Crédito Suplementar'
 
-    page.should have_notice 'Abertura de Créditos Suplementares editado com sucesso.'
+    page.should have_notice 'Abertura de Crédito Suplementar editado com sucesso.'
 
     click_link '2011'
 
@@ -114,11 +114,11 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Aberturas de Créditos Suplementares'
 
-    click_link 'Criar Abertura de Créditos Suplementares'
+    click_link 'Criar Abertura de Crédito Suplementar'
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-    click_button 'Criar Abertura de Créditos Suplementares'
+    click_button 'Criar Abertura de Crédito Suplementar'
 
     page.should have_content 'já utilizado em outra abertura de créditos suplementares'
   end
@@ -134,7 +134,7 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Apagar 2012', :confirm => true
 
-    page.should have_notice 'Abertura de Créditos Suplementares apagado com sucesso.'
+    page.should have_notice 'Abertura de Crédito Suplementar apagado com sucesso.'
 
     page.should_not have_content 'Detran'
     page.should_not have_content '2012'
