@@ -8,6 +8,7 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'create a new additional_credit_opening' do
     Entity.make!(:detran)
+    AdministractiveAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
@@ -17,6 +18,8 @@ feature "AdditionalCreditOpenings" do
 
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => 2012
+    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
     select 'Especial', :from => 'Tipo de crédito'
 
     click_button 'Criar Abertura de Créditos Suplementares'
@@ -28,10 +31,29 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Exercício', :with => '2012'
     page.should have_select 'Tipo de crédito', :selected => 'Especial'
+    page.should have_field 'Ato regulamentador', :with => '1234'
+    page.should have_field 'Tipo de ato regulamentador', :with => 'Lei'
+    page.should have_field 'Data de publicação', :with => '02/01/2012'
+  end
+
+  scenario 'when fill administractive act should fill administractive_act_type and publication_date too' do
+    AdministractiveAct.make!(:sopa)
+
+    click_link 'Contabilidade'
+
+    click_link 'Aberturas de Créditos Suplementares'
+
+    click_link 'Criar Abertura de Créditos Suplementares'
+
+    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
+    page.should have_field 'Tipo de ato regulamentador', :with => 'Lei'
+    page.should have_field 'Data de publicação', :with => '02/01/2012'
   end
 
   scenario 'update an existent additional_credit_opening' do
     Entity.make!(:secretaria_de_educacao)
+    AdministractiveAct.make!(:emenda)
     AdditionalCreditOpening.make!(:detran_2012)
 
     click_link 'Contabilidade'
@@ -42,6 +64,7 @@ feature "AdditionalCreditOpenings" do
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Exercício', :with => 2011
+    fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     select 'Suplementar', :from => 'Tipo de crédito'
 
     click_button 'Atualizar Abertura de Créditos Suplementares'
@@ -53,6 +76,25 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Exercício', :with => '2011'
     page.should have_select 'Tipo de crédito', :selected => 'Suplementar'
+    page.should have_field 'Ato regulamentador', :with => '4567'
+    page.should have_field 'Tipo de ato regulamentador', :with => 'Emenda constitucional'
+    page.should have_field 'Data de publicação', :with => '02/01/2012'
+  end
+
+  scenario 'validate uniqueness of administractive act' do
+    AdditionalCreditOpening.make!(:detran_2012)
+
+    click_link 'Contabilidade'
+
+    click_link 'Aberturas de Créditos Suplementares'
+
+    click_link 'Criar Abertura de Créditos Suplementares'
+
+    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
+    click_button 'Criar Abertura de Créditos Suplementares'
+
+    page.should have_content 'já utilizado em outra abertura de créditos suplementares'
   end
 
   scenario 'destroy an existent additional_credit_opening' do

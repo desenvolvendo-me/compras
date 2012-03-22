@@ -8,4 +8,28 @@
   </div>
 </div>
 
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :administractive_act %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :administractive_act_type, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :publication_date, :disabled => true, :input_html => { :value => (l(f.object.publication_date) if f.object.publication_date) } %>
+  </div>
+</div>
+
 <%= f.input :credit_type %>
+
+<script type="text/javascript">
+  $('form.additional_credit_opening').delegate('#additional_credit_opening_administractive_act_id', 'change', function (event, data) {
+    if (data) {
+      var record = data.record;
+      $('#additional_credit_opening_administractive_act_type').val(record.data('administractive-act-type'));
+      $('#additional_credit_opening_publication_date').val(record.data('publication-date'));
+    }
+  });
+</script>

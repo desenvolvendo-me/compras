@@ -207,6 +207,7 @@ pt-BR:
       taken_for_administractive_act: "já existe para o ato regulamentador informado"
       must_be_equal_as_licitation_object: "deve pertencer ao objeto de licitação selecionado"
       must_be_greather_or_equal_to_last_date: "deve ser maior ou igual a data da última reserva (%{restriction})"
+      must_be_uniqueness_on_additional_credit_opening: "já utilizado em outra abertura de créditos suplementares"
       should_not_exceed_reserved_value: "está acima do valor disponível para a dotação selecionada"
       must_not_be_greather_than_budget_allocation_real_amount: "não pode ser maior do que o saldo da dotação"
       cannot_be_greater_than_licitation_exemption: "não pode ser superior à dispensa de licitação"
