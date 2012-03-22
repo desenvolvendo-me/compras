@@ -10,7 +10,7 @@ pt-BR:
         process: "Processo"
         year: "Ano"
         process_date: "Data do processo"
-        administrative_process: "Número do processo administrativo"
+        administrative_process: "Processo administrativo"
         object_description: "Detalhamento do objeto"
         capability: "Fonte de recurso"
         expiration: "Validade da proposta"

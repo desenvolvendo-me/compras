@@ -33,7 +33,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
-      fill_modal 'Número do processo administrativo', :with => '1', :field => 'Processo'
+      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
 
       # testing delegated fields of administrative process (filled by javascript)
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
@@ -83,7 +83,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Processo', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '21/03/2012'
-      page.should have_field 'Número do processo administrativo', :with => '1/2012'
+      page.should have_field 'Processo administrativo', :with => '1/2012'
 
       # testing delegated fields of administrative process
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
@@ -117,7 +117,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Abrev. modalidade', :with => 'PP'
 
       # testing that delegated fields are cleaned when administrative proccess is cleaned
-      clear_modal 'Número do processo administrativo'
+      clear_modal 'Processo administrativo'
 
       page.should have_field 'Unidade orçamentária', :with => ''
       page.should have_field 'Modalidade', :with => ''
@@ -153,7 +153,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dados gerais' do
       fill_in 'Data do processo', :with => '21/03/2013'
-      fill_modal 'Número do processo administrativo', :with => '2013', :field => 'Ano'
+      fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       fill_in 'Detalhamento do objeto', :with => 'novo detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10 dias'
@@ -188,7 +188,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dados gerais' do
       page.should have_field 'Data do processo', :with => '21/03/2013'
-      page.should have_field 'Número do processo administrativo', :with => '1/2013'
+      page.should have_field 'Processo administrativo', :with => '1/2013'
       page.should have_field 'Detalhamento do objeto', :with => 'novo detalhamento'
       page.should have_field 'Fonte de recurso', :with => 'Construção'
       page.should have_field 'Validade da proposta', :with => '10 dias'
@@ -251,7 +251,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/04/2012'
-      fill_modal 'Número do processo administrativo', :with => '1', :field => 'Processo'
+      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
