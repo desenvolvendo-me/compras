@@ -207,8 +207,6 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    page.should have_button 'Gerar autorização de fornecimento'
-
     click_button 'Gerar autorização de fornecimento'
 
     page.should have_content 'Autorização de Fornecimento'
