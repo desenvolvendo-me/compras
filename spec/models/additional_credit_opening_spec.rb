@@ -8,6 +8,8 @@ describe AdditionalCreditOpening do
     subject.to_s.should eq '2012'
   end
 
+  it { should belong_to :entity }
+
   it { should allow_value(2012).for(:year) }
   it { should_not allow_value(212).for(:year) }
   it { should_not allow_value('2a12').for(:year) }
