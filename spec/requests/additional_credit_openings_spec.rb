@@ -19,6 +19,7 @@ feature "AdditionalCreditOpenings" do
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => 2012
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+    fill_in 'Data crédito', :with => '01/03/2012'
 
     select 'Especial', :from => 'Tipo de crédito'
 
@@ -34,6 +35,7 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Ato regulamentador', :with => '1234'
     page.should have_field 'Tipo de ato regulamentador', :with => 'Lei'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
+    page.should have_field 'Data crédito', :with => '01/03/2012'
   end
 
   scenario 'when fill administractive act should fill administractive_act_type and publication_date too' do
@@ -66,6 +68,7 @@ feature "AdditionalCreditOpenings" do
     fill_in 'Exercício', :with => 2011
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     select 'Suplementar', :from => 'Tipo de crédito'
+    fill_in 'Data crédito', :with => '21/03/2012'
 
     click_button 'Atualizar Abertura de Créditos Suplementares'
 
@@ -79,6 +82,7 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Ato regulamentador', :with => '4567'
     page.should have_field 'Tipo de ato regulamentador', :with => 'Emenda constitucional'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
+    # page.should have_field 'Data crédito', :with => '01/04/2012'
   end
 
   scenario 'validate uniqueness of administractive act' do
