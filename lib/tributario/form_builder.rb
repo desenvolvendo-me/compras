@@ -16,29 +16,39 @@ module Tributario
     end
 
     def input(attribute_name, options = {}, &block)
-      if reflection = find_association_reflection(attribute_name)
-        if reflection.macro == :belongs_to
-          attribute_name = reflection.options[:foreign_key] || :"#{reflection.name}_id"
-        else
-          raise "#{reflection.macro.inspect} associations are not supported by f.input"
-        end
+      return super if options[:as]
 
-        options.reverse_merge!(:as => :modal, :reflection => reflection)
-      elsif collection = find_enumeration_reflection(attribute_name)
-        options.reverse_merge!(:as => :select, :collection => collection)
+      if find_association_reflection(attribute_name)
+        association(attribute_name, options, &block)
+      elsif find_enumeration_reflection(attribute_name)
+        enumeration(attribute_name, options, &block)
+      else
+        super
       end
-
-      super
     end
 
     def find_enumeration_reflection(attribute_name)
-      object.class.enumerations[attribute_name.to_sym] if object.class.respond_to?(:enumerations)
+      return unless object.class.respond_to?(:enumerations)
+
+      object.class.enumerations[attribute_name]
+    end
+
+    def association(association, options = {}, &block)
+      options[:as] ||= 'modal'
+      super
+    end
+
+    def enumeration(attribute_name, options = {}, &block)
+      options[:as]         ||= :select
+      options[:collection] ||= find_enumeration_reflection(attribute_name).to_a
+
+      input(attribute_name, options, &block)
     end
 
     def submit_button(value = nil, options = {})
       value, options = nil, value if value.is_a?(Hash)
 
-      options[:class]   = "#{options[:class]} primary".strip
+      options[:class]   = "#{options[:class].join(" ")} primary".strip
       options[:id]    ||= "#{object_name}_submit"
 
       submit(value, options)
@@ -49,7 +59,7 @@ module Tributario
 
       value ||= template.translate('.destroy', :cascade => true, :resource => object)
 
-      options[:class]     = "#{options[:class]} negative".strip
+      options[:class]     = "#{options[:class].join(" ")} negative".strip
       options[:href]    ||= template.resource_url
       options[:method]  ||= :delete
       options[:confirm] ||= template.translate('.are_you_sure', :cascade => true, :resource => object)
@@ -63,7 +73,7 @@ module Tributario
 
       value ||= template.translate('.cancel', :cascade => true)
 
-      options[:class]   = "#{options[:class]} secondary".strip
+      options[:class]   = "#{options[:class].join(" ")} secondary".strip
       options[:href]  ||= template.smart_collection_url
       options[:id]    ||= "#{object_name}_cancel"
 

@@ -3,6 +3,7 @@ module ApplicationHelper
   def simple_form_for(object, *args, &block)
     options = args.extract_options!
     options[:builder] ||= Tributario::FormBuilder
+    options[:html] = { :class => dom_class(resource) }
 
     super(object, *(args << options), &block)
   end
