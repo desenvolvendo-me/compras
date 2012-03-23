@@ -14,6 +14,7 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
+    Provider.make!(:wenderson_sa)
 
     click_link 'Processos'
 
@@ -101,6 +102,15 @@ feature "LicitationProcesses" do
       fill_in "Data da publicação", :with => '20/04/2012'
       select "Edital", :from => "Publicação do(a)"
       select "Internet", :from => "Tipo de circulação do veículo de comunicação"
+    end
+
+    within_tab 'Licitantes convidados' do
+      click_button 'Adicionar Licitante'
+
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+      fill_in 'Protocolo', :with => '123456'
+      fill_in 'Data do protocolo', :with => I18n.l(Date.current)
+      fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
     end
 
     click_button 'Criar Processo Licitatório'
@@ -191,6 +201,13 @@ feature "LicitationProcesses" do
       page.should have_select 'Publicação do(a)', :selected => 'Edital'
       page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Internet'
     end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      page.should have_field 'Protocolo', :with => '123456'
+      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
+      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    end
   end
 
   scenario 'update an existent licitation_process' do
@@ -202,6 +219,7 @@ feature "LicitationProcesses" do
     DocumentType.make!(:oficial)
     allocation = BudgetAllocation.make!(:alocacao_extra)
     Material.make!(:arame_farpado)
+    Provider.make!(:sobrinho_sa)
 
     click_link 'Processos'
 
@@ -273,6 +291,16 @@ feature "LicitationProcesses" do
       select "Mural público", :from => "Tipo de circulação do veículo de comunicação"
     end
 
+    within_tab 'Licitantes convidados' do
+      click_button 'Remover Licitante'
+      click_button 'Adicionar Licitante'
+
+      fill_modal 'Fornecedor', :with => '123456', :field => 'Número'
+      fill_in 'Protocolo', :with => '111111'
+      fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
+      fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+    end
+
     click_button 'Atualizar Processo Licitatório'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
@@ -333,6 +361,15 @@ feature "LicitationProcesses" do
       page.should have_field 'Data da publicação', :with => '20/04/2013'
       page.should have_select 'Publicação do(a)', :selected => 'Cancelamento'
       page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Mural público'
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+
+      page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Protocolo', :with => '111111'
+      page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
     end
   end
 
@@ -401,4 +438,82 @@ feature "LicitationProcesses" do
       page.should have_field 'Número da licitação', :with => licitation_process.licitation_number.to_s
     end
   end
+
+  scenario 'asserting that cannot save with duplicated bidders' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+
+      click_button 'Adicionar Licitante'
+
+      within '.licitation-process-invited-bidder:last' do
+        fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+        fill_in 'Protocolo', :with => '123456'
+        fill_in 'Data do protocolo', :with => I18n.l(Date.current)
+        fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+      end
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    within_tab 'Licitantes convidados' do
+      page.should have_content 'já está em uso'
+    end
+  end
+
+  scenario 'testing javascript toggle dates' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
+      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+
+      check 'Auto convocação'
+
+      page.should have_disabled_field 'Data do protocolo'
+      page.should have_disabled_field 'Data do recebimento'
+
+      uncheck 'Auto convocação'
+
+      page.should_not have_disabled_field 'Data do protocolo'
+      page.should_not have_disabled_field 'Data do recebimento'
+
+      check 'Auto convocação'
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    page.should have_notice 'Processo Licitatório editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_checked_field 'Auto convocação'
+      page.should have_disabled_field 'Data do protocolo'
+      page.should have_disabled_field 'Data do recebimento'
+
+      page.should have_field 'Data do protocolo', :with => ''
+      page.should have_field 'Data do recebimento', :with => ''
+    end
+  end
+
 end

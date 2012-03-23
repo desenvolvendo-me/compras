@@ -4,6 +4,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
   attr_accessible :licitation_process_budget_allocations_attributes, :licitation_process_publications_attributes
+  attr_accessible :licitation_process_invited_bidders_attributes
 
   attr_readonly :process, :year
 
@@ -19,9 +20,11 @@ class LicitationProcess < ActiveRecord::Base
 
   has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
+  has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
 
   accepts_nested_attributes_for :licitation_process_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_publications, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_invited_bidders, :reject_if => :all_blank, :allow_destroy => true
 
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
@@ -34,6 +37,7 @@ class LicitationProcess < ActiveRecord::Base
   validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date }
 
   validate :cannot_have_duplicated_budget_allocations
+  validate :cannot_have_duplicated_invited_bidders
 
   before_create :set_process, :set_modality, :set_licitation_number
 
@@ -79,6 +83,18 @@ class LicitationProcess < ActiveRecord::Base
         allocation.errors.add(:budget_allocation_id, :taken)
       end
       single_allocations << allocation.budget_allocation_id
+    end
+  end
+
+  def cannot_have_duplicated_invited_bidders
+    single_bidders = []
+
+    licitation_process_invited_bidders.each do |bidder|
+      if single_bidders.include?(bidder.provider_id)
+        errors.add(:licitation_process_invited_bidders)
+        bidder.errors.add(:provider_id, :taken)
+      end
+      single_bidders << bidder.provider_id
     end
   end
 end
