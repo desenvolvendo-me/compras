@@ -239,7 +239,7 @@ feature "AdditionalCreditOpenings" do
 
     click_button 'Criar Abertura de Crédito Suplementar'
 
-    page.should have_content 'já utilizado em outra abertura de créditos suplementares'
+    page.should have_content 'já utilizado em outra abertura de crédito suplementar'
   end
 
   scenario 'destroy an existent additional_credit_opening' do
