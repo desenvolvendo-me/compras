@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_publication:
+        one: "Publicação"
+        other: "Publicações"
+
+    attributes:
+      licitation_process_publication:
+        name: "Nome do veículo de comunicação"
+        publication_date: "Data da publicação"
+        publication_of: "Publicação do(a)"
+        unit_price: "Valor unitário"
+        circulation_type: "Tipo de circulação do veículo de comunicação"

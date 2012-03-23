@@ -1,0 +1,24 @@
+<div id="publications">
+  <%= f.association :licitation_process_publications, :collection => localized(f.object.licitation_process_publications) do |p| %>
+    <%= render 'licitation_process_publications/form', :f => p %>
+  <% end %>
+
+  <%= mustache 'licitation-process-publications-template' do %>
+    <%= f.association :licitation_process_publications_attributes, :collection => f.object.licitation_process_publications.build, :index => '{{uuid_licitation_process_publication}}' do |p| %>
+      <%= render 'licitation_process_publications/form', :f => p %>
+    <% end %>
+  <% end %>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-licitation-process-publication" value="Adicionar Publicação">
+</p>
+
+<script>
+  $("#licitation-process-publications-template").nestedForm({
+    add: '.add-licitation-process-publication',
+    remove: '.remove-licitation-process-publication',
+    target: '#publications',
+    uuid: 'uuid_licitation_process_publication'
+  });
+</script>

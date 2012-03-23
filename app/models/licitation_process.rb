@@ -3,7 +3,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
-  attr_accessible :licitation_process_budget_allocations_attributes
+  attr_accessible :licitation_process_budget_allocations_attributes, :licitation_process_publications_attributes
 
   attr_readonly :process, :year
 
@@ -18,8 +18,10 @@ class LicitationProcess < ActiveRecord::Base
   has_and_belongs_to_many :document_types
 
   has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :licitation_process_publications, :dependent => :destroy, :order => :id
 
   accepts_nested_attributes_for :licitation_process_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_publications, :reject_if => :all_blank, :allow_destroy => true
 
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true

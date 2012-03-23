@@ -94,6 +94,15 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor total', :with => '600,00'
     end
 
+    within_tab 'Publicações' do
+      click_button "Adicionar Publicação"
+
+      fill_in "Nome do veículo de comunicação", :with => 'Jornal'
+      fill_in "Data da publicação", :with => '20/04/2012'
+      select "Edital", :from => "Publicação do(a)"
+      select "Internet", :from => "Tipo de circulação do veículo de comunicação"
+    end
+
     click_button 'Criar Processo Licitatório'
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
@@ -175,6 +184,13 @@ feature "LicitationProcesses" do
 
       page.should have_field 'Item', :with => '1'
     end
+
+    within_tab 'Publicações' do
+      page.should have_field 'Nome do veículo de comunicação', :with => 'Jornal'
+      page.should have_field 'Data da publicação', :with => '20/04/2012'
+      page.should have_select 'Publicação do(a)', :selected => 'Edital'
+      page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Internet'
+    end
   end
 
   scenario 'update an existent licitation_process' do
@@ -247,6 +263,16 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor unitário', :with => '2,00'
     end
 
+    within_tab 'Publicações' do
+      click_button "Remover Publicação"
+      click_button "Adicionar Publicação"
+
+      fill_in "Nome do veículo de comunicação", :with => 'Periodico'
+      fill_in "Data da publicação", :with => '20/04/2013'
+      select "Cancelamento", :from => "Publicação do(a)"
+      select "Mural público", :from => "Tipo de circulação do veículo de comunicação"
+    end
+
     click_button 'Atualizar Processo Licitatório'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
@@ -298,6 +324,15 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor total', :with => '200,00'
 
       page.should have_field 'Item', :with => '1'
+    end
+
+    within_tab 'Publicações' do
+      page.should_not have_field 'Nome do veículo de comunicação', :with => 'Jornal'
+
+      page.should have_field 'Nome do veículo de comunicação', :with => 'Periodico'
+      page.should have_field 'Data da publicação', :with => '20/04/2013'
+      page.should have_select 'Publicação do(a)', :selected => 'Cancelamento'
+      page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Mural público'
     end
   end
 
