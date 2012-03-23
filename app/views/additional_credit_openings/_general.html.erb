@@ -18,7 +18,7 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :publication_date, :disabled => true, :input_html => { :value => (l(f.object.publication_date) if f.object.publication_date) } %>
+    <%= f.input :publication_date, :disabled => true, :input_html => { :value => f.object.presenter.publication_date } %>
   </div>
 </div>
 
