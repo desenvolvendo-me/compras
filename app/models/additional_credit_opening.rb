@@ -34,27 +34,28 @@ class AdditionalCreditOpening < ActiveRecord::Base
   validate :uniqueness_of_budget_allocation_or_capability
 
   def uniqueness_of_budget_allocation_or_capability
-    countable = Hash.new
+    budget_allocations_count = Hash.new
+    capabilities_count = Hash.new
 
     additional_credit_opening_moviment_types.each do |moviment|
       unless moviment.budget_allocation_id.blank?
-        countable[moviment.budget_allocation_id] ||= 0
-        countable[moviment.budget_allocation_id] = countable[moviment.budget_allocation_id].to_i + 1
+        budget_allocations_count[moviment.budget_allocation_id] ||= 0
+        budget_allocations_count[moviment.budget_allocation_id] = budget_allocations_count[moviment.budget_allocation_id].to_i + 1
       end
 
       unless moviment.capability_id.blank?
-        countable[moviment.capability_id] ||= 0
-        countable[moviment.capability_id] = countable[moviment.capability_id].to_i + 1
+        capabilities_count[moviment.capability_id] ||= 0
+        capabilities_count[moviment.capability_id] = capabilities_count[moviment.capability_id].to_i + 1
       end
     end
 
     additional_credit_opening_moviment_types.each do |moviment|
-      if countable[moviment.budget_allocation_id].to_i > 1
+      if budget_allocations_count[moviment.budget_allocation_id].to_i > 1
         moviment.errors.add(:budget_allocation_id, :taken)
         errors.add(:base, :taken)
       end
 
-      if countable[moviment.capability_id].to_i > 1
+      if capabilities_count[moviment.capability_id].to_i > 1
         moviment.errors.add(:capability_id, :taken)
         errors.add(:base, :taken)
       end
