@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      additional_credit_opening_moviment_type:
+        one: "Movimento"
+        other: "Movimentos"
+
+    attributes:
+      additional_credit_opening_moviment_type:
+        moviment_type: "Tipo de movimento"
+        budget_allocation: "Dotação"
+        capability: "Recurso"
+        value: "Valor"

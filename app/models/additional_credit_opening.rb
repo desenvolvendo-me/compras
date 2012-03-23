@@ -1,6 +1,7 @@
 class AdditionalCreditOpening < ActiveRecord::Base
   attr_accessible :entity_id, :year, :credit_type, :administractive_act_id
   attr_accessible :credit_date, :additional_credit_opening_nature_id
+  attr_accessible :additional_credit_opening_moviment_types_attributes
 
   has_enumeration_for :credit_type, :with => AdditionalCreditOpeningCreditType
 
@@ -8,8 +9,12 @@ class AdditionalCreditOpening < ActiveRecord::Base
   belongs_to :administractive_act
   belongs_to :additional_credit_opening_nature
 
+  has_many :additional_credit_opening_moviment_types, :dependent => :destroy
+
   delegate :administractive_act_type, :publication_date, :to => :administractive_act, :allow_nil => true
   delegate :kind, :kind_humanize, :to => :additional_credit_opening_nature, :allow_nil => true
+
+  accepts_nested_attributes_for :additional_credit_opening_moviment_types, :allow_destroy => true
 
   validates :year, :mask => '9999'
   validates :year, :entity, :credit_type, :presence => true
@@ -26,6 +31,35 @@ class AdditionalCreditOpening < ActiveRecord::Base
     :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
     :type => :date
   }, :allow_blank => true, :if => :publication_date
+  validate :uniqueness_of_budget_allocation_or_capability
+
+  def uniqueness_of_budget_allocation_or_capability
+    countable = Hash.new
+
+    additional_credit_opening_moviment_types.each do |moviment|
+      unless moviment.budget_allocation_id.blank?
+        countable[moviment.budget_allocation_id] ||= 0
+        countable[moviment.budget_allocation_id] = countable[moviment.budget_allocation_id].to_i + 1
+      end
+
+      unless moviment.capability_id.blank?
+        countable[moviment.capability_id] ||= 0
+        countable[moviment.capability_id] = countable[moviment.capability_id].to_i + 1
+      end
+    end
+
+    additional_credit_opening_moviment_types.each do |moviment|
+      if countable[moviment.budget_allocation_id].to_i > 1
+        moviment.errors.add(:budget_allocation_id, :taken)
+        errors.add(:base, :taken)
+      end
+
+      if countable[moviment.capability_id].to_i > 1
+        moviment.errors.add(:capability_id, :taken)
+        errors.add(:base, :taken)
+      end
+    end
+  end
 
   orderize :year
   filterize

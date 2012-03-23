@@ -1,0 +1,24 @@
+<div id="additional-credit-opening-moviment-types">
+  <p>
+    <input type="button" class="button affirmative add-additional-credit-opening-moviment-type" value="Adicionar Movimento">
+  </p>
+
+  <%= f.association :additional_credit_opening_moviment_types, :collection => localized(f.object.additional_credit_opening_moviment_types) do |a| %>
+    <%= render 'additional_credit_opening_moviment_types/form', :f => a %>
+  <% end %>
+</div>
+
+<%= mustache 'additional-credit-opening-moviment-types-template' do %>
+  <%= f.association :additional_credit_opening_moviment_types_attributes, :collection => f.object.additional_credit_opening_moviment_types.build, :index => '{{uuid_additional_credit_opening_moviment_type}}' do |a| %>
+    <%= render 'additional_credit_opening_moviment_types/form', :f => a %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#additional-credit-opening-moviment-types-template").nestedForm({
+    add: '.add-additional-credit-opening-moviment-type',
+    remove: '.remove-additional-credit-opening-moviment-type',
+    target: '#additional-credit-opening-moviment-types',
+    uuid: 'uuid_additional_credit_opening_moviment_type'
+  });
+</script>

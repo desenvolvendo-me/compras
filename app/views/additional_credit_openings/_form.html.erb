@@ -1,42 +1,29 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :entity %>
+<div class="tabs">
+  <ul>
+    <li><a href="#main">Principal</a></li>
+    <li><a href="#moviments">Movimentos</a></li>
+  </ul>
+
+  <div id="main">
+    <%= render 'general', :f => f %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :year %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :administractive_act %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :administractive_act_type, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :publication_date, :disabled => true, :input_html => { :value => (l(f.object.publication_date) if f.object.publication_date) } %>
+  <div id="moviments">
+    <%= render 'additional_credit_opening_moviment_types', :f => f %>
   </div>
 </div>
-
-<%= f.input :credit_type %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :additional_credit_opening_nature %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :kind, :disabled => true, :input_html => { :value => f.object.kind_humanize } %>
-  </div>
-</div>
-
-<%= f.input :credit_date %>
 
 <script type="text/javascript">
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+
   $('form.additional_credit_opening').delegate('#additional_credit_opening_administractive_act_id', 'change', function (event, data) {
     if (data) {
       var record = data.record;
@@ -49,6 +36,24 @@
     if (data) {
       var record = data.record;
       $('#additional_credit_opening_kind').val(record.data('kind'));
+    }
+  });
+
+  $('form.additional_credit_opening').delegate('.moviment-type', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      if(record.data('character') == 'budget_allocation') {
+        $(this).closest('fieldset').find('.budget-allocation').attr('disabled', false);
+        $(this).closest('fieldset').find('.capability').attr('disabled', true);
+        $(this).closest('fieldset').find('[id$=capability]').val('');
+        $(this).closest('fieldset').find('[id$=capability_id]').val('');
+      } else if(record.data('character') == 'capability') {
+        $(this).closest('fieldset').find('.capability').attr('disabled', false);
+        $(this).closest('fieldset').find('.budget-allocation').attr('disabled', true);
+        $(this).closest('fieldset').find('[id$=budget_allocation]').val('');
+        $(this).closest('fieldset').find('[id$=budget_allocation_id]').val('');
+      }
     }
   });
 </script>

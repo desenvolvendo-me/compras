@@ -439,6 +439,12 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :moviment_types do
+    collection do
+      get :modal
+    end
+  end
+
   resources :neighborhoods do
     collection do
       get :modal
