@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/capability'
 require 'app/models/budget_allocation'
+require 'app/models/licitation_process'
 require 'app/models/additional_credit_opening_moviment_type'
 
 describe Capability do
