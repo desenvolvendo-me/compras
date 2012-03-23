@@ -7,7 +7,6 @@ pt-BR:
 
     attributes:
       purchase_solicitation:
-        id: "Número da solicitação de compra"
         accounting_year: "Ano"
         request_date: "Data da solicitação"
         organogram: "Unidade orçamentária solicitante"
