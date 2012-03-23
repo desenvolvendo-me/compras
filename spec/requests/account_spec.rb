@@ -9,7 +9,7 @@ feature 'Account' do
   end
 
   scenario 'update login without providing password' do
-    click_link 'Gabriel Sobrinho'
+    click_link 'gabriel.sobrinho'
 
     fill_in 'Login', :with => 'sobrinho.campos.gabriel'
     fill_in 'E-mail', :with => 'sobrinho.gabriel@gmail.com'

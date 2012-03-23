@@ -1,8 +1,8 @@
 /*
  *= require yui
- *= require layout
- *= require buttons
  *= require records
+ *= require report/layout
  *= require report/header
- *= require report/content
+ *= require report/records
+ *= require report/footer
  */

@@ -1,0 +1,86 @@
+#menu {
+  background: #356598;
+  background: -moz-linear-gradient(#356598, #4D79A5);
+  background: -webkit-linear-gradient(#356598, #4D79A5);
+  line-height: 2;
+}
+
+/* first level */
+#menu ul {
+  margin: 0;
+}
+
+#menu li {
+  display: inline-block;
+  margin: 0.45em 0.25em 0;
+  position: relative;
+}
+
+#menu a {
+  background: url(<%= image_path 'tool.png' %>) 1em center no-repeat;
+  color: #FFF;
+  display: block;
+  font-size: 123.1%;
+  padding: 0 1em;
+  text-decoration: none;
+  text-indent: 20px;
+}
+
+#menu li.active > a, #menu li:hover > a {
+  background: url(<%= image_path 'tool.png' %>) 1em center no-repeat,
+              url(<%= image_path 'menu-active-left.gif' %>) left top no-repeat,
+              url(<%= image_path 'menu-active-right.gif' %>) right top no-repeat,
+              #FFF;
+  color: #37638E;
+}
+
+#menu li.active > ul, #menu li:hover > ul {
+  display: block;
+}
+
+/* second level */
+#menu ul ul {
+  background: #FEFEFF;
+  border-bottom: solid 1px #DBE9ED;
+  border-left: solid 1px #DBE9ED;
+  border-right: solid 1px #DBE9ED;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  min-width: 100%;
+  padding: 0.5em 0.5em 0;
+  position: absolute;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+#menu li li {
+  border-bottom: solid 1px #D7E7F5;
+  display: block;
+  margin: 0 0 0.5em;
+}
+
+#menu li li:last-child {
+  border-bottom: 0;
+  margin: 0;
+}
+
+#menu li li > a {
+  background: transparent;
+  color: #37638E;
+  font-size: 108%;
+  padding: 0 0.5em;
+  text-indent: 0;
+}
+
+#menu li li.active > a, #menu li li:hover > a {
+  background: -webkit-linear-gradient(#FDFEF6, #FEFFE1);
+}
+
+/* third level */
+#menu ul ul ul {
+  border-top: solid 1px #DBE9ED;
+  left: 100%;
+  top: -0.6em;
+}

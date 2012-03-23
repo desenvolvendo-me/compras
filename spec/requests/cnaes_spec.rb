@@ -23,7 +23,7 @@ feature "Cnaes" do
 
     page.should have_notice 'CNAE criado com sucesso.'
 
-    click_link '8112500'
+    click_link 'Condomínios prediais'
 
     page.should have_field 'Código', :with => '8112500'
     page.should have_field 'Descrição', :with => 'Condomínios prediais'
@@ -38,7 +38,7 @@ feature "Cnaes" do
 
     click_link 'CNAES'
 
-    click_link '7739099'
+    click_link 'Aluguel de outras máquinas'
 
     fill_in 'Descrição', :with => 'Comércio varejista de bebidas'
     fill_in 'Código', :with => '4723700'
@@ -48,7 +48,7 @@ feature "Cnaes" do
 
     page.should have_notice 'CNAE editado com sucesso.'
 
-    click_link '4723700'
+    click_link 'Comércio varejista de bebidas'
 
     page.should have_field 'Código', :with => '4723700'
     page.should have_field 'Descrição', :with => 'Comércio varejista de bebidas'
@@ -62,12 +62,12 @@ feature "Cnaes" do
 
     click_link 'CNAES'
 
-    click_link '7739099'
+    click_link 'Aluguel de outras máquinas'
 
     click_link 'Apagar Aluguel de outras máquinas', :confirm => true
 
     page.should have_notice 'CNAE apagado com sucesso.'
 
-    page.should_not have_content '7739099'
+    page.should_not have_content 'Aluguel de outras máquinas'
   end
 end

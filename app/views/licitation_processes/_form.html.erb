@@ -2,6 +2,7 @@
   <ul>
     <li><a href="#general">Dados gerais</a></li>
     <li><a href="#documents">Documentos</a></li>
+    <li><a href="#budget_allocations">Dotações orçamentárias</a></li>
   </ul>
 
   <div id="general">
@@ -10,6 +11,10 @@
 
   <div id="documents">
     <%= render 'documents', :f => f %>
+  </div>
+
+  <div id="budget_allocations">
+    <%= render 'budget_allocations', :f => f %>
   </div>
 </div>
 
@@ -59,5 +64,58 @@
       $('#licitation_process_administrative_process_item').val('');
       $('#licitation_process_modality').val('');
     }
+  });
+
+  $('form.licitation_process').delegate('.budget-allocation', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $(this).closest('fieldset').find('.classification').val(record.data("expense_economic_classification"));
+      $(this).closest('fieldset').find('.amount').val(record.data("amount"));
+    }
+  });
+
+  $('form.licitation_process').delegate('.material', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $(this).closest('.item').find('.reference-unit').val(record.data("reference-unit"));
+    }
+  });
+
+  function calcItemOrder() {
+    $('fieldset.licitation-process-budget-allocation').each(function(index, item){
+      $(this).find('.item .hidden .destroy[value=false]').each(function(index, item){
+        $(this).parent().parent().find('.order').val(index + 1);
+      });
+    });
+  }
+
+  $('form.licitation_process').delegate('.remove-licitation-process-budget-allocation, .remove-item', 'click', function() {
+    calcItemOrder();
+  });
+
+  $('form.licitation_process').bind('append.mustache', function(){
+    calcItemOrder();
+  });
+
+  calcItemOrder();
+
+  $('form.licitation_process').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
+        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+
+    itemDiv.find('.item-price').val(total);
+  });
+
+  $('form.licitation_process').delegate('.item-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemPrice = parsePtBrFloat(itemDiv.find('.item-price').val() || '0'),
+        unitPrice = floatToPtBrString(itemPrice / itemQuantity);
+
+    itemDiv.find('.item-unit-price').val(unitPrice);
   });
 </script>

@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    name.to_s
+    login.to_s
   end
 
   protected

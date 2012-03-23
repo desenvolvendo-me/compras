@@ -1,0 +1,22 @@
+.actions {
+  font-size: 108%;
+  margin-bottom: 0.5em;
+  text-align: right;
+}
+
+.actions ul {
+  margin: 0;
+}
+
+.actions li {
+  border-left: solid 1px #000;
+  display: inline;
+  margin-left: 0.8em;
+  padding-left: 1em;
+}
+
+.actions li:first-child {
+  border-left: 0;
+  margin-left: 0;
+  padding-left: 0;
+}

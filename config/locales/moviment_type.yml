@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      moviment_type:
+        one: "Tipos de Movimento"
+        other: "Tipos de Movimentos"
+
+    attributes:
+      moviment_type:
+        name: "Nome"
+        operation: "Operacão"
+        character: "Atributo"

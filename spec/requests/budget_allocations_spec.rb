@@ -248,9 +248,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     page.should have_content 'Manutenção e Reparo'
-    page.should have_content '3.000,00'
     page.should_not have_content 'Alocação'
-    page.should_not have_content '500,00'
   end
 
   scenario 'should filter by year' do
@@ -268,9 +266,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     page.should have_content 'Manutenção e Reparo'
-    page.should have_content '3.000,00'
     page.should_not have_content 'Alocação'
-    page.should_not have_content '500,00'
   end
 
   scenario 'should filter by subfunction' do
@@ -288,9 +284,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     page.should have_content 'Manutenção e Reparo'
-    page.should have_content '3.000,00'
     page.should_not have_content 'Alocação'
-    page.should_not have_content '500,00'
   end
 
   scenario 'should filter by government program' do
@@ -308,9 +302,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     page.should have_content 'Manutenção e Reparo'
-    page.should have_content '3.000,00'
     page.should_not have_content 'Alocação'
-    page.should_not have_content '500,00'
   end
 
   scenario 'should filter by government action' do
@@ -328,9 +320,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     page.should have_content 'Manutenção e Reparo'
-    page.should have_content '3.000,00'
     page.should_not have_content 'Alocação'
-    page.should_not have_content '500,00'
   end
 
   scenario 'should filter by expense economic classification' do
@@ -348,9 +338,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     page.should have_content 'Manutenção e Reparo'
-    page.should have_content '3.000,00'
     page.should_not have_content 'Alocação'
-    page.should_not have_content '500,00'
   end
 
   scenario 'should filter by function' do
@@ -368,8 +356,6 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     page.should have_content 'Manutenção e Reparo'
-    page.should have_content '3.000,00'
     page.should_not have_content 'Alocação'
-    page.should_not have_content '500,00'
   end
 end

@@ -1,23 +1,21 @@
-body {
-  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+html {
+  background: #6090BF;
+  background: #CDE7FA -moz-linear-gradient(#6090BF, #CDE7FA) no-repeat;
+  background: #CDE7FA -webkit-linear-gradient(#6090BF, #CDE7FA) no-repeat;
+  height: 100%;
 }
 
 a {
-  color: #0064D5;
+  color: #519AE4;
+  text-decoration: underline;
 }
 
-.left {
-  text-align: left;
-}
-
-.center {
-  text-align: center;
-}
-
-.right {
-  text-align: right;
-}
-
-.justify {
-  text-align: justify;
+#container {
+  background: #FFF;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto 3em;
+  padding: 0 1em 1em 1em;
+  width: 1002px;
 }

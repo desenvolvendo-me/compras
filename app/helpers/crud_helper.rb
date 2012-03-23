@@ -35,11 +35,19 @@ module CrudHelper
     link_to I18n.translate("other.tributario.messages.more_information"), href, :id => id.concat('_info_link'), :class => 'modal_info'
   end
 
-  def link_to_new
-    link_to t("#{controller_name}.new", :resource => singular, :cascade => true), new_resource_path, :class => 'button primary new'
+  def create?
+    can?(:create, controller_name) && respond_to?("new_#{controller_name.singularize}_path")
   end
 
-  def link_to_filter
-    link_to t("#{controller_name}.filter", :resource => plural, :cascade => true), filter_resources_path(current_scopes), :class => 'button secondary filter'
+  def create_link
+    link_to t("#{controller_name}.new", :resource => singular, :cascade => true), new_resource_path
+  end
+
+  def filter?
+    respond_to?("filter_#{controller_name}_path")
+  end
+
+  def filter_link
+    link_to t("#{controller_name}.filter", :resource => plural, :cascade => true), filter_resources_path(current_scopes), :class => 'filter'
   end
 end

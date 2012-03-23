@@ -1,8 +1,4 @@
 module BookmarksHelper
-  def content_classes
-    "dashboard #{super}"
-  end
-
   def bookmarks
     simple_menu do |m|
       resource.links.each do |link|

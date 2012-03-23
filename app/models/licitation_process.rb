@@ -3,6 +3,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
+  attr_accessible :licitation_process_budget_allocations_attributes
 
   attr_readonly :process, :year
 
@@ -16,6 +17,13 @@ class LicitationProcess < ActiveRecord::Base
 
   has_and_belongs_to_many :document_types
 
+  has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
+
+  accepts_nested_attributes_for :licitation_process_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
+
+  delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
+           :item, :to => :administrative_process, :allow_nil => true, :prefix => true
+
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :readjustment_index,
             :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date, :envelope_opening_date,
             :envelope_opening_time, :presence => true
@@ -23,8 +31,7 @@ class LicitationProcess < ActiveRecord::Base
   validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date }
   validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date }
 
-  delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
-           :item, :to => :administrative_process, :allow_nil => true, :prefix => true
+  validate :cannot_have_duplicated_budget_allocations
 
   before_create :set_process, :set_modality, :set_licitation_number
 
@@ -58,6 +65,18 @@ class LicitationProcess < ActiveRecord::Base
       self.licitation_number = last.licitation_number.to_i + 1
     else
       self.licitation_number = 1
+    end
+  end
+
+  def cannot_have_duplicated_budget_allocations
+    single_allocations = []
+
+    licitation_process_budget_allocations.each do |allocation|
+      if single_allocations.include?(allocation.budget_allocation_id)
+        errors.add(:licitation_process_budget_allocations)
+        allocation.errors.add(:budget_allocation_id, :taken)
+      end
+      single_allocations << allocation.budget_allocation_id
     end
   end
 end

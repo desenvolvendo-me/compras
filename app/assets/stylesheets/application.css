@@ -1,18 +1,18 @@
 /*
  *= require yui
  *= require layout
+ *= require header
+ *= require account
+ *= require menu
  *= require flash
+ *= require content
+ *= require actions
+ *= require records
+ *= require will_paginate
  *= require simple_form
  *= require buttons
- *= require jquery-ui
- *= require header
  *= require sidebar
- *= require content
- *= require breadcrumb
- *= require help
- *= require will_paginate
- *= require records
- *= require dashboard
- *= require bookmarks
+ *= require devise
  *= require modal
+ *= require jquery-ui
  */

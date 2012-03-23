@@ -75,6 +75,16 @@ module Rails
         template 'request.rb', request_file
       end
 
+      def create_presenter
+        presenter_file = File.join('app/presenters', class_path, "#{singular_name}_presenter.rb")
+        template 'presenter.rb', presenter_file
+      end
+
+      def create_presenter_spec
+        presenter_spec_file = File.join('spec/presenters', class_path, "#{singular_name}_presenter_spec.rb")
+        template 'presenter_spec.rb', presenter_spec_file
+      end
+
       protected
 
       def dashboard
@@ -96,7 +106,7 @@ module Rails
       end
 
       def available_views
-        %w(_form.html.erb _list.html.erb)
+        %w(_form.html.erb)
       end
 
       def associations?

@@ -1,12 +1,5 @@
-<div class="breadcrumb">
-  <ul>
-    <li><%= plural %></li>
-    <li><%= t "#{controller_name}.edit", :resource => resource, :cascade => true %></li>
-  </ul>
-</div>
-
-<div class="title">
+<h2>
   <%= t "#{controller_name}.edit", :resource => resource, :cascade => true %>
-</div>
+</h2>
 
 <%= render 'form_wrapper' %>

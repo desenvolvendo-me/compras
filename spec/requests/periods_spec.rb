@@ -70,6 +70,5 @@ feature "Periods" do
     page.should have_notice 'Prazo apagado com sucesso.'
 
     page.should_not have_content 1
-    page.should_not have_content 'ano'
   end
 end

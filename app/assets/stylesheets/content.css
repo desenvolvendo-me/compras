@@ -1,0 +1,23 @@
+#content {
+  background: #F9F9F9;
+  border: solid 1px #E8EAEE;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 1em;
+  position: relative;
+  width: 722px;
+}
+
+#content h2 {
+  font-size: 182%;
+  font-weight: normal;
+  height: 60px;
+  margin-top: 0;
+}
+
+#content .banner {
+  float: right;
+  margin-bottom: 1em;
+}

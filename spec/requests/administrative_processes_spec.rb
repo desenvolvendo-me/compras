@@ -7,16 +7,14 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'create a new administrative_process' do
-    organogram = Organogram.make!(:secretaria_de_educacao)
     budget_allocation = BudgetAllocation.make!(:alocacao)
+    Organogram.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
-    within '.links' do
-      click_link 'Processos Administrativos'
-    end
+    click_link 'Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
 
@@ -65,11 +63,9 @@ feature "AdministrativeProcesses" do
   scenario 'should have all fields disabled when editing an existent administrative_process' do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
-    within '.links' do
-      click_link 'Processos Administrativos'
-    end
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -95,11 +91,9 @@ feature "AdministrativeProcesses" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
-    within '.links' do
-      click_link 'Processos Administrativos'
-    end
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click

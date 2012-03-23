@@ -18,6 +18,7 @@ describe LicitationProcess do
   it { should belong_to :period }
   it { should belong_to :payment_method }
   it { should have_and_belong_to_many(:document_types) }
+  it { should have_many(:licitation_process_budget_allocations).dependent(:destroy).order(:id) }
 
 
   it { should validate_presence_of  :year }
@@ -49,4 +50,24 @@ describe LicitationProcess do
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201').for(:year) }
   it { should_not allow_value('a201').for(:year) }
+
+  it "the duplicated budget_allocations should be invalid except the first" do
+    allocation_one = subject.licitation_process_budget_allocations.build(:budget_allocation_id => 1)
+    allocation_two = subject.licitation_process_budget_allocations.build(:budget_allocation_id => 1)
+
+    subject.valid?
+
+    allocation_one.errors.messages[:budget_allocation_id].should be_nil
+    allocation_two.errors.messages[:budget_allocation_id].should include "já está em uso"
+  end
+
+  it "the diferent budget_allocations should be valid" do
+    allocation_one = subject.licitation_process_budget_allocations.build(:budget_allocation_id => 1)
+    allocation_two = subject.licitation_process_budget_allocations.build(:budget_allocation_id => 2)
+
+    subject.valid?
+
+    allocation_one.errors.messages[:budget_allocation_id].should be_nil
+    allocation_two.errors.messages[:budget_allocation_id].should be_nil
+  end
 end

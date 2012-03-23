@@ -58,17 +58,12 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :stn_ordinance, :as => :modal, :hidden_field => :stn_ordinance_id %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :expense_economic_classification, :disabled => f.object.stn_ordinance.blank? %>
+    <%= f.input :expense_economic_classification %>
   </div>
 </div>
 
 <script>
-  var stn_ordinance_id = $('#material_stn_ordinance_id').val(),
-      materials_group_id = $('#material_materials_group_id').val();
+  var materials_group_id = $('#material_materials_group_id').val();
 
   $("#material_material_characteristic").change(function() {
     if (this.value == 'material') {
@@ -111,40 +106,6 @@
 
       $('#material_materials_class').val('');
       $('#material_materials_class_id').val('');
-    }
-  }
-
-  $('#material_stn_ordinance_id').change(function() {
-    if (this.value) {
-      $('#material_expense_economic_classification').attr('disabled', false);
-      $('#material_expense_economic_classification').attr('data-modal-url', expenseEconomicClassificationModalUrl);
-    } else {
-      $('#material_expense_economic_classification').attr('disabled', true);
-    }
-
-    clearExpenseEconomicClassification();
-  }).change();
-
-  function expenseEconomicClassificationModalUrl() {
-    var url = "<%= modal_expense_economic_classifications_path %>?",
-        params = {
-          locked_fields: ["stn_ordinance"],
-          expense_economic_classification: {
-            stn_ordinance_id: $('#material_stn_ordinance_id').val()
-          }
-        };
-
-    url += jQuery.param(params);
-
-    return url;
-  }
-
-  function clearExpenseEconomicClassification() {
-    if ($('#material_stn_ordinance_id').val() != stn_ordinance_id) {
-      stn_ordinance_id = $('#material_stn_ordinance_id').val();
-
-      $('#material_expense_economic_classification').val('');
-      $('#material_expense_economic_classification_id').val('');
     }
   }
 </script>

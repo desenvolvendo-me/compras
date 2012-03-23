@@ -18,7 +18,7 @@ gem 'activerecord-connections', '0.0.3'
 gem 'devise', '2.0.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
-gem 'simple_form', '1.5.2'
+gem 'simple_form', '2.0.1'
 gem 'will_paginate', '3.0.3'
 
 gem 'squeel', '0.9.5'
@@ -59,4 +59,5 @@ group :test do
   gem 'machinist-caching', '0.0.1'
   gem 'capybara', '1.1.2'
   gem 'capybara-webkit', '0.9.0'
+  gem 'selenium-webdriver', '2.13.0'
 end

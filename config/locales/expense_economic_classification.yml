@@ -8,7 +8,6 @@ pt-BR:
     attributes:
       expense_economic_classification:
         entity: "Entidade"
-        stn_ordinance: "Portaria do STN"
         administractive_act: "Ato administrativo"
         expense_economic_classification: "Classificação da natureza da despesa"
         kind: "Tipo"

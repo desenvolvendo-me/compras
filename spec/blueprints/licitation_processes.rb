@@ -19,4 +19,5 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   contract_expiration { 3 }
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_budget_allocations { [LicitationProcessBudgetAllocation.make!(:alocacao)] }
 end

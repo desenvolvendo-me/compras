@@ -1,11 +1,6 @@
-<div class="breadcrumb">
-  <ul>
-    <li><%= plural %></li>
-    <li><%= t "#{controller_name}.index", :resource => plural, :cascade => true %></li>
-  </ul>
-</div>
-
-<%= paginate %>
+<h2>
+  <%= plural %>
+</h2>
 
 <%= render 'list' %>
 

@@ -1,7 +1,7 @@
 pt-BR:
   controllers:
     addresses: "Endereços"
-    additional_credit_opening_natures: "Naturezas de Abertura de Créditos Suplementares"
+    additional_credit_opening_natures: "Naturezas de Aberturas de Créditos Suplementares"
     additional_credit_openings: "Aberturas de Créditos Suplementares"
     administractive_acts: "Atos Administrativos"
     administration_types: "Tipos de Administração"
@@ -73,7 +73,6 @@ pt-BR:
     settings: "Configurações"
     side_section_streets: "Lados das Seções dos Logradouros"
     states: "Estados"
-    stn_ordinances: "Portarias do STN"
     street_types: "Tipos de Logradouros"
     streets: "Logradouros"
     supply_authorizations: "Autorizações de Fornecimento"

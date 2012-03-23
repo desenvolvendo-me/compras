@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     models:
       additional_credit_opening:
-        one: "Abertura de Créditos Suplementares"
+        one: "Abertura de Crédito Suplementar"
         other: "Aberturas de Créditos Suplementares"
 
     attributes:
@@ -10,3 +10,9 @@ pt-BR:
         entity: "Entidade"
         year: "Exercício"
         credit_type: "Tipo de crédito"
+        administractive_act: "Ato regulamentador"
+        administractive_act_type: "Tipo de ato regulamentador"
+        publication_date: "Data de publicação"
+        credit_date: "Data crédito"
+        additional_credit_opening_nature: "Natureza de crédito"
+        kind: "Classificação da natureza de crédito"

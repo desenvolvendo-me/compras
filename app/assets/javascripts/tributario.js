@@ -35,6 +35,6 @@
 
   // Focus first focusable input
   $(document).ready(function () {
-    $(":input:focusable:not([data-modal]):first").focus();
+    $(":input:focusable:not([data-modal]):not(input[type=submit]):first").focus();
   });
 })(jQuery);

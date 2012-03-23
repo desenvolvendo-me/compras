@@ -5,30 +5,37 @@
     <meta charset="utf-8">
     <%= csrf_meta_tag %>
 
-    <title>Compras e Licitações</title>
+    <title>Sistema de Compras e Licitações</title>
 
-    <%= stylesheet_link_tag 'devise' %>
+    <%= stylesheet_link_tag 'application' %>
   </head>
 
   <body>
-    <div id="header">
-      <h1><%= link_to 'Sistema de Compras e Licitações', root_path %></h1>
-    </div>
+    <div id="container">
 
-    <div id="content">
-      <% if alert %>
-        <div class="alert"><%= alert %></div>
-      <% end %>
+      <div id="header">
+        <h1><%= link_to 'Sistema de Compras e Licitações', root_path %></h1>
 
-      <% if notice %>
-        <div class="notice"><%= notice %></div>
-      <% end %>
+        <div id="menu">
+          &nbsp;
+        </div>
+      </div>
 
-      <%= yield %>
-    </div>
+      <div id="flash">
+        <%= render 'layouts/flash' %>
+      </div>
 
-    <div id="footer">
-      <%= yield :footer %>
+      <div id="content" class="devise">
+        <div class="banner">
+          <%= prefecture_image %>
+        </div>
+
+        <h2>
+          <%= current_prefecture %>
+        </h2>
+
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

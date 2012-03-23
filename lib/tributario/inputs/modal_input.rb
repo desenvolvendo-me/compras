@@ -36,6 +36,10 @@ module Tributario
       end
 
       def modal_url
+        options[:modal_url] || find_modal_url
+      end
+
+      def find_modal_url
         route = "modal_#{model_name.pluralize}_path"
 
         unless template.respond_to?(route)
@@ -56,10 +60,6 @@ module Tributario
 
       def hidden_field_id
         [sanitized_object_name, index, hidden_field_name].compact.join('_') if hidden_field_name
-      end
-
-      def template
-        @builder.template
       end
 
       def index

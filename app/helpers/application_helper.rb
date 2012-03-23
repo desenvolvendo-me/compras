@@ -3,16 +3,9 @@ module ApplicationHelper
   def simple_form_for(object, *args, &block)
     options = args.extract_options!
     options[:builder] ||= Tributario::FormBuilder
+    options[:html] = { :class => dom_class(resource) }
 
     super(object, *(args << options), &block)
-  end
-
-  def content_classes
-    [controller_name, action_name].join(' ')
-  end
-
-  # Override this helper if you want a sidebar menu
-  def sidebar_menu
   end
 
   def simple_menu(&block)
@@ -90,11 +83,11 @@ module ApplicationHelper
     end
   end
 
-  def print_path
-    'javascript:window.print()'
-  end
-
-  def back_path
-    url_for(:action => :new)
+  def prefecture_image
+    if current_prefecture && current_prefecture.image?
+      image_tag current_prefecture.image.url
+    else
+      image_tag 'prefecture.jpg'
+    end
   end
 end

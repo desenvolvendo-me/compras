@@ -12,8 +12,10 @@ feature "LicitationProcesses" do
     Period.make!(:um_ano)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
+    allocation = BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 
@@ -66,6 +68,30 @@ feature "LicitationProcesses" do
 
     within_tab 'Documentos' do
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+      fill_in 'Valor previsto', :with => '50,00'
+      select 'Global', :from => 'Tipo de empenho'
+
+      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      # getting data from modal
+      page.should have_field 'Unidade', :with => 'Unidade'
+
+      fill_in 'Quantidade', :with => '3'
+      fill_in 'Valor unitário', :with => '200,00'
+
+      # asserting calculated total price of the item
+      page.should have_field 'Valor total', :with => '600,00'
     end
 
     click_button 'Criar Processo Licitatório'
@@ -133,6 +159,22 @@ feature "LicitationProcesses" do
       page.should have_content 'Fiscal'
       page.should have_content '10'
     end
+
+    within_tab 'Dotações' do
+      page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2012 - Alocação"
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Valor previsto', :with => '50,00'
+      page.should have_select 'Tipo de empenho', :selecte => 'Global'
+
+      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Quantidade', :with => '3'
+      page.should have_field 'Valor unitário', :with => '200,00'
+      page.should have_field 'Valor total', :with => '600,00'
+
+      page.should have_field 'Item', :with => '1'
+    end
   end
 
   scenario 'update an existent licitation_process' do
@@ -142,8 +184,10 @@ feature "LicitationProcesses" do
     Period.make!(:tres_meses)
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
+    allocation = BudgetAllocation.make!(:alocacao_extra)
+    Material.make!(:arame_farpado)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 
@@ -176,6 +220,31 @@ feature "LicitationProcesses" do
       click_button 'Remover'
 
       fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações' do
+      click_button 'Remover Dotação'
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
+      fill_in 'Valor previsto', :with => '70,00'
+      select 'Ordinário', :from => 'Tipo de empenho'
+
+      page.should have_field 'Saldo da dotação', :with => '200,00'
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
+
+      # getting data from modal
+      page.should have_field 'Unidade', :with => 'Unidade'
+
+      fill_in 'Quantidade', :with => '100'
+      fill_in 'Valor total', :with => '200,00'
+
+      # asserting calculated unit price of the item
+      page.should have_field 'Valor unitário', :with => '2,00'
     end
 
     click_button 'Atualizar Processo Licitatório'
@@ -214,12 +283,28 @@ feature "LicitationProcesses" do
       page.should have_content 'Oficial'
       page.should have_content '20'
     end
+
+    within_tab 'Dotações' do
+      page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2011 - Alocação extra"
+      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Saldo da dotação', :with => '200,00'
+      page.should have_field 'Valor previsto', :with => '70,00'
+      page.should have_select 'Tipo de empenho', :selecte => 'Ordinário'
+
+      page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Quantidade', :with => '100'
+      page.should have_field 'Valor unitário', :with => '2,00'
+      page.should have_field 'Valor total', :with => '200,00'
+
+      page.should have_field 'Item', :with => '1'
+    end
   end
 
   scenario 'destroy an existent licitation_process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 
@@ -240,7 +325,7 @@ feature "LicitationProcesses" do
   scenario 'creating another licitation with the same year to test process number and licitation number' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Processos Administrativos'
+    click_link 'Processos'
 
     click_link 'Processos Licitatórios'
 
@@ -274,12 +359,11 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    new_licitation_link = (licitation_process.id+1).to_s
-    click_link new_licitation_link
+    click_link "#{licitation_process.process}/2012"
 
     within_tab 'Dados gerais' do
-      page.should have_field 'Processo', :with => '2'
-      page.should have_field 'Número da licitação', :with => '2'
+      page.should have_field 'Processo', :with => licitation_process.process.to_s
+      page.should have_field 'Número da licitação', :with => licitation_process.licitation_number.to_s
     end
   end
 end
