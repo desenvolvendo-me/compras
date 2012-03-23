@@ -174,7 +174,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '50,00'
-      page.should have_select 'Tipo de empenho', :selecte => 'Global'
+      page.should have_select 'Tipo de empenho', :selected => 'Global'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
