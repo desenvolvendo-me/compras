@@ -12,14 +12,10 @@ class AdditionalCreditOpeningMovimentType < ActiveRecord::Base
   validates :capability_id, :uniqueness => { :scope => [:additional_credit_opening_id] }, :allow_blank => true
 
   def moviment_type_as_budget_allocation?
-    return unless moviment_type
-
-    moviment_type.budget_allocation?
+    moviment_type.try(:budget_allocation?)
   end
 
   def moviment_type_as_capability?
-    return unless moviment_type
-
-    moviment_type.capability?
+    moviment_type.try(:capability?)
   end
 end
