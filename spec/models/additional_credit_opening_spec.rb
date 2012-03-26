@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/additional_credit_opening'
+require 'app/models/additional_credit_opening_moviment_type'
 
 describe AdditionalCreditOpening do
   it 'should return year as to_s' do
@@ -9,6 +10,8 @@ describe AdditionalCreditOpening do
   end
 
   it { should belong_to :entity }
+
+  it { should have_many(:additional_credit_opening_moviment_types).dependent(:destroy) }
 
   it { should allow_value(2012).for(:year) }
   it { should_not allow_value(212).for(:year) }
@@ -20,6 +23,54 @@ describe AdditionalCreditOpening do
   it { should validate_presence_of :administractive_act }
   it { should validate_presence_of :credit_date }
   it { should validate_presence_of :additional_credit_opening_nature }
+
+  it 'should not be valid when difference is not zero' do
+    subject.stub(:supplement).and_return(10.0)
+    subject.stub(:reduced).and_return(1.0)
+    subject.should_not be_valid
+    subject.errors[:difference].should include 'não é válido'
+  end
+
+  it 'should be valid when difference is zero' do
+    subject.stub(:supplement).and_return(10.0)
+    subject.stub(:reduced).and_return(10.0)
+    subject.should_not be_valid
+    subject.errors[:difference].should be_empty
+  end
+
+  context 'validating uniquess at additional_credit_opening_moviment_type' do
+    context 'with budget_allocation' do
+      let :budget_allocation_one do
+        AdditionalCreditOpeningMovimentType.new(:budget_allocation_id => 1)
+      end
+
+      let :budget_allocation_two do
+        AdditionalCreditOpeningMovimentType.new(:budget_allocation_id => 1)
+      end
+
+      it 'should not be valid' do
+        subject.additional_credit_opening_moviment_types = [budget_allocation_one, budget_allocation_two]
+        subject.should_not be_valid
+        subject.errors.messages[:additional_credit_opening_moviment_types].should include('já está em uso')
+      end
+    end
+
+    context 'with capability' do
+      let :capability_one do
+        AdditionalCreditOpeningMovimentType.new(:capability_id => 1)
+      end
+
+      let :capability_two do
+        AdditionalCreditOpeningMovimentType.new(:capability_id => 1)
+      end
+
+      it 'should not be valid' do
+        subject.additional_credit_opening_moviment_types = [capability_one, capability_two]
+        subject.should_not be_valid
+        subject.errors.messages[:base].should include('já está em uso')
+      end
+    end
+  end
 
   context 'validating credit date' do
     context 'with last' do

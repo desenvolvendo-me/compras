@@ -1,0 +1,12 @@
+pt-BR:
+  enumerations:
+    publication_circulation_type:
+      municipal_journal: "Jornal de circulação municipal"
+      regional_newspaper: "Jornal de circulação regional"
+      state_newspaper: "Jornal de circulação estadual"
+      national_newspaper: "Jornal de circulação nacional"
+      union_official_daily: "Diário oficial da união"
+      state_official_daily: "Diário oficial do estado"
+      city_official_daily: "Diário oficial do município"
+      public_mural: "Mural público"
+      internet: "Internet"

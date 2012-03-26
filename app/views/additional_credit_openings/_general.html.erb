@@ -1,0 +1,37 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :entity %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :year %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :administractive_act %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :administractive_act_type, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :publication_date, :disabled => true, :input_html => { :value => f.object.presenter.publication_date } %>
+  </div>
+</div>
+
+<%= f.input :credit_type %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :additional_credit_opening_nature %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :kind, :disabled => true, :input_html => { :value => f.object.kind_humanize } %>
+  </div>
+</div>
+
+<%= f.input :credit_date %>

@@ -5,6 +5,10 @@ require 'app/models/administrative_process'
 require 'app/models/capability'
 require 'app/models/period'
 require 'app/models/payment_method'
+require 'app/models/licitation_process_budget_allocation'
+require 'app/models/licitation_process_publication'
+require 'app/models/licitation_process_invited_bidder'
+require 'app/models/budget_allocation'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -19,7 +23,8 @@ describe LicitationProcess do
   it { should belong_to :payment_method }
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_process_budget_allocations).dependent(:destroy).order(:id) }
-
+  it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
+  it { should have_many(:licitation_process_invited_bidders).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of  :year }
   it { should validate_presence_of :process_date }
@@ -69,5 +74,25 @@ describe LicitationProcess do
 
     allocation_one.errors.messages[:budget_allocation_id].should be_nil
     allocation_two.errors.messages[:budget_allocation_id].should be_nil
+  end
+
+  it "the duplicated invited bidders should be invalid except the first" do
+    bidder_one = subject.licitation_process_invited_bidders.build(:provider_id => 1)
+    bidder_two = subject.licitation_process_invited_bidders.build(:provider_id => 1)
+
+    subject.valid?
+
+    bidder_one.errors.messages[:provider_id].should be_nil
+    bidder_two.errors.messages[:provider_id].should include "já está em uso"
+  end
+
+  it "the diferent invited bidders should be valid" do
+    bidder_one = subject.licitation_process_invited_bidders.build(:provider_id => 1)
+    bidder_two = subject.licitation_process_invited_bidders.build(:provider_id => 2)
+
+    subject.valid?
+
+    bidder_one.errors.messages[:provider_id].should be_nil
+    bidder_two.errors.messages[:provider_id].should be_nil
   end
 end

@@ -1,0 +1,10 @@
+pt-BR:
+  enumerations:
+    publication_of:
+      edital: "Edital"
+      extension: "Prorrogação"
+      winners: "Vencedores"
+      canceling: "Cancelamento"
+      edital_rectification: "Retificação do edital"
+      ratification: "Homologação"
+      others: "Outros"

@@ -33,7 +33,7 @@ describe Pledge do
 
     should allow_value(1).for(:value)
     should allow_value(99).for(:value)
-    should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação')
+    should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação, contando com o valor reservado')
   end
 
   it 'should return id as to_s method' do

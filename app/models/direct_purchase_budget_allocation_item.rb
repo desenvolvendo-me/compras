@@ -2,6 +2,8 @@ class DirectPurchaseBudgetAllocationItem < ActiveRecord::Base
   attr_accessible :direct_purchase_budget_allocation_id, :material_id
   attr_accessible :brand, :quantity, :unit_price
 
+  attr_accessor :order
+
   belongs_to :direct_purchase_budget_allocation
   belongs_to :material
 

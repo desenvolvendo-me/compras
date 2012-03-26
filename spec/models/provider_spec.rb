@@ -21,6 +21,7 @@ describe Provider do
   it { should have_many(:provider_partners).dependent(:destroy).order(:id) }
   it { should have_many(:provider_licitation_documents).dependent(:destroy).order(:id) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
+  it { should have_many(:licitation_process_invited_bidders).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration_date }

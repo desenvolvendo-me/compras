@@ -108,7 +108,7 @@ feature "AdministrativeProcesses" do
     page.should have_content "Unidade orçamentária: 02.00 - Secretaria de Educação"
     page.should have_content "Valor estimado: R$ 500,00"
     page.should have_content "Dotação utilizada: #{budget_allocation}"
-    page.should have_content "Modalidade: Pregão presencial"
+    page.should have_content "Modalidade: Convite para compras e serviços de engenharia"
     page.should have_content "Tipo de objeto: Compras e serviços"
     page.should have_content "Forma de julgamento: Forma Global com Menor Preço"
     page.should have_content "Descrição do objeto: Licitação para compra de carteiras"

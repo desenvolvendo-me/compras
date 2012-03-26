@@ -20,4 +20,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_budget_allocations { [LicitationProcessBudgetAllocation.make!(:alocacao)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  licitation_process_invited_bidders { [LicitationProcessInvitedBidder.make!(:licitante)] }
 end

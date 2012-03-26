@@ -2,6 +2,8 @@
 require 'model_helper'
 require 'app/models/capability'
 require 'app/models/budget_allocation'
+require 'app/models/licitation_process'
+require 'app/models/additional_credit_opening_moviment_type'
 
 describe Capability do
   it 'should return to_s as description' do
@@ -12,6 +14,7 @@ describe Capability do
   it { should belong_to :entity }
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict) }
+  it { should have_many(:additional_credit_opening_moviment_types).dependent(:restrict) }
 
   it { should validate_presence_of :status }
   it { should allow_value('1999').for(:year) }

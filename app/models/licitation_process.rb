@@ -3,7 +3,8 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
-  attr_accessible :licitation_process_budget_allocations_attributes
+  attr_accessible :licitation_process_budget_allocations_attributes, :licitation_process_publications_attributes
+  attr_accessible :licitation_process_invited_bidders_attributes
 
   attr_readonly :process, :year
 
@@ -18,22 +19,29 @@ class LicitationProcess < ActiveRecord::Base
   has_and_belongs_to_many :document_types
 
   has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :licitation_process_publications, :dependent => :destroy, :order => :id
+  has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
 
   accepts_nested_attributes_for :licitation_process_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_publications, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_invited_bidders, :reject_if => :all_blank, :allow_destroy => true
 
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
 
-  validates :process_date, :administrative_process, :object_description, :capability, :expiration, :readjustment_index,
-            :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date, :envelope_opening_date,
-            :envelope_opening_time, :presence => true
+  validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
+  validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
+  validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :presence => true
   validates :year, :mask => "9999"
-  validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date }
-  validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date }
+  validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+  validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
 
   validate :cannot_have_duplicated_budget_allocations
+  validate :cannot_have_duplicated_invited_bidders
 
-  before_create :set_process, :set_modality, :set_licitation_number
+  before_create :set_process, :set_licitation_number
+
+  before_save :set_modality, :clear_bidders_depending_on_modality
 
   orderize :id
   filterize
@@ -68,6 +76,13 @@ class LicitationProcess < ActiveRecord::Base
     end
   end
 
+  def clear_bidders_depending_on_modality
+    unless [AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES,
+            AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES].include?(modality)
+      licitation_process_invited_bidders.each(&:destroy)
+    end
+  end
+
   def cannot_have_duplicated_budget_allocations
     single_allocations = []
 
@@ -77,6 +92,18 @@ class LicitationProcess < ActiveRecord::Base
         allocation.errors.add(:budget_allocation_id, :taken)
       end
       single_allocations << allocation.budget_allocation_id
+    end
+  end
+
+  def cannot_have_duplicated_invited_bidders
+    single_bidders = []
+
+    licitation_process_invited_bidders.each do |bidder|
+      if single_bidders.include?(bidder.provider_id)
+        errors.add(:licitation_process_invited_bidders)
+        bidder.errors.add(:provider_id, :taken)
+      end
+      single_bidders << bidder.provider_id
     end
   end
 end

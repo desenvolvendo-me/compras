@@ -1,5 +1,5 @@
 pt-BR:
   enumerations:
     moviment_type_character:
-      budget_allocation: Dotação
-      capability: Recurso
+      budget_allocation: "Dotação"
+      capability: "Recurso"

@@ -1,0 +1,2 @@
+class MovimentTypesController < CrudController
+end

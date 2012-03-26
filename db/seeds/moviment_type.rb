@@ -42,6 +42,6 @@ ActiveRecord::Base.transaction do
       :character => MovimentTypeCharacter::CAPABILITY
     },
   ].each do |object|
-    MovimentType.create object
+    MovimentType.create! object
   end
 end
