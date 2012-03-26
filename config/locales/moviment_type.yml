@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     models:
       moviment_type:
-        one: "Tipos de Movimento"
+        one: "Tipo de Movimento"
         other: "Tipos de Movimentos"
 
     attributes:
