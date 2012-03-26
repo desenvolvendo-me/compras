@@ -31,21 +31,16 @@ class AdditionalCreditOpening < ActiveRecord::Base
     :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
     :type => :date
   }, :allow_blank => true, :if => :publication_date
-  validate :uniqueness_of_budget_allocation_or_capability
+  validate :uniqueness_of_budget_allocation
+  validate :uniqueness_of_capability
 
-  def uniqueness_of_budget_allocation_or_capability
+  def uniqueness_of_budget_allocation
     budget_allocations_count = Hash.new
-    capabilities_count = Hash.new
 
     additional_credit_opening_moviment_types.each do |moviment|
       unless moviment.budget_allocation_id.blank?
         budget_allocations_count[moviment.budget_allocation_id] ||= 0
         budget_allocations_count[moviment.budget_allocation_id] = budget_allocations_count[moviment.budget_allocation_id].to_i + 1
-      end
-
-      unless moviment.capability_id.blank?
-        capabilities_count[moviment.capability_id] ||= 0
-        capabilities_count[moviment.capability_id] = capabilities_count[moviment.capability_id].to_i + 1
       end
     end
 
@@ -54,7 +49,20 @@ class AdditionalCreditOpening < ActiveRecord::Base
         moviment.errors.add(:budget_allocation_id, :taken)
         errors.add(:base, :taken)
       end
+    end
+  end
 
+  def uniqueness_of_capability
+    capabilities_count = Hash.new
+
+    additional_credit_opening_moviment_types.each do |moviment|
+      unless moviment.capability_id.blank?
+        capabilities_count[moviment.capability_id] ||= 0
+        capabilities_count[moviment.capability_id] = capabilities_count[moviment.capability_id].to_i + 1
+      end
+    end
+
+    additional_credit_opening_moviment_types.each do |moviment|
       if capabilities_count[moviment.capability_id].to_i > 1
         moviment.errors.add(:capability_id, :taken)
         errors.add(:base, :taken)
