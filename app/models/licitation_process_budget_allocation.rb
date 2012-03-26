@@ -1,7 +1,7 @@
 class LicitationProcessBudgetAllocation < ActiveRecord::Base
   attr_accessible :licitation_process_id, :budget_allocation_id, :estimated_value, :pledge_type, :items_attributes
 
-  has_enumeration_for :pledge_type, :with => PledgeType
+  has_enumeration_for :pledge_type
 
   belongs_to :licitation_process
   belongs_to :budget_allocation
