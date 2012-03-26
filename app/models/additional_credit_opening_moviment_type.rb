@@ -11,6 +11,8 @@ class AdditionalCreditOpeningMovimentType < ActiveRecord::Base
   validates :budget_allocation_id, :uniqueness => { :scope => [:additional_credit_opening_id] }, :allow_blank => true
   validates :capability_id, :uniqueness => { :scope => [:additional_credit_opening_id] }, :allow_blank => true
 
+  delegate :operation, :to => :moviment_type, :allow_nil => true
+
   def moviment_type_as_budget_allocation?
     moviment_type.try(:budget_allocation?)
   end

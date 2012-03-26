@@ -11,7 +11,9 @@ feature "AdditionalCreditOpenings" do
     AdministractiveAct.make!(:sopa)
     AdditionalCreditOpeningNature.make!(:abre_credito)
     MovimentType.make!(:adicionar_dotacao)
+    MovimentType.make!(:subtrair_do_excesso_arrecadado)
     budget_allocation = BudgetAllocation.make!(:alocacao)
+    Capability.make!(:reforma)
 
     click_link 'Contabilidade'
 
@@ -31,9 +33,28 @@ feature "AdditionalCreditOpenings" do
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
 
-      fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
-      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-      fill_in 'Valor', :with => '10,00'
+      within 'fieldset:first' do
+        fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
+        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '10,00'
+      end
+
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:last' do
+        fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
+        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '10,00'
+      end
+
+      page.should have_disabled_field 'Suplemento'
+      page.should have_field 'Suplemento', :with => '10,00'
+
+      page.should have_disabled_field 'Reduzido'
+      page.should have_field 'Reduzido', :with => '10,00'
+
+      page.should have_disabled_field 'Diferença'
+      page.should have_field 'Diferença', :with => '0,00'
     end
 
     click_button 'Criar Abertura de Crédito Suplementar'
@@ -55,10 +76,75 @@ feature "AdditionalCreditOpenings" do
     end
 
     within_tab 'Movimentos' do
-      page.should have_field 'Tipo de movimento', :with => 'Adicionar dotação'
-      page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
-      page.should have_disabled_field 'Recurso'
-      page.should have_field 'Valor', :with => '10,00'
+      within 'fieldset:first' do
+        page.should have_field 'Tipo de movimento', :with => 'Adicionar dotação'
+        page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
+        page.should have_disabled_field 'Recurso'
+        page.should have_field 'Valor', :with => '10,00'
+      end
+
+      within 'fieldset:last' do
+        page.should have_field 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
+        page.should have_disabled_field 'Dotação'
+        page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+        page.should have_field 'Valor', :with => '10,00'
+      end
+
+      page.should have_disabled_field 'Suplemento'
+      page.should have_field 'Suplemento', :with => '10,00'
+
+      page.should have_disabled_field 'Reduzido'
+      page.should have_field 'Reduzido', :with => '10,00'
+
+      page.should have_disabled_field 'Diferença'
+      page.should have_field 'Diferença', :with => '0,00'
+    end
+  end
+
+  scenario 'validate supplement reduced difference' do
+    AdditionalCreditOpeningNature.make!(:abre_credito)
+    MovimentType.make!(:adicionar_dotacao)
+    MovimentType.make!(:subtrair_do_excesso_arrecadado)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    Capability.make!(:reforma)
+
+    click_link 'Contabilidade'
+
+    click_link 'Aberturas de Créditos Suplementares'
+
+    click_link 'Criar Abertura de Crédito Suplementar'
+
+    within_tab 'Movimentos' do
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:first' do
+        fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
+        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '100,00'
+      end
+
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:last' do
+        fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
+        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '10,00'
+      end
+
+      page.should have_disabled_field 'Suplemento'
+      page.should have_field 'Suplemento', :with => '100,00'
+
+      page.should have_disabled_field 'Reduzido'
+      page.should have_field 'Reduzido', :with => '10,00'
+
+      page.should have_disabled_field 'Diferença'
+      page.should have_field 'Diferença', :with => '90,00'
+    end
+
+    click_button 'Criar Abertura de Crédito Suplementar'
+
+    within_tab 'Movimentos' do
+      page.should have_content 'não é válido'
     end
   end
 
@@ -102,6 +188,7 @@ feature "AdditionalCreditOpenings" do
 
     within_tab 'Movimentos' do
       click_button 'Remover Movimento'
+      click_button 'Remover Movimento'
     end
 
     click_button 'Atualizar Abertura de Crédito Suplementar'
@@ -140,12 +227,13 @@ feature "AdditionalCreditOpenings" do
     end
 
     within_tab 'Movimentos' do
-      click_button 'Remover Movimento'
-      click_button 'Adicionar Movimento'
+      within 'fieldset:first' do
+        fill_in 'Valor', :with => '20,00'
+      end
 
-      fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
-      fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Valor', :with => '20,00'
+      within 'fieldset:last' do
+        fill_in 'Valor', :with => '20,00'
+      end
     end
 
     click_button 'Atualizar Abertura de Crédito Suplementar'
@@ -167,10 +255,13 @@ feature "AdditionalCreditOpenings" do
     end
 
     within_tab 'Movimentos' do
-      page.should have_field 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
-      page.should have_disabled_field 'Dotação'
-      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
-      page.should have_field 'Valor', :with => '20,00'
+      within 'fieldset:first' do
+        page.should have_field 'Valor', :with => '20,00'
+      end
+
+      within 'fieldset:first' do
+        page.should have_field 'Valor', :with => '20,00'
+      end
     end
   end
 
@@ -202,7 +293,7 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'validate uniqueness of capibality' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    AdditionalCreditOpening.make!(:detran_2012_com_recurso)
+    AdditionalCreditOpening.make!(:detran_2012)
 
     click_link 'Contabilidade'
 

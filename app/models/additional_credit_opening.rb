@@ -2,6 +2,9 @@ class AdditionalCreditOpening < ActiveRecord::Base
   attr_accessible :entity_id, :year, :credit_type, :administractive_act_id
   attr_accessible :credit_date, :additional_credit_opening_nature_id
   attr_accessible :additional_credit_opening_moviment_types_attributes
+  # attr_accessible :supplement, :reduced
+
+  attr_accessor :difference
 
   has_enumeration_for :credit_type, :with => AdditionalCreditOpeningCreditType
 
@@ -33,6 +36,27 @@ class AdditionalCreditOpening < ActiveRecord::Base
   }, :allow_blank => true, :if => :publication_date
   validate :uniqueness_of_budget_allocation
   validate :uniqueness_of_capability
+  validate :validate_difference
+
+  before_validation :save_total
+
+  def validate_difference
+    errors.add(:difference, :invalid) unless (self.supplement - self.reduced).zero?
+  end
+
+  def save_total
+    self.supplement, self.reduced = 0.0, 0.0
+
+    additional_credit_opening_moviment_types.each do |item|
+      if item.moviment_type.present? && item.value.present?
+        if item.moviment_type.sum?
+          self.supplement += item.value
+        else item.moviment_type.subtration?
+          self.reduced += item.value
+        end
+      end
+    end
+  end
 
   def uniqueness_of_budget_allocation
     budget_allocations_count = Hash.new

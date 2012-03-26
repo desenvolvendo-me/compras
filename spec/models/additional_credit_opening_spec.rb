@@ -24,6 +24,20 @@ describe AdditionalCreditOpening do
   it { should validate_presence_of :credit_date }
   it { should validate_presence_of :additional_credit_opening_nature }
 
+  it 'should not be valid when difference is not zero' do
+    subject.stub(:supplement).and_return(10.0)
+    subject.stub(:reduced).and_return(1.0)
+    subject.should_not be_valid
+    subject.errors[:difference].should include 'não é válido'
+  end
+
+  it 'should be valid when difference is zero' do
+    subject.stub(:supplement).and_return(10.0)
+    subject.stub(:reduced).and_return(10.0)
+    subject.should_not be_valid
+    subject.errors[:difference].should be_empty
+  end
+
   context 'validating uniquess at additional_credit_opening_moviment_type' do
     context 'with budget_allocation' do
       let :budget_allocation_one do

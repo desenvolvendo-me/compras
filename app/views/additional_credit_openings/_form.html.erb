@@ -24,6 +24,31 @@
     }
   });
 
+  function calcTotal() {
+    var supplement_total = 0.0,
+        reduced_total = 0.0,
+        supplement_element = $('#additional_credit_opening_supplement'),
+        reduced_element = $('#additional_credit_opening_reduced'),
+        difference_element = $('#additional_credit_opening_difference');
+
+    $('#additional-credit-opening-moviment-types').find('fieldset').each(function(){
+      if($(this).find('.destroy').val() == 'false') {
+        var operation = $(this).find('.operation').val(),
+            value = parsePtBrFloat($(this).find('.value').val());
+
+        if(operation == '<%= MovimentTypeOperation::SUM %>') {
+          supplement_total += value;
+        } else if(operation == '<%= MovimentTypeOperation::SUBTRATION %>') {
+          reduced_total += value;
+        }
+      }
+    });
+
+    supplement_element.val(floatToPtBrString(supplement_total));
+    reduced_element.val(floatToPtBrString(reduced_total));
+    difference_element.val(floatToPtBrString(supplement_total - reduced_total));
+  }
+
   $('form.additional_credit_opening').delegate('#additional_credit_opening_administractive_act_id', 'change', function (event, data) {
     if (data) {
       var record = data.record;
@@ -42,6 +67,7 @@
   $('form.additional_credit_opening').delegate('.moviment-type', 'change', function (event, data) {
     if (data){
       var record = data.record;
+      $(this).closest('fieldset').find('.operation').val(record.data('operation'));
 
       if(record.data('character') == 'budget_allocation') {
         $(this).closest('fieldset').find('.budget-allocation').attr('disabled', false);
@@ -54,6 +80,18 @@
         $(this).closest('fieldset').find('[id$=budget_allocation]').val('');
         $(this).closest('fieldset').find('[id$=budget_allocation_id]').val('');
       }
+
+      calcTotal();
     }
   });
+
+  $('form.additional_credit_opening').delegate('.remove-additional-credit-opening-moviment-type', 'click', function() {
+    calcTotal();
+  });
+
+  $('form.additional_credit_opening').delegate('.value', 'keyup', function() {
+    calcTotal();
+  });
+
+  calcTotal();
 </script>
