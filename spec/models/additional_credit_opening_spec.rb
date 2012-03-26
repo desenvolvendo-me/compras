@@ -51,7 +51,7 @@ describe AdditionalCreditOpening do
       it 'should not be valid' do
         subject.additional_credit_opening_moviment_types = [budget_allocation_one, budget_allocation_two]
         subject.should_not be_valid
-        subject.errors.messages[:base].should include('já está em uso')
+        subject.errors.messages[:additional_credit_opening_moviment_types].should include('já está em uso')
       end
     end
 

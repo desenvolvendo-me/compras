@@ -84,7 +84,7 @@ class AdditionalCreditOpening < ActiveRecord::Base
     additional_credit_opening_moviment_types.each do |moviment|
       if budget_allocations_count[moviment.budget_allocation_id].to_i > 1
         moviment.errors.add(:budget_allocation_id, :taken)
-        errors.add(:base, :taken)
+        errors.add(:additional_credit_opening_moviment_types, :taken)
       end
     end
   end
