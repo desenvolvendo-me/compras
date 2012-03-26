@@ -24,6 +24,7 @@
   </div>
 
   <div id="invited-bidders">
+    <%= render 'msg_no_invited_bidders' %>
     <%= render 'invited_bidders', :f => f %>
   </div>
 </div>
@@ -39,6 +40,18 @@
     }
   });
 
+  function toggleInvitedBiddersTab(modality) {
+    if (modality == '<%= AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES %>' ||
+        modality == '<%= AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES %>') {
+      $('#invited_bidders').show();
+      $('#msg-no-invited-bidders').hide();
+    } else {
+      $('#invited_bidders').hide();
+      $('#msg-no-invited-bidders').show();
+    }
+  }
+
+  toggleInvitedBiddersTab('<%= f.object.modality %>');
 
   function abreviatedProcessModality(modality) {
     var abreviations = <%= AbreviatedProcessModality.to_a.to_json.html_safe %>,
@@ -63,6 +76,7 @@
       $('#licitation_process_administrative_process_responsible').val(record.data("responsible"));
       $('#licitation_process_administrative_process_item').val(record.data("item"));
       $('#licitation_process_modality').val(abreviatedProcessModality(record.data("modality")));
+      toggleInvitedBiddersTab(record.data("modality"));
 
     } else {
       $('#licitation_process_administrative_process_organogram').val('');

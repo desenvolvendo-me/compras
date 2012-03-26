@@ -5,6 +5,10 @@ require 'app/models/administrative_process'
 require 'app/models/capability'
 require 'app/models/period'
 require 'app/models/payment_method'
+require 'app/models/licitation_process_budget_allocation'
+require 'app/models/licitation_process_publication'
+require 'app/models/licitation_process_invited_bidder'
+require 'app/models/budget_allocation'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do

@@ -40,13 +40,13 @@ feature "LicitationProcesses" do
 
       # testing delegated fields of administrative process (filled by javascript)
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
-      page.should have_field 'Modalidade', :with => 'Pregão presencial'
+      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
       page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
       page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
       page.should have_field 'Inciso', :with => 'Item 1'
-      page.should have_field 'Abrev. modalidade', :with => 'PP'
+      page.should have_field 'Abrev. modalidade', :with => 'CV'
 
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -132,7 +132,7 @@ feature "LicitationProcesses" do
 
       # testing delegated fields of administrative process
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
-      page.should have_field 'Modalidade', :with => 'Pregão presencial'
+      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
       page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
       page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
@@ -159,7 +159,7 @@ feature "LicitationProcesses" do
       # testing fields of licitation number
       page.should have_field 'Número da licitação', :with => '1'
       page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Abrev. modalidade', :with => 'PP'
+      page.should have_field 'Abrev. modalidade', :with => 'CV'
 
       # testing that delegated fields are cleaned when administrative proccess is cleaned
       clear_modal 'Processo administrativo'
@@ -516,4 +516,38 @@ feature "LicitationProcesses" do
     end
   end
 
+  scenario 'testing that it cleans the invited bidder when modality is not invitation...' do
+    LicitationProcess.make!(:processo_licitatorio)
+    AdministrativeProcess.make!(:compra_sem_convite)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
+    end
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Processo administrativo', :with => '2014', :field => 'Ano'
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    page.should have_notice 'Processo Licitatório editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
+
+      page.should have_content 'Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes.'
+    end
+  end
 end

@@ -39,7 +39,9 @@ class LicitationProcess < ActiveRecord::Base
   validate :cannot_have_duplicated_budget_allocations
   validate :cannot_have_duplicated_invited_bidders
 
-  before_create :set_process, :set_modality, :set_licitation_number
+  before_create :set_process, :set_licitation_number
+
+  before_save :set_modality, :clear_bidders_depending_on_modality
 
   orderize :id
   filterize
@@ -71,6 +73,13 @@ class LicitationProcess < ActiveRecord::Base
       self.licitation_number = last.licitation_number.to_i + 1
     else
       self.licitation_number = 1
+    end
+  end
+
+  def clear_bidders_depending_on_modality
+    unless [AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES,
+            AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES].include?(modality)
+      licitation_process_invited_bidders.each(&:destroy)
     end
   end
 
