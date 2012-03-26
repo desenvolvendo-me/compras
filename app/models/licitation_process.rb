@@ -29,9 +29,9 @@ class LicitationProcess < ActiveRecord::Base
   delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
 
-  validates :process_date, :administrative_process, :object_description, :capability, :expiration, :readjustment_index,
-            :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date, :envelope_opening_date,
-            :envelope_opening_time, :presence => true
+  validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
+  validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
+  validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :presence => true
   validates :year, :mask => "9999"
   validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
   validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
