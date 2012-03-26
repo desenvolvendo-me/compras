@@ -33,8 +33,8 @@ class LicitationProcess < ActiveRecord::Base
             :period, :payment_method, :envelope_delivery_time, :year, :envelope_delivery_date, :envelope_opening_date,
             :envelope_opening_time, :presence => true
   validates :year, :mask => "9999"
-  validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date }
-  validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date }
+  validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+  validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
 
   validate :cannot_have_duplicated_budget_allocations
   validate :cannot_have_duplicated_invited_bidders
