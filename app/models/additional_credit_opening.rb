@@ -40,6 +40,19 @@ class AdditionalCreditOpening < ActiveRecord::Base
 
   before_validation :save_total
 
+  orderize :year
+  filterize
+
+  def to_s
+    "#{year}"
+  end
+
+  protected
+
+  def any_additional_credit_opening?
+    self.class.any?
+  end
+
   def validate_difference
     errors.add(:difference, :invalid) unless (self.supplement - self.reduced).zero?
   end
@@ -92,18 +105,5 @@ class AdditionalCreditOpening < ActiveRecord::Base
         errors.add(:base, :taken)
       end
     end
-  end
-
-  orderize :year
-  filterize
-
-  def to_s
-    "#{year}"
-  end
-
-  protected
-
-  def any_additional_credit_opening?
-    self.class.any?
   end
 end
