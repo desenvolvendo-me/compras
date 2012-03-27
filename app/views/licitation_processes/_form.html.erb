@@ -43,10 +43,10 @@
   function toggleInvitedBiddersTab(modality) {
     if (modality == '<%= AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES %>' ||
         modality == '<%= AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES %>') {
-      $('#invited_bidders').show();
+      $('#invited-bidders-content').show();
       $('#msg-no-invited-bidders').hide();
     } else {
-      $('#invited_bidders').hide();
+      $('#invited-bidders-content').hide();
       $('#msg-no-invited-bidders').show();
     }
   }
@@ -162,4 +162,40 @@
   });
 
   toggleBidderDates();
+
+  $('#invited_bidders').bind('append.mustache', function() {
+    var lastBidder = $(this).find('.licitation-process-invited-bidder:last'),
+        target = lastBidder.find('.document-fields');
+
+    $.each($('.document-type'), function(index, docRecord) {
+      var docId = $(docRecord).find('.document-id').val(),
+          docDescription = $(docRecord).find('.document-desc').val(),
+          mustache = lastBidder.find('[type="text/x-mustache"]').mustache({docId:docId,
+                                                                           docDescription:docDescription,
+                                                                           uuid_licitation_process_invited_bidder_document:'fresh-' + index});
+
+      target.append(mustache);
+    });
+  });
+
+  $('.licitation_process_document_types_records').bind('append.mustache', function() {
+    var docRecord = $('.document-type:last'),
+        docId = docRecord.find('.document-id').val(),
+        docDescription = docRecord.find('.document-desc').val();
+
+    $.each($('.licitation-process-invited-bidder'), function() {
+      var mustache = $(this).find('[type="text/x-mustache"]').mustache({docId:docId,
+                                                                        docDescription:docDescription,
+                                                                        uuid_licitation_process_invited_bidder_document:'fresh-' + docId});
+
+      $(this).find('.document-fields').append(mustache);
+    });
+  });
+
+  $('form.licitation_process').delegate(".modal-finder-remove", "click", function () {
+    var docId = $(this).closest("tr").find('.document-id').val(),
+        input = $('input.bidder-document-type-id[value="' + docId + '"]');
+
+    input.closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
+  });
 </script>

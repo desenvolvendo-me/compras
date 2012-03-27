@@ -111,6 +111,13 @@ feature "LicitationProcesses" do
       fill_in 'Protocolo', :with => '123456'
       fill_in 'Data do protocolo', :with => I18n.l(Date.current)
       fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+
+      page.should have_disabled_field 'Documento'
+      page.should have_field 'Documento', :with => 'Fiscal'
+
+      fill_in 'Número/certidão', :with => '123456'
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Validade', :with =>  I18n.l(Date.tomorrow)
     end
 
     click_button 'Criar Processo Licitatório'
@@ -207,6 +214,13 @@ feature "LicitationProcesses" do
       page.should have_field 'Protocolo', :with => '123456'
       page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
       page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+
+      page.should have_disabled_field 'Documento'
+      page.should have_field 'Documento', :with => 'Fiscal'
+
+      page.should have_field 'Número/certidão', :with => '123456'
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+      page.should have_field 'Validade', :with =>  I18n.l(Date.tomorrow)
     end
   end
 
@@ -299,6 +313,12 @@ feature "LicitationProcesses" do
       fill_in 'Protocolo', :with => '111111'
       fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
       fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+
+      page.should have_field 'Documento', :with => 'Oficial'
+
+      fill_in 'Número/certidão', :with => '987654'
+      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      fill_in 'Validade', :with =>  I18n.l(Date.tomorrow + 1.day)
     end
 
     click_button 'Atualizar Processo Licitatório'
@@ -370,6 +390,12 @@ feature "LicitationProcesses" do
       page.should have_field 'Protocolo', :with => '111111'
       page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+
+      page.should have_field 'Documento', :with => 'Oficial'
+
+      page.should have_field 'Número/certidão', :with => '987654'
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Validade', :with =>  I18n.l(Date.tomorrow + 1.day)
     end
   end
 
@@ -548,6 +574,64 @@ feature "LicitationProcesses" do
       page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
 
       page.should have_content 'Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes.'
+    end
+  end
+
+  scenario 'testing inclusion/exclusion of document types for invited bidders' do
+    LicitationProcess.make!(:processo_licitatorio)
+    DocumentType.make!(:oficial)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    # adding another document
+
+    within_tab 'Documentos' do
+      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Documento', :with => 'Oficial'
+    end
+ 
+    # removing the first document
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Documento', :with => 'Fiscal'
+    end
+
+    within_tab 'Documentos' do
+      within '.record:first' do
+        click_button 'Remover'
+      end
+    end
+
+    within_tab 'Licitantes convidados' do
+      fill_in 'Número/certidão', :with => '34567'
+      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 2.days)
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    page.should have_notice 'Processo Licitatório editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should_not have_field 'Documento', :with => 'Fiscal'
+
+      page.should have_field 'Documento', :with => 'Oficial'
+      page.should have_field 'Número/certidão', :with => '34567'
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 2.days)
     end
   end
 end

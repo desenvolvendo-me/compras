@@ -1,4 +1,4 @@
-<fieldset class="licitation-process-invited-bidder">
+<fieldset class="licitation-process-invited-bidder" id="<%= f.nested_identifier %>">
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
@@ -24,7 +24,27 @@
     </div>
   </div>
 
+  <div id="licitation-process-invited-bidder-documents-<%= f.nested_identifier %>" class="document-fields">
+    <%= f.association :licitation_process_invited_bidder_documents, :collection => localized(f.object.licitation_process_invited_bidder_documents) do |p| %>
+      <%= render 'licitation_process_invited_bidder_documents/form', :f => p, :document_id => p.object.document_type_id %>
+    <% end %>
+  </div>
+
+  <%= mustache "licitation-process-invited-bidder-documents-template-#{f.nested_identifier}" do %>
+    <%= f.association :licitation_process_invited_bidder_documents_attributes, :collection => f.object.licitation_process_invited_bidder_documents.build, :index => '{{uuid_licitation_process_invited_bidder_document}}' do |document| %>
+      <%= render 'licitation_process_invited_bidder_documents/form', :f => document %>
+    <% end %>
+  <% end %>
+
   <div class="nested-remove">
     <input type="button" class="button negative remove-licitation-process-invited-bidder" value="Remover Licitante">
   </div>
 </fieldset>
+
+<script>
+  $("#licitation-process-invited-bidder-documents-template-<%= f.nested_identifier %>").nestedForm({
+    add: ".add-licitation-process-invited-bidder-documents-<%= f.nested_identifier %>",
+    target: "#licitation-process-invited-bidder-documents-<%= f.nested_identifier %>",
+    uuid: "uuid_licitation_process_invited_bidder_document"
+  });
+</script>

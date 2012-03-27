@@ -21,6 +21,7 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
+  has_many :licitation_process_invited_bidder_documents, :through => :licitation_process_invited_bidders
 
   accepts_nested_attributes_for :licitation_process_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_publications, :reject_if => :all_blank, :allow_destroy => true

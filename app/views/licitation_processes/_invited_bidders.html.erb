@@ -1,13 +1,15 @@
-<div id="invited_bidders">
-  <%= f.association :licitation_process_invited_bidders, :collection => localized(f.object.licitation_process_invited_bidders) do |p| %>
-    <%= render 'licitation_process_invited_bidders/form', :f => p %>
-  <% end %>
-
-  <%= mustache 'licitation-process-invited-bidders-template' do %>
-    <%= f.association :licitation_process_invited_bidders_attributes, :collection => f.object.licitation_process_invited_bidders.build, :index => '{{uuid_licitation_process_invited_bidder}}' do |p| %>
+<div id="invited-bidders-content">
+  <div id="invited_bidders">
+    <%= f.association :licitation_process_invited_bidders, :collection => localized(f.object.licitation_process_invited_bidders) do |p| %>
       <%= render 'licitation_process_invited_bidders/form', :f => p %>
     <% end %>
-  <% end %>
+
+    <%= mustache 'licitation-process-invited-bidders-template' do %>
+      <%= f.association :licitation_process_invited_bidders_attributes, :collection => f.object.licitation_process_invited_bidders.build, :index => '{{uuid_licitation_process_invited_bidder}}' do |p| %>
+        <%= render 'licitation_process_invited_bidders/form', :f => p %>
+      <% end %>
+    <% end %>
+  </div>
 
   <p>
     <input type="button" class="button affirmative add-licitation-process-invited-bidder" value="Adicionar Licitante">
