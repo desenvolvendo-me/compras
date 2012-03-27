@@ -243,6 +243,77 @@ feature "AdditionalCreditOpenings" do
     end
   end
 
+  context 'should have modal link to capability' do
+    scenario 'when already stored' do
+      AdditionalCreditOpening.make!(:detran_2012)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:last' do
+          within '.capability-field' do
+            click_link 'Mais informações'
+          end
+        end
+      end
+
+      page.should have_content 'Informações de: Reforma e Ampliação'
+    end
+
+    scenario 'when change' do
+      AdditionalCreditOpening.make!(:detran_2012)
+      Capability.make!(:construcao)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:last' do
+          fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
+
+          within '.capability-field' do
+            click_link 'Mais informações'
+          end
+        end
+      end
+
+      page.should have_content 'Informações de: Construção'
+    end
+
+    scenario 'when add a new record' do
+      MovimentType.make!(:subtrair_do_excesso_arrecadado)
+      Capability.make!(:construcao)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link 'Criar Abertura de Crédito Suplementar'
+
+      within_tab 'Movimentos' do
+        click_button 'Adicionar Movimento'
+
+        within 'fieldset:first' do
+          fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
+          fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
+
+          within '.capability-field' do
+            click_link 'Mais informações'
+          end
+        end
+      end
+
+      page.should have_content 'Informações de: Construção'
+    end
+  end
+
   scenario 'remove additional_credit_opening_moviment_type' do
     AdditionalCreditOpening.make!(:detran_2012)
 

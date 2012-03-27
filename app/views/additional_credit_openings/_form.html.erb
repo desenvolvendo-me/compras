@@ -72,6 +72,14 @@
     }
   });
 
+  $('form.additional_credit_opening').delegate('.capability', 'change', function (event, data) {
+    if(data) {
+      var record = data.record;
+
+      $(this).closest('fieldset').find('.capability').attr('data-info-url', "/capabilities/"+record.data('value'));
+    }
+  });
+
   $('form.additional_credit_opening').delegate('.moviment-type', 'change', function (event, data) {
     if (data){
       var record = data.record;

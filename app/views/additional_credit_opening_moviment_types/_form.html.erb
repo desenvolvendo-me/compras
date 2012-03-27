@@ -11,8 +11,9 @@
       <%= link_to_modal_info "#{'additional_credit_opening_additional_credit_opening_moviment_types_attributes_' unless f.object.persisted?}#{f.nested_identifier}_budget_allocation", f.object.budget_allocation %>
     </div>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-3 capability-field">
       <%= f.input :capability, :disabled => f.object.moviment_type_as_budget_allocation?, :input_html => { :class => 'capability' } %>
+      <%= link_to_modal_info "#{'additional_credit_opening_additional_credit_opening_moviment_types_attributes_' unless f.object.persisted?}#{f.nested_identifier}_capability", f.object.capability %>
     </div>
 
     <div class="yui3-u-1-3">
