@@ -64,6 +64,14 @@
     }
   });
 
+  $('form.additional_credit_opening').delegate('.budget-allocation', 'change', function (event, data) {
+    if(data) {
+      var record = data.record;
+
+      $(this).closest('fieldset').find('.budget-allocation').attr('data-info-url', "/budget_allocations/"+record.data('id'));
+    }
+  });
+
   $('form.additional_credit_opening').delegate('.moviment-type', 'change', function (event, data) {
     if (data){
       var record = data.record;

@@ -177,6 +177,72 @@ feature "AdditionalCreditOpenings" do
     page.should have_field 'Classificação da natureza de crédito', :with => 'Outros'
   end
 
+  context 'should have modal link' do
+    scenario 'when already stored' do
+      AdditionalCreditOpening.make!(:detran_2012)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:first' do
+          click_link 'Mais informações'
+        end
+      end
+
+      page.should have_content 'Informações de: Alocação'
+    end
+
+    scenario 'when change budget_allocation' do
+      AdditionalCreditOpening.make!(:detran_2012)
+      budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:first' do
+
+          fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+          click_link 'Mais informações'
+        end
+      end
+
+      page.should have_content 'Informações de: Alocação extra'
+    end
+
+    scenario 'when add a new record' do
+      MovimentType.make!(:adicionar_dotacao)
+      budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link 'Criar Abertura de Crédito Suplementar'
+
+      within_tab 'Movimentos' do
+        click_button 'Adicionar Movimento'
+
+        within 'fieldset:first' do
+          fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
+          fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+          click_link 'Mais informações'
+        end
+      end
+
+      page.should have_content 'Informações de: Alocação extra'
+    end
+  end
+
   scenario 'remove additional_credit_opening_moviment_type' do
     AdditionalCreditOpening.make!(:detran_2012)
 
