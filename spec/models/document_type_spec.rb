@@ -14,5 +14,6 @@ describe DocumentType do
   it { should validate_presence_of :description }
 
   it { should have_many(:provider_licitation_documents).dependent(:restrict) }
+  it { should have_many(:licitation_process_invited_bidder_documents).dependent(:restrict) }
   it { should have_and_belong_to_many(:licitation_processes) }
 end
