@@ -2,6 +2,8 @@ class LicitationProcessBudgetAllocationItem < ActiveRecord::Base
   attr_accessible :licitation_process_budget_allocation_id, :material_id
   attr_accessible :quantity, :unit_price
 
+  attr_accessor :order
+
   belongs_to :licitation_process_budget_allocation
   belongs_to :material
 
