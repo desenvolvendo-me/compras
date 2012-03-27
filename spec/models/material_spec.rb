@@ -16,6 +16,7 @@ describe Material do
   it { should have_and_belong_to_many :providers }
   it { should have_and_belong_to_many :licitation_objects }
   it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
+  it { should have_many(:licitation_process_budget_allocation_items).dependent(:restrict) }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }
