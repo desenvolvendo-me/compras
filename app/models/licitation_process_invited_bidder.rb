@@ -20,7 +20,7 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
   protected
 
   def clear_dates_if_auto_convocation
-    if auto_convocation
+    if auto_convocation?
       self.protocol_date = nil
       self.receipt_date = nil
     end
