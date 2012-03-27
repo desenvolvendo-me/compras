@@ -57,7 +57,7 @@ class LicitationProcess < ActiveRecord::Base
     last = self.class.where(:year => year).last
 
     if last
-      self.process = last.process.to_i + 1
+      self.process = last.process.succ
     else
       self.process = 1
     end
@@ -71,7 +71,7 @@ class LicitationProcess < ActiveRecord::Base
     last = self.class.where(:year => year, :administrative_process_id => administrative_process_id).last
 
     if last
-      self.licitation_number = last.licitation_number.to_i + 1
+      self.licitation_number = last.licitation_number.succ
     else
       self.licitation_number = 1
     end
