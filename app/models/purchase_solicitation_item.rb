@@ -11,7 +11,7 @@ class PurchaseSolicitationItem < ActiveRecord::Base
   validates :material, :quantity, :unit_price, :presence => true
 
   def estimated_total_price
-    if (quantity && unit_price)
+    if quantity && unit_price
       quantity * unit_price
     else
       0
