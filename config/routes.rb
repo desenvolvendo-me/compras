@@ -153,7 +153,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :administractive_act_type_classifications do
+  resources :regulatory_act_type_classifications do
     collection do
       get :filter
       get :modal

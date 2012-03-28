@@ -8,4 +8,4 @@ pt-BR:
     attributes:
       administractive_act_type:
         description: "Descrição"
-        administractive_act_type_classification: "Classificação do tipo de ato administrativo"
+        regulatory_act_type_classification: "Classificação do tipo de ato regulamentador"

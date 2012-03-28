@@ -7,7 +7,7 @@ feature "AdministractiveActTypes" do
   end
 
   scenario 'create a new administractive_act_type' do
-    AdministractiveActTypeClassification.make!(:primeiro_tipo)
+    RegulatoryActTypeClassification.make!(:primeiro_tipo)
 
     click_link 'Contabilidade'
 
@@ -15,7 +15,7 @@ feature "AdministractiveActTypes" do
 
     click_link 'Criar Tipo de Ato Administrativo'
 
-    fill_modal 'Classificação do tipo de ato administrativo', :with => 'Tipo 01', :field => 'Descrição'
+    fill_modal 'Classificação do tipo de ato regulamentador', :with => 'Tipo 01', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Lei'
 
     click_button 'Criar Tipo de Ato Administrativo'
@@ -24,7 +24,7 @@ feature "AdministractiveActTypes" do
 
     click_link 'Lei'
 
-    page.should have_field 'Classificação do tipo de ato administrativo', :with => 'Tipo 01'
+    page.should have_field 'Classificação do tipo de ato regulamentador', :with => 'Tipo 01'
     page.should have_field 'Descrição', :with => 'Lei'
   end
 
@@ -48,7 +48,7 @@ feature "AdministractiveActTypes" do
 
   scenario 'update an existent administractive_act_type' do
     AdministractiveActType.make!(:lei)
-    AdministractiveActTypeClassification.make!(:segundo_tipo)
+    RegulatoryActTypeClassification.make!(:segundo_tipo)
 
     click_link 'Contabilidade'
 
@@ -56,7 +56,7 @@ feature "AdministractiveActTypes" do
 
     click_link 'Lei'
 
-    fill_modal 'Classificação do tipo de ato administrativo', :with => 'Tipo 02', :field => 'Descrição'
+    fill_modal 'Classificação do tipo de ato regulamentador', :with => 'Tipo 02', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Outra Lei'
 
     click_button 'Atualizar Tipo de Ato Administrativo'
@@ -65,7 +65,7 @@ feature "AdministractiveActTypes" do
 
     click_link 'Outra Lei'
 
-    page.should have_field 'Classificação do tipo de ato administrativo', :with => 'Tipo 02'
+    page.should have_field 'Classificação do tipo de ato regulamentador', :with => 'Tipo 02'
     page.should have_field 'Descrição', :with => 'Outra Lei'
   end
 

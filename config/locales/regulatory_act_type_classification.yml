@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      regulatory_act_type_classification:
+        one: "Classificação de Tipos de Ato Regulamentador"
+        other: "Classificações de Tipo de Ato Regulamentador"
+
+    attributes:
+      regulatory_act_type_classification:
+        description: "Descrição"
