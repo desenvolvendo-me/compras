@@ -51,7 +51,7 @@
     }
   }
 
-  toggleInvitedBiddersTab('<%= f.object.modality %>');
+  toggleInvitedBiddersTab('<%= f.object.administrative_process_modality %>');
 
   function abreviatedProcessModality(modality) {
     var abreviations = <%= AbreviatedProcessModality.to_a.to_json.html_safe %>,
