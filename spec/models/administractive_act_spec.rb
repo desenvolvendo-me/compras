@@ -12,7 +12,7 @@ describe AdministractiveAct do
     subject.to_s.should eq '01'
   end
 
-  it { should belong_to :administractive_act_type }
+  it { should belong_to :regulatory_act_type }
   it { should belong_to :legal_text_nature }
 
   it { should have_one(:additional_credit_opening) }
@@ -23,7 +23,7 @@ describe AdministractiveAct do
 
   it { should have_and_belong_to_many :dissemination_sources}
   it { should validate_presence_of :act_number }
-  it { should validate_presence_of :administractive_act_type }
+  it { should validate_presence_of :regulatory_act_type }
   it { should validate_presence_of :creation_date }
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :vigor_date }

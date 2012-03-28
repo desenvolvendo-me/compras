@@ -184,7 +184,7 @@ feature "AdditionalCreditOpenings" do
     end
   end
 
-  scenario 'when fill administractive act should fill administractive_act_type and publication_date too' do
+  scenario 'when fill administractive act should fill regulatory_act_type and publication_date too' do
     AdministractiveAct.make!(:sopa)
 
     click_link 'Contabilidade'

@@ -66,7 +66,7 @@ feature "AdministractiveActs" do
 
   scenario 'update an existent administractive_act' do
     make_dependencies!
-    AdministractiveActType.make!(:emenda)
+    RegulatoryActType.make!(:emenda)
     AdministractiveAct.make!(:sopa)
     DisseminationSource.make!(:jornal_bairro)
     LegalTextNature.make!(:trabalhista)
@@ -198,7 +198,7 @@ feature "AdministractiveActs" do
   end
 
   def make_dependencies!
-    AdministractiveActType.make!(:lei)
+    RegulatoryActType.make!(:lei)
     DisseminationSource.make!(:jornal_municipal)
     LegalTextNature.make!(:civica)
   end

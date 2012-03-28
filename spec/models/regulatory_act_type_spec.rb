@@ -1,8 +1,8 @@
 require 'model_helper'
-require 'app/models/administractive_act_type'
+require 'app/models/regulatory_act_type'
 require 'app/models/administractive_act'
 
-describe AdministractiveActType do
+describe RegulatoryActType do
   it 'should return description as to_s method' do
     subject.description = 'Lei'
     subject.to_s.should eq 'Lei'

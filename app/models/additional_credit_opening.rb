@@ -14,7 +14,7 @@ class AdditionalCreditOpening < ActiveRecord::Base
 
   has_many :additional_credit_opening_moviment_types, :dependent => :destroy
 
-  delegate :administractive_act_type, :publication_date, :to => :administractive_act, :allow_nil => true
+  delegate :regulatory_act_type, :publication_date, :to => :administractive_act, :allow_nil => true
   delegate :kind, :kind_humanize, :to => :additional_credit_opening_nature, :allow_nil => true
 
   accepts_nested_attributes_for :additional_credit_opening_moviment_types, :allow_destroy => true

@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       administractive_act:
         act_number: "Número"
-        administractive_act_type: "Tipo"
+        regulatory_act_type: "Tipo"
         legal_text_nature: "Natureza legal do texto jurídico"
         creation_date: "Data da criação"
         publication_date: "Data da publicação"

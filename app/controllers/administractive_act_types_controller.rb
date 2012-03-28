@@ -1,2 +1,0 @@
-class AdministractiveActTypesController < CrudController
-end

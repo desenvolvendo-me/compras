@@ -1,4 +1,4 @@
-class AdministractiveActType < ActiveRecord::Base
+class RegulatoryActType < ActiveRecord::Base
   attr_accessible :description, :regulatory_act_type_classification_id
 
   belongs_to :regulatory_act_type_classification

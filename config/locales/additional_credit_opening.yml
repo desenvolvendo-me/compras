@@ -11,7 +11,7 @@ pt-BR:
         year: "Exercício"
         credit_type: "Tipo de crédito"
         administractive_act: "Ato regulamentador"
-        administractive_act_type: "Tipo de ato regulamentador"
+        regulatory_act_type: "Tipo de ato regulamentador"
         publication_date: "Data de publicação"
         credit_date: "Data crédito"
         additional_credit_opening_nature: "Natureza de crédito"
