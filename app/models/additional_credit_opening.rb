@@ -37,6 +37,7 @@ class AdditionalCreditOpening < ActiveRecord::Base
   validate :uniqueness_of_budget_allocation
   validate :uniqueness_of_capability
   validate :validate_difference
+  validate :validate_item_value_when_budget_allocation
 
   before_validation :save_total
 
@@ -55,6 +56,15 @@ class AdditionalCreditOpening < ActiveRecord::Base
 
   def validate_difference
     errors.add(:difference, :invalid) unless (self.supplement - self.reduced).zero?
+  end
+
+  def validate_item_value_when_budget_allocation(numeric_parser = ::I18n::Alchemy::NumericParser)
+    additional_credit_opening_moviment_types.each do |item|
+      if item.budget_allocation? && item.subtration? && item.value > item.budget_allocation_real_amount
+        item.errors.add(:value, I18n.t('errors.messages.must_not_be_greater_than_budget_allocation_real_amount', :value => numeric_parser.localize(item.budget_allocation_real_amount)))
+        errors.add(:additional_credit_opening_moviment_types, :invalid)
+      end
+    end
   end
 
   def save_total

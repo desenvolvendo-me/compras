@@ -101,6 +101,42 @@ feature "AdditionalCreditOpenings" do
     end
   end
 
+  scenario 'when operation is subtration and budget_allocation used item value should not be greather than budget allocation real_amount' do
+    MovimentType.make!(:subtrair_dotacao)
+    MovimentType.make!(:adicionar_em_outros_casos)
+    BudgetAllocation.make!(:alocacao)
+    Capability.make!(:reforma)
+
+    click_link 'Contabilidade'
+
+    click_link 'Aberturas de Créditos Suplementares'
+
+    click_link 'Criar Abertura de Crédito Suplementar'
+    within_tab 'Movimentos' do
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:first' do
+        fill_modal 'Tipo de movimento', :with => 'Subtrair dotação'
+        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '501,00'
+      end
+
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:last' do
+        fill_modal 'Tipo de movimento', :with => 'Adicionar em outros casos'
+        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '10,00'
+      end
+    end
+
+    click_button 'Criar Abertura de Crédito Suplementar'
+
+    within_tab 'Movimentos' do
+      page.should have_content 'não pode ser maior que o saldo real da dotação (R$ 500,00)'
+    end
+  end
+
   scenario 'validate supplement reduced difference' do
     AdditionalCreditOpeningNature.make!(:abre_credito)
     MovimentType.make!(:adicionar_dotacao)

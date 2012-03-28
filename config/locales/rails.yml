@@ -216,6 +216,7 @@ pt-BR:
       must_have_at_least_one_partner: "Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável"
       must_have_at_least_one_budget_allocation: "é necessário cadastrar pelo menos uma dotação"
       must_have_at_least_one_item: "é necessário cadastrar pelo menos um item"
+      must_not_be_greater_than_budget_allocation_real_amount: "não pode ser maior que o saldo real da dotação (R$ %{value})"
 
   activerecord:
     errors:
