@@ -3,6 +3,7 @@
     <li><a href="#general">Principal</a></li>
     <li><a href="#complement">Complementar</a></li>
     <li><a href="#items">Itens</a></li>
+    <li><a href="#expirations">Vencimentos</a></li>
   </ul>
 
   <div id="general">
@@ -15,6 +16,10 @@
 
   <div id="items">
     <%= render 'items', :f => f %>
+  </div>
+
+  <div id="expirations">
+    <%= render 'expirations', :f => f %>
   </div>
 </div>
 
@@ -100,6 +105,20 @@
     return floatToPtBrString(total);
   }
 
+  function fillExpirationNumber() {
+    $('fieldset.pledge-expiration .destroy[value=false]').each(function(index, item){
+      $(this).parent().parent().find('.order').val(index + 1);
+    });
+  }
+
+  $('form.pledge').delegate('.remove-pledge-expiration', 'click', function() {
+    fillExpirationNumber();
+  });
+
+  $('form.pledge').bind('append.mustache', function(){
+    fillExpirationNumber();
+  });
+
   $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
     $('#pledge_items_total_value').val(pledgeItemsTotalValue);
   });
@@ -114,4 +133,6 @@
     $('form.pledge .remove-pledge-item').hide();
     $('form.pledge .hint').hide();
   <% end %>
+
+  fillExpirationNumber();
 </script>

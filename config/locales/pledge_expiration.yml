@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_expiration:
+        one: "Vencimento"
+        other: "Vencimentos"
+
+    attributes:
+      pledge_expiration:
+        order: "Número"
+        expiration_date: "Vencimento"
+        value: "Valor"

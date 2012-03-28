@@ -4,6 +4,7 @@ class Pledge < ActiveRecord::Base
   attr_accessible :pledge_historic_id, :management_contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
   attr_accessible :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
+  attr_accessible :pledge_expirations_attributes
 
   attr_accessor :licitation, :process
 
@@ -23,8 +24,10 @@ class Pledge < ActiveRecord::Base
   belongs_to :licitation_modality
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
+  has_many :pledge_expirations, :dependent => :destroy
 
   accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :pledge_expirations, :reject_if => :all_blank, :allow_destroy => true
 
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
@@ -42,6 +45,9 @@ class Pledge < ActiveRecord::Base
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
+  validate :expirations_should_have_date_greater_than_emission_date
+  validate :expirations_should_have_date_greater_than_last_expiration_date
+  validate :pledge_expirations_value_should_be_equals_value
 
   before_save :parse_licitation, :parse_process
 
@@ -65,6 +71,42 @@ class Pledge < ActiveRecord::Base
   end
 
   protected
+
+  def pledge_expirations_value_should_be_equals_value
+    return unless value
+
+    if pledge_expirations.map(&:value).compact.sum != value
+      pledge_expirations.each do |expiration|
+        expiration.errors.add(:value, :pledge_expiration_value_sum_must_be_equals_to_pledge_value)
+      end
+
+      errors.add(:pledge_expirations, :invalid)
+    end
+  end
+
+  def expirations_should_have_date_greater_than_last_expiration_date
+    last_expiration = nil
+
+    pledge_expirations.each do |expiration|
+      if last_expiration && expiration.expiration_date && expiration.expiration_date < last_expiration.expiration_date
+        expiration.errors.add(:expiration_date, :must_be_greater_than_last_expiration_date)
+        errors.add(:pledge_expirations, :invalid)
+      end
+
+      last_expiration = expiration
+    end
+  end
+
+  def expirations_should_have_date_greater_than_emission_date
+    pledge_expirations.each do |expiration|
+      return unless emission_date && expiration.expiration_date
+
+      unless expiration.expiration_date > emission_date
+        expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
+        errors.add(:pledge_expirations, :invalid)
+      end
+    end
+  end
 
   def parse_licitation
     parser = NumberYearParser.new(licitation)
