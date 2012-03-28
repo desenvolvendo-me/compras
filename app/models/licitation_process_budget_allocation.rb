@@ -13,4 +13,20 @@ class LicitationProcessBudgetAllocation < ActiveRecord::Base
   delegate :expense_economic_classification, :amount, :to => :budget_allocation, :allow_nil => true
 
   validates :budget_allocation, :estimated_value, :pledge_type, :presence => true
+
+  validate :cannot_have_duplicated_materials_on_items
+
+  protected
+
+  def cannot_have_duplicated_materials_on_items
+    single_materials = []
+
+    items.each do |item|
+      if single_materials.include?(item.material_id)
+        errors.add(:items)
+        item.errors.add(:material_id, :taken)
+      end
+      single_materials << item.material_id
+    end
+  end
 end

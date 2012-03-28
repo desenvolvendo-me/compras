@@ -634,4 +634,39 @@ feature "LicitationProcesses" do
       page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 2.days)
     end
   end
+
+  scenario 'cannot include the same material twice on a budget allocation' do
+    LicitationProcess.make!(:processo_licitatorio)
+    Material.make!(:antivirus)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_in 'Quantidade', :with => 2
+      fill_in 'Valor unitário', :with => 1
+
+      click_button 'Adicionar Item'
+
+      within '.item:last' do
+        fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+        fill_in 'Quantidade', :with => 3
+        fill_in 'Valor unitário', :with => 4
+      end
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content 'já está em uso'
+    end
+  end
 end
