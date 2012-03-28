@@ -1,14 +1,14 @@
 class Function < ActiveRecord::Base
-  attr_accessible :code, :administractive_act_id, :description
+  attr_accessible :code, :regulatory_act_id, :description
 
-  belongs_to :administractive_act
+  belongs_to :regulatory_act
 
   has_many :subfunctions, :dependent => :restrict
 
-  delegate :vigor_date, :to => :administractive_act, :allow_nil => true, :prefix => true
+  delegate :vigor_date, :to => :regulatory_act, :allow_nil => true, :prefix => true
 
   validates :code, :presence => true, :numericality => true
-  validates :code, :uniqueness => { :scope => :administractive_act_id, :message => :taken_for_administractive_act }
+  validates :code, :uniqueness => { :scope => :regulatory_act_id, :message => :taken_for_regulatory_act }
   validates :description, :presence => true
 
   orderize :code

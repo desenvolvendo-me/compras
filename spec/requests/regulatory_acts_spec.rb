@@ -1,19 +1,19 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "AdministractiveActs" do
+feature "RegulatoryActs" do
   background do
     sign_in
   end
 
-  scenario 'create a new administractive_act' do
+  scenario 'create a new regulatory_act' do
     make_dependencies!
 
     click_link 'Contabilidade'
 
-    click_link 'Atos Administrativos'
+    click_link 'Atos Regulamentadores'
 
-    click_link 'Criar Ato Administrativo'
+    click_link 'Criar Ato Regulamentador'
 
     within_tab "Principal" do
       fill_in 'Número', :with => '1234'
@@ -36,9 +36,9 @@ feature "AdministractiveActs" do
       fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
     end
 
-    click_button 'Criar Ato Administrativo'
+    click_button 'Criar Ato Regulamentador'
 
-    page.should have_notice 'Ato Administrativo criado com sucesso.'
+    page.should have_notice 'Ato Regulamentador criado com sucesso.'
 
     click_link '1234'
 
@@ -64,16 +64,16 @@ feature "AdministractiveActs" do
     end
   end
 
-  scenario 'update an existent administractive_act' do
+  scenario 'update an existent regulatory_act' do
     make_dependencies!
     RegulatoryActType.make!(:emenda)
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
     DisseminationSource.make!(:jornal_bairro)
     LegalTextNature.make!(:trabalhista)
 
     click_link 'Contabilidade'
 
-    click_link 'Atos Administrativos'
+    click_link 'Atos Regulamentadores'
 
     click_link '1234'
 
@@ -98,9 +98,9 @@ feature "AdministractiveActs" do
       fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Bairro', :field => 'Descrição'
     end
 
-    click_button 'Atualizar Ato Administrativo'
+    click_button 'Atualizar Ato Regulamentador'
 
-    page.should have_notice 'Ato Administrativo editado com sucesso.'
+    page.should have_notice 'Ato Regulamentador editado com sucesso.'
 
     click_link '6789'
 
@@ -126,59 +126,59 @@ feature "AdministractiveActs" do
     end
   end
 
-  scenario 'destroy an existent administractive_act' do
-    AdministractiveAct.make!(:sopa)
+  scenario 'destroy an existent regulatory_act' do
+    RegulatoryAct.make!(:sopa)
     click_link 'Contabilidade'
 
-    click_link 'Atos Administrativos'
+    click_link 'Atos Regulamentadores'
 
     click_link '1234'
 
     click_link 'Apagar 1234', :confirm => true
 
-    page.should have_notice 'Ato Administrativo apagado com sucesso.'
+    page.should have_notice 'Ato Regulamentador apagado com sucesso.'
 
     page.should_not have_link '1234'
   end
 
   scenario 'should validate uniqueness of act_number' do
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
-    click_link 'Atos Administrativos'
+    click_link 'Atos Regulamentadores'
 
-    click_link 'Criar Ato Administrativo'
+    click_link 'Criar Ato Regulamentador'
 
     fill_in 'Número', :with => '1234'
 
-    click_button 'Criar Ato Administrativo'
+    click_button 'Criar Ato Regulamentador'
 
     page.should have_content 'já está em uso'
   end
 
   scenario 'should validate uniqueness of content' do
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
-    click_link 'Atos Administrativos'
+    click_link 'Atos Regulamentadores'
 
-    click_link 'Criar Ato Administrativo'
+    click_link 'Criar Ato Regulamentador'
 
     fill_in 'Ementa', :with => 'conteudo'
 
-    click_button 'Criar Ato Administrativo'
+    click_button 'Criar Ato Regulamentador'
 
     page.should have_content 'já está em uso'
   end
 
-  scenario 'remove dissemination source from an existent administractive_act' do
-    AdministractiveAct.make!(:sopa)
+  scenario 'remove dissemination source from an existent regulatory_act' do
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
-    click_link 'Atos Administrativos'
+    click_link 'Atos Regulamentadores'
 
     click_link '1234'
 
@@ -186,9 +186,9 @@ feature "AdministractiveActs" do
       click_button 'Remover'
     end
 
-    click_button 'Atualizar Ato Administrativo'
+    click_button 'Atualizar Ato Regulamentador'
 
-    page.should have_notice 'Ato Administrativo editado com sucesso.'
+    page.should have_notice 'Ato Regulamentador editado com sucesso.'
 
     click_link '1234'
 

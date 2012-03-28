@@ -7,8 +7,8 @@ pt-BR:
 
     attributes:
       licitation_modality:
-        administractive_act: "Ato regulamentador"
-        administractive_act_publication_date: "Data da publicação"
+        regulatory_act: "Ato regulamentador"
+        regulatory_act_publication_date: "Data da publicação"
         description: "Modalidade"
         initial_value: "Valor inicial"
         final_value: "Valor final"

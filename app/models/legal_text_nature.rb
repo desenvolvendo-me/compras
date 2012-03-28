@@ -3,7 +3,7 @@ class LegalTextNature < ActiveRecord::Base
 
   attr_modal :description
 
-  has_many :administractive_acts, :dependent => :restrict
+  has_many :regulatory_acts, :dependent => :restrict
 
   validates :description, :presence => true, :uniqueness => true
 

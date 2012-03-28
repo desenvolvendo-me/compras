@@ -7,7 +7,7 @@ feature "LicitationModalities" do
   end
 
   scenario 'create a new licitation_modality' do
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
@@ -34,7 +34,7 @@ feature "LicitationModalities" do
 
   scenario 'update an existent licitation_modality' do
     LicitationModality.make!(:publica)
-    AdministractiveAct.make!(:emenda)
+    RegulatoryAct.make!(:emenda)
 
     click_link 'Contabilidade'
 
@@ -79,7 +79,7 @@ feature "LicitationModalities" do
   end
 
   scenario 'should get the publication date when administractive act is selected' do
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 

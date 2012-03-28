@@ -45,7 +45,7 @@ feature "Organograms" do
       click_button 'Adicionar Responsável'
 
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
       fill_in 'Data de término', :with => '10/02/2012'
       select 'Ativo', :from => 'Status'
@@ -76,7 +76,7 @@ feature "Organograms" do
 
     within_tab 'Responsáveis' do
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Ato administrativo', :with => '1234'
+      page.should have_field 'Ato regulamentador', :with => '1234'
       page.should have_field 'Data de início', :with => '01/02/2012'
       page.should have_field 'Data de término', :with => '10/02/2012'
       page.should have_select 'Status', :selected => 'Ativo'
@@ -88,7 +88,7 @@ feature "Organograms" do
     Address.make!(:education)
     AdministrationType.make!(:executivo)
     Employee.make!(:wenderson)
-    AdministractiveAct.make!(:emenda)
+    RegulatoryAct.make!(:emenda)
 
     click_link 'Contabilidade'
 
@@ -115,7 +115,7 @@ feature "Organograms" do
 
     within_tab 'Responsáveis' do
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Ato administrativo', :with => '4567', :field => 'Número'
+      fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
       fill_in 'Data de término', :with => '10/02/2012'
       select 'Inativo', :from => 'Status'
@@ -146,7 +146,7 @@ feature "Organograms" do
 
     within_tab 'Responsáveis' do
       page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
-      page.should have_field 'Ato administrativo', :with => '4567'
+      page.should have_field 'Ato regulamentador', :with => '4567'
       page.should have_field 'Data de início', :with => '01/02/2012'
       page.should have_field  'Data de término', :with => '10/02/2012'
       page.should have_select 'Status', :selected => 'Inativo'
@@ -174,7 +174,7 @@ feature "Organograms" do
 
     within_tab 'Responsáveis' do
       page.should_not have_field 'Responsável', :with => 'Wenderson Malheiros'
-      page.should_not have_field 'Ato administrativo', :with => '4567'
+      page.should_not have_field 'Ato regulamentador', :with => '4567'
       page.should_not have_field 'Data de início', :with => '01/02/2012'
       page.should_not have_field  'Data de término', :with => '10/02/2012'
       page.should_not have_select 'Status', :selected => 'Inativo'
@@ -236,7 +236,7 @@ feature "Organograms" do
       click_button 'Adicionar Responsável'
 
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
       fill_in 'Data de término', :with => '10/02/2012'
       select 'Ativo', :from => 'Status'
@@ -245,7 +245,7 @@ feature "Organograms" do
 
       within 'fieldset:last' do
         fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-        fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
+        fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
         fill_in 'Data de início', :with => '01/02/2012'
         fill_in 'Data de término', :with => '10/02/2012'
         select 'Ativo', :from => 'Status'

@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      administractive_act:
-        one: "Ato Administrativo"
-        other: "Atos Administrativos"
+      regulatory_act:
+        one: "Ato Regulamentador"
+        other: "Atos Regulamentadores"
 
     attributes:
-      administractive_act:
+      regulatory_act:
         act_number: "Número"
         regulatory_act_type: "Tipo"
         legal_text_nature: "Natureza legal do texto jurídico"

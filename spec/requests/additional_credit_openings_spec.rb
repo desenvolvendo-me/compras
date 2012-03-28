@@ -8,7 +8,7 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'create a new additional_credit_opening' do
     Entity.make!(:detran)
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
     AdditionalCreditOpeningNature.make!(:abre_credito)
     MovimentType.make!(:adicionar_dotacao)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
@@ -185,7 +185,7 @@ feature "AdditionalCreditOpenings" do
   end
 
   scenario 'when fill administractive act should fill regulatory_act_type and publication_date too' do
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
@@ -378,7 +378,7 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'update an existent additional_credit_opening' do
     Entity.make!(:secretaria_de_educacao)
-    AdministractiveAct.make!(:emenda)
+    RegulatoryAct.make!(:emenda)
     AdditionalCreditOpening.make!(:detran_2012)
     AdditionalCreditOpeningNature.make!(:abre_credito_de_transferencia)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)

@@ -12,7 +12,7 @@ describe ExpenseEconomicClassification do
     subject.to_s.should eq '3.1.90.11.01.00.00.00'
   end
 
-  it { should belong_to :administractive_act }
+  it { should belong_to :regulatory_act }
   it { should belong_to :entity }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }

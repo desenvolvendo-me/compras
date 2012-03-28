@@ -4,14 +4,14 @@ require 'app/models/organogram_responsible'
 
 describe OrganogramResponsible do
   it { should validate_presence_of :responsible }
-  it { should validate_presence_of :administractive_act }
+  it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :start_date }
   it { should validate_presence_of :end_date }
   it { should validate_presence_of :status }
 
   it { should belong_to :organogram }
   it { should belong_to :responsible }
-  it { should belong_to :administractive_act }
+  it { should belong_to :regulatory_act }
 
   context 'validating date' do
     it 'be invalid when the start_date is after of end_date' do

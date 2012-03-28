@@ -3,7 +3,7 @@ class DisseminationSource < ActiveRecord::Base
 
   belongs_to :communication_source
 
-  has_and_belongs_to_many :administractive_acts
+  has_and_belongs_to_many :regulatory_acts
 
   validates :description, :communication_source, :presence => true
   validates :description, :uniqueness => true

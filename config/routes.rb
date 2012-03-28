@@ -56,7 +56,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :administractive_acts do
+  resources :regulatory_acts do
     collection do
       get :filter
       get :modal

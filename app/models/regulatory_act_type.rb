@@ -3,7 +3,7 @@ class RegulatoryActType < ActiveRecord::Base
 
   belongs_to :regulatory_act_type_classification
 
-  has_many :administractive_acts, :dependent => :restrict
+  has_many :regulatory_acts, :dependent => :restrict
 
   validates :description, :presence => true, :uniqueness => true
   validates :regulatory_act_type_classification, :presence => true

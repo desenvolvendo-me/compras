@@ -1,0 +1,2 @@
+class RegulatoryActsController < CrudController
+end

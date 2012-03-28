@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       organogram_responsible:
         responsible: "Responsável"
-        administractive_act: "Ato administrativo"
+        regulatory_act: "Ato regulamentador"
         start_date: "Data de início"
         end_date: "Data de término"
         status: "Status"

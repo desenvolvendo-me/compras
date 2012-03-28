@@ -1,5 +1,5 @@
 # encoding: utf-8
-AdministractiveAct.blueprint(:sopa) do
+RegulatoryAct.blueprint(:sopa) do
   act_number { "1234" }
   regulatory_act_type { RegulatoryActType.make!(:lei) }
   legal_text_nature { LegalTextNature.make!(:civica) }
@@ -14,7 +14,7 @@ AdministractiveAct.blueprint(:sopa) do
   dissemination_sources { [DisseminationSource.make!(:jornal_bairro)] }
 end
 
-AdministractiveAct.blueprint(:emenda) do
+RegulatoryAct.blueprint(:emenda) do
   act_number { "4567" }
   regulatory_act_type { RegulatoryActType.make!(:emenda) }
   legal_text_nature { LegalTextNature.make!(:civica) }

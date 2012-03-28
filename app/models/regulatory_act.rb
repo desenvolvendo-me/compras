@@ -1,4 +1,4 @@
-class AdministractiveAct < ActiveRecord::Base
+class RegulatoryAct < ActiveRecord::Base
   attr_accessible :act_number, :regulatory_act_type_id, :creation_date, :legal_text_nature_id
   attr_accessible :publication_date, :vigor_date, :end_date, :content, :budget_law_percent
   attr_accessible :revenue_antecipation_percent, :authorized_debt_value, :dissemination_source_ids

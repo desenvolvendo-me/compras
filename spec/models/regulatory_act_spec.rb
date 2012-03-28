@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/administractive_act'
+require 'app/models/regulatory_act'
 require 'app/models/expense_economic_classification'
 require 'app/models/organogram_configuration'
 require 'app/models/organogram_responsible'
 require 'app/models/additional_credit_opening'
 
-describe AdministractiveAct do
+describe RegulatoryAct do
   it 'should return act_number as to_s method' do
     subject.act_number = '01'
     subject.to_s.should eq '01'
