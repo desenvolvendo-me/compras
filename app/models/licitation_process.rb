@@ -6,7 +6,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :licitation_process_budget_allocations_attributes, :licitation_process_publications_attributes
   attr_accessible :licitation_process_invited_bidders_attributes
 
-  attr_readonly :process, :year
+  attr_readonly :process, :year, :licitation_number
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :with => AbreviatedProcessModality
