@@ -8,6 +8,13 @@ Gestão de compras e licitações do município.
 
     $ git clone git@github.com:nohupbrasil/compras.git
 
+#### Auto-rebase
+
+[Why?](http://stevenharman.net/blog/archive/2011/06/09/git-pull-with-automatic-rebase.aspx)
+
+     $ git config branch.autosetuprebase always --global
+     $ git config branch.master.rebase true
+
 ### Qt
 
 Instale o Qt:
