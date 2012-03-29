@@ -51,7 +51,17 @@
     return url;
   }
 
+  function forceCanceledValueToTotalKind(){
+    if($('#pledge_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
+      $('#pledge_cancellation_value_canceled').attr('disabled', true);
+      $('#pledge_cancellation_value_canceled').val(pledge_expiration_value);
+    } else {
+      $('#pledge_cancellation_value_canceled').attr('disabled', false);
+    }
+  }
+
   var pledge_id = $('#pledge_cancellation_pledge_id').val();
+  var pledge_expiration_value;
 
   $('#pledge_cancellation_pledge_id').change(function(event, data) {
     if (data) {
@@ -81,10 +91,14 @@
         $('#pledge_cancellation_pledge_value').val(record.data("pledge-value"));
       }
       pledge_id = record.data('pledge-id');
+      pledge_expiration_value = record.data('pledge-value');
+      forceCanceledValueToTotalKind();
     } else {
       $('#pledge_cancellation_expiration_date, #pledge_cancellation_pledge_expiration_value').val('');
     }
   });
+
+  $('#pledge_cancellation_kind').change(forceCanceledValueToTotalKind);
 
   <% if f.object.persisted? %>
     $('form.pledge_cancellation :input').attr('disabled', true);

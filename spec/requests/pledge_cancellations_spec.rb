@@ -23,7 +23,7 @@ feature "PledgeCancellations" do
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     fill_in 'Valor anulado', :with => '1,00'
-    select 'Total', :from => 'Tipo de anulação'
+    select 'Parcial', :from => 'Tipo de anulação'
     fill_in 'Data *', :with => '28/03/2012'
     select 'Normal', :from => 'Natureza da ocorrência'
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
@@ -49,7 +49,7 @@ feature "PledgeCancellations" do
     page.should have_field 'Valor do vencimento', :with => '9,99'
 
     page.should have_field 'Valor anulado', :with => '1,00'
-    page.should have_select 'Tipo de anulação', :selected => 'Total'
+    page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => '28/03/2012'
     page.should have_field 'Valor do vencimento', :with => '9,99'
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
@@ -78,6 +78,38 @@ feature "PledgeCancellations" do
     page.should have_field 'Vencimento', :with => '30/03/2012'
     page.should have_disabled_field 'Valor do vencimento'
     page.should have_field 'Valor do vencimento', :with => '9,99'
+  end
+
+  scenario 'when select total as kind should disabled and fill value_canceled' do
+    pledge = Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Anulações de Empenho'
+
+    click_link 'Criar Anulação de Empenho'
+
+    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    select 'Total', :from => 'Tipo de anulação'
+
+    page.should have_disabled_field 'Valor anulado'
+    page.should have_field 'Valor anulado', :with => '9,99'
+  end
+
+  scenario 'should fill value_canceled when select pledge_expiration before kind and kind is total' do
+    pledge = Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Anulações de Empenho'
+
+    click_link 'Criar Anulação de Empenho'
+
+    select 'Total', :from => 'Tipo de anulação'
+    fill_modal 'Parcela', :with => '1', :field => 'Número'
+
+    page.should have_disabled_field 'Valor anulado'
+    page.should have_field 'Valor anulado', :with => '9,99'
   end
 
   scenario 'when select pledge_expiration first fill pledge' do
@@ -145,7 +177,7 @@ feature "PledgeCancellations" do
     page.should have_disabled_field 'Valor anulado'
     page.should have_field 'Valor anulado', :with => '1,00'
     page.should have_disabled_field 'Tipo de anulação'
-    page.should have_select 'Tipo de anulação', :selected => 'Total'
+    page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_disabled_field 'Data *'
     page.should have_field 'Data *', :with => '28/03/2012'
     page.should have_disabled_field 'Natureza da ocorrência'

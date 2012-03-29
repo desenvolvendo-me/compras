@@ -2,7 +2,7 @@ class PledgeCancellation < ActiveRecord::Base
   attr_accessible :pledge_id, :date, :kind, :reason, :value_canceled, :nature
   attr_accessible :pledge_expiration_id
 
-  has_enumeration_for :kind, :with => PledgeCancellationKind
+  has_enumeration_for :kind, :with => PledgeCancellationKind, :create_helpers => true
   has_enumeration_for :nature, :with => PledgeCancellationNature
 
   belongs_to :pledge
@@ -16,6 +16,8 @@ class PledgeCancellation < ActiveRecord::Base
   validates :pledge, :date, :kind, :reason, :presence => true
   validate :validate_value_canceled
 
+  before_save :force_canceled_value_to_total_kind
+
   orderize :id
   filterize
 
@@ -24,6 +26,10 @@ class PledgeCancellation < ActiveRecord::Base
   end
 
   protected
+
+  def force_canceled_value_to_total_kind
+    canceled_value = pledge_expiration.value if pledge_expiration.present? && total?
+  end
 
   def validate_value_canceled
     return if pledge_expiration.blank? || value_canceled.blank?
