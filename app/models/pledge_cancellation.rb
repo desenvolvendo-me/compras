@@ -26,9 +26,9 @@ class PledgeCancellation < ActiveRecord::Base
   protected
 
   def validate_value_canceled
-    return unless pledge_expiration
+    return if pledge_expiration.blank? || value_canceled.blank?
 
-    if (pledge_expiration.pledge_cancellations.sum(&:value).to_f + value_canceled) > pledge_expiration.value
+    if (pledge_expiration.pledge_cancellations.sum(&:value) + value_canceled) > pledge_expiration.value
       errors.add(:value_canceled, :must_not_be_greater_than_pledge_expiration_cancellations_sum_or_pledge_expiration_value)
     end
   end
