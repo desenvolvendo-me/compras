@@ -17,7 +17,7 @@ describe PledgeCancellation do
   it { should belong_to :pledge_expiration }
 
   it 'should not be valid if all other cancellations for pledge_expiration is greater than canceled_value' do
-    pledge_expiration = double(:pledge_cancellations => [double(:value => 1), double(:value => 1)], :value => 3)
+    pledge_expiration = double(:pledge_cancellations => [double(:value => 1), double(:value => 1)], :value => 3, :expiration_date => nil)
     subject.stub(:pledge_expiration).and_return(pledge_expiration)
     subject.should_not allow_value(4).for(:value_canceled).with_message("não pode ser maior que a soma do que já foi anulado ou o valor do vencimento")
   end
@@ -34,6 +34,11 @@ describe PledgeCancellation do
 
     it 'should not be valid when date is older to last' do
       subject.should_not allow_value('2011-01-01').for(:date).with_message("não pode ser menor que a data da última anulação (01/03/2012)")
+    end
+
+    it 'should not be valid when date is older then emission_date' do
+      subject.stub(:expiration_date).and_return(Date.new(2012, 3, 29))
+      subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message("deve ser maior que a data de emissão")
     end
   end
 end

@@ -20,6 +20,7 @@ class PledgeCancellation < ActiveRecord::Base
     :type => :date
   }, :allow_blank => true, :if => :any_pledge_cancellation?
   validate :validate_value_canceled
+  validate :date_must_be_greater_than_expiration_date
 
   before_save :force_canceled_value_to_total_kind
 
@@ -31,6 +32,12 @@ class PledgeCancellation < ActiveRecord::Base
   end
 
   protected
+
+  def date_must_be_greater_than_expiration_date
+    return if expiration_date.blank? || date.blank?
+
+    errors.add(:date, :must_be_greater_than_pledge_emission_date) if date < expiration_date
+  end
 
   def any_pledge_cancellation?
     self.class.any?
