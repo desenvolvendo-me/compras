@@ -21,4 +21,19 @@ describe PledgeCancellation do
     subject.stub(:pledge_expiration).and_return(pledge_expiration)
     subject.should_not allow_value(4).for(:value_canceled).with_message("não pode ser maior que a soma do que já foi anulado ou o valor do vencimento")
   end
+
+  context 'validate date' do
+    before(:each) do
+      described_class.stub(:last).and_return(double(:date => Date.new(2012, 3, 1)))
+      described_class.stub(:any?).and_return(true)
+    end
+
+    it 'should be valid when date is equal to last' do
+      subject.should allow_value('2012-03-1').for(:date)
+    end
+
+    it 'should not be valid when date is older to last' do
+      subject.should_not allow_value('2011-01-01').for(:date).with_message("não pode ser menor que a data da última anulação (01/03/2012)")
+    end
+  end
 end

@@ -24,7 +24,7 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     fill_in 'Valor anulado', :with => '1,00'
     select 'Parcial', :from => 'Tipo de anulação'
-    fill_in 'Data *', :with => '28/03/2012'
+    fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     select 'Normal', :from => 'Natureza da ocorrência'
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
 
@@ -50,7 +50,7 @@ feature "PledgeCancellations" do
 
     page.should have_field 'Valor anulado', :with => '1,00'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
-    page.should have_field 'Data *', :with => '28/03/2012'
+    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
     page.should have_field 'Valor do vencimento', :with => '9,99'
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
     page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
@@ -171,7 +171,7 @@ feature "PledgeCancellations" do
     page.should have_disabled_field 'Parcela'
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
-    page.should have_field 'Vencimento', :with => '30/03/2012'
+    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
     page.should have_disabled_field 'Valor do vencimento'
     page.should have_field 'Valor do vencimento', :with => '9,99'
     page.should have_disabled_field 'Valor anulado'
@@ -179,7 +179,7 @@ feature "PledgeCancellations" do
     page.should have_disabled_field 'Tipo de anulação'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_disabled_field 'Data *'
-    page.should have_field 'Data *', :with => '28/03/2012'
+    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
     page.should have_disabled_field 'Natureza da ocorrência'
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
     page.should have_disabled_field 'Motivo'

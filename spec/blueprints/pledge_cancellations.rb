@@ -4,7 +4,7 @@ PledgeCancellation.blueprint(:empenho_2012) do
   value_canceled { 1 }
   kind { PledgeCancellationKind::PARTIAL }
   value { 9.99 }
-  date { Date.new(2012, 3, 28) }
+  date { Date.current + 1.day }
   nature { PledgeCancellationNature::NORMAL }
   reason { "Motivo para o anulamento" }
 end

@@ -14,6 +14,11 @@ class PledgeCancellation < ActiveRecord::Base
   delegate :value, :to => :pledge_expiration, :prefix => true, :allow_nil => true
 
   validates :pledge, :date, :kind, :reason, :presence => true
+  validates :date, :timeliness => {
+    :on_or_after => lambda { last.date },
+    :on_or_after_message => :must_be_greather_or_equal_to_last_date,
+    :type => :date
+  }, :allow_blank => true, :if => :any_pledge_cancellation?
   validate :validate_value_canceled
 
   before_save :force_canceled_value_to_total_kind
@@ -26,6 +31,10 @@ class PledgeCancellation < ActiveRecord::Base
   end
 
   protected
+
+  def any_pledge_cancellation?
+    self.class.any?
+  end
 
   def force_canceled_value_to_total_kind
     canceled_value = pledge_expiration.value if pledge_expiration.present? && total?
