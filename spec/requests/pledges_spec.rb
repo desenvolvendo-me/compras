@@ -336,7 +336,7 @@ feature "Pledges" do
     page.should_not have_link "Apagar #{pledge.id}"
   end
 
-  scenario 'Fill budget allocation when select reserve fund' do
+  scenario 'Fill budget allocation informations when select reserve fund' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     reserve_fund = ReserveFund.make!(:detran_2012)
 
@@ -350,6 +350,7 @@ feature "Pledges" do
       fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
 
       page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
+      page.should have_field 'Saldo da dotação', :with => "500,00"
     end
   end
 
