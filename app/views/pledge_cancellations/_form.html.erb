@@ -36,7 +36,7 @@
 <%= f.input :reason %>
 
 <script>
-  function urlHere() {
+  function pledgeExpirationUrl() {
     var url = "<%= modal_pledge_expirations_path %>?",
         params = {
           locked_fields: ["pledge"],
@@ -59,7 +59,7 @@
       $('#pledge_cancellation_emission_date').val(record.data("emission-date"));
       $('#pledge_cancellation_pledge_value').val(record.data("pledge-value"));
       if (pledge_id != record.data('id')) {
-        $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', urlHere());
+        $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', pledgeExpirationUrl());
         $('#pledge_cancellation_expiration_date').val('');
         $('#pledge_cancellation_pledge_expiration_id, #pledge_cancellation_pledge_expiration_value').val('');
         $('#pledge_cancellation_pledge_expiration_value').val('');
