@@ -16,7 +16,7 @@ class PledgeCancellation < ActiveRecord::Base
   validates :pledge, :date, :kind, :reason, :presence => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
-    :on_or_after_message => :must_be_greather_or_equal_to_last_date,
+    :on_or_after_message => :must_be_greather_or_equal_to_last_pledge_cancellation_date,
     :type => :date
   }, :allow_blank => true, :if => :any_pledge_cancellation?
   validate :validate_value_canceled
