@@ -351,6 +351,7 @@ feature "Pledges" do
 
       page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
       page.should have_field 'Saldo da dotação', :with => "500,00"
+      page.should have_field 'Saldo reserva', :with => "10,50"
     end
   end
 
