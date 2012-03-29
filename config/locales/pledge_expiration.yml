@@ -7,6 +7,6 @@ pt-BR:
 
     attributes:
       pledge_expiration:
-        order: "Número"
+        number: "Número"
         expiration_date: "Vencimento"
         value: "Valor"
