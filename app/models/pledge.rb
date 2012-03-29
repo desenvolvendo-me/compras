@@ -8,6 +8,8 @@ class Pledge < ActiveRecord::Base
 
   attr_accessor :licitation, :process
 
+  attr_modal :entity_id, :year, :emission_date
+
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type
 
@@ -25,6 +27,7 @@ class Pledge < ActiveRecord::Base
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
   has_many :pledge_expirations, :dependent => :destroy
+  has_many :pledge_cancellations, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :pledge_expirations, :reject_if => :all_blank, :allow_destroy => true

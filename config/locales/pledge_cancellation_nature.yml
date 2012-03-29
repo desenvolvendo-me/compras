@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    pledge_cancellation_nature:
+      normal: "Normal"
+      insufficient_cash: "Insuficiência de caixa"

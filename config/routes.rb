@@ -507,6 +507,20 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :pledge_cancellations, :except => [:destroy, :update] do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :pledge_expirations do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :pledges, :except => [:destroy, :update] do
     collection do
       get :filter
