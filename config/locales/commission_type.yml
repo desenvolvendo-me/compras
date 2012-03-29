@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    commission_type:
+      trading: 'Pregão'
+      permanent: 'Permanente'
+      special: 'Especial'
+      servers: 'Servidores'
+      auctioneers: 'Leiloeiros'

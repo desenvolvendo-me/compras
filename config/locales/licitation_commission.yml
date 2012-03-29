@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_commission:
+        one: "Comissão de Licitação"
+        other: "Comissões de Licitação"
+
+    attributes:
+      licitation_commission:
+        commission_type: "Tipo de comissão"
+        nomination_date: "Data da nomeação"
+        expiration_date: "Data da expiração"
+        exoneration_date: "Data da exoneração"
+        description: "Descrição e finalidade da comissão"

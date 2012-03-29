@@ -73,6 +73,9 @@ pt-BR:
     legal_text_natures:
       <<: *female
 
+    licitation_commissions:
+      <<: *female
+
     licitation_modalities:
       <<: *female
 
