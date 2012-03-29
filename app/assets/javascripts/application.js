@@ -57,7 +57,7 @@ $(".modal-finder .modal input.modal").live("change", function(event, data) {
   var options = $.extend({}, defaults, record.data());
 
   if ($("#" + id + "_record_" + record.data("id") + '_id').length == 0 ) {
-    $("." + id + "_records").append($(template).mustache(options));
+    $("." + id + "_records").append($(template).mustache(options)).trigger('append.mustache');
   }
 
   $(this).val('');

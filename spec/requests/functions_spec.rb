@@ -7,7 +7,7 @@ feature "Functions" do
   end
 
   scenario 'create a new function' do
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
@@ -32,7 +32,7 @@ feature "Functions" do
 
   scenario 'update an existent function' do
     Function.make!(:administracao)
-    AdministractiveAct.make!(:emenda)
+    RegulatoryAct.make!(:emenda)
 
     click_link 'Contabilidade'
 
@@ -72,7 +72,7 @@ feature "Functions" do
     page.should_not have_content '1234'
   end
 
-  scenario 'have error when have duplicated code of same administractive_act' do
+  scenario 'have error when have duplicated code of same regulatory_act' do
     Function.make!(:administracao)
 
     click_link 'Contabilidade'
@@ -89,9 +89,9 @@ feature "Functions" do
     page.should have_content 'já existe para o ato regulamentador informado'
   end
 
-  scenario 'have not error when have duplicated code of other administractive_act' do
+  scenario 'have not error when have duplicated code of other regulatory_act' do
     Function.make!(:administracao)
-    AdministractiveAct.make!(:emenda)
+    RegulatoryAct.make!(:emenda)
 
     click_link 'Contabilidade'
 
@@ -108,7 +108,7 @@ feature "Functions" do
   end
 
   scenario 'should get and clean the vigor date depending on administractive act' do
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 

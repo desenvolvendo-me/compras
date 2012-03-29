@@ -1,15 +1,15 @@
 <%= f.input :code %>
-<%= f.input :administractive_act %>
-<%= f.input :administractive_act_vigor_date, :disabled => true, :input_html => { :value => (l(f.object.administractive_act_vigor_date) if f.object.administractive_act_vigor_date) } %>
+<%= f.input :regulatory_act %>
+<%= f.input :regulatory_act_vigor_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_vigor_date) if f.object.regulatory_act_vigor_date) } %>
 <%= f.input :description %>
 
 <script>
-  $("#function_administractive_act_id").change(function (event, data) {
+  $("#function_regulatory_act_id").change(function (event, data) {
     if (data){
       var record = data.record;
-      $('#function_administractive_act_vigor_date').val(record.data("vigor-date"));
+      $('#function_regulatory_act_vigor_date').val(record.data("vigor-date"));
     } else {
-      $('#function_administractive_act_vigor_date').val('');
+      $('#function_regulatory_act_vigor_date').val('');
     }
   });
 </script>

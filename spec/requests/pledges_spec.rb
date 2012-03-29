@@ -73,6 +73,22 @@ feature "Pledges" do
       page.should have_field 'Valor total dos itens', :with => "10,00"
     end
 
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:first' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Valor', :with => '5,00'
+      end
+
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:last' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Valor', :with => '5,00'
+      end
+    end
+
     click_button 'Criar Empenho'
 
     page.should have_notice 'Empenho criado com sucesso.'
@@ -113,6 +129,147 @@ feature "Pledges" do
       page.should have_field 'U. medida', :with => "Unidade"
       page.should have_field 'Descrição', :with => "Arame farpado"
       page.should have_field 'Valor total', :with => "10,00"
+    end
+
+    within_tab 'Vencimentos' do
+      within 'fieldset:first' do
+        page.should have_field 'Número', :with => '1'
+        page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        page.should have_field 'Valor', :with => '5,00'
+      end
+
+      within 'fieldset:last' do
+        page.should have_field 'Número', :with => '2'
+        page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        page.should have_field 'Valor', :with => '5,00'
+      end
+    end
+  end
+
+  scenario 'validate expiration_date on pledge_expirations should be greater than emission_date' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+    end
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Vencimento'
+
+      fill_in 'Vencimento', :with => I18n.l(Date.current - 10.days)
+    end
+
+    click_button 'Criar Empenho'
+
+    within_tab 'Vencimentos' do
+      page.should have_content 'deve ser maior que a data de emissão'
+    end
+  end
+
+  scenario 'validate expiration_date on pledge_expirations should be greater than last expiration date' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+    end
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:first' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 10.days)
+      end
+
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:last' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 5.days)
+      end
+    end
+
+    click_button 'Criar Empenho'
+
+    within_tab 'Vencimentos' do
+      within 'fieldset:last' do
+        page.should have_content 'deve ser maior que a data da última parcela'
+      end
+    end
+  end
+
+  scenario 'validate expiration_date on pledge_expirations should be greater than last expiration date' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Valor', :with => '300,00'
+    end
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:first' do
+        fill_in 'Valor', :with => '100,00'
+      end
+
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:last' do
+        fill_in 'Valor', :with => '100,00'
+      end
+    end
+
+    click_button 'Criar Empenho'
+
+    within_tab 'Vencimentos' do
+      within 'fieldset:first' do
+        page.should have_content 'a soma de todos os valores deve ser igual ao valor do empenho'
+      end
+
+      within 'fieldset:last' do
+        page.should have_content 'a soma de todos os valores deve ser igual ao valor do empenho'
+      end
+    end
+  end
+
+  scenario 'set sequencial pledge expiration number' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:first' do
+        page.should have_field 'Número', :with => '1'
+      end
+
+      click_button 'Adicionar Vencimento'
+
+      within 'fieldset:last' do
+        page.should have_field 'Número', :with => '2'
+      end
+
+      within 'fieldset:first' do
+        click_button 'Remover Vencimento'
+      end
+
+      within 'fieldset:last' do
+        page.should have_field 'Número', :with => '1'
+      end
     end
   end
 

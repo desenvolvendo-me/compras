@@ -2,6 +2,8 @@ class LicitationProcessBudgetAllocationItem < ActiveRecord::Base
   attr_accessible :licitation_process_budget_allocation_id, :material_id
   attr_accessible :quantity, :unit_price
 
+  attr_accessor :order
+
   belongs_to :licitation_process_budget_allocation
   belongs_to :material
 
@@ -10,7 +12,7 @@ class LicitationProcessBudgetAllocationItem < ActiveRecord::Base
   validates :material, :quantity, :unit_price, :presence => true
 
   def estimated_total_price
-    if (quantity && unit_price)
+    if quantity && unit_price
       quantity * unit_price
     else
       0

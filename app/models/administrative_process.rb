@@ -4,6 +4,8 @@ class AdministrativeProcess < ActiveRecord::Base
   attr_accessible :protocol, :object_type, :status, :description
   attr_accessible :judgment_form_id
 
+  attr_modal :year, :process, :protocol, :organogram_id, :budget_allocation_id
+
   attr_readonly :process, :year
 
   has_enumeration_for :modality, :with => AdministrativeProcessModality

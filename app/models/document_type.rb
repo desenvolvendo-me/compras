@@ -4,6 +4,7 @@ class DocumentType < ActiveRecord::Base
   has_and_belongs_to_many :licitation_processes
 
   has_many :provider_licitation_documents, :dependent => :restrict
+  has_many :licitation_process_invited_bidder_documents, :dependent => :restrict
 
   validates :validity, :description, :presence => true
   validates :description, :uniqueness => true

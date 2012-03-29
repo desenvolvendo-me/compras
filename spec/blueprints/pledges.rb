@@ -23,4 +23,5 @@ Pledge.blueprint(:empenho) do
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
   pledge_items { [PledgeItem.make!(:item)]}
+  pledge_expirations { [PledgeExpiration.make!(:vencimento)]}
 end

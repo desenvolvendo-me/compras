@@ -1,15 +1,15 @@
 class LicitationModality < ActiveRecord::Base
-  attr_accessible :administractive_act_id, :description, :initial_value
+  attr_accessible :regulatory_act_id, :description, :initial_value
   attr_accessible :final_value
 
-  belongs_to :administractive_act
+  belongs_to :regulatory_act
 
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
 
-  delegate :publication_date, :to => :administractive_act, :prefix => true, :allow_nil => true
+  delegate :publication_date, :to => :regulatory_act, :prefix => true, :allow_nil => true
 
-  validates :description, :administractive_act, :presence => true
+  validates :description, :regulatory_act, :presence => true
   validates :initial_value, :presence => true, :numericality => true
   validates :final_value, :presence => true
   validates :final_value, :numericality => true

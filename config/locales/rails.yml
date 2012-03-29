@@ -204,7 +204,7 @@ pt-BR:
       initial_and_final_value_range_taken: "esta combinação de valor inicial e valor final já está em uso"
       should_not_be_greater_than_pledge_value: "não pode ser superior ao valor do empenho"
       taken_for_informed_year: "já existe para o ano informado"
-      taken_for_administractive_act: "já existe para o ato regulamentador informado"
+      taken_for_regulatory_act: "já existe para o ato regulamentador informado"
       must_be_equal_as_licitation_object: "deve pertencer ao objeto de licitação selecionado"
       must_be_greather_or_equal_to_last_date: "deve ser maior ou igual a data da última reserva (%{restriction})"
       must_be_greather_or_equal_to_last_credit_date: "deve ser maior ou igual a data da última abertura de crédito suplementar (%{restriction})"
@@ -216,6 +216,10 @@ pt-BR:
       must_have_at_least_one_partner: "Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável"
       must_have_at_least_one_budget_allocation: "é necessário cadastrar pelo menos uma dotação"
       must_have_at_least_one_item: "é necessário cadastrar pelo menos um item"
+      must_not_be_greater_than_budget_allocation_real_amount: "não pode ser maior que o saldo real da dotação (R$ %{value})"
+      must_be_greater_than_pledge_emission_date: "deve ser maior que a data de emissão"
+      must_be_greater_than_last_expiration_date: "deve ser maior que a data da última parcela"
+      pledge_expiration_value_sum_must_be_equals_to_pledge_value: "a soma de todos os valores deve ser igual ao valor do empenho"
 
   activerecord:
     errors:

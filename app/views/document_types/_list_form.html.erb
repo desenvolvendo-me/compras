@@ -1,5 +1,5 @@
-<tr class="record">
-  <td>
+<tr class="record document-type">
+  <td class='id'>
     <%= id %>
   </td>
   <td>
@@ -9,7 +9,8 @@
     <%= validity %>
   </td>
   <td>
-    <input id="licitation_process_document_types_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[document_type_ids][]" value="<%= id %>" />
+    <input id="licitation_process_document_types_record_<%= id %>_id" class="document-id" type="hidden" name="<%= f.sanitized_object_name %>[document_type_ids][]" value="<%= id %>" />
+    <input id="licitation_process_document_types_record_<%= id %>_desc" class="document-desc" type="hidden" value="<%= description %>" />
     <button class="button negative modal-finder-remove">Remover</button>
   </td>
 </tr>

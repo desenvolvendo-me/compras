@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       expense_economic_classification:
         entity: "Entidade"
-        administractive_act: "Ato administrativo"
+        regulatory_act: "Ato regulamentador"
         expense_economic_classification: "Classificação da natureza da despesa"
         kind: "Tipo"
         description: "Descrição"

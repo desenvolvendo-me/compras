@@ -1,0 +1,7 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-administractive-act-type="<%= record.regulatory_act_type %>" data-publication-date="<%= record.publication_date %>" data-vigor-date="<%= record.vigor_date %>">
+  <% attributes.each do |attribute| %>
+    <td>
+      <%= record.send attribute %>
+    </td>
+  <% end %>
+</tr>

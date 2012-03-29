@@ -6,7 +6,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :licitation_process_budget_allocations_attributes, :licitation_process_publications_attributes
   attr_accessible :licitation_process_invited_bidders_attributes
 
-  attr_readonly :process, :year
+  attr_readonly :process, :year, :licitation_number
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :with => AbreviatedProcessModality
@@ -21,12 +21,13 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
+  has_many :licitation_process_invited_bidder_documents, :through => :licitation_process_invited_bidders
 
   accepts_nested_attributes_for :licitation_process_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_publications, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_invited_bidders, :reject_if => :all_blank, :allow_destroy => true
 
-  delegate :organogram, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
+  delegate :organogram, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
 
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
@@ -56,7 +57,7 @@ class LicitationProcess < ActiveRecord::Base
     last = self.class.where(:year => year).last
 
     if last
-      self.process = last.process.to_i + 1
+      self.process = last.process.succ
     else
       self.process = 1
     end
@@ -70,7 +71,7 @@ class LicitationProcess < ActiveRecord::Base
     last = self.class.where(:year => year, :administrative_process_id => administrative_process_id).last
 
     if last
-      self.licitation_number = last.licitation_number.to_i + 1
+      self.licitation_number = last.licitation_number.succ
     else
       self.licitation_number = 1
     end

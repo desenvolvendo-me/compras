@@ -15,7 +15,7 @@ describe OrganogramConfiguration do
   it { should have_many(:organogram_levels).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :description }
-  it { should validate_presence_of :administractive_act }
+  it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :entity }
 
   context 'get mask' do

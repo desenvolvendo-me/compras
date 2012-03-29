@@ -1,9 +1,14 @@
 class LicitationProcessInvitedBidder < ActiveRecord::Base
   attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date
-  attr_accessible :receipt_date, :auto_convocation
+  attr_accessible :receipt_date, :auto_convocation, :licitation_process_invited_bidder_documents_attributes
 
   belongs_to :licitation_process
   belongs_to :provider
+
+  has_many :licitation_process_invited_bidder_documents, :dependent => :destroy, :order => :id
+  has_many :document_types, :through => :licitation_process_invited_bidder_documents
+
+  accepts_nested_attributes_for :licitation_process_invited_bidder_documents, :reject_if => :all_blank, :allow_destroy => true
 
   validates :provider_id, :protocol, :presence => true
   validates :protocol_date, :receipt_date, :presence =>true, :unless => :auto_convocation
@@ -15,7 +20,7 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
   protected
 
   def clear_dates_if_auto_convocation
-    if auto_convocation
+    if auto_convocation?
       self.protocol_date = nil
       self.receipt_date = nil
     end

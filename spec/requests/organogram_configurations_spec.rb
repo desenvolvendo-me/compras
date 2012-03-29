@@ -8,7 +8,7 @@ feature "OrganogramConfigurations" do
 
   scenario 'create a new organogram_configuration' do
     Entity.make!(:detran)
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
@@ -20,7 +20,7 @@ feature "OrganogramConfigurations" do
 
     fill_modal 'Entidade', :with => 'Detran'
 
-    fill_modal 'Ato administrativo', :with => '1234', :field => 'Número'
+    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
     click_button 'Adicionar'
 
@@ -40,7 +40,7 @@ feature "OrganogramConfigurations" do
 
     page.should have_field 'Entidade', :with => 'Detran'
 
-    page.should have_field 'Ato administrativo', :with => '1234'
+    page.should have_field 'Ato regulamentador', :with => '1234'
 
     page.should have_field 'Máscara', :with => '99'
 
@@ -99,7 +99,7 @@ feature "OrganogramConfigurations" do
     click_link 'Outro Nome da Configuração'
 
     page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Ato administrativo', :with => '1234'
+    page.should have_field 'Ato regulamentador', :with => '1234'
     page.should have_field 'Descrição', :with => 'Outro Nome da Configuração'
   end
 

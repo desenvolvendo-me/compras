@@ -1,10 +1,10 @@
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :administractive_act %>
+    <%= f.input :regulatory_act %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :administractive_act_publication_date, :disabled => true, :input_html => { :value => (l(f.object.administractive_act_publication_date) if f.object.administractive_act_publication_date) } %>
+    <%= f.input :regulatory_act_publication_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_publication_date) if f.object.regulatory_act_publication_date) } %>
   </div>
 </div>
 
@@ -21,12 +21,12 @@
 </div>
 
 <script>
-  $("#licitation_modality_administractive_act_id").change(function (event, data) {
+  $("#licitation_modality_regulatory_act_id").change(function (event, data) {
     if (data){
       var record = data.record;
-      $('#licitation_modality_administractive_act_publication_date').val(record.data("publication-date"));
+      $('#licitation_modality_regulatory_act_publication_date').val(record.data("publication-date"));
     } else {
-      $('#licitation_modality_administractive_act_publication_date').val('');
+      $('#licitation_modality_regulatory_act_publication_date').val('');
     }
   });
 </script>

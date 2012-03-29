@@ -8,7 +8,7 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'create a new additional_credit_opening' do
     Entity.make!(:detran)
-    AdministractiveAct.make!(:sopa)
+    RegulatoryAct.make!(:sopa)
     AdditionalCreditOpeningNature.make!(:abre_credito)
     MovimentType.make!(:adicionar_dotacao)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
@@ -101,6 +101,42 @@ feature "AdditionalCreditOpenings" do
     end
   end
 
+  scenario 'when operation is subtration and budget_allocation used item value should not be greather than budget allocation real_amount' do
+    MovimentType.make!(:subtrair_dotacao)
+    MovimentType.make!(:adicionar_em_outros_casos)
+    BudgetAllocation.make!(:alocacao)
+    Capability.make!(:reforma)
+
+    click_link 'Contabilidade'
+
+    click_link 'Aberturas de Créditos Suplementares'
+
+    click_link 'Criar Abertura de Crédito Suplementar'
+    within_tab 'Movimentos' do
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:first' do
+        fill_modal 'Tipo de movimento', :with => 'Subtrair dotação'
+        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '501,00'
+      end
+
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:last' do
+        fill_modal 'Tipo de movimento', :with => 'Adicionar em outros casos'
+        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '10,00'
+      end
+    end
+
+    click_button 'Criar Abertura de Crédito Suplementar'
+
+    within_tab 'Movimentos' do
+      page.should have_content 'não pode ser maior que o saldo real da dotação (R$ 500,00)'
+    end
+  end
+
   scenario 'validate supplement reduced difference' do
     AdditionalCreditOpeningNature.make!(:abre_credito)
     MovimentType.make!(:adicionar_dotacao)
@@ -148,8 +184,8 @@ feature "AdditionalCreditOpenings" do
     end
   end
 
-  scenario 'when fill administractive act should fill administractive_act_type and publication_date too' do
-    AdministractiveAct.make!(:sopa)
+  scenario 'when fill administractive act should fill regulatory_act_type and publication_date too' do
+    RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
@@ -175,6 +211,143 @@ feature "AdditionalCreditOpenings" do
     fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
 
     page.should have_field 'Classificação da natureza de crédito', :with => 'Outros'
+  end
+
+  context 'should have modal link' do
+    scenario 'when already stored' do
+      AdditionalCreditOpening.make!(:detran_2012)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:first' do
+          click_link 'Mais informações'
+        end
+      end
+
+      page.should have_content 'Informações de: Alocação'
+    end
+
+    scenario 'when change budget_allocation' do
+      AdditionalCreditOpening.make!(:detran_2012)
+      budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:first' do
+
+          fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+          click_link 'Mais informações'
+        end
+      end
+
+      page.should have_content 'Informações de: Alocação extra'
+    end
+
+    scenario 'when add a new record' do
+      MovimentType.make!(:adicionar_dotacao)
+      budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link 'Criar Abertura de Crédito Suplementar'
+
+      within_tab 'Movimentos' do
+        click_button 'Adicionar Movimento'
+
+        within 'fieldset:first' do
+          fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
+          fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+          click_link 'Mais informações'
+        end
+      end
+
+      page.should have_content 'Informações de: Alocação extra'
+    end
+  end
+
+  context 'should have modal link to capability' do
+    scenario 'when already stored' do
+      AdditionalCreditOpening.make!(:detran_2012)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:last' do
+          within '.capability-field' do
+            click_link 'Mais informações'
+          end
+        end
+      end
+
+      page.should have_content 'Informações de: Reforma e Ampliação'
+    end
+
+    scenario 'when change' do
+      AdditionalCreditOpening.make!(:detran_2012)
+      Capability.make!(:construcao)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link '2012'
+
+      within_tab 'Movimentos' do
+        within 'fieldset:last' do
+          fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
+
+          within '.capability-field' do
+            click_link 'Mais informações'
+          end
+        end
+      end
+
+      page.should have_content 'Informações de: Construção'
+    end
+
+    scenario 'when add a new record' do
+      MovimentType.make!(:subtrair_do_excesso_arrecadado)
+      Capability.make!(:construcao)
+
+      click_link 'Contabilidade'
+
+      click_link 'Aberturas de Créditos Suplementares'
+
+      click_link 'Criar Abertura de Crédito Suplementar'
+
+      within_tab 'Movimentos' do
+        click_button 'Adicionar Movimento'
+
+        within 'fieldset:first' do
+          fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
+          fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
+
+          within '.capability-field' do
+            click_link 'Mais informações'
+          end
+        end
+      end
+
+      page.should have_content 'Informações de: Construção'
+    end
   end
 
   scenario 'remove additional_credit_opening_moviment_type' do
@@ -205,7 +378,7 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'update an existent additional_credit_opening' do
     Entity.make!(:secretaria_de_educacao)
-    AdministractiveAct.make!(:emenda)
+    RegulatoryAct.make!(:emenda)
     AdditionalCreditOpening.make!(:detran_2012)
     AdditionalCreditOpeningNature.make!(:abre_credito_de_transferencia)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)

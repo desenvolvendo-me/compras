@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/pledge'
 require 'app/models/pledge_item'
+require 'app/models/pledge_expiration'
 
 describe Pledge do
   it { should belong_to :entity }
@@ -15,6 +16,8 @@ describe Pledge do
   it { should belong_to :reserve_fund }
   it { should belong_to :creditor }
   it { should belong_to :founded_debt_contract }
+
+  it { should have_many(:pledge_expirations).dependent(:destroy) }
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :licitation }
