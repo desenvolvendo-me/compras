@@ -9,7 +9,7 @@ feature "ExtraCredits" do
   scenario 'create a new extra_credit' do
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
-    AdditionalCreditOpeningNature.make!(:abre_credito)
+    ExtraCreditNature.make!(:abre_credito)
     MovimentType.make!(:adicionar_dotacao)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
     budget_allocation = BudgetAllocation.make!(:alocacao)
@@ -153,7 +153,7 @@ feature "ExtraCredits" do
   end
 
   scenario 'when fill additional credit opening should fill kind too' do
-    AdditionalCreditOpeningNature.make!(:abre_credito)
+    ExtraCreditNature.make!(:abre_credito)
 
     click_link 'Contabilidade'
 
@@ -333,7 +333,7 @@ feature "ExtraCredits" do
     Entity.make!(:secretaria_de_educacao)
     RegulatoryAct.make!(:emenda)
     ExtraCredit.make!(:detran_2012)
-    AdditionalCreditOpeningNature.make!(:abre_credito_de_transferencia)
+    ExtraCreditNature.make!(:abre_credito_de_transferencia)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
     Capability.make!(:reforma)
 

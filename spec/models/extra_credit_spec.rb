@@ -22,7 +22,7 @@ describe ExtraCredit do
   it { should validate_presence_of :credit_type }
   it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :credit_date }
-  it { should validate_presence_of :additional_credit_opening_nature }
+  it { should validate_presence_of :extra_credit_nature }
 
   it 'should not be valid when difference is not zero' do
     subject.stub(:supplement).and_return(10.0)

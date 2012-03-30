@@ -1,0 +1,2 @@
+class ExtraCreditNaturesController < CrudController
+end

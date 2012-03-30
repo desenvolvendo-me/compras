@@ -57,7 +57,7 @@
     }
   });
 
-  $('form.extra_credit').delegate('#extra_credit_additional_credit_opening_nature_id', 'change', function (event, data) {
+  $('form.extra_credit').delegate('#extra_credit_extra_credit_nature_id', 'change', function (event, data) {
     if (data) {
       var record = data.record;
       $('#extra_credit_kind').val(record.data('kind'));

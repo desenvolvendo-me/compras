@@ -1,6 +1,6 @@
 class ExtraCredit < ActiveRecord::Base
   attr_accessible :entity_id, :year, :credit_type, :regulatory_act_id
-  attr_accessible :credit_date, :additional_credit_opening_nature_id
+  attr_accessible :credit_date, :extra_credit_nature_id
   attr_accessible :extra_credit_moviment_types_attributes
 
   attr_accessor :difference
@@ -9,19 +9,19 @@ class ExtraCredit < ActiveRecord::Base
 
   belongs_to :entity
   belongs_to :regulatory_act
-  belongs_to :additional_credit_opening_nature
+  belongs_to :extra_credit_nature
 
   has_many :extra_credit_moviment_types, :dependent => :destroy
 
   delegate :regulatory_act_type, :publication_date, :to => :regulatory_act, :allow_nil => true
-  delegate :kind, :kind_humanize, :to => :additional_credit_opening_nature, :allow_nil => true
+  delegate :kind, :kind_humanize, :to => :extra_credit_nature, :allow_nil => true
 
   accepts_nested_attributes_for :extra_credit_moviment_types, :allow_destroy => true
 
   validates :year, :mask => '9999'
   validates :year, :entity, :credit_type, :presence => true
   validates :regulatory_act, :credit_date, :presence => true
-  validates :additional_credit_opening_nature, :presence => true
+  validates :extra_credit_nature, :presence => true
   validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }, :allow_blank => true
   validates :credit_date, :timeliness => {
     :on_or_after => lambda { last.credit_date },

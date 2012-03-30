@@ -15,7 +15,7 @@ pt-BR:
         regulatory_act_type: "Tipo de ato regulamentador"
         publication_date: "Data de publicação"
         credit_date: "Data crédito"
-        additional_credit_opening_nature: "Natureza de crédito"
+        extra_credit_nature: "Natureza de crédito"
         kind: "Classificação da natureza de crédito"
         supplement: "Suplemento"
         reduced: "Reduzido"

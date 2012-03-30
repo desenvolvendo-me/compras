@@ -1,7 +1,6 @@
 pt-BR:
   controllers:
     addresses: "Endereços"
-    additional_credit_opening_natures: "Naturezas de Aberturas de Créditos Suplementares"
     extra_credit: "Créditos Suplementares"
     regulatory_acts: "Atos Regulamentadores"
     administration_types: "Tipos de Administração"
@@ -30,6 +29,7 @@ pt-BR:
     dissemination_sources: "Fontes de Divulgação"
     document_types: "Tipos de Documento"
     expense_economic_classifications: "Classificações Econômicas das Despesas"
+    extra_credit_natures: "Naturezas de Aberturas de Créditos Suplementares"
     employees: "Funcionários"
     entities: "Entidades"
     expense_kinds: "Tipos de Despesas"

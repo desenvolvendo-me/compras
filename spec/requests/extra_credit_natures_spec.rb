@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "AdditionalCreditOpeningNatures" do
+feature "ExtraCreditNatures" do
   background do
     sign_in
   end
 
-  scenario 'create a new additional_credit_opening_nature' do
+  scenario 'create a new extra_credit_nature' do
     click_link 'Contabilidade'
 
     click_link 'Naturezas de Aberturas de Créditos Suplementares'
@@ -26,8 +26,8 @@ feature "AdditionalCreditOpeningNatures" do
     page.should have_select 'Classificação', :selected => 'Outros'
   end
 
-  scenario 'update an existent additional_credit_opening_nature' do
-    AdditionalCreditOpeningNature.make!(:abre_credito)
+  scenario 'update an existent extra_credig_nature' do
+    ExtraCreditNature.make!(:abre_credito)
 
     click_link 'Contabilidade'
 
@@ -48,8 +48,8 @@ feature "AdditionalCreditOpeningNatures" do
     page.should have_select 'Classificação', :selected => 'Remanejamento'
   end
 
-  scenario 'destroy an existent additional_credit_opening_nature' do
-    AdditionalCreditOpeningNature.make!(:abre_credito)
+  scenario 'destroy an existent extra_credig_nature' do
+    ExtraCreditNature.make!(:abre_credito)
 
     click_link 'Contabilidade'
 

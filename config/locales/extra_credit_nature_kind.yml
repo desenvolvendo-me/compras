@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    additional_credit_opening_nature_kind:
+    extra_credit_nature_kind:
       transposition: "Transposição"
       relocation: "Remanejamento"
       transfer: "Transferência"

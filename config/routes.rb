@@ -42,13 +42,6 @@ Tributario::Application.routes.draw do
 
   resources :addresses
 
-  resources :additional_credit_opening_natures do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :regulatory_acts do
     collection do
       get :filter
@@ -281,6 +274,13 @@ Tributario::Application.routes.draw do
   end
 
   resources :extra_credits do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :extra_credit_natures do
     collection do
       get :filter
       get :modal

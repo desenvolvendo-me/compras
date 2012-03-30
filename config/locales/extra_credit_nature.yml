@@ -1,11 +1,11 @@
 pt-BR:
   activerecord:
     models:
-      additional_credit_opening_nature:
+      extra_credit_nature:
         one: "Natureza de Abertura de Crédito Suplementar"
         other: "Naturezas de Aberturas de Créditos Suplementares"
 
     attributes:
-      additional_credit_opening_nature:
+      extra_credit_nature:
         description: "Descrição"
         kind: "Classificação"
