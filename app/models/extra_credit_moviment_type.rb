@@ -1,4 +1,4 @@
-class AdditionalCreditOpeningMovimentType < ActiveRecord::Base
+class ExtraCreditMovimentType < ActiveRecord::Base
   attr_accessible :moviment_type_id, :budget_allocation_id, :capability_id, :value
 
   belongs_to :moviment_type

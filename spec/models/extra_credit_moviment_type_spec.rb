@@ -1,7 +1,7 @@
 require 'model_helper'
-require 'app/models/additional_credit_opening_moviment_type'
+require 'app/models/extra_credit_moviment_type'
 
-describe AdditionalCreditOpeningMovimentType do
+describe ExtraCreditMovimentType do
   it { should belong_to :moviment_type }
   it { should belong_to :budget_allocation }
   it { should belong_to :capability }

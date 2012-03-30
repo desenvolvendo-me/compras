@@ -4,7 +4,7 @@ class MovimentType < ActiveRecord::Base
   has_enumeration_for :operation, :with => MovimentTypeOperation, :create_helpers => true
   has_enumeration_for :character, :with => MovimentTypeCharacter, :create_helpers => true
 
-  has_many :additional_credit_opening_moviment_types, :dependent => :restrict
+  has_many :extra_credit_moviment_types, :dependent => :restrict
 
   validates :name, :operation, :character, :presence => true
 

@@ -9,7 +9,7 @@
   </div>
 
   <div id="moviments">
-    <%= render 'additional_credit_opening_moviment_types', :f => f %>
+    <%= render 'extra_credit_moviment_types', :f => f %>
   </div>
 </div>
 
@@ -31,7 +31,7 @@
         reduced_element =    $('#extra_credit_reduced'),
         difference_element = $('#extra_credit_difference');
 
-    $('#additional-credit-opening-moviment-types').find('fieldset').each(function(){
+    $('#extra-credit-moviment-types').find('fieldset').each(function(){
       if($(this).find('.destroy').val() == 'false') {
         var operation = $(this).find('.operation').val(),
             value = parsePtBrFloat($(this).find('.value').val());
@@ -101,7 +101,7 @@
     }
   });
 
-  $('form.extra_credit').delegate('.remove-additional-credit-opening-moviment-type', 'click', function() {
+  $('form.extra_credit').delegate('.remove-extra-credit-moviment-type', 'click', function() {
     calcTotal();
   });
 

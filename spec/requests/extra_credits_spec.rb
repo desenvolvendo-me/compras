@@ -303,7 +303,7 @@ feature "ExtraCredits" do
     end
   end
 
-  scenario 'remove additional_credit_opening_moviment_type' do
+  scenario 'remove extra_credit_moviment_type' do
     ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
