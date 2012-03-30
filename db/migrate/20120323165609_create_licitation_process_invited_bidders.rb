@@ -6,7 +6,7 @@ class CreateLicitationProcessInvitedBidders < ActiveRecord::Migration
       t.string :protocol
       t.date :protocol_date
       t.date :receipt_date
-      t.boolean :auto_convocation, :default => false
+      t.boolean :auto_convocation
 
       t.timestamps
     end
