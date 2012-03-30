@@ -29,7 +29,7 @@ feature "DirectPurchases" do
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -269,7 +269,7 @@ feature "DirectPurchases" do
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -660,7 +660,7 @@ feature "DirectPurchases" do
     # selecting provider that have only the group of selected material
 
     within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '123456', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     end
 
     click_button 'Criar Solicitação de Compra Direta'
@@ -672,7 +672,7 @@ feature "DirectPurchases" do
     # selecting provider that have only the class of selected material
 
     within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '222222', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '222222', :field => 'Número do CRC'
     end
 
     click_button 'Criar Solicitação de Compra Direta'
@@ -684,7 +684,7 @@ feature "DirectPurchases" do
     # selecting provider that have only the selected material
 
     within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '333333', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '333333', :field => 'Número do CRC'
     end
 
     click_button 'Criar Solicitação de Compra Direta'
@@ -696,7 +696,7 @@ feature "DirectPurchases" do
     # selecting provider that have nothing to do with the selected material
 
     within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
     end
 
     click_button 'Criar Solicitação de Compra Direta'

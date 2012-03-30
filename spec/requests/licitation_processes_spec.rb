@@ -107,7 +107,7 @@ feature "LicitationProcesses" do
     within_tab 'Licitantes convidados' do
       click_button 'Adicionar Licitante'
 
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
       fill_in 'Protocolo', :with => '123456'
       fill_in 'Data do protocolo', :with => I18n.l(Date.current)
       fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
@@ -309,7 +309,7 @@ feature "LicitationProcesses" do
       click_button 'Remover Licitante'
       click_button 'Adicionar Licitante'
 
-      fill_modal 'Fornecedor', :with => '123456', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
       fill_in 'Protocolo', :with => '111111'
       fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
       fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
@@ -482,7 +482,7 @@ feature "LicitationProcesses" do
       click_button 'Adicionar Licitante'
 
       within '.licitation-process-invited-bidder:last' do
-        fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+        fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
         fill_in 'Protocolo', :with => '123456'
         fill_in 'Data do protocolo', :with => I18n.l(Date.current)
         fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
