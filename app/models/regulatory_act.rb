@@ -15,7 +15,7 @@ class RegulatoryAct < ActiveRecord::Base
   has_many :organogram_responsibles, :dependent => :restrict
   has_many :licitation_modalities, :dependent => :restrict
 
-  has_one :additional_credit_opening
+  has_one :extra_credit
 
   validates :regulatory_act_type, :creation_date, :publication_date, :vigor_date, :end_date, :legal_text_nature,
             :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true

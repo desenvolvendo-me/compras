@@ -1,11 +1,11 @@
-class AdditionalCreditOpening < ActiveRecord::Base
+class ExtraCredit < ActiveRecord::Base
   attr_accessible :entity_id, :year, :credit_type, :regulatory_act_id
   attr_accessible :credit_date, :additional_credit_opening_nature_id
   attr_accessible :additional_credit_opening_moviment_types_attributes
 
   attr_accessor :difference
 
-  has_enumeration_for :credit_type, :with => AdditionalCreditOpeningCreditType
+  has_enumeration_for :credit_type, :with => ExtraCreditKind
 
   belongs_to :entity
   belongs_to :regulatory_act
@@ -22,12 +22,12 @@ class AdditionalCreditOpening < ActiveRecord::Base
   validates :year, :entity, :credit_type, :presence => true
   validates :regulatory_act, :credit_date, :presence => true
   validates :additional_credit_opening_nature, :presence => true
-  validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_additional_credit_opening }, :allow_blank => true
+  validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }, :allow_blank => true
   validates :credit_date, :timeliness => {
     :on_or_after => lambda { last.credit_date },
     :on_or_after_message => :must_be_greather_or_equal_to_last_credit_date,
     :type => :date
-  }, :allow_blank => true, :if => :any_additional_credit_opening?
+  }, :allow_blank => true, :if => :any_extra_credit?
   validates :credit_date, :timeliness => {
     :on_or_after => :publication_date,
     :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
@@ -49,7 +49,7 @@ class AdditionalCreditOpening < ActiveRecord::Base
 
   protected
 
-  def any_additional_credit_opening?
+  def any_extra_credit?
     self.class.any?
   end
 

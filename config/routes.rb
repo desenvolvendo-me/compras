@@ -49,13 +49,6 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :additional_credit_openings do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :regulatory_acts do
     collection do
       get :filter
@@ -281,6 +274,13 @@ Tributario::Application.routes.draw do
   end
 
   resources :expense_economic_classifications do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :extra_credits do
     collection do
       get :filter
       get :modal

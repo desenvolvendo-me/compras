@@ -27,9 +27,9 @@
   function calcTotal() {
     var supplement_total = 0.0,
         reduced_total = 0.0,
-        supplement_element = $('#additional_credit_opening_supplement'),
-        reduced_element = $('#additional_credit_opening_reduced'),
-        difference_element = $('#additional_credit_opening_difference');
+        supplement_element = $('#extra_credit_supplement'),
+        reduced_element =    $('#extra_credit_reduced'),
+        difference_element = $('#extra_credit_difference');
 
     $('#additional-credit-opening-moviment-types').find('fieldset').each(function(){
       if($(this).find('.destroy').val() == 'false') {
@@ -49,22 +49,22 @@
     difference_element.val(floatToPtBrString(supplement_total - reduced_total));
   }
 
-  $('form.additional_credit_opening').delegate('#additional_credit_opening_regulatory_act_id', 'change', function (event, data) {
+  $('form.extra_credit').delegate('#extra_credit_regulatory_act_id', 'change', function (event, data) {
     if (data) {
       var record = data.record;
-      $('#additional_credit_opening_regulatory_act_type').val(record.data('administractive-act-type'));
-      $('#additional_credit_opening_publication_date').val(record.data('publication-date'));
+      $('#extra_credit_regulatory_act_type').val(record.data('administractive-act-type'));
+      $('#extra_credit_publication_date').val(record.data('publication-date'));
     }
   });
 
-  $('form.additional_credit_opening').delegate('#additional_credit_opening_additional_credit_opening_nature_id', 'change', function (event, data) {
+  $('form.extra_credit').delegate('#extra_credit_additional_credit_opening_nature_id', 'change', function (event, data) {
     if (data) {
       var record = data.record;
-      $('#additional_credit_opening_kind').val(record.data('kind'));
+      $('#extra_credit_kind').val(record.data('kind'));
     }
   });
 
-  $('form.additional_credit_opening').delegate('.budget-allocation', 'change', function (event, data) {
+  $('form.extra_credit').delegate('.budget-allocation', 'change', function (event, data) {
     if(data) {
       var record = data.record;
 
@@ -72,7 +72,7 @@
     }
   });
 
-  $('form.additional_credit_opening').delegate('.capability', 'change', function (event, data) {
+  $('form.extra_credit').delegate('.capability', 'change', function (event, data) {
     if(data) {
       var record = data.record;
 
@@ -80,7 +80,7 @@
     }
   });
 
-  $('form.additional_credit_opening').delegate('.moviment-type', 'change', function (event, data) {
+  $('form.extra_credit').delegate('.moviment-type', 'change', function (event, data) {
     if (data){
       var record = data.record;
       $(this).closest('fieldset').find('.operation').val(record.data('operation'));
@@ -101,11 +101,11 @@
     }
   });
 
-  $('form.additional_credit_opening').delegate('.remove-additional-credit-opening-moviment-type', 'click', function() {
+  $('form.extra_credit').delegate('.remove-additional-credit-opening-moviment-type', 'click', function() {
     calcTotal();
   });
 
-  $('form.additional_credit_opening').delegate('.value', 'keyup', function() {
+  $('form.extra_credit').delegate('.value', 'keyup', function() {
     calcTotal();
   });
 

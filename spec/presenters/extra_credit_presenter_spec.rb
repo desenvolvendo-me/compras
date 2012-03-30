@@ -1,17 +1,17 @@
 # encoding: utf-8
 require 'presenter_helper'
-require 'app/presenters/additional_credit_opening_presenter'
+require 'app/presenters/extra_credit_presenter'
 
-describe AdditionalCreditOpeningPresenter do
+describe ExtraCreditPresenter do
   subject do
-    described_class.new(additional_credit_opening, nil, helpers)
+    described_class.new(extra_credit, nil, helpers)
   end
 
   let :date do
     Date.new(2012, 3, 23)
   end
 
-  let :additional_credit_opening do
+  let :extra_credit do
     double(:publication_date => date)
   end
 
@@ -26,7 +26,7 @@ describe AdditionalCreditOpeningPresenter do
   end
 
   it 'should return nil when have not publication_date' do
-    additional_credit_opening.stub(:publication_date).and_return(nil)
+    extra_credit.stub(:publication_date).and_return(nil)
     subject.publication_date.should eq nil
   end
 end

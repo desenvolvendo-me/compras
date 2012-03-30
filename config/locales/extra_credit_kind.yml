@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    additional_credit_opening_credit_type:
+    extra_credit_kind:
       additional: "Suplementar"
       special: "Especial"
       extraordinary: "Extraordinário"

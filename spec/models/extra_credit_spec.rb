@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/additional_credit_opening'
+require 'app/models/extra_credit'
 require 'app/models/additional_credit_opening_moviment_type'
 
-describe AdditionalCreditOpening do
+describe ExtraCredit do
   it 'should return year as to_s' do
     subject.year = 2012
     subject.to_s.should eq '2012'
@@ -84,7 +84,7 @@ describe AdditionalCreditOpening do
       end
 
       it 'should not be valid when credit date is older' do
-        subject.should_not allow_value('2011-01-01').for(:credit_date).with_message("deve ser maior ou igual a data da última abertura de crédito suplementar (01/03/2012)")
+        subject.should_not allow_value('2011-01-01').for(:credit_date).with_message("deve ser maior ou igual a data do último crédito suplementar (01/03/2012)")
       end
     end
 

@@ -1,7 +1,7 @@
-AdditionalCreditOpening.blueprint(:detran_2012) do
+ExtraCredit.blueprint(:detran_2012) do
   entity { Entity.make!(:detran) }
   year { 2012 }
-  credit_type { AdditionalCreditOpeningCreditType::SPECIAL }
+  credit_type { ExtraCreditKind::SPECIAL }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   additional_credit_opening_nature { AdditionalCreditOpeningNature.make!(:abre_credito) }
   additional_credit_opening_moviment_types { [

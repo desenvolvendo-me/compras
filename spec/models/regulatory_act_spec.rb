@@ -4,7 +4,7 @@ require 'app/models/regulatory_act'
 require 'app/models/expense_economic_classification'
 require 'app/models/organogram_configuration'
 require 'app/models/organogram_responsible'
-require 'app/models/additional_credit_opening'
+require 'app/models/extra_credit'
 
 describe RegulatoryAct do
   it 'should return act_number as to_s method' do
@@ -15,7 +15,7 @@ describe RegulatoryAct do
   it { should belong_to :regulatory_act_type }
   it { should belong_to :legal_text_nature }
 
-  it { should have_one(:additional_credit_opening) }
+  it { should have_one(:extra_credit) }
   it { should have_many(:expense_economic_classifications).dependent(:restrict) }
   it { should have_many(:organogram_configurations).dependent(:restrict) }
   it { should have_many(:organogram_responsibles).dependent(:restrict) }

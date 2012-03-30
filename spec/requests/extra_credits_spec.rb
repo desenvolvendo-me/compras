@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "AdditionalCreditOpenings" do
+feature "ExtraCredits" do
   background do
     sign_in
   end
 
-  scenario 'create a new additional_credit_opening' do
+  scenario 'create a new extra_credit' do
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
     AdditionalCreditOpeningNature.make!(:abre_credito)
@@ -17,9 +17,9 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
-    click_link 'Criar Abertura de Crédito Suplementar'
+    click_link 'Criar Crédito Suplementar'
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
@@ -57,9 +57,9 @@ feature "AdditionalCreditOpenings" do
       page.should have_field 'Diferença', :with => '0,00'
     end
 
-    click_button 'Criar Abertura de Crédito Suplementar'
+    click_button 'Criar Crédito Suplementar'
 
-    page.should have_notice 'Abertura de Crédito Suplementar criado com sucesso.'
+    page.should have_notice 'Crédito Suplementar criado com sucesso.'
 
     click_link '2012'
 
@@ -109,9 +109,9 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
-    click_link 'Criar Abertura de Crédito Suplementar'
+    click_link 'Criar Crédito Suplementar'
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
 
@@ -130,7 +130,7 @@ feature "AdditionalCreditOpenings" do
       end
     end
 
-    click_button 'Criar Abertura de Crédito Suplementar'
+    click_button 'Criar Crédito Suplementar'
 
     within_tab 'Movimentos' do
       page.should have_content 'não pode ser maior que o saldo real da dotação (R$ 500,00)'
@@ -142,9 +142,9 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
-    click_link 'Criar Abertura de Crédito Suplementar'
+    click_link 'Criar Crédito Suplementar'
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
@@ -157,9 +157,9 @@ feature "AdditionalCreditOpenings" do
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
-    click_link 'Criar Abertura de Crédito Suplementar'
+    click_link 'Criar Crédito Suplementar'
 
     fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
 
@@ -168,11 +168,11 @@ feature "AdditionalCreditOpenings" do
 
   context 'should have modal link' do
     scenario 'when already stored' do
-      AdditionalCreditOpening.make!(:detran_2012)
+      ExtraCredit.make!(:detran_2012)
 
       click_link 'Contabilidade'
 
-      click_link 'Aberturas de Créditos Suplementares'
+      click_link 'Créditos Suplementares'
 
       click_link '2012'
 
@@ -186,12 +186,12 @@ feature "AdditionalCreditOpenings" do
     end
 
     scenario 'when change budget_allocation' do
-      AdditionalCreditOpening.make!(:detran_2012)
+      ExtraCredit.make!(:detran_2012)
       budget_allocation = BudgetAllocation.make!(:alocacao_extra)
 
       click_link 'Contabilidade'
 
-      click_link 'Aberturas de Créditos Suplementares'
+      click_link 'Créditos Suplementares'
 
       click_link '2012'
 
@@ -213,9 +213,9 @@ feature "AdditionalCreditOpenings" do
 
       click_link 'Contabilidade'
 
-      click_link 'Aberturas de Créditos Suplementares'
+      click_link 'Créditos Suplementares'
 
-      click_link 'Criar Abertura de Crédito Suplementar'
+      click_link 'Criar Crédito Suplementar'
 
       within_tab 'Movimentos' do
         click_button 'Adicionar Movimento'
@@ -234,11 +234,11 @@ feature "AdditionalCreditOpenings" do
 
   context 'should have modal link to capability' do
     scenario 'when already stored' do
-      AdditionalCreditOpening.make!(:detran_2012)
+      ExtraCredit.make!(:detran_2012)
 
       click_link 'Contabilidade'
 
-      click_link 'Aberturas de Créditos Suplementares'
+      click_link 'Créditos Suplementares'
 
       click_link '2012'
 
@@ -254,12 +254,12 @@ feature "AdditionalCreditOpenings" do
     end
 
     scenario 'when change' do
-      AdditionalCreditOpening.make!(:detran_2012)
+      ExtraCredit.make!(:detran_2012)
       Capability.make!(:construcao)
 
       click_link 'Contabilidade'
 
-      click_link 'Aberturas de Créditos Suplementares'
+      click_link 'Créditos Suplementares'
 
       click_link '2012'
 
@@ -282,9 +282,9 @@ feature "AdditionalCreditOpenings" do
 
       click_link 'Contabilidade'
 
-      click_link 'Aberturas de Créditos Suplementares'
+      click_link 'Créditos Suplementares'
 
-      click_link 'Criar Abertura de Crédito Suplementar'
+      click_link 'Criar Crédito Suplementar'
 
       within_tab 'Movimentos' do
         click_button 'Adicionar Movimento'
@@ -304,11 +304,11 @@ feature "AdditionalCreditOpenings" do
   end
 
   scenario 'remove additional_credit_opening_moviment_type' do
-    AdditionalCreditOpening.make!(:detran_2012)
+    ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
     click_link '2012'
 
@@ -317,7 +317,7 @@ feature "AdditionalCreditOpenings" do
       click_button 'Remover Movimento'
     end
 
-    click_button 'Atualizar Abertura de Crédito Suplementar'
+    click_button 'Atualizar Crédito Suplementar'
 
     click_link '2012'
 
@@ -329,17 +329,17 @@ feature "AdditionalCreditOpenings" do
     end
   end
 
-  scenario 'update an existent additional_credit_opening' do
+  scenario 'update an existent extra_credit' do
     Entity.make!(:secretaria_de_educacao)
     RegulatoryAct.make!(:emenda)
-    AdditionalCreditOpening.make!(:detran_2012)
+    ExtraCredit.make!(:detran_2012)
     AdditionalCreditOpeningNature.make!(:abre_credito_de_transferencia)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
     Capability.make!(:reforma)
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
     click_link '2012'
 
@@ -362,9 +362,9 @@ feature "AdditionalCreditOpenings" do
       end
     end
 
-    click_button 'Atualizar Abertura de Crédito Suplementar'
+    click_button 'Atualizar Crédito Suplementar'
 
-    page.should have_notice 'Abertura de Crédito Suplementar editado com sucesso.'
+    page.should have_notice 'Crédito Suplementar editado com sucesso.'
 
     click_link '2011'
 
@@ -393,11 +393,11 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'validate uniqueness of budget_allocation' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    AdditionalCreditOpening.make!(:detran_2012)
+    ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
     click_link '2012'
 
@@ -410,7 +410,7 @@ feature "AdditionalCreditOpenings" do
       end
     end
 
-    click_button 'Atualizar Abertura de Crédito Suplementar'
+    click_button 'Atualizar Crédito Suplementar'
 
     within_tab 'Movimentos' do
       page.should have_content 'já está em uso'
@@ -419,11 +419,11 @@ feature "AdditionalCreditOpenings" do
 
   scenario 'validate uniqueness of capibality' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    AdditionalCreditOpening.make!(:detran_2012)
+    ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
     click_link '2012'
 
@@ -436,7 +436,7 @@ feature "AdditionalCreditOpenings" do
       end
     end
 
-    click_button 'Atualizar Abertura de Crédito Suplementar'
+    click_button 'Atualizar Crédito Suplementar'
 
     within_tab 'Movimentos' do
       page.should have_content 'já está em uso'
@@ -444,33 +444,33 @@ feature "AdditionalCreditOpenings" do
   end
 
   scenario 'validate uniqueness of administractive act' do
-    AdditionalCreditOpening.make!(:detran_2012)
+    ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
-    click_link 'Criar Abertura de Crédito Suplementar'
+    click_link 'Criar Crédito Suplementar'
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-    click_button 'Criar Abertura de Crédito Suplementar'
+    click_button 'Criar Crédito Suplementar'
 
-    page.should have_content 'já utilizado em outra abertura de crédito suplementar'
+    page.should have_content 'já utilizado em outro crédito suplementar'
   end
 
-  scenario 'destroy an existent additional_credit_opening' do
-    AdditionalCreditOpening.make!(:detran_2012)
+  scenario 'destroy an existent extra_credit' do
+    ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
-    click_link 'Aberturas de Créditos Suplementares'
+    click_link 'Créditos Suplementares'
 
     click_link '2012'
 
     click_link 'Apagar 2012', :confirm => true
 
-    page.should have_notice 'Abertura de Crédito Suplementar apagado com sucesso.'
+    page.should have_notice 'Crédito Suplementar apagado com sucesso.'
 
     page.should_not have_content 'Detran'
     page.should_not have_content '2012'

@@ -2,7 +2,7 @@ pt-BR:
   controllers:
     addresses: "Endereços"
     additional_credit_opening_natures: "Naturezas de Aberturas de Créditos Suplementares"
-    additional_credit_openings: "Aberturas de Créditos Suplementares"
+    extra_credit: "Créditos Suplementares"
     regulatory_acts: "Atos Regulamentadores"
     administration_types: "Tipos de Administração"
     administrative_processes: "Processos Administrativos"

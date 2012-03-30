@@ -8,8 +8,8 @@ class AdditionalCreditOpeningMovimentType < ActiveRecord::Base
   validates :moviment_type, :value, :presence => true
   validates :budget_allocation, :presence => true, :if => :moviment_type_as_budget_allocation?
   validates :capability, :presence => true, :if => :moviment_type_as_capability?
-  validates :budget_allocation_id, :uniqueness => { :scope => [:additional_credit_opening_id] }, :allow_blank => true
-  validates :capability_id, :uniqueness => { :scope => [:additional_credit_opening_id] }, :allow_blank => true
+  validates :budget_allocation_id, :uniqueness => { :scope => [:extra_credit_id] }, :allow_blank => true
+  validates :capability_id, :uniqueness => { :scope => [:extra_credit_id] }, :allow_blank => true
 
   delegate :budget_allocation?, :subtration?, :to => :moviment_type, :allow_nil => true
   delegate :operation, :to => :moviment_type, :allow_nil => true

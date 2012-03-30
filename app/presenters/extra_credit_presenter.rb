@@ -1,5 +1,5 @@
 # encoding: utf-8
-class AdditionalCreditOpeningPresenter < Presenter::Proxy
+class ExtraCreditPresenter < Presenter::Proxy
   def publication_date
     helpers.l object.publication_date if object.publication_date
   end
