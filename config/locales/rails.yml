@@ -222,6 +222,7 @@ pt-BR:
       pledge_expiration_value_sum_must_be_equals_to_pledge_value: "a soma de todos os valores deve ser igual ao valor do empenho"
       must_not_be_greater_than_pledge_expiration_cancellations_sum_or_pledge_expiration_value: "não pode ser maior que a soma do que já foi anulado ou o valor do vencimento"
       must_be_greather_or_equal_to_last_pledge_cancellation_date: "não pode ser menor que a data da última anulação (%{restriction})"
+      difference_must_be_equals_to_zero: "deve ser igual a zero"
 
   activerecord:
     errors:

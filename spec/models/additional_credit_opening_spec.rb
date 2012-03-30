@@ -28,7 +28,7 @@ describe AdditionalCreditOpening do
     subject.stub(:supplement).and_return(10.0)
     subject.stub(:reduced).and_return(1.0)
     subject.should_not be_valid
-    subject.errors[:difference].should include 'não é válido'
+    subject.errors[:difference].should include 'deve ser igual a zero'
   end
 
   it 'should be valid when difference is zero' do

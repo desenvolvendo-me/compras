@@ -54,7 +54,7 @@ class AdditionalCreditOpening < ActiveRecord::Base
   end
 
   def validate_difference
-    errors.add(:difference, :invalid) unless (self.supplement - self.reduced).zero?
+    errors.add(:difference, :difference_must_be_equals_to_zero) unless (self.supplement - self.reduced).zero?
   end
 
   def validate_item_value_when_budget_allocation(numeric_parser = ::I18n::Alchemy::NumericParser)
