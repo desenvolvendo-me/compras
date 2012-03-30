@@ -21,7 +21,7 @@ class DirectPurchase < ActiveRecord::Base
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
   has_one :supply_authorization, :dependent => :restrict
 
-  accepts_nested_attributes_for :direct_purchase_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :direct_purchase_budget_allocations, :allow_destroy => true
 
   delegate :phone, :fax, :address, :city, :zip_code, :to => :provider, :allow_nil => true
   delegate :bank_account, :agency, :bank, :to => :provider, :allow_nil => true

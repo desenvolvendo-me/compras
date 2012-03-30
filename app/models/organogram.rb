@@ -28,7 +28,7 @@ class Organogram < ActiveRecord::Base
   validate :cannot_have_duplicated_responsibles
 
   accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :organogram_responsibles, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :organogram_responsibles, :allow_destroy => true
 
   orderize :description
   filterize

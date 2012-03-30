@@ -29,8 +29,8 @@ class Pledge < ActiveRecord::Base
   has_many :pledge_expirations, :dependent => :destroy
   has_many :pledge_cancellations, :dependent => :restrict
 
-  accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :pledge_expirations, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :pledge_items, :allow_destroy => true
+  accepts_nested_attributes_for :pledge_expirations, :allow_destroy => true
 
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
