@@ -9,16 +9,16 @@ feature "ExtraCreditNatures" do
   scenario 'create a new extra_credit_nature' do
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Aberturas de Créditos Suplementares'
+    click_link 'Naturezas de Créditos Suplementares'
 
-    click_link 'Criar Natureza de Abertura de Crédito Suplementar'
+    click_link 'Criar Natureza de Crédito Suplementar'
 
     fill_in 'Descrição', :with => 'Abre crédito suplementar'
     select 'Outros', :from => 'Classificação'
 
-    click_button 'Criar Natureza de Abertura de Crédito Suplementar'
+    click_button 'Criar Natureza de Crédito Suplementar'
 
-    page.should have_notice 'Natureza de Abertura de Crédito Suplementar criado com sucesso.'
+    page.should have_notice 'Natureza de Crédito Suplementar criado com sucesso.'
 
     click_link 'Abre crédito suplementar'
 
@@ -31,16 +31,16 @@ feature "ExtraCreditNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Aberturas de Créditos Suplementares'
+    click_link 'Naturezas de Créditos Suplementares'
 
     click_link 'Abre crédito suplementar'
 
     fill_in 'Descrição', :with => 'Abre crédito suplementar - superavit financeiro'
     select 'Remanejamento', :from => 'Classificação'
 
-    click_button 'Atualizar Natureza de Abertura de Crédito Suplementar'
+    click_button 'Atualizar Natureza de Crédito Suplementar'
 
-    page.should have_notice 'Natureza de Abertura de Crédito Suplementar editado com sucesso.'
+    page.should have_notice 'Natureza de Crédito Suplementar editado com sucesso.'
 
     click_link 'Abre crédito suplementar - superavit financeiro'
 
@@ -53,13 +53,13 @@ feature "ExtraCreditNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Aberturas de Créditos Suplementares'
+    click_link 'Naturezas de Créditos Suplementares'
 
     click_link 'Abre crédito suplementar'
 
     click_link 'Apagar Abre crédito suplementar', :confirm => true
 
-    page.should have_notice 'Natureza de Abertura de Crédito Suplementar apagado com sucesso.'
+    page.should have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
 
     page.should_not have_content 'Abre crédito suplementar'
     page.should_not have_content 'Outros'
