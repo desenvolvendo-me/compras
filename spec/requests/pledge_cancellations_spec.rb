@@ -44,7 +44,7 @@ feature "PledgeCancellations" do
 
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
-    page.should have_field 'Vencimento', :with => '30/03/2012'
+    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
     page.should have_disabled_field 'Valor do vencimento'
     page.should have_field 'Valor do vencimento', :with => '9,99'
 
@@ -75,7 +75,7 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
-    page.should have_field 'Vencimento', :with => '30/03/2012'
+    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
     page.should have_disabled_field 'Valor do vencimento'
     page.should have_field 'Valor do vencimento', :with => '9,99'
   end
@@ -123,7 +123,7 @@ feature "PledgeCancellations" do
 
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
-    page.should have_field 'Vencimento', :with => '30/03/2012'
+    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
     page.should have_field 'Valor do vencimento', :with => '9,99'
 
     page.should have_field 'Empenho', :with => "#{pledge.id}"
