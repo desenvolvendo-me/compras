@@ -2,7 +2,6 @@ class AdditionalCreditOpening < ActiveRecord::Base
   attr_accessible :entity_id, :year, :credit_type, :regulatory_act_id
   attr_accessible :credit_date, :additional_credit_opening_nature_id
   attr_accessible :additional_credit_opening_moviment_types_attributes
-  # attr_accessible :supplement, :reduced
 
   attr_accessor :difference
 
