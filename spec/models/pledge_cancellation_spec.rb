@@ -22,6 +22,12 @@ describe PledgeCancellation do
     subject.should_not allow_value(4).for(:value_canceled).with_message("não pode ser maior que a soma do que já foi anulado ou o valor do vencimento")
   end
 
+  it 'should not be valid if value_canceled greater than expiration value' do
+    pledge_expiration = double(:pledge_cancellations => [], :value => 3, :expiration_date => nil)
+    subject.stub(:pledge_expiration).and_return(pledge_expiration)
+    subject.should_not allow_value(4).for(:value_canceled).with_message("não pode ser maior que a soma do que já foi anulado ou o valor do vencimento")
+  end
+
   context 'validate date' do
     before(:each) do
       described_class.stub(:last).and_return(double(:date => Date.new(2012, 3, 1)))
