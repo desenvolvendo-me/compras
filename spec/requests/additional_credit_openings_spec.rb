@@ -137,53 +137,6 @@ feature "AdditionalCreditOpenings" do
     end
   end
 
-  scenario 'validate supplement reduced difference' do
-    AdditionalCreditOpeningNature.make!(:abre_credito)
-    MovimentType.make!(:adicionar_dotacao)
-    MovimentType.make!(:subtrair_do_excesso_arrecadado)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
-    Capability.make!(:reforma)
-
-    click_link 'Contabilidade'
-
-    click_link 'Aberturas de Créditos Suplementares'
-
-    click_link 'Criar Abertura de Crédito Suplementar'
-
-    within_tab 'Movimentos' do
-      click_button 'Adicionar Movimento'
-
-      within 'fieldset:first' do
-        fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-        fill_in 'Valor', :with => '100,00'
-      end
-
-      click_button 'Adicionar Movimento'
-
-      within 'fieldset:last' do
-        fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
-        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
-        fill_in 'Valor', :with => '10,00'
-      end
-
-      page.should have_disabled_field 'Suplemento'
-      page.should have_field 'Suplemento', :with => '100,00'
-
-      page.should have_disabled_field 'Reduzido'
-      page.should have_field 'Reduzido', :with => '10,00'
-
-      page.should have_disabled_field 'Diferença'
-      page.should have_field 'Diferença', :with => '90,00'
-    end
-
-    click_button 'Criar Abertura de Crédito Suplementar'
-
-    within_tab 'Movimentos' do
-      page.should have_content 'não é válido'
-    end
-  end
-
   scenario 'when fill administractive act should fill regulatory_act_type and publication_date too' do
     RegulatoryAct.make!(:sopa)
 
