@@ -635,4 +635,74 @@ feature "DirectPurchases" do
       page.should have_content 'é necessário cadastrar pelo menos um item'
     end
   end
+
+  scenario 'budget allocation item material must belong to selected provider' do
+    Provider.make!(:wenderson_sa)
+    Provider.make!(:sobrinho_sa)
+    Provider.make!(:fornecedor_class_arames)
+    Provider.make!(:fornecedor_arame)
+    Material.make!(:arame_comum)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    click_link 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
+    end
+
+    # selecting provider that have only the group of selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '123456', :field => 'Número'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
+    end
+
+    # selecting provider that have only the class of selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '222222', :field => 'Número'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
+    end
+
+    # selecting provider that have only the selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '333333', :field => 'Número'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
+    end
+
+    # selecting provider that have nothing to do with the selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should have_content 'deve pertencer ao fornecedor selecionado'
+    end
+  end
 end

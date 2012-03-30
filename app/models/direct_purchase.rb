@@ -30,6 +30,7 @@ class DirectPurchase < ActiveRecord::Base
   validates :status, :year, :date, :legal_reference, :modality, :presence => true
   validates :organogram, :licitation_object, :delivery_location, :presence => true
   validates :provider, :employee, :payment_method, :period, :presence => true
+  validates :provider, :material_belongs_to_provider => true
 
   validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation
