@@ -24,11 +24,6 @@ class ExtraCredit < ActiveRecord::Base
   validates :extra_credit_nature, :presence => true
   validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }, :allow_blank => true
   validates :credit_date, :timeliness => {
-    :on_or_after => lambda { last.credit_date },
-    :on_or_after_message => :must_be_greather_or_equal_to_last_credit_date,
-    :type => :date
-  }, :allow_blank => true, :if => :any_extra_credit?
-  validates :credit_date, :timeliness => {
     :on_or_after => :publication_date,
     :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
     :type => :date
@@ -37,6 +32,7 @@ class ExtraCredit < ActiveRecord::Base
   validate :uniqueness_of_capability
   validate :validate_difference
   validate :validate_item_value_when_budget_allocation
+  validate :must_not_be_less_than_last_extra_credit_date
 
   before_validation :save_total
 
@@ -49,8 +45,14 @@ class ExtraCredit < ActiveRecord::Base
 
   protected
 
-  def any_extra_credit?
-    self.class.any?
+  def must_not_be_less_than_last_extra_credit_date
+    return unless credit_date
+
+    self_id = self.id
+
+    last = self.class.where { id != self_id }.last
+
+    errors.add(:credit_date, I18n.t('errors.messages.must_not_be_less_than_last_credit_date', :restriction => I18n.l(last.credit_date))) if last && credit_date < last.credit_date
   end
 
   def validate_difference
