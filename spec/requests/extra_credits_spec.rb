@@ -61,7 +61,9 @@ feature "ExtraCredits" do
 
     page.should have_notice 'Crédito Suplementar criado com sucesso.'
 
-    click_link '2012'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Detran'
@@ -168,13 +170,13 @@ feature "ExtraCredits" do
 
   context 'should have modal link' do
     scenario 'when already stored' do
-      ExtraCredit.make!(:detran_2012)
+      extra_credit = ExtraCredit.make!(:detran_2012)
 
       click_link 'Contabilidade'
 
       click_link 'Créditos Suplementares'
 
-      click_link '2012'
+      click_link "#{extra_credit.id}"
 
       within_tab 'Movimentos' do
         within 'fieldset:first' do
@@ -186,14 +188,14 @@ feature "ExtraCredits" do
     end
 
     scenario 'when change budget_allocation' do
-      ExtraCredit.make!(:detran_2012)
+      extra_credit = ExtraCredit.make!(:detran_2012)
       budget_allocation = BudgetAllocation.make!(:alocacao_extra)
 
       click_link 'Contabilidade'
 
       click_link 'Créditos Suplementares'
 
-      click_link '2012'
+      click_link "#{extra_credit.id}"
 
       within_tab 'Movimentos' do
         within 'fieldset:first' do
@@ -234,13 +236,13 @@ feature "ExtraCredits" do
 
   context 'should have modal link to capability' do
     scenario 'when already stored' do
-      ExtraCredit.make!(:detran_2012)
+      extra_credit = ExtraCredit.make!(:detran_2012)
 
       click_link 'Contabilidade'
 
       click_link 'Créditos Suplementares'
 
-      click_link '2012'
+      click_link "#{extra_credit.id}"
 
       within_tab 'Movimentos' do
         within 'fieldset:last' do
@@ -254,14 +256,14 @@ feature "ExtraCredits" do
     end
 
     scenario 'when change' do
-      ExtraCredit.make!(:detran_2012)
+      extra_credit = ExtraCredit.make!(:detran_2012)
       Capability.make!(:construcao)
 
       click_link 'Contabilidade'
 
       click_link 'Créditos Suplementares'
 
-      click_link '2012'
+      click_link "#{extra_credit.id}"
 
       within_tab 'Movimentos' do
         within 'fieldset:last' do
@@ -304,13 +306,13 @@ feature "ExtraCredits" do
   end
 
   scenario 'remove extra_credit_moviment_type' do
-    ExtraCredit.make!(:detran_2012)
+    extra_credit = ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
     click_link 'Créditos Suplementares'
 
-    click_link '2012'
+    click_link "#{extra_credit.id}"
 
     within_tab 'Movimentos' do
       click_button 'Remover Movimento'
@@ -319,7 +321,7 @@ feature "ExtraCredits" do
 
     click_button 'Atualizar Crédito Suplementar'
 
-    click_link '2012'
+    click_link "#{extra_credit.id}"
 
     within_tab 'Movimentos' do
       page.should_not have_field 'Tipo de movimento'
@@ -332,7 +334,7 @@ feature "ExtraCredits" do
   scenario 'update an existent extra_credit' do
     Entity.make!(:secretaria_de_educacao)
     RegulatoryAct.make!(:emenda)
-    ExtraCredit.make!(:detran_2012)
+    extra_credit = ExtraCredit.make!(:detran_2012)
     ExtraCreditNature.make!(:abre_credito_de_transferencia)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
     Capability.make!(:reforma)
@@ -341,7 +343,7 @@ feature "ExtraCredits" do
 
     click_link 'Créditos Suplementares'
 
-    click_link '2012'
+    click_link "#{extra_credit.id}"
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
@@ -366,7 +368,7 @@ feature "ExtraCredits" do
 
     page.should have_notice 'Crédito Suplementar editado com sucesso.'
 
-    click_link '2011'
+    click_link "#{extra_credit.id}"
 
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Secretaria de Educação'
@@ -393,13 +395,13 @@ feature "ExtraCredits" do
 
   scenario 'validate uniqueness of budget_allocation' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    ExtraCredit.make!(:detran_2012)
+    extra_credit = ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
     click_link 'Créditos Suplementares'
 
-    click_link '2012'
+    click_link "#{extra_credit.id}"
 
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
@@ -419,13 +421,13 @@ feature "ExtraCredits" do
 
   scenario 'validate uniqueness of capibality' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    ExtraCredit.make!(:detran_2012)
+    extra_credit = ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
     click_link 'Créditos Suplementares'
 
-    click_link '2012'
+    click_link "#{extra_credit.id}"
 
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
@@ -460,15 +462,15 @@ feature "ExtraCredits" do
   end
 
   scenario 'destroy an existent extra_credit' do
-    ExtraCredit.make!(:detran_2012)
+    extra_credit = ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
     click_link 'Créditos Suplementares'
 
-    click_link '2012'
+    click_link "#{extra_credit.id}"
 
-    click_link 'Apagar 2012', :confirm => true
+    click_link "Apagar #{extra_credit.id}", :confirm => true
 
     page.should have_notice 'Crédito Suplementar apagado com sucesso.'
 

@@ -5,8 +5,8 @@ require 'app/models/extra_credit_moviment_type'
 
 describe ExtraCredit do
   it 'should return year as to_s' do
-    subject.year = 2012
-    subject.to_s.should eq '2012'
+    subject.id = 2
+    subject.to_s.should eq '2'
   end
 
   it { should belong_to :entity }

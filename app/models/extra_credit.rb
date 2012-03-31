@@ -40,7 +40,7 @@ class ExtraCredit < ActiveRecord::Base
   filterize
 
   def to_s
-    "#{year}"
+    "#{id}"
   end
 
   protected
