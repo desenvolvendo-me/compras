@@ -322,6 +322,8 @@ feature "Pledges" do
     end
 
     within_tab 'Vencimentos' do
+      page.should have_disabled_field 'Vencimento'
+      page.should have_disabled_field 'Valor'
       page.should_not have_button 'Adicionar Vencimento'
       page.should_not have_button 'Remover Vencimento'
     end
