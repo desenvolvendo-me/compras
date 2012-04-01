@@ -3,19 +3,19 @@
     <%= f.input :id, :as => 'hidden' %>
     <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-4">
       <%= f.input :number, :disabled => true, :input_html => { :class => :order } %>
     </div>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-4">
       <%= f.input :expiration_date %>
     </div>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-4">
       <%= f.input :value %>
     </div>
 
-    <div class="yui3-u-1-7 nested-remove">
+    <div class="yui3-u-1-4 nested-remove">
       <input type="button" class="button negative remove-pledge-expiration" value="Remover Vencimento">
     </div>
   </div>
