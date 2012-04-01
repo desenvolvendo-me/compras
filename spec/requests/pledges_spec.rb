@@ -320,6 +320,11 @@ feature "Pledges" do
       page.should have_disabled_field 'Valor unitário'
       page.should have_disabled_field 'Valor total'
     end
+
+    within_tab 'Vencimentos' do
+      page.should_not have_button 'Adicionar Vencimento'
+      page.should_not have_button 'Remover Vencimento'
+    end
   end
 
   scenario 'should not have a button to destroy an existent pledge' do
