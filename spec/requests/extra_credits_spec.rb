@@ -103,6 +103,60 @@ feature "ExtraCredits" do
     end
   end
 
+  scenario 'calculate suplement and reduced' do
+    MovimentType.make!(:adicionar_dotacao)
+    MovimentType.make!(:subtrair_do_excesso_arrecadado)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    Capability.make!(:reforma)
+
+    click_link 'Contabilidade'
+
+    click_link 'Créditos Suplementares'
+
+    click_link 'Criar Crédito Suplementar'
+
+    within_tab 'Movimentos' do
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:first' do
+        fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
+
+        ignoring_scopes do
+          # bugfix: avoid NaN error
+          page.should have_field 'Suplemento', :with => '0,00'
+          page.should have_field 'Diferença', :with => '0,00'
+        end
+
+        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '10,00'
+      end
+
+      click_button 'Adicionar Movimento'
+
+      within 'fieldset:last' do
+        fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
+
+        ignoring_scopes do
+          # bugfix: avoid NaN error
+          page.should have_field 'Reduzido', :with => '0,00'
+          page.should have_field 'Diferença', :with => '10,00'
+        end
+
+        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor', :with => '10,00'
+      end
+
+      page.should have_disabled_field 'Suplemento'
+      page.should have_field 'Suplemento', :with => '10,00'
+
+      page.should have_disabled_field 'Reduzido'
+      page.should have_field 'Reduzido', :with => '10,00'
+
+      page.should have_disabled_field 'Diferença'
+      page.should have_field 'Diferença', :with => '0,00'
+    end
+  end
+
   scenario 'when operation is subtration and budget_allocation used item value should not be greather than budget allocation real_amount' do
     MovimentType.make!(:subtrair_dotacao)
     MovimentType.make!(:adicionar_em_outros_casos)

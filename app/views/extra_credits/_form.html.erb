@@ -32,9 +32,10 @@
         difference_element = $('#extra_credit_difference');
 
     $('#extra-credit-moviment-types').find('fieldset').each(function(){
-      if($(this).find('.destroy').val() == 'false') {
-        var operation = $(this).find('.operation').val(),
-            value = parsePtBrFloat($(this).find('.value').val());
+      var value = parsePtBrFloat($(this).find('.value').val());
+
+      if($(this).find('.destroy').val() == 'false' && !isNaN(value)) {
+        var operation = $(this).find('.operation').val();
 
         if(operation == '<%= MovimentTypeOperation::SUM %>') {
           supplement_total += value;
