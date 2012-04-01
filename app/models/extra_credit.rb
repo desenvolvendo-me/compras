@@ -48,9 +48,7 @@ class ExtraCredit < ActiveRecord::Base
   def must_not_be_less_than_last_extra_credit_date
     return unless credit_date
 
-    self_id = self.id
-
-    last = self.class.where { id != self_id }.last
+    last = self.class.where { |extra_credit| id != extra_credit.id }.last
 
     errors.add(:credit_date, I18n.t('errors.messages.must_not_be_less_than_last_credit_date', :restriction => I18n.l(last.credit_date))) if last && credit_date < last.credit_date
   end
