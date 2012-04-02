@@ -669,4 +669,35 @@ feature "LicitationProcesses" do
       page.should have_content 'já está em uso'
     end
   end
+
+  scenario 'testing that an excluded bidder document dont appear when the form returns with errors' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    # making the form invalid
+    within_tab 'Dados gerais' do
+      fill_in 'Detalhamento do objeto', :with => ''
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Documento', :with => 'Fiscal'
+    end
+
+    within_tab 'Documentos' do
+      click_button 'Remover'
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    within_tab 'Licitantes convidados' do
+      page.should_not have_field 'Documento', :with => 'Fiscal'
+    end
+  end
 end
