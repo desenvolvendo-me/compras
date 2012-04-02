@@ -3,7 +3,7 @@ class ChangeAdditionalCreditOpeningMovimentTypeValueToDecimal < ActiveRecord::Mi
     change_column :additional_credit_opening_moviment_types, :value, :decimal
   end
 
-  def up
+  def down
     change_column :additional_credit_opening_moviment_types, :value, :float
   end
 end
