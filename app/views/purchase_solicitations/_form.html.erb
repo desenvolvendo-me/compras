@@ -1,7 +1,6 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Dados gerais</a></li>
-    <li><a href="#items">Itens</a></li>
     <li><a href="#budget-allocations">Dotações orçamentárias</a></li>
   </ul>
 
@@ -9,18 +8,8 @@
     <%= render 'general', :f => f %>
   </div>
 
-  <div id="items">
-    <%= render 'items', :f => f %>
-  </div>
-
   <div id="budget-allocations">
-    <div id="budget_allocations_wrapper">
-      <%= render 'budget_allocations', :f => f %>
-    </div>
-
-    <div id="budget_allocation_wrapper">
-      <%= render 'budget_allocation', :f => f %>
-    </div>
+    <%= render 'budget_allocations', :f => f %>
   </div>
 </div>
 
@@ -31,111 +20,6 @@
 
       if (tabWithError) {
         $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
-  $("#purchase_solicitation_budget_allocation_id").change(function (event, data) {
-    if (data) {
-      var record = data.record;
-
-      $("#allocation").html($('#budget-allocation-template').mustache({budget_allocation_id: record.data("value"), budget_allocation_name: record.data("label")}));
-    }
-
-    if (!$(this).val()) {
-      $("#budget_allocations_wrapper").show();
-      $("#budget_allocation_wrapper").hide();
-    } else {
-      $("#budget_allocations_wrapper").hide();
-      $("#budget_allocation_wrapper").show();
-    }
-  }).change();
-
-  function budgetAllocationsTotalValue() {
-    var total = 0,
-        value;
-    $.each($('.allocation-price:visible'), function() {
-      value = $(this).attr('value')
-      if (value != '') {
-        total += parsePtBrFloat(value);
-      }
-    });
-    return floatToPtBrString(total);
-  }
-
-  function itemsTotalValue() {
-    var total = 0,
-    value;
-    $.each($('.item-price:visible'), function() {
-      value = $(this).attr('value');
-      if (value != '') {
-        total += parsePtBrFloat(value);
-      }
-    });
-    return floatToPtBrString(total);
-  }
-
-  $('form.purchase_solicitation').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
-    $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
-  });
-
-  $('form.purchase_solicitation').delegate('.remove-purchase-solicitation-item', 'click', function() {
-    $('#purchase_solicitation_items_total_value').val(itemsTotalValue);
-  });
-
-  $('form.purchase_solicitation').delegate('.allocation-price', 'keyup', function() {
-    $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
-  });
-
-  $('form.purchase_solicitation').delegate('.remove-purchase-solicitation-budget-allocation', 'click', function() {
-    $('#purchase_solicitation_budget_allocations_total_value').val(budgetAllocationsTotalValue);
-  });
-
-  $('.item-quantity').onlyNumbers();
-
-  $("#purchase_solicitation_budget_allocation_id").change(function (event, data) {
-    if (data) {
-      var record = data.record;
-      $('#purchase_solicitation_budget_allocation_amount').val(record.data("amount"));
-    } else {
-      $('#purchase_solicitation_budget_allocation_amount').val('');
-    }
-  });
-
-  function allocationAmount() {
-    var amount = $('#purchase_solicitation_budget_allocation_amount').attr('value');
-    if (amount != '') {
-      return parsePtBrFloat(amount);
-    }
-    return null;
-  }
-
-  function itemsValue() {
-    return parsePtBrFloat(itemsTotalValue());
-  }
-
-  function getConfirmation() {
-    return confirm("<%= I18n.translate('other.tributario.messages.question_purchase_solicitation_budget_allocation_amount') %>");
-  }
-
-  var previousAllocation = $('#purchase_solicitation_budget_allocation_id').attr('value'),
-      actionIsEdit = <%= f.object.persisted? %>;
-
-  function allocationChanged() {
-    actualAllocation = $('#purchase_solicitation_budget_allocation_id').attr('value');
-    return (actualAllocation != previousAllocation);
-  }
-
-  function canVerify() {
-    return (!actionIsEdit || (actionIsEdit && allocationChanged()));
-  }
-
-  $('form').submit(function (e) {
-    var amount = allocationAmount();
-
-    if (canVerify() && amount && amount < itemsValue()) {
-      if (!getConfirmation()) {
-        e.preventDefault();
       }
     }
   });

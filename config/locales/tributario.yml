@@ -24,6 +24,5 @@ pt-BR:
         fiscal_execution_without_movimentations: "Esta execução fiscal não possui movimentações"
         more_information: "Mais informações"
         no_extra_allocations: "Já foi selecionada uma Dotação na aba \"Dados gerais\"."
-        question_purchase_solicitation_budget_allocation_amount: "O saldo da dotação orçamentária selecionada é inferior ao valor total dos produtos. Deseja salvar?"
         msg_no_provider_partners: "Foi selecionada uma pessoa física na aba \"Principal\". Não é necessário cadastrar sócios."
         msg_no_invited_bidders: "Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes."

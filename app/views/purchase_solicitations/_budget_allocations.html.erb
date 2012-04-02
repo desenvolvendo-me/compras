@@ -1,12 +1,3 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :items_total_value, :input_html => { :value => number_to_currency(f.object.items_total_value, :format => "%n"), :size => 12 }, :disabled => true %>
-  </div>
-  <div class="yui3-u-1-2">
-    <%= f.input :budget_allocations_total_value, :input_html => { :value => number_to_currency(f.object.budget_allocations_total_value, :format => "%n"), :size => 12 }, :disabled => true %>
-  </div>
-</div>
-
 <fieldset id="budget_allocations_selector">
   <legend>
     Dotações

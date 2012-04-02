@@ -4,7 +4,6 @@ PurchaseSolicitation.blueprint(:reparo) do
   request_date { "2012-01-31" }
   responsible { Employee.make!(:sobrinho) }
   justification { "Reparo nas instalações" }
-  budget_allocation { BudgetAllocation.make!(:alocacao) }
   delivery_location { DeliveryLocation.make!(:education) }
   kind { "goods" }
   general_observations { "Reparos nas instalações superiores" }
@@ -13,7 +12,6 @@ PurchaseSolicitation.blueprint(:reparo) do
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }
   no_service_justification { "n/a" }
-  items { [PurchaseSolicitationItem.make!(:item)]}
 end
 
 PurchaseSolicitation.blueprint(:conserto) do
@@ -32,5 +30,4 @@ PurchaseSolicitation.blueprint(:conserto) do
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }
   no_service_justification { "n/a" }
-  items { [PurchaseSolicitationItem.make!(:item)]}
 end

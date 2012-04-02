@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/material'
-require 'app/models/purchase_solicitation_item'
 
 describe Material do
   it 'should return code and description as to_s method' do
@@ -10,7 +9,6 @@ describe Material do
     subject.to_s.should eq '01 - Manga'
   end
 
-  it { should have_many(:purchase_solicitation_items).dependent(:restrict) }
   it { should belong_to :expense_economic_classification }
   it { should have_many :pledge_items }
   it { should have_and_belong_to_many :providers }

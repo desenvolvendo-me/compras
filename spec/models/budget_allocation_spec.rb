@@ -29,7 +29,6 @@ describe BudgetAllocation do
   it { should belong_to(:capability) }
 
   it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
-  it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
