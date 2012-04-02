@@ -81,7 +81,7 @@ feature "PledgeCancellations" do
   end
 
   scenario 'when select total as kind should disabled and fill value_canceled' do
-    pledge = Pledge.make!(:empenho)
+    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -93,11 +93,11 @@ feature "PledgeCancellations" do
     select 'Total', :from => 'Tipo de anulação'
 
     page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => '9,99'
+    page.should have_field 'Valor anulado', :with => '100,00'
   end
 
   scenario 'should fill value_canceled when select pledge_expiration before kind and kind is total' do
-    pledge = Pledge.make!(:empenho)
+    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -109,7 +109,7 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
 
     page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => '9,99'
+    page.should have_field 'Valor anulado', :with => '100,00'
   end
 
   scenario 'when select pledge_expiration first fill pledge' do
