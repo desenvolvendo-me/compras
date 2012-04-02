@@ -80,6 +80,34 @@ feature "PledgeCancellations" do
     page.should have_field 'Valor do vencimento', :with => '9,99'
   end
 
+  scenario 'clear pledge and pledge_expiration when clear pledge' do
+    pledge = Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Anulações de Empenho'
+
+    click_link 'Criar Anulação de Empenho'
+
+    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    page.should have_field 'Parcela', :with => '1'
+    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Valor do vencimento', :with => '9,99'
+
+    clear_modal 'Empenho'
+    page.should have_field 'Empenho', :with => ''
+    page.should have_disabled_field 'Data de emissão'
+    page.should have_field 'Data de emissão', :with => ''
+    page.should have_disabled_field 'Valor do empenho'
+    page.should have_field 'Valor do empenho', :with => ''
+
+    page.should have_field 'Parcela', :with => ''
+    page.should have_disabled_field 'Vencimento'
+    page.should have_field 'Vencimento', :with => ''
+    page.should have_disabled_field 'Valor do vencimento'
+    page.should have_field 'Valor do vencimento', :with => ''
+  end
+
   scenario 'when select total as kind should disabled and fill value_canceled' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
