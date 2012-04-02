@@ -75,6 +75,7 @@
         $('#pledge_cancellation_pledge_expiration_value').val('');
       }
     } else {
+      $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', '<%= modal_pledge_expirations_path %>');
       $('#pledge_cancellation_emission_date').val('');
       $('#pledge_cancellation_pledge_value').val('');
       $('#pledge_cancellation_pledge_expiration').val('');

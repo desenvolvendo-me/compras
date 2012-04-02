@@ -176,6 +176,25 @@ feature "PledgeCancellations" do
     end
   end
 
+  scenario 'when select pledge first and clear it should clear filter by pledge on pledge_expiration modal' do
+    pledge = Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Anulações de Empenho'
+
+    click_link 'Criar Anulação de Empenho'
+
+    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+
+    clear_modal 'Empenho'
+
+    fill_modal 'Parcela', :with => '1', :field => 'Número' do
+      page.should_not have_disabled_field 'filter_pledge'
+      page.should have_field 'filter_pledge', :with => ''
+    end
+  end
+
   scenario 'should have all fields disabled when editing an existent pledge' do
     pledge = Pledge.make!(:empenho)
     PledgeCancellation.make!(:empenho_2012)
