@@ -22,23 +22,37 @@ feature "LicitationObjects" do
 
     within_tab 'Total acumulado' do
       within_fieldset 'Total acumulado de compras e serviços' do
-        fill_in 'Dispensa de licitação', :with => '1,99'
-        fill_in 'Carta convite', :with => '2,99'
-        fill_in 'Tomada de preço', :with => '3,99'
-        fill_in 'Concorrência pública', :with => '4,99'
+        page.should have_disabled_field  'Dispensa de licitação'
+        page.should have_disabled_field  'Carta convite'
+        page.should have_disabled_field  'Tomada de preço'
+        page.should have_disabled_field  'Concorrência pública'
+
+        page.should have_field 'Dispensa de licitação', :with => '0,00'
+        page.should have_field 'Carta convite', :with => '0,00'
+        page.should have_field 'Tomada de preço', :with => '0,00'
+        page.should have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de obras e engenharia' do
-        fill_in 'Dispensa de licitação', :with => '5,99'
-        fill_in 'Carta convite', :with => '6,99'
-        fill_in 'Tomada de preço', :with => '7,99'
-        fill_in 'Concorrência pública', :with => '8,99'
+        page.should have_disabled_field  'Dispensa de licitação'
+        page.should have_disabled_field  'Carta convite'
+        page.should have_disabled_field  'Tomada de preço'
+        page.should have_disabled_field  'Concorrência pública'
+
+        page.should have_field 'Dispensa de licitação', :with => '0,00'
+        page.should have_field 'Carta convite', :with => '0,00'
+        page.should have_field 'Tomada de preço', :with => '0,00'
+        page.should have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de modalidades especiais' do
-        fill_in 'Leilão', :with => '9,99'
-        fill_in 'Inexigibilidade', :with => '10,99'
-        fill_in 'Concurso', :with => '11,99'
+        page.should have_disabled_field  'Leilão'
+        page.should have_disabled_field  'Inexigibilidade'
+        page.should have_disabled_field  'Concurso'
+        
+        page.should have_field 'Leilão', :with => '0,00'
+        page.should have_field 'Inexigibilidade', :with => '0,00'
+        page.should have_field 'Concurso', :with => '0,00'
       end
     end
 
@@ -59,23 +73,37 @@ feature "LicitationObjects" do
 
     within_tab 'Total acumulado' do
       within_fieldset 'Total acumulado de compras e serviços' do
-        page.should have_field 'Dispensa de licitação', :with => '1,99'
-        page.should have_field 'Carta convite', :with => '2,99'
-        page.should have_field 'Tomada de preço', :with => '3,99'
-        page.should have_field 'Concorrência pública', :with => '4,99'
+        page.should have_disabled_field  'Dispensa de licitação'
+        page.should have_disabled_field  'Carta convite'
+        page.should have_disabled_field  'Tomada de preço'
+        page.should have_disabled_field  'Concorrência pública'
+
+        page.should have_field 'Dispensa de licitação', :with => '0,00'
+        page.should have_field 'Carta convite', :with => '0,00'
+        page.should have_field 'Tomada de preço', :with => '0,00'
+        page.should have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de obras e engenharia' do
-        page.should have_field 'Dispensa de licitação', :with => '5,99'
-        page.should have_field 'Carta convite', :with => '6,99'
-        page.should have_field 'Tomada de preço', :with => '7,99'
-        page.should have_field 'Concorrência pública', :with => '8,99'
+        page.should have_disabled_field  'Dispensa de licitação'
+        page.should have_disabled_field  'Carta convite'
+        page.should have_disabled_field  'Tomada de preço'
+        page.should have_disabled_field  'Concorrência pública'
+
+        page.should have_field 'Dispensa de licitação', :with => '0,00'
+        page.should have_field 'Carta convite', :with => '0,00'
+        page.should have_field 'Tomada de preço', :with => '0,00'
+        page.should have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de modalidades especiais' do
-        page.should have_field 'Leilão', :with => '9,99'
-        page.should have_field 'Inexigibilidade', :with => '10,99'
-        page.should have_field 'Concurso', :with => '11,99'
+        page.should have_disabled_field  'Leilão'
+        page.should have_disabled_field  'Inexigibilidade'
+        page.should have_disabled_field  'Concurso'
+        
+        page.should have_field 'Leilão', :with => '0,00'
+        page.should have_field 'Inexigibilidade', :with => '0,00'
+        page.should have_field 'Concurso', :with => '0,00'
       end
     end
 
@@ -124,28 +152,6 @@ feature "LicitationObjects" do
       fill_in 'Descrição', :with => 'Viaduto'
     end
 
-    within_tab 'Total acumulado' do
-      within_fieldset 'Total acumulado de compras e serviços' do
-        fill_in 'Dispensa de licitação', :with => '11,99'
-        fill_in 'Carta convite', :with => '12,99'
-        fill_in 'Tomada de preço', :with => '13,99'
-        fill_in 'Concorrência pública', :with => '14,99'
-      end
-
-      within_fieldset 'Total acumulado de obras e engenharia' do
-        fill_in 'Dispensa de licitação', :with => '15,99'
-        fill_in 'Carta convite', :with => '16,99'
-        fill_in 'Tomada de preço', :with => '17,99'
-        fill_in 'Concorrência pública', :with => '18,99'
-      end
-
-      within_fieldset 'Total acumulado de modalidades especiais' do
-        fill_in 'Leilão', :with => '19,99'
-        fill_in 'Inexigibilidade', :with => '20,99'
-        fill_in 'Concurso', :with => '21,99'
-      end
-    end
-
     within_tab 'Materiais' do
       fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
     end
@@ -159,28 +165,6 @@ feature "LicitationObjects" do
     within_tab 'Principal' do
       page.should have_field 'Ano', :with => '2013'
       page.should have_field 'Descrição', :with => 'Viaduto'
-    end
-
-    within_tab 'Total acumulado' do
-      within_fieldset 'Total acumulado de compras e serviços' do
-        page.should have_field 'Dispensa de licitação', :with => '11,99'
-        page.should have_field 'Carta convite', :with => '12,99'
-        page.should have_field 'Tomada de preço', :with => '13,99'
-        page.should have_field 'Concorrência pública', :with => '14,99'
-      end
-
-      within_fieldset 'Total acumulado de obras e engenharia' do
-        page.should have_field 'Dispensa de licitação', :with => '15,99'
-        page.should have_field 'Carta convite', :with => '16,99'
-        page.should have_field 'Tomada de preço', :with => '17,99'
-        page.should have_field 'Concorrência pública', :with => '18,99'
-      end
-
-      within_fieldset 'Total acumulado de modalidades especiais' do
-        page.should have_field 'Leilão', :with => '19,99'
-        page.should have_field 'Inexigibilidade', :with => '20,99'
-        page.should have_field 'Concurso', :with => '21,99'
-      end
     end
 
     within_tab 'Materiais' do
