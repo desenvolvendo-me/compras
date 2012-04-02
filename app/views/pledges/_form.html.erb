@@ -57,6 +57,30 @@
     }
   });
 
+  <% unless f.object.persisted? %>
+    var pledge_expiration_expiration_date_changed = false;
+    $("#pledge_emission_date").change(function() {
+      var expiration_date = $('fieldset:first').find('.expiration_date')
+      if(!pledge_expiration_expiration_date_changed) { expiration_date.val(($(this).val())) };
+    });
+
+    var first_pledge_expiration_value_changed = false;
+    $("#pledge_value").focusout(function() {
+      var value = $('fieldset:first').find('.value');
+      if(!first_pledge_expiration_value_changed) {
+        value.val(($(this).val()))
+      };
+    });
+
+    $('form.pledge').delegate('.expiration_date', 'change', function (event, data) {
+      pledge_expiration_expiration_date_changed = true;
+    });
+
+    $('form.pledge').delegate('.value', 'keyup', function (event, data) {
+      first_pledge_expiration_value_changed = true;
+    });
+  <% end %>
+
   $("#pledge_budget_allocation_id").change(function (event, data) {
     if (data) {
       var record = data.record;

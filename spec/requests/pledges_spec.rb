@@ -74,8 +74,6 @@ feature "Pledges" do
     end
 
     within_tab 'Vencimentos' do
-      click_button 'Adicionar Vencimento'
-
       within 'fieldset:first' do
         fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
@@ -146,6 +144,53 @@ feature "Pledges" do
     end
   end
 
+  scenario 'when create should fill first pledge_expiration date and value' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_in 'Data de emissão', :with => '30/12/2011'
+      fill_in 'Valor', :with => '31,66'
+    end
+
+    within_tab 'Vencimentos' do
+      within 'fieldset:first' do
+        page.should have_field 'Vencimento', :with => '30/12/2011'
+        page.should have_field 'Valor', :with => '31,66'
+      end
+    end
+  end
+
+  scenario 'when create should not fill first pledge_expiration date and value if already changed' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Vencimentos' do
+      within 'fieldset:first' do
+        fill_in 'Vencimento', :with => '30/12/2011'
+        fill_in 'Valor', :with => '31,66'
+      end
+    end
+
+    within_tab 'Principal' do
+      fill_in 'Data de emissão', :with => '01/11/2011'
+      fill_in 'Valor', :with => '316,60'
+    end
+
+    within_tab 'Vencimentos' do
+      within 'fieldset:first' do
+        page.should have_field 'Vencimento', :with => '30/12/2011'
+        page.should have_field 'Valor', :with => '31,66'
+      end
+    end
+  end
+
   scenario 'validate expiration_date on pledge_expirations should be greater than emission_date' do
     click_link 'Contabilidade'
 
@@ -158,8 +203,6 @@ feature "Pledges" do
     end
 
     within_tab 'Vencimentos' do
-      click_button 'Adicionar Vencimento'
-
       fill_in 'Vencimento', :with => I18n.l(Date.current - 10.days)
     end
 
@@ -182,8 +225,6 @@ feature "Pledges" do
     end
 
     within_tab 'Vencimentos' do
-      click_button 'Adicionar Vencimento'
-
       within 'fieldset:first' do
         fill_in 'Vencimento', :with => I18n.l(Date.current + 10.days)
       end
@@ -217,8 +258,6 @@ feature "Pledges" do
     end
 
     within_tab 'Vencimentos' do
-      click_button 'Adicionar Vencimento'
-
       within 'fieldset:first' do
         fill_in 'Valor', :with => '100,00'
       end
@@ -251,8 +290,6 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Vencimentos' do
-      click_button 'Adicionar Vencimento'
-
       within 'fieldset:first' do
         page.should have_field 'Número', :with => '1'
       end
