@@ -5,7 +5,7 @@ class Provider < ActiveRecord::Base
   attr_accessible :materials_group_ids, :materials_class_ids, :material_ids
   attr_accessible :provider_licitation_documents_attributes
 
-  attr_modal :crc_number
+  attr_modal :economic_registration_id, :person_id, :legal_nature_id, :cnae_id, :crc_number
 
   belongs_to :person
   belongs_to :economic_registration
@@ -22,8 +22,8 @@ class Provider < ActiveRecord::Base
   has_many :direct_purchases, :dependent => :restrict
   has_many :licitation_process_invited_bidders, :dependent => :restrict
 
-  accepts_nested_attributes_for :provider_partners, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :provider_licitation_documents, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :provider_partners, :allow_destroy => true
+  accepts_nested_attributes_for :provider_licitation_documents, :allow_destroy => true
 
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
   delegate :personable_type, :phone, :fax, :to => :person, :allow_nil => true

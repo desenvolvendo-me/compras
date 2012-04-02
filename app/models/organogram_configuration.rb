@@ -10,7 +10,7 @@ class OrganogramConfiguration < ActiveRecord::Base
   has_many :organogram_levels, :order => 'level asc', :dependent => :destroy, :order => :id
   has_many :organograms, :dependent => :restrict
 
-  accepts_nested_attributes_for :organogram_levels, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :organogram_levels, :allow_destroy => true
 
   validates :description, :entity, :regulatory_act, :presence => true
   validate :organogram_separator_for_organogram_levels

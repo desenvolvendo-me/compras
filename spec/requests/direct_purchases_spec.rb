@@ -29,7 +29,7 @@ feature "DirectPurchases" do
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -269,7 +269,7 @@ feature "DirectPurchases" do
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -633,6 +633,76 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações' do
       page.should have_content 'é necessário cadastrar pelo menos um item'
+    end
+  end
+
+  scenario 'budget allocation item material must belong to selected provider' do
+    Provider.make!(:wenderson_sa)
+    Provider.make!(:sobrinho_sa)
+    Provider.make!(:fornecedor_class_arames)
+    Provider.make!(:fornecedor_arame)
+    Material.make!(:arame_comum)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra Direta'
+
+    click_link 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Dotação'
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
+    end
+
+    # selecting provider that have only the group of selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
+    end
+
+    # selecting provider that have only the class of selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '222222', :field => 'Número do CRC'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
+    end
+
+    # selecting provider that have only the selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '333333', :field => 'Número do CRC'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
+    end
+
+    # selecting provider that have nothing to do with the selected material
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+    end
+
+    click_button 'Criar Solicitação de Compra Direta'
+
+    within_tab 'Dotações' do
+      page.should have_content 'deve pertencer ao fornecedor selecionado'
     end
   end
 end

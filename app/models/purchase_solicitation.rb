@@ -20,8 +20,8 @@ class PurchaseSolicitation < ActiveRecord::Base
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation, :order => :id
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
 
-  accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :items, :allow_destroy => true
+  accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
   delegate :amount, :description, :id, :to => :budget_allocation, :prefix => true, :allow_nil => true
 

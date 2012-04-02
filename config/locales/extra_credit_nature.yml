@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      extra_credit_nature:
+        one: "Natureza de Crédito Suplementar"
+        other: "Naturezas de Créditos Suplementares"
+
+    attributes:
+      extra_credit_nature:
+        description: "Descrição"
+        kind: "Classificação"

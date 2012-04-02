@@ -42,20 +42,6 @@ Tributario::Application.routes.draw do
 
   resources :addresses
 
-  resources :additional_credit_opening_natures do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :additional_credit_openings do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :regulatory_acts do
     collection do
       get :filter
@@ -287,6 +273,20 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :extra_credits do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :extra_credit_natures do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :employees do
     collection do
       get :filter
@@ -370,6 +370,13 @@ Tributario::Application.routes.draw do
   end
 
   resources :legal_text_natures do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :licitation_commissions do
     collection do
       get :filter
       get :modal
@@ -494,6 +501,20 @@ Tributario::Application.routes.draw do
   end
 
   resources :pledge_historics do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :pledge_cancellations, :except => [:destroy, :update] do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :pledge_expirations do
     collection do
       get :filter
       get :modal

@@ -207,11 +207,11 @@ pt-BR:
       taken_for_regulatory_act: "já existe para o ato regulamentador informado"
       must_be_equal_as_licitation_object: "deve pertencer ao objeto de licitação selecionado"
       must_be_greather_or_equal_to_last_date: "deve ser maior ou igual a data da última reserva (%{restriction})"
-      must_be_greather_or_equal_to_last_credit_date: "deve ser maior ou igual a data da última abertura de crédito suplementar (%{restriction})"
+      must_not_be_less_than_last_credit_date: "não pode ser menor que a data do último crédito suplementar (%{restriction})"
       must_be_greather_or_equal_to_publication_date: "deve ser maior ou igual a data de publicação do ato administrativo (%{restriction})"
-      must_be_uniqueness_on_additional_credit_opening: "já utilizado em outra abertura de crédito suplementar"
+      must_be_uniqueness_on_extra_credit: "já utilizado em outro crédito suplementar"
       should_not_exceed_reserved_value: "está acima do valor disponível para a dotação selecionada"
-      must_not_be_greather_than_budget_allocation_real_amount: "não pode ser maior do que o saldo da dotação, contando com o valor reservado"
+      must_not_be_greather_than_budget_allocation_real_amount: "não pode ser maior do que o saldo da dotação, contando com os valores reservados"
       cannot_be_greater_than_licitation_exemption: "não pode ser superior à dispensa de licitação"
       must_have_at_least_one_partner: "Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável"
       must_have_at_least_one_budget_allocation: "é necessário cadastrar pelo menos uma dotação"
@@ -220,6 +220,10 @@ pt-BR:
       must_be_greater_than_pledge_emission_date: "deve ser maior que a data de emissão"
       must_be_greater_than_last_expiration_date: "deve ser maior que a data da última parcela"
       pledge_expiration_value_sum_must_be_equals_to_pledge_value: "a soma de todos os valores deve ser igual ao valor do empenho"
+      must_not_be_greater_than_pledge_expiration_cancellations_sum_or_pledge_expiration_value: "não pode ser maior que a soma do que já foi anulado ou o valor do vencimento"
+      must_be_greather_or_equal_to_last_pledge_cancellation_date: "não pode ser menor que a data da última anulação (%{restriction})"
+      difference_must_be_equals_to_zero: "deve ser igual a zero"
+      must_belong_to_selected_provider: "deve pertencer ao fornecedor selecionado"
 
   activerecord:
     errors:

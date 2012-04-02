@@ -7,7 +7,7 @@ require 'app/models/reserve_fund'
 require 'app/models/pledge'
 require 'app/models/administrative_process'
 require 'app/models/direct_purchase_budget_allocation'
-require 'app/models/additional_credit_opening_moviment_type'
+require 'app/models/extra_credit_moviment_type'
 
 describe BudgetAllocation do
   it 'should return "id/year - description" as to_s' do
@@ -28,7 +28,7 @@ describe BudgetAllocation do
   it { should belong_to(:expense_economic_classification) }
   it { should belong_to(:capability) }
 
-  it { should have_many(:additional_credit_opening_moviment_types).dependent(:restrict) }
+  it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }

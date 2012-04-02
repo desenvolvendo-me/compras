@@ -15,7 +15,7 @@ pt-BR:
         cnae: "CNAE"
         registration_date: "Data do cadastramento"
         bank_account: "C/C"
-        crc_number: "Número"
+        crc_number: "Número do CRC"
         crc_registration_date: "Data da inscrição"
         crc_expiration_date: "Data de validade"
         crc_renewal_date: "Data da renovação"

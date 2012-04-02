@@ -198,4 +198,20 @@
 
     input.closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
   });
+
+  function checkBidderDocumentsForExclusion() {
+    var docIds = [];
+
+    $.each($('.document-type'), function(index, docRecord) {
+      docIds.push($(docRecord).find('.document-id').val());
+    });
+
+    $.each($('input.bidder-document-type-id'), function(index, docRecord) {
+      if ( $.inArray($(this).val(), docIds) == -1 ) {
+        $(this).closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
+      };
+    });
+  }
+
+  checkBidderDocumentsForExclusion();
 </script>

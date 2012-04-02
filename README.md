@@ -8,11 +8,25 @@ Gestão de compras e licitações do município.
 
     $ git clone git@github.com:nohupbrasil/compras.git
 
+#### Auto-rebase
+
+[Why?](http://stevenharman.net/blog/archive/2011/06/09/git-pull-with-automatic-rebase.aspx)
+
+     $ git config branch.autosetuprebase always --global
+     $ git config branch.master.rebase true
+
+### Qt
+
+Instale o Qt:
+https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+
 ### Bundler
 
     $ bundle install
 
 ### PostgreSQL
+
+A versão do PostgreSQL dever ser >= 9.1.
 
 Crie um usuário chamado `compras` com permissão para criar banco de dados.
 
@@ -21,7 +35,7 @@ Crie um usuário chamado `compras` com permissão para criar banco de dados.
 
 ### Servidor
 
-    $ bundle exec unicorn -c config/unicorn.rb
+    $ bundle exec unicorn
 
 ## Padrões de código
 

@@ -1,0 +1,7 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-id="<%= record.id %>" data-expiration-date="<%= record.expiration_date %>" data-pledge-expiration-value="<%= record.value %>" data-pledge-id="<%= record.pledge_id %>" data-pledge="<%= record.pledge %>" data-emission-date="<%= record.presenter.emission_date %>" data-pledge-value="<%= record.presenter.pledge_value %>">
+  <% attributes.each do |attribute| %>
+    <td>
+      <%= record.send attribute %>
+    </td>
+  <% end %>
+</tr>

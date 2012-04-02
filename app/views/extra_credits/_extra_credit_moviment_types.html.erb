@@ -1,0 +1,37 @@
+<div id="extra-credit-moviment-types">
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :supplement, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :reduced, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :difference, :disabled => true %>
+    </div>
+  </div>
+  <p>
+    <input type="button" class="button affirmative add-extra-credit-moviment-type" value="Adicionar Movimento">
+  </p>
+
+  <%= f.association :extra_credit_moviment_types, :collection => localized(f.object.extra_credit_moviment_types) do |a| %>
+    <%= render 'extra_credit_moviment_types/form', :f => a %>
+  <% end %>
+</div>
+
+<%= mustache 'extra-credit-moviment-types-template' do %>
+  <%= f.association :extra_credit_moviment_types_attributes, :collection => f.object.extra_credit_moviment_types.build, :index => '{{uuid_extra_credit_moviment_type}}' do |a| %>
+    <%= render 'extra_credit_moviment_types/form', :f => a %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#extra-credit-moviment-types-template").nestedForm({
+    add: '.add-extra-credit-moviment-type',
+    remove: '.remove-extra-credit-moviment-type',
+    target: '#extra-credit-moviment-types',
+    uuid: 'uuid_extra_credit_moviment_type'
+  });
+</script>

@@ -23,9 +23,9 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidder_documents, :through => :licitation_process_invited_bidders
 
-  accepts_nested_attributes_for :licitation_process_budget_allocations, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :licitation_process_publications, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :licitation_process_invited_bidders, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_budget_allocations, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_publications, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_invited_bidders, :allow_destroy => true
 
   delegate :organogram, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true

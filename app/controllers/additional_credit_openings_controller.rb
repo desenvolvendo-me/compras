@@ -1,2 +1,0 @@
-class AdditionalCreditOpeningsController < CrudController
-end

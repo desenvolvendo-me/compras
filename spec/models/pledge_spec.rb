@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/pledge'
 require 'app/models/pledge_item'
 require 'app/models/pledge_expiration'
+require 'app/models/pledge_cancellation'
 
 describe Pledge do
   it { should belong_to :entity }
@@ -19,6 +20,7 @@ describe Pledge do
 
   it { should have_many(:pledge_expirations).dependent(:destroy) }
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
+  it { should have_many(:pledge_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :licitation }
   it { should validate_presence_of :process }
@@ -36,7 +38,7 @@ describe Pledge do
 
     should allow_value(1).for(:value)
     should allow_value(99).for(:value)
-    should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação, contando com o valor reservado')
+    should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação, contando com os valores reservados')
   end
 
   it 'should return id as to_s method' do

@@ -8,6 +8,8 @@ class Pledge < ActiveRecord::Base
 
   attr_accessor :licitation, :process
 
+  attr_modal :entity_id, :year, :emission_date
+
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type
 
@@ -25,9 +27,10 @@ class Pledge < ActiveRecord::Base
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
   has_many :pledge_expirations, :dependent => :destroy
+  has_many :pledge_cancellations, :dependent => :restrict
 
-  accepts_nested_attributes_for :pledge_items, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :pledge_expirations, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :pledge_items, :allow_destroy => true
+  accepts_nested_attributes_for :pledge_expirations, :allow_destroy => true
 
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
@@ -99,12 +102,10 @@ class Pledge < ActiveRecord::Base
 
   def expirations_should_have_date_greater_than_emission_date
     pledge_expirations.each do |expiration|
-      return unless emission_date && expiration.expiration_date
+      next unless emission_date && expiration.expiration_date && expiration.expiration_date <= emission_date
 
-      unless expiration.expiration_date > emission_date
-        expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
-        errors.add(:pledge_expirations, :invalid)
-      end
+      expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
+      errors.add(:pledge_expirations, :invalid)
     end
   end
 

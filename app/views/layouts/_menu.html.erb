@@ -126,10 +126,10 @@
     <%= link_to 'Contabilidade', '#' %>
     <ul>
       <li>
-        <%= link_to t('controllers.additional_credit_openings') , additional_credit_openings_path %>
+        <%= link_to t('controllers.regulatory_acts') , regulatory_acts_path %>
       </li>
       <li>
-        <%= link_to t('controllers.regulatory_acts') , regulatory_acts_path %>
+        <%= link_to t('controllers.pledge_cancellations') , pledge_cancellations_path %>
       </li>
       <li>
         <%= link_to t('controllers.regulatory_act_type_classifications') , regulatory_act_type_classifications_path %>
@@ -138,10 +138,16 @@
         <%= link_to t('controllers.expense_economic_classifications') , expense_economic_classifications_path %>
       </li>
       <li>
+        <%= link_to t('controllers.licitation_commissions') , licitation_commissions_path %>
+      </li>
+      <li>
         <%= link_to t('controllers.organogram_configurations') , organogram_configurations_path %>
       </li>
       <li>
         <%= link_to t('controllers.founded_debt_contracts') , founded_debt_contracts_path %>
+      </li>
+      <li>
+        <%= link_to t('controllers.extra_credit') , extra_credits_path %>
       </li>
       <li>
         <%= link_to t('controllers.creditors') , creditors_path %>
@@ -159,7 +165,7 @@
         <%= link_to t('controllers.modality_limits') , modality_limits_path %>
       </li>
       <li>
-        <%= link_to t('controllers.additional_credit_opening_natures') , additional_credit_opening_natures_path %>
+        <%= link_to t('controllers.extra_credit_natures') , extra_credit_natures_path %>
       </li>
       <li>
         <%= link_to t('controllers.legal_text_natures') , legal_text_natures_path %>

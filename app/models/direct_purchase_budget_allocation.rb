@@ -8,7 +8,7 @@ class DirectPurchaseBudgetAllocation < ActiveRecord::Base
 
   has_many :items, :class_name => 'DirectPurchaseBudgetAllocationItem', :dependent => :destroy, :order => :id
 
-  accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :items, :allow_destroy => true
 
   delegate :expense_economic_classification, :amount, :to => :budget_allocation, :allow_nil => true
   delegate :licitation_object_id, :to => :direct_purchase, :allow_nil => true
