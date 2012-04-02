@@ -102,12 +102,10 @@ class Pledge < ActiveRecord::Base
 
   def expirations_should_have_date_greater_than_emission_date
     pledge_expirations.each do |expiration|
-      return unless emission_date && expiration.expiration_date
+      next unless emission_date && expiration.expiration_date && expiration.expiration_date <= emission_date
 
-      unless expiration.expiration_date > emission_date
-        expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
-        errors.add(:pledge_expirations, :invalid)
-      end
+      expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
+      errors.add(:pledge_expirations, :invalid)
     end
   end
 
