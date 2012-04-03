@@ -21,7 +21,7 @@ class PurchaseSolicitationBudgetAllocation < ActiveRecord::Base
   protected
 
   def must_have_at_least_one_item
-    if items.empty?
+    if items.reject(&:marked_for_destruction?).empty?
       errors.add(:items, :must_have_at_least_one_item)
     end
   end

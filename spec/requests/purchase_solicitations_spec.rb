@@ -286,6 +286,42 @@ feature "PurchaseSolicitations" do
     end
   end
 
+  scenario 'should validate presence of budget allocations and items when editing' do
+    PurchaseSolicitation.make!(:reparo)
+
+    click_link 'Solicitações'
+
+    click_link 'Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_field 'Item'
+
+      click_button 'Remover Item'
+    end
+
+    click_button 'Atualizar Solicitação de Compra'
+
+    within_tab 'Dotações orçamentárias' do
+      page.should_not have_field 'Item'
+      page.should have_content 'é necessário cadastrar pelo menos um item'
+
+      page.should have_field 'Dotação'
+
+      click_button 'Remover Dotação'
+    end
+
+    click_button 'Atualizar Solicitação de Compra'
+
+    within_tab 'Dotações orçamentárias' do
+      page.should_not have_field 'Dotação'
+      page.should have_content 'é necessário cadastrar pelo menos uma dotação'
+    end
+  end
+
   scenario 'calculate total value of items' do
     click_link 'Solicitações'
 

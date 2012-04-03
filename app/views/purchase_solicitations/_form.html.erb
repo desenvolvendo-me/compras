@@ -82,4 +82,18 @@
   });
 
   calcItemOrder();
+
+  // hidding the budget allocations marked for destruction
+  $('.purchase-solicitation-budget-allocation').each(function() {
+    if($(this).find('input.destroy').val() == 'true') {
+      $(this).hide();
+    }
+  });
+
+  // hidding the items marked for destruction
+  $('.item').each(function() {
+    if($(this).find('input.destroy').val() == 'true') {
+      $(this).hide();
+    }
+  });
 </script>
