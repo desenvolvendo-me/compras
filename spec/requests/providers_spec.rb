@@ -591,4 +591,30 @@ feature "Providers" do
       page.should have_content 'Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável'
     end
   end
+
+  scenario 'should validate presence of partners for company when editing' do
+    Provider.make!(:fornecedor_empresa)
+
+    click_link 'Contabilidade'
+
+    click_link 'Fornecedores'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      page.should have_field 'Pessoa'
+
+      click_button 'Remover'
+    end
+
+    click_button 'Atualizar Fornecedor'
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      page.should_not have_field 'Pessoa'
+
+      page.should have_content 'Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável'
+    end
+  end
 end

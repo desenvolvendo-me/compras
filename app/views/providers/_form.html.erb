@@ -116,4 +116,11 @@
   });
 
   togglePartners("<%= f.object.personable_type %>");
+
+  // hidding the partners marked for destruction
+  $('.provider-partner').each(function() {
+    if($(this).find('input.destroy').val() == 'true') {
+      $(this).hide();
+    }
+  });
 </script>
