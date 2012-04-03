@@ -21,7 +21,7 @@ describe ModalityLimit do
 
   it { should_not allow_value('ab/-9').for(:validity_beginning) }
   it { should_not allow_value('14/2012').for(:validity_beginning) }
-  it { should allow_value('12/2012').for(:validity_beginning) }
+  it { should allow_value('31/12/2012').for(:validity_beginning) }
 
   it { should_not allow_value('ac99').for(:ordinance_number) }
   it { should allow_value('5').for(:ordinance_number) }

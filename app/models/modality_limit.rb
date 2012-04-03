@@ -10,7 +10,7 @@ class ModalityLimit < ActiveRecord::Base
   validates :public_competition, :work_without_bidding, :presence => true
   validates :work_invitation_letter, :work_taken_price, :presence => true
   validates :work_public_competition, :presence => true
-  validates :validity_beginning, :mask => '99/9999', :allow_blank => true
+  validates_date :validity_beginning
   validates :ordinance_number, :uniqueness => true
   validates :ordinance_number, :numericality => true, :allow_blank => true
   validate :check_validity_beginning_month
@@ -27,7 +27,7 @@ class ModalityLimit < ActiveRecord::Base
   def check_validity_beginning_month
     return unless validity_beginning
 
-    month = validity_beginning.split('/').first.to_i
+    month = validity_beginning.month
     errors.add(:validity_beginning, :invalid) unless (1..12).include? month
   end
 end

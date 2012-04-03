@@ -1,5 +1,6 @@
 ModalityLimit.blueprint(:modalidade_de_compra) do
-  validity_beginning { "02/2012" }
+  #validity_beginning { "2012-02-01" }
+  validity_beginning { "01/02/2012" }
   ordinance_number { "0001" }
   published_date { "02/03/2012" }
   without_bidding { "100,00" }

@@ -13,7 +13,7 @@ feature "ModalityLimits" do
 
     click_link 'Criar Limite por Modalidade'
 
-    fill_in 'Início da validade', :with => '02/2012'
+    fill_in 'Início da validade', :with => '01/02/2012'
     fill_in 'Número da portaria', :with => '0001'
     fill_in 'Data de publicação', :with => '01/02/2012'
 
@@ -37,7 +37,7 @@ feature "ModalityLimits" do
 
     click_link '0001'
 
-    page.should have_field 'Início da validade', :with => '02/2012'
+    page.should have_field 'Início da validade', :with => '01/02/2012'
     page.should have_field 'Número da portaria', :with => '0001'
     page.should have_field 'Data de publicação', :with => '01/02/2012'
 
@@ -65,7 +65,7 @@ feature "ModalityLimits" do
 
     click_link '0001'
 
-    fill_in 'Início da validade', :with => '04/2012'
+    fill_in 'Início da validade', :with => '01/04/2012'
     fill_in 'Número da portaria', :with => '0003'
     fill_in 'Data de publicação', :with => '01/03/2012'
 
@@ -89,7 +89,7 @@ feature "ModalityLimits" do
 
     click_link '0003'
 
-    page.should have_field 'Início da validade', :with => '04/2012'
+    page.should have_field 'Início da validade', :with => '01/04/2012'
     page.should have_field 'Número da portaria', :with => '0003'
     page.should have_field 'Data de publicação', :with => '01/03/2012'
 
@@ -121,9 +121,9 @@ feature "ModalityLimits" do
 
     page.should have_notice 'Limite por Modalidade apagado com sucesso.'
 
-    page.should_not have_content '02/2012'
-    page.should_not have_content '0001'
     page.should_not have_content '01/02/2012'
+    page.should_not have_content '0001'
+    page.should_not have_content '02/03/2012'
   end
 
   scenario 'destroy an existent modality_limit' do
