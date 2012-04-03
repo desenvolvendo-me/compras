@@ -36,76 +36,79 @@
 <%= f.input :reason %>
 
 <script>
-  function pledgeExpirationUrl() {
-    var url = "<%= modal_pledge_expirations_path %>?",
-        params = {
-          locked_fields: ["pledge"],
-          pledge_expiration: {
-            pledge_id: $('#pledge_cancellation_pledge_id').val(),
-            pledge: $('#pledge_cancellation_pledge').val()
-          }
-        };
-
-    url += jQuery.param(params);
-
-    return url;
-  }
-
-  function forceCanceledValueToTotalKind(){
-    if($('#pledge_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
-      $('#pledge_cancellation_value').attr('disabled', true);
-      $('#pledge_cancellation_value').val(pledge_expiration_value);
-    } else {
-      $('#pledge_cancellation_value').attr('disabled', false);
-    }
-  }
-
-  var pledge_id = $('#pledge_cancellation_pledge_id').val();
-  var pledge_expiration_value;
-
-  $('#pledge_cancellation_pledge_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#pledge_cancellation_emission_date').val(record.data("emission-date"));
-      $('#pledge_cancellation_pledge_value').val(record.data("pledge-value"));
-      if (pledge_id != record.data('id')) {
-        $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', pledgeExpirationUrl());
-        $('#pledge_cancellation_expiration_date').val('');
-        $('#pledge_cancellation_pledge_expiration_id').val('');
-        $('#pledge_cancellation_pledge_expiration_value').val('');
-      }
-    } else {
-      $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', '<%= modal_pledge_expirations_path %>');
-      $('#pledge_cancellation_emission_date').val('');
-      $('#pledge_cancellation_pledge_value').val('');
-      $('#pledge_cancellation_pledge_expiration').val('');
-      $('#pledge_cancellation_expiration_date').val('');
-      $('#pledge_cancellation_canceled_value').val('');
-    }
-  });
-
-  $('#pledge_cancellation_pledge_expiration_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#pledge_cancellation_expiration_date').val(record.data("expiration-date"));
-      $('#pledge_cancellation_canceled_value').val(record.data("canceled-value"));
-      if (!$('#pledge_cancellation_pledge_id').val()) {
-        $('#pledge_cancellation_pledge_id').val(record.data("pledge-id"));
-        $('#pledge_cancellation_pledge').val(record.data("pledge"));
-        $('#pledge_cancellation_emission_date').val(record.data("emission-date"));
-        $('#pledge_cancellation_pledge_value').val(record.data("pledge-value"));
-      }
-      pledge_id = record.data('pledge-id');
-      pledge_expiration_value = record.data('pledge-expiration-value');
-      forceCanceledValueToTotalKind();
-    } else {
-      $('#pledge_cancellation_expiration_date, #pledge_cancellation_canceled_value').val('');
-    }
-  });
-
-  $('#pledge_cancellation_kind').change(forceCanceledValueToTotalKind);
-
   <% if f.object.persisted? %>
     $('form.pledge_cancellation :input').attr('disabled', true);
+  <% else %>
+    (function() {
+      var pledge_id = $('#pledge_cancellation_pledge_id').val();
+      var pledge_expiration_value;
+
+      function pledgeExpirationUrl() {
+        var url = "<%= modal_pledge_expirations_path %>?",
+            params = {
+              locked_fields: ["pledge"],
+              pledge_expiration: {
+                pledge_id: $('#pledge_cancellation_pledge_id').val(),
+                pledge: $('#pledge_cancellation_pledge').val()
+              }
+            };
+
+        url += jQuery.param(params);
+
+        return url;
+      }
+
+      function forceValueWhenTotalIsKind(){
+        if($('#pledge_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
+          $('#pledge_cancellation_value').attr('disabled', true);
+          $('#pledge_cancellation_value').val(pledge_expiration_value);
+        } else {
+          $('#pledge_cancellation_value').attr('disabled', false);
+        }
+      }
+
+      $('#pledge_cancellation_pledge_id').change(function(event, data) {
+        if (data) {
+          var record = data.record;
+          $('#pledge_cancellation_emission_date').val(record.data("emission-date"));
+          $('#pledge_cancellation_pledge_value').val(record.data("pledge-value"));
+          if (pledge_id != record.data('id')) {
+            $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', pledgeExpirationUrl());
+            $('#pledge_cancellation_expiration_date').val('');
+            $('#pledge_cancellation_pledge_expiration_id').val('');
+            $('#pledge_cancellation_pledge_expiration_value').val('');
+          }
+        } else {
+          $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', '<%= modal_pledge_expirations_path %>');
+          $('#pledge_cancellation_emission_date').val('');
+          $('#pledge_cancellation_pledge_value').val('');
+          $('#pledge_cancellation_pledge_expiration').val('');
+          $('#pledge_cancellation_expiration_date').val('');
+          $('#pledge_cancellation_canceled_value').val('');
+        }
+      });
+
+      $('#pledge_cancellation_pledge_expiration_id').change(function(event, data) {
+        if (data) {
+          var record = data.record;
+          $('#pledge_cancellation_expiration_date').val(record.data("expiration-date"));
+          $('#pledge_cancellation_canceled_value').val(record.data("canceled-value"));
+          if (!$('#pledge_cancellation_pledge_id').val()) {
+            $('#pledge_cancellation_pledge_id').val(record.data("pledge-id"));
+            $('#pledge_cancellation_pledge').val(record.data("pledge"));
+            $('#pledge_cancellation_pledge_value').val(record.data("pledge-value"));
+            $('#pledge_cancellation_emission_date').val(record.data("emission-date"));
+          }
+          pledge_id = record.data('pledge-id');
+          pledge_expiration_value = record.data('pledge-expiration-value');
+          forceValueWhenTotalIsKind();
+        } else {
+          $('#pledge_cancellation_expiration_date, #pledge_cancellation_canceled_value').val('');
+          pledge_expiration_value = null;
+        }
+      });
+
+      $('#pledge_cancellation_kind').change(forceValueWhenTotalIsKind);
+    })();
   <% end %>
 </script>
