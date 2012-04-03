@@ -31,9 +31,9 @@ describe PledgeCancellationPresenter do
     subject.expiration_date.should eq '01/12/2012'
   end
 
-  it 'should return pledge_expiration_value' do
-    pledge_cancellation.stub(:pledge_expiration_value).and_return(9.99)
-    subject.pledge_expiration_value.should eq '9,99'
+  it 'should return canceled_value' do
+    pledge_cancellation.stub(:canceled_value).and_return(9.99)
+    subject.canceled_value.should eq '9,99'
   end
 
   it 'should return expiration_date' do

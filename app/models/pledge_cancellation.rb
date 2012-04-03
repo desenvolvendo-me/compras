@@ -1,5 +1,5 @@
 class PledgeCancellation < ActiveRecord::Base
-  attr_accessible :pledge_id, :date, :kind, :reason, :value_canceled, :nature
+  attr_accessible :pledge_id, :date, :kind, :reason, :value, :nature
   attr_accessible :pledge_expiration_id
 
   has_enumeration_for :kind, :with => PledgeCancellationKind, :create_helpers => true
@@ -10,16 +10,16 @@ class PledgeCancellation < ActiveRecord::Base
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
-  delegate :expiration_date, :to => :pledge_expiration, :allow_nil => true
+  delegate :expiration_date, :canceled_value, :to => :pledge_expiration, :allow_nil => true
   delegate :value, :to => :pledge_expiration, :prefix => true, :allow_nil => true
 
-  validates :pledge, :date, :kind, :reason, :presence => true
+  validates :pledge, :date, :kind, :reason, :value, :presence => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greather_or_equal_to_last_pledge_cancellation_date,
     :type => :date
   }, :allow_blank => true, :if => :any_pledge_cancellation?
-  validate :validate_value_canceled
+  validate :value_validation
   validate :date_must_be_greater_than_expiration_date
 
   before_save :force_canceled_value_to_total_kind
@@ -29,6 +29,12 @@ class PledgeCancellation < ActiveRecord::Base
 
   def to_s
     "#{id}"
+  end
+
+  def total_canceled_value
+    return unless pledge_expiration
+
+    pledge_expiration.canceled_value + value
   end
 
   protected
@@ -47,11 +53,11 @@ class PledgeCancellation < ActiveRecord::Base
     canceled_value = pledge_expiration.value if pledge_expiration.present? && total?
   end
 
-  def validate_value_canceled
-    return if pledge_expiration.blank? || value_canceled.blank?
+  def value_validation
+    return if pledge_expiration.blank?
 
-    if (pledge_expiration.pledge_cancellations.sum(&:value) + value_canceled) > pledge_expiration.value
-      errors.add(:value_canceled, :must_not_be_greater_than_pledge_expiration_cancellations_sum_or_pledge_expiration_value)
+    if total_canceled_value > pledge_expiration.value
+      errors.add(:value, :must_not_be_greater_than_pledge_expiration_cancellations_sum_or_pledge_expiration_value)
     end
   end
 end

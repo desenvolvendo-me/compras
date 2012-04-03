@@ -17,12 +17,9 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_disabled_field 'Valor'
-
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
-    fill_in 'Valor anulado', :with => '1,00'
+    fill_in 'Valor *', :with => '1,00'
     select 'Parcial', :from => 'Tipo de anulação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     select 'Normal', :from => 'Natureza da ocorrência'
@@ -45,13 +42,12 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Valor do vencimento'
-    page.should have_field 'Valor do vencimento', :with => '9,99'
-
+    page.should have_disabled_field 'Valor anulado'
     page.should have_field 'Valor anulado', :with => '1,00'
+
+    page.should have_field 'Valor *', :with => '1,00'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
-    page.should have_field 'Valor do vencimento', :with => '9,99'
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
     page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
   end
@@ -76,8 +72,8 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Valor do vencimento'
-    page.should have_field 'Valor do vencimento', :with => '9,99'
+    page.should have_disabled_field 'Valor anulado'
+    page.should have_field 'Valor anulado', :with => '0,00'
   end
 
   scenario 'clear pledge and pledge_expiration when clear pledge' do
@@ -92,7 +88,7 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_field 'Valor do vencimento', :with => '9,99'
+    page.should have_field 'Valor anulado', :with => '0,00'
 
     clear_modal 'Empenho'
     page.should have_field 'Empenho', :with => ''
@@ -104,11 +100,11 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => ''
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => ''
-    page.should have_disabled_field 'Valor do vencimento'
-    page.should have_field 'Valor do vencimento', :with => ''
+    page.should have_disabled_field 'Valor anulado'
+    page.should have_field 'Valor anulado', :with => ''
   end
 
-  scenario 'when select total as kind should disabled and fill value_canceled' do
+  scenario 'when select total as kind should disabled and fill value' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
@@ -120,11 +116,11 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     select 'Total', :from => 'Tipo de anulação'
 
-    page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => '100,00'
+    page.should have_disabled_field 'Valor *'
+    page.should have_field 'Valor *', :with => '100,00'
   end
 
-  scenario 'should fill value_canceled when select pledge_expiration before kind and kind is total' do
+  scenario 'should fill value when select pledge_expiration before kind and kind is total' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
@@ -136,8 +132,8 @@ feature "PledgeCancellations" do
     select 'Total', :from => 'Tipo de anulação'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
 
-    page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => '100,00'
+    page.should have_disabled_field 'Valor *'
+    page.should have_field 'Valor *', :with => '100,00'
   end
 
   scenario 'when select pledge_expiration first fill pledge' do
@@ -152,7 +148,7 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_field 'Valor do vencimento', :with => '9,99'
+    page.should have_field 'Valor anulado', :with => '0,00'
 
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
@@ -219,10 +215,10 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Valor do vencimento'
-    page.should have_field 'Valor do vencimento', :with => '9,99'
     page.should have_disabled_field 'Valor anulado'
     page.should have_field 'Valor anulado', :with => '1,00'
+    page.should have_disabled_field 'Valor *'
+    page.should have_field 'Valor *', :with => '1,00'
     page.should have_disabled_field 'Tipo de anulação'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_disabled_field 'Data *'

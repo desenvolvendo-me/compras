@@ -15,6 +15,10 @@ class PledgeExpiration < ActiveRecord::Base
   orderize :id
   filterize
 
+  def canceled_value
+    pledge_cancellations.compact.sum(&:value)
+  end
+
   def to_s
     "#{number}"
   end

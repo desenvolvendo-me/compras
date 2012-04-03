@@ -22,11 +22,11 @@
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :pledge_expiration_value, :disabled => true, :input_html => { :value => f.object.presenter.pledge_expiration_value } %>
+    <%= f.input :canceled_value, :disabled => true, :input_html => { :value => f.object.presenter.canceled_value } %>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :value_canceled %>
+    <%= f.input :value %>
   </div>
 </div>
 
@@ -53,10 +53,10 @@
 
   function forceCanceledValueToTotalKind(){
     if($('#pledge_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
-      $('#pledge_cancellation_value_canceled').attr('disabled', true);
-      $('#pledge_cancellation_value_canceled').val(pledge_expiration_value);
+      $('#pledge_cancellation_value').attr('disabled', true);
+      $('#pledge_cancellation_value').val(pledge_expiration_value);
     } else {
-      $('#pledge_cancellation_value_canceled').attr('disabled', false);
+      $('#pledge_cancellation_value').attr('disabled', false);
     }
   }
 
@@ -71,7 +71,7 @@
       if (pledge_id != record.data('id')) {
         $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', pledgeExpirationUrl());
         $('#pledge_cancellation_expiration_date').val('');
-        $('#pledge_cancellation_pledge_expiration_id, #pledge_cancellation_pledge_expiration_value').val('');
+        $('#pledge_cancellation_pledge_expiration_id').val('');
         $('#pledge_cancellation_pledge_expiration_value').val('');
       }
     } else {
@@ -80,7 +80,7 @@
       $('#pledge_cancellation_pledge_value').val('');
       $('#pledge_cancellation_pledge_expiration').val('');
       $('#pledge_cancellation_expiration_date').val('');
-      $('#pledge_cancellation_pledge_expiration_value').val('');
+      $('#pledge_cancellation_canceled_value').val('');
     }
   });
 
@@ -88,7 +88,7 @@
     if (data) {
       var record = data.record;
       $('#pledge_cancellation_expiration_date').val(record.data("expiration-date"));
-      $('#pledge_cancellation_pledge_expiration_value').val(record.data("pledge-expiration-value"));
+      $('#pledge_cancellation_canceled_value').val(record.data("canceled-value"));
       if (!$('#pledge_cancellation_pledge_id').val()) {
         $('#pledge_cancellation_pledge_id').val(record.data("pledge-id"));
         $('#pledge_cancellation_pledge').val(record.data("pledge"));
@@ -99,7 +99,7 @@
       pledge_expiration_value = record.data('pledge-expiration-value');
       forceCanceledValueToTotalKind();
     } else {
-      $('#pledge_cancellation_expiration_date, #pledge_cancellation_pledge_expiration_value').val('');
+      $('#pledge_cancellation_expiration_date, #pledge_cancellation_canceled_value').val('');
     }
   });
 
