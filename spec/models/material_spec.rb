@@ -10,7 +10,7 @@ describe Material do
     subject.to_s.should eq '01 - Manga'
   end
 
-  it { should belong_to :expense_economic_classification }
+  it { should belong_to :expense_element }
   it { should have_many :pledge_items }
   it { should have_and_belong_to_many :providers }
   it { should have_and_belong_to_many :licitation_objects }

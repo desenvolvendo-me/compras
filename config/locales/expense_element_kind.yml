@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    expense_economic_classification_kind:
+    expense_element_kind:
       analytical: Analítico
       synthetic: Sintético
       both: Ambos

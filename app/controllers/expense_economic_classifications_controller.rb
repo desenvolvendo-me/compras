@@ -1,2 +1,0 @@
-class ExpenseEconomicClassificationsController < CrudController
-end

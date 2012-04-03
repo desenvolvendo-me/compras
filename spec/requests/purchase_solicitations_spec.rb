@@ -13,7 +13,7 @@ feature "PurchaseSolicitations" do
   scenario 'create a new purchase_solicitation' do
     Organogram.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
-    ExpenseEconomicClassification.make!(:vencimento_e_salarios)
+    ExpenseElement.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
@@ -36,7 +36,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Classificação econômica da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -47,7 +47,7 @@ feature "PurchaseSolicitations" do
 
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-        fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+        fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '200,00'
       end
 
@@ -83,7 +83,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :selected => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
-      page.should have_field 'Classificação econômica da despesa', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Elemento', :with => '3.1.90.11.01.00.00.00'
 
       # Testing the pending status applied automatically
       page.should have_select 'Status de atendimento', :selected => 'Pendente'
@@ -91,7 +91,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2012 - Alocação"
-      page.should have_field 'Compl. do el. da despesa', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field "Valor previsto", :with => '200,00'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
@@ -109,7 +109,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     Organogram.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
-    ExpenseEconomicClassification.make!(:compra_de_material)
+    ExpenseElement.make!(:compra_de_material)
     DeliveryLocation.make!(:health)
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     Material.make!(:arame_farpado)
@@ -128,7 +128,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
-      fill_modal 'Classificação econômica da despesa', :with => 'Compra de Material', :field => 'Descrição'
+      fill_modal 'Elemento', :with => 'Compra de Material', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
@@ -140,7 +140,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
-      fill_modal 'Compl. do el. da despesa', :with => 'Compra de Material', :field => 'Descrição'
+      fill_modal 'Elemento', :with => 'Compra de Material', :field => 'Descrição'
       fill_in 'Valor previsto', :with => '30,00'
 
       click_button 'Adicionar Item'
@@ -172,7 +172,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Classificação econômica da despesa', :with => '2.2.22.11.01.00.00.00'
+      page.should have_field 'Elemento', :with => '2.2.22.11.01.00.00.00'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
       page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
@@ -180,7 +180,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2011 - Alocação extra"
-      page.should have_field 'Compl. do el. da despesa', :with => '2.2.22.11.01.00.00.00'
+      page.should have_field 'Elemento', :with => '2.2.22.11.01.00.00.00'
       page.should have_field "Valor previsto", :with => '30,00'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
@@ -219,7 +219,7 @@ feature "PurchaseSolicitations" do
   scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
     Organogram.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
-    ExpenseEconomicClassification.make!(:vencimento_e_salarios)
+    ExpenseElement.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
@@ -245,14 +245,14 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-      fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
       fill_in 'Valor previsto', :with => '200,00'
 
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-        fill_modal 'Compl. do el. da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+        fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
         fill_in 'Valor previsto', :with => '300,00'
       end
     end

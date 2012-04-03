@@ -71,7 +71,7 @@
           <%= resource_class.human_attribute_name :education %>
         </th>
         <th>
-          <%= resource_class.human_attribute_name :expense_economic_classification %>
+          <%= resource_class.human_attribute_name :expense_element %>
         </th>
       </tr>
     </thead>
@@ -93,7 +93,7 @@
           <%= I18n.t(resource.education.to_s) %>
         </td>
         <td>
-          <%= resource.expense_economic_classification %>
+          <%= resource.expense_element %>
         </td>
       </tr>
     </tbody>

@@ -1,10 +1,10 @@
 class PurchaseSolicitationBudgetAllocation < ActiveRecord::Base
   attr_accessible :purchase_solicitation_id, :budget_allocation_id, :estimated_value, :blocked
-  attr_accessible :expense_economic_classification_id, :items_attributes
+  attr_accessible :expense_element_id, :items_attributes
 
   belongs_to :purchase_solicitation
   belongs_to :budget_allocation
-  belongs_to :expense_economic_classification
+  belongs_to :expense_element
 
   has_many :items, :class_name => 'PurchaseSolicitationBudgetAllocationItem', :dependent => :destroy, :order => :id
 

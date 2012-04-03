@@ -10,7 +10,7 @@ class RegulatoryAct < ActiveRecord::Base
 
   has_and_belongs_to_many :dissemination_sources
 
-  has_many :expense_economic_classifications, :dependent => :restrict
+  has_many :expense_elements, :dependent => :restrict
   has_many :organogram_configurations, :dependent => :restrict
   has_many :organogram_responsibles, :dependent => :restrict
   has_many :licitation_modalities, :dependent => :restrict

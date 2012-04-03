@@ -35,7 +35,7 @@ class Pledge < ActiveRecord::Base
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
   delegate :amount, :real_amount, :function, :subfunction, :government_program, :government_action,
-           :organogram, :expense_economic_classification,
+           :organogram, :expense_element,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
   validates :year, :mask => '9999'

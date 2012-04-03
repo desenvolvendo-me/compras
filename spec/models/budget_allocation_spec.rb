@@ -25,7 +25,7 @@ describe BudgetAllocation do
   it { should belong_to(:subfunction) }
   it { should belong_to(:government_program) }
   it { should belong_to(:government_action) }
-  it { should belong_to(:expense_economic_classification) }
+  it { should belong_to(:expense_element) }
   it { should belong_to(:capability) }
 
   it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
