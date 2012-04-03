@@ -18,10 +18,10 @@ class Material < ActiveRecord::Base
   has_and_belongs_to_many :providers
   has_and_belongs_to_many :licitation_objects
 
-  has_many :purchase_solicitation_items, :dependent => :restrict
   has_many :pledge_items, :dependent => :restrict
   has_many :direct_purchase_budget_allocation_items, :dependent => :restrict
   has_many :licitation_process_budget_allocation_items, :dependent => :restrict
+  has_many :purchase_solicitation_budget_allocation_items, :dependent => :restrict
 
   delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
 

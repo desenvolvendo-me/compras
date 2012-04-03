@@ -37,13 +37,5 @@ describe PurchaseSolicitationsController do
 
       assigns(:purchase_solicitation).service_status.should eq PurchaseSolicitationServiceStatus::PENDING
     end
-
-    it 'should mark all purchase_solicitation item as pending' do
-      post :create, :purchase_solicitation => {
-        :items_attributes => { 'fresh-0' => { :material_id => '1', :id => '', :_destroy => 'false' }}
-      }
-
-      assigns(:purchase_solicitation).items.first.status.should eq PurchaseSolicitationItemStatus::PENDING
-    end
   end
 end

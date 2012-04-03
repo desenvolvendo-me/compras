@@ -1,9 +1,10 @@
-class PurchaseSolicitationItem < ActiveRecord::Base
-  attr_accessible :material_id, :quantity, :unit_price, :status
+class PurchaseSolicitationBudgetAllocationItem < ActiveRecord::Base
+  attr_accessible :purchase_solicitation_budget_allocation_id, :material_id
+  attr_accessible :brand, :quantity, :unit_price
 
-  has_enumeration_for :status, :with => PurchaseSolicitationItemStatus
+  attr_accessor :order
 
-  belongs_to :purchase_solicitation
+  belongs_to :purchase_solicitation_budget_allocation
   belongs_to :material
 
   delegate :reference_unit, :to => :material, :allow_nil => true

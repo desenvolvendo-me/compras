@@ -4,11 +4,5 @@ PurchaseSolicitationBudgetAllocation.blueprint(:alocacao_primaria) do
   expense_economic_classification { ExpenseEconomicClassification.make!(:compra_de_material) }
   estimated_value { "20" }
   blocked { false }
-end
-
-PurchaseSolicitationBudgetAllocation.blueprint(:alocacao_secundaria) do
-  budget_allocation { BudgetAllocation.make!(:alocacao_extra) }
-  expense_economic_classification { ExpenseEconomicClassification.make!(:compra_de_material) }
-  estimated_value { "30" }
-  blocked { false }
+  items { [PurchaseSolicitationBudgetAllocationItem.make!(:item)] }
 end

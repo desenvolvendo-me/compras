@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation_budget_allocation_item:
+        one: "Item"
+        other: "Itens"
+
+    attributes:
+      purchase_solicitation_budget_allocation_item:
+        material: "Material"
+        reference_unit: "Unidade"
+        brand: "Marca/Referência"
+        quantity: "Quantidade"
+        unit_price: "Valor unitário"
+        estimated_total_price: "Valor total"
+        order: "Item"
