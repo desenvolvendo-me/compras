@@ -25,6 +25,7 @@ class PurchaseSolicitation < ActiveRecord::Base
   validates :request_date, :responsible, :delivery_location, :kind, :delivery_location, :presence => true
   validates :accounting_year, :presence => true, :numericality => true, :mask => '9999'
 
+  validate :must_have_at_least_budget_allocation
   validate :cannot_have_duplicated_budget_allocations
 
   orderize :request_date
@@ -39,6 +40,10 @@ class PurchaseSolicitation < ActiveRecord::Base
     purchase_solicitation_budget_allocations.collect { |item| item.estimated_value || 0 }.sum
   end
 
+  def total_allocations_items_value
+    purchase_solicitation_budget_allocations.collect(&:total_items_value).sum
+  end
+
   protected
 
   def cannot_have_duplicated_budget_allocations
@@ -51,5 +56,11 @@ class PurchaseSolicitation < ActiveRecord::Base
      end
      single_allocations << allocation.budget_allocation_id
    end
+  end
+
+  def must_have_at_least_budget_allocation
+    if purchase_solicitation_budget_allocations.empty?
+      errors.add(:purchase_solicitation_budget_allocations, :must_have_at_least_one_budget_allocation)
+    end
   end
 end

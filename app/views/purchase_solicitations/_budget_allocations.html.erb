@@ -3,6 +3,10 @@
     Dotações
   </legend>
 
+  <%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
+
+  <%= f.error :purchase_solicitation_budget_allocations %>
+
   <div id="allocations">
     <%= f.association :purchase_solicitation_budget_allocations, :collection => localized(f.object.purchase_solicitation_budget_allocations) do |p| %>
       <%= render 'purchase_solicitation_budget_allocations/form', :f => p %>
@@ -10,7 +14,7 @@
   </div>
 
   <p>
-    <input type="button" class="button affirmative add-purchase-solicitation-budget-allocation" value="Adicionar">
+    <input type="button" class="button affirmative add-purchase-solicitation-budget-allocation" value="Adicionar Dotação">
   </p>
 </fieldset>
 

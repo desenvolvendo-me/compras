@@ -23,4 +23,63 @@
       }
     }
   });
+
+  $('form.purchase_solicitation').delegate('.material', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $(this).closest('.item').find('.reference-unit').val(record.data("reference-unit"));
+    }
+  });
+
+  function calcItemOrder() {
+    $('.purchase-solicitation-budget-allocation').each(function(index, item){
+      $(this).find('.item .hidden .destroy[value=false]').each(function(index, item){
+        $(this).parent().parent().find('.order').val(index + 1);
+      });
+    });
+  }
+
+  function calculateItemsTotalValue() {
+    var total = 0,
+    value;
+    $.each($('.item-price:visible'), function() {
+      value = $(this).attr('value');
+      if (value) {
+        total += parsePtBrFloat(value);
+      }
+    });
+    $('#purchase_solicitation_total_allocations_items_value').val(floatToPtBrString(total));
+  }
+
+  $('form.purchase_solicitation').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
+        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+
+    itemDiv.find('.item-price').val(total);
+    calculateItemsTotalValue();
+  });
+
+  $('form.purchase_solicitation').delegate('.item-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemPrice = parsePtBrFloat(itemDiv.find('.item-price').val() || '0'),
+        unitPrice = floatToPtBrString(itemPrice / itemQuantity);
+
+    itemDiv.find('.item-unit-price').val(unitPrice);
+    calculateItemsTotalValue();
+  });
+
+  $('form.purchase_solicitation').delegate('.remove-purchase-solicitation-budget-allocation, .remove-item', 'click', function() {
+    calculateItemsTotalValue();
+    calcItemOrder();
+  });
+
+  $('form.purchase_solicitation').bind('append.mustache', function(){
+    calcItemOrder();
+  });
+
+  calcItemOrder();
 </script>

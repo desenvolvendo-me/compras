@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/material'
+require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe Material do
   it 'should return code and description as to_s method' do
@@ -15,6 +16,7 @@ describe Material do
   it { should have_and_belong_to_many :licitation_objects }
   it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:licitation_process_budget_allocation_items).dependent(:restrict) }
+  it { should have_many(:purchase_solicitation_budget_allocation_items).dependent(:restrict) }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }
