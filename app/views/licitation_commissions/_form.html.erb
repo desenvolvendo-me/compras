@@ -1,6 +1,16 @@
 <%= f.input :commission_type %>
 
 <div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :regulatory_act %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :regulatory_act_publication_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_publication_date) if f.object.regulatory_act_publication_date) } %>
+  </div>
+</div>
+
+<div class="yui3-g">
   <div class="yui3-u-1-3">
     <%= f.input :nomination_date %>
   </div>
@@ -15,3 +25,14 @@
 </div>
 
 <%= f.input :description %>
+
+<script>
+  $("#licitation_commission_regulatory_act").change(function (event, data) {
+    if (data){
+      var record = data.record;
+      $('#licitation_commission_regulatory_act_publication_date').val(record.data("publication-date"));
+    } else {
+      $('#licitation_commission_regulatory_act_publication_date').val('');
+    }
+  });
+</script>

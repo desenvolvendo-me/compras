@@ -1,4 +1,5 @@
 LicitationCommission.blueprint(:comissao) do
+  regulatory_act { RegulatoryAct.make!(:sopa) }
   commission_type { CommissionType::TRADING }
   nomination_date { "20/03/2012" }
   expiration_date { "22/03/2012" }

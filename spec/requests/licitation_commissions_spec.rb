@@ -7,6 +7,7 @@ feature "LicitationCommissions" do
   end
 
   scenario 'create a new licitation_commission' do
+    RegulatoryAct.make!(:sopa)
     click_link 'Contabilidade'
 
     click_link 'Comissões de Licitação'
@@ -14,6 +15,14 @@ feature "LicitationCommissions" do
     click_link 'Criar Comissão de Licitação'
 
     select 'Especial', :from => 'Tipo de comissão'
+
+    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
+    page.should have_field 'Ato regulamentador', :with => '1234'
+
+    page.should have_disabled_field 'Data da publicação do ato'
+    page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
+
     fill_in 'Data da nomeação', :with => '20/03/2012'
     fill_in 'Data da expiração', :with => '22/03/2012'
     fill_in 'Data da exoneração', :with => '25/03/2012'
@@ -35,6 +44,7 @@ feature "LicitationCommissions" do
   end
 
   scenario 'update an existent licitation_commission' do
+    RegulatoryAct.make!(:medida_provisoria)
     LicitationCommission.make!(:comissao)
 
     click_link 'Contabilidade'
@@ -46,6 +56,14 @@ feature "LicitationCommissions" do
     end
 
     select 'Pregão', :from => 'Tipo de comissão'
+
+    fill_modal 'Ato regulamentador', :with => '8901', :field => 'Número'
+
+    page.should have_field 'Ato regulamentador', :with => '8901'
+
+    page.should have_disabled_field 'Data da publicação do ato'
+    page.should have_field 'Data da publicação do ato', :with => '02/01/2013'
+
     fill_in 'Data da nomeação', :with => '20/03/2013'
     fill_in 'Data da expiração', :with => '22/03/2013'
     fill_in 'Data da exoneração', :with => '25/03/2013'

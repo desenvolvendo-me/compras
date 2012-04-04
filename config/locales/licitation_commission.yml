@@ -12,3 +12,5 @@ pt-BR:
         expiration_date: "Data da expiração"
         exoneration_date: "Data da exoneração"
         description: "Descrição e finalidade da comissão"
+        regulatory_act: "Ato regulamentador"
+        regulatory_act_publication_date: "Data da publicação do ato"
