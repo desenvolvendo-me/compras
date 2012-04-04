@@ -1,4 +1,4 @@
-class Organogram < ActiveRecord::Base
+class BudgetUnit < ActiveRecord::Base
   attr_accessible :description, :organogram, :tce_code, :acronym
   attr_accessible :performance_field, :organogram_configuration_id
   attr_accessible :administration_type_id, :address_attributes
@@ -6,7 +6,7 @@ class Organogram < ActiveRecord::Base
 
   attr_modal :description
 
-  has_enumeration_for :organogram_kind, :create_helpers => true
+  has_enumeration_for :organogram_kind, :with => BudgetUnitKind, :create_helpers => true
 
   belongs_to :organogram_configuration
   belongs_to :administration_type

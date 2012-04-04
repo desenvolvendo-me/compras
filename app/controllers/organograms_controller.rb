@@ -1,2 +1,0 @@
-class OrganogramsController < CrudController
-end

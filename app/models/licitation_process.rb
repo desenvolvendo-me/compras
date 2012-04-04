@@ -27,7 +27,7 @@ class LicitationProcess < ActiveRecord::Base
   accepts_nested_attributes_for :licitation_process_publications, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_invited_bidders, :allow_destroy => true
 
-  delegate :organogram, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
+  delegate :budget_unit, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
            :item, :to => :administrative_process, :allow_nil => true, :prefix => true
 
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true

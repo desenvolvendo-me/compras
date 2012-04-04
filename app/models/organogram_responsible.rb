@@ -4,7 +4,7 @@ class OrganogramResponsible < ActiveRecord::Base
 
   has_enumeration_for :status
 
-  belongs_to :organogram
+  belongs_to :budget_unit
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :regulatory_act
 

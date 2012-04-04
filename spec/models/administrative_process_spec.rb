@@ -2,7 +2,7 @@
 require 'model_helper'
 require 'app/models/administrative_process'
 require 'app/models/budget_allocation'
-require 'app/models/organogram'
+require 'app/models/budget_unit'
 require 'app/models/employee'
 require 'app/models/licitation_process'
 require 'app/enumerations/administrative_process_modality'
@@ -16,7 +16,7 @@ describe AdministrativeProcess do
     subject.to_s.should eq '1/2012'
   end
 
-  it { should belong_to :organogram }
+  it { should belong_to :budget_unit }
   it { should belong_to :budget_allocation }
   it { should belong_to :responsible }
   it { should belong_to :judgment_form }
@@ -25,7 +25,7 @@ describe AdministrativeProcess do
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }
-  it { should validate_presence_of :organogram }
+  it { should validate_presence_of :budget_unit }
   it { should validate_presence_of :value_estimated }
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :modality }

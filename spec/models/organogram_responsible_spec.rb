@@ -9,7 +9,7 @@ describe OrganogramResponsible do
   it { should validate_presence_of :end_date }
   it { should validate_presence_of :status }
 
-  it { should belong_to :organogram }
+  it { should belong_to :budget_unit }
   it { should belong_to :responsible }
   it { should belong_to :regulatory_act }
 

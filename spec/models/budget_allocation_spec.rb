@@ -21,7 +21,7 @@ describe BudgetAllocation do
   it { should validate_presence_of :description }
   it { should validate_presence_of :date }
 
-  it { should belong_to(:organogram) }
+  it { should belong_to(:budget_unit) }
   it { should belong_to(:subfunction) }
   it { should belong_to(:government_program) }
   it { should belong_to(:government_action) }

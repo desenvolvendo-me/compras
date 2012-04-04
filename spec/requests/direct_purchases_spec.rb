@@ -9,7 +9,7 @@ feature "DirectPurchases" do
   scenario 'create a new direct_purchase' do
     LegalReference.make!(:referencia)
     Provider.make!(:wenderson_sa)
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
@@ -249,7 +249,7 @@ feature "DirectPurchases" do
   scenario 'asserting that duplicated budget allocations cannot be saved' do
     LegalReference.make!(:referencia)
     Provider.make!(:wenderson_sa)
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)

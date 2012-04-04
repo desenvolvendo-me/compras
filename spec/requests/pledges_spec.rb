@@ -456,14 +456,14 @@ feature "Pledges" do
       page.should have_disabled_field 'Subfunção'
       page.should have_disabled_field 'Programa'
       page.should have_disabled_field 'Ação'
-      page.should have_disabled_field 'Organograma'
+      page.should have_disabled_field 'Unidade orçamentária'
       page.should have_disabled_field 'Natureza da despesa'
       page.should have_field 'Saldo da dotação', :with => ''
       page.should have_field 'Função', :with => ''
       page.should have_field 'Subfunção', :with => ''
       page.should have_field 'Programa', :with => ''
       page.should have_field 'Ação', :with => ''
-      page.should have_field 'Organograma', :with => ''
+      page.should have_field 'Unidade orçamentária', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
 
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
@@ -473,7 +473,7 @@ feature "Pledges" do
       page.should have_field 'Subfunção', :with => '01 - Administração Geral'
       page.should have_field 'Programa', :with => 'Habitação'
       page.should have_field 'Ação', :with => 'Ação Governamental'
-      page.should have_field 'Organograma', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Natureza da despesa', :with => '3.1.90.11.01.00.00.00'
 
       clear_modal 'Dotação'
@@ -483,7 +483,7 @@ feature "Pledges" do
       page.should have_field 'Subfunção', :with => ''
       page.should have_field 'Programa', :with => ''
       page.should have_field 'Ação', :with => ''
-      page.should have_field 'Organograma', :with => ''
+      page.should have_field 'Unidade orçamentária', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
     end
   end

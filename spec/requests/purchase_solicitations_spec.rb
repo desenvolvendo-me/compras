@@ -11,7 +11,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'create a new purchase_solicitation' do
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
     ExpenseElement.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
@@ -107,7 +107,7 @@ feature "PurchaseSolicitations" do
 
   scenario 'update an existent purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo)
-    Organogram.make!(:secretaria_de_desenvolvimento)
+    BudgetUnit.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
     ExpenseElement.make!(:compra_de_material)
     DeliveryLocation.make!(:health)
@@ -217,7 +217,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
     ExpenseElement.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)

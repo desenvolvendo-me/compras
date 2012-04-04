@@ -1,10 +1,10 @@
 # encoding: utf-8
-Organogram.blueprint(:secretaria_de_educacao) do
+BudgetUnit.blueprint(:secretaria_de_educacao) do
   organogram_configuration { OrganogramConfiguration.make!(:detran_sopa) }
   organogram { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Educação' }
-  organogram_kind { OrganogramKind::ANALYTICAL }
+  organogram_kind { BudgetUnitKind::ANALYTICAL }
   acronym { 'SEMUEDU' }
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
@@ -12,12 +12,12 @@ Organogram.blueprint(:secretaria_de_educacao) do
   organogram_responsibles { [OrganogramResponsible.make!(:sobrinho)] }
 end
 
-Organogram.blueprint(:secretaria_de_desenvolvimento) do
+BudgetUnit.blueprint(:secretaria_de_desenvolvimento) do
   organogram_configuration { OrganogramConfiguration.make!(:detran_sopa) }
   organogram { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
-  organogram_kind { OrganogramKind::ANALYTICAL }
+  organogram_kind { BudgetUnitKind::ANALYTICAL }
   acronym { 'SEMUDES' }
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }

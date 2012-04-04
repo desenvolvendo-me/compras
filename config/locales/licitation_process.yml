@@ -27,7 +27,7 @@ pt-BR:
         contract_date: "Data do contrato"
         contract_expiration: "Validade do contrato (meses)"
         observations: "Observações gerais"
-        administrative_process_organogram: "Unidade orçamentária"
+        administrative_process_budget_unit: "Unidade orçamentária"
         administrative_process_modality_humanize: "Modalidade"
         administrative_process_object_type_humanize: "Tipo de objeto"
         administrative_process_judgment_form: "Forma de julgamento"

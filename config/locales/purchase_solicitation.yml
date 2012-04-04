@@ -9,7 +9,7 @@ pt-BR:
       purchase_solicitation:
         accounting_year: "Ano"
         request_date: "Data da solicitação"
-        organogram: "Unidade orçamentária solicitante"
+        budget_unit: "Unidade orçamentária solicitante"
         responsible: "Responsável pela solicitação"
         justification: "Justificativa da solicitação"
         budget_allocation: "Dotação orçamentária"

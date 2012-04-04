@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      organogram:
-        one: "Organograma"
-        other: "Organogramas"
+      budget_unit:
+        one: "Unidade Orçamentária"
+        other: "Undiades Orçamentárias"
 
     attributes:
-      organogram:
+      budget_unit:
         organogram_configuration: "Configuração de organograma"
         organogram: "Organograma"
         organogram_kind: "Tipo"

@@ -3,7 +3,7 @@ require 'model_helper'
 require 'app/models/organogram_configuration'
 require 'app/models/organogram_level'
 require 'app/enumerations/organogram_separator'
-require 'app/models/organogram'
+require 'app/models/budget_unit'
 
 describe OrganogramConfiguration do
   it 'should respond to to_s as description' do
@@ -11,7 +11,7 @@ describe OrganogramConfiguration do
     subject.to_s.should eq 'Organograma 2012'
   end
 
-  it { should have_many(:organograms).dependent(:restrict) }
+  it { should have_many(:budget_units).dependent(:restrict) }
   it { should have_many(:organogram_levels).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :description }

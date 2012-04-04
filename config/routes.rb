@@ -125,6 +125,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :budget_units do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :capabilities do
     collection do
       get :filter
@@ -456,13 +463,6 @@ Tributario::Application.routes.draw do
     collection do
       get :modal
       get :filter
-    end
-  end
-
-  resources :organograms do
-    collection do
-      get :filter
-      get :modal
     end
   end
 

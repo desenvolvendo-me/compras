@@ -4,7 +4,7 @@ AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   year { 2012 }
   date { '2012-03-07' }
   protocol { '00099/2012' }
-  organogram { Organogram.make!(:secretaria_de_educacao) }
+  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   value_estimated { "500,50" }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
@@ -21,7 +21,7 @@ AdministrativeProcess.blueprint(:compra_de_computadores) do
   year { 2013 }
   date { '2012-03-07' }
   protocol { '00099/2012' }
-  organogram { Organogram.make!(:secretaria_de_educacao) }
+  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   value_estimated { "500,50" }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
@@ -38,7 +38,7 @@ AdministrativeProcess.blueprint(:compra_sem_convite) do
   year { 2014 }
   date { '2012-03-07' }
   protocol { '00099/2012' }
-  organogram { Organogram.make!(:secretaria_de_educacao) }
+  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   value_estimated { "500,50" }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }

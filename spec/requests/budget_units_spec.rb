@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "Organograms" do
+feature "BudgetUnit" do
   background do
     sign_in
   end
@@ -14,9 +14,9 @@ feature "Organograms" do
 
     click_link 'Contabilidade'
 
-    click_link 'Organogramas'
+    click_link 'Unidades Orçamentárias'
 
-    click_link 'Criar Organograma'
+    click_link 'Criar Unidade Orçamentária'
 
     within_tab 'Informações' do
       fill_in 'Descrição', :with => 'Secretaria de Educação'
@@ -51,9 +51,9 @@ feature "Organograms" do
       select 'Ativo', :from => 'Status'
     end
 
-    click_button 'Criar Organograma'
+    click_button 'Criar Unidade Orçamentária'
 
-    page.should have_notice 'Organograma criado com sucesso.'
+    page.should have_notice 'Unidade Orçamentária criado com sucesso.'
 
     click_link 'Secretaria de Educação'
 
@@ -84,7 +84,7 @@ feature "Organograms" do
   end
 
   scenario 'update an existent organogram' do
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
     Address.make!(:education)
     AdministrationType.make!(:executivo)
     Employee.make!(:wenderson)
@@ -92,7 +92,7 @@ feature "Organograms" do
 
     click_link 'Contabilidade'
 
-    click_link 'Organogramas'
+    click_link 'Unidades Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -121,9 +121,9 @@ feature "Organograms" do
       select 'Inativo', :from => 'Status'
     end
 
-    click_button 'Atualizar Organograma'
+    click_button 'Atualizar Unidade Orçamentária'
 
-    page.should have_notice 'Organograma editado com sucesso.'
+    page.should have_notice 'Unidade Orçamentária editado com sucesso.'
 
     click_link 'Secretaria de Transporte'
 
@@ -154,11 +154,11 @@ feature "Organograms" do
   end
 
   scenario 'remove a responsible' do
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
 
     click_link 'Contabilidade'
 
-    click_link 'Organogramas'
+    click_link 'Unidades Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
@@ -166,9 +166,9 @@ feature "Organograms" do
       click_button 'Remover Responsável'
     end
 
-    click_button 'Atualizar Organograma'
+    click_button 'Atualizar Unidade Orçamentária'
 
-    page.should have_notice 'Organograma editado com sucesso.'
+    page.should have_notice 'Unidade Orçamentária editado com sucesso.'
 
     click_link 'Secretaria de Educação'
 
@@ -182,17 +182,17 @@ feature "Organograms" do
   end
 
   scenario 'destroy an existent organogram' do
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
 
     click_link 'Contabilidade'
 
-    click_link 'Organogramas'
+    click_link 'Unidades Orçamentárias'
 
     click_link 'Secretaria de Educação'
 
     click_link 'Apagar 02.00 - Secretaria de Educação', :confirm => true
 
-    page.should have_notice 'Organograma apagado com sucesso.'
+    page.should have_notice 'Unidade Orçamentária apagado com sucesso.'
 
     page.should_not have_content 'Secretaria de Educação'
     page.should_not have_content 'Configuração do Detran'
@@ -211,9 +211,9 @@ feature "Organograms" do
 
     click_link 'Contabilidade'
 
-    click_link 'Organogramas'
+    click_link 'Unidades Orçamentárias'
 
-    click_link 'Criar Organograma'
+    click_link 'Criar Unidade Orçamentária'
 
     within_tab 'Informações' do
       fill_in 'Descrição', :with => 'Secretaria de Educação'
@@ -252,7 +252,7 @@ feature "Organograms" do
       end
     end
 
-    click_button 'Criar Organograma'
+    click_button 'Criar Unidade Orçamentária'
 
     within_tab 'Responsáveis' do
       page.should have_content 'já está em uso'

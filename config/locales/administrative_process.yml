@@ -11,7 +11,7 @@ pt-BR:
         year: "Ano"
         date: "Data do processo"
         protocol: "Número do protocolo"
-        organogram: "Unidade orçamentária"
+        budget_unit: "Unidade orçamentária"
         value_estimated: "Valor estimado"
         budget_allocation: "Dotação utilizada"
         modality: "Modalidade"

@@ -8,7 +8,7 @@ feature "AdministrativeProcesses" do
 
   scenario 'create a new administrative_process' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    Organogram.make!(:secretaria_de_educacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
 

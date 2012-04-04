@@ -68,7 +68,7 @@
     if (data) {
       var record = data.record;
 
-      $('#licitation_process_administrative_process_organogram').val(record.data("organogram"));
+      $('#licitation_process_administrative_process_budget_unit').val(record.data("budget-unit"));
       $('#licitation_process_administrative_process_modality_humanize').val(record.data("modality-humanize"));
       $('#licitation_process_administrative_process_object_type_humanize').val(record.data("object-type"));
       $('#licitation_process_administrative_process_judgment_form').val(record.data("judgment-form"));
@@ -79,7 +79,7 @@
       toggleInvitedBiddersTab(record.data("modality"));
 
     } else {
-      $('#licitation_process_administrative_process_organogram').val('');
+      $('#licitation_process_administrative_process_budget_unit').val('');
       $('#licitation_process_administrative_process_modality_humanize').val('');
       $('#licitation_process_administrative_process_object_type_humanize').val('');
       $('#licitation_process_administrative_process_judgment_form').val('');

@@ -6,7 +6,7 @@ class AdministrationType < ActiveRecord::Base
 
   belongs_to :legal_nature
 
-  has_many :organograms, :dependent => :restrict
+  has_many :budget_units, :dependent => :restrict
 
   validates :administration, :organ_type, :legal_nature, :presence => true
   validates :description, :presence => true, :uniqueness => true

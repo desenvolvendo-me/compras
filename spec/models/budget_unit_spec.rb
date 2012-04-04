@@ -1,13 +1,13 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/organogram'
+require 'app/models/budget_unit'
 require 'app/models/address'
 require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/organogram_responsible'
 require 'app/models/administrative_process'
 
-describe Organogram do
+describe BudgetUnit do
   it 'should respond to to_s with description' do
     subject.organogram = '99/00'
     subject.description = 'Secretaria de Educação'

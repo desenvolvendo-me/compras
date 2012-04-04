@@ -8,7 +8,7 @@ class OrganogramConfiguration < ActiveRecord::Base
   belongs_to :entity
 
   has_many :organogram_levels, :order => 'level asc', :dependent => :destroy, :order => :id
-  has_many :organograms, :dependent => :restrict
+  has_many :budget_units, :dependent => :restrict
 
   accepts_nested_attributes_for :organogram_levels, :allow_destroy => true
 

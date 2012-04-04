@@ -5,7 +5,7 @@ DirectPurchase.blueprint(:compra) do
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
   provider { Provider.make!(:wenderson_sa) }
-  organogram { Organogram.make!(:secretaria_de_educacao) }
+  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
@@ -24,7 +24,7 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
   provider { Provider.make!(:wenderson_sa) }
-  organogram { Organogram.make!(:secretaria_de_educacao) }
+  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
@@ -43,7 +43,7 @@ DirectPurchase.blueprint(:compra_2011) do
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::ENGINEERING_WORKS }
   provider { Provider.make!(:wenderson_sa) }
-  organogram { Organogram.make!(:secretaria_de_educacao) }
+  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }

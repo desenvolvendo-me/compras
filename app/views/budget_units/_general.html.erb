@@ -25,11 +25,11 @@
 <%= f.input :performance_field %>
 
 <script>
-  $('#organogram_organogram_configuration_id').change(function(event, data) {
+  $('#budget_unit_organogram_configuration_id').change(function(event, data) {
     if (data) {
       var record = data.record;
 
-      $('#organogram_organogram').attr("data-mask", record.data("mask"));
+      $('#budget_unit_organogram').attr("data-mask", record.data("mask"));
     }
   });
 </script>

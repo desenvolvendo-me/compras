@@ -9,7 +9,7 @@ pt-BR:
       budget_allocation:
         entity: "Entidade"
         year: "Exercício"
-        organogram: "Organograma"
+        budget_unit: "Unidade orçamentária"
         function: "Função"
         subfunction: "Subfunção"
         government_program: "Programa do governo"
