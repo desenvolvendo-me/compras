@@ -58,17 +58,19 @@
   });
 
   <% unless f.object.persisted? %>
-    var pledge_expiration_expiration_date_changed = false;
-    $("#pledge_emission_date").change(function() {
-      var expiration_date = $('fieldset:first').find('.expiration_date')
-      if(!pledge_expiration_expiration_date_changed) { expiration_date.val(($(this).val())) };
-    });
+    function uniqPledgeExpiration(){
+      return $('fieldset.pledge-expiration .destroy[value=false]').length == 1;
+    }
 
-    var first_pledge_expiration_value_changed = false;
+    $("#pledge_emission_date").change(function() {
+      if (uniqPledgeExpiration()) {
+        $('fieldset.pledge-expiration .destroy[value=false]:first').parents('fieldset.pledge-expiration').find('.expiration_date').val($(this).val());
+      };
+    }).change();
+
     $("#pledge_value").focusout(function() {
-      var value = $('fieldset:first').find('.value');
-      if(!first_pledge_expiration_value_changed) {
-        value.val(($(this).val()))
+      if (uniqPledgeExpiration()) {
+        $('fieldset.pledge-expiration .destroy[value=false]:first').parents('fieldset.pledge-expiration').find('.value').val($(this).val());
       };
     });
 

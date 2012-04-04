@@ -164,28 +164,35 @@ feature "Pledges" do
     end
   end
 
-  scenario 'when create should not fill first pledge_expiration date and value if already changed' do
+  scenario 'when create should not fill first pledge_expiration date and value if already add pledge-expirations' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
 
     click_link 'Criar Empenho'
 
+    within_tab 'Principal' do
+      fill_in 'Data de emissão', :with => '01/11/2011'
+      fill_in 'Valor', :with => '31,66'
+    end
+
     within_tab 'Vencimentos' do
       within 'fieldset:first' do
-        fill_in 'Vencimento', :with => '30/12/2011'
-        fill_in 'Valor', :with => '31,66'
+        page.should have_field 'Vencimento', :with => '01/11/2011'
+        page.should have_field 'Valor', :with => '31,66'
       end
+
+      click_button 'Adicionar Vencimento'
     end
 
     within_tab 'Principal' do
-      fill_in 'Data de emissão', :with => '01/11/2011'
-      fill_in 'Valor', :with => '316,60'
+      fill_in 'Data de emissão', :with => '10/11/2011'
+      fill_in 'Valor', :with => '336,60'
     end
 
     within_tab 'Vencimentos' do
       within 'fieldset:first' do
-        page.should have_field 'Vencimento', :with => '30/12/2011'
+        page.should have_field 'Vencimento', :with => '01/11/2011'
         page.should have_field 'Valor', :with => '31,66'
       end
     end
