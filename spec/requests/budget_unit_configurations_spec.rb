@@ -1,66 +1,51 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "OrganogramConfigurations" do
+feature "BudgetUnitConfigurations" do
   background do
     sign_in
   end
 
-  scenario 'create a new organogram_configuration' do
+  scenario 'create a new budget_unit_configuration' do
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
 
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Organograma'
+    click_link 'Configurações de Unidade Orçamentária'
 
-    click_link 'Criar Configuração de Organograma'
+    click_link 'Criar Configuração de Unidade Orçamentária'
 
     fill_in 'Descrição', :with => 'Nome da Configuração'
-
     fill_modal 'Entidade', :with => 'Detran'
-
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-
     click_button 'Adicionar'
-
     fill_in 'Nível', :with => '1'
-
-    fill_in 'organogram_configuration_organogram_levels_attributes_fresh-0_description', :with => 'Orgão'
-
+    fill_in 'budget_unit_configuration_organogram_levels_attributes_fresh-0_description', :with => 'Orgão'
     fill_in 'Dígitos', :with => '2'
-
     select 'Ponto', :from => 'Separador'
+    click_button 'Criar Configuração de Unidade Orçamentária'
 
-    click_button 'Criar Configuração de Organograma'
-
-    page.should have_notice 'Configuração de Organograma criado com sucesso.'
+    page.should have_notice 'Configuração de Unidade Orçamentária criado com sucesso.'
 
     click_link 'Nome da Configuração'
 
     page.should have_field 'Entidade', :with => 'Detran'
-
     page.should have_field 'Ato regulamentador', :with => '1234'
-
     page.should have_field 'Máscara', :with => '99'
-
     page.should have_field 'Descrição', :with => 'Nome da Configuração'
-
     page.should have_field 'Nível', :with => '1'
-
-    page.should have_field 'organogram_configuration_organogram_levels_attributes_0_description', :with => 'Orgão'
-
+    page.should have_field 'budget_unit_configuration_organogram_levels_attributes_0_description', :with => 'Orgão'
     page.should have_field 'Dígitos', :with => '2'
-
     page.should have_select 'Separador', :selected => 'Ponto'
   end
 
   scenario 'calculate mask with javascript' do
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Organograma'
+    click_link 'Configurações de Unidade Orçamentária'
 
-    click_link 'Criar Configuração de Organograma'
+    click_link 'Criar Configuração de Unidade Orçamentária'
 
     click_button 'Adicionar'
 
@@ -81,20 +66,20 @@ feature "OrganogramConfigurations" do
     page.should have_field 'Máscara', :with => '999.99'
   end
 
-  scenario 'update an existent organogram_configuration' do
-    OrganogramConfiguration.make!(:detran_sopa)
+  scenario 'update an existent budget_unit_configuration' do
+    BudgetUnitConfiguration.make!(:detran_sopa)
 
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Organograma'
+    click_link 'Configurações de Unidade Orçamentária'
 
     click_link 'Configuração do Detran'
 
     fill_in 'Descrição', :with => 'Outro Nome da Configuração'
 
-    click_button 'Atualizar Configuração de Organograma'
+    click_button 'Atualizar Configuração de Unidade Orçamentária'
 
-    page.should have_notice 'Configuração de Organograma editado com sucesso.'
+    page.should have_notice 'Configuração de Unidade Orçamentária editado com sucesso.'
 
     click_link 'Outro Nome da Configuração'
 
@@ -103,18 +88,18 @@ feature "OrganogramConfigurations" do
     page.should have_field 'Descrição', :with => 'Outro Nome da Configuração'
   end
 
-  scenario 'destroy an existent organogram_configuration' do
-    OrganogramConfiguration.make!(:detran_sopa)
+  scenario 'destroy an existent budget_unit_configuration' do
+    BudgetUnitConfiguration.make!(:detran_sopa)
 
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Organograma'
+    click_link 'Configurações de Unidade Orçamentária'
 
     click_link 'Configuração do Detran'
 
     click_link 'Apagar Configuração do Detran', :confirm => true
 
-    page.should have_notice 'Configuração de Organograma apagado com sucesso.'
+    page.should have_notice 'Configuração de Unidade Orçamentária apagado com sucesso.'
 
     page.should_not have_content 'Detran'
     page.should_not have_content '1234'

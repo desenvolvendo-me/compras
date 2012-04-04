@@ -1,7 +1,7 @@
 require 'model_helper'
 require 'app/models/entity'
 require 'app/models/expense_element'
-require 'app/models/organogram_configuration'
+require 'app/models/budget_unit_configuration'
 require 'app/models/capability'
 require 'app/models/government_program'
 require 'app/models/government_action'
@@ -23,7 +23,7 @@ describe Entity do
   end
 
   it { should have_many(:expense_elements).dependent(:restrict) }
-  it { should have_many(:organogram_configurations).dependent(:restrict) }
+  it { should have_many(:budget_unit_configurations).dependent(:restrict) }
   it { should have_many(:capabilities).dependent(:restrict) }
   it { should have_many(:government_programs).dependent(:restrict) }
   it { should have_many(:government_actions).dependent(:restrict) }

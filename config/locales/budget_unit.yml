@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       budget_unit:
-        organogram_configuration: "Configuração de organograma"
+        budget_unit_configuration: "Configuração de unidade orçamentária"
         organogram: "Organograma"
         kind: "Tipo"
         tce_code: "Código TCE"

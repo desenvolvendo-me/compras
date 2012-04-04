@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      organogram_configuration:
-        one: "Configuração de Organograma"
-        other: "Configurações de Organograma"
+      budget_unit_configuration:
+        one: "Configuração de Unidade Orçamentária"
+        other: "Configurações de Unidade Orçamentária"
 
     attributes:
-      organogram_configuration:
+      budget_unit_configuration:
         entity: "Entidade"
         regulatory_act: "Ato regulamentador"
         description: "Descrição"

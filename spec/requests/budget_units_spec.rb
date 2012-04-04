@@ -7,7 +7,7 @@ feature "BudgetUnit" do
   end
 
   scenario 'create a new organogram' do
-    OrganogramConfiguration.make!(:detran_sopa)
+    BudgetUnitConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
     Employee.make!(:sobrinho)
@@ -21,7 +21,7 @@ feature "BudgetUnit" do
     within_tab 'Informações' do
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
-      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de unidade orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
 
       # javascript test: trying to avoid the mask
       fill_in 'Organograma', :with => 'abc'
@@ -60,7 +60,7 @@ feature "BudgetUnit" do
     within_tab 'Informações' do
       page.should have_field 'Descrição', :with => 'Secretaria de Educação'
       page.should have_field 'Sigla', :with => 'SEMUEDU'
-      page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
+      page.should have_field 'Configuração de unidade orçamentária', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.00'
       page.should have_select 'Tipo', :selected => 'Analítico'
       page.should have_field 'Código TCE', :with => '051'
@@ -99,7 +99,7 @@ feature "BudgetUnit" do
     within_tab 'Informações' do
       fill_in 'Descrição', :with => 'Secretaria de Transporte'
       fill_in 'Sigla', :with => 'SEMUTRA'
-      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de unidade orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       fill_in 'Organograma', :with => '02.11'
       select 'Sintético', :from => 'Tipo'
       fill_in 'Código TCE', :with => '081'
@@ -130,7 +130,7 @@ feature "BudgetUnit" do
     within_tab 'Informações' do
       page.should have_field 'Descrição', :with => 'Secretaria de Transporte'
       page.should have_field 'Sigla', :with => 'SEMUTRA'
-      page.should have_field 'Configuração de organograma', :with => 'Configuração do Detran'
+      page.should have_field 'Configuração de unidade orçamentária', :with => 'Configuração do Detran'
       page.should have_field 'Organograma', :with => '02.11'
       page.should have_select 'Tipo', :selected => 'Sintético'
       page.should have_field 'Código TCE', :with => '081'
@@ -204,7 +204,7 @@ feature "BudgetUnit" do
   end
 
   scenario 'trying to create an Organogram with duplicated responsibles as the only error to ensure that it will not be saved' do
-    OrganogramConfiguration.make!(:detran_sopa)
+    BudgetUnitConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
     Employee.make!(:sobrinho)
@@ -218,7 +218,7 @@ feature "BudgetUnit" do
     within_tab 'Informações' do
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
-      fill_modal 'Configuração de organograma', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_modal 'Configuração de unidade orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       fill_in 'Organograma', :with => '02.00'
       select 'Analítico', :from => 'Tipo'
       fill_in 'Código TCE', :with => '051'

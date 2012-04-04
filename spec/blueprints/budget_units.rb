@@ -1,6 +1,6 @@
 # encoding: utf-8
 BudgetUnit.blueprint(:secretaria_de_educacao) do
-  organogram_configuration { OrganogramConfiguration.make!(:detran_sopa) }
+  budget_unit_configuration { BudgetUnitConfiguration.make!(:detran_sopa) }
   organogram { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Educação' }
@@ -13,7 +13,7 @@ BudgetUnit.blueprint(:secretaria_de_educacao) do
 end
 
 BudgetUnit.blueprint(:secretaria_de_desenvolvimento) do
-  organogram_configuration { OrganogramConfiguration.make!(:detran_sopa) }
+  budget_unit_configuration { BudgetUnitConfiguration.make!(:detran_sopa) }
   organogram { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }

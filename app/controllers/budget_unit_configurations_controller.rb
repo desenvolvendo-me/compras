@@ -1,0 +1,2 @@
+class BudgetUnitConfigurationsController < CrudController
+end

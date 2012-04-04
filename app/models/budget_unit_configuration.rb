@@ -1,4 +1,4 @@
-class OrganogramConfiguration < ActiveRecord::Base
+class BudgetUnitConfiguration < ActiveRecord::Base
   attr_accessible :description, :entity_id, :regulatory_act_id
   attr_accessible :organogram_levels, :organogram_levels_attributes
 

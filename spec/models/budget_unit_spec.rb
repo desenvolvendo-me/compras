@@ -19,7 +19,7 @@ describe BudgetUnit do
   it { should validate_presence_of :tce_code }
   it { should validate_presence_of :acronym }
   it { should validate_presence_of :performance_field }
-  it { should validate_presence_of :organogram_configuration }
+  it { should validate_presence_of :budget_unit_configuration }
   it { should validate_presence_of :administration_type }
   it { should validate_presence_of :kind }
 
@@ -27,7 +27,7 @@ describe BudgetUnit do
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:organogram_responsibles).dependent(:destroy).order(:id) }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
-  it { should belong_to :organogram_configuration }
+  it { should belong_to :budget_unit_configuration }
   it { should belong_to :administration_type }
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:administrative_processes).dependent(:restrict) }

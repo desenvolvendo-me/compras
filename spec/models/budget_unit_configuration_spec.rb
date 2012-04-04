@@ -1,11 +1,11 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/organogram_configuration'
+require 'app/models/budget_unit_configuration'
 require 'app/models/organogram_level'
 require 'app/enumerations/organogram_separator'
 require 'app/models/budget_unit'
 
-describe OrganogramConfiguration do
+describe BudgetUnitConfiguration do
   it 'should respond to to_s as description' do
     subject.description = 'Organograma 2012'
     subject.to_s.should eq 'Organograma 2012'

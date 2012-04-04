@@ -1,6 +1,6 @@
 class BudgetUnit < ActiveRecord::Base
   attr_accessible :description, :organogram, :tce_code, :acronym
-  attr_accessible :performance_field, :organogram_configuration_id
+  attr_accessible :performance_field, :budget_unit_configuration_id
   attr_accessible :administration_type_id, :address_attributes
   attr_accessible :organogram_responsibles_attributes, :kind
 
@@ -8,7 +8,7 @@ class BudgetUnit < ActiveRecord::Base
 
   has_enumeration_for :kind, :with => BudgetUnitKind, :create_helpers => true
 
-  belongs_to :organogram_configuration
+  belongs_to :budget_unit_configuration
   belongs_to :administration_type
 
   has_one :address, :as => :addressable, :dependent => :destroy
@@ -19,10 +19,10 @@ class BudgetUnit < ActiveRecord::Base
   has_many :direct_purchases, :dependent => :restrict
   has_many :administrative_processes, :dependent => :restrict
 
-  delegate :mask, :to => :organogram_configuration, :allow_nil => true
+  delegate :mask, :to => :budget_unit_configuration, :allow_nil => true
 
   validates :description, :organogram, :tce_code, :acronym, :presence => true
-  validates :performance_field, :organogram_configuration, :presence => true
+  validates :performance_field, :budget_unit_configuration, :presence => true
   validates :administration_type, :kind, :presence => true
   validates :organogram, :mask => :mask
   validate :cannot_have_duplicated_responsibles
