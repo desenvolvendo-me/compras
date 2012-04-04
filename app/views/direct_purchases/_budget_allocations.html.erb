@@ -1,15 +1,7 @@
 <%= f.error :direct_purchase_budget_allocations %>
 
 <div id="budget-allocations">
-  <div class="yui3-g">
-    <div class="yui3-u-1-2">
-      <%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
-    </div>
-
-    <div class="yui3-u-1-2">
-      <%= f.input :licitation_exemption, :disabled => true, :input_html => { :value => number_with_precision(f.object.licitation_exemption) } %>
-    </div>
-  </div>
+  <%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
 
   <%= f.association :direct_purchase_budget_allocations, :collection => localized(f.object.direct_purchase_budget_allocations) do |p| %>
     <%= render 'direct_purchase_budget_allocations/form', :f => p %>

@@ -209,4 +209,26 @@ feature "LicitationObjects" do
       page.should have_content 'já existe para o ano informado'
     end
   end
+
+  scenario 'validating total of purchase and build licitation exemptions' do
+    DirectPurchase.make!(:compra)
+    DirectPurchase.make!(:compra_nao_autorizada)
+    DirectPurchase.make!(:compra_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Objetos de Licitação'
+
+    click_link 'Ponte'
+
+    within_tab 'Total acumulado' do
+      within_fieldset 'Total acumulado de compras e serviços' do
+        page.should have_field 'Dispensa de licitação', :with => '1.200,00'
+      end
+
+      within_fieldset 'Total acumulado de obras e engenharia' do
+        page.should have_field 'Dispensa de licitação', :with => '600,00'
+      end
+    end
+  end
 end

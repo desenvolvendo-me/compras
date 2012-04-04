@@ -1,11 +1,9 @@
 LicitationObject.blueprint(:ponte) do
   description { "Ponte" }
   year { 2012 }
-  purchase_licitation_exemption { "1000.0" }
   purchase_invitation_letter { "2.99" }
   purchase_taking_price { "3.99" }
   purchase_public_concurrency { "4.99" }
-  build_licitation_exemption { "2000.0" }
   build_invitation_letter { "6.99" }
   build_taking_price { "7.99" }
   build_public_concurrency { "8.99" }
@@ -18,11 +16,9 @@ end
 LicitationObject.blueprint(:viaduto) do
   description { "Viaduto" }
   year { 2012 }
-  purchase_licitation_exemption { "3000" }
   purchase_invitation_letter { "2.99" }
   purchase_taking_price { "3.99" }
   purchase_public_concurrency { "4.99" }
-  build_licitation_exemption { "4000" }
   build_invitation_letter { "6.99" }
   build_taking_price { "7.99" }
   build_public_concurrency { "8.99" }

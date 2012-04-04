@@ -12,11 +12,9 @@ describe LicitationObject do
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :year }
-  it { should validate_presence_of :purchase_licitation_exemption }
   it { should validate_presence_of :purchase_invitation_letter }
   it { should validate_presence_of :purchase_taking_price }
   it { should validate_presence_of :purchase_public_concurrency }
-  it { should validate_presence_of :build_licitation_exemption }
   it { should validate_presence_of :build_invitation_letter }
   it { should validate_presence_of :build_taking_price }
   it { should validate_presence_of :build_public_concurrency }
@@ -30,12 +28,4 @@ describe LicitationObject do
   it { should have_and_belong_to_many :materials }
 
   it { should have_many(:direct_purchases).dependent(:restrict) }
-
-  it 'should return the correct licitation exemption depending on modality' do
-    subject.purchase_licitation_exemption = 1000
-    subject.build_licitation_exemption = 2000
-
-    subject.licitation_exemption(DirectPurchaseModality::MATERIAL_OR_SERVICE).should eq 1000
-    subject.licitation_exemption(DirectPurchaseModality::ENGINEERING_WORKS).should eq 2000
-  end
 end

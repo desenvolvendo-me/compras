@@ -34,7 +34,7 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   observation { "Compra de 2012 ainda não autorizada" }
   period { Period.make!(:um_ano) }
   status { DirectPurchaseStatus::UNAUTHORIZED }
-  direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra)] }
+  direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_extra)] }
 end
 
 DirectPurchase.blueprint(:compra_2011) do
@@ -53,5 +53,5 @@ DirectPurchase.blueprint(:compra_2011) do
   observation { "Compra feita em 2011 e não authorizada" }
   period { Period.make!(:um_ano) }
   status { DirectPurchaseStatus::UNAUTHORIZED }
-  direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra)] }
+  direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_engenharia)] }
 end

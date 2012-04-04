@@ -542,34 +542,6 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'get licitation exemption depending on licitation object and modality' do
-    LicitationObject.make!(:ponte)
-
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra Direta'
-
-    click_link 'Criar Solicitação de Compra Direta'
-
-    within_tab 'Dados gerais' do
-      select 'Material ou serviços', :from => 'Modalidade'
-      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
-    end
-
-    within_tab 'Dotações' do
-      page.should have_disabled_field 'Dispensa de licitação'
-      page.should have_field 'Dispensa de licitação', :with => '1.000,00'
-    end
-
-    within_tab 'Dados gerais' do
-      select 'Obras de engenharia', :from => 'Modalidade'
-    end
-
-    within_tab 'Dotações' do
-      page.should have_field 'Dispensa de licitação', :with => '2.000,00'
-    end
-  end
-
   scenario 'filtering materials on items by licitation object' do
     LicitationObject.make!(:ponte)
     LicitationObject.make!(:viaduto)

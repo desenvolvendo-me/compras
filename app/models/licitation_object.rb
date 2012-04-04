@@ -1,8 +1,8 @@
 class LicitationObject < ActiveRecord::Base
   attr_accessible :description, :year, :material_ids
 
-  attr_readonly :purchase_licitation_exemption, :purchase_invitation_letter, :purchase_taking_price
-  attr_readonly :purchase_public_concurrency, :build_licitation_exemption, :build_invitation_letter, :build_taking_price
+  attr_readonly :purchase_invitation_letter, :purchase_taking_price
+  attr_readonly :purchase_public_concurrency, :build_invitation_letter, :build_taking_price
   attr_readonly :build_public_concurrency, :special_auction, :special_unenforceability, :special_contest
 
   attr_modal :description, :year
@@ -11,8 +11,8 @@ class LicitationObject < ActiveRecord::Base
 
   has_and_belongs_to_many :materials
 
-  validates :description, :year, :purchase_licitation_exemption, :purchase_invitation_letter, :purchase_taking_price,
-            :purchase_public_concurrency, :build_licitation_exemption, :build_invitation_letter, :build_taking_price,
+  validates :description, :year, :purchase_invitation_letter, :purchase_taking_price,
+            :purchase_public_concurrency, :build_invitation_letter, :build_taking_price,
             :build_public_concurrency, :special_auction, :special_unenforceability, :special_contest, :presence => true
 
   validates :description, :uniqueness => { :scope => [:year], :message => :taken_for_informed_year }
@@ -22,16 +22,24 @@ class LicitationObject < ActiveRecord::Base
   orderize :description
   filterize
 
-  def licitation_exemption(modality)
-    case modality
-    when DirectPurchaseModality::MATERIAL_OR_SERVICE
-      purchase_licitation_exemption
-    when DirectPurchaseModality::ENGINEERING_WORKS
-      build_licitation_exemption
-    end
+  def purchase_licitation_exemption
+    licitation_exemption DirectPurchaseModality::MATERIAL_OR_SERVICE
+  end
+
+  def build_licitation_exemption
+    licitation_exemption DirectPurchaseModality::ENGINEERING_WORKS
   end
 
   def to_s
     description
+  end
+
+  private
+
+  def licitation_exemption(modality)
+    DirectPurchaseBudgetAllocationItem.select([:quantity, :unit_price]).
+      joins( :direct_purchase_budget_allocation => :direct_purchase ).
+      where('direct_purchases.modality = ? AND direct_purchases.licitation_object_id = ?', modality, self.id ).
+      collect(&:estimated_total_price).sum
   end
 end
