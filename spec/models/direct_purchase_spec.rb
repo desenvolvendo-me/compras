@@ -107,20 +107,5 @@ describe DirectPurchase do
 
       subject.errors[:direct_purchase_budget_allocations].should include 'é necessário cadastrar pelo menos uma dotação'
     end
-
-    it 'should not have total of items exceeding licitation object exemption' do
-      subject.stub(:licitation_exemption => 1000)
-      subject.stub(:total_allocations_items_value => 1000)
-
-      subject.valid?
-
-      subject.errors.messages[:total_allocations_items_value].should be_nil
-
-      subject.stub(:total_allocations_items_value => 1001)
-
-      subject.valid?
-
-      subject.errors.messages[:total_allocations_items_value].should include 'não pode ser superior à dispensa de licitação'
-    end
   end
 end
