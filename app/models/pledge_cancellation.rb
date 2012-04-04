@@ -57,7 +57,7 @@ class PledgeCancellation < ActiveRecord::Base
     return if pledge_expiration.blank?
 
     if total_canceled_value > pledge_expiration.value
-      errors.add(:value, :must_not_be_greater_than_pledge_expiration_cancellations_sum_or_pledge_expiration_value)
+      errors.add(:value, :must_not_be_greater_than_pledge_expiration_value_minus_already_canceled_value)
     end
   end
 end
