@@ -21,7 +21,7 @@ feature "BudgetUnitConfigurations" do
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
     click_button 'Adicionar'
     fill_in 'Nível', :with => '1'
-    fill_in 'budget_unit_configuration_organogram_levels_attributes_fresh-0_description', :with => 'Orgão'
+    fill_in 'budget_unit_configuration_budget_unit_levels_attributes_fresh-0_description', :with => 'Órgão'
     fill_in 'Dígitos', :with => '2'
     select 'Ponto', :from => 'Separador'
     click_button 'Criar Configuração de Unidade Orçamentária'
@@ -35,7 +35,7 @@ feature "BudgetUnitConfigurations" do
     page.should have_field 'Máscara', :with => '99'
     page.should have_field 'Descrição', :with => 'Nome da Configuração'
     page.should have_field 'Nível', :with => '1'
-    page.should have_field 'budget_unit_configuration_organogram_levels_attributes_0_description', :with => 'Orgão'
+    page.should have_field 'budget_unit_configuration_budget_unit_levels_attributes_0_description', :with => 'Órgão'
     page.should have_field 'Dígitos', :with => '2'
     page.should have_select 'Separador', :selected => 'Ponto'
   end
@@ -55,7 +55,7 @@ feature "BudgetUnitConfigurations" do
 
     click_button 'Adicionar'
 
-    within '.organogram-level:last' do
+    within '.budget-unit-level:last' do
       fill_in 'Nível', :with => '1'
 
       fill_in 'Dígitos', :with => '3'

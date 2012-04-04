@@ -11,14 +11,14 @@
   </div>
 </div>
 
-<%= render 'organogram_levels', :f => f %>
+<%= render 'budget_unit_levels', :f => f %>
 
 <script>
   function calculeMask() {
     var levels = [];
     var mask = '';
 
-    $('#organogram_levels').children('.organogram-level').each(function() {
+    $('#budget_unit_levels').children('.budget-unit-level').each(function() {
       var level     = $(this).find('input.level').val(),
           digits    = $(this).find('input.digits').val(),
           separator = $(this).find('select.separator').val();
@@ -42,6 +42,6 @@
     $('#budget_unit_configuration_mask').attr('value', mask);
   }
 
-  $('#organogram_levels').delegate('input:visible.numeric', 'keyup', calculeMask);
-  $('#organogram_levels').delegate('select', 'change', calculeMask);
+  $('#budget_unit_levels').delegate('input:visible.numeric', 'keyup', calculeMask);
+  $('#budget_unit_levels').delegate('select', 'change', calculeMask);
 </script>

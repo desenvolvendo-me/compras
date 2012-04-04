@@ -1,4 +1,4 @@
-class OrganogramLevel < ActiveRecord::Base
+class BudgetUnitLevel < ActiveRecord::Base
   attr_accessible :level, :description, :digits, :organogram_separator
   attr_accessible :budget_unit_configuration_id
 

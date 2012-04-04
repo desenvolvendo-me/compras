@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/organogram_level'
+require 'app/models/budget_unit_level'
 
-describe OrganogramLevel do
+describe BudgetUnitLevel do
   it 'should respond to to_s with level and description' do
     subject.level = 1
     subject.description = 'Orgão'

@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      organogram_level:
+      budget_unit_level:
         one: "Nível de Organograma"
         other: "Níveis de Organograma"
 
     attributes:
-      organogram_level:
+      budget_unit_level:
         level: "Nível"
         description: "Descrição"
         digits: "Dígitos"
