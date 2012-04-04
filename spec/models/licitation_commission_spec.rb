@@ -19,18 +19,16 @@ describe LicitationCommission do
   
   it "should not have expiration_date less than nomination_date" do
     subject.nomination_date = Date.current
-    subject.expiration_date = subject.nomination_date - 1.day
 
-    subject.should_not be_valid
-    subject.errors[:expiration_date].should include("deve ser em ou depois de #{I18n.l subject.nomination_date}")
+    subject.should_not allow_value(Date.yesterday).for(:expiration_date).
+                                                  with_message("deve ser em ou depois de #{I18n.l(Date.current)}")
   end
-  
+
   it "should not have exoneration_date less than nomination_date" do
     subject.nomination_date = Date.current
-    subject.exoneration_date = subject.nomination_date - 1.day
 
-    subject.should_not be_valid
-    subject.errors[:exoneration_date].should include("deve ser em ou depois de #{I18n.l subject.nomination_date}")
+    subject.should_not allow_value(Date.yesterday).for(:exoneration_date).
+                                                    with_message("deve ser em ou depois de #{I18n.l(Date.current)}")
   end
 
   it "should delegate publication_date to regulatory_act with prefix" do
