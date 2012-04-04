@@ -2,11 +2,11 @@ class BudgetUnit < ActiveRecord::Base
   attr_accessible :description, :organogram, :tce_code, :acronym
   attr_accessible :performance_field, :organogram_configuration_id
   attr_accessible :administration_type_id, :address_attributes
-  attr_accessible :organogram_responsibles_attributes, :organogram_kind
+  attr_accessible :organogram_responsibles_attributes, :kind
 
   attr_modal :description
 
-  has_enumeration_for :organogram_kind, :with => BudgetUnitKind, :create_helpers => true
+  has_enumeration_for :kind, :with => BudgetUnitKind, :create_helpers => true
 
   belongs_to :organogram_configuration
   belongs_to :administration_type
@@ -23,7 +23,7 @@ class BudgetUnit < ActiveRecord::Base
 
   validates :description, :organogram, :tce_code, :acronym, :presence => true
   validates :performance_field, :organogram_configuration, :presence => true
-  validates :administration_type, :organogram_kind, :presence => true
+  validates :administration_type, :kind, :presence => true
   validates :organogram, :mask => :mask
   validate :cannot_have_duplicated_responsibles
 

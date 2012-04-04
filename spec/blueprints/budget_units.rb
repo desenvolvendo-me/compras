@@ -4,7 +4,7 @@ BudgetUnit.blueprint(:secretaria_de_educacao) do
   organogram { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Educação' }
-  organogram_kind { BudgetUnitKind::ANALYTICAL }
+  kind { BudgetUnitKind::ANALYTICAL }
   acronym { 'SEMUEDU' }
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
@@ -17,7 +17,7 @@ BudgetUnit.blueprint(:secretaria_de_desenvolvimento) do
   organogram { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
-  organogram_kind { BudgetUnitKind::ANALYTICAL }
+  kind { BudgetUnitKind::ANALYTICAL }
   acronym { 'SEMUDES' }
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }

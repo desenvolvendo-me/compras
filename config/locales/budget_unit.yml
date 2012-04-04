@@ -9,7 +9,7 @@ pt-BR:
       budget_unit:
         organogram_configuration: "Configuração de organograma"
         organogram: "Organograma"
-        organogram_kind: "Tipo"
+        kind: "Tipo"
         tce_code: "Código TCE"
         description: "Descrição"
         acronym: "Sigla"

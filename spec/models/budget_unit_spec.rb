@@ -21,7 +21,7 @@ describe BudgetUnit do
   it { should validate_presence_of :performance_field }
   it { should validate_presence_of :organogram_configuration }
   it { should validate_presence_of :administration_type }
-  it { should validate_presence_of :organogram_kind }
+  it { should validate_presence_of :kind }
 
   it { should have_one :address }
   it { should have_many(:budget_allocations).dependent(:restrict) }
