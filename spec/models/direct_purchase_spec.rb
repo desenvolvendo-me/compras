@@ -5,6 +5,8 @@ require 'app/models/budget_allocation'
 require 'app/models/direct_purchase_budget_allocation'
 require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/supply_authorization'
+require 'app/models/modality_limit'
+require 'app/business/direct_purchase_modality_limit_verificator'
 
 describe DirectPurchase do
   it 'should return id as to_s method' do
@@ -106,6 +108,26 @@ describe DirectPurchase do
       subject.valid?
 
       subject.errors[:direct_purchase_budget_allocations].should include 'é necessário cadastrar pelo menos uma dotação'
+    end
+
+    it 'should have error when limit verificator returns false' do
+      subject.stub(:licitation_object => double, :modality => double)
+
+      DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify!).and_return(false)
+
+      subject.valid?
+
+      subject.errors[:total_allocations_items_value].should include 'está acima do valor disponível no limite em vigor para esta modalidade'
+    end
+
+    it 'should not have error when limit verificator returns true' do
+      subject.stub(:licitation_object => double, :modality => double)
+
+      DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify!).and_return(true)
+
+      subject.valid?
+
+      subject.errors[:total_allocations_items_value].should_not include 'está acima do valor disponível no limite em vigor para esta modalidade'
     end
   end
 end

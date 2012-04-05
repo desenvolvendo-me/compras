@@ -1,5 +1,6 @@
 # encoding: utf-8
 DirectPurchase.blueprint(:compra) do
+  ModalityLimit.make!(:modalidade_de_compra)
   year { 2012 }
   date { "2012-03-02" }
   legal_reference { LegalReference.make!(:referencia) }
@@ -19,6 +20,7 @@ DirectPurchase.blueprint(:compra) do
 end
 
 DirectPurchase.blueprint(:compra_nao_autorizada) do
+  ModalityLimit.make!(:modalidade_de_compra)
   year { 2012 }
   date { "2012-12-01" }
   legal_reference { LegalReference.make!(:referencia) }
@@ -38,6 +40,7 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
 end
 
 DirectPurchase.blueprint(:compra_2011) do
+  ModalityLimit.make!(:modalidade_de_compra)
   year { 2011 }
   date { "2011-11-11" }
   legal_reference { LegalReference.make!(:referencia) }

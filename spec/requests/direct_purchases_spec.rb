@@ -17,6 +17,7 @@ feature "DirectPurchases" do
     Period.make!(:um_ano)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
+    ModalityLimit.make!(:modalidade_de_compra)
 
     click_link 'Solicitações'
 
@@ -257,6 +258,7 @@ feature "DirectPurchases" do
     Period.make!(:um_ano)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
+    ModalityLimit.make!(:modalidade_de_compra)
 
     click_link 'Solicitações'
 
