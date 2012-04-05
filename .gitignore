@@ -11,3 +11,5 @@ log/*.log
 tmp/
 public/uploads
 Guardfile
+Gemfile.local
+Gemfile.local.lock
