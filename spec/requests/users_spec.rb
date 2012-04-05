@@ -84,7 +84,8 @@ feature "Users" do
     page.should_not have_content 'Wenderson Malheiros'
   end
 
-  scenario 'open the window to new perfil through the perfil modal', :driver => :selenium do
+  scenario 'open the window to new perfil through the perfil modal' do
+    pending 'waiting for https://github.com/thoughtbot/capybara-webkit/pull/314'
     click_link 'Administração'
 
     click_link 'Usuários'
