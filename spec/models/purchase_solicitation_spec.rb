@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/budget_allocation'
+require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe PurchaseSolicitation do
   it 'should return the id in to_s method' do
