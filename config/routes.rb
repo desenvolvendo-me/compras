@@ -453,7 +453,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :moviment_types do
+  resources :moviment_types, :only => [] do
     collection do
       get :modal
     end
