@@ -1,7 +1,7 @@
 require 'model_helper'
-require 'app/models/revenue_nature'
+require 'app/models/revenue_source'
 
-describe RevenueNature do
+describe RevenueSource do
   it 'should return code as to_s' do
     subject.code = 1
     subject.to_s.should eq '1'
@@ -9,7 +9,7 @@ describe RevenueNature do
 
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
-  it { should validate_presence_of :revenue_category }
+  it { should validate_presence_of :revenue_nature }
 
-  it { should have_many(:revenue_sources).dependent(:restrict) }
+  it { should belong_to :revenue_nature }
 end
