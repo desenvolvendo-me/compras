@@ -9,4 +9,6 @@ describe RevenueCategory do
 
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
+
+  it { should have_many(:revenue_natures).dependent(:restrict) }
 end
