@@ -36,10 +36,6 @@ class PurchaseSolicitation < ActiveRecord::Base
     id.to_s
   end
 
-  def budget_allocations_total_value
-    purchase_solicitation_budget_allocations.collect { |item| item.estimated_value || 0 }.sum
-  end
-
   def total_allocations_items_value
     purchase_solicitation_budget_allocations.collect(&:total_items_value).sum
   end

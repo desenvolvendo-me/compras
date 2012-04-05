@@ -3,21 +3,15 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-4">
-      <%= f.input :budget_allocation_id,:disabled => true, :required => false, :input_html => { :id => "",  :size => 2 } %>
-    </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-2">
       <%= f.input :budget_allocation, :input_html => { :size => 10, :class => 'budget-allocation' } %>
     </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-2">
       <%= f.input :expense_element, :input_html => { :size => 21 } %>
     </div>
 
-    <div class="yui3-u-1-4">
-      <%= f.input :estimated_value, :input_html => { :class => 'allocation-price', :size => 9 } %>
-    </div>
   </div>
 
   <%= f.error :items %>

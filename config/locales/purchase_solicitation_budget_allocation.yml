@@ -7,8 +7,6 @@ pt-BR:
 
     attributes:
       purchase_solicitation_budget_allocation:
-        budget_allocation_id: "Código"
         budget_allocation: "Dotação"
         expense_element: "Elemento"
-        estimated_value: "Valor previsto"
         blocked: "Bloquear"

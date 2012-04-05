@@ -11,19 +11,6 @@ describe PurchaseSolicitation do
     subject.to_s.should eq '1'
   end
 
-  context "#budget_allocations_total_value" do
-    it "should sum the estimated value of the purchase solicitation budget allocations" do
-      subject.stub(:purchase_solicitation_budget_allocations).
-              and_return([
-                double(:estimated_value => 100),
-                double(:estimated_value => 200),
-                double(:estimated_value => nil)
-              ])
-
-      subject.budget_allocations_total_value.should eq(300)
-    end
-  end
-
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it {should belong_to :expense_element }

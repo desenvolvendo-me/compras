@@ -1,5 +1,5 @@
 class PurchaseSolicitationBudgetAllocation < ActiveRecord::Base
-  attr_accessible :purchase_solicitation_id, :budget_allocation_id, :estimated_value, :blocked
+  attr_accessible :purchase_solicitation_id, :budget_allocation_id, :blocked
   attr_accessible :expense_element_id, :items_attributes
 
   belongs_to :purchase_solicitation
@@ -10,7 +10,7 @@ class PurchaseSolicitationBudgetAllocation < ActiveRecord::Base
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
-  validates :budget_allocation, :estimated_value, :presence => true
+  validates :budget_allocation, :presence => true
 
   validate :must_have_at_least_one_item
 

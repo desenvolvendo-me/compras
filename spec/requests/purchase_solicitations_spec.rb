@@ -48,7 +48,6 @@ feature "PurchaseSolicitations" do
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
         fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
-        fill_in 'Valor previsto', :with => '200,00'
       end
 
       click_button 'Adicionar Item'
@@ -92,7 +91,6 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2012 - Alocação"
       page.should have_field 'Elemento', :with => '3.1.90.11.01.00.00.00'
-      page.should have_field "Valor previsto", :with => '200,00'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -141,7 +139,6 @@ feature "PurchaseSolicitations" do
 
       fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
       fill_modal 'Elemento', :with => 'Compra de Material', :field => 'Descrição'
-      fill_in 'Valor previsto', :with => '30,00'
 
       click_button 'Adicionar Item'
 
@@ -181,7 +178,6 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2011 - Alocação extra"
       page.should have_field 'Elemento', :with => '2.2.22.11.01.00.00.00'
-      page.should have_field "Valor previsto", :with => '30,00'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -246,14 +242,12 @@ feature "PurchaseSolicitations" do
 
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      fill_in 'Valor previsto', :with => '200,00'
 
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
         fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
-        fill_in 'Valor previsto', :with => '300,00'
       end
     end
 
