@@ -83,4 +83,24 @@ feature "Users" do
 
     page.should_not have_content 'Wenderson Malheiros'
   end
+
+  scenario 'create a new user', :driver => :selenium do
+    click_link 'Administração'
+
+    click_link 'Usuários'
+
+    click_link 'Criar Usuário'
+
+    within_modal 'Perfil' do
+      click_button 'Pesquisar'
+
+      click_link 'Novo'
+    end
+
+    within_window(page.driver.browser.window_handles.last) do
+      page.should have_content 'Criar Perfil'
+    end
+    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+  end
+
 end
