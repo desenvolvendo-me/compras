@@ -100,7 +100,6 @@ feature "Users" do
     within_window(page.driver.browser.window_handles.last) do
       page.should have_content 'Criar Perfil'
     end
-    # page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
   end
 
 end
