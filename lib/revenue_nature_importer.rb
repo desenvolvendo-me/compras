@@ -14,7 +14,7 @@ class RevenueNatureImporter < Importer
 
     code = attributes['code'][1]
 
-    attributes.merge('parent_id' => parent.try(:id), 'code' => code)
+    attributes.merge('revenue_category_id' => parent.try(:id), 'code' => code)
   end
 
   def file

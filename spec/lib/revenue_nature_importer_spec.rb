@@ -30,10 +30,10 @@ describe RevenueNatureImporter do
     category_storage.stub(:find_by_code).with('8').and_return(double(:id => 4))
     category_storage.stub(:find_by_code).with('9').and_return(double(:id => 5))
 
-    null_storage.should_receive(:create!).with('code' => '4', 'description' => 'RECEITA AGROPECUÁRIA', 'parent_id' => 1)
-    null_storage.should_receive(:create!).with('code' => '5', 'description' => 'RECEITA INDUSTRIAL', 'parent_id' => 1)
-    null_storage.should_receive(:create!).with('code' => '5', 'description' => 'RECEITA INDUSTRIAL - INTRA-ORÇAMENTÁRIAS', 'parent_id' => 3)
-    null_storage.should_receive(:create!).with('code' => '5', 'description' => 'OUTRAS RECEITAS DE CAPITAL - INTRA-ORÇAMENTÁRIAS', 'parent_id' => 4)
+    null_storage.should_receive(:create!).with('code' => '4', 'description' => 'RECEITA AGROPECUÁRIA', 'revenue_category_id' => 1)
+    null_storage.should_receive(:create!).with('code' => '5', 'description' => 'RECEITA INDUSTRIAL', 'revenue_category_id' => 1)
+    null_storage.should_receive(:create!).with('code' => '5', 'description' => 'RECEITA INDUSTRIAL - INTRA-ORÇAMENTÁRIAS', 'revenue_category_id' => 3)
+    null_storage.should_receive(:create!).with('code' => '5', 'description' => 'OUTRAS RECEITAS DE CAPITAL - INTRA-ORÇAMENTÁRIAS', 'revenue_category_id' => 4)
 
     subject.import!
   end
