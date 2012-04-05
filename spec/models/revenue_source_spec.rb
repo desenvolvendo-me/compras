@@ -12,4 +12,5 @@ describe RevenueSource do
   it { should validate_presence_of :revenue_nature }
 
   it { should belong_to :revenue_nature }
+  it { should have_many(:revenue_rubrics).dependent(:restrict) }
 end

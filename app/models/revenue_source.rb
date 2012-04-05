@@ -3,6 +3,8 @@ class RevenueSource < ActiveRecord::Base
 
   belongs_to :revenue_nature
 
+  has_many :revenue_rubrics, :dependent => :restrict
+
   validates :code, :description, :revenue_nature, :presence => true
   validates :code, :uniqueness => { :scope => [:revenue_nature_id] }
 
