@@ -84,7 +84,7 @@ feature "Users" do
     page.should_not have_content 'Wenderson Malheiros'
   end
 
-  scenario 'create a new user', :driver => :selenium do
+  scenario 'open the window to new perfil through the perfil modal', :driver => :selenium do
     click_link 'Administração'
 
     click_link 'Usuários'
