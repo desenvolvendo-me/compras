@@ -36,7 +36,6 @@ feature "PurchaseSolicitations" do
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       select 'Bens', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
@@ -82,7 +81,6 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :selected => 'Bens'
       page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
-      page.should have_field 'Elemento', :with => '3.1.90.11.01.00.00.00'
 
       # Testing the pending status applied automatically
       page.should have_select 'Status de atendimento', :selected => 'Pendente'
@@ -126,7 +124,6 @@ feature "PurchaseSolicitations" do
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
-      fill_modal 'Elemento', :with => 'Compra de Material', :field => 'Descrição'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
@@ -169,7 +166,6 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
       page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Elemento', :with => '2.2.22.11.01.00.00.00'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
       page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'

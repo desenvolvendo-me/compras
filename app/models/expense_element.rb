@@ -11,7 +11,6 @@ class ExpenseElement < ActiveRecord::Base
   belongs_to :entity
   belongs_to :regulatory_act
 
-  has_many :purchase_solicitations, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :materials, :dependent => :restrict
   has_many :budget_allocations, :dependent => :restrict

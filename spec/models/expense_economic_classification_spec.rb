@@ -14,7 +14,6 @@ describe ExpenseElement do
 
   it { should belong_to :regulatory_act }
   it { should belong_to :entity }
-  it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:materials).dependent(:restrict) }
   it { should have_many(:budget_allocations).dependent(:restrict) }

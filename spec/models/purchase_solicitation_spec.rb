@@ -13,11 +13,10 @@ describe PurchaseSolicitation do
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
-  it {should belong_to :expense_element }
-  it {should belong_to :responsible }
-  it {should belong_to :delivery_location }
-  it {should belong_to :liberator }
-  it {should belong_to :budget_unit }
+  it { should belong_to :responsible }
+  it { should belong_to :delivery_location }
+  it { should belong_to :liberator }
+  it { should belong_to :budget_unit }
 
   it "must delegate the amount to budget_allocation" do
     subject.stub(:budget_allocation).and_return double("Allocation", :amount  => '400,00')

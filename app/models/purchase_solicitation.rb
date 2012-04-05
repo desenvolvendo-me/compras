@@ -2,14 +2,12 @@ class PurchaseSolicitation < ActiveRecord::Base
   attr_accessible :accounting_year, :request_date, :responsible_id, :justification
   attr_accessible :delivery_location_id, :kind, :general_observations
   attr_accessible :purchase_solicitation_budget_allocations_attributes, :budget_unit_id
-  attr_accessible :expense_element_id
 
   attr_modal :accounting_year, :kind, :delivery_location_id, :budget_unit_id
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
 
-  belongs_to :expense_element
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :delivery_location
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
