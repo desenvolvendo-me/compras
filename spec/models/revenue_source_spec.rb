@@ -9,8 +9,8 @@ describe RevenueSource do
 
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
-  it { should validate_presence_of :revenue_nature }
+  it { should validate_presence_of :revenue_subcategory }
 
-  it { should belong_to :revenue_nature }
+  it { should belong_to :revenue_subcategory }
   it { should have_many(:revenue_rubrics).dependent(:restrict) }
 end

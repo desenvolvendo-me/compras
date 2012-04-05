@@ -1,4 +1,4 @@
-class RevenueNature < ActiveRecord::Base
+class RevenueSubcategory < ActiveRecord::Base
   attr_accessible :code, :description, :revenue_category_id
 
   belongs_to :revenue_category

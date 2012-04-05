@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'unit_helper'
 require 'lib/importer'
-require 'lib/revenue_nature_importer'
+require 'lib/revenue_subcategory_importer'
 require 'active_support/core_ext/object/try'
 
-describe RevenueNatureImporter do
+describe RevenueSubcategoryImporter do
   subject do
-    RevenueNatureImporter.new(null_storage, category_storage)
+    RevenueSubcategoryImporter.new(null_storage, category_storage)
   end
 
   let :null_storage do
@@ -23,7 +23,7 @@ describe RevenueNatureImporter do
     double
   end
 
-  it 'imports revenue natures' do
+  it 'imports revenue subcategories' do
     category_storage.stub(:find_by_code).with('1').and_return(double(:id => 1))
     category_storage.stub(:find_by_code).with('2').and_return(double(:id => 2))
     category_storage.stub(:find_by_code).with('7').and_return(double(:id => 3))

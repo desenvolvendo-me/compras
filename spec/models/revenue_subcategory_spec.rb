@@ -1,7 +1,7 @@
 require 'model_helper'
-require 'app/models/revenue_nature'
+require 'app/models/revenue_subcategory'
 
-describe RevenueNature do
+describe RevenueSubcategory do
   it 'should return code as to_s' do
     subject.code = 1
     subject.to_s.should eq '1'

@@ -1,7 +1,7 @@
-class RevenueNatureImporter < Importer
+class RevenueSubcategoryImporter < Importer
   attr_accessor :storage, :revenue_category_storage
 
-  def initialize(storage = RevenueNature, revenue_category_storage = RevenueCategory)
+  def initialize(storage = RevenueSubcategory, revenue_category_storage = RevenueCategory)
     self.storage = storage
     self.revenue_category_storage = revenue_category_storage
   end
@@ -18,6 +18,6 @@ class RevenueNatureImporter < Importer
   end
 
   def file
-    'lib/import/files/revenue_natures.csv'
+    'lib/import/files/revenue_subcategories.csv'
   end
 end

@@ -6,7 +6,7 @@ require 'active_support/core_ext/object/try'
 
 describe RevenueSourceImporter do
   subject do
-    described_class.new(null_storage, nature_storage, category_storage)
+    described_class.new(null_storage, subcategory_storage, category_storage)
   end
 
   let :null_storage do
@@ -23,16 +23,16 @@ describe RevenueSourceImporter do
     double
   end
 
-  let :nature_storage do
+  let :subcategory_storage do
     double
   end
 
-  it 'imports revenue natures' do
+  it 'imports revenue subcategories' do
     category_storage.stub(:find_by_code).and_return(double(:id => 1))
 
-    nature_storage.stub(:find_by_code_and_revenue_category_id).and_return(double(:id => 1))
+    subcategory_storage.stub(:find_by_code_and_revenue_category_id).and_return(double(:id => 1))
 
-    null_storage.should_receive(:create!).with('code' => '1', 'description' => 'IMPOSTOS', 'revenue_nature_id' => 1)
+    null_storage.should_receive(:create!).with('code' => '1', 'description' => 'IMPOSTOS', 'revenue_subcategory_id' => 1)
 
     subject.import!
   end
