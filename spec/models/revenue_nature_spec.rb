@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'model_helper'
+require 'app/models/revenue_nature'
 
 describe RevenueNature do
   it 'should return code as to_s' do
