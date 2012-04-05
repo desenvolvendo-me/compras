@@ -4,6 +4,7 @@ class RevenueRubric < ActiveRecord::Base
   belongs_to :revenue_source
 
   validates :code, :description, :revenue_source, :presence => true
+  validates :code, :uniqueness => { :scope => [:revenue_source_id] }, :allow_blank => true
 
   def to_s
     "#{code}"
