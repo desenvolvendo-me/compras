@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'model_helper'
+require 'app/models/revenue_category'
 
 describe RevenueCategory do
   it 'should return code as to_s' do
