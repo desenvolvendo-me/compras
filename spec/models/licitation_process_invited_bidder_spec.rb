@@ -9,6 +9,7 @@ describe LicitationProcessInvitedBidder do
   it { should belong_to :provider }
 
   it { should have_many(:licitation_process_invited_bidder_documents).dependent(:destroy).order(:id) }
+  it { should have_many(:document_types).through(:licitation_process_invited_bidder_documents) }
 
   it { should validate_presence_of :provider_id }
   it { should validate_presence_of :protocol }
