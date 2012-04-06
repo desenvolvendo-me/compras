@@ -24,7 +24,10 @@
   </div>
 
   <div id="invited-bidders">
-    <%= render 'msg_no_invited_bidders' %>
+    <div id="msg-no-invited-bidders">
+      <%= I18n.translate('other.tributario.messages.msg_no_invited_bidders') %>
+    </div>
+
     <%= render 'invited_bidders', :f => f %>
   </div>
 </div>
