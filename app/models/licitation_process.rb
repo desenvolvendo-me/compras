@@ -9,7 +9,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_readonly :process, :year, :licitation_number
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
-  has_enumeration_for :modality, :with => AbreviatedProcessModality
+  has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
 
   belongs_to :administrative_process
   belongs_to :capability
@@ -78,8 +78,7 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def clear_bidders_depending_on_modality
-    unless [AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES,
-            AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES].include?(modality)
+    unless invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
       licitation_process_invited_bidders.each(&:destroy)
     end
   end
