@@ -42,7 +42,9 @@ class PledgeCancellation < ActiveRecord::Base
   def date_must_be_greater_than_expiration_date
     return if expiration_date.blank? || date.blank?
 
-    errors.add(:date, :must_be_greater_than_pledge_emission_date) if date < expiration_date
+    if date < expiration_date
+      errors.add(:date, :must_be_greater_than_pledge_emission_date)
+    end
   end
 
   def any_pledge_cancellation?
@@ -50,7 +52,9 @@ class PledgeCancellation < ActiveRecord::Base
   end
 
   def force_canceled_value_to_total_kind
-    canceled_value = pledge_expiration.value if pledge_expiration.present? && total?
+    if pledge_expiration.present? && total?
+      canceled_value = pledge_expiration.value
+    end
   end
 
   def value_validation
