@@ -26,7 +26,7 @@
 
   <div id="licitation-process-invited-bidder-documents-<%= f.nested_identifier %>" class="document-fields">
     <%= f.association :licitation_process_invited_bidder_documents, :collection => localized(f.object.licitation_process_invited_bidder_documents) do |p| %>
-      <%= render 'licitation_process_invited_bidder_documents/form', :f => p, :document_id => p.object.document_type_id %>
+      <%= render 'licitation_process_invited_bidder_documents/form', :f => p %>
     <% end %>
   </div>
 
