@@ -2,7 +2,7 @@
 DirectPurchase.blueprint(:compra) do
   ModalityLimit.make!(:modalidade_de_compra)
   year { 2012 }
-  date { "2012-03-02" }
+  date { Date.new(2012, 3, 2) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
   provider { Provider.make!(:wenderson_sa) }
@@ -22,7 +22,7 @@ end
 DirectPurchase.blueprint(:compra_nao_autorizada) do
   ModalityLimit.make!(:modalidade_de_compra)
   year { 2012 }
-  date { "2012-12-01" }
+  date { Date.new(2012, 12, 1) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
   provider { Provider.make!(:wenderson_sa) }
@@ -42,7 +42,7 @@ end
 DirectPurchase.blueprint(:compra_2011) do
   ModalityLimit.make!(:modalidade_de_compra)
   year { 2011 }
-  date { "2011-11-11" }
+  date { Date.new(2011, 11, 11) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::ENGINEERING_WORKS }
   provider { Provider.make!(:wenderson_sa) }

@@ -6,7 +6,7 @@ Company.blueprint(:nohup) do
   responsible { Person.make!(:wenderson) }
   state_registration { "SP" }
   commercial_registration_number { "099901" }
-  commercial_registration_date { "2011-06-29" }
+  commercial_registration_date { Date.new(2011, 6, 29) }
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { false }
   responsible_role { "Administrador" }
@@ -19,7 +19,7 @@ Company.blueprint(:nobe) do
   responsible { Person.make!(:wenderson) }
   state_registration { "SP" }
   commercial_registration_number { "099901" }
-  commercial_registration_date { "2011-06-29" }
+  commercial_registration_date { Date.new(2011, 6, 29) }
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { false }
   responsible_role { "Administrador" }

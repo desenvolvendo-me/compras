@@ -1,8 +1,8 @@
 LicitationCommission.blueprint(:comissao) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   commission_type { CommissionType::TRADING }
-  nomination_date { "20/03/2012" }
-  expiration_date { "22/03/2012" }
-  exoneration_date { "25/03/2012" }
+  nomination_date { Date.new(2012, 3, 20) }
+  expiration_date { Date.new(2012, 3, 22) }
+  exoneration_date { Date.new(2012, 3, 25) }
   description { "descricao da comissao" }
 end

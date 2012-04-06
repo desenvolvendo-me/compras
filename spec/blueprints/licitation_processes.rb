@@ -1,6 +1,6 @@
 LicitationProcess.blueprint(:processo_licitatorio) do
   year { 2012 }
-  process_date { "2012-03-19" }
+  process_date { Date.new(2012, 3, 19) }
   administrative_process { AdministrativeProcess.make!(:compra_de_cadeiras) }
   object_description { "Descricao" }
   capability { Capability.make!(:reforma) }
@@ -14,8 +14,8 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
-  legal_advice_date { "2012-03-19" }
-  contract_date { "2012-03-19" }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
   contract_expiration { 3 }
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }

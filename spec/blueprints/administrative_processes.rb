@@ -2,7 +2,7 @@
 AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   process { 1 }
   year { 2012 }
-  date { '2012-03-07' }
+  date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   value_estimated { "500,50" }
@@ -19,7 +19,7 @@ end
 AdministrativeProcess.blueprint(:compra_de_computadores) do
   process { 2 }
   year { 2013 }
-  date { '2012-03-07' }
+  date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   value_estimated { "500,50" }
@@ -36,7 +36,7 @@ end
 AdministrativeProcess.blueprint(:compra_sem_convite) do
   process { 2 }
   year { 2014 }
-  date { '2012-03-07' }
+  date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   value_estimated { "500,50" }

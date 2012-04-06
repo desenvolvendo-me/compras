@@ -4,8 +4,8 @@ FoundedDebtContract.blueprint(:contrato_detran) do
   entity { Entity.make!(:detran) }
   contract_number { "101" }
   process_number { "10" }
-  signed_date { "23/02/2012" }
-  end_date { "23/02/2013" }
+  signed_date { Date.new(2012, 2, 23) }
+  end_date { Date.new(2013, 2, 23) }
   description { "Contrato" }
 end
 
@@ -14,7 +14,7 @@ FoundedDebtContract.blueprint(:contrato_educacao) do
   entity { Entity.make!(:secretaria_de_educacao) }
   contract_number { "200" }
   process_number { "20" }
-  signed_date { "24/02/2012" }
-  end_date { "24/02/2013" }
+  signed_date { Date.new(2012, 2, 24) }
+  end_date { Date.new(2013, 2, 24) }
   description { "Contrato com a Secretaria de Educação" }
 end

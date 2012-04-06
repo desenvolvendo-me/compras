@@ -3,7 +3,7 @@ ReserveFund.blueprint(:detran_2012) do
   year { 2012 }
   status { ReserveFundStatus::RESERVED }
   reserve_allocation_type { ReserveAllocationType.make!(:licitation) }
-  date { "21/02/2012" }
+  date { Date.new(2012, 2, 21) }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { 10.5 }
   licitation_modality { LicitationModality.make!(:publica) }
@@ -20,7 +20,7 @@ ReserveFund.blueprint(:educacao_2011) do
   year { 2011 }
   status { ReserveFundStatus::RESERVED }
   reserve_allocation_type { ReserveAllocationType.make!(:comum) }
-  date { "21/02/2012" }
+  date { Date.new(2012, 2, 21) }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { 100.5 }
   process_number { "002" }
