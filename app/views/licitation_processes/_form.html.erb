@@ -170,7 +170,7 @@
     var lastBidder = $(this).find('.licitation-process-invited-bidder:last'),
         target = lastBidder.find('.document-fields');
 
-    $.each($('.document-type'), function(index, docRecord) {
+    $('.document-type').each(function(index, docRecord) {
       var docId = $(docRecord).find('.document-id').val(),
           docDescription = $(docRecord).find('.document-desc').val(),
           mustache = lastBidder.find('[type="text/x-mustache"]').mustache({docId : docId,
@@ -186,7 +186,7 @@
         docId = docRecord.find('.document-id').val(),
         docDescription = docRecord.find('.document-desc').val();
 
-    $.each($('.licitation-process-invited-bidder'), function() {
+    $('.licitation-process-invited-bidder').each(function() {
       var mustache = $(this).find('[type="text/x-mustache"]').mustache({docId : docId,
                                                                         docDescription : docDescription,
                                                                         uuid_licitation_process_invited_bidder_document : 'fresh-' + docId});
@@ -205,11 +205,11 @@
   function checkBidderDocumentsForExclusion() {
     var docIds = [];
 
-    $.each($('.document-type'), function(index, docRecord) {
+    $('.document-type').each(function(index, docRecord) {
       docIds.push($(docRecord).find('.document-id').val());
     });
 
-    $.each($('input.bidder-document-type-id'), function(index, docRecord) {
+    $('input.bidder-document-type-id').each(function(index, docRecord) {
       if ( $.inArray($(this).val(), docIds) == -1 ) {
         $(this).closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
       };
