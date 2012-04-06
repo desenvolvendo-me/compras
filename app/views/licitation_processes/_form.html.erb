@@ -173,9 +173,9 @@
     $.each($('.document-type'), function(index, docRecord) {
       var docId = $(docRecord).find('.document-id').val(),
           docDescription = $(docRecord).find('.document-desc').val(),
-          mustache = lastBidder.find('[type="text/x-mustache"]').mustache({docId:docId,
-                                                                           docDescription:docDescription,
-                                                                           uuid_licitation_process_invited_bidder_document:'fresh-' + index});
+          mustache = lastBidder.find('[type="text/x-mustache"]').mustache({docId : docId,
+                                                                           docDescription : docDescription,
+                                                                           uuid_licitation_process_invited_bidder_document : 'fresh-' + index});
 
       target.append(mustache);
     });
@@ -187,9 +187,9 @@
         docDescription = docRecord.find('.document-desc').val();
 
     $.each($('.licitation-process-invited-bidder'), function() {
-      var mustache = $(this).find('[type="text/x-mustache"]').mustache({docId:docId,
-                                                                        docDescription:docDescription,
-                                                                        uuid_licitation_process_invited_bidder_document:'fresh-' + docId});
+      var mustache = $(this).find('[type="text/x-mustache"]').mustache({docId : docId,
+                                                                        docDescription : docDescription,
+                                                                        uuid_licitation_process_invited_bidder_document : 'fresh-' + docId});
 
       $(this).find('.document-fields').append(mustache);
     });
