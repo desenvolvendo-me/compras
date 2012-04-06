@@ -26,6 +26,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_invited_bidders).dependent(:destroy).order(:id) }
+  it { should have_many(:licitation_process_invited_bidder_documents).through(:licitation_process_invited_bidders) }
 
   it { should validate_presence_of  :year }
   it { should validate_presence_of :process_date }
