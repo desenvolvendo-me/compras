@@ -542,7 +542,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'testing that it cleans the invited bidder when modality is not invitation...' do
+  scenario 'testing that it cleans the invited bidder when modality is not invitation for construction or purchase' do
     LicitationProcess.make!(:processo_licitatorio)
     AdministrativeProcess.make!(:compra_sem_convite)
 
@@ -562,6 +562,11 @@ feature "LicitationProcesses" do
       fill_modal 'Processo administrativo', :with => '2014', :field => 'Ano'
     end
 
+    within_tab 'Licitantes convidados' do
+      page.should have_content 'Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes.'
+      page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
+    end
+
     click_button 'Atualizar Processo Licitatório'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
@@ -574,6 +579,16 @@ feature "LicitationProcesses" do
       page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
 
       page.should have_content 'Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes.'
+    end
+
+    # re-selecting the previous administrative process to see that has no invited bidder anymore
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Processo administrativo', :with => '2012', :field => 'Ano'
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
     end
   end
 
