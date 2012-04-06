@@ -34,12 +34,12 @@
     $('#extra-credit-moviment-types').find('fieldset').each(function(){
       var value = parsePtBrFloat($(this).find('.value').val());
 
-      if($(this).find('.destroy').val() == 'false' && !isNaN(value)) {
+      if ($(this).find('.destroy').val() == 'false' && !isNaN(value)) {
         var operation = $(this).find('.operation').val();
 
-        if(operation == '<%= MovimentTypeOperation::SUM %>') {
+        if (operation == '<%= MovimentTypeOperation::SUM %>') {
           supplement_total += value;
-        } else if(operation == '<%= MovimentTypeOperation::SUBTRATION %>') {
+        } else if (operation == '<%= MovimentTypeOperation::SUBTRATION %>') {
           reduced_total += value;
         }
       }
@@ -66,7 +66,7 @@
   });
 
   $('form.extra_credit').delegate('.budget-allocation', 'change', function (event, data) {
-    if(data) {
+    if (data) {
       var record = data.record;
 
       $(this).closest('fieldset').find('.budget-allocation').attr('data-info-url', "/budget_allocations/"+record.data('id'));
@@ -74,7 +74,7 @@
   });
 
   $('form.extra_credit').delegate('.capability', 'change', function (event, data) {
-    if(data) {
+    if (data) {
       var record = data.record;
 
       $(this).closest('fieldset').find('.capability').attr('data-info-url', "/capabilities/"+record.data('value'));
@@ -86,12 +86,12 @@
       var record = data.record;
       $(this).closest('fieldset').find('.operation').val(record.data('operation'));
 
-      if(record.data('character') == '<%= MovimentTypeCharacter::BUDGET_ALLOCATION %>') {
+      if (record.data('character') == '<%= MovimentTypeCharacter::BUDGET_ALLOCATION %>') {
         $(this).closest('fieldset').find('.budget-allocation').attr('disabled', false);
         $(this).closest('fieldset').find('.capability').attr('disabled', true);
         $(this).closest('fieldset').find('[id$=capability]').val('');
         $(this).closest('fieldset').find('[id$=capability_id]').val('');
-      } else if(record.data('character') == '<%= MovimentTypeCharacter::CAPABILITY %>') {
+      } else if (record.data('character') == '<%= MovimentTypeCharacter::CAPABILITY %>') {
         $(this).closest('fieldset').find('.capability').attr('disabled', false);
         $(this).closest('fieldset').find('.budget-allocation').attr('disabled', true);
         $(this).closest('fieldset').find('[id$=budget_allocation]').val('');
