@@ -9,6 +9,6 @@ class RevenueSource < ActiveRecord::Base
   validates :code, :uniqueness => { :scope => :revenue_subcategory_id }, :allow_blank => true
 
   def to_s
-    "#{code}"
+    code.to_s
   end
 end
