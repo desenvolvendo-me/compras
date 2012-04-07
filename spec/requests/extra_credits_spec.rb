@@ -157,7 +157,7 @@ feature "ExtraCredits" do
     end
   end
 
-  scenario 'when operation is subtration and budget_allocation used item value should not be greather than budget allocation real_amount' do
+  scenario 'when operation is subtraction and budget_allocation used item value should not be greather than budget allocation real_amount' do
     MovimentType.make!(:subtrair_dotacao)
     MovimentType.make!(:adicionar_em_outros_casos)
     BudgetAllocation.make!(:alocacao)

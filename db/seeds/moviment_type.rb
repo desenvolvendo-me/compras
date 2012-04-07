@@ -8,17 +8,17 @@ ActiveRecord::Base.transaction do
     }, 
     {
       :name => 'Subtrair dotação',
-      :operation => MovimentTypeOperation::SUBTRATION,
+      :operation => MovimentTypeOperation::SUBTRACTION,
       :character => MovimentTypeCharacter::BUDGET_ALLOCATION
     },
     {
       :name => 'Subtrair do excesso arrecadado',
-      :operation => MovimentTypeOperation::SUBTRATION,
+      :operation => MovimentTypeOperation::SUBTRACTION,
       :character => MovimentTypeCharacter::CAPABILITY
     },
     {
       :name => 'Subtrair de outros casos',
-      :operation => MovimentTypeOperation::SUBTRATION,
+      :operation => MovimentTypeOperation::SUBTRACTION,
       :character => MovimentTypeCharacter::CAPABILITY
     },
     {
@@ -28,17 +28,17 @@ ActiveRecord::Base.transaction do
     },
     {
       :name => 'Subtrair superávit financeiro',
-      :operation => MovimentTypeOperation::SUBTRATION,
+      :operation => MovimentTypeOperation::SUBTRACTION,
       :character => MovimentTypeCharacter::CAPABILITY
     },
     {
       :name => 'Subtrair operações de crédito',
-      :operation => MovimentTypeOperation::SUBTRATION,
+      :operation => MovimentTypeOperation::SUBTRACTION,
       :character => MovimentTypeCharacter::CAPABILITY
     },
     {
       :name => 'Subtrair convênio',
-      :operation => MovimentTypeOperation::SUBTRATION,
+      :operation => MovimentTypeOperation::SUBTRACTION,
       :character => MovimentTypeCharacter::CAPABILITY
     },
   ].each do |object|

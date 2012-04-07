@@ -7,13 +7,13 @@ end
 
 MovimentType.blueprint(:subtrair_dotacao) do
   name { 'Subtrair dotação' }
-  operation { MovimentTypeOperation::SUBTRATION }
+  operation { MovimentTypeOperation::SUBTRACTION }
   character { MovimentTypeCharacter::BUDGET_ALLOCATION }
 end
 
 MovimentType.blueprint(:subtrair_do_excesso_arrecadado) do
   name { 'Subtrair do excesso arrecadado' }
-  operation { MovimentTypeOperation::SUBTRATION }
+  operation { MovimentTypeOperation::SUBTRACTION }
   character { MovimentTypeCharacter::CAPABILITY }
 end
 
