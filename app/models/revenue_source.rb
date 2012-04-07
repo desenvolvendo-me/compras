@@ -6,7 +6,7 @@ class RevenueSource < ActiveRecord::Base
   has_many :revenue_rubrics, :dependent => :restrict
 
   validates :code, :description, :revenue_subcategory, :presence => true
-  validates :code, :uniqueness => { :scope => [:revenue_subcategory_id] }
+  validates :code, :uniqueness => { :scope => :revenue_subcategory_id }, :allow_blank => true
 
   def to_s
     "#{code}"
