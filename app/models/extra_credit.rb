@@ -59,10 +59,10 @@ class ExtraCredit < ActiveRecord::Base
 
   def validate_item_value_when_budget_allocation(numeric_parser = ::I18n::Alchemy::NumericParser)
     extra_credit_moviment_types.each do |item|
-      if item.budget_allocation? && item.subtration? && item.value > item.budget_allocation_real_amount
-        item.errors.add(:value, I18n.t('errors.messages.must_not_be_greater_than_budget_allocation_real_amount', :value => numeric_parser.localize(item.budget_allocation_real_amount)))
-        errors.add(:extra_credit_moviment_types, :invalid)
-      end
+      next unless item.budget_allocation? && item.subtration? && item.value && item.value > item.budget_allocation_real_amount
+
+      item.errors.add(:value, :must_not_be_greater_than_budget_allocation_real_amount, :value => numeric_parser.localize(item.budget_allocation_real_amount))
+      errors.add(:extra_credit_moviment_types, :invalid)
     end
   end
 
