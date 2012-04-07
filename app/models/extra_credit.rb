@@ -31,7 +31,7 @@ class ExtraCredit < ActiveRecord::Base
   validate :uniqueness_of_budget_allocation
   validate :uniqueness_of_capability
   validate :validate_difference
-  validate :validate_item_value_when_budget_allocation
+  validate :subtration_item_value_cant_be_greater_than_budget_allocation
   validate :must_not_be_less_than_last_extra_credit_date
 
   before_validation :save_total
@@ -57,7 +57,7 @@ class ExtraCredit < ActiveRecord::Base
     errors.add(:difference, :difference_must_be_equals_to_zero) unless (self.supplement - self.reduced).zero?
   end
 
-  def validate_item_value_when_budget_allocation(numeric_parser = ::I18n::Alchemy::NumericParser)
+  def subtration_item_value_cant_be_greater_than_budget_allocation(numeric_parser = ::I18n::Alchemy::NumericParser)
     extra_credit_moviment_types.each do |item|
       next unless item.budget_allocation? && item.subtration? && item.value && item.value > item.budget_allocation_real_amount
 
