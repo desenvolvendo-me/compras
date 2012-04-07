@@ -343,11 +343,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :individuals, :only => [] do
-    collection do
-      get :modal
-    end
-  end
+  get "individuals/modal", :as => :modal_individuals
 
   resources :judgment_forms do
     collection do
@@ -453,11 +449,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :moviment_types, :only => [] do
-    collection do
-      get :modal
-    end
-  end
+  get "moviment_types/modal", :as => :modal_moviment_types
 
   resources :neighborhoods do
     collection do
