@@ -50,7 +50,9 @@ class ExtraCredit < ActiveRecord::Base
 
     last = self.class.where { |extra_credit| extra_credit.id.not_eq(id) }.last
 
-    errors.add(:credit_date, :must_not_be_less_than_last_credit_date, :restriction => I18n.l(last.credit_date)) if last && credit_date < last.credit_date
+    if last && credit_date < last.credit_date
+      errors.add(:credit_date, :must_not_be_less_than_last_credit_date, :restriction => I18n.l(last.credit_date))
+    end
   end
 
   def validate_difference
