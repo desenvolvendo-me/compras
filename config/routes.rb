@@ -506,12 +506,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :pledge_expirations do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "pledge_expirations/modal", :as => :modal_pledge_expirations
 
   resources :pledges, :except => [:destroy, :update] do
     collection do
