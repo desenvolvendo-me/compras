@@ -7,6 +7,6 @@ class RevenueRubric < ActiveRecord::Base
   validates :code, :uniqueness => { :scope => [:revenue_source_id] }, :allow_blank => true
 
   def to_s
-    "#{code}"
+    code.to_s
   end
 end
