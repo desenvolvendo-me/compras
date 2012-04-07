@@ -24,7 +24,7 @@
   </div>
 
   <div id="invited-bidders">
-    <div id="msg-no-invited-bidders">
+    <div id="message-invited-bidders-not-needed">
       <%= I18n.translate('other.tributario.messages.msg_no_invited_bidders') %>
     </div>
 
@@ -47,10 +47,10 @@
     if (modality == '<%= AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES %>' ||
         modality == '<%= AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES %>') {
       $('#invited-bidders-content').show();
-      $('#msg-no-invited-bidders').hide();
+      $('#message-invited-bidders-not-needed').hide();
     } else {
       $('#invited-bidders-content').hide();
-      $('#msg-no-invited-bidders').show();
+      $('#message-invited-bidders-not-needed').show();
     }
   }
 
