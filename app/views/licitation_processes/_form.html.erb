@@ -203,13 +203,11 @@
   });
 
   function checkBidderDocumentsForExclusion() {
-    var docIds = [];
-
-    $('.document-type').each(function(index, docRecord) {
-      docIds.push($(docRecord).find('.document-id').val());
+    var docIds = $(".document-type").map(function () {
+      return $(this).find('.document-id').val();
     });
 
-    $('input.bidder-document-type-id').each(function(index, docRecord) {
+    $('input.bidder-document-type-id').each(function() {
       if ( $.inArray($(this).val(), docIds) == -1 ) {
         $(this).closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
       };
