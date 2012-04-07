@@ -352,10 +352,8 @@ feature "LicitationProcesses" do
 
     within_tab 'Documentos' do
       page.should_not have_content 'Fiscal'
-      page.should_not have_content '10'
 
       page.should have_content 'Oficial'
-      page.should have_content '20'
     end
 
     within_tab 'Dotações' do
