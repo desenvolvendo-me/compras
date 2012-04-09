@@ -2,7 +2,7 @@ class RevenueRubricImporter < Importer
   attr_accessor :storage, :revenue_source_storage, :revenue_subcategory_storage
   attr_accessor :revenue_category_storage
 
-  def initialize(storage = RevenueRubric, revenue_source_storage = RevenueSource, revenue_subcategory_storage = RevenueSubcategory, revenue_category_storage = RevenueCategory)
+  def initialize(storage = RevenueRubric, revenue_source_storage = RevenueSource)
     self.storage = storage
     self.revenue_source_storage = revenue_source_storage
     self.revenue_subcategory_storage = revenue_subcategory_storage
@@ -15,13 +15,12 @@ class RevenueRubricImporter < Importer
     category_code    = attributes['code'][0]
     subcategory_code = attributes['code'][1]
     source_code      = attributes['code'][2]
-    code             = attributes['code'][3]
+    rubric_code      = attributes['code'][3]
 
-    category = revenue_category_storage.find_by_code(category_code)
-    subcategory = revenue_subcategory_storage.find_by_code_and_revenue_category_id(subcategory_code, category.try(:id))
-    source = revenue_source_storage.find_by_code_and_revenue_subcategory_id(source_code, subcategory.try(:id))
+    source = revenue_source_storage.joins { revenue_subcategory.revenue_category }.
+      where { revenue_subcategory.revenue_category.code.eq(category_code) & revenue_subcategory.code.eq(subcategory_code) & code.eq(source_code) }.first
 
-    attributes.merge('revenue_source_id' => source.try(:id), 'code' => code)
+    attributes.merge('revenue_source_id' => source.try(:id), 'code' => rubric_code)
   end
 
   def file
