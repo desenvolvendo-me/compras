@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/revenue_source'
+require 'app/models/revenue_rubric'
 
 describe RevenueSource do
   it 'should return code as to_s' do
