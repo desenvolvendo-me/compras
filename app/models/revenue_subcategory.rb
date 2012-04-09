@@ -8,6 +8,9 @@ class RevenueSubcategory < ActiveRecord::Base
   validates :code, :description, :revenue_category, :presence => true
   validates :code, :uniqueness => { :scope => :revenue_category_id }, :allow_blank => true
 
+  orderize :id
+  filterize
+
   def to_s
     code.to_s
   end

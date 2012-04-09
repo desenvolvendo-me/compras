@@ -20,6 +20,7 @@ describe RegulatoryAct do
   it { should have_many(:budget_unit_configurations).dependent(:restrict) }
   it { should have_many(:organogram_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_modalities).dependent(:restrict) }
+  it { should have_many(:revenue_natures).dependent(:restrict) }
 
   it { should have_and_belong_to_many :dissemination_sources}
   it { should validate_presence_of :act_number }

@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      revenue_nature:
+        one: "Natureza de Receita"
+        other: "Naturezas de Receitas"
+
+    attributes:
+      revenue_nature:
+        entity: "Entidade"
+        year: "Exercício"
+        regulatory_act: "Ato regulamentador"
+        regulatory_act_type: "Tipo"
+        publication_date: "Data de publicação"
+        classification: "Classificação"
+        revenue_rubric: "Rúbrica da receita"
+        specification: "Especificação"
+        kind: "Tipo"
+        docket: "Súmula"

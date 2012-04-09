@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      revenue_subcategory:
+        one: "Subcategoria da Receita"
+        other: "Subcategorias das Receitas"
+
+    attributes:
+      revenue_subcategory:
+        code: "Código"
+        description: "Descrição"
+        revenue_category: "Categoria de receita"

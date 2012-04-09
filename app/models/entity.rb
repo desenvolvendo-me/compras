@@ -16,6 +16,7 @@ class Entity < ActiveRecord::Base
   has_many :creditors, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
   has_many :extra_credits, :dependent => :restrict
+  has_many :revenue_natures, :dependent => :restrict
 
   validates :name, :presence => true
   validates :name, :uniqueness => true

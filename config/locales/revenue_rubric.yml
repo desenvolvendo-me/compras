@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      revenue_rubric:
+        one: "Rúbrica da Receita"
+        other: "Rúbricas das Receitas"
+
+    attributes:
+      revenue_rubric:
+        code: "Código"
+        description: "Descrição"
+        revenue_source: "Fonte de receita"

@@ -6,6 +6,9 @@ class RevenueCategory < ActiveRecord::Base
   validates :code, :description, :presence => true
   validates :code, :uniqueness => true
 
+  orderize :id
+  filterize
+
   def to_s
     "#{code}"
   end

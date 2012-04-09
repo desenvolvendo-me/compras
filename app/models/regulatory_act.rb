@@ -15,6 +15,7 @@ class RegulatoryAct < ActiveRecord::Base
   has_many :organogram_responsibles, :dependent => :restrict
   has_many :licitation_modalities, :dependent => :restrict
   has_many :licitation_commissions, :dependent => :restrict
+  has_many :revenue_natures, :dependent => :restrict
 
   has_one :extra_credit
 

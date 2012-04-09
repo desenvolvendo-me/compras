@@ -581,6 +581,18 @@ Tributario::Application.routes.draw do
     end
   end
 
+  get 'revenue_rubrics/modal', :as => :modal_revenue_rubrics
+  get 'revenue_sources/modal', :as => :modal_revenue_sources
+  get 'revenue_subcategories/modal', :as => :modal_revenue_subcategories
+  get 'revenue_categories/modal', :as => :modal_revenue_categories
+
+  resources :revenue_natures do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :risk_degrees do
     collection do
       get :modal

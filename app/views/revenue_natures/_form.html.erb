@@ -1,0 +1,42 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :entity %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :year %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :regulatory_act %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :regulatory_act_type, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :publication_date, :disabled => true, :input_html => { :value => f.object.presenter.publication_date } %>
+  </div>
+</div>
+
+<%= f.input :classification %>
+<%= f.input :revenue_rubric %>
+<%= f.input :specification %>
+<%= f.input :kind %>
+<%= f.input :docket %>
+
+<script>
+  $('#revenue_nature_regulatory_act_id').on('change', function (event, data) {
+    if (data) {
+      var record = data.record;
+      $('#revenue_nature_regulatory_act_type').val(record.data('administractive-act-type'));
+      $('#revenue_nature_publication_date').val(record.data('publication-date'));
+    } else {
+      $('#revenue_nature_regulatory_act_type').val('');
+      $('#revenue_nature_publication_date').val('');
+    }
+  });
+</script>
