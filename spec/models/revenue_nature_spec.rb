@@ -21,4 +21,8 @@ describe RevenueNature do
 
   it { should allow_value('12344569').for(:classification) }
   it { should_not allow_value('1234').for(:classification) }
+
+  it { should belong_to :entity }
+  it { should belong_to :regulatory_act }
+  it { should belong_to :revenue_rubric }
 end
