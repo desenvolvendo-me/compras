@@ -9,6 +9,7 @@ require 'app/models/licitation_process_budget_allocation'
 require 'app/models/licitation_process_budget_allocation_item'
 require 'app/models/licitation_process_publication'
 require 'app/models/licitation_process_invited_bidder'
+require 'app/models/licitation_process_impugnment'
 require 'app/models/budget_allocation'
 
 describe LicitationProcess do
@@ -27,6 +28,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_invited_bidders).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_invited_bidder_documents).through(:licitation_process_invited_bidders) }
+  it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
 
   it { should validate_presence_of  :year }
   it { should validate_presence_of :process_date }

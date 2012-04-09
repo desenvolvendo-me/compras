@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    situation:
+      deferred: "Deferido"
+      refused: "Indeferido"
+      pending: "Pendente"

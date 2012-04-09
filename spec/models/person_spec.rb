@@ -4,6 +4,7 @@ require 'app/models/person'
 require 'app/models/employee'
 require 'app/models/provider'
 require 'app/models/economic_registration'
+require 'app/models/licitation_process_impugnment'
 
 describe Person do
   it "return name when call to_s" do
@@ -24,6 +25,7 @@ describe Person do
 
   it { should have_many(:providers).dependent(:restrict) }
   it { should have_many(:economic_registrations).dependent(:restrict) }
+  it { should have_many(:licitation_process_impugnments).dependent(:restrict) }
 
   context "validations" do
     it "should validates phone" do

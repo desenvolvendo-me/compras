@@ -1,0 +1,5 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-object-description="<%= record.object_description %>" data-envelope-delivery-date="<%= record.envelope_delivery_date %>" data-envelope-delivery-time="<%= record.presenter.envelope_delivery_time %>"  data-envelope-opening-date="<%= record.envelope_opening_date %>" data-envelope-opening-time="<%= record.presenter.envelope_opening_time %>">
+  <% attributes.each do |attribute| %>
+    <td><%= record.send attribute %></td>
+  <% end %>
+</tr>

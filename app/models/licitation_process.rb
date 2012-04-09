@@ -8,6 +8,8 @@ class LicitationProcess < ActiveRecord::Base
 
   attr_readonly :process, :year, :licitation_number
 
+  attr_modal :process, :year, :process_date, :licitation_number, :administrative_process
+
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
 
@@ -22,6 +24,7 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidder_documents, :through => :licitation_process_invited_bidders
+  has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
 
   accepts_nested_attributes_for :licitation_process_budget_allocations, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_publications, :allow_destroy => true
