@@ -12,7 +12,7 @@ class Capability < ActiveRecord::Base
   has_many :extra_credit_moviment_types, :dependent => :restrict
 
   validates :year, :mask => '9999'
-  validates :status, :presence => true
+  validates :entity_id, :year, :description, :goal, :kind, :status, :presence => true
 
   orderize :description
   filterize
