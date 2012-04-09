@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/person'
+require 'app/models/employee'
 require 'app/models/provider'
 require 'app/models/economic_registration'
 
