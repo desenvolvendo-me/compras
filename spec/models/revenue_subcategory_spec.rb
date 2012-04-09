@@ -11,5 +11,6 @@ describe RevenueSubcategory do
   it { should validate_presence_of :description }
   it { should validate_presence_of :revenue_category }
 
+  it { should belong_to :revenue_category }
   it { should have_many(:revenue_sources).dependent(:restrict) }
 end
