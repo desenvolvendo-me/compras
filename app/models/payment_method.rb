@@ -5,7 +5,7 @@ class PaymentMethod < ActiveRecord::Base
   has_many :licitation_processes, :dependent => :restrict
 
   validates :description, :presence => true
-  validates :description, :uniqueness => true
+  validates :description, :uniqueness => { :allow_blank => true }
 
   orderize :description
   filterize

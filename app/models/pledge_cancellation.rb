@@ -18,8 +18,10 @@ class PledgeCancellation < ActiveRecord::Base
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greather_or_equal_to_last_pledge_cancellation_date,
     :type => :date,
-    :on => :create
-  }, :allow_blank => true, :if => :any_pledge_cancellation?
+    :on => :create,
+    :allow_blank => true,
+    :if => :any_pledge_cancellation?
+  }
   validate :value_validation
   validate :date_must_be_greater_than_expiration_date
 

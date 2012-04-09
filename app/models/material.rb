@@ -27,7 +27,7 @@ class Material < ActiveRecord::Base
 
   validates :materials_group, :materials_class, :reference_unit, :presence => true
   validates :material_characteristic, :presence => true
-  validates :code, :description, :presence => true, :uniqueness => true
+  validates :code, :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :material_type, :presence => true, :if => :material?
   validates :service_or_contract_type, :presence => true, :if => :service?
 

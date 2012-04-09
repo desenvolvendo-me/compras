@@ -11,7 +11,7 @@ class Agency < ActiveRecord::Base
 
   validates :name, :number, :digit, :city, :bank, :presence => true
   validates :email, :mail => true, :allow_blank => true
-  validates :phone, :fax, :mask => "(99) 9999-9999", :allow_blank => true, :allow_nil => true
+  validates :phone, :fax, :mask => "(99) 9999-9999", :allow_blank => true
 
   orderize
   filterize

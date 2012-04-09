@@ -25,15 +25,18 @@ class ReserveFund < ActiveRecord::Base
   delegate :licitation?, :to => :reserve_allocation_type, :allow_nil => true
 
   validates :entity, :budget_allocation, :value, :year, :reserve_allocation_type, :date, :presence => true
-  validates :year, :presence => true, :mask => '9999'
-  validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
-  validates :date, :timeliness => {
-    :on_or_after => lambda { last.date },
-    :on_or_after_message => :must_be_greather_or_equal_to_last_date,
-    :type => :date
-  }, :allow_blank => true, :if => :any_reserve_fund?
-
   validate :value_should_not_exceed_available_reserve
+
+  with_options :allow_blank => true do |allowed_blank|
+    allowed_blank.validates :year, :mask => '9999'
+    allowed_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
+    allowed_blank.validates :date, :timeliness => {
+      :on_or_after => lambda { last.date },
+      :on_or_after_message => :must_be_greather_or_equal_to_last_date,
+      :type => :date,
+      :if => :any_reserve_fund?
+    }
+  end
 
   before_save :parse_licitation, :parse_process, :clear_licitation_dependent_field_if_is_not_licitation
 

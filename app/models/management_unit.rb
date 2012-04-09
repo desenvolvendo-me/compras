@@ -8,7 +8,7 @@ class ManagementUnit < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
 
   validates :entity, :year, :description, :acronym, :status, :presence => true
-  validates :year, :mask => "9999"
+  validates :year, :mask => "9999", :allow_blank => true
 
   orderize :description
   filterize

@@ -9,9 +9,9 @@ class MaterialsClass < ActiveRecord::Base
 
   has_many :materials, :dependent => :restrict
 
-  validates :materials_group, :presence => true
-  validates :description, :presence => true, :uniqueness => { :scope => :materials_group_id }
-  validates :class_number, :presence => true, :uniqueness => { :scope => :materials_group_id }, :numericality => true, :mask => "99"
+  validates :materials_group, :description, :class_number, :presence => true
+  validates :class_number, :description, :uniqueness => { :scope => :materials_group_id, :allow_blank => true }
+  validates :class_number, :numericality => true, :mask => "99", :allow_blank => true
 
   orderize :description
   filterize

@@ -9,8 +9,8 @@ class Neighborhood < ActiveRecord::Base
 
   delegate :state, :to => :city, :allow_nil => true
 
-  validates :name, :presence => true, :uniqueness => { :scope => [:city_id] }
-  validates :city, :presence => true
+  validates :name, :uniqueness => { :scope => :city_id, :allow_blank => true }
+  validates :city, :name, :presence => true
 
   orderize
   filterize

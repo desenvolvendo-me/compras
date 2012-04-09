@@ -6,7 +6,7 @@ class ServiceOrContractType < ActiveRecord::Base
   has_many :materials, :dependent => :restrict
 
   validates :description, :tce_code, :service_goal, :presence => true
-  validates :description, :uniqueness => true
+  validates :description, :uniqueness => { :allow_blank => true }
 
   filterize
   orderize :description

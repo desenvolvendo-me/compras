@@ -19,7 +19,7 @@ class Entity < ActiveRecord::Base
   has_many :revenue_natures, :dependent => :restrict
 
   validates :name, :presence => true
-  validates :name, :uniqueness => true
+  validates :name, :uniqueness => { :allow_blank => true }
 
   orderize
   filterize

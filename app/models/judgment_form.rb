@@ -7,7 +7,7 @@ class JudgmentForm < ActiveRecord::Base
   has_many :administrative_processes, :dependent => :restrict
 
   validates :description, :kind, :licitation_kind, :presence => true
-  validates :description, :uniqueness => true
+  validates :description, :uniqueness => { :allow_blank => true }
 
   orderize :description
   filterize

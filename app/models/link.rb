@@ -3,7 +3,7 @@ class Link < ActiveRecord::Base
 
   has_and_belongs_to_many :bookmarks
 
-  validates :controller_name, :presence => true, :uniqueness => true
+  validates :controller_name, :presence => true, :uniqueness => { :allow_blank => true }
 
   def self.ordered
     all.sort_by(&:to_s)

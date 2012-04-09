@@ -11,7 +11,7 @@ class Capability < ActiveRecord::Base
   has_many :licitation_processes, :dependent => :restrict
   has_many :extra_credit_moviment_types, :dependent => :restrict
 
-  validates :year, :mask => '9999'
+  validates :year, :mask => '9999', :allow_blank => true
   validates :entity_id, :year, :description, :goal, :kind, :status, :presence => true
 
   orderize :description

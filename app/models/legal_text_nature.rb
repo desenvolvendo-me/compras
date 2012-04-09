@@ -5,7 +5,7 @@ class LegalTextNature < ActiveRecord::Base
 
   has_many :regulatory_acts, :dependent => :restrict
 
-  validates :description, :presence => true, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => { :allow_blank => true }
 
   orderize :description
   filterize

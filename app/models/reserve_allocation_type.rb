@@ -8,7 +8,7 @@ class ReserveAllocationType < ActiveRecord::Base
   has_many :reserve_funds, :dependent => :restrict
 
   validates :description, :status, :presence => true
-  validates :description, :uniqueness => true
+  validates :description, :uniqueness => { :allow_blank => true }
 
   orderize :description
   filterize

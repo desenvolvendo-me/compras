@@ -7,8 +7,8 @@ class GovernmentAction < ActiveRecord::Base
 
   has_many :budget_allocations, :dependent => :restrict
 
-  validates :description, :status, :entity, :presence => true
-  validates :year, :presence => true, :numericality => true, :mask => '9999'
+  validates :description, :status, :entity, :year, :presence => true
+  validates :year, :numericality => true, :mask => '9999', :allow_blank => true
 
   orderize :description
   filterize

@@ -6,10 +6,13 @@ class Subfunction < ActiveRecord::Base
 
   has_many :budget_allocations, :dependent => :restrict
 
-  validates :code, :presence => true, :uniqueness => true, :numericality => true
-  validates :description, :entity, :year, :function, :presence => true
-  validates :description, :uniqueness => true
-  validates :year, :mask => '9999'
+  validates :description, :entity, :year, :function, :code, :presence => true
+
+  with_options :allow_blank => true do |allowed_blank|
+    allowed_blank.validates :code, :numericality => true
+    allowed_blank.validates :code, :description, :uniqueness => true
+    allowed_blank.validates :year, :mask => '9999'
+  end
 
   orderize :code
   filterize

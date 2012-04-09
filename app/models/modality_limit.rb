@@ -11,7 +11,7 @@ class ModalityLimit < ActiveRecord::Base
   validates :work_invitation_letter, :work_taken_price, :presence => true
   validates :work_public_competition, :presence => true
   validates_date :validity_beginning
-  validates :ordinance_number, :uniqueness => true
+  validates :ordinance_number, :uniqueness => { :allow_blank => true }
   validates :ordinance_number, :numericality => true, :allow_blank => true
   validate :check_validity_beginning_month
 

@@ -8,8 +8,8 @@ class MaterialsGroup < ActiveRecord::Base
   has_many :materials_classes, :dependent => :restrict
   has_many :materials, :through => :materials_classes
 
-  validates :description, :group_number, :presence => true, :uniqueness => true
-  validates :group_number, :numericality => true, :mask => '99'
+  validates :description, :group_number, :presence => true, :uniqueness => { :allow_blank => true }
+  validates :group_number, :numericality => true, :mask => '99', :allow_blank => true
 
   orderize :description
   filterize

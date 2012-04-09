@@ -9,5 +9,5 @@ class OrganogramResponsible < ActiveRecord::Base
   belongs_to :regulatory_act
 
   validates :responsible, :regulatory_act, :start_date, :end_date, :status, :presence => true
-  validates :end_date, :timeliness => { :after => :start_date, :type => :date }
+  validates :end_date, :timeliness => { :after => :start_date, :type => :date, :allow_blank => true }
 end

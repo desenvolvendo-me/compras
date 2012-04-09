@@ -38,19 +38,21 @@ class Pledge < ActiveRecord::Base
            :budget_unit, :expense_element,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
 
-  validates :year, :mask => '9999'
-  validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
   validates :licitation, :process, :entity, :year, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :creditor, :presence => true
   validates :budget_allocation, :presence => true
-  validates :licitation, :process, :format => /^(\d+)\/\d{4}$/, :allow_blank => true
-
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
   validate :expirations_should_have_date_greater_than_emission_date
   validate :expirations_should_have_date_greater_than_last_expiration_date
   validate :pledge_expirations_value_should_be_equals_value
+
+  with_options :allow_blank => true do |allowed_blank|
+    allowed_blank.validates :year, :mask => '9999'
+    allowed_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
+    allowed_blank.validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+  end
 
   before_save :parse_licitation, :parse_process
 

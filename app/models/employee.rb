@@ -13,7 +13,7 @@ class Employee < ActiveRecord::Base
 
   delegate :to_s, :name, :to => :person
 
-  validates :person_id, :registration, :uniqueness => true
+  validates :person_id, :registration, :uniqueness => { :allow_blank => true }
   validates :person, :registration, :position, :presence => true
 
   filterize

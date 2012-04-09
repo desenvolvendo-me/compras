@@ -3,7 +3,7 @@ class RegulatoryActTypeClassification < ActiveRecord::Base
 
   has_many :regulatory_act_types, :dependent => :restrict
 
-  validates :description, :uniqueness => true, :presence => true
+  validates :description, :uniqueness => { :allow_blank => true }, :presence => true
 
   orderize :description
   filterize

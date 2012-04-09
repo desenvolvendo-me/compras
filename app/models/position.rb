@@ -3,7 +3,7 @@ class Position < ActiveRecord::Base
 
   has_many :employees, :dependent => :restrict
 
-  validates :name, :uniqueness => true, :presence => true
+  validates :name, :presence => true, :uniqueness => { :allow_blank => true }
 
   orderize
   filterize

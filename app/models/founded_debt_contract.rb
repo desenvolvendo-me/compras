@@ -9,8 +9,8 @@ class FoundedDebtContract < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
 
   validates :entity, :contract_number, :process_number, :presence => true
-  validates :signed_date, :end_date, :description, :presence => true
-  validates :year, :presence => true, :mask => '9999'
+  validates :signed_date, :end_date, :description, :year, :presence => true
+  validates :year, :mask => '9999', :allow_blank => true
 
   orderize :year
   filterize

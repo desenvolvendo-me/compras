@@ -5,7 +5,7 @@ class StreetType < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => { :allow_blank => true}
   validates_length_of :acronym, :is => 3
-  validates :acronym, :mask => 'aaa'
+  validates :acronym, :mask => 'aaa', :allow_blank => true
 
   filterize
   orderize

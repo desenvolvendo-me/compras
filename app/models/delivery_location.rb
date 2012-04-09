@@ -9,7 +9,7 @@ class DeliveryLocation < ActiveRecord::Base
   has_many :direct_purchases, :dependent => :restrict
 
   validates :address, :description, :presence => true
-  validates :description, :uniqueness => true
+  validates :description, :uniqueness => { :allow_blank => true }
 
   accepts_nested_attributes_for :address
 

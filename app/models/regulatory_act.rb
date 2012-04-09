@@ -19,15 +19,20 @@ class RegulatoryAct < ActiveRecord::Base
 
   has_one :extra_credit
 
-  validates :regulatory_act_type, :creation_date, :publication_date, :vigor_date, :end_date, :legal_text_nature,
-            :content, :budget_law_percent, :revenue_antecipation_percent, :authorized_debt_value, :presence => true
-  validates :content, :uniqueness => true
-  validates :act_number, :presence => true, :uniqueness => true, :numericality => true
-  validates :vigor_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
-  validates :publication_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
-  validates :publication_date, :timeliness => { :on_or_before => :vigor_date, :type => :date }
-  validates_numericality_of :budget_law_percent, :less_than_or_equal_to => 100
-  validates_numericality_of :revenue_antecipation_percent, :less_than_or_equal_to => 100
+  validates :regulatory_act_type, :creation_date, :publication_date, :presence => true
+  validates :vigor_date, :end_date, :legal_text_nature, :content, :presence => true
+  validates :budget_law_percent, :revenue_antecipation_percent, :presence => true
+  validates :authorized_debt_value, :act_number, :presence => true
+
+  with_options :allow_blank => true do |allowed_blank|
+    allowed_blank.validates :revenue_antecipation_percent, :numericality => { :less_than_or_equal_to => 100 }
+    allowed_blank.validates :budget_law_percent, :numericality => { :less_than_or_equal_to => 100 }
+    allowed_blank.validates :act_number, :content, :uniqueness => true
+    allowed_blank.validates :act_number, :numericality => true
+    allowed_blank.validates :vigor_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
+    allowed_blank.validates :publication_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
+    allowed_blank.validates :publication_date, :timeliness => { :on_or_before => :vigor_date, :type => :date }
+  end
 
   orderize :act_number
   filterize

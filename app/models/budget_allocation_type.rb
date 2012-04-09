@@ -6,7 +6,7 @@ class BudgetAllocationType < ActiveRecord::Base
 
   has_many :budget_allocations, :dependent => :restrict
 
-  validates :description, :presence => true, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => { :allow_blank => true }
   validates :status, :presence => true
 
   orderize :description

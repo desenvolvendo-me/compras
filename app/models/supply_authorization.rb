@@ -4,7 +4,7 @@ class SupplyAuthorization < ActiveRecord::Base
   belongs_to :direct_purchase
 
   validates :year, :direct_purchase, :presence => true
-  validates :year, :mask => '9999'
+  validates :year, :mask => '9999', :allow_blank => true
 
   delegate :phone, :fax, :address, :city, :zip_code, :to => :direct_purchase, :allow_nil => true
   delegate :bank_account, :agency, :bank, :provider, :to => :direct_purchase, :allow_nil => true

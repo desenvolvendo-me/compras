@@ -11,7 +11,7 @@ class Prefecture < ActiveRecord::Base
   accepts_nested_attributes_for :address
 
   validates :name, :mayor_name, :presence => true
-  validates :name, :uniqueness => true, :allow_blank => true
+  validates :name, :uniqueness => { :allow_blank => true }
   validates :email, :mail => true, :allow_blank => true
   validates :phone, :fax, :mask => '(99) 9999-9999', :allow_blank => true, :allow_blank => true
   validates :cnpj, :mask => '99.999.999/9999-99', :cnpj => true, :allow_blank => true

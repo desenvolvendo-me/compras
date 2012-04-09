@@ -9,7 +9,7 @@ class AdministrationType < ActiveRecord::Base
   has_many :budget_units, :dependent => :restrict
 
   validates :administration, :organ_type, :legal_nature, :presence => true
-  validates :description, :presence => true, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => { :allow_blank => true }
 
   orderize :description
   filterize

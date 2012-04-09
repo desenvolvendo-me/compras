@@ -6,8 +6,8 @@ class PledgeCategory < ActiveRecord::Base
 
   has_many :pledges, :dependent => :restrict
 
-  validates :description, :presence => true, :uniqueness => true
-  validates :status, :presence => true
+  validates :description, :uniqueness => { :allow_blank => true }
+  validates :status, :description, :presence => true
 
   orderize :description
   filterize

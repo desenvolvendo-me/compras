@@ -5,6 +5,6 @@ class ProviderLicitationDocument < ActiveRecord::Base
   belongs_to :document_type
 
   validates :document_type, :document_number, :emission_date, :expiration_date, :presence => true
-  validates :document_number, :numericality => true
-  validates :emission_date, :timeliness => { :on_or_before => :today, :type => :date }
+  validates :document_number, :numericality => { :allow_blank => true }
+  validates :emission_date, :timeliness => { :on_or_before => :today, :type => :date, :allow_blank => true }
 end

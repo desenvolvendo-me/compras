@@ -15,8 +15,8 @@ class Address < ActiveRecord::Base
   delegate :country, :to => 'state', :allow_nil => true
 
   validates :neighborhood, :street, :zip_code, :presence => true
-  validates :zip_code, :mask => "99999-999"
-  validates :number, :numericality => true, :allow_blank => true
+  validates :zip_code, :mask => "99999-999", :allow_blank => true
+  validates :number, :numericality => { :allow_blank => true }
 
   def to_s
     "#{street}, #{number} - #{neighborhood}"

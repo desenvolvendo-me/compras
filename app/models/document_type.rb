@@ -7,8 +7,8 @@ class DocumentType < ActiveRecord::Base
   has_many :licitation_process_invited_bidder_documents, :dependent => :restrict
 
   validates :validity, :description, :presence => true
-  validates :description, :uniqueness => true
-  validates :validity, :numericality => true
+  validates :description, :uniqueness => { :allow_blank => true }
+  validates :validity, :numericality => { :allow_blank => true }
 
   orderize :description
   filterize

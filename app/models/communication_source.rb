@@ -3,7 +3,7 @@ class CommunicationSource < ActiveRecord::Base
 
   has_many :dissemination_sources, :dependent => :restrict
 
-  validates :description, :presence => true, :uniqueness => true
+  validates :description, :presence => true, :uniqueness => { :allow_blank => true }
 
   filterize
   orderize :description

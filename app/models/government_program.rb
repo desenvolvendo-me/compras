@@ -8,7 +8,7 @@ class GovernmentProgram < ActiveRecord::Base
   has_many :budget_allocations, :dependent => :restrict
 
   validates :entity, :year, :description, :status, :presence => true
-  validates :year, :mask => '9999'
+  validates :year, :mask => '9999', :allow_blank => true
 
   orderize :description
   filterize

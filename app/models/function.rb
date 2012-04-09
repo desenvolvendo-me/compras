@@ -7,9 +7,10 @@ class Function < ActiveRecord::Base
 
   delegate :vigor_date, :to => :regulatory_act, :allow_nil => true, :prefix => true
 
-  validates :code, :presence => true, :numericality => true
-  validates :code, :uniqueness => { :scope => :regulatory_act_id, :message => :taken_for_regulatory_act }
-  validates :description, :presence => true
+  validates :description, :code, :presence => true
+  validates :code, :uniqueness   => { :scope => :regulatory_act_id, :message => :taken_for_regulatory_act },
+                   :numericality => true,
+                   :allow_blank  => true
 
   orderize :code
   filterize

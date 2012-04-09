@@ -10,7 +10,7 @@ class ManagementContract < ActiveRecord::Base
 
   validates :year, :entity, :contract_number, :process_number, :presence => true
   validates :signature_date, :end_date, :description, :presence => true
-  validates :year, :mask => "9999"
+  validates :year, :mask => "9999", :allow_blank => true
 
   orderize :contract_number
   filterize

@@ -9,8 +9,8 @@ class City < ActiveRecord::Base
   has_many :neighborhoods, :dependent => :restrict
   has_many :districts, :dependent => :restrict
 
-  validates :name, :presence => true, :uniqueness => { :scope => [:state_id] }
-  validates :state, :presence => true
+  validates :name, :uniqueness => { :scope => :state_id, :allow_blank => true }
+  validates :state, :name, :presence => true
 
   orderize
   filterize

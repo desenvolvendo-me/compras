@@ -4,7 +4,7 @@ class RevenueCategory < ActiveRecord::Base
   has_many :revenue_subcategories, :dependent => :restrict
 
   validates :code, :description, :presence => true
-  validates :code, :uniqueness => true
+  validates :code, :uniqueness => { :allow_blank => true }
 
   orderize :id
   filterize

@@ -29,9 +29,9 @@ class BudgetAllocation < ActiveRecord::Base
 
   delegate :function, :function_id, :to => :subfunction, :allow_nil => true
 
-  validates :description, :presence => true, :uniqueness => true
-  validates :year, :mask => '9999'
-  validates :date, :presence => true
+  validates :date, :description, :presence => true
+  validates :description, :uniqueness => { :allow_blank => true }
+  validates :year, :mask => '9999', :allow_blank => true
 
   orderize :description
   filterize

@@ -24,7 +24,7 @@ class BudgetUnit < ActiveRecord::Base
   validates :description, :organogram, :tce_code, :acronym, :presence => true
   validates :performance_field, :budget_unit_configuration, :presence => true
   validates :administration_type, :kind, :presence => true
-  validates :organogram, :mask => :mask
+  validates :organogram, :mask => :mask, :allow_blank => true
   validate :cannot_have_duplicated_responsibles
 
   accepts_nested_attributes_for :address

@@ -7,7 +7,7 @@ class Identity < ActiveRecord::Base
   belongs_to :state
 
   validates :number, :issuer, :state, :issue, :presence => true
-  validates :issue, :timeliness => { :before => :today, :type => :date }
+  validates :issue, :timeliness => { :before => :today, :type => :date , :allow_blank => true }
 
   def to_s
     number.to_s

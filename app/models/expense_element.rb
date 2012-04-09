@@ -16,7 +16,7 @@ class ExpenseElement < ActiveRecord::Base
   has_many :budget_allocations, :dependent => :restrict
 
   validates :expense_element, :kind, :description, :presence => true
-  validates :expense_element, :mask => '9.9.99.99.99.99.99.99'
+  validates :expense_element, :mask => '9.9.99.99.99.99.99.99', :allow_blank => true
 
   orderize :description
   filterize

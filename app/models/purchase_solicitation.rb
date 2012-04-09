@@ -20,8 +20,9 @@ class PurchaseSolicitation < ActiveRecord::Base
 
   delegate :amount, :description, :id, :to => :budget_allocation, :prefix => true, :allow_nil => true
 
-  validates :request_date, :responsible, :delivery_location, :kind, :delivery_location, :presence => true
-  validates :accounting_year, :presence => true, :numericality => true, :mask => '9999'
+  validates :request_date, :responsible, :delivery_location, :presence => true
+  validates :accounting_year, :kind, :delivery_location, :presence => true
+  validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
 
   validate :must_have_at_least_one_budget_allocation
   validate :cannot_have_duplicated_budget_allocations

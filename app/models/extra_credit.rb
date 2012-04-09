@@ -18,21 +18,24 @@ class ExtraCredit < ActiveRecord::Base
 
   accepts_nested_attributes_for :extra_credit_moviment_types, :allow_destroy => true
 
-  validates :year, :mask => '9999'
   validates :year, :entity, :credit_type, :presence => true
-  validates :regulatory_act, :credit_date, :presence => true
-  validates :extra_credit_nature, :presence => true
-  validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }, :allow_blank => true
-  validates :credit_date, :timeliness => {
-    :on_or_after => :publication_date,
-    :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
-    :type => :date
-  }, :allow_blank => true, :if => :publication_date
+  validates :regulatory_act, :credit_date, :extra_credit_nature, :presence => true
   validate :uniqueness_of_budget_allocation
   validate :uniqueness_of_capability
   validate :validate_difference
   validate :subtraction_item_value_cant_be_greater_than_budget_allocation
   validate :must_not_be_less_than_last_extra_credit_date
+
+  with_options :allow_blank => true do |allowed_blank|
+    validates :year, :mask => '9999', :allow_blank => true
+    validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }
+    validates :credit_date, :timeliness => {
+      :on_or_after => :publication_date,
+      :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
+      :type => :date,
+      :if => :publication_date
+    }
+  end
 
   before_validation :save_total
 

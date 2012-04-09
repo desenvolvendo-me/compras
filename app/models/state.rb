@@ -7,9 +7,9 @@ class State < ActiveRecord::Base
 
   has_many :cities, :dependent => :destroy
 
-  validates :name, :acronym, :presence => true, :uniqueness => { :allow_blank => true }
-  validates :country, :presence => true
-  validates :acronym, :mask => "aa"
+  validates :name, :acronym, :uniqueness => { :allow_blank => true }
+  validates :country, :name, :acronym, :presence => true
+  validates :acronym, :mask => "aa", :allow_blank => true
 
   filterize
   orderize

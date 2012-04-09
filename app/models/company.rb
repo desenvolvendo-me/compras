@@ -13,7 +13,7 @@ class Company < ActiveRecord::Base
   has_one :correspondence_address, :as => :addressable, :conditions => { :correspondence => true }, :class_name => 'Address', :dependent => :destroy
   has_one :person, :as => :personable, :dependent => :restrict
 
-  validates :cnpj, :cnpj => true, :uniqueness => true, :mask => '99.999.999/9999-99'
+  validates :cnpj, :cnpj => true, :uniqueness => true, :mask => '99.999.999/9999-99', :allow_blank => true
   validates :cnpj, :company_size, :address, :presence => true
   validates :responsible_role, :legal_nature, :responsible, :presence => true
 
