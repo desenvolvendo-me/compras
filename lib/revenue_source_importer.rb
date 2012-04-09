@@ -1,10 +1,9 @@
 class RevenueSourceImporter < Importer
-  attr_accessor :storage, :revenue_subcategory_storage, :revenue_category_storage
+  attr_accessor :storage, :revenue_subcategory_storage
 
-  def initialize(storage = RevenueSource, revenue_subcategory_storage = RevenueSubcategory, revenue_category_storage = RevenueCategory)
+  def initialize(storage = RevenueSource, revenue_subcategory_storage = RevenueSubcategory)
     self.storage = storage
     self.revenue_subcategory_storage = revenue_subcategory_storage
-    self.revenue_category_storage = revenue_category_storage
   end
 
   protected
@@ -12,12 +11,12 @@ class RevenueSourceImporter < Importer
   def normalize_attributes(attributes)
     category_code    = attributes['code'][0]
     subcategory_code = attributes['code'][1]
-    code             = attributes['code'][2]
+    source_code      = attributes['code'][2]
 
-    category = revenue_category_storage.find_by_code(category_code)
-    subcategory = revenue_subcategory_storage.find_by_code_and_revenue_category_id(subcategory_code, category.try(:id))
+    subcategory = revenue_subcategory_storage.joins { revenue_category }.
+      where { revenue_category.code.eq(category_code) & code.eq(subcategory_code) }.first
 
-    attributes.merge('revenue_subcategory_id' => subcategory.try(:id), 'code' => code)
+    attributes.merge('revenue_subcategory_id' => subcategory.try(:id), 'code' => source_code)
   end
 
   def file
