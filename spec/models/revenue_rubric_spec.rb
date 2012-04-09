@@ -8,10 +8,10 @@ describe RevenueRubric do
     subject.to_s.should eq '1'
   end
 
-  it { should belong_to :revenue_source }
-
   it { should validate_presence_of :code }
   it { should validate_presence_of :description }
   it { should validate_presence_of :revenue_source }
+
+  it { should belong_to :revenue_source }
   it { should have_many(:revenue_natures).dependent(:restrict) }
 end
