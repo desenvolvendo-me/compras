@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/revenue_subcategory'
+require 'app/models/revenue_source'
 
 describe RevenueSubcategory do
   it 'should return code as to_s' do
