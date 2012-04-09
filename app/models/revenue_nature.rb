@@ -14,11 +14,20 @@ class RevenueNature < ActiveRecord::Base
   validates :classification, :presence => true, :mask => '99999999'
 
   delegate :publication_date, :regulatory_act_type, :to => :regulatory_act, :allow_nil => true
+  delegate :full_code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
 
   orderize :id
   filterize
 
+  before_save :generate_full_code
+
   def to_s
     id.to_s
+  end
+
+  protected
+
+  def generate_full_code
+    self.full_code = [revenue_rubric_full_code, classification].reject(&:blank?).join('.')
   end
 end

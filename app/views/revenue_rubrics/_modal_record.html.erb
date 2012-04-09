@@ -1,4 +1,4 @@
-<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-id="<%= record.id %>">
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-id="<%= record.id %>" data-full-code="<%= record.full_code %>">
   <% attributes.each do |attribute| %>
     <td>
       <%= record.send attribute %>

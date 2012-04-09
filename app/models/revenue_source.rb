@@ -8,6 +8,10 @@ class RevenueSource < ActiveRecord::Base
   validates :code, :description, :revenue_subcategory, :presence => true
   validates :code, :uniqueness => { :scope => :revenue_subcategory_id }, :allow_blank => true
 
+  delegate :code, :to => :revenue_subcategory, :prefix => true, :allow_nil => true
+  delegate :revenue_source_code, :to => :revenue_subcategory, :allow_nil => true
+  delegate :revenue_category_code, :to => :revenue_subcategory, :allow_nil => true
+
   orderize :id
   filterize
 

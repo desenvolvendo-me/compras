@@ -11,6 +11,7 @@ pt-BR:
         year: "Exercício"
         regulatory_act: "Ato regulamentador"
         regulatory_act_type: "Tipo"
+        full_code: "Código completo"
         publication_date: "Data de publicação"
         classification: "Classificação"
         revenue_rubric: "Rúbrica da receita"

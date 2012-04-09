@@ -22,8 +22,9 @@
   </div>
 </div>
 
-<%= f.input :classification %>
 <%= f.input :revenue_rubric %>
+<%= f.input :classification %>
+<%= f.input :full_code, :disabled => true %>
 <%= f.input :specification %>
 <%= f.input :kind %>
 <%= f.input :docket %>
@@ -39,4 +40,32 @@
       $('#revenue_nature_publication_date').val('');
     }
   });
+
+  (function() {
+    var full_code = '<%= f.object.revenue_rubric_full_code %>';
+
+    function calcMask() {
+      var classification = $('#revenue_nature_classification').val();
+
+      if (full_code && classification) {
+        $('#revenue_nature_full_code').val(full_code + '.' + classification);
+      } else if (!classification) {
+        $('#revenue_nature_full_code').val(full_code + '.________');
+      } else {
+        $('#revenue_nature_full_code').val('');
+      }
+    }
+
+    $('#revenue_nature_revenue_rubric_id').on('change', function (event, data) {
+      if (data) {
+        var record = data.record;
+        full_code = record.data('full-code');
+      } else {
+        full_code = null;
+      }
+      calcMask();
+    });
+
+    $('#revenue_nature_classification').on('keyup', calcMask);
+  })();
 </script>
