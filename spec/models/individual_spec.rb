@@ -4,6 +4,7 @@ require 'app/models/person'
 require 'app/models/address'
 require 'app/models/individual'
 require 'app/models/identity'
+require 'app/models/provider_partner'
 require 'app/models/licitation_commission_responsible'
 
 describe Individual do
