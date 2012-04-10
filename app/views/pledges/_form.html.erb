@@ -44,6 +44,8 @@
     $('form.pledge .hint').hide();
   <% else %>
     (function () {
+      var reserve_fund_budget_allocation_id;
+
       function uniqPledgeExpiration(){
         return $('fieldset.pledge-expiration .destroy[value=false]').length == 1;
       }
@@ -68,8 +70,6 @@
           $(this).parent().parent().find('.order').val(index + 1);
         });
       }
-
-      var reserve_fund_budget_allocation_id;
 
       $("#pledge_reserve_fund_id").change(function (event, data) {
         if (data) {
