@@ -48,8 +48,8 @@ describe DirectPurchase do
 
   it 'should propagate licitation_exemption method to licitation object passing modality' do
     licitation_object = double
-    subject.stub(:licitation_object => licitation_object)
-    subject.stub(:modality => DirectPurchaseModality::MATERIAL_OR_SERVICE)
+    subject.stub(:licitation_object).and_return(licitation_object)
+    subject.stub(:modality).and_return(DirectPurchaseModality::MATERIAL_OR_SERVICE)
 
     licitation_object.should_receive(:licitation_exemption).with(DirectPurchaseModality::MATERIAL_OR_SERVICE)
 
@@ -59,7 +59,7 @@ describe DirectPurchase do
   it 'should delegate purchase_licitation_exemption to licitation object' do
     subject.licitation_object_purchase_licitation_exemption.should eq nil
 
-    subject.stub(:licitation_object => double(:purchase_licitation_exemption => 300.0))
+    subject.stub(:licitation_object).and_return(double(:purchase_licitation_exemption => 300.0))
 
     subject.licitation_object_purchase_licitation_exemption.should eq 300.0
   end
@@ -67,7 +67,7 @@ describe DirectPurchase do
   it 'should delegate build_licitation_exemption to licitation object' do
     subject.licitation_object_build_licitation_exemption.should eq nil
 
-    subject.stub(:licitation_object => double(:build_licitation_exemption => 200.0))
+    subject.stub(:licitation_object).and_return(double(:build_licitation_exemption => 200.0))
 
     subject.licitation_object_build_licitation_exemption.should eq 200.0
   end
@@ -128,7 +128,8 @@ describe DirectPurchase do
     end
 
     it 'should have error when limit verificator returns false' do
-      subject.stub(:licitation_object => double, :modality => double)
+      subject.stub(:licitation_object).and_return(double)
+      subject.stub(:modality).and_return(double)
 
       DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify!).and_return(false)
 
@@ -138,7 +139,8 @@ describe DirectPurchase do
     end
 
     it 'should not have error when limit verificator returns true' do
-      subject.stub(:licitation_object => double, :modality => double)
+      subject.stub(:licitation_object).and_return(double)
+      subject.stub(:modality).and_return(double)
 
       DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify!).and_return(true)
 
