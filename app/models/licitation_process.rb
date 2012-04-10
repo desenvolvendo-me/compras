@@ -40,10 +40,10 @@ class LicitationProcess < ActiveRecord::Base
   validate :cannot_have_duplicated_budget_allocations
   validate :cannot_have_duplicated_invited_bidders
 
-  with_options :allow_blank => true do |allowed_blank|
-    allowed_blank.validates :year, :mask => "9999"
-    allowed_blank.validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
-    allowed_blank.validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
+  with_options :allow_blank => true do |allowing_blank|
+    allowing_blank.validates :year, :mask => "9999"
+    allowing_blank.validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+    allowing_blank.validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
   end
 
   before_create :set_process, :set_licitation_number

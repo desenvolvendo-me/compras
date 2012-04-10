@@ -24,14 +24,14 @@ class RegulatoryAct < ActiveRecord::Base
   validates :budget_law_percent, :revenue_antecipation_percent, :presence => true
   validates :authorized_debt_value, :act_number, :presence => true
 
-  with_options :allow_blank => true do |allowed_blank|
-    allowed_blank.validates :revenue_antecipation_percent, :numericality => { :less_than_or_equal_to => 100 }
-    allowed_blank.validates :budget_law_percent, :numericality => { :less_than_or_equal_to => 100 }
-    allowed_blank.validates :act_number, :content, :uniqueness => true
-    allowed_blank.validates :act_number, :numericality => true
-    allowed_blank.validates :vigor_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
-    allowed_blank.validates :publication_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
-    allowed_blank.validates :publication_date, :timeliness => { :on_or_before => :vigor_date, :type => :date }
+  with_options :allow_blank => true do |allowing_blank|
+    allowing_blank.validates :revenue_antecipation_percent, :numericality => { :less_than_or_equal_to => 100 }
+    allowing_blank.validates :budget_law_percent, :numericality => { :less_than_or_equal_to => 100 }
+    allowing_blank.validates :act_number, :content, :uniqueness => true
+    allowing_blank.validates :act_number, :numericality => true
+    allowing_blank.validates :vigor_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
+    allowing_blank.validates :publication_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
+    allowing_blank.validates :publication_date, :timeliness => { :on_or_before => :vigor_date, :type => :date }
   end
 
   orderize :act_number

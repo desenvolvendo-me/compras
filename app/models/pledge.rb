@@ -48,10 +48,10 @@ class Pledge < ActiveRecord::Base
   validate :expirations_should_have_date_greater_than_last_expiration_date
   validate :pledge_expirations_value_should_be_equals_value
 
-  with_options :allow_blank => true do |allowed_blank|
-    allowed_blank.validates :year, :mask => '9999'
-    allowed_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
-    allowed_blank.validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+  with_options :allow_blank => true do |allowing_blank|
+    allowing_blank.validates :year, :mask => '9999'
+    allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
+    allowing_blank.validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
   end
 
   before_save :parse_licitation, :parse_process

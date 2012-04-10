@@ -8,10 +8,10 @@ class Subfunction < ActiveRecord::Base
 
   validates :description, :entity, :year, :function, :code, :presence => true
 
-  with_options :allow_blank => true do |allowed_blank|
-    allowed_blank.validates :code, :numericality => true
-    allowed_blank.validates :code, :description, :uniqueness => true
-    allowed_blank.validates :year, :mask => '9999'
+  with_options :allow_blank => true do |allowing_blank|
+    allowing_blank.validates :code, :numericality => true
+    allowing_blank.validates :code, :description, :uniqueness => true
+    allowing_blank.validates :year, :mask => '9999'
   end
 
   orderize :code

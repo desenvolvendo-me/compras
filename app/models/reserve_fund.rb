@@ -27,10 +27,10 @@ class ReserveFund < ActiveRecord::Base
   validates :entity, :budget_allocation, :value, :year, :reserve_allocation_type, :date, :presence => true
   validate :value_should_not_exceed_available_reserve
 
-  with_options :allow_blank => true do |allowed_blank|
-    allowed_blank.validates :year, :mask => '9999'
-    allowed_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
-    allowed_blank.validates :date, :timeliness => {
+  with_options :allow_blank => true do |allowing_blank|
+    allowing_blank.validates :year, :mask => '9999'
+    allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
+    allowing_blank.validates :date, :timeliness => {
       :on_or_after => lambda { last.date },
       :on_or_after_message => :must_be_greather_or_equal_to_last_date,
       :type => :date,
