@@ -27,9 +27,9 @@ class ExtraCredit < ActiveRecord::Base
   validate :must_not_be_less_than_last_extra_credit_date
 
   with_options :allow_blank => true do |allowed_blank|
-    validates :year, :mask => '9999', :allow_blank => true
-    validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }
-    validates :credit_date, :timeliness => {
+    allowed_blank.validates :year, :mask => '9999'
+    allowed_blank.validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }
+    allowed_blank.validates :credit_date, :timeliness => {
       :on_or_after => :publication_date,
       :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
       :type => :date,
