@@ -37,6 +37,7 @@ feature "LicitationProcesses" do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
       fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
+      select 'Global', :from => 'Tipo de empenho'
 
       # testing delegated fields of administrative process (filled by javascript)
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
@@ -76,7 +77,6 @@ feature "LicitationProcesses" do
 
       fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
       fill_in 'Valor previsto', :with => '50,00'
-      select 'Global', :from => 'Tipo de empenho'
 
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
@@ -136,6 +136,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '21/03/2012'
       page.should have_field 'Processo administrativo', :with => '1/2012'
+      page.should have_select 'Tipo de empenho', :selected => 'Global'
 
       # testing delegated fields of administrative process
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
@@ -191,7 +192,6 @@ feature "LicitationProcesses" do
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '50,00'
-      page.should have_select 'Tipo de empenho', :selected => 'Global'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -246,6 +246,7 @@ feature "LicitationProcesses" do
     within_tab 'Dados gerais' do
       fill_in 'Data do processo', :with => '21/03/2013'
       fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
+      select 'Estimativo', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'novo detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10 dias'
@@ -276,7 +277,6 @@ feature "LicitationProcesses" do
 
       fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
       fill_in 'Valor previsto', :with => '70,00'
-      select 'Ordinário', :from => 'Tipo de empenho'
 
       page.should have_field 'Saldo da dotação', :with => '200,00'
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
@@ -332,6 +332,7 @@ feature "LicitationProcesses" do
     within_tab 'Dados gerais' do
       page.should have_field 'Data do processo', :with => '21/03/2013'
       page.should have_field 'Processo administrativo', :with => '1/2013'
+      page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
       page.should have_field 'Detalhamento do objeto', :with => 'novo detalhamento'
       page.should have_field 'Fonte de recurso', :with => 'Construção'
       page.should have_field 'Validade da proposta', :with => '10 dias'
@@ -361,7 +362,6 @@ feature "LicitationProcesses" do
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '200,00'
       page.should have_field 'Valor previsto', :with => '70,00'
-      page.should have_select 'Tipo de empenho', :selecte => 'Ordinário'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -433,6 +433,7 @@ feature "LicitationProcesses" do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/04/2012'
       fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
+      select 'Global', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'

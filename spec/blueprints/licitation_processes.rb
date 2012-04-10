@@ -3,6 +3,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   process_date { Date.new(2012, 3, 19) }
   administrative_process { AdministrativeProcess.make!(:compra_de_cadeiras) }
   object_description { "Descricao" }
+  pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { "10 dias" }
   readjustment_index { "XPTO" }
@@ -29,6 +30,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   process_date { Date.new(2012, 3, 20) }
   administrative_process { AdministrativeProcess.make!(:compra_de_computadores) }
   object_description { "Descricao" }
+  pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
   expiration { "10 dias" }
   readjustment_index { "XPTO" }

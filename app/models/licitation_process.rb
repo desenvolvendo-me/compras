@@ -4,7 +4,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
   attr_accessible :licitation_process_budget_allocations_attributes, :licitation_process_publications_attributes
-  attr_accessible :licitation_process_invited_bidders_attributes
+  attr_accessible :licitation_process_invited_bidders_attributes, :pledge_type
 
   attr_readonly :process, :year, :licitation_number
 
@@ -12,6 +12,7 @@ class LicitationProcess < ActiveRecord::Base
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
+  has_enumeration_for :pledge_type
 
   belongs_to :administrative_process
   belongs_to :capability
@@ -35,7 +36,7 @@ class LicitationProcess < ActiveRecord::Base
 
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
   validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
-  validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :presence => true
+  validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
   validate :cannot_have_duplicated_budget_allocations
   validate :cannot_have_duplicated_invited_bidders
 

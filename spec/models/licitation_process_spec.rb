@@ -30,6 +30,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_invited_bidder_documents).through(:licitation_process_invited_bidders) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
 
+  it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }
   it { should validate_presence_of :administrative_process }
   it { should validate_presence_of :object_description }
@@ -42,6 +43,7 @@ describe LicitationProcess do
   it { should validate_presence_of :envelope_delivery_time }
   it { should validate_presence_of :envelope_opening_date }
   it { should validate_presence_of :envelope_opening_time }
+  it { should validate_presence_of :pledge_type }
 
   it "should not have envelope_delivery_date less than today" do
     subject.should_not allow_value(Date.yesterday).

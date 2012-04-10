@@ -12,5 +12,4 @@ describe LicitationProcessBudgetAllocation do
 
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :estimated_value }
-  it { should validate_presence_of :pledge_type }
 end

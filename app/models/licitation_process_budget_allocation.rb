@@ -1,7 +1,5 @@
 class LicitationProcessBudgetAllocation < ActiveRecord::Base
-  attr_accessible :licitation_process_id, :budget_allocation_id, :estimated_value, :pledge_type, :items_attributes
-
-  has_enumeration_for :pledge_type
+  attr_accessible :licitation_process_id, :budget_allocation_id, :estimated_value, :items_attributes
 
   belongs_to :licitation_process
   belongs_to :budget_allocation
@@ -12,7 +10,7 @@ class LicitationProcessBudgetAllocation < ActiveRecord::Base
 
   delegate :expense_element, :amount, :to => :budget_allocation, :allow_nil => true
 
-  validates :budget_allocation, :estimated_value, :pledge_type, :presence => true
+  validates :budget_allocation, :estimated_value, :presence => true
 
   validate :cannot_have_duplicated_materials_on_items
 
