@@ -21,9 +21,9 @@ class DirectPurchaseModalityLimitVerificator
   def current_limit
     case direct_purchase.modality
     when DirectPurchaseModality::MATERIAL_OR_SERVICE
-      limit_storage.current_modality_limit.without_bidding
+      limit_storage.current.without_bidding
     when DirectPurchaseModality::ENGINEERING_WORKS
-      limit_storage.current_modality_limit.work_without_bidding
+      limit_storage.current.work_without_bidding
     end
   end
 

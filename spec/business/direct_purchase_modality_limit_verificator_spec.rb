@@ -20,7 +20,7 @@ describe DirectPurchaseModalityLimitVerificator do
   end
 
   let :limit_storage do
-    double('modality limit', :current_modality_limit => modality_limit)
+    double('modality limit', :current => modality_limit)
   end
 
   let :subject do

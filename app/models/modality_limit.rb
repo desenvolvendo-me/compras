@@ -18,10 +18,8 @@ class ModalityLimit < ActiveRecord::Base
   orderize :published_date
   filterize
 
-  scope :current_modality_limits, lambda { where { validity_beginning.gteq(Date.current) }.order(:validity_beginning) }
-
-  def self.current_modality_limit
-    current_modality_limits.last
+  def self.current
+    where { validity_beginning.gteq(Date.current) }.order { validity_beginning }.last
   end
 
   def to_s
