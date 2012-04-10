@@ -24,7 +24,7 @@ class ModalityLimit < ActiveRecord::Base
 
   class << self
     def current
-      where { validity_beginning.lteq(Date.current) }.order { validity_beginning }.last
+      where { validity_beginning.lteq(Date.current) }.order { published_date }.last
     end
 
     def current_limit_material_or_service_without_bidding
