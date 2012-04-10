@@ -5,8 +5,6 @@ AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
-  value_estimated { "500,50" }
-  budget_allocation { BudgetAllocation.make!(:alocacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -22,8 +20,6 @@ AdministrativeProcess.blueprint(:compra_de_computadores) do
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
-  value_estimated { "500,50" }
-  budget_allocation { BudgetAllocation.make!(:alocacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -39,8 +35,6 @@ AdministrativeProcess.blueprint(:compra_sem_convite) do
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
-  value_estimated { "500,50" }
-  budget_allocation { BudgetAllocation.make!(:alocacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::PRESENCE_TRADING }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }

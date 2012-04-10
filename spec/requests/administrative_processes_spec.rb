@@ -25,8 +25,6 @@ feature "AdministrativeProcesses" do
     fill_in 'Data do processo', :with => '07/03/2012'
     fill_in 'Número do protocolo', :with => '00099/2012'
     fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
-    fill_in 'Valor estimado', :with => '500,50'
-    fill_modal 'Dotação utilizada', :with => '2012', :field => 'Exercício'
     select 'Compras e serviços', :from => 'Tipo de objeto'
     select 'Pregão presencial', :from => 'Modalidade'
     fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
@@ -49,8 +47,6 @@ feature "AdministrativeProcesses" do
     page.should have_field 'Data do processo', :with => '07/03/2012'
     page.should have_field 'Número do protocolo', :with => '00099/2012'
     page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
-    page.should have_field 'Valor estimado', :with => '500,50'
-    page.should have_field 'Dotação utilizada', :with => "#{budget_allocation.id}/2012 - Alocação"
     page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
     page.should have_select 'Modalidade', :selected => 'Pregão presencial'
     page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
@@ -76,8 +72,6 @@ feature "AdministrativeProcesses" do
     page.should have_disabled_field 'Data do processo'
     page.should have_disabled_field 'Número do protocolo'
     page.should have_disabled_field 'Unidade orçamentária'
-    page.should have_disabled_field 'Valor estimado'
-    page.should have_disabled_field 'Dotação utilizada'
     page.should have_disabled_field 'Tipo de objeto'
     page.should have_disabled_field 'Modalidade'
     page.should have_disabled_field 'Forma de julgamento'
@@ -106,8 +100,6 @@ feature "AdministrativeProcesses" do
     page.should have_content "Data da solicitação: 07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
     page.should have_content "Unidade orçamentária: 02.00 - Secretaria de Educação"
-    page.should have_content "Valor estimado: R$ 500,00"
-    page.should have_content "Dotação utilizada: #{budget_allocation}"
     page.should have_content "Modalidade: Convite para compras e serviços de engenharia"
     page.should have_content "Tipo de objeto: Compras e serviços"
     page.should have_content "Forma de julgamento: Forma Global com Menor Preço"

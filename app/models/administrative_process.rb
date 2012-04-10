@@ -1,10 +1,10 @@
 class AdministrativeProcess < ActiveRecord::Base
-  attr_accessible :budget_unit_id, :budget_allocation_id, :responsible_id
-  attr_accessible :process, :year, :date, :value_estimated, :modality
+  attr_accessible :budget_unit_id, :responsible_id
+  attr_accessible :process, :year, :date, :modality
   attr_accessible :protocol, :object_type, :status, :description
   attr_accessible :judgment_form_id
 
-  attr_modal :year, :process, :protocol, :budget_unit_id, :budget_allocation_id
+  attr_modal :year, :process, :protocol, :budget_unit_id
 
   attr_readonly :process, :year
 
@@ -13,14 +13,13 @@ class AdministrativeProcess < ActiveRecord::Base
   has_enumeration_for :status, :with => AdministrativeProcessStatus
 
   belongs_to :budget_unit
-  belongs_to :budget_allocation
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
 
   has_many :licitation_processes, :dependent => :restrict
 
-  validates :year, :date, :budget_unit, :value_estimated, :presence => true
-  validates :budget_allocation, :modality, :object_type, :presence => true
+  validates :year, :date, :budget_unit, :presence => true
+  validates :modality, :object_type, :presence => true
   validates :responsible, :status, :presence => true
   validates :description, :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true

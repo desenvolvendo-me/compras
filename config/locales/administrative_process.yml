@@ -12,8 +12,6 @@ pt-BR:
         date: "Data do processo"
         protocol: "Número do protocolo"
         budget_unit: "Unidade orçamentária"
-        value_estimated: "Valor estimado"
-        budget_allocation: "Dotação utilizada"
         modality: "Modalidade"
         item: "Inciso"
         object_type: "Tipo de objeto"

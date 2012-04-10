@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/administrative_process'
-require 'app/models/budget_allocation'
 require 'app/models/budget_unit'
 require 'app/models/employee'
 require 'app/models/licitation_process'
@@ -17,7 +16,6 @@ describe AdministrativeProcess do
   end
 
   it { should belong_to :budget_unit }
-  it { should belong_to :budget_allocation }
   it { should belong_to :responsible }
   it { should belong_to :judgment_form }
 
@@ -26,8 +24,6 @@ describe AdministrativeProcess do
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }
   it { should validate_presence_of :budget_unit }
-  it { should validate_presence_of :value_estimated }
-  it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :modality }
   it { should validate_presence_of :object_type }
   it { should validate_presence_of :description }
