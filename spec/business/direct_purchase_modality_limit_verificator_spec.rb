@@ -2,7 +2,6 @@ require 'unit_helper'
 require 'app/business/direct_purchase_modality_limit_verificator'
 
 describe DirectPurchaseModalityLimitVerificator do
-
   let :direct_purchase do
     double('direct purchase', :licitation_object_purchase_licitation_exemption => 400.0,
                               :licitation_object_build_licitation_exemption => 500.0)
