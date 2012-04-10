@@ -5,7 +5,7 @@ class CreateLicitationProcessImpugnments < ActiveRecord::Migration
       t.date :impugnment_date
       t.string :related
       t.references :person
-      t.text :valid_reason
+      t.text :valid_resson
       t.string :situation, :default => 'Pendente'
       t.date :judgment_date
       t.text :observation
