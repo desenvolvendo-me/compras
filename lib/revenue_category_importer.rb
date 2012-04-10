@@ -1,3 +1,4 @@
+# encoding: utf-8
 class RevenueCategoryImporter < Importer
   attr_accessor :storage
 
