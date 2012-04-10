@@ -21,7 +21,7 @@ describe DirectPurchaseModalityLimitVerificator do
     direct_purchase.stub(:engineering_works?).and_return(false)
     direct_purchase.stub(:total_allocations_items_value).and_return(100)
 
-    subject.verify!.should be_true
+    subject.verify_limit_value!.should be_true
   end
 
   it 'should return false with modality mateiral_or_service and total of item equal to 100.01' do
@@ -29,7 +29,7 @@ describe DirectPurchaseModalityLimitVerificator do
     direct_purchase.stub(:engineering_works?).and_return(false)
     direct_purchase.stub(:total_allocations_items_value).and_return(100.01)
 
-    subject.verify!.should be_false
+    subject.verify_limit_value!.should be_false
   end
 
   it 'should return true with modality engineering_works and total of item equal to 200' do
@@ -37,7 +37,7 @@ describe DirectPurchaseModalityLimitVerificator do
     direct_purchase.stub(:engineering_works?).and_return(true)
     direct_purchase.stub(:total_allocations_items_value).and_return(200)
 
-    subject.verify!.should be_true
+    subject.verify_limit_value!.should be_true
   end
 
   it 'should return false with modality engineering_works and total of item equal to 200.01' do
@@ -45,6 +45,6 @@ describe DirectPurchaseModalityLimitVerificator do
     direct_purchase.stub(:engineering_works?).and_return(true)
     direct_purchase.stub(:total_allocations_items_value).and_return(200.01)
 
-    subject.verify!.should be_false
+    subject.verify_limit_value!.should be_false
   end
 end

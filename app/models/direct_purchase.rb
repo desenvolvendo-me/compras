@@ -114,7 +114,7 @@ class DirectPurchase < ActiveRecord::Base
   def total_value_of_items_should_not_be_greater_than_modality_limit_value(limit_validator =  DirectPurchaseModalityLimitVerificator)
     return if licitation_object.nil? || modality.blank?
 
-    unless limit_validator.new(self).verify!
+    unless limit_validator.new(self).verify_limit_value!
       errors.add(:total_allocations_items_value, :greater_than_actual_modality_limit)
     end
   end

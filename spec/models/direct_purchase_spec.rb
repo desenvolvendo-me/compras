@@ -131,7 +131,7 @@ describe DirectPurchase do
       subject.stub(:licitation_object).and_return(double)
       subject.stub(:modality).and_return(double)
 
-      DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify!).and_return(false)
+      DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify_limit_value!).and_return(false)
 
       subject.valid?
 
@@ -142,7 +142,7 @@ describe DirectPurchase do
       subject.stub(:licitation_object).and_return(double)
       subject.stub(:modality).and_return(double)
 
-      DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify!).and_return(true)
+      DirectPurchaseModalityLimitVerificator.any_instance.stub(:verify_limit_value!).and_return(true)
 
       subject.valid?
 

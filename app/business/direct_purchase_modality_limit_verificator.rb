@@ -6,7 +6,7 @@ class DirectPurchaseModalityLimitVerificator
     self.limit_storage = limit_storage
   end
 
-  def verify!
+  def verify_limit_value!
     resultant_total_of_licitation_object <= current_limit
   end
 
