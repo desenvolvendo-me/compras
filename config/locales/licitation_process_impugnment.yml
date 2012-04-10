@@ -11,7 +11,7 @@ pt-BR:
         impugnment_date: "Data da impugnação"
         related: "Referente ao"
         person: "Autor"
-        valid_resson: "Motivo fundamentado da impugnação"
+        valid_reason: "Motivo fundamentado da impugnação"
         situation: "Situação"
         judgment_date: "Data do julgamento"
         observation: "Observação"

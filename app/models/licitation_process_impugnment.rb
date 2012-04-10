@@ -1,5 +1,5 @@
 class LicitationProcessImpugnment < ActiveRecord::Base
-  attr_accessible :licitation_process_id, :person_id, :impugnment_date, :related, :valid_resson
+  attr_accessible :licitation_process_id, :person_id, :impugnment_date, :related, :valid_reason
   attr_accessible :situation, :judgment_date, :observation
 
   has_enumeration_for :related
@@ -29,6 +29,6 @@ class LicitationProcessImpugnment < ActiveRecord::Base
   filterize
 
   def to_s
-    self.id.to_s
+    id.to_s
   end
 end
