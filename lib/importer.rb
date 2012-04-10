@@ -30,7 +30,7 @@ class Importer
   end
 
   def options
-    { :col_sep => ';', :headers => true }
+    { :col_sep => ';', :headers => true, :encoding => 'utf-8' }
   end
 
   def normalize_attributes(attributes)
