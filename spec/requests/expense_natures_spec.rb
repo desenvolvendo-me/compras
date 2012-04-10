@@ -9,6 +9,7 @@ feature "ExpenseNatures" do
   scenario 'create a new expense_nature' do
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
+    ExpenseCategory.make!(:despesa_corrente)
 
     click_link 'Contabilidade'
 
@@ -18,6 +19,7 @@ feature "ExpenseNatures" do
 
     fill_modal 'Entidade', :with => 'Detran'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+    fill_modal 'Categoria de despesa', :with => '3', :field => 'Código'
     fill_in 'Classificação da natureza da despesa', :with => '3.1.90.11.01.00.00.00'
     select 'Ambos', :from => 'Tipo'
     fill_in 'Descrição', :with => 'Vencimentos e Salários'
@@ -31,6 +33,7 @@ feature "ExpenseNatures" do
 
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Ato regulamentador', :with => '1234'
+    page.should have_field 'Categoria de despesa', :with => '3'
     page.should have_field 'Classificação da natureza da despesa', :with => '3.1.90.11.01.00.00.00'
     page.should have_select 'Tipo', :selected => 'Ambos'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários'
@@ -41,6 +44,7 @@ feature "ExpenseNatures" do
     ExpenseNature.make!(:vencimento_e_salarios)
     Entity.make!(:secretaria_de_educacao)
     RegulatoryAct.make!(:emenda)
+    ExpenseCategory.make!(:despesa_de_capital)
 
     click_link 'Contabilidade'
 
@@ -50,6 +54,7 @@ feature "ExpenseNatures" do
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
+    fill_modal 'Categoria de despesa', :with => '4', :field => 'Código'
     fill_in 'Classificação da natureza da despesa', :with => '1.2.34.56.78.90.12.34'
     select 'Analítico', :from => 'Tipo'
     fill_in 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
@@ -63,6 +68,7 @@ feature "ExpenseNatures" do
 
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Ato regulamentador', :with => '4567'
+    page.should have_field 'Categoria de despesa', :with => '4'
     page.should have_field 'Classificação da natureza da despesa', :with => '1.2.34.56.78.90.12.34'
     page.should have_select 'Tipo', :selected => 'Analítico'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários e Pagamento'

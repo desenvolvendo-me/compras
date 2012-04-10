@@ -1,7 +1,7 @@
 class ExpenseNature < ActiveRecord::Base
   attr_accessible :entity_id, :regulatory_act_id
   attr_accessible :expense_element, :kind
-  attr_accessible :description, :docket
+  attr_accessible :description, :docket, :expense_category_id
 
   attr_modal :expense_element, :description, :entity_id
   attr_modal :regulatory_act_id, :kind
@@ -10,6 +10,7 @@ class ExpenseNature < ActiveRecord::Base
 
   belongs_to :entity
   belongs_to :regulatory_act
+  belongs_to :expense_category
 
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :materials, :dependent => :restrict

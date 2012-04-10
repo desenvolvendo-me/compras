@@ -6,6 +6,7 @@ ExpenseNature.blueprint(:vencimento_e_salarios) do
   kind { ExpenseNatureKind::ANALYTICAL }
   description { 'Vencimentos e Salários' }
   docket { 'Registra o valor das despesas com vencimentos' }
+  expense_category { ExpenseCategory.make!(:despesa_corrente) }
 end
 
 ExpenseNature.blueprint(:compra_de_material) do
@@ -15,4 +16,5 @@ ExpenseNature.blueprint(:compra_de_material) do
   kind { ExpenseNatureKind::ANALYTICAL }
   description { 'Compra de Material' }
   docket { 'Registra o valor das despesas com compra de material' }
+  expense_category { ExpenseCategory.make!(:despesa_corrente) }
 end
