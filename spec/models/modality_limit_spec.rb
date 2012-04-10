@@ -39,5 +39,12 @@ describe ModalityLimit do
 
       ModalityLimit.current_limit_engineering_works_without_bidding.should eq 300.0
     end
+
+    it 'should return zero for current_limits when there is no current modality limit' do
+      ModalityLimit.stub(:current).and_return(nil)
+
+      ModalityLimit.current_limit_material_or_service_without_bidding.should eq 0
+      ModalityLimit.current_limit_engineering_works_without_bidding.should eq 0
+    end
   end
 end

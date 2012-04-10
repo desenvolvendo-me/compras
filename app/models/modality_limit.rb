@@ -28,10 +28,14 @@ class ModalityLimit < ActiveRecord::Base
     end
 
     def current_limit_material_or_service_without_bidding
+      return 0 unless current
+
       current.without_bidding
     end
 
     def current_limit_engineering_works_without_bidding
+      return 0 unless current
+
       current.work_without_bidding
     end
   end
