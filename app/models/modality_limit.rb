@@ -18,12 +18,22 @@ class ModalityLimit < ActiveRecord::Base
   orderize :published_date
   filterize
 
-  def self.current
-    where { validity_beginning.lteq(Date.current) }.order { validity_beginning }.last
-  end
-
   def to_s
     ordinance_number
+  end
+
+  class << self
+    def current
+      where { validity_beginning.lteq(Date.current) }.order { validity_beginning }.last
+    end
+
+    def current_limit_material_or_service_without_bidding
+      current.without_bidding
+    end
+
+    def current_limit_engineering_works_without_bidding
+      current.work_without_bidding
+    end
   end
 
   protected

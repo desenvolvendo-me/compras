@@ -56,6 +56,22 @@ describe DirectPurchase do
     subject.licitation_exemption
   end
 
+  it 'should delegate purchase_licitation_exemption to licitation object' do
+    subject.licitation_object_purchase_licitation_exemption.should eq nil
+
+    subject.stub(:licitation_object => double(:purchase_licitation_exemption => 300.0))
+
+    subject.licitation_object_purchase_licitation_exemption.should eq 300.0
+  end
+
+  it 'should delegate build_licitation_exemption to licitation object' do
+    subject.licitation_object_build_licitation_exemption.should eq nil
+
+    subject.stub(:licitation_object => double(:build_licitation_exemption => 200.0))
+
+    subject.licitation_object_build_licitation_exemption.should eq 200.0
+  end
+
   context "validations" do
     it "the duplicated budget_allocations should be invalid except the first" do
       allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)

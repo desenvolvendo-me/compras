@@ -26,6 +26,8 @@ class DirectPurchase < ActiveRecord::Base
 
   delegate :phone, :fax, :address, :city, :zip_code, :to => :provider, :allow_nil => true
   delegate :bank_account, :agency, :bank, :to => :provider, :allow_nil => true
+  delegate :purchase_licitation_exemption, :build_licitation_exemption,
+           :to => :licitation_object, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :status, :year, :date, :legal_reference, :modality, :presence => true

@@ -19,22 +19,20 @@ class DirectPurchaseModalityLimitVerificator
 
   # current modality limit value for the modality selected
   def current_limit
-    case direct_purchase.modality
-    when DirectPurchaseModality::MATERIAL_OR_SERVICE
-      limit_storage.current.without_bidding
-    when DirectPurchaseModality::ENGINEERING_WORKS
-      limit_storage.current.work_without_bidding
+    if direct_purchase.material_or_service?
+      limit_storage.current_limit_material_or_service_without_bidding
+    elsif direct_purchase.engineering_works?
+      limit_storage.current_limit_engineering_works_without_bidding
     end
   end
 
   # sum of all item values of all direct purchase items that belongs to selected
   # licitation object
   def current_total_of_licitation_object
-    case direct_purchase.modality
-    when DirectPurchaseModality::MATERIAL_OR_SERVICE
-      direct_purchase.licitation_object.purchase_licitation_exemption
-    when DirectPurchaseModality::ENGINEERING_WORKS
-      direct_purchase.licitation_object.build_licitation_exemption
+    if direct_purchase.material_or_service?
+      direct_purchase.licitation_object_purchase_licitation_exemption
+    elsif direct_purchase.engineering_works?
+      direct_purchase.licitation_object_build_licitation_exemption
     end
   end
 
