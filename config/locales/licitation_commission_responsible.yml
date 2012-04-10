@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_commission_responsible:
+        one: "Responsável"
+        other: "Responsáveis"
+
+    attributes:
+      licitation_commission_responsible:
+        individual: "Autoridade"
+        individual_cpf: "CPF"
+        role: "Cargo"
+        class_register: "Registro da classe"

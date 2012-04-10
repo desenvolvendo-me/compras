@@ -5,4 +5,5 @@ LicitationCommission.blueprint(:comissao) do
   expiration_date { Date.new(2012, 3, 22) }
   exoneration_date { Date.new(2012, 3, 25) }
   description { "descricao da comissao" }
+  licitation_commission_responsibles { [LicitationCommissionResponsible.make!(:advogado)] }
 end

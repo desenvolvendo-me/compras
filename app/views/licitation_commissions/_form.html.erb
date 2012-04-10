@@ -1,32 +1,29 @@
-<%= f.input :commission_type %>
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Dados gerais</a></li>
+    <li><a href="#responsibles">Responsáveis</a></li>
+  </ul>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :regulatory_act %>
+  <div id="general">
+    <%= render 'general', :f => f %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :regulatory_act_publication_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_publication_date) if f.object.regulatory_act_publication_date) } %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :nomination_date %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :expiration_date %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :exoneration_date %>
+  <div id="responsibles">
+    <%= render 'responsibles', :f => f %>
   </div>
 </div>
-
-<%= f.input :description %>
 
 <script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+
   $("#licitation_commission_regulatory_act").change(function (event, data) {
     if (data){
       var record = data.record;
@@ -34,5 +31,21 @@
     } else {
       $('#licitation_commission_regulatory_act_publication_date').val('');
     }
+  });
+
+  $(".licitation_commission").delegate('.individual', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $(this).closest('.responsible').find('.cpf').val(record.data('cpf'));
+    } else {
+      $(this).closest('.responsible').find('.cpf').val('');
+    }
+  });
+
+  $(".licitation_commission").delegate('.role', 'change', function (event, data) {
+    var class_register_needed = ($(this).val() == '<%= LicitationCommissionResponsibleRole::LAWYER %>');
+
+    $(this).closest('.responsible').find('.class_register').attr('disabled', !class_register_needed);
   });
 </script>

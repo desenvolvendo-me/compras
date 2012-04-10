@@ -1,0 +1,9 @@
+pt-BR:
+  enumerations:
+    licitation_commission_responsible_role:
+      mayor: Prefeito municipal
+      financial_secretary: Secretário de finanças
+      administration_secretary: Secretário de administração
+      purchase_and_licitation_director: Diretor de compras e licitações
+      purchase_and_licitation_leader: Chefe do setor de compras e licitações
+      lawyer: Advogado

@@ -4,6 +4,7 @@ require 'app/models/person'
 require 'app/models/address'
 require 'app/models/individual'
 require 'app/models/identity'
+require 'app/models/licitation_commission_responsible'
 
 describe Individual do
   it "delegate to person to_s method" do
@@ -33,6 +34,7 @@ describe Individual do
   it { should have_one :identity }
   it { should have_one :person }
   it { should have_many(:provider_partners).dependent(:restrict) }
+  it { should have_many(:licitation_commission_responsibles).dependent(:restrict) }
 
   it { should validate_presence_of :cpf }
   it { should validate_presence_of :mother }

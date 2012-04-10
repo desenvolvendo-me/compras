@@ -1,0 +1,26 @@
+<div id="licitation-commission-responsibles">
+  <%= f.association :licitation_commission_responsibles, :collection => localized(f.object.licitation_commission_responsibles) do |p| %>
+    <%= render 'licitation_commission_responsibles/form', :f => p %>
+  <% end %>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-responsible" value="Adicionar Responsável">
+</p>
+
+<%= mustache 'responsible-template' do %>
+  <%= f.association :licitation_commission_responsibles_attributes, :collection => f.object.licitation_commission_responsibles.build, :index => '{{uuid_responsible}}' do |p| %>
+    <%= render 'licitation_commission_responsibles/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#responsible-template").nestedForm({
+    add: '.add-responsible',
+    remove: '.remove-responsible',
+    target: '#licitation-commission-responsibles',
+    uuid: 'uuid_responsible',
+    fieldToRemove: '.responsible',
+    right: true
+  });
+</script>
