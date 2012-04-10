@@ -19,7 +19,7 @@ class ModalityLimit < ActiveRecord::Base
   filterize
 
   def self.current
-    where { validity_beginning.gteq(Date.current) }.order { validity_beginning }.last
+    where { validity_beginning.lteq(Date.current) }.order { validity_beginning }.last
   end
 
   def to_s
