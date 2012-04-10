@@ -17,7 +17,7 @@ describe Capability do
   it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
 
   it { should validate_presence_of :status }
-  it { should validate_presence_of :entity_id }
+  it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
   it { should validate_presence_of :description }
   it { should validate_presence_of :goal }
