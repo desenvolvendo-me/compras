@@ -30,7 +30,6 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_invited_bidder_documents).through(:licitation_process_invited_bidders) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
 
-  it { should validate_presence_of  :year }
   it { should validate_presence_of :process_date }
   it { should validate_presence_of :administrative_process }
   it { should validate_presence_of :object_description }
