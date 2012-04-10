@@ -1,7 +1,7 @@
 class DirectPurchaseModalityLimitVerificator
   attr_accessor :direct_purchase, :limit_storage, :modality
 
-  def initialize(direct_purchase, limit_storage=ModalityLimit)
+  def initialize(direct_purchase, limit_storage = ModalityLimit)
     self.direct_purchase = direct_purchase
     self.limit_storage = limit_storage
   end
