@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    expense_element_kind:
+    expense_nature_kind:
       analytical: Analítico
       synthetic: Sintético
       both: Ambos

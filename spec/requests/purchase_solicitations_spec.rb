@@ -13,7 +13,7 @@ feature "PurchaseSolicitations" do
   scenario 'create a new purchase_solicitation' do
     BudgetUnit.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
-    ExpenseElement.make!(:vencimento_e_salarios)
+    ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
@@ -46,7 +46,7 @@ feature "PurchaseSolicitations" do
 
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-        fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
+        fill_modal 'Natureza de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       end
 
       click_button 'Adicionar Item'
@@ -88,7 +88,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2012 - Alocação"
-      page.should have_field 'Elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Natureza de despesa', :with => '3.1.90.11.01.00.00.00'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -105,7 +105,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     BudgetUnit.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
-    ExpenseElement.make!(:compra_de_material)
+    ExpenseNature.make!(:compra_de_material)
     DeliveryLocation.make!(:health)
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     Material.make!(:arame_farpado)
@@ -135,7 +135,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
-      fill_modal 'Elemento', :with => 'Compra de Material', :field => 'Descrição'
+      fill_modal 'Natureza de despesa', :with => 'Compra de Material', :field => 'Descrição'
 
       click_button 'Adicionar Item'
 
@@ -173,7 +173,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2011 - Alocação extra"
-      page.should have_field 'Elemento', :with => '2.2.22.11.01.00.00.00'
+      page.should have_field 'Natureza de despesa', :with => '2.2.22.11.01.00.00.00'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -211,7 +211,7 @@ feature "PurchaseSolicitations" do
   scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
     BudgetUnit.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
-    ExpenseElement.make!(:vencimento_e_salarios)
+    ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
@@ -237,13 +237,13 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-      fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      fill_modal 'Natureza de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
 
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
         fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-        fill_modal 'Elemento', :with => 'Vencimentos e Salários', :field => 'Descrição'
+        fill_modal 'Natureza de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       end
     end
 

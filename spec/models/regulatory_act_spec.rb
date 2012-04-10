@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/regulatory_act'
-require 'app/models/expense_element'
+require 'app/models/expense_nature'
 require 'app/models/budget_unit_configuration'
 require 'app/models/organogram_responsible'
 require 'app/models/extra_credit'
@@ -16,7 +16,7 @@ describe RegulatoryAct do
   it { should belong_to :legal_text_nature }
 
   it { should have_one(:extra_credit) }
-  it { should have_many(:expense_elements).dependent(:restrict) }
+  it { should have_many(:expense_natures).dependent(:restrict) }
   it { should have_many(:budget_unit_configurations).dependent(:restrict) }
   it { should have_many(:organogram_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_modalities).dependent(:restrict) }

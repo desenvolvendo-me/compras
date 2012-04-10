@@ -14,7 +14,7 @@ pt-BR:
         subfunction: "Subfunção"
         government_program: "Programa do governo"
         government_action: "Ação do governo"
-        expense_element: "Elemento"
+        expense_nature: "Natureza de despesa"
         capability: "Recurso"
         description: "Descrição"
         goal: "Objetivo"

@@ -12,7 +12,7 @@ Material.blueprint(:antivirus) do
   material_characteristic { "material" }
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
-  expense_element { ExpenseElement.make!(:vencimento_e_salarios) }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
 Material.blueprint(:arame_farpado) do
@@ -29,7 +29,7 @@ Material.blueprint(:arame_farpado) do
   material_characteristic { "material" }
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
-  expense_element { ExpenseElement.make!(:vencimento_e_salarios) }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
 Material.blueprint(:arame_comum) do
@@ -44,5 +44,5 @@ Material.blueprint(:arame_comum) do
   material_characteristic { "material" }
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
-  expense_element { ExpenseElement.make!(:vencimento_e_salarios) }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end

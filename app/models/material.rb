@@ -2,7 +2,7 @@ class Material < ActiveRecord::Base
   attr_accessible :materials_class_id, :code, :description, :material_type
   attr_accessible :detailed_description, :minimum_stock_balance
   attr_accessible :reference_unit_id, :manufacturer, :perishable, :storable
-  attr_accessible :service_or_contract_type_id, :expense_element_id
+  attr_accessible :service_or_contract_type_id, :expense_nature_id
   attr_accessible :combustible, :material_characteristic
 
   attr_modal :description
@@ -13,7 +13,7 @@ class Material < ActiveRecord::Base
   belongs_to :materials_class
   belongs_to :reference_unit
   belongs_to :service_or_contract_type
-  belongs_to :expense_element
+  belongs_to :expense_nature
 
   has_and_belongs_to_many :providers
   has_and_belongs_to_many :licitation_objects

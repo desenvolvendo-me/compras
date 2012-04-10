@@ -2,7 +2,7 @@ class BudgetAllocation < ActiveRecord::Base
   attr_accessible :entity_id, :year, :description, :budget_unit_id, :date
   attr_accessible :subfunction_id, :government_program_id, :amount, :personal
   attr_accessible :government_action_id, :foresight, :education, :description
-  attr_accessible :expense_element_id, :capability_id, :goal
+  attr_accessible :expense_nature_id, :capability_id, :goal
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
   attr_accessible :alienation_appeal
 
@@ -15,7 +15,7 @@ class BudgetAllocation < ActiveRecord::Base
   belongs_to :subfunction
   belongs_to :government_program
   belongs_to :government_action
-  belongs_to :expense_element
+  belongs_to :expense_nature
   belongs_to :capability
   belongs_to :budget_allocation_type
 
@@ -42,7 +42,7 @@ class BudgetAllocation < ActiveRecord::Base
     relation = relation.where { subfunction_id.eq(options[:subfunction_id]) } if options[:subfunction_id].present?
     relation = relation.where { government_program_id.eq(options[:government_program_id]) } if options[:government_program_id].present?
     relation = relation.where { government_action_id.eq(options[:government_action_id]) } if options[:government_action_id].present?
-    relation = relation.where { expense_element_id.eq(options[:expense_element_id]) } if options[:expense_element_id].present?
+    relation = relation.where { expense_nature_id.eq(options[:expense_nature_id]) } if options[:expense_nature_id].present?
     relation = relation.joins(:subfunction).where { subfunctions.function_id.eq(options[:function_id]) } if options[:function_id].present?
     relation
   end

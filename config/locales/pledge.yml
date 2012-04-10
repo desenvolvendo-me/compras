@@ -24,7 +24,7 @@ pt-BR:
         budget_allocation_government_program: "Programa"
         budget_allocation_government_action: "Ação"
         budget_allocation_budget_unit: "Unidade orçamentária"
-        budget_allocation_expense_element: "Natureza da despesa"
+        budget_allocation_expense_nature: "Natureza da despesa"
         expense_kind: "Tipo de despesa"
         pledge_historic: "Histórico"
         licitation_modality: "Modalidade"

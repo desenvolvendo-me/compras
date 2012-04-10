@@ -273,7 +273,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :expense_elements do
+  resources :expense_natures do
     collection do
       get :filter
       get :modal

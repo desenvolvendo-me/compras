@@ -8,5 +8,5 @@ pt-BR:
     attributes:
       purchase_solicitation_budget_allocation:
         budget_allocation: "Dotação"
-        expense_element: "Elemento"
+        expense_nature: "Natureza de despesa"
         blocked: "Bloquear"

@@ -84,7 +84,7 @@
           $('#pledge_budget_allocation_government_program').val(record.data("government_program"));
           $('#pledge_budget_allocation_government_action').val(record.data("government_action"));
           $('#pledge_budget_allocation_budget_unit').val(record.data("budget_unit"));
-          $('#pledge_budget_allocation_expense_element').val(record.data("expense_element"));
+          $('#pledge_budget_allocation_expense_nature').val(record.data("expense-nature"));
 
           reserve_fund_budget_allocation_id = record.data('budget-allocation-id');
         } else {
@@ -118,7 +118,7 @@
           $('#pledge_budget_allocation_government_program').val(record.data("government_program"));
           $('#pledge_budget_allocation_government_action').val(record.data("government_action"));
           $('#pledge_budget_allocation_budget_unit').val(record.data("budget-unit"));
-          $('#pledge_budget_allocation_expense_element').val(record.data("expense_element"));
+          $('#pledge_budget_allocation_expense_nature').val(record.data("expense-nature"));
         } else {
           $('#pledge_budget_allocation_real_amount').val('');
           $('#pledge_budget_allocation_function').val('');
@@ -126,7 +126,7 @@
           $('#pledge_budget_allocation_government_program').val('');
           $('#pledge_budget_allocation_government_action').val('');
           $('#pledge_budget_allocation_budget_unit').val('');
-          $('#pledge_budget_allocation_expense_element').val('');
+          $('#pledge_budget_allocation_expense_nature').val('');
         }
       });
 

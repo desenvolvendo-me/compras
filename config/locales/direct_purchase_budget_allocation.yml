@@ -8,5 +8,5 @@ pt-BR:
     attributes:
       direct_purchase_budget_allocation:
         budget_allocation: "Dotação orçamentária"
-        expense_element: "Compl. do elemento"
+        expense_nature: "Compl. do elemento"
         amount: "Saldo da dotação"

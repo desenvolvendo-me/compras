@@ -9,6 +9,6 @@ pt-BR:
       licitation_process_budget_allocation:
         budget_allocation: "Dotação orçamentária"
         description: "Descrição"
-        expense_element: "Compl. do elemento"
+        expense_nature: "Compl. do elemento"
         amount: "Saldo da dotação"
         estimated_value: "Valor previsto"

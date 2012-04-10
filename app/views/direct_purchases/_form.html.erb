@@ -34,7 +34,7 @@
     if (data){
       var record = data.record;
 
-      $(this).closest('fieldset').find('.classification').val(record.data("expense_element"));
+      $(this).closest('fieldset').find('.classification').val(record.data("expense-nature"));
       $(this).closest('fieldset').find('.amount').val(record.data("amount"));
     }
   });

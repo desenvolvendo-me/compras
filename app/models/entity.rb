@@ -1,7 +1,7 @@
 class Entity < ActiveRecord::Base
   attr_accessible :name
 
-  has_many :expense_elements, :dependent => :restrict
+  has_many :expense_natures, :dependent => :restrict
   has_many :budget_unit_configurations, :dependent => :restrict
   has_many :capabilities, :dependent => :restrict
   has_many :government_programs, :dependent => :restrict

@@ -1,6 +1,6 @@
 require 'model_helper'
 require 'app/models/entity'
-require 'app/models/expense_element'
+require 'app/models/expense_nature'
 require 'app/models/budget_unit_configuration'
 require 'app/models/capability'
 require 'app/models/government_program'
@@ -23,7 +23,7 @@ describe Entity do
     subject.to_s.should eq 'Denatran'
   end
 
-  it { should have_many(:expense_elements).dependent(:restrict) }
+  it { should have_many(:expense_natures).dependent(:restrict) }
   it { should have_many(:budget_unit_configurations).dependent(:restrict) }
   it { should have_many(:capabilities).dependent(:restrict) }
   it { should have_many(:government_programs).dependent(:restrict) }

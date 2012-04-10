@@ -6,7 +6,7 @@ BudgetAllocation.blueprint(:alocacao) do
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
-  expense_element { ExpenseElement.make!(:vencimento_e_salarios) }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
   capability { Capability.make!(:reforma) }
   description { "Alocação" }
   goal { 'Manutenção da Unidade Administrativa' }
@@ -29,7 +29,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
-  expense_element { ExpenseElement.make!(:vencimento_e_salarios) }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
   capability { Capability.make!(:reforma) }
   description { "Alocação extra" }
   goal { 'Manutenção da Unidade Administrativa' }
@@ -52,7 +52,7 @@ BudgetAllocation.blueprint(:conserto) do
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
   government_action { GovernmentAction.make!(:governamental) }
-  expense_element { ExpenseElement.make!(:vencimento_e_salarios) }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
   capability { Capability.make!(:reforma) }
   description { "Conserto" }
   goal { 'Manutenção da Unidade Administrativa' }
@@ -75,7 +75,7 @@ BudgetAllocation.blueprint(:reparo_2011) do
   subfunction { Subfunction.make!(:supervisor) }
   government_program { GovernmentProgram.make!(:educacao) }
   government_action { GovernmentAction.make!(:nacional) }
-  expense_element { ExpenseElement.make!(:compra_de_material) }
+  expense_nature { ExpenseNature.make!(:compra_de_material) }
   capability { Capability.make!(:reforma) }
   description { "Manutenção e Reparo" }
   goal { 'Manutenção da Unidade Administrativa' }

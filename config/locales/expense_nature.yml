@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      expense_element:
-        one: "Classificação econômica das despesas"
-        other: "Classificações econômicas das despesas"
+      expense_nature:
+        one: "Natureza de Despesa"
+        other: "Naturezas de Despesas"
 
     attributes:
-      expense_element:
+      expense_nature:
         entity: "Entidade"
         regulatory_act: "Ato regulamentador"
         expense_element: "Classificação da natureza da despesa"

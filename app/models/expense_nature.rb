@@ -1,4 +1,4 @@
-class ExpenseElement < ActiveRecord::Base
+class ExpenseNature < ActiveRecord::Base
   attr_accessible :entity_id, :regulatory_act_id
   attr_accessible :expense_element, :kind
   attr_accessible :description, :docket
@@ -6,7 +6,7 @@ class ExpenseElement < ActiveRecord::Base
   attr_modal :expense_element, :description, :entity_id
   attr_modal :regulatory_act_id, :kind
 
-  has_enumeration_for :kind, :with => ExpenseElementKind, :create_helpers => true
+  has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
 
   belongs_to :entity
   belongs_to :regulatory_act
