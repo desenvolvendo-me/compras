@@ -89,6 +89,7 @@ describe DirectPurchase do
     it { should validate_presence_of :employee }
     it { should validate_presence_of :payment_method }
     it { should validate_presence_of :period }
+    it { should validate_presence_of :pledge_type }
 
     context '#authorized?' do
       it 'should return true when associated with supply_authorization' do

@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    direct_purchase_budget_allocation_pledge_type:
+    direct_purchase_pledge_type:
       global: "Global"
       estimated: "Estimativo"
       ordinary: "Ordinário"

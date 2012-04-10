@@ -30,6 +30,7 @@ feature "DirectPurchases" do
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
@@ -50,8 +51,6 @@ feature "DirectPurchases" do
       # getting data from modal
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '500,00'
-
-      select 'Global', :from => 'Tipo do empenho'
 
       click_button 'Adicionar Item'
 
@@ -81,6 +80,7 @@ feature "DirectPurchases" do
       page.should have_field 'Data da compra', :with => '19/03/2012'
       page.should have_field 'Referência legal', :with => 'Referencia legal'
       page.should have_select 'Modalidade', :selected => 'Material ou serviços'
+      page.should have_select 'Tipo do empenho', :selected => 'Global'
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Objeto da licitação', :with => 'Ponte'
@@ -97,7 +97,6 @@ feature "DirectPurchases" do
       page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
       page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
       page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_select 'Tipo do empenho', :selected => 'Global'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -128,6 +127,7 @@ feature "DirectPurchases" do
       page.should have_disabled_field 'Data da compra'
       page.should have_disabled_field 'Referência legal'
       page.should have_disabled_field 'Modalidade'
+      page.should have_disabled_field 'Tipo do empenho'
       page.should have_disabled_field 'Fornecedor'
       page.should have_disabled_field 'Unidade orçamentária'
       page.should have_disabled_field 'Objeto da licitação'
@@ -144,7 +144,6 @@ feature "DirectPurchases" do
       page.should have_disabled_field 'Dotação orçamentária'
       page.should have_disabled_field 'Compl. do elemento'
       page.should have_disabled_field 'Saldo da dotação'
-      page.should have_disabled_field 'Tipo do empenho'
       page.should have_disabled_field 'Material'
       page.should have_disabled_field 'Unidade'
       page.should have_disabled_field 'Marca/Referência'
@@ -271,6 +270,7 @@ feature "DirectPurchases" do
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
@@ -287,13 +287,11 @@ feature "DirectPurchases" do
       click_button 'Adicionar Dotação'
 
       fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-      select 'Global', :from => 'Tipo do empenho'
 
       click_button 'Adicionar Dotação'
 
       within '.direct-purchase-budget-allocation:last' do
         fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-        select 'Ordinário', :from => 'Tipo do empenho'
       end
     end
 

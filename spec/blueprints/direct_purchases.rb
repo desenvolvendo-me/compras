@@ -5,6 +5,7 @@ DirectPurchase.blueprint(:compra) do
   date { Date.new(2012, 3, 2) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
+  pledge_type { DirectPurchasePledgeType::GLOBAL }
   provider { Provider.make!(:wenderson_sa) }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
@@ -25,6 +26,7 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   date { Date.new(2012, 12, 1) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
+  pledge_type { DirectPurchasePledgeType::GLOBAL }
   provider { Provider.make!(:wenderson_sa) }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
@@ -45,6 +47,7 @@ DirectPurchase.blueprint(:compra_2011) do
   date { Date.new(2011, 11, 11) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::ENGINEERING_WORKS }
+  pledge_type { DirectPurchasePledgeType::GLOBAL }
   provider { Provider.make!(:wenderson_sa) }
   budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }

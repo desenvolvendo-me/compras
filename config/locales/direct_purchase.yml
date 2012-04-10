@@ -11,6 +11,7 @@ pt-BR:
         date: "Data da compra"
         legal_reference: "Referência legal"
         modality: "Modalidade"
+        pledge_type: "Tipo do empenho"
         provider: "Fornecedor"
         budget_unit: "Unidade orçamentária"
         licitation_object: "Objeto da licitação"

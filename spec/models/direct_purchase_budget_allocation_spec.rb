@@ -11,7 +11,6 @@ describe DirectPurchaseBudgetAllocation do
   it { should have_many(:items).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :budget_allocation }
-  it { should validate_presence_of :pledge_type }
 
   it 'should have at least one item' do
     subject.items.should be_empty
