@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/budget_allocation'
+require 'app/models/licitation_process_budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/reserve_fund'
