@@ -29,7 +29,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   year { 2013 }
   process_date { Date.new(2012, 3, 20) }
   administrative_process { AdministrativeProcess.make!(:compra_de_computadores) }
-  object_description { "Descricao" }
+  object_description { "Descricao do computador" }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
   expiration { "10 dias" }
