@@ -61,4 +61,24 @@ describe LicitationCommission do
     individual_one.errors.messages[:individual_id].should be_nil
     individual_two.errors.messages[:individual_id].should be_nil
   end
+
+  it "the duplicated individuals on members should be invalid except the first" do
+    individual_one = subject.licitation_commission_members.build(:individual_id => 1)
+    individual_two = subject.licitation_commission_members.build(:individual_id => 1)
+
+    subject.valid?
+
+    individual_one.errors.messages[:individual_id].should be_nil
+    individual_two.errors.messages[:individual_id].should include "já está em uso"
+  end
+
+  it "the diferent individuals on members should be valid" do
+    individual_one = subject.licitation_commission_members.build(:individual_id => 1)
+    individual_two = subject.licitation_commission_members.build(:individual_id => 2)
+
+    subject.valid?
+
+    individual_one.errors.messages[:individual_id].should be_nil
+    individual_two.errors.messages[:individual_id].should be_nil
+  end
 end
