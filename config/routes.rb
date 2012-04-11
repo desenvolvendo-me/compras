@@ -411,7 +411,14 @@ Tributario::Application.routes.draw do
       get :modal
     end
   end
-  
+
+  resources :licitation_process_appeals do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :licitation_process_impugnments do
     collection do
       get :filter

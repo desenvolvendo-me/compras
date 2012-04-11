@@ -1,0 +1,10 @@
+# encoding: utf-8
+LicitationProcessAppeal.blueprint(:interposicao_processo_licitatorio) do
+  licitation_process { LicitationProcess.make!(:processo_licitatorio) }
+  appeal_date { Date.new(2012, 4, 10) }
+  related { LicitationProcessAppealRelated::EDITAL }
+  person { Person.make!(:wenderson) }
+  valid_reason { "Processo licitatório inválido" }
+  licitation_committee_opinion { "" }
+  situation { Situation::PENDING }
+end

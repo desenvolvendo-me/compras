@@ -1,0 +1,31 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :licitation_process %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :appeal_date %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :related %>
+  </div>
+</div>
+
+<%= f.input :person %>
+<%= f.input :licitation_process_object_description, :disabled => true %>
+<%= f.input :valid_reason %>
+<%= f.input :licitation_committee_opinion %>
+<%= f.input :situation %>
+
+<script>
+  $('#licitation_process_appeal_licitation_process_id').change(function(event, data) {
+    if (data) {
+      var record = data.record;
+      $('#licitation_process_appeal_licitation_process_object_description').val(record.data('object-description'));
+    }
+    else{
+      $('#licitation_process_appeal_licitation_process_object_description').val('');
+    }
+  });
+</script>

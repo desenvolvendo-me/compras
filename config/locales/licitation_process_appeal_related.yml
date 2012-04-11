@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    licitation_process_appeal_related:
+      edital: "Edital"
+      documentation: "Documentação"
+      proposal: "Proposta"
+      cancellation: "Anulação"
+      revogation: "Revogação"

@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_appeal:
+        one: "Interposição de Recurso do Processo Licitatório"
+        other: "Interposições de Recursos do Processo Licitatório"
+
+    attributes:
+      licitation_process_appeal:
+        licitation_process: "Processo licitatório"
+        appeal_date: "Data do recurso"
+        related: "Referente ao"
+        person: "Autor"
+        valid_reason: "Motivo fundamentado do recurso"
+        licitation_committee_opinion: "Parecer da comissão de licitação"
+        situation: "Situação"
+        licitation_process_object_description: "Objeto do Processo"
