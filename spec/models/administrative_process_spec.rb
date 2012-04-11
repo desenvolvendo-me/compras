@@ -4,6 +4,8 @@ require 'app/models/administrative_process'
 require 'app/models/budget_unit'
 require 'app/models/employee'
 require 'app/models/licitation_process'
+require 'app/models/administrative_process_budget_allocation'
+require 'app/models/budget_allocation'
 require 'app/enumerations/administrative_process_modality'
 require 'app/enumerations/administrative_process_object_type'
 require 'app/business/administrative_process_modalities_by_object_type'
@@ -20,6 +22,7 @@ describe AdministrativeProcess do
   it { should belong_to :judgment_form }
 
   it { should have_many(:licitation_processes).dependent(:restrict) }
+  it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }
@@ -81,5 +84,41 @@ describe AdministrativeProcess do
     test_type(AdministrativeProcessObjectType::CONCESSIONS_AND_PERMITS, [AdministrativeProcessModality::COMPETITION_FOR_GRANTS])
 
     test_type(AdministrativeProcessObjectType::CALL_NOTICE, [AdministrativeProcessModality::COMPETITION, AdministrativeProcessModality::OTHER_MODALITIES])
+  end
+
+  it 'should return 0 for total value of all budget allocations when have no allocations' do
+    subject.administrative_process_budget_allocations.should be_empty
+
+    subject.total_allocations_value.should eq 0
+  end
+
+  it 'should return total value of all budget allocations' do
+    subject.stub(:administrative_process_budget_allocations).and_return([
+      double(:value => 20),
+      double(:value => 30),
+      double(:value => 45)
+    ])
+
+    subject.total_allocations_value.should eq 95
+  end
+
+  it "the duplicated budget_allocations should be invalid except the first" do
+    allocation_one = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
+    allocation_two = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
+
+    subject.valid?
+
+    allocation_one.errors.messages[:budget_allocation_id].should be_nil
+    allocation_two.errors.messages[:budget_allocation_id].should include "já está em uso"
+  end
+
+  it "the diferent budget_allocations should be valid" do
+    allocation_one = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
+    allocation_two = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 2)
+
+    subject.valid?
+
+    allocation_one.errors.messages[:budget_allocation_id].should be_nil
+    allocation_two.errors.messages[:budget_allocation_id].should be_nil
   end
 end

@@ -12,6 +12,7 @@ AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   responsible { Employee.make!(:sobrinho) }
   status { AdministrativeProcessStatus::WAITING }
   item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
 end
 
 AdministrativeProcess.blueprint(:compra_de_computadores) do
@@ -27,6 +28,7 @@ AdministrativeProcess.blueprint(:compra_de_computadores) do
   responsible { Employee.make!(:sobrinho) }
   status { AdministrativeProcessStatus::WAITING }
   item { 'Item 2' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
 end
 
 AdministrativeProcess.blueprint(:compra_sem_convite) do
@@ -42,4 +44,5 @@ AdministrativeProcess.blueprint(:compra_sem_convite) do
   responsible { Employee.make!(:sobrinho) }
   status { AdministrativeProcessStatus::WAITING }
   item { 'Item 2' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
 end

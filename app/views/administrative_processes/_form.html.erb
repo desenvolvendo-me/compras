@@ -1,10 +1,15 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Dados gerais</a></li>
+    <li><a href="#budget-allocations">Dotações orçamentárias</a></li>
   </ul>
 
   <div id="general">
     <%= render 'general', :f => f %>
+  </div>
+
+  <div id="budget-allocations">
+    <%= render 'budget_allocations', :f => f %>
   </div>
 </div>
 
@@ -50,5 +55,28 @@
 
   <% if f.object.persisted? %>
     $('form.administrative_process :input').attr('disabled', true);
+    $('form.administrative_process .add-administrative-process-budget-allocation').hide();
+    $('form.administrative_process .remove-administrative-process-budget-allocation').hide();
   <% end %>
+
+  function calculateAllocationsTotalValue() {
+    var total = 0,
+    value;
+
+    $.each($('.allocation-value:visible'), function() {
+      value = $(this).attr('value');
+      if (value) {
+        total += parsePtBrFloat(value);
+      }
+    });
+    $('#administrative_process_total_allocations_value').val(floatToPtBrString(total));
+  }
+
+  $('form.administrative_process').delegate('.allocation-value', 'keyup', function() {
+    calculateAllocationsTotalValue();
+  });
+
+  $('form.administrative_process').delegate('.remove-administrative-process-budget-allocation', 'click', function() {
+    calculateAllocationsTotalValue();
+  });
 </script>

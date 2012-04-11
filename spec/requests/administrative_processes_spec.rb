@@ -11,6 +11,7 @@ feature "AdministrativeProcesses" do
     BudgetUnit.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
 
     click_link 'Processos'
 
@@ -32,6 +33,13 @@ feature "AdministrativeProcesses" do
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       select 'Aguardando', :from => 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+      fill_in 'Valor *', :with => '20,00'
     end
 
     click_button 'Criar Processo Administrativo'
@@ -58,6 +66,11 @@ feature "AdministrativeProcesses" do
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
       page.should have_disabled_field 'Data de liberação'
     end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      page.should have_field 'Valor *', :with => '20,00'
+    end
   end
 
   scenario 'should have all fields disabled when editing an existent administrative_process' do
@@ -83,6 +96,14 @@ feature "AdministrativeProcesses" do
       page.should have_disabled_field 'Objeto do processo licitatório'
       page.should have_disabled_field 'Responsável'
       page.should have_disabled_field 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_disabled_field 'Dotação orçamentária'
+      page.should have_disabled_field 'Valor *'
+
+      page.should_not have_button 'Adicionar Dotação'
+      page.should_not have_button 'Remover Dotação'
     end
   end
 
@@ -111,5 +132,83 @@ feature "AdministrativeProcesses" do
     page.should have_content "Forma de julgamento: Forma Global com Menor Preço"
     page.should have_content "Descrição do objeto: Licitação para compra de carteiras"
     page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
+  end
+
+  scenario 'value calculation on budget allocations' do
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Adicionar Dotação'
+
+      fill_in 'Valor *', :with => '20,00'
+
+      page.should have_field 'Valor total', :with => '20,00'
+
+      click_button 'Adicionar Dotação'
+
+      within '.administrative-process-budget-allocation:last' do
+        fill_in 'Valor *', :with => '30,00'
+      end
+
+      page.should have_field 'Valor total', :with => '50,00'
+
+      click_button 'Remover Dotação'
+
+      page.should have_field 'Valor total', :with => '30,00'
+    end
+  end
+
+  scenario 'asserting that duplicated budget allocations cannot be saved' do
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetUnit.make!(:secretaria_de_educacao)
+    JudgmentForm.make!(:global_com_menor_preco)
+    Employee.make!(:sobrinho)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Status do processo administrativo'
+      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      select 'Aguardando', :from => 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+      fill_in 'Valor *', :with => '20,00'
+
+      click_button 'Adicionar Dotação'
+
+      within '.administrative-process-budget-allocation:last' do
+        fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+        fill_in 'Valor *', :with => '30,00'
+      end
+    end
+
+    click_button 'Criar Processo Administrativo'
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_content 'já está em uso'
+    end
   end
 end

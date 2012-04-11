@@ -1,0 +1,26 @@
+<div id="allocations">
+  <%= f.input :total_allocations_value, :disabled => true, :input_html => { :value => f.object.presenter.total_allocations_value } %>
+
+  <%= f.association :administrative_process_budget_allocations, :collection => localized(f.object.administrative_process_budget_allocations) do |p| %>
+    <%= render 'administrative_process_budget_allocations/form', :f => p %>
+  <% end %>
+
+  <%= mustache 'administrative-process-budget-allocations-template' do %>
+    <%= f.association :administrative_process_budget_allocations_attributes, :collection => f.object.administrative_process_budget_allocations.build, :index => '{{uuid_administrative_process_budget_allocation}}' do |p| %>
+      <%= render 'administrative_process_budget_allocations/form', :f => p %>
+    <% end %>
+  <% end %>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-administrative-process-budget-allocation" value="Adicionar Dotação">
+</p>
+
+<script>
+  $("#administrative-process-budget-allocations-template").nestedForm({
+    add: '.add-administrative-process-budget-allocation',
+    remove: '.remove-administrative-process-budget-allocation',
+    target: '#allocations',
+    uuid: 'uuid_administrative_process_budget_allocation'
+  });
+</script>

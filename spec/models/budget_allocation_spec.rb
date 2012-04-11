@@ -8,6 +8,7 @@ require 'app/models/reserve_fund'
 require 'app/models/pledge'
 require 'app/models/direct_purchase_budget_allocation'
 require 'app/models/extra_credit_moviment_type'
+require 'app/models/administrative_process_budget_allocation'
 
 describe BudgetAllocation do
   it 'should return "id/year - description" as to_s' do
@@ -34,6 +35,7 @@ describe BudgetAllocation do
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:restrict) }
   it { should have_many(:licitation_process_budget_allocations).dependent(:restrict) }
+  it { should have_many(:administrative_process_budget_allocations).dependent(:restrict) }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }

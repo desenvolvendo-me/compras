@@ -25,6 +25,7 @@ class BudgetAllocation < ActiveRecord::Base
   has_many :direct_purchase_budget_allocations, :dependent => :restrict
   has_many :licitation_process_budget_allocations, :dependent => :restrict
   has_many :extra_credit_moviment_types, :dependent => :restrict
+  has_many :administrative_process_budget_allocations, :dependent => :restrict
 
   delegate :function, :function_id, :to => :subfunction, :allow_nil => true
 
