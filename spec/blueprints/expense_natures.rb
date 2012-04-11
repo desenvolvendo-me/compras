@@ -8,6 +8,7 @@ ExpenseNature.blueprint(:vencimento_e_salarios) do
   docket { 'Registra o valor das despesas com vencimentos' }
   expense_group { ExpenseGroup.make!(:restos_a_pagar) }
   expense_category { ExpenseCategory.make!(:despesa_corrente) }
+  expense_modality { ExpenseModality.make!(:transferencias_intragovernamentais) }
 end
 
 ExpenseNature.blueprint(:compra_de_material) do
@@ -19,4 +20,5 @@ ExpenseNature.blueprint(:compra_de_material) do
   docket { 'Registra o valor das despesas com compra de material' }
   expense_group { ExpenseGroup.make!(:restos_a_pagar) }
   expense_category { ExpenseCategory.make!(:despesa_corrente) }
+  expense_modality { ExpenseModality.make!(:transferencias_intragovernamentais) }
 end

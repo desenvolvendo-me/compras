@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      expense_modality:
+        one: "Modalidade da Receita"
+        other: "Modalidades da Receitas"
+
+    attributes:
+      expense_modality:
+        code: "Código"
+        description: "Descrição"

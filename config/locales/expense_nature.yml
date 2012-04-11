@@ -12,6 +12,7 @@ pt-BR:
         expense_element: "Classificação da natureza da despesa"
         expense_category: "Categoria da despesa"
         expense_group: "Grupo da despesa"
+        expense_modality: "Modalidade da despesa"
         kind: "Tipo"
         description: "Descrição"
         docket: "Súmula"
