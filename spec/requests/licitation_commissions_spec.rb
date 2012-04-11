@@ -324,4 +324,55 @@ feature "LicitationCommissions" do
       page.should have_content 'já está em uso'
     end
   end
+
+  scenario 'asserting that duplicated individuals on members can not be saved' do
+    RegulatoryAct.make!(:sopa)
+    Person.make!(:wenderson)
+
+    click_link 'Contabilidade'
+
+    click_link 'Comissões de Licitação'
+
+    click_link 'Criar Comissão de Licitação'
+
+    within_tab 'Dados gerais' do
+      select 'Especial', :from => 'Tipo de comissão'
+
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
+      page.should have_field 'Ato regulamentador', :with => '1234'
+
+      page.should have_disabled_field 'Data da publicação do ato'
+      page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
+
+      fill_in 'Data da nomeação', :with => '20/03/2012'
+      fill_in 'Data da expiração', :with => '22/03/2012'
+      fill_in 'Data da exoneração', :with => '25/03/2012'
+      fill_in 'Descrição e finalidade da comissão', :with => 'descrição'
+    end
+
+    within_tab 'Membros' do
+      click_button 'Adicionar Membro'
+
+      fill_modal 'Membro', :with => 'Wenderson Malheiros'
+      select 'Suplente', :from => 'Função'
+      select 'Servidor efetivo', :from => 'Natureza do cargo'
+      fill_in 'Matrícula', :with => '3456789'
+
+      click_button 'Adicionar Membro'
+
+      within '.member:last' do
+        fill_modal 'Membro', :with => 'Wenderson Malheiros'
+        select 'Apoio', :from => 'Função'
+        select 'Outros', :from => 'Natureza do cargo'
+        fill_in 'Matrícula', :with => '987654'
+      end
+    end
+
+    click_button 'Criar Comissão de Licitação'
+
+    within_tab 'Membros' do
+      page.should have_content 'já está em uso'
+    end
+  end
 end

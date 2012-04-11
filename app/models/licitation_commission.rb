@@ -20,7 +20,8 @@ class LicitationCommission < ActiveRecord::Base
   validates :commission_type, :nomination_date, :expiration_date, :exoneration_date, :regulatory_act, :presence => true
   validates :expiration_date, :exoneration_date, :timeliness => { :on_or_after => :nomination_date, :type => :date }, :allow_blank => true
 
-  validate :cannot_have_duplicated_individuals
+  validate :cannot_have_duplicated_individuals_on_responsibles
+  validate :cannot_have_duplicated_individuals_on_members
 
   orderize :id
   filterize
@@ -31,12 +32,24 @@ class LicitationCommission < ActiveRecord::Base
 
   protected
 
-  def cannot_have_duplicated_individuals
+  def cannot_have_duplicated_individuals_on_responsibles
     single_individuals = []
 
     licitation_commission_responsibles.each do |responsible|
       if single_individuals.include?(responsible.individual_id)
         errors.add(:licitation_commission_responsibles)
+        responsible.errors.add(:individual_id, :taken)
+      end
+      single_individuals << responsible.individual_id
+    end
+  end
+
+  def cannot_have_duplicated_individuals_on_members
+    single_individuals = []
+
+    licitation_commission_members.each do |responsible|
+      if single_individuals.include?(responsible.individual_id)
+        errors.add(:licitation_commission_members)
         responsible.errors.add(:individual_id, :taken)
       end
       single_individuals << responsible.individual_id
