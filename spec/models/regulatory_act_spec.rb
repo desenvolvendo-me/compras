@@ -5,6 +5,8 @@ require 'app/models/expense_nature'
 require 'app/models/budget_unit_configuration'
 require 'app/models/organogram_responsible'
 require 'app/models/extra_credit'
+require 'app/models/revenue_nature'
+require 'app/models/licitation_modality'
 
 describe RegulatoryAct do
   it 'should return act_number as to_s method' do
