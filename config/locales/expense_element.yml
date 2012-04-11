@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      expense_element:
+        one: "Element da Receita"
+        other: "Elementos das Receitas"
+
+    attributes:
+      expense_element:
+        code: "Código"
+        description: "Descrição"

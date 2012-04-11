@@ -12,6 +12,7 @@ feature "ExpenseNatures" do
     ExpenseCategory.make!(:despesa_corrente)
     ExpenseGroup.make!(:restos_a_pagar)
     ExpenseModality.make!(:transferencias_intragovernamentais)
+    ExpenseElement.make!(:aposentadorias)
 
     click_link 'Contabilidade'
 
@@ -24,6 +25,7 @@ feature "ExpenseNatures" do
     fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
     fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
     fill_modal 'Modalidade da despesa', :with => '10', :field => 'Código'
+    fill_modal 'Elemento da despesa', :with => '1', :field => 'Código'
     fill_in 'Classificação da natureza da despesa', :with => '3.1.90.11.01.00.00.00'
     select 'Ambos', :from => 'Tipo'
     fill_in 'Descrição', :with => 'Vencimentos e Salários'
@@ -39,6 +41,7 @@ feature "ExpenseNatures" do
     page.should have_field 'Ato regulamentador', :with => '1234'
     page.should have_field 'Grupo da despesa', :with => '0'
     page.should have_field 'Modalidade da despesa', :with => '10'
+    page.should have_field 'Elemento da despesa', :with => '1'
     page.should have_field 'Categoria da despesa', :with => '3'
     page.should have_field 'Classificação da natureza da despesa', :with => '3.1.90.11.01.00.00.00'
     page.should have_select 'Tipo', :selected => 'Ambos'
@@ -53,6 +56,7 @@ feature "ExpenseNatures" do
     ExpenseCategory.make!(:despesa_de_capital)
     ExpenseGroup.make!(:investimentos)
     ExpenseModality.make!(:transferencias_a_uniao)
+    ExpenseElement.make!(:pensoes)
 
     click_link 'Contabilidade'
 
@@ -65,6 +69,7 @@ feature "ExpenseNatures" do
     fill_modal 'Grupo da despesa', :with => '4', :field => 'Código'
     fill_modal 'Modalidade da despesa', :with => '20', :field => 'Código'
     fill_modal 'Categoria da despesa', :with => '4', :field => 'Código'
+    fill_modal 'Elemento da despesa', :with => '3', :field => 'Código'
     fill_in 'Classificação da natureza da despesa', :with => '1.2.34.56.78.90.12.34'
     select 'Analítico', :from => 'Tipo'
     fill_in 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
@@ -80,6 +85,7 @@ feature "ExpenseNatures" do
     page.should have_field 'Ato regulamentador', :with => '4567'
     page.should have_field 'Grupo da despesa', :with => '4'
     page.should have_field 'Modalidade da despesa', :with => '20'
+    page.should have_field 'Elemento da despesa', :with => '3'
     page.should have_field 'Categoria da despesa', :with => '4'
     page.should have_field 'Classificação da natureza da despesa', :with => '1.2.34.56.78.90.12.34'
     page.should have_select 'Tipo', :selected => 'Analítico'
