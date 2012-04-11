@@ -18,19 +18,21 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    page.should have_disabled_field 'Status do processo administrativo'
-    page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Status do processo administrativo'
+      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
-    fill_in 'Ano', :with => '2012'
-    fill_in 'Data do processo', :with => '07/03/2012'
-    fill_in 'Número do protocolo', :with => '00099/2012'
-    fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
-    select 'Compras e serviços', :from => 'Tipo de objeto'
-    select 'Pregão presencial', :from => 'Modalidade'
-    fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
-    fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-    fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-    select 'Aguardando', :from => 'Status do processo administrativo'
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      select 'Aguardando', :from => 'Status do processo administrativo'
+    end
 
     click_button 'Criar Processo Administrativo'
 
@@ -40,20 +42,22 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should have_disabled_field 'Processo'
-    page.should have_field 'Process', :with => '1'
-    page.should have_disabled_field 'Ano'
-    page.should have_field 'Ano', :with => '2012'
-    page.should have_field 'Data do processo', :with => '07/03/2012'
-    page.should have_field 'Número do protocolo', :with => '00099/2012'
-    page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
-    page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
-    page.should have_select 'Modalidade', :selected => 'Pregão presencial'
-    page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
-    page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    page.should have_disabled_field 'Data de liberação'
+    within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Processo'
+      page.should have_field 'Process', :with => '1'
+      page.should have_disabled_field 'Ano'
+      page.should have_field 'Ano', :with => '2012'
+      page.should have_field 'Data do processo', :with => '07/03/2012'
+      page.should have_field 'Número do protocolo', :with => '00099/2012'
+      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      page.should have_select 'Modalidade', :selected => 'Pregão presencial'
+      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      page.should have_disabled_field 'Data de liberação'
+    end
   end
 
   scenario 'should have all fields disabled when editing an existent administrative_process' do
@@ -67,17 +71,19 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should have_disabled_field 'Processo'
-    page.should have_disabled_field 'Ano'
-    page.should have_disabled_field 'Data do processo'
-    page.should have_disabled_field 'Número do protocolo'
-    page.should have_disabled_field 'Unidade orçamentária'
-    page.should have_disabled_field 'Tipo de objeto'
-    page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Forma de julgamento'
-    page.should have_disabled_field 'Objeto do processo licitatório'
-    page.should have_disabled_field 'Responsável'
-    page.should have_disabled_field 'Status do processo administrativo'
+    within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Processo'
+      page.should have_disabled_field 'Ano'
+      page.should have_disabled_field 'Data do processo'
+      page.should have_disabled_field 'Número do protocolo'
+      page.should have_disabled_field 'Unidade orçamentária'
+      page.should have_disabled_field 'Tipo de objeto'
+      page.should have_disabled_field 'Modalidade'
+      page.should have_disabled_field 'Forma de julgamento'
+      page.should have_disabled_field 'Objeto do processo licitatório'
+      page.should have_disabled_field 'Responsável'
+      page.should have_disabled_field 'Status do processo administrativo'
+    end
   end
 
   scenario 'should be printable' do

@@ -1,49 +1,24 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-4">
-    <%= f.input :process, :disabled => true %>
-  </div>
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Dados gerais</a></li>
+  </ul>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :year, :disabled => f.object.persisted? %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :date %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :protocol %>
-  </div>
-</div>
-
-<%= f.input :budget_unit %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :object_type %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :item %>
-  </div>
-</div>
-
-<%= f.input :modality %>
-<%= f.input :judgment_form %>
-<%= f.input :description %>
-<%= f.input :responsible %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :status, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :delivery_date, :disabled => true %>
+  <div id="general">
+    <%= render 'general', :f => f %>
   </div>
 </div>
 
 <script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+
   (function () {
     var modalitiesGroups = <%= AdministrativeProcessModalitiesByObjectType.new.modalities_groups.to_json.html_safe %>,
         modalitiesOptions = _(<%= AdministrativeProcessModality.to_a.to_json.html_safe %>);
