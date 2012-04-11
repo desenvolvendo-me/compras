@@ -1,5 +1,5 @@
 class ExpenseNature < ActiveRecord::Base
-  attr_accessible :entity_id, :regulatory_act_id
+  attr_accessible :entity_id, :regulatory_act_id, :expense_split
   attr_accessible :classification, :kind, :expense_group_id
   attr_accessible :description, :docket, :expense_category_id
   attr_accessible :expense_modality_id, :expense_element_id
@@ -21,8 +21,9 @@ class ExpenseNature < ActiveRecord::Base
   has_many :budget_allocations, :dependent => :restrict
 
   validates :classification, :kind, :description, :expense_group, :presence => true
-  validates :expense_modality, :expense_element, :presence => true
+  validates :expense_modality, :expense_element, :expense_split, :presence => true
   validates :classification, :mask => '9.9.99.99.99.99.99.99', :allow_blank => true
+  validates :expense_split, :mask => '99999999', :allow_blank => true
 
   orderize :description
   filterize

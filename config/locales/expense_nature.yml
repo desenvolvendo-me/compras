@@ -14,6 +14,7 @@ pt-BR:
         expense_group: "Grupo da despesa"
         expense_modality: "Modalidade da despesa"
         expense_element: "Elemento da despesa"
+        expense_split: "Desdobramento da despesa"
         kind: "Tipo"
         description: "Descrição"
         docket: "Súmula"

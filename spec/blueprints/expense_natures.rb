@@ -10,6 +10,7 @@ ExpenseNature.blueprint(:vencimento_e_salarios) do
   expense_category { ExpenseCategory.make!(:despesa_corrente) }
   expense_modality { ExpenseModality.make!(:transferencias_intragovernamentais) }
   expense_element { ExpenseElement.make!(:aposentadorias) }
+  expense_split { '12345569' }
 end
 
 ExpenseNature.blueprint(:compra_de_material) do
@@ -23,4 +24,5 @@ ExpenseNature.blueprint(:compra_de_material) do
   expense_category { ExpenseCategory.make!(:despesa_corrente) }
   expense_modality { ExpenseModality.make!(:transferencias_intragovernamentais) }
   expense_element { ExpenseElement.make!(:aposentadorias) }
+  expense_split { '12345569' }
 end
