@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      expense_group:
+        one: "Grupo da Receita"
+        other: "Grupos da Receitas"
+
+    attributes:
+      expense_group:
+        code: "Código"
+        description: "Descrição"

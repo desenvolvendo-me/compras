@@ -274,6 +274,7 @@ Tributario::Application.routes.draw do
   end
 
   get 'expense_categories/modal', :as => :modal_expense_categories
+  get 'expense_groups/modal', :as => :modal_expense_groups
 
   resources :expense_natures do
     collection do
