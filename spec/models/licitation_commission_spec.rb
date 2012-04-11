@@ -42,7 +42,7 @@ describe LicitationCommission do
     subject.regulatory_act_publication_date.should eq Date.new(2012, 2, 28)
   end
 
-  it "the duplicated individuals should be invalid except the first" do
+  it "the duplicated individuals on responsibles should be invalid except the first" do
     individual_one = subject.licitation_commission_responsibles.build(:individual_id => 1)
     individual_two = subject.licitation_commission_responsibles.build(:individual_id => 1)
 
@@ -52,7 +52,7 @@ describe LicitationCommission do
     individual_two.errors.messages[:individual_id].should include "já está em uso"
   end
 
-  it "the diferent individuals should be valid" do
+  it "the diferent individuals on responsibles should be valid" do
     individual_one = subject.licitation_commission_responsibles.build(:individual_id => 1)
     individual_two = subject.licitation_commission_responsibles.build(:individual_id => 2)
 
