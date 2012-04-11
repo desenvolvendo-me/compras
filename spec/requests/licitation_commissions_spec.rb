@@ -9,6 +9,7 @@ feature "LicitationCommissions" do
   scenario 'create a new licitation_commission' do
     RegulatoryAct.make!(:sopa)
     Person.make!(:wenderson)
+    Person.make!(:sobrinho)
 
     click_link 'Contabilidade'
 
@@ -40,6 +41,15 @@ feature "LicitationCommissions" do
       fill_in 'Registro da classe', :with => '123456'
     end
 
+    within_tab 'Membros' do
+      click_button 'Adicionar Membro'
+
+      fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+      select 'Suplente', :from => 'Função'
+      select 'Servidor efetivo', :from => 'Natureza do cargo'
+      fill_in 'Matrícula', :with => '3456789'
+    end
+
     click_button 'Criar Comissão de Licitação'
 
     page.should have_notice 'Comissão de Licitação criada com sucesso.'
@@ -61,12 +71,20 @@ feature "LicitationCommissions" do
       page.should have_select 'Cargo', :selected => 'Advogado'
       page.should have_field 'Registro da classe', :with => '123456'
     end
+
+    within_tab 'Membros' do
+      page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+      page.should have_select 'Função', :selected => 'Suplente'
+      page.should have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
+      page.should have_field 'Matrícula', :with => '3456789'
+    end
   end
 
   scenario 'update an existent licitation_commission' do
     RegulatoryAct.make!(:medida_provisoria)
     LicitationCommission.make!(:comissao)
     Person.make!(:sobrinho)
+    Person.make!(:wenderson)
 
     click_link 'Contabilidade'
 
@@ -101,6 +119,17 @@ feature "LicitationCommissions" do
       select 'Prefeito municipal', :from => 'Cargo'
     end
 
+    within_tab 'Membros' do
+      click_button 'Remover'
+
+      click_button 'Adicionar Membro'
+
+      fill_modal 'Membro', :with => 'Wenderson Malheiros'
+      select 'Apoio', :from => 'Função'
+      select 'Outros', :from => 'Natureza do cargo'
+      fill_in 'Matrícula', :with => '987654'
+    end
+
     click_button 'Atualizar Comissão de Licitação'
 
     page.should have_notice 'Comissão de Licitação editada com sucesso.'
@@ -122,6 +151,13 @@ feature "LicitationCommissions" do
 
       page.should have_field 'Autoridade', :with => 'Gabriel Sobrinho'
       page.should have_select 'Cargo', :selected => 'Prefeito municipal'
+    end
+
+    within_tab 'Membros' do
+      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+      page.should have_select 'Função', :selected => 'Apoio'
+      page.should have_select 'Natureza do cargo', :selected => 'Outros'
+      page.should have_field 'Matrícula', :with => '987654'
     end
   end
 
@@ -160,6 +196,19 @@ feature "LicitationCommissions" do
       page.should have_field 'CPF', :with => '003.149.513-34'
 
       clear_modal 'Autoridade'
+      page.should have_disabled_field 'CPF'
+      page.should have_field 'CPF', :with => ''
+    end
+
+    within_tab 'Membros' do
+      click_button 'Adicionar Membro'
+
+      fill_modal 'Membro', :with => 'Wenderson Malheiros'
+
+      page.should have_disabled_field 'CPF'
+      page.should have_field 'CPF', :with => '003.149.513-34'
+
+      clear_modal 'Membro'
       page.should have_disabled_field 'CPF'
       page.should have_field 'CPF', :with => ''
     end

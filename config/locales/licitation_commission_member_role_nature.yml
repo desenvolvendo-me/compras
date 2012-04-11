@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    licitation_commission_member_role_nature:
+      public_agent: Agente público
+      commission_role: Cargo em comissão
+      efective_server: Servidor efetivo
+      temporary_server: Servidor temporário
+      others: Outros

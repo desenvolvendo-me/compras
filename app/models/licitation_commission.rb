@@ -1,6 +1,7 @@
 class LicitationCommission < ActiveRecord::Base
   attr_accessible :commission_type, :nomination_date, :expiration_date, :exoneration_date
   attr_accessible :description, :regulatory_act_id, :licitation_commission_responsibles_attributes
+  attr_accessible :licitation_commission_members_attributes
 
   attr_modal :commission_type, :nomination_date, :expiration_date, :exoneration_date
 
@@ -9,8 +10,10 @@ class LicitationCommission < ActiveRecord::Base
   belongs_to :regulatory_act
 
   has_many :licitation_commission_responsibles, :dependent => :destroy
+  has_many :licitation_commission_members, :dependent => :destroy
 
   accepts_nested_attributes_for :licitation_commission_responsibles, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_commission_members, :allow_destroy => true
 
   delegate :publication_date, :to => :regulatory_act, :allow_nil => true, :prefix => true
 

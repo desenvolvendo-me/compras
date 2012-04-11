@@ -1,0 +1,12 @@
+pt-BR:
+  enumerations:
+    licitation_commission_member_role:
+      auctioneer: Pregoeiro
+      substitute_auctioneer: Pregoeiro substituto
+      support: Apoio
+      president: Presidente
+      vice_president: Vice-presidente
+      secretary: Secretário
+      vice_secretary: Vice-secretário
+      member: Membro
+      alternate: Suplente

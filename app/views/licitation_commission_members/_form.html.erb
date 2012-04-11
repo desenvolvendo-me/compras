@@ -1,0 +1,28 @@
+<div class="yui3-g member nested">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :individual, :input_html => { :class => 'individual' } %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :individual_cpf, :disabled => true, :input_html => { :class => 'cpf' } %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :role %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :role_nature %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :registration %>
+  </div>
+
+  <div class="yui3-u-1-4 nested-remove">
+    <input type="button" class="button negative remove-member" value="Remover">
+  </div>
+</div>

@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/licitation_commission'
 require 'app/models/licitation_commission_responsible'
+require 'app/models/licitation_commission_member'
 require 'app/models/individual'
 
 describe LicitationCommission do
@@ -14,6 +15,7 @@ describe LicitationCommission do
   it { should belong_to :regulatory_act }
 
   it { should have_many(:licitation_commission_responsibles).dependent(:destroy) }
+  it { should have_many(:licitation_commission_members).dependent(:destroy) }
 
   it 'should return id as to_s method' do
     subject.id = 2

@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_commission_member:
+        one: "Membro"
+        other: "Membros"
+
+    attributes:
+      licitation_commission_member:
+        individual: "Membro"
+        individual_cpf: "CPF"
+        role: "Função"
+        role_nature: "Natureza do cargo"
+        registration: "Matrícula"
