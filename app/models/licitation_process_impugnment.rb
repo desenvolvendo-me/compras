@@ -12,16 +12,16 @@ class LicitationProcessImpugnment < ActiveRecord::Base
            :envelope_opening_date, :envelope_opening_time, :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :licitation_process, :person, :impugnment_date, :related, :situation, :presence => true
-  
+
   validates :impugnment_date, :timeliness => {
     :on_or_after => :licitation_process_process_date,
-    :invalid_date_message => :must_be_greather_or_equal_to_licitation_process_process_date,
+    :invalid_date_message => :must_be_greater_or_equal_to_licitation_process_process_date,
     :type => :date
   }
 
   validates :judgment_date, :timeliness => {
     :on_or_after => :impugnment_date,
-    :invalid_date_message => :must_be_greather_or_equal_to_impugnment_date,
+    :invalid_date_message => :must_be_greater_or_equal_to_impugnment_date,
     :type => :date
   }
 

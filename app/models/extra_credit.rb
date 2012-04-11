@@ -31,7 +31,7 @@ class ExtraCredit < ActiveRecord::Base
     allowing_blank.validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }
     allowing_blank.validates :credit_date, :timeliness => {
       :on_or_after => :publication_date,
-      :on_or_after_message => :must_be_greather_or_equal_to_publication_date,
+      :on_or_after_message => :must_be_greater_or_equal_to_publication_date,
       :type => :date,
       :if => :publication_date
     }

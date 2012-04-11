@@ -32,7 +32,7 @@ class ReserveFund < ActiveRecord::Base
     allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
     allowing_blank.validates :date, :timeliness => {
       :on_or_after => lambda { last.date },
-      :on_or_after_message => :must_be_greather_or_equal_to_last_date,
+      :on_or_after_message => :must_be_greater_or_equal_to_last_date,
       :type => :date,
       :if => :any_reserve_fund?
     }

@@ -126,7 +126,7 @@ class Pledge < ActiveRecord::Base
   def value_should_not_be_greater_than_budget_allocation_real_amount
     return unless value && budget_allocation_real_amount
 
-    errors.add(:value, :must_not_be_greather_than_budget_allocation_real_amount) if value > budget_allocation_real_amount
+    errors.add(:value, :must_not_be_greater_than_budget_allocation_real_amount_with_reserved_values) if value > budget_allocation_real_amount
   end
 
   def items_total_value_should_not_be_greater_than_value
