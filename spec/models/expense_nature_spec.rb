@@ -7,8 +7,8 @@ require 'app/models/material'
 require 'app/models/budget_allocation'
 
 describe ExpenseNature do
-  it 'should return expense_element as to_s method' do
-    subject.expense_element = '3.1.90.11.01.00.00.00'
+  it 'should return classification as to_s method' do
+    subject.classification = '3.1.90.11.01.00.00.00'
     subject.to_s.should eq '3.1.90.11.01.00.00.00'
   end
 
@@ -20,12 +20,12 @@ describe ExpenseNature do
   it { should have_many(:materials).dependent(:restrict) }
   it { should have_many(:budget_allocations).dependent(:restrict) }
 
-  it { should validate_presence_of :expense_element }
+  it { should validate_presence_of :classification }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :description }
   it { should validate_presence_of :expense_group }
   it { should validate_presence_of :expense_modality }
 
-  it { should allow_value('3.1.90.11.01.00.00.00').for(:expense_element) }
-  it { should_not allow_value('1234').for(:expense_element) }
+  it { should allow_value('3.1.90.11.01.00.00.00').for(:classification) }
+  it { should_not allow_value('1234').for(:classification) }
 end
