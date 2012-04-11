@@ -46,7 +46,7 @@ pt-BR:
     licitation_modalities: "Modalidades de Licitação"
     licitation_objects: "Objetos de Licitação"
     licitation_processes: "Processos Licitatórios"
-    licitation_process_impugnment: "Impugnações dos Processos Licitatórios"
+    licitation_process_impugnments: "Impugnações do Processo Licitatório"
     management_contracts: "Contratos de Gestão"
     management_units: "Unidades Gestoras"
     materials: "Materiais"
@@ -84,4 +84,3 @@ pt-BR:
     users: "Usuários"
     fiscal_years: "Exercícios Fiscais"
     licitation_commissions: "Comissões de Licitação"
-    licitation_process_impugnments: "Impugnações do Processo Licitatório"
