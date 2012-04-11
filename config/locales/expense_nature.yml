@@ -10,7 +10,7 @@ pt-BR:
         entity: "Entidade"
         regulatory_act: "Ato regulamentador"
         expense_element: "Classificação da natureza da despesa"
-        expense_category: "Categoria de despesa"
+        expense_category: "Categoria da despesa"
         expense_group: "Grupo da despesa"
         kind: "Tipo"
         description: "Descrição"
