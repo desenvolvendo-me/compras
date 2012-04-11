@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       expense_nature:
-        one: "Natureza de Despesa"
-        other: "Naturezas de Despesas"
+        one: "Natureza da Despesa"
+        other: "Naturezas das Despesas"
 
     attributes:
       expense_nature:

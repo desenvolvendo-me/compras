@@ -14,9 +14,9 @@ feature "ExpenseNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Despesas'
+    click_link 'Naturezas das Despesas'
 
-    click_link 'Criar Natureza de Despesa'
+    click_link 'Criar Natureza da Despesa'
 
     fill_modal 'Entidade', :with => 'Detran'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
@@ -27,9 +27,9 @@ feature "ExpenseNatures" do
     fill_in 'Descrição', :with => 'Vencimentos e Salários'
     fill_in 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
 
-    click_button 'Criar Natureza de Despesa'
+    click_button 'Criar Natureza da Despesa'
 
-    page.should have_notice 'Natureza de Despesa criado com sucesso'
+    page.should have_notice 'Natureza da Despesa criado com sucesso'
 
     click_link '3.1.90.11.01.00.00.00'
 
@@ -52,7 +52,7 @@ feature "ExpenseNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Despesas'
+    click_link 'Naturezas das Despesas'
 
     click_link '3.1.90.11.01.00.00.00'
 
@@ -65,9 +65,9 @@ feature "ExpenseNatures" do
     fill_in 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
     fill_in 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
 
-    click_button 'Atualizar Natureza de Despesa'
+    click_button 'Atualizar Natureza da Despesa'
 
-    page.should have_notice 'Natureza de Despesa editado com sucesso.'
+    page.should have_notice 'Natureza da Despesa editado com sucesso.'
 
     click_link '1.2.34.56.78.90.12.34'
 
@@ -86,13 +86,13 @@ feature "ExpenseNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Despesas'
+    click_link 'Naturezas das Despesas'
 
     click_link '3.1.90.11.01.00.00.00'
 
     click_link 'Apagar 3.1.90.11.01.00.00.00', :confirm => true
 
-    page.should have_notice 'Natureza de Despesa apagado com sucesso.'
+    page.should have_notice 'Natureza da Despesa apagado com sucesso.'
 
     page.should_not have_field '3.1.90.11.01.00.00.00'
   end

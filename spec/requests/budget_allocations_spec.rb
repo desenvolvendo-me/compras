@@ -29,7 +29,7 @@ feature "BudgetAllocations" do
     fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
     fill_modal 'Programa do governo', :with => 'Habitação', :field => 'Descrição'
     fill_modal 'Ação do governo', :with => 'Ação Governamental', :field => 'Descrição'
-    fill_modal 'Natureza de despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+    fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
     fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Alocação'
     fill_in 'Objetivo', :with => 'Manutenção da Unidade Administrativa'
@@ -52,7 +52,7 @@ feature "BudgetAllocations" do
     page.should have_field 'Subfunção', :with => '01 - Administração Geral'
     page.should have_field 'Programa do governo', :with => 'Habitação'
     page.should have_field 'Ação do governo', :with => 'Ação Governamental'
-    page.should have_field 'Natureza de despesa', :with => '3.1.90.11.01.00.00.00'
+    page.should have_field 'Natureza da despesa', :with => '3.1.90.11.01.00.00.00'
     page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
     page.should have_field 'Descrição', :with => 'Alocação'
     page.should have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa'
@@ -92,7 +92,7 @@ feature "BudgetAllocations" do
     fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
     fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
     fill_modal 'Ação do governo', :with => 'Ação Nacional', :field => 'Descrição'
-    fill_modal 'Natureza de despesa', :with => 'Compra de Material', :field => 'Descrição'
+    fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
     fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Novo nome'
     fill_in 'Objetivo', :with => 'Construção da Unidade Administrativa'
@@ -116,7 +116,7 @@ feature "BudgetAllocations" do
     page.should have_field 'Subfunção', :with => '02 - Gerente Geral'
     page.should have_field 'Programa do governo', :with => 'Educação'
     page.should have_field 'Ação do governo', :with => 'Ação Nacional'
-    page.should have_field 'Natureza de despesa', :with => '2.2.22.11.01.00.00.00'
+    page.should have_field 'Natureza da despesa', :with => '2.2.22.11.01.00.00.00'
     page.should have_field 'Recurso', :with => 'Construção'
     page.should have_field 'Descrição', :with => 'Novo nome'
     page.should have_field 'Objetivo', :with => 'Construção da Unidade Administrativa'
@@ -333,7 +333,7 @@ feature "BudgetAllocations" do
 
     click_link 'Filtrar Dotações Orçamentárias'
 
-    fill_modal 'Natureza de despesa', :with => 'Compra de Material', :field => 'Descrição'
+    fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
 
     click_button 'Pesquisar'
 
