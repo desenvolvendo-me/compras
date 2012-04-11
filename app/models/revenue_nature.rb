@@ -8,13 +8,13 @@ class RevenueNature < ActiveRecord::Base
   belongs_to :regulatory_act
   belongs_to :revenue_rubric
 
+  delegate :publication_date, :regulatory_act_type, :to => :regulatory_act, :allow_nil => true
+  delegate :full_code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
+
   validates :regulatory_act, :kind, :docket, :revenue_rubric, :presence => true
   validates :specification, :entity, :year, :classification, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :classification, :mask => '99999999', :allow_blank => true
-
-  delegate :publication_date, :regulatory_act_type, :to => :regulatory_act, :allow_nil => true
-  delegate :full_code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
 
   orderize :id
   filterize
