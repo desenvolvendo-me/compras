@@ -11,18 +11,18 @@ class LicitationProcessImpugnment < ActiveRecord::Base
   delegate :year, :process_date, :object_description, :envelope_delivery_date, :envelope_delivery_time,
            :envelope_opening_date, :envelope_opening_time, :to => :licitation_process, :allow_nil => true, :prefix => true
 
-  validates :licitation_process, :person, :impugnment_date, :related, :situation, :presence => true
+  validates :licitation_process, :person, :related, :situation, :presence => true
 
   validates :impugnment_date, :timeliness => {
     :on_or_after => :licitation_process_process_date,
-    :invalid_date_message => :must_be_greater_or_equal_to_licitation_process_process_date,
-    :type => :date
+    :on_or_after_message => :must_be_greater_or_equal_to_licitation_process_process_date,
+    :type => :date, :allow_blank => true
   }
 
   validates :judgment_date, :timeliness => {
     :on_or_after => :impugnment_date,
-    :invalid_date_message => :must_be_greater_or_equal_to_impugnment_date,
-    :type => :date
+    :on_or_after_message => :must_be_greater_or_equal_to_impugnment_date,
+    :type => :date, :allow_blank => true
   }
 
   orderize :impugnment_date
