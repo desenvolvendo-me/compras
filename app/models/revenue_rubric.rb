@@ -25,6 +25,6 @@ class RevenueRubric < ActiveRecord::Base
   end
 
   def to_s
-    code.to_s
+    "#{code} - #{description}"
   end
 end

@@ -41,7 +41,7 @@ feature "RevenueNatures" do
     page.should have_field 'Data de publicação', :with => '02/01/2012'
     page.should have_field 'Classificação', :with => '12344569'
     page.should have_field 'Código completo', :with => '1.1.1.2.12344569'
-    page.should have_field 'Rúbrica da receita', :with => '2'
+    page.should have_field 'Rúbrica da receita', :with => '2 - IMPOSTOS SOBRE O PATRIMÔNIO E A RENDA'
     page.should have_field 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
     page.should have_select 'Tipo', :selected => 'Ambos'
     page.should have_field 'Súmula', :with => 'Registra o valor da arrecadação da receita'

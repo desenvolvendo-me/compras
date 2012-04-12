@@ -5,7 +5,8 @@ require 'app/models/revenue_nature'
 describe RevenueRubric do
   it 'should return code as to_s' do
     subject.code = 1
-    subject.to_s.should eq '1'
+    subject.description = 'Alugueis'
+    subject.to_s.should eq '1 - Alugueis'
   end
 
   it { should validate_presence_of :code }
