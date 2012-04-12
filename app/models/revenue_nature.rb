@@ -22,7 +22,7 @@ class RevenueNature < ActiveRecord::Base
   before_save :generate_full_code
 
   def to_s
-    id.to_s
+    "#{full_code} - #{specification}"
   end
 
   protected

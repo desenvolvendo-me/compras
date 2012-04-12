@@ -3,8 +3,10 @@ require 'app/models/revenue_nature'
 
 describe RevenueNature do
   it 'should return id as to_s' do
-    subject.id = 1
-    subject.to_s.should eq '1'
+    subject.specification = 'Receitas correntes'
+    subject.stub(:full_code).and_return('1.0.0.0')
+
+    subject.to_s.should eq '1.0.0.0 - Receitas correntes'
   end
 
   it { should validate_presence_of :regulatory_act }
