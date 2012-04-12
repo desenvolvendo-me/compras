@@ -9,12 +9,12 @@ class RevenueSubcategoryImporter < Importer
   protected
 
   def normalize_attributes(attributes)
-    parent_code = attributes['code'][0]
-    parent = revenue_category_storage.find_by_code(parent_code)
+    revenue_category_code = attributes['code'][0]
+    revenue_category = revenue_category_storage.find_by_code(revenue_category_code)
 
     code = attributes['code'][1]
 
-    attributes.merge('revenue_category_id' => parent.try(:id), 'code' => code)
+    attributes.merge('revenue_category_id' => revenue_category.try(:id), 'code' => code)
   end
 
   def file
