@@ -20,9 +20,13 @@ class ExpenseNature < ActiveRecord::Base
   has_many :materials, :dependent => :restrict
   has_many :budget_allocations, :dependent => :restrict
 
+  delegate :code, :to => :expense_category, :prefix => true, :allow_nil => true
+  delegate :code, :to => :expense_group, :prefix => true, :allow_nil => true
+  delegate :code, :to => :expense_modality, :prefix => true, :allow_nil => true
+  delegate :code, :to => :expense_element, :prefix => true, :allow_nil => true
+
   validates :full_code, :kind, :description, :expense_group, :presence => true
   validates :expense_modality, :expense_element, :expense_split, :presence => true
-  validates :full_code, :mask => '9.9.99.99.99.99.99.99', :allow_blank => true
   validates :expense_split, :mask => '99999999', :allow_blank => true
 
   orderize :description

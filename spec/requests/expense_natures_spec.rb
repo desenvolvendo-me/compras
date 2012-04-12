@@ -27,7 +27,6 @@ feature "ExpenseNatures" do
     fill_modal 'Modalidade da despesa', :with => '10', :field => 'Código'
     fill_modal 'Elemento da despesa', :with => '1', :field => 'Código'
     fill_in 'Desdobramento da despesa', :with => '12345569'
-    fill_in 'Código completo', :with => '3.1.90.11.01.00.00.00'
     select 'Ambos', :from => 'Tipo'
     fill_in 'Descrição', :with => 'Vencimentos e Salários'
     fill_in 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
@@ -36,7 +35,7 @@ feature "ExpenseNatures" do
 
     page.should have_notice 'Natureza da Despesa criado com sucesso'
 
-    click_link '3.1.90.11.01.00.00.00'
+    click_link '3.0.10.01.12345569'
 
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Ato regulamentador', :with => '1234'
@@ -45,10 +44,37 @@ feature "ExpenseNatures" do
     page.should have_field 'Elemento da despesa', :with => '1'
     page.should have_field 'Desdobramento da despesa', :with => '12345569'
     page.should have_field 'Categoria da despesa', :with => '3'
-    page.should have_field 'Código completo', :with => '3.1.90.11.01.00.00.00'
+    page.should have_field 'Código completo', :with => '3.0.10.01.12345569'
     page.should have_select 'Tipo', :selected => 'Ambos'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários'
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
+  end
+
+  scenario 'should generate mask' do
+    ExpenseCategory.make!(:despesa_corrente)
+    ExpenseGroup.make!(:restos_a_pagar)
+    ExpenseModality.make!(:transferencias_intragovernamentais)
+    ExpenseElement.make!(:aposentadorias)
+
+    click_link 'Contabilidade'
+
+    click_link 'Naturezas das Despesas'
+
+    click_link 'Criar Natureza da Despesa'
+
+    fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
+
+    fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
+    page.should have_field 'Código completo', :with => '3.0.__.__.________'
+
+    fill_modal 'Modalidade da despesa', :with => '10', :field => 'Código'
+
+    fill_modal 'Elemento da despesa', :with => '1', :field => 'Código'
+    page.should have_field 'Código completo', :with => '3.0.10.01.________'
+
+    fill_in 'Desdobramento da despesa', :with => '12345569'
+
+    page.should have_field 'Código completo', :with => '3.0.10.01.12345569'
   end
 
   scenario 'update an existent expense_nature' do
@@ -64,7 +90,7 @@ feature "ExpenseNatures" do
 
     click_link 'Naturezas das Despesas'
 
-    click_link '3.1.90.11.01.00.00.00'
+    click_link '3.0.10.01.12345569'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
@@ -73,7 +99,6 @@ feature "ExpenseNatures" do
     fill_modal 'Categoria da despesa', :with => '4', :field => 'Código'
     fill_modal 'Elemento da despesa', :with => '3', :field => 'Código'
     fill_in 'Desdobramento da despesa', :with => '11111111'
-    fill_in 'Código completo', :with => '1.2.34.56.78.90.12.34'
     select 'Analítico', :from => 'Tipo'
     fill_in 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
     fill_in 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
@@ -82,7 +107,7 @@ feature "ExpenseNatures" do
 
     page.should have_notice 'Natureza da Despesa editado com sucesso.'
 
-    click_link '1.2.34.56.78.90.12.34'
+    click_link '4.4.20.03.11111111'
 
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Ato regulamentador', :with => '4567'
@@ -91,7 +116,7 @@ feature "ExpenseNatures" do
     page.should have_field 'Elemento da despesa', :with => '3'
     page.should have_field 'Desdobramento da despesa', :with => '11111111'
     page.should have_field 'Categoria da despesa', :with => '4'
-    page.should have_field 'Código completo', :with => '1.2.34.56.78.90.12.34'
+    page.should have_field 'Código completo', :with => '4.4.20.03.11111111'
     page.should have_select 'Tipo', :selected => 'Analítico'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
@@ -104,12 +129,12 @@ feature "ExpenseNatures" do
 
     click_link 'Naturezas das Despesas'
 
-    click_link '3.1.90.11.01.00.00.00'
+    click_link '3.0.10.01.12345569'
 
-    click_link 'Apagar 3.1.90.11.01.00.00.00', :confirm => true
+    click_link 'Apagar 3.0.10.01.12345569', :confirm => true
 
     page.should have_notice 'Natureza da Despesa apagado com sucesso.'
 
-    page.should_not have_field '3.1.90.11.01.00.00.00'
+    page.should_not have_field '3.0.10.01.12345569'
   end
 end

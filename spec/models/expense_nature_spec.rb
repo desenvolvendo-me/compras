@@ -8,8 +8,8 @@ require 'app/models/budget_allocation'
 
 describe ExpenseNature do
   it 'should return full code as to_s method' do
-    subject.full_code = '3.1.90.11.01.00.00.00'
-    subject.to_s.should eq '3.1.90.11.01.00.00.00'
+    subject.full_code = '4.4.20.03.11111111'
+    subject.to_s.should eq '4.4.20.03.11111111'
   end
 
   it { should belong_to :regulatory_act }
@@ -28,9 +28,6 @@ describe ExpenseNature do
   it { should validate_presence_of :expense_modality }
   it { should validate_presence_of :expense_element }
   it { should validate_presence_of :expense_split }
-
-  it { should allow_value('3.1.90.11.01.00.00.00').for(:full_code) }
-  it { should_not allow_value('1234').for(:full_code) }
 
   it { should allow_value('12345569').for(:expense_split) }
   it { should_not allow_value('400a').for(:expense_split) }
