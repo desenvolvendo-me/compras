@@ -364,7 +364,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :legal_natures, :only => :index do
+  resources :legal_natures, :only => [:index, :edit] do
     collection do
       get :modal
     end

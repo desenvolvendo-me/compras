@@ -1,5 +1,5 @@
 class LegalNature < ActiveRecord::Base
-  attr_accessible :code, :name, :parent_id
+  attr_readonly :code, :name, :parent_id
 
   attr_modal :code, :name
 

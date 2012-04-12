@@ -6,9 +6,18 @@ feature "LegalNatures" do
     sign_in
   end
 
-
-  def make_legal_natures!
+  scenario 'list the legal natures' do
     LegalNature.make!(:administracao_publica)
     LegalNature.make!(:executivo_federal)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Naturezas Jurídicas'
+
+    within_records do
+      page.should have_content 'Administração Pública'
+
+      page.should have_content 'Orgão Público do Poder Executivo Federal'
+    end
   end
 end
