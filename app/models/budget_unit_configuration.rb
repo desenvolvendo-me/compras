@@ -2,8 +2,6 @@ class BudgetUnitConfiguration < ActiveRecord::Base
   attr_accessible :description, :entity_id, :regulatory_act_id
   attr_accessible :budget_unit_levels, :budget_unit_levels_attributes
 
-  attr_modal :description, :entity_id, :regulatory_act_id
-
   belongs_to :regulatory_act
   belongs_to :entity
 

@@ -1,8 +1,6 @@
 class PledgeExpiration < ActiveRecord::Base
   attr_accessible :expiration_date, :value, :number, :pledge_id
 
-  attr_modal :pledge_id, :value, :number
-
   belongs_to :pledge
 
   has_many :pledge_cancellations, :dependent => :restrict

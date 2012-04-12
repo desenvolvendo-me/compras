@@ -1,8 +1,6 @@
 class BankAccount < ActiveRecord::Base
   attr_accessible :name, :agency_id, :account_number, :originator, :number_agreement
 
-  attr_modal :name, :agency_id, :account_number, :originator, :number_agreement
-
   belongs_to :agency
 
   validates :name, :presence => true, :uniqueness => { :allow_blank => true, :scope => :agency_id }

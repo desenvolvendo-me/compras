@@ -8,8 +8,6 @@ class Pledge < ActiveRecord::Base
 
   attr_accessor :licitation, :process
 
-  attr_modal :entity_id, :year, :emission_date
-
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type
 

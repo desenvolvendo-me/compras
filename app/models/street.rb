@@ -3,8 +3,6 @@ class Street < ActiveRecord::Base
 
   attr_accessor :neighborhood
 
-  attr_modal :name, :street_type_id
-
   belongs_to :street_type
 
   has_and_belongs_to_many :neighborhoods

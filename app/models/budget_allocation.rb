@@ -6,8 +6,6 @@ class BudgetAllocation < ActiveRecord::Base
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
   attr_accessible :alienation_appeal
 
-  attr_modal :year, :description
-
   has_enumeration_for :debt_type
 
   belongs_to :entity

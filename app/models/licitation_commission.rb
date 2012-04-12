@@ -3,8 +3,6 @@ class LicitationCommission < ActiveRecord::Base
   attr_accessible :description, :regulatory_act_id, :licitation_commission_responsibles_attributes
   attr_accessible :licitation_commission_members_attributes
 
-  attr_modal :commission_type, :nomination_date, :expiration_date, :exoneration_date
-
   has_enumeration_for :commission_type
 
   belongs_to :regulatory_act

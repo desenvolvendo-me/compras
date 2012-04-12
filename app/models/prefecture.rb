@@ -2,8 +2,6 @@ class Prefecture < ActiveRecord::Base
   attr_accessible :name, :cnpj, :phone, :fax, :email, :mayor_name, :remove_image
   attr_accessible :address_attributes, :image
 
-  attr_modal :name, :cnpj, :phone, :fax, :email, :mayor_name
-
   mount_uploader :image
 
   has_one :address, :as => :addressable, :dependent => :destroy

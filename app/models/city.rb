@@ -1,8 +1,6 @@
 class City < ActiveRecord::Base
   attr_accessible :name, :state_id, :code
 
-  attr_modal :name, :state_id
-
   belongs_to :state
 
   has_many :agencies, :dependent => :restrict

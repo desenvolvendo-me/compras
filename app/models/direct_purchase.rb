@@ -4,8 +4,6 @@ class DirectPurchase < ActiveRecord::Base
   attr_accessible :price_collection, :price_registration, :observation, :period_id, :pledge_type
   attr_accessible :direct_purchase_budget_allocations_attributes
 
-  attr_modal :year, :date, :modality
-
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :status, :with => DirectPurchaseStatus
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType

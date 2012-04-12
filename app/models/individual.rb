@@ -3,8 +3,6 @@ class Individual < ActiveRecord::Base
   attr_accessible :identity_attributes, :address_attributes, :cpf
   attr_accessible :correspondence_address_attributes
 
-  attr_modal :person, :mother, :father, :birthdate, :gender, :cpf
-
   has_enumeration_for :gender
 
   has_many :provider_partners, :dependent => :restrict

@@ -2,8 +2,6 @@ class Person < ActiveRecord::Base
   attr_accessible :name, :phone, :personable_id, :personable_type
   attr_accessible :mobile, :email, :fax, :personable_attributes
 
-  attr_modal :name, :cpf, :cnpj
-
   belongs_to :personable, :polymorphic => true, :autosave => true, :dependent => :destroy
 
   has_many :providers, :dependent => :restrict

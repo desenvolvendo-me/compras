@@ -5,8 +5,6 @@ class Provider < ActiveRecord::Base
   attr_accessible :materials_group_ids, :materials_class_ids, :material_ids
   attr_accessible :provider_licitation_documents_attributes
 
-  attr_modal :economic_registration_id, :person_id, :legal_nature_id, :cnae_id, :crc_number
-
   belongs_to :person
   belongs_to :economic_registration
   belongs_to :agency

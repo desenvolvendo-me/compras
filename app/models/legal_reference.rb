@@ -1,8 +1,6 @@
 class LegalReference < ActiveRecord::Base
   attr_accessible :description, :law, :article, :paragraph, :sections, :synopsis
 
-  attr_modal :description, :law, :article, :paragraph, :sections
-
   has_many :direct_purchases, :dependent => :restrict
 
   validates :description, :law, :article, :presence => true

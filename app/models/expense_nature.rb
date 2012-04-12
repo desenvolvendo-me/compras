@@ -4,9 +4,6 @@ class ExpenseNature < ActiveRecord::Base
   attr_accessible :description, :docket, :expense_category_id
   attr_accessible :expense_modality_id, :expense_element_id
 
-  attr_modal :full_code, :description, :entity_id
-  attr_modal :regulatory_act_id, :kind
-
   has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
 
   belongs_to :entity

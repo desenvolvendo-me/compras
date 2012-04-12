@@ -1,4 +1,6 @@
 class PledgeExpirationPresenter < Presenter::Proxy
+  attr_modal :pledge_id, :value, :number
+
   def emission_date
     helpers.l(object.emission_date) if object.emission_date
   end

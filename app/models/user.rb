@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
   attr_accessible :employee_id
 
-  attr_modal :email
-
   devise :database_authenticatable, :recoverable, :validatable
 
   belongs_to :profile

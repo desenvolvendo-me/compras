@@ -1,8 +1,6 @@
 class LegalNature < ActiveRecord::Base
   attr_readonly :code, :name, :parent_id
 
-  attr_modal :code, :name
-
   acts_as_nested_set
 
   has_many :administration_types, :dependent => :restrict

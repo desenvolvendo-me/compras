@@ -4,8 +4,6 @@ class BudgetUnit < ActiveRecord::Base
   attr_accessible :administration_type_id, :address_attributes
   attr_accessible :organogram_responsibles_attributes, :kind
 
-  attr_modal :description
-
   has_enumeration_for :kind, :with => BudgetUnitKind, :create_helpers => true
 
   belongs_to :budget_unit_configuration

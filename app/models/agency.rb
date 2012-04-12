@@ -1,8 +1,6 @@
 class Agency < ActiveRecord::Base
   attr_accessible :name, :number, :digit, :city_id, :bank_id, :phone, :fax, :email
 
-  attr_modal :name, :number, :bank_id
-
   belongs_to :city
   belongs_to :bank
 
