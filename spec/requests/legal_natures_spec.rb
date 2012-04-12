@@ -15,8 +15,10 @@ feature "LegalNatures" do
     click_link 'Naturezas Jurídicas'
 
     within_records do
+      page.should have_content '100'
       page.should have_content 'Administração Pública'
 
+      page.should have_content '1015'
       page.should have_content 'Orgão Público do Poder Executivo Federal'
     end
   end
