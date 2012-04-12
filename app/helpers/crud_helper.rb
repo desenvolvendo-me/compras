@@ -13,7 +13,11 @@ module CrudHelper
 
   # Get modal attributes and intersect with +params[:attributes]+ if exists
   def attributes
-    attributes  = resource_class.modal_attributes
+    if resource.presenter?
+      attributes = resource.presenter.modal_attributes
+    else
+      attributes = resource_class.modal_attributes
+    end
     attributes &= params[:attributes].split(',') if params[:attributes]
 
     associations = resource_class.reflect_on_all_associations
@@ -29,6 +33,17 @@ module CrudHelper
         attribute
       end
     end.compact
+  end
+
+  def formatted_attribute(record, attribute)
+    return if attribute["attributes"]
+    att = record.send attribute
+    if att.kind_of?(TrueClass) || att.kind_of?(FalseClass)
+      att = I18n.t(att)
+    elsif record.respond_to?("#{attribute}_humanize")
+      att = record.send "#{attribute}_humanize"
+    end
+    att
   end
 
   def link_to_modal_info(id, href="#")

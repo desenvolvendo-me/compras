@@ -1,7 +1,9 @@
+<% if record.presenter? %>
+<tr <%= record.presenter.data_attributes.map{|a| "data-#{a.first}='#{record.send(a.last)}'"}.join(" ") %>>
+<% else %>
 <tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>">
+<% end %>
   <% attributes.each do |attribute| %>
-    <td>
-      <%= record.send attribute %>
-    </td>
+    <td><%= formatted_attribute record, attribute %></td>
   <% end %>
 </tr>

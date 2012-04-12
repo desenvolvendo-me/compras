@@ -2,6 +2,9 @@ module Presenter
   # Example of usage:
   #
   #   class PersonPresenter < Presenter::Proxy
+  #     attr_modal :first_name, :last_name
+  #     attr_data 'value' => :id, 'label' => :to_s, 'type' => :class, 'first-name' => :first_name
+  #
   #     def full_name
   #       "#{last_name}, #{first_name}"
   #     end
@@ -17,15 +20,39 @@ module Presenter
   #
   #   person = Person.new(:first_name => "Gabriel", :last_name => "Sobrinho")
   #   person.presenter.full_name #=> "Sobrinho, Gabriel"
+  #   person.presenter.modal_attributes #=> #<Set: {"first_name", "last_name"}>
+  #   person.presenter.data_attributes #=> #<Set: {["value", "id"], ["type", "class"], ["first-name" => "first_name"]}>
   class Proxy < ActiveSupport::BasicObject
+    class << self
+      attr_accessor :_modal_attributes, :_data_attributes
+
+      def attr_modal(*attributes)
+        self._modal_attributes = Set.new(attributes.map { |a| a.to_s }) + (_modal_attributes || [])
+      end
+
+      def modal_attributes
+        _modal_attributes
+      end
+
+      def attr_data(attributes = {})
+        self._data_attributes = attributes.to_set + (_data_attributes || {})
+      end
+
+      def data_attributes
+        default_data_attributes + (_data_attributes || {})
+      end
+
+      private
+
+      def default_data_attributes
+        Set.new({:value => 'id', :label => 'to_s', :type => 'class'})
+      end
+    end
+
     attr_accessor :object, :routes, :helpers
 
     def initialize(object, routes = ::Rails.application.routes.url_helpers, helpers = ::ApplicationController.helpers)
-      self.object = if object.respond_to?(:localized)
-                      object.localized
-                    else
-                      object
-                    end
+      self.object = object
       self.routes = routes
       self.helpers = helpers
     end
@@ -38,10 +65,32 @@ module Presenter
       object.respond_to?(method, include_private)
     end
 
+    def modal_attributes
+      presenter_class.modal_attributes || object_class.accessible_attributes.to_set
+    end
+
+    def data_attributes
+      presenter_class.data_attributes || default_data_attributes.to_set
+    end
+
     def summary; end
 
     def summary?
       summary.present?
+    end
+
+    private
+
+    def object_class
+      object.class
+    end
+
+    def default_data_attributes
+      { :value => 'id', :label => 'to_s', :type => 'class' }
+    end
+
+    def presenter_class
+      "#{object_class}Presenter".constantize
     end
   end
 end
