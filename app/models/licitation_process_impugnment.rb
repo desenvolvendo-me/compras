@@ -8,10 +8,10 @@ class LicitationProcessImpugnment < ActiveRecord::Base
   belongs_to :licitation_process
   belongs_to :person
 
-  delegate :year, :process_date, :object_description, :envelope_delivery_date, :envelope_delivery_time,
-           :envelope_opening_date, :envelope_opening_time, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :year, :process_date, :object_description, :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :licitation_process, :person, :related, :situation, :presence => true
+  validates :envelope_delivery_date, :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :presence => true
 
   validates :impugnment_date, :timeliness => {
     :on_or_after => :licitation_process_process_date,

@@ -17,19 +17,19 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">
-    <%= f.input :licitation_process_envelope_delivery_date, :disabled => true %>
+    <%= f.input :envelope_delivery_date, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :licitation_process_envelope_delivery_time, :disabled => true %>
+    <%= f.input :envelope_delivery_time, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-4">
-    <%= f.input :licitation_process_envelope_opening_date, :disabled => true %>
+    <%= f.input :envelope_opening_date, :disabled => true %>
   </div>
-  
+
   <div class="yui3-u-1-4">
-    <%= f.input :licitation_process_envelope_opening_time, :disabled => true %>
+    <%= f.input :envelope_opening_time, :disabled => true %>
   </div>
 </div>
 
@@ -52,17 +52,17 @@
     if (data) {
       var record = data.record;
       $('#licitation_process_impugnment_licitation_process_object_description').val(record.data('object-description'));
-      $('#licitation_process_impugnment_licitation_process_envelope_delivery_date').val(record.data('envelope-delivery-date'));
-      $('#licitation_process_impugnment_licitation_process_envelope_delivery_time').val(record.data('envelope-delivery-time'));
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_date').val(record.data('envelope-opening-date'));
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_time').val(record.data('envelope-opening-time'));
+      $('#licitation_process_impugnment_envelope_delivery_date').val(record.data('envelope-delivery-date'));
+      $('#licitation_process_impugnment_envelope_delivery_time').val(record.data('envelope-delivery-time'));
+      $('#licitation_process_impugnment_envelope_opening_date').val(record.data('envelope-opening-date'));
+      $('#licitation_process_impugnment_envelope_opening_time').val(record.data('envelope-opening-time'));
     }
     else{
       $('#licitation_process_impugnment_licitation_process_object_description').val('');
-      $('#licitation_process_impugnment_licitation_process_envelope_delivery_date').val('');
-      $('#licitation_process_impugnment_licitation_process_envelope_delivery_time').val('');
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_date').val('');
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_time').val('');
+      $('#licitation_process_impugnment_envelope_delivery_date').val('');
+      $('#licitation_process_impugnment_envelope_delivery_time').val('');
+      $('#licitation_process_impugnment_envelope_opening_date').val('');
+      $('#licitation_process_impugnment_envelope_opening_time').val('');
     }
   });
 </script>

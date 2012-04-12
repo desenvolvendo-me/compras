@@ -11,6 +11,10 @@ describe LicitationProcessImpugnment do
   it { should validate_presence_of :related }
   it { should validate_presence_of :person }
   it { should validate_presence_of :situation }
+  it { should validate_presence_of :envelope_delivery_date }
+  it { should validate_presence_of :envelope_delivery_time }
+  it { should validate_presence_of :envelope_opening_date }
+  it { should validate_presence_of :envelope_opening_time }
 
   context "validating impugnment_date" do
     let(:licitation_process) { double('licitation_process', :id => 1, :process_date => Date.current) }

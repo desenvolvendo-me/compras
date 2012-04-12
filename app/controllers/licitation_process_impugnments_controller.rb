@@ -5,4 +5,14 @@ class LicitationProcessImpugnmentsController < CrudController
 
     super
   end
+
+  def create
+    object = build_resource
+    object.envelope_delivery_date = object.licitation_process.envelope_delivery_date
+    object.envelope_delivery_time = object.licitation_process.envelope_delivery_time
+    object.envelope_opening_date = object.licitation_process.envelope_opening_date
+    object.envelope_opening_time = object.licitation_process.envelope_opening_time
+
+    super
+  end
 end

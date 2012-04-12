@@ -27,6 +27,11 @@ feature "LicitationProcessImpugnments" do
     fill_in 'Data do julgamento', :with => I18n.l(Date.current + 4.days)
     fill_in 'Observação', :with => 'Não há observação'
 
+    page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+    page.should have_field 'Hora da entrega', :with => '14:00'
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    page.should have_field 'Hora da abertura', :with => '14:00'
+
     click_button 'Criar Impugnação do Processo Licitatório'
     page.should have_notice 'Impugnação do Processo Licitatório criado com sucesso.'
     click_link LicitationProcessImpugnment.last.to_s
@@ -39,11 +44,14 @@ feature "LicitationProcessImpugnments" do
     page.should have_select 'Situação', :selected => 'Pendente'
     page.should have_field 'Data do julgamento', :with => I18n.l(Date.current + 4.days)
     page.should have_field 'Observação', :with => 'Não há observação'
+    page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+    page.should have_field 'Hora da entrega', :with => '14:00'
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    page.should have_field 'Hora da abertura', :with => '14:00'
   end
 
   scenario 'update an existent licitation_process_impugnment' do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
-    LicitationProcess.make!(:processo_licitatorio_computador)
 
     click_link 'Processos'
 
@@ -51,7 +59,6 @@ feature "LicitationProcessImpugnments" do
 
     click_link licitation_process_impugnment.id.to_s
 
-    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
     fill_in 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
     select 'Pregão', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Gabriel Sobrinho', :field => 'Nome'
@@ -60,13 +67,18 @@ feature "LicitationProcessImpugnments" do
     fill_in 'Data do julgamento', :with => I18n.l(Date.current + 1.year + 4.days)
     fill_in 'Observação', :with => 'Não há observação'
 
+    page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+    page.should have_field 'Hora da entrega', :with => '14:00'
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Hora da abertura', :with => '14:00'
+
     click_button 'Atualizar Impugnação do Processo Licitatório'
 
     page.should have_notice 'Impugnação do Processo Licitatório editado com sucesso.'
 
     click_link licitation_process_impugnment.to_s
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
+    page.should have_field 'Processo licitatório', :with => '1/2012'
     page.should have_field 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
     page.should have_select 'Referente ao', :selected => 'Pregão'
     page.should have_field 'Autor', :with => 'Gabriel Sobrinho'
@@ -74,6 +86,10 @@ feature "LicitationProcessImpugnments" do
     page.should have_select 'Situação', :selected => 'Pendente'
     page.should have_field 'Data do julgamento', :with => I18n.l(Date.current + 1.year + 4.days)
     page.should have_field 'Observação', :with => 'Não há observação'
+    page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+    page.should have_field 'Hora da entrega', :with => '14:00'
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Hora da abertura', :with => '14:00'
   end
 
   scenario 'destroy an existent licitation_process_impugnment' do
