@@ -16,7 +16,7 @@ end
 ExpenseNature.blueprint(:compra_de_material) do
   entity { Entity.make!(:detran) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  full_code { '3.0.10.01.12345569' }
+  full_code { '3.0.10.01.11111111' }
   kind { ExpenseNatureKind::ANALYTICAL }
   description { 'Compra de Material' }
   docket { 'Registra o valor das despesas com compra de material' }

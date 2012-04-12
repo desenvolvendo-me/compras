@@ -79,7 +79,7 @@ feature "LicitationProcesses" do
       fill_in 'Valor previsto', :with => '50,00'
 
       page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12345569'
 
       click_button 'Adicionar Item'
 
@@ -189,7 +189,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2012 - Alocação"
-      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12345569'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '50,00'
 
@@ -279,7 +279,7 @@ feature "LicitationProcesses" do
       fill_in 'Valor previsto', :with => '70,00'
 
       page.should have_field 'Saldo da dotação', :with => '200,00'
-      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12345569'
 
       click_button 'Adicionar Item'
 
@@ -359,7 +359,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2011 - Alocação extra"
-      page.should have_field 'Compl. do elemento', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12345569'
       page.should have_field 'Saldo da dotação', :with => '200,00'
       page.should have_field 'Valor previsto', :with => '70,00'
 

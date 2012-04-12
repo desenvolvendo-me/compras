@@ -88,7 +88,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2012 - Alocação"
-      page.should have_field 'Natureza da despesa', :with => '3.1.90.11.01.00.00.00'
+      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12345569'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -173,7 +173,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field "Dotação", :with => "#{budget_allocation.id}/2011 - Alocação extra"
-      page.should have_field 'Natureza da despesa', :with => '2.2.22.11.01.00.00.00'
+      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11111111'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
       page.should have_field 'Unidade', :with => 'Unidade'
