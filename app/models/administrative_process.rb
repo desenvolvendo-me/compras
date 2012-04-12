@@ -40,7 +40,7 @@ class AdministrativeProcess < ActiveRecord::Base
   end
 
   def total_allocations_value
-    administrative_process_budget_allocations.collect(&:value).sum
+    administrative_process_budget_allocations.sum(&:value)
   end
 
   protected
