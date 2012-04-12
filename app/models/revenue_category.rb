@@ -10,6 +10,6 @@ class RevenueCategory < ActiveRecord::Base
   filterize
 
   def to_s
-    "#{code}"
+    "#{code} - #{description}"
   end
 end

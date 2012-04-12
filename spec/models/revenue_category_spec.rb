@@ -5,7 +5,8 @@ require 'app/models/revenue_subcategory'
 describe RevenueCategory do
   it 'should return code as to_s' do
     subject.code = 1
-    subject.to_s.should eq '1'
+    subject.description = "Receitas correntes"
+    subject.to_s.should eq '1 - Receitas correntes'
   end
 
   it { should validate_presence_of :code }
