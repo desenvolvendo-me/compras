@@ -5,7 +5,8 @@ require 'app/models/revenue_rubric'
 describe RevenueSource do
   it 'should return code as to_s' do
     subject.code = 1
-    subject.to_s.should eq '1'
+    subject.description = 'Imposto'
+    subject.to_s.should eq '1 - Imposto'
   end
 
   it { should validate_presence_of :code }
