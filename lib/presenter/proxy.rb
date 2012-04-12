@@ -37,5 +37,11 @@ module Presenter
     def respond_to?(method, include_private = false)
       object.respond_to?(method, include_private)
     end
+
+    def summary; end
+
+    def summary?
+      summary.present?
+    end
   end
 end
