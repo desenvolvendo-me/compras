@@ -15,3 +15,9 @@ PledgeExpiration.blueprint(:vencimento_secundario) do
   value { 100 }
   number { 2 }
 end
+
+PledgeExpiration.blueprint(:vencimento_para_empenho_em_quinze_dias) do
+  expiration_date { Date.current + 20.day }
+  value { 9.99 }
+  number { 1 }
+end
