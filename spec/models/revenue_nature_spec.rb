@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/revenue_nature'
+require 'app/models/revenue_accounting'
 
 describe RevenueNature do
   it 'should return id as to_s' do
@@ -27,4 +28,6 @@ describe RevenueNature do
   it { should belong_to :entity }
   it { should belong_to :regulatory_act }
   it { should belong_to :revenue_rubric }
+
+  it { should have_many(:revenue_accountings).dependent(:restrict) }
 end

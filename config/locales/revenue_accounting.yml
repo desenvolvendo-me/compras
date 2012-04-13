@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      revenue_accounting:
+        one: "Receita Contábel"
+        other: "Receitas Contábeis"
+
+    attributes:
+      revenue_accounting:
+        entity: "Entidade"
+        year: "Exercício"
+        code: "Código"
+        date: "Data"
+        revenue_nature: "Natureza da receita"
+        revenue_nature_docket: "Descrição da natureza da receita"
+        capability: "Recurso"

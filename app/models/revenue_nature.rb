@@ -8,6 +8,8 @@ class RevenueNature < ActiveRecord::Base
   belongs_to :regulatory_act
   belongs_to :revenue_rubric
 
+  has_many :revenue_accountings, :dependent => :restrict
+
   delegate :publication_date, :regulatory_act_type, :to => :regulatory_act, :allow_nil => true
   delegate :full_code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
 

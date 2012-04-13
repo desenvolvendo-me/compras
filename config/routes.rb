@@ -586,6 +586,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :revenue_accountings do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :reserve_allocation_types do
     collection do
       get :filter

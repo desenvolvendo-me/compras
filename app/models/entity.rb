@@ -17,6 +17,7 @@ class Entity < ActiveRecord::Base
   has_many :subfunctions, :dependent => :restrict
   has_many :extra_credits, :dependent => :restrict
   has_many :revenue_natures, :dependent => :restrict
+  has_many :revenue_accountings, :dependent => :restrict
 
   validates :name, :presence => true
   validates :name, :uniqueness => { :allow_blank => true }

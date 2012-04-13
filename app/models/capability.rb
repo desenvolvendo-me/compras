@@ -10,6 +10,7 @@ class Capability < ActiveRecord::Base
   has_many :budget_allocations, :dependent => :restrict
   has_many :licitation_processes, :dependent => :restrict
   has_many :extra_credit_moviment_types, :dependent => :restrict
+  has_many :revenue_accountings, :dependent => :restrict
 
   validates :year, :mask => '9999', :allow_blank => true
   validates :entity, :year, :description, :goal, :kind, :status, :presence => true
