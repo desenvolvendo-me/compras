@@ -12,7 +12,7 @@ feature "LicitationProcessAppeals" do
 
     click_link 'Processos'
 
-    click_link 'Interposições de Recursos do Processo Licitatório'
+    click_link 'Interposição de Recursos de Processos Licitatórios'
 
     click_link 'Criar Interposição de Recurso do Processo Licitatório'
 
@@ -47,7 +47,7 @@ feature "LicitationProcessAppeals" do
 
     click_link 'Processos'
 
-    click_link 'Interposições de Recursos do Processo Licitatório'
+    click_link 'Interposição de Recursos de Processos Licitatórios'
 
     click_link interposicao_processo_licitatorio.to_s
 
@@ -80,7 +80,7 @@ feature "LicitationProcessAppeals" do
 
     click_link 'Processos'
 
-    click_link 'Interposições de Recursos do Processo Licitatório'
+    click_link 'Interposição de Recursos de Processos Licitatórios'
 
     click_link "#{interposicao_processo_licitatorio}"
 
