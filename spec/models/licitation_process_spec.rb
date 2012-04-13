@@ -59,6 +59,26 @@ describe LicitationProcess do
       for(:envelope_opening_date).with_message("deve ser em ou depois de #{I18n.l Date.tomorrow}")
   end
 
+  it "should allow update envelope delivery and opening datetimes" do
+    now = Time.now
+    subject.envelope_delivery_date = Date.today
+    subject.envelope_delivery_time = now
+    subject.envelope_opening_date = Date.today
+    subject.envelope_opening_time = now
+
+    subject.set_dates(
+      :envelope_delivery_date => Date.tomorrow,
+      :envelope_delivery_time => now + 1.day,
+      :envelope_opening_date => Date.tomorrow,
+      :envelope_opening_time => now + 1.day
+    )
+
+    subject.envelope_delivery_date.should eq Date.tomorrow
+    subject.envelope_delivery_time.should eq now + 1.day
+    subject.envelope_opening_date.should eq Date.tomorrow
+    subject.envelope_opening_time.should eq now + 1.day
+  end
+
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201').for(:year) }
   it { should_not allow_value('a201').for(:year) }

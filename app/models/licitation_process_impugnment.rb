@@ -1,6 +1,7 @@
 class LicitationProcessImpugnment < ActiveRecord::Base
   attr_accessible :licitation_process_id, :person_id, :impugnment_date, :related, :valid_reason
   attr_accessible :situation, :judgment_date, :observation
+  attr_accessible :new_envelope_delivery_date, :new_envelope_delivery_time, :new_envelope_opening_date, :new_envelope_opening_time
 
   has_enumeration_for :related
   has_enumeration_for :situation
@@ -25,10 +26,33 @@ class LicitationProcessImpugnment < ActiveRecord::Base
     :type => :date, :allow_blank => true
   }
 
+  with_options :allow_blank => true do |allowing_blank|
+    allowing_blank.validates :new_envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+    allowing_blank.validates :new_envelope_opening_date, :timeliness => { :on_or_after => :new_envelope_delivery_date, :type => :date, :on => :create }
+    allowing_blank.validates :new_envelope_opening_time, :timeliness => {
+      :on_or_after => :new_envelope_delivery_time, 
+      :on_or_after_message => :must_be_greater_or_equal_to_time,
+      :type => :time
+      }, :if => :new_envelope_opening_date_equal_new_envelope_delivery_date?
+  end
+
+  before_save :licitation_process_impugnment_updater!
+
   orderize :impugnment_date
   filterize
 
   def to_s
     id.to_s
+  end
+
+  private
+
+  def licitation_process_impugnment_updater!
+    licitation_process_impugnment_updater = LicitationProcessImpugnmentUpdater.new(self)
+    licitation_process_impugnment_updater.update_licitation_process_date!
+  end
+
+  def new_envelope_opening_date_equal_new_envelope_delivery_date?
+    new_envelope_opening_date == new_envelope_delivery_date
   end
 end
