@@ -9,4 +9,8 @@ class AdministrativeProcessPresenter < Presenter::Proxy
   def total_allocations_value
     helpers.number_with_precision(object.total_allocations_value)
   end
+
+  def date
+    helpers.l object.date
+  end
 end

@@ -8,13 +8,14 @@ describe AdministrativeProcessPresenter do
   end
 
   let :administrative_process do
-    double(:value_estimated => 500)
+    double(:value_estimated => 500, :date => Date.new(2012, 2, 25))
   end
 
   let :helpers do
     double.tap do |helpers|
       helpers.stub(:number_to_currency).with(500).and_return('R$ 500,00')
       helpers.stub(:number_with_precision).with(400).and_return('400,00')
+      helpers.stub(:l).with(Date.new(2012, 2, 25)).and_return('25/02/2012')
     end
   end
 
@@ -26,5 +27,9 @@ describe AdministrativeProcessPresenter do
   it 'should return formatted total_allocations_value' do
     subject.stub(:total_allocations_value).and_return(400.0)
     subject.total_allocations_value.should eq '400,00'
+  end
+
+  it 'should return formatted date' do
+    subject.date.should eq '25/02/2012'
   end
 end
