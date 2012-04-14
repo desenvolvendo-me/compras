@@ -16,6 +16,19 @@ describe LicitationProcessImpugnment do
   it { should validate_presence_of :envelope_opening_date }
   it { should validate_presence_of :envelope_opening_time }
 
+  context 'when new_envelope_opening_date and new_envelope_delivery_date exists and are different' do
+    before do
+      subject.new_envelope_delivery_date = Date.tomorrow
+      subject.new_envelope_opening_date = Date.current
+    end
+
+    it { should allow_value("11:11").for(:new_envelope_delivery_time) }
+    it { should_not allow_value("44:11").for(:new_envelope_delivery_time) }
+
+    it { should allow_value("11:11").for(:new_envelope_opening_time) }
+    it { should_not allow_value("44:11").for(:new_envelope_opening_time) }
+  end
+
   it "should not have new_envelope_delivery_date less than today" do
     subject.should_not allow_value(Date.yesterday).for(:new_envelope_delivery_date).
                                                    with_message("deve ser em ou depois de #{I18n.l Date.current}")

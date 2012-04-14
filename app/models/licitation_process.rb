@@ -43,6 +43,7 @@ class LicitationProcess < ActiveRecord::Base
     allowing_blank.validates :year, :mask => "9999"
     allowing_blank.validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
     allowing_blank.validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
+    allowing_blank.validates :envelope_delivery_time, :envelope_opening_time, :timeliness => { :type => :time }
   end
 
   before_create :set_process, :set_licitation_number

@@ -47,6 +47,17 @@ describe LicitationProcess do
   it { should validate_presence_of :envelope_opening_time }
   it { should validate_presence_of :pledge_type }
 
+  context 'new_envelope_opening_date is not equal to new_envelope_delivery_date' do
+    before do
+      subject.stub(:new_envelope_opening_date_equal_new_envelope_delivery_date?).and_return(false)
+    end
+
+    it { should allow_value("11:11").for(:envelope_delivery_time) }
+    it { should_not allow_value("44:11").for(:envelope_delivery_time) }
+    it { should allow_value("11:11").for(:envelope_opening_time) }
+    it { should_not allow_value("44:11").for(:envelope_opening_time) }
+  end
+
   it "should not have envelope_delivery_date less than today" do
     subject.should_not allow_value(Date.yesterday).
       for(:envelope_delivery_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
