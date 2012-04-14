@@ -1,7 +1,8 @@
 class LicitationProcessImpugnment < ActiveRecord::Base
-  attr_accessible :licitation_process_id, :person_id, :impugnment_date, :related, :valid_reason
-  attr_accessible :situation, :judgment_date, :observation
-  attr_accessible :new_envelope_delivery_date, :new_envelope_delivery_time, :new_envelope_opening_date, :new_envelope_opening_time
+  attr_accessible :licitation_process_id, :person_id, :impugnment_date, :related
+  attr_accessible :situation, :judgment_date, :observation, :valid_reason
+  attr_accessible :new_envelope_delivery_date, :new_envelope_delivery_time
+  attr_accessible :new_envelope_opening_date, :new_envelope_opening_time
 
   has_enumeration_for :related
   has_enumeration_for :situation
@@ -12,7 +13,8 @@ class LicitationProcessImpugnment < ActiveRecord::Base
   delegate :year, :process_date, :object_description, :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :licitation_process, :person, :related, :situation, :presence => true
-  validates :envelope_delivery_date, :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :presence => true
+  validates :envelope_delivery_date, :envelope_delivery_time, :presence => true
+  validates :envelope_opening_date, :envelope_opening_time, :presence => true
   validates :new_envelope_delivery_time, :timeliness => { :type => :time }, :if => :new_envelope_delivery_date?
   validates :new_envelope_opening_time, :timeliness => { :type => :time }, :if => :new_envelope_opening_date?
 
@@ -32,7 +34,7 @@ class LicitationProcessImpugnment < ActiveRecord::Base
     allowing_blank.validates :new_envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
     allowing_blank.validates :new_envelope_opening_date, :timeliness => { :on_or_after => :new_envelope_delivery_date, :type => :date, :on => :create }
     allowing_blank.validates :new_envelope_opening_time, :timeliness => {
-      :on_or_after => :new_envelope_delivery_time, 
+      :on_or_after => :new_envelope_delivery_time,
       :on_or_after_message => :must_be_greater_or_equal_to_time,
       :type => :time
       }, :if => :new_envelope_opening_date_equal_new_envelope_delivery_date?
