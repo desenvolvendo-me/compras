@@ -1,8 +1,8 @@
 class BudgetUnitLevel < ActiveRecord::Base
-  attr_accessible :level, :description, :digits, :organogram_separator
+  attr_accessible :level, :description, :digits, :separator
   attr_accessible :budget_unit_configuration_id
 
-  has_enumeration_for :organogram_separator, :with => OrganogramSeparator, :create_helpers => true
+  has_enumeration_for :separator, :with => BudgetUnitSeparator, :create_helpers => true
 
   belongs_to :budget_unit_configuration
 

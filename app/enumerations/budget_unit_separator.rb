@@ -1,4 +1,4 @@
-class OrganogramSeparator < EnumerateIt::Base
+class BudgetUnitSeparator < EnumerateIt::Base
   associate_values(
     :point => '.',
     :hyphen => '-',

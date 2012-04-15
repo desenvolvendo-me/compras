@@ -10,4 +10,4 @@ pt-BR:
         level: "Nível"
         description: "Descrição"
         digits: "Dígitos"
-        organogram_separator: "Separador"
+        separator: "Separador"

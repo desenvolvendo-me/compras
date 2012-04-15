@@ -2,7 +2,7 @@
 require 'model_helper'
 require 'app/models/budget_unit_configuration'
 require 'app/models/budget_unit_level'
-require 'app/enumerations/organogram_separator'
+require 'app/enumerations/budget_unit_separator'
 require 'app/models/budget_unit'
 
 describe BudgetUnitConfiguration do
@@ -20,7 +20,7 @@ describe BudgetUnitConfiguration do
 
   context 'get mask' do
     let :level1 do
-      BudgetUnitLevel.new :level => 1, :digits => 1, :organogram_separator => OrganogramSeparator::HYPHEN
+      BudgetUnitLevel.new :level => 1, :digits => 1, :separator => BudgetUnitSeparator::HYPHEN
     end
 
     let :level2 do
@@ -36,10 +36,10 @@ describe BudgetUnitConfiguration do
     end
 
     it 'should validate presence of level only on last mask' do
-      level1.organogram_separator = nil
+      level1.separator = nil
       subject.should_not be_valid
-      subject.ordered_budget_unit_levels.first.errors[:organogram_separator].should include 'não pode ficar em branco'
-      subject.ordered_budget_unit_levels.last.errors[:organogram_separator].should_not include 'não pode ficar em branco'
+      subject.ordered_budget_unit_levels.first.errors[:separator].should include 'não pode ficar em branco'
+      subject.ordered_budget_unit_levels.last.errors[:separator].should_not include 'não pode ficar em branco'
     end
   end
 end
