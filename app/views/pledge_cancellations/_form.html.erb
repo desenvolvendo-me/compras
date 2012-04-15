@@ -40,9 +40,9 @@
     $('form.pledge_cancellation :input').attr('disabled', true);
   <% else %>
     (function() {
-      var pledge_id = $('#pledge_cancellation_pledge_id').val();
-      var pledge_expiration_value,
-        date_changed = false;
+      var pledge_id = $('#pledge_cancellation_pledge_id').val(),
+          pledge_expiration_value,
+          date_changed = false;
 
       function pledgeExpirationUrl() {
         var url = "<%= modal_pledge_expirations_path %>?",
