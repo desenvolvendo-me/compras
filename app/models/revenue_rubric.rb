@@ -20,7 +20,7 @@ class RevenueRubric < ActiveRecord::Base
       revenue_category_code,
       revenue_subcategory_code,
       revenue_source_code,
-      code,
+      code
     ].reject(&:blank?).join('.')
   end
 
