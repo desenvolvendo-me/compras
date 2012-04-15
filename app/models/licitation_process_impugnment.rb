@@ -18,26 +18,32 @@ class LicitationProcessImpugnment < ActiveRecord::Base
   validates :new_envelope_delivery_time, :timeliness => { :type => :time }, :if => :new_envelope_delivery_date?
   validates :new_envelope_opening_time, :timeliness => { :type => :time }, :if => :new_envelope_opening_date?
 
-  validates :impugnment_date, :timeliness => {
-    :on_or_after => :licitation_process_process_date,
-    :on_or_after_message => :must_be_greater_or_equal_to_licitation_process_process_date,
-    :type => :date, :allow_blank => true
-  }
-
-  validates :judgment_date, :timeliness => {
-    :on_or_after => :impugnment_date,
-    :on_or_after_message => :must_be_greater_or_equal_to_impugnment_date,
-    :type => :date, :allow_blank => true
-  }
-
   with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :new_envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
-    allowing_blank.validates :new_envelope_opening_date, :timeliness => { :on_or_after => :new_envelope_delivery_date, :type => :date, :on => :create }
+    allowing_blank.validates :impugnment_date, :timeliness => {
+      :on_or_after => :licitation_process_process_date,
+      :on_or_after_message => :must_be_greater_or_equal_to_licitation_process_process_date,
+      :type => :date
+    }
+    allowing_blank.validates :judgment_date, :timeliness => {
+      :on_or_after => :impugnment_date,
+      :on_or_after_message => :must_be_greater_or_equal_to_impugnment_date,
+      :type => :date
+    }
+    allowing_blank.validates :new_envelope_delivery_date,:timeliness => {
+      :on_or_after => :today,
+      :type => :date,
+      :on => :create
+    }
+    allowing_blank.validates :new_envelope_opening_date, :timeliness => {
+      :on_or_after => :new_envelope_delivery_date,
+      :type => :date,
+      :on => :create
+    }
     allowing_blank.validates :new_envelope_opening_time, :timeliness => {
       :on_or_after => :new_envelope_delivery_time,
       :on_or_after_message => :must_be_greater_or_equal_to_time,
       :type => :time
-      }, :if => :new_envelope_opening_date_equal_new_envelope_delivery_date?
+    }, :if => :new_envelope_opening_date_equal_new_envelope_delivery_date?
   end
 
   before_save :licitation_process_impugnment_updater!
