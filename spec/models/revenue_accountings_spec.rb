@@ -14,7 +14,12 @@ describe RevenueAccounting do
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
   it { should validate_presence_of :revenue_nature }
+  it { should validate_presence_of :code }
+  it { should validate_presence_of :capability }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('2a12').for(:year) }
+
+  it { should allow_value('123').for(:code) }
+  it { should_not allow_value('12a').for(:code) }
 end

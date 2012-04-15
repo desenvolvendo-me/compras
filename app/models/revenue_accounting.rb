@@ -7,9 +7,10 @@ class RevenueAccounting < ActiveRecord::Base
 
   delegate :docket, :to => :revenue_nature, :allow_nil => true, :prefix => true
 
-  validates :entity, :year, :revenue_nature, :presence => true
+  validates :entity, :year, :revenue_nature, :code, :capability, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :revenue_nature_id, :uniqueness => true, :allow_blank => true
+  validates :code, :numericality => true, :allow_blank => true
 
   orderize :code
   filterize
