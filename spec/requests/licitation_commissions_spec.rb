@@ -161,6 +161,30 @@ feature "LicitationCommissions" do
     end
   end
 
+  scenario 'should clear publication_date when administractive act is clean' do
+    LicitationCommission.make!(:comissao)
+
+    click_link 'Contabilidade'
+
+    click_link 'Comissões de Licitação'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      select 'Pregão', :from => 'Tipo de comissão'
+
+      page.should have_field 'Ato regulamentador', :with => '1234'
+      page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
+
+      clear_modal 'Ato regulamentador'
+
+      page.should have_field 'Ato regulamentador', :with => ''
+      page.should have_field 'Data da publicação do ato', :with => ''
+    end
+  end
+
   scenario 'destroy an existent licitation_commission' do
     licitation_commission = LicitationCommission.make!(:comissao)
     click_link 'Contabilidade'
