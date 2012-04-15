@@ -9,13 +9,13 @@ require 'app/models/administrative_process'
 
 describe BudgetUnit do
   it 'should respond to to_s with description' do
-    subject.organogram = '99/00'
+    subject.budget_unit = '99/00'
     subject.description = 'Secretaria de Educação'
     subject.to_s.should eq '99/00 - Secretaria de Educação'
   end
 
   it { should validate_presence_of :description }
-  it { should validate_presence_of :organogram }
+  it { should validate_presence_of :budget_unit }
   it { should validate_presence_of :tce_code }
   it { should validate_presence_of :acronym }
   it { should validate_presence_of :performance_field }
@@ -35,16 +35,16 @@ describe BudgetUnit do
   context 'should validate mask' do
     it 'and should not be valid with wrong mask' do
       subject.stub(:mask => '99.99')
-      subject.organogram = '8.8'
+      subject.budget_unit = '8.8'
       subject.should_not be_valid
-      subject.errors[:organogram].should include 'não é válido'
+      subject.errors[:budget_unit].should include 'não é válido'
     end
 
     it 'and should be valid with correct mask' do
       subject.stub(:mask => '99.99')
-      subject.organogram = '81.81'
+      subject.budget_unit = '81.81'
       subject.valid?
-      subject.errors[:organogram].should_not include 'não é válido'
+      subject.errors[:budget_unit].should_not include 'não é válido'
     end
   end
 

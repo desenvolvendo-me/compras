@@ -1,7 +1,7 @@
 # encoding: utf-8
 BudgetUnit.blueprint(:secretaria_de_educacao) do
   budget_unit_configuration { BudgetUnitConfiguration.make!(:detran_sopa) }
-  organogram { '02.00' }
+  budget_unit { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Educação' }
   kind { BudgetUnitKind::ANALYTICAL }
@@ -14,7 +14,7 @@ end
 
 BudgetUnit.blueprint(:secretaria_de_desenvolvimento) do
   budget_unit_configuration { BudgetUnitConfiguration.make!(:detran_sopa) }
-  organogram { '02.00' }
+  budget_unit { '02.00' }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
   kind { BudgetUnitKind::ANALYTICAL }

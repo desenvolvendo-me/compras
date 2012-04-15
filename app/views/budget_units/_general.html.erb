@@ -1,5 +1,5 @@
 <%= f.input :budget_unit_configuration %>
-<%= f.input :organogram, :input_html => { :size => 50 } %>
+<%= f.input :budget_unit, :input_html => { :size => 50 } %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
@@ -29,7 +29,7 @@
     if (data) {
       var record = data.record;
 
-      $('#budget_unit_organogram').attr("data-mask", record.data("mask"));
+      $('#budget_unit_budget_unit').attr("data-mask", record.data("mask"));
     }
   });
 </script>

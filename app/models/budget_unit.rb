@@ -1,5 +1,5 @@
 class BudgetUnit < ActiveRecord::Base
-  attr_accessible :description, :organogram, :tce_code, :acronym
+  attr_accessible :description, :budget_unit, :tce_code, :acronym
   attr_accessible :performance_field, :budget_unit_configuration_id
   attr_accessible :administration_type_id, :address_attributes
   attr_accessible :budget_unit_responsibles_attributes, :kind
@@ -19,10 +19,10 @@ class BudgetUnit < ActiveRecord::Base
 
   delegate :mask, :to => :budget_unit_configuration, :allow_nil => true
 
-  validates :description, :organogram, :tce_code, :acronym, :presence => true
+  validates :description, :budget_unit, :tce_code, :acronym, :presence => true
   validates :performance_field, :budget_unit_configuration, :presence => true
   validates :administration_type, :kind, :presence => true
-  validates :organogram, :mask => :mask, :allow_blank => true
+  validates :budget_unit, :mask => :mask, :allow_blank => true
   validate :cannot_have_duplicated_responsibles
 
   accepts_nested_attributes_for :address
@@ -32,7 +32,7 @@ class BudgetUnit < ActiveRecord::Base
   filterize
 
   def to_s
-    "#{organogram} - #{description}"
+    "#{budget_unit} - #{description}"
   end
 
   protected
