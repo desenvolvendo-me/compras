@@ -14,7 +14,7 @@ class LicitationProcessImpugnment < ActiveRecord::Base
 
   validates :licitation_process, :person, :related, :situation, :presence => true
   validates :envelope_delivery_date, :envelope_delivery_time, :presence => true
-  validates :envelope_opening_date, :envelope_opening_time, :presence => true
+  validates :envelope_opening_date, :envelope_opening_time, :impugnment_date, :presence => true
   validates :new_envelope_delivery_time, :timeliness => { :type => :time }, :if => :new_envelope_delivery_date?
   validates :new_envelope_opening_time, :timeliness => { :type => :time }, :if => :new_envelope_opening_date?
 

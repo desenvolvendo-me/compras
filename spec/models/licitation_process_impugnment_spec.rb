@@ -8,6 +8,7 @@ describe LicitationProcessImpugnment do
   it { should belong_to :licitation_process }
   it { should belong_to :person }
   it { should validate_presence_of :licitation_process }
+  it { should validate_presence_of :impugnment_date }
   it { should validate_presence_of :related }
   it { should validate_presence_of :person }
   it { should validate_presence_of :situation }
