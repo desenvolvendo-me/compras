@@ -86,8 +86,8 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
-    fill_modal 'Empenho', :with => I18n.l(Date.current+15.days), :field => 'Data de emissão'
-    page.should have_field 'Data *', :with => I18n.l(Date.current+15.days)
+    fill_modal 'Empenho', :with => I18n.l(Date.current + 15.days), :field => 'Data de emissão'
+    page.should have_field 'Data *', :with => I18n.l(Date.current + 15.days)
   end
 
   scenario 'should not fill when date is not greater than last' do
@@ -101,7 +101,7 @@ feature "PledgeCancellations" do
     click_link 'Criar Anulação de Empenho'
 
     fill_modal 'Empenho', :with => I18n.l(Date.current), :field => 'Data de emissão'
-    page.should have_field 'Data *', :with => I18n.l(Date.current+1.days)
+    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.days)
   end
 
   scenario 'should not fill when date is already changed' do
@@ -114,9 +114,9 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
-    fill_in 'Data *', :with => I18n.l(Date.current-10.days)
-    fill_modal 'Empenho', :with => I18n.l(Date.current+15.days), :field => 'Data de emissão'
-    page.should have_field 'Data *', :with => I18n.l(Date.current-10.days)
+    fill_in 'Data *', :with => I18n.l(Date.current - 10.days)
+    fill_modal 'Empenho', :with => I18n.l(Date.current + 15.days), :field => 'Data de emissão'
+    page.should have_field 'Data *', :with => I18n.l(Date.current - 10.days)
   end
 
   scenario 'clear pledge and pledge_expiration when clear pledge' do
