@@ -13,9 +13,9 @@ feature "RevenueNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Receitas'
+    click_link 'Naturezas das Receitas'
 
-    click_link 'Criar Natureza de Receita'
+    click_link 'Criar Natureza da Receita'
 
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => '2012'
@@ -26,9 +26,9 @@ feature "RevenueNatures" do
     select 'Ambos', :from => 'Tipo'
     fill_in 'Súmula', :with => 'Registra o valor da arrecadação da receita'
 
-    click_button 'Criar Natureza de Receita'
+    click_button 'Criar Natureza da Receita'
 
-    page.should have_notice 'Natureza de Receita criado com sucesso.'
+    page.should have_notice 'Natureza da Receita criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -52,9 +52,9 @@ feature "RevenueNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Receitas'
+    click_link 'Naturezas das Receitas'
 
-    click_link 'Criar Natureza de Receita'
+    click_link 'Criar Natureza da Receita'
 
     fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
     fill_in 'Classificação', :with => '12344569'
@@ -67,9 +67,9 @@ feature "RevenueNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Receitas'
+    click_link 'Naturezas das Receitas'
 
-    click_link 'Criar Natureza de Receita'
+    click_link 'Criar Natureza da Receita'
 
     fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
 
@@ -81,9 +81,9 @@ feature "RevenueNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Receitas'
+    click_link 'Naturezas das Receitas'
 
-    click_link 'Criar Natureza de Receita'
+    click_link 'Criar Natureza da Receita'
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
@@ -105,7 +105,7 @@ feature "RevenueNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Receitas'
+    click_link 'Naturezas das Receitas'
 
     click_link '1.1.1.2.12344569 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
@@ -118,9 +118,9 @@ feature "RevenueNatures" do
     select 'Analítico', :from => 'Tipo'
     fill_in 'Súmula', :with => 'Registra o valor da arrecadação do imposto'
 
-    click_button 'Atualizar Natureza de Receita'
+    click_button 'Atualizar Natureza da Receita'
 
-    page.should have_notice 'Natureza de Receita editado com sucesso.'
+    page.should have_notice 'Natureza da Receita editado com sucesso.'
 
     click_link '1.1.1.3.11111111 - Imposto sobre Propriedade Predial e Territorial Urbana'
 
@@ -142,13 +142,13 @@ feature "RevenueNatures" do
 
     click_link 'Contabilidade'
 
-    click_link 'Naturezas de Receitas'
+    click_link 'Naturezas das Receitas'
 
     click_link '1.1.1.2.12344569 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
     click_link "Apagar", :confirm => true
 
-    page.should have_notice 'Natureza de Receita apagado com sucesso.'
+    page.should have_notice 'Natureza da Receita apagado com sucesso.'
 
     page.should_not have_content '1.1.1.2.12344569 - Imposto s/ Propriedade Predial e Territ. Urbana'
   end

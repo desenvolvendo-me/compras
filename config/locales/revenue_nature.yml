@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       revenue_nature:
-        one: "Natureza de Receita"
-        other: "Naturezas de Receitas"
+        one: "Natureza da Receita"
+        other: "Naturezas das Receitas"
 
     attributes:
       revenue_nature:
