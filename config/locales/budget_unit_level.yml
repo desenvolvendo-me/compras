@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       budget_unit_level:
-        one: "Nível de Organograma"
-        other: "Níveis de Organograma"
+        one: "Nível de Unidade Orçamentária"
+        other: "Níveis de Unidades Orçamentárias"
 
     attributes:
       budget_unit_level:
