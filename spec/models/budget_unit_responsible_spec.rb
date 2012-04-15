@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/organogram_responsible'
+require 'app/models/budget_unit_responsible'
 
-describe OrganogramResponsible do
+describe BudgetUnitResponsible do
   it { should validate_presence_of :responsible }
   it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :start_date }

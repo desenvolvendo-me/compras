@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      organogram_responsible:
+      budget_unit_responsible:
         one: "Responsável"
         other: "Responsáveis"
 
     attributes:
-      organogram_responsible:
+      budget_unit_responsible:
         responsible: "Responsável"
         regulatory_act: "Ato regulamentador"
         start_date: "Data de início"

@@ -4,7 +4,7 @@ require 'app/models/budget_unit'
 require 'app/models/address'
 require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
-require 'app/models/organogram_responsible'
+require 'app/models/budget_unit_responsible'
 require 'app/models/administrative_process'
 
 describe BudgetUnit do
@@ -25,7 +25,7 @@ describe BudgetUnit do
 
   it { should have_one :address }
   it { should have_many(:budget_allocations).dependent(:restrict) }
-  it { should have_many(:organogram_responsibles).dependent(:destroy).order(:id) }
+  it { should have_many(:budget_unit_responsibles).dependent(:destroy).order(:id) }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should belong_to :budget_unit_configuration }
   it { should belong_to :administration_type }
@@ -49,9 +49,9 @@ describe BudgetUnit do
   end
 
   context 'validating duplicated responsibles' do
-    it "duplicated organogram_responsibles should be invalid except the first" do
-      responsible_one = subject.organogram_responsibles.build(:responsible_id => 1)
-      responsible_two = subject.organogram_responsibles.build(:responsible_id => 1)
+    it "duplicated budget_unit_responsibles should be invalid except the first" do
+      responsible_one = subject.budget_unit_responsibles.build(:responsible_id => 1)
+      responsible_two = subject.budget_unit_responsibles.build(:responsible_id => 1)
 
       subject.valid?
 
@@ -59,9 +59,9 @@ describe BudgetUnit do
       responsible_two.errors.messages[:responsible_id].should include "já está em uso"
     end
 
-    it "the diferent organogram_responsibles should be valid" do
-      responsible_one = subject.organogram_responsibles.build(:responsible_id => 1)
-      responsible_two = subject.organogram_responsibles.build(:responsible_id => 2)
+    it "the diferent budget_unit_responsibles should be valid" do
+      responsible_one = subject.budget_unit_responsibles.build(:responsible_id => 1)
+      responsible_two = subject.budget_unit_responsibles.build(:responsible_id => 2)
 
       subject.valid?
 

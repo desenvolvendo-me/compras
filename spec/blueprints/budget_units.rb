@@ -9,7 +9,7 @@ BudgetUnit.blueprint(:secretaria_de_educacao) do
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
-  organogram_responsibles { [OrganogramResponsible.make!(:sobrinho)] }
+  budget_unit_responsibles { [BudgetUnitResponsible.make!(:sobrinho)] }
 end
 
 BudgetUnit.blueprint(:secretaria_de_desenvolvimento) do
@@ -22,5 +22,5 @@ BudgetUnit.blueprint(:secretaria_de_desenvolvimento) do
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
-  organogram_responsibles { [OrganogramResponsible.make!(:sobrinho)] }
+  budget_unit_responsibles { [BudgetUnitResponsible.make!(:sobrinho)] }
 end

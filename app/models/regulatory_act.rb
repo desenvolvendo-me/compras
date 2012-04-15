@@ -10,7 +10,7 @@ class RegulatoryAct < ActiveRecord::Base
 
   has_many :expense_natures, :dependent => :restrict
   has_many :budget_unit_configurations, :dependent => :restrict
-  has_many :organogram_responsibles, :dependent => :restrict
+  has_many :budget_unit_responsibles, :dependent => :restrict
   has_many :licitation_modalities, :dependent => :restrict
   has_many :licitation_commissions, :dependent => :restrict
   has_many :revenue_natures, :dependent => :restrict

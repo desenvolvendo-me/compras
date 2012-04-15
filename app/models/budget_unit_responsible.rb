@@ -1,4 +1,4 @@
-class OrganogramResponsible < ActiveRecord::Base
+class BudgetUnitResponsible < ActiveRecord::Base
   attr_accessible :responsible_id, :regulatory_act_id, :start_date
   attr_accessible :end_date, :status
 

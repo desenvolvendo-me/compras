@@ -2,7 +2,7 @@ class BudgetUnit < ActiveRecord::Base
   attr_accessible :description, :organogram, :tce_code, :acronym
   attr_accessible :performance_field, :budget_unit_configuration_id
   attr_accessible :administration_type_id, :address_attributes
-  attr_accessible :organogram_responsibles_attributes, :kind
+  attr_accessible :budget_unit_responsibles_attributes, :kind
 
   has_enumeration_for :kind, :with => BudgetUnitKind, :create_helpers => true
 
@@ -13,7 +13,7 @@ class BudgetUnit < ActiveRecord::Base
 
   has_many :budget_allocations, :dependent => :restrict
   has_many :purchase_solicitations, :dependent => :restrict
-  has_many :organogram_responsibles, :dependent => :destroy, :order => :id
+  has_many :budget_unit_responsibles, :dependent => :destroy, :order => :id
   has_many :direct_purchases, :dependent => :restrict
   has_many :administrative_processes, :dependent => :restrict
 
@@ -26,7 +26,7 @@ class BudgetUnit < ActiveRecord::Base
   validate :cannot_have_duplicated_responsibles
 
   accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :organogram_responsibles, :allow_destroy => true
+  accepts_nested_attributes_for :budget_unit_responsibles, :allow_destroy => true
 
   orderize :description
   filterize
@@ -40,12 +40,12 @@ class BudgetUnit < ActiveRecord::Base
   def cannot_have_duplicated_responsibles
     single_responsibles = []
 
-    organogram_responsibles.each do |organogram_responsible|
-      if single_responsibles.include?(organogram_responsible.responsible_id)
-        errors.add(:organogram_responsibles)
-        organogram_responsible.errors.add(:responsible_id, :taken)
+    budget_unit_responsibles.each do |budget_unit_responsible|
+      if single_responsibles.include?(budget_unit_responsible.responsible_id)
+        errors.add(:budget_unit_responsibles)
+        budget_unit_responsible.errors.add(:responsible_id, :taken)
       end
-      single_responsibles << organogram_responsible.responsible_id
+      single_responsibles << budget_unit_responsible.responsible_id
     end
   end
 end
