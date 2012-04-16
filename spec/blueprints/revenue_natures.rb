@@ -3,8 +3,8 @@ RevenueNature.blueprint(:imposto) do
   entity { Entity.make!(:detran) }
   year { 2009 }
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  classification { '12344569' }
-  full_code { '1.1.1.2.12344569' }
+  classification { '1234' }
+  full_code { '1.1.1.2.1234' }
   revenue_rubric { RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda) }
   specification { 'Imposto s/ Propriedade Predial e Territ. Urbana' }
   kind { RevenueNatureKind::BOTH }
@@ -15,8 +15,8 @@ RevenueNature.blueprint(:imposto_sobre_renda) do
   entity { Entity.make!(:detran) }
   year { 2012 }
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  classification { '12344569' }
-  full_code { '1.1.1.2.12344569' }
+  classification { '1234' }
+  full_code { '1.1.1.2.1234' }
   revenue_rubric { RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda) }
   specification { 'Imposto sobre a renda' }
   kind { RevenueNatureKind::BOTH }

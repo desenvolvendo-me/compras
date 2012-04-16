@@ -22,8 +22,8 @@ describe RevenueNature do
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('2a12').for(:year) }
 
-  it { should allow_value('12344569').for(:classification) }
-  it { should_not allow_value('1234').for(:classification) }
+  it { should allow_value('1234').for(:classification) }
+  it { should_not allow_value('1a34').for(:classification) }
 
   it { should belong_to :entity }
   it { should belong_to :regulatory_act }

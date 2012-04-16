@@ -16,7 +16,7 @@ class RevenueNature < ActiveRecord::Base
   validates :regulatory_act, :kind, :docket, :revenue_rubric, :presence => true
   validates :specification, :entity, :year, :classification, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
-  validates :classification, :mask => '99999999', :allow_blank => true
+  validates :classification, :mask => '9999', :allow_blank => true
 
   orderize :id
   filterize

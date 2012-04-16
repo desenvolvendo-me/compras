@@ -40,7 +40,7 @@ feature "RevenueAccountings" do
       page.should have_field 'Data', :with => I18n.l(Date.current)
       page.should have_field 'Exercício', :with => '2012'
       page.should have_field 'Código', :with => '150'
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12344569 - Imposto s/ Propriedade Predial e Territ. Urbana'
+      page.should have_field 'Natureza da receita', :with => '1.1.1.2.1234 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
       page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
     end
@@ -62,7 +62,7 @@ feature "RevenueAccountings" do
     within_tab 'Principal' do
       fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
 
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12344569 - Imposto s/ Propriedade Predial e Territ. Urbana'
+      page.should have_field 'Natureza da receita', :with => '1.1.1.2.1234 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
 
       clear_modal 'Natureza da receita'
@@ -125,7 +125,7 @@ feature "RevenueAccountings" do
       page.should have_field 'Entidade', :with => 'Secretaria de Educação'
       page.should have_field 'Exercício', :with => '2011'
       page.should have_field 'Código', :with => '151'
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12344569 - Imposto sobre a renda'
+      page.should have_field 'Natureza da receita', :with => '1.1.1.2.1234 - Imposto sobre a renda'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
       page.should have_field 'Recurso', :with => 'Construção'
     end
