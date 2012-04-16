@@ -1,4 +1,6 @@
 class LicitationProcessImpugnmentsController < CrudController
+  actions :all, :except => [ :destroy ]
+
   def new
     object = build_resource
     object.situation = Situation::PENDING

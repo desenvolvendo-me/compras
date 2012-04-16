@@ -93,11 +93,8 @@ feature "LicitationProcessImpugnments" do
     click_link 'Impugnações do Processo Licitatório'
 
     click_link "#{licitation_process_impugnment.to_s}"
-    
-    click_link "Apagar #{licitation_process_impugnment.to_s}", :confirm => true
 
-    page.should have_notice 'Impugnação do Processo Licitatório apagado com sucesso.'
+    page.should_not have_link("Apagar #{licitation_process_impugnment.to_s}")
 
-    page.should_not have_link "#{licitation_process_impugnment.to_s}"
   end
 end
