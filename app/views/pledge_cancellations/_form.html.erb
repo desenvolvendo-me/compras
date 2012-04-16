@@ -41,8 +41,7 @@
   <% else %>
     (function() {
       var pledge_id = $('#pledge_cancellation_pledge_id').val(),
-          pledge_expiration_value,
-          date_changed = false;
+          pledge_expiration_value;
 
       function pledgeExpirationUrl() {
         var url = "<%= modal_pledge_expirations_path %>?",
@@ -79,11 +78,6 @@
             $('#pledge_cancellation_pledge_expiration_id').val('');
             $('#pledge_cancellation_pledge_expiration_value').val('');
           }
-          if (!date_changed && $('#pledge_cancellation_date').val()) {
-            if (Date.parseBR(record.data("emission-date")) > Date.parseBR($('#pledge_cancellation_date').val())) {
-              $('#pledge_cancellation_date').val(record.data("emission-date"));
-            }
-          }
         } else {
           $('#pledge_cancellation_pledge_expiration').attr('data-modal-url', '<%= modal_pledge_expirations_path %>');
           $('#pledge_cancellation_emission_date').val('');
@@ -112,10 +106,6 @@
           $('#pledge_cancellation_expiration_date, #pledge_cancellation_canceled_value').val('');
           pledge_expiration_value = null;
         }
-      });
-
-      $('#pledge_cancellation_date').on('change', function(){
-        date_changed = true;
       });
 
       $('#pledge_cancellation_kind').change(forceValueWhenTotalIsKind);
