@@ -1,8 +1,6 @@
 class LicitationProcessImpugnment < ActiveRecord::Base
   attr_accessible :licitation_process_id, :person_id, :impugnment_date, :related
-  attr_accessible :situation, :judgment_date, :observation, :valid_reason
-  attr_accessible :new_envelope_delivery_date, :new_envelope_delivery_time
-  attr_accessible :new_envelope_opening_date, :new_envelope_opening_time
+  attr_accessible :valid_reason
 
   has_enumeration_for :related
   has_enumeration_for :situation
