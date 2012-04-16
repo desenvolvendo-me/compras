@@ -44,7 +44,7 @@
     $('form.pledge .hint').hide();
   <% else %>
     (function () {
-      var reserve_fund_budget_allocation_id;
+      var reserveFundBudgetAllocationId;
 
       function uniqPledgeExpiration(){
         return $('fieldset.pledge-expiration .destroy[value=false]').length == 1;
@@ -86,7 +86,7 @@
           $('#pledge_budget_allocation_budget_unit').val(record.data("budget_unit"));
           $('#pledge_budget_allocation_expense_nature').val(record.data("expense-nature"));
 
-          reserve_fund_budget_allocation_id = record.data('budget-allocation-id');
+          reserveFundBudgetAllocationId = record.data('budget-allocation-id');
         } else {
           $('#pledge_reserve_fund_value').val('');
         }
@@ -108,7 +108,7 @@
         if (data) {
           var record = data.record;
 
-          if (reserve_fund_budget_allocation_id != record.data('id')) {
+          if (reserveFundBudgetAllocationId != record.data('id')) {
             $('#pledge_reserve_fund_id').val('');
             $('#pledge_reserve_fund').val('');
           }
