@@ -99,7 +99,7 @@ feature "RevenueAccountings" do
     end
   end
 
-  scenario 'validate uniqueness of thing' do
+  scenario 'validate uniqueness of revenue_nature' do
     RevenueAccounting.make!(:reforma)
 
     click_link 'Contabilidade'
