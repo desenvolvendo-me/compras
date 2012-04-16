@@ -2,4 +2,4 @@ pt-BR:
   enumerations:
     revenue_accounting_kind:
       average: "Média de arrecadação mensal dos últimos 3 anos"
-      year: "Dividir valor previsto por 12"
+      divide: "Dividir valor previsto por 12"

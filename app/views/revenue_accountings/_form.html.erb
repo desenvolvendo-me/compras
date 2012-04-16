@@ -1,32 +1,14 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Principal</a></li>
+    <li><a href="#planning">Programação</a></li>
   </ul>
 
   <div id="general">
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <%= f.input :entity %>
-      </div>
-
-      <div class="yui3-u-1-2">
-        <%= f.input :year %>
-      </div>
-    </div>
-
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <%= f.input :code %>
-      </div>
-
-      <div class="yui3-u-1-2">
-        <%= f.input :date, :disabled => true, :input_html => { :value => f.object.presenter.date } %>
-      </div>
-    </div>
-
-    <%= f.input :revenue_nature %>
-    <%= f.input :revenue_nature_docket, :disabled => true %>
-    <%= f.input :capability %>
+    <%= render 'general', :f => f %>
+  </div>
+  <div id="planning">
+    <%= render 'planning', :f => f %>
   </div>
 </div>
 
@@ -41,6 +23,21 @@
     }
   });
 
+  function applyMonthValue(value) {
+    $('#month').find('td.value').each(function(){
+      $(this).html(floatToPtBrString(value));
+    });
+  }
+
+  function calculateDivide(){
+    var input_value = $('#revenue_accounting_value').val();
+    if (input_value) {
+      value = Big.parse(parsePtBrFloat(input_value));
+      calculed = value.over(Big.parse(12));
+      applyMonthValue(parseFloat(calculed));
+    }
+  }
+
   $('#revenue_accounting_revenue_nature').on('change', function(event, data){
     if (data) {
       var record = data.record;
@@ -49,4 +46,18 @@
       $('#revenue_accounting_revenue_nature_docket').val('');
     }
   });
+
+  $('#revenue_accounting_kind').on('change', function(){
+    var kind = $(this).val();
+
+    if (kind == '<%= RevenueAccountingKind::AVERAGE %>') {
+      $('#revenue_accounting_value').val('').attr('disabled', true);
+      applyMonthValue(0);
+    } else if (kind == '<%= RevenueAccountingKind::DIVIDE %>') {
+      $('#revenue_accounting_value').attr('disabled', false);
+      calculateDivide();
+    }
+  }).change();
+
+  $('#revenue_accounting_value').on('keyup', calculateDivide);
 </script>

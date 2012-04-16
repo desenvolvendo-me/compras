@@ -14,3 +14,5 @@ pt-BR:
         revenue_nature: "Natureza da receita"
         revenue_nature_docket: "Descrição da natureza da receita"
         capability: "Recurso"
+        kind: "Tipo de programação"
+        value: "Valor previsto"

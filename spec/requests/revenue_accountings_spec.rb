@@ -25,6 +25,10 @@ feature "RevenueAccountings" do
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
 
+    within_tab 'Programação' do
+      select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
+    end
+
     click_button 'Criar Receita Contábel'
 
     page.should have_notice 'Receita Contábel criado com sucesso.'
@@ -39,6 +43,10 @@ feature "RevenueAccountings" do
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12344569 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
       page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+    end
+
+    within_tab 'Programação' do
+      page.should have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
     end
   end
 
@@ -63,6 +71,25 @@ feature "RevenueAccountings" do
     end
   end
 
+  scenario 'should apply month value based on kind and value' do
+    click_link 'Contabilidade'
+
+    click_link 'Receitas Contábeis'
+
+    click_link 'Criar Receita Contábel'
+
+    within_tab 'Programação' do
+      select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
+      page.should have_field 'Valor previsto', :with => ''
+      page.should have_disabled_field 'Valor previsto'
+      page.should have_content '0,00'
+
+      select 'Dividir valor previsto por 12', :from => 'Tipo'
+      fill_in 'Valor previsto', :with => '222,22'
+      page.should have_content '18,52'
+    end
+  end
+
   scenario 'update an existent revenue_accounting' do
     RevenueAccounting.make!(:reforma)
     Entity.make!(:secretaria_de_educacao)
@@ -83,6 +110,11 @@ feature "RevenueAccountings" do
       fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
     end
 
+    within_tab 'Programação' do
+      select 'Dividir valor previsto por 12', :from => 'Tipo'
+      fill_in 'Valor previsto', :with => '222,22'
+    end
+
     click_button 'Atualizar Receita Contábel'
 
     page.should have_notice 'Receita Contábel editado com sucesso.'
@@ -96,6 +128,11 @@ feature "RevenueAccountings" do
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12344569 - Imposto sobre a renda'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
       page.should have_field 'Recurso', :with => 'Construção'
+    end
+
+    within_tab 'Programação' do
+      page.should have_select 'Tipo', :selected => 'Dividir valor previsto por 12'
+      page.should have_content '18,52'
     end
   end
 

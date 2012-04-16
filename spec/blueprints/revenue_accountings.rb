@@ -4,4 +4,5 @@ RevenueAccounting.blueprint(:reforma) do
   code { '150' }
   revenue_nature { RevenueNature.make!(:imposto) }
   capability { Capability.make!(:reforma) }
+  kind { RevenueAccountingKind::AVERAGE }
 end

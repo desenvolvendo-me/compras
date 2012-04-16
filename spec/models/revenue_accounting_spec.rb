@@ -16,6 +16,17 @@ describe RevenueAccounting do
   it { should validate_presence_of :revenue_nature }
   it { should validate_presence_of :code }
   it { should validate_presence_of :capability }
+  it { should validate_presence_of :kind }
+
+  it 'should validate presence of value if kind is average' do
+    subject.stub(:divide?).and_return(true)
+    subject.should validate_presence_of :value
+  end
+
+  it 'should not validate presence of value if kind is average' do
+    subject.stub(:divide?).and_return(false)
+    subject.should_not validate_presence_of :value
+  end
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('2a12').for(:year) }
