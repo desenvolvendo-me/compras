@@ -54,7 +54,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link 'Impugnações do Processo Licitatório'
 
-    click_link licitation_process_impugnment.id.to_s
+    click_link licitation_process_impugnment.to_s
 
     fill_in 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
     select 'Pregão', :from => 'Referente ao'
