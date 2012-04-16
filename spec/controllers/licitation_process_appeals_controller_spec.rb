@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe LicitationProcessAppealsController do
   before do
-    sign_in User.make!(:sobrinho_as_admin_and_employee)
+    controller.stub(:authenticate_user!)
+    controller.stub(:authorize_resource!)
   end
 
   context 'GET #new' do
