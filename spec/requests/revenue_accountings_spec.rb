@@ -57,7 +57,6 @@ feature "RevenueAccountings" do
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12344569 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
 
-
       clear_modal 'Natureza da receita'
       page.should have_field 'Natureza da receita', :with => ''
       page.should have_field 'Descrição da natureza da receita', :with => ''
