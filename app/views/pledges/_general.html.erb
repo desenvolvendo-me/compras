@@ -23,20 +23,22 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-2">
     <%= f.input :reserve_fund %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-2">
+    <%= f.input :reserve_fund_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.reserve_fund_value) } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
     <%= f.input :budget_allocation %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-2">
     <%= f.input :budget_allocation_real_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_real_amount) } %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :reserve_fund_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.reserve_fund_value) } %>
   </div>
 </div>
 
