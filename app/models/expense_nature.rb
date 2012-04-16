@@ -24,7 +24,7 @@ class ExpenseNature < ActiveRecord::Base
 
   validates :full_code, :kind, :description, :expense_group, :presence => true
   validates :expense_modality, :expense_element, :expense_split, :presence => true
-  validates :expense_split, :mask => '99999999', :allow_blank => true
+  validates :expense_split, :mask => '99', :allow_blank => true
 
   orderize :description
   filterize

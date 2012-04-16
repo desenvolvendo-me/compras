@@ -25,14 +25,14 @@
     group = valueOrDefaultMask($('#expense_nature_expense_group').val(), 1);
     modality = valueOrDefaultMask($('#expense_nature_expense_modality').val(), 2);
     element = valueOrDefaultMask($('#expense_nature_expense_element').val(), 2);
-    split = valueOrDefaultMask($('#expense_nature_expense_split').val(), 8);
+    split = valueOrDefaultMask($('#expense_nature_expense_split').val(), 2);
 
     $('#expense_nature_full_code').val([category, group, modality, element, split].join('.'));
   }
 
   function valueOrDefaultMask(value, count){
     if(!value) {
-      value = '________' + value;
+      value = '__' + value;
       return value.substr(value.length - count);
     } else {
       value = '00' + value;

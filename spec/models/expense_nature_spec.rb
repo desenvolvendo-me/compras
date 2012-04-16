@@ -29,6 +29,6 @@ describe ExpenseNature do
   it { should validate_presence_of :expense_element }
   it { should validate_presence_of :expense_split }
 
-  it { should allow_value('12345569').for(:expense_split) }
-  it { should_not allow_value('400a').for(:expense_split) }
+  it { should allow_value('12').for(:expense_split) }
+  it { should_not allow_value('4a').for(:expense_split) }
 end

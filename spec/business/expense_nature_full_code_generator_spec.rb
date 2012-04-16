@@ -14,12 +14,12 @@ describe ExpenseNatureFullCodeGenerator do
         :expense_group_code => '2',
         :expense_modality_code => '33',
         :expense_element_code => '44',
-        :expense_split => '55555555',
+        :expense_split => '55',
       )
     end
 
     it 'should generate full_code' do
-      expense_nature_object.should_receive(:full_code=).with('1.2.33.44.55555555')
+      expense_nature_object.should_receive(:full_code=).with('1.2.33.44.55')
       subject.generate!
     end
   end
@@ -36,7 +36,7 @@ describe ExpenseNatureFullCodeGenerator do
     end
 
     it 'should use _' do
-      expense_nature_object.should_receive(:full_code=).with('1._.33.__.________')
+      expense_nature_object.should_receive(:full_code=).with('1._.33.__.__')
       subject.generate!
     end
   end
@@ -53,7 +53,7 @@ describe ExpenseNatureFullCodeGenerator do
     end
 
     it 'should generate full_code with 0 on left' do
-      expense_nature_object.should_receive(:full_code=).with('_._.__.01.________')
+      expense_nature_object.should_receive(:full_code=).with('_._.__.01.__')
       subject.generate!
     end
   end

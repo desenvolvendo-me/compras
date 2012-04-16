@@ -37,7 +37,7 @@ feature "Materials" do
     #end of javascript test
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
-    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12345569', :field => 'Código completo'
+    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Código completo'
 
     click_button 'Criar Material'
 
@@ -58,7 +58,7 @@ feature "Materials" do
     page.should have_select 'Característica', :selected => 'Serviço'
     page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
     page.should have_disabled_field 'Tipo de material'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12345569'
+    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12'
   end
 
   scenario 'generate code' do
@@ -83,7 +83,7 @@ feature "Materials" do
     select 'Serviço', :from => 'Característica'
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
-    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12345569', :field => 'Código completo'
+    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Código completo'
 
     click_button 'Criar Material'
 
@@ -130,7 +130,7 @@ feature "Materials" do
     # end of javascript test
 
     select 'De consumo', :from => 'Tipo de material'
-    fill_modal 'Natureza da despesa', :with => '3.0.10.01.11111111', :field => 'Código completo'
+    fill_modal 'Natureza da despesa', :with => '3.0.10.01.11', :field => 'Código completo'
 
     click_button 'Atualizar Material'
 
@@ -152,7 +152,7 @@ feature "Materials" do
     page.should have_select 'Característica', :selected => 'Material'
     page.should have_disabled_field 'Tipo de serviço'
     page.should have_select 'Tipo de material', :selected => 'De consumo'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11111111'
+    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11'
   end
 
   scenario 'destroy an existent material' do

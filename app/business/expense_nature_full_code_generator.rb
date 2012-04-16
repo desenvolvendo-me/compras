@@ -23,7 +23,7 @@ class ExpenseNatureFullCodeGenerator
       value_or_mask(expense_group_code),
       value_or_mask(expense_modality_code, 2),
       value_or_mask(expense_element_code, 2),
-      value_or_mask(expense_split, 8)
+      value_or_mask(expense_split, 2)
     ].join('.')
   end
 

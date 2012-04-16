@@ -157,7 +157,7 @@ feature "ReserveFunds" do
       page.should have_content 'Habitação'
       page.should have_content '500,00'
       page.should have_content 'Ação Governamental'
-      page.should have_content '3.0.10.01.12345569'
+      page.should have_content '3.0.10.01.12'
       page.should have_content 'Reforma e Ampliação'
       page.should have_content 'Manutenção da Unidade Administrativa'
       page.should have_content 'Nenhuma'
