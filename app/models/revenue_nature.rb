@@ -21,15 +21,7 @@ class RevenueNature < ActiveRecord::Base
   orderize :id
   filterize
 
-  before_save :generate_full_code
-
   def to_s
     "#{full_code} - #{specification}"
-  end
-
-  protected
-
-  def generate_full_code
-    self.full_code = [revenue_rubric_full_code, classification].reject(&:blank?).join('.')
   end
 end
