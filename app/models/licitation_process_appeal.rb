@@ -14,8 +14,9 @@ class LicitationProcessAppeal < ActiveRecord::Base
 
   validates :appeal_date, :timeliness => {
     :on_or_after => :licitation_process_process_date,
-    :invalid_date_message => :must_be_greater_or_equal_to_licitation_process_process_date,
-    :type => :date
+    :on_or_after_message => :must_be_greater_or_equal_to_licitation_process_process_date,
+    :type => :date,
+    :allow_blank => true
   }
 
   orderize :appeal_date
