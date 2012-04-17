@@ -95,6 +95,5 @@ feature "LicitationProcessImpugnments" do
     click_link "#{licitation_process_impugnment.to_s}"
 
     page.should_not have_link("Apagar #{licitation_process_impugnment.to_s}")
-
   end
 end
