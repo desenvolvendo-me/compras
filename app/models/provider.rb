@@ -59,9 +59,13 @@ class Provider < ActiveRecord::Base
   def must_have_at_least_one_partner
     return unless company?
 
-    if provider_partners.reject(&:marked_for_destruction?).empty?
+    unless provider_partners?
       errors.add(:provider_partners, :must_have_at_least_one_partner)
     end
+  end
+
+  def provider_partners?
+    !provider_partners.reject(&:marked_for_destruction?).empty?
   end
 
   def clean_extra_partners
