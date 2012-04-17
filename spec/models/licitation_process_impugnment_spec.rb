@@ -12,10 +12,6 @@ describe LicitationProcessImpugnment do
   it { should validate_presence_of :related }
   it { should validate_presence_of :person }
   it { should validate_presence_of :situation }
-  it { should validate_presence_of :envelope_delivery_date }
-  it { should validate_presence_of :envelope_delivery_time }
-  it { should validate_presence_of :envelope_opening_date }
-  it { should validate_presence_of :envelope_opening_time }
 
   context 'when new_envelope_opening_date and new_envelope_delivery_date exists and are different' do
     before do

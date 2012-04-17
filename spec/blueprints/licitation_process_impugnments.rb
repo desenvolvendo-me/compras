@@ -7,8 +7,4 @@ LicitationProcessImpugnment.blueprint(:proibido_cadeiras) do
   valid_reason { "Não há a necessidade de comprar cadeiras." }
   situation { Situation::PENDING }
   observation { "" }
-  envelope_delivery_date  { object.licitation_process.envelope_delivery_date }
-  envelope_delivery_time  { object.licitation_process.envelope_delivery_time }
-  envelope_opening_date   { object.licitation_process.envelope_opening_date }
-  envelope_opening_time   { object.licitation_process.envelope_opening_time }
 end

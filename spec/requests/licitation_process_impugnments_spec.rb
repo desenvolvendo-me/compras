@@ -96,4 +96,21 @@ feature "LicitationProcessImpugnments" do
 
     page.should_not have_link "Apagar #{licitation_process_impugnment.to_s}"
   end
+
+  scenario 'envelope dates should be filled when licitation process selected' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Impugnações do Processo Licitatório'
+
+    click_link 'Criar Impugnação do Processo Licitatório'
+
+    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+
+    page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(licitation_process.envelope_delivery_date)
+    page.should have_field 'Hora da entrega', :with => licitation_process.presenter.envelope_delivery_time
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(licitation_process.envelope_opening_date)
+    page.should have_field 'Hora da abertura', :with => licitation_process.presenter.envelope_opening_time
+  end
 end
