@@ -1,7 +1,0 @@
-<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-purchase-licitation-exemption="<%= record.purchase_licitation_exemption %>" data-build-licitation-exemption="<%= record.build_licitation_exemption %>">
-  <% attributes.each do |attribute| %>
-    <td>
-      <%= record.send attribute %>
-    </td>
-  <% end %>
-</tr>
