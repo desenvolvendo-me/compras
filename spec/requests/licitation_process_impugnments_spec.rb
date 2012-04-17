@@ -113,4 +113,21 @@ feature "LicitationProcessImpugnments" do
     page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(licitation_process.envelope_opening_date)
     page.should have_field 'Hora da abertura', :with => licitation_process.presenter.envelope_opening_time
   end
+
+  scenario 'envelope dates should be empty when clear licitaion process' do
+    licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
+
+    click_link 'Processos'
+
+    click_link 'Impugnações do Processo Licitatório'
+
+    click_link licitation_process_impugnment.to_s
+
+    clear_modal 'Processo licitatório'
+
+    page.should have_field 'Data da entrega dos envelopes', :with => ''
+    page.should have_field 'Hora da entrega', :with => ''
+    page.should have_field 'Data da abertura dos envelopes', :with => ''
+    page.should have_field 'Hora da abertura', :with => ''
+  end
 end
