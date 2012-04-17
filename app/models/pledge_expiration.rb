@@ -14,7 +14,7 @@ class PledgeExpiration < ActiveRecord::Base
   filterize
 
   def canceled_value
-    pledge_cancellations.compact.sum(&:value)
+    pledge_cancellations.sum(:value)
   end
 
   def to_s
