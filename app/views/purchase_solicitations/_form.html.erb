@@ -82,11 +82,4 @@
   });
 
   calcItemOrder();
-
-  // hidding the budget allocations and items marked for destruction
-  $('.item, .purchase-solicitation-budget-allocation').each(function() {
-    if($(this).find('input.destroy').val() == 'true') {
-      $(this).hide();
-    }
-  });
 </script>

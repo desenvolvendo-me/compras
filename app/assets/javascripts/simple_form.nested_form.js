@@ -54,5 +54,12 @@
     if (options.right) {
       displayFirstLabels();
     }
+
+    // hidding the elements marked for destruction
+    $(options.fieldToRemove).each(function() {
+      if($(this).find('input.destroy').val() == 'true') {
+        $(this).hide();
+      }
+    });
   };
 })(jQuery);
