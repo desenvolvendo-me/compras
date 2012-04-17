@@ -1,17 +1,25 @@
 class RevenueNature < ActiveRecord::Base
   attr_accessible :regulatory_act_id, :classification, :revenue_rubric_id
   attr_accessible :specification, :kind, :docket, :entity_id, :year
+  attr_accessible :revenue_category_id, :revenue_subcategory_id
+  attr_accessible :revenue_source_id
 
   has_enumeration_for :kind, :with => RevenueNatureKind
 
   belongs_to :entity
   belongs_to :regulatory_act
+  belongs_to :revenue_category
+  belongs_to :revenue_subcategory
+  belongs_to :revenue_source
   belongs_to :revenue_rubric
 
   has_many :revenue_accountings, :dependent => :restrict
 
   delegate :publication_date, :regulatory_act_type, :to => :regulatory_act, :allow_nil => true
-  delegate :full_code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
+  delegate :code, :to => :revenue_category, :prefix => true, :allow_nil => true
+  delegate :code, :to => :revenue_subcategory, :prefix => true, :allow_nil => true
+  delegate :code, :to => :revenue_source, :prefix => true, :allow_nil => true
+  delegate :code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
 
   validates :regulatory_act, :kind, :docket, :revenue_rubric, :presence => true
   validates :specification, :entity, :year, :classification, :presence => true

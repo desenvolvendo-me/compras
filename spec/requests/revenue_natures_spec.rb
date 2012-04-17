@@ -20,8 +20,11 @@ feature "RevenueNatures" do
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => '2012'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-    fill_in 'Classificação', :with => '1234'
+    fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
+    fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
+    fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
     fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
+    fill_in 'Classificação', :with => '1234'
     fill_in 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
     select 'Ambos', :from => 'Tipo'
     fill_in 'Súmula', :with => 'Registra o valor da arrecadação da receita'
@@ -56,24 +59,108 @@ feature "RevenueNatures" do
 
     click_link 'Criar Natureza da Receita'
 
-    fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-    fill_in 'Classificação', :with => '1234'
+    fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
+    page.should have_field 'Código completo', :with => '1.0.0.0.0000'
 
+    fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
+    page.should have_field 'Código completo', :with => '1.1.0.0.0000'
+
+    fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
+    page.should have_field 'Código completo', :with => '1.1.1.0.0000'
+
+    fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
+    page.should have_field 'Código completo', :with => '1.1.1.2.0000'
+
+    fill_in 'Classificação', :with => '1234'
     page.should have_field 'Código completo', :with => '1.1.1.2.1234'
   end
 
-  scenario 'generate full code using js without classification' do
-    RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
+  context 'should cascate clear fields' do
+    scenario 'when clear category' do
+      RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
-    click_link 'Contabilidade'
+      click_link 'Contabilidade'
 
-    click_link 'Naturezas das Receitas'
+      click_link 'Naturezas das Receitas'
 
-    click_link 'Criar Natureza da Receita'
+      click_link 'Criar Natureza da Receita'
 
-    fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
+      fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
+      fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
+      fill_in 'Classificação', :with => '1234'
 
-    page.should have_field 'Código completo', :with => '1.1.1.2.____'
+      clear_modal 'Categoria da receita'
+
+      page.should have_disabled_field 'Subcategoria da receita'
+      page.should have_disabled_field 'Fonte da receita'
+      page.should have_disabled_field 'Rúbrica da receita'
+      page.should have_disabled_field 'Classificação'
+    end
+
+    scenario 'when clear subcategory' do
+      RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
+
+      click_link 'Contabilidade'
+
+      click_link 'Naturezas das Receitas'
+
+      click_link 'Criar Natureza da Receita'
+
+      fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
+      fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
+      fill_in 'Classificação', :with => '1234'
+
+      clear_modal 'Subcategoria da receita'
+
+      page.should have_disabled_field 'Fonte da receita'
+      page.should have_disabled_field 'Rúbrica da receita'
+      page.should have_disabled_field 'Classificação'
+    end
+
+    scenario 'when clear source' do
+      RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
+
+      click_link 'Contabilidade'
+
+      click_link 'Naturezas das Receitas'
+
+      click_link 'Criar Natureza da Receita'
+
+      fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
+      fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
+      fill_in 'Classificação', :with => '1234'
+
+      clear_modal 'Fonte da receita'
+
+      page.should have_disabled_field 'Rúbrica da receita'
+      page.should have_disabled_field 'Classificação'
+    end
+
+    scenario 'when clear rubric' do
+      RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
+
+      click_link 'Contabilidade'
+
+      click_link 'Naturezas das Receitas'
+
+      click_link 'Criar Natureza da Receita'
+
+      fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
+      fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
+      fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
+      fill_in 'Classificação', :with => '1234'
+
+      clear_modal 'Rúbrica da receita'
+
+      page.should have_disabled_field 'Classificação'
+    end
   end
 
   scenario 'when fill regulatory act should fill/clear regulatory_act_type and publication_date' do

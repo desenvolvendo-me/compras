@@ -27,6 +27,9 @@ describe RevenueNature do
 
   it { should belong_to :entity }
   it { should belong_to :regulatory_act }
+  it { should belong_to :revenue_category }
+  it { should belong_to :revenue_subcategory }
+  it { should belong_to :revenue_source }
   it { should belong_to :revenue_rubric }
 
   it { should have_many(:revenue_accountings).dependent(:restrict) }

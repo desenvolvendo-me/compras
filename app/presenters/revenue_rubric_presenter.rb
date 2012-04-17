@@ -1,3 +1,3 @@
 class RevenueRubricPresenter < Presenter::Proxy
-  attr_data 'id' => :id, 'full-code' => :full_code
+  attr_data 'code' => :code
 end

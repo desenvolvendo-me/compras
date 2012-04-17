@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/revenue_subcategory'
 require 'app/models/revenue_source'
+require 'app/models/revenue_nature'
 
 describe RevenueSubcategory do
   it 'should return code as to_s' do
@@ -16,4 +17,5 @@ describe RevenueSubcategory do
 
   it { should belong_to :revenue_category }
   it { should have_many(:revenue_sources).dependent(:restrict) }
+  it { should have_many(:revenue_natures).dependent(:restrict) }
 end

@@ -22,8 +22,11 @@
   </div>
 </div>
 
-<%= f.input :revenue_rubric %>
-<%= f.input :classification %>
+<%= f.input :revenue_category %>
+<%= f.input :revenue_subcategory, :disabled => f.object.revenue_category.blank?  %>
+<%= f.input :revenue_source, :disabled => f.object.revenue_subcategory.blank? %>
+<%= f.input :revenue_rubric, :disabled => f.object.revenue_source.blank? %>
+<%= f.input :classification, :disabled => f.object.revenue_rubric.blank? %>
 <%= f.input :full_code, :disabled => true %>
 <%= f.input :specification %>
 <%= f.input :kind %>
@@ -41,31 +44,149 @@
     }
   });
 
-  (function() {
-    var full_code = '<%= f.object.revenue_rubric_full_code %>';
+    var categoryCode = '<%= f.object.revenue_category_code %>',
+        subcategoryCode = '<%= f.object.revenue_subcategory_code%>',
+        sourceCode = '<%= f.object.revenue_source_code %>',
+        rubricCode = '<%= f.object.revenue_rubric_code %>';
 
-    function calcMask() {
-      var classification = $('#revenue_nature_classification').val();
-
-      if (full_code && classification) {
-        $('#revenue_nature_full_code').val(full_code + '.' + classification);
-      } else if (!classification) {
-        $('#revenue_nature_full_code').val(full_code + '.____');
+    function valueOrDefaultValue(value, count){
+      if(!value) {
+        value = '0000';
       } else {
-        $('#revenue_nature_full_code').val('');
+        value = '0000' + value;
       }
+
+      return value.substr(value.length - count);
     }
 
-    $('#revenue_nature_revenue_rubric_id').on('change', function (event, data) {
+    function generateFullCode() {
+      var classification = $('#revenue_nature_classification').val();
+
+      fullCode = [
+        valueOrDefaultValue(categoryCode, 1),
+        valueOrDefaultValue(subcategoryCode, 1),
+        valueOrDefaultValue(sourceCode, 1),
+        valueOrDefaultValue(rubricCode, 1),
+        valueOrDefaultValue(classification, 4)
+      ].join('.')
+
+      $('#revenue_nature_full_code').val(fullCode);
+    }
+
+    function subcategoryModalUrl() {
+      var url = "<%= modal_revenue_subcategories_url %>?",
+          params = {
+            locked_fields: ["revenue_category"],
+            revenue_subcategory: {
+              revenue_category_id: $('#revenue_nature_revenue_category_id').val()
+            }
+          };
+
+      url += jQuery.param(params);
+
+      return url;
+    }
+
+    function sourceModalUrl() {
+      var url = "<%= modal_revenue_sources_url %>?",
+          params = {
+            locked_fields: ["revenue_subcategory"],
+            revenue_source: {
+              revenue_subcategory_id: $('#revenue_nature_revenue_subcategory_id').val()
+            }
+          };
+
+      url += jQuery.param(params);
+
+      return url;
+    }
+
+    function rubricModalUrl() {
+      var url = "<%= modal_revenue_rubrics_url %>?",
+          params = {
+            locked_fields: ["revenue_source"],
+            revenue_rubric: {
+              revenue_source_id: $('#revenue_nature_revenue_source_id').val()
+            }
+          };
+
+      url += jQuery.param(params);
+
+      return url;
+    }
+
+    $('#revenue_nature_revenue_category_id').on('change', function(event, data) {
       if (data) {
-        var record = data.record;
-        full_code = record.data('full-code');
+        record = data.record;
+
+        $('#revenue_nature_revenue_subcategory').attr('disabled', false);
+        $('#revenue_nature_revenue_subcategory').attr('data-modal-url', subcategoryModalUrl);
+        categoryCode = record.data('code');
       } else {
-        full_code = null;
+        $('#revenue_nature_revenue_subcategory').attr('disabled', true).val('');
+        $('#revenue_nature_revenue_subcategory_id').val('');
+        $('#revenue_nature_revenue_source').attr('disabled', true).val('');
+        $('#revenue_nature_revenue_source_id').val('');
+        $('#revenue_nature_revenue_rubric').attr('disabled', true).val('');
+        $('#revenue_nature_revenue_rubric_id').val('');
+        $('#revenue_nature_classification').val('').attr('disabled', true);
+        categoryCode = null
       }
-      calcMask();
+
+      generateFullCode();
     });
 
-    $('#revenue_nature_classification').on('keyup', calcMask);
-  })();
+    $('#revenue_nature_revenue_subcategory_id').on('change', function(event, data) {
+      if (data) {
+        record = data.record;
+
+        $('#revenue_nature_revenue_source').attr('disabled', false);
+        $('#revenue_nature_revenue_source').attr('data-modal-url', sourceModalUrl);
+        subcategoryCode = record.data('code');
+      } else {
+        $('#revenue_nature_revenue_source').attr('disabled', true).val('');
+        $('#revenue_nature_revenue_source_id').val('');
+        $('#revenue_nature_revenue_rubric').attr('disabled', true).val('');
+        $('#revenue_nature_revenue_rubric_id').val('');
+        $('#revenue_nature_classification').val('').attr('disabled', true);
+        subcategoryCode = null;
+      }
+
+      generateFullCode();
+    });
+
+    $('#revenue_nature_revenue_source_id').on('change', function(event, data) {
+      if (data) {
+        record = data.record;
+
+        $('#revenue_nature_revenue_rubric').attr('disabled', false);
+        $('#revenue_nature_revenue_rubric').attr('data-modal-url', rubricModalUrl);
+        sourceCode = record.data('code');
+      } else {
+        $('#revenue_nature_classification').val('').attr('disabled', true);
+        $('#revenue_nature_revenue_rubric').attr('disabled', true).val('');
+        $('#revenue_nature_revenue_rubric_id').val('');
+        sourceCode = null;
+      }
+
+      generateFullCode();
+    });
+
+    $('#revenue_nature_revenue_rubric_id').on('change', function(event, data) {
+      if (data) {
+        record = data.record;
+
+        rubricCode = record.data('code');
+        $('#revenue_nature_classification').attr('disabled', false);
+      } else {
+        $('#revenue_nature_classification').attr('disabled', true);
+        rubricCode = null;
+      }
+
+      generateFullCode();
+    });
+
+    $('#revenue_nature_classification').on('keyup', generateFullCode);
+
+    generateFullCode();
 </script>

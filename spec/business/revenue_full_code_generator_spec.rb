@@ -10,13 +10,16 @@ describe RevenueNatureFullCodeGenerator do
   context 'when have all codes' do
     let :revenue_nature_object do
       double(
-        :revenue_rubric_full_code => '1.1.1.3',
-        :classification => '1111'
+        :revenue_category_code => '1',
+        :revenue_subcategory_code => '2',
+        :revenue_source_code => '3',
+        :revenue_rubric_code => '4',
+        :classification => '5678'
       )
     end
 
     it 'should generate full_code' do
-      revenue_nature_object.should_receive(:full_code=).with('1.1.1.3.1111')
+      revenue_nature_object.should_receive(:full_code=).with('1.2.3.4.5678')
       subject.generate!
     end
   end
