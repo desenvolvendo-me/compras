@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 require 'model_helper'
 require 'app/models/revenue_subcategory'
 require 'app/models/revenue_source'
