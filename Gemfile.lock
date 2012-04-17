@@ -180,7 +180,8 @@ GEM
       ffi (~> 1.0.9)
       json_pure
       rubyzip
-    shoulda-matchers (1.0.0)
+    shoulda-matchers (1.1.0)
+      activesupport (>= 3.0.0)
     simple_form (2.0.1)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -246,7 +247,7 @@ DEPENDENCIES
   responders (= 0.6.4)
   rspec-rails (= 2.9.0)
   selenium-webdriver (= 2.13.0)
-  shoulda-matchers (= 1.0.0)
+  shoulda-matchers (= 1.1.0)
   simple_form (= 2.0.1)
   squeel (= 0.9.5)
   uglifier (= 1.2.1)
