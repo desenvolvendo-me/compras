@@ -52,8 +52,12 @@ class PurchaseSolicitation < ActiveRecord::Base
   end
 
   def must_have_at_least_one_budget_allocation
-    if purchase_solicitation_budget_allocations.reject(&:marked_for_destruction?).empty?
+    unless purchase_solicitation_budget_allocations?
       errors.add(:purchase_solicitation_budget_allocations, :must_have_at_least_one_budget_allocation)
     end
+  end
+
+  def purchase_solicitation_budget_allocations?
+    !purchase_solicitation_budget_allocations.reject(&:marked_for_destruction?).empty?
   end
 end
