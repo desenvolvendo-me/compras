@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/administrative_process_budget_allocation'
+require 'app/models/administrative_process_budget_allocation_item'
 
 describe AdministrativeProcessBudgetAllocation do
   it { should belong_to :administrative_process }
@@ -48,5 +49,17 @@ describe AdministrativeProcessBudgetAllocation do
 
     item_one.errors.messages[:material_id].should be_nil
     item_two.errors.messages[:material_id].should be_nil
+  end
+
+  it 'should return the total value of the items' do
+    item_one = double(:estimated_total_price => 100, :marked_for_destruction? => false)
+    item_two = double(:estimated_total_price => 300, :marked_for_destruction? => false)
+
+    # this should not be considered
+    item_three = double(:estimated_total_price => 200, :marked_for_destruction? => true)
+
+    subject.stub(:items).and_return([item_one, item_two, item_three])
+
+    subject.total_items_value.should eq 400
   end
 end

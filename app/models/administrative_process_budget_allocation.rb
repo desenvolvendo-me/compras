@@ -23,6 +23,10 @@ class AdministrativeProcessBudgetAllocation < ActiveRecord::Base
       'amount' => budget_allocation_amount.to_f }
   end
 
+  def total_items_value
+    items.reject(&:marked_for_destruction?).sum(&:estimated_total_price)
+  end
+
   protected
 
   def cannot_have_duplicated_materials_on_items

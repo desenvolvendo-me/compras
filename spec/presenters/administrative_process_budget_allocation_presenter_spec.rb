@@ -78,4 +78,12 @@ describe AdministrativeProcessBudgetAllocationPresenter do
 
     subject.value_or_mustache_variable.should eq "1,00"
   end
+
+  it 'should return the total items value' do
+    helpers.should_receive(:number_with_precision).with(100).and_return("100,00")
+
+    administrative_process_budget_allocation.stub(:total_items_value).and_return(100)
+
+    subject.total_items_value.should eq "100,00"
+  end
 end

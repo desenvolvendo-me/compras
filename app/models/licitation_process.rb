@@ -20,6 +20,7 @@ class LicitationProcess < ActiveRecord::Base
   has_and_belongs_to_many :document_types
 
   has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :administrative_process_budget_allocations, :through => :administrative_process
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidder_documents, :through => :licitation_process_invited_bidders
@@ -42,6 +43,7 @@ class LicitationProcess < ActiveRecord::Base
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
   validate :cannot_have_duplicated_budget_allocations
   validate :cannot_have_duplicated_invited_bidders
+  validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -120,6 +122,17 @@ class LicitationProcess < ActiveRecord::Base
         bidder.errors.add(:provider_id, :taken)
       end
       single_bidders << bidder.provider_id
+    end
+  end
+
+  def total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
+    return if administrative_process_budget_allocations.blank?
+
+    administrative_process_budget_allocations.each do |apba|
+      if apba.total_items_value != apba.value
+        errors.add(:administrative_process_budget_allocations)
+        apba.errors.add(:total_items_value, :must_be_equal_to_estimated_value)
+      end
     end
   end
 end

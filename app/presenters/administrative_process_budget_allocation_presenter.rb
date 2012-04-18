@@ -22,4 +22,8 @@ class AdministrativeProcessBudgetAllocationPresenter < Presenter::Proxy
   def value_or_mustache_variable
     helpers.number_with_precision(object.value) || "{{value}}"
   end
+
+  def total_items_value
+    helpers.number_with_precision(object.total_items_value)
+  end
 end

@@ -228,6 +228,7 @@ pt-BR:
       difference_must_be_equals_to_zero: "deve ser igual a zero"
       must_belong_to_selected_provider: "deve pertencer ao fornecedor selecionado"
       greater_than_actual_modality_limit: 'está acima do valor disponível no limite em vigor para esta modalidade'
+      must_be_equal_to_estimated_value: 'deve ser igual ao valor previsto'
 
   activerecord:
     errors:

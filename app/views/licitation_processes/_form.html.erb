@@ -135,8 +135,20 @@
     });
   }
 
-  $('form.licitation_process').delegate('.remove-licitation-process-budget-allocation, .remove-item', 'click', function() {
+  function calculateTotalOfItems(licitationProcessBudgetAllocation) {
+    var itemPrices = licitationProcessBudgetAllocation.find('.item-price:visible'),
+        totalValue = 0;
+
+    itemPrices.each(function() {
+      totalValue += parsePtBrFloat($(this).val());
+    });
+
+    licitationProcessBudgetAllocation.find('.total-value').val(floatToPtBrString(totalValue));
+  }
+
+  $('form.licitation_process').delegate('.remove-item', 'click', function() {
     calcItemOrder();
+    calculateTotalOfItems($(this).closest('.licitation-process-budget-allocation'));
   });
 
   $('form.licitation_process').bind('append.mustache', function(){
@@ -152,6 +164,7 @@
         total = floatToPtBrString(itemQuantity * itemUnitPrice);
 
     itemDiv.find('.item-price').val(total);
+    calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
   $('form.licitation_process').delegate('.item-price', 'keyup', function() {
@@ -161,6 +174,7 @@
         unitPrice = floatToPtBrString(itemPrice / itemQuantity);
 
     itemDiv.find('.item-unit-price').val(unitPrice);
+    calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
   function toggleBidderDates() {

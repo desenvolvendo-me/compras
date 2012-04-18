@@ -86,11 +86,11 @@ feature "LicitationProcesses" do
       # getting data from modal
       page.should have_field 'Unidade', :with => 'Unidade'
 
-      fill_in 'Quantidade', :with => '3'
-      fill_in 'Valor unitário', :with => '200,00'
+      fill_in 'Quantidade', :with => '2'
+      fill_in 'Valor unitário', :with => '10,00'
 
       # asserting calculated total price of the item
-      page.should have_field 'Valor total', :with => '600,00'
+      page.should have_field 'Valor total', :with => '20,00'
     end
 
     within_tab 'Publicações' do
@@ -181,9 +181,9 @@ feature "LicitationProcesses" do
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
-      page.should have_field 'Quantidade', :with => '3'
-      page.should have_field 'Valor unitário', :with => '200,00'
-      page.should have_field 'Valor total', :with => '600,00'
+      page.should have_field 'Quantidade', :with => '2'
+      page.should have_field 'Valor unitário', :with => '10,00'
+      page.should have_field 'Valor total', :with => '20,00'
 
       page.should have_field 'Item', :with => '1'
     end
@@ -265,11 +265,11 @@ feature "LicitationProcesses" do
       # getting data from modal
       page.should have_field 'Unidade', :with => 'Unidade'
 
-      fill_in 'Quantidade', :with => '100'
-      fill_in 'Valor total', :with => '200,00'
+      fill_in 'Quantidade', :with => '5'
+      fill_in 'Valor total', :with => '20,00'
 
       # asserting calculated unit price of the item
-      page.should have_field 'Valor unitário', :with => '2,00'
+      page.should have_field 'Valor unitário', :with => '4,00'
     end
 
     within_tab 'Publicações' do
@@ -342,9 +342,9 @@ feature "LicitationProcesses" do
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
       page.should have_field 'Unidade', :with => 'Unidade'
-      page.should have_field 'Quantidade', :with => '100'
-      page.should have_field 'Valor unitário', :with => '2,00'
-      page.should have_field 'Valor total', :with => '200,00'
+      page.should have_field 'Quantidade', :with => '5'
+      page.should have_field 'Valor unitário', :with => '4,00'
+      page.should have_field 'Valor total', :with => '20,00'
 
       page.should have_field 'Item', :with => '1'
     end
@@ -689,6 +689,71 @@ feature "LicitationProcesses" do
 
     within_tab 'Licitantes convidados' do
       page.should_not have_field 'Documento', :with => 'Fiscal'
+    end
+  end
+
+  scenario 'budget allocation with total of items diferent than value should not be saved' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações' do
+      page.should have_field 'Valor previsto', :with => "20,00"
+      page.should have_field 'Total dos itens', :with => "20,00"
+
+      fill_in 'Valor total', :with => '21,00'
+
+      page.should have_field 'Total dos itens', :with => "21,00"
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    within_tab 'Dotações' do
+      page.should have_content 'deve ser igual ao valor previsto'
+    end
+  end
+
+  scenario 'calculating total of items via javascript' do
+    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
+    end
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Item'
+
+      fill_in 'Quantidade', :with => '5'
+      fill_in 'Valor unitário', :with => '10,00'
+
+      page.should have_field 'Total dos itens', :with => '50,00'
+
+      click_button 'Adicionar Item'
+
+      within '.item:last' do
+        fill_in 'Quantidade', :with => '4'
+        fill_in 'Valor unitário', :with => '20,00'
+      end
+
+      page.should have_field 'Total dos itens', :with => '130,00'
+
+      within '.item:first' do
+        click_button 'Remover Item'
+      end
+
+      page.should have_field 'Total dos itens', :with => '80,00'
     end
   end
 end

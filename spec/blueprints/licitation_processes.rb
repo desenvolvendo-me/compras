@@ -1,7 +1,7 @@
 LicitationProcess.blueprint(:processo_licitatorio) do
   year { 2012 }
   process_date { Date.new(2012, 3, 19) }
-  administrative_process { AdministrativeProcess.make!(:compra_de_cadeiras) }
+  administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
