@@ -3,7 +3,7 @@ module Tributario
     class NumericInput < SimpleForm::Inputs::NumericInput
       protected
 
-      include Tributario::MaskToInputs
+      include Tributario::Inputs::MaskedInput
 
       private
 

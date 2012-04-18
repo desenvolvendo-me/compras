@@ -7,7 +7,7 @@ module Tributario
 
       protected
 
-      include Tributario::MaskToInputs
+      include Tributario::Inputs::MaskedInput
 
       def input_html_classes
         super.unshift('string')
