@@ -7,6 +7,9 @@ describe Presenter::Proxy do
 
   let :presenter do
     Class.new(Presenter::Proxy) do
+      attr_modal :my, :attributes
+      attr_data 'value' => :id, 'my-first-name' => :first_name
+
       def path
         routes.person_path(object)
       end
@@ -29,6 +32,10 @@ describe Presenter::Proxy do
     double
   end
 
+  let :presenter_class do
+    double
+  end
+
   it 'delegates everything to object' do
     object.stub(:name).and_return('Gabriel Sobrinho')
 
@@ -46,5 +53,19 @@ describe Presenter::Proxy do
     helpers.stub(:number_to_currency).with(object).and_return('$100.00')
 
     subject.balance.should eq '$100.00'
+  end
+
+  it 'should return an list with modal attributes' do
+    String.any_instance.stub(:constantize).and_return(presenter_class)
+    presenter_class.stub(:modal_attributes).and_return(['my', 'attributes'])
+
+    subject.modal_attributes.to_a.should eq ['my', 'attributes']
+  end
+
+  it 'should return an list with data attributes' do
+    String.any_instance.stub(:constantize).and_return(presenter_class)
+    presenter_class.stub(:data_attributes).and_return({:attribute => 'value'})
+
+    subject.data_attributes.should eq ({:attribute => 'value'})
   end
 end
