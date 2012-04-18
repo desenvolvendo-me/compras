@@ -21,19 +21,19 @@ describe Presenter::Proxy do
   end
 
   let :object do
-    double
+    double('object')
   end
 
   let :routes do
-    double
+    double('routes')
   end
 
   let :helpers do
-    double
+    double('helpers')
   end
 
   let :presenter_class do
-    double
+    double('presenter_class')
   end
 
   it 'delegates everything to object' do
@@ -91,7 +91,7 @@ describe Presenter::Proxy do
     end
 
     let :localized_object do
-      double(:date => "18/05/2012")
+      double('localize_object', :date => "18/05/2012")
     end
 
     it 'should return localized object' do
