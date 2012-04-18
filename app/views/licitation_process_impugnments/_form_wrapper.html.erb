@@ -1,0 +1,14 @@
+<% if resource.situation != Situation::PENDING %>
+
+  <%= simple_form_for resource.localized, :defaults => { :disabled => true }, :url => resource.persisted? ? resource_url : collection_url, :remote => request.xhr? do |f| %>
+    <%= render 'form', :f => f %>
+  <% end %>
+
+<% else %>
+
+  <%= simple_form_for resource.localized, :url => resource.persisted? ? resource_url : collection_url, :remote => request.xhr? do |f| %>
+    <%= render 'form', :f => f %>
+    <%= render 'form_buttons', :f => f %>
+  <% end %>
+
+<% end %>

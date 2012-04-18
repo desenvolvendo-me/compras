@@ -85,6 +85,30 @@ feature "LicitationProcessImpugnments" do
     page.should have_field 'Hora da abertura', :with => '14:00'
   end
 
+  scenario 'should have fields disabled when situation is not pending' do
+    licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras_deferida)
+
+    click_link 'Processos'
+
+    click_link 'Impugnações do Processo Licitatório'
+
+    click_link licitation_process_impugnment.to_s
+
+    page.should have_disabled_field 'Processo licitatório'
+    page.should have_disabled_field 'Data da impugnação'
+    page.should have_disabled_field 'Referente ao'
+    page.should have_disabled_field 'Autor'
+    page.should have_disabled_field 'Motivo fundamentado da impugnação'
+    page.should have_disabled_field 'Data do julgamento'
+    page.should have_disabled_field 'Observação'
+    page.should have_disabled_field 'Data da entrega dos envelopes'
+    page.should have_disabled_field 'Hora da entrega'
+    page.should have_disabled_field 'Data da abertura dos envelopes'
+    page.should have_disabled_field 'Hora da abertura'
+
+    page.should_not have_button 'Atualizar Impugnação do Processo Licitatório'
+    page.should_not have_button 'Cancelar'
+  end
 
   scenario 'destroy an existent licitation_process_impugnment' do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)

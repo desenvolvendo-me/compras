@@ -14,4 +14,10 @@ class LicitationProcessImpugnmentsController < CrudController
 
     super
   end
+
+  protected
+
+  def update_resource(object, attributes)
+    object.update_attributes(*attributes) if object.situation == Situation::PENDING
+  end
 end
