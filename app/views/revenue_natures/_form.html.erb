@@ -23,7 +23,7 @@
 </div>
 
 <%= f.input :revenue_category %>
-<%= f.input :revenue_subcategory, :disabled => f.object.revenue_category.blank?  %>
+<%= f.input :revenue_subcategory, :disabled => f.object.revenue_category.blank? %>
 <%= f.input :revenue_source, :disabled => f.object.revenue_subcategory.blank? %>
 <%= f.input :revenue_rubric, :disabled => f.object.revenue_source.blank? %>
 <%= f.input :classification, :disabled => f.object.revenue_rubric.blank? %>
