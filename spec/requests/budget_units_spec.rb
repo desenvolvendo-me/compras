@@ -6,7 +6,7 @@ feature "BudgetUnit" do
     sign_in
   end
 
-  scenario 'create a new organogram' do
+  scenario 'create a new budget unit' do
     BudgetUnitConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
@@ -83,7 +83,7 @@ feature "BudgetUnit" do
     end
   end
 
-  scenario 'update an existent organogram' do
+  scenario 'update an existent budget unit' do
     BudgetUnit.make!(:secretaria_de_educacao)
     Address.make!(:education)
     AdministrationType.make!(:executivo)
@@ -181,7 +181,7 @@ feature "BudgetUnit" do
     end
   end
 
-  scenario 'destroy an existent organogram' do
+  scenario 'destroy an existent budget unit' do
     BudgetUnit.make!(:secretaria_de_educacao)
 
     click_link 'Contabilidade'
@@ -203,7 +203,7 @@ feature "BudgetUnit" do
     page.should_not have_content 'Desenvolvimento Educacional'
   end
 
-  scenario 'trying to create an Organogram with duplicated responsibles as the only error to ensure that it will not be saved' do
+  scenario 'trying to create an budget unit with duplicated responsibles as the only error to ensure that it will not be saved' do
     BudgetUnitConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
