@@ -5,7 +5,6 @@ module Tributario
       options = super
 
       if has_mask?
-        options['size']      ||= mask.length
         options['data-mask'] ||= mask
       end
 
