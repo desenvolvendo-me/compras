@@ -12,7 +12,7 @@ describe RevenueNature do
 
   it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :classification }
-  it { should validate_presence_of :revenue_rubric }
+  it { should validate_presence_of :revenue_category }
   it { should validate_presence_of :specification }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :docket }

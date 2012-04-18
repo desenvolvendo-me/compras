@@ -21,7 +21,7 @@ class RevenueNature < ActiveRecord::Base
   delegate :code, :to => :revenue_source, :prefix => true, :allow_nil => true
   delegate :code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
 
-  validates :regulatory_act, :kind, :docket, :revenue_rubric, :presence => true
+  validates :regulatory_act, :kind, :docket, :revenue_category, :presence => true
   validates :specification, :entity, :year, :classification, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :classification, :mask => '9999', :allow_blank => true
