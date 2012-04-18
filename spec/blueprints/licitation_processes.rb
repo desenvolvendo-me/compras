@@ -20,7 +20,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   contract_expiration { 3 }
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_budget_allocations { [LicitationProcessBudgetAllocation.make!(:alocacao)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   licitation_process_invited_bidders { [LicitationProcessInvitedBidder.make!(:licitante)] }
 end
@@ -28,7 +27,7 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
   year { 2013 }
   process_date { Date.new(2012, 3, 20) }
-  administrative_process { AdministrativeProcess.make!(:compra_de_computadores) }
+  administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
   object_description { "Descricao do computador" }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
@@ -47,7 +46,6 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   contract_expiration { 3 }
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_budget_allocations { [LicitationProcessBudgetAllocation.make!(:alocacao)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   licitation_process_invited_bidders { [LicitationProcessInvitedBidder.make!(:licitante)] }
 end

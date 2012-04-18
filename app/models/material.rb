@@ -18,7 +18,6 @@ class Material < ActiveRecord::Base
 
   has_many :pledge_items, :dependent => :restrict
   has_many :direct_purchase_budget_allocation_items, :dependent => :restrict
-  has_many :licitation_process_budget_allocation_items, :dependent => :restrict
   has_many :administrative_process_budget_allocation_items, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocation_items, :dependent => :restrict
 

@@ -135,15 +135,15 @@
     });
   }
 
-  function calculateTotalOfItems(licitationProcessBudgetAllocation) {
-    var itemPrices = licitationProcessBudgetAllocation.find('.item-price:visible'),
+  function calculateTotalOfItems(administrativeProcessBudgetAllocation) {
+    var itemPrices = administrativeProcessBudgetAllocation.find('.item-price:visible'),
         totalValue = 0;
 
     itemPrices.each(function() {
       totalValue += parsePtBrFloat($(this).val());
     });
 
-    licitationProcessBudgetAllocation.find('.total-value').val(floatToPtBrString(totalValue));
+    administrativeProcessBudgetAllocation.find('.total-value').val(floatToPtBrString(totalValue));
   }
 
   $('form.licitation_process').delegate('.remove-item', 'click', function() {

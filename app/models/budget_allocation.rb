@@ -21,7 +21,6 @@ class BudgetAllocation < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
   has_many :direct_purchase_budget_allocations, :dependent => :restrict
-  has_many :licitation_process_budget_allocations, :dependent => :restrict
   has_many :extra_credit_moviment_types, :dependent => :restrict
   has_many :administrative_process_budget_allocations, :dependent => :restrict
 

@@ -3,7 +3,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
-  attr_accessible :licitation_process_budget_allocations_attributes, :licitation_process_publications_attributes
+  attr_accessible :licitation_process_publications_attributes
   attr_accessible :licitation_process_invited_bidders_attributes, :pledge_type, :administrative_process_attributes
 
   attr_readonly :process, :year, :licitation_number
@@ -19,7 +19,6 @@ class LicitationProcess < ActiveRecord::Base
 
   has_and_belongs_to_many :document_types
 
-  has_many :licitation_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :administrative_process_budget_allocations, :through => :administrative_process
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
@@ -27,7 +26,6 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
 
-  accepts_nested_attributes_for :licitation_process_budget_allocations, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_publications, :allow_destroy => true
   accepts_nested_attributes_for :licitation_process_invited_bidders, :allow_destroy => true
 
@@ -41,7 +39,6 @@ class LicitationProcess < ActiveRecord::Base
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
   validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
-  validate :cannot_have_duplicated_budget_allocations
   validate :cannot_have_duplicated_invited_bidders
   validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
 
@@ -98,18 +95,6 @@ class LicitationProcess < ActiveRecord::Base
   def clear_bidders_depending_on_modality
     unless invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
       licitation_process_invited_bidders.each(&:destroy)
-    end
-  end
-
-  def cannot_have_duplicated_budget_allocations
-    single_allocations = []
-
-    licitation_process_budget_allocations.each do |allocation|
-      if single_allocations.include?(allocation.budget_allocation_id)
-        errors.add(:licitation_process_budget_allocations)
-        allocation.errors.add(:budget_allocation_id, :taken)
-      end
-      single_allocations << allocation.budget_allocation_id
     end
   end
 
