@@ -76,4 +76,34 @@ describe Presenter::Proxy do
 
     subject.data_attributes.should eq attributes
   end
+
+  it 'should return only the object when has not the localized method' do
+    object.stub(:date => Date.new(2012, 5, 18))
+
+    subject.date.should eq Date.new(2012, 5, 18)
+  end
+
+  it 'should return the original object equal to not localized object' do
+    subject.original_object.should eq object
+  end
+
+  context 'when the object has localized method' do
+    before do
+      object.should_receive(:localized).and_return(localized_object)
+    end
+
+    let :localized_object do
+      double(:date => "18/05/2012")
+    end
+
+    it 'should return localized object' do
+      object.stub(:date => Date.new(2012, 5, 18))
+
+      subject.date.should eq "18/05/2012"
+    end
+
+    it 'should return the original object equal to not localized object' do
+      subject.original_object.should eq object
+    end
+  end
 end

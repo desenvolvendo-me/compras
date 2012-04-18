@@ -28,8 +28,4 @@ describe AdministrativeProcessPresenter do
     subject.stub(:total_allocations_value).and_return(400.0)
     subject.total_allocations_value.should eq '400,00'
   end
-
-  it 'should return formatted date' do
-    subject.date.should eq '25/02/2012'
-  end
 end

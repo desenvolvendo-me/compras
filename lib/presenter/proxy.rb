@@ -49,10 +49,11 @@ module Presenter
       end
     end
 
-    attr_accessor :object, :routes, :helpers
+    attr_accessor :original_object, :object, :routes, :helpers
 
     def initialize(object, routes = ::Rails.application.routes.url_helpers, helpers = ::ApplicationController.helpers)
-      self.object = object
+      self.original_object = object
+      self.object = object.respond_to?(:localized) ? object.localized : object
       self.routes = routes
       self.helpers = helpers
     end
