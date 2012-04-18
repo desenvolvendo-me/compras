@@ -23,4 +23,21 @@ describe RevenueNatureFullCodeGenerator do
       subject.generate!
     end
   end
+
+  context 'when have missing code' do
+    let :revenue_nature_object do
+      double(
+        :revenue_category_code => '1',
+        :revenue_subcategory_code => '2',
+        :revenue_source_code => nil,
+        :revenue_rubric_code => '4',
+        :classification => ''
+      )
+    end
+
+    it 'should generate full_code' do
+      revenue_nature_object.should_receive(:full_code=).with('1.2.0.4.0000')
+      subject.generate!
+    end
+  end
 end

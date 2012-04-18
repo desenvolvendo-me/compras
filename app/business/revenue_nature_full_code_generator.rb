@@ -19,11 +19,19 @@ class RevenueNatureFullCodeGenerator
 
   def full_code
     [
-      revenue_category_code,
-      revenue_subcategory_code,
-      revenue_source_code,
-      revenue_rubric_code,
-      classification
-    ].reject(&:blank?).join('.')
+     value_or_default(revenue_category_code, 1),
+     value_or_default(revenue_subcategory_code, 1),
+     value_or_default(revenue_source_code, 1),
+     value_or_default(revenue_rubric_code, 1),
+     value_or_default(classification, 4)
+    ].join('.')
+  end
+
+  def value_or_default(value, count)
+    if value.blank?
+      '0' * count
+    else
+      value
+    end
   end
 end
