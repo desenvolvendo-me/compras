@@ -68,4 +68,12 @@ describe Presenter::Proxy do
 
     subject.data_attributes.should eq ({:attribute => 'value'})
   end
+
+  it 'should return an list with data attributes and default data attributes' do
+    String.any_instance.stub(:constantize).and_return(presenter)
+
+    attributes = Set.new({:value => 'id', :label => 'to_s', :type => 'class', 'value' => :id, 'my-first-name' => :first_name})
+
+    subject.data_attributes.should eq attributes
+  end
 end

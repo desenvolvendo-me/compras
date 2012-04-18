@@ -70,7 +70,7 @@ module Presenter
     end
 
     def data_attributes
-      presenter_class.data_attributes || default_data_attributes.to_set
+      presenter_class.data_attributes
     end
 
     def summary; end
@@ -83,10 +83,6 @@ module Presenter
 
     def object_class
       object.class
-    end
-
-    def default_data_attributes
-      { :value => 'id', :label => 'to_s', :type => 'class' }
     end
 
     def presenter_class
