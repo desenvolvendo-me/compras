@@ -91,7 +91,7 @@ describe Presenter::Proxy do
     end
 
     let :localized_object do
-      double('localize_object', :date => "18/05/2012")
+      double('localized_object', :date => "18/05/2012")
     end
 
     it 'should return localized object' do
