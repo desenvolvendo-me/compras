@@ -8,7 +8,7 @@ describe Presenter::Proxy do
   let :presenter do
     Class.new(Presenter::Proxy) do
       attr_modal :my, :attributes
-      attr_data 'value' => :id, 'my-first-name' => :first_name
+      attr_data 'my-first-name' => :first_name
 
       def path
         routes.person_path(object)
@@ -62,19 +62,17 @@ describe Presenter::Proxy do
     subject.modal_attributes.to_a.should eq ['my', 'attributes']
   end
 
-  it 'should return an list with data attributes' do
-    String.any_instance.stub(:constantize).and_return(presenter_class)
-    presenter_class.stub(:data_attributes).and_return({:attribute => 'value'})
-
-    subject.data_attributes.should eq ({:attribute => 'value'})
-  end
-
   it 'should return an list with data attributes and default data attributes' do
     String.any_instance.stub(:constantize).and_return(presenter)
 
-    attributes = Set.new({:value => 'id', :label => 'to_s', :type => 'class', 'value' => :id, 'my-first-name' => :first_name})
+    object.should_receive(:id).and_return(1)
+    object.should_receive(:to_s).and_return('object')
+    object.should_receive(:class).exactly(2).times.and_return('Object')
+    object.should_receive(:first_name).and_return('Marcelo')
 
-    subject.data_attributes.should eq attributes
+    formatted_data_attributes = "data-value='1' data-label='object' data-type='Object' data-my-first-name='Marcelo'"
+
+    subject.formatted_data_attributes.should eq formatted_data_attributes
   end
 
   it 'should return only the object when has not the localized method' do

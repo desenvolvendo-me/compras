@@ -70,8 +70,10 @@ module Presenter
       presenter_class.modal_attributes || object_class.accessible_attributes.to_set
     end
 
-    def data_attributes
-      presenter_class.data_attributes
+    def formatted_data_attributes
+      data_attributes.map do |attr|
+        "data-#{attr.first}='#{send(attr.last)}'"
+      end.join(" ")
     end
 
     def summary; end
@@ -88,6 +90,10 @@ module Presenter
 
     def presenter_class
       "#{object_class}Presenter".constantize
+    end
+
+    def data_attributes
+      presenter_class.data_attributes
     end
   end
 end
