@@ -132,10 +132,10 @@ feature "LicitationProcessImpugnments" do
 
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
 
-    page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(licitation_process.envelope_delivery_date)
-    page.should have_field 'Hora da entrega', :with => licitation_process.presenter.envelope_delivery_time
-    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(licitation_process.envelope_opening_date)
-    page.should have_field 'Hora da abertura', :with => licitation_process.presenter.envelope_opening_time
+    page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+    page.should have_field 'Hora da entrega', :with => '14:00'
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Hora da abertura', :with => '14:00'
   end
 
   scenario 'envelope dates should be empty when clear licitaion process' do
