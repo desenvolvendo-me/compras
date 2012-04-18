@@ -7,7 +7,8 @@ feature "LicitationProcesses" do
   end
 
   scenario 'create a new licitation_process' do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
     Capability.make!(:reforma)
     Period.make!(:um_ano)
     PaymentMethod.make!(:dinheiro)
@@ -73,13 +74,10 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      click_button 'Adicionar Dotação'
-
-      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-      fill_in 'Valor previsto', :with => '50,00'
-
-      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
+      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Valor previsto', :with => '20,00'
 
       click_button 'Adicionar Item'
 
@@ -168,18 +166,6 @@ feature "LicitationProcesses" do
       page.should have_field 'Número da licitação', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Abrev. modalidade', :with => 'CV'
-
-      # testing that delegated fields are cleaned when administrative proccess is cleaned
-      clear_modal 'Processo administrativo'
-
-      page.should have_field 'Unidade orçamentária', :with => ''
-      page.should have_field 'Modalidade', :with => ''
-      page.should have_field 'Tipo de objeto', :with => ''
-      page.should have_field 'Forma de julgamento', :with => ''
-      page.should have_field 'Objeto do processo licitatório', :with => ''
-      page.should have_field 'Responsável', :with => ''
-      page.should have_field 'Inciso', :with => ''
-      page.should have_field 'Abrev. modalidade', :with => ''
     end
 
     within_tab 'Documentos' do
@@ -188,10 +174,10 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2012 - Alocação"
+      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
       page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_field 'Valor previsto', :with => '50,00'
+      page.should have_field 'Valor previsto', :with => '20,00'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'Unidade'
@@ -226,12 +212,12 @@ feature "LicitationProcesses" do
 
   scenario 'update an existent licitation_process' do
     LicitationProcess.make!(:processo_licitatorio)
-    AdministrativeProcess.make!(:compra_de_computadores)
+    administrative_process = AdministrativeProcess.make!(:compra_de_computadores)
+    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
     Capability.make!(:construcao)
     Period.make!(:tres_meses)
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
-    allocation = BudgetAllocation.make!(:alocacao_extra)
     Material.make!(:arame_farpado)
     Provider.make!(:sobrinho_sa)
 
@@ -272,15 +258,6 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      click_button 'Remover Dotação'
-      click_button 'Adicionar Dotação'
-
-      fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
-      fill_in 'Valor previsto', :with => '70,00'
-
-      page.should have_field 'Saldo da dotação', :with => '200,00'
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
-
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
@@ -358,10 +335,10 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentária', :with => "#{allocation.id}/2011 - Alocação extra"
+      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
-      page.should have_field 'Saldo da dotação', :with => '200,00'
-      page.should have_field 'Valor previsto', :with => '70,00'
+      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Valor previsto', :with => '20,00'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
       page.should have_field 'Unidade', :with => 'Unidade'

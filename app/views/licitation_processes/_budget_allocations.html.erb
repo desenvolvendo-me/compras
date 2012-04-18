@@ -1,24 +1,16 @@
 <div id="budget-allocations">
-  <%= f.association :licitation_process_budget_allocations, :collection => localized(f.object.licitation_process_budget_allocations) do |p| %>
-    <%= render 'licitation_process_budget_allocations/form', :f => p %>
-  <% end %>
-
-  <%= mustache 'licitation-process-budget-allocations-template' do %>
-    <%= f.association :licitation_process_budget_allocations_attributes, :collection => f.object.licitation_process_budget_allocations.build, :index => '{{uuid_licitation_process_budget_allocation}}' do |p| %>
+  <%= f.association :administrative_process, :collection => (f.object.administrative_process || AdministrativeProcess.new) do |a| %>
+    <%= a.input :id, :as => 'hidden' %>
+    <%= a.association :administrative_process_budget_allocations, :collection => localized(a.object.administrative_process_budget_allocations) do |p| %>
       <%= render 'licitation_process_budget_allocations/form', :f => p %>
     <% end %>
   <% end %>
+
+  <%= f.association :administrative_process, :collection => AdministrativeProcess.new do |a| %>
+    <%= mustache 'administrative-process-budget-allocations-template' do %>
+      <%= a.association :administrative_process_budget_allocations_attributes, :collection => a.object.administrative_process_budget_allocations.build, :index => '{{uuid_administrative_process_budget_allocation}}' do |p| %>
+        <%= render 'licitation_process_budget_allocations/form', :f => p %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
-
-<p>
-  <input type="button" class="button affirmative add-licitation-process-budget-allocation" value="Adicionar Dotação">
-</p>
-
-<script>
-  $("#licitation-process-budget-allocations-template").nestedForm({
-    add: '.add-licitation-process-budget-allocation',
-    remove: '.remove-licitation-process-budget-allocation',
-    target: '#budget-allocations',
-    uuid: 'uuid_licitation_process_budget_allocation'
-  });
-</script>

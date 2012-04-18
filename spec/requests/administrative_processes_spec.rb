@@ -39,7 +39,7 @@ feature "AdministrativeProcesses" do
       click_button 'Adicionar Dotação'
 
       fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-      fill_in 'Valor *', :with => '20,00'
+      fill_in 'Valor previsto', :with => '20,00'
     end
 
     click_button 'Criar Processo Administrativo'
@@ -69,7 +69,7 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
-      page.should have_field 'Valor *', :with => '20,00'
+      page.should have_field 'Valor previsto', :with => '20,00'
     end
   end
 
@@ -100,7 +100,7 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_disabled_field 'Dotação orçamentária'
-      page.should have_disabled_field 'Valor *'
+      page.should have_disabled_field 'Valor previsto'
 
       page.should_not have_button 'Adicionar Dotação'
       page.should_not have_button 'Remover Dotação'
@@ -144,14 +144,14 @@ feature "AdministrativeProcesses" do
     within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar Dotação'
 
-      fill_in 'Valor *', :with => '20,00'
+      fill_in 'Valor previsto', :with => '20,00'
 
       page.should have_field 'Valor total', :with => '20,00'
 
       click_button 'Adicionar Dotação'
 
       within '.administrative-process-budget-allocation:last' do
-        fill_in 'Valor *', :with => '30,00'
+        fill_in 'Valor previsto', :with => '30,00'
       end
 
       page.should have_field 'Valor total', :with => '50,00'
@@ -195,13 +195,13 @@ feature "AdministrativeProcesses" do
       click_button 'Adicionar Dotação'
 
       fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-      fill_in 'Valor *', :with => '20,00'
+      fill_in 'Valor previsto', :with => '20,00'
 
       click_button 'Adicionar Dotação'
 
       within '.administrative-process-budget-allocation:last' do
         fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-        fill_in 'Valor *', :with => '30,00'
+        fill_in 'Valor previsto', :with => '30,00'
       end
     end
 

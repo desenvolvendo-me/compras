@@ -67,6 +67,28 @@
     }
   }
 
+  function cleanExistingAdministrativeProcessBudgetAllocations() {
+    $(".licitation-process-budget-allocation").remove()
+  }
+
+  function createAdministrativeProcessBudgetAllocations(budgetAllocations) {
+    cleanExistingAdministrativeProcessBudgetAllocations();
+
+    var template = $('#administrative-process-budget-allocations-template'),
+        target = $('#budget-allocations');
+
+    $(budgetAllocations).each(function() {
+      target.append(template.mustache({id: this.id,
+                                       description: this.description,
+                                       administrative_process_id: this.administrative_process_id,
+                                       budget_allocation_id: this.budget_allocation_id,
+                                       uuid_administrative_process_budget_allocation: _.uniqueId('fresh-'),
+                                       value: floatToPtBrString(this.value),
+                                       expenseNature: this.expense_nature,
+                                       amount: floatToPtBrString(this.amount)}));
+    });
+  }
+
   $("#licitation_process_administrative_process_id").change(function (event, data) {
     if (data) {
       var record = data.record;
@@ -79,8 +101,10 @@
       $('#licitation_process_administrative_process_responsible').val(record.data("responsible"));
       $('#licitation_process_administrative_process_item').val(record.data("item"));
       $('#licitation_process_modality').val(abreviatedProcessModality(record.data("modality")));
-      toggleInvitedBiddersTab(record.data("modality"));
+      $("#licitation_process_administrative_process_attributes_id").val(record.data("id"));
 
+      toggleInvitedBiddersTab(record.data("modality"));
+      createAdministrativeProcessBudgetAllocations(record.data("budget-allocations"));
     } else {
       $('#licitation_process_administrative_process_budget_unit').val('');
       $('#licitation_process_administrative_process_modality_humanize').val('');
@@ -90,15 +114,8 @@
       $('#licitation_process_administrative_process_responsible').val('');
       $('#licitation_process_administrative_process_item').val('');
       $('#licitation_process_modality').val('');
-    }
-  });
 
-  $('form.licitation_process').delegate('.budget-allocation', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-
-      $(this).closest('fieldset').find('.classification').val(record.data("expense-nature"));
-      $(this).closest('fieldset').find('.amount').val(record.data("amount"));
+      cleanExistingAdministrativeProcessBudgetAllocations();
     }
   });
 

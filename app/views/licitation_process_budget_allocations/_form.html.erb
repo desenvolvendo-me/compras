@@ -1,20 +1,21 @@
 <fieldset class="licitation-process-budget-allocation contrasted">
-  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :id, :as => 'hidden', :input_html => { :value => f.object.presenter.id_or_mustache_variable } %>
+  <%= f.input :budget_allocation_id, :as => 'hidden', :input_html => { :value => f.object.presenter.budget_allocation_id_or_mustache_variable } %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <%= f.input :budget_allocation, :input_html => { :size => 40, :class => 'budget-allocation' } %>
+  <%= f.input :budget_allocation_description, :disabled => true, :input_html => { :size => 40, :value =>  f.object.presenter.budget_allocation_or_mustache_variable} %>
 
   <div class="yui3-g">
     <div class="yui3-u-1-3">
-      <%= f.input :expense_nature, :disabled => true, :input_html => { :class => 'classification' } %>
+      <%= f.input :budget_allocation_expense_nature, :disabled => true, :input_html => { :value => f.object.presenter.budget_allocation_expense_nature_or_mustache_variable } %>
     </div>
 
     <div class="yui3-u-1-3">
-      <%= f.input :amount, :disabled => true, :input_html => { :class => 'amount', :value => number_with_precision(f.object.amount) } %>
+      <%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => f.object.presenter.budget_allocation_amount_or_mustache_variable } %>
     </div>
 
     <div class="yui3-u-1-3">
-      <%= f.input :estimated_value %>
+      <%= f.input :value, :disabled => true, :input_html => { :value => f.object.presenter.value_or_mustache_variable } %>
     </div>
 
   </div>
@@ -33,10 +34,6 @@
 
   <div class="nested-remove">
     <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
-  </div>
-
-  <div class="nested-remove">
-    <input type="button" class="button negative remove-licitation-process-budget-allocation" value="Remover Dotação">
   </div>
 </fieldset>
 

@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      administrative_process_budget_allocation_item:
+        one: "Item"
+        other: "Itens"
+
+    attributes:
+      administrative_process_budget_allocation_item:
+        order: "Item"
+        reference_unit: "Unidade de medida"
+        quantity: "Quantidade"
+        unit_price: "Valor unitário"
+        estimated_total_price: "Valor total"

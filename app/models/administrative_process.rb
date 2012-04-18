@@ -14,7 +14,7 @@ class AdministrativeProcess < ActiveRecord::Base
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
 
-  has_many :licitation_processes, :dependent => :restrict
+  has_one :licitation_process, :dependent => :restrict
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
@@ -39,6 +39,10 @@ class AdministrativeProcess < ActiveRecord::Base
 
   def total_allocations_value
     administrative_process_budget_allocations.sum(&:value)
+  end
+
+  def budget_allocations_attr_data
+    administrative_process_budget_allocations.collect(&:attributes_for_data).to_json
   end
 
   protected
