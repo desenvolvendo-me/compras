@@ -22,22 +22,20 @@ class ModalityLimit < ActiveRecord::Base
     ordinance_number
   end
 
-  class << self
-    def current
-      where { validity_beginning.lteq(Date.current) }.order { published_date }.last
-    end
+  def self.current
+    where { validity_beginning.lteq(Date.current) }.order { published_date }.last
+  end
 
-    def current_limit_material_or_service_without_bidding
-      return 0 unless current
+  def self.current_limit_material_or_service_without_bidding
+    return 0 unless current
 
-      current.without_bidding
-    end
+    current.without_bidding
+  end
 
-    def current_limit_engineering_works_without_bidding
-      return 0 unless current
+  def self.current_limit_engineering_works_without_bidding
+    return 0 unless current
 
-      current.work_without_bidding
-    end
+    current.work_without_bidding
   end
 
   protected
