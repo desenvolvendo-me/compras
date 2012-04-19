@@ -35,8 +35,8 @@ describe ExpenseNatureFullCodeGenerator do
       )
     end
 
-    it 'should use _' do
-      expense_nature_object.should_receive(:full_code=).with('1._.33.__.__')
+    it 'should use 0' do
+      expense_nature_object.should_receive(:full_code=).with('1.0.33.00.00')
       subject.generate!
     end
   end
@@ -53,7 +53,7 @@ describe ExpenseNatureFullCodeGenerator do
     end
 
     it 'should generate full_code with 0 on left' do
-      expense_nature_object.should_receive(:full_code=).with('_._.__.01.__')
+      expense_nature_object.should_receive(:full_code=).with('0.0.00.01.00')
       subject.generate!
     end
   end

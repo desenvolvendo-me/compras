@@ -31,13 +31,8 @@
   }
 
   function valueOrDefaultMask(value, count){
-    if(!value) {
-      value = '__' + value;
-      return value.substr(value.length - count);
-    } else {
-      value = '00' + value;
-      return value.substr(value.length - count);
-    }
+    value = '00' + value;
+    return value.substr(value.length - count);
   }
 
   $('#expense_nature_expense_category').on('change', generateFullCode);

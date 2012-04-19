@@ -31,7 +31,7 @@ class ExpenseNatureFullCodeGenerator
     if(value)
       value.rjust(count, '0')
     else
-      '_' * count
+      '0' * count
     end
   end
 end

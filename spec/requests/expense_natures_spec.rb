@@ -65,12 +65,12 @@ feature "ExpenseNatures" do
     fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
 
     fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
-    page.should have_field 'Código completo', :with => '3.0.__.__.__'
+    page.should have_field 'Código completo', :with => '3.0.00.00.00'
 
     fill_modal 'Modalidade da despesa', :with => '10', :field => 'Código'
 
     fill_modal 'Elemento da despesa', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '3.0.10.01.__'
+    page.should have_field 'Código completo', :with => '3.0.10.01.00'
 
     fill_in 'Desdobramento da despesa', :with => '12'
 
