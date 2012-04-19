@@ -12,4 +12,8 @@ class PledgeExpirationPresenter < Presenter::Proxy
   def canceled_value
     helpers.number_with_precision(object.canceled_value) if object.canceled_value
   end
+
+  def balance
+    helpers.number_with_precision(object.balance) if object.balance
+  end
 end

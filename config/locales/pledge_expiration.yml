@@ -11,3 +11,5 @@ pt-BR:
         number: "Número"
         expiration_date: "Vencimento"
         value: "Valor"
+        canceled_value: "Valor cancelado"
+        balance: "Saldo"

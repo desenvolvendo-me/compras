@@ -13,24 +13,22 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :pledge_expiration %>
+    <%= link_to_modal_info 'pledge_cancellation_pledge_expiration', f.object.pledge_expiration %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :expiration_date, :disabled => true, :input_html => { :value => f.object.presenter.expiration_date } %>
   </div>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :canceled_value, :disabled => true, :input_html => { :value => f.object.presenter.canceled_value } %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :value %>
+  <div class="yui3-u-1-3">
+    <%= f.input :balance, :disabled => true, :input_html => { :value => f.object.presenter.balance } %>
   </div>
 </div>
 
 <%= f.input :kind %>
+<%= f.input :value %>
 <%= f.input :date %>
 <%= f.input :nature %>
 <%= f.input :reason %>
@@ -84,7 +82,7 @@
           $('#pledge_cancellation_pledge_value').val('');
           $('#pledge_cancellation_pledge_expiration').val('');
           $('#pledge_cancellation_expiration_date').val('');
-          $('#pledge_cancellation_canceled_value').val('');
+          $('#pledge_cancellation_balance').val('');
         }
       });
 
@@ -92,7 +90,7 @@
         if (data) {
           var record = data.record;
           $('#pledge_cancellation_expiration_date').val(record.data("expiration-date"));
-          $('#pledge_cancellation_canceled_value').val(record.data("canceled-value"));
+          $('#pledge_cancellation_balance').val(record.data("balance"));
           if (!$('#pledge_cancellation_pledge_id').val()) {
             $('#pledge_cancellation_pledge_id').val(record.data("pledge-id"));
             $('#pledge_cancellation_pledge').val(record.data("pledge"));
@@ -103,7 +101,7 @@
           pledge_expiration_value = record.data('pledge-expiration-value');
           forceValueWhenTotalIsKind();
         } else {
-          $('#pledge_cancellation_expiration_date, #pledge_cancellation_canceled_value').val('');
+          $('#pledge_cancellation_expiration_date, #pledge_cancellation_balance').val('');
           pledge_expiration_value = null;
         }
       });

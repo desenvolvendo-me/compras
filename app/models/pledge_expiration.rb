@@ -17,6 +17,10 @@ class PledgeExpiration < ActiveRecord::Base
     pledge_cancellations.sum(:value)
   end
 
+  def balance
+    pledge_value - canceled_value
+  end
+
   def to_s
     "#{number}"
   end

@@ -10,7 +10,7 @@ class PledgeCancellation < ActiveRecord::Base
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
-  delegate :expiration_date, :canceled_value, :to => :pledge_expiration, :allow_nil => true
+  delegate :expiration_date, :balance, :to => :pledge_expiration, :allow_nil => true
   delegate :value, :to => :pledge_expiration, :prefix => true, :allow_nil => true
 
   validates :pledge, :date, :kind, :reason, :value, :presence => true
@@ -64,7 +64,7 @@ class PledgeCancellation < ActiveRecord::Base
     return if pledge_expiration.blank?
 
     if total_canceled_value > pledge_expiration.value
-      errors.add(:value, :must_not_be_greater_than_pledge_expiration_value_minus_already_canceled_value)
+      errors.add(:value, :must_not_be_greater_than_pledge_expiration_balance)
     end
   end
 end

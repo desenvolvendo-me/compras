@@ -19,7 +19,7 @@ feature "PledgeCancellations" do
 
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
-    fill_in 'Valor *', :with => '1,00'
+    fill_in 'Valor a ser anulado', :with => '1,00'
     select 'Parcial', :from => 'Tipo de anulação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     select 'Normal', :from => 'Natureza da ocorrência'
@@ -42,10 +42,10 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => '1,00'
+    page.should have_disabled_field 'Saldo'
+    page.should have_field 'Saldo', :with => '8,99'
 
-    page.should have_field 'Valor *', :with => '1,00'
+    page.should have_field 'Valor a ser anulado', :with => '1,00'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
@@ -72,8 +72,8 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => '0,00'
+    page.should have_disabled_field 'Saldo'
+    page.should have_field 'Saldo', :with => '9,99'
   end
 
   scenario 'clear pledge and pledge_expiration when clear pledge' do
@@ -88,7 +88,7 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_field 'Valor anulado', :with => '0,00'
+    page.should have_field 'Saldo', :with => '9,99'
 
     clear_modal 'Empenho'
     page.should have_field 'Empenho', :with => ''
@@ -100,8 +100,8 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => ''
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => ''
-    page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => ''
+    page.should have_disabled_field 'Saldo'
+    page.should have_field 'Saldo', :with => ''
   end
 
   scenario 'when select total as kind should disabled and fill value' do
@@ -116,8 +116,8 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     select 'Total', :from => 'Tipo de anulação'
 
-    page.should have_disabled_field 'Valor *'
-    page.should have_field 'Valor *', :with => '100,00'
+    page.should have_disabled_field 'Valor a ser anulado'
+    page.should have_field 'Valor a ser anulado', :with => '100,00'
   end
 
   scenario 'should fill value when select pledge_expiration before kind and kind is total' do
@@ -132,8 +132,8 @@ feature "PledgeCancellations" do
     select 'Total', :from => 'Tipo de anulação'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
 
-    page.should have_disabled_field 'Valor *'
-    page.should have_field 'Valor *', :with => '100,00'
+    page.should have_disabled_field 'Valor a ser anulado'
+    page.should have_field 'Valor a ser anulado', :with => '100,00'
   end
 
   scenario 'when select pledge_expiration first fill pledge' do
@@ -148,7 +148,7 @@ feature "PledgeCancellations" do
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_field 'Valor anulado', :with => '0,00'
+    page.should have_field 'Saldo', :with => '9,99'
 
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
@@ -191,6 +191,40 @@ feature "PledgeCancellations" do
     end
   end
 
+  context 'should have modal link' do
+    scenario 'when already have stored' do
+      pledge_cancellation = PledgeCancellation.make!(:empenho_2012)
+
+      click_link 'Contabilidade'
+
+      click_link 'Anulações de Empenho'
+
+      click_link "#{pledge_cancellation.id}"
+
+      click_link 'Mais informações'
+
+      page.should have_content 'Informações de: 1'
+    end
+
+    scenario 'when change pledge_expiration' do
+      Pledge.make!(:empenho_com_dois_vencimentos)
+
+      click_link 'Contabilidade'
+
+      click_link 'Anulações de Empenho'
+
+      click_link 'Criar Anulação de Empenho'
+
+      fill_modal 'Parcela', :with => '1', :field => 'Número'
+      click_link 'Mais informações'
+      page.should have_content 'Informações de: 1'
+
+      fill_modal 'Parcela', :with => '2', :field => 'Número'
+      click_link 'Mais informações'
+      page.should have_content 'Informações de: 2'
+    end
+  end
+
   scenario 'should have all fields disabled when editing an existent pledge' do
     pledge = Pledge.make!(:empenho)
     PledgeCancellation.make!(:empenho_2012)
@@ -215,10 +249,10 @@ feature "PledgeCancellations" do
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Valor anulado'
-    page.should have_field 'Valor anulado', :with => '1,00'
-    page.should have_disabled_field 'Valor *'
-    page.should have_field 'Valor *', :with => '1,00'
+    page.should have_disabled_field 'Saldo'
+    page.should have_field 'Saldo', :with => '8,99'
+    page.should have_disabled_field 'Valor a ser anulado'
+    page.should have_field 'Valor a ser anulado', :with => '1,00'
     page.should have_disabled_field 'Tipo de anulação'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_disabled_field 'Data *'

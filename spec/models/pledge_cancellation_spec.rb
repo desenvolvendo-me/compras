@@ -19,13 +19,13 @@ describe PledgeCancellation do
   it 'should not be valid if all other cancellations for pledge_expiration is greater than value' do
     pledge_expiration = double(:canceled_value => 2, :value => 3, :expiration_date => nil)
     subject.stub(:pledge_expiration).and_return(pledge_expiration)
-    subject.should_not allow_value(4).for(:value).with_message("não pode ser maior do que o valor inicial da dotação menos o valor já anulado")
+    subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo")
   end
 
   it 'should not be valid if value greater than expiration value' do
     pledge_expiration = double(:value => 3, :canceled_value => 0, :expiration_date => nil)
     subject.stub(:pledge_expiration).and_return(pledge_expiration)
-    subject.should_not allow_value(4).for(:value).with_message("não pode ser maior do que o valor inicial da dotação menos o valor já anulado")
+    subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo")
   end
 
   context 'validate date' do

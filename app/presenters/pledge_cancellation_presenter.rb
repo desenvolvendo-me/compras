@@ -11,7 +11,7 @@ class PledgeCancellationPresenter < Presenter::Proxy
     helpers.l(object.expiration_date) if object.expiration_date
   end
 
-  def canceled_value
-    helpers.number_with_precision(object.canceled_value) if object.canceled_value
+  def balance
+    helpers.number_with_precision(object.balance) if object.balance
   end
 end

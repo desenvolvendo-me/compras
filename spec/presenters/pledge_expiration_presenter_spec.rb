@@ -30,4 +30,14 @@ describe PledgeExpirationPresenter do
     pledge_expiration.stub(:pledge_value).and_return(9.99)
     subject.pledge_value.should eq '9,99'
   end
+
+  it 'should return canceled_value' do
+    pledge_expiration.stub(:canceled_value).and_return(9.99)
+    subject.canceled_value.should eq '9,99'
+  end
+
+  it 'should return balance' do
+    pledge_expiration.stub(:balance).and_return(9.99)
+    subject.balance.should eq '9,99'
+  end
 end
