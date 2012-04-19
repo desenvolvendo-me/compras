@@ -26,17 +26,19 @@ class DirectPurchase < ActiveRecord::Base
   delegate :bank_account, :agency, :bank, :to => :provider, :allow_nil => true
   delegate :purchase_licitation_exemption, :build_licitation_exemption,
            :to => :licitation_object, :allow_nil => true, :prefix => true
+  delegate :materials, :materials_groups, :materials_classes,
+           :to => :provider, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :status, :year, :date, :legal_reference, :modality, :presence => true
   validates :budget_unit, :licitation_object, :delivery_location, :presence => true
   validates :provider, :employee, :payment_method, :period, :pledge_type, :presence => true
-  validates :provider, :material_belongs_to_provider => true
 
   validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation
   validate :material_must_have_same_licitation_object
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
+  validate :materials_should_belong_to_provider
 
   orderize :year
 
@@ -116,6 +118,21 @@ class DirectPurchase < ActiveRecord::Base
 
     unless limit_validator.new(self).value_less_than_available_limit?
       errors.add(:total_allocations_items_value, :greater_than_actual_modality_limit)
+    end
+  end
+
+  def materials_should_belong_to_provider
+    return if direct_purchase_budget_allocations.blank? || provider.nil?
+
+
+    direct_purchase_budget_allocations.each do |dpba|
+      dpba.items.each do |item|
+        unless provider_materials.include?(item.material) ||
+               provider_materials_classes.include?(item.material.materials_class) ||
+               provider_materials_groups.include?(item.material.materials_group)
+          item.errors.add(:material, :must_belong_to_selected_provider)
+        end
+      end
     end
   end
 end
