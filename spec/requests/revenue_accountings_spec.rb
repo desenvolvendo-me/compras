@@ -79,6 +79,8 @@ feature "RevenueAccountings" do
     click_link 'Criar Receita Contábel'
 
     within_tab 'Programação' do
+      page.should have_disabled_field 'Valor previsto'
+
       select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
       page.should have_field 'Valor previsto', :with => ''
       page.should have_disabled_field 'Valor previsto'

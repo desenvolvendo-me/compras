@@ -1,5 +1,5 @@
 <%= f.input :kind %>
-<%= f.input :value %>
+<%= f.input :value, :disabled => !f.object.divide? %>
 
 <table id="month" class="records">
   <tbody>
