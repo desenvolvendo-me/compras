@@ -365,12 +365,52 @@ feature "LicitationProcesses" do
       page.should have_field 'Protocolo', :with => '111111'
       page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
-
+      page.should have_field 'Status', :with => LicitationProcessInvitedBidderStatus::ENABLED
       page.should have_field 'Documento', :with => 'Oficial'
 
       page.should have_field 'Número/certidão', :with => '987654'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Validade', :with =>  I18n.l(Date.tomorrow + 1.day)
+    end
+  end
+
+  scenario 'update an existent licitation_process with provider without documents' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      fill_in 'Número/certidão', :with => ''
+      fill_in 'Data de emissão', :with => ''
+      fill_in 'Validade', :with => ''
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    page.should have_notice 'Processo Licitatório editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Licitantes convidados' do
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      page.should have_field 'Protocolo', :with => '123456'
+      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
+      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Status', :with => LicitationProcessInvitedBidderStatus::DISABLED
+
+      page.should have_field 'Documento', :with => 'Fiscal'
+
+      page.should have_field 'Número/certidão', :with => ''
+      page.should have_field 'Data de emissão', :with => ''
+      page.should have_field 'Validade', :with => ''
     end
   end
 

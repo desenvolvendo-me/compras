@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_invited_bidder'
+require 'app/models/licitation_process_invited_bidder_document'
 require 'app/models/licitation_process'
 require 'app/models/provider'
 

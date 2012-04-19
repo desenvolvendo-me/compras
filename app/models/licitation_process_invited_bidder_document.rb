@@ -6,5 +6,5 @@ class LicitationProcessInvitedBidderDocument < ActiveRecord::Base
 
   delegate :description, :to => :document_type, :allow_nil => true
 
-  validates :document_type, :document_number, :emission_date, :validity, :presence => true
+  validates :document_type, :presence => true
 end

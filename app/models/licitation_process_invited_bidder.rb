@@ -1,6 +1,8 @@
 class LicitationProcessInvitedBidder < ActiveRecord::Base
-  attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date
+  attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date, :status
   attr_accessible :receipt_date, :auto_convocation, :licitation_process_invited_bidder_documents_attributes
+
+  has_enumeration_for :status, :with => LicitationProcessInvitedBidderStatus
 
   belongs_to :licitation_process
   belongs_to :provider
@@ -19,6 +21,18 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
   end
 
   before_save :clear_dates
+
+  def filled_documents?
+    documents = licitation_process_invited_bidder_documents
+    return false if documents.empty?
+
+    documents.each do |document|
+      return false if document.document_number.blank? ||
+                      document.emission_date.blank? ||
+                      document.validity.blank?
+    end
+    true
+  end
 
   protected
 

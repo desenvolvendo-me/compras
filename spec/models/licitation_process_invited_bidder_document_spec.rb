@@ -9,7 +9,4 @@ describe LicitationProcessInvitedBidderDocument do
   it { should belong_to :document_type }
 
   it { should validate_presence_of :document_type }
-  it { should validate_presence_of :document_number }
-  it { should validate_presence_of :emission_date }
-  it { should validate_presence_of :validity }
 end

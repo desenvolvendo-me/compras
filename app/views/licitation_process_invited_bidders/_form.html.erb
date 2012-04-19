@@ -23,6 +23,8 @@
       <%= f.input :auto_convocation, :input_html => { :class => 'auto-convocation' } %>
     </div>
   </div>
+  
+  <%= f.input :status, :disabled => true %>
 
   <div id="licitation-process-invited-bidder-documents-<%= f.nested_identifier %>" class="document-fields">
     <%= f.association :licitation_process_invited_bidder_documents, :collection => localized(f.object.licitation_process_invited_bidder_documents) do |p| %>
