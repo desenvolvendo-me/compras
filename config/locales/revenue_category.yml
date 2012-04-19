@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       revenue_category:
-        one: "Categoria de Receita"
-        other: "Categorias de Receitas"
+        one: "Categoria da Receita"
+        other: "Categorias da Receitas"
 
     attributes:
       revenue_category:
