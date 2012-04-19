@@ -397,6 +397,7 @@ feature "LicitationProcesses" do
 
   scenario 'creating another licitation with the same year to test process number and licitation number' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    AdministrativeProcess.make!(:compra_com_itens_2)
 
     click_link 'Processos'
 
@@ -407,9 +408,9 @@ feature "LicitationProcesses" do
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
 
-      fill_in 'Ano', :with => '2012'
+      fill_in 'Ano', :with => '2013'
       fill_in 'Data do processo', :with => '21/04/2012'
-      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
+      fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       select 'Global', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -433,7 +434,7 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    click_link "#{licitation_process.process}/2012"
+    click_link "#{licitation_process.process}/2013"
 
     within_tab 'Dados gerais' do
       page.should have_field 'Processo', :with => licitation_process.process.to_s
