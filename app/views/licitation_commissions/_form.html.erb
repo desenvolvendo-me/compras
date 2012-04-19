@@ -49,8 +49,8 @@
   });
 
   $(".licitation_commission").delegate('.role', 'change', function (event, data) {
-    var class_register_needed = ($(this).val() == '<%= LicitationCommissionResponsibleRole::LAWYER %>');
+    var classRegisterNeeded = $(this).val() == '<%= LicitationCommissionResponsibleRole::LAWYER %>';
 
-    $(this).closest('.responsible').find('.class_register').attr('disabled', !class_register_needed);
+    $(this).closest('.responsible').find('.class_register').attr('disabled', !classRegisterNeeded);
   });
 </script>
