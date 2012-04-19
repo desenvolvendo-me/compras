@@ -28,7 +28,7 @@ gem 'awesome_nested_set', '2.1.2'
 gem 'mail_validator', '0.2.0'
 gem 'cnpj_validator', '0.3.1'
 gem 'cpf_validator', '0.2.0'
-gem 'mask_validator', :git => 'git://github.com/MarceloCajueiro/mask_validator.git'
+gem 'mask_validator', '0.2.1'
 gem 'validates_timeliness', '3.0.8'
 
 gem 'inherited_resources', '1.3.0'
