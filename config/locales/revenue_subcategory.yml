@@ -9,4 +9,4 @@ pt-BR:
       revenue_subcategory:
         code: "Código"
         description: "Descrição"
-        revenue_category: "Categoria de receita"
+        revenue_category: "Categoria da receita"
