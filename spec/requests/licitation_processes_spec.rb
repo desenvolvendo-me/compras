@@ -756,4 +756,28 @@ feature "LicitationProcesses" do
       page.should have_field 'Total dos itens', :with => '80,00'
     end
   end
+
+  scenario 'should show only available administrative process in modal' do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+    administrative_process_taken = licitation_process.administrative_process
+
+    administrative_process_taken.protocol.should eq '00088/2012'
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo' do
+        click_button 'Pesquisar'
+
+        page.should have_content '00099/2012'
+        page.should_not have_content '00088/2012'
+      end
+    end
+  end
 end

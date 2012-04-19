@@ -110,4 +110,19 @@ describe LicitationProcess do
     bidder_one.errors.messages[:provider_id].should be_nil
     bidder_two.errors.messages[:provider_id].should be_nil
   end
+
+  it 'should validate that selected administrative process is available' do
+    subject.errors.messages[:administrative_process].should be_nil
+
+    administrative_process = double('administrative process',
+                                    :administrative_process_budget_allocations => [],
+                                    :licitation_process => 1)
+
+    subject.stub(:administrative_process).and_return(administrative_process)
+    subject.stub(:administrative_process_licitation_process).and_return(true)
+
+    subject.valid?
+
+    subject.errors.messages[:administrative_process].should include 'já está em uso'
+  end
 end

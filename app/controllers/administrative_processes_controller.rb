@@ -1,6 +1,8 @@
 class AdministrativeProcessesController < CrudController
   actions :all, :except => [:update, :destroy]
 
+  has_scope :without_licitation_process, :type => :boolean
+
   def new
     object = build_resource
     object.date = Date.current

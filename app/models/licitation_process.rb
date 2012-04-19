@@ -32,7 +32,7 @@ class LicitationProcess < ActiveRecord::Base
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
   delegate :budget_unit, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
-           :item, :to => :administrative_process, :allow_nil => true, :prefix => true
+           :item, :licitation_process, :to => :administrative_process, :allow_nil => true, :prefix => true
 
   delegate :administrative_process_budget_allocations, :to => :administrative_process, :allow_nil => true
 
@@ -41,6 +41,7 @@ class LicitationProcess < ActiveRecord::Base
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
   validate :cannot_have_duplicated_invited_bidders
   validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
+  validate :administrative_process_must_not_belong_to_another_licitation_process
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -118,6 +119,14 @@ class LicitationProcess < ActiveRecord::Base
         errors.add(:administrative_process_budget_allocations)
         apba.errors.add(:total_items_value, :must_be_equal_to_estimated_value)
       end
+    end
+  end
+
+  def administrative_process_must_not_belong_to_another_licitation_process
+    return if administrative_process.nil? || administrative_process_licitation_process == self
+
+    unless administrative_process_licitation_process.nil?
+      errors.add(:administrative_process, :taken)
     end
   end
 end
