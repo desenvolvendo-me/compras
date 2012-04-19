@@ -18,11 +18,11 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
     allowing_blank.validates :receipt_date, :timeliness => { :on_or_after => :protocol_date, :type => :date, :on => :create, :unless => :auto_convocation }
   end
 
-  before_save :clear_dates_if_auto_convocation
+  before_save :clear_dates
 
   protected
 
-  def clear_dates_if_auto_convocation
+  def clear_dates
     if auto_convocation?
       self.protocol_date = nil
       self.receipt_date = nil
