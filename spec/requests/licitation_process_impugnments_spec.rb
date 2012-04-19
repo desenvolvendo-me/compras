@@ -12,7 +12,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link 'Processos'
 
-    click_link 'Impugnações do Processo Licitatório'
+    click_link 'Impugnações dos Processos Licitatórios'
 
     click_link 'Criar Impugnação do Processo Licitatório'
 
@@ -52,7 +52,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link 'Processos'
 
-    click_link 'Impugnações do Processo Licitatório'
+    click_link 'Impugnações dos Processos Licitatórios'
 
     click_link licitation_process_impugnment.to_s
 
@@ -90,7 +90,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link 'Processos'
 
-    click_link 'Impugnações do Processo Licitatório'
+    click_link 'Impugnações dos Processos Licitatórios'
 
     click_link licitation_process_impugnment.to_s
 
@@ -114,7 +114,7 @@ feature "LicitationProcessImpugnments" do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
     click_link 'Processos'
 
-    click_link 'Impugnações do Processo Licitatório'
+    click_link 'Impugnações dos Processos Licitatórios'
 
     click_link "#{licitation_process_impugnment.to_s}"
 
@@ -126,7 +126,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link 'Processos'
 
-    click_link 'Impugnações do Processo Licitatório'
+    click_link 'Impugnações dos Processos Licitatórios'
 
     click_link 'Criar Impugnação do Processo Licitatório'
 
@@ -143,7 +143,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link 'Processos'
 
-    click_link 'Impugnações do Processo Licitatório'
+    click_link 'Impugnações dos Processos Licitatórios'
 
     click_link licitation_process_impugnment.to_s
 
