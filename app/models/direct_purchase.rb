@@ -128,8 +128,8 @@ class DirectPurchase < ActiveRecord::Base
     direct_purchase_budget_allocations.each do |dpba|
       dpba.items.each do |item|
         unless provider_materials.include?(item.material) ||
-               provider_materials_classes.include?(item.material.materials_class) ||
-               provider_materials_groups.include?(item.material.materials_group)
+               provider_materials_classes.include?(item.materials_class) ||
+               provider_materials_groups.include?(item.materials_group)
           item.errors.add(:material, :must_belong_to_selected_provider)
         end
       end

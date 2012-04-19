@@ -7,7 +7,7 @@ class DirectPurchaseBudgetAllocationItem < ActiveRecord::Base
   belongs_to :direct_purchase_budget_allocation
   belongs_to :material
 
-  delegate :reference_unit, :to => :material, :allow_nil => true
+  delegate :reference_unit, :materials_class, :materials_group, :to => :material, :allow_nil => true
   delegate :licitation_object_id, :to => :direct_purchase_budget_allocation, :allow_nil => true
 
   validates :material, :quantity, :unit_price, :presence => true
