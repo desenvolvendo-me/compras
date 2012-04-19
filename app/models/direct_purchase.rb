@@ -99,6 +99,8 @@ class DirectPurchase < ActiveRecord::Base
   end
 
   def material_must_have_same_licitation_object
+    return if direct_purchase_budget_allocations.empty? || licitation_object.nil?
+
     direct_purchase_budget_allocations.each do |dpba|
       dpba.items.each do |item|
         if item.material && !item.material.licitation_object_ids.include?(licitation_object_id)
