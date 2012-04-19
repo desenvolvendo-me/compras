@@ -27,21 +27,6 @@ class LicitationProcessImpugnment < ActiveRecord::Base
       :on_or_after_message => :must_be_greater_or_equal_to_impugnment_date,
       :type => :date
     }
-    allowing_blank.validates :new_envelope_delivery_date,:timeliness => {
-      :on_or_after => :today,
-      :type => :date,
-      :on => :create
-    }
-    allowing_blank.validates :new_envelope_opening_date, :timeliness => {
-      :on_or_after => :new_envelope_delivery_date,
-      :type => :date,
-      :on => :create
-    }
-    allowing_blank.validates :new_envelope_opening_time, :timeliness => {
-      :on_or_after => :new_envelope_delivery_time,
-      :on_or_after_message => :must_be_greater_or_equal_to_time,
-      :type => :time
-    }, :if => :new_envelope_opening_date_equal_new_envelope_delivery_date?
   end
 
   before_save :licitation_process_impugnment_updater!

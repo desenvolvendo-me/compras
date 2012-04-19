@@ -26,11 +26,6 @@ describe LicitationProcessImpugnment do
     it { should_not allow_value("44:11").for(:new_envelope_opening_time) }
   end
 
-  it "should not have new_envelope_delivery_date less than today" do
-    subject.should_not allow_value(Date.yesterday).for(:new_envelope_delivery_date).
-                                                   with_message("deve ser em ou depois de #{I18n.l Date.current}")
-  end
-
   context "validating impugnment_date" do
     let(:licitation_process) { double('licitation_process', :id => 1, :process_date => Date.current) }
 
@@ -58,35 +53,6 @@ describe LicitationProcessImpugnment do
       subject.stub(:judgment_date => '')
       subject.valid?
       subject.errors[:judgment_date].should_not include ["não é uma data válida", "não pode ser vazio"]
-    end
-  end
-
-  describe "validating new_envelope_opening_date and new_envelope_opening_time" do
-    context "when new_envelope_opening_date less than new delivery date" do
-      it "should not be valid" do
-        subject.new_envelope_delivery_date = Date.tomorrow
-
-        subject.should_not allow_value(Date.current).for(:new_envelope_opening_date).
-                                                     with_message("deve ser em ou depois de #{I18n.l Date.tomorrow}")
-      end
-    end
-
-    context "when new_envelope_opening_date equal new delivery date" do
-      it "should not be valid if new_envelope_opening_time less than new delivery time" do
-        subject.new_envelope_delivery_date = Date.current
-        subject.new_envelope_delivery_time = Time.now
-        subject.new_envelope_opening_date = Date.current
-
-        subject.should_not allow_value(Time.now - 1.minute).for(:new_envelope_opening_time).
-                                                            with_message("deve ser igual ou maior a hora de entrega do envelope")
-      end
-
-      it "should be valid if new_envelope_opening_time greater than or equal new delivery time" do
-        subject.new_envelope_delivery_date = Date.current
-        subject.new_envelope_delivery_time = Time.now
-        subject.new_envelope_opening_date = Date.current
-        subject.should allow_value(Time.now + 1.minute).for(:new_envelope_opening_time)
-      end
     end
   end
 end
