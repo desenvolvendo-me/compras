@@ -1,13 +1,7 @@
 <div class="buttons">
   <%= f.button :submit %>
-  
-  <%- if f.object.persisted? %>
-    <%- if f.object.accreditation %>
-      <%= link_to 'Editar credenciamento',  edit_licitation_process_accreditation_path(f.object), :class => "button secondary" %>
-    <%- else %>
-      <%= link_to 'Novo credenciamento',  new_licitation_process_accreditation_path(f.object), :class => "button primary" %>
-    <%- end %>
-  <%- end %>
+
+  <%= f.object.presenter.build_accreditation_link if f.object.persisted? %>
 
   <%= f.button :cancel %>
   <%= f.button :destroy if f.object.persisted? %>
