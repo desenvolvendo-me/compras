@@ -140,7 +140,7 @@
         totalValue = 0;
 
     itemPrices.each(function() {
-      totalValue += parsePtBrFloat($(this).val());
+      totalValue += parsePtBrFloat(this.value);
     });
 
     administrativeProcessBudgetAllocation.find('.total-value').val(floatToPtBrString(totalValue));
@@ -239,7 +239,7 @@
     });
 
     $('input.bidder-document-type-id').each(function() {
-      if ( $.inArray($(this).val(), docIds) == -1 ) {
+      if ( $.inArray(this.value, docIds) == -1 ) {
         $(this).closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
       };
     });
