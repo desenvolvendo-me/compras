@@ -457,7 +457,7 @@ feature "LicitationCommissions" do
     click_button 'Criar Comissão de Licitação'
 
     within_tab 'Membros' do
-      page.should have_content 'deve haver um presidente'
+      page.should have_content 'deve haver apenas um presidente'
     end
   end
 end

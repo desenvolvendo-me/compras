@@ -231,6 +231,7 @@ pt-BR:
       greater_than_actual_modality_limit: 'está acima do valor disponível no limite em vigor para esta modalidade'
       must_be_equal_to_estimated_value: 'deve ser igual ao valor previsto'
       must_have_one_president: 'deve haver um presidente'
+      must_have_only_one_president: 'deve haver apenas um presidente'
 
   activerecord:
     errors:

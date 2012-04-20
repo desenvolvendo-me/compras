@@ -110,7 +110,7 @@ describe LicitationCommission do
 
       subject.valid?
 
-      subject.errors.messages[:licitation_commission_members].should include 'deve haver um presidente'
+      subject.errors.messages[:licitation_commission_members].should include 'deve haver apenas um presidente'
     end
 
     it "must be valid when there are one president" do
