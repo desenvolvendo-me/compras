@@ -12,14 +12,15 @@
       <%= f.input :difference, :disabled => true %>
     </div>
   </div>
-  <p>
-    <input type="button" class="button affirmative add-extra-credit-moviment-type" value="Adicionar Movimento">
-  </p>
 
   <%= f.association :extra_credit_moviment_types, :collection => localized(f.object.extra_credit_moviment_types) do |a| %>
     <%= render 'extra_credit_moviment_types/form', :f => a %>
   <% end %>
 </div>
+
+<p>
+  <input type="button" class="button affirmative add-extra-credit-moviment-type" value="Adicionar Movimento">
+</p>
 
 <%= mustache 'extra-credit-moviment-types-template' do %>
   <%= f.association :extra_credit_moviment_types_attributes, :collection => f.object.extra_credit_moviment_types.build, :index => '{{uuid_extra_credit_moviment_type}}' do |a| %>

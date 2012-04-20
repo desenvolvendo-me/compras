@@ -7,13 +7,15 @@
   </div>
 </div>
 
+<div id="pledge-items">
+  <%= f.association :pledge_items, :collection => localized(f.object.pledge_items) do |p| %>
+    <%= render 'pledge_items/form', :f => p %>
+  <% end %>
+</div>
+
 <p>
   <input type="button" class="button affirmative add-pledge-item" value="Adicionar Item">
 </p>
-
-<%= f.association :pledge_items, :collection => localized(f.object.pledge_items) do |p| %>
-  <%= render 'pledge_items/form', :f => p %>
-<% end %>
 
 <%= mustache 'pledge-items-template' do %>
   <%= f.association :pledge_items_attributes, :collection => f.object.pledge_items.build, :index => '{{uuid_pledge_item}}' do |p| %>
@@ -25,7 +27,7 @@
   $("#pledge-items-template").nestedForm({
     add: '.add-pledge-item',
     remove: '.remove-pledge-item',
-    target: '#items',
+    target: '#pledge-items',
     uuid: 'uuid_pledge_item',
     fieldToRemove: '.pledge-item',
     right: true

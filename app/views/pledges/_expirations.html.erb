@@ -1,16 +1,18 @@
-<p>
-  <input type="button" class="button affirmative add-pledge-expiration" value="Adicionar Vencimento">
-</p>
-
 <% if f.object.new_record? && request.get? %>
   <% f.association :pledge_expirations_attributes, :collection => f.object.pledge_expirations.build do |e| %>
       <%= render 'pledge_expirations/form', :f => e %>
   <% end %>
 <% end %>
 
-<%= f.association :pledge_expirations, :collection => localized(f.object.pledge_expirations) do |e| %>
-  <%= render 'pledge_expirations/form', :f => e %>
-<% end %>
+<div id="pledge-expirations">
+  <%= f.association :pledge_expirations, :collection => localized(f.object.pledge_expirations) do |e| %>
+    <%= render 'pledge_expirations/form', :f => e %>
+  <% end %>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-pledge-expiration" value="Adicionar Vencimento">
+</p>
 
 <%= mustache 'pledge-expirations-template' do %>
   <%= f.association :pledge_expirations_attributes, :collection => f.object.pledge_expirations.build, :index => '{{uuid_pledge_expiration}}' do |e| %>
@@ -22,7 +24,7 @@
   $("#pledge-expirations-template").nestedForm({
     add: '.add-pledge-expiration',
     remove: '.remove-pledge-expiration',
-    target: '#expirations',
+    target: '#pledge-expirations',
     uuid: 'uuid_pledge_expiration',
     fieldToRemove: '.pledge-expiration',
     right: true
