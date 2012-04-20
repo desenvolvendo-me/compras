@@ -26,6 +26,7 @@ class Pledge < ActiveRecord::Base
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
   has_many :pledge_expirations, :dependent => :destroy
   has_many :pledge_cancellations, :dependent => :restrict
+  has_many :pledge_liquidations, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
   accepts_nested_attributes_for :pledge_expirations, :allow_destroy => true

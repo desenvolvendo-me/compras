@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_liquidation:
+        one: "Liquidação de Empenho"
+        other: "Liquidações de Empenhos"
+
+    attributes:
+      pledge_liquidation:
+        pledge: "Empenho"
+        value: "Valor"
+        kind: "Tipo de liquidação"
+        date: "Data"
+        emission_date: "Data de emissão"
+        pledge_value: "Valor do empenho"
+        pledge_expiration: "Parcela"
+        expiration_date: "Vencimento"
+        balance: "Saldo"
