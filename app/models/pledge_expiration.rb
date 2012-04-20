@@ -18,7 +18,7 @@ class PledgeExpiration < ActiveRecord::Base
   end
 
   def balance
-    pledge_value - canceled_value
+    value - canceled_value
   end
 
   def to_s

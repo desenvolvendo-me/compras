@@ -34,12 +34,6 @@ class PledgeCancellation < ActiveRecord::Base
     "#{id}"
   end
 
-  def total_canceled_value
-    return unless pledge_expiration
-
-    pledge_expiration.canceled_value + value
-  end
-
   protected
 
   def date_must_be_greater_than_expiration_date
@@ -63,7 +57,7 @@ class PledgeCancellation < ActiveRecord::Base
   def value_validation
     return if pledge_expiration.blank?
 
-    if total_canceled_value > pledge_expiration.value
+    if value > balance
       errors.add(:value, :must_not_be_greater_than_pledge_expiration_balance)
     end
   end
