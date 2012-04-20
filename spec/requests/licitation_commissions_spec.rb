@@ -45,7 +45,7 @@ feature "LicitationCommissions" do
       click_button 'Adicionar Membro'
 
       fill_modal 'Membro', :with => 'Gabriel Sobrinho'
-      select 'Suplente', :from => 'Função'
+      select 'Presidente', :from => 'Função'
       select 'Servidor efetivo', :from => 'Natureza do cargo'
       fill_in 'Matrícula', :with => '3456789'
     end
@@ -74,7 +74,7 @@ feature "LicitationCommissions" do
 
     within_tab 'Membros' do
       page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
-      page.should have_select 'Função', :selected => 'Suplente'
+      page.should have_select 'Função', :selected => 'Presidente'
       page.should have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
       page.should have_field 'Matrícula', :with => '3456789'
     end
@@ -120,14 +120,14 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
-      click_button 'Remover'
-
       click_button 'Adicionar Membro'
 
-      fill_modal 'Membro', :with => 'Wenderson Malheiros'
-      select 'Apoio', :from => 'Função'
-      select 'Outros', :from => 'Natureza do cargo'
-      fill_in 'Matrícula', :with => '987654'
+      within '.member:last' do
+        fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+        select 'Apoio', :from => 'Função'
+        select 'Outros', :from => 'Natureza do cargo'
+        fill_in 'Matrícula', :with => '987654'
+      end
     end
 
     click_button 'Atualizar Comissão de Licitação'
@@ -154,10 +154,12 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
-      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
-      page.should have_select 'Função', :selected => 'Apoio'
-      page.should have_select 'Natureza do cargo', :selected => 'Outros'
-      page.should have_field 'Matrícula', :with => '987654'
+      within '.member:last' do
+        page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+        page.should have_select 'Função', :selected => 'Apoio'
+        page.should have_select 'Natureza do cargo', :selected => 'Outros'
+        page.should have_field 'Matrícula', :with => '987654'
+      end
     end
   end
 
