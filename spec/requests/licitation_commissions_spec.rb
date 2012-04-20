@@ -399,4 +399,63 @@ feature "LicitationCommissions" do
       page.should have_content 'já está em uso'
     end
   end
+
+  scenario 'must have one member with role president' do
+    Person.make!(:wenderson)
+    Person.make!(:sobrinho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Comissões de Licitação'
+
+    click_link 'Criar Comissão de Licitação'
+
+    # testing with no members
+    click_button 'Criar Comissão de Licitação'
+
+    within_tab 'Membros' do
+      page.should have_content 'deve haver um presidente'
+    end
+
+    # testing with one member that is no president
+    within_tab 'Membros' do
+      click_button 'Adicionar Membro'
+
+      fill_modal 'Membro', :with => 'Wenderson Malheiros'
+      select 'Suplente', :from => 'Função'
+    end
+
+    click_button 'Criar Comissão de Licitação'
+
+    within_tab 'Membros' do
+      page.should have_content 'deve haver um presidente'
+    end
+
+    # testing with one president
+    within_tab 'Membros' do
+      select 'Presidente', :from => 'Função'
+    end
+
+    click_button 'Criar Comissão de Licitação'
+
+    within_tab 'Membros' do
+      page.should_not have_content 'deve haver um presidente'
+    end
+
+    # testing with two presidents
+    within_tab 'Membros' do
+      click_button 'Adicionar Membro'
+
+      within '.member:last' do
+        fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+        select 'Presidente', :from => 'Função'
+      end
+    end
+
+    click_button 'Criar Comissão de Licitação'
+
+    within_tab 'Membros' do
+      page.should have_content 'deve haver um presidente'
+    end
+  end
 end

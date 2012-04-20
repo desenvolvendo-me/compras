@@ -8,7 +8,7 @@ class LicitationCommission < ActiveRecord::Base
   belongs_to :regulatory_act
 
   has_many :licitation_commission_responsibles, :dependent => :destroy
-  has_many :licitation_commission_members, :dependent => :destroy
+  has_many :licitation_commission_members, :dependent => :destroy, :order => :id
   has_many :accreditations, :dependent => :restrict
 
   accepts_nested_attributes_for :licitation_commission_responsibles, :allow_destroy => true
@@ -21,6 +21,7 @@ class LicitationCommission < ActiveRecord::Base
 
   validate :cannot_have_duplicated_individuals_on_responsibles
   validate :cannot_have_duplicated_individuals_on_members
+  validate :must_have_one_member_with_role_president
 
   orderize :id
   filterize
@@ -61,6 +62,18 @@ class LicitationCommission < ActiveRecord::Base
         responsible.errors.add(:individual_id, :taken)
       end
       single_individuals << responsible.individual_id
+    end
+  end
+
+  def must_have_one_member_with_role_president
+    presidents_count = 0
+
+    licitation_commission_members.each do |member|
+      presidents_count += 1 if member.president?
+    end
+
+    if presidents_count != 1
+      errors.add(:licitation_commission_members, :must_have_one_president)
     end
   end
 end

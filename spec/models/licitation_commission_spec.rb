@@ -83,4 +83,42 @@ describe LicitationCommission do
     individual_one.errors.messages[:individual_id].should be_nil
     individual_two.errors.messages[:individual_id].should be_nil
   end
+
+  context 'must have one president' do
+    let(:member_1) do
+      double('member 1', :individual_id => 1, :president? => false)
+    end
+
+    let(:president_1) do
+      double('president 1', :individual_id => 3, :president? => true)
+    end
+
+    let(:president_2) do
+      double('president 2', :individual_id => 4, :president? => true)
+    end
+
+    it "must be invalid when there is no president" do
+      subject.stub(:licitation_commission_members).and_return([member_1])
+
+      subject.valid?
+
+      subject.errors.messages[:licitation_commission_members].should include 'deve haver um presidente'
+    end
+
+    it "must be invalid when there are two presidents" do
+      subject.stub(:licitation_commission_members).and_return([president_1, president_2])
+
+      subject.valid?
+
+      subject.errors.messages[:licitation_commission_members].should include 'deve haver um presidente'
+    end
+
+    it "must be valid when there are one president" do
+      subject.stub(:licitation_commission_members).and_return([president_1, member_1])
+
+      subject.valid?
+
+      subject.errors.messages[:licitation_commission_members].should be_nil
+    end
+  end
 end

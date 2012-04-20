@@ -1,3 +1,5 @@
+<%= f.error :licitation_commission_members %>
+
 <div id="licitation-commission-members">
   <%= f.association :licitation_commission_members, :collection => localized(f.object.licitation_commission_members) do |p| %>
     <%= render 'licitation_commission_members/form', :f => p %>
