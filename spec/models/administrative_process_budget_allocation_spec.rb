@@ -61,4 +61,14 @@ describe AdministrativeProcessBudgetAllocation do
 
     subject.total_items_value.should eq 400
   end
+
+  it 'should call the destroy_all method on items when calling clean_items method' do
+    items_collection = double('items')
+
+    subject.stub(:items).and_return(items_collection)
+
+    items_collection.should_receive(:destroy_all)
+
+    subject.clean_items!
+  end
 end

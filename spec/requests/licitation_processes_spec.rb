@@ -821,4 +821,49 @@ feature "LicitationProcesses" do
       end
     end
   end
+
+  scenario 'the old administrative_process items should be cleaned on update' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    AdministrativeProcess.make!(:compra_de_computadores)
+    Material.make!(:arame_farpado)
+
+    old_administrative_process = licitation_process.administrative_process
+
+    old_administrative_process.administrative_process_budget_allocations.first.items.size.should eq 1
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
+    end
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
+
+      fill_in 'Quantidade', :with => '5'
+      fill_in 'Valor total', :with => '20,00'
+    end
+
+    click_button 'Atualizar Processo Licitatório'
+
+    page.should have_notice 'Processo Licitatório editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Processo administrativo', :with => '1/2013'
+    end
+
+    old_administrative_process.administrative_process_budget_allocations.first.items.size.should eq 0
+  end
 end

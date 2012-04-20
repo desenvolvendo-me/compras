@@ -56,6 +56,8 @@ class LicitationProcess < ActiveRecord::Base
 
   before_save :set_modality, :clear_bidders_depending_on_modality
 
+  before_update :clean_old_administrative_process_items
+
   orderize :id
   filterize
 
@@ -129,6 +131,12 @@ class LicitationProcess < ActiveRecord::Base
 
     unless administrative_process_licitation_process.nil?
       errors.add(:administrative_process, :taken)
+    end
+  end
+
+  def clean_old_administrative_process_items
+    if administrative_process_id_changed?
+      AdministrativeProcessItemsCleaner.new(administrative_process_id_was).clean_items!
     end
   end
 end
