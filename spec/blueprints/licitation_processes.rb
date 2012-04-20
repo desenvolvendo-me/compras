@@ -1,6 +1,8 @@
 LicitationProcess.blueprint(:processo_licitatorio) do
   year { 2012 }
+  process { 1 }
   process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
@@ -27,6 +29,8 @@ end
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
   year { 2013 }
   process_date { Date.new(2012, 3, 20) }
+  process { 1 }
+  licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens_2) }
   object_description { "Descricao do computador" }
   pledge_type { PledgeType::ESTIMATED }

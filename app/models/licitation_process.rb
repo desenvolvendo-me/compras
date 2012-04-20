@@ -52,8 +52,6 @@ class LicitationProcess < ActiveRecord::Base
     allowing_blank.validates :envelope_delivery_time, :envelope_opening_time, :timeliness => { :type => :time }
   end
 
-  before_create :set_process, :set_licitation_number
-
   before_save :set_modality, :clear_bidders_depending_on_modality
 
   before_update :clean_old_administrative_process_items
@@ -71,36 +69,41 @@ class LicitationProcess < ActiveRecord::Base
     end
   end
 
-  protected
-
-  def set_process
-    last = self.class.where(:year => year).last
-
-    if last
-      self.process = last.process.succ
-    else
-      self.process = 1
-    end
+  def next_process
+    last_process_of_self_year.succ
   end
+
+  def next_licitation_number
+    last_licitation_number_of_self_year_and_modality.succ
+  end
+
+  protected
 
   def set_modality
     self.modality = administrative_process.modality
-  end
-
-  def set_licitation_number
-    last = self.class.where(:year => year, :administrative_process_id => administrative_process_id).last
-
-    if last
-      self.licitation_number = last.licitation_number.succ
-    else
-      self.licitation_number = 1
-    end
   end
 
   def clear_bidders_depending_on_modality
     unless invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
       licitation_process_invited_bidders.each(&:destroy)
     end
+  end
+
+  def last_process_of_self_year
+    last_by_self_year.try(:process).to_i
+  end
+
+  def last_by_self_year
+    self.class.where { |p| p.year.eq(year) }.order { id }.last
+  end
+
+  def last_licitation_number_of_self_year_and_modality
+    last_by_self_year_and_modality.try(:licitation_number).to_i
+  end
+
+  def last_by_self_year_and_modality
+    self.class.where { |p| p.year.eq(year) & p.modality.eq(modality) }.
+               order { id }.last
   end
 
   def cannot_have_duplicated_invited_bidders

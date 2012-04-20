@@ -127,4 +127,56 @@ describe LicitationProcess do
 
     subject.errors.messages[:administrative_process].should include 'já está em uso'
   end
+
+  describe '#next_process' do
+    context 'when do not has a licitation process with the same year' do
+      before do
+        subject.stub(:last_by_self_year).and_return(nil)
+      end
+
+      it 'should be 1' do
+        subject.next_process.should eq 1
+      end
+    end
+
+    context 'when the process of last licitation process is 4' do
+      before do
+        subject.stub(:last_by_self_year).and_return(last_by_self_year)
+      end
+
+      let :last_by_self_year do
+        double(:last_by_self_year, :process => 4)
+      end
+
+      it 'should be 5' do
+        subject.next_process.should eq 5
+      end
+    end
+  end
+
+  describe '#next_licitation_number' do
+    context 'when do not has a licitation process with the same year and modality' do
+      before do
+        subject.stub(:last_by_self_year_and_modality).and_return(nil)
+      end
+
+      it 'should be 1' do
+        subject.next_licitation_number.should eq 1
+      end
+    end
+
+    context 'when the licitation_number of last licitation process is 4' do
+      before do
+        subject.stub(:last_by_self_year_and_modality).and_return(last_by_self_year_and_modality)
+      end
+
+      let :last_by_self_year_and_modality do
+        double(:last_by_self_year_and_modality, :licitation_number => 4)
+      end
+
+      it 'should be 5' do
+        subject.next_licitation_number.should eq 5
+      end
+    end
+  end
 end
