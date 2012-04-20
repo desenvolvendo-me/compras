@@ -28,17 +28,11 @@ pt-BR:
         expense_kind: "Tipo de despesa"
         pledge_historic: "Histórico"
         licitation_modality: "Modalidade"
-        licitation: "Número da licitação"
-        process: "Número do processo"
+        licitation_process: "Processo licitatório"
+        licitation_process_licitation_number: "Número da licitação"
         management_contract: "Contrato"
         management_contract_signature_date: "Data do contrato"
         description: "Objeto"
         creditor: "Credor"
         founded_debt_contract: "Contrato de dívida fundada"
         items_total_value: "Valor total dos itens"
-
-  simple_form:
-    hints:
-      pledge:
-        licitation: 'Exemplo: "39/2011"'
-        process: 'Exemplo: "39/2011"'

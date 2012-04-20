@@ -15,6 +15,7 @@ feature "Pledges" do
     ExpenseKind.make!(:pagamentos)
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
+    LicitationProcess.make!(:processo_licitatorio)
     management_contract = ManagementContract.make!(:primeiro_contrato)
     Creditor.make!(:nohup)
     founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
@@ -45,8 +46,7 @@ feature "Pledges" do
       fill_modal 'Tipo de despesa', :with => 'Pagamentos', :field => 'Descrição'
       fill_modal 'Histórico', :with => 'Semestral', :field => 'Descrição'
       fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
-      fill_in 'Número da licitação', :with => '001/2012'
-      fill_in 'Número do processo', :with => '002/2013'
+      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
       fill_modal 'Contrato', :with => '001', :field => 'Número do contrato'
       fill_in 'Objeto', :with => 'Objeto de empenho'
     end
@@ -114,8 +114,8 @@ feature "Pledges" do
       page.should have_field 'Tipo de despesa', :with => 'Pagamentos'
       page.should have_field 'Histórico', :with => 'Semestral'
       page.should have_field 'Modalidade', :with => 'Pública'
-      page.should have_field 'Número da licitação', :with => '001/2012'
-      page.should have_field 'Número do processo', :with => '002/2013'
+      page.should have_field 'Processo licitatório', :with => '1/2012'
+      page.should have_field 'Número da licitação', :with => '1'
       page.should have_field 'Contrato', :with => "#{management_contract.id}/2012"
       page.should have_field 'Objeto', :with => 'Objeto de empenho'
     end
@@ -349,8 +349,8 @@ feature "Pledges" do
       page.should have_disabled_field 'Tipo de despesa'
       page.should have_disabled_field 'Histórico'
       page.should have_disabled_field 'Modalidade'
+      page.should have_disabled_field 'Processo licitatório'
       page.should have_disabled_field 'Número da licitação'
-      page.should have_disabled_field 'Número do processo'
       page.should have_disabled_field 'Contrato'
       page.should have_disabled_field 'Objeto'
     end
@@ -495,6 +495,28 @@ feature "Pledges" do
     end
   end
 
+  scenario 'clear delegate fields for licitation process' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Complementar' do
+
+      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+
+      page.should have_field 'Processo licitatório', :with => "1/2012"
+
+      clear_modal 'Processo licitatório'
+
+      page.should have_field 'Processo licitatório', :with => ''
+      page.should have_field 'Número da licitação', :with => ''
+    end
+  end
+
   scenario 'getting and cleaning signature date depending on contract' do
     ManagementContract.make!(:primeiro_contrato)
 
@@ -526,6 +548,7 @@ feature "Pledges" do
     ExpenseKind.make!(:pagamentos)
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
+    LicitationProcess.make!(:processo_licitatorio)
     management_contract = ManagementContract.make!(:primeiro_contrato)
     Material.make!(:arame_farpado)
 
@@ -550,8 +573,7 @@ feature "Pledges" do
       fill_modal 'Tipo de despesa', :with => 'Pagamentos', :field => 'Descrição'
       fill_modal 'Histórico', :with => 'Semestral', :field => 'Descrição'
       fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
-      fill_in 'Número da licitação', :with => '001/2012'
-      fill_in 'Número do processo', :with => '002/2013'
+      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
       fill_modal 'Contrato', :with => '001', :field => 'Número do contrato'
       fill_in 'Objeto', :with => 'Objeto de empenho'
     end

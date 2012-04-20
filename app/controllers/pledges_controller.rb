@@ -8,14 +8,6 @@ class PledgesController < CrudController
     super
   end
 
-  def edit
-    object = resource
-    object.licitation = object.joined_licitation
-    object.process = object.joined_process
-
-    super
-  end
-
   def create
     object = build_resource
     GenerateNumberPledgeExpirations.new(object.pledge_expirations).generate!

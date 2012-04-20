@@ -4,7 +4,7 @@ class Pledge < ActiveRecord::Base
   attr_accessible :pledge_historic_id, :management_contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
   attr_accessible :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
-  attr_accessible :pledge_expirations_attributes
+  attr_accessible :pledge_expirations_attributes, :licitation_process_id
 
   attr_accessor :licitation, :process
 
@@ -22,6 +22,7 @@ class Pledge < ActiveRecord::Base
   belongs_to :pledge_historic
   belongs_to :management_contract
   belongs_to :licitation_modality
+  belongs_to :licitation_process
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
   has_many :pledge_expirations, :dependent => :destroy
@@ -36,8 +37,9 @@ class Pledge < ActiveRecord::Base
   delegate :amount, :real_amount, :function, :subfunction, :government_program, :government_action,
            :budget_unit, :expense_nature,
            :to => :budget_allocation, :allow_nil => true, :prefix => true
+  delegate :licitation_number, :to => :licitation_process, :allow_nil => true, :prefix => true
 
-  validates :licitation, :process, :entity, :year, :management_unit, :presence => true
+  validates :licitation_process, :entity, :year, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :creditor, :presence => true
   validates :budget_allocation, :presence => true
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
@@ -53,21 +55,11 @@ class Pledge < ActiveRecord::Base
     allowing_blank.validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
   end
 
-  before_save :parse_licitation, :parse_process
-
   orderize :emission_date
   filterize
 
   def to_s
     id.to_s
-  end
-
-  def joined_licitation
-    "#{licitation_number}/#{licitation_year}" if licitation?
-  end
-
-  def joined_process
-    "#{process_number}/#{process_year}" if process?
   end
 
   def items_total_value
@@ -108,18 +100,6 @@ class Pledge < ActiveRecord::Base
       expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
       errors.add(:pledge_expirations, :invalid)
     end
-  end
-
-  def parse_licitation
-    parser = NumberYearParser.new(licitation)
-    self.licitation_number = parser.number
-    self.licitation_year = parser.year
-  end
-
-  def parse_process
-    parser = NumberYearParser.new(process)
-    self.process_number = parser.number
-    self.process_year = parser.year
   end
 
   def value_should_not_be_greater_than_budget_allocation_real_amount

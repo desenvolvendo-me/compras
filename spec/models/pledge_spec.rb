@@ -18,14 +18,14 @@ describe Pledge do
   it { should belong_to :reserve_fund }
   it { should belong_to :creditor }
   it { should belong_to :founded_debt_contract }
+  it { should belong_to :licitation_process }
 
   it { should have_many(:pledge_expirations).dependent(:destroy) }
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
 
-  it { should validate_presence_of :licitation }
-  it { should validate_presence_of :process }
+  it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
   it { should validate_presence_of :management_unit }
@@ -47,24 +47,6 @@ describe Pledge do
     subject.id = '1'
 
     subject.to_s.should eq '1'
-  end
-
-  it 'should return licitation_number/year as licitation method' do
-    subject.licitation.should eq nil
-
-    subject.licitation_number = '001'
-    subject.licitation_year = '2012'
-
-    subject.joined_licitation.should eq '001/2012'
-  end
-
-  it 'should return process_number/year as process method' do
-    subject.process.should eq nil
-
-    subject.process_number = '002'
-    subject.process_year = '2013'
-
-    subject.joined_process.should eq '002/2013'
   end
 
   it { should allow_value('2012').for(:year) }

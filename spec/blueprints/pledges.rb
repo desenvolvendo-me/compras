@@ -13,12 +13,7 @@ Pledge.blueprint(:empenho) do
   pledge_historic { PledgeHistoric.make!(:semestral) }
   management_contract { ManagementContract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
-  licitation_number { '001' }
-  licitation_year { '2012' }
-  licitation { '001/2012' }
-  process_number { '002' }
-  process_year { '2013' }
-  process { '002/2013' }
+  licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
@@ -41,12 +36,7 @@ Pledge.blueprint(:empenho_com_dois_vencimentos) do
   pledge_historic { PledgeHistoric.make!(:semestral) }
   management_contract { ManagementContract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
-  licitation_number { '001' }
-  licitation_year { '2012' }
-  licitation { '001/2012' }
-  process_number { '002' }
-  process_year { '2013' }
-  process { '002/2013' }
+  licitation_process { LicitationProcess.make!(:processo_licitatorio_computador) }
   description { 'Descricao' }
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
@@ -72,12 +62,7 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   pledge_historic { PledgeHistoric.make!(:semestral) }
   management_contract { ManagementContract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
-  licitation_number { '001' }
-  licitation_year { '2012' }
-  licitation { '001/2012' }
-  process_number { '002' }
-  process_year { '2013' }
-  process { '002/2013' }
+  licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }

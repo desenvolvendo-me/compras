@@ -25,6 +25,7 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_invited_bidder_documents, :through => :licitation_process_invited_bidders
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
+  has_many :pledges, :dependent => :restrict
 
   has_one :accreditation, :dependent => :destroy
 
