@@ -406,6 +406,8 @@ Tributario::Application.routes.draw do
   end
 
   resources :licitation_processes do
+    resource :accreditation
+
     collection do
       get :filter
       get :modal

@@ -1,5 +1,6 @@
 pt-BR:
   controllers:
+    accreditation: "Credenciamento"
     addresses: "Endereços"
     extra_credit: "Créditos Suplementares"
     regulatory_acts: "Atos Regulamentadores"

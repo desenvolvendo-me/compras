@@ -1,0 +1,32 @@
+<div class="tabs">
+  <ul>
+    <li><a href="#main">Principal</a></li>
+  </ul>
+
+  <div id="main">
+    <%= render 'main', :f => f %>
+  </div>
+</div>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+
+  $('#accreditation_licitation_commission_id').change(function(event, data) {
+    if (data) {
+      var record = data.record;
+
+      $('#accreditation_licitation_commission_president_name').val(record.data('president-name'));
+    }
+    else{
+      $('#accreditation_licitation_commission_president_name').val('');
+    }
+  });
+</script>

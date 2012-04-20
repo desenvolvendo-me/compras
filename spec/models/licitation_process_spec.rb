@@ -10,6 +10,7 @@ require 'app/models/licitation_process_invited_bidder'
 require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
 require 'app/models/budget_allocation'
+require 'app/models/accreditation'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -28,6 +29,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_invited_bidder_documents).through(:licitation_process_invited_bidders) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
+  it { should have_one(:accreditation).dependent(:destroy) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }

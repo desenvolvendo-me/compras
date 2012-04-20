@@ -9,6 +9,7 @@ class LicitationCommission < ActiveRecord::Base
 
   has_many :licitation_commission_responsibles, :dependent => :destroy
   has_many :licitation_commission_members, :dependent => :destroy
+  has_many :accreditations, :dependent => :restrict
 
   accepts_nested_attributes_for :licitation_commission_responsibles, :allow_destroy => true
   accepts_nested_attributes_for :licitation_commission_members, :allow_destroy => true
@@ -26,6 +27,15 @@ class LicitationCommission < ActiveRecord::Base
 
   def to_s
     id.to_s
+  end
+
+  def president
+    licitation_commission_members.first(:conditions => "role = '#{LicitationCommissionMemberRole::PRESIDENT}'")
+  end
+
+  def president_name
+    commission_president = president
+    commission_president.individual.to_s if commission_president
   end
 
   protected

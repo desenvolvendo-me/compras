@@ -4,6 +4,7 @@ require 'app/models/licitation_commission'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission_member'
 require 'app/models/individual'
+require 'app/models/accreditation'
 
 describe LicitationCommission do
   it { should validate_presence_of :commission_type }
@@ -16,6 +17,7 @@ describe LicitationCommission do
 
   it { should have_many(:licitation_commission_responsibles).dependent(:destroy) }
   it { should have_many(:licitation_commission_members).dependent(:destroy) }
+  it { should have_many(:accreditations).dependent(:restrict) }
 
   it 'should return id as to_s method' do
     subject.id = 2

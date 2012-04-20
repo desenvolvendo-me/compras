@@ -1,0 +1,4 @@
+<%= simple_form_for resource.localized, :url => resource_url, :remote => request.xhr? do |f| %>
+  <%= render 'form', :f => f %>
+  <%= render 'form_buttons', :f => f %>
+<% end %>
