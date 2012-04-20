@@ -7,7 +7,7 @@ class LicitationCommission < ActiveRecord::Base
 
   belongs_to :regulatory_act
 
-  has_many :licitation_commission_responsibles, :dependent => :destroy
+  has_many :licitation_commission_responsibles, :dependent => :destroy, :order => :id
   has_many :licitation_commission_members, :dependent => :destroy, :order => :id
   has_many :accreditations, :dependent => :restrict
 

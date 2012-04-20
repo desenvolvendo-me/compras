@@ -15,7 +15,7 @@ describe LicitationCommission do
 
   it { should belong_to :regulatory_act }
 
-  it { should have_many(:licitation_commission_responsibles).dependent(:destroy) }
+  it { should have_many(:licitation_commission_responsibles).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_commission_members).dependent(:destroy) }
   it { should have_many(:accreditations).dependent(:restrict) }
 
