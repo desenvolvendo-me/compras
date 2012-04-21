@@ -64,12 +64,6 @@ class LicitationProcess < ActiveRecord::Base
     "#{process}/#{year}"
   end
 
-  def set_dates(dates={})
-    if dates[:envelope_delivery_date] && dates[:envelope_delivery_time] && dates[:envelope_opening_date]  && dates[:envelope_opening_time]
-      update_attributes(dates)
-    end
-  end
-
   def next_process
     last_process_of_self_year.succ
   end

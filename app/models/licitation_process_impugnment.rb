@@ -29,23 +29,10 @@ class LicitationProcessImpugnment < ActiveRecord::Base
     }
   end
 
-  before_save :licitation_process_impugnment_updater!
-
   orderize :impugnment_date
   filterize
 
   def to_s
     id.to_s
-  end
-
-  private
-
-  def licitation_process_impugnment_updater!
-    licitation_process_impugnment_updater = LicitationProcessImpugnmentUpdater.new(self)
-    licitation_process_impugnment_updater.update_licitation_process_date!
-  end
-
-  def new_envelope_opening_date_equal_new_envelope_delivery_date?
-    new_envelope_opening_date == new_envelope_delivery_date
   end
 end
