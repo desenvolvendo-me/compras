@@ -3,7 +3,7 @@ class LicitationProcessImpugnment < ActiveRecord::Base
   attr_accessible :valid_reason
 
   has_enumeration_for :related
-  has_enumeration_for :situation
+  has_enumeration_for :situation, :create_helpers => true
 
   belongs_to :licitation_process
   belongs_to :person
