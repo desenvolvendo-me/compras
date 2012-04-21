@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/agency'
 require 'app/models/bank_account'
+require 'app/models/provider'
 
 describe Agency do
   it "return the name when call to_s" do

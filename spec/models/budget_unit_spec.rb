@@ -6,6 +6,8 @@ require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/budget_unit_responsible'
 require 'app/models/administrative_process'
+require 'app/models/direct_purchase'
+require 'app/models/employee'
 
 describe BudgetUnit do
   it 'should respond to to_s with description' do

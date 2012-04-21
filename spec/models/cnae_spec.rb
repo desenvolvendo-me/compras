@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/cnae'
+require 'app/models/provider'
 
 describe Cnae do
   it "return name when call to_s" do

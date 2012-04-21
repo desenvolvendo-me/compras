@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/models/creditor'
 require 'app/models/pledge'
+require 'app/models/reserve_fund'
 
 describe Creditor do
   it 'should return to_s as name' do

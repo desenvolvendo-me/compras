@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/payment_method'
+require 'app/models/direct_purchase'
+require 'app/models/licitation_process'
 
 describe PaymentMethod do
   it 'should return description as to_s method' do

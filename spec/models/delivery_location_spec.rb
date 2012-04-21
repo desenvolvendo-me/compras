@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/models/delivery_location'
 require 'app/models/purchase_solicitation'
+require 'app/models/direct_purchase'
 
 describe DeliveryLocation do
   context "#to_s" do

@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/management_contract'
+require 'app/models/pledge'
 
 describe ManagementContract do
   it { should belong_to(:entity) }

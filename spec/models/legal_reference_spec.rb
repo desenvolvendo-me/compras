@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/legal_reference'
+require 'app/models/direct_purchase'
 
 describe LegalReference do
   it 'should return description as to_s method' do

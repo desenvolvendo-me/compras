@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_modality'
+require 'app/models/pledge'
+require 'app/models/reserve_fund'
 
 describe LicitationModality do
   it { should belong_to :regulatory_act }

@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/legal_nature'
 require 'app/models/administration_type'
+require 'app/models/provider'
 
 describe LegalNature do
   it "return the name when call to_s" do

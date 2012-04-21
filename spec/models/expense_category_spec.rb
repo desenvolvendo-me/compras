@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/expense_category'
+require 'app/models/expense_nature'
 
 describe ExpenseCategory do
   it 'should return code as to_s' do

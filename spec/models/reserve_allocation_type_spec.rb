@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/reserve_allocation_type'
+require 'app/models/reserve_fund'
 
 describe ReserveAllocationType do
   it 'should return to_s as description' do

@@ -2,6 +2,9 @@
 require 'model_helper'
 require 'app/models/material'
 require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/pledge_item'
+require 'app/models/direct_purchase_budget_allocation_item'
+require 'app/models/administrative_process_budget_allocation_item'
 
 describe Material do
   it 'should return code and description as to_s method' do

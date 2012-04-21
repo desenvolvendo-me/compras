@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/pledge_historic'
+require 'app/models/pledge'
 
 describe PledgeHistoric do
   it "should return the description as to_s method" do

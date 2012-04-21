@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/period'
+require 'app/models/direct_purchase'
+require 'app/models/licitation_process'
 
 describe Period do
   it 'should return amount and pluralized as to_s' do

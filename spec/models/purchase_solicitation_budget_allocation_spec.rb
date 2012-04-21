@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/purchase_solicitation_budget_allocation'
+require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe PurchaseSolicitationBudgetAllocation do
   it { should validate_presence_of :budget_allocation }

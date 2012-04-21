@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/pledge_category'
+require 'app/models/pledge'
 
 describe PledgeCategory do
   it "should return the description as to_s method" do

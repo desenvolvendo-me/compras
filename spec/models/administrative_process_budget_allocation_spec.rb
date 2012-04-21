@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/administrative_process_budget_allocation'
 require 'app/models/administrative_process_budget_allocation_item'
+require 'app/models/material'
 
 describe AdministrativeProcessBudgetAllocation do
   it { should belong_to :administrative_process }
