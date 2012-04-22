@@ -75,7 +75,11 @@ feature "Accreditations" do
 
     page.should have_notice 'Credenciamento criado com sucesso.'
 
-    page.should have_field 'Comissão de licitação', :with => "#{licitation_commission.id}"
+    click_link 'Editar credenciamento'
+
+    within_tab 'Principal' do
+      page.should have_field 'Comissão de licitação', :with => "#{licitation_commission.id}"
+    end
   end
 
   scenario 'edit an existent accreditation' do

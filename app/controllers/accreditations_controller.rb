@@ -20,7 +20,7 @@ class AccreditationsController < CrudController
   end
 
   def create
-    create! { edit_resource_path }
+    create! { edit_licitation_process_path(resource.licitation_process.id) }
   end
 
   def update

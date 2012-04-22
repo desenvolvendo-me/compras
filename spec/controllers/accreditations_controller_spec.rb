@@ -38,7 +38,7 @@ describe AccreditationsController do
            },
            :licitation_process_id => licitation_process.id
 
-      response.should redirect_to(edit_licitation_process_accreditation_path(licitation_process.id))
+      response.should redirect_to(edit_licitation_process_path(licitation_process.id))
     end
   end
 
