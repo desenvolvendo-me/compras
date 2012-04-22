@@ -1,0 +1,9 @@
+<% if record.presenter? %>
+  <tr <%= record.presenter.formatted_data_attributes %> data-amount="<%= record.presenter.budget_allocation_amount %>">
+<% else %>
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>">
+<% end %>
+  <% attributes.each do |attribute| %>
+    <td><%= formatted_attribute record, attribute %></td>
+  <% end %>
+</tr>

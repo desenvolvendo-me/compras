@@ -28,3 +28,17 @@ ReserveFund.blueprint(:educacao_2011) do
   creditor { Creditor.make!(:nohup) }
   historic { "historic" }
 end
+
+ReserveFund.blueprint(:reparo_2011) do
+  entity { Entity.make!(:secretaria_de_educacao) }
+  year { 2011 }
+  status { ReserveFundStatus::RESERVED }
+  reserve_allocation_type { ReserveAllocationType.make!(:comum) }
+  date { Date.new(2012, 2, 21) }
+  budget_allocation { BudgetAllocation.make!(:reparo_2011) }
+  value { 100.5 }
+  process_number { "002" }
+  process_year { "2013" }
+  creditor { Creditor.make!(:nohup) }
+  historic { "historic" }
+end

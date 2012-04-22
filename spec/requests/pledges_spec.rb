@@ -626,4 +626,38 @@ feature "Pledges" do
       page.should have_field 'Valor total dos itens', :with => "80,00"
     end
   end
+
+  scenario 'should have localized budget_allocation_amount and reserve_fund_value for a new pledge' do
+    reserve_fund = ReserveFund.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Reserva de dotação', :with => '2011', :field => 'Exercício'
+
+      page.should have_field 'Saldo reserva', :with => "100,50"
+      page.should have_field 'Saldo da dotação', :with => "3.000,00"
+    end
+  end
+
+  scenario 'should have localized budget_allocation_amount and reserve_fund_value for an existent pledge' do
+    Pledge.make!(:empenho_saldo_maior_mil)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      page.should have_field 'Saldo reserva', :with => "100,50"
+      page.should have_field 'Saldo da dotação', :with => "2.899,50"
+    end
+  end
 end

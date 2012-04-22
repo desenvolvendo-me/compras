@@ -8,7 +8,7 @@ describe PledgePresenter do
   end
 
   let :pledge do
-    double(:budget_allocation_real_ammount => 500.0, :reserve_found_value => 300.0)
+    double(:budget_allocation_real_amount => 500.0, :reserve_fund_value => 300.0)
   end
 
   let(:helpers) do
@@ -18,11 +18,11 @@ describe PledgePresenter do
     end
   end
 
-  it 'should return budget_allocation_real_ammount with precision' do
-    subject.budget_allocation_real_ammount.should eq '500,00'
+  it 'should return budget_allocation_real_amount with precision' do
+    subject.budget_allocation_real_amount.should eq '500,00'
   end
 
-  it 'should return reserve_found_value with precision' do
-    subject.reserve_found_value.should eq '300,00'
+  it 'should return reserve_fund_value with precision' do
+    subject.reserve_fund_value.should eq '300,00'
   end
 end
