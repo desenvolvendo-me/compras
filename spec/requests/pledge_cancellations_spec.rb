@@ -136,6 +136,32 @@ feature "PledgeCancellations" do
     page.should have_field 'Valor a ser anulado', :with => '100,00'
   end
 
+  scenario 'should store value when kind is total' do
+    Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Anulações de Empenho'
+
+    click_link 'Criar Anulação de Empenho'
+
+    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    fill_in 'Valor a ser anulado', :with => '1,00'
+    select 'Total', :from => 'Tipo de anulação'
+    fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
+    select 'Normal', :from => 'Natureza da ocorrência'
+    fill_in 'Motivo', :with => 'Motivo para o anulamento'
+
+    click_button 'Criar Anulação de Empenho'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_field 'Valor a ser anulado', :with => '9,99'
+    page.should have_select 'Tipo de anulação', :selected => 'Total'
+  end
+
   scenario 'when select pledge_expiration first fill pledge' do
     pledge = Pledge.make!(:empenho)
 
