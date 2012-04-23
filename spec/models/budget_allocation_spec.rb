@@ -20,6 +20,7 @@ describe BudgetAllocation do
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :date }
+  it { should validate_presence_of :kind }
 
   it { should belong_to(:budget_unit) }
   it { should belong_to(:subfunction) }
@@ -37,6 +38,16 @@ describe BudgetAllocation do
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
+
+  it 'should validate presence of amount if kind is average' do
+    subject.stub(:divide?).and_return(true)
+    subject.should validate_presence_of :amount
+  end
+
+  it 'should not validate presence of amount if kind is average' do
+    subject.stub(:divide?).and_return(false)
+    subject.should_not validate_presence_of :amount
+  end
 
   it 'should calculate reserved value' do
     subject.reserved_value.should eq 0

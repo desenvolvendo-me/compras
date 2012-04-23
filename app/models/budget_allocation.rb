@@ -4,9 +4,10 @@ class BudgetAllocation < ActiveRecord::Base
   attr_accessible :government_action_id, :foresight, :education, :description
   attr_accessible :expense_nature_id, :capability_id, :goal
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
-  attr_accessible :alienation_appeal
+  attr_accessible :alienation_appeal, :kind
 
   has_enumeration_for :debt_type
+  has_enumeration_for :kind, :with => BudgetAllocationKind, :create_helpers => true
 
   belongs_to :entity
   belongs_to :budget_unit
@@ -26,7 +27,8 @@ class BudgetAllocation < ActiveRecord::Base
 
   delegate :function, :function_id, :to => :subfunction, :allow_nil => true
 
-  validates :date, :description, :presence => true
+  validates :date, :description, :kind, :presence => true
+  validates :amount, :presence => true, :if => :divide?
   validates :description, :uniqueness => { :allow_blank => true }
   validates :year, :mask => '9999', :allow_blank => true
 

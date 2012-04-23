@@ -1,0 +1,80 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :entity %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :year %>
+  </div>
+</div>
+
+<%= f.input :budget_unit %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :function, :as => :modal, :hidden_field => :function_id %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :subfunction, :disabled => f.object.function.blank? %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :government_program %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :government_action %>
+  </div>
+</div>
+
+<%= f.input :expense_nature %>
+<%= f.input :capability %>
+<%= f.input :description %>
+<%= f.input :goal %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :debt_type %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocation_type %>
+  </div>
+</div>
+
+<fieldset>
+  <legend>Classificação</legend>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :refinancing %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :health %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :alienation_appeal %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :education %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :foresight %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :personal %>
+    </div>
+  </div>
+</fieldset>
+
+<%= f.input :date %>

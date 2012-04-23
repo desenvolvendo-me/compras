@@ -20,6 +20,7 @@ BudgetAllocation.blueprint(:alocacao) do
   personal { false }
   date { Date.current }
   amount { "500,00" }
+  kind { BudgetAllocationKind::DIVIDE }
 end
 
 BudgetAllocation.blueprint(:alocacao_extra) do
@@ -43,6 +44,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   personal { false }
   amount { "200,00" }
   date { Date.current }
+  kind { BudgetAllocationKind::DIVIDE }
 end
 
 BudgetAllocation.blueprint(:conserto) do
@@ -66,6 +68,7 @@ BudgetAllocation.blueprint(:conserto) do
   personal { false }
   date { Date.current }
   amount { "300,00" }
+  kind { BudgetAllocationKind::DIVIDE }
 end
 
 BudgetAllocation.blueprint(:reparo_2011) do
@@ -89,4 +92,5 @@ BudgetAllocation.blueprint(:reparo_2011) do
   personal { false }
   date { Date.current }
   amount { "3000,00" }
+  kind { BudgetAllocationKind::DIVIDE }
 end

@@ -1,0 +1,23 @@
+<%= f.input :kind %>
+<%= f.input :amount %>
+
+<table id="month" class="records">
+  <thead>
+    <tr>
+      <th>Mês</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% (1..12).each do |month| %>
+      <tr>
+        <td>
+          <%= I18n.t('date.month_names')[month] %>
+        </td>
+        <td class="value">
+          0,00
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
