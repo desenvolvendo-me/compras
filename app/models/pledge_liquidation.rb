@@ -23,7 +23,7 @@ class PledgeLiquidation < ActiveRecord::Base
   validate :date_must_be_greater_than_expiration_date
   validate :validate_value
 
-  before_save :force_canceled_value_to_total_kind
+  before_validation :force_value_to_total_kind
 
   orderize :id
   filterize
@@ -34,9 +34,9 @@ class PledgeLiquidation < ActiveRecord::Base
 
   protected
 
-  def force_canceled_value_to_total_kind
+  def force_value_to_total_kind
     if pledge_expiration.present? && total?
-      canceled_value = pledge_expiration.value
+      self.value = pledge_expiration.value
     end
   end
 

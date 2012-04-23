@@ -219,6 +219,32 @@ feature "PledgeLiquidations" do
     end
   end
 
+  scenario 'create a new pledge_liquidation with value when kind is total' do
+    Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Liquidações de Empenhos'
+
+    click_link 'Criar Liquidação de Empenho'
+
+    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    select 'Total', :from => 'Tipo de liquidação'
+    fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
+
+    click_button 'Criar Liquidação de Empenho'
+
+    page.should have_notice 'Liquidação de Empenho criado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_field 'Valor *', :with => '9,99'
+    page.should have_select 'Tipo de liquidação', :selected => 'Total'
+    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
+  end
+
   scenario 'should have all disabled fields when edit existent pledge_liquidation' do
     pledge = Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
