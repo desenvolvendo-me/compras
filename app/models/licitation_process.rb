@@ -26,6 +26,7 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
+  has_many :judgment_commission_advices, :dependent => :restrict
 
   has_one :accreditation, :dependent => :destroy
 
@@ -70,6 +71,10 @@ class LicitationProcess < ActiveRecord::Base
 
   def next_licitation_number
     last_licitation_number_of_self_year_and_modality.succ
+  end
+
+  def next_judgment_commission_advice
+    judgment_commission_advices.count.succ
   end
 
   protected

@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      judgment_commission_advice:
+        one: "Parecer da Comissão Julgadora"
+        other: "Pareceres das Comissões Julgadoras"
+
+    attributes:
+      judgment_commission_advice:
+        licitation_process: "Processo licitatório"
+        licitation_commission: "Comissão julgadora"
+        minutes_number: "Número da ata"
+        year: "Ano"
+        licitation_process_modality_humanize: "Modalidade"
+        licitation_commission_president_name: "Presidente da comissão"
+        judgment_sequence: "Sequência de julgamento"

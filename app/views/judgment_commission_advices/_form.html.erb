@@ -1,0 +1,43 @@
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Principal</a></li>
+  </ul>
+
+  <div id="general">
+    <%= render 'general', :f => f %>
+  </div>
+</div>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+
+  $('#judgment_commission_advice_licitation_process_id').change(function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $('#judgment_commission_advice_licitation_process_modality_humanize').val(record.data("modality-humanize"));
+      $('#judgment_commission_advice_judgment_sequence').val(record.data("next-judgment-commission-advice"));
+    } else {
+      $('#judgment_commission_advice_licitation_process_modality_humanize').val('');
+      $('#judgment_commission_advice_judgment_sequence').val('');
+    }
+  });
+
+  $('#judgment_commission_advice_licitation_commission_id').change(function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $('#judgment_commission_advice_licitation_commission_president_name').val(record.data("president-name"));
+    } else {
+      $('#judgment_commission_advice_licitation_commission_president_name').val('');
+    }
+  });
+</script>
