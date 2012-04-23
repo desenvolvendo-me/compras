@@ -5,6 +5,7 @@ class PledgeExpiration < ActiveRecord::Base
 
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
+  has_many :pledge_liquidation_cancellations, :dependent => :restrict
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
@@ -22,8 +23,12 @@ class PledgeExpiration < ActiveRecord::Base
     pledge_liquidations.sum(:value)
   end
 
+  def canceled_liquidations_value
+    pledge_liquidation_cancellations.sum(:value)
+  end
+
   def balance
-    value - canceled_value - liquidations_value
+    value - canceled_value - liquidations_value + canceled_liquidations_value
   end
 
   def to_s

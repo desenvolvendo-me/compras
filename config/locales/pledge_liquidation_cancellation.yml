@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_liquidation_cancellation:
+        one: "Anulação de Liquidação de Empenho"
+        other: "Anulações de Liquidações de Empenho"
+
+    attributes:
+      pledge_liquidation_cancellation:
+        pledge: "Empenho"
+        emission_date: "Data de emissão"
+        pledge_value: "Valor do empenho"
+        pledge_expiration: "Parcela"
+        expiration_date: "Vencimento"
+        pledge_expiration_value: "Valor do vencimento"
+        balance: "Saldo"
+        kind: "Tipo de anulação"
+        value: "Valor a ser anulado"
+        date: "Data"
+        reason: "Motivo"

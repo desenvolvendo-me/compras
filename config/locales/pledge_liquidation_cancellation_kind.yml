@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    pledge_liquidation_cancellation_kind:
+      total: "Total"
+      partial: "Parcial"

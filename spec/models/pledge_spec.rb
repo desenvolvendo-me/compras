@@ -5,6 +5,7 @@ require 'app/models/pledge_item'
 require 'app/models/pledge_expiration'
 require 'app/models/pledge_cancellation'
 require 'app/models/pledge_liquidation'
+require 'app/models/pledge_liquidation_cancellation'
 
 describe Pledge do
   it { should belong_to :entity }
@@ -24,6 +25,7 @@ describe Pledge do
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
+  it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :entity }

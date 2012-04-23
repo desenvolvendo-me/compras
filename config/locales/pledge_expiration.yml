@@ -12,4 +12,6 @@ pt-BR:
         expiration_date: "Vencimento"
         value: "Valor"
         canceled_value: "Valor cancelado"
+        liquidations_value: "Valor liquidado"
+        canceled_liquidations_value: "Valor liquidado anulado"
         balance: "Saldo"

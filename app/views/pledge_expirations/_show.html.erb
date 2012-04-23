@@ -33,6 +33,12 @@
           <%= resource_class.human_attribute_name :canceled_value %>
         </th>
         <th>
+          <%= resource_class.human_attribute_name :liquidations_value %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :canceled_liquidations_value %>
+        </th>
+        <th>
           <%= resource_class.human_attribute_name :balance %>
         </th>
       </tr>
@@ -45,6 +51,12 @@
         </td>
         <td>
           <%= resource.presenter.canceled_value %>
+        </td>
+        <td>
+          <%= resource.presenter.liquidations_value %>
+        </td>
+        <td>
+          <%= resource.presenter.canceled_liquidations_value %>
         </td>
         <td>
           <%= resource.presenter.balance %>

@@ -28,6 +28,7 @@ class Pledge < ActiveRecord::Base
   has_many :pledge_expirations, :dependent => :destroy
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
+  has_many :pledge_liquidation_cancellations, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
   accepts_nested_attributes_for :pledge_expirations, :allow_destroy => true
