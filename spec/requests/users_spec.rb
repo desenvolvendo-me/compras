@@ -85,7 +85,6 @@ feature "Users" do
   end
 
   scenario 'open the window to new perfil through the perfil modal' do
-    pending 'waiting for https://github.com/thoughtbot/capybara-webkit/pull/314'
     click_link 'Administração'
 
     click_link 'Usuários'
@@ -95,11 +94,7 @@ feature "Users" do
     within_modal 'Perfil' do
       click_button 'Pesquisar'
 
-      click_link 'Novo'
-    end
-
-    within_window(page.driver.browser.window_handles.last) do
-      page.should have_content 'Criar Perfil'
+      page.should have_link 'Novo', :href => '/profiles/new'
     end
   end
 
