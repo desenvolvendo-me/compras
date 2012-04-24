@@ -3,7 +3,7 @@ pt-BR:
     models:
       revenue_category:
         one: "Categoria da Receita"
-        other: "Categorias da Receitas"
+        other: "Categorias das Receitas"
 
     attributes:
       revenue_category:
