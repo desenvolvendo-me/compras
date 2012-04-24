@@ -1,10 +1,15 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Principal</a></li>
+    <li><a href="#members">Membros</a></li>
   </ul>
 
   <div id="general">
     <%= render 'general', :f => f %>
+  </div>
+
+  <div id="members">
+    <%= render 'members', :f => f %>
   </div>
 </div>
 
@@ -38,6 +43,16 @@
       $('#judgment_commission_advice_licitation_commission_president_name').val(record.data("president-name"));
     } else {
       $('#judgment_commission_advice_licitation_commission_president_name').val('');
+    }
+  });
+
+  $(".judgment_commission_advice").delegate('.individual', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $(this).closest('.nested').find('.cpf').val(record.data('cpf'));
+    } else {
+      $(this).closest('.nested').find('.cpf').val('');
     }
   });
 </script>

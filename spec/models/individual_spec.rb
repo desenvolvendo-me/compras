@@ -40,6 +40,7 @@ describe Individual do
   it { should have_many(:licitation_commission_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_commission_members).dependent(:restrict) }
   it { should have_many(:accredited_representatives).dependent(:restrict) }
+  it { should have_many(:judgment_commission_advice_members).dependent(:restrict) }
 
   it { should validate_presence_of :cpf }
   it { should validate_presence_of :mother }

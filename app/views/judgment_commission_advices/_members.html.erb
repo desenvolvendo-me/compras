@@ -1,0 +1,27 @@
+<%= f.error :judgment_commission_advice_members %>
+
+<div id="licitation-commission-members">
+  <%= f.association :judgment_commission_advice_members, :collection => localized(f.object.judgment_commission_advice_members) do |p| %>
+    <%= render 'licitation_commission_members/form', :f => p %>
+  <% end %>
+</div>
+
+<p>
+  <input type="button" class="button affirmative add-member" value="Adicionar Membro">
+</p>
+
+<%= mustache 'member-template' do %>
+  <%= f.association :judgment_commission_advice_members_attributes, :collection => f.object.judgment_commission_advice_members.build, :index => '{{uuid_member}}' do |p| %>
+    <%= render 'licitation_commission_members/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#member-template").nestedForm({
+    add: '.add-member',
+    remove: '.remove-member',
+    target: '#licitation-commission-members',
+    uuid: 'uuid_member',
+    fieldToRemove: '.member'
+  });
+</script>

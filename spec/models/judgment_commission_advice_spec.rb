@@ -6,6 +6,8 @@ describe JudgmentCommissionAdvice do
   it { should belong_to :licitation_process }
   it { should belong_to :licitation_commission }
 
+  it { should have_many(:judgment_commission_advice_members).dependent(:destroy).order(:id) }
+
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :licitation_commission }
   it { should validate_presence_of :year }
@@ -19,5 +21,25 @@ describe JudgmentCommissionAdvice do
     subject.year = 2012
 
     subject.to_s.should eq '1/2012'
+  end
+
+  it "the duplicated individuals on members should be invalid except the first" do
+    individual_one = subject.judgment_commission_advice_members.build(:individual_id => 1)
+    individual_two = subject.judgment_commission_advice_members.build(:individual_id => 1)
+
+    subject.valid?
+
+    individual_one.errors.messages[:individual_id].should be_nil
+    individual_two.errors.messages[:individual_id].should include "já está em uso"
+  end
+
+  it "the diferent individuals on members should be valid" do
+    individual_one = subject.judgment_commission_advice_members.build(:individual_id => 1)
+    individual_two = subject.judgment_commission_advice_members.build(:individual_id => 2)
+
+    subject.valid?
+
+    individual_one.errors.messages[:individual_id].should be_nil
+    individual_two.errors.messages[:individual_id].should be_nil
   end
 end
