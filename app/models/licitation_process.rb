@@ -27,6 +27,7 @@ class LicitationProcess < ActiveRecord::Base
   has_many :licitation_process_appeals, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
   has_many :judgment_commission_advices, :dependent => :restrict
+  has_many :licitation_notices, :dependent => :destroy
 
   has_one :accreditation, :dependent => :destroy
 

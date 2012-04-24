@@ -26,6 +26,7 @@ describe LicitationProcess do
   it { should belong_to :period }
   it { should belong_to :payment_method }
   it { should have_and_belong_to_many(:document_types) }
+  it { should have_many(:licitation_notices).dependent(:destroy) }
   it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_invited_bidders).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_invited_bidder_documents).through(:licitation_process_invited_bidders) }

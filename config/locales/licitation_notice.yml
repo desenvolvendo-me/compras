@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_notice:
+        one: "Aviso de Licitação"
+        other: "Avisos de Licitações"
+
+    attributes:
+      licitation_notice:
+        date: "Data do aviso"
+        licitation_process: "Processo licitatório"
+        licitation_process_licitation_number: "Número da licitação"
+        licitation_process_administrative_process_modality_humanize: "Modalidade"
+        licitation_process_object_description: "Objeto da licitação"
+        licitation_process_process_date: "Data do processo"
+        number: "Número do aviso"
+        observations: "Observações gerais"
