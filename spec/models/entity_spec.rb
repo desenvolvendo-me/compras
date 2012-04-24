@@ -17,6 +17,7 @@ require 'app/models/management_contract'
 require 'app/models/extra_credit'
 require 'app/models/revenue_nature'
 require 'app/models/revenue_accounting'
+require 'app/models/pledge_cancellation'
 
 describe Entity do
   it 'should return the name as to_s method' do
@@ -41,6 +42,7 @@ describe Entity do
   it { should have_many(:extra_credits).dependent(:restrict) }
   it { should have_many(:revenue_natures).dependent(:restrict) }
   it { should have_many(:revenue_accountings).dependent(:restrict) }
+  it { should have_many(:pledge_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :name }
 end

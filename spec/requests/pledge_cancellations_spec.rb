@@ -17,6 +17,8 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
+    fill_modal 'Entidade', :with => 'Detran'
+    fill_in 'Ano', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     fill_in 'Valor a ser anulado', :with => '1,00'
@@ -32,6 +34,9 @@ feature "PledgeCancellations" do
     within_records do
       page.find('a').click
     end
+
+    page.should have_field 'Entidade', :with => 'Detran'
+    page.should have_field 'Ano', :with => '2012'
 
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_disabled_field 'Data de emissão'
@@ -145,6 +150,8 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
+    fill_modal 'Entidade', :with => 'Detran'
+    fill_in 'Ano', :with => '2012'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     fill_in 'Valor a ser anulado', :with => '1,00'
     select 'Total', :from => 'Tipo de anulação'

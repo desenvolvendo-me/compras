@@ -12,7 +12,13 @@ describe PledgeCancellation do
   it { should validate_presence_of :date }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :reason }
+  it { should validate_presence_of :entity }
+  it { should validate_presence_of :year }
 
+  it { should_not allow_value('2a12').for(:year) }
+  it { should allow_value('2012').for(:year) }
+
+  it { should belong_to :entity }
   it { should belong_to :pledge }
   it { should belong_to :pledge_expiration }
 
