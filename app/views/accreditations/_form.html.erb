@@ -1,10 +1,15 @@
 <div class="tabs">
   <ul>
     <li><a href="#main">Principal</a></li>
+    <li><a href="#representatives">Representantes</a></li>
   </ul>
 
   <div id="main">
     <%= render 'main', :f => f %>
+  </div>
+
+  <div id="representatives">
+    <%= render 'representatives', :f => f %>
   </div>
 </div>
 
@@ -29,4 +34,30 @@
       $('#accreditation_licitation_commission_president_name').val('');
     }
   });
+
+  function setProvidersModalUrl() {
+    var licitationProcessId = <%= f.object.licitation_process_id %>;
+    var providerFields = $('.provider');
+
+    $.each(providerFields, function(){
+      $(this).attr("data-modal-url", "<%= modal_providers_path %>?licitation_process_id=" + licitationProcessId);
+    });
+  }
+
+  function calcRepresentativeNumber() {
+    $('.representative .hidden .destroy[value=false]').each(function(index, item){
+      $(this).parent().parent().find('.number').val(index + 1);
+    });
+  }
+
+  $('form').delegate('.remove-representative', 'click', function() {
+    calcRepresentativeNumber();
+  });
+
+  $('form').bind('append.mustache', function(){
+    setProvidersModalUrl();
+    calcRepresentativeNumber();
+  });
+
+  calcRepresentativeNumber();
 </script>

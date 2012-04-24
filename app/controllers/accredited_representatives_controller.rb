@@ -1,0 +1,2 @@
+class AccreditedRepresentativesController < CrudController
+end

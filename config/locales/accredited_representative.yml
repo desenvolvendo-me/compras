@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      accredited_representative:
+        one: "Representante Credenciado"
+        other: "Representantes Credenciados"
+
+    attributes:
+      accredited_representative:
+        accreditation: "Credenciamento"
+        individual: "Pessoa"
+        provider: "Fornecedor"
+        role: "Cargo ou função"
+        number: "Número"

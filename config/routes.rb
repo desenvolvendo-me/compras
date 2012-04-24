@@ -1,5 +1,12 @@
 Tributario::Application.routes.draw do
 
+  resources :accredited_representatives do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :fiscal_years do
     collection do
       get :filter

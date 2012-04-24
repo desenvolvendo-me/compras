@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/accreditation'
 require 'app/models/licitation_commission'
 require 'app/models/licitation_process'
+require 'app/models/accredited_representative'
 
 describe Accreditation do
   it { should validate_presence_of(:licitation_process) }
@@ -10,6 +11,8 @@ describe Accreditation do
 
   it { should belong_to(:licitation_process) }
   it { should belong_to(:licitation_commission) }
+
+  it { should have_many(:accredited_representatives).dependent(:destroy) }
 
   it 'should return id as to_s method' do
     subject.id = 2

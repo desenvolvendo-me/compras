@@ -28,6 +28,7 @@ class LicitationProcess < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
   has_many :judgment_commission_advices, :dependent => :restrict
   has_many :licitation_notices, :dependent => :destroy
+  has_many :providers, :through => :licitation_process_invited_bidders, :dependent => :restrict
 
   has_one :accreditation, :dependent => :destroy
 

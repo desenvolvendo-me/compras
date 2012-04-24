@@ -7,6 +7,7 @@ require 'app/models/identity'
 require 'app/models/provider_partner'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission_member'
+require 'app/models/accredited_representative'
 
 describe Individual do
   it "delegate to person to_s method" do
@@ -38,6 +39,7 @@ describe Individual do
   it { should have_many(:provider_partners).dependent(:restrict) }
   it { should have_many(:licitation_commission_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_commission_members).dependent(:restrict) }
+  it { should have_many(:accredited_representatives).dependent(:restrict) }
 
   it { should validate_presence_of :cpf }
   it { should validate_presence_of :mother }

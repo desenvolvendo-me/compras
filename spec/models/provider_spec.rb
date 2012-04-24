@@ -8,6 +8,8 @@ require 'app/models/direct_purchase'
 require 'app/models/person'
 require 'app/models/company'
 require 'app/models/individual'
+require 'app/models/licitation_process_invited_bidder'
+require 'app/models/accredited_representative'
 
 describe Provider do
   it { should belong_to :person }
@@ -23,6 +25,8 @@ describe Provider do
   it { should have_many(:provider_licitation_documents).dependent(:destroy).order(:id) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:licitation_process_invited_bidders).dependent(:restrict) }
+  it { should have_many(:accredited_representatives).dependent(:restrict) }
+  it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_invited_bidders) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration_date }

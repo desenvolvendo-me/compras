@@ -8,6 +8,7 @@ class Individual < ActiveRecord::Base
   has_many :provider_partners, :dependent => :restrict
   has_many :licitation_commission_responsibles, :dependent => :restrict
   has_many :licitation_commission_members, :dependent => :restrict
+  has_many :accredited_representatives, :dependent => :restrict
 
   has_one :address, :as => :addressable, :conditions => { :correspondence => false }, :dependent => :destroy
   has_one :correspondence_address, :as => :addressable, :conditions => { :correspondence => true }, :class_name => 'Address', :dependent => :destroy

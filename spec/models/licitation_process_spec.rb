@@ -13,6 +13,7 @@ require 'app/models/budget_allocation'
 require 'app/models/accreditation'
 require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
+require 'app/models/provider'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -35,6 +36,7 @@ describe LicitationProcess do
   it { should have_one(:accreditation).dependent(:destroy) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
+  it { should have_many(:providers).dependent(:restrict).through(:licitation_process_invited_bidders) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }

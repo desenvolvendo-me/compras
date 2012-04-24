@@ -234,6 +234,7 @@ pt-BR:
       must_be_equal_to_estimated_value: 'deve ser igual ao valor previsto'
       must_have_one_president: 'deve haver um presidente'
       must_have_only_one_president: 'deve haver apenas um presidente'
+      cannot_have_providers_that_are_not_in_licitation_process: 'não pode ter fornecedores que não estejam no processo licitatório'
 
   activerecord:
     errors:
