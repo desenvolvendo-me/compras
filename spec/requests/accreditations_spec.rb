@@ -130,7 +130,7 @@ feature "Accreditations" do
 
     page.should have_link "Apagar #{accreditation}"
 
-    click_link "Apagar #{accreditation}"
+    click_link "Apagar #{accreditation}", :confirm => true
 
     page.should have_notice 'Credenciamento apagado com sucesso.'
 
