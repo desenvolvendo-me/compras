@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      subpledge:
+        one: "Subempenho"
+        other: "Subempenho"
+
+    attributes:
+      subpledge:
+        entity: "Entidade"
+        year: "Ano"
+        pledge: "Empenho"
+        pledge_creditor: "Credor do empenho"
+        pledge_value: "Valor do empenho"
+        emission_date: "Data de emissão"
+        balance: "Saldo a subempenhar"
+        number: "Subempenho"
+        creditor: "Credor"
+        date: "Data"
+        value: "Valor"
+        process_number: "Número do processo"
+        description: "Objeto"

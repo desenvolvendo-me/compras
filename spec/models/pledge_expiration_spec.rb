@@ -21,4 +21,10 @@ describe PledgeExpiration do
     subject.stub(:canceled_liquidations_value).and_return(3)
     subject.balance.should eq 8
   end
+
+  it 'should return correct cancellation_moviments value' do
+    subject.stub(:canceled_value).and_return(2)
+    subject.stub(:liquidations_value).and_return(3)
+    subject.cancellation_moviments.should eq 5
+  end
 end

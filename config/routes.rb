@@ -714,6 +714,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :subpledges do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :type_improvements do
     collection do
       get :modal

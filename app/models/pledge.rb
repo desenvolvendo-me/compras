@@ -9,7 +9,7 @@ class Pledge < ActiveRecord::Base
   attr_accessor :licitation, :process
 
   has_enumeration_for :material_kind
-  has_enumeration_for :pledge_type
+  has_enumeration_for :pledge_type, :create_helpers => true
 
   belongs_to :creditor
   belongs_to :founded_debt_contract
@@ -29,6 +29,7 @@ class Pledge < ActiveRecord::Base
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
+  has_many :subpledges, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
   accepts_nested_attributes_for :pledge_expirations, :allow_destroy => true
@@ -59,12 +60,24 @@ class Pledge < ActiveRecord::Base
   orderize :emission_date
   filterize
 
+  def self.global_or_estimated
+    where { pledge_type.eq(PledgeType::GLOBAL) | pledge_type.eq(PledgeType::ESTIMATED) }
+  end
+
   def to_s
     id.to_s
   end
 
   def items_total_value
     pledge_items.map(&:estimated_total_price).compact.sum
+  end
+
+  def balance
+    value - pledge_expiration_balances
+  end
+
+  def pledge_expiration_balances
+    pledge_expirations.compact.sum(&:cancellation_moviments)
   end
 
   protected

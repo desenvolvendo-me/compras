@@ -224,7 +224,9 @@ pt-BR:
       must_be_greater_than_last_expiration_date: "deve ser maior que a data da última parcela"
       pledge_expiration_value_sum_must_be_equals_to_pledge_value: "a soma de todos os valores deve ser igual ao valor do empenho"
       must_not_be_greater_than_pledge_expiration_balance: "não pode ser superior ao saldo"
+      must_not_be_greater_than_pledge_balance: "não pode ser superior ao saldo"
       must_not_be_greater_than_pledge_expiration_liquidations: "não pode ser superior a soma das liquidações da parcela"
+      must_be_greater_or_equal_to_last_subpledge_date: "não pode ser menor que a data do último subempenho (%{restriction})"
       must_be_greater_or_equal_to_last_pledge_cancellation_date: "não pode ser menor que a data da última anulação (%{restriction})"
       must_be_greater_or_equal_to_last_pledge_liquidation_cancellation_date: "não pode ser menor que a data da última anulação de liquidação (%{restriction})"
       must_be_greater_or_equal_to_last_pledge_liquidation_date: "não pode ser menor que a data da última liquidação (%{restriction})"
@@ -235,6 +237,7 @@ pt-BR:
       must_have_one_president: 'deve haver um presidente'
       must_have_only_one_president: 'deve haver apenas um presidente'
       cannot_have_providers_that_are_not_in_licitation_process: 'não pode ter fornecedores que não estejam no processo licitatório'
+      must_be_pledge_global_or_estimated: 'deve ser do tipo global ou estimativo'
 
   activerecord:
     errors:

@@ -31,6 +31,10 @@ class PledgeExpiration < ActiveRecord::Base
     value - canceled_value - liquidations_value + canceled_liquidations_value
   end
 
+  def cancellation_moviments
+    canceled_value + liquidations_value
+  end
+
   def to_s
     "#{number}"
   end
