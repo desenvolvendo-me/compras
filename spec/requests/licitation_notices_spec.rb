@@ -16,6 +16,13 @@ feature "LicitationNotices" do
     click_link 'Criar Aviso de Licitação'
 
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+
+    page.should have_field 'Processo licitatório', :with => '1/2012'
+    page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
+    page.should have_field 'Número da licitação', :with => '1'
+    page.should have_field 'Data do processo', :with => '19/03/2012'
+    page.should have_field 'Objeto da licitação', :with => 'Descricao'
+
     fill_in 'Data do aviso', :with => '05/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo'
 
@@ -132,6 +139,7 @@ feature "LicitationNotices" do
 
   scenario 'destroy an existent licitation_notice' do
     licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
+
     click_link 'Processos'
 
     click_link 'Avisos de Licitações'
@@ -144,5 +152,23 @@ feature "LicitationNotices" do
 
     page.should_not have_content I18n.l(Date.current)
     page.should_not have_content "A licitação começou."
+  end
+
+  scenario 'delegate fields should be empty when clear licitaion process' do
+    licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
+
+    click_link 'Processos'
+
+    click_link 'Avisos de Licitações'
+
+    click_link licitation_notice.to_s
+
+    clear_modal 'Processo licitatório'
+
+    page.should have_field 'Processo licitatório', :with => ''
+    page.should have_field 'Modalidade', :with => ''
+    page.should have_field 'Número da licitação', :with => ''
+    page.should have_field 'Data do processo', :with => ''
+    page.should have_field 'Objeto da licitação', :with => ''
   end
 end
