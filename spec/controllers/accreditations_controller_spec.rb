@@ -27,7 +27,7 @@ describe AccreditationsController do
   end
 
   describe 'POST #create' do
-    it 'should redirect to current accreditation edit link when created successful' do
+    it 'should redirect to licitation process edit link when created successful' do
       licitation_process = LicitationProcess.make!(:processo_licitatorio)
       licitation_commission = LicitationCommission.make!(:comissao)
 
