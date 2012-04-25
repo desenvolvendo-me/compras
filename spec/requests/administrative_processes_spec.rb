@@ -150,13 +150,15 @@ feature "AdministrativeProcesses" do
 
       click_button 'Adicionar Dotação'
 
-      within '.administrative-process-budget-allocation:last' do
+      within 'div.administrative-process-budget-allocation:first' do
         fill_in 'Valor previsto', :with => '30,00'
       end
 
       page.should have_field 'Valor total', :with => '50,00'
 
-      click_button 'Remover Dotação'
+      within 'div.administrative-process-budget-allocation:last' do
+        click_button 'Remover Dotação'
+      end
 
       page.should have_field 'Valor total', :with => '30,00'
     end
@@ -199,7 +201,7 @@ feature "AdministrativeProcesses" do
 
       click_button 'Adicionar Dotação'
 
-      within '.administrative-process-budget-allocation:last' do
+      within 'div.administrative-process-budget-allocation:first' do
         fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
         fill_in 'Valor previsto', :with => '30,00'
       end
