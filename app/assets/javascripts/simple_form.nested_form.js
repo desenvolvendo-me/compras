@@ -20,7 +20,8 @@
       hiddenDestroyInput: 'input.hidden.destroy',
       target: '#targe',
       uuid: 'uuid',
-      right: false
+      right: false,
+      appendItem: true
     };
     var options = $.extend({}, defaults, options);
 
@@ -36,7 +37,11 @@
       var binds = {};
       binds[options.uuid] = _.uniqueId('fresh-');
 
-      $(options.target).append(template.mustache(binds)).trigger('append.mustache');
+      if (options.appendItem) {
+        $(options.target).append(template.mustache(binds)).trigger('append.mustache');
+      } else {
+        $(options.target).prepend(template.mustache(binds)).trigger('append.mustache');
+      }
 
       if (options.right) {
         displayFirstLabels();
