@@ -106,7 +106,7 @@ feature "LicitationProcessImpugnments" do
     page.should have_disabled_field 'Data da abertura dos envelopes'
     page.should have_disabled_field 'Hora da abertura'
 
-    page.should have_disabled_button 'Atualizar Impugnação do Processo Licitatório'
+    page.should_not have_button 'Atualizar Impugnação do Processo Licitatório'
   end
 
   scenario 'destroy an existent licitation_process_impugnment' do

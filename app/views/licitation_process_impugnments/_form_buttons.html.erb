@@ -1,4 +1,4 @@
 <div class="buttons">
-  <%= f.button :submit, :disabled => !resource.pending? %>
+  <%= f.button :submit if resource.pending? %>
   <%= f.button :cancel %>
 </div>
