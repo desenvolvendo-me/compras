@@ -59,5 +59,5 @@
     }
   }).change();
 
-  $('#revenue_accounting_value').on('keyup', calculateDivide);
+  $('form.revenue_accounting').delegate('#revenue_accounting_value', 'keyup', calculateDivide);
 </script>
