@@ -19,7 +19,7 @@ feature "Cnaes" do
     fill_in 'Código', :with => '8112500'
     fill_modal 'Grau de risco', :with => 'Leve'
 
-    click_button 'Criar CNAE'
+    click_button 'Salvar'
 
     page.should have_notice 'CNAE criado com sucesso.'
 
@@ -44,7 +44,7 @@ feature "Cnaes" do
     fill_in 'Código', :with => '4723700'
     fill_modal 'Grau de risco', :with => 'Médio'
 
-    click_button 'Atualizar CNAE'
+    click_button 'Salvar'
 
     page.should have_notice 'CNAE editado com sucesso.'
 
@@ -64,7 +64,7 @@ feature "Cnaes" do
 
     click_link 'Aluguel de outras máquinas'
 
-    click_link 'Apagar Aluguel de outras máquinas', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'CNAE apagado com sucesso.'
 

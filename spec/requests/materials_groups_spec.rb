@@ -16,7 +16,7 @@ feature "MaterialsGroups" do
     fill_in 'Código', :with => '01'
     fill_in 'Descrição', :with => 'Informática'
 
-    click_button 'Criar Grupo de Materiais'
+    click_button 'Salvar'
 
     page.should have_notice 'Grupo de Materiais criado com sucesso.'
 
@@ -38,7 +38,7 @@ feature "MaterialsGroups" do
     fill_in 'Código', :with => '02'
     fill_in 'Descrição', :with => 'Materiais de escritorio'
 
-    click_button 'Atualizar Grupo de Materiais'
+    click_button 'Salvar'
 
     page.should have_notice 'Grupo de Materiais editado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "MaterialsGroups" do
 
     click_link 'Informática'
 
-    click_link 'Apagar 01 - Informática', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Grupo de Materiais apagado com sucesso.'
 
@@ -76,7 +76,7 @@ feature "MaterialsGroups" do
 
     fill_in 'Código', :with => '01'
 
-    click_button 'Criar Grupo de Materiais'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end
@@ -92,7 +92,7 @@ feature "MaterialsGroups" do
 
     fill_in 'Descrição', :with => 'Informática'
 
-    click_button 'Criar Grupo de Materiais'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

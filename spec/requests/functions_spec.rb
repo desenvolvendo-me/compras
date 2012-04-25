@@ -19,7 +19,7 @@ feature "Functions" do
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
     fill_in 'Descrição', :with => 'Administração'
 
-    click_button 'Criar Função'
+    click_button 'Salvar'
 
     page.should have_notice 'Função criada com sucesso.'
 
@@ -44,7 +44,7 @@ feature "Functions" do
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     fill_in 'Descrição', :with => 'Execução'
 
-    click_button 'Atualizar Função'
+    click_button 'Salvar'
 
     page.should have_notice 'Função editada com sucesso.'
 
@@ -64,7 +64,7 @@ feature "Functions" do
 
     click_link '04'
 
-    click_link 'Apagar 04 - Administração', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Função apagada com sucesso.'
 
@@ -84,7 +84,7 @@ feature "Functions" do
     fill_in 'Código', :with => '04'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-    click_button 'Criar Função'
+    click_button 'Salvar'
 
     page.should have_content 'já existe para o ato regulamentador informado'
   end
@@ -102,7 +102,7 @@ feature "Functions" do
     fill_in 'Código', :with => '04'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
 
-    click_button 'Criar Função'
+    click_button 'Salvar'
 
     page.should_not have_content 'já existe para o ato regulamentador informado'
   end

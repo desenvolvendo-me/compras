@@ -19,7 +19,7 @@ feature "Condominiums" do
     fill_in 'Nome', :with => 'Edifício Paulista'
     select 'Vertical', :from => "Tipo de condomínio"
 
-    click_button 'Criar Condomínio'
+    click_button 'Salvar'
 
     page.should have_notice 'Condomínio criado com sucesso.'
 
@@ -40,7 +40,7 @@ feature "Condominiums" do
 
     fill_in 'Nome', :with => 'Parque das Plantas'
 
-    click_button 'Atualizar Condomínio'
+    click_button 'Salvar'
 
     page.should have_notice 'Condomínio editado com sucesso.'
 
@@ -58,7 +58,7 @@ feature "Condominiums" do
 
     click_link 'Tambuata'
 
-    click_link 'Apagar Tambuata', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Condomínio apagado com sucesso.'
 

@@ -16,7 +16,7 @@ feature "RiskDegrees" do
     fill_in 'Nível', :with => '1'
     fill_in 'Nome', :with => 'Médio'
 
-    click_button 'Criar Grau de Risco'
+    click_button 'Salvar'
 
     page.should have_notice 'Grau de Risco criado com sucesso.'
 
@@ -38,7 +38,7 @@ feature "RiskDegrees" do
     fill_in 'Nome', :with => 'Muito Grave'
     fill_in 'Nível', :with => '4'
 
-    click_button 'Atualizar Grau de Risco'
+    click_button 'Salvar'
 
     page.should have_notice 'Grau de Risco editado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "RiskDegrees" do
 
     click_link 'Grave'
 
-    click_link 'Apagar Grave', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Grau de Risco apagado com sucesso.'
 

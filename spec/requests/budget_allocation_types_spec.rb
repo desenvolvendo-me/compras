@@ -16,7 +16,7 @@ feature "BudgetAllocationTypes" do
     fill_in 'Descrição', :with => 'Administrativa'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Tipo de Dotação'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Dotação criado com sucesso.'
 
@@ -38,7 +38,7 @@ feature "BudgetAllocationTypes" do
     fill_in 'Descrição', :with => 'Executiva'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Tipo de Dotação'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Dotação editado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "BudgetAllocationTypes" do
 
     click_link 'Dotação Administrativa'
 
-    click_link 'Apagar Dotação Administrativa', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Dotação apagado com sucesso.'
 
@@ -75,7 +75,7 @@ feature "BudgetAllocationTypes" do
 
     fill_in 'Descrição', :with => 'Dotação Administrativa'
 
-    click_button 'Criar Tipo de Dotação'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

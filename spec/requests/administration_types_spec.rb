@@ -20,7 +20,7 @@ feature "AdministrationTypes" do
     select 'Autarquia', :from => 'Tipo do órgão'
     fill_modal 'Natureza jurídica', :with => 'Administração Pública', :field => 'Nome'
 
-    click_button 'Criar Tipo de Administração'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Administração criado com sucesso.'
 
@@ -49,7 +49,7 @@ feature "AdministrationTypes" do
     select 'Fundo especial', :from => 'Tipo do órgão'
     fill_modal 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal', :field => 'Nome'
 
-    click_button 'Atualizar Tipo de Administração'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Administração editado com sucesso.'
 
@@ -69,7 +69,7 @@ feature "AdministrationTypes" do
 
     click_link 'Pública'
 
-    click_link 'Apagar Pública', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Administração apagado com sucesso.'
 
@@ -87,7 +87,7 @@ feature "AdministrationTypes" do
 
     fill_in 'Descrição', :with => 'Pública'
 
-    click_button 'Criar Tipo de Administração'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

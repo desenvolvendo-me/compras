@@ -57,7 +57,7 @@ feature "ExtraCredits" do
       page.should have_field 'Diferença', :with => '0,00'
     end
 
-    click_button 'Criar Crédito Suplementar'
+    click_button 'Salvar'
 
     page.should have_notice 'Crédito Suplementar criado com sucesso.'
 
@@ -186,7 +186,7 @@ feature "ExtraCredits" do
       end
     end
 
-    click_button 'Criar Crédito Suplementar'
+    click_button 'Salvar'
 
     within_tab 'Movimentos' do
       page.should have_content 'não pode ser maior que o saldo real da dotação (R$ 500,00)'
@@ -373,7 +373,7 @@ feature "ExtraCredits" do
       click_button 'Remover Movimento'
     end
 
-    click_button 'Atualizar Crédito Suplementar'
+    click_button 'Salvar'
 
     click_link "#{extra_credit.id}"
 
@@ -418,7 +418,7 @@ feature "ExtraCredits" do
       end
     end
 
-    click_button 'Atualizar Crédito Suplementar'
+    click_button 'Salvar'
 
     page.should have_notice 'Crédito Suplementar editado com sucesso.'
 
@@ -466,7 +466,7 @@ feature "ExtraCredits" do
       end
     end
 
-    click_button 'Atualizar Crédito Suplementar'
+    click_button 'Salvar'
 
     within_tab 'Movimentos' do
       page.should have_content 'já está em uso'
@@ -492,7 +492,7 @@ feature "ExtraCredits" do
       end
     end
 
-    click_button 'Atualizar Crédito Suplementar'
+    click_button 'Salvar'
 
     within_tab 'Movimentos' do
       page.should have_content 'já está em uso'
@@ -510,7 +510,7 @@ feature "ExtraCredits" do
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-    click_button 'Criar Crédito Suplementar'
+    click_button 'Salvar'
 
     page.should have_content 'já utilizado em outro crédito suplementar'
   end
@@ -524,7 +524,7 @@ feature "ExtraCredits" do
 
     click_link "#{extra_credit.id}"
 
-    click_link "Apagar #{extra_credit.id}", :confirm => true
+    click_link "Apagar", :confirm => true
 
     page.should have_notice 'Crédito Suplementar apagado com sucesso.'
 

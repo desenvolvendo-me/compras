@@ -16,7 +16,7 @@ feature "PledgeCategories" do
     fill_in 'Descrição', :with => 'Geral'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Categoria de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Categoria de Empenho criada com sucesso.'
 
@@ -38,7 +38,7 @@ feature "PledgeCategories" do
     fill_in 'Descrição', :with => 'Municipal'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Categoria de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Categoria de Empenho editada com sucesso.'
 
@@ -57,7 +57,7 @@ feature "PledgeCategories" do
 
     click_link 'Geral'
 
-    click_link 'Apagar Geral', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Categoria de Empenho apagada com sucesso.'
 
@@ -76,7 +76,7 @@ feature "PledgeCategories" do
 
     fill_in 'Descrição', :with => 'Geral'
 
-    click_button 'Criar Categoria de Empenho'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

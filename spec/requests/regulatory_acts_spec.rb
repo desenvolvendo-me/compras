@@ -36,7 +36,7 @@ feature "RegulatoryActs" do
       fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
     end
 
-    click_button 'Criar Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_notice 'Ato Regulamentador criado com sucesso.'
 
@@ -98,7 +98,7 @@ feature "RegulatoryActs" do
       fill_modal 'Fonte de divulgação', :with => 'Jornal Oficial do Bairro', :field => 'Descrição'
     end
 
-    click_button 'Atualizar Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_notice 'Ato Regulamentador editado com sucesso.'
 
@@ -134,7 +134,7 @@ feature "RegulatoryActs" do
 
     click_link '1234'
 
-    click_link 'Apagar 1234', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Ato Regulamentador apagado com sucesso.'
 
@@ -152,7 +152,7 @@ feature "RegulatoryActs" do
 
     fill_in 'Número', :with => '1234'
 
-    click_button 'Criar Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end
@@ -168,7 +168,7 @@ feature "RegulatoryActs" do
 
     fill_in 'Ementa', :with => 'conteudo'
 
-    click_button 'Criar Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end
@@ -186,7 +186,7 @@ feature "RegulatoryActs" do
       click_button 'Remover'
     end
 
-    click_button 'Atualizar Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_notice 'Ato Regulamentador editado com sucesso.'
 

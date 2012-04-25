@@ -67,7 +67,7 @@ feature "DirectPurchases" do
       page.should have_field 'Valor total', :with => '600,00'
     end
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     page.should have_notice 'Compra Direta criada com sucesso.'
 
@@ -295,7 +295,7 @@ feature "DirectPurchases" do
       end
     end
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should have_content 'já está em uso'
@@ -324,8 +324,7 @@ feature "DirectPurchases" do
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
     end
 
-
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should have_content 'deve pertencer ao objeto de licitação selecionado'
@@ -591,7 +590,7 @@ feature "DirectPurchases" do
 
     click_link 'Criar Solicitação de Compra Direta'
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should have_content 'é necessário cadastrar pelo menos uma dotação'
@@ -601,7 +600,7 @@ feature "DirectPurchases" do
       fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
     end
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should have_content 'é necessário cadastrar pelo menos um item'
@@ -635,7 +634,7 @@ feature "DirectPurchases" do
       fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     end
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should_not have_content 'deve pertencer ao fornecedor selecionado'
@@ -647,7 +646,7 @@ feature "DirectPurchases" do
       fill_modal 'Fornecedor', :with => '222222', :field => 'Número do CRC'
     end
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should_not have_content 'deve pertencer ao fornecedor selecionado'
@@ -659,7 +658,7 @@ feature "DirectPurchases" do
       fill_modal 'Fornecedor', :with => '333333', :field => 'Número do CRC'
     end
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should_not have_content 'deve pertencer ao fornecedor selecionado'
@@ -671,7 +670,7 @@ feature "DirectPurchases" do
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
     end
 
-    click_button 'Criar Solicitação de Compra Direta'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should have_content 'deve pertencer ao fornecedor selecionado'

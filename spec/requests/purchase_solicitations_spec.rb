@@ -64,7 +64,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Valor total', :with => '600,00'
     end
 
-    click_button 'Criar Solicitação de Compra'
+    click_button 'Salvar'
 
     page.should have_notice 'Solicitação de Compra criada com sucesso.'
 
@@ -152,7 +152,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Valor unitário', :with => '0,10'
     end
 
-    click_button 'Atualizar Solicitação de Compra'
+    click_button 'Salvar'
 
     page.should have_notice 'Solicitação de Compra editada com sucesso.'
 
@@ -247,7 +247,7 @@ feature "PurchaseSolicitations" do
       end
     end
 
-    click_button 'Criar Solicitação de Compra'
+    click_button 'Salvar'
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'já está em uso'
@@ -261,7 +261,7 @@ feature "PurchaseSolicitations" do
 
     click_link 'Criar Solicitação de Compra'
 
-    click_button 'Criar Solicitação de Compra'
+    click_button 'Salvar'
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'é necessário cadastrar pelo menos uma dotação'
@@ -269,7 +269,7 @@ feature "PurchaseSolicitations" do
       click_button 'Adicionar Dotação'
     end
 
-    click_button 'Criar Solicitação de Compra'
+    click_button 'Salvar'
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'é necessário cadastrar pelo menos um item'
@@ -293,7 +293,7 @@ feature "PurchaseSolicitations" do
       click_button 'Remover Item'
     end
 
-    click_button 'Atualizar Solicitação de Compra'
+    click_button 'Salvar'
 
     within_tab 'Dotações orçamentárias' do
       page.should_not have_field 'Item'
@@ -304,7 +304,7 @@ feature "PurchaseSolicitations" do
       click_button 'Remover Dotação'
     end
 
-    click_button 'Atualizar Solicitação de Compra'
+    click_button 'Salvar'
 
     within_tab 'Dotações orçamentárias' do
       page.should_not have_field 'Dotação'

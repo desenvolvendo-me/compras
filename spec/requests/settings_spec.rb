@@ -19,7 +19,7 @@ feature "Settings" do
 
     fill_in 'Valor', :with => '1'
 
-    click_button 'Atualizar Configuração'
+    click_button 'Salvar'
 
     page.should have_notice 'Configuração editada com sucesso.'
 

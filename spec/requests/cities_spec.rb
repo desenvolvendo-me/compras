@@ -19,7 +19,7 @@ feature "Cities" do
     fill_mask 'Código', :with => '4929'
     fill_modal 'Estado', :with => 'Rio Grande do Sul'
 
-    click_button 'Criar Cidade'
+    click_button 'Salvar'
 
     page.should have_notice 'Cidade criada com sucesso.'
 
@@ -42,7 +42,7 @@ feature "Cities" do
     fill_in 'Nome', :with => 'B. Horizonte'
     fill_mask 'Código', :with => 'BHORIZO'
 
-    click_button 'Atualizar Cidade'
+    click_button 'Salvar'
 
     page.should have_notice 'Cidade editada com sucesso.'
 
@@ -62,7 +62,7 @@ feature "Cities" do
 
     click_link 'Porto Alegre'
 
-    click_link 'Apagar Porto Alegre', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Cidade apagada com sucesso.'
 

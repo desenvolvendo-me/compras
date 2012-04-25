@@ -29,7 +29,7 @@ feature "Prefecture" do
       fill_mask 'CEP', :with => '33400-500'
     end
 
-    click_button 'Criar Prefeitura'
+    click_button 'Salvar'
 
     page.should have_notice 'Prefeitura criada com sucesso.'
 
@@ -76,7 +76,7 @@ feature "Prefecture" do
       fill_mask 'CEP', :with => '33400-500'
     end
 
-    click_button 'Atualizar Prefeitura'
+    click_button 'Salvar'
 
     page.should have_notice 'Prefeitura editada com sucesso.'
 

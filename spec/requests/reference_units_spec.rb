@@ -16,7 +16,7 @@ feature "ReferenceUnits" do
     fill_in 'Descrição', :with => 'Reais'
     fill_in 'Sigla', :with => 'R$'
 
-    click_button 'Criar Unidade de Referência'
+    click_button 'Salvar'
 
     page.should have_notice 'Unidade de Referência criada com sucesso.'
 
@@ -38,7 +38,7 @@ feature "ReferenceUnits" do
     fill_in 'Descrição', :with => 'Centímetro'
     fill_in 'Sigla', :with => 'cm'
 
-    click_button 'Atualizar Unidade de Referência'
+    click_button 'Salvar'
 
     page.should have_notice 'Unidade de Referência editada com sucesso.'
 
@@ -57,7 +57,7 @@ feature "ReferenceUnits" do
 
     click_link 'Metro'
 
-    click_link 'Apagar Metro', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Unidade de Referência apagada com sucesso.'
 

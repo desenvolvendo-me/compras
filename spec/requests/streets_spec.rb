@@ -25,7 +25,7 @@ feature "Streets" do
     fill_modal 'Bairro', :with => 'Centro'
     page.should have_content "Bairro"
 
-    click_button 'Criar Logradouro'
+    click_button 'Salvar'
 
     page.should have_notice 'Logradouro criado com sucesso.'
 
@@ -56,7 +56,7 @@ feature "Streets" do
 
     fill_modal 'Bairro', :with => 'Portugal' 
 
-    click_button 'Atualizar Logradouro'
+    click_button 'Salvar'
 
     page.should have_notice 'Logradouro editado com sucesso.'
 
@@ -77,7 +77,7 @@ feature "Streets" do
 
     click_link 'Girassol'
 
-    click_link 'Apagar Girassol', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Logradouro apagado com sucesso.'
 

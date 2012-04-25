@@ -27,7 +27,7 @@ feature "PledgeCancellations" do
     select 'Normal', :from => 'Natureza da ocorrência'
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
 
-    click_button 'Criar Anulação de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Anulação de Empenho criado com sucesso.'
 
@@ -159,7 +159,7 @@ feature "PledgeCancellations" do
     select 'Normal', :from => 'Natureza da ocorrência'
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
 
-    click_button 'Criar Anulação de Empenho'
+    click_button 'Salvar'
 
     within_records do
       page.find('a').click
@@ -307,6 +307,6 @@ feature "PledgeCancellations" do
       page.find('a').click
     end
 
-    page.should_not have_link "Apagar #{pledge_cancellation.id}"
+    page.should_not have_link "Apagar"
   end
 end

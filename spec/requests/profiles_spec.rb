@@ -15,7 +15,7 @@ feature "Profiles" do
 
     fill_in 'Nome', :with => 'Gestor'
 
-    click_button 'Criar Perfil'
+    click_button 'Salvar'
 
     page.should have_notice 'Perfil criado com sucesso.'
 
@@ -35,7 +35,7 @@ feature "Profiles" do
 
     fill_in 'Nome', :with => 'Gestão'
 
-    click_button 'Atualizar Perfil'
+    click_button 'Salvar'
 
     page.should have_notice 'Perfil editado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "Profiles" do
 
     click_link 'Gestor'
 
-    click_link 'Apagar Gestor', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Perfil apagado com sucesso.'
 

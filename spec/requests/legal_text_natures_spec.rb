@@ -15,7 +15,7 @@ feature "LegalTextNatures" do
 
     fill_in 'Descrição', :with => 'Natureza Cívica'
 
-    click_button 'Criar Natureza de Textos Jurídicos'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza de Textos Jurídicos criada com sucesso.'
 
@@ -35,7 +35,7 @@ feature "LegalTextNatures" do
 
     fill_in 'Descrição', :with => 'Natureza Jurídica'
 
-    click_button 'Atualizar Natureza de Textos Jurídicos'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza de Textos Jurídicos editada com sucesso.'
 
@@ -52,7 +52,7 @@ feature "LegalTextNatures" do
 
     click_link 'Natureza Cívica'
 
-    click_link 'Apagar Natureza Cívica', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Natureza de Textos Jurídicos apagada com sucesso.'
 
@@ -70,7 +70,7 @@ feature "LegalTextNatures" do
 
     fill_in 'Descrição', :with => 'Natureza Cívica'
 
-    click_button 'Criar Natureza de Textos Jurídicos'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

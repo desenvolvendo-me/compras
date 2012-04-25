@@ -21,7 +21,7 @@ feature "ManagementUnits" do
     fill_in 'Sigla', :with => 'UGC'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Unidade Gestora'
+    click_button 'Salvar'
 
     page.should have_notice 'Unidade Gestora criada com sucesso.'
 
@@ -50,7 +50,7 @@ feature "ManagementUnits" do
     fill_in 'Sigla', :with => 'UGA'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Unidade Gestora'
+    click_button 'Salvar'
 
     page.should have_notice 'Unidade Gestora editada com sucesso.'
 
@@ -71,7 +71,7 @@ feature "ManagementUnits" do
 
     click_link 'Unidade Central'
 
-    click_link 'Apagar Unidade Central', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Unidade Gestora apagada com sucesso.'
 

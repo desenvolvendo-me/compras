@@ -28,7 +28,7 @@ feature "Users" do
 
     fill_modal 'Perfil', :with => 'Gestor'
 
-    click_button 'Criar Usuário'
+    click_button 'Salvar'
 
     page.should have_notice 'Usuário criado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "Users" do
       click_record 'Gabriel Sobrinho'
     end
 
-    click_button 'Atualizar Usuário'
+    click_button 'Salvar'
 
     page.should have_notice 'Usuário editado com sucesso.'
 
@@ -77,7 +77,7 @@ feature "Users" do
 
     click_link 'wenderson.malheiros'
 
-    click_link 'Apagar wenderson.malheiros', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Usuário apagado com sucesso.'
 

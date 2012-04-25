@@ -15,7 +15,7 @@ feature "RegulatoryActTypeClassifications" do
 
     fill_in 'Descrição', :with => 'description'
 
-    click_button 'Criar Classificação de Tipos de Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_notice 'Classificação de Tipos de Ato Regulamentador criado com sucesso.'
 
@@ -35,7 +35,7 @@ feature "RegulatoryActTypeClassifications" do
 
     fill_in 'Descrição', :with => 'Tipo 01'
 
-    click_button 'Criar Classificação de Tipos de Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should_not have_notice 'Classificação Tipos de Ato Regulamentador criado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "RegulatoryActTypeClassifications" do
 
     fill_in 'Descrição', :with => 'Segundo Tipo'
 
-    click_button 'Atualizar Classificação de Tipos de Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_notice 'Classificação de Tipos de Ato Regulamentador editado com sucesso.'
 
@@ -71,7 +71,7 @@ feature "RegulatoryActTypeClassifications" do
 
     click_link 'Tipo 01'
 
-    click_link 'Apagar Tipo 01', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Classificação de Tipos de Ato Regulamentador apagado com sucesso.'
 

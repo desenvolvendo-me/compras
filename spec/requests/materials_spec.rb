@@ -39,7 +39,7 @@ feature "Materials" do
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Código completo'
 
-    click_button 'Criar Material'
+    click_button 'Salvar'
 
     page.should have_notice 'Material criado com sucesso.'
 
@@ -85,7 +85,7 @@ feature "Materials" do
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Código completo'
 
-    click_button 'Criar Material'
+    click_button 'Salvar'
 
     page.should have_notice 'Material criado com sucesso.'
 
@@ -132,7 +132,7 @@ feature "Materials" do
     select 'De consumo', :from => 'Tipo de material'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.11', :field => 'Código completo'
 
-    click_button 'Atualizar Material'
+    click_button 'Salvar'
 
     page.should have_notice 'Material editado com sucesso.'
 
@@ -164,7 +164,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    click_link 'Apagar 01.01.00001 - Antivirus', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Material apagado com sucesso.'
 
@@ -182,7 +182,7 @@ feature "Materials" do
 
     fill_in 'Descrição', :with => 'Antivirus'
 
-    click_button 'Criar Material'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end
@@ -200,7 +200,7 @@ feature "Materials" do
 
     select 'De consumo', :from => 'Tipo de material'
 
-    click_button 'Atualizar Material'
+    click_button 'Salvar'
 
     click_link 'Antivirus'
 
@@ -210,7 +210,7 @@ feature "Materials" do
 
     fill_modal 'Tipo de serviço', :with => 'Reparos', :field => 'Descrição'
 
-    click_button 'Atualizar Material'
+    click_button 'Salvar'
 
     click_link 'Antivirus'
 

@@ -27,7 +27,7 @@ feature "Agencies" do
     fill_mask 'Fax', :with => '(99) 9999-9999'
     fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
 
-    click_button 'Criar Agência'
+    click_button 'Salvar'
 
     page.should have_notice 'Agência criada com sucesso.'
 
@@ -59,7 +59,7 @@ feature "Agencies" do
     fill_modal 'Cidade', :with => 'Curitiba'
     fill_modal 'Banco', :with => 'Santander'
 
-    click_button 'Atualizar Agência'
+    click_button 'Salvar'
 
     page.should have_notice 'Agência editada com sucesso.'
 
@@ -79,7 +79,7 @@ feature "Agencies" do
 
     click_link 'Agência Santander'
 
-    click_link 'Apagar Agência Santander', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Agência apagada com sucesso.'
 

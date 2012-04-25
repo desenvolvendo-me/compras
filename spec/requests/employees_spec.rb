@@ -20,7 +20,7 @@ feature "Employees" do
     fill_modal 'Cargo', :with => 'Gerente'
     fill_in 'Matrícula', :with => '958473'
 
-    click_button 'Criar Funcionário'
+    click_button 'Salvar'
 
     page.should have_notice 'Funcionário criado com sucesso.'
 
@@ -50,7 +50,7 @@ feature "Employees" do
     fill_modal 'Cargo', :with => 'Supervisor'
     fill_in 'Matrícula', :with => '123456'
 
-    click_button 'Atualizar Funcionário'
+    click_button 'Salvar'
 
     page.should have_notice 'Funcionário editado com sucesso.'
 
@@ -72,7 +72,7 @@ feature "Employees" do
       click_link 'Gabriel Sobrinho'
     end
 
-    click_link 'Apagar Gabriel Sobrinho', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Funcionário apagado com sucesso.'
 
@@ -93,7 +93,8 @@ feature "Employees" do
 
     fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
-    click_button 'Criar Funcionário'
+    click_button 'Salvar'
+
     page.should have_content "já está em uso"
   end
 
@@ -108,7 +109,8 @@ feature "Employees" do
 
     fill_in 'Matrícula', :with => '958473'
 
-    click_button 'Criar Funcionário'
+    click_button 'Salvar'
+
     page.should have_content "já está em uso"
   end
 end

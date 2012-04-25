@@ -31,7 +31,7 @@ feature 'Bookmarks' do
     select 'Cidades', :from => 'Cadastros'
     select 'Países', :from => 'Cadastros'
 
-    click_button 'Criar Favoritos'
+    click_button 'Salvar'
 
     page.should have_link 'Cidades'
     page.should have_link 'Países'
@@ -52,7 +52,7 @@ feature 'Bookmarks' do
     unselect 'Cidades', :from => 'Cadastros'
     select 'Países', :from => 'Cadastros'
 
-    click_button 'Atualizar Favoritos'
+    click_button 'Salvar'
 
     page.should_not have_link 'Cidades'
     page.should have_link 'Países'
@@ -72,7 +72,7 @@ feature 'Bookmarks' do
     unselect 'Cidades', :from => 'Cadastros'
     unselect 'Países', :from => 'Cadastros'
 
-    click_button 'Atualizar Favoritos'
+    click_button 'Salvar'
 
     page.should have_content 'Sua página inicial está vazia.'
     page.should have_content 'Clique no botão abaixo para adicionar atalhos para os cadastros que você mais utiliza.'

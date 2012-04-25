@@ -19,7 +19,7 @@ feature "Creditors" do
     fill_modal 'Entidade', :with => 'Detran'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Credor'
+    click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
 
@@ -44,7 +44,7 @@ feature "Creditors" do
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Credor'
+    click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
 
@@ -64,7 +64,7 @@ feature "Creditors" do
 
     click_link 'Nohup LTDA.'
 
-    click_link 'Apagar Nohup LTDA.', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Credor apagado com sucesso.'
 

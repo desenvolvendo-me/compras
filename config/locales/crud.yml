@@ -5,6 +5,6 @@ pt-BR:
   index: "Listar %{resource}"
   new: "Criar %{resource}"
   edit: "Editar %{resource}"
-  destroy: "Apagar %{resource}"
+  destroy: "Apagar"
   are_you_sure: "Você tem certeza?"
   cancel: "Cancelar"

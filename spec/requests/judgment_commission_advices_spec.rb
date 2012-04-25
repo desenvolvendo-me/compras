@@ -58,7 +58,7 @@ feature "JudgmentCommissionAdvices" do
       end
     end
 
-    click_button 'Criar Parecer da Comissão Julgadora'
+    click_button 'Salvar'
 
     page.should have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
 
@@ -130,7 +130,7 @@ feature "JudgmentCommissionAdvices" do
       end
     end
 
-    click_button 'Atualizar Parecer da Comissão Julgadora'
+    click_button 'Salvar'
 
     page.should have_notice 'Parecer da Comissão Julgadora editado com sucesso.'
 
@@ -191,7 +191,7 @@ feature "JudgmentCommissionAdvices" do
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
     end
 
-    click_button 'Criar Parecer da Comissão Julgadora'
+    click_button 'Salvar'
 
     page.should have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
 
@@ -251,7 +251,7 @@ feature "JudgmentCommissionAdvices" do
       end
     end
 
-    click_button 'Criar Parecer da Comissão Julgadora'
+    click_button 'Salvar'
 
     within_tab 'Membros' do
       page.should have_content 'já está em uso'

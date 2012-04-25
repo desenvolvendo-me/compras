@@ -20,7 +20,7 @@ feature "GovernmentActions" do
     fill_in 'Descrição', :with => 'Ação Governamental'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Ação do Governo'
+    click_button 'Salvar'
 
     page.should have_notice 'Ação do Governo criada com sucesso.'
 
@@ -47,7 +47,7 @@ feature "GovernmentActions" do
     fill_in 'Descrição', :with => 'Ação Estatal'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Ação do Governo'
+    click_button 'Salvar'
 
     page.should have_notice 'Ação do Governo editada com sucesso.'
 
@@ -68,7 +68,7 @@ feature "GovernmentActions" do
 
     click_link 'Ação Governamental'
 
-    click_link 'Apagar Ação Governamental', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Ação do Governo apagada com sucesso.'
 

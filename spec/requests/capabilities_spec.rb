@@ -22,7 +22,7 @@ feature "Capabilities" do
     select 'Ordinário', :from => 'Tipo'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Recurso'
+    click_button 'Salvar'
 
     page.should have_notice 'Recurso criado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "Capabilities" do
     select 'Vinculado', :from => 'Tipo'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Recurso'
+    click_button 'Salvar'
 
     page.should have_notice 'Recurso editado com sucesso.'
 
@@ -76,7 +76,7 @@ feature "Capabilities" do
 
     click_link 'Reforma e Ampliação'
 
-    click_link 'Apagar Reforma e Ampliação', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Recurso apagado com sucesso.'
 

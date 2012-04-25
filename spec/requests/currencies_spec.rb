@@ -16,7 +16,7 @@ feature "Currencies" do
     fill_in 'Nome', :with => 'Real'
     fill_in 'Sigla', :with => 'R$'
 
-    click_button 'Criar Moeda'
+    click_button 'Salvar'
 
     page.should have_notice 'Moeda criada com sucesso.'
 
@@ -38,7 +38,7 @@ feature "Currencies" do
     fill_in 'Nome', :with => 'Peso'
     fill_in 'Sigla', :with => '$'
 
-    click_button 'Atualizar Moeda'
+    click_button 'Salvar'
 
     page.should have_notice 'Moeda editada com sucesso.'
 
@@ -57,7 +57,7 @@ feature "Currencies" do
 
     click_link 'Real'
 
-    click_link 'Apagar Real', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Moeda apagada com sucesso.'
 

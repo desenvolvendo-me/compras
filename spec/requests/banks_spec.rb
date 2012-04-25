@@ -17,7 +17,7 @@ feature "Banks" do
     fill_in 'Código', :with => '1'
     fill_in 'Sigla', :with => 'BB'
 
-    click_button 'Criar Banco'
+    click_button 'Salvar'
 
     page.should have_notice 'Banco criado com sucesso.'
 
@@ -41,7 +41,7 @@ feature "Banks" do
     fill_in 'Código', :with => '123'
     fill_in 'Sigla', :with => 'BRE'
 
-    click_button 'Atualizar Banco'
+    click_button 'Salvar'
 
     page.should have_notice 'Banco editado com sucesso.'
 
@@ -61,7 +61,7 @@ feature "Banks" do
 
     click_link 'Itaú'
 
-    click_link 'Apagar Itaú', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Banco apagado com sucesso.'
 

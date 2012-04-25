@@ -18,7 +18,7 @@ feature "RegulatoryActTypes" do
     fill_modal 'Classificação do tipo de ato regulamentador', :with => 'Tipo 01', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Lei'
 
-    click_button 'Criar Tipo de Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Ato Regulamentador criado com sucesso.'
 
@@ -39,7 +39,7 @@ feature "RegulatoryActTypes" do
 
     fill_in 'Descrição', :with => 'Lei'
 
-    click_button 'Criar Tipo de Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should_not have_notice 'Tipo de Ato Regulamentador criado com sucesso.'
 
@@ -59,7 +59,7 @@ feature "RegulatoryActTypes" do
     fill_modal 'Classificação do tipo de ato regulamentador', :with => 'Tipo 02', :field => 'Descrição'
     fill_in 'Descrição', :with => 'Outra Lei'
 
-    click_button 'Atualizar Tipo de Ato Regulamentador'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Ato Regulamentador editado com sucesso.'
 
@@ -78,7 +78,7 @@ feature "RegulatoryActTypes" do
 
     click_link 'Lei'
 
-    click_link 'Apagar Lei', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Ato Regulamentador apagado com sucesso.'
 

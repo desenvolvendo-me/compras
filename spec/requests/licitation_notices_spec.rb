@@ -19,7 +19,7 @@ feature "LicitationNotices" do
     fill_in 'Data do aviso', :with => '05/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo'
 
-    click_button 'Criar Aviso de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Aviso de Licitação criado com sucesso.'
 
@@ -51,7 +51,7 @@ feature "LicitationNotices" do
     fill_in 'Data do aviso', :with => '12/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo, continuação.'
 
-    click_button 'Atualizar Aviso de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Aviso de Licitação editado com sucesso.'
 
@@ -81,7 +81,7 @@ feature "LicitationNotices" do
     fill_in 'Data do aviso', :with => '07/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo 3'
 
-    click_button 'Criar Aviso de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Aviso de Licitação criado com sucesso.'
 
@@ -112,7 +112,7 @@ feature "LicitationNotices" do
     fill_in 'Data do aviso', :with => '06/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo 2'
 
-    click_button 'Criar Aviso de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Aviso de Licitação criado com sucesso.'
 
@@ -138,7 +138,7 @@ feature "LicitationNotices" do
 
     click_link licitation_notice.to_s
 
-    click_link licitation_notice.to_s, :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Aviso de Licitação apagado com sucesso.'
 

@@ -16,7 +16,7 @@ feature "ExpenseKinds" do
     fill_in 'Descrição', :with => 'Pagamentos'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Tipo de Despesa'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Despesa criado com sucesso.'
 
@@ -38,7 +38,7 @@ feature "ExpenseKinds" do
     fill_in 'Descrição', :with => 'Limpeza'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Tipo de Despesa'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Despesa editado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "ExpenseKinds" do
 
     click_link 'Pagamentos'
 
-    click_link 'Apagar Pagamentos', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Despesa apagado com sucesso.'
 
@@ -76,7 +76,7 @@ feature "ExpenseKinds" do
 
     fill_in 'Descrição', :with => 'Pagamentos'
 
-    click_button 'Criar Tipo de Despesa'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

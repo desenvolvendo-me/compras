@@ -51,7 +51,7 @@ feature "BudgetUnit" do
       select 'Ativo', :from => 'Status'
     end
 
-    click_button 'Criar Unidade Orçamentária'
+    click_button 'Salvar'
 
     page.should have_notice 'Unidade Orçamentária criado com sucesso.'
 
@@ -121,7 +121,7 @@ feature "BudgetUnit" do
       select 'Inativo', :from => 'Status'
     end
 
-    click_button 'Atualizar Unidade Orçamentária'
+    click_button 'Salvar'
 
     page.should have_notice 'Unidade Orçamentária editado com sucesso.'
 
@@ -166,7 +166,7 @@ feature "BudgetUnit" do
       click_button 'Remover Responsável'
     end
 
-    click_button 'Atualizar Unidade Orçamentária'
+    click_button 'Salvar'
 
     page.should have_notice 'Unidade Orçamentária editado com sucesso.'
 
@@ -190,7 +190,7 @@ feature "BudgetUnit" do
 
     click_link 'Secretaria de Educação'
 
-    click_link 'Apagar 02.00 - Secretaria de Educação', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Unidade Orçamentária apagado com sucesso.'
 
@@ -252,7 +252,7 @@ feature "BudgetUnit" do
       end
     end
 
-    click_button 'Criar Unidade Orçamentária'
+    click_button 'Salvar'
 
     within_tab 'Responsáveis' do
       page.should have_content 'já está em uso'

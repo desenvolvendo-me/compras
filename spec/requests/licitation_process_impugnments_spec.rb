@@ -29,7 +29,8 @@ feature "LicitationProcessImpugnments" do
     page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Hora da abertura', :with => '14:00'
 
-    click_button 'Criar Impugnação do Processo Licitatório'
+    click_button 'Salvar'
+
     page.should have_notice 'Impugnação do Processo Licitatório criado com sucesso.'
     click_link LicitationProcessImpugnment.last.to_s
 
@@ -66,7 +67,7 @@ feature "LicitationProcessImpugnments" do
     page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
     page.should have_field 'Hora da abertura', :with => '14:00'
 
-    click_button 'Atualizar Impugnação do Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Impugnação do Processo Licitatório editado com sucesso.'
 
@@ -117,7 +118,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link licitation_process_impugnment.to_s
 
-    page.should_not have_link "Apagar #{licitation_process_impugnment}"
+    page.should_not have_link "Apagar"
   end
 
   scenario 'envelope dates should be filled when licitation process selected' do

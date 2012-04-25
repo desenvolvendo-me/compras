@@ -18,7 +18,7 @@ feature "DisseminationSources" do
     fill_in 'Descrição', :with => 'Jornal Oficial do Município'
     fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal', :field => 'Descrição'
 
-    click_button 'Criar Fonte de Divulgação'
+    click_button 'Salvar'
 
     page.should have_notice 'Fonte de Divulgação criado com sucesso.'
 
@@ -39,7 +39,7 @@ feature "DisseminationSources" do
 
     fill_in 'Descrição', :with => 'Jornal Oficial do Município'
 
-    click_button 'Criar Fonte de Divulgação'
+    click_button 'Salvar'
 
     page.should_not have_notice 'Fonte de Divulgação criado com sucesso.'
 
@@ -60,7 +60,7 @@ feature "DisseminationSources" do
 
     fill_modal 'Fonte de comunicação', :with => 'Jornal de Circulação Estadual', :field => 'Descrição'
 
-    click_button 'Atualizar Fonte de Divulgação'
+    click_button 'Salvar'
 
     page.should have_notice 'Fonte de Divulgação editado com sucesso.'
 
@@ -80,7 +80,7 @@ feature "DisseminationSources" do
 
     click_link 'Jornal Oficial do Município'
 
-    click_link 'Apagar Jornal Oficial do Município', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Fonte de Divulgação apagado com sucesso.'
 

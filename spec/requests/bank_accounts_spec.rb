@@ -25,7 +25,7 @@ feature "BankAccounts" do
     fill_in 'Código do cedente', :with => '00000000003'
     fill_in 'Número do contrato', :with => '000003-2011'
 
-    click_button 'Criar Conta Bancária / Convênio'
+    click_button 'Salvar'
 
     page.should have_notice 'Conta Bancária / Convênio criado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "BankAccounts" do
     fill_in 'Código do cedente', :with => '00000000004'
     fill_in 'Número do contrato', :with => '000004-2011'
 
-    click_button 'Atualizar Conta Bancária / Convênio'
+    click_button 'Salvar'
 
     page.should have_notice 'Conta Bancária / Convênio editado com sucesso.'
 
@@ -74,7 +74,7 @@ feature "BankAccounts" do
 
     click_link 'Itaú Tributos'
 
-    click_link 'Apagar Itaú Tributos', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Conta Bancária / Convênio apagado com sucesso.'
 

@@ -20,7 +20,7 @@ feature "MaterialsClasses" do
     fill_in 'Descrição', :with => 'Materiais de Escritório'
     fill_in 'Detalhamento', :with => 'materiais para escritório'
 
-    click_button 'Criar Classe de Materiais'
+    click_button 'Salvar'
 
     page.should have_notice 'Classe de Materiais criado com sucesso.'
 
@@ -47,7 +47,7 @@ feature "MaterialsClasses" do
     fill_in 'Descrição', :with => 'Lampada'
     fill_in 'Detalhamento', :with => 'descricao'
 
-    click_button 'Atualizar Classe de Materiais'
+    click_button 'Salvar'
 
     page.should have_notice 'Classe de Materiais editado com sucesso.'
 
@@ -68,7 +68,7 @@ feature "MaterialsClasses" do
 
     click_link 'Software'
 
-    click_link 'Apagar 01 - Software', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Classe de Materiais apagado com sucesso.'
 
@@ -89,7 +89,7 @@ feature "MaterialsClasses" do
     fill_modal 'Grupo', :with => '01', :field => 'Código'
     fill_in 'Código', :with => '01'
 
-    click_button 'Criar Classe de Materiais'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end
@@ -107,7 +107,7 @@ feature "MaterialsClasses" do
     fill_modal 'Grupo', :with => '01', :field => 'Código'
     fill_in 'Código', :with => '02'
 
-    click_button 'Criar Classe de Materiais'
+    click_button 'Salvar'
 
     page.should_not have_content 'já está em uso'
   end
@@ -125,7 +125,7 @@ feature "MaterialsClasses" do
     fill_modal 'Grupo', :with => '01', :field => 'Código'
     fill_in 'Descrição', :with => 'Software'
 
-    click_button 'Criar Classe de Materiais'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end
@@ -143,7 +143,7 @@ feature "MaterialsClasses" do
     fill_modal 'Grupo', :with => '01', :field => 'Código'
     fill_in 'Descrição', :with => 'Hardware'
 
-    click_button 'Criar Classe de Materiais'
+    click_button 'Salvar'
 
     page.should_not have_content 'já está em uso'
   end

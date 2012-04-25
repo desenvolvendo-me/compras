@@ -23,7 +23,7 @@ feature "PledgeLiquidationCancellations" do
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
 
-    click_button 'Criar Anulação de Liquidação de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Anulação de Liquidação de Empenho criado com sucesso.'
 
@@ -148,7 +148,7 @@ feature "PledgeLiquidationCancellations" do
     fill_in 'Data *', :with => I18n.l(Date.current + 2.day)
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
 
-    click_button 'Criar Anulação de Liquidação de Empenho'
+    click_button 'Salvar'
 
     within_records do
       page.find('a').click
@@ -284,6 +284,6 @@ feature "PledgeLiquidationCancellations" do
 
     click_link "#{pledge_liquidation_cancellation.id}"
 
-    page.should_not have_link "Apagar #{pledge_liquidation_cancellation.id}"
+    page.should_not have_link "Apagar"
   end
 end

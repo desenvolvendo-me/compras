@@ -18,7 +18,7 @@ feature "Districts" do
     fill_in 'Nome', :with => 'Leste'
     fill_modal 'Cidade', :with => "Belo Horizonte"
 
-    click_button 'Criar Distrito'
+    click_button 'Salvar'
 
     page.should have_notice 'Distrito criado com sucesso.'
 
@@ -39,7 +39,7 @@ feature "Districts" do
 
     fill_in 'Nome', :with => 'Oeste'
 
-    click_button 'Atualizar Distrito'
+    click_button 'Salvar'
 
     page.should have_notice 'Distrito editado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "Districts" do
 
     click_link 'Sul'
 
-    click_link 'Apagar Sul', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Distrito apagado com sucesso.'
 

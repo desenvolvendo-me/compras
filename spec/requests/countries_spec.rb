@@ -15,7 +15,7 @@ feature "Countries" do
 
     fill_in 'Nome', :with => 'Argentina'
 
-    click_button 'Criar País'
+    click_button 'Salvar'
 
     page.should have_notice 'País criado com sucesso.'
 
@@ -35,7 +35,7 @@ feature "Countries" do
 
     fill_in 'Nome', :with => 'Argentina'
 
-    click_button 'Atualizar País'
+    click_button 'Salvar'
 
     page.should have_notice 'País editado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "Countries" do
 
     click_link 'Argentina'
 
-    click_link 'Apagar Argentina', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'País apagado com sucesso.'
 

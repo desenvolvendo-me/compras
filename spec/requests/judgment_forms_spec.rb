@@ -17,7 +17,7 @@ feature "JudgmentForms" do
     select 'Global', :from => 'Tipo de julgamento'
     select 'Menor preço', :from => 'Tipo de licitação'
 
-    click_button 'Criar Forma de Julgamento de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Forma de Julgamento de Licitação criado com sucesso.'
 
@@ -41,7 +41,7 @@ feature "JudgmentForms" do
     select 'Por item', :from => 'Tipo de julgamento'
     select 'Melhor técnica', :from => 'Tipo de licitação'
 
-    click_button 'Atualizar Forma de Julgamento de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Forma de Julgamento de Licitação editado com sucesso.'
 
@@ -61,7 +61,7 @@ feature "JudgmentForms" do
 
     click_link 'Forma Global com Menor Preço'
 
-    click_link 'Apagar Forma Global com Menor Preço', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Forma de Julgamento de Licitação apagado com sucesso.'
 
@@ -81,7 +81,7 @@ feature "JudgmentForms" do
 
     fill_in 'Descrição', :with => 'Forma Global com Menor Preço'
 
-    click_button 'Criar Forma de Julgamento de Licitação'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

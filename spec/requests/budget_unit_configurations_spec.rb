@@ -24,7 +24,7 @@ feature "BudgetUnitConfigurations" do
     fill_in 'budget_unit_configuration_budget_unit_levels_attributes_fresh-0_description', :with => 'Órgão'
     fill_in 'Dígitos', :with => '2'
     select 'Ponto', :from => 'Separador'
-    click_button 'Criar Configuração de Unidade Orçamentária'
+    click_button 'Salvar'
 
     page.should have_notice 'Configuração de Unidade Orçamentária criado com sucesso.'
 
@@ -77,7 +77,7 @@ feature "BudgetUnitConfigurations" do
 
     fill_in 'Descrição', :with => 'Outro Nome da Configuração'
 
-    click_button 'Atualizar Configuração de Unidade Orçamentária'
+    click_button 'Salvar'
 
     page.should have_notice 'Configuração de Unidade Orçamentária editado com sucesso.'
 
@@ -97,7 +97,7 @@ feature "BudgetUnitConfigurations" do
 
     click_link 'Configuração do Detran'
 
-    click_link 'Apagar Configuração do Detran', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Configuração de Unidade Orçamentária apagado com sucesso.'
 

@@ -15,7 +15,7 @@ feature "LandSubdivisions" do
 
     fill_in 'Nome', :with => 'Oportunity'
 
-    click_button 'Criar Loteamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Loteamento criado com sucesso.'
 
@@ -35,7 +35,7 @@ feature "LandSubdivisions" do
 
     fill_in 'Nome', :with => 'Monte Verde'
 
-    click_button 'Atualizar Loteamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Loteamento editado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "LandSubdivisions" do
 
     click_link 'Terra Prometida'
 
-    click_link 'Apagar Terra Prometida', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Loteamento apagado com sucesso.'
 

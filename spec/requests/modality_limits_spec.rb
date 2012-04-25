@@ -31,7 +31,7 @@ feature "ModalityLimits" do
       fill_in 'Concorrência pública', :with => '401,00'
     end
 
-    click_button 'Criar Limite por Modalidade'
+    click_button 'Salvar'
 
     page.should have_notice 'Limite por Modalidade criado com sucesso.'
 
@@ -83,7 +83,7 @@ feature "ModalityLimits" do
       fill_in 'Concorrência pública', :with => '451,00'
     end
 
-    click_button 'Atualizar Limite por Modalidade'
+    click_button 'Salvar'
 
     page.should have_notice 'Limite por Modalidade editado com sucesso.'
 
@@ -117,7 +117,7 @@ feature "ModalityLimits" do
 
     click_link '0001'
 
-    click_link 'Apagar 0001', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Limite por Modalidade apagado com sucesso.'
 
@@ -137,7 +137,7 @@ feature "ModalityLimits" do
 
     fill_in 'Número da portaria', :with => '0001'
 
-    click_button 'Criar Limite por Modalidade'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

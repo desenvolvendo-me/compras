@@ -17,7 +17,7 @@ feature "CompanySizes" do
     fill_in 'Sigla', :with => 'EMP'
     fill_in 'Número', :with => '3'
 
-    click_button 'Criar Porte da Empresa'
+    click_button 'Salvar'
 
     page.should have_notice 'Porte da Empresa criado com sucesso.'
 
@@ -41,7 +41,7 @@ feature "CompanySizes" do
     fill_in 'Sigla', :with => 'MEI'
     fill_in 'Número', :with => '5'
 
-    click_button 'Atualizar Porte da Empresa'
+    click_button 'Salvar'
 
     page.should have_notice 'Porte da Empresa editado com sucesso.'
 
@@ -61,7 +61,7 @@ feature "CompanySizes" do
 
     click_link 'Empresa de grande porte'
 
-    click_link 'Apagar Empresa de grande porte', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Porte da Empresa apagado com sucesso.'
 

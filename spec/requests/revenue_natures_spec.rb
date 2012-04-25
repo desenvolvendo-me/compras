@@ -29,7 +29,7 @@ feature "RevenueNatures" do
     select 'Ambos', :from => 'Tipo'
     fill_in 'Súmula', :with => 'Registra o valor da arrecadação da receita'
 
-    click_button 'Criar Natureza da Receita'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza da Receita criado com sucesso.'
 
@@ -205,7 +205,7 @@ feature "RevenueNatures" do
     select 'Analítico', :from => 'Tipo'
     fill_in 'Súmula', :with => 'Registra o valor da arrecadação do imposto'
 
-    click_button 'Atualizar Natureza da Receita'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza da Receita editado com sucesso.'
 

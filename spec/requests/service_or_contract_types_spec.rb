@@ -17,7 +17,7 @@ feature "ServiceOrContractType" do
     fill_in 'Descrição', :with => 'Contratação de estagiários'
     select 'Estagiário', :from => 'Finalidade'
 
-    click_button 'Criar Tipo de Serviço ou Contrato'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
 
@@ -39,7 +39,7 @@ feature "ServiceOrContractType" do
 
     fill_in 'Descrição', :with => 'Contratação de estagiários'
 
-    click_button 'Criar Tipo de Serviço ou Contrato'
+    click_button 'Salvar'
 
     page.should_not have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "ServiceOrContractType" do
 
     fill_in 'Descrição', :with => 'Contratação de 10 estagiários'
 
-    click_button 'Atualizar Tipo de Serviço ou Contrato'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Serviço ou Contrato editado com sucesso.'
 
@@ -77,7 +77,7 @@ feature "ServiceOrContractType" do
 
     click_link 'Contratação de estagiários'
 
-    click_link 'Apagar Contratação de estagiários', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Serviço ou Contrato apagado com sucesso.'
 

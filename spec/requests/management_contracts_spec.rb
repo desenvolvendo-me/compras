@@ -23,7 +23,7 @@ feature "ManagementContracts" do
     fill_in 'Data do término', :with => '30/12/2012'
     fill_in 'Objeto', :with => 'Objeto'
 
-    click_button 'Criar Contrato de Gestão'
+    click_button 'Salvar'
 
     page.should have_notice 'Contrato de Gestão criado com sucesso.'
 
@@ -60,7 +60,7 @@ feature "ManagementContracts" do
     fill_in 'Data do término', :with => '30/12/2013'
     fill_in 'Objeto', :with => 'Novo Objeto'
 
-    click_button 'Atualizar Contrato de Gestão'
+    click_button 'Salvar'
 
     page.should have_notice 'Contrato de Gestão editado com sucesso.'
 

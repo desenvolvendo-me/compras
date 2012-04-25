@@ -19,7 +19,7 @@ feature "States" do
     fill_in 'Sigla', :with => 'MG'
     fill_modal 'País', :with => 'Brasil'
 
-    click_button 'Criar Estado'
+    click_button 'Salvar'
 
     page.should have_notice 'Estado criado com sucesso.'
 
@@ -41,7 +41,7 @@ feature "States" do
 
     fill_in 'Nome', :with => 'Rio Grande do Norte'
 
-    click_button 'Atualizar Estado'
+    click_button 'Salvar'
 
     page.should have_notice 'Estado editado com sucesso.'
 
@@ -59,7 +59,7 @@ feature "States" do
 
     click_link 'Rio Grande do Sul'
 
-    click_link 'Apagar Rio Grande do Sul', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Estado apagado com sucesso.'
 

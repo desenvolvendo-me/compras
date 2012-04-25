@@ -16,7 +16,7 @@ feature "Periods" do
     select 'ano', :from => 'Unidade'
     fill_in 'Quantidade', :with => '1'
 
-    click_button 'Criar Prazo'
+    click_button 'Salvar'
 
     page.should have_notice 'Prazo criado com sucesso.'
 
@@ -42,7 +42,7 @@ feature "Periods" do
     select 'dia', :from => 'Unidade'
     fill_in 'Quantidade', :with => '30'
 
-    click_button 'Atualizar Prazo'
+    click_button 'Salvar'
 
     page.should have_notice 'Prazo editado com sucesso.'
 
@@ -65,7 +65,7 @@ feature "Periods" do
       page.find('a').click
     end
 
-    click_link 'Apagar 1 ano', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Prazo apagado com sucesso.'
 

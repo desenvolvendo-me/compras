@@ -16,7 +16,7 @@ feature "ReserveAllocationTypes" do
     fill_in 'Descrição', :with => 'Reserva para Educação'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Tipo de Reserva de Dotação'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Reserva de Dotação criado com sucesso.'
 
@@ -38,7 +38,7 @@ feature "ReserveAllocationTypes" do
     fill_in 'Descrição', :with => 'Descrição do Tipo'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Tipo de Reserva de Dotação'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Reserva de Dotação editado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "ReserveAllocationTypes" do
 
     click_link 'Comum'
 
-    click_link 'Apagar Comum', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Reserva de Dotação apagado com sucesso.'
 
@@ -76,7 +76,7 @@ feature "ReserveAllocationTypes" do
 
     fill_in 'Descrição', :with => 'Comum'
 
-    click_button 'Criar Tipo de Reserva de Dotação'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

@@ -24,7 +24,7 @@ feature "LicitationProcessAppeals" do
     fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação'
     select 'Pendente', :from => 'Situação'
 
-    click_button 'Criar Interposição de Recurso do Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Interposição de Recurso do Processo Licitatório criado com sucesso.'
 
@@ -59,7 +59,7 @@ feature "LicitationProcessAppeals" do
     fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
     select 'Deferido', :from => 'Situação'
 
-    click_button 'Atualizar Interposição de Recurso do Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Interposição de Recurso do Processo Licitatório editado com sucesso.'
 
@@ -84,7 +84,7 @@ feature "LicitationProcessAppeals" do
 
     click_link "#{interposicao_processo_licitatorio}"
 
-    click_link "Apagar #{interposicao_processo_licitatorio}", :confirm => true
+    click_link "Apagar", :confirm => true
 
     page.should have_notice 'Interposição de Recurso do Processo Licitatório apagado com sucesso.'
 

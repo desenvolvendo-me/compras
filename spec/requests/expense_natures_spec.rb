@@ -31,7 +31,7 @@ feature "ExpenseNatures" do
     fill_in 'Descrição', :with => 'Vencimentos e Salários'
     fill_in 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
 
-    click_button 'Criar Natureza da Despesa'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza da Despesa criado com sucesso'
 
@@ -103,7 +103,7 @@ feature "ExpenseNatures" do
     fill_in 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
     fill_in 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
 
-    click_button 'Atualizar Natureza da Despesa'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza da Despesa editado com sucesso.'
 
@@ -131,7 +131,7 @@ feature "ExpenseNatures" do
 
     click_link '3.0.10.01.12'
 
-    click_link 'Apagar 3.0.10.01.12', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Natureza da Despesa apagado com sucesso.'
 

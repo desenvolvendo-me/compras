@@ -22,7 +22,7 @@ feature "Subfunctions" do
     fill_in 'Código', :with => '01'
     fill_in 'Descrição', :with => 'Administração Geral'
 
-    click_button 'Criar Subfunção'
+    click_button 'Salvar'
 
     page.should have_notice 'Subfunção criada com sucesso.'
 
@@ -52,7 +52,7 @@ feature "Subfunctions" do
     fill_in 'Código', :with => '02'
     fill_in 'Descrição', :with => 'Legislativa'
 
-    click_button 'Atualizar Subfunção'
+    click_button 'Salvar'
 
     page.should have_notice 'Subfunção editada com sucesso.'
 
@@ -74,7 +74,7 @@ feature "Subfunctions" do
 
     click_link '01'
 
-    click_link 'Apagar 01 - Administração Geral', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Subfunção apagada com sucesso.'
 
@@ -93,7 +93,7 @@ feature "Subfunctions" do
 
     fill_in 'Código', :with => '01'
 
-    click_button 'Criar Subfunção'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end
@@ -109,7 +109,7 @@ feature "Subfunctions" do
 
     fill_in 'Descrição', :with => 'Administração Geral'
 
-    click_button 'Criar Subfunção'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

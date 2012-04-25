@@ -19,7 +19,7 @@ feature "PledgeHistorics" do
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Exercício', :with => '2012'
 
-    click_button 'Criar Histórico de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Histórico de Empenho criado com sucesso.'
 
@@ -44,7 +44,7 @@ feature "PledgeHistorics" do
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Exercício', :with => '2013'
 
-    click_button 'Atualizar Histórico de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Histórico de Empenho editado com sucesso.'
 
@@ -64,7 +64,7 @@ feature "PledgeHistorics" do
 
     click_link 'Semestral'
 
-    click_link 'Apagar Semestral', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Histórico de Empenho apagado com sucesso.'
 

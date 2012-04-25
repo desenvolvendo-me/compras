@@ -29,7 +29,7 @@ feature "RevenueAccountings" do
       select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
     end
 
-    click_button 'Criar Receita Contábel'
+    click_button 'Salvar'
 
     page.should have_notice 'Receita Contábel criado com sucesso.'
 
@@ -117,7 +117,7 @@ feature "RevenueAccountings" do
       fill_in 'Valor previsto', :with => '222,22'
     end
 
-    click_button 'Atualizar Receita Contábel'
+    click_button 'Salvar'
 
     page.should have_notice 'Receita Contábel editado com sucesso.'
 
@@ -151,7 +151,7 @@ feature "RevenueAccountings" do
       fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
     end
 
-    click_button 'Criar Receita Contábel'
+    click_button 'Salvar'
 
     within_tab 'Principal' do
       page.should have_content 'já está em uso'
@@ -167,7 +167,7 @@ feature "RevenueAccountings" do
 
     click_link '150'
 
-    click_link 'Apagar 150', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Receita Contábel apagado com sucesso.'
 

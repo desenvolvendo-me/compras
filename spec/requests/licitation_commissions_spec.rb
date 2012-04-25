@@ -50,7 +50,7 @@ feature "LicitationCommissions" do
       fill_in 'Matrícula', :with => '3456789'
     end
 
-    click_button 'Criar Comissão de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Comissão de Licitação criada com sucesso.'
 
@@ -130,7 +130,7 @@ feature "LicitationCommissions" do
       end
     end
 
-    click_button 'Atualizar Comissão de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Comissão de Licitação editada com sucesso.'
 
@@ -288,7 +288,7 @@ feature "LicitationCommissions" do
       select 'Prefeito municipal', :from => 'Cargo'
     end
 
-    click_button 'Atualizar Comissão de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Comissão de Licitação editada com sucesso.'
 
@@ -344,7 +344,7 @@ feature "LicitationCommissions" do
       end
     end
 
-    click_button 'Criar Comissão de Licitação'
+    click_button 'Salvar'
 
     within_tab 'Responsáveis' do
       page.should have_content 'já está em uso'
@@ -395,7 +395,7 @@ feature "LicitationCommissions" do
       end
     end
 
-    click_button 'Criar Comissão de Licitação'
+    click_button 'Salvar'
 
     within_tab 'Membros' do
       page.should have_content 'já está em uso'
@@ -413,7 +413,7 @@ feature "LicitationCommissions" do
     click_link 'Criar Comissão de Licitação'
 
     # testing with no members
-    click_button 'Criar Comissão de Licitação'
+    click_button 'Salvar'
 
     within_tab 'Membros' do
       page.should have_content 'deve haver um presidente'
@@ -427,7 +427,7 @@ feature "LicitationCommissions" do
       select 'Suplente', :from => 'Função'
     end
 
-    click_button 'Criar Comissão de Licitação'
+    click_button 'Salvar'
 
     within_tab 'Membros' do
       page.should have_content 'deve haver um presidente'
@@ -438,7 +438,7 @@ feature "LicitationCommissions" do
       select 'Presidente', :from => 'Função'
     end
 
-    click_button 'Criar Comissão de Licitação'
+    click_button 'Salvar'
 
     within_tab 'Membros' do
       page.should_not have_content 'deve haver um presidente'
@@ -454,7 +454,7 @@ feature "LicitationCommissions" do
       end
     end
 
-    click_button 'Criar Comissão de Licitação'
+    click_button 'Salvar'
 
     within_tab 'Membros' do
       page.should have_content 'deve haver apenas um presidente'

@@ -23,7 +23,7 @@ feature "FoundedDebtContracts" do
     fill_in 'Data do término', :with => '23/02/2013'
     fill_in 'Descrição', :with => 'Contrato sobre'
 
-    click_button 'Criar Contrato de Dívida Fundada'
+    click_button 'Salvar'
 
     page.should have_notice 'Contrato de Dívida Fundada criado com sucesso.'
 
@@ -56,7 +56,7 @@ feature "FoundedDebtContracts" do
     fill_in 'Data do término', :with => '21/02/2013'
     fill_in 'Descrição', :with => 'Outro contrato sobre compra de material'
 
-    click_button 'Atualizar Contrato de Dívida Fundada'
+    click_button 'Salvar'
 
     page.should have_notice 'Contrato de Dívida Fundada editado com sucesso.'
 
@@ -80,7 +80,7 @@ feature "FoundedDebtContracts" do
 
     click_link "#{founded_debt_contract.id}/#{founded_debt_contract.year}"
 
-    click_link "Apagar #{founded_debt_contract.id}/2012", :confirm => true
+    click_link "Apagar", :confirm => true
 
     page.should have_notice 'Contrato de Dívida Fundada apagado com sucesso.'
 

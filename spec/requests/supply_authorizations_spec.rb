@@ -18,7 +18,7 @@ feature "SupplyAuthorizations" do
     fill_in 'Exercício', :with => '2012'
     fill_modal 'Solicitação de compra direta', :with => '2012', :field => 'Ano'
 
-    click_button 'Criar Autorização de Fornecimento'
+    click_button 'Salvar'
 
     page.should have_notice 'Autorização de Fornecimento criado com sucesso.'
 

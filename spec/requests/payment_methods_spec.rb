@@ -15,7 +15,7 @@ feature "PaymentMethods" do
 
     fill_in 'Descrição', :with => 'Dinheiro'
 
-    click_button 'Criar Forma de Pagamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Forma de Pagamento criada com sucesso.'
 
@@ -35,7 +35,7 @@ feature "PaymentMethods" do
 
     fill_in 'Descrição', :with => 'Cheque'
 
-    click_button 'Atualizar Forma de Pagamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Forma de Pagamento editada com sucesso.'
 
@@ -52,7 +52,7 @@ feature "PaymentMethods" do
 
     click_link 'Dinheiro'
 
-    click_link 'Apagar Dinheiro', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Forma de Pagamento apagada com sucesso.'
 
@@ -70,7 +70,7 @@ feature "PaymentMethods" do
 
     fill_in 'Descrição', :with => 'Dinheiro'
 
-    click_button 'Criar Forma de Pagamento'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

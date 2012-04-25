@@ -16,7 +16,7 @@ feature "DocumentTypes" do
     fill_in 'Validade em dias', :with => '10'
     fill_in 'Descrição', :with => 'Fiscal'
 
-    click_button 'Criar Tipo de Documento'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Documento criado com sucesso.'
 
@@ -38,7 +38,7 @@ feature "DocumentTypes" do
     fill_in 'Validade em dias', :with => '20'
     fill_in 'Descrição', :with => 'Oficial'
 
-    click_button 'Atualizar Tipo de Documento'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Documento editado com sucesso.'
 
@@ -56,7 +56,7 @@ feature "DocumentTypes" do
 
     click_link 'Fiscal'
 
-    click_link 'Apagar Fiscal', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Documento apagado com sucesso.'
 
@@ -75,7 +75,7 @@ feature "DocumentTypes" do
 
     fill_in 'Descrição', :with => 'Fiscal'
 
-    click_button 'Criar Tipo de Documento'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

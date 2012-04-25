@@ -54,7 +54,7 @@ feature "Providers" do
       fill_in 'Data de validade', :with => I18n.l(Date.current + 5.days)
     end
 
-    click_button 'Criar Fornecedor'
+    click_button 'Salvar'
 
     page.should have_notice 'Fornecedor criado com sucesso.'
 
@@ -140,7 +140,7 @@ feature "Providers" do
       fill_in 'Data de validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
-    click_button 'Atualizar Fornecedor'
+    click_button 'Salvar'
 
     page.should have_notice 'Fornecedor editado com sucesso.'
 
@@ -213,7 +213,7 @@ feature "Providers" do
       fill_in 'Data', :with => '25/02/2012'
     end
 
-    click_button 'Criar Fornecedor'
+    click_button 'Salvar'
 
     page.should have_notice 'Fornecedor criado com sucesso.'
 
@@ -415,7 +415,7 @@ feature "Providers" do
       end
     end
 
-    click_button 'Criar Fornecedor'
+    click_button 'Salvar'
 
     within_tab 'Sócios/Responsáveis pela empresa' do
       page.should have_content 'já está em uso'
@@ -465,7 +465,7 @@ feature "Providers" do
       click_button 'Remover grupo'
     end
 
-    click_button 'Atualizar Fornecedor'
+    click_button 'Salvar'
 
     page.should have_notice 'Fornecedor editado com sucesso.'
 
@@ -494,7 +494,7 @@ feature "Providers" do
       click_button 'Remover classe'
     end
 
-    click_button 'Atualizar Fornecedor'
+    click_button 'Salvar'
 
     page.should have_notice 'Fornecedor editado com sucesso.'
 
@@ -523,7 +523,7 @@ feature "Providers" do
       click_button 'Remover material'
     end
 
-    click_button 'Atualizar Fornecedor'
+    click_button 'Salvar'
 
     page.should have_notice 'Fornecedor editado com sucesso.'
 
@@ -556,7 +556,7 @@ feature "Providers" do
       click_button 'Remover'
     end
 
-    click_button 'Atualizar Fornecedor'
+    click_button 'Salvar'
 
     page.should have_notice 'Fornecedor editado com sucesso.'
 
@@ -585,7 +585,7 @@ feature "Providers" do
       fill_modal 'Pessoa', :with => 'Nohup'
     end
 
-    click_button 'Criar Fornecedor'
+    click_button 'Salvar'
 
     within_tab 'Sócios/Responsáveis pela empresa' do
       page.should have_content 'Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável'
@@ -609,7 +609,7 @@ feature "Providers" do
       click_button 'Remover'
     end
 
-    click_button 'Atualizar Fornecedor'
+    click_button 'Salvar'
 
     within_tab 'Sócios/Responsáveis pela empresa' do
       page.should_not have_field 'Pessoa'

@@ -29,7 +29,7 @@ feature "AccreditedRepresentatives" do
       fill_in 'Cargo ou função', :with => 'Gerente'
     end
 
-    click_button 'Atualizar Credenciamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Credenciamento editado com sucesso.'
 
@@ -68,7 +68,7 @@ feature "AccreditedRepresentatives" do
       end
     end
 
-    click_button 'Atualizar Credenciamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Credenciamento editado com sucesso.'
 
@@ -101,7 +101,7 @@ feature "AccreditedRepresentatives" do
       click_button 'Remover'
     end
 
-    click_button 'Atualizar Credenciamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Credenciamento editado com sucesso.'
 

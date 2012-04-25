@@ -15,7 +15,7 @@ feature "FiscalYears" do
 
     fill_in 'Ano', :with => '2011'
 
-    click_button 'Criar Exercício Fiscal'
+    click_button 'Salvar'
 
     page.should have_notice 'Exercício Fiscal criado com sucesso.'
 
@@ -35,7 +35,7 @@ feature "FiscalYears" do
 
     fill_in 'Ano', :with => '2012'
 
-    click_button 'Atualizar Exercício Fiscal'
+    click_button 'Salvar'
 
     page.should have_notice 'Exercício Fiscal editado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "FiscalYears" do
 
     click_link '2011'
 
-    click_link 'Apagar 2011', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Exercício Fiscal apagado com sucesso.'
 

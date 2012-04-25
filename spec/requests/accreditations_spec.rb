@@ -71,7 +71,7 @@ feature "Accreditations" do
       fill_modal 'Comissão de licitação', :with => '20/03/2012', :field => 'Data da nomeação'
     end
 
-    click_button 'Criar Credenciamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Credenciamento criado com sucesso.'
 
@@ -108,7 +108,7 @@ feature "Accreditations" do
       fill_modal 'Comissão de licitação', :with => '20/04/2012', :field => 'Data da nomeação'
     end
 
-    click_button 'Atualizar Credenciamento'
+    click_button 'Salvar'
 
     page.should have_notice 'Credenciamento editado com sucesso.'
 
@@ -130,9 +130,9 @@ feature "Accreditations" do
 
     click_link 'Editar credenciamento'
 
-    page.should have_link "Apagar #{accreditation}"
+    page.should have_link "Apagar"
 
-    click_link "Apagar #{accreditation}", :confirm => true
+    click_link "Apagar", :confirm => true
 
     page.should have_notice 'Credenciamento apagado com sucesso.'
 

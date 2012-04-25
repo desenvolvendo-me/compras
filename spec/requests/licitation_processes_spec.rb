@@ -118,7 +118,7 @@ feature "LicitationProcesses" do
       fill_in 'Validade', :with =>  I18n.l(Date.tomorrow)
     end
 
-    click_button 'Criar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
@@ -298,7 +298,7 @@ feature "LicitationProcesses" do
       fill_in 'Validade', :with =>  I18n.l(Date.tomorrow + 1.day)
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
@@ -391,7 +391,7 @@ feature "LicitationProcesses" do
       fill_in 'Validade', :with => ''
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
@@ -470,7 +470,7 @@ feature "LicitationProcesses" do
       fill_in 'Observações gerais', :with => 'observacoes'
     end
 
-    click_button 'Criar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
@@ -506,7 +506,7 @@ feature "LicitationProcesses" do
       end
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     within_tab 'Licitantes convidados' do
       page.should have_content 'já está em uso'
@@ -541,7 +541,7 @@ feature "LicitationProcesses" do
       check 'Auto convocação'
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
@@ -584,7 +584,7 @@ feature "LicitationProcesses" do
       page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
@@ -649,7 +649,7 @@ feature "LicitationProcesses" do
       fill_in 'Validade', :with => I18n.l(Date.tomorrow + 2.days)
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
@@ -695,7 +695,7 @@ feature "LicitationProcesses" do
       end
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'já está em uso'
@@ -726,7 +726,7 @@ feature "LicitationProcesses" do
       click_button 'Remover'
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     within_tab 'Licitantes convidados' do
       page.should_not have_field 'Documento', :with => 'Fiscal'
@@ -753,7 +753,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Total dos itens', :with => "21,00"
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     within_tab 'Dotações' do
       page.should have_content 'deve ser igual ao valor previsto'
@@ -852,7 +852,7 @@ feature "LicitationProcesses" do
       fill_in 'Valor total', :with => '20,00'
     end
 
-    click_button 'Atualizar Processo Licitatório'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 

@@ -20,7 +20,7 @@ feature "GovernmentPrograms" do
     fill_in 'Descrição', :with => 'Habitação'
     select 'Ativo', :from => 'Status'
 
-    click_button 'Criar Programa do Governo'
+    click_button 'Salvar'
 
     page.should have_notice 'Programa do Governo criado com sucesso.'
 
@@ -47,7 +47,7 @@ feature "GovernmentPrograms" do
     fill_in 'Descrição', :with => 'Educação'
     select 'Inativo', :from => 'Status'
 
-    click_button 'Atualizar Programa do Governo'
+    click_button 'Salvar'
 
     page.should have_notice 'Programa do Governo editado com sucesso.'
 
@@ -68,7 +68,7 @@ feature "GovernmentPrograms" do
 
     click_link 'Habitação'
 
-    click_link 'Apagar Habitação', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Programa do Governo apagado com sucesso.'
 

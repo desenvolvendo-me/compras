@@ -15,7 +15,7 @@ feature "Entities" do
 
     fill_in 'Nome', :with => 'Denatran'
 
-    click_button 'Criar Entidade'
+    click_button 'Salvar'
 
     page.should have_notice 'Entidade criada com sucesso.'
 
@@ -35,7 +35,7 @@ feature "Entities" do
 
     fill_in 'Nome', :with => 'Contran'
 
-    click_button 'Atualizar Entidade'
+    click_button 'Salvar'
 
     page.should have_notice 'Entidade editada com sucesso.'
 
@@ -53,7 +53,7 @@ feature "Entities" do
 
     click_link 'Detran'
 
-    click_link 'Apagar Detran', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Entidade apagada com sucesso.'
 
@@ -71,7 +71,7 @@ feature "Entities" do
 
     fill_in 'Nome', :with => 'Detran'
 
-    click_button 'Criar Entidade'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

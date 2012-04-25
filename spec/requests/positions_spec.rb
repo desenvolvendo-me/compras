@@ -15,7 +15,7 @@ feature "Positions" do
 
     fill_in 'Nome', :with => 'Gerente'
 
-    click_button 'Criar Cargo'
+    click_button 'Salvar'
 
     page.should have_notice 'Cargo criado com sucesso.'
 
@@ -35,7 +35,7 @@ feature "Positions" do
 
     fill_in 'Nome', :with => 'Gerente de Setor'
 
-    click_button 'Atualizar Cargo'
+    click_button 'Salvar'
 
     page.should have_notice 'Cargo editado com sucesso.'
 
@@ -53,7 +53,7 @@ feature "Positions" do
 
     click_link 'Gerente'
 
-    click_link 'Apagar Gerente', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Cargo apagado com sucesso.'
 
@@ -71,7 +71,7 @@ feature "Positions" do
 
     fill_in 'Nome', :with => 'Gerente'
 
-    click_button 'Criar Cargo'
+    click_button 'Salvar'
 
     page.should have_content 'já está em uso'
   end

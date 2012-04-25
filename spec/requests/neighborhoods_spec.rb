@@ -37,7 +37,7 @@ feature "Neighborhoods" do
       click_record 'Porto Alegre'
     end
 
-    click_button 'Criar Bairro'
+    click_button 'Salvar'
 
     page.should have_notice 'Bairro criado com sucesso.'
 
@@ -58,7 +58,7 @@ feature "Neighborhoods" do
 
     fill_in 'Nome', :with => 'Alvorada'
 
-    click_button 'Atualizar Bairro'
+    click_button 'Salvar'
 
     page.should have_notice 'Bairro editado com sucesso.'
 
@@ -77,7 +77,7 @@ feature "Neighborhoods" do
 
     click_link 'Centro'
 
-    click_link 'Apagar Centro', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Bairro apagado com sucesso.'
 

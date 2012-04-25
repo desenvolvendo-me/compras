@@ -31,7 +31,7 @@ feature "DeliveryLocations" do
 
     page.should have_field "Estado", :with => 'Parana'
 
-    click_button 'Criar Local de Entrega'
+    click_button 'Salvar'
 
     page.should have_notice 'Local de Entrega criado com sucesso.'
 
@@ -77,7 +77,7 @@ feature "DeliveryLocations" do
 
     page.should have_field "Estado", :with => 'Parana'
 
-    click_button 'Atualizar Local de Entrega'
+    click_button 'Salvar'
 
     page.should have_notice 'Local de Entrega editado com sucesso.'
 
@@ -106,7 +106,7 @@ feature "DeliveryLocations" do
 
     click_link 'Secretaria da Educação'
 
-    click_link 'Apagar Secretaria da Educação', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Local de Entrega apagado com sucesso.'
 
@@ -133,7 +133,8 @@ feature "DeliveryLocations" do
     fill_modal 'Loteamento', :with => 'Solar da Serra'
     fill_mask 'CEP', :with => '88900-000'
 
-    click_button 'Criar Local de Entrega'
+    click_button 'Salvar'
+
     page.should have_content "já está em uso"
   end
 end

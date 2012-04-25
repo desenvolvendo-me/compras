@@ -21,7 +21,7 @@ feature "PledgeLiquidations" do
     select 'Parcial', :from => 'Tipo de liquidação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
 
-    click_button 'Criar Liquidação de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Liquidação de Empenho criado com sucesso.'
 
@@ -232,7 +232,7 @@ feature "PledgeLiquidations" do
     select 'Total', :from => 'Tipo de liquidação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
 
-    click_button 'Criar Liquidação de Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Liquidação de Empenho criado com sucesso.'
 

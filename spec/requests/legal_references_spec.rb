@@ -20,7 +20,7 @@ feature "LegalReferences" do
     fill_in 'Incisos', :with => '004'
     fill_in 'Sinopse', :with => 'resumo'
 
-    click_button 'Criar Referência Legal'
+    click_button 'Salvar'
 
     page.should have_notice 'Referência Legal criada com sucesso.'
 
@@ -50,7 +50,7 @@ feature "LegalReferences" do
     fill_in 'Incisos', :with => '104'
     fill_in 'Sinopse', :with => 'novo resumo'
 
-    click_button 'Atualizar Referência Legal'
+    click_button 'Salvar'
 
     page.should have_notice 'Referência Legal editada com sucesso.'
 
@@ -73,7 +73,7 @@ feature "LegalReferences" do
 
     click_link 'Referencia'
 
-    click_link 'Apagar Referencia', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Referência Legal apagada com sucesso.'
 

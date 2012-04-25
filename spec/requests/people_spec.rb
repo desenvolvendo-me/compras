@@ -56,7 +56,7 @@ feature "People" do
       end
     end
 
-    click_button 'Criar Pessoa'
+    click_button 'Salvar'
 
     page.should have_notice 'Pessoa criada com sucesso.'
 
@@ -120,7 +120,7 @@ feature "People" do
       fill_in 'Complemento', :with => "Apto das alfalfas"
     end
 
-    click_button 'Atualizar Pessoa'
+    click_button 'Salvar'
 
     page.should have_notice 'Pessoa editada com sucesso.'
 
@@ -147,7 +147,7 @@ feature "People" do
 
     click_link 'Wenderson Malheiros'
 
-    click_link 'Apagar Wenderson Malheiros', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Pessoa apagada com sucesso.'
 
@@ -204,7 +204,7 @@ feature "People" do
       end
     end
 
-    click_button 'Criar Pessoa'
+    click_button 'Salvar'
 
     page.should have_notice 'Pessoa criada com sucesso.'
 
@@ -266,7 +266,7 @@ feature "People" do
       fill_in 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
     end
 
-    click_button 'Atualizar Pessoa'
+    click_button 'Salvar'
 
     page.should have_notice 'Pessoa editada com sucesso.'
 

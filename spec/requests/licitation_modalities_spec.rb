@@ -20,7 +20,7 @@ feature "LicitationModalities" do
     fill_in 'Valor inicial', :with => '500,00'
     fill_in 'Valor final', :with => '800,00'
 
-    click_button 'Criar Modalidade de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Modalidade de Licitação criada com sucesso.'
 
@@ -47,7 +47,7 @@ feature "LicitationModalities" do
     fill_in 'Valor inicial', :with => '600,00'
     fill_in 'Valor final', :with => '900,00'
 
-    click_button 'Atualizar Modalidade de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Modalidade de Licitação editada com sucesso.'
 
@@ -68,7 +68,7 @@ feature "LicitationModalities" do
 
     click_link 'Pública'
 
-    click_link 'Apagar Pública', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Modalidade de Licitação apagada com sucesso.'
 
@@ -126,7 +126,7 @@ feature "LicitationModalities" do
     fill_in 'Valor inicial', :with => '500,00'
     fill_in 'Valor final', :with => '700,00'
 
-    click_button 'Criar Modalidade de Licitação'
+    click_button 'Salvar'
 
     page.should have_content 'esta combinação de valor inicial e valor final já está em uso'
   end

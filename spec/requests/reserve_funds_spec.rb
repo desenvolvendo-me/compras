@@ -35,7 +35,7 @@ feature "ReserveFunds" do
     fill_modal 'Favorecido', :with => 'Nohup LTDA.'
     fill_in 'Histórico', :with => 'Historico da reserva'
 
-    click_button 'Criar Reserva de Dotação'
+    click_button 'Salvar'
 
     page.should have_notice 'Reserva de Dotação criado com sucesso.'
 
@@ -76,7 +76,7 @@ feature "ReserveFunds" do
     fill_modal 'Favorecido', :with => 'Nobe'
     fill_in 'Histórico', :with => 'Novo histórico'
 
-    click_button 'Atualizar Reserva de Dotação'
+    click_button 'Salvar'
 
     page.should have_notice 'Reserva de Dotação editado com sucesso.'
 
@@ -103,7 +103,7 @@ feature "ReserveFunds" do
 
     click_link '2012'
 
-    click_link "Apagar #{reserve_fund.id}/2012", :confirm => true
+    click_link "Apagar", :confirm => true
 
     page.should have_notice 'Reserva de Dotação apagado com sucesso.'
 
@@ -209,7 +209,7 @@ feature "ReserveFunds" do
 
     fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
 
-    click_button 'Atualizar Reserva de Dotação'
+    click_button 'Salvar'
 
     click_link '2012'
 

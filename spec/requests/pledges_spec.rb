@@ -87,7 +87,7 @@ feature "Pledges" do
       end
     end
 
-    click_button 'Criar Empenho'
+    click_button 'Salvar'
 
     page.should have_notice 'Empenho criado com sucesso.'
 
@@ -213,7 +213,7 @@ feature "Pledges" do
       fill_in 'Vencimento', :with => I18n.l(Date.current - 10.days)
     end
 
-    click_button 'Criar Empenho'
+    click_button 'Salvar'
 
     within_tab 'Vencimentos' do
       page.should have_content 'deve ser maior que a data de emissão'
@@ -243,7 +243,7 @@ feature "Pledges" do
       end
     end
 
-    click_button 'Criar Empenho'
+    click_button 'Salvar'
 
     within_tab 'Vencimentos' do
       within 'fieldset:last' do
@@ -276,7 +276,7 @@ feature "Pledges" do
       end
     end
 
-    click_button 'Criar Empenho'
+    click_button 'Salvar'
 
     within_tab 'Vencimentos' do
       within 'fieldset:first' do
@@ -384,7 +384,7 @@ feature "Pledges" do
       page.find('a').click
     end
 
-    page.should_not have_link "Apagar #{pledge.id}"
+    page.should_not have_link "Apagar"
   end
 
   scenario 'Fill budget allocation informations when select reserve fund' do
@@ -592,7 +592,7 @@ feature "Pledges" do
       fill_in 'pledge_pledge_items_attributes_fresh-1_unit_price', :with => "100,00"
     end
 
-    click_button 'Criar Empenho'
+    click_button 'Salvar'
 
     within_tab 'Itens' do
       page.should have_content 'já está em uso'

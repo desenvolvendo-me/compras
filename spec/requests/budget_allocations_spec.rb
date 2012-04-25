@@ -44,7 +44,7 @@ feature "BudgetAllocations" do
       select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo da programação'
     end
 
-    click_button 'Criar Dotação Orçamentária'
+    click_button 'Salvar'
 
     page.should have_notice 'Dotação Orçamentária criado com sucesso.'
 
@@ -140,7 +140,7 @@ feature "BudgetAllocations" do
       fill_in 'Valor', :with => '800,00'
     end
 
-    click_button 'Atualizar Dotação Orçamentária'
+    click_button 'Salvar'
 
     page.should have_notice 'Dotação Orçamentária editado com sucesso.'
 
@@ -261,7 +261,7 @@ feature "BudgetAllocations" do
 
     click_link 'Alocação'
 
-    click_link "Apagar #{budget_allocation.id}/2012", :confirm => true
+    click_link "Apagar", :confirm => true
 
     page.should have_notice 'Dotação Orçamentária apagado com sucesso.'
 
@@ -281,7 +281,7 @@ feature "BudgetAllocations" do
       fill_in 'Descrição', :with => 'Alocação'
     end
 
-    click_button 'Criar Dotação Orçamentária'
+    click_button 'Salvar'
 
     within_tab 'Principal' do
       page.should have_content 'já está em uso'

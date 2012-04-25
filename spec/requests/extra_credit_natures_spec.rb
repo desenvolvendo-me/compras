@@ -16,7 +16,7 @@ feature "ExtraCreditNatures" do
     fill_in 'Descrição', :with => 'Abre crédito suplementar'
     select 'Outros', :from => 'Classificação'
 
-    click_button 'Criar Natureza de Crédito Suplementar'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza de Crédito Suplementar criado com sucesso.'
 
@@ -38,7 +38,7 @@ feature "ExtraCreditNatures" do
     fill_in 'Descrição', :with => 'Abre crédito suplementar - superavit financeiro'
     select 'Remanejamento', :from => 'Classificação'
 
-    click_button 'Atualizar Natureza de Crédito Suplementar'
+    click_button 'Salvar'
 
     page.should have_notice 'Natureza de Crédito Suplementar editado com sucesso.'
 
@@ -57,7 +57,7 @@ feature "ExtraCreditNatures" do
 
     click_link 'Abre crédito suplementar'
 
-    click_link 'Apagar Abre crédito suplementar', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
 

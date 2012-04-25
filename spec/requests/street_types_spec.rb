@@ -16,7 +16,7 @@ feature "StreetTypes" do
     fill_in 'Nome', :with => 'Alameda'
     fill_in 'Sigla', :with => 'ALA'
 
-    click_button 'Criar Tipo de Logradouro'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Logradouro criado com sucesso.'
 
@@ -39,7 +39,7 @@ feature "StreetTypes" do
 
     fill_in 'Sigla', :with => 'TRA'
 
-    click_button 'Atualizar Tipo de Logradouro'
+    click_button 'Salvar'
 
     page.should have_notice 'Tipo de Logradouro editado com sucesso.'
 
@@ -58,7 +58,7 @@ feature "StreetTypes" do
 
     click_link 'Rua'
 
-    click_link 'Apagar Rua', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Tipo de Logradouro apagado com sucesso.'
 

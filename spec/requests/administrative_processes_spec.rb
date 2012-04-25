@@ -42,7 +42,7 @@ feature "AdministrativeProcesses" do
       fill_in 'Valor previsto', :with => '20,00'
     end
 
-    click_button 'Criar Processo Administrativo'
+    click_button 'Salvar'
 
     page.should have_notice 'Processo Administrativo criado com sucesso.'
 
@@ -205,7 +205,7 @@ feature "AdministrativeProcesses" do
       end
     end
 
-    click_button 'Criar Processo Administrativo'
+    click_button 'Salvar'
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'já está em uso'

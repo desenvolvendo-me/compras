@@ -60,7 +60,7 @@ feature "LicitationObjects" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
     end
 
-    click_button 'Criar Objeto de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Objeto de Licitação criado com sucesso.'
 
@@ -126,7 +126,7 @@ feature "LicitationObjects" do
       click_button 'Remover material'
     end
 
-    click_button 'Atualizar Objeto de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Objeto de Licitação editado com sucesso.'
 
@@ -156,7 +156,7 @@ feature "LicitationObjects" do
       fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
     end
 
-    click_button 'Atualizar Objeto de Licitação'
+    click_button 'Salvar'
 
     page.should have_notice 'Objeto de Licitação editado com sucesso.'
 
@@ -181,7 +181,7 @@ feature "LicitationObjects" do
 
     click_link 'Ponte'
 
-    click_link 'Apagar Ponte', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Objeto de Licitação apagado com sucesso.'
 
@@ -203,7 +203,7 @@ feature "LicitationObjects" do
       fill_in 'Descrição', :with => 'Ponte'
     end
 
-    click_button 'Criar Objeto de Licitação'
+    click_button 'Salvar'
 
     within_tab 'Principal' do
       page.should have_content 'já existe para o ano informado'
