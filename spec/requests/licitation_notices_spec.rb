@@ -62,7 +62,7 @@ feature "LicitationNotices" do
     page.should have_field 'Data do aviso', :with => '12/04/2012'
     page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
     page.should have_field 'Número da licitação', :with => '1'
-    page.should have_field 'Data do processo', :with => '20/03/2012'
+    page.should have_field 'Data do processo', :with => '20/03/2013'
     page.should have_field 'Objeto da licitação', :with => 'Descricao do computador'
     page.should have_field 'Observações gerais', :with => 'Aviso de processo, continuação.'
   end
@@ -94,7 +94,7 @@ feature "LicitationNotices" do
     page.should have_field 'Data do aviso', :with => '07/04/2012'
     page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
     page.should have_field 'Número da licitação', :with => '1'
-    page.should have_field 'Data do processo', :with => '20/03/2012'
+    page.should have_field 'Data do processo', :with => '20/03/2013'
     page.should have_field 'Objeto da licitação', :with => 'Descricao do computador'
     page.should have_field 'Observações gerais', :with => 'Aviso de processo 3'
   end

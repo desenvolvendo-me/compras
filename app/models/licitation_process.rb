@@ -38,7 +38,7 @@ class LicitationProcess < ActiveRecord::Base
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
   delegate :budget_unit, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
-           :item, :licitation_process, :to => :administrative_process, :allow_nil => true, :prefix => true
+           :item, :licitation_process, :date, :to => :administrative_process, :allow_nil => true, :prefix => true
 
   delegate :administrative_process_budget_allocations, :to => :administrative_process, :allow_nil => true
 
@@ -54,6 +54,7 @@ class LicitationProcess < ActiveRecord::Base
     allowing_blank.validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
     allowing_blank.validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
     allowing_blank.validates :envelope_delivery_time, :envelope_opening_time, :timeliness => { :type => :time }
+    allowing_blank.validates :process_date, :timeliness => { :on_or_after => :administrative_process_date, :type => :date }
   end
 
   before_save :set_modality, :clear_bidders_depending_on_modality

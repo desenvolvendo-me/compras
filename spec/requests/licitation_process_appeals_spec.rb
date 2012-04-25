@@ -52,7 +52,7 @@ feature "LicitationProcessAppeals" do
     click_link interposicao_processo_licitatorio.to_s
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
-    fill_in 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
+    fill_in 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     select 'Revogação', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Wenderson Malheiros', :field => 'Nome'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
@@ -66,7 +66,7 @@ feature "LicitationProcessAppeals" do
     click_link interposicao_processo_licitatorio.to_s
 
     page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
+    page.should have_field 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     page.should have_select 'Referente ao', :selected => 'Revogação'
     page.should have_field 'Autor', :with => 'Wenderson Malheiros'
     page.should have_field 'Objeto do Processo', :with => 'Descricao do computador'

@@ -14,6 +14,7 @@ require 'app/models/accreditation'
 require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
 require 'app/models/provider'
+require 'app/models/licitation_notice'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -171,5 +172,21 @@ describe LicitationProcess do
     subject.stub(:judgment_commission_advices).and_return(Array.new(5))
 
     subject.next_judgment_commission_advice.should eq 6
+  end
+
+  it 'should not have process_date less than administrative_process_date' do
+    subject.stub(:administrative_process_date).and_return(Date.current)
+    subject.stub(:process_date).and_return(Date.yesterday)
+
+    subject.valid?
+    subject.errors.messages[:process_date].should include 'deve ser em ou depois de 25/04/2012'
+  end
+
+   it 'should have process_date equal or greater than administrative_process_date' do
+    subject.stub(:administrative_process_date).and_return(Date.current)
+    subject.stub(:process_date).and_return(Date.current)
+
+    subject.valid?
+    subject.errors.messages[:process_date].should be_nil
   end
 end

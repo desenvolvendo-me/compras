@@ -449,7 +449,7 @@ feature "LicitationProcesses" do
       page.should have_disabled_field 'Processo'
 
       fill_in 'Ano', :with => '2013'
-      fill_in 'Data do processo', :with => '21/04/2012'
+      fill_in 'Data do processo', :with => '21/04/2013'
       fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       select 'Global', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
