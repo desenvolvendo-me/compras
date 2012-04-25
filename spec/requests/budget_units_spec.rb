@@ -243,7 +243,7 @@ feature "BudgetUnit" do
 
       click_button 'Adicionar Responsável'
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
         fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
         fill_in 'Data de início', :with => '01/02/2012'
