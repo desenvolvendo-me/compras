@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/judgment_commission_advice'
+require 'app/models/judgment_commission_advice_member'
+require 'app/models/individual'
 
 describe JudgmentCommissionAdvice do
   it { should belong_to :licitation_process }
@@ -41,5 +43,33 @@ describe JudgmentCommissionAdvice do
 
     individual_one.errors.messages[:individual_id].should be_nil
     individual_two.errors.messages[:individual_id].should be_nil
+  end
+
+  context "inherited and not inherited members" do
+    let(:member1) do
+      double('member 1', :to_hash => {:member => 1})
+    end
+
+    let(:member2) do
+      double('member 2', :to_hash => {:member => 2})
+    end
+
+    let(:member3) do
+      double('member 3', :to_hash => {:member => 3})
+    end
+
+    it "it should return the inherited members" do
+      subject.stub(:licitation_commission_members).and_return([member1, member3])
+      subject.stub(:judgment_commission_advice_members).and_return([member1, member2, member3])
+
+      subject.inherited_members.should eq [member1, member3]
+    end
+
+    it "it should return the not inherited members" do
+      subject.stub(:licitation_commission_members).and_return([member1, member2])
+      subject.stub(:judgment_commission_advice_members).and_return([member1, member2, member3])
+
+      subject.not_inherited_members.should eq [member3]
+    end
   end
 end

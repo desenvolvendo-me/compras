@@ -8,7 +8,10 @@ pt-BR:
     attributes:
       judgment_commission_advice_member:
         individual: "Membro"
+        individual_name: "Membro"
         individual_cpf: "CPF"
         role: "Função"
+        role_humanize: "Função"
         role_nature: "Natureza do cargo"
+        role_nature_humanize: "Natureza do cargo"
         registration: "Matrícula"

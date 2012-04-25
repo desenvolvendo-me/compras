@@ -7,7 +7,14 @@ class JudgmentCommissionAdviceMember < ActiveRecord::Base
   belongs_to :judgment_commission_advice
   belongs_to :individual
 
-  delegate :cpf, :to => :individual, :allow_nil => true, :prefix => true
+  delegate :cpf, :to_s, :to => :individual, :allow_nil => true, :prefix => true
 
   validates :individual, :role, :role_nature, :registration, :presence => true
+
+  def to_hash
+    {:individual_id => individual_id,
+     :role => role,
+     :role_nature => role_nature,
+     :registration => registration}
+  end
 end

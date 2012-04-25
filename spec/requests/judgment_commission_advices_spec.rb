@@ -35,12 +35,27 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Membros' do
+      # Verifying member that comes from Licitation Commission
+      page.should have_disabled_field 'Membro'
+      page.should have_disabled_field 'CPF'
+      page.should have_disabled_field 'Função'
+      page.should have_disabled_field 'Natureza do cargo'
+      page.should have_disabled_field 'Matrícula'
+
+      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+      page.should have_field 'CPF', :with => '003.149.513-34'
+      page.should have_field 'Função', :with => 'Presidente'
+      page.should have_field 'Natureza do cargo', :with => 'Servidor efetivo'
+      page.should have_field 'Matrícula', :with => '38'
+
       click_button 'Adicionar Membro'
 
-      fill_modal 'Membro', :with => 'Gabriel Sobrinho'
-      select 'Presidente', :from => 'Função'
-      select 'Servidor efetivo', :from => 'Natureza do cargo'
-      fill_in 'Matrícula', :with => '3456789'
+      within '.member:last' do
+        fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+        select 'Presidente', :from => 'Função'
+        select 'Servidor efetivo', :from => 'Natureza do cargo'
+        fill_in 'Matrícula', :with => '3456789'
+      end
     end
 
     click_button 'Criar Parecer da Comissão Julgadora'
@@ -60,21 +75,28 @@ feature "JudgmentCommissionAdvices" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Comissão julgadora', :with => licitation_commission.to_s
       page.should have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
-
-      # testing delegated modality from licitation process when cleaning the licitation process
-      clear_modal 'Processo licitatório'
-      page.should have_field 'Modalidade', :with => ''
-
-      # testing delegated president from licitation commission when cleaning the licitation commission
-      clear_modal 'Comissão julgadora'
-      page.should have_field 'Presidente da comissão', :with => ''
     end
 
     within_tab 'Membros' do
-      page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
-      page.should have_select 'Função', :selected => 'Presidente'
-      page.should have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
-      page.should have_field 'Matrícula', :with => '3456789'
+      # Verifying member that comes from Licitation Commission
+      page.should have_disabled_field 'Membro'
+      page.should have_disabled_field 'CPF'
+      page.should have_disabled_field 'Função'
+      page.should have_disabled_field 'Natureza do cargo'
+      page.should have_disabled_field 'Matrícula'
+
+      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+      page.should have_field 'CPF', :with => '003.149.513-34'
+      page.should have_field 'Função', :with => 'Presidente'
+      page.should have_field 'Natureza do cargo', :with => 'Servidor efetivo'
+      page.should have_field 'Matrícula', :with => '38'
+
+      within '.member:last' do
+        page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+        page.should have_select 'Função', :selected => 'Presidente'
+        page.should have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
+        page.should have_field 'Matrícula', :with => '3456789'
+      end
     end
   end
 
@@ -99,13 +121,12 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Membros' do
-      click_button 'Adicionar Membro'
+      page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
 
       within '.member:last' do
-        fill_modal 'Membro', :with => 'Gabriel Sobrinho'
-        select 'Apoio', :from => 'Função'
-        select 'Outros', :from => 'Natureza do cargo'
-        fill_in 'Matrícula', :with => '987654'
+        page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+
+        click_button 'Remover'
       end
     end
 
@@ -127,12 +148,8 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Membros' do
-      within '.member:last' do
-        page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
-        page.should have_select 'Função', :selected => 'Apoio'
-        page.should have_select 'Natureza do cargo', :selected => 'Outros'
-        page.should have_field 'Matrícula', :with => '987654'
-      end
+      page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
+      page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
     end
   end
 
@@ -217,10 +234,12 @@ feature "JudgmentCommissionAdvices" do
     within_tab 'Membros' do
       click_button 'Adicionar Membro'
 
-      fill_modal 'Membro', :with => 'Gabriel Sobrinho'
-      select 'Presidente', :from => 'Função'
-      select 'Servidor efetivo', :from => 'Natureza do cargo'
-      fill_in 'Matrícula', :with => '3456789'
+      within '.member:last' do
+        fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+        select 'Presidente', :from => 'Função'
+        select 'Servidor efetivo', :from => 'Natureza do cargo'
+        fill_in 'Matrícula', :with => '3456789'
+      end
 
       click_button 'Adicionar Membro'
 
@@ -259,6 +278,58 @@ feature "JudgmentCommissionAdvices" do
       clear_modal 'Membro'
       page.should have_disabled_field 'CPF'
       page.should have_field 'CPF', :with => ''
+    end
+  end
+
+  scenario 'should clean delegated fields and inherited members when cleaning modal fileds' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    licitation_commission = LicitationCommission.make!(:comissao)
+    Person.make!(:sobrinho)
+
+    click_link 'Processos'
+
+    click_link 'Pareceres das Comissões Julgadoras'
+
+    click_link 'Criar Parecer da Comissão Julgadora'
+
+    within_tab 'Principal' do
+      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+
+      # testing delegated modality and next judgment commission advice number from licitation process
+      page.should have_field 'Modalidade', :with => 'CV'
+      page.should have_field 'Sequência de julgamento', :with => '1'
+
+      # removing licitation process
+      clear_modal 'Processo licitatório'
+      page.should have_field 'Modalidade', :with => ''
+      page.should have_field 'Sequência de julgamento', :with => ''
+
+      fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
+
+      # testing delegated president name from licitation commission
+      page.should have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
+    end
+
+    within_tab 'Membros' do
+      # Verifying member that comes from Licitation Commission
+      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+      page.should have_field 'CPF', :with => '003.149.513-34'
+      page.should have_field 'Função', :with => 'Presidente'
+      page.should have_field 'Natureza do cargo', :with => 'Servidor efetivo'
+      page.should have_field 'Matrícula', :with => '38'
+    end
+
+    within_tab 'Principal' do
+      clear_modal 'Comissão julgadora'
+    end
+
+    within_tab 'Membros' do
+      # Verifying member that comes from Licitation Commission
+      page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
+      page.should_not have_field 'CPF', :with => '003.149.513-34'
+      page.should_not have_field 'Função', :with => 'Presidente'
+      page.should_not have_field 'Natureza do cargo', :with => 'Servidor efetivo'
+      page.should_not have_field 'Matrícula', :with => '38'
     end
   end
 end

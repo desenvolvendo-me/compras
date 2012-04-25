@@ -1,7 +1,11 @@
 <%= f.error :judgment_commission_advice_members %>
 
 <div id="licitation-commission-members">
-  <%= f.association :judgment_commission_advice_members, :collection => localized(f.object.judgment_commission_advice_members) do |p| %>
+  <%= f.association :judgment_commission_advice_members, :collection => localized(f.object.inherited_members) do |p| %>
+    <%= render 'licitation_commission_members/locked_form', :f => p %>
+  <% end %>
+
+  <%= f.association :judgment_commission_advice_members, :collection => localized(f.object.not_inherited_members) do |p| %>
     <%= render 'licitation_commission_members/form', :f => p %>
   <% end %>
 </div>
@@ -9,6 +13,12 @@
 <p>
   <input type="button" class="button affirmative add-member" value="Adicionar Membro">
 </p>
+
+<%= mustache 'licitation-commission-inherited-member-template' do %>
+  <%= f.association :judgment_commission_advice_members_attributes, :collection => f.object.judgment_commission_advice_members.build, :index => '{{uuid_member}}' do |p| %>
+    <%= render 'licitation_commission_members/locked_form', :f => p %>
+  <% end %>
+<% end %>
 
 <%= mustache 'member-template' do %>
   <%= f.association :judgment_commission_advice_members_attributes, :collection => f.object.judgment_commission_advice_members.build, :index => '{{uuid_member}}' do |p| %>
@@ -22,6 +32,12 @@
     remove: '.remove-member',
     target: '#licitation-commission-members',
     uuid: 'uuid_member',
+    fieldToRemove: '.member'
+  });
+
+  $("#licitation-commission-inherited-member-template").nestedForm({
+    remove: '.remove-member',
+    target: '#licitation-commission-members',
     fieldToRemove: '.member'
   });
 </script>

@@ -10,4 +10,16 @@ describe JudgmentCommissionAdviceMember do
   it { should validate_presence_of :role }
   it { should validate_presence_of :role_nature }
   it { should validate_presence_of :registration }
+
+  it 'should return to hash correctly' do
+    subject.individual_id = 3
+    subject.registration = 'registration'
+    subject.role = 'role'
+    subject.role_nature = 'role nature'
+
+    subject.to_hash.should eq({:individual_id => 3,
+                               :registration => 'registration',
+                               :role => 'role',
+                               :role_nature => 'role nature' })
+  end
 end

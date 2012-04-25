@@ -36,13 +36,44 @@
     }
   });
 
+  function cleanExistingMembers() {
+    $('.member.inherited').each(function() {
+      $(this).find('input.destroy').attr('value', 'true');
+      $(this).hide();
+    });
+  }
+
+  function createMembersFromLicitationCommission(members) {
+    cleanExistingMembers();
+
+    var template = $('#licitation-commission-inherited-member-template'),
+        target = $('#licitation-commission-members'),
+        member;
+
+    $(members).each(function() {
+      member = template.mustache({ uuid_member: _.uniqueId('fresh-'),
+                                   individual_name: this.individual_name,
+                                   individual_id: this.individual_id,
+                                   cpf: "cpff",
+                                   role: this.role,
+                                   role_humanize: this.role_humanize,
+                                   role_nature: this.role_nature,
+                                   role_nature_humanize: this.role_nature_humanize,
+                                   registration: this.registration,
+                                   cpf: this.cpf });
+      target.prepend(member);
+    });
+  }
+
   $('#judgment_commission_advice_licitation_commission_id').change(function (event, data) {
     if (data){
       var record = data.record;
 
       $('#judgment_commission_advice_licitation_commission_president_name').val(record.data("president-name"));
+      createMembersFromLicitationCommission(record.data("members"));
     } else {
       $('#judgment_commission_advice_licitation_commission_president_name').val('');
+      cleanExistingMembers();
     }
   });
 

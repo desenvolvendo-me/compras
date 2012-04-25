@@ -12,6 +12,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   delegate :modality_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
   delegate :next_judgment_commission_advice, :to => :licitation_process, :allow_nil => true, :prefix => true
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
+  delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 
   validates :licitation_process, :licitation_commission, :year, :minutes_number, :presence => true
   validates :year, :mask => "9999"
@@ -27,6 +28,18 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
 
   def next_minutes_number
     last_minutes_number_of_self_year.succ
+  end
+
+  def not_inherited_members
+    judgment_commission_advice_members.reject do |member|
+      inherited_members_to_hash.include? member.to_hash
+    end
+  end
+
+  def inherited_members
+    judgment_commission_advice_members.select do |member|
+      inherited_members_to_hash.include? member.to_hash
+    end
   end
 
   protected
@@ -49,5 +62,11 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
       end
       single_individuals << responsible.individual_id
     end
+  end
+
+  def inherited_members_to_hash
+    return [] unless licitation_commission_members
+
+    licitation_commission_members.collect(&:to_hash)
   end
 end

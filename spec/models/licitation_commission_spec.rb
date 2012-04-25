@@ -122,4 +122,14 @@ describe LicitationCommission do
       subject.errors.messages[:licitation_commission_members].should be_nil
     end
   end
+
+  it 'should return the attr_data for members' do
+    member1 = double(:attributes_for_data => 'attributes 1')
+    member2 = double(:attributes_for_data => 'attributes 2')
+    member3 = double(:attributes_for_data => 'attributes 3')
+
+    subject.stub(:licitation_commission_members).and_return([member1, member2, member3])
+
+    subject.members_attr_data.should eq ["attributes 1", "attributes 2", "attributes 3"].to_json
+  end
 end
