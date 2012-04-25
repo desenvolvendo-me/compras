@@ -19,7 +19,7 @@ feature "BudgetUnitConfigurations" do
     fill_in 'Descrição', :with => 'Nome da Configuração'
     fill_modal 'Entidade', :with => 'Detran'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-    click_button 'Adicionar'
+    click_button 'Adicionar Estrutura'
     fill_in 'Nível', :with => '1'
     fill_in 'budget_unit_configuration_budget_unit_levels_attributes_fresh-0_description', :with => 'Órgão'
     fill_in 'Dígitos', :with => '2'
@@ -47,15 +47,15 @@ feature "BudgetUnitConfigurations" do
 
     click_link 'Criar Configuração de Unidade Orçamentária'
 
-    click_button 'Adicionar'
+    click_button 'Adicionar Estrutura'
 
     fill_in 'Nível', :with => '2'
 
     fill_in 'Dígitos', :with => '2'
 
-    click_button 'Adicionar'
+    click_button 'Adicionar Estrutura'
 
-    within '.budget-unit-level:last' do
+    within 'fieldset:first' do
       fill_in 'Nível', :with => '1'
 
       fill_in 'Dígitos', :with => '3'

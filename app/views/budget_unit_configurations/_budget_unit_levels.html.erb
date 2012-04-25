@@ -1,17 +1,12 @@
-<fieldset>
-  <legend>
-    Estrutura
-  </legend>
+<input type="button" class="button affirmative add-budget-unit-level" value="Adicionar Estrutura">
 
+<div>
   <div id="budget_unit_levels">
     <%= f.association :budget_unit_levels, :collection => localized(f.object.budget_unit_levels) do |p| %>
       <%= render 'budget_unit_levels/form', :f => p %>
     <% end %>
   </div>
-  <p>
-    <input type="button" class="button affirmative add-budget-unit-level" value="Adicionar">
-  </p>
-</fieldset>
+</div>
 
 <%= mustache 'budget-unit-levels-template' do %>
   <%= f.association :budget_unit_levels_attributes, :collection => f.object.budget_unit_levels.build, :index => '{{uuid_budget_unit_level}}' do |p| %>
@@ -25,7 +20,6 @@
     remove: '.remove-budget-unit-level',
     target: '#budget_unit_levels',
     uuid: 'uuid_budget_unit_level',
-    fieldToRemove: '.budget-unit-level',
-    right: true
+    appendItem: false
   });
 </script>

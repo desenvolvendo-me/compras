@@ -1,26 +1,22 @@
-<div class="yui3-g budget-unit-level nested">
+<fieldset class="yui3-g nested">
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-4">
     <%= f.input :level, :input_html => { :class => 'level', :size => 2 } %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-4">
     <%= f.input :description %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-4">
     <%= f.input :digits, :input_html => { :class => 'digits', :size => 4 } %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-4">
     <%= f.input :separator, :input_html => { :class => 'separator' } %>
   </div>
 
-  <div class="yui3-u-1-5">
-    <div class="nested-remove">
-      <input type="button" class="button negative remove-budget-unit-level" value="Remover">
-    </div>
-  </div>
-</div>
+  <input type="button" class="button negative remove-budget-unit-level" value="Remover Estrutura">
+</fieldset>
