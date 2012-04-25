@@ -112,6 +112,8 @@ feature "Accreditations" do
 
     page.should have_notice 'Credenciamento editado com sucesso.'
 
+    click_link 'Editar credenciamento'
+
     page.should have_field 'Comissão de licitação', :with => "#{licitation_commission.id}"
   end
 

@@ -24,7 +24,7 @@ class AccreditationsController < CrudController
   end
 
   def update
-    update! { edit_resource_path }
+    update! { edit_licitation_process_path(resource.licitation_process.id) }
   end
 
   def destroy

@@ -43,12 +43,12 @@ describe AccreditationsController do
   end
 
   describe 'PUT #update' do
-    it 'should redirect to current accreditation edit link when updated successful' do
+    it 'should redirect to licitation process edit link when updated successful' do
       accreditation = Accreditation.make!(:credenciamento)
 
       put :update, :licitation_process_id => accreditation.licitation_process.id
 
-      response.should redirect_to(edit_licitation_process_accreditation_path(accreditation.licitation_process.id))
+      response.should redirect_to(edit_licitation_process_path(accreditation.licitation_process.id))
     end
   end
 

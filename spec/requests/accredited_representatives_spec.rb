@@ -33,6 +33,8 @@ feature "AccreditedRepresentatives" do
 
     page.should have_notice 'Credenciamento editado com sucesso.'
 
+    click_link 'Editar credenciamento'
+
     within_tab 'Representantes' do
       page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
@@ -70,6 +72,8 @@ feature "AccreditedRepresentatives" do
 
     page.should have_notice 'Credenciamento editado com sucesso.'
 
+    click_link 'Editar credenciamento'
+
     within_tab 'Representantes' do
       within '.representative:last' do
         page.should have_field 'Número', :with => '2'
@@ -100,6 +104,8 @@ feature "AccreditedRepresentatives" do
     click_button 'Atualizar Credenciamento'
 
     page.should have_notice 'Credenciamento editado com sucesso.'
+
+    click_link 'Editar credenciamento'
 
     within_tab 'Representantes' do
       page.should_not have_field 'Pessoa', :with => 'Wenderson Malheiros'
