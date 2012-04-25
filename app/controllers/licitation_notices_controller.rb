@@ -1,5 +1,4 @@
 class LicitationNoticesController < CrudController
-
   def new
     object = build_resource
     object.date = Date.current
