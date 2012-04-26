@@ -111,7 +111,7 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Responsáveis' do
-      click_button 'Remover'
+      click_button 'Remover Responsável'
 
       click_button 'Adicionar Responsável'
 
@@ -122,7 +122,7 @@ feature "LicitationCommissions" do
     within_tab 'Membros' do
       click_button 'Adicionar Membro'
 
-      within '.member:last' do
+      within '.member:first' do
         fill_modal 'Membro', :with => 'Gabriel Sobrinho'
         select 'Apoio', :from => 'Função'
         select 'Outros', :from => 'Natureza do cargo'
@@ -155,6 +155,7 @@ feature "LicitationCommissions" do
 
     within_tab 'Membros' do
       within '.member:last' do
+
         page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
         page.should have_select 'Função', :selected => 'Apoio'
         page.should have_select 'Natureza do cargo', :selected => 'Outros'
@@ -338,7 +339,7 @@ feature "LicitationCommissions" do
 
       click_button 'Adicionar Responsável'
 
-      within '.responsible:last' do
+      within '.responsible:first' do
         fill_modal 'Autoridade', :with => 'Wenderson Malheiros'
         select 'Prefeito municipal', :from => 'Cargo'
       end
@@ -387,7 +388,7 @@ feature "LicitationCommissions" do
 
       click_button 'Adicionar Membro'
 
-      within '.member:last' do
+      within '.member:first' do
         fill_modal 'Membro', :with => 'Wenderson Malheiros'
         select 'Apoio', :from => 'Função'
         select 'Outros', :from => 'Natureza do cargo'
@@ -448,7 +449,7 @@ feature "LicitationCommissions" do
     within_tab 'Membros' do
       click_button 'Adicionar Membro'
 
-      within '.member:last' do
+      within '.member:first' do
         fill_modal 'Membro', :with => 'Gabriel Sobrinho'
         select 'Presidente', :from => 'Função'
       end
