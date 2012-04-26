@@ -55,5 +55,21 @@ describe AdministrativeProcessesController do
 
       response.should redirect_to(administrative_processes_path)
     end
+
+    it "should release an administrative process with status waiting" do
+      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+
+      put :update, :id => administrative_process.id, :commit => 'Liberar'
+
+      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::RELEASED
+    end
+
+    it "should not release an administrative process without status waiting" do
+      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+
+      put :update, :id => administrative_process.id
+
+      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
+    end
   end
 end

@@ -15,7 +15,13 @@ class AdministrativeProcessesController < CrudController
 
   def update
     if resource.waiting?
-      super
+      if params.has_key?(:commit) && params[:commit] == 'Liberar'
+        resource.status = AdministrativeProcessStatus::RELEASED
+        resource.save!
+        redirect_to administrative_processes_path, :notice => t(:administrative_process_released_successful)
+      else
+        super
+      end
     else
       redirect_to edit_administrative_process_path(resource.id)
     end

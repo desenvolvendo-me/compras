@@ -1,5 +1,8 @@
 <div class="buttons">
-  <%= f.button :submit if f.object.waiting? %>
+  <%- if f.object.waiting? %>
+    <%= f.button :submit %>
+    <%= f.button :submit, 'Liberar' %>
+  <%- end %>
   <%= link_to "Imprimir", resource_path(resource), :class => 'clear button neutral' if f.object.released? %>
   <%= f.button :cancel %>
 </div>
