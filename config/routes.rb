@@ -63,7 +63,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :administrative_processes, :except => [:update, :destroy] do
+  resources :administrative_processes, :except => [ :destroy ] do
     collection do
       get :filter
       get :modal

@@ -73,8 +73,8 @@ feature "AdministrativeProcesses" do
     end
   end
 
-  scenario 'should have all fields disabled when editing an existent administrative_process' do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+  scenario 'should have all fields disabled on edit when status is different from waiting' do
+    AdministrativeProcess.make!(:compra_liberada)
 
     click_link 'Processos'
 
@@ -212,5 +212,66 @@ feature "AdministrativeProcesses" do
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'já está em uso'
     end
+  end
+
+  scenario 'update an existing administrative process' do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Status do processo administrativo'
+      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      select 'Aguardando', :from => 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      fill_in 'Valor previsto', :with => '30,00'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Processo Administrativo editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Processo'
+      page.should have_field 'Process', :with => '1'
+      page.should have_disabled_field 'Ano'
+      page.should have_field 'Ano', :with => '2012'
+      page.should have_field 'Data do processo', :with => '07/03/2012'
+      page.should have_field 'Número do protocolo', :with => '00099/2012'
+      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      page.should have_select 'Modalidade', :selected => 'Pregão presencial'
+      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      page.should have_disabled_field 'Data de liberação'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should have_field 'Valor previsto', :with => '30,00'
+    end
+
+
   end
 end

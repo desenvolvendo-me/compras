@@ -38,4 +38,22 @@ describe AdministrativeProcessesController do
       assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
     end
   end
+
+  describe "PUT #update" do
+    it 'should redirect to edit when administrative process status is not waiting' do
+      administrative_process = AdministrativeProcess.make!(:compra_liberada)
+
+      put :update, :id => administrative_process.id
+
+      response.should redirect_to(edit_administrative_process_path(administrative_process.id))
+    end
+
+    it 'should update when administrative process status is waiting' do
+      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+
+      put :update, :id => administrative_process.id
+
+      response.should redirect_to(administrative_processes_path)
+    end
+  end
 end

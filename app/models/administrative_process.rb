@@ -8,7 +8,7 @@ class AdministrativeProcess < ActiveRecord::Base
 
   has_enumeration_for :modality, :with => AdministrativeProcessModality
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
-  has_enumeration_for :status, :with => AdministrativeProcessStatus
+  has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true
 
   belongs_to :budget_unit
   belongs_to :responsible, :class_name => 'Employee'

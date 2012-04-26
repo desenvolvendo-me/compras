@@ -1,5 +1,5 @@
 class AdministrativeProcessesController < CrudController
-  actions :all, :except => [:update, :destroy]
+  actions :all, :except => [ :destroy ]
 
   has_scope :without_licitation_process, :type => :boolean
 
@@ -11,6 +11,14 @@ class AdministrativeProcessesController < CrudController
     object.responsible = current_user.employee
 
     super
+  end
+
+  def update
+    if resource.waiting?
+      super
+    else
+      redirect_to edit_administrative_process_path(resource.id)
+    end
   end
 
   def create

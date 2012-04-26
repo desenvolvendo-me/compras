@@ -53,7 +53,7 @@
     $("#administrative_process_modality").val("<%= f.object.modality %>");
   })();
 
-  <% if f.object.persisted? %>
+  <% if f.object.persisted? && !f.object.waiting? %>
     $('form.administrative_process :input').attr('disabled', true);
     $('form.administrative_process .add-administrative-process-budget-allocation').hide();
     $('form.administrative_process .remove-administrative-process-budget-allocation').hide();
