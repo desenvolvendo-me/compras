@@ -274,7 +274,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'should not have print button if status different from released' do
-     AdministrativeProcess.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_de_cadeiras)
 
     click_link 'Processos'
 
