@@ -110,7 +110,7 @@ feature "AdministrativeProcesses" do
   scenario 'should be printable' do
     Prefecture.make!(:belo_horizonte)
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+    administrative_process = AdministrativeProcess.make!(:compra_liberada)
 
     click_link 'Processos'
 
@@ -123,7 +123,7 @@ feature "AdministrativeProcesses" do
     click_link 'Imprimir'
 
     page.should have_content "Número: #{administrative_process}"
-    page.should have_content "Protocolo número: 00099/2012"
+    page.should have_content "Protocolo número: 00088/2012"
     page.should have_content "Data da solicitação: 07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
     page.should have_content "Unidade orçamentária: 02.00 - Secretaria de Educação"
@@ -271,7 +271,35 @@ feature "AdministrativeProcesses" do
     within_tab 'Dotações orçamentárias' do
       page.should have_field 'Valor previsto', :with => '30,00'
     end
+  end
 
+  scenario 'should not have print button if status different from released' do
+     AdministrativeProcess.make!(:compra_de_cadeiras)
 
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_select 'Status do processo administrativo', :selected => 'Liberado'
+    page.should_not have_link 'Imprimir'
+  end
+
+  scenario 'should have print button if status equals released' do
+     AdministrativeProcess.make!(:compra_liberada)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_select 'Status do processo administrativo', :selected => 'Liberado'
+    page.should have_link 'Imprimir'
   end
 end
