@@ -30,6 +30,7 @@
 <%= f.input :kind %>
 <%= f.input :value %>
 <%= f.input :date %>
+<%= f.input :description, :disabled => true %>
 
 <script>
   <% if f.object.persisted? %>
@@ -68,6 +69,7 @@
           var record = data.record;
           $('#pledge_liquidation_emission_date').val(record.data("emission-date"));
           $('#pledge_liquidation_pledge_value').val(record.data("pledge-value"));
+          $('#pledge_liquidation_description').val(record.data("description"));
           if (pledgeId != record.data('id')) {
             $('#pledge_liquidation_pledge_expiration').attr('data-modal-url', pledgeExpirationUrl());
             $('#pledge_liquidation_expiration_date').val('');
@@ -81,6 +83,7 @@
           $('#pledge_liquidation_pledge_expiration').val('');
           $('#pledge_liquidation_expiration_date').val('');
           $('#pledge_liquidation_balance').val('');
+          $('#pledge_liquidation_description').val('');
         }
       });
 

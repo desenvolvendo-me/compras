@@ -44,6 +44,8 @@ feature "PledgeLiquidations" do
     page.should have_field 'Valor *', :with => '1,00'
     page.should have_select 'Tipo de liquidação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
+    page.should have_disabled_field 'Objeto do empenho'
+    page.should have_field 'Objeto do empenho', :with => 'Descricao'
   end
 
   scenario 'when fill pledge and pledge_expiration should fill delegateds fields' do
@@ -61,6 +63,8 @@ feature "PledgeLiquidations" do
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
     page.should have_disabled_field 'Valor do empenho'
     page.should have_field 'Valor do empenho', :with => '9,99'
+    page.should have_disabled_field 'Objeto do empenho'
+    page.should have_field 'Objeto do empenho', :with => 'Descricao'
 
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
@@ -96,6 +100,8 @@ feature "PledgeLiquidations" do
     page.should have_field 'Vencimento', :with => ''
     page.should have_disabled_field 'Saldo'
     page.should have_field 'Saldo', :with => ''
+    page.should have_disabled_field 'Objeto do empenho'
+    page.should have_field 'Objeto do empenho', :with => ''
   end
 
   scenario 'when kind is total should disable and fill value' do

@@ -6,7 +6,7 @@ class PledgeLiquidation < ActiveRecord::Base
   belongs_to :pledge
   belongs_to :pledge_expiration
 
-  delegate :emission_date, :to => :pledge, :allow_nil => true
+  delegate :emission_date, :description, :to => :pledge, :allow_nil => true
   delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :balance, :expiration_date, :to => :pledge_expiration, :allow_nil => true
 
