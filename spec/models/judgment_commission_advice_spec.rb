@@ -14,6 +14,14 @@ describe JudgmentCommissionAdvice do
   it { should validate_presence_of :licitation_commission }
   it { should validate_presence_of :year }
   it { should validate_presence_of :minutes_number }
+  it { should validate_presence_of :judgment_start_date }
+  it { should validate_presence_of :judgment_start_time }
+  it { should validate_presence_of :judgment_end_date }
+  it { should validate_presence_of :judgment_end_time }
+  it { should validate_presence_of :companies_minutes }
+  it { should validate_presence_of :companies_documentation_minutes }
+  it { should validate_presence_of :justification_minutes }
+  it { should validate_presence_of :judgment_minutes }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('2a12').for(:year) }

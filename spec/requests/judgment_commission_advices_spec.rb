@@ -58,6 +58,17 @@ feature "JudgmentCommissionAdvices" do
       end
     end
 
+    within_tab 'Parecer' do
+      fill_in "Data do início do julgamento", :with => "20/01/2012"
+      fill_in "Hora do início do julgamento", :with => "12:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2012"
+      fill_in "Hora do fim do julgamento", :with => "13:00"
+      fill_in "Texto da ata sobre as empresas licitantes", :with => "texto 1"
+      fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
+      fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
+      fill_in "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
@@ -98,6 +109,17 @@ feature "JudgmentCommissionAdvices" do
         page.should have_field 'Matrícula', :with => '3456789'
       end
     end
+
+    within_tab 'Parecer' do
+      page.should have_field "Data do início do julgamento", :with => "20/01/2012"
+      page.should have_field "Hora do início do julgamento", :with => "12:00"
+      page.should have_field "Data do fim do julgamento", :with => "21/01/2012"
+      page.should have_field "Hora do fim do julgamento", :with => "13:00"
+      page.should have_field "Texto da ata sobre as empresas licitantes", :with => "texto 1"
+      page.should have_field "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
+      page.should have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
+      page.should have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
+    end
   end
 
   scenario 'update an existent judgment_commission_advice' do
@@ -130,6 +152,17 @@ feature "JudgmentCommissionAdvices" do
       end
     end
 
+    within_tab 'Parecer' do
+      fill_in "Data do início do julgamento", :with => "20/01/2013"
+      fill_in "Hora do início do julgamento", :with => "14:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2013"
+      fill_in "Hora do fim do julgamento", :with => "15:00"
+      fill_in "Texto da ata sobre as empresas licitantes", :with => "novo texto 1"
+      fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "novo texto 2"
+      fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "novo texto 3"
+      fill_in "Texto da ata sobre julgamento - pareceres diversos", :with => "novo texto 4"
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Parecer da Comissão Julgadora editado com sucesso.'
@@ -150,6 +183,17 @@ feature "JudgmentCommissionAdvices" do
     within_tab 'Membros' do
       page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
       page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+    end
+
+    within_tab 'Parecer' do
+      page.should have_field "Data do início do julgamento", :with => "20/01/2013"
+      page.should have_field "Hora do início do julgamento", :with => "14:00"
+      page.should have_field "Data do fim do julgamento", :with => "21/01/2013"
+      page.should have_field "Hora do fim do julgamento", :with => "15:00"
+      page.should have_field "Texto da ata sobre as empresas licitantes", :with => "novo texto 1"
+      page.should have_field "Texto da ata sobre documentação das empresas licitantes", :with => "novo texto 2"
+      page.should have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "novo texto 3"
+      page.should have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "novo texto 4"
     end
   end
 
@@ -189,6 +233,17 @@ feature "JudgmentCommissionAdvices" do
 
       fill_in 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
+    end
+
+    within_tab 'Parecer' do
+      fill_in "Data do início do julgamento", :with => "20/01/2012"
+      fill_in "Hora do início do julgamento", :with => "12:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2012"
+      fill_in "Hora do fim do julgamento", :with => "13:00"
+      fill_in "Texto da ata sobre as empresas licitantes", :with => "texto 1"
+      fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
+      fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
+      fill_in "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
     end
 
     click_button 'Salvar'
@@ -249,6 +304,17 @@ feature "JudgmentCommissionAdvices" do
         select 'Outros', :from => 'Natureza do cargo'
         fill_in 'Matrícula', :with => '987654'
       end
+    end
+
+    within_tab 'Parecer' do
+      fill_in "Data do início do julgamento", :with => "20/01/2012"
+      fill_in "Hora do início do julgamento", :with => "12:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2012"
+      fill_in "Hora do fim do julgamento", :with => "13:00"
+      fill_in "Texto da ata sobre as empresas licitantes", :with => "texto 1"
+      fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
+      fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
+      fill_in "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
     end
 
     click_button 'Salvar'

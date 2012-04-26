@@ -1,6 +1,9 @@
 class JudgmentCommissionAdvice < ActiveRecord::Base
   attr_accessible :licitation_process_id, :licitation_commission_id, :year, :minutes_number
   attr_accessible :judgment_commission_advice_members_attributes
+  attr_accessible :judgment_start_date, :judgment_start_time, :judgment_end_date
+  attr_accessible :judgment_end_time, :companies_minutes, :companies_documentation_minutes
+  attr_accessible :justification_minutes, :judgment_minutes
 
   belongs_to :licitation_process
   belongs_to :licitation_commission
@@ -16,6 +19,9 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
 
   validates :licitation_process, :licitation_commission, :year, :minutes_number, :presence => true
   validates :year, :mask => "9999"
+  validates :judgment_start_date, :judgment_start_time, :judgment_end_date, :presence => true
+  validates :judgment_end_time, :companies_minutes, :companies_documentation_minutes, :presence => true
+  validates :justification_minutes, :judgment_minutes, :presence => true
 
   validate :cannot_have_duplicated_individuals_on_members
 
