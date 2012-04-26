@@ -117,6 +117,28 @@ feature "PledgeLiquidationCancellations" do
     page.should have_field 'Valor a ser anulado', :with => '100,00'
   end
 
+  scenario 'when submit form with same wrong validation and kind is total should have value as disabled field' do
+    Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Anulações de Liquidações de Empenho'
+
+    click_link 'Criar Anulação de Liquidação de Empenho'
+
+    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    select 'Total', :from => 'Tipo de anulação'
+    fill_in 'Data *', :with => I18n.l(Date.current - 1.day)
+
+    click_button 'Salvar'
+
+    page.should_not have_notice 'Anulação de Liquidação de Empenho criado com sucesso.'
+
+    page.should have_disabled_field 'Valor a ser anulado'
+    page.should have_field 'Valor a ser anulado', :with => '9,99'
+    page.should have_select 'Tipo de anulação', :selected => 'Total'
+  end
+
   scenario 'should fill value when select pledge_expiration before kind and kind is total' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
