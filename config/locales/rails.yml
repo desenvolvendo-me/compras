@@ -238,6 +238,7 @@ pt-BR:
       must_have_only_one_president: 'deve haver apenas um presidente'
       cannot_have_providers_that_are_not_in_licitation_process: 'não pode ter fornecedores que não estejam no processo licitatório'
       must_be_pledge_global_or_estimated: 'deve ser do tipo global ou estimativo'
+      start_date_time_should_not_be_greater_than_end_date_time: "fim do julgamento não pode ser antes do início"
 
   activerecord:
     errors:

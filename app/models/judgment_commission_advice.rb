@@ -24,6 +24,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   validates :justification_minutes, :judgment_minutes, :presence => true
 
   validate :cannot_have_duplicated_individuals_on_members
+  validate :start_date_time_should_not_be_greater_than_end_date_time
 
   orderize :id
   filterize
@@ -74,5 +75,30 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
     return [] unless licitation_commission_members
 
     licitation_commission_members.collect(&:to_hash)
+  end
+
+  def start_date_time_should_not_be_greater_than_end_date_time
+    return unless judgment_start_date || judgment_start_time ||
+                  judgment_end_date || judgment_end_time
+
+    if judgment_start > judgment_end
+      errors.add(:judgment_start_date, :start_date_time_should_not_be_greater_than_end_date_time)
+    end
+  end
+
+  def judgment_start
+    DateTime.new(judgment_start_date.year,
+                 judgment_start_date.month,
+                 judgment_start_date.day,
+                 judgment_start_time.hour,
+                 judgment_start_time.min)
+  end
+
+  def judgment_end
+    DateTime.new(judgment_end_date.year,
+                 judgment_end_date.month,
+                 judgment_end_date.day,
+                 judgment_end_time.hour,
+                 judgment_end_time.min)
   end
 end

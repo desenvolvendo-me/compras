@@ -79,5 +79,34 @@ describe JudgmentCommissionAdvice do
 
       subject.not_inherited_members.should eq [member3]
     end
+
+    it "should not have judgment end date/time before judgment start date/time" do
+      subject.judgment_start_date = Date.new(2012, 3, 10)
+      subject.judgment_start_time = "10:00"
+
+      # same time should be valid
+      subject.judgment_end_date = Date.new(2012, 3, 10)
+      subject.judgment_end_time = "10:00"
+
+      subject.valid?
+
+      subject.errors.messages[:judgment_start_date].should be_nil
+
+      # end after start should be valid
+      subject.judgment_end_date = Date.new(2012, 3, 11)
+      subject.judgment_end_time = "9:00"
+
+      subject.valid?
+
+      subject.errors.messages[:judgment_start_date].should be_nil
+
+      # end before start should be invalid
+      subject.judgment_end_date = Date.new(2012, 3, 10)
+      subject.judgment_end_time = "9:59"
+
+      subject.valid?
+
+      subject.errors.messages[:judgment_start_date].should include "fim do julgamento não pode ser antes do início"
+    end
   end
 end
