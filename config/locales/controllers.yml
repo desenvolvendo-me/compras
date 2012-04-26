@@ -32,7 +32,7 @@ pt-BR:
     entities: "Entidades"
     expense_kinds: "Tipos de Despesas"
     expense_natures: "Naturezas das Despesas"
-    extra_credit: "Créditos Suplementares"
+    extra_credits: "Créditos Suplementares"
     extra_credit_natures: "Naturezas de Créditos Suplementares"
     fiscal_years: "Exercícios Fiscais"
     founded_debt_contracts: "Contratos de Dívida Fundada"
