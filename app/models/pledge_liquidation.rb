@@ -11,7 +11,7 @@ class PledgeLiquidation < ActiveRecord::Base
   delegate :balance, :expiration_date, :to => :pledge_expiration, :allow_nil => true
 
   validates :pledge, :pledge_expiration, :kind, :value, :presence => true
-  validates :date, :expiration_date, :presence => true
+  validates :date, :presence => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greater_or_equal_to_last_pledge_liquidation_date,
@@ -20,7 +20,7 @@ class PledgeLiquidation < ActiveRecord::Base
     :allow_blank => true,
     :if => :any_pledge_liquidation?
   }
-  validate :date_must_be_greater_than_expiration_date
+  validate :date_must_be_greater_than_emission_date
   validate :validate_value
 
   before_validation :force_value_to_total_kind
@@ -44,10 +44,10 @@ class PledgeLiquidation < ActiveRecord::Base
     self.class.any?
   end
 
-  def date_must_be_greater_than_expiration_date
-    return unless expiration_date && date
+  def date_must_be_greater_than_emission_date
+    return unless emission_date && date
 
-    if date < expiration_date
+    if date < emission_date
       errors.add(:date, :must_be_greater_than_pledge_emission_date)
     end
   end
