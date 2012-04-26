@@ -55,7 +55,7 @@ feature "BudgetUnitConfigurations" do
 
     click_button 'Adicionar Estrutura'
 
-    within 'fieldset:first' do
+    within 'fieldset.budget-unit-level:first' do
       fill_in 'Nível', :with => '1'
 
       fill_in 'Dígitos', :with => '3'
