@@ -20,7 +20,7 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
     :if => :any_pledge_cancellation?
   }
   validate :value_validation
-  validate :date_must_be_greater_than_expiration_date
+  validate :date_must_be_greater_than_emission_date
 
   before_validation :force_value_to_total_kind
 
@@ -39,10 +39,10 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
     end
   end
 
-  def date_must_be_greater_than_expiration_date
-    return if expiration_date.blank? || date.blank?
+  def date_must_be_greater_than_emission_date
+    return if emission_date.blank? || date.blank?
 
-    if date < expiration_date
+    if date < emission_date
       errors.add(:date, :must_be_greater_than_pledge_emission_date)
     end
   end

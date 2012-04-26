@@ -13,13 +13,13 @@ describe PledgeLiquidationCancellation do
 
   context 'validate value' do
     it 'should not be valid if value greater than liquidations_value' do
-      pledge_expiration = double(:value => 3, :liquidations_value => 3, :expiration_date => nil)
+      pledge_expiration = double(:value => 3, :liquidations_value => 3, :emission_date => nil)
       subject.stub(:pledge_expiration).and_return(pledge_expiration)
       subject.should_not allow_value(4).for(:value).with_message('não pode ser superior a soma das liquidações da parcela')
     end
 
     it 'should be valid if value is not greater than liquidations_value' do
-      pledge_expiration = double(:value => 3, :liquidations_value => 2, :expiration_date => nil)
+      pledge_expiration = double(:value => 3, :liquidations_value => 2, :emission_date => nil)
       subject.stub(:pledge_expiration).and_return(pledge_expiration)
       subject.should allow_value(1).for(:value)
     end
@@ -40,7 +40,7 @@ describe PledgeLiquidationCancellation do
     end
 
     it 'should not be valid when date is older then emission_date' do
-      subject.stub(:expiration_date).and_return(Date.new(2012, 3, 29))
+      subject.stub(:emission_date).and_return(Date.new(2012, 3, 29))
       subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão')
     end
   end
