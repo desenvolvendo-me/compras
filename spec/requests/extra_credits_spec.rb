@@ -41,7 +41,7 @@ feature "ExtraCredits" do
 
       click_button 'Adicionar Movimento'
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
         fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
         fill_in 'Valor', :with => '10,00'
@@ -78,14 +78,14 @@ feature "ExtraCredits" do
     end
 
     within_tab 'Movimentos' do
-      within 'fieldset:first' do
+      within 'fieldset:last' do
         page.should have_field 'Tipo de movimento', :with => 'Adicionar dotação'
         page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
         page.should have_disabled_field 'Recurso'
         page.should have_field 'Valor', :with => '10,00'
       end
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         page.should have_field 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
         page.should have_disabled_field 'Dotação'
         page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
@@ -133,7 +133,7 @@ feature "ExtraCredits" do
 
       click_button 'Adicionar Movimento'
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
 
         ignoring_scopes do
@@ -179,7 +179,7 @@ feature "ExtraCredits" do
 
       click_button 'Adicionar Movimento'
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Adicionar em outros casos'
         fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
         fill_in 'Valor', :with => '10,00'
@@ -486,7 +486,7 @@ feature "ExtraCredits" do
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
         fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
       end
