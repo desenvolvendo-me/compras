@@ -1,3 +1,7 @@
+<p>
+  <input type="button" class="button affirmative add-licitation-process-publication" value="Adicionar Publicação">
+</p>
+
 <div id="publications">
   <%= f.association :licitation_process_publications, :collection => localized(f.object.licitation_process_publications) do |p| %>
     <%= render 'licitation_process_publications/form', :f => p %>
@@ -10,15 +14,12 @@
   <% end %>
 </div>
 
-<p>
-  <input type="button" class="button affirmative add-licitation-process-publication" value="Adicionar Publicação">
-</p>
-
 <script>
   $("#licitation-process-publications-template").nestedForm({
     add: '.add-licitation-process-publication',
     remove: '.remove-licitation-process-publication',
     target: '#publications',
-    uuid: 'uuid_licitation_process_publication'
+    uuid: 'uuid_licitation_process_publication',
+    appendItem: false
   });
 </script>

@@ -3,28 +3,31 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-4">
       <%= f.input :provider %>
     </div>
 
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-4">
       <%= f.input :protocol  %>
     </div>
 
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-4">
       <%= f.input :protocol_date, :input_html => { :class => 'protocol-date' } %>
     </div>
 
-    <div class="yui3-u-1-5">
+    <div class="yui3-u-1-4">
       <%= f.input :receipt_date, :input_html => { :class => 'receipt-date' } %>
     </div>
+  </div>
 
-    <div class="yui3-u-1-5">
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
       <%= f.input :auto_convocation, :input_html => { :class => 'auto-convocation' } %>
     </div>
+    <div class="yui3-u-1-2">
+      <%= f.input :status, :disabled => true %>
+    </div>
   </div>
-  
-  <%= f.input :status, :disabled => true %>
 
   <div id="licitation-process-invited-bidder-documents-<%= f.nested_identifier %>" class="document-fields">
     <%= f.association :licitation_process_invited_bidder_documents, :collection => localized(f.object.licitation_process_invited_bidder_documents) do |p| %>

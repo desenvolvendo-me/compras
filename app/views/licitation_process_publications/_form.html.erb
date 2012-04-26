@@ -3,19 +3,21 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-2">
       <%= f.input :name %>
     </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-2">
       <%= f.input :publication_date %>
     </div>
+  </div>
 
-    <div class="yui3-u-1-4">
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
       <%= f.input :publication_of %>
     </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-2">
       <%= f.input :circulation_type %>
     </div>
   </div>

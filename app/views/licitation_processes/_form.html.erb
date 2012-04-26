@@ -198,7 +198,7 @@
   toggleBidderDates();
 
   $('#invited_bidders').bind('append.mustache', function() {
-    var lastBidder = $(this).find('.licitation-process-invited-bidder:last'),
+    var lastBidder = $(this).find('.licitation-process-invited-bidder:visible:first'),
         target = lastBidder.find('.document-fields');
 
     $('.document-type').each(function(index, docRecord) {

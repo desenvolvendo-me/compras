@@ -498,7 +498,7 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar Licitante'
 
-      within '.licitation-process-invited-bidder:last' do
+      within '.licitation-process-invited-bidder:first' do
         fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
         fill_in 'Protocolo', :with => '123456'
         fill_in 'Data do protocolo', :with => I18n.l(Date.current)
@@ -783,14 +783,14 @@ feature "LicitationProcesses" do
 
       click_button 'Adicionar Item'
 
-      within '.item:last' do
+      within '.item:first' do
         fill_in 'Quantidade', :with => '4'
         fill_in 'Valor unitário', :with => '20,00'
       end
 
       page.should have_field 'Total dos itens', :with => '130,00'
 
-      within '.item:first' do
+      within '.item:last' do
         click_button 'Remover Item'
       end
 

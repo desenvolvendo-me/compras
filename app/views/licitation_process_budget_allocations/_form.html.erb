@@ -21,7 +21,10 @@
     <div class="yui3-u-1-4">
       <%= f.input :total_items_value, :disabled => true, :input_html => { :class => 'total-value', :value => f.object.presenter.total_items_value } %>
     </div>
+  </div>
 
+  <div class="nested-remove">
+    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
   </div>
 
   <div id="items-<%= f.nested_identifier %>">
@@ -35,10 +38,6 @@
       <%= render 'licitation_process_budget_allocation_items/form', :f => item %>
     <% end %>
   <% end %>
-
-  <div class="nested-remove">
-    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
-  </div>
 </fieldset>
 
 <script>
@@ -47,6 +46,7 @@
     remove: ".remove-item",
     target: "#items-<%= f.nested_identifier %>",
     fieldToRemove: '.item',
-    uuid: "uuid_item"
+    uuid: "uuid_item",
+    appendItem: false
   });
 </script>
