@@ -251,6 +251,28 @@ feature "PledgeLiquidations" do
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
   end
 
+  scenario 'when submit form with same field missing and kind is total should have value disabled field' do
+    Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Liquidações de Empenhos'
+
+    click_link 'Criar Liquidação de Empenho'
+
+    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    select 'Total', :from => 'Tipo de liquidação'
+    fill_in 'Data *', :with => I18n.l(Date.current - 1.day)
+
+    click_button 'Salvar'
+
+    page.should_not have_notice 'Liquidação de Empenho criado com sucesso.'
+
+    page.should have_disabled_field 'Valor *'
+    page.should have_field 'Valor *', :with => '9,99'
+    page.should have_select 'Tipo de liquidação', :selected => 'Total'
+  end
+
   scenario 'should have all disabled fields when edit existent pledge_liquidation' do
     pledge = Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
