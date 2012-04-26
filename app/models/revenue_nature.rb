@@ -20,16 +20,48 @@ class RevenueNature < ActiveRecord::Base
   delegate :code, :to => :revenue_subcategory, :prefix => true, :allow_nil => true
   delegate :code, :to => :revenue_source, :prefix => true, :allow_nil => true
   delegate :code, :to => :revenue_rubric, :prefix => true, :allow_nil => true
+  delegate :revenue_category_id, :to => :revenue_subcategory, :allow_nil => true, :prefix => true
+  delegate :revenue_subcategory_id, :to => :revenue_source, :allow_nil => true, :prefix => true
+  delegate :revenue_source_id, :to => :revenue_rubric, :allow_nil => true, :prefix => true
 
   validates :regulatory_act, :kind, :docket, :revenue_category, :presence => true
   validates :specification, :entity, :year, :classification, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :classification, :mask => '9999', :allow_blank => true
+  validate :revenue_subcategory_must_be_related_with_revenue_category
+  validate :revenue_source_must_be_related_with_revenue_subcategory
+  validate :revenue_rubric_must_be_related_with_revenue_source
 
   orderize :id
   filterize
 
   def to_s
     "#{full_code} - #{specification}"
+  end
+
+  protected
+
+  def revenue_subcategory_must_be_related_with_revenue_category
+    return unless revenue_category || revenue_subcategory
+
+    if revenue_category_id != revenue_subcategory_revenue_category_id
+      errors.add(:revenue_subcategory, :revenue_subcategory_must_be_related_with_revenue_category)
+    end
+  end
+
+  def revenue_source_must_be_related_with_revenue_subcategory
+    return unless revenue_source || revenue_subcategory
+
+    if revenue_subcategory_id != revenue_rubric_revenue_source_id
+      errors.add(:revenue_source, :revenue_source_must_be_related_with_revenue_subcategory)
+    end
+  end
+
+  def revenue_rubric_must_be_related_with_revenue_source
+    return unless revenue_rubric || revenue_source
+
+    if revenue_source_id != revenue_rubric_revenue_source_id
+      errors.add(:revenue_rubric, :revenue_rubric_must_be_related_with_revenue_source)
+    end
   end
 end

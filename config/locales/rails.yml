@@ -239,6 +239,9 @@ pt-BR:
       cannot_have_providers_that_are_not_in_licitation_process: 'não pode ter fornecedores que não estejam no processo licitatório'
       must_be_pledge_global_or_estimated: 'deve ser do tipo global ou estimativo'
       start_date_time_should_not_be_greater_than_end_date_time: "fim do julgamento não pode ser antes do início"
+      revenue_subcategory_must_be_related_with_revenue_category: "subcategoria da receita deve estar relacionada com categoria da receita"
+      revenue_source_must_be_related_with_revenue_subcategory: "fonte da receita deve estar relacionada com subcategoria da receita"
+      revenue_rubric_must_be_related_with_revenue_source: "rúbrica da receita deve estar relacionada com fonte da receita"
 
   activerecord:
     errors:
