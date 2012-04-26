@@ -616,12 +616,16 @@ feature "Pledges" do
 
       click_button "Adicionar Item"
 
-      fill_in 'pledge_pledge_items_attributes_fresh-1_quantity', :with => "4"
-      fill_in 'pledge_pledge_items_attributes_fresh-1_unit_price', :with => "20,00"
+      within '.pledge-item:first' do
+        fill_in 'Quantidade', :with => "4"
+        fill_in 'Valor unitário', :with => "20,00"
+      end
 
       page.should have_field 'Valor total dos itens', :with => "380,00"
 
-      click_button 'Remover Item'
+      within '.pledge-item:last' do
+        click_button 'Remover Item'
+      end
 
       page.should have_field 'Valor total dos itens', :with => "80,00"
     end
