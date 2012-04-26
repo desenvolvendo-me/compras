@@ -14,9 +14,6 @@ class Accreditation < ActiveRecord::Base
 
   validates :licitation_process, :licitation_commission, :presence => true
 
-  orderize
-  filterize
-
   def to_s
     id.to_s
   end
