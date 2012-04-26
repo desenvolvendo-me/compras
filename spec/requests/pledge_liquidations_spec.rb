@@ -279,4 +279,17 @@ feature "PledgeLiquidations" do
     page.should have_select 'Tipo de liquidação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
   end
+
+  scenario 'should not have a button to destroy an existent pledge_liquidation' do
+    pledge = Pledge.make!(:empenho)
+    pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
+
+    click_link 'Contabilidade'
+
+    click_link 'Liquidações de Empenhos'
+
+    click_link "#{pledge_liquidation.id}"
+
+    page.should_not have_link 'Apagar'
+  end
 end
