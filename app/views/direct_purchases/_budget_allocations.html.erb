@@ -1,8 +1,10 @@
 <%= f.error :direct_purchase_budget_allocations %>
 
-<div id="budget-allocations">
-  <%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
+<%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
 
+<input type="button" class="button affirmative add-direct-purchase-budget-allocation" value="Adicionar Dotação">
+
+<div id="budget-allocations">
   <%= f.association :direct_purchase_budget_allocations, :collection => localized(f.object.direct_purchase_budget_allocations) do |p| %>
     <%= render 'direct_purchase_budget_allocations/form', :f => p %>
   <% end %>
@@ -14,15 +16,12 @@
   <% end %>
 </div>
 
-<p>
-  <input type="button" class="button affirmative add-direct-purchase-budget-allocation" value="Adicionar Dotação">
-</p>
-
 <script>
   $("#direct-purchase-budget-allocations-template").nestedForm({
     add: '.add-direct-purchase-budget-allocation',
     remove: '.remove-direct-purchase-budget-allocation',
     target: '#budget-allocations',
-    uuid: 'uuid_direct_purchase_budget_allocation'
+    uuid: 'uuid_direct_purchase_budget_allocation',
+    appendItem: false
   });
 </script>

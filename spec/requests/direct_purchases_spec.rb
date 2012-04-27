@@ -290,7 +290,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      within '.direct-purchase-budget-allocation:last' do
+      within '.direct-purchase-budget-allocation:first' do
         fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
       end
     end
@@ -465,7 +465,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         click_button 'Adicionar Item'
 
         within '.item:first' do
@@ -479,7 +479,7 @@ feature "DirectPurchases" do
 
       # removing an item
 
-      within 'fieldset:first' do
+      within 'fieldset:last' do
         within '.item:last' do
           click_button 'Remover Item'
         end
@@ -489,7 +489,7 @@ feature "DirectPurchases" do
 
       # removing an entire budget allocation
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         click_button 'Remover Dotação'
       end
 
@@ -523,7 +523,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      within 'fieldset:last' do
+      within 'fieldset:first' do
         click_button 'Adicionar Item'
 
         within '.item:first' do
@@ -531,7 +531,7 @@ feature "DirectPurchases" do
         end
       end
 
-      within 'fieldset:first' do
+      within 'fieldset:last' do
         within '.item:first' do
           click_button 'Remover Item'
         end

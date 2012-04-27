@@ -22,6 +22,10 @@
 
   <%= f.error :items %>
 
+  <p class="nested-remove">
+    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
+  </p>
+
   <div id="items-<%= f.nested_identifier %>">
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
       <%= render 'direct_purchase_budget_allocation_items/form', :f => p %>
@@ -33,10 +37,6 @@
       <%= render 'direct_purchase_budget_allocation_items/form', :f => item %>
     <% end %>
   <% end %>
-
-  <div class="nested-remove">
-    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
-  </div>
 
   <div class="nested-remove">
     <input type="button" class="button negative remove-direct-purchase-budget-allocation" value="Remover Dotação">
