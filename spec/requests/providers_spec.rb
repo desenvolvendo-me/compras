@@ -408,7 +408,7 @@ feature "Providers" do
 
       click_button 'Adicionar'
 
-      within '.provider-partner:last' do
+      within '.provider-partner:first' do
         fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
         select 'Membro do quadro societário', :from => 'Função'
         fill_in 'Data', :with => '25/02/2012'

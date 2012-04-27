@@ -1,3 +1,7 @@
+<p>
+  <input type="button" class="button affirmative add-provider-partner" value="Adicionar Sócio / Responsável">
+</p>
+
 <fieldset id="partners_selector">
   <%= f.error :provider_partners %>
 
@@ -6,10 +10,6 @@
       <%= render 'provider_partners/form', :f => p %>
     <% end %>
   </div>
-
-  <p>
-    <input type="button" class="button affirmative add-provider-partner" value="Adicionar">
-  </p>
 </fieldset>
 
 <%= mustache 'provider-partners-template' do %>
@@ -25,6 +25,6 @@
     target: '#provider-partners',
     uuid: 'uuid_provider_partner',
     fieldToRemove: '.provider-partner',
-    right: true
+    appendItem: false
   });
 </script>
