@@ -76,6 +76,6 @@ module Capybara
 end
 
 Capybara.configure do |config|
-  config.default_driver = ENV['SELENIUM'] ? :selenium : :webkit
+  config.default_driver = ENV['WEBKIT'] ? :webkit : :selenium
   config.ignore_hidden_elements = true
 end
