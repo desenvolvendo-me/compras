@@ -158,7 +158,7 @@ feature "Pledges" do
 
     within_tab 'Vencimentos' do
       within 'fieldset:first' do
-        page.should have_field 'Vencimento', :with => '30/12/2011'
+        page.should have_field 'Vencimento *', :with => '30/12/2011'
         page.should have_field 'Valor', :with => '31,66'
       end
     end
@@ -178,7 +178,7 @@ feature "Pledges" do
 
     within_tab 'Vencimentos' do
       within 'fieldset:first' do
-        page.should have_field 'Vencimento', :with => '01/11/2011'
+        page.should have_field 'Vencimento *', :with => '01/11/2011'
         page.should have_field 'Valor', :with => '31,66'
       end
 
