@@ -19,6 +19,10 @@ class AdministrativeProcessesController < CrudController
         resource.status = AdministrativeProcessStatus::RELEASED
         resource.save!
         redirect_to administrative_processes_path, :notice => t(:administrative_process_released_successful)
+      elsif params.has_key?(:commit) && params[:commit] == 'Anular'
+        resource.status = AdministrativeProcessStatus::CANCELED
+        resource.save!
+        redirect_to administrative_processes_path, :notice => t(:administrative_process_canceled_successful)
       else
         super
       end

@@ -2,6 +2,7 @@
   <%- if f.object.waiting? %>
     <%= f.button :submit %>
     <%= f.button :submit, 'Liberar' %>
+    <%= f.button :submit, 'Anular', :class => 'negative' %>
   <%- end %>
   <%= link_to "Imprimir", resource_path(resource), :class => 'clear button neutral' if f.object.released? %>
   <%= f.button :cancel %>

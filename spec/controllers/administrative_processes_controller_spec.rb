@@ -71,5 +71,21 @@ describe AdministrativeProcessesController do
 
       assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
     end
+
+    it "should calcel an administrative process with status waiting" do
+      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+
+      put :update, :id => administrative_process.id, :commit => 'Anular'
+
+      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::CANCELED
+    end
+
+    it "should not cancel an administrative process without status waiting" do
+      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+
+      put :update, :id => administrative_process.id
+
+      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
+    end
   end
 end

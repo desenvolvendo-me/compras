@@ -348,4 +348,50 @@ feature "AdministrativeProcesses" do
 
     page.should have_notice 'Processo Administrativo liberado com sucesso'
   end
+
+  scenario "should have a cancel button when editing an administrative process with status waiting" do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    page.should have_button 'Anular'
+  end
+
+  scenario "should not have a cancel button when editing an administrative process without status waiting" do
+    AdministrativeProcess.make!(:compra_liberada)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    page.should_not have_button 'Anular'
+  end
+
+  scenario "canceling an administrative process" do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Anular'
+
+    page.should have_notice 'Processo Administrativo anulado com sucesso'
+  end
 end
