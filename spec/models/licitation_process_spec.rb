@@ -81,26 +81,6 @@ describe LicitationProcess do
   it { should_not allow_value('201').for(:year) }
   it { should_not allow_value('a201').for(:year) }
 
-  it "the duplicated invited bidders should be invalid except the first" do
-    bidder_one = subject.licitation_process_invited_bidders.build(:provider_id => 1)
-    bidder_two = subject.licitation_process_invited_bidders.build(:provider_id => 1)
-
-    subject.valid?
-
-    bidder_one.errors.messages[:provider_id].should be_nil
-    bidder_two.errors.messages[:provider_id].should include "já está em uso"
-  end
-
-  it "the diferent invited bidders should be valid" do
-    bidder_one = subject.licitation_process_invited_bidders.build(:provider_id => 1)
-    bidder_two = subject.licitation_process_invited_bidders.build(:provider_id => 2)
-
-    subject.valid?
-
-    bidder_one.errors.messages[:provider_id].should be_nil
-    bidder_two.errors.messages[:provider_id].should be_nil
-  end
-
   it 'should validate that selected administrative process is available' do
     subject.errors.messages[:administrative_process].should be_nil
 

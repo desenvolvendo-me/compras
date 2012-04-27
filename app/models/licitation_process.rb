@@ -4,7 +4,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
   attr_accessible :licitation_process_publications_attributes
-  attr_accessible :licitation_process_invited_bidders_attributes, :pledge_type, :administrative_process_attributes
+  attr_accessible :pledge_type, :administrative_process_attributes
 
   attr_readonly :process, :year, :licitation_number
 
@@ -33,7 +33,6 @@ class LicitationProcess < ActiveRecord::Base
   has_one :accreditation, :dependent => :destroy
 
   accepts_nested_attributes_for :licitation_process_publications, :allow_destroy => true
-  accepts_nested_attributes_for :licitation_process_invited_bidders, :allow_destroy => true
 
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
@@ -45,7 +44,6 @@ class LicitationProcess < ActiveRecord::Base
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
   validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
-  validate :cannot_have_duplicated_invited_bidders
   validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
   validate :administrative_process_must_not_belong_to_another_licitation_process
 
@@ -107,18 +105,6 @@ class LicitationProcess < ActiveRecord::Base
   def last_by_self_year_and_modality
     self.class.where { |p| p.year.eq(year) & p.modality.eq(modality) }.
                order { id }.last
-  end
-
-  def cannot_have_duplicated_invited_bidders
-    single_bidders = []
-
-    licitation_process_invited_bidders.each do |bidder|
-      if single_bidders.include?(bidder.provider_id)
-        errors.add(:licitation_process_invited_bidders)
-        bidder.errors.add(:provider_id, :taken)
-      end
-      single_bidders << bidder.provider_id
-    end
   end
 
   def total_of_administrative_process_budget_allocations_items_must_be_equal_to_value

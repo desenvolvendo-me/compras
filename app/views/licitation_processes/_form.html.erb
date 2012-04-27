@@ -4,7 +4,6 @@
     <li><a href="#documents">Documentos</a></li>
     <li><a href="#budget_allocations">Dotações orçamentárias</a></li>
     <li><a href="#publications-tab">Publicações</a></li>
-    <li><a href="#invited-bidders">Licitantes convidados</a></li>
   </ul>
 
   <div id="general">
@@ -22,14 +21,6 @@
   <div id="publications-tab">
     <%= render 'publications', :f => f %>
   </div>
-
-  <div id="invited-bidders">
-    <div id="message-invited-bidders-not-needed">
-      <%= t 'other.tributario.messages.msg_no_invited_bidders' %>
-    </div>
-
-    <%= render 'invited_bidders', :f => f %>
-  </div>
 </div>
 
 <script>
@@ -42,19 +33,6 @@
       }
     }
   });
-
-  function toggleInvitedBiddersTab(modality) {
-    if (modality == '<%= AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES %>' ||
-        modality == '<%= AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES %>') {
-      $('#invited-bidders-content').show();
-      $('#message-invited-bidders-not-needed').hide();
-    } else {
-      $('#invited-bidders-content').hide();
-      $('#message-invited-bidders-not-needed').show();
-    }
-  }
-
-  toggleInvitedBiddersTab('<%= f.object.administrative_process_modality %>');
 
   function abreviatedProcessModality(modality) {
     var abreviations = <%= AbreviatedProcessModality.to_a.to_json.html_safe %>,
@@ -103,7 +81,6 @@
       $('#licitation_process_modality').val(abreviatedProcessModality(record.data("modality")));
       $("#licitation_process_administrative_process_attributes_id").val(record.data("id"));
 
-      toggleInvitedBiddersTab(record.data("modality"));
       createAdministrativeProcessBudgetAllocations(record.data("budget-allocations"));
     } else {
       $('#licitation_process_administrative_process_budget_unit').val('');
@@ -176,74 +153,4 @@
     itemDiv.find('.item-unit-price').val(unitPrice);
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
-
-  function toggleBidderDates() {
-    $('.auto-convocation').each(function(){
-      var bidderDiv = $(this).closest('.licitation-process-invited-bidder');
-
-      if($(this).is(':checked')) {
-        bidderDiv.find('.protocol-date').attr('disabled', true);
-        bidderDiv.find('.receipt-date').attr('disabled', true);
-      } else {
-        bidderDiv.find('.protocol-date').attr('disabled', false);
-        bidderDiv.find('.receipt-date').attr('disabled', false);
-      }
-    });
-  }
-
-  $('form.licitation_process').delegate('.auto-convocation', 'click', function() {
-    toggleBidderDates();
-  });
-
-  toggleBidderDates();
-
-  $('#invited_bidders').bind('append.mustache', function() {
-    var lastBidder = $(this).find('.licitation-process-invited-bidder:visible:first'),
-        target = lastBidder.find('.document-fields');
-
-    $('.document-type').each(function(index, docRecord) {
-      var docId = $(docRecord).find('.document-id').val(),
-          docDescription = $(docRecord).find('.document-desc').val(),
-          mustache = lastBidder.find('[type="text/x-mustache"]').mustache({docId: docId,
-                                                                           docDescription: docDescription,
-                                                                           uuid_licitation_process_invited_bidder_document: 'fresh-' + index});
-
-      target.append(mustache);
-    });
-  });
-
-  $('.licitation_process_document_types_records').bind('append.mustache', function() {
-    var docRecord = $('.document-type:last'),
-        docId = docRecord.find('.document-id').val(),
-        docDescription = docRecord.find('.document-desc').val();
-
-    $('.licitation-process-invited-bidder').each(function() {
-      var mustache = $(this).find('[type="text/x-mustache"]').mustache({docId: docId,
-                                                                        docDescription: docDescription,
-                                                                        uuid_licitation_process_invited_bidder_document: 'fresh-' + docId});
-
-      $(this).find('.document-fields').append(mustache);
-    });
-  });
-
-  $('form.licitation_process').delegate(".modal-finder-remove", "click", function () {
-    var docId = $(this).closest("tr").find('.document-id').val(),
-        input = $('input.bidder-document-type-id[value="' + docId + '"]');
-
-    input.closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
-  });
-
-  function checkBidderDocumentsForExclusion() {
-    var docIds = $(".document-type").map(function () {
-      return $(this).find('.document-id').val();
-    });
-
-    $('input.bidder-document-type-id').each(function() {
-      if ( $.inArray(this.value, docIds) == -1 ) {
-        $(this).closest('.bidder-document').hide().find('input.hidden.destroy').val('true');
-      };
-    });
-  }
-
-  checkBidderDocumentsForExclusion();
 </script>

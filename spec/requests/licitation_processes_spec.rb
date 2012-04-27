@@ -15,7 +15,6 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
-    Provider.make!(:wenderson_sa)
 
     click_link 'Processos'
 
@@ -102,22 +101,6 @@ feature "LicitationProcesses" do
       select "Internet", :from => "Tipo de circulação do veículo de comunicação"
     end
 
-    within_tab 'Licitantes convidados' do
-      click_button 'Adicionar Licitante'
-
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
-      fill_in 'Protocolo', :with => '123456'
-      fill_in 'Data do protocolo', :with => I18n.l(Date.current)
-      fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
-
-      page.should have_disabled_field 'Documento'
-      page.should have_field 'Documento', :with => 'Fiscal'
-
-      fill_in 'Número/certidão', :with => '123456'
-      fill_in 'Data de emissão', :with => I18n.l(Date.current)
-      fill_in 'Validade', :with =>  I18n.l(Date.tomorrow)
-    end
-
     click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
@@ -194,20 +177,6 @@ feature "LicitationProcesses" do
       page.should have_select 'Publicação do(a)', :selected => 'Edital'
       page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Internet'
     end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_field 'Protocolo', :with => '123456'
-      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
-      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
-
-      page.should have_disabled_field 'Documento'
-      page.should have_field 'Documento', :with => 'Fiscal'
-
-      page.should have_field 'Número/certidão', :with => '123456'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-      page.should have_field 'Validade', :with =>  I18n.l(Date.tomorrow)
-    end
   end
 
   scenario 'update an existent licitation_process' do
@@ -219,7 +188,6 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
-    Provider.make!(:sobrinho_sa)
 
     click_link 'Processos'
 
@@ -282,22 +250,6 @@ feature "LicitationProcesses" do
       select "Mural público", :from => "Tipo de circulação do veículo de comunicação"
     end
 
-    within_tab 'Licitantes convidados' do
-      click_button 'Remover Licitante'
-      click_button 'Adicionar Licitante'
-
-      fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
-      fill_in 'Protocolo', :with => '111111'
-      fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
-      fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
-
-      page.should have_field 'Documento', :with => 'Oficial'
-
-      fill_in 'Número/certidão', :with => '987654'
-      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
-      fill_in 'Validade', :with =>  I18n.l(Date.tomorrow + 1.day)
-    end
-
     click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
@@ -356,61 +308,6 @@ feature "LicitationProcesses" do
       page.should have_field 'Data da publicação', :with => '20/04/2013'
       page.should have_select 'Publicação do(a)', :selected => 'Cancelamento'
       page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Mural público'
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-
-      page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Protocolo', :with => '111111'
-      page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
-      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
-      page.should have_field 'Status', :with => LicitationProcessInvitedBidderStatus::ENABLED
-      page.should have_field 'Documento', :with => 'Oficial'
-
-      page.should have_field 'Número/certidão', :with => '987654'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
-      page.should have_field 'Validade', :with =>  I18n.l(Date.tomorrow + 1.day)
-    end
-  end
-
-  scenario 'update an existent licitation_process with provider without documents' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      fill_in 'Número/certidão', :with => ''
-      fill_in 'Data de emissão', :with => ''
-      fill_in 'Validade', :with => ''
-    end
-
-    click_button 'Salvar'
-
-    page.should have_notice 'Processo Licitatório editado com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_field 'Protocolo', :with => '123456'
-      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
-      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
-      page.should have_field 'Status', :with => LicitationProcessInvitedBidderStatus::DISABLED
-
-      page.should have_field 'Documento', :with => 'Fiscal'
-
-      page.should have_field 'Número/certidão', :with => ''
-      page.should have_field 'Data de emissão', :with => ''
-      page.should have_field 'Validade', :with => ''
     end
   end
 
@@ -482,185 +379,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'asserting that cannot save with duplicated bidders' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-
-      click_button 'Adicionar Licitante'
-
-      within '.licitation-process-invited-bidder:first' do
-        fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
-        fill_in 'Protocolo', :with => '123456'
-        fill_in 'Data do protocolo', :with => I18n.l(Date.current)
-        fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Licitantes convidados' do
-      page.should have_content 'já está em uso'
-    end
-  end
-
-  scenario 'testing javascript toggle dates' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
-      page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
-
-      check 'Auto convocação'
-
-      page.should have_disabled_field 'Data do protocolo'
-      page.should have_disabled_field 'Data do recebimento'
-
-      uncheck 'Auto convocação'
-
-      page.should_not have_disabled_field 'Data do protocolo'
-      page.should_not have_disabled_field 'Data do recebimento'
-
-      check 'Auto convocação'
-    end
-
-    click_button 'Salvar'
-
-    page.should have_notice 'Processo Licitatório editado com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_checked_field 'Auto convocação'
-      page.should have_disabled_field 'Data do protocolo'
-      page.should have_disabled_field 'Data do recebimento'
-
-      page.should have_field 'Data do protocolo', :with => ''
-      page.should have_field 'Data do recebimento', :with => ''
-    end
-  end
-
-  scenario 'testing that it cleans the invited bidder when modality is not invitation for construction or purchase' do
-    LicitationProcess.make!(:processo_licitatorio)
-    AdministrativeProcess.make!(:compra_sem_convite)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
-    end
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Processo administrativo', :with => '2014', :field => 'Ano'
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_content 'Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes.'
-      page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
-    end
-
-    click_button 'Salvar'
-
-    page.should have_notice 'Processo Licitatório editado com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
-
-      page.should have_content 'Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes.'
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
-    end
-  end
-
-  scenario 'testing inclusion/exclusion of document types for invited bidders' do
-    LicitationProcess.make!(:processo_licitatorio)
-    DocumentType.make!(:oficial)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    # adding another document
-
-    within_tab 'Documentos' do
-      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Documento', :with => 'Oficial'
-    end
- 
-    # removing the first document
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Documento', :with => 'Fiscal'
-    end
-
-    within_tab 'Documentos' do
-      within '.record:first' do
-        click_button 'Remover'
-      end
-    end
-
-    within_tab 'Licitantes convidados' do
-      fill_in 'Número/certidão', :with => '34567'
-      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
-      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 2.days)
-    end
-
-    click_button 'Salvar'
-
-    page.should have_notice 'Processo Licitatório editado com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should_not have_field 'Documento', :with => 'Fiscal'
-
-      page.should have_field 'Documento', :with => 'Oficial'
-      page.should have_field 'Número/certidão', :with => '34567'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
-      page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 2.days)
-    end
-  end
-
   scenario 'cannot include the same material twice on a budget allocation' do
     LicitationProcess.make!(:processo_licitatorio)
     Material.make!(:antivirus)
@@ -693,37 +411,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_content 'já está em uso'
-    end
-  end
-
-  scenario 'testing that an excluded bidder document dont appear when the form returns with errors' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    # making the form invalid
-    within_tab 'Dados gerais' do
-      fill_in 'Detalhamento do objeto', :with => ''
-    end
-
-    within_tab 'Licitantes convidados' do
-      page.should have_field 'Documento', :with => 'Fiscal'
-    end
-
-    within_tab 'Documentos' do
-      click_button 'Remover'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Licitantes convidados' do
-      page.should_not have_field 'Documento', :with => 'Fiscal'
     end
   end
 
