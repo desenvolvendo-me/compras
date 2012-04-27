@@ -241,7 +241,7 @@ feature "PurchaseSolicitations" do
 
       click_button "Adicionar Dotação"
 
-      within '.purchase-solicitation-budget-allocation:last' do
+      within '.purchase-solicitation-budget-allocation:first' do
         fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
         fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       end
@@ -335,7 +335,7 @@ feature "PurchaseSolicitations" do
 
         click_button 'Adicionar Item'
 
-        within '.item:last' do
+        within '.item:first' do
           fill_in 'Quantidade', :with => 5
           fill_in 'Valor unitário', :with => '2,00'
           page.should have_field 'Valor total', :with => '10,00'
@@ -344,7 +344,7 @@ feature "PurchaseSolicitations" do
 
       click_button 'Adicionar Dotação'
 
-      within '.purchase-solicitation-budget-allocation:last' do
+      within '.purchase-solicitation-budget-allocation:first' do
         click_button 'Adicionar Item'
 
         within '.item:first' do
@@ -358,8 +358,8 @@ feature "PurchaseSolicitations" do
 
       # removing an item
 
-      within '.purchase-solicitation-budget-allocation:first' do
-        within '.item:last' do
+      within '.purchase-solicitation-budget-allocation:last' do
+        within '.item:first' do
           click_button 'Remover Item'
         end
       end
@@ -368,7 +368,7 @@ feature "PurchaseSolicitations" do
 
       # removing an entire budget allocation
 
-      within '.purchase-solicitation-budget-allocation:last' do
+      within '.purchase-solicitation-budget-allocation:first' do
         click_button 'Remover Dotação'
       end
 

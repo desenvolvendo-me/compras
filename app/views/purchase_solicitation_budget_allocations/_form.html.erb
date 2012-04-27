@@ -16,6 +16,10 @@
 
   <%= f.error :items %>
 
+  <p class="nested-remove">
+    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
+  </p>
+
   <div id="items-<%= f.nested_identifier %>">
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
       <%= render 'purchase_solicitation_budget_allocation_items/form', :f => p %>
@@ -28,10 +32,6 @@
     <% end %>
   <% end %>
 
-  <div class="nested-remove">
-    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
-  </div>
-
   <div class="yui3-u-1-5 nested-remove">
     <input type="button" class="button negative remove-purchase-solicitation-budget-allocation" value="Remover Dotação">
   </div>
@@ -43,6 +43,7 @@
     remove: ".remove-item",
     target: "#items-<%= f.nested_identifier %>",
     fieldToRemove: '.item',
-    uuid: "uuid_item"
+    uuid: "uuid_item",
+    appendItem: false
   });
 </script>

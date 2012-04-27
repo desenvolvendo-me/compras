@@ -1,22 +1,18 @@
-<fieldset id="budget_allocations_selector">
-  <legend>
-    Dotações
-  </legend>
+<div id="budget_allocations_selector">
 
   <%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
-
   <%= f.error :purchase_solicitation_budget_allocations %>
+
+  <p>
+    <input type="button" class="button affirmative add-purchase-solicitation-budget-allocation" value="Adicionar Dotação">
+  </p>
 
   <div id="allocations">
     <%= f.association :purchase_solicitation_budget_allocations, :collection => localized(f.object.purchase_solicitation_budget_allocations) do |p| %>
       <%= render 'purchase_solicitation_budget_allocations/form', :f => p %>
     <% end %>
   </div>
-
-  <p>
-    <input type="button" class="button affirmative add-purchase-solicitation-budget-allocation" value="Adicionar Dotação">
-  </p>
-</fieldset>
+</div>
 
 <%= mustache 'purchase-solicitation-budget-allocations-template' do %>
   <%= f.association :purchase_solicitation_budget_allocations_attributes, :collection => f.object.purchase_solicitation_budget_allocations.build, :index => '{{uuid_purchase_solicitation_budget_allocation}}' do |p| %>
@@ -31,7 +27,7 @@
     target: '#allocations',
     uuid: 'uuid_purchase_solicitation_budget_allocation',
     fieldToRemove: '.purchase-solicitation-budget-allocation',
-    right: true
+    appendItem: false
   });
 
   $('form').delegate('.budget-allocation', 'change', function (event, data) {
