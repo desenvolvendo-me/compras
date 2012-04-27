@@ -10,6 +10,8 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
   has_many :licitation_process_invited_bidder_documents, :dependent => :destroy, :order => :id
   has_many :document_types, :through => :licitation_process_invited_bidder_documents
 
+  delegate :document_type_ids, :to => :licitation_process, :prefix => true
+
   accepts_nested_attributes_for :licitation_process_invited_bidder_documents, :allow_destroy => true
 
   validates :provider_id, :protocol, :presence => true
@@ -39,6 +41,16 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
 
   def to_s
     "#{licitation_process} - #{id}"
+  end
+
+  def assign_document_types
+    self.document_type_ids = licitation_process_document_type_ids
+  end
+
+  def build_licitation_process_invited_bidder_documents
+    licitation_process_document_type_ids.each do |document_type_id|
+      licitation_process_invited_bidder_documents.build(:document_type_id => document_type_id)
+    end
   end
 
   protected

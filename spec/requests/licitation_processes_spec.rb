@@ -603,4 +603,52 @@ feature "LicitationProcesses" do
 
     page.should_not have_link 'Licitantes convidados'
   end
+
+  scenario 'change document types to ensure that the changes are reflected on invited bidder documents' do
+    LicitationProcess.make!(:processo_licitatorio_computador)
+    DocumentType.make!(:oficial)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Licitantes convidados'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_field 'Documento', :with => 'Fiscal'
+
+    click_link 'Cancelar'
+
+    click_link 'Voltar ao processo licitatório'
+
+    within_tab 'Documentos' do
+      click_button 'Remover'
+
+      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Processo Licitatório editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Licitantes convidados'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_field 'Documento', :with => 'Fiscal'
+    page.should have_field 'Documento', :with => 'Oficial'
+  end
 end

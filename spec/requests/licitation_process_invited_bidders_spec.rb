@@ -48,7 +48,17 @@ feature "LicitationProcessInvitedBidders" do
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
+    # testing that document type from licitation process are automaticaly included in bidder
+    page.should have_disabled_field 'Documento'
+    page.should have_field 'Documento', :with => 'Fiscal'
+
+    fill_in 'Número/certidão', :with => '222222'
+    fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
+    fill_in 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+
     click_button 'Salvar'
+
+    page.should have_content 'Licitante convidado criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -58,6 +68,11 @@ feature "LicitationProcessInvitedBidders" do
     page.should have_field 'Protocolo', :with => '123456'
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+
+    page.should have_field 'Documento', :with => 'Fiscal'
+    page.should have_field 'Número/certidão', :with => '222222'
+    page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
+    page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
   end
 
   scenario 'updating an existing invited bidder' do
@@ -83,7 +98,13 @@ feature "LicitationProcessInvitedBidders" do
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
 
+    fill_in 'Número/certidão', :with => '333333'
+    fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
+    fill_in 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+
     click_button 'Salvar'
+
+    page.should have_content 'Licitante convidado editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -93,6 +114,11 @@ feature "LicitationProcessInvitedBidders" do
     page.should have_field 'Protocolo', :with => '111111'
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+
+    page.should have_field 'Documento', :with => 'Fiscal'
+    page.should have_field 'Número/certidão', :with => '333333'
+    page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
+    page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
   end
 
   scenario 'deleting an invited bidder' do
@@ -116,6 +142,8 @@ feature "LicitationProcessInvitedBidders" do
     end
 
     click_link 'Apagar', :confirm => true
+
+    page.should have_notice 'Licitante convidado apagado com sucesso.'
 
     page.should_not have_link invited_bidder.to_s
   end

@@ -21,7 +21,7 @@ class LicitationProcess < ActiveRecord::Base
 
   has_many :administrative_process_budget_allocations, :through => :administrative_process
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
-  has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id
+  has_many :licitation_process_invited_bidders, :dependent => :destroy, :order => :id, :autosave => true
   has_many :licitation_process_invited_bidder_documents, :through => :licitation_process_invited_bidders
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
@@ -58,6 +58,7 @@ class LicitationProcess < ActiveRecord::Base
   before_save :set_modality, :clear_bidders_depending_on_modality
 
   before_update :clean_old_administrative_process_items
+  before_update :assign_invited_bidders_documents
 
   orderize :id
   filterize
@@ -134,5 +135,11 @@ class LicitationProcess < ActiveRecord::Base
     if administrative_process_id_changed?
       AdministrativeProcessItemsCleaner.new(administrative_process_id_was).clean_items!
     end
+  end
+
+  def assign_invited_bidders_documents
+    return unless can_have_invited_bidders?
+
+    licitation_process_invited_bidders.each(&:assign_document_types)
   end
 end
