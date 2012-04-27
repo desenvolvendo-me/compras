@@ -45,7 +45,7 @@
   }
 
   function calcRepresentativeNumber() {
-    $('.representative .hidden .destroy[value=false]').each(function(index, item){
+    $($('.representative .hidden .destroy[value=false]').get().reverse()).each(function(index, item){
       $(this).parent().parent().find('.number').val(index + 1);
     });
   }

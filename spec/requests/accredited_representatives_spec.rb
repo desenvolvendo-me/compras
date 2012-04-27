@@ -61,7 +61,7 @@ feature "AccreditedRepresentatives" do
     within_tab 'Representantes' do
       click_button 'Adicionar Representante'
 
-      within '.representative:last' do
+      within '.representative:first' do
         fill_modal 'Pessoa', :with => 'Gabriel Sobrinho',  :field => 'Nome'
         fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
         fill_in 'Cargo ou função', :with => 'Desenvolvedor'
@@ -76,7 +76,7 @@ feature "AccreditedRepresentatives" do
 
     within_tab 'Representantes' do
       within '.representative:last' do
-        page.should have_field 'Número', :with => '2'
+        page.should have_field 'Número', :with => '1'
         page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
         page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
         page.should have_field 'Cargo ou função', :with => 'Desenvolvedor'
