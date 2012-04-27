@@ -33,6 +33,8 @@ class AdministrativeProcess < ActiveRecord::Base
   orderize :year
   filterize
 
+  scope :with_released_status, lambda { where { status.eq(AdministrativeProcessStatus::RELEASED) } }
+
   def self.without_licitation_process
     joins { licitation_process.outer }.where { licitation_process.administrative_process_id.eq(nil) }
   end

@@ -49,7 +49,7 @@ describe AdministrativeProcessesController do
     end
 
     it 'should update when administrative process status is waiting' do
-      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
       put :update, :id => administrative_process.id
 
@@ -57,7 +57,7 @@ describe AdministrativeProcessesController do
     end
 
     it "should release an administrative process with status waiting" do
-      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
       put :update, :id => administrative_process.id, :commit => 'Liberar'
 
@@ -65,7 +65,7 @@ describe AdministrativeProcessesController do
     end
 
     it "should not release an administrative process without status waiting" do
-      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
       put :update, :id => administrative_process.id
 
@@ -73,7 +73,7 @@ describe AdministrativeProcessesController do
     end
 
     it "should calcel an administrative process with status waiting" do
-      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
       put :update, :id => administrative_process.id, :commit => 'Anular'
 
@@ -81,7 +81,7 @@ describe AdministrativeProcessesController do
     end
 
     it "should not cancel an administrative process without status waiting" do
-      administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
       put :update, :id => administrative_process.id
 

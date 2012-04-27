@@ -215,7 +215,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'update an existing administrative process' do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
 
@@ -274,7 +274,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'should not have print button if status different from released' do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
 
@@ -304,7 +304,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario "should have a release button when editing an administrative process with status waiting" do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
 
@@ -334,7 +334,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario "releasing an administrative process" do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
 
@@ -350,7 +350,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario "should have a cancel button when editing an administrative process with status waiting" do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
 
@@ -380,7 +380,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario "canceling an administrative process" do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
+    AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
 

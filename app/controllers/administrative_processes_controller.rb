@@ -2,6 +2,7 @@ class AdministrativeProcessesController < CrudController
   actions :all, :except => [ :destroy ]
 
   has_scope :without_licitation_process, :type => :boolean
+  has_scope :with_released_status, :type => :boolean
 
   def new
     object = build_resource

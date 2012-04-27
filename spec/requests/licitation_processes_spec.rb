@@ -598,12 +598,6 @@ feature "LicitationProcesses" do
       page.should have_content 'Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes.'
     end
 
-    # re-selecting the previous administrative process to see that has no invited bidder anymore
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Processo administrativo', :with => '2012', :field => 'Ano'
-    end
-
     within_tab 'Licitantes convidados' do
       page.should_not have_field 'Data do protocolo', :with => I18n.l(Date.current)
     end
@@ -865,5 +859,28 @@ feature "LicitationProcesses" do
     end
 
     old_administrative_process.administrative_process_budget_allocations.first.items.size.should eq 0
+  end
+
+  scenario 'administrative process modal should list only released administrative processes' do
+    AdministrativeProcess.make!(:compra_aguardando)
+    AdministrativeProcess.make!(:compra_com_itens)
+    AdministrativeProcess.make!(:compra_liberada)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    within_tab 'Dados gerais' do
+      within_modal 'Processo administrativo' do
+        click_button 'Pesquisar'
+
+        page.should have_css("table.records tbody tr", :count => 1)
+        page.should have_content '2012'
+        page.should have_content '1'
+        page.should have_content '00088/2012'
+      end
+    end
   end
 end
