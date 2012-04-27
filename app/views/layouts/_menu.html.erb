@@ -294,7 +294,15 @@
   </li>
 </ul>
 <script>
-  $("#menu a[href=#]").click(function (event) {
-    event.preventDefault();
+  $("#menu li").click(function (event) {
+    $(this).addClass("active");
+
+    if ($(event.target).is("a[href=#]")) {
+      return false;
+    }
+  });
+
+  $("#menu li").mouseout(function () {
+    $(this).removeClass("active");
   });
 </script>
