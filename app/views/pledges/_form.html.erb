@@ -47,7 +47,7 @@
       var reserveFundBudgetAllocationId;
 
       function uniqPledgeExpiration(){
-        return $('fieldset.pledge-expiration .destroy[value=false]').length == 1;
+        return $('div.pledge-expiration .destroy[value=false]').length == 1;
       }
 
       function pledgeItemsTotalValue() {
@@ -66,7 +66,7 @@
       }
 
       function fillExpirationNumber() {
-        $('fieldset.pledge-expiration .destroy[value=false]').each(function(index, item){
+        $('div.pledge-expiration .destroy[value=false]').each(function(index, item){
           $(this).parent().parent().find('.order').val(index + 1);
         });
       }
@@ -94,13 +94,13 @@
 
       $("#pledge_emission_date").change(function() {
         if (uniqPledgeExpiration()) {
-          $('fieldset.pledge-expiration .destroy[value=false]:first').parents('fieldset.pledge-expiration').find('.expiration_date').val($(this).val());
+          $('div.pledge-expiration .destroy[value=false]:first').parents('div.pledge-expiration').find('.expiration_date').val($(this).val());
         };
       }).change();
 
       $("#pledge_value").focusout(function() {
         if (uniqPledgeExpiration()) {
-          $('fieldset.pledge-expiration .destroy[value=false]:first').parents('fieldset.pledge-expiration').find('.value').val($(this).val());
+          $('div.pledge-expiration .destroy[value=false]:first').parents('div.pledge-expiration').find('.value').val($(this).val());
         };
       });
 

@@ -1,3 +1,7 @@
+<p>
+  <input type="button" class="button affirmative add-pledge-expiration" value="Adicionar Vencimento">
+</p>
+
 <% if f.object.new_record? && request.get? %>
   <% f.association :pledge_expirations_attributes, :collection => f.object.pledge_expirations.build do |e| %>
       <%= render 'pledge_expirations/form', :f => e %>
@@ -9,10 +13,6 @@
     <%= render 'pledge_expirations/form', :f => e %>
   <% end %>
 </div>
-
-<p>
-  <input type="button" class="button affirmative add-pledge-expiration" value="Adicionar Vencimento">
-</p>
 
 <%= mustache 'pledge-expirations-template' do %>
   <%= f.association :pledge_expirations_attributes, :collection => f.object.pledge_expirations.build, :index => '{{uuid_pledge_expiration}}' do |e| %>
