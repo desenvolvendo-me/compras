@@ -570,4 +570,37 @@ feature "LicitationProcesses" do
       end
     end
   end
+
+  scenario 'testing that it cleans the invited bidder when modality is not invitation for construction or purchase' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    AdministrativeProcess.make!(:compra_sem_convite)
+
+    licitation_process.licitation_process_invited_bidders.size.should eq 1
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_link 'Licitantes convidados'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Processo administrativo', :with => '2014', :field => 'Ano'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Processo Licitatório editado com sucesso.'
+
+    licitation_process.licitation_process_invited_bidders.size.should eq 0
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_link 'Licitantes convidados'
+  end
 end

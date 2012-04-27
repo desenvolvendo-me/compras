@@ -169,4 +169,26 @@ describe LicitationProcess do
     subject.valid?
     subject.errors.messages[:process_date].should be_nil
   end
+
+   it 'should tell if it can have invitation bidders' do
+    subject.stub(:invitation_for_constructions_engineering_services?).and_return(false)
+    subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(false)
+
+    subject.can_have_invited_bidders?.should eq false
+
+    subject.stub(:invitation_for_constructions_engineering_services?).and_return(true)
+    subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(false)
+
+    subject.can_have_invited_bidders?.should eq true
+
+    subject.stub(:invitation_for_constructions_engineering_services?).and_return(false)
+    subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(true)
+
+    subject.can_have_invited_bidders?.should eq true
+
+    subject.stub(:invitation_for_constructions_engineering_services?).and_return(true)
+    subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(true)
+
+    subject.can_have_invited_bidders?.should eq true
+   end
 end

@@ -78,6 +78,10 @@ class LicitationProcess < ActiveRecord::Base
     judgment_commission_advices.count.succ
   end
 
+  def can_have_invited_bidders?
+    invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
+  end
+
   protected
 
   def set_modality
