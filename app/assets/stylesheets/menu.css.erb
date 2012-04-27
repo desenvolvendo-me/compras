@@ -3,7 +3,6 @@
   background: -moz-linear-gradient(#356598, #4D79A5);
   background: -webkit-linear-gradient(#356598, #4D79A5);
   line-height: 2;
-  padding: 0 0.5em;
 }
 
 /* first level */
@@ -12,37 +11,30 @@
 }
 
 #menu li {
-  border-right: solid 1px #7292B3;
   display: inline-block;
-  margin-top: 0.45em;
+  margin: 0.45em 0.25em 0;
   position: relative;
 }
 
-#menu li:last-child {
-  border-right: 0;
-}
-
 #menu a {
+  background: url(<%= image_path 'tool.png' %>) 1em center no-repeat;
   color: #FFF;
   display: block;
   font-size: 123.1%;
-  margin-right: 0.25em;
-  padding: 0 0.5em;
+  padding: 0 1em;
   text-decoration: none;
+  text-indent: 20px;
 }
 
-#menu img {
-  vertical-align: middle;
-}
-
-#menu li:active > a, #menu li:hover > a {
-  background: url(<%= image_path 'menu-active-left.gif' %>) left top no-repeat,
+#menu li.active > a, #menu li:hover > a {
+  background: url(<%= image_path 'tool.png' %>) 1em center no-repeat,
+              url(<%= image_path 'menu-active-left.gif' %>) left top no-repeat,
               url(<%= image_path 'menu-active-right.gif' %>) right top no-repeat,
               #FFF;
   color: #37638E;
 }
 
-#menu li:active > ul, #menu li:hover > ul {
+#menu li.active > ul, #menu li:hover > ul {
   display: block;
 }
 
@@ -65,27 +57,24 @@
 
 #menu li li {
   border-bottom: solid 1px #D7E7F5;
-  border-right: 0;
   display: block;
-  margin-bottom: 0.5em;
-  margin-top: 0;
+  margin: 0 0 0.5em;
 }
 
 #menu li li:last-child {
   border-bottom: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 #menu li li > a {
   background: transparent;
   color: #37638E;
   font-size: 108%;
-  margin-right: 0;
+  padding: 0 0.5em;
+  text-indent: 0;
 }
 
-#menu li li:active > a, #menu li li:hover > a {
-  background: #FEFFE1;
-  background: -moz-linear-gradient(#FDFEF6, #FEFFE1);
+#menu li li.active > a, #menu li li:hover > a {
   background: -webkit-linear-gradient(#FDFEF6, #FEFFE1);
 }
 
