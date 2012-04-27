@@ -428,6 +428,7 @@ Tributario::Application.routes.draw do
 
   resources :licitation_processes do
     resource :accreditation
+    resources :licitation_process_invited_bidders
 
     collection do
       get :filter

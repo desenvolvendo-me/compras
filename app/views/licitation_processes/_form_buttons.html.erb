@@ -3,6 +3,8 @@
 
   <%= f.object.presenter.build_accreditation_link if f.object.persisted? %>
 
+  <%= f.object.presenter.invited_bidders_link if f.object.persisted? %>
+
   <%= f.button :cancel %>
   <%= f.button :destroy if f.object.persisted? %>
 </div>

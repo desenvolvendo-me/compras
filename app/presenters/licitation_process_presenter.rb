@@ -16,4 +16,8 @@ class LicitationProcessPresenter < Presenter::Proxy
       return helpers.link_to('Novo credenciamento',  routes.new_licitation_process_accreditation_path(object), :class => "button primary")
     end
   end
+
+  def invited_bidders_link
+    helpers.link_to('Licitantes convidados', routes.licitation_process_licitation_process_invited_bidders_path(object), :class => "button primary")
+  end
 end

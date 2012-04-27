@@ -22,6 +22,9 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
 
   before_save :clear_dates
 
+  orderize :id
+  filterize
+
   def filled_documents?
     documents = licitation_process_invited_bidder_documents
     return false if documents.empty?
@@ -32,6 +35,10 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
                       document.validity.blank?
     end
     true
+  end
+
+  def to_s
+    "#{licitation_process} - #{id}"
   end
 
   protected

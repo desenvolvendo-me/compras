@@ -44,4 +44,11 @@ describe LicitationProcessInvitedBidder do
     subject.errors.messages[:protocol_date].should include "não pode ficar em branco"
     subject.errors.messages[:receipt_date].should include "não pode ficar em branco"
   end
+
+  it 'should return licitation process  - id as to_s method' do
+    subject.stub(:licitation_process).and_return(double(:to_s => '1/2012'))
+    subject.id = 5
+
+    subject.to_s.should eq '1/2012 - 5'
+  end
 end
