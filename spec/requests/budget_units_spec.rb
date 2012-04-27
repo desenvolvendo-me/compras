@@ -23,11 +23,6 @@ feature "BudgetUnit" do
       fill_in 'Sigla', :with => 'SEMUEDU'
       fill_modal 'Configuração de unidade orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
 
-      # javascript test: trying to avoid the mask
-      fill_in 'Unidade orçamentária', :with => 'abc'
-      page.should have_field 'Unidade orçamentária', :with => ''
-      # end of javascript test
-
       fill_in 'Unidade orçamentária', :with => '02.00'
       select 'Analítico', :from => 'Tipo'
       fill_in 'Código TCE', :with => '051'
