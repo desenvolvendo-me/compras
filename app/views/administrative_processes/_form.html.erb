@@ -79,4 +79,14 @@
   $('form.administrative_process').delegate('.remove-administrative-process-budget-allocation', 'click', function() {
     calculateAllocationsTotalValue();
   });
+
+  $('form.administrative_process').delegate('.budget-allocation', 'change', function (event, data) {
+    if (data){
+      var record = data.record;
+
+      $(this).closest('.administrative-process-budget-allocation').find('.amount').val(record.data("amount"));
+    }else{
+      $(this).closest('.administrative-process-budget-allocation').find('.amount').val("");
+    }
+  });
 </script>

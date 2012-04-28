@@ -69,6 +69,7 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
     end
   end
@@ -100,6 +101,7 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Dotações orçamentárias' do
       page.should have_disabled_field 'Dotação orçamentária'
+      page.should have_disabled_field 'Saldo da dotação'
       page.should have_disabled_field 'Valor previsto'
 
       page.should_not have_button 'Adicionar Dotação'
@@ -269,6 +271,7 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Dotações orçamentárias' do
+      page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '30,00'
     end
   end
