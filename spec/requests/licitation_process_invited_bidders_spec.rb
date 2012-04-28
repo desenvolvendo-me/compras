@@ -189,4 +189,26 @@ feature "LicitationProcessInvitedBidders" do
     page.should have_disabled_field 'Data do protocolo'
     page.should have_disabled_field 'Data do recebimento'
   end
+
+  scenario 'validating uniqueness of provider on licitation process scope' do
+    LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Licitantes convidados'
+
+    click_link 'Criar Licitante convidado'
+
+    fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+
+    click_button 'Salvar'
+
+    page.should have_content 'já está em uso'
+  end
 end
