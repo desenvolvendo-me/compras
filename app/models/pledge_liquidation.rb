@@ -53,7 +53,7 @@ class PledgeLiquidation < ActiveRecord::Base
   end
 
   def validate_value
-    return unless pledge_expiration
+    return if pledge_expiration.blank? || value.blank?
 
     if value > balance
       errors.add(:value, :must_not_be_greater_than_pledge_expiration_balance)
