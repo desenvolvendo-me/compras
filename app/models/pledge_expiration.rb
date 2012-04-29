@@ -8,7 +8,7 @@ class PledgeExpiration < ActiveRecord::Base
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
-  delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
+  delegate :value, :description, :to => :pledge, :prefix => true, :allow_nil => true
 
   validates :expiration_date, :value, :presence => true
 
