@@ -6,7 +6,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :regulatory_act_publication_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_publication_date) if f.object.regulatory_act_publication_date) } %>
+    <%= f.input :regulatory_act_publication_date, :disabled => true, :input_html => { :value => f.object.presenter.regulatory_act_publication_date } %>
   </div>
 </div>
 
