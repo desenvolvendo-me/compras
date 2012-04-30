@@ -1,6 +1,6 @@
 <%= f.error :direct_purchase_budget_allocations %>
 
-<%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.total_allocations_items_value) } %>
+<%= f.input :total_allocations_items_value, :disabled => true, :input_html => { :value => f.object.presenter.total_allocations_items_value } %>
 
 <input type="button" class="button affirmative add-direct-purchase-budget-allocation" value="Adicionar Dotação">
 
