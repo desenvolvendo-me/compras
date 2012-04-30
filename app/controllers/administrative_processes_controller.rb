@@ -40,6 +40,10 @@ class AdministrativeProcessesController < CrudController
   end
 
   def show
-    render :layout => 'report'
+    if resource.released?
+      render :layout => 'report'
+    else
+      redirect_to edit_administrative_process_path(resource)
+    end
   end
 end
