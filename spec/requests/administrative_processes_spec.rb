@@ -71,6 +71,8 @@ feature "AdministrativeProcesses" do
       page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
+
+      page.should have_field 'Valor total', :with => '20,00'
     end
   end
 

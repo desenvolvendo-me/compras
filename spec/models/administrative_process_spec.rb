@@ -93,16 +93,6 @@ describe AdministrativeProcess do
     subject.total_allocations_value.should eq 0
   end
 
-  it 'should return total value of all budget allocations' do
-    subject.stub(:administrative_process_budget_allocations).and_return([
-      double(:value => 20),
-      double(:value => 30),
-      double(:value => 45)
-    ])
-
-    subject.total_allocations_value.should eq 95
-  end
-
   it "the duplicated budget_allocations should be invalid except the first" do
     allocation_one = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
     allocation_two = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
