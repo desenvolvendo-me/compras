@@ -37,15 +37,17 @@ describe RevenueNature do
 
   context 'cascate validate' do
     context 'subcategory should have related with category' do
-      it 'with invalid subcategory' do
+      before(:each) do
         subject.stub(:revenue_subcategory).and_return(double('Subcategory', :revenue_category_id => 1))
+      end
+
+      it 'with invalid subcategory' do
         subject.stub(:revenue_category_id).and_return(2)
         subject.valid?
         subject.errors[:revenue_subcategory].should include('subcategoria da receita deve estar relacionada com categoria da receita')
       end
 
       it 'with valid subcategory' do
-        subject.stub(:revenue_subcategory).and_return(double('Subcategory', :revenue_category_id => 1))
         subject.stub(:revenue_category_id).and_return(1)
         subject.valid?
         subject.errors[:revenue_subcategory].should be_blank
@@ -53,15 +55,17 @@ describe RevenueNature do
     end
 
     context 'source should have related with subcategory' do
-      it 'with invalid source' do
+      before(:each) do
         subject.stub(:revenue_source).and_return(double('Source', :revenue_subcategory_id => 1))
+      end
+
+      it 'with invalid source' do
         subject.stub(:revenue_subcategory_id).and_return(2)
         subject.valid?
         subject.errors[:revenue_source].should include('fonte da receita deve estar relacionada com subcategoria da receita')
       end
 
       it 'with valid source' do
-        subject.stub(:revenue_source).and_return(double('Source', :revenue_source_id => 1))
         subject.stub(:revenue_source_id).and_return(1)
         subject.valid?
         subject.errors[:revenue_source].should_not include('fonte da receita deve estar relacionada com subcategoria da receita')
@@ -69,15 +73,17 @@ describe RevenueNature do
     end
 
     context 'rubric should have related with source' do
-      it 'with invalid rubric' do
+      before(:each) do
         subject.stub(:revenue_rubric).and_return(double('Rubric', :revenue_source_id => 1))
+      end
+
+      it 'with invalid rubric' do
         subject.stub(:revenue_source_id).and_return(2)
         subject.valid?
         subject.errors[:revenue_rubric].should include('rúbrica da receita deve estar relacionada com fonte da receita')
       end
 
       it 'with valid rubric' do
-        subject.stub(:revenue_rubric).and_return(double('Rubric', :revenue_source_id => 1))
         subject.stub(:revenue_source_id).and_return(1)
         subject.valid?
         subject.errors[:revenue_rubric].should_not include('rúbrica da receita deve estar relacionada com fonte da receita')
