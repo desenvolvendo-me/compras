@@ -91,7 +91,7 @@ class LicitationProcess < ActiveRecord::Base
 
   def clear_bidders_depending_on_modality
     unless invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
-      licitation_process_invited_bidders.each(&:destroy)
+      licitation_process_invited_bidders.destroy_all
     end
   end
 
