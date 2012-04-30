@@ -16,7 +16,7 @@ class LicitationProcessInvitedBidder < ActiveRecord::Base
 
   validates :provider_id, :protocol, :presence => true
   validates :protocol_date, :receipt_date, :presence =>true, :unless => :auto_convocation
-  validates :provider_id, :uniqueness => { :scope => :licitation_process_id }
+  validates :provider_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :protocol_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create, :unless => :auto_convocation }
