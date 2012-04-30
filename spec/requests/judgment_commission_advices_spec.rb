@@ -10,6 +10,7 @@ feature "JudgmentCommissionAdvices" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
     licitation_commission = LicitationCommission.make!(:comissao)
     Person.make!(:sobrinho)
+    Person.make!(:wenderson)
 
     click_link 'Processos'
 
@@ -262,6 +263,7 @@ feature "JudgmentCommissionAdvices" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
     licitation_commission = LicitationCommission.make!(:comissao)
     Person.make!(:sobrinho)
+    Person.make!(:wenderson)
 
     click_link 'Processos'
 
@@ -351,6 +353,7 @@ feature "JudgmentCommissionAdvices" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
     licitation_commission = LicitationCommission.make!(:comissao)
     Person.make!(:sobrinho)
+    Person.make!(:wenderson)
 
     click_link 'Processos'
 
