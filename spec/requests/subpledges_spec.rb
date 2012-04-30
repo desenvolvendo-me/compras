@@ -17,14 +17,16 @@ feature "SubPledges" do
 
     click_link 'Criar Subempenho'
 
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Ano', :with => '2012'
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-    fill_in 'Número do processo', :with => '1239/2012'
-    fill_modal 'Credor *', :with => 'Nohup LTDA.'
-    fill_in 'Data *', :with => I18n.l(Date.current)
-    fill_in 'Valor *', :with => '1,00'
-    fill_in 'Objeto', :with => 'Aquisição de materiais'
+    within_tab 'Principal' do
+      fill_modal 'Entidade', :with => 'Detran'
+      fill_in 'Ano', :with => '2012'
+      fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+      fill_in 'Número do processo', :with => '1239/2012'
+      fill_modal 'Credor *', :with => 'Nohup LTDA.'
+      fill_in 'Data *', :with => I18n.l(Date.current)
+      fill_in 'Valor *', :with => '1,00'
+      fill_in 'Objeto', :with => 'Aquisição de materiais'
+    end
 
     click_button 'Salvar'
 
@@ -34,23 +36,63 @@ feature "SubPledges" do
       page.find('a').click
     end
 
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_disabled_field 'Credor do empenho'
-    page.should have_field 'Credor do empenho', :with => 'Nohup LTDA.'
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '9,99'
-    page.should have_disabled_field 'Saldo a subempenhar'
-    page.should have_field 'Saldo a subempenhar', :with => '9,99'
-    page.should have_field 'Ano', :with => '2012'
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
-    page.should have_field 'Subempenho', :with => '1'
-    page.should have_field 'Número do processo', :with => '1239/2012'
-    page.should have_field 'Credor *', :with => 'Nohup LTDA.'
-    page.should have_field 'Data *', :with => I18n.l(Date.current)
-    page.should have_field 'Valor *', :with => '1,00'
-    page.should have_field 'Objeto', :with => 'Aquisição de materiais'
+    within_tab 'Principal' do
+      page.should have_field 'Entidade', :with => 'Detran'
+      page.should have_disabled_field 'Credor do empenho'
+      page.should have_field 'Credor do empenho', :with => 'Nohup LTDA.'
+      page.should have_disabled_field 'Data de emissão'
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+      page.should have_disabled_field 'Valor do empenho'
+      page.should have_field 'Valor do empenho', :with => '9,99'
+      page.should have_disabled_field 'Saldo a subempenhar'
+      page.should have_field 'Saldo a subempenhar', :with => '9,99'
+      page.should have_field 'Ano', :with => '2012'
+      page.should have_field 'Empenho', :with => "#{pledge.id}"
+      page.should have_field 'Subempenho', :with => '1'
+      page.should have_field 'Número do processo', :with => '1239/2012'
+      page.should have_field 'Credor *', :with => 'Nohup LTDA.'
+      page.should have_field 'Data *', :with => I18n.l(Date.current)
+      page.should have_field 'Valor *', :with => '1,00'
+      page.should have_field 'Objeto', :with => 'Aquisição de materiais'
+    end
+
+    within_tab 'Vencimentos' do
+      page.should have_content '1'
+      page.should have_content I18n.l(Date.current + 1.day)
+      page.should have_content '9,99'
+    end
+  end
+
+  scenario 'when fill/clear pledge should update expiration tab' do
+    Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Subempenhos'
+
+    click_link 'Criar Subempenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+    end
+
+    within_tab 'Vencimentos' do
+      page.should have_content '1'
+      page.should have_content I18n.l(Date.current + 1.day)
+      page.should have_content '9,99'
+    end
+
+    # Clear Pledge
+
+    within_tab 'Principal' do
+      clear_modal 'Empenho'
+    end
+
+    within_tab 'Vencimentos' do
+      page.should_not have_content '1'
+      page.should_not have_content I18n.l(Date.current + 1.day)
+      page.should_not have_content '9,99'
+    end
   end
 
   scenario 'should fill modal only to pledge as pledge_type as global or estimated' do
@@ -64,19 +106,19 @@ feature "SubPledges" do
 
     click_link 'Criar Subempenho'
 
-    within_modal 'Empenho' do
-      click_button 'Pesquisar'
+    within_tab 'Principal' do
+      within_modal 'Empenho' do
+        click_button 'Pesquisar'
 
-      page.should have_content '2012'
-      page.should have_content '2011'
-      page.should_not have_content '2010'
+        page.should have_content '2012'
+        page.should have_content '2011'
+        page.should_not have_content '2010'
+      end
     end
   end
 
   scenario 'should fill pledge related fields with fill pledge' do
     pledge = Pledge.make!(:empenho)
-    #Entity.make!(:detran)
-    #Creditor.make!(:nohup)
 
     click_link 'Contabilidade'
 
@@ -84,25 +126,27 @@ feature "SubPledges" do
 
     click_link 'Criar Subempenho'
 
-    page.should have_disabled_field 'Credor do empenho'
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_disabled_field 'Saldo a subempenhar'
+    within_tab 'Principal' do
+      page.should have_disabled_field 'Credor do empenho'
+      page.should have_disabled_field 'Data de emissão'
+      page.should have_disabled_field 'Valor do empenho'
+      page.should have_disabled_field 'Saldo a subempenhar'
 
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-    page.should have_field 'Credor do empenho', :with => 'Nohup LTDA.'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_field 'Valor do empenho', :with => '9,99'
-    page.should have_field 'Saldo a subempenhar', :with => '9,99'
-    page.should have_field 'Credor *', :with => 'Nohup LTDA.'
-    page.should have_field 'Objeto *', :with => 'Descricao'
-    page.should have_field 'Valor *', :with => '9,99'
+      fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+      page.should have_field 'Credor do empenho', :with => 'Nohup LTDA.'
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+      page.should have_field 'Valor do empenho', :with => '9,99'
+      page.should have_field 'Saldo a subempenhar', :with => '9,99'
+      page.should have_field 'Credor *', :with => 'Nohup LTDA.'
+      page.should have_field 'Objeto *', :with => 'Descricao'
+      page.should have_field 'Valor *', :with => '9,99'
 
-    clear_modal 'Empenho'
-    page.should have_field 'Credor do empenho', :with => ''
-    page.should have_field 'Data de emissão', :with => ''
-    page.should have_field 'Valor do empenho', :with => ''
-    page.should have_field 'Saldo a subempenhar', :with => ''
+      clear_modal 'Empenho'
+      page.should have_field 'Credor do empenho', :with => ''
+      page.should have_field 'Data de emissão', :with => ''
+      page.should have_field 'Valor do empenho', :with => ''
+      page.should have_field 'Saldo a subempenhar', :with => ''
+    end
   end
 
   scenario 'should have all fields disabled when edit subpledge' do
@@ -117,22 +161,24 @@ feature "SubPledges" do
 
     should_not have_button 'Atualizar Anulação de Empenho'
 
-    page.should have_disabled_field 'Entidade'
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_disabled_field 'Ano'
-    page.should have_field 'Ano', :with => '2012'
-    page.should have_disabled_field 'Empenho'
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
-    page.should have_disabled_field 'Número do processo'
-    page.should have_field 'Número do processo', :with => '1239/2012'
-    page.should have_disabled_field 'Credor'
-    page.should have_field 'Credor', :with => 'Nohup LTDA.'
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor'
-    page.should have_field 'Valor', :with => '1,00'
-    page.should have_disabled_field 'Objeto'
-    page.should have_field 'Objeto', :with => 'Aquisição de material'
+    within_tab 'Principal' do
+      page.should have_disabled_field 'Entidade'
+      page.should have_field 'Entidade', :with => 'Detran'
+      page.should have_disabled_field 'Ano'
+      page.should have_field 'Ano', :with => '2012'
+      page.should have_disabled_field 'Empenho'
+      page.should have_field 'Empenho', :with => "#{pledge.id}"
+      page.should have_disabled_field 'Número do processo'
+      page.should have_field 'Número do processo', :with => '1239/2012'
+      page.should have_disabled_field 'Credor'
+      page.should have_field 'Credor', :with => 'Nohup LTDA.'
+      page.should have_disabled_field 'Data'
+      page.should have_field 'Data', :with => I18n.l(Date.current)
+      page.should have_disabled_field 'Valor'
+      page.should have_field 'Valor', :with => '1,00'
+      page.should have_disabled_field 'Objeto'
+      page.should have_field 'Objeto', :with => 'Aquisição de material'
+    end
   end
 
   scenario 'should not have a button to destroy an existent pledge' do

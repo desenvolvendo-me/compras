@@ -18,6 +18,7 @@ describe PledgeExpirationPresenter do
     double.tap do |helpers|
       helpers.stub(:l).with(date).and_return('01/12/2012')
       helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
+      helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
     end
   end
 
@@ -39,5 +40,15 @@ describe PledgeExpirationPresenter do
   it 'should return balance' do
     pledge_expiration.stub(:balance).and_return(9.99)
     subject.balance.should eq '9,99'
+  end
+
+  it 'should return formatted balance as currency' do
+    pledge_expiration.stub(:balance).and_return(9.99)
+    subject.balance_as_currency.should eq 'R$ 9,99'
+  end
+
+  it 'should return formatted value as currency' do
+    pledge_expiration.stub(:value).and_return(9.99)
+    subject.value_as_currency.should eq 'R$ 9,99'
   end
 end

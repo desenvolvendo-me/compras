@@ -36,6 +36,12 @@ class Subpledge < ActiveRecord::Base
     next_number.succ
   end
 
+  def pledge_expirations
+    return [] if pledge.blank?
+
+    pledge.pledge_expirations
+  end
+
   protected
 
   def only_accept_pledge_global_or_estimated

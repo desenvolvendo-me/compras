@@ -16,4 +16,21 @@ class PledgeExpirationPresenter < Presenter::Proxy
   def balance
     helpers.number_with_precision(object.balance) if object.balance
   end
+
+  def value_as_currency
+    helpers.number_to_currency(object.value) if object.value
+  end
+
+  def balance_as_currency
+    helpers.number_to_currency(object.balance) if object.balance
+  end
+
+  def to_hash
+    {
+      'number' => number,
+      'expiration_date' => expiration_date,
+      'value' => value_as_currency,
+      'balance' => balance_as_currency
+    }
+  end
 end

@@ -12,4 +12,10 @@ class PledgePresenter < Presenter::Proxy
   def balance
     helpers.number_with_precision object.balance
   end
+
+  def pledge_expirations_as_json
+    object.pledge_expirations.map { |pledge_expiration|
+      pledge_expiration.presenter.to_hash
+    }.to_json
+  end
 end

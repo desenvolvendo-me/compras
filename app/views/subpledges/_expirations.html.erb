@@ -1,0 +1,46 @@
+<table id="expirations" class="records">
+  <thead>
+    <tr>
+      <th>Número</th>
+      <th>Vencimento</th>
+      <th>Valor</th>
+      <th>Saldo a Subempenhar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% f.object.pledge_expirations.each do |pledge_expiration| %>
+      <tr>
+        <td>
+          <%= pledge_expiration.number %>
+        </td>
+        <td>
+          <%= pledge_expiration.presenter.expiration_date %>
+        </td>
+        <td>
+          <%= pledge_expiration.presenter.value_as_currency %>
+        </td>
+        <td>
+          <%= pledge_expiration.presenter.balance_as_currency %>
+        </td>
+      </tr>
+      <% %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache 'pledge-expiration-template' do %>
+    <tr>
+      <td>
+        {{number}}
+      </td>
+      <td>
+        {{expiration_date}}
+      </td>
+      <td>
+        {{value}}
+      </td>
+      <td>
+        {{balance}}
+      </td>
+    </tr>
+<% end %>
