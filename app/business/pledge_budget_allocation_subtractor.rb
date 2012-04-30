@@ -9,6 +9,6 @@ class PledgeBudgetAllocationSubtractor
   def subtract_budget_allocation_amount!
     return unless budget_allocation
 
-    budget_allocation.update_attributes!(:amount => budget_allocation.amount - pledge.value)
+    budget_allocation.update_attribute(:amount, budget_allocation.amount - pledge.value)
   end
 end
