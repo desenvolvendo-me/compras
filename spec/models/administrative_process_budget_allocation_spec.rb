@@ -10,6 +10,7 @@ describe AdministrativeProcessBudgetAllocation do
   it { should have_many(:items).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :budget_allocation }
+  it { should validate_presence_of :value }
 
   it 'should get the correct attributes for data' do
     expense_nature = double(:to_s => 'nature')

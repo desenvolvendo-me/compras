@@ -10,7 +10,7 @@ class AdministrativeProcessBudgetAllocation < ActiveRecord::Base
 
   delegate :expense_nature, :amount, :to => :budget_allocation, :allow_nil => true, :prefix => true
 
-  validates :budget_allocation, :presence => true
+  validates :budget_allocation, :value, :presence => true
 
   validate :cannot_have_duplicated_materials_on_items
 
