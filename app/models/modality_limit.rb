@@ -27,11 +27,11 @@ class ModalityLimit < ActiveRecord::Base
   end
 
   def self.current_limit_material_or_service_without_bidding
-    current.try(:without_bidding) || BigDecimal.new('0.0')
+    current.try(:without_bidding) || zero
   end
 
   def self.current_limit_engineering_works_without_bidding
-    current.try(:work_without_bidding) || BigDecimal.new('0.0')
+    current.try(:work_without_bidding) || zero
   end
 
   protected
@@ -41,5 +41,9 @@ class ModalityLimit < ActiveRecord::Base
 
     month = validity_beginning.month
     errors.add(:validity_beginning, :invalid) unless (1..12).include? month
+  end
+
+  def self.zero
+    BigDecimal.new('0.0')
   end
 end
