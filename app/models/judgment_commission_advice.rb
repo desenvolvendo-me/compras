@@ -82,7 +82,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
                   judgment_end_date || judgment_end_time
 
     if judgment_start > judgment_end
-      errors.add(:judgment_start_date, :start_date_time_should_not_be_greater_than_end_date_time)
+      errors.add(:judgment_end_date, :start_date_time_should_not_be_greater_than_end_date_time)
     end
   end
 
