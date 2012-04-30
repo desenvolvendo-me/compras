@@ -158,7 +158,7 @@ describe LicitationProcess do
   end
 
    it 'should have process_date equal or greater than administrative_process_date' do
-     subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
+    subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
     subject.stub(:process_date).and_return(Date.new(2012, 4, 25))
 
     subject.valid?
