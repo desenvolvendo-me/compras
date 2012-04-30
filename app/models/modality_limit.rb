@@ -27,11 +27,11 @@ class ModalityLimit < ActiveRecord::Base
   end
 
   def self.current_limit_material_or_service_without_bidding
-    current.try(:without_bidding) || 0
+    current.try(:without_bidding) || BigDecimal.new('0.0')
   end
 
   def self.current_limit_engineering_works_without_bidding
-    current.try(:work_without_bidding) || 0
+    current.try(:work_without_bidding) || BigDecimal.new('0.0')
   end
 
   protected
