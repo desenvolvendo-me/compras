@@ -7,25 +7,36 @@ describe AdministrativeProcessPresenter do
     described_class.new(administrative_process, nil, helpers)
   end
 
-  let :administrative_process do
-    double(:value_estimated => 500, :date => Date.new(2012, 2, 25))
-  end
+  context '#value_estimated' do
+    let :administrative_process do
+      double(:value_estimated => 500)
+    end
 
-  let :helpers do
-    double.tap do |helpers|
-      helpers.stub(:number_to_currency).with(500).and_return('R$ 500,00')
-      helpers.stub(:number_with_precision).with(400).and_return('400,00')
-      helpers.stub(:l).with(Date.new(2012, 2, 25)).and_return('25/02/2012')
+    let :helpers do
+      double.tap do |helpers|
+        helpers.stub(:number_to_currency).with(500).and_return('R$ 500,00')
+      end
+    end
+
+    it 'should return formatted value_estimated' do
+      subject.stub(:value_estimated).and_return(500)
+      subject.value_estimated.should eq 'R$ 500,00'
     end
   end
 
-  it 'should return formatted value_estimated' do
-    subject.stub(:value_estimated).and_return(500)
-    subject.value_estimated.should eq 'R$ 500,00'
-  end
+  context '#total_allocations_value' do
+    let :administrative_process do
+      double(:total_allocations_value => 400)
+    end
 
-  it 'should return formatted total_allocations_value' do
-    subject.stub(:total_allocations_value).and_return(400.0)
-    subject.total_allocations_value.should eq '400,00'
+    let :helpers do
+      double.tap do |helpers|
+        helpers.stub(:number_with_precision).with(400).and_return('400,00')
+      end
+    end
+
+    it 'should return formatted total_allocations_value' do
+      subject.total_allocations_value.should eq '400,00'
+    end
   end
 end
