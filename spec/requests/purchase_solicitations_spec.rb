@@ -320,7 +320,7 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dotações orçamentárias' do
-      page.should have_disabled_field 'Total em itens'
+      page.should have_disabled_field 'Valor total dos itens'
 
       click_button 'Adicionar Dotação'
 
@@ -354,7 +354,7 @@ feature "PurchaseSolicitations" do
         end
       end
 
-      page.should have_field 'Total em itens', :with => '90,00'
+      page.should have_field 'Valor total dos itens', :with => '90,00'
 
       # removing an item
 
@@ -364,7 +364,7 @@ feature "PurchaseSolicitations" do
         end
       end
 
-      page.should have_field 'Total em itens', :with => '80,00'
+      page.should have_field 'Valor total dos itens', :with => '80,00'
 
       # removing an entire budget allocation
 
@@ -372,7 +372,7 @@ feature "PurchaseSolicitations" do
         click_button 'Remover Dotação'
       end
 
-      page.should have_field 'Total em itens', :with => '30,00'
+      page.should have_field 'Valor total dos itens', :with => '30,00'
     end
   end
 end

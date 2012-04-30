@@ -427,11 +427,11 @@ feature "LicitationProcesses" do
 
     within_tab 'Dotações' do
       page.should have_field 'Valor previsto', :with => "20,00"
-      page.should have_field 'Total dos itens', :with => "20,00"
+      page.should have_field 'Valor total dos itens', :with => "20,00"
 
       fill_in 'Valor total', :with => '21,00'
 
-      page.should have_field 'Total dos itens', :with => "21,00"
+      page.should have_field 'Valor total dos itens', :with => "21,00"
     end
 
     click_button 'Salvar'
@@ -460,7 +460,7 @@ feature "LicitationProcesses" do
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor unitário', :with => '10,00'
 
-      page.should have_field 'Total dos itens', :with => '50,00'
+      page.should have_field 'Valor total dos itens', :with => '50,00'
 
       click_button 'Adicionar Item'
 
@@ -469,13 +469,13 @@ feature "LicitationProcesses" do
         fill_in 'Valor unitário', :with => '20,00'
       end
 
-      page.should have_field 'Total dos itens', :with => '130,00'
+      page.should have_field 'Valor total dos itens', :with => '130,00'
 
       within '.item:last' do
         click_button 'Remover Item'
       end
 
-      page.should have_field 'Total dos itens', :with => '80,00'
+      page.should have_field 'Valor total dos itens', :with => '80,00'
     end
   end
 
