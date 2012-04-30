@@ -13,6 +13,6 @@ class ReserveFundPresenter < Presenter::Proxy
   attr_data 'expense-nature' => :budget_allocation_expense_nature
 
   def budget_allocation_amount
-     helpers.number_with_precision object.budget_allocation_amount
+    helpers.number_with_precision object.budget_allocation_amount
   end
 end
