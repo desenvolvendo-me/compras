@@ -23,14 +23,6 @@ class Subpledge < ActiveRecord::Base
   validate :value_validation
   validate :only_accept_pledge_global_or_estimated
 
-  def only_accept_pledge_global_or_estimated
-    return unless pledge
-
-    unless pledge.global? || pledge.estimated?
-      errors.add(:pledge, :must_be_pledge_global_or_estimated)
-    end
-  end
-
   orderize :id
   filterize
 
@@ -45,6 +37,14 @@ class Subpledge < ActiveRecord::Base
   end
 
   protected
+
+  def only_accept_pledge_global_or_estimated
+    return unless pledge
+
+    unless pledge.global? || pledge.estimated?
+      errors.add(:pledge, :must_be_pledge_global_or_estimated)
+    end
+  end
 
   def any_subpledge?
     self.class.any?
