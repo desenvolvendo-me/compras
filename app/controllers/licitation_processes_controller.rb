@@ -21,6 +21,7 @@ class LicitationProcessesController < CrudController
   end
 
   def update_resource(object, attributes)
+    return unless object.can_update?
     object.localized.assign_attributes(*attributes)
 
     InvitedBidderStatusChanger.new(object).change

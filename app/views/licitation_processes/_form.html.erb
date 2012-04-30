@@ -153,4 +153,15 @@
     itemDiv.find('.item-unit-price').val(unitPrice);
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
+
+  <% unless resource.can_update? %>
+    $('form.licitation_process .add-licitation-process-budget-allocation').hide();
+    $('form.licitation_process .remove-licitation-process-budget-allocation').hide();
+    $('form.licitation_process .add-licitation-process-publication').hide();
+    $('form.licitation_process .remove-licitation-process-publication').hide();
+    $('form.licitation_process .document-type .modal-finder-remove').hide();
+    $('form.licitation_process .add-licitation-process-invited-bidder').hide();
+    $('form.licitation_process .remove-licitation-process-invited-bidder').hide();
+    $('form.licitation_process input, form.licitation_process select').attr('disabled', 'disabled');
+  <% end %>
 </script>

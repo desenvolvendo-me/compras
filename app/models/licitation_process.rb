@@ -89,6 +89,20 @@ class LicitationProcess < ActiveRecord::Base
     envelope_opening_date == Date.current
   end
 
+  def can_update?
+    return true if licitation_process_publications.empty?
+
+    unless licitation_process_publications.empty?
+      return true if licitation_process_publications.first.id.nil?
+    end
+
+    licitation_process_publications.each do |publication|
+      return true if publication.extension? || publication.edital? || publication.edital_rectification?
+    end
+
+    false
+  end
+
   protected
 
   def set_modality

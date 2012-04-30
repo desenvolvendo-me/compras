@@ -673,4 +673,30 @@ feature "LicitationProcesses" do
 
     page.should_not have_link 'Apurar'
   end
+
+  scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_publicacao_cancelada)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    click_link licitation_process.to_s
+
+    page.should_not have_button 'Salvar'
+
+    within_tab 'Documentos' do
+      page.should_not have_button 'Remover'
+    end
+
+    within_tab 'Dotações orçamentárias' do
+      page.should_not have_button 'Adicionar Item'
+      page.should_not have_button 'Remover Item'
+    end
+
+    within_tab 'Publicações' do
+      page.should_not have_button 'Adicionar Publicação'
+      page.should_not have_button 'Remover Publicação'
+    end
+  end
 end

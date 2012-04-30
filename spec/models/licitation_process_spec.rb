@@ -165,7 +165,7 @@ describe LicitationProcess do
     subject.errors.messages[:process_date].should be_nil
   end
 
-   it 'should tell if it can have invitation bidders' do
+  it 'should tell if it can have invitation bidders' do
     subject.stub(:invitation_for_constructions_engineering_services?).and_return(false)
     subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(false)
 
@@ -191,5 +191,58 @@ describe LicitationProcess do
     subject.stub(:judgment_commission_advices).and_return([1, 2, 3])
 
     subject.advice_number.should eq 3
+  end
+
+  describe 'publication' do
+    context 'when has not publication' do
+      it 'should can be updated' do
+        subject.can_update?.should eq true
+      end
+    end
+
+    context 'when publication_of is any of [extension, edital, edital_rectification]' do
+      let :publication  do
+        double :publication
+      end
+
+      it 'should can update when publication_of is extension' do
+        publication.should_receive(:id).and_return(1)
+        publication.should_receive(:extension?).and_return(true)
+        subject.stub(:licitation_process_publications => [ publication ])
+        subject.can_update?.should eq true
+      end
+
+      it 'should can update when publication_of is edital' do
+        publication.should_receive(:id).and_return(1)
+        publication.should_receive(:extension?).and_return(false)
+        publication.should_receive(:edital?).and_return(true)
+        subject.stub(:licitation_process_publications => [ publication ])
+        subject.can_update?.should eq true
+      end
+
+      it 'should can update when publication_of is edital_rectification' do
+        publication.should_receive(:id).and_return(1)
+        publication.should_receive(:extension?).and_return(false)
+        publication.should_receive(:edital?).and_return(false)
+        publication.should_receive(:edital_rectification?).and_return(true)
+        subject.stub(:licitation_process_publications => [ publication ])
+        subject.can_update?.should eq true
+      end
+    end
+
+    context 'when publication_of is not any of [extension, edital, edital_rectification]' do
+      let(:publication) do
+        double(:publication)
+      end
+
+      it 'should can not update' do
+        publication.should_receive(:id).and_return(1)
+        publication.should_receive(:extension?).and_return(false)
+        publication.should_receive(:edital?).and_return(false)
+        publication.should_receive(:edital_rectification?).and_return(false)
+        subject.stub(:licitation_process_publications => [ publication ])
+        subject.can_update?.should eq false
+      end
+    end
   end
 end
