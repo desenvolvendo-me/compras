@@ -53,6 +53,12 @@ describe JudgmentCommissionAdvice do
     individual_two.errors.messages[:individual_id].should be_nil
   end
 
+  it "should generate next judgment commission advice number correctly" do
+    subject.stub(:licitation_process_advice_number).and_return(7)
+
+    subject.next_judgment_commission_advice_number.should eq 8
+  end
+
   context "inherited and not inherited members" do
     let(:member1) do
       double('member 1', :to_hash => {:member => 1})

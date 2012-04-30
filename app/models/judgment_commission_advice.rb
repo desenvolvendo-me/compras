@@ -13,7 +13,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   accepts_nested_attributes_for :judgment_commission_advice_members, :allow_destroy => true
 
   delegate :modality_humanize, :to => :licitation_process, :allow_nil => true, :prefix => true
-  delegate :next_judgment_commission_advice, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :advice_number, :to => :licitation_process, :allow_nil => true, :prefix => true
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
   delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 
@@ -47,6 +47,10 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
     judgment_commission_advice_members.select do |member|
       inherited_members_to_hash.include? member.to_hash
     end
+  end
+
+  def next_judgment_commission_advice_number
+    licitation_process_advice_number.succ
   end
 
   protected

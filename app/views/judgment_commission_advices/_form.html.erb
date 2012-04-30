@@ -34,7 +34,7 @@
       var record = data.record;
 
       $('#judgment_commission_advice_licitation_process_modality_humanize').val(record.data("modality-humanize"));
-      $('#judgment_commission_advice_judgment_sequence').val(record.data("next-judgment-commission-advice"));
+      $('#judgment_commission_advice_judgment_sequence').val(record.data("advice-number") + 1);
     } else {
       $('#judgment_commission_advice_licitation_process_modality_humanize').val('');
       $('#judgment_commission_advice_judgment_sequence').val('');

@@ -75,8 +75,8 @@ class LicitationProcess < ActiveRecord::Base
     last_licitation_number_of_self_year_and_modality.succ
   end
 
-  def next_judgment_commission_advice
-    judgment_commission_advices.count.succ
+  def advice_number
+    judgment_commission_advices.count
   end
 
   def can_have_invited_bidders?

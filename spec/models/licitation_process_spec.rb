@@ -148,12 +148,6 @@ describe LicitationProcess do
     end
   end
 
-  it 'should return the correct number for next judgment commission advice' do
-    subject.stub(:judgment_commission_advices).and_return(Array.new(5))
-
-    subject.next_judgment_commission_advice.should eq 6
-  end
-
   it 'should not have process_date less than administrative_process_date' do
     subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
     subject.stub(:process_date).and_return(Date.new(2012, 4, 24))
@@ -191,4 +185,10 @@ describe LicitationProcess do
 
     subject.can_have_invited_bidders?.should eq true
    end
+
+  it 'should return the advice number correctly' do
+    subject.stub(:judgment_commission_advices).and_return([1, 2, 3])
+
+    subject.advice_number.should eq 3
+  end
 end

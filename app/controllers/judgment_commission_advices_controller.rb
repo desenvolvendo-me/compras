@@ -10,7 +10,7 @@ class JudgmentCommissionAdvicesController < CrudController
 
   def create_resource(object)
     object.minutes_number = object.next_minutes_number
-    object.judgment_sequence = object.licitation_process_next_judgment_commission_advice
+    object.judgment_sequence = object.next_judgment_commission_advice_number
 
     super
   end
