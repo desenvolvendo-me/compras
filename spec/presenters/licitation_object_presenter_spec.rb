@@ -11,7 +11,9 @@ describe LicitationObjectPresenter do
     double(:purchase_licitation_exemption => 500.0, :build_licitation_exemption => 300.0)
   end
 
-  let(:helper) { double }
+  let(:helper) do
+    double
+  end
 
   it 'should return purchase_licitation_exemption_with_precision' do
     helper.should_receive(:number_with_precision).with(licitation_object.purchase_licitation_exemption).and_return("500,00")
