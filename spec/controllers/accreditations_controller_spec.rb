@@ -12,7 +12,7 @@ describe AccreditationsController do
 
       get :new, :licitation_process_id => accreditation.licitation_process.id
 
-      response.should redirect_to(edit_licitation_process_accreditation_path(accreditation.licitation_process.id))
+      response.should redirect_to(edit_licitation_process_accreditation_path(accreditation.licitation_process))
     end
   end
 
@@ -22,7 +22,7 @@ describe AccreditationsController do
 
       get :edit, :licitation_process_id => licitation_process.id
 
-      response.should redirect_to(new_licitation_process_accreditation_path(licitation_process.id))
+      response.should redirect_to(new_licitation_process_accreditation_path(licitation_process))
     end
   end
 
@@ -38,7 +38,7 @@ describe AccreditationsController do
            },
            :licitation_process_id => licitation_process.id
 
-      response.should redirect_to(edit_licitation_process_path(licitation_process.id))
+      response.should redirect_to(edit_licitation_process_path(licitation_process))
     end
   end
 
@@ -48,18 +48,17 @@ describe AccreditationsController do
 
       put :update, :licitation_process_id => accreditation.licitation_process.id
 
-      response.should redirect_to(edit_licitation_process_path(accreditation.licitation_process.id))
+      response.should redirect_to(edit_licitation_process_path(accreditation.licitation_process))
     end
   end
 
   describe 'DELETE #destroy' do
     it 'should redirect to current accreditation edit link' do
       accreditation = Accreditation.make!(:credenciamento)
-      licitation_process_id = accreditation.licitation_process_id
 
       delete :destroy, :licitation_process_id => accreditation.licitation_process.id
 
-      response.should redirect_to(edit_licitation_process_path(licitation_process_id))
+      response.should redirect_to(edit_licitation_process_path(accreditation.licitation_process))
     end
   end
 end
