@@ -50,11 +50,11 @@
     });
   }
 
-  $('form').delegate('.remove-representative', 'click', function() {
+  $('form.accreditation').delegate('.remove-representative', 'click', function() {
     calcRepresentativeNumber();
   });
 
-  $('form').bind('append.mustache', function(){
+  $('form.accreditation').bind('append.mustache', function(){
     setProvidersModalUrl();
     calcRepresentativeNumber();
   });
