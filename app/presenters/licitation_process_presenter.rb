@@ -11,9 +11,9 @@ class LicitationProcessPresenter < Presenter::Proxy
 
   def build_accreditation_link
     if object.accreditation
-      return helpers.link_to('Editar credenciamento',  routes.edit_licitation_process_accreditation_path(object), :class => "button secondary")
+      helpers.link_to('Editar credenciamento',  routes.edit_licitation_process_accreditation_path(object), :class => "button secondary")
     else
-      return helpers.link_to('Novo credenciamento',  routes.new_licitation_process_accreditation_path(object), :class => "button primary")
+      helpers.link_to('Novo credenciamento',  routes.new_licitation_process_accreditation_path(object), :class => "button primary")
     end
   end
 
