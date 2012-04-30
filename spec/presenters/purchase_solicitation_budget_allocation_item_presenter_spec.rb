@@ -7,15 +7,22 @@ describe PurchaseSolicitationBudgetAllocationItemPresenter do
     described_class.new(purchase_solicitation_budget_allocation_item, nil, helper)
   end
 
-  let :purchase_solicitation_budget_allocation_item do
-    double(:estimated_total_price => 300.0)
+  let(:helper) do
+    double
   end
 
-  let(:helper) { double }
+  context '#estimated_total_price' do
+    let :purchase_solicitation_budget_allocation_item do
+      double(:estimated_total_price => 300.0)
+    end
 
-  it 'should return estimated total price with precision' do
-    helper.should_receive(:number_with_precision).with(300).and_return("300,00")
+    before do
+      helper.should_receive(:number_with_precision).with(300).and_return("300,00")
+    end
 
-    subject.estimated_total_price.should eq '300,00'
+    it 'should return estimated total price with precision' do
+      subject.estimated_total_price.should eq '300,00'
+    end
+
   end
 end
