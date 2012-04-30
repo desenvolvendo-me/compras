@@ -71,7 +71,7 @@ class LicitationCommission < ActiveRecord::Base
   end
 
   def must_have_one_member_with_role_president
-    presidents = licitation_commission_members.reject { |member| !member.president? }
+    presidents = licitation_commission_members.select(&:president?)
 
     if presidents.empty?
       errors.add(:licitation_commission_members, :must_have_one_president)
