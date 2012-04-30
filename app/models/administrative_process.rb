@@ -8,7 +8,7 @@ class AdministrativeProcess < ActiveRecord::Base
 
   has_enumeration_for :modality, :with => AdministrativeProcessModality
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
-  has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true
+  has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true, :create_scopes => true
 
   belongs_to :budget_unit
   belongs_to :responsible, :class_name => 'Employee'
@@ -32,8 +32,6 @@ class AdministrativeProcess < ActiveRecord::Base
 
   orderize :year
   filterize
-
-  scope :with_released_status, lambda { where { status.eq(AdministrativeProcessStatus::RELEASED) } }
 
   def self.without_licitation_process
     joins { licitation_process.outer }.where { licitation_process.administrative_process_id.eq(nil) }
