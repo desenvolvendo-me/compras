@@ -40,8 +40,10 @@ feature "LicitationProcessImpugnments" do
     page.should have_field 'Autor', :with => 'Gabriel Sobrinho'
     page.should have_field 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
     page.should have_select 'Situação', :selected => 'Pendente'
-    page.should have_disabled_field 'Data do julgamento', :with => ''
-    page.should have_disabled_field 'Observação', :with => ''
+    page.should have_disabled_field 'Data do julgamento'
+    page.should have_field 'Data do julgamento', :with => ''
+    page.should have_disabled_field 'Observação'
+    page.should have_field 'Observação', :with => ''
     page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
     page.should have_field 'Hora da entrega', :with => '14:00'
     page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
@@ -78,8 +80,10 @@ feature "LicitationProcessImpugnments" do
     page.should have_select 'Referente ao', :selected => 'Pregão'
     page.should have_field 'Autor', :with => 'Gabriel Sobrinho'
     page.should have_field 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
-    page.should have_disabled_field 'Data do julgamento', :with => ''
-    page.should have_disabled_field 'Observação', :with => ''
+    page.should have_disabled_field 'Data do julgamento'
+    page.should have_field 'Data do julgamento', :with => ''
+    page.should have_disabled_field 'Observação'
+    page.should have_field 'Observação', :with => ''
     page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
     page.should have_field 'Hora da entrega', :with => '14:00'
     page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
