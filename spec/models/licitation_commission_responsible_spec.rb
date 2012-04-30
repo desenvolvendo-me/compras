@@ -13,14 +13,10 @@ describe LicitationCommissionResponsible do
   it { should validate_presence_of :role }
 
   it 'should validate presence of class_register when role is lawyer' do
-    subject.valid?
-
-    subject.errors.messages[:class_register].should be_nil
+    subject.should_not validate_presence_of :class_register
 
     subject.role = LicitationCommissionResponsibleRole::LAWYER
 
-    subject.valid?
-
-    subject.errors.messages[:class_register].should include "não pode ficar em branco"
+    subject.should validate_presence_of :class_register
   end
 end
