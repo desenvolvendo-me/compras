@@ -28,7 +28,7 @@ class AdministrativeProcessesController < CrudController
         super
       end
     else
-      redirect_to edit_administrative_process_path(resource.id)
+      redirect_to edit_administrative_process_path(resource)
     end
   end
 
