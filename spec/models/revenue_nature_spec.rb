@@ -37,7 +37,7 @@ describe RevenueNature do
 
   context 'cascate validate' do
     context 'subcategory should have related with category' do
-      before(:each) do
+      before do
         subject.stub(:revenue_subcategory).and_return(double('Subcategory', :revenue_category_id => 1))
       end
 
@@ -55,7 +55,7 @@ describe RevenueNature do
     end
 
     context 'source should have related with subcategory' do
-      before(:each) do
+      before do
         subject.stub(:revenue_source).and_return(double('Source', :revenue_subcategory_id => 1))
       end
 
@@ -73,7 +73,7 @@ describe RevenueNature do
     end
 
     context 'rubric should have related with source' do
-      before(:each) do
+      before do
         subject.stub(:revenue_rubric).and_return(double('Rubric', :revenue_source_id => 1))
       end
 
