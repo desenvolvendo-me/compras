@@ -47,19 +47,19 @@
     <tbody>
       <tr>
         <td>
-          <%= resource.value %>
+          <%= resource.presenter.value_as_currency %>
         </td>
         <td>
-          <%= resource.presenter.canceled_value %>
+          <%= resource.presenter.canceled_value_as_currency %>
         </td>
         <td>
-          <%= resource.presenter.liquidations_value %>
+          <%= resource.presenter.liquidations_value_as_currency %>
         </td>
         <td>
-          <%= resource.presenter.canceled_liquidations_value %>
+          <%= resource.presenter.canceled_liquidations_value_as_currency %>
         </td>
         <td>
-          <%= resource.presenter.balance %>
+          <%= resource.presenter.balance_as_currency %>
         </td>
       </tr>
     </tbody>

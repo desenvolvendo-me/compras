@@ -51,4 +51,19 @@ describe PledgeExpirationPresenter do
     pledge_expiration.stub(:value).and_return(9.99)
     subject.value_as_currency.should eq 'R$ 9,99'
   end
+
+  it 'should return formatted canceled_value as currency' do
+    pledge_expiration.stub(:canceled_value).and_return(9.99)
+    subject.canceled_value_as_currency.should eq 'R$ 9,99'
+  end
+
+  it 'should return formatted liquidations_value as currency' do
+    pledge_expiration.stub(:liquidations_value).and_return(9.99)
+    subject.liquidations_value_as_currency.should eq 'R$ 9,99'
+  end
+
+  it 'should return formatted canceled_liquidations_value as currency' do
+    pledge_expiration.stub(:canceled_liquidations_value).and_return(9.99)
+    subject.canceled_liquidations_value_as_currency.should eq 'R$ 9,99'
+  end
 end

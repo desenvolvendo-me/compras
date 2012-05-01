@@ -25,6 +25,18 @@ class PledgeExpirationPresenter < Presenter::Proxy
     helpers.number_to_currency(object.balance) if object.balance
   end
 
+  def canceled_value_as_currency
+    helpers.number_to_currency(object.canceled_value) if object.canceled_value
+  end
+
+  def liquidations_value_as_currency
+    helpers.number_to_currency(object.liquidations_value) if object.liquidations_value
+  end
+
+  def canceled_liquidations_value_as_currency
+    helpers.number_to_currency(object.canceled_liquidations_value) if object.canceled_liquidations_value
+  end
+
   def to_hash
     {
       'number' => number,
