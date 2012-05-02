@@ -1,4 +1,6 @@
 class LicitationProcessesController < CrudController
+  actions :all, :except => [ :destroy ]
+
   def new
     object = build_resource
     object.year = Date.current.year

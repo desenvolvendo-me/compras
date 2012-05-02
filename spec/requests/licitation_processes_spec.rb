@@ -315,27 +315,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'destroy an existent licitation_process' do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apagar', :confirm => true
-
-    page.should have_notice 'Processo Licitatório apagado com sucesso.'
-
-    page.should_not have_content '19/03/2012'
-    page.should_not have_content '1/2012'
-    page.should_not have_content 'Reforma e Ampliação'
-    page.should_not have_content '1 ano'
-  end
-
   scenario 'creating another licitation with the same year to test process number and licitation number' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
     AdministrativeProcess.make!(:compra_com_itens_2)
