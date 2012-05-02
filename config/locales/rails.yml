@@ -242,6 +242,7 @@ pt-BR:
       revenue_subcategory_must_be_related_with_revenue_category: "subcategoria da receita deve estar relacionada com categoria da receita"
       revenue_source_must_be_related_with_revenue_subcategory: "fonte da receita deve estar relacionada com subcategoria da receita"
       revenue_rubric_must_be_related_with_revenue_source: "rúbrica da receita deve estar relacionada com fonte da receita"
+      commission_members_should_not_be_modified: "os membros pertencentes à comissão julgadora não podem ter seus dados alterados"
 
   activerecord:
     errors:

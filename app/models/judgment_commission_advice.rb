@@ -9,6 +9,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   belongs_to :licitation_commission
 
   has_many :judgment_commission_advice_members, :dependent => :destroy, :order => :id
+  has_many :licitation_commission_members, :through => :licitation_commission
 
   accepts_nested_attributes_for :judgment_commission_advice_members, :allow_destroy => true
 
@@ -25,6 +26,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
 
   validate :cannot_have_duplicated_individuals_on_members
   validate :start_date_time_should_not_be_greater_than_end_date_time
+  validate :commission_members_should_not_be_modified
 
   orderize :id
   filterize
@@ -104,5 +106,26 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
                  judgment_end_date.day,
                  judgment_end_time.hour,
                  judgment_end_time.min)
+  end
+
+  def commission_members_should_not_be_modified
+    return if licitation_commission.nil?
+
+    judgment_commission_advice_members.each do |member|
+      if commission_members_individual_ids.include?(member.individual_id) &&
+         member.to_hash != commission_member_hash(member.individual_id)
+        errors.add(:judgment_commission_advice_members, :commission_members_should_not_be_modified)
+
+        return
+      end
+    end
+  end
+
+  def commission_members_individual_ids
+    licitation_commission_members.collect(&:individual_id)
+  end
+
+  def commission_member_hash(individual_id)
+    licitation_commission_members.find{|m| m.individual_id == individual_id}.to_hash
   end
 end
