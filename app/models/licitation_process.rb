@@ -4,13 +4,14 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
   attr_accessible :licitation_process_publications_attributes
-  attr_accessible :pledge_type, :administrative_process_attributes
+  attr_accessible :pledge_type, :administrative_process_attributes, :type_of_calculation
 
   attr_readonly :process, :year, :licitation_number
 
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
   has_enumeration_for :pledge_type
+  has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation
 
   belongs_to :administrative_process
   belongs_to :capability
@@ -44,6 +45,7 @@ class LicitationProcess < ActiveRecord::Base
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
   validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
+  validates :type_of_calculation, :presence => true
   validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
   validate :administrative_process_must_not_belong_to_another_licitation_process
 

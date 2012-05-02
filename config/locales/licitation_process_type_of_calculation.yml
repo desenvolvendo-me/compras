@@ -1,0 +1,10 @@
+pt-BR:
+  enumerations:
+    licitation_process_type_of_calculation:
+      lowest_total_price_by_item: "Menor preço total por item"
+      lowest_global_price: "Menor preço global"
+      lowest_price_by_lot: "Menor preço por lote"
+      sort_participants_by_item: "Classificar participantes por item (pregão presencial)"
+      sort_participants_by_lot: "Classificar participantes por lote (pregão presencial)"
+      highest_bidder_by_item: "Maior lance por item"
+      highest_bidder_by_lot: "Maior lance por lote"

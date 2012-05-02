@@ -53,6 +53,7 @@ describe LicitationProcess do
   it { should validate_presence_of :envelope_opening_date }
   it { should validate_presence_of :envelope_opening_time }
   it { should validate_presence_of :pledge_type }
+  it { should validate_presence_of :type_of_calculation }
 
   context 'new_envelope_opening_date is not equal to new_envelope_delivery_date' do
     before do
