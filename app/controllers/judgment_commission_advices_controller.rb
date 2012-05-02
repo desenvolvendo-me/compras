@@ -5,13 +5,4 @@ class JudgmentCommissionAdvicesController < CrudController
 
     super
   end
-
-  protected
-
-  def create_resource(object)
-    object.minutes_number = object.next_minutes_number
-    object.judgment_sequence = object.next_judgment_commission_advice_number
-
-    super
-  end
 end

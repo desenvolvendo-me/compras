@@ -18,7 +18,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
   delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 
-  validates :licitation_process, :licitation_commission, :year, :minutes_number, :presence => true
+  validates :licitation_process, :licitation_commission, :year, :presence => true
   validates :year, :mask => "9999"
   validates :judgment_start_date, :judgment_start_time, :judgment_end_date, :presence => true
   validates :judgment_end_time, :companies_minutes, :companies_documentation_minutes, :presence => true
@@ -28,15 +28,14 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   validate :start_date_time_should_not_be_greater_than_end_date_time
   validate :commission_members_should_not_be_modified
 
+  before_create :set_minutes_number
+  before_create :set_judgment_sequence
+
   orderize :id
   filterize
 
   def to_s
     "#{id}/#{year}"
-  end
-
-  def next_minutes_number
-    last_minutes_number_of_self_year.succ
   end
 
   def not_inherited_members
@@ -51,11 +50,23 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
     end
   end
 
+  protected
+
+  def set_judgment_sequence
+    self.judgment_sequence = next_judgment_commission_advice_number
+  end
+
   def next_judgment_commission_advice_number
     licitation_process_advice_number.succ
   end
 
-  protected
+  def set_minutes_number
+    self.minutes_number = next_minutes_number
+  end
+
+  def next_minutes_number
+    last_minutes_number_of_self_year.succ
+  end
 
   def last_minutes_number_of_self_year
     last_by_self_year.try(:minutes_number).to_i
