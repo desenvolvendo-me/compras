@@ -3,13 +3,15 @@ class SupplyAuthorization < ActiveRecord::Base
 
   belongs_to :direct_purchase
 
-  validates :year, :direct_purchase, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
-
   delegate :phone, :fax, :address, :city, :zip_code, :to => :direct_purchase, :allow_nil => true
   delegate :bank_account, :agency, :bank, :provider, :to => :direct_purchase, :allow_nil => true
   delegate :period, :licitation_object, :observation, :payment_method, :to => :direct_purchase, :allow_nil => true
   delegate :date, :budget_unit, :delivery_location, :to => :direct_purchase, :allow_nil => true
+
+  validates :year, :direct_purchase, :presence => true
+  validates :year, :mask => '9999', :allow_blank => true
+
+  before_create :set_code
 
   orderize :year
   filterize
@@ -17,8 +19,6 @@ class SupplyAuthorization < ActiveRecord::Base
   def to_s
     "#{code}/#{year}"
   end
-
-  before_create :set_code
 
   def items_count
     direct_purchase.direct_purchase_budget_allocations.map(&:items).flatten.count
