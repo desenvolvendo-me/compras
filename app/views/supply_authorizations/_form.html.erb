@@ -4,6 +4,6 @@
 
 <% if f.object.persisted? %>
   <script>
-    $('form.supply_authorization input').attr('disabled', true);
+    $('form.supply_authorization :input').attr('disabled', true);
   </script>
 <% end %>
