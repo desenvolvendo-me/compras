@@ -120,6 +120,10 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
+      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+
+      click_button 'Remover Membro'
+
       click_button 'Adicionar Membro'
 
       within '.member:first' do
@@ -154,8 +158,9 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
-      within '.member:last' do
+      page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
 
+      within '.member:last' do
         page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
         page.should have_select 'Função', :selected => 'Apoio'
         page.should have_select 'Natureza do cargo', :selected => 'Outros'
