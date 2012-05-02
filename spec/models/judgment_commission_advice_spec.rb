@@ -13,7 +13,6 @@ describe JudgmentCommissionAdvice do
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :licitation_commission }
   it { should validate_presence_of :year }
-  it { should validate_presence_of :minutes_number }
   it { should validate_presence_of :judgment_start_date }
   it { should validate_presence_of :judgment_start_time }
   it { should validate_presence_of :judgment_end_date }
