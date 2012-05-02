@@ -85,6 +85,10 @@ class LicitationProcess < ActiveRecord::Base
     invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
   end
 
+  def can_count?
+    envelope_opening_date == Date.current
+  end
+
   protected
 
   def set_modality

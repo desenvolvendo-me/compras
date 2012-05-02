@@ -656,4 +656,42 @@ feature "LicitationProcesses" do
     page.should_not have_field 'Documento', :with => 'Fiscal'
     page.should have_field 'Documento', :with => 'Oficial'
   end
+
+  scenario "count link should be available when envelope opening date is the current date" do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      fill_in 'Data da abertura dos envelopes', :with => "#{I18n.l(Date.current)}"
+    end
+
+    click_button 'Salvar'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_link 'Apurar'
+  end
+
+  scenario "count link should not be available when envelope opening date is not the current date" do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_link 'Apurar'
+  end
 end

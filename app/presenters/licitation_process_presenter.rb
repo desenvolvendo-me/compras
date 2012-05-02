@@ -22,4 +22,8 @@ class LicitationProcessPresenter < Presenter::Proxy
   def invited_bidders_link
     helpers.link_to('Licitantes convidados', routes.licitation_process_licitation_process_invited_bidders_path(object), :class => "button primary")
   end
+
+  def count_link
+    helpers.link_to('Apurar', '#', :class => "button primary") if object.can_count?
+  end
 end
