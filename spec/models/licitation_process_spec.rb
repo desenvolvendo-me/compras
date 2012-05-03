@@ -151,18 +151,15 @@ describe LicitationProcess do
 
   it 'should not have process_date less than administrative_process_date' do
     subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
-    subject.stub(:process_date).and_return(Date.new(2012, 4, 24))
 
-    subject.valid?
-    subject.errors.messages[:process_date].should include 'deve ser em ou depois de 25/04/2012'
+    subject.should_not allow_value(Date.new(2012, 4, 24)).for(:process_date).
+                                                         with_message("deve ser em ou depois de 25/04/2012")
   end
 
    it 'should have process_date equal or greater than administrative_process_date' do
     subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
-    subject.stub(:process_date).and_return(Date.new(2012, 4, 25))
 
-    subject.valid?
-    subject.errors.messages[:process_date].should be_nil
+    subject.should allow_value(Date.new(2012, 4, 25)).for(:process_date)
   end
 
   it 'should tell if it can have invitation bidders' do
