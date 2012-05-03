@@ -11,13 +11,13 @@ describe ReserveFundPresenter do
     double(:budget_allocation_amount => 5000.0)
   end
 
-  let(:helpers) do
-    double.tap do |helpers|
-      helpers.stub(:number_with_precision).with(5000.0).and_return("5.000,00")
-    end
+  let :helpers do
+    double 'helpers'
   end
 
   it 'should return budget_allocation_amount with precision' do
+    helpers.stub(:number_with_precision).with(5000.0).and_return("5.000,00")
+
     subject.budget_allocation_amount.should eq '5.000,00'
   end
 end

@@ -11,12 +11,12 @@ describe LicitationCommissionPresenter do
   end
 
   let :helpers do
-    double.tap do |helpers|
-      helpers.stub(:l).with(Date.new(2012, 2, 16)).and_return('16/02/2012')
-    end
+    double 'helpers'
   end
 
   it 'should return formatted regulatory_act_publication_date' do
+    helpers.stub(:l).with(Date.new(2012, 2, 16)).and_return('16/02/2012')
+
     subject.regulatory_act_publication_date.should eq '16/02/2012'
   end
 end

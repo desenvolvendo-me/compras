@@ -15,12 +15,12 @@ describe RevenueNaturePresenter do
   end
 
   let :helpers do
-    double.tap do |helpers|
-      helpers.stub(:l).with(date).and_return('09/04/2012')
-    end
+    double 'helpers'
   end
 
   it 'should return formatted publication_date' do
+    helpers.stub(:l).with(date).and_return('09/04/2012')
+
     subject.publication_date.should eq '09/04/2012'
   end
 

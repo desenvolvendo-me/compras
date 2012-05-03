@@ -11,9 +11,7 @@ describe RevenueAccountingPresenter do
   end
 
   let :helpers do
-    double.tap do |helpers|
-      helpers.stub(:l).with(date).and_return('13/04/2012')
-    end
+    double 'helpers'
   end
 
   context 'when have persisted' do
@@ -22,6 +20,8 @@ describe RevenueAccountingPresenter do
     end
 
     it 'should return formatted created_at as date' do
+      helpers.stub(:l).with(date).and_return('13/04/2012')
+
       subject.date.should eq '13/04/2012'
     end
   end
@@ -36,6 +36,8 @@ describe RevenueAccountingPresenter do
     end
 
     it 'should return formatted date current' do
+      helpers.stub(:l).with(date).and_return('13/04/2012')
+
       subject.date(date_storage).should eq '13/04/2012'
     end
   end

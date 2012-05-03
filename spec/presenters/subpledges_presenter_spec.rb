@@ -15,24 +15,27 @@ describe SubpledgePresenter do
   end
 
   let :helpers do
-    double.tap do |helpers|
-      helpers.stub(:l).with(date).and_return('01/12/2012')
-      helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
-    end
+    double 'helpers'
   end
 
   it 'should return formatted emission date' do
+    helpers.stub(:l).with(date).and_return('01/12/2012')
     subpledge.stub(:emission_date).and_return(date)
+
     subject.emission_date.should eq '01/12/2012'
   end
 
   it 'should return formatted pledge_value' do
+    helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
     subpledge.stub(:pledge_value).and_return(9.99)
+
     subject.pledge_value.should eq '9,99'
   end
 
   it 'should return formatted balance' do
+    helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
     subpledge.stub(:balance).and_return(9.99)
+
     subject.balance.should eq '9,99'
   end
 end

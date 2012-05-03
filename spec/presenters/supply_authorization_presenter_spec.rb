@@ -20,18 +20,20 @@ describe SupplyAuthorizationPresenter do
   end
 
   let :helpers do
-    double.tap do |helpers|
-      helpers.stub(:l).with(date).and_return('01/12/2012')
-    end
+    double 'helpers'
   end
 
   it 'should return formatted direct_purchase' do
+    helpers.stub(:l).with(date).and_return('01/12/2012')
     subject.stub(:direct_purchase).and_return(direct_purchase)
+
     subject.direct_purchase.should eq '1/2012'
   end
 
   it 'should return localized direct_purchase date' do
+    helpers.stub(:l).with(date).and_return('01/12/2012')
     supply_authorization.stub(:date).and_return(date)
+
     subject.date.should eq '01/12/2012'
   end
 
