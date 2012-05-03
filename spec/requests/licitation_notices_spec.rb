@@ -75,7 +75,7 @@ feature "LicitationNotices" do
   end
 
   scenario 'create a new licitation_notice when already exists a licitation_notice with the same licitation process year' do
-    licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
+    LicitationNotice.make!(:aviso_de_licitacao)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     click_link 'Processos'
@@ -107,7 +107,7 @@ feature "LicitationNotices" do
   end
 
   scenario 'create a new licitation_notice when already exists a licitation_notice with other licitation process year' do
-    licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
+    LicitationNotice.make!(:aviso_de_licitacao)
 
     click_link 'Processos'
 
