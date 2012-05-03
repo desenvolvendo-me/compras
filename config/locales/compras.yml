@@ -1,0 +1,5 @@
+pt-BR:
+  compras:
+    messages:
+      administrative_process_released_successful: 'Processo Administrativo liberado com sucesso'
+      administrative_process_annulled_successful: 'Processo Administrativo anulado com sucesso'

@@ -19,11 +19,11 @@ class AdministrativeProcessesController < CrudController
       if params.has_key?(:commit) && params[:commit] == 'Liberar'
         resource.status = AdministrativeProcessStatus::RELEASED
         resource.save!
-        redirect_to administrative_processes_path, :notice => t(:administrative_process_released_successful)
+        redirect_to administrative_processes_path, :notice => t('compras.messages.administrative_process_released_successful')
       elsif params.has_key?(:commit) && params[:commit] == 'Anular'
         resource.status = AdministrativeProcessStatus::ANNULLED
         resource.save!
-        redirect_to administrative_processes_path, :notice => t(:administrative_process_annulled_successful)
+        redirect_to administrative_processes_path, :notice => t('compras.messages.administrative_process_annulled_successful')
       else
         super
       end
