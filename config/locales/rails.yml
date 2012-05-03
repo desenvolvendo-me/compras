@@ -221,6 +221,7 @@ pt-BR:
       must_have_at_least_one_item: "é necessário cadastrar pelo menos um item"
       must_not_be_greater_than_budget_allocation_real_amount: "não pode ser maior que o saldo real da dotação (R$ %{value})"
       must_be_greater_than_pledge_emission_date: "deve ser maior que a data de emissão"
+      must_be_equal_or_greater_than_pledge_emission_date: "deve ser igual ou maior que a data de emissão"
       must_be_greater_than_last_expiration_date: "deve ser maior que a data da última parcela"
       pledge_expiration_value_sum_must_be_equals_to_pledge_value: "a soma de todos os valores deve ser igual ao valor do empenho"
       must_not_be_greater_than_pledge_expiration_balance: "não pode ser superior ao saldo"
