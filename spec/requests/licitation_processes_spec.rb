@@ -130,7 +130,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Inciso', :with => 'Item 1'
 
       page.should have_field 'Detalhamento do objeto', :with => 'detalhamento'
-      page.should have_select 'Tipo da apuração', :with => 'Menor preço global'
+      page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
       page.should have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       page.should have_field 'Validade da proposta', :with => '5 dias'
       page.should have_field 'Índice de reajuste', :with => 'XPTO'
@@ -266,7 +266,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Processo administrativo', :with => '1/2013'
       page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
       page.should have_field 'Detalhamento do objeto', :with => 'novo detalhamento'
-      page.should have_select 'Tipo da apuração', :with => 'Menor preço por lote'
+      page.should have_select 'Tipo da apuração', :selected => 'Menor preço por lote'
       page.should have_field 'Fonte de recurso', :with => 'Construção'
       page.should have_field 'Validade da proposta', :with => '10 dias'
       page.should have_field 'Índice de reajuste', :with => 'IPC'
