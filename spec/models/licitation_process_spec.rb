@@ -6,7 +6,7 @@ require 'app/models/capability'
 require 'app/models/period'
 require 'app/models/payment_method'
 require 'app/models/licitation_process_publication'
-require 'app/models/licitation_process_invited_bidder'
+require 'app/models/licitation_process_bidder'
 require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
 require 'app/models/budget_allocation'
@@ -30,14 +30,13 @@ describe LicitationProcess do
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
   it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
-  it { should have_many(:licitation_process_invited_bidders).dependent(:destroy).order(:id) }
-  it { should have_many(:licitation_process_invited_bidder_documents).through(:licitation_process_invited_bidders) }
+  it { should have_many(:licitation_process_bidders).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_one(:accreditation).dependent(:destroy) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
-  it { should have_many(:providers).dependent(:restrict).through(:licitation_process_invited_bidders) }
+  it { should have_many(:providers).dependent(:restrict).through(:licitation_process_bidders) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }
@@ -166,22 +165,22 @@ describe LicitationProcess do
     subject.stub(:invitation_for_constructions_engineering_services?).and_return(false)
     subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(false)
 
-    subject.can_have_invited_bidders?.should eq false
+    subject.can_have_bidders?.should eq false
 
     subject.stub(:invitation_for_constructions_engineering_services?).and_return(true)
     subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(false)
 
-    subject.can_have_invited_bidders?.should eq true
+    subject.can_have_bidders?.should eq true
 
     subject.stub(:invitation_for_constructions_engineering_services?).and_return(false)
     subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(true)
 
-    subject.can_have_invited_bidders?.should eq true
+    subject.can_have_bidders?.should eq true
 
     subject.stub(:invitation_for_constructions_engineering_services?).and_return(true)
     subject.stub(:invitation_for_purchases_and_engineering_services?).and_return(true)
 
-    subject.can_have_invited_bidders?.should eq true
+    subject.can_have_bidders?.should eq true
    end
 
   it 'should return the advice number correctly' do

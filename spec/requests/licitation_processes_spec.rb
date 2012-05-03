@@ -555,11 +555,11 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'testing that it cleans the invited bidder when modality is not invitation for construction or purchase' do
+  scenario 'testing that it cleans the bidder when modality is not invitation for construction or purchase' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     AdministrativeProcess.make!(:compra_sem_convite)
 
-    licitation_process.licitation_process_invited_bidders.size.should eq 1
+    licitation_process.licitation_process_bidders.size.should eq 1
 
     click_link 'Processos'
 
@@ -579,7 +579,7 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
-    licitation_process.licitation_process_invited_bidders.size.should eq 0
+    licitation_process.licitation_process_bidders.size.should eq 0
 
     within_records do
       page.find('a').click
@@ -588,7 +588,7 @@ feature "LicitationProcesses" do
     page.should_not have_link 'Licitantes convidados'
   end
 
-  scenario 'change document types to ensure that the changes are reflected on invited bidder documents' do
+  scenario 'change document types to ensure that the changes are reflected on bidder documents' do
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 

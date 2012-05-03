@@ -1,4 +1,4 @@
-LicitationProcessInvitedBidderDocument.blueprint(:documento) do
+LicitationProcessBidderDocument.blueprint(:documento) do
   document_type { DocumentType.make!(:fiscal) }
   document_number { '123456' }
   emission_date { I18n.l(Date.current) }

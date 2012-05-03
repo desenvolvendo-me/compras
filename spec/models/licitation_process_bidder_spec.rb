@@ -1,16 +1,16 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/licitation_process_invited_bidder'
-require 'app/models/licitation_process_invited_bidder_document'
+require 'app/models/licitation_process_bidder'
+require 'app/models/licitation_process_bidder_document'
 require 'app/models/licitation_process'
 require 'app/models/provider'
 
-describe LicitationProcessInvitedBidder do
+describe LicitationProcessBidder do
   it { should belong_to :licitation_process }
   it { should belong_to :provider }
 
-  it { should have_many(:licitation_process_invited_bidder_documents).dependent(:destroy).order(:id) }
-  it { should have_many(:document_types).through(:licitation_process_invited_bidder_documents) }
+  it { should have_many(:documents).dependent(:destroy).order(:id) }
+  it { should have_many(:document_types).through(:documents) }
 
   it { should validate_presence_of :provider_id }
   it { should validate_presence_of :protocol }

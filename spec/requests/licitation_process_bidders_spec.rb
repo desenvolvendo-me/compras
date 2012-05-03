@@ -1,14 +1,14 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "LicitationProcessInvitedBidders" do
+feature "LicitationProcessBidders" do
   background do
     sign_in
   end
 
-  scenario 'accessing the invited bidders and return to licitation process edit page' do
+  scenario 'accessing the bidders and return to licitation process edit page' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
-    invited_bidder = licitation_process.licitation_process_invited_bidders.first
+    bidder = licitation_process.licitation_process_bidders.first
 
     click_link 'Processos'
 
@@ -20,14 +20,14 @@ feature "LicitationProcessInvitedBidders" do
 
     click_link 'Licitantes convidados'
 
-    page.should have_link invited_bidder.to_s
+    page.should have_link bidder.to_s
 
     click_link 'Voltar ao processo licitatório'
 
     page.should have_content "Editar #{licitation_process.to_s}"
   end
 
-  scenario 'creating a new invited bidder' do
+  scenario 'creating a new bidder' do
     LicitationProcess.make!(:processo_licitatorio)
     Provider.make!(:wenderson_sa)
 
@@ -75,7 +75,7 @@ feature "LicitationProcessInvitedBidders" do
     page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
   end
 
-  scenario 'updating an existing invited bidder' do
+  scenario 'updating an existing bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador)
     Provider.make!(:sobrinho_sa)
 
@@ -121,9 +121,9 @@ feature "LicitationProcessInvitedBidders" do
     page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
   end
 
-  scenario 'deleting an invited bidder' do
+  scenario 'deleting an bidder' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    invited_bidder = licitation_process.licitation_process_invited_bidders.first
+    bidder = licitation_process.licitation_process_bidders.first
 
     click_link 'Processos'
 
@@ -135,7 +135,7 @@ feature "LicitationProcessInvitedBidders" do
 
     click_link 'Licitantes convidados'
 
-    page.should have_link invited_bidder.to_s
+    page.should have_link bidder.to_s
 
     within_records do
       page.find('a').click
@@ -145,7 +145,7 @@ feature "LicitationProcessInvitedBidders" do
 
     page.should have_notice 'Licitante convidado apagado com sucesso.'
 
-    page.should_not have_link invited_bidder.to_s
+    page.should_not have_link bidder.to_s
   end
 
   scenario 'marking auto_convocation to disable and clear date fields' do

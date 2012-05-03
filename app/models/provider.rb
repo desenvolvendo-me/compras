@@ -18,9 +18,9 @@ class Provider < ActiveRecord::Base
   has_many :provider_partners, :dependent => :destroy, :order => :id
   has_many :provider_licitation_documents, :dependent => :destroy, :inverse_of => :provider, :order => :id
   has_many :direct_purchases, :dependent => :restrict
-  has_many :licitation_process_invited_bidders, :dependent => :restrict
+  has_many :licitation_process_bidders, :dependent => :restrict
   has_many :accredited_representatives, :dependent => :restrict
-  has_many :licitation_processes, :through => :licitation_process_invited_bidders, :dependent => :restrict
+  has_many :licitation_processes, :through => :licitation_process_bidders, :dependent => :restrict
 
   accepts_nested_attributes_for :provider_partners, :allow_destroy => true
   accepts_nested_attributes_for :provider_licitation_documents, :allow_destroy => true

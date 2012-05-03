@@ -51,7 +51,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  licitation_process_invited_bidders { [LicitationProcessInvitedBidder.make!(:licitante)] }
+  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
 end
 
@@ -80,7 +80,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
-  licitation_process_invited_bidders { [LicitationProcessInvitedBidder.make!(:licitante), LicitationProcessInvitedBidder.make!(:licitante_sobrinho)] }
+  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante), LicitationProcessBidder.make!(:licitante_sobrinho)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
 end
 
@@ -109,6 +109,6 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_de_cancelamento)] }
-  licitation_process_invited_bidders { [LicitationProcessInvitedBidder.make!(:licitante)] }
+  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
 end

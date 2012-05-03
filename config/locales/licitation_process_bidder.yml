@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      licitation_process_invited_bidder:
+      licitation_process_bidder:
         one: "Licitante convidado"
         other: "Licitantes convidados"
 
     attributes:
-      licitation_process_invited_bidder:
+      licitation_process_bidder:
         provider: "Fornecedor"
         protocol: "Protocolo"
         protocol_date: "Data do protocolo"

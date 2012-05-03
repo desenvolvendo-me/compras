@@ -12,7 +12,7 @@ class LicitationProcessesController < CrudController
   protected
 
   def create_resource(object)
-    InvitedBidderStatusChanger.new(object).change
+    BidderStatusChanger.new(object).change
 
     object.process = object.next_process
     object.licitation_number = object.next_licitation_number
@@ -24,7 +24,7 @@ class LicitationProcessesController < CrudController
     return unless object.can_update?
     object.localized.assign_attributes(*attributes)
 
-    InvitedBidderStatusChanger.new(object).change
+    BidderStatusChanger.new(object).change
 
     object.save
   end

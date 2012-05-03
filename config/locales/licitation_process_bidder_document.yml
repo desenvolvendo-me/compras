@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      licitation_process_invited_bidder_document:
+      licitation_process_bidder_document:
         one: "Documento"
         other: "Documentos"
 
     attributes:
-      licitation_process_invited_bidder_document:
+      licitation_process_bidder_document:
         document_type: "Tipo de documento"
         description: "Documento"
         document_number: "Número/certidão"
