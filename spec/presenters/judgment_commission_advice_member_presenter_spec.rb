@@ -4,14 +4,12 @@ require 'app/presenters/judgment_commission_advice_member_presenter'
 
 describe JudgmentCommissionAdviceMemberPresenter do
   subject do
-    described_class.new(judgment_commission_advice_member, nil, helpers)
+    described_class.new(judgment_commission_advice_member, nil, nil)
   end
 
   let :judgment_commission_advice_member do
     double('member')
   end
-
-  let(:helpers) { double }
 
   it 'should return the individual_id or mustache variable' do
     judgment_commission_advice_member.should_receive(:individual_id).and_return(nil)
