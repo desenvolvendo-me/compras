@@ -56,7 +56,7 @@ class LicitationProcess < ActiveRecord::Base
     allowing_blank.validates :process_date, :timeliness => { :on_or_after => :administrative_process_date, :type => :date }
   end
 
-  before_save :set_modality, :clear_bidders_depending_on_modality
+  before_save :set_modality
 
   before_update :clean_old_administrative_process_items
   before_update :assign_bidders_documents
@@ -81,7 +81,7 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def can_have_bidders?
-    invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
+    envelope_opening_date <= Date.current
   end
 
   def can_count?
@@ -106,12 +106,6 @@ class LicitationProcess < ActiveRecord::Base
 
   def set_modality
     self.modality = administrative_process.modality
-  end
-
-  def clear_bidders_depending_on_modality
-    unless invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
-      licitation_process_bidders.destroy_all
-    end
   end
 
   def last_process_of_self_year

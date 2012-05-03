@@ -7,7 +7,7 @@ feature "LicitationProcessBidders" do
   end
 
   scenario 'accessing the bidders and return to licitation process edit page' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     bidder = licitation_process.licitation_process_bidders.first
 
     click_link 'Processos'
@@ -28,8 +28,8 @@ feature "LicitationProcessBidders" do
   end
 
   scenario 'creating a new bidder' do
-    LicitationProcess.make!(:processo_licitatorio)
-    Provider.make!(:wenderson_sa)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    Provider.make!(:sobrinho_sa)
 
     click_link 'Processos'
 
@@ -43,7 +43,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Licitante'
 
-    fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+    fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     fill_in 'Protocolo', :with => '123456'
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
@@ -61,10 +61,10 @@ feature "LicitationProcessBidders" do
     page.should have_content 'Licitante criado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link licitation_process.licitation_process_bidders.last.to_s
     end
 
-    page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+    page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     page.should have_field 'Protocolo', :with => '123456'
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
