@@ -1,4 +1,6 @@
 PledgeLiquidation.blueprint(:empenho_2012) do
+  entity { Entity.make!(:detran) }
+  year { 2012 }
   pledge { Pledge.make!(:empenho) }
   pledge_expiration { PledgeExpiration.make!(:vencimento) }
   value { 1 }
@@ -8,6 +10,8 @@ PledgeLiquidation.blueprint(:empenho_2012) do
 end
 
 PledgeLiquidation.blueprint(:liquidacao_total) do
+  entity { Entity.make!(:detran) }
+  year { 2012 }
   pledge { Pledge.make!(:empenho) }
   pledge_expiration { PledgeExpiration.make!(:vencimento) }
   kind { PledgeLiquidationKind::TOTAL }
@@ -15,6 +19,8 @@ PledgeLiquidation.blueprint(:liquidacao_total) do
 end
 
 PledgeLiquidation.blueprint(:liquidacao_parcial) do
+  entity { Entity.make!(:detran) }
+  year { 2012 }
   pledge { Pledge.make!(:empenho) }
   pledge_expiration { PledgeExpiration.make!(:vencimento) }
   kind { PledgeLiquidationKind::PARTIAL }

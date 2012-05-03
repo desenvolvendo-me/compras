@@ -12,9 +12,15 @@ describe PledgeLiquidation do
   it { should validate_presence_of :kind }
   it { should validate_presence_of :value }
   it { should validate_presence_of :date }
+  it { should validate_presence_of :entity }
+  it { should validate_presence_of :year }
 
   it { should belong_to :pledge }
   it { should belong_to :pledge_expiration }
+  it { should belong_to :entity }
+
+  it { should_not allow_value("2ce3").for(:year) }
+  it { should allow_value("2012").for(:year) }
 
   context 'validate value' do
     it 'should not be valid if value greater than balance' do

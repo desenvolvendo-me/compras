@@ -8,6 +8,7 @@ feature "PledgeLiquidations" do
 
   scenario 'create a new pledge_liquidation' do
     pledge = Pledge.make!(:empenho)
+    entity = pledge.entity
 
     click_link 'Contabilidade'
 
@@ -15,6 +16,8 @@ feature "PledgeLiquidations" do
 
     click_link 'Criar Liquidação de Empenho'
 
+    fill_modal 'Entidade', :field => 'Nome', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     fill_in 'Valor *', :with => '1,00'
@@ -29,6 +32,8 @@ feature "PledgeLiquidations" do
       page.find('a').click
     end
 
+    page.should have_field 'Entidade', :with => "#{entity}"
+    page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
@@ -50,6 +55,7 @@ feature "PledgeLiquidations" do
 
   scenario 'when fill pledge and pledge_expiration should fill delegateds fields' do
     pledge = Pledge.make!(:empenho)
+    entity = pledge.entity
 
     click_link 'Contabilidade'
 
@@ -57,6 +63,8 @@ feature "PledgeLiquidations" do
 
     click_link 'Criar Liquidação de Empenho'
 
+    fill_modal 'Entidade', :field => 'Nome', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_disabled_field 'Data de emissão'
@@ -67,7 +75,9 @@ feature "PledgeLiquidations" do
     page.should have_field 'Objeto do empenho', :with => 'Descricao'
 
     clear_modal 'Empenho'
-
+    
+    page.should have_field 'Entidade', :with => "#{entity}"
+    page.should have_field 'Exercício', :with => '2012'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
     page.should have_disabled_field 'Vencimento'
@@ -93,6 +103,8 @@ feature "PledgeLiquidations" do
 
     click_link 'Criar Liquidação de Empenho'
 
+    fill_modal 'Entidade', :field => 'Nome', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     page.should have_field 'Parcela', :with => '1'
     page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
@@ -244,6 +256,8 @@ feature "PledgeLiquidations" do
 
     click_link 'Criar Liquidação de Empenho'
 
+    fill_modal 'Entidade', :field => 'Nome', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     select 'Total', :from => 'Tipo de liquidação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
@@ -295,6 +309,10 @@ feature "PledgeLiquidations" do
 
     should_not have_button 'Criar Liquidação de Empenho'
 
+    page.should have_field 'Entidade', :with => 'Detran'
+    page.should have_disabled_field 'Entidade'
+    page.should have_disabled_field 'Exercício'
+    page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)

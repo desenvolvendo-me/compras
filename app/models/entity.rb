@@ -21,6 +21,7 @@ class Entity < ActiveRecord::Base
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
   has_many :subpledges, :dependent => :restrict
+  has_many :pledge_liquidations, :dependent => :restrict
 
   validates :name, :presence => true
   validates :name, :uniqueness => { :allow_blank => true }

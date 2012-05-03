@@ -17,3 +17,5 @@ pt-BR:
         pledge_expiration: "Parcela"
         expiration_date: "Vencimento"
         balance: "Saldo"
+        year: "Exercício"
+        entity: "Entidade"
