@@ -75,7 +75,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
 
@@ -160,7 +160,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
 
@@ -292,7 +292,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
 

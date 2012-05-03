@@ -35,7 +35,7 @@ feature "ExpenseNatures" do
 
     page.should have_notice 'Natureza da Despesa criado com sucesso'
 
-    click_link '3.0.10.01.12'
+    click_link '3.0.10.01.12 - Vencimentos e Salários'
 
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Ato regulamentador', :with => '1234'
@@ -90,7 +90,7 @@ feature "ExpenseNatures" do
 
     click_link 'Naturezas das Despesas'
 
-    click_link '3.0.10.01.12'
+    click_link '3.0.10.01.12 - Vencimentos e Salários'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
@@ -129,7 +129,7 @@ feature "ExpenseNatures" do
 
     click_link 'Naturezas das Despesas'
 
-    click_link '3.0.10.01.12'
+    click_link '3.0.10.01.12 - Vencimentos e Salários'
 
     click_link 'Apagar', :confirm => true
 

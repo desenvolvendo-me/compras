@@ -30,6 +30,6 @@ class ExpenseNature < ActiveRecord::Base
   filterize
 
   def to_s
-    full_code
+    "#{full_code} - #{description}"
   end
 end

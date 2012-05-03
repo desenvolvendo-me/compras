@@ -49,7 +49,7 @@ feature "DirectPurchases" do
       fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
 
       # getting data from modal
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
 
       click_button 'Adicionar Item'
@@ -95,7 +95,7 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações' do
       page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12'
+      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'

@@ -58,7 +58,7 @@ feature "Materials" do
     page.should have_select 'Característica', :selected => 'Serviço'
     page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
     page.should have_disabled_field 'Tipo de material'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12'
+    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
   end
 
   scenario 'generate code' do
@@ -152,7 +152,7 @@ feature "Materials" do
     page.should have_select 'Característica', :selected => 'Material'
     page.should have_disabled_field 'Tipo de serviço'
     page.should have_select 'Tipo de material', :selected => 'De consumo'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11'
+    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
   end
 
   scenario 'destroy an existent material' do
