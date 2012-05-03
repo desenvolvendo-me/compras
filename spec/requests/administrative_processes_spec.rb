@@ -369,7 +369,7 @@ feature "AdministrativeProcesses" do
     page.should have_button 'Anular'
   end
 
-  scenario "should not have a cancel button when editing an administrative process without status waiting" do
+  scenario "should not have an annul button when editing an administrative process without status waiting" do
     AdministrativeProcess.make!(:compra_liberada)
 
     click_link 'Processos'
@@ -384,7 +384,7 @@ feature "AdministrativeProcesses" do
     page.should_not have_button 'Anular'
   end
 
-  scenario "canceling an administrative process" do
+  scenario "annuling an administrative process" do
     AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
