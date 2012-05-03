@@ -11,7 +11,9 @@ describe AdministrativeProcessBudgetAllocationPresenter do
     double()
   end
 
-  let(:helpers) { double }
+  let :helpers do
+    double 'helpers'
+  end
 
   it 'should return the id or mustache variable' do
     subject.stub(:id).and_return(nil)
