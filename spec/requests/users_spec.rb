@@ -94,7 +94,7 @@ feature "Users" do
     within_modal 'Perfil' do
       click_button 'Pesquisar'
 
-      page.should have_link 'Novo', :href => '/profiles/new'
+      page.should have_link 'Novo', :href => new_profile_path
     end
   end
 
