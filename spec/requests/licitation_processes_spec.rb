@@ -569,7 +569,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    page.should have_link 'Licitantes convidados'
+    page.should have_link 'Licitantes'
 
     within_tab 'Dados gerais' do
       fill_modal 'Processo administrativo', :with => '2014', :field => 'Ano'
@@ -585,7 +585,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    page.should_not have_link 'Licitantes convidados'
+    page.should_not have_link 'Licitantes'
   end
 
   scenario 'change document types to ensure that the changes are reflected on bidder documents' do
@@ -600,7 +600,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
     within_records do
       page.find('a').click
@@ -626,7 +626,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
     within_records do
       page.find('a').click

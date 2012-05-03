@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       licitation_process_bidder:
-        one: "Licitante convidado"
-        other: "Licitantes convidados"
+        one: "Licitante"
+        other: "Licitantes"
 
     attributes:
       licitation_process_bidder:

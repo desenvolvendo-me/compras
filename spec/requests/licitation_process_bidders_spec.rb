@@ -18,7 +18,7 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
     page.should have_link bidder.to_s
 
@@ -39,9 +39,9 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
-    click_link 'Criar Licitante convidado'
+    click_link 'Criar Licitante'
 
     fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
     fill_in 'Protocolo', :with => '123456'
@@ -58,7 +58,7 @@ feature "LicitationProcessBidders" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Licitante convidado criado com sucesso.'
+    page.should have_content 'Licitante criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -87,7 +87,7 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
     within_records do
       page.find('a').click
@@ -104,7 +104,7 @@ feature "LicitationProcessBidders" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Licitante convidado editado com sucesso.'
+    page.should have_content 'Licitante editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -133,7 +133,7 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
     page.should have_link bidder.to_s
 
@@ -143,7 +143,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Licitante convidado apagado com sucesso.'
+    page.should have_notice 'Licitante apagado com sucesso.'
 
     page.should_not have_link bidder.to_s
   end
@@ -159,7 +159,7 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
     within_records do
       page.find('a').click
@@ -201,9 +201,9 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    click_link 'Licitantes convidados'
+    click_link 'Licitantes'
 
-    click_link 'Criar Licitante convidado'
+    click_link 'Criar Licitante'
 
     fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
 

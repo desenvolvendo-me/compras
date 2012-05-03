@@ -20,7 +20,7 @@ class LicitationProcessPresenter < Presenter::Proxy
   end
 
   def bidders_link
-    helpers.link_to('Licitantes convidados', routes.licitation_process_licitation_process_bidders_path(object), :class => "button primary")
+    helpers.link_to('Licitantes', routes.licitation_process_licitation_process_bidders_path(object), :class => "button primary")
   end
 
   def count_link
