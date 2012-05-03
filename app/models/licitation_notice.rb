@@ -6,7 +6,7 @@ class LicitationNotice < ActiveRecord::Base
   delegate :administrative_process_modality_humanize, :licitation_number, :process_date, :year,
            :object_description, :to => :licitation_process, :prefix => true, :allow_nil => true
 
-  validates :licitation_process_id, :date, :number, :presence => true
+  validates :licitation_process, :date, :number, :presence => true
 
   orderize :id
   filterize
