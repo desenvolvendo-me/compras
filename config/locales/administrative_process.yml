@@ -1,6 +1,6 @@
 pt-BR:
   administrative_process_released_successful: 'Processo Administrativo liberado com sucesso'
-  administrative_process_canceled_successful: 'Processo Administrativo anulado com sucesso'
+  administrative_process_annulled_successful: 'Processo Administrativo anulado com sucesso'
 
   activerecord:
     models:

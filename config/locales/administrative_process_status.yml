@@ -3,4 +3,4 @@ pt-BR:
     administrative_process_status:
       waiting: "Aguardando"
       released: "Liberado"
-      canceled: "Cancelado"
+      annulled: "Anulado"

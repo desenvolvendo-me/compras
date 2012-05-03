@@ -77,7 +77,7 @@ describe AdministrativeProcessesController do
 
       put :update, :id => administrative_process.id, :commit => 'Anular'
 
-      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::CANCELED
+      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::ANNULLED
     end
 
     it "should not cancel an administrative process without status waiting" do
