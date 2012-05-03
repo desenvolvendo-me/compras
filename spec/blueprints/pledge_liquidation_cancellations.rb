@@ -1,5 +1,7 @@
 # encoding: utf-8
 PledgeLiquidationCancellation.blueprint(:empenho_2012) do
+  entity { Entity.make!(:detran) }
+  year { 2012 }
   pledge { Pledge.make!(:empenho) }
   pledge_expiration { PledgeExpiration.make!(:vencimento) }
   value { 1 }

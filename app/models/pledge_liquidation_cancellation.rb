@@ -1,8 +1,10 @@
 class PledgeLiquidationCancellation < ActiveRecord::Base
-  attr_accessible :pledge_id, :pledge_expiration_id, :kind, :value, :date, :reason
+  attr_accessible :pledge_id, :pledge_expiration_id, :kind, :value, :date
+  attr_accessible :reason, :entity_id, :year
 
   has_enumeration_for :kind, :with => PledgeLiquidationCancellationKind, :create_helpers => true
 
+  belongs_to :entity
   belongs_to :pledge
   belongs_to :pledge_expiration
 
@@ -10,7 +12,8 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
   delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
 
-  validates :pledge, :pledge_expiration, :date, :kind, :reason, :value, :presence => true
+  validates :pledge, :pledge_expiration, :date, :kind, :reason, :presence => true
+  validates :value, :entity, :year, :presence => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greater_or_equal_to_last_pledge_liquidation_cancellation_date,
@@ -19,6 +22,9 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
     :allow_blank => true,
     :if => :any_pledge_cancellation?
   }
+  with_options :allow_blank => true do |allowing_blank|
+    allowing_blank.validates :year, :mask => '9999'
+  end
   validate :value_validation
   validate :date_must_be_greater_than_emission_date
 

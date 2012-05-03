@@ -18,6 +18,7 @@ require 'app/models/extra_credit'
 require 'app/models/revenue_nature'
 require 'app/models/revenue_accounting'
 require 'app/models/pledge_cancellation'
+require 'app/models/pledge_liquidation_cancellation'
 require 'app/models/subpledge'
 
 describe Entity do
@@ -44,6 +45,7 @@ describe Entity do
   it { should have_many(:revenue_natures).dependent(:restrict) }
   it { should have_many(:revenue_accountings).dependent(:restrict) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
+  it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
   it { should have_many(:subpledges).dependent(:restrict) }
 
   it { should validate_presence_of :name }

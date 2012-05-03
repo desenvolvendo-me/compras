@@ -16,6 +16,8 @@ feature "PledgeLiquidationCancellations" do
 
     click_link 'Criar Anulação de Liquidação de Empenho'
 
+    fill_modal 'Entidade', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     fill_in 'Valor a ser anulado', :with => '1,00'
@@ -31,6 +33,8 @@ feature "PledgeLiquidationCancellations" do
       page.find('a').click
     end
 
+    page.should have_field 'Entidade', :with => 'Detran'
+    page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
@@ -165,6 +169,8 @@ feature "PledgeLiquidationCancellations" do
 
     click_link 'Criar Anulação de Liquidação de Empenho'
 
+    fill_modal 'Entidade', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     select 'Total', :from => 'Tipo de anulação'
     fill_in 'Data *', :with => I18n.l(Date.current + 2.day)

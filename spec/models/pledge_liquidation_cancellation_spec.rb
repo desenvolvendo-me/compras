@@ -10,6 +10,13 @@ describe PledgeLiquidationCancellation do
 
   it { should belong_to :pledge }
   it { should belong_to :pledge_expiration }
+  it { should belong_to :entity }
+
+  it { should validate_presence_of :entity }
+  it { should validate_presence_of :year }
+
+  it { should_not allow_value('2a12').for(:year) }
+  it { should allow_value('2012').for(:year) }
 
   context 'validate value' do
     it 'should not be valid if value greater than liquidations_value' do
