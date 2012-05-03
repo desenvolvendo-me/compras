@@ -16,9 +16,14 @@ class LicitationNotice < ActiveRecord::Base
   end
 
   def next_number
-    next_number = self.class.joins { licitation_process }.
-                             where { |licitation_notice| licitation_notice.licitation_process.year.eq(licitation_process_year) }.
-                             maximum(:number).to_i
-    next_number.succ
+    last_number.succ
+  end
+
+  private
+
+  def last_number
+    self.class.joins { licitation_process }.
+               where { |licitation_notice| licitation_notice.licitation_process.year.eq(licitation_process_year) }.
+               maximum(:number).to_i
   end
 end
