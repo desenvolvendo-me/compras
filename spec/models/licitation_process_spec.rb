@@ -233,4 +233,20 @@ describe LicitationProcess do
       end
     end
   end
+
+  context "when envelope_opening_date is not the current date" do
+    it "should return false for envelope_opening? method" do
+      subject.envelope_opening_date = Date.tomorrow
+
+      subject.envelope_opening?.should eq false
+    end
+  end
+
+  context "when envelope_opening_date is the current date" do
+    it "should return true for envelope_opening? method" do
+      subject.envelope_opening_date = Date.current
+
+      subject.envelope_opening?.should eq true
+    end
+  end
 end
