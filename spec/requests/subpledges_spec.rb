@@ -63,6 +63,95 @@ feature "SubPledges" do
     end
   end
 
+  scenario 'set sequencial subpledge expiration number' do
+    click_link 'Contabilidade'
+
+    click_link 'Subempenhos'
+
+    click_link 'Criar Subempenho'
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:first' do
+        page.should have_field 'Número', :with => '1'
+      end
+
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:last' do
+        page.should have_field 'Número', :with => '2'
+      end
+
+      within '.subpledge-expiration:first' do
+        click_button 'Remover Parcela'
+      end
+
+      within '.subpledge-expiration:last' do
+        page.should have_field 'Número', :with => '1'
+      end
+    end
+  end
+
+  scenario 'validate subpledge_expiration value sum' do
+    click_link 'Contabilidade'
+
+    click_link 'Subempenhos'
+
+    click_link 'Criar Subempenho'
+
+    within_tab 'Principal' do
+      fill_in 'Valor *', :with => '10,00'
+    end
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:first' do
+        fill_in 'Valor *', :with => '100,00'
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Vencimentos' do
+      within '.subpledge-expiration:first' do
+        page.should have_content 'a soma de todos os valores não pode ser maior o valor do subempenho'
+      end
+    end
+  end
+
+  scenario 'validate expiration_date based on first pledge_expiration available' do
+    pledge = Pledge.make!(:empenho_em_quinze_dias)
+    pledge_expiration = PledgeExpiration.make!(:vencimento_para_empenho_em_quinze_dias)
+
+    click_link 'Contabilidade'
+
+    click_link 'Subempenhos'
+
+    click_link 'Criar Subempenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+    end
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:first' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 18.days)
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Vencimentos' do
+      within '.subpledge-expiration:first' do
+        page.should have_content "não pode ser superior ao vencimento da primeira parcela do empenho com saldo disponível (#{I18n.l(pledge_expiration.expiration_date)})"
+      end
+    end
+  end
+
   scenario 'when fill/clear pledge should update expiration tab' do
     Pledge.make!(:empenho)
 
@@ -77,19 +166,15 @@ feature "SubPledges" do
     end
 
     within_tab 'Vencimentos' do
-      page.should have_content '1'
       page.should have_content I18n.l(Date.current + 1.day)
       page.should have_content '9,99'
     end
-
-    # Clear Pledge
 
     within_tab 'Principal' do
       clear_modal 'Empenho'
     end
 
     within_tab 'Vencimentos' do
-      page.should_not have_content '1'
       page.should_not have_content I18n.l(Date.current + 1.day)
       page.should_not have_content '9,99'
     end

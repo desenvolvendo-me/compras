@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      subpledge_expiration:
+        one: "Vencimento"
+        other: "Vencimentos"
+
+    attributes:
+      subpledge_expiration:
+        pledge: "Empenho"
+        number: "Número"
+        expiration_date: "Vencimento"
+        value: "Valor"

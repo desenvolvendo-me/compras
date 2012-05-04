@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/subpledge'
+require 'app/models/subpledge_expiration'
 
 describe Subpledge do
   it 'should return id as to_s' do
@@ -11,6 +12,8 @@ describe Subpledge do
   it { should belong_to :entity }
   it { should belong_to :pledge }
   it { should belong_to :creditor }
+
+  it { should have_many(:subpledge_expirations).dependent(:destroy) }
 
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
@@ -43,7 +46,7 @@ describe Subpledge do
 
   context 'validate value' do
     let :pledge do
-      pledge = double('Pledge', :balance => 3, :emission_date => nil, :global? => false, :estimated? => true)
+      pledge = double('Pledge', :balance => 3, :emission_date => nil, :global? => false, :estimated? => true, :pledge_expirations => [])
     end
 
     it 'should not be valid if value greater than balance' do
@@ -59,21 +62,21 @@ describe Subpledge do
 
   context 'validate pledge' do
     it 'pledge_type is global' do
-      pledge = double('Pledge', :emission_date => nil, :global? => true, :estimated? => false)
+      pledge = double('Pledge', :emission_date => nil, :pledge_expirations => [], :global? => true, :estimated? => false)
       subject.stub(:pledge).and_return(pledge)
       subject.valid?
       subject.errors[:pledge].should_not include 'deve ser do tipo global ou estimativo'
     end
 
     it 'pledge_type is estimated' do
-      pledge = double('Pledge', :emission_date => nil, :global? => false, :estimated? => true)
+      pledge = double('Pledge', :emission_date => nil, :pledge_expirations => [], :global? => false, :estimated? => true)
       subject.stub(:pledge).and_return(pledge)
       subject.valid?
       subject.errors[:pledge].should_not include 'deve ser do tipo global ou estimativo'
     end
 
     it 'pledge_type is ordinary' do
-      pledge = double('Pledge', :emission_date => nil, :global? => false, :estimated? => false, :ordinary? => true)
+      pledge = double('Pledge', :emission_date => nil, :pledge_expirations => [], :global? => false, :estimated? => false, :ordinary? => true)
       subject.stub(:pledge).and_return(pledge)
       subject.valid?
       subject.errors[:pledge].should include 'deve ser do tipo global ou estimativo'

@@ -27,6 +27,12 @@
   <% if f.object.persisted? %>
     $('form.subpledge :input').attr('disabled', true);
   <% else %>
+    function fillExpirationNumber() {
+      $('div.subpledge-expiration .destroy[value=false]').each(function(index, item){
+        $(this).parent().parent().find('.order').val(index + 1);
+      });
+    }
+
     function cleanExistingPledgeExpirations() {
       $('#expirations tbody').html('');
     }
@@ -68,5 +74,10 @@
           $('#subpledge_balance').val('');
         }
       });
+
+    $('form.subpledge').delegate('.remove-subpledge-expiration', 'click', fillExpirationNumber);
+    $('form.subpledge').bind('append.mustache', fillExpirationNumber);
+
+    fillExpirationNumber();
   <% end %>
 </script>

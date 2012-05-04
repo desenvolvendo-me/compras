@@ -6,6 +6,13 @@ class SubpledgesController < CrudController
     super
   end
 
+  def create
+    object = build_resource
+    GenerateNumberPledgeExpirations.new(object.subpledge_expirations).generate!
+
+    super
+  end
+
   protected
 
   def create_resource(object)

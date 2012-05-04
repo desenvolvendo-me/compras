@@ -44,3 +44,30 @@
       </td>
     </tr>
 <% end %>
+
+<p>
+  <input type="button" class="button affirmative add-subpledge-expiration" value="Adicionar Parcela">
+</p>
+
+<div id="subpledge-expirations">
+  <%= f.association :subpledge_expirations, :collection => localized(f.object.subpledge_expirations) do |e| %>
+    <%= render 'subpledge_expirations/form', :f => e %>
+  <% end %>
+</div>
+
+<%= mustache 'subpledge-expirations-template' do %>
+  <%= f.association :subpledge_expirations_attributes, :collection => f.object.subpledge_expirations.build, :index => '{{uuid_subpledge_expiration}}' do |e| %>
+    <%= render 'subpledge_expirations/form', :f => e %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#subpledge-expirations-template").nestedForm({
+    add: '.add-subpledge-expiration',
+    remove: '.remove-subpledge-expiration',
+    target: '#subpledge-expirations',
+    uuid: 'uuid_subpledge_expiration',
+    fieldToRemove: '.subpledge-expiration',
+    right: true
+  });
+</script>

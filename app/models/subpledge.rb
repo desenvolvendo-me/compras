@@ -1,10 +1,15 @@
 class Subpledge < ActiveRecord::Base
   attr_accessible :entity_id, :pledge_id, :creditor_id, :year, :number, :date
   attr_accessible :value, :process_number, :description
+  attr_accessible :subpledge_expirations_attributes
 
   belongs_to :entity
   belongs_to :pledge
   belongs_to :creditor
+
+  has_many :subpledge_expirations, :dependent => :destroy
+
+  accepts_nested_attributes_for :subpledge_expirations, :allow_destroy => true
 
   delegate :emission_date, :balance, :to => :pledge, :allow_nil => true
   delegate :value, :creditor, :to => :pledge, :allow_nil => true, :prefix => true
@@ -22,6 +27,8 @@ class Subpledge < ActiveRecord::Base
   validate :date_must_be_greater_than_emission_date
   validate :value_validation
   validate :only_accept_pledge_global_or_estimated
+  validate :subpledge_expirations_value_sum_should_be_equals_value
+  validate :validate_subpledge_expirations_expiration_date
 
   orderize :id
   filterize
@@ -43,6 +50,36 @@ class Subpledge < ActiveRecord::Base
   end
 
   protected
+
+  def first_pledge_expiration_available
+    pledge_expirations.each do |expiration|
+      if expiration.balance > 0
+        return expiration
+      end
+    end
+  end
+
+  def validate_subpledge_expirations_expiration_date
+    return unless pledge && first_pledge_expiration_available
+
+    subpledge_expirations.each do |expiration|
+      if expiration.expiration_date < first_pledge_expiration_available.expiration_date
+        expiration.errors.add(:expiration_date, :must_not_be_greater_to_first_pledge_expiration_avaliable, :restriction => I18n.l(first_pledge_expiration_available.expiration_date))
+      end
+    end
+  end
+
+  def subpledge_expirations_value_sum_should_be_equals_value
+    return unless value
+
+    if subpledge_expirations.map(&:value).compact.sum > value
+      subpledge_expirations.each do |expiration|
+        expiration.errors.add(:value, :subpledge_expiration_value_sum_must_not_be_greater_to_subpledge_value)
+      end
+
+      errors.add(:pledge_expirations, :invalid)
+    end
+  end
 
   def only_accept_pledge_global_or_estimated
     return unless pledge
