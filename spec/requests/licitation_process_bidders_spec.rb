@@ -44,6 +44,7 @@ feature "LicitationProcessBidders" do
     click_link 'Criar Licitante'
 
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+    check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
@@ -94,6 +95,7 @@ feature "LicitationProcessBidders" do
     end
 
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+    check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
@@ -148,7 +150,7 @@ feature "LicitationProcessBidders" do
     page.should_not have_link bidder.to_s
   end
 
-  scenario 'marking auto_convocation to disable and clear date fields' do
+  scenario 'when is not invited should disable and clear date, protocol fields' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     click_link 'Processos'
@@ -165,16 +167,24 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
+    page.should have_field 'Protocolo', :with => '123456'
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
+    page.should_not have_disabled_field 'Protocolo'
     page.should_not have_disabled_field 'Data do protocolo'
     page.should_not have_disabled_field 'Data do recebimento'
 
-    check 'Auto convocação'
+    uncheck 'Convidado'
 
+    page.should have_disabled_field 'Protocolo'
     page.should have_disabled_field 'Data do protocolo'
     page.should have_disabled_field 'Data do recebimento'
+
+    page.should_not have_checked_field 'Convidado'
+    page.should have_field 'Protocolo', :with => ''
+    page.should have_field 'Data do protocolo', :with => ''
+    page.should have_field 'Data do recebimento', :with => ''
 
     click_button 'Salvar'
 
@@ -182,10 +192,12 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    page.should have_checked_field 'Auto convocação'
+    page.should_not have_checked_field 'Convidado'
+    page.should have_field 'Protocolo', :with => ''
     page.should have_field 'Data do protocolo', :with => ''
     page.should have_field 'Data do recebimento', :with => ''
 
+    page.should have_disabled_field 'Protocolo'
     page.should have_disabled_field 'Data do protocolo'
     page.should have_disabled_field 'Data do recebimento'
   end

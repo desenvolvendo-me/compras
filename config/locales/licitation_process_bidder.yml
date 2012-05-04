@@ -11,5 +11,5 @@ pt-BR:
         protocol: "Protocolo"
         protocol_date: "Data do protocolo"
         receipt_date: "Data do recebimento"
-        auto_convocation: "Auto convocação"
+        invited: "Convidado"
         status: "Status"

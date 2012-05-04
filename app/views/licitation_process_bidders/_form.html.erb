@@ -1,27 +1,29 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1">
     <%= f.input :provider %>
   </div>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :protocol  %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :protocol_date %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :receipt_date %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :auto_convocation %>
-  </div>
-
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1">
     <%= f.input :status, :disabled => true %>
   </div>
+
+  <% if f.object.presenter.modality_is_invited? %>
+    <div class="yui3-u-1-4">
+      <%= f.input :invited %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :protocol  %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :protocol_date %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :receipt_date %>
+    </div>
+  <% end %>
 </div>
 
 <%= f.association :documents, :collection => localized(f.object.documents) do |p| %>
@@ -29,17 +31,39 @@
 <% end %>
 
 <script>
-  function toggleBidderDates() {
-    if($('#licitation_process_bidder_auto_convocation').is(':checked')) {
-       $('#licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').attr('disabled', true);
+  function toggleEnabledDisabledFields() {
+    if($('#licitation_process_bidder_invited').is(':checked')) {
+      $('#licitation_process_bidder_protocol, #licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').attr('disabled', false);
      } else {
-       $('#licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').attr('disabled', false);
+       $('#licitation_process_bidder_protocol, #licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').attr('disabled', true);
      }
    }
 
-  $('#licitation_process_bidder_auto_convocation').click(function() {
-    toggleBidderDates();
+   function toggleRequiredFields() {
+     if($('#licitation_process_bidder_invited').is(':checked')) {
+       $('label[for|="licitation_process_bidder_protocol"], label[for|="licitation_process_bidder_protocol_date"], label[for|="licitation_process_bidder_receipt_date"]').append('<abbr title="obrigatório">*</abbr>');
+     } else {
+       $('label[for|="licitation_process_bidder_protocol"] abbr, label[for|="licitation_process_bidder_protocol_date"] abbr, label[for|="licitation_process_bidder_receipt_date"] abbr').remove();
+     }
+   }
+
+   function removeValuesFromDisabledFields() {
+     if(!$('#licitation_process_bidder_invited').is(':checked')) {
+       $('#licitation_process_bidder_protocol, #licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').val('');
+     }
+   }
+
+   function removeDuplicateRequiredLabels(){
+     $('label[for|="licitation_process_bidder_protocol"] abbr, label[for|="licitation_process_bidder_protocol_date"] abbr, label[for|="licitation_process_bidder_receipt_date"] abbr').remove();
+   }
+
+  $('#licitation_process_bidder_invited').click(function() {
+    toggleEnabledDisabledFields();
+    removeValuesFromDisabledFields();
+    toggleRequiredFields();
   });
 
-  toggleBidderDates();
+  removeDuplicateRequiredLabels();
+  toggleEnabledDisabledFields();
+  toggleRequiredFields();
 </script>

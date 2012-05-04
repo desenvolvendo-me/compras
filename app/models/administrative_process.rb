@@ -49,6 +49,11 @@ class AdministrativeProcess < ActiveRecord::Base
     administrative_process_budget_allocations.collect(&:attributes_for_data).to_json
   end
 
+  def is_invite?
+    modality == AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES ||
+    modality == AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES
+  end
+
   protected
 
   def set_process

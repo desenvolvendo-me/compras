@@ -12,35 +12,38 @@ describe LicitationProcessBidder do
   it { should have_many(:documents).dependent(:destroy).order(:id) }
   it { should have_many(:document_types).through(:documents) }
 
-  it { should validate_presence_of :provider_id }
-  it { should validate_presence_of :protocol }
+  it { should validate_presence_of :provider }
 
   it "should not have protocol_date less than today" do
+    subject.invited = true
     subject.should_not allow_value(Date.yesterday).
       for(:protocol_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
   end
 
   it "should not have receipt_date less than protocol date" do
+    subject.invited = true
     subject.protocol_date = Date.current + 5.days
 
     subject.should_not allow_value(Date.current + 4.days).
       for(:receipt_date).with_message("deve ser em ou depois de #{I18n.l (Date.current + 5.days)}")
   end
 
-  it "should validate presence of dates when it is not auto convocation" do
-    subject.auto_convocation = true
+  it "should validate presence of dates, protocol when it is not invite" do
+    subject.invited = false
 
     subject.valid?
 
+    subject.errors.messages[:protocol].should be_nil
     subject.errors.messages[:protocol_date].should be_nil
     subject.errors.messages[:receipt_date].should be_nil
   end
 
-  it "should not validate presence of dates when it is auto convocation" do
-    subject.auto_convocation = false
+  it "should not validate presence of dates, protocol when it is invite" do
+    subject.invited = true
 
     subject.valid?
 
+    subject.errors.messages[:protocol].should include "não pode ficar em branco"
     subject.errors.messages[:protocol_date].should include "não pode ficar em branco"
     subject.errors.messages[:receipt_date].should include "não pode ficar em branco"
   end
@@ -50,5 +53,21 @@ describe LicitationProcessBidder do
     subject.id = 5
 
     subject.to_s.should eq '1/2012 - 5'
+  end
+
+  describe 'before_save' do
+    it 'should clear dates, protocol when is not invited' do
+      subject.invited = false
+      subject.protocol = 1234
+      subject.protocol_date = Date.new(2012, 1, 1)
+      subject.receipt_date = Date.new(2012, 1, 1)
+
+      subject.run_callbacks(:save)
+
+      subject.invited = false
+      subject.protocol.should be nil
+      subject.protocol_date.should be nil
+      subject.receipt_date.should be nil
+    end
   end
 end
