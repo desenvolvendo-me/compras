@@ -26,7 +26,6 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
 
   validate :cannot_have_duplicated_individuals_on_members
   validate :start_date_time_should_not_be_greater_than_end_date_time
-  validate :commission_members_should_not_be_modified
 
   before_create :set_minutes_number
   before_create :set_judgment_sequence
@@ -38,16 +37,12 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
     "#{id}/#{year}"
   end
 
-  def not_inherited_members
-    judgment_commission_advice_members.reject do |member|
-      inherited_members_to_hash.include? member.to_hash
-    end
+  def inherited_members
+    judgment_commission_advice_members.select(&:inherited?)
   end
 
-  def inherited_members
-    judgment_commission_advice_members.select do |member|
-      inherited_members_to_hash.include? member.to_hash
-    end
+  def not_inherited_members
+    judgment_commission_advice_members.reject(&:inherited?)
   end
 
   protected
@@ -79,19 +74,17 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   def cannot_have_duplicated_individuals_on_members
     single_individuals = []
 
-    judgment_commission_advice_members.each do |responsible|
-      if single_individuals.include?(responsible.individual_id)
+    judgment_commission_advice_members_not_marked_for_destruction.each do |member|
+      if single_individuals.include?(member.individual_identification)
         errors.add(:judgment_commission_advice_members)
-        responsible.errors.add(:individual_id, :taken)
+        member.errors.add(:individual_id, :taken)
       end
-      single_individuals << responsible.individual_id
+      single_individuals << member.individual_identification
     end
   end
 
-  def inherited_members_to_hash
-    return [] unless licitation_commission_members
-
-    licitation_commission_members.collect(&:to_hash)
+  def judgment_commission_advice_members_not_marked_for_destruction
+    judgment_commission_advice_members.reject(&:marked_for_destruction?)
   end
 
   def start_date_time_should_not_be_greater_than_end_date_time
@@ -117,26 +110,5 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
                  judgment_end_date.day,
                  judgment_end_time.hour,
                  judgment_end_time.min)
-  end
-
-  def commission_members_should_not_be_modified
-    return if licitation_commission.nil?
-
-    judgment_commission_advice_members.each do |member|
-      if commission_members_individual_ids.include?(member.individual_id) &&
-         member.to_hash != commission_member_hash(member.individual_id)
-        errors.add(:judgment_commission_advice_members, :commission_members_should_not_be_modified)
-
-        return
-      end
-    end
-  end
-
-  def commission_members_individual_ids
-    licitation_commission_members.collect(&:individual_id)
-  end
-
-  def commission_member_hash(individual_id)
-    licitation_commission_members.find{|m| m.individual_id == individual_id}.to_hash
   end
 end

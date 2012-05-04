@@ -57,12 +57,9 @@
 
     $(members).each(function() {
       member = template.mustache({ uuid_member: _.uniqueId('fresh-'),
+                                   licitation_commission_member_id: this.id,
                                    individual_name: this.individual_name,
-                                   individual_id: this.individual_id,
-                                   cpf: "cpff",
-                                   role: this.role,
                                    role_humanize: this.role_humanize,
-                                   role_nature: this.role_nature,
                                    role_nature_humanize: this.role_nature_humanize,
                                    registration: this.registration,
                                    cpf: this.cpf });

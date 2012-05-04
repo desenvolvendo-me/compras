@@ -5,21 +5,44 @@ require 'app/models/judgment_commission_advice_member'
 describe JudgmentCommissionAdviceMember do
   it { should belong_to :judgment_commission_advice }
   it { should belong_to :individual }
+  it { should belong_to :licitation_commission_member }
 
-  it { should validate_presence_of :individual }
-  it { should validate_presence_of :role }
-  it { should validate_presence_of :role_nature }
-  it { should validate_presence_of :registration }
+  it "should not validate attributes when is inherited" do
+    subject.stub(:inherited?).and_return(true)
 
-  it 'should return to hash correctly' do
-    subject.individual_id = 3
-    subject.registration = 'registration'
-    subject.role = 'role'
-    subject.role_nature = 'role nature'
+    subject.should_not validate_presence_of :individual
+    subject.should_not validate_presence_of :role
+    subject.should_not validate_presence_of :role_nature
+    subject.should_not validate_presence_of :registration
+  end
 
-    subject.to_hash.should eq({:individual_id => 3,
-                               :registration => 'registration',
-                               :role => 'role',
-                               :role_nature => 'role nature' })
+  it "should validate attributes when is not inherited" do
+    subject.stub(:inherited?).and_return(false)
+
+    subject.should validate_presence_of :individual
+    subject.should validate_presence_of :role
+    subject.should validate_presence_of :role_nature
+    subject.should validate_presence_of :registration
+  end
+
+  it "should verify if is inherited" do
+    subject.stub(:licitation_commission_member).and_return(nil)
+
+    subject.inherited?.should be_false
+
+    subject.stub(:licitation_commission_member).and_return(double)
+
+    subject.inherited?.should be_true
+  end
+
+  it "should return the correct individual id depending on presence of licitation_commission_member" do
+    subject.stub(:individual_id).and_return(3)
+    subject.stub(:licitation_commission_member).and_return(nil)
+
+    subject.individual_identification.should eq 3
+
+    subject.stub(:licitation_commission_member).and_return(double(:individual_id => 5))
+
+    subject.individual_identification.should eq 5
   end
 end

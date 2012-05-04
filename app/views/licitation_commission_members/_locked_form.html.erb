@@ -2,10 +2,7 @@
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <%= f.input :individual_id, :as => 'hidden', :input_html => { :value => f.object.presenter.individual_id_or_mustache_variable } %>
-  <%= f.input :role, :as => 'hidden', :input_html => { :value => f.object.presenter.role_or_mustache_variable } %>
-  <%= f.input :role_nature, :as => 'hidden', :input_html => { :value => f.object.presenter.role_nature_or_mustache_variable } %>
-  <%= f.input :registration, :as => 'hidden', :input_html => { :value => f.object.presenter.registration_or_mustache_variable } %>
+  <%= f.input :licitation_commission_member_id, :as => 'hidden', :input_html => { :value => f.object.presenter.licitation_commission_member_id_or_mustache_variable } %>
 
   <div class="yui3-u-1-2">
     <%= f.input :individual_name, :disabled => true, :input_html => { :value => f.object.presenter.individual_name_or_mustache_variable }  %>
