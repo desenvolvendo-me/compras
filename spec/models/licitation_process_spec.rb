@@ -152,7 +152,7 @@ describe LicitationProcess do
     subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
 
     subject.should_not allow_value(Date.new(2012, 4, 24)).for(:process_date).
-                                                         with_message("deve ser em ou depois de 25/04/2012")
+                                                          with_message("deve ser em ou depois de 25/04/2012")
   end
 
    it 'should have process_date equal or greater than administrative_process_date' do
