@@ -58,7 +58,7 @@ class Pledge < ActiveRecord::Base
   end
 
   orderize :emission_date
-  filterize
+  filterize accessible_attributes + [:id]
 
   def self.global_or_estimated
     where { pledge_type.eq(PledgeType::GLOBAL) | pledge_type.eq(PledgeType::ESTIMATED) }

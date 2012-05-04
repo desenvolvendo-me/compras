@@ -1,5 +1,5 @@
 class PledgePresenter < Presenter::Proxy
-  attr_modal :entity_id, :year, :emission_date, :management_unit_id,
+  attr_modal :id, :entity_id, :year, :emission_date, :management_unit_id,
              :budget_allocation_id, :creditor_id
 
   def budget_allocation_real_amount
