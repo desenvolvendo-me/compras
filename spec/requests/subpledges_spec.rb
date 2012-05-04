@@ -121,9 +121,9 @@ feature "SubPledges" do
     end
   end
 
-  scenario 'validate expiration_date based on first pledge_expiration available' do
+  scenario 'validate expiration_date based on first pledge_parcel available' do
     pledge = Pledge.make!(:empenho_em_quinze_dias)
-    pledge_expiration = PledgeExpiration.make!(:vencimento_para_empenho_em_quinze_dias)
+    pledge_parcel = PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)
 
     click_link 'Contabilidade'
 
@@ -147,7 +147,7 @@ feature "SubPledges" do
 
     within_tab 'Vencimentos' do
       within '.subpledge-expiration:first' do
-        page.should have_content "não pode ser superior ao vencimento da primeira parcela do empenho com saldo disponível (#{I18n.l(pledge_expiration.expiration_date)})"
+        page.should have_content "não pode ser superior ao vencimento da primeira parcela do empenho com saldo disponível (#{I18n.l(pledge_parcel.expiration_date)})"
       end
     end
   end

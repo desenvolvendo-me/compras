@@ -53,7 +53,7 @@ feature "PledgeLiquidations" do
     page.should have_field 'Objeto do empenho', :with => 'Descricao'
   end
 
-  scenario 'when fill pledge and pledge_expiration should fill delegateds fields' do
+  scenario 'when fill pledge and pledge_parcel should fill delegateds fields' do
     pledge = Pledge.make!(:empenho)
     entity = pledge.entity
 
@@ -94,7 +94,7 @@ feature "PledgeLiquidations" do
     page.should have_field 'Objeto do empenho', :with => 'Descricao'
   end
 
-  scenario 'clear pledge and pledge_expiration when clear pledge' do
+  scenario 'clear pledge and pledge_parcel when clear pledge' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -142,7 +142,7 @@ feature "PledgeLiquidations" do
     page.should have_field 'Valor *', :with => '100,00'
   end
 
-  scenario 'should fill value when select pledge_expiration before kind and kind is total' do
+  scenario 'should fill value when select pledge_parcel before kind and kind is total' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
@@ -158,7 +158,7 @@ feature "PledgeLiquidations" do
     page.should have_field 'Valor *', :with => '100,00'
   end
 
-  scenario 'when select pledge_expiration first fill pledge' do
+  scenario 'when select pledge_parcel first fill pledge' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -177,7 +177,7 @@ feature "PledgeLiquidations" do
     page.should have_field 'Valor do empenho', :with => '9,99'
   end
 
-  scenario 'when select pledge first should filter pledge_expiration by pledge_id' do
+  scenario 'when select pledge first should filter pledge_parcel by pledge_id' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -194,7 +194,7 @@ feature "PledgeLiquidations" do
     end
   end
 
-  scenario 'when select pledge first and clear it should clear filter by pledge on pledge_expiration modal' do
+  scenario 'when select pledge first and clear it should clear filter by pledge on pledge_parcel modal' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -228,7 +228,7 @@ feature "PledgeLiquidations" do
       page.should have_content 'Informações de: 1'
     end
 
-    scenario 'when change pledge_expiration' do
+    scenario 'when change pledge_parcel' do
       Pledge.make!(:empenho_com_dois_vencimentos)
 
       click_link 'Contabilidade'

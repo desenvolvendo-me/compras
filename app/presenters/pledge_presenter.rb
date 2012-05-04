@@ -14,9 +14,9 @@ class PledgePresenter < Presenter::Proxy
     helpers.number_with_precision object.balance
   end
 
-  def pledge_expirations_as_json
-    object.pledge_expirations.map { |pledge_expiration|
-      pledge_expiration.presenter.to_hash
+  def pledge_parcels_as_json
+    object.pledge_parcels.map { |pledge_parcel|
+      pledge_parcel.presenter.to_hash
     }.to_json
   end
 end

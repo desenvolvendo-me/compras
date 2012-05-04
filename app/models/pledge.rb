@@ -4,7 +4,7 @@ class Pledge < ActiveRecord::Base
   attr_accessible :pledge_historic_id, :management_contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
   attr_accessible :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
-  attr_accessible :pledge_expirations_attributes, :licitation_process_id
+  attr_accessible :pledge_parcels_attributes, :licitation_process_id
 
   attr_accessor :licitation, :process
 
@@ -25,14 +25,14 @@ class Pledge < ActiveRecord::Base
   belongs_to :licitation_process
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
-  has_many :pledge_expirations, :dependent => :destroy
+  has_many :pledge_parcels, :dependent => :destroy
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
   has_many :subpledges, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
-  accepts_nested_attributes_for :pledge_expirations, :allow_destroy => true
+  accepts_nested_attributes_for :pledge_parcels, :allow_destroy => true
 
   delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
@@ -49,7 +49,7 @@ class Pledge < ActiveRecord::Base
   validate :cannot_have_more_than_once_item_with_the_same_material
   validate :expirations_should_have_date_greater_than_emission_date
   validate :expirations_should_have_date_greater_than_last_expiration_date
-  validate :pledge_expirations_value_should_be_equals_value
+  validate :pledge_parcels_value_should_be_equals_value
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => '9999'
@@ -73,34 +73,34 @@ class Pledge < ActiveRecord::Base
   end
 
   def balance
-    value - pledge_expiration_balances
+    value - pledge_parcels_balances
   end
 
-  def pledge_expiration_balances
-    pledge_expirations.compact.sum(&:cancellation_moviments)
+  def pledge_parcels_balances
+    pledge_parcels.compact.sum(&:cancellation_moviments)
   end
 
   protected
 
-  def pledge_expirations_value_should_be_equals_value
+  def pledge_parcels_value_should_be_equals_value
     return unless value
 
-    if pledge_expirations.map(&:value).compact.sum != value
-      pledge_expirations.each do |expiration|
-        expiration.errors.add(:value, :pledge_expiration_value_sum_must_be_equals_to_pledge_value)
+    if pledge_parcels.map(&:value).compact.sum != value
+      pledge_parcels.each do |expiration|
+        expiration.errors.add(:value, :pledge_parcel_value_sum_must_be_equals_to_pledge_value)
       end
 
-      errors.add(:pledge_expirations, :invalid)
+      errors.add(:pledge_parcels, :invalid)
     end
   end
 
   def expirations_should_have_date_greater_than_last_expiration_date
     last_expiration = nil
 
-    pledge_expirations.each do |expiration|
+    pledge_parcels.each do |expiration|
       if last_expiration && expiration.expiration_date && expiration.expiration_date < last_expiration.expiration_date
         expiration.errors.add(:expiration_date, :must_be_greater_than_last_expiration_date)
-        errors.add(:pledge_expirations, :invalid)
+        errors.add(:pledge_parcels, :invalid)
       end
 
       last_expiration = expiration
@@ -108,11 +108,11 @@ class Pledge < ActiveRecord::Base
   end
 
   def expirations_should_have_date_greater_than_emission_date
-    pledge_expirations.each do |expiration|
+    pledge_parcels.each do |expiration|
       next unless emission_date && expiration.expiration_date && expiration.expiration_date <= emission_date
 
       expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
-      errors.add(:pledge_expirations, :invalid)
+      errors.add(:pledge_parcels, :invalid)
     end
   end
 

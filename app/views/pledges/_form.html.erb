@@ -46,7 +46,7 @@
     (function () {
       var reserveFundBudgetAllocationId;
 
-      function uniqPledgeExpiration(){
+      function uniqPledgeParcel(){
         return $('div.pledge-expiration .destroy[value=false]').length == 1;
       }
 
@@ -93,13 +93,13 @@
       });
 
       $("#pledge_emission_date").change(function() {
-        if (uniqPledgeExpiration()) {
+        if (uniqPledgeParcel()) {
           $('div.pledge-expiration .destroy[value=false]:first').parents('div.pledge-expiration').find('.expiration_date').val($(this).val());
         };
       }).change();
 
       $("#pledge_value").focusout(function() {
-        if (uniqPledgeExpiration()) {
+        if (uniqPledgeParcel()) {
           $('div.pledge-expiration .destroy[value=false]:first').parents('div.pledge-expiration').find('.value').val($(this).val());
         };
       });

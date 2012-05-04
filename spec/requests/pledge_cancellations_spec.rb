@@ -4,7 +4,7 @@ require 'spec_helper'
 feature "PledgeCancellations" do
   background do
     Pledge.destroy_all
-    PledgeExpiration.destroy_all
+    PledgeParcel.destroy_all
     sign_in
   end
 
@@ -57,7 +57,7 @@ feature "PledgeCancellations" do
     page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
   end
 
-  scenario 'when fill pledge and pledge_expiration should fill delegateds fields' do
+  scenario 'when fill pledge and pledge_parcel should fill delegateds fields' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -81,7 +81,7 @@ feature "PledgeCancellations" do
     page.should have_field 'Saldo', :with => '9,99'
   end
 
-  scenario 'clear pledge and pledge_expiration when clear pledge' do
+  scenario 'clear pledge and pledge_parcel when clear pledge' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -125,7 +125,7 @@ feature "PledgeCancellations" do
     page.should have_field 'Valor a ser anulado', :with => '100,00'
   end
 
-  scenario 'should fill value when select pledge_expiration before kind and kind is total' do
+  scenario 'should fill value when select pledge_parcel before kind and kind is total' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
@@ -169,7 +169,7 @@ feature "PledgeCancellations" do
     page.should have_select 'Tipo de anulação', :selected => 'Total'
   end
 
-  scenario 'when select pledge_expiration first fill pledge' do
+  scenario 'when select pledge_parcel first fill pledge' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -188,7 +188,7 @@ feature "PledgeCancellations" do
     page.should have_field 'Valor do empenho', :with => '9,99'
   end
 
-  scenario 'when select pledge first should filter pledge_expiration by pledge_id' do
+  scenario 'when select pledge first should filter pledge_parcel by pledge_id' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -205,7 +205,7 @@ feature "PledgeCancellations" do
     end
   end
 
-  scenario 'when select pledge first and clear it should clear filter by pledge on pledge_expiration modal' do
+  scenario 'when select pledge first and clear it should clear filter by pledge on pledge_parcel modal' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -239,7 +239,7 @@ feature "PledgeCancellations" do
       page.should have_content 'Informações de: 1'
     end
 
-    scenario 'when change pledge_expiration' do
+    scenario 'when change pledge_parcel' do
       Pledge.make!(:empenho_com_dois_vencimentos)
 
       click_link 'Contabilidade'

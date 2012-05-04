@@ -33,11 +33,11 @@
       });
     }
 
-    function cleanExistingPledgeExpirations() {
+    function cleanExistingPledgeParcels() {
       $('#expirations tbody').html('');
     }
 
-    function createPledgeExpirationsFromPledge(pledgeExpirations) {
+    function createPledgeParcelsFromPledge(pledgeExpirations) {
       var template = $('#pledge-expiration-template'),
           rendered = '';
 
@@ -54,7 +54,7 @@
     }
 
       $('#subpledge_pledge_id').change(function(event, data) {
-        cleanExistingPledgeExpirations();
+        cleanExistingPledgeParcels();
 
         if (data) {
           var record = data.record;
@@ -66,7 +66,7 @@
           $('#subpledge_creditor_id').val(record.data("creditor-id"));
           $('#subpledge_creditor').val(record.data("creditor"));
           $('#subpledge_description').val(record.data("description"));
-          createPledgeExpirationsFromPledge(record.data("pledge-expirations"));
+          createPledgeParcelsFromPledge(record.data("pledge-expirations"));
         } else {
           $('#subpledge_pledge_creditor').val('');
           $('#subpledge_emission_date').val('');

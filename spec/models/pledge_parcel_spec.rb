@@ -1,11 +1,11 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/pledge_expiration'
+require 'app/models/pledge_parcel'
 require 'app/models/pledge_cancellation'
 require 'app/models/pledge_liquidation'
 require 'app/models/pledge_liquidation_cancellation'
 
-describe PledgeExpiration do
+describe PledgeParcel do
   it { should belong_to :pledge }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }

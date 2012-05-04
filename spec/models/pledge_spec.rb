@@ -2,7 +2,7 @@
 require 'model_helper'
 require 'app/models/pledge'
 require 'app/models/pledge_item'
-require 'app/models/pledge_expiration'
+require 'app/models/pledge_parcel'
 require 'app/models/pledge_cancellation'
 require 'app/models/pledge_liquidation'
 require 'app/models/pledge_liquidation_cancellation'
@@ -22,7 +22,7 @@ describe Pledge do
   it { should belong_to :founded_debt_contract }
   it { should belong_to :licitation_process }
 
-  it { should have_many(:pledge_expirations).dependent(:destroy) }
+  it { should have_many(:pledge_parcels).dependent(:destroy) }
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
@@ -40,17 +40,17 @@ describe Pledge do
   it { should validate_presence_of :budget_allocation }
 
   context 'balance' do
-    let :pledge_expirations do
+    let :pledge_parcels do
       [
-        double('PledgeExpirationOne', :cancellation_moviments => 10),
-        double('PledgeExpirationTwo', :cancellation_moviments => 9),
-        double('PledgeExpirationThree', :cancellation_moviments => 0)
+        double('PledgeParcelOne', :cancellation_moviments => 10),
+        double('PledgeParcelTwo', :cancellation_moviments => 9),
+        double('PledgeParcelThree', :cancellation_moviments => 0)
       ]
     end
 
     it 'should return balance' do
       subject.value = 20
-      subject.stub(:pledge_expirations).and_return(pledge_expirations)
+      subject.stub(:pledge_parcels).and_return(pledge_parcels)
       subject.balance.should eq 1
     end
   end

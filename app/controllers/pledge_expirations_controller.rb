@@ -1,2 +1,0 @@
-class PledgeExpirationsController < CrudController
-end

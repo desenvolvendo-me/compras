@@ -16,7 +16,7 @@ describe PledgeLiquidation do
   it { should validate_presence_of :year }
 
   it { should belong_to :pledge }
-  it { should belong_to :pledge_expiration }
+  it { should belong_to :pledge_parcel }
   it { should belong_to :entity }
 
   it { should_not allow_value("2ce3").for(:year) }
@@ -24,14 +24,14 @@ describe PledgeLiquidation do
 
   context 'validate value' do
     it 'should not be valid if value greater than balance' do
-      pledge_expiration = double('PledgeExpiration', :value => 3, :balance => 0, :emission_date => nil)
-      subject.stub(:pledge_expiration).and_return(pledge_expiration)
+      pledge_parcel = double('PledgeParcel', :value => 3, :balance => 0, :emission_date => nil)
+      subject.stub(:pledge_parcel).and_return(pledge_parcel)
       subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo")
     end
 
     it 'should be valid if value is not greater than balance' do
-      pledge_expiration = double('PledgeExpiration', :value => 3, :balance => 0, :emission_date => nil)
-      subject.stub(:pledge_expiration).and_return(pledge_expiration)
+      pledge_parcel = double('PledgeParcel', :value => 3, :balance => 0, :emission_date => nil)
+      subject.stub(:pledge_parcel).and_return(pledge_parcel)
       subject.should_not allow_value(1).for(:value)
     end
   end

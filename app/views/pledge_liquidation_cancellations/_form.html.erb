@@ -24,8 +24,8 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :pledge_expiration %>
-    <%= link_to_modal_info 'pledge_liquidation_cancellation_pledge_expiration', f.object.pledge_expiration %>
+    <%= f.input :pledge_parcel %>
+    <%= link_to_modal_info 'pledge_liquidation_cancellation_pledge_parcel', f.object.pledge_parcel %>
   </div>
 
   <div class="yui3-u-1-3">
@@ -47,13 +47,13 @@
   <% else %>
     (function() {
       var pledge_id = $('#pledge_liquidation_cancellation_pledge_id').val(),
-          pledge_expiration_value;
+          pledge_parcel_value;
 
       function pledgeExpirationUrl() {
-        var url = "<%= modal_pledge_expirations_path %>?",
+        var url = "<%= modal_pledge_parcels_path %>?",
             params = {
               locked_fields: ["pledge"],
-              pledge_expiration: {
+              pledge_parcel: {
                 pledge_id: $('#pledge_liquidation_cancellation_pledge_id').val(),
                 pledge: $('#pledge_liquidation_cancellation_pledge').val()
               }
@@ -67,7 +67,7 @@
       function forceValueWhenTotalIsKind(){
         if($('#pledge_liquidation_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
           $('#pledge_liquidation_cancellation_value').attr('disabled', true);
-          $('#pledge_liquidation_cancellation_value').val(pledge_expiration_value);
+          $('#pledge_liquidation_cancellation_value').val(pledge_parcel_value);
         } else {
           $('#pledge_liquidation_cancellation_value').attr('disabled', false);
         }
@@ -79,22 +79,22 @@
           $('#pledge_liquidation_cancellation_emission_date').val(record.data("emission-date"));
           $('#pledge_liquidation_cancellation_pledge_value').val(record.data("pledge-value"));
           if (pledge_id != record.data('id')) {
-            $('#pledge_liquidation_cancellation_pledge_expiration').attr('data-modal-url', pledgeExpirationUrl());
+            $('#pledge_liquidation_cancellation_pledge_parcel').attr('data-modal-url', pledgeExpirationUrl());
             $('#pledge_liquidation_cancellation_expiration_date').val('');
-            $('#pledge_liquidation_cancellation_pledge_expiration_id').val('');
-            $('#pledge_liquidation_cancellation_pledge_expiration_value').val('');
+            $('#pledge_liquidation_cancellation_pledge_parcel_id').val('');
+            $('#pledge_liquidation_cancellation_pledge_parcel_value').val('');
           }
         } else {
-          $('#pledge_liquidation_cancellation_pledge_expiration').attr('data-modal-url', '<%= modal_pledge_expirations_path %>');
+          $('#pledge_liquidation_cancellation_pledge_parcel').attr('data-modal-url', '<%= modal_pledge_parcels_path %>');
           $('#pledge_liquidation_cancellation_emission_date').val('');
           $('#pledge_liquidation_cancellation_pledge_value').val('');
-          $('#pledge_liquidation_cancellation_pledge_expiration').val('');
+          $('#pledge_liquidation_cancellation_pledge_parcel').val('');
           $('#pledge_liquidation_cancellation_expiration_date').val('');
           $('#pledge_liquidation_cancellation_balance').val('');
         }
       });
 
-      $('#pledge_liquidation_cancellation_pledge_expiration_id').change(function(event, data) {
+      $('#pledge_liquidation_cancellation_pledge_parcel_id').change(function(event, data) {
         if (data) {
           var record = data.record;
           $('#pledge_liquidation_cancellation_expiration_date').val(record.data("expiration-date"));
@@ -106,11 +106,11 @@
             $('#pledge_liquidation_cancellation_emission_date').val(record.data("emission-date"));
           }
           pledge_id = record.data('pledge-id');
-          pledge_expiration_value = record.data('pledge-expiration-value');
+          pledge_parcel_value = record.data('pledge-expiration-value');
           forceValueWhenTotalIsKind();
         } else {
           $('#pledge_liquidation_cancellation_expiration_date, #pledge_liquidation_cancellation_balance').val('');
-          pledge_expiration_value = null;
+          pledge_parcel_value = null;
         }
       });
 

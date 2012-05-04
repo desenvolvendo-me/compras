@@ -18,7 +18,7 @@ Pledge.blueprint(:empenho) do
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_expirations { [PledgeExpiration.make!(:vencimento)]}
+  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
 end
 
 Pledge.blueprint(:empenho_com_dois_vencimentos) do
@@ -41,9 +41,9 @@ Pledge.blueprint(:empenho_com_dois_vencimentos) do
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_expirations { [
-    PledgeExpiration.make!(:vencimento_primario),
-    PledgeExpiration.make!(:vencimento_secundario)
+  pledge_parcels { [
+    PledgeParcel.make!(:vencimento_primario),
+    PledgeParcel.make!(:vencimento_secundario)
   ] }
 end
 
@@ -67,7 +67,7 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_expirations { [PledgeExpiration.make!(:vencimento_para_empenho_em_quinze_dias)] }
+  pledge_parcels { [PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)] }
 end
 
 Pledge.blueprint(:empenho_saldo_maior_mil) do
@@ -90,7 +90,7 @@ Pledge.blueprint(:empenho_saldo_maior_mil) do
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_expirations { [PledgeExpiration.make!(:vencimento)]}
+  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
 end
 
 Pledge.blueprint(:empenho_estimativo) do
@@ -113,7 +113,7 @@ Pledge.blueprint(:empenho_estimativo) do
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_expirations { [PledgeExpiration.make!(:vencimento)]}
+  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
 end
 
 Pledge.blueprint(:empenho_ordinario) do
@@ -136,5 +136,5 @@ Pledge.blueprint(:empenho_ordinario) do
   founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
   creditor { Creditor.make!(:nohup) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_expirations { [PledgeExpiration.make!(:vencimento)]}
+  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
 end

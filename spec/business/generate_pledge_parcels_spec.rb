@@ -1,7 +1,7 @@
 require 'unit_helper'
-require 'app/business/generate_number_pledge_expirations'
+require 'app/business/generate_number_pledge_parcels'
 
-describe GenerateNumberPledgeExpirations do
+describe GenerateNumberPledgeParcels do
   let :pledge_expedition_one do
     double
   end

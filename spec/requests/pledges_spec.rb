@@ -144,7 +144,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'when create should fill first pledge_expiration date and value' do
+  scenario 'when create should fill first pledge_parcel date and value' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -164,7 +164,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'when create should not fill first pledge_expiration date and value if already add pledge-expirations' do
+  scenario 'when create should not fill first pledge_parcel date and value if already add pledge-expirations' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -198,7 +198,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'validate expiration_date on pledge_expirations should be greater than emission_date' do
+  scenario 'validate expiration_date on pledge_parcels should be greater than emission_date' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -220,7 +220,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'validate expiration_date on pledge_expirations should be greater than last expiration date' do
+  scenario 'validate expiration_date on pledge_parcels should be greater than last expiration date' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -252,7 +252,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'validate expiration_date on pledge_expirations should be greater than last expiration date' do
+  scenario 'validate expiration_date on pledge_parcels should be greater than last expiration date' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -279,6 +279,7 @@ feature "Pledges" do
     click_button 'Salvar'
 
     within_tab 'Vencimentos' do
+
       within '.pledge-expiration:first' do
         page.should have_content 'a soma de todos os valores deve ser igual ao valor do empenho'
       end

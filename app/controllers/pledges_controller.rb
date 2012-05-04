@@ -12,7 +12,7 @@ class PledgesController < CrudController
 
   def create
     object = build_resource
-    GenerateNumberPledgeExpirations.new(object.pledge_expirations).generate!
+    GenerateNumberPledgeParcels.new(object.pledge_parcels).generate!
 
     super
   end

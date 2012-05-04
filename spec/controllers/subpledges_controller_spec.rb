@@ -34,8 +34,8 @@ describe SubpledgesController do
       assigns(:subpledge).number.should eq 2
     end
 
-    it 'should call the GenerateNumberPledgeExpirations on action create' do
-      GenerateNumberPledgeExpirations.any_instance.should_receive(:generate!)
+    it 'should call the GenerateNumberPledgeParcels on action create' do
+      GenerateNumberPledgeParcels.any_instance.should_receive(:generate!)
 
       post :create
     end

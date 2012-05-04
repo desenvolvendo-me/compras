@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      pledge_expiration:
+      pledge_parcel:
         one: "Vencimento"
         other: "Vencimentos"
 
     attributes:
-      pledge_expiration:
+      pledge_parcel:
         pledge: "Empenho"
         number: "Número"
         expiration_date: "Vencimento"

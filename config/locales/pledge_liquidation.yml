@@ -14,7 +14,7 @@ pt-BR:
         date: "Data"
         emission_date: "Data de emissão"
         pledge_value: "Valor do empenho"
-        pledge_expiration: "Parcela"
+        pledge_parcel: "Parcela"
         expiration_date: "Vencimento"
         balance: "Saldo"
         year: "Exercício"

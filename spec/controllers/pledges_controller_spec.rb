@@ -20,8 +20,8 @@ describe PledgesController do
     post :create
   end
 
-  it 'should call the GenerateNumberPledgeExpirations on action create' do
-    GenerateNumberPledgeExpirations.any_instance.should_receive(:generate!)
+  it 'should call the GenerateNumberPledgeParcels on action create' do
+    GenerateNumberPledgeParcels.any_instance.should_receive(:generate!)
 
     post :create
   end

@@ -43,16 +43,16 @@ class Subpledge < ActiveRecord::Base
     next_number.succ
   end
 
-  def pledge_expirations
+  def pledge_parcels
     return [] if pledge.blank?
 
-    pledge.pledge_expirations
+    pledge.pledge_parcels
   end
 
   protected
 
-  def first_pledge_expiration_available
-    pledge_expirations.each do |expiration|
+  def first_pledge_parcel_available
+    pledge_parcels.each do |expiration|
       if expiration.balance > 0
         return expiration
       end
@@ -60,11 +60,11 @@ class Subpledge < ActiveRecord::Base
   end
 
   def validate_subpledge_expirations_expiration_date
-    return unless pledge && first_pledge_expiration_available
+    return unless pledge && first_pledge_parcel_available
 
     subpledge_expirations.each do |expiration|
-      if expiration.expiration_date < first_pledge_expiration_available.expiration_date
-        expiration.errors.add(:expiration_date, :must_not_be_greater_to_first_pledge_expiration_avaliable, :restriction => I18n.l(first_pledge_expiration_available.expiration_date))
+      if expiration.expiration_date < first_pledge_parcel_available.expiration_date
+        expiration.errors.add(:expiration_date, :must_not_be_greater_to_first_pledge_parcel_avaliable, :restriction => I18n.l(first_pledge_parcel_available.expiration_date))
       end
     end
   end
@@ -77,7 +77,7 @@ class Subpledge < ActiveRecord::Base
         expiration.errors.add(:value, :subpledge_expiration_value_sum_must_not_be_greater_to_subpledge_value)
       end
 
-      errors.add(:pledge_expirations, :invalid)
+      errors.add(:pledge_parcels, :invalid)
     end
   end
 

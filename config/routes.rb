@@ -549,7 +549,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :pledge_expirations, :only => [:show] do
+  resources :pledge_parcels, :only => [:show] do
     collection do
       get :modal
     end

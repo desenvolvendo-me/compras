@@ -3,7 +3,7 @@ PledgeLiquidationCancellation.blueprint(:empenho_2012) do
   entity { Entity.make!(:detran) }
   year { 2012 }
   pledge { Pledge.make!(:empenho) }
-  pledge_expiration { PledgeExpiration.make!(:vencimento) }
+  pledge_parcel { PledgeParcel.make!(:vencimento) }
   value { 1 }
   kind { PledgeLiquidationCancellationKind::PARTIAL }
   value { 9.99 }

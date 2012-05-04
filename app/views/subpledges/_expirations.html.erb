@@ -8,19 +8,19 @@
     </tr>
   </thead>
   <tbody>
-    <% f.object.pledge_expirations.each do |pledge_expiration| %>
+    <% f.object.pledge_parcels.each do |pledge_parcel| %>
       <tr>
         <td>
-          <%= pledge_expiration.number %>
+          <%= pledge_parcel.number %>
         </td>
         <td>
-          <%= pledge_expiration.presenter.expiration_date %>
+          <%= pledge_parcel.presenter.expiration_date %>
         </td>
         <td>
-          <%= pledge_expiration.presenter.value_as_currency %>
+          <%= pledge_parcel.presenter.value_as_currency %>
         </td>
         <td>
-          <%= pledge_expiration.presenter.balance_as_currency %>
+          <%= pledge_parcel.presenter.balance_as_currency %>
         </td>
       </tr>
       <% %>

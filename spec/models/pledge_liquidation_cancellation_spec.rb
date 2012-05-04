@@ -9,7 +9,7 @@ describe PledgeLiquidationCancellation do
   end
 
   it { should belong_to :pledge }
-  it { should belong_to :pledge_expiration }
+  it { should belong_to :pledge_parcel }
   it { should belong_to :entity }
 
   it { should validate_presence_of :entity }
@@ -20,14 +20,14 @@ describe PledgeLiquidationCancellation do
 
   context 'validate value' do
     it 'should not be valid if value greater than liquidations_value' do
-      pledge_expiration = double(:value => 3, :liquidations_value => 3, :emission_date => nil)
-      subject.stub(:pledge_expiration).and_return(pledge_expiration)
+      pledge_parcel = double(:value => 3, :liquidations_value => 3, :emission_date => nil)
+      subject.stub(:pledge_parcel).and_return(pledge_parcel)
       subject.should_not allow_value(4).for(:value).with_message('não pode ser superior a soma das liquidações da parcela')
     end
 
     it 'should be valid if value is not greater than liquidations_value' do
-      pledge_expiration = double(:value => 3, :liquidations_value => 2, :emission_date => nil)
-      subject.stub(:pledge_expiration).and_return(pledge_expiration)
+      pledge_parcel = double(:value => 3, :liquidations_value => 2, :emission_date => nil)
+      subject.stub(:pledge_parcel).and_return(pledge_parcel)
       subject.should allow_value(1).for(:value)
     end
   end

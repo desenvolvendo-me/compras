@@ -1,4 +1,4 @@
-class PledgeExpirationPresenter < Presenter::Proxy
+class PledgeParcelPresenter < Presenter::Proxy
   attr_modal :pledge_id, :value, :number
 
   def emission_date
