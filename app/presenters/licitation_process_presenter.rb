@@ -24,6 +24,6 @@ class LicitationProcessPresenter < Presenter::Proxy
   end
 
   def count_link
-    helpers.link_to('Apurar', '#', :class => "button primary") if object.can_count?
+    helpers.link_to('Apurar', '#', :class => "button primary") if object.envelope_opening?
   end
 end

@@ -84,7 +84,7 @@ class LicitationProcess < ActiveRecord::Base
     envelope_opening_date <= Date.current
   end
 
-  def can_count?
+  def envelope_opening?
     envelope_opening_date == Date.current
   end
 
