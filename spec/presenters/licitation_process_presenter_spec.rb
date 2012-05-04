@@ -27,4 +27,17 @@ describe LicitationProcessPresenter do
 
     subject.envelope_opening_time.should eq '11:00'
   end
+
+  it 'should return a link to count when envelope_opening? is true' do
+    helpers.stub(:link_to).with('Apurar', '#', :class => "button primary").and_return('link')
+    licitation_process.stub(:envelope_opening? => true)
+
+    subject.count_link.should eq 'link'
+  end
+
+  it 'should not return a link to count when envelope_opening? is false' do
+    licitation_process.stub(:envelope_opening? => false)
+
+    subject.count_link.should eq nil
+  end
 end
