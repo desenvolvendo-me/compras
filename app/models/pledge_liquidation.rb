@@ -14,19 +14,18 @@ class PledgeLiquidation < ActiveRecord::Base
 
   validates :pledge, :pledge_expiration, :kind, :value, :presence => true
   validates :date, :entity, :year, :presence => true
-  validates :date, :timeliness => {
-    :on_or_after => lambda { last.date },
-    :on_or_after_message => :must_be_greater_or_equal_to_last_pledge_liquidation_date,
-    :type => :date,
-    :on => :create,
-    :allow_blank => true,
-    :if => :any_pledge_liquidation?
-  }
   validate :date_must_be_greater_than_emission_date
   validate :validate_value
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => '9999'
+    allowing_blank.validates :date, :timeliness => {
+      :on_or_after => lambda { last.date },
+      :on_or_after_message => :must_be_greater_or_equal_to_last_pledge_liquidation_date,
+      :type => :date,
+      :on => :create,
+      :if => :any_pledge_liquidation?
+    }
   end
 
   before_validation :force_value_to_total_kind
