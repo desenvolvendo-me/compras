@@ -55,7 +55,7 @@ describe Subpledge do
 
     it 'should not be valid if value greater than balance' do
       subject.stub(:pledge).and_return(pledge)
-      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo")
+      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho")
     end
 
     it 'should be valid if value is not greater than balance' do
