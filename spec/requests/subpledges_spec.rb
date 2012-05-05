@@ -121,6 +121,38 @@ feature "SubPledges" do
     end
   end
 
+  scenario 'should not validate expiration_date when all pledge_parcel dont have balance' do
+    pledge = Pledge.make!(:empenho_em_quinze_dias)
+    pledge_parcel = PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)
+    PledgeCancellation.make!(:cancelamento_para_empenho_em_quinze_dias)
+
+    click_link 'Contabilidade'
+
+    click_link 'Subempenhos'
+
+    click_link 'Criar Subempenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+    end
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:first' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 18.days)
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Vencimentos' do
+      within '.subpledge-expiration:first' do
+        page.should_not have_content "não pode ser superior ao vencimento da primeira parcela do empenho com saldo disponível (#{I18n.l(pledge_parcel.expiration_date)})"
+      end
+    end
+  end
+
   scenario 'validate expiration_date based on first pledge_parcel available' do
     pledge = Pledge.make!(:empenho_em_quinze_dias)
     pledge_parcel = PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)

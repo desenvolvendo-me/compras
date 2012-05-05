@@ -58,6 +58,8 @@ class Subpledge < ActiveRecord::Base
         return expiration
       end
     end
+
+    return
   end
 
   def validate_subpledge_expirations_expiration_date
