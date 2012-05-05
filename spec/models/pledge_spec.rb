@@ -27,7 +27,7 @@ describe Pledge do
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
   it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
-  it { should have_many(:subpledges).dependent(:restrict) }
+  it { should have_many(:subpledges).dependent(:restrict).order(:number) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :entity }

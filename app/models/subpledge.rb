@@ -12,6 +12,7 @@ class Subpledge < ActiveRecord::Base
   accepts_nested_attributes_for :subpledge_expirations, :allow_destroy => true
 
   delegate :emission_date, :balance, :to => :pledge, :allow_nil => true
+  delegate :last_subpledge, :to => :pledge, :allow_nil => true
   delegate :value, :creditor, :to => :pledge, :allow_nil => true, :prefix => true
 
   validates :entity, :year, :pledge, :creditor, :date, :presence => true
@@ -38,19 +39,23 @@ class Subpledge < ActiveRecord::Base
     id.to_s
   end
 
-  def next_number
-    next_number = self.class.where { |subpledge| subpledge.pledge_id.eq(subpledge.pledge_id) }.count
-
-    next_number.succ
-  end
-
   def pledge_parcels
     return [] if pledge.blank?
 
     pledge.pledge_parcels
   end
 
+  def next_number
+    last_number.succ
+  end
+
   protected
+
+  def last_number
+    return 0 unless last_subpledge
+
+    last_subpledge.number
+  end
 
   def first_pledge_parcel_available
     pledge_parcels.each do |expiration|

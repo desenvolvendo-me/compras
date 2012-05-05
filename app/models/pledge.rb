@@ -29,7 +29,7 @@ class Pledge < ActiveRecord::Base
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
-  has_many :subpledges, :dependent => :restrict
+  has_many :subpledges, :dependent => :restrict, :order => :number
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
   accepts_nested_attributes_for :pledge_parcels, :allow_destroy => true
@@ -78,6 +78,10 @@ class Pledge < ActiveRecord::Base
 
   def pledge_parcels_balances
     pledge_parcels.compact.sum(&:cancellation_moviments)
+  end
+
+  def last_subpledge
+    subpledges.last
   end
 
   protected

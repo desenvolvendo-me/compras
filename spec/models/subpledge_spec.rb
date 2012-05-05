@@ -28,6 +28,20 @@ describe Subpledge do
   it { should_not allow_value('201a').for(:year) }
   it { should_not allow_value('201').for(:year) }
 
+  context 'next_number' do
+    it 'should return 1 as first subpledge' do
+      pledge = double('Pledge', :last_subpledge => nil)
+      subject.stub(:pledge).and_return(pledge)
+      subject.next_number.should eq 1
+    end
+
+    it 'should return 2 as secondary subpledge' do
+      pledge = double('Pledge', :last_subpledge => double('Subpledge', :number => 1))
+      subject.stub(:pledge).and_return(pledge)
+      subject.next_number.should eq 2
+    end
+  end
+
   context 'validate date' do
     before(:each) do
       described_class.stub(:last).and_return(double(:date => Date.new(2012, 3, 1)))
