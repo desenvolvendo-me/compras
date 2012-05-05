@@ -52,7 +52,7 @@ describe PledgeLiquidation do
 
     it 'should not be valid when date is older then emission_date' do
       subject.stub(:emission_date).and_return(Date.new(2012, 3, 29))
-      subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão')
+      subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho')
     end
   end
 end
