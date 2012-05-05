@@ -16,6 +16,7 @@ class Subpledge < ActiveRecord::Base
 
   validates :entity, :year, :pledge, :creditor, :date, :presence => true
   validates :value, :process_number, :description, :presence => true
+  validates :year, :mask => '9999', :allow_blank => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greater_or_equal_to_last_subpledge_date,

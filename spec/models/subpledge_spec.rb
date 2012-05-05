@@ -24,6 +24,10 @@ describe Subpledge do
   it { should validate_presence_of :process_number }
   it { should validate_presence_of :description }
 
+  it { should allow_value('2012').for(:year) }
+  it { should_not allow_value('201a').for(:year) }
+  it { should_not allow_value('201').for(:year) }
+
   context 'validate date' do
     before(:each) do
       described_class.stub(:last).and_return(double(:date => Date.new(2012, 3, 1)))
