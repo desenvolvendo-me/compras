@@ -14,6 +14,7 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
 
   validates :pledge, :pledge_parcel, :date, :kind, :reason, :presence => true
   validates :value, :entity, :year, :presence => true
+  validates :year, :mask => '9999', :allow_blank => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greater_or_equal_to_last_pledge_liquidation_cancellation_date,
@@ -22,9 +23,6 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
     :allow_blank => true,
     :if => :any_pledge_cancellation?
   }
-  with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :year, :mask => '9999'
-  end
   validate :value_validation
   validate :date_must_be_greater_than_emission_date
 
