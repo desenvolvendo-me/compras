@@ -274,7 +274,7 @@ feature "SubPledges" do
 
     click_link 'Subempenhos'
 
-    click_link "#{subpledge.id}"
+    click_link subpledge.to_s
 
     should_not have_button 'Atualizar Anulação de Empenho'
 
@@ -305,8 +305,8 @@ feature "SubPledges" do
 
     click_link 'Subempenhos'
 
-    click_link "#{subpledge.id}"
+    click_link subpledge.to_s
 
-    page.should_not have_link "Apagar #{subpledge.id}"
+    page.should_not have_link 'Apagar'
   end
 end
