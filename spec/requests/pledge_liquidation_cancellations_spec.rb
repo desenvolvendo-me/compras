@@ -249,7 +249,7 @@ feature "PledgeLiquidationCancellations" do
 
       click_link 'Anulações de Liquidações de Empenho'
 
-      click_link "#{pledge_liquidation_cancellation.id}"
+      click_link pledge_liquidation_cancellation.to_s
 
       click_link 'Mais informações'
 
@@ -284,7 +284,7 @@ feature "PledgeLiquidationCancellations" do
 
     click_link 'Anulações de Liquidações de Empenho'
 
-    click_link "#{pledge_liquidation_cancellation.id}"
+    click_link pledge_liquidation_cancellation.to_s
 
     should_not have_button 'Criar Anulação de Liquidação de Empenho'
 
@@ -310,7 +310,7 @@ feature "PledgeLiquidationCancellations" do
 
     click_link 'Anulações de Liquidações de Empenho'
 
-    click_link "#{pledge_liquidation_cancellation.id}"
+    click_link pledge_liquidation_cancellation.to_s
 
     page.should_not have_link "Apagar"
   end
