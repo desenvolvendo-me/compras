@@ -36,6 +36,7 @@
     <%= f.input :balance, :disabled => true, :input_html => { :value => f.object.presenter.balance } %>
   </div>
 </div>
+
 <%= f.input :kind %>
 <%= f.input :value, :disabled => f.object.total? %>
 <%= f.input :date %>
