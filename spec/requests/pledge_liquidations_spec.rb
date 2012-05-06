@@ -221,7 +221,7 @@ feature "PledgeLiquidations" do
 
       click_link 'Liquidações de Empenho'
 
-      click_link "#{pledge_liquidation.id}"
+      click_link pledge_liquidation.to_s
 
       click_link 'Mais informações'
 
@@ -305,7 +305,7 @@ feature "PledgeLiquidations" do
 
     click_link 'Liquidações de Empenhos'
 
-    click_link "#{pledge_liquidation.id}"
+    click_link pledge_liquidation.to_s
 
     should_not have_button 'Criar Liquidação de Empenho'
 
@@ -338,7 +338,7 @@ feature "PledgeLiquidations" do
 
     click_link 'Liquidações de Empenhos'
 
-    click_link "#{pledge_liquidation.id}"
+    click_link pledge_liquidation.to_s
 
     page.should_not have_link 'Apagar'
   end
