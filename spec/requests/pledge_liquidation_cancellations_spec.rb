@@ -78,7 +78,7 @@ feature "PledgeLiquidationCancellations" do
   end
 
   scenario 'clear pledge and pledge_parcel when clear pledge' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
 
@@ -106,7 +106,7 @@ feature "PledgeLiquidationCancellations" do
   end
 
   scenario 'when select total as kind should disabled and fill value' do
-    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+    Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -144,7 +144,7 @@ feature "PledgeLiquidationCancellations" do
   end
 
   scenario 'should fill value when select pledge_parcel before kind and kind is total' do
-    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+    Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -160,7 +160,7 @@ feature "PledgeLiquidationCancellations" do
   end
 
   scenario 'create a new pledge_liquidation_cancellation with total as kind' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
     PledgeLiquidation.make!(:liquidacao_total)
 
     click_link 'Contabilidade'
@@ -222,7 +222,7 @@ feature "PledgeLiquidationCancellations" do
   end
 
   scenario 'when select pledge first and clear it should clear filter by pledge on pledge_parcel modal' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
 
