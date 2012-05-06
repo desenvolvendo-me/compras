@@ -43,7 +43,7 @@ describe Subpledge do
   end
 
   context 'validate date' do
-    before(:each) do
+    before do
       described_class.stub(:last).and_return(double(:date => Date.new(2012, 3, 1)))
       described_class.stub(:any?).and_return(true)
     end
