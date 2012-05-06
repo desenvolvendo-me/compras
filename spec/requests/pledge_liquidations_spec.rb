@@ -95,7 +95,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'clear pledge and pledge_parcel when clear pledge' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
 
@@ -127,7 +127,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'when kind is total should disable and fill value' do
-    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+    Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -143,7 +143,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'should fill value when select pledge_parcel before kind and kind is total' do
-    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+    Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -195,7 +195,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'when select pledge first and clear it should clear filter by pledge on pledge_parcel modal' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
 
@@ -331,7 +331,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'should not have a button to destroy an existent pledge_liquidation' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
     click_link 'Contabilidade'
