@@ -9,15 +9,11 @@ class PledgeParcelPresenter < Presenter::Proxy
     helpers.number_with_precision(object.pledge_value) if object.pledge_value
   end
 
-  def canceled_value
-    helpers.number_with_precision(object.canceled_value) if object.canceled_value
-  end
-
   def balance
     helpers.number_with_precision(object.balance) if object.balance
   end
 
-  def value_as_currency
+  def value
     helpers.number_to_currency(object.value) if object.value
   end
 
@@ -25,15 +21,15 @@ class PledgeParcelPresenter < Presenter::Proxy
     helpers.number_to_currency(object.balance) if object.balance
   end
 
-  def canceled_value_as_currency
+  def canceled_value
     helpers.number_to_currency(object.canceled_value) if object.canceled_value
   end
 
-  def liquidations_value_as_currency
+  def liquidations_value
     helpers.number_to_currency(object.liquidations_value) if object.liquidations_value
   end
 
-  def canceled_liquidations_value_as_currency
+  def canceled_liquidations_value
     helpers.number_to_currency(object.canceled_liquidations_value) if object.canceled_liquidations_value
   end
 
@@ -41,7 +37,7 @@ class PledgeParcelPresenter < Presenter::Proxy
     {
       'number' => number,
       'expiration_date' => expiration_date,
-      'value' => value_as_currency,
+      'value' => value,
       'balance' => balance_as_currency
     }
   end

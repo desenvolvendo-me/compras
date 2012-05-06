@@ -36,13 +36,6 @@ describe PledgeParcelPresenter do
     subject.pledge_value.should eq '9,99'
   end
 
-  it 'should return canceled_value' do
-    helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
-    pledge_parcel.stub(:canceled_value).and_return(9.99)
-
-    subject.canceled_value.should eq '9,99'
-  end
-
   it 'should return balance' do
     helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
     pledge_parcel.stub(:balance).and_return(9.99)
@@ -61,27 +54,27 @@ describe PledgeParcelPresenter do
     helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
     pledge_parcel.stub(:value).and_return(9.99)
 
-    subject.value_as_currency.should eq 'R$ 9,99'
+    subject.value.should eq 'R$ 9,99'
   end
 
   it 'should return formatted canceled_value as currency' do
     helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
     pledge_parcel.stub(:canceled_value).and_return(9.99)
 
-    subject.canceled_value_as_currency.should eq 'R$ 9,99'
+    subject.canceled_value.should eq 'R$ 9,99'
   end
 
   it 'should return formatted liquidations_value as currency' do
     helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
     pledge_parcel.stub(:liquidations_value).and_return(9.99)
 
-    subject.liquidations_value_as_currency.should eq 'R$ 9,99'
+    subject.liquidations_value.should eq 'R$ 9,99'
   end
 
   it 'should return formatted canceled_liquidations_value as currency' do
     helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
     pledge_parcel.stub(:canceled_liquidations_value).and_return(9.99)
 
-    subject.canceled_liquidations_value_as_currency.should eq 'R$ 9,99'
+    subject.canceled_liquidations_value.should eq 'R$ 9,99'
   end
 end
