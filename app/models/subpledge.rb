@@ -102,7 +102,7 @@ class Subpledge < ActiveRecord::Base
   end
 
   def date_must_be_greater_than_emission_date
-    return if emission_date.blank? || date.blank?
+    return unless emission_date && date
 
     if date < emission_date
       errors.add(:date, :must_be_greater_than_pledge_emission_date)
