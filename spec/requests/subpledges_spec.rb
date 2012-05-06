@@ -122,7 +122,7 @@ feature "SubPledges" do
   end
 
   scenario 'should not validate expiration_date when all pledge_parcel dont have balance' do
-    pledge = Pledge.make!(:empenho_em_quinze_dias)
+    Pledge.make!(:empenho_em_quinze_dias)
     pledge_parcel = PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)
     PledgeCancellation.make!(:cancelamento_para_empenho_em_quinze_dias)
 
@@ -154,7 +154,7 @@ feature "SubPledges" do
   end
 
   scenario 'validate expiration_date based on first pledge_parcel available' do
-    pledge = Pledge.make!(:empenho_em_quinze_dias)
+    Pledge.make!(:empenho_em_quinze_dias)
     pledge_parcel = PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)
 
     click_link 'Contabilidade'
@@ -235,7 +235,7 @@ feature "SubPledges" do
   end
 
   scenario 'should fill pledge related fields with fill pledge' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
 
