@@ -286,7 +286,7 @@ feature "PledgeLiquidations" do
 
     fill_modal 'Parcela', :with => '1', :field => 'Número'
     select 'Total', :from => 'Tipo de liquidação'
-    fill_in 'Data *', :with => I18n.l(Date.current - 1.day)
+    fill_in 'Data *', :with => I18n.l(Date.yesterday)
 
     click_button 'Salvar'
 
