@@ -164,15 +164,15 @@ describe LicitationProcess do
   it 'should tell if it can have invitation bidders' do
     subject.stub(:envelope_opening_date).and_return(Date.tomorrow)
 
-    subject.can_have_bidders?.should eq false
+    subject.can_have_bidders?.should be_false
 
     subject.stub(:envelope_opening_date).and_return(Date.current)
 
-    subject.can_have_bidders?.should eq true
+    subject.can_have_bidders?.should be_true
 
     subject.stub(:envelope_opening_date).and_return(Date.yesterday)
 
-    subject.can_have_bidders?.should eq true
+    subject.can_have_bidders?.should be_true
    end
 
   it 'should return the advice number correctly' do
@@ -238,7 +238,7 @@ describe LicitationProcess do
     it "should return false for envelope_opening? method" do
       subject.envelope_opening_date = Date.tomorrow
 
-      subject.envelope_opening?.should eq false
+      subject.envelope_opening?.should be_false
     end
   end
 
@@ -246,7 +246,7 @@ describe LicitationProcess do
     it "should return true for envelope_opening? method" do
       subject.envelope_opening_date = Date.current
 
-      subject.envelope_opening?.should eq true
+      subject.envelope_opening?.should be_true
     end
   end
 end
