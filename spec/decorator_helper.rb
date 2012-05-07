@@ -1,0 +1,8 @@
+require 'unit_helper'
+require 'active_support/basic_object'
+require 'lib/decorator/infection'
+require 'lib/decorator/summary'
+require 'lib/decorator/modal_attributes'
+require 'lib/decorator/data_attributes'
+require 'lib/decorator'
+require 'support/decorator_example_group'

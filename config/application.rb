@@ -22,7 +22,7 @@ module Tributario
       #{config.root}/lib
       #{config.root}/app/business
       #{config.root}/app/enumerations
-      #{config.root}/app/presenters
+      #{config.root}/app/decorators
       #{config.root}/app/reports
       #{config.root}/app/validators
     )

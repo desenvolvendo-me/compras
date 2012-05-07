@@ -1,0 +1,2 @@
+class AccreditedRepresentativeDecorator < Decorator
+end

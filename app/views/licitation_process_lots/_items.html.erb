@@ -28,7 +28,7 @@
 
   <tbody class="<%= f.sanitized_object_name %>_administrative_process_budget_allocation_items_records">
     <% f.object.administrative_process_budget_allocation_items.each do |item| %>
-      <%= render 'administrative_process_budget_allocation_items/list_form', :material => item.material, :id => item.id, :quantity => item.quantity, :unit_price => item.presenter.unit_price, :f => f %>
+      <%= render 'administrative_process_budget_allocation_items/list_form', :material => item.material, :id => item.id, :quantity => item.quantity, :unit_price => item.decorator.unit_price, :f => f %>
     <% end %>
   </tbody>
 </table>

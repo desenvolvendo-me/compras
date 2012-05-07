@@ -13,8 +13,8 @@ module CrudHelper
 
   # Get modal attributes and intersect with +params[:attributes]+ if exists
   def attributes
-    if resource.presenter?
-      attributes = resource.presenter.modal_attributes
+    if resource.decorator?
+      attributes = resource.decorator.modal_attributes
     else
       attributes = resource_class.modal_attributes
     end
