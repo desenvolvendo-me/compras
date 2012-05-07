@@ -89,17 +89,7 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def can_update?
-    return true if licitation_process_publications.empty?
-
-    unless licitation_process_publications.empty?
-      return true if licitation_process_publications.first.id.nil?
-    end
-
-    licitation_process_publications.each do |publication|
-      return true if publication.extension? || publication.edital? || publication.edital_rectification?
-    end
-
-    false
+    new_record? || licitation_process_publications.empty? || licitation_process_publications.allow_update_licitation_process?(id)
   end
 
   protected
