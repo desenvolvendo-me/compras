@@ -33,6 +33,6 @@ pt-BR:
         management_contract: "Contrato"
         management_contract_signature_date: "Data do contrato"
         description: "Objeto"
-        creditor: "Credor"
+        provider: "Fornecedor"
         founded_debt_contract: "Contrato de dívida fundada"
         items_total_value: "Valor total dos itens"

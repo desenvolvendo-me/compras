@@ -11,7 +11,7 @@ feature "ReserveFunds" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     ReserveAllocationType.make!(:licitation)
     LicitationModality.make!(:publica)
-    Creditor.make!(:nohup)
+    Provider.make!(:wenderson_sa)
 
     click_link 'Contabilidade'
 
@@ -32,7 +32,7 @@ feature "ReserveFunds" do
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
     fill_in 'Número da licitação', :with => '001/2012'
     fill_in 'Número do processo', :with => '002/2013'
-    fill_modal 'Favorecido', :with => 'Nohup LTDA.'
+    fill_modal 'Favorecido', :with => '456789', :field => 'CRC'
     fill_in 'Histórico', :with => 'Historico da reserva'
 
     click_button 'Salvar'
@@ -50,7 +50,7 @@ feature "ReserveFunds" do
     page.should have_field 'Modalidade', :with => 'Pública'
     page.should have_field 'Número da licitação', :with => '001/2012'
     page.should have_field 'Número do processo', :with => '002/2013'
-    page.should have_field 'Favorecido', :with => 'Nohup LTDA.'
+    page.should have_field 'Favorecido', :with => 'Wenderson Malheiros'
     page.should have_field 'Histórico', :with => 'Historico da reserva'
   end
 
@@ -59,7 +59,7 @@ feature "ReserveFunds" do
     Entity.make!(:secretaria_de_educacao)
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     ReserveAllocationType.make!(:comum)
-    Creditor.make!(:nobe)
+    Provider.make!(:sobrinho_sa)
 
     click_link 'Contabilidade'
 
@@ -73,7 +73,7 @@ feature "ReserveFunds" do
     fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
     fill_in 'Valor *', :with => '199,00'
     fill_in 'Número do processo', :with => '005/2015'
-    fill_modal 'Favorecido', :with => 'Nobe'
+    fill_modal 'Favorecido', :with => '123456', :field => 'CRC'
     fill_in 'Histórico', :with => 'Novo histórico'
 
     click_button 'Salvar'
@@ -89,7 +89,7 @@ feature "ReserveFunds" do
     page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011 - Alocação extra"
     page.should have_field 'Valor *', :with => '199,00'
     page.should have_field 'Número do processo', :with => '005/2015'
-    page.should have_field 'Favorecido', :with => 'Nobe'
+    page.should have_field 'Favorecido', :with => 'Gabriel Sobrinho'
     page.should have_field 'Histórico', :with => 'Novo histórico'
   end
 

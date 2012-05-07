@@ -10,6 +10,9 @@ require 'app/models/company'
 require 'app/models/individual'
 require 'app/models/licitation_process_bidder'
 require 'app/models/accredited_representative'
+require 'app/models/pledge'
+require 'app/models/reserve_fund'
+require 'app/models/subpledge'
 
 describe Provider do
   it { should belong_to :person }
@@ -27,6 +30,9 @@ describe Provider do
   it { should have_many(:licitation_process_bidders).dependent(:restrict) }
   it { should have_many(:accredited_representatives).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_bidders) }
+  it { should have_many(:pledges).dependent(:restrict) }
+  it { should have_many(:reserve_funds).dependent(:restrict) }
+  it { should have_many(:subpledges).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration_date }

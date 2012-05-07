@@ -1,11 +1,11 @@
 class Subpledge < ActiveRecord::Base
-  attr_accessible :entity_id, :pledge_id, :creditor_id, :year, :number, :date
+  attr_accessible :entity_id, :pledge_id, :provider_id, :year, :number, :date
   attr_accessible :value, :process_number, :description
   attr_accessible :subpledge_expirations_attributes
 
   belongs_to :entity
   belongs_to :pledge
-  belongs_to :creditor
+  belongs_to :provider
 
   has_many :subpledge_expirations, :dependent => :destroy
 
@@ -13,9 +13,9 @@ class Subpledge < ActiveRecord::Base
 
   delegate :emission_date, :balance, :to => :pledge, :allow_nil => true
   delegate :last_subpledge, :to => :pledge, :allow_nil => true
-  delegate :value, :creditor, :to => :pledge, :allow_nil => true, :prefix => true
+  delegate :value, :provider, :to => :pledge, :allow_nil => true, :prefix => true
 
-  validates :entity, :year, :pledge, :creditor, :date, :presence => true
+  validates :entity, :year, :pledge, :provider, :date, :presence => true
   validates :value, :process_number, :description, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :date, :timeliness => {

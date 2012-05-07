@@ -15,7 +15,7 @@ pt-BR:
         value: "Valor"
         reserve_allocation_type: "Tipo"
         licitation_modality: "Modalidade"
-        creditor: "Favorecido"
+        provider: "Favorecido"
         date: "Data"
         historic: "Histórico"
         licitation: "Número da licitação"

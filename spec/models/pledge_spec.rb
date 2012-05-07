@@ -18,7 +18,7 @@ describe Pledge do
   it { should belong_to :management_contract }
   it { should belong_to :licitation_modality }
   it { should belong_to :reserve_fund }
-  it { should belong_to :creditor }
+  it { should belong_to :provider }
   it { should belong_to :founded_debt_contract }
   it { should belong_to :licitation_process }
 
@@ -36,7 +36,7 @@ describe Pledge do
   it { should validate_presence_of :emission_date }
   it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :value }
-  it { should validate_presence_of :creditor }
+  it { should validate_presence_of :provider }
   it { should validate_presence_of :budget_allocation }
 
   context 'balance' do

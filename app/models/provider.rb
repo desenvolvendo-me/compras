@@ -21,6 +21,9 @@ class Provider < ActiveRecord::Base
   has_many :licitation_process_bidders, :dependent => :restrict
   has_many :accredited_representatives, :dependent => :restrict
   has_many :licitation_processes, :through => :licitation_process_bidders, :dependent => :restrict
+  has_many :pledges, :dependent => :restrict
+  has_many :reserve_funds, :dependent => :restrict
+  has_many :subpledges, :dependent => :restrict
 
   accepts_nested_attributes_for :provider_partners, :allow_destroy => true
   accepts_nested_attributes_for :provider_licitation_documents, :allow_destroy => true

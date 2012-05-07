@@ -11,14 +11,14 @@ describe Subpledge do
 
   it { should belong_to :entity }
   it { should belong_to :pledge }
-  it { should belong_to :creditor }
+  it { should belong_to :provider }
 
   it { should have_many(:subpledge_expirations).dependent(:destroy) }
 
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
   it { should validate_presence_of :pledge }
-  it { should validate_presence_of :creditor }
+  it { should validate_presence_of :provider }
   it { should validate_presence_of :date }
   it { should validate_presence_of :value }
   it { should validate_presence_of :process_number }

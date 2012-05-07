@@ -9,7 +9,7 @@ feature "SubPledges" do
   scenario 'create a new subpledge' do
     Entity.make!(:detran)
     pledge = Pledge.make!(:empenho)
-    Creditor.make!(:nohup)
+    Provider.make!(:wenderson_sa)
 
     click_link 'Contabilidade'
 
@@ -22,7 +22,7 @@ feature "SubPledges" do
       fill_in 'Ano', :with => '2012'
       fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
       fill_in 'Número do processo', :with => '1239/2012'
-      fill_modal 'Credor *', :with => 'Nohup LTDA.'
+      fill_modal 'Fornecedor *', :with => '456789', :field => 'CRC'
       fill_in 'Data *', :with => I18n.l(Date.current)
       fill_in 'Valor *', :with => '1,00'
       fill_in 'Objeto', :with => 'Aquisição de materiais'
@@ -38,8 +38,8 @@ feature "SubPledges" do
 
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Detran'
-      page.should have_disabled_field 'Credor do empenho'
-      page.should have_field 'Credor do empenho', :with => 'Nohup LTDA.'
+      page.should have_disabled_field 'Fornecedor do empenho'
+      page.should have_field 'Fornecedor do empenho', :with => 'Wenderson Malheiros'
       page.should have_disabled_field 'Data de emissão'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
       page.should have_disabled_field 'Valor do empenho'
@@ -50,7 +50,7 @@ feature "SubPledges" do
       page.should have_field 'Empenho', :with => "#{pledge.id}"
       page.should have_field 'Subempenho', :with => '1'
       page.should have_field 'Número do processo', :with => '1239/2012'
-      page.should have_field 'Credor *', :with => 'Nohup LTDA.'
+      page.should have_field 'Fornecedor *', :with => 'Wenderson Malheiros'
       page.should have_field 'Data *', :with => I18n.l(Date.current)
       page.should have_field 'Valor *', :with => '1,00'
       page.should have_field 'Objeto', :with => 'Aquisição de materiais'
@@ -244,22 +244,22 @@ feature "SubPledges" do
     click_link 'Criar Subempenho'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Credor do empenho'
+      page.should have_disabled_field 'Fornecedor do empenho'
       page.should have_disabled_field 'Data de emissão'
       page.should have_disabled_field 'Valor do empenho'
       page.should have_disabled_field 'Saldo a subempenhar'
 
       fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-      page.should have_field 'Credor do empenho', :with => 'Nohup LTDA.'
+      page.should have_field 'Fornecedor do empenho', :with => 'Wenderson Malheiros'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
       page.should have_field 'Valor do empenho', :with => '9,99'
       page.should have_field 'Saldo a subempenhar', :with => '9,99'
-      page.should have_field 'Credor *', :with => 'Nohup LTDA.'
+      page.should have_field 'Fornecedor *', :with => 'Wenderson Malheiros'
       page.should have_field 'Objeto *', :with => 'Descricao'
       page.should have_field 'Valor *', :with => '9,99'
 
       clear_modal 'Empenho'
-      page.should have_field 'Credor do empenho', :with => ''
+      page.should have_field 'Fornecedor do empenho', :with => ''
       page.should have_field 'Data de emissão', :with => ''
       page.should have_field 'Valor do empenho', :with => ''
       page.should have_field 'Saldo a subempenhar', :with => ''
@@ -287,8 +287,8 @@ feature "SubPledges" do
       page.should have_field 'Empenho', :with => "#{pledge.id}"
       page.should have_disabled_field 'Número do processo'
       page.should have_field 'Número do processo', :with => '1239/2012'
-      page.should have_disabled_field 'Credor'
-      page.should have_field 'Credor', :with => 'Nohup LTDA.'
+      page.should have_disabled_field 'Fornecedor'
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_disabled_field 'Data'
       page.should have_field 'Data', :with => I18n.l(Date.current)
       page.should have_disabled_field 'Valor'

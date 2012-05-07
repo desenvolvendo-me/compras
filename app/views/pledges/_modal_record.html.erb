@@ -1,4 +1,4 @@
-<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-emission-date="<%= record.emission_date %>" data-pledge-value="<%= record.value %>" data-creditor-id="<%= record.creditor_id %>" data-creditor="<%= record.creditor %>" data-balance="<%= record.presenter.balance %>" data-description="<%= record.description %>" data-pledge-expirations="<%= record.presenter.pledge_parcels_as_json %>">
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-emission-date="<%= record.emission_date %>" data-pledge-value="<%= record.value %>" data-provider-id="<%= record.provider_id %>" data-provider="<%= record.provider %>" data-balance="<%= record.presenter.balance %>" data-description="<%= record.description %>" data-pledge-expirations="<%= record.presenter.pledge_parcels_as_json %>">
   <% attributes.each do |attribute| %>
     <td><%= formatted_attribute record, attribute %></td>
   <% end %>

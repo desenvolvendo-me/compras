@@ -11,7 +11,7 @@ ReserveFund.blueprint(:detran_2012) do
   licitation_year { "2012" }
   process_number { "002" }
   process_year { "2013" }
-  creditor { Creditor.make!(:nohup) }
+  provider { Provider.make!(:wenderson_sa) }
   historic { "historic" }
 end
 
@@ -25,7 +25,7 @@ ReserveFund.blueprint(:educacao_2011) do
   value { 100.5 }
   process_number { "002" }
   process_year { "2013" }
-  creditor { Creditor.make!(:nohup) }
+  provider { Provider.make!(:wenderson_sa) }
   historic { "historic" }
 end
 
@@ -39,6 +39,6 @@ ReserveFund.blueprint(:reparo_2011) do
   value { 100.5 }
   process_number { "002" }
   process_year { "2013" }
-  creditor { Creditor.make!(:nohup) }
+  provider { Provider.make!(:wenderson_sa) }
   historic { "historic" }
 end

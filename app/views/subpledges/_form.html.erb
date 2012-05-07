@@ -58,17 +58,17 @@
 
         if (data) {
           var record = data.record;
-          $('#subpledge_pledge_creditor').val(record.data("creditor"));
+          $('#subpledge_pledge_provider').val(record.data("provider"));
           $('#subpledge_emission_date').val(record.data("emission-date"));
           $('#subpledge_pledge_value').val(record.data("pledge-value"));
           $('#subpledge_balance').val(record.data("balance"));
           $('#subpledge_value').val(record.data("balance"));
-          $('#subpledge_creditor_id').val(record.data("creditor-id"));
-          $('#subpledge_creditor').val(record.data("creditor"));
+          $('#subpledge_provider_id').val(record.data("provider-id"));
+          $('#subpledge_provider').val(record.data("provider"));
           $('#subpledge_description').val(record.data("description"));
           createPledgeParcelsFromPledge(record.data("pledge-expirations"));
         } else {
-          $('#subpledge_pledge_creditor').val('');
+          $('#subpledge_pledge_provider').val('');
           $('#subpledge_emission_date').val('');
           $('#subpledge_pledge_value').val('');
           $('#subpledge_balance').val('');

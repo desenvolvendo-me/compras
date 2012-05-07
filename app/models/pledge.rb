@@ -3,7 +3,7 @@ class Pledge < ActiveRecord::Base
   attr_accessible :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id
   attr_accessible :pledge_historic_id, :management_contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
-  attr_accessible :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
+  attr_accessible :founded_debt_contract_id, :provider_id, :pledge_items_attributes
   attr_accessible :pledge_parcels_attributes, :licitation_process_id
 
   attr_accessor :licitation, :process
@@ -11,7 +11,7 @@ class Pledge < ActiveRecord::Base
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type, :create_helpers => true
 
-  belongs_to :creditor
+  belongs_to :provider
   belongs_to :founded_debt_contract
   belongs_to :entity
   belongs_to :reserve_fund
@@ -42,7 +42,7 @@ class Pledge < ActiveRecord::Base
   delegate :licitation_number, :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validates :licitation_process, :entity, :year, :management_unit, :presence => true
-  validates :emission_date, :pledge_type, :value, :creditor, :presence => true
+  validates :emission_date, :pledge_type, :value, :provider, :presence => true
   validates :budget_allocation, :presence => true
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value

@@ -4,7 +4,7 @@ Subpledge.blueprint(:empenho_2012) do
   year { 2012 }
   pledge { Pledge.make!(:empenho) }
   number { 1 }
-  creditor { Creditor.make!(:nohup) }
+  provider { Provider.make!(:wenderson_sa) }
   date { Date.current }
   value { 1 }
   process_number { "1239/2012" }

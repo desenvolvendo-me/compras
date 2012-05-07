@@ -17,7 +17,7 @@ feature "Pledges" do
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
     management_contract = ManagementContract.make!(:primeiro_contrato)
-    Creditor.make!(:nohup)
+    Provider.make!(:wenderson_sa)
     founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
     Material.make!(:arame_farpado)
 
@@ -39,7 +39,7 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
-      fill_modal 'Credor', :with => 'Nohup LTDA.'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
     end
 
     within_tab 'Complementar' do
@@ -107,7 +107,7 @@ feature "Pledges" do
       page.should have_field 'Categoria', :with => 'Geral'
       page.should have_select 'Tipo de bem', :selected => 'Patrimonial'
       page.should have_field 'Contrato de dívida fundada', :with => "#{founded_debt_contract.id}/2012"
-      page.should have_field 'Credor', :with => 'Nohup LTDA.'
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Complementar' do
@@ -343,7 +343,7 @@ feature "Pledges" do
       page.should have_disabled_field 'Categoria'
       page.should have_disabled_field 'Tipo de bem'
       page.should have_disabled_field 'Contrato de dívida fundada'
-      page.should have_disabled_field 'Credor'
+      page.should have_disabled_field 'Fornecedor'
     end
 
     within_tab 'Complementar' do
