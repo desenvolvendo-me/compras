@@ -52,6 +52,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   licitation_process_bidders { [LicitationProcessBidder.make!(:licitante)] }
+  licitation_process_lots { [LicitationProcessLot.make!(:lote)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
 end
 

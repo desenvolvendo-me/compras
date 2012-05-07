@@ -15,6 +15,7 @@ require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
 require 'app/models/provider'
 require 'app/models/licitation_notice'
+require 'app/models/licitation_process_lot'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -37,6 +38,7 @@ describe LicitationProcess do
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
   it { should have_many(:providers).dependent(:restrict).through(:licitation_process_bidders) }
+  it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }

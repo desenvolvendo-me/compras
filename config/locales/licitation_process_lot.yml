@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_lot:
+        one: "Lote de itens"
+        other: "Lotes de itens"
+
+    attributes:
+      licitation_process_lot:
+        observations: "Observações"

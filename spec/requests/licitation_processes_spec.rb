@@ -680,4 +680,14 @@ feature "LicitationProcesses" do
       page.should_not have_button 'Remover Publicação'
     end
   end
+
+  scenario "should not have link to lots when creating a new licitation process" do
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    click_link 'Criar Processo Licitatório'
+
+    page.should_not have_link 'Lotes de itens'
+  end
 end

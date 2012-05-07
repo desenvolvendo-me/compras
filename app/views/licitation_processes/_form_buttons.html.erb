@@ -4,6 +4,7 @@
 
   <%= f.object.presenter.build_accreditation_link %>
   <%= f.object.presenter.bidders_link if f.object.persisted? && f.object.can_have_bidders? %>
+  <%= f.object.presenter.lots_link if f.object.persisted? %>
   <%= f.object.presenter.count_link %>
   <%= f.button :cancel %>
 </div>

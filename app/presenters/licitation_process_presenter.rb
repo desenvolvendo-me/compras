@@ -23,6 +23,10 @@ class LicitationProcessPresenter < Presenter::Proxy
     helpers.link_to('Licitantes', routes.licitation_process_licitation_process_bidders_path(object), :class => "button primary")
   end
 
+  def lots_link
+    helpers.link_to('Lotes de itens', routes.licitation_process_licitation_process_lots_path(object), :class => "button primary")
+  end
+
   def count_link
     helpers.link_to('Apurar', '#', :class => "button primary") if object.envelope_opening?
   end
