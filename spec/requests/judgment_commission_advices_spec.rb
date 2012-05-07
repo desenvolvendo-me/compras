@@ -51,7 +51,7 @@ feature "JudgmentCommissionAdvices" do
 
       click_button 'Adicionar Membro'
 
-      within '.member:last' do
+      within '.member:first' do
         fill_modal 'Membro', :with => 'Gabriel Sobrinho'
         select 'Presidente', :from => 'Função'
         select 'Servidor efetivo', :from => 'Natureza do cargo'
@@ -291,7 +291,7 @@ feature "JudgmentCommissionAdvices" do
     within_tab 'Membros' do
       click_button 'Adicionar Membro'
 
-      within '.member:last' do
+      within '.member:first' do
         fill_modal 'Membro', :with => 'Gabriel Sobrinho'
         select 'Presidente', :from => 'Função'
         select 'Servidor efetivo', :from => 'Natureza do cargo'
@@ -300,7 +300,7 @@ feature "JudgmentCommissionAdvices" do
 
       click_button 'Adicionar Membro'
 
-      within '.member:last' do
+      within '.member:first' do
         fill_modal 'Membro', :with => 'Gabriel Sobrinho'
         select 'Apoio', :from => 'Função'
         select 'Outros', :from => 'Natureza do cargo'
