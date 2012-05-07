@@ -81,10 +81,12 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def can_have_bidders?
+    return unless envelope_opening_date
     envelope_opening_date <= Date.current
   end
 
   def envelope_opening?
+    return unless envelope_opening_date
     envelope_opening_date == Date.current
   end
 
