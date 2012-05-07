@@ -1,10 +1,11 @@
 class BidderStatusChanger
-  attr_accessor :licitation_process
+  attr_accessor :licitation_process, :licitation_process_bidder_status
 
   delegate :licitation_process_bidders, :to => :licitation_process
 
-  def initialize(licitation_process)
+  def initialize(licitation_process, licitation_process_bidder_status = LicitationProcessBidderStatus)
     self.licitation_process = licitation_process
+    self.licitation_process_bidder_status = licitation_process_bidder_status
   end
 
   def change
@@ -17,11 +18,13 @@ class BidderStatusChanger
     end
   end
 
+  private
+
   def enabled_status
-    LicitationProcessBidderStatus::ENABLED
+    licitation_process_bidder_status.value_for(:ENABLED)
   end
 
   def disabled_status
-    LicitationProcessBidderStatus::DISABLED
+    licitation_process_bidder_status.value_for(:DISABLED)
   end
 end

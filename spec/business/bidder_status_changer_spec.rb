@@ -1,10 +1,12 @@
 require 'unit_helper'
+require 'enumerate_it'
 require 'active_support/core_ext/module/delegation'
 require 'app/business/bidder_status_changer'
+require 'app/enumerations/licitation_process_bidder_status'
 
 describe BidderStatusChanger do
   subject do
-    described_class.new(licitation_process)
+    described_class.new(licitation_process, LicitationProcessBidderStatus)
   end
 
   before do
