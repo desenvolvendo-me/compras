@@ -1,0 +1,40 @@
+<div class="yui3-g modal-finder">
+  <div class="yui3-u-1-2">
+    <%= f.association :administrative_process_budget_allocation_items, :as => :modal, :hidden_field => false, :input_html => { :value => nil } %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[administrative_process_budget_allocation_item_ids][]" />
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :id %>
+      </th>
+      <th>
+        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :material %>
+      </th>
+      <th>
+        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :quantity %>
+      </th>
+      <th>
+        <%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :unit_price %>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_administrative_process_budget_allocation_items_records">
+    <% f.object.administrative_process_budget_allocation_items.each do |item| %>
+      <%= render 'administrative_process_budget_allocation_items/list_form', :material => item.material, :id => item.id, :quantity => item.quantity, :unit_price => item.presenter.unit_price, :f => f %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_administrative_process_budget_allocation_items_template" do %>
+  <%= f.association :administrative_process_budget_allocation_items, :collection => f.object.administrative_process_budget_allocation_items.build do |p| %>
+    <%= render 'administrative_process_budget_allocation_items/list_form', :material => '{{material}}', :quantity => '{{quantity}}', :unit_price => '{{unit_price}}', :id => '{{value}}', :f => f %>
+  <% end %>
+<% end %>

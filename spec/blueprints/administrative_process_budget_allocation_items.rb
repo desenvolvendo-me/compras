@@ -4,3 +4,9 @@ AdministrativeProcessBudgetAllocationItem.blueprint(:item) do
   quantity { 2 }
   unit_price { 10.0 }
 end
+
+AdministrativeProcessBudgetAllocationItem.blueprint(:item_arame) do
+  material { Material.make!(:arame_farpado) }
+  quantity { 2 }
+  unit_price { 30.0 }
+end

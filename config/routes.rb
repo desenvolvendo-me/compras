@@ -70,6 +70,12 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :administrative_process_budget_allocation_items, :only => [] do
+    collection do
+      get :modal
+    end
+  end
+
   resources :agencies do
     collection do
       get :modal

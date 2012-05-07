@@ -43,6 +43,7 @@ feature "LicitationProcessLots" do
     click_link 'Criar Lote de itens'
 
     fill_in 'Observações', :with => 'observacoes teste'
+    fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
 
     click_button 'Salvar'
 
@@ -53,6 +54,8 @@ feature "LicitationProcessLots" do
     end
 
     page.should have_field 'Observações', :with => 'observacoes teste'
+    page.should have_content '01.01.00001 - Antivirus'
+    page.should have_content '10,00'
   end
 
   scenario 'updating an existing lot' do
@@ -74,6 +77,13 @@ feature "LicitationProcessLots" do
 
     fill_in 'Observações', :with => 'novas observacoes'
 
+    page.should have_content '02.02.00001 - Arame farpado'
+    page.should have_content '30,00'
+
+    click_button 'Remover'
+
+    fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
+
     click_button 'Salvar'
 
     page.should have_content 'Lote de itens editado com sucesso.'
@@ -83,6 +93,12 @@ feature "LicitationProcessLots" do
     end
 
     page.should have_field 'Observações', :with => 'novas observacoes'
+
+    page.should have_content '01.01.00001 - Antivirus'
+    page.should have_content '10,00'
+
+    page.should_not have_content '02.02.00001 - Arame farpado'
+    page.should_not have_content '30,00'
   end
 
   scenario 'deleting a lot' do

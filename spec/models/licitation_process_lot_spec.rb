@@ -4,6 +4,7 @@ require 'app/models/licitation_process_lot'
 
 describe LicitationProcessLot do
   it { should belong_to :licitation_process }
+  it { should have_many(:administrative_process_budget_allocation_items).dependent(:nullify).order(:id) }
 
   it "should return the observations as to_s method" do
     subject.observations = "some observation"

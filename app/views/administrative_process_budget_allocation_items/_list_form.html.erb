@@ -1,0 +1,18 @@
+<tr class="record document-type">
+  <td class='id'>
+    <%= id %>
+  </td>
+  <td>
+    <%= material %>
+  </td>
+  <td>
+    <%= quantity %>
+  </td>
+  <td>
+    <%= unit_price %>
+  </td>
+  <td>
+    <input id="<%= f.sanitized_object_name %>_administrative_process_budget_allocation_items_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[administrative_process_budget_allocation_item_ids][]" value="<%= id %>" />
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>

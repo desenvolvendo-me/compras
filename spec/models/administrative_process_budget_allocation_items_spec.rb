@@ -9,6 +9,7 @@ describe AdministrativeProcessBudgetAllocationItem do
 
   it { should belong_to :administrative_process_budget_allocation }
   it { should belong_to :material }
+  it { should belong_to :licitation_process_lot }
 
   it 'should calculate the estimated total price' do
     subject.estimated_total_price.should eq 0

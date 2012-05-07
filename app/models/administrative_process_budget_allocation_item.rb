@@ -5,10 +5,14 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
 
   belongs_to :administrative_process_budget_allocation
   belongs_to :material
+  belongs_to :licitation_process_lot
 
   delegate :reference_unit, :to => :material, :allow_nil => true
 
   validates :material, :quantity, :unit_price, :presence => true
+
+  orderize :id
+  filterize
 
   def estimated_total_price
     if quantity && unit_price
