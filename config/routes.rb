@@ -583,6 +583,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :precatory_types do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resource :prefecture, :except => :destroy
 
   resources :procedures, :only => %w(index show) do

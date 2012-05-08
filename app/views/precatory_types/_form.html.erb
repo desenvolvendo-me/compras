@@ -1,0 +1,27 @@
+<%= f.input :description %>
+<%= f.input :status %>
+<%= f.input :deactivation_date %>
+
+<script>
+  $('#precatory_type_status').change(function() {
+    enableOrDisableDeactivationDate();
+  });
+
+  function enableOrDisableDeactivationDate() {
+    if ($('#precatory_type_status').val() == '<%= PrecatoryTypeStatus::INACTIVE %>'){
+      $('#precatory_type_deactivation_date').removeAttr('disabled');
+      setDeactivationDateRequired();
+    }else {
+      $('#precatory_type_deactivation_date').attr('disabled', 'disabled');
+      $('label[for="precatory_type_deactivation_date"] abbr').remove();
+    }
+  }
+
+  function setDeactivationDateRequired() {
+    var required_tag = '<abbr title="required">*</abbr>';
+
+    $('label[for="precatory_type_deactivation_date"]').append(required_tag);
+  }
+
+  enableOrDisableDeactivationDate();
+</script>

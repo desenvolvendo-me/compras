@@ -1,0 +1,2 @@
+class PrecatoryTypesController < CrudController
+end
