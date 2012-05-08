@@ -30,6 +30,7 @@ class Pledge < ActiveRecord::Base
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
   has_many :subpledges, :dependent => :restrict, :order => :number
+  has_many :subpledge_cancellations, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
   accepts_nested_attributes_for :pledge_parcels, :allow_destroy => true
@@ -64,6 +65,17 @@ class Pledge < ActiveRecord::Base
     where { pledge_type.eq(PledgeType::GLOBAL) | pledge_type.eq(PledgeType::ESTIMATED) }
   end
 
+  def self.has_subpledges(has = true)
+    relation = scoped
+    if has
+      relation = relation.joins(:subpledges)
+    else
+      relation = relation.joins { subpledges.outer }.where { subpledges.id.eq(nil) }
+    end
+
+    relation
+  end
+
   def to_s
     id.to_s
   end
@@ -73,15 +85,23 @@ class Pledge < ActiveRecord::Base
   end
 
   def balance
-    value - pledge_parcels_balances
+    value - pledge_parcels_balances - pledge_cancellations_sum
   end
 
   def pledge_parcels_balances
     pledge_parcels.compact.sum(&:cancellation_moviments)
   end
 
+  def pledge_cancellations_sum
+    pledge_cancellations.compact.sum(&:value)
+  end
+
   def last_subpledge
     subpledges.last
+  end
+
+  def has_subpledges?
+    !subpledges.count.zero?
   end
 
   protected

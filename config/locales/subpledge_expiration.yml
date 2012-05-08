@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       subpledge_expiration:
-        pledge: "Empenho"
+        subpledge: "Subempenho"
         number: "Número"
         expiration_date: "Vencimento"
         value: "Valor"

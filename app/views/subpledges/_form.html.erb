@@ -46,7 +46,7 @@
           expiration_date: this.expiration_date,
           value: this.value,
           number: this.number,
-          balance: this.balance
+          pledge_balance: this.pledge_balance
         });
       });
 
@@ -61,7 +61,7 @@
           $('#subpledge_pledge_provider').val(record.data("provider"));
           $('#subpledge_emission_date').val(record.data("emission-date"));
           $('#subpledge_pledge_value').val(record.data("pledge-value"));
-          $('#subpledge_balance').val(record.data("balance"));
+          $('#subpledge_pledge_balance').val(record.data("balance"));
           $('#subpledge_value').val(record.data("balance"));
           $('#subpledge_provider_id').val(record.data("provider-id"));
           $('#subpledge_provider').val(record.data("provider"));
@@ -71,7 +71,7 @@
           $('#subpledge_pledge_provider').val('');
           $('#subpledge_emission_date').val('');
           $('#subpledge_pledge_value').val('');
-          $('#subpledge_balance').val('');
+          $('#subpledge_pledge_balance').val('');
         }
       });
 

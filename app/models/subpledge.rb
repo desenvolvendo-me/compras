@@ -8,12 +8,13 @@ class Subpledge < ActiveRecord::Base
   belongs_to :provider
 
   has_many :subpledge_expirations, :dependent => :destroy
+  has_many :subpledge_cancellations, :dependent => :restrict
 
   accepts_nested_attributes_for :subpledge_expirations, :allow_destroy => true
 
-  delegate :emission_date, :balance, :to => :pledge, :allow_nil => true
+  delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :last_subpledge, :to => :pledge, :allow_nil => true
-  delegate :value, :provider, :to => :pledge, :allow_nil => true, :prefix => true
+  delegate :value, :provider, :balance, :to => :pledge, :allow_nil => true, :prefix => true
 
   validates :entity, :year, :pledge, :provider, :date, :presence => true
   validates :value, :process_number, :description, :presence => true
@@ -47,6 +48,14 @@ class Subpledge < ActiveRecord::Base
 
   def next_number
     last_number.succ
+  end
+
+  def balance
+    value - subpledge_cancellations_sum
+  end
+
+  def subpledge_cancellations_sum
+    subpledge_cancellations.compact.sum(&:value)
   end
 
   protected
@@ -112,7 +121,7 @@ class Subpledge < ActiveRecord::Base
   def value_validation
     return unless pledge && value
 
-    if value > balance
+    if value > pledge_balance
       errors.add(:value, :must_not_be_greater_than_pledge_balance)
     end
   end

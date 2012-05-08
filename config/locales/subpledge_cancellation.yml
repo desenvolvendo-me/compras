@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      subpledge_cancellation:
+        one: "Anulação de Subempenho"
+        other: "Anulações de Subempenho"
+
+    attributes:
+      subpledge_cancellation:
+        entity: "Entidade"
+        year: "Exercício"
+        pledge: "Empenho"
+        subpledge: "Subempenho"
+        subpledge_balance: "Saldo do subempenho"
+        subpledge_expiration_balance: "Saldo da parcela"
+        provider: "Fornecedor"
+        emission_date: "Data de emissão"
+        pledge_value: "Valor do empenho"
+        subpledge_expiration: "Parcela"
+        value: "Valor"
+        date: "Data"
+        reason: "Motivo"

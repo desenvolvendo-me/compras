@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/subpledge'
 require 'app/models/subpledge_expiration'
+require 'app/models/subpledge_cancellation'
 
 describe Subpledge do
   it 'should return id as to_s' do
@@ -14,6 +15,7 @@ describe Subpledge do
   it { should belong_to :provider }
 
   it { should have_many(:subpledge_expirations).dependent(:destroy) }
+  it { should have_many(:subpledge_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
@@ -27,6 +29,21 @@ describe Subpledge do
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
   it { should_not allow_value('201').for(:year) }
+
+  context 'balance' do
+    let :subpledge_cancellations do
+      [
+        double('SubpledgeCancellationsOne', :value => 1),
+        double('SubpledgeCancellationsOne', :value => 2),
+      ]
+    end
+
+    it 'should return correct balance' do
+      subject.value = 10
+      subject.stub(:subpledge_cancellations).and_return(subpledge_cancellations)
+      subject.balance.should eq 7
+    end
+  end
 
   context 'next_number' do
     it 'should return 1 as first subpledge' do

@@ -1,0 +1,5 @@
+<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-emission-date="<%= record.presenter.emission_date %>" data-pledge-value="<%= record.presenter.pledge_value %>" data-pledge-provider="<%= record.pledge_provider %>" data-pledge="<%= record.pledge %>" data-pledge-id="<%= record.pledge_id %>" data-balance="<%= record.presenter.balance %>">
+  <% attributes.each do |attribute| %>
+    <td><%= formatted_attribute record, attribute %></td>
+  <% end %>
+</tr>

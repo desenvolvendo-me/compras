@@ -9,4 +9,5 @@ Subpledge.blueprint(:empenho_2012) do
   value { 1 }
   process_number { "1239/2012" }
   description { "Aquisição de material" }
+  subpledge_expirations { [SubpledgeExpiration.make!(:vencimento)] }
 end

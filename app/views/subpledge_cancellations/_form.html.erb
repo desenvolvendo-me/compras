@@ -1,0 +1,142 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :entity %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :year %>
+  </div>
+</div>
+
+<%= f.input :pledge, :modal_url => modal_pledges_path(:has_subpledges => true) %>
+<%= f.input :provider, :disabled => true %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :emission_date, :disabled => true, :input_html => { :value => f.object.presenter.emission_date } %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :pledge_value, :disabled => true, :input_html => { :value => f.object.presenter.pledge_value } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :subpledge %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :subpledge_balance, :disabled => true, :input_html => { :value => f.object.presenter.subpledge_balance } %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :subpledge_expiration, :disabled => f.object.subpledge_id.blank? %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :subpledge_expiration_balance, :disabled => true, :input_html => { :value => f.object.presenter.subpledge_expiration_balance } %>
+  </div>
+</div>
+
+<%= f.input :value %>
+<%= f.input :date %>
+<%= f.input :reason %>
+
+<script>
+  <% if f.object.persisted? %>
+    $('form.subpledge_cancellation :input').attr('disabled', true);
+  <% else %>
+    function subpledgeUrl() {
+      var url = "<%= modal_subpledges_path %>?",
+          params = {
+            locked_fields: ["pledge"],
+            subpledge: {
+              pledge_id: $('#subpledge_cancellation_pledge_id').val(),
+              pledge: $('#subpledge_cancellation_pledge').val()
+            }
+          };
+
+      url += jQuery.param(params);
+
+      return url;
+    }
+
+    function subpledgeExpirationUrl() {
+      var url = "<%= modal_subpledge_expirations_path %>?",
+          params = {
+            locked_fields: ["subpledge"],
+            subpledge_expiration: {
+              subpledge_id: $('#subpledge_cancellation_subpledge_id').val(),
+              subpledge: $('#subpledge_cancellation_subpledge').val()
+            }
+          };
+
+      url += jQuery.param(params);
+
+      return url;
+    }
+
+    $('#subpledge_cancellation_pledge_id').change(function(event, data) {
+      if (data) {
+        var record = data.record;
+
+        $('#subpledge_cancellation_provider').val(record.data("provider"));
+        $('#subpledge_cancellation_emission_date').val(record.data("emission-date"));
+        $('#subpledge_cancellation_pledge_value').val(record.data("pledge-value"));
+        $('#subpledge_cancellation_subpledge').attr('data-modal-url', subpledgeUrl());
+      } else {
+        $('#subpledge_cancellation_provider').val('');
+        $('#subpledge_cancellation_emission_date').val('');
+        $('#subpledge_cancellation_pledge_value').val('');
+        $('#subpledge_cancellation_subpledge').val('');
+        $('#subpledge_cancellation_subpledge_id').val('');
+        $('#subpledge_cancellation_subpledge').attr('data-modal-url', '<%= modal_subpledges_path%>');
+        $('#subpledge_cancellation_subpledge_expiration_balance').val('');
+        $('#subpledge_cancellation_subpledge_balance').val('');
+        $('#subpledge_cancellation_subpledge_expiration').val('');
+        $('#subpledge_cancellation_subpledge_expiration_id').val('');
+        $('#subpledge_cancellation_subpledge_expiration').attr('disabled', true);
+      }
+    });
+
+    $('#subpledge_cancellation_subpledge_id').change(function(event, data) {
+      if (data) {
+        var record = data.record;
+
+        $('#subpledge_cancellation_subpledge_expiration').attr('disabled', false);
+        $('#subpledge_cancellation_subpledge_expiration').attr('data-modal-url', subpledgeExpirationUrl());
+        $('#subpledge_cancellation_subpledge_balance').val(record.data('balance'));
+
+        if (!$('#subpledge_cancellation_pledge_id').val()) {
+          $('#subpledge_cancellation_provider').val(record.data("pledge-provider"));
+          $('#subpledge_cancellation_emission_date').val(record.data("emission-date"));
+          $('#subpledge_cancellation_pledge_value').val(record.data("pledge-value"));
+          $('#subpledge_cancellation_pledge').val(record.data("pledge"));
+          $('#subpledge_cancellation_pledge_id').val(record.data("pledge-id"));
+        }
+      } else {
+        $('#subpledge_cancellation_subpledge_balance').val('');
+        $('#subpledge_cancellation_subpledge_expiration_balance').val('');
+        $('#subpledge_cancellation_subpledge_expiration').val('');
+        $('#subpledge_cancellation_subpledge_expiration_id').val('');
+        $('#subpledge_cancellation_subpledge_expiration').attr('disabled', true);
+      }
+    });
+
+    $('#subpledge_cancellation_subpledge_expiration_id').change(function(event, data) {
+      if (data) {
+        var record = data.record;
+
+        if (!$('#subpledge_cancellation_value').val()){
+          $('#subpledge_cancellation_value').val(record.data("balance"));
+        }
+        $('#subpledge_cancellation_subpledge_expiration_balance').val(record.data("balance"));
+      } else {
+        $('#subpledge_cancellation_subpledge_expiration_balance').val('');
+      }
+    });
+  <% end %>
+</script>

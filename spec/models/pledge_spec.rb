@@ -7,6 +7,7 @@ require 'app/models/pledge_cancellation'
 require 'app/models/pledge_liquidation'
 require 'app/models/pledge_liquidation_cancellation'
 require 'app/models/subpledge'
+require 'app/models/subpledge_cancellation'
 
 describe Pledge do
   it { should belong_to :entity }
@@ -28,6 +29,7 @@ describe Pledge do
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
   it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
   it { should have_many(:subpledges).dependent(:restrict).order(:number) }
+  it { should have_many(:subpledge_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :entity }
@@ -48,10 +50,18 @@ describe Pledge do
       ]
     end
 
+    let :pledge_cancellations do
+      [
+        double('PledgeCancellationsOne', :value => 1),
+        double('PledgeCancellationsTwo', :value => 1)
+      ]
+    end
+
     it 'should return balance' do
-      subject.value = 20
+      subject.value = 21
       subject.stub(:pledge_parcels).and_return(pledge_parcels)
-      subject.balance.should eq 1
+      subject.stub(:pledge_cancellations).and_return(pledge_cancellations)
+      subject.balance.should eq 0
     end
   end
 

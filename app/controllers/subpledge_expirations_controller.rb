@@ -1,0 +1,2 @@
+class SubpledgeExpirationsController < CrudController
+end

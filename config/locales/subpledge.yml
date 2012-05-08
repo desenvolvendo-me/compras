@@ -13,7 +13,7 @@ pt-BR:
         pledge_provider: "Fornecedor do empenho"
         pledge_value: "Valor do empenho"
         emission_date: "Data de emissão"
-        balance: "Saldo a subempenhar"
+        pledge_balance: "Saldo a subempenhar"
         number: "Subempenho"
         provider: "Fornecedor"
         date: "Data"

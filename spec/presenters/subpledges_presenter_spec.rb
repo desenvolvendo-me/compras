@@ -7,7 +7,7 @@ describe SubpledgePresenter do
   end
 
   let :subpledge do
-    double('Subpledge')
+    double('Subpledge', :balance => 100)
   end
 
   let :date do
@@ -32,10 +32,16 @@ describe SubpledgePresenter do
     subject.pledge_value.should eq '9,99'
   end
 
-  it 'should return formatted balance' do
+  it 'should return formatted pledge_balance' do
     helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
-    subpledge.stub(:balance).and_return(9.99)
+    subpledge.stub(:pledge_balance).and_return(9.99)
 
-    subject.balance.should eq '9,99'
+    subject.pledge_balance.should eq '9,99'
+  end
+
+  it 'should return formatted balance' do
+    helpers.stub(:number_with_precision).with(100).and_return('100,00')
+
+    subject.balance.should eq '100,00'
   end
 end
