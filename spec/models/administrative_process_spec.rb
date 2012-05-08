@@ -125,16 +125,16 @@ describe AdministrativeProcess do
 
   it 'should be invite when modality is INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES' do
     subject.modality = AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES
-    subject.is_invite?.should be true
+    subject.invited?.should be true
   end
 
   it 'should be invite when modality is INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES' do
     subject.modality = AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES
-    subject.is_invite?.should be true
+    subject.invited?.should be true
   end
 
   it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES)' do
     subject.modality = AdministrativeProcessModality::MAKING_COST_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES
-    subject.is_invite?.should be false
+    subject.invited?.should be false
   end
 end

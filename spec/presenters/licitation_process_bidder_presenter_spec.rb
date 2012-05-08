@@ -24,16 +24,4 @@ describe LicitationProcessBidderPresenter do
       :administrative_process => administrative_process
     )
   end
-
-  it 'should be invited when modality is invited' do
-    subject.stub(:licitation_process => licitation_process)
-    administrative_process.stub(:is_invite? => true)
-    subject.modality_is_invited?.should be true
-  end
-
-  it 'should not be invited when modality is not invited' do
-    subject.stub(:licitation_process => licitation_process)
-    administrative_process.stub(:is_invite? => false)
-    subject.modality_is_invited?.should be false
-  end
 end

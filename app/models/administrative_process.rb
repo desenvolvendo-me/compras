@@ -6,7 +6,7 @@ class AdministrativeProcess < ActiveRecord::Base
 
   attr_readonly :process, :year
 
-  has_enumeration_for :modality, :with => AdministrativeProcessModality
+  has_enumeration_for :modality, :with => AdministrativeProcessModality, :create_helpers => true
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
   has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true, :create_scopes => true
 
@@ -49,9 +49,8 @@ class AdministrativeProcess < ActiveRecord::Base
     administrative_process_budget_allocations.collect(&:attributes_for_data).to_json
   end
 
-  def is_invite?
-    modality == AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES ||
-    modality == AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES
+  def invited?
+    invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
   end
 
   protected

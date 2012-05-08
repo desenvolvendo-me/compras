@@ -10,7 +10,9 @@ class LicitationProcessBidder < ActiveRecord::Base
   has_many :documents, :class_name => :LicitationProcessBidderDocument, :dependent => :destroy, :order => :id
   has_many :document_types, :through => :documents
 
-  delegate :document_type_ids, :process_date, :administrative_process, :to => :licitation_process, :prefix => true
+  delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
+  delegate :administrative_process, :to => :licitation_process
+  delegate :invited?, :to => :administrative_process, :prefix => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
 
@@ -56,7 +58,7 @@ class LicitationProcessBidder < ActiveRecord::Base
   protected
 
   def clear_data_unless_invited
-    unless invited
+    unless invited?
       self.protocol = nil
       self.protocol_date = nil
       self.receipt_date = nil
