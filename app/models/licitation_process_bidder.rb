@@ -10,7 +10,7 @@ class LicitationProcessBidder < ActiveRecord::Base
   has_many :documents, :class_name => :LicitationProcessBidderDocument, :dependent => :destroy, :order => :id
   has_many :document_types, :through => :documents
 
-  delegate :document_type_ids, :to => :licitation_process, :prefix => true
+  delegate :document_type_ids, :process_date, :administrative_process, :to => :licitation_process, :prefix => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
 

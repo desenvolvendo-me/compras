@@ -43,19 +43,25 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Licitante'
 
+    page.should have_field 'Processo licitatório', :with => '1/2013'
+    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
+    page.should have_field 'Processo administrativo', :with => '1/2013'
+
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
-    # testing that document type from licitation process are automaticaly included in bidder
-    page.should have_disabled_field 'Documento'
-    page.should have_field 'Documento', :with => 'Fiscal'
+    within_tab 'Documentos' do
+      # testing that document type from licitation process are automaticaly included in bidder
+      page.should have_disabled_field 'Documento'
+      page.should have_field 'Documento', :with => 'Fiscal'
 
-    fill_in 'Número/certidão', :with => '222222'
-    fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
-    fill_in 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+      fill_in 'Número/certidão', :with => '222222'
+      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+    end
 
     click_button 'Salvar'
 
@@ -65,15 +71,20 @@ feature "LicitationProcessBidders" do
       click_link licitation_process.licitation_process_bidders.last.to_s
     end
 
+    page.should have_field 'Processo licitatório', :with => '1/2013'
+    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
+    page.should have_field 'Processo administrativo', :with => '1/2013'
     page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     page.should have_field 'Protocolo', :with => '123456'
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
-    page.should have_field 'Documento', :with => 'Fiscal'
-    page.should have_field 'Número/certidão', :with => '222222'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
-    page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+    within_tab 'Documentos' do
+      page.should have_field 'Documento', :with => 'Fiscal'
+      page.should have_field 'Número/certidão', :with => '222222'
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+    end
   end
 
   scenario 'updating an existing bidder' do
@@ -94,15 +105,21 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
+    page.should have_field 'Processo licitatório', :with => '1/2013'
+    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
+    page.should have_field 'Processo administrativo', :with => '1/2013'
+
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
 
-    fill_in 'Número/certidão', :with => '333333'
-    fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
-    fill_in 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+    within_tab 'Documentos' do
+      fill_in 'Número/certidão', :with => '333333'
+      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+    end
 
     click_button 'Salvar'
 
@@ -112,15 +129,21 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
+    page.should have_field 'Processo licitatório', :with => '1/2013'
+    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
+    page.should have_field 'Processo administrativo', :with => '1/2013'
+
     page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     page.should have_field 'Protocolo', :with => '111111'
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
 
-    page.should have_field 'Documento', :with => 'Fiscal'
-    page.should have_field 'Número/certidão', :with => '333333'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
-    page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+    within_tab 'Documentos' do
+      page.should have_field 'Documento', :with => 'Fiscal'
+      page.should have_field 'Número/certidão', :with => '333333'
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
+      page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+    end
   end
 
   scenario 'deleting an bidder' do
