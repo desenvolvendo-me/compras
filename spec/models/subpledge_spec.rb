@@ -80,6 +80,10 @@ describe Subpledge do
   end
 
   context 'validate value' do
+    before do
+      subject.stub(:pledge).and_return(pledge)
+    end
+
     let :pledge do
       double('Pledge', {
         :balance => 3,
@@ -91,12 +95,10 @@ describe Subpledge do
     end
 
     it 'should not be valid if value greater than balance' do
-      subject.stub(:pledge).and_return(pledge)
       subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho")
     end
 
     it 'should be valid if value is not greater than balance' do
-      subject.stub(:pledge).and_return(pledge)
       subject.should allow_value(1).for(:value)
     end
   end
