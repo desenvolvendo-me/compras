@@ -81,7 +81,13 @@ describe Subpledge do
 
   context 'validate value' do
     let :pledge do
-      pledge = double('Pledge', :balance => 3, :emission_date => nil, :global? => false, :estimated? => true, :pledge_parcels => [])
+      double('Pledge', {
+        :balance => 3,
+        :emission_date => nil,
+        :global? => false,
+        :estimated? => true,
+        :pledge_parcels => []
+      })
     end
 
     it 'should not be valid if value greater than balance' do
