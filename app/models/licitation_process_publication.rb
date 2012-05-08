@@ -8,9 +8,11 @@ class LicitationProcessPublication < ActiveRecord::Base
 
   validates :name, :publication_date, :publication_of, :circulation_type, :presence => true
 
-  def self.allow_update_licitation_process?(licitation_process_id)
-    where { (self.licitation_process_id.eq licitation_process_id) &
-            (publication_of.in [ PublicationOf::EXTENSION, PublicationOf::EDITAL, PublicationOf::EDITAL_RECTIFICATION ])
-          }.any?
+  def self.any_publication_that_permit_the_licitation_process_update?
+    where { publication_of.in [
+      PublicationOf::EXTENSION,
+      PublicationOf::EDITAL,
+      PublicationOf::EDITAL_RECTIFICATION
+    ] }.any?
   end
 end

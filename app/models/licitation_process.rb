@@ -92,7 +92,7 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def can_update?
-    new_record? || licitation_process_publications.empty? || licitation_process_publications.allow_update_licitation_process?(id)
+    new_record? || licitation_process_publications.empty? || any_publication_that_permit_update?
   end
 
   protected
@@ -147,5 +147,11 @@ class LicitationProcess < ActiveRecord::Base
     return unless can_have_bidders?
 
     licitation_process_bidders.each(&:assign_document_types)
+  end
+
+  private
+
+  def any_publication_that_permit_update?
+    licitation_process_publications.any_publication_that_permit_the_licitation_process_update?
   end
 end
