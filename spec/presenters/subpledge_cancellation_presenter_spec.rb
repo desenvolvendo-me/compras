@@ -7,12 +7,12 @@ describe SubpledgeCancellationPresenter do
   end
 
   let :subpledge_cancellation do
-    double('SubpledgeCancellation',
-           :subpledge_balance => 9.99,
-           :emission_date => date,
-           :pledge_value => 9.99,
-           :subpledge_expiration_balance => 9.99
-          )
+    double('SubpledgeCancellation', {
+      :subpledge_balance => 9.99,
+      :emission_date => date,
+      :pledge_value => 9.99,
+      :subpledge_expiration_balance => 9.99
+    })
   end
 
   let :date do
