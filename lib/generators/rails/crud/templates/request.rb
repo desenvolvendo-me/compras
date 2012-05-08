@@ -21,7 +21,7 @@ feature "<%= controller_class_name %>" do
     fill_in '<%= i18n %>', :with => '<%= name %>'
     <%- end -%>
 
-    click_button 'Criar <%= singular %>'
+    click_button 'Salvar'
 
     page.should have_notice '<%= singular %> criado com sucesso.'
 
@@ -49,7 +49,7 @@ feature "<%= controller_class_name %>" do
     fill_in '<%= i18n %>', :with => '<%= name %>'
     <%- end -%>
 
-    click_button 'Atualizar <%= singular %>'
+    click_button 'Salvar'
 
     page.should have_notice '<%= singular %> editado com sucesso.'
 
@@ -68,7 +68,7 @@ feature "<%= controller_class_name %>" do
 
     click_link 'Example'
 
-    click_link 'Apagar Example', :confirm => true
+    click_link 'Apagar', :confirm => true
 
     page.should have_notice '<%= singular %> apagado com sucesso.'
 
