@@ -27,7 +27,7 @@ class RevenueNature < ActiveRecord::Base
   validates :regulatory_act, :kind, :docket, :revenue_category, :presence => true
   validates :specification, :entity, :year, :classification, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
-  validates :classification, :mask => '9999', :allow_blank => true
+  validates :classification, :mask => '99.99', :allow_blank => true
   validate :revenue_subcategory_must_be_related_with_revenue_category
   validate :revenue_source_must_be_related_with_revenue_subcategory
   validate :revenue_rubric_must_be_related_with_revenue_source

@@ -14,12 +14,12 @@ describe RevenueNatureFullCodeGenerator do
         :revenue_subcategory_code => '2',
         :revenue_source_code => '3',
         :revenue_rubric_code => '4',
-        :classification => '5678'
+        :classification => '56.78'
       )
     end
 
     it 'should generate full_code' do
-      revenue_nature_object.should_receive(:full_code=).with('1.2.3.4.5678')
+      revenue_nature_object.should_receive(:full_code=).with('1.2.3.4.56.78')
       subject.generate!
     end
   end
@@ -36,7 +36,7 @@ describe RevenueNatureFullCodeGenerator do
     end
 
     it 'should generate full_code' do
-      revenue_nature_object.should_receive(:full_code=).with('1.2.0.4.0000')
+      revenue_nature_object.should_receive(:full_code=).with('1.2.0.4.00.00')
       subject.generate!
     end
   end

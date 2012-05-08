@@ -49,25 +49,22 @@
         sourceCode = '<%= f.object.revenue_source_code %>',
         rubricCode = '<%= f.object.revenue_rubric_code %>';
 
-    function valueOrDefaultValue(value, count){
+    function valueOrDefaultValue(value, defaultValue) {
       if(!value) {
-        value = '0000';
-      } else {
-        value = '0000' + value;
+        value = defaultValue;
       }
-
-      return value.substr(value.length - count);
+      return value;
     }
 
     function generateFullCode() {
       var classification = $('#revenue_nature_classification').val();
 
       fullCode = [
-        valueOrDefaultValue(categoryCode, 1),
-        valueOrDefaultValue(subcategoryCode, 1),
-        valueOrDefaultValue(sourceCode, 1),
-        valueOrDefaultValue(rubricCode, 1),
-        valueOrDefaultValue(classification, 4)
+        valueOrDefaultValue(categoryCode, '0'),
+        valueOrDefaultValue(subcategoryCode, '0'),
+        valueOrDefaultValue(sourceCode, '0'),
+        valueOrDefaultValue(rubricCode, '0'),
+        valueOrDefaultValue(classification, '00.00')
       ].join('.')
 
       $('#revenue_nature_full_code').val(fullCode);

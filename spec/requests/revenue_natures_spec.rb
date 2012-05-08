@@ -24,7 +24,7 @@ feature "RevenueNatures" do
     fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
     fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
     fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-    fill_in 'Classificação', :with => '1234'
+    fill_in 'Classificação', :with => '12.34'
     fill_in 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
     select 'Ambos', :from => 'Tipo'
     fill_in 'Súmula', :with => 'Registra o valor da arrecadação da receita'
@@ -42,8 +42,8 @@ feature "RevenueNatures" do
     page.should have_field 'Ato regulamentador', :with => '1234'
     page.should have_field 'Tipo', :with => 'Lei'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
-    page.should have_field 'Classificação', :with => '1234'
-    page.should have_field 'Código completo', :with => '1.1.1.2.1234'
+    page.should have_field 'Classificação', :with => '12.34'
+    page.should have_field 'Código completo', :with => '1.1.1.2.12.34'
     page.should have_field 'Rúbrica da receita', :with => '2 - IMPOSTOS SOBRE O PATRIMÔNIO E A RENDA'
     page.should have_field 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
     page.should have_select 'Tipo', :selected => 'Ambos'
@@ -60,19 +60,19 @@ feature "RevenueNatures" do
     click_link 'Criar Natureza da Receita'
 
     fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.0.0.0.0000'
+    page.should have_field 'Código completo', :with => '1.0.0.0.00.00'
 
     fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.1.0.0.0000'
+    page.should have_field 'Código completo', :with => '1.1.0.0.00.00'
 
     fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.1.1.0.0000'
+    page.should have_field 'Código completo', :with => '1.1.1.0.00.00'
 
     fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.1.1.2.0000'
+    page.should have_field 'Código completo', :with => '1.1.1.2.00.00'
 
-    fill_in 'Classificação', :with => '1234'
-    page.should have_field 'Código completo', :with => '1.1.1.2.1234'
+    fill_in 'Classificação', :with => '12.34'
+    page.should have_field 'Código completo', :with => '1.1.1.2.12.34'
   end
 
   context 'should cascate clear fields' do
@@ -89,7 +89,7 @@ feature "RevenueNatures" do
       fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
       fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
       fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-      fill_in 'Classificação', :with => '1234'
+      fill_in 'Classificação', :with => '12.34'
 
       clear_modal 'Categoria da receita'
 
@@ -112,7 +112,7 @@ feature "RevenueNatures" do
       fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
       fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
       fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-      fill_in 'Classificação', :with => '1234'
+      fill_in 'Classificação', :with => '12.34'
 
       clear_modal 'Subcategoria da receita'
 
@@ -134,7 +134,7 @@ feature "RevenueNatures" do
       fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
       fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
       fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-      fill_in 'Classificação', :with => '1234'
+      fill_in 'Classificação', :with => '12.34'
 
       clear_modal 'Fonte da receita'
 
@@ -155,7 +155,7 @@ feature "RevenueNatures" do
       fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
       fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
       fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-      fill_in 'Classificação', :with => '1234'
+      fill_in 'Classificação', :with => '12.34'
 
       clear_modal 'Rúbrica da receita'
 
@@ -194,12 +194,12 @@ feature "RevenueNatures" do
 
     click_link 'Naturezas das Receitas'
 
-    click_link '1.1.1.2.1234 - Imposto s/ Propriedade Predial e Territ. Urbana'
+    click_link '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Exercício', :with => '2011'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
-    fill_in 'Classificação', :with => '1111'
+    fill_in 'Classificação', :with => '11.11'
     fill_modal 'Rúbrica da receita', :with => '3', :field => 'Código'
     fill_in 'Especificação', :with => 'Imposto sobre Propriedade Predial e Territorial Urbana'
     select 'Analítico', :from => 'Tipo'
@@ -209,15 +209,15 @@ feature "RevenueNatures" do
 
     page.should have_notice 'Natureza da Receita editado com sucesso.'
 
-    click_link '1.1.1.3.1111 - Imposto sobre Propriedade Predial e Territorial Urbana'
+    click_link '1.1.1.3.11.11 - Imposto sobre Propriedade Predial e Territorial Urbana'
 
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Exercício', :with => '2011'
     page.should have_field 'Ato regulamentador', :with => '4567'
     page.should have_field 'Tipo', :with => 'Emenda constitucional'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
-    page.should have_field 'Classificação', :with => '1111'
-    page.should have_field 'Código completo', :with => '1.1.1.3.1111'
+    page.should have_field 'Classificação', :with => '11.11'
+    page.should have_field 'Código completo', :with => '1.1.1.3.11.11'
     page.should have_field 'Rúbrica da receita', :with => '3 - IMPOSTOS SOBRE A PRODUÇÃO E A CIRCULAÇÃO'
     page.should have_field 'Especificação', :with => 'Imposto sobre Propriedade Predial e Territorial Urbana'
     page.should have_select 'Tipo', :selected => 'Analítico'
@@ -231,12 +231,12 @@ feature "RevenueNatures" do
 
     click_link 'Naturezas das Receitas'
 
-    click_link '1.1.1.2.1234 - Imposto s/ Propriedade Predial e Territ. Urbana'
+    click_link '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
     click_link "Apagar", :confirm => true
 
     page.should have_notice 'Natureza da Receita apagado com sucesso.'
 
-    page.should_not have_content '1.1.1.2.1234 - Imposto s/ Propriedade Predial e Territ. Urbana'
+    page.should_not have_content '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
   end
 end
