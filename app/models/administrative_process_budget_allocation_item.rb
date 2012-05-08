@@ -8,11 +8,21 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
   belongs_to :licitation_process_lot
 
   delegate :reference_unit, :to => :material, :allow_nil => true
+  delegate :administrative_process_id, :to => :administrative_process_budget_allocation, :allow_nil => true
 
   validates :material, :quantity, :unit_price, :presence => true
 
   orderize :id
   filterize
+
+  scope :administrative_process_id, lambda { |administrative_process_id|
+    joins { administrative_process_budget_allocation }.
+    where { administrative_process_budget_allocation.administrative_process_id.eq administrative_process_id }
+  }
+
+  def self.without_licitation_process_lot
+    where { licitation_process_lot_id.eq(nil) }
+  end
 
   def estimated_total_price
     if quantity && unit_price
