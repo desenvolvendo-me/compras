@@ -20,7 +20,7 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
     where { administrative_process_budget_allocation.administrative_process_id.eq administrative_process_id }
   }
 
-  def self.without_licitation_process_lot
+  def self.without_lot
     where { licitation_process_lot_id.eq(nil) }
   end
 
