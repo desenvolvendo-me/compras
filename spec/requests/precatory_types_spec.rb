@@ -15,14 +15,15 @@ feature "PrecatoryTypes" do
 
     fill_in 'Descrição', :with => 'Precatórios Alimentares'
     select 'Ativo', :from => 'Status'
-    fill_in 'Data de desativação', :with => ''
 
     click_button 'Salvar'
 
     page.should have_notice 'Tipos de Precatório criado com sucesso.'
 
+    precatory_type = PrecatoryType.last
+
     within_records do
-      page.find('a').click
+      click_link precatory_type.to_s
     end 
 
     page.should have_field 'Descrição', :with => 'Precatórios Alimentares'
@@ -32,14 +33,14 @@ feature "PrecatoryTypes" do
   end
 
   scenario 'update an existent precatory_type' do
-    PrecatoryType.make!(:tipo_de_precatorio_ativo)
+    precatory_type = PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
     click_link 'Contabilidade'
 
     click_link 'Tipos de Precatórios'
 
     within_records do
-      page.find('a').click
+      click_link precatory_type.to_s
     end
 
     fill_in 'Descrição', :with => 'description'
@@ -51,7 +52,7 @@ feature "PrecatoryTypes" do
     page.should have_notice 'Tipos de Precatório editado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link precatory_type.to_s
     end
 
     page.should have_field 'Descrição', :with => 'description'
@@ -60,14 +61,14 @@ feature "PrecatoryTypes" do
   end
 
   scenario 'destroy an existent precatory_type' do
-    PrecatoryType.make!(:tipo_de_precatorio_ativo)
+    precatory_type = PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
     click_link 'Contabilidade'
 
     click_link 'Tipos de Precatórios'
 
     within_records do
-      page.find('a').click
+      click_link precatory_type.to_s
     end
 
     click_link 'Apagar', :confirm => true
