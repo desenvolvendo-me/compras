@@ -87,6 +87,7 @@ feature "PrecatoryTypes" do
     click_link 'Criar Tipos de Precatório'
 
     select 'Ativo', :from => 'Status'
+
     page.should have_disabled_field 'Data de desativação'
   end
 
@@ -98,6 +99,7 @@ feature "PrecatoryTypes" do
     click_link 'Criar Tipos de Precatório'
 
     select 'Inativo', :from => 'Status'
+
     page.should_not have_disabled_field 'Data de desativação *'
   end
 end
