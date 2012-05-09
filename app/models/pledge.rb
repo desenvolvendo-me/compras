@@ -68,7 +68,7 @@ class Pledge < ActiveRecord::Base
   def self.has_subpledges(has = true)
     relation = scoped
     if has
-      relation = relation.joins(:subpledges)
+      relation = relation.joins { subpledges }
     else
       relation = relation.joins { subpledges.outer }.where { subpledges.id.eq(nil) }
     end
