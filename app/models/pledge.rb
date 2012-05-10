@@ -101,7 +101,7 @@ class Pledge < ActiveRecord::Base
   end
 
   def has_subpledges?
-    !subpledges.count.zero?
+    subpledges.any?
   end
 
   protected
