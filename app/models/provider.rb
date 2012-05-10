@@ -24,6 +24,7 @@ class Provider < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
   has_many :subpledges, :dependent => :restrict
+  has_many :precatories, :dependent => :restrict
 
   accepts_nested_attributes_for :provider_partners, :allow_destroy => true
   accepts_nested_attributes_for :provider_licitation_documents, :allow_destroy => true

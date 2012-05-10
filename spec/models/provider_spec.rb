@@ -13,6 +13,7 @@ require 'app/models/accredited_representative'
 require 'app/models/pledge'
 require 'app/models/reserve_fund'
 require 'app/models/subpledge'
+require 'app/models/precatory'
 
 describe Provider do
   it { should belong_to :person }
@@ -33,6 +34,7 @@ describe Provider do
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:subpledges).dependent(:restrict) }
+  it { should have_many(:precatories).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration_date }

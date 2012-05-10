@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      precatory:
+        one: "Precatório"
+        other: "Precatórios"
+
+    attributes:
+      precatory:
+        number: "Número do precatório"
+        lawsuit_number: "Número da Ação"
+        provider: "Beneficiário"
+        date: "Data do precatório"
+        judgment_date: "Data da decisão judicial"
+        apresentation_date: "Data da apresentação"
+        precatory_type: "Tipo"
+        historic: "Histórico"

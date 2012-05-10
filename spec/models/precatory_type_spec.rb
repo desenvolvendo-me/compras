@@ -1,10 +1,13 @@
 #encoding: utf-8
 require 'model_helper'
 require 'app/models/precatory_type'
+require 'app/models/precatory'
 
 describe PrecatoryType do
   it { should validate_presence_of :description }
   it { should validate_presence_of :status }
+
+  it { should have_many(:precatories).dependent(:restrict) }
 
   it "should validate presence of deactivation_date when status is inactive" do
     subject.status = PrecatoryTypeStatus::INACTIVE

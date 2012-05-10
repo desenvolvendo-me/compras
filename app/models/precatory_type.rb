@@ -3,6 +3,8 @@ class PrecatoryType < ActiveRecord::Base
 
   has_enumeration_for :status, :create_helpers => true
 
+  has_many :precatories, :dependent => :restrict
+
   validates :description, :status, :presence => true
   validate :deactivation_date_must_be_required_when_inactive
 
