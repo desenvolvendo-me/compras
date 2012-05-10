@@ -56,7 +56,7 @@ feature "SubpledgeCancellations" do
 
   scenario 'when fill/clear pledge should fill/clear related fields' do
     pledge = Pledge.make!(:empenho)
-    subpledge = Subpledge.make!(:empenho_2012)
+    Subpledge.make!(:empenho_2012)
 
     click_link 'Contabilidade'
 
@@ -180,7 +180,7 @@ feature "SubpledgeCancellations" do
 
   scenario 'when fill subpledge_expiration fill related fields' do
     Pledge.make!(:empenho)
-    subpledge = Subpledge.make!(:empenho_2012)
+    Subpledge.make!(:empenho_2012)
 
     click_link 'Contabilidade'
 
@@ -239,7 +239,7 @@ feature "SubpledgeCancellations" do
   end
 
   scenario 'should not have a button to destroy an existent subpledge cancellation' do
-    subpledge_cancellation = SubpledgeCancellation.make!(:empenho_2012)
+    SubpledgeCancellation.make!(:empenho_2012)
 
     click_link 'Contabilidade'
 
