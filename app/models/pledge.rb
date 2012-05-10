@@ -61,19 +61,10 @@ class Pledge < ActiveRecord::Base
   orderize :emission_date
   filterize accessible_attributes + [:id]
 
+  scope :has_subpledges, joins { subpledges }
+
   def self.global_or_estimated
     where { pledge_type.eq(PledgeType::GLOBAL) | pledge_type.eq(PledgeType::ESTIMATED) }
-  end
-
-  def self.has_subpledges(has = true)
-    relation = scoped
-    if has
-      relation = relation.joins { subpledges }
-    else
-      relation = relation.joins { subpledges.outer }.where { subpledges.id.eq(nil) }
-    end
-
-    relation
   end
 
   def to_s
