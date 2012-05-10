@@ -50,7 +50,7 @@ group :production, :staging do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '2.9.0'
+  gem 'rspec-rails', '2.10.1'
 end
 
 group :test do
