@@ -30,7 +30,7 @@ class SubpledgeCancellation < ActiveRecord::Base
   def pledge_must_has_subpledges
     return unless pledge
 
-    if !pledge.subpledges?
+    unless pledge.subpledges?
       errors.add(:pledge, :pledge_must_has_subpledges)
     end
   end
