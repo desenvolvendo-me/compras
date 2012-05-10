@@ -1,2 +1,2 @@
-class <%= class_name %>Decorator < Decorator::Proxy
+class <%= class_name %>Decorator < Decorator
 end
