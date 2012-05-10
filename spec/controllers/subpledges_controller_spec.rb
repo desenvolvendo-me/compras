@@ -38,6 +38,8 @@ describe SubpledgesController do
       GenerateNumberPledgeParcels.any_instance.should_receive(:generate!)
 
       post :create
+
+      assigns(:subpledge).number.should eq 1
     end
   end
 end
