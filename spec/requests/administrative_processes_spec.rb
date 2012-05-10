@@ -11,7 +11,6 @@ feature "AdministrativeProcesses" do
     BudgetUnit.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
 
     click_link 'Processos'
 
