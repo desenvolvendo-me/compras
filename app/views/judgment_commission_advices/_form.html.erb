@@ -19,16 +19,6 @@
 </div>
 
 <script>
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
   $('#judgment_commission_advice_licitation_process_id').change(function (event, data) {
     if (data){
       var record = data.record;

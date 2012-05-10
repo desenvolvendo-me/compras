@@ -14,16 +14,6 @@
 </div>
 
 <script>
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
   (function () {
     var modalitiesGroups = <%= AdministrativeProcessModalitiesByObjectType.new.modalities_groups.to_json.html_safe %>,
         modalitiesOptions = _(<%= AdministrativeProcessModality.to_a.to_json.html_safe %>);

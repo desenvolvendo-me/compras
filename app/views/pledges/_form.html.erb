@@ -25,13 +25,6 @@
 
 <script>
   $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    },
     select: function() {
       $('#replicated_value').val($('#pledge_value').val());
     }

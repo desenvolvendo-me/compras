@@ -54,16 +54,6 @@
 </div>
 
 <script>
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
   function toggleEnabledDisabledFields() {
     if($('#licitation_process_bidder_invited').is(':checked')) {
       $('#licitation_process_bidder_protocol, #licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').attr('disabled', false);

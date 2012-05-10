@@ -24,16 +24,6 @@
 </div>
 
 <script>
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
   function abreviatedProcessModality(modality) {
     var abreviations = <%= AbreviatedProcessModality.to_a.to_json.html_safe %>,
         index;

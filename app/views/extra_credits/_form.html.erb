@@ -14,16 +14,6 @@
 </div>
 
 <script type="text/javascript">
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
   function calcTotal() {
     var supplement_total = 0.0,
         reduced_total = 0.0,

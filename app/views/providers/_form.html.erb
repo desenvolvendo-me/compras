@@ -29,16 +29,6 @@
 </div>
 
 <script>
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
   var bank_id = $('#provider_bank_id').val();
   var person_id = $('#provider_person_id').val();
 

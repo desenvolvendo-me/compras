@@ -14,16 +14,6 @@
 </div>
 
 <script>
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
-
   <% if f.object.persisted? %>
     $('form.direct_purchase :input:not([name=_method]):not([name=authenticity_token])').attr('disabled', true);
     $('.button.negative').hide();
