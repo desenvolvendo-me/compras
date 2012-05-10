@@ -27,7 +27,7 @@ describe SubpledgeCancellation do
 
   context 'validate pledge' do
     it 'should not accept pledge without subpledges' do
-      pledge = double('Pledge', :has_subpledges? => false)
+      pledge = double('Pledge', :subpledges? => false)
       subject.stub(:pledge).and_return(pledge)
 
       subject.valid?
@@ -36,7 +36,7 @@ describe SubpledgeCancellation do
     end
 
     it 'should accept pledge with subpledges' do
-      pledge = double('Pledge', :has_subpledges? => true)
+      pledge = double('Pledge', :subpledges? => true)
       subject.stub(:pledge).and_return(pledge)
 
       subject.valid?

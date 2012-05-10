@@ -100,7 +100,7 @@ class Pledge < ActiveRecord::Base
     subpledges.last
   end
 
-  def has_subpledges?
+  def subpledges?
     subpledges.any?
   end
 
