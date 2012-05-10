@@ -4,5 +4,5 @@ class LicitationKind < EnumerateIt::Base
                    :technical_and_price,
                    :best_auction_or_offer,
                    :higher_discount_on_item,
-                   :higher_discount
+                   :higher_discount_on_lot
 end
