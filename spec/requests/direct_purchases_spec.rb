@@ -26,8 +26,8 @@ feature "DirectPurchases" do
     click_link 'Criar Solicitação de Compra Direta'
 
     within_tab 'Dados gerais' do
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_mask 'Ano', :with => '2012'
+      fill_mask 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
@@ -266,8 +266,8 @@ feature "DirectPurchases" do
     click_link 'Criar Solicitação de Compra Direta'
 
     within_tab 'Dados gerais' do
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_mask 'Ano', :with => '2012'
+      fill_mask 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
@@ -341,7 +341,7 @@ feature "DirectPurchases" do
 
     click_link 'Filtrar Solitações de Compra Direta'
 
-    fill_in 'Ano', :with => '2011'
+    fill_mask 'Ano', :with => '2011'
 
     click_button 'Pesquisar'
 
@@ -361,7 +361,7 @@ feature "DirectPurchases" do
 
     click_link 'Filtrar Solitações de Compra Direta'
 
-    fill_in 'Data da compra', :with => '11/11/2011'
+    fill_mask 'Data da compra', :with => '11/11/2011'
 
     click_button 'Pesquisar'
 

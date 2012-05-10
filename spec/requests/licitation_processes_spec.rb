@@ -34,8 +34,8 @@ feature "LicitationProcesses" do
       page.should have_disabled_field 'Data da homologação'
       page.should have_disabled_field 'Data da adjudicação'
 
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '21/03/2012'
+      fill_mask 'Ano', :with => '2012'
+      fill_mask 'Data do processo', :with => '21/03/2012'
       fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
       select 'Global', :from => 'Tipo de empenho'
 
@@ -54,17 +54,17 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
       fill_in 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '14:00'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da abertura', :with => '14:00'
+      fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_mask 'Hora da entrega', :with => '14:00'
+      fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_mask 'Hora da abertura', :with => '14:00'
       fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_modal 'Prazo de entrega', :with => '1', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
+      fill_mask 'Data do parecer', :with => '30/03/2012'
+      fill_mask 'Data do contrato', :with => '31/03/2012'
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
     end
@@ -97,7 +97,7 @@ feature "LicitationProcesses" do
       click_button "Adicionar Publicação"
 
       fill_in "Nome do veículo de comunicação", :with => 'Jornal'
-      fill_in "Data da publicação", :with => '20/04/2012'
+      fill_mask "Data da publicação", :with => '20/04/2012'
       select "Edital", :from => "Publicação do(a)"
       select "Internet", :from => "Tipo de circulação do veículo de comunicação"
     end
@@ -200,7 +200,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dados gerais' do
-      fill_in 'Data do processo', :with => '21/03/2013'
+      fill_mask 'Data do processo', :with => '21/03/2013'
       fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       select 'Estimativo', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'novo detalhamento'
@@ -208,16 +208,16 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10 dias'
       fill_in 'Índice de reajuste', :with => 'IPC'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da entrega', :with => '15:00'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
-      fill_in 'Hora da abertura', :with => '15:00'
+      fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_mask 'Hora da entrega', :with => '15:00'
+      fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_mask 'Hora da abertura', :with => '15:00'
       fill_modal 'Prazo de entrega', :with => '3', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '60,00'
       select 'Contrário', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2013'
-      fill_in 'Data do contrato', :with => '31/03/2013'
+      fill_mask 'Data do parecer', :with => '30/03/2013'
+      fill_mask 'Data do contrato', :with => '31/03/2013'
       fill_in 'Validade do contrato (meses)', :with => '6'
       fill_in 'Observações gerais', :with => 'novas observacoes'
     end
@@ -248,7 +248,7 @@ feature "LicitationProcesses" do
       click_button "Adicionar Publicação"
 
       fill_in "Nome do veículo de comunicação", :with => 'Periodico'
-      fill_in "Data da publicação", :with => '20/04/2013'
+      fill_mask "Data da publicação", :with => '20/04/2013'
       select "Cancelamento", :from => "Publicação do(a)"
       select "Mural público", :from => "Tipo de circulação do veículo de comunicação"
     end
@@ -328,8 +328,8 @@ feature "LicitationProcesses" do
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
 
-      fill_in 'Ano', :with => '2013'
-      fill_in 'Data do processo', :with => '21/04/2013'
+      fill_mask 'Ano', :with => '2013'
+      fill_mask 'Data do processo', :with => '21/04/2013'
       fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       select 'Global', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
@@ -337,16 +337,16 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
       fill_in 'Índice de reajuste', :with => 'XPTO'
-      fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      fill_in 'Hora da entrega', :with => '15:00'
-      fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      fill_in 'Hora da abertura', :with => '15:00'
+      fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_mask 'Hora da entrega', :with => '15:00'
+      fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      fill_mask 'Hora da abertura', :with => '15:00'
       fill_modal 'Prazo de entrega', :with => '1', :field => 'Quantidade'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
-      fill_in 'Data do parecer', :with => '30/03/2012'
-      fill_in 'Data do contrato', :with => '31/03/2012'
+      fill_mask 'Data do parecer', :with => '30/03/2012'
+      fill_mask 'Data do contrato', :with => '31/03/2012'
       fill_in 'Validade do contrato (meses)', :with => '5'
       fill_in 'Observações gerais', :with => 'observacoes'
     end
@@ -630,7 +630,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dados gerais' do
-      fill_in 'Data da abertura dos envelopes', :with => "#{I18n.l(Date.current)}"
+      fill_mask 'Data da abertura dos envelopes', :with => "#{I18n.l(Date.current)}"
     end
 
     click_button 'Salvar'

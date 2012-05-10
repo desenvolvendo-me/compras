@@ -15,10 +15,10 @@ feature "Prefecture" do
 
     within_tab 'Prefeitura' do
       fill_in 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
-      fill_in 'CNPJ', :with => '39.067.716/0001-41'
+      fill_mask 'CNPJ', :with => '39.067.716/0001-41'
 
-      fill_in 'Telefone', :with => '(56) 2345-9876'
-      fill_in 'Fax', :with => '(56) 1234-5432'
+      fill_mask 'Telefone', :with => '(56) 2345-9876'
+      fill_mask 'Fax', :with => '(56) 1234-5432'
       fill_in 'E-mail', :with => 'curitiba@curitiba.com.br'
       fill_in 'Prefeito', :with => 'Prefeito de Porto Alegre'
     end
@@ -60,10 +60,10 @@ feature "Prefecture" do
 
     within_tab 'Prefeitura' do
       fill_in 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
-      fill_in 'CNPJ', :with => '39.067.716/0001-41'
+      fill_mask 'CNPJ', :with => '39.067.716/0001-41'
 
-      fill_in 'Telefone', :with => '(56) 2345-9876'
-      fill_in 'Fax', :with => '(56) 1234-5432'
+      fill_mask 'Telefone', :with => '(56) 2345-9876'
+      fill_mask 'Fax', :with => '(56) 1234-5432'
       fill_in 'E-mail', :with => 'curitiba@curitiba.com.br'
       fill_in 'Prefeito', :with => 'Prefeito de Porto Alegre'
 

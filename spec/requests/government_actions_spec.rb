@@ -16,7 +16,7 @@ feature "GovernmentActions" do
     click_link 'Criar Ação do Governo'
 
     fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
+    fill_mask 'Exercício', :with => '2012'
     fill_in 'Descrição', :with => 'Ação Governamental'
     select 'Ativo', :from => 'Status'
 
@@ -43,7 +43,7 @@ feature "GovernmentActions" do
     click_link 'Ação Governamental'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_in 'Exercício', :with => '2011'
+    fill_mask 'Exercício', :with => '2011'
     fill_in 'Descrição', :with => 'Ação Estatal'
     select 'Inativo', :from => 'Status'
 

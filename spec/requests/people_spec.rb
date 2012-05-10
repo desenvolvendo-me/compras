@@ -170,7 +170,7 @@ feature "People" do
 
     within_tab "Contribuinte" do
       fill_in 'Nome', :with => 'Nohup'
-      fill_in 'CNPJ', :with => '00.000.000/9983-03'
+      fill_mask 'CNPJ', :with => '00.000.000/9983-03'
       fill_in 'Inscrição estadual', :with => '01237070'
       fill_in 'Número do registro na junta comercial', :with => '1234909034'
       fill_mask 'Data do registro na junta comercial', :with => '30/06/2011'
@@ -262,7 +262,7 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      fill_in 'CEP', :with => '55554-333'
+      fill_mask 'CEP', :with => '55554-333'
       fill_in 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
     end
 

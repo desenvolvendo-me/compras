@@ -15,12 +15,12 @@ feature "ManagementContracts" do
 
     click_link 'Criar Contrato de Gestão'
 
-    fill_in 'Exercício', :with => '2012'
+    fill_mask 'Exercício', :with => '2012'
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Número do contrato', :with => '001'
     fill_in 'Número do processo', :with => '002'
-    fill_in 'Data da assinatura', :with => '01/01/2012'
-    fill_in 'Data do término', :with => '30/12/2012'
+    fill_mask 'Data da assinatura', :with => '01/01/2012'
+    fill_mask 'Data do término', :with => '30/12/2012'
     fill_in 'Objeto', :with => 'Objeto'
 
     click_button 'Salvar'
@@ -52,12 +52,12 @@ feature "ManagementContracts" do
       page.find('a').click
     end
 
-    fill_in 'Exercício', :with => '2013'
+    fill_mask 'Exercício', :with => '2013'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Número do contrato', :with => '111'
     fill_in 'Número do processo', :with => '222'
-    fill_in 'Data da assinatura', :with => '01/01/2013'
-    fill_in 'Data do término', :with => '30/12/2013'
+    fill_mask 'Data da assinatura', :with => '01/01/2013'
+    fill_mask 'Data do término', :with => '30/12/2013'
     fill_in 'Objeto', :with => 'Novo Objeto'
 
     click_button 'Salvar'

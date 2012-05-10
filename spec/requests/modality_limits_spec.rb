@@ -13,9 +13,9 @@ feature "ModalityLimits" do
 
     click_link 'Criar Limite por Modalidade'
 
-    fill_in 'Início da validade', :with => '01/02/2012'
+    fill_mask 'Início da validade', :with => '01/02/2012'
     fill_in 'Número da portaria', :with => '0001'
-    fill_in 'Data de publicação', :with => '01/02/2012'
+    fill_mask 'Data de publicação', :with => '01/02/2012'
 
     within_fieldset 'Compras e serviços' do
       fill_in 'Dispensa de licitação', :with => '100,00'
@@ -65,9 +65,9 @@ feature "ModalityLimits" do
 
     click_link '0001'
 
-    fill_in 'Início da validade', :with => '01/04/2012'
+    fill_mask 'Início da validade', :with => '01/04/2012'
     fill_in 'Número da portaria', :with => '0003'
-    fill_in 'Data de publicação', :with => '01/03/2012'
+    fill_mask 'Data de publicação', :with => '01/03/2012'
 
     within_fieldset 'Compras e serviços' do
       fill_in 'Dispensa de licitação', :with => '150,00'

@@ -15,12 +15,12 @@ feature "FoundedDebtContracts" do
 
     click_link 'Criar Contrato de Dívida Fundada'
 
-    fill_in 'Exercício', :with => '2012'
+    fill_mask 'Exercício', :with => '2012'
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Número do contrato', :with => '101'
     fill_in 'Número do processo', :with => '10'
-    fill_in 'Data da assinatura', :with => '23/02/2012'
-    fill_in 'Data do término', :with => '23/02/2013'
+    fill_mask 'Data da assinatura', :with => '23/02/2012'
+    fill_mask 'Data do término', :with => '23/02/2013'
     fill_in 'Descrição', :with => 'Contrato sobre'
 
     click_button 'Salvar'
@@ -48,12 +48,12 @@ feature "FoundedDebtContracts" do
 
     click_link '2012'
 
-    fill_in 'Exercício', :with => '2011'
+    fill_mask 'Exercício', :with => '2011'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Número do contrato', :with => '100'
     fill_in 'Número do processo', :with => '200'
-    fill_in 'Data da assinatura', :with => '21/02/2012'
-    fill_in 'Data do término', :with => '21/02/2013'
+    fill_mask 'Data da assinatura', :with => '21/02/2012'
+    fill_mask 'Data do término', :with => '21/02/2013'
     fill_in 'Descrição', :with => 'Outro contrato sobre compra de material'
 
     click_button 'Salvar'

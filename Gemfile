@@ -58,5 +58,5 @@ group :test do
   gem 'machinist', '2.0'
   gem 'machinist-caching', '0.0.1'
   gem 'capybara', '1.1.2'
-  gem 'capybara-webkit', '0.9.0'
+  gem 'capybara-webkit', '0.11.0'
 end

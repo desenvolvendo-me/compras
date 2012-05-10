@@ -23,8 +23,8 @@ feature "AdministrativeProcesses" do
       page.should have_disabled_field 'Status do processo administrativo'
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_mask 'Ano', :with => '2012'
+      fill_mask 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -186,7 +186,7 @@ feature "AdministrativeProcesses" do
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_mask 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'

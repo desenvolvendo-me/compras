@@ -50,8 +50,8 @@ feature "LicitationProcessBidders" do
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
-    fill_in 'Data do protocolo', :with => I18n.l(Date.current)
-    fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    fill_mask 'Data do protocolo', :with => I18n.l(Date.current)
+    fill_mask 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
@@ -59,8 +59,8 @@ feature "LicitationProcessBidders" do
       page.should have_field 'Documento', :with => 'Fiscal'
 
       fill_in 'Número/certidão', :with => '222222'
-      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow)
-      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+      fill_mask 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
     click_button 'Salvar'
@@ -112,13 +112,13 @@ feature "LicitationProcessBidders" do
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
-    fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
-    fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+    fill_mask 'Data do protocolo', :with => I18n.l(Date.tomorrow)
+    fill_mask 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
 
     within_tab 'Documentos' do
       fill_in 'Número/certidão', :with => '333333'
-      fill_in 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
-      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+      fill_mask 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
     end
 
     click_button 'Salvar'

@@ -16,7 +16,7 @@ feature "Subfunctions" do
 
     click_link 'Criar Subfunção'
 
-    fill_in 'Exercício', :with => '2012'
+    fill_mask 'Exercício', :with => '2012'
     fill_modal 'Entidade', :with => 'Detran'
     fill_modal 'Função', :with => '04', :field => "Código"
     fill_in 'Código', :with => '01'
@@ -46,7 +46,7 @@ feature "Subfunctions" do
 
     click_link '01'
 
-    fill_in 'Exercício', :with => '2011'
+    fill_mask 'Exercício', :with => '2011'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_modal 'Função', :with => '05', :field => "Código"
     fill_in 'Código', :with => '02'
@@ -91,7 +91,7 @@ feature "Subfunctions" do
 
     click_link 'Criar Subfunção'
 
-    fill_in 'Código', :with => '01'
+    fill_mask 'Código', :with => '01'
 
     click_button 'Salvar'
 

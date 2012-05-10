@@ -23,11 +23,11 @@ feature "ExtraCredits" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => 2012
+      fill_mask 'Exercício', :with => 2012
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       select 'Especial', :from => 'Tipo de crédito'
       fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
-      fill_in 'Data crédito', :with => '01/03/2012'
+      fill_mask 'Data crédito', :with => '01/03/2012'
     end
 
     within_tab 'Movimentos' do
@@ -401,11 +401,11 @@ feature "ExtraCredits" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_in 'Exercício', :with => 2011
+      fill_mask 'Exercício', :with => 2011
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
       select 'Suplementar', :from => 'Tipo de crédito'
       fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar de transferência', :field => 'Descrição'
-      fill_in 'Data crédito', :with => '21/03/2012'
+      fill_mask 'Data crédito', :with => '21/03/2012'
     end
 
     within_tab 'Movimentos' do

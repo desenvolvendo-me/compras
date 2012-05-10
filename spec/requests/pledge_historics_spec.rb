@@ -17,7 +17,7 @@ feature "PledgeHistorics" do
 
     fill_in 'Descrição', :with => 'Mensal'
     fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
+    fill_mask 'Exercício', :with => '2012'
 
     click_button 'Salvar'
 
@@ -42,7 +42,7 @@ feature "PledgeHistorics" do
 
     fill_in 'Descrição', :with => 'Anual'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_in 'Exercício', :with => '2013'
+    fill_mask 'Exercício', :with => '2013'
 
     click_button 'Salvar'
 

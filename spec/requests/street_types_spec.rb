@@ -14,7 +14,7 @@ feature "StreetTypes" do
     click_link 'Criar Tipo de Logradouro'
 
     fill_in 'Nome', :with => 'Alameda'
-    fill_in 'Sigla', :with => 'ALA'
+    fill_mask 'Sigla', :with => 'ALA'
 
     click_button 'Salvar'
 
@@ -37,7 +37,7 @@ feature "StreetTypes" do
 
     fill_in 'Nome', :with => 'Travessa'
 
-    fill_in 'Sigla', :with => 'TRA'
+    fill_mask 'Sigla', :with => 'TRA'
 
     click_button 'Salvar'
 

@@ -27,9 +27,9 @@ feature "LicitationCommissions" do
       page.should have_disabled_field 'Data da publicação do ato'
       page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
 
-      fill_in 'Data da nomeação', :with => '20/03/2012'
-      fill_in 'Data da expiração', :with => '22/03/2012'
-      fill_in 'Data da exoneração', :with => '25/03/2012'
+      fill_mask 'Data da nomeação', :with => '20/03/2012'
+      fill_mask 'Data da expiração', :with => '22/03/2012'
+      fill_mask 'Data da exoneração', :with => '25/03/2012'
       fill_in 'Descrição e finalidade da comissão', :with => 'descrição'
     end
 
@@ -104,9 +104,9 @@ feature "LicitationCommissions" do
       page.should have_disabled_field 'Data da publicação do ato'
       page.should have_field 'Data da publicação do ato', :with => '02/01/2013'
 
-      fill_in 'Data da nomeação', :with => '20/03/2013'
-      fill_in 'Data da expiração', :with => '22/03/2013'
-      fill_in 'Data da exoneração', :with => '25/03/2013'
+      fill_mask 'Data da nomeação', :with => '20/03/2013'
+      fill_mask 'Data da expiração', :with => '22/03/2013'
+      fill_mask 'Data da exoneração', :with => '25/03/2013'
       fill_in 'Descrição e finalidade da comissão', :with => 'nova descrição'
     end
 
@@ -329,9 +329,9 @@ feature "LicitationCommissions" do
       page.should have_disabled_field 'Data da publicação do ato'
       page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
 
-      fill_in 'Data da nomeação', :with => '20/03/2012'
-      fill_in 'Data da expiração', :with => '22/03/2012'
-      fill_in 'Data da exoneração', :with => '25/03/2012'
+      fill_mask 'Data da nomeação', :with => '20/03/2012'
+      fill_mask 'Data da expiração', :with => '22/03/2012'
+      fill_mask 'Data da exoneração', :with => '25/03/2012'
       fill_in 'Descrição e finalidade da comissão', :with => 'descrição'
     end
 
@@ -377,9 +377,9 @@ feature "LicitationCommissions" do
       page.should have_disabled_field 'Data da publicação do ato'
       page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
 
-      fill_in 'Data da nomeação', :with => '20/03/2012'
-      fill_in 'Data da expiração', :with => '22/03/2012'
-      fill_in 'Data da exoneração', :with => '25/03/2012'
+      fill_mask 'Data da nomeação', :with => '20/03/2012'
+      fill_mask 'Data da expiração', :with => '22/03/2012'
+      fill_mask 'Data da exoneração', :with => '25/03/2012'
       fill_in 'Descrição e finalidade da comissão', :with => 'descrição'
     end
 

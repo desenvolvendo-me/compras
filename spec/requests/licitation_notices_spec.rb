@@ -23,7 +23,7 @@ feature "LicitationNotices" do
     page.should have_field 'Data do processo', :with => '19/03/2012'
     page.should have_field 'Objeto da licitação', :with => 'Descricao'
 
-    fill_in 'Data do aviso', :with => '05/04/2012'
+    fill_mask 'Data do aviso', :with => '05/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo'
 
     click_button 'Salvar'
@@ -55,7 +55,7 @@ feature "LicitationNotices" do
     click_link licitation_notice.to_s
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
-    fill_in 'Data do aviso', :with => '12/04/2012'
+    fill_mask 'Data do aviso', :with => '12/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo, continuação.'
 
     click_button 'Salvar'
@@ -85,7 +85,7 @@ feature "LicitationNotices" do
     click_link 'Criar Aviso de Licitação'
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
-    fill_in 'Data do aviso', :with => '07/04/2012'
+    fill_mask 'Data do aviso', :with => '07/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo 3'
 
     click_button 'Salvar'
@@ -116,7 +116,7 @@ feature "LicitationNotices" do
     click_link 'Criar Aviso de Licitação'
 
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-    fill_in 'Data do aviso', :with => '06/04/2012'
+    fill_mask 'Data do aviso', :with => '06/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo 2'
 
     click_button 'Salvar'

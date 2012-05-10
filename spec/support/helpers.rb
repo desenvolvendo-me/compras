@@ -21,7 +21,7 @@ module Helpers
     raise "Must pass a hash containing 'with'" if not options.is_a?(Hash) or not options.has_key?(:with)
 
     field = find(:xpath, XPath::HTML.fillable_field(locator), :message => msg)
-    page.execute_script %{document.getElementById('#{field[:id]}').value = '#{options[:with]}'}
+    page.execute_script %{$('##{field[:id]}').val('#{options[:with]}').change().keyup()}
   end
 
   def clear_modal(locator)

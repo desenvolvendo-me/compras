@@ -31,8 +31,8 @@ feature "PurchaseSolicitations" do
       page.should have_disabled_field 'Justificativa para não atendimento'
       page.should have_disabled_field 'Status de atendimento'
 
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_mask 'Ano', :with => '2012'
+      fill_mask 'Data da solicitação', :with => '01/02/2012'
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
@@ -119,8 +119,8 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dados gerais' do
-      fill_in 'Ano', :with => '2013'
-      fill_in 'Data da solicitação', :with => '01/02/2013'
+      fill_mask 'Ano', :with => '2013'
+      fill_mask 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
@@ -223,8 +223,8 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dados gerais' do
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_mask 'Ano', :with => '2012'
+      fill_mask 'Data da solicitação', :with => '01/02/2012'
       fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
