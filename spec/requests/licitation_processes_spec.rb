@@ -204,7 +204,7 @@ feature "LicitationProcesses" do
       fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       select 'Estimativo', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'novo detalhamento'
-      select 'Menor preço por lote', :from => 'Tipo da apuração'
+      select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10 dias'
       fill_in 'Índice de reajuste', :with => 'IPC'
@@ -266,7 +266,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Processo administrativo', :with => '1/2013'
       page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
       page.should have_field 'Detalhamento do objeto', :with => 'novo detalhamento'
-      page.should have_select 'Tipo da apuração', :selected => 'Menor preço por lote'
+      page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
       page.should have_field 'Fonte de recurso', :with => 'Construção'
       page.should have_field 'Validade da proposta', :with => '10 dias'
       page.should have_field 'Índice de reajuste', :with => 'IPC'
@@ -506,6 +506,7 @@ feature "LicitationProcesses" do
 
     within_tab 'Dados gerais' do
       fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
+      select 'Menor preço global', :from => 'Tipo da apuração'
     end
 
     within_tab 'Dotações' do

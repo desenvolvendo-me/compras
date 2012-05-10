@@ -73,7 +73,7 @@
 
       $('#licitation_process_administrative_process_budget_unit').val(record.data("budget-unit"));
       $('#licitation_process_administrative_process_modality_humanize').val(record.data("modality-humanize"));
-      $('#licitation_process_administrative_process_object_type_humanize').val(record.data("object-type"));
+      $('#licitation_process_administrative_process_object_type_humanize').val(record.data("object-type-humanize"));
       $('#licitation_process_administrative_process_judgment_form').val(record.data("judgment-form"));
       $('#licitation_process_administrative_process_description').val(record.data("description"));
       $('#licitation_process_administrative_process_responsible').val(record.data("responsible"));
@@ -82,6 +82,7 @@
       $("#licitation_process_administrative_process_attributes_id").val(record.data("id"));
 
       createAdministrativeProcessBudgetAllocations(record.data("budget-allocations"));
+      filterTypesOfCalculation(record.data("judgment-form-kind"), record.data("object-type"), record.data("modality"));
     } else {
       $('#licitation_process_administrative_process_budget_unit').val('');
       $('#licitation_process_administrative_process_modality_humanize').val('');
@@ -164,4 +165,43 @@
     $('form.licitation_process .remove-licitation-process-bidder').hide();
     $('form.licitation_process :input').attr('disabled', true);
   <% end %>
+
+  function filterTypesOfCalculation (judgmentKind, objectType, modality) {
+    var typesOfCalculationGroupsForJudgmentFormKind = <%= LicitationProcessTypesOfCalculationByJudgmentFormKind.new.types_of_calculation_groups.to_json.html_safe %>,
+        typesOfCalculationGroupsForObjectType   = <%= LicitationProcessTypesOfCalculationByObjectType.new.types_of_calculation_groups.to_json.html_safe %>,
+        typesOfCalculationGroupsForModality     = <%= LicitationProcessTypesOfCalculationByModality.new.types_of_calculation_groups.to_json.html_safe %>,
+        typesOfCalculationOptions               = _(<%= LicitationProcessTypeOfCalculation.to_a.to_json.html_safe %>),
+        options                                 = typesOfCalculationGroupsForJudgmentFormKind[judgmentKind] || [],
+        optionsForObjectType                    = _(typesOfCalculationGroupsForObjectType[objectType] || []),
+        optionsForModality                      = _(typesOfCalculationGroupsForModality[modality] || []);
+
+
+    if (!optionsForObjectType.include(options[1])) {
+      delete options[1];
+    }
+
+    if (!optionsForModality.include(options[2])) {
+      delete options[2];
+    }
+
+    if (_.size(options) == 0) {
+      $("#licitation_process_type_of_calculation").empty().closest("div.input").hide();
+      return;
+    }
+
+    $("#licitation_process_type_of_calculation").html("<option></option>").closest("div.input").show();;
+
+    typesOfCalculationOptions.each(function (option) {
+      if (_(options).include(option[1])) {
+        $("#licitation_process_type_of_calculation").append(function () {
+          return $("<option>").text(option[0]).val(option[1]);
+        });
+      }
+    });
+  }
+
+  filterTypesOfCalculation('<%= f.object.administrative_process_judgment_form_kind %>',
+                           '<%= f.object.administrative_process_object_type %>',
+                           '<%= f.object.administrative_process_modality %>');
+  $("#licitation_process_type_of_calculation").val("<%= f.object.type_of_calculation %>");
 </script>

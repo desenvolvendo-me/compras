@@ -38,7 +38,8 @@ class LicitationProcess < ActiveRecord::Base
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
   delegate :budget_unit, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
-           :item, :licitation_process, :date, :to => :administrative_process, :allow_nil => true, :prefix => true
+           :item, :licitation_process, :date, :object_type, :judgment_form_kind,
+           :to => :administrative_process, :allow_nil => true, :prefix => true
 
   delegate :administrative_process_budget_allocations, :to => :administrative_process, :allow_nil => true
 
@@ -48,6 +49,9 @@ class LicitationProcess < ActiveRecord::Base
   validates :type_of_calculation, :presence => true
   validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
   validate :administrative_process_must_not_belong_to_another_licitation_process
+  validate :validate_type_of_calculation_by_judgment_form_kind
+  validate :validate_type_of_calculation_by_object_type
+  validate :validate_type_of_calculation_by_modality
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -147,6 +151,30 @@ class LicitationProcess < ActiveRecord::Base
     return unless can_have_bidders?
 
     licitation_process_bidders.each(&:assign_document_types)
+  end
+
+  def validate_type_of_calculation_by_judgment_form_kind(verificator = LicitationProcessTypesOfCalculationByJudgmentFormKind.new)
+    return if type_of_calculation.nil? || administrative_process_judgment_form_kind.nil?
+
+    unless verificator.correct_type_of_calculation?(administrative_process_judgment_form_kind, type_of_calculation)
+      errors.add(:type_of_calculation, :not_permited_for_judgment_form_kind)
+    end
+  end
+
+  def validate_type_of_calculation_by_object_type(verificator = LicitationProcessTypesOfCalculationByObjectType.new)
+    return if type_of_calculation.nil? || administrative_process_object_type.nil?
+
+    unless verificator.correct_type_of_calculation?(administrative_process_object_type, type_of_calculation)
+      errors.add(:type_of_calculation, :not_permited_for_object_type)
+    end
+  end
+
+  def validate_type_of_calculation_by_modality(verificator = LicitationProcessTypesOfCalculationByModality.new)
+    return if type_of_calculation.nil? || administrative_process_modality.nil?
+
+    unless verificator.correct_type_of_calculation?(administrative_process_modality, type_of_calculation)
+      errors.add(:type_of_calculation, :not_permited_for_modality)
+    end
   end
 
   private

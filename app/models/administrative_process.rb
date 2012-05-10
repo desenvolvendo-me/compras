@@ -19,6 +19,8 @@ class AdministrativeProcess < ActiveRecord::Base
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
 
+  delegate :kind, :to => :judgment_form, :allow_nil => true, :prefix => true
+
   validates :year, :date, :budget_unit, :presence => true
   validates :modality, :object_type, :presence => true
   validates :responsible, :status, :presence => true

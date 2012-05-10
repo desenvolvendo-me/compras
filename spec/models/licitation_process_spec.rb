@@ -16,6 +16,9 @@ require 'app/models/judgment_commission_advice'
 require 'app/models/provider'
 require 'app/models/licitation_notice'
 require 'app/models/licitation_process_lot'
+require 'app/business/licitation_process_types_of_calculation_by_judgment_form_kind'
+require 'app/business/licitation_process_types_of_calculation_by_object_type'
+require 'app/business/licitation_process_types_of_calculation_by_modality'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -228,5 +231,56 @@ describe LicitationProcess do
 
       subject.envelope_opening?.should be_true
     end
+  end
+
+  it "should validate type_of_calculation by judgment_form_kind" do
+    subject.stub(:administrative_process_judgment_form_kind).and_return('any')
+    subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
+
+    LicitationProcessTypesOfCalculationByJudgmentFormKind.any_instance.stub(:correct_type_of_calculation?).and_return(false)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de julgamento'
+
+    LicitationProcessTypesOfCalculationByJudgmentFormKind.any_instance.stub(:correct_type_of_calculation?).and_return(true)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de julgamento'
+  end
+
+  it "should validate type_of_calculation by object type" do
+    subject.stub(:administrative_process_object_type).and_return('any')
+    subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
+
+    LicitationProcessTypesOfCalculationByObjectType.any_instance.stub(:correct_type_of_calculation?).and_return(false)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de objeto'
+
+    LicitationProcessTypesOfCalculationByObjectType.any_instance.stub(:correct_type_of_calculation?).and_return(true)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de objeto'
+  end
+
+  it "should validate type_of_calculation by modality" do
+    subject.stub(:administrative_process_modality).and_return('any')
+    subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
+
+    LicitationProcessTypesOfCalculationByModality.any_instance.stub(:correct_type_of_calculation?).and_return(false)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade'
+
+    LicitationProcessTypesOfCalculationByModality.any_instance.stub(:correct_type_of_calculation?).and_return(true)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
   end
 end
