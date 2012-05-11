@@ -45,7 +45,7 @@ feature "PrecatoryTypes" do
 
     fill_in 'Descrição', :with => 'description'
     select 'Inativo',  :from => 'Status'
-    fill_in 'Data de desativação', :with => '08/05/2012'
+    fill_mask 'Data de desativação', :with => '08/05/2012'
 
     click_button 'Salvar'
 
