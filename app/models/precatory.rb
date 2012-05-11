@@ -12,6 +12,6 @@ class Precatory < ActiveRecord::Base
   filterize
 
   def to_s
-    id.to_s
+    number
   end
 end

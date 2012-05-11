@@ -16,8 +16,8 @@ describe Precatory do
   it { should belong_to :precatory_type }
 
   it "should return id when call to_s method" do
-    subject.id = 1
+    subject.number = '1234/2012'
 
-    subject.to_s.should eq "1"
+    subject.to_s.should eq "1234/2012"
   end
 end

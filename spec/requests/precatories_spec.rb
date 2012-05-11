@@ -76,7 +76,7 @@ feature "Precatories" do
     page.should have_notice 'Precatório editado com sucesso.'
 
     within_records do
-      click_link precatorio.to_s
+      click_link '123455'
     end
 
     page.should have_field 'Número do precatório', :with => '123455'
