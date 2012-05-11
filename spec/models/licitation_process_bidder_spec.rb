@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_bidder'
+require 'app/models/licitation_process_bidder_proposal'
 require 'app/models/licitation_process_bidder_document'
 require 'app/models/licitation_process'
 require 'app/models/provider'
@@ -69,5 +70,64 @@ describe LicitationProcessBidder do
       subject.protocol_date.should be nil
       subject.receipt_date.should be nil
     end
+
+    describe "proposal" do
+      let :proposal do
+        double :proposal
+      end
+
+      it "should proposal situation be nil on create" do
+        proposal.stub(:situation).with(SituationOfProposal::CANCELED)
+        subject.stub(:proposals => [ proposal ])
+        proposal.should_receive(:classification=)
+        proposal.should_receive(:unit_price=)
+        proposal.should_receive(:unit_price)
+        proposal.should_receive(:situation=).with(nil)
+
+        subject.run_callbacks(:save)
+      end
+
+      it "should proposal classificaton be nil on create" do
+        proposal.stub(:classification).with(9)
+        subject.stub(:proposals => [ proposal ])
+        proposal.should_receive(:situation=)
+        proposal.should_receive(:unit_price=)
+        proposal.should_receive(:unit_price)
+        proposal.should_receive(:classification=).with(nil)
+
+        subject.run_callbacks(:save)
+      end
+
+      it "should proposal unit_price be 0 if was nil on create" do
+        proposal.stub(:unit_price)
+        subject.stub(:proposals => [ proposal ])
+        proposal.should_receive(:situation=)
+        proposal.should_receive(:classification=)
+        proposal.should_receive(:unit_price=).with(0)
+
+        subject.run_callbacks(:save)
+      end
+
+      it "should not change proposal unit_price if has value on create" do
+        proposal.stub(:unit_price => 99)
+        subject.stub(:proposals => [ proposal ])
+        proposal.should_receive(:situation=)
+        proposal.should_receive(:classification=)
+        proposal.should_not_receive(:unit_price=).with(0)
+
+        subject.run_callbacks(:save)
+      end
+    end
+  end
+
+  it "should can update proposals when all licitation process lots are filled" do
+    subject.stub_chain(:licitation_process, :filled_lots?).and_return(true)
+    subject.should be_can_update_proposals
+  end
+
+  it "should can update proposals when has not any lots" do
+    subject.stub_chain(:licitation_process, :filled_lots?).and_return(false)
+    subject.stub(:licitation_process_lots).and_return( Array.new )
+    subject.should be_can_update_proposals
   end
 end

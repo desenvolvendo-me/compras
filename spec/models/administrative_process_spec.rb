@@ -24,6 +24,7 @@ describe AdministrativeProcess do
 
   it { should have_one(:licitation_process).dependent(:restrict) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
+  it { should have_many(:items).through(:administrative_process_budget_allocations) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }

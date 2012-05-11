@@ -40,8 +40,8 @@
 
 <div class="tabs">
   <ul>
-    <li><a href="#documents">Documentos</a></li>
-    <li><a href="#proposal">Propostas</a></li>
+    <li><%= link_to "Documentos", "#documents" %></li>
+    <li><%= link_to "Propostas", "#proposal" %></li>
   </ul>
 
   <div id="documents">
@@ -49,7 +49,7 @@
   </div>
 
   <div id="proposal">
-    <%= render 'proposal', :f => f %>
+    <%= render f.object.decorator.show_proposal_tabs, :f => f  %>
   </div>
 </div>
 
@@ -85,6 +85,31 @@
     removeValuesFromDisabledFields();
     toggleRequiredFields();
   });
+
+  function calculateProposalTotalValue(field) {
+    var total = 0,
+        value,
+        container = field.closest('.container');
+
+    container.find('.item-total-price').each(function() {
+      value = $(this).val();
+
+      if (value != '') {
+        total += parsePtBrFloat(value);
+      }
+    });
+
+    container.find('.proposal-total-value').val(numberWithDelimiter(total, '.', ','));
+  };
+
+  $('form.licitation_process_bidder').delegate('.item-unit-price', 'keyup', function() {
+     var itemDiv = $(this).closest('div.item'),
+         unitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
+         quantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+         totalPrice = numberWithDelimiter(unitPrice * quantity, '.', ',');
+     itemDiv.find('.item-total-price').val(totalPrice);
+     calculateProposalTotalValue($(this));
+   });
 
   removeDuplicateRequiredLabels();
   toggleEnabledDisabledFields();

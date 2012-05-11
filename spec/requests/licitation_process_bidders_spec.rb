@@ -63,6 +63,24 @@ feature "LicitationProcessBidders" do
       fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
+    within_tab 'Propostas' do
+      within_tab 'Itens' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        fill_in 'Marca', :with => 'Apple'
+        fill_in 'Preço unitário', :with => '11,22'
+
+        page.should have_field 'Preço total', :with => '22,44'
+        page.should have_field 'Preço total dos itens', :with => '22,44'
+      end
+    end
+
     click_button 'Salvar'
 
     page.should have_content 'Licitante criado com sucesso.'
@@ -84,6 +102,28 @@ feature "LicitationProcessBidders" do
       page.should have_field 'Número/certidão', :with => '222222'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+    end
+
+    within_tab 'Propostas' do
+      within_tab 'Itens' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        page.should have_field 'Preço total dos itens', :with => '22,44'
+        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+        page.should have_field 'Situação', :with => ''
+        page.should have_field 'Classificação', :with => ''
+        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Quantidade', :with => '2'
+        page.should have_field 'Preço unitário', :with => '11,22'
+        page.should have_field 'Preço total', :with => '22,44'
+        page.should have_field 'Marca', :with => 'Apple'
+      end
     end
   end
 
@@ -121,6 +161,24 @@ feature "LicitationProcessBidders" do
       fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
     end
 
+    within_tab 'Propostas' do
+      within_tab 'Itens' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        fill_in 'Marca', :with => 'LG'
+        fill_in 'Preço unitário', :with => '10,01'
+
+        page.should have_field 'Preço unitário', :with => '10,01'
+        page.should have_field 'Preço total', :with => '20,02'
+      end
+    end
+
     click_button 'Salvar'
 
     page.should have_content 'Licitante editado com sucesso.'
@@ -143,6 +201,28 @@ feature "LicitationProcessBidders" do
       page.should have_field 'Número/certidão', :with => '333333'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
       page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+    end
+
+    within_tab 'Propostas' do
+      within_tab 'Itens' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        page.should have_field 'Preço total dos itens', :with => '20,02'
+        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+        page.should have_field 'Situação', :with => ''
+        page.should have_field 'Classificação', :with => ''
+        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Quantidade', :with => '2'
+        page.should have_field 'Preço unitário', :with => '10,01'
+        page.should have_field 'Preço total', :with => '20,02'
+        page.should have_field 'Marca', :with => 'LG'
+      end
     end
   end
 
@@ -245,5 +325,219 @@ feature "LicitationProcessBidders" do
     click_button 'Salvar'
 
     page.should have_content 'já está em uso'
+  end
+
+  scenario 'creating some lots and showing one tab for lot on proposals' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    bidder = licitation_process.licitation_process_bidders.first
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Lotes de itens'
+
+    click_link 'Criar Lote de itens'
+
+    fill_in 'Observações', :with => 'lote numero 1'
+    fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
+
+    click_button 'Salvar'
+
+    page.should have_content 'Lote de itens criado com sucesso.'
+
+    within_records do
+      click_link licitation_process.licitation_process_lots.last.to_s
+    end
+
+    page.should have_field 'Observações', :with => 'lote numero 1'
+    page.should have_content '01.01.00001 - Antivirus'
+    page.should have_content '2'
+    page.should have_content '10,00'
+
+    click_link 'Cancelar'
+
+    click_link 'Criar Lote de itens'
+
+    fill_in 'Observações', :with => 'lote numero 2'
+    fill_modal 'Itens', :with => '02.02.00002 - Arame comum', :field => 'Material'
+
+    click_button 'Salvar'
+
+    page.should have_content 'Lote de itens criado com sucesso.'
+
+    within_records do
+      click_link licitation_process.licitation_process_lots.last.to_s
+    end
+
+    page.should have_field 'Observações', :with => 'lote numero 2'
+    page.should have_content '02.02.00002 - Arame comum'
+    page.should have_content '1'
+    page.should have_content '10,00'
+
+    click_link 'Cancelar'
+
+    page.should have_content 'lote numero 1'
+    page.should have_content 'lote numero 2'
+
+    click_link 'Voltar ao processo licitatório'
+
+    click_link 'Licitantes'
+
+    click_link bidder.to_s
+
+    page.should have_field 'Processo licitatório', :with => '1/2013'
+    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
+    page.should have_field 'Processo administrativo', :with => '1/2013'
+    page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+    page.should have_field 'Protocolo', :with => '123456'
+
+    within_tab 'Propostas' do
+      page.should have_content 'lote numero 1'
+      page.should have_content 'lote numero 2'
+
+      within_tab 'lote numero 1' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Quantidade', :with => '2'
+
+        fill_in 'Marca', :with => 'mcafee'
+        fill_in 'Preço unitário', :with => '99,99'
+
+        page.should have_field 'Preço total', :with => '199,98'
+        page.should have_field 'Preço total dos itens', :with => '199,98'
+      end
+
+      within_tab 'lote numero 2' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
+        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Quantidade', :with => '1'
+
+        fill_in 'Marca', :with => 'Arame Forte'
+        fill_in 'Preço unitário', :with => '9,99'
+
+        page.should have_field 'Preço total', :with => '9,99'
+        page.should have_field 'Preço total dos itens', :with => '9,99'
+      end
+    end
+
+    click_button 'Salvar'
+
+    click_link bidder.to_s
+
+    within_tab 'Propostas' do
+      within_tab 'lote numero 1' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        page.should have_field 'Preço total dos itens', :with => '199,98'
+        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+        page.should have_field 'Situação', :with => ''
+        page.should have_field 'Classificação', :with => ''
+        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Quantidade', :with => '2'
+        page.should have_field 'Preço unitário', :with => '99,99'
+        page.should have_field 'Preço total', :with => '199,98'
+        page.should have_field 'Marca', :with => 'mcafee'
+      end
+
+      within_tab 'lote numero 2' do
+        page.should have_disabled_field 'Preço total dos itens'
+        page.should have_disabled_field 'Material'
+        page.should have_disabled_field 'Situação'
+        page.should have_disabled_field 'Classificação'
+        page.should have_disabled_field 'Unidade'
+        page.should have_disabled_field 'Quantidade'
+        page.should have_disabled_field 'Preço total'
+
+        page.should have_field 'Preço total dos itens', :with => '9,99'
+        page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
+        page.should have_field 'Situação', :with => ''
+        page.should have_field 'Classificação', :with => ''
+        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Quantidade', :with => '1'
+        page.should have_field 'Preço unitário', :with => '9,99'
+        page.should have_field 'Preço total', :with => '9,99'
+        page.should have_field 'Marca', :with => 'Arame Forte'
+      end
+    end
+  end
+
+  scenario 'should show message that can not update proposals when any item does not have lot and licitation process has lot' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    bidder = licitation_process.licitation_process_bidders.first
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Lotes de itens'
+
+    click_link 'Criar Lote de itens'
+
+    fill_in 'Observações', :with => 'lote numero 1'
+    fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
+
+    click_button 'Salvar'
+
+    page.should have_content 'Lote de itens criado com sucesso.'
+
+    within_records do
+      click_link licitation_process.licitation_process_lots.last.to_s
+    end
+
+    page.should have_field 'Observações', :with => 'lote numero 1'
+    page.should have_content '01.01.00001 - Antivirus'
+    page.should have_content '2'
+    page.should have_content '10,00'
+
+    click_link 'Cancelar'
+
+    page.should have_content 'lote numero 1'
+
+    click_link 'Voltar ao processo licitatório'
+
+    click_link 'Licitantes'
+
+    click_link bidder.to_s
+
+    page.should have_field 'Processo licitatório', :with => '1/2013'
+    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
+    page.should have_field 'Processo administrativo', :with => '1/2013'
+    page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+    page.should have_field 'Protocolo', :with => '123456'
+
+    within_tab 'Propostas' do
+      page.should have_content 'Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir.'
+    end
   end
 end

@@ -16,6 +16,7 @@ class AdministrativeProcess < ActiveRecord::Base
 
   has_one :licitation_process, :dependent => :restrict
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :items, :through => :administrative_process_budget_allocations
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
 

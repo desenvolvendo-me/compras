@@ -283,4 +283,10 @@ describe LicitationProcess do
 
     subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
   end
+
+  it "should have filled lots" do
+    subject.stub(:items).and_return(true)
+    subject.items.stub(:without_lot?).and_return(false)
+    subject.should be_filled_lots
+  end
 end

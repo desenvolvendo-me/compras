@@ -1,6 +1,6 @@
 class LicitationProcessBidder < ActiveRecord::Base
   attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date, :status
-  attr_accessible :receipt_date, :invited, :documents_attributes
+  attr_accessible :receipt_date, :invited, :documents_attributes, :proposals_attributes
 
   has_enumeration_for :status, :with => LicitationProcessBidderStatus
 
@@ -9,12 +9,18 @@ class LicitationProcessBidder < ActiveRecord::Base
 
   has_many :documents, :class_name => :LicitationProcessBidderDocument, :dependent => :destroy, :order => :id
   has_many :document_types, :through => :documents
+  has_many :proposals, :class_name => :LicitationProcessBidderProposal, :dependent => :destroy, :order => :id
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :to => :licitation_process
   delegate :invited?, :to => :administrative_process, :prefix => true
+  delegate :licitation_process_lots, :to => :licitation_process
+  delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
+  delegate :material, :to => :administrative_process_budget_allocation_items
+  delegate :items, :to => :licitation_process, :allow_nil => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
+  accepts_nested_attributes_for :proposals, :allow_destroy => true
 
   validates :provider, :presence => true
   validates :protocol, :protocol_date, :receipt_date, :presence => true, :if => :invited
@@ -25,10 +31,14 @@ class LicitationProcessBidder < ActiveRecord::Base
     allowing_blank.validates :receipt_date, :timeliness => { :on_or_after => :protocol_date, :type => :date, :on => :create, :if => :invited }
   end
 
-  before_save :clear_data_unless_invited
+  before_save :clear_data_unless_invited, :set_default_values
 
   orderize :id
   filterize
+
+  def proposals_by_lot(lot)
+    proposals.select { |proposal| proposal.licitation_process_lot == lot }
+  end
 
   def filled_documents?
     return false if documents.empty?
@@ -55,6 +65,24 @@ class LicitationProcessBidder < ActiveRecord::Base
     end
   end
 
+  def can_update_proposals?
+    licitation_process.filled_lots? || licitation_process_lots.empty?
+  end
+
+  def proposal_total_value
+   self.class.joins { proposals.administrative_process_budget_allocation_item }.
+     where { |bidder| bidder.id.eq id }.
+     sum('administrative_process_budget_allocation_items.quantity * licitation_process_bidder_proposals.unit_price')
+  end
+
+  def proposal_total_value_by_lot(lot_id = nil)
+    return 0 unless lot_id
+
+    self.class.joins { proposals.administrative_process_budget_allocation_item.licitation_process_lot }.
+      where { |bidder| (bidder.id.eq id) & (bidder.proposals.administrative_process_budget_allocation_item.licitation_process_lot.id.eq lot_id) }.
+      sum('administrative_process_budget_allocation_items.quantity * licitation_process_bidder_proposals.unit_price')
+  end
+
   protected
 
   def clear_data_unless_invited
@@ -62,6 +90,14 @@ class LicitationProcessBidder < ActiveRecord::Base
       self.protocol = nil
       self.protocol_date = nil
       self.receipt_date = nil
+    end
+  end
+
+  def set_default_values
+    proposals.each do |proposal|
+      proposal.situation = nil
+      proposal.classification = nil
+      proposal.unit_price = 0 unless proposal.unit_price
     end
   end
 end

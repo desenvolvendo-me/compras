@@ -20,7 +20,6 @@ class LicitationProcess < ActiveRecord::Base
 
   has_and_belongs_to_many :document_types
 
-  has_many :administrative_process_budget_allocations, :through => :administrative_process
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :licitation_process_bidders, :dependent => :destroy, :order => :id, :autosave => true
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
@@ -41,7 +40,7 @@ class LicitationProcess < ActiveRecord::Base
            :item, :licitation_process, :date, :object_type, :judgment_form_kind,
            :to => :administrative_process, :allow_nil => true, :prefix => true
 
-  delegate :administrative_process_budget_allocations, :to => :administrative_process, :allow_nil => true
+  delegate :administrative_process_budget_allocations, :items, :to => :administrative_process, :allow_nil => true
 
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
   validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
@@ -95,8 +94,13 @@ class LicitationProcess < ActiveRecord::Base
     envelope_opening_date == Date.current
   end
 
+  # TODO change this to updatable?
   def can_update?
     new_record? || licitation_process_publications.empty? || any_publication_that_permit_update?
+  end
+
+  def filled_lots?
+    items && !items.without_lot?
   end
 
   protected

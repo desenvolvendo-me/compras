@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_bidder_proposal:
+        one: "Proposta"
+        other: "Propostas"
+
+    attributes:
+      licitation_process_bidder_proposal:
+        licitation_process_bidder: "Licitante"
+        administrative_process_budget_allocation_item": "Item"
+        unit_price: "Preço unitário"
+        brand: "Marca"
+        situation: "Situação"
+        classification: "Classificação"
+        total_price: "Preço total"
+        reference_unit: "Unidade"
+        quantity: "Quantidade"
