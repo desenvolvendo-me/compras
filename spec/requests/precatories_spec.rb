@@ -31,10 +31,8 @@ feature "Precatories" do
 
     page.should have_notice 'Precatório criado com sucesso.'
 
-    last_precatory = Precatory.last
-
     within_records do
-      click_link last_precatory.to_s
+      click_link '123456'
     end
 
     page.should have_field 'Número do precatório', :with => '123456'
@@ -48,7 +46,7 @@ feature "Precatories" do
   end
 
   scenario 'update an existent precatory' do
-    precatorio = Precatory.make!(:precatorio)
+    Precatory.make!(:precatorio)
     Provider.make!(:sobrinho_sa)
     PrecatoryType.make!(:ordinario_demais_casos)
 
@@ -57,7 +55,7 @@ feature "Precatories" do
     click_link 'Precatórios'
 
     within_records do
-      click_link precatorio.to_s
+      click_link '1234/2012'
     end
 
     within_tab 'Principal' do
@@ -90,14 +88,14 @@ feature "Precatories" do
   end
 
   scenario 'destroy an existent precatory' do
-    precatory = Precatory.make!(:precatorio)
+    Precatory.make!(:precatorio)
 
     click_link 'Contabilidade'
 
     click_link 'Precatórios'
 
     within_records do
-      click_link precatory.to_s
+      click_link '1234/2012'
     end
 
     click_link 'Apagar', :confirm => true
