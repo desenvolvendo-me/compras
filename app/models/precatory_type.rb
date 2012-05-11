@@ -1,7 +1,7 @@
 class PrecatoryType < ActiveRecord::Base
   attr_accessible :description, :status, :deactivation_date
 
-  has_enumeration_for :status, :create_helpers => true
+  has_enumeration_for :status, :with => PrecatoryTypeStatus, :create_helpers => true
 
   has_many :precatories, :dependent => :restrict
 
