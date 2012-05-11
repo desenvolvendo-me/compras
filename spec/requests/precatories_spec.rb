@@ -19,7 +19,7 @@ feature "Precatories" do
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123456'
       fill_modal 'Beneficiário', :field => 'CRC', :with => '456789'
-      fill_in 'Número da Ação', :with => '001.111.2222/2012'
+      fill_in 'Número da ação', :with => '001.111.2222/2012'
       fill_mask 'Data do precatório', :with => '10/05/2012'
       fill_mask 'Data da decisão judicial', :with => '05/01/2012'
       fill_mask 'Data da apresentação', :with => '10/01/2012'
@@ -39,7 +39,7 @@ feature "Precatories" do
 
     page.should have_field 'Número do precatório', :with => '123456'
     page.should have_field 'Beneficiário', :with => 'Wenderson Malheiros'
-    page.should have_field 'Número da Ação', :with => '001.111.2222/2012'
+    page.should have_field 'Número da ação', :with => '001.111.2222/2012'
     page.should have_field 'Data do precatório', :with => '10/05/2012'
     page.should have_field 'Data da decisão judicial', :with => '05/01/2012'
     page.should have_field 'Data da apresentação', :with => '10/01/2012'
@@ -63,7 +63,7 @@ feature "Precatories" do
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123455'
       fill_modal 'Beneficiário', :field => 'CRC', :with => '123456'
-      fill_in 'Número da Ação', :with => '002.111.2222/2012'
+      fill_in 'Número da ação', :with => '002.111.2222/2012'
       fill_mask 'Data do precatório', :with => '09/05/2012'
       fill_mask 'Data da decisão judicial', :with => '06/01/2012'
       fill_mask 'Data da apresentação', :with => '11/01/2012'
@@ -81,7 +81,7 @@ feature "Precatories" do
 
     page.should have_field 'Número do precatório', :with => '123455'
     page.should have_field 'Beneficiário', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Número da Ação', :with => '002.111.2222/2012'
+    page.should have_field 'Número da ação', :with => '002.111.2222/2012'
     page.should have_field 'Data do precatório', :with => '09/05/2012'
     page.should have_field 'Data da decisão judicial', :with => '06/01/2012'
     page.should have_field 'Data da apresentação', :with => '11/01/2012'

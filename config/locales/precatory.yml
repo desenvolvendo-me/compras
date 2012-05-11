@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       precatory:
         number: "Número do precatório"
-        lawsuit_number: "Número da Ação"
+        lawsuit_number: "Número da ação"
         provider: "Beneficiário"
         date: "Data do precatório"
         judgment_date: "Data da decisão judicial"
