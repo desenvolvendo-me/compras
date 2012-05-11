@@ -88,13 +88,13 @@ describe Provider do
     partner1.should_receive(:destroy)
     partner2.should_receive(:destroy)
 
-    subject.save
+    subject.run_callbacks(:save)
 
     subject.stub(:company? => true)
 
     partner1.should_receive(:destroy).never
     partner2.should_receive(:destroy).never
 
-    subject.save
+    subject.run_callbacks(:save)
   end
 end
