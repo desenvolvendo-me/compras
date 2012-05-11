@@ -52,7 +52,7 @@ feature "PrecatoryTypes" do
     page.should have_notice 'Tipos de Precatório editado com sucesso.'
 
     within_records do
-      click_link precatory_type.to_s
+      click_link 'description'
     end
 
     page.should have_field 'Descrição', :with => 'description'

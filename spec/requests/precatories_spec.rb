@@ -8,7 +8,7 @@ feature "Precatories" do
 
   scenario 'create a new precatory' do
     Provider.make!(:wenderson_sa)
-    precatory_type = PrecatoryType.make!(:tipo_de_precatorio_ativo)
+    PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
     click_link 'Contabilidade'
 
@@ -43,14 +43,14 @@ feature "Precatories" do
     page.should have_field 'Data do precatório', :with => '10/05/2012'
     page.should have_field 'Data da decisão judicial', :with => '05/01/2012'
     page.should have_field 'Data da apresentação', :with => '10/01/2012'
-    page.should have_field 'Tipo', :with => "#{precatory_type}"
+    page.should have_field 'Tipo', :with => 'Precatórios Alimentares'
     page.should have_field 'Histórico', :with => 'Histórico'
   end
 
   scenario 'update an existent precatory' do
     precatorio = Precatory.make!(:precatorio)
     Provider.make!(:sobrinho_sa)
-    precatory_type = PrecatoryType.make!(:ordinario_demais_casos)
+    PrecatoryType.make!(:ordinario_demais_casos)
 
     click_link 'Contabilidade'
 
@@ -85,7 +85,7 @@ feature "Precatories" do
     page.should have_field 'Data do precatório', :with => '09/05/2012'
     page.should have_field 'Data da decisão judicial', :with => '06/01/2012'
     page.should have_field 'Data da apresentação', :with => '11/01/2012'
-    page.should have_field 'Tipo', :with => "#{precatory_type}"
+    page.should have_field 'Tipo', :with => 'Ordinário - Demais Casos'
     page.should have_field 'Histórico', :with => 'Histórico atualizado'
   end
 
@@ -110,7 +110,7 @@ feature "Precatories" do
     page.should_not have_content '01/01/2012'
     page.should_not have_content '30/06/2011'
     page.should_not have_content '31/12/2011'
-    page.should_not have_content 'precatory_type'
+    page.should_not have_content 'Precatórios Alimentares'
     page.should_not have_content "Precatório Expedido conforme decisão do STJ"
   end
 end

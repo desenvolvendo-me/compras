@@ -17,9 +17,9 @@ describe PrecatoryType do
   end
 
   it "should return id as to_s" do
-    subject.id = 1
+    subject.description = 'Alimentares'
 
-    subject.to_s.should eq '1'
+    subject.to_s.should eq 'Alimentares'
   end
 
   it "should not validate presence of deactivation_date when status is active" do
