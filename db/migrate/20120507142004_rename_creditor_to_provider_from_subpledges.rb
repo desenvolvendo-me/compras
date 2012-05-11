@@ -4,7 +4,7 @@ class RenameCreditorToProviderFromSubpledges < ActiveRecord::Migration
 
     add_column :subpledges, :provider_id, :integer
 
-    add_index :subpledges, :index_subpledges_on_provider_id
+    add_index :subpledges, :provider_id
 
     add_foreign_key :subpledges, :providers
   end
