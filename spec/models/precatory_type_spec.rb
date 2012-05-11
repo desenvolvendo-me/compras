@@ -33,7 +33,7 @@ describe PrecatoryType do
     subject.description = 'description'
     subject.deactivation_date = Date.current
 
-    subject.save!
+    subject.run_callbacks(:save)
     subject.deactivation_date.should be_nil
   end
 end
