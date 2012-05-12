@@ -43,7 +43,7 @@ feature "PrecatoryTypes" do
       click_link precatory_type.to_s
     end
 
-    fill_in 'Descrição', :with => 'description'
+    fill_in 'Descrição', :with => 'De pequeno valor'
     select 'Inativo',  :from => 'Status'
     fill_mask 'Data de desativação', :with => '08/05/2012'
 
@@ -52,10 +52,10 @@ feature "PrecatoryTypes" do
     page.should have_notice 'Tipos de Precatório editado com sucesso.'
 
     within_records do
-      click_link 'description'
+      click_link 'De pequeno valor'
     end
 
-    page.should have_field 'Descrição', :with => 'description'
+    page.should have_field 'Descrição', :with => 'De pequeno valor'
     page.should have_select 'Status', :selected => 'Inativo'
     page.should have_field 'Data de desativação', :with => '08/05/2012'
   end
