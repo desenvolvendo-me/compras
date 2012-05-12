@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      precatory_parcel:
+        one: "Parcela do Precatório"
+        other: "Parcelas do Precatório"
+
+    attributes:
+      precatory_parcel:
+        expiration_date: "Data do vencimento"
+        value: "Valor"
+        situation: "Situação"
+        payment_date: "Data do pagamento"
+        amount_paid: "Valor pago"
+        observation: "Observação"

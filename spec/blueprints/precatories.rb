@@ -9,4 +9,6 @@ Precatory.blueprint(:precatorio) do
   apresentation_date { Date.new(2011, 12, 31) }
   precatory_type { PrecatoryType.make!(:tipo_de_precatorio_ativo) }
   historic { "Precatório Expedido conforme decisão do STJ" }
+  value { 6000000.0 }
+  precatory_parcels { [PrecatoryParcel.make!(:parcela_paga), PrecatoryParcel.make!(:parcela_a_vencer)] }
 end

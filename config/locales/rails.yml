@@ -253,6 +253,7 @@ pt-BR:
       not_permited_for_judgment_form_kind: "não permitido para este tipo de julgamento"
       not_permited_for_object_type: "não permitido para este tipo de objeto"
       not_permited_for_modality: "não permitido para esta modalidade"
+      must_be_equal_precatory_value: "deve ser igual ao valor do precatório"
 
   activerecord:
     errors:
