@@ -7,4 +7,5 @@ class RenameCreditorToProviderFromReserveFunds < ActiveRecord::Migration
     add_index :reserve_funds, :provider_id
 
     add_foreign_key :reserve_funds, :providers
+  end
 end
