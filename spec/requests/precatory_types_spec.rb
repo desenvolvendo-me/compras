@@ -20,10 +20,8 @@ feature "PrecatoryTypes" do
 
     page.should have_notice 'Tipos de Precatório criado com sucesso.'
 
-    precatory_type = PrecatoryType.last
-
     within_records do
-      click_link precatory_type.to_s
+      click_link 'Precatórios Alimentares'
     end 
 
     page.should have_field 'Descrição', :with => 'Precatórios Alimentares'
@@ -33,14 +31,14 @@ feature "PrecatoryTypes" do
   end
 
   scenario 'update an existent precatory_type' do
-    precatory_type = PrecatoryType.make!(:tipo_de_precatorio_ativo)
+    PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
     click_link 'Contabilidade'
 
     click_link 'Tipos de Precatório'
 
     within_records do
-      click_link precatory_type.to_s
+      click_link 'Precatórios Alimentares'
     end
 
     fill_in 'Descrição', :with => 'De pequeno valor'
@@ -61,14 +59,14 @@ feature "PrecatoryTypes" do
   end
 
   scenario 'destroy an existent precatory_type' do
-    precatory_type = PrecatoryType.make!(:tipo_de_precatorio_ativo)
+    PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
     click_link 'Contabilidade'
 
     click_link 'Tipos de Precatório'
 
     within_records do
-      click_link precatory_type.to_s
+      click_link 'Precatórios Alimentares'
     end
 
     click_link 'Apagar', :confirm => true
