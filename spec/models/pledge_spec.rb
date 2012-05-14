@@ -23,7 +23,7 @@ describe Pledge do
   it { should belong_to :founded_debt_contract }
   it { should belong_to :licitation_process }
 
-  it { should have_many(:pledge_parcels).dependent(:destroy) }
+  it { should have_many(:pledge_parcels).dependent(:destroy).order(:number) }
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
@@ -60,24 +60,29 @@ describe Pledge do
   context 'balance' do
     let :pledge_parcels do
       [
-        double('PledgeParcelOne', :cancellation_moviments => 10),
-        double('PledgeParcelTwo', :cancellation_moviments => 9),
-        double('PledgeParcelThree', :cancellation_moviments => 0)
-      ]
-    end
-
-    let :pledge_cancellations do
-      [
-        double('PledgeCancellationsOne', :value => 1),
-        double('PledgeCancellationsTwo', :value => 1)
+        double('PledgeParcelOne', :canceled_value => 1),
+        double('PledgeParcelTwo', :canceled_value => 1)
       ]
     end
 
     it 'should return balance' do
       subject.value = 21
       subject.stub(:pledge_parcels).and_return(pledge_parcels)
-      subject.stub(:pledge_cancellations).and_return(pledge_cancellations)
-      subject.balance.should eq 0
+      subject.balance.should eq 19
+    end
+  end
+
+  context 'pledge_parcels_cancellations_sum' do
+    let :pledge_parcels do
+      [
+        double('PledgeParcelOne', :canceled_value => 1),
+        double('PledgeParcelTwo', :canceled_value => 2)
+      ]
+    end
+
+    it 'should return correct value' do
+      subject.stub(:pledge_parcels).and_return(pledge_parcels)
+      subject.pledge_parcels_cancellations_sum.should eq 3
     end
   end
 

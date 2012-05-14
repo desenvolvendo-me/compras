@@ -3,13 +3,11 @@ require 'spec_helper'
 
 feature "PledgeCancellations" do
   background do
-    Pledge.destroy_all
-    PledgeParcel.destroy_all
     sign_in
   end
 
   scenario 'create a new pledge_cancellation' do
-    pledge = Pledge.make!(:empenho)
+    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -20,8 +18,7 @@ feature "PledgeCancellations" do
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Ano', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
-    fill_in 'Valor a ser anulado', :with => '1,00'
+    fill_in 'Valor a ser anulado', :with => '150,00'
     select 'Parcial', :from => 'Tipo de anulação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     select 'Normal', :from => 'Natureza da ocorrência'
@@ -38,26 +35,36 @@ feature "PledgeCancellations" do
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Ano', :with => '2012'
 
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
+    page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
     page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '9,99'
+    page.should have_field 'Valor do empenho', :with => '200,00'
 
-    page.should have_field 'Parcela', :with => '1'
-    page.should have_disabled_field 'Vencimento'
-    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Saldo'
-    page.should have_field 'Saldo', :with => '8,99'
+    within '#parcel_1' do
+      page.should have_content '1'
+      page.should have_content I18n.l(Date.current + 1.day)
+      find('.value').should have_content 'R$ 100,00'
+      find('.canceled_value').should have_content 'R$ 100,00'
+      find('.balance').should have_content 'R$ 0,00'
+    end
 
-    page.should have_field 'Valor a ser anulado', :with => '1,00'
+    within '#parcel_2' do
+      page.should have_content '2'
+      page.should have_content I18n.l(Date.current + 2.day)
+      find('.value').should have_content 'R$ 100,00'
+      find('.canceled_value').should have_content 'R$ 50,00'
+      find('.balance').should have_content 'R$ 50,00'
+    end
+
+    page.should have_field 'Valor a ser anulado', :with => '150,00'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
     page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
   end
 
-  scenario 'when fill pledge and pledge_parcel should fill delegateds fields' do
+  scenario 'when fill/clear pledge should fill/clear delegateds fields' do
     pledge = Pledge.make!(:empenho)
 
     click_link 'Contabilidade'
@@ -67,50 +74,39 @@ feature "PledgeCancellations" do
     click_link 'Criar Anulação de Empenho'
 
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
+    page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
     page.should have_disabled_field 'Valor do empenho'
     page.should have_field 'Valor do empenho', :with => '9,99'
 
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
-    page.should have_field 'Parcela', :with => '1'
-    page.should have_disabled_field 'Vencimento'
-    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Saldo'
-    page.should have_field 'Saldo', :with => '9,99'
-  end
-
-  scenario 'clear pledge and pledge_parcel when clear pledge' do
-    pledge = Pledge.make!(:empenho)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
-
-    click_link 'Criar Anulação de Empenho'
-
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
-    page.should have_field 'Parcela', :with => '1'
-    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_field 'Saldo', :with => '9,99'
+    within '#parcel_1' do
+      page.should have_content '1'
+      page.should have_content I18n.l(Date.current + 1.day)
+      find('.value').should have_content 'R$ 9,99'
+      find('.canceled_value').should have_content 'R$ 0,00'
+      find('.balance').should have_content 'R$ 9,99'
+    end
 
     clear_modal 'Empenho'
-    page.should have_field 'Empenho', :with => ''
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => ''
     page.should have_disabled_field 'Valor do empenho'
     page.should have_field 'Valor do empenho', :with => ''
 
-    page.should have_field 'Parcela', :with => ''
-    page.should have_disabled_field 'Vencimento'
-    page.should have_field 'Vencimento', :with => ''
-    page.should have_disabled_field 'Saldo'
-    page.should have_field 'Saldo', :with => ''
+    within '#pledge_parcels' do
+      page.should_not have_content '1'
+      page.should_not have_content I18n.l(Date.current + 1.day)
+      page.should_not have_content 'R$ 9,99'
+      page.should_not have_content 'R$ 0,00'
+      page.should_not have_content 'R$ 9,99'
+    end
   end
 
-  scenario 'when select total as kind should disabled and fill value' do
-    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+  scenario 'when select total as kind should fill value with balance' do
+    Pledge.make!(:empenho)
+    PledgeCancellation.make!(:empenho_2012)
+    PledgeParcelMovimentation.make!(:empenho)
 
     click_link 'Contabilidade'
 
@@ -118,15 +114,15 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     select 'Total', :from => 'Tipo de anulação'
 
     page.should have_disabled_field 'Valor a ser anulado'
-    page.should have_field 'Valor a ser anulado', :with => '100,00'
+    page.should have_field 'Valor a ser anulado', :with => '8,99'
   end
 
-  scenario 'should fill value when select pledge_parcel before kind and kind is total' do
-    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+  scenario 'should fill value when select pledge before kind and kind is total' do
+    Pledge.make!(:empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -135,10 +131,10 @@ feature "PledgeCancellations" do
     click_link 'Criar Anulação de Empenho'
 
     select 'Total', :from => 'Tipo de anulação'
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
+    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
 
     page.should have_disabled_field 'Valor a ser anulado'
-    page.should have_field 'Valor a ser anulado', :with => '100,00'
+    page.should have_field 'Valor a ser anulado', :with => '200,00'
   end
 
   scenario 'should store value when kind is total' do
@@ -152,8 +148,8 @@ feature "PledgeCancellations" do
 
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Ano', :with => '2012'
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
     fill_in 'Valor a ser anulado', :with => '1,00'
+    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     select 'Total', :from => 'Tipo de anulação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     select 'Normal', :from => 'Natureza da ocorrência'
@@ -167,95 +163,6 @@ feature "PledgeCancellations" do
 
     page.should have_field 'Valor a ser anulado', :with => '9,99'
     page.should have_select 'Tipo de anulação', :selected => 'Total'
-  end
-
-  scenario 'when select pledge_parcel first fill pledge' do
-    pledge = Pledge.make!(:empenho)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
-
-    click_link 'Criar Anulação de Empenho'
-
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
-    page.should have_field 'Parcela', :with => '1'
-    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_field 'Saldo', :with => '9,99'
-
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_field 'Valor do empenho', :with => '9,99'
-  end
-
-  scenario 'when select pledge first should filter pledge_parcel by pledge_id' do
-    pledge = Pledge.make!(:empenho)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
-
-    click_link 'Criar Anulação de Empenho'
-
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-
-    fill_modal 'Parcela', :with => '1', :field => 'Número' do
-      page.should have_disabled_field 'filter_pledge'
-      page.should have_field 'filter_pledge', :with => "#{pledge.id}"
-    end
-  end
-
-  scenario 'when select pledge first and clear it should clear filter by pledge on pledge_parcel modal' do
-    pledge = Pledge.make!(:empenho)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
-
-    click_link 'Criar Anulação de Empenho'
-
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-
-    clear_modal 'Empenho'
-
-    fill_modal 'Parcela', :with => '1', :field => 'Número' do
-      page.should_not have_disabled_field 'filter_pledge'
-      page.should have_field 'filter_pledge', :with => ''
-    end
-  end
-
-  context 'should have modal link' do
-    scenario 'when already have stored' do
-      pledge_cancellation = PledgeCancellation.make!(:empenho_2012)
-
-      click_link 'Contabilidade'
-
-      click_link 'Anulações de Empenho'
-
-      click_link "#{pledge_cancellation.id}"
-
-      click_link 'Mais informações'
-
-      page.should have_content 'Informações de: 1'
-    end
-
-    scenario 'when change pledge_parcel' do
-      Pledge.make!(:empenho_com_dois_vencimentos)
-
-      click_link 'Contabilidade'
-
-      click_link 'Anulações de Empenho'
-
-      click_link 'Criar Anulação de Empenho'
-
-      fill_modal 'Parcela', :with => '1', :field => 'Número'
-      click_link 'Mais informações'
-      page.should have_content 'Informações de: 1'
-
-      fill_modal 'Parcela', :with => '2', :field => 'Número'
-      click_link 'Mais informações'
-      page.should have_content 'Informações de: 2'
-    end
   end
 
   scenario 'should have all fields disabled when editing an existent pledge' do
@@ -273,17 +180,11 @@ feature "PledgeCancellations" do
     should_not have_button 'Criar Anulação de Empenho'
 
     page.should have_disabled_field 'Empenho'
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
+    page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
     page.should have_disabled_field 'Valor do empenho'
     page.should have_field 'Valor do empenho', :with => '9,99'
-    page.should have_disabled_field 'Parcela'
-    page.should have_field 'Parcela', :with => '1'
-    page.should have_disabled_field 'Vencimento'
-    page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.day)
-    page.should have_disabled_field 'Saldo'
-    page.should have_field 'Saldo', :with => '8,99'
     page.should have_disabled_field 'Valor a ser anulado'
     page.should have_field 'Valor a ser anulado', :with => '1,00'
     page.should have_disabled_field 'Tipo de anulação'
@@ -297,7 +198,7 @@ feature "PledgeCancellations" do
   end
 
   scenario 'should not have a button to destroy an existent pledge' do
-    pledge_cancellation = PledgeCancellation.make!(:empenho_2012)
+    PledgeCancellation.make!(:empenho_2012)
 
     click_link 'Contabilidade'
 

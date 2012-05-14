@@ -25,7 +25,7 @@ class Pledge < ActiveRecord::Base
   belongs_to :licitation_process
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
-  has_many :pledge_parcels, :dependent => :destroy
+  has_many :pledge_parcels, :dependent => :destroy, :order => :number
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
@@ -80,15 +80,15 @@ class Pledge < ActiveRecord::Base
   end
 
   def balance
-    value - pledge_parcels_balances - pledge_cancellations_sum
+    value - pledge_parcels_cancellations_sum
   end
 
   def pledge_parcels_balances
     pledge_parcels.compact.sum(&:cancellation_moviments)
   end
 
-  def pledge_cancellations_sum
-    pledge_cancellations.compact.sum(&:value)
+  def pledge_parcels_cancellations_sum
+    pledge_parcels.compact.sum(&:canceled_value)
   end
 
   def last_subpledge

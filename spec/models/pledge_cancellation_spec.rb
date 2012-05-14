@@ -20,18 +20,17 @@ describe PledgeCancellation do
 
   it { should belong_to :entity }
   it { should belong_to :pledge }
-  it { should belong_to :pledge_parcel }
 
   context 'validate value' do
-    it 'should not be valid if value greater than balance' do
-      pledge_parcel = double(:value => 3, :balance => 3, :expiration_date => nil)
-      subject.stub(:pledge_parcel).and_return(pledge_parcel)
-      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo")
+    it 'should not be valid if value greater than pledge balance' do
+      pledge = double('Pledge', :emission_date => nil, :balance => 3)
+      subject.stub(:pledge).and_return(pledge)
+      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho")
     end
 
-    it 'should be valid if value is not greater than balance' do
-      pledge_parcel = double(:value => 3, :balance => 2, :expiration_date => nil)
-      subject.stub(:pledge_parcel).and_return(pledge_parcel)
+    it 'should be valid if value is not greater than pledge balance' do
+      pledge = double('Pledge', :emission_date => nil, :balance => 3)
+      subject.stub(:pledge).and_return(pledge)
       subject.should allow_value(1).for(:value)
     end
   end

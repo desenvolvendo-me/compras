@@ -22,4 +22,12 @@ describe PledgeCancellationsController do
 
     assigns(:pledge_cancellation).date.should eq Date.new(2012, 1, 1)
   end
+
+  it 'should call the PledgeParcelMovimentationGenerator on action create' do
+    PledgeCancellation.any_instance.stub(:valid?).and_return(true)
+
+    PledgeParcelMovimentationGenerator.any_instance.should_receive(:generate!)
+
+    post :create
+  end
 end
