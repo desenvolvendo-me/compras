@@ -75,6 +75,10 @@ class Pledge < ActiveRecord::Base
     pledge_items.map(&:estimated_total_price).compact.sum
   end
 
+  def pledge_parcels_with_balance
+    pledge_parcels.select { |pledge_parcel| pledge_parcel.balance > 0 }
+  end
+
   def balance
     value - pledge_parcels_balances - pledge_cancellations_sum
   end

@@ -41,6 +41,22 @@ describe Pledge do
   it { should validate_presence_of :provider }
   it { should validate_presence_of :budget_allocation }
 
+  context 'pledge_parcels with balance' do
+    let :pledge_parcel_one do
+      double('PledgeParcelOne', :balance => 100)
+    end
+
+    let :pledge_parcel_two do
+      double('PledgeParcelTow', :balance => 0)
+    end
+
+    it 'should return only with balance' do
+      subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
+
+      subject.pledge_parcels_with_balance.should eq [pledge_parcel_one]
+    end
+  end
+
   context 'balance' do
     let :pledge_parcels do
       [

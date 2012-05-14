@@ -90,7 +90,7 @@ describe Subpledge do
         :emission_date => nil,
         :global? => false,
         :estimated? => true,
-        :pledge_parcels => []
+        :pledge_parcels_with_balance => []
       })
     end
 
@@ -105,21 +105,21 @@ describe Subpledge do
 
   context 'validate pledge' do
     it 'pledge_type is global' do
-      pledge = double('Pledge', :emission_date => nil, :pledge_parcels => [], :global? => true, :estimated? => false)
+      pledge = double('Pledge', :emission_date => nil, :pledge_parcels_with_balance => [], :global? => true, :estimated? => false)
       subject.stub(:pledge).and_return(pledge)
       subject.valid?
       subject.errors[:pledge].should_not include 'deve ser do tipo global ou estimativo'
     end
 
     it 'pledge_type is estimated' do
-      pledge = double('Pledge', :emission_date => nil, :pledge_parcels => [], :global? => false, :estimated? => true)
+      pledge = double('Pledge', :emission_date => nil, :pledge_parcels_with_balance => [], :global? => false, :estimated? => true)
       subject.stub(:pledge).and_return(pledge)
       subject.valid?
       subject.errors[:pledge].should_not include 'deve ser do tipo global ou estimativo'
     end
 
     it 'pledge_type is ordinary' do
-      pledge = double('Pledge', :emission_date => nil, :pledge_parcels => [], :global? => false, :estimated? => false, :ordinary? => true)
+      pledge = double('Pledge', :emission_date => nil, :pledge_parcels_with_balance => [], :global? => false, :estimated? => false, :ordinary? => true)
       subject.stub(:pledge).and_return(pledge)
       subject.valid?
       subject.errors[:pledge].should include 'deve ser do tipo global ou estimativo'
