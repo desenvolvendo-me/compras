@@ -128,6 +128,9 @@
         $('#revenue_nature_revenue_rubric_id').val('');
         $('#revenue_nature_classification').val('').attr('disabled', true);
         categoryCode = null
+        subcategoryCode = null;
+        sourceCode = null;
+        rubricCode = null;
       }
 
       generateFullCode();
@@ -147,6 +150,8 @@
         $('#revenue_nature_revenue_rubric_id').val('');
         $('#revenue_nature_classification').val('').attr('disabled', true);
         subcategoryCode = null;
+        sourceCode = null;
+        rubricCode = null;
       }
 
       generateFullCode();
@@ -164,6 +169,7 @@
         $('#revenue_nature_revenue_rubric').attr('disabled', true).val('');
         $('#revenue_nature_revenue_rubric_id').val('');
         sourceCode = null;
+        rubricCode = null;
       }
 
       generateFullCode();
@@ -176,7 +182,7 @@
         rubricCode = record.data('code');
         $('#revenue_nature_classification').attr('disabled', false);
       } else {
-        $('#revenue_nature_classification').attr('disabled', true);
+        $('#revenue_nature_classification').val('').attr('disabled', true);
         rubricCode = null;
       }
 

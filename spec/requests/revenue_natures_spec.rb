@@ -93,10 +93,16 @@ feature "RevenueNatures" do
 
       clear_modal 'Categoria da receita'
 
+      page.should have_field 'Categoria da receita', :with => ''
       page.should have_disabled_field 'Subcategoria da receita'
+      page.should have_field 'Subcategoria da receita', :with => ''
       page.should have_disabled_field 'Fonte da receita'
+      page.should have_field 'Fonte da receita', :with => ''
       page.should have_disabled_field 'Rúbrica da receita'
+      page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
+      page.should have_field 'Classificação', :with => ''
+      page.should have_field 'Código completo', :with => '0.0.0.0.00.00'
     end
 
     scenario 'when clear subcategory' do
@@ -116,9 +122,15 @@ feature "RevenueNatures" do
 
       clear_modal 'Subcategoria da receita'
 
+      page.should have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
+      page.should have_field 'Subcategoria da receita', :with => ''
       page.should have_disabled_field 'Fonte da receita'
+      page.should have_field 'Fonte da receita', :with => ''
       page.should have_disabled_field 'Rúbrica da receita'
+      page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
+      page.should have_field 'Classificação', :with => ''
+      page.should have_field 'Código completo', :with => '1.0.0.0.00.00'
     end
 
     scenario 'when clear source' do
@@ -138,8 +150,14 @@ feature "RevenueNatures" do
 
       clear_modal 'Fonte da receita'
 
+      page.should have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
+      page.should have_field 'Subcategoria da receita', :with => '1 - RECEITA TRIBUTÁRIA'
+      page.should have_field 'Fonte da receita', :with => ''
       page.should have_disabled_field 'Rúbrica da receita'
+      page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
+      page.should have_field 'Classificação', :with => ''
+      page.should have_field 'Código completo', :with => '1.1.0.0.00.00'
     end
 
     scenario 'when clear rubric' do
@@ -159,7 +177,13 @@ feature "RevenueNatures" do
 
       clear_modal 'Rúbrica da receita'
 
+      page.should have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
+      page.should have_field 'Subcategoria da receita', :with => '1 - RECEITA TRIBUTÁRIA'
+      page.should have_field 'Fonte da receita', :with => '1 - IMPOSTOS'
+      page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
+      page.should have_field 'Classificação', :with => ''
+      page.should have_field 'Código completo', :with => '1.1.1.0.00.00'
     end
   end
 
