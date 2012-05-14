@@ -6,6 +6,7 @@ class PrecatoryType < ActiveRecord::Base
   has_many :precatories, :dependent => :restrict
 
   validates :description, :status, :presence => true
+  validates :deactivation_date, :timeliness => { :on_or_before => :today, :type => :date, :allow_blank => true }
   validate :deactivation_date_must_be_required_when_inactive
 
   before_save :clean_deactivate_date_when_active

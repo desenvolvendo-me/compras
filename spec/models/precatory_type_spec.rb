@@ -36,4 +36,18 @@ describe PrecatoryType do
     subject.run_callbacks(:save)
     subject.deactivation_date.should be_nil
   end
+
+  it "should not deactivation_date be in the future" do
+    subject.status = PrecatoryTypeStatus::INACTIVE
+
+    subject.should_not allow_value(Date.tomorrow).for(:deactivation_date)
+  end
+
+  it "should deactivation_date less or equal current date" do
+    subject.status = PrecatoryTypeStatus::INACTIVE
+
+    subject.should allow_value(Date.current).for(:deactivation_date)
+
+    subject.should allow_value(Date.yesterday).for(:deactivation_date)
+  end
 end
