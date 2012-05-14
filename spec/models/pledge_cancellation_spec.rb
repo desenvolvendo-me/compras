@@ -46,11 +46,11 @@ describe PledgeCancellation do
     end
 
     it 'should be valid when date is equal to last' do
-      subject.should allow_value('2012-03-1').for(:date)
+      subject.should allow_value(Date.new(2012, 3, 1)).for(:date)
     end
 
     it 'should not be valid when date is older to last' do
-      subject.should_not allow_value('2011-01-01').for(:date).with_message("não pode ser menor que a data da última anulação (01/03/2012)")
+      subject.should_not allow_value(Date.new(2011, 1, 1)).for(:date).with_message("não pode ser menor que a data da última anulação (01/03/2012)")
     end
 
     it 'should not be valid when date is older then emission_date' do
