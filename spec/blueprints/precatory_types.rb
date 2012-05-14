@@ -11,3 +11,9 @@ PrecatoryType.blueprint(:ordinario_demais_casos) do
   status { PrecatoryTypeStatus::ACTIVE }
   deactivation_date { "" }
 end
+
+PrecatoryType.blueprint(:tipo_de_precatorio_inativo) do
+  description { "De pequeno valor" }
+  status { PrecatoryTypeStatus::INACTIVE }
+  deactivation_date { Date.yesterday }
+end

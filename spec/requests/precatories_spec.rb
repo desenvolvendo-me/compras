@@ -258,4 +258,27 @@ feature "Precatories" do
       page.should have_field 'Valor parcelado', :with => '0,00'
     end
   end
+
+  scenario "type modal should show only precatory_types with status active" do
+    PrecatoryType.make!(:tipo_de_precatorio_ativo)
+    PrecatoryType.make!(:tipo_de_precatorio_inativo)
+    PrecatoryType.make!(:ordinario_demais_casos)
+
+    click_link 'Contabilidade'
+
+    click_link 'Precatórios'
+
+    click_link 'Criar Precatório'
+
+    within_tab 'Principal' do
+      within_modal 'Tipo' do
+        click_button 'Pesquisar'
+
+        page.should have_css("table.records tbody tr", :count => 2)
+        page.should have_content 'Precatórios Alimentares'
+        page.should have_content 'Ordinário - Demais Casos'
+        page.should_not have_content 'De pequeno valor'
+      end
+    end
+  end
 end
