@@ -17,6 +17,7 @@
 //= require date
 //= require modal_info_link
 //= require only_numbers
+//= require tabs
 
 $(':input[data-property-id]').live('change', function() {
   var property = $(this);
@@ -69,16 +70,4 @@ $(".included").live('click', function() {
   } else {
     $(".destroy").val("true");
   }
-});
-
-$(function(){
-  $('.tabs').tabs({
-    create: function () {
-      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
-
-      if (tabWithError) {
-        $(this).tabs('select', tabWithError);
-      }
-    }
-  });
 });
