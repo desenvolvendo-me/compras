@@ -13,14 +13,18 @@ class PeopleController < CrudController
   def create_resource(object)
     return unless super
 
-    taxpayer = ISSIntel::Taxpayer.new(object.iss_intel_attributes)
-    taxpayer.update!
+    if !object.special?
+      taxpayer = ISSIntel::Taxpayer.new(object.iss_intel_attributes)
+      taxpayer.update!
+    end
   end
 
   def update_resource(object, attributes)
     return unless super
 
-    taxpayer = ISSIntel::Taxpayer.new(object.iss_intel_attributes)
-    taxpayer.update!
+    if !object.special?
+      taxpayer = ISSIntel::Taxpayer.new(object.iss_intel_attributes)
+      taxpayer.update!
+    end
   end
 end

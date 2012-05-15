@@ -44,3 +44,12 @@ Person.blueprint(:nohup) do
   email  { "wenderson@gmail.com" }
   personable { Company.make!(:nohup) }
 end
+
+Person.blueprint(:mateus) do
+  name   { "Mateus Lorandi" }
+  phone  { "(44) 3499-9999" }
+  fax    { "(44) 3499-8888" }
+  mobile { "(44) 3499-7777" }
+  email  { "mcomogo@gmail.com" }
+  personable { SpecialEntry.make!(:especial) }
+end

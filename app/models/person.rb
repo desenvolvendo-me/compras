@@ -48,6 +48,10 @@ class Person < ActiveRecord::Base
     personable.cnpj if personable.respond_to?(:cnpj)
   end
 
+  def special?
+    !personable.respond_to?(:cpf) & !personable.respond_to?(:cnpj)
+  end
+
   def iss_intel_attributes
     {
       :cpf_cnpj          => (cpf || cnpj).scan(/[0-9]/).join,

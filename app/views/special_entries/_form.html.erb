@@ -1,0 +1,51 @@
+<%= f.association :personable, :collection => f.object.personable.is_a?(SpecialEntry) ? f.object.personable.localized : SpecialEntry.new do |p| %>
+  <div class="tabs">
+    <ul>
+      <li><a href="#special_entry">Inscrição especial</a></li>
+      <li><a href="#special_entry_contact">Contato</a></li>
+      <li><a href="#special_entry_address">Endereço</a></li>
+    </ul>
+
+    <div id="special_entry">
+      <%= f.input :name %>
+    </div>
+
+    <div id="special_entry_contact">
+      <div class="yui3-g">
+        <div class="yui3-u-1-3">
+          <%= f.input :phone, :as => :string %>
+        </div>
+
+        <div class="yui3-u-1-3">
+          <%= f.input :mobile, :as => :string %>
+        </div>
+
+        <div class="yui3-u-1-3">
+          <%= f.input :fax, :as => :string %>
+        </div>
+      </div>
+
+      <%= f.input :email %>
+    </div>
+
+    <div id="special_entry_address">
+      <%= p.association :address, :collection => p.object.address || Address.new do |a| %>
+        <%= render "addresses/address", :a => a %>
+      <% end %>
+
+      <%= render "addresses/correspondence", :f => p %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $('.tabs').tabs({
+    create: function () {
+      var tabWithError = $('.ui-tabs-panel:has(.error)', this).attr('id');
+
+      if (tabWithError) {
+        $(this).tabs('select', tabWithError);
+      }
+    }
+  });
+</script>

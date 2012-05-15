@@ -312,4 +312,129 @@ feature "People" do
       end
     end
   end
+
+  scenario 'create a new person as special_entry' do
+    State.make!(:mg)
+    Street.make!(:amazonas)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Pessoas'
+
+    click_link 'Criar Pessoa'
+
+    choose 'Inscrição Especial'
+
+    within_tab "Inscrição especial" do
+      fill_in 'Nome', :with => 'Wenderson Malheiros'
+    end
+
+    within_tab 'Contato' do
+      fill_mask 'Telefone', :with => '(33) 3333-3333'
+      fill_mask 'Celular', :with => '(33) 3333-3334'
+      fill_mask 'Fax', :with => '(99) 9999-9999'
+      fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+    end
+
+    within_tab 'Endereço' do
+      fill_modal 'Logradouro', :with => 'Amazonas'
+      fill_in "Complemento", :with => "Apartamento 12"
+      fill_modal 'Bairro', :with => 'Portugal'
+      fill_mask "CEP", :with => "31400-223"
+
+      click_button 'Adicionar Endereço de Correspondência'
+
+      within_fieldset 'Endereço de Correspondência' do
+        fill_modal 'Logradouro', :with => 'Amazonas'
+        fill_modal 'Bairro', :with => 'Portugal'
+        fill_mask 'CEP', :with => '89009-187'
+      end
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Pessoa criada com sucesso.'
+
+    click_link 'Wenderson Malheiros'
+
+    within_tab "Inscrição especial" do
+      page.should have_field 'Nome', :with => 'Wenderson Malheiros'
+    end
+
+    within_tab 'Contato' do
+      page.should have_field 'Telefone', :with => '(33) 3333-3333'
+      page.should have_field 'Celular', :with => '(33) 3333-3334'
+      page.should have_field 'Fax', :with => '(99) 9999-9999'
+      page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+    end
+
+    within_tab 'Endereço' do
+      page.should have_field 'Logradouro', :with => 'Amazonas'
+      page.should have_field "Complemento", :with => "Apartamento 12"
+      page.should have_field 'Bairro', :with => 'Portugal'
+      page.should have_field "CEP", :with => "31400-223"
+
+      within_fieldset 'Endereço de Correspondência' do
+        page.should have_field 'Logradouro', :with => 'Amazonas'
+        page.should have_field 'Bairro', :with => 'Portugal'
+        page.should have_field 'CEP', :with => '89009-187'
+      end
+    end
+  end
+
+  scenario 'update an existent person as special_entry' do
+    Person.make!(:mateus)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Pessoa'
+
+    click_link 'Mateus Lorandi'
+
+    page.should_not have_field 'Pessoa Física'
+    page.should_not have_field 'Pessoa Jurídica'
+    page.should_not have_field 'Inscrição Especial'
+
+    within_tab "Inscrição especial" do
+      fill_in 'Nome', :with => 'Gabriel Sobrinho'
+    end
+
+    within_tab 'Endereço' do
+      fill_mask "CEP", :with => "41600-223"
+      fill_in 'Complemento', :with => "Apto das alfalfas"
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Pessoa editada com sucesso.'
+
+    within_records do
+      click_link 'Gabriel Sobrinho'
+    end
+
+    within_tab "Inscrição especial" do
+      page.should have_field 'Nome', :with => 'Gabriel Sobrinho'
+    end
+
+    within_tab 'Endereço' do
+      page.should have_field "CEP", :with => "41600-223"
+      page.should have_field 'Complemento', :with => "Apto das alfalfas"
+    end
+  end
+
+  scenario 'destroy an existent special_entry' do
+    Person.make!(:mateus)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Pessoa'
+
+    click_link 'Mateus Lorandi'
+
+    click_link 'Apagar', :confirm => true
+
+    page.should have_notice 'Pessoa apagada com sucesso.'
+
+    page.should_not have_content 'Mateus Lorandi'
+  end
 end
