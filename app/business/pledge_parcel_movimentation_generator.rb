@@ -17,22 +17,18 @@ class PledgeParcelMovimentationGenerator
     pledge_parcels_with_balance.each do |parcel|
       return if value_left.zero?
 
-      if value_left >= parcel.balance
-        current_value = parcel.balance
-      else
-        current_value = value_left
-      end
+      calculator = PledgeParcelMovimentationCalculator.new(value_left, parcel.balance)
 
       pledge_parcel_movimentation_storage.create!(
         :pledge_parcel_id => parcel.id,
         :pledge_parcel_modificator_id => pledge_cancellation_object.id,
         :pledge_parcel_modificator_type => pledge_cancellation_object.class.name,
         :pledge_parcel_value_was => parcel.balance,
-        :pledge_parcel_value => parcel.balance - current_value,
-        :value => current_value
+        :pledge_parcel_value => calculator.parcel_value,
+        :value => calculator.movimented_value
       )
 
-      value_left -= current_value
+      value_left -= calculator.movimented_value
     end
   end
 end

@@ -1,5 +1,6 @@
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
+require 'app/business/pledge_parcel_movimentation_calculator'
 require 'app/business/pledge_parcel_movimentation_generator'
 
 describe PledgeParcelMovimentationGenerator do
