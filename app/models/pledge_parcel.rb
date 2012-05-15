@@ -3,7 +3,6 @@ class PledgeParcel < ActiveRecord::Base
 
   belongs_to :pledge
 
-  has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
   has_many :pledge_parcel_movimentations, :dependent => :restrict
 
@@ -20,7 +19,7 @@ class PledgeParcel < ActiveRecord::Base
   end
 
   def liquidations_value
-    pledge_liquidations.sum(:value)
+    pledge_parcel_movimentations.where { pledge_parcel_modificator_type.eq 'PledgeLiquidation' }.sum(:value)
   end
 
   def canceled_liquidations_value

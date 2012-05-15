@@ -1,18 +1,18 @@
 class PledgeLiquidation < ActiveRecord::Base
-  attr_accessible :pledge_id, :pledge_parcel_id, :kind, :value, :date
+  attr_accessible :pledge_id, :kind, :value, :date
   attr_accessible :entity_id, :year
 
   has_enumeration_for :kind, :with => PledgeLiquidationKind, :create_helpers => true
 
   belongs_to :pledge
-  belongs_to :pledge_parcel
   belongs_to :entity
 
-  delegate :emission_date, :description, :to => :pledge, :allow_nil => true
-  delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
-  delegate :balance, :expiration_date, :to => :pledge_parcel, :allow_nil => true
+  has_many :pledge_parcel_movimentations, :dependent => :restrict, :as => :pledge_parcel_modificator
 
-  validates :pledge, :pledge_parcel, :kind, :value, :presence => true
+  delegate :emission_date, :description, :to => :pledge, :allow_nil => true
+  delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
+
+  validates :pledge, :kind, :value, :presence => true
   validates :date, :entity, :year, :presence => true
   validate :date_must_be_greater_than_emission_date
   validate :validate_value
@@ -40,8 +40,8 @@ class PledgeLiquidation < ActiveRecord::Base
   protected
 
   def force_value_to_total_kind
-    if pledge_parcel.present? && total?
-      self.value = pledge_parcel.value
+    if pledge && total?
+      self.value = pledge_balance
     end
   end
 
@@ -50,7 +50,7 @@ class PledgeLiquidation < ActiveRecord::Base
   end
 
   def date_must_be_greater_than_emission_date
-    return unless emission_date && date
+    return unless pledge && date
 
     if date < emission_date
       errors.add(:date, :must_be_greater_than_pledge_emission_date)
@@ -58,10 +58,10 @@ class PledgeLiquidation < ActiveRecord::Base
   end
 
   def validate_value
-    return if pledge_parcel.blank? || value.blank?
+    return unless pledge && value
 
-    if value > balance
-      errors.add(:value, :must_not_be_greater_than_pledge_parcel_balance)
+    if value > pledge_balance
+      errors.add(:value, :must_not_be_greater_than_pledge_balance)
     end
   end
 end

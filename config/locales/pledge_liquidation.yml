@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       pledge_liquidation:
         pledge: "Empenho"
-        value: "Valor"
+        value: "Valor a ser liquidado"
         kind: "Tipo de liquidação"
         description: "Objeto do empenho"
         date: "Data"

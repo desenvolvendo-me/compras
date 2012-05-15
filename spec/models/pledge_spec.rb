@@ -57,33 +57,11 @@ describe Pledge do
     end
   end
 
-  context 'balance' do
-    let :pledge_parcels do
-      [
-        double('PledgeParcelOne', :canceled_value => 1),
-        double('PledgeParcelTwo', :canceled_value => 1)
-      ]
-    end
-
-    it 'should return balance' do
-      subject.value = 21
-      subject.stub(:pledge_parcels).and_return(pledge_parcels)
-      subject.balance.should eq 19
-    end
-  end
-
-  context 'pledge_parcels_cancellations_sum' do
-    let :pledge_parcels do
-      [
-        double('PledgeParcelOne', :canceled_value => 1),
-        double('PledgeParcelTwo', :canceled_value => 2)
-      ]
-    end
-
-    it 'should return correct value' do
-      subject.stub(:pledge_parcels).and_return(pledge_parcels)
-      subject.pledge_parcels_cancellations_sum.should eq 3
-    end
+  it 'should return correct balance' do
+    subject.value = 21
+    subject.stub(:pledge_cancellations_sum).and_return(2)
+    subject.stub(:pledge_liquidations_sum).and_return(1)
+    subject.balance.should eq 18
   end
 
   it 'validate value based on budeget_allocation_real_amount' do

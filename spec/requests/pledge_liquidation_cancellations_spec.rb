@@ -9,6 +9,7 @@ feature "PledgeLiquidationCancellations" do
   scenario 'create a new pledge_liquidation_cancellation' do
     pledge = Pledge.make!(:empenho)
     PledgeLiquidation.make!(:liquidacao_parcial)
+    PledgeParcelMovimentation.make!(:liquidacao_parcial)
 
     click_link 'Contabilidade'
 
@@ -162,6 +163,7 @@ feature "PledgeLiquidationCancellations" do
   scenario 'create a new pledge_liquidation_cancellation with total as kind' do
     Pledge.make!(:empenho)
     PledgeLiquidation.make!(:liquidacao_total)
+    PledgeParcelMovimentation.make!(:liquidacao_total)
 
     click_link 'Contabilidade'
 
@@ -243,6 +245,7 @@ feature "PledgeLiquidationCancellations" do
   context 'should have modal link' do
     scenario 'when already have stored' do
       PledgeLiquidation.make!(:liquidacao_parcial)
+      PledgeParcelMovimentation.make!(:liquidacao_total)
       pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
 
       click_link 'Contabilidade'
@@ -277,7 +280,8 @@ feature "PledgeLiquidationCancellations" do
 
   scenario 'should have all fields disabled when editing an existent pledge' do
     pledge = Pledge.make!(:empenho)
-    PledgeLiquidation.make!(:liquidacao_parcial)
+    PledgeLiquidation.make!(:liquidacao_total)
+    PledgeParcelMovimentation.make!(:liquidacao_total)
     pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
 
     click_link 'Contabilidade'
@@ -303,7 +307,8 @@ feature "PledgeLiquidationCancellations" do
   end
 
   scenario 'should not have a button to destroy an existent pledge' do
-    PledgeLiquidation.make!(:liquidacao_parcial)
+    PledgeLiquidation.make!(:liquidacao_total)
+    PledgeParcelMovimentation.make!(:liquidacao_total)
     pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
 
     click_link 'Contabilidade'

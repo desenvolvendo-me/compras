@@ -39,6 +39,7 @@ class PledgeParcelDecorator < Decorator
       'expiration_date' => expiration_date,
       'value' => value,
       'canceled_value' => canceled_value,
+      'liquidations_value' => liquidations_value,
       'balance' => balance_as_currency
     }
   end

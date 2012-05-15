@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/pledge_liquidation'
+require 'app/models/pledge_parcel_movimentation'
 
 describe PledgeLiquidation do
   it 'should return id as to_s' do
@@ -16,23 +17,28 @@ describe PledgeLiquidation do
   it { should validate_presence_of :year }
 
   it { should belong_to :pledge }
-  it { should belong_to :pledge_parcel }
   it { should belong_to :entity }
+
+  it { should have_many(:pledge_parcel_movimentations).dependent(:restrict) }
 
   it { should_not allow_value("2ce3").for(:year) }
   it { should allow_value("2012").for(:year) }
 
   context 'validate value' do
-    it 'should not be valid if value greater than balance' do
-      pledge_parcel = double('PledgeParcel', :value => 3, :balance => 0, :emission_date => nil)
-      subject.stub(:pledge_parcel).and_return(pledge_parcel)
-      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo")
+    before do
+      subject.stub(:pledge).and_return(pledge)
     end
 
-    it 'should be valid if value is not greater than balance' do
-      pledge_parcel = double('PledgeParcel', :value => 3, :balance => 0, :emission_date => nil)
-      subject.stub(:pledge_parcel).and_return(pledge_parcel)
-      subject.should_not allow_value(1).for(:value)
+    let :pledge do
+      double('Pledge', :balance => 3)
+    end
+
+    it 'should not be valid if value greater than pledge balance' do
+      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho")
+    end
+
+    it 'should be valid if value is not greater than pledge balance' do
+      subject.should allow_value(1).for(:value)
     end
   end
 
@@ -51,7 +57,7 @@ describe PledgeLiquidation do
     end
 
     it 'should not be valid when date is older then emission_date' do
-      subject.stub(:emission_date).and_return(Date.new(2012, 3, 29))
+      subject.stub(:pledge).and_return(double('Pledge', :emission_date => Date.new(2012, 3, 29)))
       subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho')
     end
   end

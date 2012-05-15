@@ -22,25 +22,63 @@
   </div>
 </div>
 
+<table id="pledge_parcels" class="records">
+  <thead>
+    <tr>
+      <th>Parcela</th>
+      <th>Vencimento</th>
+      <th>Valor inicial</th>
+      <th>Valor liquidação</th>
+      <th>Valor atual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if f.object.pledge %>
+      <% localized(f.object.pledge.pledge_parcels).each do |parcel| %>
+        <tr id="parcel_<%= parcel.number %>">
+          <td><%= parcel.number %></td>
+          <td><%= parcel.expiration_date %></td>
+          <td class="value"><%= parcel.decorator.value %></td>
+          <td class="liquidations_value"><%= parcel.decorator.liquidations_value %></td>
+          <td class="balance"><%= parcel.decorator.balance_as_currency %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <%= f.input :pledge_parcel %>
-    <%= link_to_modal_info 'pledge_liquidation_pledge_parcel', f.object.pledge_parcel %>
+  <div class="yui3-u-1-2">
+    <%= f.input :kind %>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :expiration_date, :disabled => true, :input_html => { :value => f.object.decorator.expiration_date } %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :balance, :disabled => true, :input_html => { :value => f.object.decorator.balance } %>
+  <div class="yui3-u-1-2">
+    <%= f.input :value, :disabled => f.object.total? %>
   </div>
 </div>
 
-<%= f.input :kind %>
-<%= f.input :value, :disabled => f.object.total? %>
 <%= f.input :date %>
 <%= f.input :description, :disabled => true %>
+
+<%= mustache 'pledge-parcels-template' do %>
+  <tr id="parcel_{{number}}">
+    <td>
+      {{number}}
+    </td>
+    <td>
+      {{expiration_date}}
+    </td>
+    <td class="value">
+      {{value}}
+    </td>
+    <td class="liquidations_value">
+      {{liquidations_value}}
+    </td>
+    <td class="balance">
+      {{balance}}
+    </td>
+  </tr>
+<% end %>
 
 <script>
   <% if f.object.persisted? %>
@@ -48,27 +86,33 @@
   <% else %>
     (function() {
       var pledgeId = $('#pledge_liquidation_pledge_id').val(),
-          pledgeExpirationValue;
+          pledgeValue;
 
-      function pledgeExpirationUrl() {
-        var url = "<%= modal_pledge_parcels_path %>?",
-            params = {
-              locked_fields: ["pledge"],
-              pledge_parcel: {
-                pledge_id: $('#pledge_liquidation_pledge_id').val(),
-                pledge: $('#pledge_liquidation_pledge').val()
-              }
-            };
+      function clearExistingPledgeParcels() {
+        $('#pledge_parcels tbody').html('');
+      }
 
-        url += jQuery.param(params);
+      function createPledgeParcelsFromPledge(pledgeParcels) {
+        var template = $('#pledge-parcels-template'),
+            rendered = '';
 
-        return url;
+        $(pledgeParcels).each(function() {
+          rendered += template.mustache({
+            expiration_date: this.expiration_date,
+            value: this.value,
+            number: this.number,
+            liquidations_value: this.liquidations_value,
+            balance: this.balance
+          });
+        });
+
+        $('#pledge_parcels tbody').html(rendered);
       }
 
       function forceValueWhenKindIsTotal(){
         if($('#pledge_liquidation_kind').val() == '<%= PledgeLiquidationKind::TOTAL %>') {
           $('#pledge_liquidation_value').attr('disabled', true);
-          $('#pledge_liquidation_value').val(pledgeExpirationValue);
+          $('#pledge_liquidation_value').val(pledgeValue);
         } else {
           $('#pledge_liquidation_value').attr('disabled', false);
         }
@@ -77,45 +121,25 @@
       $('#pledge_liquidation_pledge_id').change(function(event, data) {
         if (data) {
           var record = data.record;
+
           $('#pledge_liquidation_emission_date').val(record.data("emission-date"));
           $('#pledge_liquidation_pledge_value').val(record.data("pledge-value"));
           $('#pledge_liquidation_description').val(record.data("description"));
-          if (pledgeId != record.data('id')) {
-            $('#pledge_liquidation_pledge_parcel').attr('data-modal-url', pledgeExpirationUrl());
-            $('#pledge_liquidation_expiration_date').val('');
-            $('#pledge_liquidation_pledge_parcel_id').val('');
-            $('#pledge_liquidation_pledge_parcel_value').val('');
-          }
+
+          createPledgeParcelsFromPledge(record.data('pledge-expirations'));
+          pledgeValue = record.data('balance');
         } else {
-          $('#pledge_liquidation_pledge_parcel').attr('data-modal-url', '<%= modal_pledge_parcels_path %>');
           $('#pledge_liquidation_emission_date').val('');
           $('#pledge_liquidation_pledge_value').val('');
-          $('#pledge_liquidation_pledge_parcel').val('');
           $('#pledge_liquidation_expiration_date').val('');
           $('#pledge_liquidation_balance').val('');
           $('#pledge_liquidation_description').val('');
-        }
-      });
 
-      $('#pledge_liquidation_pledge_parcel_id').change(function(event, data) {
-        if (data) {
-          var record = data.record;
-          $('#pledge_liquidation_expiration_date').val(record.data("expiration-date"));
-          $('#pledge_liquidation_balance').val(record.data("balance"));
-          if (!$('#pledge_liquidation_pledge_id').val()) {
-            $('#pledge_liquidation_pledge_id').val(record.data("pledge-id"));
-            $('#pledge_liquidation_pledge').val(record.data("pledge"));
-            $('#pledge_liquidation_pledge_value').val(record.data("pledge-value"));
-            $('#pledge_liquidation_emission_date').val(record.data("emission-date"));
-            $('#pledge_liquidation_description').val(record.data('pledge-description'));
-          }
-          pledgeId = record.data('pledge-id');
-          pledgeExpirationValue = record.data('pledge-expiration-value');
-          forceValueWhenKindIsTotal();
-        } else {
-          $('#pledge_liquidation_expiration_date, #pledge_liquidation_balance').val('');
-          pledgeExpirationValue = null;
+          clearExistingPledgeParcels();
+          pledgeValue = null;
         }
+
+        forceValueWhenKindIsTotal();
       });
 
       $('#pledge_liquidation_kind').change(forceValueWhenKindIsTotal);
