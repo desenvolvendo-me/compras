@@ -19,16 +19,22 @@ class PledgeParcelMovimentationGenerator
 
       calculator = PledgeParcelMovimentationCalculator.new(value_left, parcel.balance)
 
-      pledge_parcel_movimentation_storage.create!(
-        :pledge_parcel_id => parcel.id,
-        :pledge_parcel_modificator_id => pledge_cancellation_object.id,
-        :pledge_parcel_modificator_type => pledge_cancellation_object.class.name,
-        :pledge_parcel_value_was => parcel.balance,
-        :pledge_parcel_value => calculator.parcel_value,
-        :value => calculator.movimented_value
-      )
+      create!(parcel, pledge_cancellation_object, calculator)
 
       value_left -= calculator.movimented_value
     end
+  end
+
+  protected
+
+  def create!(parcel, pledge_cancellation_object, calculator)
+    pledge_parcel_movimentation_storage.create!(
+      :pledge_parcel_id => parcel.id,
+      :pledge_parcel_modificator_id => pledge_cancellation_object.id,
+      :pledge_parcel_modificator_type => pledge_cancellation_object.class.name,
+      :pledge_parcel_value_was => parcel.balance,
+      :pledge_parcel_value => calculator.parcel_value,
+      :value => calculator.movimented_value
+    )
   end
 end
