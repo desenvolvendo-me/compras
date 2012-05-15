@@ -18,7 +18,7 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   delegate :president_name, :to => :licitation_commission, :allow_nil => true, :prefix => true
   delegate :licitation_commission_members, :to => :licitation_commission, :allow_nil => true
 
-  validates :licitation_process, :licitation_commission, :year, :presence => true
+  validates :licitation_process, :licitation_commission, :year, :minutes_number, :judgment_sequence, :presence => true
   validates :year, :mask => "9999"
   validates :judgment_start_date, :judgment_start_time, :judgment_end_date, :presence => true
   validates :judgment_end_time, :companies_minutes, :companies_documentation_minutes, :presence => true
@@ -27,8 +27,8 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   validate :cannot_have_duplicated_individuals_on_members
   validate :start_date_time_should_not_be_greater_than_end_date_time
 
-  before_create :set_minutes_number
-  before_create :set_judgment_sequence
+  before_validation :set_minutes_number, :on => :create
+  before_validation :set_judgment_sequence, :on => :create
 
   orderize :id
   filterize
@@ -52,6 +52,8 @@ class JudgmentCommissionAdvice < ActiveRecord::Base
   end
 
   def next_judgment_commission_advice_number
+    return unless licitation_process
+
     licitation_process_advice_number.succ
   end
 
