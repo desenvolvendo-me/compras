@@ -1,4 +1,4 @@
-<fieldset class="direct-purchase-budget-allocation contrasted">
+<div class="direct-purchase-budget-allocation contrasted">
   <div class="yui3-g">
     <%= f.input :id, :as => 'hidden' %>
     <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
@@ -7,22 +7,18 @@
       <%= f.input :budget_allocation, :input_html => { :class => 'budget-allocation' } %>
     </div>
 
-    <div class="yui3-u-1-2">
-      <div class="yui3-g">
-        <div class="yui3-u-1-2">
-          <%= f.input :expense_nature, :disabled => true, :input_html => { :class => 'classification' } %>
-        </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :expense_nature, :disabled => true, :input_html => { :class => 'classification' } %>
+    </div>
 
-        <div class="yui3-u-1-2">
-          <%= f.input :amount, :disabled => true, :input_html => { :class => 'amount', :value => number_with_precision(f.object.amount) } %>
-        </div>
-      </div>
+    <div class="yui3-u-1-4">
+      <%= f.input :amount, :disabled => true, :input_html => { :class => 'amount', :value => number_with_precision(f.object.amount) } %>
     </div>
   </div>
 
   <%= f.error :items %>
 
-  <p class="nested-remove">
+  <p>
     <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
   </p>
 
@@ -38,10 +34,10 @@
     <% end %>
   <% end %>
 
-  <div class="nested-remove">
+  <p class="yui3-u">
     <input type="button" class="button negative remove-direct-purchase-budget-allocation" value="Remover Dotação">
-  </div>
-</fieldset>
+  </p>
+</div>
 
 <script>
   $("#items-template-<%= f.nested_identifier %>").nestedForm({
@@ -49,6 +45,7 @@
     remove: ".remove-item",
     target: "#items-<%= f.nested_identifier %>",
     fieldToRemove: '.item',
-    uuid: "uuid_item"
+    uuid: "uuid_item",
+    appendItem: false
   });
 </script>

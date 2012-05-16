@@ -23,9 +23,7 @@
     </div>
   </div>
 
-  <div class="nested-remove">
-    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %> add-licitation-process-budget-allocation" value="Adicionar Item">
-  </div>
+  <input type="button" class="button affirmative add-item-<%= f.nested_identifier %> add-licitation-process-budget-allocation" value="Adicionar Item">
 
   <div id="items-<%= f.nested_identifier %>">
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>

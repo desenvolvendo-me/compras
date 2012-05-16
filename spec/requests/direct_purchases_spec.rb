@@ -445,7 +445,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      within 'fieldset:first' do
+      within 'div.direct-purchase-budget-allocation:first' do
         click_button 'Adicionar Item'
 
         within '.item:first' do
@@ -456,7 +456,7 @@ feature "DirectPurchases" do
 
         click_button 'Adicionar Item'
 
-        within '.item:last' do
+        within '.item:first' do
           fill_in 'Quantidade', :with => 5
           fill_in 'Valor unitário', :with => '2,00'
           page.should have_field 'Valor total', :with => '10,00'
@@ -465,7 +465,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      within 'fieldset:first' do
+      within 'div.direct-purchase-budget-allocation:first' do
         click_button 'Adicionar Item'
 
         within '.item:first' do
@@ -479,8 +479,8 @@ feature "DirectPurchases" do
 
       # removing an item
 
-      within 'fieldset:last' do
-        within '.item:last' do
+      within 'div.direct-purchase-budget-allocation:last' do
+        within '.item:first' do
           click_button 'Remover Item'
         end
       end
@@ -489,7 +489,7 @@ feature "DirectPurchases" do
 
       # removing an entire budget allocation
 
-      within 'fieldset:first' do
+      within 'div:last' do
         click_button 'Remover Dotação'
       end
 
@@ -507,7 +507,7 @@ feature "DirectPurchases" do
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
 
-      within 'fieldset:first' do
+      within 'div.direct-purchase-budget-allocation:first' do
         click_button 'Adicionar Item'
 
         within '.item:first' do
@@ -523,7 +523,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      within 'fieldset:first' do
+      within 'div.direct-purchase-budget-allocation:first' do
         click_button 'Adicionar Item'
 
         within '.item:first' do
@@ -531,7 +531,7 @@ feature "DirectPurchases" do
         end
       end
 
-      within 'fieldset:last' do
+      within 'div.direct-purchase-budget-allocation:last' do
         within '.item:first' do
           click_button 'Remover Item'
         end

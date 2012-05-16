@@ -12,7 +12,9 @@
   </div>
 </div>
 
-<input type="button" class="button affirmative add-extra-credit-moviment-type" value="Adicionar Movimento">
+<p>
+  <input type="button" class="button affirmative add-extra-credit-moviment-type" value="Adicionar Movimento">
+</p>
 
 <div id="extra-credit-moviment-types">
   <%= f.association :extra_credit_moviment_types, :collection => localized(f.object.extra_credit_moviment_types) do |a| %>

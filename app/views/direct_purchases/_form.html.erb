@@ -24,8 +24,8 @@
     if (data){
       var record = data.record;
 
-      $(this).closest('fieldset').find('.classification').val(record.data("expense-nature"));
-      $(this).closest('fieldset').find('.amount').val(record.data("amount"));
+      $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(record.data("expense-nature"));
+      $(this).closest('div.direct-purchase-budget-allocation').find('.amount').val(record.data("amount"));
     }
   });
 
@@ -38,7 +38,7 @@
   });
 
   function calcItemOrder() {
-    $('fieldset.direct-purchase-budget-allocation').each(function(index, item){
+    $('div.direct-purchase-budget-allocation').each(function(index, item){
       $(this).find('.item .hidden .destroy[value=false]').each(function(index, item){
         $(this).parent().parent().find('.order').val(index + 1);
       });
