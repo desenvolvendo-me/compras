@@ -13,11 +13,9 @@
 <%= a.input :state, :disabled => true %>
 
 <script>
-  $("#<%= a.sanitized_object_name %>_street").change(function (event, data) {
-    if (data) {
-      var record = data.record;
-
-      $("#<%= a.sanitized_object_name %>_neighborhood").attr("data-modal-url", "<%= modal_neighborhoods_path %>?street_id=" + record.data("value")).val("");
+  $("#<%= a.sanitized_object_name %>_street_id").change(function (event, street) {
+    if (street) {
+      $("#<%= a.sanitized_object_name %>_neighborhood").attr("data-modal-url", "<%= modal_neighborhoods_path %>?street_id=" + street.id).val("");
       $("#<%= a.sanitized_object_name %>_neighborhood_id").val("");
     }
 
@@ -28,12 +26,10 @@
     }
   }).change();
 
-  $("#<%= a.sanitized_object_name %>_neighborhood_id").change(function (event, data) {
-    if (data) {
-      var neighborhood = data.record;
-
-      $("#<%= a.sanitized_object_name %>_city").val(neighborhood.data("city"));
-      $("#<%= a.sanitized_object_name %>_state").val(neighborhood.data("state"));
+  $("#<%= a.sanitized_object_name %>_neighborhood_id").change(function (event, neighborhood) {
+    if (neighborhood) {
+      $("#<%= a.sanitized_object_name %>_city").val(neighborhood.city);
+      $("#<%= a.sanitized_object_name %>_state").val(neighborhood.state);
     }
   });
 </script>

@@ -3,7 +3,7 @@ class CrudController < ApplicationController
 
   inherit_resources
 
-  respond_to :js
+  respond_to :js, :json
 
   has_scope :filter, :type => :hash
   has_scope :page, :default => 1, :only => [:index, :modal], :unless => :disable_pagination?

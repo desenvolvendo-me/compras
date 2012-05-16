@@ -40,10 +40,6 @@ class LicitationCommission < ActiveRecord::Base
     commission_president.individual.to_s if commission_president
   end
 
-  def members_attr_data
-    licitation_commission_members.collect(&:attributes_for_data).to_json
-  end
-
   protected
 
   def cannot_have_duplicated_individuals_on_responsibles

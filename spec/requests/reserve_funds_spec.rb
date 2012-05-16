@@ -252,7 +252,7 @@ feature "ReserveFunds" do
     page.should have_field 'Valor reservado', :with => '20,00'
 
     # re-selecting the same budget allocation
-    fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+    fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
 
     page.should have_field 'Valor reservado', :with => '20,00'
   end

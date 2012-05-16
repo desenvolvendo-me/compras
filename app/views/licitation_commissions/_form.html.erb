@@ -19,26 +19,23 @@
 </div>
 
 <script>
-  $("#licitation_commission_regulatory_act").change(function (event, data) {
-    if (data){
-      var record = data.record;
-      $('#licitation_commission_regulatory_act_publication_date').val(record.data("publication-date"));
+  $("#licitation_commission_regulatory_act_id").change(function (event, regulatory_act) {
+    if (regulatory_act) {
+      $('#licitation_commission_regulatory_act_publication_date').val(regulatory_act.publication_date);
     } else {
       $('#licitation_commission_regulatory_act_publication_date').val('');
     }
   });
 
-  $(".licitation_commission").delegate('.individual', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-
-      $(this).closest('.nested').find('.cpf').val(record.data('cpf'));
+  $(".licitation_commission").delegate('.individual', 'change', function (event, individual) {
+    if (individual){
+      $(this).closest('.nested').find('.cpf').val(individual.cpf);
     } else {
       $(this).closest('.nested').find('.cpf').val('');
     }
   });
 
-  $(".licitation_commission").delegate('.role', 'change', function (event, data) {
+  $(".licitation_commission").delegate('.role', 'change', function () {
     var classRegisterNeeded = $(this).val() == '<%= LicitationCommissionResponsibleRole::LAWYER %>';
 
     $(this).closest('.responsible').find('.class_register').attr('disabled', !classRegisterNeeded);

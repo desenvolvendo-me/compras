@@ -35,6 +35,6 @@
 
 <%= mustache "#{f.sanitized_object_name}_administrative_process_budget_allocation_items_template" do %>
   <%= f.association :administrative_process_budget_allocation_items, :collection => f.object.administrative_process_budget_allocation_items.build do |p| %>
-    <%= render 'administrative_process_budget_allocation_items/list_form', :material => '{{material}}', :quantity => '{{quantity}}', :unit_price => '{{unit_price}}', :id => '{{value}}', :f => f %>
+    <%= render 'administrative_process_budget_allocation_items/list_form', :material => '{{material}}', :quantity => '{{quantity}}', :unit_price => '{{unit_price}}', :id => '{{id}}', :f => f %>
   <% end %>
 <% end %>

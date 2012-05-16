@@ -11,8 +11,10 @@
 <%= f.input :status, :disabled => true %>
 <%= f.input :reserve_allocation_type %>
 <%= f.input :date, :disabled => f.object.persisted? %>
-<%= f.input :budget_allocation %>
-<%= link_to_modal_info 'reserve_fund_budget_allocation', f.object.budget_allocation %>
+<p>
+  <%= f.input :budget_allocation %>
+  <%= link_to_modal_info 'reserve_fund_budget_allocation', f.object.budget_allocation %>
+</p>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
@@ -51,8 +53,8 @@
       persisted = <%= f.object.persisted? %>;
 
   function calculateTotalReservedValue() {
-    var actualValue = (parsePtBrFloat($('#reserve_fund_value').val()) || 0),
-        total = reservedValue + actualValue;
+    var actualValue = (parsePtBrFloat($('#reserve_fund_value').val()) || 0);
+    var total = reservedValue + actualValue;
 
     // when editing, if user change the budget allocation, and re-select the same later,
     // it must subtract the saved value of the reserve and sum with the informed value
@@ -60,6 +62,7 @@
       total -= savedValue;
     }
 
+    total = parseFloat(total);
     $('#reserve_fund_budget_allocation_reserved_value').val(floatToPtBrString(total));
   }
 
@@ -67,12 +70,10 @@
     calculateTotalReservedValue();
   });
 
-  $("#reserve_fund_budget_allocation_id").change(function (event, data) {
-    if (data) {
-      var record = data.record;
-
-      $('#reserve_fund_budget_allocation_amount').val(record.data("amount"));
-      reservedValue = record.data('reserved-value');
+  $("#reserve_fund_budget_allocation_id").change(function (event, budget_allocation) {
+    if (budget_allocation) {
+      $('#reserve_fund_budget_allocation_amount').val(budget_allocation.amount);
+      reservedValue = parseFloat(budget_allocation.reserved_value);
     } else {
       $('#reserve_fund_budget_allocation_amount').val('');
       reservedValue = 0;
@@ -83,8 +84,8 @@
 
   calculateTotalReservedValue();
 
-  $("#reserve_fund_reserve_allocation_type_id").change(function (event, data) {
-    if (data && data.record.data("label") == "Licitação") {
+  $("#reserve_fund_reserve_allocation_type_id").change(function (event, reserve_allocation_type) {
+    if (reserve_allocation_type && reserve_allocation_type.value == "Licitação") {
       $("#reserve_fund_licitation_modality").attr("disabled", false);
       $("#reserve_fund_licitation").attr("disabled", false);
     } else {

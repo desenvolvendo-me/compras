@@ -33,12 +33,11 @@
     appendItem: false
   });
 
-  $('form.pledge').delegate('.material', 'change', function (event, data) {
-    if (data){
-      var record = data.record,
-          inputs = $(this).closest('.pledge-item').find(':input');
-      $(inputs[4]).val(record.data("name"));
-      $(inputs[5]).val(record.data("reference-unit"));
+  $('form.pledge').delegate('.material', 'change', function (event, material) {
+    if (material) {
+      var inputs = $(this).closest('.pledge-item').find(':input');
+      $(inputs[4]).val(material.description);
+      $(inputs[5]).val(material.reference_unit);
     }
   });
 

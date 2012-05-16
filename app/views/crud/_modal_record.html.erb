@@ -1,8 +1,4 @@
-<% if record.decorator? %>
-<tr <%= record.decorator.formatted_data_attributes %>>
-<% else %>
-<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>">
-<% end %>
+<tr data-resource="<%= render "data_attributes", :resource => record %>">
   <% attributes.each do |attribute| %>
     <td><%= formatted_attribute record, attribute %></td>
   <% end %>

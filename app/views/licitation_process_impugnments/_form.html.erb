@@ -66,16 +66,14 @@
 <%= f.input :observation, :disabled => true %>
 
 <script>
-  $('#licitation_process_impugnment_licitation_process_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#licitation_process_impugnment_licitation_process_object_description').val(record.data('object-description'));
-      $('#licitation_process_impugnment_licitation_process_envelope_delivery_date').val(record.data('envelope-delivery-date'));
-      $('#licitation_process_impugnment_licitation_process_envelope_delivery_time').val(record.data('envelope-delivery-time'));
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_date').val(record.data('envelope-opening-date'));
-      $('#licitation_process_impugnment_licitation_process_envelope_opening_time').val(record.data('envelope-opening-time'));
-    }
-    else{
+  $('#licitation_process_impugnment_licitation_process_id').change(function (event, licitation_process) {
+    if (licitation_process) {
+      $('#licitation_process_impugnment_licitation_process_object_description').val(licitation_process.object_description);
+      $('#licitation_process_impugnment_licitation_process_envelope_delivery_date').val(licitation_process.envelope_delivery_date);
+      $('#licitation_process_impugnment_licitation_process_envelope_delivery_time').val(licitation_process.envelope_delivery_time);
+      $('#licitation_process_impugnment_licitation_process_envelope_opening_date').val(licitation_process.envelope_opening_date);
+      $('#licitation_process_impugnment_licitation_process_envelope_opening_time').val(licitation_process.envelope_opening_time);
+    } else {
       $('#licitation_process_impugnment_licitation_process_object_description').val('');
       $('#licitation_process_impugnment_licitation_process_envelope_delivery_date').val('');
       $('#licitation_process_impugnment_licitation_process_envelope_delivery_time').val('');

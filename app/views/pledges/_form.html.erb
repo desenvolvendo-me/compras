@@ -64,22 +64,20 @@
         });
       }
 
-      $("#pledge_reserve_fund_id").change(function (event, data) {
-        if (data) {
-          var record = data.record;
+      $("#pledge_reserve_fund_id").change(function (event, reserve_fund) {
+        if (reserve_fund) {
+          $('#pledge_reserve_fund_value').val(reserve_fund.reserve_fund_value);
+          $('#pledge_budget_allocation').val(reserve_fund.budget_allocation);
+          $('#pledge_budget_allocation_id').val(reserve_fund.budget_allocation_id);
+          $('#pledge_budget_allocation_real_amount').val(reserve_fund.amount);
+          $('#pledge_budget_allocation_function').val(reserve_fund.function);
+          $('#pledge_budget_allocation_subfunction').val(reserve_fund.subfunction);
+          $('#pledge_budget_allocation_government_program').val(reserve_fund.government_program);
+          $('#pledge_budget_allocation_government_action').val(reserve_fund.government_action);
+          $('#pledge_budget_allocation_budget_unit').val(reserve_fund.budget_unit);
+          $('#pledge_budget_allocation_expense_nature').val(reserve_fund.expense_nature);
 
-          $('#pledge_reserve_fund_value').val(record.data("reserve-fund-value"));
-          $('#pledge_budget_allocation').val(record.data("budget-allocation"));
-          $('#pledge_budget_allocation_id').val(record.data("budget-allocation-id"));
-          $('#pledge_budget_allocation_real_amount').val(record.data("amount"));
-          $('#pledge_budget_allocation_function').val(record.data("function"));
-          $('#pledge_budget_allocation_subfunction').val(record.data("subfunction"));
-          $('#pledge_budget_allocation_government_program').val(record.data("government_program"));
-          $('#pledge_budget_allocation_government_action').val(record.data("government_action"));
-          $('#pledge_budget_allocation_budget_unit').val(record.data("budget_unit"));
-          $('#pledge_budget_allocation_expense_nature').val(record.data("expense-nature"));
-
-          reserveFundBudgetAllocationId = record.data('budget-allocation-id');
+          reserveFundBudgetAllocationId = reserve_fund.budget_allocation_id;
         } else {
           $('#pledge_reserve_fund_value').val('');
         }
@@ -97,21 +95,19 @@
         };
       });
 
-      $("#pledge_budget_allocation_id").change(function (event, data) {
-        if (data) {
-          var record = data.record;
-
-          if (reserveFundBudgetAllocationId != record.data('id')) {
+      $("#pledge_budget_allocation_id").change(function (event, budget_allocation) {
+        if (budget_allocation) {
+          if (reserveFundBudgetAllocationId != budget_allocation.id) {
             $('#pledge_reserve_fund_id').val('');
             $('#pledge_reserve_fund').val('');
           }
-          $('#pledge_budget_allocation_real_amount').val(record.data("real-amount"));
-          $('#pledge_budget_allocation_function').val(record.data("function"));
-          $('#pledge_budget_allocation_subfunction').val(record.data("subfunction"));
-          $('#pledge_budget_allocation_government_program').val(record.data("government_program"));
-          $('#pledge_budget_allocation_government_action').val(record.data("government_action"));
-          $('#pledge_budget_allocation_budget_unit').val(record.data("budget-unit"));
-          $('#pledge_budget_allocation_expense_nature').val(record.data("expense-nature"));
+          $('#pledge_budget_allocation_real_amount').val(budget_allocation.real_amount);
+          $('#pledge_budget_allocation_function').val(budget_allocation.function);
+          $('#pledge_budget_allocation_subfunction').val(budget_allocation.subfunction);
+          $('#pledge_budget_allocation_government_program').val(budget_allocation.government_program);
+          $('#pledge_budget_allocation_government_action').val(budget_allocation.government_action);
+          $('#pledge_budget_allocation_budget_unit').val(budget_allocation.budget_unit);
+          $('#pledge_budget_allocation_expense_nature').val(budget_allocation.expense_nature);
         } else {
           $('#pledge_budget_allocation_real_amount').val('');
           $('#pledge_budget_allocation_function').val('');
@@ -123,11 +119,9 @@
         }
       });
 
-      $("#pledge_management_contract_id").change(function (event, data) {
-        if (data) {
-          var record = data.record;
-
-          $('#pledge_management_contract_signature_date').val(record.data("signature-date"));
+      $("#pledge_management_contract_id").change(function (event, management_contract) {
+        if (management_contract) {
+          $('#pledge_management_contract_signature_date').val(management_contract.signature_date);
         } else {
           $('#pledge_management_contract_signature_date').val('');
         }

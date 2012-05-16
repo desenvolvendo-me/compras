@@ -90,4 +90,10 @@ module ApplicationHelper
       image_tag 'prefecture.jpg'
     end
   end
+
+  def builder(resource, json)
+    json.id resource.id
+    json.value resource.to_s
+    yield
+  end
 end

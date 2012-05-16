@@ -32,15 +32,4 @@ class PledgeParcelDecorator < Decorator
   def canceled_liquidations_value
     helpers.number_to_currency(component.canceled_liquidations_value) if component.canceled_liquidations_value
   end
-
-  def to_hash
-    {
-      'number' => number,
-      'expiration_date' => expiration_date,
-      'value' => value,
-      'canceled_value' => canceled_value,
-      'liquidations_value' => liquidations_value,
-      'balance' => balance_as_currency
-    }
-  end
 end

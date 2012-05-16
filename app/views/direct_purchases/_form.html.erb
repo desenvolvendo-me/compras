@@ -20,20 +20,16 @@
     $('.button.affirmative').hide();
   <% end %>
 
-  $('form.direct_purchase').delegate('.budget-allocation', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-
-      $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(record.data("expense-nature"));
-      $(this).closest('div.direct-purchase-budget-allocation').find('.amount').val(record.data("amount"));
+  $('form.direct_purchase').delegate('.budget-allocation', 'change', function (event, budget_allocation) {
+    if (budget_allocation) {
+      $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(budget_allocation.expense_nature);
+      $(this).closest('div.direct-purchase-budget-allocation').find('.amount').val(budget_allocation.amount);
     }
   });
 
-  $('form.direct_purchase').delegate('.material', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-
-      $(this).closest('.item').find('.reference-unit').val(record.data("reference-unit"));
+  $('form.direct_purchase').delegate('.material', 'change', function (event, material) {
+    if (material) {
+      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }
   });
 
@@ -107,12 +103,10 @@
     }
   }
 
-  $('form.direct_purchase').delegate('#direct_purchase_licitation_object_id', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-
-      purchaseLicitationExemption = record.data('purchase-licitation-exemption');
-      buildLicitationExemption = record.data('build-licitation-exemption');
+  $('form.direct_purchase').delegate('#direct_purchase_licitation_object_id', 'change', function (event, licitation_object) {
+    if (licitation_object) {
+      purchaseLicitationExemption = licitation_object.purchase_licitation_exemption;
+      buildLicitationExemption    = licitation_object.build_licitation_exemption;
     } else {
       purchaseLicitationExemption = 0;
       buildLicitationExemption = 0;
@@ -121,7 +115,7 @@
     setLicitationExemption();
   });
 
-  $('form.direct_purchase').delegate('#direct_purchase_modality', 'change', function (event, data) {
+  $('form.direct_purchase').delegate('#direct_purchase_modality', 'change', function () {
     setLicitationExemption();
   });
 

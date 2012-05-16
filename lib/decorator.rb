@@ -19,7 +19,6 @@
 class Decorator < ActiveSupport::BasicObject
   include ::Decorator::Summary
   include ::Decorator::Infection
-  include ::Decorator::DataAttributes
   include ::Decorator::ModalAttributes
 
   attr_accessor :original_component, :component, :routes, :helpers

@@ -1,7 +1,0 @@
-<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>" data-id="<%= record.id %>" data-expiration-date="<%= record.expiration_date %>" data-pledge-expiration-value="<%= record.value %>" data-balance="<%= record.decorator.balance %>" data-pledge-id="<%= record.pledge_id %>" data-pledge="<%= record.pledge %>" data-emission-date="<%= record.decorator.emission_date %>" data-pledge-value="<%= record.decorator.pledge_value %>" data-modal-info-url="<%= pledge_parcel_path(record) %>" data-pledge-description="<%= record.pledge_description %>">
-  <% attributes.each do |attribute| %>
-    <td>
-      <%= record.send attribute %>
-    </td>
-  <% end %>
-</tr>

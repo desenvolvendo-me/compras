@@ -46,18 +46,17 @@ $(".modal-finder-remove").live("click", function () {
   $(this).closest("tr").remove();
 });
 
-$(".modal-finder .modal input.modal").live("change", function(event, data) {
+$(".modal-finder .modal input.modal").live("change", function(event, record) {
   var id = $(this).attr("id");
   var template = "#" + id + "_template";
-  var record = data.record;
   var defaults = {
     index: _.uniqueId('fresh-'),
     uuid: _.uniqueId('fresh-')
   }
 
-  var options = $.extend({}, defaults, record.data());
+  var options = $.extend({}, defaults, record);
 
-  if ($("#" + id + "_record_" + record.data("id") + '_id').length == 0 ) {
+  if ($("#" + id + "_record_" + record.id + '_id').length == 0 ) {
     $("." + id + "_records").append($(template).mustache(options)).trigger('append.mustache');
   }
 

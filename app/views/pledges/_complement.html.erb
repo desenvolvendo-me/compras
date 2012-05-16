@@ -25,12 +25,10 @@
 <%= f.input :description %>
 
 <script>
-  $('#pledge_licitation_process_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#pledge_licitation_process_licitation_number').val(record.data('licitation-number'));
-    }
-    else{
+  $('#pledge_licitation_process_id').change(function (event, licitation_process) {
+    if (licitation_process) {
+      $('#pledge_licitation_process_licitation_number').val(licitation_process.licitation_number);
+    } else {
       $('#pledge_licitation_process_licitation_number').val('');
     }
   });

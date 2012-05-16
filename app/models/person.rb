@@ -75,4 +75,8 @@ class Person < ActiveRecord::Base
   def to_s
     name
   end
+
+  def company?
+    personable_type == "Company"
+  end
 end

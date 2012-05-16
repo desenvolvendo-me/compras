@@ -25,11 +25,9 @@
 <%= f.input :performance_field %>
 
 <script>
-  $('#budget_unit_budget_unit_configuration_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-
-      $('#budget_unit_budget_unit').attr("data-mask", record.data("mask"));
+  $('#budget_unit_budget_unit_configuration_id').change(function (event, budget_unit_configuration) {
+    if (budget_unit_configuration) {
+      $('#budget_unit_budget_unit').attr("data-mask", budget_unit_configuration.mask);
     }
   });
 </script>

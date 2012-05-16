@@ -4,10 +4,9 @@
 <%= f.input :description %>
 
 <script>
-  $("#function_regulatory_act_id").change(function (event, data) {
-    if (data){
-      var record = data.record;
-      $('#function_regulatory_act_vigor_date').val(record.data("vigor-date"));
+  $("#function_regulatory_act_id").change(function (event, regulatory_act) {
+    if (regulatory_act) {
+      $('#function_regulatory_act_vigor_date').val(regulatory_act.vigor_date);
     } else {
       $('#function_regulatory_act_vigor_date').val('');
     }

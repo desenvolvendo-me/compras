@@ -36,27 +36,26 @@
           expiration_date: this.expiration_date,
           value: this.value,
           number: this.number,
-          pledge_balance: this.pledge_balance
+          balance: this.balance
         });
       });
 
       $('#expirations tbody').html(rendered);
     }
 
-      $('#subpledge_pledge_id').change(function(event, data) {
+      $('#subpledge_pledge_id').change(function (event, pledge) {
         cleanExistingPledgeParcels();
 
-        if (data) {
-          var record = data.record;
-          $('#subpledge_pledge_provider').val(record.data("provider"));
-          $('#subpledge_emission_date').val(record.data("emission-date"));
-          $('#subpledge_pledge_value').val(record.data("pledge-value"));
-          $('#subpledge_pledge_balance').val(record.data("balance"));
-          $('#subpledge_value').val(record.data("balance"));
-          $('#subpledge_provider_id').val(record.data("provider-id"));
-          $('#subpledge_provider').val(record.data("provider"));
-          $('#subpledge_description').val(record.data("description"));
-          createPledgeParcelsFromPledge(record.data("pledge-expirations"));
+        if (pledge) {
+          $('#subpledge_pledge_provider').val(pledge.provider);
+          $('#subpledge_emission_date').val(pledge.emission_date);
+          $('#subpledge_pledge_value').val(pledge.pledge_value);
+          $('#subpledge_pledge_balance').val(pledge.balance);
+          $('#subpledge_value').val(pledge.balance);
+          $('#subpledge_provider_id').val(pledge.provider_id);
+          $('#subpledge_provider').val(pledge.provider);
+          $('#subpledge_description').val(pledge.description);
+          createPledgeParcelsFromPledge(pledge.parcels);
         } else {
           $('#subpledge_pledge_provider').val('');
           $('#subpledge_emission_date').val('');

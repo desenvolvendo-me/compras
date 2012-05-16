@@ -64,11 +64,12 @@
         modal.find(':input:focusable:not([data-modal]):first').focus();
       });
 
-      modal.delegate('tr[data-value]', 'click', function () {
+      modal.delegate('tr[data-resource]', 'click', function () {
         var tr = $(this);
+        var resource = $(this).data("resource");
 
-        element.val(tr.attr('data-label')).trigger('change', {record: tr});
-        hidden.val(tr.attr('data-value')).trigger('change', {record: tr});
+        element.val(resource.value).trigger('change', resource);
+        hidden.val(resource.id).trigger('change', resource);
 
         modal.dialog('close');
       });

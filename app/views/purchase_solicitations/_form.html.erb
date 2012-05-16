@@ -14,11 +14,9 @@
 </div>
 
 <script>
-  $('form.purchase_solicitation').delegate('.material', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-
-      $(this).closest('.item').find('.reference-unit').val(record.data("reference-unit"));
+  $('form.purchase_solicitation').delegate('.material', 'change', function (event, material) {
+    if (material) {
+      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }
   });
 

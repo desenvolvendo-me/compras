@@ -57,22 +57,20 @@
     });
   }
 
-  $("#licitation_process_administrative_process_id").change(function (event, data) {
-    if (data) {
-      var record = data.record;
+  $("#licitation_process_administrative_process_id").change(function (event, administrative_process) {
+    if (administrative_process) {
+      $('#licitation_process_administrative_process_budget_unit').val(administrative_process.budget_unit);
+      $('#licitation_process_administrative_process_modality_humanize').val(administrative_process.modality_humanize);
+      $('#licitation_process_administrative_process_object_type_humanize').val(administrative_process.object_type_humanize);
+      $('#licitation_process_administrative_process_judgment_form').val(administrative_process.judgment_form);
+      $('#licitation_process_administrative_process_description').val(administrative_process.description);
+      $('#licitation_process_administrative_process_responsible').val(administrative_process.responsible);
+      $('#licitation_process_administrative_process_item').val(administrative_process.item);
+      $('#licitation_process_modality').val(abreviatedProcessModality(administrative_process.modality));
+      $("#licitation_process_administrative_process_attributes_id").val(administrative_process.id);
 
-      $('#licitation_process_administrative_process_budget_unit').val(record.data("budget-unit"));
-      $('#licitation_process_administrative_process_modality_humanize').val(record.data("modality-humanize"));
-      $('#licitation_process_administrative_process_object_type_humanize').val(record.data("object-type-humanize"));
-      $('#licitation_process_administrative_process_judgment_form').val(record.data("judgment-form"));
-      $('#licitation_process_administrative_process_description').val(record.data("description"));
-      $('#licitation_process_administrative_process_responsible').val(record.data("responsible"));
-      $('#licitation_process_administrative_process_item').val(record.data("item"));
-      $('#licitation_process_modality').val(abreviatedProcessModality(record.data("modality")));
-      $("#licitation_process_administrative_process_attributes_id").val(record.data("id"));
-
-      createAdministrativeProcessBudgetAllocations(record.data("budget-allocations"));
-      filterTypesOfCalculation(record.data("judgment-form-kind"), record.data("object-type"), record.data("modality"));
+      createAdministrativeProcessBudgetAllocations(administrative_process.budget_allocations);
+      filterTypesOfCalculation(administrative_process.judgment_form_kind, administrative_process.object_type, administrative_process.modality);
     } else {
       $('#licitation_process_administrative_process_budget_unit').val('');
       $('#licitation_process_administrative_process_modality_humanize').val('');
@@ -87,11 +85,9 @@
     }
   });
 
-  $('form.licitation_process').delegate('.material', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-
-      $(this).closest('.item').find('.reference-unit').val(record.data("reference-unit"));
+  $('form.licitation_process').delegate('.material', 'change', function (event, material) {
+    if (material){
+      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }
   });
 

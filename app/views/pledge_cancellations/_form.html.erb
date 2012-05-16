@@ -134,16 +134,15 @@
         $('#pledge_parcels tbody').html(rendered);
       }
 
-      $('#pledge_cancellation_pledge_id').change(function(event, data) {
-        if (data) {
-          var record = data.record;
-          $('#pledge_cancellation_emission_date').val(record.data("emission-date"));
-          $('#pledge_cancellation_pledge_value').val(record.data("pledge-value"));
-          createPledgeParcelsFromPledge(record.data('pledge-expirations'));
-          pledgeValue = record.data('balance');
+      $('#pledge_cancellation_pledge_id').change(function (event, pledge) {
+        if (pledge) {
+          $('#pledge_cancellation_emission_date').val(pledge.emission_date);
+          $('#pledge_cancellation_pledge_value').val(pledge.pledge_value);
+          createPledgeParcelsFromPledge(pledge.parcels);
+          pledgeValue = pledge.balance;
           forceValueWhenTotalIsKind();
 
-          if (pledgeId != record.data('id')) {
+          if (pledgeId != pledge.id) {
             $('#pledge_cancellation_pledge_parcel').attr('data-modal-url', pledgeExpirationUrl());
             $('#pledge_cancellation_expiration_date').val('');
             $('#pledge_cancellation_pledge_parcel_id').val('');

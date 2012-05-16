@@ -1,2 +1,0 @@
-class LicitationProcessAppealDecorator < Decorator
-end

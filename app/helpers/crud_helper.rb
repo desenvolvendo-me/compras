@@ -36,14 +36,15 @@ module CrudHelper
   end
 
   def formatted_attribute(record, attribute)
-    return if attribute["attributes"]
     att = record.send attribute
+
     if att.kind_of?(TrueClass) || att.kind_of?(FalseClass)
-      att = I18n.t(att)
+      I18n.t(att)
     elsif record.respond_to?("#{attribute}_humanize")
-      att = record.send "#{attribute}_humanize"
+      record.send "#{attribute}_humanize"
+    else
+      att
     end
-    att
   end
 
   def link_to_modal_info(id, href="#")

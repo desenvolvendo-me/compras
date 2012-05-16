@@ -8,7 +8,6 @@ describe Decorator do
   let :decorator do
     Class.new(Decorator) do
       attr_modal :my, :attributes
-      attr_data 'my-first-name' => :first_name
 
       def path
         routes.person_path(component)
@@ -60,20 +59,6 @@ describe Decorator do
     decorator_class.stub(:modal_attributes).and_return(['my', 'attributes'])
 
     subject.modal_attributes.to_a.should eq ['my', 'attributes']
-  end
-
-  it 'should return an list with data attributes and default data attributes' do
-    data_attributes = { 'value' => :id, 'label' => :to_s, 'type' => :class, 'my-first-name' => :first_name }
-    formatted_data_attributes = "data-value='1' data-label='component' data-type='RSpec::Mocks::Mock' data-my-first-name='Marcelo'"
-
-    component.stub(:id).and_return(1)
-    component.stub(:to_s).and_return('component')
-    component.stub(:first_name).and_return('Marcelo')
-
-    String.any_instance.stub(:constantize).and_return(decorator_class)
-    decorator_class.stub(:data_attributes).and_return(data_attributes)
-
-    subject.formatted_data_attributes.should eq formatted_data_attributes
   end
 
   it 'should return only the component when has not the localized method' do

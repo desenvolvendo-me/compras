@@ -79,13 +79,11 @@
       return url;
     }
 
-    $('#subpledge_cancellation_pledge_id').change(function(event, data) {
-      if (data) {
-        var record = data.record;
-
-        $('#subpledge_cancellation_provider').val(record.data("provider"));
-        $('#subpledge_cancellation_emission_date').val(record.data("emission-date"));
-        $('#subpledge_cancellation_pledge_value').val(record.data("pledge-value"));
+    $('#subpledge_cancellation_pledge_id').change(function (event, pledge) {
+      if (pledge) {
+        $('#subpledge_cancellation_provider').val(pledge.provider);
+        $('#subpledge_cancellation_emission_date').val(pledge.emission_date);
+        $('#subpledge_cancellation_pledge_value').val(pledge.pledge_value);
         $('#subpledge_cancellation_subpledge').attr('data-modal-url', subpledgeUrl());
       } else {
         $('#subpledge_cancellation_provider').val('');
@@ -93,7 +91,7 @@
         $('#subpledge_cancellation_pledge_value').val('');
         $('#subpledge_cancellation_subpledge').val('');
         $('#subpledge_cancellation_subpledge_id').val('');
-        $('#subpledge_cancellation_subpledge').attr('data-modal-url', '<%= modal_subpledges_path%>');
+        $('#subpledge_cancellation_subpledge').attr('data-modal-url', '<%= modal_subpledges_path %>');
         $('#subpledge_cancellation_subpledge_expiration_balance').val('');
         $('#subpledge_cancellation_subpledge_balance').val('');
         $('#subpledge_cancellation_subpledge_expiration').val('');
@@ -102,20 +100,18 @@
       }
     });
 
-    $('#subpledge_cancellation_subpledge_id').change(function(event, data) {
-      if (data) {
-        var record = data.record;
-
+    $('#subpledge_cancellation_subpledge_id').change(function (event, subpledge) {
+      if (subpledge) {
         $('#subpledge_cancellation_subpledge_expiration').attr('disabled', false);
         $('#subpledge_cancellation_subpledge_expiration').attr('data-modal-url', subpledgeExpirationUrl());
-        $('#subpledge_cancellation_subpledge_balance').val(record.data('balance'));
+        $('#subpledge_cancellation_subpledge_balance').val(subpledge.balance);
 
         if (!$('#subpledge_cancellation_pledge_id').val()) {
-          $('#subpledge_cancellation_provider').val(record.data("pledge-provider"));
-          $('#subpledge_cancellation_emission_date').val(record.data("emission-date"));
-          $('#subpledge_cancellation_pledge_value').val(record.data("pledge-value"));
-          $('#subpledge_cancellation_pledge').val(record.data("pledge"));
-          $('#subpledge_cancellation_pledge_id').val(record.data("pledge-id"));
+          $('#subpledge_cancellation_provider').val(subpledge.pledge_provider);
+          $('#subpledge_cancellation_emission_date').val(subpledge.emission_date);
+          $('#subpledge_cancellation_pledge_value').val(subpledge.pledge_value);
+          $('#subpledge_cancellation_pledge').val(subpledge.pledge);
+          $('#subpledge_cancellation_pledge_id').val(subpledge.pledge_id);
         }
       } else {
         $('#subpledge_cancellation_subpledge_balance').val('');
@@ -126,14 +122,12 @@
       }
     });
 
-    $('#subpledge_cancellation_subpledge_expiration_id').change(function(event, data) {
-      if (data) {
-        var record = data.record;
-
+    $('#subpledge_cancellation_subpledge_expiration_id').change(function(event, subpledge_expiration) {
+      if (subpledge_expiration) {
         if (!$('#subpledge_cancellation_value').val()){
-          $('#subpledge_cancellation_value').val(record.data("balance"));
+          $('#subpledge_cancellation_value').val(subpledge_expiration.balance);
         }
-        $('#subpledge_cancellation_subpledge_expiration_balance').val(record.data("balance"));
+        $('#subpledge_cancellation_subpledge_expiration_balance').val(subpledge_expiration.balance);
       } else {
         $('#subpledge_cancellation_subpledge_expiration_balance').val('');
       }

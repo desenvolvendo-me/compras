@@ -30,11 +30,10 @@
     appendItem: false
   });
 
-  $('form').delegate('.budget-allocation', 'change', function (event, data) {
-    if (data){
-      var record = data.record,
-          inputs = $(this).closest('div.nested').find(':input');
-      $(inputs[2]).val(record.data("id"));
+  $('form').delegate('.budget-allocation', 'change', function (event, budget_allocation) {
+    if (budget_allocation) {
+      var inputs = $(this).closest('div.nested').find(':input');
+      $(inputs[2]).val(budget_allocation.id);
     }
   });
 </script>

@@ -29,6 +29,6 @@
 
 <%= mustache "#{f.sanitized_object_name}_materials_classes_template" do %>
   <%= f.association :materials_classes, :collection => f.object.materials_classes.build do |p| %>
-    <%= render 'materials_classes/list_form', :class_number => '{{number}}', :description => '{{description}}', :id => '{{id}}', :f => f %>
+    <%= render 'materials_classes/list_form', :class_number => '{{class_number}}', :description => '{{description}}', :id => '{{id}}', :f => f %>
   <% end %>
 <% end %>

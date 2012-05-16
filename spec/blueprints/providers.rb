@@ -33,6 +33,7 @@ Provider.blueprint(:sobrinho_sa) do
   materials_classes { [MaterialsClass.make!(:software)] }
   materials { [Material.make!(:antivirus)] }
   provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
+  provider_partners { [ProviderPartner.make!(:sobrinho)] }
 end
 
 Provider.blueprint(:fornecedor_class_arames) do
@@ -51,6 +52,7 @@ Provider.blueprint(:fornecedor_class_arames) do
   materials_classes { [MaterialsClass.make!(:arames)] }
   materials { [Material.make!(:antivirus)] }
   provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
+  provider_partners { [ProviderPartner.make!(:sobrinho)] }
 end
 
 Provider.blueprint(:fornecedor_arame) do
@@ -69,6 +71,7 @@ Provider.blueprint(:fornecedor_arame) do
   materials_classes { [MaterialsClass.make!(:software)] }
   materials { [Material.make!(:arame_comum)] }
   provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
+  provider_partners { [ProviderPartner.make!(:sobrinho)] }
 end
 
 Provider.blueprint(:fornecedor_empresa) do
@@ -83,9 +86,9 @@ Provider.blueprint(:fornecedor_empresa) do
   crc_registration_date { Date.new(2012, 2, 26) }
   crc_renewal_date { Date.new(2012, 2, 27) }
   crc_expiration_date { Date.new(2012, 2, 28) }
-  provider_partners { [ProviderPartner.make!(:sobrinho)] }
   materials_groups { [MaterialsGroup.make!(:informatica)] }
   materials_classes { [MaterialsClass.make!(:software)] }
   materials { [Material.make!(:antivirus)] }
   provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
+  provider_partners { [ProviderPartner.make!(:sobrinho)] }
 end

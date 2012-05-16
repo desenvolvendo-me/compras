@@ -48,10 +48,6 @@ class AdministrativeProcess < ActiveRecord::Base
     administrative_process_budget_allocations.sum(:value)
   end
 
-  def budget_allocations_attr_data
-    administrative_process_budget_allocations.collect(&:attributes_for_data).to_json
-  end
-
   def invited?
     invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
   end

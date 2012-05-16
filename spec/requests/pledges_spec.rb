@@ -30,8 +30,8 @@ feature "Pledges" do
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
       fill_mask 'Exercício', :with => '2012'
-      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
+      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
       fill_mask 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
@@ -53,8 +53,8 @@ feature "Pledges" do
 
     within_tab 'Itens' do
       # should get the value informed on the general tab
-      page.should have_disabled_field 'Valor'
-      page.should have_field 'Valor', :with => "10,00"
+      page.should have_disabled_field 'Valor *'
+      page.should have_field 'Valor *', :with => "10,00"
 
       click_button "Adicionar Item"
 

@@ -1,9 +1,0 @@
-<% if record.decorator? %>
-  <tr <%= record.decorator.formatted_data_attributes %> data-amount="<%= record.decorator.budget_allocation_amount %>">
-<% else %>
-<tr data-value="<%= record.id %>" data-label="<%= record %>" data-type="<%= record.class.to_s %>">
-<% end %>
-  <% attributes.each do |attribute| %>
-    <td><%= formatted_attribute record, attribute %></td>
-  <% end %>
-</tr>

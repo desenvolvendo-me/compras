@@ -13,15 +13,6 @@ class LicitationCommissionMember < ActiveRecord::Base
 
   validates :individual, :role, :role_nature, :registration, :presence => true
 
-  def attributes_for_data
-    { 'id' => id,
-      'role_humanize' => role_humanize,
-      'role_nature_humanize' => role_nature_humanize,
-      'registration' => registration,
-      'individual_name' => individual.to_s,
-      'cpf' => individual_cpf }
-  end
-
   def to_s
     individual_to_s
   end

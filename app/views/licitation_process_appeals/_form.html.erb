@@ -19,12 +19,10 @@
 <%= f.input :situation %>
 
 <script>
-  $('#licitation_process_appeal_licitation_process_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#licitation_process_appeal_licitation_process_object_description').val(record.data('object-description'));
-    }
-    else{
+  $('#licitation_process_appeal_licitation_process_id').change(function (event, licitation_process) {
+    if (licitation_process) {
+      $('#licitation_process_appeal_licitation_process_object_description').val(licitation_process.object_description);
+    } else {
       $('#licitation_process_appeal_licitation_process_object_description').val('');
     }
   });

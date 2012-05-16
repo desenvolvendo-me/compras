@@ -14,23 +14,6 @@ describe LicitationCommissionMember do
   it { should validate_presence_of :role_nature }
   it { should validate_presence_of :registration }
 
-  it 'should get the correct attributes for data' do
-    individual = double(:cpf => 'cpf 1', :to_s => 'name 1')
-
-    subject.stub(:id).and_return(5)
-    subject.stub(:registration).and_return('registration 1')
-    subject.stub(:role_humanize).and_return('role humanize 1')
-    subject.stub(:role_nature_humanize).and_return('role nature humanize 1')
-    subject.stub(:individual).and_return(individual)
-
-    subject.attributes_for_data.should eq({ 'id' => 5,
-                                            'registration' => 'registration 1',
-                                            'role_humanize' => 'role humanize 1',
-                                            'role_nature_humanize' => 'role nature humanize 1',
-                                            'individual_name' => 'name 1',
-                                            'cpf' => 'cpf 1' })
-  end
-
   it 'should return the individual_to_s as to_s method' do
     individual = double(:to_s => 'name 1')
 

@@ -14,13 +14,10 @@
 </div>
 
 <script>
-  $('#accreditation_licitation_commission_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-
-      $('#accreditation_licitation_commission_president_name').val(record.data('president-name'));
-    }
-    else{
+  $('#accreditation_licitation_commission_id').change(function (event, licitation_commission) {
+    if (licitation_commission) {
+      $('#accreditation_licitation_commission_president_name').val(licitation_commission.president_name);
+    } else{
       $('#accreditation_licitation_commission_president_name').val('');
     }
   });

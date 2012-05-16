@@ -30,15 +30,13 @@
 <%= f.input :observations %>
 
 <script>
-  $('#licitation_notice_licitation_process_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#licitation_notice_licitation_process_administrative_process_modality_humanize').val(record.data('administrative-process-modality-humanize'));
-      $('#licitation_notice_licitation_process_licitation_number').val(record.data('licitation-number'));
-      $('#licitation_notice_licitation_process_process_date').val(record.data('process-date'));
-      $('#licitation_notice_licitation_process_object_description').val(record.data('object-description'));
-    }
-    else{
+  $('#licitation_notice_licitation_process_id').change(function (event, licitation_process) {
+    if (licitation_process) {
+      $('#licitation_notice_licitation_process_administrative_process_modality_humanize').val(licitation_process.administrative_process_modality_humanize);
+      $('#licitation_notice_licitation_process_licitation_number').val(licitation_process.licitation_number);
+      $('#licitation_notice_licitation_process_process_date').val(licitation_process.process_date);
+      $('#licitation_notice_licitation_process_object_description').val(licitation_process.object_description);
+    } else {
       $('#licitation_notice_licitation_process_administrative_process_modality_humanize').val('');
       $('#licitation_notice_licitation_process_licitation_number').val('');
       $('#licitation_notice_licitation_process_process_date').val('');

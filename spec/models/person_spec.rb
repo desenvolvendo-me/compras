@@ -20,6 +20,18 @@ describe Person do
     end
   end
 
+  describe "#company?" do
+    it "should be a company" do
+      subject.stub(:personable_type).and_return("Company")
+      subject.company?.should be_true
+    end
+
+    it "should not be a company" do
+      subject.stub(:personable_type).and_return("Individual")
+      subject.company?.should be_false
+    end
+  end
+
   it { should belong_to :personable }
   it { should have_one :employee }
   it { should have_many(:providers).dependent(:restrict) }

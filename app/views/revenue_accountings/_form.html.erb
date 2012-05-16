@@ -28,10 +28,9 @@
     }
   }
 
-  $('#revenue_accounting_revenue_nature').on('change', function(event, data){
-    if (data) {
-      var record = data.record;
-      $('#revenue_accounting_revenue_nature_docket').val(record.data('docket'));
+  $('#revenue_accounting_revenue_nature_id').on('change', function (event, revenue_nature) {
+    if (revenue_nature) {
+      $('#revenue_accounting_revenue_nature_docket').val(revenue_nature.docket);
     } else {
       $('#revenue_accounting_revenue_nature_docket').val('');
     }

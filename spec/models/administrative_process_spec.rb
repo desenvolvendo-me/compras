@@ -114,16 +114,6 @@ describe AdministrativeProcess do
     allocation_two.errors.messages[:budget_allocation_id].should be_nil
   end
 
-  it 'should return the attr_data for budget allocations' do
-    item1 = double(:attributes_for_data => 'attributes 1')
-    item2 = double(:attributes_for_data => 'attributes 2')
-    item3 = double(:attributes_for_data => 'attributes 3')
-
-    subject.stub(:administrative_process_budget_allocations).and_return([item1, item2, item3])
-
-    subject.budget_allocations_attr_data.should eq ["attributes 1", "attributes 2", "attributes 3"].to_json
-  end
-
   it 'should be invite when modality is INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES' do
     subject.modality = AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES
     subject.invited?.should be true

@@ -33,11 +33,10 @@
 <%= f.input :docket %>
 
 <script>
-  $('#revenue_nature_regulatory_act_id').on('change', function (event, data) {
-    if (data) {
-      var record = data.record;
-      $('#revenue_nature_regulatory_act_type').val(record.data('administractive-act-type'));
-      $('#revenue_nature_publication_date').val(record.data('publication-date'));
+  $('#revenue_nature_regulatory_act_id').on('change', function (event, regulatory_act) {
+    if (regulatory_act) {
+      $('#revenue_nature_regulatory_act_type').val(regulatory_act.regulatory_act_type);
+      $('#revenue_nature_publication_date').val(regulatory_act.publication_date);
     } else {
       $('#revenue_nature_regulatory_act_type').val('');
       $('#revenue_nature_publication_date').val('');
@@ -112,13 +111,11 @@
       return url;
     }
 
-    $('#revenue_nature_revenue_category_id').on('change', function(event, data) {
-      if (data) {
-        record = data.record;
-
+    $('#revenue_nature_revenue_category_id').on('change', function(event, revenue_category) {
+      if (revenue_category) {
         $('#revenue_nature_revenue_subcategory').attr('disabled', false);
         $('#revenue_nature_revenue_subcategory').attr('data-modal-url', subcategoryModalUrl);
-        categoryCode = record.data('code');
+        categoryCode = revenue_category.code;
       } else {
         $('#revenue_nature_revenue_subcategory').attr('disabled', true).val('');
         $('#revenue_nature_revenue_subcategory_id').val('');
@@ -136,13 +133,11 @@
       generateFullCode();
     });
 
-    $('#revenue_nature_revenue_subcategory_id').on('change', function(event, data) {
-      if (data) {
-        record = data.record;
-
+    $('#revenue_nature_revenue_subcategory_id').on('change', function(event, revenue_subcategory) {
+      if (revenue_subcategory) {
         $('#revenue_nature_revenue_source').attr('disabled', false);
         $('#revenue_nature_revenue_source').attr('data-modal-url', sourceModalUrl);
-        subcategoryCode = record.data('code');
+        subcategoryCode = revenue_subcategory.code;
       } else {
         $('#revenue_nature_revenue_source').attr('disabled', true).val('');
         $('#revenue_nature_revenue_source_id').val('');
@@ -157,13 +152,12 @@
       generateFullCode();
     });
 
-    $('#revenue_nature_revenue_source_id').on('change', function(event, data) {
-      if (data) {
-        record = data.record;
+    $('#revenue_nature_revenue_source_id').on('change', function(event, revenue_source) {
+      if (revenue_source) {
 
         $('#revenue_nature_revenue_rubric').attr('disabled', false);
         $('#revenue_nature_revenue_rubric').attr('data-modal-url', rubricModalUrl);
-        sourceCode = record.data('code');
+        sourceCode = revenue_source.code;
       } else {
         $('#revenue_nature_classification').val('').attr('disabled', true);
         $('#revenue_nature_revenue_rubric').attr('disabled', true).val('');
@@ -175,11 +169,9 @@
       generateFullCode();
     });
 
-    $('#revenue_nature_revenue_rubric_id').on('change', function(event, data) {
-      if (data) {
-        record = data.record;
-
-        rubricCode = record.data('code');
+    $('#revenue_nature_revenue_rubric_id').on('change', function(event, revenue_rubric) {
+      if (revenue_rubric) {
+        rubricCode = revenue_rubric.code;
         $('#revenue_nature_classification').attr('disabled', false);
       } else {
         $('#revenue_nature_classification').val('').attr('disabled', true);

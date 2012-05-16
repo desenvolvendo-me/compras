@@ -40,48 +40,29 @@
     difference_element.val(floatToPtBrString(supplement_total - reduced_total));
   }
 
-  $('form.extra_credit').delegate('#extra_credit_regulatory_act_id', 'change', function (event, data) {
-    if (data) {
-      var record = data.record;
-      $('#extra_credit_regulatory_act_type').val(record.data('administractive-act-type'));
-      $('#extra_credit_publication_date').val(record.data('publication-date'));
+  $('form.extra_credit').delegate('#extra_credit_regulatory_act_id', 'change', function (event, regulatory_act) {
+    if (regulatory_act) {
+      $('#extra_credit_regulatory_act_type').val(regulatory_act.regulatory_act_type);
+      $('#extra_credit_publication_date').val(regulatory_act.publication_date);
     }
   });
 
-  $('form.extra_credit').delegate('#extra_credit_extra_credit_nature_id', 'change', function (event, data) {
-    if (data) {
-      var record = data.record;
-      $('#extra_credit_kind').val(record.data('kind'));
+  $('form.extra_credit').delegate('#extra_credit_extra_credit_nature_id', 'change', function (event, extra_credit_nature) {
+    if (extra_credit_nature) {
+      $('#extra_credit_kind').val(extra_credit_nature.kind);
     }
   });
 
-  $('form.extra_credit').delegate('.budget-allocation', 'change', function (event, data) {
-    if (data) {
-      var record = data.record;
+  $('form.extra_credit').delegate('.moviment-type', 'change', function (event, moviment_type) {
+    if (moviment_type){
+      $(this).closest('fieldset').find('.operation').val(moviment_type.operation);
 
-      $(this).closest('fieldset').find('.budget-allocation').attr('data-info-url', "/budget_allocations/"+record.data('id'));
-    }
-  });
-
-  $('form.extra_credit').delegate('.capability', 'change', function (event, data) {
-    if (data) {
-      var record = data.record;
-
-      $(this).closest('fieldset').find('.capability').attr('data-info-url', "/capabilities/"+record.data('value'));
-    }
-  });
-
-  $('form.extra_credit').delegate('.moviment-type', 'change', function (event, data) {
-    if (data){
-      var record = data.record;
-      $(this).closest('fieldset').find('.operation').val(record.data('operation'));
-
-      if (record.data('character') == '<%= MovimentTypeCharacter::BUDGET_ALLOCATION %>') {
+      if (moviment_type.character == '<%= MovimentTypeCharacter::BUDGET_ALLOCATION %>') {
         $(this).closest('fieldset').find('.budget-allocation').attr('disabled', false);
         $(this).closest('fieldset').find('.capability').attr('disabled', true);
         $(this).closest('fieldset').find('[id$=capability]').val('');
         $(this).closest('fieldset').find('[id$=capability_id]').val('');
-      } else if (record.data('character') == '<%= MovimentTypeCharacter::CAPABILITY %>') {
+      } else if (moviment_type.character == '<%= MovimentTypeCharacter::CAPABILITY %>') {
         $(this).closest('fieldset').find('.capability').attr('disabled', false);
         $(this).closest('fieldset').find('.budget-allocation').attr('disabled', true);
         $(this).closest('fieldset').find('[id$=budget_allocation]').val('');

@@ -34,6 +34,7 @@ gem 'validates_timeliness', '3.0.8'
 gem 'inherited_resources', '1.3.0'
 gem 'has_scope', '0.5.1'
 gem 'responders', '0.6.4'
+gem 'jbuilder', '0.4.0'
 
 gem 'foreigner', '1.1.4'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'

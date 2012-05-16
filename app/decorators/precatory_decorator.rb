@@ -1,2 +1,0 @@
-class PrecatoryDecorator < Decorator
-end

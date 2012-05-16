@@ -26,7 +26,6 @@ feature "Providers" do
 
     within_tab 'Principal'do
       fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
-      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
       fill_mask 'Data do cadastramento', :with => '15/02/2012'
       fill_modal 'Banco', :with => 'Itaú'
       fill_modal 'Agência', :with => 'Agência Itaú'
@@ -37,6 +36,14 @@ feature "Providers" do
       fill_mask 'Data da renovação', :with => '28/02/2012'
       fill_modal 'Natureza jurídica', :with => 'Administração Pública'
       fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      click_button 'Adicionar'
+
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      select 'Membro do quadro societário', :from => 'Função'
+      fill_mask 'Data', :with => '25/02/2012'
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
@@ -63,7 +70,6 @@ feature "Providers" do
     end
 
     within_tab 'Principal'do
-      page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
       page.should have_field 'Cadastro econômico', :with => '00001'
       page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
       page.should have_field 'Data do cadastramento', :with => '15/02/2012'
@@ -76,6 +82,12 @@ feature "Providers" do
       page.should have_field 'Data da renovação', :with => '28/02/2012'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
       page.should have_field 'CNAE', :with => 'Aluguel de outras máquinas'
+    end
+
+    within_tab 'Sócios/Responsáveis pela empresa' do
+      page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      page.should have_select 'Função', :selected => 'Membro do quadro societário'
+      page.should have_field 'Data', :with => '25/02/2012'
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
@@ -113,7 +125,6 @@ feature "Providers" do
     end
 
     within_tab 'Principal'do
-      fill_modal 'Cadastro econômico', :with => '00002', :field => 'Inscrição'
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       fill_mask 'Data do cadastramento', :with => '15/02/2013'
       fill_modal 'Banco', :with => 'Santander'
@@ -149,7 +160,6 @@ feature "Providers" do
     end
 
     within_tab 'Principal'do
-      page.should have_field 'Cadastro econômico', :with => '00002'
       page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
       page.should have_field 'Data do cadastramento', :with => '15/02/2013'
       page.should have_field 'Banco', :with => 'Santander'
@@ -273,7 +283,7 @@ feature "Providers" do
 
     fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
 
-    click_link 'provider_person_info_link'
+    click_link 'Mais informações'
 
     within '#record' do
       page.should have_content 'Wenderson Malheiros'

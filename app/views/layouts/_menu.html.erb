@@ -299,12 +299,13 @@
     </ul>
   </li>
 </ul>
+
 <script>
   $("#menu li").click(function (event) {
     $(this).addClass("active");
 
     if ($(event.target).is("a[href=#]")) {
-      return false;
+      event.preventDefault();
     }
   });
 

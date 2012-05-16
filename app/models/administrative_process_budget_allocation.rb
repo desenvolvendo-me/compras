@@ -14,15 +14,6 @@ class AdministrativeProcessBudgetAllocation < ActiveRecord::Base
 
   validate :cannot_have_duplicated_materials_on_items
 
-  def attributes_for_data
-    { 'id' => id,
-      'description' => budget_allocation.to_s,
-      'budget_allocation_id' => budget_allocation_id,
-      'value' => value.to_f,
-      'expense_nature' => budget_allocation_expense_nature.to_s,
-      'amount' => budget_allocation_amount.to_f }
-  end
-
   def total_items_value
     items.reject(&:marked_for_destruction?).sum(&:estimated_total_price)
   end

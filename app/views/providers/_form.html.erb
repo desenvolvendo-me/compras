@@ -43,25 +43,30 @@
     clearAgency();
   }).change();
 
-  $('#provider_person_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
+  $('#provider_person_id').change(function (event, person) {
+    var isCompany = false;
+
+    if (person) {
+      isCompany = person.isCompany;
 
       if ($('#provider_person_id').val() != person_id) {
         $('#provider_economic_registration').val('');
         $('#provider_economic_registration_id').val('');
-        person_id = record.data('value');
+        person_id = person.id;
       }
     }
+
+    togglePartners(isCompany);
   });
 
-  $('#provider_economic_registration_id').change(function(event, data) {
-    if (data) {
-      var record = data.record;
-      $('#provider_person').val(record.data('person'));
-      $('#provider_person_id').val(record.data('person-id'));
-      person_id = record.data('person-id');
+  $('#provider_economic_registration_id').change(function (event, economic_registration) {
+    if (economic_registration) {
+      $('#provider_person').val(economic_registration.person);
+      $('#provider_person_id').val(economic_registration.person_id);
+      person_id = economic_registration.person_id;
     }
+
+    togglePartners(true);
   });
 
   function agencyModalUrl() {
@@ -87,23 +92,17 @@
     }
   }
 
-  function togglePartners(personableType) {
-    if (personableType == "Individual") {
-      $('#msg-no-partners').html("<%= I18n.translate('other.tributario.messages.msg_no_provider_partners') %>").show();
-      $('#partners_selector').hide();
-    } else {
+  function togglePartners(isCompany) {
+    if (isCompany) {
       $('#msg-no-partners').html('').hide();
       $('#partners_selector').show();
+      $('#partners_selector .destroy[value=true]').hide();
+    } else {
+      $('#msg-no-partners').html("<%= I18n.translate('other.tributario.messages.msg_no_provider_partners') %>").show();
+      $('#partners_selector').hide();
+      $('#partners_selector .destroy').val(true);
     }
   }
 
-  $('#provider_person_id').change(function(event, data) {
-    var type = ''
-    if (data) {
-      type = data.record.data('personable-type');
-    }
-    togglePartners(type);
-  });
-
-  togglePartners("<%= f.object.personable_type %>");
+  togglePartners("<%= f.object.company? %>");
 </script>
