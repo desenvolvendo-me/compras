@@ -22,32 +22,37 @@ describe PrecatoryType do
     subject.to_s.should eq 'Alimentares'
   end
 
-  it "should not validate presence of deactivation_date when status is active" do
-    subject.status = PrecatoryTypeStatus::ACTIVE
+  context "with active status" do
+    before do
+      subject.status = PrecatoryTypeStatus::ACTIVE
+    end
 
-    subject.should allow_value(nil).for(:deactivation_date)
+    it "should not validate presence of deactivation_date when status is active" do
+      subject.should allow_value(nil).for(:deactivation_date)
+    end
+
+    it "should clean deactivation_date when status is active" do
+      subject.description = 'description'
+      subject.deactivation_date = Date.current
+
+      subject.run_callbacks(:save)
+      subject.deactivation_date.should be_nil
+    end
   end
 
-  it "should clean deactivation_date when status is active" do
-    subject.status = PrecatoryTypeStatus::ACTIVE
-    subject.description = 'description'
-    subject.deactivation_date = Date.current
+  context "with inactive status" do
+    before do
+      subject.status = PrecatoryTypeStatus::INACTIVE
+    end
 
-    subject.run_callbacks(:save)
-    subject.deactivation_date.should be_nil
-  end
+    it "should not deactivation_date be in the future" do
+      subject.should_not allow_value(Date.tomorrow).for(:deactivation_date)
+    end
 
-  it "should not deactivation_date be in the future" do
-    subject.status = PrecatoryTypeStatus::INACTIVE
+    it "should deactivation_date less or equal current date" do
+      subject.should allow_value(Date.current).for(:deactivation_date)
 
-    subject.should_not allow_value(Date.tomorrow).for(:deactivation_date)
-  end
-
-  it "should deactivation_date less or equal current date" do
-    subject.status = PrecatoryTypeStatus::INACTIVE
-
-    subject.should allow_value(Date.current).for(:deactivation_date)
-
-    subject.should allow_value(Date.yesterday).for(:deactivation_date)
+      subject.should allow_value(Date.yesterday).for(:deactivation_date)
+    end
   end
 end
