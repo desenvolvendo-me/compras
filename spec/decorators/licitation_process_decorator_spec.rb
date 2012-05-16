@@ -19,6 +19,7 @@ describe LicitationProcessDecorator do
 
   it 'should return a link to count when envelope_opening? is true' do
     component.stub(:envelope_opening? => true)
+    routes.stub(:licitation_process_path).and_return('#')
     helpers.stub(:link_to).with('Apurar', '#', :class => "button primary").and_return('link')
 
     subject.count_link.should eq 'link'

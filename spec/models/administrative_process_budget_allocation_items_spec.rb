@@ -13,6 +13,8 @@ describe AdministrativeProcessBudgetAllocationItem do
   it { should belong_to :licitation_process_lot }
   it { should have_many :licitation_process_bidder_proposals }
 
+  it { should have_many :licitation_process_bidder_proposals }
+
   it 'should calculate the estimated total price' do
     subject.estimated_total_price.should eq 0
 
@@ -30,5 +32,16 @@ describe AdministrativeProcessBudgetAllocationItem do
   it "should without_lot? be false when has not lot" do
     subject.class.without_lot.stub(:any?).and_return(false)
     subject.class.should_not be_without_lot
+  end
+
+  it 'should return the winner proposal by item total value' do
+    proposal_1 = double(:total_price => 200.0, :provider => 'provider 1')
+    proposal_2 = double(:total_price => 100.0, :provider => 'provider 2')
+    proposal_3 = double(:total_price => 300.0, :provider => 'provider 3')
+
+    subject.stub(:licitation_process_bidder_proposals).and_return([proposal_1, proposal_2, proposal_3])
+
+    subject.winner_proposal_provider.should eq 'provider 2'
+    subject.winner_proposal_total_price.should eq 100.0
   end
 end

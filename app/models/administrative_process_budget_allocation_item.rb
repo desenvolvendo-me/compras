@@ -9,7 +9,7 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
 
   has_many :licitation_process_bidder_proposals
 
-  delegate :reference_unit, :to => :material, :allow_nil => true
+  delegate :reference_unit, :description, :to => :material, :allow_nil => true
   delegate :administrative_process_id, :to => :administrative_process_budget_allocation, :allow_nil => true
 
   validates :material, :quantity, :unit_price, :presence => true
@@ -36,5 +36,23 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
     else
       0
     end
+  end
+
+  def winner_proposal_provider
+    return unless winner_proposal
+
+    winner_proposal.provider
+  end
+
+  def winner_proposal_total_price
+    return unless winner_proposal
+
+    winner_proposal.total_price
+  end
+
+  protected
+
+  def winner_proposal
+    licitation_process_bidder_proposals.min_by(&:total_price)
   end
 end

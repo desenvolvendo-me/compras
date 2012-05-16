@@ -24,7 +24,7 @@ class LicitationProcessDecorator < Decorator
   end
 
   def count_link
-    helpers.link_to('Apurar', '#', :class => "button primary") if component.envelope_opening?
+    helpers.link_to('Apurar', routes.licitation_process_path(component), :class => "button primary") if component.envelope_opening?
   end
 
   def lots_link
