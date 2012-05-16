@@ -171,3 +171,33 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   licitation_process_bidders { [LicitationProcessBidder.make!(:licitante_com_proposta_1),
                                 LicitationProcessBidder.make!(:licitante_com_proposta_2)] }
 end
+
+LicitationProcess.blueprint(:apuracao_por_lote) do
+  year { 2012 }
+  process { 1 }
+  process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
+  administrative_process { AdministrativeProcess.make!(:apuracao_por_lote) }
+  object_description { "Descricao" }
+  pledge_type { PledgeType::GLOBAL }
+  capability { Capability.make!(:reforma) }
+  expiration { "10 dias" }
+  readjustment_index { "XPTO" }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "00:00" }
+  envelope_opening_date { I18n.l(Date.current) }
+  envelope_opening_time { "00:00" }
+  period { Period.make!(:um_ano) }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
+  contract_expiration { 3 }
+  observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
+  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante_com_proposta_1),
+                                LicitationProcessBidder.make!(:licitante_com_proposta_2)] }
+end

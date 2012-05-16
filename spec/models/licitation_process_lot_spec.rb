@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_lot'
+require 'app/models/licitation_process_bidder'
+require 'app/models/licitation_process_bidder_proposal'
 require 'app/models/administrative_process_budget_allocation_item'
 
 describe LicitationProcessLot do
@@ -33,5 +35,15 @@ describe LicitationProcessLot do
     subject.valid?
 
     subject.errors.messages[:administrative_process_budget_allocation_items].should include "somente são permitidos itens do processo administrativo relacionado"
+  end
+
+  it 'should return the winner proposal by lot total value' do
+    subject.stub(:winner_proposal).and_return([1, 100.0])
+
+    provider = double('provider', :provider => 'provider x')
+    bidder_storage = double(:find => provider)
+
+    subject.winner_proposal_provider(bidder_storage).should eq 'provider x'
+    subject.winner_proposal_total_price.should eq 100.0
   end
 end
