@@ -103,7 +103,23 @@ class LicitationProcess < ActiveRecord::Base
     items && !items.without_lot?
   end
 
+  def winner_proposal_provider()
+    return unless winner_proposal
+
+    winner_proposal.provider
+  end
+
+  def winner_proposal_total_price
+    return unless winner_proposal
+
+    winner_proposal.proposal_total_value
+  end
+
   protected
+
+  def winner_proposal
+    licitation_process_bidders.min_by(&:proposal_total_value)
+  end
 
   def set_modality
     self.modality = administrative_process.modality

@@ -289,4 +289,13 @@ describe LicitationProcess do
     subject.items.stub(:without_lot?).and_return(false)
     subject.should be_filled_lots
   end
+
+  it 'should return the winner proposal by global total value' do
+    bidder_1 = double(:proposal_total_value => 1000.0, :provider => 'provider 1')
+    bidder_2 = double(:proposal_total_value => 500.0, :provider => 'provider 2')
+    subject.stub(:licitation_process_bidders).and_return([bidder_1, bidder_2])
+
+    subject.winner_proposal_provider.should eq 'provider 2'
+    subject.winner_proposal_total_price.should eq 500.0
+  end
 end

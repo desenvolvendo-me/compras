@@ -30,4 +30,8 @@ class LicitationProcessDecorator < Decorator
   def lots_link
     helpers.link_to('Lotes de itens', routes.licitation_process_licitation_process_lots_path(component), :class => "button primary")
   end
+
+  def winner_proposal_total_price
+    helpers.number_to_currency component.winner_proposal_total_price if component.winner_proposal_total_price
+  end
 end
