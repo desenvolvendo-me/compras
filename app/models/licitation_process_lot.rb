@@ -34,7 +34,7 @@ class LicitationProcessLot < ActiveRecord::Base
   def winner_proposal_total_price
     return unless winner_proposal
 
-    winner_proposal.last.to_f
+    winner_proposal.last
   end
 
   protected
