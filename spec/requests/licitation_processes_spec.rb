@@ -711,7 +711,7 @@ feature "LicitationProcesses" do
     page.should have_content 'R$ 18,00'
   end
 
-  scenario "should show the count report by type_of_calculation being lowest__price_by_lot" do
+  scenario "should show the count report by type_of_calculation being lowest_price_by_lot" do
     licitation_process = LicitationProcess.make!(:apuracao_por_lote)
     LicitationProcessLot.make!(:lote_antivirus, :licitation_process_id => licitation_process.id)
 
