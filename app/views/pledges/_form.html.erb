@@ -89,7 +89,7 @@
         };
       }).change();
 
-      $("#pledge_value").focusout(function() {
+      $('form.pledge').delegate('#pledge_value', 'keyup', function() {
         if (uniqPledgeParcel()) {
           $('div.pledge-expiration .destroy[value=false]:first').parents('div.pledge-expiration').find('.value').val($(this).val());
         };
