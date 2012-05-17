@@ -5,7 +5,6 @@ class LicitationProcessLot < ActiveRecord::Base
 
   has_many :administrative_process_budget_allocation_items, :dependent => :nullify, :order => :id
 
-#  delegate :administrative_process_id, :licitation_process_bidders, :to => :licitation_process, :allow_nil => true
   delegate :administrative_process_id, :to => :licitation_process, :allow_nil => true
 
   validate :items_should_belong_to_administrative_process
