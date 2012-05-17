@@ -7,4 +7,12 @@ class PledgeLiquidationCancellationsController < CrudController
 
     super
   end
+
+  protected
+
+  def create_resource(object)
+    if super
+      PledgeParcelMovimentationGenerator.new(object).generate!
+    end
+  end
 end

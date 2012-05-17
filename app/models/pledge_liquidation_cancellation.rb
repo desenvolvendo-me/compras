@@ -1,18 +1,16 @@
 class PledgeLiquidationCancellation < ActiveRecord::Base
-  attr_accessible :pledge_id, :pledge_parcel_id, :kind, :value, :date
+  attr_accessible :pledge_id, :kind, :value, :date
   attr_accessible :reason, :entity_id, :year
 
   has_enumeration_for :kind, :with => PledgeLiquidationCancellationKind, :create_helpers => true
 
   belongs_to :entity
   belongs_to :pledge
-  belongs_to :pledge_parcel
 
-  delegate :liquidations_value, :balance, :expiration_date, :to => :pledge_parcel, :allow_nil => true
-  delegate :emission_date, :to => :pledge, :allow_nil => true
-  delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
+  delegate :emission_date, :pledge_liquidations_sum, :to => :pledge, :allow_nil => true
+  delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
 
-  validates :pledge, :pledge_parcel, :date, :kind, :reason, :presence => true
+  validates :pledge, :date, :kind, :reason, :presence => true
   validates :value, :entity, :year, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :date, :timeliness => {
@@ -38,24 +36,24 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
   protected
 
   def force_value_to_total_kind
-    if pledge_parcel.present? && total?
-      self.value = pledge_parcel.value
+    if pledge && total?
+      self.value = pledge_liquidations_sum
     end
   end
 
   def date_must_be_greater_than_emission_date
-    return if emission_date.blank? || date.blank?
+    return unless pledge && date
 
     if date < emission_date
       errors.add(:date, :must_be_greater_than_pledge_emission_date)
     end
   end
 
-  def value_validation
-    return unless pledge_parcel
+  def value_validation(numeric_parser = ::I18n::Alchemy::NumericParser)
+    return unless pledge && value
 
-    if value > liquidations_value
-      errors.add(:value, :must_not_be_greater_than_pledge_parcel_liquidations)
+    if value > pledge_liquidations_sum
+      errors.add(:value, :must_not_be_greater_than_pledge_liquidations_value, :value => numeric_parser.localize(pledge_liquidations_sum))
     end
   end
 

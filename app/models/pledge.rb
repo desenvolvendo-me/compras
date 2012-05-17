@@ -79,16 +79,24 @@ class Pledge < ActiveRecord::Base
     pledge_parcels.select { |pledge_parcel| pledge_parcel.balance > 0 }
   end
 
+  def pledge_parcels_with_liquidations
+    pledge_parcels.select { |pledge_parcel| pledge_parcel.liquidations_value > 0 }
+  end
+
   def balance
-    value - pledge_cancellations_sum - pledge_liquidations_sum
+    value - pledge_cancellations_sum - pledge_liquidations_sum + pledge_liquidation_cancellations_sum
   end
 
   def pledge_liquidations_sum
-    pledge_liquidations.sum(:value)
+    BigDecimal(pledge_liquidations.sum(:value))
   end
 
   def pledge_cancellations_sum
     pledge_cancellations.sum(:value)
+  end
+
+  def pledge_liquidation_cancellations_sum
+    pledge_liquidation_cancellations.sum(:value)
   end
 
   def last_subpledge

@@ -22,97 +22,123 @@
   </div>
 </div>
 
+<table id="pledge_parcels" class="records">
+  <thead>
+    <tr>
+      <th>Parcela</th>
+      <th>Vencimento</th>
+      <th>Valor inicial</th>
+      <th>Liquidado</th>
+      <th>Liquidado anulado</th>
+      <th>Valor atual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if f.object.pledge %>
+      <% localized(f.object.pledge.pledge_parcels).each do |parcel| %>
+        <tr id="parcel_<%= parcel.number %>">
+          <td><%= parcel.number %></td>
+          <td><%= parcel.localized.expiration_date %></td>
+          <td class="value"><%= parcel.decorator.value %></td>
+          <td class="liquidations_value"><%= parcel.decorator.liquidations_value %></td>
+          <td class="canceled_liquidations_value"><%= parcel.decorator.canceled_liquidations_value %></td>
+          <td class="balance"><%= parcel.decorator.balance_as_currency %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
-    <p>
-      <%= f.input :pledge_parcel %>
-      <%= link_to_modal_info 'pledge_liquidation_cancellation_pledge_parcel', f.object.pledge_parcel %>
-    </p>
+  <div class="yui3-u-1-2">
+    <%= f.input :kind %>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :expiration_date, :disabled => true, :input_html => { :value => f.object.decorator.expiration_date } %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :balance, :disabled => true, :input_html => { :value => f.object.decorator.balance } %>
+  <div class="yui3-u-1-2">
+    <%= f.input :value, :disabled => f.object.total? %>
   </div>
 </div>
 
-<%= f.input :kind %>
-<%= f.input :value, :disabled => f.object.total? %>
 <%= f.input :date %>
 <%= f.input :reason %>
+
+<%= mustache 'pledge-parcels-template' do %>
+  <tr id="parcel_{{number}}">
+    <td>
+      {{number}}
+    </td>
+    <td>
+      {{expiration_date}}
+    </td>
+    <td class="value">
+      {{value}}
+    </td>
+    <td class="liquidations_value">
+      {{liquidations_value}}
+    </td>
+    <td class="canceled_liquidations_value">
+      {{canceled_liquidations_value}}
+    </td>
+    <td class="balance">
+      {{balance}}
+    </td>
+  </tr>
+<% end %>
 
 <script>
   <% if f.object.persisted? %>
     $('form.pledge_liquidation_cancellation :input').attr('disabled', true);
   <% else %>
     (function() {
-      var pledge_id = $('#pledge_liquidation_cancellation_pledge_id').val(),
-          pledge_parcel_value;
-
-      function pledgeExpirationUrl() {
-        var url = "<%= modal_pledge_parcels_path %>?",
-            params = {
-              locked_fields: ["pledge"],
-              pledge_parcel: {
-                pledge_id: $('#pledge_liquidation_cancellation_pledge_id').val(),
-                pledge: $('#pledge_liquidation_cancellation_pledge').val()
-              }
-            };
-
-        url += jQuery.param(params);
-
-        return url;
-      }
+      var pledgeValue;
 
       function forceValueWhenTotalIsKind(){
         if($('#pledge_liquidation_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
           $('#pledge_liquidation_cancellation_value').attr('disabled', true);
-          $('#pledge_liquidation_cancellation_value').val(pledge_parcel_value);
+          $('#pledge_liquidation_cancellation_value').val(pledgeValue);
         } else {
           $('#pledge_liquidation_cancellation_value').attr('disabled', false);
         }
       }
 
-      $('#pledge_liquidation_cancellation_pledge_id').change(function (event, pledge) {
+      function clearExistingPledgeParcels() {
+        $('#pledge_parcels tbody').html('');
+      }
+
+      function createPledgeParcelsFromPledge(pledgeParcels) {
+        var template = $('#pledge-parcels-template'),
+            rendered = '';
+
+        $(pledgeParcels).each(function() {
+          rendered += template.mustache({
+            expiration_date: this.expiration_date,
+            value: this.value,
+            number: this.number,
+            liquidations_value: this.liquidations_value,
+            canceled_liquidations_value: this.canceled_liquidations_value,
+            balance: this.balance
+          });
+        });
+
+        $('#pledge_parcels tbody').html(rendered);
+      }
+
+      $('#pledge_liquidation_cancellation_pledge_id').change(function(event, pledge) {
         if (pledge) {
           $('#pledge_liquidation_cancellation_emission_date').val(pledge.emission_date);
           $('#pledge_liquidation_cancellation_pledge_value').val(pledge.pledge_value);
-          if (pledge_id != pledge.id) {
-            $('#pledge_liquidation_cancellation_pledge_parcel').attr('data-modal-url', pledgeExpirationUrl());
-            $('#pledge_liquidation_cancellation_expiration_date').val('');
-            $('#pledge_liquidation_cancellation_pledge_parcel_id').val('');
-            $('#pledge_liquidation_cancellation_pledge_parcel_value').val('');
-          }
+
+          createPledgeParcelsFromPledge(pledge.parcels);
+          pledgeValue = pledge.pledge_liquidations_sum;
         } else {
-          $('#pledge_liquidation_cancellation_pledge_parcel').attr('data-modal-url', '<%= modal_pledge_parcels_path %>');
           $('#pledge_liquidation_cancellation_emission_date').val('');
           $('#pledge_liquidation_cancellation_pledge_value').val('');
-          $('#pledge_liquidation_cancellation_pledge_parcel').val('');
-          $('#pledge_liquidation_cancellation_expiration_date').val('');
-          $('#pledge_liquidation_cancellation_balance').val('');
-        }
-      });
 
-      $('#pledge_liquidation_cancellation_pledge_parcel_id').change(function (event, pledge_parcel) {
-        if (pledge_parcel) {
-          $('#pledge_liquidation_cancellation_expiration_date').val(pledge_parcel.expiration_date);
-          $('#pledge_liquidation_cancellation_balance').val(pledge_parcel.balance);
-          if (!$('#pledge_liquidation_cancellation_pledge_id').val()) {
-            $('#pledge_liquidation_cancellation_pledge_id').val(pledge_parcel.pledge_id);
-            $('#pledge_liquidation_cancellation_pledge').val(pledge_parcel.pledge);
-            $('#pledge_liquidation_cancellation_pledge_value').val(pledge_parcel.pledge_value);
-            $('#pledge_liquidation_cancellation_emission_date').val(pledge_parcel.emission_date);
-          }
-          pledge_id = pledge_parcel.pledge_id;
-          pledge_parcel_value = pledge_parcel.pledge_expiration_value;
-          forceValueWhenTotalIsKind();
-        } else {
-          $('#pledge_liquidation_cancellation_expiration_date, #pledge_liquidation_cancellation_balance').val('');
-          pledge_parcel_value = null;
+          clearExistingPledgeParcels();
+          pledgeValue = null;
         }
+
+        forceValueWhenTotalIsKind();
       });
 
       $('#pledge_liquidation_cancellation_kind').change(forceValueWhenTotalIsKind);

@@ -57,6 +57,22 @@ describe Pledge do
     end
   end
 
+  context 'pledge_parcels with liquidations' do
+    let :pledge_parcel_one do
+      double('PledgeParcelOne', :liquidations_value => 100)
+    end
+
+    let :pledge_parcel_two do
+      double('PledgeParcelTow', :liquidations_value => 0)
+    end
+
+    it 'should return only with balance' do
+      subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
+
+      subject.pledge_parcels_with_liquidations.should eq [pledge_parcel_one]
+    end
+  end
+
   it 'should return correct balance' do
     subject.value = 21
     subject.stub(:pledge_cancellations_sum).and_return(2)

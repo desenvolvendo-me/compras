@@ -8,6 +8,15 @@ PledgeLiquidation.blueprint(:empenho_2012) do
   date { Date.current + 1.day }
 end
 
+PledgeLiquidation.blueprint(:liquidacao_para_dois_vencimentos) do
+  entity { Entity.make!(:detran) }
+  year { 2012 }
+  pledge { Pledge.make!(:empenho_com_dois_vencimentos) }
+  kind { PledgeLiquidationKind::PARTIAL }
+  value { 90 }
+  date { Date.current + 1.day }
+end
+
 PledgeLiquidation.blueprint(:liquidacao_total) do
   entity { Entity.make!(:detran) }
   year { 2012 }

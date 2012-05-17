@@ -13,4 +13,8 @@ class PledgeDecorator < Decorator
   def balance
     helpers.number_with_precision component.balance
   end
+
+  def pledge_liquidations_sum
+    helpers.number_with_precision(component.pledge_liquidations_sum) if component.pledge_liquidations_sum
+  end
 end

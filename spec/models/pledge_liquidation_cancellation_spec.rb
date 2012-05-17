@@ -9,7 +9,6 @@ describe PledgeLiquidationCancellation do
   end
 
   it { should belong_to :pledge }
-  it { should belong_to :pledge_parcel }
   it { should belong_to :entity }
 
   it { should validate_presence_of :entity }
@@ -19,15 +18,19 @@ describe PledgeLiquidationCancellation do
   it { should allow_value('2012').for(:year) }
 
   context 'validate value' do
-    it 'should not be valid if value greater than liquidations_value' do
-      pledge_parcel = double(:value => 3, :liquidations_value => 3, :emission_date => nil)
-      subject.stub(:pledge_parcel).and_return(pledge_parcel)
-      subject.should_not allow_value(4).for(:value).with_message('não pode ser superior a soma das liquidações da parcela')
+    before do
+      subject.stub(:pledge).and_return(pledge)
+    end
+
+    let :pledge do
+      pledge = double(:value => 3, :pledge_liquidations_sum => 3.00)
+    end
+
+    it 'should not be valid if value greater than pledge_liquidations_sum' do
+      subject.should_not allow_value(4).for(:value).with_message('não pode ser superior a soma das liquidações do empenho (R$ 3,00)')
     end
 
     it 'should be valid if value is not greater than liquidations_value' do
-      pledge_parcel = double(:value => 3, :liquidations_value => 2, :emission_date => nil)
-      subject.stub(:pledge_parcel).and_return(pledge_parcel)
       subject.should allow_value(1).for(:value)
     end
   end
@@ -47,7 +50,7 @@ describe PledgeLiquidationCancellation do
     end
 
     it 'should not be valid when date is older then emission_date' do
-      subject.stub(:emission_date).and_return(Date.new(2012, 3, 29))
+      subject.stub(:pledge).and_return(double('Pledge', :emission_date => Date.new(2012, 3, 29), :pledge_liquidations_sum => 0))
       subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho')
     end
   end
