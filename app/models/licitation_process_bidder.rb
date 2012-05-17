@@ -12,7 +12,7 @@ class LicitationProcessBidder < ActiveRecord::Base
   has_many :proposals, :class_name => :LicitationProcessBidderProposal, :dependent => :destroy, :order => :id
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
-  delegate :administrative_process, :to => :licitation_process
+  delegate :administrative_process, :envelope_opening?, :to => :licitation_process
   delegate :invited?, :to => :administrative_process, :prefix => true
   delegate :licitation_process_lots, :to => :licitation_process
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
