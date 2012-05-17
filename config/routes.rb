@@ -425,7 +425,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :licitation_processes do
+  resources :licitation_processes, :except => :destroy do
     resource :accreditation
     resources :licitation_process_bidders
     resources :licitation_process_lots
