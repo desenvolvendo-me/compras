@@ -31,7 +31,7 @@ class LicitationProcessBidder < ActiveRecord::Base
     allowing_blank.validates :receipt_date, :timeliness => { :on_or_after => :protocol_date, :type => :date, :on => :create, :if => :invited }
   end
 
-  before_save :clear_data_unless_invited, :set_default_values
+  before_save :clear_invited_data, :set_default_values
 
   orderize :id
   filterize
@@ -85,7 +85,7 @@ class LicitationProcessBidder < ActiveRecord::Base
 
   protected
 
-  def clear_data_unless_invited
+  def clear_invited_data
     unless invited?
       self.protocol = nil
       self.protocol_date = nil
