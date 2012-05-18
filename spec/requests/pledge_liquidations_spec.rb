@@ -20,7 +20,7 @@ feature "PledgeLiquidations" do
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_in 'Valor a ser liquidado', :with => '150,00'
     select 'Parcial', :from => 'Tipo de liquidação'
-    fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
+    fill_in 'Data *', :with => I18n.l(Date.tomorrow)
 
     click_button 'Salvar'
 
@@ -40,7 +40,7 @@ feature "PledgeLiquidations" do
 
     within '#parcel_1' do
       page.should have_content '1'
-      page.should have_content I18n.l(Date.current + 1.day)
+      page.should have_content I18n.l(Date.tomorrow)
       find('.value').should have_content 'R$ 100,00'
       find('.liquidations_value').should have_content 'R$ 100,00'
       find('.balance').should have_content 'R$ 0,00'
@@ -56,7 +56,7 @@ feature "PledgeLiquidations" do
 
     page.should have_field 'Valor a ser liquidado', :with => '150,00'
     page.should have_select 'Tipo de liquidação', :selected => 'Parcial'
-    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
     page.should have_disabled_field 'Objeto do empenho'
     page.should have_field 'Objeto do empenho', :with => 'Descricao'
   end
@@ -81,7 +81,7 @@ feature "PledgeLiquidations" do
 
     within '#parcel_1' do
       page.should have_content '1'
-      page.should have_content I18n.l(Date.current + 1.day)
+      page.should have_content I18n.l(Date.tomorrow)
       find('.value').should have_content 'R$ 100,00'
       find('.liquidations_value').should have_content 'R$ 0,00'
       find('.balance').should have_content 'R$ 100,00'
@@ -151,7 +151,7 @@ feature "PledgeLiquidations" do
     fill_in 'Exercício', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     select 'Total', :from => 'Tipo de liquidação'
-    fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
+    fill_in 'Data *', :with => I18n.l(Date.tomorrow)
 
     click_button 'Salvar'
 
@@ -163,7 +163,7 @@ feature "PledgeLiquidations" do
 
     page.should have_field 'Valor a ser liquidado', :with => '9,99'
     page.should have_select 'Tipo de liquidação', :selected => 'Total'
-    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
   end
 
   scenario 'when submit form with same field missing and kind is total should have value disabled field' do
@@ -212,7 +212,7 @@ feature "PledgeLiquidations" do
 
     page.should have_field 'Valor a ser liquidado', :with => '1,00'
     page.should have_select 'Tipo de liquidação', :selected => 'Parcial'
-    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
   end
 
   scenario 'should not have a button to destroy an existent pledge_liquidation' do
