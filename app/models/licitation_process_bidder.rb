@@ -1,6 +1,7 @@
 class LicitationProcessBidder < ActiveRecord::Base
   attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date, :status
   attr_accessible :receipt_date, :invited, :documents_attributes, :proposals_attributes
+  attr_accessible :technical_score
 
   has_enumeration_for :status, :with => LicitationProcessBidderStatus
 
@@ -12,8 +13,9 @@ class LicitationProcessBidder < ActiveRecord::Base
   has_many :proposals, :class_name => :LicitationProcessBidderProposal, :dependent => :destroy, :order => :id
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
-  delegate :administrative_process, :envelope_opening?, :to => :licitation_process
+  delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true
   delegate :invited?, :to => :administrative_process, :prefix => true
+  delegate :judgment_form_best_technique?, :judgment_form_technical_and_price?, :to => :administrative_process, :allow_nil => true
   delegate :licitation_process_lots, :to => :licitation_process
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
@@ -25,6 +27,7 @@ class LicitationProcessBidder < ActiveRecord::Base
   validates :provider, :presence => true
   validates :protocol, :protocol_date, :receipt_date, :presence => true, :if => :invited
   validates :provider_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
+  validates :technical_score, :presence => true, :if => :validate_technical_score?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :protocol_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create, :if => :invited }
@@ -99,5 +102,9 @@ class LicitationProcessBidder < ActiveRecord::Base
       proposal.classification = nil
       proposal.unit_price = 0 unless proposal.unit_price
     end
+  end
+
+  def validate_technical_score?
+    judgment_form_best_technique? || judgment_form_technical_and_price?
   end
 end

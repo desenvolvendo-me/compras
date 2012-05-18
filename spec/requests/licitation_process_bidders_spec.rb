@@ -649,4 +649,67 @@ feature "LicitationProcessBidders" do
 
     page.should have_content "Criar Licitante no Processo Licitatório 1/2013"
   end
+
+ scenario 'should have field technical_score when licitation kind is technical_and_price' do
+    licitation_process = LicitationProcess.make!(:apuracao_melhor_tecnica_e_preco)
+    bidder = licitation_process.licitation_process_bidders.first
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    click_link bidder.to_s
+
+    page.should have_field 'Pontuação técnica'
+  end
+
+  scenario 'should have field technical_score when licitation kind is best_technique' do
+    licitation_process = LicitationProcess.make!(:apuracao_global)
+    bidder = licitation_process.licitation_process_bidders.first
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    click_link bidder.to_s
+
+    page.should have_field 'Pontuação técnica'
+  end
+
+  scenario 'should not have field technical_score when licitation kind is not(best_technique, technical_and_price)' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores, :envelope_opening_date => I18n.l(Date.current))
+    bidder = licitation_process.licitation_process_bidders.first
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    click_link bidder.to_s
+
+    page.should_not have_field 'Pontuação técnica'
+  end
 end

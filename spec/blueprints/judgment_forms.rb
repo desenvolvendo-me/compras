@@ -22,3 +22,9 @@ JudgmentForm.blueprint(:global) do
   kind { JudgmentFormKind::GLOBAL }
   licitation_kind { LicitationKind::BEST_TECHNIQUE }
 end
+
+JudgmentForm.blueprint(:por_lote_com_tecnica_e_preco) do
+  description { 'Por Lote com Técnica e Preço' }
+  kind { JudgmentFormKind::GLOBAL }
+  licitation_kind { LicitationKind::TECHNICAL_AND_PRICE }
+end

@@ -15,6 +15,25 @@ describe LicitationProcessBidder do
 
   it { should validate_presence_of :provider }
 
+  describe "licitation kind" do
+    it "should validate technical_score when licitation kind is best_technique" do
+      subject.stub(:judgment_form_best_technique?).and_return(true)
+      should validate_presence_of(:technical_score)
+    end
+
+    it "should validate technical_score when licitation kind is technical_and_price" do
+      subject.stub(:judgment_form_best_technique?).and_return(false)
+      subject.stub(:judgment_form_technical_and_price?).and_return(true)
+      should validate_presence_of(:technical_score)
+    end
+
+    it "should not validate technical_score when licitation kind is not best_technique or technical_and_price" do
+      subject.stub(:judgment_form_best_technique?).and_return(false)
+      subject.stub(:judgment_form_technical_and_price?).and_return(false)
+      should_not validate_presence_of(:technical_score)
+    end
+  end
+
   it "should not have protocol_date less than today" do
     subject.invited = true
     subject.should_not allow_value(Date.yesterday).

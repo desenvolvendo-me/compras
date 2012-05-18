@@ -10,16 +10,28 @@
   <div class="yui3-u-1-3">
     <%= f.input :administrative_process, :disabled => true %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1">
     <%= f.input :provider %>
   </div>
+</div>
 
-  <div class="yui3-u-1">
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
     <%= f.input :status, :disabled => true %>
   </div>
 
-  <% if f.object.administrative_process_invited? %>
+  <div class="yui3-u-1-2">
+    <% if f.object.validate_technical_score? %>
+      <%= f.input :technical_score, :input_html => { :maxlength => 6 } %>
+    <% end %>
+  </div>
+</div>
+
+<% if f.object.administrative_process_invited? %>
+  <div class="yui3-g">
     <div class="yui3-u-1-4">
       <%= f.input :invited %>
     </div>
@@ -35,8 +47,8 @@
     <div class="yui3-u-1-4">
       <%= f.input :receipt_date %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <div class="tabs">
   <ul>

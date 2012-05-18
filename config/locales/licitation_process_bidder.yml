@@ -13,6 +13,7 @@ pt-BR:
         receipt_date: "Data do recebimento"
         invited: "Convidado"
         status: "Status"
+        technical_score: "Pontuação técnica"
         licitation_process: "Processo licitatório"
         administrative_process: "Processo administrativo"
         licitation_process_process_date: "Data do processo licitatório"

@@ -2,7 +2,7 @@ class JudgmentForm < ActiveRecord::Base
   attr_accessible :description, :kind, :licitation_kind
 
   has_enumeration_for :kind, :with => JudgmentFormKind
-  has_enumeration_for :licitation_kind, :with => LicitationKind
+  has_enumeration_for :licitation_kind, :with => LicitationKind, :create_helpers => true
 
   has_many :administrative_processes, :dependent => :restrict
 
