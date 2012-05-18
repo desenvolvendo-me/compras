@@ -1,0 +1,24 @@
+<table id="pledge_parcels" class="records">
+  <thead>
+    <tr>
+      <th>Parcela</th>
+      <th>Vencimento</th>
+      <th>Valor inicial</th>
+      <th>Valor liquidação</th>
+      <th>Valor atual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if f.object.pledge %>
+      <% localized(f.object.pledge.pledge_parcels).each do |parcel| %>
+        <tr id="parcel_<%= parcel.number %>">
+          <td><%= parcel.number %></td>
+          <td><%= parcel.expiration_date %></td>
+          <td class="value"><%= parcel.decorator.value %></td>
+          <td class="liquidations_value"><%= parcel.decorator.liquidations_value %></td>
+          <td class="balance"><%= parcel.decorator.balance_as_currency %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
