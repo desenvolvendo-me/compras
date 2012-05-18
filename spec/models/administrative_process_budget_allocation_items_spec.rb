@@ -25,13 +25,13 @@ describe AdministrativeProcessBudgetAllocationItem do
   end
 
   it "should without_lot? be true when has not lot" do
-    subject.class.stub_chain(:without_lot, :any?).and_return(true)
-    subject.class.should be_without_lot
+    described_class.stub_chain(:without_lot, :any?).and_return(true)
+    described_class.should be_without_lot
   end
 
   it "should without_lot? be false when has not lot" do
-    subject.class.without_lot.stub(:any?).and_return(false)
-    subject.class.should_not be_without_lot
+    described_class.without_lot.stub(:any?).and_return(false)
+    described_class.should_not be_without_lot
   end
 
   it 'should return the winner proposal by item total value' do
