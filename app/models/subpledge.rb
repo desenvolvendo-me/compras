@@ -67,7 +67,7 @@ class Subpledge < ActiveRecord::Base
   end
 
   def first_pledge_parcel_available
-    pledge.pledge_parcels_with_balance.first
+    pledge_parcels.find { |parcel| parcel.balance > 0 }
   end
 
   def validate_subpledge_expirations_expiration_date
