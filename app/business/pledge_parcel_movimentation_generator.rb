@@ -1,12 +1,12 @@
 class PledgeParcelMovimentationGenerator
-  attr_accessor :pledge_cancellation_object
+  attr_accessor :object
   attr_accessor :pledge_parcel_movimentation_storage
 
-  delegate :value, :pledge, :to => :pledge_cancellation_object
+  delegate :value, :pledge, :to => :object
 
-  def initialize(pledge_cancellation_object, pledge_parcel_movimentation_storage = PledgeParcelMovimentation)
+  def initialize(object, pledge_parcel_movimentation_storage = PledgeParcelMovimentation)
     self.pledge_parcel_movimentation_storage = pledge_parcel_movimentation_storage
-    self.pledge_cancellation_object = pledge_cancellation_object
+    self.object = object
   end
 
   def generate!
@@ -44,7 +44,7 @@ class PledgeParcelMovimentationGenerator
   end
 
   def kind
-    case pledge_cancellation_object.class.name
+    case object.class.name
     when 'PledgeCancellation', 'PledgeLiquidation'
       'balance'
     when 'PledgeLiquidationCancellation'
@@ -55,8 +55,8 @@ class PledgeParcelMovimentationGenerator
   def create!(parcel, calculator)
     pledge_parcel_movimentation_storage.create!(
       :pledge_parcel_id => parcel.id,
-      :pledge_parcel_modificator_id => pledge_cancellation_object.id,
-      :pledge_parcel_modificator_type => pledge_cancellation_object.class.name,
+      :pledge_parcel_modificator_id => object.id,
+      :pledge_parcel_modificator_type => object.class.name,
       :pledge_parcel_value_was => parcel_value(parcel),
       :pledge_parcel_value => calculator.parcel_value,
       :value => calculator.movimented_value
