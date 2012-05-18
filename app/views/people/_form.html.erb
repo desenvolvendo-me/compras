@@ -35,4 +35,8 @@
   <% if f.object.persisted? %>
     $("#personable-type").hide();
   <% end %>
+
+  $("#personable").change(function() {
+    loadTabs();
+  });
 </script>
