@@ -1,11 +1,22 @@
-<div class="yui3-g nested subpledge-expiration">
-  <%= f.input :id, :as => 'hidden' %>
-  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+<div class="subpledge-expiration">
+  <div class="yui3-g nested">
+    <%= f.input :id, :as => 'hidden' %>
+    <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <%= f.input :number, :disabled => true, :input_html => { :class => 'order' }, :wrapper_html => { :class => 'yui3-u-1-4' } %>
-  <%= f.input :expiration_date, :wrapper_html => { :class => 'order yui3-u-1-4' } %>
-  <%= f.input :value, :wrapper_html => { :class => 'order yui3-u-1-4' } %>
-  <p class="yui3-u-1-4 nested-remove">
-    <input type="button" class="button negative remove-subpledge-expiration" value="Remover Parcela">
-  </p>
+    <div class="yui3-u-1-4">
+      <%= f.input :number, :disabled => true, :input_html => { :class => 'order' } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :expiration_date %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :value %>
+    </div>
+
+    <div class="yui3-u-1-4 nested-remove">
+      <input type="button" class="button negative remove-subpledge-expiration" value="Remover Parcela">
+    </div>
+  </div>
 </div>
