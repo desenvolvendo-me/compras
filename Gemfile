@@ -60,5 +60,5 @@ group :test do
   gem 'machinist-caching', '0.0.1'
   gem 'capybara', '1.1.2'
   gem 'capybara-webkit', '0.11.0'
-  gem 'selenium-webdriver', '2.21.1'
+  gem 'selenium-webdriver', '2.21.2'
 end
