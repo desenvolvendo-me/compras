@@ -52,7 +52,7 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
 
   protected
 
-  def winner_proposal
-    licitation_process_bidder_proposals.min_by(&:total_price)
+  def winner_proposal(classificator = LicitationProcessProposalsClassificatorByItem)
+    classificator.new(self).winner_proposal
   end
 end

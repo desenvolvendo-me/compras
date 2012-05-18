@@ -35,11 +35,7 @@ describe AdministrativeProcessBudgetAllocationItem do
   end
 
   it 'should return the winner proposal by item total value' do
-    proposal_1 = double(:total_price => 200.0, :provider => 'provider 1')
-    proposal_2 = double(:total_price => 100.0, :provider => 'provider 2')
-    proposal_3 = double(:total_price => 300.0, :provider => 'provider 3')
-
-    subject.stub(:licitation_process_bidder_proposals).and_return([proposal_1, proposal_2, proposal_3])
+    subject.stub(:winner_proposal).and_return double(:total_price => 100.0, :provider => 'provider 2')
 
     subject.winner_proposal_provider.should eq 'provider 2'
     subject.winner_proposal_total_price.should eq 100.0
