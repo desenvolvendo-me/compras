@@ -22,6 +22,8 @@ class AdministrativeProcess < ActiveRecord::Base
 
   delegate :kind, :to => :judgment_form, :allow_nil => true, :prefix => true
 
+  delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
+
   validates :year, :date, :budget_unit, :presence => true
   validates :modality, :object_type, :presence => true
   validates :responsible, :status, :presence => true

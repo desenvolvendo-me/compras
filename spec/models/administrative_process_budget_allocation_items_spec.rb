@@ -33,11 +33,4 @@ describe AdministrativeProcessBudgetAllocationItem do
     described_class.without_lot.stub(:any?).and_return(false)
     described_class.should_not be_without_lot
   end
-
-  it 'should return the winner proposal by item total value' do
-    subject.stub(:winner_proposal).and_return double(:total_price => 100.0, :provider => 'provider 2')
-
-    subject.winner_proposal_provider.should eq 'provider 2'
-    subject.winner_proposal_total_price.should eq 100.0
-  end
 end

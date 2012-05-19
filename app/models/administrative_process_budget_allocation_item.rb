@@ -12,6 +12,10 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
   delegate :administrative_process_id, :to => :administrative_process_budget_allocation, :allow_nil => true
 
+  delegate :type_of_calculation, :to => :administrative_process_budget_allocation, :allow_nil => true
+
+  delegate :provider, :total_price, :to => :winner_proposals, :allow_nil => true, :prefix => true
+
   validates :material, :quantity, :unit_price, :presence => true
 
   orderize :id
@@ -38,21 +42,7 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
     end
   end
 
-  def winner_proposal_provider
-    return unless winner_proposal
-
-    winner_proposal.provider
-  end
-
-  def winner_proposal_total_price
-    return unless winner_proposal
-
-    winner_proposal.total_price
-  end
-
-  protected
-
-  def winner_proposal(classificator = LicitationProcessProposalsClassificatorByItem)
-    classificator.new(self).winner_proposal
+  def winner_proposals(classificator = LicitationProcessProposalsClassificatorByItem)
+    classificator.new(self, type_of_calculation).winner_proposals
   end
 end

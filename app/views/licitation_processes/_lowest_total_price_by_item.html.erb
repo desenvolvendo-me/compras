@@ -28,10 +28,10 @@
           <%= item.quantity %>
         </td>
         <td>
-          <%= item.winner_proposal_provider %>
+          <%= item.winner_proposals_provider %>
         </td>
         <td>
-          <%= item.decorator.winner_proposal_total_price %>
+          <%= number_with_precision item.winner_proposals_total_price %>
         </td>
       </tr>
     <% end %>

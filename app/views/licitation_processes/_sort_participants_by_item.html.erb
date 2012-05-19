@@ -1,0 +1,31 @@
+<p>Apuração: Classificar participante por item</p>
+
+<% localized(resource.items).each_with_index do |item, index| %>
+  <p>Item: <%= item.description %></p>
+  <p>Quantidade: <%= item.quantity %></p>
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          Fornecedor
+        </th>
+        <th>
+          Valor cotado
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% localized(item.winner_proposals).each do |winner| %>
+        <tr>
+          <td>
+            <%= winner.provider %>
+          </td>
+          <td>
+            <%= winner.decorator.total_price %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -708,7 +708,28 @@ feature "LicitationProcesses" do
     page.should have_content 'Apuração: Menor preço total por item'
     page.should have_content 'Antivirus'
     page.should have_content 'Gabriel Sobrinho'
-    page.should have_content 'R$ 18,00'
+    page.should have_content '18,00'
+  end
+
+  scenario "should show the count report by type_of_calculation being sort_participants_by_item" do
+    LicitationProcess.make!(:classificar_por_itens)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apurar'
+
+    page.should have_content 'Apuração: Classificar participante por item'
+    page.should have_content 'Antivirus'
+    page.should have_content 'Gabriel Sobrinho'
+    page.should have_content '18,00'
+    page.should have_content 'Wenderson Malheiros'
+    page.should have_content '20,00'
   end
 
   scenario "should show the count report by type_of_calculation being lowest_price_by_lot" do
@@ -728,7 +749,7 @@ feature "LicitationProcesses" do
     page.should have_content 'Apuração: Menor preço total por lote'
     page.should have_content 'lote antivirus'
     page.should have_content 'Gabriel Sobrinho'
-    page.should have_content 'R$ 18,00'
+    page.should have_content '18,00'
   end
 
   scenario "should show the count report by type_of_calculation being lowest_global_price" do
@@ -746,6 +767,6 @@ feature "LicitationProcesses" do
 
     page.should have_content 'Apuração: Menor preço global'
     page.should have_content 'Gabriel Sobrinho'
-    page.should have_content 'R$ 18,00'
+    page.should have_content '18,00'
   end
 end
