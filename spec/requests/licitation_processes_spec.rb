@@ -724,7 +724,7 @@ feature "LicitationProcesses" do
 
     click_link 'Apurar'
 
-    page.should have_content 'Apuração: Classificar participante por item'
+    page.should have_content 'Apuração: Classificar participantes por item (pregão presencial)'
     page.should have_content 'Antivirus'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
@@ -746,7 +746,7 @@ feature "LicitationProcesses" do
 
     click_link 'Apurar'
 
-    page.should have_content 'Apuração: Menor preço total por lote'
+    page.should have_content 'Apuração: Menor preço por lote'
     page.should have_content 'lote antivirus'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
