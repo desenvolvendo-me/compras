@@ -36,7 +36,5 @@
     $("#personable-type").hide();
   <% end %>
 
-  $("#personable").change(function() {
-    loadTabs();
-  });
+  $("#personable").change(loadTabs);
 </script>
