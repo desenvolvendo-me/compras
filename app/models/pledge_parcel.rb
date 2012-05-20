@@ -25,8 +25,12 @@ class PledgeParcel < ActiveRecord::Base
     pledge_parcel_movimentations.where { pledge_parcel_modificator_type.eq 'PledgeLiquidationCancellation' }.sum(:value)
   end
 
+  def subpledges_sum
+    pledge_parcel_movimentations.where { pledge_parcel_modificator_type.eq 'Subpledge' }.sum(:value)
+  end
+
   def balance
-    value - canceled_value - liquidations_value + canceled_liquidations_value
+    value - canceled_value - liquidations_value + canceled_liquidations_value - subpledges_sum
   end
 
   def cancellation_moviments

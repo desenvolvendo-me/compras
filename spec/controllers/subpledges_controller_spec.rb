@@ -41,5 +41,13 @@ describe SubpledgesController do
 
       assigns(:subpledge).number.should eq 1
     end
+
+    it 'should call the PledgeParcelMovimentationGenerator on action create' do
+      Subpledge.any_instance.stub(:valid?).and_return(true)
+
+      PledgeParcelMovimentationGenerator.any_instance.should_receive(:generate!)
+
+      post :create
+    end
   end
 end

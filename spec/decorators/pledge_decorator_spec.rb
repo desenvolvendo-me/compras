@@ -24,6 +24,13 @@ describe PledgeDecorator do
     subject.balance.should eq '100,00'
   end
 
+  it 'should return formatted balance as currency' do
+    component.stub(:balance => 100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.balance_as_currency.should eq 'R$ 100,00'
+  end
+
   it 'should return formatted pledge_liquidations_sum' do
     component.stub(:pledge_liquidations_sum => 100.0)
     helpers.stub(:number_with_precision).with(100.0).and_return('100,00')

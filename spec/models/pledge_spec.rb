@@ -77,7 +77,9 @@ describe Pledge do
     subject.value = 21
     subject.stub(:pledge_cancellations_sum).and_return(2)
     subject.stub(:pledge_liquidations_sum).and_return(1)
-    subject.balance.should eq 18
+    subject.stub(:subpledges_value_sum).and_return(1)
+    subject.stub(:pledge_liquidation_cancellations_sum).and_return(4)
+    subject.balance.should eq 21
   end
 
   it 'validate value based on budeget_allocation_real_amount' do

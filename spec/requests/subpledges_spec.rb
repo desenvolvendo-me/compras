@@ -8,7 +8,7 @@ feature "SubPledges" do
 
   scenario 'create a new subpledge' do
     Entity.make!(:detran)
-    pledge = Pledge.make!(:empenho)
+    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
     Provider.make!(:wenderson_sa)
 
     click_link 'Contabilidade'
@@ -24,8 +24,20 @@ feature "SubPledges" do
       fill_in 'Número do processo', :with => '1239/2012'
       fill_modal 'Fornecedor *', :with => '456789', :field => 'CRC'
       fill_in 'Data *', :with => I18n.l(Date.current)
-      fill_in 'Valor *', :with => '1,00'
       fill_in 'Objeto', :with => 'Aquisição de materiais'
+    end
+
+    within_tab 'Vencimentos' do
+      page.should have_disabled_field 'Saldo a subempenhar'
+
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:first' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 10.days)
+        fill_in 'Valor *', :with => '110,00'
+      end
+
+      fill_in 'Valor a subempenhar', :with => '110,00'
     end
 
     click_button 'Salvar'
@@ -43,23 +55,36 @@ feature "SubPledges" do
       page.should have_disabled_field 'Data de emissão'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
       page.should have_disabled_field 'Valor do empenho'
-      page.should have_field 'Valor do empenho', :with => '9,99'
-      page.should have_disabled_field 'Saldo a subempenhar'
-      page.should have_field 'Saldo a subempenhar', :with => '9,99'
+      page.should have_field 'Valor do empenho', :with => '200,00'
       page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Empenho', :with => "#{pledge.id}"
+      page.should have_field 'Empenho', :with => pledge.to_s
       page.should have_field 'Subempenho', :with => '1'
       page.should have_field 'Número do processo', :with => '1239/2012'
       page.should have_field 'Fornecedor *', :with => 'Wenderson Malheiros'
       page.should have_field 'Data *', :with => I18n.l(Date.current)
-      page.should have_field 'Valor *', :with => '1,00'
       page.should have_field 'Objeto', :with => 'Aquisição de materiais'
     end
 
     within_tab 'Vencimentos' do
-      page.should have_content '1'
-      page.should have_content I18n.l(Date.current + 1.day)
-      page.should have_content '9,99'
+      within '#parcel_1' do
+        page.should have_content '1'
+        page.should have_content I18n.l(Date.tomorrow)
+        find('.value').should have_content 'R$ 100,00'
+        find('.balance').should have_content 'R$ 0,00'
+      end
+
+      within '#parcel_2' do
+        page.should have_content '2'
+        page.should have_content I18n.l(Date.current + 2.day)
+        find('.value').should have_content 'R$ 100,00'
+        find('.balance').should have_content 'R$ 90,00'
+      end
+
+      page.should have_disabled_field 'Saldo a subempenhar'
+      page.should have_field 'Saldo a subempenhar', :with => '90,00'
+      page.should have_disabled_field 'Total do empenho a subempenhar'
+      page.should have_field 'Total do empenho a subempenhar', :with => '110,00'
+      page.should have_field 'Valor a subempenhar', :with => '110,00'
     end
   end
 
@@ -100,16 +125,14 @@ feature "SubPledges" do
 
     click_link 'Criar Subempenho'
 
-    within_tab 'Principal' do
-      fill_in 'Valor *', :with => '10,00'
-    end
-
     within_tab 'Vencimentos' do
       click_button 'Adicionar Parcela'
 
       within '.subpledge-expiration:first' do
         fill_in 'Valor *', :with => '100,00'
       end
+
+      fill_in 'Valor a subempenhar', :with => '10,00'
     end
 
     click_button 'Salvar'
@@ -175,8 +198,10 @@ feature "SubPledges" do
     end
 
     within_tab 'Vencimentos' do
-      page.should_not have_content I18n.l(Date.current + 1.day)
-      page.should_not have_content '9,99'
+      within '#expirations' do
+        page.should_not have_content I18n.l(Date.current + 1.day)
+        page.should_not have_content '9,99'
+      end
     end
   end
 
@@ -215,21 +240,29 @@ feature "SubPledges" do
       page.should have_disabled_field 'Fornecedor do empenho'
       page.should have_disabled_field 'Data de emissão'
       page.should have_disabled_field 'Valor do empenho'
-      page.should have_disabled_field 'Saldo a subempenhar'
 
       fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
       page.should have_field 'Fornecedor do empenho', :with => 'Wenderson Malheiros'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
       page.should have_field 'Valor do empenho', :with => '9,99'
-      page.should have_field 'Saldo a subempenhar', :with => '9,99'
       page.should have_field 'Fornecedor *', :with => 'Wenderson Malheiros'
       page.should have_field 'Objeto *', :with => 'Descricao'
-      page.should have_field 'Valor *', :with => '9,99'
+    end
 
+    within_tab 'Vencimentos' do
+      page.should have_field 'Saldo a subempenhar', :with => '9,99'
+      page.should have_field 'Valor a subempenhar', :with => '9,99'
+    end
+
+    within_tab 'Principal' do
       clear_modal 'Empenho'
+
       page.should have_field 'Fornecedor do empenho', :with => ''
       page.should have_field 'Data de emissão', :with => ''
       page.should have_field 'Valor do empenho', :with => ''
+    end
+
+    within_tab 'Vencimentos' do
       page.should have_field 'Saldo a subempenhar', :with => ''
     end
   end
@@ -252,17 +285,25 @@ feature "SubPledges" do
       page.should have_disabled_field 'Ano'
       page.should have_field 'Ano', :with => '2012'
       page.should have_disabled_field 'Empenho'
-      page.should have_field 'Empenho', :with => "#{pledge.id}"
+      page.should have_field 'Empenho', :with => pledge.to_s
       page.should have_disabled_field 'Número do processo'
       page.should have_field 'Número do processo', :with => '1239/2012'
       page.should have_disabled_field 'Fornecedor'
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_disabled_field 'Data'
       page.should have_field 'Data', :with => I18n.l(Date.current)
-      page.should have_disabled_field 'Valor'
-      page.should have_field 'Valor', :with => '1,00'
       page.should have_disabled_field 'Objeto'
       page.should have_field 'Objeto', :with => 'Aquisição de material'
+    end
+
+    within_tab 'Vencimentos' do
+      page.should have_disabled_field 'Valor a subempenhar'
+      page.should have_field 'Valor a subempenhar', :with => '1,00'
+
+      within '.subpledge-expiration:first' do
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 8.days)
+        fill_in 'Valor *', :with => '1,00'
+      end
     end
   end
 

@@ -45,7 +45,7 @@ class PledgeParcelMovimentationGenerator
 
   def kind
     case object.class.name
-    when 'PledgeCancellation', 'PledgeLiquidation'
+    when 'PledgeCancellation', 'PledgeLiquidation', 'Subpledge'
       'balance'
     when 'PledgeLiquidationCancellation'
       'liquidation'

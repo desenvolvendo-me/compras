@@ -3,25 +3,25 @@
 <table id="expirations" class="records">
   <thead>
     <tr>
-      <th>Número</th>
+      <th>Parcela</th>
       <th>Vencimento</th>
-      <th>Valor</th>
-      <th>Saldo a Subempenhar</th>
+      <th>Valor inicial</th>
+      <th>Valor a subempenhar</th>
     </tr>
   </thead>
   <tbody>
     <% f.object.pledge_parcels.each do |pledge_parcel| %>
-      <tr>
+      <tr id="parcel_<%= pledge_parcel.number %>">
         <td>
           <%= pledge_parcel.number %>
         </td>
         <td>
           <%= pledge_parcel.decorator.expiration_date %>
         </td>
-        <td>
+        <td class="value">
           <%= pledge_parcel.decorator.value %>
         </td>
-        <td>
+        <td class="balance">
           <%= pledge_parcel.decorator.balance_as_currency %>
         </td>
       </tr>
@@ -30,8 +30,14 @@
   </tbody>
 </table>
 
+<%= f.input :pledge_balance, :disabled => true, :input_html => { :value => f.object.decorator.pledge_balance } %>
+
+<%= f.input :subpledge_expirations_sum, :disabled => true, :input_html => { :value => f.object.decorator.subpledge_expirations_sum } %>
+
+<%= f.input :value %>
+
 <%= mustache 'pledge-expiration-template' do %>
-    <tr>
+    <tr id="parcel_{{number}}">
       <td>
         {{number}}
       </td>

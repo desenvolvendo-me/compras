@@ -84,7 +84,7 @@ class Pledge < ActiveRecord::Base
   end
 
   def balance
-    value - pledge_cancellations_sum - pledge_liquidations_sum + pledge_liquidation_cancellations_sum
+    value - pledge_cancellations_sum - pledge_liquidations_sum - subpledges_value_sum + pledge_liquidation_cancellations_sum
   end
 
   def pledge_liquidations_sum
@@ -97,6 +97,10 @@ class Pledge < ActiveRecord::Base
 
   def pledge_liquidation_cancellations_sum
     pledge_liquidation_cancellations.sum(:value)
+  end
+
+  def subpledges_value_sum
+    subpledges.sum(:value)
   end
 
   def last_subpledge
