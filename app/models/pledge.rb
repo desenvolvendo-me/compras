@@ -88,7 +88,7 @@ class Pledge < ActiveRecord::Base
   end
 
   def pledge_liquidations_sum
-    BigDecimal(pledge_liquidations.sum(:value))
+    pledge_liquidations.sum(:value)
   end
 
   def pledge_cancellations_sum
