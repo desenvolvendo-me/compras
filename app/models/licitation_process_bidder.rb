@@ -55,7 +55,7 @@ class LicitationProcessBidder < ActiveRecord::Base
   end
 
   def to_s
-    "#{licitation_process} - #{id}"
+    provider.to_s
   end
 
   def assign_document_types

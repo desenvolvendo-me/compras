@@ -69,10 +69,9 @@ describe LicitationProcessBidder do
   end
 
   it 'should return licitation process  - id as to_s method' do
-    subject.stub(:licitation_process).and_return('1/2012')
-    subject.id = 5
+    subject.stub(:provider => double(:to_s => 'Fulano'))
 
-    subject.to_s.should eq '1/2012 - 5'
+    subject.to_s.should eq 'Fulano'
   end
 
   describe 'before_save' do
