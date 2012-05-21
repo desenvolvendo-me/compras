@@ -1,0 +1,37 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        Item
+      </th>
+      <th>
+        Quantidade
+      </th>
+      <th>
+        Fornecedor
+      </th>
+      <th>
+        Valor cotado
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(resource.items).each_with_index do |item, index| %>
+      <tr>
+        <td>
+          <%= item.description %>
+        </td>
+        <td>
+          <%= item.quantity %>
+        </td>
+        <td>
+          <%= item.winner_proposals_provider %>
+        </td>
+        <td>
+          <%= number_with_precision item.winner_proposals_total_price %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

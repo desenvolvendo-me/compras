@@ -159,6 +159,22 @@ AdministrativeProcess.blueprint(:classificacao_por_itens) do
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
 end
 
+AdministrativeProcess.blueprint(:maior_lance_por_itens) do
+  process { 1 }
+  year { 2012 }
+  date { Date.new(2012, 3, 7) }
+  protocol { '00088/2012' }
+  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
+  object_type { AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS }
+  modality { AdministrativeProcessModality::AUCTION }
+  judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  status { AdministrativeProcessStatus::WAITING }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+end
+
 AdministrativeProcess.blueprint(:classificacao_por_lote) do
   process { 1 }
   year { 2012 }

@@ -16,6 +16,8 @@ class LicitationProcessProposalsClassificatorByItem
       best_proposal
     when LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM
       classified_proposals
+    when LicitationProcessTypeOfCalculation::HIGHEST_BIDDER_BY_ITEM
+      higher_proposal
     end
   end
 
@@ -39,6 +41,10 @@ class LicitationProcessProposalsClassificatorByItem
 
   def best_proposal
     sorted_proposals.first
+  end
+
+  def higher_proposal
+    sorted_proposals.last
   end
 
   def maximum_price_for_classification

@@ -69,4 +69,18 @@ describe LicitationProcessProposalsClassificatorByItem do
       subject.winner_proposals.should eq [proposal_6, proposal_2, proposal_4]
     end
   end
+
+  context "highest bidder by item" do
+    let :item do
+      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3])
+    end
+
+    subject do
+      described_class.new(item, LicitationProcessTypeOfCalculation::HIGHEST_BIDDER_BY_ITEM)
+    end
+
+    it "it should return the winner proposal for highest bidder by item" do
+      subject.winner_proposals.should eq proposal_1
+    end
+  end
 end
