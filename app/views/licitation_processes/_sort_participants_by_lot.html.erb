@@ -1,0 +1,29 @@
+<% localized(resource.licitation_process_lots).each do |lot| %>
+  <p>Lote: <%= lot %></p>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          Fornecedor
+        </th>
+        <th>
+          Valor cotado
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% localized(lot.winner_proposals).each do |winner| %>
+        <tr>
+          <td>
+            <%= winner.provider %>
+          </td>
+          <td>
+            <%= winner.decorator.proposal_total_value_by_lot(lot.id) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
