@@ -5,7 +5,6 @@ builder resource, json do
   json.provider_id             resource.provider_id
   json.provider                resource.provider.to_s
   json.balance                 resource.decorator.balance
-  json.balance_as_currency     resource.decorator.balance_as_currency
   json.description             resource.description
 
   json.parcels resource.pledge_parcels do |json, parcel|

@@ -14,10 +14,6 @@ class PledgeDecorator < Decorator
     helpers.number_with_precision component.balance
   end
 
-  def balance_as_currency
-    helpers.number_to_currency component.balance
-  end
-
   def pledge_liquidations_sum
     helpers.number_with_precision(component.pledge_liquidations_sum) if component.pledge_liquidations_sum
   end
