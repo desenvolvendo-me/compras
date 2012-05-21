@@ -25,12 +25,12 @@ describe AdministrativeProcessBudgetAllocationItem do
   end
 
   it "should without_lot? be true when has not lot" do
-    described_class.stub_chain(:without_lot, :any?).and_return(true)
+    described_class.stub(:without_lot?).and_return(true)
     described_class.should be_without_lot
   end
 
   it "should without_lot? be false when has not lot" do
-    described_class.without_lot.stub(:any?).and_return(false)
+    described_class.stub(:without_lot?).and_return(false)
     described_class.should_not be_without_lot
   end
 end
