@@ -676,11 +676,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Apurar'
 
@@ -718,11 +720,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Apurar'
 
@@ -740,11 +744,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Apurar'
 
