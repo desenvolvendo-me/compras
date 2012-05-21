@@ -587,4 +587,66 @@ feature "LicitationProcessBidders" do
 
     page.should_not have_button 'Salvar'
   end
+
+  scenario "index shoud have title Licitantes do Processo Licitatório 1/2013" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    page.should have_content "Licitantes do Processo Licitatório 1/2013"
+  end
+
+  scenario "edit shoud have title Editar Licitante do Processo Licitatório 1/2013" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    within_records do
+      page.find('a').click
+    end
+
+    licitation_process_bidder = licitation_process.licitation_process_bidders.last
+
+    page.should have_content "Editar Licitante(#{licitation_process_bidder}) do Processo Licitatório 1/2013"
+  end
+
+  scenario "new shoud have title Novo Licitante do Processo Licitatório 1/2013" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    click_link 'Criar Licitante'
+
+    page.should have_content "Criar Licitante no Processo Licitatório 1/2013"
+  end
 end
