@@ -9,10 +9,9 @@ describe LicitationProcessLot do
   it { should belong_to :licitation_process }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:nullify).order(:id) }
 
-  it "should return the observations as to_s method" do
-    subject.observations = "some observation"
-
-    subject.to_s.should eq "some observation"
+  it "should return 'Lote x' as to_s method" do
+    subject.stub(:count_lots).and_return(1)
+    subject.to_s.should eq "Lote 1"
   end
 
   it "items from related administrative process should be valid" do

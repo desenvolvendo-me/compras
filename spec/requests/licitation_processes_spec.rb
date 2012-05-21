@@ -709,7 +709,7 @@ feature "LicitationProcesses" do
     click_link 'Apurar'
 
     page.should have_content 'Apuração: Menor preço por lote'
-    page.should have_content 'lote antivirus'
+    page.should have_content 'Lote 1'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
   end
@@ -731,7 +731,7 @@ feature "LicitationProcesses" do
     click_link 'Apurar'
 
     page.should have_content 'Apuração: Classificar participantes por lote (pregão presencial)'
-    page.should have_content 'Lote: lote antivirus'
+    page.should have_content 'Lote 1'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
     page.should have_content 'Wenderson Malheiros'
@@ -755,7 +755,7 @@ feature "LicitationProcesses" do
     click_link 'Apurar'
 
     page.should have_content 'Apuração: Maior lance por lote'
-    page.should have_content 'lote antivirus'
+    page.should have_content 'Lote 1'
     page.should have_content 'Wenderson Malheiros '
     page.should have_content '20,00'
   end

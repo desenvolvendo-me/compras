@@ -250,7 +250,7 @@ AdministrativeProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   judgment_form { JudgmentForm.make!(:por_lote_com_tecnica_e_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
-  status { AdministrativeProcessStatus::WAITING }
+  status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
 end

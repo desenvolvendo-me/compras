@@ -16,7 +16,7 @@ class LicitationProcessLot < ActiveRecord::Base
   filterize
 
   def to_s
-    observations
+    "Lote #{count_lots}"
   end
 
   def items_should_belong_to_administrative_process
@@ -29,5 +29,9 @@ class LicitationProcessLot < ActiveRecord::Base
 
   def winner_proposals(classificator = LicitationProcessProposalsClassificatorByLot)
     classificator.new(self, type_of_calculation).winner_proposals
+  end
+
+  def count_lots
+    self.class.where { |lot| lot.id.lteq id }.count
   end
 end

@@ -357,7 +357,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Lote de itens'
 
-    fill_in 'Observações', :with => 'lote numero 1'
+    fill_in 'Observações', :with => 'Lote 1'
     fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
 
     click_button 'Salvar'
@@ -368,7 +368,7 @@ feature "LicitationProcessBidders" do
       click_link licitation_process.licitation_process_lots.last.to_s
     end
 
-    page.should have_field 'Observações', :with => 'lote numero 1'
+    page.should have_field 'Observações', :with => 'Lote 1'
     page.should have_content '01.01.00001 - Antivirus'
     page.should have_content '2'
     page.should have_content '10,00'
@@ -377,7 +377,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Lote de itens'
 
-    fill_in 'Observações', :with => 'lote numero 2'
+    fill_in 'Observações', :with => 'Lote 2'
     fill_modal 'Itens', :with => '02.02.00002 - Arame comum', :field => 'Material'
 
     click_button 'Salvar'
@@ -388,15 +388,15 @@ feature "LicitationProcessBidders" do
       click_link licitation_process.licitation_process_lots.last.to_s
     end
 
-    page.should have_field 'Observações', :with => 'lote numero 2'
+    page.should have_field 'Observações', :with => 'Lote 2'
     page.should have_content '02.02.00002 - Arame comum'
     page.should have_content '1'
     page.should have_content '10,00'
 
     click_link 'Cancelar'
 
-    page.should have_content 'lote numero 1'
-    page.should have_content 'lote numero 2'
+    page.should have_content 'Lote 1'
+    page.should have_content 'Lote 2'
 
     click_link 'Voltar ao processo licitatório'
 
@@ -411,10 +411,10 @@ feature "LicitationProcessBidders" do
     page.should have_field 'Protocolo', :with => '123456'
 
     within_tab 'Propostas' do
-      page.should have_content 'lote numero 1'
-      page.should have_content 'lote numero 2'
+      page.should have_content 'Lote 1'
+      page.should have_content 'Lote 2'
 
-      within_tab 'lote numero 1' do
+      within_tab 'Lote 1' do
         page.should have_disabled_field 'Preço total dos itens'
         page.should have_disabled_field 'Material'
         page.should have_disabled_field 'Situação'
@@ -434,7 +434,7 @@ feature "LicitationProcessBidders" do
         page.should have_field 'Preço total dos itens', :with => '199,98'
       end
 
-      within_tab 'lote numero 2' do
+      within_tab 'Lote 2' do
         page.should have_disabled_field 'Preço total dos itens'
         page.should have_disabled_field 'Material'
         page.should have_disabled_field 'Situação'
@@ -460,7 +460,7 @@ feature "LicitationProcessBidders" do
     click_link bidder.to_s
 
     within_tab 'Propostas' do
-      within_tab 'lote numero 1' do
+      within_tab 'Lote 1' do
         page.should have_disabled_field 'Preço total dos itens'
         page.should have_disabled_field 'Material'
         page.should have_disabled_field 'Situação'
@@ -480,7 +480,7 @@ feature "LicitationProcessBidders" do
         page.should have_field 'Marca', :with => 'mcafee'
       end
 
-      within_tab 'lote numero 2' do
+      within_tab 'Lote 2' do
         page.should have_disabled_field 'Preço total dos itens'
         page.should have_disabled_field 'Material'
         page.should have_disabled_field 'Situação'
@@ -520,7 +520,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Lote de itens'
 
-    fill_in 'Observações', :with => 'lote numero 1'
+    fill_in 'Observações', :with => 'Lote 1'
     fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
 
     click_button 'Salvar'
@@ -531,14 +531,14 @@ feature "LicitationProcessBidders" do
       click_link licitation_process.licitation_process_lots.last.to_s
     end
 
-    page.should have_field 'Observações', :with => 'lote numero 1'
+    page.should have_field 'Observações', :with => 'Lote 1'
     page.should have_content '01.01.00001 - Antivirus'
     page.should have_content '2'
     page.should have_content '10,00'
 
     click_link 'Cancelar'
 
-    page.should have_content 'lote numero 1'
+    page.should have_content 'Lote 1'
 
     click_link 'Voltar ao processo licitatório'
 
