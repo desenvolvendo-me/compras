@@ -153,4 +153,70 @@ feature "LicitationProcessLots" do
       page.should have_content 'Antivirus'
     end
   end
+
+  scenario "index shoud have title Lotes de itens do Processo Licitatório 1/2013" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    page.should have_content "Lotes de itens do Processo Licitatório 1/2013"
+  end
+
+  scenario "edit shoud have title Editar Lotes de itens do Processo Licitatório 1/2013" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    click_link 'Criar Lote de itens'
+
+    fill_in 'Observações', :with => 'Lote especial'
+
+    click_button 'Salvar'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_content "Editar Lote de itens(Lote especial) do Processo Licitatório 1/2013"
+  end
+
+  scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 1/2013" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    click_link 'Criar Lote de itens'
+
+    page.should have_content "Criar Lote de itens no Processo Licitatório 1/2013"
+  end
 end
