@@ -37,12 +37,24 @@
     <% if f.object.pledge %>
       <% localized(f.object.pledge.pledge_parcels).each do |parcel| %>
         <tr id="parcel_<%= parcel.number %>">
-          <td><%= parcel.number %></td>
-          <td><%= parcel.localized.expiration_date %></td>
-          <td class="value"><%= parcel.decorator.value %></td>
-          <td class="liquidations_value"><%= parcel.decorator.liquidations_value %></td>
-          <td class="canceled_liquidations_value"><%= parcel.decorator.canceled_liquidations_value %></td>
-          <td class="balance"><%= parcel.decorator.balance_as_currency %></td>
+          <td>
+            <%= parcel.number %>
+          </td>
+          <td>
+            <%= parcel.localized.expiration_date %>
+          </td>
+          <td class="value">
+            <%= parcel.decorator.value %>
+          </td>
+          <td class="liquidations_value">
+            <%= parcel.decorator.liquidations_value %>
+          </td>
+          <td class="canceled_liquidations_value">
+            <%= parcel.decorator.canceled_liquidations_value %>
+          </td>
+          <td class="balance">
+            <%= parcel.decorator.balance_as_currency %>
+          </td>
         </tr>
       <% end %>
     <% end %>
