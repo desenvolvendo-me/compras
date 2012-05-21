@@ -49,7 +49,7 @@ class Person < ActiveRecord::Base
   end
 
   def special?
-    !personable.respond_to?(:cpf) & !personable.respond_to?(:cnpj)
+    !personable.respond_to?(:cpf) && !personable.respond_to?(:cnpj)
   end
 
   def iss_intel_attributes

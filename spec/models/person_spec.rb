@@ -78,16 +78,16 @@ describe Person do
       end
 
       it "should be special when does not have both cpf and cnpj" do
-        personable.should_receive(:respond_to?).with(:cpf).and_return(false)
-        personable.should_receive(:respond_to?).with(:cnpj).and_return(false)
+        personable.stub(:respond_to?).with(:cpf).and_return(false)
+        personable.stub(:respond_to?).with(:cnpj).and_return(false)
         subject.stub(:personable => personable)
 
         subject.should be_special
       end
 
       it "should not be special if have cpf" do
-        personable.should_receive(:respond_to?).with(:cpf).and_return(true)
-        personable.should_receive(:respond_to?).with(:cnpj).and_return(false)
+        personable.stub(:respond_to?).with(:cpf).and_return(true)
+        personable.stub(:respond_to?).with(:cnpj).and_return(false)
         subject.stub(:personable => personable)
 
         subject.should_not be_special
