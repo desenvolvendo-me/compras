@@ -16,6 +16,8 @@ class LicitationProcessProposalsClassificatorByLot
       best_proposal
     when type_of_calculation_enumerator::SORT_PARTICIPANTS_BY_LOT
       classified_proposals
+    when type_of_calculation_enumerator::HIGHEST_BIDDER_BY_LOT
+      highest_proposal
     end
   end
 
@@ -45,6 +47,10 @@ class LicitationProcessProposalsClassificatorByLot
 
   def best_proposal
     sorted_proposals.first
+  end
+
+  def highest_proposal
+    sorted_proposals.last
   end
 
   def sorted_proposals

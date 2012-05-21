@@ -69,4 +69,18 @@ describe LicitationProcessProposalsClassificatorByLot do
       subject.winner_proposals.should eq [bidder_5, bidder_2, bidder_1]
     end
   end
+
+  context "highest bidder by lot" do
+    let :lot do
+      double(:id => 1, :licitation_process_bidders => [bidder_1, bidder_2, bidder_3, bidder_4])
+    end
+
+    subject do
+      described_class.new(lot, LicitationProcessTypeOfCalculation::HIGHEST_BIDDER_BY_LOT)
+    end
+
+    it "it should return the winner proposal for highest_bidder_by_lot" do
+      subject.winner_proposals.should eq bidder_4
+    end
+  end
 end

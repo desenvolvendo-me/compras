@@ -734,6 +734,26 @@ feature "LicitationProcesses" do
     page.should have_content '20,00'
   end
 
+  scenario "should show the count report by type_of_calculation being highest_bidder_by_lot" do
+    licitation_process = LicitationProcess.make!(:maior_lance_por_lote)
+    LicitationProcessLot.make!(:lote_antivirus, :licitation_process_id => licitation_process.id)
+
+    click_link 'Processos'
+
+    click_link 'Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apurar'
+
+    page.should have_content 'Apuração: Maior lance por lote'
+    page.should have_content 'lote antivirus'
+    page.should have_content 'Wenderson Malheiros '
+    page.should have_content '20,00'
+  end
+
   scenario "should show the count report by type_of_calculation being lowest_global_price" do
     licitation_process = LicitationProcess.make!(:apuracao_global)
 
