@@ -18,7 +18,9 @@ class SubpledgesController < CrudController
   def create_resource(object)
     object.number = object.next_number
 
-    if super
+    object.transaction do
+      return unless super
+
       PledgeParcelMovimentationGenerator.new(object).generate!
     end
   end
