@@ -1,12 +1,24 @@
 class LicitationProcessesController < CrudController
-  actions :all, :except => [ :destroy ]
+  actions :all, :except => [ :destroy, :index ]
 
   def new
+    administrative_process = AdministrativeProcess.find(params[:administrative_process_id])
+
     object = build_resource
     object.year = Date.current.year
     object.process_date = Date.current
+    object.administrative_process = administrative_process
+    object.modality = administrative_process.modality
 
     super
+  end
+
+  def create
+    create!{ edit_administrative_process_path(resource.administrative_process) }
+  end
+
+  def update
+    update!{ edit_administrative_process_path(resource.administrative_process) }
   end
 
   protected

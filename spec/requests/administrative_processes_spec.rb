@@ -398,4 +398,47 @@ feature "AdministrativeProcesses" do
 
     page.should have_notice 'Processo Administrativo anulado com sucesso'
   end
+
+  scenario "show new licitation process link" do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_link 'Novo processo licitatório'
+  end
+
+  scenario "show edit licitation process link" do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_link 'Editar processo licitatório'
+  end
+
+  scenario "should not have new licitation process link if not released" do
+    AdministrativeProcess.make!(:compra_aguardando)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_link 'Novo processo licitatório'
+    page.should_not have_link 'Editar processo licitatório'
+  end
 end

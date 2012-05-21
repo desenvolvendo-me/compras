@@ -57,34 +57,6 @@
     });
   }
 
-  $("#licitation_process_administrative_process_id").change(function (event, administrative_process) {
-    if (administrative_process) {
-      $('#licitation_process_administrative_process_budget_unit').val(administrative_process.budget_unit);
-      $('#licitation_process_administrative_process_modality_humanize').val(administrative_process.modality_humanize);
-      $('#licitation_process_administrative_process_object_type_humanize').val(administrative_process.object_type_humanize);
-      $('#licitation_process_administrative_process_judgment_form').val(administrative_process.judgment_form);
-      $('#licitation_process_administrative_process_description').val(administrative_process.description);
-      $('#licitation_process_administrative_process_responsible').val(administrative_process.responsible);
-      $('#licitation_process_administrative_process_item').val(administrative_process.item);
-      $('#licitation_process_modality').val(abreviatedProcessModality(administrative_process.modality));
-      $("#licitation_process_administrative_process_attributes_id").val(administrative_process.id);
-
-      createAdministrativeProcessBudgetAllocations(administrative_process.budget_allocations);
-      filterTypesOfCalculation(administrative_process.judgment_form_kind, administrative_process.object_type, administrative_process.modality);
-    } else {
-      $('#licitation_process_administrative_process_budget_unit').val('');
-      $('#licitation_process_administrative_process_modality_humanize').val('');
-      $('#licitation_process_administrative_process_object_type_humanize').val('');
-      $('#licitation_process_administrative_process_judgment_form').val('');
-      $('#licitation_process_administrative_process_description').val('');
-      $('#licitation_process_administrative_process_responsible').val('');
-      $('#licitation_process_administrative_process_item').val('');
-      $('#licitation_process_modality').val('');
-
-      cleanExistingAdministrativeProcessBudgetAllocations();
-    }
-  });
-
   $('form.licitation_process').delegate('.material', 'change', function (event, material) {
     if (material){
       $(this).closest('.item').find('.reference-unit').val(material.reference_unit);

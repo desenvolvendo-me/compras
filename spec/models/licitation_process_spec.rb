@@ -86,21 +86,6 @@ describe LicitationProcess do
   it { should_not allow_value('201').for(:year) }
   it { should_not allow_value('a201').for(:year) }
 
-  it 'should validate that selected administrative process is available' do
-    subject.errors.messages[:administrative_process].should be_nil
-
-    administrative_process = double('administrative process',
-                                    :administrative_process_budget_allocations => [],
-                                    :licitation_process => 1)
-
-    subject.stub(:administrative_process).and_return(administrative_process)
-    subject.stub(:administrative_process_licitation_process).and_return(true)
-
-    subject.valid?
-
-    subject.errors.messages[:administrative_process].should include 'já está em uso'
-  end
-
   describe '#next_process' do
     context 'when do not has a licitation process with the same year' do
       before do
@@ -297,5 +282,86 @@ describe LicitationProcess do
 
     subject.winner_proposal_provider.should eq 'provider 2'
     subject.winner_proposal_total_price.should eq 500.0
+  end
+
+  it "should validate administrative_process_status" do
+    subject.stub(:administrative_process_released?).and_return(false)
+
+    subject.valid?
+
+    puts subject.errors[:administrative_process]
+
+    subject.errors[:administrative_process].should include 'o status deve ser liberado'
+
+    subject.stub(:administrative_process_released?).and_return(true)
+
+    subject.valid?
+
+    subject.errors[:administrative_process].should_not include 'o status deve ser liberado'
+  end
+
+  context "with adminsitrative process" do
+    before do
+      subject.stub(:administrative_process => administrative_process)
+    end
+
+    let :administrative_process do
+      double('administrative_process',
+             :administrative_process_budget_allocations => [],
+             :released? => true
+      )
+    end
+
+    let :licitation_process do
+      double('licitation_process', :id => 1)
+    end
+
+    it 'should validate that selected administrative process is available' do
+      subject.errors.messages[:administrative_process].should be_nil
+
+      subject.stub(:administrative_process_licitation_process).and_return(true)
+
+      administrative_process.stub(:licitation_process => licitation_process)
+
+      subject.valid?
+
+      subject.errors.messages[:administrative_process].should include 'já está em uso'
+    end
+
+    it "should not be valid if administrative_process have another licitation_process" do
+      subject.stub(:id => 2)
+
+      administrative_process.stub(:licitation_process => licitation_process)
+
+      licitation_process.stub(:nil?).and_return(false)
+
+      subject.valid?
+
+      subject.errors[:administrative_process].should include "já tem um processo licitatório"
+    end
+
+    it "should be valid if administrative_process have the current licitation_process" do
+      subject.stub(:id => 1)
+
+      administrative_process.stub(:licitation_process => nil)
+
+      licitation_process.stub(:nil?).and_return(true)
+
+      subject.valid?
+
+      subject.errors[:administrative_process].should_not include "já tem um processo licitatório"
+    end
+
+    it "should be valid if administrative_process do not have licitation_process" do
+      subject.stub(:id => 2)
+
+      administrative_process.stub(:licitation_process => nil)
+
+      licitation_process.stub(:nil?).and_return(true)
+
+      subject.valid?
+
+      subject.errors[:administrative_process].should_not include "já tem um processo licitatório"
+    end
   end
 end

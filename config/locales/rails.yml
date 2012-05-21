@@ -254,6 +254,8 @@ pt-BR:
       not_permited_for_object_type: "não permitido para este tipo de objeto"
       not_permited_for_modality: "não permitido para esta modalidade"
       must_be_equal_precatory_value: "deve ser igual ao valor do precatório"
+      status_must_be_released: "o status deve ser liberado"
+      already_have_a_licitation_process: "já tem um processo licitatório"
 
   activerecord:
     errors:

@@ -20,4 +20,60 @@ describe AdministrativeProcessDecorator do
       subject.total_allocations_value.should eq '400,00'
     end
   end
+
+  context "persisted and released" do
+    before do
+      component.stub(:persisted?).and_return(true)
+      component.stub(:released?).and_return(true)
+      component.stub(:licitation_process => licitation_process)
+    end
+
+    let :licitation_process do
+      double('licitation_process')
+    end
+
+    it "should return a link to a new licitation process" do
+      routes.stub(:new_licitation_process_path).with(component).and_return('url')
+
+      helpers.stub(:link_to).with('Novo processo licitatório', 'url', :class => "button primary").and_return('link_novo')
+
+      licitation_process.stub(:nil?).and_return(true)
+
+      subject.build_licitation_process_link.should eq 'link_novo'
+    end
+
+    it "should return a link to edit licitation process" do
+      routes.stub(:edit_licitation_process_path).with(component.licitation_process).and_return('url')
+
+      helpers.stub(:link_to).with('Editar processo licitatório', 'url', :class => "button secondary").and_return('link_edit')
+
+      licitation_process.stub(:nil?).and_return(false)
+
+      subject.build_licitation_process_link.should eq 'link_edit'
+    end
+  end
+
+  context "with licitation process" do
+    before do
+      component.stub(:licitation_process => licitation_process)
+    end
+
+    let :licitation_process do
+      double('licitation_process')
+    end
+
+    it "should not return a link to new neither edit licitation_process if not persisted" do
+      component.stub(:persisted?).and_return(false)
+      component.stub(:released?).and_return(true)
+
+      subject.build_licitation_process_link.should be_nil
+    end
+
+    it "should not return a link to new neither edit licitation_process if not released" do
+      component.stub(:persisted?).and_return(true)
+      component.stub(:released?).and_return(false)
+
+      subject.build_licitation_process_link.should be_nil
+    end
+  end
 end

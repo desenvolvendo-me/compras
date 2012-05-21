@@ -7,26 +7,34 @@ feature "Accreditations" do
   end
 
   scenario 'acreditation button link should not exists on licitation process creation' do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
-    click_link  'Criar Processo Licitatório'
-    
+    within_records do
+      page.find('a').click
+    end
+
+    click_link  'Novo processo licitatório'
+
     page.should_not have_link "Novo credenciamento"
     page.should_not have_link "Editar credenciamento"
   end
 
   scenario 'accreditation button link to licitation process without accreditation' do
     LicitationProcess.make!(:processo_licitatorio)
-    
+
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link  'Editar processo licitatório'
     
     page.should have_link "Novo credenciamento"
   end
@@ -36,11 +44,13 @@ feature "Accreditations" do
     
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link  'Editar processo licitatório'
     
     page.should have_link "Editar credenciamento"
   end
@@ -51,11 +61,13 @@ feature "Accreditations" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link  'Editar processo licitatório'
 
     click_link 'Novo credenciamento'
 
@@ -88,11 +100,13 @@ feature "Accreditations" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link  'Editar processo licitatório'
 
     click_link 'Editar credenciamento'
 
@@ -122,11 +136,13 @@ feature "Accreditations" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link  'Editar processo licitatório'
 
     click_link 'Editar credenciamento'
 
@@ -145,11 +161,13 @@ feature "Accreditations" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link  'Editar processo licitatório'
 
     click_link 'Editar credenciamento'
 
@@ -166,11 +184,13 @@ feature "Accreditations" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link  'Editar processo licitatório'
 
     click_link 'Editar credenciamento'
 

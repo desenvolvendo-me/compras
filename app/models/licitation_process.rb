@@ -36,7 +36,8 @@ class LicitationProcess < ActiveRecord::Base
 
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
-  delegate :budget_unit, :modality, :modality_humanize, :object_type_humanize, :judgment_form, :description, :responsible,
+  delegate :budget_unit, :modality, :modality_humanize, :object_type_humanize,
+           :released?, :judgment_form, :description, :responsible,
            :item, :licitation_process, :date, :object_type, :judgment_form_kind,
            :to => :administrative_process, :allow_nil => true, :prefix => true
 
@@ -51,6 +52,8 @@ class LicitationProcess < ActiveRecord::Base
   validate :validate_type_of_calculation_by_judgment_form_kind
   validate :validate_type_of_calculation_by_object_type
   validate :validate_type_of_calculation_by_modality
+  validate :validate_administrative_process_status
+  validate :validate_administrative_process
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -62,7 +65,6 @@ class LicitationProcess < ActiveRecord::Base
 
   before_save :set_modality
 
-  before_update :clean_old_administrative_process_items
   before_update :assign_bidders_documents
 
   orderize :id
@@ -125,6 +127,22 @@ class LicitationProcess < ActiveRecord::Base
     self.modality = administrative_process.modality
   end
 
+  def validate_administrative_process_status
+    return if administrative_process_released?
+
+    errors.add(:administrative_process, :status_must_be_released)
+  end
+
+  def validate_administrative_process
+    return unless administrative_process.try(:licitation_process)
+
+    if administrative_process.licitation_process.id == id
+      return
+    end
+
+    errors.add(:administrative_process, :already_have_a_licitation_process)
+  end
+
   def last_process_of_self_year
     last_by_self_year.try(:process).to_i
   end
@@ -158,12 +176,6 @@ class LicitationProcess < ActiveRecord::Base
 
     unless administrative_process_licitation_process.nil?
       errors.add(:administrative_process, :taken)
-    end
-  end
-
-  def clean_old_administrative_process_items
-    if administrative_process_id_changed?
-      AdministrativeProcessItemsCleaner.new(administrative_process_id_was).clean_items!
     end
   end
 

@@ -18,9 +18,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
-    click_link 'Criar Processo Licitatório'
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
 
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
@@ -33,10 +37,10 @@ feature "LicitationProcesses" do
       page.should have_disabled_field 'Inciso'
       page.should have_disabled_field 'Data da homologação'
       page.should have_disabled_field 'Data da adjudicação'
+      page.should have_disabled_field 'Processo administrativo'
 
       fill_mask 'Ano', :with => '2012'
       fill_mask 'Data do processo', :with => '21/03/2012'
-      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
       select 'Global', :from => 'Tipo de empenho'
 
       # testing delegated fields of administrative process (filled by javascript)
@@ -106,9 +110,7 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Editar processo licitatório'
 
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
@@ -193,15 +195,16 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
 
+    click_link 'Editar processo licitatório'
+
     within_tab 'Dados gerais' do
       fill_mask 'Data do processo', :with => '21/03/2013'
-      fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       select 'Estimativo', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'novo detalhamento'
       select 'Menor preço global', :from => 'Tipo da apuração'
@@ -229,6 +232,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
+      click_button 'Remover Item'
+
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
@@ -257,13 +262,11 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Editar processo licitatório'
 
     within_tab 'Dados gerais' do
       page.should have_field 'Data do processo', :with => '21/03/2013'
-      page.should have_field 'Processo administrativo', :with => '1/2013'
+      page.should have_field 'Processo administrativo', :with => '1/2012'
       page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
       page.should have_field 'Detalhamento do objeto', :with => 'novo detalhamento'
       page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
@@ -321,16 +324,19 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
-    click_link 'Criar Processo Licitatório'
+    within_records do
+      click_link '1/2013'
+    end
+
+    click_link 'Novo processo licitatório'
 
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
 
       fill_mask 'Ano', :with => '2013'
       fill_mask 'Data do processo', :with => '21/04/2013'
-      fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
       select 'Global', :from => 'Tipo de empenho'
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       select 'Menor preço global', :from => 'Tipo da apuração'
@@ -355,7 +361,7 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
 
-    click_link "#{licitation_process.process}/2013"
+    click_link "Editar processo licitatório"
 
     within_tab 'Dados gerais' do
       page.should have_field 'Processo', :with => licitation_process.process.to_s
@@ -369,11 +375,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar Item'
@@ -403,11 +411,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     within_tab 'Dotações' do
       page.should have_field 'Valor previsto', :with => "20,00"
@@ -430,9 +440,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
-    click_link 'Criar Processo Licitatório'
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
 
     within_tab 'Dados gerais' do
       fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
@@ -463,109 +477,18 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'should show only available administrative process in modal' do
-    AdministrativeProcess.make!(:compra_de_cadeiras)
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-
-    administrative_process_taken = licitation_process.administrative_process
-
-    administrative_process_taken.protocol.should eq '00088/2012'
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    click_link 'Criar Processo Licitatório'
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo' do
-        click_button 'Pesquisar'
-
-        page.should have_content '00099/2012'
-        page.should_not have_content '00088/2012'
-      end
-    end
-  end
-
-  scenario 'the old administrative_process items should be cleaned on update' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-    AdministrativeProcess.make!(:compra_de_computadores)
-    Material.make!(:arame_farpado)
-
-    old_administrative_process = licitation_process.administrative_process
-
-    old_administrative_process.administrative_process_budget_allocations.first.items.size.should eq 1
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Processo administrativo', :with => '2013', :field => 'Ano'
-      select 'Menor preço global', :from => 'Tipo da apuração'
-    end
-
-    within_tab 'Dotações' do
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
-
-      fill_in 'Quantidade', :with => '5'
-      fill_in 'Valor total', :with => '20,00'
-    end
-
-    click_button 'Salvar'
-
-    page.should have_notice 'Processo Licitatório editado com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
-
-    within_tab 'Dados gerais' do
-      page.should have_field 'Processo administrativo', :with => '1/2013'
-    end
-
-    old_administrative_process.administrative_process_budget_allocations.first.items.size.should eq 0
-  end
-
-  scenario 'administrative process modal should list only released administrative processes' do
-    AdministrativeProcess.make!(:compra_aguardando)
-    AdministrativeProcess.make!(:compra_com_itens)
-    AdministrativeProcess.make!(:compra_liberada)
-
-    click_link 'Processos'
-
-    click_link 'Processos Licitatórios'
-
-    click_link 'Criar Processo Licitatório'
-
-    within_tab 'Dados gerais' do
-      within_modal 'Processo administrativo' do
-        click_button 'Pesquisar'
-
-        page.should have_css("table.records tbody tr", :count => 1)
-        page.should have_content '2012'
-        page.should have_content '1'
-        page.should have_content '00088/2012'
-      end
-    end
-  end
-
   scenario 'should not have bidders link when envelope opening date is tomorrow' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     page.should_not have_link 'Licitantes'
   end
@@ -576,11 +499,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
@@ -604,9 +529,7 @@ feature "LicitationProcesses" do
 
     page.should have_notice 'Processo Licitatório editado com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
@@ -623,11 +546,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     within_tab 'Dados gerais' do
       fill_mask 'Data da abertura dos envelopes', :with => "#{I18n.l(Date.current)}"
@@ -635,9 +560,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link 'Editar processo licitatório'
 
     page.should have_link 'Apurar'
   end
@@ -647,11 +570,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     page.should_not have_link 'Apurar'
   end
@@ -661,9 +586,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
-    click_link licitation_process.to_s
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
 
     page.should_not have_button 'Salvar'
 
@@ -683,11 +612,17 @@ feature "LicitationProcesses" do
   end
 
   scenario "should not have link to lots when creating a new licitation process" do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
-    click_link 'Criar Processo Licitatório'
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
 
     page.should_not have_link 'Lotes de itens'
   end
@@ -697,11 +632,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Apurar'
 
@@ -716,11 +653,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Apurar'
 
@@ -738,11 +677,13 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Apurar'
 
@@ -757,16 +698,62 @@ feature "LicitationProcesses" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Apurar'
 
     page.should have_content 'Apuração: Menor preço global'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
+  end
+
+  scenario "should brings some filled fields when creating a new licitatoin process" do
+    AdministrativeProcess.make!(:compra_de_cadeiras)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Ano', :with => "#{Date.current.year}"
+      page.should have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
+      page.should have_field 'Processo administrativo', :with => "1/2012"
+      page.should have_field 'Abrev. modalidade', :with => "CV"
+    end
+  end
+
+  scenario "cancelar button should redirect to the respective administrative_process" do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Cancelar'
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Processo', :with => '1' 
+      page.should have_field 'Ano', :with => '2012'
+      page.should have_field 'Data do processo', :with => '07/03/2012'
+      page.should have_field 'Número do protocolo', :with => '00088/2012'
+    end
   end
 end

@@ -12,11 +12,13 @@ feature "LicitationProcessLots" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -32,11 +34,13 @@ feature "LicitationProcessLots" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
@@ -72,11 +76,13 @@ feature "LicitationProcessLots" do
 
     click_link 'Processos'
 
-    click_link 'Processos Licitatórios'
+    click_link 'Processos Administrativos'
 
     within_records do
       page.find('a').click
     end
+
+    click_link 'Editar processo licitatório'
 
     click_link 'Lotes de itens'
 
