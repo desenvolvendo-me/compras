@@ -57,26 +57,26 @@
       $('#subpledge_subpledge_expirations_sum').val(floatToPtBrString(total));
     }
 
-      $('#subpledge_pledge_id').change(function (event, pledge) {
-        cleanExistingPledgeParcels();
+    $('#subpledge_pledge_id').change(function (event, pledge) {
+      cleanExistingPledgeParcels();
 
-        if (pledge) {
-          $('#subpledge_pledge_provider').val(pledge.provider);
-          $('#subpledge_emission_date').val(pledge.emission_date);
-          $('#subpledge_pledge_value').val(pledge.pledge_value);
-          $('#subpledge_pledge_balance').val(pledge.balance);
-          $('#subpledge_value').val(pledge.balance);
-          $('#subpledge_provider_id').val(pledge.provider_id);
-          $('#subpledge_provider').val(pledge.provider);
-          $('#subpledge_description').val(pledge.description);
-          createPledgeParcelsFromPledge(pledge.parcels);
-        } else {
-          $('#subpledge_pledge_provider').val('');
-          $('#subpledge_emission_date').val('');
-          $('#subpledge_pledge_value').val('');
-          $('#subpledge_pledge_balance').val('');
-        }
-      });
+      if (pledge) {
+        $('#subpledge_pledge_provider').val(pledge.provider);
+        $('#subpledge_emission_date').val(pledge.emission_date);
+        $('#subpledge_pledge_value').val(pledge.pledge_value);
+        $('#subpledge_pledge_balance').val(pledge.balance);
+        $('#subpledge_value').val(pledge.balance);
+        $('#subpledge_provider_id').val(pledge.provider_id);
+        $('#subpledge_provider').val(pledge.provider);
+        $('#subpledge_description').val(pledge.description);
+        createPledgeParcelsFromPledge(pledge.parcels);
+      } else {
+        $('#subpledge_pledge_provider').val('');
+        $('#subpledge_emission_date').val('');
+        $('#subpledge_pledge_value').val('');
+        $('#subpledge_pledge_balance').val('');
+      }
+    });
 
     $('form.subpledge').delegate('.remove-subpledge-expiration', 'click', fillExpirationNumber);
     $('form.subpledge').bind('append.mustache', fillExpirationNumber);
