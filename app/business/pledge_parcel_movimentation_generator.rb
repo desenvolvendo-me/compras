@@ -15,7 +15,7 @@ class PledgeParcelMovimentationGenerator
     movimentable_pledge_parcels.each do |parcel|
       return if value_left.zero?
 
-      calculator = PledgeParcelMovimentationCalculator.new(value_left, parcel_value(parcel))
+      calculator = PledgeParcelMovimentationCalculator.new(value_left, value_by_modificator_type(parcel))
 
       create!(parcel, calculator)
 
@@ -25,21 +25,11 @@ class PledgeParcelMovimentationGenerator
 
   protected
 
-  def parcel_value(parcel)
-    case kind
-    when 'balance'
-      parcel.balance
-    when 'liquidation'
+  def value_by_modificator_type(parcel)
+    if object.class.name == 'PledgeLiquidationCancellation'
       parcel.liquidations_value
-    end
-  end
-
-  def kind
-    case object.class.name
-    when 'PledgeCancellation', 'PledgeLiquidation', 'Subpledge'
-      'balance'
-    when 'PledgeLiquidationCancellation'
-      'liquidation'
+    else
+      parcel.balance
     end
   end
 
@@ -48,7 +38,7 @@ class PledgeParcelMovimentationGenerator
       :pledge_parcel_id => parcel.id,
       :pledge_parcel_modificator_id => object.id,
       :pledge_parcel_modificator_type => object.class.name,
-      :pledge_parcel_value_was => parcel_value(parcel),
+      :pledge_parcel_value_was => value_by_modificator_type(parcel),
       :pledge_parcel_value => calculator.parcel_value,
       :value => calculator.movimented_value
     )
