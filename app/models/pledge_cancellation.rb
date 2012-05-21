@@ -32,6 +32,12 @@ class PledgeCancellation < ActiveRecord::Base
   orderize :id
   filterize
 
+  def movimentable_pledge_parcels
+    return unless pledge
+
+    pledge.pledge_parcels_with_balance
+  end
+
   def to_s
     "#{id}"
   end

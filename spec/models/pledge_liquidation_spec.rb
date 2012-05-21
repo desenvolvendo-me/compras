@@ -61,4 +61,25 @@ describe PledgeLiquidation do
       subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho')
     end
   end
+
+  context 'movimentable pledge_parcels' do
+    before do
+      subject.stub(:pledge).and_return(pledge)
+    end
+
+    let :pledge do
+      double('Pledge', :pledge_parcels_with_balance => pledge_parcels)
+    end
+
+    let :pledge_parcels do
+      [
+        double('PledgeParcelOne', :balance => 100),
+        double('PledgeParcelTwo', :balance => 100)
+      ]
+    end
+
+    it 'should return pledge_parcels with balance' do
+      subject.movimentable_pledge_parcels.should eq pledge_parcels
+    end
+  end
 end

@@ -2,7 +2,7 @@ class PledgeParcelMovimentationGenerator
   attr_accessor :object
   attr_accessor :pledge_parcel_movimentation_storage
 
-  delegate :value, :pledge, :to => :object
+  delegate :value, :pledge, :movimentable_pledge_parcels, :to => :object
 
   def initialize(object, pledge_parcel_movimentation_storage = PledgeParcelMovimentation)
     self.pledge_parcel_movimentation_storage = pledge_parcel_movimentation_storage
@@ -12,7 +12,7 @@ class PledgeParcelMovimentationGenerator
   def generate!
     value_left = value
 
-    pledge_parcels.each do |parcel|
+    movimentable_pledge_parcels.each do |parcel|
       return if value_left.zero?
 
       calculator = PledgeParcelMovimentationCalculator.new(value_left, parcel_value(parcel))
@@ -31,15 +31,6 @@ class PledgeParcelMovimentationGenerator
       parcel.balance
     when 'liquidation'
       parcel.liquidations_value
-    end
-  end
-
-  def pledge_parcels
-    case kind
-    when 'balance'
-      pledge.pledge_parcels_with_balance
-    when 'liquidation'
-      pledge.pledge_parcels_with_liquidations
     end
   end
 

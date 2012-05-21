@@ -62,6 +62,12 @@ class Subpledge < ActiveRecord::Base
     subpledge_cancellations.compact.sum(&:value)
   end
 
+  def movimentable_pledge_parcels
+    return unless pledge
+
+    pledge.pledge_parcels_with_balance
+  end
+
   protected
 
   def last_number

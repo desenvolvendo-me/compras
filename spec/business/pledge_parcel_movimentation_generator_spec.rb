@@ -22,11 +22,17 @@ describe PledgeParcelMovimentationGenerator do
     end
 
     let :pledge_object do
-      double('PledgeStorage', :id => 3, :value => 200, :pledge_parcels_with_balance => [pledge_parcel_one, pledge_parcel_two])
+      double('PledgeStorage', :id => 3, :value => 200)
     end
 
     let :pledge_cancellation_object do
-      double('PledgeCancellationStorage', :id => 4, :pledge => pledge_object, :class => double('PledgeCancellationStorage', :name => 'PledgeCancellation'))
+      double(
+        'PledgeCancellationStorage',
+        :id => 4,
+        :pledge => pledge_object,
+        :class => double('PledgeCancellationStorage', :name => 'PledgeCancellation'),
+        :movimentable_pledge_parcels => [pledge_parcel_one, pledge_parcel_two]
+      )
     end
 
     it 'cancel 90' do
@@ -71,7 +77,7 @@ describe PledgeParcelMovimentationGenerator do
     it 'cancel 50 after already canceled 90' do
       pledge_cancellation_object.stub(:value).and_return(50)
       pledge_parcel_one.stub(:balance).and_return(10)
-      pledge_object.stub(:pledge_parcels_with_balance).and_return([pledge_parcel_one, pledge_parcel_two])
+      pledge_cancellation_object.stub(:movimentable_pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,
@@ -109,11 +115,17 @@ describe PledgeParcelMovimentationGenerator do
     end
 
     let :pledge_object do
-      double('PledgeStorage', :id => 3, :value => 200, :pledge_parcels_with_liquidations => [pledge_parcel_one, pledge_parcel_two])
+      double('PledgeStorage', :id => 3, :value => 200)
     end
 
     let :pledge_cancellation_object do
-      double('PledgeLiquidationCancellationStorage', :id => 4, :pledge => pledge_object, :class => double('PledgeLiquidationCancellationClass', :name => 'PledgeLiquidationCancellation'))
+      double(
+        'PledgeLiquidationCancellationStorage',
+        :id => 4,
+        :pledge => pledge_object,
+        :class => double('PledgeLiquidationCancellationClass', :name => 'PledgeLiquidationCancellation'),
+        :movimentable_pledge_parcels => [pledge_parcel_one, pledge_parcel_two]
+      )
     end
 
     it 'cancel 90' do
@@ -158,7 +170,7 @@ describe PledgeParcelMovimentationGenerator do
     it 'cancel 50 after already canceled 90' do
       pledge_cancellation_object.stub(:value).and_return(50)
       pledge_parcel_one.stub(:liquidations_value).and_return(10)
-      pledge_object.stub(:pledge_parcels_with_liquidations).and_return([pledge_parcel_one, pledge_parcel_two])
+      pledge_cancellation_object.stub(:movimentable_pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,

@@ -125,4 +125,25 @@ describe Subpledge do
       subject.errors[:pledge].should include 'deve ser do tipo global ou estimativo'
     end
   end
+
+  context 'movimentable pledge_parcels' do
+    before do
+      subject.stub(:pledge).and_return(pledge)
+    end
+
+    let :pledge do
+      double('Pledge', :pledge_parcels_with_balance => pledge_parcels)
+    end
+
+    let :pledge_parcels do
+      [
+        double('PledgeParcelOne', :balance => 100),
+        double('PledgeParcelTwo', :balance => 100)
+      ]
+    end
+
+    it 'should return pledge parcel with balance' do
+      subject.movimentable_pledge_parcels.should eq pledge_parcels
+    end
+  end
 end
