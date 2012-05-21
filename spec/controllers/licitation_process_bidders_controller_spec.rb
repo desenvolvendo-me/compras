@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'spec_helper'
 
 describe LicitationProcessBiddersController do
@@ -13,6 +14,17 @@ describe LicitationProcessBiddersController do
       LicitationProcessBidderProposalBuilder.any_instance.should_receive(:build!)
 
       get :new, :licitation_process_id => licitation_process.id
+
+      response.code.should eq '200'
+    end
+
+    it 'should redirect to 401 when can not create a bidder' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+      get :new, :licitation_process_id => licitation_process.id
+
+      response.code.should eq '401'
+      response.body.should =~ /Você não tem acesso a essa página/
     end
   end
 

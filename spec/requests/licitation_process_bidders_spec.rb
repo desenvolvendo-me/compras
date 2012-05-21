@@ -557,7 +557,7 @@ feature "LicitationProcessBidders" do
     end
   end
 
-  scenario 'submit button does show when envelope opening date is today' do
+  scenario 'create bidder link does show when envelope opening date is today' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     Provider.make!(:sobrinho_sa)
 
@@ -578,14 +578,12 @@ feature "LicitationProcessBidders" do
     page.should have_button 'Salvar'
   end
 
-  scenario 'submit button does not show when envelope opening date is not today' do
+  scenario 'create bidder linkd does not show when envelope opening date is not today' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     visit licitation_process_licitation_process_bidders_path(licitation_process)
 
-    click_link 'Criar Licitante'
-
-    page.should_not have_button 'Salvar'
+    page.should_not have_link 'Criar Licitante'
   end
 
   scenario "index shoud have title Licitantes do Processo Licitatório 1/2013" do
