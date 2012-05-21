@@ -38,12 +38,9 @@ describe LicitationProcessLot do
   end
 
   it 'should return the winner proposal by lot total value' do
-    subject.stub(:winner_proposal).and_return([1, 100.0])
+    classificator = double(:winner_proposals => 'the winner proposals')
+    classificator_class = double(:new => classificator)
 
-    provider = double('provider', :provider => 'provider x')
-    bidder_storage = double(:find => provider)
-
-    subject.winner_proposal_provider(bidder_storage).should eq 'provider x'
-    subject.winner_proposal_total_price.should eq 100.0
+    subject.winner_proposals(classificator_class).should eq 'the winner proposals'
   end
 end

@@ -20,10 +20,10 @@
           <%= lot %>
         </td>
         <td>
-          <%= lot.winner_proposal_provider %>
+          <%= lot.winner_proposals.provider %>
         </td>
         <td>
-          <%= lot.decorator.winner_proposal_total_price %>
+          <%= lot.winner_proposals.decorator.proposal_total_value_by_lot(lot.id) %>
         </td>
       </tr>
     <% end %>

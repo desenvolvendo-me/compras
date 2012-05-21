@@ -4,8 +4,11 @@ class LicitationProcessLot < ActiveRecord::Base
   belongs_to :licitation_process
 
   has_many :administrative_process_budget_allocation_items, :dependent => :nullify, :order => :id
+  has_many :licitation_process_bidder_proposals, :through => :administrative_process_budget_allocation_items
+  has_many :licitation_process_bidders, :through => :licitation_process_bidder_proposals
 
   delegate :administrative_process_id, :to => :licitation_process, :allow_nil => true
+  delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
 
   validate :items_should_belong_to_administrative_process
 
@@ -24,30 +27,7 @@ class LicitationProcessLot < ActiveRecord::Base
     end
   end
 
-  def winner_proposal_provider(bidder_storage = LicitationProcessBidder)
-    return unless winner_proposal
-
-    bidder_storage.find(winner_proposal.first).provider
-  end
-
-  def winner_proposal_total_price
-    return unless winner_proposal
-
-    winner_proposal.last
-  end
-
-  protected
-
-  def winner_proposal
-    return unless proposals
-
-    proposals.sort_by {|bidder, value| value.to_f }.first
-  end
-
-  def proposals(proposal_storage = LicitationProcessBidderProposal)
-    proposal_storage.joins { administrative_process_budget_allocation_item.licitation_process_lot }.
-      where{ |lot| lot.licitation_process_lots.id.eq id }.
-      group{ [ licitation_process_bidder_proposals.licitation_process_bidder_id ] }.
-      sum('administrative_process_budget_allocation_items.quantity * licitation_process_bidder_proposals.unit_price')
+  def winner_proposals(classificator = LicitationProcessProposalsClassificatorByLot)
+    classificator.new(self, type_of_calculation).winner_proposals
   end
 end
