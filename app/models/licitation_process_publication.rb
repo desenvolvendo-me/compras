@@ -14,9 +14,8 @@ class LicitationProcessPublication < ActiveRecord::Base
 
   def self.current_updatable?
     publication = current
-    return true if publication.nil?
 
-    publication.updatable?
+    publication.nil? || publication.updatable?
   end
 
   def updatable?
