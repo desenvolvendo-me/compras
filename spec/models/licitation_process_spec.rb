@@ -154,15 +154,15 @@ describe LicitationProcess do
   it 'should tell if it can have invitation bidders' do
     subject.stub(:envelope_opening_date).and_return(Date.tomorrow)
 
-    subject.can_have_bidders?.should be_false
+    subject.should_not be_can_have_bidders
 
     subject.stub(:envelope_opening_date).and_return(Date.current)
 
-    subject.can_have_bidders?.should be_true
+    subject.should be_can_have_bidders
 
     subject.stub(:envelope_opening_date).and_return(Date.yesterday)
 
-    subject.can_have_bidders?.should be_true
+    subject.should be_can_have_bidders
    end
 
   it 'should return the advice number correctly' do
@@ -177,12 +177,12 @@ describe LicitationProcess do
     end
 
     it 'should can be updated when is a new record' do
-      subject.can_update?.should be_true
+      subject.should be_updatable
     end
 
     it 'should can be updated when is not a new record, but has not publication' do
       subject.stub!(:new_record? => false)
-      subject.can_update?.should be_true
+      subject.should be_updatable
     end
 
     it 'should can be updated when is not a new record, has publication but licitation process publication is updatable' do
@@ -206,7 +206,7 @@ describe LicitationProcess do
     it "should return false for envelope_opening? method" do
       subject.envelope_opening_date = Date.tomorrow
 
-      subject.envelope_opening?.should be_false
+      subject.should_not be_envelope_opening
     end
   end
 
@@ -214,7 +214,7 @@ describe LicitationProcess do
     it "should return true for envelope_opening? method" do
       subject.envelope_opening_date = Date.current
 
-      subject.envelope_opening?.should be_true
+      subject.should be_envelope_opening
     end
   end
 
