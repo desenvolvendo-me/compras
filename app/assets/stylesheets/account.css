@@ -13,7 +13,7 @@
   display: inline;
 }
 
-#account a {
+#account a, #account span {
   border-left: solid 1px #000;
   color: #D7ECF6;
   margin-left: 0.8em;
@@ -30,6 +30,5 @@
   color: #FFF;
   margin-left: 0;
   padding-left: 0;
-  font-weight: bold;
   text-decoration: none;
 }

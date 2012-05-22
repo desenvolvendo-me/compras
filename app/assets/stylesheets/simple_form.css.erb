@@ -2,8 +2,8 @@
   margin-bottom: 2em;
 }
 
-.simple_form .input .important {
-  background-color: #FFBBBB;
+.simple_form .input.hidden {
+  margin-bottom: 0;
 }
 
 .simple_form label {
@@ -37,8 +37,14 @@
   width: 100%;
 }
 
+.simple_form input.numeric, .simple_form input.decimal {
+  text-align: right;
+}
+
 .simple_form input.modal {
-  background: #FFF url(<%= image_path 'zoom.png' %>) 99% center no-repeat;
+  background: url(<%= image_path 'zoom.png' %>) 99% center no-repeat,
+              url(<%= image_path 'input.gif' %>) repeat-x,
+              #FFF;
 }
 
 .simple_form select.select {
@@ -47,6 +53,10 @@
 
 .simple_form textarea.text {
   height: 125px;
+}
+
+.simple_form select.select[multiple]:focus, .simple_form input.string:focus, .simple_form input.numeric:focus, .simple_form input.password:focus, .simple_form textarea.text:focus {
+  border-color: #A57F18;
 }
 
 .simple_form input.boolean, .simple_form input.radio {
