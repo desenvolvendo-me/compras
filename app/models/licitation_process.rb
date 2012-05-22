@@ -136,7 +136,7 @@ class LicitationProcess < ActiveRecord::Base
   def validate_administrative_process
     return unless administrative_process.try(:licitation_process)
 
-    if administrative_process.licitation_process.id == id
+    if administrative_process.licitation_process == self
       return
     end
 
