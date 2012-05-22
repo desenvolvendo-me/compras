@@ -1,6 +1,6 @@
 <div class="buttons">
 
-  <%= f.button :submit if f.object.can_update? %>
+  <%= f.button :submit if f.object.updatable? %>
 
   <%= f.object.decorator.build_accreditation_link %>
   <%= f.object.decorator.bidders_link if f.object.persisted? && f.object.can_have_bidders? %>

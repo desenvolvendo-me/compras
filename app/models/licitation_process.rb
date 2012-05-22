@@ -96,9 +96,8 @@ class LicitationProcess < ActiveRecord::Base
     envelope_opening_date == Date.current
   end
 
-  # TODO change this to updatable?
-  def can_update?
-    new_record? || licitation_process_publications.empty? || any_publication_that_permit_update?
+  def updatable?
+    new_record? || licitation_process_publications.empty? || licitation_process_publications.current_updatable?
   end
 
   def filled_lots?
@@ -207,11 +206,5 @@ class LicitationProcess < ActiveRecord::Base
     unless verificator.correct_type_of_calculation?(administrative_process_modality, type_of_calculation)
       errors.add(:type_of_calculation, :not_permited_for_modality)
     end
-  end
-
-  private
-
-  def any_publication_that_permit_update?
-    licitation_process_publications.any_publication_that_permit_the_licitation_process_update?
   end
 end

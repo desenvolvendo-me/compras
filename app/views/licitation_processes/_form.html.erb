@@ -113,7 +113,7 @@
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
-  <% unless resource.can_update? %>
+  <% unless resource.updatable? %>
     $('form.licitation_process .add-licitation-process-budget-allocation').hide();
     $('form.licitation_process .remove-licitation-process-budget-allocation').hide();
     $('form.licitation_process .add-licitation-process-publication').hide();

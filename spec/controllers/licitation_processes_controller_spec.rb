@@ -57,7 +57,7 @@ describe LicitationProcessesController do
       end
 
       it 'should not update any field when publication not allow update licitation process' do
-        LicitationProcess.any_instance.stub(:can_update?).and_return(false)
+        LicitationProcess.any_instance.stub(:updatable?).and_return(false)
 
         put :update, :id => licitation_process.to_param, :licitation_process => { :object_description => "Descrição do objeto" }
 
@@ -65,7 +65,7 @@ describe LicitationProcessesController do
       end
 
       it 'should update any field when has not publication or when publication allow update licitation process' do
-        LicitationProcess.any_instance.stub(:can_update?).and_return(true)
+        LicitationProcess.any_instance.stub(:updatable?).and_return(true)
 
         put :update, :id => licitation_process.id, :licitation_process => { :object_description => "Descrição do objeto" }
 

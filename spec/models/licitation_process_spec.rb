@@ -185,20 +185,20 @@ describe LicitationProcess do
       subject.can_update?.should be_true
     end
 
-    it 'should can be updated when is not a new record, has publication but licitation process publication allow update' do
+    it 'should can be updated when is not a new record, has publication but licitation process publication is updatable' do
       subject.stub!(:new_record? => false)
       subject.stub(:licitation_process_publications => licitation_process_publications)
-      licitation_process_publications.should_receive(:any_publication_that_permit_the_licitation_process_update?).and_return(true)
       licitation_process_publications.should_receive(:empty?).and_return(false)
-      subject.can_update?.should be_true
+      licitation_process_publications.stub(:current_updatable? => true)
+      subject.should be_updatable
     end
 
-    it 'should can not be updated when is not a new record, has publication and licitation process publication not allow update' do
+    it 'should can not be updated when is not a new record, has publication and licitation process publication not updatable' do
       subject.stub!(:new_record?, false)
-      licitation_process_publications.should_receive(:any_publication_that_permit_the_licitation_process_update?).and_return(false)
+      licitation_process_publications.stub(:current_updatable? => false)
       licitation_process_publications.should_receive(:empty?).and_return(false)
       subject.stub(:licitation_process_publications => licitation_process_publications)
-      subject.can_update?.should be_false
+      subject.should_not be_updatable
     end
   end
 
