@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      occupation_classification:
+        one: "CBO"
+        other: "CBOs"
+
+    attributes:
+      occupation_classification:
+        code: "Código"
+        name: "Nome"
+        parent_id: "Pai"

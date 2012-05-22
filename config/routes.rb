@@ -503,6 +503,12 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :occupation_classifications, :only => [:index] do
+    collection do
+      get :modal
+    end
+  end
+
   resources :payment_methods do
     collection do
       get :filter
