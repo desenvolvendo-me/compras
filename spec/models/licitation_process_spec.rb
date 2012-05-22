@@ -289,8 +289,6 @@ describe LicitationProcess do
 
     subject.valid?
 
-    puts subject.errors[:administrative_process]
-
     subject.errors[:administrative_process].should include 'o status deve ser liberado'
 
     subject.stub(:administrative_process_released?).and_return(true)
