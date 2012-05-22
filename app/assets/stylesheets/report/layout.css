@@ -8,6 +8,17 @@ a {
 }
 
 #container {
-  margin: 0 auto;
-  width: 210mm;
+  -mox-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -box-sizing: border-box;
+  margin: 1em auto;
+  padding: 0 1em;
+  width: 1002px;
+}
+
+@media print {
+  #container {
+    padding: 0;
+    width: auto;
+  }
 }

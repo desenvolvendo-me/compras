@@ -29,5 +29,11 @@ table.records tr:nth-child(even) td {
 }
 
 table.records tr:hover td {
-  background-color: #FDFFDC;
+  background-color: #FDFFDC !important;
+}
+
+table.records td.empty {
+  color: #CCC;
+  font-style: italic;
+  text-align: center;
 }
