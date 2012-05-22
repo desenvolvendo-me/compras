@@ -3,6 +3,7 @@ class PaymentMethod < ActiveRecord::Base
 
   has_many :direct_purchases, :dependent => :restrict
   has_many :licitation_processes, :dependent => :restrict
+  has_many :price_collections, :dependent => :restrict
 
   validates :description, :presence => true
   validates :description, :uniqueness => { :allow_blank => true }

@@ -5,6 +5,7 @@ class DeliveryLocation < ActiveRecord::Base
 
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :direct_purchases, :dependent => :restrict
+  has_many :price_collections, :dependent => :restrict
 
   validates :address, :description, :presence => true
   validates :description, :uniqueness => { :allow_blank => true }

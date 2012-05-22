@@ -20,5 +20,6 @@ describe DeliveryLocation do
     it { should belong_to :address }
     it { should have_many(:purchase_solicitations).dependent(:restrict) }
     it { should have_many(:direct_purchases).dependent(:restrict) }
+    it { should have_many(:price_collections).dependent(:restrict) }
   end
 end

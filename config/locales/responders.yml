@@ -97,6 +97,9 @@ pt-BR:
     prefectures:
       <<: *female
 
+    price_collections:
+      <<: *female
+
     property_settings:
       <<: *female
 

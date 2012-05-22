@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      price_collection:
+        one: "Coleta de Preços"
+        other: "Coletas de Preços"
+
+    attributes:
+      price_collection:
+        collection_number: "Número"
+        year: "Ano"
+        date: "Data"
+        delivery_location: "Local de entrega"
+        employee: "Responsável"
+        payment_method: "Forma de pagamento"
+        period: "Prazo de entrega"
+        object_description: "Objeto"
+        observations: "Observações"
+        proposal_validity: "Validade da proposta"
+        expiration: "Vencimento"

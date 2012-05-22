@@ -613,6 +613,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :price_collections, :except => :destroy do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :profiles do
     collection do
       get :modal

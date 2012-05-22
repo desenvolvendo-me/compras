@@ -13,6 +13,7 @@ describe Employee do
   it { should have_many(:budget_unit_responsibles).dependent(:restrict) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:administrative_processes).dependent(:restrict) }
+  it { should have_many(:price_collections).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration }

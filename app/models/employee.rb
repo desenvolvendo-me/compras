@@ -10,6 +10,7 @@ class Employee < ActiveRecord::Base
   has_many :budget_unit_responsibles, :foreign_key => :responsible_id, :dependent => :restrict
   has_many :administrative_processes, :foreign_key => :responsible_id, :dependent => :restrict
   has_many :direct_purchases, :dependent => :restrict
+  has_many :price_collections, :dependent => :restrict
 
   delegate :to_s, :name, :to => :person
 

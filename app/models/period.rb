@@ -5,6 +5,7 @@ class Period < ActiveRecord::Base
 
   has_many :direct_purchases, :dependent => :restrict
   has_many :licitation_processes, :dependent => :restrict
+  has_many :price_collections, :dependent => :restrict
 
   validates :unit, :amount, :presence => true
 
