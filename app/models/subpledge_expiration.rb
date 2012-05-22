@@ -2,7 +2,8 @@ class SubpledgeExpiration < ActiveRecord::Base
   attr_accessible :subpledge_id, :number, :value, :expiration_date
 
   belongs_to :subpledge
-  has_many :subpledge_cancellations, :dependent => :restrict
+
+  has_many :subpledge_expiration_movimentations
 
   validates :expiration_date, :value, :presence => true
   validates :expiration_date, :timeliness => { :on_or_after => :today, :type => :date }, :on => :create
@@ -15,10 +16,10 @@ class SubpledgeExpiration < ActiveRecord::Base
   end
 
   def balance
-    value - canceled_values
+    value - canceled_value
   end
 
-  def canceled_values
-    subpledge_cancellations.sum(:value)
+  def canceled_value
+    subpledge_expiration_movimentations.where { subpledge_expiration_modificator_type.eq 'SubpledgeCancellation' }.sum(:value)
   end
 end

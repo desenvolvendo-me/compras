@@ -8,9 +8,8 @@ feature "SubpledgeCancellations" do
 
   scenario 'create a new subpledge_cancellation' do
     Entity.make!(:detran)
-    pledge = Pledge.make!(:empenho)
-    subpledge = Subpledge.make!(:empenho_2012)
-    subpledge_expiration = SubpledgeExpiration.make!(:vencimento)
+    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+    subpledge = Subpledge.make!(:para_empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -21,8 +20,7 @@ feature "SubpledgeCancellations" do
     fill_in 'Exercício', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Subempenho', :with => '1', :field => 'Número do processo'
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
-    fill_in 'Valor *', :with => '1,00'
+    fill_in 'Valor *', :with => '90,00'
     fill_in 'Data *', :with => I18n.l(Date.current)
     fill_in 'Motivo', :with => 'Falta de documentação'
 
@@ -42,14 +40,32 @@ feature "SubpledgeCancellations" do
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
     page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '9,99'
+    page.should have_field 'Valor do empenho', :with => '200,00'
     page.should have_field 'Subempenho', :with => subpledge.to_s
     page.should have_disabled_field 'Saldo do subempenho'
-    page.should have_field 'Saldo do subempenho', :with => '0,00'
-    page.should have_field 'Parcela', :with => subpledge_expiration.to_s
-    page.should have_disabled_field 'Saldo da parcela'
-    page.should have_field 'Saldo da parcela', :with => '0,00'
-    page.should have_field 'Valor *', :with => '1,00'
+    page.should have_field 'Saldo do subempenho', :with => '10,00'
+
+    within '#subpledge_expiration_1' do
+      page.should have_content '1'
+      page.should have_content I18n.l(Date.current + 30.days)
+      find('.value').should have_content 'R$ 60,00'
+      find('.canceled_value').should have_content 'R$ 60,00'
+      find('.balance').should have_content 'R$ 0,00'
+    end
+
+    within '#subpledge_expiration_2' do
+      page.should have_content '2'
+      page.should have_content I18n.l(Date.current + 60.days)
+      find('.value').should have_content 'R$ 40,00'
+      find('.canceled_value').should have_content 'R$ 30,00'
+      find('.balance').should have_content 'R$ 10,00'
+    end
+
+    page.find('#subpledge_value').should have_content 'R$ 100,00'
+    page.find('#subpledge_cancellations_sum').should have_content 'R$ 90,00'
+    page.find('#subpledge_balance').should have_content 'R$ 10,00'
+
+    page.should have_field 'Valor *', :with => '90,00'
     page.should have_field 'Data *', :with => I18n.l(Date.current)
     page.should have_field 'Motivo', :with => 'Falta de documentação'
   end
@@ -129,8 +145,8 @@ feature "SubpledgeCancellations" do
   end
 
   scenario 'when fill subpledge should fill related fields' do
-    pledge = Pledge.make!(:empenho)
-    subpledge = Subpledge.make!(:empenho_2012)
+    pledge = Pledge.make!(:empenho_com_dois_vencimentos)
+    subpledge = Subpledge.make!(:para_empenho_com_dois_vencimentos)
 
     click_link 'Contabilidade'
 
@@ -146,54 +162,31 @@ feature "SubpledgeCancellations" do
 
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_field 'Subempenho', :with => subpledge.to_s
-    page.should have_field 'Saldo do subempenho', :with => '1,00'
+    sleep 10
+    page.should have_field 'Saldo do subempenho', :with => '100,00'
     page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_field 'Valor do empenho', :with => '9,99'
-  end
+    page.should have_field 'Valor do empenho', :with => '200,00'
 
-  scenario 'when fill subpledge should enable subpledge_expiration' do
-    Pledge.make!(:empenho)
-    subpledge = Subpledge.make!(:empenho_2012)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Subempenho'
-
-    click_link 'Criar Anulação de Subempenho'
-
-    page.should have_disabled_field 'Parcela'
-
-    fill_modal 'Subempenho', :with => '1', :field => 'Número do processo'
-
-    page.should_not have_disabled_field 'Parcela'
-
-    fill_modal 'Parcela', :with => '1', :field => 'Número' do
-      page.should have_disabled_field 'filter_subpledge'
-      page.should have_field 'filter_subpledge', :with => subpledge.to_s
+    within '#subpledge_expiration_1' do
+      page.should have_content '1'
+      page.should have_content I18n.l(Date.current + 30.days)
+      find('.value').should have_content 'R$ 60,00'
+      find('.canceled_value').should have_content 'R$ 0,00'
+      find('.balance').should have_content 'R$ 60,00'
     end
 
-    clear_modal 'Subempenho'
+    within '#subpledge_expiration_2' do
+      page.should have_content '2'
+      page.should have_content I18n.l(Date.current + 60.days)
+      find('.value').should have_content 'R$ 40,00'
+      find('.canceled_value').should have_content 'R$ 0,00'
+      find('.balance').should have_content 'R$ 40,00'
+    end
 
-    page.should have_disabled_field 'Parcela'
-  end
-
-  scenario 'when fill subpledge_expiration fill related fields' do
-    Pledge.make!(:empenho)
-    Subpledge.make!(:empenho_2012)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Subempenho'
-
-    click_link 'Criar Anulação de Subempenho'
-
-    fill_modal 'Subempenho', :with => '1', :field => 'Número do processo'
-    fill_modal 'Parcela', :with => '1', :field => 'Número'
-
-    page.should have_disabled_field 'Saldo da parcela'
-    page.should have_field 'Saldo da parcela', :with => '1,00'
-    page.should have_field 'Valor *', :with => '1,00'
+    page.find('#subpledge_value').should have_content 'R$ 100,00'
+    page.find('#subpledge_cancellations_sum').should have_content 'R$ 0,00'
+    page.find('#subpledge_balance').should have_content 'R$ 100,00'
   end
 
   scenario 'should have all fields disabled when editing an existent pledge' do
@@ -226,10 +219,6 @@ feature "SubpledgeCancellations" do
     page.should have_field 'Subempenho', :with => subpledge.to_s
     page.should have_disabled_field 'Saldo do subempenho'
     page.should have_field 'Saldo do subempenho', :with => '0,00'
-    page.should have_disabled_field 'Parcela'
-    page.should have_field 'Parcela', :with => pledge_expiration.to_s
-    page.should have_disabled_field 'Saldo da parcela'
-    page.should have_field 'Saldo da parcela', :with => '0,00'
     page.should have_disabled_field 'Valor'
     page.should have_field 'Valor *', :with => '1,00'
     page.should have_disabled_field 'Data'

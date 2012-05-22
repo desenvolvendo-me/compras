@@ -59,13 +59,17 @@ class Subpledge < ActiveRecord::Base
   end
 
   def subpledge_cancellations_sum
-    subpledge_cancellations.compact.sum(&:value)
+    subpledge_cancellations.sum(:value)
   end
 
   def movimentable_pledge_parcels
     return unless pledge
 
     pledge.pledge_parcels_with_balance
+  end
+
+  def subpledge_expirations_with_balance
+    subpledge_expirations.select { |subpledge_expiration| subpledge_expiration.balance > 0 }
   end
 
   protected

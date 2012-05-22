@@ -18,11 +18,23 @@ class SubpledgeDecorator < Decorator
     helpers.number_with_precision component.balance if component.balance
   end
 
+  def balance_as_currency
+    helpers.number_to_currency component.balance if component.balance
+  end
+
   def pledge_balance_as_currency
     helpers.number_to_currency component.pledge_balance if component.pledge_balance
   end
 
   def subpledge_expirations_sum
     helpers.number_with_precision component.subpledge_expirations_sum if super
+  end
+
+  def subpledge_cancellations_sum
+    helpers.number_to_currency super
+  end
+
+  def value
+    helpers.number_to_currency super if super
   end
 end

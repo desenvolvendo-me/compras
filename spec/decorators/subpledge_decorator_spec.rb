@@ -41,6 +41,27 @@ describe SubpledgeDecorator do
     subject.pledge_balance_as_currency.should eq 'R$ 100,00'
   end
 
+  it 'should return formatted balance as currency' do
+    component.stub(:balance).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.balance_as_currency.should eq 'R$ 100,00'
+  end
+
+  it 'should return formatted value as currency' do
+    component.stub(:value).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.value.should eq 'R$ 100,00'
+  end
+
+  it 'should return formatted subpledge_cancellations_sum' do
+    component.stub(:subpledge_cancellations_sum).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.subpledge_cancellations_sum.should eq 'R$ 100,00'
+  end
+
   it 'should return formatted subpledge_expirations_sum' do
     component.stub(:subpledge_expirations_sum).and_return(100.0)
     helpers.stub(:number_with_precision).with(100.0).and_return('100,00')

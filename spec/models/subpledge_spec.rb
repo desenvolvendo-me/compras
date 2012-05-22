@@ -31,16 +31,9 @@ describe Subpledge do
   it { should_not allow_value('201').for(:year) }
 
   context 'balance' do
-    let :subpledge_cancellations do
-      [
-        double('SubpledgeCancellationsOne', :value => 1),
-        double('SubpledgeCancellationsOne', :value => 2),
-      ]
-    end
-
     it 'should return correct balance' do
       subject.value = 10
-      subject.stub(:subpledge_cancellations).and_return(subpledge_cancellations)
+      subject.stub(:subpledge_cancellations_sum).and_return(3)
       subject.balance.should eq 7
     end
   end
@@ -123,6 +116,22 @@ describe Subpledge do
       subject.stub(:pledge).and_return(pledge)
       subject.valid?
       subject.errors[:pledge].should include 'deve ser do tipo global ou estimativo'
+    end
+  end
+
+  context 'subpledge_expirations with balance' do
+    let :subpledge_expiration_one do
+      double('SubpledgeExpirationOne', :balance => 100)
+    end
+
+    let :subpledge_expiration_two do
+      double('SubpledgeExpirationTwo', :balance => 0)
+    end
+
+    it 'should return only with balance' do
+      subject.stub(:subpledge_expirations).and_return([subpledge_expiration_one, subpledge_expiration_two])
+
+      subject.subpledge_expirations_with_balance.should eq [subpledge_expiration_one]
     end
   end
 

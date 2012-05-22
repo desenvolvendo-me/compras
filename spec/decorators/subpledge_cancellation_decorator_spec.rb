@@ -27,6 +27,27 @@ describe SubpledgeCancellationDecorator do
     subject.subpledge_balance.should eq '9,99'
   end
 
+  it 'should return formatted subpledge_balance as currency' do
+    component.stub(:subpledge_balance).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.subpledge_balance_as_currency.should eq 'R$ 100,00'
+  end
+
+  it 'should return formatted subpledge_value as currency' do
+    component.stub(:subpledge_value).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.subpledge_value.should eq 'R$ 100,00'
+  end
+
+  it 'should return formatted subpledge_cancellations_sum as currency' do
+    component.stub(:subpledge_cancellations_sum).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.subpledge_cancellations_sum.should eq 'R$ 100,00'
+  end
+
   it 'should return formatted subpledge_expiration_balance' do
     component.stub(:subpledge_expiration_balance).and_return(9.99)
     helpers.stub(:number_with_precision).with(9.99).and_return('9,99')

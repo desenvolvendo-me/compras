@@ -82,6 +82,23 @@ describe Pledge do
     subject.balance.should eq 21
   end
 
+  context 'subpledge_value_sum' do
+    before do
+      subject.stub(:subpledges).and_return(subpledges)
+    end
+
+    let :subpledges do
+      [
+        double('SubpledgeOne', :balance => 10),
+        double('SubpledgeTwo', :balance => 9)
+      ]
+    end
+
+    it 'should return subpledge_value_sum as a sum of subpledges balance' do
+      subject.subpledges_value_sum.should eq 19
+    end
+  end
+
   it 'validate value based on budeget_allocation_real_amount' do
     subject.stub(:budget_allocation_real_amount).and_return(99)
 

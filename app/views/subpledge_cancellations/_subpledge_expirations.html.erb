@@ -1,0 +1,64 @@
+<table id="subpledge_expirations" class="records">
+  <thead>
+    <tr>
+      <th>
+        Parcela
+      </th>
+      <th>
+        Vencimento
+      </th>
+      <th>
+        Valor inicial
+      </th>
+      <th>
+        Valor anulado
+      </th>
+      <th>
+        Valor atual
+      </th>
+    </tr>
+  </thead>
+
+  <tfoot>
+    <tr>
+      <td>
+        Totais
+      </td>
+      <td>
+      </td>
+      <td id="subpledge_value">
+        <%= f.object.decorator.subpledge_value %>
+      </td>
+      <td id="subpledge_cancellations_sum">
+        <%= f.object.decorator.subpledge_cancellations_sum %>
+      </td>
+      <td id="subpledge_balance">
+        <%= f.object.decorator.subpledge_balance_as_currency %>
+      </td>
+    </tr>
+  </tfoot>
+
+  <tbody>
+    <% if f.object.subpledge %>
+      <% localized(f.object.subpledge.subpledge_expirations).each do |expiration| %>
+        <tr id="subpledge_expiration_<%= expiration.number %>">
+          <td>
+            <%= expiration.number %>
+          </td>
+          <td>
+            <%= expiration.localized.expiration_date %>
+          </td>
+          <td class="value">
+            <%= expiration.decorator.value %>
+          </td>
+          <td class="canceled_value">
+            <%= expiration.decorator.canceled_value %>
+          </td>
+          <td class="balance">
+            <%= expiration.decorator.balance %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -31,19 +31,31 @@
   </div>
 </div>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :subpledge_expiration, :disabled => f.object.subpledge_id.blank? %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :subpledge_expiration_balance, :disabled => true, :input_html => { :value => f.object.decorator.subpledge_expiration_balance } %>
-  </div>
-</div>
+<%= render 'subpledge_expirations', :f => f %>
 
 <%= f.input :value %>
 <%= f.input :date %>
 <%= f.input :reason %>
+
+<%= mustache 'subpledge_expiration_template' do %>
+  <tr id="subpledge_expiration_{{number}}">
+    <td>
+      {{number}}
+    </td>
+    <td>
+      {{expiration_date}}
+    </td>
+    <td class="value">
+      {{value}}
+    </td>
+    <td class="canceled_value">
+      {{canceled_value}}
+    </td>
+    <td class="balance">
+      {{balance}}
+    </td>
+  </tr>
+<% end %>
 
 <script>
   <% if f.object.persisted? %>
@@ -64,19 +76,26 @@
       return url;
     }
 
-    function subpledgeExpirationUrl() {
-      var url = "<%= modal_subpledge_expirations_path %>?",
-          params = {
-            locked_fields: ["subpledge"],
-            subpledge_expiration: {
-              subpledge_id: $('#subpledge_cancellation_subpledge_id').val(),
-              subpledge: $('#subpledge_cancellation_subpledge').val()
-            }
-          };
+    function clearExistingSubpledgeExpirations() {
+      $('#expirations tbody').html('');
+    }
 
-      url += jQuery.param(params);
+    function createSubpledgeExpirationsFromSubpledge(subpledgeExpirations) {
+      var template = $('#subpledge_expiration_template'),
+        rendered = '';
 
-      return url;
+      $(subpledgeExpirations).each(function() {
+
+        rendered += template.mustache({
+          expiration_date: this.expiration_date,
+          value: this.value,
+          number: this.number,
+          canceled_value: this.canceled_value,
+          balance: this.balance
+        });
+      });
+
+      $('#subpledge_expirations tbody').html(rendered);
     }
 
     $('#subpledge_cancellation_pledge_id').change(function (event, pledge) {
@@ -92,18 +111,14 @@
         $('#subpledge_cancellation_subpledge').val('');
         $('#subpledge_cancellation_subpledge_id').val('');
         $('#subpledge_cancellation_subpledge').attr('data-modal-url', '<%= modal_subpledges_path %>');
-        $('#subpledge_cancellation_subpledge_expiration_balance').val('');
         $('#subpledge_cancellation_subpledge_balance').val('');
-        $('#subpledge_cancellation_subpledge_expiration').val('');
-        $('#subpledge_cancellation_subpledge_expiration_id').val('');
-        $('#subpledge_cancellation_subpledge_expiration').attr('disabled', true);
       }
     });
 
     $('#subpledge_cancellation_subpledge_id').change(function (event, subpledge) {
+      clearExistingSubpledgeExpirations();
+
       if (subpledge) {
-        $('#subpledge_cancellation_subpledge_expiration').attr('disabled', false);
-        $('#subpledge_cancellation_subpledge_expiration').attr('data-modal-url', subpledgeExpirationUrl());
         $('#subpledge_cancellation_subpledge_balance').val(subpledge.balance);
 
         if (!$('#subpledge_cancellation_pledge_id').val()) {
@@ -113,23 +128,12 @@
           $('#subpledge_cancellation_pledge').val(subpledge.pledge);
           $('#subpledge_cancellation_pledge_id').val(subpledge.pledge_id);
         }
+       $('#subpledge_value').html(subpledge.subpledge_value);
+       $('#subpledge_cancellations_sum').html(subpledge.subpledge_cancellations_sum);
+       $('#subpledge_balance').html(subpledge.balance_as_currency);
+        createSubpledgeExpirationsFromSubpledge(subpledge.expirations);
       } else {
         $('#subpledge_cancellation_subpledge_balance').val('');
-        $('#subpledge_cancellation_subpledge_expiration_balance').val('');
-        $('#subpledge_cancellation_subpledge_expiration').val('');
-        $('#subpledge_cancellation_subpledge_expiration_id').val('');
-        $('#subpledge_cancellation_subpledge_expiration').attr('disabled', true);
-      }
-    });
-
-    $('#subpledge_cancellation_subpledge_expiration_id').change(function(event, subpledge_expiration) {
-      if (subpledge_expiration) {
-        if (!$('#subpledge_cancellation_value').val()){
-          $('#subpledge_cancellation_value').val(subpledge_expiration.balance);
-        }
-        $('#subpledge_cancellation_subpledge_expiration_balance').val(subpledge_expiration.balance);
-      } else {
-        $('#subpledge_cancellation_subpledge_expiration_balance').val('');
       }
     });
   <% end %>

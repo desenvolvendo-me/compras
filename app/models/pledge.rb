@@ -100,7 +100,7 @@ class Pledge < ActiveRecord::Base
   end
 
   def subpledges_value_sum
-    subpledges.sum(:value)
+    subpledges.compact.sum(&:balance)
   end
 
   def last_subpledge

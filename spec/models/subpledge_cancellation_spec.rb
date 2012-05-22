@@ -12,7 +12,6 @@ describe SubpledgeCancellation do
   it { should validate_presence_of :year }
   it { should validate_presence_of :pledge }
   it { should validate_presence_of :subpledge }
-  it { should validate_presence_of :subpledge_expiration }
   it { should validate_presence_of :value }
   it { should validate_presence_of :date }
   it { should validate_presence_of :reason }
@@ -20,7 +19,6 @@ describe SubpledgeCancellation do
   it { should belong_to :entity }
   it { should belong_to :pledge }
   it { should belong_to :subpledge }
-  it { should belong_to :subpledge_expiration }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
@@ -47,20 +45,41 @@ describe SubpledgeCancellation do
 
   context 'validate value' do
     before do
-      subject.stub(:subpledge_expiration).and_return(subpledge_expiration)
+      subject.stub(:subpledge).and_return(subpledge)
     end
 
-    let :subpledge_expiration do
-      double('SubpledgeExpiration', :balance => 3)
+    let :subpledge do
+      double('Subpledge', :balance => 3)
     end
 
     it 'should not be valid if value greater than subpledge_expiratin_balance' do
       subject.should_not allow_value(4).for(:value).
-                                        with_message('não pode ser superior ao saldo da parcela')
+                                        with_message('não pode ser superior ao saldo do subempenho')
     end
 
     it 'should be valid if value is not greater than balance' do
       subject.should allow_value(1).for(:value)
+    end
+  end
+
+  context 'movimentable subpledge_expirations' do
+    before do
+      subject.stub(:subpledge).and_return(subpledge)
+    end
+
+    let :subpledge do
+      double('Subpledge', :subpledge_expirations_with_balance => subpledge_expirations)
+    end
+
+    let :subpledge_expirations do
+      [
+        double('SubpledgeExpirationOne', :balance => 200),
+        double('SubpledgeExpirationTwo', :balance => 500)
+      ]
+    end
+
+    it 'should return subpledge expirations with balance' do
+      subject.movimentable_subpledge_expirations.should eq subpledge_expirations
     end
   end
 end
