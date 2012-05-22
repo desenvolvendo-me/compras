@@ -128,9 +128,9 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def validate_administrative_process_status
-    return if administrative_process_released?
-
-    errors.add(:administrative_process, :status_must_be_released)
+    unless administrative_process_released?
+      errors.add(:administrative_process, :status_must_be_released)
+    end
   end
 
   def validate_administrative_process
