@@ -162,7 +162,6 @@ feature "SubpledgeCancellations" do
 
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_field 'Subempenho', :with => subpledge.to_s
-    sleep 10
     page.should have_field 'Saldo do subempenho', :with => '100,00'
     page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
