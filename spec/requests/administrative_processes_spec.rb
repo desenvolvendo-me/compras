@@ -125,15 +125,15 @@ feature "AdministrativeProcesses" do
 
     click_link 'Imprimir'
 
-    page.should have_content "Número: #{administrative_process}"
-    page.should have_content "Protocolo número: 00088/2012"
-    page.should have_content "Data da solicitação: 07/03/2012"
+    page.should have_content "#{administrative_process}"
+    page.should have_content "00088/2012"
+    page.should have_content "07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
-    page.should have_content "Unidade orçamentária: 02.00 - Secretaria de Educação"
-    page.should have_content "Modalidade: Convite para compras e serviços de engenharia"
-    page.should have_content "Tipo de objeto: Compras e serviços"
-    page.should have_content "Forma de julgamento: Forma Global com Menor Preço"
-    page.should have_content "Descrição do objeto: Licitação para compra de carteiras"
+    page.should have_content "02.00 - Secretaria de Educação"
+    page.should have_content "Convite para compras e serviços de engenharia"
+    page.should have_content "Compras e serviços"
+    page.should have_content "Forma Global com Menor Preço"
+    page.should have_content "Licitação para compra de carteiras"
     page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
   end
 
