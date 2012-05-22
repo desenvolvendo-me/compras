@@ -66,9 +66,9 @@ describe LicitationProcessesController do
     it 'should update any field when has not publication or when publication allow update licitation process' do
       LicitationProcess.any_instance.stub(:can_update?).and_return(true)
 
-      licitation_process2 = LicitationProcess.make!(:processo_licitatorio)
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-      put :update, :id => licitation_process2.id, :licitation_process => { :object_description => "Descrição do objeto" }
+      put :update, :id => licitation_process.id, :licitation_process => { :object_description => "Descrição do objeto" }
 
       assigns(:licitation_process).object_description.should eq 'Descrição do objeto'
     end
