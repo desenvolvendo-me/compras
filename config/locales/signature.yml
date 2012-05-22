@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      signature:
+        one: "Assinatura"
+        other: "Assinaturas"
+
+    attributes:
+      signature:
+        person: "Pessoa"
+        position: "Cargo"
