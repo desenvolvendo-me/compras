@@ -1,30 +1,110 @@
 <h1>Processo Administrativo</h1>
-<p>Número: <%= resource %></p>
-<p>Protocolo número: <%= resource.protocol %></p>
-<p>Data da solicitação: <%=  resource.decorator.date %></p>
-<h1>Solicitação de Abertura de Processo Licitatório</h1>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        Número
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :protocol %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :date %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource %>
+      </td>
+      <td>
+        <%= resource.protocol %>
+      </td>
+      <td>
+        <%= resource.decorator.date %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Solicitação de Abertura de Processo Licitatório</h2>
+
 <p>Excelentíssimo Sr. <%= current_prefecture.mayor_name %></p>
 <p>
   No uso das atribuições do meu cargo, venho respeitosamente, requerer que V. Excia. autorize a abertura de procedimento licitatório, conforme especificações relacionadas abaixo. A existência de recursos orçamentários foi confirmada pelo parecer contábil, expedido pelo setor de contabilidade, estado tudo de acordo com a legislação vigente.
 </p>
-<p>Unidade orçamentária: <%= resource.budget_unit %></p>
-<p>Modalidade: <%= resource.modality_humanize %></p>
-<p>Tipo de objeto: <%= resource.object_type_humanize %></p>
-<p>Forma de julgamento: <%= resource.judgment_form %></p>
-<p>Descrição do objeto: <%= resource.description %></p>
 
-<div>
-  <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :budget_unit %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :modality %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :object_type %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :judgment_form %>
+      </th>
+      <th>
+        <%= resource_class.human_attribute_name :description %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource.budget_unit %>
+      </td>
+      <td>
+        <%= resource.modality_humanize %>
+      </td>
+      <td>
+        <%= resource.object_type_humanize %>
+      </td>
+      <td>
+        <%= resource.judgment_form %>
+      </td>
+      <td>
+        <%= resource.description %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin-top: 20px;">
+  <span>
+    <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
+  </span>
+
+  <span style="float: right;">
+    Autorizado
+  </span>
+</div>
+
+<div style="margin-top: 30px;">
+  <span>
+    ______________________________
+  </span>
+
+  <span style="float: right;">
+    ______________________________
+  </span>
 </div>
 
 <div>
-  Responsável pela solicitação
-</div>
+  <span>
+    Responsável pela solicitação
+  </span>
 
-<div>
-  Autorizado
-</div>
-
-<div>
-  Prefeito municipal
+  <span style="float: right;">
+    Prefeito municipal
+  </span>
 </div>
