@@ -12,6 +12,7 @@ feature "PriceCollections" do
     PaymentMethod.make!(:dinheiro)
     Period.make!(:um_ano)
     Material.make!(:antivirus)
+    Provider.make!(:wenderson_sa)
 
     click_link 'Processos'
 
@@ -52,6 +53,10 @@ feature "PriceCollections" do
       fill_in 'Quantidade', :with => '10'
     end
 
+    within_tab 'Fornecedores' do
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Coleta de Preços criada com sucesso.'
@@ -86,6 +91,10 @@ feature "PriceCollections" do
       page.should have_field 'Marca', :with => 'Norton'
       page.should have_field 'Quantidade', :with => '10'
     end
+
+    within_tab 'Fornecedores' do
+      page.should have_content 'Wenderson Malheiros'
+    end
   end
 
   scenario 'update an existent price_collection' do
@@ -95,6 +104,7 @@ feature "PriceCollections" do
     PaymentMethod.make!(:cheque)
     Period.make!(:tres_meses)
     Material.make!(:arame_farpado)
+    Provider.make!(:sobrinho_sa)
 
     click_link 'Processos'
 
@@ -125,6 +135,14 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
       fill_in 'Marca', :with => 'Aço inox'
       fill_in 'Quantidade', :with => '100'
+    end
+
+    within_tab 'Fornecedores' do
+      page.should have_content 'Wenderson Malheiros'
+
+      click_button 'Remover'
+
+      fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     end
 
     click_button 'Salvar'
@@ -160,6 +178,11 @@ feature "PriceCollections" do
       page.should have_field 'Unidade de referência', :with => 'Unidade'
       page.should have_field 'Marca', :with => 'Aço inox'
       page.should have_field 'Quantidade', :with => '100'
+    end
+
+    within_tab 'Fornecedores' do
+      page.should_not have_content 'Wenderson Malheiros'
+      page.should have_content 'Gabriel Sobrinho'
     end
   end
 

@@ -1,7 +1,7 @@
 class PriceCollection < ActiveRecord::Base
   attr_accessible :collection_number, :year, :date, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :period_id, :object_description, :observations, :proposal_validity_id, :expiration
-  attr_accessible :price_collection_lots_attributes
+  attr_accessible :price_collection_lots_attributes, :provider_ids
 
   attr_readonly :year, :collection_number
 
@@ -14,6 +14,9 @@ class PriceCollection < ActiveRecord::Base
   belongs_to :proposal_validity, :class_name => 'Period', :foreign_key => 'proposal_validity_id'
 
   has_many :price_collection_lots, :dependent => :destroy, :order => :id
+
+  has_many :price_collections_providers, :dependent => :destroy, :order => :id
+  has_many :providers, :through => :price_collections_providers
 
   accepts_nested_attributes_for :price_collection_lots, :allow_destroy => true
 

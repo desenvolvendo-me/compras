@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/price_collection'
 require 'app/models/price_collection_lot'
+require 'app/models/price_collections_provider'
 
 describe PriceCollection do
   context '#relationships' do
@@ -11,6 +12,8 @@ describe PriceCollection do
     it { should belong_to :period }
     it { should belong_to :proposal_validity }
     it { should have_many :price_collection_lots }
+    it { should have_many(:price_collections_providers).dependent(:destroy).order(:id) }
+    it { should have_many(:providers).through(:price_collections_providers) }
   end
 
   context '#validations' do

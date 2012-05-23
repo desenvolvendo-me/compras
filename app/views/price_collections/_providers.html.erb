@@ -1,0 +1,34 @@
+<div class="yui3-g modal-finder">
+  <div class="yui3-u-1-2">
+    <%= f.association :providers, :as => :modal, :hidden_field => false, :input_html => { :value => nil } %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[provider_ids][]" />
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        Id
+      </th>
+      <th>
+        Nome
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_providers_records">
+    <% f.object.providers.each do |provider| %>
+      <%= render 'providers/list_form', :value => provider.to_s, :id => provider.id, :f => f %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_providers_template" do %>
+  <%= f.association :providers, :collection => f.object.providers.build do |p| %>
+    <%= render 'providers/list_form', :value => '{{value}}', :id => '{{id}}', :f => f %>
+  <% end %>
+<% end %>
