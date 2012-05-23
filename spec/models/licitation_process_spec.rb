@@ -311,7 +311,7 @@ describe LicitationProcess do
     end
 
     let :licitation_process do
-      double('licitation_process', :id => 1)
+      double('licitation_process')
     end
 
     it 'should validate that selected administrative process is available' do
@@ -327,11 +327,7 @@ describe LicitationProcess do
     end
 
     it "should not be valid if administrative_process have another licitation_process" do
-      subject.stub(:id => 2)
-
       administrative_process.stub(:licitation_process => licitation_process)
-
-      licitation_process.stub(:nil?).and_return(false)
 
       subject.valid?
 
@@ -339,11 +335,7 @@ describe LicitationProcess do
     end
 
     it "should be valid if administrative_process have the current licitation_process" do
-      subject.stub(:id => 1)
-
-      administrative_process.stub(:licitation_process => nil)
-
-      licitation_process.stub(:nil?).and_return(true)
+      administrative_process.stub(:licitation_process => subject)
 
       subject.valid?
 
@@ -351,11 +343,7 @@ describe LicitationProcess do
     end
 
     it "should be valid if administrative_process do not have licitation_process" do
-      subject.stub(:id => 2)
-
       administrative_process.stub(:licitation_process => nil)
-
-      licitation_process.stub(:nil?).and_return(true)
 
       subject.valid?
 
