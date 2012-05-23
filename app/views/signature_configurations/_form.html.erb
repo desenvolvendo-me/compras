@@ -1,4 +1,4 @@
-<%= f.input :report %>
+<%= f.input :report, :collection => f.object.decorator.availables %>
 
 <p>
   <input type="button" class="button affirmative add_item" value="Adicionar Item">

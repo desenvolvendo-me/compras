@@ -18,6 +18,7 @@ bundle exec rspec spec/business
 bundle exec rspec spec/decorators
 #bundle exec rspec spec/reports
 bundle exec rspec spec/lib
+bundle exec rspec spec/enumerations
 bundle exec rspec spec/models
 bundle exec rspec spec/controllers
 bundle exec rspec spec/requests

@@ -41,6 +41,34 @@ feature "SignatureConfigurations" do
     page.should have_field 'Cargo', :with => 'Gerente'
   end
 
+  scenario 'should have only availables reports' do
+    SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
+
+    click_link 'Administração'
+
+    click_link 'Relatórios'
+
+    click_link 'Configurações de Assinatura'
+
+    click_link 'Criar Configuração de Assinatura'
+
+    page.all('#signature_configuration_report option').map(&:text).should eq ['', 'Processos Administrativos']
+  end
+
+  scenario 'should have only availables reports when edit' do
+    SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
+
+    click_link 'Administração'
+
+    click_link 'Relatórios'
+
+    click_link 'Configurações de Assinatura'
+
+    click_link 'Autorizações de Fornecimento'
+
+    page.all('#signature_configuration_report option').map(&:text).should eq ['', 'Processos Administrativos', 'Autorizações de Fornecimento']
+  end
+
   scenario 'when fill signature should fill position' do
     Signature.make!(:gerente_sobrinho)
 

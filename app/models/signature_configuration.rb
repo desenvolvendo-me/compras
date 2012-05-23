@@ -8,6 +8,11 @@ class SignatureConfiguration < ActiveRecord::Base
   accepts_nested_attributes_for :signature_configuration_items, :allow_destroy => true
 
   validates :report, :presence => true
+  validates :report, :uniqueness => true, :allow_blank => true
+
+  def self.unavailables_reports
+    select('distinct report').pluck(:report)
+  end
 
   orderize :id
   filterize
