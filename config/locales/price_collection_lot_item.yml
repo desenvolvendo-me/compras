@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      price_collection_lot_item:
+        one: "Item"
+        other: "Itens"
+
+    attributes:
+      price_collection_lot_item:
+        lot_number: "Número do item"
+        brand: "Marca"
+        reference_unit: "Unidade de referência"
+        quantity: "Quantidade"

@@ -1,9 +1,22 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Principal</a></li>
+    <li><a href="#lots">Lotes de itens</a></li>
   </ul>
 
   <div id="general">
     <%= render 'general', :f => f %>
   </div>
+
+  <div id="lots">
+    <%= render 'lots', :f => f %>
+  </div>
 </div>
+
+<script>
+  $('form.price_collection').delegate('.material', 'change', function (event, material) {
+    if (material) {
+      $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
+    }
+  });
+</script>

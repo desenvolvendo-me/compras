@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/price_collection'
+require 'app/models/price_collection_lot'
 
 describe PriceCollection do
   context '#relationships' do
@@ -9,6 +10,7 @@ describe PriceCollection do
     it { should belong_to :payment_method }
     it { should belong_to :period }
     it { should belong_to :proposal_validity }
+    it { should have_many :price_collection_lots }
   end
 
   context '#validations' do

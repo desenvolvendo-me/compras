@@ -20,6 +20,7 @@ describe Material do
   it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocation_items).dependent(:restrict) }
+  it { should have_many(:price_collection_lot_items).dependent(:restrict) }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }

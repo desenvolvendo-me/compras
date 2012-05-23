@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      price_collection_lot:
+        one: "Lote"
+        other: "Lotes"
+
+    attributes:
+      price_collection_lot:
+        lot_number: "Número do lote"
+        observations: "Observações"

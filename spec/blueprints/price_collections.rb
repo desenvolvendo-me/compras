@@ -11,4 +11,5 @@ PriceCollection.blueprint(:coleta_de_precos) do
   proposal_validity { Period.make!(:um_ano) }
   expiration { Date.tomorrow }
   status { Status::ACTIVE }
+  price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
 end
