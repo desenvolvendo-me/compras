@@ -73,3 +73,9 @@ require 'i18n_alchemy'
 class ActiveRecord::Base
   include I18n::Alchemy
 end
+
+# Unico
+require 'unico/engine'
+require 'unico/model'
+
+$:.append Unico::Engine.config.root
