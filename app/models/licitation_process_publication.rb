@@ -9,7 +9,7 @@ class LicitationProcessPublication < ActiveRecord::Base
   validates :name, :publication_date, :publication_of, :circulation_type, :presence => true
 
   def self.current
-    where{ publication_date.lteq(Date.current) }.order{ publication_date }.last
+    where { publication_date.lteq(Date.current) }.order { publication_date }.last
   end
 
   def self.current_updatable?
