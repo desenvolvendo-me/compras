@@ -1,53 +1,257 @@
-<h1>Autorização de Fornecimento</h1>
-<p>Número da autorização: <%= resource %></p>
-<p>Compra direta: <%= resource.decorator.direct_purchase %></p>
-<p>Data da compra: <%= resource.decorator.date %></p>
+<h1>
+  Autorização de Fornecimento
+</h1>
 
-<h1>Dados do Fornecedor</h1>
-<p>Fornecedor: <%= resource.provider %></p>
-<p>Endereço: <%= resource.address %></p>
-<p>Cidade: <%= resource.city %></p>
-<p>CEP: <%= resource.zip_code %></p>
-<p>Telefone: <%= resource.phone %></p>
-<p>Fax: <%= resource.fax %></p>
-<p>Conta: <%= resource.bank_account %></p>
-<p>Agência: <%= resource.agency %></p>
-<p>Banco: <%= resource.bank %></p>
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        Número da autorização
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :direct_purchase %>
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :date %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource %>
+      </td>
+
+      <td>
+        <%= resource.decorator.direct_purchase %>
+      </td>
+
+      <td>
+        <%= resource.decorator.date %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Dados do Fornecedor</h2>
+
+<h3>Endereço</h3>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :provider %>
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :address %>
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :city %>
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :zip_code %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource.provider %>
+      </td>
+
+      <td>
+        <%= resource.address %>
+      </td>
+
+      <td>
+        <%= resource.city %>
+      </td>
+
+      <td>
+        <%= resource.zip_code %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Contato</h3>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :phone %>
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :fax %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource.phone %>
+      </td>
+
+      <td>
+        <%= resource.fax %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Dados Bancários<h3>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :bank_account %>
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :agency %>
+      </th>
+
+      <th>
+        <%= resource_class.human_attribute_name :bank %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource.bank_account %>
+      </td>
+
+      <td>
+        <%= resource.agency %>
+      </td>
+
+      <td>
+        <%= resource.bank %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <p>Prezados Senhores,<br> <%= resource.decorator.message %></p>
 
-<h1>Identificação da Despesa</h1>
-<p>Unidade orçamentária: <%= resource.budget_unit %></p>
-<p>Condições de Pagamento: <%= resource.payment_method %></p>
-<p>Prazo de entrega: <%= resource.period %></p>
-<p>Local de entrega: <%= resource.delivery_location %></p>
-<p>Objeto da compra: <%= resource.licitation_object %></p>
-<p>Observações: <%= resource.observation %></p>
+<h2>Identificação da Despesa</h2>
 
-<h1>Dotações Orçamentárias</h1>
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource.class.human_attribute_name :budget_unit %>
+      </th>
+
+      <th>
+        <%= resource.class.human_attribute_name :payment_method %>
+      </th>
+
+      <th>
+        <%= resource.class.human_attribute_name :period %>
+      </th>
+
+      <th>
+        <%= resource.class.human_attribute_name :delivery_location %>
+      </th>
+
+      <th>
+        <%= resource.class.human_attribute_name :licitation_object %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource.budget_unit %>
+      </td>
+
+      <td>
+        <%= resource.payment_method %>
+      </td>
+
+      <td>
+        <%= resource.period %>
+      </td>
+
+      <td>
+        <%= resource.delivery_location %>
+      </td>
+
+      <td>
+        <%= resource.licitation_object %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= resource_class.human_attribute_name :observation %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= resource.observation %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Dotações Orçamentárias</h2>
+
 <% resource.direct_purchase.direct_purchase_budget_allocations.each_with_index do |dpba, idx| %>
-  <h2><%= idx + 1 %> - <%= dpba.budget_allocation.description %></h2>
-  <h3>Itens da Dotação</h3>
+  <h3><%= idx + 1 %> - <%= dpba.budget_allocation.description %></h3>
+
+  <h4>Itens da Dotação</h4>
+
   <table class="records">
     <thead>
       <tr>
         <th>
           Item
         </th>
+
         <th>
           Quantidade
         </th>
+
         <th>
           Unidade
         </th>
+
         <th>
           Especificação
         </th>
+
         <th>
           Marca
         </th>
+
         <th>
           Preço unitário
         </th>
+
         <th>
           Preço total
         </th>
@@ -60,21 +264,27 @@
           <td>
             <%= idx + 1 %>
           </td>
+
           <td>
             <%= item.quantity %>
           </td>
+
           <td>
             <%= item.material.reference_unit %>
           </td>
+
           <td>
             <%= item.material.description %>
           </td>
+
           <td>
             <%= item.brand %>
           </td>
+
           <td>
             <%= item.unit_price %>
           </td>
+
           <td>
             <%= number_with_precision item.estimated_total_price %>
           </td>
@@ -84,6 +294,37 @@
   </table>
 <% end %>
 
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        Total bruto
+      </th>
+
+      <th>
+        Descontos
+      </th>
+
+      <th>
+        Total líquido
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+          <%= resource.direct_purchase.decorator.total_allocations_items_value %>
+      </td>
+
+      <td></td>
+
+      <td>
+          <%= resource.direct_purchase.decorator.total_allocations_items_value %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <div>
   <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
 </div>
