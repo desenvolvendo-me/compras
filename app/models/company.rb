@@ -12,6 +12,9 @@ class Company < ActiveRecord::Base
   has_one :address, :as => :addressable, :conditions => { :correspondence => false }, :dependent => :destroy
   has_one :correspondence_address, :as => :addressable, :conditions => { :correspondence => true }, :class_name => 'Address', :dependent => :destroy
   has_one :person, :as => :personable, :dependent => :restrict
+  accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :correspondence_address
+  accepts_nested_attributes_for :person
 
   validates :cnpj, :cnpj => true, :uniqueness => true, :mask => '99.999.999/9999-99', :allow_blank => true
   validates :cnpj, :company_size, :address, :presence => true
@@ -20,9 +23,6 @@ class Company < ActiveRecord::Base
   orderize
   filterize
 
-  accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :correspondence_address
-  accepts_nested_attributes_for :person
 
   def to_s
     person.name
