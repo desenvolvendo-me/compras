@@ -11,6 +11,7 @@ Company.blueprint(:nohup) do
   choose_simple { false }
   responsible_role { "Administrador" }
   address { Address.make(:apto, :addressable => object) }
+  partners { [Partner.make!(:wenderson)] }
 end
 
 Company.blueprint(:nobe) do
@@ -24,4 +25,5 @@ Company.blueprint(:nobe) do
   choose_simple { false }
   responsible_role { "Administrador" }
   address { Address.make(:apto, :addressable => object) }
+  partners { [Partner.make!(:wenderson)] }
 end

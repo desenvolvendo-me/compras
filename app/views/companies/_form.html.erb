@@ -4,6 +4,7 @@
       <li><a href="#company">Contribuinte</a></li>
       <li><a href="#company_contact">Contato</a></li>
       <li><a href="#company_address">Endereço</a></li>
+      <li><a href="#company-partners">Sócios</a></li>
     </ul>
 
     <div id="company">
@@ -60,6 +61,10 @@
       <% end %>
 
       <%= render "addresses/correspondence", :f => c %>
+    </div>
+
+    <div id="company-partners">
+      <%= render 'partners', :f => c %>
     </div>
   </div>
 <% end %>

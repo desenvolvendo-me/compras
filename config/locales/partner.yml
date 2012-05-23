@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      partner:
+        one: "Sócio do Cadastro Econômico"
+        other: "Sócios dos Cadastros Econômicos"
+
+    attributes:
+      partner:
+        person: "Pessoa"
+        percentage: "Percentual de cotas societárias"
+        company: "Empresa"

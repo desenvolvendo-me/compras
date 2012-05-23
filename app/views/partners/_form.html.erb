@@ -1,0 +1,18 @@
+<div class="partner">
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :person %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :percentage %>
+    </div>
+  </div>
+
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-partner" value="Remover Sócio">
+  </p>
+</div>

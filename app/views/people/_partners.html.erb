@@ -1,0 +1,27 @@
+<%= f.error :partners %>
+<p>
+  <input type="button" class="button affirmative add-partner" value="Adicionar Sócio">
+</p>
+
+<div id="partners">
+  <%= f.association :partners, :collection => localized(f.object.partners) || Partner.new do |p| %>
+    <%= render 'partners/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'partners-template' do %>
+  <%= f.association :partners_attributes, :collection => f.object.partners.build, :index => '{{uuid_partner}}' do |p| %>
+    <%= render 'partners/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#partners-template").nestedForm({
+    add: '.add-partner',
+    remove: '.remove-partner',
+    target: '#partners',
+    uuid: 'uuid_partner',
+    fieldToRemove: '.partner',
+    appendItem: false
+  });
+</script>

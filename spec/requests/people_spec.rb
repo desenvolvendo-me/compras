@@ -159,6 +159,7 @@ feature "People" do
     CompanySize.make!(:micro_empresa)
     Street.make!(:bento_goncalves)
     Person.make!(:wenderson)
+    Person.make!(:sobrinho)
 
     click_link 'Cadastros Diversos'
 
@@ -204,6 +205,13 @@ feature "People" do
       end
     end
 
+    within_tab 'Sócios' do
+      click_button 'Adicionar Sócio'
+
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      fill_in 'Percentual de cotas societárias', :with => '100,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Pessoa criada com sucesso.'
@@ -243,10 +251,16 @@ feature "People" do
         page.should have_field "CEP", :with => "31600-223"
       end
     end
+
+    within_tab 'Sócios'do
+      page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Percentual de cotas societárias', :with => '100,00'
+    end
   end
 
   scenario 'update an existent person as company' do
     Person.make!(:nohup)
+    Person.make!(:sobrinho)
 
     click_link 'Cadastros Diversos'
 
@@ -266,6 +280,15 @@ feature "People" do
       fill_in 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
     end
 
+    within_tab 'Sócios' do
+      click_button 'Remover Sócio'
+
+      click_button 'Adicionar Sócio'
+
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      fill_in 'Percentual de cotas societárias', :with => '100,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Pessoa editada com sucesso.'
@@ -279,6 +302,11 @@ feature "People" do
     within_tab 'Endereço' do
       page.should have_field 'CEP', :with => '55554-333'
       page.should have_field 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
+    end
+
+    within_tab 'Sócios'do
+      page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Percentual de cotas societárias', :with => '100,00'
     end
   end
 
@@ -436,5 +464,89 @@ feature "People" do
     page.should have_notice 'Pessoa apagada com sucesso.'
 
     page.should_not have_content 'Mateus Lorandi'
+  end
+
+  scenario 'should have the uniqueness validation to partner on new form' do
+    Person.make!(:sobrinho)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Pessoa'
+
+    click_link 'Criar Pessoa'
+
+    choose "Pessoa Jurídica"
+
+    within_tab 'Sócios' do
+      click_button 'Adicionar Sócio'
+
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      fill_in 'Percentual de cotas societárias', :with => '20,00'
+
+      click_button 'Adicionar Sócio'
+
+      within 'div.partner:first' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+        fill_in 'Percentual de cotas societárias', :with => '80,00'
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Sócios' do
+      page.should have_content 'já está em uso'
+    end
+  end
+
+  scenario 'should have the uniqueness validation to partner' do
+    Person.make!(:nohup)
+
+    click_link 'Cadastros'
+
+    click_link 'Pessoa'
+
+    click_link 'Nohup'
+
+    within_tab 'Sócios' do
+      click_button 'Adicionar Sócio'
+
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+      fill_in 'Percentual de cotas societárias', :with => '100,00'
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Sócios' do
+      page.should have_content 'já está em uso'
+    end
+  end
+
+  scenario 'should validate at least one partner' do
+    Person.make!(:wenderson)
+
+    click_link 'Cadastros'
+
+    click_link 'Pessoa'
+
+    click_link 'Criar Pessoa'
+
+    choose "Pessoa Jurídica"
+
+    click_button 'Salvar'
+
+    within_tab 'Sócios' do
+      page.should have_content 'deve haver ao menos um sócio.'
+
+      click_button 'Adicionar Sócio'
+
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+      fill_in 'Percentual de cotas societárias', :with => '100,00'
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Sócios' do
+      page.should_not have_content 'deve haver ao menos um sócio.'
+    end
   end
 end
