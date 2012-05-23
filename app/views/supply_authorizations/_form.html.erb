@@ -1,9 +1,0 @@
-<%= f.input :year %>
-<%= f.input :code if f.object.persisted? %>
-<%= f.input :direct_purchase, :input_html => { 'data-modal-url' => modal_direct_purchases_path(:by_status => 'unauthorized', :locked_fields => [:by_status]) } %>
-
-<% if f.object.persisted? %>
-  <script>
-    $('form.supply_authorization :input').attr('disabled', true);
-  </script>
-<% end %>
