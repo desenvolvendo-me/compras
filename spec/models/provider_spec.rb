@@ -15,6 +15,7 @@ require 'app/models/reserve_fund'
 require 'app/models/subpledge'
 require 'app/models/precatory'
 require 'app/models/price_collections_provider'
+require 'app/models/price_collection_proposal'
 
 describe Provider do
   it { should belong_to :person }
@@ -38,6 +39,7 @@ describe Provider do
   it { should have_many(:precatories).dependent(:restrict) }
   it { should have_many(:price_collections_providers).dependent(:restrict) }
   it { should have_many(:price_collections).through(:price_collections_providers) }
+  it { should have_many(:price_collection_proposals).dependent(:restrict).order(:id) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration_date }

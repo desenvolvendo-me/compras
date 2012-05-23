@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      price_collection_proposal_item:
+        one: "Item"
+        other: "Itens"
+
+    attributes:
+      price_collection_proposal_item:
+        brand: "Marca"
+        reference_unit: "Unidade de referência"
+        quantiy: "Quantidade"
+        unit_price: "Valor unitário"
+        total_price: "Valor total"

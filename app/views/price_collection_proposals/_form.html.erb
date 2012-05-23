@@ -1,0 +1,78 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :price_collection, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :price_collection_date, :disabled => true, :input_html => { :value => f.object.decorator.price_collection_date } %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :price_collection_period, :disabled => true %>
+  </div>
+</div>
+
+<%= f.input :provider, :disabled => true %>
+
+<div id="lot" class="tabs">
+  <ul>
+    <% f.object.price_collection_lots.each_with_index do |lot, index| %>
+      <li><%= link_to "Lote #{index.succ}", "#lot#{lot.id}" %></li>
+    <% end %>
+  </ul>
+
+  <% f.object.price_collection_lots.each do |lot| %>
+    <div id="lot<%= lot.id %>" class="licitation-process-lot container">
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-2">
+          <%= f.input :item_total_value_by_lot, :input_html => { :class => 'item-total-value-by-lot', :value => f.object.decorator.item_total_value_by_lot(lot), :size => 12, :disabled => true } %>
+        </div>
+      </div>
+
+      <%= f.association :items, :collection => f.object.items_by_lot(lot) do |p| %>
+        <%= render 'price_collection_proposal_items/form', :f => p %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $('.licitation-process-lot').each( function(index, item) {
+    $(this).find('.item-number').each( function(index, item) {
+      $(this).html(index + 1);
+    });
+  });
+
+  function calculateLotTotalItems(itemDiv) {
+    var lotDiv = itemDiv.closest('.licitation-process-lot'),
+        itemPrices = lotDiv.find('.item-total-price');
+        totalValue = 0;
+
+    itemPrices.each(function() {
+      totalValue += parsePtBrFloat(this.value);
+    });
+
+    lotDiv.find('.item-total-value-by-lot').val(floatToPtBrString(totalValue));
+  }
+
+  $('form.price_collection_proposal').delegate('.item-unit-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
+        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+
+    itemDiv.find('.item-total-price').val(total);
+    calculateLotTotalItems(itemDiv);
+  });
+
+  $('form.price_collection_proposal').delegate('.item-total-price', 'keyup', function() {
+    var itemDiv = $(this).closest('.item'),
+        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
+        itemTotalPrice = parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0'),
+        unitPrice = floatToPtBrString(itemTotalPrice / itemQuantity);
+
+    itemDiv.find('.item-unit-price').val(unitPrice);
+    calculateLotTotalItems(itemDiv);
+  });
+</script>

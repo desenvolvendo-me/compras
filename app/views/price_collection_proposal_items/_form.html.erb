@@ -1,0 +1,33 @@
+<div class='item'>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      Item <span class="item-number"></span>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :material, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :brand, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :reference_unit, :disabled => true %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :quantity, :disabled => true, :input_html => { :class => 'item-quantity' } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :unit_price, :input_html => { :class => 'item-unit-price', :value => f.object.decorator.unit_price } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :total_price, :input_html => { :class => 'item-total-price', 'data-decimal' => true, :value => f.object.decorator.total_price } %>
+    </div>
+  </div>
+</div>

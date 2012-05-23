@@ -1,0 +1,2 @@
+class PriceCollectionProposalsController < CrudController
+end

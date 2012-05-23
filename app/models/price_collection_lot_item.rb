@@ -4,6 +4,8 @@ class PriceCollectionLotItem < ActiveRecord::Base
   belongs_to :price_collection_lot
   belongs_to :material
 
+  has_many :price_collection_proposal_items, :dependent => :destroy
+
   delegate :reference_unit, :to => :material, :allow_nil => true
 
   validates :material, :quantity, :brand, :presence => true

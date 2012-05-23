@@ -615,6 +615,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :price_collection_proposals, :except => [:new, :create, :destroy] do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :profiles do
     collection do
       get :modal

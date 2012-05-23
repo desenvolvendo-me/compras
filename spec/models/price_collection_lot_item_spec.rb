@@ -1,10 +1,12 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/price_collection_lot_item'
+require 'app/models/price_collection_proposal_item'
 
 describe PriceCollectionLotItem do
   it { should belong_to :price_collection_lot }
   it { should belong_to :material }
+  it { should have_many(:price_collection_proposal_items).dependent(:destroy) }
 
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }

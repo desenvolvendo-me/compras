@@ -15,6 +15,7 @@ class PriceCollection < ActiveRecord::Base
   belongs_to :payment_method
 
   has_many :price_collection_lots, :dependent => :destroy, :order => :id
+  has_many :price_collection_proposals, :dependent => :destroy, :order => :id
 
   has_many :price_collections_providers, :dependent => :destroy, :order => :id
   has_many :providers, :through => :price_collections_providers
