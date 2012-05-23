@@ -1,0 +1,37 @@
+<%= f.input :report %>
+
+<p>
+  <input type="button" class="button affirmative add_item" value="Adicionar Item">
+</p>
+
+<div id="signature_configuration_items">
+  <%= f.association :signature_configuration_items, :collection => f.object.signature_configuration_items do |s| %>
+    <%= render 'signature_configuration_items/form', :f => s %>
+  <% end %>
+</div>
+
+<%= mustache 'signature_configuration_items_template' do %>
+  <%= f.association :signature_configuration_items_attributes, :collection => f.object.signature_configuration_items.build, :index => '{{uuid_item}}' do |p| %>
+    <%= render 'signature_configuration_items/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#signature_configuration_items_template").nestedForm({
+    add: '.add_item',
+    remove: '.remove_item',
+    target: '#signature_configuration_items',
+    uuid: 'uuid_item',
+    fieldToRemove: '.signature_configuration_item',
+    appendItem: false,
+    right: true
+  });
+
+  $('form.signature_configuration').delegate('.signature', 'change', function (event, signature) {
+    if (signature) {
+      $(this).closest('.signature_configuration_item').find('.position').val(signature.position);
+    } else {
+      $(this).closest('.signature_configuration_item').find('.position').val('');
+    }
+  });
+</script>

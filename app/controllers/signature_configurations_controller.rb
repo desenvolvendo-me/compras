@@ -1,0 +1,2 @@
+class SignatureConfigurationsController < CrudController
+end

@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      signature_configuration_item:
+        one: "Item da Configuração de Assinatura"
+        other: "Item da Configurações de Assinatura"
+
+    attributes:
+      signature_configuration_item:
+        order: "Ordem"
+        signature: "Assinatura"
+        position: "Cargo"

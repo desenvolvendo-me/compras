@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    signature_report:
+      supply_authorizations: "Autorizações de Fornecimento"
+      administrative_processes: "Processos Administrativos"

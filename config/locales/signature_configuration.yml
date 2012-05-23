@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      signature_configuration:
+        one: "Configuração de Assinatura"
+        other: "Configurações de Assinatura"
+
+    attributes:
+      signature_configuration:
+        report: "Relatório"
