@@ -151,18 +151,18 @@ describe LicitationProcess do
     subject.should allow_value(Date.new(2012, 4, 25)).for(:process_date)
   end
 
-  it 'should tell if it can have invitation bidders' do
+  it 'should tell if it allow invitation bidders' do
     subject.stub(:envelope_opening_date).and_return(Date.tomorrow)
 
-    subject.should_not be_can_have_bidders
+    subject.should_not be_allow_bidders
 
     subject.stub(:envelope_opening_date).and_return(Date.current)
 
-    subject.should be_can_have_bidders
+    subject.should be_allow_bidders
 
     subject.stub(:envelope_opening_date).and_return(Date.yesterday)
 
-    subject.should be_can_have_bidders
+    subject.should be_allow_bidders
    end
 
   it 'should return the advice number correctly' do

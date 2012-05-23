@@ -3,7 +3,7 @@
   <%= f.button :submit if f.object.updatable? %>
 
   <%= f.object.decorator.build_accreditation_link %>
-  <%= f.object.decorator.bidders_link if f.object.persisted? && f.object.can_have_bidders? %>
+  <%= f.object.decorator.bidders_link if f.object.persisted? && f.object.allow_bidders? %>
   <%= f.object.decorator.lots_link if f.object.persisted? %>
   <%= f.object.decorator.count_link %>
   <%= f.button :cancel, :href => edit_administrative_process_path(resource.administrative_process) %>

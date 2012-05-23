@@ -86,7 +86,7 @@ class LicitationProcess < ActiveRecord::Base
     judgment_commission_advices.count
   end
 
-  def can_have_bidders?
+  def allow_bidders?
     return unless envelope_opening_date
     envelope_opening_date <= Date.current
   end
@@ -179,7 +179,7 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def assign_bidders_documents
-    return unless can_have_bidders?
+    return unless allow_bidders?
 
     licitation_process_bidders.each(&:assign_document_types)
   end
