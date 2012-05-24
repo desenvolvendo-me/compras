@@ -9,6 +9,8 @@ class Creditor < ActiveRecord::Base
   belongs_to :company_size
   belongs_to :main_cnae, :class_name => 'Cnae'
 
+  delegate :personable_type, :to => :person, :allow_nil => true
+
   validates :person, :presence => true
   validates :social_identification_number_date, 
     :presence => { :if => :social_identification_number? },

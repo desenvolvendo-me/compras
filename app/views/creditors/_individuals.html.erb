@@ -1,0 +1,34 @@
+<div class="tabs">
+  <ul>
+    <li><a href="#creditor-main">Principal</a></li>
+    <li><a href="#creditor-materials">Materiais</a></li>
+    <li><a href="#creditor-accounts">Conta Bancária</a></li>
+    <li><a href="#creditor-balance">Balanço</a></li>
+    <li><a href="#creditor-crc">CRC</a></li>
+    <li><a href="#creditor-administrative-penalty">Sanção Adm / Regularização</a></li>
+  </ul>
+
+  <div id="creditor-main">
+    <%= render 'main', :f => f %>
+  </div>
+
+  <div id="creditor-materials">
+    <%= render 'materials', :f => f %>
+  </div>
+
+  <div id="creditor-accounts">
+    <%= render 'accounts', :f => f %>
+  </div>
+
+  <div id="creditor-balance">
+    <%= render 'balance', :f => f %>
+  </div>
+
+  <div id="creditor-crc">
+    <%= render 'crc', :f => f %>
+  </div>
+
+  <div id="creditor-administrative-penalty">
+    <%= render 'administrative_penalty', :f => f %>
+  </div>
+</div>

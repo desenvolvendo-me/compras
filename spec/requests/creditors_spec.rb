@@ -38,10 +38,13 @@ feature "Creditors" do
     click_link 'Criar Credor'
 
     fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
-    fill_modal 'Porte da empressa', :with => 'Microempresa', :field => 'Nome'
-    check 'Optante pelo simples'
 
-    fill_modal 'CNAE principal', :with => '4712100', :field => 'Código'
+    within_tab 'Principal' do
+      fill_modal 'Porte da empressa', :with => 'Microempresa', :field => 'Nome'
+      check 'Optante pelo simples'
+
+      fill_modal 'CNAE principal', :with => '4712100', :field => 'Código'
+    end
 
     click_button 'Salvar'
 
@@ -50,9 +53,12 @@ feature "Creditors" do
     click_link 'Nohup'
 
     page.should have_field 'Pessoa', :with => 'Nohup'
-    page.should have_field 'Porte da empressa', :with => 'Microempresa'
-    page.should have_checked_field 'Optante pelo simples'
-    page.should have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
+
+    within_tab 'Principal' do
+      page.should have_field 'Porte da empressa', :with => 'Microempresa'
+      page.should have_checked_field 'Optante pelo simples'
+      page.should have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
+    end
   end
 
   scenario 'create a new creditor when people is individual' do
@@ -66,12 +72,14 @@ feature "Creditors" do
     click_link 'Criar Credor'
 
     fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
-    fill_modal 'CBO', :with => 'MEMBROS DAS FORÇAS ARMADAS', :field => 'Nome'
-    check 'Admnistração pública municipal'
-    check 'Autônomo'
-    fill_in 'PIS/PASEP', :with => '123456'
-    fill_in 'Início do contrato', :with => '05/04/2012'
 
+    within_tab 'Principal' do
+      fill_modal 'CBO', :with => 'MEMBROS DAS FORÇAS ARMADAS', :field => 'Nome'
+      check 'Admnistração pública municipal'
+      check 'Autônomo'
+      fill_in 'PIS/PASEP', :with => '123456'
+      fill_in 'Início do contrato', :with => '05/04/2012'
+    end
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -79,11 +87,14 @@ feature "Creditors" do
     click_link 'Gabriel Sobrinho'
 
     page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
-    page.should have_field 'CBO', :with => '01 - MEMBROS DAS FORÇAS ARMADAS'
-    page.should have_checked_field 'Admnistração pública municipal'
-    page.should have_checked_field 'Autônomo'
-    page.should have_field 'PIS/PASEP', :with => '123456'
-    page.should have_field 'Início do contrato', :with => '05/04/2012'
+
+    within_tab 'Principal' do
+      page.should have_field 'CBO', :with => '01 - MEMBROS DAS FORÇAS ARMADAS'
+      page.should have_checked_field 'Admnistração pública municipal'
+      page.should have_checked_field 'Autônomo'
+      page.should have_field 'PIS/PASEP', :with => '123456'
+      page.should have_field 'Início do contrato', :with => '05/04/2012'
+    end
   end
 
   scenario 'update a creditor when people is special entry' do
@@ -119,10 +130,13 @@ feature "Creditors" do
     click_link 'Nohup'
 
     fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
-    fill_modal 'Porte da empressa', :with => 'Empresa de grande porte', :field => 'Nome'
-    uncheck 'Optante pelo simples'
 
-    fill_modal 'CNAE principal', :with => '7739099', :field => 'Código'
+    within_tab 'Principal' do
+      fill_modal 'Porte da empressa', :with => 'Empresa de grande porte', :field => 'Nome'
+      uncheck 'Optante pelo simples'
+
+      fill_modal 'CNAE principal', :with => '7739099', :field => 'Código'
+    end
 
     click_button 'Salvar'
 
@@ -131,9 +145,12 @@ feature "Creditors" do
     click_link 'Nohup'
 
     page.should have_field 'Pessoa', :with => 'Nohup'
-    page.should have_field 'Porte da empressa', :with => 'Empresa de grande porte'
-    page.should have_unchecked_field 'Optante pelo simples'
-    page.should have_field 'CNAE principal', :with => 'Aluguel de outras máquinas'
+
+    within_tab 'Principal' do
+      page.should have_field 'Porte da empressa', :with => 'Empresa de grande porte'
+      page.should have_unchecked_field 'Optante pelo simples'
+      page.should have_field 'CNAE principal', :with => 'Aluguel de outras máquinas'
+    end
   end
 
   scenario 'update a creditor when people is individual' do
@@ -148,9 +165,12 @@ feature "Creditors" do
     click_link 'Gabriel Sobrinho'
 
     fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
-    fill_modal 'CBO', :with => 'Engenheiro', :field => 'Nome'
-    fill_in 'PIS/PASEP', :with => '6789'
-    fill_mask 'Início do contrato', :with => '05/04/2011'
+
+    within_tab 'Principal' do
+      fill_modal 'CBO', :with => 'Engenheiro', :field => 'Nome'
+      fill_in 'PIS/PASEP', :with => '6789'
+      fill_mask 'Início do contrato', :with => '05/04/2011'
+    end
 
     click_button 'Salvar'
 
@@ -159,11 +179,14 @@ feature "Creditors" do
     click_link 'Wenderson Malheiros'
 
     page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
-    page.should have_field 'CBO', :with => '214 - Engenheiro'
-    page.should have_unchecked_field 'Admnistração pública municipal'
-    page.should have_unchecked_field 'Autônomo'
-    page.should have_field 'PIS/PASEP', :with => '6789'
-    page.should have_field 'Início do contrato', :with => '05/04/2011'
+
+    within_tab 'Principal' do
+      page.should have_field 'CBO', :with => '214 - Engenheiro'
+      page.should have_unchecked_field 'Admnistração pública municipal'
+      page.should have_unchecked_field 'Autônomo'
+      page.should have_field 'PIS/PASEP', :with => '6789'
+      page.should have_field 'Início do contrato', :with => '05/04/2011'
+    end
   end
 
   scenario 'destroy an existent creditor' do

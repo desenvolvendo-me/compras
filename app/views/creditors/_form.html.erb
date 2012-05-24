@@ -1,9 +1,70 @@
 <%= f.input :person %>
-<%= f.input :occupation_classification %>
-<%= f.input :municipal_public_administration %>
-<%= f.input :autonomous %>
-<%= f.input :social_identification_number %>
-<%= f.input :social_identification_number_date %>
-<%= f.input :company_size %>
-<%= f.input :choose_simple %>
-<%= f.input :main_cnae %>
+
+<%= f.input :personable_type, :as => :hidden %>
+
+<div id="creditor-tabs">
+</div>
+
+<%= mustache 'individual-template' do %>
+  <%= render 'individuals', :f => f %>
+<% end %>
+
+<%= mustache 'company-template' do %>
+  <%= render 'companies', :f => f %>
+<% end %>
+
+<%= mustache 'special-entry-template' do %>
+  <%= render 'special_entries', :f => f %>
+<% end %>
+
+<script>
+  $('#creditor_person_id').change(function (event, people) {
+    if (people) {
+      $('#creditor_personable_type').val(people.personable_type);
+    } else {
+      $('#creditor_personable_type').val('');
+    }
+  });
+
+  function hideFieldsExceptIndividualFields(){
+    $('#creditor_company_size').parent().hide();
+    $('#creditor_choose_simple').parent().hide();
+    $('#creditor_main_cnae').parent().hide();
+  };
+
+  function hideFieldsExceptCompanyFields(){
+    $('#creditor_occupation_classification').parent().hide();
+    $('#creditor_municipal_public_administration').parent().parent().hide();
+    $('#creditor_autonomous').parent().hide();
+    $('#creditor_social_identification_number').parent().hide();
+    $('#creditor_social_identification_number_date').parent().hide();
+  };
+
+  function hideFieldsExceptSpecialEntryFields(){
+  };
+
+  function renderPartial(){
+    switch ($('#creditor_personable_type').val()){
+      case 'Individual':
+        $("#creditor-tabs").html($("#individual-template").mustache());
+        hideFieldsExceptIndividualFields();
+        break;
+      case 'Company':
+        $("#creditor-tabs").html($("#company-template").mustache());
+        hideFieldsExceptCompanyFields();
+        break;
+      case 'SpecialEntry':
+        $("#creditor-tabs").html($("#special-entry-template").mustache());
+        hideFieldsExceptSpecialEntryFields();
+        break;
+    }
+  };
+
+  $("#creditor_person_id").change(function () {
+    renderPartial();
+    loadTabs();
+  });
+
+  renderPartial();
+
+</script>
