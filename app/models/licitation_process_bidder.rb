@@ -15,7 +15,6 @@ class LicitationProcessBidder < ActiveRecord::Base
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true
   delegate :invited?, :to => :administrative_process, :prefix => true
-  delegate :judgment_form_best_technique?, :judgment_form_technical_and_price?, :to => :administrative_process, :allow_nil => true
   delegate :licitation_process_lots, :to => :licitation_process
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
@@ -105,6 +104,8 @@ class LicitationProcessBidder < ActiveRecord::Base
   end
 
   def validate_technical_score?
-    judgment_form_best_technique? || judgment_form_technical_and_price?
+    return unless administrative_process.present?
+
+    administrative_process.judgment_form_best_technique? || administrative_process.judgment_form_technical_and_price?
   end
 end
