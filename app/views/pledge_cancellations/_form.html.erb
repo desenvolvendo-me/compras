@@ -116,13 +116,6 @@
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
           forceValueWhenTotalIsKind();
-
-          if (pledgeId != pledge.id) {
-            $('#pledge_cancellation_pledge_parcel').attr('data-modal-url', pledgeExpirationUrl());
-            $('#pledge_cancellation_expiration_date').val('');
-            $('#pledge_cancellation_pledge_parcel_id').val('');
-            $('#pledge_cancellation_pledge_parcel_value').val('');
-          }
         } else {
           $('#pledge_cancellation_pledge_parcel').attr('data-modal-url', '<%= modal_pledge_parcels_path %>');
           $('#pledge_cancellation_emission_date').val('');
