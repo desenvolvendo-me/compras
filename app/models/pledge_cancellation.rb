@@ -40,7 +40,7 @@ class PledgeCancellation < ActiveRecord::Base
   end
 
   def to_s
-    "#{id}"
+    id.to_s
   end
 
   protected
