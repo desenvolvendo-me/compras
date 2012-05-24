@@ -35,8 +35,6 @@ feature "PledgeLiquidations" do
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '200,00'
 
     within '#parcel_1' do
       page.should have_content '1'
@@ -74,8 +72,6 @@ feature "PledgeLiquidations" do
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '200,00'
     page.should have_disabled_field 'Objeto do empenho'
     page.should have_field 'Objeto do empenho', :with => 'Descricao'
 
@@ -100,8 +96,6 @@ feature "PledgeLiquidations" do
     page.should have_field 'Empenho', :with => ''
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => ''
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => ''
     page.should have_disabled_field 'Objeto do empenho'
     page.should have_field 'Objeto do empenho', :with => ''
   end
@@ -207,8 +201,6 @@ feature "PledgeLiquidations" do
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '9,99'
 
     page.should have_field 'Valor a ser liquidado', :with => '1,00'
     page.should have_select 'Tipo de liquidação', :selected => 'Parcial'
