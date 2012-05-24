@@ -353,7 +353,7 @@ feature "AdministrativeProcesses" do
     page.should have_notice 'Processo Administrativo liberado com sucesso'
   end
 
-  scenario "should have a cancel button when editing an administrative process with status waiting" do
+  scenario "should have a annul button when editing an administrative process with status waiting" do
     AdministrativeProcess.make!(:compra_aguardando)
 
     click_link 'Processos'
