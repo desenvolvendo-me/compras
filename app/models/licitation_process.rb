@@ -142,20 +142,12 @@ class LicitationProcess < ActiveRecord::Base
   end
 
   def last_process_of_self_year
-    last_by_self_year.try(:process).to_i
-  end
-
-  def last_by_self_year
-    self.class.where { |p| p.year.eq(year) }.order { id }.last
+    self.class.where { self.year.eq(year) }.maximum(:process).to_i
   end
 
   def last_licitation_number_of_self_year_and_modality
-    last_by_self_year_and_modality.try(:licitation_number).to_i
-  end
-
-  def last_by_self_year_and_modality
-    self.class.where { |p| p.year.eq(year) & p.modality.eq(modality) }.
-               order { id }.last
+    self.class.where { self.year.eq(year) & self.modality.eq(modality) }.
+               maximum(:licitation_number).to_i
   end
 
   def total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
