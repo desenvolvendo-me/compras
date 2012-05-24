@@ -11,7 +11,7 @@ class PledgeCancellation < ActiveRecord::Base
   has_many :pledge_parcel_modifications, :dependent => :restrict, :as => :pledge_parcel_modificator
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
-  delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
+  delegate :balance, :to => :pledge, :prefix => true, :allow_nil => true
 
   validates :pledge, :date, :kind, :reason, :value, :entity, :presence => true
   validates :year, :presence => true

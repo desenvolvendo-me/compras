@@ -11,7 +11,6 @@ pt-BR:
         year: "Ano"
         pledge: "Empenho"
         emission_date: "Data de emissão"
-        pledge_value: "Valor do empenho"
         pledge_parcel: "Parcela"
         expiration_date: "Vencimento"
         pledge_parcel_value: "Valor do vencimento"
