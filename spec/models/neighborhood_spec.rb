@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'model_helper'
 require 'app/models/neighborhood'
 require 'app/models/address'
@@ -23,4 +24,23 @@ describe Neighborhood do
   it { should validate_presence_of :name }
   it { should validate_presence_of :city }
 
+  context "with streets" do
+    let :streets do
+      [ double('street') ]
+    end
+
+    it "should not destroy if has streets" do
+      subject.stub(:streets => streets)
+
+      subject.run_callbacks(:destroy)
+
+      subject.errors[:base].should include "não pode ter relacionamento com rua"
+    end
+  end
+
+  it "should destroy if does not have streets" do
+    subject.run_callbacks(:destroy)
+
+    subject.errors[:base].should_not include "não pode ter relacionamento com rua"
+  end
 end

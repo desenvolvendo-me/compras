@@ -259,6 +259,7 @@ pt-BR:
       cannot_have_regulatory_act_relationship: "não pode ter relacionamento com ato regulamentador"
       cannot_have_licitation_process_relationship: "não pode ter relacionamento com processo licitatório"
       cannot_have_licitation_object_relationship: "não pode ter relacionamento com objeto da licitação"
+      cannot_have_street_relationship: "não pode ter relacionamento com rua"
 
   activerecord:
     errors:

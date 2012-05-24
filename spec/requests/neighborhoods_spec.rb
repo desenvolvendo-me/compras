@@ -83,4 +83,18 @@ feature "Neighborhoods" do
 
     page.should_not have_content 'Centro'
   end
+
+  scenario 'cannot destroy a neighborhood with streets' do
+    Street.make!(:girassol)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Bairros'
+
+    click_link 'Centro'
+
+    click_link 'Apagar', :confirm => true
+
+    page.should_not have_notice 'Bairro apagado com sucesso.'
+  end
 end

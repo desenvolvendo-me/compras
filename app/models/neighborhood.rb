@@ -12,6 +12,8 @@ class Neighborhood < ActiveRecord::Base
   validates :name, :uniqueness => { :scope => :city_id, :allow_blank => true }
   validates :city, :name, :presence => true
 
+  before_destroy :validate_street_relationship
+
   orderize
   filterize
 
@@ -21,5 +23,15 @@ class Neighborhood < ActiveRecord::Base
 
   def to_s
     name.to_s
+  end
+
+  protected
+
+  def validate_street_relationship
+    return unless streets.any?
+
+    errors.add(:base, :cannot_have_street_relationship)
+
+    false
   end
 end
