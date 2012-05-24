@@ -9,12 +9,16 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
     <%= f.input :pledge %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
     <%= f.input :emission_date, :disabled => true, :input_html => { :value => f.object.decorator.emission_date } %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :pledge_value, :disabled => true, :input_html => { :value => f.object.decorator.pledge_value } %>
   </div>
 </div>
 
@@ -94,12 +98,14 @@
       $('#pledge_liquidation_pledge_id').change(function (event, pledge) {
         if (pledge) {
           $('#pledge_liquidation_emission_date').val(pledge.emission_date);
+          $('#pledge_liquidation_pledge_value').val(pledge.pledge_value);
           $('#pledge_liquidation_description').val(pledge.description);
 
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
         } else {
           $('#pledge_liquidation_emission_date').val('');
+          $('#pledge_liquidation_pledge_value').val('');
           $('#pledge_liquidation_expiration_date').val('');
           $('#pledge_liquidation_balance').val('');
           $('#pledge_liquidation_description').val('');
