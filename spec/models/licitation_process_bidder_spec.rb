@@ -156,4 +156,28 @@ describe LicitationProcessBidder do
     subject.stub(:licitation_process_lots).and_return( Array.new )
     subject.should be_can_update_proposals
   end
+
+  context "with licitation_process" do
+    before do
+      subject.stub(:licitation_process => licitation_process)
+    end
+
+    let :licitation_process do
+      double('licitation_process', :administrative_process => nil)
+    end
+
+    it "should not allow changes if licitation_process does not allow_bidders" do
+      licitation_process.stub(:allow_bidders?).and_return(false)
+
+      subject.valid?
+      subject.errors[:licitation_process].should include "deve ser a data da abertura do envelope do processo licitatório"
+    end
+
+    it "shuld allow changes if licitation_process allow bidders" do
+      licitation_process.stub(:allow_bidders?).and_return(true)
+
+      subject.valid?
+      subject.errors[:licitation_process].should_not include "deve ser a data da abertura do envelope do processo licitatório"
+    end
+  end
 end

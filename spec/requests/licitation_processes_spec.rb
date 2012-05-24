@@ -477,22 +477,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'should not have bidders link when envelope opening date is tomorrow' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    page.should_not have_link 'Licitantes'
-  end
-
   scenario 'change document types to ensure that the changes are reflected on bidder documents' do
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)

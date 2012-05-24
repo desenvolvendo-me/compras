@@ -27,6 +27,7 @@ class LicitationProcessBidder < ActiveRecord::Base
   validates :protocol, :protocol_date, :receipt_date, :presence => true, :if => :invited
   validates :provider_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
   validates :technical_score, :presence => true, :if => :validate_technical_score?
+  validate :validate_licitaton_process_envelope_opening_date
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :protocol_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create, :if => :invited }
@@ -86,6 +87,14 @@ class LicitationProcessBidder < ActiveRecord::Base
   end
 
   protected
+
+  def validate_licitaton_process_envelope_opening_date
+    return if licitation_process.nil?
+
+    unless licitation_process.allow_bidders?
+      errors.add(:licitation_process, :must_be_the_licitation_process_envelope_opening_date)
+    end
+  end
 
   def clear_invited_data
     unless invited?

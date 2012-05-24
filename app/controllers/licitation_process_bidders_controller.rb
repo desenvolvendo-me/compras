@@ -1,11 +1,9 @@
 class LicitationProcessBiddersController < CrudController
   belongs_to :licitation_process
 
-  def new
-    unless parent.envelope_opening?
-      return render :file => "public/401", :layout => nil, :status => 401
-    end
+  before_filter :block_not_allow_bidders, :only => [ :new, :create, :update, :destroy ]
 
+  def new
     object = build_resource
     object.build_documents
     LicitationProcessBidderProposalBuilder.new(object).build!
@@ -31,5 +29,11 @@ class LicitationProcessBiddersController < CrudController
     return unless object.envelope_opening?
 
     super
+  end
+
+  def block_not_allow_bidders
+    unless parent.allow_bidders?
+      return render :file => "public/401", :layout => nil, :status => 401
+    end
   end
 end

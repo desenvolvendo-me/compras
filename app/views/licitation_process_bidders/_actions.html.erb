@@ -3,7 +3,7 @@
     <li>
       <%= link_to 'Voltar ao processo licitatório', edit_licitation_process_path(parent) %>
     </li>
-    <% if parent.envelope_opening? %>
+    <% if parent.allow_bidders? %>
       <li>
         <%= create_link %>
       </li>

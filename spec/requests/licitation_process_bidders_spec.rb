@@ -710,4 +710,50 @@ feature "LicitationProcessBidders" do
 
     page.should_not have_field 'Pontuação técnica'
   end
+
+  scenario "Save and destroy buttons should not be shown if licitation process envelope opening date is not today" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_button 'Salvar'
+    page.should_not have_link 'Apagar'
+  end
+
+  scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_button 'Salvar'
+    page.should have_link 'Apagar'
+  end
 end

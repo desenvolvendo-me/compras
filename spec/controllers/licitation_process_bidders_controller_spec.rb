@@ -48,11 +48,18 @@ describe LicitationProcessBiddersController do
     end
 
     it 'should save when envelope opening date is today' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-
-      LicitationProcessBidder.any_instance.should_receive(:save).once
+      licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
 
       post :create, :licitation_process_id => licitation_process.id
+    end
+
+    it 'should redirect to 401 when can not create a bidder' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+      post :create, :licitation_process_id => licitation_process.id
+
+      response.code.should eq '401'
+      response.body.should =~ /Você não tem acesso a essa página/
     end
   end
 
@@ -73,6 +80,26 @@ describe LicitationProcessBiddersController do
       LicitationProcessBidder.any_instance.should_receive(:save).once
 
       put :update, :id => bidder.id, :licitation_process_id => licitation_process.id
+    end
+
+    it 'should redirect to 401 when can not update a bidder' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+      put :update, :licitation_process_id => licitation_process.id
+
+      response.code.should eq '401'
+      response.body.should =~ /Você não tem acesso a essa página/
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'should redirect to 401 when can not destroy a bidder' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+      delete :destroy, :licitation_process_id => licitation_process.id
+
+      response.code.should eq '401'
+      response.body.should =~ /Você não tem acesso a essa página/
     end
   end
 end

@@ -1,0 +1,6 @@
+<div class="buttons">
+  <%= f.button :submit if parent.allow_bidders? %>
+  <%= f.button :cancel %>
+  <%= f.button :destroy if parent.allow_bidders? && f.object.persisted? %>
+</div>
+

@@ -162,7 +162,7 @@ describe LicitationProcess do
 
     subject.stub(:envelope_opening_date).and_return(Date.yesterday)
 
-    subject.should be_allow_bidders
+    subject.should_not be_allow_bidders
    end
 
   it 'should return the advice number correctly' do

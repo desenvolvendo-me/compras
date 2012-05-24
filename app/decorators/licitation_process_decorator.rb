@@ -19,10 +19,6 @@ class LicitationProcessDecorator < Decorator
     end
   end
 
-  def bidders_link
-    helpers.link_to('Licitantes', routes.licitation_process_licitation_process_bidders_path(component), :class => "button primary")
-  end
-
   def count_link
     helpers.link_to('Apurar', routes.licitation_process_path(component), :class => "button primary") if component.envelope_opening?
   end
