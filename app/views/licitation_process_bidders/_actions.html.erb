@@ -1,9 +1,9 @@
 <div class="actions">
   <ul>
     <li>
-      <%= link_to 'Voltar ao processo licitatório', edit_licitation_process_path(params[:licitation_process_id]) %>
+      <%= link_to 'Voltar ao processo licitatório', edit_licitation_process_path(parent) %>
     </li>
-    <% if @licitation_process.envelope_opening? %>
+    <% if parent.envelope_opening? %>
       <li>
         <%= create_link %>
       </li>
