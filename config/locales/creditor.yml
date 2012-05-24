@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      creditor:
+        one: "Credor"
+        other: "Credores"
+
+    attributes:
+      creditor:
+        person: "Pessoa"
+        occupation_classification: "CBO"
+        municipal_public_administration: "Admnistração pública municipal"
+        autonomous: "Autônomo"
+        social_identification_number: "PIS/PASEP"
+        social_identification_number_date: "Início do contrato"
+        company_size: "Porte da empressa"
+        choose_simple: "Optante pelo simples"
+        main_cnae: "CNAE principal"

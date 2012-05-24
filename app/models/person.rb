@@ -9,6 +9,7 @@ class Person < ActiveRecord::Base
   has_many :licitation_process_impugnments, :dependent => :restrict
   has_many :licitation_process_appeals, :dependent => :restrict
   has_many :partners, :dependent => :destroy
+  has_many :creditors, :dependent => :restrict
 
   has_one :employee
 

@@ -6,6 +6,7 @@ class Cnae < ActiveRecord::Base
   belongs_to :risk_degree
 
   has_many :providers, :dependent => :restrict
+  has_many :creditors, :dependent => :restrict, :foreign_key => :main_cnae_id
 
   validates :name, :code, :presence => true
 
