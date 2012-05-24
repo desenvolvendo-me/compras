@@ -12,4 +12,24 @@ describe DisseminationSource do
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :communication_source }
+
+  context "with regulatory_acts" do
+    let :regulatory_acts do
+      [ double('regulatory_act') ]
+    end
+
+    it "should not destroy if has association with regulatory_acts" do
+      subject.stub(:regulatory_acts => regulatory_acts)
+
+      subject.run_callbacks(:destroy)
+
+      subject.errors[:base].should include "não pode ter relacionamento com ato regulamentador"
+    end
+  end
+
+  it "should destroy if does not have relationship with regulatory_acts" do
+    subject.run_callbacks(:destroy)
+
+    subject.errors[:base].should_not include "não pode ter relacionamento com ato regulamentador"
+  end
 end

@@ -87,4 +87,18 @@ feature "DisseminationSources" do
     page.should_not have_content 'Jornal Oficial do Município'
     page.should_not have_content 'Jornal de Circulação Municipal'
   end
+
+  scenario 'cannot destroy an existent dissemination_source with regulatory_act relationship' do
+    RegulatoryAct.make!(:sopa)
+
+    click_link 'Solicitações'
+
+    click_link 'Fontes de Divulgação'
+
+    click_link 'Jornal Oficial do Bairro'
+
+    click_link 'Apagar', :confirm => true
+
+    page.should_not have_notice 'Fonte de Divulgação apagado com sucesso.'
+  end
 end

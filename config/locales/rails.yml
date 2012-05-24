@@ -256,6 +256,7 @@ pt-BR:
       must_be_equal_precatory_value: "deve ser igual ao valor do precatório"
       status_must_be_released: "o status deve ser liberado"
       already_have_a_licitation_process: "já tem um processo licitatório"
+      cannot_have_regulatory_act_relationship: "não pode ter relacionamento com ato regulamentador"
 
   activerecord:
     errors:

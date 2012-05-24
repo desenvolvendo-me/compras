@@ -8,10 +8,22 @@ class DisseminationSource < ActiveRecord::Base
   validates :description, :communication_source, :presence => true
   validates :description, :uniqueness => { :allow_blank => true }
 
+  before_destroy :validate_regulatory_act_relationship
+
   filterize
   orderize :description
 
   def to_s
     description
+  end
+
+  protected
+
+  def validate_regulatory_act_relationship
+    return unless regulatory_acts.any?
+
+    errors.add(:base, :cannot_have_regulatory_act_relationship)
+
+    false
   end
 end
