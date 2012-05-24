@@ -171,6 +171,20 @@ feature "Materials" do
     page.should_not have_content 'Antivirus'
   end
 
+  scenario 'cannot destroy an existent material with licitation_objects' do
+    LicitationObject.make!(:ponte)
+
+    click_link 'Solicitações'
+
+    click_link 'Materiais'
+
+    click_link 'Antivirus'
+
+    click_link 'Apagar', :confirm => true
+
+    page.should_not have_notice 'Material apagado com sucesso.'
+  end
+
   scenario 'should validate uniqueness of name' do
     Material.make!(:antivirus)
 

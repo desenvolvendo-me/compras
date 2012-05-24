@@ -32,6 +32,8 @@ class Material < ActiveRecord::Base
 
   before_save :clean_unnecessary_type
 
+  before_destroy :validate_licitation_object_relationship
+
   orderize :description
   filterize
 
@@ -58,5 +60,13 @@ class Material < ActiveRecord::Base
     elsif service?
       self.material_type = nil
     end
+  end
+
+  def validate_licitation_object_relationship
+    return unless licitation_objects.any?
+
+    errors.add(:base, :cannot_have_licitation_object_relationship)
+
+    false
   end
 end

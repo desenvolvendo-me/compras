@@ -56,4 +56,24 @@ describe Material do
   it "should have false as the default value of combustible" do
     subject.combustible.should eq false
   end
+
+  context "with licitation_object" do
+    let :licitation_objects do
+      [ double('licitation_object') ]
+    end
+
+    it "should not destroy if has licitation_processes" do
+      subject.stub(:licitation_objects => licitation_objects)
+
+      subject.run_callbacks(:destroy)
+
+      subject.errors[:base].should include "não pode ter relacionamento com objeto da licitação"
+    end
+  end
+
+  it "should destroy if does not have licitation_processes" do
+    subject.run_callbacks(:destroy)
+
+    subject.errors[:base].should_not include "não pode ter relacionamento com objeto da licitação"
+  end
 end

@@ -258,6 +258,7 @@ pt-BR:
       already_have_a_licitation_process: "já tem um processo licitatório"
       cannot_have_regulatory_act_relationship: "não pode ter relacionamento com ato regulamentador"
       cannot_have_licitation_process_relationship: "não pode ter relacionamento com processo licitatório"
+      cannot_have_licitation_object_relationship: "não pode ter relacionamento com objeto da licitação"
 
   activerecord:
     errors:
