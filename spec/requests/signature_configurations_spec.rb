@@ -38,6 +38,7 @@ feature "SignatureConfigurations" do
     page.should have_select 'Relatório', :selected => 'Autorizações de Fornecimento'
     page.should have_field 'Assinatura', :with => 'Gabriel Sobrinho'
     page.should have_field 'Ordem', :with => '1'
+    page.should have_disabled_field 'Cargo'
     page.should have_field 'Cargo', :with => 'Gerente'
   end
 
@@ -89,6 +90,7 @@ feature "SignatureConfigurations" do
       click_record 'Gerente'
     end
 
+    page.should have_disabled_field 'Cargo'
     page.should have_field 'Cargo', :with => 'Gerente'
 
     clear_modal 'Assinatura'
@@ -129,6 +131,7 @@ feature "SignatureConfigurations" do
 
     page.should have_select 'Relatório', :selected => 'Processos Administrativos'
     page.should have_field 'Assinatura', :with => 'Wenderson Malheiros'
+    page.should have_disabled_field 'Cargo'
     page.should have_field 'Ordem', :with => '1'
   end
 
