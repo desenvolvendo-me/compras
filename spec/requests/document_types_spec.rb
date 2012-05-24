@@ -49,6 +49,20 @@ feature "DocumentTypes" do
   end
 
   scenario 'destroy an existent document_type' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Contabilidade'
+
+    click_link 'Tipos de Documento'
+
+    click_link 'Fiscal'
+
+    click_link 'Apagar', :confirm => true
+
+    page.should_not have_notice 'Tipo de Documento apagado com sucesso.'
+  end
+
+  scenario 'destroy an existent document_type' do
     DocumentType.make!(:fiscal)
     click_link 'Contabilidade'
 

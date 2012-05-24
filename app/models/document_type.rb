@@ -10,10 +10,22 @@ class DocumentType < ActiveRecord::Base
   validates :description, :uniqueness => { :allow_blank => true }
   validates :validity, :numericality => { :allow_blank => true }
 
+  before_destroy :validate_licitation_process_relationship
+
   orderize :description
   filterize
 
   def to_s
     description
+  end
+
+  protected
+
+  def validate_licitation_process_relationship
+    return unless licitation_processes.any?
+
+    errors.add(:base, :cannot_have_licitation_process_relationship)
+
+    false
   end
 end

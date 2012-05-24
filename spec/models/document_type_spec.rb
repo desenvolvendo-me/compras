@@ -19,4 +19,24 @@ describe DocumentType do
   it { should have_many(:provider_licitation_documents).dependent(:restrict) }
   it { should have_many(:licitation_process_bidder_documents).dependent(:restrict) }
   it { should have_and_belong_to_many(:licitation_processes) }
+
+  context "with licitation_process" do
+    let :licitation_processes do
+      [ double("licitation_process") ]
+    end
+
+    it "should not destroy if has relationship with licitation_process" do
+      subject.stub(:licitation_processes => licitation_processes)
+
+      subject.run_callbacks(:destroy)
+
+      subject.errors[:base].should include "não pode ter relacionamento com processo licitatório"
+    end
+  end
+
+  it "should destroy if does not have relationship with licitation_process" do
+    subject.run_callbacks(:destroy)
+
+    subject.errors[:base].should_not include "não pode ter relacionamento com processo licitatório"
+  end
 end
