@@ -110,6 +110,9 @@
       $('#pledge_cancellation_pledge_id').change(function (event, pledge) {
         if (pledge) {
           $('#pledge_cancellation_emission_date').val(pledge.emission_date);
+          $('#pledge_value').html(pledge.pledge_value_as_currency);
+          $('#pledge_cancellations_sum').html(pledge.pledge_cancellations_sum);
+          $('#pledge_balance').html(pledge.balance_as_currency);
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
           forceValueWhenTotalIsKind();
@@ -126,6 +129,9 @@
           $('#pledge_cancellation_pledge_parcel').val('');
           $('#pledge_cancellation_expiration_date').val('');
           $('#pledge_cancellation_balance').val('');
+          $('#pledge_balance').html('');
+          $('#pledge_value').html('');
+          $('#pledge_cancellations_sum').html('');
           clearExistingPledgeParcels();
           pledgeValue = null;
         }

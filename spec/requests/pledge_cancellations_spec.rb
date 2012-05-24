@@ -55,6 +55,10 @@ feature "PledgeCancellations" do
       find('.balance').should have_content 'R$ 50,00'
     end
 
+    page.find('#pledge_value').should have_content 'R$ 200,00'
+    page.find('#pledge_cancellations_sum').should have_content 'R$ 150,00'
+    page.find('#pledge_balance').should have_content 'R$ 50,00'
+
     page.should have_field 'Valor a ser anulado', :with => '150,00'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
@@ -83,6 +87,10 @@ feature "PledgeCancellations" do
       find('.canceled_value').should have_content 'R$ 0,00'
       find('.balance').should have_content 'R$ 9,99'
     end
+
+    page.find('#pledge_value').should have_content 'R$ 9,99'
+    page.find('#pledge_cancellations_sum').should have_content 'R$ 0,00'
+    page.find('#pledge_balance').should have_content 'R$ 9,99'
 
     clear_modal 'Empenho'
     page.should have_disabled_field 'Data de emissão'

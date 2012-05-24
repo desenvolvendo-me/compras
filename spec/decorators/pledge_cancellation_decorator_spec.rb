@@ -26,4 +26,25 @@ describe PledgeCancellationDecorator do
 
     subject.balance.should eq '9,99'
   end
+
+  it 'should return pledge_value' do
+    component.stub(:pledge_value).and_return(10.0)
+    helpers.stub(:number_to_currency).with(10.0).and_return('R$ 10,00')
+
+    subject.pledge_value.should eq 'R$ 10,00'
+  end
+
+  it 'should return pledge_balance' do
+    component.stub(:pledge_balance).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.pledge_balance.should eq 'R$ 100,00'
+  end
+
+  it 'should return pledge_cancellations_sum' do
+    component.stub(:pledge_cancellations_sum).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.pledge_cancellations_sum.should eq 'R$ 100,00'
+  end
 end

@@ -10,4 +10,16 @@ class PledgeCancellationDecorator < Decorator
   def balance
     helpers.number_with_precision(component.balance) if component.balance
   end
+
+  def pledge_balance
+    helpers.number_to_currency super if super
+  end
+
+  def pledge_value
+    helpers.number_to_currency component.pledge_value if component.pledge_value
+  end
+
+  def pledge_cancellations_sum
+    helpers.number_to_currency super if super
+  end
 end
