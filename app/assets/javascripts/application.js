@@ -10,6 +10,7 @@
 //= require simple_form.decimal_input
 //= require simple_form.masked_input
 //= require simple_form.modal_input
+//= require simple_form.numeric_input
 //= require simple_form.nested_form
 //= require rails
 //= require tributario
