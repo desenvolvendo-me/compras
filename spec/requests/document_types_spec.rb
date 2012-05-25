@@ -48,7 +48,7 @@ feature "DocumentTypes" do
     page.should have_field 'Descrição', :with => 'Oficial'
   end
 
-  scenario 'destroy an existent document_type' do
+  scenario 'cannot destroy an existent document_type with licitation_process relationship' do
     LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Contabilidade'
