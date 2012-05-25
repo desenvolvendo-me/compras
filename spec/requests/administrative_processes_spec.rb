@@ -447,7 +447,6 @@ feature "AdministrativeProcesses" do
 
     click_link 'Processos Administrativos'
 
-
     click_link 'Criar Processo Administrativo'
 
     page.should_not have_button 'Anular'
