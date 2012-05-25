@@ -703,7 +703,7 @@ feature "LicitationProcessBidders" do
   end
 
   scenario "index shoud have title Licitantes do Processo Licitatório 1/2013" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcess.make!(:processo_licitatorio_computador)
 
     click_link 'Processos'
 
