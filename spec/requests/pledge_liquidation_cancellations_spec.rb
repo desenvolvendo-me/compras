@@ -38,8 +38,6 @@ feature "PledgeLiquidationCancellations" do
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '200,00'
 
     within '#parcel_1' do
       page.should have_content '1'
@@ -80,8 +78,6 @@ feature "PledgeLiquidationCancellations" do
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => '200,00'
 
     within '#parcel_1' do
       page.should have_content '1'
@@ -105,8 +101,6 @@ feature "PledgeLiquidationCancellations" do
     page.should have_field 'Empenho', :with => ''
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => ''
-    page.should have_disabled_field 'Valor do empenho'
-    page.should have_field 'Valor do empenho', :with => ''
 
     within '#pledge_parcels' do
       page.should_not have_content '1'

@@ -3,10 +3,6 @@ class PledgeLiquidationCancellationDecorator < Decorator
     helpers.l(component.emission_date) if component.emission_date
   end
 
-  def pledge_value
-    helpers.number_with_precision(component.pledge_value) if component.pledge_value
-  end
-
   def expiration_date
     helpers.l(component.expiration_date) if component.expiration_date
   end
