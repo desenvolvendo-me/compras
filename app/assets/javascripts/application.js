@@ -16,6 +16,7 @@
 //= require currency_manipulation
 //= require date
 //= require modal_info_link
+//= require jquery.singlemask
 //= require tabs
 
 $(':input[data-property-id]').live('change', function() {
