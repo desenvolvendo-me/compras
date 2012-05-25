@@ -91,6 +91,10 @@ class Pledge < ActiveRecord::Base
     pledge_liquidations.sum(:value)
   end
 
+  def liquidation_value
+    pledge_liquidations_sum - pledge_liquidation_cancellations_sum
+  end
+
   def pledge_cancellations_sum
     pledge_cancellations.sum(:value)
   end

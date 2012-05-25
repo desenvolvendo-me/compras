@@ -53,7 +53,7 @@ feature "PledgeLiquidations" do
     end
 
     page.find('#pledge_value').should have_content 'R$ 200,00'
-    page.find('#pledge_liquidations_sum').should have_content 'R$ 150,00'
+    page.find('#pledge_liquidation_sum').should have_content 'R$ 150,00'
     page.find('#pledge_balance').should have_content 'R$ 50,00'
 
     page.should have_field 'Valor a ser liquidado', :with => '150,00'
@@ -96,7 +96,7 @@ feature "PledgeLiquidations" do
     end
 
     page.find('#pledge_value').should have_content 'R$ 200,00'
-    page.find('#pledge_liquidations_sum').should have_content 'R$ 0,00'
+    page.find('#pledge_liquidation_sum').should have_content 'R$ 0,00'
     page.find('#pledge_balance').should have_content 'R$ 200,00'
 
     clear_modal 'Empenho'

@@ -7,8 +7,9 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
   belongs_to :entity
   belongs_to :pledge
 
-  delegate :emission_date, :pledge_liquidations_sum, :to => :pledge, :allow_nil => true
+  delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
+  delegate :liquidation_value, :to => :pledge, :prefix => true, :allow_nil => true
 
   validates :pledge, :date, :kind, :reason, :presence => true
   validates :value, :entity, :year, :presence => true
@@ -43,7 +44,7 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
 
   def force_value_to_total_kind
     if pledge && total?
-      self.value = pledge_liquidations_sum
+      self.value = pledge_liquidation_value
     end
   end
 
@@ -58,8 +59,8 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
   def value_validation(numeric_parser = ::I18n::Alchemy::NumericParser)
     return unless pledge && value
 
-    if value > pledge_liquidations_sum
-      errors.add(:value, :must_not_be_greater_than_pledge_liquidations_value, :value => numeric_parser.localize(pledge_liquidations_sum))
+    if value > pledge_liquidation_value
+      errors.add(:value, :must_not_be_greater_than_pledge_liquidation_value, :value => numeric_parser.localize(pledge_liquidation_value))
     end
   end
 

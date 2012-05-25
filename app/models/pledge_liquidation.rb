@@ -11,7 +11,7 @@ class PledgeLiquidation < ActiveRecord::Base
 
   delegate :emission_date, :description, :to => :pledge, :allow_nil => true
   delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
-  delegate :pledge_liquidations_sum, :to => :pledge, :allow_nil => true
+  delegate :liquidation_value, :to => :pledge, :prefix => true, :allow_nil => true
 
   validates :pledge, :kind, :value, :presence => true
   validates :date, :entity, :year, :presence => true
