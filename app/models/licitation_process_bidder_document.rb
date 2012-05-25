@@ -10,5 +10,6 @@ class LicitationProcessBidderDocument < ActiveRecord::Base
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :emission_date, :timeliness => { :on_or_before => :today, :type => :date }
+    allowing_blank.validates :validity, :timeliness => { :on_or_after => :emission_date, :type => :date }
   end
 end

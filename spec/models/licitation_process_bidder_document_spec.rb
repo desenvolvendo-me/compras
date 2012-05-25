@@ -13,4 +13,17 @@ describe LicitationProcessBidderDocument do
   it { should_not allow_value(Date.tomorrow).for(:emission_date) }
   it { should allow_value(Date.current).for(:emission_date) }
   it { should allow_value(Date.yesterday).for(:emission_date) }
+
+  it "should not allow validity before emission_date" do
+    subject.emission_date = Date.current
+
+    subject.should_not allow_value(Date.yesterday).for(:validity)
+  end
+
+  it "should allow validity on or after emission_date" do
+    subject.emission_date = Date.current
+
+    subject.should allow_value(Date.current).for(:validity)
+    subject.should allow_value(Date.tomorrow).for(:validity)
+  end
 end
