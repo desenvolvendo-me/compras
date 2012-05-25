@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/period'
 require 'app/models/direct_purchase'
 require 'app/models/licitation_process'
+require 'app/models/price_collection'
 
 describe Period do
   it 'should return amount and pluralized as to_s' do
