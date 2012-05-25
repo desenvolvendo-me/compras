@@ -9,4 +9,8 @@ describe LicitationProcessBidderDocument do
   it { should belong_to :document_type }
 
   it { should validate_presence_of :document_type }
+
+  it { should_not allow_value(Date.tomorrow).for(:emission_date) }
+  it { should allow_value(Date.current).for(:emission_date) }
+  it { should allow_value(Date.yesterday).for(:emission_date) }
 end
