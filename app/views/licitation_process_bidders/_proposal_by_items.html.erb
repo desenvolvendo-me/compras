@@ -1,19 +1,12 @@
-<div id="items" class="tabs">
-  <ul>
-    <li><a href="#items">Itens</a></li>
-  </ul>
+<div id="items" class="container">
 
-  <div id="items" class="container">
-
-    <div class="yui3-g">
-      <div class="yui3-u-1-2">
-        <%= f.input :proposal_total_value, :input_html => { :class => 'proposal-total-value', :value => number_to_currency(f.object.proposal_total_value, :format => "%n"), :size => 12, :disabled => true } %>
-      </div>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :proposal_total_value, :input_html => { :class => 'proposal-total-value', :value => number_to_currency(f.object.proposal_total_value, :format => "%n"), :size => 12, :disabled => true } %>
     </div>
-
-   <%= f.association :proposals, :collection => f.object.proposals do |p| %>
-      <%= render 'licitation_process_bidder_proposals/form', :f => p %>
-    <% end %>
   </div>
-</div>
 
+  <%= f.association :proposals, :collection => f.object.proposals do |p| %>
+    <%= render 'licitation_process_bidder_proposals/form', :f => p %>
+  <% end %>
+</div>

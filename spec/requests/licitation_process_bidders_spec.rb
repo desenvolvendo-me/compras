@@ -68,21 +68,19 @@ feature "LicitationProcessBidders" do
     end
 
     within_tab 'Propostas' do
-      within_tab 'Itens' do
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+      page.should have_disabled_field 'Preço total dos itens'
+      page.should have_disabled_field 'Material'
+      page.should have_disabled_field 'Situação'
+      page.should have_disabled_field 'Classificação'
+      page.should have_disabled_field 'Unidade'
+      page.should have_disabled_field 'Quantidade'
+      page.should have_disabled_field 'Preço total'
 
-        fill_in 'Marca', :with => 'Apple'
-        fill_in 'Preço unitário', :with => '11,22'
+      fill_in 'Marca', :with => 'Apple'
+      fill_in 'Preço unitário', :with => '11,22'
 
-        page.should have_field 'Preço total', :with => '22,44'
-        page.should have_field 'Preço total dos itens', :with => '22,44'
-      end
+      page.should have_field 'Preço total', :with => '22,44'
+      page.should have_field 'Preço total dos itens', :with => '22,44'
     end
 
     click_button 'Salvar'
@@ -109,25 +107,23 @@ feature "LicitationProcessBidders" do
     end
 
     within_tab 'Propostas' do
-      within_tab 'Itens' do
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+      page.should have_disabled_field 'Preço total dos itens'
+      page.should have_disabled_field 'Material'
+      page.should have_disabled_field 'Situação'
+      page.should have_disabled_field 'Classificação'
+      page.should have_disabled_field 'Unidade'
+      page.should have_disabled_field 'Quantidade'
+      page.should have_disabled_field 'Preço total'
 
-        page.should have_field 'Preço total dos itens', :with => '22,44'
-        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_field 'Situação', :with => ''
-        page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'Unidade'
-        page.should have_field 'Quantidade', :with => '2'
-        page.should have_field 'Preço unitário', :with => '11,22'
-        page.should have_field 'Preço total', :with => '22,44'
-        page.should have_field 'Marca', :with => 'Apple'
-      end
+      page.should have_field 'Preço total dos itens', :with => '22,44'
+      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+      page.should have_field 'Situação', :with => ''
+      page.should have_field 'Classificação', :with => ''
+      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Quantidade', :with => '2'
+      page.should have_field 'Preço unitário', :with => '11,22'
+      page.should have_field 'Preço total', :with => '22,44'
+      page.should have_field 'Marca', :with => 'Apple'
     end
   end
 
@@ -168,21 +164,19 @@ feature "LicitationProcessBidders" do
     end
 
     within_tab 'Propostas' do
-      within_tab 'Itens' do
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+      page.should have_disabled_field 'Preço total dos itens'
+      page.should have_disabled_field 'Material'
+      page.should have_disabled_field 'Situação'
+      page.should have_disabled_field 'Classificação'
+      page.should have_disabled_field 'Unidade'
+      page.should have_disabled_field 'Quantidade'
+      page.should have_disabled_field 'Preço total'
 
-        fill_in 'Marca', :with => 'LG'
-        fill_in 'Preço unitário', :with => '10,01'
+      fill_in 'Marca', :with => 'LG'
+      fill_in 'Preço unitário', :with => '10,01'
 
-        page.should have_field 'Preço unitário', :with => '10,01'
-        page.should have_field 'Preço total', :with => '20,02'
-      end
+      page.should have_field 'Preço unitário', :with => '10,01'
+      page.should have_field 'Preço total', :with => '20,02'
     end
 
     click_button 'Salvar'
@@ -210,25 +204,23 @@ feature "LicitationProcessBidders" do
     end
 
     within_tab 'Propostas' do
-      within_tab 'Itens' do
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+      page.should have_disabled_field 'Preço total dos itens'
+      page.should have_disabled_field 'Material'
+      page.should have_disabled_field 'Situação'
+      page.should have_disabled_field 'Classificação'
+      page.should have_disabled_field 'Unidade'
+      page.should have_disabled_field 'Quantidade'
+      page.should have_disabled_field 'Preço total'
 
-        page.should have_field 'Preço total dos itens', :with => '20,02'
-        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_field 'Situação', :with => ''
-        page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'Unidade'
-        page.should have_field 'Quantidade', :with => '2'
-        page.should have_field 'Preço unitário', :with => '10,01'
-        page.should have_field 'Preço total', :with => '20,02'
-        page.should have_field 'Marca', :with => 'LG'
-      end
+      page.should have_field 'Preço total dos itens', :with => '20,02'
+      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+      page.should have_field 'Situação', :with => ''
+      page.should have_field 'Classificação', :with => ''
+      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Quantidade', :with => '2'
+      page.should have_field 'Preço unitário', :with => '10,01'
+      page.should have_field 'Preço total', :with => '20,02'
+      page.should have_field 'Marca', :with => 'LG'
     end
   end
 
