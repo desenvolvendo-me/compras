@@ -41,3 +41,7 @@
 .ui-datepicker td {
   text-align: center;
 }
+
+.ui-datepicker td.ui-datepicker-current-day {
+  font-weight: bold;
+}
