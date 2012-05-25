@@ -29,7 +29,6 @@ describe LicitationProcess do
 
   it { should belong_to :administrative_process }
   it { should belong_to :capability }
-  it { should belong_to :period }
   it { should belong_to :payment_method }
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
@@ -51,6 +50,7 @@ describe LicitationProcess do
   it { should validate_presence_of :expiration }
   it { should validate_presence_of :readjustment_index }
   it { should validate_presence_of :period }
+  it { should validate_presence_of :period_unit }
   it { should validate_presence_of :payment_method }
   it { should validate_presence_of :envelope_delivery_date }
   it { should validate_presence_of :envelope_delivery_time }

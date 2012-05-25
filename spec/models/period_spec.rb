@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/period'
 require 'app/models/direct_purchase'
-require 'app/models/licitation_process'
 require 'app/models/price_collection'
 
 describe Period do
@@ -36,6 +35,5 @@ describe Period do
   it { should validate_presence_of :amount }
 
   it { should have_many(:direct_purchases).dependent(:restrict) }
-  it { should have_many(:licitation_processes).dependent(:restrict) }
   it { should have_many(:price_collections).dependent(:restrict) }
 end

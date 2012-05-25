@@ -1,6 +1,6 @@
 class LicitationProcess < ActiveRecord::Base
-  attr_accessible :administrative_process_id, :capability_id, :period_id, :payment_method_id, :year, :process_date
   attr_accessible :object_description, :expiration, :readjustment_index, :caution_value, :legal_advice
+  attr_accessible :administrative_process_id, :capability_id, :period, :period_unit, :payment_method_id, :year, :process_date
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
   attr_accessible :licitation_process_publications_attributes
@@ -12,10 +12,10 @@ class LicitationProcess < ActiveRecord::Base
   has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
   has_enumeration_for :pledge_type
   has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation
+  has_enumeration_for :period_unit, :with => PeriodUnit
 
   belongs_to :administrative_process
   belongs_to :capability
-  belongs_to :period
   belongs_to :payment_method
 
   has_and_belongs_to_many :document_types
@@ -44,7 +44,8 @@ class LicitationProcess < ActiveRecord::Base
   delegate :administrative_process_budget_allocations, :items, :to => :administrative_process, :allow_nil => true
 
   validates :process_date, :administrative_process, :object_description, :capability, :expiration, :presence => true
-  validates :readjustment_index, :period, :payment_method, :envelope_delivery_time, :year, :presence => true
+  validates :period, :period_unit, :presence => true
+  validates :readjustment_index, :payment_method, :envelope_delivery_time, :year, :presence => true
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
   validates :type_of_calculation, :presence => true
   validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value

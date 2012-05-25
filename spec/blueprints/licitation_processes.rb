@@ -13,7 +13,8 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.tomorrow) }
   envelope_opening_time { "14:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -41,7 +42,8 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "14:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -70,7 +72,8 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.tomorrow) }
   envelope_opening_time { "14:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -99,7 +102,8 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.tomorrow) }
   envelope_opening_time { "14:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -128,7 +132,8 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "14:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -157,7 +162,8 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -187,7 +193,8 @@ LicitationProcess.blueprint(:classificar_por_itens) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -217,7 +224,8 @@ LicitationProcess.blueprint(:maior_lance_por_itens) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -247,7 +255,8 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -277,7 +286,8 @@ LicitationProcess.blueprint(:classificar_por_lote) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -307,7 +317,8 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -337,7 +348,8 @@ LicitationProcess.blueprint(:apuracao_global) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
@@ -367,7 +379,8 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "00:00" }
-  period { Period.make!(:um_ano) }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
   payment_method { PaymentMethod.make!(:dinheiro) }
   caution_value { 9.99 }
   legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
