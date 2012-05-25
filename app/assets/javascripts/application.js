@@ -16,7 +16,6 @@
 //= require currency_manipulation
 //= require date
 //= require modal_info_link
-//= require only_numbers
 //= require tabs
 
 $(':input[data-property-id]').live('change', function() {
