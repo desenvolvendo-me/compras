@@ -319,7 +319,7 @@ feature "LicitationProcesses" do
   end
 
   scenario 'creating another licitation with the same year to test process number and licitation number' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    last_licitation_process = LicitationProcess.make!(:processo_licitatorio)
     AdministrativeProcess.make!(:compra_com_itens_2)
 
     click_link 'Processos'
@@ -364,8 +364,8 @@ feature "LicitationProcesses" do
     click_link "Editar processo licitatório"
 
     within_tab 'Dados gerais' do
-      page.should have_field 'Processo', :with => licitation_process.process.to_s
-      page.should have_field 'Número da licitação', :with => licitation_process.licitation_number.to_s
+      page.should have_field 'Processo', :with => last_licitation_process.process.succ.to_s
+      page.should have_field 'Número da licitação', :with => last_licitation_process.licitation_number.succ.to_s
     end
   end
 
