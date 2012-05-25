@@ -32,6 +32,9 @@ class LicitationProcessLot < ActiveRecord::Base
   end
 
   def count_lots
-    self.class.where { |lot| lot.id.lteq id }.count
+    self.class.where { |lot|
+      (lot.id.lteq id) &
+      (lot.licitation_process_id.eq licitation_process_id)
+    }.count
   end
 end
