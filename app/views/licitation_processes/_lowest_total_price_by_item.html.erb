@@ -8,10 +8,13 @@
         Quantidade
       </th>
       <th>
-        Fornecedor
+        Valor cotado
       </th>
       <th>
-        Valor cotado
+        Total
+      </th>
+      <th>
+        Fornecedor
       </th>
     </tr>
   </thead>
@@ -26,10 +29,13 @@
           <%= item.quantity %>
         </td>
         <td>
+          <%= item.winner_proposals.decorator.unit_price %>
+        </td>
+        <td>
           <%= item.winner_proposals_provider %>
         </td>
         <td>
-          <%= number_with_precision item.winner_proposals_total_price %>
+          <%= item.winner_proposals.decorator.total_price %>
         </td>
       </tr>
     <% end %>

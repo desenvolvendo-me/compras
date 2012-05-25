@@ -637,6 +637,8 @@ feature "LicitationProcesses" do
     page.should have_content 'Apuração: Menor preço total por item'
     page.should have_content 'Antivirus'
     page.should have_content 'Gabriel Sobrinho'
+    page.should have_content '2'
+    page.should have_content '9,00'
     page.should have_content '18,00'
 
     # back to form
