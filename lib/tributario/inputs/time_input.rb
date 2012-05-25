@@ -13,7 +13,6 @@ module Tributario
 
       def input_html_options
         super.tap do |options|
-          options[:size]        ||= 5
           options[:type]        ||= :string
           options[:value]       ||= formated_value
           options[:data]        ||= {}

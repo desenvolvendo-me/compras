@@ -25,7 +25,6 @@ module Tributario
 
       def input_html_options
         super.tap do |options|
-          options[:size]                  ||= SimpleForm.default_input_size
           options['data-modal-url']       ||= modal_url
           options['data-hidden-field-id'] ||= hidden_field_id if hidden_field_id
         end

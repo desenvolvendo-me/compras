@@ -15,7 +15,6 @@ module Tributario
 
       def input_html_options
         super.tap do |options|
-          options[:size]              ||= 10 unless has_mask?
           options[:type]              ||= :string
           options[:data]              ||= {}
           options[:data][:decimal]    ||= true
