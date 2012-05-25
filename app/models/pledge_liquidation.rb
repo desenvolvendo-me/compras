@@ -10,7 +10,7 @@ class PledgeLiquidation < ActiveRecord::Base
   has_many :pledge_parcel_movimentations, :dependent => :restrict, :as => :pledge_parcel_modificator
 
   delegate :emission_date, :description, :to => :pledge, :allow_nil => true
-  delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
+  delegate :balance, :to => :pledge, :prefix => true, :allow_nil => true
 
   validates :pledge, :kind, :value, :presence => true
   validates :date, :entity, :year, :presence => true

@@ -13,7 +13,6 @@ pt-BR:
         description: "Objeto do empenho"
         date: "Data"
         emission_date: "Data de emissão"
-        pledge_value: "Valor do empenho"
         pledge_parcel: "Parcela"
         expiration_date: "Vencimento"
         balance: "Saldo"
