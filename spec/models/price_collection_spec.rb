@@ -9,8 +9,6 @@ describe PriceCollection do
     it { should belong_to :delivery_location }
     it { should belong_to :employee }
     it { should belong_to :payment_method }
-    it { should belong_to :period }
-    it { should belong_to :proposal_validity }
     it { should have_many :price_collection_lots }
     it { should have_many(:price_collections_providers).dependent(:destroy).order(:id) }
     it { should have_many(:providers).through(:price_collections_providers) }
@@ -24,9 +22,11 @@ describe PriceCollection do
     it { should validate_presence_of :employee }
     it { should validate_presence_of :payment_method }
     it { should validate_presence_of :period }
+    it { should validate_presence_of :period_unit }
     it { should validate_presence_of :object_description }
     it { should validate_presence_of :expiration }
     it { should validate_presence_of :proposal_validity }
+    it { should validate_presence_of :proposal_validity_unit }
 
     it { should allow_value('2012').for(:year) }
     it { should_not allow_value('201').for(:year) }

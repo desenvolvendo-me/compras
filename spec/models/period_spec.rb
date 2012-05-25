@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/period'
-require 'app/models/price_collection'
 
 describe Period do
   it 'should return amount and pluralized as to_s' do
@@ -32,6 +31,4 @@ describe Period do
 
   it { should validate_presence_of :unit }
   it { should validate_presence_of :amount }
-
-  it { should have_many(:price_collections).dependent(:restrict) }
 end
