@@ -63,7 +63,7 @@ feature "LicitationProcessBidders" do
       page.should have_field 'Documento', :with => 'Fiscal'
 
       fill_in 'Número/certidão', :with => '222222'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
       fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
@@ -104,7 +104,7 @@ feature "LicitationProcessBidders" do
     within_tab 'Documentos' do
       page.should have_field 'Documento', :with => 'Fiscal'
       page.should have_field 'Número/certidão', :with => '222222'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow)
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
       page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
@@ -163,7 +163,7 @@ feature "LicitationProcessBidders" do
 
     within_tab 'Documentos' do
       fill_in 'Número/certidão', :with => '333333'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
+      fill_mask 'Data de emissão', :with => I18n.l(Date.yesterday)
       fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
     end
 
@@ -205,7 +205,7 @@ feature "LicitationProcessBidders" do
     within_tab 'Documentos' do
       page.should have_field 'Documento', :with => 'Fiscal'
       page.should have_field 'Número/certidão', :with => '333333'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.tomorrow + 1.day)
+      page.should have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
       page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
     end
 
