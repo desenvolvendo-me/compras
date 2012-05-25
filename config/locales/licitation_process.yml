@@ -14,6 +14,7 @@ pt-BR:
         object_description: "Detalhamento do objeto"
         capability: "Fonte de recurso"
         expiration: "Validade da proposta"
+        expiration_unit: "Unidade da validade da proposta"
         readjustment_index: "Índice de reajuste"
         envelope_delivery_date: "Data da entrega dos envelopes"
         envelope_delivery_time: "Hora da entrega"

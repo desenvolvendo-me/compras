@@ -7,7 +7,8 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
@@ -36,7 +37,8 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   object_description { "Descricao do computador" }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
@@ -66,7 +68,8 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
@@ -96,7 +99,8 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
@@ -126,7 +130,8 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   object_description { "Descricao das canetas" }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
@@ -156,7 +161,8 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
@@ -187,7 +193,8 @@ LicitationProcess.blueprint(:classificar_por_itens) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
@@ -218,7 +225,8 @@ LicitationProcess.blueprint(:maior_lance_por_itens) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
@@ -249,7 +257,8 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
@@ -280,7 +289,8 @@ LicitationProcess.blueprint(:classificar_por_lote) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
@@ -311,7 +321,8 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
@@ -342,7 +353,8 @@ LicitationProcess.blueprint(:apuracao_global) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
@@ -373,7 +385,8 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
-  expiration { "10 dias" }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
   readjustment_index { "XPTO" }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }

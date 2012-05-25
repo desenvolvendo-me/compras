@@ -10,7 +10,6 @@ feature "LicitationProcesses" do
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
     budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
     Capability.make!(:reforma)
-    Period.make!(:um_ano)
     PaymentMethod.make!(:dinheiro)
     DocumentType.make!(:fiscal)
     allocation = BudgetAllocation.make!(:alocacao)
@@ -56,7 +55,8 @@ feature "LicitationProcesses" do
       fill_in 'Detalhamento do objeto', :with => 'detalhamento'
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '5 dias'
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia', :from => 'Unidade da validade da proposta'
       fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_mask 'Hora da entrega', :with => '14:00'
@@ -135,7 +135,8 @@ feature "LicitationProcesses" do
       page.should have_field 'Detalhamento do objeto', :with => 'detalhamento'
       page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
       page.should have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
-      page.should have_field 'Validade da proposta', :with => '5 dias'
+      page.should have_field 'Validade da proposta', :with => '5'
+      page.should have_select 'Unidade da validade da proposta', :selected => 'dia'
       page.should have_field 'Índice de reajuste', :with => 'XPTO'
       page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       page.should have_field 'Hora da entrega', :with => '14:00'
@@ -210,7 +211,8 @@ feature "LicitationProcesses" do
       fill_in 'Detalhamento do objeto', :with => 'novo detalhamento'
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
-      fill_in 'Validade da proposta', :with => '10 dias'
+      fill_in 'Validade da proposta', :with => '10'
+      select 'dia', :from => 'Unidade da validade da proposta'
       fill_in 'Índice de reajuste', :with => 'IPC'
       fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_mask 'Hora da entrega', :with => '15:00'
@@ -273,7 +275,8 @@ feature "LicitationProcesses" do
       page.should have_field 'Detalhamento do objeto', :with => 'novo detalhamento'
       page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
       page.should have_field 'Fonte de recurso', :with => 'Construção'
-      page.should have_field 'Validade da proposta', :with => '10 dias'
+      page.should have_field 'Validade da proposta', :with => '10'
+      page.should have_select 'Unidade da validade da proposta', :selected => 'dia'
       page.should have_field 'Índice de reajuste', :with => 'IPC'
       page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Hora da entrega', :with => '15:00'
@@ -345,6 +348,7 @@ feature "LicitationProcesses" do
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
+      select 'dia', :from => 'Unidade da validade da proposta'
       fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_mask 'Hora da entrega', :with => '15:00'

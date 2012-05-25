@@ -47,6 +47,7 @@ describe LicitationProcess do
   it { should validate_presence_of :object_description }
   it { should validate_presence_of :capability }
   it { should validate_presence_of :expiration }
+  it { should validate_presence_of :expiration_unit }
   it { should validate_presence_of :readjustment_index }
   it { should validate_presence_of :period }
   it { should validate_presence_of :period_unit }
