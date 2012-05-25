@@ -57,6 +57,11 @@ feature "PledgeLiquidationCancellations" do
       find('.balance').should have_content 'R$ 100,00'
     end
 
+    page.find('#pledge_value').should have_content 'R$ 200,00'
+    page.find('#pledge_liquidations_sum').should have_content 'R$ 90,00'
+    page.find('#pledge_liquidation_cancellations_sum').should have_content 'R$ 90,00'
+    page.find('#pledge_balance').should have_content 'R$ 200,00'
+
     page.should have_field 'Valor liquidado a ser anulado', :with => '90,00'
     page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
@@ -97,17 +102,19 @@ feature "PledgeLiquidationCancellations" do
       find('.balance').should have_content 'R$ 100,00'
     end
 
+    page.find('#pledge_value').should have_content 'R$ 200,00'
+    page.find('#pledge_liquidations_sum').should have_content 'R$ 90,00'
+    page.find('#pledge_liquidation_cancellations_sum').should have_content 'R$ 0,00'
+    page.find('#pledge_balance').should have_content 'R$ 110,00'
+
     clear_modal 'Empenho'
     page.should have_field 'Empenho', :with => ''
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => ''
 
     within '#pledge_parcels' do
-      page.should_not have_content '1'
       page.should_not have_content I18n.l(Date.current + 1.day)
       page.should_not have_content 'R$ 100,00'
-      page.should_not have_content 'R$ 90,00'
-      page.should_not have_content 'R$ 0,00'
     end
   end
 

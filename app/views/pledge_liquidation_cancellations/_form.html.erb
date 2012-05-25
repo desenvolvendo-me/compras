@@ -100,8 +100,17 @@
 
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.liquidation_value;
+
+          $('#pledge_value').html(pledge.pledge_value_as_currency);
+          $('#pledge_liquidation_cancellations_sum').html(pledge.pledge_liquidation_cancellations_sum);
+          $('#pledge_liquidations_sum').html(pledge.pledge_liquidations_sum);
+          $('#pledge_balance').html(pledge.balance_as_currency);
         } else {
           $('#pledge_liquidation_cancellation_emission_date').val('');
+          $('#pledge_value').html('');
+          $('#pledge_liquidation_cancellations_sum').html('');
+          $('#pledge_liquidations_sum').html('');
+          $('#pledge_balance').html('');
 
           clearExistingPledgeParcels();
           pledgeValue = null;
