@@ -3,3 +3,5 @@
 <p>Apuração: <%= resource.type_of_calculation_humanize %></p>
 
 <%= render resource.type_of_calculation %>
+
+<%= link_to 'Voltar', edit_licitation_process_path(resource), :class => "button primary" %>

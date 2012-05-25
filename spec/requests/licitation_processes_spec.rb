@@ -620,7 +620,7 @@ feature "LicitationProcesses" do
   end
 
   scenario "should show the count report by type_of_calculation being lowest_total_price_by_item" do
-    LicitationProcess.make!(:apuracao_por_itens)
+    licitation_process = LicitationProcess.make!(:apuracao_por_itens)
 
     click_link 'Processos'
 
@@ -638,10 +638,14 @@ feature "LicitationProcesses" do
     page.should have_content 'Antivirus'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
+
+    # back to form
+    click_link 'Voltar'
+    page.should have_content "Editar #{licitation_process.to_s}"
   end
 
   scenario "should show the count report by type_of_calculation being sort_participants_by_item" do
-    LicitationProcess.make!(:classificar_por_itens)
+    licitation_process = LicitationProcess.make!(:classificar_por_itens)
 
     click_link 'Processos'
 
@@ -661,10 +665,14 @@ feature "LicitationProcesses" do
     page.should have_content '18,00'
     page.should have_content 'Wenderson Malheiros'
     page.should have_content '20,00'
+
+    # back to form
+    click_link 'Voltar'
+    page.should have_content "Editar #{licitation_process.to_s}"
   end
 
   scenario "should show the count report by type_of_calculation being highest_bidder_by_item" do
-    LicitationProcess.make!(:maior_lance_por_itens)
+    licitation_process = LicitationProcess.make!(:maior_lance_por_itens)
 
     click_link 'Processos'
 
@@ -682,6 +690,10 @@ feature "LicitationProcesses" do
     page.should have_content 'Antivirus'
     page.should have_content 'Wenderson Malheiros '
     page.should have_content '20,00'
+
+    # back to form
+    click_link 'Voltar'
+    page.should have_content "Editar #{licitation_process.to_s}"
   end
 
   scenario "should show the count report by type_of_calculation being lowest_price_by_lot" do
@@ -704,6 +716,10 @@ feature "LicitationProcesses" do
     page.should have_content 'Lote 1'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
+
+    # back to form
+    click_link 'Voltar'
+    page.should have_content "Editar #{licitation_process.to_s}"
   end
 
   scenario "should show the count report by type_of_calculation being sort_participants_by_lot" do
@@ -728,6 +744,10 @@ feature "LicitationProcesses" do
     page.should have_content '18,00'
     page.should have_content 'Wenderson Malheiros'
     page.should have_content '20,00'
+
+    # back to form
+    click_link 'Voltar'
+    page.should have_content "Editar #{licitation_process.to_s}"
   end
 
   scenario "should show the count report by type_of_calculation being highest_bidder_by_lot" do
@@ -750,6 +770,10 @@ feature "LicitationProcesses" do
     page.should have_content 'Lote 1'
     page.should have_content 'Wenderson Malheiros '
     page.should have_content '20,00'
+
+    # back to form
+    click_link 'Voltar'
+    page.should have_content "Editar #{licitation_process.to_s}"
   end
 
   scenario "should show the count report by type_of_calculation being lowest_global_price" do
@@ -770,6 +794,10 @@ feature "LicitationProcesses" do
     page.should have_content 'Apuração: Menor preço global'
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content '18,00'
+
+    # back to form
+    click_link 'Voltar'
+    page.should have_content "Editar #{licitation_process.to_s}"
   end
 
   scenario "should brings some filled fields when creating a new licitatoin process" do
