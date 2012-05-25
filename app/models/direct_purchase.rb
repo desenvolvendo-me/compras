@@ -1,12 +1,13 @@
 class DirectPurchase < ActiveRecord::Base
   attr_accessible :year, :date, :legal_reference_id, :modality, :provider_id, :budget_unit_id
   attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
-  attr_accessible :price_collection, :price_registration, :observation, :period_id, :pledge_type
-  attr_accessible :direct_purchase_budget_allocations_attributes
+  attr_accessible :price_collection, :price_registration, :observation, :pledge_type
+  attr_accessible :direct_purchase_budget_allocations_attributes, :period, :period_unit
 
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :status, :with => DirectPurchaseStatus
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
+  has_enumeration_for :period_unit, :with => PeriodUnit
 
   belongs_to :legal_reference
   belongs_to :provider
@@ -15,7 +16,6 @@ class DirectPurchase < ActiveRecord::Base
   belongs_to :delivery_location
   belongs_to :employee
   belongs_to :payment_method
-  belongs_to :period
 
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
   has_one :supply_authorization, :dependent => :restrict
@@ -32,7 +32,8 @@ class DirectPurchase < ActiveRecord::Base
   validates :year, :mask => "9999", :allow_blank => true
   validates :status, :year, :date, :legal_reference, :modality, :presence => true
   validates :budget_unit, :licitation_object, :delivery_location, :presence => true
-  validates :provider, :employee, :payment_method, :period, :pledge_type, :presence => true
+  validates :provider, :employee, :payment_method, :pledge_type, :presence => true
+  validates :period, :period_unit, :presence => true
 
   validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation

@@ -14,7 +14,6 @@ feature "DirectPurchases" do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
-    Period.make!(:um_ano)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     ModalityLimit.make!(:modalidade_de_compra)
@@ -36,7 +35,8 @@ feature "DirectPurchases" do
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_modal 'Prazo', :with => '1', :field => 'Quantidade'
+      fill_in 'Prazo', :with => '1'
+      select 'ano',  :from => 'Unidade do prazo'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
       fill_in 'Registro de preços', :with => '88'
@@ -86,7 +86,8 @@ feature "DirectPurchases" do
       page.should have_field 'Objeto da licitação', :with => 'Ponte'
       page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Prazo', :with => '1 ano'
+      page.should have_field 'Prazo', :with => '1'
+      page.should have_select 'Unidade do prazo', :selected => 'ano'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Coleta de preços', :with => '99'
       page.should have_field 'Registro de preços', :with => '88'
@@ -134,6 +135,7 @@ feature "DirectPurchases" do
       page.should have_disabled_field 'Local de entrega'
       page.should have_disabled_field 'Responsável'
       page.should have_disabled_field 'Prazo'
+      page.should have_disabled_field 'Unidade do prazo'
       page.should have_disabled_field 'Forma de pagamento'
       page.should have_disabled_field 'Coleta de preços'
       page.should have_disabled_field 'Registro de preços'
@@ -254,7 +256,6 @@ feature "DirectPurchases" do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
-    Period.make!(:um_ano)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     ModalityLimit.make!(:modalidade_de_compra)
@@ -276,7 +277,8 @@ feature "DirectPurchases" do
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_modal 'Prazo', :with => '1', :field => 'Quantidade'
+      fill_in 'Prazo', :with => '1'
+      select 'ano', :from => 'Unidade do prazo'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
       fill_in 'Registro de preços', :with => '88'
