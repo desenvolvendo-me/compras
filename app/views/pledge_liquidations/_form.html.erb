@@ -96,6 +96,9 @@
           $('#pledge_liquidation_emission_date').val(pledge.emission_date);
           $('#pledge_liquidation_pledge_value').val(pledge.pledge_value);
           $('#pledge_liquidation_description').val(pledge.description);
+          $('#pledge_value').html(pledge.pledge_value_as_currency);
+          $('#pledge_liquidations_sum').html(pledge.pledge_liquidations_sum_as_currency);
+          $('#pledge_balance').html(pledge.balance_as_currency);
 
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
@@ -105,6 +108,9 @@
           $('#pledge_liquidation_expiration_date').val('');
           $('#pledge_liquidation_balance').val('');
           $('#pledge_liquidation_description').val('');
+          $('#pledge_balance').html('');
+          $('#pledge_value').html('');
+          $('#pledge_liquidations_sum').html('');
 
           clearExistingPledgeParcels();
           pledgeValue = null;

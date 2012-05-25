@@ -26,6 +26,10 @@ class PledgeDecorator < Decorator
     helpers.number_to_currency super
   end
 
+  def pledge_liquidations_sum_as_currency
+    helpers.number_to_currency component.pledge_liquidations_sum
+  end
+
   def value
     helpers.number_to_currency component.value if component.value
   end
