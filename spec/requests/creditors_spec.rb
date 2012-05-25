@@ -78,6 +78,7 @@ feature "Creditors" do
       check 'Admnistração pública municipal'
       check 'Autônomo'
       fill_in 'PIS/PASEP', :with => '123456'
+      fill_in 'Data do PIS/PASEP', :with => '05/04/2012'
       fill_in 'Início do contrato', :with => '05/04/2012'
     end
     click_button 'Salvar'

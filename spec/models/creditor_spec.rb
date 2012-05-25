@@ -11,6 +11,7 @@ describe Creditor do
   it { should_not validate_presence_of :company_size }
   it { should_not validate_presence_of :main_cnae }
   it { should_not validate_presence_of :social_identification_number_date }
+  it { should_not validate_presence_of :contract_start_date }
 
   context 'when is company' do
     before do
@@ -33,5 +34,13 @@ describe Creditor do
     end
 
     it { should validate_presence_of :social_identification_number_date }
+  end
+
+  context 'when is autonomous' do
+    before do
+      subject.stub(:autonomous?).and_return(true)
+    end
+
+    it { should validate_presence_of :contract_start_date }
   end
 end
