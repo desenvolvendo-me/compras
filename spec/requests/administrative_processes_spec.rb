@@ -441,4 +441,16 @@ feature "AdministrativeProcesses" do
     page.should_not have_link 'Novo processo licitatório'
     page.should_not have_link 'Editar processo licitatório'
   end
+
+  scenario "should not have a release and annull button at new" do
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+
+    click_link 'Criar Processo Administrativo'
+
+    page.should_not have_button 'Anular'
+    page.should_not have_button 'Liberar'
+  end
 end
