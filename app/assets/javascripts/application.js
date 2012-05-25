@@ -5,6 +5,7 @@
 //= require jquery.masked_input
 //= require jquery.mustache
 //= require jquery.price_format
+//= require jquery.singlemask
 //= require simple_form.datepicker_input
 //= require simple_form.decimal_input
 //= require simple_form.masked_input
@@ -16,7 +17,6 @@
 //= require currency_manipulation
 //= require date
 //= require modal_info_link
-//= require jquery.singlemask
 //= require tabs
 
 $(':input[data-property-id]').live('change', function() {
