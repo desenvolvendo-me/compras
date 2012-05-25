@@ -20,3 +20,11 @@
     </div>
   <% end %>
 </div>
+
+<script>
+    $('.licitation-process-lot').each( function(index, item) {
+      $(this).find('.item-number').each( function(index, item) {
+        $(this).html(index + 1);
+      });
+  });
+</script>
