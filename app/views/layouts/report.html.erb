@@ -14,7 +14,8 @@
     <div id="container">
       <% if current_prefecture %>
         <div id="header">
-          <p><%= image_tag current_prefecture.image if current_prefecture.image? %></p>
+          <p><%= prefecture_image %></p>
+
           <h2><%= current_prefecture.name %> | CNPJ: <%= current_prefecture.cnpj %></h2>
           <h3>E-mail: <%= current_prefecture.email %> | Telefone: <%= current_prefecture.phone %> | Fax: <%= current_prefecture.fax %></h3>
         </div>
