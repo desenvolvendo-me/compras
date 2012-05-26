@@ -52,6 +52,6 @@ class LicitationProcessProposalsClassificatorByItem
   end
 
   def sorted_proposals
-    self.licitation_proposals.sort_by(&:total_price)
+    self.licitation_proposals.sort_by(&:total_price).reject { |proposal| proposal.total_price.zero? }
   end
 end

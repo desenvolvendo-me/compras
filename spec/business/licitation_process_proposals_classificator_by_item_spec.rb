@@ -28,51 +28,55 @@ describe LicitationProcessProposalsClassificatorByItem do
     double('proposal 6', :total_price => 50.0, :provider => 'provider 6')
   end
 
+  let :proposal_7 do
+    double('proposal 7', :total_price => 0.0, :provider => 'provider 7')
+  end
+
   context "lowest total price by item" do
     let :item do
-      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3])
+      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3, proposal_7])
     end
 
     subject do
       described_class.new(item, LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
     end
 
-    it "it should return the winner proposal for lowest_total_price_by_item" do
+    it "it should return the winner proposal for lowest_total_price_by_item not considering zero" do
       subject.winner_proposals.should eq proposal_2
     end
   end
 
   context "sort participants by item with more than 3 classified" do
     let :item do
-      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3, proposal_4, proposal_5])
+      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3, proposal_4, proposal_5, proposal_7])
     end
 
     subject do
       described_class.new(item, LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM)
     end
 
-    it "it should return the 4 classified proposals as winners" do
+    it "it should return the 4 classified proposals as winners not considering zero" do
       subject.winner_proposals.should eq [proposal_2, proposal_4, proposal_3, proposal_5]
     end
   end
 
   context "sort participants by item with less than 3 classified" do
     let :item do
-      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3, proposal_4, proposal_6])
+      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3, proposal_4, proposal_6, proposal_7])
     end
 
     subject do
       described_class.new(item, LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM)
     end
 
-    it "it should return the tree best proposals as winners" do
+    it "it should return the tree best proposals as winners not considering zero" do
       subject.winner_proposals.should eq [proposal_6, proposal_2, proposal_4]
     end
   end
 
   context "highest bidder by item" do
     let :item do
-      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3])
+      double('item', :licitation_process_bidder_proposals => [proposal_1, proposal_2, proposal_3, proposal_7])
     end
 
     subject do
