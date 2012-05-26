@@ -9,24 +9,18 @@ class Creditor < ActiveRecord::Base
   belongs_to :company_size
   belongs_to :main_cnae, :class_name => 'Cnae'
 
-  delegate :personable_type, :to => :person, :allow_nil => true
+  delegate :personable_type, :company?, :to => :person, :allow_nil => true
 
   validates :person, :presence => true
   validates :contract_start_date,
     :presence => { :if => :autonomous? },
-    :timeliness => { :type => :date, :allow_blank => true }
-  validates :company_size, :main_cnae, :presence => { :if => :company? }
+    :timeliness => { :type => :date }, :allow_blank => true
+  validates :company_size, :main_cnae, :presence => true, :if => :company?
 
   orderize :id
   filterize
 
   def to_s
     person.to_s
-  end
-
-  protected
-
-  def company?
-    person_id? && person.company?
   end
 end
