@@ -54,8 +54,10 @@ class LicitationProcessProposalsClassificatorByLot
   end
 
   def sorted_proposals
-    bidders.sort_by do |bidder|
+    all_bidders_sorted = bidders.sort_by do |bidder|
       bidder.proposal_total_value_by_lot(lot.id)
     end
+
+    all_bidders_sorted.reject {|bidder| bidder.proposal_total_value_by_lot(lot.id).zero? }
   end
 end
