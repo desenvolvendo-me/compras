@@ -510,11 +510,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :occupation_classifications, :only => [:index] do
-    collection do
-      get :modal
-    end
-  end
+  get 'occupation_classifications/modal', :as => :modal_occupation_classifications
 
   resources :payment_methods do
     collection do
