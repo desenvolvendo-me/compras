@@ -10,6 +10,12 @@
         <th>
           Valor cotado
         </th>
+        <th>
+          Quantidade
+        </th>
+        <th>
+          Valor total
+        </th>
       </tr>
     </thead>
 
@@ -18,6 +24,12 @@
         <tr>
           <td>
             <%= winner.provider %>
+          </td>
+          <td>
+            <%= winner.decorator.unit_price %>
+          </td>
+          <td>
+            <%= item.quantity %>
           </td>
           <td>
             <%= winner.decorator.total_price %>

@@ -664,8 +664,12 @@ feature "LicitationProcesses" do
     page.should have_content 'Apuração: Classificar participantes por item (pregão presencial)'
     page.should have_content 'Antivirus'
     page.should have_content 'Gabriel Sobrinho'
+    page.should have_content '9,00'
+    page.should have_content '2'
     page.should have_content '18,00'
     page.should have_content 'Wenderson Malheiros'
+    page.should have_content '10,00'
+    page.should have_content '2'
     page.should have_content '20,00'
 
     # back to form
