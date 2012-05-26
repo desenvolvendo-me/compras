@@ -73,17 +73,21 @@ class LicitationProcessBidder < ActiveRecord::Base
   end
 
   def proposal_total_value
-   self.class.joins { proposals.administrative_process_budget_allocation_item }.
+   total = self.class.joins { proposals.administrative_process_budget_allocation_item }.
      where { |bidder| bidder.id.eq id }.
      sum('administrative_process_budget_allocation_items.quantity * licitation_process_bidder_proposals.unit_price')
+
+    BigDecimal.new(total)
   end
 
   def proposal_total_value_by_lot(lot_id = nil)
     return 0 unless lot_id
 
-    self.class.joins { proposals.administrative_process_budget_allocation_item.licitation_process_lot }.
+    total = self.class.joins { proposals.administrative_process_budget_allocation_item.licitation_process_lot }.
       where { |bidder| (bidder.id.eq id) & (bidder.proposals.administrative_process_budget_allocation_item.licitation_process_lot.id.eq lot_id) }.
       sum('administrative_process_budget_allocation_items.quantity * licitation_process_bidder_proposals.unit_price')
+
+    BigDecimal.new(total)
   end
 
   protected
