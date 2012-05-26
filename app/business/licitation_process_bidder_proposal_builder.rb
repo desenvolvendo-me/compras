@@ -7,15 +7,11 @@ class LicitationProcessBidderProposalBuilder
 
   def build!
     bidder.items.each  do |item|
-      build_proposal(item) unless has_bidder_proposal?(item)
+      build_proposal(item) unless item.bidder_proposal?(bidder)
     end
   end
 
   private
-
-  def has_bidder_proposal?(item) 
-    item.licitation_process_bidder_proposals.where { |p| p.licitation_process_bidder_id.eq(bidder.id) }.any?
-  end
 
   def build_proposal(item)
     bidder.proposals.build({ :administrative_process_budget_allocation_item => item })

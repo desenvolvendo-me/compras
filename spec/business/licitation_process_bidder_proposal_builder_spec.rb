@@ -22,13 +22,13 @@ describe LicitationProcessBidderProposalBuilder do
   end
 
   it "should build proposals" do
-    item.licitation_process_bidder_proposals.should_receive(:where).and_return( [ ] )
+    item.stub(:bidder_proposal?).and_return( false )
     bidder.proposals.should_receive(:build)
     LicitationProcessBidderProposalBuilder.new(bidder).build!
   end
 
   it "should not build proposals when already exists" do
-    item.licitation_process_bidder_proposals.should_receive(:where).and_return( [ true ] )
+    item.stub(:bidder_proposal?).and_return( true )
     bidder.proposals.should_not_receive(:build)
     LicitationProcessBidderProposalBuilder.new(bidder).build!
   end

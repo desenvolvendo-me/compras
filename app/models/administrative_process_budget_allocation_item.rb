@@ -45,4 +45,8 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
   def winner_proposals(classificator = LicitationProcessProposalsClassificatorByItem)
     classificator.new(self, type_of_calculation).winner_proposals
   end
+
+  def bidder_proposal?(bidder)
+    licitation_process_bidder_proposals.where { |p| p.licitation_process_bidder_id.eq(bidder.id) }.any?
+  end
 end
