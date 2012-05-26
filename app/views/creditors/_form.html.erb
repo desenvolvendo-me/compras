@@ -39,9 +39,6 @@
     $('#creditor_social_identification_number').parent().hide();
   };
 
-  function hideFieldsExceptSpecialEntryFields(){
-  };
-
   function renderPartial(){
     switch ($('#creditor_personable_type').val()){
       case 'Individual':
@@ -51,10 +48,6 @@
       case 'Company':
         $("#creditor-tabs").html($("#company-template").mustache());
         hideFieldsExceptCompanyFields();
-        break;
-      case 'SpecialEntry':
-        $("#creditor-tabs").html($("#special-entry-template").mustache());
-        hideFieldsExceptSpecialEntryFields();
         break;
     }
   };
