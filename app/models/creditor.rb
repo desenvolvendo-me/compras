@@ -2,7 +2,7 @@ class Creditor < ActiveRecord::Base
   attr_accessible :person_id, :occupation_classification_id, :company_size_id
   attr_accessible :main_cnae_id, :municipal_public_administration, :autonomous
   attr_accessible :social_identification_number, :choose_simple
-  attr_accessible :social_identification_number_date, :contract_start_date
+  attr_accessible :contract_start_date
 
   belongs_to :person
   belongs_to :occupation_classification
@@ -12,9 +12,6 @@ class Creditor < ActiveRecord::Base
   delegate :personable_type, :to => :person, :allow_nil => true
 
   validates :person, :presence => true
-  validates :social_identification_number_date, 
-    :presence => { :if => :social_identification_number? },
-    :timeliness => { :before => :today, :type => :date, :allow_blank => true }
   validates :contract_start_date,
     :presence => { :if => :autonomous? },
     :timeliness => { :type => :date, :allow_blank => true }

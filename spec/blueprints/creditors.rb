@@ -4,7 +4,6 @@ Creditor.blueprint(:sobrinho) do
   municipal_public_administration { false }
   autonomous { false }
   social_identification_number { "123456" }
-  social_identification_number_date { Date.new(2012, 05, 04) }
 end
 
 Creditor.blueprint(:nohup) do
