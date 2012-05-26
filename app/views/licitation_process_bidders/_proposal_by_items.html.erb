@@ -2,7 +2,7 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-2">
-      <%= f.input :proposal_total_value, :input_html => { :class => 'proposal-total-value', :value => number_to_currency(f.object.proposal_total_value, :format => "%n"), :size => 12, :disabled => true } %>
+      <%= f.input :proposal_total_value, :input_html => { :class => 'proposal-total-value', :value => f.object.decorator.proposal_total_value, :size => 12, :disabled => true } %>
     </div>
   </div>
 

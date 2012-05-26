@@ -18,4 +18,8 @@ class LicitationProcessBidderDecorator < Decorator
   def proposal_total_value_by_lot(lot_id)
     helpers.number_with_precision component.proposal_total_value_by_lot(lot_id)
   end
+
+  def proposal_total_value
+    helpers.number_to_currency(component.proposal_total_value, :format => "%n")
+  end
 end

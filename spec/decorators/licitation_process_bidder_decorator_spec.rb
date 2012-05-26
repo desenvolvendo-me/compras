@@ -46,5 +46,11 @@ describe LicitationProcessBidderDecorator do
       subject.proposal_total_value_by_lot(lot).should eq '5.000,00'
     end
   end
-end
 
+  it 'should return proposal_total_value' do
+    component.stub(:proposal_total_value).and_return(10.0)
+    helpers.stub(:number_to_currency).with(10.0, {:format => '%n'}).and_return('10,00')
+
+    subject.proposal_total_value.should eq '10,00'
+  end
+end
