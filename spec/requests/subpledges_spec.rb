@@ -82,8 +82,6 @@ feature "SubPledges" do
 
       page.should have_disabled_field 'Saldo a subempenhar'
       page.should have_field 'Saldo a subempenhar', :with => '90,00'
-      page.should have_disabled_field 'Total do empenho a subempenhar'
-      page.should have_field 'Total do empenho a subempenhar', :with => '110,00'
       page.should have_field 'Valor a subempenhar', :with => '110,00'
     end
   end

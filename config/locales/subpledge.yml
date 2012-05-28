@@ -14,7 +14,6 @@ pt-BR:
         pledge_value: "Valor do empenho"
         emission_date: "Data de emissão"
         pledge_balance: "Saldo a subempenhar"
-        subpledge_expirations_sum: 'Total do empenho a subempenhar'
         number: "Subempenho"
         provider: "Fornecedor"
         date: "Data"

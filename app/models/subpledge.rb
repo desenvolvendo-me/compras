@@ -46,10 +46,6 @@ class Subpledge < ActiveRecord::Base
     pledge.pledge_parcels
   end
 
-  def subpledge_expirations_sum
-    subpledge_expirations.sum(:value)
-  end
-
   def next_number
     last_number.succ
   end

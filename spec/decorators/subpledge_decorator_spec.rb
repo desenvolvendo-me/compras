@@ -61,11 +61,4 @@ describe SubpledgeDecorator do
 
     subject.subpledge_cancellations_sum.should eq 'R$ 100,00'
   end
-
-  it 'should return formatted subpledge_expirations_sum' do
-    component.stub(:subpledge_expirations_sum).and_return(100.0)
-    helpers.stub(:number_with_precision).with(100.0).and_return('100,00')
-
-    subject.subpledge_expirations_sum.should eq '100,00'
-  end
 end
