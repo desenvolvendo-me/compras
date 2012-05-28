@@ -88,6 +88,8 @@ class Subpledge < ActiveRecord::Base
     return unless pledge && first_pledge_parcel_available
 
     subpledge_expirations.each do |expiration|
+      next unless expiration.expiration_date?
+
       if expiration.expiration_date < first_pledge_parcel_available.expiration_date
         expiration.errors.add(:expiration_date, :must_not_be_greater_to_first_pledge_parcel_avaliable, :restriction => I18n.l(first_pledge_parcel_available.expiration_date))
       end
