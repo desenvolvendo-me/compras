@@ -66,11 +66,16 @@
         $('#subpledge_provider_id').val(pledge.provider_id);
         $('#subpledge_provider').val(pledge.provider);
         $('#subpledge_description').val(pledge.description);
+
+        $('#pledge_value').html(pledge.pledge_value_as_currency);
+        $('#pledge_balance').html(pledge.balance_as_currency);
         createPledgeParcelsFromPledge(pledge.parcels);
       } else {
         $('#subpledge_pledge_provider').val('');
         $('#subpledge_emission_date').val('');
         $('#subpledge_pledge_value').val('');
+        $('#pledge_value').html('');
+        $('#pledge_balance').html('');
       }
     });
 

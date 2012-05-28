@@ -78,6 +78,9 @@ feature "SubPledges" do
         find('.balance').should have_content 'R$ 90,00'
       end
 
+      page.find('#pledge_balance').should have_content 'R$ 90,00'
+      page.find('#pledge_value').should have_content 'R$ 200,00'
+
       page.should have_field 'Valor a subempenhar', :with => '110,00'
     end
   end
@@ -185,6 +188,9 @@ feature "SubPledges" do
     within_tab 'Vencimentos' do
       page.should have_content I18n.l(Date.current + 1.day)
       page.should have_content '9,99'
+
+      page.find('#pledge_balance').should have_content 'R$ 9,99'
+      page.find('#pledge_value').should have_content 'R$ 9,99'
     end
 
     within_tab 'Principal' do

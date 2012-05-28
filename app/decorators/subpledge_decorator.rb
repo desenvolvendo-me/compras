@@ -25,4 +25,12 @@ class SubpledgeDecorator < Decorator
   def value
     helpers.number_to_currency super if super
   end
+
+  def pledge_value_as_currency
+    helpers.number_to_currency component.pledge_value if component.pledge_value
+  end
+
+  def pledge_balance
+    helpers.number_to_currency super if super
+  end
 end
