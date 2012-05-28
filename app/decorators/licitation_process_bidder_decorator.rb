@@ -20,6 +20,6 @@ class LicitationProcessBidderDecorator < Decorator
   end
 
   def proposal_total_value
-    helpers.number_to_currency(component.proposal_total_value, :format => "%n")
+    helpers.number_to_currency(super, :format => "%n") if super
   end
 end
