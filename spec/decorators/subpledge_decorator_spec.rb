@@ -20,25 +20,11 @@ describe SubpledgeDecorator do
     subject.pledge_value.should eq '9,99'
   end
 
-  it 'should return formatted pledge_balance' do
-    component.stub(:pledge_balance).and_return(9.99)
-    helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
-
-    subject.pledge_balance.should eq '9,99'
-  end
-
   it 'should return formatted balance' do
     component.stub(:balance).and_return(9.99)
     helpers.stub(:number_with_precision).with(9.99).and_return('9,99')
 
     subject.balance.should eq '9,99'
-  end
-
-  it 'should return formatted pledge_balance as currency' do
-    component.stub(:pledge_balance).and_return(100.0)
-    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
-
-    subject.pledge_balance_as_currency.should eq 'R$ 100,00'
   end
 
   it 'should return formatted balance as currency' do

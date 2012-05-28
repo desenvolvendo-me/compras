@@ -28,8 +28,6 @@ feature "SubPledges" do
     end
 
     within_tab 'Vencimentos' do
-      page.should have_disabled_field 'Saldo a subempenhar'
-
       click_button 'Adicionar Parcela'
 
       within '.subpledge-expiration:first' do
@@ -80,8 +78,6 @@ feature "SubPledges" do
         find('.balance').should have_content 'R$ 90,00'
       end
 
-      page.should have_disabled_field 'Saldo a subempenhar'
-      page.should have_field 'Saldo a subempenhar', :with => '90,00'
       page.should have_field 'Valor a subempenhar', :with => '110,00'
     end
   end
@@ -248,7 +244,6 @@ feature "SubPledges" do
     end
 
     within_tab 'Vencimentos' do
-      page.should have_field 'Saldo a subempenhar', :with => '9,99'
       page.should have_field 'Valor a subempenhar', :with => '9,99'
     end
 
@@ -258,10 +253,6 @@ feature "SubPledges" do
       page.should have_field 'Fornecedor do empenho', :with => ''
       page.should have_field 'Data de emissão', :with => ''
       page.should have_field 'Valor do empenho', :with => ''
-    end
-
-    within_tab 'Vencimentos' do
-      page.should have_field 'Saldo a subempenhar', :with => ''
     end
   end
 

@@ -10,20 +10,12 @@ class SubpledgeDecorator < Decorator
     helpers.number_with_precision component.pledge_value if component.pledge_value
   end
 
-  def pledge_balance
-    helpers.number_with_precision component.pledge_balance if component.pledge_balance
-  end
-
   def balance
     helpers.number_with_precision component.balance if component.balance
   end
 
   def balance_as_currency
     helpers.number_to_currency component.balance if component.balance
-  end
-
-  def pledge_balance_as_currency
-    helpers.number_to_currency component.pledge_balance if component.pledge_balance
   end
 
   def subpledge_cancellations_sum
