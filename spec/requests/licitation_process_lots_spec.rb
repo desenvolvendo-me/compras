@@ -197,7 +197,7 @@ feature "LicitationProcessLots" do
       page.find('a').click
     end
 
-    page.should have_content "Editar Lote de itens(Lote 1) do Processo Licitatório 1/2013"
+    page.should have_content "Editar Lote 1 do Processo Licitatório 1/2013"
   end
 
   scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 1/2013" do

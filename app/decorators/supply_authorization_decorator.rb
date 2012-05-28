@@ -15,4 +15,14 @@ class SupplyAuthorizationDecorator < Decorator
       'Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
     end
   end
+
+  def pluralized_period_unit
+    return unless component.direct_purchase
+
+    if component.period > 1
+      helpers.t("enumerations.period_unit_plural.#{period_unit}")
+    else
+      component.period_unit_humanize
+    end
+  end
 end
