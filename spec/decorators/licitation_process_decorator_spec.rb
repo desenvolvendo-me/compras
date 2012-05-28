@@ -18,6 +18,7 @@ describe LicitationProcessDecorator do
   end
 
   it 'should return a link to count when envelope_opening? is true' do
+    component.stub(:persisted?).and_return(true)
     component.stub(:envelope_opening? => true)
     routes.stub(:licitation_process_path).and_return('#')
     helpers.stub(:link_to).with('Apurar', '#', :class => "button primary").and_return('link')
@@ -26,6 +27,7 @@ describe LicitationProcessDecorator do
   end
 
   it 'should not return a link to count when envelope_opening? is false' do
+    component.stub(:persisted?).and_return(true)
     component.stub(:envelope_opening? => false)
 
     subject.count_link.should eq nil
