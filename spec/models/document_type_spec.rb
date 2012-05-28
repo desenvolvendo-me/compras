@@ -30,13 +30,13 @@ describe DocumentType do
 
       subject.run_callbacks(:destroy)
 
-      subject.errors[:base].should include "não pode set apagado pois há relacionamento com processo licitatório"
+      subject.errors[:base].should include "não pode ser apagado pois há relacionamento com processo licitatório"
     end
   end
 
   it "should destroy if does not have relationship with licitation_process" do
     subject.run_callbacks(:destroy)
 
-    subject.errors[:base].should_not include "não pode set apagado pois há relacionamento com processo licitatório"
+    subject.errors[:base].should_not include "não pode ser apagado pois há relacionamento com processo licitatório"
   end
 end
