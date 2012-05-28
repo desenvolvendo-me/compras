@@ -23,13 +23,13 @@ describe DisseminationSource do
 
       subject.run_callbacks(:destroy)
 
-      subject.errors[:base].should include "não pode ter relacionamento com ato regulamentador"
+      subject.errors[:base].should include "não pode ser apagado pois há relacionamento com ato regulamentador"
     end
   end
 
   it "should destroy if does not have relationship with regulatory_acts" do
     subject.run_callbacks(:destroy)
 
-    subject.errors[:base].should_not include "não pode ter relacionamento com ato regulamentador"
+    subject.errors[:base].should_not include "não pode ser apagado pois há relacionamento com ato regulamentador"
   end
 end
