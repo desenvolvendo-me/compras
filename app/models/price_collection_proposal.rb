@@ -1,5 +1,5 @@
 class PriceCollectionProposal < ActiveRecord::Base
-  attr_accessible :items_attributes
+  attr_accessible :price_collection_id, :provider_id, :items_attributes
 
   belongs_to :price_collection
   belongs_to :provider
@@ -28,5 +28,10 @@ class PriceCollectionProposal < ActiveRecord::Base
     return 0 unless lot
 
     items_by_lot(lot).sum(&:total_price)
+  end
+
+  def self.by_price_collection_and_provider(params = {})
+    where { price_collection_id.eq(params.fetch(:price_collection_id)) &
+            provider_id.eq(params.fetch(:provider_id)) }
   end
 end

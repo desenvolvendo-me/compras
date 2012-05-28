@@ -14,6 +14,7 @@ describe PriceCollection do
     it { should have_many(:price_collections_providers).dependent(:destroy).order(:id) }
     it { should have_many(:price_collection_proposals).dependent(:destroy).order(:id) }
     it { should have_many(:providers).through(:price_collections_providers) }
+    it { should have_many(:items).through(:price_collection_lots) }
   end
 
   context '#validations' do

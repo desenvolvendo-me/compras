@@ -15,6 +15,7 @@ class PriceCollection < ActiveRecord::Base
   belongs_to :payment_method
 
   has_many :price_collection_lots, :dependent => :destroy, :order => :id
+  has_many :items, :through => :price_collection_lots
   has_many :price_collection_proposals, :dependent => :destroy, :order => :id
 
   has_many :price_collections_providers, :dependent => :destroy, :order => :id
@@ -27,6 +28,8 @@ class PriceCollection < ActiveRecord::Base
   validates :period, :period_unit, :proposal_validity, :proposal_validity_unit, :presence => true
   validates :year, :mask => "9999"
   validates :date, :expiration, :timeliness => { :on_or_after => :today, :type => :date }, :on => :create
+
+  after_save :generate_proposals
 
   orderize :id
   filterize
@@ -43,5 +46,11 @@ class PriceCollection < ActiveRecord::Base
 
   def last_by_self_year
     self.class.where{ |p| p.year.eq(year) }.order{ id }.last
+  end
+
+  protected
+
+  def generate_proposals
+    PriceCollectionProposalGenerator.new(self).generate!
   end
 end
