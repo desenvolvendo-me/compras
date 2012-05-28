@@ -67,13 +67,13 @@ describe Material do
 
       subject.run_callbacks(:destroy)
 
-      subject.errors[:base].should include "não pode ter relacionamento com objeto da licitação"
+      subject.errors[:base].should include "não pode ser apagado pois há relacionamento com objeto da licitação"
     end
   end
 
   it "should destroy if does not have licitation_processes" do
     subject.run_callbacks(:destroy)
 
-    subject.errors[:base].should_not include "não pode ter relacionamento com objeto da licitação"
+    subject.errors[:base].should_not include "não pode ser apagado pois há relacionamento com objeto da licitação"
   end
 end

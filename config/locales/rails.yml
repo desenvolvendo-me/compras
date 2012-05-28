@@ -258,7 +258,7 @@ pt-BR:
       already_have_a_licitation_process: "já tem um processo licitatório"
       cannot_have_regulatory_act_relationship: "não pode ter relacionamento com ato regulamentador"
       cannot_be_destroyed_because_have_licitation_process_relationship: "não pode set apagado pois há relacionamento com processo licitatório"
-      cannot_have_licitation_object_relationship: "não pode ter relacionamento com objeto da licitação"
+      cannot_be_destroyed_because_have_licitation_object_relationship: "não pode ser apagado pois há relacionamento com objeto da licitação"
       cannot_have_street_relationship: "não pode ter relacionamento com rua"
       must_be_the_licitation_process_envelope_opening_date: "deve ser a data da abertura do envelope do processo licitatório"
 
