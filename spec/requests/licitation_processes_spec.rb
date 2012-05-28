@@ -872,4 +872,53 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor unitário', :with => '0,00'
     end
   end
+
+  scenario 'create a new licitation_process with envelope opening date today' do
+    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    allocation = BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
+
+    within_tab 'Dados gerais' do
+      select 'Global', :from => 'Tipo de empenho'
+
+      fill_in 'Detalhamento do objeto', :with => 'detalhamento'
+      select 'Menor preço global', :from => 'Tipo da apuração'
+      fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+      fill_in 'Validade da proposta', :with => '5'
+      select 'dia', :from => 'Unidade da validade da proposta'
+      fill_in 'Índice de reajuste', :with => 'XPTO'
+      fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      fill_mask 'Hora da entrega', :with => I18n.l(Date.current, :format => 'time')
+      fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.current)
+      fill_mask 'Hora da abertura', :with => I18n.l(Date.current, :format => 'time')
+      fill_in 'Índice de reajuste', :with => 'XPTO'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano', :from => 'Unidade do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Valor da caução', :with => '50,00'
+      select 'Favorável', :from => 'Parecer jurídico'
+      fill_mask 'Data do parecer', :with => '30/03/2012'
+      fill_mask 'Data do contrato', :with => '31/03/2012'
+      fill_in 'Validade do contrato (meses)', :with => '5'
+      fill_in 'Observações gerais', :with => 'observacoes'
+    end
+
+    click_button 'Salvar'
+
+    page.should_not have_content 'Routing Error No route matches'
+  end
 end

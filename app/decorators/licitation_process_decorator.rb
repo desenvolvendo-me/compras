@@ -20,6 +20,8 @@ class LicitationProcessDecorator < Decorator
   end
 
   def count_link
+    return unless component.persisted?
+
     helpers.link_to('Apurar', routes.licitation_process_path(component), :class => "button primary") if component.envelope_opening?
   end
 
