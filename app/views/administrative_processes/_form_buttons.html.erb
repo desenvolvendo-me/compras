@@ -1,8 +1,11 @@
 <div class="buttons">
   <% if f.object.waiting? %>
     <%= f.button :submit %>
-    <%= f.button :submit, 'Liberar' if f.object.persisted? %>
-    <%= f.button :submit, 'Anular', :class => 'negative' if f.object.persisted? %>
+
+    <% if f.object.persisted? %>
+      <%= f.button :submit, 'Liberar' %>
+      <%= f.button :submit, 'Anular', :class => 'negative' %>
+    <% end %>
   <% end %>
 
   <%= f.object.decorator.build_licitation_process_link %>
