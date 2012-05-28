@@ -7,9 +7,6 @@ class LicitationProcessBidderDocument < ActiveRecord::Base
   delegate :description, :to => :document_type, :allow_nil => true
 
   validates :document_type, :presence => true
-
-  with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :emission_date, :timeliness => { :on_or_before => :today, :type => :date }
-    allowing_blank.validates :validity, :timeliness => { :on_or_after => :emission_date, :type => :date }
-  end
+  validates :emission_date, :timeliness => { :on_or_before => :today, :type => :date }, :allow_blank => true
+  validates :validity, :timeliness => { :on_or_after => :emission_date, :type => :date }, :allow_blank => true
 end
