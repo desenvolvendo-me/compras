@@ -90,9 +90,8 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :supply_authorizations, :except => [:new, :create, :edit, :update, :destroy] do
+  resources :supply_authorizations, :only => [:show, :modal] do
     collection do
-      get :filter
       get :modal
     end
   end

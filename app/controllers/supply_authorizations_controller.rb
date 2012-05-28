@@ -1,5 +1,5 @@
 class SupplyAuthorizationsController < CrudController
-  actions :all, :except => [:new, :create, :edit, :update, :destroy]
+  actions :all, :except => [:show, :modal]
 
   def show
     render :layout => 'report'
