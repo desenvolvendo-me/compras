@@ -17,4 +17,11 @@ describe PriceCollectionLotItem do
     subject.should_not allow_value(0).for(:quantity).
                                                     with_message("deve ser maior ou igual a 1")
   end
+
+  it 'should return the winner proposal' do
+    classificator = double(:winner_proposal => 'proposal 1')
+    classificator_class = double(:new => classificator)
+
+    subject.winner_proposal(classificator_class).should eq 'proposal 1'
+  end
 end

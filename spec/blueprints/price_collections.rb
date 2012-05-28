@@ -1,4 +1,5 @@
 PriceCollection.blueprint(:coleta_de_precos) do
+  type_of_calculation { PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   collection_number { 1 }
   year { 2012 }
   date { Date.current }

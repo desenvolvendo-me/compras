@@ -399,4 +399,26 @@ feature "PriceCollections" do
       page.should_not have_field 'Observações', :with => 'lote da coleta'
     end
   end
+
+  scenario 'calc by lowest_total_price_by_item' do
+    PriceCollection.make!(:coleta_de_precos)
+    PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
+
+    click_link 'Processos'
+
+    click_link 'Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apurar'
+
+    page.should have_content 'Apuração: Menor preço total por item'
+    page.should have_content 'Antivirus'
+    page.should have_content '10'
+    page.should have_content '50,00 '
+    page.should have_content '500,00 '
+    page.should have_content 'Wenderson Malheiros'
+  end
 end

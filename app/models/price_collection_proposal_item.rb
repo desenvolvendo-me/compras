@@ -9,6 +9,7 @@ class PriceCollectionProposalItem < ActiveRecord::Base
   has_one :price_collection_lot, :through => :price_collection_lot_item
 
   delegate :material, :brand, :reference_unit, :quantity, :to => :price_collection_lot_item, :allow_nil => true
+  delegate :provider, :to => :price_collection_proposal, :allow_nil => true
 
   def total_price
     (unit_price || 0) * (quantity || 0)

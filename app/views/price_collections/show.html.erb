@@ -1,0 +1,7 @@
+<h1>Coleta de preços <%= resource %></h1>
+
+<p>Apuração: <%= resource.type_of_calculation_humanize %></p>
+
+<%= render resource.type_of_calculation %>
+
+<%= link_to 'Voltar', edit_price_collection_path(resource), :class => "button primary" %>
