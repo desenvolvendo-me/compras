@@ -26,6 +26,7 @@ feature "PriceCollections" do
 
       fill_mask 'Ano', :with => '2012'
       fill_mask 'Data', :with => I18n.l(Date.current)
+      select 'Menor preço total por item', :from => 'Tipo de apuração'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -74,6 +75,7 @@ feature "PriceCollections" do
 
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data', :with => I18n.l(Date.current)
+      page.should have_select 'Tipo de apuração', :selected => 'Menor preço total por item'
       page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'

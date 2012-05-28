@@ -2,13 +2,14 @@ class PriceCollection < ActiveRecord::Base
   attr_accessible :collection_number, :year, :date, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :object_description, :observations, :expiration
   attr_accessible :period, :period_unit, :proposal_validity, :proposal_validity_unit
-  attr_accessible :price_collection_lots_attributes, :provider_ids
+  attr_accessible :price_collection_lots_attributes, :provider_ids, :type_of_calculation
 
   attr_readonly :year, :collection_number
 
   has_enumeration_for :status
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :proposal_validity_unit, :with => PeriodUnit
+  has_enumeration_for :type_of_calculation, :with => PriceCollectionTypeOfCalculation
 
   belongs_to :delivery_location
   belongs_to :employee

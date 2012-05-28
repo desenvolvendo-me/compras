@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    price_collection_type_of_calculation:
+      lowest_total_price_by_item: "Menor preço total por item"
+      lowest_global_price: "Menor preço global"
+      lowest_price_by_lot: "Menor preço por lote"
