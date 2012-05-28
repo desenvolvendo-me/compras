@@ -849,4 +849,27 @@ feature "LicitationProcesses" do
       page.should have_field 'Número do protocolo', :with => '00088/2012'
     end
   end
+
+  scenario 'budget allocation with quantity empty and total item value should have 0 as unit value' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    within_tab 'Dotações' do
+      click_button 'Remover Item'
+      click_button 'Adicionar Item'
+
+      fill_in 'Valor total', :with => '20,00'
+      
+      page.should have_field 'Valor unitário', :with => '0,00'
+    end
+  end
 end

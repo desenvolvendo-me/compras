@@ -109,6 +109,10 @@
         itemPrice = parsePtBrFloat(itemDiv.find('.item-price').val() || '0'),
         unitPrice = floatToPtBrString(itemPrice / itemQuantity);
 
+    if (itemQuantity == '0') {
+      unitPrice = floatToPtBrString(0)
+    }
+
     itemDiv.find('.item-unit-price').val(unitPrice);
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
