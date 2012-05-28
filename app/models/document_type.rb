@@ -24,7 +24,7 @@ class DocumentType < ActiveRecord::Base
   def validate_licitation_process_relationship
     return unless licitation_processes.any?
 
-    errors.add(:base, :cannot_have_licitation_process_relationship)
+    errors.add(:base, :cannot_be_destroyed_because_have_licitation_process_relationship)
 
     false
   end
