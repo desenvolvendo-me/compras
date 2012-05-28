@@ -130,7 +130,7 @@ class Subpledge < ActiveRecord::Base
     return unless pledge && value
 
     if value > pledge_balance
-      errors.add(:value, :must_not_be_greater_than_pledge_balance)
+      errors.add(:value, :must_not_be_greater_than_total_pledge_balance)
     end
   end
 end
