@@ -7,6 +7,7 @@ require 'app/models/material'
 describe PriceCollectionLot do
   it { should belong_to :price_collection }
   it { should have_many :items }
+  it { should have_many(:price_collection_proposals).through(:price_collection) }
 
   it 'should have at least one item' do
     subject.items.should be_empty
@@ -44,5 +45,12 @@ describe PriceCollectionLot do
 
     item_one.errors.messages[:material_id].should be_nil
     item_two.errors.messages[:material_id].should be_nil
+  end
+
+  it 'should return the winner proposal' do
+    classificator = double(:winner_proposal => 'proposal 1')
+    classificator_class = double(:new => classificator)
+
+    subject.winner_proposal(classificator_class).should eq 'proposal 1'
   end
 end

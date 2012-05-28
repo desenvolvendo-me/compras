@@ -4,11 +4,18 @@ class PriceCollectionLot < ActiveRecord::Base
   belongs_to :price_collection
 
   has_many :items, :class_name => 'PriceCollectionLotItem', :dependent => :destroy, :order => :id
+  has_many :price_collection_proposals, :through => :price_collection
+
+  delegate :provider, :to => :winner_proposal, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
   validate :must_have_at_least_one_item
   validate :cannot_have_duplicated_materials
+
+  def winner_proposal(classificator = PriceCollectionProposalsClassificatorByLot)
+    classificator.new(self).winner_proposal
+  end
 
   protected
 

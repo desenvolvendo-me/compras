@@ -1,0 +1,31 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        Lote
+      </th>
+      <th>
+        Fornecedor
+      </th>
+      <th>
+        Valor cotado
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% localized(resource.price_collection_lots).each_with_index do |lot, index| %>
+      <tr>
+        <td>
+          Lote <%= index.succ %>
+        </td>
+        <td>
+          <%= lot.winner_proposal.provider %>
+        </td>
+        <td>
+          <%= lot.winner_proposal.decorator.item_total_value_by_lot(lot) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -421,4 +421,24 @@ feature "PriceCollections" do
     page.should have_content '500,00 '
     page.should have_content 'Wenderson Malheiros'
   end
+
+  scenario 'calc by lowest_total_price_by_item' do
+    PriceCollection.make!(:coleta_de_precos, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
+    PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
+
+    click_link 'Processos'
+
+    click_link 'Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apurar'
+
+    page.should have_content 'Apuração: Menor preço por lote'
+    page.should have_content 'Lote 1'
+    page.should have_content 'Wenderson Malheiros'
+    page.should have_content '500,00 '
+  end
 end
