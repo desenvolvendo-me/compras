@@ -11,6 +11,7 @@ describe OccupationClassification do
   end
 
   it { should have_many(:creditors).dependent(:restrict) }
+
   it { should validate_presence_of :name }
   it { should validate_presence_of :code }
 end
