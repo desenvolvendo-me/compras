@@ -14,7 +14,8 @@ feature "PrecatoryTypes" do
     click_link 'Criar Tipos de Precatório'
 
     fill_in 'Descrição', :with => 'Precatórios Alimentares'
-    select 'Ativo', :from => 'Status'
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
