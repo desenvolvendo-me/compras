@@ -15,11 +15,11 @@ class PledgeDecorator < Decorator
   end
 
   def balance_as_currency
-    helpers.number_to_currency component.balance
+    helpers.number_to_currency component.balance if component.balance
   end
 
   def pledge_cancellations_sum
-    helpers.number_to_currency super
+    helpers.number_to_currency super if super
   end
 
   def liquidation_value
