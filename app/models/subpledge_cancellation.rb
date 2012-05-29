@@ -12,8 +12,9 @@ class SubpledgeCancellation < ActiveRecord::Base
   delegate :subpledge_cancellations_sum, :to => :subpledge, :allow_nil => true
 
   validates :year, :pledge, :subpledge, :presence => true
-  validates :entity, :value, :date, :reason, :presence => true
+  validates :entity, :date, :reason, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
+  validates :value, :presence => true, :numericality => { :greater_than => 0 }
   validate :pledge_must_has_subpledges
   validate :value_must_not_be_greater_than_subpledge_balance
 
