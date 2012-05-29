@@ -47,8 +47,8 @@ feature "ExtraCredits" do
         fill_in 'Valor', :with => '10,00'
       end
 
-      page.should have_disabled_field 'Suplemento'
-      page.should have_field 'Suplemento', :with => '10,00'
+      page.should have_disabled_field 'Suplementado'
+      page.should have_field 'Suplementado', :with => '10,00'
 
       page.should have_disabled_field 'Reduzido'
       page.should have_field 'Reduzido', :with => '10,00'
@@ -92,8 +92,8 @@ feature "ExtraCredits" do
         page.should have_field 'Valor', :with => '10,00'
       end
 
-      page.should have_disabled_field 'Suplemento'
-      page.should have_field 'Suplemento', :with => '10,00'
+      page.should have_disabled_field 'Suplementado'
+      page.should have_field 'Suplementado', :with => '10,00'
 
       page.should have_disabled_field 'Reduzido'
       page.should have_field 'Reduzido', :with => '10,00'
@@ -123,7 +123,7 @@ feature "ExtraCredits" do
 
         ignoring_scopes do
           # bugfix: avoid NaN error
-          page.should have_field 'Suplemento', :with => '0,00'
+          page.should have_field 'Suplementado', :with => '0,00'
           page.should have_field 'Diferença', :with => '0,00'
         end
 
@@ -146,8 +146,8 @@ feature "ExtraCredits" do
         fill_in 'Valor', :with => '10,00'
       end
 
-      page.should have_disabled_field 'Suplemento'
-      page.should have_field 'Suplemento', :with => '10,00'
+      page.should have_disabled_field 'Suplementado'
+      page.should have_field 'Suplementado', :with => '10,00'
 
       page.should have_disabled_field 'Reduzido'
       page.should have_field 'Reduzido', :with => '10,00'
