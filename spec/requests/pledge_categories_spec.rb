@@ -14,7 +14,8 @@ feature "PledgeCategories" do
     click_link 'Criar Categoria de Empenho'
 
     fill_in 'Descrição', :with => 'Geral'
-    select 'Ativo', :from => 'Status'
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
