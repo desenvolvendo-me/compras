@@ -14,8 +14,13 @@ describe PledgeLiquidationCancellation do
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
 
+  it { should validate_numericality_of :value }
+
   it { should_not allow_value('2a12').for(:year) }
   it { should allow_value('2012').for(:year) }
+  it { should allow_value(14).for(:value) }
+  it { should_not allow_value(0).for(:value) }
+  it { should_not allow_value(-10).for(:value) }
 
   context 'validate value' do
     before do
