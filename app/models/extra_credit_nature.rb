@@ -3,6 +3,8 @@ class ExtraCreditNature < ActiveRecord::Base
 
   has_enumeration_for :kind, :with => ExtraCreditNatureKind
 
+  has_many :extra_credits, :dependent => :restrict
+
   validates :description, :kind, :presence => true
 
   orderize :description
