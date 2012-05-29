@@ -72,7 +72,7 @@ class Pledge < ActiveRecord::Base
   end
 
   def items_total_value
-    pledge_items.map(&:estimated_total_price).compact.sum
+    pledge_items.map(&:estimated_total_price).sum
   end
 
   def pledge_parcels_with_balance
