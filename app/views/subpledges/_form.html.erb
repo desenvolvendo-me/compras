@@ -43,18 +43,6 @@
       $('#expirations tbody').html(rendered);
     }
 
-    function pledgeParcelTotalValue() {
-      var total = 0;
-
-      $('.parcel-value:visible').each(function() {
-        var value = $(this).val();
-
-        if (value) {
-          total += parsePtBrFloat(value);
-        }
-      });
-    }
-
     $('#subpledge_pledge_id').change(function (event, pledge) {
       cleanExistingPledgeParcels();
 
@@ -81,9 +69,20 @@
 
     $('form.subpledge').delegate('.remove-subpledge-expiration', 'click', fillExpirationNumber);
     $('form.subpledge').bind('append.mustache', fillExpirationNumber);
-    $('form.subpledge').delegate('.parcel-value', 'keyup', pledgeParcelTotalValue);
-    $('form.subpledge').delegate('.remove-subpledge-expiration', 'click', pledgeParcelTotalValue);
 
     fillExpirationNumber();
   <% end %>
+
+  function calculateTotalExpirations() {
+    var totalExpirations = 0;
+
+    $('.parcel-value:visible').each(function() {
+      totalExpirations += parsePtBrFloat($(this).val() || '0');
+    });
+
+    $('#subpledge_subpledge_expirations_total_value').val(numberWithDelimiter(totalExpirations))
+  }
+
+  $('form.subpledge').delegate('.parcel-value', 'keyup', calculateTotalExpirations)
+  $('form.subpledge').delegate('.remove-subpledge-expiration', 'click', calculateTotalExpirations);
 </script>

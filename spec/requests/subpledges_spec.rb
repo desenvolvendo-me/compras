@@ -35,6 +35,8 @@ feature "SubPledges" do
         fill_in 'Valor *', :with => '110,00'
       end
 
+      page.should have_field 'Valor total das parcelas', :with => '110,00'
+
       fill_in 'Valor a subempenhar', :with => '110,00'
     end
 
@@ -129,15 +131,29 @@ feature "SubPledges" do
         fill_in 'Valor *', :with => '100,00'
       end
 
+      page.should have_field 'Valor total das parcelas', :with => '100,00'
+
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:first' do
+        fill_in 'Valor *', :with => '50,00'
+      end
+
+      page.should have_field 'Valor total das parcelas', :with => '150,00'
+
+      within '.subpledge-expiration:first' do
+        click_button 'Remover Parcela'
+      end
+
+      page.should have_field 'Valor total das parcelas', :with => '100,00'
+
       fill_in 'Valor a subempenhar', :with => '10,00'
     end
 
     click_button 'Salvar'
 
     within_tab 'Vencimentos' do
-      within '.subpledge-expiration:first' do
-        page.should have_content 'a soma de todos os valores não pode ser maior o valor do subempenho'
-      end
+        page.should have_content 'deve ser igual ao valor a subempenhar'
     end
   end
 

@@ -68,6 +68,10 @@ class Subpledge < ActiveRecord::Base
     subpledge_expirations.select { |subpledge_expiration| subpledge_expiration.balance > 0 }
   end
 
+  def subpledge_expirations_total_value
+    subpledge_expirations.compact.sum(&:value)
+  end
+
   protected
 
   def last_number
@@ -95,12 +99,8 @@ class Subpledge < ActiveRecord::Base
   def subpledge_expirations_value_sum_should_be_equals_value
     return unless value
 
-    if subpledge_expirations.map(&:value).compact.sum > value
-      subpledge_expirations.each do |expiration|
-        expiration.errors.add(:value, :subpledge_expiration_value_sum_must_not_be_greater_to_subpledge_value)
-      end
-
-      errors.add(:pledge_parcels, :invalid)
+    if subpledge_expirations_total_value != value
+      errors.add(:subpledge_expirations_total_value, :must_be_equals_subpledge_value)
     end
   end
 

@@ -155,4 +155,31 @@ describe Subpledge do
       subject.movimentable_pledge_parcels.should eq pledge_parcels
     end
   end
+
+  context "with expirations" do
+    let :subpledge_expirations do
+      [
+        double('expiration1', :value => 100),
+        double('expiration2', :value => 50)
+      ]
+    end
+
+    it "should not allow subpledge_value different from subpledge_expirations_total_value" do
+      subject.stub(:value => 200)
+      subject.stub(:subpledge_expirations => subpledge_expirations)
+
+      subject.valid?
+
+      subject.errors[:subpledge_expirations_total_value].should include "deve ser igual ao valor a subempenhar"
+    end
+
+    it "should allow subpledge_value equals subpledge_expirations_total_value" do
+      subject.stub(:value => 150)
+      subject.stub(:subpledge_expirations => subpledge_expirations)
+
+      subject.valid?
+
+      subject.errors[:subpledge_expirations_total_value].should_not include "deve ser igual ao valor a subempenhar"
+    end
+  end
 end
