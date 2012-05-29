@@ -14,7 +14,7 @@ describe PrecatoryTypesController do
     end
   end
 
-  context '#get' do
+  context '#post' do
     it 'should use active as default value for status' do
       post :create
 
