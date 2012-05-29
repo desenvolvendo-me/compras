@@ -643,7 +643,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar #{licitation_process}"
   end
 
   scenario "should show the count report by type_of_calculation being sort_participants_by_item" do
