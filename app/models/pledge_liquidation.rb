@@ -13,8 +13,9 @@ class PledgeLiquidation < ActiveRecord::Base
   delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :liquidation_value, :to => :pledge, :prefix => true, :allow_nil => true
 
-  validates :pledge, :kind, :value, :presence => true
+  validates :pledge, :kind, :presence => true
   validates :date, :entity, :year, :presence => true
+  validates :value, :presence => true, :numericality => { :greater_than => 0 }
   validate :date_must_be_greater_than_emission_date
   validate :validate_value
 
