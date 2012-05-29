@@ -3,7 +3,7 @@ require 'unit_helper'
 # ActiveRecord
 require 'active_record'
 
-spec = YAML.load_file(File.expand_path('config/database.yml'))
+spec = YAML.load(ERB.new(File.read('config/database.yml')).result)
 ActiveRecord::Base.establish_connection(spec['test'])
 
 # Squeel
