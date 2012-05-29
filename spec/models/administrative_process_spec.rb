@@ -10,6 +10,7 @@ require 'app/models/budget_allocation'
 require 'app/enumerations/administrative_process_modality'
 require 'app/enumerations/administrative_process_object_type'
 require 'app/business/administrative_process_modalities_by_object_type'
+require 'app/models/signature_configuration'
 
 describe AdministrativeProcess do
   it 'should return process/year as to_s' do
@@ -43,6 +44,11 @@ describe AdministrativeProcess do
   it { should have_db_index([:process, :year]).unique(true) }
 
   it { should_not allow_mass_assignment_of(:delivery_date) }
+
+  it 'should return signatures based on REPORT_NAME' do
+    SignatureConfiguration.should_receive(:signatures_by_report).with('administrative_processes').and_return([])
+    subject.signatures.should eq []
+  end
 
   it "should validate the modality depending on object_type" do
     def test_type(type, modalities_for_type)

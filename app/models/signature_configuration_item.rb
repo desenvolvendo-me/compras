@@ -4,7 +4,7 @@ class SignatureConfigurationItem < ActiveRecord::Base
   belongs_to :signature_configuration
   belongs_to :signature
 
-  delegate :position, :to => :signature, :allow_nil => true
+  delegate :person, :position, :to => :signature, :allow_nil => true
 
   validates :order, :signature, :presence => true
 end

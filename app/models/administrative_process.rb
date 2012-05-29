@@ -1,4 +1,6 @@
 class AdministrativeProcess < ActiveRecord::Base
+  REPORT_NAME = SignatureReport::ADMINISTRATIVE_PROCESSES
+
   attr_accessible :budget_unit_id, :responsible_id
   attr_accessible :process, :year, :date, :modality
   attr_accessible :protocol, :object_type, :status, :description
@@ -49,6 +51,10 @@ class AdministrativeProcess < ActiveRecord::Base
 
   def invited?
     invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
+  end
+
+  def signatures
+    SignatureConfiguration.signatures_by_report(self.class::REPORT_NAME)
   end
 
   protected

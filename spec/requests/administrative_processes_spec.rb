@@ -114,6 +114,7 @@ feature "AdministrativeProcesses" do
     Prefecture.make!(:belo_horizonte)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     administrative_process = AdministrativeProcess.make!(:compra_liberada)
+    SignatureConfiguration.make!(:processo_administrativo)
 
     click_link 'Processos'
 
@@ -135,6 +136,10 @@ feature "AdministrativeProcesses" do
     page.should have_content "Forma Global com Menor Preço"
     page.should have_content "Licitação para compra de carteiras"
     page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
+    page.should have_content 'Gabriel Sobrinho'
+    page.should have_content 'Gerente'
+    page.should have_content 'Wenderson Malheiros'
+    page.should have_content 'Supervisor'
   end
 
   scenario 'value calculation on budget allocations' do
