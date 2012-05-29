@@ -30,6 +30,8 @@ describe Subpledge do
   it { should_not allow_value('201a').for(:year) }
   it { should_not allow_value('201').for(:year) }
 
+  it { should validate_numericality_of :value }
+
   context 'balance' do
     it 'should return correct balance' do
       subject.value = 10
