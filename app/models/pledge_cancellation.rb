@@ -14,9 +14,10 @@ class PledgeCancellation < ActiveRecord::Base
   delegate :balance, :value, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :pledge_cancellations_sum, :to => :pledge, :allow_nil => true
 
-  validates :pledge, :date, :kind, :reason, :value, :entity, :presence => true
+  validates :pledge, :date, :kind, :reason, :entity, :presence => true
   validates :year, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
+  validates :value, :presence => true, :numericality => { :greater_than => 0 }
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greater_or_equal_to_last_pledge_cancellation_date,

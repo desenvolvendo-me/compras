@@ -15,8 +15,13 @@ describe PledgeCancellation do
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
 
+  it { should validate_numericality_of :value }
+
   it { should_not allow_value('2a12').for(:year) }
   it { should allow_value('2012').for(:year) }
+  it { should allow_value(10).for(:value) }
+  it { should_not allow_value(0).for(:value) }
+  it { should_not allow_value(-1).for(:value) }
 
   it { should belong_to :entity }
   it { should belong_to :pledge }
