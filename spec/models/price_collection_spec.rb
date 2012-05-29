@@ -78,4 +78,13 @@ describe PriceCollection do
       end
     end
   end
+
+  it 'should return the winner proposal' do
+    proposal_1 = double('proposal_1', :total_price => 500)
+    proposal_2 = double('proposal_2', :total_price => 300)
+
+    subject.stub(:price_collection_proposals => [proposal_1, proposal_2])
+
+    subject.winner_proposal.should eq proposal_2
+  end
 end

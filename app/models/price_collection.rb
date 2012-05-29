@@ -22,6 +22,8 @@ class PriceCollection < ActiveRecord::Base
   has_many :price_collections_providers, :dependent => :destroy, :order => :id
   has_many :providers, :through => :price_collections_providers
 
+  delegate :provider, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
+
   accepts_nested_attributes_for :price_collection_lots, :allow_destroy => true
 
   validates :collection_number, :year, :date, :delivery_location, :employee, :presence => true
@@ -47,6 +49,10 @@ class PriceCollection < ActiveRecord::Base
 
   def last_by_self_year
     self.class.where{ |p| p.year.eq(year) }.order{ id }.last
+  end
+
+  def winner_proposal
+    price_collection_proposals.min_by(&:total_price)
   end
 
   protected

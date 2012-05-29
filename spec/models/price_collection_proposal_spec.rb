@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/price_collection_proposal'
+require 'app/models/price_collection_proposal_item'
 
 describe PriceCollectionProposal do
   it { should belong_to :price_collection }
@@ -40,5 +41,18 @@ describe PriceCollectionProposal do
 
       subject.item_total_value_by_lot('lot 1').should eq 50
     end
+  end
+
+  it 'should return 0 as the total price when there are no items' do
+    subject.total_price.should eq 0
+  end
+
+  it 'should return the total price' do
+    item_1 = double('item 1', :total_price => 300)
+    item_2 = double('item 2', :total_price => 200)
+
+    subject.stub(:items).and_return([item_1, item_2])
+
+    subject.total_price.should eq 500
   end
 end

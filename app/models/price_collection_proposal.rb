@@ -20,6 +20,12 @@ class PriceCollectionProposal < ActiveRecord::Base
     "#{price_collection} - #{provider}"
   end
 
+  def total_price
+    return 0 if items.empty?
+
+    items.sum(&:total_price)
+  end
+
   def items_by_lot(lot)
     items.select { |item| item.price_collection_lot == lot }
   end
