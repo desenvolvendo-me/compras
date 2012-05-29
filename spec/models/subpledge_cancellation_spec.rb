@@ -59,7 +59,7 @@ describe SubpledgeCancellation do
 
     it 'should not be valid if value greater than subpledge_expiratin_balance' do
       subject.should_not allow_value(4).for(:value).
-                                        with_message('não pode ser superior ao saldo do subempenho')
+                                        with_message('não pode ser superior ao valor atual do subempenho')
     end
 
     it 'should be valid if value is not greater than balance' do

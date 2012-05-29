@@ -226,7 +226,7 @@ pt-BR:
       must_be_greater_than_last_expiration_date: "deve ser maior que a data da última parcela"
       must_be_equals_subpledge_value: "deve ser igual ao valor a subempenhar"
       pledge_parcel_value_sum_must_be_equals_to_pledge_value: "a soma de todos os valores deve ser igual ao valor do empenho"
-      must_not_be_greater_than_subpledge_balance: "não pode ser superior ao saldo do subempenho"
+      must_not_be_greater_than_current_subpledge_value: "não pode ser superior ao valor atual do subempenho"
       must_not_be_greater_than_pledge_parcel_balance: "não pode ser superior ao saldo"
       must_not_be_greater_than_pledge_balance: "não pode ser superior ao saldo do empenho"
       must_not_be_greater_than_total_pledge_balance: "não pode ser superior ao total do empenho a subempenhar"

@@ -45,7 +45,7 @@ class SubpledgeCancellation < ActiveRecord::Base
     return unless subpledge && value
 
     if value > subpledge_balance
-      errors.add(:value, :must_not_be_greater_than_subpledge_balance)
+      errors.add(:value, :must_not_be_greater_than_current_subpledge_value)
     end
   end
 end
