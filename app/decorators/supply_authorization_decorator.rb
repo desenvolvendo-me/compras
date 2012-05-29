@@ -17,7 +17,7 @@ class SupplyAuthorizationDecorator < Decorator
   end
 
   def pluralized_period_unit
-    return unless component.direct_purchase
+    return unless component.direct_purchase && component.period
 
     if component.period > 1
       helpers.t("enumerations.period_unit_plural.#{period_unit}")

@@ -54,4 +54,16 @@ describe SupplyAuthorizationDecorator do
     component.stub(:period_unit_humanize).and_return("mês")
     subject.pluralized_period_unit.should eq 'mês'
   end
+
+  it "should not pluralize the period unit when period is nil" do
+    component.stub(:direct_purchase => direct_purchase)
+    component.stub(:period => nil)
+    subject.pluralized_period_unit.should be_nil
+  end
+
+  it "should not pluralize the period unit when direct_purchase is nill" do
+    component.stub(:direct_purchase => nil)
+    component.stub(:period => 1)
+    subject.pluralized_period_unit.should be_nil
+  end
 end
