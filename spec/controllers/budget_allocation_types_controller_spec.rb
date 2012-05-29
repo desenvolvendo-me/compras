@@ -21,7 +21,6 @@ describe BudgetAllocationTypesController do
       assigns(:budget_allocation_type).status.should eq Status::ACTIVE
     end
 
-
     it 'uses manual as default value for source' do
       post :create
 
