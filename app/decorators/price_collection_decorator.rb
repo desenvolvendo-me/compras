@@ -6,6 +6,6 @@ class PriceCollectionDecorator < Decorator
   end
 
   def winner_proposal_total_price
-    helpers.number_with_precision component.winner_proposal_total_price if component.winner_proposal_total_price
+    helpers.number_with_precision super if super
   end
 end
