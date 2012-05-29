@@ -1,0 +1,15 @@
+<tr class="record cnae">
+  <td>
+    <% id %>
+    <%= code %>
+  </td>
+  <td>
+    <%= name %>
+  </td>
+  <td>
+    <input id="cnaes_record_<%= id %>_id" class="cnae-id" type="hidden" name="<%= f.sanitized_object_name %>[cnae_ids][]" value="<%= id %>" />
+    <input id="cnaes_record_<%= id %>_code" class="cnae-code" type="hidden" value="<%= code %>" />
+    <input id="cnaes_record_<%= id %>_name" class="cnae-name" type="hidden" value="<%= name %>" />
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>

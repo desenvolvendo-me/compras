@@ -11,6 +11,7 @@ Creditor.blueprint(:nohup) do
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { false }
   main_cnae { Cnae.make!(:varejo) }
+  cnaes { [ Cnae.make!(:aluguel) ] }
 end
 
 Creditor.blueprint(:mateus) do
