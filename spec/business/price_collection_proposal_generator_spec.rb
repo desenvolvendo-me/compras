@@ -2,7 +2,6 @@ require 'unit_helper'
 require 'app/business/price_collection_proposal_generator'
 
 describe PriceCollectionProposalGenerator do
-
   subject do
     described_class.new(price_collection, proposal_storage, proposal_item_storage)
   end

@@ -49,7 +49,3 @@ class PriceCollectionProposalGenerator
                                                 :item_id => item.id).empty?
   end
 end
-
-
-
-
