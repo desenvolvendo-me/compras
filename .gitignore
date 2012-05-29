@@ -13,3 +13,4 @@ public/uploads
 Guardfile
 Gemfile.local
 Gemfile.local.lock
+.powenv
