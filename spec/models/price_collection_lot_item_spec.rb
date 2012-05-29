@@ -15,7 +15,7 @@ describe PriceCollectionLotItem do
 
   it 'should not have quantity less than 1' do
     subject.should_not allow_value(0).for(:quantity).
-                                                    with_message("deve ser maior ou igual a 1")
+                                      with_message("deve ser maior ou igual a 1")
   end
 
   it 'should return the winner proposal' do
