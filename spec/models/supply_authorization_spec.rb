@@ -1,6 +1,5 @@
 require 'model_helper'
 require 'app/models/supply_authorization'
-require 'app/models/signature_configuration'
 
 describe SupplyAuthorization do
   it 'should return to_s as code/year' do
@@ -20,8 +19,18 @@ describe SupplyAuthorization do
 
   it { should have_db_index([:code, :year]).unique(true) }
 
-  it 'should return signatures' do
-    SignatureConfiguration.should_receive(:signatures_by_report).with('supply_authorizations').and_return([])
-    subject.signatures.should eq []
+  context 'signatures' do
+    let :signature_configuration_item do
+      double('SignatureConfigurationItem')
+    end
+
+    let :signature_configuration_item_store do
+      double('SignatureConfigurationItemStore')
+    end
+
+    it 'should return related signatures' do
+      signature_configuration_item_store.should_receive(:all_by_configuration_report).with('supply_authorization').and_return [signature_configuration_item]
+      subject.signatures(signature_configuration_item_store).should eq [signature_configuration_item]
+    end
   end
 end

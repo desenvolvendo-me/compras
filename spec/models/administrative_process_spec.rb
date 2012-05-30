@@ -10,7 +10,6 @@ require 'app/models/budget_allocation'
 require 'app/enumerations/administrative_process_modality'
 require 'app/enumerations/administrative_process_object_type'
 require 'app/business/administrative_process_modalities_by_object_type'
-require 'app/models/signature_configuration'
 
 describe AdministrativeProcess do
   it 'should return process/year as to_s' do
@@ -45,9 +44,19 @@ describe AdministrativeProcess do
 
   it { should_not allow_mass_assignment_of(:delivery_date) }
 
-  it 'should return signatures' do
-    SignatureConfiguration.should_receive(:signatures_by_report).with('administrative_processes').and_return([])
-    subject.signatures.should eq []
+  context 'signatures' do
+    let :signature_configuration_item do
+      double('SignatureConfigurationItem')
+    end
+
+    let :signature_configuration_item_store do
+      double('SignatureConfigurationItemStore')
+    end
+
+    it 'should return related signatures' do
+      signature_configuration_item_store.should_receive(:all_by_configuration_report).with('administrative_processes').and_return [signature_configuration_item]
+      subject.signatures(signature_configuration_item_store).should eq [signature_configuration_item]
+    end
   end
 
   it "should validate the modality depending on object_type" do

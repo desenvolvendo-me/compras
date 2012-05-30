@@ -24,8 +24,8 @@ class SupplyAuthorization < ActiveRecord::Base
     direct_purchase.direct_purchase_budget_allocations.map(&:items).flatten.count
   end
 
-  def signatures
-    SignatureConfiguration.signatures_by_report(SignatureReport::SUPPLY_AUTHORIZATIONS)
+  def signatures(signature_configuration_item = SignatureConfigurationItem)
+    signature_configuration_item.all_by_configuration_report(SignatureReport::SUPPLY_AUTHORIZATIONS)
   end
 
   protected

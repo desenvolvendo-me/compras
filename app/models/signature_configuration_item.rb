@@ -7,4 +7,9 @@ class SignatureConfigurationItem < ActiveRecord::Base
   delegate :person, :position, :to => :signature, :allow_nil => true
 
   validates :order, :signature, :presence => true
+
+  def self.all_by_configuration_report(report_name)
+    joins { signature_configuration }.
+    where { signature_configuration.report.eq(report_name) }
+  end
 end
