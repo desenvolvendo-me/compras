@@ -82,7 +82,6 @@ feature "BudgetUnitConfigurations" do
     click_button 'Adicionar Estrutura'
     fill_in 'Nível', :with => '1'
     fill_in 'budget_unit_configuration_budget_unit_levels_attributes_fresh-0_description', :with => 'Órgão'
-    #fill_in 'Dígitos', :with => '2'
     select 'Ponto', :from => 'Separador'
     click_button 'Salvar'
 
