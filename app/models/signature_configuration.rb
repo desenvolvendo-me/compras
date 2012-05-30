@@ -21,7 +21,7 @@ class SignatureConfiguration < ActiveRecord::Base
     report_humanize
   end
 
-  def self.signatures_by_report report_name
+  def self.signatures_by_report(report_name)
     scope = where { report.eq(report_name) }
 
     return [] unless scope.any?
