@@ -227,7 +227,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :condominiums do
+  resources :condominia do
     collection do
       get :modal
       get :filter

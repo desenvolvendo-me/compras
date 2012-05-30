@@ -1,2 +1,0 @@
-class CondominiumsController < CrudController
-end

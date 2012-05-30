@@ -1,4 +1,4 @@
-class Condominium < ActiveRecord::Base
+class Condominium < Unico::Condominium
   attr_accessible :name, :condominium_type
 
   has_enumeration_for :condominium_type

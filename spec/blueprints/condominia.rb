@@ -1,5 +1,5 @@
 Condominium.blueprint(:tambuata) do
-  name               { "Tambuata" }
+  name               { 'Tambuata' }
   condominium_type   { CondominiumType::VERTICAL }
 end
 

@@ -1,7 +1,7 @@
 # encoding:utf-8
 require 'spec_helper'
 
-feature "Condominiums" do
+feature "Condominia" do
   background do
     sign_in
   end
@@ -16,37 +16,37 @@ feature "Condominiums" do
 
     click_link 'Criar Condomínio'
 
-    fill_in 'Nome', :with => 'Edifício Paulista'
-    select 'Vertical', :from => "Tipo de condomínio"
+    fill_in 'Nome', :with => 'Tambuata'
+    select 'Vertical', :from => 'Tipo de condomínio'
 
     click_button 'Salvar'
 
     page.should have_notice 'Condomínio criado com sucesso.'
 
-    click_link 'Edifício Paulista'
+    click_link 'Tambuata'
 
-    page.should have_field 'Nome', :with => 'Edifício Paulista'
-    page.should have_select 'Tipo de condomínio', :with => "Vertical"
+    page.should have_field 'Nome', :with => 'Tambuata'
+    page.should have_select 'Tipo de condomínio', :selected => 'Vertical'
   end
 
   scenario 'update a condominium' do
-    Condominium.make!(:parque_das_flores)
+    Condominium.make!(:tambuata)
 
     click_link 'Cadastros Diversos'
 
     click_link 'Condomínios'
 
-    click_link 'Parque das Flores'
+    click_link 'Tambuata'
 
-    fill_in 'Nome', :with => 'Parque das Plantas'
+    fill_in 'Nome', :with => 'Parque das Flores'
 
     click_button 'Salvar'
 
     page.should have_notice 'Condomínio editado com sucesso.'
 
-    click_link 'Parque das Plantas'
+    click_link 'Parque das Flores'
 
-    page.should have_field 'Nome', :with => 'Parque das Plantas'
+    page.should have_field 'Nome', :with => 'Parque das Flores'
   end
 
   scenario 'destroy a condominium' do

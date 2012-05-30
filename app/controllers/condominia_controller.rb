@@ -1,0 +1,2 @@
+class CondominiaController < CrudController
+end
