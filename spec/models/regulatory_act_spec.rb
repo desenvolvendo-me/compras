@@ -31,13 +31,22 @@ describe RegulatoryAct do
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :vigor_date }
   it { should validate_presence_of :content }
-  it { should validate_presence_of :budget_law_percent }
-  it { should validate_presence_of :revenue_antecipation_percent }
-  it { should validate_presence_of :authorized_debt_value }
   it { should validate_presence_of :legal_text_nature }
   it { should validate_numericality_of :budget_law_percent }
   it { should validate_numericality_of :revenue_antecipation_percent }
   it { should validate_numericality_of :act_number }
+
+  it 'should have zero as default value to budget_law_percent' do
+    subject.budget_law_percent.should eq 0.0
+  end
+
+  it 'should have zero as default value to revenue_antecipation_percent' do
+    subject.revenue_antecipation_percent.should eq 0.0
+  end
+
+  it 'should have zero as default value to authorized_debt_value' do
+    subject.authorized_debt_value.should eq 0.0
+  end
 
   it "should not have vigor_date less than creation_date" do
     subject.creation_date = Date.current
