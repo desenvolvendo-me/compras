@@ -27,6 +27,8 @@ class BudgetUnitConfiguration < ActiveRecord::Base
   def mask
     m = ''
     ordered_budget_unit_levels.each_with_index do |budget_unit_level, idx|
+      next unless budget_unit_level.digits?
+
       m += '9' * budget_unit_level.digits
       m += budget_unit_level.separator unless budget_unit_level.blank? or (idx+1) == budget_unit_levels.size
     end
