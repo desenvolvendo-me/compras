@@ -1,4 +1,4 @@
-<%= f.input :person %>
+<%= f.input :person, :disabled => f.object.persisted?  %>
 
 <%= f.input :personable_type, :as => :hidden %>
 

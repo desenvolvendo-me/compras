@@ -144,8 +144,6 @@ feature "Creditors" do
 
     click_link 'Nohup'
 
-    fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
-
     within_tab 'Principal' do
       fill_modal 'Porte da empressa', :with => 'Empresa de grande porte', :field => 'Nome'
       uncheck 'Optante pelo simples'
