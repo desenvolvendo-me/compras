@@ -6,7 +6,7 @@ require 'app/models/price_collections_provider'
 require 'app/models/price_collection_proposal'
 
 describe PriceCollection do
-  context '#relationships' do
+  context 'relationships' do
     it { should belong_to :delivery_location }
     it { should belong_to :employee }
     it { should belong_to :payment_method }
@@ -17,7 +17,7 @@ describe PriceCollection do
     it { should have_many(:items).through(:price_collection_lots) }
   end
 
-  context '#validations' do
+  context 'validations' do
     it { should validate_presence_of :collection_number }
     it { should validate_presence_of :year }
     it { should validate_presence_of :date }
