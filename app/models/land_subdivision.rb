@@ -1,14 +1,6 @@
-class LandSubdivision < ActiveRecord::Base
-  attr_accessible :name
-
+class LandSubdivision < Unico::LandSubdivision
   has_many :addresses, :dependent => :restrict
-
-  validates :name, :presence => true
 
   filterize
   orderize
-
-  def to_s
-    name
-  end
 end
