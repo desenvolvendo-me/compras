@@ -25,6 +25,8 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
+    page.should have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
+
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
       page.should have_disabled_field 'Unidade orçamentária'
@@ -204,6 +206,8 @@ feature "LicitationProcesses" do
     end
 
     click_link 'Editar processo licitatório'
+
+    page.should have_content "Editar Processo Licitatório 1/2012 do Processo Administrativo 1/2012"
 
     within_tab 'Dados gerais' do
       fill_mask 'Data do processo', :with => '21/03/2013'
