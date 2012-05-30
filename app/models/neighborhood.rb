@@ -1,10 +1,8 @@
-class Neighborhood < ActiveRecord::Base
+class Neighborhood < Unico::Neighborhood
   attr_accessible :name, :city_id, :district_id
 
   belongs_to :city
   belongs_to :district
-
-  has_and_belongs_to_many :streets
 
   has_many :addresses, :dependent => :restrict
 

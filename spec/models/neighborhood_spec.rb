@@ -5,7 +5,6 @@ require 'app/models/address'
 require 'app/models/land_subdivision'
 
 describe Neighborhood do
-  it { should have_and_belong_to_many :streets }
   it { should belong_to :city }
   it { should belong_to :district }
   it { should have_many :addresses }

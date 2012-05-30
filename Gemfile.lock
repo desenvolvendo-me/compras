@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git@github.com:nohupbrasil/unico.git
-  revision: fcf1d530e923f388595370121831223d41250af7
+  revision: 0390e75b83a4d7d71e1a7486dc0cb215f6336b43
   specs:
     unico (0.0.1)
       actionpack (~> 3.2.0)
