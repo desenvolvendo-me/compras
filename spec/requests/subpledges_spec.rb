@@ -306,10 +306,8 @@ feature "SubPledges" do
       page.should have_disabled_field 'Valor a subempenhar'
       page.should have_field 'Valor a subempenhar', :with => '1,00'
 
-      within '.subpledge-expiration:first' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 8.days)
-        fill_in 'Valor *', :with => '1,00'
-      end
+      page.should_not have_button 'Adicionar Parcela'
+      page.should_not have_button 'Remover Parcela'
     end
   end
 

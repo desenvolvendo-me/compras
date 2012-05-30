@@ -16,6 +16,8 @@
 <script>
   <% if f.object.persisted? %>
     $('form.subpledge :input').attr('disabled', true);
+    $('form.subpledge .add-subpledge-expiration').hide();
+    $('form.subpledge .remove-subpledge-expiration').hide();
   <% else %>
     function fillExpirationNumber() {
       $('div.subpledge-expiration .destroy[value=false]').each(function(index, item){
