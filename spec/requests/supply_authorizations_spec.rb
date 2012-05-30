@@ -44,7 +44,6 @@ feature "SupplyAuthorizations" do
     page.should have_content 'Antivirus'
     page.should have_content 'Norton'
     page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
-    sleep 100
     page.should have_content 'Gabriel Sobrinho'
     page.should have_content 'Gerente'
   end
