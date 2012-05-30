@@ -3,7 +3,7 @@ class SubpledgeExpiration < ActiveRecord::Base
 
   belongs_to :subpledge
 
-  has_many :subpledge_expiration_movimentations
+  has_many :subpledge_expiration_movimentations, :dependent => :restrict
 
   validates :expiration_date, :value, :presence => true
   validates :expiration_date, :timeliness => { :on_or_after => :today, :type => :date }, :on => :create
