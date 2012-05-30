@@ -48,7 +48,7 @@ class Pledge < ActiveRecord::Base
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
-  validate :parcels_should_have_date_greater_than_emission_date
+  validate :parcels_should_have_date_greater_than_or_equals_emission_date
   validate :parcels_should_have_date_greater_than_last_parcel_date
   validate :pledge_parcels_value_should_be_equals_value
 
@@ -142,11 +142,11 @@ class Pledge < ActiveRecord::Base
     end
   end
 
-  def parcels_should_have_date_greater_than_emission_date
+  def parcels_should_have_date_greater_than_or_equals_emission_date
     pledge_parcels.each do |parcel|
       next unless emission_date && parcel.expiration_date && parcel.expiration_date <= emission_date
 
-      parcel.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
+      parcel.errors.add(:expiration_date, :must_be_greater_than_or_equals_pledge_emission_date)
       errors.add(:pledge_parcels, :invalid)
     end
   end

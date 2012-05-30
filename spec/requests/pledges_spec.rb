@@ -216,7 +216,7 @@ feature "Pledges", :driver => :selenium do
     click_button 'Salvar'
 
     within_tab 'Vencimentos' do
-      page.should have_content 'deve ser maior que a data de emissão'
+      page.should have_content 'deve ser maior ou igual a data de emissão'
     end
   end
 
