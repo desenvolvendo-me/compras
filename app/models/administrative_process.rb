@@ -1,6 +1,4 @@
 class AdministrativeProcess < ActiveRecord::Base
-  REPORT_NAME = SignatureReport::ADMINISTRATIVE_PROCESSES
-
   attr_accessible :budget_unit_id, :responsible_id
   attr_accessible :process, :year, :date, :modality
   attr_accessible :protocol, :object_type, :status, :description
@@ -54,7 +52,7 @@ class AdministrativeProcess < ActiveRecord::Base
   end
 
   def signatures
-    SignatureConfiguration.signatures_by_report(self.class::REPORT_NAME)
+    SignatureConfiguration.signatures_by_report(SignatureReport::ADMINISTRATIVE_PROCESSES)
   end
 
   protected

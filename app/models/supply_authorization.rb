@@ -1,6 +1,4 @@
 class SupplyAuthorization < ActiveRecord::Base
-  REPORT_NAME = SignatureReport::SUPPLY_AUTHORIZATIONS
-
   attr_accessible :year, :code, :direct_purchase_id
 
   belongs_to :direct_purchase
@@ -27,7 +25,7 @@ class SupplyAuthorization < ActiveRecord::Base
   end
 
   def signatures
-    SignatureConfiguration.signatures_by_report(self.class::REPORT_NAME)
+    SignatureConfiguration.signatures_by_report(SignatureReport::SUPPLY_AUTHORIZATIONS)
   end
 
   protected

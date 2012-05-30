@@ -45,7 +45,7 @@ describe AdministrativeProcess do
 
   it { should_not allow_mass_assignment_of(:delivery_date) }
 
-  it 'should return signatures based on REPORT_NAME' do
+  it 'should return signatures' do
     SignatureConfiguration.should_receive(:signatures_by_report).with('administrative_processes').and_return([])
     subject.signatures.should eq []
   end

@@ -20,7 +20,7 @@ describe SupplyAuthorization do
 
   it { should have_db_index([:code, :year]).unique(true) }
 
-  it 'should return signatures based on REPORT_NAME' do
+  it 'should return signatures' do
     SignatureConfiguration.should_receive(:signatures_by_report).with('supply_authorizations').and_return([])
     subject.signatures.should eq []
   end
