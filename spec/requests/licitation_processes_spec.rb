@@ -647,7 +647,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being sort_participants_by_item" do
@@ -678,7 +678,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being highest_bidder_by_item" do
@@ -703,7 +703,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being lowest_price_by_lot" do
@@ -729,7 +729,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being sort_participants_by_lot" do
@@ -757,7 +757,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being highest_bidder_by_lot" do
@@ -783,7 +783,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being lowest_global_price" do
@@ -807,7 +807,7 @@ feature "LicitationProcesses" do
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should brings some filled fields when creating a new licitatoin process" do
