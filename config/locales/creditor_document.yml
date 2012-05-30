@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      creditor_document:
+        one: "Documento"
+        other: "Documentos"
+
+    attributes:
+      creditor_document:
+        document_type: "Tipo de documento"
+        description: "Documento"
+        document_number: "Número"
+        emission_date: "Data de emissão"
+        validity: "Data de validade"
+        issuer: "Órgão emissor"

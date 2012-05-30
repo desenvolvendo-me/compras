@@ -32,6 +32,7 @@ feature "Creditors" do
     Cnae.make!(:aluguel)
     Cnae.make!(:direito_social)
     CompanySize.make!(:micro_empresa)
+    DocumentType.make!(:fiscal)
 
     click_link 'Cadastros Diversos'
 
@@ -53,6 +54,16 @@ feature "Creditors" do
       fill_modal 'Cnaes', :with => '7739099', :field => 'Código'
     end
 
+    within_tab 'Documentos' do
+      click_button 'Adicionar Documento'
+
+      fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
+      fill_in 'Número', :with => '1234'
+      fill_mask 'Data de emissão', :with => '05/04/2012'
+      fill_mask 'Data de validade', :with => '05/04/2013'
+      fill_in 'Órgão emissor', :with => 'SSP'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -72,6 +83,14 @@ feature "Creditors" do
       page.should have_content 'Aluguel de outras máquinas'
       page.should have_content '94308'
       page.should have_content 'Atividades de associações de defesa de direitos sociais'
+    end
+
+    within_tab 'Documentos' do
+      page.should have_field 'Tipo de documento', :with => 'Fiscal'
+      page.should have_field 'Número', :with => '1234'
+      page.should have_field 'Data de emissão', :with => '05/04/2012'
+      page.should have_field 'Data de validade', :with => '05/04/2013'
+      page.should have_field 'Órgão emissor', :with => 'SSP'
     end
   end
 
@@ -137,6 +156,7 @@ feature "Creditors" do
     Cnae.make!(:aluguel)
     Cnae.make!(:direito_social)
     CompanySize.make!(:empresa_de_grande_porte)
+    DocumentType.make!(:oficial)
 
     click_link 'Cadastros Diversos'
 
@@ -159,6 +179,18 @@ feature "Creditors" do
       fill_modal 'Cnaes', :with => '94308', :field => 'Código'
     end
 
+    within_tab 'Documentos' do
+      click_button 'Remover Documento'
+
+      click_button 'Adicionar Documento'
+
+      fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
+      fill_in 'Número', :with => '12345'
+      fill_mask 'Data de emissão', :with => '05/05/2012'
+      fill_mask 'Data de validade', :with => '05/05/2013'
+      fill_in 'Órgão emissor', :with => 'PM'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -179,6 +211,17 @@ feature "Creditors" do
       page.should_not have_content '7739099'
       page.should_not have_content 'Aluguel de outras máquinas'
     end
+
+    within_tab 'Documentos' do
+      page.should have_field 'Tipo de documento', :with => 'Oficial'
+      page.should have_field 'Número', :with => '12345'
+      page.should have_field 'Data de emissão', :with => '05/05/2012'
+      page.should have_field 'Data de validade', :with => '05/05/2013'
+      page.should have_field 'Órgão emissor', :with => 'PM'
+
+      page.should_not have_content 'SSP'
+    end
+
   end
 
   scenario 'update a creditor when people is individual' do

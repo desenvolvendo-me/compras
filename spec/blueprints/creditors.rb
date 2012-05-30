@@ -12,6 +12,7 @@ Creditor.blueprint(:nohup) do
   choose_simple { false }
   main_cnae { Cnae.make!(:varejo) }
   cnaes { [ Cnae.make!(:aluguel) ] }
+  documents { [ CreditorDocument.make!(:documento) ] }
 end
 
 Creditor.blueprint(:mateus) do

@@ -1,0 +1,26 @@
+<p>
+  <input type="button" class="button affirmative add-document" value="Adicionar Documento">
+</p>
+
+<div id="documents">
+  <%= f.association :documents, :collection => localized(f.object.documents) do |p| %>
+    <%= render 'creditor_documents/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'documents-template' do %>
+  <%= f.association :documents_attributes, :collection => f.object.documents.build, :index => '{{uuid_document}}' do |p| %>
+    <%= render 'creditor_documents/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#documents-template").nestedForm({
+    add: '.add-document',
+    remove: '.remove-document',
+    target: '#documents',
+    uuid: 'uuid_document',
+    appendItem: false,
+    fieldToRemove: '.creditor-document'
+  });
+</script>
