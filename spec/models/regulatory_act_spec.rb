@@ -30,7 +30,6 @@ describe RegulatoryAct do
   it { should validate_presence_of :creation_date }
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :vigor_date }
-  it { should validate_presence_of :end_date }
   it { should validate_presence_of :content }
   it { should validate_presence_of :budget_law_percent }
   it { should validate_presence_of :revenue_antecipation_percent }

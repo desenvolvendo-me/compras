@@ -18,7 +18,7 @@ class RegulatoryAct < ActiveRecord::Base
   has_one :extra_credit
 
   validates :regulatory_act_type, :creation_date, :publication_date, :presence => true
-  validates :vigor_date, :end_date, :legal_text_nature, :content, :presence => true
+  validates :vigor_date, :legal_text_nature, :content, :presence => true
   validates :budget_law_percent, :revenue_antecipation_percent, :presence => true
   validates :authorized_debt_value, :act_number, :presence => true
 
