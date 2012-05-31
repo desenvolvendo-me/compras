@@ -15,6 +15,8 @@ class LicitationProcessLot < ActiveRecord::Base
   orderize :id
   filterize
 
+  scope :search_by_licitation_process_less_than_me, lambda { |licitation_process_id, id| where { |lot| (lot.licitation_process_id.eq(licitation_process_id)) & (lot.id.lteq(id)) } }
+
   def to_s
     "Lote #{count_lots}"
   end
@@ -32,9 +34,6 @@ class LicitationProcessLot < ActiveRecord::Base
   end
 
   def count_lots
-    self.class.where { |lot|
-      (lot.id.lteq id) &
-      (lot.licitation_process_id.eq licitation_process_id)
-    }.count
+    self.class.search_by_licitation_process_less_than_me(licitation_process_id, id).count
   end
 end
