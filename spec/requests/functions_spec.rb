@@ -30,6 +30,53 @@ feature "Functions" do
     page.should have_field 'Ato regulamentador', :with => '1234'
   end
 
+  scenario 'should have modal info to regulatory_act' do
+    function = Function.make!(:administracao)
+
+    click_link 'Contabilidade'
+
+    click_link 'Funções'
+
+    click_link function.to_s
+
+    click_link 'Mais informações'
+
+    within '#record' do
+      page.should have_content '1234'
+      page.should have_content 'Lei'
+      page.should have_content 'Natureza Cívica'
+      page.should have_content '01/01/2012'
+      page.should have_content '02/01/2012'
+      page.should have_content '03/01/2012'
+      page.should have_content '09/01/2012'
+    end
+  end
+
+  scenario 'when cange regulatory_act should have modal info to regulatory_act' do
+    function = Function.make!(:administracao)
+    RegulatoryAct.make!(:emenda)
+
+    click_link 'Contabilidade'
+
+    click_link 'Funções'
+
+    click_link function.to_s
+
+    fill_modal 'Ato regulamentador', :field => 'Número', :with => '4567'
+
+    click_link 'Mais informações'
+
+    within '#record' do
+      page.should have_content '4567'
+      page.should have_content 'Emenda constitucional'
+      page.should have_content 'Natureza Cívica'
+      page.should have_content '01/01/2012'
+      page.should have_content '02/01/2012'
+      page.should have_content '03/01/2012'
+      page.should have_content '09/01/2012'
+    end
+  end
+
   scenario 'update an existent function' do
     Function.make!(:administracao)
     RegulatoryAct.make!(:emenda)

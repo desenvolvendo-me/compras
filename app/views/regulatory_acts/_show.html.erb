@@ -1,0 +1,67 @@
+<div id="record">
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= resource_class.human_attribute_name :act_number %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :regulatory_act_type %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :legal_text_nature %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.act_number %>
+        </td>
+        <td>
+          <%= resource.regulatory_act_type %>
+        </td>
+        <td>
+          <%= resource.legal_text_nature %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= resource_class.human_attribute_name :creation_date %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :publication_date %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :vigor_date %>
+        </th>
+        <th>
+          <%= resource_class.human_attribute_name :end_date %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.creation_date %>
+        </td>
+        <td>
+          <%= resource.publication_date %>
+        </td>
+        <td>
+          <%= resource.vigor_date %>
+        </td>
+        <td>
+          <%= resource.end_date %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
