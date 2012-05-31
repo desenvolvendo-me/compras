@@ -43,7 +43,11 @@ Tributario::Application.routes.draw do
   # Keep routes sorted alphabetically
   root :to => 'bookmarks#show'
 
-  devise_for :users
+  devise_for :users, :controllers => { :confirmations => 'confirmations' }
+
+  devise_scope :user do
+    put '/confirm' => 'confirmations#confirm'
+  end
 
   resource :account, :only => %w(edit update)
 

@@ -15,3 +15,7 @@ pt-BR:
     passwords:
       send_instructions: "Você receberá um e-mail com instruções sobre como redefinir sua senha em alguns minutos."
       updated: "Sua senha foi alterada com sucesso."
+    
+    confirmations:
+      user:
+        confirmed: 'Usuário confirmado com sucesso.'

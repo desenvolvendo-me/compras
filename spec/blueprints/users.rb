@@ -32,3 +32,10 @@ User.blueprint(:sobrinho_as_admin_and_employee) do
   administrator { true }
   authenticable { Employee.make!(:sobrinho) }
 end
+
+User.blueprint(:provider_without_password) do
+  email         { 'contato@sobrinhosa.com' }
+  login         { 'sobrinhosa' }
+  administrator { false }
+  authenticable { Provider.make!(:sobrinho_sa) }
+end

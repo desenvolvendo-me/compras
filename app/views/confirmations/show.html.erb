@@ -1,0 +1,10 @@
+<h2>Cadastre sua senha</h2>
+<%= simple_form_for resource, :as => resource_name, :url => confirm_path do |f| %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :confirmation_token, :as => :hidden %>
+
+  <div class='buttons'>
+    <%= f.button :submit, 'Confirmar' %>
+  </div>
+<% end %>

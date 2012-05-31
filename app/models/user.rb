@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   orderize
 
   def password_required?
-    return false if provider?
+    return persisted? && !confirmed? if provider?
     !persisted? || password.present? || password_confirmation.present?
   end
 

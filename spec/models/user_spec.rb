@@ -31,6 +31,31 @@ describe User do
     subject.should be_password_required
   end
 
+  describe 'password required for provider' do
+    it 'should not require the password if the user is a provider and no persisted' do
+      subject.should_receive(:provider?).and_return true
+      subject.should_receive(:persisted?).and_return false
+
+      subject.should_not be_password_required
+    end
+
+    it 'should require the password if the user is a provider and is persisted but not confimed' do
+      subject.should_receive(:provider?).and_return true
+      subject.should_receive(:persisted?).and_return true
+      subject.should_receive(:confirmed?).and_return false
+
+      subject.should be_password_required
+    end
+
+    it 'should not require the password if the user is a provider, is persisted and confirmed' do
+      subject.should_receive(:provider?).and_return true
+      subject.should_receive(:persisted?).and_return true
+      subject.should_receive(:confirmed?).and_return true
+
+      subject.should_not be_password_required
+    end
+  end
+
   it { should have_one :bookmark }
   it { should belong_to :profile }
 
