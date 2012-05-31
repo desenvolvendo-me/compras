@@ -55,6 +55,10 @@ class AdministrativeProcess < ActiveRecord::Base
     signature_configuration_item.all_by_configuration_report(SignatureReport::ADMINISTRATIVE_PROCESSES)
   end
 
+  def signatures_grouped
+    signatures.in_groups_of(4, false)
+  end
+
   protected
 
   def set_process
