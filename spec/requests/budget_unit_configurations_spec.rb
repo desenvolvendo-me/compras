@@ -66,29 +66,6 @@ feature "BudgetUnitConfigurations" do
     page.should have_field 'Máscara', :with => '999.99'
   end
 
-  scenario 'show errors message when create with empty budget_unit_level' do
-    Entity.make!(:detran)
-    RegulatoryAct.make!(:sopa)
-
-    click_link 'Contabilidade'
-
-    click_link 'Configurações de Unidade Orçamentária'
-
-    click_link 'Criar Configuração de Unidade Orçamentária'
-
-    fill_in 'Descrição', :with => 'Nome da Configuração'
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-    click_button 'Adicionar Estrutura'
-    fill_in 'Nível', :with => '1'
-    fill_in 'budget_unit_configuration_budget_unit_levels_attributes_fresh-0_description', :with => 'Órgão'
-    select 'Ponto', :from => 'Separador'
-    click_button 'Salvar'
-
-    page.should_not have_notice 'Configuração de Unidade Orçamentária criado com sucesso.'
-    page.should have_content 'não pode ficar em branco'
-  end
-
   scenario 'update an existent budget_unit_configuration' do
     BudgetUnitConfiguration.make!(:detran_sopa)
 
