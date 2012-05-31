@@ -65,7 +65,7 @@ class Material < ActiveRecord::Base
   def validate_licitation_object_relationship
     return unless licitation_objects.any?
 
-    errors.add(:base, :cannot_be_destroyed_because_have_licitation_object_relationship)
+    errors.add(:base, :cant_be_destroyed)
 
     false
   end

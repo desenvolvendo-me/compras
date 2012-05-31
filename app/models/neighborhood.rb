@@ -30,7 +30,7 @@ class Neighborhood < ActiveRecord::Base
   def validate_street_relationship
     return unless streets.any?
 
-    errors.add(:base, :cannot_have_street_relationship)
+    errors.add(:base, :cant_be_destroyed)
 
     false
   end

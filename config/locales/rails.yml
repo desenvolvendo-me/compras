@@ -276,7 +276,7 @@ pt-BR:
       messages:
         taken: "já está em uso"
         record_invalid: "A validação falhou: %{errors}"
-        cant_be_destroyed: "devem ser apagados(as) manualmente"
+        cant_be_destroyed: "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
         <<: *errors_messages
 
       full_messages:

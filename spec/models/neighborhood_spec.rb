@@ -34,13 +34,13 @@ describe Neighborhood do
 
       subject.run_callbacks(:destroy)
 
-      subject.errors[:base].should include "não pode ter relacionamento com rua"
+      subject.errors[:base].should include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
     end
   end
 
   it "should destroy if does not have streets" do
     subject.run_callbacks(:destroy)
 
-    subject.errors[:base].should_not include "não pode ter relacionamento com rua"
+    subject.errors[:base].should_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
   end
 end
