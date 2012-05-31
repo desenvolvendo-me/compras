@@ -2,7 +2,6 @@ class PledgeCancellation < ActiveRecord::Base
   attr_accessible :pledge_id, :date, :kind, :reason, :value, :nature
   attr_accessible :entity_id, :year
 
-  has_enumeration_for :kind, :with => PledgeCancellationKind, :create_helpers => true
   has_enumeration_for :nature, :with => PledgeCancellationNature
 
   belongs_to :entity
@@ -14,7 +13,7 @@ class PledgeCancellation < ActiveRecord::Base
   delegate :balance, :value, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :pledge_cancellations_sum, :to => :pledge, :allow_nil => true
 
-  validates :pledge, :date, :kind, :reason, :entity, :presence => true
+  validates :pledge, :date, :reason, :entity, :presence => true
   validates :year, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :value, :presence => true, :numericality => { :greater_than => 0 }
@@ -28,8 +27,6 @@ class PledgeCancellation < ActiveRecord::Base
   }
   validate :value_validation
   validate :date_must_be_equal_or_greater_than_pledge_emission_date
-
-  before_validation :force_value_to_total_kind
 
   orderize :id
   filterize
@@ -56,14 +53,6 @@ class PledgeCancellation < ActiveRecord::Base
 
   def any_pledge_cancellation?
     self.class.any?
-  end
-
-  def force_value_to_total_kind
-    return unless pledge
-
-    if total?
-      self.value = pledge_balance
-    end
   end
 
   def value_validation

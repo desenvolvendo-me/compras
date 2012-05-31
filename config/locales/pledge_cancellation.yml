@@ -16,7 +16,6 @@ pt-BR:
         pledge_parcel_value: "Valor do vencimento"
         balance: "Saldo"
         value: "Valor a ser anulado"
-        kind: "Tipo de anulação"
         date: "Data"
         nature: "Natureza da ocorrência"
         reason: "Motivo"

@@ -10,7 +10,6 @@ describe PledgeCancellation do
 
   it { should validate_presence_of :pledge }
   it { should validate_presence_of :date }
-  it { should validate_presence_of :kind }
   it { should validate_presence_of :reason }
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
