@@ -16,6 +16,6 @@ class PriceCollectionsController < CrudController
     object.collection_number = object.next_collection_number
     object.status = Status::ACTIVE
 
-    super
+    ProviderUserCreator.new(object).generate if super
   end
 end

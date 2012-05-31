@@ -3,6 +3,7 @@ class PriceCollection < ActiveRecord::Base
   attr_accessible :object_description, :observations, :expiration
   attr_accessible :period, :period_unit, :proposal_validity, :proposal_validity_unit
   attr_accessible :price_collection_lots_attributes, :provider_ids, :type_of_calculation
+  attr_accessible :price_collection_proposals_attributes
 
   attr_readonly :year, :collection_number
 
@@ -25,6 +26,7 @@ class PriceCollection < ActiveRecord::Base
   delegate :provider, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
 
   accepts_nested_attributes_for :price_collection_lots, :allow_destroy => true
+  accepts_nested_attributes_for :price_collection_proposals, :allow_destroy => true
 
   validates :collection_number, :year, :date, :delivery_location, :employee, :presence => true
   validates :payment_method, :object_description, :expiration, :presence => true
@@ -32,7 +34,7 @@ class PriceCollection < ActiveRecord::Base
   validates :year, :mask => "9999"
   validates :date, :expiration, :timeliness => { :on_or_after => :today, :type => :date }, :on => :create
 
-  after_save :generate_proposals
+  after_save :generate_proposal_items
 
   orderize :id
   filterize
@@ -57,7 +59,7 @@ class PriceCollection < ActiveRecord::Base
 
   protected
 
-  def generate_proposals
-    PriceCollectionProposalGenerator.new(self).generate!
+  def generate_proposal_items
+    PriceCollectionProposalUpdater.new(self).update!
   end
 end

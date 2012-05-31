@@ -1,25 +1,29 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
-  attr_accessible :employee_id
+  attr_accessible :authenticable_id, :authenticable_type
 
   devise :database_authenticatable, :recoverable, :validatable
 
   belongs_to :profile
-  belongs_to :employee
+  belongs_to :authenticable, :polymorphic => true
 
   has_one :bookmark, :dependent => :destroy
 
   delegate :roles, :to => :profile, :allow_nil => true
-  delegate :name, :to => :employee, :allow_nil => true
+  delegate :name, :to => :authenticable, :allow_nil => true
 
   validates :login, :presence => true
-  validates :employee, :profile, :presence => true, :unless => :administrator?
+  validates :authenticable, :presence => true, :unless => :administrator?
+  validates :profile, :presence => true, :if => lambda{ |u| !u.administrator? && !u.provider? }
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
+
+  has_enumeration_for :authenticable_type, :with => AuthenticableType, :create_helpers => true
 
   filterize
   orderize
 
   def password_required?
+    return false if provider?
     !persisted? || password.present? || password_confirmation.present?
   end
 

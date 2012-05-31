@@ -48,6 +48,11 @@ describe User do
 
   it "shoud validate presence of employee when user is not an admin" do
     subject.stub(:administrator?).and_return(false)
-    subject.should validate_presence_of :employee
+    subject.should validate_presence_of :authenticable
+  end
+
+  it 'should not validate presence of profile when user is a provider' do
+    subject.stub(:provider?).and_return true
+    subject.should_not validate_presence_of :profile
   end
 end

@@ -15,5 +15,5 @@ PriceCollection.blueprint(:coleta_de_precos) do
   expiration { Date.tomorrow }
   status { Status::ACTIVE }
   price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
-  providers { [Provider.make!(:wenderson_sa)] }
+  price_collection_proposals { [PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object)] }
 end

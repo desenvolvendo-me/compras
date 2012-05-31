@@ -27,7 +27,7 @@ describe AdministrativeProcessesController do
     it 'uses current employee as default value for employee' do
       get :new
 
-      assigns(:administrative_process).responsible.should eq controller.current_user.employee
+      assigns(:administrative_process).responsible.should eq controller.current_user.authenticable
     end
   end
 

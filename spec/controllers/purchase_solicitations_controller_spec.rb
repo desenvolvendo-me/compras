@@ -27,7 +27,7 @@ describe PurchaseSolicitationsController do
     it 'uses current employee as default value for employee' do
       get :new
 
-      assigns(:purchase_solicitation).responsible.should eq controller.current_user.employee
+      assigns(:purchase_solicitation).responsible.should eq controller.current_user.authenticable
     end
   end
 

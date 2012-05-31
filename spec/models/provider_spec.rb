@@ -102,4 +102,71 @@ describe Provider do
 
     subject.run_callbacks(:save)
   end
+
+  describe '#email' do
+    context 'when has no user related to this provider' do
+      it "returns the person's email" do
+        subject.stub(:person).and_return double('Person', :email => 'joao@silva.com')
+
+        subject.email.should eq 'joao@silva.com'
+      end
+    end
+
+    context 'when has a user related to this provider' do
+      it "returns the user's email" do
+        subject.stub(:user).and_return double('User', :email => 'foo@bar.com')
+
+        subject.email.should eq 'foo@bar.com'
+      end
+    end
+  end
+
+  describe '#email=' do
+    let :person do
+      double('Person')
+    end
+
+    it 'sets the email on person' do
+      subject.stub(:person).and_return person
+
+      person.should_receive(:email=).with('foo@bar.com')
+      subject.email = 'foo@bar.com'
+    end
+  end
+
+  describe '#login=' do
+    context 'have no user related to this provider' do
+      it 'sets the login to the given string' do
+        subject.login = 'foo.bar'
+        subject.login.should eq 'foo.bar'
+      end
+    end
+
+    context 'have a user related to this provider' do
+      it "should not override the user's login" do
+        subject.stub(:user).and_return double('User', :login => 'foo.bar')
+
+        subject.login = 'joao.silva'
+        subject.login.should eq 'foo.bar'
+      end
+    end
+  end
+  
+  describe '#login' do
+    context 'have no user related to this provider' do
+      it 'returns the given login' do
+        subject.login = 'foo.bar'
+        
+        subject.login.should eq 'foo.bar'
+      end
+    end
+    
+    context 'have a user related to this provider' do
+      it "returns the user's login" do
+        subject.stub(:user).and_return double('User', :login => 'foo.bar')
+        
+        subject.login.should eq 'foo.bar'
+      end
+    end
+  end
 end

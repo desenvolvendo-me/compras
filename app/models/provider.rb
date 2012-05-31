@@ -3,13 +3,15 @@ class Provider < ActiveRecord::Base
   attr_accessible :bank_account, :crc_number, :crc_registration_date, :crc_expiration_date
   attr_accessible :crc_renewal_date, :provider_partners_attributes, :economic_registration_id
   attr_accessible :materials_group_ids, :materials_class_ids, :material_ids
-  attr_accessible :provider_licitation_documents_attributes
+  attr_accessible :provider_licitation_documents_attributes, :email, :login
 
   belongs_to :person
   belongs_to :economic_registration
   belongs_to :agency
   belongs_to :legal_nature
   belongs_to :cnae
+
+  has_one :user, :as => :authenticable
 
   has_and_belongs_to_many :materials_groups
   has_and_belongs_to_many :materials_classes
@@ -33,7 +35,7 @@ class Provider < ActiveRecord::Base
   accepts_nested_attributes_for :provider_licitation_documents, :allow_destroy => true
 
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
-  delegate :phone, :fax, :to => :person, :allow_nil => true
+  delegate :phone, :fax, :name, :email, :to => :person, :allow_nil => true
   delegate :address, :city, :zip_code, :to => :person, :allow_nil => true
 
   validates :person, :registration_date, :agency, :bank_account, :presence => true
@@ -54,6 +56,22 @@ class Provider < ActiveRecord::Base
 
   def to_s
     person.to_s
+  end
+
+  def email= email
+    person.email = email
+  end
+  
+  def email
+    user.try(:email) || person.email
+  end
+
+  def login= login
+    @login = login
+  end
+
+  def login
+    user.try(:login) || @login
   end
 
   protected

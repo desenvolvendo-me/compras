@@ -8,7 +8,7 @@ class AdministrativeProcessesController < CrudController
     object.date = Date.current
     object.year = Date.current.year
     object.status = AdministrativeProcessStatus::WAITING
-    object.responsible = current_user.employee
+    object.responsible = current_user.authenticable
 
     super
   end

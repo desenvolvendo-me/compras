@@ -1,5 +1,5 @@
 class PriceCollectionProposal < ActiveRecord::Base
-  attr_accessible :price_collection_id, :provider_id, :items_attributes
+  attr_accessible :provider_id, :items_attributes, :email, :login
 
   belongs_to :price_collection
   belongs_to :provider
@@ -8,10 +8,12 @@ class PriceCollectionProposal < ActiveRecord::Base
 
   delegate :date, :period, :to => :price_collection, :allow_nil => true, :prefix => true
   delegate :price_collection_lots, :to => :price_collection, :allow_nil => true
+  delegate :name, :email, :email=, :login, :login=, :to => :provider, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
-  validates :price_collection, :provider, :presence => true
+  validates :provider, :presence => true
+  validates :email, :login, :presence => true, :if => :new_record?
 
   orderize :id
   filterize

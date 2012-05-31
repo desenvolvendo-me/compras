@@ -4,7 +4,7 @@ class Employee < ActiveRecord::Base
   belongs_to :person
   belongs_to :position
 
-  has_one :user
+  has_one :user, :as => :authenticable
 
   has_many :purchase_solicitations, :foreign_key => :responsible_id, :dependent => :restrict
   has_many :budget_unit_responsibles, :foreign_key => :responsible_id, :dependent => :restrict

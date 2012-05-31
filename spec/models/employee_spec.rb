@@ -4,6 +4,7 @@ require 'app/models/purchase_solicitation'
 require 'app/models/direct_purchase'
 require 'app/models/administrative_process'
 require 'app/models/budget_unit_responsible'
+require 'app/models/price_collection'
 
 describe Employee do
   it { should belong_to :person }

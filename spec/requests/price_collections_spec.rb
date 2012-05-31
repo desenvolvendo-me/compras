@@ -6,6 +6,66 @@ feature "PriceCollections" do
     sign_in
   end
 
+  scenario 'can not create a new price collection when no set the provider email and login' do
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    Material.make!(:antivirus)
+    Provider.make!(:wenderson_sa)
+
+    click_link 'Processos'
+
+    click_link 'Coletas de Preços'
+
+    click_link 'Criar Coleta de Preços'
+
+    within_tab 'Principal' do
+      page.should have_disabled_field 'Número'
+      page.should have_disabled_field 'Status'
+      page.should have_select 'Status', :selected => 'Ativo'
+
+      fill_mask 'Ano', :with => '2012'
+      fill_mask 'Data', :with => I18n.l(Date.current)
+      select 'Menor preço total por item', :from => 'Tipo de apuração'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano', :from => 'Unidade do prazo de entrega'
+      fill_in 'Validade da proposta', :with => '1'
+      select 'ano', :from => 'Unidade da validade da proposta'
+      fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
+      fill_in 'Objeto', :with => 'objeto da coleta'
+      fill_in 'Observações', :with => 'observacoes da coleta'
+    end
+
+    within_tab 'Lotes de itens' do
+      click_button 'Adicionar Lote'
+
+      fill_in 'Observações', :with => 'lote 1'
+
+      click_button 'Adicionar Item'
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      # testing fill reference unit with javascript
+      page.should have_disabled_field 'Unidade de referência'
+      page.should have_field 'Unidade de referência', :with => 'Unidade'
+
+      fill_in 'Marca', :with => 'Norton'
+      fill_in 'Quantidade', :with => '10'
+    end
+
+    within_tab 'Fornecedores' do
+      click_on 'Adicionar Fornecedor'
+
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_content 'Criar Coleta de Preços'
+  end
+
   scenario 'create a new price_collection' do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
@@ -56,7 +116,11 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
+      click_on 'Adicionar Fornecedor'
+
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+      fill_in 'Email', :with => 'contato@wendersonsa.com'
+      fill_in 'Login', :with => 'wenderson.sa'
     end
 
     click_button 'Salvar'
@@ -98,7 +162,12 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      page.should have_content 'Wenderson Malheiros'
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      page.should have_disabled_field 'Fornecedor'
+      page.should have_field 'Email', :with => 'contato@wendersonsa.com'
+      page.should have_disabled_field 'Email'
+      page.should have_field 'Login', :with => 'wenderson.sa'
+      page.should have_disabled_field 'Login'
     end
   end
 
@@ -144,11 +213,15 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      page.should have_content 'Wenderson Malheiros'
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
 
       click_button 'Remover'
 
+      click_on 'Adicionar Fornecedor'
+
       fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+      fill_in 'Email', :with => 'contato@sobrinho.com'
+      fill_in 'Login', :with => 'sobrinho.sa'
     end
 
     click_button 'Salvar'
@@ -189,8 +262,8 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      page.should_not have_content 'Wenderson Malheiros'
-      page.should have_content 'Gabriel Sobrinho'
+      page.should_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     end
   end
 

@@ -1,34 +1,34 @@
-<div class="yui3-g modal-finder">
-  <div class="yui3-u-1-2">
-    <%= f.association :providers, :as => :modal, :hidden_field => false, :input_html => { :value => nil } %>
-  </div>
+<p>
+  <input type="button" class="button affirmative add-provider" value="Adicionar Fornecedor">
+</p>
+
+<div id="providers-list">
+  <%= f.association :price_collection_proposals, :collection => localized(f.object.price_collection_proposals) do |p| %>
+    <%= render 'providers_form', :f => p %>
+  <% end %>
 </div>
 
-<input type="hidden" name="<%= f.sanitized_object_name %>[provider_ids][]" />
-
-<table class="records">
-  <thead>
-    <tr>
-      <th>
-        Id
-      </th>
-      <th>
-        Nome
-      </th>
-      <th>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody class="<%= f.sanitized_object_name %>_providers_records">
-    <% f.object.providers.each do |provider| %>
-      <%= render 'providers/list_form', :value => provider.to_s, :id => provider.id, :f => f %>
-    <% end %>
-  </tbody>
-</table>
-
 <%= mustache "#{f.sanitized_object_name}_providers_template" do %>
-  <%= f.association :providers, :collection => f.object.providers.build do |p| %>
-    <%= render 'providers/list_form', :value => '{{value}}', :id => '{{id}}', :f => f %>
+  <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build, :index => '{{uuid_provider}}' do |p| %>
+    <%= render 'providers_form', :f => p %>
   <% end %>
 <% end %>
+
+<script>
+  $("#<%= f.sanitized_object_name %>_providers_template").nestedForm({
+    add: '.add-provider',
+    remove: '.remove-provider',
+    target: '#providers-list',
+    uuid: 'uuid_provider',
+    fieldToRemove: '.provider_collection_proposal',
+    appendItem: false
+  });
+
+  $('form.price_collection').on('change', '.provider', function (event, provider) {
+    if(provider){
+      var inputs = $(this).closest('.provider').find(':input');
+      $(inputs[1]).val(provider.email);
+      $(inputs[2]).val(provider.login);
+    }
+  });
+</script>

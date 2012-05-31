@@ -7,7 +7,6 @@ describe PriceCollectionProposal do
   it { should belong_to :price_collection }
   it { should belong_to :provider }
 
-  it { should validate_presence_of :price_collection }
   it { should validate_presence_of :provider }
 
   it 'should return price_colletion and provider as to_s method' do

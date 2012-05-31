@@ -8,7 +8,7 @@ describe DirectPurchasesController do
   it 'uses current employee as default value for employee' do
     get :new
 
-    assigns(:direct_purchase).employee.should eq controller.current_user.employee
+    assigns(:direct_purchase).employee.should eq controller.current_user.authenticable
   end
 
   it 'show unauthorized as default value for status' do

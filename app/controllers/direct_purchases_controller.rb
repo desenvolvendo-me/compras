@@ -5,7 +5,7 @@ class DirectPurchasesController < CrudController
 
   def new
     object = build_resource
-    object.employee = current_user.employee
+    object.employee = current_user.authenticable
     object.status = DirectPurchaseStatus::UNAUTHORIZED
     object.date = Date.current
 

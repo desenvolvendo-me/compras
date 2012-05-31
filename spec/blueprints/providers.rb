@@ -17,6 +17,27 @@ Provider.blueprint(:wenderson_sa) do
   provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
 end
 
+Provider.blueprint(:wenderson_sa_with_user) do
+  economic_registration { EconomicRegistration.make!(:nohup) }
+  person { Person.make!(:wenderson) }
+  agency { Agency.make!(:itau) }
+  legal_nature { LegalNature.make!(:administracao_publica) }
+  cnae { Cnae.make!(:aluguel) }
+  registration_date { Date.new(2012, 2, 15) }
+  bank_account { '123456' }
+  crc_number { '456789' }
+  crc_registration_date { Date.new(2012, 2, 26) }
+  crc_renewal_date { Date.new(2012, 2, 27) }
+  crc_expiration_date { Date.new(2012, 2, 28) }
+  provider_partners { [ProviderPartner.make!(:sobrinho)] }
+  materials_groups { [MaterialsGroup.make!(:informatica)] }
+  materials_classes { [MaterialsClass.make!(:software)] }
+  materials { [Material.make!(:antivirus)] }
+  provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
+  user { User.make!(:wenderson) }
+end
+
+
 Provider.blueprint(:sobrinho_sa) do
   economic_registration { EconomicRegistration.make!(:nohup) }
   person { Person.make!(:sobrinho) }
