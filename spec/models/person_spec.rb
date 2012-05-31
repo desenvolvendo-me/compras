@@ -107,13 +107,13 @@ describe Person do
     end
   end
 
-  it "should return cpf on cpf_cnpj when personable respond_to cpf" do
+  it "should return cpf on identity document when personable respond_to cpf" do
     subject.stub(:cpf).and_return('059.894.946-10')
-    subject.cpf_cnpj.should eq '059.894.946-10'
+    subject.identity_document.should eq '059.894.946-10'
   end
 
-  it "should return cnpj on cpf_cnpj when personable respond_to cnpj" do
+  it "should return cnpj on identity_document when personable respond_to cnpj" do
     subject.stub(:cnpj).and_return('76.238.594/0001-35')
-    subject.cpf_cnpj.should eq '76.238.594/0001-35'
+    subject.identity_document.should eq '76.238.594/0001-35'
   end
 end

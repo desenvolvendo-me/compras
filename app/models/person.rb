@@ -52,7 +52,7 @@ class Person < ActiveRecord::Base
     personable.cnpj if personable.respond_to?(:cnpj)
   end
 
-  def cpf_cnpj
+  def identity_document
     cpf || cnpj
   end
 

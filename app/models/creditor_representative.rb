@@ -4,5 +4,5 @@ class CreditorRepresentative < ActiveRecord::Base
   belongs_to :creditor
   belongs_to :representative_person, :class_name => 'Person'
 
-  delegate :name, :cpf_cnpj, :to => :representative_person, :allow_nil => true
+  delegate :name, :identity_document, :to => :representative_person, :allow_nil => true
 end

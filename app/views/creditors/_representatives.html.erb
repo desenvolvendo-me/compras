@@ -15,7 +15,7 @@
         <%= Person.human_attribute_name :name %>
       </th>
       <th>
-        <%= Person.human_attribute_name :cpf_cnpj %>
+        <%= Person.human_attribute_name :identity_document %>
       </th>
       <th>
       </th>
@@ -24,13 +24,13 @@
 
   <tbody class="<%= f.sanitized_object_name %>_representatives_records">
     <% f.object.representatives.each do |representative| %>
-      <%= render 'creditor_representatives/list_form', :name => representative.name, :id => representative.representative_person.try(:id), :cpf_cnpj => representative.cpf_cnpj, :f => f %>
+      <%= render 'creditor_representatives/list_form', :name => representative.name, :id => representative.representative_person.try(:id), :identity_document => representative.identity_document, :f => f %>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache "#{f.sanitized_object_name}_representatives_template" do %>
   <%= f.association :representatives, :collection => f.object.representatives.build do |p| %>
-    <%= render 'creditor_representatives/list_form', :name => '{{name}}', :id => '{{id}}', :cpf_cnpj => '{{cpf_cnpj}}', :f => f %>
+    <%= render 'creditor_representatives/list_form', :name => '{{name}}', :id => '{{id}}', :identity_document => '{{identity_document}}', :f => f %>
   <% end %>
 <% end %>
