@@ -6,7 +6,7 @@ class Precatory < ActiveRecord::Base
   belongs_to :provider
   belongs_to :precatory_type
 
-  has_many :precatory_parcels, :dependent => :destroy
+  has_many :precatory_parcels, :dependent => :destroy, :order => :id
 
   accepts_nested_attributes_for :precatory_parcels, :allow_destroy => true
 
