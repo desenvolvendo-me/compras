@@ -18,3 +18,22 @@
   <%= f.input :choose_simple %>
   <%= f.input :main_cnae %>
 </div>
+
+<script>
+
+  function toggleEnabledDisabledFieldsForAutonomous() {
+    if ( $('#creditor_autonomous').is(':checked') ){
+        $('#creditor_social_identification_number, #creditor_contract_start_date').attr('disabled', false)
+        $('#creditor_social_identification_number, #creditor_contract_start_date').requiredField(true)
+      } else {
+        $('#creditor_social_identification_number, #creditor_contract_start_date').attr('disabled', true)
+        $('#creditor_social_identification_number, #creditor_contract_start_date').requiredField(false)
+    }
+  }
+
+  $('#creditor_autonomous').click(function() {
+    toggleEnabledDisabledFieldsForAutonomous();
+  });
+
+  toggleEnabledDisabledFieldsForAutonomous();
+</script>

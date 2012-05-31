@@ -23,6 +23,7 @@ describe Creditor do
   it { should_not validate_presence_of :company_size }
   it { should_not validate_presence_of :main_cnae }
   it { should_not validate_presence_of :contract_start_date }
+  it { should_not validate_presence_of :social_identification_number }
 
   context 'when is company' do
     before do
@@ -39,6 +40,29 @@ describe Creditor do
     end
 
     it { should validate_presence_of :contract_start_date }
+    it { should validate_presence_of :social_identification_number }
+  end
+
+  context 'when is not autonomous' do
+    before do
+      subject.stub(:autonomous?).and_return(false)
+    end
+
+    it "contract_start_date should be nil" do
+      subject.contract_start_date = Date.new(2012, 04, 05)
+
+      subject.run_callbacks(:save)
+
+      subject.contract_start_date.should be nil
+    end
+
+    it "social_identification_number should be nil" do
+      subject.social_identification_number = 12345
+
+      subject.run_callbacks(:save)
+
+      subject.social_identification_number.should be nil
+    end
   end
 
   it "should return selected_cnaes" do

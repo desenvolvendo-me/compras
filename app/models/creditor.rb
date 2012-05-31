@@ -22,12 +22,13 @@ class Creditor < ActiveRecord::Base
   accepts_nested_attributes_for :representatives, :allow_destroy => true
 
   validates :person, :presence => true
-  validates :contract_start_date,
-    :presence => { :if => :autonomous? },
-    :timeliness => { :type => :date }, :allow_blank => true
+  validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
+  validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :company_size, :main_cnae, :presence => true, :if => :company?
   validate :uniqueness_of_document_type
   validate :person_in_representatives
+
+  before_save :clean_fields_when_is_no_autonomous
 
   orderize :id
   filterize
@@ -41,6 +42,13 @@ class Creditor < ActiveRecord::Base
   end
 
   protected
+
+  def clean_fields_when_is_no_autonomous
+    return if autonomous?
+
+    self.contract_start_date = nil
+    self.social_identification_number = nil
+  end
 
   def uniqueness_of_document_type
     countable = Hash.new

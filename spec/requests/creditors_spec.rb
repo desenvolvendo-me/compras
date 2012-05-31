@@ -255,6 +255,7 @@ feature "Creditors" do
 
     within_tab 'Principal' do
       fill_modal 'CBO', :with => 'Engenheiro', :field => 'Nome'
+      check 'Autônomo'
       fill_in 'PIS/PASEP', :with => '6789'
       fill_mask 'Início do contrato', :with => '05/04/2011'
     end
@@ -270,7 +271,7 @@ feature "Creditors" do
     within_tab 'Principal' do
       page.should have_field 'CBO', :with => '214 - Engenheiro'
       page.should have_unchecked_field 'Admnistração pública municipal'
-      page.should have_unchecked_field 'Autônomo'
+      page.should have_checked_field 'Autônomo'
       page.should have_field 'PIS/PASEP', :with => '6789'
       page.should have_field 'Início do contrato', :with => '05/04/2011'
     end
