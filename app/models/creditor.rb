@@ -51,24 +51,15 @@ class Creditor < ActiveRecord::Base
   end
 
   def uniqueness_of_document_type
-    countable = Hash.new
+    single_documents = []
 
     documents.each do |document|
-      if document.document_type_id.blank?
-        document.errors.add(:document_type_id, :blank)
-      else
-        countable[document.document_type_id] ||= 0
-        countable[document.document_type_id] = countable[document.document_type_id].to_i + 1
-      end
-    end
-
-    documents.each do |document|
-      if countable[document.document_type_id].to_i > 1
-        # FIXME: rails issue, see: https://github.com/rails/rails/issues/5061
+      if single_documents.include? document.document_type_id
         errors.add(:documents, :invalid)
 
         document.errors.add(:document_type_id, :taken)
       end
+      single_documents << document.document_type_id
     end
   end
 
