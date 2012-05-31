@@ -19,9 +19,7 @@ class PriceCollection < ActiveRecord::Base
   has_many :price_collection_lots, :dependent => :destroy, :order => :id
   has_many :items, :through => :price_collection_lots
   has_many :price_collection_proposals, :dependent => :destroy, :order => :id
-
-  has_many :price_collections_providers, :dependent => :destroy, :order => :id
-  has_many :providers, :through => :price_collections_providers
+  has_many :providers, :through => :price_collection_proposals
 
   delegate :provider, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
 

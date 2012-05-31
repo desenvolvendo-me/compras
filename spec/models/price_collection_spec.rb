@@ -11,9 +11,8 @@ describe PriceCollection do
     it { should belong_to :employee }
     it { should belong_to :payment_method }
     it { should have_many :price_collection_lots }
-    it { should have_many(:price_collections_providers).dependent(:destroy).order(:id) }
     it { should have_many(:price_collection_proposals).dependent(:destroy).order(:id) }
-    it { should have_many(:providers).through(:price_collections_providers) }
+    it { should have_many(:providers).through(:price_collection_proposals) }
     it { should have_many(:items).through(:price_collection_lots) }
   end
 

@@ -37,9 +37,8 @@ describe Provider do
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:subpledges).dependent(:restrict) }
   it { should have_many(:precatories).dependent(:restrict) }
-  it { should have_many(:price_collections_providers).dependent(:restrict) }
-  it { should have_many(:price_collections).through(:price_collections_providers) }
   it { should have_many(:price_collection_proposals).dependent(:restrict).order(:id) }
+  it { should have_many(:price_collections).through(:price_collection_proposals) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration_date }
