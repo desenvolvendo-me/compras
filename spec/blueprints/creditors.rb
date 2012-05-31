@@ -13,6 +13,7 @@ Creditor.blueprint(:nohup) do
   main_cnae { Cnae.make!(:varejo) }
   cnaes { [ Cnae.make!(:aluguel) ] }
   documents { [ CreditorDocument.make!(:documento) ] }
+  representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
 end
 
 Creditor.blueprint(:mateus) do

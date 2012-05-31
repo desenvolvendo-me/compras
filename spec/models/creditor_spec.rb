@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/creditor'
 require 'app/models/creditor_document'
+require 'app/models/creditor_representative'
 require 'app/models/document_type'
 require 'app/models/creditor_secondary_cnae'
 require 'app/models/cnae'
@@ -15,6 +16,8 @@ describe Creditor do
   it { should have_many(:cnaes).through(:creditor_secondary_cnaes) }
   it { should have_many(:documents) }
   it { should have_many(:document_types).through(:documents) }
+  it { should have_many(:representatives) }
+  it { should have_many(:representative_people).through(:representatives) }
 
   it { should validate_presence_of :person }
   it { should_not validate_presence_of :company_size }

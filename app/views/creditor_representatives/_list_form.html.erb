@@ -1,0 +1,16 @@
+<tr class="record representative-person">
+  <td>
+    <% id %>
+    <%= name %>
+  </td>
+  <td>
+    <%= cpf_cnpj %>
+  </td>
+  <td>
+    <input id="people_record<%= id %>_id" class="person-id" type="hidden" name="<%= f.sanitized_object_name %>[representative_person_ids][]" value="<%= id %>" />
+    <input id="people_record<%= id %>_name" class="person-name" type="hidden" value="<%= name %>" />
+    <input id="people_record<%= id %>_cpf_cnpj" class="person-cpf-cnpj" type="hidden" value="<%= cpf_cnpj %>" />
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>
+

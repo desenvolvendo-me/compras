@@ -157,6 +157,7 @@ feature "Creditors" do
     Cnae.make!(:direito_social)
     CompanySize.make!(:empresa_de_grande_porte)
     DocumentType.make!(:oficial)
+    Person.make!(:wenderson)
 
     click_link 'Cadastros Diversos'
 
@@ -191,6 +192,14 @@ feature "Creditors" do
       fill_in 'Órgão emissor', :with => 'PM'
     end
 
+    within_tab 'Representantes' do
+      page.should have_content 'Gabriel Sobrinho'
+      page.should have_content '003.151.987-37'
+      click_button 'Remover'
+
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -222,6 +231,13 @@ feature "Creditors" do
       page.should_not have_content 'SSP'
     end
 
+    within_tab 'Representantes' do
+      page.should_not have_content 'Gabriel Sobrinho'
+      page.should_not have_content '003.151.987-37'
+
+      page.should have_content 'Wenderson Malheiros'
+      page.should have_content '003.149.513-34'
+    end
   end
 
   scenario 'update a creditor when people is individual' do

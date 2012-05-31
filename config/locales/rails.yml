@@ -263,6 +263,7 @@ pt-BR:
       cannot_be_destroyed_because_have_licitation_object_relationship: "não pode ser apagado pois há relacionamento com objeto da licitação"
       cannot_have_street_relationship: "não pode ter relacionamento com rua"
       must_be_the_licitation_process_envelope_opening_date: "deve ser a data da abertura do envelope do processo licitatório"
+      cannot_have_representative_equal_creditor: "não pode ter um representante igual ao credor"
 
   activerecord:
     errors:

@@ -3,6 +3,7 @@ class Creditor < ActiveRecord::Base
   attr_accessible :main_cnae_id, :municipal_public_administration, :autonomous
   attr_accessible :social_identification_number, :choose_simple
   attr_accessible :contract_start_date, :cnae_ids, :documents_attributes
+  attr_accessible :representative_person_ids, :representative_ids
 
   belongs_to :person
   belongs_to :occupation_classification
@@ -12,10 +13,13 @@ class Creditor < ActiveRecord::Base
   has_many :cnaes, :through => :creditor_secondary_cnaes
   has_many :documents, :class_name => 'CreditorDocument', :dependent => :destroy, :order => :id
   has_many :document_types, :through => :documents
+  has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
+  has_many :representative_people, :through => :representatives, :source => :representative_person
 
   delegate :personable_type, :company?, :to => :person, :allow_nil => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
+  accepts_nested_attributes_for :representatives, :allow_destroy => true
 
   validates :person, :presence => true
   validates :contract_start_date,
@@ -23,6 +27,7 @@ class Creditor < ActiveRecord::Base
     :timeliness => { :type => :date }, :allow_blank => true
   validates :company_size, :main_cnae, :presence => true, :if => :company?
   validate :uniqueness_of_document_type
+  validate :person_in_representatives
 
   orderize :id
   filterize
@@ -55,6 +60,14 @@ class Creditor < ActiveRecord::Base
         errors.add(:documents, :invalid)
 
         document.errors.add(:document_type_id, :taken)
+      end
+    end
+  end
+
+  def person_in_representatives
+    representatives.each do |representative|
+      if representative.representative_person == person
+          errors.add(:representatives, :cannot_have_representative_equal_creditor)
       end
     end
   end

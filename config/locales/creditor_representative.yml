@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      creditor_representative:
+        one: "Representante"
+        other: "Representantes"
+
+    attributes:
+      creditor_representative:
+        person: "Pessoa"
+        creditor: "Credor"
