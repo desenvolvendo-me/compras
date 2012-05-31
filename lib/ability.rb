@@ -12,6 +12,9 @@ class Ability
 
     if user.administrator?
       can :access, :all
+    elsif user.provider?
+      can :read, PriceCollectionProposal, :provider_id => user.authenticable_id
+      can :update, PriceCollectionProposal, :provider_id => user.authenticable_id
     else
       user.roles.each do |role|
         can role.permission.to_sym, role.controller.to_sym
