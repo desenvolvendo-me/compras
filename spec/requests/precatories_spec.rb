@@ -74,7 +74,7 @@ feature "Precatories" do
       page.should have_field 'Valor', :with => '20.000.000,00'
       page.should have_field 'Valor parcelado', :with => '20.000.000,00'
 
-      within '.parcel:first' do
+      within '.parcel' do
         page.should have_field 'Data do vencimento', :with => '15/05/2012'
         page.should have_field 'Valor', :with => '10.000.000,00'
         page.should have_select 'Situação', :selected => 'Pago'
