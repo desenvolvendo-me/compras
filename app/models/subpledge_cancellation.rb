@@ -10,6 +10,7 @@ class SubpledgeCancellation < ActiveRecord::Base
   delegate :provider, :emission_date, :to => :pledge, :allow_nil => true
   delegate :value, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :subpledge_cancellations_sum, :to => :subpledge, :allow_nil => true
+  delegate :subpledge_expirations, :to => :subpledge, :allow_nil => true
 
   validates :year, :pledge, :subpledge, :presence => true
   validates :entity, :date, :reason, :presence => true

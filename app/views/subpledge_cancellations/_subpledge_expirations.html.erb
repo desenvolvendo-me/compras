@@ -40,7 +40,7 @@
 
   <tbody>
     <% if f.object.subpledge %>
-      <% localized(f.object.subpledge.subpledge_expirations).each do |expiration| %>
+      <% localized(f.object.subpledge_expirations).each do |expiration| %>
         <tr id="subpledge_expiration_<%= expiration.number %>">
           <td>
             <%= expiration.number %>
