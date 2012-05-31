@@ -76,7 +76,7 @@
 
    function toggleRequiredFields() {
      if($('#licitation_process_bidder_invited').is(':checked')) {
-       $('label[for|="licitation_process_bidder_protocol"], label[for|="licitation_process_bidder_protocol_date"], label[for|="licitation_process_bidder_receipt_date"]').append('<abbr title="obrigatório">*</abbr>');
+       $('#licitation_process_bidder_protocol, #licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').requiredField(true);
      } else {
        removeDuplicateRequiredLabels();
      }
@@ -89,7 +89,7 @@
    }
 
    function removeDuplicateRequiredLabels(){
-     $('label[for|="licitation_process_bidder_protocol"] abbr, label[for|="licitation_process_bidder_protocol_date"] abbr, label[for|="licitation_process_bidder_receipt_date"] abbr').remove();
+     $('#licitation_process_bidder_protocol, #licitation_process_bidder_protocol_date, #licitation_process_bidder_receipt_date').requiredField(false);
    }
 
   $('#licitation_process_bidder_invited').click(function() {
