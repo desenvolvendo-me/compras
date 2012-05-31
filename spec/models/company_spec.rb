@@ -2,7 +2,7 @@
 require 'model_helper'
 require 'app/models/person'
 require 'app/models/company'
-require 'app/models/address'
+require 'app/models/unico/address'
 require 'app/models/partner'
 
 describe Company do
