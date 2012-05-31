@@ -20,15 +20,7 @@
 
 <%= render 'pledge_parcels', :f => f %>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :kind %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :value, :disabled => f.object.total? %>
-  </div>
-</div>
+<%= f.input :value %>
 
 <%= f.input :date %>
 <%= f.input :reason %>
@@ -62,15 +54,6 @@
   <% else %>
     (function() {
       var pledgeValue;
-
-      function forceValueWhenTotalIsKind(){
-        if($('#pledge_liquidation_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
-          $('#pledge_liquidation_cancellation_value').attr('disabled', true);
-          $('#pledge_liquidation_cancellation_value').val(pledgeValue);
-        } else {
-          $('#pledge_liquidation_cancellation_value').attr('disabled', false);
-        }
-      }
 
       function clearExistingPledgeParcels() {
         $('#pledge_parcels tbody').html('');
@@ -115,11 +98,7 @@
           clearExistingPledgeParcels();
           pledgeValue = null;
         }
-
-        forceValueWhenTotalIsKind();
       });
-
-      $('#pledge_liquidation_cancellation_kind').change(forceValueWhenTotalIsKind);
     })();
   <% end %>
 </script>
