@@ -71,28 +71,23 @@ describe Creditor do
     subject.selected_cnaes.should == [1, 2, 3, 4]
   end
 
-  context 'uniqueness of document_type_id' do
-    let :document_one do
-      CreditorDocument.new :document_type_id => 1
-    end
+  it 'document should_not be invalid when not duplicated' do
+    document_one = subject.documents.build(:document_type_id => 1)
+    document_two = subject.documents.build(:document_type_id => 2)
 
-    let :document_two do
-      CreditorDocument.new :document_type_id => 1
-    end
+    subject.valid?
 
-    it 'document should_not be invalid when not duplicated' do
-      document_two.document_type_id = 2
-      subject.documents = [document_one, document_two]
-      subject.should_not be_valid
-      subject.errors.messages[:documents].should be_nil
-      subject.documents.last.errors.messages[:document_type_id].should be_nil
-    end
+    document_one.errors.messages[:document_type_id].should be_nil
+    document_two.errors.messages[:document_type_id].should be_nil
+  end
 
-    it 'document should be invalid when duplicated' do
-      subject.documents = [document_one, document_two]
-      subject.should_not be_valid
-      subject.errors.messages[:documents].should include("não é válido")
-      subject.documents.last.errors.messages[:document_type_id].should include("já está em uso")
-    end
+  it 'document should be invalid when duplicated' do
+    document_one = subject.documents.build(:document_type_id => 1)
+    document_two = subject.documents.build(:document_type_id => 1)
+
+    subject.valid?
+
+    document_one.errors.messages[:document_type_id].should be_nil
+    document_two.errors.messages[:document_type_id].should include "já está em uso"
   end
 end
