@@ -9,7 +9,6 @@ pt-BR:
       pledge_liquidation:
         pledge: "Empenho"
         value: "Valor a ser liquidado"
-        kind: "Tipo de liquidação"
         description: "Objeto do empenho"
         date: "Data"
         emission_date: "Data de emissão"

@@ -20,16 +20,7 @@
 
 <%= render 'pledge_parcels', :f => f %>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :kind %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :value, :disabled => f.object.total? %>
-  </div>
-</div>
-
+<%= f.input :value %>
 <%= f.input :date %>
 <%= f.input :description, :disabled => true %>
 
@@ -82,15 +73,6 @@
         $('#pledge_parcels tbody').html(rendered);
       }
 
-      function forceValueWhenKindIsTotal(){
-        if($('#pledge_liquidation_kind').val() == '<%= PledgeLiquidationKind::TOTAL %>') {
-          $('#pledge_liquidation_value').attr('disabled', true);
-          $('#pledge_liquidation_value').val(pledgeValue);
-        } else {
-          $('#pledge_liquidation_value').attr('disabled', false);
-        }
-      }
-
       $('#pledge_liquidation_pledge_id').change(function (event, pledge) {
         if (pledge) {
           $('#pledge_liquidation_emission_date').val(pledge.emission_date);
@@ -115,11 +97,7 @@
           clearExistingPledgeParcels();
           pledgeValue = null;
         }
-
-        forceValueWhenKindIsTotal();
       });
-
-      $('#pledge_liquidation_kind').change(forceValueWhenKindIsTotal);
     })();
   <% end %>
 </script>
