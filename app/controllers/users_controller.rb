@@ -12,4 +12,9 @@ class UsersController < CrudController
 
     super
   end
+
+  protected
+  def create_resource object
+    object.confirm! if super
+  end
 end

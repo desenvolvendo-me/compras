@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
   attr_accessible :authenticable_id, :authenticable_type
 
-  devise :database_authenticatable, :recoverable, :validatable
+  devise :database_authenticatable, :recoverable, :validatable, :confirmable
 
   belongs_to :profile
   belongs_to :authenticable, :polymorphic => true

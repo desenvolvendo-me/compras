@@ -40,4 +40,6 @@ Tributario::Application.configure do
 
   # See everything in the log (default is :info)
   config.log_level = :fatal
+
+  config.action_mailer.default_url_options = { :host => 'localhost' }
 end
