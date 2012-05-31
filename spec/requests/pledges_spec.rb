@@ -423,6 +423,7 @@ feature "Pledges", :driver => :selenium do
       fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
 
       page.should have_field 'Reserva de dotação', :with => ''
+      page.should have_field 'Saldo reserva', :with => ''
     end
   end
 
