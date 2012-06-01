@@ -27,6 +27,7 @@ class Creditor < ActiveRecord::Base
   validates :company_size, :main_cnae, :presence => true, :if => :company?
   validate :uniqueness_of_document_type
   validate :person_in_representatives
+  validate :secondary_cnae_in_main_cnae
 
   before_save :clean_fields_when_is_no_autonomous
 
@@ -70,6 +71,12 @@ class Creditor < ActiveRecord::Base
       errors.add(:representatives, :cannot_have_representative_equal_creditor)
     end
   end
+
+  def secondary_cnae_in_main_cnae
+    return unless main_cnae && cnaes
+
+    if cnae_ids.include? main_cnae.id
+      errors.add(:cnaes, :cannot_have_secondary_cnae_equal_main_cnae)
     end
   end
 end

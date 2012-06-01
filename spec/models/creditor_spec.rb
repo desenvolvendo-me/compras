@@ -66,10 +66,37 @@ describe Creditor do
     end
   end
 
-  it "should return selected_cnaes" do
-    subject.stub(:cnae_ids).and_return( [1, 2, 3] )
-    subject.main_cnae_id = 4
-    subject.selected_cnaes.should == [1, 2, 3, 4]
+  describe 'cnaes' do
+    it "should return selected_cnaes" do
+      subject.stub(:cnae_ids).and_return( [1, 2, 3] )
+      subject.main_cnae_id = 4
+      subject.selected_cnaes.should == [1, 2, 3, 4]
+    end
+
+    let :main_cnae do
+      double :main_cnae
+    end
+
+    it "should be invalid when has a secondary cnae equal a main cnae" do
+      main_cnae.stub(:id).and_return(3)
+      subject.stub(:main_cnae).and_return(main_cnae)
+      subject.stub(:cnae_ids).and_return( [1, 2, 3] )
+
+      subject.valid?
+
+      subject.errors.messages[:cnaes].should include "não pode haver um CNAE secundário igual ao CNAE principal"
+    end
+
+    it "should be valid when has not a secondary cnae equal a main cnae" do
+      main_cnae.stub(:id).and_return(4)
+      subject.stub(:main_cnae).and_return(main_cnae)
+      subject.stub(:cnae_ids).and_return( [1, 2, 3] )
+
+      subject.valid?
+
+      subject.errors.messages[:cnaes].should be_nil
+    end
+  end
 
   describe 'representatives' do
     let :person do
