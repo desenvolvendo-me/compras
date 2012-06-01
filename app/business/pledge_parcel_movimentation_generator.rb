@@ -36,8 +36,8 @@ class PledgeParcelMovimentationGenerator
   def create!(parcel, calculator)
     pledge_parcel_movimentation_storage.create!(
       :pledge_parcel_id => parcel.id,
-      :pledge_parcel_modificator_id => object.id,
-      :pledge_parcel_modificator_type => object.class.name,
+      :pledge_parcel_modifiable_id => object.id,
+      :pledge_parcel_modifiable_type => object.class.name,
       :pledge_parcel_value_was => value_by_modificator_type(parcel),
       :pledge_parcel_value => calculator.parcel_value,
       :value => calculator.movimented_value

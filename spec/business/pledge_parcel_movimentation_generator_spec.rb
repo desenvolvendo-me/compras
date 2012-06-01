@@ -40,8 +40,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 10,
         :value => 90
@@ -55,8 +55,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 0,
         :value => 100
@@ -64,8 +64,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 2,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 50,
         :value => 50
@@ -81,8 +81,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeCancellation',
         :pledge_parcel_value_was => 10,
         :pledge_parcel_value => 0,
         :value => 10
@@ -90,8 +90,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 2,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 60,
         :value => 40
@@ -133,8 +133,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeLiquidationCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeLiquidationCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 10,
         :value => 90
@@ -148,8 +148,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeLiquidationCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeLiquidationCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 0,
         :value => 100
@@ -157,8 +157,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 2,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeLiquidationCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeLiquidationCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 50,
         :value => 50
@@ -174,8 +174,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 1,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeLiquidationCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeLiquidationCancellation',
         :pledge_parcel_value_was => 10,
         :pledge_parcel_value => 0,
         :value => 10
@@ -183,8 +183,8 @@ describe PledgeParcelMovimentationGenerator do
 
       pledge_parcel_movimentation_storage.should_receive(:create!).with(
         :pledge_parcel_id => 2,
-        :pledge_parcel_modificator_id => 4,
-        :pledge_parcel_modificator_type => 'PledgeLiquidationCancellation',
+        :pledge_parcel_modifiable_id => 4,
+        :pledge_parcel_modifiable_type => 'PledgeLiquidationCancellation',
         :pledge_parcel_value_was => 100,
         :pledge_parcel_value => 60,
         :value => 40

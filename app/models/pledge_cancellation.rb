@@ -5,7 +5,7 @@ class PledgeCancellation < ActiveRecord::Base
 
   belongs_to :pledge
 
-  has_many :pledge_parcel_modifications, :dependent => :restrict, :as => :pledge_parcel_modificator
+  has_many :pledge_parcel_modifications, :dependent => :restrict, :as => :pledge_parcel_modifiable
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :balance, :value, :to => :pledge, :prefix => true, :allow_nil => true
