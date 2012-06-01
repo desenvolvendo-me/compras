@@ -74,14 +74,14 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
 
       click_button 'Adicionar Vencimento'
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
@@ -136,13 +136,13 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Valor', :with => '10,00'
       page.should have_field 'Valor total das parcelas', :with => '10,00'
 
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         page.should have_field 'Número', :with => '1'
         page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
         page.should have_field 'Valor', :with => '5,00'
       end
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         page.should have_field 'Número', :with => '2'
         page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
         page.should have_field 'Valor', :with => '5,00'
@@ -195,14 +195,14 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
 
       click_button 'Adicionar Vencimento'
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
@@ -236,14 +236,14 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         page.should have_field 'Vencimento', :with => '30/12/2011'
         page.should have_field 'Valor', :with => '31,66'
       end
     end
   end
 
-  scenario 'when create should not fill first pledge_parcel date and value if already add pledge-expirations' do
+  scenario 'when create should not fill first pledge_parcel date and value if already add pledge parcels' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -256,7 +256,7 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         page.should have_field 'Vencimento', :with => '01/11/2011'
         page.should have_field 'Valor', :with => '31,66'
       end
@@ -270,7 +270,7 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         page.should have_field 'Vencimento', :with => '01/11/2011'
         page.should have_field 'Valor', :with => '31,66'
       end
@@ -311,13 +311,13 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         fill_mask 'Vencimento', :with => I18n.l(Date.current + 10.days)
       end
 
       click_button 'Adicionar Vencimento'
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         fill_mask 'Vencimento', :with => I18n.l(Date.current + 5.days)
       end
     end
@@ -325,7 +325,7 @@ feature "Pledges", :driver => :selenium do
     click_button 'Salvar'
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         page.should have_content 'deve ser maior que a data da última parcela'
       end
     end
@@ -344,13 +344,13 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         fill_in 'Valor', :with => '100,00'
       end
 
       click_button 'Adicionar Vencimento'
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         fill_in 'Valor', :with => '100,00'
       end
     end
@@ -359,17 +359,17 @@ feature "Pledges", :driver => :selenium do
 
     within_tab 'Vencimentos' do
 
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         page.should have_content 'a soma de todos os valores deve ser igual ao valor do empenho'
       end
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         page.should have_content 'a soma de todos os valores deve ser igual ao valor do empenho'
       end
     end
   end
 
-  scenario 'set sequencial pledge expiration number' do
+  scenario 'set sequencial pledge parcel number' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -377,21 +377,21 @@ feature "Pledges", :driver => :selenium do
     click_link 'Criar Empenho'
 
     within_tab 'Vencimentos' do
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         page.should have_field 'Número', :with => '1'
       end
 
       click_button 'Adicionar Vencimento'
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         page.should have_field 'Número', :with => '2'
       end
 
-      within '.pledge-expiration:first' do
+      within '.pledge-parcel:first' do
         click_button 'Remover Vencimento'
       end
 
-      within '.pledge-expiration:last' do
+      within '.pledge-parcel:last' do
         page.should have_field 'Número', :with => '1'
       end
     end

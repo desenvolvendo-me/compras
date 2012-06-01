@@ -3,7 +3,7 @@
     <li><a href="#general">Principal</a></li>
     <li><a href="#complement">Complementar</a></li>
     <li><a href="#items">Itens</a></li>
-    <li><a href="#expirations">Vencimentos</a></li>
+    <li><a href="#parcels">Vencimentos</a></li>
   </ul>
 
   <div id="general">
@@ -18,8 +18,8 @@
     <%= render 'items', :f => f %>
   </div>
 
-  <div id="expirations">
-    <%= render 'expirations', :f => f %>
+  <div id="parcels">
+    <%= render 'parcels', :f => f %>
   </div>
 </div>
 
@@ -32,15 +32,15 @@
 
   <% if f.object.persisted? %>
     $('form.pledge :input').attr('disabled', true);
-    $('form.pledge .add-pledge-item, form.pledge .add-pledge-expiration').hide();
-    $('form.pledge .remove-pledge-item, form.pledge .remove-pledge-expiration').hide();
+    $('form.pledge .add-pledge-item, form.pledge .add-pledge-parcel').hide();
+    $('form.pledge .remove-pledge-item, form.pledge .remove-pledge-parcel').hide();
     $('form.pledge .hint').hide();
   <% else %>
     (function () {
       var reserveFundBudgetAllocationId;
 
       function uniqPledgeParcel(){
-        return $('div.pledge-expiration .destroy[value=false]').length == 1;
+        return $('div.pledge-parcel .destroy[value=false]').length == 1;
       }
 
       function pledgeItemsTotalValue() {
@@ -62,7 +62,7 @@
         var total = 0,
             value;
 
-        $('.pledge-expiration .value:visible').each(function() {
+        $('.pledge-parcel .value:visible').each(function() {
           value = $(this).val();
 
           if (value != '') {
@@ -73,8 +73,8 @@
         $('#pledge_pledge_parcels_sum').val(floatToPtBrString(total));
       }
 
-      function fillExpirationNumber() {
-        $('div.pledge-expiration .destroy[value=false]').each(function(index, item){
+      function fillParcelNumber() {
+        $('div.pledge-parcel .destroy[value=false]').each(function(index, item){
           $(this).parent().parent().find('.order').val(index + 1);
         });
       }
@@ -100,13 +100,13 @@
 
       $("#pledge_emission_date").change(function() {
         if (uniqPledgeParcel()) {
-          $('div.pledge-expiration .destroy[value=false]:first').parents('div.pledge-expiration').find('.expiration_date').val($(this).val());
+          $('div.pledge-parcel .destroy[value=false]:first').parents('div.pledge-parcel').find('.expiration_date').val($(this).val());
         };
       }).change();
 
       $('form.pledge').delegate('#pledge_value', 'keyup', function() {
         if (uniqPledgeParcel()) {
-          $('div.pledge-expiration .destroy[value=false]:first').parents('div.pledge-expiration').find('.value').val($(this).val());
+          $('div.pledge-parcel .destroy[value=false]:first').parents('div.pledge-parcel').find('.value').val($(this).val());
         };
       });
 
@@ -143,15 +143,15 @@
         }
       });
 
-      $('form.pledge').delegate('.remove-pledge-expiration', 'click', fillExpirationNumber);
-      $('form.pledge').delegate('.add-pledge-expiration', 'click', pledgeParcelsTotalValue);
+      $('form.pledge').delegate('.remove-pledge-parcel', 'click', fillParcelNumber);
+      $('form.pledge').delegate('.add-pledge-parcel', 'click', pledgeParcelsTotalValue);
       $('form.pledge').bind('append.mustache', pledgeParcelsTotalValue);
       $('form.pledge').delegate('.value', 'keyup', pledgeParcelsTotalValue);
-      $('form.pledge').bind('append.mustache', fillExpirationNumber);
+      $('form.pledge').bind('append.mustache', fillParcelNumber);
       $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', pledgeItemsTotalValue);
       $('form.pledge').delegate('.remove-pledge-item', 'click', pledgeItemsTotalValue);
 
-      fillExpirationNumber();
+      fillParcelNumber();
     })();
   <% end %>
 </script>
