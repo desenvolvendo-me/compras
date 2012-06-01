@@ -10,7 +10,7 @@ describe SubpledgeExpiration do
 
   it { should belong_to :subpledge }
 
-  it { should have_many :subpledge_expiration_movimentations }
+  it { should have_many(:subpledge_expiration_movimentations).dependent(:restrict) }
 
   it { should validate_presence_of :expiration_date }
   it { should validate_presence_of :value }

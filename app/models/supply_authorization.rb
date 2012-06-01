@@ -24,6 +24,14 @@ class SupplyAuthorization < ActiveRecord::Base
     direct_purchase.direct_purchase_budget_allocations.map(&:items).flatten.count
   end
 
+  def signatures(signature_configuration_item = SignatureConfigurationItem)
+    signature_configuration_item.all_by_configuration_report(SignatureReport::SUPPLY_AUTHORIZATIONS)
+  end
+
+  def signatures_grouped
+    signatures.in_groups_of(4, false)
+  end
+
   protected
 
   def set_code

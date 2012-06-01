@@ -14,7 +14,8 @@ feature "ExpenseKinds" do
     click_link 'Criar Tipo de Despesa'
 
     fill_in 'Descrição', :with => 'Pagamentos'
-    select 'Ativo', :from => 'Status'
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 

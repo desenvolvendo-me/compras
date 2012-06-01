@@ -14,7 +14,8 @@ feature "BudgetAllocationTypes" do
     click_link 'Criar Tipo de Dotação'
 
     fill_in 'Descrição', :with => 'Administrativa'
-    select 'Ativo', :from => 'Status'
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 

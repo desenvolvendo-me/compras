@@ -22,6 +22,8 @@ class Person < ActiveRecord::Base
 
   orderize
 
+  scope :except_special_entry, where { personable_type.not_eq 'SpecialEntry' }
+
   def self.filter(params = {})
     relation = scoped
     relation = relation.where{ name.matches "#{params[:name]}%" } unless params[:name].blank?
@@ -48,6 +50,10 @@ class Person < ActiveRecord::Base
 
   def cnpj
     personable.cnpj if personable.respond_to?(:cnpj)
+  end
+
+  def identity_document
+    cpf || cnpj
   end
 
   def special?

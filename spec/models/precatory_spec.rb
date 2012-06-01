@@ -17,7 +17,7 @@ describe Precatory do
 
   it { should belong_to :provider }
   it { should belong_to :precatory_type }
-  it { should have_many(:precatory_parcels).dependent(:destroy) }
+  it { should have_many(:precatory_parcels).dependent(:destroy).order(:id) }
 
   it "should return id when call to_s method" do
     subject.number = '1234/2012'

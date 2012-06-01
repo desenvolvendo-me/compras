@@ -10,3 +10,9 @@ Cnae.blueprint(:varejo) do
   name { "Comércio varejista de mercadorias em geral" }
   risk_degree { RiskDegree.make!(:medio) }
 end
+
+Cnae.blueprint(:direito_social) do
+  code { "94308" }
+  name { "Atividades de associações de defesa de direitos sociais" }
+  risk_degree { RiskDegree.make!(:medio) }
+end

@@ -10,11 +10,12 @@ describe PledgeLiquidation do
   end
 
   it { should validate_presence_of :pledge }
-  it { should validate_presence_of :kind }
   it { should validate_presence_of :value }
   it { should validate_presence_of :date }
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
+
+  it { should validate_numericality_of :value }
 
   it { should belong_to :pledge }
   it { should belong_to :entity }
@@ -23,6 +24,9 @@ describe PledgeLiquidation do
 
   it { should_not allow_value("2ce3").for(:year) }
   it { should allow_value("2012").for(:year) }
+  it { should allow_value(23).for(:value) }
+  it { should_not allow_value(0).for(:value) }
+  it { should_not allow_value(-23).for(:value) }
 
   context 'validate value' do
     before do

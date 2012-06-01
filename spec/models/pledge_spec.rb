@@ -131,8 +131,7 @@ describe Pledge do
     subject.stub(:pledge_items).
             and_return([
               double(:estimated_total_price => 100),
-              double(:estimated_total_price => 200),
-              double(:estimated_total_price => nil)
+              double(:estimated_total_price => 200)
             ])
 
     subject.items_total_value.should eq(300)

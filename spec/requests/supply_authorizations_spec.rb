@@ -10,6 +10,7 @@ feature "SupplyAuthorizations" do
     Prefecture.make!(:belo_horizonte)
     direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
     supply_authorization = SupplyAuthorization.make!(:compra_2012)
+    SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
     click_link 'Solicitações'
 
@@ -43,5 +44,7 @@ feature "SupplyAuthorizations" do
     page.should have_content 'Antivirus'
     page.should have_content 'Norton'
     page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
+    page.should have_content 'Gabriel Sobrinho'
+    page.should have_content 'Gerente'
   end
 end

@@ -17,8 +17,9 @@ class Subpledge < ActiveRecord::Base
   delegate :value, :provider, :balance, :to => :pledge, :allow_nil => true, :prefix => true
 
   validates :entity, :year, :pledge, :provider, :date, :presence => true
-  validates :value, :process_number, :description, :presence => true
+  validates :process_number, :description, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
+  validates :value, :numericality => { :greater_than => 0 }, :presence => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
     :on_or_after_message => :must_be_greater_or_equal_to_last_subpledge_date,
@@ -68,6 +69,10 @@ class Subpledge < ActiveRecord::Base
     subpledge_expirations.select { |subpledge_expiration| subpledge_expiration.balance > 0 }
   end
 
+  def subpledge_expirations_total_value
+    subpledge_expirations.compact.sum(&:value)
+  end
+
   protected
 
   def last_number
@@ -95,12 +100,8 @@ class Subpledge < ActiveRecord::Base
   def subpledge_expirations_value_sum_should_be_equals_value
     return unless value
 
-    if subpledge_expirations.map(&:value).compact.sum > value
-      subpledge_expirations.each do |expiration|
-        expiration.errors.add(:value, :subpledge_expiration_value_sum_must_not_be_greater_to_subpledge_value)
-      end
-
-      errors.add(:pledge_parcels, :invalid)
+    if subpledge_expirations_total_value != value
+      errors.add(:subpledge_expirations_total_value, :must_be_equals_subpledge_value)
     end
   end
 

@@ -1,4 +1,4 @@
-<%= f.input :person %>
+<%= f.input :person, :disabled => f.object.persisted?  %>
 
 <%= f.input :personable_type, :as => :hidden %>
 
@@ -37,6 +37,8 @@
     $('#creditor_municipal_public_administration').parent().parent().hide();
     $('#creditor_autonomous').parent().hide();
     $('#creditor_social_identification_number').parent().hide();
+    $('#creditor_contract_start_date').parent().hide();
+
   };
 
   function renderPartial(){

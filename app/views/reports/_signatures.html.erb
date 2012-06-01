@@ -1,0 +1,23 @@
+<% resource.signatures_grouped.each do |signature_group| %>
+  <div class="yui3-g signature">
+    <% signature_group.each do |signature| %>
+      <div class="yui3-u-1<%= "-#{signature_group.size}" if signature_group.size > 1 %>">
+        <hr />
+      </div>
+    <% end %>
+  </div>
+
+  <div class="yui3-g">
+    <% signature_group.each do |signature| %>
+      <div class="yui3-u-1<%= "-#{signature_group.size}" if signature_group.size > 1 %>">
+        <div class="name-position">
+          <%= signature.person %>
+        </div>
+
+        <div class="name-position">
+          <%= signature.position %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

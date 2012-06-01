@@ -25,12 +25,16 @@ class BudgetUnitConfiguration < ActiveRecord::Base
   end
 
   def mask
-    m = ''
-    ordered_budget_unit_levels.each_with_index do |budget_unit_level, idx|
-      m += '9' * budget_unit_level.digits
-      m += budget_unit_level.separator unless budget_unit_level.blank? or (idx+1) == budget_unit_levels.size
+    final_mask = ''
+
+    ordered_budget_unit_levels.each_with_index do |budget_unit_level, index|
+      next unless budget_unit_level.digits?
+
+      final_mask += '9' * budget_unit_level.digits
+      final_mask += budget_unit_level.separator unless budget_unit_level.separator.blank? || (index + 1) == budget_unit_levels.size
     end
-    m
+
+    final_mask
   end
 
   def as_json(options = {})

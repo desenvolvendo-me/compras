@@ -47,6 +47,6 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
   end
 
   def bidder_proposal?(bidder)
-    licitation_process_bidder_proposals.where { |p| p.licitation_process_bidder_id.eq(bidder.id) }.any?
+    licitation_process_bidder_proposals.where { licitation_process_bidder_id.eq(bidder.id) }.any?
   end
 end

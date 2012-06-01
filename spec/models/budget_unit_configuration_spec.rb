@@ -41,5 +41,10 @@ describe BudgetUnitConfiguration do
       subject.ordered_budget_unit_levels.first.errors[:separator].should include 'não pode ficar em branco'
       subject.ordered_budget_unit_levels.last.errors[:separator].should_not include 'não pode ficar em branco'
     end
+
+    it 'should return incorrect mask when digits is missing' do
+      level1.digits = nil
+      subject.mask.should eq '99'
+    end
   end
 end

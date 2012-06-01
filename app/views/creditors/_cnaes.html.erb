@@ -1,0 +1,34 @@
+<div class="yui3-g modal-finder">
+  <div class="yui3-u-1-2">
+    <%= f.association :cnaes, :as => :modal, :hidden_field => false, :input_html => { :value => nil }, :modal_url => modal_cnaes_path(:cnaes_remainder => ( f.object.selected_cnaes ) ) %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[cnae_ids][]" />
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= Cnae.human_attribute_name :code %>
+      </th>
+      <th>
+        <%= Cnae.human_attribute_name :name %>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_cnaes_records">
+    <% f.object.cnaes.each do |cnae| %>
+      <%= render 'cnaes/list_form', :name => cnae.name, :id => cnae.id, :code => cnae.code, :f => f %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_cnaes_template" do %>
+  <%= f.association :cnaes, :collection => f.object.cnaes.build do |p| %>
+    <%= render 'cnaes/list_form', :name => '{{name}}', :id => '{{id}}', :code => '{{code}}', :f => f %>
+  <% end %>
+<% end %>

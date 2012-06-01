@@ -44,6 +44,21 @@ describe AdministrativeProcess do
 
   it { should_not allow_mass_assignment_of(:delivery_date) }
 
+  context 'signatures' do
+    let :signature_configuration_item do
+      double('SignatureConfigurationItem')
+    end
+
+    let :signature_configuration_item_store do
+      double('SignatureConfigurationItemStore')
+    end
+
+    it 'should return related signatures' do
+      signature_configuration_item_store.should_receive(:all_by_configuration_report).with('administrative_processes').and_return [signature_configuration_item]
+      subject.signatures(signature_configuration_item_store).should eq [signature_configuration_item]
+    end
+  end
+
   it "should validate the modality depending on object_type" do
     def test_type(type, modalities_for_type)
       subject.object_type = type
@@ -127,5 +142,51 @@ describe AdministrativeProcess do
   it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES)' do
     subject.modality = AdministrativeProcessModality::MAKING_COST_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES
     subject.should_not be_invited
+  end
+
+  context 'signatures' do
+    let :signature_configuration_item1 do
+      double('SignatureConfigurationItem1')
+    end
+
+    let :signature_configuration_item2 do
+      double('SignatureConfigurationItem2')
+    end
+
+    let :signature_configuration_item3 do
+      double('SignatureConfigurationItem3')
+    end
+
+    let :signature_configuration_item4 do
+      double('SignatureConfigurationItem4')
+    end
+
+    let :signature_configuration_item5 do
+      double('SignatureConfigurationItem5')
+    end
+
+    let :signature_configuration_items do
+      [
+        signature_configuration_item1,
+        signature_configuration_item2,
+        signature_configuration_item3,
+        signature_configuration_item4,
+        signature_configuration_item5,
+      ]
+    end
+
+    let :signature_configuration_item_store do
+      double('SignatureConfigurationItemStore')
+    end
+
+    it 'should return related signatures' do
+      signature_configuration_item_store.should_receive(:all_by_configuration_report).with('administrative_processes').and_return(signature_configuration_items)
+      subject.signatures(signature_configuration_item_store).should eq signature_configuration_items
+    end
+
+    it "should group signatures" do
+      subject.stub(:signatures => signature_configuration_items)
+      subject.signatures_grouped.should eq [[signature_configuration_item1, signature_configuration_item2, signature_configuration_item3, signature_configuration_item4], [signature_configuration_item5]]
+    end
   end
 end

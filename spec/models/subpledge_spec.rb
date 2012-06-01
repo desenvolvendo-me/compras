@@ -29,6 +29,11 @@ describe Subpledge do
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
   it { should_not allow_value('201').for(:year) }
+  it { should allow_value(1).for(:value) }
+  it { should_not allow_value(0).for(:value) }
+  it { should_not allow_value(-1).for(:value) }
+
+  it { should validate_numericality_of :value }
 
   context 'balance' do
     it 'should return correct balance' do
@@ -153,6 +158,33 @@ describe Subpledge do
 
     it 'should return pledge parcel with balance' do
       subject.movimentable_pledge_parcels.should eq pledge_parcels
+    end
+  end
+
+  context "with expirations" do
+    let :subpledge_expirations do
+      [
+        double('expiration1', :value => 100),
+        double('expiration2', :value => 50)
+      ]
+    end
+
+    it "should not allow subpledge_value different from subpledge_expirations_total_value" do
+      subject.stub(:value => 200)
+      subject.stub(:subpledge_expirations => subpledge_expirations)
+
+      subject.valid?
+
+      subject.errors[:subpledge_expirations_total_value].should include "deve ser igual ao valor a subempenhar"
+    end
+
+    it "should allow subpledge_value equals subpledge_expirations_total_value" do
+      subject.stub(:value => 150)
+      subject.stub(:subpledge_expirations => subpledge_expirations)
+
+      subject.valid?
+
+      subject.errors[:subpledge_expirations_total_value].should_not include "deve ser igual ao valor a subempenhar"
     end
   end
 end

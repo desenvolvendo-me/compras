@@ -12,6 +12,7 @@
 //= require simple_form.modal_input
 //= require simple_form.numeric_input
 //= require simple_form.nested_form
+//= require simple_form.toogle_required_input
 //= require rails
 //= require tributario
 //= require filter

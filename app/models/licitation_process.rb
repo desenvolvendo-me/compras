@@ -106,7 +106,7 @@ class LicitationProcess < ActiveRecord::Base
     items && !items.without_lot?
   end
 
-  def winner_proposal_provider()
+  def winner_proposal_provider
     return unless winner_proposal
 
     winner_proposal.provider

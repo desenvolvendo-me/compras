@@ -19,7 +19,7 @@ feature "SignatureConfigurations" do
 
     select 'Autorizações de Fornecimento', :from => 'Relatório'
 
-    click_button 'Adicionar Item'
+    click_button 'Adicionar Assinatura'
 
     fill_in 'Ordem', :with => '1'
     within_modal 'Assinatura' do
@@ -81,7 +81,7 @@ feature "SignatureConfigurations" do
 
     click_link 'Criar Configuração de Assinatura'
 
-    click_button 'Adicionar Item'
+    click_button 'Adicionar Assinatura'
 
     within_modal 'Assinatura' do
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
@@ -112,8 +112,8 @@ feature "SignatureConfigurations" do
 
     select 'Processos Administrativos', :from => 'Relatório'
 
-    click_button 'Remover Item'
-    click_button 'Adicionar Item'
+    click_button 'Remover Assinatura'
+    click_button 'Adicionar Assinatura'
 
     fill_in 'Ordem', :with => '1'
     within_modal 'Assinatura' do

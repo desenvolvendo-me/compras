@@ -15,7 +15,6 @@ pt-BR:
         expiration_date: "Vencimento"
         pledge_parcel_value: "Valor do vencimento"
         balance: "Saldo"
-        kind: "Tipo de anulação"
         value: "Valor liquidado a ser anulado"
         date: "Data"
         reason: "Motivo"

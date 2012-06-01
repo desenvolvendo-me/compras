@@ -16,12 +16,17 @@ describe SubpledgeCancellation do
   it { should validate_presence_of :date }
   it { should validate_presence_of :reason }
 
+  it { should validate_numericality_of :value }
+
   it { should belong_to :entity }
   it { should belong_to :pledge }
   it { should belong_to :subpledge }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
+  it { should allow_value(10).for(:value) }
+  it { should_not allow_value(0).for(:value) }
+  it { should_not allow_value(-10).for(:value) }
 
   context 'validate pledge' do
     it 'should not accept pledge without subpledges' do
@@ -54,7 +59,7 @@ describe SubpledgeCancellation do
 
     it 'should not be valid if value greater than subpledge_expiratin_balance' do
       subject.should_not allow_value(4).for(:value).
-                                        with_message('não pode ser superior ao saldo do subempenho')
+                                        with_message('não pode ser superior ao valor atual do subempenho')
     end
 
     it 'should be valid if value is not greater than balance' do

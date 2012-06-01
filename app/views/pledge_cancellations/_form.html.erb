@@ -20,16 +20,7 @@
 
 <%= render 'pledge_parcels', :f => f %>
 
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :kind %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :value %>
-  </div>
-</div>
-
+<%= f.input :value %>
 <%= f.input :date %>
 <%= f.input :nature %>
 <%= f.input :reason %>
@@ -77,15 +68,6 @@
         return url;
       }
 
-      function forceValueWhenTotalIsKind(){
-        if($('#pledge_cancellation_kind').val() == '<%= PledgeCancellationKind::TOTAL %>') {
-          $('#pledge_cancellation_value').attr('disabled', true);
-          $('#pledge_cancellation_value').val(pledgeValue);
-        } else {
-          $('#pledge_cancellation_value').attr('disabled', false);
-        }
-      }
-
       function clearExistingPledgeParcels() {
         $('#pledge_parcels tbody').html('');
       }
@@ -115,7 +97,6 @@
           $('#pledge_balance').html(pledge.balance_as_currency);
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
-          forceValueWhenTotalIsKind();
         } else {
           $('#pledge_cancellation_pledge_parcel').attr('data-modal-url', '<%= modal_pledge_parcels_path %>');
           $('#pledge_cancellation_emission_date').val('');
@@ -129,8 +110,6 @@
           pledgeValue = null;
         }
       });
-
-      $('#pledge_cancellation_kind').change(forceValueWhenTotalIsKind);
     })();
   <% end %>
 </script>

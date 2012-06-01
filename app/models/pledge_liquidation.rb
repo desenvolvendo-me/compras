@@ -1,8 +1,6 @@
 class PledgeLiquidation < ActiveRecord::Base
-  attr_accessible :pledge_id, :kind, :value, :date
+  attr_accessible :pledge_id, :value, :date
   attr_accessible :entity_id, :year
-
-  has_enumeration_for :kind, :with => PledgeLiquidationKind, :create_helpers => true
 
   belongs_to :pledge
   belongs_to :entity
@@ -13,8 +11,9 @@ class PledgeLiquidation < ActiveRecord::Base
   delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :liquidation_value, :to => :pledge, :prefix => true, :allow_nil => true
 
-  validates :pledge, :kind, :value, :presence => true
+  validates :pledge, :presence => true
   validates :date, :entity, :year, :presence => true
+  validates :value, :presence => true, :numericality => { :greater_than => 0 }
   validate :date_must_be_greater_than_emission_date
   validate :validate_value
 
@@ -28,8 +27,6 @@ class PledgeLiquidation < ActiveRecord::Base
       :if => :any_pledge_liquidation?
     }
   end
-
-  before_validation :force_value_to_total_kind
 
   orderize :id
   filterize
@@ -45,12 +42,6 @@ class PledgeLiquidation < ActiveRecord::Base
   end
 
   protected
-
-  def force_value_to_total_kind
-    if pledge && total?
-      self.value = pledge_balance
-    end
-  end
 
   def any_pledge_liquidation?
     self.class.any?

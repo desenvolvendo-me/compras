@@ -32,7 +32,7 @@ class LicitationProcessProposalsClassificatorByLot
   end
 
   def pre_classified_proposals
-    sorted_proposals.select do |bidder|\
+    sorted_proposals.select do |bidder|
       bidder.proposal_total_value_by_lot(lot.id) <= maximum_price_for_classification
     end
   end

@@ -11,6 +11,10 @@ class LicitationProcessTypesOfCalculationByModality
       modality::PRESENCE_TRADING => [
         type_of_calculation::SORT_PARTICIPANTS_BY_ITEM,
         type_of_calculation::SORT_PARTICIPANTS_BY_LOT
+      ],
+      modality::AUCTION => [
+        type_of_calculation::LOWEST_GLOBAL_PRICE,
+        type_of_calculation::LOWEST_PRICE_BY_LOT
       ]
     }
   end

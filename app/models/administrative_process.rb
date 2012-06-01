@@ -51,6 +51,14 @@ class AdministrativeProcess < ActiveRecord::Base
     invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
   end
 
+  def signatures(signature_configuration_item = SignatureConfigurationItem)
+    signature_configuration_item.all_by_configuration_report(SignatureReport::ADMINISTRATIVE_PROCESSES)
+  end
+
+  def signatures_grouped
+    signatures.in_groups_of(4, false)
+  end
+
   protected
 
   def set_process

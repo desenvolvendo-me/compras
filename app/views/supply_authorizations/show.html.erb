@@ -38,8 +38,6 @@
 
 <h2>Dados do Fornecedor</h2>
 
-<h3>Endereço</h3>
-
 <table class="records">
   <thead>
     <tr>
@@ -329,6 +327,4 @@
   <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
 </div>
 
-<div>
-  Responsável pelo setor de compras
-</div>
+<%= render 'reports/signatures' %>

@@ -19,3 +19,4 @@ pt-BR:
         value: "Valor a subempenhar"
         process_number: "Número do processo"
         description: "Objeto"
+        subpledge_expirations_total_value: "Valor total das parcelas"

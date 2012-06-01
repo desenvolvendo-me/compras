@@ -19,7 +19,8 @@ feature "ManagementUnits" do
     fill_mask 'Exercício', :with => '2012'
     fill_in 'Descrição', :with => 'Unidade Central'
     fill_in 'Sigla', :with => 'UGC'
-    select 'Ativo', :from => 'Status'
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 

@@ -26,7 +26,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Voltar ao processo licitatório'
 
-    page.should have_content "Editar #{licitation_process.to_s}"
+    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario 'creating a new bidder' do

@@ -239,6 +239,31 @@ describe LicitationProcess do
     subject.valid?
 
     subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
+
+    subject.stub(:administrative_process_modality).and_return('auction')
+    subject.stub(:type_of_calculation).and_return('lowest_global_price')
+
+    LicitationProcessTypesOfCalculationByModality.any_instance.stub(:correct_type_of_calculation?).and_return(true)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
+
+    subject.stub(:type_of_calculation).and_return('lowest_price_by_lot')
+
+    LicitationProcessTypesOfCalculationByModality.any_instance.stub(:correct_type_of_calculation?).and_return(true)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
+
+    subject.stub(:type_of_calculation).and_return('lowest_total_price_by_item')
+
+    LicitationProcessTypesOfCalculationByModality.any_instance.stub(:correct_type_of_calculation?).and_return(false)
+
+    subject.valid?
+
+    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade'
   end
 
   it "should have filled lots" do

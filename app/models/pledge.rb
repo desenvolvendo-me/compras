@@ -48,8 +48,8 @@ class Pledge < ActiveRecord::Base
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
-  validate :expirations_should_have_date_greater_than_emission_date
-  validate :expirations_should_have_date_greater_than_last_expiration_date
+  validate :parcels_should_have_date_greater_than_or_equals_emission_date
+  validate :parcels_should_have_date_greater_than_last_parcel_date
   validate :pledge_parcels_value_should_be_equals_value
 
   with_options :allow_blank => true do |allowing_blank|
@@ -72,7 +72,7 @@ class Pledge < ActiveRecord::Base
   end
 
   def items_total_value
-    pledge_items.map(&:estimated_total_price).compact.sum
+    pledge_items.map(&:estimated_total_price).sum
   end
 
   def pledge_parcels_with_balance
@@ -121,32 +121,32 @@ class Pledge < ActiveRecord::Base
     return unless value
 
     if pledge_parcels.map(&:value).compact.sum != value
-      pledge_parcels.each do |expiration|
-        expiration.errors.add(:value, :pledge_parcel_value_sum_must_be_equals_to_pledge_value)
+      pledge_parcels.each do |parcel|
+        parcel.errors.add(:value, :pledge_parcel_value_sum_must_be_equals_to_pledge_value)
       end
 
       errors.add(:pledge_parcels, :invalid)
     end
   end
 
-  def expirations_should_have_date_greater_than_last_expiration_date
-    last_expiration = nil
+  def parcels_should_have_date_greater_than_last_parcel_date
+    last_parcel = nil
 
-    pledge_parcels.each do |expiration|
-      if last_expiration && expiration.expiration_date && expiration.expiration_date < last_expiration.expiration_date
-        expiration.errors.add(:expiration_date, :must_be_greater_than_last_expiration_date)
+    pledge_parcels.each do |parcel|
+      if last_parcel && parcel.expiration_date && parcel.expiration_date < last_parcel.expiration_date
+        parcel.errors.add(:expiration_date, :must_be_greater_than_last_expiration_date)
         errors.add(:pledge_parcels, :invalid)
       end
 
-      last_expiration = expiration
+      last_parcel = parcel
     end
   end
 
-  def expirations_should_have_date_greater_than_emission_date
-    pledge_parcels.each do |expiration|
-      next unless emission_date && expiration.expiration_date && expiration.expiration_date <= emission_date
+  def parcels_should_have_date_greater_than_or_equals_emission_date
+    pledge_parcels.each do |parcel|
+      next unless emission_date && parcel.expiration_date && parcel.expiration_date <= emission_date
 
-      expiration.errors.add(:expiration_date, :must_be_greater_than_pledge_emission_date)
+      parcel.errors.add(:expiration_date, :must_be_greater_than_or_equals_pledge_emission_date)
       errors.add(:pledge_parcels, :invalid)
     end
   end

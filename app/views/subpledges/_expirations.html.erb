@@ -47,7 +47,15 @@
   </tbody>
 </table>
 
-<%= f.input :value %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :value %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :subpledge_expirations_total_value, :disabled => true, :input_html => { :class => "decimal", :value => number_to_currency(f.object.subpledge_expirations_total_value, :format => "%n"), :size => 12 } %>
+  </div>
+</div>
 
 <%= mustache 'pledge-expiration-template' do %>
     <tr id="parcel_{{number}}">

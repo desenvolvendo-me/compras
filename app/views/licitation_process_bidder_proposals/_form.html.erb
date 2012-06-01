@@ -1,13 +1,15 @@
 <div class="proposal">
-  <div class="yui3-g">
     <%= f.input :id, :as => 'hidden' %>
     <%= f.input :licitation_process_bidder_id, :as => 'hidden' %>
     <%= f.input :administrative_process_budget_allocation_item_id, :as => 'hidden' %>
 
+  <div class="yui3-g">
     <div class="yui3-u-1">
       Item <span class="item-number"></span>
     </div>
+  </div>
 
+  <div class="yui3-g">
     <div class="yui3-u-1-4">
       <%= f.input :material, :disabled => true %>
     </div>

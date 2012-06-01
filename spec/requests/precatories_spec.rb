@@ -43,7 +43,7 @@ feature "Precatories" do
 
       click_button 'Adicionar Parcela'
 
-      within '.parcel:first' do
+      within '.parcel:last' do
         fill_mask 'Data do vencimento', :with => '15/06/2012'
         fill_in 'Valor', :with => '10.000.000,00'
         select 'A vencer', :from => 'Situação'
@@ -121,12 +121,12 @@ feature "Precatories" do
     within_tab 'Vencimentos' do
       fill_in 'Valor', :with => '5.000.000,00'
 
-      within '.parcel:last' do
+      within '.parcel:first' do
         fill_in 'Valor', :with => '2.500.000,00'
         fill_in 'Valor pago', :with => '2.500.000,00'
       end
 
-      within '.parcel:first' do
+      within '.parcel:last' do
         fill_in 'Valor', :with => '2.500.000,00'
       end
     end
@@ -154,7 +154,7 @@ feature "Precatories" do
       page.should have_field 'Valor', :with => '5.000.000,00'
       page.should have_field 'Valor parcelado', :with => '5.000.000,00'
 
-      within '.parcel:last' do
+      within '.parcel:first' do
         page.should have_field 'Data do vencimento', :with => '12/05/2012'
         page.should have_field 'Valor', :with => '2.500.000,00'
         page.should have_select 'Situação', :selected => 'Pago'
@@ -163,7 +163,7 @@ feature "Precatories" do
         page.should have_field 'Observação', :with => 'pagamento efetuado'
       end
 
-      within '.parcel:first' do
+      within '.parcel:last' do
         page.should have_field 'Data do vencimento', :with => '20/05/2012'
         page.should have_field 'Valor', :with => '2.500.000,00'
         page.should have_select 'Situação', :selected => 'A vencer'
@@ -215,7 +215,7 @@ feature "Precatories" do
 
       click_button 'Adicionar Parcela'
 
-      within '.parcel:first' do
+      within '.parcel:last' do
         fill_in 'Valor', :with => '5.000.000,00'
       end
 

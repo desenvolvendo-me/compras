@@ -35,6 +35,8 @@ feature "SubPledges" do
         fill_in 'Valor *', :with => '110,00'
       end
 
+      page.should have_field 'Valor total das parcelas', :with => '110,00'
+
       fill_in 'Valor a subempenhar', :with => '110,00'
     end
 
@@ -52,8 +54,6 @@ feature "SubPledges" do
       page.should have_field 'Fornecedor do empenho', :with => 'Wenderson Malheiros'
       page.should have_disabled_field 'Data de emissão'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-      page.should have_disabled_field 'Valor do empenho'
-      page.should have_field 'Valor do empenho', :with => '200,00'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Empenho', :with => pledge.to_s
       page.should have_field 'Subempenho', :with => '1'
@@ -129,15 +129,29 @@ feature "SubPledges" do
         fill_in 'Valor *', :with => '100,00'
       end
 
+      page.should have_field 'Valor total das parcelas', :with => '100,00'
+
+      click_button 'Adicionar Parcela'
+
+      within '.subpledge-expiration:first' do
+        fill_in 'Valor *', :with => '50,00'
+      end
+
+      page.should have_field 'Valor total das parcelas', :with => '150,00'
+
+      within '.subpledge-expiration:first' do
+        click_button 'Remover Parcela'
+      end
+
+      page.should have_field 'Valor total das parcelas', :with => '100,00'
+
       fill_in 'Valor a subempenhar', :with => '10,00'
     end
 
     click_button 'Salvar'
 
     within_tab 'Vencimentos' do
-      within '.subpledge-expiration:first' do
-        page.should have_content 'a soma de todos os valores não pode ser maior o valor do subempenho'
-      end
+        page.should have_content 'deve ser igual ao valor a subempenhar'
     end
   end
 
@@ -239,12 +253,10 @@ feature "SubPledges" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Fornecedor do empenho'
       page.should have_disabled_field 'Data de emissão'
-      page.should have_disabled_field 'Valor do empenho'
 
       fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
       page.should have_field 'Fornecedor do empenho', :with => 'Wenderson Malheiros'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-      page.should have_field 'Valor do empenho', :with => '9,99'
       page.should have_field 'Fornecedor *', :with => 'Wenderson Malheiros'
       page.should have_field 'Objeto *', :with => 'Descricao'
     end
@@ -258,7 +270,6 @@ feature "SubPledges" do
 
       page.should have_field 'Fornecedor do empenho', :with => ''
       page.should have_field 'Data de emissão', :with => ''
-      page.should have_field 'Valor do empenho', :with => ''
     end
   end
 
@@ -295,10 +306,8 @@ feature "SubPledges" do
       page.should have_disabled_field 'Valor a subempenhar'
       page.should have_field 'Valor a subempenhar', :with => '1,00'
 
-      within '.subpledge-expiration:first' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 8.days)
-        fill_in 'Valor *', :with => '1,00'
-      end
+      page.should_not have_button 'Adicionar Parcela'
+      page.should_not have_button 'Remover Parcela'
     end
   end
 

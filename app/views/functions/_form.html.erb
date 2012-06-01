@@ -1,5 +1,6 @@
 <%= f.input :code %>
 <%= f.input :regulatory_act %>
+<%= link_to_modal_info 'function_regulatory_act', f.object.regulatory_act %>
 <%= f.input :regulatory_act_vigor_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_vigor_date) if f.object.regulatory_act_vigor_date) } %>
 <%= f.input :description %>
 

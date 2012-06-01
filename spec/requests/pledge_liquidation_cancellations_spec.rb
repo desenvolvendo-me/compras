@@ -21,7 +21,6 @@ feature "PledgeLiquidationCancellations" do
     fill_in 'Exercício', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_in 'Valor liquidado a ser anulado', :with => '90,00'
-    select 'Parcial', :from => 'Tipo de anulação'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
 
@@ -63,7 +62,6 @@ feature "PledgeLiquidationCancellations" do
     page.find('#pledge_balance').should have_content 'R$ 200,00'
 
     page.should have_field 'Valor liquidado a ser anulado', :with => '90,00'
-    page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
     page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
   end
@@ -118,89 +116,6 @@ feature "PledgeLiquidationCancellations" do
     end
   end
 
-  scenario 'when select total as kind should disabled and fill value' do
-    Pledge.make!(:empenho)
-    PledgeParcelMovimentation.make!(:liquidacao_parcial)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
-
-    click_link 'Criar Anulação de Liquidação de Empenho'
-
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-    select 'Total', :from => 'Tipo de anulação'
-
-    page.should have_disabled_field 'Valor liquidado a ser anulado'
-    page.should have_field 'Valor liquidado a ser anulado', :with => '1,00'
-  end
-
-  scenario 'when submit form with same wrong validation and kind is total should have value as disabled field' do
-    Pledge.make!(:empenho)
-    PledgeParcelMovimentation.make!(:liquidacao_parcial)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
-
-    click_link 'Criar Anulação de Liquidação de Empenho'
-
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-    select 'Total', :from => 'Tipo de anulação'
-    fill_in 'Data *', :with => I18n.l(Date.yesterday)
-
-    click_button 'Salvar'
-
-    page.should_not have_notice 'Anulação de Liquidação de Empenho criado com sucesso.'
-
-    page.should have_disabled_field 'Valor liquidado a ser anulado'
-    page.should have_field 'Valor liquidado a ser anulado', :with => '1,00'
-    page.should have_select 'Tipo de anulação', :selected => 'Total'
-  end
-
-  scenario 'should fill value when select pledge before kind and kind is total' do
-    Pledge.make!(:empenho)
-    PledgeParcelMovimentation.make!(:liquidacao_parcial)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
-
-    click_link 'Criar Anulação de Liquidação de Empenho'
-
-    select 'Total', :from => 'Tipo de anulação'
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-
-    page.should have_disabled_field 'Valor liquidado a ser anulado'
-    page.should have_field 'Valor liquidado a ser anulado', :with => '1,00'
-  end
-
-  scenario 'create a new pledge_liquidation_cancellation with total as kind' do
-    Pledge.make!(:empenho)
-    PledgeParcelMovimentation.make!(:liquidacao_parcial)
-
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
-
-    click_link 'Criar Anulação de Liquidação de Empenho'
-
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
-    select 'Total', :from => 'Tipo de anulação'
-    fill_in 'Data *', :with => I18n.l(Date.current + 2.day)
-    fill_in 'Motivo', :with => 'Motivo para o anulamento'
-
-    click_button 'Salvar'
-
-    within_records do
-      page.find('a').click
-    end
-
-    page.should have_field 'Valor liquidado a ser anulado', :with => '1,00'
-  end
-
   scenario 'should have all fields disabled when editing an existent pledge' do
     pledge = Pledge.make!(:empenho)
     PledgeLiquidation.make!(:liquidacao_total)
@@ -219,8 +134,6 @@ feature "PledgeLiquidationCancellations" do
     page.should have_field 'Empenho', :with => "#{pledge.id}"
     page.should have_disabled_field 'Valor liquidado a ser anulado'
     page.should have_field 'Valor liquidado a ser anulado', :with => '1,00'
-    page.should have_disabled_field 'Tipo de anulação'
-    page.should have_select 'Tipo de anulação', :selected => 'Parcial'
     page.should have_disabled_field 'Data *'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
     page.should have_disabled_field 'Motivo *'
