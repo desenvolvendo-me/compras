@@ -18,7 +18,6 @@ class Entity < ActiveRecord::Base
   has_many :revenue_natures, :dependent => :restrict
   has_many :revenue_accountings, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
-  has_many :subpledges, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :subpledge_cancellations, :dependent => :restrict
 

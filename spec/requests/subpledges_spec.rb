@@ -7,7 +7,6 @@ feature "SubPledges" do
   end
 
   scenario 'create a new subpledge' do
-    Entity.make!(:detran)
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
     Provider.make!(:wenderson_sa)
 
@@ -18,8 +17,6 @@ feature "SubPledges" do
     click_link 'Criar Subempenho'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Ano', :with => '2012'
       fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
       fill_in 'Número do processo', :with => '1239/2012'
       fill_modal 'Fornecedor *', :with => '456789', :field => 'CRC'
@@ -49,12 +46,10 @@ feature "SubPledges" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Detran'
       page.should have_disabled_field 'Fornecedor do empenho'
       page.should have_field 'Fornecedor do empenho', :with => 'Wenderson Malheiros'
       page.should have_disabled_field 'Data de emissão'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-      page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Empenho', :with => pledge.to_s
       page.should have_field 'Subempenho', :with => '1'
       page.should have_field 'Número do processo', :with => '1239/2012'
@@ -286,10 +281,6 @@ feature "SubPledges" do
     should_not have_button 'Atualizar Anulação de Empenho'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Entidade'
-      page.should have_field 'Entidade', :with => 'Detran'
-      page.should have_disabled_field 'Ano'
-      page.should have_field 'Ano', :with => '2012'
       page.should have_disabled_field 'Empenho'
       page.should have_field 'Empenho', :with => pledge.to_s
       page.should have_disabled_field 'Número do processo'

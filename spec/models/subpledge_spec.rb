@@ -10,15 +10,12 @@ describe Subpledge do
     subject.to_s.should eq '1'
   end
 
-  it { should belong_to :entity }
   it { should belong_to :pledge }
   it { should belong_to :provider }
 
   it { should have_many(:subpledge_expirations).dependent(:destroy) }
   it { should have_many(:subpledge_cancellations).dependent(:restrict) }
 
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :year }
   it { should validate_presence_of :pledge }
   it { should validate_presence_of :provider }
   it { should validate_presence_of :date }
@@ -26,9 +23,6 @@ describe Subpledge do
   it { should validate_presence_of :process_number }
   it { should validate_presence_of :description }
 
-  it { should allow_value('2012').for(:year) }
-  it { should_not allow_value('201a').for(:year) }
-  it { should_not allow_value('201').for(:year) }
   it { should allow_value(1).for(:value) }
   it { should_not allow_value(0).for(:value) }
   it { should_not allow_value(-1).for(:value) }

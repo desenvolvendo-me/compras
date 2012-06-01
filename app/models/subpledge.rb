@@ -1,9 +1,8 @@
 class Subpledge < ActiveRecord::Base
-  attr_accessible :entity_id, :pledge_id, :provider_id, :year, :number, :date
+  attr_accessible :pledge_id, :provider_id, :number, :date
   attr_accessible :value, :process_number, :description
   attr_accessible :subpledge_expirations_attributes
 
-  belongs_to :entity
   belongs_to :pledge
   belongs_to :provider
 
@@ -16,9 +15,8 @@ class Subpledge < ActiveRecord::Base
   delegate :last_subpledge, :to => :pledge, :allow_nil => true
   delegate :value, :provider, :balance, :to => :pledge, :allow_nil => true, :prefix => true
 
-  validates :entity, :year, :pledge, :provider, :date, :presence => true
+  validates :pledge, :provider, :date, :presence => true
   validates :process_number, :description, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
   validates :value, :numericality => { :greater_than => 0 }, :presence => true
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
