@@ -28,7 +28,6 @@ a {
   text-align: center;
 }
 
-
 @media print {
   #container {
     padding: 0;
