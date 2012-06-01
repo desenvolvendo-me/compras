@@ -53,21 +53,6 @@
       var pledgeId = $('#pledge_cancellation_pledge_id').val(),
           pledgeValue;
 
-      function pledgeExpirationUrl() {
-        var url = "<%= modal_pledge_parcels_path %>?",
-            params = {
-              locked_fields: ["pledge"],
-              pledge_parcel: {
-                pledge_id: $('#pledge_cancellation_pledge_id').val(),
-                pledge: $('#pledge_cancellation_pledge').val()
-              }
-            };
-
-        url += jQuery.param(params);
-
-        return url;
-      }
-
       function clearExistingPledgeParcels() {
         $('#pledge_parcels tbody').html('');
       }
