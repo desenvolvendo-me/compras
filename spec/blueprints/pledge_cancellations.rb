@@ -1,6 +1,4 @@
 PledgeCancellation.blueprint(:empenho_2012) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
   pledge { Pledge.make!(:empenho) }
   value { 1 }
   date { Date.current + 1.day }
@@ -9,8 +7,6 @@ PledgeCancellation.blueprint(:empenho_2012) do
 end
 
 PledgeCancellation.blueprint(:cancelamento_para_empenho_em_quinze_dias) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
   pledge { Pledge.make!(:empenho_em_quinze_dias) }
   value { 1 }
   date { Date.current + 20.day }

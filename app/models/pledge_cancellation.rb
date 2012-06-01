@@ -1,10 +1,8 @@
 class PledgeCancellation < ActiveRecord::Base
   attr_accessible :pledge_id, :date, :kind, :reason, :value, :nature
-  attr_accessible :entity_id, :year
 
   has_enumeration_for :nature, :with => PledgeCancellationNature
 
-  belongs_to :entity
   belongs_to :pledge
 
   has_many :pledge_parcel_modifications, :dependent => :restrict, :as => :pledge_parcel_modificator
@@ -13,9 +11,7 @@ class PledgeCancellation < ActiveRecord::Base
   delegate :balance, :value, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :pledge_cancellations_sum, :to => :pledge, :allow_nil => true
 
-  validates :pledge, :date, :reason, :entity, :presence => true
-  validates :year, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
+  validates :pledge, :date, :reason, :presence => true
   validates :value, :presence => true, :numericality => { :greater_than => 0 }
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
