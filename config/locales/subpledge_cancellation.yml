@@ -7,8 +7,6 @@ pt-BR:
 
     attributes:
       subpledge_cancellation:
-        entity: "Entidade"
-        year: "Exercício"
         pledge: "Empenho"
         subpledge: "Subempenho"
         subpledge_balance: "Saldo do subempenho"

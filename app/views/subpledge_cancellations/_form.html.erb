@@ -1,13 +1,3 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :entity %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :year %>
-  </div>
-</div>
-
 <%= f.input :pledge, :modal_url => modal_pledges_path(:has_subpledges => true) %>
 <%= f.input :provider, :disabled => true %>
 

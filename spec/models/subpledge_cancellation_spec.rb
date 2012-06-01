@@ -8,8 +8,6 @@ describe SubpledgeCancellation do
     subject.to_s.should eq '1'
   end
 
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :year }
   it { should validate_presence_of :pledge }
   it { should validate_presence_of :subpledge }
   it { should validate_presence_of :value }
@@ -18,12 +16,9 @@ describe SubpledgeCancellation do
 
   it { should validate_numericality_of :value }
 
-  it { should belong_to :entity }
   it { should belong_to :pledge }
   it { should belong_to :subpledge }
 
-  it { should allow_value('2012').for(:year) }
-  it { should_not allow_value('201a').for(:year) }
   it { should allow_value(10).for(:value) }
   it { should_not allow_value(0).for(:value) }
   it { should_not allow_value(-10).for(:value) }

@@ -7,7 +7,6 @@ feature "SubpledgeCancellations" do
   end
 
   scenario 'create a new subpledge_cancellation' do
-    Entity.make!(:detran)
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
     subpledge = Subpledge.make!(:para_empenho_com_dois_vencimentos)
 
@@ -16,8 +15,6 @@ feature "SubpledgeCancellations" do
     click_link 'Anulações de Subempenho'
 
     click_link 'Criar Anulação de Subempenho'
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_modal 'Subempenho', :with => '1', :field => 'Número do processo'
     fill_in 'Valor *', :with => '90,00'
@@ -32,8 +29,6 @@ feature "SubpledgeCancellations" do
       page.find('a').click
     end
 
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Fornecedor'
     page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
@@ -202,10 +197,6 @@ feature "SubpledgeCancellations" do
 
     should_not have_button 'Salvar'
 
-    page.should have_disabled_field 'Entidade'
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_disabled_field 'Exercício'
-    page.should have_field 'Exercício', :with => '2012'
     page.should have_disabled_field 'Empenho'
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Fornecedor'

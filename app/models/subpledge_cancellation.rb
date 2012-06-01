@@ -1,8 +1,7 @@
 class SubpledgeCancellation < ActiveRecord::Base
-  attr_accessible :entity_id, :pledge_id, :subpledge_id
-  attr_accessible :year, :value, :date, :reason
+  attr_accessible :pledge_id, :subpledge_id
+  attr_accessible :value, :date, :reason
 
-  belongs_to :entity
   belongs_to :pledge
   belongs_to :subpledge
 
@@ -12,9 +11,8 @@ class SubpledgeCancellation < ActiveRecord::Base
   delegate :subpledge_cancellations_sum, :to => :subpledge, :allow_nil => true
   delegate :subpledge_expirations, :to => :subpledge, :allow_nil => true
 
-  validates :year, :pledge, :subpledge, :presence => true
-  validates :entity, :date, :reason, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
+  validates :pledge, :subpledge, :presence => true
+  validates :date, :reason, :presence => true
   validates :value, :presence => true, :numericality => { :greater_than => 0 }
   validate :pledge_must_has_subpledges
   validate :value_must_not_be_greater_than_subpledge_balance
