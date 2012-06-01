@@ -7,8 +7,6 @@ pt-BR:
 
     attributes:
       subpledge:
-        entity: "Entidade"
-        year: "Ano"
         pledge: "Empenho"
         pledge_provider: "Fornecedor do empenho"
         pledge_value: "Valor do empenho"
