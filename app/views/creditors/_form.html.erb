@@ -2,6 +2,10 @@
 
 <%= f.input :personable_type, :as => :hidden %>
 
+<p>
+  <%= link_to_modal_info 'creditor_person', f.object.person %>
+</p>
+
 <div id="creditor-tabs">
 </div>
 

@@ -53,7 +53,7 @@
     </tbody>
   </table>
 
-  <% if resource.personable_type == "Individual" %>
+  <% if resource.individual? %>
     <table class="records">
       <thead>
         <tr>
@@ -102,7 +102,7 @@
       </tbody>
     </table>
 
-  <% elsif resource.personable_type == "Company" %>
+  <% elsif resource.company? %>
     <table class="records">
       <thead>
         <tr>
@@ -178,6 +178,23 @@
             <%= resource.personable.company_size %>
           </td>
         </tr>
+      </tbody>
+    </table>
+
+    <table class='records'>
+      <thead>
+        <tr>
+          <th>Sócios</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% resource.personable.partners.each do |partner| %>
+          <tr>
+            <td>
+              <%= partner %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   <% end %>

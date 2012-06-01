@@ -87,4 +87,8 @@ class Person < ActiveRecord::Base
   def company?
     personable_type == "Company"
   end
+
+  def individual?
+    personable_type == "Individual"
+  end
 end

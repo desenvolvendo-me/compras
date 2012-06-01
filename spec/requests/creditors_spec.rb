@@ -26,6 +26,24 @@ feature "Creditors" do
     page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
   end
 
+  scenario 'viewing more data from the selected person' do
+    Person.make!(:nohup)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Criar Credor'
+
+    fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
+    
+    click_link 'Mais informações'
+
+    page.should have_content 'Nohup'
+    page.should have_content 'Sócios'
+    page.should have_content 'Wenderson Malheiros'
+  end
+
   scenario 'create a new creditor when people is a company' do
     Person.make!(:nohup)
     Cnae.make!(:varejo)
