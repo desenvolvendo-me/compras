@@ -1,8 +1,6 @@
 class PledgeLiquidationCancellation < ActiveRecord::Base
-  attr_accessible :pledge_id, :value, :date
-  attr_accessible :reason, :entity_id, :year
+  attr_accessible :pledge_id, :value, :date, :reason
 
-  belongs_to :entity
   belongs_to :pledge
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
@@ -12,8 +10,6 @@ class PledgeLiquidationCancellation < ActiveRecord::Base
   delegate :pledge_liquidation_cancellations_sum, :to => :pledge, :allow_nil => true
 
   validates :pledge, :date, :reason, :presence => true
-  validates :entity, :year, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
   validates :value, :presence => true, :numericality => { :greater_than => 0 }
   validates :date, :timeliness => {
     :on_or_after => lambda { last.date },
