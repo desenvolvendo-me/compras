@@ -6,6 +6,7 @@ require 'app/models/creditor_representative'
 require 'app/models/document_type'
 require 'app/models/creditor_secondary_cnae'
 require 'app/models/cnae'
+require 'app/models/person'
 
 describe Creditor do
   it { should belong_to :person }
@@ -69,6 +70,33 @@ describe Creditor do
     subject.stub(:cnae_ids).and_return( [1, 2, 3] )
     subject.main_cnae_id = 4
     subject.selected_cnaes.should == [1, 2, 3, 4]
+
+  describe 'representatives' do
+    let :person do
+      double :person
+    end
+
+    it "should be invalid when has a representative equal a person" do
+      person.stub(:id).and_return(1)
+      person.stub(:company?).and_return(true)
+      subject.stub(:person).and_return(person)
+      subject.stub(:representative_person_ids).and_return( [1, 2, 3] )
+
+      subject.valid?
+
+      subject.errors.messages[:representatives].should include "não pode haver um representante igual ao credor"
+    end
+
+    it "should be valid when has not a representative equal a person" do
+      person.stub(:id).and_return(4)
+      person.stub(:company?).and_return(true)
+      subject.stub(:person).and_return(person)
+      subject.stub(:representative_person_ids).and_return( [1, 2, 3] )
+
+      subject.valid?
+
+      subject.errors.messages[:representatives].should be_nil
+    end
   end
 
   it 'document should_not be invalid when not duplicated' do

@@ -64,10 +64,12 @@ class Creditor < ActiveRecord::Base
   end
 
   def person_in_representatives
-    representatives.each do |representative|
-      if representative.representative_person == person
-          errors.add(:representatives, :cannot_have_representative_equal_creditor)
-      end
+    return unless person && representatives
+
+    if representative_person_ids.include? person.id
+      errors.add(:representatives, :cannot_have_representative_equal_creditor)
+    end
+  end
     end
   end
 end
