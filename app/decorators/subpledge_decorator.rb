@@ -1,6 +1,6 @@
 class SubpledgeDecorator < Decorator
-  attr_modal :entity_id, :year, :pledge_id, :provider_id, :number, :date,
-             :value, :process_number, :description
+  attr_modal :pledge_id, :provider_id, :number, :date, :value,
+    :process_number, :description
 
   def emission_date
     helpers.l component.emission_date if component.emission_date
