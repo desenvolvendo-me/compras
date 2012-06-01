@@ -18,7 +18,6 @@ require 'app/models/revenue_nature'
 require 'app/models/revenue_accounting'
 require 'app/models/pledge_liquidation_cancellation'
 require 'app/models/pledge_liquidation'
-require 'app/models/subpledge_cancellation'
 
 describe Entity do
   it 'should return the name as to_s method' do
@@ -44,7 +43,6 @@ describe Entity do
   it { should have_many(:revenue_accountings).dependent(:restrict) }
   it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
-  it { should have_many(:subpledge_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :name }
 end
