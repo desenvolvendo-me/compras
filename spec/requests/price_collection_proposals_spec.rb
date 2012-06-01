@@ -103,10 +103,10 @@ feature "PriceCollectionProposals" do
     scenario "I can not update other's proposals" do
        collection = PriceCollection.make!(:coleta_de_precos_com_2_propostas)
        proposal = collection.price_collection_proposals.first
- 
+
        visit "/price_collection_proposals/#{proposal.id}/edit"
 
-       page.should have_content 'Você não tem acesso a essa página!'
+       page.should_not have_field "Coleta de Preços", :with => '1/2012'
     end
   end
 end
