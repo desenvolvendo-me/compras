@@ -299,6 +299,28 @@ feature "Pledges", :driver => :selenium do
     end
   end
 
+  scenario 'should not have error on expiration_date when pledge_parcels is equals than emission_date' do
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+    end
+
+    within_tab 'Vencimentos' do
+      fill_mask 'Vencimento', :with => I18n.l(Date.current)
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Vencimentos' do
+      page.should_not have_content 'deve ser maior ou igual a data de emissão'
+    end
+  end
+
   scenario 'validate expiration_date on pledge_parcels should be greater than last expiration date' do
     click_link 'Contabilidade'
 

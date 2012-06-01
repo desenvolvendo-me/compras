@@ -148,7 +148,7 @@ class Pledge < ActiveRecord::Base
 
   def parcels_should_have_date_greater_than_or_equals_emission_date
     pledge_parcels.each do |parcel|
-      next unless emission_date && parcel.expiration_date && parcel.expiration_date <= emission_date
+      next unless emission_date && parcel.expiration_date && parcel.expiration_date < emission_date
 
       parcel.errors.add(:expiration_date, :must_be_greater_than_or_equals_pledge_emission_date)
       errors.add(:pledge_parcels, :invalid)
