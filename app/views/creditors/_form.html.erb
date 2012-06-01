@@ -30,13 +30,13 @@
     }
   });
 
-  function hideFieldsExceptIndividualFields(){
+  function showOnlyIndividualFields(){
     $('#creditor_company_size').parent().hide();
     $('#creditor_choose_simple').parent().hide();
     $('#creditor_main_cnae').parent().hide();
   };
 
-  function hideFieldsExceptCompanyFields(){
+  function showOnlyCompanyFields(){
     $('#creditor_occupation_classification').parent().hide();
     $('#creditor_municipal_public_administration').parent().parent().hide();
     $('#creditor_autonomous').parent().hide();
@@ -49,11 +49,14 @@
     switch ($('#creditor_personable_type').val()){
       case 'Individual':
         $("#creditor-tabs").html($("#individual-template").mustache());
-        hideFieldsExceptIndividualFields();
+        showOnlyIndividualFields();
         break;
       case 'Company':
         $("#creditor-tabs").html($("#company-template").mustache());
-        hideFieldsExceptCompanyFields();
+        showOnlyCompanyFields();
+        break;
+      case 'SpecialEntry':
+        $("#creditor-tabs").html($("#special-entry-template").mustache());
         break;
     }
   };
@@ -64,5 +67,4 @@
   });
 
   renderPartial();
-
 </script>
