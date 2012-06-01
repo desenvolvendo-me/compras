@@ -26,7 +26,7 @@
 <script>
   $('.tabs').tabs({
     select: function() {
-      $('#replicated_value').val($('#pledge_value').val());
+      $('.replicated_value').val($('#pledge_value').val());
     }
   });
 
@@ -56,6 +56,21 @@
         });
 
         $('#pledge_items_total_value').val(floatToPtBrString(total));
+      }
+
+      function pledgeParcelsTotalValue() {
+        var total = 0,
+            value;
+
+        $('.pledge-expiration .value:visible').each(function() {
+          value = $(this).val();
+
+          if (value != '') {
+            total += parsePtBrFloat(value);
+          }
+        });
+
+        $('#pledge_pledge_parcels_sum').val(floatToPtBrString(total));
       }
 
       function fillExpirationNumber() {
@@ -129,6 +144,9 @@
       });
 
       $('form.pledge').delegate('.remove-pledge-expiration', 'click', fillExpirationNumber);
+      $('form.pledge').delegate('.add-pledge-expiration', 'click', pledgeParcelsTotalValue);
+      $('form.pledge').bind('append.mustache', pledgeParcelsTotalValue);
+      $('form.pledge').delegate('.value', 'keyup', pledgeParcelsTotalValue);
       $('form.pledge').bind('append.mustache', fillExpirationNumber);
       $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', pledgeItemsTotalValue);
       $('form.pledge').delegate('.remove-pledge-item', 'click', pledgeItemsTotalValue);

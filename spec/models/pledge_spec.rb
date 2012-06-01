@@ -57,6 +57,21 @@ describe Pledge do
     end
   end
 
+  context 'pledge_parcels_sum' do
+    let :pledge_parcel_one do
+      double('PledgeParcel', :value => 10)
+    end
+
+    let :pledge_parcel_two do
+      double('PledgeParcel', :value => 12)
+    end
+
+    it 'should return correct pledge_parcels_sum' do
+      subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
+      subject.pledge_parcels_sum.should eq 22
+    end
+  end
+
   it 'should return correct liquidation_value' do
     subject.stub(:pledge_liquidations_sum).and_return(200)
     subject.stub(:pledge_liquidation_cancellations_sum).and_return(90)

@@ -17,6 +17,13 @@ describe PledgeDecorator do
     subject.reserve_fund_value.should eq '300,00'
   end
 
+  it 'should return pledge_parcels_sum with precision' do
+    component.stub(:pledge_parcels_sum => 300.0)
+    helpers.stub(:number_with_precision).with(300.0).and_return("300,00")
+
+    subject.pledge_parcels_sum.should eq '300,00'
+  end
+
   it 'should return formatted balance' do
     component.stub(:balance => 100.0)
     helpers.stub(:number_with_precision).with(100.0).and_return("100,00")

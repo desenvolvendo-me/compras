@@ -1,6 +1,6 @@
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :value, :disabled => true, :input_html => { :id => 'replicated_value' } %>
+    <%= f.input :parcel_replicated_value, :disabled => true, :input_html => { :class => 'replicated_value' } %>
   </div>
   <div class="yui3-u-1-2">
     <%= f.input :items_total_value, :input_html => { :value => number_to_currency(f.object.items_total_value, :format => "%n"), :size => 12 }, :disabled => true %>

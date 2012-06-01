@@ -53,8 +53,8 @@ feature "Pledges", :driver => :selenium do
 
     within_tab 'Itens' do
       # should get the value informed on the general tab
-      page.should have_disabled_field 'Valor *'
-      page.should have_field 'Valor *', :with => "10,00"
+      page.should have_disabled_field 'Valor'
+      page.should have_field 'Valor', :with => '10,00'
 
       click_button "Adicionar Item"
 
@@ -85,6 +85,9 @@ feature "Pledges", :driver => :selenium do
         fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
+
+      page.should have_disabled_field 'Valor total das parcelas'
+      page.should have_field 'Valor total das parcelas', :with => '10,00'
     end
 
     click_button 'Salvar'
@@ -130,6 +133,9 @@ feature "Pledges", :driver => :selenium do
     end
 
     within_tab 'Vencimentos' do
+      page.should have_field 'Valor', :with => '10,00'
+      page.should have_field 'Valor total das parcelas', :with => '10,00'
+
       within '.pledge-expiration:first' do
         page.should have_field 'Número', :with => '1'
         page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
@@ -141,6 +147,79 @@ feature "Pledges", :driver => :selenium do
         page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
         page.should have_field 'Valor', :with => '5,00'
       end
+    end
+  end
+
+  scenario 'should not have errors on replicated value' do
+    Entity.make!(:detran)
+    ManagementUnit.make!(:unidade_central)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    reserve_fund = ReserveFund.make!(:detran_2012)
+    PledgeCategory.make!(:geral)
+    ExpenseKind.make!(:pagamentos)
+    PledgeHistoric.make!(:semestral)
+    LicitationModality.make!(:publica)
+    LicitationProcess.make!(:processo_licitatorio)
+    management_contract = ManagementContract.make!(:primeiro_contrato)
+    Provider.make!(:wenderson_sa)
+    founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
+    Material.make!(:arame_farpado)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Entidade', :with => 'Detran'
+      fill_mask 'Exercício', :with => '2012'
+      fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
+      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      select 'Global', :from => 'Tipo de empenho'
+      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      select 'Patrimonial', :from => 'Tipo de bem'
+      fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
+      fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
+    end
+
+    within_tab 'Complementar' do
+      fill_modal 'Tipo de despesa', :with => 'Pagamentos', :field => 'Descrição'
+      fill_modal 'Histórico', :with => 'Semestral', :field => 'Descrição'
+      fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
+      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+      fill_modal 'Contrato', :with => '001', :field => 'Número do contrato'
+      fill_in 'Objeto', :with => 'Objeto de empenho'
+    end
+
+    within_tab 'Vencimentos' do
+      within '.pledge-expiration:first' do
+        fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Valor', :with => '5,00'
+      end
+
+      click_button 'Adicionar Vencimento'
+
+      within '.pledge-expiration:last' do
+        fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Valor', :with => '5,00'
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Principal' do
+      page.should have_content 'não pode ficar em branco'
+    end
+
+    within_tab 'Itens' do
+      page.should_not have_content 'não pode ficar em branco'
+    end
+
+    within_tab 'Vencimentos' do
+      page.should_not have_content 'não pode ficar em branco'
     end
   end
 

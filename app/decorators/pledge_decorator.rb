@@ -10,6 +10,10 @@ class PledgeDecorator < Decorator
     helpers.number_with_precision super if super
   end
 
+  def pledge_parcels_sum
+    helpers.number_with_precision super if super
+  end
+
   def balance
     helpers.number_with_precision super if super
   end

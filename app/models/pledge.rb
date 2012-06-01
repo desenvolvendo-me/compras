@@ -6,7 +6,7 @@ class Pledge < ActiveRecord::Base
   attr_accessible :founded_debt_contract_id, :provider_id, :pledge_items_attributes
   attr_accessible :pledge_parcels_attributes, :licitation_process_id
 
-  attr_accessor :licitation, :process
+  attr_accessor :licitation, :process, :item_replicated_value, :parcel_replicated_value
 
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type, :create_helpers => true
@@ -69,6 +69,10 @@ class Pledge < ActiveRecord::Base
 
   def to_s
     id.to_s
+  end
+
+  def pledge_parcels_sum
+    pledge_parcels.map(&:value).compact.sum
   end
 
   def items_total_value
