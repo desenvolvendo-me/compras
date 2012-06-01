@@ -21,6 +21,7 @@ class Material < ActiveRecord::Base
   has_many :administrative_process_budget_allocation_items, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocation_items, :dependent => :restrict
   has_many :price_collection_lot_items, :dependent => :restrict
+  has_many :creditor_materials, :dependent => :restrict
 
   delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
 

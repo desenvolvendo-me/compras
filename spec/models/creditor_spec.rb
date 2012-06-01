@@ -7,6 +7,7 @@ require 'app/models/document_type'
 require 'app/models/creditor_secondary_cnae'
 require 'app/models/cnae'
 require 'app/models/person'
+require 'app/models/creditor_material'
 
 describe Creditor do
   it { should belong_to :person }
@@ -19,6 +20,8 @@ describe Creditor do
   it { should have_many(:document_types).through(:documents) }
   it { should have_many(:representatives) }
   it { should have_many(:representative_people).through(:representatives) }
+  it { should have_many(:materials).through(:creditor_materials) }
+  it { should have_many(:creditor_materials).dependent(:destroy) }
 
   it { should validate_presence_of :person }
   it { should_not validate_presence_of :company_size }

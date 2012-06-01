@@ -6,6 +6,7 @@ require 'app/models/pledge_item'
 require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/price_collection_lot_item'
+require 'app/models/creditor_material'
 
 describe Material do
   it 'should return code and description as to_s method' do
@@ -22,6 +23,7 @@ describe Material do
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:price_collection_lot_items).dependent(:restrict) }
+  it { should have_many(:creditor_materials).dependent(:restrict) }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }

@@ -4,6 +4,7 @@ class Creditor < ActiveRecord::Base
   attr_accessible :social_identification_number, :choose_simple
   attr_accessible :contract_start_date, :cnae_ids, :documents_attributes
   attr_accessible :representative_person_ids, :representative_ids
+  attr_accessible :material_ids
 
   belongs_to :person
   belongs_to :occupation_classification
@@ -15,6 +16,8 @@ class Creditor < ActiveRecord::Base
   has_many :document_types, :through => :documents
   has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
   has_many :representative_people, :through => :representatives, :source => :representative_person
+  has_many :materials, :through => :creditor_materials
+  has_many :creditor_materials, :dependent => :destroy
 
   delegate :personable_type, :company?, :to => :person, :allow_nil => true
 

@@ -51,6 +51,7 @@ feature "Creditors" do
     Cnae.make!(:direito_social)
     CompanySize.make!(:micro_empresa)
     DocumentType.make!(:fiscal)
+    Material.make!(:arame_farpado)
 
     click_link 'Cadastros Diversos'
 
@@ -82,6 +83,10 @@ feature "Creditors" do
       fill_in 'Órgão emissor', :with => 'SSP'
     end
 
+    within_tab 'Materiais' do
+      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -110,10 +115,16 @@ feature "Creditors" do
       page.should have_field 'Data de validade', :with => '05/04/2013'
       page.should have_field 'Órgão emissor', :with => 'SSP'
     end
+
+    within_tab 'Materiais' do
+      page.should have_content '02.02.00001'
+      page.should have_content 'Arame farpado'
+    end
   end
 
   scenario 'create a new creditor when people is individual' do
     Person.make!(:sobrinho)
+    Material.make!(:arame_farpado)
     OccupationClassification.make!(:armed_forces)
 
     click_link 'Cadastros Diversos'
@@ -131,6 +142,11 @@ feature "Creditors" do
       fill_in 'PIS/PASEP', :with => '123456'
       fill_in 'Início do contrato', :with => '05/04/2012'
     end
+
+    within_tab 'Materiais' do
+      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -145,6 +161,11 @@ feature "Creditors" do
       page.should have_checked_field 'Autônomo'
       page.should have_field 'PIS/PASEP', :with => '123456'
       page.should have_field 'Início do contrato', :with => '05/04/2012'
+    end
+
+    within_tab 'Materiais' do
+      page.should have_content '02.02.00001'
+      page.should have_content 'Arame farpado'
     end
   end
 
@@ -176,6 +197,7 @@ feature "Creditors" do
     CompanySize.make!(:empresa_de_grande_porte)
     DocumentType.make!(:oficial)
     Person.make!(:wenderson)
+    Material.make!(:arame_farpado)
 
     click_link 'Cadastros Diversos'
 
@@ -218,6 +240,12 @@ feature "Creditors" do
       fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
     end
 
+    within_tab 'Materiais' do
+      click_button 'Remover material'
+
+      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -256,12 +284,22 @@ feature "Creditors" do
       page.should have_content 'Wenderson Malheiros'
       page.should have_content '003.149.513-34'
     end
+
+    within_tab 'Materiais' do
+      page.should_not have_content '01.01.00001'
+      page.should_not have_content 'Antivirus'
+
+      page.should have_content '02.02.00001'
+      page.should have_content 'Arame farpado'
+    end
   end
 
   scenario 'update a creditor when people is individual' do
     Creditor.make!(:sobrinho)
     Person.make!(:wenderson)
     OccupationClassification.make!(:engineer)
+    Material.make!(:arame_farpado)
+    Material.make!(:arame_comum)
 
     click_link 'Cadastros Diversos'
 
@@ -278,6 +316,11 @@ feature "Creditors" do
       fill_mask 'Início do contrato', :with => '05/04/2011'
     end
 
+    within_tab 'Materiais' do
+      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
+      fill_modal 'Materiais', :with => 'Arame comum', :field => 'Descrição'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -292,6 +335,13 @@ feature "Creditors" do
       page.should have_checked_field 'Autônomo'
       page.should have_field 'PIS/PASEP', :with => '6789'
       page.should have_field 'Início do contrato', :with => '05/04/2011'
+    end
+
+    within_tab 'Materiais' do
+      page.should have_content '02.02.00001'
+      page.should have_content 'Arame farpado'
+      page.should have_content '02.02.00002'
+      page.should have_content 'Arame comum'
     end
   end
 

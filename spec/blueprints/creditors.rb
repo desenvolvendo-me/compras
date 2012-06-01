@@ -14,6 +14,7 @@ Creditor.blueprint(:nohup) do
   cnaes { [ Cnae.make!(:aluguel) ] }
   documents { [ CreditorDocument.make!(:documento) ] }
   representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
+  materials { [ Material.make!(:antivirus) ] }
 end
 
 Creditor.blueprint(:mateus) do
