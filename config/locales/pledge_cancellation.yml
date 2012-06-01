@@ -7,8 +7,6 @@ pt-BR:
 
     attributes:
       pledge_cancellation:
-        entity: "Entidade"
-        year: "Ano"
         pledge: "Empenho"
         emission_date: "Data de emissão"
         pledge_parcel: "Parcela"
