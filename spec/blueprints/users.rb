@@ -50,4 +50,5 @@ User.blueprint(:provider_with_password) do
   password      { '123456' }
   administrator { false }
   authenticable { Provider.make!(:sobrinho_sa) }
+  confirmed_at  { 2.days.ago }
 end
