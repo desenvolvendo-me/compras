@@ -16,7 +16,7 @@ class LicitationProcessLot < ActiveRecord::Base
   filterize
 
   scope :licitation_process_less_than_me, lambda { |licitation_process_id, id|
-    where { |lot| (lot.licitation_process_id.eq(licitation_process_id)) & (lot.id.lteq(id)) }
+    where { |lot| lot.licitation_process_id.eq(licitation_process_id) & lot.id.lteq(id) }
   }
 
   def to_s
