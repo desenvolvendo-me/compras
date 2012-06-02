@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       price_collection_proposal:
-        price_collection: "Coleta de Preços"
+        price_collection: "Coleta de preços"
         provider: "Fornecedor"
         price_collection_date: "Data de início"
         price_collection_period: "Prazo de entrega"
