@@ -780,8 +780,8 @@ feature "LicitationProcesses" do
 
     page.should have_content 'Apuração: Maior lance por lote'
     page.should have_content 'Lote 1'
-    page.should have_content 'Wenderson Malheiros '
     page.should have_content '20,00'
+    page.should have_content 'Wenderson Malheiros '
 
     # back to form
     click_link 'Voltar'
