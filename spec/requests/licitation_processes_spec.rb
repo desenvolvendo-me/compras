@@ -698,8 +698,10 @@ feature "LicitationProcesses" do
 
     page.should have_content 'Apuração: Maior lance por item'
     page.should have_content 'Antivirus'
-    page.should have_content 'Wenderson Malheiros '
+    page.should have_content '2'
+    page.should have_content '10,00'
     page.should have_content '20,00'
+    page.should have_content 'Wenderson Malheiros '
 
     # back to form
     click_link 'Voltar'

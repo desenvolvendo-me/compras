@@ -14,7 +14,7 @@ class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
 
   delegate :type_of_calculation, :to => :administrative_process_budget_allocation, :allow_nil => true
 
-  delegate :provider, :total_price, :to => :winner_proposals, :allow_nil => true, :prefix => true
+  delegate :provider, :total_price, :unit_price, :to => :winner_proposals, :allow_nil => true, :prefix => true
 
   validates :material, :quantity, :unit_price, :presence => true
 
