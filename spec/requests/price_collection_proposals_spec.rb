@@ -11,9 +11,9 @@ feature "PriceCollectionProposals" do
     scenario 'should not have a button to create a proposal' do
       click_link 'Processos'
 
-      click_link 'Propostas Para Coleta de Preços'
+      click_link 'Propostas Para Coletas de Preços'
 
-      page.should_not have_link 'Criar Coleta de Preços'
+      page.should_not have_link 'Criar Proposta Para Coleta de Preços'
     end
 
     scenario 'the proposal should be created automatically when the price collection is created' do
@@ -21,7 +21,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coleta de Preços'
+      click_link 'Propostas Para Coletas de Preços'
 
       page.should have_link '1/2012 - Wenderson Malheiros'
     end
@@ -31,7 +31,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coleta de Preços'
+      click_link 'Propostas Para Coletas de Preços'
 
       click_link '1/2012 - Wenderson Malheiros'
 
@@ -43,7 +43,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coleta de Preços'
+      click_link 'Propostas Para Coletas de Preços'
 
       click_link '1/2012 - Wenderson Malheiros'
 
@@ -78,7 +78,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coleta de Preços'
+      click_link 'Propostas Para Coletas de Preços'
 
       page.should_not have_content '1/2012 - Wenderson Malheiros'
       page.should have_content '1/2012 - Gabriel Sobrinho'
@@ -89,7 +89,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coleta de Preços'
+      click_link 'Propostas Para Coletas de Preços'
 
       click_link '1/2012 - Gabriel Sobrinho'
 

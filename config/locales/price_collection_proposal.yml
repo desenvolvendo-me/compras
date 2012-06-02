@@ -3,7 +3,7 @@ pt-BR:
     models:
       price_collection_proposal:
         one: "Proposta Para Coleta de Preços"
-        other: "Propostas Para Coleta de Preços"
+        other: "Propostas Para Coletas de Preços"
 
     attributes:
       price_collection_proposal:
