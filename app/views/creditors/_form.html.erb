@@ -6,20 +6,55 @@
   <%= link_to_modal_info 'creditor_person', f.object.person %>
 </p>
 
-<div id="creditor-tabs">
+<div id="creditor-tabs" class="tabs">
+  <ul>
+    <li id="tab-creditor-main"><a href="#creditor-main">Principal</a></li>
+    <li id="tab-creditor-cnaes"><a href="#creditor-cnaes">Cnaes secundários</a></li>
+    <li id="tab-creditor-documents"><a href="#creditor-documents">Documentos</a></li>
+    <li id="tab-creditor-materials"><a href="#creditor-materials">Materiais</a></li>
+    <li id="tab-creditor-representatives"><a href="#creditor-representatives">Representantes</a></li>
+    <li id="tab-creditor-accounts"><a href="#creditor-accounts">Conta Bancária</a></li>
+    <li id="tab-creditor-balance"><a href="#creditor-balance">Balanço</a></li>
+    <li id="tab-creditor-crc"><a href="#creditor-crc">CRC</a></li>
+    <li id="tab-creditor-administrative-penalty"><a href="#creditor-administrative-penalty">Sanção Adm / Regularização</a></li>
+  </ul>
+
+  <div id="creditor-main">
+    <%= render 'main', :f => f %>
+  </div>
+
+  <div id="creditor-cnaes">
+    <%= render 'cnaes', :f => f %>
+  </div>
+
+  <div id="creditor-documents">
+    <%= render 'documents', :f => f %>
+  </div>
+
+  <div id="creditor-materials">
+    <%= render 'materials', :f => f %>
+  </div>
+
+  <div id="creditor-representatives">
+    <%= render 'representatives', :f => f %>
+  </div>
+
+  <div id="creditor-accounts">
+    <%= render 'accounts', :f => f %>
+  </div>
+
+  <div id="creditor-balance">
+    <%= render 'balance', :f => f %>
+  </div>
+
+  <div id="creditor-crc">
+    <%= render 'crc', :f => f %>
+  </div>
+
+  <div id="creditor-administrative-penalty">
+    <%= render 'administrative_penalty', :f => f %>
+  </div>
 </div>
-
-<%= mustache 'individual-template' do %>
-  <%= render 'individuals', :f => f %>
-<% end %>
-
-<%= mustache 'company-template' do %>
-  <%= render 'companies', :f => f %>
-<% end %>
-
-<%= mustache 'special-entry-template' do %>
-  <%= render 'special_entries', :f => f %>
-<% end %>
 
 <script>
   $('#creditor_person_id').change(function (event, people) {
@@ -34,6 +69,9 @@
     $('#creditor_company_size').parent().hide();
     $('#creditor_choose_simple').parent().hide();
     $('#creditor_main_cnae').parent().hide();
+    $('#tab-creditor-cnaes').hide();
+    $('#tab-creditor-documents').hide();
+    $('#tab-creditor-representatives').hide();
   };
 
   function showOnlyCompanyFields(){
@@ -42,29 +80,53 @@
     $('#creditor_autonomous').parent().hide();
     $('#creditor_social_identification_number').parent().hide();
     $('#creditor_contract_start_date').parent().hide();
-
   };
 
-  function renderPartial(){
+  function showOnlySpecialEntryFields(){
+    $('#tab-creditor-main').hide();
+  };
+
+  function showAllTabs(){
+    $('#tab-creditor-main').show();
+    $('#tab-creditor-cnaes').show();
+    $('#tab-creditor-documents').show();
+    $('#tab-creditor-materials').show();
+    $('#tab-creditor-representatives').show();
+    $('#tab-creditor-accounts').show();
+    $('#tab-creditor-balance').show();
+    $('#tab-creditor-crc').show();
+    $('#tab-creditor-administrative-penalty').show();
+  };
+
+  function showAllFields(){
+    $('#creditor_company_size').parent().show();
+    $('#creditor_choose_simple').parent().show();
+    $('#creditor_main_cnae').parent().show();
+
+    $('#creditor_occupation_classification').parent().show();
+    $('#creditor_municipal_public_administration').parent().parent().show();
+    $('#creditor_autonomous').parent().show();
+    $('#creditor_social_identification_number').parent().show();
+    $('#creditor_contract_start_date').parent().show();
+  };
+
+  function renderTabs(){
     switch ($('#creditor_personable_type').val()){
       case 'Individual':
-        $("#creditor-tabs").html($("#individual-template").mustache());
         showOnlyIndividualFields();
         break;
       case 'Company':
-        $("#creditor-tabs").html($("#company-template").mustache());
         showOnlyCompanyFields();
         break;
       case 'SpecialEntry':
-        $("#creditor-tabs").html($("#special-entry-template").mustache());
+        showOnlySpecialEntryFields();
         break;
     }
   };
 
   $("#creditor_person_id").change(function () {
-    renderPartial();
-    loadTabs();
+    showAllFields();
+    showAllTabs();
+    renderTabs();
   });
-
-  renderPartial();
 </script>
