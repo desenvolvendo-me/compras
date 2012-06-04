@@ -63,7 +63,6 @@ describe PriceCollectionsController do
 
         post :create
       end
-
     end
   end
 
