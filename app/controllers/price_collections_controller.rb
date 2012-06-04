@@ -18,4 +18,9 @@ class PriceCollectionsController < CrudController
 
     ProviderUserCreator.new(object).generate if super
   end
+
+  def update_resource(object, attributes)
+    return unless super
+    ProviderUserCreator.new(object).generate
+  end
 end

@@ -40,5 +40,65 @@ describe PriceCollectionsController do
 
       assigns(:price_collection).status.should eq Status::ACTIVE
     end
+
+    describe 'successfull' do
+      before do
+        PriceCollection.any_instance.should_receive(:save).and_return true
+      end
+
+      it 'should generate the users for the providers' do
+        ProviderUserCreator.any_instance.should_receive(:generate)
+
+        post :create
+      end
+    end
+
+    describe 'unsuccessful' do
+      before do
+        PriceCollection.any_instance.should_receive(:save).and_return false
+      end
+
+      it 'should generate the users for the providers' do
+        ProviderUserCreator.any_instance.should_not_receive(:generate)
+
+        post :create
+      end
+
+    end
+  end
+
+  context 'PUT #update' do
+    let :price_collection do
+      double('PriceCollection')
+    end
+
+    before do
+      PriceCollection.stub(:find).and_return price_collection
+      price_collection.stub(:localized).and_return price_collection
+    end
+
+    describe 'successful update' do
+      before do
+        price_collection.stub(:update_attributes).and_return true
+      end
+
+      it 'should generate users for any provider' do
+        ProviderUserCreator.any_instance.should_receive(:generate)
+
+        put :update
+      end
+    end
+
+    describe 'unsuccessful update' do
+      before do
+        price_collection.stub(:update_attributes).and_return false
+      end
+
+      it 'should not generate users for any provider' do
+        ProviderUserCreator.any_instance.should_not_receive(:generate)
+
+        put :update
+      end
+    end
   end
 end
