@@ -129,4 +129,8 @@
     showAllTabs();
     renderTabs();
   });
+
+  $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {
+    $(this).closest('.creditor-account').find('.creditor-account-agency').attr('data-modal-url', "<%= modal_agencies_path %>?bank_id=" + $(this).val() );
+  });
 </script>

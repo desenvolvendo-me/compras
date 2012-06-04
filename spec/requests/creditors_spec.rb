@@ -8,6 +8,7 @@ feature "Creditors" do
 
   scenario 'create a new creditor when people is special entry' do
     Person.make!(:mateus)
+    Agency.make!(:itau)
 
     click_link 'Cadastros Diversos'
 
@@ -17,6 +18,17 @@ feature "Creditors" do
 
     fill_modal 'Pessoa', :with => 'Mateus', :field => 'Nome'
 
+    within_tab 'Conta Bancária' do
+      click_button 'Adicionar Conta Bancária'
+
+      fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
+      fill_modal 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      select 'Ativo', :from => 'Status'
+      select 'Conta corrente', :from => 'Tipo da conta'
+      fill_in 'Número da conta', :with => '12345'
+      fill_in 'Dígito da conta', :with => 'x'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -24,6 +36,15 @@ feature "Creditors" do
     click_link 'Mateus Lorandi'
 
     page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
+
+    within_tab 'Conta Bancária' do
+      page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
+      page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should have_select 'Status', :selected => 'Ativo'
+      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
+      page.should have_field 'Número da conta', :with => '12345'
+      page.should have_field 'Dígito da conta', :with => 'x'
+    end
   end
 
   scenario 'viewing more data from the selected person' do
@@ -36,7 +57,7 @@ feature "Creditors" do
     click_link 'Criar Credor'
 
     fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
-    
+
     click_link 'Mais informações'
 
     page.should have_content 'Nohup'
@@ -52,6 +73,7 @@ feature "Creditors" do
     CompanySize.make!(:micro_empresa)
     DocumentType.make!(:fiscal)
     Material.make!(:arame_farpado)
+    Agency.make!(:itau)
 
     click_link 'Cadastros Diversos'
 
@@ -87,6 +109,17 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
+    within_tab 'Conta Bancária' do
+      click_button 'Adicionar Conta Bancária'
+
+      fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
+      fill_modal 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      select 'Ativo', :from => 'Status'
+      select 'Conta corrente', :from => 'Tipo da conta'
+      fill_in 'Número da conta', :with => '12345'
+      fill_in 'Dígito da conta', :with => 'x'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -120,12 +153,22 @@ feature "Creditors" do
       page.should have_content '02.02.00001'
       page.should have_content 'Arame farpado'
     end
+
+    within_tab 'Conta Bancária' do
+      page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
+      page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should have_select 'Status', :selected => 'Ativo'
+      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
+      page.should have_field 'Número da conta', :with => '12345'
+      page.should have_field 'Dígito da conta', :with => 'x'
+    end
   end
 
   scenario 'create a new creditor when people is individual' do
     Person.make!(:sobrinho)
     Material.make!(:arame_farpado)
     OccupationClassification.make!(:armed_forces)
+    Agency.make!(:itau)
 
     click_link 'Cadastros Diversos'
 
@@ -145,6 +188,17 @@ feature "Creditors" do
 
     within_tab 'Materiais' do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
+    end
+
+    within_tab 'Conta Bancária' do
+      click_button 'Adicionar Conta Bancária'
+
+      fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
+      fill_modal 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      select 'Ativo', :from => 'Status'
+      select 'Conta corrente', :from => 'Tipo da conta'
+      fill_in 'Número da conta', :with => '12345'
+      fill_in 'Dígito da conta', :with => 'x'
     end
 
     click_button 'Salvar'
@@ -167,11 +221,21 @@ feature "Creditors" do
       page.should have_content '02.02.00001'
       page.should have_content 'Arame farpado'
     end
+
+    within_tab 'Conta Bancária' do
+      page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
+      page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should have_select 'Status', :selected => 'Ativo'
+      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
+      page.should have_field 'Número da conta', :with => '12345'
+      page.should have_field 'Dígito da conta', :with => 'x'
+    end
   end
 
   scenario 'update a creditor when people is special entry' do
     Creditor.make!(:mateus)
     Person.make!(:sobrinho, :personable => SpecialEntry.make!(:especial))
+    Agency.make!(:santander)
 
     click_link 'Cadastros Diversos'
 
@@ -181,6 +245,18 @@ feature "Creditors" do
 
     fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
 
+    within_tab 'Conta Bancária' do
+      click_button 'Remover Conta Bancária'
+      click_button 'Adicionar Conta Bancária'
+
+      fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
+      fill_modal 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      select 'Ativo', :from => 'Status'
+      select 'Conta corrente', :from => 'Tipo da conta'
+      fill_in 'Número da conta', :with => '98765'
+      fill_in 'Dígito da conta', :with => '4'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -188,6 +264,18 @@ feature "Creditors" do
     click_link 'Gabriel Sobrinho'
 
     page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+
+    within_tab 'Conta Bancária' do
+      page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
+      page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+
+      page.should have_field 'Banco', :with => 'Santander', :field => 'Nome'
+      page.should have_field 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      page.should have_select 'Status', :selected => 'Ativo'
+      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
+      page.should have_field 'Número da conta', :with => '98765'
+      page.should have_field 'Dígito da conta', :with => '4'
+    end
   end
 
   scenario 'update a creditor when people is a company' do
@@ -198,6 +286,7 @@ feature "Creditors" do
     DocumentType.make!(:oficial)
     Person.make!(:wenderson)
     Material.make!(:arame_farpado)
+    Agency.make!(:santander)
 
     click_link 'Cadastros Diversos'
 
@@ -246,6 +335,18 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
+    within_tab 'Conta Bancária' do
+      click_button 'Remover Conta Bancária'
+      click_button 'Adicionar Conta Bancária'
+
+      fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
+      fill_modal 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      select 'Ativo', :from => 'Status'
+      select 'Conta corrente', :from => 'Tipo da conta'
+      fill_in 'Número da conta', :with => '98765'
+      fill_in 'Dígito da conta', :with => '4'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -292,6 +393,18 @@ feature "Creditors" do
       page.should have_content '02.02.00001'
       page.should have_content 'Arame farpado'
     end
+
+    within_tab 'Conta Bancária' do
+      page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
+      page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+
+      page.should have_field 'Banco', :with => 'Santander', :field => 'Nome'
+      page.should have_field 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      page.should have_select 'Status', :selected => 'Ativo'
+      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
+      page.should have_field 'Número da conta', :with => '98765'
+      page.should have_field 'Dígito da conta', :with => '4'
+    end
   end
 
   scenario 'update a creditor when people is individual' do
@@ -300,6 +413,7 @@ feature "Creditors" do
     OccupationClassification.make!(:engineer)
     Material.make!(:arame_farpado)
     Material.make!(:arame_comum)
+    Agency.make!(:santander)
 
     click_link 'Cadastros Diversos'
 
@@ -319,6 +433,18 @@ feature "Creditors" do
     within_tab 'Materiais' do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
       fill_modal 'Materiais', :with => 'Arame comum', :field => 'Descrição'
+    end
+
+    within_tab 'Conta Bancária' do
+      click_button 'Remover Conta Bancária'
+      click_button 'Adicionar Conta Bancária'
+
+      fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
+      fill_modal 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      select 'Ativo', :from => 'Status'
+      select 'Conta corrente', :from => 'Tipo da conta'
+      fill_in 'Número da conta', :with => '98765'
+      fill_in 'Dígito da conta', :with => '4'
     end
 
     click_button 'Salvar'
@@ -342,6 +468,18 @@ feature "Creditors" do
       page.should have_content 'Arame farpado'
       page.should have_content '02.02.00002'
       page.should have_content 'Arame comum'
+    end
+
+    within_tab 'Conta Bancária' do
+      page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
+      page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+
+      page.should have_field 'Banco', :with => 'Santander', :field => 'Nome'
+      page.should have_field 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      page.should have_select 'Status', :selected => 'Ativo'
+      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
+      page.should have_field 'Número da conta', :with => '98765'
+      page.should have_field 'Dígito da conta', :with => '4'
     end
   end
 

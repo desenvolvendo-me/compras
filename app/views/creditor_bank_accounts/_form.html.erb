@@ -1,0 +1,36 @@
+<div class="creditor-account">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :bank, :as => :modal, :hidden_field => :bank_id, :input_html => { :class => 'creditor-account-bank' }, :wrapper_html => { :class => 'wrapper-creditor-account-bank' } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :agency, :input_html => { :class => 'creditor-account-agency' } %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :status %>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :account_type %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :number %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :digit %>
+    </div>
+  </div>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-account" value="Remover Conta Bancária">
+  </p>
+</div>

@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      creditor_bank_account:
+        one: "Conta Bancária"
+        other: "Contas Bancárias"
+
+    attributes:
+      creditor_bank_account:
+        creditor: "Credor"
+        bank: "Banco"
+        agency: "Agência"
+        status: "Status"
+        number: "Número da conta corrente"
+        account_type: "Tipo da conta"
+        number: "Número da conta"
+        digit: "Dígito da conta"

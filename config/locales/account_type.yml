@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    account_type:
+      checking_account: "Conta corrente"
+      savings_account: "Conta poupança"
+
