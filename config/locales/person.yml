@@ -15,6 +15,6 @@ pt-BR:
         email: "E-mail"
         cpf: "CPF"
         cnpj: "CNPJ"
-        cpf_cnpj: "CPF / CNPJ"
+        identity_document: "CPF / CNPJ"
         address: "Endereço"
         correspondence_address: "Endereço de correspondência"
