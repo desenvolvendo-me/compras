@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset="utf-8">
+    <%= csrf_meta_tag %>
+
+    <title>Sistema de Compras e Licitações</title>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'application' %>
+
+    <% if Rails.env.production? %>
+      <script>
+        window._inform = window._inform || {};
+        window._inform['_setAccount'] = 'IN-88a2f158a508';
+
+        (function () {
+          inscript = document.createElement('script');
+          inscript.type = 'text/javascript';
+          inscript.async = true;
+
+          inscript.src = location.protocol + '//inform.forwardtechnology.co.uk/javascripts/capture.js';
+          s = document.getElementsByTagName('script')[0];
+          s.parentNode.appendChild(inscript)
+        })();
+      </script>
+    <% end %>
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1><%= link_to 'Sistema de Compras e Licitações', root_path %></h1>
+        <div id="account">
+          <ul>
+            <li>
+              <%= link_to current_user, edit_account_path, :class => 'current_user' %>
+            </li>
+
+            <li>
+              <%= link_to t('logout'), destroy_user_session_path, :method => :delete %>
+            </li>
+          </ul>
+        </div>
+
+        <div id="menu">
+          <ul>
+            <li>
+              <%= link_to 'Compras e Licitações', '#' %>
+              <ul>
+                <li>
+                  <%= link_to 'Coletas de preço', '#' %>
+                  <ul>
+                    <li><%= link_to 'Propostas', price_collection_proposals_path %>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+        <div id="flash">
+          <%= render 'layouts/flash' %>
+        </div>
+
+        <div id="content">
+          <div class="banner">
+            <%= prefecture_image %>
+          </div>
+
+          <%= yield %>
+        </div>
+    </div>
+  </body>
+</html>
+

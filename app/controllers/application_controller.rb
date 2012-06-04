@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  layout :layout_by_user
+
   around_filter :handle_customer, :if => :production?
   before_filter :handle_action_mailer
   before_filter :authenticate_user!
@@ -8,6 +10,11 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::Unauthorized, :with => :unauthorized
 
   protected
+
+  def layout_by_user
+    return 'provider' if current_user.provider?
+    'application'
+  end
 
   helper_method :current_prefecture
 
