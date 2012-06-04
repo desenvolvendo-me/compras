@@ -9,6 +9,7 @@ feature "Creditors" do
   scenario 'create a new creditor when people is special entry' do
     Person.make!(:mateus)
     Agency.make!(:itau)
+    Material.make!(:arame_farpado)
 
     click_link 'Cadastros Diversos'
 
@@ -43,6 +44,10 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
+    within_tab 'Materiais' do
+      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -58,6 +63,11 @@ feature "Creditors" do
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '12345'
       page.should have_field 'Dígito da conta', :with => 'x'
+    end
+
+    within_tab 'Materiais' do
+      page.should have_content '02.02.00001'
+      page.should have_content 'Arame farpado'
     end
 
     within_tab 'Balanço' do
@@ -314,6 +324,7 @@ feature "Creditors" do
     Creditor.make!(:mateus)
     Person.make!(:sobrinho, :personable => SpecialEntry.make!(:especial))
     Agency.make!(:santander)
+    Material.make!(:arame_farpado)
 
     click_link 'Cadastros Diversos'
 
@@ -333,6 +344,10 @@ feature "Creditors" do
       select 'Conta corrente', :from => 'Tipo da conta'
       fill_in 'Número da conta', :with => '98765'
       fill_in 'Dígito da conta', :with => '4'
+    end
+
+    within_tab 'Materiais' do
+      fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
     within_tab 'Balanço' do
@@ -368,6 +383,11 @@ feature "Creditors" do
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '98765'
       page.should have_field 'Dígito da conta', :with => '4'
+    end
+
+    within_tab 'Materiais' do
+      page.should have_content '02.02.00001'
+      page.should have_content 'Arame farpado'
     end
 
     within_tab 'Balanço' do
