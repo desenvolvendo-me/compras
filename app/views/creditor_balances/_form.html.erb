@@ -1,0 +1,51 @@
+<div class="creditor-balance">
+  <%= f.input :fiscal_year  %>
+
+  <h3>Ativo</h3>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :current_assets %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :long_term_assets %>
+    </div>
+  </div>
+
+  <h3>Passivo</h3>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :current_liabilities %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :net_equity %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :long_term_liabilities %>
+    </div>
+  </div>
+
+  <h3>Índices</h3>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :liquidity_ratio_general %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :current_radio %>
+    </div>
+
+    <div class="yui3-u-1-3">
+      <%= f.input :net_working_capital %>
+    </div>
+  </div>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-creditor-balance" value="Remover Balanço">
+  </p>
+</div>

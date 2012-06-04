@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      creditor_balance:
+        one: "Balanço"
+        other: "Balanços"
+
+    attributes:
+      creditor_balance:
+        fiscal_year: "Exercício"
+        current_assets: "Ativo circulante"
+        long_term_assets: "Realizável em longo prazo"
+        current_liabilities: "Passivo circulante"
+        net_equity: "Patrimônio líquido"
+        long_term_liabilities: "Exigível em longo prazo"
+        liquidity_ratio_general: "Liquidez geral"
+        current_radio: "Liquidez corrente"
+        net_working_capital: "Capital circulante líquido"

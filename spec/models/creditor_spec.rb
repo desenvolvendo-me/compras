@@ -9,6 +9,7 @@ require 'app/models/cnae'
 require 'app/models/person'
 require 'app/models/creditor_material'
 require 'app/models/creditor_bank_account'
+require 'app/models/creditor_balance'
 
 describe Creditor do
   it { should belong_to :person }
@@ -24,6 +25,7 @@ describe Creditor do
   it { should have_many(:materials).through(:creditor_materials) }
   it { should have_many(:creditor_materials).dependent(:destroy) }
   it { should have_many(:accounts).dependent(:destroy) }
+  it { should have_many(:creditor_balances).dependent(:destroy) }
 
   it { should validate_presence_of :person }
   it { should_not validate_presence_of :company_size }

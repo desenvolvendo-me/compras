@@ -29,6 +29,20 @@ feature "Creditors" do
       fill_in 'Dígito da conta', :with => 'x'
     end
 
+    within_tab 'Balanço' do
+      click_button 'Adicionar Balanço'
+
+      fill_in 'Exercício', :with => '2012'
+      fill_in 'Ativo circulante', :with => '10,00'
+      fill_in 'Realizável em longo prazo', :with => '20,00'
+      fill_in 'Passivo circulante', :with => '30,00'
+      fill_in 'Patrimônio líquido', :with => '40,00'
+      fill_in 'Exigível em longo prazo', :with => '50,00'
+      fill_in 'Liquidez geral', :with => '60,00'
+      fill_in 'Liquidez corrente', :with => '70,00'
+      fill_in 'Capital circulante líquido', :with => '80,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -44,6 +58,18 @@ feature "Creditors" do
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '12345'
       page.should have_field 'Dígito da conta', :with => 'x'
+    end
+
+    within_tab 'Balanço' do
+      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Ativo circulante', :with => '10,00'
+      page.should have_field 'Realizável em longo prazo', :with => '20,00'
+      page.should have_field 'Passivo circulante', :with => '30,00'
+      page.should have_field 'Patrimônio líquido', :with => '40,00'
+      page.should have_field 'Exigível em longo prazo', :with => '50,00'
+      page.should have_field 'Liquidez geral', :with => '60,00'
+      page.should have_field 'Liquidez corrente', :with => '70,00'
+      page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
   end
 
@@ -120,6 +146,20 @@ feature "Creditors" do
       fill_in 'Dígito da conta', :with => 'x'
     end
 
+    within_tab 'Balanço' do
+      click_button 'Adicionar Balanço'
+
+      fill_in 'Exercício', :with => '2012'
+      fill_in 'Ativo circulante', :with => '10,00'
+      fill_in 'Realizável em longo prazo', :with => '20,00'
+      fill_in 'Passivo circulante', :with => '30,00'
+      fill_in 'Patrimônio líquido', :with => '40,00'
+      fill_in 'Exigível em longo prazo', :with => '50,00'
+      fill_in 'Liquidez geral', :with => '60,00'
+      fill_in 'Liquidez corrente', :with => '70,00'
+      fill_in 'Capital circulante líquido', :with => '80,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -162,6 +202,18 @@ feature "Creditors" do
       page.should have_field 'Número da conta', :with => '12345'
       page.should have_field 'Dígito da conta', :with => 'x'
     end
+
+    within_tab 'Balanço' do
+      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Ativo circulante', :with => '10,00'
+      page.should have_field 'Realizável em longo prazo', :with => '20,00'
+      page.should have_field 'Passivo circulante', :with => '30,00'
+      page.should have_field 'Patrimônio líquido', :with => '40,00'
+      page.should have_field 'Exigível em longo prazo', :with => '50,00'
+      page.should have_field 'Liquidez geral', :with => '60,00'
+      page.should have_field 'Liquidez corrente', :with => '70,00'
+      page.should have_field 'Capital circulante líquido', :with => '80,00'
+    end
   end
 
   scenario 'create a new creditor when people is individual' do
@@ -201,6 +253,20 @@ feature "Creditors" do
       fill_in 'Dígito da conta', :with => 'x'
     end
 
+    within_tab 'Balanço' do
+      click_button 'Adicionar Balanço'
+
+      fill_in 'Exercício', :with => '2012'
+      fill_in 'Ativo circulante', :with => '10,00'
+      fill_in 'Realizável em longo prazo', :with => '20,00'
+      fill_in 'Passivo circulante', :with => '30,00'
+      fill_in 'Patrimônio líquido', :with => '40,00'
+      fill_in 'Exigível em longo prazo', :with => '50,00'
+      fill_in 'Liquidez geral', :with => '60,00'
+      fill_in 'Liquidez corrente', :with => '70,00'
+      fill_in 'Capital circulante líquido', :with => '80,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -230,6 +296,18 @@ feature "Creditors" do
       page.should have_field 'Número da conta', :with => '12345'
       page.should have_field 'Dígito da conta', :with => 'x'
     end
+
+    within_tab 'Balanço' do
+      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Ativo circulante', :with => '10,00'
+      page.should have_field 'Realizável em longo prazo', :with => '20,00'
+      page.should have_field 'Passivo circulante', :with => '30,00'
+      page.should have_field 'Patrimônio líquido', :with => '40,00'
+      page.should have_field 'Exigível em longo prazo', :with => '50,00'
+      page.should have_field 'Liquidez geral', :with => '60,00'
+      page.should have_field 'Liquidez corrente', :with => '70,00'
+      page.should have_field 'Capital circulante líquido', :with => '80,00'
+    end
   end
 
   scenario 'update a creditor when people is special entry' do
@@ -257,6 +335,21 @@ feature "Creditors" do
       fill_in 'Dígito da conta', :with => '4'
     end
 
+    within_tab 'Balanço' do
+      click_button 'Remover Balanço'
+      click_button 'Adicionar Balanço'
+
+      fill_in 'Exercício', :with => '2012'
+      fill_in 'Ativo circulante', :with => '10,00'
+      fill_in 'Realizável em longo prazo', :with => '20,00'
+      fill_in 'Passivo circulante', :with => '30,00'
+      fill_in 'Patrimônio líquido', :with => '40,00'
+      fill_in 'Exigível em longo prazo', :with => '50,00'
+      fill_in 'Liquidez geral', :with => '60,00'
+      fill_in 'Liquidez corrente', :with => '70,00'
+      fill_in 'Capital circulante líquido', :with => '80,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -275,6 +368,18 @@ feature "Creditors" do
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '98765'
       page.should have_field 'Dígito da conta', :with => '4'
+    end
+
+    within_tab 'Balanço' do
+      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Ativo circulante', :with => '10,00'
+      page.should have_field 'Realizável em longo prazo', :with => '20,00'
+      page.should have_field 'Passivo circulante', :with => '30,00'
+      page.should have_field 'Patrimônio líquido', :with => '40,00'
+      page.should have_field 'Exigível em longo prazo', :with => '50,00'
+      page.should have_field 'Liquidez geral', :with => '60,00'
+      page.should have_field 'Liquidez corrente', :with => '70,00'
+      page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
   end
 
@@ -347,6 +452,21 @@ feature "Creditors" do
       fill_in 'Dígito da conta', :with => '4'
     end
 
+    within_tab 'Balanço' do
+      click_button 'Remover Balanço'
+      click_button 'Adicionar Balanço'
+
+      fill_in 'Exercício', :with => '2012'
+      fill_in 'Ativo circulante', :with => '10,00'
+      fill_in 'Realizável em longo prazo', :with => '20,00'
+      fill_in 'Passivo circulante', :with => '30,00'
+      fill_in 'Patrimônio líquido', :with => '40,00'
+      fill_in 'Exigível em longo prazo', :with => '50,00'
+      fill_in 'Liquidez geral', :with => '60,00'
+      fill_in 'Liquidez corrente', :with => '70,00'
+      fill_in 'Capital circulante líquido', :with => '80,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -405,6 +525,18 @@ feature "Creditors" do
       page.should have_field 'Número da conta', :with => '98765'
       page.should have_field 'Dígito da conta', :with => '4'
     end
+
+    within_tab 'Balanço' do
+      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Ativo circulante', :with => '10,00'
+      page.should have_field 'Realizável em longo prazo', :with => '20,00'
+      page.should have_field 'Passivo circulante', :with => '30,00'
+      page.should have_field 'Patrimônio líquido', :with => '40,00'
+      page.should have_field 'Exigível em longo prazo', :with => '50,00'
+      page.should have_field 'Liquidez geral', :with => '60,00'
+      page.should have_field 'Liquidez corrente', :with => '70,00'
+      page.should have_field 'Capital circulante líquido', :with => '80,00'
+    end
   end
 
   scenario 'update a creditor when people is individual' do
@@ -447,6 +579,21 @@ feature "Creditors" do
       fill_in 'Dígito da conta', :with => '4'
     end
 
+    within_tab 'Balanço' do
+      click_button 'Remover Balanço'
+      click_button 'Adicionar Balanço'
+
+      fill_in 'Exercício', :with => '2012'
+      fill_in 'Ativo circulante', :with => '10,00'
+      fill_in 'Realizável em longo prazo', :with => '20,00'
+      fill_in 'Passivo circulante', :with => '30,00'
+      fill_in 'Patrimônio líquido', :with => '40,00'
+      fill_in 'Exigível em longo prazo', :with => '50,00'
+      fill_in 'Liquidez geral', :with => '60,00'
+      fill_in 'Liquidez corrente', :with => '70,00'
+      fill_in 'Capital circulante líquido', :with => '80,00'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -480,6 +627,18 @@ feature "Creditors" do
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '98765'
       page.should have_field 'Dígito da conta', :with => '4'
+    end
+
+    within_tab 'Balanço' do
+      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Ativo circulante', :with => '10,00'
+      page.should have_field 'Realizável em longo prazo', :with => '20,00'
+      page.should have_field 'Passivo circulante', :with => '30,00'
+      page.should have_field 'Patrimônio líquido', :with => '40,00'
+      page.should have_field 'Exigível em longo prazo', :with => '50,00'
+      page.should have_field 'Liquidez geral', :with => '60,00'
+      page.should have_field 'Liquidez corrente', :with => '70,00'
+      page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
   end
 
