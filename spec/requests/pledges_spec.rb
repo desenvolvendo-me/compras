@@ -353,37 +353,6 @@ feature "Pledges", :driver => :selenium do
     end
   end
 
-  scenario 'validate value on pledge_parcels should be equals to pledge value' do
-    click_link 'Contabilidade'
-
-    click_link 'Empenhos'
-
-    click_link 'Criar Empenho'
-
-    within_tab 'Principal' do
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
-      fill_in 'Valor', :with => '300,00'
-    end
-
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        fill_in 'Valor', :with => '100,00'
-      end
-
-      click_button 'Adicionar Vencimento'
-
-      within '.pledge-parcel:last' do
-        fill_in 'Valor', :with => '100,00'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Vencimentos' do
-      page.should have_content 'deverá ser igual ao valor'
-    end
-  end
-
   scenario 'set sequencial pledge parcel number' do
     click_link 'Contabilidade'
 
