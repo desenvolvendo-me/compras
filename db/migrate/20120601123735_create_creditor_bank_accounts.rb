@@ -15,4 +15,4 @@ class CreateCreditorBankAccounts < ActiveRecord::Migration
     add_foreign_key :creditor_bank_accounts, :creditors
     add_foreign_key :creditor_bank_accounts, :agencies
   end
-nend
+end
