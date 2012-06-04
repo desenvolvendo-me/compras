@@ -353,7 +353,7 @@ feature "Pledges", :driver => :selenium do
     end
   end
 
-  scenario 'validate expiration_date on pledge_parcels should be greater than last expiration date' do
+  scenario 'validate value on pledge_parcels should be equals to pledge value' do
     click_link 'Contabilidade'
 
     click_link 'Empenhos'
@@ -380,14 +380,7 @@ feature "Pledges", :driver => :selenium do
     click_button 'Salvar'
 
     within_tab 'Vencimentos' do
-
-      within '.pledge-parcel:first' do
-        page.should have_content 'a soma de todos os valores deve ser igual ao valor do empenho'
-      end
-
-      within '.pledge-parcel:last' do
-        page.should have_content 'a soma de todos os valores deve ser igual ao valor do empenho'
-      end
+      page.should have_content 'deverá ser igual ao valor'
     end
   end
 

@@ -124,12 +124,8 @@ class Pledge < ActiveRecord::Base
   def pledge_parcels_value_should_be_equals_value
     return unless value
 
-    if pledge_parcels.map(&:value).compact.sum != value
-      pledge_parcels.each do |parcel|
-        parcel.errors.add(:value, :pledge_parcel_value_sum_must_be_equals_to_pledge_value)
-      end
-
-      errors.add(:pledge_parcels, :invalid)
+    if pledge_parcels_sum != value
+      errors.add(:pledge_parcels_sum, :pledge_parcels_sum_must_be_equals_to_pledge_value)
     end
   end
 
