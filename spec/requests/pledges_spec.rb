@@ -153,16 +153,16 @@ feature "Pledges", :driver => :selenium do
   scenario 'should not have errors on replicated value' do
     Entity.make!(:detran)
     ManagementUnit.make!(:unidade_central)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
-    reserve_fund = ReserveFund.make!(:detran_2012)
+    BudgetAllocation.make!(:alocacao)
+    ReserveFund.make!(:detran_2012)
     PledgeCategory.make!(:geral)
     ExpenseKind.make!(:pagamentos)
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
-    management_contract = ManagementContract.make!(:primeiro_contrato)
+    ManagementContract.make!(:primeiro_contrato)
     Provider.make!(:wenderson_sa)
-    founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
+    FoundedDebtContract.make!(:contrato_detran)
     Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
