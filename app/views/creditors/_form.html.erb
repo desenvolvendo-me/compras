@@ -132,4 +132,16 @@
   $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {
     $(this).closest('.creditor-account').find('.creditor-account-agency').attr('data-modal-url', "<%= modal_agencies_path %>?bank_id=" + $(this).val() );
   });
+
+  function setModalUrlToCnae(){
+    var mainCnaeId = $('#creditor_main_cnae_id').val();
+    var urlModal = $('#creditor_cnaes').attr('data-modal-url');
+    urlModal += '&cnaes_remainder[]=' + mainCnaeId;
+
+    $('#creditor_cnaes').attr('data-modal-url', urlModal);
+  };
+
+  $('#creditor_main_cnae_id').change( function() {
+    setModalUrlToCnae();
+  });
 </script>
