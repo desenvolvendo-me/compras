@@ -6,9 +6,7 @@
     <%= identity_document %>
   </td>
   <td>
-    <input id="people_record<%= id %>_id" class="person-id" type="hidden" name="<%= f.sanitized_object_name %>[representative_person_ids][]" value="<%= id %>" />
-    <input id="people_record<%= id %>_name" class="person-name" type="hidden" value="<%= name %>" />
-    <input id="people_record<%= id %>_identity_document" class="person-identity-document" type="hidden" value="<%= identity_document %>" />
+    <input id="<%= f.sanitized_object_name %>_representative_people_record_<%= id %>_id" class="representative_person-id" type="hidden" name="<%= f.sanitized_object_name %>[representative_person_ids][]" value="<%= id %>" />
     <button class="button negative modal-finder-remove">Remover</button>
   </td>
 </tr>
