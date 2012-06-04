@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<%= f.input :status, :disabled => true %>
+<%= f.input :status, :disabled => f.object.new_record? %>
 <%= f.input :type_of_calculation %>
 <%= f.input :delivery_location %>
 <%= f.input :employee %>

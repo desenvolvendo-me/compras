@@ -134,7 +134,6 @@ feature "PriceCollections" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Número'
       page.should have_field 'Número', :with => '1'
-      page.should have_disabled_field 'Status'
       page.should have_select 'Status', :selected => 'Ativo'
 
       page.should have_field 'Ano', :with => '2012'
@@ -235,7 +234,6 @@ feature "PriceCollections" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Número'
       page.should have_field 'Número', :with => '1'
-      page.should have_disabled_field 'Status'
       page.should have_select 'Status', :selected => 'Ativo'
 
       page.should have_field 'Ano', :with => '2012'
