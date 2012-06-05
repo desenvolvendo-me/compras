@@ -619,7 +619,9 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :price_collection_proposals, :except => [:new, :create, :destroy] do
+  get 'price_collections/:price_collection_id/price_collection_proposals' => 'price_collection_proposals#index', :as => :price_collection_price_collection_proposals
+
+  resources :price_collection_proposals, :only => [:index, :edit, :update] do
     collection do
       get :filter
       get :modal

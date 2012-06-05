@@ -5,6 +5,12 @@ class PriceCollectionDecorator < Decorator
     helpers.link_to('Apurar', routes.price_collection_path(component), :class => "button primary")
   end
 
+  def proposals_link
+    return unless component.persisted?
+
+    helpers.link_to('Propostas', routes.price_collection_price_collection_proposals_path(component), :class => "button primary")
+  end
+
   def winner_proposal_total_price
     helpers.number_with_precision super if super
   end

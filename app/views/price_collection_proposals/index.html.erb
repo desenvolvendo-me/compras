@@ -1,0 +1,10 @@
+<h2>
+  <%= @parent.present? ? "Propostas para a Coleta #{@parent}" : plural %>
+</h2>
+
+<%= render 'actions' %>
+
+<%= render 'list' %>
+
+<%= paginate %>
+

@@ -9,9 +9,15 @@ feature "PriceCollectionProposals" do
     end
 
     scenario 'should not have a button to create a proposal' do
+      PriceCollection.make!(:coleta_de_precos)
+
       click_link 'Processos'
 
-      click_link 'Propostas Para Coletas de Preços'
+      click_link 'Coletas de Preços'
+
+      click_link '1/2012'
+
+      click_link 'Propostas'
 
       page.should_not have_link 'Criar Proposta Para Coleta de Preços'
     end
@@ -21,7 +27,11 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coletas de Preços'
+      click_link 'Coletas de Preços'
+
+      click_link '1/2012'
+
+      click_link 'Propostas'
 
       page.should have_link '1/2012 - Wenderson Malheiros'
     end
@@ -31,7 +41,11 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coletas de Preços'
+      click_link 'Coletas de Preços'
+
+      click_link '1/2012'
+
+      click_link 'Propostas'
 
       click_link '1/2012 - Wenderson Malheiros'
 
@@ -43,7 +57,11 @@ feature "PriceCollectionProposals" do
 
       click_link 'Processos'
 
-      click_link 'Propostas Para Coletas de Preços'
+      click_link 'Coletas de Preços'
+
+      click_link '1/2012'
+
+      click_link 'Propostas'
 
       click_link '1/2012 - Wenderson Malheiros'
 
