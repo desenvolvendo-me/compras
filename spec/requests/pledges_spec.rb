@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "Pledges" do
+feature "Pledges", :driver => :selenium do
   background do
     sign_in
   end
