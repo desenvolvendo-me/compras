@@ -1,0 +1,19 @@
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Informações</a></li>
+    <li><a href="#addresses">Endereços</a></li>
+    <li><a href="#budget_structure_responsibles">Responsáveis</a></li>
+  </ul>
+
+  <div id="general">
+    <%= render 'general', :f => f %>
+  </div>
+
+  <div id="addresses">
+    <%= render 'address', :f => f %>
+  </div>
+
+  <div id="budget_structure_responsibles">
+    <%= render 'budget_structure_responsible', :f => f %>
+  </div>
+</div>

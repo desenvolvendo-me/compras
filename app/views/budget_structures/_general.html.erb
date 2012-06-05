@@ -1,0 +1,33 @@
+<%= f.input :budget_structure_configuration %>
+<%= f.input :budget_structure, :input_html => { :size => 50 } %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :kind %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :tce_code %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :description %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :acronym %>
+  </div>
+</div>
+
+<%= f.input :administration_type %>
+<%= f.input :performance_field %>
+
+<script>
+  $('#budget_structure_budget_structure_configuration_id').change(function (event, budget_structure_configuration) {
+    if (budget_structure_configuration) {
+      $('#budget_structure_budget_structure').attr("data-mask", budget_structure_configuration.mask);
+    }
+  });
+</script>

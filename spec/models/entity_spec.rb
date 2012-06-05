@@ -1,7 +1,7 @@
 require 'model_helper'
 require 'app/models/entity'
 require 'app/models/expense_nature'
-require 'app/models/budget_unit_configuration'
+require 'app/models/budget_structure_configuration'
 require 'app/models/capability'
 require 'app/models/government_program'
 require 'app/models/government_action'
@@ -24,7 +24,7 @@ describe Entity do
   end
 
   it { should have_many(:expense_natures).dependent(:restrict) }
-  it { should have_many(:budget_unit_configurations).dependent(:restrict) }
+  it { should have_many(:budget_structure_configurations).dependent(:restrict) }
   it { should have_many(:capabilities).dependent(:restrict) }
   it { should have_many(:government_programs).dependent(:restrict) }
   it { should have_many(:government_actions).dependent(:restrict) }

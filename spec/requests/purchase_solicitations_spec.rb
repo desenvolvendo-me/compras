@@ -11,7 +11,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'create a new purchase_solicitation' do
-    BudgetUnit.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
     ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
@@ -33,7 +33,7 @@ feature "PurchaseSolicitations" do
 
       fill_mask 'Ano', :with => '2012'
       fill_mask 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -76,7 +76,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
       page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
-      page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentária solicitante', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -103,7 +103,7 @@ feature "PurchaseSolicitations" do
 
   scenario 'update an existent purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo)
-    BudgetUnit.make!(:secretaria_de_desenvolvimento)
+    BudgetStructure.make!(:secretaria_de_desenvolvimento)
     Employee.make!(:wenderson)
     ExpenseNature.make!(:compra_de_material)
     DeliveryLocation.make!(:health)
@@ -122,7 +122,7 @@ feature "PurchaseSolicitations" do
       fill_mask 'Ano', :with => '2013'
       fill_mask 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
@@ -164,7 +164,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Ano', :with => '2013'
       page.should have_field 'Data da solicitação', :with => '01/02/2013'
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
-      page.should have_field 'Unidade orçamentária solicitante', :with => '02.00 - Secretaria de Desenvolvimento'
+      page.should have_field 'Estrutura orçamentária solicitante', :with => '02.00 - Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
@@ -209,7 +209,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
-    BudgetUnit.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:sobrinho)
     ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
@@ -225,7 +225,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Dados gerais' do
       fill_mask 'Ano', :with => '2012'
       fill_mask 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Unidade orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'

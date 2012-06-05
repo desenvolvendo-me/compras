@@ -1,6 +1,6 @@
 # encoding: utf-8
 class AdministrativeProcessDecorator < Decorator
-  attr_modal :year, :process, :protocol, :budget_unit_id
+  attr_modal :year, :process, :protocol, :budget_structure_id
 
   def value_estimated
     helpers.number_to_currency(component.value_estimated)

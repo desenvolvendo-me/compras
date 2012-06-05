@@ -1,14 +1,14 @@
 builder resource, json do
-  json.budget_unit                  resource.budget_unit.to_s
-  json.modality                     resource.modality
-  json.modality_humanize            resource.modality_humanize
-  json.item                         resource.item
-  json.object_type_humanize         resource.object_type_humanize
-  json.judgment_form                resource.judgment_form.to_s
-  json.description                  resource.description
-  json.responsible                  resource.responsible.to_s
-  json.judgment_form_kind           resource.judgment_form_kind
-  json.object_type                  resource.object_type
+  json.budget_structure     resource.budget_structure.to_s
+  json.modality             resource.modality
+  json.modality_humanize    resource.modality_humanize
+  json.item                 resource.item
+  json.object_type_humanize resource.object_type_humanize
+  json.judgment_form        resource.judgment_form.to_s
+  json.description          resource.description
+  json.responsible          resource.responsible.to_s
+  json.judgment_form_kind   resource.judgment_form_kind
+  json.object_type          resource.object_type
 
   json.budget_allocations resource.administrative_process_budget_allocations do |json, budget_allocation|
     json.id                    budget_allocation.id

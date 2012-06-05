@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    budget_structure_separator:
+      point: "Ponto"
+      hyphen: "Hífem"
+      slash: "Barra"

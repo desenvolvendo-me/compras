@@ -7,7 +7,7 @@ DirectPurchase.blueprint(:compra) do
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
   pledge_type { DirectPurchasePledgeType::GLOBAL }
   provider { Provider.make!(:wenderson_sa) }
-  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
@@ -29,7 +29,7 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
   pledge_type { DirectPurchasePledgeType::GLOBAL }
   provider { Provider.make!(:wenderson_sa) }
-  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
@@ -51,7 +51,7 @@ DirectPurchase.blueprint(:compra_2011) do
   modality { DirectPurchaseModality::ENGINEERING_WORKS }
   pledge_type { DirectPurchasePledgeType::GLOBAL }
   provider { Provider.make!(:wenderson_sa) }
-  budget_unit { BudgetUnit.make!(:secretaria_de_educacao) }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   licitation_object { LicitationObject.make!(:ponte) }
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }

@@ -6,7 +6,7 @@ class SupplyAuthorization < ActiveRecord::Base
   delegate :phone, :fax, :address, :city, :zip_code, :to => :direct_purchase, :allow_nil => true
   delegate :bank_account, :agency, :bank, :provider, :to => :direct_purchase, :allow_nil => true
   delegate :period, :period_unit, :period_unit_humanize, :licitation_object, :observation, :payment_method, :to => :direct_purchase, :allow_nil => true
-  delegate :date, :budget_unit, :delivery_location, :to => :direct_purchase, :allow_nil => true
+  delegate :date, :budget_structure, :delivery_location, :to => :direct_purchase, :allow_nil => true
 
   validates :year, :direct_purchase, :presence => true
   validates :year, :mask => '9999', :allow_blank => true

@@ -22,7 +22,7 @@ describe BudgetAllocation do
   it { should validate_presence_of :date }
   it { should validate_presence_of :kind }
 
-  it { should belong_to(:budget_unit) }
+  it { should belong_to(:budget_structure) }
   it { should belong_to(:subfunction) }
   it { should belong_to(:government_program) }
   it { should belong_to(:government_action) }

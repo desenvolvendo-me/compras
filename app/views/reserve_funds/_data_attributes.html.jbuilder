@@ -6,7 +6,7 @@ builder resource, json do
   json.subfunction          resource.budget_allocation_subfunction.to_s
   json.government_program   resource.budget_allocation_government_program.to_s
   json.government_action    resource.budget_allocation_government_action.to_s
-  json.budget_unit          resource.budget_allocation_budget_unit.to_s
+  json.budget_structure     resource.budget_allocation_budget_structure.to_s
   json.expense_nature       resource.budget_allocation_expense_nature.to_s
   json.amount               resource.decorator.budget_allocation_amount
 end

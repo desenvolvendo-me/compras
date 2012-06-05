@@ -9,7 +9,7 @@ feature "DirectPurchases" do
   scenario 'create a new direct_purchase' do
     LegalReference.make!(:referencia)
     Provider.make!(:wenderson_sa)
-    BudgetUnit.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
@@ -31,7 +31,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
-      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -82,7 +82,7 @@ feature "DirectPurchases" do
       page.should have_select 'Modalidade', :selected => 'Material ou serviços'
       page.should have_select 'Tipo do empenho', :selected => 'Global'
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Objeto da licitação', :with => 'Ponte'
       page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -130,7 +130,7 @@ feature "DirectPurchases" do
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Tipo do empenho'
       page.should have_disabled_field 'Fornecedor'
-      page.should have_disabled_field 'Unidade orçamentária'
+      page.should have_disabled_field 'Estrutura orçamentária'
       page.should have_disabled_field 'Objeto da licitação'
       page.should have_disabled_field 'Local de entrega'
       page.should have_disabled_field 'Responsável'
@@ -251,7 +251,7 @@ feature "DirectPurchases" do
   scenario 'asserting that duplicated budget allocations cannot be saved' do
     LegalReference.make!(:referencia)
     Provider.make!(:wenderson_sa)
-    BudgetUnit.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
@@ -273,7 +273,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
-      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'

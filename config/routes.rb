@@ -148,14 +148,14 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :budget_unit_configurations do
+  resources :budget_structure_configurations do
     collection do
       get :filter
       get :modal
     end
   end
 
-  resources :budget_units do
+  resources :budget_structures do
     collection do
       get :filter
       get :modal

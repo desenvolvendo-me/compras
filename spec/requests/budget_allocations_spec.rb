@@ -7,7 +7,7 @@ feature "BudgetAllocations" do
   end
 
   scenario 'create a new budget_allocation' do
-    BudgetUnit.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_educacao)
     Entity.make!(:detran)
     Subfunction.make!(:geral)
     GovernmentProgram.make!(:habitacao)
@@ -25,7 +25,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
       fill_mask 'Exercício', :with => '2012'
-      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Habitação', :field => 'Descrição'
@@ -53,7 +53,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Detran'
       page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Função', :with => '04 - Administração'
       page.should have_field 'Subfunção', :with => '01 - Administração Geral'
       page.should have_field 'Programa do governo', :with => 'Habitação'
@@ -101,7 +101,7 @@ feature "BudgetAllocations" do
 
   scenario 'update an existent budget_allocation' do
     BudgetAllocation.make!(:alocacao)
-    BudgetUnit.make!(:secretaria_de_desenvolvimento)
+    BudgetStructure.make!(:secretaria_de_desenvolvimento)
     Entity.make!(:secretaria_de_educacao)
     Subfunction.make!(:gerente)
     GovernmentProgram.make!(:educacao)
@@ -119,7 +119,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
       fill_mask 'Exercício', :with => '2013'
-      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
@@ -149,7 +149,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Secretaria de Educação'
       page.should have_field 'Exercício', :with => '2013'
-      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Desenvolvimento'
+      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Desenvolvimento'
       page.should have_field 'Função', :with => '04 - Administração'
       page.should have_field 'Subfunção', :with => '02 - Gerente Geral'
       page.should have_field 'Programa do governo', :with => 'Educação'
@@ -288,7 +288,7 @@ feature "BudgetAllocations" do
     end
   end
 
-  scenario 'should filter by budget unit' do
+  scenario 'should filter by budget structure' do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -298,7 +298,7 @@ feature "BudgetAllocations" do
 
     click_link 'Filtrar Dotações Orçamentárias'
 
-    fill_modal 'Unidade orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+    fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
 
     click_button 'Pesquisar'
 

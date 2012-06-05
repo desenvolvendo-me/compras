@@ -1,5 +1,5 @@
 class BudgetAllocation < ActiveRecord::Base
-  attr_accessible :entity_id, :year, :description, :budget_unit_id, :date
+  attr_accessible :entity_id, :year, :description, :budget_structure_id, :date
   attr_accessible :subfunction_id, :government_program_id, :amount, :personal
   attr_accessible :government_action_id, :foresight, :education, :description
   attr_accessible :expense_nature_id, :capability_id, :goal
@@ -10,7 +10,7 @@ class BudgetAllocation < ActiveRecord::Base
   has_enumeration_for :kind, :with => BudgetAllocationKind, :create_helpers => true
 
   belongs_to :entity
-  belongs_to :budget_unit
+  belongs_to :budget_structure
   belongs_to :subfunction
   belongs_to :government_program
   belongs_to :government_action
@@ -38,7 +38,7 @@ class BudgetAllocation < ActiveRecord::Base
   def self.filter(options={})
     relation = scoped
     relation = relation.where { year.eq(options[:year]) } if options[:year].present?
-    relation = relation.where { budget_unit_id.eq(options[:budget_unit_id]) } if options[:budget_unit_id].present?
+    relation = relation.where { budget_structure_id.eq(options[:budget_structure_id]) } if options[:budget_structure_id].present?
     relation = relation.where { subfunction_id.eq(options[:subfunction_id]) } if options[:subfunction_id].present?
     relation = relation.where { government_program_id.eq(options[:government_program_id]) } if options[:government_program_id].present?
     relation = relation.where { government_action_id.eq(options[:government_action_id]) } if options[:government_action_id].present?

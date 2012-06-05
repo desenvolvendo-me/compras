@@ -1,0 +1,47 @@
+<%= f.input :entity %>
+<%= f.input :regulatory_act %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :description %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :mask, :disabled => true %>
+  </div>
+</div>
+
+<%= render 'budget_structure_levels', :f => f %>
+
+<script>
+  function calculeMask() {
+    var levels = [];
+    var mask = '';
+
+    $('#budget_structure_levels').children('.budget-structure-level').each(function() {
+      var level     = $(this).find('input.level').val(),
+          digits    = $(this).find('input.digits').val(),
+          separator = $(this).find('select.separator').val();
+
+      levels.push([level, digits, separator]);
+    });
+
+    var ordered_levels = levels.sort(function(a, b) {
+      return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
+    })
+
+    $.each(ordered_levels, function(index) {
+      for (var i = 1; i <= this[1]; i++) {
+        mask += '9';
+      }
+      if ((index+1) < levels.length) {
+        mask += this[2];
+      }
+    });
+
+    $('#budget_structure_configuration_mask').attr('value', mask);
+  }
+
+  $('#budget_structure_levels').delegate('input:visible.numeric', 'keyup', calculeMask);
+  $('#budget_structure_levels').delegate('select', 'change', calculeMask);
+</script>

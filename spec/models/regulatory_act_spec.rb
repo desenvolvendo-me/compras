@@ -2,8 +2,8 @@
 require 'model_helper'
 require 'app/models/regulatory_act'
 require 'app/models/expense_nature'
-require 'app/models/budget_unit_configuration'
-require 'app/models/budget_unit_responsible'
+require 'app/models/budget_structure_configuration'
+require 'app/models/budget_structure_responsible'
 require 'app/models/extra_credit'
 require 'app/models/revenue_nature'
 require 'app/models/licitation_modality'
@@ -19,8 +19,8 @@ describe RegulatoryAct do
 
   it { should have_one(:extra_credit) }
   it { should have_many(:expense_natures).dependent(:restrict) }
-  it { should have_many(:budget_unit_configurations).dependent(:restrict) }
-  it { should have_many(:budget_unit_responsibles).dependent(:restrict) }
+  it { should have_many(:budget_structure_configurations).dependent(:restrict) }
+  it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_modalities).dependent(:restrict) }
   it { should have_many(:revenue_natures).dependent(:restrict) }
 

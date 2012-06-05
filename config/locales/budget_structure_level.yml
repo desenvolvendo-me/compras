@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      budget_structure_level:
+        one: "Nível de Estrutura Orçamentária"
+        other: "Níveis de Estruturas Orçamentárias"
+
+    attributes:
+      budget_structure_level:
+        level: "Nível"
+        description: "Descrição"
+        digits: "Dígitos"
+        separator: "Separador"

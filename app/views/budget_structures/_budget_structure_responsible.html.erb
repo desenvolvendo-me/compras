@@ -1,0 +1,25 @@
+<p>
+  <input type="button" class="button affirmative add-budget-structure-responsible" value="Adicionar Responsável">
+</p>
+
+<div id="budget_structure-responsibles">
+  <%= f.association :budget_structure_responsibles, :collection => localized(f.object.budget_structure_responsibles) do |p| %>
+    <%= render 'budget_structure_responsibles/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'budget_structure-responsibles-template' do %>
+  <%= f.association :budget_structure_responsibles_attributes, :collection => f.object.budget_structure_responsibles.build, :index => '{{uuid_budget_structure_responsible}}' do |p| %>
+    <%= render 'budget_structure_responsibles/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#budget_structure-responsibles-template").nestedForm({
+    add: '.add-budget-structure-responsible',
+    remove: '.remove-budget-structure-responsible',
+    target: '#budget_structure-responsibles',
+    uuid: 'uuid_budget_structure_responsible',
+    appendItem: false
+  });
+</script>

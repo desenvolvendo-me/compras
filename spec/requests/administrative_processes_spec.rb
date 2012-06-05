@@ -8,7 +8,7 @@ feature "AdministrativeProcesses" do
 
   scenario 'create a new administrative_process' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    BudgetUnit.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
 
@@ -25,7 +25,7 @@ feature "AdministrativeProcesses" do
       fill_mask 'Ano', :with => '2012'
       fill_mask 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
-      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Pregão presencial', :from => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
@@ -56,7 +56,7 @@ feature "AdministrativeProcesses" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '07/03/2012'
       page.should have_field 'Número do protocolo', :with => '00099/2012'
-      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       page.should have_select 'Modalidade', :selected => 'Pregão presencial'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
@@ -91,7 +91,7 @@ feature "AdministrativeProcesses" do
       page.should have_disabled_field 'Ano'
       page.should have_disabled_field 'Data do processo'
       page.should have_disabled_field 'Número do protocolo'
-      page.should have_disabled_field 'Unidade orçamentária'
+      page.should have_disabled_field 'Estrutura orçamentária'
       page.should have_disabled_field 'Tipo de objeto'
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Forma de julgamento'
@@ -112,7 +112,7 @@ feature "AdministrativeProcesses" do
 
   scenario 'should be printable' do
     Prefecture.make!(:belo_horizonte)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     administrative_process = AdministrativeProcess.make!(:compra_liberada)
     SignatureConfiguration.make!(:processo_administrativo)
 
@@ -126,7 +126,7 @@ feature "AdministrativeProcesses" do
 
     click_link 'Imprimir'
 
-    page.should have_content "#{administrative_process}"
+    page.should have_content administrative_process.to_s
     page.should have_content "00088/2012"
     page.should have_content "07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
@@ -174,7 +174,7 @@ feature "AdministrativeProcesses" do
 
   scenario 'asserting that duplicated budget allocations cannot be saved' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    BudgetUnit.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
     budget_allocation = BudgetAllocation.make!(:alocacao)
@@ -192,7 +192,7 @@ feature "AdministrativeProcesses" do
       fill_in 'Ano', :with => '2012'
       fill_mask 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
-      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Pregão presencial', :from => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
@@ -238,7 +238,7 @@ feature "AdministrativeProcesses" do
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Número do protocolo', :with => '00099/2012'
-      fill_modal 'Unidade orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Pregão presencial', :from => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
@@ -266,7 +266,7 @@ feature "AdministrativeProcesses" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '07/03/2012'
       page.should have_field 'Número do protocolo', :with => '00099/2012'
-      page.should have_field 'Unidade orçamentária', :with => '02.00 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       page.should have_select 'Modalidade', :selected => 'Pregão presencial'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
