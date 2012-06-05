@@ -104,6 +104,30 @@ feature "PriceCollectionProposals" do
       page.should have_content '1/2012 - Gabriel Sobrinho'
     end
 
+    scenario 'I can see the information about the price collection' do
+      PriceCollection.make!(:coleta_de_precos_com_2_propostas)
+
+      click_link 'Compras e Licitações'
+
+      click_link 'Coletas de Preço'
+
+      click_link 'Propostas'
+
+      click_link '1/2012 - Gabriel Sobrinho'
+
+      page.should have_disabled_field 'Coleta de preços'
+      page.should have_field 'Coleta de preços', :with => '1/2012'
+
+      page.should have_disabled_field 'Data de início'
+      page.should have_field 'Data de início', :with => I18n.l(Date.current)
+
+      page.should have_disabled_field 'Prazo de entrega'
+      page.should have_field 'Prazo de entrega', :with => '1 ano'
+
+      page.should have_disabled_field 'Fornecedor'
+      page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+    end
+
     scenario 'I can update my own proposals' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 

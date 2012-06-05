@@ -6,7 +6,7 @@ class PriceCollectionProposal < ActiveRecord::Base
 
   has_many :items, :class_name => :PriceCollectionProposalItem, :dependent => :destroy, :order => :id
 
-  delegate :date, :period, :to => :price_collection, :allow_nil => true, :prefix => true
+  delegate :date, :full_period, :to => :price_collection, :allow_nil => true, :prefix => true
   delegate :price_collection_lots, :to => :price_collection, :allow_nil => true
   delegate :name, :email, :email=, :login, :login=, :to => :provider, :allow_nil => true
 

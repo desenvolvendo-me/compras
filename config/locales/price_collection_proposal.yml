@@ -10,5 +10,5 @@ pt-BR:
         price_collection: "Coleta de preços"
         provider: "Fornecedor"
         price_collection_date: "Data de início"
-        price_collection_period: "Prazo de entrega"
+        price_collection_full_period: "Prazo de entrega"
         item_total_value_by_lot: "Valor total do lote"

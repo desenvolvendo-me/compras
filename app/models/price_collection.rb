@@ -55,6 +55,10 @@ class PriceCollection < ActiveRecord::Base
     price_collection_proposals.min_by(&:total_price)
   end
 
+  def full_period
+    "#{period} #{period_unit_humanize}"
+  end
+
   protected
 
   def generate_proposal_items
