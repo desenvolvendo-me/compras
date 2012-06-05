@@ -22,6 +22,7 @@ pt-BR:
     condominium_types: "Tipos de Condomínios"
     countries: "Países"
     currencies: "Moedas"
+    creditors: "Credores"
     delivery_locations: "Locais de Entrega"
     direct_purchases: "Solicitações de Compra Direta"
     dissemination_sources: "Fontes de Divulgação"
@@ -101,4 +102,3 @@ pt-BR:
     subpledges: "Subempenhos"
     supply_authorizations: "Autorizações de Fornecimento"
     users: "Usuários"
-    creditors: "Credores"
