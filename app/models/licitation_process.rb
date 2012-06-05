@@ -6,6 +6,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :licitation_process_publications_attributes
   attr_accessible :pledge_type, :administrative_process_attributes, :type_of_calculation
   attr_accessible :period, :period_unit, :expiration, :expiration_unit
+  attr_accessible :licitation_process_bidders_attributes
 
   attr_readonly :process, :year, :licitation_number
 
@@ -23,7 +24,7 @@ class LicitationProcess < ActiveRecord::Base
   has_and_belongs_to_many :document_types
 
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
-  has_many :licitation_process_bidders, :dependent => :destroy, :order => :id, :autosave => true
+  has_many :licitation_process_bidders, :dependent => :destroy, :order => :id
   has_many :licitation_process_impugnments, :dependent => :restrict, :order => :id
   has_many :licitation_process_appeals, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
@@ -35,7 +36,7 @@ class LicitationProcess < ActiveRecord::Base
   has_one :accreditation, :dependent => :destroy
 
   accepts_nested_attributes_for :licitation_process_publications, :allow_destroy => true
-
+  accepts_nested_attributes_for :licitation_process_bidders, :allow_destroy => true
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
   delegate :budget_unit, :modality, :modality_humanize, :object_type_humanize,
