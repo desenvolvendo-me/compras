@@ -9,23 +9,6 @@
 
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'application' %>
-
-    <% if Rails.env.production? %>
-      <script>
-        window._inform = window._inform || {};
-        window._inform['_setAccount'] = 'IN-88a2f158a508';
-
-        (function () {
-          inscript = document.createElement('script');
-          inscript.type = 'text/javascript';
-          inscript.async = true;
-
-          inscript.src = location.protocol + '//inform.forwardtechnology.co.uk/javascripts/capture.js';
-          s = document.getElementsByTagName('script')[0];
-          s.parentNode.appendChild(inscript)
-        })();
-      </script>
-    <% end %>
   </head>
 
   <body>
