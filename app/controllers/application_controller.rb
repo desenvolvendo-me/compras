@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_user
-    return 'provider' if current_user.provider?
+    return 'provider' if current_user && current_user.provider?
     'application'
   end
 
