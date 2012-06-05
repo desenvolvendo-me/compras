@@ -64,7 +64,7 @@ feature "PriceCollectionProposals" do
     end
   end
 
-  describe 'provider editing proposals' do
+  describe 'provider editing proposals', :driver => :selenium do
     let :current_user do
       User.make!(:provider_with_password)
     end
@@ -76,9 +76,11 @@ feature "PriceCollectionProposals" do
     scenario 'I can see only my proposals' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 
-      click_link 'Processos'
+      click_link 'Compras e Licitações'
 
-      click_link 'Propostas Para Coletas de Preços'
+      click_link 'Coletas de Preço'
+
+      click_link 'Propostas'
 
       page.should_not have_content '1/2012 - Wenderson Malheiros'
       page.should have_content '1/2012 - Gabriel Sobrinho'
@@ -87,9 +89,11 @@ feature "PriceCollectionProposals" do
     scenario 'I can update my own proposals' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 
-      click_link 'Processos'
+      click_link 'Compras e Licitações'
 
-      click_link 'Propostas Para Coletas de Preços'
+      click_link 'Coletas de Preço'
+
+      click_link 'Propostas'
 
       click_link '1/2012 - Gabriel Sobrinho'
 
