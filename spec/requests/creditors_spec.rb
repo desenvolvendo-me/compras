@@ -226,6 +226,22 @@ feature "Creditors" do
     end
   end
 
+  scenario 'validate uniqueness of person' do
+    Creditor.make!(:sobrinho)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Criar Credor'
+
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+
+    click_button 'Salvar'
+
+    page.should have_content 'já está em uso'
+  end
+
   scenario 'create a new creditor when people is individual' do
     Person.make!(:sobrinho)
     Material.make!(:arame_farpado)

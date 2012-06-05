@@ -30,6 +30,7 @@ class Creditor < ActiveRecord::Base
   accepts_nested_attributes_for :creditor_balances, :allow_destroy => true
 
   validates :person, :presence => true
+  validates :person_id, :uniqueness => true, :allow_blank => true
   validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :company_size, :main_cnae, :presence => true, :if => :company?
