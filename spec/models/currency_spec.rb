@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/currency'
+require 'app/models/indexer'
 
 describe Currency do
   it 'return name when converted to string' do
@@ -10,4 +11,5 @@ describe Currency do
   it { should validate_presence_of :name }
   it { should validate_presence_of :acronym }
 
+  it { should have_many :indexers }
 end

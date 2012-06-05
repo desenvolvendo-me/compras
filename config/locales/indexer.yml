@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      indexer:
+        one: "Indexador"
+        other: "Indexadores"
+
+    attributes:
+      indexer:
+        name: "Nome"
+        currency: "Moeda"
+        period_start: "Período inicial"
+        period_end: "Período final"
+        value: "Valor"

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      indexer_value:
+        one: "Valor do Indexador"
+        other: "Valores dos Indexadores"
+
+    attributes:
+      indexer_value:
+        date: "Data"
+        value: "Valor"

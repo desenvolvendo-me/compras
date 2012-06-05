@@ -28,6 +28,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :indexers do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :installment_terms do
     collection do
       get :modal

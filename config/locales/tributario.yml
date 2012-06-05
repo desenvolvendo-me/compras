@@ -17,6 +17,8 @@ pt-BR:
         missing_rate_property_transfer_funded_setting: "Não possui configuração de alíquota de transfência financiada. Por favor, cadastre primeiro antes de transferir imóveis."
         missing_default_interest_setting: "Não possui configuração de Juros padrão. Por favor, cadastre primeiro antes de criar uma baixa de pagamento."
         missing_default_penalty_setting: "Não possui configuração de Multa padrão. Por favor, cadastre primeiro antes de criar uma baixa de pagamento."
+        missing_default_indexer_setting: "Não possui configuração de Indexador padrão. Por favor, cadastre primeiro antes de criar uma baixa de pagamento."
+        missing_indexer_value_for_current_date: "Não possui configuração de Valores de indexador para a data atual. Por favor, cadastre primeiro antes de criar uma baixa de pagamento."
   other:
     tributario:
       messages:

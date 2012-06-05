@@ -1,0 +1,2 @@
+class IndexersController < CrudController
+end
