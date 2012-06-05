@@ -16,11 +16,18 @@ class PriceCollectionsController < CrudController
     object.collection_number = object.next_collection_number
     object.status = Status::ACTIVE
 
-    ProviderUserCreator.new(object).generate if super
+    object.transaction do
+      return unless super
+
+      ProviderUserCreator.new(object).generate
+    end
   end
 
   def update_resource(object, attributes)
-    return unless super
-    ProviderUserCreator.new(object).generate
+    object.transaction do
+      return unless super
+
+      ProviderUserCreator.new(object).generate
+    end
   end
 end

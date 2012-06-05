@@ -68,7 +68,7 @@ describe PriceCollectionsController do
 
   context 'PUT #update' do
     let :price_collection do
-      double('PriceCollection')
+      PriceCollection.new
     end
 
     before do
