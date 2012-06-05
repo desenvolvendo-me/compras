@@ -1,0 +1,2 @@
+class RegularizationOrAdministrativeSanctionReasonDecorator < Decorator
+end

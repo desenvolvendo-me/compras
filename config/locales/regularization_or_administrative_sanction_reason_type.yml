@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    regularization_or_administrative_sanction_reason_type:
+      administrative_sanction: "Sanção administrativa"
+      regularization: "Regularização"

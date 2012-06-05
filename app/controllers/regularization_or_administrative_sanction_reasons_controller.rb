@@ -1,0 +1,2 @@
+class RegularizationOrAdministrativeSanctionReasonsController < CrudController
+end

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      regularization_or_administrative_sanction_reason:
+        one: "Motivo de Sanção Administrativa ou Regularização"
+        other: "Motivos de Sanções Administrativas ou Regularizações"
+
+    attributes:
+      regularization_or_administrative_sanction_reason:
+        description: "Descrição"
+        reason_type: "Tipo"
