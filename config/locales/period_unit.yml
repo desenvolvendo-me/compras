@@ -1,11 +1,6 @@
 pt-BR:
   enumerations:
     period_unit:
-      day: "dia"
-      month: "mês"
-      year: "ano"
-
-    period_unit_plural:
-      day: "dias"
-      month: "meses"
-      year: "anos"
+      day: "dia/dias"
+      month: "mês/meses"
+      year: "ano/anos"
