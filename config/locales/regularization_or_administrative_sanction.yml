@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       regularization_or_administrative_sanction:
-        one: "Sanção administrativa / regularização"
-        other: "Sanções administrativas / regularizações"
+        one: "Sanção Administrativa / Regularização"
+        other: "Sanções Administrativas / Regularizações"
 
     attributes:
       regularization_or_administrative_sanction:
