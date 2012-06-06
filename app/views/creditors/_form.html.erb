@@ -130,7 +130,16 @@
   });
 
   $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {
-    $(this).closest('.creditor-account').find('.creditor-account-agency').attr('data-modal-url', "<%= modal_agencies_path %>?bank_id=" + $(this).val() );
+
+    var url = "<%= modal_agencies_path %>?",
+        params = {
+          locked_fields: ["bank"],
+          bank_id: $(this).val()
+        };
+
+    url += jQuery.param(params);
+
+    $(this).closest('.creditor-account').find('.creditor-account-agency').attr('data-modal-url', url);
   });
 
   function setModalUrlToCnae(){

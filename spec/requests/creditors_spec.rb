@@ -24,7 +24,17 @@ feature "Creditors" do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
-      fill_modal 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+
+      within_modal 'Agência' do
+        page.should have_disabled_field 'Banco'
+        page.should have_field 'Banco', :with => 'Itaú'
+
+        fill_in 'Nome', :with => 'Agência Itaú'
+        click_button 'Pesquisar'
+
+        click_record 'Agência Itaú'
+      end
+
       select 'Ativo', :from => 'Status'
       select 'Conta corrente', :from => 'Tipo da conta'
       fill_in 'Número da conta', :with => '12345'
@@ -167,7 +177,17 @@ feature "Creditors" do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
-      fill_modal 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+
+      within_modal 'Agência' do
+        page.should have_disabled_field 'Banco'
+        page.should have_field 'Banco', :with => 'Itaú'
+
+        fill_in 'Nome', :with => 'Agência Itaú'
+        click_button 'Pesquisar'
+
+        click_record 'Agência Itaú'
+      end
+
       select 'Ativo', :from => 'Status'
       select 'Conta corrente', :from => 'Tipo da conta'
       fill_in 'Número da conta', :with => '12345'
@@ -307,7 +327,17 @@ feature "Creditors" do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
-      fill_modal 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+
+      within_modal 'Agência' do
+        page.should have_disabled_field 'Banco'
+        page.should have_field 'Banco', :with => 'Itaú'
+
+        fill_in 'Nome', :with => 'Agência Itaú'
+        click_button 'Pesquisar'
+
+        click_record 'Agência Itaú'
+      end
+
       select 'Ativo', :from => 'Status'
       select 'Conta corrente', :from => 'Tipo da conta'
       fill_in 'Número da conta', :with => '12345'
@@ -407,7 +437,17 @@ feature "Creditors" do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
-      fill_modal 'Agência', :with => 'Agência Santander', :field => 'Nome'
+
+      within_modal 'Agência' do
+        page.should have_disabled_field 'Banco'
+        page.should have_field 'Banco', :with => 'Santander'
+
+        fill_in 'Nome', :with => 'Agência Santander'
+        click_button 'Pesquisar'
+
+        click_record 'Agência Santander'
+      end
+
       select 'Ativo', :from => 'Status'
       select 'Conta corrente', :from => 'Tipo da conta'
       fill_in 'Número da conta', :with => '98765'
@@ -560,7 +600,17 @@ feature "Creditors" do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
-      fill_modal 'Agência', :with => 'Agência Santander', :field => 'Nome'
+
+      within_modal 'Agência' do
+        page.should have_disabled_field 'Banco'
+        page.should have_field 'Banco', :with => 'Santander'
+
+        fill_in 'Nome', :with => 'Agência Santander'
+        click_button 'Pesquisar'
+
+        click_record 'Agência Santander'
+      end
+
       select 'Ativo', :from => 'Status'
       select 'Conta corrente', :from => 'Tipo da conta'
       fill_in 'Número da conta', :with => '98765'
@@ -714,7 +764,17 @@ feature "Creditors" do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
-      fill_modal 'Agência', :with => 'Agência Santander', :field => 'Nome'
+
+      within_modal 'Agência' do
+        page.should have_disabled_field 'Banco'
+        page.should have_field 'Banco', :with => 'Santander'
+
+        fill_in 'Nome', :with => 'Agência Santander'
+        click_button 'Pesquisar'
+
+        click_record 'Agência Santander'
+      end
+
       select 'Ativo', :from => 'Status'
       select 'Conta corrente', :from => 'Tipo da conta'
       fill_in 'Número da conta', :with => '98765'
