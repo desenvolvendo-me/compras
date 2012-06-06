@@ -19,6 +19,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
+      page.should have_content 'Propostas para a Coleta 1/2012'
       page.should_not have_link 'Criar Proposta Para Coleta de Preços'
     end
 
@@ -48,6 +49,8 @@ feature "PriceCollectionProposals" do
       click_link 'Propostas'
 
       click_link '1/2012 - Wenderson Malheiros'
+
+      page.should have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
 
       page.should_not have_link 'Apagar'
     end
@@ -90,6 +93,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
+      page.should have_content 'Coletas de Preço'
       page.should_not have_content '1/2012 - Wenderson Malheiros'
       page.should have_content '1/2012 - Gabriel Sobrinho'
     end
@@ -104,6 +108,8 @@ feature "PriceCollectionProposals" do
       click_link 'Propostas'
 
       click_link '1/2012 - Gabriel Sobrinho'
+
+      page.should have_content 'Proposta do Fornecedor Gabriel Sobrinho para a Coleta de Preço 1/2012'
 
       page.should have_disabled_field 'Coleta de preços'
       page.should have_field 'Coleta de preços', :with => '1/2012'
