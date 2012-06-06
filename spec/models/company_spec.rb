@@ -43,13 +43,13 @@ describe Company do
       it "the total percentage of partners should not be greater than hundred percent" do
         subject.partners << partner_one
         subject.valid?
-        subject.errors.messages[:partners].should include("o total das porcentagens deve ser 100%.")
+        subject.errors.messages[:partners].should include("o total das porcentagens deve ser 100%")
       end
 
       it "the total percentage of partners should not be less than hundred percent" do
         subject.partners << partner_one
         subject.valid?
-        subject.errors.messages[:partners].should include("o total das porcentagens deve ser 100%.")
+        subject.errors.messages[:partners].should include("o total das porcentagens deve ser 100%")
       end
 
       it "the total percentage of partners should be hundred percent" do
@@ -91,7 +91,7 @@ describe Company do
       it 'should return correct validation for empty partner_id' do
         subject.partners = [Partner.new, Partner.new]
         subject.should_not be_valid
-        subject.errors.messages[:partners].should include("o total das porcentagens deve ser 100%.")
+        subject.errors.messages[:partners].should include("o total das porcentagens deve ser 100%")
         subject.partners.last.errors.messages[:person_id].should_not be_nil
         subject.partners.last.errors.messages[:person_id].should_not include("já está em uso")
         subject.partners.last.errors.messages[:person_id].should include("não pode ficar em branco")

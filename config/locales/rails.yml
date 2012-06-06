@@ -169,7 +169,7 @@ pt-BR:
     template:
       header:
         one: "Não foi possível gravar %{model}: 1 erro"
-        other: "Não foi possível gravar %{model}: %{count} erros."
+        other: "Não foi possível gravar %{model}: %{count} erros"
       body: "Por favor, verifique o(s) seguinte(s) campo(s):"
 
     messages: &errors_messages
@@ -194,11 +194,11 @@ pt-BR:
       even: "deve ser par"
       presence_at_least_one: "um dos campos precisa ser preenchido" # for presence_at_least_one validator
       individual_required: "não pode ser empresa"
-      read_only_cannot_be_required: "não pode ser obrigatório se for somente leitura."
-      hundred_percent: "o total das porcentagens deve ser 100%."
-      exclusion_of_person_correspondence_address: "não está disponível pois o Contribuinte não tem endereço de correspondência cadastrado."
-      duplicated_formulas: "não podem haver duas fórmulas com o mesmo ano."
-      cannot_have_more_than_once_item_with_the_same_material: "não é permitido adicionar mais de um item com o mesmo material."
+      read_only_cannot_be_required: "não pode ser obrigatório se for somente leitura"
+      hundred_percent: "o total das porcentagens deve ser 100%"
+      exclusion_of_person_correspondence_address: "não está disponível pois o Contribuinte não tem endereço de correspondência cadastrado"
+      duplicated_formulas: "não podem haver duas fórmulas com o mesmo ano"
+      cannot_have_more_than_once_item_with_the_same_material: "não é permitido adicionar mais de um item com o mesmo material"
       must_be_equal_to_items_total_value: "deve ser igual ao valor total previsto dos itens"
       should_not_be_less_than_initial_value: "não pode ser menor que o valor inicial"
       initial_and_final_value_range_taken: "esta combinação de valor inicial e valor final já está em uso"
@@ -217,7 +217,7 @@ pt-BR:
       must_not_be_greater_than_budget_allocation_real_amount_with_reserved_values: "não pode ser maior do que o saldo da dotação, contando com os valores reservados"
       cannot_be_greater_than_licitation_exemption: "não pode ser superior à dispensa de licitação"
       must_have_at_least_one_partner: "Pessoa jurídica selecionada na aba Principal. É necessário cadastrar pelo menos um sócio/responsável"
-      at_least_one_partner: "deve haver ao menos um sócio."
+      at_least_one_partner: "deve haver ao menos um sócio"
       must_have_at_least_one_budget_allocation: "é necessário cadastrar pelo menos uma dotação"
       must_have_at_least_one_item: "é necessário cadastrar pelo menos um item"
       must_not_be_greater_than_budget_allocation_real_amount: "não pode ser maior que o saldo real da dotação (R$ %{value})"
@@ -271,7 +271,7 @@ pt-BR:
       template:
         header:
           one: "Não foi possível gravar %{model}: 1 erro"
-          other: "Não foi possível gravar %{model}: %{count} erros."
+          other: "Não foi possível gravar %{model}: %{count} erros"
         body: "Por favor, verifique o(s) seguinte(s) campo(s):"
 
       messages:

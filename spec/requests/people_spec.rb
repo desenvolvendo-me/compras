@@ -535,7 +535,7 @@ feature "People" do
     click_button 'Salvar'
 
     within_tab 'Sócios' do
-      page.should have_content 'deve haver ao menos um sócio.'
+      page.should have_content 'deve haver ao menos um sócio'
 
       click_button 'Adicionar Sócio'
 
@@ -546,7 +546,7 @@ feature "People" do
     click_button 'Salvar'
 
     within_tab 'Sócios' do
-      page.should_not have_content 'deve haver ao menos um sócio.'
+      page.should_not have_content 'deve haver ao menos um sócio'
     end
   end
 end
