@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       expense_modality:
-        one: "Modalidade da Receita"
-        other: "Modalidades da Receitas"
+        one: "Modalidade da Despesa"
+        other: "Modalidades da Despesas"
 
     attributes:
       expense_modality:

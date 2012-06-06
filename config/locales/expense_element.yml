@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       expense_element:
-        one: "Element da Receita"
-        other: "Elementos das Receitas"
+        one: "Element da Despesa"
+        other: "Elementos das Despesas"
 
     attributes:
       expense_element:
