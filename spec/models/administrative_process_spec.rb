@@ -42,8 +42,6 @@ describe AdministrativeProcess do
 
   it { should have_db_index([:process, :year]).unique(true) }
 
-  it { should_not allow_mass_assignment_of(:delivery_date) }
-
   context 'signatures' do
     let :signature_configuration_item do
       double('SignatureConfigurationItem')

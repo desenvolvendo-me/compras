@@ -63,7 +63,6 @@ feature "AdministrativeProcesses" do
       page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
-      page.should have_disabled_field 'Data de liberação'
     end
 
     within_tab 'Dotações orçamentárias' do
@@ -273,7 +272,6 @@ feature "AdministrativeProcesses" do
       page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
-      page.should have_disabled_field 'Data de liberação'
     end
 
     within_tab 'Dotações orçamentárias' do
