@@ -53,7 +53,7 @@
 
   function applyMonthValue(value) {
     $('#month').find('td.value').each(function(){
-      $(this).html(floatToPtBrString(value));
+      $(this).html(numberWithDelimiter(value));
     });
   }
 
@@ -61,9 +61,13 @@
     var input_value = $('#budget_allocation_amount').val();
 
     if (input_value) {
-      value = Big.parse(parsePtBrFloat(input_value));
-      calculed = value.over(Big.parse(12));
-      applyMonthValue(parseFloat(calculed));
+      value = parsePtBrFloat(input_value);
+      calculed = toFixedRoundDown(value / 12);
+      applyMonthValue(calculed);
+
+      rest = value - (calculed.toFixed(2) * 12);
+
+      $('#month_12').find('td.value').html(numberWithDelimiter(parseFloat(calculed) + rest));
     }
   }
 
