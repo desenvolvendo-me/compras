@@ -155,8 +155,29 @@ feature "Creditors" do
     end
 
     within_tab 'Cnaes secundários' do
-      fill_modal 'Cnaes', :with => '94308', :field => 'Código'
-      fill_modal 'Cnaes', :with => '7739099', :field => 'Código'
+      within_modal 'Cnaes' do
+        fill_in 'Código', :with => '94308'
+        click_button 'Pesquisar'
+
+        click_record '94308'
+      end
+
+      within_modal 'Cnaes' do
+        fill_in 'Código', :with => '7739099'
+        click_button 'Pesquisar'
+
+        page.find('.records').should have_content '7739099'
+
+        click_record '7739099'
+      end
+
+      within_modal 'Cnaes' do
+        fill_in 'Código', :with => '4712100'
+        click_button 'Pesquisar'
+
+        page.find('.records').should_not have_content '4712100'
+        click_link 'close'
+      end
     end
 
     within_tab 'Documentos' do
@@ -566,7 +587,22 @@ feature "Creditors" do
 
       click_button 'Remover'
 
-      fill_modal 'Cnaes', :with => '94308', :field => 'Código'
+      within_modal 'Cnaes' do
+        fill_in 'Código', :with => '94308'
+        click_button 'Pesquisar'
+
+        page.find('.records').should have_content '94308'
+
+        click_record '94308'
+      end
+
+      within_modal 'Cnaes' do
+        fill_in 'Código', :with => '7739099'
+        click_button 'Pesquisar'
+
+        page.find('.records').should_not have_content '7739099'
+        click_link 'close'
+      end
     end
 
     within_tab 'Documentos' do
