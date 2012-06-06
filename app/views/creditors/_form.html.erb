@@ -150,9 +150,7 @@
     $('#creditor_cnaes').attr('data-modal-url', urlModal);
   };
 
-  $('#creditor_main_cnae_id').change( function() {
-    setModalUrlToCnae();
-  });
+  $('#creditor_main_cnae_id').change(setModalUrlToCnae);
 
   $('form.creditor').on('change', '.regularization-or-administrative-sanction-reason', function (event, sanctionReason) {
     if (sanctionReason) {
