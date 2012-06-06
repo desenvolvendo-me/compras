@@ -54,7 +54,9 @@ describe AdministrativeProcess do
     end
 
     it 'should return related signatures' do
-      signature_configuration_item_store.should_receive(:all_by_configuration_report).with('administrative_processes').and_return [signature_configuration_item]
+      signature_configuration_item_store.should_receive(:all_by_configuration_report).
+                                         with('administrative_processes').
+                                         and_return([signature_configuration_item])
       subject.signatures(signature_configuration_item_store).should eq [signature_configuration_item]
     end
   end
