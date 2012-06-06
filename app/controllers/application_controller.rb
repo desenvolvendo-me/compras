@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
 
   rescue_from CanCan::Unauthorized, :with => :unauthorized
+  rescue_from Exceptions::Unauthorized, :with => :unauthorized
 
   protected
 
@@ -46,7 +47,7 @@ class ApplicationController < ActionController::Base
     if request.xhr?
       render :nothing => true, :status => :unauthorized
     else
-      redirect_to '/401.html'
+      render :file => "public/401", :layout => nil, :status => 401
     end
   end
 
