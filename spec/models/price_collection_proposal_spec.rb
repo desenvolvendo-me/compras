@@ -42,6 +42,28 @@ describe PriceCollectionProposal do
     end
   end
 
+  describe '#editable_by?' do
+    let :provider do
+      double('Provider')
+    end
+
+    before do
+      subject.stub(:provider).and_return provider
+    end
+
+    it 'should be true when the provider is the given user' do
+      user = double('User', :authenticable => provider)
+
+      subject.editable_by?(user).should be_true
+    end
+
+    it 'should not be true for when the provider is not the given user' do
+      user = double('User', :authenticable => double)
+
+      subject.editable_by?(user).should be_false
+    end
+  end
+
   it 'should return 0 as the total price when there are no items' do
     subject.total_price.should eq 0
   end

@@ -38,6 +38,10 @@ class PriceCollectionProposal < ActiveRecord::Base
     items_by_lot(lot).sum(&:total_price)
   end
 
+  def editable_by? user
+    provider == user.authenticable
+  end
+
   def self.by_price_collection_and_provider(params = {})
     where { price_collection_id.eq(params.fetch(:price_collection_id)) &
             provider_id.eq(params.fetch(:provider_id)) }

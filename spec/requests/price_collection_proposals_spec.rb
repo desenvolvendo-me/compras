@@ -65,20 +65,10 @@ feature "PriceCollectionProposals" do
 
       click_link '1/2012 - Wenderson Malheiros'
 
-      fill_in 'Valor unitário', :with => '50,00'
+      page.should have_disabled_field 'Valor total'
+      page.should have_disabled_field 'Valor total do lote'
 
-      page.should have_field 'Valor total', :with => '500,00'
-      page.should have_field 'Valor total do lote', :with => '500,00'
-
-      click_button 'Salvar'
-
-      page.should have_notice 'Proposta Para Coleta de Preços editada com sucesso.'
-
-      click_link '1/2012 - Wenderson Malheiros'
-
-      page.should have_field 'Valor unitário', :with => '50,00'
-      page.should have_field 'Valor total', :with => '500,00'
-      page.should have_field 'Valor total do lote', :with => '500,00'
+      page.should_not have_button 'Salvar'
     end
   end
 
@@ -126,6 +116,10 @@ feature "PriceCollectionProposals" do
 
       page.should have_disabled_field 'Fornecedor'
       page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+
+      page.should have_field 'Valor unitário'
+      page.should have_disabled_field 'Valor total'
+      page.should have_disabled_field 'Valor total do lote'
     end
 
     scenario 'I can update my own proposals' do
@@ -141,9 +135,18 @@ feature "PriceCollectionProposals" do
 
       fill_in 'Valor unitário', :with => '50,00'
 
+      page.should have_field 'Valor total', :with => '500,00'
+      page.should have_field 'Valor total do lote', :with => '500,00'
+
       click_button 'Salvar'
 
       page.should have_notice 'Proposta Para Coleta de Preços editada com sucesso.'
+
+      click_link '1/2012 - Gabriel Sobrinho'
+
+      page.should have_field 'Valor unitário', :with => '50,00'
+      page.should have_field 'Valor total', :with => '500,00'
+      page.should have_field 'Valor total do lote', :with => '500,00'
     end
 
     scenario "I can not update other's proposals" do
