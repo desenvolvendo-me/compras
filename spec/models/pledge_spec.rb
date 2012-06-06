@@ -101,7 +101,6 @@ describe Pledge do
 
       subject.valid?
 
-      subject.errors.messages[:pledge_parcels_sum].should_not be_nil
       subject.errors.messages[:pledge_parcels_sum].should include 'deve ser igual ao valor'
     end
   end
