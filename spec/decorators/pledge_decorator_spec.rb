@@ -79,4 +79,11 @@ describe PledgeDecorator do
 
     subject.pledge_liquidations_sum.should eq '100,00'
   end
+
+  it 'should return formatted subpledges_sum' do
+    component.stub(:subpledges_sum).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('100,00')
+
+    subject.subpledges_sum.should eq '100,00'
+  end
 end

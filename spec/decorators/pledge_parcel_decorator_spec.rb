@@ -61,4 +61,11 @@ describe PledgeParcelDecorator do
 
     subject.canceled_liquidations_value.should eq 'R$ 9,99'
   end
+
+  it 'should return formatted subpledges_sum as currency' do
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+    component.stub(:canceled_liquidations_value).and_return(100.0)
+
+    subject.canceled_liquidations_value.should eq 'R$ 100,00'
+  end
 end

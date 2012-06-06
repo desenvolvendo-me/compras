@@ -22,4 +22,12 @@ class PledgeCancellationDecorator < Decorator
   def pledge_cancellations_sum
     helpers.number_to_currency super if super
   end
+
+  def pledge_liquidations_sum
+    helpers.number_to_currency super if super
+  end
+
+  def subpledges_sum
+    helpers.number_to_currency super if super
+  end
 end

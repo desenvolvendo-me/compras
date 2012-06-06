@@ -10,6 +10,8 @@ class PledgeCancellation < ActiveRecord::Base
   delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :balance, :value, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :pledge_cancellations_sum, :to => :pledge, :allow_nil => true
+  delegate :pledge_liquidations_sum, :to => :pledge, :allow_nil => true
+  delegate :subpledges_sum, :to => :pledge, :allow_nil => true
 
   validates :pledge, :date, :reason, :presence => true
   validates :value, :presence => true, :numericality => { :greater_than => 0 }

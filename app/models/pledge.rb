@@ -95,6 +95,10 @@ class Pledge < ActiveRecord::Base
     pledge_liquidations.sum(:value)
   end
 
+  def subpledges_sum
+    pledge_parcels.map(&:subpledges_sum).compact.sum
+  end
+
   def liquidation_value
     pledge_liquidations_sum - pledge_liquidation_cancellations_sum
   end
