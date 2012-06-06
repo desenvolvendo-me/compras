@@ -31,7 +31,7 @@ feature "PriceCollections" do
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano', :from => 'Unidade do prazo de entrega'
+      select 'ano', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano', :from => 'Unidade da validade da proposta'
       fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
@@ -91,7 +91,7 @@ feature "PriceCollections" do
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano', :from => 'Unidade do prazo de entrega'
+      select 'ano', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano', :from => 'Unidade da validade da proposta'
       fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
@@ -143,7 +143,7 @@ feature "PriceCollections" do
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Prazo de entrega', :with => '1'
-      page.should have_select 'Unidade do prazo de entrega', :selected => 'ano'
+      page.should have_select 'Período', :selected => 'ano'
       page.should have_field 'Validade da proposta', :with => '1'
       page.should have_select 'Unidade da validade da proposta', :selected => 'ano'
       page.should have_field 'Vencimento', :with => I18n.l(Date.tomorrow)
@@ -192,7 +192,7 @@ feature "PriceCollections" do
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '3'
-      select 'mês', :from => 'Unidade do prazo de entrega'
+      select 'mês', :from => 'Período'
       fill_in 'Validade da proposta', :with => '3'
       select 'mês', :from => 'Unidade da validade da proposta'
       fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
@@ -242,7 +242,7 @@ feature "PriceCollections" do
       page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
       page.should have_field 'Forma de pagamento', :with => 'Cheque'
       page.should have_field 'Prazo de entrega', :with => '3'
-      page.should have_select 'Unidade do prazo de entrega', :selected => 'mês'
+      page.should have_select 'Período', :selected => 'mês'
       page.should have_field 'Validade da proposta', :with => '3'
       page.should have_select 'Unidade da validade da proposta', :selected => 'mês'
       page.should have_field 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
@@ -297,7 +297,7 @@ feature "PriceCollections" do
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano', :from => 'Unidade do prazo de entrega'
+      select 'ano', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano', :from => 'Unidade da validade da proposta'
       fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
@@ -408,7 +408,7 @@ feature "PriceCollections" do
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano', :from => 'Unidade do prazo de entrega'
+      select 'ano', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano', :from => 'Unidade da validade da proposta'
       fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)

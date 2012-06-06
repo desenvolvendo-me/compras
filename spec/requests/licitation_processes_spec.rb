@@ -66,7 +66,7 @@ feature "LicitationProcesses" do
       fill_mask 'Hora da abertura', :with => '14:00'
       fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano', :from => 'Unidade do prazo de entrega'
+      select 'ano', :from => 'Período'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -145,7 +145,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Hora da abertura', :with => '14:00'
       page.should have_field 'Prazo de entrega', :with => '1'
-      page.should have_select 'Unidade do prazo de entrega', :selected => 'ano'
+      page.should have_select 'Período', :selected => 'ano'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Valor da caução', :with => '50,00'
       page.should have_select 'Parecer jurídico', :selected => 'Favorável'
@@ -223,7 +223,7 @@ feature "LicitationProcesses" do
       fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
       fill_mask 'Hora da abertura', :with => '15:00'
       fill_in 'Prazo de entrega', :with => '3'
-      select  'mês', :from => 'Unidade do prazo de entrega'
+      select  'mês', :from => 'Período'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '60,00'
       select 'Contrário', :from => 'Parecer jurídico'
@@ -287,7 +287,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
       page.should have_field 'Hora da abertura', :with => '15:00'
       page.should have_field 'Prazo de entrega', :with => '3'
-      page.should have_select 'Unidade do prazo de entrega', :selected => 'mês'
+      page.should have_select 'Período', :selected => 'mês'
       page.should have_field 'Forma de pagamento', :with => 'Cheque'
       page.should have_field 'Valor da caução', :with => '60,00'
       page.should have_select 'Parecer jurídico', :selected => 'Contrário'
@@ -359,7 +359,7 @@ feature "LicitationProcesses" do
       fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_mask 'Hora da abertura', :with => '15:00'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano', :from => 'Unidade do prazo de entrega'
+      select 'ano', :from => 'Período'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -849,7 +849,7 @@ feature "LicitationProcesses" do
     click_link 'Cancelar'
 
     within_tab 'Dados gerais' do
-      page.should have_field 'Processo', :with => '1' 
+      page.should have_field 'Processo', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '07/03/2012'
       page.should have_field 'Número do protocolo', :with => '00088/2012'
@@ -913,7 +913,7 @@ feature "LicitationProcesses" do
       fill_mask 'Hora da abertura', :with => I18n.l(Date.current, :format => 'time')
       fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano', :from => 'Unidade do prazo de entrega'
+      select 'ano', :from => 'Período'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'

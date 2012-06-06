@@ -21,7 +21,7 @@ pt-BR:
         envelope_opening_date: "Data da abertura dos envelopes"
         envelope_opening_time: "Hora da abertura"
         period: "Prazo de entrega"
-        period_unit: "Unidade do prazo de entrega"
+        period_unit: "Período"
         payment_method: "Forma de pagamento"
         caution_value: "Valor da caução"
         legal_advice: "Parecer jurídico"
