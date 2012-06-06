@@ -1,7 +1,5 @@
 <%= f.error :price_collection_lots %>
 
-<input type="button" class="button affirmative add-price-collection-lot" value="Adicionar Lote">
-
 <div id="price-collection-lots">
   <%= f.association :price_collection_lots, :collection => localized(f.object.price_collection_lots) do |p| %>
     <%= render 'price_collection_lots/form', :f => p %>
@@ -14,6 +12,8 @@
   <% end %>
 </div>
 
+<input type="button" class="button affirmative add-price-collection-lot" value="Adicionar Lote">
+
 <script>
   $("#price-collection-lots-template").nestedForm({
     add: '.add-price-collection-lot',
@@ -21,6 +21,6 @@
     target: '#price-collection-lots',
     fieldToRemove: '.price-collection-lot',
     uuid: 'uuid_price_collection_lot',
-    appendItem: false
+    appendItem: true
   });
 </script>

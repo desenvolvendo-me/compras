@@ -6,10 +6,6 @@
 
   <%= f.error :items %>
 
-  <p>
-    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
-  </p>
-
   <div id="items-<%= f.nested_identifier %>">
     <%= f.association :items, :collection => localized(f.object.items) do |p| %>
       <%= render 'price_collection_lot_items/form', :f => p %>
@@ -21,6 +17,10 @@
       <%= render 'price_collection_lot_items/form', :f => item %>
     <% end %>
   <% end %>
+
+  <p>
+    <input type="button" class="button affirmative add-item-<%= f.nested_identifier %>" value="Adicionar Item">
+  </p>
 
   <p class="yui3-u">
     <input type="button" class="button negative remove-price-collection-lot" value="Remover Lote">
@@ -34,6 +34,6 @@
     target: "#items-<%= f.nested_identifier %>",
     fieldToRemove: '.item',
     uuid: "uuid_item",
-    appendItem: false
+    appendItem: true
   });
 </script>

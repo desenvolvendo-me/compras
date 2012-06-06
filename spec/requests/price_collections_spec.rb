@@ -203,12 +203,14 @@ feature "PriceCollections" do
     within_tab 'Lotes de itens' do
       click_button 'Adicionar Lote'
 
-      fill_in 'Observações', :with => 'lote 2'
+      within '.price-collection-lot:last' do
+        fill_in 'Observações', :with => 'lote 2'
 
-      click_button 'Adicionar Item'
-      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
-      fill_in 'Marca', :with => 'Aço inox'
-      fill_in 'Quantidade', :with => '100'
+        click_button 'Adicionar Item'
+        fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
+        fill_in 'Marca', :with => 'Aço inox'
+        fill_in 'Quantidade', :with => '100'
+      end
     end
 
     within_tab 'Fornecedores' do
@@ -419,20 +421,22 @@ feature "PriceCollections" do
     within_tab 'Lotes de itens' do
       click_button 'Adicionar Lote'
 
-      fill_in 'Observações', :with => 'lote 1'
+      within '.price-collection-lot:last' do
+        fill_in 'Observações', :with => 'lote 1'
 
-      click_button 'Adicionar Item'
+        click_button 'Adicionar Item'
 
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-      fill_in 'Marca', :with => 'Norton'
-      fill_in 'Quantidade', :with => '10'
-
-      click_button 'Adicionar Item'
-
-      within '.item:first' do
         fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
         fill_in 'Marca', :with => 'Norton'
-        fill_in 'Quantidade', :with => '20'
+        fill_in 'Quantidade', :with => '10'
+
+        click_button 'Adicionar Item'
+
+        within '.item:last' do
+          fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+          fill_in 'Marca', :with => 'Norton'
+          fill_in 'Quantidade', :with => '20'
+        end
       end
     end
 
