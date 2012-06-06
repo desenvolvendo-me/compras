@@ -7,6 +7,8 @@ class Creditor < ActiveRecord::Base
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
 
+  attr_readonly :person_id
+
   belongs_to :person
   belongs_to :occupation_classification
   belongs_to :company_size

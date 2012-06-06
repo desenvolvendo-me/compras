@@ -440,7 +440,6 @@ feature "Creditors" do
 
   scenario 'update a creditor when people is special entry' do
     Creditor.make!(:mateus)
-    Person.make!(:sobrinho, :personable => SpecialEntry.make!(:especial))
     Agency.make!(:santander)
     Material.make!(:arame_farpado)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
@@ -450,8 +449,6 @@ feature "Creditors" do
     click_link 'Credores'
 
     click_link 'Mateus Lorandi'
-
-    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
 
     within_tab 'Conta Bancária' do
       click_button 'Remover Conta Bancária'
@@ -514,9 +511,9 @@ feature "Creditors" do
 
     page.should have_notice 'Credor editado com sucesso.'
 
-    click_link 'Gabriel Sobrinho'
+    click_link 'Mateus Lorandi'
 
-    page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+    page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
 
     within_tab 'Conta Bancária' do
       page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
@@ -768,7 +765,6 @@ feature "Creditors" do
 
   scenario 'update a creditor when people is individual' do
     Creditor.make!(:sobrinho)
-    Person.make!(:wenderson)
     OccupationClassification.make!(:engineer)
     Material.make!(:arame_farpado)
     Material.make!(:arame_comum)
@@ -780,8 +776,6 @@ feature "Creditors" do
     click_link 'Credores'
 
     click_link 'Gabriel Sobrinho'
-
-    fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
 
     within_tab 'Principal' do
       fill_modal 'CBO', :with => 'Engenheiro', :field => 'Nome'
@@ -852,9 +846,9 @@ feature "Creditors" do
 
     page.should have_notice 'Credor editado com sucesso.'
 
-    click_link 'Wenderson Malheiros'
+    click_link 'Gabriel Sobrinho'
 
-    page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
+    page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
 
     within_tab 'Principal' do
       page.should have_field 'CBO', :with => '214 - Engenheiro'
@@ -928,6 +922,24 @@ feature "Creditors" do
       page.should have_field 'Tipo', :with => ''
       page.should have_field 'Descrição', :with => ''
     end
+  end
+
+  scenario 'shoud not update a person on creditor' do
+    Creditor.make!(:mateus)
+    Person.make!(:sobrinho)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Mateus Lorandi'
+
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+
+    click_button 'Salvar'
+
+    page.should have_content 'Mateus Lorandi'
+    page.should_not have_content 'Gabriel Sobrinho'
   end
 
   scenario 'destroy an existent creditor' do
