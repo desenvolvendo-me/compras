@@ -19,7 +19,7 @@ pt-BR:
         bank_account: "Conta"
         agency: "Agência"
         bank: "Banco"
-        budget_unit: "Estrutura orçamentária"
+        budget_structure: "Estrutura orçamentária"
         payment_method: "Método de pagamento"
         period: "Prazo"
         delivery_location: "Local de entrega"
