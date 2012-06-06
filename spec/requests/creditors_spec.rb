@@ -10,6 +10,7 @@ feature "Creditors" do
     Person.make!(:mateus)
     Agency.make!(:itau)
     Material.make!(:arame_farpado)
+    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
     click_link 'Cadastros Diversos'
 
@@ -48,6 +49,14 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
+    within_tab 'Sanção Administrativa / Regularização' do
+      click_button 'Adicionar Sanção Administrativa / Regularização'
+
+      fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      fill_mask 'Suspenso até', :with => '05/04/2012'
+      fill_mask 'Data da ocorrência', :with => '05/05/2012'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -81,6 +90,14 @@ feature "Creditors" do
       page.should have_field 'Liquidez corrente', :with => '70,00'
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
+
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Tipo', :with => 'Sanção administrativa'
+      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2012'
+      page.should have_field 'Data da ocorrência', :with => '05/05/2012'
+    end
   end
 
   scenario 'viewing more data from the selected person' do
@@ -110,6 +127,7 @@ feature "Creditors" do
     DocumentType.make!(:fiscal)
     Material.make!(:arame_farpado)
     Agency.make!(:itau)
+    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
     click_link 'Cadastros Diversos'
 
@@ -170,6 +188,14 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
+    within_tab 'Sanção Administrativa / Regularização' do
+      click_button 'Adicionar Sanção Administrativa / Regularização'
+
+      fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      fill_mask 'Suspenso até', :with => '05/04/2012'
+      fill_mask 'Data da ocorrência', :with => '05/05/2012'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -224,6 +250,14 @@ feature "Creditors" do
       page.should have_field 'Liquidez corrente', :with => '70,00'
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
+
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Tipo', :with => 'Sanção administrativa'
+      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2012'
+      page.should have_field 'Data da ocorrência', :with => '05/05/2012'
+    end
   end
 
   scenario 'validate uniqueness of person' do
@@ -247,6 +281,7 @@ feature "Creditors" do
     Material.make!(:arame_farpado)
     OccupationClassification.make!(:armed_forces)
     Agency.make!(:itau)
+    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
     click_link 'Cadastros Diversos'
 
@@ -293,6 +328,14 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
+    within_tab 'Sanção Administrativa / Regularização' do
+      click_button 'Adicionar Sanção Administrativa / Regularização'
+
+      fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      fill_mask 'Suspenso até', :with => '05/04/2012'
+      fill_mask 'Data da ocorrência', :with => '05/05/2012'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor criado com sucesso.'
@@ -334,6 +377,14 @@ feature "Creditors" do
       page.should have_field 'Liquidez corrente', :with => '70,00'
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
+
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Tipo', :with => 'Sanção administrativa'
+      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2012'
+      page.should have_field 'Data da ocorrência', :with => '05/05/2012'
+    end
   end
 
   scenario 'update a creditor when people is special entry' do
@@ -341,6 +392,7 @@ feature "Creditors" do
     Person.make!(:sobrinho, :personable => SpecialEntry.make!(:especial))
     Agency.make!(:santander)
     Material.make!(:arame_farpado)
+    RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
     click_link 'Cadastros Diversos'
 
@@ -381,6 +433,22 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Tipo', :with => 'Sanção administrativa'
+      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2012'
+      page.should have_field 'Data da ocorrência', :with => '04/01/2012'
+
+      click_button 'Remover Sanção Administrativa / Regularização'
+
+      click_button 'Adicionar Sanção Administrativa / Regularização'
+
+      fill_modal 'Motivo', :with => 'Ativação do registro cadastral', :field => 'Descrição'
+      fill_mask 'Suspenso até', :with => '05/04/2011'
+      fill_mask 'Data da ocorrência', :with => '05/05/2011'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -417,6 +485,16 @@ feature "Creditors" do
       page.should have_field 'Liquidez corrente', :with => '70,00'
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
+
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should_not have_content 'Motivo 1'
+
+      page.should have_field 'Motivo', :with => 'Motivo 2'
+      page.should have_field 'Tipo', :with => 'Regularização'
+      page.should have_field 'Descrição', :with => 'Ativação do registro cadastral', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2011'
+      page.should have_field 'Data da ocorrência', :with => '05/05/2011'
+    end
   end
 
   scenario 'update a creditor when people is a company' do
@@ -428,6 +506,7 @@ feature "Creditors" do
     Person.make!(:wenderson)
     Material.make!(:arame_farpado)
     Agency.make!(:santander)
+    RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
     click_link 'Cadastros Diversos'
 
@@ -503,6 +582,22 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Tipo', :with => 'Sanção administrativa'
+      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2012'
+      page.should have_field 'Data da ocorrência', :with => '04/01/2012'
+
+      click_button 'Remover Sanção Administrativa / Regularização'
+
+      click_button 'Adicionar Sanção Administrativa / Regularização'
+
+      fill_modal 'Motivo', :with => 'Ativação do registro cadastral', :field => 'Descrição'
+      fill_mask 'Suspenso até', :with => '05/04/2011'
+      fill_mask 'Data da ocorrência', :with => '05/05/2011'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -573,6 +668,16 @@ feature "Creditors" do
       page.should have_field 'Liquidez corrente', :with => '70,00'
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
+
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should_not have_content 'Motivo 1'
+
+      page.should have_field 'Motivo', :with => 'Motivo 2'
+      page.should have_field 'Tipo', :with => 'Regularização'
+      page.should have_field 'Descrição', :with => 'Ativação do registro cadastral', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2011'
+      page.should have_field 'Data da ocorrência', :with => '05/05/2011'
+    end
   end
 
   scenario 'update a creditor when people is individual' do
@@ -582,6 +687,7 @@ feature "Creditors" do
     Material.make!(:arame_farpado)
     Material.make!(:arame_comum)
     Agency.make!(:santander)
+    RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
     click_link 'Cadastros Diversos'
 
@@ -630,6 +736,22 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Tipo', :with => 'Sanção administrativa'
+      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2012'
+      page.should have_field 'Data da ocorrência', :with => '04/01/2012'
+
+      click_button 'Remover Sanção Administrativa / Regularização'
+
+      click_button 'Adicionar Sanção Administrativa / Regularização'
+
+      fill_modal 'Motivo', :with => 'Ativação do registro cadastral', :field => 'Descrição'
+      fill_mask 'Suspenso até', :with => '05/04/2011'
+      fill_mask 'Data da ocorrência', :with => '05/05/2011'
+    end
+
     click_button 'Salvar'
 
     page.should have_notice 'Credor editado com sucesso.'
@@ -675,6 +797,40 @@ feature "Creditors" do
       page.should have_field 'Liquidez geral', :with => '60,00'
       page.should have_field 'Liquidez corrente', :with => '70,00'
       page.should have_field 'Capital circulante líquido', :with => '80,00'
+    end
+
+    within_tab 'Sanção Administrativa / Regularização' do
+      page.should_not have_content 'Motivo 1'
+
+      page.should have_field 'Motivo', :with => 'Motivo 2'
+      page.should have_field 'Tipo', :with => 'Regularização'
+      page.should have_field 'Descrição', :with => 'Ativação do registro cadastral', :field => 'Descrição'
+      page.should have_field 'Suspenso até', :with => '05/04/2011'
+      page.should have_field 'Data da ocorrência', :with => '05/05/2011'
+    end
+  end
+
+  scenario 'validating javascript to regularization or administrative sanction reason modal' do
+    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Criar Credor'
+
+    within_tab 'Sanção Administrativa / Regularização' do
+      click_button 'Adicionar Sanção Administrativa / Regularização'
+
+      fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+
+      page.should have_field 'Tipo', :with => 'Sanção administrativa'
+      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+
+      fill_in 'Motivo', :with => ''
+
+      page.should have_field 'Tipo', :with => ''
+      page.should have_field 'Descrição', :with => ''
     end
   end
 

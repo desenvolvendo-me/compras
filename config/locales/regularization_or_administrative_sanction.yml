@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      regularization_or_administrative_sanction:
+        one: "Sanção administrativa / regularização"
+        other: "Sanções administrativas / regularizações"
+
+    attributes:
+      regularization_or_administrative_sanction:
+        creditor: "Credor"
+        regularization_or_administrative_sanction_reason: "Motivo"
+        suspended_until: "Suspenso até"
+        occurrence: "Data da ocorrência"
+        reason_type_humanize: "Tipo"
+        description: "Descrição"

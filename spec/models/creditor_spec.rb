@@ -26,6 +26,7 @@ describe Creditor do
   it { should have_many(:creditor_materials).dependent(:destroy) }
   it { should have_many(:accounts).dependent(:destroy) }
   it { should have_many(:creditor_balances).dependent(:destroy) }
+  it { should have_many(:regularization_or_administrative_sanctions).dependent(:destroy) }
 
   it { should validate_presence_of :person }
   it { should_not validate_presence_of :company_size }

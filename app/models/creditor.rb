@@ -5,6 +5,7 @@ class Creditor < ActiveRecord::Base
   attr_accessible :contract_start_date, :cnae_ids, :documents_attributes
   attr_accessible :representative_person_ids, :representative_ids
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
+  attr_accessible :regularization_or_administrative_sanctions_attributes
 
   belongs_to :person
   belongs_to :occupation_classification
@@ -20,6 +21,7 @@ class Creditor < ActiveRecord::Base
   has_many :creditor_materials, :dependent => :destroy
   has_many :accounts, :class_name => 'CreditorBankAccount', :dependent => :destroy
   has_many :creditor_balances, :dependent => :destroy
+  has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
 
   delegate :personable_type, :company?, :to => :person, :allow_nil => true
   delegate :bank_id, :to => :accounts, :allow_nil => true
@@ -28,6 +30,7 @@ class Creditor < ActiveRecord::Base
   accepts_nested_attributes_for :representatives, :allow_destroy => true
   accepts_nested_attributes_for :accounts, :allow_destroy => true
   accepts_nested_attributes_for :creditor_balances, :allow_destroy => true
+  accepts_nested_attributes_for :regularization_or_administrative_sanctions, :allow_destroy => true
 
   validates :person, :presence => true
   validates :person_id, :uniqueness => true, :allow_blank => true

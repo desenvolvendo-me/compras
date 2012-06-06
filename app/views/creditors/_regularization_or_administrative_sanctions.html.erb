@@ -1,0 +1,26 @@
+<p>
+  <input type="button" class="button affirmative add-regularization-or-administrative-sanction" value="Adicionar Sanção Administrativa / Regularização">
+</p>
+
+<div id="regularization-or-administrative-sanctions">
+  <%= f.association :regularization_or_administrative_sanctions, :collection => localized(f.object.regularization_or_administrative_sanctions) do |p| %>
+    <%= render 'regularization_or_administrative_sanctions/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'regularization-or-administrative-sanctions-template' do %>
+  <%= f.association :regularization_or_administrative_sanctions_attributes, :collection => f.object.regularization_or_administrative_sanctions.build, :index => '{{uuid_regularization_or_administrative_sanction}}' do |p| %>
+    <%= render 'regularization_or_administrative_sanctions/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#regularization-or-administrative-sanctions-template").nestedForm({
+    add: '.add-regularization-or-administrative-sanction',
+    remove: '.remove-regularization-or-administrative-sanction',
+    target: '#regularization-or-administrative-sanctions',
+    uuid: 'uuid_regularization_or_administrative_sanction',
+    appendItem: false,
+    fieldToRemove: '.regularization-or-administrative-sanction'
+  });
+</script>

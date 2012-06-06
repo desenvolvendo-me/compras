@@ -1,0 +1,24 @@
+<div class="regularization-or-administrative-sanction">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :regularization_or_administrative_sanction_reason, :input_html => { :class => 'regularization-or-administrative-sanction-reason' }, :wrapper_html => { :class => 'wrapper-regularization-or-administrative-sanction-reason' } %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :reason_type_humanize, :disabled => true, :input_html => { :class => 'sanction-reason-type-humanize' } %>
+    </div>
+  </div>
+
+  <%= f.input :description, :as => :text, :disabled => true, :input_html => { :class => 'sanction-reason-description' } %>
+
+  <%= f.input :suspended_until, :input_html => { :class => 'sanction-suspended-until' } %>
+
+  <%= f.input :occurrence %>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-regularization-or-administrative-sanction" value="Remover Sanção Administrativa / Regularização">
+  </p>
+</div>
