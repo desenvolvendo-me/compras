@@ -9,7 +9,7 @@ class PriceCollectionLotItem < ActiveRecord::Base
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
   delegate :provider, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
 
-  validates :material, :quantity, :brand, :presence => true
+  validates :material, :quantity, :presence => true
   validates :quantity, :numericality => { :greater_than_or_equal_to => 1 }
 
   def winner_proposal(classificator = PriceCollectionProposalsClassificatorByItem)
