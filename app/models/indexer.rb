@@ -4,7 +4,7 @@ class Indexer < ActiveRecord::Base
   belongs_to :currency
 
   has_many :indexer_values, :dependent => :destroy, :order => :date
-  belongs_to :currency
+  has_many :licitation_processes, :dependent => :restrict, :foreign_key => :readjustment_index_id
 
   accepts_nested_attributes_for :indexer_values
 

@@ -9,7 +9,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.tomorrow) }
@@ -39,7 +39,7 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -70,7 +70,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.tomorrow) }
@@ -101,7 +101,7 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.tomorrow) }
@@ -132,7 +132,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -163,7 +163,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -195,7 +195,7 @@ LicitationProcess.blueprint(:classificar_por_itens) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -227,7 +227,7 @@ LicitationProcess.blueprint(:maior_lance_por_itens) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -259,7 +259,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -291,7 +291,7 @@ LicitationProcess.blueprint(:classificar_por_lote) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -323,7 +323,7 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -355,7 +355,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }
@@ -387,7 +387,7 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   capability { Capability.make!(:reforma) }
   expiration { 10 }
   expiration_unit { PeriodUnit::DAY }
-  readjustment_index { "XPTO" }
+  readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "00:00" }
   envelope_opening_date { I18n.l(Date.current) }

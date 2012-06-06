@@ -18,6 +18,7 @@ require 'app/models/licitation_process_lot'
 require 'app/business/licitation_process_types_of_calculation_by_judgment_form_kind'
 require 'app/business/licitation_process_types_of_calculation_by_object_type'
 require 'app/business/licitation_process_types_of_calculation_by_modality'
+require 'app/models/indexer'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -29,6 +30,8 @@ describe LicitationProcess do
   it { should belong_to :administrative_process }
   it { should belong_to :capability }
   it { should belong_to :payment_method }
+  it { should belong_to :readjustment_index }
+
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
   it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }

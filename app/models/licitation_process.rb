@@ -1,6 +1,6 @@
 class LicitationProcess < ActiveRecord::Base
   attr_accessible :administrative_process_id, :capability_id, :payment_method_id, :year, :process_date
-  attr_accessible :object_description, :readjustment_index, :caution_value, :legal_advice
+  attr_accessible :object_description, :readjustment_index_id, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
   attr_accessible :licitation_process_publications_attributes
@@ -20,6 +20,7 @@ class LicitationProcess < ActiveRecord::Base
   belongs_to :administrative_process
   belongs_to :capability
   belongs_to :payment_method
+  belongs_to :readjustment_index, :class_name => 'Indexer'
 
   has_and_belongs_to_many :document_types
 

@@ -14,6 +14,7 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
+    Indexer.make!(:xpto)
 
     click_link 'Processos'
 
@@ -59,12 +60,11 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Unidade da validade da proposta'
-      fill_in 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
       fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_mask 'Hora da entrega', :with => '14:00'
       fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_mask 'Hora da abertura', :with => '14:00'
-      fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Prazo de entrega', :with => '1'
       select 'ano/anos', :from => 'Período'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -196,6 +196,7 @@ feature "LicitationProcesses" do
     PaymentMethod.make!(:cheque)
     DocumentType.make!(:oficial)
     Material.make!(:arame_farpado)
+    Indexer.make!(:selic)
 
     click_link 'Processos'
 
@@ -217,7 +218,7 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10'
       select 'dia/dias', :from => 'Unidade da validade da proposta'
-      fill_in 'Índice de reajuste', :with => 'IPC'
+      fill_modal 'Índice de reajuste', :with => 'SELIC', :field => 'Nome'
       fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_mask 'Hora da entrega', :with => '15:00'
       fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
@@ -281,7 +282,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Fonte de recurso', :with => 'Construção'
       page.should have_field 'Validade da proposta', :with => '10'
       page.should have_select 'Unidade da validade da proposta', :selected => 'dia/dias'
-      page.should have_field 'Índice de reajuste', :with => 'IPC'
+      page.should have_field 'Índice de reajuste', :with => 'SELIC'
       page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Hora da entrega', :with => '15:00'
       page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
@@ -331,6 +332,7 @@ feature "LicitationProcesses" do
   scenario 'creating another licitation with the same year to test process number and licitation number' do
     last_licitation_process = LicitationProcess.make!(:processo_licitatorio)
     AdministrativeProcess.make!(:compra_com_itens_2)
+    Indexer.make!(:xpto)
 
     click_link 'Processos'
 
@@ -353,7 +355,7 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
       select 'dia/dias', :from => 'Unidade da validade da proposta'
-      fill_in 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
       fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_mask 'Hora da entrega', :with => '15:00'
       fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
@@ -887,6 +889,7 @@ feature "LicitationProcesses" do
     DocumentType.make!(:fiscal)
     allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
+    Indexer.make!(:xpto)
 
     click_link 'Processos'
 
@@ -906,12 +909,11 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Unidade da validade da proposta'
-      fill_in 'Índice de reajuste', :with => 'XPTO'
+      fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
       fill_mask 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_mask 'Hora da entrega', :with => I18n.l(Date.current, :format => 'time')
       fill_mask 'Data da abertura dos envelopes', :with => I18n.l(Date.current)
       fill_mask 'Hora da abertura', :with => I18n.l(Date.current, :format => 'time')
-      fill_in 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Prazo de entrega', :with => '1'
       select 'ano/anos', :from => 'Período'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
