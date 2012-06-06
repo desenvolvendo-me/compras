@@ -6,5 +6,6 @@ class CreditorBalance < ActiveRecord::Base
 
   belongs_to :creditor
 
-  validates :fiscal_year, :mask => '9999', :presence => true
+  validates :fiscal_year, :mask => '9999', :allow_blank => true
+  validates :fiscal_year, :presence => true
 end
