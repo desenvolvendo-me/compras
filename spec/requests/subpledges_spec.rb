@@ -110,6 +110,30 @@ feature "SubPledges" do
     end
   end
 
+  scenario 'validate subpledge_expirations expiration_date' do
+    Pledge.make!(:empenho_com_dois_vencimentos)
+
+    click_link 'Contabilidade'
+
+    click_link 'Subempenhos'
+
+    click_link 'Criar Subempenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+    end
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Parcela'
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Vencimentos' do
+      page.should have_content 'não pode ficar em branco'
+    end
+  end
+
   scenario 'validate subpledge_expiration value sum' do
     click_link 'Contabilidade'
 
