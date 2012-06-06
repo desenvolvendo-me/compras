@@ -88,7 +88,8 @@ feature "RevenueAccountings" do
 
       select 'Dividir valor previsto por 12', :from => 'Tipo'
       fill_in 'Valor previsto', :with => '222,22'
-      page.should have_content '18,52'
+      page.should have_content '18,51'
+      page.should have_content '18,61'
     end
   end
 
@@ -134,7 +135,8 @@ feature "RevenueAccountings" do
 
     within_tab 'Programação' do
       page.should have_select 'Tipo', :selected => 'Dividir valor previsto por 12'
-      page.should have_content '18,52'
+      page.should have_content '18,51'
+      page.should have_content '18,61'
     end
   end
 
