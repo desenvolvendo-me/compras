@@ -123,7 +123,7 @@ feature "LicitationObjects" do
 
     within_tab 'Materiais' do
       page.should have_content 'Arame comum'
-      click_button 'Remover material'
+      click_button 'Remover Material'
     end
 
     click_button 'Salvar'

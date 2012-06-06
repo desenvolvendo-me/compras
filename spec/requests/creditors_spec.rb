@@ -626,7 +626,7 @@ feature "Creditors" do
     end
 
     within_tab 'Materiais' do
-      click_button 'Remover material'
+      click_button 'Remover Material'
 
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end

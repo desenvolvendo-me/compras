@@ -530,7 +530,7 @@ feature "Providers" do
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
       page.should have_content 'Antivirus'
-      click_button 'Remover material'
+      click_button 'Remover Material'
     end
 
     click_button 'Salvar'
