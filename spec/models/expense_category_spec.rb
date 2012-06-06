@@ -5,7 +5,8 @@ require 'app/models/expense_nature'
 describe ExpenseCategory do
   it 'should return code as to_s' do
     subject.code = 1
-    subject.to_s.should eq '1'
+    subject.description = 'DESPESA CORRENTE'
+    subject.to_s.should eq '1 - DESPESA CORRENTE'
   end
 
   it { should validate_presence_of :code }

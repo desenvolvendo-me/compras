@@ -5,7 +5,8 @@ require 'app/models/expense_nature'
 describe ExpenseElement do
   it 'should return code as to_s' do
     subject.code = 1
-    subject.to_s.should eq '1'
+    subject.description = 'APOSENTADORIAS'
+    subject.to_s.should eq '1 - APOSENTADORIAS'
   end
 
   it { should validate_presence_of :code }

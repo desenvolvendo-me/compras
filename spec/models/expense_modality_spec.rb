@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'model_helper'
 require 'app/models/expense_modality'
 require 'app/models/expense_nature'
@@ -5,7 +6,8 @@ require 'app/models/expense_nature'
 describe ExpenseModality do
   it 'should return code as to_s' do
     subject.code = 1
-    subject.to_s.should eq '1'
+    subject.description = 'TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+    subject.to_s.should eq '1 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
   end
 
   it { should validate_presence_of :code }

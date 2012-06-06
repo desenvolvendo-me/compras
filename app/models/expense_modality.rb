@@ -10,6 +10,6 @@ class ExpenseModality < ActiveRecord::Base
   filterize
 
   def to_s
-    code.to_s
+    "#{code} - #{description}"
   end
 end
