@@ -10,6 +10,7 @@ require 'app/models/person'
 require 'app/models/creditor_material'
 require 'app/models/creditor_bank_account'
 require 'app/models/creditor_balance'
+require 'app/models/regularization_or_administrative_sanction'
 
 describe Creditor do
   it { should belong_to :person }
