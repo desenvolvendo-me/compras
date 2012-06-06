@@ -1,7 +1,7 @@
 class Indexer < ActiveRecord::Base
   attr_accessible :name, :currency_id, :indexer_values_attributes
 
-  attr_modal :name
+  belongs_to :currency
 
   has_many :indexer_values, :dependent => :destroy, :order => :date
   belongs_to :currency
