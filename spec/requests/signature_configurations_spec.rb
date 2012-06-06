@@ -53,7 +53,8 @@ feature "SignatureConfigurations" do
 
     click_link 'Criar Configuração de Assinatura'
 
-    page.all('#signature_configuration_report option').map(&:text).should eq ['', 'Processos Administrativos']
+    page.should have_css '#signature_configuration_report option', :count => 2
+    page.should have_select 'Relatório', :options => ['', 'Processos Administrativos']
   end
 
   scenario 'should have only availables reports when edit' do
@@ -67,7 +68,8 @@ feature "SignatureConfigurations" do
 
     click_link 'Autorizações de Fornecimento'
 
-    page.all('#signature_configuration_report option').map(&:text).should eq ['', 'Processos Administrativos', 'Autorizações de Fornecimento']
+    page.should have_css '#signature_configuration_report option', :count => 3
+    page.should have_select 'Relatório', :options => ['', 'Processos Administrativos', 'Autorizações de Fornecimento']
   end
 
   scenario 'when fill signature should fill position' do
