@@ -927,4 +927,22 @@ feature "LicitationProcesses" do
 
     page.should_not have_content 'Routing Error No route matches'
   end
+
+  scenario "When administrative_process modality is auction, should filter type_of_calculation" do
+    AdministrativeProcess.make!(:maior_lance_por_itens)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
+
+    page.should have_css '#licitation_process_type_of_calculation option', :count => 3
+
+    page.should have_select 'Tipo da apuração', :options => ['', 'Menor preço global', 'Menor preço por lote']
+  end
 end
