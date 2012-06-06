@@ -86,4 +86,11 @@ describe PriceCollection do
 
     subject.winner_proposal.should eq proposal_2
   end
+
+  it 'should return the full period' do
+    subject.period = 10
+    subject.stub(:period_unit_humanize).and_return('dias')
+
+    subject.full_period.should eq '10 dias'
+  end
 end
