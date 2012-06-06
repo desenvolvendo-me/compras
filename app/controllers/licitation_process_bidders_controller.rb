@@ -32,8 +32,6 @@ class LicitationProcessBiddersController < CrudController
   end
 
   def block_not_allow_bidders
-    return if parent.allow_bidders?
-
-    render :file => "public/401", :layout => nil, :status => 401
+    raise Exceptions::Unauthorized unless parent.allow_bidders?
   end
 end
