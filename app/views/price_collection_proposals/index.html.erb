@@ -1,6 +1,4 @@
-<h2>
-  <%= @parent.present? ? "Propostas para a Coleta #{@parent}" : plural %>
-</h2>
+<%= proposals_list_header(@parent) %>
 
 <%= render 'actions' %>
 
