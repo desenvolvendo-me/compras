@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     models:
       expense_element:
-        one: "Element da Despesa"
+        one: "Elemento da Despesa"
         other: "Elementos das Despesas"
 
     attributes:
