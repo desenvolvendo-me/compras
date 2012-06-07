@@ -18,6 +18,7 @@ feature "PledgeLiquidations" do
     fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
     fill_in 'Valor a ser liquidado', :with => '150,00'
     fill_in 'Data *', :with => I18n.l(Date.tomorrow)
+    fill_in 'Objeto do empenho', :with => 'Para empenho 2012'
 
     click_button 'Salvar'
 
@@ -53,8 +54,7 @@ feature "PledgeLiquidations" do
 
     page.should have_field 'Valor a ser liquidado', :with => '150,00'
     page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
-    page.should have_disabled_field 'Objeto do empenho'
-    page.should have_field 'Objeto do empenho', :with => 'Descricao'
+    page.should have_field 'Objeto do empenho', :with => 'Para empenho 2012'
   end
 
   scenario 'when fill/clear pledge should fill/clear delegateds fields' do
@@ -70,7 +70,6 @@ feature "PledgeLiquidations" do
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Objeto do empenho'
     page.should have_field 'Objeto do empenho', :with => 'Descricao'
 
     within '#parcel_1' do
@@ -98,8 +97,6 @@ feature "PledgeLiquidations" do
     page.should have_field 'Empenho', :with => ''
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => ''
-    page.should have_disabled_field 'Objeto do empenho'
-    page.should have_field 'Objeto do empenho', :with => ''
   end
 
   scenario 'should have all disabled fields when edit existent pledge_liquidation' do
@@ -120,6 +117,8 @@ feature "PledgeLiquidations" do
 
     page.should have_field 'Valor a ser liquidado', :with => '1,00'
     page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
+    page.should have_disabled_field 'Objeto do empenho'
+    page.should have_field 'Objeto do empenho', :with => 'Para empenho 2012'
   end
 
   scenario 'should not have a button to destroy an existent pledge_liquidation' do

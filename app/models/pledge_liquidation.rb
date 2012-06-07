@@ -1,11 +1,11 @@
 class PledgeLiquidation < ActiveRecord::Base
-  attr_accessible :pledge_id, :value, :date
+  attr_accessible :pledge_id, :value, :date, :description
 
   belongs_to :pledge
 
   has_many :pledge_parcel_movimentations, :dependent => :restrict, :as => :pledge_parcel_modifiable
 
-  delegate :emission_date, :description, :to => :pledge, :allow_nil => true
+  delegate :emission_date, :to => :pledge, :allow_nil => true
   delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
   delegate :liquidation_value, :to => :pledge, :prefix => true, :allow_nil => true
 
