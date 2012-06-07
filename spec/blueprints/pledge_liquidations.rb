@@ -2,7 +2,6 @@
 PledgeLiquidation.blueprint(:empenho_2012) do
   pledge { Pledge.make!(:empenho) }
   value { 1 }
-  value { 9.99 }
   date { Date.current + 1.day }
   description { 'Para empenho 2012' }
 end
