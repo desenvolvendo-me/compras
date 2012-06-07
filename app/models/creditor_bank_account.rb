@@ -5,7 +5,7 @@ class CreditorBankAccount < ActiveRecord::Base
   has_enumeration_for :status
   has_enumeration_for :account_type
 
-  belongs_to :creditor, :inverse_of => :accounts
+  belongs_to :creditor
   belongs_to :agency
 
   delegate :bank, :bank_id, :to => :agency, :allow_nil => true
