@@ -40,9 +40,8 @@ class Pledge < ActiveRecord::Base
            :to => :budget_allocation, :allow_nil => true, :prefix => true
   delegate :licitation_number, :to => :licitation_process, :allow_nil => true, :prefix => true
 
-  validates :licitation_process, :entity, :year, :management_unit, :presence => true
+  validates :budget_allocation, :entity, :year, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :provider, :presence => true
-  validates :budget_allocation, :presence => true
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material

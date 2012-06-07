@@ -27,7 +27,6 @@ describe Pledge do
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
   it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
 
-  it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
   it { should validate_presence_of :management_unit }
