@@ -10,6 +10,7 @@ class LicitationProcessLot < ActiveRecord::Base
   delegate :administrative_process_id, :to => :licitation_process, :allow_nil => true
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
 
+  validates :administrative_process_budget_allocation_items, :presence => true
   validate :items_should_belong_to_administrative_process
 
   orderize :id

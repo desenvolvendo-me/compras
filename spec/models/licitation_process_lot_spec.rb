@@ -8,6 +8,7 @@ require 'app/models/administrative_process_budget_allocation_item'
 describe LicitationProcessLot do
   it { should belong_to :licitation_process }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:nullify).order(:id) }
+  it { should validate_presence_of :administrative_process_budget_allocation_items }
 
   it "should return 'Lote x' as to_s method" do
     subject.stub(:count_lots).and_return(1)

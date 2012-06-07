@@ -174,6 +174,7 @@ feature "LicitationProcessLots" do
 
   scenario "edit shoud have title Editar Lotes de itens do Processo Licitatório 1/2013" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
     click_link 'Processos'
 
@@ -190,6 +191,8 @@ feature "LicitationProcessLots" do
     click_link 'Criar Lote de itens'
 
     fill_in 'Observações', :with => 'Lote especial'
+
+    fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
 
     click_button 'Salvar'
 
