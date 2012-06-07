@@ -9,7 +9,6 @@ class LicitationCommission < ActiveRecord::Base
 
   has_many :licitation_commission_responsibles, :dependent => :destroy, :order => :id
   has_many :licitation_commission_members, :dependent => :destroy, :order => :id
-  has_many :accreditations, :dependent => :restrict
   has_many :judgment_commission_advices, :dependent => :restrict
 
   accepts_nested_attributes_for :licitation_commission_responsibles, :allow_destroy => true

@@ -4,7 +4,7 @@ require 'app/models/licitation_commission'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission_member'
 require 'app/models/individual'
-require 'app/models/accreditation'
+require 'app/models/judgment_commission_advice'
 
 describe LicitationCommission do
   it { should validate_presence_of :commission_type }
@@ -17,7 +17,6 @@ describe LicitationCommission do
 
   it { should have_many(:licitation_commission_responsibles).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_commission_members).dependent(:destroy).order(:id) }
-  it { should have_many(:accreditations).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
 
   it 'should return id as to_s method' do
@@ -25,7 +24,7 @@ describe LicitationCommission do
 
     subject.to_s.should eq '2'
   end
-  
+
   it "should not have expiration_date less than nomination_date" do
     subject.nomination_date = Date.current
 

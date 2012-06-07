@@ -9,7 +9,6 @@ require 'app/models/person'
 require 'app/models/company'
 require 'app/models/individual'
 require 'app/models/licitation_process_bidder'
-require 'app/models/accredited_representative'
 require 'app/models/pledge'
 require 'app/models/reserve_fund'
 require 'app/models/precatory'
@@ -30,7 +29,6 @@ describe Provider do
   it { should have_many(:provider_licitation_documents).dependent(:destroy).order(:id) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:licitation_process_bidders).dependent(:restrict) }
-  it { should have_many(:accredited_representatives).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_bidders) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
@@ -148,20 +146,20 @@ describe Provider do
       end
     end
   end
-  
+
   describe '#login' do
     context 'have no user related to this provider' do
       it 'returns the given login' do
         subject.login = 'foo.bar'
-        
+
         subject.login.should eq 'foo.bar'
       end
     end
-    
+
     context 'have a user related to this provider' do
       it "returns the user's login" do
         subject.stub(:user).and_return double('User', :login => 'foo.bar')
-        
+
         subject.login.should eq 'foo.bar'
       end
     end

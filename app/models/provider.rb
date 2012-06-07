@@ -21,7 +21,6 @@ class Provider < ActiveRecord::Base
   has_many :provider_licitation_documents, :dependent => :destroy, :inverse_of => :provider, :order => :id
   has_many :direct_purchases, :dependent => :restrict
   has_many :licitation_process_bidders, :dependent => :restrict
-  has_many :accredited_representatives, :dependent => :restrict
   has_many :licitation_processes, :through => :licitation_process_bidders, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
@@ -59,7 +58,7 @@ class Provider < ActiveRecord::Base
   def email= email
     person.email = email
   end
-  
+
   def email
     user.try(:email) || person.email
   end

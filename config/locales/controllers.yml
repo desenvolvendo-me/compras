@@ -1,7 +1,5 @@
 pt-BR:
   controllers:
-    accreditations: "Credenciamentos"
-    accredited_representatives: "Representantes Credenciados"
     addresses: "Endereços"
     administration_types: "Tipos de Administração"
     administrative_processes: "Processos Administrativos"

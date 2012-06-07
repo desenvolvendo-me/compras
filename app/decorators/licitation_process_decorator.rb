@@ -9,16 +9,6 @@ class LicitationProcessDecorator < Decorator
     helpers.l(component.envelope_opening_time, :format => :hour) if component.envelope_opening_time
   end
 
-  def build_accreditation_link
-    return unless component.persisted?
-
-    if component.accreditation
-      helpers.link_to('Editar credenciamento',  routes.edit_licitation_process_accreditation_path(component), :class => "button secondary")
-    else
-      helpers.link_to('Novo credenciamento',  routes.new_licitation_process_accreditation_path(component), :class => "button primary")
-    end
-  end
-
   def count_link
     return unless component.persisted?
 

@@ -1,12 +1,5 @@
 Tributario::Application.routes.draw do
 
-  resources :accredited_representatives do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :creditors do
     collection do
       get :filter
@@ -459,7 +452,6 @@ Tributario::Application.routes.draw do
   get 'licitation_processes/new/:administrative_process_id', :controller => :licitation_processes, :action => :new, :as => :new_licitation_process
 
   resources :licitation_processes, :except => [ :destroy, :index, :new ] do
-    resource :accreditation
     resources :licitation_process_bidders
     resources :licitation_process_lots
 

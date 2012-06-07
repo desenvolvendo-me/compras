@@ -9,7 +9,6 @@ require 'app/models/licitation_process_bidder'
 require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
 require 'app/models/budget_allocation'
-require 'app/models/accreditation'
 require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
 require 'app/models/provider'
@@ -38,7 +37,6 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_bidders).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
-  it { should have_one(:accreditation).dependent(:destroy) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
   it { should have_many(:providers).dependent(:restrict).through(:licitation_process_bidders) }
