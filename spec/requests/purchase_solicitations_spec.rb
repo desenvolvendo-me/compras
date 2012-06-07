@@ -54,7 +54,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3'
@@ -91,7 +91,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Marca/Referência', :with => 'Norton'
       page.should have_field 'Quantidade', :with => '3'
       page.should have_field 'Valor unitário', :with => '200,00'
@@ -142,7 +142,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Ferro SA'
       fill_in 'Quantidade', :with => '200'
@@ -176,7 +176,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Marca/Referência', :with => 'Ferro SA'
       page.should have_field 'Quantidade', :with => '200'
       page.should have_field 'Valor unitário', :with => '0,10'

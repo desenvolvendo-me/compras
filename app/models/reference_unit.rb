@@ -10,6 +10,6 @@ class ReferenceUnit < ActiveRecord::Base
   orderize
 
   def to_s
-    name
+    acronym
   end
 end

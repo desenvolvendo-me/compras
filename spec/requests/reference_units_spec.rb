@@ -20,7 +20,7 @@ feature "ReferenceUnits" do
 
     page.should have_notice 'Unidade de Referência criada com sucesso.'
 
-    click_link 'Reais'
+    click_link 'R$'
 
     page.should have_field 'Descrição', :with => 'Reais'
     page.should have_field 'Sigla', :with => 'R$'
@@ -33,7 +33,7 @@ feature "ReferenceUnits" do
 
     click_link 'Unidades de Referência'
 
-    click_link 'Metro'
+    click_link 'M'
 
     fill_in 'Descrição', :with => 'Centímetro'
     fill_in 'Sigla', :with => 'cm'
@@ -42,7 +42,7 @@ feature "ReferenceUnits" do
 
     page.should have_notice 'Unidade de Referência editada com sucesso.'
 
-    click_link 'Centímetro'
+    click_link 'cm'
 
     page.should have_field 'Descrição', :with => 'Centímetro'
     page.should have_field 'Sigla', :with => 'cm'
@@ -55,7 +55,7 @@ feature "ReferenceUnits" do
 
     click_link 'Unidades de Referência'
 
-    click_link 'Metro'
+    click_link 'M'
 
     click_link 'Apagar', :confirm => true
 

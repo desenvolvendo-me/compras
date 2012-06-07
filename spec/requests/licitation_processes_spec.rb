@@ -91,7 +91,7 @@ feature "LicitationProcesses" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Quantidade', :with => '2'
       fill_in 'Valor unitário', :with => '10,00'
@@ -172,7 +172,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor previsto', :with => '20,00'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Quantidade', :with => '2'
       page.should have_field 'Valor unitário', :with => '10,00'
       page.should have_field 'Valor total', :with => '20,00'
@@ -248,7 +248,7 @@ feature "LicitationProcesses" do
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor total', :with => '20,00'
@@ -311,7 +311,7 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor previsto', :with => '20,00'
 
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Quantidade', :with => '5'
       page.should have_field 'Valor unitário', :with => '4,00'
       page.should have_field 'Valor total', :with => '20,00'

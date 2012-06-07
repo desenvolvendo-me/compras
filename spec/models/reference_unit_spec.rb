@@ -3,9 +3,9 @@ require 'app/models/reference_unit'
 require 'app/models/material'
 
 describe ReferenceUnit do
-  it 'return name when converted to string' do
-    subject.name = 'Unidade'
-    subject.name.should eq subject.to_s
+  it 'return acronym when converted to string' do
+    subject.acronym = 'M'
+    subject.to_s.should eq 'M'
   end
 
   it 'validates length of acronym' do

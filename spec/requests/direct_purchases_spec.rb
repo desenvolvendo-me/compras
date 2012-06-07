@@ -57,7 +57,7 @@ feature "DirectPurchases" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3'
@@ -100,7 +100,7 @@ feature "DirectPurchases" do
       page.should have_field 'Saldo da dotação', :with => '500,00'
 
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Marca/Referência', :with => 'Norton'
       page.should have_field 'Quantidade', :with => '3'
       page.should have_field 'Valor unitário', :with => '200,00'

@@ -121,7 +121,7 @@ feature "LicitationProcessBidders" do
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Situação', :with => ''
       page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Quantidade', :with => '2'
       page.should have_field 'Preço unitário', :with => '11,22'
       page.should have_field 'Preço total', :with => '22,44'
@@ -220,7 +220,7 @@ feature "LicitationProcessBidders" do
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Situação', :with => ''
       page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Unidade', :with => 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Quantidade', :with => '2'
       page.should have_field 'Preço unitário', :with => '10,01'
       page.should have_field 'Preço total', :with => '20,02'
@@ -371,7 +371,7 @@ feature "LicitationProcessBidders" do
         page.should have_disabled_field 'Preço total'
 
         page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '2'
 
         fill_in 'Marca', :with => 'mcafee'
@@ -390,7 +390,7 @@ feature "LicitationProcessBidders" do
         page.should have_disabled_field 'Preço total'
 
         page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '1'
 
         fill_in 'Marca', :with => 'Arame Forte'
@@ -420,7 +420,7 @@ feature "LicitationProcessBidders" do
         page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
         page.should have_field 'Situação', :with => ''
         page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '2'
         page.should have_field 'Preço unitário', :with => '99,99'
         page.should have_field 'Preço total', :with => '199,98'
@@ -439,7 +439,7 @@ feature "LicitationProcessBidders" do
         page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
         page.should have_field 'Situação', :with => ''
         page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '1'
         page.should have_field 'Preço unitário', :with => '9,99'
         page.should have_field 'Preço total', :with => '9,99'
@@ -537,7 +537,7 @@ feature "LicitationProcessBidders" do
         page.should have_disabled_field 'Preço total'
 
         page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '2'
 
         fill_in 'Marca', :with => 'mcafee'
@@ -558,7 +558,7 @@ feature "LicitationProcessBidders" do
         page.should have_disabled_field 'Preço total'
 
         page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '1'
 
         fill_in 'Marca', :with => 'Arame Forte'
@@ -588,7 +588,7 @@ feature "LicitationProcessBidders" do
         page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
         page.should have_field 'Situação', :with => ''
         page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '2'
         page.should have_field 'Preço unitário', :with => '99,99'
         page.should have_field 'Preço total', :with => '199,98'
@@ -609,7 +609,7 @@ feature "LicitationProcessBidders" do
         page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
         page.should have_field 'Situação', :with => ''
         page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'Unidade'
+        page.should have_field 'Unidade', :with => 'UN'
         page.should have_field 'Quantidade', :with => '1'
         page.should have_field 'Preço unitário', :with => '9,99'
         page.should have_field 'Preço total', :with => '9,99'
