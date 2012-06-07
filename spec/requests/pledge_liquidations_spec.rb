@@ -111,7 +111,7 @@ feature "PledgeLiquidations" do
 
     should_not have_button 'Criar Liquidação de Empenho'
 
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
+    page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
 
