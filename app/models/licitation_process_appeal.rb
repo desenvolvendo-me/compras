@@ -1,5 +1,6 @@
 class LicitationProcessAppeal < ActiveRecord::Base
   attr_accessible :licitation_process_id, :appeal_date, :related, :person_id, :valid_reason
+  attr_accessible :new_envelope_opening_date, :new_envelope_opening_time
   attr_accessible :licitation_committee_opinion, :situation
 
   has_enumeration_for :related, :with => LicitationProcessAppealRelated

@@ -7,4 +7,6 @@ LicitationProcessAppeal.blueprint(:interposicao_processo_licitatorio) do
   valid_reason { "Processo licitatório inválido" }
   licitation_committee_opinion { "" }
   situation { Situation::PENDING }
+  new_envelope_opening_date { Date.tomorrow }
+  new_envelope_opening_time { "14:00" }
 end

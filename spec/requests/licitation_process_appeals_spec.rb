@@ -21,6 +21,8 @@ feature "LicitationProcessAppeals" do
     select 'Edital', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Gabriel Sobrinho', :field => 'Nome'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
+    fill_mask 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    fill_mask 'Nova hora da abertura dos envelopes', :with => '15:30'
     fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação'
     select 'Pendente', :from => 'Situação'
 
@@ -35,6 +37,8 @@ feature "LicitationProcessAppeals" do
     page.should have_select 'Referente ao', :selected => 'Edital'
     page.should have_field 'Autor', :with => 'Gabriel Sobrinho'
     page.should have_field 'Objeto do Processo', :with => 'Descricao'
+    page.should have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    page.should have_field 'Nova hora da abertura dos envelopes', :with => '15:30'
     page.should have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
     page.should have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação'
     page.should have_select 'Situação', :selected => 'Pendente'
@@ -56,6 +60,8 @@ feature "LicitationProcessAppeals" do
     select 'Revogação', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Wenderson Malheiros', :field => 'Nome'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
+    fill_mask 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
+    fill_mask 'Nova hora da abertura dos envelopes', :with => '16:00'
     fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
     select 'Deferido', :from => 'Situação'
 
@@ -70,6 +76,8 @@ feature "LicitationProcessAppeals" do
     page.should have_select 'Referente ao', :selected => 'Revogação'
     page.should have_field 'Autor', :with => 'Wenderson Malheiros'
     page.should have_field 'Objeto do Processo', :with => 'Descricao do computador'
+    page.should have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
+    page.should have_field 'Nova hora da abertura dos envelopes', :with => '16:00'
     page.should have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
     page.should have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
     page.should have_select 'Situação', :selected => 'Deferido'
@@ -92,6 +100,8 @@ feature "LicitationProcessAppeals" do
     page.should_not have_content I18n.l(Date.new(2012, 3, 20))
     page.should_not have_content 'Revogação'
     page.should_not have_content 'Wenderson Malheiros'
+    page.should_not have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow )
+    page.should_not have_field 'Nova hora da abertura dos envelopes', :with => '14:00'
     page.should_not have_content "#{interposicao_processo_licitatorio}"
   end
 end

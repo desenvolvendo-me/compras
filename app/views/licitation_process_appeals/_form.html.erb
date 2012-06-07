@@ -14,6 +14,17 @@
 
 <%= f.input :person %>
 <%= f.input :licitation_process_object_description, :disabled => true %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :new_envelope_opening_date %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :new_envelope_opening_time %>
+  </div>
+</div>
+
 <%= f.input :valid_reason %>
 <%= f.input :licitation_committee_opinion %>
 <%= f.input :situation %>
