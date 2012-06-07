@@ -52,7 +52,7 @@ class LicitationProcess < ActiveRecord::Base
   validates :readjustment_index, :payment_method, :envelope_delivery_time, :year, :presence => true
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
   validates :type_of_calculation, :presence => true
-  validate :total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
+  validate :total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value
   validate :administrative_process_must_not_belong_to_another_licitation_process
   validate :validate_type_of_calculation_by_judgment_form_kind
   validate :validate_type_of_calculation_by_object_type
@@ -155,13 +155,13 @@ class LicitationProcess < ActiveRecord::Base
                maximum(:licitation_number).to_i
   end
 
-  def total_of_administrative_process_budget_allocations_items_must_be_equal_to_value
+  def total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value(numeric_parser = ::I18n::Alchemy::NumericParser)
     return if administrative_process_budget_allocations.blank?
 
     administrative_process_budget_allocations.each do |apba|
-      if apba.total_items_value != apba.value
+      if apba.total_items_value > apba.value
         errors.add(:administrative_process_budget_allocations)
-        apba.errors.add(:total_items_value, :must_be_equal_to_estimated_value)
+        apba.errors.add(:total_items_value, :less_than_or_equal_to, :count => numeric_parser.localize(apba.value))
       end
     end
   end

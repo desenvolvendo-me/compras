@@ -445,7 +445,7 @@ feature "LicitationProcesses" do
     click_button 'Salvar'
 
     within_tab 'Dotações' do
-      page.should have_content 'deve ser igual ao valor previsto'
+      page.should have_content 'deve ser menor ou igual a 20,00'
     end
   end
 
