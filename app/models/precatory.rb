@@ -19,7 +19,7 @@ class Precatory < ActiveRecord::Base
   filterize
 
   def parceled_value
-    precatory_parcels.compact.sum(&:value)
+    precatory_parcels.map(&:value).compact.sum
   end
 
   def to_s

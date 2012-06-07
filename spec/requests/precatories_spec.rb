@@ -174,6 +174,23 @@ feature "Precatories" do
     end
   end
 
+  scenario 'should return empty erro when try create a empty parcel' do
+    click_link 'Contabilidade'
+
+    click_link 'Precatórios'
+
+    click_link 'Criar Precatório'
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Parcela'
+      click_button 'Adicionar Parcela'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_content 'não pode ficar em branco'
+  end
+
   scenario 'destroy an existent precatory' do
     Precatory.make!(:precatorio)
 
