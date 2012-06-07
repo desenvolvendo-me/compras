@@ -901,13 +901,14 @@ feature "Creditors" do
   end
 
   scenario 'validating javascript to regularization or administrative sanction reason modal' do
+    Creditor.make!(:nohup)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
     click_link 'Cadastros Diversos'
 
     click_link 'Credores'
 
-    click_link 'Criar Credor'
+    click_link 'Nohup'
 
     within_tab 'Sanção Administrativa / Regularização' do
       click_button 'Adicionar Sanção Administrativa / Regularização'

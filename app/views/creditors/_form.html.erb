@@ -57,11 +57,23 @@
 </div>
 
 <script>
+  function toogleCreditorTabs () {
+    if ( $('#creditor_person_id').val() == '') {
+      $('#creditor-tabs').hide();
+    } else {
+      $('#creditor-tabs').show();
+    }
+  };
+
+  toogleCreditorTabs();
+
   $('#creditor_person_id').change(function (event, people) {
     if (people) {
       $('#creditor_personable_type').val(people.personable_type);
+      $('#creditor-tabs').show();
     } else {
       $('#creditor_personable_type').val('');
+      $('#creditor-tabs').hide();
     }
   });
 
