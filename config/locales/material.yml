@@ -16,7 +16,7 @@ pt-BR:
         stock_balance: "Saldo físico em estoque"
         unit_price: "Preço unitário"
         cash_balance: "Saldo financeiro"
-        reference_unit: "Unidade de medida"
+        reference_unit: "Unidade"
         manufacturer: "Referência do fabricante"
         perishable: "Material perecível"
         storable: "Material estocável"

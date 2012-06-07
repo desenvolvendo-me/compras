@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       administrative_process_budget_allocation_item:
         order: "Item"
-        reference_unit: "Unidade de medida"
+        reference_unit: "Unidade"
         quantity: "Quantidade"
         unit_price: "Valor unitário"
         estimated_total_price: "Valor total"
