@@ -118,7 +118,7 @@ feature "PriceCollectionProposals" do
       page.should have_field 'Data de início', :with => I18n.l(Date.current)
 
       page.should have_disabled_field 'Prazo de entrega'
-      page.should have_field 'Prazo de entrega', :with => '1 ano'
+      page.should have_field 'Prazo de entrega', :with => '1 ano/anos'
 
       page.should have_disabled_field 'Fornecedor'
       page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
