@@ -17,7 +17,7 @@ pt-BR:
         licitation_modality: "Modalidade"
         provider: "Favorecido"
         date: "Data"
-        historic: "Histórico"
+        reason: "Motivo"
         licitation: "Número da licitação"
         process: "Número do processo"
 

@@ -33,7 +33,7 @@ feature "ReserveFunds" do
     fill_in 'Número da licitação', :with => '001/2012'
     fill_in 'Número do processo', :with => '002/2013'
     fill_modal 'Favorecido', :with => '456789', :field => 'CRC'
-    fill_in 'Histórico', :with => 'Historico da reserva'
+    fill_in 'Motivo', :with => 'Motivo para reserva de dotação'
 
     click_button 'Salvar'
 
@@ -51,7 +51,7 @@ feature "ReserveFunds" do
     page.should have_field 'Número da licitação', :with => '001/2012'
     page.should have_field 'Número do processo', :with => '002/2013'
     page.should have_field 'Favorecido', :with => 'Wenderson Malheiros'
-    page.should have_field 'Histórico', :with => 'Historico da reserva'
+    page.should have_field 'Motivo', :with => 'Motivo para reserva de dotação'
   end
 
   scenario 'update an existent reserve_fund' do
@@ -74,7 +74,7 @@ feature "ReserveFunds" do
     fill_in 'Valor *', :with => '199,00'
     fill_in 'Número do processo', :with => '005/2015'
     fill_modal 'Favorecido', :with => '123456', :field => 'CRC'
-    fill_in 'Histórico', :with => 'Novo histórico'
+    fill_in 'Motivo', :with => 'Motivo modificado para a reserva de dotação'
 
     click_button 'Salvar'
 
@@ -90,7 +90,7 @@ feature "ReserveFunds" do
     page.should have_field 'Valor *', :with => '199,00'
     page.should have_field 'Número do processo', :with => '005/2015'
     page.should have_field 'Favorecido', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Histórico', :with => 'Novo histórico'
+    page.should have_field 'Motivo', :with => 'Motivo modificado para a reserva de dotação'
   end
 
   scenario 'destroy an existent reserve_fund' do

@@ -1,3 +1,4 @@
+# encoding: utf-8
 ReserveFund.blueprint(:detran_2012) do
   entity { Entity.make!(:detran) }
   year { 2012 }
@@ -12,7 +13,7 @@ ReserveFund.blueprint(:detran_2012) do
   process_number { "002" }
   process_year { "2013" }
   provider { Provider.make!(:wenderson_sa) }
-  historic { "historic" }
+  reason { 'Motivo para a reserva de dotação' }
 end
 
 ReserveFund.blueprint(:educacao_2011) do
@@ -26,7 +27,7 @@ ReserveFund.blueprint(:educacao_2011) do
   process_number { "002" }
   process_year { "2013" }
   provider { Provider.make!(:wenderson_sa) }
-  historic { "historic" }
+  reason { 'Motivo para a reserva de dotação' }
 end
 
 ReserveFund.blueprint(:reparo_2011) do
@@ -40,5 +41,5 @@ ReserveFund.blueprint(:reparo_2011) do
   process_number { "002" }
   process_year { "2013" }
   provider { Provider.make!(:wenderson_sa) }
-  historic { "historic" }
+  reason { 'Motivo para a reserva de dotação' }
 end
