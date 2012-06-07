@@ -5,7 +5,7 @@ Creditor.blueprint(:sobrinho) do
   autonomous { false }
   social_identification_number { "123456" }
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
-  creditor_balances { [ CreditorBalance.make!(:balanco_2012) ] }
+  creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end
 
@@ -19,13 +19,13 @@ Creditor.blueprint(:nohup) do
   representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
   materials { [ Material.make!(:antivirus) ] }
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
-  creditor_balances { [ CreditorBalance.make!(:balanco_2012) ] }
+  creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end
 
 Creditor.blueprint(:mateus) do
   person { Person.make!(:mateus) }
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
-  creditor_balances { [ CreditorBalance.make!(:balanco_2012) ] }
+  creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end

@@ -7,6 +7,7 @@ describe CreditorBalance do
   it { should belong_to :creditor }
 
   it { should validate_presence_of :fiscal_year }
+  it { should validate_presence_of :creditor }
 
   it { should allow_value('2012').for(:fiscal_year) }
   it { should_not allow_value('212').for(:fiscal_year) }

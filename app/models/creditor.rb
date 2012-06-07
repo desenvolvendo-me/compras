@@ -22,7 +22,7 @@ class Creditor < ActiveRecord::Base
   has_many :materials, :through => :creditor_materials
   has_many :creditor_materials, :dependent => :destroy
   has_many :accounts, :class_name => 'CreditorBankAccount', :inverse_of => :creditor, :dependent => :destroy
-  has_many :creditor_balances, :dependent => :destroy
+  has_many :creditor_balances, :inverse_of => :creditor, :dependent => :destroy
   has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
 
   delegate :personable_type, :company?, :to => :person, :allow_nil => true
