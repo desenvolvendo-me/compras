@@ -9,4 +9,4 @@
 </div>
 
 <%= f.input :description %>
-<%= f.input :status %>
+<%= f.input :status, :disabled => f.object.new_record? %>
