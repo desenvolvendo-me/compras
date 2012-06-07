@@ -16,8 +16,7 @@ describe PledgeParcel do
     subject.stub(:canceled_value).and_return(2)
     subject.stub(:liquidations_value).and_return(3)
     subject.stub(:canceled_liquidations_value).and_return(3)
-    subject.stub(:subpledges_sum).and_return(5)
-    subject.balance.should eq 3
+    subject.balance.should eq 8
   end
 
   it 'should return correct cancellation_moviments value' do

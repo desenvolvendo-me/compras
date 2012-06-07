@@ -32,8 +32,4 @@ class PledgeParcelDecorator < Decorator
   def canceled_liquidations_value
     helpers.number_to_currency super if super
   end
-
-  def subpledges_sum
-    helpers.number_to_currency super if super
-  end
 end

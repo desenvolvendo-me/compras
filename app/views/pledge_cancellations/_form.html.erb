@@ -32,9 +32,6 @@
     <td class="liquidations_value">
       {{liquidations_value}}
     </td>
-    <td class="subpledges_sum">
-      {{subpledges_sum}}
-    </td>
     <td class="balance">
       {{balance}}
     </td>
@@ -64,7 +61,6 @@
             number: this.number,
             canceled_value: this.canceled_value,
             liquidations_value: this.liquidations_value,
-            subpledges_sum: this.subpledges_sum,
             balance: this.balance
           });
         });
@@ -79,7 +75,6 @@
           $('#pledge_cancellations_sum').html(pledge.pledge_cancellations_sum);
           $('#pledge_balance').html(pledge.balance_as_currency);
           $('#pledge_liquidations_sum').html(pledge.pledge_liquidations_sum);
-          $('#subpledges_sum').html(pledge.subpledges_sum);
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
         } else {
@@ -92,7 +87,6 @@
           $('#pledge_value').html('');
           $('#pledge_cancellations_sum').html('');
           $('#pledge_liquidations_sum').html('');
-          $('#subpledges_sum').html('');
           clearExistingPledgeParcels();
           pledgeValue = null;
         }

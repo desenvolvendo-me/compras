@@ -17,9 +17,6 @@
         Liquidado
       </th>
       <th>
-        Subempenhado
-      </th>
-      <th>
         Valor atual
       </th>
     </tr>
@@ -40,9 +37,6 @@
       </td>
       <td id="pledge_liquidations_sum">
         <%= f.object.decorator.pledge_liquidations_sum %>
-      </td>
-      <td id="subpledges_sum">
-        <%= f.object.decorator.subpledges_sum %>
       </td>
       <td id="pledge_balance">
         <%= f.object.decorator.pledge_balance %>
@@ -68,9 +62,6 @@
           </td>
           <td class="liquidations_value">
             <%= parcel.decorator.liquidations_value %>
-          </td>
-          <td class="subpledges_sum">
-            <%= parcel.decorator.subpledges_sum %>
           </td>
           <td class="balance">
             <%= parcel.decorator.balance_as_currency %>

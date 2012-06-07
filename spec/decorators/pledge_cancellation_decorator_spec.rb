@@ -54,11 +54,4 @@ describe PledgeCancellationDecorator do
 
     subject.pledge_liquidations_sum.should eq 'R$ 100,00'
   end
-
-  it 'should return subpledges_sum' do
-    component.stub(:subpledges_sum).and_return(100.0)
-    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
-
-    subject.subpledges_sum.should eq 'R$ 100,00'
-  end
 end

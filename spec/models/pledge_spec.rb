@@ -6,8 +6,6 @@ require 'app/models/pledge_parcel'
 require 'app/models/pledge_cancellation'
 require 'app/models/pledge_liquidation'
 require 'app/models/pledge_liquidation_cancellation'
-require 'app/models/subpledge'
-require 'app/models/subpledge_cancellation'
 
 describe Pledge do
   it { should belong_to :entity }
@@ -28,8 +26,6 @@ describe Pledge do
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
   it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
-  it { should have_many(:subpledges).dependent(:restrict).order(:number) }
-  it { should have_many(:subpledge_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :entity }
@@ -69,21 +65,6 @@ describe Pledge do
     it 'should return correct pledge_parcels_sum' do
       subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
       subject.pledge_parcels_sum.should eq 22
-    end
-  end
-
-  context 'supledges_sum' do
-    let :pledge_parcel_one do
-      double('PledgeParcel', :subpledges_sum => 1)
-    end
-
-    let :pledge_parcel_two do
-      double('PledgeParcel', :subpledges_sum => 12)
-    end
-
-    it 'should return correct pledge_parcels_sum' do
-      subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
-      subject.subpledges_sum.should eq 13
     end
   end
 
@@ -131,26 +112,8 @@ describe Pledge do
     subject.value = 21
     subject.stub(:pledge_cancellations_sum).and_return(2)
     subject.stub(:pledge_liquidations_sum).and_return(1)
-    subject.stub(:subpledges_value_sum).and_return(1)
     subject.stub(:pledge_liquidation_cancellations_sum).and_return(4)
-    subject.balance.should eq 21
-  end
-
-  context 'subpledge_value_sum' do
-    before do
-      subject.stub(:subpledges).and_return(subpledges)
-    end
-
-    let :subpledges do
-      [
-        double('SubpledgeOne', :balance => 10),
-        double('SubpledgeTwo', :balance => 9)
-      ]
-    end
-
-    it 'should return subpledge_value_sum as a sum of subpledges balance' do
-      subject.subpledges_value_sum.should eq 19
-    end
+    subject.balance.should eq 22
   end
 
   it 'validate value based on budeget_allocation_real_amount' do

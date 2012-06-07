@@ -2,7 +2,6 @@ class PledgesController < CrudController
   actions :all, :except => [:update, :destroy]
 
   has_scope :global_or_estimated, :type => :boolean
-  has_scope :has_subpledges, :type => :boolean
 
   def new
     object = build_resource

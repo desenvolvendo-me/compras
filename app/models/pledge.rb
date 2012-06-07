@@ -29,8 +29,6 @@ class Pledge < ActiveRecord::Base
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
-  has_many :subpledges, :dependent => :restrict, :order => :number
-  has_many :subpledge_cancellations, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
   accepts_nested_attributes_for :pledge_parcels, :allow_destroy => true
@@ -61,8 +59,6 @@ class Pledge < ActiveRecord::Base
   orderize :emission_date
   filterize accessible_attributes + [:id]
 
-  scope :has_subpledges, joins { subpledges }
-
   def self.global_or_estimated
     where { pledge_type.eq(PledgeType::GLOBAL) | pledge_type.eq(PledgeType::ESTIMATED) }
   end
@@ -88,15 +84,11 @@ class Pledge < ActiveRecord::Base
   end
 
   def balance
-    value - pledge_cancellations_sum - liquidation_value - subpledges_value_sum
+    value - pledge_cancellations_sum - liquidation_value
   end
 
   def pledge_liquidations_sum
     pledge_liquidations.sum(:value)
-  end
-
-  def subpledges_sum
-    pledge_parcels.map(&:subpledges_sum).compact.sum
   end
 
   def liquidation_value
@@ -109,18 +101,6 @@ class Pledge < ActiveRecord::Base
 
   def pledge_liquidation_cancellations_sum
     pledge_liquidation_cancellations.sum(:value)
-  end
-
-  def subpledges_value_sum
-    subpledges.compact.sum(&:balance)
-  end
-
-  def last_subpledge
-    subpledges.last
-  end
-
-  def subpledges?
-    subpledges.any?
   end
 
   protected

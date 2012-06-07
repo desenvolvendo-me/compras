@@ -25,7 +25,6 @@ class Provider < ActiveRecord::Base
   has_many :licitation_processes, :through => :licitation_process_bidders, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
-  has_many :subpledges, :dependent => :restrict
   has_many :precatories, :dependent => :restrict
   has_many :price_collection_proposals, :dependent => :restrict, :order => :id
   has_many :price_collections, :through => :price_collection_proposals

@@ -30,10 +30,6 @@ class PledgeDecorator < Decorator
     helpers.number_with_precision super if super
   end
 
-  def subpledges_sum
-    helpers.number_to_currency super if super
-  end
-
   def liquidation_value_as_currency
     helpers.number_to_currency component.liquidation_value if component.liquidation_value
   end

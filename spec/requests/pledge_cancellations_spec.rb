@@ -40,7 +40,6 @@ feature "PledgeCancellations" do
       find('.canceled_value').should have_content 'R$ 100,00'
       find('.balance').should have_content 'R$ 0,00'
       find('.liquidations_value').should have_content 'R$ 0,00'
-      find('.subpledges_sum').should have_content 'R$ 0,00'
     end
 
     within '#parcel_2' do
@@ -50,7 +49,6 @@ feature "PledgeCancellations" do
       find('.canceled_value').should have_content 'R$ 50,00'
       find('.balance').should have_content 'R$ 50,00'
       find('.liquidations_value').should have_content 'R$ 0,00'
-      find('.subpledges_sum').should have_content 'R$ 0,00'
     end
 
     page.find('#pledge_value').should have_content 'R$ 200,00'
@@ -84,7 +82,6 @@ feature "PledgeCancellations" do
       find('.canceled_value').should have_content 'R$ 0,00'
       find('.balance').should have_content 'R$ 9,99'
       find('.liquidations_value').should have_content 'R$ 0,00'
-      find('.subpledges_sum').should have_content 'R$ 0,00'
     end
 
     page.find('#pledge_value').should have_content 'R$ 9,99'

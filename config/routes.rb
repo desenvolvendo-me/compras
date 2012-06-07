@@ -780,22 +780,6 @@ Tributario::Application.routes.draw do
     end
   end
 
-  get 'subpledge_expirations/modal', :as => :modal_subpledge_expirations
-
-  resources :subpledge_cancellations do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :subpledges do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :type_improvements do
     collection do
       get :modal

@@ -7,7 +7,6 @@ builder resource, json do
   json.pledge_cancellations_sum             resource.decorator.pledge_cancellations_sum
   json.pledge_liquidation_cancellations_sum resource.decorator.pledge_liquidation_cancellations_sum
   json.pledge_liquidations_sum              resource.decorator.pledge_liquidations_sum
-  json.subpledges_sum                       resource.decorator.subpledges_sum
   json.provider_id                          resource.provider_id
   json.provider                             resource.provider.to_s
   json.balance                              resource.decorator.balance
@@ -20,7 +19,6 @@ builder resource, json do
     json.value                       parcel.decorator.value
     json.balance                     parcel.decorator.balance_as_currency
     json.liquidations_value          parcel.decorator.liquidations_value
-    json.subpledges_sum              parcel.decorator.subpledges_sum
     json.canceled_liquidations_value parcel.decorator.canceled_liquidations_value
     json.canceled_value              parcel.decorator.canceled_value
     json.liquidations_value          parcel.decorator.liquidations_value
