@@ -24,9 +24,16 @@
     appendItem: true
   });
 
+  function setItemLabels(lotDiv) {
+    lotDiv.find('.item:visible').each(function(index, _){
+      $(this).find('.item-label').html(index + 1);
+    });
+  }
+
   function setLotLabels() {
     $('.price-collection-lot:visible').each(function(index, _){
       $(this).find('.lot-label').html(index + 1);
+      setItemLabels($(this));
     });
   }
 

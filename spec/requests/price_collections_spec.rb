@@ -570,4 +570,48 @@ feature "PriceCollections" do
       page.should_not have_content 'Lote 3'
     end
   end
+
+  scenario 'showing numbered labels on each item' do
+    PriceCollection.make!(:coleta_de_precos)
+
+    click_link 'Processos'
+
+    click_link 'Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Lotes de itens' do
+      page.should have_content 'Item 1'
+      page.should_not have_content 'Item 2'
+
+      click_button 'Adicionar Item'
+
+      page.should have_content 'Item 1'
+      page.should have_content 'Item 2'
+
+      click_button 'Adicionar Item'
+
+      page.should have_content 'Item 1'
+      page.should have_content 'Item 2'
+      page.should have_content 'Item 3'
+
+      # removing the first item to se that it re-order all the others
+      click_button 'Remover Item'
+
+      page.should have_content 'Item 1'
+      page.should have_content 'Item 2'
+      page.should_not have_content 'Item 3'
+
+      # adding another lot to see that its items are numbered independently of the first lot
+      click_button 'Adicionar Lote'
+
+      within '.price-collection-lot:last' do
+        click_button 'Adicionar Item'
+
+        page.should have_content 'Item 1'
+      end
+    end
+  end
 end
