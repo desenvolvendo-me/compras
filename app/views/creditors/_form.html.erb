@@ -8,15 +8,15 @@
 
 <div id="creditor-tabs" class="tabs">
   <ul>
-    <li id="tab-creditor-main"><a href="#creditor-main">Principal</a></li>
+    <li id="tab-creditor-main" class="individual-field company-field"><a href="#creditor-main">Principal</a></li>
     <li id="tab-creditor-cnaes" class="company-field"><a href="#creditor-cnaes">Cnaes secundários</a></li>
     <li id="tab-creditor-documents" class="company-field"><a href="#creditor-documents">Documentos</a></li>
-    <li id="tab-creditor-materials"><a href="#creditor-materials">Materiais</a></li>
+    <li id="tab-creditor-materials" class="special-field individual-field company-field"><a href="#creditor-materials">Materiais</a></li>
     <li id="tab-creditor-representatives" class="company-field"><a href="#creditor-representatives">Representantes</a></li>
-    <li id="tab-creditor-accounts"><a href="#creditor-accounts">Conta Bancária</a></li>
-    <li id="tab-creditor-balance"><a href="#creditor-balance">Balanço</a></li>
-    <li id="tab-creditor-crc"><a href="#creditor-crc">CRC</a></li>
-    <li id="tab-creditor-regularization-or-administrative-sanctions"><a href="#creditor-regularization-or-administrative-sanctions">Sanção Administrativa / Regularização</a></li>
+    <li id="tab-creditor-accounts" class="special-field individual-field company-field"><a href="#creditor-accounts">Conta Bancária</a></li>
+    <li id="tab-creditor-balance" class="special-field individual-field company-field"><a href="#creditor-balance">Balanço</a></li>
+    <li id="tab-creditor-crc" class="special-field individual-field company-field"><a href="#creditor-crc">CRC</a></li>
+    <li id="tab-creditor-regularization-or-administrative-sanctions" class="special-field individual-field company-field"><a href="#creditor-regularization-or-administrative-sanctions">Sanção Administrativa / Regularização</a></li>
   </ul>
 
   <div id="creditor-main">
@@ -57,65 +57,45 @@
 </div>
 
 <script>
-  function toogleCreditorTabs () {
-    if ( $('#creditor_person_id').val() == '') {
-      $('#creditor-tabs').hide();
-    } else {
-      $('#creditor-tabs').show();
-    }
-  };
-
-  toogleCreditorTabs();
-
   $('#creditor_person_id').change(function (event, people) {
     if (people) {
       $('#creditor_personable_type').val(people.personable_type);
-      $('#creditor-tabs').show();
     } else {
       $('#creditor_personable_type').val('');
-      $('#creditor-tabs').hide();
     }
   });
 
+  function selectFirstTabVisible() {
+    $('#creditor-tabs').tabs({ selected: $('#creditor-tabs > ul > :not(li:hidden)').first().index() });
+  };
+
+  function showCommonTabs() {
+    if ( $('#creditor_person_id').val() == '') {
+      $('.special-field, .individual-field, .company-field').hide();
+      $('li.special-field.individual-field.company-field').show();
+      selectFirstTabVisible();
+    }
+  };
+
   function showOnlyIndividualFields(){
-    $('.company-field').hide();
+    $('.special-field, .company-field').hide();
     $('.individual-field').show();
+    selectFirstTabVisible();
   };
 
   function showOnlyCompanyFields(){
-    $('.individual-field').hide();
+    $('.special-field, .individual-field').hide();
     $('.company-field').show();
+    selectFirstTabVisible();
   };
 
   function showOnlySpecialEntryFields(){
-    $('#tab-creditor-main').hide();
+    $('.individual-field, .company-field').hide();
+    $('.special-field').show();
+    selectFirstTabVisible();
   };
 
-  function showAllTabs(){
-    $('#tab-creditor-main').show();
-    $('#tab-creditor-cnaes').show();
-    $('#tab-creditor-documents').show();
-    $('#tab-creditor-materials').show();
-    $('#tab-creditor-representatives').show();
-    $('#tab-creditor-accounts').show();
-    $('#tab-creditor-balance').show();
-    $('#tab-creditor-crc').show();
-    $('#tab-creditor-regularization-or-administrative-sanctions').show();
-  };
-
-  function showAllFields(){
-    $('#creditor_company_size').parent().show();
-    $('#creditor_choose_simple').parent().show();
-    $('#creditor_main_cnae').parent().show();
-
-    $('#creditor_occupation_classification').parent().show();
-    $('#creditor_municipal_public_administration').parent().parent().show();
-    $('#creditor_autonomous').parent().show();
-    $('#creditor_social_identification_number').parent().show();
-    $('#creditor_contract_start_date').parent().show();
-  };
-
-  function renderTabs(){
+  $("#creditor_person_id").change( function() {
     switch ($('#creditor_personable_type').val()){
       case 'Individual':
         showOnlyIndividualFields();
@@ -126,17 +106,12 @@
       case 'SpecialEntry':
         showOnlySpecialEntryFields();
         break;
+      default:
+        showCommonTabs();
     }
-  };
-
-  $("#creditor_person_id").change(function () {
-    showAllFields();
-    showAllTabs();
-    renderTabs();
   });
 
   $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {
-
     var url = "<%= modal_agencies_path %>?",
         params = {
           locked_fields: ["bank"],
@@ -175,4 +150,6 @@
       $(this).closest('.regularization-or-administrative-sanction').find('.sanction-suspended-until').requiredField(false);
     }
   });
+
+  showCommonTabs();
 </script>

@@ -943,6 +943,98 @@ feature "Creditors" do
     page.should_not have_content 'Gabriel Sobrinho'
   end
 
+  scenario 'show only the tabs that are common to all personable of people when has not a people.' do
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Criar Credor'
+
+    within "#creditor-tabs" do
+       page.should_not have_link "Principal"
+       page.should_not have_link "Cnaes secundários"
+       page.should_not have_link "Documentos"
+       page.should have_link "Materiais"
+       page.should_not have_link "Representantes"
+       page.should have_link "Conta Bancária"
+       page.should have_link "Balanço"
+       page.should have_link "CRC"
+       page.should have_link "Sanção Administrativa / Regularização"
+    end
+  end
+
+  scenario 'should only show only tabs for special people' do
+    Person.make!(:mateus)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Criar Credor'
+
+    fill_modal 'Pessoa', :with => 'Mateus Lorandi', :field => 'Nome'
+
+    within "#creditor-tabs" do
+       page.should_not have_link "Principal"
+       page.should_not have_link "Cnaes secundários"
+       page.should_not have_link "Documentos"
+       page.should have_link "Materiais"
+       page.should_not have_link "Representantes"
+       page.should have_link "Conta Bancária"
+       page.should have_link "Balanço"
+       page.should have_link "CRC"
+       page.should have_link "Sanção Administrativa / Regularização"
+    end
+  end
+
+  scenario 'should only show only tabs for individual people' do
+    Person.make!(:sobrinho)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Criar Credor'
+
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+
+    within "#creditor-tabs" do
+       page.should have_link "Principal"
+       page.should_not have_link "Cnaes secundários"
+       page.should_not have_link "Documentos"
+       page.should have_link "Materiais"
+       page.should_not have_link "Representantes"
+       page.should have_link "Conta Bancária"
+       page.should have_link "Balanço"
+       page.should have_link "CRC"
+       page.should have_link "Sanção Administrativa / Regularização"
+    end
+  end
+
+  scenario 'should only show only tabs for company people' do
+    Person.make!(:nohup)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Criar Credor'
+
+    fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
+
+    within "#creditor-tabs" do
+       page.should have_link "Principal"
+       page.should have_link "Cnaes secundários"
+       page.should have_link "Documentos"
+       page.should have_link "Materiais"
+       page.should have_link "Representantes"
+       page.should have_link "Conta Bancária"
+       page.should have_link "Balanço"
+       page.should have_link "CRC"
+       page.should have_link "Sanção Administrativa / Regularização"
+    end
+  end
+
   scenario 'destroy an existent creditor' do
     Creditor.make!(:nohup)
     click_link 'Cadastros Diversos'
