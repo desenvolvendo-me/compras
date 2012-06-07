@@ -535,4 +535,39 @@ feature "PriceCollections" do
     page.should have_content 'Wenderson Malheiros'
     page.should have_content '500,00 '
   end
+
+  scenario 'showing numberd labels on each lot' do
+    PriceCollection.make!(:coleta_de_precos)
+
+    click_link 'Processos'
+
+    click_link 'Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Lotes de itens' do
+      page.should have_content 'Lote 1'
+      page.should_not have_content 'Lote 2'
+
+      click_button 'Adicionar Lote'
+
+      page.should have_content 'Lote 1'
+      page.should have_content 'Lote 2'
+
+      click_button 'Adicionar Lote'
+
+      page.should have_content 'Lote 1'
+      page.should have_content 'Lote 2'
+      page.should have_content 'Lote 3'
+
+      # removing the first lot to se that it re-order all the others
+      click_button 'Remover Lote'
+
+      page.should have_content 'Lote 1'
+      page.should have_content 'Lote 2'
+      page.should_not have_content 'Lote 3'
+    end
+  end
 end

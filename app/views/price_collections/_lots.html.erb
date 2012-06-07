@@ -23,4 +23,14 @@
     uuid: 'uuid_price_collection_lot',
     appendItem: true
   });
+
+  function setLotLabels() {
+    $('.price-collection-lot:visible').each(function(index, _){
+      $(this).find('.lot-label').html(index + 1);
+    });
+  }
+
+  $('#price-collection-lots').bind('append.mustache remove.mustache', setLotLabels);
+
+  setLotLabels();
 </script>

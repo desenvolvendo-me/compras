@@ -50,6 +50,7 @@
 
     $(options.target).delegate(options.remove, 'click', function () {
       $(this).closest(options.fieldToRemove).hide().find(options.hiddenDestroyInput).val('true');
+      $(options.target).trigger('remove.mustache');
 
       if (options.right) {
         displayFirstLabels();
