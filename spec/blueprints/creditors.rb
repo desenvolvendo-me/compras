@@ -4,7 +4,7 @@ Creditor.blueprint(:sobrinho) do
   municipal_public_administration { false }
   autonomous { false }
   social_identification_number { "123456" }
-  accounts { [ CreditorBankAccount.make!(:conta) ] }
+  accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end
@@ -18,14 +18,14 @@ Creditor.blueprint(:nohup) do
   documents { [ CreditorDocument.make!(:documento) ] }
   representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
   materials { [ Material.make!(:antivirus) ] }
-  accounts { [ CreditorBankAccount.make!(:conta) ] }
+  accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end
 
 Creditor.blueprint(:mateus) do
   person { Person.make!(:mateus) }
-  accounts { [ CreditorBankAccount.make!(:conta) ] }
+  accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end

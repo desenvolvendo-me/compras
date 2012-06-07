@@ -6,6 +6,7 @@ describe CreditorBankAccount do
   it { should belong_to :creditor }
   it { should belong_to :agency }
 
+  it { should validate_presence_of :creditor }
   it { should validate_presence_of :agency }
   it { should validate_presence_of :status }
   it { should validate_presence_of :account_type }
