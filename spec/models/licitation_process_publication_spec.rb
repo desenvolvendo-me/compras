@@ -10,4 +10,10 @@ describe LicitationProcessPublication do
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :publication_of }
   it { should validate_presence_of :circulation_type }
+
+  it "should return name as to_s" do
+    subject.name = 'Jornal'
+
+    subject.to_s.should eq 'Jornal'
+  end
 end

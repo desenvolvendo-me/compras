@@ -3,7 +3,6 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :object_description, :readjustment_index_id, :caution_value, :legal_advice
   attr_accessible :legal_advice_date, :contract_date, :contract_expiration, :observations, :envelope_delivery_date
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
-  attr_accessible :licitation_process_publications_attributes
   attr_accessible :pledge_type, :administrative_process_attributes, :type_of_calculation
   attr_accessible :period, :period_unit, :expiration, :expiration_unit
   attr_accessible :licitation_process_bidders_attributes
@@ -34,7 +33,8 @@ class LicitationProcess < ActiveRecord::Base
   has_many :providers, :through => :licitation_process_bidders, :dependent => :restrict
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
 
-  accepts_nested_attributes_for :licitation_process_publications, :allow_destroy => true
+  has_one :accreditation, :dependent => :destroy
+
   accepts_nested_attributes_for :licitation_process_bidders, :allow_destroy => true
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 

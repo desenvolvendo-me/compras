@@ -28,6 +28,8 @@ feature "LicitationProcesses" do
 
     page.should have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
 
+    page.should_not have_link 'Publicações'
+
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
       page.should have_disabled_field 'Estrutura orçamentária'
@@ -100,15 +102,6 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor total', :with => '20,00'
     end
 
-    within_tab 'Publicações' do
-      click_button "Adicionar Publicação"
-
-      fill_in "Nome do veículo de comunicação", :with => 'Jornal'
-      fill_mask "Data da publicação", :with => '20/04/2012'
-      select "Edital", :from => "Publicação do(a)"
-      select "Internet", :from => "Tipo de circulação do veículo de comunicação"
-    end
-
     click_button 'Salvar'
 
     page.should have_notice 'Processo Licitatório criado com sucesso.'
@@ -179,13 +172,6 @@ feature "LicitationProcesses" do
 
       page.should have_field 'Item', :with => '1'
     end
-
-    within_tab 'Publicações' do
-      page.should have_field 'Nome do veículo de comunicação', :with => 'Jornal'
-      page.should have_field 'Data da publicação', :with => '20/04/2012'
-      page.should have_select 'Publicação do(a)', :selected => 'Edital'
-      page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Internet'
-    end
   end
 
   scenario 'update an existent licitation_process' do
@@ -209,6 +195,8 @@ feature "LicitationProcesses" do
     click_link 'Editar processo licitatório'
 
     page.should have_content "Editar Processo Licitatório 1/2012 do Processo Administrativo 1/2012"
+
+    page.should have_link 'Publicações'
 
     within_tab 'Dados gerais' do
       fill_mask 'Data do processo', :with => '21/03/2013'
@@ -255,16 +243,6 @@ feature "LicitationProcesses" do
 
       # asserting calculated unit price of the item
       page.should have_field 'Valor unitário', :with => '4,00'
-    end
-
-    within_tab 'Publicações' do
-      click_button "Remover Publicação"
-      click_button "Adicionar Publicação"
-
-      fill_in "Nome do veículo de comunicação", :with => 'Periodico'
-      fill_mask "Data da publicação", :with => '20/04/2013'
-      select "Cancelamento", :from => "Publicação do(a)"
-      select "Mural público", :from => "Tipo de circulação do veículo de comunicação"
     end
 
     click_button 'Salvar'
@@ -317,15 +295,6 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor total', :with => '20,00'
 
       page.should have_field 'Item', :with => '1'
-    end
-
-    within_tab 'Publicações' do
-      page.should_not have_field 'Nome do veículo de comunicação', :with => 'Jornal'
-
-      page.should have_field 'Nome do veículo de comunicação', :with => 'Periodico'
-      page.should have_field 'Data da publicação', :with => '20/04/2013'
-      page.should have_select 'Publicação do(a)', :selected => 'Cancelamento'
-      page.should have_select 'Tipo de circulação do veículo de comunicação', :selected => 'Mural público'
     end
   end
 
@@ -601,11 +570,6 @@ feature "LicitationProcesses" do
     within_tab 'Dotações orçamentárias' do
       page.should_not have_button 'Adicionar Item'
       page.should_not have_button 'Remover Item'
-    end
-
-    within_tab 'Publicações' do
-      page.should_not have_button 'Adicionar Publicação'
-      page.should_not have_button 'Remover Publicação'
     end
   end
 

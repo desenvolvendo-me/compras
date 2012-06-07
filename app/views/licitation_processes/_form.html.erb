@@ -3,7 +3,6 @@
     <li><a href="#general">Dados gerais</a></li>
     <li><a href="#documents">Documentos</a></li>
     <li><a href="#budget_allocations">Dotações orçamentárias</a></li>
-    <li><a href="#publications-tab">Publicações</a></li>
   </ul>
 
   <div id="general">
@@ -16,10 +15,6 @@
 
   <div id="budget_allocations">
     <%= render 'budget_allocations', :f => f %>
-  </div>
-
-  <div id="publications-tab">
-    <%= render 'publications', :f => f %>
   </div>
 </div>
 
@@ -120,8 +115,6 @@
   <% unless resource.updatable? %>
     $('form.licitation_process .add-licitation-process-budget-allocation').hide();
     $('form.licitation_process .remove-licitation-process-budget-allocation').hide();
-    $('form.licitation_process .add-licitation-process-publication').hide();
-    $('form.licitation_process .remove-licitation-process-publication').hide();
     $('form.licitation_process .document-type .modal-finder-remove').hide();
     $('form.licitation_process .add-licitation-process-bidder').hide();
     $('form.licitation_process .remove-licitation-process-bidder').hide();

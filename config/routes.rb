@@ -454,6 +454,7 @@ Tributario::Application.routes.draw do
   resources :licitation_processes, :except => [ :destroy, :index, :new ] do
     resources :licitation_process_bidders
     resources :licitation_process_lots
+    resources :licitation_process_publications
 
     collection do
       get :filter

@@ -8,6 +8,13 @@ class LicitationProcessPublication < ActiveRecord::Base
 
   validates :name, :publication_date, :publication_of, :circulation_type, :presence => true
 
+  orderize :publication_date
+  filterize
+
+  def to_s
+    name
+  end
+
   def self.current
     where { publication_date.lteq(Date.current) }.order { publication_date }.last
   end
