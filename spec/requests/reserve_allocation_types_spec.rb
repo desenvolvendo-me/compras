@@ -14,7 +14,8 @@ feature "ReserveAllocationTypes" do
     click_link 'Criar Tipo de Reserva de Dotação'
 
     fill_in 'Descrição', :with => 'Reserva para Educação'
-    select 'Ativo', :from => 'Status'
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
