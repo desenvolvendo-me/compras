@@ -18,7 +18,8 @@ feature "GovernmentActions" do
     fill_modal 'Entidade', :with => 'Detran'
     fill_mask 'Exercício', :with => '2012'
     fill_in 'Descrição', :with => 'Ação Governamental'
-    select 'Ativo', :from => 'Status'
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
