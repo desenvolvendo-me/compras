@@ -41,7 +41,7 @@ class PriceCollectionProposal < ActiveRecord::Base
     items_by_lot(lot).sum(&:total_price)
   end
 
-  def editable_by? user
+  def editable_by?(user)
     provider == user.authenticable
   end
 
