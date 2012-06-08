@@ -47,6 +47,10 @@
 <%= f.input :reason %>
 
 <script>
+  <% if f.object.persisted? %>
+    $('form.reserve_fund :input').attr('disabled', true);
+    $('form.reserve_fund .hint').hide();
+  <% end %>
   var savedValue = parsePtBrFloat('<%= f.object.value %>'),
       savedAllocation = '<%= f.object.budget_allocation_id %>',
       reservedValue = <%= f.object.budget_allocation_reserved_value || 0 %>,
@@ -89,8 +93,8 @@
       $("#reserve_fund_licitation_modality").attr("disabled", false);
       $("#reserve_fund_licitation").attr("disabled", false);
     } else {
-      $("#reserve_fund_licitation_modality").attr("disabled", true);
-      $("#reserve_fund_licitation").attr("disabled", true);
+      $("#reserve_fund_licitation_modality").attr("disabled", true).val('');
+      $("#reserve_fund_licitation").attr("disabled", true).val('');
     }
   });
 </script>

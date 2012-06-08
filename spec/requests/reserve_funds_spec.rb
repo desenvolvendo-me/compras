@@ -54,12 +54,9 @@ feature "ReserveFunds" do
     page.should have_field 'Motivo', :with => 'Motivo para reserva de dotação'
   end
 
-  scenario 'update an existent reserve_fund' do
+  scenario 'should have all fields disabled when editing an existent reserve fund' do
     ReserveFund.make!(:detran_2012)
-    Entity.make!(:secretaria_de_educacao)
-    budget_allocation = BudgetAllocation.make!(:alocacao_extra)
-    ReserveAllocationType.make!(:comum)
-    Provider.make!(:sobrinho_sa)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
 
     click_link 'Contabilidade'
 
@@ -67,35 +64,34 @@ feature "ReserveFunds" do
 
     click_link '2012'
 
-    fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_mask 'Exercício', :with => '2011'
-    fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
-    fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
-    fill_in 'Valor *', :with => '199,00'
-    fill_in 'Número do processo', :with => '005/2015'
-    fill_modal 'Favorecido', :with => '123456', :field => 'CRC'
-    fill_in 'Motivo', :with => 'Motivo modificado para a reserva de dotação'
+    should_not have_button 'Salvar'
 
-    click_button 'Salvar'
-
-    page.should have_notice 'Reserva de Dotação editado com sucesso.'
-
-    click_link '2011'
-
-    page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-    page.should have_field 'Exercício', :with => '2011'
-    page.should have_field  'Tipo', :with => 'Comum'
+    page.should have_disabled_field 'Entidade'
+    page.should have_field 'Entidade', :with => 'Detran'
+    page.should have_disabled_field 'Exercício'
+    page.should have_field 'Exercício', :with => '2012'
+    page.should have_disabled_field 'Tipo'
+    page.should have_field 'Tipo', :with => 'Licitação'
     page.should have_disabled_field 'Data'
-    page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2011 - Alocação extra"
-    page.should have_field 'Valor *', :with => '199,00'
-    page.should have_field 'Número do processo', :with => '005/2015'
-    page.should have_field 'Favorecido', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Motivo', :with => 'Motivo modificado para a reserva de dotação'
+    page.should have_field 'Data', :with => '21/02/2012'
+    page.should have_disabled_field 'Dotação orçamentária'
+    page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+    page.should have_disabled_field 'Valor *'
+    page.should have_field 'Valor *', :with => '10,50'
+    page.should have_disabled_field 'Modalidade'
+    page.should have_field 'Modalidade', :with => 'Pública'
+    page.should have_disabled_field 'Número da licitação'
+    page.should have_field 'Número da licitação', :with => '001/2012'
+    page.should have_disabled_field 'Número do processo'
+    page.should have_field 'Número do processo', :with => '002/2013'
+    page.should have_disabled_field 'Favorecido'
+    page.should have_field 'Favorecido', :with => 'Wenderson Malheiros'
+    page.should have_disabled_field 'Motivo'
+    page.should have_field 'Motivo', :with => 'Motivo para a reserva de dotação'
   end
 
-  scenario 'destroy an existent reserve_fund' do
-    budget_allocation = BudgetAllocation.make!(:alocacao)
-    reserve_fund = ReserveFund.make!(:detran_2012)
+  scenario 'should not have link to destroy an existent reserve_fund' do
+    ReserveFund.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
@@ -103,14 +99,7 @@ feature "ReserveFunds" do
 
     click_link '2012'
 
-    click_link "Apagar", :confirm => true
-
-    page.should have_notice 'Reserva de Dotação apagado com sucesso.'
-
-    page.should_not have_content '2012'
-    page.should_not have_content 'Detran'
-    page.should_not have_content "#{budget_allocation.id}/2012 - Alocação"
-    page.should_not have_content '10,00'
+    page.should_not have_link 'Apagar'
   end
 
   scenario 'getting and cleaning budget_allocation amount via javascript' do
@@ -195,25 +184,28 @@ feature "ReserveFunds" do
   end
 
   scenario 'should clean licitation modality and licitation number/year when changing type to diferent of licitation' do
-    ReserveFund.make!(:detran_2012)
+    ReserveAllocationType.make!(:licitation)
     ReserveAllocationType.make!(:comum)
+    LicitationModality.make!(:publica)
 
     click_link 'Contabilidade'
 
     click_link 'Reservas de Dotação'
 
-    click_link '2012'
+    click_link 'Criar Reserva de Dotação'
+
+    fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
+    fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
+    fill_in 'Número da licitação', :with => '001/2012'
 
     page.should have_field 'Modalidade', :with => 'Pública'
     page.should have_field 'Número da licitação', :with => '001/2012'
 
     fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
 
-    click_button 'Salvar'
-
-    click_link '2012'
-
-    page.should have_field 'Modalidade', :with => ''
+    page.should have_disabled_field 'Modalidade'
+    page.should have_field 'Número da licitação', :with => ''
+    page.should have_disabled_field 'Modalidade'
     page.should have_field 'Número da licitação', :with => ''
   end
 
@@ -236,14 +228,13 @@ feature "ReserveFunds" do
   end
 
   scenario 'should calculate reserved value when editing a reserve fund' do
-    ReserveFund.make!(:detran_2012)
     BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Contabilidade'
 
     click_link 'Reservas de Dotação'
 
-    click_link '2012'
+    click_link 'Criar Reserva de Dotação'
 
     fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
 
