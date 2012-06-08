@@ -5,7 +5,7 @@ class RegularizationOrAdministrativeSanction < ActiveRecord::Base
   belongs_to :creditor
   belongs_to :regularization_or_administrative_sanction_reason
 
-  delegate :administrative_sanction?, :regularization?, :description, :reason_type_humanize,
+  delegate :administrative_sanction?, :regularization?, :reason_type_humanize,
     :to => :regularization_or_administrative_sanction_reason, :allow_nil => true
 
   validates :creditor, :occurrence, :presence => true

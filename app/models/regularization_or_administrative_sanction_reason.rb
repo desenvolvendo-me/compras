@@ -8,15 +8,7 @@ class RegularizationOrAdministrativeSanctionReason < ActiveRecord::Base
   orderize :id
   filterize
 
-  scope :less_than_or_equal_me, lambda { |id| where { |reason| reason.id.lteq(id) } }
-
   def to_s
-    "Motivo #{count_less_than_or_equal_me}"
-  end
-
-  protected
-
-  def count_less_than_or_equal_me
-    RegularizationOrAdministrativeSanctionReason.less_than_or_equal_me(id).count
+    description
   end
 end

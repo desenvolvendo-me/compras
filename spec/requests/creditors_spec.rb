@@ -102,9 +102,8 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
       page.should have_field 'Data da ocorrência', :with => '05/05/2012'
     end
@@ -293,9 +292,8 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
       page.should have_field 'Data da ocorrência', :with => '05/05/2012'
     end
@@ -430,9 +428,8 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
       page.should have_field 'Data da ocorrência', :with => '05/05/2012'
     end
@@ -609,9 +606,8 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
       page.should have_field 'Data da ocorrência', :with => '04/01/2012'
 
@@ -662,11 +658,10 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should_not have_content 'Motivo 1'
+      page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
-      page.should have_field 'Motivo', :with => 'Motivo 2'
+      page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
       page.should have_field 'Tipo', :with => 'Regularização'
-      page.should have_field 'Descrição', :with => 'Ativação do registro cadastral', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2011'
       page.should have_field 'Data da ocorrência', :with => '05/05/2011'
     end
@@ -783,9 +778,8 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
       page.should have_field 'Data da ocorrência', :with => '04/01/2012'
 
@@ -870,11 +864,10 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should_not have_content 'Motivo 1'
+      page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
-      page.should have_field 'Motivo', :with => 'Motivo 2'
+      page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
       page.should have_field 'Tipo', :with => 'Regularização'
-      page.should have_field 'Descrição', :with => 'Ativação do registro cadastral', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2011'
       page.should have_field 'Data da ocorrência', :with => '05/05/2011'
     end
@@ -944,9 +937,8 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should have_field 'Motivo', :with => 'Motivo 1'
+      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
       page.should have_field 'Data da ocorrência', :with => '04/01/2012'
 
@@ -1007,11 +999,10 @@ feature "Creditors" do
     end
 
     within_tab 'Sanção Administrativa / Regularização' do
-      page.should_not have_content 'Motivo 1'
+      page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
-      page.should have_field 'Motivo', :with => 'Motivo 2'
+      page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
       page.should have_field 'Tipo', :with => 'Regularização'
-      page.should have_field 'Descrição', :with => 'Ativação do registro cadastral', :field => 'Descrição'
       page.should have_field 'Suspenso até', :with => '05/04/2011'
       page.should have_field 'Data da ocorrência', :with => '05/05/2011'
     end
@@ -1033,12 +1024,11 @@ feature "Creditors" do
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
 
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
+      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
 
       fill_in 'Motivo', :with => ''
 
       page.should have_field 'Tipo', :with => ''
-      page.should have_field 'Descrição', :with => ''
     end
   end
 
