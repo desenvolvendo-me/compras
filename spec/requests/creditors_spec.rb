@@ -59,7 +59,7 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
@@ -101,7 +101,7 @@ feature "Creditors" do
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
@@ -228,7 +228,7 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
@@ -291,7 +291,7 @@ feature "Creditors" do
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
@@ -377,7 +377,7 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
@@ -427,7 +427,7 @@ feature "Creditors" do
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
@@ -605,7 +605,7 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
@@ -657,7 +657,7 @@ feature "Creditors" do
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
       page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
@@ -777,7 +777,7 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
@@ -863,7 +863,7 @@ feature "Creditors" do
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
       page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
@@ -936,7 +936,7 @@ feature "Creditors" do
       fill_in 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
       page.should have_field 'Tipo', :with => 'Sanção administrativa'
       page.should have_field 'Suspenso até', :with => '05/04/2012'
@@ -998,7 +998,7 @@ feature "Creditors" do
       page.should have_field 'Capital circulante líquido', :with => '80,00'
     end
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
       page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
@@ -1018,7 +1018,7 @@ feature "Creditors" do
 
     click_link 'Nohup'
 
-    within_tab 'Sanção Administrativa / Regularização' do
+    within_tab 'Sanções Administrativas / Regularizações' do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
@@ -1065,7 +1065,7 @@ feature "Creditors" do
        page.should_not have_link "Representantes"
        page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
-       page.should have_link "Sanção Administrativa / Regularização"
+       page.should have_link "Sanções Administrativas / Regularizações"
     end
   end
 
@@ -1088,7 +1088,7 @@ feature "Creditors" do
        page.should_not have_link "Representantes"
        page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
-       page.should have_link "Sanção Administrativa / Regularização"
+       page.should have_link "Sanções Administrativas / Regularizações"
     end
   end
 
@@ -1111,7 +1111,7 @@ feature "Creditors" do
        page.should_not have_link "Representantes"
        page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
-       page.should have_link "Sanção Administrativa / Regularização"
+       page.should have_link "Sanções Administrativas / Regularizações"
     end
   end
 
@@ -1134,7 +1134,7 @@ feature "Creditors" do
        page.should have_link "Representantes"
        page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
-       page.should have_link "Sanção Administrativa / Regularização"
+       page.should have_link "Sanções Administrativas / Regularizações"
     end
   end
 
