@@ -628,6 +628,8 @@ Tributario::Application.routes.draw do
       get :filter
       get :modal
     end
+
+    resources :price_collection_proposal_annuls, :path => '/annul', :except => [:index, :show, :destroy]
   end
 
   resources :profiles do

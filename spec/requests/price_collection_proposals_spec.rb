@@ -70,8 +70,10 @@ feature "PriceCollectionProposals" do
 
       page.should have_disabled_field 'Valor total'
       page.should have_disabled_field 'Valor total do lote'
+      page.should have_disabled_field 'Status'
 
       page.should_not have_button 'Salvar'
+      page.should have_link 'Anular'
     end
   end
 
@@ -123,6 +125,9 @@ feature "PriceCollectionProposals" do
       page.should have_disabled_field 'Fornecedor'
       page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
 
+      page.should have_disabled_field 'Status'
+      page.should have_select 'Status', :selected => 'Ativo'
+
       page.should have_field 'Valor unitário'
       page.should have_disabled_field 'Valor total'
       page.should have_disabled_field 'Valor total do lote'
@@ -143,6 +148,8 @@ feature "PriceCollectionProposals" do
 
       page.should have_field 'Valor total', :with => '500,00'
       page.should have_field 'Valor total do lote', :with => '500,00'
+
+      page.should_not have_link 'Anular'
 
       click_button 'Salvar'
 

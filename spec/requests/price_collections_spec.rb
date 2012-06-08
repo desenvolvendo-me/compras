@@ -168,6 +168,13 @@ feature "PriceCollections" do
       page.should have_field 'Login', :with => 'wenderson.sa'
       page.should have_disabled_field 'Login'
     end
+
+    click_link 'Propostas'
+
+    click_link '1/2012 - Wenderson Malheiros'
+
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent price_collection' do
