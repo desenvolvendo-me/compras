@@ -24,6 +24,7 @@ class Creditor < ActiveRecord::Base
   has_many :accounts, :class_name => 'CreditorBankAccount', :inverse_of => :creditor, :dependent => :destroy
   has_many :creditor_balances, :inverse_of => :creditor, :dependent => :destroy
   has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
+  has_many :registration_cadastral_certificates, :dependent => :destroy
 
   delegate :personable_type, :company?, :to => :person, :allow_nil => true
   delegate :bank_id, :to => :accounts, :allow_nil => true

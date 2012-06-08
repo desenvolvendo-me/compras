@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      registration_cadastral_certificate:
+        one: "Certificado de Registro Cadastral"
+        other: "Certificados de Registro Cadastral"
+
+    attributes:
+      registration_cadastral_certificate:
+        creditor: "Credor"
+        fiscal_year: "Exercício"
+        number: "Número"
+        specification: "Especificação"
+        registration_date: "Data da inscrição"
+        validity_date: "Data da validade"
+        revocation_date: "Data da revogação"
+        capital_stock: "Capital social"
+        capital_whole: "Capital integral"
+        total_sales: 'Faturamento mensal'
+        building_area: 'Área construída'
+        total_area: 'Área total'
+        total_employees: 'Total de empregados'
+        commercial_registry_registration_date: 'Data de registro na junta comercial'
+        commercial_registry_number: 'Número na junta comercial'

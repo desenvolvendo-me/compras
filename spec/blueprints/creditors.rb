@@ -7,6 +7,7 @@ Creditor.blueprint(:sobrinho) do
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
+  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
 end
 
 Creditor.blueprint(:nohup) do
@@ -21,6 +22,7 @@ Creditor.blueprint(:nohup) do
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
+  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
 end
 
 Creditor.blueprint(:mateus) do
@@ -28,4 +30,5 @@ Creditor.blueprint(:mateus) do
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
+  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
 end

@@ -438,6 +438,123 @@ feature "Creditors" do
     end
   end
 
+  scenario 'acessing a CRC for a creditor and returnig to creditor' do
+    Creditor.make!(:mateus)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Mateus Lorandi'
+
+    click_link 'CRC'
+
+    click_link '1/2012'
+
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Mateus Lorandi'
+
+    page.should have_field 'Exercício', :with => '2012'
+    page.should have_field 'Número', :with => '1'
+    page.should have_field 'Especificação', :with => 'Especificação do certificado do registro cadastral'
+    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    page.should have_field 'Data da validade', :with => I18n.l(Date.current)
+    page.should have_field 'Data da revogação', :with => I18n.l(Date.tomorrow)
+    page.should have_field 'Capital social', :with => '12.349,99'
+    page.should have_field 'Capital integral', :with => '56.789,99'
+    page.should have_field 'Faturamento mensal', :with => '123.456.789,99'
+    page.should have_field 'Área construída', :with => '99,99'
+    page.should have_field 'Área total', :with => '123,99'
+    page.should have_field 'Total de empregados', :with => '1'
+    page.should have_field 'Data de registro na junta comercial', :with => I18n.l(Date.current)
+    page.should have_field 'Número na junta comercial', :with => '12345678-x'
+
+    click_link 'Cancelar'
+
+    click_link 'Voltar ao credor'
+
+    page.should have_content 'Editar Mateus Lorandi'
+  end
+
+  scenario 'create a CRC for a creditor' do
+    Creditor.make!(:mateus)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Mateus Lorandi'
+
+    click_link 'CRC'
+
+    click_link 'Criar Certificado de Registro Cadastral'
+
+    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Mateus Lorandi'
+
+    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral'
+    fill_mask 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    fill_mask 'Data da validade', :with => '05/04/2013'
+    fill_mask 'Data da revogação', :with => '05/04/2014'
+    fill_in 'Capital social', :with => '987.654,32'
+    fill_in 'Capital integral', :with => '123.456,78'
+    fill_in 'Faturamento mensal', :with => '456.789,99'
+    fill_in 'Área construída', :with => '99,99'
+    fill_in 'Área total', :with => '123,50'
+    fill_in 'Total de empregados', :with => '2'
+    fill_mask 'Data de registro na junta comercial', :with => '05/04/2011'
+    fill_in 'Número na junta comercial', :with => '12345678'
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Certificado de Registro Cadastral criado com sucesso.'
+
+    click_link '1/2013'
+
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Mateus Lorandi'
+
+    page.should have_field 'Exercício', :with => '2013'
+    page.should have_field 'Número', :with => '1'
+    page.should have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral'
+    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    page.should have_field 'Data da validade', :with => '05/04/2013'
+    page.should have_field 'Data da revogação', :with => '05/04/2014'
+    page.should have_field 'Capital social', :with => '987.654,32'
+    page.should have_field 'Capital integral', :with => '123.456,78'
+    page.should have_field 'Faturamento mensal', :with => '456.789,99'
+    page.should have_field 'Área construída', :with => '99,99'
+    page.should have_field 'Área total', :with => '123,50'
+    page.should have_field 'Total de empregados', :with => '2'
+    page.should have_field 'Data de registro na junta comercial', :with => '05/04/2011'
+    page.should have_field 'Número na junta comercial', :with => '12345678'
+
+    click_link 'Cancelar'
+
+    click_link 'Criar Certificado de Registro Cadastral'
+
+    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Mateus Lorandi'
+
+    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Especificação', :with => 'Especificação do CRC'
+    fill_mask 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    fill_mask 'Data da validade', :with => '05/04/2013'
+    fill_mask 'Data da revogação', :with => '05/04/2014'
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Certificado de Registro Cadastral criado com sucesso.'
+
+    click_link '2/2013'
+
+    page.should have_content 'Editar Certificado de Registro Cadastral 2/2013 do Credor Mateus Lorandi'
+
+    page.should have_field 'Exercício', :with => '2013'
+    page.should have_field 'Número', :with => '2'
+    page.should have_field 'Especificação', :with => 'Especificação do CRC'
+    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    page.should have_field 'Data da validade', :with => '05/04/2013'
+    page.should have_field 'Data da revogação', :with => '05/04/2014'
+  end
+
   scenario 'update a creditor when people is special entry' do
     Creditor.make!(:mateus)
     Agency.make!(:santander)
@@ -958,7 +1075,6 @@ feature "Creditors" do
        page.should_not have_link "Representantes"
        page.should have_link "Conta Bancária"
        page.should have_link "Balanço"
-       page.should have_link "CRC"
        page.should have_link "Sanção Administrativa / Regularização"
     end
   end
@@ -982,7 +1098,6 @@ feature "Creditors" do
        page.should_not have_link "Representantes"
        page.should have_link "Conta Bancária"
        page.should have_link "Balanço"
-       page.should have_link "CRC"
        page.should have_link "Sanção Administrativa / Regularização"
     end
   end
@@ -1006,7 +1121,6 @@ feature "Creditors" do
        page.should_not have_link "Representantes"
        page.should have_link "Conta Bancária"
        page.should have_link "Balanço"
-       page.should have_link "CRC"
        page.should have_link "Sanção Administrativa / Regularização"
     end
   end
@@ -1030,7 +1144,6 @@ feature "Creditors" do
        page.should have_link "Representantes"
        page.should have_link "Conta Bancária"
        page.should have_link "Balanço"
-       page.should have_link "CRC"
        page.should have_link "Sanção Administrativa / Regularização"
     end
   end
@@ -1049,5 +1162,28 @@ feature "Creditors" do
 
     page.should_not have_content 'Nohup'
     page.should_not have_content 'Microempresa'
+  end
+
+  scenario 'destroy a CRC for a creditor' do
+    Creditor.make!(:mateus)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Credores'
+
+    click_link 'Mateus Lorandi'
+
+    click_link 'CRC'
+
+    click_link '1/2012'
+
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Mateus Lorandi'
+
+    click_link 'Apagar', :confirm => true
+
+    page.should have_notice 'Certificado de Registro Cadastral apagado com sucesso.'
+
+    page.should_not have_link '2012'
+    page.should_not have_content '2012'
   end
 end

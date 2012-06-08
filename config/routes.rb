@@ -1,6 +1,8 @@
 Tributario::Application.routes.draw do
 
   resources :creditors do
+    resources :registration_cadastral_certificates
+
     collection do
       get :filter
       get :modal
