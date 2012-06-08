@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      price_collection_proposal_annul:
+        one: "Anulação de Proposta Para Coleta de Preços"
+        other: "Anulações de Propostas Para Coletas de Preços"
+
+    attributes:
+      price_collection_proposal_annul:
+        price_collection: "Coleta de preços"
+        provider: "Fornecedor"
+        date: "Data"
+        description: "Justificativa"
+        employee: "Responsável"

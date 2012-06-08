@@ -1,10 +1,13 @@
 class PriceCollectionProposal < ActiveRecord::Base
-  attr_accessible :provider_id, :items_attributes, :email, :login
+  attr_accessible :provider_id, :items_attributes, :email, :login, :status
 
   belongs_to :price_collection
   belongs_to :provider
 
-  has_many :items, :class_name => :PriceCollectionProposalItem, :dependent => :destroy, :order => :id
+  has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :id
+  has_one :annul, :class_name => 'PriceCollectionProposalAnnul', :dependent => :destroy
+
+  has_enumeration_for :status, :with => PriceCollectionProposalStatus, :create_helpers => true
 
   delegate :date, :full_period, :to => :price_collection, :allow_nil => true, :prefix => true
   delegate :price_collection_lots, :to => :price_collection, :allow_nil => true
@@ -40,6 +43,10 @@ class PriceCollectionProposal < ActiveRecord::Base
 
   def editable_by? user
     provider == user.authenticable
+  end
+
+  def annul!
+    update_attribute :status, PriceCollectionProposalStatus::ANNULLED
   end
 
   def self.by_price_collection_and_provider(params = {})

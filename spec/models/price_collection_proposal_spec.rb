@@ -2,10 +2,14 @@
 require 'model_helper'
 require 'app/models/price_collection_proposal'
 require 'app/models/price_collection_proposal_item'
+require 'app/models/price_collection_proposal_annul'
 
 describe PriceCollectionProposal do
   it { should belong_to :price_collection }
   it { should belong_to :provider }
+
+  it { should have_many :items }
+  it { should have_one :annul }
 
   it { should validate_presence_of :provider }
 
@@ -61,6 +65,14 @@ describe PriceCollectionProposal do
       user = double('User', :authenticable => double)
 
       subject.editable_by?(user).should be_false
+    end
+  end
+
+  describe '#annul!' do
+    it 'should change the subject status to annuled' do
+      subject.should_receive(:update_attribute).with(:status, PriceCollectionProposalStatus::ANNULLED)
+
+      subject.annul!
     end
   end
 

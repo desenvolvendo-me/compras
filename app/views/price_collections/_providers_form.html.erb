@@ -1,6 +1,7 @@
 <div class="yui3-g nested provider_collection_proposal">
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+  <%= f.input :status, :as => 'hidden' %>
 
   <div class="yui3-u-1-3">
     <%= f.input :provider, :input_html => { :class => 'provider' }, :disabled => f.object.persisted? %>

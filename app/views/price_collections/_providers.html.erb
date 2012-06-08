@@ -9,7 +9,7 @@
 </div>
 
 <%= mustache "#{f.sanitized_object_name}_providers_template" do %>
-  <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build, :index => '{{uuid_provider}}' do |p| %>
+  <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build(:status => PriceCollectionProposalStatus::ACTIVE), :index => '{{uuid_provider}}' do |p| %>
     <%= render 'providers_form', :f => p %>
   <% end %>
 <% end %>
