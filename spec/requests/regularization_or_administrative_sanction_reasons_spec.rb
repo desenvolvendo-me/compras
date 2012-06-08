@@ -20,7 +20,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     page.should have_notice 'Motivo de Sanção Administrativa ou Regularização criado com sucesso.'
 
-    click_link 'Motivo 1'
+    click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 
     page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
     page.should have_select 'Tipo', :selected => 'Regularização'
@@ -33,7 +33,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     click_link 'Motivos de Sanções Administrativas ou Regularizações'
 
-    click_link 'Motivo 1'
+    click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 
     fill_in 'Descrição', :with => 'Ativação do registro cadastral'
     select 'Sanção administrativa', :from => 'Tipo'
@@ -42,7 +42,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     page.should have_notice 'Motivo de Sanção Administrativa ou Regularização editado com sucesso.'
 
-    click_link 'Motivo 1'
+    click_link 'Ativação do registro cadastral'
 
     page.should have_field 'Descrição', :with => 'Ativação do registro cadastral'
     page.should have_select 'Tipo', :selected => 'Sanção administrativa'
@@ -55,7 +55,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     click_link 'Motivos de Sanções Administrativas ou Regularizações'
 
-    click_link 'Motivo 1'
+    click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 
     click_link 'Apagar', :confirm => true
 
