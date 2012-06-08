@@ -12,9 +12,15 @@
     </div>
   </div>
 
-  <%= f.input :suspended_until, :input_html => { :class => 'sanction-suspended-until' } %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :suspended_until, :input_html => { :class => 'sanction-suspended-until' } %>
+    </div>
 
-  <%= f.input :occurrence %>
+    <div class="yui3-u-1-2">
+      <%= f.input :occurrence %>
+    </div>
+  </div>
 
   <p class="yui3-u">
     <input type="button" class="button negative remove-regularization-or-administrative-sanction" value="Remover Sanção Administrativa / Regularização">
