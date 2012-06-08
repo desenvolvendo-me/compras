@@ -17,8 +17,8 @@ pt-BR:
         capital_stock: "Capital social"
         capital_whole: "Capital integral"
         total_sales: 'Faturamento mensal'
-        building_area: 'Área construída'
-        total_area: 'Área total'
+        building_area: 'Área construída (m²)'
+        total_area: 'Área total (m²)'
         total_employees: 'Total de empregados'
         commercial_registry_registration_date: 'Data de registro na junta comercial'
         commercial_registry_number: 'Número na junta comercial'
