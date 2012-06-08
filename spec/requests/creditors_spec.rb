@@ -20,7 +20,7 @@ feature "Creditors" do
 
     fill_modal 'Pessoa', :with => 'Mateus', :field => 'Nome'
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
@@ -75,7 +75,7 @@ feature "Creditors" do
 
     page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
       page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
       page.should have_select 'Status', :selected => 'Ativo'
@@ -194,7 +194,7 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
@@ -271,7 +271,7 @@ feature "Creditors" do
       page.should have_content 'Arame farpado'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
       page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
       page.should have_select 'Status', :selected => 'Ativo'
@@ -344,7 +344,7 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
@@ -408,7 +408,7 @@ feature "Creditors" do
       page.should have_content 'Arame farpado'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
       page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
       page.should have_select 'Status', :selected => 'Ativo'
@@ -567,7 +567,7 @@ feature "Creditors" do
 
     click_link 'Mateus Lorandi'
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Remover Conta Bancária'
       click_button 'Adicionar Conta Bancária'
 
@@ -632,7 +632,7 @@ feature "Creditors" do
 
     page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
       page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
 
@@ -745,7 +745,7 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame farpado', :field => 'Descrição'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Remover Conta Bancária'
       click_button 'Adicionar Conta Bancária'
 
@@ -845,7 +845,7 @@ feature "Creditors" do
       page.should have_content 'Arame farpado'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
       page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
 
@@ -906,7 +906,7 @@ feature "Creditors" do
       fill_modal 'Materiais', :with => 'Arame comum', :field => 'Descrição'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Remover Conta Bancária'
       click_button 'Adicionar Conta Bancária'
 
@@ -982,7 +982,7 @@ feature "Creditors" do
       page.should have_content 'Arame comum'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
       page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
 
@@ -1073,7 +1073,7 @@ feature "Creditors" do
        page.should_not have_link "Documentos"
        page.should have_link "Materiais"
        page.should_not have_link "Representantes"
-       page.should have_link "Conta Bancária"
+       page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
        page.should have_link "Sanção Administrativa / Regularização"
     end
@@ -1096,7 +1096,7 @@ feature "Creditors" do
        page.should_not have_link "Documentos"
        page.should have_link "Materiais"
        page.should_not have_link "Representantes"
-       page.should have_link "Conta Bancária"
+       page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
        page.should have_link "Sanção Administrativa / Regularização"
     end
@@ -1119,7 +1119,7 @@ feature "Creditors" do
        page.should_not have_link "Documentos"
        page.should have_link "Materiais"
        page.should_not have_link "Representantes"
-       page.should have_link "Conta Bancária"
+       page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
        page.should have_link "Sanção Administrativa / Regularização"
     end
@@ -1142,7 +1142,7 @@ feature "Creditors" do
        page.should have_link "Documentos"
        page.should have_link "Materiais"
        page.should have_link "Representantes"
-       page.should have_link "Conta Bancária"
+       page.should have_link "Contas Bancárias"
        page.should have_link "Balanço"
        page.should have_link "Sanção Administrativa / Regularização"
     end
