@@ -11,7 +11,5 @@ class RegularizationOrAdministrativeSanction < ActiveRecord::Base
   validates :creditor, :occurrence, :presence => true
   validates :regularization_or_administrative_sanction_reason, :presence => true
   validates :suspended_until, :presence => true, :if => :administrative_sanction?
-  validates :suspended_until, :occurrence,
-    :timeliness => {:type => :date },
-    :allow_blank => true
+  validates :suspended_until, :occurrence, :timeliness => {:type => :date }, :allow_blank => true
 end
