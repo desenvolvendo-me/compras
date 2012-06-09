@@ -7,12 +7,12 @@ module PriceCollectionProposalsHelper
   end
 
   def proposal_annul_link
-    if can? :modify, :price_collection_proposal_annuls
-      if resource.active?
-        link_to "Anular", new_price_collection_proposal_price_collection_proposal_annul_path(resource), :class => 'button primary'
-      elsif resource.annulled?
-        link_to "Anulação", edit_price_collection_proposal_price_collection_proposal_annul_path(resource), :class => 'button primary'
-      end
+    return unless can? :modify, :price_collection_proposal_annuls
+
+    if resource.active?
+      link_to "Anular", new_price_collection_proposal_price_collection_proposal_annul_path(resource), :class => 'button primary'
+    elsif resource.annulled?
+      link_to "Anulação", edit_price_collection_proposal_price_collection_proposal_annul_path(resource), :class => 'button primary'
     end
   end
 end
