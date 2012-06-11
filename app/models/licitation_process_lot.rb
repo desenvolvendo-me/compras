@@ -10,7 +10,7 @@ class LicitationProcessLot < ActiveRecord::Base
   delegate :administrative_process_id, :to => :licitation_process, :allow_nil => true
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
 
-  validates :administrative_process_budget_allocation_items, :presence => true
+  validate :administrative_process_budget_allocation_items_should_have_at_least_one
   validate :items_should_belong_to_administrative_process
 
   orderize :id
@@ -38,5 +38,13 @@ class LicitationProcessLot < ActiveRecord::Base
 
   def count_lots
     self.class.licitation_process_less_than_me(licitation_process_id, id).count
+  end
+
+  private
+
+  def administrative_process_budget_allocation_items_should_have_at_least_one
+    if administrative_process_budget_allocation_items.empty?
+      errors.add :administrative_process_budget_allocation_items, :must_have_at_least_one_item
+    end
   end
 end

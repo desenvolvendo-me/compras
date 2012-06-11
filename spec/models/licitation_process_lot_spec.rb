@@ -8,7 +8,6 @@ require 'app/models/administrative_process_budget_allocation_item'
 describe LicitationProcessLot do
   it { should belong_to :licitation_process }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:nullify).order(:id) }
-  it { should validate_presence_of :administrative_process_budget_allocation_items }
 
   it "should return 'Lote x' as to_s method" do
     subject.stub(:count_lots).and_return(1)
@@ -42,5 +41,11 @@ describe LicitationProcessLot do
     classificator_class = double(:new => classificator)
 
     subject.winner_proposals(classificator_class).should eq 'the winner proposals'
+  end
+
+  it 'administrative process budget allocation items should have at least one' do
+    subject.stub(:administrative_process_budget_allocation_items => [])
+    subject.valid?
+    subject.errors.messages[:administrative_process_budget_allocation_items].should include "é necessário cadastrar pelo menos um item"
   end
 end
