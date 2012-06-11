@@ -87,36 +87,18 @@ describe Person do
 
     it { should allow_value('gabriel.sobrinho@gmail.com').for(:email) }
     it { should_not allow_value('missing.host').for(:email) }
+  end
 
-    context "when personable" do
-      let :personable do
-        double('Personable')
-      end
+  it 'should be special when personable_type is SpecialEntry' do
+    subject.stub(:personable_type).and_return('SpecialEntry')
 
-      it "should be special when does not have both cpf and cnpj" do
-        personable.stub(:respond_to?).with(:cpf).and_return(false)
-        personable.stub(:respond_to?).with(:cnpj).and_return(false)
-        subject.stub(:personable => personable)
+    subject.should be_special
+  end
 
-        subject.should be_special
-      end
+  it 'should not be special if personable_tye is not SpecialEntry' do
+    subject.stub(:personable_type).and_return('Company')
 
-      it "should not be special if have cpf" do
-        personable.stub(:respond_to?).with(:cpf).and_return(true)
-        personable.stub(:respond_to?).with(:cnpj).and_return(false)
-        subject.stub(:personable => personable)
-
-        subject.should_not be_special
-      end
-
-      it "should not be special if have cnpj" do
-        personable.should_receive(:respond_to?).with(:cpf).and_return(false)
-        personable.should_receive(:respond_to?).with(:cnpj).and_return(true)
-        subject.stub(:personable => personable)
-
-        subject.should_not be_special
-      end
-    end
+    subject.should_not be_special
   end
 
   it "should return cpf on identity document when personable respond_to cpf" do

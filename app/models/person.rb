@@ -56,10 +56,6 @@ class Person < ActiveRecord::Base
     cpf || cnpj
   end
 
-  def special?
-    !personable.respond_to?(:cpf) && !personable.respond_to?(:cnpj)
-  end
-
   def iss_intel_attributes
     {
       :cpf_cnpj          => (cpf || cnpj).scan(/[0-9]/).join,
@@ -90,5 +86,9 @@ class Person < ActiveRecord::Base
 
   def individual?
     personable_type == "Individual"
+  end
+
+  def special?
+    personable_type == "SpecialEntry"
   end
 end
