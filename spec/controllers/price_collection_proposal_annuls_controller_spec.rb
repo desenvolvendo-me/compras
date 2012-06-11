@@ -31,7 +31,7 @@ describe PriceCollectionProposalAnnulsController do
 
   describe "POST 'create'" do
     it 'should redirect to price_collection_proposal when was saved' do
-      PriceCollectionProposalAnnul.any_instance.stub(:save).and_return true
+      ResourceAnnul.any_instance.stub(:save).and_return true
       post :create, :price_collection_proposal_id => proposal.id
 
       response.should redirect_to(edit_price_collection_proposal_path(proposal))

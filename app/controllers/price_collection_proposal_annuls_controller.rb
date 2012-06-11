@@ -1,5 +1,6 @@
 class PriceCollectionProposalAnnulsController < CrudController
   belongs_to :price_collection_proposal
+  defaults :resource_class => ResourceAnnul
 
   def new
     object = build_resource

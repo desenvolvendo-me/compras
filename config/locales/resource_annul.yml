@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      resource_annul:
+        one: "Anulação de Recurso"
+        other: "Anulações de Recurso"
+
+    attributes:
+      resource_annul:
+        provider: "Fornecedor"
+        date: "Data"
+        description: "Justificativa"
+        employee: "Responsável"

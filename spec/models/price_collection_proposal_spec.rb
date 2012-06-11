@@ -2,7 +2,7 @@
 require 'model_helper'
 require 'app/models/price_collection_proposal'
 require 'app/models/price_collection_proposal_item'
-require 'app/models/price_collection_proposal_annul'
+require 'app/models/resource_annul'
 
 describe PriceCollectionProposal do
   it { should belong_to :price_collection }
