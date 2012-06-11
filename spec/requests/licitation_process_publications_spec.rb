@@ -7,7 +7,7 @@ feature "LicitationProcessPublications" do
   end
 
   scenario 'index should have link to back to licitation_process and create a new publication' do
-    LicitationProcess.make!(:processo_licitatorio)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos'
 
@@ -23,10 +23,11 @@ feature "LicitationProcessPublications" do
 
     page.should have_link 'Voltar ao processo licitatório'
     page.should have_link 'Criar Publicação'
+    page.should have_content "Publicações do Processo Licitatório #{licitation_process}"
   end
 
   scenario 'create a new publication' do
-    LicitationProcess.make!(:processo_licitatorio)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos'
 
@@ -41,6 +42,8 @@ feature "LicitationProcessPublications" do
     click_link 'Publicações'
 
     click_link 'Criar Publicação'
+
+    page.should have_content "Criar Publicação para o Processo Licitatório #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
     fill_mask "Data da publicação", :with => '20/04/2012'
@@ -61,7 +64,7 @@ feature "LicitationProcessPublications" do
   end
 
   scenario 'update an existing publication' do
-    LicitationProcess.make!(:processo_licitatorio)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos'
 
@@ -78,6 +81,8 @@ feature "LicitationProcessPublications" do
     within_records do
       click_link 'Publicacao'
     end
+
+    page.should have_content "Editar Publicação Publicacao do Processo Licitatório #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
     fill_mask "Data da publicação", :with => '20/04/2012'
