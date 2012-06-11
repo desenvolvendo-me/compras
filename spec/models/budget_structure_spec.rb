@@ -32,7 +32,6 @@ describe BudgetStructure do
   it { should belong_to :budget_structure_configuration }
   it { should belong_to :administration_type }
   it { should have_many(:direct_purchases).dependent(:restrict) }
-  it { should have_many(:administrative_processes).dependent(:restrict) }
 
   context 'should validate mask' do
     it 'and should not be valid with wrong mask' do

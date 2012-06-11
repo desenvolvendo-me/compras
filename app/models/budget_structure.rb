@@ -15,7 +15,6 @@ class BudgetStructure < ActiveRecord::Base
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :budget_structure_responsibles, :dependent => :destroy, :order => :id
   has_many :direct_purchases, :dependent => :restrict
-  has_many :administrative_processes, :dependent => :restrict
 
   delegate :mask, :to => :budget_structure_configuration, :allow_nil => true
 
