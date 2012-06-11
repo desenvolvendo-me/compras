@@ -18,8 +18,7 @@ class PriceCollectionProposalAnnulsController < CrudController
 
   def create_resource(object)
     object.transaction do
-      super
-      PriceCollectionAnnulment.new(parent).change!
+      PriceCollectionAnnulment.new(parent).change! if super
     end
   end
 

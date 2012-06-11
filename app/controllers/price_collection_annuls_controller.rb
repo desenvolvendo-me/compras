@@ -20,8 +20,7 @@ class PriceCollectionAnnulsController < CrudController
 
   def create_resource(object)
     object.transaction do
-      super
-      PriceCollectionAnnulment.new(object.price_collection).change!
+      PriceCollectionAnnulment.new(object.price_collection).change! if super
     end
   end
 end
