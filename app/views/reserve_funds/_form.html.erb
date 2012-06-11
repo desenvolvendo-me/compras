@@ -51,19 +51,13 @@
     $('form.reserve_fund :input').attr('disabled', true);
     $('form.reserve_fund .hint').hide();
   <% end %>
-  var savedValue = parsePtBrFloat('<%= f.object.value %>'),
-      savedAllocation = '<%= f.object.budget_allocation_id %>',
-      reservedValue = <%= f.object.budget_allocation_reserved_value || 0 %>,
-      persisted = <%= f.object.persisted? %>;
 
   $("#reserve_fund_budget_allocation_id").change(function (event, budget_allocation) {
     if (budget_allocation) {
       $('#reserve_fund_budget_allocation_amount').val(budget_allocation.amount);
-      reservedValue = parseFloat(budget_allocation.reserved_value);
       $('#reserve_fund_budget_allocation_reserved_value').val(budget_allocation.reserved_value);
     } else {
       $('#reserve_fund_budget_allocation_amount').val('');
-      reservedValue = 0;
       $('#reserve_fund_budget_allocation_reserved_value').val('');
     }
   });
