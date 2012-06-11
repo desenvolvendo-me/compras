@@ -28,6 +28,9 @@ feature "ReserveFunds" do
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
     fill_mask 'Data', :with => '22/02/2012'
     fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+
+    page.should have_field 'Valor reservado', :with => '10,50'
+
     fill_in 'Valor *', :with => '10,00'
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
     fill_in 'Número da licitação', :with => '001/2012'
@@ -46,6 +49,7 @@ feature "ReserveFunds" do
     page.should have_field  'Tipo', :with => 'Licitação'
     page.should have_field 'Data', :with => '22/02/2012'
     page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
+    page.should have_field 'Valor reservado', :with => '20,50'
     page.should have_field 'Valor *', :with => '10,00'
     page.should have_field 'Modalidade', :with => 'Pública'
     page.should have_field 'Número da licitação', :with => '001/2012'

@@ -43,3 +43,19 @@ ReserveFund.blueprint(:reparo_2011) do
   provider { Provider.make!(:wenderson_sa) }
   reason { 'Motivo para a reserva de dotação' }
 end
+
+ReserveFund.blueprint(:detran_2011) do
+  entity { Entity.make!(:detran) }
+  year { 2011 }
+  status { ReserveFundStatus::RESERVED }
+  reserve_allocation_type { ReserveAllocationType.make!(:licitation) }
+  date { Date.new(2012, 2, 21) }
+  value { 10.5 }
+  licitation_modality { LicitationModality.make!(:publica) }
+  licitation_number { "001" }
+  licitation_year { "2012" }
+  process_number { "002" }
+  process_year { "2013" }
+  provider { Provider.make!(:wenderson_sa) }
+  reason { 'Motivo para a reserva de dotação' }
+end

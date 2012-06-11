@@ -21,6 +21,7 @@ BudgetAllocation.blueprint(:alocacao) do
   date { Date.current }
   amount { "500,00" }
   kind { BudgetAllocationKind::DIVIDE }
+  reserve_funds { [ReserveFund.make!(:detran_2011, :budget_allocation => object)] }
 end
 
 BudgetAllocation.blueprint(:alocacao_extra) do

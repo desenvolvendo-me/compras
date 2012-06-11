@@ -60,9 +60,11 @@
     if (budget_allocation) {
       $('#reserve_fund_budget_allocation_amount').val(budget_allocation.amount);
       reservedValue = parseFloat(budget_allocation.reserved_value);
+      $('#reserve_fund_budget_allocation_reserved_value').val(budget_allocation.reserved_value);
     } else {
       $('#reserve_fund_budget_allocation_amount').val('');
       reservedValue = 0;
+      $('#reserve_fund_budget_allocation_reserved_value').val('');
     }
   });
 
