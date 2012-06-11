@@ -32,7 +32,6 @@ feature "LicitationProcesses" do
 
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Processo'
-      page.should have_disabled_field 'Estrutura orçamentária'
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Tipo de objeto'
       page.should have_disabled_field 'Forma de julgamento'
@@ -48,7 +47,6 @@ feature "LicitationProcesses" do
       select 'Global', :from => 'Tipo de empenho'
 
       # testing delegated fields of administrative process (filled by javascript)
-      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
       page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
@@ -119,7 +117,6 @@ feature "LicitationProcesses" do
       page.should have_select 'Tipo de empenho', :selected => 'Global'
 
       # testing delegated fields of administrative process
-      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
       page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
@@ -430,10 +427,6 @@ feature "LicitationProcesses" do
     end
 
     click_link 'Novo processo licitatório'
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Processo administrativo', :with => '1', :field => 'Processo'
-    end
 
     within_tab 'Dotações' do
       click_button 'Adicionar Item'

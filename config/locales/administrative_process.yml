@@ -11,7 +11,6 @@ pt-BR:
         year: "Ano"
         date: "Data do processo"
         protocol: "Número do protocolo"
-        budget_structure: "Estrutura orçamentária"
         modality: "Modalidade"
         item: "Inciso"
         object_type: "Tipo de objeto"

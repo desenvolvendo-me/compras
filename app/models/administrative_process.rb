@@ -1,5 +1,5 @@
 class AdministrativeProcess < ActiveRecord::Base
-  attr_accessible :budget_structure_id, :responsible_id, :process, :year, :date
+  attr_accessible :responsible_id, :process, :year, :date
   attr_accessible :modality, :protocol, :object_type, :status, :description
   attr_accessible :judgment_form_id, :administrative_process_budget_allocations_attributes
 
@@ -9,7 +9,6 @@ class AdministrativeProcess < ActiveRecord::Base
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
   has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true, :create_scopes => true
 
-  belongs_to :budget_structure
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
 
@@ -24,7 +23,7 @@ class AdministrativeProcess < ActiveRecord::Base
 
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
 
-  validates :year, :date, :budget_structure, :presence => true
+  validates :year, :date, :presence => true
   validates :modality, :object_type, :presence => true
   validates :responsible, :status, :presence => true
   validates :description, :judgment_form, :presence => true

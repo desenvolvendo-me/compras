@@ -25,7 +25,6 @@ feature "AdministrativeProcesses" do
       fill_mask 'Ano', :with => '2012'
       fill_mask 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Pregão presencial', :from => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
@@ -56,7 +55,6 @@ feature "AdministrativeProcesses" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '07/03/2012'
       page.should have_field 'Número do protocolo', :with => '00099/2012'
-      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       page.should have_select 'Modalidade', :selected => 'Pregão presencial'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
@@ -90,7 +88,6 @@ feature "AdministrativeProcesses" do
       page.should have_disabled_field 'Ano'
       page.should have_disabled_field 'Data do processo'
       page.should have_disabled_field 'Número do protocolo'
-      page.should have_disabled_field 'Estrutura orçamentária'
       page.should have_disabled_field 'Tipo de objeto'
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Forma de julgamento'
@@ -129,7 +126,6 @@ feature "AdministrativeProcesses" do
     page.should have_content "00088/2012"
     page.should have_content "07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
-    page.should have_content "02.00 - Secretaria de Educação"
     page.should have_content "Convite para compras e serviços de engenharia"
     page.should have_content "Compras e serviços"
     page.should have_content "Forma Global com Menor Preço"
@@ -191,7 +187,6 @@ feature "AdministrativeProcesses" do
       fill_in 'Ano', :with => '2012'
       fill_mask 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Pregão presencial', :from => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
@@ -237,7 +232,6 @@ feature "AdministrativeProcesses" do
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Número do protocolo', :with => '00099/2012'
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       select 'Compras e serviços', :from => 'Tipo de objeto'
       select 'Pregão presencial', :from => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
@@ -265,7 +259,6 @@ feature "AdministrativeProcesses" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '07/03/2012'
       page.should have_field 'Número do protocolo', :with => '00099/2012'
-      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
       page.should have_select 'Modalidade', :selected => 'Pregão presencial'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'

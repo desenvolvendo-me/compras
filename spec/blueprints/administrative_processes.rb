@@ -4,7 +4,6 @@ AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -20,7 +19,6 @@ AdministrativeProcess.blueprint(:compra_de_computadores) do
   year { 2013 }
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -36,7 +34,6 @@ AdministrativeProcess.blueprint(:compra_sem_convite) do
   year { 2014 }
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::PRESENCE_TRADING }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -52,7 +49,6 @@ AdministrativeProcess.blueprint(:compra_com_itens) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -68,7 +64,6 @@ AdministrativeProcess.blueprint(:compra_com_itens_2) do
   year { 2013 }
   date { Date.new(2013, 3, 7) }
   protocol { '00089/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -84,7 +79,6 @@ AdministrativeProcess.blueprint(:compra_com_itens_3) do
   year { 2013 }
   date { Date.new(2013, 3, 7) }
   protocol { '00089/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -100,7 +94,6 @@ AdministrativeProcess.blueprint(:compra_liberada) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -116,7 +109,6 @@ AdministrativeProcess.blueprint(:compra_aguardando) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
@@ -132,7 +124,6 @@ AdministrativeProcess.blueprint(:apuracao_por_itens) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
@@ -148,7 +139,6 @@ AdministrativeProcess.blueprint(:classificacao_por_itens) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::PRESENCE_TRADING }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
@@ -164,7 +154,6 @@ AdministrativeProcess.blueprint(:maior_lance_por_itens) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS }
   modality { AdministrativeProcessModality::AUCTION }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
@@ -180,7 +169,6 @@ AdministrativeProcess.blueprint(:classificacao_por_lote) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::PRESENCE_TRADING }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
@@ -196,7 +184,6 @@ AdministrativeProcess.blueprint(:apuracao_por_lote) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
@@ -212,7 +199,6 @@ AdministrativeProcess.blueprint(:maior_lance_por_lote) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS }
   modality { AdministrativeProcessModality::AUCTION }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
@@ -228,7 +214,6 @@ AdministrativeProcess.blueprint(:apuracao_global) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:global) }
@@ -244,7 +229,6 @@ AdministrativeProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   year { 2012 }
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
-  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
   modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
   judgment_form { JudgmentForm.make!(:por_lote_com_tecnica_e_preco) }

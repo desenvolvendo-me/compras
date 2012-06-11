@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/administrative_process'
-require 'app/models/budget_structure'
 require 'app/models/employee'
 require 'app/models/licitation_process'
 require 'app/models/administrative_process_budget_allocation'
@@ -18,7 +17,6 @@ describe AdministrativeProcess do
     subject.to_s.should eq '1/2012'
   end
 
-  it { should belong_to :budget_structure }
   it { should belong_to :responsible }
   it { should belong_to :judgment_form }
 
@@ -28,7 +26,6 @@ describe AdministrativeProcess do
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }
-  it { should validate_presence_of :budget_structure }
   it { should validate_presence_of :modality }
   it { should validate_presence_of :object_type }
   it { should validate_presence_of :description }
