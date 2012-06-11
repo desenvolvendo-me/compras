@@ -56,7 +56,7 @@ feature "PriceCollectionProposals" do
     end
 
     scenario 'editing proposal' do
-      PriceCollection.make!(:coleta_de_precos)
+      price_collection = PriceCollection.make!(:coleta_de_precos)
 
       click_link 'Processos'
 
@@ -74,6 +74,10 @@ feature "PriceCollectionProposals" do
 
       page.should_not have_button 'Salvar'
       page.should have_link 'Anular'
+
+      click_link 'Cancelar'
+
+      current_path.should == edit_price_collection_path(price_collection)
     end
   end
 
@@ -131,6 +135,10 @@ feature "PriceCollectionProposals" do
       page.should have_field 'Valor unitário'
       page.should have_disabled_field 'Valor total'
       page.should have_disabled_field 'Valor total do lote'
+
+      click_link 'Cancelar'
+
+      current_path.should == price_collection_proposals_path
     end
 
     scenario 'I can update my own proposals' do

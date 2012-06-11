@@ -15,4 +15,12 @@ module PriceCollectionProposalsHelper
       link_to "Anulação", edit_price_collection_proposal_price_collection_proposal_annul_path(resource), :class => 'button primary'
     end
   end
+
+  def proposal_cancel_button form
+    if current_user.provider?
+      form.button :cancel
+    else
+      form.button :cancel, :href => edit_price_collection_path(resource.price_collection)
+    end
+  end
 end
