@@ -12,3 +12,15 @@
     <%= render 'expirations', :f => f %>
   </div>
 </div>
+
+<script>
+  function fillParcelNumber() {
+    $('div.parcel .destroy[value=false]').each(function(index, item){
+      $(this).parents('.parcel').find('.order').html(index + 1);
+    });
+  }
+
+  $('form.precatory').delegate('.remove-parcel', 'click', fillParcelNumber);
+  $('form.precatory').bind('append.mustache', fillParcelNumber);
+  fillParcelNumber();
+</script>

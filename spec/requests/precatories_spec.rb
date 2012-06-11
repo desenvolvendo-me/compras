@@ -39,6 +39,8 @@ feature "Precatories" do
         fill_mask 'Data do pagamento', :with => '15/05/2012'
         fill_in 'Valor pago', :with => '10.000.000,00'
         fill_in 'Observação', :with => 'pagamento efetuado'
+
+        page.should have_content 'Parcela 1'
       end
 
       click_button 'Adicionar Parcela'
@@ -48,6 +50,8 @@ feature "Precatories" do
         fill_in 'Valor', :with => '10.000.000,00'
         select 'A vencer', :from => 'Situação'
         fill_in 'Valor pago', :with => '0,00'
+
+        page.should have_content 'Parcela 2'
       end
     end
 
@@ -90,6 +94,35 @@ feature "Precatories" do
         page.should have_field 'Data do pagamento', :with => ''
         page.should have_field 'Valor pago', :with => '0,00'
         page.should have_field 'Observação', :with => ''
+      end
+    end
+  end
+
+  scenario 'it should update order' do
+    click_link 'Contabilidade'
+
+    click_link 'Precatórios'
+
+    click_link 'Criar Precatório'
+
+    within_tab 'Vencimentos' do
+      click_button 'Adicionar Parcela'
+
+      within '.parcel:first' do
+        page.should have_content 'Parcela 1'
+      end
+
+      click_button 'Adicionar Parcela'
+
+      within '.parcel:last' do
+        page.should have_content 'Parcela 2'
+      end
+
+      click_button 'Remover Parcela'
+      click_button 'Adicionar Parcela'
+
+      within '.parcel:last' do
+        page.should have_content 'Parcela 2'
       end
     end
   end
