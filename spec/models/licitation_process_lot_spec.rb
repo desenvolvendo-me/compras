@@ -46,6 +46,6 @@ describe LicitationProcessLot do
   it 'administrative process budget allocation items should have at least one' do
     subject.stub(:administrative_process_budget_allocation_items => [])
     subject.valid?
-    subject.errors.messages[:administrative_process_budget_allocation_items].should include "é necessário cadastrar pelo menos um item"
+    subject.errors.messages[:administrative_process_budget_allocation_items].should include "deve haver ao menos um item"
   end
 end

@@ -44,7 +44,7 @@ class LicitationProcessLot < ActiveRecord::Base
 
   def administrative_process_budget_allocation_items_should_have_at_least_one
     if administrative_process_budget_allocation_items.empty?
-      errors.add :administrative_process_budget_allocation_items, :must_have_at_least_one_item
+      errors.add :administrative_process_budget_allocation_items, :should_be_at_least_one_item
     end
   end
 end

@@ -221,6 +221,7 @@ pt-BR:
       at_least_one_partner: "deve haver ao menos um sócio"
       must_have_at_least_one_budget_allocation: "é necessário cadastrar pelo menos uma dotação"
       must_have_at_least_one_item: "é necessário cadastrar pelo menos um item"
+      should_be_at_least_one_item: "deve haver ao menos um item"
       must_not_be_greater_than_budget_allocation_real_amount: "não pode ser maior que o saldo real da dotação (R$ %{value})"
       must_be_greater_than_pledge_emission_date: "deve ser maior que a data de emissão do empenho"
       must_be_greater_than_or_equals_pledge_emission_date: "deve ser maior ou igual a data de emissão do empenho"
