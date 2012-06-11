@@ -254,19 +254,19 @@ feature "BudgetAllocations" do
   end
 
   scenario 'destroy an existent budget_allocation' do
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao_extra)
 
     click_link 'Contabilidade'
 
     click_link 'Dotações Orçamentárias'
 
-    click_link 'Alocação'
+    click_link 'Alocação extra'
 
     click_link "Apagar", :confirm => true
 
     page.should have_notice 'Dotação Orçamentária apagado com sucesso.'
 
-    page.should_not have_content 'Alocação'
+    page.should_not have_content 'Alocação extra'
   end
 
   scenario 'validates uniqueness of name' do
