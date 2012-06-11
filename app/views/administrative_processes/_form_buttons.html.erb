@@ -9,6 +9,6 @@
   <% end %>
 
   <%= f.object.decorator.build_licitation_process_link %>
-  <%= link_to "Imprimir", resource_path(resource), :class => 'clear button neutral' if f.object.released? %>
+  <%= link_to "Solicitação de abertura de processo licitatório", resource_path(resource), :class => 'clear button neutral' if f.object.released? %>
   <%= f.button :cancel %>
 </div>

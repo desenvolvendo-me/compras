@@ -120,7 +120,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    click_link 'Imprimir'
+    click_link 'Solicitação de abertura de processo licitatório'
 
     page.should have_content administrative_process.to_s
     page.should have_content "00088/2012"
@@ -285,7 +285,7 @@ feature "AdministrativeProcesses" do
     end
 
     page.should_not have_select 'Status do processo administrativo', :selected => 'Liberado'
-    page.should_not have_link 'Imprimir'
+    page.should_not have_link 'Solicitação de abertura de processo licitatório'
   end
 
   scenario 'should have print button if status equals released' do
@@ -300,7 +300,7 @@ feature "AdministrativeProcesses" do
     end
 
     page.should have_select 'Status do processo administrativo', :selected => 'Liberado'
-    page.should have_link 'Imprimir'
+    page.should have_link 'Solicitação de abertura de processo licitatório'
   end
 
   scenario "should have a release button when editing an administrative process with status waiting" do
