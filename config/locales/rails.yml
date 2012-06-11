@@ -190,6 +190,7 @@ pt-BR:
       equal_to: "deve ser igual a %{count}"
       less_than: "deve ser menor que %{count}"
       less_than_or_equal_to: "deve ser menor ou igual a %{count}"
+      less_than_or_equal_to_predicted_value: "deve ser menor ou igual ao valor previsto (R$ %{count})"
       odd: "deve ser ímpar"
       even: "deve ser par"
       presence_at_least_one: "um dos campos precisa ser preenchido" # for presence_at_least_one validator

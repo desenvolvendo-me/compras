@@ -157,7 +157,7 @@ class LicitationProcess < ActiveRecord::Base
     administrative_process_budget_allocations.each do |apba|
       if apba.total_items_value > apba.value
         errors.add(:administrative_process_budget_allocations)
-        apba.errors.add(:total_items_value, :less_than_or_equal_to, :count => numeric_parser.localize(apba.value))
+        apba.errors.add(:total_items_value, :less_than_or_equal_to_predicted_value, :count => numeric_parser.localize(apba.value))
       end
     end
   end
