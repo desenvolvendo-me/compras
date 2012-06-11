@@ -53,7 +53,7 @@ class Person < ActiveRecord::Base
   end
 
   def identity_document
-    cpf || cnpj
+    cpf || cnpj || ''
   end
 
   def iss_intel_attributes

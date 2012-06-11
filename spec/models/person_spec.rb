@@ -101,6 +101,10 @@ describe Person do
     subject.should_not be_special
   end
 
+  it "should return an empty string on identity document when personable doesn't respond_to both cpf and cnpj" do
+    subject.identity_document.should eq ''
+  end
+
   it "should return cpf on identity document when personable respond_to cpf" do
     subject.stub(:cpf).and_return('059.894.946-10')
     subject.identity_document.should eq '059.894.946-10'
