@@ -1,7 +1,7 @@
 class LicitationProcessBidder < ActiveRecord::Base
   attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date, :status
   attr_accessible :receipt_date, :invited, :documents_attributes, :proposals_attributes
-  attr_accessible :technical_score
+  attr_accessible :technical_score, :person_ids
 
   has_enumeration_for :status, :with => LicitationProcessBidderStatus
 
@@ -11,6 +11,8 @@ class LicitationProcessBidder < ActiveRecord::Base
   has_many :documents, :class_name => :LicitationProcessBidderDocument, :dependent => :destroy, :order => :id
   has_many :document_types, :through => :documents
   has_many :proposals, :class_name => :LicitationProcessBidderProposal, :dependent => :destroy, :order => :id
+  has_many :accredited_representatives, :dependent => :destroy
+  has_many :people, :through => :accredited_representatives
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true

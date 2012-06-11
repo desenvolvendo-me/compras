@@ -32,6 +32,8 @@ feature "LicitationProcessBidders" do
   scenario 'creating a new bidder' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     Provider.make!(:sobrinho_sa)
+    Person.make!(:wenderson)
+    Person.make!(:joao_da_silva)
 
     click_link 'Processos'
 
@@ -56,6 +58,11 @@ feature "LicitationProcessBidders" do
     fill_in 'Protocolo', :with => '123456'
     fill_mask 'Data do protocolo', :with => I18n.l(Date.current)
     fill_mask 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+
+    within_tab 'Representantes credenciados' do
+      fill_modal 'Pessoas', :with => 'Wenderson Malheiros', :field => 'Nome'
+      fill_modal 'Pessoas', :with => 'Joao da Silva', :field => 'Nome'
+    end
 
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
@@ -100,6 +107,13 @@ feature "LicitationProcessBidders" do
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
+    within_tab 'Representantes credenciados' do
+      page.should have_content 'Wenderson Malheiros'
+      page.should have_content '003.149.513-34'
+      page.should have_content 'Joao da Silva'
+      page.should have_content '206.538.014-40'
+    end
+
     within_tab 'Documentos' do
       page.should have_field 'Documento', :with => 'Fiscal'
       page.should have_field 'Número/certidão', :with => '222222'
@@ -132,6 +146,7 @@ feature "LicitationProcessBidders" do
   scenario 'updating an existing bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador)
     Provider.make!(:sobrinho_sa)
+    Person.make!(:wenderson)
 
     click_link 'Processos'
 
@@ -158,6 +173,12 @@ feature "LicitationProcessBidders" do
     fill_in 'Protocolo', :with => '111111'
     fill_mask 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     fill_mask 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+
+    within_tab 'Representantes credenciados' do
+      click_button 'Remover Pessoa'
+
+      fill_modal 'Pessoas', :with => 'Wenderson Malheiros', :field => 'Nome'
+    end
 
     within_tab 'Documentos' do
       fill_in 'Número/certidão', :with => '333333'
@@ -198,6 +219,13 @@ feature "LicitationProcessBidders" do
     page.should have_field 'Protocolo', :with => '111111'
     page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+
+    within_tab 'Representantes credenciados' do
+      page.should_not have_content 'Gabriel Sobrinho'
+      page.should_not have_content '003.151.987-37'
+      page.should have_content 'Wenderson Malheiros'
+      page.should have_content '003.149.513-34'
+    end
 
     within_tab 'Documentos' do
       page.should have_field 'Documento', :with => 'Fiscal'

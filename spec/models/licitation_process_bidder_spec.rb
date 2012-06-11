@@ -5,6 +5,8 @@ require 'app/models/licitation_process_bidder_proposal'
 require 'app/models/licitation_process_bidder_document'
 require 'app/models/licitation_process'
 require 'app/models/provider'
+require 'app/models/licitation_process_bidder'
+require 'app/models/accredited_representative'
 
 describe LicitationProcessBidder do
   it { should belong_to :licitation_process }
@@ -12,6 +14,8 @@ describe LicitationProcessBidder do
 
   it { should have_many(:documents).dependent(:destroy).order(:id) }
   it { should have_many(:document_types).through(:documents) }
+  it { should have_many(:accredited_representatives).dependent(:destroy) }
+  it { should have_many(:people).through(:accredited_representatives) }
 
   it { should validate_presence_of :provider }
 

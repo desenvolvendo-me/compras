@@ -1,0 +1,12 @@
+<tr class="record">
+  <td>
+    <%= name %>
+  </td>
+  <td>
+    <%= identity_document %>
+  </td>
+  <td>
+    <input id="<%= f.sanitized_object_name %>_people_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[person_ids][]" value="<%= id %>" />
+    <button class="button negative modal-finder-remove">Remover Pessoa</button>
+  </td>
+</tr>

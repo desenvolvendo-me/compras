@@ -5,6 +5,7 @@ LicitationProcessBidder.blueprint(:licitante) do
   protocol_date { Date.current }
   receipt_date { Date.tomorrow }
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
+  people { [Person.make!(:sobrinho)] }
 end
 
 LicitationProcessBidder.blueprint(:licitante_sobrinho) do

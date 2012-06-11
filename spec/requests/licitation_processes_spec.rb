@@ -473,7 +473,9 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    page.should have_field 'Documento', :with => 'Fiscal'
+    within_tab 'Documentos' do
+      page.should have_field 'Documento', :with => 'Fiscal'
+    end
 
     click_link 'Cancelar'
 
@@ -497,8 +499,10 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    page.should_not have_field 'Documento', :with => 'Fiscal'
-    page.should have_field 'Documento', :with => 'Oficial'
+    within_tab 'Documentos' do
+      page.should_not have_field 'Documento', :with => 'Fiscal'
+      page.should have_field 'Documento', :with => 'Oficial'
+    end
   end
 
   scenario "count link should be available when envelope opening date is the current date" do
