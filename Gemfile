@@ -15,6 +15,7 @@ end
 
 gem 'activerecord-connections', '0.0.3'
 
+gem 'unico', :git => 'git@github.com:nohupbrasil/unico.git'
 gem 'devise', '2.0.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
@@ -23,7 +24,7 @@ gem 'will_paginate', '3.0.3'
 
 gem 'squeel', '1.0.0'
 gem 'carrierwave', '0.5.8'
-gem 'awesome_nested_set', '2.1.2'
+gem 'awesome_nested_set', '2.1.3'
 
 gem 'mail_validator', '0.2.0'
 gem 'cnpj_validator', '0.3.1'
@@ -39,7 +40,7 @@ gem 'jbuilder', '0.4.0'
 gem 'foreigner', '1.1.4'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
-gem 'enumerate_it', '0.7.12'
+gem 'enumerate_it', '0.7.14'
 
 group :assets do
   gem 'uglifier', '1.2.1'
