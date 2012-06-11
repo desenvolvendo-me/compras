@@ -8,4 +8,3 @@ describe ReferenceUnitDecorator do
     subject.summary.should eq 'Meters'
   end
 end
-
