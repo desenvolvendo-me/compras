@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'lib/annullable'
 require 'app/models/resource_annul'
 
 describe ResourceAnnul do
