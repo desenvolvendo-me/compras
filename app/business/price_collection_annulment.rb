@@ -1,4 +1,4 @@
-class PriceCollectionProposalAnnulment
+class PriceCollectionAnnulment
   def initialize(proposal)
     @proposal = proposal
   end

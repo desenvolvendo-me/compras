@@ -38,7 +38,7 @@ describe PriceCollectionProposalAnnulsController do
     end
 
     it 'should annul the proposal' do
-      PriceCollectionProposalAnnulment.any_instance.should_receive(:change!)
+      PriceCollectionAnnulment.any_instance.should_receive(:change!)
 
       post :create, :price_collection_proposal_id => proposal.id
     end

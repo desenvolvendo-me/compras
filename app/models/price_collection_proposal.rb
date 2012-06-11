@@ -7,7 +7,7 @@ class PriceCollectionProposal < ActiveRecord::Base
   has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :id
   has_one :annul, :class_name => 'ResourceAnnul', :as => :resource, :dependent => :destroy
 
-  has_enumeration_for :status, :with => PriceCollectionProposalStatus, :create_helpers => true
+  has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
 
   delegate :date, :full_period, :to => :price_collection, :allow_nil => true, :prefix => true
   delegate :price_collection_lots, :to => :price_collection, :allow_nil => true
@@ -46,7 +46,7 @@ class PriceCollectionProposal < ActiveRecord::Base
   end
 
   def annul!
-    update_attribute :status, PriceCollectionProposalStatus::ANNULLED
+    update_attribute :status, PriceCollectionStatus::ANNULLED
   end
 
   def self.by_price_collection_and_provider(params = {})
