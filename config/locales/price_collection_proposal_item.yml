@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       price_collection_proposal_item:
         brand: "Marca"
-        reference_unit: "Unidade de referência"
+        reference_unit: "Unidade"
         quantiy: "Quantidade"
         unit_price: "Valor unitário"
         total_price: "Valor total"

@@ -9,5 +9,5 @@ pt-BR:
       price_collection_lot_item:
         lot_number: "Número do item"
         brand: "Marca"
-        reference_unit: "Unidade de referência"
+        reference_unit: "Unidade"
         quantity: "Quantidade"

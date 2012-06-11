@@ -58,14 +58,14 @@ feature "Pledges", :driver => :selenium do
 
       click_button "Adicionar Item"
 
-      page.should have_disabled_field "U. medida"
+      page.should have_disabled_field "Unidade"
 
       fill_modal 'Item', :with => "Arame farpado", :field => "Descrição"
       fill_in 'Quantidade', :with => "2"
       fill_in 'Valor unitário', :with => "5,00"
 
       # getting the reference unit and description via javascript
-      page.should have_field 'U. medida', :with => "UN"
+      page.should have_field 'Unidade', :with => "UN"
       page.should have_field 'Descrição', :with => "Arame farpado"
 
       # calculating total item price via javascript
@@ -127,7 +127,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Item', :with => "02.02.00001 - Arame farpado"
       page.should have_field 'Quantidade', :with => "2"
       page.should have_field 'Valor unitário', :with => "5,00"
-      page.should have_field 'U. medida', :with => "UN"
+      page.should have_field 'Unidade', :with => "UN"
       page.should have_field 'Descrição', :with => "Arame farpado"
       page.should have_field 'Valor total', :with => "10,00"
     end
@@ -423,7 +423,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_disabled_field 'Valor'
       page.should have_disabled_field 'Item'
       page.should have_disabled_field 'Descrição'
-      page.should have_disabled_field 'U. medida'
+      page.should have_disabled_field 'Unidade'
       page.should have_disabled_field 'Quantidade'
       page.should have_disabled_field 'Valor unitário'
       page.should have_disabled_field 'Valor total'

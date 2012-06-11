@@ -9,4 +9,4 @@ pt-BR:
       public_service_calculation:
         name: "Nome"
         value: "Valor"
-        reference_unit: "Unidade de referência"
+        reference_unit: "Unidade"

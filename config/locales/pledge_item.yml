@@ -9,7 +9,7 @@ pt-BR:
       pledge_item:
         material: "Item"
         description: "Descrição"
-        reference_unit: "U. medida"
+        reference_unit: "Unidade"
         quantity: "Quantidade"
         unit_price: "Valor unitário"
         estimated_total_price: "Valor total"

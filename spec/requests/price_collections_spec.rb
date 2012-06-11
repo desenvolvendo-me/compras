@@ -48,8 +48,8 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
-      page.should have_disabled_field 'Unidade de referência'
-      page.should have_field 'Unidade de referência', :with => 'UN'
+      page.should have_disabled_field 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca', :with => 'Norton'
       fill_in 'Quantidade', :with => '10'
@@ -108,8 +108,8 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
-      page.should have_disabled_field 'Unidade de referência'
-      page.should have_field 'Unidade de referência', :with => 'UN'
+      page.should have_disabled_field 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca', :with => 'Norton'
       fill_in 'Quantidade', :with => '10'
@@ -154,8 +154,8 @@ feature "PriceCollections" do
     within_tab 'Lotes de itens' do
       page.should have_field 'Observações', :with => 'lote 1'
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_disabled_field 'Unidade de referência'
-      page.should have_field 'Unidade de referência', :with => 'UN'
+      page.should have_disabled_field 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Marca', :with => 'Norton'
       page.should have_field 'Quantidade', :with => '10'
     end
@@ -262,8 +262,8 @@ feature "PriceCollections" do
     within_tab 'Lotes de itens' do
       page.should have_field 'Observações', :with => 'lote 2'
       page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      page.should have_disabled_field 'Unidade de referência'
-      page.should have_field 'Unidade de referência', :with => 'UN'
+      page.should have_disabled_field 'Unidade'
+      page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Marca', :with => 'Aço inox'
       page.should have_field 'Quantidade', :with => '100'
     end

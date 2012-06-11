@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       item_cost_improvement:
         name: "Nome"
-        reference_unit: "Unidade de referência"
+        reference_unit: "Unidade"
         value: "Valor"
         percentage: "Percentual"
         unit_value: "Valor unitário"
