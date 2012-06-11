@@ -45,7 +45,7 @@ class LicitationProcess < ActiveRecord::Base
 
   validates :process_date, :administrative_process, :object_description, :capability, :presence => true
   validates :period, :period_unit, :expiration, :expiration_unit, :presence => true
-  validates :readjustment_index, :payment_method, :envelope_delivery_time, :year, :presence => true
+  validates :payment_method, :envelope_delivery_time, :year, :presence => true
   validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
   validates :type_of_calculation, :presence => true
   validate :total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value
