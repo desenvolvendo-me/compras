@@ -208,43 +208,4 @@ feature "ReserveFunds" do
     page.should have_disabled_field 'Modalidade'
     page.should have_field 'Número da licitação', :with => ''
   end
-
-  scenario 'should calculate reserved value' do
-    ReserveFund.make!(:detran_2012)
-
-    click_link 'Contabilidade'
-
-    click_link 'Reservas de Dotação'
-
-    click_link 'Criar Reserva de Dotação'
-
-    fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
-
-    page.should have_field 'Valor reservado', :with => '10,50'
-
-    fill_in 'Valor *', :with => '10,00'
-
-    page.should have_field 'Valor reservado', :with => '20,50'
-  end
-
-  scenario 'should calculate reserved value when editing a reserve fund' do
-    BudgetAllocation.make!(:alocacao_extra)
-
-    click_link 'Contabilidade'
-
-    click_link 'Reservas de Dotação'
-
-    click_link 'Criar Reserva de Dotação'
-
-    fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
-
-    fill_in 'Valor *', :with => '20,00'
-
-    page.should have_field 'Valor reservado', :with => '20,00'
-
-    # re-selecting the same budget allocation
-    fill_modal 'Dotação orçamentária', :with => '2011', :field => 'Exercício'
-
-    page.should have_field 'Valor reservado', :with => '20,00'
-  end
 end
