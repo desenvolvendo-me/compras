@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    price_collection_annul_type:
+      annulment: "Anulação"
+      revocation: "Revogação"

@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    price_collection_status:
+      active: 'Ativo'
+      annulled: 'Anulado'

@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/price_collection_proposal'
 require 'app/models/price_collection_proposal_item'
+require 'lib/annullable'
 require 'app/models/resource_annul'
 
 describe PriceCollectionProposal do
@@ -70,7 +71,7 @@ describe PriceCollectionProposal do
 
   describe '#annul!' do
     it 'should change the subject status to annuled' do
-      subject.should_receive(:update_attribute).with(:status, PriceCollectionProposalStatus::ANNULLED)
+      subject.should_receive(:update_attribute).with(:status, PriceCollectionStatus::ANNULLED)
 
       subject.annul!
     end

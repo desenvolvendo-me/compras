@@ -7,7 +7,7 @@ class PriceCollection < ActiveRecord::Base
 
   attr_readonly :year, :collection_number
 
-  has_enumeration_for :status
+  has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :proposal_validity_unit, :with => PeriodUnit
   has_enumeration_for :type_of_calculation, :with => PriceCollectionTypeOfCalculation
@@ -16,6 +16,7 @@ class PriceCollection < ActiveRecord::Base
   belongs_to :employee
   belongs_to :payment_method
 
+  has_one :annul, :class_name => 'PriceCollectionAnnul'
   has_many :price_collection_lots, :dependent => :destroy, :order => :id
   has_many :items, :through => :price_collection_lots
   has_many :price_collection_proposals, :dependent => :destroy, :order => :id
@@ -58,6 +59,10 @@ class PriceCollection < ActiveRecord::Base
 
   def full_period
     "#{period} #{period_unit_humanize}"
+  end
+
+  def annul!
+    update_attribute :status, PriceCollectionStatus::ANNULLED
   end
 
   protected

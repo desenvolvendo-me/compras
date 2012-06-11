@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      price_collection_annul:
+        one: "Anulação de Coleta de Preço"
+        other: "Anulações de Coletas de Preço"
+
+    attributes:
+      price_collection_annul:
+        description: "Justificativa"
+        date: "Data"
+        employee: "Responsável"
+        price_collection: "Coleta de Preço"
+        annul_type: "Tipo da Anulação"

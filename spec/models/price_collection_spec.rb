@@ -4,12 +4,15 @@ require 'app/models/price_collection'
 require 'app/models/price_collection_lot'
 require 'app/models/price_collections_provider'
 require 'app/models/price_collection_proposal'
+require 'lib/annullable'
+require 'app/models/price_collection_annul'
 
 describe PriceCollection do
   context 'relationships' do
     it { should belong_to :delivery_location }
     it { should belong_to :employee }
     it { should belong_to :payment_method }
+    it { should have_one(:annul) }
     it { should have_many :price_collection_lots }
     it { should have_many(:price_collection_proposals).dependent(:destroy).order(:id) }
     it { should have_many(:providers).through(:price_collection_proposals) }
@@ -93,5 +96,13 @@ describe PriceCollection do
     subject.stub(:period_unit_humanize).and_return('dias')
 
     subject.full_period.should eq '10 dias'
+  end
+
+  describe '#annul!' do
+    it 'should change the subject status to annuled' do
+      subject.should_receive(:update_attribute).with(:status, PriceCollectionStatus::ANNULLED)
+
+      subject.annul!
+    end
   end
 end
