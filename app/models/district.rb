@@ -3,6 +3,8 @@ class District < ActiveRecord::Base
 
   belongs_to :city
 
+  has_many :neighborhoods, :dependent => :restrict
+
   validates :name, :city, :presence => true
   validates :name, :uniqueness => true, :allow_blank => { :allow_blank => true }
 

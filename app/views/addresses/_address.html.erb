@@ -8,6 +8,7 @@
 <%= a.input :neighborhood, :url => modal_neighborhoods_path(:street_id => a.object.street_id), :disabled => a.object.street.nil? %>
 <%= a.input :condominium %>
 <%= a.input :land_subdivision %>
+<%= a.input :district, :disabled => true %>
 <%= a.input :city, :disabled => true %>
 <%= a.input :zip_code, :input_html => { :size => 10 } %>
 <%= a.input :state, :disabled => true %>

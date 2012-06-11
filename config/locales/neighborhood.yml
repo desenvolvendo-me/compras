@@ -9,6 +9,4 @@ pt-BR:
       neighborhood:
         name: "Nome"
         city: "Cidade"
-
-
-
+        district: "Distrito"

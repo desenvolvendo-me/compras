@@ -97,4 +97,48 @@ feature "Neighborhoods" do
 
     page.should_not have_notice 'Bairro apagado com sucesso.'
   end
+
+  scenario 'validate uniquenes of name scoped to district' do
+    City.make!(:porto_alegre)
+    Neighborhood.make!(:portugal)
+    District.make!(:oeste)
+
+    click_link 'Cadastros Diversos'
+
+    click_link 'Bairros'
+
+    click_link 'Criar Bairro'
+
+    fill_in 'Nome', :with => 'Portugal'
+
+    within_modal 'Cidade' do
+      fill_in 'Nome', :with => 'Porto Alegre'
+
+      click_button 'Pesquisar'
+
+      click_record 'Porto Alegre'
+    end
+
+    within_modal 'Distrito' do
+      fill_in 'Nome', :with => 'Leste'
+
+      click_button 'Pesquisar'
+
+      click_record 'Leste'
+    end
+
+    click_button 'Salvar'
+    page.should have_content 'já está em uso'
+
+    within_modal 'Distrito' do
+      fill_in 'Nome', :with => 'Oeste'
+
+      click_button 'Pesquisar'
+
+      click_record 'Oeste'
+    end
+
+    click_button 'Salvar'
+    page.should have_notice 'Bairro criado com sucesso.'
+  end
 end

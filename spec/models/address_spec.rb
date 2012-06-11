@@ -13,6 +13,11 @@ describe Address do
     subject.to_s.should eq 'Amazonas, 13140 - Centro'
   end
 
+  it 'delegates district to neighborhood' do
+    subject.stub(:neighborhood).and_return(double(:district => 'Venda Nova'))
+    subject.district.should eq 'Venda Nova'
+  end
+
   it { should belong_to :neighborhood }
   it { should belong_to :street }
   it { should belong_to :land_subdivision }

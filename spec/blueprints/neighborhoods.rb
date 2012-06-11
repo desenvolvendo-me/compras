@@ -7,6 +7,7 @@ end
 Neighborhood.blueprint(:portugal) do
   name  { 'Portugal' }
   city { City.make!(:porto_alegre) }
+  district { District.make!(:leste) }
 end
 
 Neighborhood.blueprint(:alvorada) do

@@ -9,10 +9,10 @@ class Address < ActiveRecord::Base
   belongs_to :condominium
   belongs_to :addressable, :polymorphic => true
 
-  delegate :street_type, :to => 'street', :allow_nil => true
-  delegate :city, :to => 'neighborhood', :allow_nil => true
-  delegate :state, :to => 'city', :allow_nil => true
-  delegate :country, :to => 'state', :allow_nil => true
+  delegate :street_type, :to => :street, :allow_nil => true
+  delegate :city, :district, :to => :neighborhood, :allow_nil => true
+  delegate :state, :to => :city, :allow_nil => true
+  delegate :country, :to => :state, :allow_nil => true
 
   validates :neighborhood, :street, :zip_code, :presence => true
   validates :zip_code, :mask => "99999-999", :allow_blank => true

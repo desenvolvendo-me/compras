@@ -1,4 +1,23 @@
 <fieldset>
   <%= f.input :name %>
   <%= f.input :city %>
+  <%= f.input :district, :disabled => true, :url => modal_districts_path(:filter => {:city_id => f.object.city_id}) %>
 </fieldset>
+
+<script>
+  if ($("#<%= f.sanitized_object_name %>_city").val()) {
+    $("#<%= f.sanitized_object_name %>_district").attr('disabled', false);
+  }
+
+  $("#<%= f.sanitized_object_name %>_city").change(function (e, record) {
+    if (record) {
+      $("#<%= f.sanitized_object_name %>_district").data("modal-url", "<%= modal_districts_path %>?filter[city_id]=" + record.id).val("");
+      $("#<%= f.sanitized_object_name %>_district_id").val("");
+    }
+    if ($(this).val()) {
+      $("#<%= f.sanitized_object_name %>_district").attr("disabled", false);
+    } else {
+      $("#<%= f.sanitized_object_name %>_district").attr("disabled", true);
+    }
+  })
+</script>
