@@ -625,7 +625,6 @@ Tributario::Application.routes.draw do
 
   resources :price_collection_proposals, :only => [:index, :edit, :update] do
     collection do
-      get :filter
       get :modal
     end
 
