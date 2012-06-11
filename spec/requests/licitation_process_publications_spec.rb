@@ -6,7 +6,7 @@ feature "LicitationProcessPublications" do
     sign_in
   end
 
-  scenario 'index should have show link to back to licitation_process and create a new publication' do
+  scenario 'index should have link to back to licitation_process and create a new publication' do
     LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos'
