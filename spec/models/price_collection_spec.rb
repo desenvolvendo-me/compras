@@ -29,6 +29,7 @@ describe PriceCollection do
     it { should validate_presence_of :expiration }
     it { should validate_presence_of :proposal_validity }
     it { should validate_presence_of :proposal_validity_unit }
+    it { should validate_presence_of :type_of_calculation }
 
     it { should allow_value('2012').for(:year) }
     it { should_not allow_value('201').for(:year) }

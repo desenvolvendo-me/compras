@@ -29,6 +29,7 @@ class PriceCollection < ActiveRecord::Base
   validates :collection_number, :year, :date, :delivery_location, :employee, :presence => true
   validates :payment_method, :object_description, :expiration, :presence => true
   validates :period, :period_unit, :proposal_validity, :proposal_validity_unit, :presence => true
+  validates :type_of_calculation, :presence => true
   validates :year, :mask => "9999"
   validates :date, :expiration, :timeliness => { :on_or_after => :today, :type => :date }, :on => :create
 
