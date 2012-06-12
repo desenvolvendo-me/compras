@@ -58,6 +58,5 @@ feature 'PriceCollectionAnnuls' do
 
     page.should_not have_link 'Apagar'
     page.should_not have_button 'Salvar'
-
   end
 end
