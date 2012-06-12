@@ -4,7 +4,6 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -34,7 +33,6 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   process { 1 }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens_2) }
-  object_description { "Descricao do computador" }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -65,7 +63,6 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -96,7 +93,6 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -127,7 +123,6 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   process { 1 }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:compra_com_itens_3) }
-  object_description { "Descricao das canetas" }
   pledge_type { PledgeType::ESTIMATED }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -158,7 +153,6 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_por_itens) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -190,7 +184,6 @@ LicitationProcess.blueprint(:classificar_por_itens) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:classificacao_por_itens) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -222,7 +215,6 @@ LicitationProcess.blueprint(:maior_lance_por_itens) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:maior_lance_por_itens) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -254,7 +246,6 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_por_lote) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -286,7 +277,6 @@ LicitationProcess.blueprint(:classificar_por_lote) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:classificacao_por_lote) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -318,7 +308,6 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:maior_lance_por_lote) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -350,7 +339,6 @@ LicitationProcess.blueprint(:apuracao_global) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_global) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -382,7 +370,6 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
   administrative_process { AdministrativeProcess.make!(:apuracao_melhor_tecnica_e_preco) }
-  object_description { "Descricao" }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }

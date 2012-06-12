@@ -11,7 +11,6 @@ pt-BR:
         year: "Ano"
         process_date: "Data do processo"
         administrative_process: "Processo administrativo"
-        object_description: "Detalhamento do objeto"
         capability: "Fonte de recurso"
         expiration: "Validade da proposta"
         expiration_unit: "Unidade da validade da proposta"

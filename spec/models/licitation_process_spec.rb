@@ -45,7 +45,6 @@ describe LicitationProcess do
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }
   it { should validate_presence_of :administrative_process }
-  it { should validate_presence_of :object_description }
   it { should validate_presence_of :capability }
   it { should validate_presence_of :expiration }
   it { should validate_presence_of :expiration_unit }

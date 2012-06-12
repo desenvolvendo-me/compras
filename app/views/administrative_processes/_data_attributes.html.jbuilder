@@ -1,5 +1,4 @@
 builder resource, json do
-  json.budget_structure     resource.budget_structure.to_s
   json.modality             resource.modality
   json.modality_humanize    resource.modality_humanize
   json.item                 resource.item
