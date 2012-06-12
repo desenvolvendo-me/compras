@@ -16,7 +16,7 @@ module PriceCollectionProposalsHelper
     end
   end
 
-  def proposal_cancel_button form
+  def proposal_cancel_button(form)
     if current_user.provider?
       form.button :cancel
     else
