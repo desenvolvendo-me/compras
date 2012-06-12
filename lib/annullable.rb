@@ -8,9 +8,9 @@ module Annullable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :employee
-
     attr_accessible :date, :description, :employee_id
+
+    belongs_to :employee
 
     validates :date, :employee, :presence => true
   end
