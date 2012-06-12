@@ -77,7 +77,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Cancelar'
 
-      current_path.should == edit_price_collection_path(price_collection)
+      page.should have_content 'Editar 1/2012'
     end
   end
 
@@ -138,7 +138,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Cancelar'
 
-      current_path.should == price_collection_proposals_path
+      page.should have_content 'Propostas Para Coletas de Preços'
     end
 
     scenario 'I can update my own proposals' do
