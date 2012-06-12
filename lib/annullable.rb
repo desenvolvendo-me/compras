@@ -5,13 +5,13 @@
 #    date         date
 #    description  text
 module Annullable
-  def self.included(receiver)
-    receiver.class_eval do
-      belongs_to :employee
+  extend ActiveSupport::Concern
 
-      attr_accessible :date, :description, :employee_id
+  included do
+    belongs_to :employee
 
-      validates :date, :employee, :presence => true
-    end
+    attr_accessible :date, :description, :employee_id
+
+    validates :date, :employee, :presence => true
   end
 end
