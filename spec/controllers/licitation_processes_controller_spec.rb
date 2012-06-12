@@ -46,8 +46,7 @@ describe LicitationProcessesController do
   describe 'PUT #update' do
     let :licitation_process do
       double(:licitation_process,
-             :id => 1,
-             :object_description => 'Descricao',
+             :id => 1
       )
     end
 
@@ -59,17 +58,17 @@ describe LicitationProcessesController do
       it 'should not update any field when publication not allow update licitation process' do
         LicitationProcess.any_instance.stub(:updatable?).and_return(false)
 
-        put :update, :id => licitation_process.to_param, :licitation_process => { :object_description => "Descrição do objeto" }
+        put :update, :id => licitation_process.to_param, :licitation_process => { :observations => "Descrição do objeto" }
 
-        assigns(:licitation_process).object_description.should eq 'Descricao'
+        assigns(:licitation_process).observations.should eq 'observacoes'
       end
 
       it 'should update any field when has not publication or when publication allow update licitation process' do
         LicitationProcess.any_instance.stub(:updatable?).and_return(true)
 
-        put :update, :id => licitation_process.id, :licitation_process => { :object_description => "Descrição do objeto" }
+        put :update, :id => licitation_process.id, :licitation_process => { :observations => "Descrição do objeto" }
 
-        assigns(:licitation_process).object_description.should eq 'Descrição do objeto'
+        assigns(:licitation_process).observations.should eq 'Descrição do objeto'
       end
 
       it 'should redirect to administrative process edit page after update' do
