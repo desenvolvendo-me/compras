@@ -39,6 +39,7 @@ describe PriceCollectionAnnulsController do
     let :price_collection do
       PriceCollection.make!(:coleta_de_precos)
     end
+
     before do
       PriceCollectionAnnul.any_instance.stub(:save).and_return true
       PriceCollectionAnnul.any_instance.stub(:price_collection).and_return price_collection
