@@ -119,7 +119,8 @@ feature "PriceCollections" do
       click_on 'Adicionar Fornecedor'
 
       fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
-      fill_in 'Email', :with => 'contato@wendersonsa.com'
+      page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
+      page.should have_disabled_field 'Email'
       fill_in 'Login', :with => 'wenderson.sa'
     end
 
@@ -163,7 +164,7 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_disabled_field 'Fornecedor'
-      page.should have_field 'Email', :with => 'contato@wendersonsa.com'
+      page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
       page.should have_disabled_field 'Email'
       page.should have_field 'Login', :with => 'wenderson.sa'
       page.should have_disabled_field 'Login'
@@ -183,7 +184,9 @@ feature "PriceCollections" do
     Employee.make!(:wenderson)
     PaymentMethod.make!(:cheque)
     Material.make!(:arame_farpado)
-    Provider.make!(:sobrinho_sa)
+    provider = Provider.make!(:sobrinho_sa)
+    person = provider.person
+    person.update_attribute :email, ''
 
     click_link 'Processos'
 
@@ -228,6 +231,8 @@ feature "PriceCollections" do
       click_on 'Adicionar Fornecedor'
 
       fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+      page.should_not have_disabled_field 'Email'
+      page.should_not have_disabled_field 'Login'
       fill_in 'Email', :with => 'contato@sobrinho.com'
       fill_in 'Login', :with => 'sobrinho.sa'
     end
@@ -271,6 +276,8 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       page.should_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Email', :with => 'contato@sobrinho.com'
+      page.should have_field 'Login', :with => 'sobrinho.sa'
     end
   end
 
@@ -619,6 +626,27 @@ feature "PriceCollections" do
 
         page.should have_content 'Item 1'
       end
+    end
+  end
+
+  scenario 'disable login and email when the provider has a related user' do
+    Provider.make!(:wenderson_sa_with_user)
+
+    click_link 'Processos'
+
+    click_link 'Coletas de Preços'
+
+    click_link 'Criar Coleta de Preços'
+
+    within_tab 'Fornecedores' do
+      click_button 'Adicionar Fornecedor'
+
+      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+
+      page.should have_disabled_field 'Email'
+      page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
+      page.should have_disabled_field 'Login'
+      page.should have_field 'Login', :with => 'wenderson.malheiros'
     end
   end
 end

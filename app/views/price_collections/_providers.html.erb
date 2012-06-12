@@ -31,4 +31,21 @@
       $(inputs[2]).val(provider.login);
     }
   });
+
+  $('#providers-list').on('change', '.provider-modal input[type=hidden]', function (event, provider) {
+    var mainDiv = $(this).closest('div.provider_collection_proposal');
+    var emailInput = mainDiv.find('input.email');
+    var loginInput = mainDiv.find('input.login');
+
+    emailInput.val(provider.email);
+    loginInput.val(provider.login);
+
+    if(provider.email){
+      emailInput.attr('disabled', true);
+    }
+
+    if(provider.login){
+      loginInput.attr('disabled', true);
+    }
+  });
 </script>
