@@ -135,11 +135,11 @@
         }
       });
 
-      $("#pledge_management_contract_id").change(function (event, management_contract) {
-        if (management_contract) {
-          $('#pledge_management_contract_signature_date').val(management_contract.signature_date);
+      $("#pledge_contract_id").change(function (event, contract) {
+        if (contract) {
+          $('#pledge_contract_signature_date').val(contract.signature_date);
         } else {
-          $('#pledge_management_contract_signature_date').val('');
+          $('#pledge_contract_signature_date').val('');
         }
       });
 

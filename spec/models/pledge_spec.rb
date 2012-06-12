@@ -14,7 +14,7 @@ describe Pledge do
   it { should belong_to :pledge_category }
   it { should belong_to :expense_kind }
   it { should belong_to :pledge_historic }
-  it { should belong_to :management_contract }
+  it { should belong_to :contract }
   it { should belong_to :licitation_modality }
   it { should belong_to :reserve_fund }
   it { should belong_to :provider }

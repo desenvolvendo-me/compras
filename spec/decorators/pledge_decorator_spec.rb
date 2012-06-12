@@ -79,4 +79,11 @@ describe PledgeDecorator do
 
     subject.pledge_liquidations_sum.should eq '100,00'
   end
+
+  it 'should return formatted contract_signature_date' do
+    component.stub(:contract_signature_date).and_return(Date.new(2012, 6, 12))
+    helpers.stub(:l).with(Date.new(2012, 6, 12)).and_return('12/06/2012')
+
+    subject.contract_signature_date.should eq '12/06/2012'
+  end
 end

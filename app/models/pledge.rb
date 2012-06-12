@@ -1,7 +1,7 @@
 class Pledge < ActiveRecord::Base
   attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :pledge_type
   attr_accessible :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id
-  attr_accessible :pledge_historic_id, :management_contract_id, :licitation_modality_id
+  attr_accessible :pledge_historic_id, :contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
   attr_accessible :founded_debt_contract_id, :provider_id, :pledge_items_attributes
   attr_accessible :pledge_parcels_attributes, :licitation_process_id
@@ -14,7 +14,6 @@ class Pledge < ActiveRecord::Base
   has_enumeration_for :pledge_type, :create_helpers => true
 
   belongs_to :provider
-  belongs_to :founded_debt_contract
   belongs_to :entity
   belongs_to :reserve_fund
   belongs_to :management_unit
@@ -22,7 +21,8 @@ class Pledge < ActiveRecord::Base
   belongs_to :pledge_category
   belongs_to :expense_kind
   belongs_to :pledge_historic
-  belongs_to :management_contract
+  belongs_to :contract
+  belongs_to :founded_debt_contract, :class_name => 'Contract'
   belongs_to :licitation_modality
   belongs_to :licitation_process
 
@@ -35,7 +35,7 @@ class Pledge < ActiveRecord::Base
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
   accepts_nested_attributes_for :pledge_parcels, :allow_destroy => true
 
-  delegate :signature_date, :to => :management_contract, :allow_nil => true, :prefix => true
+  delegate :signature_date, :to => :contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
   delegate :amount, :real_amount, :function, :subfunction, :government_program, :government_action,
            :budget_structure, :expense_nature,

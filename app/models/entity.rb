@@ -11,8 +11,7 @@ class Entity < ActiveRecord::Base
   has_many :pledges, :dependent => :restrict
   has_many :management_units, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
-  has_many :management_contracts, :dependent => :restrict
-  has_many :founded_debt_contracts, :dependent => :restrict
+  has_many :contracts, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
   has_many :extra_credits, :dependent => :restrict
   has_many :revenue_natures, :dependent => :restrict

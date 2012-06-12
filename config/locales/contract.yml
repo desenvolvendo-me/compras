@@ -1,16 +1,17 @@
 pt-BR:
   activerecord:
     models:
-      founded_debt_contract:
-        one: "Contrato de Dívida Fundada"
-        other: "Contratos de Dívida Fundada"
+      contract:
+        one: "Contrato"
+        other: "Contratos"
 
     attributes:
-      founded_debt_contract:
+      contract:
         year: "Exercício"
         entity: "Entidade"
         contract_number: "Número do contrato"
         process_number: "Número do processo"
-        signed_date: "Data da assinatura"
+        signature_date: "Data da assinatura"
         end_date: "Data do término"
-        description: "Descrição"
+        description: "Objeto"
+        kind: "Tipo"

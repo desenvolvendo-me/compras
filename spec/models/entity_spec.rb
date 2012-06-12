@@ -10,9 +10,8 @@ require 'app/models/budget_allocation'
 require 'app/models/pledge'
 require 'app/models/management_unit'
 require 'app/models/reserve_fund'
-require 'app/models/founded_debt_contract'
 require 'app/models/subfunction'
-require 'app/models/management_contract'
+require 'app/models/contract'
 require 'app/models/extra_credit'
 require 'app/models/revenue_nature'
 require 'app/models/revenue_accounting'
@@ -33,8 +32,7 @@ describe Entity do
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:management_units).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
-  it { should have_many(:management_contracts).dependent(:restrict) }
-  it { should have_many(:founded_debt_contracts).dependent(:restrict) }
+  it { should have_many(:contracts).dependent(:restrict) }
   it { should have_many(:subfunctions).dependent(:restrict) }
   it { should have_many(:extra_credits).dependent(:restrict) }
   it { should have_many(:revenue_natures).dependent(:restrict) }

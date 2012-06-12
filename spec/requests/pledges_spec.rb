@@ -16,9 +16,9 @@ feature "Pledges", :driver => :selenium do
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
-    management_contract = ManagementContract.make!(:primeiro_contrato)
+    contract = Contract.make!(:primeiro_contrato)
     Provider.make!(:wenderson_sa)
-    founded_debt_contract = FoundedDebtContract.make!(:contrato_detran)
+    founded_debt_contract = Contract.make!(:contrato_detran)
     Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
@@ -38,7 +38,7 @@ feature "Pledges", :driver => :selenium do
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
-      fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
       fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
 
       page.should have_disabled_field 'Código'
@@ -112,7 +112,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Valor', :with => '10,00'
       page.should have_field 'Categoria', :with => 'Geral'
       page.should have_select 'Tipo de bem', :selected => 'Patrimonial'
-      page.should have_field 'Contrato de dívida fundada', :with => "#{founded_debt_contract.id}/2012"
+      page.should have_field 'Contrato de dívida', :with => founded_debt_contract.to_s
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     end
 
@@ -122,7 +122,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Modalidade', :with => 'Pública'
       page.should have_field 'Processo licitatório', :with => '1/2012'
       page.should have_field 'Número da licitação', :with => '1'
-      page.should have_field 'Contrato', :with => "#{management_contract.id}/2012"
+      page.should have_field 'Contrato', :with => contract.to_s
       page.should have_field 'Objeto', :with => 'Objeto de empenho'
     end
 
@@ -163,9 +163,9 @@ feature "Pledges", :driver => :selenium do
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
-    ManagementContract.make!(:primeiro_contrato)
+    Contract.make!(:primeiro_contrato)
     Provider.make!(:wenderson_sa)
-    FoundedDebtContract.make!(:contrato_detran)
+    Contract.make!(:contrato_detran)
     Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
@@ -184,7 +184,7 @@ feature "Pledges", :driver => :selenium do
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
-      fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
       fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
     end
 
@@ -408,7 +408,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_disabled_field 'Valor'
       page.should have_disabled_field 'Categoria'
       page.should have_disabled_field 'Tipo de bem'
-      page.should have_disabled_field 'Contrato de dívida fundada'
+      page.should have_disabled_field 'Contrato de dívida'
       page.should have_disabled_field 'Fornecedor'
     end
 
@@ -586,7 +586,7 @@ feature "Pledges", :driver => :selenium do
   end
 
   scenario 'getting and cleaning signature date depending on contract' do
-    ManagementContract.make!(:primeiro_contrato)
+    Contract.make!(:primeiro_contrato)
 
     click_link 'Contabilidade'
 
@@ -617,7 +617,7 @@ feature "Pledges", :driver => :selenium do
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
-    management_contract = ManagementContract.make!(:primeiro_contrato)
+    Contract.make!(:primeiro_contrato)
     Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
@@ -733,6 +733,37 @@ feature "Pledges", :driver => :selenium do
     end
   end
 
+  scenario "contracts search should be scoped by kind" do
+    Contract.make!(:primeiro_contrato)
+    Contract.make!(:contrato_detran)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      within_modal 'Contrato de dívida' do
+        click_button 'Pesquisar'
+
+        page.should_not have_content '001'
+        page.should have_content '101'
+
+        click_link 'Cancelar'
+      end
+    end
+
+    within_tab 'Complementar' do
+      within_modal 'Contrato' do
+        click_button 'Pesquisar'
+
+        page.should have_content '001'
+        page.should_not have_content '101'
+      end
+    end
+  end
+
   scenario 'when create a new pledge with a entity and year that already exist the code should be increased by one' do
     Pledge.make!(:empenho_saldo_maior_mil)
     ReserveFund.make!(:detran_2012)
@@ -754,7 +785,7 @@ feature "Pledges", :driver => :selenium do
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
-      fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
       fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
     end
 

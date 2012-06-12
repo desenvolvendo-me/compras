@@ -1,19 +1,19 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "ManagementContracts" do
+feature "Contracts" do
   background do
     sign_in
   end
 
-  scenario 'create a new management_contract' do
+  scenario 'create a new contract' do
     Entity.make!(:detran)
 
     click_link 'Contabilidade'
 
-    click_link 'Contratos de Gestão'
+    click_link 'Contratos'
 
-    click_link 'Criar Contrato de Gestão'
+    click_link 'Criar Contrato'
 
     fill_mask 'Exercício', :with => '2012'
     fill_modal 'Entidade', :with => 'Detran'
@@ -21,11 +21,12 @@ feature "ManagementContracts" do
     fill_in 'Número do processo', :with => '002'
     fill_mask 'Data da assinatura', :with => '01/01/2012'
     fill_mask 'Data do término', :with => '30/12/2012'
+    select 'Contrato de dívida', :from => 'Tipo'
     fill_in 'Objeto', :with => 'Objeto'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Contrato de Gestão criado com sucesso.'
+    page.should have_notice 'Contrato criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -37,16 +38,17 @@ feature "ManagementContracts" do
     page.should have_field 'Número do processo', :with => '002'
     page.should have_field 'Data da assinatura', :with => '01/01/2012'
     page.should have_field 'Data do término', :with => '30/12/2012'
+    page.should have_select 'Tipo', :selected => 'Contrato de dívida'
     page.should have_field 'Objeto', :with => 'Objeto'
   end
 
-  scenario 'update an existent management_contract' do
-    ManagementContract.make!(:primeiro_contrato)
+  scenario 'update an existent contract' do
+    Contract.make!(:primeiro_contrato)
     Entity.make!(:secretaria_de_educacao)
 
     click_link 'Contabilidade'
 
-    click_link 'Contratos de Gestão'
+    click_link 'Contratos'
 
     within_records do
       page.find('a').click
@@ -58,11 +60,12 @@ feature "ManagementContracts" do
     fill_in 'Número do processo', :with => '222'
     fill_mask 'Data da assinatura', :with => '01/01/2013'
     fill_mask 'Data do término', :with => '30/12/2013'
+    select 'Contrato de gestão', :from => 'Tipo'
     fill_in 'Objeto', :with => 'Novo Objeto'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Contrato de Gestão editado com sucesso.'
+    page.should have_notice 'Contrato editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -75,14 +78,15 @@ feature "ManagementContracts" do
     page.should have_field 'Data da assinatura', :with => '01/01/2013'
     page.should have_field 'Data do término', :with => '30/12/2013'
     page.should have_field 'Objeto', :with => 'Novo Objeto'
+    page.should have_select 'Tipo', :selected => 'Contrato de gestão'
   end
 
-  scenario 'destroy an existent management_contract' do
-    ManagementContract.make!(:primeiro_contrato)
+  scenario 'destroy an existent contract' do
+    Contract.make!(:primeiro_contrato)
 
     click_link 'Contabilidade'
 
-    click_link 'Contratos de Gestão'
+    click_link 'Contratos'
 
     within_records do
       page.find('a').click
@@ -90,7 +94,7 @@ feature "ManagementContracts" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Contrato de Gestão apagado com sucesso.'
+    page.should have_notice 'Contrato apagado com sucesso.'
 
     page.should_not have_content '2012'
     page.should_not have_content 'Detran'

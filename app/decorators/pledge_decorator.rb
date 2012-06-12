@@ -6,6 +6,10 @@ class PledgeDecorator < Decorator
     helpers.number_with_precision super if super
   end
 
+  def contract_signature_date
+    helpers.l super if super
+  end
+
   def reserve_fund_value
     helpers.number_with_precision super if super
   end

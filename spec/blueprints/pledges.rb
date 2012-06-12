@@ -11,11 +11,11 @@ Pledge.blueprint(:empenho) do
   pledge_category { PledgeCategory.make!(:geral) }
   expense_kind { ExpenseKind.make!(:pagamentos) }
   pledge_historic { PledgeHistoric.make!(:semestral) }
-  management_contract { ManagementContract.make!(:primeiro_contrato) }
+  contract { Contract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
-  founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
+  founded_debt_contract { Contract.make!(:contrato_detran) }
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
@@ -34,11 +34,11 @@ Pledge.blueprint(:empenho_com_dois_vencimentos) do
   pledge_category { PledgeCategory.make!(:geral) }
   expense_kind { ExpenseKind.make!(:pagamentos) }
   pledge_historic { PledgeHistoric.make!(:semestral) }
-  management_contract { ManagementContract.make!(:primeiro_contrato) }
+  contract { Contract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
   licitation_process { LicitationProcess.make!(:processo_licitatorio_computador) }
   description { 'Descricao' }
-  founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
+  founded_debt_contract { Contract.make!(:contrato_detran) }
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [
@@ -60,11 +60,11 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   pledge_category { PledgeCategory.make!(:geral) }
   expense_kind { ExpenseKind.make!(:pagamentos) }
   pledge_historic { PledgeHistoric.make!(:semestral) }
-  management_contract { ManagementContract.make!(:primeiro_contrato) }
+  contract { Contract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
-  founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
+  founded_debt_contract { Contract.make!(:contrato_detran) }
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)] }
@@ -83,11 +83,11 @@ Pledge.blueprint(:empenho_saldo_maior_mil) do
   pledge_category { PledgeCategory.make!(:geral) }
   expense_kind { ExpenseKind.make!(:pagamentos) }
   pledge_historic { PledgeHistoric.make!(:semestral) }
-  management_contract { ManagementContract.make!(:primeiro_contrato) }
+  contract { Contract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
-  founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
+  founded_debt_contract { Contract.make!(:contrato_detran) }
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
@@ -106,11 +106,11 @@ Pledge.blueprint(:empenho_estimativo) do
   pledge_category { PledgeCategory.make!(:geral) }
   expense_kind { ExpenseKind.make!(:pagamentos) }
   pledge_historic { PledgeHistoric.make!(:semestral) }
-  management_contract { ManagementContract.make!(:primeiro_contrato) }
+  contract { Contract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
-  founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
+  founded_debt_contract { Contract.make!(:contrato_detran) }
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
@@ -129,11 +129,11 @@ Pledge.blueprint(:empenho_ordinario) do
   pledge_category { PledgeCategory.make!(:geral) }
   expense_kind { ExpenseKind.make!(:pagamentos) }
   pledge_historic { PledgeHistoric.make!(:semestral) }
-  management_contract { ManagementContract.make!(:primeiro_contrato) }
+  contract { Contract.make!(:primeiro_contrato) }
   licitation_modality { LicitationModality.make!(:publica) }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
-  founded_debt_contract { FoundedDebtContract.make!(:contrato_detran) }
+  founded_debt_contract { Contract.make!(:contrato_detran) }
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}

@@ -178,6 +178,13 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :contracts do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :regulatory_act_type_classifications do
     collection do
       get :filter
@@ -338,13 +345,6 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :founded_debt_contracts do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :functions do
     collection do
       get :filter
@@ -458,13 +458,6 @@ Tributario::Application.routes.draw do
     resources :licitation_process_lots
     resources :licitation_process_publications
 
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :management_contracts do
     collection do
       get :filter
       get :modal
