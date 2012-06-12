@@ -1,5 +1,6 @@
 class PriceCollectionsController < CrudController
   actions :all, :except => :destroy
+  before_filter :should_not_be_annuled!, :only => :update
 
   def new
     object = build_resource
@@ -28,6 +29,12 @@ class PriceCollectionsController < CrudController
       return unless super
 
       ProviderUserCreator.new(object).generate
+    end
+  end
+
+  def should_not_be_annuled!
+    if resource.annulled?
+      raise Exceptions::Unauthorized
     end
   end
 end

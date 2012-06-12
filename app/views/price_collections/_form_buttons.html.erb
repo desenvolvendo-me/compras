@@ -2,6 +2,8 @@
   <%= f.object.decorator.proposals_link %>
   <%= f.object.decorator.count_link %>
   <%= price_collection_annul_link %>
-  <%= f.button :submit %>
+  <% unless f.object.annulled? %>
+    <%= f.button :submit %>
+  <% end %>
   <%= f.button :cancel %>
 </div>

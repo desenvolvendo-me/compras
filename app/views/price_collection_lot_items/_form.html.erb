@@ -6,11 +6,11 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-4">
-      <%= f.input :material, :input_html => { :class => 'material' } %>
+      <%= f.input :material, :input_html => { :class => 'material' }, :disabled => f.object.annulled? %>
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :brand %>
+      <%= f.input :brand, :disabled => f.object.annulled? %>
     </div>
 
     <div class="yui3-u-1-4">
@@ -18,11 +18,12 @@
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :quantity %>
+      <%= f.input :quantity, :disabled => f.object.annulled? %>
     </div>
   </div>
-
-  <p class="yui3-u">
-    <input type="button" class="button negative remove-item" value="Remover Item">
-  </p>
+  <% unless f.object.annulled? %>
+    <p class="yui3-u">
+      <input type="button" class="button negative remove-item" value="Remover Item">
+    </p>
+  <% end %>
 </div>

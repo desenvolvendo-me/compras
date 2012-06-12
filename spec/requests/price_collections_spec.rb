@@ -649,4 +649,55 @@ feature "PriceCollections" do
       page.should have_field 'Login', :with => 'wenderson.malheiros'
     end
   end
+
+  scenario 'can not edit any data from a annulled price collection' do
+    PriceCollectionAnnul.make!(:coleta_anulada)
+
+    click_link 'Processos'
+
+    click_link 'Coletas de Preços'
+
+    click_link '1/2012'
+
+    within_tab 'Principal' do
+      page.should have_disabled_field 'Ano'
+      page.should have_disabled_field 'Data'
+      page.should have_disabled_field 'Status'
+      page.should have_disabled_field 'Tipo de apuração'
+      page.should have_disabled_field 'Local de entrega'
+      page.should have_disabled_field 'Responsável'
+      page.should have_disabled_field 'Forma de pagamento'
+      page.should have_disabled_field 'Prazo de entrega'
+      page.should have_disabled_field 'Período'
+      page.should have_disabled_field 'Validade da proposta'
+      page.should have_disabled_field 'Unidade da validade da proposta'
+      page.should have_disabled_field 'Vencimento'
+      page.should have_disabled_field 'Objeto'
+      page.should have_disabled_field 'Observações'
+    end
+
+    within_tab 'Lotes de itens' do
+      page.should have_disabled_field 'Observações'
+      page.should have_disabled_field 'Material'
+      page.should have_disabled_field 'Marca'
+      page.should have_disabled_field 'Unidade'
+      page.should have_disabled_field 'Quantidade'
+
+      page.should_not have_button 'Remover Item'
+      page.should_not have_button 'Adicionar Item'
+      page.should_not have_button 'Remover Lote'
+      page.should_not have_button 'Adicionar Lote'
+    end
+
+    within_tab 'Fornecedores' do
+      page.should have_disabled_field 'Fornecedor'
+      page.should have_disabled_field 'Email'
+      page.should have_disabled_field 'Login'
+
+      page.should_not have_button 'Adicionar Fornecedor'
+      page.should_not have_button 'Remover Fornecedor'
+    end
+
+    page.should_not have_button 'Salvar'
+  end
 end
