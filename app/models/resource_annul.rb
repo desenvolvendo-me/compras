@@ -1,8 +1,8 @@
 class ResourceAnnul < ActiveRecord::Base
   include Annullable
-  belongs_to :resource, :polymorphic => true
+  belongs_to :annullable, :polymorphic => true
 
-  validates :resource, :presence => true
+  validates :annullable, :presence => true
 
-  delegate :provider, :price_collection, :to => :resource, :allow_nil => true
+  delegate :provider, :price_collection, :to => :annullable, :allow_nil => true
 end

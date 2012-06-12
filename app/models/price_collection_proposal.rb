@@ -5,7 +5,7 @@ class PriceCollectionProposal < ActiveRecord::Base
   belongs_to :provider
 
   has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :id
-  has_one :annul, :class_name => 'ResourceAnnul', :as => :resource, :dependent => :destroy
+  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
 
