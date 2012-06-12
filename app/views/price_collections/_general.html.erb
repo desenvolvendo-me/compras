@@ -4,46 +4,46 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :year %>
+    <%= f.input :year, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :date %>
+    <%= f.input :date, :disabled => f.object.annulled? %>
   </div>
 </div>
 
-<%= f.input :status, :disabled => f.object.new_record? %>
-<%= f.input :type_of_calculation %>
-<%= f.input :delivery_location %>
-<%= f.input :employee %>
+<%= f.input :status, :disabled => f.object.new_record? || f.object.annulled? %>
+<%= f.input :type_of_calculation, :disabled => f.object.annulled? %>
+<%= f.input :delivery_location, :disabled => f.object.annulled? %>
+<%= f.input :employee, :disabled => f.object.annulled? %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :payment_method %>
+    <%= f.input :payment_method, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :period %>
+    <%= f.input :period, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :period_unit %>
+    <%= f.input :period_unit, :disabled => f.object.annulled? %>
   </div>
 </div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :proposal_validity %>
+    <%= f.input :proposal_validity, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :proposal_validity_unit %>
+    <%= f.input :proposal_validity_unit, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :expiration %>
+    <%= f.input :expiration, :disabled => f.object.annulled? %>
   </div>
 </div>
 
-<%= f.input :object_description %>
-<%= f.input :observations %>
+<%= f.input :object_description, :disabled => f.object.annulled? %>
+<%= f.input :observations, :disabled => f.object.annulled? %>

@@ -12,7 +12,9 @@
   <% end %>
 </div>
 
-<input type="button" class="button affirmative add-price-collection-lot" value="Adicionar Lote">
+<% unless f.object.annulled? %>
+  <input type="button" class="button affirmative add-price-collection-lot" value="Adicionar Lote">
+<% end %>
 
 <script>
   $("#price-collection-lots-template").nestedForm({

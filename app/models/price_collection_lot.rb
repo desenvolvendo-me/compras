@@ -7,6 +7,7 @@ class PriceCollectionLot < ActiveRecord::Base
   has_many :price_collection_proposals, :through => :price_collection
 
   delegate :provider, :to => :winner_proposal, :allow_nil => true
+  delegate :annulled?, :to => :price_collection, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 

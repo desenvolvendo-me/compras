@@ -1,6 +1,8 @@
-<p>
-  <input type="button" class="button affirmative add-provider" value="Adicionar Fornecedor">
-</p>
+<% unless f.object.annulled? %>
+  <p>
+    <input type="button" class="button affirmative add-provider" value="Adicionar Fornecedor">
+  </p>
+<% end %>
 
 <div id="providers-list">
   <%= f.association :price_collection_proposals, :collection => localized(f.object.price_collection_proposals) do |p| %>
