@@ -6,6 +6,8 @@ class Pledge < ActiveRecord::Base
   attr_accessible :founded_debt_contract_id, :provider_id, :pledge_items_attributes
   attr_accessible :pledge_parcels_attributes, :licitation_process_id
 
+  attr_readonly :code
+
   attr_accessor :licitation, :process, :item_replicated_value, :parcel_replicated_value
 
   has_enumeration_for :material_kind
@@ -42,6 +44,7 @@ class Pledge < ActiveRecord::Base
 
   validates :budget_allocation, :entity, :year, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :provider, :presence => true
+  validates :code, :uniqueness => { :scope => [:year, :entity_id], :allow_blank => true }
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
@@ -55,6 +58,8 @@ class Pledge < ActiveRecord::Base
     allowing_blank.validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
   end
 
+  before_create :set_code
+
   orderize :emission_date
   filterize accessible_attributes + [:id]
 
@@ -63,7 +68,7 @@ class Pledge < ActiveRecord::Base
   end
 
   def to_s
-    id.to_s
+     "#{code} - #{entity}/#{year}"
   end
 
   def pledge_parcels_sum
@@ -102,7 +107,20 @@ class Pledge < ActiveRecord::Base
     pledge_liquidation_cancellations.sum(:value)
   end
 
+  def next_code
+    last_code.succ
+  end
+
   protected
+
+  def set_code
+    self.code = next_code
+  end
+
+  def last_code
+    self.class.where { self.year.eq(year) & self.entity_id.eq(entity_id) }.
+               maximum(:code).to_i
+  end
 
   def pledge_parcels_value_should_be_equals_value
     return unless value

@@ -39,3 +39,4 @@ pt-BR:
         provider: "Fornecedor"
         founded_debt_contract: "Contrato de dívida fundada"
         items_total_value: "Valor total dos itens"
+        code: "Código"

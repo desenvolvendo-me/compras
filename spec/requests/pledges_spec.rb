@@ -40,6 +40,8 @@ feature "Pledges", :driver => :selenium do
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
       fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
+
+      page.should have_disabled_field 'Código'
     end
 
     within_tab 'Complementar' do
@@ -101,6 +103,7 @@ feature "Pledges", :driver => :selenium do
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Detran'
       page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Código', :with => '1'
       page.should have_field 'Reserva de dotação', :with => "#{reserve_fund.id}/2012"
       page.should have_field 'Unidade gestora', :with => 'Unidade Central'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
@@ -727,6 +730,43 @@ feature "Pledges", :driver => :selenium do
     within_tab 'Principal' do
       page.should have_field 'Saldo reserva', :with => "100,50"
       page.should have_field 'Saldo da dotação', :with => "2.899,50"
+    end
+  end
+
+  scenario 'when create a new pledge with a entity and year that already exist the code should be increased by one' do
+    Pledge.make!(:empenho_saldo_maior_mil)
+    ReserveFund.make!(:detran_2012)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Entidade', :with => 'Detran'
+      fill_mask 'Exercício', :with => '2012'
+      fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
+      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      select 'Global', :from => 'Tipo de empenho'
+      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_in 'Valor', :with => '10,00'
+      select 'Patrimonial', :from => 'Tipo de bem'
+      fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
+      fill_modal 'Contrato de dívida fundada', :with => '2012', :field => 'Exercício'
+      fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
+    end
+
+    click_button 'Salvar'
+
+    within_records do
+      click_link '2 - Detran/2012'
+    end
+
+    within_tab 'Principal' do
+      page.should have_disabled_field 'Código'
+      page.should have_field 'Código', :with => '2'
     end
   end
 end

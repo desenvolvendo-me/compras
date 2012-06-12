@@ -113,7 +113,7 @@ feature "PledgeLiquidationCancellations" do
   end
 
   scenario 'should have all fields disabled when editing an existent pledge' do
-    pledge = Pledge.make!(:empenho)
+    Pledge.make!(:empenho)
     PledgeLiquidation.make!(:liquidacao_total)
     PledgeParcelMovimentation.make!(:liquidacao_total)
     pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
@@ -127,7 +127,7 @@ feature "PledgeLiquidationCancellations" do
     should_not have_button 'Criar Anulação de Liquidação de Empenho'
 
     page.should have_disabled_field 'Empenho'
-    page.should have_field 'Empenho', :with => "#{pledge.id}"
+    page.should have_field 'Empenho', :with => '1 - Detran/2012'
     page.should have_disabled_field 'Valor liquidado a ser anulado'
     page.should have_field 'Valor liquidado a ser anulado', :with => '1,00'
     page.should have_disabled_field 'Data *'

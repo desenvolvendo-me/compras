@@ -123,10 +123,12 @@ describe Pledge do
     should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação, contando com os valores reservados')
   end
 
-  it 'should return id as to_s method' do
-    subject.id = '1'
+  it 'should return "code - Entity/Year" as to_s method' do
+    subject.code = 1
+    subject.stub(:entity => 'Detran')
+    subject.year = 2012
 
-    subject.to_s.should eq '1'
+    subject.to_s.should eq '1 - Detran/2012'
   end
 
   it { should allow_value('2012').for(:year) }
@@ -179,5 +181,17 @@ describe Pledge do
     subject.valid?
 
     subject.errors.messages[:items_total_value].should include "não pode ser superior ao valor do empenho"
+  end
+
+  describe '#next_code' do
+    context 'when the code of last licitation process is 3' do
+      before do
+        subject.stub(:last_code).and_return(3)
+      end
+
+      it 'should be 4' do
+        subject.next_code.should eq 4
+      end
+    end
   end
 end
