@@ -70,6 +70,10 @@ feature "LicitationProcessLots" do
     pending "validation for itens/administrative_process prevents the creation of a lot on blueprints"
   end
 
+  scenario 'edit an existing lot, search item, remove item and search item again' do
+    pending "validation for itens/administrative_process prevents the creation of a lot on blueprints"
+  end
+
   scenario 'only items from administrative process that are not included by any lot must be available' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)

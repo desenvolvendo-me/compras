@@ -1,6 +1,6 @@
 <div class="yui3-g modal-finder">
   <div class="yui3-u-1-2">
-    <%= f.association :administrative_process_budget_allocation_items, :as => :modal, :hidden_field => false, :input_html => { :value => nil, 'data-modal-url' => modal_administrative_process_budget_allocation_items_path(:administrative_process_id => f.object.administrative_process_id, :without_lot => true) } %>
+    <%= f.association :administrative_process_budget_allocation_items, :as => :modal, :hidden_field => false, :input_html => { :value => nil, 'data-modal-url' => modal_administrative_process_budget_allocation_items_path(:administrative_process_id => f.object.administrative_process_id, :without_lot => true, :ids => "") } %>
   </div>
 </div>
 
@@ -38,3 +38,34 @@
     <%= render 'administrative_process_budget_allocation_items/list_form', :material => '{{material}}', :quantity => '{{quantity}}', :unit_price => '{{unit_price}}', :id => '{{id}}', :f => f %>
   <% end %>
 <% end %>
+
+<script>
+  var objectBudgetAllocationItemIds = '<%= f.object.administrative_process_budget_allocation_item_ids.join(",") %>';
+  objectBudgetAllocationItemIds = objectBudgetAllocationItemIds.split(',');
+
+  $('#licitation_process_lot_administrative_process_budget_allocation_items').focus(function() {
+
+    var tableItems = [];
+    var deletedItems = [];
+
+    $('table.records td').children('input').each(function(index, item) {
+      tableItems.push($(item).val());
+    });
+
+    $(objectBudgetAllocationItemIds).each(function(index, item) {
+      if (item != null && item.length > 0 && $.inArray(item, tableItems) == -1) {
+        deletedItems.push(item);
+      }
+    });
+
+    var modalUrl = '<%= modal_administrative_process_budget_allocation_items_path(:administrative_process_id => f.object.administrative_process_id) %>';
+
+    if (deletedItems.length < 1) {
+      modalUrl += '&without_lot=true';
+    } else {
+      modalUrl += '&without_lot_or_ids=' + deletedItems.join();
+    }
+
+    $('#licitation_process_lot_administrative_process_budget_allocation_items').attr('data-modal-url', modalUrl);
+  });
+</script>
