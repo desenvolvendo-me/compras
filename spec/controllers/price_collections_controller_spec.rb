@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'spec_helper'
 
 describe PriceCollectionsController do
@@ -97,6 +98,17 @@ describe PriceCollectionsController do
         ProviderUserCreator.any_instance.should_not_receive(:generate)
 
         put :update
+      end
+    end
+
+    describe 'a annulled collection' do
+      it 'should raises a unauthorized error' do
+        price_collection.stub(:annulled?).and_return true
+
+        put :update
+
+        response.code.should eq '401'
+        response.body.should =~ /Você não tem acesso a essa página/
       end
     end
   end
