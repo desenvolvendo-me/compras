@@ -49,7 +49,6 @@
 <script>
   <% if f.object.persisted? %>
     $('form.reserve_fund :input').attr('disabled', true);
-    $('form.reserve_fund .hint').hide();
   <% end %>
 
   $("#reserve_fund_budget_allocation_id").change(function (event, budget_allocation) {
