@@ -64,7 +64,7 @@ feature "BudgetStructure" do
     end
 
     within_tab 'Endereços' do
-      page.should have_field 'Logradouro', :with => 'Girassol'
+      page.should have_field 'Logradouro', :with => 'Rua Girassol'
       page.should have_field 'Bairro', :with => 'São Francisco'
       page.should have_field 'CEP', :with => '33400-500'
     end
@@ -134,7 +134,7 @@ feature "BudgetStructure" do
     end
 
     within_tab 'Endereços' do
-      page.should have_field 'Logradouro', :with => 'Amazonas'
+      page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field 'CEP', :with => '33600-500'
     end
