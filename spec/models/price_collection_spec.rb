@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/price_collection'
 require 'app/models/price_collection_lot'
-require 'app/models/price_collections_provider'
 require 'app/models/price_collection_proposal'
 require 'lib/annullable'
 require 'app/models/price_collection_annul'

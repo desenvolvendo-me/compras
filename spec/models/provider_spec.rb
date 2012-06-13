@@ -12,7 +12,6 @@ require 'app/models/licitation_process_bidder'
 require 'app/models/pledge'
 require 'app/models/reserve_fund'
 require 'app/models/precatory'
-require 'app/models/price_collections_provider'
 require 'app/models/price_collection_proposal'
 
 describe Provider do
