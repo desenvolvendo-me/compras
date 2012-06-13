@@ -1,3 +1,4 @@
+#encoding: utf-8
 module CrudHelper
   def plural
     resource_class.model_name.human(:count => 'many')
@@ -65,5 +66,22 @@ module CrudHelper
 
   def filter_link
     link_to t("#{controller_name}.filter", :resource => plural, :cascade => true), filter_resources_path(current_scopes), :class => 'filter'
+  end
+
+  def annul_link(options={})
+    annul_controller_name = options[:annul_controller_name] || "#{controller_name.singularize}_annuls"
+
+    return unless can? :modify, annul_controller_name.to_sym
+
+    annulled_method = options[:annulled_method] || "annulled?"
+    param_name = options[:param_name] || "annullable_id"
+    annul_object = options[:annul_object] || "annul"
+    button_class = options[:button_class] || "negative"
+
+    if resource.persisted? && !resource.send(annulled_method)
+      link_to 'Anular', { :controller => annul_controller_name, :action => :new, param_name => resource }, :class => "button #{button_class}"
+    elsif resource.send(annulled_method)
+      link_to 'Anulação', { :controller => annul_controller_name, :action => :edit, :id => resource.annul }, :class => "button #{button_class}"
+    end
   end
 end
