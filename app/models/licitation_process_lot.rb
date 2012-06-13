@@ -9,6 +9,7 @@ class LicitationProcessLot < Compras::Model
 
   delegate :administrative_process_id, :to => :licitation_process, :allow_nil => true
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
+  delegate :updatable?, :to => :licitation_process, :allow_nil => true, :prefix => true
 
   validate :administrative_process_budget_allocation_items_should_have_at_least_one
   validate :items_should_belong_to_administrative_process

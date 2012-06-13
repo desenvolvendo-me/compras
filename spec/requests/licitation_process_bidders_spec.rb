@@ -364,7 +364,7 @@ feature "LicitationProcessBidders" do
   end
 
   scenario 'showing some items without lot on proposals' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     bidder = licitation_process.licitation_process_bidders.first
 
     click_link 'Processos'
@@ -480,7 +480,7 @@ feature "LicitationProcessBidders" do
   end
 
   scenario 'creating some lots and showing one tab for lot on proposals' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     bidder = licitation_process.licitation_process_bidders.first
 
     click_link 'Processos'
@@ -647,7 +647,7 @@ feature "LicitationProcessBidders" do
   end
 
   scenario 'should show message that can not update proposals when any item does not have lot and licitation process has lot' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     bidder = licitation_process.licitation_process_bidders.first
 
     click_link 'Processos'

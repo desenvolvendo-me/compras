@@ -22,6 +22,8 @@ feature "LicitationProcessLots" do
 
     click_link 'Lotes de itens'
 
+    page.should have_link 'Criar Lote de itens'
+
     page.should have_link lot.to_s
 
     click_link 'Voltar ao processo licitatório'
@@ -60,6 +62,72 @@ feature "LicitationProcessLots" do
     page.should have_field 'Observações', :with => 'observacoes teste'
     page.should have_content '01.01.00001 - Antivirus'
     page.should have_content '10,00'
+  end
+
+
+  scenario 'should not show link to create a new lot if licitation process is not updatable' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    page.should_not have_link 'Criar Lote de itens'
+  end
+
+  scenario 'should not have Salvar neither Apagar buttons when updating a lot if licitation process is not updatable' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_button 'Salvar'
+    page.should_not have_button 'Apagar'
+    page.should_not have_button 'Remover'
+  end
+
+  scenario 'all fields should be disabled when updating a lot if licitation process is not updatable' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_disabled_field 'Observações'
+    page.should have_disabled_field 'Itens'
   end
 
   scenario 'updating an existing lot' do
@@ -162,7 +230,7 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'only items from administrative process that are not included by any lot must be available' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
     click_link 'Processos'
