@@ -9,6 +9,15 @@ Person.blueprint(:sobrinho) do
   personable { Individual.make!(:sobrinho) }
 end
 
+Person.blueprint(:sobrinho_without_email) do
+  name   { "Gabriel Sobrinho" }
+  phone  { '(33) 3333-3333' }
+  fax    { '(33) 3333-3334' }
+  mobile { '(99) 9999-9999' }
+  email  { '' }
+  personable { Individual.make!(:sobrinho) }
+end
+
 Person.blueprint(:wenderson) do
   name   { "Wenderson Malheiros" }
   phone  { '(33) 3333-3333' }

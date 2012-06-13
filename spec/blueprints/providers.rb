@@ -57,6 +57,25 @@ Provider.blueprint(:sobrinho_sa) do
   provider_partners { [ProviderPartner.make!(:sobrinho)] }
 end
 
+Provider.blueprint(:sobrinho_sa_without_email) do
+  economic_registration { EconomicRegistration.make!(:nohup) }
+  person { Person.make!(:sobrinho_without_email) }
+  agency { Agency.make!(:itau) }
+  legal_nature { LegalNature.make!(:administracao_publica) }
+  cnae { Cnae.make!(:aluguel) }
+  registration_date { Date.new(2012, 2, 15) }
+  bank_account { '123456' }
+  crc_number { '123456' }
+  crc_registration_date { Date.new(2012, 2, 26) }
+  crc_renewal_date { Date.new(2012, 2, 27) }
+  crc_expiration_date { Date.new(2012, 2, 28) }
+  materials_groups { [MaterialsGroup.make!(:ferro_aco)] }
+  materials_classes { [MaterialsClass.make!(:software)] }
+  materials { [Material.make!(:antivirus)] }
+  provider_licitation_documents { [ProviderLicitationDocument.make(:oficial)] }
+  provider_partners { [ProviderPartner.make!(:sobrinho)] }
+end
+
 Provider.blueprint(:fornecedor_class_arames) do
   economic_registration { EconomicRegistration.make!(:nohup) }
   person { Person.make!(:sobrinho) }

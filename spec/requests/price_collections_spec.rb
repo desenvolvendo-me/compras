@@ -184,9 +184,7 @@ feature "PriceCollections" do
     Employee.make!(:wenderson)
     PaymentMethod.make!(:cheque)
     Material.make!(:arame_farpado)
-    provider = Provider.make!(:sobrinho_sa)
-    person = provider.person
-    person.update_attribute :email, ''
+    Provider.make!(:sobrinho_sa_without_email)
 
     click_link 'Processos'
 
