@@ -38,7 +38,7 @@ feature "DeliveryLocations" do
     click_link 'Secretaria da Educação'
 
     page.should have_field 'Descrição', :with => 'Secretaria da Educação'
-    page.should have_field 'Logradouro', :with => 'Girassol'
+    page.should have_field 'Logradouro', :with => 'Rua Girassol'
     page.should have_field 'Número', :with => '13'
     page.should have_field 'Bloco', :with => '20'
     page.should have_field 'Sala/Apartamento', :with => '202'
@@ -84,7 +84,7 @@ feature "DeliveryLocations" do
     click_link 'Secretaria da Saúde'
 
     page.should have_field 'Descrição', :with => 'Secretaria da Saúde'
-    page.should have_field 'Logradouro', :with => 'Girassol'
+    page.should have_field 'Logradouro', :with => 'Rua Girassol'
     page.should have_field 'Número', :with => '13'
     page.should have_field 'Bloco', :with => '20'
     page.should have_field 'Sala/Apartamento', :with => '202'
