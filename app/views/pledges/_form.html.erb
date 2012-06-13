@@ -84,10 +84,6 @@
           $('#pledge_budget_allocation').val(reserve_fund.budget_allocation);
           $('#pledge_budget_allocation_id').val(reserve_fund.budget_allocation_id);
           $('#pledge_budget_allocation_real_amount').val(reserve_fund.real_amount);
-          $('#pledge_budget_allocation_function').val(reserve_fund.function);
-          $('#pledge_budget_allocation_subfunction').val(reserve_fund.subfunction);
-          $('#pledge_budget_allocation_government_program').val(reserve_fund.government_program);
-          $('#pledge_budget_allocation_government_action').val(reserve_fund.government_action);
           $('#pledge_budget_allocation_budget_structure').val(reserve_fund.budget_structure);
           $('#pledge_budget_allocation_expense_nature').val(reserve_fund.expense_nature);
 
@@ -117,19 +113,9 @@
             $('#pledge_reserve_fund_value').val('');
           }
           $('#pledge_budget_allocation_real_amount').val(budget_allocation.real_amount);
-          $('#pledge_budget_allocation_function').val(budget_allocation.function);
-          $('#pledge_budget_allocation_subfunction').val(budget_allocation.subfunction);
-          $('#pledge_budget_allocation_government_program').val(budget_allocation.government_program);
-          $('#pledge_budget_allocation_government_action').val(budget_allocation.government_action);
-          $('#pledge_budget_allocation_budget_structure').val(budget_allocation.budget_structure);
           $('#pledge_budget_allocation_expense_nature').val(budget_allocation.expense_nature);
         } else {
           $('#pledge_budget_allocation_real_amount').val('');
-          $('#pledge_budget_allocation_function').val('');
-          $('#pledge_budget_allocation_subfunction').val('');
-          $('#pledge_budget_allocation_government_program').val('');
-          $('#pledge_budget_allocation_government_action').val('');
-          $('#pledge_budget_allocation_budget_structure').val('');
           $('#pledge_budget_allocation_expense_nature').val('');
         }
       });

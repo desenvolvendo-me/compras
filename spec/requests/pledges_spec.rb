@@ -153,6 +153,44 @@ feature "Pledges", :driver => :selenium do
     end
   end
 
+  context 'should have modal link' do
+    scenario 'when already stored' do
+      pledge = Pledge.make!(:empenho)
+
+      click_link 'Contabilidade'
+
+      click_link 'Empenhos'
+
+      click_link pledge.to_s
+
+      within_tab 'Principal' do
+        click_link 'Mais informações'
+      end
+
+      page.should have_content 'Informações de: Alocação'
+    end
+
+    scenario 'when change budget_allocation' do
+      BudgetAllocation.make!(:reparo_2011)
+
+      click_link 'Contabilidade'
+
+      click_link 'Empenhos'
+
+      click_link 'Criar Empenho'
+
+      within_tab 'Principal' do
+        fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+        click_link 'Mais informações'
+      end
+
+      page.should have_content 'Informações de: Manutenção e Reparo'
+      page.should have_content '2011'
+      page.should have_content 'Manutenção e Reparo'
+    end
+  end
+
   scenario 'should not have errors on replicated value' do
     Entity.make!(:detran)
     ManagementUnit.make!(:unidade_central)
@@ -527,38 +565,18 @@ feature "Pledges", :driver => :selenium do
 
     within_tab 'Principal' do
       page.should have_disabled_field 'Saldo da dotação'
-      page.should have_disabled_field 'Função'
-      page.should have_disabled_field 'Subfunção'
-      page.should have_disabled_field 'Programa'
-      page.should have_disabled_field 'Ação'
-      page.should have_disabled_field 'Estrutura orçamentária'
       page.should have_disabled_field 'Natureza da despesa'
       page.should have_field 'Saldo da dotação', :with => ''
-      page.should have_field 'Função', :with => ''
-      page.should have_field 'Subfunção', :with => ''
-      page.should have_field 'Programa', :with => ''
-      page.should have_field 'Ação', :with => ''
-      page.should have_field 'Estrutura orçamentária', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
 
       fill_modal 'Dotação *', :with => '2012', :field => 'Exercício'
 
       page.should have_field 'Saldo da dotação', :with => '489,50'
-      page.should have_field 'Função', :with => '04 - Administração'
-      page.should have_field 'Subfunção', :with => '01 - Administração Geral'
-      page.should have_field 'Programa', :with => 'Habitação'
-      page.should have_field 'Ação', :with => 'Ação Governamental'
-      page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
       clear_modal 'Dotação *'
 
       page.should have_field 'Saldo da dotação', :with => ''
-      page.should have_field 'Função', :with => ''
-      page.should have_field 'Subfunção', :with => ''
-      page.should have_field 'Programa', :with => ''
-      page.should have_field 'Ação', :with => ''
-      page.should have_field 'Estrutura orçamentária', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
     end
   end

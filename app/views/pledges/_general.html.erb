@@ -39,6 +39,7 @@
 <div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :budget_allocation %>
+    <%= link_to_modal_info 'pledge_budget_allocation', f.object.budget_allocation %>
   </div>
 
   <div class="yui3-u-1-2">
@@ -47,28 +48,6 @@
 </div>
 
 <%= f.input :value %>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation_function, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation_subfunction, :disabled => true %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation_government_program, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation_government_action, :disabled => true %>
-  </div>
-</div>
-
-<%= f.input :budget_allocation_budget_structure, :disabled => true %>
 
 <%= f.input :budget_allocation_expense_nature, :disabled => true %>
 
