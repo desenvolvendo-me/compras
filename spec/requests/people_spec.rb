@@ -86,13 +86,13 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Amazonas'
+      page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
       page.should have_field "Complemento", :with => "Apartamento 12"
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field "CEP", :with => "31400-223"
 
       within_fieldset 'Endereço de Correspondência' do
-        page.should have_field 'Logradouro', :with => 'Amazonas'
+        page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
         page.should have_field 'Bairro', :with => 'Portugal'
         page.should have_field 'CEP', :with => '89009-187'
       end
@@ -239,13 +239,13 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Bento Gonçalves'
+      page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
       page.should have_field 'Complemento', :with => 'Setor 7, Sala 2'
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field "CEP", :with => "31600-223"
 
       within_fieldset 'Endereço de Correspondência' do
-        page.should have_field 'Logradouro', :with => 'Bento Gonçalves'
+        page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
         page.should have_field 'Complemento', :with => 'Setor 7, Sala 2'
         page.should have_field 'Bairro', :with => 'Portugal'
         page.should have_field "CEP", :with => "31600-223"
@@ -397,13 +397,13 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Amazonas'
+      page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
       page.should have_field "Complemento", :with => "Apartamento 12"
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field "CEP", :with => "31400-223"
 
       within_fieldset 'Endereço de Correspondência' do
-        page.should have_field 'Logradouro', :with => 'Amazonas'
+        page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
         page.should have_field 'Bairro', :with => 'Portugal'
         page.should have_field 'CEP', :with => '89009-187'
       end
