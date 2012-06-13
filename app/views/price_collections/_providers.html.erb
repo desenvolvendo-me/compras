@@ -36,8 +36,8 @@
 
   $('#providers-list').on('change', '.provider-modal input[type=hidden]', function (event, provider) {
     var mainDiv = $(this).closest('div.provider_collection_proposal'),
-      emailInput = mainDiv.find('input.email'),
-      loginInput = mainDiv.find('input.login');
+        emailInput = mainDiv.find('input.email'),
+        loginInput = mainDiv.find('input.login');
 
     emailInput.val(provider.email);
     loginInput.val(provider.login);
