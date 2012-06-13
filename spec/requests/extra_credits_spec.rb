@@ -168,6 +168,7 @@ feature "ExtraCredits" do
     click_link 'Créditos Suplementares'
 
     click_link 'Criar Crédito Suplementar'
+
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
 
