@@ -684,7 +684,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :reserve_funds do
+  resources :reserve_funds, :except => [:destroy, :update] do
     collection do
       get :filter
       get :modal
