@@ -642,7 +642,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :purchase_solicitations do
+  resources :purchase_solicitations, :except => :destroy do
     collection do
       get :filter
       get :modal

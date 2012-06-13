@@ -118,6 +118,8 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
+    page.should_not have_link 'Apagar'
+
     within_tab 'Dados gerais' do
       fill_mask 'Ano', :with => '2013'
       fill_mask 'Data da solicitação', :with => '01/02/2013'
@@ -184,28 +186,6 @@ feature "PurchaseSolicitations" do
 
       page.should have_field 'Item', :with => '1'
     end
-  end
-
-  scenario 'destroy an existent purchase_solicitation' do
-    PurchaseSolicitation.make!(:reparo)
-
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apagar', :confirm => true
-
-    page.should have_notice 'Solicitação de Compra apagada com sucesso.'
-
-    page.should_not have_content '2012'
-    page.should_not have_content '31/01/2012'
-    page.should_not have_content 'Wenderson Malheiros'
-    page.should_not have_content 'Reparo nas instalações'
-    page.should_not have_content 'Bens'
   end
 
   scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
