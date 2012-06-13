@@ -468,7 +468,7 @@ feature "Pledges", :driver => :selenium do
       fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
 
       page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
-      page.should have_field 'Saldo da dotação', :with => "500,00"
+      page.should have_field 'Saldo da dotação', :with => "479,00"
       page.should have_field 'Saldo reserva', :with => "10,50"
     end
   end
@@ -541,9 +541,9 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Estrutura orçamentária', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
 
-      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação *', :with => '2012', :field => 'Exercício'
 
-      page.should have_field 'Saldo da dotação', :with => '500,00'
+      page.should have_field 'Saldo da dotação', :with => '489,50'
       page.should have_field 'Função', :with => '04 - Administração'
       page.should have_field 'Subfunção', :with => '01 - Administração Geral'
       page.should have_field 'Programa', :with => 'Habitação'
@@ -551,7 +551,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Estrutura orçamentária', :with => '02.00 - Secretaria de Educação'
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
-      clear_modal 'Dotação'
+      clear_modal 'Dotação *'
 
       page.should have_field 'Saldo da dotação', :with => ''
       page.should have_field 'Função', :with => ''
@@ -712,7 +712,7 @@ feature "Pledges", :driver => :selenium do
       fill_modal 'Reserva de dotação', :with => '2011', :field => 'Exercício'
 
       page.should have_field 'Saldo reserva', :with => "100,50"
-      page.should have_field 'Saldo da dotação', :with => "3.000,00"
+      page.should have_field 'Saldo da dotação', :with => "2.899,50"
     end
   end
 

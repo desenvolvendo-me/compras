@@ -8,5 +8,5 @@ builder resource, json do
   json.government_action    resource.budget_allocation_government_action.to_s
   json.budget_structure     resource.budget_allocation_budget_structure.to_s
   json.expense_nature       resource.budget_allocation_expense_nature.to_s
-  json.amount               resource.decorator.budget_allocation_amount
+  json.real_amount          resource.decorator.budget_allocation_real_amount
 end
