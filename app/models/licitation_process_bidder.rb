@@ -77,7 +77,7 @@ class LicitationProcessBidder < Compras::Model
   def proposal_total_value
    total = self.class.joins { proposals.administrative_process_budget_allocation_item }.
      where { |bidder| bidder.id.eq id }.
-     sum('administrative_process_budget_allocation_items.quantity * licitation_process_bidder_proposals.unit_price')
+     sum('compras_administrative_process_budget_allocation_items.quantity * compras_licitation_process_bidder_proposals.unit_price')
 
     BigDecimal.new(total)
   end
@@ -87,7 +87,7 @@ class LicitationProcessBidder < Compras::Model
 
     total = self.class.joins { proposals.administrative_process_budget_allocation_item.licitation_process_lot }.
       where { |bidder| (bidder.id.eq id) & (bidder.proposals.administrative_process_budget_allocation_item.licitation_process_lot.id.eq lot_id) }.
-      sum('administrative_process_budget_allocation_items.quantity * licitation_process_bidder_proposals.unit_price')
+      sum('compras_administrative_process_budget_allocation_items.quantity * compras_licitation_process_bidder_proposals.unit_price')
 
     BigDecimal.new(total)
   end

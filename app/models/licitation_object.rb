@@ -37,7 +37,7 @@ class LicitationObject < Compras::Model
   def licitation_exemption(modality)
     DirectPurchaseBudgetAllocationItem.select([:quantity, :unit_price]).
       joins( :direct_purchase_budget_allocation => :direct_purchase ).
-      where('direct_purchases.modality = ? AND direct_purchases.licitation_object_id = ?', modality, self.id ).
+      where('compras_direct_purchases.modality = ? AND compras_direct_purchases.licitation_object_id = ?', modality, self.id ).
       collect(&:estimated_total_price).sum
   end
 end
