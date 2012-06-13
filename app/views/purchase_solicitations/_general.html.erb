@@ -1,28 +1,28 @@
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :accounting_year %>
+    <%= f.input :accounting_year, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :request_date %>
+    <%= f.input :request_date, :disabled => f.object.annulled? %>
   </div>
 </div>
 
-<%= f.input :budget_structure %>
-<%= f.input :responsible %>
-<%= f.input :justification %>
+<%= f.input :budget_structure, :disabled => f.object.annulled? %>
+<%= f.input :responsible, :disabled => f.object.annulled? %>
+<%= f.input :justification, :disabled => f.object.annulled? %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :delivery_location %>
+    <%= f.input :delivery_location, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :kind %>
+    <%= f.input :kind, :disabled => f.object.annulled? %>
   </div>
 </div>
 
-<%= f.input :general_observations %>
+<%= f.input :general_observations, :disabled => f.object.annulled? %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">

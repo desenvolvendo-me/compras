@@ -13,6 +13,7 @@ class PurchaseSolicitation < Compras::Model
 
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation, :order => :id
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
+  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
@@ -35,6 +36,10 @@ class PurchaseSolicitation < Compras::Model
 
   def total_allocations_items_value
     purchase_solicitation_budget_allocations.collect(&:total_items_value).sum
+  end
+
+  def annul!
+    update_attribute :service_status, PurchaseSolicitationServiceStatus::ANNULLED
   end
 
   protected

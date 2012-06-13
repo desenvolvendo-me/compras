@@ -8,6 +8,7 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   belongs_to :material
 
   delegate :reference_unit, :to => :material, :allow_nil => true
+  delegate :annulled?, :to => :purchase_solicitation_budget_allocation, :allow_nil => true
 
   validates :material, :quantity, :unit_price, :presence => true
 

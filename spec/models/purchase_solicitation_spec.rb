@@ -56,4 +56,12 @@ describe PurchaseSolicitation do
       item_two.errors.messages[:budget_allocation_id].should be_nil
     end
   end
+
+  describe '#annul!' do
+    it 'should updates the service status to annulled' do
+      subject.should_receive(:update_attribute).with(:service_status, PurchaseSolicitationServiceStatus::ANNULLED)
+
+      subject.annul!
+    end
+  end
 end

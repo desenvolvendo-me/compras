@@ -649,6 +649,8 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
+
   resources :reference_units do
     collection do
       get :modal
