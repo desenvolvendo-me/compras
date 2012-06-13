@@ -9,6 +9,7 @@ class LicitationProcessesController < CrudController
     object.process_date = Date.current
     object.administrative_process = administrative_process
     object.modality = administrative_process.modality
+    object.judgment_form = administrative_process.judgment_form
 
     super
   end

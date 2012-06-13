@@ -130,7 +130,6 @@
         optionsForObjectType                    = _(typesOfCalculationGroupsForObjectType[objectType] || []),
         optionsForModality                      = _(typesOfCalculationGroupsForModality[modality] || []);
 
-
     if (!optionsForObjectType.include(options[1])) {
       delete options[1];
     }
@@ -166,5 +165,10 @@
   filterTypesOfCalculation('<%= f.object.administrative_process_judgment_form_kind %>',
                            '<%= f.object.administrative_process_object_type %>',
                            '<%= f.object.administrative_process_modality %>');
+
+  $('#licitation_process_judgment_form_id').change(function(e, record) {
+    filterTypesOfCalculation(record.kind, '<%= f.object.administrative_process_object_type %>', '<%= f.object.administrative_process_modality %>');
+  });
+
   $("#licitation_process_type_of_calculation").val("<%= f.object.type_of_calculation %>");
 </script>

@@ -30,6 +30,7 @@ describe LicitationProcess do
   it { should belong_to :capability }
   it { should belong_to :payment_method }
   it { should belong_to :readjustment_index }
+  it { should belong_to :judgment_form }
 
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_notices).dependent(:destroy) }

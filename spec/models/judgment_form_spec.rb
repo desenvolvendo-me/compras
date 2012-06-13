@@ -13,4 +13,5 @@ describe JudgmentForm do
   it { should validate_presence_of :licitation_kind }
 
   it { should have_many(:administrative_processes).dependent(:restrict) }
+  it { should have_many(:licitation_processes).dependent(:restrict) }
 end

@@ -1,3 +1,4 @@
 builder resource, json do
-  json.description json.description
+  json.description resource.description
+  json.kind        resource.kind
 end

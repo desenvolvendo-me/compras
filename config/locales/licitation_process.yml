@@ -30,7 +30,7 @@ pt-BR:
         observations: "Observações gerais"
         administrative_process_modality_humanize: "Modalidade"
         administrative_process_object_type_humanize: "Tipo de objeto"
-        administrative_process_judgment_form: "Forma de julgamento"
+        judgment_form: "Forma de julgamento"
         administrative_process_description: "Objeto do processo licitatório"
         administrative_process_responsible: "Responsável"
         administrative_process_item: "Inciso"

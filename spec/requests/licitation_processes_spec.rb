@@ -34,7 +34,6 @@ feature "LicitationProcesses" do
       page.should have_disabled_field 'Processo'
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Tipo de objeto'
-      page.should have_disabled_field 'Forma de julgamento'
       page.should have_disabled_field 'Objeto do processo licitatório'
       page.should have_disabled_field 'Responsável'
       page.should have_disabled_field 'Inciso'
@@ -166,6 +165,40 @@ feature "LicitationProcesses" do
       page.should have_field 'Valor total', :with => '20,00'
 
       page.should have_field 'Item', :with => '1'
+    end
+  end
+
+  scenario 'changing judgment form' do
+    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+    budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation
+    Capability.make!(:reforma)
+    PaymentMethod.make!(:dinheiro)
+    DocumentType.make!(:fiscal)
+    allocation = BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Indexer.make!(:xpto)
+    JudgmentForm.make!(:por_lote_com_melhor_tecnica)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
+
+    page.should have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
+
+    page.should_not have_link 'Publicações'
+
+    within_tab 'Dados gerais' do
+      fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
+      select 'Menor preço por lote', :from => 'Tipo da apuração'
+
+      fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
+      select 'Menor preço global', :from => 'Tipo da apuração'
     end
   end
 

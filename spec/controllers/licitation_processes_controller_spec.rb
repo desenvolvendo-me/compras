@@ -18,6 +18,12 @@ describe LicitationProcessesController do
       assigns(:licitation_process).year.should eq Date.current.year
     end
 
+    it 'uses current year as default value for judgment form' do
+      get :new, :administrative_process_id => administrative_process.id
+
+      assigns(:licitation_process).judgment_form.description.should eq 'Forma Global com Menor Preço'
+    end
+
     it 'uses current date as default value for process_date' do
       get :new, :administrative_process_id => administrative_process.id
 

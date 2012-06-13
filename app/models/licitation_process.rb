@@ -5,7 +5,7 @@ class LicitationProcess < ActiveRecord::Base
   attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
   attr_accessible :pledge_type, :administrative_process_attributes, :type_of_calculation
   attr_accessible :period, :period_unit, :expiration, :expiration_unit
-  attr_accessible :licitation_process_bidders_attributes
+  attr_accessible :licitation_process_bidders_attributes, :judgment_form_id
 
   attr_readonly :process, :year, :licitation_number
 
@@ -20,6 +20,7 @@ class LicitationProcess < ActiveRecord::Base
   belongs_to :capability
   belongs_to :payment_method
   belongs_to :readjustment_index, :class_name => 'Indexer'
+  belongs_to :judgment_form
 
   has_and_belongs_to_many :document_types
 
