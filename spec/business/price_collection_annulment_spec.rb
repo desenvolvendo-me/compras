@@ -7,7 +7,7 @@ describe PriceCollectionAnnulment do
   end
 
   let :annul do
-    double('Annul', :date => 'current date', :description => 'Foo Bar', :employee_id => 1)
+    double('Annul', :date => 'current date', :description => 'Foo Bar', :employee_id => 1, :present? => true)
   end
 
   let :proposal do
@@ -18,15 +18,14 @@ describe PriceCollectionAnnulment do
 
   it 'should not annul the proposal when annul is not present' do
     price_collection.should_not_receive(:annul!)
-    price_collection.stub_chain(:annul, :present?).and_return false
+    price_collection.stub_chain(:annul, :present?).and_return(false)
 
     subject.change!
   end
 
   it 'should annul the proposal when annul is present' do
-    price_collection.should_receive(:annul!).and_return true
-    price_collection.stub(:annul).and_return annul
-    price_collection.stub_chain(:annul, :present?).and_return true
+    price_collection.should_receive(:annul!).and_return(true)
+    price_collection.stub(:annul).and_return(annul)
 
     proposal.should_receive(:annul!)
     proposal.should_receive(:build_annul).with(:employee_id => 1, :date => 'current date', :description => 'Foo Bar').and_return double(:save => true)
