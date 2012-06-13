@@ -44,7 +44,7 @@ feature "Prefecture" do
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Bento Gonçalves'
+      page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field 'CEP', :with => '33400-500'
     end
@@ -95,7 +95,7 @@ feature "Prefecture" do
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Bento Gonçalves'
+      page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
       page.should have_field 'Bairro', :with => 'Portugal'
       page.should have_field 'CEP', :with => '33400-500'
     end
