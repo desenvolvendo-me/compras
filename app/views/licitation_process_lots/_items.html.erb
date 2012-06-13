@@ -40,10 +40,9 @@
 <% end %>
 
 <script>
-  var objectBudgetAllocationItemIds = '<%= f.object.administrative_process_budget_allocation_item_ids.join(",") %>';
-  objectBudgetAllocationItemIds = objectBudgetAllocationItemIds.split(',');
-
   $('#licitation_process_lot_administrative_process_budget_allocation_items').focus(function() {
+    var objectBudgetAllocationItemIds = '<%= f.object.administrative_process_budget_allocation_item_ids.join(",") %>';
+    objectBudgetAllocationItemIds = objectBudgetAllocationItemIds.split(',');
 
     var tableItems = [];
     var deletedItems = [];
