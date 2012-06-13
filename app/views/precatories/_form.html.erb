@@ -20,7 +20,7 @@
     });
   }
 
-  $('form.precatory').delegate('.remove-parcel', 'click', fillParcelNumber);
+  $('form.precatory').on('click', '.remove-parcel', fillParcelNumber)
   $('form.precatory').bind('append.mustache', fillParcelNumber);
   fillParcelNumber();
 </script>
