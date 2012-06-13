@@ -35,9 +35,9 @@
   });
 
   $('#providers-list').on('change', '.provider-modal input[type=hidden]', function (event, provider) {
-    var mainDiv = $(this).closest('div.provider_collection_proposal');
-    var emailInput = mainDiv.find('input.email');
-    var loginInput = mainDiv.find('input.login');
+    var mainDiv = $(this).closest('div.provider_collection_proposal'),
+      emailInput = mainDiv.find('input.email'),
+      loginInput = mainDiv.find('input.login');
 
     emailInput.val(provider.email);
     loginInput.val(provider.login);
