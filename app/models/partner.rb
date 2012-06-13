@@ -1,4 +1,4 @@
-class Partner < ActiveRecord::Base
+class Partner < Compras::Model
   attr_accessible :person_id, :percentage
 
   belongs_to :person

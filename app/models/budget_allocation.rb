@@ -1,4 +1,4 @@
-class BudgetAllocation < ActiveRecord::Base
+class BudgetAllocation < Compras::Model
   attr_accessible :entity_id, :year, :description, :budget_structure_id, :date
   attr_accessible :subfunction_id, :government_program_id, :amount, :personal
   attr_accessible :government_action_id, :foresight, :education, :description

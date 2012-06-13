@@ -1,4 +1,4 @@
-class Capability < ActiveRecord::Base
+class Capability < Compras::Model
   attr_accessible :entity_id, :year, :description, :goal, :kind, :status
 
   has_enumeration_for :kind, :with => CapabilityKind

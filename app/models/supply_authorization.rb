@@ -1,4 +1,4 @@
-class SupplyAuthorization < ActiveRecord::Base
+class SupplyAuthorization < Compras::Model
   attr_accessible :year, :code, :direct_purchase_id
 
   belongs_to :direct_purchase

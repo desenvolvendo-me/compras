@@ -1,4 +1,4 @@
-class Creditor < ActiveRecord::Base
+class Creditor < Compras::Model
   attr_accessible :person_id, :occupation_classification_id, :company_size_id
   attr_accessible :main_cnae_id, :municipal_public_administration, :autonomous
   attr_accessible :social_identification_number, :choose_simple

@@ -1,4 +1,4 @@
-class ServiceOrContractType < ActiveRecord::Base
+class ServiceOrContractType < Compras::Model
   attr_accessible :description, :tce_code, :service_goal
 
   has_enumeration_for :service_goal, :create_helpers => true

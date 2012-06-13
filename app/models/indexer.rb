@@ -1,4 +1,4 @@
-class Indexer < ActiveRecord::Base
+class Indexer < Compras::Model
   attr_accessible :name, :currency_id, :indexer_values_attributes
 
   belongs_to :currency

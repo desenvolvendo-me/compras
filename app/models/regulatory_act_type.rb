@@ -1,4 +1,4 @@
-class RegulatoryActType < ActiveRecord::Base
+class RegulatoryActType < Compras::Model
   attr_accessible :description, :regulatory_act_type_classification_id
 
   belongs_to :regulatory_act_type_classification

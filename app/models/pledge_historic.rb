@@ -1,4 +1,4 @@
-class PledgeHistoric < ActiveRecord::Base
+class PledgeHistoric < Compras::Model
   attr_accessible :description, :entity_id, :year
 
   has_enumeration_for :source

@@ -78,4 +78,7 @@ end
 require 'unico/engine'
 require 'unico/model'
 
+# Compras Model
+require 'compras'
+
 $:.append Unico::Engine.config.root

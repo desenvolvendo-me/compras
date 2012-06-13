@@ -1,4 +1,4 @@
-class PriceCollectionLot < ActiveRecord::Base
+class PriceCollectionLot < Compras::Model
   attr_accessible :price_collection_id, :observations, :items_attributes
 
   belongs_to :price_collection

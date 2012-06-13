@@ -1,4 +1,4 @@
-class Material < ActiveRecord::Base
+class Material < Compras::Model
   attr_accessible :materials_class_id, :code, :description, :material_type
   attr_accessible :detailed_description, :minimum_stock_balance
   attr_accessible :reference_unit_id, :manufacturer, :perishable, :storable

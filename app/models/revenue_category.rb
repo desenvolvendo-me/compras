@@ -1,4 +1,4 @@
-class RevenueCategory < ActiveRecord::Base
+class RevenueCategory < Compras::Model
   attr_accessible :code, :description
 
   has_many :revenue_subcategories, :dependent => :restrict

@@ -1,4 +1,4 @@
-class PledgeLiquidation < ActiveRecord::Base
+class PledgeLiquidation < Compras::Model
   attr_accessible :pledge_id, :value, :date, :description
 
   belongs_to :pledge

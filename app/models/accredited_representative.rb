@@ -1,4 +1,4 @@
-class AccreditedRepresentative < ActiveRecord::Base
+class AccreditedRepresentative < Compras::Model
   attr_accessible :person_id, :licitation_process_bidder_id
 
   belongs_to :person

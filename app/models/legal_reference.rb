@@ -1,4 +1,4 @@
-class LegalReference < ActiveRecord::Base
+class LegalReference < Compras::Model
   attr_accessible :description, :law, :article, :paragraph, :sections, :synopsis
 
   has_many :direct_purchases, :dependent => :restrict

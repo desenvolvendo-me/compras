@@ -1,4 +1,4 @@
-class ExtraCredit < ActiveRecord::Base
+class ExtraCredit < Compras::Model
   attr_accessible :entity_id, :year, :credit_type, :regulatory_act_id
   attr_accessible :credit_date, :extra_credit_nature_id
   attr_accessible :extra_credit_moviment_types_attributes

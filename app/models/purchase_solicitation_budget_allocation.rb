@@ -1,4 +1,4 @@
-class PurchaseSolicitationBudgetAllocation < ActiveRecord::Base
+class PurchaseSolicitationBudgetAllocation < Compras::Model
   attr_accessible :purchase_solicitation_id, :budget_allocation_id, :blocked
   attr_accessible :expense_nature_id, :items_attributes
 

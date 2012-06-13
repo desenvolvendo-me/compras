@@ -1,4 +1,4 @@
-class DocumentType < ActiveRecord::Base
+class DocumentType < Compras::Model
   attr_accessible :validity, :description
 
   has_and_belongs_to_many :licitation_processes

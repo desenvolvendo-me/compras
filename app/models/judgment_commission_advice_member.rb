@@ -1,4 +1,4 @@
-class JudgmentCommissionAdviceMember < ActiveRecord::Base
+class JudgmentCommissionAdviceMember < Compras::Model
   attr_accessible :judgment_commission_advice_id, :individual_id, :role, :role_nature, :registration
   attr_accessible :licitation_commission_member_id
 

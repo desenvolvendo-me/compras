@@ -1,4 +1,4 @@
-class Customer < ActiveRecord::Base
+class Customer < Compras::Model
   attr_accessible :name, :domain, :database
 
   validates :name, :domain, :database, :presence => true

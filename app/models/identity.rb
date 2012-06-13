@@ -1,4 +1,4 @@
-class Identity < ActiveRecord::Base
+class Identity < Compras::Model
   attr_accessible :number, :issuer, :state_id, :issue
 
   attr_readonly :person_id

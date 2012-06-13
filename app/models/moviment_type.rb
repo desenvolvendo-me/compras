@@ -1,4 +1,4 @@
-class MovimentType < ActiveRecord::Base
+class MovimentType < Compras::Model
   attr_accessible :name, :operation, :character
 
   has_enumeration_for :operation, :with => MovimentTypeOperation, :create_helpers => true

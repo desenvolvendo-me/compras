@@ -1,4 +1,4 @@
-class LicitationProcessBidderProposal < ActiveRecord::Base
+class LicitationProcessBidderProposal < Compras::Model
   attr_accessible :licitation_process_bidder, :administrative_process_budget_allocation_item, :brand, :unit_price
   attr_accessible :licitation_process_bidder_id, :administrative_process_budget_allocation_item_id
 

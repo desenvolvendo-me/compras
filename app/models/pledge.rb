@@ -1,4 +1,4 @@
-class Pledge < ActiveRecord::Base
+class Pledge < Compras::Model
   attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :pledge_type
   attr_accessible :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id
   attr_accessible :pledge_historic_id, :contract_id, :licitation_modality_id

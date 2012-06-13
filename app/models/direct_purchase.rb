@@ -1,4 +1,4 @@
-class DirectPurchase < ActiveRecord::Base
+class DirectPurchase < Compras::Model
   attr_accessible :year, :date, :legal_reference_id, :modality, :provider_id, :budget_structure_id
   attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :price_collection, :price_registration, :observation, :pledge_type

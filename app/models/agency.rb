@@ -1,4 +1,4 @@
-class Agency < ActiveRecord::Base
+class Agency < Compras::Model
   attr_accessible :name, :number, :digit, :city_id, :bank_id, :phone, :fax, :email
 
   belongs_to :city

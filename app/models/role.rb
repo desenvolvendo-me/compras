@@ -1,4 +1,4 @@
-class Role < ActiveRecord::Base
+class Role < Compras::Model
   attr_accessible :profile_id, :controller, :permission
 
   has_enumeration_for :permission

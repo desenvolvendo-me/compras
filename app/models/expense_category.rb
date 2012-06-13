@@ -1,4 +1,4 @@
-class ExpenseCategory < ActiveRecord::Base
+class ExpenseCategory < Compras::Model
   attr_accessible :code, :description
 
   has_many :expense_natures, :dependent => :restrict

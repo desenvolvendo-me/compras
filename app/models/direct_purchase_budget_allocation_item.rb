@@ -1,4 +1,4 @@
-class DirectPurchaseBudgetAllocationItem < ActiveRecord::Base
+class DirectPurchaseBudgetAllocationItem < Compras::Model
   attr_accessible :direct_purchase_budget_allocation_id, :material_id
   attr_accessible :brand, :quantity, :unit_price
 

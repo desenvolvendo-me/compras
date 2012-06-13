@@ -1,4 +1,4 @@
-class RevenueRubric < ActiveRecord::Base
+class RevenueRubric < Compras::Model
   attr_accessible :code, :description, :revenue_source_id
 
   belongs_to :revenue_source

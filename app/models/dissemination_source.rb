@@ -1,4 +1,4 @@
-class DisseminationSource < ActiveRecord::Base
+class DisseminationSource < Compras::Model
   attr_accessible :description, :communication_source_id
 
   belongs_to :communication_source

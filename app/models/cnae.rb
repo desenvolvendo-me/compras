@@ -1,4 +1,4 @@
-class Cnae < ActiveRecord::Base
+class Cnae < Compras::Model
   attr_accessible :name, :code, :section, :risk_degree_id, :parent_id
 
   acts_as_nested_set

@@ -1,4 +1,4 @@
-class Function < ActiveRecord::Base
+class Function < Compras::Model
   attr_accessible :code, :regulatory_act_id, :description
 
   belongs_to :regulatory_act

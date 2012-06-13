@@ -1,4 +1,4 @@
-class BudgetStructure < ActiveRecord::Base
+class BudgetStructure < Compras::Model
   attr_accessible :description, :budget_structure, :tce_code, :acronym
   attr_accessible :performance_field, :budget_structure_configuration_id
   attr_accessible :administration_type_id, :address_attributes

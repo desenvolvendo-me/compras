@@ -1,4 +1,4 @@
-class PriceCollection < ActiveRecord::Base
+class PriceCollection < Compras::Model
   attr_accessible :collection_number, :year, :date, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :object_description, :observations, :expiration
   attr_accessible :period, :period_unit, :proposal_validity, :proposal_validity_unit

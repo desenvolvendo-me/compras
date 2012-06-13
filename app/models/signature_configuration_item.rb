@@ -1,4 +1,4 @@
-class SignatureConfigurationItem < ActiveRecord::Base
+class SignatureConfigurationItem < Compras::Model
   attr_accessible :signature_configuration_id, :signature_id, :order
 
   belongs_to :signature_configuration

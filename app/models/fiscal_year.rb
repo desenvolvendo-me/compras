@@ -1,4 +1,4 @@
-class FiscalYear < ActiveRecord::Base
+class FiscalYear < Compras::Model
   attr_accessible :year
 
   validates :year, :presence => true, :uniqueness => { :allow_blank => true }

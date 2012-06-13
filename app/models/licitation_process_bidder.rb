@@ -1,4 +1,4 @@
-class LicitationProcessBidder < ActiveRecord::Base
+class LicitationProcessBidder < Compras::Model
   attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date, :status
   attr_accessible :receipt_date, :invited, :documents_attributes, :proposals_attributes
   attr_accessible :technical_score, :person_ids

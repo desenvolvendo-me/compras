@@ -1,4 +1,4 @@
-class EconomicRegistration < ActiveRecord::Base
+class EconomicRegistration < Compras::Model
   attr_accessible :registration, :person_id
 
   belongs_to :person

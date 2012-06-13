@@ -1,4 +1,4 @@
-class OccupationClassification < ActiveRecord::Base
+class OccupationClassification < Compras::Model
   attr_accessible :code, :name, :parent_id
 
   acts_as_nested_set

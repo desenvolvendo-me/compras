@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < Compras::Model
   attr_accessible :email, :login, :profile_id, :password, :password_confirmation
   attr_accessible :authenticable_id, :authenticable_type
 

@@ -1,4 +1,4 @@
-class LicitationProcessPublication < ActiveRecord::Base
+class LicitationProcessPublication < Compras::Model
   attr_accessible :licitation_process_id, :name, :publication_date, :publication_of, :circulation_type
 
   has_enumeration_for :publication_of, :with => PublicationOf, :create_helpers => true

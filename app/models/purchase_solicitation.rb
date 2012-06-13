@@ -1,4 +1,4 @@
-class PurchaseSolicitation < ActiveRecord::Base
+class PurchaseSolicitation < Compras::Model
   attr_accessible :accounting_year, :request_date, :responsible_id, :justification
   attr_accessible :delivery_location_id, :kind, :general_observations
   attr_accessible :purchase_solicitation_budget_allocations_attributes, :budget_structure_id

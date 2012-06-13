@@ -1,4 +1,4 @@
-class BudgetStructureConfiguration < ActiveRecord::Base
+class BudgetStructureConfiguration < Compras::Model
   attr_accessible :description, :entity_id, :regulatory_act_id
   attr_accessible :budget_structure_levels, :budget_structure_levels_attributes
 

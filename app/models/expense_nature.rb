@@ -1,4 +1,4 @@
-class ExpenseNature < ActiveRecord::Base
+class ExpenseNature < Compras::Model
   attr_accessible :entity_id, :regulatory_act_id, :expense_split
   attr_accessible :full_code, :kind, :expense_group_id
   attr_accessible :description, :docket, :expense_category_id

@@ -1,4 +1,4 @@
-class AdministrativeProcess < ActiveRecord::Base
+class AdministrativeProcess < Compras::Model
   attr_accessible :responsible_id, :process, :year, :date
   attr_accessible :modality, :protocol, :object_type, :status, :description
   attr_accessible :judgment_form_id, :administrative_process_budget_allocations_attributes

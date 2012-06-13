@@ -1,4 +1,4 @@
-class SpecialEntry < ActiveRecord::Base
+class SpecialEntry < Compras::Model
   attr_accessible :person_attributes
   attr_accessible :address_attributes
   attr_accessible :correspondence_address_attributes

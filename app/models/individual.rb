@@ -1,4 +1,4 @@
-class Individual < ActiveRecord::Base
+class Individual < Compras::Model
   attr_accessible :person_attributes, :mother, :father, :birthdate, :gender
   attr_accessible :identity_attributes, :address_attributes, :cpf
   attr_accessible :correspondence_address_attributes

@@ -1,4 +1,4 @@
-class PriceCollectionProposalItem < ActiveRecord::Base
+class PriceCollectionProposalItem < Compras::Model
   attr_accessible :price_collection_proposal_id, :price_collection_lot_item_id, :unit_price
 
   attr_readonly :price_collection_proposal_id, :price_collection_lot_item_id

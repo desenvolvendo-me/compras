@@ -1,4 +1,4 @@
-class MaterialsGroup < ActiveRecord::Base
+class MaterialsGroup < Compras::Model
   attr_accessible :group_number, :description
 
   has_and_belongs_to_many :providers

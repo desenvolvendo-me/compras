@@ -1,4 +1,4 @@
-class Profile < ActiveRecord::Base
+class Profile < Compras::Model
   attr_accessible :name, :roles_attributes
 
   has_many :roles, :dependent => :destroy, :inverse_of => :profile

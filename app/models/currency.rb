@@ -1,4 +1,4 @@
-class Currency < ActiveRecord::Base
+class Currency < Compras::Model
   attr_accessible :name, :acronym
 
   has_many :indexers, :dependent => :restrict

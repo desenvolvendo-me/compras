@@ -1,4 +1,4 @@
-class PledgeParcelMovimentation < ActiveRecord::Base
+class PledgeParcelMovimentation < Compras::Model
   attr_accessible :pledge_parcel_id, :pledge_parcel_modifiable_type
   attr_accessible :pledge_parcel_modifiable_id, :pledge_parcel_value_was
   attr_accessible :pledge_parcel_value, :value

@@ -1,4 +1,4 @@
-class DeliveryLocation < ActiveRecord::Base
+class DeliveryLocation < Compras::Model
   attr_accessible :address_attributes, :description
 
   belongs_to :address

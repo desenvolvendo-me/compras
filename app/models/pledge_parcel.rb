@@ -1,4 +1,4 @@
-class PledgeParcel < ActiveRecord::Base
+class PledgeParcel < Compras::Model
   attr_accessible :expiration_date, :value, :number, :pledge_id
 
   belongs_to :pledge

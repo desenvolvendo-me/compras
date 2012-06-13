@@ -1,4 +1,4 @@
-class Contract < ActiveRecord::Base
+class Contract < Compras::Model
   attr_accessible :year, :entity_id, :contract_number, :process_number
   attr_accessible :signature_date, :end_date, :description, :kind
 

@@ -1,4 +1,4 @@
-class Signature < ActiveRecord::Base
+class Signature < Compras::Model
   attr_accessible :person_id, :position_id
 
   belongs_to :person

@@ -1,4 +1,4 @@
-class LicitationCommissionMember < ActiveRecord::Base
+class LicitationCommissionMember < Compras::Model
   attr_accessible :licitation_commission_id, :individual_id, :role, :role_nature, :registration
 
   has_enumeration_for :role, :with => LicitationCommissionMemberRole, :create_helpers => true

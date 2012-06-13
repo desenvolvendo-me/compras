@@ -1,4 +1,4 @@
-class PrecatoryParcel < ActiveRecord::Base
+class PrecatoryParcel < Compras::Model
   attr_accessible :expiration_date, :value, :situation, :payment_date
   attr_accessible :amount_paid, :observation
 

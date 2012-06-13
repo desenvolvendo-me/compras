@@ -1,4 +1,4 @@
-class RegularizationOrAdministrativeSanctionReason < ActiveRecord::Base
+class RegularizationOrAdministrativeSanctionReason < Compras::Model
   attr_accessible :description, :reason_type
 
   has_enumeration_for :reason_type, :with => RegularizationOrAdministrativeSanctionReasonType, :create_helpers => true

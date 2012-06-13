@@ -1,4 +1,4 @@
-class BudgetAllocationType < ActiveRecord::Base
+class BudgetAllocationType < Compras::Model
   attr_accessible :description, :status
 
   has_enumeration_for :source

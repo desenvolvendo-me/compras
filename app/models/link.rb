@@ -1,4 +1,4 @@
-class Link < ActiveRecord::Base
+class Link < Compras::Model
   attr_accessible :controller_name
 
   has_and_belongs_to_many :bookmarks

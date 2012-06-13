@@ -1,4 +1,4 @@
-class ExtraCreditMovimentType < ActiveRecord::Base
+class ExtraCreditMovimentType < Compras::Model
   attr_accessible :moviment_type_id, :budget_allocation_id, :capability_id, :value
 
   belongs_to :moviment_type

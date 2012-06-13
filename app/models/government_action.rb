@@ -1,4 +1,4 @@
-class GovernmentAction < ActiveRecord::Base
+class GovernmentAction < Compras::Model
   attr_accessible :year, :description, :status, :entity_id
 
   has_enumeration_for :status, :create_helpers => true

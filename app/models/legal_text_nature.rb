@@ -1,4 +1,4 @@
-class LegalTextNature < ActiveRecord::Base
+class LegalTextNature < Compras::Model
   attr_accessible :description
 
   has_many :regulatory_acts, :dependent => :restrict

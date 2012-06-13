@@ -1,4 +1,4 @@
-class ExtraCreditNature < ActiveRecord::Base
+class ExtraCreditNature < Compras::Model
   attr_accessible :description, :kind
 
   has_enumeration_for :kind, :with => ExtraCreditNatureKind

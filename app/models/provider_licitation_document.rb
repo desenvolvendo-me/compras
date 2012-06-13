@@ -1,4 +1,4 @@
-class ProviderLicitationDocument < ActiveRecord::Base
+class ProviderLicitationDocument < Compras::Model
   attr_accessible :provider_id, :document_type_id, :document_number, :emission_date, :expiration_date
 
   belongs_to :provider

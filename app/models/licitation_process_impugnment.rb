@@ -1,4 +1,4 @@
-class LicitationProcessImpugnment < ActiveRecord::Base
+class LicitationProcessImpugnment < Compras::Model
   attr_accessible :licitation_process_id, :person_id, :impugnment_date, :related
   attr_accessible :valid_reason
 

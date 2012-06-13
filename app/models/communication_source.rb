@@ -1,4 +1,4 @@
-class CommunicationSource < ActiveRecord::Base
+class CommunicationSource < Compras::Model
   attr_accessible :description
 
   has_many :dissemination_sources, :dependent => :restrict

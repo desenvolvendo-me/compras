@@ -1,4 +1,4 @@
-class ExpenseKind < ActiveRecord::Base
+class ExpenseKind < Compras::Model
   attr_accessible :description, :status
 
   has_enumeration_for :status, :create_helpers => true

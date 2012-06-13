@@ -1,4 +1,4 @@
-class Subfunction < ActiveRecord::Base
+class Subfunction < Compras::Model
   attr_accessible :code, :description, :function_id, :entity_id, :year
 
   belongs_to :function

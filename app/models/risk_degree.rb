@@ -1,4 +1,4 @@
-class RiskDegree < ActiveRecord::Base
+class RiskDegree < Compras::Model
   attr_accessible :name, :level
 
   has_many :cnaes, :dependent => :restrict

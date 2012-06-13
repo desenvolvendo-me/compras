@@ -1,4 +1,4 @@
-class PledgeCancellation < ActiveRecord::Base
+class PledgeCancellation < Compras::Model
   attr_accessible :pledge_id, :date, :kind, :reason, :value, :nature
 
   has_enumeration_for :nature, :with => PledgeCancellationNature

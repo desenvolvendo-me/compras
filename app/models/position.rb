@@ -1,4 +1,4 @@
-class Position < ActiveRecord::Base
+class Position < Compras::Model
   attr_accessible :name
 
   has_many :employees, :dependent => :restrict

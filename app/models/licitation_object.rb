@@ -1,4 +1,4 @@
-class LicitationObject < ActiveRecord::Base
+class LicitationObject < Compras::Model
   attr_accessible :description, :year, :material_ids
 
   attr_readonly :purchase_invitation_letter, :purchase_taking_price

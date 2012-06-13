@@ -1,5 +1,5 @@
 # encoding: utf-8
-class ReserveAllocationType < ActiveRecord::Base
+class ReserveAllocationType < Compras::Model
   attr_accessible :description, :status
 
   has_enumeration_for :status

@@ -1,4 +1,4 @@
-class RevenueAccounting < ActiveRecord::Base
+class RevenueAccounting < Compras::Model
   attr_accessible :entity_id, :revenue_nature_id, :capability_id, :code, :year
   attr_accessible :kind, :value
 

@@ -1,4 +1,4 @@
-class RevenueSubcategory < ActiveRecord::Base
+class RevenueSubcategory < Compras::Model
   attr_accessible :code, :description, :revenue_category_id
 
   belongs_to :revenue_category

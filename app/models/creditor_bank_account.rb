@@ -1,4 +1,4 @@
-class CreditorBankAccount < ActiveRecord::Base
+class CreditorBankAccount < Compras::Model
   attr_accessible :creditor_id, :agency_id, :status, :account_type
   attr_accessible :number, :digit
 

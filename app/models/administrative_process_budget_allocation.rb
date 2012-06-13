@@ -1,4 +1,4 @@
-class AdministrativeProcessBudgetAllocation < ActiveRecord::Base
+class AdministrativeProcessBudgetAllocation < Compras::Model
   attr_accessible :administrative_process_id, :budget_allocation_id, :value, :items_attributes
 
   belongs_to :administrative_process

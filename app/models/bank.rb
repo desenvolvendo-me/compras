@@ -1,4 +1,4 @@
-class Bank < ActiveRecord::Base
+class Bank < Compras::Model
   attr_accessible :name, :code, :acronym
 
   has_many :agencies, :dependent => :restrict

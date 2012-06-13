@@ -1,4 +1,4 @@
-class BankAccount < ActiveRecord::Base
+class BankAccount < Compras::Model
   attr_accessible :name, :agency_id, :account_number, :originator, :number_agreement
 
   belongs_to :agency

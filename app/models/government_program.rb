@@ -1,4 +1,4 @@
-class GovernmentProgram < ActiveRecord::Base
+class GovernmentProgram < Compras::Model
   attr_accessible :entity_id, :year, :description, :status
 
   has_enumeration_for :status

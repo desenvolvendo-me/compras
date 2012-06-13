@@ -1,4 +1,4 @@
-class AdministrationType < ActiveRecord::Base
+class AdministrationType < Compras::Model
   attr_accessible :description, :administration, :organ_type, :legal_nature_id
 
   has_enumeration_for :administration, :create_helpers => true

@@ -1,4 +1,4 @@
-class Bookmark < ActiveRecord::Base
+class Bookmark < Compras::Model
   attr_accessible :user_id, :link_ids
 
   belongs_to :user

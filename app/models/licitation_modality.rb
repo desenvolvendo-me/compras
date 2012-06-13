@@ -1,4 +1,4 @@
-class LicitationModality < ActiveRecord::Base
+class LicitationModality < Compras::Model
   attr_accessible :regulatory_act_id, :description, :initial_value
   attr_accessible :final_value
 

@@ -1,4 +1,4 @@
-class Company < ActiveRecord::Base
+class Company < Compras::Model
   attr_accessible :name, :cnpj, :person_id, :legal_nature_id, :company_size_id
   attr_accessible :state_registration, :commercial_registration_number
   attr_accessible :commercial_registration_date, :responsible_role

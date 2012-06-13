@@ -1,4 +1,4 @@
-class RevenueNature < ActiveRecord::Base
+class RevenueNature < Compras::Model
   attr_accessible :regulatory_act_id, :classification, :revenue_rubric_id
   attr_accessible :specification, :kind, :docket, :entity_id, :year
   attr_accessible :revenue_category_id, :revenue_subcategory_id

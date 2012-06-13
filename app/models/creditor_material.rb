@@ -1,4 +1,4 @@
-class CreditorMaterial < ActiveRecord::Base
+class CreditorMaterial < Compras::Model
   attr_accessible :creditor_id, :material_id
 
   belongs_to :creditor

@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < Compras::Model
   attr_accessible :name, :phone, :personable_id, :personable_type
   attr_accessible :mobile, :email, :fax, :personable_attributes
 

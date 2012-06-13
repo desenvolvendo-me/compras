@@ -1,4 +1,4 @@
-class PledgeItem < ActiveRecord::Base
+class PledgeItem < Compras::Model
   attr_accessible :material_id, :description, :quantity, :unit_price
 
   attr_readonly :description

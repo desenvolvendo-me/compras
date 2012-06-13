@@ -1,4 +1,4 @@
-class Provider < ActiveRecord::Base
+class Provider < Compras::Model
   attr_accessible :person_id, :agency_id, :legal_nature_id, :cnae_id, :registration_date
   attr_accessible :bank_account, :crc_number, :crc_registration_date, :crc_expiration_date
   attr_accessible :crc_renewal_date, :provider_partners_attributes, :economic_registration_id

@@ -1,4 +1,4 @@
-class PriceCollectionAnnul < ActiveRecord::Base
+class PriceCollectionAnnul < Compras::Model
   include Annullable
   belongs_to :price_collection
 

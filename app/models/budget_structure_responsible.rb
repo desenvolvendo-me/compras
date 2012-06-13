@@ -1,4 +1,4 @@
-class BudgetStructureResponsible < ActiveRecord::Base
+class BudgetStructureResponsible < Compras::Model
   attr_accessible :responsible_id, :regulatory_act_id, :start_date
   attr_accessible :end_date, :status
 

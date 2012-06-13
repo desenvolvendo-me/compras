@@ -1,4 +1,4 @@
-class CreditorDocument < ActiveRecord::Base
+class CreditorDocument < Compras::Model
   attr_accessible :document_type_id, :document_number, :emission_date, :validity
   attr_accessible :issuer
 

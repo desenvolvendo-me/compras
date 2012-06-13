@@ -1,4 +1,4 @@
-class LicitationProcessLot < ActiveRecord::Base
+class LicitationProcessLot < Compras::Model
   attr_accessible :observations, :administrative_process_budget_allocation_item_ids
 
   belongs_to :licitation_process

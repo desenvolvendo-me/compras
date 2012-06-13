@@ -1,4 +1,4 @@
-class CreditorRepresentative < ActiveRecord::Base
+class CreditorRepresentative < Compras::Model
   attr_accessible :creditor_id, :representative_person_id
 
   belongs_to :creditor

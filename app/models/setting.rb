@@ -1,4 +1,4 @@
-class Setting < ActiveRecord::Base
+class Setting < Compras::Model
   attr_accessible :key, :value
 
   validates :key, :presence => true

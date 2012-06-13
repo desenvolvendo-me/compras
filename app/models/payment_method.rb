@@ -1,4 +1,4 @@
-class PaymentMethod < ActiveRecord::Base
+class PaymentMethod < Compras::Model
   attr_accessible :description
 
   has_many :direct_purchases, :dependent => :restrict

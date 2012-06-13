@@ -1,4 +1,4 @@
-class SignatureConfiguration < ActiveRecord::Base
+class SignatureConfiguration < Compras::Model
   attr_accessible :report, :signature_configuration_items_attributes
 
   has_enumeration_for :report, :with => SignatureReport

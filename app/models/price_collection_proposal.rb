@@ -1,4 +1,4 @@
-class PriceCollectionProposal < ActiveRecord::Base
+class PriceCollectionProposal < Compras::Model
   attr_accessible :provider_id, :items_attributes, :email, :login, :status
 
   belongs_to :price_collection

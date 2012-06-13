@@ -1,4 +1,4 @@
-class PledgeCategory < ActiveRecord::Base
+class PledgeCategory < Compras::Model
   attr_accessible :description, :status
 
   has_enumeration_for :status, :create_helpers => true

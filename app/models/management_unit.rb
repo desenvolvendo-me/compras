@@ -1,4 +1,4 @@
-class ManagementUnit < ActiveRecord::Base
+class ManagementUnit < Compras::Model
   attr_accessible :description, :acronym, :status, :entity_id, :year
 
   has_enumeration_for :status, :create_helpers => true

@@ -1,4 +1,4 @@
-class AdministrativeProcessBudgetAllocationItem < ActiveRecord::Base
+class AdministrativeProcessBudgetAllocationItem < Compras::Model
   attr_accessible :administrative_process_budget_allocation_id, :material_id, :quantity, :unit_price
 
   attr_accessor :order

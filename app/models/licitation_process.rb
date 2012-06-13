@@ -1,4 +1,4 @@
-class LicitationProcess < ActiveRecord::Base
+class LicitationProcess < Compras::Model
   attr_accessible :administrative_process_id, :capability_id, :payment_method_id, :year, :process_date
   attr_accessible :readjustment_index_id, :caution_value, :legal_advice, :legal_advice_date
   attr_accessible :contract_date, :contract_expiration, :observations, :envelope_delivery_date

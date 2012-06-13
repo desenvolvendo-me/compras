@@ -1,4 +1,4 @@
-class Precatory < ActiveRecord::Base
+class Precatory < Compras::Model
   attr_accessible :number, :provider_id, :historic, :precatory_type_id
   attr_accessible :date, :judgment_date, :apresentation_date, :lawsuit_number
   attr_accessible :value, :precatory_parcels_attributes

@@ -1,4 +1,4 @@
-class ExpenseModality < ActiveRecord::Base
+class ExpenseModality < Compras::Model
   attr_accessible :code, :description
 
   has_many :expense_natures, :dependent => :restrict

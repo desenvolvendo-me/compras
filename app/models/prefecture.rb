@@ -1,4 +1,4 @@
-class Prefecture < ActiveRecord::Base
+class Prefecture < Compras::Model
   attr_accessible :name, :cnpj, :phone, :fax, :email, :mayor_name, :remove_image
   attr_accessible :address_attributes, :image
 

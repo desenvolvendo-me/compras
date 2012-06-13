@@ -1,4 +1,4 @@
-class PriceCollectionLotItem < ActiveRecord::Base
+class PriceCollectionLotItem < Compras::Model
   attr_accessible :price_collection_lot_id, :material_id, :brand, :quantity
 
   belongs_to :price_collection_lot

@@ -1,4 +1,4 @@
-class JudgmentCommissionAdvice < ActiveRecord::Base
+class JudgmentCommissionAdvice < Compras::Model
   attr_accessible :licitation_process_id, :licitation_commission_id, :year, :minutes_number
   attr_accessible :judgment_commission_advice_members_attributes
   attr_accessible :judgment_start_date, :judgment_start_time, :judgment_end_date

@@ -1,4 +1,4 @@
-class ResourceAnnul < ActiveRecord::Base
+class ResourceAnnul < Compras::Model
   include Annullable
   belongs_to :annullable, :polymorphic => true
 

@@ -1,4 +1,4 @@
-class RegulatoryActTypeClassification < ActiveRecord::Base
+class RegulatoryActTypeClassification < Compras::Model
   attr_accessible :description
 
   has_many :regulatory_act_types, :dependent => :restrict

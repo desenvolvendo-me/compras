@@ -1,4 +1,4 @@
-class ModalityLimit < ActiveRecord::Base
+class ModalityLimit < Compras::Model
   attr_accessible :validity_beginning, :ordinance_number, :published_date
   attr_accessible :without_bidding, :invitation_letter, :taken_price
   attr_accessible :public_competition, :work_without_bidding

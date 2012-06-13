@@ -1,4 +1,4 @@
-class IndexerValue < ActiveRecord::Base
+class IndexerValue < Compras::Model
   attr_accessible :indexer_id, :date, :value
 
   belongs_to :indexer

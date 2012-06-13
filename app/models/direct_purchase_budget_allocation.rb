@@ -1,4 +1,4 @@
-class DirectPurchaseBudgetAllocation < ActiveRecord::Base
+class DirectPurchaseBudgetAllocation < Compras::Model
   attr_accessible :direct_purchase_id, :budget_allocation_id, :items_attributes
 
   belongs_to :direct_purchase

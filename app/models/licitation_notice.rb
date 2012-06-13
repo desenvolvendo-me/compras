@@ -1,4 +1,4 @@
-class LicitationNotice < ActiveRecord::Base
+class LicitationNotice < Compras::Model
   attr_accessible :licitation_process_id, :number, :date, :observations
 
   belongs_to :licitation_process

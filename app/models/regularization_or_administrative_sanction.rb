@@ -1,4 +1,4 @@
-class RegularizationOrAdministrativeSanction < ActiveRecord::Base
+class RegularizationOrAdministrativeSanction < Compras::Model
   attr_accessible :creditor_id, :suspended_until, :occurrence
   attr_accessible :regularization_or_administrative_sanction_reason_id
 

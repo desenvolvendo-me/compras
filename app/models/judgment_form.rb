@@ -1,4 +1,4 @@
-class JudgmentForm < ActiveRecord::Base
+class JudgmentForm < Compras::Model
   attr_accessible :description, :kind, :licitation_kind
 
   has_enumeration_for :kind, :with => JudgmentFormKind

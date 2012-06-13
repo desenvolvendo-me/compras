@@ -1,4 +1,4 @@
-class Employee < ActiveRecord::Base
+class Employee < Compras::Model
   attr_accessible :person_id, :position_id, :registration
 
   belongs_to :person

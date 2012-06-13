@@ -1,4 +1,4 @@
-class Entity < ActiveRecord::Base
+class Entity < Compras::Model
   attr_accessible :name
 
   has_many :expense_natures, :dependent => :restrict

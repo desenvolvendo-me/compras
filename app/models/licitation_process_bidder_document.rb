@@ -1,4 +1,4 @@
-class LicitationProcessBidderDocument < ActiveRecord::Base
+class LicitationProcessBidderDocument < Compras::Model
   attr_accessible :document_type_id, :document_number, :emission_date, :validity
 
   belongs_to :licitation_process_bidder

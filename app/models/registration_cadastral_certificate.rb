@@ -1,4 +1,4 @@
-class RegistrationCadastralCertificate < ActiveRecord::Base
+class RegistrationCadastralCertificate < Compras::Model
   attr_accessible :building_area, :capital_stock, :capital_whole, :total_area
   attr_accessible :commercial_registry_registration_date, :fiscal_year, :number
   attr_accessible :registration_date, :revocation_date, :specification
