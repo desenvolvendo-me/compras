@@ -21,7 +21,7 @@ feature "LicitationNotices" do
     page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
     page.should have_field 'Número da licitação', :with => '1'
     page.should have_field 'Data do processo', :with => '19/03/2012'
-    page.should have_field 'Objeto da licitação', :with => 'Descricao'
+    page.should have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
 
     fill_mask 'Data do aviso', :with => '05/04/2012'
     fill_in 'Observações gerais', :with => 'Aviso de processo'
@@ -40,7 +40,7 @@ feature "LicitationNotices" do
     page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
     page.should have_field 'Número da licitação', :with => '1'
     page.should have_field 'Data do processo', :with => '19/03/2012'
-    page.should have_field 'Objeto da licitação', :with => 'Descricao'
+    page.should have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Observações gerais', :with => 'Aviso de processo'
   end
 
@@ -70,7 +70,7 @@ feature "LicitationNotices" do
     page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
     page.should have_field 'Número da licitação', :with => '1'
     page.should have_field 'Data do processo', :with => '20/03/2013'
-    page.should have_field 'Objeto da licitação', :with => 'Descricao do computador'
+    page.should have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Observações gerais', :with => 'Aviso de processo, continuação.'
   end
 
@@ -102,7 +102,7 @@ feature "LicitationNotices" do
     page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
     page.should have_field 'Número da licitação', :with => '1'
     page.should have_field 'Data do processo', :with => '20/03/2013'
-    page.should have_field 'Objeto da licitação', :with => 'Descricao do computador'
+    page.should have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Observações gerais', :with => 'Aviso de processo 3'
   end
 
@@ -133,7 +133,7 @@ feature "LicitationNotices" do
     page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
     page.should have_field 'Número da licitação', :with => '1'
     page.should have_field 'Data do processo', :with => '19/03/2012'
-    page.should have_field 'Objeto da licitação', :with => 'Descricao'
+    page.should have_field 'Objeto da licitação', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Observações gerais', :with => 'Aviso de processo 2'
   end
 

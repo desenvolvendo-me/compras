@@ -26,7 +26,7 @@
   </div>
 </div>
 
-<%= f.input :licitation_process_object_description, :disabled => true %>
+<%= f.input :licitation_process_administrative_process_description, :disabled => true %>
 <%= f.input :observations %>
 
 <script>
@@ -35,12 +35,12 @@
       $('#licitation_notice_licitation_process_administrative_process_modality_humanize').val(licitation_process.administrative_process_modality_humanize);
       $('#licitation_notice_licitation_process_licitation_number').val(licitation_process.licitation_number);
       $('#licitation_notice_licitation_process_process_date').val(licitation_process.process_date);
-      $('#licitation_notice_licitation_process_object_description').val(licitation_process.object_description);
+      $('#licitation_notice_licitation_process_administrative_process_description').val(licitation_process.administrative_process_description);
     } else {
       $('#licitation_notice_licitation_process_administrative_process_modality_humanize').val('');
       $('#licitation_notice_licitation_process_licitation_number').val('');
       $('#licitation_notice_licitation_process_process_date').val('');
-      $('#licitation_notice_licitation_process_object_description').val('');
+      $('#licitation_notice_licitation_process_administrative_process_description').val('');
     }
   });
 </script>

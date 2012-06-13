@@ -8,4 +8,5 @@ builder resource, json do
   json.advice_number                            resource.decorator.advice_number
   json.process_date                             resource.process_date
   json.administrative_process_modality_humanize resource.administrative_process_modality_humanize
+  json.administrative_process_description       resource.administrative_process_description
 end
