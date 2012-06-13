@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/unico/street_type'
+require 'app/models/unico/street'
 require 'app/models/street_type'
 require 'app/models/street'
 
