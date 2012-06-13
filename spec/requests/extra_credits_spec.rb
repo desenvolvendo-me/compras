@@ -190,7 +190,7 @@ feature "ExtraCredits" do
     click_button 'Salvar'
 
     within_tab 'Movimentos' do
-      page.should have_content 'não pode ser maior que o saldo real da dotação (R$ 500,00)'
+      page.should have_content 'não pode ser maior que o saldo real da dotação (R$ 489,50)'
     end
   end
 
