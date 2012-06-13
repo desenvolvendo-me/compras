@@ -36,7 +36,7 @@ feature "LicitationProcessAppeals" do
     page.should have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     page.should have_select 'Referente ao', :selected => 'Edital'
     page.should have_field 'Autor', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Objeto do Processo', :with => 'Descricao'
+    page.should have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Nova hora da abertura dos envelopes', :with => '15:30'
     page.should have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
@@ -75,7 +75,7 @@ feature "LicitationProcessAppeals" do
     page.should have_field 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     page.should have_select 'Referente ao', :selected => 'Revogação'
     page.should have_field 'Autor', :with => 'Wenderson Malheiros'
-    page.should have_field 'Objeto do Processo', :with => 'Descricao do computador'
+    page.should have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
     page.should have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
     page.should have_field 'Nova hora da abertura dos envelopes', :with => '16:00'
     page.should have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
