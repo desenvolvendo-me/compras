@@ -15,7 +15,7 @@ pt-BR:
         situation: "Situação"
         judgment_date: "Data do julgamento"
         observation: "Observação"
-        licitation_process_object_description: "Objeto do processo"
+        administrative_process_licitation_process_description: "Objeto do processo"
         licitation_process_envelope_delivery_date: "Data da entrega dos envelopes"
         licitation_process_envelope_delivery_time: "Hora da entrega"
         licitation_process_envelope_opening_date: "Data da abertura dos envelopes"
