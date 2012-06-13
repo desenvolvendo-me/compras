@@ -63,15 +63,102 @@ feature "LicitationProcessLots" do
   end
 
   scenario 'updating an existing lot' do
-    pending "validation for itens/administrative_process prevents the creation of a lot on blueprints"
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    within_records do
+      page.find('a').click
+    end
+
+    fill_in 'Observações', :with => 'Arame'
+    fill_modal 'Itens', :with => '1', :field => 'Quantidade'
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Lote de itens editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_field 'Observações', :with => 'Arame'
+    page.should have_content '01.01.00001 - Antivirus'
+    page.should have_content '02.02.00002 - Arame comum'
   end
 
   scenario 'deleting a lot' do
-    pending "validation for itens/administrative_process prevents the creation of a lot on blueprints"
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apagar'
+
+    page.should have_notice 'Lote de itens apagado com sucesso'
+
+    within_records do
+      page.should_not have_css 'a'
+    end
   end
 
   scenario 'edit an existing lot, search item, remove item and search item again' do
-    pending "validation for itens/administrative_process prevents the creation of a lot on blueprints"
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Lotes de itens'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_modal 'Itens' do
+      click_button 'Pesquisar'
+
+      page.should_not have_content '01.01.00001 - Antivirus'
+      page.should have_content '02.02.00002 - Arame comum'
+
+      click_record '02.02.00002 - Arame comum'
+    end
+
+    within_modal 'Itens' do
+      click_button 'Pesquisar'
+
+      page.should_not have_content '01.01.00001 - Antivirus'
+      page.should_not have_content '02.02.00002 - Arame comum'
+    end
   end
 
   scenario 'only items from administrative process that are not included by any lot must be available' do
