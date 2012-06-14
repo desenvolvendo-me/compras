@@ -15,7 +15,7 @@ feature 'DirectPurchaseLiberations' do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     page.should_not have_link 'Avaliações'
   end

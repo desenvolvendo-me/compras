@@ -22,7 +22,9 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
+
+    page.should have_content 'Gerar Compra Direta'
 
     within_tab 'Dados gerais' do
       fill_mask 'Ano', :with => '2012'
@@ -266,7 +268,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     within_tab 'Dados gerais' do
       fill_mask 'Ano', :with => '2012'
@@ -314,7 +316,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
@@ -442,7 +444,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     within_tab 'Dotações' do
       page.should have_disabled_field 'Valor total dos itens'
@@ -506,7 +508,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
@@ -553,7 +555,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     within_tab 'Dados gerais' do
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
@@ -592,7 +594,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     click_button 'Salvar'
 
@@ -622,7 +624,7 @@ feature "DirectPurchases" do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link 'Criar Solicitação de Compra Direta'
+    click_link 'Gerar Compra Direta'
 
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
