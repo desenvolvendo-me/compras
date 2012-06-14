@@ -19,7 +19,7 @@ class PriceCollectionAnnulment
     @annul ||= @price_collection.annul
   end
 
-  def annul_proposal proposal
+  def annul_proposal(proposal)
     proposal_annul = proposal.build_annul(:employee_id => annul.employee_id, :date => annul.date, :description => annul.description)
 
     if proposal_annul.save
