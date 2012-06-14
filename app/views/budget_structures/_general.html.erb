@@ -1,12 +1,32 @@
-<%= f.input :budget_structure_configuration %>
-<%= f.input :budget_structure, :input_html => { :size => 50 } %>
+<%= f.input :digits, :as => :hidden %>
+<%= f.input :level, :as => :hidden %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
+    <%= f.input :budget_structure_configuration %>
+  </div>
+
+  <div class="yui3-u-1-3">
     <%= f.input :kind %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
+    <%= f.input :budget_structure_level %>
+  </div>
+</div>
+
+<%= f.input :parent, :label_html => { :id => 'label_budget_structure_parent' } %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :code %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :budget_structure, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
     <%= f.input :tce_code %>
   </div>
 </div>

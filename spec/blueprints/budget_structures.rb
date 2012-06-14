@@ -1,26 +1,29 @@
 # encoding: utf-8
 BudgetStructure.blueprint(:secretaria_de_educacao) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  budget_structure { '02.00' }
+  code { 1 }
   tce_code { '051' }
   description { 'Secretaria de Educação' }
-  kind { BudgetStructureKind::ANALYTICAL }
+  kind { BudgetStructureKind::SYNTHETIC }
   acronym { 'SEMUEDU' }
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
   budget_structure_responsibles { [BudgetStructureResponsible.make!(:sobrinho)] }
+  budget_structure_level { BudgetStructureLevel.make!(:orgao) }
 end
 
 BudgetStructure.blueprint(:secretaria_de_desenvolvimento) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  budget_structure { '02.00' }
+  code { 2 }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
-  kind { BudgetStructureKind::ANALYTICAL }
+  kind { BudgetStructureKind::SYNTHETIC }
   acronym { 'SEMUDES' }
   administration_type { AdministrationType.make!(:publica) }
   performance_field { 'Desenvolvimento Educacional' }
   address { Address.make!(:general) }
   budget_structure_responsibles { [BudgetStructureResponsible.make!(:sobrinho)] }
+  budget_structure_level { BudgetStructureLevel.make!(:unidade) }
+  parent { BudgetStructure.make!(:secretaria_de_educacao) }
 end

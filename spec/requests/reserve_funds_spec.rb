@@ -145,7 +145,7 @@ feature "ReserveFunds" do
       page.should have_content 'Detran'
       page.should have_content '2012'
       page.should have_content 'Alocação'
-      page.should have_content '02.00 - Secretaria de Educação'
+      page.should have_content '1 - Secretaria de Educação'
       page.should have_content '01 - Administração Geral'
       page.should have_content 'Habitação'
       page.should have_content '500,00'

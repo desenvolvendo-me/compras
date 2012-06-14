@@ -35,7 +35,7 @@ feature "SupplyAuthorizations" do
     page.should have_content 'Agência Itaú'
     page.should have_content 'Itaú'
     page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
-    page.should have_content '02.00 - Secretaria de Educação'
+    page.should have_content '1 - Secretaria de Educação'
     page.should have_content 'Dinheiro'
     page.should have_content '1 ano'
     page.should have_content 'Secretaria da Educação'

@@ -164,6 +164,8 @@ Tributario::Application.routes.draw do
     end
   end
 
+  get 'budget_structure_levels/modal', :as => :modal_budget_structure_levels
+
   resources :capabilities do
     collection do
       get :filter

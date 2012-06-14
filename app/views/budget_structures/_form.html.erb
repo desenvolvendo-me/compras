@@ -17,3 +17,86 @@
     <%= render 'budget_structure_responsible', :f => f %>
   </div>
 </div>
+
+<script>
+  function addMaskToLevel(){
+    var digits = parseInt($('#budget_structure_digits').val()) + 1 ;
+    if (digits > 0){
+      $('#budget_structure_code').attr('data-mask', Array(digits).join('9') );
+    }
+  };
+
+  addMaskToLevel();
+
+  function setModalUrlToBudgetStructureParent( level ){
+    var urlModal = $('#budget_structure_parent').attr('data-modal-url');
+    urlModal += '?search_by_level=' + level;
+    urlModal += '&only_synthetic=true';
+    $('#budget_structure_parent').attr('data-modal-url', urlModal);
+  };
+
+  function budgetStructureLevelValidations() {
+    if ( $('#budget_structure_level').val() <= 1 ){
+      $('#budget_structure_parent').parent().hide();
+    } else {
+      $('#label_budget_structure_parent').text('Estrutura orçamentária do nível ' +  ($('#budget_structure_level').val() - 1) );
+    }
+  };
+
+  budgetStructureLevelValidations();
+
+  function setModalUtlToBudgetStructureLevel( ){
+    var configuration_id = $('#budget_structure_budget_structure_configuration_id').val();
+    if (configuration_id == ''){
+      $('#budget_structure_budget_structure_level').attr('disabled', true);
+    } else {
+      var urlModal = '/budget_structure_levels/modal?'
+      urlModal += 'search_by_configuration_id=' + configuration_id;
+      $('#budget_structure_budget_structure_level').attr('data-modal-url', urlModal);
+      $('#budget_structure_budget_structure_level').attr('disabled', false);
+    }
+  };
+
+  setModalUtlToBudgetStructureLevel();
+  $('#budget_structure_budget_structure_configuration_id').change( setModalUtlToBudgetStructureLevel );
+
+  $('#budget_structure_budget_structure_level_id').change(function (event, level) {
+    if (level) {
+      $('#budget_structure_code').attr('data-mask', Array(level.digits + 1).join('9') );
+
+      if (level.level <= 1){
+        $('#budget_structure_parent').parent().hide();
+        $('#budget_structure_code').attr('disabled', false);
+      } else {
+        var number_level = level.level - 1;
+        $('#budget_structure_parent').parent().show();
+        $('#label_budget_structure_parent').text('Estrutura orçamentária do nível ' + number_level );
+        setModalUrlToBudgetStructureParent(number_level);
+        $('#budget_structure_code').attr('disabled', true);
+        $('#budget_structure_code').val('');
+      }
+    } else {
+      $('#budget_structure_code').attr('data-mask', '');
+      $('#budget_structure_parent').parent().hide();
+      $('#budget_structure_parent').attr('data-modal-url', '');
+    }
+  });
+
+  var budgedt_structure_mask = '';
+
+  $('#budget_structure_parent_id').change(function (event, parent) {
+    if (parent) {
+      budgedt_structure_mask = parent.budget_structure + parent.separator;
+      $('#budget_structure_code').attr('disabled', false);
+    } else {
+      budgedt_structure_mask = '';
+      $('#budget_structure_code').attr('disabled', true);
+      $('#budget_structure_code').val('');
+      $('#budget_structure_budget_structure').val('');
+    }
+  });
+
+  $('#budget_structure_code').keyup(function (){
+    $('#budget_structure_budget_structure').val(budgedt_structure_mask + $(this).val() );
+  });
+</script>

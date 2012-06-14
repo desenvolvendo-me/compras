@@ -11,20 +11,22 @@ require 'app/models/direct_purchase'
 require 'app/models/employee'
 
 describe BudgetStructure do
-  it 'should respond to to_s with description' do
-    subject.budget_structure = '99/00'
+  it 'should respond to to_s with budget_structure - description' do
+    subject.stub(:budget_structure).and_return('99/00')
     subject.description = 'Secretaria de Educação'
     subject.to_s.should eq '99/00 - Secretaria de Educação'
   end
 
   it { should validate_presence_of :description }
-  it { should validate_presence_of :budget_structure }
+  it { should validate_presence_of :code }
   it { should validate_presence_of :tce_code }
   it { should validate_presence_of :acronym }
   it { should validate_presence_of :performance_field }
   it { should validate_presence_of :budget_structure_configuration }
   it { should validate_presence_of :administration_type }
   it { should validate_presence_of :kind }
+  it { should validate_presence_of :budget_structure_level }
+  it { should_not validate_presence_of :parent }
 
   it { should have_one :address }
   it { should have_many(:budget_allocations).dependent(:restrict) }
@@ -32,22 +34,17 @@ describe BudgetStructure do
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should belong_to :budget_structure_configuration }
   it { should belong_to :administration_type }
+  it { should belong_to :budget_structure_level }
+  it { should belong_to :parent }
   it { should have_many(:direct_purchases).dependent(:restrict) }
+  it { should have_many(:children).dependent(:restrict) }
 
-  context 'should validate mask' do
-    it 'and should not be valid with wrong mask' do
-      subject.stub(:mask => '99.99')
-      subject.budget_structure = '8.8'
-      subject.should_not be_valid
-      subject.errors[:budget_structure].should include 'não é válido'
+  context 'when level is greater than 1' do
+    before do
+      subject.stub(:level_greater_than_1?).and_return(true)
     end
 
-    it 'and should be valid with correct mask' do
-      subject.stub(:mask => '99.99')
-      subject.budget_structure = '81.81'
-      subject.valid?
-      subject.errors[:budget_structure].should_not include 'não é válido'
-    end
+    it { should validate_presence_of :parent }
   end
 
   context 'validating duplicated responsibles' do
@@ -69,6 +66,68 @@ describe BudgetStructure do
 
       responsible_one.errors.messages[:responsible_id].should be_nil
       responsible_two.errors.messages[:responsible_id].should be_nil
+    end
+  end
+
+  describe 'to_s' do
+    context 'when has not parent' do
+      before do
+        subject.stub(:parent).and_return( nil )
+        subject.stub(:separator).and_return('')
+      end
+
+      it 'should to_s be code + separator - description' do
+        subject.code = 123
+        subject.description = 'prefeitura'
+
+        subject.to_s.should eq '123 - prefeitura'
+      end
+    end
+
+    context 'when has a parent' do
+      let :parent do
+        double(:parent,
+               :code => 1,
+               :separator => '-',
+               :parent => nil
+              )
+      end
+
+      it 'should to_s be parent_cod + parent_separator + code + separator - description' do
+        subject.stub(:parent).and_return( parent )
+        subject.stub(:separator).and_return('')
+        subject.code = 123
+        subject.description = 'prefeitura'
+
+        subject.to_s.should eq '1-123 - prefeitura'
+      end
+    end
+
+    context 'when has a parent that has a parent' do
+      let :parent_of_parent do
+        double(:parent,
+               :code => 1,
+               :separator => '-',
+               :parent => nil
+              )
+      end
+
+      let :parent do
+        double(:parent,
+               :code => 12,
+               :separator => '/',
+               :parent => parent_of_parent
+              )
+      end
+
+      it 'should to_s be parent_of_parent_cod + parent_of_parent_separator + parent_cod + parent_separator + code + separator - description' do
+        subject.stub(:parent).and_return( parent )
+        subject.stub(:separator).and_return('')
+        subject.code = 123
+        subject.description = 'prefeitura'
+
+        subject.to_s.should eq '1-12/123 - prefeitura'
+      end
     end
   end
 end

@@ -7,11 +7,14 @@ pt-BR:
 
     attributes:
       budget_structure:
-        budget_structure_configuration: "Configuração de estrutura orçamentária"
-        budget_structure: "Estrutura orçamentária"
-        kind: "Tipo"
-        tce_code: "Código TCE"
-        description: "Descrição"
         acronym: "Sigla"
         administration_type: "Tipo de administração"
+        budget_structure: "Estrutura orçamentária"
+        budget_structure_configuration: "Configuração de estrutura orçamentária"
+        budget_structure_level: "Nível"
+        code: "Código"
+        description: "Descrição"
+        kind: "Tipo"
+        parent: "Estrutura orçamentária do nível"
         performance_field: "Área de atuação"
+        tce_code: "Código TCE"

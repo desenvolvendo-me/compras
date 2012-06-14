@@ -19,13 +19,14 @@ feature "BudgetStructure" do
     click_link 'Criar Estrutura Orçamentária'
 
     within_tab 'Informações' do
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
+      select 'Sintético', :from => 'Tipo'
+      fill_modal 'Nível', :with => '1', :field => 'Nível'
+      fill_mask 'Código', :with => '1'
+      page.should have_field 'Estrutura orçamentária', :with => '1'
+      fill_in 'Código TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
-      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
-
-      fill_mask 'Estrutura orçamentária', :with => '02.00'
-      select 'Analítico', :from => 'Tipo'
-      fill_in 'Código TCE', :with => '051'
       fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
       fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
@@ -53,12 +54,14 @@ feature "BudgetStructure" do
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
+      page.should have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
+      page.should have_select 'Tipo', :selected => 'Sintético'
+      page.should have_field 'Nível', :with => '1 - Orgão'
+      page.should have_field 'Código', :with => '1'
+      page.should have_field 'Estrutura orçamentária', :with => '1'
+      page.should have_field 'Código TCE', :with => '051'
       page.should have_field 'Descrição', :with => 'Secretaria de Educação'
       page.should have_field 'Sigla', :with => 'SEMUEDU'
-      page.should have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
-      page.should have_field 'Estrutura orçamentária', :with => '02.00'
-      page.should have_select 'Tipo', :selected => 'Analítico'
-      page.should have_field 'Código TCE', :with => '051'
       page.should have_field 'Tipo de administração', :with => 'Pública'
       page.should have_field 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
@@ -92,12 +95,12 @@ feature "BudgetStructure" do
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
+      fill_mask 'Código', :with => '2'
+      page.should have_field 'Estrutura orçamentária', :with => '2'
+      fill_in 'Código TCE', :with => '081'
       fill_in 'Descrição', :with => 'Secretaria de Transporte'
       fill_in 'Sigla', :with => 'SEMUTRA'
-      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
-      fill_mask 'Estrutura orçamentária', :with => '02.11'
-      select 'Sintético', :from => 'Tipo'
-      fill_in 'Código TCE', :with => '081'
       fill_modal 'Tipo de administração', :with => 'Executivo', :field => 'Descrição'
       fill_in 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
@@ -123,12 +126,14 @@ feature "BudgetStructure" do
     click_link 'Secretaria de Transporte'
 
     within_tab 'Informações' do
+      page.should have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
+      page.should have_select 'Tipo', :selected => 'Sintético'
+      page.should have_field 'Nível', :with => '1 - Orgão'
+      page.should have_field 'Código', :with => '2'
+      page.should have_field 'Estrutura orçamentária', :with => '2'
+      page.should have_field 'Código TCE', :with => '081'
       page.should have_field 'Descrição', :with => 'Secretaria de Transporte'
       page.should have_field 'Sigla', :with => 'SEMUTRA'
-      page.should have_field 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran'
-      page.should have_field 'Estrutura orçamentária', :with => '02.11'
-      page.should have_select 'Tipo', :selected => 'Sintético'
-      page.should have_field 'Código TCE', :with => '081'
       page.should have_field 'Tipo de administração', :with => 'Executivo'
       page.should have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
@@ -145,6 +150,100 @@ feature "BudgetStructure" do
       page.should have_field 'Data de início', :with => '01/02/2012'
       page.should have_field  'Data de término', :with => '10/02/2012'
       page.should have_select 'Status', :selected => 'Inativo'
+    end
+  end
+
+  scenario 'should not create a new budget structure when already exist a code in the same level and configuration' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    BudgetStructureConfiguration.make!(:detran_sopa)
+    AdministrationType.make!(:publica)
+    Address.make!(:general)
+    Employee.make!(:sobrinho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Estruturas Orçamentárias'
+
+    click_link 'Criar Estrutura Orçamentária'
+
+    within_tab 'Informações' do
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
+      select 'Sintético', :from => 'Tipo'
+      fill_modal 'Nível', :with => '1', :field => 'Nível'
+      fill_mask 'Código', :with => '1'
+      page.should have_field 'Estrutura orçamentária', :with => '1'
+      fill_in 'Código TCE', :with => '051'
+      fill_in 'Descrição', :with => 'Secretaria de Educação'
+      fill_in 'Sigla', :with => 'SEMUEDU'
+      fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
+      fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
+    end
+
+    within_tab 'Endereços' do
+      fill_modal 'Logradouro', :with => 'Girassol'
+      fill_modal 'Bairro', :with => 'São Francisco'
+      fill_mask 'CEP', :with => "33400-500"
+    end
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+      fill_mask 'Data de início', :with => '01/02/2012'
+      fill_mask 'Data de término', :with => '10/02/2012'
+      select 'Ativo', :from => 'Status'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_content 'já existe um código para este nível desta configuração Estrutura orçamentária Código TCE'
+  end
+
+  scenario 'validating modal of level' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    BudgetStructureConfiguration.make!(:secretaria_de_educacao)
+
+    click_link 'Contabilidade'
+
+    click_link 'Estruturas Orçamentárias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Informações' do
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
+      within_modal 'Nível' do
+         click_button 'Pesquisar'
+
+         page.should have_content 'Orgão'
+         page.should have_content 'Unidade'
+         page.should_not have_content 'Nível 1'
+         page.should_not have_content 'Nível 2'
+      end
+    end
+  end
+
+  scenario 'validating modal of budget_structure_parent' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_desenvolvimento)
+
+    click_link 'Contabilidade'
+
+    click_link 'Estruturas Orçamentárias'
+
+    click_link 'Criar Estrutura Orçamentária'
+
+    within_tab 'Informações' do
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
+      select 'Sintético', :from => 'Tipo'
+      fill_modal 'Nível', :with => '2', :field => 'Nível'
+
+      within_modal 'Estrutura orçamentária do nível 1' do
+         click_button 'Pesquisar'
+
+         page.should have_content 'Secretaria de Educação'
+         page.should_not have_content 'Secretaria de Desenvolvimento'
+      end
     end
   end
 
