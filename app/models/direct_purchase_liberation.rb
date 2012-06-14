@@ -8,7 +8,7 @@ class DirectPurchaseLiberation < Compras::Model
 
   validates :evaluation, :employee, :direct_purchase, :presence => true
 
-  orderize
+  orderize :id
   filterize
 
   def to_s
