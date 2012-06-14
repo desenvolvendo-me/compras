@@ -49,7 +49,7 @@ feature "LicitationObjects" do
         page.should have_disabled_field  'Leilão'
         page.should have_disabled_field  'Inexigibilidade'
         page.should have_disabled_field  'Concurso'
-        
+
         page.should have_field 'Leilão', :with => '0,00'
         page.should have_field 'Inexigibilidade', :with => '0,00'
         page.should have_field 'Concurso', :with => '0,00'
@@ -58,6 +58,9 @@ feature "LicitationObjects" do
 
     within_tab 'Materiais' do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      page.should have_content '01.01.00001'
+      page.should have_content 'Antivirus'
     end
 
     click_button 'Salvar'
@@ -100,7 +103,7 @@ feature "LicitationObjects" do
         page.should have_disabled_field  'Leilão'
         page.should have_disabled_field  'Inexigibilidade'
         page.should have_disabled_field  'Concurso'
-        
+
         page.should have_field 'Leilão', :with => '0,00'
         page.should have_field 'Inexigibilidade', :with => '0,00'
         page.should have_field 'Concurso', :with => '0,00'
