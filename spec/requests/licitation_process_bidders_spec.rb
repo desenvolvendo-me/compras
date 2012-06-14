@@ -60,8 +60,8 @@ feature "LicitationProcessBidders" do
     fill_mask 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
     within_tab 'Representantes credenciados' do
-      fill_modal 'Pessoas', :with => 'Wenderson Malheiros', :field => 'Nome'
-      fill_modal 'Pessoas', :with => 'Joao da Silva', :field => 'Nome'
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
+      fill_modal 'Representantes', :with => 'Joao da Silva', :field => 'Nome'
     end
 
     within_tab 'Documentos' do
@@ -177,7 +177,7 @@ feature "LicitationProcessBidders" do
     within_tab 'Representantes credenciados' do
       click_button 'Remover Pessoa'
 
-      fill_modal 'Pessoas', :with => 'Wenderson Malheiros', :field => 'Nome'
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
     end
 
     within_tab 'Documentos' do
