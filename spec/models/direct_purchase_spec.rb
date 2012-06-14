@@ -154,7 +154,7 @@ describe DirectPurchase do
   end
 
   describe '#next_purchase' do
-    context 'when the direct_purchase of last licitation process is 4' do
+    context 'when the direct_purchase of last purchase is 4' do
       before do
         subject.stub(:last_purchase_of_self_year).and_return(4)
       end
