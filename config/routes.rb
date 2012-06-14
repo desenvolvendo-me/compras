@@ -695,6 +695,8 @@ Tributario::Application.routes.draw do
     end
   end
 
+  resources :reserve_fund_annuls, :except => [:destroy, :update]
+
   get 'revenue_rubrics/modal', :as => :modal_revenue_rubrics
   get 'revenue_sources/modal', :as => :modal_revenue_sources
   get 'revenue_subcategories/modal', :as => :modal_revenue_subcategories

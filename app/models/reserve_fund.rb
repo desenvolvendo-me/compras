@@ -18,6 +18,8 @@ class ReserveFund < Compras::Model
 
   has_many :pledges, :dependent => :restrict
 
+  has_one :reserve_fund_annul, :dependent => :destroy
+
   delegate :real_amount, :amount, :function, :subfunction, :government_program, :government_action, :budget_structure,
            :expense_nature, :reserved_value, :to => :budget_allocation, :allow_nil => true, :prefix => true
   delegate :licitation?, :to => :reserve_allocation_type, :allow_nil => true

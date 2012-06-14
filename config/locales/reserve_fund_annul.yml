@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      reserve_fund_annul:
+        one: "Anular Reserva de Dotação"
+        other: "Anulações da Reserva de Dotação"
+
+    attributes:
+      reserve_fund_annul:
+        employee: "Responsável"
+        date: "Data"

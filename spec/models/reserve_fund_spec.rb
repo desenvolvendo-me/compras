@@ -15,6 +15,8 @@ describe ReserveFund do
   it { should belong_to :reserve_allocation_type }
   it { should belong_to :licitation_modality }
   it { should belong_to :provider}
+
+  it { should have_one(:reserve_fund_annul).dependent(:destroy) }
   it { should have_many(:pledges).dependent(:restrict) }
 
   it { should validate_presence_of :entity }

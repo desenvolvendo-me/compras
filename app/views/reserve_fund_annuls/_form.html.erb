@@ -1,0 +1,9 @@
+<%= f.input :reserve_fund_id, :as => :hidden %>
+<%= f.input :employee %>
+<%= f.input :date %>
+
+<script>
+  <% if f.object.persisted? %>
+    $('form.reserve_fund_annul :input').attr('disabled', true);
+  <% end %>
+</script>
