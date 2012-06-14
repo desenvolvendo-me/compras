@@ -5,6 +5,9 @@ class MigrateFoundedDebtContractsToContracts < ActiveRecord::Migration
   class FoundedDebtContract < ActiveRecord::Base
   end
 
+  class Pledge < ActiveRecord::Base
+  end
+
   def change
     Contract.update_all(:kind => :management)
 
