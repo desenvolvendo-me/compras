@@ -1,4 +1,7 @@
 class ChangeModalityLimitsValidityBeginningToDate < ActiveRecord::Migration
+  class ModalityLimit < ActiveRecord::Base
+  end
+
   def up
     rename_column :modality_limits, :validity_beginning, :validity_beginning_string
     add_column :modality_limits, :validity_beginning, :date

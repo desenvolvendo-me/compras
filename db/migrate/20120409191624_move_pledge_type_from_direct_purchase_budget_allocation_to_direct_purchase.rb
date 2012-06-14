@@ -1,4 +1,7 @@
 class MovePledgeTypeFromDirectPurchaseBudgetAllocationToDirectPurchase < ActiveRecord::Migration
+  class DirectPurchase < ActiveRecord::Base
+  end
+
   def change
     add_column :direct_purchases, :pledge_type, :string
 

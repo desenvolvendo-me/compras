@@ -1,4 +1,7 @@
 class ChangeBudgetAllocationsDebtTypeToString < ActiveRecord::Migration
+  class BudgetAllocation < ActiveRecord::Base
+  end
+
   def up
     change_column :budget_allocations, :debt_type, :string
 

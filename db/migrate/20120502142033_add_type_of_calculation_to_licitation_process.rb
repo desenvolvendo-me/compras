@@ -1,4 +1,7 @@
 class AddTypeOfCalculationToLicitationProcess < ActiveRecord::Migration
+  class LicitationProcess < ActiveRecord::Base
+  end
+
   def change
     add_column :licitation_processes, :type_of_calculation, :string
 

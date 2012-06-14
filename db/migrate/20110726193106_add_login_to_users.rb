@@ -1,4 +1,7 @@
 class AddLoginToUsers < ActiveRecord::Migration
+  class User < ActiveRecord::Base
+  end
+
   def change
     add_column :users, :login, :string
     add_index :users, :login, :unique => true

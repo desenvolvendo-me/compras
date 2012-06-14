@@ -1,4 +1,7 @@
 class RenameAdministrativeStatusCanceledToAnnulled < ActiveRecord::Migration
+  class AdministrativeProcess < ActiveRecord::Base
+  end
+
   def change
     annulled = AdministrativeProcessStatus::ANNULLED
 

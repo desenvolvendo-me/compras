@@ -1,4 +1,7 @@
 class MovePledgeTypeFromLicitationProcessBudgetAllocationsToLicitationProcess < ActiveRecord::Migration
+  class LicitationProcess < ActiveRecord::Base
+  end
+
   def change
     add_column :licitation_processes, :pledge_type, :string
 

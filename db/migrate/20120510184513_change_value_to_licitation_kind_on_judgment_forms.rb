@@ -1,4 +1,7 @@
 class ChangeValueToLicitationKindOnJudgmentForms < ActiveRecord::Migration
+  class JudgmentForm < ActiveRecord::Base
+  end
+
   def up
     JudgmentForm.where { licitation_kind.eq('higher_discount') }.
                  update_all(:licitation_kind => 'higher_discount_on_lot')

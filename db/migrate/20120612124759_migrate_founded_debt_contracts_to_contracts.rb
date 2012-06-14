@@ -1,4 +1,7 @@
 class MigrateFoundedDebtContractsToContracts < ActiveRecord::Migration
+  class Contract < ActiveRecord::Base
+  end
+
   class FoundedDebtContract < ActiveRecord::Base
   end
 
