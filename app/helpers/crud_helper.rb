@@ -56,8 +56,8 @@ module CrudHelper
     can?(:create, controller_name) && respond_to?("new_#{controller_name.singularize}_path")
   end
 
-  def create_link
-    link_to t("#{controller_name}.new", :resource => singular, :cascade => true), new_resource_path
+  def create_link(optional_params={})
+    link_to t("#{controller_name}.new", :resource => singular, :cascade => true), new_resource_path(optional_params||{})
   end
 
   def filter?
