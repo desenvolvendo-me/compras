@@ -22,17 +22,16 @@ feature 'DirectPurchaseLiberations' do
 
   scenario 'viewing all liberations from a direct purchase' do
     liberation = DirectPurchaseLiberation.make!(:compra_liberada)
-    direct_purchase = liberation.direct_purchase
 
     click_link 'Solicitações'
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link "#{direct_purchase}"
+    click_link "1/2012"
 
     click_link 'Avaliações'
 
-    page.should have_content "Avaliações da Solicitação de Compra #{direct_purchase}"
+    page.should have_content "Avaliações da Solicitação de Compra 1/2012"
 
     within_records do
       page.should have_content "#{liberation}"
@@ -47,7 +46,7 @@ feature 'DirectPurchaseLiberations' do
 
     click_link 'Solicitações de Compra Direta'
 
-    click_link "#{direct_purchase}"
+    click_link "2/2012"
 
     click_link 'Avaliações'
 
