@@ -30,4 +30,18 @@ describe DirectPurchasesController do
       assigns(:direct_purchase).status.should eq DirectPurchaseStatus::UNAUTHORIZED
     end
   end
+
+  context 'next direct purchase' do
+    let :direct_purchase do
+      DirectPurchase.make!(:compra)
+    end
+
+    it 'should assign the direct purchase' do
+      DirectPurchase.any_instance.stub(:next_purchase).and_return(2)
+
+      post :create
+
+      assigns(:direct_purchase).direct_purchase.should eq 2
+    end
+  end
 end

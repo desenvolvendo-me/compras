@@ -9,10 +9,11 @@ require 'app/models/modality_limit'
 require 'app/business/direct_purchase_modality_limit_verificator'
 
 describe DirectPurchase do
-  it 'should return id as to_s method' do
-    subject.id = 1
+  it 'should return direct_purchase/year as to_s method' do
+    subject.direct_purchase = 1
+    subject.year = 2012
 
-    subject.to_s.should eq '1'
+    subject.to_s.should eq '1/2012'
   end
 
   it { should belong_to :legal_reference }
@@ -147,6 +148,18 @@ describe DirectPurchase do
       subject.valid?
 
       subject.errors[:total_allocations_items_value].should_not include 'está acima do valor disponível no limite em vigor para esta modalidade'
+    end
+  end
+
+  describe '#next_purchase' do
+    context 'when the direct_purchase of last licitation process is 4' do
+      before do
+        subject.stub(:last_purchase_of_self_year).and_return(4)
+      end
+
+      it 'should be 5' do
+        subject.next_purchase.should eq 5
+      end
     end
   end
 end

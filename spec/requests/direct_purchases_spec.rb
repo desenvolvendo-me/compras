@@ -76,6 +76,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Dados gerais' do
+      page.should have_field 'Compra', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da compra', :with => '19/03/2012'
       page.should have_field 'Referência legal', :with => 'Referencia legal'
@@ -124,6 +125,7 @@ feature "DirectPurchases" do
     page.should_not have_button 'Atualizar Solicitação de Compra Direta'
 
     within_tab 'Dados gerais' do
+      page.should have_disabled_field 'Compra'
       page.should have_disabled_field 'Ano'
       page.should have_disabled_field 'Data da compra'
       page.should have_disabled_field 'Referência legal'
@@ -348,8 +350,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_content year_2011.id
-      page.should_not have_content year_2012.id
+      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -368,8 +370,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_content year_2011.id
-      page.should_not have_content year_2012.id
+      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -388,8 +390,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_content year_2011.id
-      page.should_not have_content year_2012.id
+      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -409,8 +411,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should_not have_content year_2011.id
-      page.should have_content year_2012.id
+      page.should_not have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      page.should have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -430,8 +432,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_content year_2011.id
-      page.should_not have_content year_2012.id
+      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 

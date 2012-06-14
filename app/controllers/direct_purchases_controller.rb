@@ -23,4 +23,13 @@ class DirectPurchasesController < CrudController
     supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
     redirect_to supply_authorization
   end
+
+  protected
+
+  def create_resource(object)
+    object.direct_purchase = object.next_purchase
+
+    super
+  end
+
 end

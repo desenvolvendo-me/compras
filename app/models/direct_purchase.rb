@@ -1,5 +1,5 @@
 class DirectPurchase < Compras::Model
-  attr_accessible :year, :date, :legal_reference_id, :modality, :provider_id, :budget_structure_id
+  attr_accessible :direct_purchase, :year, :date, :legal_reference_id, :modality, :provider_id, :budget_structure_id
   attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :price_collection, :price_registration, :observation, :pledge_type
   attr_accessible :direct_purchase_budget_allocations_attributes, :period, :period_unit
@@ -43,6 +43,14 @@ class DirectPurchase < Compras::Model
 
   orderize :year
 
+  def to_s
+    "#{direct_purchase}/#{year}"
+  end
+
+  def next_purchase
+    last_purchase_of_self_year.succ
+  end
+
   def licitation_exemption
     return 0 if licitation_object.nil? || modality.empty?
 
@@ -75,10 +83,6 @@ class DirectPurchase < Compras::Model
 
   def authorized?
     supply_authorization.present?
-  end
-
-  def to_s
-    id.to_s
   end
 
   protected
@@ -135,5 +139,9 @@ class DirectPurchase < Compras::Model
         end
       end
     end
+  end
+
+  def last_purchase_of_self_year
+    self.class.where { self.year.eq(year) }.maximum(:direct_purchase).to_i
   end
 end
