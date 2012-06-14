@@ -3,7 +3,7 @@ class MaterialsClass < Compras::Model
 
   belongs_to :materials_group
 
-  has_and_belongs_to_many :providers
+  has_and_belongs_to_many :providers, :join_table => :compras_materials_classes_compras_providers
 
   has_many :materials, :dependent => :restrict
 

@@ -7,7 +7,7 @@ class LicitationObject < Compras::Model
 
   has_many :direct_purchases, :dependent => :restrict
 
-  has_and_belongs_to_many :materials
+  has_and_belongs_to_many :materials, :join_table => :compras_licitation_objects_compras_materials
 
   validates :description, :year, :purchase_invitation_letter, :presence => true
   validates :purchase_taking_price, :special_unenforceability, :presence => true

@@ -3,7 +3,7 @@ class DisseminationSource < Compras::Model
 
   belongs_to :communication_source
 
-  has_and_belongs_to_many :regulatory_acts
+  has_and_belongs_to_many :regulatory_acts, :join_table => :compras_dissemination_sources_compras_regulatory_acts
 
   validates :description, :communication_source, :presence => true
   validates :description, :uniqueness => { :allow_blank => true }

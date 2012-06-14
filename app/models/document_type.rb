@@ -1,7 +1,7 @@
 class DocumentType < Compras::Model
   attr_accessible :validity, :description
 
-  has_and_belongs_to_many :licitation_processes
+  has_and_belongs_to_many :licitation_processes, :join_table => :compras_document_types_compras_licitation_processes
 
   has_many :provider_licitation_documents, :dependent => :restrict
   has_many :licitation_process_bidder_documents, :dependent => :restrict

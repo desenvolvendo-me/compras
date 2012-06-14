@@ -13,8 +13,8 @@ class Material < Compras::Model
   belongs_to :service_or_contract_type
   belongs_to :expense_nature
 
-  has_and_belongs_to_many :providers
-  has_and_belongs_to_many :licitation_objects
+  has_and_belongs_to_many :providers, :join_table => :compras_materials_compras_providers
+  has_and_belongs_to_many :licitation_objects, :join_table => :compras_licitation_objects_compras_materials
 
   has_many :pledge_items, :dependent => :restrict
   has_many :direct_purchase_budget_allocation_items, :dependent => :restrict

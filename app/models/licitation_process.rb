@@ -22,7 +22,7 @@ class LicitationProcess < Compras::Model
   belongs_to :readjustment_index, :class_name => 'Indexer'
   belongs_to :judgment_form
 
-  has_and_belongs_to_many :document_types
+  has_and_belongs_to_many :document_types, :join_table => :compras_document_types_compras_licitation_processes
 
   has_many :licitation_process_publications, :dependent => :destroy, :order => :id
   has_many :licitation_process_bidders, :dependent => :destroy, :order => :id

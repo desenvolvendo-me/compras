@@ -3,7 +3,7 @@ class Bookmark < Compras::Model
 
   belongs_to :user
 
-  has_and_belongs_to_many :links
+  has_and_belongs_to_many :links, :join_table => :compras_bookmarks_compras_links
 
   validates :user, :presence => true
 

@@ -13,9 +13,9 @@ class Provider < Compras::Model
 
   has_one :user, :as => :authenticable
 
-  has_and_belongs_to_many :materials_groups
-  has_and_belongs_to_many :materials_classes
-  has_and_belongs_to_many :materials
+  has_and_belongs_to_many :materials_groups, :join_table => :compras_materials_groups_compras_providers
+  has_and_belongs_to_many :materials_classes, :join_table => :compras_materials_classes_compras_providers
+  has_and_belongs_to_many :materials, :join_table => :compras_materials_compras_providers
 
   has_many :provider_partners, :dependent => :destroy, :order => :id
   has_many :provider_licitation_documents, :dependent => :destroy, :inverse_of => :provider, :order => :id
