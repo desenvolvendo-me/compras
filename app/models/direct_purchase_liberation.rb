@@ -6,7 +6,7 @@ class DirectPurchaseLiberation < Compras::Model
   belongs_to :direct_purchase
   belongs_to :employee
 
-  validates :evaluation, :employee, :presence => true
+  validates :evaluation, :employee, :direct_purchase, :presence => true
 
   orderize
   filterize
