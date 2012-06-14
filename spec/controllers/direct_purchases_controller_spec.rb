@@ -23,6 +23,12 @@ describe DirectPurchasesController do
     assigns(:direct_purchase).date.should eq Date.current
   end
 
+  it 'show current year as default value for year' do
+    get :new
+
+    assigns(:direct_purchase).year.should eq Date.current.year
+  end
+
   describe 'POST create' do
     it 'should set unauthorized as status' do
       post :create

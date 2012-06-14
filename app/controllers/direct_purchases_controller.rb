@@ -8,6 +8,7 @@ class DirectPurchasesController < CrudController
     object.employee = current_user.authenticable
     object.status = DirectPurchaseStatus::UNAUTHORIZED
     object.date = Date.current
+    object.year = Date.current.year
 
     super
   end

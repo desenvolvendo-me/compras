@@ -27,6 +27,8 @@ feature "DirectPurchases" do
     page.should have_content 'Gerar Compra Direta'
 
     within_tab 'Dados gerais' do
+      page.should have_field 'Ano', :with => "#{Date.current.year}"
+
       fill_mask 'Ano', :with => '2012'
       fill_mask 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
