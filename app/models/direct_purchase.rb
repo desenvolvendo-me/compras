@@ -18,6 +18,7 @@ class DirectPurchase < Compras::Model
   belongs_to :payment_method
 
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :direct_purchase_liberations, :dependent => :destroy, :order => :id
   has_one :supply_authorization, :dependent => :restrict
 
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :allow_destroy => true
@@ -83,6 +84,10 @@ class DirectPurchase < Compras::Model
 
   def authorized?
     supply_authorization.present?
+  end
+
+  def update_status!(new_status)
+    update_attribute :status, new_status
   end
 
   protected

@@ -1,0 +1,15 @@
+<div class="actions">
+  <ul>
+    <% if filter? %>
+      <li>
+        <%= filter_link %>
+      </li>
+    <% end %>
+
+    <% if create? %>
+      <li>
+        <%= create_link(:direct_purchase_id => @parent.id) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
