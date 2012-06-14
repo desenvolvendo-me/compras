@@ -19,4 +19,12 @@ class DirectPurchaseBudgetAllocationItem < Compras::Model
       0
     end
   end
+
+  scope :by_modality_and_licitation_object_id, lambda { |modality, licitation_object_id|
+    joins{ direct_purchase_budget_allocation.direct_purchase }.
+    where {
+      direct_purchase_budget_allocation.direct_purchase.modality.eq(modality) &
+      direct_purchase_budget_allocation.direct_purchase.licitation_object_id.eq(licitation_object_id)
+    }
+  }
 end
