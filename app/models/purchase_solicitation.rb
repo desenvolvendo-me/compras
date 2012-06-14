@@ -3,6 +3,8 @@ class PurchaseSolicitation < Compras::Model
   attr_accessible :delivery_location_id, :kind, :general_observations
   attr_accessible :purchase_solicitation_budget_allocations_attributes, :budget_structure_id
 
+  attr_readonly :code
+
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
 
@@ -26,12 +28,13 @@ class PurchaseSolicitation < Compras::Model
   validate :must_have_at_least_one_budget_allocation
   validate :cannot_have_duplicated_budget_allocations
 
+  before_create :set_next_code
+
   orderize :request_date
   filterize
 
-
   def to_s
-    id.to_s
+    "#{code}/#{accounting_year}"
   end
 
   def total_allocations_items_value
@@ -42,7 +45,19 @@ class PurchaseSolicitation < Compras::Model
     update_attribute :service_status, PurchaseSolicitationServiceStatus::ANNULLED
   end
 
+  def next_code
+    last_code.succ
+  end
+
   protected
+
+  def set_next_code
+    self.code = next_code
+  end
+
+  def last_code
+    self.class.where { self.accounting_year.eq(accounting_year) }.maximum(:code).to_i
+  end
 
   def cannot_have_duplicated_budget_allocations
    single_allocations = []

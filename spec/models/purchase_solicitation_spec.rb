@@ -6,10 +6,11 @@ require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe PurchaseSolicitation do
-  it 'should return the id in to_s method' do
-    subject.id = 1
+  it 'should return the code/accounting_year in to_s method' do
+    subject.accounting_year = 2012
+    subject.code = 2
 
-    subject.to_s.should eq '1'
+    subject.to_s.should eq '2/2012'
   end
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
@@ -62,6 +63,18 @@ describe PurchaseSolicitation do
       subject.should_receive(:update_attribute).with(:service_status, PurchaseSolicitationServiceStatus::ANNULLED)
 
       subject.annul!
+    end
+  end
+
+  describe '#next_code' do
+    context 'when the code of last purchase_solicitation is 5' do
+      before do
+        subject.stub(:last_code).and_return(5)
+      end
+
+      it 'should return 6 as next_code' do
+        subject.next_code.should eq 6
+      end
     end
   end
 end
