@@ -7,8 +7,8 @@ class ReplaceBudgetStructureByCodeInBudgetStructure < ActiveRecord::Migration
 
     add_index :compras_budget_structures, :budget_structure_level_id
     add_index :compras_budget_structures, :parent_id
-    add_foreign_key :compras_budget_structures, :budget_structure_levels
-    add_foreign_key :compras_budget_structures, :budget_structures, :column => :parent_id
+    add_foreign_key :compras_budget_structures, :compras_budget_structure_levels, :column => :budget_structure_level_id
+    add_foreign_key :compras_budget_structures, :compras_budget_structures, :column => :parent_id
   end
 
   def down
