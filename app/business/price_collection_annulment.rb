@@ -14,6 +14,7 @@ class PriceCollectionAnnulment
   end
 
   protected
+
   def annul
     @annul ||= @price_collection.annul
   end
