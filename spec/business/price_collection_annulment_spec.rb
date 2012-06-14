@@ -14,7 +14,11 @@ describe PriceCollectionAnnulment do
     double('Proposal')
   end
 
-  subject{ described_class.new(price_collection) }
+  let :proposal_annulment do
+    double('ProposalAnnulment')
+  end
+
+  subject{ described_class.new(price_collection, proposal_annulment) }
 
   it 'should not annul the proposal when annul is not present' do
     price_collection.should_not_receive(:annul!)
@@ -27,8 +31,7 @@ describe PriceCollectionAnnulment do
     price_collection.should_receive(:annul!).and_return(true)
     price_collection.stub(:annul).and_return(annul)
 
-    proposal.should_receive(:annul!)
-    proposal.should_receive(:build_annul).with(:employee_id => 1, :date => 'current date', :description => 'Foo Bar').and_return double(:save => true)
+    proposal_annulment.should_receive(:annul_proposals!).with([proposal], annul)
 
     subject.change!
   end

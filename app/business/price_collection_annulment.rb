@@ -1,29 +1,24 @@
 class PriceCollectionAnnulment
-  def initialize(price_collection)
+  def initialize(price_collection, proposal_annulment_class=PriceCollectionProposalAnnulment)
     @price_collection = price_collection
+    @proposal_annulment_class = proposal_annulment_class
   end
 
   def change!
     return unless annul.present?
 
     if @price_collection.annul!
-      @price_collection.price_collection_proposals.each do |proposal|
-        annul_proposal(proposal)
-      end
+      @proposal_annulment_class.annul_proposals!(proposals, annul)
     end
   end
 
   protected
 
-  def annul
-    @annul ||= @price_collection.annul
+  def proposals
+    @price_collection.price_collection_proposals
   end
 
-  def annul_proposal(proposal)
-    proposal_annul = proposal.build_annul(:employee_id => annul.employee_id, :date => annul.date, :description => annul.description)
-
-    if proposal_annul.save
-      proposal.annul!
-    end
+  def annul
+    @price_collection.annul
   end
 end
