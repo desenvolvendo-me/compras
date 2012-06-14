@@ -43,7 +43,7 @@ class BudgetAllocation < Compras::Model
     relation = relation.where { government_program_id.eq(options[:government_program_id]) } if options[:government_program_id].present?
     relation = relation.where { government_action_id.eq(options[:government_action_id]) } if options[:government_action_id].present?
     relation = relation.where { expense_nature_id.eq(options[:expense_nature_id]) } if options[:expense_nature_id].present?
-    relation = relation.joins(:subfunction).where { compras_subfunctions.function_id.eq(options[:function_id]) } if options[:function_id].present?
+    relation = relation.joins { subfunction }.where { subfunction.function_id.eq(options[:function_id]) } if options[:function_id].present?
     relation
   end
 
