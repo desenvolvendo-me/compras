@@ -6,7 +6,9 @@ describe JudgmentCommissionAdvicesController do
   end
 
   it 'uses current year as default value for year' do
-    get :new
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+    get :new, :licitation_process_id => licitation_process.id
 
     assigns(:judgment_commission_advice).year.should eq Date.current.year
   end

@@ -2,6 +2,7 @@
   <%= f.button :submit if f.object.updatable? %>
   <%= link_to('Licitantes', licitation_process_licitation_process_bidders_path(resource), :class => "button primary") if f.object.persisted? %>
   <%= link_to('Publicações', licitation_process_licitation_process_publications_path(resource), :class => "button primary") if f.object.persisted? %>
+  <%= link_to('Pareceres da comissão julgadora', licitation_process_judgment_commission_advices_path(resource), :class => "button primary") if f.object.persisted? %>
   <%= f.object.decorator.lots_link if f.object.persisted? %>
   <%= f.object.decorator.count_link %>
   <%= f.button :cancel, :href => edit_administrative_process_path(resource.administrative_process) %>

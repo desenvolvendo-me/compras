@@ -14,19 +14,19 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Processos'
 
-    click_link 'Pareceres das Comissões Julgadoras'
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Pareceres da comissão julgadora'
 
     click_link 'Criar Parecer da Comissão Julgadora'
 
     within_tab 'Principal' do
-      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-
-      # testing delegated modality and next judgment commission advice number from licitation process
-      page.should have_disabled_field 'Modalidade'
-      page.should have_field 'Modalidade', :with => 'CV'
-      page.should have_disabled_field 'Sequência de julgamento'
-      page.should have_field 'Sequência de julgamento', :with => '1'
-
       fill_mask 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
@@ -79,11 +79,7 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Processo licitatório', :with => licitation_process.to_s
-      page.should have_disabled_field 'Modalidade'
-      page.should have_field 'Modalidade', :with => 'CV'
       page.should have_field 'Número da ata', :with => '1'
-      page.should have_field 'Sequência de julgamento', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Comissão julgadora', :with => licitation_commission.to_s
       page.should have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
@@ -130,15 +126,21 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Processos'
 
-    click_link 'Pareceres das Comissões Julgadoras'
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Pareceres da comissão julgadora'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
-
       fill_mask 'Ano', :with => '2013'
       fill_modal 'Comissão julgadora', :with => '20/04/2012', :field => 'Data da nomeação'
     end
@@ -173,11 +175,8 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Processo licitatório', :with => new_licitation_process.to_s
-      page.should have_field 'Modalidade', :with => 'CV'
       page.should have_field 'Número da ata', :with => '1'
       page.should have_field 'Ano', :with => '2013'
-      page.should have_field 'Sequência de julgamento', :with => '1'
       page.should have_field 'Comissão julgadora', :with => new_licitation_commission.to_s
     end
 
@@ -203,7 +202,15 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Processos'
 
-    click_link 'Pareceres das Comissões Julgadoras'
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Pareceres da comissão julgadora'
 
     page.should have_link advice.to_s
 
@@ -225,13 +232,19 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Processos'
 
-    click_link 'Pareceres das Comissões Julgadoras'
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Pareceres da comissão julgadora'
 
     click_link 'Criar Parecer da Comissão Julgadora'
 
     within_tab 'Principal' do
-      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-
       fill_mask 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
     end
@@ -255,7 +268,6 @@ feature "JudgmentCommissionAdvices" do
 
     within_tab 'Principal' do
       page.should have_field 'Número da ata', :with => '2'
-      page.should have_field 'Sequência de julgamento', :with => '2'
     end
   end
 
@@ -267,19 +279,19 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Processos'
 
-    click_link 'Pareceres das Comissões Julgadoras'
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Pareceres da comissão julgadora'
 
     click_link 'Criar Parecer da Comissão Julgadora'
 
     within_tab 'Principal' do
-      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-
-      # testing delegated modality and next judgment commission advice number from licitation process
-      page.should have_disabled_field 'Modalidade'
-      page.should have_field 'Modalidade', :with => 'CV'
-      page.should have_disabled_field 'Sequência de julgamento'
-      page.should have_field 'Sequência de julgamento', :with => '1'
-
       fill_mask 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
@@ -328,10 +340,19 @@ feature "JudgmentCommissionAdvices" do
 
   scenario 'should get the CPF number when selecting individual' do
     Person.make!(:wenderson)
+    LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Processos'
 
-    click_link 'Pareceres das Comissões Julgadoras'
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Pareceres da comissão julgadora'
 
     click_link 'Criar Parecer da Comissão Julgadora'
 
@@ -346,59 +367,6 @@ feature "JudgmentCommissionAdvices" do
       clear_modal 'Membro'
       page.should have_disabled_field 'CPF'
       page.should have_field 'CPF', :with => ''
-    end
-  end
-
-  scenario 'should clean delegated fields and inherited members when cleaning modal fileds' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
-    licitation_commission = LicitationCommission.make!(:comissao)
-    Person.make!(:sobrinho)
-    Person.make!(:wenderson)
-
-    click_link 'Processos'
-
-    click_link 'Pareceres das Comissões Julgadoras'
-
-    click_link 'Criar Parecer da Comissão Julgadora'
-
-    within_tab 'Principal' do
-      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-
-      # testing delegated modality and next judgment commission advice number from licitation process
-      page.should have_field 'Modalidade', :with => 'CV'
-      page.should have_field 'Sequência de julgamento', :with => '1'
-
-      # removing licitation process
-      clear_modal 'Processo licitatório'
-      page.should have_field 'Modalidade', :with => ''
-      page.should have_field 'Sequência de julgamento', :with => ''
-
-      fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
-
-      # testing delegated president name from licitation commission
-      page.should have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
-    end
-
-    within_tab 'Membros' do
-      # Verifying member that comes from Licitation Commission
-      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
-      page.should have_field 'CPF', :with => '003.149.513-34'
-      page.should have_field 'Função', :with => 'Presidente'
-      page.should have_field 'Natureza do cargo', :with => 'Servidor efetivo'
-      page.should have_field 'Matrícula', :with => '38'
-    end
-
-    within_tab 'Principal' do
-      clear_modal 'Comissão julgadora'
-    end
-
-    within_tab 'Membros' do
-      # Verifying member that comes from Licitation Commission
-      page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
-      page.should_not have_field 'CPF', :with => '003.149.513-34'
-      page.should_not have_field 'Função', :with => 'Presidente'
-      page.should_not have_field 'Natureza do cargo', :with => 'Servidor efetivo'
-      page.should_not have_field 'Matrícula', :with => '38'
     end
   end
 end

@@ -376,13 +376,6 @@ Tributario::Application.routes.draw do
 
   get "individuals/modal", :as => :modal_individuals
 
-  resources :judgment_commission_advices do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :judgment_forms do
     collection do
       get :filter
@@ -465,6 +458,7 @@ Tributario::Application.routes.draw do
     resources :licitation_process_bidders
     resources :licitation_process_lots
     resources :licitation_process_publications
+    resources :judgment_commission_advices
 
     collection do
       get :filter

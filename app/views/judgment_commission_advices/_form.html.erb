@@ -19,16 +19,6 @@
 </div>
 
 <script>
-  $('#judgment_commission_advice_licitation_process_id').change(function (event, advice_licitation_process) {
-    if (advice_licitation_process){
-      $('#judgment_commission_advice_licitation_process_modality_humanize').val(advice_licitation_process.modality_humanize);
-      $('#judgment_commission_advice_judgment_sequence').val(advice_licitation_process.advice_number + 1);
-    } else {
-      $('#judgment_commission_advice_licitation_process_modality_humanize').val('');
-      $('#judgment_commission_advice_judgment_sequence').val('');
-    }
-  });
-
   function cleanExistingMembers() {
     $('.member.inherited').each(function() {
       $(this).find('input.destroy').attr('value', 'true');
