@@ -23,6 +23,10 @@ class ReserveFund < Compras::Model
   delegate :real_amount, :amount, :function, :subfunction, :government_program, :government_action, :budget_structure,
            :expense_nature, :reserved_value, :to => :budget_allocation, :allow_nil => true, :prefix => true
   delegate :licitation?, :to => :reserve_allocation_type, :allow_nil => true
+  delegate :expense_category_id, :to => :budget_allocation, :allow_nil => true
+  delegate :expense_group_id, :to => :budget_allocation, :allow_nil => true
+  delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
+  delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
 
   validates :entity, :budget_allocation, :value, :year, :reserve_allocation_type, :date, :presence => true
   validate :value_should_not_exceed_available_reserve

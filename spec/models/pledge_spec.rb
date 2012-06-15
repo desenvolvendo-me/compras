@@ -20,6 +20,7 @@ describe Pledge do
   it { should belong_to :provider }
   it { should belong_to :founded_debt_contract }
   it { should belong_to :licitation_process }
+  it { should belong_to :expense_nature }
 
   it { should have_many(:pledge_parcels).dependent(:destroy).order(:number) }
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
@@ -35,6 +36,7 @@ describe Pledge do
   it { should validate_presence_of :value }
   it { should validate_presence_of :provider }
   it { should validate_presence_of :budget_allocation }
+  it { should validate_presence_of :expense_nature }
 
   context 'pledge_parcels with balance' do
     let :pledge_parcel_one do

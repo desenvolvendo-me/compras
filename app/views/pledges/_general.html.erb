@@ -49,7 +49,15 @@
 
 <%= f.input :value %>
 
-<%= f.input :budget_allocation_expense_nature, :disabled => true %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_allocation_expense_nature, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :expense_nature, :disabled => f.object.budget_allocation.blank? %>
+  </div>
+</div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">

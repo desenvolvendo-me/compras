@@ -16,6 +16,7 @@ class ExpenseNature < Compras::Model
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :materials, :dependent => :restrict
   has_many :budget_allocations, :dependent => :restrict
+  has_many :pledges, :dependent => :restrict
 
   delegate :code, :to => :expense_category, :prefix => true, :allow_nil => true
   delegate :code, :to => :expense_group, :prefix => true, :allow_nil => true

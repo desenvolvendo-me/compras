@@ -19,6 +19,7 @@ Pledge.blueprint(:empenho) do
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
 Pledge.blueprint(:empenho_com_dois_vencimentos) do
@@ -45,6 +46,7 @@ Pledge.blueprint(:empenho_com_dois_vencimentos) do
     PledgeParcel.make!(:vencimento_primario),
     PledgeParcel.make!(:vencimento_secundario)
   ] }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
 Pledge.blueprint(:empenho_em_quinze_dias) do
@@ -68,6 +70,7 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)] }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
 Pledge.blueprint(:empenho_saldo_maior_mil) do
@@ -91,6 +94,7 @@ Pledge.blueprint(:empenho_saldo_maior_mil) do
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
 Pledge.blueprint(:empenho_estimativo) do
@@ -114,6 +118,7 @@ Pledge.blueprint(:empenho_estimativo) do
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
 Pledge.blueprint(:empenho_ordinario) do
@@ -137,4 +142,5 @@ Pledge.blueprint(:empenho_ordinario) do
   provider { Provider.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end

@@ -5,6 +5,7 @@ require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/material'
 require 'app/models/budget_allocation'
+require 'app/models/pledge'
 
 describe ExpenseNature do
   it 'should return full code and description as to_s method' do
@@ -21,6 +22,7 @@ describe ExpenseNature do
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
   it { should have_many(:materials).dependent(:restrict) }
   it { should have_many(:budget_allocations).dependent(:restrict) }
+  it { should have_many(:pledges).dependent(:restrict) }
 
   it { should validate_presence_of :full_code }
   it { should validate_presence_of :kind }

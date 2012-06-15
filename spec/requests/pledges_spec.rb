@@ -35,6 +35,7 @@ feature "Pledges", :driver => :selenium do
       fill_mask 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Código completo'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
@@ -149,6 +150,107 @@ feature "Pledges", :driver => :selenium do
         page.should have_field 'Número', :with => '2'
         page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
         page.should have_field 'Valor', :with => '5,00'
+      end
+    end
+  end
+
+  scenario 'should lock expense_nature modal fields when fill reserve_fund' do
+    ReserveFund.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Reserva de dotação', :with => '2011', :field => 'Exercício'
+
+      within_modal 'Desdobramento' do
+        page.should have_disabled_field 'Categoria da despesa'
+        page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
+        page.should have_disabled_field 'Grupo da despesa'
+        page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+        page.should have_disabled_field 'Modalidade da despesa'
+        page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+        page.should have_disabled_field 'Elemento da despesa'
+        page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
+      end
+    end
+  end
+
+  scenario 'should lock expense_nature modal fields when fill budget_allocation' do
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+      within_modal 'Desdobramento' do
+        page.should have_disabled_field 'Categoria da despesa'
+        page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
+        page.should have_disabled_field 'Grupo da despesa'
+        page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+        page.should have_disabled_field 'Modalidade da despesa'
+        page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+        page.should have_disabled_field 'Elemento da despesa'
+        page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
+      end
+    end
+  end
+
+  scenario 'should filter by budget_allocation category, group, modality, element' do
+    BudgetAllocation.make!(:reparo_2011)
+    ExpenseNature.make!(:despesas_correntes)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+
+      within_modal 'Desdobramento' do
+        click_button 'Pesquisar'
+      end
+    end
+
+    page.should have_content '3.0.10.01.11'
+    page.should_not have_content '4.4.20.03.11'
+  end
+
+  scenario 'when submit a form with some error should return filtered expense_nature' do
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Principal' do
+      within_modal 'Desdobramento' do
+        page.should have_disabled_field 'Categoria da despesa'
+        page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
+        page.should have_disabled_field 'Grupo da despesa'
+        page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+        page.should have_disabled_field 'Modalidade da despesa'
+        page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+        page.should have_disabled_field 'Elemento da despesa'
+        page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
       end
     end
   end
@@ -800,6 +902,7 @@ feature "Pledges", :driver => :selenium do
       fill_mask 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Código completo'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'

@@ -36,7 +36,11 @@
     $('form.pledge .remove-pledge-item, form.pledge .remove-pledge-parcel').hide();
   <% else %>
     (function () {
-      var reserveFundBudgetAllocationId;
+      var reserveFundBudgetAllocationId,
+          expenseCategoryId = '<%= f.object.expense_category_id %>',
+          expenseGroupId = '<%= f.object.expense_group_id %>',
+          expenseModalityId = '<%= f.object.expense_modality_id %>',
+          expenseElementId = '<%= f.object.expense_element_id %>';
 
       function uniqPledgeParcel(){
         return $('div.pledge-parcel .destroy[value=false]').length == 1;
@@ -78,6 +82,23 @@
         });
       }
 
+      function subcategoryModalUrl() {
+        var url = "<%= modal_expense_natures_path %>?",
+            params = {
+              locked_fields: ["expense_category", "expense_group", "expense_modality", "expense_element"],
+              expense_nature: {
+                expense_category_id: expenseCategoryId,
+                expense_group_id: expenseGroupId,
+                expense_modality_id: expenseModalityId,
+                expense_element_id: expenseElementId
+              }
+            };
+
+        url += jQuery.param(params);
+
+        return url;
+      }
+
       $("#pledge_reserve_fund_id").change(function (event, reserve_fund) {
         if (reserve_fund) {
           $('#pledge_reserve_fund_value').val(reserve_fund.reserve_fund_value);
@@ -88,6 +109,12 @@
           $('#pledge_budget_allocation_expense_nature').val(reserve_fund.expense_nature);
 
           reserveFundBudgetAllocationId = reserve_fund.budget_allocation_id;
+          expenseCategoryId = reserve_fund.expense_category_id;
+          expenseGroupId = reserve_fund.expense_group_id;
+          expenseModalityId = reserve_fund.expense_modality_id;
+          expenseElementId = reserve_fund.expense_element_id;
+
+          $('#pledge_expense_nature').attr('disabled', false).attr('data-modal-url', subcategoryModalUrl);
         } else {
           $('#pledge_reserve_fund_value').val('');
         }
@@ -114,9 +141,18 @@
           }
           $('#pledge_budget_allocation_real_amount').val(budget_allocation.real_amount);
           $('#pledge_budget_allocation_expense_nature').val(budget_allocation.expense_nature);
+
+          expenseCategoryId = budget_allocation.expense_category_id;
+          expenseGroupId = budget_allocation.expense_group_id;
+          expenseModalityId = budget_allocation.expense_modality_id;
+          expenseElementId = budget_allocation.expense_element_id;
+
+          $('#pledge_expense_nature').attr('disabled', false).attr('data-modal-url', subcategoryModalUrl);
         } else {
           $('#pledge_budget_allocation_real_amount').val('');
           $('#pledge_budget_allocation_expense_nature').val('');
+          $('#pledge_expense_nature').val('');
+          $('#pledge_expense_nature_id').val('');
         }
       });
 
@@ -137,6 +173,7 @@
       $('form.pledge').delegate('.remove-pledge-item', 'click', pledgeItemsTotalValue);
 
       fillParcelNumber();
+      $('#pledge_expense_nature').attr('disabled', false).attr('data-modal-url', subcategoryModalUrl);
     })();
   <% end %>
 </script>

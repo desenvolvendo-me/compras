@@ -26,3 +26,17 @@ ExpenseNature.blueprint(:compra_de_material) do
   expense_element { ExpenseElement.make!(:aposentadorias) }
   expense_split { '11' }
 end
+
+ExpenseNature.blueprint(:despesas_correntes) do
+  entity { Entity.make!(:detran) }
+  regulatory_act { RegulatoryAct.make!(:sopa) }
+  full_code { '4.4.20.03.11' }
+  kind { ExpenseNatureKind::ANALYTICAL }
+  description { 'Despesas Correntes' }
+  docket { 'Registra o valor das despesas' }
+  expense_group { ExpenseGroup.make!(:investimentos) }
+  expense_category { ExpenseCategory.make!(:despesa_de_capital) }
+  expense_modality { ExpenseModality.make!(:transferencias_a_uniao) }
+  expense_element { ExpenseElement.make!(:pensoes) }
+  expense_split { '11' }
+end

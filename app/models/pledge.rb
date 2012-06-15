@@ -4,7 +4,7 @@ class Pledge < Compras::Model
   attr_accessible :pledge_historic_id, :contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
   attr_accessible :founded_debt_contract_id, :provider_id, :pledge_items_attributes
-  attr_accessible :pledge_parcels_attributes, :licitation_process_id
+  attr_accessible :pledge_parcels_attributes, :licitation_process_id, :expense_nature_id
 
   attr_readonly :code
 
@@ -25,6 +25,7 @@ class Pledge < Compras::Model
   belongs_to :founded_debt_contract, :class_name => 'Contract'
   belongs_to :licitation_modality
   belongs_to :licitation_process
+  belongs_to :expense_nature
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
   has_many :pledge_parcels, :dependent => :destroy, :order => :number
@@ -39,9 +40,14 @@ class Pledge < Compras::Model
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
   delegate :amount, :real_amount, :expense_nature, :to => :budget_allocation, :allow_nil => true, :prefix => true
   delegate :licitation_number, :to => :licitation_process, :allow_nil => true, :prefix => true
+  delegate :expense_category_id, :to => :budget_allocation, :allow_nil => true
+  delegate :expense_group_id, :to => :budget_allocation, :allow_nil => true
+  delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
+  delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
 
   validates :budget_allocation, :entity, :year, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :provider, :presence => true
+  validates :expense_nature, :presence => true
   validates :code, :uniqueness => { :scope => [:year, :entity_id], :allow_blank => true }
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
