@@ -18,6 +18,7 @@ class DirectPurchase < Compras::Model
   belongs_to :payment_method
 
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
+  has_many :items, :through => :direct_purchase_budget_allocations, :class_name => :DirectPurchaseBudgetAllocationItem
   has_many :direct_purchase_liberations, :dependent => :destroy, :order => :id
   has_one :supply_authorization, :dependent => :restrict
 

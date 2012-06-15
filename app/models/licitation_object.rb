@@ -6,6 +6,7 @@ class LicitationObject < Compras::Model
   attr_readonly :build_public_concurrency, :special_auction, :special_unenforceability, :special_contest
 
   has_many :direct_purchases, :dependent => :restrict
+  has_many :items, :through => :direct_purchases
 
   has_and_belongs_to_many :materials, :join_table => :compras_licitation_objects_compras_materials
 
@@ -34,8 +35,8 @@ class LicitationObject < Compras::Model
 
   private
 
-  def licitation_exemption(modality, item_storage = DirectPurchaseBudgetAllocationItem)
-    item_storage.by_modality_and_licitation_object_id(modality, self.id).
+  def licitation_exemption(modality)
+    items.by_modality(modality).
       collect(&:estimated_total_price).sum
   end
 end
