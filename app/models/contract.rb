@@ -2,7 +2,7 @@ class Contract < Compras::Model
   attr_accessible :year, :entity_id, :contract_number, :process_number
   attr_accessible :signature_date, :end_date, :description, :kind
 
-  has_enumeration_for :kind, :with => ContractKind
+  has_enumeration_for :kind, :with => ContractKind, :create_scopes => true
 
   belongs_to :entity
 
@@ -15,9 +15,6 @@ class Contract < Compras::Model
 
   orderize :contract_number
   filterize
-
-  scope :management, where { kind.eq('management') }
-  scope :founded, where { kind.eq('founded') }
 
   def to_s
     "#{id}/#{year}"
