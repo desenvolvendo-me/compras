@@ -4,4 +4,3 @@ PriceCollectionAnnul.blueprint(:coleta_anulada) do
   employee { Employee.make!(:sobrinho) }
   date { Date.current }
 end
-
