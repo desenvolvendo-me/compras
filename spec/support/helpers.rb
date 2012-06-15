@@ -23,7 +23,8 @@ module Helpers
     raise "Must pass a hash containing 'with'" if not options.is_a?(Hash) or not options.has_key?(:with)
 
     field = find(:xpath, XPath::HTML.fillable_field(locator), :message => msg)
-    page.execute_script %{$('##{field[:id]}').val('#{options[:with]}').change().keyup()}
+    page.execute_script %{document.getElementById('#{field[:id]}').value = '#{options[:with]}'}
+    field.trigger('blur')
   end
 
   def clear_modal(locator)
@@ -50,12 +51,22 @@ module Helpers
   #     end
   #
   def fill_modal(modal, options = {})
+    options[:fill] = true
+    select_modal modal, options
+  end
+
+  def select_modal(modal, options = {})
     within_modal modal do
-      fill_in options.fetch(:field, 'Nome'), :with => options.fetch(:with)
+      fill_in options.fetch(:field, 'Nome'), :with => options.fetch(:with) if options.fetch(:fill, false)
 
       yield if block_given?
 
+      # Scroll modal to bottom
+      # See https://github.com/jonleighton/poltergeist/issues/83
+      page.execute_script '$(".ui-dialog-content").scrollTop($(".ui-dialog-content").outerHeight())'
+
       click_button 'Pesquisar'
+
       click_record options.fetch(:with)
     end
   end
@@ -66,10 +77,8 @@ module Helpers
     field = page.find_field(locator)
     page.execute_script %{ $('##{field[:id]}').modal({autoOpen: true}) }
 
-    ignoring_scopes do
-      within '.ui-dialog:nth-last-of-type(2)' do
-        yield
-      end
+    within :xpath, '(//div[contains(@class, "ui-dialog")])[last()]' do
+      yield
     end
   end
 
@@ -91,10 +100,34 @@ module Helpers
     end
   end
 
+  def within_first_fieldset
+    within 'fieldset:first' do
+      yield
+    end
+  end
+
+  def within_last_fieldset
+    within 'fieldset:last' do
+      yield
+    end
+  end
+
+  def navigate_through(path)
+    path.split('>').each do |link|
+      click_link link.strip
+    end
+  end
+
   def click_record(record)
     within_records do
       page.find('td', :text => record).click
     end
+  end
+
+  def destroy_record(record, path)
+    navigate_through "#{path} > #{record}"
+
+    click_link "Apagar #{record}", :confirm => true
   end
 
   def within_tab(locator)

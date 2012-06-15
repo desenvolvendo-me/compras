@@ -62,4 +62,5 @@ group :test do
   gem 'capybara', '1.1.2'
   gem 'capybara-webkit', '0.11.0'
   gem 'selenium-webdriver', '2.21.2'
+  gem 'poltergeist', :git => 'https://github.com/jonleighton/poltergeist.git'
 end
