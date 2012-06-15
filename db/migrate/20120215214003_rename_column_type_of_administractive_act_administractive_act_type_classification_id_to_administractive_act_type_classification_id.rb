@@ -1,5 +1,0 @@
-class RenameColumnTypeOfAdministractiveActAdministractiveActTypeClassificationIdToAdministractiveActTypeClassificationId < ActiveRecord::Migration
-  def change
-    rename_column :type_of_administractive_acts, :classification_of_types_of_administractive_act_id, :administractive_act_type_classification_id
-  end
-end
