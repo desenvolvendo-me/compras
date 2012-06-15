@@ -25,7 +25,7 @@
   </div>
 
   <%= mustache "items-template-#{f.nested_identifier}" do %>
-    <%= f.association :items_attributes, :collection => f.object.items.build, :index => '{{uuid_item}}' do |item| %>
+    <%= f.association :items_attributes, :collection => f.object.items.build(:status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING), :index => '{{uuid_item}}' do |item| %>
       <%= render 'purchase_solicitation_budget_allocation_items/form', :f => item %>
     <% end %>
   <% end %>

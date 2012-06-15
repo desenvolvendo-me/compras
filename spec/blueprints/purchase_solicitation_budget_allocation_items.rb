@@ -3,4 +3,5 @@ PurchaseSolicitationBudgetAllocationItem.blueprint(:item) do
   brand { "Norton" }
   quantity { 3 }
   unit_price { 200.0 }
+  status { PurchaseSolicitationBudgetAllocationItemStatus::PENDING }
 end

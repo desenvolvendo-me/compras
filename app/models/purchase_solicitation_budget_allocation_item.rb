@@ -1,8 +1,10 @@
 class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   attr_accessible :purchase_solicitation_budget_allocation_id, :material_id
-  attr_accessible :brand, :quantity, :unit_price
+  attr_accessible :brand, :quantity, :unit_price, :status
 
   attr_accessor :order
+
+  has_enumeration_for :status, :with => PurchaseSolicitationBudgetAllocationItemStatus
 
   belongs_to :purchase_solicitation_budget_allocation
   belongs_to :material
@@ -10,7 +12,7 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   delegate :reference_unit, :to => :material, :allow_nil => true
   delegate :annulled?, :to => :purchase_solicitation_budget_allocation, :allow_nil => true
 
-  validates :material, :quantity, :unit_price, :presence => true
+  validates :material, :quantity, :unit_price, :status, :presence => true
 
   def estimated_total_price
     (quantity || 0) * (unit_price || 0)

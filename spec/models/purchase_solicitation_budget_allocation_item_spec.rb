@@ -11,6 +11,7 @@ describe PurchaseSolicitationBudgetAllocationItem do
   it { should validate_presence_of :material }
   it { should validate_presence_of :quantity }
   it { should validate_presence_of :unit_price }
+  it { should validate_presence_of :status }
 
   it 'should calculate total price' do
     subject.estimated_total_price.should eq 0

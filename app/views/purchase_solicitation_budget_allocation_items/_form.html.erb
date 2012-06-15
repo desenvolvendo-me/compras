@@ -1,6 +1,7 @@
 <div class="yui3-g item nested">
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+  <%= f.input :status, :as => :hidden %>
 
   <div class="yui3-u-1-4">
     <%= f.input :order, :disabled => true, :input_html => { :class => 'order' } %>
