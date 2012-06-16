@@ -17,6 +17,6 @@ class Contract < Compras::Model
   filterize
 
   def to_s
-    "#{id}/#{year}"
+    contract_number
   end
 end

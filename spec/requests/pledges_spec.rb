@@ -16,9 +16,9 @@ feature "Pledges", :driver => :selenium do
     PledgeHistoric.make!(:semestral)
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
-    contract = Contract.make!(:primeiro_contrato)
+    Contract.make!(:primeiro_contrato)
     Provider.make!(:wenderson_sa)
-    founded_debt_contract = Contract.make!(:contrato_detran)
+    Contract.make!(:contrato_detran)
     Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
@@ -113,7 +113,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Valor', :with => '10,00'
       page.should have_field 'Categoria', :with => 'Geral'
       page.should have_select 'Tipo de bem', :selected => 'Patrimonial'
-      page.should have_field 'Contrato de dívida', :with => founded_debt_contract.to_s
+      page.should have_field 'Contrato de dívida', :with => '101'
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
     end
 
@@ -123,7 +123,7 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Modalidade', :with => 'Pública'
       page.should have_field 'Processo licitatório', :with => '1/2012'
       page.should have_field 'Número da licitação', :with => '1'
-      page.should have_field 'Contrato', :with => contract.to_s
+      page.should have_field 'Contrato', :with => '001'
       page.should have_field 'Objeto', :with => 'Objeto de empenho'
     end
 

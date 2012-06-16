@@ -6,11 +6,9 @@ require 'app/models/pledge'
 describe Contract do
   it { should belong_to(:entity) }
 
-  it 'should return id/year as to_s method' do
-    subject.id = '1'
-    subject.year = '2012'
-
-    subject.to_s.should eq '1/2012'
+  it 'should return contract_number as to_s method' do
+    subject.contract_number = '001'
+    subject.to_s.should eq '001'
   end
 
   it { should have_many(:pledges).dependent(:restrict) }
