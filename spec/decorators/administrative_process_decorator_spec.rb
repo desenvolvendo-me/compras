@@ -76,4 +76,45 @@ describe AdministrativeProcessDecorator do
       subject.build_licitation_process_link.should be_nil
     end
   end
+
+  it "should return nil when administrative process is not persisted" do
+    component.stub(:persisted? => false)
+
+    subject.release_button.should be_nil
+  end
+
+  it "should return nil when administrative process is persisted but is not waiting neither released" do
+    component.stub(:persisted? => false)
+    component.stub(:waiting? => false)
+    component.stub(:released? => false)
+
+    subject.release_button.should be_nil
+  end
+
+  it "should return a link to new administrative process liberation when is waiting" do
+    component.stub(:id => 1)
+    component.stub(:persisted? => true)
+    component.stub(:waiting? => true)
+    routes.stub(:new_administrative_process_liberation_path).with(:administrative_process_id => 1).and_return('new_path')
+    helpers.stub(:link_to).with('Liberar', 'new_path', { :class => 'button primary' }).and_return('new_link')
+
+    subject.release_button.should eq 'new_link'
+  end
+
+  context "with administrative_process_liberation" do
+    let :administrative_process_liberation do
+      double(:administrative_process_liberation, :id => 1)
+    end
+
+    it "should return a link to new administrative process liberation when is released" do
+      component.stub(:administrative_process_liberation => administrative_process_liberation)
+      component.stub(:persisted? => true)
+      component.stub(:waiting? => false)
+      component.stub(:released? => true)
+      routes.stub(:edit_administrative_process_liberation_path).and_return('edit_path')
+      helpers.stub(:link_to).with('Liberação', 'edit_path', { :class => 'button secondary' }).and_return('edit_link')
+
+      subject.release_button.should eq 'edit_link'
+    end
+  end
 end

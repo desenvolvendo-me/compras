@@ -9,6 +9,7 @@ require 'app/models/budget_allocation'
 require 'app/enumerations/administrative_process_modality'
 require 'app/enumerations/administrative_process_object_type'
 require 'app/business/administrative_process_modalities_by_object_type'
+require 'app/models/administrative_process_liberation'
 
 describe AdministrativeProcess do
   it 'should return process/year as to_s' do
@@ -21,6 +22,7 @@ describe AdministrativeProcess do
   it { should belong_to :judgment_form }
 
   it { should have_one(:licitation_process).dependent(:restrict) }
+  it { should have_one(:administrative_process_liberation).dependent(:destroy) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).through(:administrative_process_budget_allocations) }
 
@@ -184,6 +186,14 @@ describe AdministrativeProcess do
     it "should group signatures" do
       subject.stub(:signatures => signature_configuration_items)
       subject.signatures_grouped.should eq [[signature_configuration_item1, signature_configuration_item2, signature_configuration_item3, signature_configuration_item4], [signature_configuration_item5]]
+    end
+  end
+
+  describe '#update_status!' do
+    it 'update the status attribute with the given string' do
+      subject.should_receive(:update_attribute).with(:status, 'released')
+
+      subject.update_status!('released')
     end
   end
 end

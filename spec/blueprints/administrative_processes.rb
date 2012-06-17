@@ -12,6 +12,7 @@ AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:compra_de_computadores) do
@@ -27,6 +28,7 @@ AdministrativeProcess.blueprint(:compra_de_computadores) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 2' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:compra_sem_convite) do
@@ -42,6 +44,7 @@ AdministrativeProcess.blueprint(:compra_sem_convite) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 2' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:compra_com_itens) do
@@ -57,6 +60,7 @@ AdministrativeProcess.blueprint(:compra_com_itens) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:compra_com_itens_2) do
@@ -72,6 +76,7 @@ AdministrativeProcess.blueprint(:compra_com_itens_2) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:compra_com_itens_3) do
@@ -87,6 +92,7 @@ AdministrativeProcess.blueprint(:compra_com_itens_3) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:compra_liberada) do
@@ -102,6 +108,7 @@ AdministrativeProcess.blueprint(:compra_liberada) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:compra_aguardando) do
@@ -132,6 +139,7 @@ AdministrativeProcess.blueprint(:apuracao_por_itens) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:classificacao_por_itens) do
@@ -147,6 +155,7 @@ AdministrativeProcess.blueprint(:classificacao_por_itens) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:maior_lance_por_itens) do
@@ -162,6 +171,7 @@ AdministrativeProcess.blueprint(:maior_lance_por_itens) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:classificacao_por_lote) do
@@ -177,6 +187,7 @@ AdministrativeProcess.blueprint(:classificacao_por_lote) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:apuracao_por_lote) do
@@ -192,6 +203,7 @@ AdministrativeProcess.blueprint(:apuracao_por_lote) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:maior_lance_por_lote) do
@@ -207,6 +219,7 @@ AdministrativeProcess.blueprint(:maior_lance_por_lote) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:apuracao_global) do
@@ -222,6 +235,7 @@ AdministrativeProcess.blueprint(:apuracao_global) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
 AdministrativeProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
@@ -237,4 +251,5 @@ AdministrativeProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end

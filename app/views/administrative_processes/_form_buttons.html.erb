@@ -1,13 +1,10 @@
 <div class="buttons">
   <% if f.object.waiting? %>
     <%= f.button :submit %>
-
-    <% if f.object.persisted? %>
-      <%= f.button :submit, 'Liberar' %>
-      <%= f.button :submit, 'Anular', :class => 'negative' %>
-    <% end %>
+    <%= f.button :submit, 'Anular', :class => 'negative' if f.object.persisted? %>
   <% end %>
 
+  <%= f.object.decorator.release_button %>
   <%= f.object.decorator.build_licitation_process_link %>
   <%= link_to "Solicitação de abertura de processo licitatório", resource_path(resource), :class => 'clear button neutral' if f.object.released? %>
   <%= f.button :cancel %>

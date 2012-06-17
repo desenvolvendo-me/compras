@@ -315,7 +315,7 @@ feature "AdministrativeProcesses" do
     end
 
     page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    page.should have_button 'Liberar'
+    page.should have_link 'Liberar'
   end
 
   scenario "should not have a release button when editing an administrative process without status waiting" do
@@ -330,23 +330,7 @@ feature "AdministrativeProcesses" do
     end
 
     page.should_not have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    page.should_not have_button 'Liberar'
-  end
-
-  scenario "releasing an administrative process" do
-    AdministrativeProcess.make!(:compra_aguardando)
-
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_button 'Liberar'
-
-    page.should have_notice 'Processo Administrativo liberado com sucesso'
+    page.should_not have_link 'Liberar'
   end
 
   scenario "should have a annul button when editing an administrative process with status waiting" do

@@ -13,6 +13,7 @@ class AdministrativeProcess < Compras::Model
   belongs_to :judgment_form
 
   has_one :licitation_process, :dependent => :restrict
+  has_one :administrative_process_liberation, :dependent => :destroy
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
   has_many :items, :through => :administrative_process_budget_allocations
 
@@ -55,6 +56,10 @@ class AdministrativeProcess < Compras::Model
 
   def signatures_grouped
     signatures.in_groups_of(4, false)
+  end
+
+  def update_status!(new_status)
+    update_attribute :status, new_status
   end
 
   protected
