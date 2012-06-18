@@ -1,13 +1,5 @@
-class Identity < Compras::Model
-  attr_accessible :number, :issuer, :state_id, :issue
-
-  attr_readonly :person_id
-
-  belongs_to :individual
-  belongs_to :state
-
-  validates :number, :issuer, :state, :issue, :presence => true
-  validates :issue, :timeliness => { :before => :today, :type => :date , :allow_blank => true }
+class Identity < Unico::Identity
+  validates :issuer, :state, :issue, :presence => true
 
   def to_s
     number.to_s

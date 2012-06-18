@@ -1,4 +1,5 @@
 require 'model_helper'
+require 'app/models/unico/identity'
 require 'app/models/identity'
 
 describe Identity do
