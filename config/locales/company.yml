@@ -4,9 +4,24 @@ pt-BR:
       company:
         one: "Empresa"
         other: "Empresas"
+    models:
+      unico/company:
+        one: "Empresa"
+        other: "Empresas"
 
     attributes:
       company:
+        name: "Nome"
+        cnpj: "CNPJ"
+        legal_nature: "Natureza jurídica"
+        responsible: "Pessoa responsável pela empresa"
+        state_registration: "Inscrição estadual"
+        commercial_registration_number: "Número do registro na junta comercial"
+        commercial_registration_date: "Data do registro na junta comercial"
+        company_size: "Porte da empresa"
+        choose_simple: "Optante pelo Simples"
+        responsible_role: "Função do responsável"
+      unico/company:
         name: "Nome"
         cnpj: "CNPJ"
         legal_nature: "Natureza jurídica"
