@@ -3,7 +3,7 @@ module Matchers
 
   matcher :have_disabled_field do |field|
     match do |page|
-      page.find_field(field)[:disabled].should eq 'true'
+      page.find_field(field)[:disabled].should eq 'disabled'
     end
 
     failure_message_for_should do |page|
@@ -17,7 +17,7 @@ module Matchers
 
   matcher :have_disabled_button do |field|
     match do |page|
-      page.find_button(field)[:disabled].should eq 'true'
+      page.find_button(field)[:disabled].should eq 'disabled'
     end
 
     failure_message_for_should do |page|
