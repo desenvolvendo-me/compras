@@ -42,7 +42,7 @@ feature 'PriceCollectionAnnuls' do
       click_record 'Wenderson Malheiros'
     end
 
-    select 'Anulação', :from => 'Tipo da Anulação'
+    select 'Anulação', :from => 'Tipo da anulação'
 
     fill_in 'Justificativa', :with => 'Something'
 
@@ -57,8 +57,8 @@ feature 'PriceCollectionAnnuls' do
     page.should have_field 'Data', :with => I18n.l(Date.current)
     page.should have_disabled_field 'Justificativa'
     page.should have_field 'Justificativa', :with => 'Something'
-    page.should have_disabled_field 'Tipo da Anulação'
-    page.should have_select 'Tipo da Anulação', :selected => 'Anulação'
+    page.should have_disabled_field 'Tipo da anulação'
+    page.should have_select 'Tipo da anulação', :selected => 'Anulação'
 
     page.should_not have_link 'Apagar'
     page.should_not have_button 'Salvar'
