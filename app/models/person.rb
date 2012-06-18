@@ -19,8 +19,8 @@ class Person < Unico::Person
   def self.filter(params = {})
     relation = scoped
     relation = relation.where{ name.matches "#{params[:name]}%" } unless params[:name].blank?
-    relation = relation.joins{ personable Unico::Individual }.where{ personable(Unico::Individual).cpf == params[:cpf] } unless params[:cpf].blank?
-    relation = relation.joins{ personable Unico::Company }.where{ personable(Unico::Company).cnpj == params[:cnpj] } unless params[:cnpj].blank?
+    relation = relation.joins{ personable Individual }.where{ personable(Individual).cpf == params[:cpf] } unless params[:cpf].blank?
+    relation = relation.joins{ personable Company }.where{ personable(Company).cnpj == params[:cnpj] } unless params[:cnpj].blank?
 
     relation
   end

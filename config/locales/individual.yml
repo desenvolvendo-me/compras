@@ -4,21 +4,9 @@ pt-BR:
       individual:
         one: "Pessoa"
         other: "Pessoas"
-      unico/individual:
-        one: "Pessoa"
-        other: "Pessoas"
 
     attributes:
       individual:
-        cpf: "CPF"
-        name: "Nome"
-        mother: "Mãe"
-        father: "Pai"
-        birthdate: "Data de nascimento"
-        gender: "Sexo"
-        identity: "Identidade"
-        person: "Nome"
-      unico/individual:
         cpf: "CPF"
         name: "Nome"
         mother: "Mãe"

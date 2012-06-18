@@ -1,4 +1,4 @@
-<%= f.association :personable, :collection => f.object.personable.is_a?(Unico::Individual) ? f.object.personable.localized : Unico::Individual.new do |p| %>
+<%= f.association :personable, :collection => f.object.personable.is_a?(Individual) ? f.object.personable.localized : Individual.new do |p| %>
   <div class="tabs">
     <ul>
       <li><a href="#individual">Pessoa</a></li>

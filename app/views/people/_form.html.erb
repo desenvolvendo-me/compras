@@ -1,5 +1,5 @@
 <div id="personable-type">
-  <%= f.input :personable_type, :as => :radio_buttons, :collection => [['Pessoa Física', 'Unico::Individual'], ['Pessoa Jurídica', 'Unico::Company'], ['Inscrição Especial', 'SpecialEntry']], :input_html => { :class => 'personable_type' } %>
+  <%= f.input :personable_type, :as => :radio_buttons, :collection => [['Pessoa Física', 'Individual'], ['Pessoa Jurídica', 'Company'], ['Inscrição Especial', 'SpecialEntry']], :input_html => { :class => 'personable_type' } %>
 </div>
 
 <div id="personable">
@@ -18,11 +18,11 @@
 <% end %>
 
 <script>
-  $("#person_personable_type_unicoindividual").click(function () {
+  $("#person_personable_type_individual").click(function () {
     $("#personable").html($("#individual-template").mustache());
   });
 
-  $("#person_personable_type_unicocompany").click(function () {
+  $("#person_personable_type_company").click(function () {
     $("#personable").html($("#company-template").mustache());
   });
 
