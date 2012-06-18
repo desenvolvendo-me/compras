@@ -274,11 +274,7 @@ Tributario::Application.routes.draw do
     end
   end
 
-  resources :direct_purchase_liberations, :except => :destroy do
-    collection do
-      get :filter
-    end
-  end
+  resources :direct_purchase_liberations, :except => :destroy
 
   resources :districts do
     collection do
