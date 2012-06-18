@@ -64,11 +64,11 @@ feature "DirectPurchases" do
       page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
-      fill_in 'Quantidade', :with => '3'
+      fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
       # asserting calculated total price of the item
-      page.should have_field 'Valor total', :with => '600,00'
+      page.should have_field 'Valor total', :with => '700,00'
     end
 
     click_button 'Salvar'
@@ -107,9 +107,9 @@ feature "DirectPurchases" do
       page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
       page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Marca/Referência', :with => 'Norton'
-      page.should have_field 'Quantidade', :with => '3'
+      page.should have_field 'Quantidade', :with => '3,50'
       page.should have_field 'Valor unitário', :with => '200,00'
-      page.should have_field 'Valor total', :with => '600,00'
+      page.should have_field 'Valor total', :with => '700,00'
 
       page.should have_field 'Item', :with => '1'
     end
@@ -457,7 +457,7 @@ feature "DirectPurchases" do
         click_button 'Adicionar Item'
 
         within '.item:first' do
-          fill_in 'Quantidade', :with => 3
+          fill_in 'Quantidade', :with => '3,00'
           fill_in 'Valor unitário', :with => '10,00'
           page.should have_field 'Valor total', :with => '30,00'
         end
@@ -465,7 +465,7 @@ feature "DirectPurchases" do
         click_button 'Adicionar Item'
 
         within '.item:first' do
-          fill_in 'Quantidade', :with => 5
+          fill_in 'Quantidade', :with => '5,00'
           fill_in 'Valor unitário', :with => '2,00'
           page.should have_field 'Valor total', :with => '10,00'
         end
@@ -477,7 +477,7 @@ feature "DirectPurchases" do
         click_button 'Adicionar Item'
 
         within '.item:first' do
-          fill_in 'Quantidade', :with => 10
+          fill_in 'Quantidade', :with => '10,00'
           fill_in 'Valor total', :with => '50,00'
           page.should have_field 'Valor unitário', :with => '5,00'
         end
