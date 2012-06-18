@@ -30,7 +30,7 @@
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => number_with_precision(f.object.estimated_total_price) } %>
+      <%= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => number_with_precision(f.object.estimated_total_price), :disabled => true } %>
     </div>
   </div>
 

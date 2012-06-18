@@ -68,6 +68,7 @@ feature "DirectPurchases" do
       fill_in 'Valor unitário', :with => '200,00'
 
       # asserting calculated total price of the item
+      page.should have_disabled_field 'Valor total'
       page.should have_field 'Valor total', :with => '700,00'
     end
 
@@ -460,6 +461,7 @@ feature "DirectPurchases" do
           fill_in 'Quantidade', :with => '3,00'
           fill_in 'Valor unitário', :with => '10,00'
           page.should have_field 'Valor total', :with => '30,00'
+          page.should have_disabled_field 'Valor total'
         end
 
         click_button 'Adicionar Item'
@@ -468,6 +470,7 @@ feature "DirectPurchases" do
           fill_in 'Quantidade', :with => '5,00'
           fill_in 'Valor unitário', :with => '2,00'
           page.should have_field 'Valor total', :with => '10,00'
+          page.should have_disabled_field 'Valor total'
         end
       end
 
@@ -478,8 +481,9 @@ feature "DirectPurchases" do
 
         within '.item:first' do
           fill_in 'Quantidade', :with => '10,00'
-          fill_in 'Valor total', :with => '50,00'
-          page.should have_field 'Valor unitário', :with => '5,00'
+          fill_in 'Valor unitário', :with => '5,00'
+          page.should have_field 'Valor total', :with => '50,00'
+          page.should have_disabled_field 'Valor total'
         end
       end
 
