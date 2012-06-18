@@ -78,7 +78,7 @@
 
       function fillParcelNumber() {
         $('div.pledge-parcel .destroy[value=false]').each(function(index, item){
-          $(this).parent().parent().find('.order').val(index + 1);
+          $(this).parents('.pledge-parcel').find('.order').html(index + 1);
         });
       }
 

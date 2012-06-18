@@ -141,13 +141,13 @@ feature "Pledges", :driver => :selenium do
       page.should have_field 'Valor total das parcelas', :with => '10,00'
 
       within '.pledge-parcel:first' do
-        page.should have_field 'Número', :with => '1'
+        page.should have_content 'Parcela 1'
         page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
         page.should have_field 'Valor', :with => '5,00'
       end
 
       within '.pledge-parcel:last' do
-        page.should have_field 'Número', :with => '2'
+        page.should have_content 'Parcela 2'
         page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
         page.should have_field 'Valor', :with => '5,00'
       end
@@ -505,13 +505,13 @@ feature "Pledges", :driver => :selenium do
 
     within_tab 'Vencimentos' do
       within '.pledge-parcel:first' do
-        page.should have_field 'Número', :with => '1'
+        page.should have_content 'Parcela 1'
       end
 
       click_button 'Adicionar Vencimento'
 
       within '.pledge-parcel:last' do
-        page.should have_field 'Número', :with => '2'
+        page.should have_content 'Parcela 2'
       end
 
       within '.pledge-parcel:first' do
@@ -519,7 +519,7 @@ feature "Pledges", :driver => :selenium do
       end
 
       within '.pledge-parcel:last' do
-        page.should have_field 'Número', :with => '1'
+        page.should have_content 'Parcela 1'
       end
     end
   end
