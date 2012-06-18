@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/unico/person'
 require 'app/models/person'
 require 'app/models/employee'
 require 'app/models/provider'
@@ -26,7 +27,7 @@ describe Person do
 
   describe "#company?" do
     it "should be a company" do
-      subject.stub(:personable_type).and_return("Company")
+      subject.stub(:personable).and_return(double(:cnpj => '12345'))
       subject.company?.should be_true
     end
 
@@ -38,7 +39,7 @@ describe Person do
 
   describe '#individual' do
     it 'should be individual' do
-      subject.stub(:personable_type).and_return 'Individual'
+      subject.stub(:personable).and_return(double(:cpf => '12345'))
       subject.should be_individual
     end
 
