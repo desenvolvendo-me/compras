@@ -9,6 +9,14 @@
 
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'application' %>
+
+    <script>
+      var environment = "<%= Rails.env %>";
+
+      if (environment === "test") {
+        $.fx.off = true;
+      }
+    </script>
   </head>
 
   <body>
