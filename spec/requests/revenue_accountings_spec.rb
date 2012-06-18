@@ -18,6 +18,8 @@ feature "RevenueAccountings" do
     click_link 'Criar Receita Contábel'
 
     within_tab 'Principal' do
+      page.should have_disabled_field 'Código'
+
       fill_modal 'Entidade', :with => 'Detran'
       fill_mask 'Exercício', :with => '2012'
       fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
@@ -40,6 +42,7 @@ feature "RevenueAccountings" do
       page.should have_field 'Entidade', :with => 'Detran'
       page.should have_field 'Data', :with => I18n.l(Date.current)
       page.should have_field 'Exercício', :with => '2012'
+      page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
@@ -86,6 +89,7 @@ feature "RevenueAccountings" do
       page.should have_field 'Entidade', :with => 'Detran'
       page.should have_field 'Data', :with => I18n.l(Date.current)
       page.should have_field 'Exercício', :with => '2012'
+      page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
@@ -173,6 +177,7 @@ feature "RevenueAccountings" do
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Secretaria de Educação'
       page.should have_field 'Exercício', :with => '2011'
+      page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
