@@ -25,7 +25,7 @@ class AdministrativeProcessDecorator < Decorator
 
     if component.waiting?
       helpers.link_to('Liberar', routes.new_administrative_process_liberation_path(:administrative_process_id => component.id), :class => 'button primary')
-    elsif component.released?
+    elsif component.released? && component.administrative_process_liberation
       helpers.link_to('Liberação', routes.edit_administrative_process_liberation_path(component.administrative_process_liberation), :class => 'button secondary')
     end
   end
