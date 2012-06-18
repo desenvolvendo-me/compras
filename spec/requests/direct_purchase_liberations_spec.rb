@@ -68,6 +68,10 @@ feature 'DirectPurchaseLiberations' do
       find('a').click
     end
 
+    #assuming the last record is the created on the form
+    liberation = DirectPurchaseLiberation.last
+    page.should have_content "Editar Avaliação #{liberation.id} da Solicitação de Compra 2/2012"
+
     page.should have_disabled_field 'Responsável'
     page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
 
