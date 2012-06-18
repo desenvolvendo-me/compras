@@ -81,7 +81,7 @@ feature "PriceCollectionProposals" do
     end
   end
 
-  describe 'provider editing proposals', :driver => :selenium do
+  describe 'provider editing proposals' do
     let :current_user do
       User.make!(:provider_with_password)
     end
