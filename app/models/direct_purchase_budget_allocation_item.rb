@@ -11,6 +11,7 @@ class DirectPurchaseBudgetAllocationItem < Compras::Model
   delegate :licitation_object_id, :to => :direct_purchase_budget_allocation, :allow_nil => true
 
   validates :material, :quantity, :unit_price, :presence => true
+  validates :unit_price, :numericality => { :greater_than => 0 }
 
   def estimated_total_price
     if quantity && unit_price
