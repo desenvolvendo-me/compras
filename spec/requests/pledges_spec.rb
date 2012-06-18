@@ -491,7 +491,7 @@ feature "Pledges", :driver => :selenium do
 
     within_tab 'Vencimentos' do
       within '.pledge-parcel:last' do
-        page.should have_content 'deve ser maior que a data da última parcela'
+        page.should have_content 'deve ser maior que a data da parcela anterior'
       end
     end
   end

@@ -226,7 +226,7 @@ pt-BR:
       must_be_greater_than_pledge_emission_date: "deve ser maior que a data de emissão do empenho"
       must_be_greater_than_or_equals_pledge_emission_date: "deve ser maior ou igual a data de emissão do empenho"
       must_be_equal_or_greater_than_pledge_emission_date: "deve ser igual ou maior que a data de emissão"
-      must_be_greater_than_last_expiration_date: "deve ser maior que a data da última parcela"
+      must_be_greater_than_last_expiration_date: "deve ser maior que a data da parcela anterior"
       pledge_parcels_sum_must_be_equals_to_pledge_value: "deve ser igual ao valor"
       must_not_be_greater_than_pledge_parcel_balance: "não pode ser superior ao saldo"
       must_not_be_greater_than_pledge_balance: "não pode ser superior ao saldo do empenho"
