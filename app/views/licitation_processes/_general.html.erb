@@ -27,23 +27,20 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :judgment_form %>
   </div>
 
-  <div class="yui3-u-1-4">
-    <%= f.input :administrative_process_description, :disabled => true %>
-  </div>
-
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :administrative_process_responsible, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :administrative_process_item, :disabled => true %>
   </div>
 </div>
 
+<%= f.input :administrative_process_description, :disabled => true, :as => 'text' %>
 <%= f.input :type_of_calculation %>
 
 <div class="yui3-g">
