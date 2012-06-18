@@ -58,11 +58,11 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
-      fill_in 'Quantidade', :with => '3'
+      fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
       # asserting calculated total price of the item
-      page.should have_field 'Valor total', :with => '600,00'
+      page.should have_field 'Valor total', :with => '700,00'
     end
 
     click_button 'Salvar'
