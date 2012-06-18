@@ -20,5 +20,4 @@ describe Partner do
   it { should allow_value(100).for(:percentage) }
   it { should allow_value(0.01).for(:percentage) }
   it { should_not allow_value(100.01).for(:percentage) }
-  it { should_not allow_value(0).for(:percentage) }
 end
