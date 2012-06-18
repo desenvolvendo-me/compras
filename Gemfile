@@ -23,14 +23,14 @@ gem 'simple_form', '2.0.1'
 gem 'will_paginate', '3.0.3'
 
 gem 'squeel', '1.0.0'
-gem 'carrierwave', '0.5.8'
+gem 'carrierwave', '~> 0.6.2'
 gem 'awesome_nested_set', '2.1.3'
 
 gem 'mail_validator', '0.2.0'
 gem 'cnpj_validator', '0.3.1'
 gem 'cpf_validator', '0.2.0'
 gem 'mask_validator', '0.2.1'
-gem 'validates_timeliness', '3.0.8'
+gem 'validates_timeliness', '~> 3.0.11'
 
 gem 'inherited_resources', '1.3.0'
 gem 'has_scope', '0.5.1'

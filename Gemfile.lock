@@ -16,18 +16,21 @@ GIT
 
 GIT
   remote: git@github.com:nohupbrasil/unico.git
-  revision: fcf1d530e923f388595370121831223d41250af7
+  revision: 392a4655d7adc0e10a7902cdffa2d5ed13e49974
   specs:
     unico (0.0.1)
       actionpack (~> 3.2.0)
       activerecord (~> 3.2.0)
       awesome_nested_set (~> 2.1.3)
+      carrierwave (~> 0.6.2)
       cnpj_validator (~> 0.3.1)
+      cpf_validator (~> 0.2.0)
       enumerate_it (~> 0.7.14)
       foreigner (~> 1.1.1)
       mail_validator (~> 0.2.0)
       mask_validator (~> 0.2.0)
       railties (~> 3.2.0)
+      validates_timeliness (~> 3.0.11)
 
 GIT
   remote: https://github.com/jonleighton/poltergeist.git
@@ -93,8 +96,9 @@ GEM
     capybara-webkit (0.11.0)
       capybara (>= 1.0.0, < 1.2)
       json
-    carrierwave (0.5.8)
-      activesupport (~> 3.0)
+    carrierwave (0.6.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     childprocess (0.3.2)
       ffi (~> 1.0.6)
     cnpj_validator (0.3.1)
@@ -227,8 +231,8 @@ GEM
       kgio (~> 2.4)
       rack
       raindrops (~> 0.6)
-    validates_timeliness (3.0.8)
-      timeliness (~> 0.3.4)
+    validates_timeliness (3.0.11)
+      timeliness (~> 0.3.6)
     warden (1.1.1)
       rack (>= 1.0)
     will_paginate (3.0.3)
@@ -246,7 +250,7 @@ DEPENDENCIES
   cancan!
   capybara (= 1.1.2)
   capybara-webkit (= 0.11.0)
-  carrierwave (= 0.5.8)
+  carrierwave (~> 0.6.2)
   cnpj_validator (= 0.3.1)
   cpf_validator (= 0.2.0)
   devise (= 2.0.4)
@@ -274,5 +278,5 @@ DEPENDENCIES
   uglifier (= 1.2.1)
   unico!
   unicorn (= 4.1.1)
-  validates_timeliness (= 3.0.8)
+  validates_timeliness (~> 3.0.11)
   will_paginate (= 3.0.3)
