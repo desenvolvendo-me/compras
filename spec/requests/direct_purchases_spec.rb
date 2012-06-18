@@ -362,7 +362,7 @@ feature "DirectPurchases" do
 
   scenario 'should filter by date' do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
-    year_2011 = DirectPurchase.make!(:compra_2011)
+    year_2011 = DirectPurchase.make!(:compra_2011_dez)
 
     click_link 'Solicitações'
 
@@ -370,7 +370,7 @@ feature "DirectPurchases" do
 
     click_link 'Filtrar Solitações de Compra Direta'
 
-    fill_mask 'Data da compra', :with => '11/11/2011'
+    fill_mask 'Data da compra', :with => '20/12/2011'
 
     click_button 'Pesquisar'
 
