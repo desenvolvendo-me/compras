@@ -24,6 +24,7 @@ describe DirectPurchase do
   it { should belong_to :delivery_location }
   it { should belong_to :employee }
   it { should belong_to :payment_method }
+  it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:direct_purchase_liberations).dependent(:destroy).order(:id) }
   it { should have_one(:supply_authorization).dependent(:restrict) }
