@@ -1,10 +1,8 @@
 <div class="actions">
   <ul>
-    <% if filter? %>
-      <li>
-        <%= filter_link %>
-      </li>
-    <% end %>
+    <li>
+      <%= link_to "Ver solicitação", edit_direct_purchase_path(@parent) %>
+    </li>
 
     <% if create? %>
       <li>
