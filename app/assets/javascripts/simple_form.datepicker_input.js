@@ -20,6 +20,12 @@
   $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
 
   $('input[data-datepicker]').live('focus', function () {
-    $(this).mask('99/99/9999').datepicker();
+    var element = $(this);
+
+    if (environment !== "test") {
+      element.datepicker();
+    }
+
+    element.mask('99/99/9999');
   });
 })(jQuery);
