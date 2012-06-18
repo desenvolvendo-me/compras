@@ -52,6 +52,8 @@ feature 'DirectPurchaseLiberations' do
 
     click_link 'Criar Liberação de Compra Direta'
 
+    page.should have_content 'Criar Avaliação para Solicitação de Compra 2/2012'
+
     fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
     page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
 
