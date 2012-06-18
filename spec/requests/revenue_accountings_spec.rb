@@ -20,7 +20,6 @@ feature "RevenueAccountings" do
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
       fill_mask 'Exercício', :with => '2012'
-      fill_in 'Código', :with => '150'
       fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
@@ -33,13 +32,61 @@ feature "RevenueAccountings" do
 
     page.should have_notice 'Receita Contábel criado com sucesso.'
 
-    click_link '150'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Detran'
       page.should have_field 'Data', :with => I18n.l(Date.current)
       page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Código', :with => '150'
+      page.should have_field 'Código', :with => '1'
+      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
+      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
+      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+    end
+
+    within_tab 'Programação' do
+      page.should have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+    end
+  end
+
+  scenario 'create a new revenue_accounting with other year and restart code' do
+    Entity.make!(:detran)
+    RevenueNature.make!(:imposto_sobre_renda)
+    Capability.make!(:reforma)
+    RevenueAccounting.make!(:reforma)
+
+    click_link 'Contabilidade'
+
+    click_link 'Receitas Contábeis'
+
+    click_link 'Criar Receita Contábel'
+
+    within_tab 'Principal' do
+      fill_modal 'Entidade', :with => 'Detran'
+      fill_mask 'Exercício', :with => '2013'
+      fill_modal 'Natureza da receita', :with => '2012', :field => 'Exercício'
+      fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+    end
+
+    within_tab 'Programação' do
+      select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Receita Contábel criado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      page.should have_field 'Entidade', :with => 'Detran'
+      page.should have_field 'Data', :with => I18n.l(Date.current)
+      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Código', :with => '1'
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
       page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
@@ -103,12 +150,11 @@ feature "RevenueAccountings" do
 
     click_link 'Receitas Contábeis'
 
-    click_link '150'
+    click_link '1'
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
       fill_mask 'Exercício', :with => '2011'
-      fill_in 'Código', :with => '151'
       fill_modal 'Natureza da receita', :with => '2012', :field => 'Exercício'
       fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
     end
@@ -122,12 +168,12 @@ feature "RevenueAccountings" do
 
     page.should have_notice 'Receita Contábel editado com sucesso.'
 
-    click_link '151'
+    click_link '1'
 
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Secretaria de Educação'
       page.should have_field 'Exercício', :with => '2011'
-      page.should have_field 'Código', :with => '151'
+      page.should have_field 'Código', :with => '1'
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
       page.should have_field 'Recurso', :with => 'Construção'
@@ -167,12 +213,12 @@ feature "RevenueAccountings" do
 
     click_link 'Receitas Contábeis'
 
-    click_link '150'
+    click_link '1'
 
     click_link 'Apagar', :confirm => true
 
     page.should have_notice 'Receita Contábel apagado com sucesso.'
 
-    page.should_not have_content '150'
+    page.should_not have_content '1'
   end
 end
