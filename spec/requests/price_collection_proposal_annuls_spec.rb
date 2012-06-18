@@ -24,6 +24,10 @@ feature 'PriceCollectionProposalAnnul' do
     page.should have_content 'Anular Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
 
     page.should have_field 'Data', :with => I18n.l(Date.current)
+
+    click_link 'Cancelar'
+
+    page.should have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
   end
 
   scenario 'creating an annul' do
