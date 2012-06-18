@@ -28,4 +28,5 @@ describe LicitationObject do
   it { should have_and_belong_to_many :materials }
 
   it { should have_many(:direct_purchases).dependent(:restrict) }
+  it { should have_many(:items).through(:direct_purchases) }
 end
