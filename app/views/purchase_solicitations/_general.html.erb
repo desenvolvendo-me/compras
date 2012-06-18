@@ -3,17 +3,25 @@
     <%= f.input :code, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-8">
     <%= f.input :accounting_year, :disabled => f.object.annulled? %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-6">
     <%= f.input :request_date, :disabled => f.object.annulled? %>
   </div>
 </div>
 
-<%= f.input :budget_structure, :disabled => f.object.annulled? %>
-<%= f.input :responsible, :disabled => f.object.annulled? %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :budget_structure, :disabled => f.object.annulled? %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :responsible, :disabled => f.object.annulled? %>
+  </div>
+</div>
+
 <%= f.input :justification, :disabled => f.object.annulled? %>
 
 <div class="yui3-g">
