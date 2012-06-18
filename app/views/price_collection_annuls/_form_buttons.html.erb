@@ -1,4 +1,4 @@
 <div class="buttons">
   <%= f.button :submit if f.object.new_record? %>
-  <%= f.button :cancel %>
+  <%= f.button :cancel, :href => edit_price_collection_path(f.object.price_collection) %>
 </div>
