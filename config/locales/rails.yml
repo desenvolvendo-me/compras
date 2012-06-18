@@ -264,6 +264,7 @@ pt-BR:
       cannot_have_representative_equal_creditor: "não pode haver um representante igual ao credor"
       cannot_have_secondary_cnae_equal_main_cnae: "não pode haver um CNAE secundário igual ao CNAE principal"
       cannot_have_a_code_with_configuration_and_level_repeated: "já existe um código para este nível desta configuração"
+      not_allow_licitation_process: "não permite processo licitatório"
 
   activerecord:
     errors:

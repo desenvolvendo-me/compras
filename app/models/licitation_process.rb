@@ -56,6 +56,7 @@ class LicitationProcess < Compras::Model
   validate :validate_type_of_calculation_by_modality
   validate :validate_administrative_process_status
   validate :validate_administrative_process
+  validate :validate_administrative_process_allow_licitation_process
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -198,6 +199,14 @@ class LicitationProcess < Compras::Model
 
     unless verificator.correct_type_of_calculation?(administrative_process_modality, type_of_calculation)
       errors.add(:type_of_calculation, :not_permited_for_modality)
+    end
+  end
+
+  def validate_administrative_process_allow_licitation_process
+    return if administrative_process.nil?
+
+    unless administrative_process.allow_licitation_process?
+      errors.add(:administrative_process, :not_allow_licitation_process)
     end
   end
 end

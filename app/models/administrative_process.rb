@@ -6,7 +6,7 @@ class AdministrativeProcess < Compras::Model
   attr_readonly :process, :year
 
   has_enumeration_for :modality, :with => AdministrativeProcessModality, :create_helpers => true
-  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
+  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType, :create_helpers => true
   has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true, :create_scopes => true
 
   belongs_to :responsible, :class_name => 'Employee'
@@ -60,6 +60,10 @@ class AdministrativeProcess < Compras::Model
 
   def update_status!(new_status)
     update_attribute :status, new_status
+  end
+
+  def allow_licitation_process?
+    purchase_and_services? || construction_and_engineering_services?
   end
 
   protected

@@ -672,33 +672,6 @@ feature "LicitationProcesses" do
     page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
-  scenario "should show the count report by type_of_calculation being highest_bidder_by_item" do
-    licitation_process = LicitationProcess.make!(:maior_lance_por_itens)
-
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Apurar'
-
-    page.should have_content 'Apuração: Maior lance por item'
-    page.should have_content 'Antivirus'
-    page.should have_content '2'
-    page.should have_content '10,00'
-    page.should have_content '20,00'
-    page.should have_content 'Wenderson Malheiros '
-
-    # back to form
-    click_link 'Voltar'
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
-  end
-
   scenario "should show the count report by type_of_calculation being lowest_price_by_lot" do
     licitation_process = LicitationProcess.make!(:apuracao_por_lote)
     LicitationProcessLot.make!(:lote_antivirus, :licitation_process_id => licitation_process.id)
@@ -747,32 +720,6 @@ feature "LicitationProcesses" do
     page.should have_content '18,00'
     page.should have_content 'Wenderson Malheiros'
     page.should have_content '20,00'
-
-    # back to form
-    click_link 'Voltar'
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
-  end
-
-  scenario "should show the count report by type_of_calculation being highest_bidder_by_lot" do
-    licitation_process = LicitationProcess.make!(:maior_lance_por_lote)
-    LicitationProcessLot.make!(:lote_antivirus, :licitation_process_id => licitation_process.id)
-
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Apurar'
-
-    page.should have_content 'Apuração: Maior lance por lote'
-    page.should have_content 'Lote 1'
-    page.should have_content '20,00'
-    page.should have_content 'Wenderson Malheiros '
 
     # back to form
     click_link 'Voltar'
@@ -916,23 +863,5 @@ feature "LicitationProcesses" do
     click_button 'Salvar'
 
     page.should_not have_content 'Routing Error No route matches'
-  end
-
-  scenario "When administrative_process modality is auction, should filter type_of_calculation" do
-    AdministrativeProcess.make!(:maior_lance_por_itens)
-
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Novo processo licitatório'
-
-    page.should have_css '#licitation_process_type_of_calculation option', :count => 3
-
-    page.should have_select 'Tipo da apuração', :options => ['', 'Menor preço global', 'Menor preço por lote']
   end
 end

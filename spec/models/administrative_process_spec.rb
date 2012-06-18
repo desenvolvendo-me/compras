@@ -196,4 +196,19 @@ describe AdministrativeProcess do
       subject.update_status!('released')
     end
   end
+
+  it "should allow licitation process when object type is purchase and services" do
+    subject.stub(:object_type => AdministrativeProcessObjectType::PURCHASE_AND_SERVICES)
+    subject.should be_allow_licitation_process
+  end
+
+  it "should allow licitation process when object type is construction_and_engineering_services" do
+    subject.stub(:object_type => AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES)
+    subject.should be_allow_licitation_process
+  end
+
+  it "should not allow licitation process when object type is not construction_and_engineering_services neither purchase_and_services" do
+    subject.stub(:object_type => AdministrativeProcessObjectType::CALL_NOTICE)
+    subject.should_not be_allow_licitation_process
+  end
 end

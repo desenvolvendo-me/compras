@@ -432,4 +432,18 @@ feature "AdministrativeProcesses" do
     page.should_not have_button 'Anular'
     page.should_not have_button 'Liberar'
   end
+
+  scenario 'should not have licitation_process button if not allow licitation_process' do
+    AdministrativeProcess.make!(:maior_lance_por_itens)
+
+    click_link 'Processos'
+
+    click_link 'Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_link 'Novo processo licitatório'
+  end
 end

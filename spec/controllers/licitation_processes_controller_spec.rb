@@ -7,6 +7,24 @@ describe LicitationProcessesController do
     controller.stub(:authorize_resource!)
   end
 
+  context "with administrative process that does not allow licitation_process" do
+    let :administrative_process do
+      AdministrativeProcess.make!(:maior_lance_por_itens)
+    end
+
+    it 'should return 401 on access new url' do
+      get :new, :administrative_process_id => administrative_process.id
+
+      response.code.should eq "401"
+    end
+
+    it 'should return 401 on access create url' do
+      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
+
+      response.code.should eq "401"
+    end
+  end
+
   context "with administrative process" do
     let :administrative_process do
       AdministrativeProcess.make!(:compra_de_cadeiras)
@@ -34,7 +52,7 @@ describe LicitationProcessesController do
       LicitationProcess.any_instance.stub(:administrative_process).and_return(administrative_process)
       LicitationProcess.any_instance.stub(:next_process).and_return(2)
 
-      post :create
+      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
 
       assigns(:licitation_process).process.should eq 2
     end
@@ -43,7 +61,7 @@ describe LicitationProcessesController do
       LicitationProcess.any_instance.stub(:administrative_process).and_return(administrative_process)
       LicitationProcess.any_instance.stub(:licitation_number).and_return(2)
 
-      post :create
+      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
 
       assigns(:licitation_process).licitation_number.should eq 2
     end

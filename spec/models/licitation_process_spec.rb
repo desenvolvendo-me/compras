@@ -329,12 +329,24 @@ describe LicitationProcess do
       double('licitation_process')
     end
 
+    it "should not be valid if administrative process does not allow licitation process" do
+      administrative_process.stub(:allow_licitation_process? => false)
+      administrative_process.stub(:licitation_process => nil)
+
+      subject.stub(:administrative_process => administrative_process)
+
+      subject.valid?
+
+      subject.errors[:administrative_process].should include 'não permite processo licitatório'
+    end
+
     it 'should validate that selected administrative process is available' do
       subject.errors.messages[:administrative_process].should be_nil
 
       subject.stub(:administrative_process_licitation_process).and_return(true)
 
       administrative_process.stub(:licitation_process => licitation_process)
+      administrative_process.stub(:allow_licitation_process? => true)
 
       subject.valid?
 
@@ -343,6 +355,7 @@ describe LicitationProcess do
 
     it "should not be valid if administrative_process have another licitation_process" do
       administrative_process.stub(:licitation_process => licitation_process)
+      administrative_process.stub(:allow_licitation_process? => true)
 
       subject.valid?
 
@@ -351,6 +364,7 @@ describe LicitationProcess do
 
     it "should be valid if administrative_process have the current licitation_process" do
       administrative_process.stub(:licitation_process => subject)
+      administrative_process.stub(:allow_licitation_process? => true)
 
       subject.valid?
 
@@ -359,6 +373,7 @@ describe LicitationProcess do
 
     it "should be valid if administrative_process do not have licitation_process" do
       administrative_process.stub(:licitation_process => nil)
+      administrative_process.stub(:allow_licitation_process? => true)
 
       subject.valid?
 

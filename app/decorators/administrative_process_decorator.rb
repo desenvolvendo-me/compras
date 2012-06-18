@@ -11,7 +11,7 @@ class AdministrativeProcessDecorator < Decorator
   end
 
   def build_licitation_process_link
-    return unless component.persisted? && component.released?
+    return unless component.persisted? && component.released? && component.allow_licitation_process?
 
     if component.licitation_process.nil?
       helpers.link_to('Novo processo licitatório',  routes.new_licitation_process_path(component), :class => "button primary")

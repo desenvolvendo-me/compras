@@ -1,15 +1,15 @@
 class LicitationProcessesController < CrudController
   actions :all, :except => [ :destroy, :index ]
 
-  def new
-    administrative_process = AdministrativeProcess.find(params[:administrative_process_id])
+  before_filter :block_administrative_process_not_allowed, :only => [:new, :create]
 
+  def new
     object = build_resource
     object.year = Date.current.year
     object.process_date = Date.current
-    object.administrative_process = administrative_process
-    object.modality = administrative_process.modality
-    object.judgment_form = administrative_process.judgment_form
+    object.administrative_process = @administrative_process
+    object.modality = @administrative_process.modality
+    object.judgment_form = @administrative_process.judgment_form
 
     super
   end
@@ -40,5 +40,12 @@ class LicitationProcessesController < CrudController
     BidderStatusChanger.new(object).change
 
     object.save
+  end
+
+  def block_administrative_process_not_allowed
+    administrative_process_id = params[:administrative_process_id] || params[:licitation_process][:administrative_process_id]
+    @administrative_process = AdministrativeProcess.find(administrative_process_id)
+
+    raise Exceptions::Unauthorized unless @administrative_process.allow_licitation_process?
   end
 end

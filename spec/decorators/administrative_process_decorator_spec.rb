@@ -39,6 +39,8 @@ describe AdministrativeProcessDecorator do
 
       licitation_process.stub(:nil?).and_return(true)
 
+      component.stub(:allow_licitation_process? => true)
+
       subject.build_licitation_process_link.should eq 'link_novo'
     end
 
@@ -49,7 +51,16 @@ describe AdministrativeProcessDecorator do
 
       licitation_process.stub(:nil?).and_return(false)
 
+      component.stub(:allow_licitation_process? => true)
+
       subject.build_licitation_process_link.should eq 'link_edit'
+    end
+
+
+    it "should not return a link to edit neither new licitation process when not allow licitation process" do
+      component.stub(:allow_licitation_process? => false)
+
+      subject.build_licitation_process_link.should be_nil
     end
   end
 
