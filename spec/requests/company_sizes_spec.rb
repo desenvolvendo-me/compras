@@ -16,7 +16,6 @@ feature "CompanySizes" do
     fill_in 'Nome', :with => 'Empresa de médio porte'
     fill_in 'Sigla', :with => 'EMP'
     fill_in 'Número', :with => '3'
-    check 'Beneficiado pela lei 123/2006'
 
     click_button 'Salvar'
 
@@ -27,7 +26,6 @@ feature "CompanySizes" do
     page.should have_field 'Nome', :with => 'Empresa de médio porte'
     page.should have_field 'Sigla', :with => 'EMP'
     page.should have_field 'Número', :with => '3'
-    page.should have_checked_field 'Beneficiado pela lei 123/2006'
   end
 
   scenario 'update an existent company_size' do
