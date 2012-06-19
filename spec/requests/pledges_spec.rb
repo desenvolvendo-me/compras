@@ -596,7 +596,7 @@ feature "Pledges", :driver => :selenium do
 
   scenario 'Fill budget allocation informations when select reserve fund' do
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    reserve_fund = ReserveFund.make!(:detran_2012)
+    ReserveFund.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
@@ -615,7 +615,7 @@ feature "Pledges", :driver => :selenium do
 
   scenario 'should clear reserve fund when select other budget allocation' do
     BudgetAllocation.make!(:alocacao_extra)
-    reserve_fund = ReserveFund.make!(:detran_2012)
+    ReserveFund.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
@@ -634,7 +634,7 @@ feature "Pledges", :driver => :selenium do
   end
 
   scenario 'clear reserve_fund_value field when clear' do
-    reserve_fund = ReserveFund.make!(:detran_2012)
+    ReserveFund.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
@@ -657,7 +657,7 @@ feature "Pledges", :driver => :selenium do
   end
 
   scenario 'getting and cleaning budget delegated fields depending on budget allocation field' do
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
 
     click_link 'Contabilidade'
 
@@ -731,7 +731,7 @@ feature "Pledges", :driver => :selenium do
   scenario 'trying to create a new pledge with duplicated items to ensure the error' do
     Entity.make!(:detran)
     ManagementUnit.make!(:unidade_central)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     PledgeCategory.make!(:geral)
     ExpenseKind.make!(:pagamentos)
     PledgeHistoric.make!(:semestral)
@@ -820,7 +820,7 @@ feature "Pledges", :driver => :selenium do
   end
 
   scenario 'should have localized budget_allocation_amount and reserve_fund_value for a new pledge' do
-    reserve_fund = ReserveFund.make!(:reparo_2011)
+    ReserveFund.make!(:reparo_2011)
 
     click_link 'Contabilidade'
 
