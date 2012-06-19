@@ -163,6 +163,7 @@ feature "Creditors" do
 
       within_modal 'Cnaes' do
         fill_in 'Código', :with => '7739099'
+
         click_button 'Pesquisar'
 
         page.find('.records').should have_content '7739099'
@@ -172,10 +173,12 @@ feature "Creditors" do
 
       within_modal 'Cnaes' do
         fill_in 'Código', :with => '4712100'
+
         click_button 'Pesquisar'
 
         page.find('.records').should_not have_content '4712100'
-        click_link 'close'
+
+        click_link 'Cancelar'
       end
     end
 
@@ -707,10 +710,12 @@ feature "Creditors" do
 
       within_modal 'Cnaes' do
         fill_in 'Código', :with => '7739099'
+
         click_button 'Pesquisar'
 
         page.find('.records').should_not have_content '7739099'
-        click_link 'close'
+
+        click_link 'Cancelar'
       end
     end
 
