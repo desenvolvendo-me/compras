@@ -310,7 +310,7 @@ feature "PurchaseSolicitations" do
       within '.purchase-solicitation-budget-allocation:first' do
         click_button 'Adicionar Item'
 
-        within '.item:first' do
+        within '.item:last' do
           fill_in 'Quantidade', :with => '3,00'
           fill_in 'Valor unitário', :with => '10,00'
           page.should have_field 'Valor total', :with => '30,00'
@@ -318,7 +318,7 @@ feature "PurchaseSolicitations" do
 
         click_button 'Adicionar Item'
 
-        within '.item:first' do
+        within '.item:last' do
           fill_in 'Quantidade', :with => '5,00'
           fill_in 'Valor unitário', :with => '2,00'
           page.should have_field 'Valor total', :with => '10,00'
@@ -330,7 +330,7 @@ feature "PurchaseSolicitations" do
       within '.purchase-solicitation-budget-allocation:first' do
         click_button 'Adicionar Item'
 
-        within '.item:first' do
+        within '.item:last' do
           fill_in 'Quantidade', :with => '10,00'
           fill_in 'Valor total', :with => '50,00'
           page.should have_field 'Valor unitário', :with => '5,00'
@@ -342,7 +342,7 @@ feature "PurchaseSolicitations" do
       # removing an item
 
       within '.purchase-solicitation-budget-allocation:last' do
-        within '.item:first' do
+        within '.item:last' do
           click_button 'Remover Item'
         end
       end
