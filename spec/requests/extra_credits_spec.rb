@@ -250,7 +250,7 @@ feature "ExtraCredits" do
 
       click_link 'Créditos Suplementares'
 
-      click_link "#{extra_credit.id}"
+      click_link extra_credit.to_s
 
       within_tab 'Movimentos' do
         within 'fieldset:first' do
@@ -297,7 +297,7 @@ feature "ExtraCredits" do
 
       click_link 'Créditos Suplementares'
 
-      click_link "#{extra_credit.id}"
+      click_link extra_credit.to_s
 
       within_tab 'Movimentos' do
         within 'fieldset:last' do
@@ -318,7 +318,7 @@ feature "ExtraCredits" do
 
       click_link 'Créditos Suplementares'
 
-      click_link "#{extra_credit.id}"
+      click_link extra_credit.to_s
 
       within_tab 'Movimentos' do
         within 'fieldset:last' do
@@ -367,7 +367,7 @@ feature "ExtraCredits" do
 
     click_link 'Créditos Suplementares'
 
-    click_link "#{extra_credit.id}"
+    click_link extra_credit.to_s
 
     within_tab 'Movimentos' do
       click_button 'Remover Movimento'
@@ -376,7 +376,7 @@ feature "ExtraCredits" do
 
     click_button 'Salvar'
 
-    click_link "#{extra_credit.id}"
+    click_link extra_credit.to_s
 
     within_tab 'Movimentos' do
       page.should_not have_field 'Tipo de movimento'
@@ -398,7 +398,7 @@ feature "ExtraCredits" do
 
     click_link 'Créditos Suplementares'
 
-    click_link "#{extra_credit.id}"
+    click_link extra_credit.to_s
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
@@ -423,7 +423,7 @@ feature "ExtraCredits" do
 
     page.should have_notice 'Crédito Suplementar editado com sucesso.'
 
-    click_link "#{extra_credit.id}"
+    click_link extra_credit.to_s
 
     within_tab 'Principal' do
       page.should have_field 'Entidade', :with => 'Secretaria de Educação'
@@ -456,7 +456,7 @@ feature "ExtraCredits" do
 
     click_link 'Créditos Suplementares'
 
-    click_link "#{extra_credit.id}"
+    click_link extra_credit.to_s
 
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
@@ -482,7 +482,7 @@ feature "ExtraCredits" do
 
     click_link 'Créditos Suplementares'
 
-    click_link "#{extra_credit.id}"
+    click_link extra_credit.to_s
 
     within_tab 'Movimentos' do
       click_button 'Adicionar Movimento'
@@ -523,7 +523,7 @@ feature "ExtraCredits" do
 
     click_link 'Créditos Suplementares'
 
-    click_link "#{extra_credit.id}"
+    click_link extra_credit.to_s
 
     click_link "Apagar", :confirm => true
 
