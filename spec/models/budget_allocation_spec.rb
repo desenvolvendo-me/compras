@@ -10,9 +10,10 @@ require 'app/models/extra_credit_moviment_type'
 require 'app/models/administrative_process_budget_allocation'
 
 describe BudgetAllocation do
-  it 'should return "id/year - description" as to_s' do
-    subject.code = 1
-    subject.to_s.should eq '1'
+  it 'should return "budget structure code - description" as to_s' do
+    subject.description = 'Secretaria de educação'
+    subject.stub(:budget_structure_code => '1')
+    subject.to_s.should eq '1 - Secretaria de educação'
   end
 
   it { should validate_presence_of :description }

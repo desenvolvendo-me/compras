@@ -30,6 +30,7 @@ class BudgetAllocation < Compras::Model
   delegate :expense_group_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_modality_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_element_id, :to => :expense_nature, :allow_nil => true
+  delegate :code, :to => :budget_structure, :prefix => true, :allow_nil => true
 
   validates :date, :description, :kind, :presence => true
   validates :amount, :presence => true, :if => :divide?
@@ -61,7 +62,7 @@ class BudgetAllocation < Compras::Model
   end
 
   def to_s
-    code.to_s
+    "#{budget_structure_code} - #{description}"
   end
 
   def next_code
