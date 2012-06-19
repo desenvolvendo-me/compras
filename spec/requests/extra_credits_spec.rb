@@ -106,7 +106,7 @@ feature "ExtraCredits" do
   scenario 'calculate suplement and reduced' do
     MovimentType.make!(:adicionar_dotacao)
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     Capability.make!(:reforma)
 
     click_link 'Contabilidade'
@@ -244,7 +244,7 @@ feature "ExtraCredits" do
 
     scenario 'when change budget_allocation' do
       extra_credit = ExtraCredit.make!(:detran_2012)
-      budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+      BudgetAllocation.make!(:alocacao_extra)
 
       click_link 'Contabilidade'
 
@@ -266,7 +266,7 @@ feature "ExtraCredits" do
 
     scenario 'when add a new record' do
       MovimentType.make!(:adicionar_dotacao)
-      budget_allocation = BudgetAllocation.make!(:alocacao_extra)
+      BudgetAllocation.make!(:alocacao_extra)
 
       click_link 'Contabilidade'
 
@@ -449,7 +449,7 @@ feature "ExtraCredits" do
   end
 
   scenario 'validate uniqueness of budget_allocation' do
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     extra_credit = ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
@@ -475,7 +475,7 @@ feature "ExtraCredits" do
   end
 
   scenario 'validate uniqueness of capibality' do
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     extra_credit = ExtraCredit.make!(:detran_2012)
 
     click_link 'Contabilidade'
