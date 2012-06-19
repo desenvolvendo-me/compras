@@ -26,6 +26,7 @@ feature "DeliveryLocations" do
     fill_modal 'Loteamento', :with => 'Solar da Serra'
 
     page.should have_field "Cidade", :with => 'Curitiba'
+    page.should have_field "Distrito", :with => ''
 
     fill_in 'CEP', :with => '88900-000'
 
