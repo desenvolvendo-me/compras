@@ -2,6 +2,7 @@
 BudgetAllocation.blueprint(:alocacao) do
   entity { Entity.make!(:detran) }
   year { 2012 }
+  code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
@@ -27,6 +28,7 @@ end
 BudgetAllocation.blueprint(:alocacao_extra) do
   entity { Entity.make!(:detran) }
   year { 2011 }
+  code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
@@ -51,6 +53,7 @@ end
 BudgetAllocation.blueprint(:conserto) do
   entity { Entity.make!(:detran) }
   year { 2012 }
+  code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   subfunction { Subfunction.make!(:geral) }
   government_program { GovernmentProgram.make!(:habitacao) }
@@ -75,6 +78,7 @@ end
 BudgetAllocation.blueprint(:reparo_2011) do
   entity { Entity.make!(:secretaria_de_educacao) }
   year { 2011 }
+  code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
   subfunction { Subfunction.make!(:supervisor) }
   government_program { GovernmentProgram.make!(:educacao) }

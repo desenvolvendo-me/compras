@@ -48,7 +48,7 @@ feature "ReserveFunds" do
     page.should have_field 'Exercício', :with => '2012'
     page.should have_field  'Tipo', :with => 'Licitação'
     page.should have_field 'Data', :with => '22/02/2012'
-    page.should have_field 'Dotação orçamentária', :with => "#{budget_allocation.id}/2012 - Alocação"
+    page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
     page.should have_field 'Valor reservado', :with => '20,50'
     page.should have_field 'Valor *', :with => '10,00'
     page.should have_field 'Modalidade', :with => 'Pública'

@@ -80,7 +80,7 @@ feature "ExtraCredits" do
     within_tab 'Movimentos' do
       within 'fieldset:last' do
         page.should have_field 'Tipo de movimento', :with => 'Adicionar dotação'
-        page.should have_field 'Dotação', :with => "#{budget_allocation.id}/2012 - Alocação"
+        page.should have_field 'Dotação', :with => budget_allocation.to_s
         page.should have_disabled_field 'Recurso'
         page.should have_field 'Valor', :with => '10,00'
       end

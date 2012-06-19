@@ -2,7 +2,7 @@ class BudgetAllocation < Compras::Model
   attr_accessible :entity_id, :year, :description, :budget_structure_id, :date
   attr_accessible :subfunction_id, :government_program_id, :amount, :personal
   attr_accessible :government_action_id, :foresight, :education, :description
-  attr_accessible :expense_nature_id, :capability_id, :goal
+  attr_accessible :expense_nature_id, :capability_id, :goal, :code
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
   attr_accessible :alienation_appeal, :kind
 
@@ -35,6 +35,7 @@ class BudgetAllocation < Compras::Model
   validates :amount, :presence => true, :if => :divide?
   validates :description, :uniqueness => { :allow_blank => true }
   validates :year, :mask => '9999', :allow_blank => true
+  validates :code, :uniqueness => { :scope => [:entity_id, :year] }, :allow_blank => true
 
   orderize :description
   filterize
@@ -60,6 +61,18 @@ class BudgetAllocation < Compras::Model
   end
 
   def to_s
-    "#{id}/#{year} - #{description}"
+    code.to_s
+  end
+
+  def next_code
+    last_code.succ
+  end
+
+  private
+
+  def last_code
+    self.class.where { |budget_allocation|
+      budget_allocation.year.eq(year) & budget_allocation.entity_id.eq(entity_id)
+    }.maximum(:code).to_i
   end
 end
