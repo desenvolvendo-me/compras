@@ -2,6 +2,7 @@
 .DS_Store
 .rvmrc
 .sass-cache
+bin/
 config/database.yml
 config/newrelic.yml
 config/initializers/airbrake.rb
