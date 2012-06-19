@@ -44,7 +44,7 @@ feature "ExpenseNatures" do
     page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
     page.should have_field 'Desdobramento da despesa', :with => '12'
     page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
-    page.should have_field 'Código completo', :with => '3.0.10.01.12'
+    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12'
     page.should have_select 'Tipo', :selected => 'Ambos'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários'
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
@@ -65,16 +65,16 @@ feature "ExpenseNatures" do
     fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
 
     fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
-    page.should have_field 'Código completo', :with => '3.0.00.00.00'
+    page.should have_field 'Natureza da despesa', :with => '3.0.00.00.00'
 
     fill_modal 'Modalidade da despesa', :with => '10', :field => 'Código'
 
     fill_modal 'Elemento da despesa', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '3.0.10.01.00'
+    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.00'
 
     fill_in 'Desdobramento da despesa', :with => '12'
 
-    page.should have_field 'Código completo', :with => '3.0.10.01.12'
+    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12'
   end
 
   scenario 'update an existent expense_nature' do
@@ -116,7 +116,7 @@ feature "ExpenseNatures" do
     page.should have_field 'Elemento da despesa', :with => '3 - PENSÕES'
     page.should have_field 'Desdobramento da despesa', :with => '11'
     page.should have_field 'Categoria da despesa', :with => '4 - DESPESA DE CAPITAL'
-    page.should have_field 'Código completo', :with => '4.4.20.03.11'
+    page.should have_field 'Natureza da despesa', :with => '4.4.20.03.11'
     page.should have_select 'Tipo', :selected => 'Analítico'
     page.should have_field 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
     page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'

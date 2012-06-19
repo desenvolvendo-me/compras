@@ -12,12 +12,12 @@ class ExpenseNatureFullCodeGenerator
   end
 
   def generate!
-    expense_nature_object.full_code = full_code
+    expense_nature_object.expense_nature = expense_nature
   end
 
   protected
 
-  def full_code
+  def expense_nature
     [
       value_or_mask(expense_category_code),
       value_or_mask(expense_group_code),

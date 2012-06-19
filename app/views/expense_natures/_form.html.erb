@@ -8,7 +8,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :full_code, :disabled => true %>
+    <%= f.input :expense_nature, :disabled => true %>
   </div>
 
   <div class="yui3-u-1-2">
@@ -33,7 +33,7 @@
       element = valueOrDefaultMask(elementCode, 2);
       split = valueOrDefaultMask($('#expense_nature_expense_split').val(), 2);
 
-      $('#expense_nature_full_code').val([category, group, modality, element, split].join('.'));
+      $('#expense_nature_expense_nature').val([category, group, modality, element, split].join('.'));
     }
 
     function valueOrDefaultMask(value, count){

@@ -8,8 +8,8 @@ require 'app/models/budget_allocation'
 require 'app/models/pledge'
 
 describe ExpenseNature do
-  it 'should return full code and description as to_s method' do
-    subject.full_code = '4.4.20.03.11111111'
+  it 'should return expense nature and description as to_s method' do
+    subject.expense_nature = '4.4.20.03.11111111'
     subject.description = "Descrição"
     subject.to_s.should eq '4.4.20.03.11111111 - Descrição'
   end
@@ -24,7 +24,7 @@ describe ExpenseNature do
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
 
-  it { should validate_presence_of :full_code }
+  it { should validate_presence_of :expense_nature }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :description }
   it { should validate_presence_of :expense_group }

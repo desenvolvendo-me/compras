@@ -2,7 +2,7 @@
 ExpenseNature.blueprint(:vencimento_e_salarios) do
   entity { Entity.make!(:detran) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  full_code { '3.0.10.01.12' }
+  expense_nature { '3.0.10.01.12' }
   kind { ExpenseNatureKind::ANALYTICAL }
   description { 'Vencimentos e Salários' }
   docket { 'Registra o valor das despesas com vencimentos' }
@@ -16,7 +16,7 @@ end
 ExpenseNature.blueprint(:compra_de_material) do
   entity { Entity.make!(:detran) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  full_code { '3.0.10.01.11' }
+  expense_nature { '3.0.10.01.11' }
   kind { ExpenseNatureKind::ANALYTICAL }
   description { 'Compra de Material' }
   docket { 'Registra o valor das despesas com compra de material' }
@@ -30,7 +30,7 @@ end
 ExpenseNature.blueprint(:despesas_correntes) do
   entity { Entity.make!(:detran) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  full_code { '4.4.20.03.11' }
+  expense_nature { '4.4.20.03.11' }
   kind { ExpenseNatureKind::ANALYTICAL }
   description { 'Despesas Correntes' }
   docket { 'Registra o valor das despesas' }

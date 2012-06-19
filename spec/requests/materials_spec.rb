@@ -37,7 +37,7 @@ feature "Materials" do
     #end of javascript test
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
-    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Código completo'
+    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
 
@@ -83,7 +83,7 @@ feature "Materials" do
     select 'Serviço', :from => 'Característica'
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
-    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Código completo'
+    fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
 
@@ -130,7 +130,7 @@ feature "Materials" do
     # end of javascript test
 
     select 'De consumo', :from => 'Tipo de material'
-    fill_modal 'Natureza da despesa', :with => '3.0.10.01.11', :field => 'Código completo'
+    fill_modal 'Natureza da despesa', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
 
     click_button 'Salvar'
 

@@ -35,7 +35,7 @@ feature "Pledges", :driver => :selenium do
       fill_mask 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-      fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Código completo'
+      fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
@@ -900,7 +900,7 @@ feature "Pledges", :driver => :selenium do
       fill_mask 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
-      fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Código completo'
+      fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
