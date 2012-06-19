@@ -587,9 +587,7 @@ feature "Pledges", :driver => :selenium do
 
     click_link 'Empenhos'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link pledge.to_s
 
     page.should_not have_link "Apagar"
   end
