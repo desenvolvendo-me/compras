@@ -63,7 +63,7 @@ module Helpers
 
       # Scroll modal to bottom
       # See https://github.com/jonleighton/poltergeist/issues/83
-      page.execute_script '$(".ui-dialog-content").scrollTop($(".ui-dialog-content").outerHeight())'
+      page.execute_script '$(".ui-dialog-content").scrollTop($(".ui-dialog-content").prop("scrollHeight"))'
 
       click_button 'Pesquisar'
 
