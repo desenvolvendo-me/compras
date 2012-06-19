@@ -12,4 +12,8 @@ class CreditorBankAccount < Compras::Model
 
   validates :creditor, :agency, :status, :account_type, :digit, :presence => true
   validates :number, :presence => true, :uniqueness => { :scope => :agency_id }
+
+  def to_s
+    "#{number}-#{digit}"
+  end
 end

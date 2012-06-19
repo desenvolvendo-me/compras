@@ -14,4 +14,11 @@ describe CreditorBankAccount do
   it { should validate_presence_of :number }
 
   it { should have_db_index([:agency_id, :number]).unique(true) }
+
+  it "should return number-digit as to_s" do
+    subject.number = 1234
+    subject.digit = 1
+
+    subject.to_s.should eq '1234-1'
+  end
 end
