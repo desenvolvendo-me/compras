@@ -18,8 +18,8 @@ describe RevenueNatureFullCodeGenerator do
       )
     end
 
-    it 'should generate full_code' do
-      revenue_nature_object.should_receive(:full_code=).with('1.2.3.4.56.78')
+    it 'should generate revenue_nature' do
+      revenue_nature_object.should_receive(:revenue_nature=).with('1.2.3.4.56.78')
       subject.generate!
     end
   end
@@ -35,8 +35,8 @@ describe RevenueNatureFullCodeGenerator do
       )
     end
 
-    it 'should generate full_code' do
-      revenue_nature_object.should_receive(:full_code=).with('1.2.0.4.00.00')
+    it 'should generate revenue_nature' do
+      revenue_nature_object.should_receive(:revenue_nature=).with('1.2.0.4.00.00')
       subject.generate!
     end
   end

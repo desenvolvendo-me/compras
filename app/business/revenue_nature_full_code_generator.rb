@@ -12,12 +12,12 @@ class RevenueNatureFullCodeGenerator
   end
 
   def generate!
-    revenue_nature_object.full_code = full_code
+    revenue_nature_object.revenue_nature = revenue_nature
   end
 
   protected
 
-  def full_code
+  def revenue_nature
     [
      value_or_default(revenue_category_code, '0'),
      value_or_default(revenue_subcategory_code, '0'),

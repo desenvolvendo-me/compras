@@ -4,9 +4,9 @@ require 'app/models/revenue_nature'
 require 'app/models/revenue_accounting'
 
 describe RevenueNature do
-  it 'should return id as to_s' do
+  it 'should return revenue_nature and specification as to_s' do
     subject.specification = 'Receitas correntes'
-    subject.stub(:full_code).and_return('1.0.0.0')
+    subject.stub(:revenue_nature).and_return('1.0.0.0')
 
     subject.to_s.should eq '1.0.0.0 - Receitas correntes'
   end

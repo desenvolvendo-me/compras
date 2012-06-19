@@ -27,7 +27,7 @@
 <%= f.input :revenue_source, :disabled => f.object.revenue_subcategory.blank? %>
 <%= f.input :revenue_rubric, :disabled => f.object.revenue_source.blank? %>
 <%= f.input :classification, :disabled => f.object.revenue_rubric.blank? %>
-<%= f.input :full_code, :disabled => true %>
+<%= f.input :revenue_nature, :disabled => true %>
 <%= f.input :specification %>
 <%= f.input :kind %>
 <%= f.input :docket %>
@@ -58,7 +58,7 @@
     function generateFullCode() {
       var classification = $('#revenue_nature_classification').val();
 
-      fullCode = [
+      var revenueNature = [
         valueOrDefaultValue(categoryCode, '0'),
         valueOrDefaultValue(subcategoryCode, '0'),
         valueOrDefaultValue(sourceCode, '0'),
@@ -66,7 +66,7 @@
         valueOrDefaultValue(classification, '00.00')
       ].join('.')
 
-      $('#revenue_nature_full_code').val(fullCode);
+      $('#revenue_nature_revenue_nature').val(revenueNature);
     }
 
     function subcategoryModalUrl() {

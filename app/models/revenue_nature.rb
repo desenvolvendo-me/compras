@@ -36,7 +36,7 @@ class RevenueNature < Compras::Model
   filterize
 
   def to_s
-    "#{full_code} - #{specification}"
+    "#{revenue_nature} - #{specification}"
   end
 
   protected
