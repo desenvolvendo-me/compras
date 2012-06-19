@@ -25,7 +25,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
-  licitation_process_lots { [LicitationProcessLot.make!(:lote_antivirus, :licitation_process => object)] }
+  licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do
@@ -146,7 +146,7 @@ LicitationProcess.blueprint(:processo_licitatorio_canetas) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   licitation_process_bidders { [LicitationProcessBidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
-  licitation_process_lots { [LicitationProcessLot.make!(:lote_antivirus, :licitation_process => object)] }
+  licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
 end
 
 LicitationProcess.blueprint(:apuracao_por_itens) do
@@ -424,7 +424,7 @@ LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_nao_atualizavel)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
-  licitation_process_lots { [LicitationProcessLot.make!(:lote_antivirus, :licitation_process => object)] }
+  licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_canetas_sem_lote) do
