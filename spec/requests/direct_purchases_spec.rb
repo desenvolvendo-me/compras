@@ -263,7 +263,7 @@ feature "DirectPurchases" do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     ModalityLimit.make!(:modalidade_de_compra)
 
