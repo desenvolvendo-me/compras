@@ -7,7 +7,7 @@ class PriceCollectionLotItem < Compras::Model
   has_many :price_collection_proposal_items, :dependent => :destroy
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
-  delegate :provider, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
+  delegate :creditor, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
   delegate :annulled?, :to => :price_collection_lot, :allow_nil => true
 
   validates :material, :quantity, :presence => true

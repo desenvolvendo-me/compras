@@ -151,6 +151,7 @@ feature "Creditors" do
       check 'Optante pelo simples'
 
       fill_modal 'CNAE principal', :with => '4712100', :field => 'Código'
+      fill_modal 'Natureza jurídica', :with => 'Administração Pública'
     end
 
     within_tab 'Cnaes secundários' do
@@ -251,6 +252,7 @@ feature "Creditors" do
       page.should have_field 'Porte da empressa', :with => 'Microempresa'
       page.should have_checked_field 'Optante pelo simples'
       page.should have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
+      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
     end
 
     within_tab 'Cnaes secundários' do

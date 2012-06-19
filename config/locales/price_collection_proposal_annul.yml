@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       price_collection_proposal_annul:
         price_collection: "Coleta de preços"
-        provider: "Fornecedor"
+        creditor: "Fornecedor"
         date: "Data"
         description: "Justificativa"
         employee: "Responsável"

@@ -17,7 +17,7 @@ describe PriceCollectionProposalAnnulsController do
     end
 
     let :current_user do
-      double('CurrentUser', :authenticable => Employee.new, :provider? => false)
+      double('CurrentUser', :authenticable => Employee.new, :creditor? => false)
     end
 
     it 'uses the authenticated user as default responsible' do

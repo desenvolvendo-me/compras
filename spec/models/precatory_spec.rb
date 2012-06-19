@@ -1,13 +1,13 @@
 #encoding: utf-8
 require 'model_helper'
 require 'app/models/precatory'
-require 'app/models/provider'
+require 'app/models/creditor'
 require 'app/models/precatory_type'
 require 'app/models/precatory_parcel'
 
 describe Precatory do
   it { should validate_presence_of :number }
-  it { should validate_presence_of :provider }
+  it { should validate_presence_of :creditor }
   it { should validate_presence_of :date }
   it { should validate_presence_of :judgment_date }
   it { should validate_presence_of :apresentation_date }
@@ -15,7 +15,7 @@ describe Precatory do
   it { should validate_presence_of :historic }
   it { should validate_presence_of :value }
 
-  it { should belong_to :provider }
+  it { should belong_to :creditor }
   it { should belong_to :precatory_type }
   it { should have_many(:precatory_parcels).dependent(:destroy).order(:id) }
 

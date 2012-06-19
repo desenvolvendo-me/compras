@@ -1,5 +1,5 @@
 class DirectPurchase < Compras::Model
-  attr_accessible :direct_purchase, :year, :date, :legal_reference_id, :modality, :provider_id, :budget_structure_id
+  attr_accessible :direct_purchase, :year, :date, :legal_reference_id, :modality, :creditor_id, :budget_structure_id
   attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :price_collection, :price_registration, :observation, :pledge_type
   attr_accessible :direct_purchase_budget_allocations_attributes, :period, :period_unit
@@ -10,7 +10,7 @@ class DirectPurchase < Compras::Model
   has_enumeration_for :period_unit, :with => PeriodUnit
 
   belongs_to :legal_reference
-  belongs_to :provider
+  belongs_to :creditor
   belongs_to :budget_structure
   belongs_to :licitation_object
   belongs_to :delivery_location
@@ -24,24 +24,24 @@ class DirectPurchase < Compras::Model
 
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :allow_destroy => true
 
-  delegate :phone, :fax, :address, :city, :zip_code, :to => :provider, :allow_nil => true
-  delegate :bank_account, :agency, :bank, :to => :provider, :allow_nil => true
+  delegate :phone, :fax, :address, :city, :zip_code, :to => :creditor, :allow_nil => true
+  delegate :accounts, :agencies, :banks, :to => :creditor, :allow_nil => true
   delegate :purchase_licitation_exemption, :build_licitation_exemption,
            :to => :licitation_object, :allow_nil => true, :prefix => true
   delegate :materials, :materials_groups, :materials_classes,
-           :to => :provider, :allow_nil => true, :prefix => true
+           :to => :creditor, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :status, :year, :date, :legal_reference, :modality, :presence => true
   validates :budget_structure, :licitation_object, :delivery_location, :presence => true
-  validates :provider, :employee, :payment_method, :pledge_type, :presence => true
+  validates :creditor, :employee, :payment_method, :pledge_type, :presence => true
   validates :period, :period_unit, :presence => true
 
   validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation
   validate :material_must_have_same_licitation_object
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
-  validate :materials_should_belong_to_provider
+  validate :materials_should_belong_to_creditor
 
   orderize :year
 
@@ -132,16 +132,14 @@ class DirectPurchase < Compras::Model
     end
   end
 
-  def materials_should_belong_to_provider
-    return if direct_purchase_budget_allocations.blank? || provider.nil?
+  def materials_should_belong_to_creditor
+    return if direct_purchase_budget_allocations.blank? || creditor.nil?
 
 
     direct_purchase_budget_allocations.each do |dpba|
       dpba.items.each do |item|
-        unless provider_materials.include?(item.material) ||
-               provider_materials_classes.include?(item.materials_class) ||
-               provider_materials_groups.include?(item.materials_group)
-          item.errors.add(:material, :must_belong_to_selected_provider)
+        unless creditor_materials.include?(item.material)
+          item.errors.add(:material, :must_belong_to_selected_creditor)
         end
       end
     end

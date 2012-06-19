@@ -7,18 +7,18 @@ require 'app/models/resource_annul'
 
 describe PriceCollectionProposal do
   it { should belong_to :price_collection }
-  it { should belong_to :provider }
+  it { should belong_to :creditor }
 
   it { should have_many :items }
   it { should have_one :annul }
 
-  it { should validate_presence_of :provider }
+  it { should validate_presence_of :creditor }
 
-  it 'should return price_colletion and provider as to_s method' do
+  it 'should return price_colletion and creditor as to_s method' do
     subject.stub(:price_collection).and_return('Price Collection 1')
-    subject.stub(:provider).and_return('Provider 1')
+    subject.stub(:creditor).and_return('creditor 1')
 
-    subject.to_s.should eq 'Price Collection 1 - Provider 1'
+    subject.to_s.should eq 'Price Collection 1 - creditor 1'
   end
 
   context 'items by lot' do
@@ -48,21 +48,21 @@ describe PriceCollectionProposal do
   end
 
   describe '#editable_by?' do
-    let :provider do
-      double('Provider')
+    let :creditor do
+      double('creditor')
     end
 
     before do
-      subject.stub(:provider).and_return provider
+      subject.stub(:creditor).and_return creditor
     end
 
-    it 'should be true when the provider is the given user' do
-      user = double('User', :authenticable => provider)
+    it 'should be true when the creditor is the given user' do
+      user = double('User', :authenticable => creditor)
 
       subject.editable_by?(user).should be_true
     end
 
-    it 'should not be true for when the provider is not the given user' do
+    it 'should not be true for when the creditor is not the given user' do
       user = double('User', :authenticable => double)
 
       subject.editable_by?(user).should be_false

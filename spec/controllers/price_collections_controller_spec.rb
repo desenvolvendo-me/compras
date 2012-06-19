@@ -47,8 +47,8 @@ describe PriceCollectionsController do
         PriceCollection.any_instance.should_receive(:save).and_return true
       end
 
-      it 'should generate the users for the providers' do
-        ProviderUserCreator.any_instance.should_receive(:generate)
+      it 'should generate the users for the creditors' do
+        CreditorUserCreator.any_instance.should_receive(:generate)
 
         post :create
       end
@@ -59,8 +59,8 @@ describe PriceCollectionsController do
         PriceCollection.any_instance.should_receive(:save).and_return false
       end
 
-      it 'should generate the users for the providers' do
-        ProviderUserCreator.any_instance.should_not_receive(:generate)
+      it 'should generate the users for the creditors' do
+        CreditorUserCreator.any_instance.should_not_receive(:generate)
 
         post :create
       end
@@ -82,8 +82,8 @@ describe PriceCollectionsController do
         price_collection.stub(:update_attributes).and_return true
       end
 
-      it 'should generate users for any provider' do
-        ProviderUserCreator.any_instance.should_receive(:generate)
+      it 'should generate users for any creditor' do
+        CreditorUserCreator.any_instance.should_receive(:generate)
 
         put :update
       end
@@ -94,8 +94,8 @@ describe PriceCollectionsController do
         price_collection.stub(:update_attributes).and_return false
       end
 
-      it 'should not generate users for any provider' do
-        ProviderUserCreator.any_instance.should_not_receive(:generate)
+      it 'should not generate users for any creditor' do
+        CreditorUserCreator.any_instance.should_not_receive(:generate)
 
         put :update
       end

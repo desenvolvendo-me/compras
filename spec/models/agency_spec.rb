@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/agency'
 require 'app/models/bank_account'
-require 'app/models/provider'
 
 describe Agency do
   it "return the name when call to_s" do
@@ -18,7 +17,6 @@ describe Agency do
   it { should belong_to :city }
   it { should belong_to :bank }
   it { should have_many :bank_accounts }
-  it { should have_many(:providers).dependent(:restrict) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :number }

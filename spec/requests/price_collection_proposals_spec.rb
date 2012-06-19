@@ -81,9 +81,9 @@ feature "PriceCollectionProposals" do
     end
   end
 
-  describe 'provider editing proposals' do
+  describe 'creditor editing proposals' do
     let :current_user do
-      User.make!(:provider_with_password)
+      User.make!(:creditor_with_password)
     end
 
     background do

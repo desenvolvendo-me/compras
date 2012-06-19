@@ -11,7 +11,7 @@ require 'app/models/licitation_process_appeal'
 require 'app/models/budget_allocation'
 require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
-require 'app/models/provider'
+require 'app/models/creditor'
 require 'app/models/licitation_notice'
 require 'app/models/licitation_process_lot'
 require 'app/business/licitation_process_types_of_calculation_by_judgment_form_kind'
@@ -40,7 +40,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
-  it { should have_many(:providers).dependent(:restrict).through(:licitation_process_bidders) }
+  it { should have_many(:creditors).dependent(:restrict).through(:licitation_process_bidders) }
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
 
   it { should validate_presence_of :year }
@@ -291,11 +291,11 @@ describe LicitationProcess do
   end
 
   it 'should return the winner proposal by global total value' do
-    bidder_1 = double(:proposal_total_value => 1000.0, :provider => 'provider 1')
-    bidder_2 = double(:proposal_total_value => 500.0, :provider => 'provider 2')
+    bidder_1 = double(:proposal_total_value => 1000.0, :creditor => 'creditor 1')
+    bidder_2 = double(:proposal_total_value => 500.0, :creditor => 'creditor 2')
     subject.stub(:licitation_process_bidders).and_return([bidder_1, bidder_2])
 
-    subject.winner_proposal_provider.should eq 'provider 2'
+    subject.winner_proposal_creditor.should eq 'creditor 2'
     subject.winner_proposal_total_price.should eq 500.0
   end
 

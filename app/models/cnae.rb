@@ -5,7 +5,6 @@ class Cnae < Compras::Model
 
   belongs_to :risk_degree
 
-  has_many :providers, :dependent => :restrict
   has_many :creditors_with_main_cnae, :class_name => 'Creditor', :dependent => :restrict, :foreign_key => :main_cnae_id
   has_many :creditor_secondary_cnaes, :dependent => :restrict
   has_many :creditors, :through => :creditor_secondary_cnaes

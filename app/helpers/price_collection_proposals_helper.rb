@@ -17,7 +17,7 @@ module PriceCollectionProposalsHelper
   end
 
   def proposal_cancel_button(form)
-    if current_user.provider?
+    if current_user.creditor?
       form.button :cancel
     else
       form.button :cancel, :href => edit_price_collection_path(resource.price_collection)

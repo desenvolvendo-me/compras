@@ -31,7 +31,7 @@ class LicitationProcess < Compras::Model
   has_many :pledges, :dependent => :restrict
   has_many :judgment_commission_advices, :dependent => :restrict
   has_many :licitation_notices, :dependent => :destroy
-  has_many :providers, :through => :licitation_process_bidders, :dependent => :restrict
+  has_many :creditors, :through => :licitation_process_bidders, :dependent => :restrict
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
 
   accepts_nested_attributes_for :licitation_process_bidders, :allow_destroy => true
@@ -106,10 +106,10 @@ class LicitationProcess < Compras::Model
     items && !items.without_lot?
   end
 
-  def winner_proposal_provider
+  def winner_proposal_creditor
     return unless winner_proposal
 
-    winner_proposal.provider
+    winner_proposal.creditor
   end
 
   def winner_proposal_total_price

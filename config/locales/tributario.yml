@@ -26,6 +26,5 @@ pt-BR:
         fiscal_execution_without_movimentations: "Esta execução fiscal não possui movimentações"
         more_information: "Mais informações"
         no_extra_allocations: "Já foi selecionada uma Dotação na aba \"Dados gerais\"."
-        msg_no_provider_partners: "Foi selecionada uma pessoa física na aba \"Principal\". Não é necessário cadastrar sócios."
         msg_no_bidders: "Para a modalidade do processo administrativo escolhido, não é necessário cadastrar licitantes."
         to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist: "Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir."

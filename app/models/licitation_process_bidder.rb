@@ -1,12 +1,12 @@
 class LicitationProcessBidder < Compras::Model
-  attr_accessible :licitation_process_id, :provider_id, :protocol, :protocol_date, :status
+  attr_accessible :licitation_process_id, :creditor_id, :protocol, :protocol_date, :status
   attr_accessible :receipt_date, :invited, :documents_attributes, :proposals_attributes
   attr_accessible :technical_score, :person_ids
 
   has_enumeration_for :status, :with => LicitationProcessBidderStatus
 
   belongs_to :licitation_process
-  belongs_to :provider
+  belongs_to :creditor
 
   has_many :documents, :class_name => :LicitationProcessBidderDocument, :dependent => :destroy, :order => :id
   has_many :document_types, :through => :documents
@@ -25,9 +25,9 @@ class LicitationProcessBidder < Compras::Model
   accepts_nested_attributes_for :documents, :allow_destroy => true
   accepts_nested_attributes_for :proposals, :allow_destroy => true
 
-  validates :provider, :presence => true
+  validates :creditor, :presence => true
   validates :protocol, :protocol_date, :receipt_date, :presence => true, :if => :invited
-  validates :provider_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
+  validates :creditor_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
   validates :technical_score, :presence => true, :if => :validate_technical_score?
   validate :validate_licitaton_process_envelope_opening_date
 
@@ -57,7 +57,7 @@ class LicitationProcessBidder < Compras::Model
   end
 
   def to_s
-    provider.to_s
+    creditor.to_s
   end
 
   def assign_document_types

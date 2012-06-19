@@ -31,24 +31,24 @@ describe User do
     subject.should be_password_required
   end
 
-  describe 'password required for provider' do
-    it 'should not require the password if the user is a provider and no persisted' do
-      subject.should_receive(:provider?).and_return true
+  describe 'password required for creditor' do
+    it 'should not require the password if the user is a creditor and no persisted' do
+      subject.should_receive(:creditor?).and_return true
       subject.should_receive(:persisted?).and_return false
 
       subject.should_not be_password_required
     end
 
-    it 'should require the password if the user is a provider and is persisted but not confimed' do
-      subject.should_receive(:provider?).and_return true
+    it 'should require the password if the user is a creditor and is persisted but not confimed' do
+      subject.should_receive(:creditor?).and_return true
       subject.should_receive(:persisted?).and_return true
       subject.should_receive(:confirmed?).and_return false
 
       subject.should be_password_required
     end
 
-    it 'should not require the password if the user is a provider, is persisted and confirmed' do
-      subject.should_receive(:provider?).and_return true
+    it 'should not require the password if the user is a creditor, is persisted and confirmed' do
+      subject.should_receive(:creditor?).and_return true
       subject.should_receive(:persisted?).and_return true
       subject.should_receive(:confirmed?).and_return true
 
@@ -76,8 +76,8 @@ describe User do
     subject.should validate_presence_of :authenticable
   end
 
-  it 'should not validate presence of profile when user is a provider' do
-    subject.stub(:provider?).and_return true
+  it 'should not validate presence of profile when user is a creditor' do
+    subject.stub(:creditor?).and_return true
     subject.should_not validate_presence_of :profile
   end
 end

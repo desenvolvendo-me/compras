@@ -9,7 +9,7 @@ pt-BR:
       precatory:
         number: "Número do precatório"
         lawsuit_number: "Número da ação"
-        provider: "Beneficiário"
+        creditor: "Beneficiário"
         date: "Data do precatório"
         judgment_date: "Data da decisão judicial"
         apresentation_date: "Data da apresentação"

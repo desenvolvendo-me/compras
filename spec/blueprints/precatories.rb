@@ -3,7 +3,7 @@
 Precatory.blueprint(:precatorio) do
   number { "1234/2012" }
   lawsuit_number { "001.456.1234/2009" }
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   date { Date.new(2012, 1, 1) }
   judgment_date { Date.new(2011, 6, 30) }
   apresentation_date { Date.new(2011, 12, 31) }

@@ -36,7 +36,7 @@ pt-BR:
         contract: "Contrato"
         contract_signature_date: "Data do contrato"
         description: "Objeto"
-        provider: "Fornecedor"
+        creditor: "Fornecedor"
         founded_debt_contract: "Contrato de dívida"
         items_total_value: "Valor total dos itens"
         code: "Código"

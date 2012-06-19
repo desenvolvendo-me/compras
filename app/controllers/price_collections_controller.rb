@@ -20,7 +20,7 @@ class PriceCollectionsController < CrudController
     object.transaction do
       return unless super
 
-      ProviderUserCreator.new(object).generate
+      CreditorUserCreator.new(object).generate
     end
   end
 
@@ -28,7 +28,7 @@ class PriceCollectionsController < CrudController
     object.transaction do
       return unless super
 
-      ProviderUserCreator.new(object).generate
+      CreditorUserCreator.new(object).generate
     end
   end
 

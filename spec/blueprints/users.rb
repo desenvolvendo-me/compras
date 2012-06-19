@@ -37,18 +37,18 @@ User.blueprint(:sobrinho_as_admin_and_employee) do
   confirmed_at  { 1.day.ago }
 end
 
-User.blueprint(:provider_without_password) do
+User.blueprint(:creditor_without_password) do
   email         { 'contato@sobrinhosa.com' }
   login         { 'sobrinhosa' }
   administrator { false }
-  authenticable { Provider.make!(:sobrinho_sa) }
+  authenticable { Creditor.make!(:sobrinho_sa) }
 end
 
-User.blueprint(:provider_with_password) do
+User.blueprint(:creditor_with_password) do
   email         { 'contato@sobrinhosa.com' }
   login         { 'sobrinhosa' }
   password      { '123456' }
   administrator { false }
-  authenticable { Provider.make!(:sobrinho_sa) }
+  authenticable { Creditor.make!(:sobrinho_sa) }
   confirmed_at  { 2.days.ago }
 end

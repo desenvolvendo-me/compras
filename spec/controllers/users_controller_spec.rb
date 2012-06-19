@@ -8,7 +8,7 @@ describe UsersController do
 
   describe '#edit' do
     it 'when the authenticable type is not employee should return 401' do
-      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::PROVIDER)
+      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::CREDITOR)
 
       get :edit
 
@@ -37,7 +37,7 @@ describe UsersController do
 
   describe '#destroy' do
     it 'when the authenticable type is not employee should return 401' do
-      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::PROVIDER)
+      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::CREDITOR)
 
       get :destroy
 
@@ -47,7 +47,7 @@ describe UsersController do
 
   describe '#update' do
     it 'when the authenticable type is not employee should return 401' do
-      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::PROVIDER)
+      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::CREDITOR)
 
       get :update
 
@@ -55,3 +55,4 @@ describe UsersController do
     end
   end
 end
+

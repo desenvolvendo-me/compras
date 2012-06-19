@@ -10,7 +10,7 @@ pt-BR:
         year: "Exercício"
         code: "Código"
         direct_purchase: "Solicitação de compra direta"
-        provider: "Fornecedor"
+        creditor: "Fornecedor"
         address: "Endereço"
         city: "Cidade"
         zip_code: "CEP"

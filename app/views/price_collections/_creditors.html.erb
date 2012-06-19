@@ -1,0 +1,53 @@
+<% unless f.object.annulled? %>
+  <p>
+    <input type="button" class="button affirmative add-creditor" value="Adicionar Fornecedor">
+  </p>
+<% end %>
+
+<div id="creditors-list">
+  <%= f.association :price_collection_proposals, :collection => localized(f.object.price_collection_proposals) do |p| %>
+    <%= render 'creditors_form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache "#{f.sanitized_object_name}_creditors_template" do %>
+  <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build(:status => PriceCollectionStatus::ACTIVE), :index => '{{uuid_creditor}}' do |p| %>
+    <%= render 'creditors_form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#<%= f.sanitized_object_name %>_creditors_template").nestedForm({
+    add: '.add-creditor',
+    remove: '.remove-creditor',
+    target: '#creditors-list',
+    uuid: 'uuid_creditor',
+    fieldToRemove: '.creditor_collection_proposal',
+    appendItem: false
+  });
+
+  $('form.price_collection').on('change', '.creditor', function (event, creditor) {
+    if(creditor){
+      var inputs = $(this).closest('.creditor').find(':input');
+      $(inputs[1]).val(creditor.email);
+      $(inputs[2]).val(creditor.login);
+    }
+  });
+
+  $('#creditors-list').on('change', '.creditor-modal input[type=hidden]', function (event, creditor) {
+    var mainDiv = $(this).closest('div.creditor_collection_proposal'),
+        emailInput = mainDiv.find('input.email'),
+        loginInput = mainDiv.find('input.login');
+
+    emailInput.val(creditor.email);
+    loginInput.val(creditor.login);
+
+    if(creditor.email){
+      emailInput.attr('disabled', true);
+    }
+
+    if(creditor.login){
+      loginInput.attr('disabled', true);
+    }
+  });
+</script>

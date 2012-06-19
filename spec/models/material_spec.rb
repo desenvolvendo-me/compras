@@ -17,7 +17,6 @@ describe Material do
 
   it { should belong_to :expense_nature }
   it { should have_many :pledge_items }
-  it { should have_and_belong_to_many :providers }
   it { should have_and_belong_to_many :licitation_objects }
   it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:restrict) }

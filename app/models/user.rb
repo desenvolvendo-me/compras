@@ -14,7 +14,7 @@ class User < Compras::Model
 
   validates :login, :presence => true
   validates :authenticable, :presence => true, :unless => :administrator?
-  validates :profile, :presence => true, :if => lambda{ |u| !u.administrator? && !u.provider? }
+  validates :profile, :presence => true, :if => lambda{ |u| !u.administrator? && !u.creditor? }
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
 
   has_enumeration_for :authenticable_type, :with => AuthenticableType, :create_helpers => true
@@ -23,7 +23,7 @@ class User < Compras::Model
   orderize
 
   def password_required?
-    return persisted? && !confirmed? if provider?
+    return persisted? && !confirmed? if creditor?
     !persisted? || password.present? || password_confirmation.present?
   end
 

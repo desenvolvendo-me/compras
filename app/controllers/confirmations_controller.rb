@@ -1,4 +1,4 @@
-# This is a confirmation page to users generates from providers
+# This is a confirmation page to users generates from creditors
 # They need to creates a new password
 # Check https://github.com/plataformatec/devise/wiki/How-To:-Two-Step-Confirmation/
 class ConfirmationsController < Devise::ConfirmationsController

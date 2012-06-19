@@ -7,14 +7,16 @@ pt-BR:
 
     attributes:
       creditor:
-        person: "Pessoa"
-        occupation_classification: "CBO"
-        municipal_public_administration: "Admnistração pública municipal"
         autonomous: "Autônomo"
-        social_identification_number: "PIS/PASEP"
-        contract_start_date: "Início do contrato"
-        company_size: "Porte da empressa"
         choose_simple: "Optante pelo simples"
+        company_size: "Porte da empressa"
+        contract_start_date: "Início do contrato"
+        legal_nature: "Natureza jurídica"
         main_cnae: "CNAE principal"
-        representative_people: "Representantes"
         materials: "Materiais"
+        municipal_public_administration: "Admnistração pública municipal"
+        occupation_classification: "CBO"
+        person: "Pessoa"
+        registration_cadastral_certificates: 'Certificado de registro cadastral' 
+        representative_people: "Representantes"
+        social_identification_number: "PIS/PASEP"

@@ -31,7 +31,7 @@ feature "SupplyAuthorizations" do
     page.should have_content 'Curitiba'
     page.should have_content '33400-500'
     page.should have_content '(33) 3333-3333'
-    page.should have_content '123456'
+    page.should have_content '23456-0'
     page.should have_content 'Agência Itaú'
     page.should have_content 'Itaú'
     page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'

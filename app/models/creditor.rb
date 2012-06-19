@@ -6,40 +6,60 @@ class Creditor < Compras::Model
   attr_accessible :representative_person_ids, :representative_ids
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
+  attr_accessible :email, :login, :legal_nature_id
 
   attr_readonly :person_id
 
-  belongs_to :person
-  belongs_to :occupation_classification
   belongs_to :company_size
+  belongs_to :legal_nature
   belongs_to :main_cnae, :class_name => 'Cnae'
-  has_many :creditor_secondary_cnaes, :dependent => :destroy
-  has_many :cnaes, :through => :creditor_secondary_cnaes
-  has_many :documents, :class_name => 'CreditorDocument', :dependent => :destroy, :order => :id
-  has_many :document_types, :through => :documents
-  has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
-  has_many :representative_people, :through => :representatives, :source => :representative_person
-  has_many :materials, :through => :creditor_materials
-  has_many :creditor_materials, :dependent => :destroy
+  belongs_to :occupation_classification
+  belongs_to :person
+
   has_many :accounts, :class_name => 'CreditorBankAccount', :inverse_of => :creditor, :dependent => :destroy
+  has_many :agencies, :through => :accounts
+  has_many :banks, :through => :accounts, :source => :agency
+  has_many :cnaes, :through => :creditor_secondary_cnaes
   has_many :creditor_balances, :inverse_of => :creditor, :dependent => :destroy
-  has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
+  has_many :creditor_materials, :dependent => :destroy
+  has_many :creditor_secondary_cnaes, :dependent => :destroy
+  has_many :direct_purchases, :dependent => :restrict
+  has_many :document_types, :through => :documents
+  has_many :documents, :class_name => 'CreditorDocument', :dependent => :destroy, :order => :id
+  has_many :licitation_process_bidders, :dependent => :restrict
+  has_many :licitation_processes, :through => :licitation_process_bidders, :dependent => :restrict
+  has_many :materials, :through => :creditor_materials
+  has_many :materials_classes, :through => :materials
+  has_many :materials_groups, :through => :materials_classes
+  has_many :pledges, :dependent => :restrict
+  has_many :precatories, :dependent => :restrict
+  has_many :price_collection_proposals, :dependent => :restrict, :order => :id
+  has_many :price_collections, :through => :price_collection_proposals
   has_many :registration_cadastral_certificates, :dependent => :destroy
+  has_many :regularization_or_administrative_sanctions, :inverse_of => :creditor, :dependent => :destroy
+  has_many :representative_people, :through => :representatives, :source => :representative_person
+  has_many :representatives, :class_name => 'CreditorRepresentative', :dependent => :destroy, :order => :id
+  has_many :reserve_funds, :dependent => :restrict
 
-  delegate :personable_type, :company?, :to => :person, :allow_nil => true
+  has_one :user, :as => :authenticable
+
+  delegate :email, :personable_type, :company?, :to => :person, :allow_nil => true
+  delegate :phone, :fax, :name, :to => :person, :allow_nil => true
+  delegate :address, :city, :zip_code, :to => :person, :allow_nil => true
   delegate :bank_id, :to => :accounts, :allow_nil => true
+  delegate :materials_class, :materials_group, :to => :materials, :allow_nil => true
 
-  accepts_nested_attributes_for :documents, :allow_destroy => true
-  accepts_nested_attributes_for :representatives, :allow_destroy => true
   accepts_nested_attributes_for :accounts, :allow_destroy => true
   accepts_nested_attributes_for :creditor_balances, :allow_destroy => true
+  accepts_nested_attributes_for :documents, :allow_destroy => true
   accepts_nested_attributes_for :regularization_or_administrative_sanctions, :allow_destroy => true
+  accepts_nested_attributes_for :representatives, :allow_destroy => true
 
   validates :person, :presence => true
   validates :person_id, :uniqueness => true, :allow_blank => true
   validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
-  validates :company_size, :main_cnae, :presence => true, :if => :company?
+  validates :company_size, :main_cnae, :legal_nature, :presence => true, :if => :company?
   validate :uniqueness_of_document_type
   validate :person_in_representatives
   validate :secondary_cnae_in_main_cnae
@@ -51,6 +71,22 @@ class Creditor < Compras::Model
 
   def to_s
     person.to_s
+  end
+
+  def email= email
+    person.email = email
+  end
+
+  def email
+    user.try(:email) || person.email
+  end
+
+  def login= login
+    @login = login
+  end
+
+  def login
+    user.try(:login) || @login
   end
 
   def selected_cnaes

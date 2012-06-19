@@ -643,13 +643,6 @@ Compras::Application.routes.draw do
 
   resources :property_variable_setting_options, :only => :index
 
-  resources :providers do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :purchase_solicitations, :except => :destroy do
     collection do
       get :filter

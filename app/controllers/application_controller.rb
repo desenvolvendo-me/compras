@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_user
-    if current_user && current_user.provider?
-      'provider'
+    if current_user && current_user.creditor?
+      'creditor'
     else
       'application'
     end

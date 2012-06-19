@@ -1,8 +1,8 @@
 class PriceCollectionProposal < Compras::Model
-  attr_accessible :provider_id, :items_attributes, :email, :login, :status
+  attr_accessible :creditor_id, :items_attributes, :email, :login, :status
 
   belongs_to :price_collection
-  belongs_to :provider
+  belongs_to :creditor
 
   has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :id
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
@@ -11,18 +11,18 @@ class PriceCollectionProposal < Compras::Model
 
   delegate :date, :full_period, :to => :price_collection, :allow_nil => true, :prefix => true
   delegate :price_collection_lots, :to => :price_collection, :allow_nil => true
-  delegate :name, :email, :email=, :login, :login=, :to => :provider, :allow_nil => true
+  delegate :name, :email, :email=, :login, :login=, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
-  validates :provider, :presence => true
+  validates :creditor, :presence => true
   validates :email, :login, :presence => true, :if => :new_record?
 
   orderize :id
   filterize
 
   def to_s
-    "#{price_collection} - #{provider}"
+    "#{price_collection} - #{creditor}"
   end
 
   def total_price
@@ -42,15 +42,15 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def editable_by?(user)
-    provider == user.authenticable
+    creditor == user.authenticable
   end
 
   def annul!
     update_attribute :status, PriceCollectionStatus::ANNULLED
   end
 
-  def self.by_price_collection_and_provider(params = {})
+  def self.by_price_collection_and_creditor(params = {})
     where { price_collection_id.eq(params.fetch(:price_collection_id)) &
-            provider_id.eq(params.fetch(:provider_id)) }
+            creditor_id.eq(params.fetch(:creditor_id)) }
   end
 end

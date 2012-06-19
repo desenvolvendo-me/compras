@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       resource_annul:
-        provider: "Fornecedor"
+        creditor: "Fornecedor"
         date: "Data"
         description: "Justificativa"
         employee: "Responsável"

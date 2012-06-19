@@ -17,7 +17,7 @@
       <% localized(lot.winner_proposals).each do |winner| %>
         <tr>
           <td>
-            <%= winner.provider %>
+            <%= winner.creditor %>
           </td>
           <td>
             <%= winner.decorator.proposal_total_value_by_lot(lot.id) %>

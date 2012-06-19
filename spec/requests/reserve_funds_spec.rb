@@ -11,7 +11,7 @@ feature "ReserveFunds" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     ReserveAllocationType.make!(:licitation)
     LicitationModality.make!(:publica)
-    Provider.make!(:wenderson_sa)
+    Creditor.make!(:wenderson_sa)
 
     click_link 'Contabilidade'
 
@@ -35,7 +35,11 @@ feature "ReserveFunds" do
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
     fill_in 'Número da licitação', :with => '001/2012'
     fill_in 'Número do processo', :with => '002/2013'
-    fill_modal 'Favorecido', :with => '456789', :field => 'CRC'
+    within_modal 'Favorecido' do
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+      click_button 'Pesquisar'
+      click_record 'Wenderson Malheiros'
+    end
     fill_in 'Motivo', :with => 'Motivo para reserva de dotação'
 
     click_button 'Salvar'

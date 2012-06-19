@@ -10,7 +10,7 @@ class LicitationProcessBidderProposal < Compras::Model
 
   delegate :material, :quantity, :to => :administrative_process_budget_allocation_item, :allow_nil => true
   delegate :reference_unit, :to => :material, :allow_nil => true
-  delegate :provider, :to => :licitation_process_bidder, :allow_nil => true
+  delegate :creditor, :to => :licitation_process_bidder, :allow_nil => true
 
   def total_price
     return 0 unless quantity && unit_price

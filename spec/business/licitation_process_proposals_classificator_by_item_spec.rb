@@ -5,31 +5,31 @@ require 'app/enumerations/licitation_process_type_of_calculation'
 
 describe LicitationProcessProposalsClassificatorByItem do
   let :proposal_1 do
-    double('proposal 1', :total_price => 110.01, :provider => 'provider 1')
+    double('proposal 1', :total_price => 110.01, :creditor => 'creditor 1')
   end
 
   let :proposal_2 do
-    double('proposal 2', :total_price => 100.0, :provider => 'provider 2')
+    double('proposal 2', :total_price => 100.0, :creditor => 'creditor 2')
   end
 
   let :proposal_3 do
-    double('proposal 3', :total_price => 105.0, :provider => 'provider 3')
+    double('proposal 3', :total_price => 105.0, :creditor => 'creditor 3')
   end
 
   let :proposal_4 do
-    double('proposal 4', :total_price => 104.0, :provider => 'provider 4')
+    double('proposal 4', :total_price => 104.0, :creditor => 'creditor 4')
   end
 
   let :proposal_5 do
-    double('proposal 5', :total_price => 107.0, :provider => 'provider 5')
+    double('proposal 5', :total_price => 107.0, :creditor => 'creditor 5')
   end
 
   let :proposal_6 do
-    double('proposal 6', :total_price => 50.0, :provider => 'provider 6')
+    double('proposal 6', :total_price => 50.0, :creditor => 'creditor 6')
   end
 
   let :proposal_7 do
-    double('proposal 7', :total_price => 0.0, :provider => 'provider 7')
+    double('proposal 7', :total_price => 0.0, :creditor => 'creditor 7')
   end
 
   context "lowest total price by item" do

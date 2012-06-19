@@ -18,7 +18,7 @@ describe DirectPurchase do
   end
 
   it { should belong_to :legal_reference }
-  it { should belong_to :provider }
+  it { should belong_to :creditor }
   it { should belong_to :budget_structure }
   it { should belong_to :licitation_object }
   it { should belong_to :delivery_location }
@@ -104,7 +104,7 @@ describe DirectPurchase do
     it { should validate_presence_of :budget_structure }
     it { should validate_presence_of :licitation_object }
     it { should validate_presence_of :delivery_location }
-    it { should validate_presence_of :provider }
+    it { should validate_presence_of :creditor }
     it { should validate_presence_of :employee }
     it { should validate_presence_of :payment_method }
     it { should validate_presence_of :period }

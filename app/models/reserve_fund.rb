@@ -1,7 +1,7 @@
 class ReserveFund < Compras::Model
   attr_accessible :entity_id, :budget_allocation_id, :year
   attr_accessible :value, :reserve_allocation_type_id, :reserve_allocation_type_id
-  attr_accessible :licitation_modality_id, :provider_id, :status, :date, :reason
+  attr_accessible :licitation_modality_id, :creditor_id, :status, :date, :reason
   attr_accessible :licitation, :process
 
   attr_readonly :date
@@ -14,7 +14,7 @@ class ReserveFund < Compras::Model
   belongs_to :budget_allocation
   belongs_to :reserve_allocation_type
   belongs_to :licitation_modality
-  belongs_to :provider
+  belongs_to :creditor
 
   has_many :pledges, :dependent => :restrict
 

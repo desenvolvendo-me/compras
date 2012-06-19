@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       licitation_process_bidder:
-        provider: "Fornecedor"
+        creditor: "Fornecedor"
         protocol: "Protocolo"
         protocol_date: "Data do protocolo"
         receipt_date: "Data do recebimento"

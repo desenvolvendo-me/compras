@@ -8,7 +8,7 @@ feature "DirectPurchases" do
 
   scenario 'create a new direct_purchase' do
     LegalReference.make!(:referencia)
-    Provider.make!(:wenderson_sa)
+    Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)
@@ -34,7 +34,11 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -191,7 +195,7 @@ feature "DirectPurchases" do
     page.should have_content '33400-500'
     page.should have_content '(33) 3333-3333'
     page.should have_content '(33) 3333-3334'
-    page.should have_content '123456'
+    page.should have_content '23456-0'
     page.should have_content 'Agência Itaú'
     page.should have_content 'Itaú'
     page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
@@ -227,7 +231,7 @@ feature "DirectPurchases" do
     page.should have_content '33400-500'
     page.should have_content '(33) 3333-3333'
     page.should have_content '(33) 3333-3334'
-    page.should have_content '123456'
+    page.should have_content '23456-0'
     page.should have_content 'Agência Itaú'
     page.should have_content 'Itaú'
     page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
@@ -257,7 +261,7 @@ feature "DirectPurchases" do
 
   scenario 'asserting that duplicated budget allocations cannot be saved' do
     LegalReference.make!(:referencia)
-    Provider.make!(:wenderson_sa)
+    Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
     LicitationObject.make!(:ponte)
     DeliveryLocation.make!(:education)
@@ -279,7 +283,11 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -579,11 +587,9 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'budget allocation item material must belong to selected provider' do
-    Provider.make!(:wenderson_sa)
-    Provider.make!(:sobrinho_sa)
-    Provider.make!(:fornecedor_class_arames)
-    Provider.make!(:fornecedor_arame)
+  scenario 'budget allocation item material must belong to selected creditor' do
+    Creditor.make!(:nohup)
+    Creditor.make!(:sobrinho)
     Material.make!(:arame_comum)
 
     click_link 'Solicitações'
@@ -600,10 +606,14 @@ feature "DirectPurchases" do
       fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
     end
 
-    # selecting provider that have only the group of selected material
+    # selecting creditor that have only the selected material
 
     within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Nohup'
+      end
     end
 
     click_button 'Salvar'
@@ -612,34 +622,14 @@ feature "DirectPurchases" do
       page.should_not have_content 'deve pertencer ao fornecedor selecionado'
     end
 
-    # selecting provider that have only the class of selected material
+    # selecting creditor that have nothing to do with the selected material
 
     within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '222222', :field => 'Número do CRC'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações' do
-      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
-    end
-
-    # selecting provider that have only the selected material
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '333333', :field => 'Número do CRC'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações' do
-      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
-    end
-
-    # selecting provider that have nothing to do with the selected material
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Gabriel Sobrinho'
+      end
     end
 
     click_button 'Salvar'

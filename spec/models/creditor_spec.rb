@@ -11,6 +11,9 @@ require 'app/models/creditor_material'
 require 'app/models/creditor_bank_account'
 require 'app/models/creditor_balance'
 require 'app/models/regularization_or_administrative_sanction'
+require 'app/models/direct_purchase'
+require 'app/models/licitation_process_bidder'
+require 'app/models/licitation_process'
 
 describe Creditor do
   it { should belong_to :person }
@@ -29,8 +32,12 @@ describe Creditor do
   it { should have_many(:creditor_balances).dependent(:destroy) }
   it { should have_many(:regularization_or_administrative_sanctions).dependent(:destroy) }
   it { should have_many(:registration_cadastral_certificates).dependent(:destroy) }
+  it { should have_many(:direct_purchases).dependent(:restrict) }
+  it { should have_many(:licitation_process_bidders).dependent(:restrict) }
+  it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_bidders) }
 
   it { should validate_presence_of :person }
+  it { should_not validate_presence_of :legal_nature }  
   it { should_not validate_presence_of :company_size }
   it { should_not validate_presence_of :main_cnae }
   it { should_not validate_presence_of :contract_start_date }
@@ -43,6 +50,7 @@ describe Creditor do
 
     it { should validate_presence_of :company_size }
     it { should validate_presence_of :main_cnae }
+    it { should validate_presence_of :legal_nature }  
   end
 
   context 'when is autonomous' do
@@ -154,5 +162,72 @@ describe Creditor do
 
     document_one.errors.messages[:document_type_id].should be_nil
     document_two.errors.messages[:document_type_id].should include "já está em uso"
+  end
+
+  describe '#email' do
+    context 'when has no user related to this creditor' do
+      it "returns the person's email" do
+        subject.stub(:person).and_return double('Person', :email => 'joao@silva.com')
+
+        subject.email.should eq 'joao@silva.com'
+      end
+    end
+
+    context 'when has a user related to this creditor' do
+      it "returns the user's email" do
+        subject.stub(:user).and_return double('User', :email => 'foo@bar.com')
+
+        subject.email.should eq 'foo@bar.com'
+      end
+    end
+  end
+
+  describe '#email=' do
+    let :person do
+      double('Person')
+    end
+
+    it 'sets the email on person' do
+      subject.stub(:person).and_return person
+
+      person.should_receive(:email=).with('foo@bar.com')
+      subject.email = 'foo@bar.com'
+    end
+  end
+
+  describe '#login=' do
+    context 'have no user related to this creditor' do
+      it 'sets the login to the given string' do
+        subject.login = 'foo.bar'
+        subject.login.should eq 'foo.bar'
+      end
+    end
+
+    context 'have a user related to this creditor' do
+      it "should not override the user's login" do
+        subject.stub(:user).and_return double('User', :login => 'foo.bar')
+
+        subject.login = 'joao.silva'
+        subject.login.should eq 'foo.bar'
+      end
+    end
+  end
+
+  describe '#login' do
+    context 'have no user related to this creditor' do
+      it 'returns the given login' do
+        subject.login = 'foo.bar'
+
+        subject.login.should eq 'foo.bar'
+      end
+    end
+
+    context 'have a user related to this creditor' do
+      it "returns the user's login" do
+        subject.stub(:user).and_return double('User', :login => 'foo.bar')
+
+        subject.login.should eq 'foo.bar'
+      end
+    end
   end
 end

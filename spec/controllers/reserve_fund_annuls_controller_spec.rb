@@ -9,7 +9,7 @@ describe ReserveFundAnnulsController do
   context 'GET #new' do
     before do
       ReserveFund.stub(:find).with('1').and_return(reserve_fund)
-      controller.stub(:current_user).and_return(double(:authenticable => authenticable, :provider? => false))
+      controller.stub(:current_user).and_return(double(:authenticable => authenticable, :creditor? => false))
     end
 
     let :reserve_fund do

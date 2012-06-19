@@ -13,7 +13,7 @@ describe Ability do
   end
 
   let :user do
-    double('user', :administrator? => false, :provider? => false, :roles => [role])
+    double('user', :administrator? => false, :creditor? => false, :roles => [role])
   end
 
   let :admin do
@@ -65,12 +65,12 @@ describe Ability do
     ability.should be_able_to :destroy, :something
   end
 
-  context 'ability for provider user' do
-    let :provider do
-      double('user', :administrator? => false, :provider? => true, :authenticable_id => 1)
+  context 'ability for creditor user' do
+    let :creditor do
+      double('user', :administrator? => false, :creditor? => true, :authenticable_id => 1)
     end
 
-    subject { Ability.new(provider) } 
+    subject { Ability.new(creditor) } 
 
     it 'should be able to access accounts and bookmarks' do
       subject.should be_able_to :access, :bookmarks

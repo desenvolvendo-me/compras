@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/cnae'
-require 'app/models/provider'
 require 'app/models/creditor'
 require 'app/models/creditor_secondary_cnae'
 
@@ -12,7 +11,6 @@ describe Cnae do
   end
 
   it { should belong_to :risk_degree }
-  it { should have_many(:providers).dependent(:restrict) }
   it { should have_many(:creditors) }
   it { should have_many(:creditors_with_main_cnae) }
   it { should have_many(:creditor_secondary_cnaes).dependent(:restrict) }

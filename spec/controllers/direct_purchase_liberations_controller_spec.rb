@@ -17,7 +17,7 @@ describe DirectPurchaseLiberationsController do
     end
 
     before do
-      controller.stub(:current_user).and_return double('User', :authenticable => authenticable, :provider? => false)
+      controller.stub(:current_user).and_return double('User', :authenticable => authenticable, :creditor? => false)
       DirectPurchase.stub(:find).and_return direct_purchase
 
       get :new, :direct_purchase_id => 1

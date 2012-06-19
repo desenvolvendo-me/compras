@@ -3,7 +3,7 @@ class Pledge < Compras::Model
   attr_accessible :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id
   attr_accessible :pledge_historic_id, :contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
-  attr_accessible :founded_debt_contract_id, :provider_id, :pledge_items_attributes
+  attr_accessible :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
   attr_accessible :pledge_parcels_attributes, :licitation_process_id, :expense_nature_id
 
   attr_readonly :code
@@ -13,7 +13,7 @@ class Pledge < Compras::Model
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type, :create_helpers => true
 
-  belongs_to :provider
+  belongs_to :creditor
   belongs_to :entity
   belongs_to :reserve_fund
   belongs_to :management_unit
@@ -46,7 +46,7 @@ class Pledge < Compras::Model
   delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
 
   validates :budget_allocation, :entity, :year, :management_unit, :presence => true
-  validates :emission_date, :pledge_type, :value, :provider, :presence => true
+  validates :emission_date, :pledge_type, :value, :creditor, :presence => true
   validates :expense_nature, :presence => true
   validates :code, :uniqueness => { :scope => [:year, :entity_id], :allow_blank => true }
   validate :value_should_not_be_greater_than_budget_allocation_real_amount

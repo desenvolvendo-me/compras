@@ -1,5 +1,5 @@
 LicitationProcessBidder.blueprint(:licitante) do
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   invited { true }
   protocol { "123456" }
   protocol_date { Date.current }
@@ -9,7 +9,7 @@ LicitationProcessBidder.blueprint(:licitante) do
 end
 
 LicitationProcessBidder.blueprint(:licitante_sobrinho) do
-  provider { Provider.make!(:sobrinho_sa) }
+  creditor { Creditor.make!(:sobrinho_sa) }
   invited { true }
   protocol { "123453" }
   protocol_date { Date.current }
@@ -18,7 +18,7 @@ LicitationProcessBidder.blueprint(:licitante_sobrinho) do
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_1) do
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   invited { true }
   protocol { "123456" }
   protocol_date { Date.current }
@@ -28,7 +28,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_1) do
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_2) do
-  provider { Provider.make!(:sobrinho_sa) }
+  creditor { Creditor.make!(:sobrinho_sa) }
   invited { true }
   protocol { "123456" }
   protocol_date { Date.current }

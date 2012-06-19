@@ -7,7 +7,7 @@ feature "Precatories" do
   end
 
   scenario 'create a new precatory' do
-    Provider.make!(:wenderson_sa)
+    Creditor.make!(:wenderson_sa)
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
     click_link 'Contabilidade'
@@ -18,7 +18,11 @@ feature "Precatories" do
 
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123456'
-      fill_modal 'Beneficiário', :field => 'CRC', :with => '456789'
+      within_modal 'Beneficiário' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
       fill_in 'Número da ação', :with => '001.111.2222/2012'
       fill_in 'Data do precatório', :with => '10/05/2012'
       fill_in 'Data da decisão judicial', :with => '05/01/2012'
@@ -129,7 +133,7 @@ feature "Precatories" do
 
   scenario 'update an existent precatory' do
     Precatory.make!(:precatorio)
-    Provider.make!(:sobrinho_sa)
+    Creditor.make!(:sobrinho_sa)
     PrecatoryType.make!(:ordinario_demais_casos)
 
     click_link 'Contabilidade'
@@ -142,7 +146,11 @@ feature "Precatories" do
 
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123455'
-      fill_modal 'Beneficiário', :field => 'CRC', :with => '123456'
+      within_modal 'Beneficiário' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Gabriel Sobrinho'
+      end
       fill_in 'Número da ação', :with => '002.111.2222/2012'
       fill_in 'Data do precatório', :with => '09/05/2012'
       fill_in 'Data da decisão judicial', :with => '06/01/2012'

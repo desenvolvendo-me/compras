@@ -42,7 +42,7 @@
   <thead>
     <tr>
       <th>
-        <%= resource_class.human_attribute_name :provider %>
+        <%= resource_class.human_attribute_name :creditor %>
       </th>
 
       <th>
@@ -62,7 +62,7 @@
   <tbody>
     <tr>
       <td>
-        <%= resource.provider %>
+        <%= resource.creditor %>
       </td>
 
       <td>
@@ -128,19 +128,21 @@
   </thead>
 
   <tbody>
+    <% resource.accounts.try(:each) do |account| %>
     <tr>
       <td>
-        <%= resource.bank_account %>
+        <%= account %>
       </td>
 
       <td>
-        <%= resource.agency %>
+        <%= account.agency %>
       </td>
 
       <td>
-        <%= resource.bank %>
+        <%= account.bank %>
       </td>
     </tr>
+    <% end %>
   </tbody>
 </table>
 

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 feature 'A user confirming your account' do
   let :user_without_password do
-    User.make!(:provider_without_password)
+    User.make!(:creditor_without_password)
   end
 
   scenario 'confirming my account' do

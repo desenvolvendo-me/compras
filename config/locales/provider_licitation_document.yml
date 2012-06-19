@@ -1,8 +1,0 @@
-pt-BR:
-  activerecord:
-    attributes:
-      provider_licitation_document:
-        document_type: Tipo de documento
-        document_number: Número do documento
-        emission_date: Data de emissão
-        expiration_date: Data de validade

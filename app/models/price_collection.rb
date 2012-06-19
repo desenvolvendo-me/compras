@@ -2,7 +2,7 @@ class PriceCollection < Compras::Model
   attr_accessible :collection_number, :year, :date, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :object_description, :observations, :expiration
   attr_accessible :period, :period_unit, :proposal_validity, :proposal_validity_unit
-  attr_accessible :price_collection_lots_attributes, :provider_ids, :type_of_calculation
+  attr_accessible :price_collection_lots_attributes, :creditor_ids, :type_of_calculation
   attr_accessible :price_collection_proposals_attributes
 
   attr_readonly :year, :collection_number
@@ -20,9 +20,9 @@ class PriceCollection < Compras::Model
   has_many :price_collection_lots, :dependent => :destroy, :order => :id
   has_many :items, :through => :price_collection_lots
   has_many :price_collection_proposals, :dependent => :destroy, :order => :id
-  has_many :providers, :through => :price_collection_proposals
+  has_many :creditors, :through => :price_collection_proposals
 
-  delegate :provider, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
+  delegate :creditor, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
 
   accepts_nested_attributes_for :price_collection_lots, :allow_destroy => true
   accepts_nested_attributes_for :price_collection_proposals, :allow_destroy => true

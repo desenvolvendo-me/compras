@@ -18,7 +18,7 @@ describe PurchaseSolicitationAnnulsController do
 
     before do
       PurchaseSolicitation.stub(:find).and_return purchase_solicitation
-      controller.stub(:current_user).and_return double('User', :authenticable => authenticable, :provider? => false)
+      controller.stub(:current_user).and_return double('User', :authenticable => authenticable, :creditor? => false)
 
       get :new
     end

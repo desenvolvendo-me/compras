@@ -6,7 +6,7 @@ class PriceCollectionLot < Compras::Model
   has_many :items, :class_name => 'PriceCollectionLotItem', :dependent => :destroy, :order => :id
   has_many :price_collection_proposals, :through => :price_collection
 
-  delegate :provider, :to => :winner_proposal, :allow_nil => true
+  delegate :creditor, :to => :winner_proposal, :allow_nil => true
   delegate :annulled?, :to => :price_collection, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true

@@ -12,7 +12,7 @@ class Ability
 
     if user.administrator?
       can :access, :all
-    elsif user.provider?
+    elsif user.creditor?
       can [:read, :update], :price_collection_proposals
     else
       user.roles.each do |role|

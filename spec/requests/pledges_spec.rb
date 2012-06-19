@@ -17,8 +17,8 @@ feature "Pledges" do
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
     Contract.make!(:primeiro_contrato)
-    Provider.make!(:wenderson_sa)
     Contract.make!(:contrato_detran)
+    Creditor.make!(:wenderson_sa)
     Material.make!(:arame_farpado)
 
     click_link 'Contabilidade'
@@ -40,7 +40,11 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
 
       page.should have_disabled_field 'Código'
     end
@@ -304,7 +308,7 @@ feature "Pledges" do
     LicitationModality.make!(:publica)
     LicitationProcess.make!(:processo_licitatorio)
     Contract.make!(:primeiro_contrato)
-    Provider.make!(:wenderson_sa)
+    Creditor.make!(:wenderson_sa)
     Contract.make!(:contrato_detran)
     Material.make!(:arame_farpado)
 
@@ -325,7 +329,12 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
     end
 
     within_tab 'Complementar' do
@@ -905,7 +914,11 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
     end
 
     click_button 'Salvar'

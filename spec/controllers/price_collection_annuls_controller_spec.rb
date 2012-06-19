@@ -17,7 +17,7 @@ describe PriceCollectionAnnulsController do
 
     before do
       PriceCollection.stub(:find).with("1").and_return price_collection
-      controller.stub(:current_user).and_return double(:authenticable => authenticable, :provider? => false)
+      controller.stub(:current_user).and_return double(:authenticable => authenticable, :creditor? => false)
 
       get :new, :price_collection_id => 1
     end

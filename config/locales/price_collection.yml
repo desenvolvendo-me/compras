@@ -20,5 +20,5 @@ pt-BR:
         proposal_validity: "Validade da proposta"
         proposal_validity_unit: "Unidade da validade da proposta"
         expiration: "Vencimento"
-        providers: "Fornecedor"
+        creditors: "Fornecedor"
         type_of_calculation: "Tipo de apuração"

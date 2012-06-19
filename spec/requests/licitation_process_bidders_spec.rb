@@ -31,7 +31,7 @@ feature "LicitationProcessBidders" do
 
   scenario 'creating a new bidder' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    Provider.make!(:sobrinho_sa)
+    Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
     Person.make!(:joao_da_silva)
 
@@ -53,7 +53,12 @@ feature "LicitationProcessBidders" do
     page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
     page.should have_field 'Processo administrativo', :with => '1/2013'
 
-    fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+    within_modal 'Fornecedor' do
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+      click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
+
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
@@ -145,7 +150,7 @@ feature "LicitationProcessBidders" do
 
   scenario 'updating an existing bidder' do
     LicitationProcess.make!(:processo_licitatorio_computador)
-    Provider.make!(:sobrinho_sa)
+    Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
 
     click_link 'Processos'
@@ -168,7 +173,12 @@ feature "LicitationProcessBidders" do
     page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
     page.should have_field 'Processo administrativo', :with => '1/2013'
 
-    fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
+    within_modal 'Fornecedor' do
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+      click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
+
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
@@ -339,7 +349,7 @@ feature "LicitationProcessBidders" do
     page.should have_disabled_field 'Data do recebimento'
   end
 
-  scenario 'validating uniqueness of provider on licitation process scope' do
+  scenario 'validating uniqueness of creditor on licitation process scope' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     click_link 'Processos'
@@ -356,7 +366,11 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Licitante'
 
-    fill_modal 'Fornecedor', :with => '456789', :field => 'Número do CRC'
+    within_modal 'Fornecedor' do
+      fill_modal 'Pessoa', :with => 'Wenderson', :field => 'Nome'
+      click_button 'Pesquisar'
+      click_record 'Wenderson'
+    end
 
     click_button 'Salvar'
 
@@ -703,7 +717,7 @@ feature "LicitationProcessBidders" do
 
   scenario 'create bidder link does show when envelope opening date is today' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    Provider.make!(:sobrinho_sa)
+    Creditor.make!(:sobrinho_sa)
 
     click_link 'Processos'
 

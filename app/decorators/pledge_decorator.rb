@@ -1,6 +1,6 @@
 class PledgeDecorator < Decorator
   attr_modal :id, :entity_id, :year, :emission_date, :management_unit_id,
-             :budget_allocation_id, :provider_id
+             :budget_allocation_id, :creditor_id
 
   def budget_allocation_real_amount
     helpers.number_with_precision super if super

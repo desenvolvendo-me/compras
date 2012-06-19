@@ -4,20 +4,20 @@ require 'app/models/licitation_process_bidder'
 require 'app/models/licitation_process_bidder_proposal'
 require 'app/models/licitation_process_bidder_document'
 require 'app/models/licitation_process'
-require 'app/models/provider'
+require 'app/models/creditor'
 require 'app/models/licitation_process_bidder'
 require 'app/models/accredited_representative'
 
 describe LicitationProcessBidder do
   it { should belong_to :licitation_process }
-  it { should belong_to :provider }
+  it { should belong_to :creditor }
 
   it { should have_many(:documents).dependent(:destroy).order(:id) }
   it { should have_many(:document_types).through(:documents) }
   it { should have_many(:accredited_representatives).dependent(:destroy) }
   it { should have_many(:people).through(:accredited_representatives) }
 
-  it { should validate_presence_of :provider }
+  it { should validate_presence_of :creditor }
 
   context "licitation kind" do
     before do
@@ -81,7 +81,7 @@ describe LicitationProcessBidder do
   end
 
   it 'should return licitation process  - id as to_s method' do
-    subject.stub(:provider => double(:to_s => 'Fulano'))
+    subject.stub(:creditor => double(:to_s => 'Fulano'))
 
     subject.to_s.should eq 'Fulano'
   end

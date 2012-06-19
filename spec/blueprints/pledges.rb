@@ -16,7 +16,7 @@ Pledge.blueprint(:empenho) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:contrato_detran) }
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
@@ -40,7 +40,7 @@ Pledge.blueprint(:empenho_com_dois_vencimentos) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio_computador) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:contrato_detran) }
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [
     PledgeParcel.make!(:vencimento_primario),
@@ -67,7 +67,7 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:contrato_detran) }
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)] }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
@@ -91,7 +91,7 @@ Pledge.blueprint(:empenho_saldo_maior_mil) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:contrato_detran) }
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
@@ -115,7 +115,7 @@ Pledge.blueprint(:empenho_estimativo) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:contrato_detran) }
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
@@ -139,7 +139,7 @@ Pledge.blueprint(:empenho_ordinario) do
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   description { 'Descricao' }
   founded_debt_contract { Contract.make!(:contrato_detran) }
-  provider { Provider.make!(:wenderson_sa) }
+  creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
   pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
