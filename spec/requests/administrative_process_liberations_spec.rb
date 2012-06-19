@@ -23,7 +23,7 @@ feature "AdministrativeProcessLiberations" do
     page.should have_content 'Liberação do Processo Administrativo 1/2012'
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-    fill_mask 'Data', :with => '15/06/2012'
+    fill_in 'Data', :with => '15/06/2012'
 
     click_button 'Salvar'
 

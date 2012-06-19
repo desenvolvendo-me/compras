@@ -68,7 +68,7 @@ feature "RevenueAccountings" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
-      fill_mask 'Exercício', :with => '2013'
+      fill_in 'Exercício', :with => '2013'
       fill_modal 'Natureza da receita', :with => '2012', :field => 'Exercício'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end

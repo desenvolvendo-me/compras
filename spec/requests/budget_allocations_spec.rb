@@ -97,7 +97,7 @@ feature "BudgetAllocations" do
       page.should have_disabled_field 'Código'
 
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_mask 'Exercício', :with => '2012'
+      fill_in 'Exercício', :with => '2012'
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
@@ -110,7 +110,7 @@ feature "BudgetAllocations" do
       select 'Nenhuma', :from => 'Tipo de dívida'
       fill_modal 'Tipo de dotação', :with => 'Dotação Administrativa', :field => 'Descrição'
       check 'Refinanciamento'
-      fill_mask 'Data', :with => '17/02/2012'
+      fill_in 'Data', :with => '17/02/2012'
     end
 
     within_tab 'Programação' do
