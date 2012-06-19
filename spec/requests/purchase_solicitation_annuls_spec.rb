@@ -58,7 +58,7 @@ feature 'PurchaseSolicitationAnnul' do
       click_record 'Gabriel Sobrinho'
     end
 
-    fill_mask 'Data', :with => '10/06/2012'
+    fill_in 'Data', :with => '10/06/2012'
     fill_in 'Justificativa', :with => 'Foo Bar'
 
     click_button 'Salvar'

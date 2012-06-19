@@ -20,13 +20,13 @@ feature "ReserveFunds" do
     click_link 'Criar Reserva de Dotação'
 
     fill_modal 'Entidade', :with => 'Detran'
-    fill_mask 'Exercício', :with => '2012'
+    fill_in 'Exercício', :with => '2012'
 
     page.should have_disabled_field 'Status'
     page.should have_select 'Status', :selected => 'Reservado'
 
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
-    fill_mask 'Data', :with => '22/02/2012'
+    fill_in 'Data', :with => '22/02/2012'
     fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
 
     page.should have_field 'Valor reservado', :with => '10,50'

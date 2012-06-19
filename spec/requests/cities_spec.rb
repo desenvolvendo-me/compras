@@ -16,7 +16,7 @@ feature "Cities" do
     click_link 'Criar Cidade'
 
     fill_in 'Nome', :with => 'Porto Alegre'
-    fill_mask 'Código', :with => '4929'
+    fill_in 'Código', :with => '4929'
     fill_modal 'Estado', :with => 'Rio Grande do Sul'
 
     click_button 'Salvar'
@@ -40,7 +40,7 @@ feature "Cities" do
     click_link 'Belo Horizonte'
 
     fill_in 'Nome', :with => 'B. Horizonte'
-    fill_mask 'Código', :with => 'BHORIZO'
+    fill_in 'Código', :with => 'BHORIZO'
 
     click_button 'Salvar'
 

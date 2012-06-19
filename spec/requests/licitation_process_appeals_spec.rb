@@ -17,12 +17,12 @@ feature "LicitationProcessAppeals" do
     click_link 'Criar Interposição de Recurso do Processo Licitatório'
 
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-    fill_mask 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
+    fill_in 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     select 'Edital', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Gabriel Sobrinho', :field => 'Nome'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
-    fill_mask 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-    fill_mask 'Nova hora da abertura dos envelopes', :with => '15:30'
+    fill_in 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    fill_in 'Nova hora da abertura dos envelopes', :with => '15:30'
     fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação'
     select 'Pendente', :from => 'Situação'
 
@@ -56,12 +56,12 @@ feature "LicitationProcessAppeals" do
     click_link interposicao_processo_licitatorio.to_s
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
-    fill_mask 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
+    fill_in 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     select 'Revogação', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Wenderson Malheiros', :field => 'Nome'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
-    fill_mask 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
-    fill_mask 'Nova hora da abertura dos envelopes', :with => '16:00'
+    fill_in 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
+    fill_in 'Nova hora da abertura dos envelopes', :with => '16:00'
     fill_in 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
     select 'Deferido', :from => 'Situação'
 

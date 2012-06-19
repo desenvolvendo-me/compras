@@ -20,9 +20,9 @@ feature "Precatories" do
       fill_in 'Número do precatório', :with => '123456'
       fill_modal 'Beneficiário', :field => 'CRC', :with => '456789'
       fill_in 'Número da ação', :with => '001.111.2222/2012'
-      fill_mask 'Data do precatório', :with => '10/05/2012'
-      fill_mask 'Data da decisão judicial', :with => '05/01/2012'
-      fill_mask 'Data da apresentação', :with => '10/01/2012'
+      fill_in 'Data do precatório', :with => '10/05/2012'
+      fill_in 'Data da decisão judicial', :with => '05/01/2012'
+      fill_in 'Data da apresentação', :with => '10/01/2012'
       fill_modal 'Tipo', :field => 'Descrição', :with => 'Precatórios Alimentares'
       fill_in 'Histórico', :with => 'Histórico'
     end
@@ -33,10 +33,10 @@ feature "Precatories" do
       click_button 'Adicionar Parcela'
 
       within '.parcel:first' do
-        fill_mask 'Data do vencimento', :with => '15/05/2012'
+        fill_in 'Data do vencimento', :with => '15/05/2012'
         fill_in 'Valor', :with => '10.000.000,00'
         select 'Pago', :from => 'Situação'
-        fill_mask 'Data do pagamento', :with => '15/05/2012'
+        fill_in 'Data do pagamento', :with => '15/05/2012'
         fill_in 'Valor pago', :with => '10.000.000,00'
         fill_in 'Observação', :with => 'pagamento efetuado'
 
@@ -46,7 +46,7 @@ feature "Precatories" do
       click_button 'Adicionar Parcela'
 
       within '.parcel:last' do
-        fill_mask 'Data do vencimento', :with => '15/06/2012'
+        fill_in 'Data do vencimento', :with => '15/06/2012'
         fill_in 'Valor', :with => '10.000.000,00'
         select 'A vencer', :from => 'Situação'
         fill_in 'Valor pago', :with => '0,00'
@@ -144,9 +144,9 @@ feature "Precatories" do
       fill_in 'Número do precatório', :with => '123455'
       fill_modal 'Beneficiário', :field => 'CRC', :with => '123456'
       fill_in 'Número da ação', :with => '002.111.2222/2012'
-      fill_mask 'Data do precatório', :with => '09/05/2012'
-      fill_mask 'Data da decisão judicial', :with => '06/01/2012'
-      fill_mask 'Data da apresentação', :with => '11/01/2012'
+      fill_in 'Data do precatório', :with => '09/05/2012'
+      fill_in 'Data da decisão judicial', :with => '06/01/2012'
+      fill_in 'Data da apresentação', :with => '11/01/2012'
       fill_modal 'Tipo', :field => 'Descrição', :with => 'Ordinário - Demais Casos'
       fill_in 'Histórico', :with => 'Histórico atualizado'
     end

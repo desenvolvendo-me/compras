@@ -19,7 +19,7 @@ feature "LicitationProcessImpugnments" do
     page.should have_select 'Situação', :selected => 'Pendente'
 
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-    fill_mask 'Data da impugnação', :with => I18n.l(Date.current + 2.days)
+    fill_in 'Data da impugnação', :with => I18n.l(Date.current + 2.days)
     select 'Pregão', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Gabriel Sobrinho', :field => 'Nome'
     fill_in 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'
@@ -59,7 +59,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link licitation_process_impugnment.to_s
 
-    fill_mask 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
+    fill_in 'Data da impugnação', :with => I18n.l(Date.current + 1.year + 2.days)
     select 'Pregão', :from => 'Referente ao'
     fill_modal 'Autor', :with => 'Gabriel Sobrinho', :field => 'Nome'
     fill_in 'Motivo fundamentado da impugnação', :with => 'Não há a necessidade de comprar cadeiras.'

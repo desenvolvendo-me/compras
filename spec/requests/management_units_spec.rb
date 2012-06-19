@@ -16,7 +16,7 @@ feature "ManagementUnits" do
     click_link 'Criar Unidade Gestora'
 
     fill_modal 'Entidade', :with => 'Detran'
-    fill_mask 'Exercício', :with => '2012'
+    fill_in 'Exercício', :with => '2012'
     fill_in 'Descrição', :with => 'Unidade Central'
     fill_in 'Sigla', :with => 'UGC'
     page.should have_disabled_field 'Status'
@@ -46,7 +46,7 @@ feature "ManagementUnits" do
     click_link 'Unidade Central'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Exercício', :with => '2013'
     fill_in 'Descrição', :with => 'Unidade Auxiliar'
     fill_in 'Sigla', :with => 'UGA'
     select 'Inativo', :from => 'Status'

@@ -16,7 +16,7 @@ feature "LicitationObjects" do
     click_link 'Criar Objeto de Licitação'
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2012'
+      fill_in 'Ano', :with => '2012'
       fill_in 'Descrição', :with => 'Ponte'
     end
 
@@ -151,7 +151,7 @@ feature "LicitationObjects" do
     click_link 'Ponte'
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2013'
+      fill_in 'Ano', :with => '2013'
       fill_in 'Descrição', :with => 'Viaduto'
     end
 
@@ -202,7 +202,7 @@ feature "LicitationObjects" do
     click_link 'Criar Objeto de Licitação'
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2012'
+      fill_in 'Ano', :with => '2012'
       fill_in 'Descrição', :with => 'Ponte'
     end
 

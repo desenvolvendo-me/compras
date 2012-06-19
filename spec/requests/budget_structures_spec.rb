@@ -22,7 +22,7 @@ feature "BudgetStructure" do
       fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
       fill_modal 'Nível', :with => '1', :field => 'Nível'
-      fill_mask 'Código', :with => '1'
+      fill_in 'Código', :with => '1'
       page.should have_field 'Estrutura orçamentária', :with => '1'
       fill_in 'Código TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
@@ -34,7 +34,7 @@ feature "BudgetStructure" do
     within_tab 'Endereços' do
       fill_modal 'Logradouro', :with => 'Girassol'
       fill_modal 'Bairro', :with => 'São Francisco'
-      fill_mask 'CEP', :with => "33400-500"
+      fill_in 'CEP', :with => "33400-500"
     end
 
     within_tab 'Responsáveis' do
@@ -42,8 +42,8 @@ feature "BudgetStructure" do
 
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-      fill_mask 'Data de início', :with => '01/02/2012'
-      fill_mask 'Data de término', :with => '10/02/2012'
+      fill_in 'Data de início', :with => '01/02/2012'
+      fill_in 'Data de término', :with => '10/02/2012'
       select 'Ativo', :from => 'Status'
     end
 
@@ -96,7 +96,7 @@ feature "BudgetStructure" do
 
     within_tab 'Informações' do
       fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
-      fill_mask 'Código', :with => '2'
+      fill_in 'Código', :with => '2'
       page.should have_field 'Estrutura orçamentária', :with => '2'
       fill_in 'Código TCE', :with => '081'
       fill_in 'Descrição', :with => 'Secretaria de Transporte'
@@ -108,14 +108,14 @@ feature "BudgetStructure" do
     within_tab 'Endereços' do
       fill_modal 'Logradouro', :with => 'Amazonas'
       fill_modal 'Bairro', :with => 'Portugal'
-      fill_mask 'CEP', :with => '33600-500'
+      fill_in 'CEP', :with => '33600-500'
     end
 
     within_tab 'Responsáveis' do
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
-      fill_mask 'Data de início', :with => '01/02/2012'
-      fill_mask 'Data de término', :with => '10/02/2012'
+      fill_in 'Data de início', :with => '01/02/2012'
+      fill_in 'Data de término', :with => '10/02/2012'
       select 'Inativo', :from => 'Status'
     end
 
@@ -170,7 +170,7 @@ feature "BudgetStructure" do
       fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
       fill_modal 'Nível', :with => '1', :field => 'Nível'
-      fill_mask 'Código', :with => '1'
+      fill_in 'Código', :with => '1'
       page.should have_field 'Estrutura orçamentária', :with => '1'
       fill_in 'Código TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
@@ -182,7 +182,7 @@ feature "BudgetStructure" do
     within_tab 'Endereços' do
       fill_modal 'Logradouro', :with => 'Girassol'
       fill_modal 'Bairro', :with => 'São Francisco'
-      fill_mask 'CEP', :with => "33400-500"
+      fill_in 'CEP', :with => "33400-500"
     end
 
     within_tab 'Responsáveis' do
@@ -190,8 +190,8 @@ feature "BudgetStructure" do
 
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-      fill_mask 'Data de início', :with => '01/02/2012'
-      fill_mask 'Data de término', :with => '10/02/2012'
+      fill_in 'Data de início', :with => '01/02/2012'
+      fill_in 'Data de término', :with => '10/02/2012'
       select 'Ativo', :from => 'Status'
     end
 
@@ -313,7 +313,7 @@ feature "BudgetStructure" do
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
       fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
-      fill_mask 'Estrutura orçamentária', :with => '02.00'
+      fill_in 'Estrutura orçamentária', :with => '02.00'
       select 'Analítico', :from => 'Tipo'
       fill_in 'Código TCE', :with => '051'
       fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
@@ -323,7 +323,7 @@ feature "BudgetStructure" do
     within_tab 'Endereços' do
       fill_modal 'Logradouro', :with => 'Girassol'
       fill_modal 'Bairro', :with => 'São Francisco'
-      fill_mask 'CEP', :with => "33400-500"
+      fill_in 'CEP', :with => "33400-500"
     end
 
     within_tab 'Responsáveis' do
@@ -331,8 +331,8 @@ feature "BudgetStructure" do
 
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-      fill_mask 'Data de início', :with => '01/02/2012'
-      fill_mask 'Data de término', :with => '10/02/2012'
+      fill_in 'Data de início', :with => '01/02/2012'
+      fill_in 'Data de término', :with => '10/02/2012'
       select 'Ativo', :from => 'Status'
 
       click_button 'Adicionar Responsável'
@@ -340,8 +340,8 @@ feature "BudgetStructure" do
       within 'fieldset:first' do
         fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
         fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-        fill_mask 'Data de início', :with => '01/02/2012'
-        fill_mask 'Data de término', :with => '10/02/2012'
+        fill_in 'Data de início', :with => '01/02/2012'
+        fill_in 'Data de término', :with => '10/02/2012'
         select 'Ativo', :from => 'Status'
       end
     end

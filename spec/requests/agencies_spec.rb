@@ -23,8 +23,8 @@ feature "Agencies" do
     fill_modal 'Cidade', :with => 'Belo Horizonte'
     fill_modal 'Banco', :with => 'Banco do Brasil'
 
-    fill_mask 'Telefone', :with => '(33) 3333-3333'
-    fill_mask 'Fax', :with => '(99) 9999-9999'
+    fill_in 'Telefone', :with => '(33) 3333-3333'
+    fill_in 'Fax', :with => '(99) 9999-9999'
     fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
 
     click_button 'Salvar'

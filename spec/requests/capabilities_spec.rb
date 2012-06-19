@@ -16,7 +16,7 @@ feature "Capabilities" do
     click_link 'Criar Recurso'
 
     fill_modal 'Entidade', :with => 'Detran'
-    fill_mask 'Exercício', :with => '2012'
+    fill_in 'Exercício', :with => '2012'
     fill_in 'Descrição', :with => 'Reforma e Ampliação'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     select 'Ordinário', :from => 'Tipo'
@@ -47,7 +47,7 @@ feature "Capabilities" do
     click_link 'Reforma e Ampliação'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Exercício', :with => '2013'
     fill_in 'Descrição', :with => 'Reforma e Ampliação do Posto'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios no posto'
     select 'Vinculado', :from => 'Tipo'

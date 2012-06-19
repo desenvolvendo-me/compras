@@ -24,8 +24,8 @@ feature "PriceCollections" do
       page.should have_disabled_field 'Status'
       page.should have_select 'Status', :selected => 'Ativo'
 
-      fill_mask 'Ano', :with => '2012'
-      fill_mask 'Data', :with => I18n.l(Date.current)
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data', :with => I18n.l(Date.current)
       select 'Menor preço total por item', :from => 'Tipo de apuração'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -34,7 +34,7 @@ feature "PriceCollections" do
       select 'ano/anos', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano/anos', :from => 'Unidade da validade da proposta'
-      fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
+      fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
@@ -84,8 +84,8 @@ feature "PriceCollections" do
       page.should have_disabled_field 'Status'
       page.should have_select 'Status', :selected => 'Ativo'
 
-      fill_mask 'Ano', :with => '2012'
-      fill_mask 'Data', :with => I18n.l(Date.current)
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data', :with => I18n.l(Date.current)
       select 'Menor preço total por item', :from => 'Tipo de apuração'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -94,7 +94,7 @@ feature "PriceCollections" do
       select 'ano/anos', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano/anos', :from => 'Unidade da validade da proposta'
-      fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
+      fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
@@ -195,7 +195,7 @@ feature "PriceCollections" do
     end
 
     within_tab 'Principal' do
-      fill_mask 'Data', :with => I18n.l(Date.current + 10.days)
+      fill_in 'Data', :with => I18n.l(Date.current + 10.days)
       fill_modal 'Local de entrega', :with => 'Secretaria da Saúde', :field => 'Descrição'
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
@@ -203,7 +203,7 @@ feature "PriceCollections" do
       select 'mês/meses', :from => 'Período'
       fill_in 'Validade da proposta', :with => '3'
       select 'mês/meses', :from => 'Unidade da validade da proposta'
-      fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
+      fill_in 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
       fill_in 'Objeto', :with => 'novo objeto da coleta'
       fill_in 'Observações', :with => 'novo observacoes da coleta'
     end
@@ -305,8 +305,8 @@ feature "PriceCollections" do
     click_link 'Criar Coleta de Preços'
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2012'
-      fill_mask 'Data', :with => I18n.l(Date.current)
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data', :with => I18n.l(Date.current)
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -314,7 +314,7 @@ feature "PriceCollections" do
       select 'ano/anos', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano/anos', :from => 'Unidade da validade da proposta'
-      fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
+      fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
@@ -416,8 +416,8 @@ feature "PriceCollections" do
       page.should have_disabled_field 'Status'
       page.should have_select 'Status', :selected => 'Ativo'
 
-      fill_mask 'Ano', :with => '2012'
-      fill_mask 'Data', :with => I18n.l(Date.current)
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data', :with => I18n.l(Date.current)
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -425,7 +425,7 @@ feature "PriceCollections" do
       select 'ano/anos', :from => 'Período'
       fill_in 'Validade da proposta', :with => '1'
       select 'ano/anos', :from => 'Unidade da validade da proposta'
-      fill_mask 'Vencimento', :with => I18n.l(Date.tomorrow)
+      fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end

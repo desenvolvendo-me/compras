@@ -15,12 +15,12 @@ feature "Contracts" do
 
     click_link 'Criar Contrato'
 
-    fill_mask 'Exercício', :with => '2012'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Entidade', :with => 'Detran'
     fill_in 'Número do contrato', :with => '001'
     fill_in 'Número do processo', :with => '002'
-    fill_mask 'Data da assinatura', :with => '01/01/2012'
-    fill_mask 'Data do término', :with => '30/12/2012'
+    fill_in 'Data da assinatura', :with => '01/01/2012'
+    fill_in 'Data do término', :with => '30/12/2012'
     select 'Contrato de dívida', :from => 'Tipo'
     fill_in 'Objeto', :with => 'Objeto'
 
@@ -54,12 +54,12 @@ feature "Contracts" do
       page.find('a').click
     end
 
-    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Exercício', :with => '2013'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Número do contrato', :with => '111'
     fill_in 'Número do processo', :with => '222'
-    fill_mask 'Data da assinatura', :with => '01/01/2013'
-    fill_mask 'Data do término', :with => '30/12/2013'
+    fill_in 'Data da assinatura', :with => '01/01/2013'
+    fill_in 'Data do término', :with => '30/12/2013'
     select 'Contrato de gestão', :from => 'Tipo'
     fill_in 'Objeto', :with => 'Novo Objeto'
 

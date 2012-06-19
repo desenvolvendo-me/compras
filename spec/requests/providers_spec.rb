@@ -26,14 +26,14 @@ feature "Providers" do
 
     within_tab 'Principal'do
       fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
-      fill_mask 'Data do cadastramento', :with => '15/02/2012'
+      fill_in 'Data do cadastramento', :with => '15/02/2012'
       fill_modal 'Banco', :with => 'Itaú'
       fill_modal 'Agência', :with => 'Agência Itaú'
       fill_in 'C/C', :with => '123456'
       fill_in 'Número do CRC', :with => '456789'
-      fill_mask 'Data da inscrição', :with => '26/02/2012'
-      fill_mask 'Data de validade', :with => '27/02/2012'
-      fill_mask 'Data da renovação', :with => '28/02/2012'
+      fill_in 'Data da inscrição', :with => '26/02/2012'
+      fill_in 'Data de validade', :with => '27/02/2012'
+      fill_in 'Data da renovação', :with => '28/02/2012'
       fill_modal 'Natureza jurídica', :with => 'Administração Pública'
       fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
     end
@@ -43,7 +43,7 @@ feature "Providers" do
 
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       select 'Membro do quadro societário', :from => 'Função'
-      fill_mask 'Data', :with => '25/02/2012'
+      fill_in 'Data', :with => '25/02/2012'
     end
 
     within_tab 'Grupos/Classes/Materiais fornecidos' do
@@ -57,8 +57,8 @@ feature "Providers" do
 
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
       fill_in 'Número do documento', :with => '123456'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
-      fill_mask 'Data de validade', :with => I18n.l(Date.current + 5.days)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de validade', :with => I18n.l(Date.current + 5.days)
     end
 
     click_button 'Salvar'
@@ -126,14 +126,14 @@ feature "Providers" do
 
     within_tab 'Principal'do
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-      fill_mask 'Data do cadastramento', :with => '15/02/2013'
+      fill_in 'Data do cadastramento', :with => '15/02/2013'
       fill_modal 'Banco', :with => 'Santander'
       fill_modal 'Agência', :with => 'Agência Santander'
       fill_in 'C/C', :with => '456789'
       fill_in 'Número do CRC', :with => '147258'
-      fill_mask 'Data da inscrição', :with => '26/02/2013'
-      fill_mask 'Data de validade', :with => '27/02/2013'
-      fill_mask 'Data da renovação', :with => '28/02/2013'
+      fill_in 'Data da inscrição', :with => '26/02/2013'
+      fill_in 'Data de validade', :with => '27/02/2013'
+      fill_in 'Data da renovação', :with => '28/02/2013'
       fill_modal 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
       fill_modal 'CNAE', :with => 'Comércio varejista de mercadorias em geral', :field => 'Descrição'
     end
@@ -147,8 +147,8 @@ feature "Providers" do
     within_tab 'Documentação para licitações' do
       fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
       fill_in 'Número do documento', :with => '2222222'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.yesterday)
-      fill_mask 'Data de validade', :with => I18n.l(Date.tomorrow + 5.days)
+      fill_in 'Data de emissão', :with => I18n.l(Date.yesterday)
+      fill_in 'Data de validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
     click_button 'Salvar'
@@ -203,14 +203,14 @@ feature "Providers" do
     within_tab 'Principal'do
       fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
       fill_modal 'Pessoa', :with => 'Nohup'
-      fill_mask 'Data do cadastramento', :with => '15/02/2012'
+      fill_in 'Data do cadastramento', :with => '15/02/2012'
       fill_modal 'Banco', :with => 'Itaú'
       fill_modal 'Agência', :with => 'Agência Itaú'
       fill_in 'C/C', :with => '123456'
       fill_in 'Número do CRC', :with => '456789'
-      fill_mask 'Data da inscrição', :with => '26/02/2012'
-      fill_mask 'Data de validade', :with => '27/02/2012'
-      fill_mask 'Data da renovação', :with => '28/02/2012'
+      fill_in 'Data da inscrição', :with => '26/02/2012'
+      fill_in 'Data de validade', :with => '27/02/2012'
+      fill_in 'Data da renovação', :with => '28/02/2012'
       fill_modal 'Natureza jurídica', :with => 'Administração Pública'
       fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
     end
@@ -220,7 +220,7 @@ feature "Providers" do
 
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       select 'Membro do quadro societário', :from => 'Função'
-      fill_mask 'Data', :with => '25/02/2012'
+      fill_in 'Data', :with => '25/02/2012'
     end
 
     click_button 'Salvar'
@@ -397,14 +397,14 @@ feature "Providers" do
     within_tab 'Principal'do
       fill_modal 'Cadastro econômico', :with => '00001', :field => 'Inscrição'
       fill_modal 'Pessoa', :with => 'Nohup'
-      fill_mask 'Data do cadastramento', :with => '15/02/2012'
+      fill_in 'Data do cadastramento', :with => '15/02/2012'
       fill_modal 'Banco', :with => 'Itaú'
       fill_modal 'Agência', :with => 'Agência Itaú'
       fill_in 'C/C', :with => '123456'
       fill_in 'Número do CRC', :with => '456789'
-      fill_mask 'Data da inscrição', :with => '26/02/2012'
-      fill_mask 'Data de validade', :with => '27/02/2012'
-      fill_mask 'Data da renovação', :with => '28/02/2012'
+      fill_in 'Data da inscrição', :with => '26/02/2012'
+      fill_in 'Data de validade', :with => '27/02/2012'
+      fill_in 'Data da renovação', :with => '28/02/2012'
       fill_modal 'Natureza jurídica', :with => 'Administração Pública'
       fill_modal 'CNAE', :with => 'Aluguel de outras máquinas', :field => 'Descrição'
     end
@@ -414,14 +414,14 @@ feature "Providers" do
 
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       select 'Membro do quadro societário', :from => 'Função'
-      fill_mask 'Data', :with => '25/02/2012'
+      fill_in 'Data', :with => '25/02/2012'
 
       click_button 'Adicionar'
 
       within '.provider-partner:first' do
         fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
         select 'Membro do quadro societário', :from => 'Função'
-        fill_mask 'Data', :with => '25/02/2012'
+        fill_in 'Data', :with => '25/02/2012'
       end
     end
 

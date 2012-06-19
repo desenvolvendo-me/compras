@@ -19,10 +19,10 @@ feature "RegulatoryActs" do
       fill_in 'Número', :with => '1234'
       fill_modal 'Tipo', :with => 'Lei', :field => 'Descrição'
       fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Cívica', :field => 'Descrição'
-      fill_mask 'Data da criação', :with => '01/01/2012'
-      fill_mask 'Data da publicação', :with => '02/01/2012'
-      fill_mask 'Data a vigorar', :with => '03/01/2012'
-      fill_mask 'Data do término', :with => '09/01/2012'
+      fill_in 'Data da criação', :with => '01/01/2012'
+      fill_in 'Data da publicação', :with => '02/01/2012'
+      fill_in 'Data a vigorar', :with => '03/01/2012'
+      fill_in 'Data do término', :with => '09/01/2012'
       fill_in 'Ementa', :with => 'conteudo'
     end
 
@@ -81,10 +81,10 @@ feature "RegulatoryActs" do
       fill_in 'Número', :with => '6789'
       fill_modal 'Tipo', :with => 'Emenda constitucional', :field => 'Descrição'
       fill_modal 'Natureza legal do texto jurídico', :with => 'Natureza Trabalhista', :field => 'Descrição'
-      fill_mask 'Data da criação', :with => '01/01/2013'
-      fill_mask 'Data da publicação', :with => '02/01/2013'
-      fill_mask 'Data a vigorar', :with => '03/01/2013'
-      fill_mask 'Data do término', :with => '09/01/2013'
+      fill_in 'Data da criação', :with => '01/01/2013'
+      fill_in 'Data da publicação', :with => '02/01/2013'
+      fill_in 'Data a vigorar', :with => '03/01/2013'
+      fill_in 'Data do término', :with => '09/01/2013'
       fill_in 'Ementa', :with => 'novo conteudo'
     end
 

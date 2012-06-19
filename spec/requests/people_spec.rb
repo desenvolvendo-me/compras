@@ -23,21 +23,21 @@ feature "People" do
       choose 'Masculino'
       fill_in 'Mãe', :with => 'Alaine Agnes'
       fill_in 'Pai', :with => "Wenderson Primeiro"
-      fill_mask "CPF", :with => '003.215.785-11'
-      fill_mask 'Data de nascimento', :with => '21/03/1973'
+      fill_in "CPF", :with => '003.215.785-11'
+      fill_in 'Data de nascimento', :with => '21/03/1973'
     end
 
     within_tab 'Identidade' do
       fill_in 'Número', :with => 'MG23912702'
       fill_in 'Orgão emissor', :with => 'SSP-MG'
-      fill_mask 'Data de emissão', :with => '03/07/2004'
+      fill_in 'Data de emissão', :with => '03/07/2004'
       fill_modal 'Estado', :with => 'Minas Gerais'
     end
 
     within_tab 'Contato' do
-      fill_mask 'Telefone', :with => '(33) 3333-3333'
-      fill_mask 'Celular', :with => '(33) 3333-3334'
-      fill_mask 'Fax', :with => '(99) 9999-9999'
+      fill_in 'Telefone', :with => '(33) 3333-3333'
+      fill_in 'Celular', :with => '(33) 3333-3334'
+      fill_in 'Fax', :with => '(99) 9999-9999'
       fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     end
 
@@ -45,14 +45,14 @@ feature "People" do
       fill_modal 'Logradouro', :with => 'Amazonas'
       fill_in "Complemento", :with => "Apartamento 12"
       fill_modal 'Bairro', :with => 'Portugal'
-      fill_mask "CEP", :with => "31400-223"
+      fill_in "CEP", :with => "31400-223"
 
       click_button 'Adicionar Endereço de Correspondência'
 
       within_fieldset 'Endereço de Correspondência' do
         fill_modal 'Logradouro', :with => 'Amazonas'
         fill_modal 'Bairro', :with => 'Portugal'
-        fill_mask 'CEP', :with => '89009-187'
+        fill_in 'CEP', :with => '89009-187'
       end
     end
 
@@ -116,7 +116,7 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      fill_mask "CEP", :with => "41600-223"
+      fill_in "CEP", :with => "41600-223"
       fill_in 'Complemento', :with => "Apto das alfalfas"
     end
 
@@ -171,10 +171,10 @@ feature "People" do
 
     within_tab "Contribuinte" do
       fill_in 'Nome', :with => 'Nohup'
-      fill_mask 'CNPJ', :with => '00.000.000/9983-03'
+      fill_in 'CNPJ', :with => '00.000.000/9983-03'
       fill_in 'Inscrição estadual', :with => '01237070'
       fill_in 'Número do registro na junta comercial', :with => '1234909034'
-      fill_mask 'Data do registro na junta comercial', :with => '30/06/2011'
+      fill_in 'Data do registro na junta comercial', :with => '30/06/2011'
       fill_modal "Natureza jurídica", :with => 'Administração Pública'
       fill_modal "Pessoa responsável pela empresa", :with => "Wenderson"
       fill_in 'Função do responsável', :with => 'Administrador'
@@ -183,9 +183,9 @@ feature "People" do
     end
 
     within_tab 'Contato' do
-      fill_mask 'Telefone', :with => '(11) 7070-6432'
-      fill_mask 'Celular', :with => '(11) 9090-3334'
-      fill_mask 'Fax', :with => '(99) 1111-2222'
+      fill_in 'Telefone', :with => '(11) 7070-6432'
+      fill_in 'Celular', :with => '(11) 9090-3334'
+      fill_in 'Fax', :with => '(99) 1111-2222'
       fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     end
 
@@ -193,7 +193,7 @@ feature "People" do
       fill_modal 'Logradouro', :with => 'Bento Gonçalves'
       fill_in 'Complemento', :with => 'Setor 7, Sala 2'
       fill_modal 'Bairro', :with => 'Portugal'
-      fill_mask "CEP", :with => "31600-223"
+      fill_in "CEP", :with => "31600-223"
 
       click_button 'Adicionar Endereço de Correspondência'
 
@@ -201,7 +201,7 @@ feature "People" do
         fill_modal 'Logradouro', :with => 'Bento Gonçalves'
         fill_in 'Complemento', :with => 'Setor 7, Sala 2'
         fill_modal 'Bairro', :with => 'Portugal'
-        fill_mask "CEP", :with => "31600-223"
+        fill_in "CEP", :with => "31600-223"
       end
     end
 
@@ -276,7 +276,7 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      fill_mask 'CEP', :with => '55554-333'
+      fill_in 'CEP', :with => '55554-333'
       fill_in 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
     end
 
@@ -358,9 +358,9 @@ feature "People" do
     end
 
     within_tab 'Contato' do
-      fill_mask 'Telefone', :with => '(33) 3333-3333'
-      fill_mask 'Celular', :with => '(33) 3333-3334'
-      fill_mask 'Fax', :with => '(99) 9999-9999'
+      fill_in 'Telefone', :with => '(33) 3333-3333'
+      fill_in 'Celular', :with => '(33) 3333-3334'
+      fill_in 'Fax', :with => '(99) 9999-9999'
       fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     end
 
@@ -368,14 +368,14 @@ feature "People" do
       fill_modal 'Logradouro', :with => 'Amazonas'
       fill_in "Complemento", :with => "Apartamento 12"
       fill_modal 'Bairro', :with => 'Portugal'
-      fill_mask "CEP", :with => "31400-223"
+      fill_in "CEP", :with => "31400-223"
 
       click_button 'Adicionar Endereço de Correspondência'
 
       within_fieldset 'Endereço de Correspondência' do
         fill_modal 'Logradouro', :with => 'Amazonas'
         fill_modal 'Bairro', :with => 'Portugal'
-        fill_mask 'CEP', :with => '89009-187'
+        fill_in 'CEP', :with => '89009-187'
       end
     end
 
@@ -428,7 +428,7 @@ feature "People" do
     end
 
     within_tab 'Endereço' do
-      fill_mask "CEP", :with => "41600-223"
+      fill_in "CEP", :with => "41600-223"
       fill_in 'Complemento', :with => "Apto das alfalfas"
     end
 

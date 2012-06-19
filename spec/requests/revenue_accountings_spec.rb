@@ -21,7 +21,7 @@ feature "RevenueAccountings" do
       page.should have_disabled_field 'Código'
 
       fill_modal 'Entidade', :with => 'Detran'
-      fill_mask 'Exercício', :with => '2012'
+      fill_in 'Exercício', :with => '2012'
       fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
@@ -158,7 +158,7 @@ feature "RevenueAccountings" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_mask 'Exercício', :with => '2011'
+      fill_in 'Exercício', :with => '2011'
       fill_modal 'Natureza da receita', :with => '2012', :field => 'Exercício'
       fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
     end

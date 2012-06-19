@@ -18,15 +18,6 @@ module Helpers
     page.should have_notice 'Login efetuado com sucesso.'
   end
 
-  def fill_mask(locator, options = {})
-    msg = "cannot fill in, no text field with id, name, or label '#{locator}' found"
-    raise "Must pass a hash containing 'with'" if not options.is_a?(Hash) or not options.has_key?(:with)
-
-    field = find(:xpath, XPath::HTML.fillable_field(locator), :message => msg)
-    page.execute_script %{document.getElementById('#{field[:id]}').value = '#{options[:with]}'}
-    field.trigger('blur')
-  end
-
   def clear_modal(locator)
     page.should have_field locator
 

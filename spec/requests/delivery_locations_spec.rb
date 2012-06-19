@@ -27,7 +27,7 @@ feature "DeliveryLocations" do
 
     page.should have_field "Cidade", :with => 'Curitiba'
 
-    fill_mask 'CEP', :with => '88900-000'
+    fill_in 'CEP', :with => '88900-000'
 
     page.should have_field "Estado", :with => 'Parana'
 
@@ -73,7 +73,7 @@ feature "DeliveryLocations" do
 
     page.should have_field "Cidade", :with => 'Curitiba'
 
-    fill_mask 'CEP', :with => '88900-000'
+    fill_in 'CEP', :with => '88900-000'
 
     page.should have_field "Estado", :with => 'Parana'
 
@@ -131,7 +131,7 @@ feature "DeliveryLocations" do
     fill_modal 'Bairro', :with => 'São Francisco'
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
-    fill_mask 'CEP', :with => '88900-000'
+    fill_in 'CEP', :with => '88900-000'
 
     click_button 'Salvar'
 

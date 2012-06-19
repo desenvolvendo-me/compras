@@ -27,7 +27,7 @@ feature "JudgmentCommissionAdvices" do
     click_link 'Criar Parecer da Comissão Julgadora'
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2012'
+      fill_in 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
       # testing delegated president name from licitation commission
@@ -60,10 +60,10 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Parecer' do
-      fill_mask "Data do início do julgamento", :with => "20/01/2012"
-      fill_mask "Hora do início do julgamento", :with => "12:00"
-      fill_mask "Data do fim do julgamento", :with => "21/01/2012"
-      fill_mask "Hora do fim do julgamento", :with => "13:00"
+      fill_in "Data do início do julgamento", :with => "20/01/2012"
+      fill_in "Hora do início do julgamento", :with => "12:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2012"
+      fill_in "Hora do fim do julgamento", :with => "13:00"
       fill_in "Texto da ata sobre as empresas licitantes", :with => "texto 1"
       fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
       fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
@@ -141,7 +141,7 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2013'
+      fill_in 'Ano', :with => '2013'
       fill_modal 'Comissão julgadora', :with => '20/04/2012', :field => 'Data da nomeação'
     end
 
@@ -156,10 +156,10 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Parecer' do
-      fill_mask "Data do início do julgamento", :with => "20/01/2013"
-      fill_mask "Hora do início do julgamento", :with => "14:00"
-      fill_mask "Data do fim do julgamento", :with => "21/01/2013"
-      fill_mask "Hora do fim do julgamento", :with => "15:00"
+      fill_in "Data do início do julgamento", :with => "20/01/2013"
+      fill_in "Hora do início do julgamento", :with => "14:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2013"
+      fill_in "Hora do fim do julgamento", :with => "15:00"
       fill_in "Texto da ata sobre as empresas licitantes", :with => "novo texto 1"
       fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "novo texto 2"
       fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "novo texto 3"
@@ -245,15 +245,15 @@ feature "JudgmentCommissionAdvices" do
     click_link 'Criar Parecer da Comissão Julgadora'
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2012'
+      fill_in 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
     end
 
     within_tab 'Parecer' do
-      fill_mask "Data do início do julgamento", :with => "20/01/2012"
-      fill_mask "Hora do início do julgamento", :with => "12:00"
-      fill_mask "Data do fim do julgamento", :with => "21/01/2012"
-      fill_mask "Hora do fim do julgamento", :with => "13:00"
+      fill_in "Data do início do julgamento", :with => "20/01/2012"
+      fill_in "Hora do início do julgamento", :with => "12:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2012"
+      fill_in "Hora do fim do julgamento", :with => "13:00"
       fill_in "Texto da ata sobre as empresas licitantes", :with => "texto 1"
       fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
       fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
@@ -292,7 +292,7 @@ feature "JudgmentCommissionAdvices" do
     click_link 'Criar Parecer da Comissão Julgadora'
 
     within_tab 'Principal' do
-      fill_mask 'Ano', :with => '2012'
+      fill_in 'Ano', :with => '2012'
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
       # testing delegated president name from licitation commission
@@ -321,10 +321,10 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Parecer' do
-      fill_mask "Data do início do julgamento", :with => "20/01/2012"
-      fill_mask "Hora do início do julgamento", :with => "12:00"
-      fill_mask "Data do fim do julgamento", :with => "21/01/2012"
-      fill_mask "Hora do fim do julgamento", :with => "13:00"
+      fill_in "Data do início do julgamento", :with => "20/01/2012"
+      fill_in "Hora do início do julgamento", :with => "12:00"
+      fill_in "Data do fim do julgamento", :with => "21/01/2012"
+      fill_in "Hora do fim do julgamento", :with => "13:00"
       fill_in "Texto da ata sobre as empresas licitantes", :with => "texto 1"
       fill_in "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
       fill_in "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"

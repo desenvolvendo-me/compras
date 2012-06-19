@@ -16,7 +16,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo', :with => '01', :field => 'Código'
-    fill_mask 'Código', :with => '01'
+    fill_in 'Código', :with => '01'
     fill_in 'Descrição', :with => 'Materiais de Escritório'
     fill_in 'Detalhamento', :with => 'materiais para escritório'
 
@@ -43,7 +43,7 @@ feature "MaterialsClasses" do
     click_link 'Software'
 
     fill_modal 'Grupo', :with => '03', :field => 'Código'
-    fill_mask 'Código', :with => '02'
+    fill_in 'Código', :with => '02'
     fill_in 'Descrição', :with => 'Lampada'
     fill_in 'Detalhamento', :with => 'descricao'
 
@@ -87,7 +87,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo', :with => '01', :field => 'Código'
-    fill_mask 'Código', :with => '01'
+    fill_in 'Código', :with => '01'
 
     click_button 'Salvar'
 
@@ -105,7 +105,7 @@ feature "MaterialsClasses" do
     click_link 'Criar Classe de Materiais'
 
     fill_modal 'Grupo', :with => '01', :field => 'Código'
-    fill_mask 'Código', :with => '02'
+    fill_in 'Código', :with => '02'
 
     click_button 'Salvar'
 

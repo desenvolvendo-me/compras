@@ -46,7 +46,7 @@ feature "LicitationProcessPublications" do
     page.should have_content "Criar Publicação para o Processo Licitatório #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
-    fill_mask "Data da publicação", :with => '20/04/2012'
+    fill_in "Data da publicação", :with => '20/04/2012'
     select "Edital", :from => "Publicação do(a)"
     select "Internet", :from => "Tipo de circulação do veículo de comunicação"
 
@@ -85,7 +85,7 @@ feature "LicitationProcessPublications" do
     page.should have_content "Editar Publicação Publicacao do Processo Licitatório #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
-    fill_mask "Data da publicação", :with => '20/04/2012'
+    fill_in "Data da publicação", :with => '20/04/2012'
     select "Edital", :from => "Publicação do(a)"
     select "Internet", :from => "Tipo de circulação do veículo de comunicação"
 

@@ -56,8 +56,8 @@ feature "LicitationProcessBidders" do
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
-    fill_mask 'Data do protocolo', :with => I18n.l(Date.current)
-    fill_mask 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    fill_in 'Data do protocolo', :with => I18n.l(Date.current)
+    fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
     within_tab 'Representantes credenciados' do
       fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
@@ -70,8 +70,8 @@ feature "LicitationProcessBidders" do
       page.should have_field 'Documento', :with => 'Fiscal'
 
       fill_in 'Número/certidão', :with => '222222'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
-      fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
     within_tab 'Propostas' do
@@ -171,8 +171,8 @@ feature "LicitationProcessBidders" do
     fill_modal 'Fornecedor', :with => '123456', :field => 'Número do CRC'
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
-    fill_mask 'Data do protocolo', :with => I18n.l(Date.tomorrow)
-    fill_mask 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+    fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
+    fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
 
     within_tab 'Representantes credenciados' do
       click_button 'Remover Pessoa'
@@ -182,8 +182,8 @@ feature "LicitationProcessBidders" do
 
     within_tab 'Documentos' do
       fill_in 'Número/certidão', :with => '333333'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.yesterday)
-      fill_mask 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+      fill_in 'Data de emissão', :with => I18n.l(Date.yesterday)
+      fill_in 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
     end
 
     within_tab 'Propostas' do

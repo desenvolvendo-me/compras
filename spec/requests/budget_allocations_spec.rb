@@ -26,7 +26,7 @@ feature "BudgetAllocations" do
       page.should have_disabled_field 'Código'
 
       fill_modal 'Entidade', :with => 'Detran'
-      fill_mask 'Exercício', :with => '2012'
+      fill_in 'Exercício', :with => '2012'
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
@@ -39,7 +39,7 @@ feature "BudgetAllocations" do
       select 'Nenhuma', :from => 'Tipo de dívida'
       fill_modal 'Tipo de dotação', :with => 'Dotação Administrativa', :field => 'Descrição'
       check 'Refinanciamento'
-      fill_mask 'Data', :with => '17/02/2012'
+      fill_in 'Data', :with => '17/02/2012'
     end
 
     within_tab 'Programação' do
@@ -199,7 +199,7 @@ feature "BudgetAllocations" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_mask 'Exercício', :with => '2013'
+      fill_in 'Exercício', :with => '2013'
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
@@ -213,7 +213,7 @@ feature "BudgetAllocations" do
       fill_modal 'Tipo de dotação', :with => 'Dotação Presidencial', :field => 'Descrição'
       uncheck 'Refinanciamento'
       check 'Saúde'
-      fill_mask 'Data', :with => '01/02/2012'
+      fill_in 'Data', :with => '01/02/2012'
     end
 
     within_tab 'Programação' do
@@ -405,7 +405,7 @@ feature "BudgetAllocations" do
 
     click_link 'Filtrar Dotações Orçamentárias'
 
-    fill_mask 'Exercício', :with => '2011'
+    fill_in 'Exercício', :with => '2011'
 
     # Scroll modal to bottom
     # See https://github.com/jonleighton/poltergeist/issues/83

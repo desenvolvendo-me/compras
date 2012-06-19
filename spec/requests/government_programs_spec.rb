@@ -16,7 +16,7 @@ feature "GovernmentPrograms" do
     click_link 'Criar Programa do Governo'
 
     fill_modal 'Entidade', :with => 'Detran'
-    fill_mask 'Exercício', :with => '2012'
+    fill_in 'Exercício', :with => '2012'
     fill_in 'Descrição', :with => 'Habitação'
     page.should have_disabled_field 'Status'
     page.should have_select 'Status', :selected => 'Ativo'
@@ -44,7 +44,7 @@ feature "GovernmentPrograms" do
     click_link 'Habitação'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Exercício', :with => '2013'
     fill_in 'Descrição', :with => 'Educação'
     select 'Inativo', :from => 'Status'
 

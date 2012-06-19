@@ -29,10 +29,10 @@ feature "Pledges" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
-      fill_mask 'Exercício', :with => '2012'
+      fill_in 'Exercício', :with => '2012'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
@@ -78,14 +78,14 @@ feature "Pledges" do
 
     within_tab 'Vencimentos' do
       within '.pledge-parcel:first' do
-        fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
 
       click_button 'Adicionar Vencimento'
 
       within '.pledge-parcel:last' do
-        fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
 
@@ -316,10 +316,10 @@ feature "Pledges" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
-      fill_mask 'Exercício', :with => '2012'
+      fill_in 'Exercício', :with => '2012'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       select 'Patrimonial', :from => 'Tipo de bem'
@@ -339,14 +339,14 @@ feature "Pledges" do
 
     within_tab 'Vencimentos' do
       within '.pledge-parcel:first' do
-        fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
 
       click_button 'Adicionar Vencimento'
 
       within '.pledge-parcel:last' do
-        fill_mask 'Vencimento', :with => I18n.l(Date.current + 1.month)
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
         fill_in 'Valor', :with => '5,00'
       end
     end
@@ -374,7 +374,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_mask 'Data de emissão', :with => '30/12/2011'
+      fill_in 'Data de emissão', :with => '30/12/2011'
       fill_in 'Valor', :with => '31,66'
     end
 
@@ -394,7 +394,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_mask 'Data de emissão', :with => '01/11/2011'
+      fill_in 'Data de emissão', :with => '01/11/2011'
       fill_in 'Valor', :with => '31,66'
     end
 
@@ -408,7 +408,7 @@ feature "Pledges" do
     end
 
     within_tab 'Principal' do
-      fill_mask 'Data de emissão', :with => '10/11/2011'
+      fill_in 'Data de emissão', :with => '10/11/2011'
       fill_in 'Valor', :with => '336,60'
     end
 
@@ -428,11 +428,11 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
     end
 
     within_tab 'Vencimentos' do
-      fill_mask 'Vencimento', :with => I18n.l(Date.current - 10.days)
+      fill_in 'Vencimento', :with => I18n.l(Date.current - 10.days)
     end
 
     click_button 'Salvar'
@@ -450,11 +450,11 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
     end
 
     within_tab 'Vencimentos' do
-      fill_mask 'Vencimento', :with => I18n.l(Date.current)
+      fill_in 'Vencimento', :with => I18n.l(Date.current)
     end
 
     click_button 'Salvar'
@@ -472,18 +472,18 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
     end
 
     within_tab 'Vencimentos' do
       within '.pledge-parcel:first' do
-        fill_mask 'Vencimento', :with => I18n.l(Date.current + 10.days)
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 10.days)
       end
 
       click_button 'Adicionar Vencimento'
 
       within '.pledge-parcel:last' do
-        fill_mask 'Vencimento', :with => I18n.l(Date.current + 5.days)
+        fill_in 'Vencimento', :with => I18n.l(Date.current + 5.days)
       end
     end
 
@@ -746,9 +746,9 @@ feature "Pledges" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
-      fill_mask 'Exercício', :with => '2012'
+      fill_in 'Exercício', :with => '2012'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       fill_in 'Valor', :with => '300,00'
@@ -894,10 +894,10 @@ feature "Pledges" do
 
     within_tab 'Principal' do
       fill_modal 'Entidade', :with => 'Detran'
-      fill_mask 'Exercício', :with => '2012'
+      fill_in 'Exercício', :with => '2012'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
-      fill_mask 'Data de emissão', :with => I18n.l(Date.current)
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Natureza da despesa'

@@ -63,8 +63,8 @@ feature "Creditors" do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
-      fill_mask 'Suspenso até', :with => '05/04/2012'
-      fill_mask 'Data da ocorrência', :with => '05/05/2012'
+      fill_in 'Suspenso até', :with => '05/04/2012'
+      fill_in 'Data da ocorrência', :with => '05/05/2012'
     end
 
     click_button 'Salvar'
@@ -187,8 +187,8 @@ feature "Creditors" do
 
       fill_modal 'Tipo de documento', :with => 'Fiscal', :field => 'Descrição'
       fill_in 'Número', :with => '1234'
-      fill_mask 'Data de emissão', :with => '05/04/2012'
-      fill_mask 'Data de validade', :with => '05/04/2013'
+      fill_in 'Data de emissão', :with => '05/04/2012'
+      fill_in 'Data de validade', :with => '05/04/2013'
       fill_in 'Órgão emissor', :with => 'SSP'
     end
 
@@ -235,8 +235,8 @@ feature "Creditors" do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
-      fill_mask 'Suspenso até', :with => '05/04/2012'
-      fill_mask 'Data da ocorrência', :with => '05/05/2012'
+      fill_in 'Suspenso até', :with => '05/04/2012'
+      fill_in 'Data da ocorrência', :with => '05/05/2012'
     end
 
     click_button 'Salvar'
@@ -384,8 +384,8 @@ feature "Creditors" do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
-      fill_mask 'Suspenso até', :with => '05/04/2012'
-      fill_mask 'Data da ocorrência', :with => '05/05/2012'
+      fill_in 'Suspenso até', :with => '05/04/2012'
+      fill_in 'Data da ocorrência', :with => '05/05/2012'
     end
 
     click_button 'Salvar'
@@ -490,18 +490,18 @@ feature "Creditors" do
 
     page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Mateus Lorandi'
 
-    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Exercício', :with => '2013'
     fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral'
-    fill_mask 'Data da inscrição', :with => I18n.l(Date.yesterday)
-    fill_mask 'Data da validade', :with => '05/04/2013'
-    fill_mask 'Data da revogação', :with => '05/04/2014'
+    fill_in 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    fill_in 'Data da validade', :with => '05/04/2013'
+    fill_in 'Data da revogação', :with => '05/04/2014'
     fill_in 'Capital social', :with => '987.654,32'
     fill_in 'Capital integral', :with => '123.456,78'
     fill_in 'Faturamento mensal', :with => '456.789,99'
     fill_in 'Área construída (m²)', :with => '99,99'
     fill_in 'Área total (m²)', :with => '123,50'
     fill_in 'Total de empregados', :with => '2'
-    fill_mask 'Data de registro na junta comercial', :with => '05/04/2011'
+    fill_in 'Data de registro na junta comercial', :with => '05/04/2011'
     fill_in 'Número na junta comercial', :with => '12345678'
 
     click_button 'Salvar'
@@ -533,11 +533,11 @@ feature "Creditors" do
 
     page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Mateus Lorandi'
 
-    fill_mask 'Exercício', :with => '2013'
+    fill_in 'Exercício', :with => '2013'
     fill_in 'Especificação', :with => 'Especificação do CRC'
-    fill_mask 'Data da inscrição', :with => I18n.l(Date.yesterday)
-    fill_mask 'Data da validade', :with => '05/04/2013'
-    fill_mask 'Data da revogação', :with => '05/04/2014'
+    fill_in 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    fill_in 'Data da validade', :with => '05/04/2013'
+    fill_in 'Data da revogação', :with => '05/04/2014'
 
     click_button 'Salvar'
 
@@ -619,8 +619,8 @@ feature "Creditors" do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Ativação do registro cadastral', :field => 'Descrição'
-      fill_mask 'Suspenso até', :with => '05/04/2011'
-      fill_mask 'Data da ocorrência', :with => '05/05/2011'
+      fill_in 'Suspenso até', :with => '05/04/2011'
+      fill_in 'Data da ocorrência', :with => '05/05/2011'
     end
 
     click_button 'Salvar'
@@ -726,8 +726,8 @@ feature "Creditors" do
 
       fill_modal 'Tipo de documento', :with => 'Oficial', :field => 'Descrição'
       fill_in 'Número', :with => '12345'
-      fill_mask 'Data de emissão', :with => '05/05/2012'
-      fill_mask 'Data de validade', :with => '05/05/2013'
+      fill_in 'Data de emissão', :with => '05/05/2012'
+      fill_in 'Data de validade', :with => '05/05/2013'
       fill_in 'Órgão emissor', :with => 'PM'
     end
 
@@ -793,8 +793,8 @@ feature "Creditors" do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Ativação do registro cadastral', :field => 'Descrição'
-      fill_mask 'Suspenso até', :with => '05/04/2011'
-      fill_mask 'Data da ocorrência', :with => '05/05/2011'
+      fill_in 'Suspenso até', :with => '05/04/2011'
+      fill_in 'Data da ocorrência', :with => '05/05/2011'
     end
 
     click_button 'Salvar'
@@ -896,7 +896,7 @@ feature "Creditors" do
       fill_modal 'CBO', :with => 'Engenheiro', :field => 'Nome'
       check 'Autônomo'
       fill_in 'PIS/PASEP', :with => '6789'
-      fill_mask 'Início do contrato', :with => '05/04/2011'
+      fill_in 'Início do contrato', :with => '05/04/2011'
     end
 
     within_tab 'Materiais' do
@@ -952,8 +952,8 @@ feature "Creditors" do
       click_button 'Adicionar Sanção Administrativa / Regularização'
 
       fill_modal 'Motivo', :with => 'Ativação do registro cadastral', :field => 'Descrição'
-      fill_mask 'Suspenso até', :with => '05/04/2011'
-      fill_mask 'Data da ocorrência', :with => '05/05/2011'
+      fill_in 'Suspenso até', :with => '05/04/2011'
+      fill_in 'Data da ocorrência', :with => '05/05/2011'
     end
 
     click_button 'Salvar'

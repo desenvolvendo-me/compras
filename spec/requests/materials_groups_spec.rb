@@ -13,7 +13,7 @@ feature "MaterialsGroups" do
 
     click_link 'Criar Grupo de Materiais'
 
-    fill_mask 'Código', :with => '01'
+    fill_in 'Código', :with => '01'
     fill_in 'Descrição', :with => 'Informática'
 
     click_button 'Salvar'
@@ -35,7 +35,7 @@ feature "MaterialsGroups" do
 
     click_link 'Informática'
 
-    fill_mask 'Código', :with => '02'
+    fill_in 'Código', :with => '02'
     fill_in 'Descrição', :with => 'Materiais de escritorio'
 
     click_button 'Salvar'
@@ -74,7 +74,7 @@ feature "MaterialsGroups" do
 
     click_link 'Criar Grupo de Materiais'
 
-    fill_mask 'Código', :with => '01'
+    fill_in 'Código', :with => '01'
 
     click_button 'Salvar'
 
