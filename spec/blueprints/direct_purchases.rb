@@ -45,7 +45,7 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_extra)] }
 end
 
-DDirectPurchase.blueprint(:compra_2011) do
+DirectPurchase.blueprint(:compra_2011) do
   ModalityLimit.make!(:modalidade_de_compra)
   year { 2011 }
   direct_purchase { 3 }
