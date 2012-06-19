@@ -107,7 +107,7 @@ feature "ReserveFunds" do
   end
 
   scenario 'getting and cleaning budget_allocation amount via javascript' do
-    budget_allocation = BudgetAllocation.make!(:alocacao)
+    BudgetAllocation.make!(:alocacao)
 
     click_link 'Contabilidade'
 
