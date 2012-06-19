@@ -42,6 +42,7 @@ feature "Users" do
   end
 
   scenario 'update an user' do
+    User.make!(:wenderson)
     Employee.make!(:sobrinho)
 
     click_link 'Administração'
@@ -49,7 +50,7 @@ feature "Users" do
     click_link 'Usuários'
 
     within_records do
-      click_link 'sobrinho'
+      click_link 'wenderson.malheiros'
     end
 
     within_modal 'Funcionário' do
@@ -62,7 +63,7 @@ feature "Users" do
     page.should have_notice 'Usuário editado com sucesso.'
 
     within_records do
-      click_link 'sobrinho'
+      click_link 'wenderson.malheiros'
     end
 
     page.should have_field 'Funcionário', :with => 'Gabriel Sobrinho'
