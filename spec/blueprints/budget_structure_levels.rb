@@ -2,7 +2,7 @@
 BudgetStructureLevel.blueprint(:orgao) do
   description { 'Orgão' }
   level { 1 }
-  digits { 2 }
+  digits { 1 }
   separator { BudgetStructureSeparator::POINT }
 end
 

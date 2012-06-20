@@ -310,12 +310,14 @@ feature "BudgetStructure" do
     click_link 'Criar Estrutura Orçamentária'
 
     within_tab 'Informações' do
+      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
+      select 'Sintético', :from => 'Tipo'
+      fill_modal 'Nível', :with => '1', :field => 'Nível'
+      fill_in 'Código', :with => '1'
+      page.should have_field 'Estrutura orçamentária', :with => '1'
+      fill_in 'Código TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
-      fill_modal 'Configuração de estrutura orçamentária', :with => 'Configuração do Detran', :field => 'Descrição'
-      fill_in 'Estrutura orçamentária', :with => '02.00'
-      select 'Analítico', :from => 'Tipo'
-      fill_in 'Código TCE', :with => '051'
       fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
       fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
