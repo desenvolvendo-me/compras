@@ -1,10 +1,12 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/unico/person'
 require 'app/models/person'
 require 'app/models/unico/address'
 require 'app/models/address'
 require 'app/models/unico/individual'
 require 'app/models/individual'
+require 'app/models/unico/identity'
 require 'app/models/identity'
 require 'app/models/provider_partner'
 require 'app/models/licitation_commission_responsible'
