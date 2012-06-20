@@ -8,7 +8,7 @@ describe ExpenseNaturesController do
 
   context 'POST #create' do
     it 'should generate full code' do
-      ExpenseNatureFullCodeGenerator.any_instance.should_receive(:generate!)
+      ExpenseNatureCodeGenerator.any_instance.should_receive(:generate!)
 
       post :create
     end
@@ -19,7 +19,7 @@ describe ExpenseNaturesController do
       expense_nature = ExpenseNature.make!(:vencimento_e_salarios)
       ExpenseNature.stub(:find).and_return(expense_nature)
 
-      ExpenseNatureFullCodeGenerator.any_instance.should_receive(:generate!)
+      ExpenseNatureCodeGenerator.any_instance.should_receive(:generate!)
 
       put :update, :id => '1'
     end

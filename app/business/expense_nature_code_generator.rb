@@ -1,4 +1,4 @@
-class ExpenseNatureFullCodeGenerator
+class ExpenseNatureCodeGenerator
   attr_accessor :expense_nature_object
 
   delegate :expense_category_code, :to => :expense_nature_object, :allow_nil => true

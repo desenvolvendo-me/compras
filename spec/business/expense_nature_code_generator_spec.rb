@@ -1,8 +1,8 @@
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
-require 'app/business/expense_nature_full_code_generator'
+require 'app/business/expense_nature_code_generator'
 
-describe ExpenseNatureFullCodeGenerator do
+describe ExpenseNatureCodeGenerator do
   subject do
     described_class.new(expense_nature_object)
   end

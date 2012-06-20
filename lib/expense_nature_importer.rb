@@ -4,7 +4,7 @@ class ExpenseNatureImporter < Importer
   attr_accessor :expense_group_storage, :expense_modality_storage
   attr_accessor :expense_element_storage, :code_generator
 
-  def initialize(storage = ExpenseNature, expense_category_storage = ExpenseCategory, expense_group_storage = ExpenseGroup, expense_modality_storage = ExpenseModality, expense_element_storage = ExpenseElement, code_generator = ExpenseNatureFullCodeGenerator)
+  def initialize(storage = ExpenseNature, expense_category_storage = ExpenseCategory, expense_group_storage = ExpenseGroup, expense_modality_storage = ExpenseModality, expense_element_storage = ExpenseElement, code_generator = ExpenseNatureCodeGenerator)
     self.storage                     = storage
     self.expense_category_storage    = expense_category_storage
     self.expense_group_storage       = expense_group_storage

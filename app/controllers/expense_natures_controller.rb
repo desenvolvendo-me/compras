@@ -1,7 +1,7 @@
 class ExpenseNaturesController < CrudController
   def create
     object = build_resource
-    ExpenseNatureFullCodeGenerator.new(object).generate!
+    ExpenseNatureCodeGenerator.new(object).generate!
 
     super
   end
@@ -11,7 +11,7 @@ class ExpenseNaturesController < CrudController
   def update_resource(object, attributes)
     object.localized.assign_attributes(*attributes)
 
-    ExpenseNatureFullCodeGenerator.new(object).generate!
+    ExpenseNatureCodeGenerator.new(object).generate!
 
     super
   end
