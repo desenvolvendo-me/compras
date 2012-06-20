@@ -1,0 +1,5 @@
+pt-BR:
+  activerecord:
+    attributes:
+      extended_company_size:
+        benefited: "Beneficiado pela lei 123/2006"

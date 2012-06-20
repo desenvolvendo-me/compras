@@ -1,7 +1,11 @@
 class CompanySize < Unico::CompanySize
-   attr_accessible :benefited
+   attr_accessible :extended_company_size_attributes
 
    has_many :companies, :dependent => :restrict
+
+   has_one :extended_company_size, :dependent => :destroy
+
+   accepts_nested_attributes_for :extended_company_size
 
    filterize
    orderize
