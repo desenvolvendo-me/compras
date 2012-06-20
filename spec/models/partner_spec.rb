@@ -1,7 +1,10 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/unico/partner'
 require 'app/models/partner'
+require 'app/models/unico/person'
 require 'app/models/person'
+require 'app/models/unico/company'
 require 'app/models/company'
 
 describe Partner do
