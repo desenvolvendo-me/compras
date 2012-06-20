@@ -1,4 +1,4 @@
-//= require big
+//= require bignumber
 //= require underscore
 //= require jquery
 //= require jquery.ui
