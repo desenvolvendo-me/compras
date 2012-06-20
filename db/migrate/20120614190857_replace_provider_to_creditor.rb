@@ -1,4 +1,11 @@
 class ReplaceProviderToCreditor < ActiveRecord::Migration
+
+  class DirectPurchase < Compras::Model;end
+  class Pledge < Compras::Model;end
+  class ReserveFund < Compras::Model;end
+  class Precatory < Compras::Model;end
+  class PriceCollectionProposal < Compras::Model;end
+
   def change
     User.where(:authenticable_type => AuthenticableType::PROVIDER).update_all(:authenticable_type => AuthenticableType::CREDITOR)
 
