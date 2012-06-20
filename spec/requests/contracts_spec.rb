@@ -15,13 +15,7 @@ feature "Contracts" do
 
     click_link 'Criar Contrato'
 
-    within_modal 'Processo licitatório' do
-      click_button 'Pesquisar'
-
-      within_records do
-        find('tbody tr').click
-      end
-    end
+    select_modal 'Processo licitatório', :field => 'Ano', :with => '2012'
 
     page.should have_disabled_field 'Compra direta'
     page.should have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
@@ -36,13 +30,7 @@ feature "Contracts" do
 
     click_link 'Criar Contrato'
 
-    within_modal 'Compra direta' do
-      click_button 'Pesquisar'
-
-      within_records do
-        find('tbody tr').click
-      end
-    end
+    select_modal 'Compra direta', :field => 'Ano', :with => '2012'
 
     page.should have_disabled_field 'Processo licitatório'
     page.should have_field 'Objeto do contrato', :with => ''
@@ -77,13 +65,7 @@ feature "Contracts" do
 
     attach_file 'Contrato', 'spec/fixtures/example_of_image.gif'
 
-    within_modal 'Processo licitatório' do
-      click_button 'Pesquisar'
-
-      within_records do
-        find('tbody tr').click
-      end
-    end
+    select_modal 'Processo licitatório', :field => 'Ano', :with => '2012'
 
     fill_in 'Objeto do contrato', :with => 'Objeto'
 
