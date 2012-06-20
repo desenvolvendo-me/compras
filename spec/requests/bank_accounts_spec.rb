@@ -19,7 +19,14 @@ feature "BankAccounts" do
 
     fill_modal 'Banco', :with => 'Itaú'
 
-    fill_modal 'Agência', :with => 'Agência Itaú'
+    within_modal 'Agência' do
+      page.should have_field 'Banco', :with => 'Itaú'
+
+      fill_in 'Nome', :with => 'Agência Itaú'
+      click_button 'Pesquisar'
+
+      click_record 'Agência Itaú'
+    end
 
     fill_in 'Número da conta corrente', :with => '1111113'
     fill_in 'Código do cedente', :with => '00000000003'

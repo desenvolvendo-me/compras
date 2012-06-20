@@ -7,12 +7,20 @@
 
 <script>
   $("#bank_account_bank_id").change(function () {
-    $("#bank_account_agency").data('modal-url', "<%= modal_agencies_path %>?bank_id=" + this.value);
+    var url = "<%= modal_agencies_path %>?",
+    params = {
+      locked_fields: ["bank"],
+      bank_id: $(this).val()
+    };
+
+    url += jQuery.param(params);
+
+    $("#bank_account_agency").attr('data-modal-url', url);
 
     if (this.value) {
       $("#bank_account_agency").attr('disabled', false);
     } else {
       $("#bank_account_agency").attr('disabled', true);
     }
-  }).change();
+  })
 </script>
