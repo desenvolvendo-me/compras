@@ -1,6 +1,7 @@
 # encoding: utf-8
 ExpenseNature.blueprint(:vencimento_e_salarios) do
   entity { Entity.make!(:detran) }
+  year { 2012 }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '3.0.10.01.12' }
   kind { ExpenseNatureKind::ANALYTICAL }
@@ -15,6 +16,7 @@ end
 
 ExpenseNature.blueprint(:compra_de_material) do
   entity { Entity.make!(:detran) }
+  year { 2012 }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '3.0.10.01.11' }
   kind { ExpenseNatureKind::ANALYTICAL }
@@ -29,6 +31,7 @@ end
 
 ExpenseNature.blueprint(:despesas_correntes) do
   entity { Entity.make!(:detran) }
+  year { 2012 }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '4.4.20.03.11' }
   kind { ExpenseNatureKind::ANALYTICAL }

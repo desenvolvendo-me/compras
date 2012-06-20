@@ -33,6 +33,7 @@ describe ExpenseNature do
   it { should validate_presence_of :expense_split }
   it { should validate_presence_of :expense_category }
   it { should validate_presence_of :entity }
+  it { should validate_presence_of :year }
   it { should validate_presence_of :regulatory_act }
 
   it { should allow_value('12').for(:expense_split) }

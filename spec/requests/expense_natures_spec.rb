@@ -21,6 +21,7 @@ feature "ExpenseNatures" do
     click_link 'Criar Natureza da Despesa'
 
     fill_modal 'Entidade', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
     fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
     fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
@@ -38,6 +39,7 @@ feature "ExpenseNatures" do
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
     page.should have_field 'Entidade', :with => 'Detran'
+    page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Ato regulamentador', :with => '1234'
     page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
     page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'

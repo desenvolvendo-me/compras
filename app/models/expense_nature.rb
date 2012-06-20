@@ -2,7 +2,7 @@ class ExpenseNature < Compras::Model
   attr_accessible :entity_id, :regulatory_act_id, :expense_split
   attr_accessible :expense_nature, :kind, :expense_group_id
   attr_accessible :description, :docket, :expense_category_id
-  attr_accessible :expense_modality_id, :expense_element_id
+  attr_accessible :expense_modality_id, :expense_element_id, :year
 
   has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
 
@@ -26,7 +26,7 @@ class ExpenseNature < Compras::Model
   validates :expense_nature, :kind, :description, :expense_group, :presence => true
   validates :expense_modality, :expense_element, :expense_split, :presence => true
   validates :expense_split, :mask => '99', :allow_blank => true
-  validates :entity, :regulatory_act, :expense_category, :presence => true
+  validates :entity, :year, :regulatory_act, :expense_category, :presence => true
 
   orderize :description
   filterize
