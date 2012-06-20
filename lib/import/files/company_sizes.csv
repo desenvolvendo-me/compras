@@ -1,6 +1,6 @@
-name;acronym
-Não classificada;N/A
-Microempresa;ME
-Empresa de pequeno porte;EPP
-Empresa de médio porte;EMP
-Empresa de grande porte;EGP
+name;acronym;number
+Não classificada;N/A;1
+Microempresa;ME;2
+Empresa de pequeno porte;EPP;3
+Empresa de médio porte;EMP;4
+Empresa de grande porte;EGP;5
