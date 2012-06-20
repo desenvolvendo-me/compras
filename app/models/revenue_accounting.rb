@@ -15,7 +15,7 @@ class RevenueAccounting < Compras::Model
   validates :value, :presence => true, :if => :divide?
   validates :year, :mask => '9999', :allow_blank => true
   validates :revenue_nature_id, :uniqueness => true, :allow_blank => true
-  validates :code, :uniqueness => { :scope => [:entity_id, :year] }
+  validates :code, :uniqueness => { :scope => [:entity_id, :year] }, :allow_blank => true
 
   orderize :code
   filterize
