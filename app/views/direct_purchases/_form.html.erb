@@ -42,24 +42,24 @@
   }
 
   function calculateItemsTotalValue() {
-    var total = 0,
+    var total = new BigNumber(0),
     value;
     $.each($('.item-price:visible'), function() {
       value = $(this).attr('value');
       if (value) {
-        total += parsePtBrFloat(value);
+        total = total.add(parsePtBrFloat(value));
       }
     });
-    $('#direct_purchase_total_allocations_items_value').val(floatToPtBrString(total));
+    $('#direct_purchase_total_allocations_items_value').val(floatToPtBrString(parseFloat(total)));
   }
 
   $('form.direct_purchase').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
-        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+        total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-price').val(total);
+    itemDiv.find('.item-price').val(floatToPtBrString(parseFloat(total)));
     calculateItemsTotalValue();
   });
 
