@@ -2,9 +2,24 @@
 require 'model_helper'
 require 'app/models/contract'
 require 'app/models/pledge'
+require 'app/models/dissemination_source'
+require 'app/models/creditor'
+require 'app/models/service_or_contract_type'
+require 'app/models/licitation_process'
+require 'app/models/direct_purchase'
+require 'app/models/budget_structure'
+require 'app/models/employee'
 
 describe Contract do
-  it { should belong_to(:entity) }
+  it { should belong_to :entity }
+  it { should belong_to :dissemination_source }
+  it { should belong_to :creditor }
+  it { should belong_to :service_or_contract_type }
+  it { should belong_to :licitation_process }
+  it { should belong_to :direct_purchase }
+  it { should belong_to :budget_structure }
+  it { should belong_to :budget_structure_responsible }
+  it { should belong_to :lawyer }
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'
@@ -13,14 +28,9 @@ describe Contract do
 
   it { should have_many(:pledges).dependent(:restrict) }
 
-  it { should validate_presence_of(:year) }
-  it { should validate_presence_of(:entity) }
-  it { should validate_presence_of(:contract_number) }
-  it { should validate_presence_of(:process_number) }
-  it { should validate_presence_of(:signature_date) }
-  it { should validate_presence_of(:end_date) }
-  it { should validate_presence_of(:description) }
-  it { should validate_presence_of(:kind) }
+  it { should validate_presence_of :sequential_number }
+  it { should validate_presence_of :year }
+  it { should validate_presence_of :entity }
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
@@ -50,6 +60,42 @@ describe Contract do
 
       subject.errors[:end_date].should be_empty
       subject.errors[:signature_date].should be_empty
+    end
+  end
+
+  describe 'validating licitation process' do
+    context 'without direct purchase' do
+      it 'should be required' do
+        subject.should validate_presence_of :licitation_process
+      end
+    end
+
+    context 'with direct purchase' do
+      before do
+        subject.stub_chain(:direct_purchase, :present?).and_return true
+      end
+
+      it 'should not be required' do
+        subject.should_not validate_presence_of :licitation_process
+      end
+    end
+  end
+
+  context 'validating direct purchase' do
+    context 'without licitation process' do
+      it 'should be required' do
+        subject.should validate_presence_of :direct_purchase
+      end
+    end
+
+    context 'with licitation process' do
+      before do
+        subject.stub_chain(:licitation_process, :present?).and_return true
+      end
+
+      it 'should not be required' do
+        subject.should_not validate_presence_of :direct_purchase
+      end
     end
   end
 end

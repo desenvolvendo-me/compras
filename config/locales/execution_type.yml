@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    execution_type:
+      global_price: 'Empreitada preço global'
+      unit_price: 'Empreitada preço unitário'
+      integral: 'Empreitada integral'
+      task: 'Tarefa'
+      direct: 'Execução direta'

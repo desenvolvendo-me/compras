@@ -1,5 +1,5 @@
 pt-BR:
   enumerations:
     contract_kind:
-      founded: "Contrato de dívida"
-      management: "Contrato de gestão"
+      main: 'Contrato principal'
+      amendment: 'Aditivo'

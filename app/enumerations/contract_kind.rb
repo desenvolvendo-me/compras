@@ -1,3 +1,3 @@
 class ContractKind < EnumerateIt::Base
-  associate_values :founded, :management
+  associate_values :main, :amendment
 end

@@ -186,6 +186,7 @@ Tributario::Application.routes.draw do
     collection do
       get :filter
       get :modal
+      get :next_sequential
     end
   end
 

@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    contract_guarantees:
+      without: 'Sem garantia'
+      bank: 'Fiança bancária'
+      insurance: 'Seguro garantia'
+      cash_bond: 'Caução em dinheiro'
+      public_debt_securities: 'Títulos de dívida pública'

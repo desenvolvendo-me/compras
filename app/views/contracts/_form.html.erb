@@ -1,31 +1,139 @@
 <div class="yui3-g">
+  <div class='yui3-u-1-5'>
+    <%= f.input :sequential_number, :disabled => true %>
+  </div>
+
+  <div class='yui3-u-1-5'>
+    <%= f.input :year %>
+  </div>
+
+  <div class='yui3-u-1-5'>
+    <%= f.input :kind %>
+  </div>
+
+  <div class='yui3-u-1-5'>
+    <%= f.input :contract_number %>
+  </div>
+</div>
+
+<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :entity %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :year %>
+    <%= f.input :parent, :disabled => true %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-5">
+    <%= f.input :publication_date %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :contract_number %>
+  <div class="yui3-u-2-5">
+    <%= f.input :dissemination_source %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :process_number %>
+  <div class="yui3-u-1-5">
+    <%= f.input :contract_file %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-5">
+    <%= link_to f.object.contract_file_identifier, f.object.contract_file_url if f.object.contract_file? %>
+  </div>
+</div>
+
+<%= f.input :content %>
+<%= f.input :creditor %>
+
+<div class="yui3-g">
+  <div class='yui3-u-1-3'>
+    <%= f.input :service_or_contract_type %>
+  </div>
+
+  <div class='yui3-u-1-3'>
+    <%= f.input :execution_type %>
+  </div>
+
+  <div class='yui3-u-1-3'>
+    <%= f.input :contract_guarantees %>
+  </div>
+</div>
+
+<div class='yui3-g'>
+  <div class='yui3-u-1-4'>
+    <%= f.input :contract_value %>
+  </div>
+
+  <div class='yui3-u-1-4'>
+    <%= f.input :guarantee_value %>
+  </div>
+
+  <div class='yui3-u-1-4'>
+    <%= f.input :contract_validity, :hint => 'mes(es)' %>
+  </div>
+
+  <div class='yui3-u-1-4'>
+    <%= f.input :subcontracting %>
+  </div>
+</div>
+
+<div class='yui3-g'>
+  <div class='yui3-u-1-5'>
     <%= f.input :signature_date %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class='yui3-u-1-5'>
     <%= f.input :end_date %>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :kind %>
+  <div class='yui3-u-1-5'>
+    <%= f.input :cancellation_date %>
+  </div>
+
+  <div class='yui3-u-2-5'>
+    <%= f.input :cancellation_reason %>
+  </div>
+</div>
+
+<%= f.input :licitation_process %>
+<%= f.input :direct_purchase %>
+<%= f.input :budget_structure %>
+<%= f.input :budget_structure_responsible %>
+
+<div class='yui3-g'>
+  <div class='yui3-u-3-5'>
+    <%= f.input :lawyer %>
+  </div>
+
+  <div class='yui3-u-2-5'>
+    <%= f.input :lawyer_code %>
   </div>
 </div>
 
 <%= f.input :description %>
+
+<script>
+  $('#contract_kind').change(function (e) {
+    $('#contract_parent').attr('disabled', $(this).val() != '<%= ContractKind::AMENDMENT %>');
+  });
+
+  $('form').on('change', '#contract_licitation_process_id', function (event, licitationProcess) {
+    $('#contract_direct_purchase').attr('disabled', licitationProcess !== undefined);
+
+    if (licitationProcess) {
+      $('#contract_content').val(licitationProcess.administrative_process_description);
+    }
+  });
+
+  $('form').on('change', '#contract_direct_purchase_id', function (event, directPurchase) {
+    $('#contract_licitation_process').attr('disabled', directPurchase !== undefined);
+  });
+
+  $('form').on('change', '#contract_year, #contract_entity_id', function (event) {
+    $.getJSON('<%= next_sequential_contracts_path %>?year='+$('#contract_year').val()+'&entity_id='+$('#contract_entity_id').val(), function (data) {
+      $('#contract_sequential_number').val(data.sequential);
+    });
+  });
+</script>

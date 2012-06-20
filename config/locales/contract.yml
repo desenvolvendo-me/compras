@@ -7,11 +7,32 @@ pt-BR:
 
     attributes:
       contract:
-        year: "Exercício"
+        sequential_number: 'Número sequencial'
+        year: "Ano do contrato"
         entity: "Entidade"
         contract_number: "Número do contrato"
-        process_number: "Número do processo"
+        parent: 'Contrato principal'
+        publication_date: 'Data de publicação'
+        dissemination_source: 'Local de publicação'
+        content: 'Objeto do contrato'
+        creditor: 'Fornecedor'
+        service_or_contract_type: 'Tipo de contrato'
+        execution_type: 'Forma de execução'
+        contract_guarantees: 'Garantias do contrato'
+        contract_value: 'Valor do contrato'
+        guarantee_value: 'Valor da garantia'
+        contract_validity: 'Validade do contrato'
+        subcontracting: 'Subcontração'
         signature_date: "Data da assinatura"
-        end_date: "Data do término"
-        description: "Objeto"
+        end_date: "Data de validade"
+        cancellation_date: 'Data de cancelamento'
+        cancellation_reason: 'Motivo do cancelamento'
+        licitation_process: 'Processo licitatório'
+        direct_purchase: 'Compra direta'
+        budget_structure: 'Unidade orçamentária gestora responsável'
+        budget_structure_responsible: 'Responsável pela unidade oçamentária gestora'
+        lawyer: 'Advogado responsável pela gestão do contrato'
+        lawyer_code: 'O.A.B. do advogado responsável'
+        description: "Observações gerais"
         kind: "Tipo"
+        contract_file: 'Contrato'

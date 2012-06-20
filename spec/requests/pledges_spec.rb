@@ -39,7 +39,7 @@ feature "Pledges" do
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
-      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
       fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
 
       page.should have_disabled_field 'Código'
@@ -324,7 +324,7 @@ feature "Pledges" do
       fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
-      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
       fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
     end
 
@@ -904,7 +904,7 @@ feature "Pledges" do
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
-      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
       fill_modal 'Fornecedor', :with => '456789', :field => 'CRC'
     end
 
