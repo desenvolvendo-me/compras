@@ -27,6 +27,7 @@ class ExpenseNature < Compras::Model
   validates :expense_modality, :expense_element, :expense_split, :presence => true
   validates :expense_split, :mask => '99', :allow_blank => true
   validates :entity, :year, :regulatory_act, :expense_category, :presence => true
+  validates :year, :mask => '9999', :allow_blank => true
 
   orderize :description
   filterize

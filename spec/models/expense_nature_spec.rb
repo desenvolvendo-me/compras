@@ -38,4 +38,7 @@ describe ExpenseNature do
 
   it { should allow_value('12').for(:expense_split) }
   it { should_not allow_value('4a').for(:expense_split) }
+
+  it { should allow_value('2012').for(:year) }
+  it { should_not allow_value('2a12').for(:year) }
 end
