@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/provider_partner'
 require 'app/models/provider'
+require 'app/models/unico/person'
 require 'app/models/person'
 
 describe ProviderPartner do

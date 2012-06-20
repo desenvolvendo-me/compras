@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
+require 'app/models/unico/person'
 require 'app/models/person'
+require 'app/models/unico/address'
 require 'app/models/address'
 require 'app/models/special_entry'
 

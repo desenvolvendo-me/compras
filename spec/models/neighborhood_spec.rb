@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/unico/neighborhood'
 require 'app/models/neighborhood'
+require 'app/models/unico/address'
 require 'app/models/address'
 
 describe Neighborhood do

@@ -3,6 +3,7 @@ require 'model_helper'
 require 'app/models/licitation_commission'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission_member'
+require 'app/models/unico/individual'
 require 'app/models/individual'
 require 'app/models/judgment_commission_advice'
 
