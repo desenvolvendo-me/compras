@@ -250,7 +250,7 @@ DEPENDENCIES
   cancan!
   capybara (= 1.1.2)
   capybara-webkit (= 0.11.0)
-  carrierwave (~> 0.6.2)
+  carrierwave (= 0.6.2)
   cnpj_validator (= 0.3.1)
   cpf_validator (= 0.2.0)
   devise (= 2.0.4)
@@ -278,5 +278,5 @@ DEPENDENCIES
   uglifier (= 1.2.1)
   unico!
   unicorn (= 4.1.1)
-  validates_timeliness (~> 3.0.11)
+  validates_timeliness (= 3.0.11)
   will_paginate (= 3.0.3)
