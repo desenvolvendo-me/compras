@@ -211,7 +211,7 @@ end
 
 # Custom layout for Devise controllers
 # See more: https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
-Tributario::Application.configure do
+Compras::Application.configure do
   config.to_prepare do
     Devise::SessionsController.layout 'devise'
     Devise::PasswordsController.layout 'devise'

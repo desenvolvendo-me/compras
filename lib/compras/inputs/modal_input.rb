@@ -1,4 +1,4 @@
-module Tributario
+module Compras
   module Inputs
     class ModalInput < SimpleForm::Inputs::Base
       def input

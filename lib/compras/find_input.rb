@@ -1,4 +1,4 @@
-module Tributario
+module Compras
   class FindInput
     include ::ActionView::Helpers::NumberHelper
 

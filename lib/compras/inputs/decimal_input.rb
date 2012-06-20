@@ -1,4 +1,4 @@
-module Tributario
+module Compras
   module Inputs
     class DecimalInput < SimpleForm::Inputs::Base
       def input
@@ -7,7 +7,7 @@ module Tributario
 
       protected
 
-      include Tributario::Inputs::MaskedInput
+      include Compras::Inputs::MaskedInput
 
       def input_html_classes
         super.unshift('string')

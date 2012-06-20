@@ -2,7 +2,7 @@
 module ApplicationHelper
   def simple_form_for(object, *args, &block)
     options = args.extract_options!
-    options[:builder] ||= Tributario::FormBuilder
+    options[:builder] ||= Compras::FormBuilder
     options[:html] = { :class => dom_class(resource) }
 
     super(object, *(args << options), &block)
@@ -57,7 +57,7 @@ module ApplicationHelper
   end
 
   def find_input_for(value, setting)
-    Tributario::FindInput.new(value, setting).find
+    Compras::FindInput.new(value, setting).find
   end
 
   def value_by_field_type(value, setting)

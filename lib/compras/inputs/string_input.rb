@@ -1,9 +1,9 @@
-module Tributario
+module Compras
   module Inputs
     class StringInput < SimpleForm::Inputs::StringInput
       protected
 
-      include Tributario::Inputs::MaskedInput
+      include Compras::Inputs::MaskedInput
 
       private
 

@@ -1,4 +1,4 @@
-module Tributario
+module Compras
   module Inputs
     class TimeInput < SimpleForm::Inputs::Base
       def input

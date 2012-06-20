@@ -1,4 +1,4 @@
-module Tributario
+module Compras
   module Inputs
     class DateInput < SimpleForm::Inputs::Base
       def input

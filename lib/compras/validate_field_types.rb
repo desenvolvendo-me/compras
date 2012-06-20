@@ -1,4 +1,4 @@
-module Tributario
+module Compras
   module ValidateFieldTypes
     protected
 

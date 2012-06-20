@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Tributario::Application.load_tasks
+Compras::Application.load_tasks

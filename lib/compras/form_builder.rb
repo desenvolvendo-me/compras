@@ -1,11 +1,11 @@
-module Tributario
+module Compras
   class FormBuilder < SimpleForm::FormBuilder
-    map_type :decimal, :float, :to => Tributario::Inputs::DecimalInput
-    map_type :string,  :tel,   :to => Tributario::Inputs::StringInput
-    map_type :integer,         :to => Tributario::Inputs::NumericInput
-    map_type :modal,           :to => Tributario::Inputs::ModalInput
-    map_type :date,            :to => Tributario::Inputs::DateInput
-    map_type :time,            :to => Tributario::Inputs::TimeInput
+    map_type :decimal, :float, :to => Compras::Inputs::DecimalInput
+    map_type :string,  :tel,   :to => Compras::Inputs::StringInput
+    map_type :integer,         :to => Compras::Inputs::NumericInput
+    map_type :modal,           :to => Compras::Inputs::ModalInput
+    map_type :date,            :to => Compras::Inputs::DateInput
+    map_type :time,            :to => Compras::Inputs::TimeInput
 
     def sanitized_object_name
       @sanitized_object_name ||= object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
