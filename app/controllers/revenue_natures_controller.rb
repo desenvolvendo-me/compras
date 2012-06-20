@@ -1,7 +1,7 @@
 class RevenueNaturesController < CrudController
   def create
     object = build_resource
-    RevenueNatureFullCodeGenerator.new(object).generate!
+    RevenueNatureCodeGenerator.new(object).generate!
 
     super
   end
@@ -11,7 +11,7 @@ class RevenueNaturesController < CrudController
   def update_resource(object, attributes)
     object.localized.assign_attributes(*attributes)
 
-    RevenueNatureFullCodeGenerator.new(object).generate!
+    RevenueNatureCodeGenerator.new(object).generate!
 
     super
   end

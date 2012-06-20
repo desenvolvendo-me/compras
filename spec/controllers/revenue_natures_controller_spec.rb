@@ -8,7 +8,7 @@ describe RevenueNaturesController do
 
   context 'POST #create' do
     it 'should generate full code' do
-      RevenueNatureFullCodeGenerator.any_instance.should_receive(:generate!)
+      RevenueNatureCodeGenerator.any_instance.should_receive(:generate!)
 
       post :create
     end
@@ -19,7 +19,7 @@ describe RevenueNaturesController do
       revenue_nature = RevenueNature.make!(:imposto)
       RevenueNature.stub(:find).and_return(revenue_nature)
 
-      RevenueNatureFullCodeGenerator.any_instance.should_receive(:generate!)
+      RevenueNatureCodeGenerator.any_instance.should_receive(:generate!)
 
       put :update, :id => '1'
     end

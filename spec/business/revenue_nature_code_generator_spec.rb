@@ -1,8 +1,8 @@
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
-require 'app/business/revenue_nature_full_code_generator'
+require 'app/business/revenue_nature_code_generator'
 
-describe RevenueNatureFullCodeGenerator do
+describe RevenueNatureCodeGenerator do
   subject do
     described_class.new(revenue_nature_object)
   end

@@ -1,4 +1,4 @@
-class RevenueNatureFullCodeGenerator
+class RevenueNatureCodeGenerator
   attr_accessor :revenue_nature_object
 
   delegate :revenue_category_code, :to => :revenue_nature_object, :allow_nil => true

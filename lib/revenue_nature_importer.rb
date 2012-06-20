@@ -4,7 +4,7 @@ class RevenueNatureImporter < Importer
   attr_accessor :revenue_subcategory_storage, :revenue_source_storage
   attr_accessor :revenue_rubric_storage, :code_generator
 
-  def initialize(storage = RevenueNature, revenue_category_storage = RevenueCategory, revenue_subcategory_storage = RevenueSubcategory, revenue_source_storage = RevenueSource, revenue_rubric_storage = RevenueRubric, code_generator = RevenueNatureFullCodeGenerator)
+  def initialize(storage = RevenueNature, revenue_category_storage = RevenueCategory, revenue_subcategory_storage = RevenueSubcategory, revenue_source_storage = RevenueSource, revenue_rubric_storage = RevenueRubric, code_generator = RevenueNatureCodeGenerator)
     self.storage                     = storage
     self.revenue_category_storage    = revenue_category_storage
     self.revenue_subcategory_storage = revenue_subcategory_storage
