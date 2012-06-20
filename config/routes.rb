@@ -268,6 +268,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :descriptors do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :direct_purchases, :except => :destroy do
     collection do
       get :filter

@@ -23,6 +23,7 @@ pt-BR:
     currencies: "Moedas"
     creditors: "Credores"
     delivery_locations: "Locais de Entrega"
+    descriptors: "Descritores"
     direct_purchases: "Solicitações de Compra Direta"
     dissemination_sources: "Fontes de Divulgação"
     districts: "Distritos"

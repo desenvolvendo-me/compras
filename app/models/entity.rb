@@ -16,6 +16,7 @@ class Entity < Compras::Model
   has_many :extra_credits, :dependent => :restrict
   has_many :revenue_natures, :dependent => :restrict
   has_many :revenue_accountings, :dependent => :restrict
+  has_many :descriptors, :dependent => :restrict
 
   validates :name, :presence => true
   validates :name, :uniqueness => { :allow_blank => true }

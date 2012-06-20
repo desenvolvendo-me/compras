@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      descriptor:
+        one: "Descritor"
+        other: "Descritores"
+
+    attributes:
+      descriptor:
+        entity: "Entidade"
+        year: "Exercício"
