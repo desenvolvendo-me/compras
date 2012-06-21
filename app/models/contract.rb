@@ -25,11 +25,14 @@ class Contract < Compras::Model
 
   has_many :pledges, :dependent => :restrict
 
-  validates :sequential_number, :year, :entity, :contract_number, :presence => true
   validates :year, :mask => "9999", :allow_blank => true
   validates :direct_purchase, :presence => true, :unless => lambda { |c| c.licitation_process.present? }
   validates :licitation_process, :presence => true, :unless => lambda { |c| c.direct_purchase.present? }
   validates :end_date, :timeliness => { :after => :signature_date, :type => :date, :allow_blank => true }
+  validates :sequential_number, :year, :entity, :contract_number, :publication_date, :presence => true
+  validates :dissemination_source, :content, :creditor, :execution_type, :presence => true
+  validates :contract_guarantees, :contract_value, :contract_validity, :subcontracting, :signature_date, :presence => true
+  validates :end_date, :budget_structure, :budget_structure_responsible, :lawyer, :lawyer_code, :kind, :presence => true
 
   orderize :contract_number
   filterize

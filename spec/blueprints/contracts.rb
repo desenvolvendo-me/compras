@@ -10,6 +10,19 @@ Contract.blueprint(:primeiro_contrato) do
   kind { ContractKind::MAIN }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
   service_or_contract_type { ServiceOrContractType.make!(:management) }
+  dissemination_source { DisseminationSource.make!(:jornal_municipal) }
+  creditor { Creditor.make!(:sobrinho) }
+  contract_value { 1000 }
+  contract_validity { 12 }
+  execution_type { ExecutionType::INTEGRAL }
+  contract_guarantees { ContractGuarantees::BANK }
+  subcontracting { Subcontracting::YES }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_responsible { Employee.make!(:wenderson) }
+  lawyer { Employee.make!(:wenderson) }
+  lawyer_code { '5678' }
+  publication_date { Date.new(2012, 1, 10) }
+  content { 'Objeto' }
 end
 
 Contract.blueprint(:segundo_contrato) do
@@ -24,6 +37,19 @@ Contract.blueprint(:segundo_contrato) do
   parent { Contract.make!(:primeiro_contrato) }
   direct_purchase { DirectPurchase.make!(:compra) }
   service_or_contract_type { ServiceOrContractType.make!(:management) }
+  dissemination_source { DisseminationSource.make!(:jornal_municipal) }
+  creditor { Creditor.make!(:sobrinho) }
+  contract_value { 1000 }
+  contract_validity { 12 }
+  execution_type { ExecutionType::INTEGRAL }
+  contract_guarantees { ContractGuarantees::BANK }
+  subcontracting { Subcontracting::YES }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_responsible { Employee.make!(:wenderson) }
+  lawyer { Employee.make!(:wenderson) }
+  lawyer_code { '5678' }
+  publication_date { Date.new(2012, 1, 10) }
+  content { 'Objeto' }
 end
 
 Contract.blueprint(:contrato_detran) do
@@ -37,6 +63,19 @@ Contract.blueprint(:contrato_detran) do
   kind { ContractKind::MAIN }
   direct_purchase { DirectPurchase.make!(:compra) }
   service_or_contract_type { ServiceOrContractType.make!(:founded) }
+  creditor { Creditor.make!(:sobrinho) }
+  contract_value { 1000 }
+  contract_validity { 12 }
+  dissemination_source { DisseminationSource.make!(:jornal_municipal) }
+  execution_type { ExecutionType::INTEGRAL }
+  contract_guarantees { ContractGuarantees::BANK }
+  subcontracting { Subcontracting::YES }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_responsible { Employee.make!(:wenderson) }
+  lawyer { Employee.make!(:wenderson) }
+  lawyer_code { '5678' }
+  publication_date { Date.new(2012, 1, 10) }
+  content { 'Objeto' }
 end
 
 Contract.blueprint(:contrato_educacao) do
@@ -49,4 +88,17 @@ Contract.blueprint(:contrato_educacao) do
   description { "Contrato com a Secretaria de Educação" }
   kind { ContractKind::MAIN }
   licitation_process { LicitationProcess.make!(:processo_licitatorio) }
+  creditor { Creditor.make!(:sobrinho) }
+  contract_value { 1000 }
+  contract_validity { 12 }
+  dissemination_source { DisseminationSource.make!(:jornal_municipal) }
+  execution_type { ExecutionType::INTEGRAL }
+  contract_guarantees { ContractGuarantees::BANK }
+  subcontracting { Subcontracting::YES }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  budget_structure_responsible { Employee.make!(:wenderson) }
+  lawyer { Employee.make!(:wenderson) }
+  lawyer_code { '5678' }
+  publication_date { Date.new(2012, 1, 10) }
+  content { 'Objeto' }
 end
