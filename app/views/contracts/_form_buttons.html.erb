@@ -1,0 +1,6 @@
+<div class="buttons">
+  <%= link_to 'Rescisões', contract_terminations_path(:contract_id => f.object.id), :class => 'button primary' if f.object.persisted? %>
+  <%= f.button :submit %>
+  <%= f.button :cancel %>
+  <%= f.button :destroy if f.object.persisted? %>
+</div>

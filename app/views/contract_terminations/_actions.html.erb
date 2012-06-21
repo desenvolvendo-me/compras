@@ -1,0 +1,13 @@
+<div class="actions">
+  <ul>
+     <li>
+      <%= link_to "Contrato #{@parent}", edit_contract_path(@parent) %>
+     </li>
+
+    <% if create? %>
+      <li>
+        <%= create_link(:contract_id => @parent.id) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

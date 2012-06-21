@@ -1,5 +1,7 @@
 Compras::Application.routes.draw do
 
+  resources :contract_terminations, :except => [:show, :destroy]
+
   resources :creditors do
     resources :registration_cadastral_certificates
 

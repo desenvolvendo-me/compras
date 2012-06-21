@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      contract_termination:
+        one: "Rescisão Contratual"
+        other: "Rescisões Contratuais"
+
+    attributes:
+      contract_termination:
+        year: 'Ano'
+        number: 'Número da rescisão'
+        reason: 'Motivo da rescisão'
+        expiry_date: 'Data do termo'
+        termination_date: 'Data da rescisão'
+        publication_date: 'Data da publicação'
+        dissemination_source: 'Local da publicação'
+        fine_value: 'Valor da multa'
+        compensation_value: 'Valor da indenização'
+        term_termination_file: 'Termo de rescisão'
+
