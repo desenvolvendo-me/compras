@@ -225,13 +225,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :condominium_types do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
-
   resources :condominia do
     collection do
       get :modal
