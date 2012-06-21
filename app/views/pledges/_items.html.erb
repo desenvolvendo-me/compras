@@ -43,10 +43,10 @@
 
   $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
     var itemDiv = $(this).closest('.pledge-item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
-        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+        total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-price').attr('value', total);
+    itemDiv.find('.item-price').attr('value', floatToPtBrString(parseFloat(total)));
   });
 </script>
