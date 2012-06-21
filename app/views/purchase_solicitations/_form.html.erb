@@ -29,34 +29,34 @@
   }
 
   function calculateItemsTotalValue() {
-    var total = 0,
+    var total = new BigNumber(0),
         value;
     $('.item-price:visible').each(function() {
       value = $(this).attr('value');
       if (value) {
-        total += parsePtBrFloat(value);
+        total = total.add(parsePtBrFloat(value));
       }
     });
-    $('#purchase_solicitation_total_allocations_items_value').val(floatToPtBrString(total));
+    $('#purchase_solicitation_total_allocations_items_value').val(floatToPtBrString(parseFloat(total)));
   }
 
   $('form.purchase_solicitation').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
-        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+        total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-price').val(total);
+    itemDiv.find('.item-price').val(floatToPtBrString(parseFloat(total)));
     calculateItemsTotalValue();
   });
 
   $('form.purchase_solicitation').delegate('.item-price', 'keyup', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemPrice = parsePtBrFloat(itemDiv.find('.item-price').val() || '0'),
-        unitPrice = floatToPtBrString(itemPrice / itemQuantity);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-price').val() || '0')),
+        unitPrice = itemPrice.divide(itemQuantity);
 
-    itemDiv.find('.item-unit-price').val(unitPrice);
+    itemDiv.find('.item-unit-price').val(floatToPtBrString(parseFloat(unitPrice)));
     calculateItemsTotalValue();
   });
 
