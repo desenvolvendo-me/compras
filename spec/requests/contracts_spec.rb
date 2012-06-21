@@ -63,7 +63,7 @@ feature "Contracts" do
     fill_in 'Data da assinatura', :with => '01/01/2012'
     fill_in 'Data de validade', :with => '30/12/2012'
 
-    attach_file 'Contrato', 'spec/fixtures/example_of_image.gif'
+    attach_file 'Contrato', 'spec/fixtures/other_example_document.txt'
 
     select_modal 'Processo licitatório', :field => 'Ano', :with => '2012'
 
@@ -84,7 +84,7 @@ feature "Contracts" do
     page.should have_field 'Data da assinatura', :with => '01/01/2012'
     page.should have_field 'Data de validade', :with => '30/12/2012'
     page.should have_field 'Objeto do contrato', :with => 'Objeto'
-    page.should have_link 'example_of_image.gif'
+    page.should have_link 'other_example_document.txt'
   end
 
   scenario 'update an existent contract' do
