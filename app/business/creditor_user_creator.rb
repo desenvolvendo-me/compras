@@ -1,5 +1,5 @@
 class CreditorUserCreator
-  def initialize price_collection, authenticable_type=AuthenticableType::CREDITOR, user_storage=User
+  def initialize(price_collection, authenticable_type = AuthenticableType::CREDITOR, user_storage = User)
     @price_collection = price_collection
     @authenticable_type = authenticable_type
     @user_storage = user_storage
