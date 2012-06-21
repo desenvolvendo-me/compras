@@ -61,21 +61,21 @@
 
   $('form.price_collection_proposal').delegate('.item-unit-price', 'keyup', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
-        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+        total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-total-price').val(total);
+    itemDiv.find('.item-total-price').val(floatToPtBrString(parseFloat(total)));
     calculateLotTotalItems(itemDiv);
   });
 
   $('form.price_collection_proposal').delegate('.item-total-price', 'keyup', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemTotalPrice = parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0'),
-        unitPrice = floatToPtBrString(itemTotalPrice / itemQuantity);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),
+        unitPrice = itemTotalPrice.divide(itemQuantity);
 
-    itemDiv.find('.item-unit-price').val(unitPrice);
+    itemDiv.find('.item-unit-price').val(floatToPtBrString(parseFloat(unitPrice)));
     calculateLotTotalItems(itemDiv);
   });
 </script>
