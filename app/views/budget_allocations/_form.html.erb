@@ -61,13 +61,15 @@
     var input_value = $('#budget_allocation_amount').val();
 
     if (input_value) {
-      value = parsePtBrFloat(input_value);
-      calculed = toFixedRoundDown(value / 12);
-      applyMonthValue(calculed);
+      value = new BigNumber(parsePtBrFloat(input_value));
+      calculed = new BigNumber(parseFloat(value.divide(new BigNumber(12))));
+      applyMonthValue(toFixedRoundDown(calculed));
 
-      rest = value - (calculed.toFixed(2) * 12);
+      rest = value.subtract(calculed.multiply(new BigNumber(12)));
 
-      $('#month_12').find('td.value').html(numberWithDelimiter(parseFloat(calculed) + rest));
+      result = calculed.add(rest);
+
+      $('#month_12').find('td.value').html(numberWithDelimiter(parseFloat(result)));
     }
   }
 
