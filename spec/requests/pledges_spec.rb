@@ -208,7 +208,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'should filter by budget_allocation category, group, modality, element', :driver => :selenium do
+  scenario 'should filter by budget_allocation category, group, modality, element' do
     BudgetAllocation.make!(:reparo_2011)
     ExpenseNature.make!(:despesas_correntes)
 
