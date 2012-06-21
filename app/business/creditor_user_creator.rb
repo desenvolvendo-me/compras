@@ -13,6 +13,7 @@ class CreditorUserCreator
   end
 
   protected
+
   def creditors
     @price_collection.price_collection_proposals.map &:creditor
   end
