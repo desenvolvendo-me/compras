@@ -329,7 +329,6 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Exercício'
       within_modal 'Fornecedor' do
         fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
         click_button 'Pesquisar'
