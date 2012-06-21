@@ -1,5 +1,12 @@
 <fieldset>
   <%= f.input :name %>
-  <%= f.input :acronym %>
-  <%= f.input :country %>
+  <div class='yui3-g'>
+    <div class='yui3-u-1-4'>
+      <%= f.input :acronym %>
+    </div>
+
+    <div class='yui3-u-3-4'>
+      <%= f.input :country %>
+    </div>
+  </div>
 </fieldset>

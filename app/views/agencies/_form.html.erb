@@ -1,10 +1,28 @@
 <fieldset>
-  <%= f.input :name %>
-  <%= f.input :number, :input_html => { :class => :number_values, :size => 6 } %>
-  <%= f.input :digit, :input_html => { :class => :number_values, :size => 1 }  %>
-  <%= f.input :city %>
   <%= f.input :bank %>
-  <%= f.input :phone %>
-  <%= f.input :fax %>
+  <%= f.input :name %>
+
+  <div class='yui3-g'>
+    <div class='yui3-u-1-2'>
+      <%= f.input :number, :input_html => { :class => :number_values, :size => 6 } %>
+    </div>
+
+    <div class='yui3-u-1-2'>
+      <%= f.input :digit, :input_html => { :class => :number_values, :size => 1 }  %>
+    </div>
+  </div>
+
+  <%= f.input :city %>
+
+  <div class='yui3-g'>
+    <div class='yui3-u-1-2'>
+      <%= f.input :phone %>
+    </div>
+
+    <div class='yui3-u-1-2'>
+      <%= f.input :fax %>
+    </div>
+  </div>
+
   <%= f.input :email %>
 </fieldset>

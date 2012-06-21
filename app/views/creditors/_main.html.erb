@@ -2,8 +2,16 @@
 
   <div class="individual-field">
     <%= f.input :occupation_classification %>
-    <%= f.input :municipal_public_administration %>
-    <%= f.input :autonomous %>
+
+    <div class='yui3-g'>
+      <div class='yui3-u-1-2'>
+        <%= f.input :municipal_public_administration %>
+      </div>
+
+      <div class='yui3-u-1-2'>
+        <%= f.input :autonomous %>
+      </div>
+    </div>
   </div>
 
   <div class='yui3-g individual-field'>
@@ -17,8 +25,15 @@
   </div>
 
   <div class="company-field">
-    <%= f.input :company_size  %>
-    <%= f.input :choose_simple %>
+    <div class='yui3-g'>
+      <div class='yui3-u-1-2'>
+        <%= f.input :company_size  %>
+      </div>
+
+      <div class='yui3-u-1-2'>
+        <%= f.input :choose_simple %>
+      </div>
+    </div>
     <%= f.input :main_cnae %>
     <%= f.input :legal_nature %>
   </div>

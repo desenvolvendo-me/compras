@@ -1,7 +1,15 @@
 <fieldset>
   <%= f.input :name %>
-  <%= f.input :street_type %>
-  <%= f.input :tax_zone, :input_html => { :size => 3 } %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :street_type %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :tax_zone, :input_html => { :size => 3 } %>
+    </div>
+  </div>
 
   <div class="modal-finder" >
     <%= f.input :neighborhood, :as => :modal , :input_html => { 'data-modal-url' => modal_neighborhoods_path }, :hidden_field => false  %>
