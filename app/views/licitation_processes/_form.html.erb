@@ -90,22 +90,23 @@
 
   $('form.licitation_process').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemUnitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
-        total = floatToPtBrString(itemQuantity * itemUnitPrice);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+        total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-price').val(total);
+    itemDiv.find('.item-price').val(floatToPtBrString(parseFloat(total)));
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
   $('form.licitation_process').delegate('.item-price', 'keyup', function() {
     var itemDiv = $(this).closest('.item'),
-        itemQuantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-        itemPrice = parsePtBrFloat(itemDiv.find('.item-price').val() || '0'),
-        unitPrice = floatToPtBrString(itemPrice / itemQuantity);
+        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+        itemPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-price').val() || '0')),
+        unitPrice = floatToPtBrString(0);
 
-    if (itemQuantity == '0') {
-      unitPrice = floatToPtBrString(0)
+    if (itemQuantity != '0') {
+      unitPrice = itemPrice.divide(itemQuantity);
+      unitPrice = floatToPtBrString(parseFloat(unitPrice));
     }
 
     itemDiv.find('.item-unit-price').val(unitPrice);
