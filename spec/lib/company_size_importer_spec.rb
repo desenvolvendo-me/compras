@@ -18,8 +18,8 @@ describe CompanySizeImporter do
   end
 
   it 'import company sizes' do
-    null_storage.should_receive(:create!).with('name' => 'Empresa de pequeno porte', 'acronym' => 'EPP')
-    null_storage.should_receive(:create!).with('name' => 'Empresa de grande porte', 'acronym' => 'EGP')
+    null_storage.should_receive(:create!).with('name' => 'Empresa de pequeno porte', 'acronym' => 'EPP', 'number' => '3')
+    null_storage.should_receive(:create!).with('name' => 'Empresa de grande porte', 'acronym' => 'EGP', 'number' => '5')
 
     subject.import!
   end
