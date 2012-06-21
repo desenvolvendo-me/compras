@@ -121,10 +121,10 @@
 
   $('form.licitation_process_bidder').delegate('.item-unit-price', 'keyup', function() {
      var itemDiv = $(this).closest('div.item'),
-         unitPrice = parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0'),
-         quantity = parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0'),
-         totalPrice = numberWithDelimiter(unitPrice * quantity, '.', ',');
-     itemDiv.find('.item-total-price').val(totalPrice);
+         unitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
+         quantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
+         totalPrice = parseFloat(unitPrice.multiply(quantity));
+     itemDiv.find('.item-total-price').val(numberWithDelimiter(totalPrice, '.', ','));
      calculateProposalTotalValue($(this));
    });
 
