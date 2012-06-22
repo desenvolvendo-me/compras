@@ -1,8 +1,8 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :parcel_replicated_value, :disabled => true, :input_html => { :class => 'replicated_value' } %>
   </div>
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
     <%= f.input :items_total_value, :input_html => { :value => number_to_currency(f.object.items_total_value, :format => "%n"), :size => 12 }, :disabled => true %>
   </div>
 </div>
@@ -35,9 +35,9 @@
 
   $('form.pledge').delegate('.material', 'change', function (event, material) {
     if (material) {
-      var inputs = $(this).closest('.pledge-item').find(':input');
-      $(inputs[4]).val(material.description);
-      $(inputs[5]).val(material.reference_unit);
+      $(this).closest('.pledge-item').find('.item-reference-unit').val(material.reference_unit);
+    } else {
+      $(this).closest('.pledge-item').find('.item-reference-unit').val('');
     }
   });
 

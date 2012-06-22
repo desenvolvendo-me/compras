@@ -68,12 +68,12 @@ feature "Pledges" do
       page.should have_disabled_field "Unidade"
 
       fill_modal 'Item', :with => "Arame farpado", :field => "Descrição"
+
+      # getting the reference unit via javascript
+      page.should have_field 'Unidade', :with => "UN"
+
       fill_in 'Quantidade', :with => "2"
       fill_in 'Valor unitário', :with => "5,00"
-
-      # getting the reference unit and description via javascript
-      page.should have_field 'Unidade', :with => "UN"
-      page.should have_field 'Descrição', :with => "Arame farpado"
 
       # calculating total item price via javascript
       page.should have_disabled_field 'Valor total dos itens'
@@ -136,7 +136,6 @@ feature "Pledges" do
       page.should have_field 'Quantidade', :with => "2"
       page.should have_field 'Valor unitário', :with => "5,00"
       page.should have_field 'Unidade', :with => "UN"
-      page.should have_field 'Descrição', :with => "Arame farpado"
       page.should have_field 'Valor total', :with => "10,00"
     end
 
@@ -575,7 +574,6 @@ feature "Pledges" do
     within_tab 'Itens' do
       page.should have_disabled_field 'Valor'
       page.should have_disabled_field 'Item'
-      page.should have_disabled_field 'Descrição'
       page.should have_disabled_field 'Unidade'
       page.should have_disabled_field 'Quantidade'
       page.should have_disabled_field 'Valor unitário'
@@ -931,6 +929,30 @@ feature "Pledges" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '2'
+    end
+  end
+
+  scenario 'validating javascript to item modal' do
+    Material.make!(:arame_farpado)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Itens' do
+      click_button "Adicionar Item"
+
+      page.should have_disabled_field "Unidade"
+
+      fill_modal 'Item', :with => "Arame farpado", :field => "Descrição"
+
+      page.should have_field 'Unidade', :with => 'UN'
+
+      fill_in 'Item', :with => ''
+
+      page.should have_field 'Unidade', :with => ''
     end
   end
 end
