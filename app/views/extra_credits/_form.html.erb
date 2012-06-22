@@ -35,9 +35,9 @@
       }
     });
 
-    supplement_element.val(floatToPtBrString(supplement_total));
-    reduced_element.val(floatToPtBrString(reduced_total));
-    difference_element.val(floatToPtBrString(supplement_total - reduced_total));
+    supplement_element.val(numberWithDelimiter(supplement_total));
+    reduced_element.val(numberWithDelimiter(reduced_total));
+    difference_element.val(numberWithDelimiter(supplement_total - reduced_total));
   }
 
   $('form.extra_credit').delegate('#extra_credit_regulatory_act_id', 'change', function (event, regulatory_act) {

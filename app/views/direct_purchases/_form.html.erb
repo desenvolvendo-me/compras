@@ -50,7 +50,7 @@
         total = total.add(parsePtBrFloat(value));
       }
     });
-    $('#direct_purchase_total_allocations_items_value').val(floatToPtBrString(parseFloat(total)));
+    $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(parseFloat(total)));
   }
 
   $('form.direct_purchase').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
@@ -59,7 +59,7 @@
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
         total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-price').val(floatToPtBrString(parseFloat(total)));
+    itemDiv.find('.item-price').val(numberWithDelimiter(parseFloat(total)));
     calculateItemsTotalValue();
   });
 
@@ -74,8 +74,8 @@
       buildLicitationExemption = '0,00';
 
   <% if f.object.licitation_object %>
-    purchaseLicitationExemption = floatToPtBrString(<%= f.object.licitation_object.purchase_licitation_exemption %>);
-    buildLicitationExemption = floatToPtBrString(<%= f.object.licitation_object.build_licitation_exemption %>);
+    purchaseLicitationExemption = numberWithDelimiter(<%= f.object.licitation_object.purchase_licitation_exemption %>);
+    buildLicitationExemption = numberWithDelimiter(<%= f.object.licitation_object.build_licitation_exemption %>);
   <% end %>
 
   function setLicitationExemption() {

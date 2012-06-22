@@ -47,6 +47,6 @@
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
         total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-price').attr('value', floatToPtBrString(parseFloat(total)));
+    itemDiv.find('.item-price').attr('value', numberWithDelimiter(parseFloat(total)));
   });
 </script>

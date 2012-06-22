@@ -46,9 +46,9 @@
                                        administrative_process_id: this.administrative_process_id,
                                        budget_allocation_id: this.budget_allocation_id,
                                        uuid_administrative_process_budget_allocation: _.uniqueId('fresh-'),
-                                       value: floatToPtBrString(this.value),
+                                       value: numberWithDelimiter(this.value),
                                        expenseNature: this.expense_nature,
-                                       amount: floatToPtBrString(this.amount)}));
+                                       amount: numberWithDelimiter(this.amount)}));
     });
   }
 
@@ -74,7 +74,7 @@
       totalValue += parsePtBrFloat(this.value);
     });
 
-    administrativeProcessBudgetAllocation.find('.total-value').val(floatToPtBrString(totalValue));
+    administrativeProcessBudgetAllocation.find('.total-value').val(numberWithDelimiter(totalValue));
   }
 
   $('form.licitation_process').delegate('.remove-item', 'click', function() {
@@ -94,7 +94,7 @@
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
         total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-price').val(floatToPtBrString(parseFloat(total)));
+    itemDiv.find('.item-price').val(numberWithDelimiter(parseFloat(total)));
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
@@ -102,11 +102,11 @@
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-price').val() || '0')),
-        unitPrice = floatToPtBrString(0);
+        unitPrice = numberWithDelimiter(0);
 
     if (itemQuantity != '0') {
       unitPrice = itemPrice.divide(itemQuantity);
-      unitPrice = floatToPtBrString(parseFloat(unitPrice));
+      unitPrice = numberWithDelimiter(parseFloat(unitPrice));
     }
 
     itemDiv.find('.item-unit-price').val(unitPrice);

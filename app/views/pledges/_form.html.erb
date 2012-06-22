@@ -58,7 +58,7 @@
           }
         });
 
-        $('#pledge_items_total_value').val(floatToPtBrString(total));
+        $('#pledge_items_total_value').val(numberWithDelimiter(total));
       }
 
       function pledgeParcelsTotalValue() {
@@ -73,7 +73,7 @@
           }
         });
 
-        $('#pledge_pledge_parcels_sum').val(floatToPtBrString(total));
+        $('#pledge_pledge_parcels_sum').val(numberWithDelimiter(total));
       }
 
       function fillParcelNumber() {

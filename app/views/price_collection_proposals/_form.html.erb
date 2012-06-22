@@ -56,7 +56,7 @@
       totalValue += parsePtBrFloat(this.value);
     });
 
-    lotDiv.find('.item-total-value-by-lot').val(floatToPtBrString(totalValue));
+    lotDiv.find('.item-total-value-by-lot').val(numberWithDelimiter(totalValue));
   }
 
   $('form.price_collection_proposal').delegate('.item-unit-price', 'keyup', function() {
@@ -65,7 +65,7 @@
         itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
         total = itemQuantity.multiply(itemUnitPrice);
 
-    itemDiv.find('.item-total-price').val(floatToPtBrString(parseFloat(total)));
+    itemDiv.find('.item-total-price').val(numberWithDelimiter(parseFloat(total)));
     calculateLotTotalItems(itemDiv);
   });
 
@@ -75,7 +75,7 @@
         itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),
         unitPrice = itemTotalPrice.divide(itemQuantity);
 
-    itemDiv.find('.item-unit-price').val(floatToPtBrString(parseFloat(unitPrice)));
+    itemDiv.find('.item-unit-price').val(numberWithDelimiter(parseFloat(unitPrice)));
     calculateLotTotalItems(itemDiv);
   });
 </script>

@@ -59,7 +59,7 @@
         total += parsePtBrFloat(value);
       }
     });
-    $('#administrative_process_total_allocations_value').val(floatToPtBrString(total));
+    $('#administrative_process_total_allocations_value').val(numberWithDelimiter(total));
   }
 
   $('form.administrative_process').delegate('.allocation-value', 'keyup', function() {
