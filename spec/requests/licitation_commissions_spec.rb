@@ -45,9 +45,9 @@ feature "LicitationCommissions" do
       click_button 'Adicionar Membro'
 
       fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+      fill_in 'Matrícula', :with => '3456789'
       select 'Presidente', :from => 'Função'
       select 'Servidor efetivo', :from => 'Natureza do cargo'
-      fill_in 'Matrícula', :with => '3456789'
     end
 
     click_button 'Salvar'
@@ -74,9 +74,9 @@ feature "LicitationCommissions" do
 
     within_tab 'Membros' do
       page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Matrícula', :with => '3456789'
       page.should have_select 'Função', :selected => 'Presidente'
       page.should have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
-      page.should have_field 'Matrícula', :with => '3456789'
     end
   end
 
@@ -128,9 +128,9 @@ feature "LicitationCommissions" do
 
       within '.member:first' do
         fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+        fill_in 'Matrícula', :with => '987654'
         select 'Apoio', :from => 'Função'
         select 'Outros', :from => 'Natureza do cargo'
-        fill_in 'Matrícula', :with => '987654'
       end
     end
 
@@ -162,9 +162,9 @@ feature "LicitationCommissions" do
 
       within '.member:last' do
         page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+        page.should have_field 'Matrícula', :with => '987654'
         page.should have_select 'Função', :selected => 'Apoio'
         page.should have_select 'Natureza do cargo', :selected => 'Outros'
-        page.should have_field 'Matrícula', :with => '987654'
       end
     end
   end
@@ -387,17 +387,17 @@ feature "LicitationCommissions" do
       click_button 'Adicionar Membro'
 
       fill_modal 'Membro', :with => 'Wenderson Malheiros'
+      fill_in 'Matrícula', :with => '3456789'
       select 'Suplente', :from => 'Função'
       select 'Servidor efetivo', :from => 'Natureza do cargo'
-      fill_in 'Matrícula', :with => '3456789'
 
       click_button 'Adicionar Membro'
 
       within '.member:first' do
         fill_modal 'Membro', :with => 'Wenderson Malheiros'
+        fill_in 'Matrícula', :with => '987654'
         select 'Apoio', :from => 'Função'
         select 'Outros', :from => 'Natureza do cargo'
-        fill_in 'Matrícula', :with => '987654'
       end
     end
 

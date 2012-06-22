@@ -2,7 +2,11 @@
 <%= f.input :materials_class, :disabled => f.object.materials_group.blank? %>
 
 <% if f.object.persisted? %>
-  <%= f.input :code, :disabled => true %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <%= f.input :code, :disabled => true %>
+    </div>
+  </div>
 <% end %>
 
 <%= f.input :description %>
@@ -16,7 +20,9 @@
   <div class="yui3-u-1-2">
     <%= f.input :minimum_stock_balance %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :stock_balance, :disabled => true %>
   </div>
@@ -24,7 +30,9 @@
   <div class="yui3-u-1-2">
     <%= f.input :cash_balance, :disabled => true %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :reference_unit %>
   </div>
@@ -32,7 +40,9 @@
   <div class="yui3-u-1-2">
     <%= f.input :manufacturer %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :perishable %>
   </div>
@@ -40,7 +50,9 @@
   <div class="yui3-u-1-2">
     <%= f.input :storable %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :material_characteristic %>
   </div>
@@ -48,15 +60,19 @@
   <div class="yui3-u-1-2">
     <%= f.input :service_or_contract_type, :disabled => !f.object.service? %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :material_type, :disabled => !f.object.material? %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :combustible %>
+    <%= f.input :combustible, :input_html => {:class => 'boolean_field' } %>
   </div>
+</div>
 
+<div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :expense_nature %>
   </div>
