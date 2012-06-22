@@ -81,39 +81,37 @@ describe Contract do
     end
   end
 
-  describe 'validating licitation process' do
-    context 'without direct purchase' do
-      it 'should be required' do
-        subject.should validate_presence_of :licitation_process
-      end
+  context 'validating licitation process or direct purchase' do
+    let :licitation_process do
+      double(:licitation_process)
     end
 
-    context 'with direct purchase' do
-      before do
-        subject.stub_chain(:direct_purchase, :present?).and_return true
-      end
-
-      it 'should not be required' do
-        subject.should_not validate_presence_of :licitation_process
-      end
-    end
-  end
-
-  context 'validating direct purchase' do
-    context 'without licitation process' do
-      it 'should be required' do
-        subject.should validate_presence_of :direct_purchase
-      end
+    let :direct_purchase do
+      double(:direct_purchase)
     end
 
-    context 'with licitation process' do
-      before do
-        subject.stub_chain(:licitation_process, :present?).and_return true
-      end
+    it 'only licitation process must be valid' do
+      subject.stub(:licitation_process => licitation_process)
+      subject.valid?
+      subject.errors[:licitation_process].should be_empty
+    end
 
-      it 'should not be required' do
-        subject.should_not validate_presence_of :direct_purchase
-      end
+    it 'only direct purchase must be valid' do
+      subject.stub(:direct_purchase => direct_purchase)
+      subject.valid?
+      subject.errors[:licitation_process].should be_empty
+    end
+
+    it 'no licitation_process and no direct_purchase must be invalid' do
+      subject.valid?
+      subject.errors[:licitation_process].should eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
+    end
+
+    it 'both must be invalid' do
+      subject.stub(:direct_purchase => direct_purchase)
+      subject.stub(:licitation_process => licitation_process)
+      subject.valid?
+      subject.errors[:licitation_process].should eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
     end
   end
 end

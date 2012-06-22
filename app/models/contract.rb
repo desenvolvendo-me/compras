@@ -26,13 +26,12 @@ class Contract < Compras::Model
   has_many :pledges, :dependent => :restrict
 
   validates :year, :mask => "9999", :allow_blank => true
-  validates :direct_purchase, :presence => true, :unless => lambda { |c| c.licitation_process.present? }
-  validates :licitation_process, :presence => true, :unless => lambda { |c| c.direct_purchase.present? }
   validates :end_date, :timeliness => { :after => :signature_date, :type => :date, :allow_blank => true }
   validates :sequential_number, :year, :entity, :contract_number, :publication_date, :presence => true
   validates :dissemination_source, :content, :creditor, :execution_type, :presence => true
   validates :contract_guarantees, :contract_value, :contract_validity, :subcontracting, :signature_date, :presence => true
   validates :end_date, :budget_structure, :budget_structure_responsible, :lawyer, :lawyer_code, :kind, :presence => true
+  validate :presence_of_licitation_process_or_direct_purchase
 
   orderize :contract_number
   filterize
@@ -46,5 +45,11 @@ class Contract < Compras::Model
 
   def self.next_sequential(year, entity_id)
     self.where { (self.year.eq(year)) & (self.entity_id.eq(entity_id)) }.size + 1
+  end
+
+  def presence_of_licitation_process_or_direct_purchase
+    if (licitation_process && direct_purchase) || (!licitation_process && !direct_purchase)
+      errors.add :licitation_process, :must_select_licitation_process_or_direct_purchase
+    end
   end
 end
