@@ -1,4 +1,7 @@
 pt-BR:
+  direct_purchases:
+    new: "Gerar Compra Direta"
+
   activerecord:
     models:
       direct_purchase:
