@@ -1,9 +1,9 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-2">
     <%= f.input :entity %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-8">
     <%= f.input :year %>
   </div>
 
@@ -17,7 +17,7 @@
     <%= f.input :management_unit %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-6">
     <%= f.input :emission_date %>
   </div>
 
@@ -31,23 +31,31 @@
     <%= f.input :reserve_fund %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :reserve_fund_value, :disabled => true, :input_html => { :value => f.object.decorator.reserve_fund_value } %>
   </div>
 </div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation %>
-    <%= link_to_modal_info 'pledge_budget_allocation', f.object.budget_allocation %>
+    <p>
+      <%= f.input :budget_allocation %>
+      <%= link_to_modal_info 'pledge_budget_allocation', f.object.budget_allocation %>
+    </p>
   </div>
 
-  <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation_real_amount, :disabled => true, :input_html => { :value => f.object.decorator.budget_allocation_real_amount } %>
+  <div class="yui3-u-1-4">
+    <p>
+      <%= f.input :budget_allocation_real_amount, :disabled => true, :input_html => { :value => f.object.decorator.budget_allocation_real_amount } %>
+    </p>
   </div>
 </div>
 
-<%= f.input :value %>
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :value %>
+  </div>
+</div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-2">

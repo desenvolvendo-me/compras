@@ -1,32 +1,45 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-7-8">
     <%= f.input :entity %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-8">
     <%= f.input :year %>
   </div>
 </div>
 
 <%= f.input :status, :disabled => true %>
-<%= f.input :reserve_allocation_type %>
-<%= f.input :date, :disabled => f.object.persisted? %>
+
+<div class="yui3-g">
+  <div class="yui3-u-5-6">
+    <%= f.input :reserve_allocation_type %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :date, :disabled => f.object.persisted? %>
+  </div>
+</div>
+
 <p>
   <%= f.input :budget_allocation %>
   <%= link_to_modal_info 'reserve_fund_budget_allocation', f.object.budget_allocation %>
 </p>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :budget_allocation_amount, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_amount) } %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :budget_allocation_reserved_value, :disabled => true, :input_html => { :value => number_with_precision(f.object.budget_allocation_reserved_value) } %>
   </div>
 </div>
 
-<%= f.input :value %>
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :value %>
+  </div>
+</div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
@@ -43,7 +56,6 @@
 </div>
 
 <%= f.input :creditor %>
-
 <%= f.input :reason %>
 
 <script>

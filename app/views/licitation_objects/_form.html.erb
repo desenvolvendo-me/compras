@@ -6,7 +6,12 @@
   </ul>
 
   <div id="general">
-    <%= f.input :year %>
+    <div class="yui3-g">
+      <div class="yui3-u-1-8">
+        <%= f.input :year %>
+      </div>
+    </div>
+
     <%= f.input :description %>
   </div>
 
@@ -46,6 +51,7 @@
         </div>
       </div>
     </fieldset>
+
     <fieldset>
       <legend>Total acumulado de modalidades especiais</legend>
       <div class="yui3-g">
@@ -61,6 +67,7 @@
       </div>
     </div>
   </fieldset>
+
   <div id="material">
     <%= render 'materials', :f => f %>
   </div>

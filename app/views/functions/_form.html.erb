@@ -1,7 +1,20 @@
 <%= f.input :code %>
-<%= f.input :regulatory_act %>
-<%= link_to_modal_info 'function_regulatory_act', f.object.regulatory_act %>
-<%= f.input :regulatory_act_vigor_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_vigor_date) if f.object.regulatory_act_vigor_date) } %>
+
+<div class="yui3-g">
+  <div class="yui3-u-4-5">
+    <p>
+      <%= f.input :regulatory_act %>
+      <%= link_to_modal_info 'function_regulatory_act', f.object.regulatory_act %>
+    </p>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <p>
+      <%= f.input :regulatory_act_vigor_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_vigor_date) if f.object.regulatory_act_vigor_date) } %>
+    </p>
+  </div>
+</div>
+
 <%= f.input :description %>
 
 <script>

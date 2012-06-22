@@ -6,22 +6,24 @@
   <%= f.input :operation, :as => :hidden, :disabled => true, :input_html => { :class => :operation } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-2-5">
       <p>
         <%= f.input :budget_allocation, :disabled => f.object.moviment_type_as_capability?, :input_html => { :class => 'budget-allocation' } %>
         <%= link_to_modal_info "#{'extra_credit_extra_credit_moviment_types_attributes_' unless f.object.persisted?}#{f.nested_identifier}_budget_allocation", f.object.budget_allocation %>
       </p>
     </div>
 
-    <div class="yui3-u-1-3 capability-field">
+    <div class="yui3-u-2-5 capability-field">
       <p>
         <%= f.input :capability, :disabled => f.object.moviment_type_as_budget_allocation?, :input_html => { :class => 'capability' } %>
         <%= link_to_modal_info "#{'extra_credit_extra_credit_moviment_types_attributes_' unless f.object.persisted?}#{f.nested_identifier}_capability", f.object.capability %>
       </p>
     </div>
 
-    <div class="yui3-u-1-3">
-      <%= f.input :value, :input_html => { :class => :value } %>
+    <div class="yui3-u-1-5">
+      <p>
+        <%= f.input :value, :input_html => { :class => :value } %>
+      </p>
     </div>
   </div>
 

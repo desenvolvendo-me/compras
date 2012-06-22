@@ -1,6 +1,23 @@
 <%= f.input :description %>
-<%= f.input :law %>
-<%= f.input :article %>
-<%= f.input :paragraph %>
-<%= f.input :sections %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :law %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :article %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :paragraph %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :sections %>
+  </div>
+</div>
+
 <%= f.input :synopsis %>

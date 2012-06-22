@@ -1,6 +1,14 @@
 <%= f.input :description %>
-<%= f.input :status, :disabled => f.object.new_record? %>
-<%= f.input :deactivation_date %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-6">
+    <%= f.input :status, :disabled => f.object.new_record? %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :deactivation_date %>
+  </div>
+</div>
 
 <script>
   $('#precatory_type_status').change(function() {

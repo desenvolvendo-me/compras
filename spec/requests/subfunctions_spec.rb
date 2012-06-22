@@ -16,8 +16,8 @@ feature "Subfunctions" do
 
     click_link 'Criar Subfunção'
 
-    fill_in 'Exercício', :with => '2012'
     fill_modal 'Entidade', :with => 'Detran'
+    fill_in 'Exercício', :with => '2012'
     fill_modal 'Função', :with => '04', :field => "Código"
     fill_in 'Código', :with => '01'
     fill_in 'Descrição', :with => 'Administração Geral'
@@ -28,8 +28,8 @@ feature "Subfunctions" do
 
     click_link '01'
 
-    page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Código', :with => '01'
+    page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Descrição', :with => 'Administração Geral'
     page.should have_field 'Função', :with => '04 - Administração'
@@ -46,8 +46,8 @@ feature "Subfunctions" do
 
     click_link '01'
 
-    fill_in 'Exercício', :with => '2011'
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
+    fill_in 'Exercício', :with => '2011'
     fill_modal 'Função', :with => '05', :field => "Código"
     fill_in 'Código', :with => '02'
     fill_in 'Descrição', :with => 'Legislativa'
@@ -58,8 +58,8 @@ feature "Subfunctions" do
 
     click_link '02'
 
-    page.should have_field 'Exercício', :with => '2011'
     page.should have_field 'Entidade', :with => 'Secretaria de Educação'
+    page.should have_field 'Exercício', :with => '2011'
     page.should have_field 'Código', :with => '02'
     page.should have_field 'Descrição', :with => 'Legislativa'
     page.should have_field 'Função', :with => '05 - Execução'

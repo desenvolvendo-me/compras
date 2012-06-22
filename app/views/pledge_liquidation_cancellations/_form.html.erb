@@ -3,16 +3,23 @@
     <%= f.input :pledge %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-6">
     <%= f.input :emission_date, :disabled => true, :input_html => { :value => f.object.decorator.emission_date } %>
   </div>
 </div>
 
 <%= render 'pledge_parcels', :f => f %>
 
-<%= f.input :value %>
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :value %>
+  </div>
 
-<%= f.input :date %>
+  <div class="yui3-u-1-6">
+    <%= f.input :date %>
+  </div>
+</div>
+
 <%= f.input :reason %>
 
 <%= mustache 'pledge-parcels-template' do %>
