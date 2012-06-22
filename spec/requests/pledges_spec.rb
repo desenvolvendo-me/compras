@@ -222,12 +222,14 @@ feature "Pledges" do
       fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
 
       within_modal 'Desdobramento' do
+        scroll_modal_to_bottom field: 'Natureza da despesa'
+
         click_button 'Pesquisar'
+
+        page.should have_content '3.0.10.01.11'
+        page.should_not have_content '4.4.20.03.11'
       end
     end
-
-    page.should have_content '3.0.10.01.11'
-    page.should_not have_content '4.4.20.03.11'
   end
 
   scenario 'when submit a form with some error should return filtered expense_nature' do
