@@ -66,7 +66,7 @@ module Helpers
   #
   # ==== Examples
   #
-  #     scroll_modal_to_bottom field: "Nome"
+  #     scroll_modal_to_bottom :field => "Nome"
   #
   # A field is required because we need to make sure that the fields have
   # appeared on screen for only then do the rolling.

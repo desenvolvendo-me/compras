@@ -222,7 +222,7 @@ feature "Pledges" do
       fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
 
       within_modal 'Desdobramento' do
-        scroll_modal_to_bottom field: 'Natureza da despesa'
+        scroll_modal_to_bottom :field => 'Natureza da despesa'
 
         click_button 'Pesquisar'
 
