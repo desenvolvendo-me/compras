@@ -34,7 +34,7 @@ class PurchaseSolicitation < Compras::Model
   filterize
 
   def to_s
-    "#{code}/#{accounting_year}"
+    "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end
 
   def total_allocations_items_value

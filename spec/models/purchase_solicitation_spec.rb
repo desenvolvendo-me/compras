@@ -8,9 +8,11 @@ require 'app/models/purchase_solicitation_budget_allocation_item'
 describe PurchaseSolicitation do
   it 'should return the code/accounting_year in to_s method' do
     subject.accounting_year = 2012
+    subject.stub(:budget_structure => "01.01.001 - SECRETARIA DA EDUCAÇÃO")
+    subject.stub(:responsible => "CARLOS DORNELES")
     subject.code = 2
 
-    subject.to_s.should eq '2/2012'
+    subject.to_s.should eq "2/2012 01.01.001 - SECRETARIA DA EDUCAÇÃO - RESP: CARLOS DORNELES"
   end
 
   it { should have_many(:budget_allocations).dependent(:restrict) }

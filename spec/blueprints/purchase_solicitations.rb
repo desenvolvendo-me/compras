@@ -15,4 +15,5 @@ PurchaseSolicitation.blueprint(:reparo) do
   purchase_solicitation_budget_allocations {
     [PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)]
   }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
 end
