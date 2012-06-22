@@ -160,7 +160,7 @@ feature "LicitationCommissions" do
     within_tab 'Membros' do
       page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
 
-      within '.member:last' do
+      within '.member' do
         page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
         page.should have_field 'Matrícula', :with => '987654'
         page.should have_select 'Função', :selected => 'Apoio'
