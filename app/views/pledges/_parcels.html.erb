@@ -1,5 +1,12 @@
-<%= f.input :parcel_replicated_value, :disabled => true, :input_html => { :class => 'replicated_value' } %>
-<%= f.input :pledge_parcels_sum, :disabled => true, :input_html => { :value => f.object.decorator.pledge_parcels_sum } %>
+<div class="yui3-g nested">
+  <div class="yui3-u-1-4">
+    <%= f.input :parcel_replicated_value, :disabled => true, :input_html => { :class => 'replicated_value' } %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :pledge_parcels_sum, :disabled => true, :input_html => { :value => f.object.decorator.pledge_parcels_sum } %>
+  </div>
+</div>
 
 <p>
   <input type="button" class="button affirmative add-pledge-parcel" value="Adicionar Vencimento">
