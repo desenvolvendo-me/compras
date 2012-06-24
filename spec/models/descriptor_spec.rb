@@ -32,7 +32,7 @@ describe Descriptor do
   it { should have_many(:management_units).dependent(:restrict) }
   it { should have_many(:pledge_historics).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
-  it { should have_many(:reserve_fund).dependent(:restrict) }
+  it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:revenue_accountings).dependent(:restrict) }
   it { should have_many(:revenue_natures).dependent(:restrict) }
   it { should have_many(:subfunctions).dependent(:restrict) }
