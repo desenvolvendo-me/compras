@@ -4,7 +4,8 @@ require 'app/models/revenue_accounting'
 describe RevenueAccounting do
   it 'should return code as to_s' do
     subject.code = '150'
-    subject.to_s.should eq '150'
+    subject.stub(:year).and_return(2012)
+    subject.to_s.should eq '150/2012'
   end
 
   it { should belong_to :descriptor }
