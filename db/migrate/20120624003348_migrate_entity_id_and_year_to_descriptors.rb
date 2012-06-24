@@ -18,8 +18,7 @@ class MigrateEntityIdAndYearToDescriptors < ActiveRecord::Migration
       model.find_each do |object|
         descriptor = Descriptor.find_or_initialize_by_entity_id_and_year(object.entity_id, object.year)
         descriptor.save(:validate => false)
-        object.descriptor_id = descriptor.id
-        object.save!
+        object.update_column(:descriptor_id, descriptor.id)
       end
     end
   end
