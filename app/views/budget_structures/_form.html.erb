@@ -96,7 +96,7 @@
     }
   });
 
-  $('#budget_structure_code').change(function (){
+  $('#budget_structure_code').on('change keyup', function() {
     $('#budget_structure_budget_structure').val(budgedt_structure_mask + $(this).val() );
   });
 </script>
