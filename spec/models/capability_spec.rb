@@ -12,7 +12,7 @@ describe Capability do
     subject.to_s.should eq 'Reforma e Ampliação'
   end
 
-  it { should belong_to :descritor }
+  it { should belong_to :descriptor }
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict) }

@@ -11,7 +11,7 @@ describe Subfunction do
     subject.to_s.should eq '01 - Subfunção'
   end
 
-  it { should belong_to :descritor }
+  it { should belong_to :descriptor }
   it { should belong_to :function }
 
   it { should validate_presence_of :descriptor }
