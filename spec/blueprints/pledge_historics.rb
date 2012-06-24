@@ -1,11 +1,9 @@
 PledgeHistoric.blueprint(:semestral) do
+  descriptor { Descriptor.make!(:detran_2012) }
   description { "Semestral" }
-  entity { Entity.make!(:detran) }
-  year { "2012" }
 end
 
 PledgeHistoric.blueprint(:anual) do
+  descriptor { Descriptor.make!(:detran_2012) }
   description { "Anual" }
-  entity { Entity.make!(:detran) }
-  year { "2012" }
 end

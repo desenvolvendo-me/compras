@@ -7,7 +7,7 @@ feature "RevenueAccountings" do
   end
 
   scenario 'create a new revenue_accounting' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
     RevenueNature.make!(:imposto)
     Capability.make!(:reforma)
 
@@ -20,9 +20,8 @@ feature "RevenueAccountings" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
 
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => '2012'
-      fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
 
@@ -39,9 +38,8 @@ feature "RevenueAccountings" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Detran'
+      page.should have_field 'Descritor', :with => '2012 - Detran'
       page.should have_field 'Data', :with => I18n.l(Date.current)
-      page.should have_field 'Exercício', :with => '2012'
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
@@ -54,11 +52,11 @@ feature "RevenueAccountings" do
     end
   end
 
-  scenario 'create a new revenue_accounting with other year and restart code' do
-    Entity.make!(:detran)
+  scenario 'create a new revenue_accounting with other descriptor and restart code' do
+    RevenueAccounting.make!(:reforma)
+    Descriptor.make!(:detran_2011)
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:reforma)
-    RevenueAccounting.make!(:reforma)
 
     click_link 'Contabilidade'
 
@@ -67,9 +65,8 @@ feature "RevenueAccountings" do
     click_link 'Criar Receita Contábel'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => '2013'
-      fill_modal 'Natureza da receita', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Natureza da receita', :with => 'Imposto sobre a renda', :field => 'Especificação'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
 
@@ -82,17 +79,16 @@ feature "RevenueAccountings" do
     page.should have_notice 'Receita Contábel criado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link '1/2011'
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Detran'
+      page.should have_field 'Descritor', :with => '2011 - Detran'
       page.should have_field 'Data', :with => I18n.l(Date.current)
-      page.should have_field 'Exercício', :with => '2012'
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
-      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
+      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
+      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
       page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
     end
 
@@ -111,7 +107,7 @@ feature "RevenueAccountings" do
     click_link 'Criar Receita Contábel'
 
     within_tab 'Principal' do
-      fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
+      fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
 
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
       page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
@@ -146,7 +142,7 @@ feature "RevenueAccountings" do
 
   scenario 'update an existent revenue_accounting' do
     RevenueAccounting.make!(:reforma)
-    Entity.make!(:secretaria_de_educacao)
+    Descriptor.make!(:secretaria_de_educacao_2011)
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:construcao)
 
@@ -157,9 +153,8 @@ feature "RevenueAccountings" do
     click_link '1'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_in 'Exercício', :with => '2011'
-      fill_modal 'Natureza da receita', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Natureza da receita', :with => 'Imposto sobre a renda', :field => 'Especificação'
       fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
     end
 
@@ -175,8 +170,7 @@ feature "RevenueAccountings" do
     click_link '1'
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-      page.should have_field 'Exercício', :with => '2011'
+      page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
@@ -201,7 +195,7 @@ feature "RevenueAccountings" do
     click_link 'Criar Receita Contábel'
 
     within_tab 'Principal' do
-      fill_modal 'Natureza da receita', :with => '2009', :field => 'Exercício'
+      fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
     end
 
     click_button 'Salvar'

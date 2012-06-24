@@ -7,7 +7,7 @@ feature "ManagementUnits" do
   end
 
   scenario 'create a new management_unit' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
@@ -15,8 +15,7 @@ feature "ManagementUnits" do
 
     click_link 'Criar Unidade Gestora'
 
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
+    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Unidade Central'
     fill_in 'Sigla', :with => 'UGC'
     page.should have_disabled_field 'Status'
@@ -28,8 +27,7 @@ feature "ManagementUnits" do
 
     click_link 'Unidade Central'
 
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Exercício', :with => '2012'
+    page.should have_field 'Descritor', :with => '2012 - Detran'
     page.should have_field 'Descrição', :with => 'Unidade Central'
     page.should have_field 'Sigla', :with => 'UGC'
     page.should have_select 'Status', :selected => 'Ativo'
@@ -37,7 +35,7 @@ feature "ManagementUnits" do
 
   scenario 'update an existent management_unit' do
     ManagementUnit.make!(:unidade_central)
-    Entity.make!(:secretaria_de_educacao)
+    Descriptor.make!(:secretaria_de_educacao_2013)
 
     click_link 'Contabilidade'
 
@@ -45,8 +43,7 @@ feature "ManagementUnits" do
 
     click_link 'Unidade Central'
 
-    fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_in 'Exercício', :with => '2013'
+    fill_modal 'Descritor', :with => '2013', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Unidade Auxiliar'
     fill_in 'Sigla', :with => 'UGA'
     select 'Inativo', :from => 'Status'
@@ -57,8 +54,7 @@ feature "ManagementUnits" do
 
     click_link 'Unidade Auxiliar'
 
-    page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-    page.should have_field 'Exercício', :with => '2013'
+    page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
     page.should have_field 'Descrição', :with => 'Unidade Auxiliar'
     page.should have_field 'Sigla', :with => 'UGA'
     page.should have_select 'Status', :selected => 'Inativo'
@@ -66,6 +62,7 @@ feature "ManagementUnits" do
 
   scenario 'destroy an existent management_unit' do
     ManagementUnit.make!(:unidade_central)
+
     click_link 'Contabilidade'
 
     click_link 'Unidades Gestoras'

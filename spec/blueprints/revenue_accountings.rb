@@ -1,6 +1,5 @@
 RevenueAccounting.blueprint(:reforma) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   code { '1' }
   revenue_nature { RevenueNature.make!(:imposto) }
   capability { Capability.make!(:reforma) }

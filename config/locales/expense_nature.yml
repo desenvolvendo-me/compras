@@ -7,8 +7,7 @@ pt-BR:
 
     attributes:
       expense_nature:
-        entity: "Entidade"
-        year: "Exercício"
+        descriptor: "Descritor"
         regulatory_act: "Ato regulamentador"
         expense_nature: "Natureza da despesa"
         expense_category: "Categoria da despesa"

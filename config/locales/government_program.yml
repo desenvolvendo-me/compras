@@ -7,7 +7,6 @@ pt-BR:
 
     attributes:
       government_program:
-        entity: "Entidade"
-        year: "Exercício"
+        descriptor: "Descritor"
         description: "Descrição"
         status: "Status"

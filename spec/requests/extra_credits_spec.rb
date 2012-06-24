@@ -7,7 +7,7 @@ feature "ExtraCredits" do
   end
 
   scenario 'create a new extra_credit' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
     RegulatoryAct.make!(:sopa)
     ExtraCreditNature.make!(:abre_credito)
     MovimentType.make!(:adicionar_dotacao)
@@ -22,8 +22,7 @@ feature "ExtraCredits" do
     click_link 'Criar Crédito Suplementar'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => 2012
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       select 'Especial', :from => 'Tipo de crédito'
       fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
@@ -35,7 +34,7 @@ feature "ExtraCredits" do
 
       within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
         fill_in 'Valor', :with => '10,00'
       end
 
@@ -43,7 +42,7 @@ feature "ExtraCredits" do
 
       within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
-        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
         fill_in 'Valor', :with => '10,00'
       end
 
@@ -66,8 +65,7 @@ feature "ExtraCredits" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Detran'
-      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Descritor', :with => '2012 - Detran'
       page.should have_select 'Tipo de crédito', :selected => 'Especial'
       page.should have_field 'Ato regulamentador', :with => '1234'
       page.should have_field 'Tipo de ato regulamentador', :with => 'Lei'
@@ -127,7 +125,7 @@ feature "ExtraCredits" do
           page.should have_field 'Diferença', :with => '0,00'
         end
 
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
         fill_in 'Valor', :with => '10,00'
       end
 
@@ -142,7 +140,7 @@ feature "ExtraCredits" do
           page.should have_field 'Diferença', :with => '10,00'
         end
 
-        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
         fill_in 'Valor', :with => '10,00'
       end
 
@@ -174,7 +172,7 @@ feature "ExtraCredits" do
 
       within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Subtrair dotação'
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
         fill_in 'Valor', :with => '501,00'
       end
 
@@ -182,7 +180,7 @@ feature "ExtraCredits" do
 
       within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Adicionar em outros casos'
-        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
         fill_in 'Valor', :with => '10,00'
       end
     end
@@ -231,7 +229,7 @@ feature "ExtraCredits" do
 
       click_link 'Créditos Suplementares'
 
-      click_link "#{extra_credit.id}"
+      click_link extra_credit.to_s
 
       within_tab 'Movimentos' do
         within 'fieldset:first' do
@@ -240,28 +238,6 @@ feature "ExtraCredits" do
       end
 
       page.should have_content 'Informações de: Alocação'
-    end
-
-    scenario 'when change budget_allocation' do
-      extra_credit = ExtraCredit.make!(:detran_2012)
-      BudgetAllocation.make!(:alocacao_extra)
-
-      click_link 'Contabilidade'
-
-      click_link 'Créditos Suplementares'
-
-      click_link extra_credit.to_s
-
-      within_tab 'Movimentos' do
-        within 'fieldset:first' do
-
-          fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
-
-          click_link 'Mais informações'
-        end
-      end
-
-      page.should have_content 'Informações de: Alocação extra'
     end
 
     scenario 'when add a new record' do
@@ -279,7 +255,7 @@ feature "ExtraCredits" do
 
         within 'fieldset:first' do
           fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
-          fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+          fill_modal 'Dotação', :with => '1', :field => 'Código'
 
           click_link 'Mais informações'
         end
@@ -308,29 +284,6 @@ feature "ExtraCredits" do
       end
 
       page.should have_content 'Informações de: Reforma e Ampliação'
-    end
-
-    scenario 'when change' do
-      extra_credit = ExtraCredit.make!(:detran_2012)
-      Capability.make!(:construcao)
-
-      click_link 'Contabilidade'
-
-      click_link 'Créditos Suplementares'
-
-      click_link extra_credit.to_s
-
-      within_tab 'Movimentos' do
-        within 'fieldset:last' do
-          fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
-
-          within '.capability-field' do
-            click_link 'Mais informações'
-          end
-        end
-      end
-
-      page.should have_content 'Informações de: Construção'
     end
 
     scenario 'when add a new record' do
@@ -387,7 +340,7 @@ feature "ExtraCredits" do
   end
 
   scenario 'update an existent extra_credit' do
-    Entity.make!(:secretaria_de_educacao)
+    Descriptor.make!(:secretaria_de_educacao_2011)
     RegulatoryAct.make!(:emenda)
     extra_credit = ExtraCredit.make!(:detran_2012)
     ExtraCreditNature.make!(:abre_credito_de_transferencia)
@@ -401,8 +354,7 @@ feature "ExtraCredits" do
     click_link extra_credit.to_s
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_in 'Exercício', :with => 2011
+      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
       select 'Suplementar', :from => 'Tipo de crédito'
       fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar de transferência', :field => 'Descrição'
@@ -426,8 +378,7 @@ feature "ExtraCredits" do
     click_link extra_credit.to_s
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-      page.should have_field 'Exercício', :with => '2011'
+      page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
       page.should have_select 'Tipo de crédito', :selected => 'Suplementar'
       page.should have_field 'Ato regulamentador', :with => '4567'
       page.should have_field 'Tipo de ato regulamentador', :with => 'Emenda constitucional'
@@ -463,7 +414,7 @@ feature "ExtraCredits" do
 
       within 'fieldset:last' do
         fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
       end
     end
 
@@ -489,7 +440,7 @@ feature "ExtraCredits" do
 
       within 'fieldset:first' do
         fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
-        fill_modal 'Recurso', :with => '2012', :field => 'Exercício'
+        fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       end
     end
 

@@ -1,14 +1,13 @@
 class ManagementUnit < Compras::Model
-  attr_accessible :description, :acronym, :status, :entity_id, :year
+  attr_accessible :descriptor_id, :description, :acronym, :status
 
   has_enumeration_for :status, :create_helpers => true
 
-  belongs_to :entity
+  belongs_to :descriptor
 
   has_many :pledges, :dependent => :restrict
 
-  validates :entity, :year, :description, :acronym, :status, :presence => true
-  validates :year, :mask => "9999", :allow_blank => true
+  validates :descriptor, :description, :acronym, :status, :presence => true
 
   orderize :description
   filterize

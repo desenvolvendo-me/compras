@@ -10,8 +10,11 @@ describe GovernmentProgram do
   end
 
   it { should belong_to :entity }
+  it { should belong_to :descriptor }
+
   it { should have_many(:budget_allocations).dependent(:restrict) }
 
+  it { should validate_presence_of :descriptor }
   it { should validate_presence_of :entity }
   it { should validate_presence_of :year }
   it { should validate_presence_of :description }

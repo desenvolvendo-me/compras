@@ -9,16 +9,11 @@ describe ExtraCredit do
     subject.to_s.should eq '2'
   end
 
-  it { should belong_to :entity }
+  it { should belong_to :descriptor }
 
   it { should have_many(:extra_credit_moviment_types).dependent(:destroy) }
 
-  it { should allow_value(2012).for(:year) }
-  it { should_not allow_value(212).for(:year) }
-  it { should_not allow_value('2a12').for(:year) }
-
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :year }
+  it { should validate_presence_of :descriptor }
   it { should validate_presence_of :credit_type }
   it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :credit_date }

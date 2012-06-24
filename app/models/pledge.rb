@@ -1,5 +1,5 @@
 class Pledge < Compras::Model
-  attr_accessible :entity_id, :year, :management_unit_id, :emission_date, :pledge_type
+  attr_accessible :descriptor_id, :management_unit_id, :emission_date, :pledge_type
   attr_accessible :budget_allocation_id, :value, :pledge_category_id, :expense_kind_id
   attr_accessible :pledge_historic_id, :contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
@@ -13,8 +13,8 @@ class Pledge < Compras::Model
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type, :create_helpers => true
 
+  belongs_to :descriptor
   belongs_to :creditor
-  belongs_to :entity
   belongs_to :reserve_fund
   belongs_to :management_unit
   belongs_to :budget_allocation
@@ -44,11 +44,12 @@ class Pledge < Compras::Model
   delegate :expense_group_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
+  delegate :entity, :year, :to => :descriptor, :allow_nil => true
 
-  validates :budget_allocation, :entity, :year, :management_unit, :presence => true
+  validates :descriptor, :budget_allocation, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :creditor, :presence => true
   validates :expense_nature, :presence => true
-  validates :code, :uniqueness => { :scope => [:year, :entity_id], :allow_blank => true }
+  validates :code, :uniqueness => { :scope => [:descriptor_id], :allow_blank => true }
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
@@ -57,7 +58,6 @@ class Pledge < Compras::Model
   validate :pledge_parcels_value_should_be_equals_value
 
   with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :year, :mask => '9999'
     allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
     allowing_blank.validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
   end
@@ -122,8 +122,7 @@ class Pledge < Compras::Model
   end
 
   def last_code
-    self.class.where { self.year.eq(year) & self.entity_id.eq(entity_id) }.
-               maximum(:code).to_i
+    self.class.where { self.descriptor_id.eq(descriptor_id) }.maximum(:code).to_i
   end
 
   def pledge_parcels_value_should_be_equals_value

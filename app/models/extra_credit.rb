@@ -1,5 +1,5 @@
 class ExtraCredit < Compras::Model
-  attr_accessible :entity_id, :year, :credit_type, :regulatory_act_id
+  attr_accessible :descriptor_id, :credit_type, :regulatory_act_id
   attr_accessible :credit_date, :extra_credit_nature_id
   attr_accessible :extra_credit_moviment_types_attributes
 
@@ -7,7 +7,7 @@ class ExtraCredit < Compras::Model
 
   has_enumeration_for :credit_type, :with => ExtraCreditKind
 
-  belongs_to :entity
+  belongs_to :descriptor
   belongs_to :regulatory_act
   belongs_to :extra_credit_nature
 
@@ -18,7 +18,7 @@ class ExtraCredit < Compras::Model
 
   accepts_nested_attributes_for :extra_credit_moviment_types, :allow_destroy => true
 
-  validates :year, :entity, :credit_type, :presence => true
+  validates :descriptor, :credit_type, :presence => true
   validates :regulatory_act, :credit_date, :extra_credit_nature, :presence => true
   validate :uniqueness_of_budget_allocation
   validate :uniqueness_of_capability
@@ -27,7 +27,6 @@ class ExtraCredit < Compras::Model
   validate :must_not_be_less_than_last_extra_credit_date
 
   with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :year, :mask => '9999'
     allowing_blank.validates :regulatory_act_id, :uniqueness => { :message => :must_be_uniqueness_on_extra_credit }
     allowing_blank.validates :credit_date, :timeliness => {
       :on_or_after => :publication_date,
@@ -39,7 +38,7 @@ class ExtraCredit < Compras::Model
 
   before_validation :save_total
 
-  orderize :year
+  orderize :id
   filterize
 
   def to_s

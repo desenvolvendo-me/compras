@@ -8,7 +8,7 @@ require 'app/models/pledge_liquidation'
 require 'app/models/pledge_liquidation_cancellation'
 
 describe Pledge do
-  it { should belong_to :entity }
+  it { should belong_to :descriptor }
   it { should belong_to :management_unit }
   it { should belong_to :budget_allocation }
   it { should belong_to :pledge_category }
@@ -28,8 +28,7 @@ describe Pledge do
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
   it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
 
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :year }
+  it { should validate_presence_of :descriptor }
   it { should validate_presence_of :management_unit }
   it { should validate_presence_of :emission_date }
   it { should validate_presence_of :pledge_type }
@@ -127,14 +126,10 @@ describe Pledge do
 
   it 'should return "code - Entity/Year" as to_s method' do
     subject.code = 1
-    subject.stub(:entity => 'Detran')
-    subject.year = 2012
+    subject.stub(:descriptor => double(:entity => 'Detran', :year => 2012))
 
     subject.to_s.should eq '1 - Detran/2012'
   end
-
-  it { should allow_value('2012').for(:year) }
-  it { should_not allow_value('201a').for(:year) }
 
   it "should not have emission_date less than today" do
     subject.should_not allow_value(Date.yesterday).

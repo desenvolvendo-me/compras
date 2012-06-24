@@ -7,6 +7,5 @@ pt-BR:
 
     attributes:
       pledge_historic:
+        descriptor: "Descritor"
         description: "Descrição"
-        entity: "Entidade"
-        year: "Exercício"

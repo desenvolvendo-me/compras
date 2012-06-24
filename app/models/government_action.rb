@@ -1,14 +1,13 @@
 class GovernmentAction < Compras::Model
-  attr_accessible :year, :description, :status, :entity_id
+  attr_accessible :descriptor_id, :description, :status
 
   has_enumeration_for :status, :create_helpers => true
 
-  belongs_to :entity
+  belongs_to :descriptor
 
   has_many :budget_allocations, :dependent => :restrict
 
-  validates :description, :status, :entity, :year, :presence => true
-  validates :year, :numericality => true, :mask => '9999', :allow_blank => true
+  validates :descriptor, :description, :status, :presence => true
 
   orderize :description
   filterize

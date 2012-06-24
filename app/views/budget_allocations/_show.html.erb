@@ -3,10 +3,7 @@
     <thead>
       <tr>
         <th>
-          <%= resource_class.human_attribute_name :entity %>
-        </th>
-        <th>
-          <%= resource_class.human_attribute_name :year %>
+          <%= resource_class.human_attribute_name :descriptor %>
         </th>
         <th>
           <%= resource_class.human_attribute_name :description %>
@@ -28,10 +25,7 @@
     <tbody>
       <tr>
         <td>
-          <%= resource.entity %>
-        </td>
-        <td>
-          <%= resource.year %>
+          <%= resource.descriptor %>
         </td>
         <td>
           <%= resource.description %>

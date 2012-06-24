@@ -1,6 +1,5 @@
 Pledge.blueprint(:empenho) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { I18n.l(Date.current) }
@@ -23,8 +22,7 @@ Pledge.blueprint(:empenho) do
 end
 
 Pledge.blueprint(:empenho_com_dois_vencimentos) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { I18n.l(Date.current) }
@@ -50,8 +48,7 @@ Pledge.blueprint(:empenho_com_dois_vencimentos) do
 end
 
 Pledge.blueprint(:empenho_em_quinze_dias) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   reserve_fund { ReserveFund.make!(:detran_2012) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { Date.current + 15.days }
@@ -74,8 +71,7 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
 end
 
 Pledge.blueprint(:empenho_saldo_maior_mil) do
-  entity { Entity.make!(:detran) }
-  year { 2011 }
+  descriptor { Descriptor.make!(:detran_2011) }
   reserve_fund { ReserveFund.make!(:reparo_2011) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { I18n.l(Date.current) }
@@ -98,8 +94,7 @@ Pledge.blueprint(:empenho_saldo_maior_mil) do
 end
 
 Pledge.blueprint(:empenho_estimativo) do
-  entity { Entity.make!(:detran) }
-  year { 2011 }
+  descriptor { Descriptor.make!(:detran_2011) }
   reserve_fund { ReserveFund.make!(:reparo_2011) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { I18n.l(Date.current) }
@@ -122,8 +117,7 @@ Pledge.blueprint(:empenho_estimativo) do
 end
 
 Pledge.blueprint(:empenho_ordinario) do
-  entity { Entity.make!(:detran) }
-  year { 2010 }
+  descriptor { Descriptor.make!(:detran_2010) }
   reserve_fund { ReserveFund.make!(:reparo_2011) }
   management_unit { ManagementUnit.make!(:unidade_central) }
   emission_date { I18n.l(Date.current) }

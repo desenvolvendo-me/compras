@@ -7,8 +7,7 @@ pt-BR:
 
     attributes:
       revenue_nature:
-        entity: "Entidade"
-        year: "Exercício"
+        descriptor: "Descritor"
         regulatory_act: "Ato regulamentador"
         regulatory_act_type: "Tipo"
         revenue_nature: "Código completo"

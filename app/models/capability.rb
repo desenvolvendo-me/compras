@@ -1,19 +1,18 @@
 class Capability < Compras::Model
-  attr_accessible :entity_id, :year, :description, :goal, :kind, :status
+  attr_accessible :descriptor_id, :description, :goal, :kind, :status
 
   has_enumeration_for :kind, :with => CapabilityKind
   has_enumeration_for :status, :create_helpers => true
   has_enumeration_for :source
 
-  belongs_to :entity
+  belongs_to :descriptor
 
   has_many :budget_allocations, :dependent => :restrict
   has_many :licitation_processes, :dependent => :restrict
   has_many :extra_credit_moviment_types, :dependent => :restrict
   has_many :revenue_accountings, :dependent => :restrict
 
-  validates :year, :mask => '9999', :allow_blank => true
-  validates :entity, :year, :description, :goal, :kind, :status, :presence => true
+  validates :descriptor, :description, :goal, :kind, :status, :presence => true
 
   orderize :description
   filterize

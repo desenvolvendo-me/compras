@@ -7,8 +7,7 @@ pt-BR:
 
     attributes:
       pledge:
-        entity: "Entidade"
-        year: "Exercício"
+        descriptor: "Descritor"
         reserve_fund: "Reserva de dotação"
         reserve_fund_value: "Saldo reserva"
         management_unit: "Unidade gestora"

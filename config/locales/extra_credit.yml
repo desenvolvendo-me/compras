@@ -7,8 +7,7 @@ pt-BR:
 
     attributes:
       extra_credit:
-        entity: "Entidade"
-        year: "Exercício"
+        descriptor: "Descritor"
         credit_type: "Tipo de crédito"
         regulatory_act: "Ato regulamentador"
         regulatory_act_id: "Ato regulamentador"

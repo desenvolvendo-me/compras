@@ -46,7 +46,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
         fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       end
 
@@ -138,7 +138,12 @@ feature "PurchaseSolicitations" do
 
       click_button "Adicionar Dotação"
 
-      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+      within_modal 'Dotação' do
+        fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+        click_button 'Pesquisar'
+        click_record '2011 - Detran'
+      end
+
       fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
 
       click_button 'Adicionar Item'
@@ -219,13 +224,13 @@ feature "PurchaseSolicitations" do
     within_tab 'Dotações orçamentárias' do
       click_button "Adicionar Dotação"
 
-      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
       fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
 
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:first' do
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
         fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       end
     end
@@ -389,7 +394,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
-        fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
         fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
       end
 

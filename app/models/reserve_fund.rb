@@ -1,8 +1,7 @@
 class ReserveFund < Compras::Model
-  attr_accessible :entity_id, :budget_allocation_id, :year
+  attr_accessible :descriptor_id, :budget_allocation_id, :process, :licitation
   attr_accessible :value, :reserve_allocation_type_id, :reserve_allocation_type_id
   attr_accessible :licitation_modality_id, :creditor_id, :status, :date, :reason
-  attr_accessible :licitation, :process
 
   attr_readonly :date
 
@@ -10,7 +9,7 @@ class ReserveFund < Compras::Model
 
   has_enumeration_for :status, :with => ReserveFundStatus, :create_helpers => true
 
-  belongs_to :entity
+  belongs_to :descriptor
   belongs_to :budget_allocation
   belongs_to :reserve_allocation_type
   belongs_to :licitation_modality
@@ -27,12 +26,12 @@ class ReserveFund < Compras::Model
   delegate :expense_group_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
+  delegate :year, :to => :descriptor, :allow_nil => true
 
-  validates :entity, :budget_allocation, :value, :year, :reserve_allocation_type, :date, :presence => true
+  validates :descriptor, :budget_allocation, :value, :reserve_allocation_type, :date, :presence => true
   validate :value_should_not_exceed_available_reserve
 
   with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :year, :mask => '9999'
     allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
     allowing_blank.validates :date, :timeliness => {
       :on_or_after => lambda { last.date },
@@ -44,7 +43,7 @@ class ReserveFund < Compras::Model
 
   before_save :parse_licitation, :parse_process, :clear_licitation_dependent_field_if_is_not_licitation
 
-  orderize :year
+  orderize :id
   filterize
 
   def to_s

@@ -7,7 +7,7 @@ feature "Pledges" do
   end
 
   scenario 'create a new pledge' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
     ManagementUnit.make!(:unidade_central)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     reserve_fund = ReserveFund.make!(:detran_2012)
@@ -28,13 +28,12 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => '2012'
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
-      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
       fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
@@ -106,8 +105,7 @@ feature "Pledges" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Detran'
-      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Descritor', :with => '2012 - Detran'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Reserva de dotação', :with => "#{reserve_fund.id}/2012"
       page.should have_field 'Unidade gestora', :with => 'Unidade Central'
@@ -167,7 +165,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Reserva de dotação', :with => '2011', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '21/02/2012', :field => 'Data'
 
       within_modal 'Desdobramento' do
         page.should have_disabled_field 'Categoria da despesa'
@@ -192,7 +190,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
 
       within_modal 'Desdobramento' do
         page.should have_disabled_field 'Categoria da despesa'
@@ -218,7 +216,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
 
       within_modal 'Desdobramento' do
         scroll_modal_to_bottom :field => 'Natureza da despesa'
@@ -241,13 +239,15 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
     end
 
     click_button 'Salvar'
 
     within_tab 'Principal' do
       within_modal 'Desdobramento' do
+        scroll_modal_to_bottom :field => 'Natureza da despesa'
+
         page.should have_disabled_field 'Categoria da despesa'
         page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
         page.should have_disabled_field 'Grupo da despesa'
@@ -287,7 +287,7 @@ feature "Pledges" do
       click_link 'Criar Empenho'
 
       within_tab 'Principal' do
-        fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
 
         click_link 'Mais informações'
       end
@@ -299,7 +299,7 @@ feature "Pledges" do
   end
 
   scenario 'should not have errors on replicated value' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
     ManagementUnit.make!(:unidade_central)
     BudgetAllocation.make!(:alocacao)
     ReserveFund.make!(:detran_2012)
@@ -320,13 +320,12 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => '2012'
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
-      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
@@ -547,8 +546,7 @@ feature "Pledges" do
     should_not have_button 'Criar Empenho'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Entidade'
-      page.should have_disabled_field 'Exercício'
+      page.should have_disabled_field 'Descritor'
       page.should have_disabled_field 'Reserva de dotação'
       page.should have_disabled_field 'Unidade gestora'
       page.should have_disabled_field 'Data de emissão'
@@ -611,7 +609,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
 
       page.should have_field 'Dotação', :with => budget_allocation.to_s
       page.should have_field 'Saldo da dotação', :with => "479,00"
@@ -630,9 +628,15 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
 
-      fill_modal 'Dotação', :with => '2011', :field => 'Exercício'
+      within_modal 'Dotação' do
+        scroll_modal_to_bottom :field => 'Código'
+
+        click_button 'Pesquisar'
+
+        click_record '2011 - Detran'
+      end
 
       page.should have_field 'Reserva de dotação', :with => ''
       page.should have_field 'Saldo reserva', :with => ''
@@ -652,7 +656,7 @@ feature "Pledges" do
       page.should have_disabled_field 'Saldo reserva'
       page.should have_field 'Saldo reserva', :with => ''
 
-      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
 
       page.should have_field 'Saldo reserva', :with => '10,50'
 
@@ -677,7 +681,7 @@ feature "Pledges" do
       page.should have_field 'Saldo da dotação', :with => ''
       page.should have_field 'Natureza da despesa', :with => ''
 
-      fill_modal 'Dotação *', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação *', :with => '1', :field => 'Código'
 
       page.should have_field 'Saldo da dotação', :with => '489,50'
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -735,7 +739,7 @@ feature "Pledges" do
   end
 
   scenario 'trying to create a new pledge with duplicated items to ensure the error' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
     ManagementUnit.make!(:unidade_central)
     BudgetAllocation.make!(:alocacao)
     PledgeCategory.make!(:geral)
@@ -753,12 +757,11 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => '2012'
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
       fill_in 'Valor', :with => '300,00'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
     end
@@ -835,7 +838,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Reserva de dotação', :with => '2011', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '21/02/2012', :field => 'Data'
 
       page.should have_field 'Saldo reserva', :with => "100,50"
       page.should have_field 'Saldo da dotação', :with => "2.899,50"
@@ -901,13 +904,18 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => '2012'
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
-      fill_modal 'Reserva de dotação', :with => '2012', :field => 'Exercício'
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
-      fill_modal 'Dotação', :with => '2012', :field => 'Exercício'
+      within_modal 'Dotação' do
+        scroll_modal_to_bottom :field => 'Natureza da despesa'
+
+        click_button 'Pesquisar'
+
+        click_record '2011 - Secretaria de Educação'
+      end
       fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
@@ -923,7 +931,7 @@ feature "Pledges" do
     click_button 'Salvar'
 
     within_records do
-      click_link '2 - Detran/2012'
+      click_link '2 - Secretaria de Educação/2012'
     end
 
     within_tab 'Principal' do

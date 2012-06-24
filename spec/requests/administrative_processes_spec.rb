@@ -36,7 +36,7 @@ feature "AdministrativeProcesses" do
     within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -198,13 +198,13 @@ feature "AdministrativeProcesses" do
     within_tab 'Dotações orçamentárias' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
       fill_in 'Valor previsto', :with => '20,00'
 
       click_button 'Adicionar Dotação'
 
       within 'div.administrative-process-budget-allocation:first' do
-        fill_modal 'Dotação orçamentária', :with => '2012', :field => 'Exercício'
+        fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
         fill_in 'Valor previsto', :with => '30,00'
       end
     end

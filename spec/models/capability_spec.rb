@@ -12,18 +12,16 @@ describe Capability do
     subject.to_s.should eq 'Reforma e Ampliação'
   end
 
-  it { should belong_to :entity }
+  it { should belong_to :descritor }
+
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict) }
   it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
   it { should have_many(:revenue_accountings).dependent(:restrict) }
 
+  it { should validate_presence_of :descriptor }
   it { should validate_presence_of :status }
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :year }
   it { should validate_presence_of :description }
   it { should validate_presence_of :goal }
   it { should validate_presence_of :kind }
-  it { should allow_value('1999').for(:year) }
-  it { should_not allow_value('201a').for(:year) }
 end

@@ -1,16 +1,14 @@
 class PledgeHistoric < Compras::Model
-  attr_accessible :description, :entity_id, :year
+  attr_accessible :descriptor_id, :description
 
   has_enumeration_for :source
 
-  belongs_to :entity
+  belongs_to :descriptor
 
   has_many :pledges, :dependent => :restrict
 
   validates :description, :presence => true
-  validates :entity, :presence => true, :unless => Proc.new { |ph| ph.source == Source::DEFAULT }
-  validates :year, :presence => true, :unless => Proc.new { |ph| ph.source == Source::DEFAULT }
-  validates :year, :mask => "9999", :allow_blank => true
+  validates :descriptor, :presence => true, :unless => Proc.new { |ph| ph.source == Source::DEFAULT }
 
   orderize :description
   filterize

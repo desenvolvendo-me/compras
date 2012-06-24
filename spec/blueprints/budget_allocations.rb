@@ -1,7 +1,6 @@
 # encoding: utf-8
 BudgetAllocation.blueprint(:alocacao) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   subfunction { Subfunction.make!(:geral) }
@@ -26,8 +25,7 @@ BudgetAllocation.blueprint(:alocacao) do
 end
 
 BudgetAllocation.blueprint(:alocacao_extra) do
-  entity { Entity.make!(:detran) }
-  year { 2011 }
+  descriptor { Descriptor.make!(:detran_2011) }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   subfunction { Subfunction.make!(:geral) }
@@ -51,8 +49,7 @@ BudgetAllocation.blueprint(:alocacao_extra) do
 end
 
 BudgetAllocation.blueprint(:conserto) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   subfunction { Subfunction.make!(:geral) }
@@ -76,8 +73,7 @@ BudgetAllocation.blueprint(:conserto) do
 end
 
 BudgetAllocation.blueprint(:reparo_2011) do
-  entity { Entity.make!(:secretaria_de_educacao) }
-  year { 2011 }
+  descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
   code { 1 }
   budget_structure { BudgetStructure.make!(:secretaria_de_desenvolvimento) }
   subfunction { Subfunction.make!(:supervisor) }

@@ -1,12 +1,12 @@
 class RevenueNature < Compras::Model
   attr_accessible :regulatory_act_id, :classification, :revenue_rubric_id
-  attr_accessible :specification, :kind, :docket, :entity_id, :year
+  attr_accessible :descriptor_id, :specification, :kind, :docket
   attr_accessible :revenue_category_id, :revenue_subcategory_id
   attr_accessible :revenue_source_id
 
   has_enumeration_for :kind, :with => RevenueNatureKind
 
-  belongs_to :entity
+  belongs_to :descriptor
   belongs_to :regulatory_act
   belongs_to :revenue_category
   belongs_to :revenue_subcategory
@@ -25,8 +25,7 @@ class RevenueNature < Compras::Model
   delegate :revenue_source_id, :to => :revenue_rubric, :allow_nil => true, :prefix => true
 
   validates :regulatory_act, :kind, :docket, :revenue_category, :presence => true
-  validates :specification, :entity, :year, :classification, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
+  validates :descriptor, :specification, :classification, :presence => true
   validates :classification, :mask => '99.99', :allow_blank => true
   validate :revenue_subcategory_must_be_related_with_revenue_category
   validate :revenue_source_must_be_related_with_revenue_subcategory

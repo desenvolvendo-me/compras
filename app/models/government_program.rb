@@ -1,14 +1,13 @@
 class GovernmentProgram < Compras::Model
-  attr_accessible :entity_id, :year, :description, :status
+  attr_accessible :descriptor_id, :description, :status
 
   has_enumeration_for :status
 
-  belongs_to :entity
+  belongs_to :descriptor
 
   has_many :budget_allocations, :dependent => :restrict
 
-  validates :entity, :year, :description, :status, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
+  validates :descriptor, :description, :status, :presence => true
 
   orderize :description
   filterize

@@ -8,7 +8,7 @@ feature "BudgetAllocations" do
 
   scenario 'create a new budget_allocation' do
     BudgetStructure.make!(:secretaria_de_educacao)
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
     Subfunction.make!(:geral)
     GovernmentProgram.make!(:habitacao)
     GovernmentAction.make!(:governamental)
@@ -25,8 +25,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
 
-      fill_modal 'Entidade', :with => 'Detran'
-      fill_in 'Exercício', :with => '2012'
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
@@ -55,8 +54,7 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Detran'
-      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Descritor', :with => '2012 - Detran'
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
@@ -85,6 +83,7 @@ feature "BudgetAllocations" do
   end
 
   scenario 'create a new budget_allocation with 1 as code when is other year' do
+    Descriptor.make!(:detran_2012)
     BudgetAllocation.make!(:reparo_2011)
 
     click_link 'Contabilidade'
@@ -96,8 +95,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
 
-      fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_in 'Exercício', :with => '2012'
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
@@ -126,8 +124,7 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-      page.should have_field 'Exercício', :with => '2012'
+      page.should have_field 'Descritor', :with => '2012 - Detran'
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
@@ -181,7 +178,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     parent = BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructure.make!(:secretaria_de_desenvolvimento, :parent => parent)
-    Entity.make!(:secretaria_de_educacao)
+    Descriptor.make!(:secretaria_de_educacao_2013)
     Subfunction.make!(:gerente)
     GovernmentProgram.make!(:educacao)
     GovernmentAction.make!(:nacional)
@@ -198,8 +195,7 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      fill_modal 'Entidade', :with => 'Secretaria de Educação'
-      fill_in 'Exercício', :with => '2013'
+      fill_modal 'Descritor', :with => '2013', :field => 'Exercício'
       fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
@@ -230,8 +226,7 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-      page.should have_field 'Exercício', :with => '2013'
+      page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
       page.should have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento'
       page.should have_field 'Função', :with => '04 - Administração'
       page.should have_field 'Subfunção', :with => '02 - Gerente Geral'
@@ -395,26 +390,21 @@ feature "BudgetAllocations" do
     page.should_not have_content 'Alocação'
   end
 
-  scenario 'should filter by year' do
+  scenario 'should filter by descriptor' do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
     click_link 'Contabilidade'
 
     click_link 'Dotações Orçamentárias'
-
     click_link 'Filtrar Dotações Orçamentárias'
 
-    fill_in 'Exercício', :with => '2011'
-
-    # Scroll modal to bottom
-    # See https://github.com/jonleighton/poltergeist/issues/83
-    page.execute_script '$(".ui-dialog-content").scrollTop($(".ui-dialog-content").prop("scrollHeight"))'
+    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
 
     click_button 'Pesquisar'
 
-    page.should have_content 'Manutenção e Reparo'
-    page.should_not have_content 'Alocação'
+    page.should_not have_content 'Manutenção e Reparo'
+    page.should have_content 'Alocação'
   end
 
   scenario 'should filter by subfunction' do

@@ -1,7 +1,6 @@
 # encoding: utf-8
 RevenueNature.blueprint(:imposto) do
-  entity { Entity.make!(:detran) }
-  year { 2009 }
+  descriptor { Descriptor.make!(:detran_2009) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   revenue_category { RevenueCategory.make!(:receita_tributaria) }
   revenue_subcategory { RevenueSubcategory.make!(:receita_tributaria) }
@@ -15,8 +14,7 @@ RevenueNature.blueprint(:imposto) do
 end
 
 RevenueNature.blueprint(:imposto_sobre_renda) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   revenue_category { RevenueCategory.make!(:receita_tributaria) }
   revenue_subcategory { RevenueSubcategory.make!(:receita_tributaria) }

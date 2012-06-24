@@ -7,8 +7,7 @@ pt-BR:
 
     attributes:
       subfunction:
+        descriptor: "Descritor"
         code: "Código"
         description: "Descrição"
         function: "Função"
-        entity: "Entidade"
-        year: "Exercício"

@@ -15,7 +15,7 @@ feature "PledgeLiquidations" do
 
     click_link 'Criar Liquidação de Empenho'
 
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+    fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
     fill_in 'Valor a ser liquidado', :with => '150,00'
     fill_in 'Data *', :with => I18n.l(Date.tomorrow)
     fill_in 'Objeto do empenho', :with => 'Para empenho 2012'
@@ -66,7 +66,7 @@ feature "PledgeLiquidations" do
 
     click_link 'Criar Liquidação de Empenho'
 
-    fill_modal 'Empenho', :with => '2012', :field => 'Exercício'
+    fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)

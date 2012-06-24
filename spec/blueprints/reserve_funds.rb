@@ -1,10 +1,9 @@
 # encoding: utf-8
 ReserveFund.blueprint(:detran_2012) do
-  entity { Entity.make!(:detran) }
-  year { 2012 }
+  descriptor { Descriptor.make!(:detran_2012) }
   status { ReserveFundStatus::RESERVED }
   reserve_allocation_type { ReserveAllocationType.make!(:licitation) }
-  date { Date.new(2012, 2, 21) }
+  date { Date.new(2012, 2, 22) }
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   value { 10.5 }
   licitation_modality { LicitationModality.make!(:publica) }
@@ -17,8 +16,7 @@ ReserveFund.blueprint(:detran_2012) do
 end
 
 ReserveFund.blueprint(:educacao_2011) do
-  entity { Entity.make!(:secretaria_de_educacao) }
-  year { 2011 }
+  descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
   status { ReserveFundStatus::RESERVED }
   reserve_allocation_type { ReserveAllocationType.make!(:comum) }
   date { Date.new(2012, 2, 21) }
@@ -31,8 +29,7 @@ ReserveFund.blueprint(:educacao_2011) do
 end
 
 ReserveFund.blueprint(:reparo_2011) do
-  entity { Entity.make!(:secretaria_de_educacao) }
-  year { 2011 }
+  descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
   status { ReserveFundStatus::RESERVED }
   reserve_allocation_type { ReserveAllocationType.make!(:comum) }
   date { Date.new(2012, 2, 21) }
@@ -45,8 +42,7 @@ ReserveFund.blueprint(:reparo_2011) do
 end
 
 ReserveFund.blueprint(:detran_2011) do
-  entity { Entity.make!(:detran) }
-  year { 2011 }
+  descriptor { Descriptor.make!(:detran_2011) }
   status { ReserveFundStatus::RESERVED }
   reserve_allocation_type { ReserveAllocationType.make!(:licitation) }
   date { Date.new(2012, 2, 21) }

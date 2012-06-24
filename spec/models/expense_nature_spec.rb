@@ -14,8 +14,8 @@ describe ExpenseNature do
     subject.to_s.should eq '4.4.20.03.11111111 - Descrição'
   end
 
+  it { should belong_to :descriptor }
   it { should belong_to :regulatory_act }
-  it { should belong_to :entity }
   it { should belong_to :expense_group }
   it { should belong_to :expense_modality }
   it { should belong_to :expense_element }
@@ -32,13 +32,9 @@ describe ExpenseNature do
   it { should validate_presence_of :expense_element }
   it { should validate_presence_of :expense_split }
   it { should validate_presence_of :expense_category }
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :year }
+  it { should validate_presence_of :descriptor }
   it { should validate_presence_of :regulatory_act }
 
   it { should allow_value('12').for(:expense_split) }
   it { should_not allow_value('4a').for(:expense_split) }
-
-  it { should allow_value('2012').for(:year) }
-  it { should_not allow_value('2a12').for(:year) }
 end

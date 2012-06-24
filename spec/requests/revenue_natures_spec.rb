@@ -7,7 +7,7 @@ feature "RevenueNatures" do
   end
 
   scenario 'create a new revenue_nature' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
     RegulatoryAct.make!(:sopa)
     RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
@@ -17,8 +17,7 @@ feature "RevenueNatures" do
 
     click_link 'Criar Natureza da Receita'
 
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
+    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
     fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
     fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
@@ -37,8 +36,7 @@ feature "RevenueNatures" do
       page.find('a').click
     end
 
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Exercício', :with => '2012'
+    page.should have_field 'Descritor', :with => '2012 - Detran'
     page.should have_field 'Ato regulamentador', :with => '1234'
     page.should have_field 'Tipo', :with => 'Lei'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
@@ -209,7 +207,7 @@ feature "RevenueNatures" do
   end
 
   scenario 'update an existent revenue_nature' do
-    Entity.make!(:secretaria_de_educacao)
+    Descriptor.make!(:secretaria_de_educacao_2011)
     RegulatoryAct.make!(:emenda)
     RevenueRubric.make!(:imposto_sobre_a_producao_e_a_circulacao)
     RevenueNature.make!(:imposto)
@@ -220,8 +218,7 @@ feature "RevenueNatures" do
 
     click_link '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
-    fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_in 'Exercício', :with => '2011'
+    fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     fill_in 'Classificação', :with => '11.11'
     fill_modal 'Rúbrica da receita', :with => '3', :field => 'Código'
@@ -235,8 +232,7 @@ feature "RevenueNatures" do
 
     click_link '1.1.1.3.11.11 - Imposto sobre Propriedade Predial e Territorial Urbana'
 
-    page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-    page.should have_field 'Exercício', :with => '2011'
+    page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
     page.should have_field 'Ato regulamentador', :with => '4567'
     page.should have_field 'Tipo', :with => 'Emenda constitucional'
     page.should have_field 'Data de publicação', :with => '02/01/2012'

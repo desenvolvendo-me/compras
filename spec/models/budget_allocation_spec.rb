@@ -16,10 +16,12 @@ describe BudgetAllocation do
     subject.to_s.should eq '1 - Secretaria de educação'
   end
 
+  it { should validate_presence_of :descriptor }
   it { should validate_presence_of :description }
   it { should validate_presence_of :date }
   it { should validate_presence_of :kind }
 
+  it { should belong_to(:descriptor) }
   it { should belong_to(:budget_structure) }
   it { should belong_to(:subfunction) }
   it { should belong_to(:government_program) }
@@ -33,9 +35,6 @@ describe BudgetAllocation do
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:restrict) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:restrict) }
-
-  it { should allow_value('2012').for(:year) }
-  it { should_not allow_value('201a').for(:year) }
 
   it 'should validate presence of amount if kind is average' do
     subject.stub(:divide?).and_return(true)

@@ -9,15 +9,12 @@ describe ManagementUnit do
     subject.to_s.should eq "Central Unit"
   end
 
-  it { should validate_presence_of(:year) }
-  it { should validate_presence_of(:entity) }
+  it { should validate_presence_of(:descriptor) }
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:acronym) }
   it { should validate_presence_of(:status) }
 
-  it { should have_many(:pledges).dependent(:restrict) }
-  it { should belong_to(:entity) }
+  it { should belong_to(:descriptor) }
 
-  it { should allow_value('2012').for(:year) }
-  it { should_not allow_value('201a').for(:year) }
+  it { should have_many(:pledges).dependent(:restrict) }
 end

@@ -1,5 +1,5 @@
 class BudgetAllocationDecorator < Decorator
-  attr_modal :year, :description, :code
+  attr_modal :code, :descriptor_id, :description
 
   def summary
     component.description if component.description

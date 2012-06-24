@@ -17,17 +17,13 @@ describe RevenueNature do
   it { should validate_presence_of :specification }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :docket }
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :year }
-
-  it { should allow_value('2012').for(:year) }
-  it { should_not allow_value('2a12').for(:year) }
+  it { should validate_presence_of :descriptor }
 
   it { should allow_value('12.34').for(:classification) }
   it { should_not allow_value('1a34').for(:classification) }
   it { should_not allow_value('1a.34').for(:classification) }
 
-  it { should belong_to :entity }
+  it { should belong_to :descriptor }
   it { should belong_to :regulatory_act }
   it { should belong_to :revenue_category }
   it { should belong_to :revenue_subcategory }

@@ -7,7 +7,7 @@ feature "PledgeHistorics" do
   end
 
   scenario 'create a new pledge_historic' do
-    Entity.make!(:detran)
+    Descriptor.make!(:detran_2012)
 
     click_link 'Contabilidade'
 
@@ -15,9 +15,8 @@ feature "PledgeHistorics" do
 
     click_link 'Criar Histórico de Empenho'
 
+    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Mensal'
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
 
     click_button 'Salvar'
 
@@ -25,14 +24,13 @@ feature "PledgeHistorics" do
 
     click_link 'Mensal'
 
+    page.should have_field 'Descritor', :with => '2012 - Detran'
     page.should have_field 'Descrição', :with => 'Mensal'
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Exercício', :with => '2012'
   end
 
   scenario 'update an existent pledge_historic' do
     PledgeHistoric.make!(:semestral)
-    Entity.make!(:secretaria_de_educacao)
+    Descriptor.make!(:secretaria_de_educacao_2013)
 
     click_link 'Contabilidade'
 
@@ -41,8 +39,7 @@ feature "PledgeHistorics" do
     click_link 'Semestral'
 
     fill_in 'Descrição', :with => 'Anual'
-    fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_in 'Exercício', :with => '2013'
+    fill_modal 'Descritor', :with => '2013', :field => 'Exercício'
 
     click_button 'Salvar'
 
@@ -51,8 +48,7 @@ feature "PledgeHistorics" do
     click_link 'Anual'
 
     page.should have_field 'Descrição', :with => 'Anual'
-    page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-    page.should have_field 'Exercício', :with => '2013'
+    page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
   end
 
   scenario 'destroy an existent pledge_historic' do

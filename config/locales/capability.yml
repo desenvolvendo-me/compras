@@ -7,8 +7,7 @@ pt-BR:
 
     attributes:
       capability:
-        entity: "Entidade"
-        year: "Exercício"
+        descriptor: "Descritor"
         description: "Descrição"
         goal: "Finalidade"
         kind: "Tipo"
