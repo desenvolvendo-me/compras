@@ -52,6 +52,49 @@ feature "RevenueAccountings" do
     end
   end
 
+  scenario 'create a new revenue_accounting with same descriptor and use 1 as code' do
+    RevenueAccounting.make!(:reforma)
+    RevenueNature.make!(:imposto_sobre_renda)
+
+    click_link 'Contabilidade'
+
+    click_link 'Receitas Contábeis'
+
+    click_link 'Criar Receita Contábel'
+
+    within_tab 'Principal' do
+      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Natureza da receita', :with => 'Imposto sobre a renda', :field => 'Especificação'
+      fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+    end
+
+    within_tab 'Programação' do
+      select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Receita Contábel criado com sucesso.'
+
+    within_records do
+      click_link '2/2012'
+    end
+
+    within_tab 'Principal' do
+      page.should have_field 'Descritor', :with => '2012 - Detran'
+      page.should have_field 'Data', :with => I18n.l(Date.current)
+      page.should have_disabled_field 'Código'
+      page.should have_field 'Código', :with => '2'
+      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
+      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
+      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+    end
+
+    within_tab 'Programação' do
+      page.should have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+    end
+  end
+
   scenario 'create a new revenue_accounting with other descriptor and restart code' do
     RevenueAccounting.make!(:reforma)
     Descriptor.make!(:detran_2011)

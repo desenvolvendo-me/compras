@@ -17,6 +17,8 @@ class RevenueAccounting < Compras::Model
   validates :revenue_nature_id, :uniqueness => true, :allow_blank => true
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
 
+  before_save :set_code
+
   orderize :code
   filterize
 
@@ -24,11 +26,11 @@ class RevenueAccounting < Compras::Model
     "#{code}/#{year}"
   end
 
-  def next_code
-    last_code.succ
-  end
-
   private
+
+  def set_code
+    self.code = last_code.succ
+  end
 
   def last_code
     self.class.where { |revenue_accounting|
