@@ -123,8 +123,8 @@
      var itemDiv = $(this).closest('div.item'),
          unitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
          quantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-         totalPrice = parseFloat(unitPrice.multiply(quantity));
-     itemDiv.find('.item-total-price').val(numberWithDelimiter(totalPrice, '.', ','));
+         totalPrice = numberWithDelimiter(parseFloat(unitPrice.multiply(quantity)));
+     itemDiv.find('.item-total-price').val(totalPrice);
      calculateProposalTotalValue($(this));
    });
 

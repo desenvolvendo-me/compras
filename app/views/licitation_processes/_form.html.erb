@@ -92,9 +92,9 @@
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
-        total = itemQuantity.multiply(itemUnitPrice);
+        total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
 
-    itemDiv.find('.item-price').val(numberWithDelimiter(parseFloat(total)));
+    itemDiv.find('.item-price').val(total);
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
