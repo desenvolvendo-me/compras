@@ -37,6 +37,8 @@ class BudgetAllocation < Compras::Model
   validates :description, :uniqueness => { :allow_blank => true }
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
 
+  before_create :set_code
+
   orderize :description
   filterize
 
@@ -64,11 +66,11 @@ class BudgetAllocation < Compras::Model
     "#{budget_structure_code} - #{description}"
   end
 
-  def next_code
-    last_code.succ
-  end
+  protected
 
-  private
+  def set_code
+    self.code = last_code.succ
+  end
 
   def last_code
     self.class.where { |budget_allocation|

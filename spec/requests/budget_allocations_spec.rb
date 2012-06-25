@@ -82,6 +82,75 @@ feature "BudgetAllocations" do
     end
   end
 
+  scenario 'create a new budget_allocation with 2 as code when is from same descriptor' do
+    BudgetAllocation.make!(:reparo_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Dotações Orçamentarias'
+
+    click_link 'Criar Dotação Orçamentaria'
+
+    within_tab 'Principal' do
+      page.should have_disabled_field 'Código'
+
+      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
+      fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
+      fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
+      fill_modal 'Ação do governo', :with => 'Ação Nacional', :field => 'Descrição'
+      fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
+      fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+      fill_in 'Descrição', :with => 'Alocação para o ano de 2011'
+      fill_in 'Objetivo', :with => 'Manutenção da Unidade Administrativa do ano de 2011'
+      select 'Nenhuma', :from => 'Tipo de dívida'
+      fill_modal 'Tipo de dotação', :with => 'Dotação Administrativa', :field => 'Descrição'
+      check 'Refinanciamento'
+      fill_in 'Data', :with => '17/02/2012'
+    end
+
+    within_tab 'Programação' do
+      select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo da programação'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
+
+    within_records do
+      click_link '1 - Alocação para o ano de 2011'
+    end
+
+    within_tab 'Principal' do
+      page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
+      page.should have_disabled_field 'Código'
+      page.should have_field 'Código', :with => '2'
+      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      page.should have_field 'Função', :with => '05 - Execução'
+      page.should have_field 'Subfunção', :with => '02 - Supervisor'
+      page.should have_field 'Programa do governo', :with => 'Educação'
+      page.should have_field 'Ação do governo', :with => 'Ação Nacional'
+      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
+      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+      page.should have_field 'Descrição', :with => 'Alocação para o ano de 2011'
+      page.should have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa do ano de 2011'
+      page.should have_select 'Tipo de dívida', :selected => 'Nenhuma'
+      page.should have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
+      page.should have_checked_field 'Refinanciamento'
+      page.should_not have_checked_field 'Saúde'
+      page.should_not have_checked_field 'Recurso alienação'
+      page.should_not have_checked_field 'Educação'
+      page.should_not have_checked_field 'Previdência'
+      page.should_not have_checked_field 'Pessoal'
+      page.should have_field 'Data', :with => '17/02/2012'
+    end
+
+    within_tab 'Programação' do
+      page.should have_select 'Tipo da programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+    end
+  end
+
   scenario 'create a new budget_allocation with 1 as code when is other year' do
     Descriptor.make!(:detran_2012)
     BudgetAllocation.make!(:reparo_2011)
