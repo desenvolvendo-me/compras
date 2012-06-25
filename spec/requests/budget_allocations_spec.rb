@@ -50,7 +50,7 @@ feature "BudgetAllocations" do
     page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
 
     within_records do
-      page.find('a').click
+      click_link '1 - Alocação'
     end
 
     within_tab 'Principal' do
@@ -120,7 +120,7 @@ feature "BudgetAllocations" do
     page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
 
     within_records do
-      click_link BudgetAllocation.last.to_s
+      click_link '1 - Alocação para o ano de 2012'
     end
 
     within_tab 'Principal' do
