@@ -12,5 +12,5 @@ builder resource, json do
   json.expense_group_id    resource.expense_group_id
   json.expense_modality_id resource.expense_modality_id
   json.expense_element_id  resource.expense_element_id
-  json.modal_info_url      "/budget_allocations/#{resource.id}.js"
+  json.modal_info_url      budget_allocation_path(resource, :format => :js)
 end
