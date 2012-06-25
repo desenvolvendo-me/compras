@@ -8,7 +8,6 @@ describe ContractTermination do
   it { should belong_to :contract }
   it { should belong_to :dissemination_source }
 
-  it { should validate_presence_of :number }
   it { should validate_presence_of :year }
   it { should validate_presence_of :contract }
   it { should validate_presence_of :reason }
@@ -20,15 +19,14 @@ describe ContractTermination do
   it { should_not allow_value('12').for(:year) }
   it { should allow_value('1234').for(:year) }
 
-  describe 'ContractTermination#next_number' do
-    subject { described_class}
-
+  describe '#next_number' do
     before do
-      subject.stub(:last_number).and_return 1
+      described_class.stub(:last_number).and_return 1
+      subject.stub(:year).and_return 2012
     end
 
     it 'returns the last number + 1' do
-      subject.next_number(2012).should eq 2
+      subject.next_number.should eq 2
     end
   end
 end

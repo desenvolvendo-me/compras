@@ -8,7 +8,7 @@ class ContractTerminationsController < CrudController
   def new
     object = build_resource
     object.year = Date.current.year
-    object.number = ContractTermination.next_number(object.year)
+    object.number = object.next_number
     object.contract = Contract.find(params[:contract_id])
 
     super
@@ -26,7 +26,6 @@ class ContractTerminationsController < CrudController
 
   def create_resource(object)
     object.year = Date.current.year
-    object.number = ContractTermination.next_number(object.year)
 
     super
   end

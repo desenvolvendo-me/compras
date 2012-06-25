@@ -7,9 +7,11 @@ class ContractTermination < Compras::Model
   belongs_to :contract
   belongs_to :dissemination_source
 
-  validates :number, :year, :contract, :reason, :expiry_date, :termination_date, :presence => true
+  validates :year, :contract, :reason, :expiry_date, :termination_date, :presence => true
   validates :publication_date, :dissemination_source, :presence => true
   validates :year, :mask => "9999", :allow_blank => true
+
+  before_create :generate_number
 
   orderize :year, :number
 
@@ -17,13 +19,17 @@ class ContractTermination < Compras::Model
     "#{year}/#{number}"
   end
 
-  def self.next_number(year)
-    last_number(year).succ
+  def next_number
+    self.class.last_number(self.year).succ
   end
 
   protected
 
   def self.last_number(year)
     where{ self.year.eq(year) }.maximum('number').to_i
+  end
+
+  def generate_number
+    self.number = next_number
   end
 end
