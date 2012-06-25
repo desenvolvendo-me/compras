@@ -170,7 +170,7 @@ feature "BudgetAllocations" do
       select 'Dividir valor previsto por 12', :from => 'Tipo'
       fill_in 'Valor', :with => '222,22'
       page.should have_content '18,51'
-      page.should have_content '18,52'
+      page.should have_content '18,61'
     end
   end
 
