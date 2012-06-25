@@ -21,17 +21,6 @@ describe DirectPurchaseBudgetAllocationItem do
   it { should validate_presence_of :quantity }
   it { should validate_presence_of :unit_price }
 
-  context 'should unit_price be greater than 0' do
-    it 'should be valid' do
-      subject.unit_price = 4
-      subject.valid?
-      subject.errors[:unit_price].should be_empty
-    end
-
-    it 'should be invalid' do
-      subject.unit_price = -4
-      subject.valid?
-      subject.errors[:unit_price].should eq ["deve ser maior que 0"]
-    end
-  end
+  it { should allow_value(4).for(:unit_price) }
+  it { should_not allow_value(-4).for(:unit_price) }
 end
