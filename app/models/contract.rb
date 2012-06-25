@@ -47,8 +47,11 @@ class Contract < Compras::Model
     self.where { (self.year.eq(year)) & (self.entity_id.eq(entity_id)) }.size + 1
   end
 
+  # It's a XNOR validation.
+  # Must have licitation process or direct purchase,
+  # but not both and not neither one.
   def presence_of_licitation_process_or_direct_purchase
-    if (licitation_process && direct_purchase) || (!licitation_process && !direct_purchase)
+    unless licitation_process.present? ^ direct_purchase.present?
       errors.add :licitation_process, :must_select_licitation_process_or_direct_purchase
     end
   end
