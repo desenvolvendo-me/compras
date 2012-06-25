@@ -893,7 +893,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'when create a new pledge with a entity and year that already exist the code should be increased by one' do
+  scenario 'when create a new pledge with a descriptor that already exist the code should be increased by one' do
     Pledge.make!(:empenho_saldo_maior_mil)
     ReserveFund.make!(:detran_2012)
 
@@ -937,6 +937,51 @@ feature "Pledges" do
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '2'
+    end
+  end
+
+  scenario 'when create a new pledge with a descriptor that not exist the code should restart at 1' do
+    Pledge.make!(:empenho)
+    Descriptor.make!(:detran_2011)
+
+    click_link 'Contabilidade'
+
+    click_link 'Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
+      fill_in 'Data de emissão', :with => I18n.l(Date.current)
+      select 'Global', :from => 'Tipo de empenho'
+      within_modal 'Dotação' do
+        scroll_modal_to_bottom :field => 'Natureza da despesa'
+        click_button 'Pesquisar'
+        click_record '2012 - Detran'
+      end
+      fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
+      fill_in 'Valor', :with => '10,00'
+      select 'Patrimonial', :from => 'Tipo de bem'
+      fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
+      fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_records do
+      click_link '1 - Detran/2012'
+    end
+
+    within_tab 'Principal' do
+      page.should have_disabled_field 'Código'
+      page.should have_field 'Código', :with => '1'
     end
   end
 
