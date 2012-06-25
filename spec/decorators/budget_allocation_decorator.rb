@@ -16,9 +16,4 @@ describe BudgetAllocationDecorator do
 
     subject.reserved_value.should eq '500,00'
   end
-
-  it 'should return description as summary' do
-    component.stub(:description => 'Alocação')
-    subject.summary.should eq 'Alocação'
-  end
 end
