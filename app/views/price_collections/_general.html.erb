@@ -1,13 +1,13 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-4">
     <%= f.input :collection_number, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-8">
     <%= f.input :year, :disabled => f.object.annulled? %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-6">
     <%= f.input :date, :disabled => f.object.annulled? %>
   </div>
 </div>
@@ -22,26 +22,26 @@
     <%= f.input :payment_method, :disabled => f.object.annulled? %>
   </div>
 
-  <div class="yui3-u-1-3">
-    <%= f.input :period, :disabled => f.object.annulled? %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :period_unit, :disabled => f.object.annulled? %>
+  <div class="yui3-u-1-6">
+    <%= f.input :expiration, :disabled => f.object.annulled? %>
   </div>
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-5">
+    <%= f.input :period, :disabled => f.object.annulled? %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :period_unit, :disabled => f.object.annulled? %>
+  </div>
+
+  <div class="yui3-u-1-5">
     <%= f.input :proposal_validity, :disabled => f.object.annulled? %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-6">
     <%= f.input :proposal_validity_unit, :disabled => f.object.annulled? %>
-  </div>
-
-  <div class="yui3-u-1-3">
-    <%= f.input :expiration, :disabled => f.object.annulled? %>
   </div>
 </div>
 

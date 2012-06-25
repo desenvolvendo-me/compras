@@ -3,7 +3,7 @@
     <%= f.input :regulatory_act %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-6">
     <%= f.input :regulatory_act_publication_date, :disabled => true, :input_html => { :value => (l(f.object.regulatory_act_publication_date) if f.object.regulatory_act_publication_date) } %>
   </div>
 </div>
@@ -11,11 +11,11 @@
 <%= f.input :description %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :initial_value %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :final_value %>
   </div>
 </div>

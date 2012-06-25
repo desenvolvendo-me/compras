@@ -3,11 +3,11 @@
     <%= f.input :process, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-8">
     <%= f.input :year, :disabled => f.object.persisted? %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-6">
     <%= f.input :process_date %>
   </div>
 
@@ -54,11 +54,11 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-5">
     <%= f.input :expiration %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-8">
     <%= f.input :expiration_unit %>
   </div>
 
@@ -68,43 +68,45 @@
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-4">
     <%= f.input :licitation_number, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-8">
     <%= f.input :year, :disabled => true, :input_html => { :id => nil } %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-4">
     <%= f.input :modality, :disabled => true, :as => :string, :input_html => { :value => f.object.modality_humanize } %>
   </div>
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :envelope_delivery_date %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-5">
     <%= f.input :envelope_delivery_time %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :envelope_opening_date %>
-  </div>
-
-  <div class="yui3-u-1-4">
-    <%= f.input :envelope_opening_time %>
   </div>
 </div>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
+    <%= f.input :envelope_opening_date %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :envelope_opening_time %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-5">
     <%= f.input :period %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-8">
     <%= f.input :period_unit %>
   </div>
 
@@ -122,15 +124,15 @@
     <%= f.input :legal_advice %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-6">
     <%= f.input :legal_advice_date %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-6">
     <%= f.input :contract_date %>
   </div>
 
-  <div class="yui3-u-1-5">
+  <div class="yui3-u-1-4">
     <%= f.input :contract_expiration %>
   </div>
 </div>
@@ -138,11 +140,11 @@
 <%= f.input :observations %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-6">
     <%= f.input :ratification_date, :disabled => true, :input_html => { :class => 'important' } %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-6">
     <%= f.input :adjudication_date, :disabled => true, :input_html => { :class => 'important' } %>
   </div>
 </div>

@@ -1,9 +1,9 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-5">
     <%= f.input :licitation_process %>
   </div>
 
-  <div class="yui3-u-1-3">
+  <div class="yui3-u-1-5">
     <%= f.input :impugnment_date %>
   </div>
 
@@ -16,19 +16,21 @@
 <%= f.input :licitation_process_administrative_process_description, :disabled => true, :as => 'text' %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :licitation_process_envelope_delivery_date, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_envelope_delivery_date } %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-5">
     <%= f.input :licitation_process_envelope_delivery_time, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_envelope_delivery_time }%>
   </div>
+</div>
 
-  <div class="yui3-u-1-4">
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
     <%= f.input :licitation_process_envelope_opening_date, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_envelope_opening_date } %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-5">
     <%= f.input :licitation_process_envelope_opening_time, :disabled => true, :input_html => { :value => f.object.decorator.licitation_process_envelope_opening_time } %>
   </div>
 </div>
@@ -36,29 +38,31 @@
 <%= f.input :valid_reason %>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
     <%= f.input :situation, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-4">
     <%= f.input :judgment_date, :disabled => true %>
   </div>
 </div>
 
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-3">
     <%= f.input :new_envelope_delivery_date, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-5">
     <%= f.input :new_envelope_delivery_time, :disabled => true %>
   </div>
+</div>
 
-  <div class="yui3-u-1-4">
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
     <%= f.input :new_envelope_opening_date, :disabled => true %>
   </div>
 
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-5">
     <%= f.input :new_envelope_opening_time, :disabled => true %>
   </div>
 </div>

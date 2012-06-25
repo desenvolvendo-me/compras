@@ -3,30 +3,30 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-8">
       <%= f.input :order, :disabled => true, :input_html => { :class => :order } %>
     </div>
 
-    <div class="yui3-u-1-2">
+    <div class="yui3-u-3-4">
       <%= f.input :material, :input_html => { :class => 'material' } %>
     </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-8">
       <%= f.input :reference_unit, :disabled => true, :input_html => { :class => 'reference-unit' } %>
     </div>
   </div>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-6">
       <%= f.input :quantity, :input_html => { :class => 'item-quantity' } %>
     </div>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-4">
       <%= f.input :unit_price, :input_html => { :class => 'item-unit-price' } %>
     </div>
 
-    <div class="yui3-u-1-3">
-      <%= f.input :estimated_total_price, :input_html => { :class => 'item-price', 'data-decimal' => true, :value => number_with_precision(f.object.estimated_total_price) } %>
+    <div class="yui3-u-1-4">
+      <%= f.input :estimated_total_price, :input_html => { :class => 'decimal item-price', 'data-decimal' => true, :value => number_with_precision(f.object.estimated_total_price) } %>
     </div>
   </div>
 
