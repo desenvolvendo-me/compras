@@ -7,7 +7,8 @@ class ContractTermination < Compras::Model
   belongs_to :contract
   belongs_to :dissemination_source
 
-  validates :number, :year, :contract, :reason, :expiry_date, :termination_date, :publication_date, :dissemination_source, :presence => true
+  validates :number, :year, :contract, :reason, :expiry_date, :termination_date, :presence => true
+  validates :publication_date, :dissemination_source, :presence => true
   validates :year, :mask => "9999", :allow_blank => true
 
   orderize :year, :number
