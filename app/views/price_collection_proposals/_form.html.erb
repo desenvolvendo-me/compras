@@ -63,9 +63,9 @@
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
-        total = itemQuantity.multiply(itemUnitPrice);
+        total = numberWithDelimiter(parseFloat(itemQuantity.multiply(itemUnitPrice)));
 
-    itemDiv.find('.item-total-price').val(numberWithDelimiter(parseFloat(total)));
+    itemDiv.find('.item-total-price').val(total);
     calculateLotTotalItems(itemDiv);
   });
 
@@ -73,9 +73,9 @@
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),
-        unitPrice = itemTotalPrice.divide(itemQuantity);
+        unitPrice = numberWithDelimiter(parseFloat(itemTotalPrice.divide(itemQuantity)));
 
-    itemDiv.find('.item-unit-price').val(numberWithDelimiter(parseFloat(unitPrice)));
+    itemDiv.find('.item-unit-price').val(unitPrice);
     calculateLotTotalItems(itemDiv);
   });
 </script>
