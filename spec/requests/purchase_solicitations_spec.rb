@@ -34,7 +34,7 @@ feature "PurchaseSolicitations" do
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -42,7 +42,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
@@ -78,7 +78,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
       page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
-      page.should have_field 'Estrutura orçamentária solicitante', :with => '1 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -88,7 +88,7 @@ feature "PurchaseSolicitations" do
       page.should have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_field "Dotação", :with => budget_allocation.to_s
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
@@ -126,14 +126,14 @@ feature "PurchaseSolicitations" do
       fill_in 'Ano', :with => '2013'
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
       select 'Serviços', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button "Remover Dotação"
 
       click_button "Adicionar Dotação"
@@ -174,14 +174,14 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Ano', :with => '2013'
       page.should have_field 'Data da solicitação', :with => '01/02/2013'
       page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros', :field => 'Matrícula'
-      page.should have_field 'Estrutura orçamentária solicitante', :with => '1.2 - Secretaria de Desenvolvimento'
+      page.should have_field 'Estrutura orçamentaria solicitante', :with => '1.2 - Secretaria de Desenvolvimento'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
       page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_field "Dotação", :with => budget_allocation.to_s
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
 
@@ -213,7 +213,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Dados gerais' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -221,7 +221,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button "Adicionar Dotação"
 
       fill_modal 'Dotação', :with => '1', :field => 'Código'
@@ -237,7 +237,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_content 'já está em uso'
     end
   end
@@ -251,7 +251,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_content 'é necessário cadastrar pelo menos uma dotação'
 
       click_button 'Adicionar Dotação'
@@ -259,7 +259,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_content 'é necessário cadastrar pelo menos um item'
     end
   end
@@ -275,7 +275,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_field 'Item'
 
       click_button 'Remover Item'
@@ -283,7 +283,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should_not have_field 'Item'
       page.should have_content 'é necessário cadastrar pelo menos um item'
 
@@ -294,7 +294,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should_not have_field 'Dotação'
       page.should have_content 'é necessário cadastrar pelo menos uma dotação'
     end
@@ -307,7 +307,7 @@ feature "PurchaseSolicitations" do
 
     click_link 'Criar Solicitação de Compra'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_disabled_field 'Valor total dos itens'
 
       click_button 'Adicionar Dotação'
@@ -382,7 +382,7 @@ feature "PurchaseSolicitations" do
     within_tab 'Dados gerais' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentária solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
       fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
       fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -390,7 +390,7 @@ feature "PurchaseSolicitations" do
       fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button "Adicionar Dotação"
 
       within '.purchase-solicitation-budget-allocation:last' do
@@ -420,7 +420,7 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
       page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho', :field => 'Matrícula'
-      page.should have_field 'Estrutura orçamentária solicitante', :with => '1 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
       page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
       page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
       page.should have_select 'Tipo de solicitação', :selected => 'Bens'
@@ -430,7 +430,7 @@ feature "PurchaseSolicitations" do
       page.should have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_field "Dotação", :with => budget_allocation.to_s
       page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 

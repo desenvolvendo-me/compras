@@ -88,14 +88,14 @@ feature "Contracts" do
     select 'Fiança bancária', :from => 'Garantias do contrato'
     select 'Sim', :from => 'Subcontração'
 
-    fill_modal 'Unidade orçamentária gestora responsável', :with => 'Secretaria de Educação', :field => 'Descrição'
+    fill_modal 'Unidade orçamentaria gestora responsável', :with => 'Secretaria de Educação', :field => 'Descrição'
 
     within_modal 'Advogado responsável pela gestão do contrato' do
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
 
-    within_modal 'Responsável pela unidade orçamentária gestora' do
+    within_modal 'Responsável pela unidade orçamentaria gestora' do
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
@@ -126,8 +126,8 @@ feature "Contracts" do
     page.should have_select 'Forma de execução', :selected => 'Empreitada integral'
     page.should have_select 'Garantias do contrato', :selected => 'Fiança bancária'
     page.should have_select 'Subcontração', :selected => 'Sim'
-    page.should have_field 'Unidade orçamentária gestora responsável', :with => '1 - Secretaria de Educação'
-    page.should have_field 'Responsável pela unidade orçamentária gestora', :with => 'Wenderson Malheiros'
+    page.should have_field 'Unidade orçamentaria gestora responsável', :with => '1 - Secretaria de Educação'
+    page.should have_field 'Responsável pela unidade orçamentaria gestora', :with => 'Wenderson Malheiros'
     page.should have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'
     page.should have_field 'O.A.B. do advogado responsável', :with => '5678'
 

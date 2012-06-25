@@ -7,8 +7,8 @@ pt-BR:
 
     attributes:
       administrative_process_budget_allocation:
-        budget_allocation: "Dotação orçamentária"
-        budget_allocation_description: "Dotação orçamentária"
+        budget_allocation: "Dotação orçamentaria"
+        budget_allocation_description: "Dotação orçamentaria"
         budget_allocation_expense_nature: "Compl. do elemento"
         budget_allocation_amount: "Saldo da dotação"
         value: "Valor previsto"

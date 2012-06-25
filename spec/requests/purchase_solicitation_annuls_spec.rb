@@ -71,7 +71,7 @@ feature 'PurchaseSolicitationAnnul' do
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Ano'
       page.should have_disabled_field 'Data da solicitação'
-      page.should have_disabled_field 'Estrutura orçamentária solicitante'
+      page.should have_disabled_field 'Estrutura orçamentaria solicitante'
       page.should have_disabled_field 'Responsável pela solicitação'
       page.should have_disabled_field 'Justificativa da solicitação'
       page.should have_disabled_field 'Local para entrega'
@@ -84,7 +84,7 @@ feature 'PurchaseSolicitationAnnul' do
       page.should have_disabled_field 'Justificativa para não atendimento'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_disabled_field 'Valor total dos itens'
 
       page.should_not have_button 'Adicionar Dotação'

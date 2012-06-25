@@ -39,7 +39,7 @@ feature "DirectPurchases" do
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -54,7 +54,7 @@ feature "DirectPurchases" do
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
       # getting data from modal
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
@@ -92,7 +92,7 @@ feature "DirectPurchases" do
       page.should have_select 'Modalidade', :selected => 'Material ou serviços'
       page.should have_select 'Tipo do empenho', :selected => 'Global'
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
       page.should have_field 'Objeto da licitação', :with => 'Ponte'
       page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
       page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -105,7 +105,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
 
@@ -141,7 +141,7 @@ feature "DirectPurchases" do
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Tipo do empenho'
       page.should have_disabled_field 'Fornecedor'
-      page.should have_disabled_field 'Estrutura orçamentária'
+      page.should have_disabled_field 'Estrutura orçamentaria'
       page.should have_disabled_field 'Objeto da licitação'
       page.should have_disabled_field 'Local de entrega'
       page.should have_disabled_field 'Responsável'
@@ -154,7 +154,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Dotações' do
-      page.should have_disabled_field 'Dotação orçamentária'
+      page.should have_disabled_field 'Dotação orçamentaria'
       page.should have_disabled_field 'Compl. do elemento'
       page.should have_disabled_field 'Saldo da dotação'
       page.should have_disabled_field 'Material'
@@ -288,7 +288,7 @@ feature "DirectPurchases" do
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -303,12 +303,12 @@ feature "DirectPurchases" do
     within_tab 'Dotações' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
       click_button 'Adicionar Dotação'
 
       within '.direct-purchase-budget-allocation:first' do
-        fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+        fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
       end
     end
 
@@ -577,7 +577,7 @@ feature "DirectPurchases" do
 
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
     end
 
     click_button 'Salvar'

@@ -18,15 +18,15 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Criar Dotação Orçamentária'
+    click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Habitação', :field => 'Descrição'
@@ -47,7 +47,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Dotação Orçamentária criado com sucesso.'
+    page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -57,7 +57,7 @@ feature "BudgetAllocations" do
       page.should have_field 'Descritor', :with => '2012 - Detran'
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
       page.should have_field 'Função', :with => '04 - Administração'
       page.should have_field 'Subfunção', :with => '01 - Administração Geral'
       page.should have_field 'Programa do governo', :with => 'Habitação'
@@ -88,15 +88,15 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Criar Dotação Orçamentária'
+    click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
@@ -117,7 +117,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Dotação Orçamentária criado com sucesso.'
+    page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
 
     within_records do
       click_link BudgetAllocation.last.to_s
@@ -127,7 +127,7 @@ feature "BudgetAllocations" do
       page.should have_field 'Descritor', :with => '2012 - Detran'
       page.should have_disabled_field 'Código'
       page.should have_field 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
       page.should have_field 'Função', :with => '05 - Execução'
       page.should have_field 'Subfunção', :with => '02 - Supervisor'
       page.should have_field 'Programa do governo', :with => 'Educação'
@@ -155,9 +155,9 @@ feature "BudgetAllocations" do
   scenario 'should apply month value based on kind and value' do
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Criar Dotação Orçamentária'
+    click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Programação' do
       page.should have_disabled_field 'Valor'
@@ -188,7 +188,7 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -196,7 +196,7 @@ feature "BudgetAllocations" do
 
     within_tab 'Principal' do
       fill_modal 'Descritor', :with => '2013', :field => 'Exercício'
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
       fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
@@ -219,7 +219,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Dotação Orçamentária editado com sucesso.'
+    page.should have_notice 'Dotação Orçamentaria editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -227,7 +227,7 @@ feature "BudgetAllocations" do
 
     within_tab 'Principal' do
       page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
-      page.should have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento'
+      page.should have_field 'Estrutura orçamentaria', :with => '1.2 - Secretaria de Desenvolvimento'
       page.should have_field 'Função', :with => '04 - Administração'
       page.should have_field 'Subfunção', :with => '02 - Gerente Geral'
       page.should have_field 'Programa do governo', :with => 'Educação'
@@ -258,9 +258,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Criar Dotação Orçamentária'
+    click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
       page.should have_disabled_field 'Subfunção'
@@ -281,7 +281,7 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -297,7 +297,7 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -320,9 +320,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Criar Dotação Orçamentária'
+    click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
@@ -339,7 +339,7 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -347,7 +347,7 @@ feature "BudgetAllocations" do
 
     click_link "Apagar", :confirm => true
 
-    page.should have_notice 'Dotação Orçamentária apagado com sucesso.'
+    page.should have_notice 'Dotação Orçamentaria apagado com sucesso.'
 
     page.should_not have_content 'Alocação extra'
   end
@@ -357,9 +357,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Criar Dotação Orçamentária'
+    click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
       fill_in 'Descrição', :with => 'Alocação'
@@ -378,11 +378,11 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Filtrar Dotações Orçamentárias'
+    click_link 'Filtrar Dotações Orçamentarias'
 
-    fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+    fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
 
     click_button 'Pesquisar'
 
@@ -396,8 +396,8 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
-    click_link 'Filtrar Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
+    click_link 'Filtrar Dotações Orçamentarias'
 
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
 
@@ -413,9 +413,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Filtrar Dotações Orçamentárias'
+    click_link 'Filtrar Dotações Orçamentarias'
 
     fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
 
@@ -431,9 +431,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Filtrar Dotações Orçamentárias'
+    click_link 'Filtrar Dotações Orçamentarias'
 
     fill_modal 'Programa do governo', :with => 'Educação', :field => 'Descrição'
 
@@ -449,9 +449,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Filtrar Dotações Orçamentárias'
+    click_link 'Filtrar Dotações Orçamentarias'
 
     fill_modal 'Ação do governo', :with => 'Ação Nacional', :field => 'Descrição'
 
@@ -467,9 +467,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Filtrar Dotações Orçamentárias'
+    click_link 'Filtrar Dotações Orçamentarias'
 
     fill_modal 'Natureza da despesa', :with => 'Compra de Material', :field => 'Descrição'
 
@@ -485,9 +485,9 @@ feature "BudgetAllocations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Dotações Orçamentárias'
+    click_link 'Dotações Orçamentarias'
 
-    click_link 'Filtrar Dotações Orçamentárias'
+    click_link 'Filtrar Dotações Orçamentarias'
 
     fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
 

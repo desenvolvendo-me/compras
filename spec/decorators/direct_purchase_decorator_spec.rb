@@ -13,6 +13,6 @@ describe DirectPurchaseDecorator do
   it 'should return budget_structure and creditor on summary' do
     subject.stub(:budget_structure).and_return('Secretaria de educação')
     subject.stub(:creditor).and_return('Nohup')
-    subject.summary.should eq "Estrutura orçamentária: Secretaria de educação / Fornecedor: Nohup"
+    subject.summary.should eq "Estrutura orçamentaria: Secretaria de educação / Fornecedor: Nohup"
   end
 end

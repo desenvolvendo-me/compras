@@ -2,14 +2,14 @@ pt-BR:
   activerecord:
     models:
       budget_allocation:
-        one: "Dotação Orçamentária"
-        other: "Dotações Orçamentárias"
+        one: "Dotação Orçamentaria"
+        other: "Dotações Orçamentarias"
 
     attributes:
       budget_allocation:
         descriptor: "Descritor"
         code: "Código"
-        budget_structure: "Estrutura orçamentária"
+        budget_structure: "Estrutura orçamentaria"
         function: "Função"
         subfunction: "Subfunção"
         government_program: "Programa do governo"

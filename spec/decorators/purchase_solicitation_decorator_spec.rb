@@ -8,6 +8,6 @@ describe PurchaseSolicitationDecorator do
     subject.stub(:responsible).and_return('Nohup')
     subject.stub(:service_status_humanize).and_return('Pendente')
 
-    subject.summary.should eq "Estrutura orçamentária solicitante: Secretaria de educação / Responsável pela solicitação: Nohup / Status: Pendente"
+    subject.summary.should eq "Estrutura orçamentaria solicitante: Secretaria de educação / Responsável pela solicitação: Nohup / Status: Pendente"
   end
 end

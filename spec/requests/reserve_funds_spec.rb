@@ -26,7 +26,7 @@ feature "ReserveFunds" do
 
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
     fill_in 'Data', :with => '22/02/2012'
-    fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+    fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
     page.should have_field 'Valor reservado', :with => '10,50'
 
@@ -50,7 +50,7 @@ feature "ReserveFunds" do
     page.should have_field 'Descritor', :with => '2012 - Detran'
     page.should have_field 'Tipo', :with => 'Licitação'
     page.should have_field 'Data', :with => '22/02/2012'
-    page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+    page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
     page.should have_field 'Valor reservado', :with => '20,50'
     page.should have_field 'Valor *', :with => '10,00'
     page.should have_field 'Modalidade', :with => 'Pública'
@@ -78,8 +78,8 @@ feature "ReserveFunds" do
     page.should have_field 'Tipo', :with => 'Licitação'
     page.should have_disabled_field 'Data'
     page.should have_field 'Data', :with => '22/02/2012'
-    page.should have_disabled_field 'Dotação orçamentária'
-    page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+    page.should have_disabled_field 'Dotação orçamentaria'
+    page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
     page.should have_disabled_field 'Valor *'
     page.should have_field 'Valor *', :with => '10,50'
     page.should have_disabled_field 'Modalidade'
@@ -117,12 +117,12 @@ feature "ReserveFunds" do
 
     page.should have_disabled_field 'Saldo orçamentário'
 
-    fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+    fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
     page.should have_disabled_field 'Saldo orçamentário'
     page.should have_field 'Saldo orçamentário', :with => '500,00'
 
-    clear_modal 'Dotação orçamentária'
+    clear_modal 'Dotação orçamentaria'
 
     page.should have_disabled_field 'Saldo orçamentário'
     page.should have_field 'Saldo orçamentário', :with => ''
@@ -137,7 +137,7 @@ feature "ReserveFunds" do
 
     click_link 'Criar Reserva de Dotação'
 
-    fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+    fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
     click_link 'reserve_fund_budget_allocation_info_link'
 

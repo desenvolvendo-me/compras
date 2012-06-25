@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       reserve_fund:
         descriptor: "Descritor"
-        budget_allocation: "Dotação orçamentária"
+        budget_allocation: "Dotação orçamentaria"
         budget_allocation_amount: "Saldo orçamentário"
         budget_allocation_reserved_value: "Valor reservado"
         value: "Valor"

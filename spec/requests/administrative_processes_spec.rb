@@ -33,10 +33,10 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
       fill_in 'Valor previsto', :with => '20,00'
     end
 
@@ -63,8 +63,8 @@ feature "AdministrativeProcesses" do
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+    within_tab 'Dotações orçamentarias' do
+      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
 
@@ -96,8 +96,8 @@ feature "AdministrativeProcesses" do
       page.should have_disabled_field 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentárias' do
-      page.should have_disabled_field 'Dotação orçamentária'
+    within_tab 'Dotações orçamentarias' do
+      page.should have_disabled_field 'Dotação orçamentaria'
       page.should have_disabled_field 'Saldo da dotação'
       page.should have_disabled_field 'Valor previsto'
 
@@ -144,7 +144,7 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button 'Adicionar Dotação'
 
       fill_in 'Valor previsto', :with => '20,00'
@@ -195,23 +195,23 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button 'Adicionar Dotação'
 
-      fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
       fill_in 'Valor previsto', :with => '20,00'
 
       click_button 'Adicionar Dotação'
 
       within 'div.administrative-process-budget-allocation:first' do
-        fill_modal 'Dotação orçamentária', :with => '1', :field => 'Código'
+        fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
         fill_in 'Valor previsto', :with => '30,00'
       end
     end
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_content 'já está em uso'
     end
   end
@@ -240,7 +240,7 @@ feature "AdministrativeProcesses" do
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       fill_in 'Valor previsto', :with => '30,00'
     end
 
@@ -267,7 +267,7 @@ feature "AdministrativeProcesses" do
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '30,00'
     end

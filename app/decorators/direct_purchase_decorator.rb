@@ -7,6 +7,6 @@ class DirectPurchaseDecorator < Decorator
   end
 
   def summary
-    "Estrutura orçamentária: #{budget_structure} / Fornecedor: #{creditor}"
+    "Estrutura orçamentaria: #{budget_structure} / Fornecedor: #{creditor}"
   end
 end

@@ -39,7 +39,7 @@
     if ( $('#budget_structure_level').val() <= 1 ){
       $('#budget_structure_parent').parent().hide();
     } else {
-      $('#label_budget_structure_parent').text('Estrutura orçamentária do nível ' +  ($('#budget_structure_level').val() - 1) );
+      $('#label_budget_structure_parent').text('Estrutura orçamentaria do nível ' +  ($('#budget_structure_level').val() - 1) );
     }
   };
 
@@ -70,7 +70,7 @@
       } else {
         var number_level = level.level - 1;
         $('#budget_structure_parent').parent().show();
-        $('#label_budget_structure_parent').text('Estrutura orçamentária do nível ' + number_level );
+        $('#label_budget_structure_parent').text('Estrutura orçamentaria do nível ' + number_level );
         setModalUrlToBudgetStructureParent(number_level);
         $('#budget_structure_code').attr('disabled', true);
         $('#budget_structure_code').val('');

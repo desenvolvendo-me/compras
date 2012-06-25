@@ -12,9 +12,9 @@ feature "BudgetStructureConfigurations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Estrutura Orçamentária'
+    click_link 'Configurações de Estrutura Orçamentaria'
 
-    click_link 'Criar Configuração de Estrutura Orçamentária'
+    click_link 'Criar Configuração de Estrutura Orçamentaria'
 
     fill_in 'Descrição', :with => 'Nome da Configuração'
     fill_modal 'Entidade', :with => 'Detran'
@@ -26,7 +26,7 @@ feature "BudgetStructureConfigurations" do
     select 'Ponto', :from => 'Separador'
     click_button 'Salvar'
 
-    page.should have_notice 'Configuração de Estrutura Orçamentária criado com sucesso.'
+    page.should have_notice 'Configuração de Estrutura Orçamentaria criado com sucesso.'
 
     click_link 'Nome da Configuração'
 
@@ -43,9 +43,9 @@ feature "BudgetStructureConfigurations" do
   scenario 'calculate mask with javascript' do
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Estrutura Orçamentária'
+    click_link 'Configurações de Estrutura Orçamentaria'
 
-    click_link 'Criar Configuração de Estrutura Orçamentária'
+    click_link 'Criar Configuração de Estrutura Orçamentaria'
 
     click_button 'Adicionar Estrutura'
 
@@ -71,7 +71,7 @@ feature "BudgetStructureConfigurations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Estrutura Orçamentária'
+    click_link 'Configurações de Estrutura Orçamentaria'
 
     click_link 'Configuração do Detran'
 
@@ -79,7 +79,7 @@ feature "BudgetStructureConfigurations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Configuração de Estrutura Orçamentária editado com sucesso.'
+    page.should have_notice 'Configuração de Estrutura Orçamentaria editado com sucesso.'
 
     click_link 'Outro Nome da Configuração'
 
@@ -93,13 +93,13 @@ feature "BudgetStructureConfigurations" do
 
     click_link 'Contabilidade'
 
-    click_link 'Configurações de Estrutura Orçamentária'
+    click_link 'Configurações de Estrutura Orçamentaria'
 
     click_link 'Configuração do Detran'
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Configuração de Estrutura Orçamentária apagado com sucesso.'
+    page.should have_notice 'Configuração de Estrutura Orçamentaria apagado com sucesso.'
 
     page.should_not have_content 'Detran'
     page.should_not have_content '1234'

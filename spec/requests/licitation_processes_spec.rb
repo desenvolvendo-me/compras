@@ -79,7 +79,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
@@ -153,7 +153,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
@@ -309,7 +309,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentária', :with => budget_allocation.to_s
+      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
       page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
       page.should have_field 'Saldo da dotação', :with => '500,00'
       page.should have_field 'Valor previsto', :with => '20,00'
@@ -391,7 +391,7 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -409,7 +409,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should have_content 'já está em uso'
     end
   end
@@ -592,7 +592,7 @@ feature "LicitationProcesses" do
       page.should_not have_button 'Remover'
     end
 
-    within_tab 'Dotações orçamentárias' do
+    within_tab 'Dotações orçamentarias' do
       page.should_not have_button 'Adicionar Item'
       page.should_not have_button 'Remover Item'
     end
