@@ -81,25 +81,6 @@ module Helpers
     page.execute_script '$(".ui-dialog-content").scrollTop($(".ui-dialog-content").prop("scrollHeight"))'
   end
 
-  # Move the scroll to bottom
-  #
-  # ==== Examples
-  #
-  #     scroll_page_to_bottom field: "Nome"
-  #
-  # A field is required because we need to make sure that the fields have
-  # appeared on screen for only then do the rolling.
-  #
-  def scroll_page_to_bottom(options = {})
-    wait_until do
-      page.should have_content(options.fetch(:field))
-    end if options
-
-    # Scroll page to bottom
-    # See https://github.com/jonleighton/poltergeist/issues/83
-    page.execute_script '$("html").scrollTop($("html").prop("scrollHeight"))'
-  end
-
   def within_modal(locator)
     page.should have_field locator
 
