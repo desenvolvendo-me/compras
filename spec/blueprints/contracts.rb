@@ -16,7 +16,7 @@ Contract.blueprint(:primeiro_contrato) do
   contract_validity { 12 }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  subcontracting { Subcontracting::YES }
+  subcontracting { true }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }
   lawyer { Employee.make!(:wenderson) }
@@ -43,7 +43,7 @@ Contract.blueprint(:segundo_contrato) do
   contract_validity { 12 }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  subcontracting { Subcontracting::YES }
+  subcontracting { false }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }
   lawyer { Employee.make!(:wenderson) }
@@ -69,7 +69,7 @@ Contract.blueprint(:contrato_detran) do
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  subcontracting { Subcontracting::YES }
+  subcontracting { true }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }
   lawyer { Employee.make!(:wenderson) }
@@ -94,7 +94,7 @@ Contract.blueprint(:contrato_educacao) do
   dissemination_source { DisseminationSource.make!(:jornal_municipal) }
   execution_type { ExecutionType::INTEGRAL }
   contract_guarantees { ContractGuarantees::BANK }
-  subcontracting { Subcontracting::YES }
+  subcontracting { true }
   budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
   budget_structure_responsible { Employee.make!(:wenderson) }
   lawyer { Employee.make!(:wenderson) }

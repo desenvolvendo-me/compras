@@ -151,6 +151,7 @@ feature "Contracts" do
     fill_in 'Número do contrato', :with => '111'
     fill_in 'Data da assinatura', :with => '01/01/2013'
     fill_in 'Data de validade', :with => '30/12/2013'
+    select 'Não', :from => 'Subcontração'
     attach_file 'Contrato', 'spec/fixtures/example_document.txt'
 
     click_button 'Salvar'
@@ -166,6 +167,7 @@ feature "Contracts" do
     page.should have_field 'Número do contrato', :with => '111'
     page.should have_field 'Data da assinatura', :with => '01/01/2013'
     page.should have_field 'Data de validade', :with => '30/12/2013'
+    page.should have_select 'Subcontração', :selected => 'Não'
     page.should have_link 'example_document.txt'
   end
 

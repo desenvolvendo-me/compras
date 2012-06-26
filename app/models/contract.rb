@@ -11,7 +11,6 @@ class Contract < Compras::Model
   has_enumeration_for :kind, :with => ContractKind, :create_scopes => true
   has_enumeration_for :execution_type
   has_enumeration_for :contract_guarantees
-  has_enumeration_for :subcontracting
 
   belongs_to :entity
   belongs_to :dissemination_source
