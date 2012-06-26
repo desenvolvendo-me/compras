@@ -10,9 +10,7 @@ feature "LicitationProcessLots" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     lot = licitation_process.licitation_process_lots.first
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -34,9 +32,7 @@ feature "LicitationProcessLots" do
   scenario 'creating a new lot' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -68,9 +64,7 @@ feature "LicitationProcessLots" do
   scenario 'should not show link to create a new lot if licitation process is not updatable' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -86,9 +80,7 @@ feature "LicitationProcessLots" do
   scenario 'should not have Salvar neither Apagar buttons when updating a lot if licitation process is not updatable' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -110,9 +102,7 @@ feature "LicitationProcessLots" do
   scenario 'all fields should be disabled when updating a lot if licitation process is not updatable' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -133,9 +123,7 @@ feature "LicitationProcessLots" do
   scenario 'updating an existing lot' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -168,9 +156,7 @@ feature "LicitationProcessLots" do
   scenario 'deleting a lot' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -196,9 +182,7 @@ feature "LicitationProcessLots" do
   scenario 'edit an existing lot, search item, remove item and search item again' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -233,9 +217,7 @@ feature "LicitationProcessLots" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -316,9 +298,7 @@ feature "LicitationProcessLots" do
   scenario "index shoud have title Lotes de itens do Processo Licitatório 1/2013" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -335,9 +315,7 @@ feature "LicitationProcessLots" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     AdministrativeProcessBudgetAllocationItem.make!(:item_arame_farpado)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -365,9 +343,7 @@ feature "LicitationProcessLots" do
   scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 1/2013" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click

@@ -11,9 +11,7 @@ feature "RevenueNatures" do
     RegulatoryAct.make!(:sopa)
     RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Receitas'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
     click_link 'Criar Natureza da Receita'
 
@@ -51,9 +49,7 @@ feature "RevenueNatures" do
   scenario 'generate full code using js' do
     RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Receitas'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
     click_link 'Criar Natureza da Receita'
 
@@ -77,9 +73,7 @@ feature "RevenueNatures" do
     scenario 'when clear category' do
       RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
-      click_link 'Contabilidade'
-
-      click_link 'Naturezas das Receitas'
+      navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
       click_link 'Criar Natureza da Receita'
 
@@ -106,9 +100,7 @@ feature "RevenueNatures" do
     scenario 'when clear subcategory' do
       RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
-      click_link 'Contabilidade'
-
-      click_link 'Naturezas das Receitas'
+      navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
       click_link 'Criar Natureza da Receita'
 
@@ -134,9 +126,7 @@ feature "RevenueNatures" do
     scenario 'when clear source' do
       RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
-      click_link 'Contabilidade'
-
-      click_link 'Naturezas das Receitas'
+      navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
       click_link 'Criar Natureza da Receita'
 
@@ -161,9 +151,7 @@ feature "RevenueNatures" do
     scenario 'when clear rubric' do
       RevenueRubric.make!(:imposto_sobre_patrimonio_e_a_renda)
 
-      click_link 'Contabilidade'
-
-      click_link 'Naturezas das Receitas'
+      navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
       click_link 'Criar Natureza da Receita'
 
@@ -188,9 +176,7 @@ feature "RevenueNatures" do
   scenario 'when fill regulatory act should fill/clear regulatory_act_type and publication_date' do
     RegulatoryAct.make!(:sopa)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Receitas'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
     click_link 'Criar Natureza da Receita'
 
@@ -212,9 +198,7 @@ feature "RevenueNatures" do
     RevenueRubric.make!(:imposto_sobre_a_producao_e_a_circulacao)
     RevenueNature.make!(:imposto)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Receitas'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
     click_link '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
@@ -247,9 +231,7 @@ feature "RevenueNatures" do
   scenario 'destroy an existent revenue_nature' do
     RevenueNature.make!(:imposto)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Receitas'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Naturezas das Receitas'
 
     click_link '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
 

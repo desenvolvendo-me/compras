@@ -10,9 +10,7 @@ feature "Streets" do
     Neighborhood.make!(:centro)
     StreetType.make!(:rua)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Logradouros'
+    navigate_through 'Outros > Logradouros'
 
     click_link 'Criar Logradouro'
 
@@ -42,9 +40,7 @@ feature "Streets" do
     StreetType.make!(:avenida)
     Street.make!(:girassol)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Logradouros'
+    navigate_through 'Outros > Logradouros'
 
     click_link 'Girassol'
 
@@ -71,9 +67,7 @@ feature "Streets" do
   scenario 'destroy a street' do
     Street.make!(:girassol)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Logradouros'
+    navigate_through 'Outros > Logradouros'
 
     click_link 'Girassol'
 

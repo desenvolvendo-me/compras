@@ -7,9 +7,7 @@ feature "BudgetAllocationTypes" do
   end
 
   scenario 'create a new budget_allocation_type' do
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Dotação'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Tipos de Dotação'
 
     click_link 'Criar Tipo de Dotação'
 
@@ -30,9 +28,7 @@ feature "BudgetAllocationTypes" do
   scenario 'update an existent budget_allocation_type' do
     BudgetAllocationType.make!(:administrativa)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Dotação'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Tipos de Dotação'
 
     click_link 'Administrativa'
 
@@ -52,9 +48,7 @@ feature "BudgetAllocationTypes" do
   scenario 'destroy an existent budget_allocation_type' do
     BudgetAllocationType.make!(:administrativa)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Dotação'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Tipos de Dotação'
 
     click_link 'Dotação Administrativa'
 
@@ -68,9 +62,7 @@ feature "BudgetAllocationTypes" do
   scenario 'validate uniqueness of description' do
     BudgetAllocationType.make!(:administrativa)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Dotação'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Tipos de Dotação'
 
     click_link 'Criar Tipo de Dotação'
 

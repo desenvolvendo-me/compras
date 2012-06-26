@@ -9,9 +9,7 @@ feature "Prefecture" do
   scenario 'create a new prefecture' do
     Street.make!(:bento_goncalves)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Prefeitura'
+    navigate_through 'Outros > Prefeitura'
 
     within_tab 'Prefeitura' do
       fill_in 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
@@ -54,9 +52,7 @@ feature "Prefecture" do
     Street.make!(:bento_goncalves)
     Prefecture.make!(:belo_horizonte)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Prefeitura'
+    navigate_through 'Outros > Prefeitura'
 
     within_tab 'Prefeitura' do
       fill_in 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'

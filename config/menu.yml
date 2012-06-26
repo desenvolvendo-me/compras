@@ -1,0 +1,138 @@
+menu:
+  - purchasing_and_licitations:
+    - general_entries:
+      - materials_groups
+      - materials_classes
+      - materials
+      - reference_units
+      - document_types
+      - regulatory_act_types
+      - legal_natures
+      - employees
+      - judgment_forms
+      - delivery_locations
+      - banks
+      - agencies
+      - payment_methods
+      - licitation_objects
+      - licitation_modalities
+      - modality_limits
+      - licitation_commissions
+      - dissemination_sources
+      - communication_sources
+      - company_sizes
+      - service_or_contract_types
+
+    - purchase_solicitations
+
+    - price_collection:
+      - price_collections
+
+    - direct_purchase:
+      - direct_purchases
+
+    - contract:
+      - contracts
+
+    - administrative_and_licitation_processes:
+      - administrative_process:
+        - administrative_processes
+
+      - licitation_process:
+        - licitation_notices
+        - licitation_process_impugnments
+        - licitation_process_appeals
+
+  - accounting:
+    - commom:
+      - legislation:
+        - dissemination_sources
+        - communication_sources
+        - legal_text_natures
+
+        - regulatory_act:
+          - regulatory_act_types
+          - regulatory_act_type_classifications
+          - regulatory_acts
+
+      - contract:
+        - contracts
+
+      - precatory:
+        - precatories
+        - precatory_types
+
+    - estimate:
+      - funtional_classification:
+        - functions
+        - subfunctions
+
+      - organizational_structure:
+        - management_units
+        - budget_structure_configurations
+        - budget_structures
+
+      - extra_credit:
+        - extra_credit_natures
+        - extra_credits
+
+      - budget_allocation:
+        - expense_natures
+        - budget_allocation_types
+        - budget_allocations
+
+      - revenue_accounting:
+        - revenue_natures
+        - revenue_accountings
+
+      - government_programs
+      - government_actions
+      - capabilities
+
+    - execution:
+      - reserve_fund:
+        - reserve_allocation_types
+        - reserve_funds
+
+    - pledge:
+      - pledge_historics
+      - pledge_categories
+      - pledges
+      - pledge_cancellations
+      - pledge_liquidations
+      - pledge_liquidation_cancellations
+
+  - commom:
+    - creditors
+
+  - others:
+    - people
+    - profiles
+    - users
+    - signature_configurations
+    - signatures
+    - cnaes
+    - entities
+    - states
+    - districts
+    - neighborhoods
+    - cities
+    - countries
+    - streets
+    - street_types
+    - land_subdivisions
+    - condominia
+    - positions
+    - settings
+    - bank_accounts
+    - fiscal_years
+    - risk_degrees
+    - indexers
+    - currencies
+    - prefecture
+    - regularization_or_administrative_sanction_reasons 
+    - descriptors
+    - legal_references
+    - administration_types
+    - government_actions
+    - expense_kinds

@@ -11,9 +11,7 @@ feature "PledgeLiquidationCancellations" do
     PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
     PledgeParcelMovimentation.make!(:liquidacao_para_dois_vencimentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Liquidações de Empenho'
 
     click_link 'Criar Anulação de Liquidação de Empenho'
 
@@ -67,9 +65,7 @@ feature "PledgeLiquidationCancellations" do
     PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
     PledgeParcelMovimentation.make!(:liquidacao_para_dois_vencimentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Liquidações de Empenho'
 
     click_link 'Criar Anulação de Liquidação de Empenho'
 
@@ -118,9 +114,7 @@ feature "PledgeLiquidationCancellations" do
     PledgeParcelMovimentation.make!(:liquidacao_total)
     pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Liquidações de Empenho'
 
     click_link pledge_liquidation_cancellation.to_s
 
@@ -141,9 +135,7 @@ feature "PledgeLiquidationCancellations" do
     PledgeParcelMovimentation.make!(:liquidacao_total)
     pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Liquidações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Liquidações de Empenho'
 
     click_link pledge_liquidation_cancellation.to_s
 

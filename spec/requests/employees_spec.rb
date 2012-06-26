@@ -10,9 +10,7 @@ feature "Employees" do
     Person.make!(:sobrinho)
     Position.make!(:gerente)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Funcionários'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Funcionários'
 
     click_link 'Criar Funcionário'
 
@@ -38,9 +36,7 @@ feature "Employees" do
     Employee.make!(:sobrinho)
     Position.make!(:supervisor)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Funcionários'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Funcionários'
 
     within_records do
       click_link 'Gabriel Sobrinho'
@@ -64,9 +60,7 @@ feature "Employees" do
   scenario 'destroy an existent employee' do
     Employee.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Funcionários'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Funcionários'
 
     within_records do
       click_link 'Gabriel Sobrinho'
@@ -85,9 +79,7 @@ feature "Employees" do
   scenario 'should validate uniqueness of person' do
     Employee.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Funcionários'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Funcionários'
 
     click_link 'Criar Funcionário'
 
@@ -101,9 +93,7 @@ feature "Employees" do
   scenario 'should validate uniqueness of registration' do
     Employee.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Funcionários'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Funcionários'
 
     click_link 'Criar Funcionário'
 

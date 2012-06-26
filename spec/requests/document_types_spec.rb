@@ -7,9 +7,7 @@ feature "DocumentTypes" do
   end
 
   scenario 'create a new document_type' do
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Documento'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Documento'
 
     click_link 'Criar Tipo de Documento'
 
@@ -29,9 +27,7 @@ feature "DocumentTypes" do
   scenario 'update an existent document_type' do
     DocumentType.make!(:fiscal)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Documento'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Documento'
 
     click_link 'Fiscal'
 
@@ -51,9 +47,7 @@ feature "DocumentTypes" do
   scenario 'cannot destroy an existent document_type with licitation_process relationship' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Documento'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Documento'
 
     click_link 'Fiscal'
 
@@ -64,9 +58,7 @@ feature "DocumentTypes" do
 
   scenario 'destroy an existent document_type' do
     DocumentType.make!(:fiscal)
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Documento'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Documento'
 
     click_link 'Fiscal'
 
@@ -81,9 +73,7 @@ feature "DocumentTypes" do
   scenario 'validate uniqueness of description' do
     DocumentType.make!(:fiscal)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Documento'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Documento'
 
     click_link 'Criar Tipo de Documento'
 

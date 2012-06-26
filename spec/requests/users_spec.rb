@@ -10,9 +10,7 @@ feature "Users" do
     Employee.make!(:wenderson)
     Profile.make!(:manager)
 
-    click_link 'Administração'
-
-    click_link 'Usuários'
+    navigate_through 'Outros > Usuários'
 
     click_link 'Criar Usuário'
 
@@ -45,9 +43,7 @@ feature "Users" do
     User.make!(:wenderson)
     Employee.make!(:sobrinho)
 
-    click_link 'Administração'
-
-    click_link 'Usuários'
+    navigate_through 'Outros > Usuários'
 
     within_records do
       click_link 'wenderson.malheiros'
@@ -72,9 +68,7 @@ feature "Users" do
   scenario 'destroy an user' do
     User.make!(:wenderson)
 
-    click_link 'Administração'
-
-    click_link 'Usuários'
+    navigate_through 'Outros > Usuários'
 
     click_link 'wenderson.malheiros'
 
@@ -86,9 +80,7 @@ feature "Users" do
   end
 
   scenario 'open the window to new perfil through the perfil modal' do
-    click_link 'Administração'
-
-    click_link 'Usuários'
+    navigate_through 'Outros > Usuários'
 
     click_link 'Criar Usuário'
 

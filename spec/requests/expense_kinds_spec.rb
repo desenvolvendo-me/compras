@@ -7,9 +7,7 @@ feature "ExpenseKinds" do
   end
 
   scenario 'create a new expense_kind' do
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Despesas'
+    navigate_through 'Outros > Tipos de Despesas'
 
     click_link 'Criar Tipo de Despesa'
 
@@ -30,9 +28,7 @@ feature "ExpenseKinds" do
   scenario 'update an existent expense_kind' do
     ExpenseKind.make!(:pagamentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Despesas'
+    navigate_through 'Outros > Tipos de Despesas'
 
     click_link 'Pagamentos'
 
@@ -52,9 +48,7 @@ feature "ExpenseKinds" do
   scenario 'destroy an existent expense_kind' do
     ExpenseKind.make!(:pagamentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Despesas'
+    navigate_through 'Outros > Tipos de Despesas'
 
     click_link 'Pagamentos'
 
@@ -69,9 +63,7 @@ feature "ExpenseKinds" do
   scenario 'validate uniqueness of description' do
     ExpenseKind.make!(:pagamentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Despesas'
+    navigate_through 'Outros > Tipos de Despesas'
 
     click_link 'Criar Tipo de Despesa'
 

@@ -10,9 +10,7 @@ feature 'ContractTerminations' do
     Contract.make!(:primeiro_contrato)
     DisseminationSource.make!(:jornal_bairro)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     click_link '001'
 
@@ -73,9 +71,7 @@ feature 'ContractTerminations' do
   scenario 'editing a contract termination' do
     ContractTermination.make!(:contrato_rescindido)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     click_link '001'
 

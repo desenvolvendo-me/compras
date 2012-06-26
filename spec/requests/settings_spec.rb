@@ -9,9 +9,7 @@ feature "Settings" do
   scenario 'update a setting' do
     Setting.make!(:default_city)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Configurações'
+    navigate_through 'Outros > Configurações'
 
     click_link 'Cidade padrão'
 

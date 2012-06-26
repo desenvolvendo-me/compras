@@ -9,9 +9,7 @@ feature "LicitationObjects" do
   scenario 'create a new licitation_object' do
     Material.make!(:antivirus)
 
-    click_link 'Contabilidade'
-
-    click_link 'Objetos de Licitação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Criar Objeto de Licitação'
 
@@ -118,9 +116,7 @@ feature "LicitationObjects" do
   scenario 'should remove material' do
     LicitationObject.make!(:viaduto)
 
-    click_link 'Contabilidade'
-
-    click_link 'Objetos de Licitação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Viaduto'
 
@@ -144,9 +140,7 @@ feature "LicitationObjects" do
     LicitationObject.make!(:ponte)
     Material.make!(:arame_comum)
 
-    click_link 'Contabilidade'
-
-    click_link 'Objetos de Licitação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Ponte'
 
@@ -178,9 +172,7 @@ feature "LicitationObjects" do
   scenario 'destroy an existent licitation_object' do
     LicitationObject.make!(:ponte)
 
-    click_link 'Contabilidade'
-
-    click_link 'Objetos de Licitação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Ponte'
 
@@ -195,9 +187,7 @@ feature "LicitationObjects" do
   scenario 'validate uniqueness of description and year together' do
     LicitationObject.make!(:ponte)
 
-    click_link 'Contabilidade'
-
-    click_link 'Objetos de Licitação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Criar Objeto de Licitação'
 
@@ -218,9 +208,7 @@ feature "LicitationObjects" do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
 
-    click_link 'Contabilidade'
-
-    click_link 'Objetos de Licitação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Ponte'
 

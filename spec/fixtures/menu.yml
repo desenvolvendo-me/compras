@@ -1,0 +1,5 @@
+menu:
+  - main_menu:
+    - submenu:
+      - item1
+      - item2

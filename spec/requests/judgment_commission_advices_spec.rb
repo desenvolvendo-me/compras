@@ -12,9 +12,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:sobrinho)
     Person.make!(:wenderson)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -124,9 +122,7 @@ feature "JudgmentCommissionAdvices" do
     new_licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     new_licitation_commission = LicitationCommission.make!(:comissao_nova)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -200,9 +196,7 @@ feature "JudgmentCommissionAdvices" do
   scenario 'destroy an existent judgment_commission_advice' do
     advice = JudgmentCommissionAdvice.make!(:parecer)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -230,9 +224,7 @@ feature "JudgmentCommissionAdvices" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationCommission.make!(:comissao)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -277,9 +269,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:sobrinho)
     Person.make!(:wenderson)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -342,9 +332,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:wenderson)
     LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click

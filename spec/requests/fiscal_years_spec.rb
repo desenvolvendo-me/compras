@@ -7,9 +7,7 @@ feature "FiscalYears" do
   end
 
   scenario 'create a new fiscal year' do
-    click_link 'Cadastros Diversos'
-
-    click_link 'Exercícios Fiscais'
+    navigate_through 'Outros > Exercícios Fiscais'
 
     click_link 'Criar Exercício Fiscal'
 
@@ -27,9 +25,7 @@ feature "FiscalYears" do
   scenario 'update an existent fiscal year' do
     FiscalYear.make!(:two_thousand_and_eleven)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Exercícios Fiscais'
+    navigate_through 'Outros > Exercícios Fiscais'
 
     click_link '2011'
 
@@ -47,9 +43,7 @@ feature "FiscalYears" do
   scenario 'destroy an existent fiscal_year' do
     FiscalYear.make!(:two_thousand_and_eleven)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Exercícios Fiscais'
+    navigate_through 'Outros > Exercícios Fiscais'
 
     click_link '2011'
 

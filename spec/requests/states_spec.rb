@@ -9,9 +9,7 @@ feature "States" do
   scenario 'create a new state' do
     Country.make!(:brasil)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Estados'
+    navigate_through 'Outros > Estados'
 
     click_link 'Criar Estado'
 
@@ -33,9 +31,7 @@ feature "States" do
   scenario 'update a state' do
     rs = State.make!(:rs)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Estados'
+    navigate_through 'Outros > Estados'
 
     click_link 'Rio Grande do Sul'
 
@@ -53,9 +49,7 @@ feature "States" do
   scenario 'destroy a state' do
     rs = State.make!(:rs)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Estados'
+    navigate_through 'Outros > Estados'
 
     click_link 'Rio Grande do Sul'
 

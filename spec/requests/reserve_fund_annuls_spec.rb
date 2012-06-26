@@ -10,9 +10,7 @@ feature 'ReserveFundAnnuls' do
     reserve_fund = ReserveFund.make!(:detran_2012)
     Employee.make!(:sobrinho)
 
-    click_link 'Contabilidade'
-
-    click_link 'Reservas de Dotação'
+    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link reserve_fund.to_s
 

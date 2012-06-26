@@ -10,9 +10,7 @@ feature "Agencies" do
     City.make!(:belo_horizonte)
     Bank.make!(:banco_do_brasil)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Agências'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Agências'
 
     click_link 'Criar Agência'
 
@@ -46,9 +44,7 @@ feature "Agencies" do
     Bank.make!(:santander)
     Agency.make!(:itau)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Agências'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Agências'
 
     click_link 'Agência Itaú'
 
@@ -70,9 +66,7 @@ feature "Agencies" do
   scenario 'destroy an existent agency' do
     Agency.make!(:santander)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Agências'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Agências'
 
     click_link 'Agência Santander'
 

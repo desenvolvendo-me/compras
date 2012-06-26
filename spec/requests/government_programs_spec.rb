@@ -9,9 +9,7 @@ feature "GovernmentPrograms" do
   scenario 'create a new government_program' do
     Descriptor.make!(:detran_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Programas do Governo'
+    navigate_through 'Contabilidade > Orçamento > Programas do Governo'
 
     click_link 'Criar Programa do Governo'
 
@@ -35,9 +33,7 @@ feature "GovernmentPrograms" do
     GovernmentProgram.make!(:habitacao)
     Descriptor.make!(:secretaria_de_educacao_2013)
 
-    click_link 'Contabilidade'
-
-    click_link 'Programas do Governo'
+    navigate_through 'Contabilidade > Orçamento > Programas do Governo'
 
     click_link 'Habitação'
 
@@ -59,9 +55,7 @@ feature "GovernmentPrograms" do
   scenario 'destroy an existent government_program' do
     GovernmentProgram.make!(:habitacao)
 
-    click_link 'Contabilidade'
-
-    click_link 'Programas do Governo'
+    navigate_through 'Contabilidade > Orçamento > Programas do Governo'
 
     click_link 'Habitação'
 

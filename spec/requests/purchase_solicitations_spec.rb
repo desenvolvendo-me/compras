@@ -18,9 +18,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
 
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -112,9 +110,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     Material.make!(:arame_farpado)
 
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -204,9 +200,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
 
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -243,9 +237,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'should have at least one budget allocation with one item' do
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -267,9 +259,7 @@ feature "PurchaseSolicitations" do
   scenario 'should validate presence of budget allocations and items when editing' do
     PurchaseSolicitation.make!(:reparo)
 
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -301,9 +291,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'calculate total value of items' do
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -373,9 +361,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
 
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra'
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 

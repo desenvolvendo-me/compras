@@ -10,9 +10,7 @@ feature "Precatories" do
     Creditor.make!(:wenderson_sa)
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -103,9 +101,7 @@ feature "Precatories" do
   end
 
   scenario 'it should update order' do
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -136,9 +132,7 @@ feature "Precatories" do
     Creditor.make!(:sobrinho_sa)
     PrecatoryType.make!(:ordinario_demais_casos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     within_records do
       click_link '1234/2012'
@@ -216,9 +210,7 @@ feature "Precatories" do
   end
 
   scenario 'should return empty erro when try create a empty parcel' do
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -235,9 +227,7 @@ feature "Precatories" do
   scenario 'destroy an existent precatory' do
     Precatory.make!(:precatorio)
 
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     within_records do
       click_link '1234/2012'
@@ -252,9 +242,7 @@ feature "Precatories" do
   end
 
   scenario "when writing a value parcel should update automatic parceled_value" do
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -282,9 +270,7 @@ feature "Precatories" do
   end
 
   scenario "when remove a parcel the parceled_value should be recalculated" do
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -322,9 +308,7 @@ feature "Precatories" do
     PrecatoryType.make!(:tipo_de_precatorio_inativo)
     PrecatoryType.make!(:ordinario_demais_casos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Precatórios'
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 

@@ -9,9 +9,7 @@ feature "Cities" do
   scenario 'create a new city' do
     State.make!(:rs)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Cidades'
+    navigate_through 'Outros > Cidades'
 
     click_link 'Criar Cidade'
 
@@ -33,9 +31,7 @@ feature "Cities" do
   scenario 'update a city' do
     City.make!(:belo_horizonte)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Cidades'
+    navigate_through 'Outros > Cidades'
 
     click_link 'Belo Horizonte'
 
@@ -56,9 +52,7 @@ feature "Cities" do
   scenario 'destroy a city' do
     City.make!(:porto_alegre)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Cidades'
+    navigate_through 'Outros > Cidades'
 
     click_link 'Porto Alegre'
 

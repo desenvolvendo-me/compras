@@ -14,9 +14,7 @@ feature "ExpenseNatures" do
     ExpenseModality.make!(:transferencias_intragovernamentais)
     ExpenseElement.make!(:aposentadorias)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Despesas'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link 'Criar Natureza da Despesa'
 
@@ -56,9 +54,7 @@ feature "ExpenseNatures" do
     ExpenseModality.make!(:transferencias_intragovernamentais)
     ExpenseElement.make!(:aposentadorias)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Despesas'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link 'Criar Natureza da Despesa'
 
@@ -86,9 +82,7 @@ feature "ExpenseNatures" do
     ExpenseModality.make!(:transferencias_a_uniao)
     ExpenseElement.make!(:pensoes)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Despesas'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
@@ -125,9 +119,7 @@ feature "ExpenseNatures" do
   scenario 'destroy an existent expense_nature' do
     ExpenseNature.make!(:vencimento_e_salarios)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas das Despesas'
+    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 

@@ -7,9 +7,7 @@ feature "ReserveAllocationTypes" do
   end
 
   scenario 'create a new reserve_allocation_type' do
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Reserva de Dotação'
+    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
     click_link 'Criar Tipo de Reserva de Dotação'
 
@@ -30,11 +28,9 @@ feature "ReserveAllocationTypes" do
   scenario 'update an existent reserve_allocation_type' do
     ReserveAllocationType.make!(:comum)
 
-    click_link 'Contabilidade'
+    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
-    click_link 'Tipos de Reserva de Dotação'
-
-    click_link 'Comum'
+    click_link 'Tipo Comum'
 
     fill_in 'Descrição', :with => 'Descrição do Tipo'
     select 'Inativo', :from => 'Status'
@@ -52,11 +48,9 @@ feature "ReserveAllocationTypes" do
   scenario 'destroy an existent reserve_allocation_type' do
     ReserveAllocationType.make!(:comum)
 
-    click_link 'Contabilidade'
+    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
-    click_link 'Tipos de Reserva de Dotação'
-
-    click_link 'Comum'
+    click_link 'Tipo Comum'
 
     click_link 'Apagar', :confirm => true
 
@@ -69,13 +63,11 @@ feature "ReserveAllocationTypes" do
   scenario 'validate uniqueness of description' do
     ReserveAllocationType.make!(:comum)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Reserva de Dotação'
+    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
     click_link 'Criar Tipo de Reserva de Dotação'
 
-    fill_in 'Descrição', :with => 'Comum'
+    fill_in 'Descrição', :with => 'Tipo Comum'
 
     click_button 'Salvar'
 

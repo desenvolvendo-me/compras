@@ -9,9 +9,7 @@ feature "PledgeCancellations" do
   scenario 'create a new pledge_cancellation' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Empenho'
 
     click_link 'Criar Anulação de Empenho'
 
@@ -64,9 +62,7 @@ feature "PledgeCancellations" do
   scenario 'when fill/clear pledge should fill/clear delegateds fields' do
     pledge = Pledge.make!(:empenho)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Empenho'
 
     click_link 'Criar Anulação de Empenho'
 
@@ -109,9 +105,7 @@ feature "PledgeCancellations" do
     pledge = Pledge.make!(:empenho)
     PledgeCancellation.make!(:empenho_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Empenho'
 
     within_records do
       page.find('a').click
@@ -136,9 +130,7 @@ feature "PledgeCancellations" do
   scenario 'should not have a button to destroy an existent pledge' do
     PledgeCancellation.make!(:empenho_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Anulações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Anulações de Empenho'
 
     within_records do
       page.find('a').click

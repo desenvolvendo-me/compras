@@ -7,9 +7,7 @@ feature "Entities" do
   end
 
   scenario 'create a new entity' do
-    click_link 'Solicitações'
-
-    click_link 'Entidades'
+    navigate_through 'Outros > Entidades'
 
     click_link 'Criar Entidade'
 
@@ -27,9 +25,7 @@ feature "Entities" do
   scenario 'update an existent entity' do
     Entity.make!(:detran)
 
-    click_link 'Solicitações'
-
-    click_link 'Entidades'
+    navigate_through 'Outros > Entidades'
 
     click_link 'Detran'
 
@@ -47,9 +43,7 @@ feature "Entities" do
   scenario 'destroy an existent entity' do
     Entity.make!(:detran)
 
-    click_link 'Solicitações'
-
-    click_link 'Entidades'
+    navigate_through 'Outros > Entidades'
 
     click_link 'Detran'
 
@@ -63,9 +57,7 @@ feature "Entities" do
   scenario 'should validate uniqueness of name' do
     Entity.make!(:detran)
 
-    click_link 'Solicitações'
-
-    click_link 'Entidade'
+    navigate_through 'Outros > Entidades'
 
     click_link 'Criar Entidade'
 

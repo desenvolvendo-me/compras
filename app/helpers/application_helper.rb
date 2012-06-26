@@ -1,5 +1,7 @@
 # encoding: utf-8
 module ApplicationHelper
+  include MenuHelper
+
   def simple_form_for(object, *args, &block)
     options = args.extract_options!
     options[:builder] ||= Compras::FormBuilder

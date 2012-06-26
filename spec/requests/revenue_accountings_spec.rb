@@ -11,9 +11,7 @@ feature "RevenueAccountings" do
     RevenueNature.make!(:imposto)
     Capability.make!(:reforma)
 
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link 'Criar Receita Contábel'
 
@@ -56,9 +54,7 @@ feature "RevenueAccountings" do
     RevenueAccounting.make!(:reforma)
     RevenueNature.make!(:imposto_sobre_renda)
 
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link 'Criar Receita Contábel'
 
@@ -101,9 +97,7 @@ feature "RevenueAccountings" do
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:reforma)
 
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link 'Criar Receita Contábel'
 
@@ -143,9 +137,7 @@ feature "RevenueAccountings" do
   scenario 'fill/clear revenue_natured docket when select revenue_nature' do
     RevenueNature.make!(:imposto)
 
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link 'Criar Receita Contábel'
 
@@ -162,9 +154,7 @@ feature "RevenueAccountings" do
   end
 
   scenario 'should apply month value based on kind and value' do
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link 'Criar Receita Contábel'
 
@@ -189,9 +179,7 @@ feature "RevenueAccountings" do
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:construcao)
 
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link '1'
 
@@ -231,9 +219,7 @@ feature "RevenueAccountings" do
   scenario 'validate uniqueness of revenue_nature' do
     RevenueAccounting.make!(:reforma)
 
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link 'Criar Receita Contábel'
 
@@ -251,9 +237,7 @@ feature "RevenueAccountings" do
   scenario 'destroy an existent revenue_accounting' do
     RevenueAccounting.make!(:reforma)
 
-    click_link 'Contabilidade'
-
-    click_link 'Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
 
     click_link '1'
 

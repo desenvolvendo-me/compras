@@ -9,9 +9,7 @@ feature "Districts" do
   scenario 'create a new district' do
     City.make!(:belo_horizonte)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Distritos'
+    navigate_through 'Outros > Distritos'
 
     click_link 'Criar Distrito'
 
@@ -31,9 +29,7 @@ feature "Districts" do
   scenario 'update a district' do
     District.make!(:sul)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Distritos'
+    navigate_through 'Outros > Distritos'
 
     click_link 'Sul'
 
@@ -51,9 +47,7 @@ feature "Districts" do
   scenario 'destroy a district' do
     District.make!(:sul)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Distritos'
+    navigate_through 'Outros > Distritos'
 
     click_link 'Sul'
 

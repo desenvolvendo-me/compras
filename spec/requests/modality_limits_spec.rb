@@ -7,9 +7,7 @@ feature "ModalityLimits" do
   end
 
   scenario 'create a new modality_limit' do
-    click_link 'Contabilidade'
-
-    click_link 'Limites por Modalidade'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Limites por Modalidade'
 
     click_link 'Criar Limite por Modalidade'
 
@@ -59,9 +57,7 @@ feature "ModalityLimits" do
   scenario 'update an existent modality_limit' do
     ModalityLimit.make!(:modalidade_de_compra)
 
-    click_link 'Contabilidade'
-
-    click_link 'Limites por Modalidade'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Limites por Modalidade'
 
     click_link '0001'
 
@@ -111,9 +107,7 @@ feature "ModalityLimits" do
   scenario 'destroy an existent modality_limit' do
     ModalityLimit.make!(:modalidade_de_compra)
 
-    click_link 'Contabilidade'
-
-    click_link 'Limites por Modalidade'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Limites por Modalidade'
 
     click_link '0001'
 
@@ -129,9 +123,7 @@ feature "ModalityLimits" do
   scenario 'destroy an existent modality_limit' do
     ModalityLimit.make!(:modalidade_de_compra)
 
-    click_link 'Contabilidade'
-
-    click_link 'Limites por Modalidade'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Limites por Modalidade'
 
     click_link 'Criar Limite por Modalidade'
 

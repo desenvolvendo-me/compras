@@ -12,9 +12,7 @@ feature "SupplyAuthorizations" do
     supply_authorization = SupplyAuthorization.make!(:compra_2012)
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    click_link 'Solicitações'
-
-    click_link 'Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas > Solicitações de Compra Direta'
 
     within_records do
       page.find('a').click

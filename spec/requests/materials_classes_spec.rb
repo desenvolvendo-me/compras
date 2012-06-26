@@ -9,9 +9,7 @@ feature "MaterialsClasses" do
   scenario 'create a new materials_class' do
     MaterialsGroup.make!(:informatica)
 
-    click_link 'Solicitações'
-
-    click_link 'Classes de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -36,9 +34,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software)
     MaterialsGroup.make!(:comp_eletricos_eletronicos)
 
-    click_link 'Solicitações'
-
-    click_link 'Classes de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Classes de Materiais'
 
     click_link 'Software'
 
@@ -62,9 +58,7 @@ feature "MaterialsClasses" do
   scenario 'destroy an existent materials_class' do
     MaterialsClass.make!(:software)
 
-    click_link 'Solicitações'
-
-    click_link 'Classes de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Classes de Materiais'
 
     click_link 'Software'
 
@@ -80,9 +74,7 @@ feature "MaterialsClasses" do
   scenario 'should validate uniqueness of class_number scoped to materials_group' do
     MaterialsClass.make!(:software)
 
-    click_link 'Solicitações'
-
-    click_link 'Classes de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -98,9 +90,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software)
     MaterialsGroup.make!(:informatica)
 
-    click_link 'Solicitações'
-
-    click_link 'Classes de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -116,9 +106,7 @@ feature "MaterialsClasses" do
     MaterialsGroup.make!(:informatica)
     MaterialsClass.make!(:software)
 
-    click_link 'Solicitações'
-
-    click_link 'Classes de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -134,9 +122,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software)
     MaterialsGroup.make!(:informatica)
 
-    click_link 'Solicitações'
-
-    click_link 'Classes de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 

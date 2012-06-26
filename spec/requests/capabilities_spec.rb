@@ -9,9 +9,7 @@ feature "Capabilities" do
   scenario 'create a new capability' do
     Descriptor.make!(:detran_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Recursos'
+    navigate_through 'Contabilidade > Orçamento > Recursos'
 
     click_link 'Criar Recurso'
 
@@ -38,9 +36,7 @@ feature "Capabilities" do
     Capability.make!(:reforma)
     Descriptor.make!(:secretaria_de_educacao_2013)
 
-    click_link 'Contabilidade'
-
-    click_link 'Recursos'
+    navigate_through 'Contabilidade > Orçamento > Recursos'
 
     click_link 'Reforma e Ampliação'
 
@@ -66,9 +62,7 @@ feature "Capabilities" do
   scenario 'destroy an existent capability' do
     Capability.make!(:reforma)
 
-    click_link 'Contabilidade'
-
-    click_link 'Recursos'
+    navigate_through 'Contabilidade > Orçamento > Recursos'
 
     click_link 'Reforma e Ampliação'
 

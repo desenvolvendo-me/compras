@@ -7,9 +7,7 @@ feature "LegalReferences" do
   end
 
   scenario 'create a new legal_reference' do
-    click_link 'Contabilidade'
-
-    click_link 'Referências Legais'
+    navigate_through 'Outros > Referências Legais'
 
     click_link 'Criar Referência Legal'
 
@@ -37,9 +35,7 @@ feature "LegalReferences" do
   scenario 'update an existent legal_reference' do
     LegalReference.make!(:referencia)
 
-    click_link 'Contabilidade'
-
-    click_link 'Referências Legais'
+    navigate_through 'Outros > Referências Legais'
 
     click_link 'Referencia'
 
@@ -67,9 +63,7 @@ feature "LegalReferences" do
   scenario 'destroy an existent legal_reference' do
     LegalReference.make!(:referencia)
 
-    click_link 'Contabilidade'
-
-    click_link 'Referências Legais'
+    navigate_through 'Outros > Referências Legais'
 
     click_link 'Referencia'
 

@@ -10,9 +10,7 @@ feature "People" do
     State.make!(:mg)
     Street.make!(:amazonas)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoas'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -102,9 +100,7 @@ feature "People" do
   scenario 'update an existent person as individual' do
     Person.make!(:wenderson)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoa'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Wenderson'
 
@@ -141,9 +137,7 @@ feature "People" do
   scenario 'destroy an existent person' do
     Person.make!(:wenderson)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoa'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Wenderson Malheiros'
 
@@ -161,9 +155,7 @@ feature "People" do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoas'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -262,9 +254,7 @@ feature "People" do
     Person.make!(:nohup)
     Person.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoas'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Nohup'
 
@@ -314,9 +304,7 @@ feature "People" do
     Street.make!(:amazonas)
     Street.make!(:cristiano_machado)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoas'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -345,9 +333,7 @@ feature "People" do
     State.make!(:mg)
     Street.make!(:amazonas)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoas'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -413,9 +399,7 @@ feature "People" do
   scenario 'update an existent person as special_entry' do
     Person.make!(:mateus)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoa'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Mateus Lorandi'
 
@@ -453,9 +437,7 @@ feature "People" do
   scenario 'destroy an existent special_entry' do
     Person.make!(:mateus)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoa'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Mateus Lorandi'
 
@@ -469,9 +451,7 @@ feature "People" do
   scenario 'should have the uniqueness validation to partner on new form' do
     Person.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Pessoa'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -501,9 +481,7 @@ feature "People" do
   scenario 'should have the uniqueness validation to partner' do
     Person.make!(:nohup)
 
-    click_link 'Cadastros'
-
-    click_link 'Pessoa'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Nohup'
 
@@ -524,9 +502,7 @@ feature "People" do
   scenario 'should validate at least one partner' do
     Person.make!(:wenderson)
 
-    click_link 'Cadastros'
-
-    click_link 'Pessoa'
+    navigate_through 'Outros > Pessoas'
 
     click_link 'Criar Pessoa'
 

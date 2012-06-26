@@ -10,9 +10,7 @@ feature "Addresses" do
     Street.make!(:amazonas)
     Street.make!(:girassol)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Prefeitura'
+    navigate_through  'Outros > Prefeitura'
 
     within_tab 'Endereço' do
       page.should have_disabled_field "Bairro"
@@ -39,9 +37,7 @@ feature "Addresses" do
     Prefecture.make!(:belo_horizonte)
     Street.make!(:amazonas)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Prefeitura'
+    navigate_through  'Outros > Prefeitura'
 
     within_tab 'Endereço' do
       page.should have_field 'Cidade', :with => 'Curitiba'

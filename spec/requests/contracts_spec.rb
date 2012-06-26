@@ -9,9 +9,7 @@ feature "Contracts" do
   scenario 'picking a licitation process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     click_link 'Criar Contrato'
 
@@ -24,9 +22,7 @@ feature "Contracts" do
   scenario 'picking a direct purchase' do
     DirectPurchase.make!(:compra)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     click_link 'Criar Contrato'
 
@@ -44,9 +40,7 @@ feature "Contracts" do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     click_link 'Criar Contrato'
 
@@ -138,9 +132,7 @@ feature "Contracts" do
     Contract.make!(:primeiro_contrato)
     Entity.make!(:secretaria_de_educacao)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -174,9 +166,7 @@ feature "Contracts" do
   scenario 'destroy an existent contract' do
     Contract.make!(:primeiro_contrato)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -198,9 +188,7 @@ feature "Contracts" do
     Pledge.make!(:empenho_em_quinze_dias)
     Pledge.make!(:empenho)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     within_records do
       page.find('a').click

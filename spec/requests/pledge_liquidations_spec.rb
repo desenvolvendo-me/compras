@@ -11,9 +11,7 @@ feature "PledgeLiquidations" do
 
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Liquidações de Empenhos'
+    navigate_through 'Contabilidade > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -62,9 +60,7 @@ feature "PledgeLiquidations" do
   scenario 'when fill/clear pledge should fill/clear delegateds fields' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
-    click_link 'Contabilidade'
-
-    click_link 'Liquidações de Empenho'
+    navigate_through 'Contabilidade > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -105,9 +101,7 @@ feature "PledgeLiquidations" do
     pledge = Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Liquidações de Empenhos'
+    navigate_through 'Contabilidade > Empenho > Liquidações de Empenhos'
 
     click_link pledge_liquidation.to_s
 
@@ -127,9 +121,7 @@ feature "PledgeLiquidations" do
     Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Liquidações de Empenhos'
+    navigate_through 'Contabilidade > Empenho > Liquidações de Empenhos'
 
     click_link pledge_liquidation.to_s
 

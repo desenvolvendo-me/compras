@@ -9,9 +9,7 @@ feature 'PriceCollectionProposalAnnul' do
   scenario 'accessing the form' do
     PriceCollection.make!(:coleta_de_precos)
 
-    click_link 'Processos'
-
-    click_link 'Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
 
     click_link '1/2012'
 
@@ -34,9 +32,7 @@ feature 'PriceCollectionProposalAnnul' do
     PriceCollection.make!(:coleta_de_precos)
     Employee.make!(:wenderson)
 
-    click_link 'Processos'
-
-    click_link 'Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
 
     click_link '1/2012'
 

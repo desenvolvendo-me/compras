@@ -7,9 +7,7 @@ feature "ReferenceUnits" do
   end
 
   scenario 'create a new reference_unit' do
-    click_link 'Cadastros Diversos'
-
-    click_link 'Unidades de Referência'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Unidades de Referência'
 
     click_link 'Criar Unidade de Referência'
 
@@ -29,9 +27,7 @@ feature "ReferenceUnits" do
   scenario 'update a reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Unidades de Referência'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Unidades de Referência'
 
     click_link 'M'
 
@@ -51,9 +47,7 @@ feature "ReferenceUnits" do
   scenario 'destroy an existent reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Unidades de Referência'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Unidades de Referência'
 
     click_link 'M'
 

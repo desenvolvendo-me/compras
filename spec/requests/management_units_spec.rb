@@ -9,9 +9,7 @@ feature "ManagementUnits" do
   scenario 'create a new management_unit' do
     Descriptor.make!(:detran_2012)
 
-    click_link 'Contabilidade'
-
-    click_link 'Unidades Gestoras'
+    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Unidades Gestoras'
 
     click_link 'Criar Unidade Gestora'
 
@@ -37,9 +35,7 @@ feature "ManagementUnits" do
     ManagementUnit.make!(:unidade_central)
     Descriptor.make!(:secretaria_de_educacao_2013)
 
-    click_link 'Contabilidade'
-
-    click_link 'Unidades Gestoras'
+    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Unidades Gestoras'
 
     click_link 'Unidade Central'
 
@@ -63,9 +59,7 @@ feature "ManagementUnits" do
   scenario 'destroy an existent management_unit' do
     ManagementUnit.make!(:unidade_central)
 
-    click_link 'Contabilidade'
-
-    click_link 'Unidades Gestoras'
+    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Unidades Gestoras'
 
     click_link 'Unidade Central'
 

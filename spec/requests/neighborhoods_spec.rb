@@ -9,9 +9,7 @@ feature "Neighborhoods" do
   scenario 'fetch default city from settings' do
     Setting.make!(:default_city)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Bairros'
+    navigate_through 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -21,9 +19,7 @@ feature "Neighborhoods" do
   scenario 'create a new neighborhood' do
     City.make!(:porto_alegre)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Bairros'
+    navigate_through 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -50,9 +46,7 @@ feature "Neighborhoods" do
   scenario 'update a neighborhood' do
     Neighborhood.make!(:centro)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Bairros'
+    navigate_through 'Outros > Bairros'
 
     click_link 'Centro'
 
@@ -71,9 +65,7 @@ feature "Neighborhoods" do
   scenario 'destroy a neighborhood' do
     Neighborhood.make!(:centro)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Bairros'
+    navigate_through 'Outros > Bairros'
 
     click_link 'Centro'
 
@@ -87,9 +79,7 @@ feature "Neighborhoods" do
   scenario 'cannot destroy a neighborhood with streets' do
     Street.make!(:girassol)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Bairros'
+    navigate_through 'Outros > Bairros'
 
     click_link 'Centro'
 
@@ -103,9 +93,7 @@ feature "Neighborhoods" do
     Neighborhood.make!(:portugal)
     District.make!(:oeste)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Bairros'
+    navigate_through 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 

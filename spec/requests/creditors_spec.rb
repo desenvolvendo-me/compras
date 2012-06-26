@@ -12,9 +12,7 @@ feature "Creditors" do
     Material.make!(:arame_farpado)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -112,9 +110,7 @@ feature "Creditors" do
   scenario 'viewing more data from the selected person' do
     Person.make!(:nohup)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -138,9 +134,7 @@ feature "Creditors" do
     Agency.make!(:itau)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -307,9 +301,7 @@ feature "Creditors" do
   scenario 'validate uniqueness of person' do
     Creditor.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -327,9 +319,7 @@ feature "Creditors" do
     Agency.make!(:itau)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -443,9 +433,7 @@ feature "Creditors" do
   scenario 'acessing a CRC for a creditor and returnig to creditor' do
     Creditor.make!(:mateus)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -480,9 +468,7 @@ feature "Creditors" do
   scenario 'create a CRC for a creditor' do
     Creditor.make!(:mateus)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -563,9 +549,7 @@ feature "Creditors" do
     Material.make!(:arame_farpado)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -683,9 +667,7 @@ feature "Creditors" do
     Agency.make!(:santander)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Nohup'
 
@@ -888,9 +870,7 @@ feature "Creditors" do
     Agency.make!(:santander)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Gabriel Sobrinho'
 
@@ -1019,9 +999,7 @@ feature "Creditors" do
     Creditor.make!(:nohup)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Nohup'
 
@@ -1043,9 +1021,7 @@ feature "Creditors" do
     Creditor.make!(:mateus)
     Person.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -1058,9 +1034,7 @@ feature "Creditors" do
   end
 
   scenario 'show only the tabs that are common to all personable of people when has not a people.' do
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -1079,9 +1053,7 @@ feature "Creditors" do
   scenario 'should only show only tabs for special people' do
     Person.make!(:mateus)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -1102,9 +1074,7 @@ feature "Creditors" do
   scenario 'should only show only tabs for individual people' do
     Person.make!(:sobrinho)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -1125,9 +1095,7 @@ feature "Creditors" do
   scenario 'should only show only tabs for company people' do
     Person.make!(:nohup)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Criar Credor'
 
@@ -1147,9 +1115,7 @@ feature "Creditors" do
 
   scenario 'destroy an existent creditor' do
     Creditor.make!(:nohup)
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Nohup'
 
@@ -1164,9 +1130,7 @@ feature "Creditors" do
   scenario 'destroy a CRC for a creditor' do
     Creditor.make!(:mateus)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Credores'
+    navigate_through 'Comum > Credores'
 
     click_link 'Mateus Lorandi'
 

@@ -11,9 +11,7 @@ feature "PriceCollectionProposals" do
     scenario 'should not have a button to create a proposal' do
       PriceCollection.make!(:coleta_de_precos)
 
-      click_link 'Processos'
-
-      click_link 'Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
 
       click_link '1/2012'
 
@@ -26,9 +24,7 @@ feature "PriceCollectionProposals" do
     scenario 'the proposal should be created automatically when the price collection is created' do
       PriceCollection.make!(:coleta_de_precos)
 
-      click_link 'Processos'
-
-      click_link 'Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
 
       click_link '1/2012'
 
@@ -40,9 +36,7 @@ feature "PriceCollectionProposals" do
     scenario 'should not have a button to delete a proposal' do
       PriceCollection.make!(:coleta_de_precos)
 
-      click_link 'Processos'
-
-      click_link 'Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
 
       click_link '1/2012'
 
@@ -58,9 +52,7 @@ feature "PriceCollectionProposals" do
     scenario 'editing proposal' do
       price_collection = PriceCollection.make!(:coleta_de_precos)
 
-      click_link 'Processos'
-
-      click_link 'Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
 
       click_link '1/2012'
 

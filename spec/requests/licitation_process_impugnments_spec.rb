@@ -10,9 +10,7 @@ feature "LicitationProcessImpugnments" do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
-    click_link 'Processos'
-
-    click_link 'Impugnações dos Processos Licitatórios'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processo Licitatório > Impugnações dos Processos Licitatórios'
 
     click_link 'Criar Impugnação do Processo Licitatório'
 
@@ -53,9 +51,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'update an existent licitation_process_impugnment' do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
-    click_link 'Processos'
-
-    click_link 'Impugnações dos Processos Licitatórios'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processo Licitatório > Impugnações dos Processos Licitatórios'
 
     click_link licitation_process_impugnment.to_s
 
@@ -93,9 +89,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'should have fields disabled when situation is not pending' do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras_deferida)
 
-    click_link 'Processos'
-
-    click_link 'Impugnações dos Processos Licitatórios'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processo Licitatório > Impugnações dos Processos Licitatórios'
 
     click_link licitation_process_impugnment.to_s
 
@@ -116,9 +110,8 @@ feature "LicitationProcessImpugnments" do
 
   scenario 'destroy an existent licitation_process_impugnment' do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
-    click_link 'Processos'
 
-    click_link 'Impugnações dos Processos Licitatórios'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processo Licitatório > Impugnações dos Processos Licitatórios'
 
     click_link licitation_process_impugnment.to_s
 
@@ -128,9 +121,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'envelope dates should be filled when licitation process selected' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    click_link 'Processos'
-
-    click_link 'Impugnações dos Processos Licitatórios'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processo Licitatório > Impugnações dos Processos Licitatórios'
 
     click_link 'Criar Impugnação do Processo Licitatório'
 
@@ -145,9 +136,7 @@ feature "LicitationProcessImpugnments" do
   scenario 'envelope dates should be empty when clear licitaion process' do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
-    click_link 'Processos'
-
-    click_link 'Impugnações dos Processos Licitatórios'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processo Licitatório > Impugnações dos Processos Licitatórios'
 
     click_link licitation_process_impugnment.to_s
 

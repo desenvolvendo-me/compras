@@ -7,9 +7,7 @@ feature "PrecatoryTypes" do
   end
 
   scenario 'create a new precatory_type' do
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Precatório'
+    navigate_through 'Contabilidade > Comum > Precatório > Tipos de Precatório'
 
     click_link 'Criar Tipos de Precatório'
 
@@ -34,9 +32,7 @@ feature "PrecatoryTypes" do
   scenario 'update an existent precatory_type' do
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Precatório'
+    navigate_through 'Contabilidade > Comum > Precatório > Tipos de Precatório'
 
     within_records do
       click_link 'Precatórios Alimentares'
@@ -62,9 +58,7 @@ feature "PrecatoryTypes" do
   scenario 'destroy an existent precatory_type' do
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Precatório'
+    navigate_through 'Contabilidade > Comum > Precatório > Tipos de Precatório'
 
     within_records do
       click_link 'Precatórios Alimentares'
@@ -79,9 +73,7 @@ feature "PrecatoryTypes" do
   end
 
   scenario "disable deactivation_date when status is not inactive" do
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Precatório'
+    navigate_through 'Contabilidade > Comum > Precatório > Tipos de Precatório'
 
     click_link 'Criar Tipos de Precatório'
 
@@ -91,9 +83,7 @@ feature "PrecatoryTypes" do
   end
 
   scenario "enable deactivation_date when status is inactive" do
-    click_link 'Contabilidade'
-
-    click_link 'Tipos de Precatório'
+    navigate_through 'Contabilidade > Comum > Precatório > Tipos de Precatório'
 
     click_link 'Criar Tipos de Precatório'
 

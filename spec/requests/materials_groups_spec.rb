@@ -7,9 +7,7 @@ feature "MaterialsGroups" do
   end
 
   scenario 'create a new materials_group' do
-    click_link 'Solicitações'
-
-    click_link 'Grupos de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Grupos de Materiais'
 
     click_link 'Criar Grupo de Materiais'
 
@@ -29,9 +27,7 @@ feature "MaterialsGroups" do
   scenario 'update an existent materials_group' do
     MaterialsGroup.make!(:informatica)
 
-    click_link 'Solicitações'
-
-    click_link 'Grupos de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Grupos de Materiais'
 
     click_link 'Informática'
 
@@ -51,9 +47,7 @@ feature "MaterialsGroups" do
   scenario 'destroy an existent materials_group' do
     MaterialsGroup.make!(:informatica)
 
-    click_link 'Solicitações'
-
-    click_link 'Grupos de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Grupos de Materiais'
 
     click_link 'Informática'
 
@@ -68,9 +62,7 @@ feature "MaterialsGroups" do
   scenario 'should validate uniqueness of group' do
     MaterialsGroup.make!(:informatica)
 
-    click_link 'Solicitações'
-
-    click_link 'Grupos de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Grupos de Materiais'
 
     click_link 'Criar Grupo de Materiais'
 
@@ -84,9 +76,7 @@ feature "MaterialsGroups" do
   scenario 'should validate uniqueness of name' do
     MaterialsGroup.make!(:informatica)
 
-    click_link 'Solicitações'
-
-    click_link 'Grupos de Materiais'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Grupos de Materiais'
 
     click_link 'Criar Grupo de Materiais'
 

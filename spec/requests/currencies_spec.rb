@@ -7,9 +7,7 @@ feature "Currencies" do
   end
 
   scenario 'create a new currency' do
-    click_link 'Cadastros Diversos'
-
-    click_link 'Moedas'
+    navigate_through 'Outros > Moedas'
 
     click_link 'Criar Moeda'
 
@@ -29,9 +27,7 @@ feature "Currencies" do
   scenario 'update a currency' do
     Currency.make!(:real)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Moedas'
+    navigate_through 'Outros > Moedas'
 
     click_link 'Real'
 
@@ -51,9 +47,7 @@ feature "Currencies" do
   scenario 'destroy a currency' do
     Currency.make!(:real)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Moedas'
+    navigate_through 'Outros > Moedas'
 
     click_link 'Real'
 

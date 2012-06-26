@@ -9,11 +9,7 @@ feature "SignatureConfigurations" do
   scenario 'create a new signature_configuration' do
     Signature.make!(:gerente_sobrinho)
 
-    click_link 'Administração'
-
-    click_link 'Relatórios'
-
-    click_link 'Configurações de Assinatura'
+    navigate_through 'Outros > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -45,11 +41,7 @@ feature "SignatureConfigurations" do
   scenario 'should have only availables reports' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    click_link 'Administração'
-
-    click_link 'Relatórios'
-
-    click_link 'Configurações de Assinatura'
+    navigate_through 'Outros > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -60,11 +52,7 @@ feature "SignatureConfigurations" do
   scenario 'should have only availables reports when edit' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    click_link 'Administração'
-
-    click_link 'Relatórios'
-
-    click_link 'Configurações de Assinatura'
+    navigate_through 'Outros > Configurações de Assinatura'
 
     click_link 'Autorizações de Fornecimento'
 
@@ -75,11 +63,7 @@ feature "SignatureConfigurations" do
   scenario 'when fill signature should fill position' do
     Signature.make!(:gerente_sobrinho)
 
-    click_link 'Administração'
-
-    click_link 'Relatórios'
-
-    click_link 'Configurações de Assinatura'
+    navigate_through 'Outros > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -104,11 +88,7 @@ feature "SignatureConfigurations" do
     Signature.make!(:supervisor_wenderson)
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    click_link 'Administração'
-
-    click_link 'Relatórios'
-
-    click_link 'Configurações de Assinatura'
+    navigate_through 'Outros > Configurações de Assinatura'
 
     click_link 'Autorizações de Fornecimento'
 
@@ -140,11 +120,7 @@ feature "SignatureConfigurations" do
   scenario 'destroy an existent signature_configuration' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    click_link 'Administração'
-
-    click_link 'Relatórios'
-
-    click_link 'Configurações de Assinatura'
+    navigate_through 'Outros > Configurações de Assinatura'
 
     click_link 'Autorizações de Fornecimento'
 

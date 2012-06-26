@@ -9,9 +9,7 @@ feature "DisseminationSources" do
   scenario 'create a new dissemination_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Divulgação'
+    navigate_through 'Contabilidade > Comum > Legislação > Fontes de Divulgação'
 
     click_link 'Criar Fonte de Divulgação'
 
@@ -31,9 +29,7 @@ feature "DisseminationSources" do
   scenario 'validates uniqueness of description' do
     DisseminationSource.make!(:jornal_municipal)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Divulgação'
+    navigate_through 'Contabilidade > Comum > Legislação > Fontes de Divulgação'
 
     click_link 'Criar Fonte de Divulgação'
 
@@ -50,9 +46,7 @@ feature "DisseminationSources" do
     DisseminationSource.make!(:jornal_municipal)
     CommunicationSource.make!(:jornal_estadual)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Divulgação'
+    navigate_through 'Contabilidade > Comum > Legislação > Fontes de Divulgação'
 
     click_link 'Jornal Oficial do Município'
 
@@ -74,9 +68,7 @@ feature "DisseminationSources" do
   scenario 'destroy an existent dissemination_source' do
     DisseminationSource.make!(:jornal_municipal)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Divulgação'
+    navigate_through 'Contabilidade > Comum > Legislação > Fontes de Divulgação'
 
     click_link 'Jornal Oficial do Município'
 
@@ -91,9 +83,7 @@ feature "DisseminationSources" do
   scenario 'cannot destroy an existent dissemination_source with regulatory_act relationship' do
     RegulatoryAct.make!(:sopa)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Divulgação'
+    navigate_through 'Contabilidade > Comum > Legislação > Fontes de Divulgação'
 
     click_link 'Jornal Oficial do Bairro'
 

@@ -7,9 +7,7 @@ feature "Positions" do
   end
 
   scenario 'create a new position' do
-    click_link 'Cadastros Diversos'
-
-    click_link 'Cargos'
+    navigate_through 'Outros > Cargos'
 
     click_link 'Criar Cargo'
 
@@ -27,9 +25,7 @@ feature "Positions" do
   scenario 'update an existent position' do
     Position.make!(:gerente)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Cargos'
+    navigate_through 'Outros > Cargos'
 
     click_link 'Gerente'
 
@@ -47,9 +43,7 @@ feature "Positions" do
   scenario 'destroy an existent position' do
     Position.make!(:gerente)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Cargos'
+    navigate_through 'Outros > Cargos'
 
     click_link 'Gerente'
 
@@ -63,9 +57,7 @@ feature "Positions" do
   scenario 'validate uniqueness of code' do
     Position.make!(:gerente)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Cargos'
+    navigate_through 'Outros > Cargos'
 
     click_link 'Criar Cargo'
 

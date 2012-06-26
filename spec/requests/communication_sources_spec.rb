@@ -7,9 +7,7 @@ feature "CommunicationSources" do
   end
 
   scenario 'create a new communication_source' do
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Comunicação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Fontes de Comunicação'
 
     click_link 'Criar Fonte de Comunicação'
 
@@ -27,9 +25,7 @@ feature "CommunicationSources" do
   scenario 'validates uniqueness of description' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Comunicação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Fontes de Comunicação'
 
     click_link 'Criar Fonte de Comunicação'
 
@@ -45,9 +41,7 @@ feature "CommunicationSources" do
   scenario 'update an existent communication_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Comunicação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Fontes de Comunicação'
 
     click_link 'Jornal de Circulação Municipal'
 
@@ -65,9 +59,7 @@ feature "CommunicationSources" do
   scenario 'destroy an existent communication_source' do
     CommunicationSource.make!(:jornal_municipal)
 
-    click_link 'Solicitações'
-
-    click_link 'Fontes de Comunicação'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Fontes de Comunicação'
 
     click_link 'Jornal de Circulação Municipal'
 

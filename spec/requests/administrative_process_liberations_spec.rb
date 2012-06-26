@@ -10,9 +10,7 @@ feature "AdministrativeProcessLiberations" do
     AdministrativeProcess.make!(:compra_aguardando)
     Employee.make!(:sobrinho)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -40,9 +38,7 @@ feature "AdministrativeProcessLiberations" do
   scenario 'when edit a liberation all fields should be disabled' do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    click_link 'Processos'
-
-    click_link 'Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -62,10 +58,9 @@ feature "AdministrativeProcessLiberations" do
   scenario 'cancel should return to edit_administrative_process' do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    click_link 'Processos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
 
-    click_link 'Processos Administrativos'
-
+    
     within_records do
       page.find('a').click
     end

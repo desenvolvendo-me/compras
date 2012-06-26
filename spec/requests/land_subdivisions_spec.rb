@@ -7,9 +7,7 @@ feature "LandSubdivisions" do
   end
 
   scenario 'create a new land subdivision' do
-    click_link 'Cadastros Diversos'
-
-    click_link 'Loteamentos'
+    navigate_through 'Outros > Loteamentos'
 
     click_link 'Criar Loteamento'
 
@@ -27,9 +25,7 @@ feature "LandSubdivisions" do
   scenario 'update a land subdivision' do
     LandSubdivision.make!(:solar_da_serra)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Loteamentos'
+    navigate_through 'Outros > Loteamentos'
 
     click_link 'Solar da Serra'
 
@@ -47,9 +43,7 @@ feature "LandSubdivisions" do
   scenario 'destroy a land subdivision' do
     LandSubdivision.make!(:terra_prometida)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Loteamentos'
+    navigate_through 'Outros > Loteamentos'
 
     click_link 'Terra Prometida'
 

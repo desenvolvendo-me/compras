@@ -7,9 +7,7 @@ feature "PledgeCategories" do
   end
 
   scenario 'create a new pledge_category' do
-    click_link 'Contabilidade'
-
-    click_link 'Categorias de Empenho'
+    navigate_through 'Contabilidade > Empenho > Categorias de Empenho'
 
     click_link 'Criar Categoria de Empenho'
 
@@ -30,9 +28,7 @@ feature "PledgeCategories" do
   scenario 'update an existent pledge_category' do
     PledgeCategory.make!(:geral)
 
-    click_link 'Contabilidade'
-
-    click_link 'Categorias de Empenho'
+    navigate_through 'Contabilidade > Empenho > Categorias de Empenho'
 
     click_link 'Geral'
 
@@ -52,9 +48,7 @@ feature "PledgeCategories" do
   scenario 'destroy an existent pledge_category' do
     PledgeCategory.make!(:geral)
 
-    click_link 'Contabilidade'
-
-    click_link 'Categorias de Empenho'
+    navigate_through 'Contabilidade > Empenho > Categorias de Empenho'
 
     click_link 'Geral'
 
@@ -69,9 +63,7 @@ feature "PledgeCategories" do
   scenario 'validate uniqueness of description' do
     PledgeCategory.make!(:geral)
 
-    click_link 'Contabilidade'
-
-    click_link 'Categorias de Empenho'
+    navigate_through 'Contabilidade > Empenho > Categorias de Empenho'
 
     click_link 'Criar Categoria de Empenho'
 

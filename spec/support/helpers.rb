@@ -149,6 +149,12 @@ module Helpers
       end
     end
   end
+
+  def navigate_through(path)
+    path.split('>').each do |link|
+      click_link link.strip
+    end
+  end
 end
 
 RSpec.configure do |config|

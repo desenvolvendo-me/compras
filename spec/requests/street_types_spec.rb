@@ -7,9 +7,7 @@ feature "StreetTypes" do
   end
 
   scenario 'create a new street type' do
-    click_link 'Cadastros Diversos'
-
-    click_link 'Tipos de Logradouros'
+    navigate_through 'Outros > Tipos de Logradouros'
 
     click_link 'Criar Tipo de Logradouro'
 
@@ -29,9 +27,7 @@ feature "StreetTypes" do
   scenario 'update a street type' do
     StreetType.make!(:rua)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Tipos de Logradouros'
+    navigate_through 'Outros > Tipos de Logradouros'
 
     click_link 'Rua'
 
@@ -52,9 +48,7 @@ feature "StreetTypes" do
   scenario 'destroy a street type' do
     StreetType.make!(:rua)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Tipos de Logradouros'
+    navigate_through 'Outros > Tipos de Logradouros'
 
     click_link 'Rua'
 

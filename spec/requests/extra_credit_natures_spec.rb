@@ -7,9 +7,8 @@ feature "ExtraCreditNatures" do
   end
 
   scenario 'create a new extra_credit_nature' do
-    click_link 'Contabilidade'
 
-    click_link 'Naturezas de Créditos Suplementares'
+    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar  > Naturezas de Créditos Suplementares'
 
     click_link 'Criar Natureza de Crédito Suplementar'
 
@@ -29,9 +28,7 @@ feature "ExtraCreditNatures" do
   scenario 'update an existent extra_credig_nature' do
     ExtraCreditNature.make!(:abre_credito)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas de Créditos Suplementares'
+    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Naturezas de Créditos Suplementares'
 
     click_link 'Abre crédito suplementar'
 
@@ -51,9 +48,7 @@ feature "ExtraCreditNatures" do
   scenario 'destroy an existent extra_credig_nature' do
     ExtraCreditNature.make!(:abre_credito)
 
-    click_link 'Contabilidade'
-
-    click_link 'Naturezas de Créditos Suplementares'
+    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Naturezas de Créditos Suplementares'
 
     click_link 'Abre crédito suplementar'
 
@@ -61,7 +56,9 @@ feature "ExtraCreditNatures" do
 
     page.should have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
 
-    page.should_not have_content 'Abre crédito suplementar'
-    page.should_not have_content 'Outros'
+    within_records do
+      page.should_not have_content 'Abre crédito suplementar'
+      page.should_not have_content 'Outros'
+    end
   end
 end

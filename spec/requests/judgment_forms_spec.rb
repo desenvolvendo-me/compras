@@ -7,9 +7,7 @@ feature "JudgmentForms" do
   end
 
   scenario 'create a new judgment_form' do
-    click_link 'Processos'
-
-    click_link 'Formas de Julgamento das Licitações'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Formas de Julgamento das Licitações'
 
     click_link 'Criar Forma de Julgamento de Licitação'
 
@@ -31,9 +29,7 @@ feature "JudgmentForms" do
   scenario 'update an existent judgment_form' do
     JudgmentForm.make!(:global_com_menor_preco)
 
-    click_link 'Processos'
-
-    click_link 'Formas de Julgamento das Licitações'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Formas de Julgamento das Licitações'
 
     click_link 'Forma Global com Menor Preço'
 
@@ -55,9 +51,7 @@ feature "JudgmentForms" do
   scenario 'destroy an existent judgment_form' do
     JudgmentForm.make!(:global_com_menor_preco)
 
-    click_link 'Processos'
-
-    click_link 'Formas de Julgamento das Licitações'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Formas de Julgamento das Licitações'
 
     click_link 'Forma Global com Menor Preço'
 
@@ -73,9 +67,7 @@ feature "JudgmentForms" do
   scenario 'should validate uniqueness of description' do
     JudgmentForm.make!(:global_com_menor_preco)
 
-    click_link 'Processos'
-
-    click_link 'Formas de Julgamento das Licitações'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Formas de Julgamento das Licitações'
 
     click_link 'Criar Forma de Julgamento de Licitação'
 

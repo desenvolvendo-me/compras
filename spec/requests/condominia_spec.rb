@@ -10,9 +10,7 @@ feature "Condominia" do
     Neighborhood.make!(:sao_francisco)
     Street.make!(:girassol)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Condomínios'
+    navigate_through 'Outros > Condomínios'
 
     click_link 'Criar Condomínio'
 
@@ -32,9 +30,7 @@ feature "Condominia" do
   scenario 'update a condominium' do
     Condominium.make!(:tambuata)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Condomínios'
+    navigate_through 'Outros > Condomínios'
 
     click_link 'Tambuata'
 
@@ -52,9 +48,7 @@ feature "Condominia" do
   scenario 'destroy a condominium' do
     Condominium.make!(:tambuata)
 
-    click_link 'Cadastros Diversos'
-
-    click_link 'Condomínios'
+    navigate_through 'Outros > Condomínios'
 
     click_link 'Tambuata'
 
