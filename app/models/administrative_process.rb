@@ -58,7 +58,7 @@ class AdministrativeProcess < Compras::Model
     signatures.in_groups_of(4, false)
   end
 
-  def update_status!(new_status)
+  def update_status(new_status)
     update_attribute :status, new_status
   end
 

@@ -7,7 +7,7 @@ class AdministrativeProcessStatusUpdater
   end
 
   def release!
-    administrative_process.update_status!(released_status)
+    administrative_process.update_status(released_status)
   end
 
   private

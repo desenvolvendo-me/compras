@@ -193,7 +193,7 @@ describe AdministrativeProcess do
     it 'update the status attribute with the given string' do
       subject.should_receive(:update_attribute).with(:status, 'released')
 
-      subject.update_status!('released')
+      subject.update_status('released')
     end
   end
 

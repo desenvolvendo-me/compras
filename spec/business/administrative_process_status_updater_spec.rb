@@ -16,7 +16,7 @@ describe AdministrativeProcessStatusUpdater do
 
   describe '#release!' do
     it 'should change the status of administrative_process to released' do
-      administrative_process.should_receive(:update_status!).with('released')
+      administrative_process.should_receive(:update_status).with('released')
       administrative_process_status.should_receive(:value_for).with(:RELEASED).and_return('released')
 
       subject.release!
