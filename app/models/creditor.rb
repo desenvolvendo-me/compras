@@ -6,7 +6,7 @@ class Creditor < Compras::Model
   attr_accessible :representative_person_ids, :representative_ids
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
-  attr_accessible :email, :login, :legal_nature_id
+  attr_accessible :legal_nature_id
 
   attr_readonly :person_id
 
@@ -43,17 +43,20 @@ class Creditor < Compras::Model
 
   has_one :user, :as => :authenticable
 
-  delegate :email, :personable_type, :company?, :to => :person, :allow_nil => true
+  delegate :personable_type, :company?, :to => :person, :allow_nil => true
   delegate :phone, :fax, :name, :to => :person, :allow_nil => true
   delegate :address, :city, :zip_code, :to => :person, :allow_nil => true
+  delegate :email, :to => :person, :allow_nil => true, :prefix => true
   delegate :bank_id, :to => :accounts, :allow_nil => true
   delegate :materials_class, :materials_group, :to => :materials, :allow_nil => true
+  delegate :login, :email, :to => :user, :allow_nil => true
 
   accepts_nested_attributes_for :accounts, :allow_destroy => true
   accepts_nested_attributes_for :creditor_balances, :allow_destroy => true
   accepts_nested_attributes_for :documents, :allow_destroy => true
   accepts_nested_attributes_for :regularization_or_administrative_sanctions, :allow_destroy => true
   accepts_nested_attributes_for :representatives, :allow_destroy => true
+  accepts_nested_attributes_for :user
 
   validates :person, :presence => true
   validates :person_id, :uniqueness => true, :allow_blank => true
@@ -71,22 +74,6 @@ class Creditor < Compras::Model
 
   def to_s
     person.to_s
-  end
-
-  def email= email
-    person.email = email
-  end
-
-  def email
-    user.try(:email) || person.email
-  end
-
-  def login= login
-    @login = login
-  end
-
-  def login
-    user.try(:login) || @login
   end
 
   def selected_cnaes

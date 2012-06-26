@@ -1,5 +1,5 @@
 class PriceCollectionProposal < Compras::Model
-  attr_accessible :creditor_id, :items_attributes, :email, :login, :status
+  attr_accessible :creditor_id, :items_attributes, :status, :user_attributes
 
   belongs_to :price_collection
   belongs_to :creditor
@@ -11,15 +11,21 @@ class PriceCollectionProposal < Compras::Model
 
   delegate :date, :full_period, :to => :price_collection, :allow_nil => true, :prefix => true
   delegate :price_collection_lots, :to => :price_collection, :allow_nil => true
-  delegate :name, :email, :email=, :login, :login=, :to => :creditor, :allow_nil => true
+  delegate :name, :email, :login, :user_attributes, :user_attributes=, :user, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
   validates :creditor, :presence => true
-  validates :email, :login, :presence => true, :if => :new_record?
+  validate :must_have_a_valid_creditor_user
 
   orderize :id
   filterize
+
+  def build_user
+    return user if user.present?
+
+    creditor.try(:build_user)
+  end
 
   def to_s
     "#{price_collection} - #{creditor}"
@@ -52,5 +58,13 @@ class PriceCollectionProposal < Compras::Model
   def self.by_price_collection_and_creditor(params = {})
     where { price_collection_id.eq(params.fetch(:price_collection_id)) &
             creditor_id.eq(params.fetch(:creditor_id)) }
+  end
+
+  protected
+
+  def must_have_a_valid_creditor_user
+    return if !user || user.valid?
+
+    errors[:user_attributes] << user.errors.full_messages
   end
 end

@@ -39,7 +39,7 @@
         emailInput = mainDiv.find('input.email'),
         loginInput = mainDiv.find('input.login');
 
-    emailInput.val(creditor.email);
+    emailInput.val(creditor.email || creditor.person_email);
     loginInput.val(creditor.login);
 
     if(creditor.email){

@@ -30,8 +30,8 @@ describe CreditorUserCreator do
 
   context 'none of the users exists' do
     before do
-      creditor_1.stub_chain(:user, :present?).and_return false
-      creditor_2.stub_chain(:user, :present?).and_return false
+      creditor_1.stub_chain(:user, :id).and_return nil
+      creditor_2.stub_chain(:user, :id).and_return nil
     end
 
     it 'generates a user for each creditor in price_collection' do
@@ -44,8 +44,8 @@ describe CreditorUserCreator do
 
   context 'the creditor_1 has a user' do
     before do
-      creditor_1.stub_chain(:user, :present?).and_return true
-      creditor_2.stub_chain(:user, :present?).and_return false
+      creditor_1.stub_chain(:user, :id).and_return 1
+      creditor_2.stub_chain(:user, :id).and_return nil
     end
 
     it 'generates a user for each creditor in price_collection' do

@@ -21,6 +21,40 @@ describe PriceCollectionProposal do
     subject.to_s.should eq 'Price Collection 1 - creditor 1'
   end
 
+  describe '#build_user' do
+    context 'has a user' do
+      before do
+        subject.stub(:user).and_return user
+        subject.stub_chain(:user, :present?).and_return true
+      end
+
+      let :user do
+        double('user')
+      end
+
+      it 'should return the user' do
+        subject.build_user.should eq user
+      end
+    end
+
+    context 'has no user' do
+      before do
+        subject.stub_chain(:user, :present?).and_return false
+        subject.stub(:creditor).and_return creditor
+      end
+
+      let :creditor do
+        double('Creditor')
+      end
+
+      it 'delegates to the creditor to build the user' do
+        creditor.should_receive(:build_user)
+
+        subject.build_user
+      end
+    end
+  end
+
   context 'items by lot' do
     let(:item_1) do
       double('item 1', :price_collection_lot => 'lot 1', :total_price => 10)

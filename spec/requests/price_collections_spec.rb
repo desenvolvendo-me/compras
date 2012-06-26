@@ -67,7 +67,11 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Criar Coleta de Preços'
+    page.should_not have_content 'Coleta de Preços criada com sucesso'
+
+    within_tab 'Fornecedores' do
+      page.should have_content 'não pode ficar em branco'
+    end
   end
 
   scenario 'create a new price_collection' do
@@ -129,7 +133,6 @@ feature "PriceCollections" do
       end
 
       page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
-      page.should have_disabled_field 'Email'
       fill_in 'Login', :with => 'wenderson.sa'
     end
 
@@ -173,8 +176,8 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_disabled_field 'Fornecedor'
-      page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
-      page.should have_disabled_field 'Email'
+      page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+      page.should have_disabled_field 'E-mail'
       page.should have_field 'Login', :with => 'wenderson.sa'
       page.should have_disabled_field 'Login'
     end
@@ -287,7 +290,7 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       page.should_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_field 'Fornecedor', :with => 'José Gomes'
-      page.should have_field 'Email', :with => 'contato@sobrinho.com'
+      page.should have_field 'E-mail', :with => 'contato@sobrinho.com'
       page.should have_field 'Login', :with => 'sobrinho.sa'
     end
   end
@@ -706,7 +709,7 @@ feature "PriceCollections" do
 
     within_tab 'Fornecedores' do
       page.should have_disabled_field 'Fornecedor'
-      page.should have_disabled_field 'Email'
+      page.should have_disabled_field 'E-mail'
       page.should have_disabled_field 'Login'
 
       page.should_not have_button 'Adicionar Fornecedor'
