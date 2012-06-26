@@ -122,3 +122,68 @@ class Person < ActiveRecord::Base
   end
 end
 ```
+
+### Sistema de Grids e Units para as views:
+
+Utilizamos o sistema de grids [YUI](http://yuilibrary.com/yui/docs/cssgrids/), o exemplo mais simples para utilização é o seguinte:
+
+#### Para um field ocupar a linha inteira não precisa fazer nada. :P
+
+```
+<%= f.input :name %>
+```
+
+#### Para dividir a linha em duas partes iguais
+
+```
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :name %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :description %>
+  </div>
+</div>
+
+```
+
+#### Boas práticas
+
+Sempre que possível utilize o seguinte padrão:
+
+* Para ano utilize a class `yui3-u-1-8`
+
+```
+<div class="yui3-g">
+  <div class="yui3-u-1-8">
+    <%= f.input :year %>
+  </div>
+</div>
+```
+
+* Para datas utilize a class `yui3-u-1-6`
+
+```
+<div class="yui3-g">
+  <div class="yui3-u-1-6">
+    <%= f.input :date %>
+  </div>
+</div>
+```
+
+* Para valores, decimais, utilize a class `yui3-u-1-4`
+
+```
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :value %>
+  </div>
+</div>
+```
+
+* Não é possível usar esse padrão quando o label for muito grande, devendo assim aumentar o tamanho do field. Se fosse 1-8 use 1-7, se for uma data com label muito grande use 1-5 ou 1-4. Etc
+
+* Para os demais, use o bom senso. ;)
+
+* Fields booleanos não devem ficar na mesma linha de outros tipos de fields, podem ficar sozinho na linha ou com outros fields booleanos.
