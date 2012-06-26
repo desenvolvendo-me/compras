@@ -41,7 +41,6 @@ describe Contract do
   it { should validate_presence_of :contract_guarantees }
   it { should validate_presence_of :contract_value }
   it { should validate_presence_of :contract_validity }
-  it { should validate_presence_of :subcontracting }
   it { should validate_presence_of :signature_date }
   it { should validate_presence_of :end_date }
   it { should validate_presence_of :budget_structure }
@@ -52,6 +51,10 @@ describe Contract do
 
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
+
+  it { should allow_value(true).for(:subcontracting) }
+  it { should allow_value(false).for(:subcontracting) }
+  it { should_not allow_value(nil).for(:subcontracting) }
 
   context 'validating date' do
     it 'be invalid when the signature_date is after of end_date' do

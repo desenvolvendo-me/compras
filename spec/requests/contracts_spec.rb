@@ -156,6 +156,7 @@ feature "Contracts" do
 
     click_button 'Salvar'
 
+    page.driver.render('/tmp/foo.png', :full => true)
     page.should have_notice 'Contrato editado com sucesso.'
 
     within_records do
