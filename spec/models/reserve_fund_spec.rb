@@ -33,11 +33,11 @@ describe ReserveFund do
     end
 
     it 'should be valid when date is equal to last' do
-      subject.should allow_value('2011-12-31').for(:date)
+      subject.should allow_value(Date.new(2011, 12, 31)).for(:date)
     end
 
     it 'should not be valid when date is greater than last' do
-      subject.should_not allow_value('2011-12-21').for(:date).with_message("deve ser maior ou igual a data da última reserva (31/12/2011)")
+      subject.should_not allow_value(Date.new(2011, 12, 21)).for(:date).with_message("deve ser maior ou igual a data da última reserva (31/12/2011)")
     end
   end
 
