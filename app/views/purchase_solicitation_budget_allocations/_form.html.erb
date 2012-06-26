@@ -3,11 +3,11 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
   <div class="yui3-u-1-2">
-    <%= f.input :budget_allocation, :input_html => { :size => 10, :class => 'budget-allocation' }, :disabled => f.object.annulled? %>
+    <%= f.input :budget_allocation, :input_html => { :class => 'budget-allocation' }, :disabled => f.object.annulled? %>
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :expense_nature, :input_html => { :size => 21 }, :disabled => f.object.annulled? %>
+    <%= f.input :expense_nature, :disabled => f.object.annulled? %>
   </div>
 
   <%= f.error :items %>

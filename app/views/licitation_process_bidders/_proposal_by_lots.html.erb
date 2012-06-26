@@ -9,8 +9,8 @@
     <div id="lot<%= lot.id %>" class="licitation-process-lot container">
 
       <div class="yui3-g">
-        <div class="yui3-u-1-2">
-          <%= f.input :proposal_total_value_by_lot, :input_html => { :class => 'proposal-total-value', :value => f.object.decorator.proposal_total_value_by_lot(lot.id), :size => 12, :disabled => true } %>
+        <div class="yui3-u-1-4">
+          <%= f.input :proposal_total_value_by_lot, :input_html => { :class => 'proposal-total-value', :value => f.object.decorator.proposal_total_value_by_lot(lot.id), :disabled => true } %>
         </div>
       </div>
 

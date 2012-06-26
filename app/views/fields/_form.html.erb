@@ -1,15 +1,15 @@
 <fieldset>
   <div class="yui3-g">
     <div class="yui3-u-1-3">
-      <%= f.input :name, :input_html => { :size => 30, :disabled => f.object.has_object_registrations? } %>
+      <%= f.input :name, :input_html => { :disabled => f.object.has_object_registrations? } %>
     </div>
 
     <div class="yui3-u-1-3">
-      <%= f.input :description, :input_html => { :size => 30, :disabled => f.object.has_object_registrations? } %>
+      <%= f.input :description, :input_html => { :disabled => f.object.has_object_registrations? } %>
     </div>
 
     <div class="yui3-u-1-3">
-      <%= f.input :mask, :input_html => { :size => 20, :disabled => f.object.has_object_registrations? } %>
+      <%= f.input :mask, :input_html => { :disabled => f.object.has_object_registrations? } %>
     </div>
 
     <%= f.input :id, :as => 'hidden' %>

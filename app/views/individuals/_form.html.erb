@@ -43,15 +43,15 @@
       <%= p.association :identity, :collection => p.object.identity ? p.object.identity.localized : p.object.build_identity do |i| %>
         <div class="yui3-g">
           <div class="yui3-u-1-3">
-            <%= i.input :number, :input_html => { :size => 15 } %>
+            <%= i.input :number %>
           </div>
 
           <div class="yui3-u-1-3">
-            <%= i.input :issuer, :input_html => { :size => 15} %>
+            <%= i.input :issuer %>
           </div>
 
           <div class="yui3-u-1-6">
-            <%= i.input :issue, :input_html => { :size => 6 } %>
+            <%= i.input :issue %>
           </div>
         </div>
 
