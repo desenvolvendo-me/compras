@@ -91,7 +91,6 @@
           createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
         } else {
-          $('#pledge_cancellation_pledge_parcel').attr('data-modal-url', '<%= modal_pledge_parcels_path %>');
           $('#pledge_cancellation_emission_date').val('');
           $('#pledge_cancellation_pledge_parcel').val('');
           $('#pledge_cancellation_expiration_date').val('');
