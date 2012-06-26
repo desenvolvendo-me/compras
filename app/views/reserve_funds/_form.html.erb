@@ -38,11 +38,11 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :licitation, :disabled => !f.object.licitation? %>
+    <%= f.input :licitation_process, :disabled => !f.object.licitation? %>
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :process %>
+    <%= f.input :administrative_process, :disabled => true %>
   </div>
 </div>
 
@@ -53,6 +53,14 @@
   <% if f.object.persisted? %>
     $('form.reserve_fund :input').attr('disabled', true);
   <% end %>
+
+  $("#reserve_fund_licitation_process_id").change(function (event, licitation_process) {
+    if (licitation_process) {
+      $('#reserve_fund_administrative_process').val(licitation_process.administrative_process);
+    } else {
+      $('#reserve_fund_administrative_process').val('');
+    }
+  });
 
   $("#reserve_fund_budget_allocation_id").change(function (event, budget_allocation) {
     if (budget_allocation) {
@@ -67,10 +75,11 @@
   $("#reserve_fund_reserve_allocation_type_id").change(function (event, reserve_allocation_type) {
     if (reserve_allocation_type && reserve_allocation_type.value == "Licitação") {
       $("#reserve_fund_licitation_modality").attr("disabled", false);
-      $("#reserve_fund_licitation").attr("disabled", false);
+      $("#reserve_fund_licitation_process").attr("disabled", false);
     } else {
       $("#reserve_fund_licitation_modality").attr("disabled", true).val('');
-      $("#reserve_fund_licitation").attr("disabled", true).val('');
+      $("#reserve_fund_licitation_process").attr("disabled", true).val('');
+      $("#reserve_fund_licitation_process_id").attr("disabled", true).val('');
     }
   });
 </script>

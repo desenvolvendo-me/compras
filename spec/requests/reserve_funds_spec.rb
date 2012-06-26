@@ -12,6 +12,7 @@ feature "ReserveFunds" do
     ReserveAllocationType.make!(:licitation)
     LicitationModality.make!(:publica)
     Creditor.make!(:wenderson_sa)
+    LicitationProcess.make!(:processo_licitatorio)
 
     click_link 'Contabilidade'
 
@@ -32,8 +33,7 @@ feature "ReserveFunds" do
 
     fill_in 'Valor *', :with => '10,00'
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
-    fill_in 'Número da licitação', :with => '001/2012'
-    fill_in 'Número do processo', :with => '002/2013'
+    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
     within_modal 'Favorecido' do
       fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
       click_button 'Pesquisar'
@@ -54,8 +54,8 @@ feature "ReserveFunds" do
     page.should have_field 'Valor reservado', :with => '20,50'
     page.should have_field 'Valor *', :with => '10,00'
     page.should have_field 'Modalidade', :with => 'Pública'
-    page.should have_field 'Número da licitação', :with => '001/2012'
-    page.should have_field 'Número do processo', :with => '002/2013'
+    page.should have_field 'Processo licitatório', :with => '1/2012'
+    page.should have_field 'Processo administrativo', :with => '1/2012'
     page.should have_field 'Favorecido', :with => 'Wenderson Malheiros'
     page.should have_field 'Motivo', :with => 'Motivo para reserva de dotação'
   end
@@ -84,10 +84,8 @@ feature "ReserveFunds" do
     page.should have_field 'Valor *', :with => '10,50'
     page.should have_disabled_field 'Modalidade'
     page.should have_field 'Modalidade', :with => 'Pública'
-    page.should have_disabled_field 'Número da licitação'
-    page.should have_field 'Número da licitação', :with => '001/2012'
-    page.should have_disabled_field 'Número do processo'
-    page.should have_field 'Número do processo', :with => '002/2013'
+    page.should have_disabled_field 'Processo licitatório'
+    page.should have_disabled_field 'Processo administrativo'
     page.should have_disabled_field 'Favorecido'
     page.should have_field 'Favorecido', :with => 'Wenderson Malheiros'
     page.should have_disabled_field 'Motivo'
@@ -169,22 +167,22 @@ feature "ReserveFunds" do
     click_link 'Criar Reserva de Dotação'
 
     page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Número da licitação'
+    page.should have_disabled_field 'Processo licitatório'
 
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
 
     page.should_not have_disabled_field 'Modalidade'
-    page.should_not have_disabled_field 'Número da licitação'
+    page.should_not have_disabled_field 'Processo licitatório'
 
     clear_modal 'Tipo'
 
     page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Número da licitação'
+    page.should have_disabled_field 'Processo licitatório'
 
     fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
 
     page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Número da licitação'
+    page.should have_disabled_field 'Processo licitatório'
   end
 
   scenario 'should clean licitation modality and licitation number/year when changing type to diferent of licitation' do
@@ -200,16 +198,31 @@ feature "ReserveFunds" do
 
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
-    fill_in 'Número da licitação', :with => '001/2012'
 
     page.should have_field 'Modalidade', :with => 'Pública'
-    page.should have_field 'Número da licitação', :with => '001/2012'
 
     fill_modal 'Tipo', :with => 'Comum', :field => 'Descrição'
 
     page.should have_disabled_field 'Modalidade'
-    page.should have_field 'Número da licitação', :with => ''
     page.should have_disabled_field 'Modalidade'
-    page.should have_field 'Número da licitação', :with => ''
+  end
+
+  scenario 'should fill/clear delegate liciation_process fields' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    click_link 'Contabilidade'
+
+    click_link 'Reservas de Dotação'
+
+    click_link 'Criar Reserva de Dotação'
+
+    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+
+    page.should have_field 'Processo licitatório', :with => '1/2012'
+    page.should have_field 'Processo administrativo', :with => '1/2012'
+
+    clear_modal 'Processo licitatório'
+
+    page.should have_field 'Processo administrativo', :with => ''
   end
 end

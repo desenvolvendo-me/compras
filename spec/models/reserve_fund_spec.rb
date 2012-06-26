@@ -15,6 +15,7 @@ describe ReserveFund do
   it { should belong_to :reserve_allocation_type }
   it { should belong_to :licitation_modality }
   it { should belong_to :creditor}
+  it { should belong_to :licitation_process }
 
   it { should have_one(:reserve_fund_annul).dependent(:destroy) }
   it { should have_many(:pledges).dependent(:restrict) }
@@ -24,24 +25,6 @@ describe ReserveFund do
   it { should validate_presence_of :value }
   it { should validate_presence_of :reserve_allocation_type }
   it { should validate_presence_of :date }
-
-  it 'should return licitation_number/year as licitation method' do
-    subject.licitation.should eq nil
-
-    subject.licitation_number = '001'
-    subject.licitation_year = '2012'
-
-    subject.joined_licitation.should eq '001/2012'
-  end
-
-  it 'should return process_number/year as process method' do
-    subject.process.should eq nil
-
-    subject.process_number = '002'
-    subject.process_year = '2013'
-
-    subject.joined_process.should eq '002/2013'
-  end
 
   context 'validating date' do
     before(:each) do

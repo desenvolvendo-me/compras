@@ -17,6 +17,7 @@ require 'app/models/licitation_process_lot'
 require 'app/business/licitation_process_types_of_calculation_by_judgment_form_kind'
 require 'app/business/licitation_process_types_of_calculation_by_object_type'
 require 'app/business/licitation_process_types_of_calculation_by_modality'
+require 'app/models/reserve_fund'
 require 'app/models/indexer'
 
 describe LicitationProcess do
@@ -42,6 +43,7 @@ describe LicitationProcess do
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
   it { should have_many(:creditors).dependent(:restrict).through(:licitation_process_bidders) }
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
+  it { should have_many(:reserve_funds).dependent(:restrict) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }

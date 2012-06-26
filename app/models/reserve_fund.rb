@@ -1,14 +1,13 @@
 class ReserveFund < Compras::Model
-  attr_accessible :descriptor_id, :budget_allocation_id, :process, :licitation
+  attr_accessible :descriptor_id, :budget_allocation_id, :licitation_process_id
   attr_accessible :value, :reserve_allocation_type_id, :reserve_allocation_type_id
   attr_accessible :licitation_modality_id, :creditor_id, :status, :date, :reason
 
   attr_readonly :date
 
-  attr_accessor :licitation, :process
-
   has_enumeration_for :status, :with => ReserveFundStatus, :create_helpers => true
 
+  belongs_to :licitation_process
   belongs_to :descriptor
   belongs_to :budget_allocation
   belongs_to :reserve_allocation_type
@@ -27,12 +26,12 @@ class ReserveFund < Compras::Model
   delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
   delegate :year, :to => :descriptor, :allow_nil => true
+  delegate :administrative_process, :to => :licitation_process, :allow_nil => true
 
   validates :descriptor, :budget_allocation, :value, :reserve_allocation_type, :date, :presence => true
   validate :value_should_not_exceed_available_reserve
 
   with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
     allowing_blank.validates :date, :timeliness => {
       :on_or_after => lambda { last.date },
       :on_or_after_message => :must_be_greater_or_equal_to_last_date,
@@ -41,21 +40,13 @@ class ReserveFund < Compras::Model
     }
   end
 
-  before_save :parse_licitation, :parse_process, :clear_licitation_dependent_field_if_is_not_licitation
+  before_save :clear_licitation_dependent_field_if_is_not_licitation
 
   orderize :id
   filterize
 
   def to_s
     "#{id}/#{year}"
-  end
-
-  def joined_licitation
-    "#{licitation_number}/#{licitation_year}" if licitation_number && licitation_year
-  end
-
-  def joined_process
-    "#{process_number}/#{process_year}" if process_number && process_year
   end
 
   protected
@@ -68,27 +59,10 @@ class ReserveFund < Compras::Model
     end
   end
 
-  def parse_licitation
-    if licitation
-      parser = NumberYearParser.new(licitation)
-      self.licitation_number = parser.number
-      self.licitation_year = parser.year
-    end
-  end
-
-  def parse_process
-    if process
-      parser = NumberYearParser.new(process)
-      self.process_number = parser.number
-      self.process_year = parser.year
-    end
-  end
-
   def clear_licitation_dependent_field_if_is_not_licitation
     unless licitation?
       self.licitation_modality_id = nil
-      self.licitation_number = nil
-      self.licitation_year = nil
+      self.licitation_process = nil
     end
   end
 

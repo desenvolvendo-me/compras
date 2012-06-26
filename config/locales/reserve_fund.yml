@@ -17,8 +17,8 @@ pt-BR:
         creditor: "Favorecido"
         date: "Data"
         reason: "Motivo"
-        licitation: "Número da licitação"
-        process: "Número do processo"
+        licitation_process: "Processo licitatório"
+        administrative_process: "Processo administrativo"
 
   simple_form:
     hints:
