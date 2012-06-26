@@ -152,7 +152,7 @@ Utilizamos o sistema de grids [YUI](http://yuilibrary.com/yui/docs/cssgrids/), o
 
 Sempre que possível utilize o seguinte padrão:
 
-* Para ano utilize a class `yui3-u-1-8`
+Para ano utilize a class `yui3-u-1-8`
 
 ```
 <div class="yui3-g">
@@ -162,7 +162,7 @@ Sempre que possível utilize o seguinte padrão:
 </div>
 ```
 
-* Para datas utilize a class `yui3-u-1-6`
+Para datas utilize a class `yui3-u-1-6`
 
 ```
 <div class="yui3-g">
@@ -172,7 +172,7 @@ Sempre que possível utilize o seguinte padrão:
 </div>
 ```
 
-* Para valores, decimais, utilize a class `yui3-u-1-4`
+Para valores, decimais, utilize a class `yui3-u-1-4`
 
 ```
 <div class="yui3-g">
@@ -182,8 +182,8 @@ Sempre que possível utilize o seguinte padrão:
 </div>
 ```
 
-* Não é possível usar esse padrão quando o label for muito grande, devendo assim aumentar o tamanho do field. Se fosse 1-8 use 1-7, se for uma data com label muito grande use 1-5 ou 1-4. Etc
+Não é possível usar esse padrão quando o label for muito grande, devendo assim aumentar o tamanho do field. Se fosse 1-8 use 1-7, se for uma data com label muito grande use 1-5 ou 1-4. Etc
 
-* Para os demais, use o bom senso. ;)
+Fields booleanos não devem ficar na mesma linha de outros tipos de fields, podem ficar sozinho na linha ou com outros fields booleanos.
 
-* Fields booleanos não devem ficar na mesma linha de outros tipos de fields, podem ficar sozinho na linha ou com outros fields booleanos.
+Para os demais, use o bom senso. ;)
