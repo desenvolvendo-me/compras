@@ -86,4 +86,11 @@ describe PledgeDecorator do
 
     subject.contract_signature_date.should eq '12/06/2012'
   end
+
+  it 'should return formatted emission date' do
+    component.stub(:emission_date).and_return(Date.new(2012, 6, 12))
+    helpers.stub(:l).with(Date.new(2012, 6, 12)).and_return('12/06/2012')
+
+    subject.emission_date.should eq '12/06/2012'
+  end
 end

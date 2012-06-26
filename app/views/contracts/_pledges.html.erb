@@ -1,0 +1,19 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th><%= Pledge.human_attribute_name :code %></th>
+      <th><%= Pledge.human_attribute_name :emission_date %></th>
+      <th><%= Pledge.human_attribute_name :value %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render :partial => '/pledges/pledge', :collection => resource.pledges, :as => :pledge %>
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <td colspan="3" align="right">Total Empenhado: <%= resource.decorator.pledges_total_value %></td>
+    </tr>
+  </tfoot>
+</table>

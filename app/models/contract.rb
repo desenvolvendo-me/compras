@@ -54,4 +54,10 @@ class Contract < Compras::Model
       errors.add :licitation_process, :must_select_licitation_process_or_direct_purchase
     end
   end
+
+  def pledges_total_value
+    total = 0
+    pledges.each { |p| total += p.value }
+    total
+  end
 end

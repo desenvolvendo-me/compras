@@ -193,4 +193,24 @@ feature "Contracts" do
     page.should_not have_content '23/02/2012'
     page.should_not have_content '24/02/2012'
   end
+
+  scenario 'show pledges' do
+    Pledge.make!(:empenho_em_quinze_dias)
+    Pledge.make!(:empenho)
+
+    click_link 'Contabilidade'
+
+    click_link 'Contratos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Empenhos'
+
+    page.driver.render '/home/tiago/Desktop/debug.png'
+    page.should have_content '9,99'
+    page.should have_content I18n.l(Date.current + 15.days)
+    page.should have_content '19,98'
+  end
 end

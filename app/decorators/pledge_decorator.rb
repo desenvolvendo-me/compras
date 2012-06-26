@@ -10,6 +10,10 @@ class PledgeDecorator < Decorator
     helpers.l super if super
   end
 
+  def emission_date
+    helpers.l super.to_date if super
+  end
+
   def reserve_fund_value
     helpers.number_with_precision super if super
   end
