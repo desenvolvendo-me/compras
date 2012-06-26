@@ -86,7 +86,7 @@ feature "Contracts" do
 
     select 'Empreitada integral', :from => 'Forma de execução'
     select 'Fiança bancária', :from => 'Garantias do contrato'
-    select 'Sim', :from => 'Subcontração'
+    select 'Sim', :from => 'Subcontratação'
 
     fill_modal 'Unidade orçamentaria gestora responsável', :with => 'Secretaria de Educação', :field => 'Descrição'
 
@@ -125,7 +125,7 @@ feature "Contracts" do
 
     page.should have_select 'Forma de execução', :selected => 'Empreitada integral'
     page.should have_select 'Garantias do contrato', :selected => 'Fiança bancária'
-    page.should have_select 'Subcontração', :selected => 'Sim'
+    page.should have_select 'Subcontratação', :selected => 'Sim'
     page.should have_field 'Unidade orçamentaria gestora responsável', :with => '1 - Secretaria de Educação'
     page.should have_field 'Responsável pela unidade orçamentaria gestora', :with => 'Wenderson Malheiros'
     page.should have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'
@@ -151,7 +151,7 @@ feature "Contracts" do
     fill_in 'Número do contrato', :with => '111'
     fill_in 'Data da assinatura', :with => '01/01/2013'
     fill_in 'Data de validade', :with => '30/12/2013'
-    select 'Não', :from => 'Subcontração'
+    select 'Não', :from => 'Subcontratação'
     attach_file 'Contrato', 'spec/fixtures/example_document.txt'
 
     click_button 'Salvar'
@@ -167,7 +167,7 @@ feature "Contracts" do
     page.should have_field 'Número do contrato', :with => '111'
     page.should have_field 'Data da assinatura', :with => '01/01/2013'
     page.should have_field 'Data de validade', :with => '30/12/2013'
-    page.should have_select 'Subcontração', :selected => 'Não'
+    page.should have_select 'Subcontratação', :selected => 'Não'
     page.should have_link 'example_document.txt'
   end
 
