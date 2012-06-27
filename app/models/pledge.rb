@@ -45,6 +45,7 @@ class Pledge < Compras::Model
   delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
   delegate :entity, :year, :to => :descriptor, :allow_nil => true
+  delegate :expense_nature_expense_nature, :to => :budget_allocation, :allow_nil => true
 
   validates :descriptor, :budget_allocation, :management_unit, :presence => true
   validates :emission_date, :pledge_type, :value, :creditor, :presence => true

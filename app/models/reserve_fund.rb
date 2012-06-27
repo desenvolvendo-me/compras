@@ -25,6 +25,7 @@ class ReserveFund < Compras::Model
   delegate :expense_group_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_modality_id, :to => :budget_allocation, :allow_nil => true
   delegate :expense_element_id, :to => :budget_allocation, :allow_nil => true
+  delegate :expense_nature_expense_nature, :to => :budget_allocation, :allow_nil => true
   delegate :year, :to => :descriptor, :allow_nil => true
   delegate :administrative_process, :to => :licitation_process, :allow_nil => true
 

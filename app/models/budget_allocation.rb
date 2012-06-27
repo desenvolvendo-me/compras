@@ -26,6 +26,7 @@ class BudgetAllocation < Compras::Model
   has_many :administrative_process_budget_allocations, :dependent => :restrict
 
   delegate :function, :function_id, :to => :subfunction, :allow_nil => true
+  delegate :expense_nature, :to => :expense_nature, :allow_nil => true, :prefix => true
   delegate :expense_category_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_group_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_modality_id, :to => :expense_nature, :allow_nil => true

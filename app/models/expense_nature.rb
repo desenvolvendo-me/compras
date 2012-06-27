@@ -31,6 +31,8 @@ class ExpenseNature < Compras::Model
   orderize :description
   filterize
 
+  scope :expense_nature_not_eq, lambda { |code| where { expense_nature.not_eq(code) } }
+
   def to_s
     "#{expense_nature} - #{description}"
   end

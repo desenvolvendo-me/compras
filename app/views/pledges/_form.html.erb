@@ -40,7 +40,8 @@
           expenseCategoryId = '<%= f.object.expense_category_id %>',
           expenseGroupId = '<%= f.object.expense_group_id %>',
           expenseModalityId = '<%= f.object.expense_modality_id %>',
-          expenseElementId = '<%= f.object.expense_element_id %>';
+          expenseElementId = '<%= f.object.expense_element_id %>',
+          expenseNature = '<%= f.object.expense_nature_expense_nature %>';
 
       function uniqPledgeParcel(){
         return $('div.pledge-parcel .destroy[value=false]').length == 1;
@@ -85,6 +86,7 @@
       function subcategoryModalUrl() {
         var url = "<%= modal_expense_natures_path %>?",
             params = {
+              expense_nature_eq: expenseNature,
               locked_fields: ["expense_category", "expense_group", "expense_modality", "expense_element"],
               expense_nature: {
                 expense_category_id: expenseCategoryId,
@@ -113,6 +115,7 @@
           expenseGroupId = reserve_fund.expense_group_id;
           expenseModalityId = reserve_fund.expense_modality_id;
           expenseElementId = reserve_fund.expense_element_id;
+          expenseNature = reserve_fund.expense_nature_expense_nature;
 
           $('#pledge_expense_nature').attr('disabled', false).attr('data-modal-url', subcategoryModalUrl);
         } else {
@@ -146,6 +149,7 @@
           expenseGroupId = budget_allocation.expense_group_id;
           expenseModalityId = budget_allocation.expense_modality_id;
           expenseElementId = budget_allocation.expense_element_id;
+          expenseNature = budget_allocation.expense_nature_expense_nature;
 
           $('#pledge_expense_nature').attr('disabled', false).attr('data-modal-url', subcategoryModalUrl);
         } else {
