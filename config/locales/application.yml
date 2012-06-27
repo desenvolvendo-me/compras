@@ -3,3 +3,6 @@ pt-BR:
   logout: "Sair"
   "true": "Sim"
   "false": "Não"
+  test: "teste"
+  development: "desenvolvimento"
+  staging: "homologação"

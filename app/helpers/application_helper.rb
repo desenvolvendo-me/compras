@@ -93,6 +93,10 @@ module ApplicationHelper
     end
   end
 
+  def message_about_environment?
+    Rails.env.test? || Rails.env.development? || Rails.env.staging?
+  end
+
   def builder(resource, json)
     json.id resource.id
     json.value resource.to_s

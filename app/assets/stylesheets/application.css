@@ -4,6 +4,7 @@
  *= require header
  *= require account
  *= require menu
+ *= require environment
  *= require flash
  *= require content
  *= require actions
