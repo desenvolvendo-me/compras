@@ -9,7 +9,7 @@ class UsersController < CrudController
     raise Exceptions::Unauthorized
   end
 
-  def create_resource object
+  def create_resource(object)
     object.authenticable_type = AuthenticableType::EMPLOYEE
 
     object.confirm! if super
