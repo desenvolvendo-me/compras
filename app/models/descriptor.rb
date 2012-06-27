@@ -19,7 +19,7 @@ class Descriptor < Compras::Model
 
   validates :year, :entity, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
-  validates :entity_id, :uniqueness => { :scope => [:year] }, :allow_blank => true
+  validates :entity_id, :uniqueness => { :scope => [:year], :message => :taken_for_informed_year }, :allow_blank => true
 
   orderize :year
   filterize

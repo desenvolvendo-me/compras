@@ -60,7 +60,7 @@ feature "Descriptors" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    page.should have_content 'já existe para o ano informado'
   end
 
   scenario 'destroy an existent descriptor' do
