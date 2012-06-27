@@ -154,6 +154,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :budget_revenues do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :budget_structure_configurations do
     collection do
       get :filter
@@ -662,13 +669,6 @@ Compras::Application.routes.draw do
   end
 
   resources :regularization_or_administrative_sanction_reasons do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :revenue_accountings do
     collection do
       get :filter
       get :modal

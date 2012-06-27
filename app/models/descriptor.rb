@@ -13,7 +13,7 @@ class Descriptor < Compras::Model
   has_many :pledge_historics, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
-  has_many :revenue_accountings, :dependent => :restrict
+  has_many :budget_revenue, :dependent => :restrict
   has_many :revenue_natures, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
 

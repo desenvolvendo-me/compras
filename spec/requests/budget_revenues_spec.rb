@@ -1,19 +1,19 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "RevenueAccountings" do
+feature "BudgetRevenues" do
   background do
     sign_in
   end
 
-  scenario 'create a new revenue_accounting' do
+  scenario 'create a new budget_revenue' do
     Descriptor.make!(:detran_2012)
     RevenueNature.make!(:imposto)
     Capability.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
-    click_link 'Criar Receita Contábel'
+    click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
       page.should have_disabled_field 'Código'
@@ -29,7 +29,7 @@ feature "RevenueAccountings" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Contábel criado com sucesso.'
+    page.should have_notice 'Receita Orçamentaria criado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -50,13 +50,13 @@ feature "RevenueAccountings" do
     end
   end
 
-  scenario 'create a new revenue_accounting with same descriptor and use 1 as code' do
-    RevenueAccounting.make!(:reforma)
+  scenario 'create a new budget_revenue with same descriptor and use 1 as code' do
+    BudgetRevenue.make!(:reforma)
     RevenueNature.make!(:imposto_sobre_renda)
 
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
-    click_link 'Criar Receita Contábel'
+    click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
       fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
@@ -70,7 +70,7 @@ feature "RevenueAccountings" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Contábel criado com sucesso.'
+    page.should have_notice 'Receita Orçamentaria criado com sucesso.'
 
     within_records do
       click_link '2/2012'
@@ -91,15 +91,15 @@ feature "RevenueAccountings" do
     end
   end
 
-  scenario 'create a new revenue_accounting with other descriptor and restart code' do
-    RevenueAccounting.make!(:reforma)
+  scenario 'create a new budget_revenue with other descriptor and restart code' do
+    BudgetRevenue.make!(:reforma)
     Descriptor.make!(:detran_2011)
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
-    click_link 'Criar Receita Contábel'
+    click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
       fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
@@ -113,7 +113,7 @@ feature "RevenueAccountings" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Contábel criado com sucesso.'
+    page.should have_notice 'Receita Orçamentaria criado com sucesso.'
 
     within_records do
       click_link '1/2011'
@@ -137,9 +137,9 @@ feature "RevenueAccountings" do
   scenario 'fill/clear revenue_natured docket when select revenue_nature' do
     RevenueNature.make!(:imposto)
 
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
-    click_link 'Criar Receita Contábel'
+    click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
       fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
@@ -154,9 +154,9 @@ feature "RevenueAccountings" do
   end
 
   scenario 'should apply month value based on kind and value' do
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
-    click_link 'Criar Receita Contábel'
+    click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Programação' do
       page.should have_disabled_field 'Valor previsto'
@@ -173,13 +173,13 @@ feature "RevenueAccountings" do
     end
   end
 
-  scenario 'update an existent revenue_accounting' do
-    RevenueAccounting.make!(:reforma)
+  scenario 'update an existent budget_revenue' do
+    BudgetRevenue.make!(:reforma)
     Descriptor.make!(:secretaria_de_educacao_2011)
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:construcao)
 
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
     click_link '1'
 
@@ -196,7 +196,7 @@ feature "RevenueAccountings" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Contábel editado com sucesso.'
+    page.should have_notice 'Receita Orçamentaria editado com sucesso.'
 
     click_link '1'
 
@@ -217,11 +217,11 @@ feature "RevenueAccountings" do
   end
 
   scenario 'validate uniqueness of revenue_nature' do
-    RevenueAccounting.make!(:reforma)
+    BudgetRevenue.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
-    click_link 'Criar Receita Contábel'
+    click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
       fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
@@ -234,16 +234,16 @@ feature "RevenueAccountings" do
     end
   end
 
-  scenario 'destroy an existent revenue_accounting' do
-    RevenueAccounting.make!(:reforma)
+  scenario 'destroy an existent budget_revenue' do
+    BudgetRevenue.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Contábeis'
+    navigate_through 'Contabilidade > Orçamento > Receita Contábel > Receitas Orçamentarias'
 
     click_link '1'
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Receita Contábel apagado com sucesso.'
+    page.should have_notice 'Receita Orçamentaria apagado com sucesso.'
 
     page.should_not have_content '1'
   end

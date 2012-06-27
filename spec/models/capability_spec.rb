@@ -4,7 +4,7 @@ require 'app/models/capability'
 require 'app/models/budget_allocation'
 require 'app/models/licitation_process'
 require 'app/models/extra_credit_moviment_type'
-require 'app/models/revenue_accounting'
+require 'app/models/budget_revenue'
 
 describe Capability do
   it 'should return to_s as description' do
@@ -17,7 +17,7 @@ describe Capability do
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict) }
   it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
-  it { should have_many(:revenue_accountings).dependent(:restrict) }
+  it { should have_many(:budget_revenues).dependent(:restrict) }
 
   it { should validate_presence_of :descriptor }
   it { should validate_presence_of :status }

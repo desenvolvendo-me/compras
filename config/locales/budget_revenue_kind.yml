@@ -1,5 +1,5 @@
 pt-BR:
   enumerations:
-    revenue_accounting_kind:
+    budget_revenue_kind:
       average: "Média de arrecadação mensal dos últimos 3 anos"
       divide: "Dividir valor previsto por 12"

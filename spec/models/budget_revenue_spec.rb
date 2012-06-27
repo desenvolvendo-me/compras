@@ -1,7 +1,7 @@
 require 'model_helper'
-require 'app/models/revenue_accounting'
+require 'app/models/budget_revenue'
 
-describe RevenueAccounting do
+describe BudgetRevenue do
   it 'should return code as to_s' do
     subject.code = '150'
     subject.stub(:year).and_return(2012)

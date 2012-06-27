@@ -83,7 +83,7 @@ menu:
 
       - revenue_accounting:
         - revenue_natures
-        - revenue_accountings
+        - budget_revenues
 
       - government_programs
       - government_actions

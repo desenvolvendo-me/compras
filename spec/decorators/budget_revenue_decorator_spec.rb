@@ -1,7 +1,7 @@
 require 'decorator_helper'
-require 'app/decorators/revenue_accounting_decorator'
+require 'app/decorators/budget_revenue_decorator'
 
-describe RevenueAccountingDecorator do
+describe BudgetRevenueDecorator do
   let :date do
     Date.new(2012, 4, 13)
   end

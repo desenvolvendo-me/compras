@@ -20,7 +20,7 @@
   }
 
   function calculateDivide(){
-    var input_value = $('#revenue_accounting_value').val();
+    var input_value = $('#budget_revenue_value').val();
     if (input_value) {
       value = new BigNumber(parsePtBrFloat(input_value));
       calculed = toFixedRoundDown(parseFloat(value.divide(new BigNumber(12))));
@@ -32,25 +32,25 @@
     }
   }
 
-  $('#revenue_accounting_revenue_nature_id').on('change', function (event, revenue_nature) {
+  $('#budget_revenue_revenue_nature_id').on('change', function (event, revenue_nature) {
     if (revenue_nature) {
-      $('#revenue_accounting_revenue_nature_docket').val(revenue_nature.docket);
+      $('#budget_revenue_revenue_nature_docket').val(revenue_nature.docket);
     } else {
-      $('#revenue_accounting_revenue_nature_docket').val('');
+      $('#budget_revenue_revenue_nature_docket').val('');
     }
   });
 
-  $('#revenue_accounting_kind').on('change', function(){
+  $('#budget_revenue_kind').on('change', function(){
     var kind = $(this).val();
 
-    if (kind == '<%= RevenueAccountingKind::AVERAGE %>') {
-      $('#revenue_accounting_value').val('').attr('disabled', true);
+    if (kind == '<%= BudgetRevenueKind::AVERAGE %>') {
+      $('#budget_revenue_value').val('').attr('disabled', true);
       applyMonthValue(0);
-    } else if (kind == '<%= RevenueAccountingKind::DIVIDE %>') {
-      $('#revenue_accounting_value').attr('disabled', false);
+    } else if (kind == '<%= BudgetRevenueKind::DIVIDE %>') {
+      $('#budget_revenue_value').attr('disabled', false);
       calculateDivide();
     }
   }).change();
 
-  $('form.revenue_accounting').delegate('#revenue_accounting_value', 'keyup', calculateDivide);
+  $('form.budget_revenue').delegate('#budget_revenue_value', 'keyup', calculateDivide);
 </script>
