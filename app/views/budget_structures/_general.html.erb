@@ -43,11 +43,3 @@
 
 <%= f.input :administration_type %>
 <%= f.input :performance_field %>
-
-<script>
-  $('#budget_structure_budget_structure_configuration_id').change(function (event, budget_structure_configuration) {
-    if (budget_structure_configuration) {
-      $('#budget_structure_budget_structure').attr("data-mask", budget_structure_configuration.mask);
-    }
-  });
-</script>

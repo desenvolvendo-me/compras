@@ -149,6 +149,20 @@ feature "BudgetStructure" do
     end
   end
 
+  scenario 'assert that javascript return parent mask when budget structure that have a parent' do
+    BudgetStructure.make!(:secretaria_de_desenvolvimento)
+
+    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Desenvolvimento'
+
+    within_tab 'Informações' do
+      fill_in 'Código', :with => '12'
+
+      page.should have_field 'Estrutura orçamentaria', :with => '1.12'
+    end
+  end
+
   scenario 'should not create a new budget structure when already exist a code in the same level and configuration' do
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructureConfiguration.make!(:detran_sopa)
