@@ -4,7 +4,7 @@ class UsersController < CrudController
   protected
 
   def block_non_employee
-    return if resource.employee?
+    return if resource.employee? || !resource.authenticable_type?
 
     raise Exceptions::Unauthorized
   end
