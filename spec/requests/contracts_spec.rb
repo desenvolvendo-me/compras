@@ -204,9 +204,7 @@ feature "Contracts" do
   scenario 'add delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -228,7 +226,7 @@ feature "Contracts" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Contrato criado com sucesso.'
+    page.should have_notice 'Contrato editado com sucesso.'
 
     within_records do
       page.find('a').click
@@ -248,9 +246,7 @@ feature "Contracts" do
   scenario 'remove delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    click_link 'Contabilidade'
-
-    click_link 'Contratos'
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -262,7 +258,7 @@ feature "Contracts" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Contrato criado com sucesso.'
+    page.should have_notice 'Contrato editado com sucesso.'
 
     within_records do
       page.find('a').click
