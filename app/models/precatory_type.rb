@@ -22,7 +22,7 @@ class PrecatoryType < Compras::Model
 
   def deactivation_date_must_be_required_when_inactive
     return unless inactive?
-    
+
     if deactivation_date.nil?
       errors.add(:deactivation_date, :blank)
     end

@@ -2,7 +2,7 @@ class RegistrationCadastralCertificate < Compras::Model
   attr_accessible :building_area, :capital_stock, :capital_whole, :total_area
   attr_accessible :commercial_registry_registration_date, :fiscal_year, :number
   attr_accessible :registration_date, :revocation_date, :specification
-  attr_accessible :total_employees, :total_sales, :validity_date 
+  attr_accessible :total_employees, :total_sales, :validity_date
   attr_accessible :commercial_registry_number
 
   belongs_to :creditor

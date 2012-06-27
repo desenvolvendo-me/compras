@@ -5,7 +5,7 @@ ActiveRecord::Base.transaction do
       :name => 'Adicionar dotação',
       :operation => MovimentTypeOperation::SUM,
       :character => MovimentTypeCharacter::BUDGET_ALLOCATION
-    }, 
+    },
     {
       :name => 'Subtrair dotação',
       :operation => MovimentTypeOperation::SUBTRACTION,
