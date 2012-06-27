@@ -14,6 +14,14 @@ describe UsersController do
 
       response.code.should eq "401"
     end
+
+    it 'when the user has no authenticable type should be editable' do
+      User.stub(:find).and_return User.new(:authenticable_type => nil)
+
+      get :edit
+
+      response.should be_success
+    end
   end
 
   describe '#create' do
@@ -43,6 +51,14 @@ describe UsersController do
 
       response.code.should eq "401"
     end
+
+    it 'when the user has no authenticable type should be destroyed' do
+      User.stub(:find).and_return User.new(:authenticable_type => nil)
+
+      delete :destroy
+
+      response.should redirect_to(users_path)
+    end
   end
 
   describe '#update' do
@@ -52,6 +68,14 @@ describe UsersController do
       get :update
 
       response.code.should eq "401"
+    end
+
+    it 'when the user has no authenticable type should be editable' do
+      User.stub(:find).and_return User.new(:authenticable_type => nil)
+
+      put :update
+
+      response.code.should eq "200"
     end
   end
 end
