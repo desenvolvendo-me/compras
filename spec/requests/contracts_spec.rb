@@ -200,4 +200,79 @@ feature "Contracts" do
     page.should have_content I18n.l(Date.current + 15.days)
     page.should have_content '19,98'
   end
+
+  scenario 'add delivery schedule' do
+    DeliverySchedule.make!(:primeira_entrega)
+
+    click_link 'Contabilidade'
+
+    click_link 'Contratos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Cronogramas de entrega'
+
+    page.should have_field 'Observações', :with => 'entregue com atraso'
+    page.should have_field 'Data de entrega', :with => '02/01/2012'
+    page.should have_field 'Data prevista', :with => '01/01/2012'
+    page.should have_select 'Status', :selected => 'Entregue'
+
+    click_button 'Adicionar Cronograma de Entrega'
+
+    within '.delivery_schedule:last' do
+      fill_in 'Data de entrega', :with => '10/01/2012'
+      select 'Vencido', :from => 'Status'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Contrato criado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Cronogramas de entrega'
+
+    page.should have_field 'Observações', :with => 'entregue com atraso'
+    page.should have_field 'Data de entrega', :with => '02/01/2012'
+    page.should have_field 'Data prevista', :with => '01/01/2012'
+    page.should have_select 'Status', :selected => 'Entregue'
+
+    page.should have_field 'Data de entrega', :with => '10/01/2012'
+    page.should have_select 'Status', :selected => 'Vencido'
+  end
+
+  scenario 'remove delivery schedule' do
+    DeliverySchedule.make!(:primeira_entrega)
+
+    click_link 'Contabilidade'
+
+    click_link 'Contratos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Cronogramas de entrega'
+
+    click_button 'Remover Cronograma de Entrega'
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Contrato criado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Cronogramas de entrega'
+
+    page.should_not have_field 'Observações', :with => 'entregue com atraso'
+    page.should_not have_field 'Data de entrega', :with => '02/01/2012'
+    page.should_not have_field 'Data prevista', :with => '01/01/2012'
+    page.should_not have_select 'Status', :selected => 'Entregue'
+  end
 end

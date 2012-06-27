@@ -4,6 +4,7 @@ class Contract < Compras::Model
   attr_accessible :contract_value, :guarantee_value, :contract_validity, :subcontracting, :cancellation_date, :cancellation_reason
   attr_accessible :dissemination_source_id, :creditor_id, :service_or_contract_type_id, :licitation_process_id
   attr_accessible :direct_purchase_id, :budget_structure_id, :budget_structure_responsible_id, :lawyer_id, :parent_id
+  attr_accessible :delivery_schedules_attributes
 
   acts_as_nested_set
   mount_uploader :contract_file, DocumentUploader
@@ -23,6 +24,9 @@ class Contract < Compras::Model
   belongs_to :lawyer, :class_name => 'Employee'
 
   has_many :pledges, :dependent => :restrict
+  has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
+
+  accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :end_date, :timeliness => { :after => :signature_date, :type => :date, :allow_blank => true }

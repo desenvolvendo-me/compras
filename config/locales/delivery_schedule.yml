@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      delivery_schedule:
+        one: "Cronograma de Entrega"
+        other: "Cronogramas de Entrega"
+
+    attributes:
+      delivery_schedule:
+        sequence: 'Sequência'
+        scheduled_date: "Data prevista"
+        delivery_date: "Data de entrega"
+        delivery_schedule_status: "Status"
+        observations: "Observações"

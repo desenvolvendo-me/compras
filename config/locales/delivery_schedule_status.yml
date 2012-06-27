@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    delivery_schedule_status:
+      expired: "Vencido"
+      to_expire: "A vencer"
+      delivered: "Entregue"

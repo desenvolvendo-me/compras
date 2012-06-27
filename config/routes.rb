@@ -192,6 +192,8 @@ Compras::Application.routes.draw do
   end
 
   resources :contracts do
+    resources :delivery_schedules
+
     collection do
       get :filter
       get :modal

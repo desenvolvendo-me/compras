@@ -1,14 +1,19 @@
 <div class="tabs">
   <ul>
     <li><a href="#general">Dados gerais</a></li>
-    <li><a href="#budget-allocations">Empenhos</a></li>
+    <li><a href="#pledges">Empenhos</a></li>
+    <li><a href="#schedules">Cronogramas de entrega</a></li>
   </ul>
 
   <div id="general">
     <%= render 'general', :f => f %>
   </div>
 
-  <div id="budget-allocations">
+  <div id="pledges">
     <%= render 'pledges', :f => f %>
+  </div>
+
+  <div id="schedules">
+    <%= render 'delivery_schedules', :f => f %>
   </div>
 </div>
