@@ -29,6 +29,12 @@
               <%= link_to current_user, edit_account_path, :class => 'current_user' %>
             </li>
 
+            <% if current_prefecture %>
+              <li>
+                <span><%= current_prefecture %></span>
+              </li>
+            <% end %>
+
             <li>
               <%= link_to t('logout'), destroy_user_session_path, :method => :delete %>
             </li>
