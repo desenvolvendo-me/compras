@@ -1,4 +1,4 @@
-class RevenueAccountingDecorator < Decorator
+class BudgetRevenueDecorator < Decorator
   def date(date_storage = ::Date)
     if component.persisted?
       created_at_or_default = original_component.created_at.to_date

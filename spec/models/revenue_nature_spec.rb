@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/revenue_nature'
-require 'app/models/revenue_accounting'
+require 'app/models/budget_revenue'
 
 describe RevenueNature do
   it 'should return revenue_nature and specification as to_s' do
@@ -30,7 +30,7 @@ describe RevenueNature do
   it { should belong_to :revenue_source }
   it { should belong_to :revenue_rubric }
 
-  it { should have_many(:revenue_accountings).dependent(:restrict) }
+  it { should have_many(:budget_revenues).dependent(:restrict) }
 
   context 'cascate validate' do
     context 'subcategory should have related with category' do

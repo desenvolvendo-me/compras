@@ -1,8 +1,8 @@
-class RevenueAccounting < Compras::Model
+class BudgetRevenue < Compras::Model
   attr_accessible :descriptor_id, :revenue_nature_id, :capability_id, :code
   attr_accessible :kind, :value
 
-  has_enumeration_for :kind, :with => RevenueAccountingKind, :create_helpers => true
+  has_enumeration_for :kind, :with => BudgetRevenueKind, :create_helpers => true
 
   belongs_to :descriptor
   belongs_to :revenue_nature
@@ -33,8 +33,8 @@ class RevenueAccounting < Compras::Model
   end
 
   def last_code
-    self.class.where { |revenue_accounting|
-      revenue_accounting.descriptor_id.eq(descriptor_id)
+    self.class.where { |budget_revenue|
+      budget_revenue.descriptor_id.eq(descriptor_id)
     }.maximum(:code).to_i
   end
 end

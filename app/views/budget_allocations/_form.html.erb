@@ -77,7 +77,7 @@
   $('#budget_allocation_kind').on('change', function(){
     var kind = $(this).val();
 
-    if (kind === '<%= RevenueAccountingKind::DIVIDE %>') {
+    if (kind === '<%= BudgetRevenueKind::DIVIDE %>') {
       $('#budget_allocation_amount').attr('disabled', false);
       calculateDivide();
     } else {

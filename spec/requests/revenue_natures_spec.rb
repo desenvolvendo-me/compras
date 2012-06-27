@@ -39,7 +39,7 @@ feature "RevenueNatures" do
     page.should have_field 'Tipo', :with => 'Lei'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
     page.should have_field 'Classificação', :with => '12.34'
-    page.should have_field 'Código completo', :with => '1.1.1.2.12.34'
+    page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34'
     page.should have_field 'Rúbrica da receita', :with => '2 - IMPOSTOS SOBRE O PATRIMÔNIO E A RENDA'
     page.should have_field 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
     page.should have_select 'Tipo', :selected => 'Ambos'
@@ -54,19 +54,19 @@ feature "RevenueNatures" do
     click_link 'Criar Natureza da Receita'
 
     fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.0.0.0.00.00'
+    page.should have_field 'Natureza da receita', :with => '1.0.0.0.00.00'
 
     fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.1.0.0.00.00'
+    page.should have_field 'Natureza da receita', :with => '1.1.0.0.00.00'
 
     fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.1.1.0.00.00'
+    page.should have_field 'Natureza da receita', :with => '1.1.1.0.00.00'
 
     fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-    page.should have_field 'Código completo', :with => '1.1.1.2.00.00'
+    page.should have_field 'Natureza da receita', :with => '1.1.1.2.00.00'
 
     fill_in 'Classificação', :with => '12.34'
-    page.should have_field 'Código completo', :with => '1.1.1.2.12.34'
+    page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34'
   end
 
   context 'should cascate clear fields' do
@@ -94,7 +94,7 @@ feature "RevenueNatures" do
       page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
       page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Código completo', :with => '0.0.0.0.00.00'
+      page.should have_field 'Natureza da receita', :with => '0.0.0.0.00.00'
     end
 
     scenario 'when clear subcategory' do
@@ -120,7 +120,7 @@ feature "RevenueNatures" do
       page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
       page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Código completo', :with => '1.0.0.0.00.00'
+      page.should have_field 'Natureza da receita', :with => '1.0.0.0.00.00'
     end
 
     scenario 'when clear source' do
@@ -145,7 +145,7 @@ feature "RevenueNatures" do
       page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
       page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Código completo', :with => '1.1.0.0.00.00'
+      page.should have_field 'Natureza da receita', :with => '1.1.0.0.00.00'
     end
 
     scenario 'when clear rubric' do
@@ -169,7 +169,7 @@ feature "RevenueNatures" do
       page.should have_field 'Rúbrica da receita', :with => ''
       page.should have_disabled_field 'Classificação'
       page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Código completo', :with => '1.1.1.0.00.00'
+      page.should have_field 'Natureza da receita', :with => '1.1.1.0.00.00'
     end
   end
 
@@ -221,7 +221,7 @@ feature "RevenueNatures" do
     page.should have_field 'Tipo', :with => 'Emenda constitucional'
     page.should have_field 'Data de publicação', :with => '02/01/2012'
     page.should have_field 'Classificação', :with => '11.11'
-    page.should have_field 'Código completo', :with => '1.1.1.3.11.11'
+    page.should have_field 'Natureza da receita', :with => '1.1.1.3.11.11'
     page.should have_field 'Rúbrica da receita', :with => '3 - IMPOSTOS SOBRE A PRODUÇÃO E A CIRCULAÇÃO'
     page.should have_field 'Especificação', :with => 'Imposto sobre Propriedade Predial e Territorial Urbana'
     page.should have_select 'Tipo', :selected => 'Analítico'

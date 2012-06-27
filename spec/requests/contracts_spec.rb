@@ -196,7 +196,6 @@ feature "Contracts" do
 
     click_link 'Empenhos'
 
-    page.driver.render '/home/tiago/Desktop/debug.png'
     page.should have_content '9,99'
     page.should have_content I18n.l(Date.current + 15.days)
     page.should have_content '19,98'

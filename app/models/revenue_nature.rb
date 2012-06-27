@@ -13,7 +13,7 @@ class RevenueNature < Compras::Model
   belongs_to :revenue_source
   belongs_to :revenue_rubric
 
-  has_many :revenue_accountings, :dependent => :restrict
+  has_many :budget_revenues, :dependent => :restrict
 
   delegate :publication_date, :regulatory_act_type, :to => :regulatory_act, :allow_nil => true
   delegate :code, :to => :revenue_category, :prefix => true, :allow_nil => true

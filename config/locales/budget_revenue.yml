@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      revenue_accounting:
-        one: "Receita Contábel"
-        other: "Receitas Contábeis"
+      budget_revenue:
+        one: "Receita Orçamentaria"
+        other: "Receitas Orçamentarias"
 
     attributes:
-      revenue_accounting:
+      budget_revenue:
         descriptor: "Descritor"
         code: "Código"
         date: "Data"

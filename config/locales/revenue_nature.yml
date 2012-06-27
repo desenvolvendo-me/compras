@@ -10,7 +10,7 @@ pt-BR:
         descriptor: "Descritor"
         regulatory_act: "Ato regulamentador"
         regulatory_act_type: "Tipo"
-        revenue_nature: "Código completo"
+        revenue_nature: "Natureza da receita"
         publication_date: "Data de publicação"
         classification: "Classificação"
         revenue_rubric: "Rúbrica da receita"
