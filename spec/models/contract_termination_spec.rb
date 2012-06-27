@@ -29,4 +29,24 @@ describe ContractTermination do
       subject.next_number.should eq 2
     end
   end
+
+  describe 'generate the number' do
+    before do
+      described_class.stub(:last_number).and_return 1
+    end
+
+    it 'assigns the next_number' do
+      subject.run_callbacks(:create)
+
+      subject.number.should eq 2
+    end
+
+    it 'overrides the number' do
+      subject.number = 30
+
+      subject.run_callbacks(:create)
+
+      subject.number.should eq 2
+    end
+  end
 end
