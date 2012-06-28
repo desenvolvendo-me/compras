@@ -1,6 +1,7 @@
 class BudgetRevenue < Compras::Model
-  attr_accessible :descriptor_id, :revenue_nature_id, :capability_id, :code
-  attr_accessible :kind, :value
+  attr_accessible :descriptor_id, :revenue_nature_id, :capability_id, :kind, :value
+
+  attr_readonly :code
 
   has_enumeration_for :kind, :with => BudgetRevenueKind, :create_helpers => true
 
