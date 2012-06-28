@@ -21,6 +21,13 @@
         </div>
       </div>
 
+      <% if message_about_environment? %>
+        <div id="environment">
+          <h2>Você está acessando o ambiente de <span><%= t Rails.env %></span> do Sistema Tributário.</h2>
+          <p>As guias geradas nesse ambiente não terão validade.</p>
+        </div>
+      <% end %>
+
       <div id="flash">
         <%= render 'layouts/flash' %>
       </div>
