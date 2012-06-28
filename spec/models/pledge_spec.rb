@@ -180,15 +180,16 @@ describe Pledge do
     subject.errors.messages[:items_total_value].should include "não pode ser superior ao valor do empenho"
   end
 
-  describe '#next_code' do
-    context 'when the code of last licitation process is 3' do
-      before do
-        subject.stub(:last_code).and_return(3)
-      end
+  context 'auto set code' do
+    it 'should set 1 as code when have not other' do
+      subject.run_callbacks(:create)
+      subject.code.should eq 1
+    end
 
-      it 'should be 4' do
-        subject.next_code.should eq 4
-      end
+    it 'should set 2 as code when have other' do
+      subject.stub(:last_code).and_return(1)
+      subject.run_callbacks(:create)
+      subject.code.should eq 2
     end
   end
 end
