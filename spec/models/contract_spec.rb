@@ -11,6 +11,7 @@ require 'app/models/direct_purchase'
 require 'app/models/budget_structure'
 require 'app/models/employee'
 require 'app/models/delivery_schedule'
+require 'app/models/occurrence_contractual_historic'
 
 describe Contract do
   it { should belong_to :entity }
@@ -23,6 +24,7 @@ describe Contract do
   it { should belong_to :budget_structure_responsible }
   it { should belong_to :lawyer }
   it { should have_many(:delivery_schedules).dependent(:destroy).order(:sequence) }
+  it { should have_many(:occurrence_contractual_historics).dependent(:restrict) }
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'

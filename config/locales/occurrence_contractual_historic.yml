@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      occurrence_contractual_historic:
+        one: "Histórico de Ocorrências Contratuais"
+        other: "Históricos de Ocorrências Contratuais"
+
+    attributes:
+      occurrence_contractual_historic:
+        sequence: "Sequência"
+        occurrence_date: "Data da ocorrência"
+        observations: "Observações"
+        occurrence_contractual_historic_type: "Tipo de histórico"
+        occurrence_contractual_historic_change: "Tipo de alteração"

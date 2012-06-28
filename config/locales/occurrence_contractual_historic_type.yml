@@ -1,0 +1,9 @@
+pt-BR:
+  enumerations:
+    occurrence_contractual_historic_type:
+      increase: "Acréscimo"
+      decrease: "Decréscimo"
+      balance: "Equilíbrio Ec. Financeiro"
+      extension: "Prorrogração"
+      rescission: "Rescisão"
+      others: "Outros"

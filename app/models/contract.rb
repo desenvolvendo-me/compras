@@ -25,6 +25,7 @@ class Contract < Compras::Model
 
   has_many :pledges, :dependent => :restrict
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
+  has_many :occurrence_contractual_historics, :dependent => :restrict
 
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 

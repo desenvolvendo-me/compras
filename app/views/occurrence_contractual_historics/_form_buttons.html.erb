@@ -1,0 +1,5 @@
+<div class="buttons">
+  <%= f.button :submit %>
+  <%= f.button :cancel, :href => occurrence_contractual_historics_path(:contract_id => resource.contract_id) %>
+  <%= f.button :destroy if f.object.persisted? %>
+</div>

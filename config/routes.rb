@@ -542,6 +542,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :occurrence_contractual_historics do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :pledge_categories do
     collection do
       get :filter

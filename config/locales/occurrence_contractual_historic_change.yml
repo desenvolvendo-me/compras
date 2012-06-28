@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    occurrence_contractual_historic_change:
+      unilateral: "Unilateral"
+      bilateral: "Bilateral"
