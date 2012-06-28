@@ -152,6 +152,11 @@
 					if (e.ctrlKey || e.altKey || e.metaKey || k<32) {//Ignore
 						return true;
 					} else if (k) {
+						// do not rewind
+						if(pos.begin==pos.end && pos.end==len) {
+							return false;
+						}
+
 						if(pos.end-pos.begin!=0){
 							clearBuffer(pos.begin, pos.end);
 							shiftL(pos.begin, pos.end-1);
@@ -165,7 +170,9 @@
 								buffer[p] = c;
 								writeBuffer();
 								var next = seekNext(p);
-								input.caret(next);
+								// do not move caret after last position
+								if (next <= len)
+									input.caret(next);
 								if (settings.completed && next >= len)
 									settings.completed.call(input);
 							}
