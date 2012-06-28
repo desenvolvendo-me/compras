@@ -25,8 +25,7 @@ menu:
 
     - purchase_solicitations
 
-    - price_collection:
-      - price_collections
+    - price_collections
 
     - direct_purchase:
       - direct_purchases
@@ -35,8 +34,7 @@ menu:
       - contracts
 
     - administrative_and_licitation_processes:
-      - administrative_process:
-        - administrative_processes
+      - administrative_processes
 
       - licitation_process:
         - licitation_notices
@@ -94,13 +92,13 @@ menu:
         - reserve_allocation_types
         - reserve_funds
 
-    - pledge:
-      - pledge_historics
-      - pledge_categories
-      - pledges
-      - pledge_cancellations
-      - pledge_liquidations
-      - pledge_liquidation_cancellations
+      - pledge:
+        - pledge_historics
+        - pledge_categories
+        - pledges
+        - pledge_cancellations
+        - pledge_liquidations
+        - pledge_liquidation_cancellations
 
   - commom:
     - creditors

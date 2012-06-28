@@ -13,7 +13,7 @@ feature "PriceCollections" do
     Material.make!(:antivirus)
     Creditor.make!(:wenderson_sa)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -79,7 +79,7 @@ feature "PriceCollections" do
     Material.make!(:antivirus)
     Creditor.make!(:wenderson_sa)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -194,7 +194,7 @@ feature "PriceCollections" do
     Material.make!(:arame_farpado)
     Creditor.make!(:sobrinho_sa, :person => Person.make!(:sobrinho_without_email, :name => 'José Gomes'))
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -292,7 +292,7 @@ feature "PriceCollections" do
   scenario 'should not have destroy button' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -306,7 +306,7 @@ feature "PriceCollections" do
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -341,7 +341,7 @@ feature "PriceCollections" do
   scenario 'trying to remove all the items to see the error message' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -362,7 +362,7 @@ feature "PriceCollections" do
     PriceCollection.make!(:coleta_de_precos)
     Material.make!(:arame_farpado)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -407,7 +407,7 @@ feature "PriceCollections" do
     PaymentMethod.make!(:dinheiro)
     Material.make!(:antivirus)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -462,7 +462,7 @@ feature "PriceCollections" do
   scenario 'removing a lot' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -489,7 +489,7 @@ feature "PriceCollections" do
     PriceCollection.make!(:coleta_de_precos)
     PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -509,7 +509,7 @@ feature "PriceCollections" do
     PriceCollection.make!(:coleta_de_precos, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
     PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -527,7 +527,7 @@ feature "PriceCollections" do
     PriceCollection.make!(:coleta_de_precos, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE)
     PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -543,7 +543,7 @@ feature "PriceCollections" do
   scenario 'showing numberd labels on each lot' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -576,7 +576,7 @@ feature "PriceCollections" do
   scenario 'showing numbered labels on each item' do
     PriceCollection.make!(:coleta_de_precos)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     within_records do
       page.find('a').click
@@ -618,7 +618,7 @@ feature "PriceCollections" do
   scenario 'disable login and email when the creditor has a related user' do
     Creditor.make!(:wenderson_sa_with_user)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     click_link 'Criar Coleta de Preços'
 
@@ -641,7 +641,7 @@ feature "PriceCollections" do
   scenario 'can not edit any data from a annulled price collection' do
     PriceCollectionAnnul.make!(:coleta_anulada)
 
-    navigate_through 'Compras e Licitações > Coletas de Preço > Coletas de Preços'
+    navigate_through 'Compras e Licitações > Coletas de Preços'
 
     click_link '1/2012'
 

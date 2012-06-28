@@ -12,7 +12,7 @@ feature "AdministrativeProcesses" do
     JudgmentForm.make!(:global_com_menor_preco)
     Employee.make!(:sobrinho)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
 
@@ -73,7 +73,7 @@ feature "AdministrativeProcesses" do
   scenario 'should have all fields disabled on edit when status is different from waiting' do
     AdministrativeProcess.make!(:compra_liberada)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -108,7 +108,7 @@ feature "AdministrativeProcesses" do
     administrative_process = AdministrativeProcess.make!(:compra_liberada)
     SignatureConfiguration.make!(:processo_administrativo)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -132,7 +132,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario 'value calculation on budget allocations' do
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
 
@@ -166,7 +166,7 @@ feature "AdministrativeProcesses" do
     Employee.make!(:sobrinho)
     budget_allocation = BudgetAllocation.make!(:alocacao)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
 
@@ -209,7 +209,7 @@ feature "AdministrativeProcesses" do
   scenario 'update an existing administrative process' do
     AdministrativeProcess.make!(:compra_aguardando)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -264,7 +264,7 @@ feature "AdministrativeProcesses" do
   scenario 'should not have print button if status different from released' do
     AdministrativeProcess.make!(:compra_aguardando)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -277,7 +277,7 @@ feature "AdministrativeProcesses" do
   scenario 'should have print button if status equals released' do
      AdministrativeProcess.make!(:compra_liberada)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -290,7 +290,7 @@ feature "AdministrativeProcesses" do
   scenario "should have a release button when editing an administrative process with status waiting" do
     AdministrativeProcess.make!(:compra_aguardando)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -303,7 +303,7 @@ feature "AdministrativeProcesses" do
   scenario "should not have a release button when editing an administrative process without status waiting" do
     AdministrativeProcess.make!(:compra_liberada)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -316,7 +316,7 @@ feature "AdministrativeProcesses" do
   scenario "should have a annul button when editing an administrative process with status waiting" do
     AdministrativeProcess.make!(:compra_aguardando)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -329,7 +329,7 @@ feature "AdministrativeProcesses" do
   scenario "should not have an annul button when editing an administrative process without status waiting" do
     AdministrativeProcess.make!(:compra_liberada)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -342,7 +342,7 @@ feature "AdministrativeProcesses" do
   scenario "annuling an administrative process" do
     AdministrativeProcess.make!(:compra_aguardando)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -356,7 +356,7 @@ feature "AdministrativeProcesses" do
   scenario "show new licitation process link" do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -368,7 +368,7 @@ feature "AdministrativeProcesses" do
   scenario "show edit licitation process link" do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -380,7 +380,7 @@ feature "AdministrativeProcesses" do
   scenario "should not have new licitation process link if not released" do
     AdministrativeProcess.make!(:compra_aguardando)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -391,7 +391,7 @@ feature "AdministrativeProcesses" do
   end
 
   scenario "should not have a release and annull button at new" do
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     click_link 'Criar Processo Administrativo'
 
@@ -402,7 +402,7 @@ feature "AdministrativeProcesses" do
   scenario 'should not have licitation_process button if not allow licitation_process' do
     AdministrativeProcess.make!(:maior_lance_por_itens)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click

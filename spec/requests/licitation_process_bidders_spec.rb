@@ -10,7 +10,7 @@ feature "LicitationProcessBidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     bidder = licitation_process.licitation_process_bidders.first
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Administrativo > Processos Administrativos'
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
