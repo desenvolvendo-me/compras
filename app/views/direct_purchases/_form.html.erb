@@ -36,7 +36,7 @@
   function calcItemOrder() {
     $('div.direct-purchase-budget-allocation').each(function(index, item){
       $(this).find('.item .hidden .destroy[value=false]').each(function(index, item){
-        $(this).parent().parent().find('.order').val(index + 1);
+        $(this).closest('.item').find('.order').val(index + 1);
       });
     });
   }
