@@ -24,12 +24,8 @@ menu:
       - service_or_contract_types
 
     - purchase_solicitations
-
     - price_collections
-
-    - direct_purchase:
-      - direct_purchases
-
+    - direct_purchases
     - contracts
 
     - administrative_and_licitation_processes:

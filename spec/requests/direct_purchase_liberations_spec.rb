@@ -11,7 +11,7 @@ feature 'DirectPurchaseLiberations' do
   end
 
   scenario 'the liberation button should not be visible on new direct purchases' do
-    navigate_through 'Compras e Licitações > Compras Diretas > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -21,7 +21,7 @@ feature 'DirectPurchaseLiberations' do
   scenario 'viewing all liberations from a direct purchase' do
     liberation = DirectPurchaseLiberation.make!(:compra_liberada)
 
-    navigate_through 'Compras e Licitações > Compras Diretas > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
 
     click_link "1/2012"
 
@@ -38,7 +38,7 @@ feature 'DirectPurchaseLiberations' do
     direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
     Employee.make!(:wenderson)
 
-    navigate_through 'Compras e Licitações > Compras Diretas > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
 
     click_link "2/2012"
 
