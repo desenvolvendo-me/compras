@@ -9,7 +9,7 @@ feature "Contracts" do
   scenario 'picking a licitation process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     click_link 'Criar Contrato'
 
@@ -24,7 +24,7 @@ feature "Contracts" do
   scenario 'picking a direct purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     click_link 'Criar Contrato'
 
@@ -45,7 +45,7 @@ feature "Contracts" do
     Employee.make!(:wenderson)
     ServiceOrContractType.make!(:trainees)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     click_link 'Criar Contrato'
 
@@ -139,7 +139,7 @@ feature "Contracts" do
     Contract.make!(:primeiro_contrato)
     Entity.make!(:secretaria_de_educacao)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -173,7 +173,7 @@ feature "Contracts" do
   scenario 'destroy an existent contract' do
     Contract.make!(:primeiro_contrato)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -195,7 +195,7 @@ feature "Contracts" do
     Pledge.make!(:empenho_em_quinze_dias)
     Pledge.make!(:empenho)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -211,7 +211,7 @@ feature "Contracts" do
   scenario 'add delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     within_records do
       page.find('a').click
@@ -253,7 +253,7 @@ feature "Contracts" do
   scenario 'remove delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 
     within_records do
       page.find('a').click

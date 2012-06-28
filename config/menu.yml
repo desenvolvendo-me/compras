@@ -30,8 +30,7 @@ menu:
     - direct_purchase:
       - direct_purchases
 
-    - contract:
-      - contracts
+    - contracts
 
     - administrative_and_licitation_processes:
       - administrative_processes
@@ -53,8 +52,7 @@ menu:
           - regulatory_act_type_classifications
           - regulatory_acts
 
-      - contract:
-        - contracts
+      - contracts
 
       - precatory:
         - precatories
