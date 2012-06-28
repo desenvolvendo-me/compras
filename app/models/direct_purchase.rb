@@ -66,7 +66,7 @@ class DirectPurchase < Compras::Model
   def self.filter(params={})
     relation = scoped
     relation = relation.where{ year.eq(params[:year]) } unless params[:year].blank?
-    relation = relation.where{ date.eq(params[:date].to_date) } unless params[:date].blank?
+    relation = relation.where{ date.eq(params[:date].to_date) } if !params[:date].blank? && params[:date].date?
     relation = relation.where{ modality.eq(params[:modality]) } unless params[:modality].blank?
     relation = relation.by_status(params[:by_status]) unless params[:by_status].blank?
     relation
