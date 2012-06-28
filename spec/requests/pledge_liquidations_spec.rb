@@ -7,8 +7,6 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'create a new pledge_liquidation' do
-    pending 'awaiting a response from the issue https://github.com/jonleighton/poltergeist/issues/88'
-
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
     navigate_through 'Contabilidade > Empenho > Liquidações de Empenhos'
