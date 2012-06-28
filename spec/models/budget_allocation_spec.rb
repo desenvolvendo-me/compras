@@ -67,4 +67,17 @@ describe BudgetAllocation do
       subject.real_amount.should eq(-200.0)
     end
   end
+
+  context 'auto set code' do
+    it 'should set 1 as code when have not other' do
+      subject.run_callbacks(:create)
+      subject.code.should eq 1
+    end
+
+    it 'should set 2 as code when have other' do
+      subject.stub(:last_code).and_return(1)
+      subject.run_callbacks(:create)
+      subject.code.should eq 2
+    end
+  end
 end
