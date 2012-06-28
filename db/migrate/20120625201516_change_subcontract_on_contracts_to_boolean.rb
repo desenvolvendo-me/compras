@@ -1,6 +1,6 @@
 class ChangeSubcontractOnContractsToBoolean < ActiveRecord::Migration
 
-  class Contract; end
+  class Contract < Compras::Model; end
 
   def change
     rename_column :compras_contracts, :subcontracting, :subcontracting_aux
