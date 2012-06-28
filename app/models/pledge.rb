@@ -116,6 +116,10 @@ class Pledge < Compras::Model
     last_code.succ
   end
 
+  def self.total_value(id)
+    select{ sum(:value).as(total) }.where{ contract_id.eq(id) }.first.total
+  end
+
   protected
 
   def set_code
