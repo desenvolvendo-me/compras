@@ -7,4 +7,5 @@ class ResourceAnnul < Compras::Model
   validates :annullable, :presence => true
 
   delegate :creditor, :price_collection, :to => :annullable, :allow_nil => true
+  delegate :to_s, :to => :annullable, :allow_nil => true
 end
