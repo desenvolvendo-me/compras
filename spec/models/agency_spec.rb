@@ -14,14 +14,12 @@ describe Agency do
     subject.errors[:email].should be_empty
   end
 
-  it { should belong_to :city }
   it { should belong_to :bank }
   it { should have_many :bank_accounts }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :number }
   it { should validate_presence_of :digit }
-  it { should validate_presence_of :city }
   it { should validate_presence_of :bank }
 
   it { should allow_value('gabriel.sobrinho@gmail.com').for(:email) }

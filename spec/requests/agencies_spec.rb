@@ -7,7 +7,6 @@ feature "Agencies" do
   end
 
   scenario 'create a new agency' do
-    City.make!(:belo_horizonte)
     Bank.make!(:banco_do_brasil)
 
     navigate_through 'Compras e Licitações > Cadastros Gerais > Agências'
@@ -18,7 +17,6 @@ feature "Agencies" do
     fill_in 'Nome', :with => 'Comercial BB'
     fill_in 'Número', :with => '10000'
     fill_in 'Dígito', :with => '3'
-    fill_modal 'Cidade', :with => 'Belo Horizonte'
     fill_in 'Telefone', :with => '(33) 3333-3333'
     fill_in 'Fax', :with => '(99) 9999-9999'
     fill_in 'E-mail', :with => 'wenderson.malheiros@gmail.com'
@@ -33,14 +31,12 @@ feature "Agencies" do
     page.should have_field 'Nome', :with => 'Comercial BB'
     page.should have_field 'Número', :with => '10000'
     page.should have_field 'Dígito', :with => '3'
-    page.should have_field 'Cidade', :with => 'Belo Horizonte'
     page.should have_field 'Telefone', :with => '(33) 3333-3333'
     page.should have_field 'Fax', :with => '(99) 9999-9999'
     page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
   end
 
   scenario 'update an existent agency' do
-    City.make!(:curitiba)
     Bank.make!(:santander)
     Agency.make!(:itau)
 
@@ -50,7 +46,6 @@ feature "Agencies" do
 
     fill_modal 'Banco', :with => 'Santander'
     fill_in 'Nome', :with => 'Agência ST'
-    fill_modal 'Cidade', :with => 'Curitiba'
 
     click_button 'Salvar'
 
@@ -60,7 +55,6 @@ feature "Agencies" do
 
     page.should have_field 'Banco', :with => 'Santander'
     page.should have_field 'Nome', :with => 'Agência ST'
-    page.should have_field 'Cidade', :with => 'Curitiba'
   end
 
   scenario 'destroy an existent agency' do

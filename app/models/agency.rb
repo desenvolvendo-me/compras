@@ -1,12 +1,11 @@
 class Agency < Compras::Model
-  attr_accessible :name, :number, :digit, :city_id, :bank_id, :phone, :fax, :email
+  attr_accessible :name, :number, :digit, :bank_id, :phone, :fax, :email
 
-  belongs_to :city
   belongs_to :bank
 
   has_many :bank_accounts, :dependent => :restrict
 
-  validates :name, :number, :digit, :city, :bank, :presence => true
+  validates :name, :number, :digit, :bank, :presence => true
   validates :email, :mail => true, :allow_blank => true
   validates :phone, :fax, :mask => "(99) 9999-9999", :allow_blank => true
 

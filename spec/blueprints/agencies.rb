@@ -3,7 +3,6 @@ Agency.blueprint(:itau) do
   name { "Agência Itaú" }
   number { "10009" }
   digit { "1" }
-  city { City.make!(:belo_horizonte) }
   bank { Bank.make!(:itau) }
   phone { "(11) 7070-7070" }
   fax { "(11) 9090-7070" }
@@ -14,7 +13,6 @@ Agency.blueprint(:santander) do
   name { "Agência Santander" }
   number { "10099" }
   digit { "5" }
-  city { City.make!(:porto_alegre) }
   bank { Bank.make!(:santander) }
   phone { "(11) 7070-7070" }
   fax { "(11) 9090-7070" }
