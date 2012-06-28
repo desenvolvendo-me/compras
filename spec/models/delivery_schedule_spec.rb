@@ -16,4 +16,21 @@ describe DeliverySchedule do
       end
     end
   end
+
+  describe 'generate the code' do
+    before do
+      subject.stub(:last_code).and_return 1
+    end
+
+    it 'assigns the next_code' do
+      subject.run_callbacks(:create)
+      subject.sequence.should eq 2
+    end
+
+    it 'overrides the number' do
+      subject.sequence = 30
+      subject.run_callbacks(:create)
+      subject.sequence.should eq 2
+    end
+  end
 end
