@@ -18,7 +18,7 @@ feature "AdministrativeProcessLiberations" do
 
     click_link 'Liberar'
 
-    page.should have_content 'Liberação do Processo Administrativo 1/2012'
+    page.should have_content 'Liberar Processo Administrativo 1/2012'
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '15/06/2012'
@@ -45,6 +45,8 @@ feature "AdministrativeProcessLiberations" do
     end
 
     click_link 'Liberação'
+
+    page.should have_content 'Liberação do Processo Administrativo 1/2012'
 
     page.should have_disabled_field 'Responsável'
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
