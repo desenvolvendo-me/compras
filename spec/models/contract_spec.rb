@@ -132,4 +132,22 @@ describe Contract do
       subject.errors[:licitation_process].should eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
     end
   end
+
+  describe 'setting contract modality' do
+    it 'should set the modality to "licitation_process" when a licitation process is present' do
+      subject.stub(:licitation_process_id).and_return 1
+
+      subject.run_callbacks(:create)
+
+      subject.modality.should eq ContractModality::LICITATION_PROCESS
+    end
+
+    it 'should set the modality to "direct_purchase" when no licitation process is present' do
+      subject.stub(:licitation_process_id).and_return nil
+
+      subject.run_callbacks(:create)
+
+      subject.modality.should eq ContractModality::DIRECT_PURCHASE
+    end
+  end
 end

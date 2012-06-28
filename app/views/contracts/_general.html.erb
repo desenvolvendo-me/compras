@@ -97,8 +97,20 @@
   </div>
 </div>
 
-<%= f.input :licitation_process %>
-<%= f.input :direct_purchase %>
+<div class='yui3-g'>
+  <div class='yui3-u-1-3'>
+    <%= f.input :licitation_process %>
+  </div>
+
+  <div class='yui3-u-1-3'>
+    <%= f.input :direct_purchase %>
+  </div>
+
+  <div class='yui3-u-1-5'>
+    <%= f.input :modality, :disabled => true %>
+  </div>
+</div>
+
 <%= f.input :budget_structure %>
 <%= f.input :budget_structure_responsible %>
 
@@ -124,11 +136,16 @@
 
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.administrative_process_description);
+      $('#contract_modality').val('licitation_process');
     }
   });
 
   $('form').on('change', '#contract_direct_purchase_id', function (event, directPurchase) {
     $('#contract_licitation_process').attr('disabled', directPurchase !== undefined);
+
+    if (directPurchase) {
+      $('#contract_modality').val('direct_purchase');
+    }
   });
 
   $('form').on('change', '#contract_year, #contract_entity_id', function (event) {

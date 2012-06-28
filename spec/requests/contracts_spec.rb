@@ -17,6 +17,8 @@ feature "Contracts" do
 
     page.should have_disabled_field 'Compra direta'
     page.should have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
+    page.should have_disabled_field 'Modalidade'
+    page.should have_select 'Modalidade', :selected => 'Processo licitatório'
   end
 
   scenario 'picking a direct purchase' do
@@ -30,6 +32,8 @@ feature "Contracts" do
 
     page.should have_disabled_field 'Processo licitatório'
     page.should have_field 'Objeto do contrato', :with => ''
+    page.should have_disabled_field 'Modalidade'
+    page.should have_select 'Modalidade', :selected => 'Compra direta'
   end
 
   scenario 'create a new contract' do
@@ -48,6 +52,7 @@ feature "Contracts" do
     page.should have_field 'Ano do contrato', :with => "#{Date.current.year}"
     page.should have_disabled_field 'Número sequencial'
     page.should have_disabled_field 'Contrato principal'
+    page.should have_disabled_field 'Modalidade'
 
     select 'Aditivo', :from => 'Tipo'
     page.should_not have_disabled_field 'Contrato principal'

@@ -12,6 +12,7 @@ class Contract < Compras::Model
   has_enumeration_for :kind, :with => ContractKind, :create_helpers => true
   has_enumeration_for :execution_type
   has_enumeration_for :contract_guarantees
+  has_enumeration_for :modality, :with => ContractModality
 
   belongs_to :entity
   belongs_to :dissemination_source
@@ -38,6 +39,8 @@ class Contract < Compras::Model
   validates :parent, :presence => true, :if => :amendment?
   validate :presence_of_licitation_process_or_direct_purchase
 
+  before_create :define_modality
+
   orderize :contract_number
   filterize
 
@@ -63,5 +66,12 @@ class Contract < Compras::Model
 
   def pledges_total_value
     Pledge.total_value(id)
+  end
+
+  protected
+
+  def define_modality
+    self.modality = ContractModality::LICITATION_PROCESS if licitation_process_id
+    self.modality ||= ContractModality::DIRECT_PURCHASE
   end
 end
