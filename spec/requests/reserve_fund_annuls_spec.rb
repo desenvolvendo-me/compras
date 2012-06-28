@@ -21,6 +21,8 @@ feature 'ReserveFundAnnuls' do
       click_record 'Gabriel Sobrinho'
     end
 
+    fill_in 'Descrição', :with => 'Não necessário'
+
     click_button 'Salvar'
 
     page.should have_disabled_field 'Status'

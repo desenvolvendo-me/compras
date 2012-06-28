@@ -9,3 +9,4 @@ pt-BR:
       reserve_fund_annul:
         employee: "Responsável"
         date: "Data"
+        description: "Descrição"
