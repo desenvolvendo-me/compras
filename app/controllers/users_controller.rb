@@ -14,4 +14,8 @@ class UsersController < CrudController
 
     object.confirm! if super
   end
+
+  def collection
+    get_collection_ivar || set_collection_ivar(end_of_association_chain.where { authenticable_type.eq AuthenticableType::EMPLOYEE }.ordered)
+  end
 end

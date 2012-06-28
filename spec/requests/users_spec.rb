@@ -91,4 +91,19 @@ feature "Users" do
     end
   end
 
+  scenario 'should list only users with authenticable_type == employee' do
+    User.make!(:wenderson)
+    User.make!(:sobrinho_as_admin)
+    User.make!(:creditor_with_password)
+
+    navigate_through 'Outros > Usuários'
+
+    within_records do
+      page.should have_link 'wenderson.malheiros'
+      page.should_not have_link 'gabriel.sobrinho'
+      page.should_not have_link 'sobrinhosa'
+
+      page.should have_css 'a', :count => 1
+    end
+  end
 end
