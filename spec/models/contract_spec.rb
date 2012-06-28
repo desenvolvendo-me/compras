@@ -56,10 +56,6 @@ describe Contract do
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
 
-  it { should allow_value(true).for(:subcontracting) }
-  it { should allow_value(false).for(:subcontracting) }
-  it { should_not allow_value(nil).for(:subcontracting) }
-
   context 'validating date' do
     it 'be invalid when the signature_date is after of end_date' do
       subject.signature_date = Date.new(2012, 2, 10)

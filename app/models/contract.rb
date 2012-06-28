@@ -35,7 +35,6 @@ class Contract < Compras::Model
   validates :dissemination_source, :content, :creditor, :execution_type, :presence => true
   validates :contract_guarantees, :contract_value, :contract_validity, :signature_date, :presence => true
   validates :end_date, :budget_structure, :budget_structure_responsible, :lawyer, :lawyer_code, :kind, :presence => true
-  validates :subcontracting, :inclusion => { :in => [true, false] }
   validate :presence_of_licitation_process_or_direct_purchase
 
   orderize :contract_number
