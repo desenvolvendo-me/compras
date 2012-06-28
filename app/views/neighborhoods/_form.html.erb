@@ -1,7 +1,15 @@
 <fieldset>
   <%= f.input :name %>
-  <%= f.input :city %>
-  <%= f.input :district, :disabled => true, :url => modal_districts_path(:filter => {:city_id => f.object.city_id}) %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :city %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :district, :disabled => true, :url => modal_districts_path(:filter => {:city_id => f.object.city_id}) %>
+    </div>
+  </div>
 </fieldset>
 
 <script>
