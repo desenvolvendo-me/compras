@@ -7,6 +7,8 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'create a new budget_structure_configuration' do
+    pending 'awaiting a response from the issue https://github.com/jonleighton/poltergeist/issues/88'
+
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
 
