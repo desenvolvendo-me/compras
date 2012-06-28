@@ -39,6 +39,7 @@ feature "Contracts" do
     Creditor.make!(:sobrinho)
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
+    ServiceOrContractType.make!(:trainees)
 
     navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
 
@@ -73,6 +74,7 @@ feature "Contracts" do
     attach_file 'Contrato', 'spec/fixtures/other_example_document.txt'
 
     fill_modal 'Processo licitatório', :field => 'Ano', :with => '2012'
+    fill_modal 'Tipo de contrato', :with => 'Contratação de estagiários', :field => 'Descrição'
 
     fill_in 'Objeto do contrato', :with => 'Objeto'
     fill_in 'Valor do contrato', :with => '1.000,00'
