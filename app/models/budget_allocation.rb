@@ -2,9 +2,11 @@ class BudgetAllocation < Compras::Model
   attr_accessible :descriptor_id, :description, :budget_structure_id, :date
   attr_accessible :subfunction_id, :government_program_id, :amount, :personal
   attr_accessible :government_action_id, :foresight, :education, :description
-  attr_accessible :expense_nature_id, :capability_id, :goal, :code
+  attr_accessible :expense_nature_id, :capability_id, :goal, :kind
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
-  attr_accessible :alienation_appeal, :kind
+  attr_accessible :alienation_appeal
+
+  attr_readonly :code
 
   has_enumeration_for :debt_type
   has_enumeration_for :kind, :with => BudgetAllocationKind, :create_helpers => true
