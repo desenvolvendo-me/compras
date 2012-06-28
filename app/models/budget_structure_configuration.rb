@@ -45,7 +45,7 @@ class BudgetStructureConfiguration < Compras::Model
 
   def separator_for_budget_structure_levels
     ordered_budget_structure_levels.each_with_index do |budget_structure_level, idx|
-      if budget_structure_level.separator.blank? and (idx+1) < budget_structure_levels.size
+      if budget_structure_level.separator.blank? and idx.succ < budget_structure_levels.size
         budget_structure_level.errors.add(:separator, :blank)
       end
     end
