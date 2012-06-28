@@ -10,37 +10,37 @@
   </div>
 </div>
 
-<%= f.input :reason %>
+<%= f.input :reason, :disabled => f.object.annulled? %>
 
 <div class='yui3-g'>
   <div class='yui3-u-1-6'>
-    <%= f.input :expiry_date %>
+    <%= f.input :expiry_date, :disabled => f.object.annulled? %>
   </div>
 
   <div class='yui3-u-1-6'>
-    <%= f.input :termination_date %>
+    <%= f.input :termination_date, :disabled => f.object.annulled? %>
   </div>
 
   <div class='yui3-u-1-6'>
-    <%= f.input :publication_date %>
+    <%= f.input :publication_date, :disabled => f.object.annulled? %>
   </div>
 
   <div class='yui3-u-1-3'>
-    <%= f.input :dissemination_source %>
+    <%= f.input :dissemination_source, :disabled => f.object.annulled? %>
   </div>
 </div>
 
 <div class='yui3-g'>
   <div class='yui3-u-1-4'>
-    <%= f.input :fine_value %>
+    <%= f.input :fine_value, :disabled => f.object.annulled? %>
   </div>
 
   <div class='yui3-u-1-4'>
-    <%= f.input :compensation_value %>
+    <%= f.input :compensation_value, :disabled => f.object.annulled? %>
   </div>
 
   <div class='yui3-u-1-4'>
-    <%= f.input :term_termination_file %>
+    <%= f.input :term_termination_file, :disabled => f.object.annulled? %>
   </div>
 
   <div class='yui3-u-1-4'>

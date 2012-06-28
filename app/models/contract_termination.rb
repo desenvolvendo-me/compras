@@ -7,6 +7,8 @@ class ContractTermination < Compras::Model
   belongs_to :contract
   belongs_to :dissemination_source
 
+  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
+
   validates :year, :contract, :reason, :expiry_date, :termination_date, :presence => true
   validates :publication_date, :dissemination_source, :presence => true
   validates :year, :mask => "9999", :allow_blank => true
@@ -21,6 +23,10 @@ class ContractTermination < Compras::Model
 
   def next_number
     self.class.last_number(self.year).succ
+  end
+
+  def annulled?
+    annul.present?
   end
 
   protected

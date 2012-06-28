@@ -3,10 +3,14 @@ require 'app/uploaders/document_uploader'
 require 'app/models/contract'
 require 'app/models/dissemination_source'
 require 'app/models/contract_termination'
+require 'lib/annullable'
+require 'app/models/resource_annul'
 
 describe ContractTermination do
   it { should belong_to :contract }
   it { should belong_to :dissemination_source }
+
+  it { should have_one(:annul).dependent(:destroy) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :contract }
@@ -48,5 +52,21 @@ describe ContractTermination do
 
       subject.number.should eq 2
     end
+  end
+
+  context 'with annul' do
+    let :annul do
+      double(:annul)
+    end
+
+    it "should be annulled when it has an annul" do
+      subject.stub(:annul => annul)
+
+      subject.should be_annulled
+    end
+  end
+
+  it "should not be annulled when it does not have an annul" do
+    subject.should_not be_annulled
   end
 end

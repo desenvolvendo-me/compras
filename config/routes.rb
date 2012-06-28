@@ -201,6 +201,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :contract_termination_annuls, :only => [:new, :create, :edit, :update]
+
   resources :regulatory_act_type_classifications do
     collection do
       get :filter

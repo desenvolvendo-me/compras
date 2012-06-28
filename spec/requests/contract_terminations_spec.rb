@@ -46,6 +46,8 @@ feature 'ContractTerminations' do
 
     page.should have_content "Editar rescisão #{Date.current.year}/1 do Contrato 001"
 
+    page.should have_link 'Anular'
+
     page.should have_disabled_field 'Número da rescisão'
     page.should have_field 'Número da rescisão', :with => '1'
 
@@ -88,5 +90,32 @@ feature 'ContractTerminations' do
     click_link '2012/1'
 
     page.should have_field 'Motivo da rescisão', :with => 'Motivo vai aqui'
+  end
+
+  scenario 'contract termination annulled should have fields disabled' do
+    ResourceAnnul.make!(:rescisao_de_contrato_anulada)
+
+    navigate_through 'Contabilidade > Comum > Contratos > Contratos de Gestão'
+
+    click_link '001'
+
+    click_link 'Rescisões'
+
+    click_link '2012/1'
+
+    page.should have_disabled_field 'Número da rescisão'
+    page.should have_disabled_field 'Ano'
+    page.should have_disabled_field 'Motivo da rescisão'
+    page.should have_disabled_field 'Data do termo'
+    page.should have_disabled_field 'Data da rescisão'
+    page.should have_disabled_field 'Data da publicação'
+    page.should have_disabled_field 'Local da publicação'
+    page.should have_disabled_field 'Valor da multa'
+    page.should have_disabled_field 'Valor da indenização'
+
+    page.should_not have_link 'Anular'
+    page.should_not have_button 'Salvar'
+
+    page.should have_link 'Anulação'
   end
 end
