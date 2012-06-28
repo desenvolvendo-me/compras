@@ -1,4 +1,6 @@
 class MigrateEntityIdAndYearToDescriptors < ActiveRecord::Migration
+  class RevenueAccounting < Compras::Model; end
+
   def change
     [
       BudgetAllocation,
