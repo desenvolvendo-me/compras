@@ -57,6 +57,20 @@ describe Contract do
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201a').for(:year) }
 
+  describe 'validating parent' do
+    it 'should be required when the kind is amendment' do
+      subject.stub(:amendment?).and_return true
+
+      subject.should validate_presence_of :parent
+    end
+
+    it 'should not be required when the kind is not amendment' do
+      subject.stub(:amendment?).and_return false
+
+      subject.should_not validate_presence_of :parent
+    end
+  end
+
   context 'validating date' do
     it 'be invalid when the signature_date is after of end_date' do
       subject.signature_date = Date.new(2012, 2, 10)

@@ -22,7 +22,7 @@
   </div>
 
   <div class="yui3-u-1-2">
-    <%= f.input :parent, :disabled => true %>
+    <%= f.input :parent, :disabled => !f.object.amendment? %>
   </div>
 </div>
 
