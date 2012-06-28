@@ -13,5 +13,8 @@ class IndexerValue < Compras::Model
   def self.current
     where { date.lteq Date.current }.order { date }.last
   end
-end
 
+  def scale_of_value
+    column_for_attribute(:value).try(:scale)
+  end
+end

@@ -20,7 +20,7 @@ feature "Indexers" do
     click_button 'Adicionar Valor de Indexador'
 
     fill_in 'Data', :with => '01/05/2011'
-    fill_in 'Valor', :with => '0,99'
+    fill_in 'Valor', :with => '0,990000'
 
     click_button 'Salvar'
 
@@ -31,7 +31,7 @@ feature "Indexers" do
     page.should have_field 'Nome', :with => 'SELIC'
     page.should have_field 'Moeda', :with => 'Real'
     page.should have_field 'Data', :with => '01/05/2011'
-    page.should have_field 'Valor', :with => '0,99'
+    page.should have_field 'Valor', :with => '0,990000'
   end
 
   scenario 'update a indexer' do
@@ -41,7 +41,7 @@ feature "Indexers" do
 
     click_link 'SELIC'
 
-    fill_in 'Valor', :with => '0,84'
+    fill_in 'Valor', :with => '0,840000'
 
     click_button 'Salvar'
 
@@ -49,7 +49,7 @@ feature "Indexers" do
 
     click_link 'SELIC'
 
-    page.should have_field 'Valor', :with => '0,84'
+    page.should have_field 'Valor', :with => '0,840000'
   end
 
   scenario 'destroy an existent indexer' do
@@ -66,6 +66,6 @@ feature "Indexers" do
     page.should_not have_content 'SELIC'
     page.should_not have_content 'Real'
     page.should_not have_content '01/05/2011'
-    page.should_not have_content '0,99'
+    page.should_not have_content '0,990000'
   end
 end
