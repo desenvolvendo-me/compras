@@ -118,6 +118,28 @@ describe Creditor do
     end
   end
 
+  describe '#user?' do
+    let :user do
+      double('User')
+    end
+
+    before do
+      subject.stub(:user).and_return user
+    end
+
+    it 'returns false when the user is not persisted' do
+      user.stub(:persisted?).and_return false
+
+      subject.user?.should be_false
+    end
+
+    it 'returns true when the user was persisted' do
+      user.stub(:persisted?).and_return true
+
+      subject.user?.should be_true
+    end
+  end
+
   describe 'representatives' do
     let :person do
       double :person

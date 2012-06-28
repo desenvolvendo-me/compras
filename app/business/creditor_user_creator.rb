@@ -7,7 +7,7 @@ class CreditorUserCreator
 
   def generate
     creditors.each do |creditor|
-      next if creditor.user.id
+      next if creditor.user?
       @user_storage.create!(:name => creditor.name, :email => creditor.email, :login => creditor.login, :authenticable_id => creditor.id, :authenticable_type => @authenticable_type)
     end
   end

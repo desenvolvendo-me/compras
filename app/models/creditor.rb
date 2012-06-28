@@ -80,6 +80,10 @@ class Creditor < Compras::Model
     cnae_ids | [ main_cnae_id ]
   end
 
+  def user?
+    user.persisted?
+  end
+
   protected
 
   def clean_fields_when_is_no_autonomous
