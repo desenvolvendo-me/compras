@@ -1,10 +1,6 @@
 module Compras
   module Inputs
     class NumericInput < SimpleForm::Inputs::NumericInput
-      protected
-
-      include Compras::Inputs::MaskedInput
-
       private
 
       def input_html_options

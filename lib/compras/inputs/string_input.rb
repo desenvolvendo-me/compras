@@ -1,10 +1,6 @@
 module Compras
   module Inputs
     class StringInput < SimpleForm::Inputs::StringInput
-      protected
-
-      include Compras::Inputs::MaskedInput
-
       private
 
       # SimpleForm do not add maxlength if html5 is disabled which not make any sense

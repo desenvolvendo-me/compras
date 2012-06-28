@@ -7,8 +7,6 @@ module Compras
 
       protected
 
-      include Compras::Inputs::MaskedInput
-
       def input_html_classes
         super.unshift('string')
       end
