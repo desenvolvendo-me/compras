@@ -75,11 +75,11 @@ describe ExtraCredit do
       end
 
       it 'should be valid when credit date is equal' do
-        subject.should allow_value('2012-03-01').for(:credit_date)
+        subject.should allow_value(Date.new(2012, 3, 1)).for(:credit_date)
       end
 
       it 'should not be valid when credit date is older' do
-        subject.should_not allow_value('2011-01-01').for(:credit_date).with_message("não pode ser menor que a data do último crédito suplementar (01/03/2012)")
+        subject.should_not allow_value(Date.new(2011, 1, 1)).for(:credit_date).with_message("não pode ser menor que a data do último crédito suplementar (01/03/2012)")
       end
     end
 
@@ -89,11 +89,11 @@ describe ExtraCredit do
       end
 
       it 'should be valid when credit date is equal' do
-        subject.should allow_value('2012-03-01').for(:credit_date)
+        subject.should allow_value(Date.new(2012, 3, 1)).for(:credit_date)
       end
 
       it 'should not be valid when credit date is older' do
-        subject.should_not allow_value('2011-01-01').for(:credit_date).with_message("deve ser maior ou igual a data de publicação do ato administrativo (01/03/2012)")
+        subject.should_not allow_value(Date.new(2011, 1, 1)).for(:credit_date).with_message("deve ser maior ou igual a data de publicação do ato administrativo (01/03/2012)")
       end
     end
   end
