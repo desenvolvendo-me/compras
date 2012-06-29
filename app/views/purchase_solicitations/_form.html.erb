@@ -50,16 +50,6 @@
     calculateItemsTotalValue();
   });
 
-  $('form.purchase_solicitation').delegate('.item-price', 'keyup', function() {
-    var itemDiv = $(this).closest('.item'),
-        itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
-        itemPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-price').val() || '0')),
-        unitPrice = numberWithDelimiter(parseFloat(itemPrice.divide(itemQuantity)));
-
-    itemDiv.find('.item-unit-price').val(unitPrice);
-    calculateItemsTotalValue();
-  });
-
   $('form.purchase_solicitation').delegate('.remove-purchase-solicitation-budget-allocation, .remove-item', 'click', function() {
     calculateItemsTotalValue();
     calcItemOrder();

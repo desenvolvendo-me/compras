@@ -59,6 +59,8 @@ feature "PurchaseSolicitations" do
       fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
+      page.should have_disabled_field 'Valor total'
+
       # asserting calculated total price of the item
       page.should have_field 'Valor total', :with => '700,00'
     end
@@ -151,10 +153,10 @@ feature "PurchaseSolicitations" do
 
       fill_in 'Marca/Referência', :with => 'Ferro SA'
       fill_in 'Quantidade', :with => '200,00'
-      fill_in 'Valor total', :with => '20,00'
+      fill_in 'Valor unitário', :with => '25,00'
 
       # asserting calculated unit price of the item
-      page.should have_field 'Valor unitário', :with => '0,10'
+      page.should have_field 'Valor total', :with => '5.000,00'
     end
 
     click_button 'Salvar'
@@ -185,8 +187,8 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Unidade', :with => 'UN'
       page.should have_field 'Marca/Referência', :with => 'Ferro SA'
       page.should have_field 'Quantidade', :with => '200,00'
-      page.should have_field 'Valor unitário', :with => '0,10'
-      page.should have_field 'Valor total', :with => '20,00'
+      page.should have_field 'Valor unitário', :with => '25,00'
+      page.should have_field 'Valor total', :with => '5.000,00'
 
       page.should have_field 'Item', :with => '1'
     end
@@ -325,12 +327,12 @@ feature "PurchaseSolicitations" do
 
         within '.item:last' do
           fill_in 'Quantidade', :with => '10,00'
-          fill_in 'Valor total', :with => '50,00'
-          page.should have_field 'Valor unitário', :with => '5,00'
+          fill_in 'Valor unitário', :with => '5,50'
+          page.should have_field 'Valor total', :with => '55,00'
         end
       end
 
-      page.should have_field 'Valor total dos itens', :with => '90,00'
+      page.should have_field 'Valor total dos itens', :with => '95,00'
 
       # removing an item
 
@@ -340,7 +342,7 @@ feature "PurchaseSolicitations" do
         end
       end
 
-      page.should have_field 'Valor total dos itens', :with => '80,00'
+      page.should have_field 'Valor total dos itens', :with => '85,00'
 
       # removing an entire budget allocation
 
