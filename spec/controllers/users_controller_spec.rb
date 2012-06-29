@@ -7,20 +7,20 @@ describe UsersController do
   end
 
   describe '#edit' do
-    it 'when the authenticable type is not employee should return 401' do
-      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::CREDITOR)
+    it 'when the user has Employee as authenticable type should be editable' do
+      user = User.make!(:sobrinho)
 
-      get :edit
-
-      response.code.should eq "401"
-    end
-
-    it 'when the user has no authenticable type should be editable' do
-      User.stub(:find).and_return User.new(:authenticable_type => nil)
-
-      get :edit
+      get :edit, user.attributes
 
       response.should be_success
+    end
+
+    it 'when the user does not have Employee as authenticable type should not be editable' do
+      user = User.make!(:creditor_with_password)
+
+      assert_raise ActiveRecord::RecordNotFound do
+        get :edit, user.attributes
+      end
     end
   end
 
@@ -44,38 +44,38 @@ describe UsersController do
   end
 
   describe '#destroy' do
-    it 'when the authenticable type is not employee should return 401' do
-      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::CREDITOR)
+    it 'when the user has Employee as authenticable type should be destroyed' do
+      user = User.make!(:sobrinho)
 
-      get :destroy
-
-      response.code.should eq "401"
-    end
-
-    it 'when the user has no authenticable type should be destroyed' do
-      User.stub(:find).and_return User.new(:authenticable_type => nil)
-
-      delete :destroy
+      delete :destroy, user.attributes
 
       response.should redirect_to(users_path)
+    end
+
+    it 'when the user does no have Employee as authenticable type should not be destroyed' do
+      user = User.make!(:creditor_with_password)
+
+      assert_raise ActiveRecord::RecordNotFound do
+        delete :destroy, user.attributes
+      end
     end
   end
 
   describe '#update' do
-    it 'when the authenticable type is not employee should return 401' do
-      User.stub(:find).and_return User.new(:authenticable_type => AuthenticableType::CREDITOR)
+    it 'when the user has no authenticable type should be editable' do
+      user = User.make!(:sobrinho)
 
-      get :update
+      put :update, user.attributes
 
-      response.code.should eq "401"
+      response.should redirect_to(users_path)
     end
 
-    it 'when the user has no authenticable type should be editable' do
-      User.stub(:find).and_return User.new(:authenticable_type => nil)
+    it 'when the user does not have Employee as authenticable type should not be editable' do
+      user = User.make!(:creditor_with_password)
 
-      put :update
-
-      response.code.should eq "200"
+      assert_raise ActiveRecord::RecordNotFound do
+        put :update, user.attributes
+      end
     end
   end
 end
