@@ -1,5 +1,5 @@
 class Contract < Compras::Model
-  attr_accessible :year, :entity_id, :contract_number, :sequential_number, :publication_date, :lawyer_code, :contract_file
+  attr_accessible :year, :contract_number, :sequential_number, :publication_date, :lawyer_code, :contract_file
   attr_accessible :signature_date, :end_date, :description, :kind, :content, :execution_type, :contract_guarantees
   attr_accessible :contract_value, :guarantee_value, :contract_validity, :subcontracting, :cancellation_date, :cancellation_reason
   attr_accessible :dissemination_source_id, :creditor_id, :service_or_contract_type_id, :licitation_process_id
@@ -13,7 +13,6 @@ class Contract < Compras::Model
   has_enumeration_for :execution_type
   has_enumeration_for :contract_guarantees
 
-  belongs_to :entity
   belongs_to :dissemination_source
   belongs_to :creditor
   belongs_to :service_or_contract_type
@@ -30,7 +29,7 @@ class Contract < Compras::Model
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
   validates :year, :mask => "9999", :allow_blank => true
-  validates :sequential_number, :year, :entity, :contract_number, :publication_date, :presence => true
+  validates :sequential_number, :year, :contract_number, :publication_date, :presence => true
   validates :dissemination_source, :content, :creditor, :execution_type, :service_or_contract_type, :presence => true
   validates :contract_guarantees, :contract_value, :contract_validity, :signature_date, :presence => true
   validates :end_date, :budget_structure, :budget_structure_responsible, :lawyer, :lawyer_code, :kind, :presence => true
@@ -58,8 +57,8 @@ class Contract < Compras::Model
     licitation_process.try(:administrative_process_modality) || direct_purchase.try(:modality)
   end
 
-  def self.next_sequential(year, entity_id)
-    self.where { (self.year.eq(year)) & (self.entity_id.eq(entity_id)) }.size + 1
+  def self.next_sequential(year)
+    self.where { self.year.eq year }.size + 1
   end
 
   # It's a XNOR validation.

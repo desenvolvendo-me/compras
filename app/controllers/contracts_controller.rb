@@ -10,11 +10,11 @@ class ContractsController < CrudController
   end
 
   def next_sequential
-    render :nothing => true and return if params[:entity_id].blank? || params[:year].blank?
+    render :nothing => true and return if params[:year].blank?
 
     respond_to do |format|
       format.json do
-        render :json => { :sequential => Contract.next_sequential(params[:year], params[:entity_id]) }
+        render :json => { :sequential => Contract.next_sequential(params[:year]) }
       end
     end
   end
@@ -22,7 +22,7 @@ class ContractsController < CrudController
   protected
 
   def create_resource(object)
-    object.sequential_number = Contract.next_sequential(object.year, object.entity_id)
+    object.sequential_number = Contract.next_sequential(object.year)
 
     super
   end

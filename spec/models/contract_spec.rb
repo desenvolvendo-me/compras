@@ -14,7 +14,6 @@ require 'app/models/delivery_schedule'
 require 'app/models/occurrence_contractual_historic'
 
 describe Contract do
-  it { should belong_to :entity }
   it { should belong_to :dissemination_source }
   it { should belong_to :creditor }
   it { should belong_to :service_or_contract_type }
@@ -35,7 +34,6 @@ describe Contract do
 
   it { should validate_presence_of :sequential_number }
   it { should validate_presence_of :year }
-  it { should validate_presence_of :entity }
   it { should validate_presence_of :contract_number }
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :dissemination_source }

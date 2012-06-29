@@ -75,7 +75,6 @@ feature "Contracts" do
     page.should have_disabled_field 'Contrato principal'
 
     fill_in 'Ano do contrato', :with => '2012'
-    fill_modal 'Entidade', :with => 'Detran'
     page.should have_field 'Número sequencial', :with => '1'
 
     fill_modal 'Local de publicação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
@@ -128,7 +127,6 @@ feature "Contracts" do
 
     page.should have_field 'Número sequencial', :with => '1'
     page.should have_field 'Ano do contrato', :with => '2012'
-    page.should have_field 'Entidade', :with => 'Detran'
     page.should have_field 'Número do contrato', :with => '001'
     page.should have_field 'Data de publicação', :with => '10/01/2012'
     page.should have_field 'Data da assinatura', :with => '01/01/2012'
@@ -162,7 +160,6 @@ feature "Contracts" do
     end
 
     fill_in 'Ano do contrato', :with => '2013'
-    fill_modal 'Entidade', :with => 'Secretaria de Educação'
     fill_in 'Número do contrato', :with => '111'
     fill_in 'Data da assinatura', :with => '01/01/2013'
     fill_in 'Data de validade', :with => '30/12/2013'
@@ -178,7 +175,6 @@ feature "Contracts" do
     end
 
     page.should have_field 'Ano do contrato', :with => '2013'
-    page.should have_field 'Entidade', :with => 'Secretaria de Educação'
     page.should have_field 'Número do contrato', :with => '111'
     page.should have_field 'Data da assinatura', :with => '01/01/2013'
     page.should have_field 'Data de validade', :with => '30/12/2013'

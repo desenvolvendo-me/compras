@@ -2,7 +2,6 @@
 Contract.blueprint(:primeiro_contrato) do
   sequential_number { 1 }
   year { 2012 }
-  entity { Entity.make!(:detran) }
   contract_number { "001" }
   signature_date { Date.new(2012, 2, 23) }
   end_date { Date.new(2012, 2, 24) }
@@ -28,7 +27,6 @@ end
 Contract.blueprint(:segundo_contrato) do
   sequential_number { 2 }
   year { 2013 }
-  entity { Entity.make!(:detran) }
   contract_number { "002" }
   signature_date { Date.new(2013, 2, 23) }
   end_date { Date.new(2013, 2, 24) }
@@ -55,7 +53,6 @@ end
 Contract.blueprint(:contrato_detran) do
   sequential_number { 3 }
   year { 2012 }
-  entity { Entity.make!(:detran) }
   contract_number { "101" }
   signature_date { Date.new(2012, 2, 23) }
   end_date { Date.new(2013, 2, 23) }
@@ -81,7 +78,6 @@ end
 Contract.blueprint(:contrato_educacao) do
   sequential_number { 4 }
   year { 2011 }
-  entity { Entity.make!(:secretaria_de_educacao) }
   contract_number { "200" }
   signature_date { Date.new(2012, 2, 24) }
   end_date { Date.new(2013, 2, 24) }
