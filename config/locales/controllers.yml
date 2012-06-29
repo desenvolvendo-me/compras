@@ -105,7 +105,6 @@ pt-BR:
     budget_structure_levels: "Níveis de Estruturas Orçamentárias"
     confirmations: "Confirmações"
     contract_termination_annuls: "Anulações de Rescisões de Contratos"
-    delayed_calculations: "Cálculos Atrasados"
     direct_purchase_liberations: "Liberações de Compras Diretas"
     economic_registrations: "Registros Econômicos"
     expense_categories: "Categorias de Despesas"
@@ -130,7 +129,6 @@ pt-BR:
     revenue_rubrics: "Rúbricas de Reiceitas"
     revenue_sources: "Fontes de Receitas"
     revenue_subcategories: "Subcategorias de Receitas"
-    type_public_services: "Tipos de Serviços Públicos"
 
   menu:
     <<: *controllers
