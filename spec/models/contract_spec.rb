@@ -72,30 +72,22 @@ describe Contract do
   end
 
   context 'validating date' do
-    it 'be invalid when the signature_date is after of end_date' do
-      subject.signature_date = Date.new(2012, 2, 10)
-      subject.end_date = Date.new(2012, 2, 1)
-
-      subject.should be_invalid
-      subject.errors[:end_date].should eq ['deve ser depois da data de assinatura (10/02/2012)']
+    before(:each) do
+      subject.stub(:signature_date).and_return(Date.new(2012, 2, 1))
     end
 
-    it 'be invalid when the signature_date is equal to end_date' do
-      subject.signature_date = Date.new(2012, 2, 10)
-      subject.end_date = subject.signature_date
-
-      subject.should be_invalid
-      subject.errors[:end_date].should eq ['deve ser depois da data de assinatura (10/02/2012)']
+    it 'be valid when the end_date is after signature_date' do
+      subject.should allow_value(Date.new(2012, 2, 10)).for(:end_date)
     end
 
-    it 'be valid when the end_date is after of signature_date' do
-      subject.signature_date = Date.yesterday
-      subject.end_date = Date.current
+    it 'be invalid when the signature_date is after end_date' do
+      subject.should_not allow_value(Date.new(2012, 1, 1)).for(:end_date).
+                                                           with_message('deve ser depois da data de assinatura (01/02/2012)')
+    end
 
-      subject.valid?
-
-      subject.errors[:end_date].should be_empty
-      subject.errors[:signature_date].should be_empty
+    it 'be invalid when the end_date is equal to signature' do
+      subject.should_not allow_value(Date.new(2012, 2, 1)).for(:end_date).
+                                                           with_message('deve ser depois da data de assinatura (01/02/2012)')
     end
   end
 
