@@ -27,7 +27,7 @@ describe LicitationProcessBidderDecorator do
   end
 
   it "should return erro message when cannot update proposals" do
-    helpers.stub(:t).with("other.tributario.messages.to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist").
+    helpers.stub(:t).with("other.compras.messages.to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist").
                      and_return("Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir.")
     subject.stub(:can_update_proposals?).and_return(false)
     subject.show_proposal_tabs.should eq :text => "Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir."

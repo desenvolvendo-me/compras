@@ -11,7 +11,7 @@ class LicitationProcessBidderDecorator < Decorator
         'licitation_process_bidders/proposal_by_lots'
       end
     else
-      { :text =>  helpers.t("other.tributario.messages.to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist") }
+      { :text =>  helpers.t("other.compras.messages.to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist") }
     end
   end
 

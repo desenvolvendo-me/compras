@@ -49,7 +49,7 @@ module CrudHelper
   end
 
   def link_to_modal_info(id, href="#")
-    link_to I18n.translate("other.tributario.messages.more_information"), href, :id => id.concat('_info_link'), :class => 'modal_info'
+    link_to I18n.translate("other.compras.messages.more_information"), href, :id => id.concat('_info_link'), :class => 'modal_info'
   end
 
   def create?

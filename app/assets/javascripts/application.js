@@ -14,7 +14,7 @@
 //= require simple_form.nested_form
 //= require simple_form.toogle_required_input
 //= require rails
-//= require tributario
+//= require compras
 //= require filter
 //= require currency_manipulation
 //= require date

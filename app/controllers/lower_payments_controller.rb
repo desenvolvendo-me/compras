@@ -20,13 +20,13 @@ class LowerPaymentsController < CrudController
 
   def check_default_interest_setting
     unless Setting.fetch(:default_interest)
-      redirect_to collection_url, :alert => t("errors.tributario.messages.missing_default_interest_setting")
+      redirect_to collection_url, :alert => t("errors.compras.messages.missing_default_interest_setting")
     end
   end
 
   def check_default_penalty_setting
     unless Setting.fetch(:default_penalty)
-      redirect_to collection_url, :alert => t("errors.tributario.messages.missing_default_penalty_setting")
+      redirect_to collection_url, :alert => t("errors.compras.messages.missing_default_penalty_setting")
     end
   end
 end
