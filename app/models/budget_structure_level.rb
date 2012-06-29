@@ -11,7 +11,7 @@ class BudgetStructureLevel < Compras::Model
   orderize :level
   filterize
 
-  scope :search_by_configuration_id, lambda { |configuration_id| where {
+  scope :configuration_id, lambda { |configuration_id| where {
      budget_structure_configuration_id.eq(configuration_id) }
   }
 

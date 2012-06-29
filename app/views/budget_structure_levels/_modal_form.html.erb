@@ -1,0 +1,15 @@
+<%= f.input :budget_structure_configuration %>
+<%= f.input :description %>
+
+<script>
+  function enabledDisabledBudgetStructureConfiguration(){
+    if ($('#filter_budget_structure_configuration_id').val() == ''){
+      var value = false;
+    }else{
+      var value = true;
+    }
+    $('#filter_budget_structure_configuration').attr('DISABLED', value); 
+  }
+
+  enabledDisabledBudgetStructureConfiguration();
+</script>

@@ -19,7 +19,14 @@ feature "BudgetStructure" do
     within_tab 'Informações' do
       fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
-      fill_modal 'Nível', :with => '1', :field => 'Nível'
+
+      within_modal 'Nível' do
+        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        click_button 'Pesquisar'
+        click_record 'Orgão'
+      end
+
       fill_in 'Código', :with => '1'
       page.should have_field 'Estrutura orçamentaria', :with => '1'
       fill_in 'Código TCE', :with => '051'
@@ -177,7 +184,14 @@ feature "BudgetStructure" do
     within_tab 'Informações' do
       fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
-      fill_modal 'Nível', :with => '1', :field => 'Nível'
+
+      within_modal 'Nível' do
+        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        click_button 'Pesquisar'
+        click_record 'Orgão'
+      end
+
       fill_in 'Código', :with => '1'
       page.should have_field 'Estrutura orçamentaria', :with => '1'
       fill_in 'Código TCE', :with => '051'
@@ -240,13 +254,22 @@ feature "BudgetStructure" do
     within_tab 'Informações' do
       fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
-      fill_modal 'Nível', :with => '2', :field => 'Nível'
 
-      within_modal 'Estrutura orçamentaria do nível 1' do
-         click_button 'Pesquisar'
+      within_modal 'Nível' do
+        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        click_button 'Pesquisar'
+        click_record 'Unidade'
+      end
 
-         page.should have_content 'Secretaria de Educação'
-         page.should_not have_content 'Secretaria de Desenvolvimento'
+      within_modal 'Estrutura orçamentaria superior' do
+        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+
+        click_button 'Pesquisar'
+
+        page.should have_content 'Secretaria de Educação'
+        page.should_not have_content 'Secretaria de Desenvolvimento'
       end
     end
   end
@@ -310,7 +333,14 @@ feature "BudgetStructure" do
     within_tab 'Informações' do
       fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
       select 'Sintético', :from => 'Tipo'
-      fill_modal 'Nível', :with => '1', :field => 'Nível'
+
+      within_modal 'Nível' do
+        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        click_button 'Pesquisar'
+        click_record 'Orgão'
+      end
+
       fill_in 'Código', :with => '1'
       page.should have_field 'Estrutura orçamentaria', :with => '1'
       fill_in 'Código TCE', :with => '051'

@@ -15,6 +15,6 @@ pt-BR:
         code: "Código"
         description: "Descrição"
         kind: "Tipo"
-        parent: "Estrutura orçamentaria do nível"
+        parent: "Estrutura orçamentaria superior"
         performance_field: "Área de atuação"
         tce_code: "Código TCE"

@@ -1,3 +1,3 @@
 class BudgetStructureDecorator < Decorator
-  attr_modal :description
+  attr_modal :parent, :level, :description
 end
