@@ -42,6 +42,8 @@ class Contract < Compras::Model
   }, :allow_blank => true
   validate :presence_of_licitation_process_or_direct_purchase
 
+  delegate :total_value, :to => :pledges, :allow_nil => true, :prefix => true
+
   orderize :contract_number
   filterize
 
@@ -67,9 +69,5 @@ class Contract < Compras::Model
     unless licitation_process.present? ^ direct_purchase.present?
       errors.add :licitation_process, :must_select_licitation_process_or_direct_purchase
     end
-  end
-
-  def pledges_total_value
-    Pledge.total_value(id)
   end
 end
