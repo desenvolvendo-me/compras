@@ -16,10 +16,17 @@ describe BudgetAllocation do
     subject.to_s.should eq '1 - Secretaria de educação'
   end
 
-  it { should validate_presence_of :descriptor }
-  it { should validate_presence_of :description }
+  it { should validate_presence_of :budget_allocation_type }
+  it { should validate_presence_of :budget_structure }
+  it { should validate_presence_of :capability }
   it { should validate_presence_of :date }
-  it { should validate_presence_of :kind }
+  it { should validate_presence_of :description }
+  it { should validate_presence_of :descriptor }
+  it { should validate_presence_of :expense_nature }
+  it { should validate_presence_of :goal }
+  it { should validate_presence_of :government_action }
+  it { should validate_presence_of :government_program }
+  it { should validate_presence_of :subfunction }
 
   it { should belong_to(:descriptor) }
   it { should belong_to(:budget_structure) }
