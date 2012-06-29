@@ -20,5 +20,4 @@ class DeliverySchedule < Compras::Model
   def last_code
     self.class.where { self.contract_id.eq(contract_id) }.maximum(:sequence).to_i
   end
-
 end
