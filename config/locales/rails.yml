@@ -265,6 +265,7 @@ pt-BR:
       cannot_have_a_code_with_configuration_and_level_repeated: "já existe um código para este nível desta configuração"
       not_allow_licitation_process: "não permite processo licitatório"
       must_select_licitation_process_or_direct_purchase: "selecione um processo licitário ou uma compra direta, mas não ambos"
+      end_date_should_be_after_start_date: "deve ser depois da data de início (%{restriction})"
 
   activerecord:
     errors:
