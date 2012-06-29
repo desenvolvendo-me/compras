@@ -14,30 +14,22 @@ describe BudgetStructureResponsible do
   it { should belong_to :regulatory_act }
 
   context 'validating date' do
-    it 'be invalid when the start_date is after of end_date' do
-      subject.start_date = Date.new(2012, 2, 10)
-      subject.end_date = Date.new(2012, 2, 1)
-
-      subject.should be_invalid
-      subject.errors[:end_date].should eq ['deve ser depois da data de início (10/02/2012)']
-    end
-
-    it 'be invalid when the start_date is equal to end_date' do
-      subject.start_date = Date.new(2012, 2, 10)
-      subject.end_date = subject.start_date
-
-      subject.should be_invalid
-      subject.errors[:end_date].should eq ['deve ser depois da data de início (10/02/2012)']
+    before(:each) do
+      subject.stub(:start_date).and_return(Date.new(2012, 2, 10))
     end
 
     it 'be valid when the end_date is after of start_date' do
-      subject.start_date = Date.yesterday
-      subject.end_date = Date.current
+      subject.should allow_value(Date.new(2012, 2, 11)).for(:end_date)
+    end
 
-      subject.valid?
+    it 'be invalid when the start_date is after of end_date' do
+      subject.should_not allow_value(Date.new(2012, 2, 1)).for(:end_date).
+                                                           with_message('deve ser depois da data de início (10/02/2012)')
+    end
 
-      subject.errors[:end_date].should be_empty
-      subject.errors[:start_date].should be_empty
+    it 'be invalid when the start_date is equal to end_date' do
+      subject.should_not allow_value(Date.new(2012, 2, 10)).for(:end_date).
+                                                           with_message('deve ser depois da data de início (10/02/2012)')
     end
   end
 end
