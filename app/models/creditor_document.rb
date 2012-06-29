@@ -9,9 +9,17 @@ class CreditorDocument < Compras::Model
 
   validates :document_type, :document_number, :emission_date, :validity, :issuer, :presence => true
   validates :emission_date,
-    :timeliness => { :on_or_before => :today, :type => :date },
+    :timeliness => {
+      :on_or_before => :today,
+      :type => :date,
+      :on_or_before_message => :should_be_on_or_before_today
+    },
     :allow_blank => true
   validates :validity,
-    :timeliness => { :on_or_after => :emission_date, :type => :date },
+    :timeliness => {
+      :on_or_after => :emission_date,
+      :type => :date,
+      :on_or_after_message => :validity_should_be_on_or_after_emission_date
+    },
     :allow_blank => true
 end

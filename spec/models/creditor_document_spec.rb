@@ -13,22 +13,35 @@ describe CreditorDocument do
   it { should validate_presence_of :validity }
   it { should validate_presence_of :issuer }
 
-  it { should_not allow_value(Date.tomorrow).for(:emission_date) }
-  it { should allow_value(Date.current).for(:emission_date) }
+  context 'validate emission_date' do
+    it { should allow_value(Date.current).for(:emission_date) }
 
-  it { should allow_value(Date.current).for(:emission_date) }
-  it { should allow_value(Date.current).for(:emission_date) }
-
-  it "should not allow validity before emission_date" do
-    subject.emission_date = Date.current
-
-    subject.should_not allow_value(Date.yesterday).for(:validity)
+    it 'should not allow date after today' do
+      subject.should_not allow_value(Date.tomorrow).for(:emission_date).
+                                                    with_message("deve ser hoje ou antes de hoje (#{I18n.l(Date.current)})")
+    end
   end
 
-  it "should allow validity on or after emission_date" do
-    subject.emission_date = Date.current
+  context 'validate emission_date' do
+    let :emission_date do
+      Date.current + 10.days
+    end
 
-    subject.should allow_value(Date.current).for(:validity)
-    subject.should allow_value(Date.tomorrow).for(:validity)
+    before do
+      subject.stub(:emission_date).and_return(emission_date)
+    end
+
+    it 'should allow validity date after emission_date' do
+      subject.should allow_value(Date.current + 15.days).for(:validity)
+    end
+
+    it 'should allow validity date equals to emission_date' do
+      subject.should allow_value(emission_date).for(:validity)
+    end
+
+    it 'should not allow validity date before emission_date' do
+      subject.should_not allow_value(Date.current).for(:validity).
+                                                    with_message("deve ser em ou depois da data de emissão (#{I18n.l emission_date})")
+    end
   end
 end
