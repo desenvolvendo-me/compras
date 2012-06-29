@@ -133,21 +133,33 @@ describe Contract do
     end
   end
 
-  describe 'setting contract modality' do
-    it 'should set the modality to "licitation_process" when a licitation process is present' do
-      subject.stub(:licitation_process_id).and_return 1
+  describe '#modality' do
+    context 'given a licitation process' do
+      let :licitation_process do
+        double('LicitationProcess', :administrative_process_modality => 'xpto')
+      end
 
-      subject.run_callbacks(:create)
+      before do
+        subject.stub(:licitation_process).and_return licitation_process
+      end
 
-      subject.modality.should eq ContractModality::LICITATION_PROCESS
+      it 'should return the licitation process modality' do
+        subject.modality.should eq 'xpto'
+      end
     end
 
-    it 'should set the modality to "direct_purchase" when no licitation process is present' do
-      subject.stub(:licitation_process_id).and_return nil
+    context 'given a direct purchase' do
+      let :direct_purchase do
+        double('DirectPurchase', :modality => 'xxto')
+      end
 
-      subject.run_callbacks(:create)
+      before do
+        subject.stub(:direct_purchase).and_return direct_purchase
+      end
 
-      subject.modality.should eq ContractModality::DIRECT_PURCHASE
+      it 'should return the direct purchase modality' do
+        subject.modality.should eq 'xxto'
+      end
     end
   end
 end

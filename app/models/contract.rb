@@ -6,15 +6,12 @@ class Contract < Compras::Model
   attr_accessible :direct_purchase_id, :budget_structure_id, :budget_structure_responsible_id, :lawyer_id, :parent_id
   attr_accessible :delivery_schedules_attributes
 
-  attr_readonly :modality
-
   acts_as_nested_set
   mount_uploader :contract_file, DocumentUploader
 
   has_enumeration_for :kind, :with => ContractKind, :create_helpers => true
   has_enumeration_for :execution_type
   has_enumeration_for :contract_guarantees
-  has_enumeration_for :modality, :with => ContractModality
 
   belongs_to :entity
   belongs_to :dissemination_source
@@ -41,8 +38,6 @@ class Contract < Compras::Model
   validates :parent, :presence => true, :if => :amendment?
   validate :presence_of_licitation_process_or_direct_purchase
 
-  before_create :define_modality
-
   orderize :contract_number
   filterize
 
@@ -51,6 +46,10 @@ class Contract < Compras::Model
 
   def to_s
     contract_number
+  end
+
+  def modality
+    licitation_process.try(:administrative_process_modality) || direct_purchase.try(:modality)
   end
 
   def self.next_sequential(year, entity_id)
@@ -68,12 +67,5 @@ class Contract < Compras::Model
 
   def pledges_total_value
     Pledge.total_value(id)
-  end
-
-  protected
-
-  def define_modality
-    self.modality = ContractModality::LICITATION_PROCESS if licitation_process_id
-    self.modality ||= ContractModality::DIRECT_PURCHASE
   end
 end
