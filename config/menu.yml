@@ -75,7 +75,7 @@ menu:
         - budget_allocation_types
         - budget_allocations
 
-      - revenue_accounting:
+      - budget_revenue:
         - revenue_natures
         - budget_revenues
 
