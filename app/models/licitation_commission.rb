@@ -17,7 +17,12 @@ class LicitationCommission < Compras::Model
   delegate :publication_date, :to => :regulatory_act, :allow_nil => true, :prefix => true
 
   validates :commission_type, :nomination_date, :expiration_date, :exoneration_date, :regulatory_act, :presence => true
-  validates :expiration_date, :exoneration_date, :timeliness => { :on_or_after => :nomination_date, :type => :date }, :allow_blank => true
+  validates :expiration_date, :exoneration_date,
+    :timeliness => {
+      :on_or_after => :nomination_date,
+      :type => :date,
+      :on_or_after_message => :should_be_on_or_after_nomination_date
+    }, :allow_blank => true
 
   validate :cannot_have_duplicated_individuals_on_responsibles
   validate :cannot_have_duplicated_individuals_on_members

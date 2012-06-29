@@ -269,6 +269,7 @@ pt-BR:
       end_date_should_be_after_signature_date: "deve ser depois da data de assinatura (%{restriction})"
       should_be_on_or_before_today: "deve ser hoje ou antes de hoje (%{restriction})"
       validity_should_be_on_or_after_emission_date: "deve ser em ou depois da data de emissão (%{restriction})"
+      should_be_on_or_after_nomination_date: "deve ser em ou depois da data da nomeação (%{restriction})"
 
   activerecord:
     errors:

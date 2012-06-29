@@ -26,18 +26,40 @@ describe LicitationCommission do
     subject.to_s.should eq '2'
   end
 
-  it "should not have expiration_date less than nomination_date" do
-    subject.nomination_date = Date.current
+  context 'validate dates based on nomination_date' do
+    before do
+      subject.stub(:nomination_date).and_return(Date.new(2012, 12, 20))
+    end
 
-    subject.should_not allow_value(Date.yesterday).for(:expiration_date).
-                                                   with_message("deve ser em ou depois de #{I18n.l(Date.current)}")
-  end
+    context 'expiration_date' do
+      it 'should not allow expiration_date before nomination_date' do
+        subject.should_not allow_value(Date.new(2012, 11, 1)).for(:expiration_date).
+          with_message('deve ser em ou depois da data da nomeação (20/12/2012)')
+      end
 
-  it "should not have exoneration_date less than nomination_date" do
-    subject.nomination_date = Date.current
+      it 'should allow expiration_date equals to nomination_date' do
+        subject.should allow_value(Date.new(2012, 12, 20)).for(:expiration_date)
+      end
 
-    subject.should_not allow_value(Date.yesterday).for(:exoneration_date).
-                                                   with_message("deve ser em ou depois de #{I18n.l(Date.current)}")
+      it 'should allow expiration_date after nomination_date' do
+        subject.should allow_value(Date.new(2012, 12, 31)).for(:expiration_date)
+      end
+    end
+
+    context 'exoneration_date' do
+      it 'should not allow exoneration_date before nomination_date' do
+        subject.should_not allow_value(Date.new(2012, 11, 1)).for(:exoneration_date).
+          with_message('deve ser em ou depois da data da nomeação (20/12/2012)')
+      end
+
+      it 'should allow exoneration_date equals to nomination_date' do
+        subject.should allow_value(Date.new(2012, 12, 20)).for(:exoneration_date)
+      end
+
+      it 'should allow exoneration_date after nomination_date' do
+        subject.should allow_value(Date.new(2012, 12, 31)).for(:exoneration_date)
+      end
+    end
   end
 
   it "should delegate publication_date to regulatory_act with prefix" do
