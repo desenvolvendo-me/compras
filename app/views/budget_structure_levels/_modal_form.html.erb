@@ -3,11 +3,7 @@
 
 <script>
   function enabledDisabledBudgetStructureConfiguration(){
-    if ($('#filter_budget_structure_configuration_id').val() == ''){
-      var value = false;
-    }else{
-      var value = true;
-    }
+    var value = $('#filter_budget_structure_configuration_id').val() != '';
     $('#filter_budget_structure_configuration').attr('DISABLED', value); 
   }
 
