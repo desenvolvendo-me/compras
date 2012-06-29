@@ -261,12 +261,6 @@ Compras::Application.routes.draw do
 
   resources :debt_payment_resources, :only => %w(index)
 
-  resources :delayed_calculations do
-    collection do
-      get :filter
-    end
-  end
-
   resources :delivery_locations do
     collection do
       get :filter
