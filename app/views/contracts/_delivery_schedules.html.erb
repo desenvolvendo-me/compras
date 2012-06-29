@@ -4,9 +4,7 @@
 
 <div id="delivery_schedules">
   <%= f.association :delivery_schedules, :collection => localized(f.object.delivery_schedules) do |p| %>
-    <p>
-      <%= render 'delivery_schedules/form', :f => p %>
-    </p>
+    <%= render 'delivery_schedules/form', :f => p %>
   <% end %>
 </div>
 
