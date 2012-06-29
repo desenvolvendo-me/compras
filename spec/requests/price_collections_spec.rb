@@ -6,12 +6,12 @@ feature "PriceCollections" do
     sign_in
   end
 
-  scenario 'can not create a new price collection when no set the creditor email and login' do
+  scenario 'can not create a new price collection when no set the creditor email' do
     DeliveryLocation.make!(:education)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
     Material.make!(:antivirus)
-    Creditor.make!(:wenderson_sa)
+    Creditor.make!(:sobrinho_sa_without_email)
 
     navigate_through 'Compras e Licitações > Coletas de Preços'
 
@@ -57,9 +57,9 @@ feature "PriceCollections" do
       click_on 'Adicionar Fornecedor'
 
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho SA', :field => 'Nome'
         click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
+        click_record 'Gabriel Sobrinho SA'
       end
     end
 
@@ -129,7 +129,6 @@ feature "PriceCollections" do
       end
 
       page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
-      fill_in 'Login', :with => 'wenderson.sa'
     end
 
     click_button 'Salvar'
@@ -174,8 +173,6 @@ feature "PriceCollections" do
       page.should have_disabled_field 'Fornecedor'
       page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
       page.should have_disabled_field 'E-mail'
-      page.should have_field 'Login', :with => 'wenderson.sa'
-      page.should have_disabled_field 'Login'
     end
 
     click_link 'Propostas'
@@ -240,9 +237,7 @@ feature "PriceCollections" do
         click_record 'José Gomes'
       end
       page.should_not have_disabled_field 'Email'
-      page.should_not have_disabled_field 'Login'
       fill_in 'Email', :with => 'contato@sobrinho.com'
-      fill_in 'Login', :with => 'sobrinho.sa'
     end
 
     click_button 'Salvar'
@@ -285,7 +280,6 @@ feature "PriceCollections" do
       page.should_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       page.should have_field 'Fornecedor', :with => 'José Gomes'
       page.should have_field 'E-mail', :with => 'contato@sobrinho.com'
-      page.should have_field 'Login', :with => 'sobrinho.sa'
     end
   end
 
@@ -615,7 +609,7 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'disable login and email when the creditor has a related user' do
+  scenario 'disable email when the creditor has a related user' do
     Creditor.make!(:wenderson_sa_with_user)
 
     navigate_through 'Compras e Licitações > Coletas de Preços'
@@ -633,8 +627,6 @@ feature "PriceCollections" do
 
       page.should have_disabled_field 'Email'
       page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
-      page.should have_disabled_field 'Login'
-      page.should have_field 'Login', :with => 'wenderson.malheiros'
     end
   end
 
@@ -678,7 +670,6 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       page.should have_disabled_field 'Fornecedor'
       page.should have_disabled_field 'E-mail'
-      page.should have_disabled_field 'Login'
 
       page.should_not have_button 'Adicionar Fornecedor'
       page.should_not have_button 'Remover Fornecedor'

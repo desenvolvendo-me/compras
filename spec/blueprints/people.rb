@@ -10,7 +10,7 @@ Person.blueprint(:sobrinho) do
 end
 
 Person.blueprint(:sobrinho_without_email) do
-  name   { "Gabriel Sobrinho" }
+  name   { "Gabriel Sobrinho SA" }
   phone  { '(33) 3333-3333' }
   fax    { '(33) 3333-3334' }
   mobile { '(99) 9999-9999' }

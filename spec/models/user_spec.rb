@@ -31,6 +31,24 @@ describe User do
     subject.should be_password_required
   end
 
+  it 'requires login if the user is not an creditor' do
+    subject.stub(:creditor?).and_return false
+
+    subject.should validate_presence_of :login
+  end
+
+  it 'do not require login if the use is a creditor' do
+    subject.stub(:creditor?).and_return true
+
+    subject.should_not validate_presence_of :login
+  end
+
+  it 'require the login for persisted users' do
+    subject.stub(:persisted?).and_return true
+
+    subject.should validate_presence_of :login
+  end
+
   describe 'password required for creditor' do
     it 'should not require the password if the user is a creditor and no persisted' do
       subject.should_receive(:creditor?).and_return true

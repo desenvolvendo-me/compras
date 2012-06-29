@@ -39,7 +39,6 @@ end
 
 User.blueprint(:creditor_without_password) do
   email         { 'contato@sobrinhosa.com' }
-  login         { 'sobrinhosa' }
   administrator { false }
   authenticable { Creditor.make!(:sobrinho_sa) }
 end

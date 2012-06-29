@@ -3,20 +3,17 @@
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
   <%= f.input :status, :as => 'hidden' %>
 
-  <div class="yui3-u-1-3 creditor-modal">
-    <%= f.input :creditor, :input_html => { :class => 'creditor' }, :disabled => f.object.persisted? %>
+  <div class='yui3-g'>
+    <div class="yui3-u-1-3 creditor-modal">
+      <%= f.input :creditor, :input_html => { :class => 'creditor' }, :disabled => f.object.persisted? %>
+    </div>
+
+    <%= f.association :user_attributes, :collection => f.object.build_user do |u| %>
+      <div class="yui3-u-1-3">
+        <%= u.input :email, :disabled => f.object.persisted? %>
+      </div>
+    <% end %>
   </div>
-
-  <%= f.association :user_attributes, :collection => f.object.build_user do |u| %>
-    <div class="yui3-u-1-3">
-      <%= u.input :email, :disabled => f.object.persisted? %>
-    </div>
-
-    <div class="yui3-u-1-3">
-      <%= u.input :login, :disabled => f.object.persisted?, :input_html => { :class => 'login' } %>
-    </div>
-  <% end %>
-
   <% unless f.object.annulled? %>
     <p class="yui3-u">
       <input type="button" class="button negative remove-creditor" value="Remover Fornecedor">

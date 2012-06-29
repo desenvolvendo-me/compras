@@ -28,26 +28,19 @@
 
   $('form.price_collection').on('change', '.creditor', function (event, creditor) {
     if(creditor){
-      var inputs = $(this).closest('.creditor').find(':input');
-      $(inputs[1]).val(creditor.email);
-      $(inputs[2]).val(creditor.login);
+      var input = $(this).closest('.creditor').find('input.email');
+      $(input).val(creditor.email);
     }
   });
 
   $('#creditors-list').on('change', '.creditor-modal input[type=hidden]', function (event, creditor) {
     var mainDiv = $(this).closest('div.creditor_collection_proposal'),
-        emailInput = mainDiv.find('input.email'),
-        loginInput = mainDiv.find('input.login');
+        emailInput = mainDiv.find('input.email');
 
     emailInput.val(creditor.email || creditor.person_email);
-    loginInput.val(creditor.login);
 
     if(creditor.email){
       emailInput.attr('disabled', true);
-    }
-
-    if(creditor.login){
-      loginInput.attr('disabled', true);
     }
   });
 </script>

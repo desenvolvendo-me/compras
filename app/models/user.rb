@@ -12,9 +12,9 @@ class User < Compras::Model
   delegate :roles, :to => :profile, :allow_nil => true
   delegate :name, :to => :authenticable, :allow_nil => true
 
-  validates :login, :presence => true
+  validates :login, :presence => true, :unless => lambda { |u| !u.persisted? && u.creditor? }
   validates :authenticable, :presence => true, :unless => :administrator?
-  validates :profile, :presence => true, :if => lambda{ |u| !u.administrator? && !u.creditor? }
+  validates :profile, :presence => true, :if => lambda { |u| !u.administrator? && !u.creditor? }
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
 
   has_enumeration_for :authenticable_type, :with => AuthenticableType, :create_helpers => true, :create_scopes => true
@@ -34,6 +34,6 @@ class User < Compras::Model
   protected
 
   def email_required?
-    false
+    creditor?
   end
 end
