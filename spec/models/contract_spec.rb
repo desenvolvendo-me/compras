@@ -77,7 +77,7 @@ describe Contract do
       subject.end_date = Date.new(2012, 2, 1)
 
       subject.should be_invalid
-      subject.errors[:end_date].should eq ['deve ser depois de 10/02/2012']
+      subject.errors[:end_date].should eq ['deve ser depois da data de assinatura (10/02/2012)']
     end
 
     it 'be invalid when the signature_date is equal to end_date' do
@@ -85,7 +85,7 @@ describe Contract do
       subject.end_date = subject.signature_date
 
       subject.should be_invalid
-      subject.errors[:end_date].should eq ['deve ser depois de 10/02/2012']
+      subject.errors[:end_date].should eq ['deve ser depois da data de assinatura (10/02/2012)']
     end
 
     it 'be valid when the end_date is after of signature_date' do

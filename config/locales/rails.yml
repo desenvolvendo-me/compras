@@ -266,6 +266,7 @@ pt-BR:
       not_allow_licitation_process: "não permite processo licitatório"
       must_select_licitation_process_or_direct_purchase: "selecione um processo licitário ou uma compra direta, mas não ambos"
       end_date_should_be_after_start_date: "deve ser depois da data de início (%{restriction})"
+      end_date_should_be_after_signature_date: "deve ser depois da data de assinatura (%{restriction})"
 
   activerecord:
     errors:
