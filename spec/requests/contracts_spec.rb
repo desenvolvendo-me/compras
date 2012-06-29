@@ -36,6 +36,21 @@ feature "Contracts" do
     page.should have_field 'Modalidade', :with => 'Material ou serviços'
   end
 
+  scenario 'selecting a amendment contract, submeting with error, the main contract should still enabled' do
+    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
+
+    click_link 'Criar Contrato'
+
+    page.should have_disabled_field 'Contrato principal'
+    select 'Aditivo', :from => 'Tipo'
+    page.should_not have_disabled_field 'Contrato principal'
+
+    click_button 'Salvar'
+
+    page.should have_select 'Tipo', :selected => 'Aditivo'
+    page.should_not have_disabled_field 'Contrato principal'
+  end
+
   scenario 'create a new contract' do
     Entity.make!(:detran)
     LicitationProcess.make!(:processo_licitatorio)
