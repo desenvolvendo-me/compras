@@ -44,14 +44,6 @@ describe ContractTermination do
 
       subject.number.should eq 2
     end
-
-    it 'overrides the number' do
-      subject.number = 30
-
-      subject.run_callbacks(:create)
-
-      subject.number.should eq 2
-    end
   end
 
   context 'with annul' do

@@ -2,6 +2,8 @@ class ContractTermination < Compras::Model
   attr_accessible :expiry_date, :number, :reason, :termination_date, :year, :publication_date, :contract_id
   attr_accessible :dissemination_source_id, :fine_value, :compensation_value, :term_termination_file
 
+  attr_readonly :number
+
   mount_uploader :term_termination_file, DocumentUploader
 
   belongs_to :contract
