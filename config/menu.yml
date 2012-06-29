@@ -1,6 +1,7 @@
 menu:
   - purchasing_and_licitations:
     - general_entries:
+      - creditors
       - materials_groups
       - materials_classes
       - materials
@@ -49,6 +50,7 @@ menu:
           - regulatory_acts
 
       - contracts
+      - creditors
 
       - precatory:
         - precatories
@@ -93,9 +95,6 @@ menu:
         - pledge_cancellations
         - pledge_liquidations
         - pledge_liquidation_cancellations
-
-  - commom:
-    - creditors
 
   - others:
     - people

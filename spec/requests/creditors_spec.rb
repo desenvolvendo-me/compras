@@ -12,7 +12,7 @@ feature "Creditors" do
     Material.make!(:arame_farpado)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -110,7 +110,7 @@ feature "Creditors" do
   scenario 'viewing more data from the selected person' do
     Person.make!(:nohup)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -134,7 +134,7 @@ feature "Creditors" do
     Agency.make!(:itau)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -301,7 +301,7 @@ feature "Creditors" do
   scenario 'validate uniqueness of person' do
     Creditor.make!(:sobrinho)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -319,7 +319,7 @@ feature "Creditors" do
     Agency.make!(:itau)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -433,7 +433,7 @@ feature "Creditors" do
   scenario 'acessing a CRC for a creditor and returnig to creditor' do
     Creditor.make!(:mateus)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -468,7 +468,7 @@ feature "Creditors" do
   scenario 'create a CRC for a creditor' do
     Creditor.make!(:mateus)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -549,7 +549,7 @@ feature "Creditors" do
     Material.make!(:arame_farpado)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -667,7 +667,7 @@ feature "Creditors" do
     Agency.make!(:santander)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Nohup'
 
@@ -870,7 +870,7 @@ feature "Creditors" do
     Agency.make!(:santander)
     RegularizationOrAdministrativeSanctionReason.make!(:regularizacao)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Gabriel Sobrinho'
 
@@ -999,7 +999,7 @@ feature "Creditors" do
     Creditor.make!(:nohup)
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Nohup'
 
@@ -1021,7 +1021,7 @@ feature "Creditors" do
     Creditor.make!(:mateus)
     Person.make!(:sobrinho)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Mateus Lorandi'
 
@@ -1034,7 +1034,7 @@ feature "Creditors" do
   end
 
   scenario 'show only the tabs that are common to all personable of people when has not a people.' do
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -1053,7 +1053,7 @@ feature "Creditors" do
   scenario 'should only show only tabs for special people' do
     Person.make!(:mateus)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -1074,7 +1074,7 @@ feature "Creditors" do
   scenario 'should only show only tabs for individual people' do
     Person.make!(:sobrinho)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -1095,7 +1095,7 @@ feature "Creditors" do
   scenario 'should only show only tabs for company people' do
     Person.make!(:nohup)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
 
@@ -1115,7 +1115,7 @@ feature "Creditors" do
 
   scenario 'destroy an existent creditor' do
     Creditor.make!(:nohup)
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Nohup'
 
@@ -1130,7 +1130,7 @@ feature "Creditors" do
   scenario 'destroy a CRC for a creditor' do
     Creditor.make!(:mateus)
 
-    navigate_through 'Comum > Credores'
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Mateus Lorandi'
 
