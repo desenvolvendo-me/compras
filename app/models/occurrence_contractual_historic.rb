@@ -1,6 +1,8 @@
 class OccurrenceContractualHistoric < Compras::Model
   attr_accessible :observations, :occurrence_contractual_historic_change, :occurrence_contractual_historic_type
-  attr_accessible :contract_id, :occurrence_date, :sequence
+  attr_accessible :contract_id, :occurrence_date
+
+  attr_readonly :sequence
 
   has_enumeration_for :occurrence_contractual_historic_change
   has_enumeration_for :occurrence_contractual_historic_type

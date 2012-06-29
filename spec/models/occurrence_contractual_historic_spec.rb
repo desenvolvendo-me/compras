@@ -36,11 +36,5 @@ describe OccurrenceContractualHistoric do
       subject.run_callbacks(:create)
       subject.sequence.should eq 2
     end
-
-    it 'overrides the number' do
-      subject.sequence = 30
-      subject.run_callbacks(:create)
-      subject.sequence.should eq 2
-    end
   end
 end
