@@ -103,7 +103,7 @@
   </div>
 
   <div class='yui3-u-1-3'>
-    <%= f.input :modality, :disabled => true, :input_html => { :value => f.object.decorator.modality } %>
+    <%= f.input :modality_humanize, :disabled => true %>
   </div>
 </div>
 
@@ -132,7 +132,7 @@
 
     if (licitationProcess) {
       $('#contract_content').val(licitationProcess.administrative_process_description);
-      $('#contract_modality').val(licitationProcess.administrative_process_modality_humanize);
+      $('#contract_modality_humanize').val(licitationProcess.administrative_process_modality_humanize);
     }
   });
 
@@ -140,7 +140,7 @@
     $('#contract_licitation_process').attr('disabled', directPurchase !== undefined);
 
     if (directPurchase) {
-      $('#contract_modality').val(directPurchase.modality_humanize);
+      $('#contract_modality_humanize').val(directPurchase.modality_humanize);
     }
   });
 

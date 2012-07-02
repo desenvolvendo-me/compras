@@ -36,4 +36,4 @@ pt-BR:
         description: "Observações gerais"
         kind: "Tipo"
         contract_file: 'Contrato'
-        modality: 'Modalidade'
+        modality_humanize: 'Modalidade'

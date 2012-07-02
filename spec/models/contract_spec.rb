@@ -123,10 +123,10 @@ describe Contract do
     end
   end
 
-  describe '#modality' do
+  describe '#modality_humanize' do
     context 'given a licitation process' do
       let :licitation_process do
-        double('LicitationProcess', :administrative_process_modality => 'xpto')
+        double('LicitationProcess', :administrative_process_modality_humanize => 'xpto')
       end
 
       before do
@@ -134,13 +134,13 @@ describe Contract do
       end
 
       it 'should return the licitation process modality' do
-        subject.modality.should eq 'xpto'
+        subject.modality_humanize.should eq 'xpto'
       end
     end
 
     context 'given a direct purchase' do
       let :direct_purchase do
-        double('DirectPurchase', :modality => 'xxto')
+        double('DirectPurchase', :modality_humanize => 'xxto')
       end
 
       before do
@@ -148,7 +148,7 @@ describe Contract do
       end
 
       it 'should return the direct purchase modality' do
-        subject.modality.should eq 'xxto'
+        subject.modality_humanize.should eq 'xxto'
       end
     end
   end
