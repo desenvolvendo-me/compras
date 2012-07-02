@@ -26,22 +26,6 @@ describe LicitationProcessImpugnment do
     it { should_not allow_value("44:11").for(:new_envelope_opening_time) }
   end
 
-  context "validating impugnment_date" do
-    let(:licitation_process) { double('licitation_process', :id => 1, :process_date => Date.current) }
-
-    it 'should be equal or greater than process_date' do
-      subject.stub(:impugnment_date => Date.yesterday, :licitation_process => licitation_process)
-      subject.valid?
-      subject.errors[:impugnment_date].should include "deve ser maior ou igual a data do processo (#{I18n.l Date.current})"
-    end
-
-    it 'should be valid when is blank' do
-      subject.stub(:impugnment_date => '', :licitation_process => licitation_process)
-      subject.valid?
-      subject.errors[:impugnment_date].should_not include "não é uma data válida"
-    end
-  end
-
   describe "validating judgment_date" do
     it 'should be equal or greater than impugnment_date' do
       subject.stub(:judgment_date => Date.yesterday, :impugnment_date => Date.current)
@@ -53,6 +37,29 @@ describe LicitationProcessImpugnment do
       subject.stub(:judgment_date => '')
       subject.valid?
       subject.errors[:judgment_date].should_not include ["não é uma data válida", "não pode ser vazio"]
+    end
+  end
+
+  context 'validating impugnment_date' do
+    before(:each) do
+      subject.stub(:licitation_process).and_return(licitation_process)
+    end
+
+    let :licitation_process do
+      double('licitation_process', :process_date => Date.new(2012, 12, 13))
+    end
+
+    it 'be valid when impugnment_date is after process_date' do
+      subject.should allow_value(Date.new(2012, 12, 20)).for(:impugnment_date)
+    end
+
+    it 'be valid when impugnment_date is equals to process_date' do
+      subject.should allow_value(Date.new(2012, 12, 13)).for(:impugnment_date)
+    end
+
+    it 'be invalid when impugnment_date is before process_date' do
+      subject.should_not allow_value(Date.new(2012, 1, 1)).for(:impugnment_date).
+                                                           with_message('deve ser maior ou igual a data do processo (13/12/2012)')
     end
   end
 end
