@@ -1,10 +1,11 @@
 <div class="actions">
   <ul>
     <li>
-      <%= link_to 'Voltar ao processo licitatório', edit_licitation_process_path(parent) %>
+      <%= link_to 'Voltar ao processo licitatório', edit_licitation_process_path(@parent) %>
     </li>
+
     <li>
-      <%= create_link %>
+      <%= create_link(:licitation_process_id => @parent.id) %>
     </li>
   </ul>
 </div>

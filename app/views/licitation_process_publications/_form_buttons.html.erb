@@ -1,0 +1,5 @@
+<div class="buttons">
+  <%= f.button :submit %>
+  <%= f.button :cancel, :href => licitation_process_publications_path(:licitation_process_id => f.object.licitation_process_id) %>
+  <%= f.button :destroy if f.object.persisted? %>
+</div>

@@ -458,7 +458,6 @@ Compras::Application.routes.draw do
 
   resources :licitation_processes, :except => [ :destroy, :index, :new ] do
     resources :licitation_process_bidders
-    resources :licitation_process_publications
     resources :judgment_commission_advices
 
     collection do
@@ -468,6 +467,13 @@ Compras::Application.routes.draw do
   end
 
   resources :licitation_process_lots do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :licitation_process_publications do
     collection do
       get :filter
       get :modal
