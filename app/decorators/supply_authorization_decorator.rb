@@ -1,7 +1,7 @@
 # encoding: utf-8
 class SupplyAuthorizationDecorator < Decorator
   def date
-    helpers.l component.date
+    helpers.l super
   end
 
   def direct_purchase

@@ -24,6 +24,6 @@ class AdministrativeProcessBudgetAllocationDecorator < Decorator
   end
 
   def total_items_value
-    helpers.number_with_precision(component.total_items_value)
+    helpers.number_with_precision(super)
   end
 end

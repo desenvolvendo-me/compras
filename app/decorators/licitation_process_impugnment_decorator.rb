@@ -1,17 +1,17 @@
 class LicitationProcessImpugnmentDecorator < Decorator
   def licitation_process_envelope_delivery_date
-    helpers.l(component.licitation_process_envelope_delivery_date) if component.licitation_process_envelope_delivery_date
+    helpers.l super if super
   end
 
   def licitation_process_envelope_opening_date
-    helpers.l(component.licitation_process_envelope_opening_date) if component.licitation_process_envelope_opening_date
+    helpers.l super if super
   end
 
   def licitation_process_envelope_delivery_time
-    helpers.l(component.licitation_process_envelope_delivery_time, :format => :hour) if component.licitation_process_envelope_delivery_time
+    helpers.l(super, :format => :hour) if super
   end
 
   def licitation_process_envelope_opening_time
-    helpers.l(component.licitation_process_envelope_opening_time, :format => :hour) if component.licitation_process_envelope_opening_time
+    helpers.l(super, :format => :hour) if super
   end
 end

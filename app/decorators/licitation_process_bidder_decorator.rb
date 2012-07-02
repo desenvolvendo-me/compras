@@ -16,7 +16,7 @@ class LicitationProcessBidderDecorator < Decorator
   end
 
   def proposal_total_value_by_lot(lot_id)
-    helpers.number_with_precision component.proposal_total_value_by_lot(lot_id)
+    helpers.number_with_precision super
   end
 
   def proposal_total_value

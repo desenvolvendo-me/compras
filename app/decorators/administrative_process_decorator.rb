@@ -3,11 +3,11 @@ class AdministrativeProcessDecorator < Decorator
   attr_modal :year, :process, :protocol
 
   def value_estimated
-    helpers.number_to_currency(component.value_estimated)
+    helpers.number_to_currency(super)
   end
 
   def total_allocations_value
-    helpers.number_with_precision(component.total_allocations_value)
+    helpers.number_with_precision(super)
   end
 
   def build_licitation_process_link
