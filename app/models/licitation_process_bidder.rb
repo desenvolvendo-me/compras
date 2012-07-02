@@ -32,8 +32,22 @@ class LicitationProcessBidder < Compras::Model
   validate :validate_licitaton_process_envelope_opening_date
 
   with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :protocol_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create, :if => :invited }
-    allowing_blank.validates :receipt_date, :timeliness => { :on_or_after => :protocol_date, :type => :date, :on => :create, :if => :invited }
+    allowing_blank.validates :protocol_date,
+      :timeliness => {
+        :on_or_after => :today,
+        :on_or_after_message => :should_be_on_or_after_today,
+        :type => :date,
+        :on => :create,
+        :if => :invited
+      }
+    allowing_blank.validates :receipt_date,
+      :timeliness => {
+        :on_or_after => :protocol_date,
+        :on_or_after_message => :should_be_on_or_after_protocol_date,
+        :type => :date,
+        :on => :create,
+        :if => :invited
+      }
   end
 
   before_save :clear_invited_data, :set_default_values

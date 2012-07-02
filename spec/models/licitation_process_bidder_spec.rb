@@ -46,18 +46,43 @@ describe LicitationProcessBidder do
     end
   end
 
-  it "should not have protocol_date less than today" do
-    subject.invited = true
-    subject.should_not allow_value(Date.yesterday).
-      for(:protocol_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
+  context 'validate protocol_date related with today' do
+    before do
+      subject.invited = true
+    end
+
+    it { should allow_value(Date.current).for(:protocol_date) }
+
+    it { should allow_value(Date.tomorrow).for(:protocol_date) }
+
+    it 'should not allow date after today' do
+      subject.should_not allow_value(Date.yesterday).for(:protocol_date).
+        with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+    end
   end
 
-  it "should not have receipt_date less than protocol date" do
-    subject.invited = true
-    subject.protocol_date = Date.current + 5.days
+  context 'validate receipt_date related with protocol_date' do
+    let :protocol_date do
+      Date.current + 10.days
+    end
 
-    subject.should_not allow_value(Date.current + 4.days).
-      for(:receipt_date).with_message("deve ser em ou depois de #{I18n.l (Date.current + 5.days)}")
+    before do
+      subject.stub(:protocol_date).and_return(protocol_date)
+      subject.invited = true
+    end
+
+    it 'should allow receipt_date date after protocol_date' do
+      subject.should allow_value(Date.current + 15.days).for(:receipt_date)
+    end
+
+    it 'should allow receipt_date date equals to protocol_date' do
+      subject.should allow_value(protocol_date).for(:receipt_date)
+    end
+
+    it 'should not allow receipt_date date before protocol_date' do
+      subject.should_not allow_value(Date.current).for(:receipt_date).
+                                                    with_message("deve ser em ou depois da data do protocolo (#{I18n.l protocol_date})")
+    end
   end
 
   it "should validate presence of dates, protocol when it is not invite" do
