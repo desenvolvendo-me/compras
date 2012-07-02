@@ -98,4 +98,22 @@ describe User do
     subject.stub(:creditor?).and_return true
     subject.should_not validate_presence_of :profile
   end
+
+  describe '#administrator_or_creditor?' do
+    it 'should be true when is a administrator?' do
+      subject.stub(:administrator?).and_return true
+
+      subject.should be_administrator_or_creditor
+    end
+
+    it 'should be true when is a creditor?' do
+      subject.stub(:creditor?).and_return true
+
+      subject.should be_administrator_or_creditor
+    end
+
+    it 'should be false when is not an administrator neither a creditor' do
+      subject.should_not be_administrator_or_creditor
+    end
+  end
 end
