@@ -5,7 +5,6 @@ class DirectPurchase < Compras::Model
   attr_accessible :direct_purchase_budget_allocations_attributes, :period, :period_unit
 
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
-  has_enumeration_for :status, :with => DirectPurchaseStatus
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
   has_enumeration_for :period_unit, :with => PeriodUnit
 
@@ -31,7 +30,7 @@ class DirectPurchase < Compras::Model
            :to => :creditor, :allow_nil => true, :prefix => true
 
   validates :year, :mask => "9999", :allow_blank => true
-  validates :status, :year, :date, :legal_reference, :modality, :presence => true
+  validates :year, :date, :legal_reference, :modality, :presence => true
   validates :budget_structure, :licitation_object, :delivery_location, :presence => true
   validates :creditor, :employee, :payment_method, :pledge_type, :presence => true
   validates :period, :period_unit, :presence => true
@@ -67,27 +66,11 @@ class DirectPurchase < Compras::Model
     relation = relation.where{ year.eq(params[:year]) } unless params[:year].blank?
     relation = relation.where{ date.eq(params[:date].to_date) } if !params[:date].blank? && params[:date].date?
     relation = relation.where{ modality.eq(params[:modality]) } unless params[:modality].blank?
-    relation = relation.by_status(params[:by_status]) unless params[:by_status].blank?
-    relation
-  end
-
-  def self.by_status(status = '')
-    relation = scoped
-    if status == 'authorized'
-      relation = relation.joins(:supply_authorization)
-    elsif status == 'unauthorized'
-      relation = relation.joins { supply_authorization.outer }.where { supply_authorization.id.eq(nil) }
-    end
-
     relation
   end
 
   def authorized?
     supply_authorization.present?
-  end
-
-  def update_status!(new_status)
-    update_attribute :status, new_status
   end
 
   protected

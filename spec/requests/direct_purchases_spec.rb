@@ -388,44 +388,6 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'should filter by status when authorized' do
-    SupplyAuthorization.make!(:compra_2012)
-    year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
-    year_2011 = DirectPurchase.make!(:compra_2011)
-
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
-
-    click_link 'Filtrar Solitações de Compra Direta'
-
-    select 'Autorizado', :from => 'Status'
-
-    click_button 'Pesquisar'
-
-    within_records do
-      page.should_not have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      page.should have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
-    end
-  end
-
-  scenario 'should filter by status when not authorized' do
-    SupplyAuthorization.make!(:compra_2012)
-    year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
-    year_2011 = DirectPurchase.make!(:compra_2011)
-
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
-
-    click_link 'Filtrar Solitações de Compra Direta'
-
-    select 'Não autorizado', :from => 'Status'
-
-    click_button 'Pesquisar'
-
-    within_records do
-      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
-    end
-  end
-
   scenario 'calculate total value of items' do
     navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
 

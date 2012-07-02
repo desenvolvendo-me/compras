@@ -11,12 +11,6 @@ describe DirectPurchasesController do
     assigns(:direct_purchase).employee.should eq controller.current_user.authenticable
   end
 
-  it 'show unauthorized as default value for status' do
-    get :new
-
-    assigns(:direct_purchase).status.should eq DirectPurchaseStatus::UNAUTHORIZED
-  end
-
   it 'show today as default value for date' do
     get :new
 
@@ -27,14 +21,6 @@ describe DirectPurchasesController do
     get :new
 
     assigns(:direct_purchase).year.should eq Date.current.year
-  end
-
-  describe 'POST create' do
-    it 'should set unauthorized as status' do
-      post :create
-
-      assigns(:direct_purchase).status.should eq DirectPurchaseStatus::UNAUTHORIZED
-    end
   end
 
   context 'next direct purchase' do

@@ -11,9 +11,3 @@
 </div>
 
 <%= f.input :modality %>
-
-<div class="input select required">
-  <%= label_tag :filter_by_status, 'Status' %>
-  <%= select_tag 'filter_by_status', options_for_select([['Autorizado', 'authorized'], ['Não autorizado', 'unauthorized']], params[:by_status]), :include_blank => true, :disabled => (params[:locked_fields].try(:include?, 'by_status')), :name => 'filter[by_status]' %>
-  <%= hidden_field_tag 'filter[by_status]', params[:by_status] if params[:locked_fields].try(:include?, 'by_status') %>
-</div>

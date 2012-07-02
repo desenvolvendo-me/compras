@@ -1,6 +1,0 @@
-pt-BR:
-  enumerations:
-    direct_purchase_status:
-      authorized: "Autorizado"
-      unauthorized: "Não autorizado"
-      returned: "Devolvido para alteração"

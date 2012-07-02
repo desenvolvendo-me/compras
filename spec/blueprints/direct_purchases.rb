@@ -18,7 +18,6 @@ DirectPurchase.blueprint(:compra) do
   observation { "Observacoes" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
-  status { DirectPurchaseStatus::AUTHORIZED }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra)] }
 end
 
@@ -41,7 +40,6 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   observation { "Compra de 2012 ainda não autorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
-  status { DirectPurchaseStatus::UNAUTHORIZED }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_extra)] }
 end
 
@@ -64,7 +62,6 @@ DirectPurchase.blueprint(:compra_2011) do
   observation { "Compra feita em 2011 e não authorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
-  status { DirectPurchaseStatus::UNAUTHORIZED }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_engenharia)] }
 end
 
@@ -87,6 +84,5 @@ DirectPurchase.blueprint(:compra_2011_dez) do
   observation { "Compra feita em 2011 e não authorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
-  status { DirectPurchaseStatus::UNAUTHORIZED }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_engenharia)] }
 end
