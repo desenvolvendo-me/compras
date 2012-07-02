@@ -4,7 +4,7 @@
       <%= link_to 'Voltar ao processo licitatório', edit_licitation_process_path(params[:licitation_process_id]) %>
     </li>
     <li>
-      <%= create_link if parent.updatable? %>
+      <%= create_link(:licitation_process_id => @parent.id) if @parent.updatable? %>
     </li>
   </ul>
 </div>

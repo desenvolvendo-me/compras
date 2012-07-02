@@ -1,5 +1,5 @@
 <div class="buttons">
-  <%= f.button :submit if parent.updatable? %>
-  <%= f.button :cancel %>
-  <%= f.button :destroy if f.object.persisted? && parent.updatable? %>
+  <%= f.button :submit if f.object.licitation_process.updatable? %>
+  <%= f.button :cancel, :href => licitation_process_lots_path(:licitation_process_id => f.object.licitation_process_id) %>
+  <%= f.button :destroy if f.object.persisted? && f.object.licitation_process.updatable? %>
 </div>

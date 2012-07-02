@@ -1,6 +1,6 @@
 <div class="yui3-g modal-finder">
   <div class="yui3-u-1-2">
-    <%= f.association :administrative_process_budget_allocation_items, :disabled => !parent.updatable?, :as => :modal, :hidden_field => false, :input_html => { :value => nil, 'data-modal-url' => modal_administrative_process_budget_allocation_items_path(:administrative_process_id => f.object.administrative_process_id, :without_lot => true, :ids => "") } %>
+    <%= f.association :administrative_process_budget_allocation_items, :disabled => !f.object.licitation_process.updatable?, :as => :modal, :hidden_field => false, :input_html => { :value => nil, 'data-modal-url' => modal_administrative_process_budget_allocation_items_path(:administrative_process_id => f.object.administrative_process_id, :without_lot => true, :ids => "") } %>
   </div>
 </div>
 
