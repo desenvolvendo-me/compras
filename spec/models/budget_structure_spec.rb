@@ -47,6 +47,26 @@ describe BudgetStructure do
     it { should validate_presence_of :parent }
   end
 
+  context "when has a parent" do
+    let :parent do
+      double(:parent,
+             :level => 1
+            )
+    end
+
+    it 'should return 1 as parent_level' do
+      subject.stub(:parent).and_return( parent )
+      subject.parent_level.should be 1
+    end
+  end
+
+  context "when has not a parent" do
+    it 'should return 0 as parent_level' do
+      subject.stub(:parent).and_return( nil )
+      subject.parent_level.should be 0
+    end
+  end
+
   context 'validating duplicated responsibles' do
     it "duplicated budget_structure_responsibles should be invalid except the first" do
       responsible_one = subject.budget_structure_responsibles.build(:responsible_id => 1)

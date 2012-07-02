@@ -105,7 +105,7 @@
     }
   });
 
-  setModalUrlToBudgetStructureParent("<%= (f.object.level || 1) - 1 %>");
+  setModalUrlToBudgetStructureParent("<%= f.object.parent_level %>");
 
   var budgedt_structure_mask = "<%= f.object.parent_budget_structure(f.object.parent) %>";
 

@@ -53,6 +53,10 @@ class BudgetStructure < Compras::Model
 
   before_create :cannot_have_duplicated_code_in_same_configuration_and_level
 
+  def parent_level
+    parent ? parent.level : 0
+  end
+
   def to_s
     "#{budget_structure} - #{description}"
   end
