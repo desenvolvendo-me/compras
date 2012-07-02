@@ -280,8 +280,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :direct_purchase_liberations, :except => :destroy
-
   resources :districts do
     collection do
       get :modal

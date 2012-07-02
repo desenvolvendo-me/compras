@@ -2,8 +2,6 @@
   <% if f.object.new_record? %>
     <%= f.button :submit %>
   <% else %>
-    <%= link_to 'Avaliações', direct_purchase_liberations_path(:direct_purchase_id => resource.id), :class => 'button primary' %>
-
     <% if resource.authorized? %>
       <%= link_to "Imprimir autorização de fornecimento", supply_authorization_path(resource.supply_authorization), :class => 'clear button neutral' %>
     <% else %>

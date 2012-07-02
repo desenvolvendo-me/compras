@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
-require 'app/models/direct_purchase_liberation'
 require 'app/models/direct_purchase_budget_allocation'
 require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/supply_authorization'
@@ -26,7 +25,6 @@ describe DirectPurchase do
   it { should belong_to :payment_method }
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
-  it { should have_many(:direct_purchase_liberations).dependent(:destroy).order(:id) }
   it { should have_one(:supply_authorization).dependent(:restrict) }
 
   it 'should return 0 for total items value of all budget allocations when have no allocations' do
@@ -96,7 +94,6 @@ describe DirectPurchase do
       allocation_two.errors.messages[:budget_allocation_id].should be_nil
     end
 
-    it { should validate_presence_of :status }
     it { should validate_presence_of :year }
     it { should validate_presence_of :date }
     it { should validate_presence_of :legal_reference }
@@ -163,14 +160,6 @@ describe DirectPurchase do
       it 'should be 5' do
         subject.next_purchase.should eq 5
       end
-    end
-  end
-
-  describe '#update_status!' do
-    it 'update the status attribute with the given string' do
-      subject.should_receive(:update_attribute).with(:status, 'xpto')
-
-      subject.update_status!('xpto')
     end
   end
 end
