@@ -16,6 +16,8 @@ describe CreditorDocument do
   context 'validate emission_date' do
     it { should allow_value(Date.current).for(:emission_date) }
 
+    it { should allow_value(Date.yesterday).for(:emission_date) }
+
     it 'should not allow date after today' do
       subject.should_not allow_value(Date.tomorrow).for(:emission_date).
                                                     with_message("deve ser hoje ou antes de hoje (#{I18n.l(Date.current)})")
