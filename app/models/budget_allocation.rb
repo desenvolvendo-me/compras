@@ -35,10 +35,9 @@ class BudgetAllocation < Compras::Model
   delegate :expense_element_id, :to => :expense_nature, :allow_nil => true
   delegate :code, :to => :budget_structure, :prefix => true, :allow_nil => true
 
-  validates :descriptor, :budget_structure, :subfunction, :presence => true
-  validates :government_program, :government_action, :presence => true
-  validates :expense_nature, :capability, :description, :presence => true
-  validates :goal, :budget_allocation_type, :date, :presence => true
+  validates :descriptor, :budget_structure, :subfunction, :goal, :date,
+            :government_program, :government_action, :budget_allocation_type,
+            :expense_nature, :capability, :description, :presence => true
   validates :amount, :presence => true, :if => :divide?
   validates :description, :uniqueness => { :allow_blank => true }
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
