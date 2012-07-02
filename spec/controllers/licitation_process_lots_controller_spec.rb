@@ -62,7 +62,7 @@ describe LicitationProcessLotsController do
 
       put :update, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
-      response.should redirect_to(licitation_process_licitation_process_lots_path(licitation_process))
+      response.should redirect_to(licitation_process_lots_path(:licitation_process_id => licitation_process.id))
     end
   end
 
@@ -83,7 +83,7 @@ describe LicitationProcessLotsController do
 
       delete :destroy, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
-      response.should redirect_to(licitation_process_licitation_process_lots_path(licitation_process))
+      response.should redirect_to(licitation_process_lots_path(:licitation_process_id => licitation_process.id))
     end
   end
 end
