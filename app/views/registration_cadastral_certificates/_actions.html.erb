@@ -1,10 +1,11 @@
 <div class="actions">
   <ul>
     <li>
-      <%= link_to 'Voltar ao credor', edit_creditor_path(parent) %>
+      <%= link_to 'Voltar ao credor', edit_creditor_path(@parent) %>
     </li>
+
     <li>
-      <%= create_link %>
+      <%= create_link(:creditor_id => @parent.id) %>
     </li>
   </ul>
 </div>

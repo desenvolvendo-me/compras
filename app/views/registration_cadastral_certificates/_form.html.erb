@@ -1,11 +1,13 @@
 <div class="registration-cadastral-certificate">
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+  <%= f.input :creditor, :as => 'hidden' %>
 
   <div class="yui3-g">
     <div class="yui3-u-1-2">
       <%= f.input :fiscal_year %>
     </div>
+
     <div class="yui3-u-1-2">
       <%= f.input :number, :disabled => true, :input_html => { :value => f.object.decorator.number } %>
     </div>

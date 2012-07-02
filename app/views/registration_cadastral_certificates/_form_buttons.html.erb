@@ -1,0 +1,5 @@
+<div class="buttons">
+  <%= f.button :submit %>
+  <%= f.button :cancel, :href => registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) %>
+  <%= f.button :destroy if f.object.persisted? %>
+</div>

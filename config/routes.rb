@@ -3,8 +3,6 @@ Compras::Application.routes.draw do
   resources :contract_terminations, :except => [:show, :destroy]
 
   resources :creditors do
-    resources :registration_cadastral_certificates
-
     collection do
       get :filter
       get :modal
@@ -660,6 +658,13 @@ Compras::Application.routes.draw do
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 
   resources :reference_units do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
+
+  resources :registration_cadastral_certificates do
     collection do
       get :modal
       get :filter

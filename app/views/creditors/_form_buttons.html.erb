@@ -1,6 +1,6 @@
 <div class="buttons">
   <%= f.button :submit %>
-  <%= link_to('CRC', creditor_registration_cadastral_certificates_path(resource), :class => "button primary") if f.object.persisted? %>
+  <%= link_to('CRC', registration_cadastral_certificates_path(:creditor_id => resource.id), :class => "button primary") if f.object.persisted? %>
   <%= f.button :cancel %>
   <%= f.button :destroy if f.object.persisted? %>
 </div>
