@@ -13,7 +13,7 @@ describe CreditorDocument do
   it { should validate_presence_of :validity }
   it { should validate_presence_of :issuer }
 
-  context 'validate emission_date' do
+  context 'validate emission_date related with today' do
     it { should allow_value(Date.current).for(:emission_date) }
 
     it { should allow_value(Date.yesterday).for(:emission_date) }
@@ -24,7 +24,7 @@ describe CreditorDocument do
     end
   end
 
-  context 'validate emission_date' do
+  context 'validate validity related with emission_date' do
     let :emission_date do
       Date.current + 10.days
     end
