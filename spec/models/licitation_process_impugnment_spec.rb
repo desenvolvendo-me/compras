@@ -32,7 +32,7 @@ describe LicitationProcessImpugnment do
     it 'should be equal or greater than process_date' do
       subject.stub(:impugnment_date => Date.yesterday, :licitation_process => licitation_process)
       subject.valid?
-      subject.errors[:impugnment_date].should include "deve ser maior ou igual a data do processo"
+      subject.errors[:impugnment_date].should include "deve ser maior ou igual a data do processo (#{I18n.l Date.current})"
     end
 
     it 'should be valid when is blank' do

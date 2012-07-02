@@ -29,7 +29,7 @@ describe LicitationProcessAppeal do
       it 'should not be valid' do
         subject.stub(:appeal_date => Date.yesterday, :licitation_process => licitation_process)
         subject.should_not be_valid
-        subject.errors[:appeal_date].should include "deve ser maior ou igual a data do processo"
+        subject.errors[:appeal_date].should include "deve ser maior ou igual a data do processo (#{I18n.l Date.current})"
       end
     end
   end
