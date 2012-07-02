@@ -7,6 +7,16 @@ class LicitationProcessBidderDocument < Compras::Model
   delegate :description, :to => :document_type, :allow_nil => true
 
   validates :document_type, :presence => true
-  validates :emission_date, :timeliness => { :on_or_before => :today, :type => :date }, :allow_blank => true
-  validates :validity, :timeliness => { :on_or_after => :emission_date, :type => :date }, :allow_blank => true
+  validates :emission_date,
+    :timeliness => {
+      :on_or_before => :today,
+      :type => :date,
+      :on_or_before_message => :should_be_on_or_before_today
+    }, :allow_blank => true
+  validates :validity,
+    :timeliness => {
+      :type => :date,
+      :on_or_after => :emission_date,
+      :on_or_after_message => :validity_should_be_on_or_after_emission_date
+    }, :allow_blank => true
 end
