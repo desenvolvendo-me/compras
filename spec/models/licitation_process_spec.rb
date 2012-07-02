@@ -72,16 +72,22 @@ describe LicitationProcess do
     it { should_not allow_value("44:11").for(:envelope_opening_time) }
   end
 
-  it "should not have envelope_delivery_date less than today" do
-    subject.should_not allow_value(Date.yesterday).
-      for(:envelope_delivery_date).with_message("deve ser em ou depois de #{I18n.l Date.current}")
-  end
-
   it "should not have envelope_opening_date less than delivery date" do
     subject.envelope_delivery_date = Date.tomorrow
 
     subject.should_not allow_value(Date.current).
       for(:envelope_opening_date).with_message("deve ser em ou depois de #{I18n.l Date.tomorrow}")
+  end
+
+  context 'validate envelope_opening_date related with today' do
+    it { should allow_value(Date.current).for(:envelope_delivery_date) }
+
+    it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
+
+    it 'should not allow envelope_delivery_date before today' do
+      subject.should_not allow_value(Date.yesterday).for(:envelope_delivery_date).
+                                                    with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+    end
   end
 
   it { should allow_value('2012').for(:year) }

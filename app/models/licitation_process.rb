@@ -61,7 +61,13 @@ class LicitationProcess < Compras::Model
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
-    allowing_blank.validates :envelope_delivery_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+    allowing_blank.validates :envelope_delivery_date,
+      :timeliness => {
+        :on_or_after => :today,
+        :on_or_after_message => :should_be_on_or_after_today,
+        :type => :date,
+        :on => :create
+      }
     allowing_blank.validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
     allowing_blank.validates :envelope_delivery_time, :envelope_opening_time, :timeliness => { :type => :time }
     allowing_blank.validates :process_date, :timeliness => { :on_or_after => :administrative_process_date, :type => :date }
