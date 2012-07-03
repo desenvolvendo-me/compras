@@ -49,9 +49,7 @@ describe BudgetStructure do
 
   context "when has a parent" do
     let :parent do
-      double(:parent,
-             :level => 1
-            )
+      double(:parent, :level => 1)
     end
 
     it 'should return 1 as parent_level' do
