@@ -22,4 +22,15 @@ describe RegistrationCadastralCertificate do
 
     subject.to_s.should eq "1/2012"
   end
+
+  context 'validate registration_date related with today' do
+    it { should allow_value(Date.current).for(:registration_date) }
+
+    it { should allow_value(Date.yesterday).for(:registration_date) }
+
+    it 'should not allow date after today' do
+      subject.should_not allow_value(Date.tomorrow).for(:registration_date).
+                                                    with_message("deve ser hoje ou antes de hoje (#{I18n.l(Date.current)})")
+    end
+  end
 end
