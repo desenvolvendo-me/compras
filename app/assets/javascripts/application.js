@@ -1,5 +1,6 @@
 //= require bignumber
 //= require underscore
+//= require moment
 //= require jquery
 //= require jquery.ui
 //= require jquery.masked_input
