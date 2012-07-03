@@ -60,7 +60,13 @@ class Pledge < Compras::Model
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
-    allowing_blank.validates :emission_date, :timeliness => { :on_or_after => :today, :type => :date, :on => :create }
+    allowing_blank.validates :emission_date,
+      :timeliness => {
+        :on_or_after => :today,
+        :on_or_after_message => :should_be_on_or_after_today,
+        :type => :date,
+        :on => :create
+      }
   end
 
   before_create :set_code
