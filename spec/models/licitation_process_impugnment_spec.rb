@@ -5,6 +5,12 @@ require 'app/models/licitation_process'
 
 describe LicitationProcessImpugnment do
 
+  describe 'default values' do
+    it 'uses Situation::PENDING as default for situation' do
+      subject.situation.should eq Situation::PENDING
+    end
+  end
+
   it { should belong_to :licitation_process }
   it { should belong_to :person }
   it { should validate_presence_of :licitation_process }

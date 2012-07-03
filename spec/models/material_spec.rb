@@ -9,6 +9,21 @@ require 'app/models/price_collection_lot_item'
 require 'app/models/creditor_material'
 
 describe Material do
+
+  describe 'default values' do
+    it 'uses false as default for perishable' do
+      subject.perishable.should be false
+    end
+
+    it 'uses false as default for storable' do
+      subject.storable.should be false
+    end
+
+    it 'uses false as default for combustible' do
+      subject.combustible.should be false
+    end
+  end
+
   it 'should return code and description as to_s method' do
     subject.code = '01'
     subject.description = 'Manga'

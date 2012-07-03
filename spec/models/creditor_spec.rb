@@ -18,6 +18,21 @@ require 'app/models/licitation_process_bidder'
 require 'app/models/licitation_process'
 
 describe Creditor do
+
+  describe 'default values' do
+    it 'uses false as default for municipal_public_administration' do
+      subject.municipal_public_administration.should be false
+    end
+
+    it 'uses false as default for autonomous' do
+      subject.autonomous.should be false
+    end
+
+    it 'uses false as default for choose_simple' do
+      subject.choose_simple.should be false
+    end
+  end
+
   it { should belong_to :person }
   it { should belong_to :occupation_classification }
   it { should belong_to :company_size }

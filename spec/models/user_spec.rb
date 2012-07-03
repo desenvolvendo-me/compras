@@ -3,6 +3,13 @@ require 'app/models/user'
 require 'app/models/bookmark'
 
 describe User do
+
+  describe 'default values' do
+    it 'uses false as default for administrator' do
+      subject.administrator.should be false
+    end
+  end
+
   it "return login on to_s" do
     subject.stub(:login).and_return('gabriel.sobrinho')
     subject.to_s.should eq 'gabriel.sobrinho'

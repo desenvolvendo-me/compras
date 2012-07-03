@@ -4,6 +4,13 @@ require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe PurchaseSolicitationBudgetAllocation do
+
+  describe 'default values' do
+    it 'uses false as default for blocked' do
+      subject.blocked.should be false
+    end
+  end
+
   it { should validate_presence_of :budget_allocation }
   it { should belong_to :purchase_solicitation }
   it { should belong_to :budget_allocation }

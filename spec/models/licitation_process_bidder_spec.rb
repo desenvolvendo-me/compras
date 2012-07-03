@@ -9,6 +9,13 @@ require 'app/models/licitation_process_bidder'
 require 'app/models/accredited_representative'
 
 describe LicitationProcessBidder do
+
+  describe 'default values' do
+    it 'uses false as default for invited' do
+      subject.invited.should be false
+    end
+  end
+
   it { should belong_to :licitation_process }
   it { should belong_to :creditor }
 

@@ -10,6 +10,33 @@ require 'app/models/extra_credit_moviment_type'
 require 'app/models/administrative_process_budget_allocation'
 
 describe BudgetAllocation do
+
+  describe 'default values' do
+    it 'uses false as default for refinancing' do
+      subject.refinancing.should be false
+    end
+
+    it 'uses false as default for health' do
+      subject.health.should be false
+    end
+
+    it 'uses false as default for alienation_appeal' do
+      subject.alienation_appeal.should be false
+    end
+
+    it 'uses false as default for education' do
+      subject.education.should be false
+    end
+
+    it 'uses false as default for foresight' do
+      subject.foresight.should be false
+    end
+
+    it 'uses false as default for personal' do
+      subject.personal.should be false
+    end
+  end
+
   it 'should return "budget structure code - description" as to_s' do
     subject.description = 'Secretaria de educação'
     subject.stub(:budget_structure_code => '1')
