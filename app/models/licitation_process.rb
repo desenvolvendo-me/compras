@@ -68,9 +68,20 @@ class LicitationProcess < Compras::Model
         :type => :date,
         :on => :create
       }
-    allowing_blank.validates :envelope_opening_date, :timeliness => { :on_or_after => :envelope_delivery_date, :type => :date, :on => :create }
+    allowing_blank.validates :envelope_opening_date,
+      :timeliness => {
+        :on_or_after => :envelope_delivery_date,
+        :on_or_after_message => :should_be_on_or_after_envelope_delivery_date,
+        :type => :date,
+        :on => :create
+      }
     allowing_blank.validates :envelope_delivery_time, :envelope_opening_time, :timeliness => { :type => :time }
-    allowing_blank.validates :process_date, :timeliness => { :on_or_after => :administrative_process_date, :type => :date }
+    allowing_blank.validates :process_date,
+      :timeliness => {
+        :on_or_after => :administrative_process_date,
+        :on_or_after_message => :should_be_on_or_after_administrative_process_date,
+        :type => :date
+      }
   end
 
   before_save :set_modality

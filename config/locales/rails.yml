@@ -272,6 +272,8 @@ pt-BR:
       validity_should_be_on_or_after_emission_date: "deve ser em ou depois da data de emissão (%{restriction})"
       should_be_on_or_after_nomination_date: "deve ser em ou depois da data da nomeação (%{restriction})"
       should_be_on_or_after_protocol_date: "deve ser em ou depois da data do protocolo (%{restriction})"
+      should_be_on_or_after_envelope_delivery_date: "deve ser em ou depois da data da entrega dos envelopes (%{restriction})"
+      should_be_on_or_after_administrative_process_date: "deve ser em ou depois da data do processo administrativo (%{restriction})"
 
   activerecord:
     errors:

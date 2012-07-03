@@ -72,14 +72,7 @@ describe LicitationProcess do
     it { should_not allow_value("44:11").for(:envelope_opening_time) }
   end
 
-  it "should not have envelope_opening_date less than delivery date" do
-    subject.envelope_delivery_date = Date.tomorrow
-
-    subject.should_not allow_value(Date.current).
-      for(:envelope_opening_date).with_message("deve ser em ou depois de #{I18n.l Date.tomorrow}")
-  end
-
-  context 'validate envelope_opening_date related with today' do
+  context 'validate envelope_delivery_date related with today' do
     it { should allow_value(Date.current).for(:envelope_delivery_date) }
 
     it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
@@ -87,6 +80,52 @@ describe LicitationProcess do
     it 'should not allow envelope_delivery_date before today' do
       subject.should_not allow_value(Date.yesterday).for(:envelope_delivery_date).
                                                     with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+    end
+  end
+
+  context 'validate envelope_opening_date related with envelope_delivery_date' do
+    let :envelope_delivery_date do
+      Date.current + 10.days
+    end
+
+    before do
+      subject.stub(:envelope_delivery_date).and_return(envelope_delivery_date)
+    end
+
+    it 'should allow envelope_opening_date date after envelope_delivery_date' do
+      subject.should allow_value(Date.current + 15.days).for(:envelope_opening_date)
+    end
+
+    it 'should allow envelope_opening_date date equals to envelope_delivery_date' do
+      subject.should allow_value(envelope_delivery_date).for(:envelope_opening_date)
+    end
+
+    it 'should not allow envelope_opening_date date before envelope_delivery_date' do
+      subject.should_not allow_value(Date.current).for(:envelope_opening_date).
+                                                    with_message("deve ser em ou depois da data da entrega dos envelopes (#{I18n.l envelope_delivery_date})")
+    end
+  end
+
+  context 'validate process_date related with administrative_process_date' do
+    let :administrative_process_date do
+      Date.current + 10.days
+    end
+
+    before do
+      subject.stub(:administrative_process_date).and_return(administrative_process_date)
+    end
+
+    it 'should allow process_date after administrative_process_date' do
+      subject.should allow_value(Date.current + 15.days).for(:process_date)
+    end
+
+    it 'should allow process_date equals to administrative_process_date' do
+      subject.should allow_value(administrative_process_date).for(:process_date)
+    end
+
+    it 'should not allow process_date before administrative_process_date' do
+      subject.should_not allow_value(Date.current).for(:process_date).
+                                                   with_message("deve ser em ou depois da data do processo administrativo (#{I18n.l administrative_process_date})")
     end
   end
 
@@ -116,19 +155,6 @@ describe LicitationProcess do
         subject.next_licitation_number.should eq 5
       end
     end
-  end
-
-  it 'should not have process_date less than administrative_process_date' do
-    subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
-
-    subject.should_not allow_value(Date.new(2012, 4, 24)).for(:process_date).
-                                                          with_message("deve ser em ou depois de 25/04/2012")
-  end
-
-   it 'should have process_date equal or greater than administrative_process_date' do
-    subject.stub(:administrative_process_date).and_return(Date.new(2012, 4, 25))
-
-    subject.should allow_value(Date.new(2012, 4, 25)).for(:process_date)
   end
 
   it 'should tell if it allow invitation bidders' do
