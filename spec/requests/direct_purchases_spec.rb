@@ -118,7 +118,7 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'should have all fields disabled when edit an existent direct_purchase' do
+  scenario 'should edit an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
     navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
@@ -127,42 +127,70 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    page.should_not have_button 'Atualizar Solicitação de Compra Direta'
-
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Compra'
-      page.should have_disabled_field 'Ano'
-      page.should have_disabled_field 'Data da compra'
-      page.should have_disabled_field 'Referência legal'
-      page.should have_disabled_field 'Modalidade'
-      page.should have_disabled_field 'Tipo do empenho'
-      page.should have_disabled_field 'Fornecedor'
-      page.should have_disabled_field 'Estrutura orçamentaria'
-      page.should have_disabled_field 'Objeto da licitação'
-      page.should have_disabled_field 'Local de entrega'
-      page.should have_disabled_field 'Responsável'
-      page.should have_disabled_field 'Prazo'
-      page.should have_disabled_field 'Período'
-      page.should have_disabled_field 'Forma de pagamento'
-      page.should have_disabled_field 'Coleta de preços'
-      page.should have_disabled_field 'Registro de preços'
-      page.should have_disabled_field 'Observações gerais'
+      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+      within_modal 'Fornecedor' do
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        click_button 'Pesquisar'
+        click_record 'Wenderson Malheiros'
+      end
+      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo', :with => '1'
+      select 'ano/anos',  :from => 'Período'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Coleta de preços', :with => '99'
+      fill_in 'Registro de preços', :with => '88'
+      fill_in 'Observações gerais', :with => 'obs'
     end
 
     within_tab 'Dotações' do
-      page.should have_disabled_field 'Dotação orçamentaria'
+      fill_in 'Quantidade', :with => '2,00'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Solicitação de Compra Direta editada com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dados gerais' do
+      page.should have_field 'Compra', :with => '1'
+      page.should have_field 'Ano', :with => '2012'
+      page.should have_field 'Data da compra', :with => '19/03/2012'
+      page.should have_field 'Referência legal', :with => 'Referencia legal'
+      page.should have_select 'Modalidade', :selected => 'Material ou serviços'
+      page.should have_select 'Tipo do empenho', :selected => 'Global'
+      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      page.should have_field 'Objeto da licitação', :with => 'Ponte'
+      page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      page.should have_field 'Prazo', :with => '1'
+      page.should have_select 'Período', :selected => 'ano/anos'
+      page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
+      page.should have_field 'Coleta de preços', :with => '99'
+      page.should have_field 'Registro de preços', :with => '88'
+      page.should have_field 'Observações gerais', :with => 'obs'
+    end
+
+    within_tab 'Dotações' do
+      page.should have_disabled_field 'Valor total dos itens'
       page.should have_disabled_field 'Compl. do elemento'
       page.should have_disabled_field 'Saldo da dotação'
-      page.should have_disabled_field 'Material'
+      page.should have_disabled_field 'Item'
       page.should have_disabled_field 'Unidade'
-      page.should have_disabled_field 'Marca/Referência'
-      page.should have_disabled_field 'Quantidade'
-      page.should have_disabled_field 'Valor unitário'
-      page.should have_disabled_field 'Valor total'
-      page.should_not have_button 'Adicionar Dotação'
-      page.should_not have_button 'Remover Dotação'
-      page.should_not have_button 'Adicionar Item'
-      page.should_not have_button 'Remover Item'
+
+      page.should have_field 'Quantidade', :with => '2,00'
+      page.should have_field 'Valor total dos itens', :with => '400,00'
     end
   end
 

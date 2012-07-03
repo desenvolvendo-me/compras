@@ -1,12 +1,13 @@
 <div class="buttons">
-  <% if f.object.new_record? %>
-    <%= f.button :submit %>
-  <% else %>
+  <%= f.button :submit %>
+
+  <% if f.object.persisted? %>
     <% if resource.authorized? %>
       <%= link_to "Imprimir autorização de fornecimento", supply_authorization_path(resource.supply_authorization), :class => 'clear button neutral' %>
     <% else %>
       <%= f.button :submit, 'Gerar autorização de fornecimento', :id => 'print' %>
     <% end %>
   <% end %>
+
   <%= f.button :cancel %>
 </div>

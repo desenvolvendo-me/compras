@@ -13,6 +13,8 @@ class DirectPurchasesController < CrudController
   end
 
   def update
+    return super unless params[:commit] != 'Salvar'
+
     supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
     redirect_to supply_authorization
   end
@@ -24,5 +26,4 @@ class DirectPurchasesController < CrudController
 
     super
   end
-
 end

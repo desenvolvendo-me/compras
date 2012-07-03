@@ -14,12 +14,6 @@
 </div>
 
 <script>
-  <% if f.object.persisted? %>
-    $('form.direct_purchase :input:not([name=_method]):not([name=authenticity_token])').attr('disabled', true);
-    $('.button.negative').hide();
-    $('.button.affirmative').hide();
-  <% end %>
-
   $('form.direct_purchase').delegate('.budget-allocation', 'change', function (event, budget_allocation) {
     if (budget_allocation) {
       $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(budget_allocation.expense_nature);
