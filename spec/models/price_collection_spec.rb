@@ -37,14 +37,26 @@ describe PriceCollection do
     it { should_not allow_value('201').for(:year) }
     it { should_not allow_value('a201').for(:year) }
 
-    it 'should not have date less than today' do
-      subject.should_not allow_value(Date.yesterday).for(:date).
-                                                     with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+    context 'validate date related with today' do
+      it { should allow_value(Date.current).for(:date) }
+
+      it { should allow_value(Date.tomorrow).for(:date) }
+
+      it 'should not allow date before today' do
+        subject.should_not allow_value(Date.yesterday).for(:date).
+                                                      with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+      end
     end
 
-    it 'should not have expiration less than today' do
-      subject.should_not allow_value(Date.yesterday).for(:expiration).
-                                                     with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+    context 'validate expiration related with today' do
+      it { should allow_value(Date.current).for(:expiration) }
+
+      it { should allow_value(Date.tomorrow).for(:expiration) }
+
+      it 'should not allow expiration before today' do
+        subject.should_not allow_value(Date.yesterday).for(:expiration).
+          with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+      end
     end
   end
 
