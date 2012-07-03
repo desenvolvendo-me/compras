@@ -649,11 +649,11 @@ Compras::Application.routes.draw do
     collection do
       get :modal
     end
-
-    resources :price_collection_proposal_annuls, :path => '/annul', :except => [:index, :show, :destroy]
   end
 
   resources :price_collection_annuls, :except => [:index, :show, :destroy]
+
+  resources :price_collection_proposal_annuls, :except => [:index, :show, :destroy]
 
   resources :profiles do
     collection do

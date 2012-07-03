@@ -10,9 +10,9 @@ module PriceCollectionProposalsHelper
     return unless can? :modify, :price_collection_proposal_annuls
 
     if resource.active?
-      link_to "Anular", new_price_collection_proposal_price_collection_proposal_annul_path(resource), :class => 'button negative'
+      link_to "Anular", new_price_collection_proposal_annul_path(:price_collection_proposal_id => resource.id), :class => 'button negative'
     elsif resource.annulled?
-      link_to "Anulação", edit_price_collection_proposal_price_collection_proposal_annul_path(resource), :class => 'button negative'
+      link_to "Anulação", edit_price_collection_proposal_annul_path(resource.annul), :class => 'button negative'
     end
   end
 

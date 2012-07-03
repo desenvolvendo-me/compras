@@ -1,9 +1,9 @@
 class PriceCollectionProposalAnnulsController < CrudController
-  belongs_to :price_collection_proposal
   defaults :resource_class => ResourceAnnul
 
   def new
     object = build_resource
+    object.annullable = PriceCollectionProposal.find(params[:price_collection_proposal_id])
     object.employee = current_user.authenticable
     object.date = Date.current
 
@@ -11,16 +11,18 @@ class PriceCollectionProposalAnnulsController < CrudController
   end
 
   def create
-    create!{ edit_price_collection_proposal_path(parent) }
+    create!{ edit_price_collection_proposal_path(resource.annullable_id) }
   end
 
   protected
 
   def create_resource(object)
+    object.annullable = PriceCollectionProposal.find(params[:resource_annul][:annullable_id])
+
     object.transaction do
       return unless super
 
-      PriceCollectionProposalAnnulment.new(parent).change!
+      PriceCollectionProposalAnnulment.new(resource.annullable).change!
     end
   end
 
@@ -30,9 +32,5 @@ class PriceCollectionProposalAnnulsController < CrudController
 
   def method_for_association_build
     :build_annul
-  end
-
-  def method_for_find
-    :annul
   end
 end
