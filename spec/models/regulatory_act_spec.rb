@@ -54,7 +54,7 @@ describe RegulatoryAct do
 
     subject.should_not be_valid
 
-    subject.errors[:vigor_date].should include("deve ser em ou depois de #{I18n.l subject.creation_date}")
+    subject.errors[:vigor_date].should include("deve ser em ou depois da data de criação (#{I18n.l subject.creation_date})")
   end
 
   it "should not have publication_date less than creation_date" do
@@ -63,7 +63,7 @@ describe RegulatoryAct do
 
     subject.should_not be_valid
 
-    subject.errors[:publication_date].should include("deve ser em ou depois de #{I18n.l subject.creation_date}")
+    subject.errors[:publication_date].should include("deve ser em ou depois da data de criação (#{I18n.l subject.creation_date})")
   end
 
   it "should not have publication_date greater than vigor_date" do
@@ -72,7 +72,7 @@ describe RegulatoryAct do
 
     subject.should_not be_valid
 
-    subject.errors[:publication_date].should include("deve ser em ou antes de #{I18n.l subject.vigor_date}")
+    subject.errors[:publication_date].should include("deve ser em ou antes da data a vigorar (#{I18n.l subject.vigor_date})")
   end
 
   it "should not have budget_law_percent greater than 100" do

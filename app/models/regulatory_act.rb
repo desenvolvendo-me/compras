@@ -26,9 +26,24 @@ class RegulatoryAct < Compras::Model
     allowing_blank.validates :budget_law_percent, :numericality => { :less_than_or_equal_to => 100 }
     allowing_blank.validates :act_number, :content, :uniqueness => true
     allowing_blank.validates :act_number, :numericality => true
-    allowing_blank.validates :vigor_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
-    allowing_blank.validates :publication_date, :timeliness => { :on_or_after => :creation_date, :type => :date }
-    allowing_blank.validates :publication_date, :timeliness => { :on_or_before => :vigor_date, :type => :date }
+    allowing_blank.validates :vigor_date,
+      :timeliness => {
+        :on_or_after => :creation_date,
+        :on_or_after_message => :should_be_on_or_after_creation_date,
+        :type => :date
+      }
+    allowing_blank.validates :publication_date,
+      :timeliness => {
+        :on_or_after => :creation_date,
+        :on_or_after_message => :should_be_on_or_after_creation_date,
+        :type => :date
+       }
+    allowing_blank.validates :publication_date,
+      :timeliness => {
+        :on_or_before => :vigor_date,
+        :on_or_before_message => :should_be_on_or_before_vigor_date,
+        :type => :date
+      }
   end
 
   orderize :act_number
