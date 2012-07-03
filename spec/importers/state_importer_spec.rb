@@ -1,6 +1,5 @@
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/state_importer'
+require 'importer_helper'
+require 'app/importers/state_importer'
 
 describe StateImporter do
   let :null_storage do

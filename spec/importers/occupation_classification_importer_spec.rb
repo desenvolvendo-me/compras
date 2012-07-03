@@ -1,7 +1,6 @@
 # encoding: utf-8
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/occupation_classification_importer'
+require 'importer_helper'
+require 'app/importers/occupation_classification_importer'
 
 describe OccupationClassificationImporter do
   subject do

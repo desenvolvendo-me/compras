@@ -1,6 +1,5 @@
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/city_importer'
+require 'importer_helper'
+require 'app/importers/city_importer'
 
 describe CityImporter do
   subject do

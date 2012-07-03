@@ -1,7 +1,6 @@
 # encoding: utf-8
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/expense_element_importer'
+require 'importer_helper'
+require 'app/importers/expense_element_importer'
 require 'active_support/core_ext/object/try'
 
 describe ExpenseElementImporter do

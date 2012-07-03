@@ -1,7 +1,6 @@
 #encoding: utf-8
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/precatory_type_importer'
+require 'importer_helper'
+require 'app/importers/precatory_type_importer'
 require 'enumerate_it'
 require 'app/enumerations/precatory_type_status'
 

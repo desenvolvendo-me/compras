@@ -1,11 +1,10 @@
 # encoding: utf-8
-require 'unit_helper'
+require 'importer_helper'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/hash/except'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/object/try'
-require 'lib/importer'
-require 'lib/revenue_nature_importer'
+require 'app/importers/revenue_nature_importer'
 
 describe RevenueNatureImporter do
   subject do

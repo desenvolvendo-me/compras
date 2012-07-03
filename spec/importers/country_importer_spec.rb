@@ -1,6 +1,5 @@
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/country_importer'
+require 'importer_helper'
+require 'app/importers/country_importer'
 
 describe CountryImporter do
   let :null_storage do

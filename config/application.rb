@@ -21,8 +21,9 @@ module Compras
     config.autoload_paths += %W(
       #{config.root}/lib
       #{config.root}/app/business
-      #{config.root}/app/enumerations
       #{config.root}/app/decorators
+      #{config.root}/app/enumerations
+      #{config.root}/app/importers
       #{config.root}/app/reports
       #{config.root}/app/validators
     )

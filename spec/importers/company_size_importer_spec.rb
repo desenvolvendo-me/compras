@@ -1,6 +1,5 @@
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/company_size_importer'
+require 'importer_helper'
+require 'app/importers/company_size_importer'
 
 describe CompanySizeImporter do
   let :null_storage do

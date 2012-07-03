@@ -1,7 +1,6 @@
 # encoding: utf-8
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/legal_nature_importer'
+require 'importer_helper'
+require 'app/importers/legal_nature_importer'
 require 'active_support/core_ext/object/try'
 
 describe LegalNatureImporter do

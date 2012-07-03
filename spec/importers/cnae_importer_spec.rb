@@ -1,7 +1,6 @@
 # encoding: utf-8
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/cnae_importer'
+require 'importer_helper'
+require 'app/importers/cnae_importer'
 require 'active_support/core_ext/object/try'
 
 describe CnaeImporter do

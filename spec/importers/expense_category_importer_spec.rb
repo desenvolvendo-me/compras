@@ -1,10 +1,9 @@
 # encoding: utf-8
-require 'unit_helper'
-require 'lib/importer'
-require 'lib/expense_group_importer'
+require 'importer_helper'
+require 'app/importers/expense_category_importer'
 require 'active_support/core_ext/object/try'
 
-describe ExpenseGroupImporter do
+describe ExpenseCategoryImporter do
   subject do
     described_class.new(null_storage)
   end
@@ -19,9 +18,9 @@ describe ExpenseGroupImporter do
     storage
   end
 
-  it 'imports expense groups' do
-    null_storage.should_receive(:create!).with('code' => '0', 'description' => 'RESTOS A PAGAR')
-    null_storage.should_receive(:create!).with('code' => '4', 'description' => 'INVESTIMENTOS')
+  it 'imports expense categories' do
+    null_storage.should_receive(:create!).with('code' => '3', 'description' => 'DESPESA CORRENTE')
+    null_storage.should_receive(:create!).with('code' => '7', 'description' => 'RESERVA ORÇAMENTÁRIA DO RPPS')
     null_storage.should_receive(:create!).with('code' => '9', 'description' => 'RESERVA DE CONTINGÊNCIA')
 
     subject.import!
