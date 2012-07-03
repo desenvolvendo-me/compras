@@ -119,19 +119,13 @@ describe RegulatoryAct do
     end
   end
 
-  it "should not have budget_law_percent greater than 100" do
-    subject.budget_law_percent = 100.01
-
-    subject.should_not be_valid
-
-    subject.errors[:budget_law_percent].should include("deve ser menor ou igual a 100")
+  it 'should not allow budget_law_percent greater than 100' do
+    subject.should_not allow_value(101).for(:budget_law_percent).
+                                           with_message('deve ser menor ou igual a 100')
   end
 
-  it "should not have revenue_antecipation_percent greater than 100" do
-    subject.revenue_antecipation_percent = 100.01
-
-    subject.should_not be_valid
-
-    subject.errors[:revenue_antecipation_percent].should include("deve ser menor ou igual a 100")
+  it 'should not allow revenue_antecipation_percent greater than 100' do
+    subject.should_not allow_value(101).for(:revenue_antecipation_percent).
+                                           with_message('deve ser menor ou igual a 100')
   end
 end
