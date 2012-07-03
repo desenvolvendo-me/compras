@@ -719,7 +719,7 @@ feature "LicitationProcessBidders" do
   scenario 'create bidder linkd does not show when envelope opening date is not today' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    visit licitation_process_licitation_process_bidders_path(licitation_process)
+    visit licitation_process_bidders_path(:licitation_process_id => licitation_process.id)
 
     page.should_not have_link 'Criar Licitante'
   end

@@ -1,7 +1,7 @@
 class LicitationProcessBidder < Compras::Model
   attr_accessible :licitation_process_id, :creditor_id, :protocol, :protocol_date, :status
   attr_accessible :receipt_date, :invited, :documents_attributes, :proposals_attributes
-  attr_accessible :technical_score, :person_ids
+  attr_accessible :technical_score, :person_ids, :licitation_process_id
 
   has_enumeration_for :status, :with => LicitationProcessBidderStatus
 
@@ -20,7 +20,7 @@ class LicitationProcessBidder < Compras::Model
   delegate :licitation_process_lots, :to => :licitation_process
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
-  delegate :items, :to => :licitation_process, :allow_nil => true
+  delegate :items, :allow_bidders?, :to => :licitation_process, :allow_nil => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
   accepts_nested_attributes_for :proposals, :allow_destroy => true
@@ -111,7 +111,7 @@ class LicitationProcessBidder < Compras::Model
   def validate_licitaton_process_envelope_opening_date
     return if licitation_process.nil?
 
-    unless licitation_process.allow_bidders?
+    unless allow_bidders?
       errors.add(:licitation_process, :must_be_the_licitation_process_envelope_opening_date)
     end
   end
