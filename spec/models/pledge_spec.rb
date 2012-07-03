@@ -131,9 +131,15 @@ describe Pledge do
     subject.to_s.should eq '1 - Detran/2012'
   end
 
-  it "should not have emission_date less than today" do
-    subject.should_not allow_value(Date.yesterday).
-      for(:emission_date).with_message("deve ser hoje ou depois de hoje (#{I18n.l Date.current})")
+  context 'validate emission_date related with today' do
+    it { should allow_value(Date.current).for(:emission_date) }
+
+    it { should allow_value(Date.tomorrow).for(:emission_date) }
+
+    it 'should not allow emission_date before today' do
+      subject.should_not allow_value(Date.yesterday).for(:emission_date).
+                                                    with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
+    end
   end
 
   it "should sum the estimated total price of the items" do
