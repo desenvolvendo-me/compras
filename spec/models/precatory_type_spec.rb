@@ -15,6 +15,17 @@ describe PrecatoryType do
     subject.to_s.should eq 'Alimentares'
   end
 
+  context 'validate deactivation_date related with today' do
+    it { should allow_value(Date.current).for(:deactivation_date) }
+
+    it { should allow_value(Date.yesterday).for(:deactivation_date) }
+
+    it 'should not allow date after today' do
+      subject.should_not allow_value(Date.tomorrow).for(:deactivation_date).
+                                                    with_message("deve ser hoje ou antes de hoje (#{I18n.l(Date.current)})")
+    end
+  end
+
   context "with active status" do
     before do
       subject.status = PrecatoryTypeStatus::ACTIVE
@@ -40,16 +51,6 @@ describe PrecatoryType do
 
     it 'should validate presence of deactivation_date' do
       subject.should validate_presence_of :deactivation_date
-    end
-
-    it "should not deactivation_date be in the future" do
-      subject.should_not allow_value(Date.tomorrow).for(:deactivation_date)
-    end
-
-    it "should deactivation_date less or equal current date" do
-      subject.should allow_value(Date.current).for(:deactivation_date)
-
-      subject.should allow_value(Date.yesterday).for(:deactivation_date)
     end
   end
 end
