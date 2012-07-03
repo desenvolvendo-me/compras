@@ -9,13 +9,6 @@ describe PrecatoryType do
 
   it { should have_many(:precatories).dependent(:restrict) }
 
-  it "should validate presence of deactivation_date when status is inactive" do
-    subject.status = PrecatoryTypeStatus::INACTIVE
-
-    subject.should_not allow_value(nil).for(:deactivation_date).
-                                        with_message('não pode ficar em branco')
-  end
-
   it "should return id as to_s" do
     subject.description = 'Alimentares'
 
@@ -27,8 +20,8 @@ describe PrecatoryType do
       subject.status = PrecatoryTypeStatus::ACTIVE
     end
 
-    it "should not validate presence of deactivation_date when status is active" do
-      subject.should allow_value(nil).for(:deactivation_date)
+    it 'should not validate presence of deactivation_date' do
+      subject.should_not validate_presence_of :deactivation_date
     end
 
     it "should clean deactivation_date when status is active" do
@@ -43,6 +36,10 @@ describe PrecatoryType do
   context "with inactive status" do
     before do
       subject.status = PrecatoryTypeStatus::INACTIVE
+    end
+
+    it 'should validate presence of deactivation_date' do
+      subject.should validate_presence_of :deactivation_date
     end
 
     it "should not deactivation_date be in the future" do
