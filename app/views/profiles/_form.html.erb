@@ -7,12 +7,17 @@
       <th class="small"></th>
     </tr>
   </thead>
+
   <tbody>
     <%= f.association :roles do |r| %>
       <tr>
-        <td><%= r.object.controller_name %></td>
         <td>
+          <%= r.object.controller_name %>
+        </td>
+        <td>
+          <%= r.hidden_field :id %>
           <%= r.hidden_field :controller %>
+
           <%= r.select :permission, Permission.to_a %>
         </td>
       </tr>
