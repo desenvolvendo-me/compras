@@ -2,10 +2,6 @@
   <thead>
     <tr>
       <th>
-        Parcela
-      </th>
-      <th>
-        Vencimento
       </th>
       <th>
         Valor inicial
@@ -14,7 +10,7 @@
         Valor anulado
       </th>
       <th>
-        Liquidado
+        Valor liquidado
       </th>
       <th>
         Valor atual
@@ -22,52 +18,25 @@
     </tr>
   </thead>
 
-  <tfoot>
-    <tr>
-      <td>
-        Totais
-      </td>
-      <td>
-      </td>
-      <td id="pledge_value">
-        <%= f.object.decorator.pledge_value %>
-      </td>
-      <td id="pledge_cancellations_sum">
-        <%= f.object.decorator.pledge_cancellations_sum %>
-      </td>
-      <td id="pledge_liquidations_sum">
-        <%= f.object.decorator.pledge_liquidations_sum %>
-      </td>
-      <td id="pledge_balance">
-        <%= f.object.decorator.pledge_balance %>
-      </td>
-    </tr>
-  </tfoot>
-
   <tbody>
     <% if f.object.pledge %>
-      <% localized(f.object.pledge.pledge_parcels).each do |parcel| %>
-        <tr id="parcel_<%= parcel.number %>">
-          <td>
-            <%= parcel.number %>
-          </td>
-          <td>
-            <%= parcel.localized.expiration_date %>
-          </td>
-          <td class="value">
-            <%= parcel.decorator.value %>
-          </td>
-          <td class="canceled_value">
-            <%= parcel.decorator.canceled_value %>
-          </td>
-          <td class="liquidations_value">
-            <%= parcel.decorator.liquidations_value %>
-          </td>
-          <td class="balance">
-            <%= parcel.decorator.balance_as_currency %>
-          </td>
-        </tr>
-      <% end %>
+      <tr class='pledge_totals'>
+        <td>
+          Totais
+        </td>
+        <td id="pledge_value">
+          <%= f.object.decorator.pledge_value %>
+        </td>
+        <td id="pledge_cancellations_sum">
+          <%= f.object.decorator.pledge_cancellations_sum %>
+        </td>
+        <td id="pledge_liquidations_sum">
+          <%= f.object.decorator.pledge_liquidations_sum %>
+        </td>
+        <td id="pledge_balance">
+          <%= f.object.decorator.pledge_balance %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>

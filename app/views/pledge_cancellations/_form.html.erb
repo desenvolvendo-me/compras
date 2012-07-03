@@ -29,23 +29,19 @@
 <%= f.input :reason %>
 
 <%= mustache 'pledge-parcels-template' do %>
-  <tr id="parcel_{{number}}">
+  <tr class="pledge_totals">
     <td>
-      {{number}}
     </td>
-    <td>
-      {{expiration_date}}
-    </td>
-    <td class="value">
+    <td id="pledge_value">
       {{value}}
     </td>
-    <td class="canceled_value">
+    <td id="pledge_cancellations_sum">
       {{canceled_value}}
     </td>
-    <td class="liquidations_value">
+    <td id="pledge_liquidations_sum">
       {{liquidations_value}}
     </td>
-    <td class="balance">
+    <td id="pledge_balance">
       {{balance}}
     </td>
   </tr>
