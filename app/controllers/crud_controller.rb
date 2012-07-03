@@ -22,6 +22,10 @@ class CrudController < ApplicationController
   def destroy
     destroy! do |success, failure|
       failure.html do
+        # FIXME: I'm not sure about why flash is lost here but
+        # if we don't keep, the failure message is not shown.
+        flash.keep
+
         redirect_to edit_resource_path
       end
     end
