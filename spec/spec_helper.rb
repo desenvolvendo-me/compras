@@ -30,4 +30,14 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
+
+  # If true, take screenshots when an exceptions happens in request spec
+  # Follow the available configurations with default values
+  #
+  # config.screenshot_folder = 'tmp/errors'
+  # config.screenshot_on_errors = false
+  # config.screenshot_full = true
+  # config.clear_screenshots_before_run =  true
+  # config.screenshot_on_errors = false
+  config.screenshot_on_errors = false
 end
