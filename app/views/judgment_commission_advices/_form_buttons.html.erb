@@ -1,0 +1,6 @@
+<div class="buttons">
+  <%= f.button :submit %>
+  <%= f.button :cancel, :href => edit_licitation_process_path(resource.licitation_process) %>
+  <%= f.button :destroy if f.object.persisted? %>
+</div>
+
