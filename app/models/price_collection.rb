@@ -32,7 +32,12 @@ class PriceCollection < Compras::Model
   validates :period, :period_unit, :proposal_validity, :proposal_validity_unit, :presence => true
   validates :type_of_calculation, :presence => true
   validates :year, :mask => "9999"
-  validates :date, :expiration, :timeliness => { :on_or_after => :today, :type => :date }, :on => :create
+  validates :date, :expiration,
+    :timeliness => {
+      :on_or_after => :today,
+      :on_or_after_message => :should_be_on_or_after_today,
+      :type => :date
+    }, :on => :create
 
   after_save :generate_proposal_items
 

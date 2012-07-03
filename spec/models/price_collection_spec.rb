@@ -39,12 +39,12 @@ describe PriceCollection do
 
     it 'should not have date less than today' do
       subject.should_not allow_value(Date.yesterday).for(:date).
-                                                     with_message("deve ser em ou depois de #{I18n.l Date.current}")
+                                                     with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
     end
 
     it 'should not have expiration less than today' do
       subject.should_not allow_value(Date.yesterday).for(:expiration).
-                                                     with_message("deve ser em ou depois de #{I18n.l Date.current}")
+                                                     with_message("deve ser hoje ou depois de hoje (#{I18n.l(Date.current)})")
     end
   end
 
