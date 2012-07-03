@@ -17,7 +17,7 @@ module CrudHelper
     if resource.decorator?
       attributes = resource.decorator.modal_attributes
     else
-      attributes = resource_class.modal_attributes
+      attributes = resource_class.accessible_attributes.to_set
     end
     attributes &= params[:attributes].split(',') if params[:attributes]
 
