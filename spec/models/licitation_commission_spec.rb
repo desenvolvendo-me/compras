@@ -34,7 +34,7 @@ describe LicitationCommission do
     context 'expiration_date' do
       it 'should not allow expiration_date before nomination_date' do
         subject.should_not allow_value(Date.new(2012, 11, 1)).for(:expiration_date).
-          with_message('deve ser em ou depois da data da nomeação (20/12/2012)')
+                                                              with_message('deve ser igual ou posterior a data da nomeação (20/12/2012)')
       end
 
       it 'should allow expiration_date equals to nomination_date' do
@@ -49,7 +49,7 @@ describe LicitationCommission do
     context 'exoneration_date' do
       it 'should not allow exoneration_date before nomination_date' do
         subject.should_not allow_value(Date.new(2012, 11, 1)).for(:exoneration_date).
-          with_message('deve ser em ou depois da data da nomeação (20/12/2012)')
+                                                              with_message('deve ser igual ou posterior a data da nomeação (20/12/2012)')
       end
 
       it 'should allow exoneration_date equals to nomination_date' do

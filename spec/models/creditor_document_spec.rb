@@ -43,7 +43,7 @@ describe CreditorDocument do
 
     it 'should not allow validity date before emission_date' do
       subject.should_not allow_value(Date.current).for(:validity).
-                                                    with_message("deve ser em ou depois da data de emissão (#{I18n.l emission_date})")
+                                                    with_message("deve ser igual ou posterior a data de emissão (#{I18n.l emission_date})")
     end
   end
 end

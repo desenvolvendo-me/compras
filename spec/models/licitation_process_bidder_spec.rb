@@ -81,7 +81,7 @@ describe LicitationProcessBidder do
 
     it 'should not allow receipt_date date before protocol_date' do
       subject.should_not allow_value(Date.current).for(:receipt_date).
-                                                    with_message("deve ser em ou depois da data do protocolo (#{I18n.l protocol_date})")
+                                                    with_message("deve ser igual ou posterior a data do protocolo (#{I18n.l protocol_date})")
     end
   end
 

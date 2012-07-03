@@ -269,12 +269,12 @@ pt-BR:
       end_date_should_be_after_signature_date: "deve ser depois da data de assinatura (%{restriction})"
       should_be_on_or_before_today: "deve ser hoje ou antes de hoje (%{restriction})"
       should_be_on_or_after_today: "deve ser hoje ou depois de hoje (%{restriction})"
-      validity_should_be_on_or_after_emission_date: "deve ser em ou depois da data de emissão (%{restriction})"
-      should_be_on_or_after_nomination_date: "deve ser em ou depois da data da nomeação (%{restriction})"
-      should_be_on_or_after_protocol_date: "deve ser em ou depois da data do protocolo (%{restriction})"
-      should_be_on_or_after_envelope_delivery_date: "deve ser em ou depois da data da entrega dos envelopes (%{restriction})"
-      should_be_on_or_after_administrative_process_date: "deve ser em ou depois da data do processo administrativo (%{restriction})"
-      should_be_on_or_after_creation_date: "deve ser em ou depois da data de criação (%{restriction})"
+      validity_should_be_on_or_after_emission_date: "deve ser igual ou posterior a data de emissão (%{restriction})"
+      should_be_on_or_after_nomination_date: "deve ser igual ou posterior a data da nomeação (%{restriction})"
+      should_be_on_or_after_protocol_date: "deve ser igual ou posterior a data do protocolo (%{restriction})"
+      should_be_on_or_after_envelope_delivery_date: "deve ser igual ou posterior a data da entrega dos envelopes (%{restriction})"
+      should_be_on_or_after_administrative_process_date: "deve ser igual ou posterior a data do processo administrativo (%{restriction})"
+      should_be_on_or_after_creation_date: "deve ser igual ou posterior a data de criação (%{restriction})"
       should_be_on_or_before_vigor_date: "deve ser em ou antes da data a vigorar (%{restriction})"
 
   activerecord:

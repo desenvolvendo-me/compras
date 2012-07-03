@@ -67,7 +67,7 @@ describe RegulatoryAct do
 
     it 'should not allow vigor_date date before creation_date' do
       subject.should_not allow_value(Date.current).for(:vigor_date).
-                                                   with_message("deve ser em ou depois da data de criação (#{I18n.l creation_date})")
+                                                   with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
     end
   end
 
@@ -91,7 +91,7 @@ describe RegulatoryAct do
 
     it 'should not allow publication_date date before creation_date' do
       subject.should_not allow_value(Date.current).for(:publication_date).
-                                                   with_message("deve ser em ou depois da data de criação (#{I18n.l creation_date})")
+                                                   with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
     end
   end
 

@@ -102,7 +102,7 @@ describe LicitationProcess do
 
     it 'should not allow envelope_opening_date date before envelope_delivery_date' do
       subject.should_not allow_value(Date.current).for(:envelope_opening_date).
-                                                    with_message("deve ser em ou depois da data da entrega dos envelopes (#{I18n.l envelope_delivery_date})")
+                                                    with_message("deve ser igual ou posterior a data da entrega dos envelopes (#{I18n.l envelope_delivery_date})")
     end
   end
 
@@ -125,7 +125,7 @@ describe LicitationProcess do
 
     it 'should not allow process_date before administrative_process_date' do
       subject.should_not allow_value(Date.current).for(:process_date).
-                                                   with_message("deve ser em ou depois da data do processo administrativo (#{I18n.l administrative_process_date})")
+                                                   with_message("deve ser igual ou posterior a data do processo administrativo (#{I18n.l administrative_process_date})")
     end
   end
 
