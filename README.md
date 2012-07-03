@@ -69,8 +69,8 @@ Nesse exemplo geral mostra o padrão para a ordem das definições e espaçament
 
 ```ruby
 class Person < ActiveRecord::Base
-  attr_accessible :name, :birthdate, :address_attributes, :parent, :chindren, :grandpa
-  attr_accessible :cousin, :grandson, :nephew, :work_id
+  attr_accessible :name, :birthdate, :address_attributes, :parent, :children,
+                  :grandpa, :cousin, :grandson, :nephew, :work_id
 
   attr_readonly :document
 
@@ -98,7 +98,8 @@ class Person < ActiveRecord::Base
 
   delegate :company_name, :to => :work
 
-  validates :name, :presence => true
+  validates :name, :birthdate, :parent, :children, :cousin, :grandson,
+            :nephew, :work, :presence => true
 
   before_save :mount_name
 
