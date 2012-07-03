@@ -48,31 +48,75 @@ describe RegulatoryAct do
     subject.authorized_debt_value.should eq 0.0
   end
 
-  it "should not have vigor_date less than creation_date" do
-    subject.creation_date = Date.current
-    subject.vigor_date = subject.creation_date - 1.day
+  context 'validate vigor_date related with creation_date' do
+    let :creation_date do
+      Date.current + 10.days
+    end
 
-    subject.should_not be_valid
+    before do
+      subject.stub(:creation_date).and_return(creation_date)
+    end
 
-    subject.errors[:vigor_date].should include("deve ser em ou depois da data de criação (#{I18n.l subject.creation_date})")
+    it 'should allow vigor_date date after creation_date' do
+      subject.should allow_value(Date.current + 15.days).for(:vigor_date)
+    end
+
+    it 'should allow vigor_date date equals to creation_date' do
+      subject.should allow_value(creation_date).for(:vigor_date)
+    end
+
+    it 'should not allow vigor_date date before creation_date' do
+      subject.should_not allow_value(Date.current).for(:vigor_date).
+                                                   with_message("deve ser em ou depois da data de criação (#{I18n.l creation_date})")
+    end
   end
 
-  it "should not have publication_date less than creation_date" do
-    subject.creation_date = Date.current
-    subject.publication_date = subject.creation_date - 1.day
+  context 'validate publication_date related with creation_date' do
+    let :creation_date do
+      Date.current + 10.days
+    end
 
-    subject.should_not be_valid
+    before do
+      subject.stub(:vigor_date).and_return(creation_date + 20.days)
+      subject.stub(:creation_date).and_return(creation_date)
+    end
 
-    subject.errors[:publication_date].should include("deve ser em ou depois da data de criação (#{I18n.l subject.creation_date})")
+    it 'should allow publication_date date after creation_date' do
+      subject.should allow_value(Date.current + 15.days).for(:publication_date)
+    end
+
+    it 'should allow publication_date date equals to creation_date' do
+      subject.should allow_value(creation_date).for(:publication_date)
+    end
+
+    it 'should not allow publication_date date before creation_date' do
+      subject.should_not allow_value(Date.current).for(:publication_date).
+                                                   with_message("deve ser em ou depois da data de criação (#{I18n.l creation_date})")
+    end
   end
 
-  it "should not have publication_date greater than vigor_date" do
-    subject.vigor_date = Date.current
-    subject.publication_date = subject.vigor_date + 1.day
+  context 'validate publication_date related with vigor_date' do
+    let :vigor_date do
+      Date.current + 10.days
+    end
 
-    subject.should_not be_valid
+    before do
+      subject.stub(:creation_date).and_return(Date.current)
+      subject.stub(:vigor_date).and_return(vigor_date)
+    end
 
-    subject.errors[:publication_date].should include("deve ser em ou antes da data a vigorar (#{I18n.l subject.vigor_date})")
+    it 'should allow publication_date before vigor_date' do
+      subject.should allow_value(vigor_date - 5.days).for(:publication_date)
+    end
+
+    it 'should allow publication_date equals to vigor_date' do
+      subject.should allow_value(vigor_date).for(:publication_date)
+    end
+
+    it 'should not allow publication_date after vigor_date' do
+      subject.should_not allow_value(vigor_date + 5.days).for(:publication_date).
+                                                          with_message("deve ser em ou antes da data a vigorar (#{I18n.l vigor_date})")
+    end
   end
 
   it "should not have budget_law_percent greater than 100" do
