@@ -1,13 +1,3 @@
-Date.parseUS = function (date) {
-  var parts = date.split("-");
-  return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-};
-
-Date.parseBR = function (date) {
-  var parts = date.split("/");
-  return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
-};
-
 Date.diffDatesInMonths = function(firstDate, secondDate) {
   var month = 1000*60*60*24*30;
   return Math.ceil(((firstDate.getTime() - secondDate.getTime()) / month) - 1);
