@@ -93,6 +93,14 @@ module ApplicationHelper
     end
   end
 
+  def cancel_link
+    link_to 'cancelar', 'javascript:history.back()'
+  end
+
+  def print_link
+    link_to 'imprimir', 'javascript:window.print()'
+  end
+
   def message_about_environment?
     Rails.env.test? || Rails.env.development? || Rails.env.staging?
   end
