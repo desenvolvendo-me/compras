@@ -1,10 +1,36 @@
 class JudgmentCommissionAdvicesController < CrudController
-  belongs_to :licitation_process
+
+  def index
+    @parent = LicitationProcess.find(params[:licitation_process_id])
+
+    super
+  end
 
   def new
     object = build_resource
+    object.licitation_process = LicitationProcess.find(params[:licitation_process_id])
     object.year = Date.current.year
 
     super
+  end
+
+  def create
+    create!{ judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
+  end
+
+  def update
+    update!{ judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
+  end
+
+  def destroy
+    destroy! do |success, failure|
+      failure.html do
+        redirect_to edit_resource_path
+      end
+
+      success.html do
+        redirect_to judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id)
+      end
+    end
   end
 end
