@@ -15,11 +15,11 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Rescisões'
 
-    click_link '2012/1'
+    click_link '1/2012'
 
     click_link 'Anular'
 
-    page.should have_content "Anulação da Rescisão do Contrato 2012/1"
+    page.should have_content "Anulação da Rescisão do Contrato 1/2012"
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '28/06/2012'
@@ -31,7 +31,7 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Anulação'
 
-    page.should have_content "Anulação da Rescisão do Contrato 2012/1"
+    page.should have_content "Anulação da Rescisão do Contrato 1/2012"
 
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
     page.should have_field 'Data', :with => '28/06/2012'
@@ -47,11 +47,11 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Rescisões'
 
-    click_link '2012/1'
+    click_link '1/2012'
 
     click_link 'Anulação'
 
-    page.should have_content "Anulação da Rescisão do Contrato 2012/1"
+    page.should have_content "Anulação da Rescisão do Contrato 1/2012"
 
     page.should have_disabled_field 'Responsável'
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -75,12 +75,12 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Rescisões'
 
-    click_link '2012/1'
+    click_link '1/2012'
 
     click_link 'Anulação'
 
     click_link 'Cancelar'
 
-    page.should have_content 'Editar rescisão 2012/1 do Contrato 001'
+    page.should have_content 'Editar rescisão 1/2012 do Contrato 001'
   end
 end

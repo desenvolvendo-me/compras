@@ -20,7 +20,7 @@ class ContractTermination < Compras::Model
   orderize :year, :number
 
   def to_s
-    "#{year}/#{number}"
+    "#{number}/#{year}"
   end
 
   def next_number

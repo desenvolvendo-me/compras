@@ -23,6 +23,13 @@ describe ContractTermination do
   it { should_not allow_value('12').for(:year) }
   it { should allow_value('1234').for(:year) }
 
+  it 'should contact the number an the year to generate the to_s' do
+    subject.stub(:number).and_return 1
+    subject.stub(:year).and_return 2012
+
+    subject.to_s.should eq '1/2012'
+  end
+
   describe '#next_number' do
     before do
       described_class.stub(:last_number).and_return 1

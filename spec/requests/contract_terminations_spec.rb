@@ -42,9 +42,9 @@ feature 'ContractTerminations' do
 
     page.should have_content 'Rescisão Contratual criado com sucesso.'
 
-    click_link "#{Date.current.year}/1"
+    click_link "1/#{Date.current.year}"
 
-    page.should have_content "Editar rescisão #{Date.current.year}/1 do Contrato 001"
+    page.should have_content "Editar rescisão 1/#{Date.current.year} do Contrato 001"
 
     page.should have_link 'Anular'
 
@@ -79,7 +79,7 @@ feature 'ContractTerminations' do
 
     click_link 'Rescisões'
 
-    click_link '2012/1'
+    click_link '1/2012'
 
     fill_in 'Motivo da rescisão', :with => 'Motivo vai aqui'
 
@@ -87,7 +87,7 @@ feature 'ContractTerminations' do
 
     page.should have_content 'Rescisão Contratual editado com sucesso.'
 
-    click_link '2012/1'
+    click_link '1/2012'
 
     page.should have_field 'Motivo da rescisão', :with => 'Motivo vai aqui'
   end
@@ -101,7 +101,7 @@ feature 'ContractTerminations' do
 
     click_link 'Rescisões'
 
-    click_link '2012/1'
+    click_link '1/2012'
 
     page.should have_disabled_field 'Número da rescisão'
     page.should have_disabled_field 'Ano'
