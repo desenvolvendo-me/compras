@@ -14,7 +14,6 @@ require 'app/models/delivery_schedule'
 require 'app/models/occurrence_contractual_historic'
 
 describe Contract do
-
   describe 'default values' do
     it 'uses false as default for subcontracting' do
       subject.subcontracting.should be false

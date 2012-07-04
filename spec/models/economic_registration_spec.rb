@@ -2,7 +2,6 @@ require 'model_helper'
 require 'app/models/economic_registration'
 
 describe EconomicRegistration do
-
   describe 'default values' do
     it 'uses false as default for location_operation_fee' do
       subject.location_operation_fee.should be false

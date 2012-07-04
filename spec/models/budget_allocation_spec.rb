@@ -10,7 +10,6 @@ require 'app/models/extra_credit_moviment_type'
 require 'app/models/administrative_process_budget_allocation'
 
 describe BudgetAllocation do
-
   describe 'default values' do
     it 'uses false as default for refinancing' do
       subject.refinancing.should be false

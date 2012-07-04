@@ -3,7 +3,6 @@ require 'app/models/user'
 require 'app/models/bookmark'
 
 describe User do
-
   describe 'default values' do
     it 'uses false as default for administrator' do
       subject.administrator.should be false

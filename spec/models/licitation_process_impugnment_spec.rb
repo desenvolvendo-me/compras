@@ -4,7 +4,6 @@ require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process'
 
 describe LicitationProcessImpugnment do
-
   describe 'default values' do
     it 'uses Situation::PENDING as default for situation' do
       subject.situation.should eq Situation::PENDING

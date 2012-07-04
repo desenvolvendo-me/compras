@@ -18,7 +18,6 @@ require 'app/models/licitation_process_bidder'
 require 'app/models/licitation_process'
 
 describe Creditor do
-
   describe 'default values' do
     it 'uses false as default for municipal_public_administration' do
       subject.municipal_public_administration.should be false

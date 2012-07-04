@@ -9,7 +9,6 @@ require 'app/models/price_collection_lot_item'
 require 'app/models/creditor_material'
 
 describe Material do
-
   describe 'default values' do
     it 'uses false as default for perishable' do
       subject.perishable.should be false
