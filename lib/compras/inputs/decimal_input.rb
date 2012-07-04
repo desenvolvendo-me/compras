@@ -13,36 +13,42 @@ module Compras
 
       def input_html_options
         super.tap do |options|
-          options[:type]              ||= :string
-          options[:maxlength]         ||= maxlength
-          options[:data]              ||= {}
-          options[:data][:decimal]    ||= true
-          options[:data][:precision]  ||= precision
+          options[:type]           ||= :string
+          options[:maxlength]      ||= maxlength
+          options[:data]           ||= {}
+          options[:data][:decimal] ||= true
+          options[:data][:scale]   ||= scale
         end
       end
 
       def maxlength
-        return unless column_with_precision_and_scale?
-
-        points, missing = (column.precision - column.scale).divmod(3)
+        points, missing = (precision - scale).divmod(3)
 
         if missing.zero?
-          column.precision + points
+          precision + points
         else
-          column.precision + points + 1
+          precision + points + 1
         end
       end
 
       def precision
-        return unless column_with_precision_and_scale?
+        precision = options[:precision] || column.try(:precision)
 
-        column.scale
+        if precision.blank?
+          raise ArgumentError, "Missing :precision for #{attribute_name.inspect} input"
+        end
+
+        precision
       end
 
-      private
+      def scale
+        scale = options[:scale] || column.try(:scale)
 
-      def column_with_precision_and_scale?
-        column && column.precision && column.scale
+        if scale.blank?
+          raise ArgumentError, "Missing :scale for #{attribute_name.inspect} input"
+        end
+
+        scale
       end
     end
   end

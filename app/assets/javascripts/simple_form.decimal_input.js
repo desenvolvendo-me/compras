@@ -5,6 +5,6 @@ $(document).on("focus", "input[data-decimal]", function () {
     prefix: false,
     thousandsSeparator: ".",
     centsSeparator: ",",
-    centsLimit: input.data("precision")
+    centsLimit: input.data("scale")
   });
 });
