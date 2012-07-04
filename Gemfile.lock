@@ -169,6 +169,8 @@ GEM
       activesupport (= 3.2.5)
       bundler (~> 1.0)
       railties (= 3.2.5)
+    rails-footnotes (3.7.8)
+      rails (>= 3.0.0)
     railties (3.2.5)
       actionpack (= 3.2.5)
       activesupport (= 3.2.5)
@@ -265,6 +267,7 @@ DEPENDENCIES
   pg (= 0.12.2)
   poltergeist!
   rails (= 3.2.5)
+  rails-footnotes (>= 3.7.5.rc4)
   range_sentence_parser (= 0.0.2)
   responders (= 0.6.4)
   rspec-rails (= 2.10.1)
