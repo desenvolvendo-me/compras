@@ -24,4 +24,5 @@ bundle exec rspec spec/enumerations
 bundle exec rspec spec/models
 bundle exec rspec spec/routing
 bundle exec rspec spec/controllers
+bundle exec rspec spec/views
 bundle exec rspec spec/requests
