@@ -205,7 +205,7 @@ feature "Contracts" do
 
   scenario 'show pledges' do
     Pledge.make!(:empenho_em_quinze_dias)
-    Pledge.make!(:empenho)
+    Pledge.make!(:founded_debt)
 
     navigate_through 'Contabilidade > Comum > Contratos de Gestão'
 

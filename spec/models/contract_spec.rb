@@ -30,6 +30,8 @@ describe Contract do
   it { should belong_to :lawyer }
   it { should have_many(:delivery_schedules).dependent(:destroy).order(:sequence) }
   it { should have_many(:occurrence_contractual_historics).dependent(:restrict) }
+  it { should have_many(:pledges).dependent(:restrict) }
+  it { should have_many(:founded_debt_pledges).dependent(:restrict) }
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'
@@ -157,5 +159,19 @@ describe Contract do
         subject.modality_humanize.should eq 'xxto'
       end
     end
+  end
+
+  it 'should return pledges and founded debt pledges on all_pledges' do
+    subject.stub(:pledges => [double('Pledge')])
+    subject.stub(:founded_debt_pledges => [double('Pledge')])
+
+    subject.all_pledges.size.should eq 2
+  end
+
+  it 'should return pledges total value with founded debt pledges on all_pledges_total_value' do
+    subject.stub(:pledges_total_value => 100)
+    subject.stub(:founded_debt_pledges_total_value => 50)
+
+    subject.all_pledges_total_value.should eq 150
   end
 end

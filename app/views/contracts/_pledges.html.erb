@@ -8,12 +8,12 @@
   </thead>
 
   <tbody>
-    <%= render :partial => '/pledges/pledge', :collection => resource.pledges, :as => :pledge %>
+    <%= render :partial => '/pledges/pledge', :collection => resource.all_pledges, :as => :pledge %>
   </tbody>
 
   <tfoot>
     <tr>
-      <td colspan="3" align="right">Total Empenhado: <%= resource.decorator.pledges_total_value %></td>
+      <td colspan="3" align="right">Total Empenhado: <%= resource.decorator.all_pledges_total_value %></td>
     </tr>
   </tfoot>
 </table>
