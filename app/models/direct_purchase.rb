@@ -37,9 +37,7 @@ class DirectPurchase < Compras::Model
 
   validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation
-  validate :material_must_have_same_licitation_object
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
-  validate :materials_should_belong_to_creditor
 
   orderize :year
 
@@ -93,37 +91,11 @@ class DirectPurchase < Compras::Model
     end
   end
 
-  def material_must_have_same_licitation_object
-    return if direct_purchase_budget_allocations.empty? || licitation_object.nil?
-
-    direct_purchase_budget_allocations.each do |dpba|
-      dpba.items.each do |item|
-        if item.material && !item.material.licitation_object_ids.include?(licitation_object_id)
-          errors.add(:direct_purchase_budget_allocations)
-          item.errors.add(:material, :must_be_equal_as_licitation_object)
-        end
-      end
-    end
-  end
-
   def total_value_of_items_should_not_be_greater_than_modality_limit_value(limit_validator = DirectPurchaseModalityLimitVerificator)
     return if licitation_object.nil? || modality.blank?
 
     unless limit_validator.new(self).value_less_than_available_limit?
       errors.add(:total_allocations_items_value, :greater_than_actual_modality_limit)
-    end
-  end
-
-  def materials_should_belong_to_creditor
-    return if direct_purchase_budget_allocations.blank? || creditor.nil?
-
-
-    direct_purchase_budget_allocations.each do |dpba|
-      dpba.items.each do |item|
-        unless creditor_materials.include?(item.material)
-          item.errors.add(:material, :must_belong_to_selected_creditor)
-        end
-      end
     end
   end
 

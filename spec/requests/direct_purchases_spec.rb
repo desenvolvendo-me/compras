@@ -335,33 +335,6 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'material must have same licitation object' do
-    LicitationObject.make!(:ponte)
-    Material.make!(:arame_farpado)
-
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
-
-    click_link 'Gerar Compra Direta'
-
-    within_tab 'Dotações' do
-      click_button 'Adicionar Dotação'
-
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
-    end
-
-    within_tab 'Dados gerais' do
-      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações' do
-      page.should have_content 'deve pertencer ao objeto de licitação selecionado'
-    end
-  end
-
   scenario 'should filter by year' do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011)
@@ -544,56 +517,6 @@ feature "DirectPurchases" do
 
     within_tab 'Dotações' do
       page.should have_content 'é necessário cadastrar pelo menos um item'
-    end
-  end
-
-  scenario 'budget allocation item material must belong to selected creditor' do
-    Creditor.make!(:nohup)
-    Creditor.make!(:sobrinho)
-    Material.make!(:arame_comum)
-
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
-
-    click_link 'Gerar Compra Direta'
-
-    within_tab 'Dotações' do
-      click_button 'Adicionar Dotação'
-
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Arame comum', :field => 'Descrição'
-    end
-
-    # selecting creditor that have only the selected material
-
-    within_tab 'Dados gerais' do
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
-        click_button 'Pesquisar'
-        click_record 'Nohup'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações' do
-      page.should_not have_content 'deve pertencer ao fornecedor selecionado'
-    end
-
-    # selecting creditor that have nothing to do with the selected material
-
-    within_tab 'Dados gerais' do
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
-        click_button 'Pesquisar'
-        click_record 'Gabriel Sobrinho'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações' do
-      page.should have_content 'deve pertencer ao fornecedor selecionado'
     end
   end
 end

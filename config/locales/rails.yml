@@ -206,7 +206,6 @@ pt-BR:
       should_not_be_greater_than_pledge_value: "não pode ser superior ao valor do empenho"
       taken_for_informed_year: "já existe para o ano informado"
       taken_for_regulatory_act: "já existe para o ato regulamentador informado"
-      must_be_equal_as_licitation_object: "deve pertencer ao objeto de licitação selecionado"
       must_be_greater_or_equal_to_last_date: "deve ser maior ou igual a data da última reserva (%{restriction})"
       must_be_greater_or_equal_to_time: "deve ser igual ou maior a hora de entrega do envelope"
       must_be_greater_or_equal_to_licitation_process_process_date: "deve ser maior ou igual a data do processo (%{restriction})"
@@ -237,7 +236,6 @@ pt-BR:
       must_be_greater_or_equal_to_last_pledge_liquidation_date: "não pode ser menor que a data da última liquidação (%{restriction})"
       must_not_be_greater_to_first_pledge_parcel_avaliable: "não pode ser superior ao vencimento da primeira parcela do empenho com saldo disponível (%{restriction})"
       difference_must_be_equals_to_zero: "deve ser igual a zero"
-      must_belong_to_selected_creditor: "deve pertencer ao fornecedor selecionado"
       greater_than_actual_modality_limit: 'está acima do valor disponível no limite em vigor para esta modalidade'
       must_be_equal_to_estimated_value: 'deve ser igual ao valor previsto'
       must_have_one_president: 'deve haver um presidente'
