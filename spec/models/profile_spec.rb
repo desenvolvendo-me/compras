@@ -22,4 +22,25 @@ describe Profile do
     subject.name = 'management'
     subject.to_s.should eq 'management'
   end
+
+  context '#delete_role' do
+    before do
+      subject.stub(:roles).and_return(roles)
+    end
+
+    let :roles do
+      [role]
+    end
+
+    let :role do
+      double(:role)
+    end
+
+    it 'deletes role' do
+      subject.roles.should have(1).record
+
+      subject.delete_role(role)
+      subject.roles.should have(:no).records
+    end
+  end
 end

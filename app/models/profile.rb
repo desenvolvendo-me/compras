@@ -18,4 +18,8 @@ class Profile < Compras::Model
   def build_role(attributes)
     roles.build(attributes)
   end
+
+  def delete_role(role)
+    roles.delete(role)
+  end
 end

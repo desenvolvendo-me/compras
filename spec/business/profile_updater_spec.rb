@@ -39,7 +39,7 @@ describe ProfileUpdater do
   end
 
   it 'should destroy left roles' do
-    contacts_role.should_receive(:destroy)
+    profile.should_receive(:delete_role).with(contacts_role)
     profile.stub(:roles).and_return([customers_role, contacts_role])
 
     profile_updater = ProfileUpdater.new(profile, permission, i18n)

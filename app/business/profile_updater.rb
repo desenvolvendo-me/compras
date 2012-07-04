@@ -13,7 +13,7 @@ class ProfileUpdater
     end
 
     left_roles.each do |role|
-      role.destroy
+      profile.delete_role(role)
     end
   end
 
