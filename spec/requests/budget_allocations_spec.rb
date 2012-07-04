@@ -47,9 +47,7 @@ feature "BudgetAllocations" do
 
     page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
 
-    within_records do
-      click_link '1 - Alocação'
-    end
+    click_link '1 - Alocação'
 
     within_tab 'Principal' do
       page.should have_field 'Descritor', :with => '2012 - Detran'
@@ -114,9 +112,7 @@ feature "BudgetAllocations" do
 
     page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
 
-    within_records do
-      click_link '1 - Alocação para o ano de 2011'
-    end
+    click_link '1 - Alocação para o ano de 2011'
 
     within_tab 'Principal' do
       page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
@@ -182,9 +178,7 @@ feature "BudgetAllocations" do
 
     page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
 
-    within_records do
-      click_link '1 - Alocação para o ano de 2012'
-    end
+    click_link '1 - Alocação para o ano de 2012'
 
     within_tab 'Principal' do
       page.should have_field 'Descritor', :with => '2012 - Detran'
