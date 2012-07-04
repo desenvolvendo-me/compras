@@ -6,7 +6,7 @@ feature "Addresses" do
     sign_in
   end
 
-  scenario "new address through prefecture" do
+  scenario "filter neighborhood through street" do
     Street.make!(:amazonas)
     Street.make!(:girassol)
 
@@ -27,27 +27,23 @@ feature "Addresses" do
 
         click_record 'Portugal'
       end
-
-      page.should have_field 'Cidade', :with => 'Porto Alegre'
-      page.should have_field 'Estado', :with => 'Rio Grande do Sul'
     end
   end
 
-  scenario "edit address through prefecture" do
-    Prefecture.make!(:belo_horizonte)
+  scenario "fetch city and state from neighborhood" do
     Street.make!(:amazonas)
+    Street.make!(:girassol)
 
     navigate_through  'Outros > Prefeitura'
 
     within_tab 'Endereço' do
-      page.should have_field 'Cidade', :with => 'Curitiba'
-      page.should have_field 'Estado', :with => 'Parana'
-
-      page.should_not have_disabled_field "Bairro"
+      page.should have_disabled_field "Bairro"
 
       fill_modal 'Logradouro', :with => 'Amazonas'
+      fill_modal 'Bairro', :with => 'Portugal'
 
-      find_field('Bairro').value.should be_empty
+      page.should have_field 'Cidade', :with => 'Porto Alegre'
+      page.should have_field 'Estado', :with => 'Rio Grande do Sul'
     end
   end
 end
