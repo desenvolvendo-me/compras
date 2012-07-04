@@ -22,7 +22,7 @@ describe PrecatoryType do
 
     it 'should not allow date after today' do
       subject.should_not allow_value(Date.tomorrow).for(:deactivation_date).
-                                                    with_message("deve ser hoje ou antes de hoje (#{I18n.l(Date.current)})")
+                                                    with_message("deve ser igual ou anterior a hoje (#{I18n.l(Date.current)})")
     end
   end
 
