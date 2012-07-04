@@ -1,4 +1,4 @@
-# test environment
+# rails environment
 export RAILS_ENV="test"
 
 # makes bash exit immediately if any command fails
@@ -8,7 +8,7 @@ set -e
 set -x
 
 # bundle gems
-(bundle check || bundle install) > /dev/null
+bundle > /dev/null
 
 # migrate database
 bundle exec rake db:migrate > /dev/null
