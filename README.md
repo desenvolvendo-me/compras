@@ -37,6 +37,17 @@ Crie um usuário chamado `compras` com permissão para criar banco de dados.
 
     $ bundle exec unicorn
 
+### Testes(RSpec)
+
+Criamos uma variável de ambiente especial para quando se deseja que ao ocorrer
+um erro em um teste de request salve uma screenshot da página automaticamente.
+
+Por padrão as imagens são salvas em tmp/errors porém existem várias variáveis
+de configuraçãos no ```spec/spec_helpers.rb``` relacionadas a essa funcionalidade
+disponíveis
+
+    $ SCREENSHOT=true rspec spec/requests
+
 ## Padrões de código
 
 ### Modelos (app/models)

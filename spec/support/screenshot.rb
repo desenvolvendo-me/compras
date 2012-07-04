@@ -49,7 +49,7 @@ end
 
 RSpec.configure do |config|
   config.add_setting :screenshot_folder, :default => 'tmp/errors'
-  config.add_setting :screenshot_on_errors, :default => false
+  config.add_setting :screenshot_on_errors, :default => ENV['SCREENSHOT']
   config.add_setting :screenshot_full, :default => true
   config.add_setting :clear_screenshots_before_run, :default => true
 

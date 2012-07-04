@@ -34,10 +34,8 @@ RSpec.configure do |config|
   # If true, take screenshots when an exceptions happens in request spec
   # Follow the available configurations with default values
   #
-  config.screenshot_folder = 'tmp/errors'
-  # config.screenshot_on_errors = false
-  config.screenshot_full = true
-  config.clear_screenshots_before_run =  true
-  # config.screenshot_on_errors = false
-  config.screenshot_on_errors = true
+  # config.screenshot_folder = 'tmp/errors'
+  # config.screenshot_full = true
+  # config.clear_screenshots_before_run =  true
+  # config.screenshot_on_errors = ENV['SCREENSHOT']
 end
