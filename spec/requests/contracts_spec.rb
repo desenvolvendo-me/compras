@@ -239,6 +239,8 @@ feature "Contracts" do
     click_button 'Adicionar Cronograma de Entrega'
 
     within '.delivery_schedule:last' do
+      page.should have_field 'Sequência', :with => '2'
+
       fill_in 'Data de entrega', :with => '10/01/2012'
       select 'Vencido', :from => 'Status'
     end

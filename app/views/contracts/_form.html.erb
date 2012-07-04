@@ -17,3 +17,14 @@
     <%= render 'delivery_schedules', :f => f %>
   </div>
 </div>
+
+<script>
+  function fillSequence() {
+    $('div.delivery_schedule .destroy[value=false]').each(function(index, item){
+      $(this).parents('.delivery_schedule').find('.auto_sequence').val(index + 1);
+    });
+  }
+
+  $('form.contract').delegate('.remove_item', 'click', fillSequence);
+  $('form.contract').bind('append.mustache', fillSequence);
+</script>
