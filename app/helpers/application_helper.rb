@@ -94,7 +94,7 @@ module ApplicationHelper
   end
 
   def cancel_link
-    link_to 'cancelar', 'javascript:history.back()'
+    link_to 'cancelar', :back
   end
 
   def print_link
