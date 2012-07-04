@@ -1,4 +1,17 @@
 # encoding: utf-8
+ExpenseNature.blueprint(:sem_categoria) do
+  descriptor { Descriptor.make!(:detran_2012) }
+  regulatory_act { RegulatoryAct.make!(:sopa) }
+  expense_nature { '3.0.10.01.10' }
+  kind { ExpenseNatureKind::ANALYTICAL }
+  description { 'Vencimentos e Salários' }
+  docket { 'Registra o valor das despesas com vencimentos' }
+  expense_group { ExpenseGroup.make!(:restos_a_pagar) }
+  expense_modality { ExpenseModality.make!(:transferencias_intragovernamentais) }
+  expense_element { ExpenseElement.make!(:aposentadorias) }
+  expense_split { '12' }
+end
+
 ExpenseNature.blueprint(:vencimento_e_salarios) do
   descriptor { Descriptor.make!(:detran_2012) }
   regulatory_act { RegulatoryAct.make!(:sopa) }

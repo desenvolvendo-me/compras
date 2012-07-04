@@ -184,6 +184,36 @@ feature "Pledges" do
     end
   end
 
+  scenario 'should not lock when expense_nature have missing field' do
+    expense_nature = ExpenseNature.make(:sem_categoria)
+    expense_nature.save(:validate => false)
+    ReserveFund.make!(:reparo_2011)
+
+    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      fill_modal 'Reserva de dotação', :with => '21/02/2012', :field => 'Data'
+
+      within_modal 'Desdobramento' do
+        page.should have_disabled_field 'Grupo da despesa'
+        page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+        page.should have_disabled_field 'Modalidade da despesa'
+        page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+        page.should have_disabled_field 'Elemento da despesa'
+        page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
+
+        scroll_modal_to_bottom :field => 'Grupo da despesa'
+
+        click_button 'Pesquisar'
+
+        page.should_not have_content '3.0.10.01.10'
+        page.should have_content '3.0.10.01.11'
+      end
+    end
+  end
+
   scenario 'should lock expense_nature modal fields and filter modal when fill budget_allocation' do
     BudgetAllocation.make!(:reparo_2011)
     ExpenseNature.make!(:vencimento_e_salarios)

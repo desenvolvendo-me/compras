@@ -84,16 +84,27 @@
       }
 
       function subcategoryModalUrl() {
+        var expense_nature_selects =  {
+              expense_category_id: expenseCategoryId,
+              expense_group_id: expenseGroupId,
+              expense_modality_id: expenseModalityId,
+              expense_element_id: expenseElementId
+            },
+            disabled_keys = [],
+            expense_nature = {};
+
+        $.each(expense_nature_selects, function(key, value) {
+          if(value) {
+            disabled_keys.push(key.replace('_id', ''));
+            expense_nature[key] = value;
+          }
+        });
+
         var url = "<%= modal_expense_natures_path %>?",
             params = {
               expense_nature_eq: expenseNature,
-              locked_fields: ["expense_category", "expense_group", "expense_modality", "expense_element"],
-              expense_nature: {
-                expense_category_id: expenseCategoryId,
-                expense_group_id: expenseGroupId,
-                expense_modality_id: expenseModalityId,
-                expense_element_id: expenseElementId
-              }
+              locked_fields: disabled_keys,
+              expense_nature: expense_nature
             };
 
         url += jQuery.param(params);
