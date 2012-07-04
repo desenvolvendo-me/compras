@@ -17,8 +17,6 @@ class PriceCollectionProposalAnnulsController < CrudController
   protected
 
   def create_resource(object)
-    object.annullable = PriceCollectionProposal.find(params[:resource_annul][:annullable_id])
-
     object.transaction do
       return unless super
 
