@@ -13,14 +13,14 @@ class RegistrationCadastralCertificatesController < CrudController
   end
 
   def create
-    create!{ registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
+    create! { registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
   end
 
   def update
-    update!{ registration_cadastral_cerificates_path(:creditor_id => resource.creditor_id) }
+    update! { registration_cadastral_cerificates_path(:creditor_id => resource.creditor_id) }
   end
 
   def destroy
-    destroy!{ registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
+    destroy! { registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
   end
 end

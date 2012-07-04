@@ -15,14 +15,14 @@ class JudgmentCommissionAdvicesController < CrudController
   end
 
   def create
-    create!{ judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
+    create! { judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
   def update
-    update!{ judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
+    update! { judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
   def destroy
-    destroy!{ judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
+    destroy! { judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
   end
 end

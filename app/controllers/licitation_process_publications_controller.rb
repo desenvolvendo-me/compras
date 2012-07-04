@@ -14,14 +14,14 @@ class LicitationProcessPublicationsController < CrudController
   end
 
   def create
-    create!{ licitation_process_publications_path(:licitation_process_id => resource.licitation_process_id) }
+    create! { licitation_process_publications_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
   def update
-    update!{ licitation_process_publications_path(:licitation_process_id => resource.licitation_process_id) }
+    update! { licitation_process_publications_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
   def destroy
-    destroy!{ licitation_process_publications_path(:licitation_process_id => resource.licitation_process_id) }
+    destroy! { licitation_process_publications_path(:licitation_process_id => resource.licitation_process_id) }
   end
 end
