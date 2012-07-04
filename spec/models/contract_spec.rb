@@ -76,7 +76,7 @@ describe Contract do
   end
 
   context 'validating date' do
-    before(:each) do
+    before do
       subject.stub(:signature_date).and_return(Date.new(2012, 2, 1))
     end
 
