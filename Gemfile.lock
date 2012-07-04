@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/jonleighton/poltergeist.git
-  revision: b3367b4a05d1599c19ffb8f48239adf3a6923888
+  revision: 29428a7da7494685ba8ee1fdd4f95dc0280547ef
   specs:
     poltergeist (0.6.0)
       capybara (~> 1.1)
