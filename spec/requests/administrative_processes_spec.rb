@@ -16,6 +16,8 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
+    page.should be_on_tab 'Dados gerais'
+
     within_tab 'Dados gerais' do
       page.should have_disabled_field 'Status do processo administrativo'
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'

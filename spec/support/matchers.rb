@@ -56,6 +56,20 @@ module Matchers
       "expected #{page.text.inspect} not to have alert #{alert.inspect}"
     end
   end
+
+  matcher :be_on_tab do |tab|
+    match do |page|
+      page.find('.ui-tabs .ui-tabs-selected').should have_link tab
+    end
+
+    failure_message_for_should do |page|
+      "expected #{page.text.inspect} to be on tab #{tab.inspect}"
+    end
+
+    failure_message_for_should_not do |page|
+      "expected #{page.text.inspect} to not be on tab #{tab.inspect}"
+    end
+  end
 end
 
 RSpec.configure do |config|
