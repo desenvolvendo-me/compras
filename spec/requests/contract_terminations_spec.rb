@@ -16,7 +16,7 @@ feature 'ContractTerminations' do
 
     click_link 'Rescisões'
 
-    page.should have_content 'Rescisões Contratuais - Contrato 001'
+    page.should have_content 'Rescisões do contrato 001'
     page.should have_link 'Contrato 001'
 
     click_link 'Criar Rescisão Contratual'
@@ -67,7 +67,7 @@ feature 'ContractTerminations' do
 
     click_link 'Cancelar'
 
-    page.should have_content 'Rescisões Contratuais - Contrato 001'
+    page.should have_content 'Rescisões do contrato 001'
   end
 
   scenario 'editing a contract termination' do
