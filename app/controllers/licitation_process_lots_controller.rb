@@ -23,15 +23,7 @@ class LicitationProcessLotsController < CrudController
   end
 
   def destroy
-    destroy! do |success, failure|
-      failure.html do
-        redirect_to edit_resource_path
-      end
-
-      success.html do
-        redirect_to licitation_process_lots_path(:licitation_process_id => resource.licitation_process_id)
-      end
-    end
+    destroy!{ licitation_process_lots_path(:licitation_process_id => resource.licitation_process_id) }
   end
 
   protected

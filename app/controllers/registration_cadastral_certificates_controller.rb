@@ -21,14 +21,6 @@ class RegistrationCadastralCertificatesController < CrudController
   end
 
   def destroy
-    destroy! do |success, failure|
-      failure.html do
-        redirect_to edit_resource_path
-      end
-
-      success.html do
-        redirect_to registration_cadastral_certificates_path(:creditor_id => resource.creditor_id)
-      end
-    end
+    destroy!{ registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
   end
 end
