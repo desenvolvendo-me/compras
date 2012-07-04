@@ -188,3 +188,40 @@ Não é possível usar esse padrão quando o label for muito grande, devendo ass
 Fields booleanos não devem ficar na mesma linha de outros tipos de fields, podem ficar sozinho na linha ou com outros fields booleanos.
 
 Para os demais, use o bom senso. ;)
+
+### Mensagens de erro para validações baseadas em outros campos
+
+A mensagem de erro deve conter a *restrição*, o *campo relacionado* e por fim o *valor do outro campo* entre parênteses, exemplo:
+
+    "deve ser igual ou posterior a data de emissão (04/06/2012)"
+
+#### Customizando menssagens de erro
+
+Para validações usando métodos o `errors.add` permite que seja passada inflections:
+
+    def value_validation(numeric_parser = ::I18n::Alchemy::NumericParser)
+      return unless pledge && value
+
+      if value > pledge_liquidation_value
+        errors.add(:value, :must_not_be_greater_than_pledge_liquidation_value, :value => numeric_parser.localize(pledge_liquidation_value))
+      end
+    end
+
+No locale:
+
+    must_not_be_greater_than_pledge_liquidation_value: "não pode ser superior a soma das liquidações do empenho (R$ %{value})"
+
+#### Customizando mensagens com as validações do timeliness
+
+O timeliness permite que seja customizado a mensagem de erro, exemplo:
+
+    validates :protocol_date,
+      :timeliness => {
+        :on_or_after => :emission_date,
+        :on_or_after_message => :should_be_on_or_after_emission_date,
+        :type => :date
+       }, :allow_blank => true
+
+No locale precisa apenas colocar a inflection `restriction`, para o exemplo acima:
+
+    should_be_on_or_after_emission_date: "deve ser igual ou posterior a data de emissão (%{restriction})"
