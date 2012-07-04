@@ -32,7 +32,7 @@ describe PriceCollectionProposalAnnulsController do
   describe "POST 'create'" do
     before do
       ResourceAnnul.any_instance.stub(:save).and_return true
-      post :create, :price_collection_proposal_id => proposal.id
+      post :create, :resource_annul => { :annullable_id => proposal.id }
     end
 
     it 'should redirect to price_collection_proposal when was saved' do
@@ -42,7 +42,7 @@ describe PriceCollectionProposalAnnulsController do
     it 'should annul the proposal' do
       PriceCollectionProposalAnnulment.any_instance.should_receive(:change!)
 
-      post :create, :price_collection_proposal_id => proposal.id
+      post :create, :resource_annul => { :annullable_id => proposal.id }
     end
   end
 end
