@@ -6,22 +6,6 @@ describe ContractTerminationsController do
     controller.stub(:authorize_resource!)
   end
 
-  describe "GET 'index'" do
-    before do
-      Contract.stub(:find).and_return contract
-
-      get :index
-    end
-
-    let :contract do
-      double('Contract')
-    end
-
-    it 'should have the parent available for the view' do
-      assigns(:parent).should == contract
-    end
-  end
-
   describe "GET 'new'" do
     before do
       Contract.stub(:find).and_return contract
