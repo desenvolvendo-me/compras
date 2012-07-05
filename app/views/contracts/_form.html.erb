@@ -25,6 +25,6 @@
     });
   }
 
-  $('form.contract').delegate('.remove_item', 'click', fillSequence);
+  $('form.contract').on('click', '.remove_item', fillSequence);
   $('form.contract').bind('append.mustache', fillSequence);
 </script>
