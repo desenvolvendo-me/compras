@@ -1,10 +1,4 @@
 class OccurrenceContractualHistoricsController < CrudController
-  def index
-    @parent = Contract.find(params[:contract_id])
-
-    super
-  end
-
   def new
     object = build_resource
     object.contract = Contract.find(params[:contract_id])
@@ -21,14 +15,15 @@ class OccurrenceContractualHistoricsController < CrudController
   end
 
   def destroy
-    destroy! do |success, failure|
-      failure.html do
-        redirect_to edit_resource_path
-      end
+    destroy! { occurrence_contractual_historics_path(:contract_id => resource.contract_id) }
+  end
 
-      success.html do
-        redirect_to occurrence_contractual_historics_path(:contract_id => resource.contract_id)
-      end
+  def begin_of_association_chain
+    if params[:contract_id]
+      @parent = Contract.find(params[:contract_id])
+      return @parent
     end
+
+    super
   end
 end
