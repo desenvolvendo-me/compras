@@ -84,27 +84,27 @@
       }
 
       function subcategoryModalUrl() {
-        var expense_nature_selects =  {
+        var expenseNatureSelects =  {
               expense_category_id: expenseCategoryId,
               expense_group_id: expenseGroupId,
               expense_modality_id: expenseModalityId,
               expense_element_id: expenseElementId
             },
-            disabled_keys = [],
-            expense_nature = {};
+            disabledKeys = [],
+            expenseNatureFilter = {};
 
-        $.each(expense_nature_selects, function(key, value) {
+        $.each(expenseNatureSelects, function(key, value) {
           if(value) {
-            disabled_keys.push(key.replace('_id', ''));
-            expense_nature[key] = value;
+            disabledKeys.push(key.replace('_id', ''));
+            expenseNatureFilter[key] = value;
           }
         });
 
         var url = "<%= modal_expense_natures_path %>?",
             params = {
               expense_nature_eq: expenseNature,
-              locked_fields: disabled_keys,
-              expense_nature: expense_nature
+              locked_fields: disabledKeys,
+              expense_nature: expenseNatureFilter
             };
 
         url += jQuery.param(params);
