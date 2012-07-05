@@ -141,13 +141,13 @@ Utilizamos o sistema de grids [YUI](http://yuilibrary.com/yui/docs/cssgrids/), o
 
 #### Para um field ocupar a linha inteira não precisa fazer nada. :P
 
-```
+```erb
 <%= f.input :name %>
 ```
 
 #### Para dividir a linha em duas partes iguais
 
-```
+```erb
 <div class="yui3-g">
   <div class="yui3-u-1-2">
     <%= f.input :name %>
@@ -166,7 +166,7 @@ Sempre que possível utilize o seguinte padrão:
 
 Para ano utilize a class `yui3-u-1-8`
 
-```
+```erb
 <div class="yui3-g">
   <div class="yui3-u-1-8">
     <%= f.input :year %>
@@ -176,7 +176,7 @@ Para ano utilize a class `yui3-u-1-8`
 
 Para datas utilize a class `yui3-u-1-6`
 
-```
+```erb
 <div class="yui3-g">
   <div class="yui3-u-1-6">
     <%= f.input :date %>
@@ -186,7 +186,7 @@ Para datas utilize a class `yui3-u-1-6`
 
 Para valores, decimais, utilize a class `yui3-u-1-4`
 
-```
+```erb
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :value %>
