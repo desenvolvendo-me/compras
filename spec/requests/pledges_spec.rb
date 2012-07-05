@@ -11,6 +11,7 @@ feature "Pledges" do
     ManagementUnit.make!(:unidade_central)
     budget_allocation = BudgetAllocation.make!(:alocacao)
     reserve_fund = ReserveFund.make!(:detran_2012)
+    ExpenseNature.make!(:compra_de_material)
     PledgeCategory.make!(:geral)
     ExpenseKind.make!(:pagamentos)
     PledgeHistoric.make!(:semestral)
@@ -32,7 +33,7 @@ feature "Pledges" do
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       fill_modal 'Dotação', :with => '1', :field => 'Código'
-      fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
+      fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
@@ -187,14 +188,16 @@ feature "Pledges" do
   scenario 'should not lock when expense_nature have missing field' do
     expense_nature = ExpenseNature.make(:sem_categoria)
     expense_nature.save(:validate => false)
-    ReserveFund.make!(:reparo_2011)
+
+    BudgetAllocation.make!(:reparo_2011, :expense_nature => expense_nature)
+    ExpenseNature.make!(:vencimento_e_salarios)
 
     navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Reserva de dotação', :with => '21/02/2012', :field => 'Data'
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
 
       within_modal 'Desdobramento' do
         page.should have_disabled_field 'Grupo da despesa'
@@ -208,8 +211,8 @@ feature "Pledges" do
 
         click_button 'Pesquisar'
 
-        page.should_not have_content '3.0.10.01.10'
-        page.should have_content '3.0.10.01.11'
+        page.should_not have_content     '3.0.10.01.11'
+        page.should have_content '3.0.10.01.12'
       end
     end
   end
@@ -868,6 +871,7 @@ feature "Pledges" do
   scenario 'when create a new pledge with a descriptor that already exist the code should be increased by one' do
     Pledge.make!(:empenho_saldo_maior_mil)
     ReserveFund.make!(:detran_2012)
+    ExpenseNature.make!(:compra_de_material)
 
     navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
 
@@ -886,7 +890,7 @@ feature "Pledges" do
 
         click_record '2011 - Secretaria de Educação'
       end
-      fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
+      fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
@@ -913,6 +917,7 @@ feature "Pledges" do
   scenario 'when create a new pledge with a descriptor that not exist the code should restart at 1' do
     Pledge.make!(:empenho)
     Descriptor.make!(:detran_2011)
+ExpenseNature.make!(:compra_de_material)
 
     navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
 
@@ -929,7 +934,7 @@ feature "Pledges" do
         click_button 'Pesquisar'
         click_record '2012 - Detran'
       end
-      fill_modal 'Desdobramento', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
+      fill_modal 'Desdobramento', :with => '3.0.10.01.11', :field => 'Natureza da despesa'
       fill_in 'Valor', :with => '10,00'
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'

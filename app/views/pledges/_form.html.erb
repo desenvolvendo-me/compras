@@ -102,7 +102,7 @@
 
         var url = "<%= modal_expense_natures_path %>?",
             params = {
-              expense_nature_eq: expenseNature,
+              expense_nature_not_eq: expenseNature,
               locked_fields: disabledKeys,
               expense_nature: expenseNatureFilter
             };
