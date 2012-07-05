@@ -48,20 +48,25 @@ describe BudgetStructure do
   end
 
   context "when has a parent" do
+    let :upper_budget_structure_level do
+      double(:upper_budget_structure_level, :id => 1)
+    end
+
     let :parent do
       double(:parent, :level => 1)
     end
 
-    it 'should return 1 as parent_level' do
+    it 'should return 1 as budget_structure_level' do
       subject.stub(:parent).and_return( parent )
-      subject.parent_level.should be 1
+      subject.stub(:upper_budget_structure_level).and_return( upper_budget_structure_level )
+      subject.parent_budget_structure_level_id.should be 1
     end
   end
 
   context "when has not a parent" do
-    it 'should return 0 as parent_level' do
+    it 'should return nil as upper_budget_structure_level' do
       subject.stub(:parent).and_return( nil )
-      subject.parent_level.should be 0
+      subject.upper_budget_structure_level.should be nil
     end
   end
 
@@ -84,6 +89,30 @@ describe BudgetStructure do
 
       responsible_one.errors.messages[:responsible_id].should be_nil
       responsible_two.errors.messages[:responsible_id].should be_nil
+    end
+  end
+
+  context 'when has a parent with level 1' do
+    let :parent do
+      double(:parent, :level => 1)
+    end
+
+    it 'validating that parent is an immediate superior when level is 3' do
+      subject.stub(:level).and_return(3)
+      subject.stub(:parent).and_return(parent)
+
+      subject.valid?
+
+      subject.errors.messages[:parent].should include 'deve ser uma estrutura com nível superior imediato (nível 2)'
+    end
+
+    it 'validating that parent is an immediate superior when level is 2' do
+      subject.stub(:level).and_return(2)
+      subject.stub(:parent).and_return(parent)
+
+      subject.valid?
+
+      subject.errors.messages[:parent].should be nil
     end
   end
 

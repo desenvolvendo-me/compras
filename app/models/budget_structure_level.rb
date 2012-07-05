@@ -18,4 +18,13 @@ class BudgetStructureLevel < Compras::Model
   def to_s
     "#{level} - #{description}"
   end
+
+  def upper_budget_structure_level
+    return nil if level == 1
+    upper_level_number = level.pred
+
+    BudgetStructureLevel.where {
+      budget_structure_configuration_id.eq( my{budget_structure_configuration_id} ) &
+      level.eq(upper_level_number) }.first
+  end
 end

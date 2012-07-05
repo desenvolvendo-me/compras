@@ -20,7 +20,7 @@ class BudgetStructure < Compras::Model
   has_many :direct_purchases, :dependent => :restrict
   has_many :children, :class_name => 'BudgetStructure', :foreign_key => :parent_id, :dependent => :restrict
 
-  delegate :digits, :level, :separator, :to => :budget_structure_level, :allow_nil => true
+  delegate :digits, :level, :separator, :upper_budget_structure_level, :to => :budget_structure_level, :allow_nil => true
 
   validates :description, :code, :tce_code, :acronym, :presence => true
   validates :performance_field, :budget_structure_configuration, :presence => true
@@ -28,16 +28,13 @@ class BudgetStructure < Compras::Model
   validates :budget_structure_level, :presence => true
   validates :parent, :presence => true, :if => :level_greater_than_1?
   validate :cannot_have_duplicated_responsibles
+  validate :parent_level_must_be_immediate_superior
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :budget_structure_responsibles, :allow_destroy => true
 
   orderize :description
   filterize
-
-  scope :search_by_level, lambda { |level| joins{ budget_structure_level }.where {
-    |structure| structure.budget_structure_level.level.eq(level) }
-  }
 
   scope :only_synthetic, where { kind.eq BudgetStructureKind::SYNTHETIC }
 
@@ -53,8 +50,8 @@ class BudgetStructure < Compras::Model
 
   before_create :cannot_have_duplicated_code_in_same_configuration_and_level
 
-  def parent_level
-    parent ? parent.level : 0
+  def parent_budget_structure_level_id
+    upper_budget_structure_level.id if parent
   end
 
   def to_s
@@ -77,6 +74,15 @@ class BudgetStructure < Compras::Model
         budget_structure_responsible.errors.add(:responsible_id, :taken)
       end
       single_responsibles << budget_structure_responsible.responsible_id
+    end
+  end
+
+  def parent_level_must_be_immediate_superior
+    return unless parent
+
+    if parent.level.succ != level
+      errors.add(:base, :invalid)
+      errors.add(:parent, :cannot_have_a_parent_who_is_not_immediate_superior, :level => level.pred)
     end
   end
 
