@@ -2,6 +2,7 @@ menu:
   - purchasing_and_licitations:
     - general_entries:
       - creditors
+      - contracts
       - materials_groups
       - materials_classes
       - materials
@@ -27,7 +28,6 @@ menu:
     - purchase_solicitations
     - price_collections
     - direct_purchases
-    - contracts
 
     - administrative_and_licitation_processes:
       - administrative_processes
