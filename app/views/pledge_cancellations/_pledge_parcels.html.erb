@@ -2,8 +2,6 @@
   <thead>
     <tr>
       <th>
-      </th>
-      <th>
         Valor inicial
       </th>
       <th>
@@ -19,24 +17,19 @@
   </thead>
 
   <tbody>
-    <% if f.object.pledge %>
-      <tr class='pledge_totals'>
-        <td>
-          Totais
-        </td>
-        <td id="pledge_value">
-          <%= f.object.decorator.pledge_value %>
-        </td>
-        <td id="pledge_cancellations_sum">
-          <%= f.object.decorator.pledge_cancellations_sum %>
-        </td>
-        <td id="pledge_liquidations_sum">
-          <%= f.object.decorator.pledge_liquidations_sum %>
-        </td>
-        <td id="pledge_balance">
-          <%= f.object.decorator.pledge_balance %>
-        </td>
-      </tr>
-    <% end %>
+    <tr class='pledge_totals'>
+      <td id="pledge_value">
+        <%= f.object.decorator.pledge_value %>
+      </td>
+      <td id="pledge_cancellations_sum">
+        <%= f.object.decorator.pledge_cancellations_sum %>
+      </td>
+      <td id="pledge_liquidations_sum">
+        <%= f.object.decorator.pledge_liquidations_sum %>
+      </td>
+      <td id="pledge_balance">
+        <%= f.object.decorator.pledge_balance %>
+      </td>
+    </tr>
   </tbody>
 </table>

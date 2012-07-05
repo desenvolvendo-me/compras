@@ -28,25 +28,6 @@
 
 <%= f.input :reason %>
 
-<%= mustache 'pledge-parcels-template' do %>
-  <tr class="pledge_totals">
-    <td>
-    </td>
-    <td id="pledge_value">
-      {{value}}
-    </td>
-    <td id="pledge_cancellations_sum">
-      {{canceled_value}}
-    </td>
-    <td id="pledge_liquidations_sum">
-      {{liquidations_value}}
-    </td>
-    <td id="pledge_balance">
-      {{balance}}
-    </td>
-  </tr>
-<% end %>
-
 <script>
   <% if f.object.persisted? %>
     $('form.pledge_cancellation :input').attr('disabled', true);
@@ -55,28 +36,6 @@
       var pledgeId = $('#pledge_cancellation_pledge_id').val(),
           pledgeValue;
 
-      function clearExistingPledgeParcels() {
-        $('#pledge_parcels tbody').html('');
-      }
-
-      function createPledgeParcelsFromPledge(pledgeParcels) {
-        var template = $('#pledge-parcels-template'),
-            rendered = '';
-
-        $(pledgeParcels).each(function() {
-          rendered += template.mustache({
-            expiration_date: this.expiration_date,
-            value: this.value,
-            number: this.number,
-            canceled_value: this.canceled_value,
-            liquidations_value: this.liquidations_value,
-            balance: this.balance
-          });
-        });
-
-        $('#pledge_parcels tbody').html(rendered);
-      }
-
       $('#pledge_cancellation_pledge_id').change(function (event, pledge) {
         if (pledge) {
           $('#pledge_cancellation_emission_date').val(pledge.emission_date);
@@ -84,18 +43,13 @@
           $('#pledge_cancellations_sum').html(pledge.pledge_cancellations_sum);
           $('#pledge_balance').html(pledge.balance_as_currency);
           $('#pledge_liquidations_sum').html(pledge.pledge_liquidations_sum);
-          createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
         } else {
           $('#pledge_cancellation_emission_date').val('');
-          $('#pledge_cancellation_pledge_parcel').val('');
-          $('#pledge_cancellation_expiration_date').val('');
-          $('#pledge_cancellation_balance').val('');
-          $('#pledge_balance').html('');
           $('#pledge_value').html('');
           $('#pledge_cancellations_sum').html('');
+          $('#pledge_balance').html('');
           $('#pledge_liquidations_sum').html('');
-          clearExistingPledgeParcels();
           pledgeValue = null;
         }
       });
