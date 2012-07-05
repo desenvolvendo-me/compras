@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/judgment_commission_advice'
 require 'app/models/judgment_commission_advice_member'
+require 'app/models/unico/individual'
 require 'app/models/individual'
 
 describe JudgmentCommissionAdvice do
