@@ -210,13 +210,15 @@ A mensagem de erro deve conter a *restrição*, o *campo relacionado* e por fim 
 
 Para validações usando métodos o `errors.add` permite que seja passada inflections:
 
-    def value_validation(numeric_parser = ::I18n::Alchemy::NumericParser)
-      return unless pledge && value
+```ruby
+def value_validation(numeric_parser = ::I18n::Alchemy::NumericParser)
+  return unless pledge && value
 
-      if value > pledge_liquidation_value
-        errors.add(:value, :must_not_be_greater_than_pledge_liquidation_value, :value => numeric_parser.localize(pledge_liquidation_value))
-      end
-    end
+  if value > pledge_liquidation_value
+    errors.add(:value, :must_not_be_greater_than_pledge_liquidation_value, :value => numeric_parser.localize(pledge_liquidation_value))
+  end
+end
+```
 
 No locale:
 
@@ -226,12 +228,14 @@ No locale:
 
 O timeliness permite que seja customizado a mensagem de erro, exemplo:
 
-    validates :protocol_date,
-      :timeliness => {
-        :on_or_after => :emission_date,
-        :on_or_after_message => :should_be_on_or_after_emission_date,
-        :type => :date
-       }, :allow_blank => true
+```ruby
+validates :protocol_date,
+  :timeliness => {
+    :on_or_after => :emission_date,
+    :on_or_after_message => :should_be_on_or_after_emission_date,
+    :type => :date
+   }, :allow_blank => true
+```
 
 No locale precisa apenas colocar a inflection `restriction`, para o exemplo acima:
 
