@@ -1,3 +1,4 @@
+# encoding: utf-8
 class DirectPurchasesController < CrudController
   actions :all, :except => :destroy
 
@@ -13,10 +14,13 @@ class DirectPurchasesController < CrudController
   end
 
   def update
-    return super if params[:commit] == 'Salvar'
+    if params[:commit] == 'Gerar autorização de fornecimento'
+      supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
+      redirect_to supply_authorization
+      return
+    end
 
-    supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
-    redirect_to supply_authorization
+    super
   end
 
   protected
