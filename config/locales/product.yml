@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      product:
+        one: "Produto"
+        other: "Produtos"
+
+    attributes:
+      product:
+        specification: "Especificação"
+        observation: "Observação"
