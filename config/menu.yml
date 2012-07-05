@@ -51,6 +51,7 @@ menu:
 
       - contracts
       - creditors
+      - program_kinds
 
       - precatory:
         - precatories
