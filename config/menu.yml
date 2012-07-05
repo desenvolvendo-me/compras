@@ -53,6 +53,7 @@ menu:
       - creditors
       - program_kinds
       - target_audiences
+      - macro_objectives
 
       - precatory:
         - precatories

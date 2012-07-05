@@ -491,6 +491,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :macro_objectives do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :management_units do
     collection do
       get :filter

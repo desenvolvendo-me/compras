@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      macro_objective:
+        one: "Macro Objetivo"
+        other: "Macro Objetivos"
+
+    attributes:
+      macro_objective:
+        specification: "Especificação"
+        observation: "Observação"
