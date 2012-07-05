@@ -16,12 +16,12 @@ feature 'ContractTerminations' do
 
     click_link 'Rescisões'
 
-    page.should have_content 'Rescisões do contrato 001'
-    page.should have_link 'Voltar para o contrato 001'
+    page.should have_content 'Rescisões do Contrato 001'
+    page.should have_link 'Voltar para o Contrato 001'
 
     click_link 'Criar Rescisão Contratual'
 
-    page.should have_content 'Criar nova rescisão contratual para Contrato 001'
+    page.should have_content 'Criar nova Rescisão Contratual para Contrato 001'
 
     page.should have_disabled_field 'Número da rescisão'
     page.should have_field 'Número da rescisão', :with => '1'
@@ -44,7 +44,7 @@ feature 'ContractTerminations' do
 
     click_link "1/#{Date.current.year}"
 
-    page.should have_content "Editar rescisão 1/#{Date.current.year} do Contrato 001"
+    page.should have_content "Editar Rescisão 1/#{Date.current.year} do Contrato 001"
 
     page.should have_link 'Anular'
 
@@ -67,7 +67,7 @@ feature 'ContractTerminations' do
 
     click_link 'Cancelar'
 
-    page.should have_content 'Rescisões do contrato 001'
+    page.should have_content 'Rescisões do Contrato 001'
   end
 
   scenario 'editing a contract termination' do

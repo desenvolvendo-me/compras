@@ -81,6 +81,6 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Cancelar'
 
-    page.should have_content 'Editar rescisão 1/2012 do Contrato 001'
+    page.should have_content 'Editar Rescisão 1/2012 do Contrato 001'
   end
 end
