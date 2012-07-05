@@ -65,8 +65,6 @@ feature "Streets" do
   end
 
   scenario 'destroy a street' do
-    pending 'awaiting a response from the issue https://github.com/jonleighton/poltergeist/issues/88'
-
     Street.make!(:girassol)
 
     navigate_through 'Outros > Logradouros'
