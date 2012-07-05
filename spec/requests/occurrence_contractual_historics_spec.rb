@@ -9,7 +9,7 @@ feature "OccurrenceContractualHistorics" do
   scenario 'create a new occurrence_contractual_historic' do
     Contract.make!(:primeiro_contrato)
 
-    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos'
 
     within_records do
       page.find('a').click
@@ -40,7 +40,7 @@ feature "OccurrenceContractualHistorics" do
   scenario 'update an existent occurrence_contractual_historic' do
     OccurrenceContractualHistoric.make!(:example)
 
-    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos'
 
     within_records do
       page.find('a').click
@@ -66,7 +66,7 @@ feature "OccurrenceContractualHistorics" do
   scenario 'destroy an existent occurrence_contractual_historic' do
     OccurrenceContractualHistoric.make!(:example)
 
-    navigate_through 'Contabilidade > Comum > Contratos de Gestão'
+    navigate_through 'Contabilidade > Comum > Contratos'
 
     within_records do
       page.find('a').click
