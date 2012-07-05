@@ -81,7 +81,7 @@ class Creditor < Compras::Model
   end
 
   def user?
-    user.persisted?
+    user.present? && user.persisted?
   end
 
   protected

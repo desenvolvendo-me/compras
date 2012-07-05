@@ -53,7 +53,7 @@ describe Creditor do
   it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_bidders) }
 
   it { should validate_presence_of :person }
-  it { should_not validate_presence_of :legal_nature }  
+  it { should_not validate_presence_of :legal_nature }
   it { should_not validate_presence_of :company_size }
   it { should_not validate_presence_of :main_cnae }
   it { should_not validate_presence_of :contract_start_date }
@@ -66,7 +66,7 @@ describe Creditor do
 
     it { should validate_presence_of :company_size }
     it { should validate_presence_of :main_cnae }
-    it { should validate_presence_of :legal_nature }  
+    it { should validate_presence_of :legal_nature }
   end
 
   context 'when is autonomous' do
@@ -141,14 +141,23 @@ describe Creditor do
       subject.stub(:user).and_return user
     end
 
-    it 'returns false when the user is not persisted' do
+    it 'returns false when the user is not present and not persisted' do
       user.stub(:persisted?).and_return false
+      user.stub(:present?).and_return false
 
       subject.user?.should be_false
     end
 
-    it 'returns true when the user was persisted' do
+    it 'returns false when the user is present but is not persisted' do
+      user.stub(:persisted?).and_return false
+      user.stub(:present?).and_return true
+
+      subject.user?.should be_false
+    end
+
+    it 'returns true when the user was present and persisted' do
       user.stub(:persisted?).and_return true
+      user.stub(:present?).and_return true
 
       subject.user?.should be_true
     end
