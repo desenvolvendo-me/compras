@@ -52,6 +52,7 @@ menu:
       - contracts
       - creditors
       - program_kinds
+      - target_audiences
 
       - precatory:
         - precatories

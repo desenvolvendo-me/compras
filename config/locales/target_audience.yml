@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      target_audience:
+        one: "Público Alvo"
+        other: "Públicos Alvo"
+
+    attributes:
+      target_audience:
+        specification: "Especificação"
+        observation: "Observação"
+

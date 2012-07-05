@@ -809,6 +809,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :target_audiences do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :type_improvements do
     collection do
       get :modal
