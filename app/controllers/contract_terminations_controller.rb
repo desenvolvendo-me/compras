@@ -17,8 +17,8 @@ class ContractTerminationsController < CrudController
   end
 
   def begin_of_association_chain
-    if params[:licitation_process_id]
-      @parent = LicitationProcess.find(params[:licitation_process_id])
+    if params[:contract_id]
+      @parent = Contract.find(params[:contract_id])
       return @parent
     end
 

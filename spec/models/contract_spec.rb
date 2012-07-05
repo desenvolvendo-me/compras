@@ -12,6 +12,7 @@ require 'app/models/budget_structure'
 require 'app/models/employee'
 require 'app/models/delivery_schedule'
 require 'app/models/occurrence_contractual_historic'
+require 'app/models/contract_termination'
 
 describe Contract do
   describe 'default values' do
@@ -32,6 +33,7 @@ describe Contract do
   it { should have_many(:occurrence_contractual_historics).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:founded_debt_pledges).dependent(:restrict) }
+  it { should have_many(:contract_terminations).dependent(:restrict) }
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'
