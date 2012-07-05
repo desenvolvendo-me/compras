@@ -265,6 +265,8 @@ feature "BudgetStructure" do
       within_modal 'Estrutura orçamentaria superior' do
         page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
         page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        page.should have_field 'Nível', :with => '1 - Orgão'
+        page.should have_disabled_field 'Nível'
 
         click_button 'Pesquisar'
 

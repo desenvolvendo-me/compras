@@ -1,15 +1,37 @@
 <%= f.input :budget_structure_configuration %>
+<%= f.input :budget_structure_level %>
 <%= f.input :description %>
 
 <script>
+
+  function setModalUrlToBudgetStructureLevel(){
+    var urlModal = "<%= modal_budget_structure_levels_path %>?",
+    params = {
+      locked_fields: ['budget_structure_configuration'],
+      budget_structure_level:{
+        budget_structure_configuration_id: $('#filter_budget_structure_configuration_id').val()
+      }
+    };
+
+    urlModal += jQuery.param(params);
+    $('#filter_budget_structure_level').attr('data-modal-url', urlModal);
+  };
+
   function enabledDisabledBudgetStructureConfiguration(){
-    if ($('#filter_budget_structure_configuration_id').val() == ''){
-      var value = false;
-    }else{
-      var value = true;
-    }
-    $('#filter_budget_structure_configuration').attr('DISABLED', value); 
+    var value = $('#filter_budget_structure_configuration_id').val() != '';
+    $('#filter_budget_structure_configuration').attr('DISABLED', value);
   }
 
+  function enabledDisabledLevel(){
+    var value = $('#filter_budget_structure_level_id').val() != '';
+    $('#filter_budget_structure_level').attr('DISABLED', value);
+  }
+
+  $('#filter_budget_structure_configuration_id').change( function() {
+    $('#filter_budget_structure_level').attr('DISABLED', $(this).val() == '' );
+    setModalUrlToBudgetStructureLevel();
+  });
+
   enabledDisabledBudgetStructureConfiguration();
+  enabledDisabledLevel();
 </script>
