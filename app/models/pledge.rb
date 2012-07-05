@@ -122,10 +122,6 @@ class Pledge < Compras::Model
     last_code.succ
   end
 
-  def self.total_value
-    sum(:value)
-  end
-
   protected
 
   def set_code

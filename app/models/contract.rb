@@ -23,7 +23,7 @@ class Contract < Compras::Model
   belongs_to :lawyer, :class_name => 'Employee'
 
   has_many :pledges, :dependent => :restrict
-  has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict
+  has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict, :foreign_key => 'founded_debt_contract_id'
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
   has_many :occurrence_contractual_historics, :dependent => :restrict
 
@@ -41,9 +41,6 @@ class Contract < Compras::Model
     :after_message => :end_date_should_be_after_signature_date
   }, :allow_blank => true
   validate :presence_of_licitation_process_or_direct_purchase
-
-  delegate :total_value, :to => :pledges, :allow_nil => true, :prefix => true
-  delegate :total_value, :to => :founded_debt_pledges, :allow_nil => true, :prefix => true
 
   orderize :contract_number
   filterize
@@ -73,10 +70,12 @@ class Contract < Compras::Model
   end
 
   def all_pledges
-    pledges + founded_debt_pledges
+    (pledges + founded_debt_pledges).uniq
   end
 
   def all_pledges_total_value
-    pledges_total_value + founded_debt_pledges_total_value
+    sum = 0
+    all_pledges.each {|p| sum += p.value }
+    sum
   end
 end

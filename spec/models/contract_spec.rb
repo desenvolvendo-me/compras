@@ -161,17 +161,33 @@ describe Contract do
     end
   end
 
-  it 'should return pledges and founded debt pledges on all_pledges' do
-    subject.stub(:pledges => [double('Pledge')])
-    subject.stub(:founded_debt_pledges => [double('Pledge')])
+  context 'pledges list and pledges sum' do
+    let :pledge_1 do
+      double('Pledge', :id => 1)
+    end
 
-    subject.all_pledges.size.should eq 2
-  end
+    let :pledge_2 do
+      double('Pledge', :id => 2)
+    end
 
-  it 'should return pledges total value with founded debt pledges on all_pledges_total_value' do
-    subject.stub(:pledges_total_value => 100)
-    subject.stub(:founded_debt_pledges_total_value => 50)
+    it 'should return pledges and founded debt pledges on all_pledges' do
+      subject.stub(:pledges => [pledge_1])
+      subject.stub(:founded_debt_pledges => [pledge_2])
 
-    subject.all_pledges_total_value.should eq 150
+      subject.all_pledges.size.should eq 2
+    end
+
+    it 'should return pledges as a uniq list' do
+      subject.stub(:pledges => [pledge_1])
+      subject.stub(:founded_debt_pledges => [pledge_1])
+
+      subject.all_pledges.size.should eq 1
+    end
+
+    it 'should return pledges total value with founded debt pledges on all_pledges_total_value' do
+      subject.stub(:all_pledges => [double(:value => 100), double(:value => 50)])
+
+      subject.all_pledges_total_value.should eq 150
+    end
   end
 end
