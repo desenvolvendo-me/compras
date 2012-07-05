@@ -1,12 +1,6 @@
 class LicitationProcessLotsController < CrudController
   before_filter :updatable?, :only => [:new, :create, :update, :destroy]
 
-  def index
-    @parent = LicitationProcess.find(params[:licitation_process_id])
-
-    super
-  end
-
   def new
     object = build_resource
     object.licitation_process = LicitationProcess.find(params[:licitation_process_id])
@@ -24,6 +18,15 @@ class LicitationProcessLotsController < CrudController
 
   def destroy
     destroy! { licitation_process_lots_path(:licitation_process_id => resource.licitation_process_id) }
+  end
+
+  def begin_of_association_chain
+    if params[:licitation_process_id]
+      @parent = LicitationProcess.find(params[:licitation_process_id])
+      return @parent
+    end
+
+    super
   end
 
   protected

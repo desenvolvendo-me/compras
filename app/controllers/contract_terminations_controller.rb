@@ -1,10 +1,4 @@
 class ContractTerminationsController < CrudController
-  def index
-    @parent = Contract.find(params[:contract_id])
-
-    super
-  end
-
   def new
     object = build_resource
     object.year = Date.current.year
@@ -20,6 +14,15 @@ class ContractTerminationsController < CrudController
 
   def update
     update!{ contract_terminations_path(:contract_id => resource.contract_id) }
+  end
+
+  def begin_of_association_chain
+    if params[:licitation_process_id]
+      @parent = LicitationProcess.find(params[:licitation_process_id])
+      return @parent
+    end
+
+    super
   end
 
   protected

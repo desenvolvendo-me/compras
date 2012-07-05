@@ -1,11 +1,4 @@
 class JudgmentCommissionAdvicesController < CrudController
-
-  def index
-    @parent = LicitationProcess.find(params[:licitation_process_id])
-
-    super
-  end
-
   def new
     object = build_resource
     object.licitation_process = LicitationProcess.find(params[:licitation_process_id])
@@ -24,5 +17,14 @@ class JudgmentCommissionAdvicesController < CrudController
 
   def destroy
     destroy! { judgment_commission_advices_path(:licitation_process_id => resource.licitation_process_id) }
+  end
+
+  def begin_of_association_chain
+    if params[:licitation_process_id]
+      @parent = LicitationProcess.find(params[:licitation_process_id])
+      return @parent
+    end
+
+    super
   end
 end
