@@ -2,6 +2,8 @@
 require 'model_helper'
 require 'app/models/pledge_liquidation'
 require 'app/models/pledge_parcel_movimentation'
+require 'lib/annullable'
+require 'app/models/resource_annul'
 
 describe PledgeLiquidation do
   it 'should return id as to_s' do
@@ -18,6 +20,8 @@ describe PledgeLiquidation do
   it { should belong_to :pledge }
 
   it { should have_many(:pledge_parcel_movimentations).dependent(:restrict) }
+
+  it { should have_one(:annul).dependent(:destroy) }
 
   it { should allow_value(23).for(:value) }
   it { should_not allow_value(0).for(:value) }
