@@ -33,7 +33,7 @@
       $(options.target + " .nested:visible:first .nested-remove").css('padding-top', '30px');
     }
 
-    $('body').delegate(options.add, 'click', function () {
+    $(options.target).closest('form').on('click', options.add, function () {
       var binds = {};
       binds[options.uuid] = _.uniqueId('fresh-');
 
