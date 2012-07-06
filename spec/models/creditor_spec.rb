@@ -141,25 +141,24 @@ describe Creditor do
       subject.stub(:user).and_return user
     end
 
-    it 'returns false when the user is not present and not persisted' do
-      user.stub(:persisted?).and_return false
-      user.stub(:present?).and_return false
-
-      subject.user?.should be_false
+    it 'returns false when has not user' do
+      subject.should_not be_user
     end
 
-    it 'returns false when the user is present but is not persisted' do
-      user.stub(:persisted?).and_return false
-      user.stub(:present?).and_return true
+    it 'returns true when has user and it is persisted' do
+      user = double("User", :persisted => true)
 
-      subject.user?.should be_false
+      subject.stub(:user).and_return(user)
+
+      subject.should be_user
     end
 
-    it 'returns true when the user was present and persisted' do
-      user.stub(:persisted?).and_return true
-      user.stub(:present?).and_return true
+    it 'returns false when has user and it is not persisted' do
+      user = double("User", :persisted => false)
 
-      subject.user?.should be_true
+      subject.stub(:user).and_return(user)
+
+      subject.should_not be_user
     end
   end
 
