@@ -448,11 +448,11 @@ feature "DirectPurchases" do
 
       # removing an entire budget allocation
 
-      within 'div:last' do
+      within 'div.direct-purchase-budget-allocation:last' do
         click_button 'Remover Dotação'
       end
 
-      page.should have_field 'Valor total dos itens', :with => '30,00'
+      page.should have_field 'Valor total dos itens', :with => '50,00'
     end
   end
 
