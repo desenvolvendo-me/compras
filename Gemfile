@@ -41,7 +41,6 @@ gem 'foreigner', '1.1.4'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
 gem 'enumerate_it', '0.7.14'
-gem 'range_sentence_parser', '0.0.2'
 
 group :assets do
   gem 'uglifier', '1.2.1'

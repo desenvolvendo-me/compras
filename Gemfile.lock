@@ -180,7 +180,6 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.8.1)
     rake (0.9.2.2)
-    range_sentence_parser (0.0.2)
     rdoc (3.12)
       json (~> 1.4)
     responders (0.6.4)
@@ -268,7 +267,6 @@ DEPENDENCIES
   poltergeist!
   rails (= 3.2.5)
   rails-footnotes (>= 3.7.5.rc4)
-  range_sentence_parser (= 0.0.2)
   responders (= 0.6.4)
   rspec-rails (= 2.10.1)
   shoulda-matchers (= 1.1.0)
