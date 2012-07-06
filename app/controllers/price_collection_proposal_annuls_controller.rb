@@ -20,7 +20,7 @@ class PriceCollectionProposalAnnulsController < CrudController
     object.transaction do
       return unless super
 
-      PriceCollectionProposalAnnulment.new(PriceCollectionProposal.find(object.annullable_id)).change!
+      PriceCollectionProposalAnnulment.new(object.annullable).change!
     end
   end
 
