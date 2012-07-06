@@ -1,4 +1,5 @@
 <div class="buttons">
+  <%= annul_link(:param_name => :pledge_liquidation_id) %>
   <%= f.button :submit unless f.object.persisted? %>
   <%= f.button :cancel %>
 </div>

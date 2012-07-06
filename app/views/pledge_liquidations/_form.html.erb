@@ -6,6 +6,10 @@
   <div class="yui3-u-1-6">
     <%= f.input :emission_date, :disabled => true, :input_html => { :value => f.object.decorator.emission_date } %>
   </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :status, :disabled => true %>
+  </div>
 </div>
 
 <%= render 'pledge_parcels', :f => f %>

@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    pledge_liquidation_status:
+      active: "Ativo"
+      annulled: "Anulada"

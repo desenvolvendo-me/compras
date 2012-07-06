@@ -6,28 +6,44 @@ describe PledgeLiquidationsController do
     controller.stub(:authorize_resource!)
   end
 
-  it 'should be empty if dont have any other pledge_liquidation' do
-    PledgeLiquidation.stub(:any?).and_return(false)
+  context 'GET #new' do
+    it 'should be empty if dont have any other pledge_liquidation' do
+      PledgeLiquidation.stub(:any?).and_return(false)
 
-    get :new
+      get :new
 
-    assigns(:pledge_liquidation).date.should eq nil
+      assigns(:pledge_liquidation).date.should eq nil
+    end
+
+    it 'should set date as last pledge_liquidation' do
+      PledgeLiquidation.stub(:any?).and_return(true)
+      PledgeLiquidation.stub(:last).and_return(double(:date => Date.new(2012, 1, 1)))
+
+      get :new
+
+      assigns(:pledge_liquidation).date.should eq Date.new(2012, 1, 1)
+    end
+
+    it 'should use active as default status' do
+      get :new
+
+      assigns(:pledge_liquidation).status.should eq PledgeLiquidationStatus::ACTIVE
+    end
   end
 
-  it 'should set date as last pledge_liquidation' do
-    PledgeLiquidation.stub(:any?).and_return(true)
-    PledgeLiquidation.stub(:last).and_return(double(:date => Date.new(2012, 1, 1)))
+  context 'POST #create' do
+    it 'should call the PledgeParcelMovimentationGenerator on action create' do
+      PledgeLiquidation.any_instance.stub(:valid?).and_return(true)
 
-    get :new
+      PledgeParcelMovimentationGenerator.any_instance.should_receive(:generate!)
 
-    assigns(:pledge_liquidation).date.should eq Date.new(2012, 1, 1)
-  end
+      post :create
+    end
 
-  it 'should call the PledgeParcelMovimentationGenerator on action create' do
-    PledgeLiquidation.any_instance.stub(:valid?).and_return(true)
+    it 'should use active as default status' do
+      post :create
 
-    PledgeParcelMovimentationGenerator.any_instance.should_receive(:generate!)
-
-    post :create
+      assigns(:pledge_liquidation).status.should eq PledgeLiquidationStatus::ACTIVE
+    end
   end
 end
