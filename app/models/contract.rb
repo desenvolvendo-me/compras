@@ -75,8 +75,6 @@ class Contract < Compras::Model
   end
 
   def all_pledges_total_value
-    sum = 0
-    all_pledges.each {|p| sum += p.value }
-    sum
+    all_pledges.sum(&:value)
   end
 end
