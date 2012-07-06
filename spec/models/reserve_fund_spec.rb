@@ -2,6 +2,8 @@
 require 'model_helper'
 require 'app/models/reserve_fund'
 require 'app/models/pledge'
+require 'lib/annullable'
+require 'app/models/resource_annul'
 
 describe ReserveFund do
   it 'should return to_s as id/year' do
@@ -17,7 +19,7 @@ describe ReserveFund do
   it { should belong_to :creditor}
   it { should belong_to :licitation_process }
 
-  it { should have_one(:reserve_fund_annul).dependent(:destroy) }
+  it { should have_one(:annul).dependent(:destroy) }
   it { should have_many(:pledges).dependent(:restrict) }
 
   it { should validate_presence_of :descriptor }
@@ -56,5 +58,13 @@ describe ReserveFund do
     subject.valid?
 
     subject.errors.messages[:value].should include 'está acima do valor disponível para a dotação selecionada'
+  end
+
+  describe '#annul!' do
+    it 'update the status attribute to annulled' do
+      subject.should_receive(:update_attribute).with(:status, 'annulled')
+
+      subject.annul!
+    end
   end
 end

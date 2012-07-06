@@ -1,4 +1,7 @@
 pt-BR:
+  reserve_fund_annuls:
+    edit: "Anulação da Reserva de Dotação %{resource}"
+
   activerecord:
     models:
       reserve_fund_annul:

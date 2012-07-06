@@ -21,7 +21,7 @@ feature 'ReserveFundAnnuls' do
       click_record 'Gabriel Sobrinho'
     end
 
-    fill_in 'Descrição', :with => 'Não necessário'
+    fill_in 'Justificativa', :with => 'Não necessário'
 
     click_button 'Salvar'
 
@@ -35,6 +35,8 @@ feature 'ReserveFundAnnuls' do
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
     page.should have_disabled_field 'Data'
     page.should have_field 'Data', :with => I18n.l(Date.current)
+    page.should have_disabled_field 'Justificativa'
+    page.should have_field 'Justificativa', :with => 'Não necessário'
 
     page.should_not have_link 'Apagar'
     page.should_not have_button 'Salvar'

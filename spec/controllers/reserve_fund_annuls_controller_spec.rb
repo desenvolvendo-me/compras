@@ -31,16 +31,30 @@ describe ReserveFundAnnulsController do
 
       assigns(:reserve_fund_annul).employee.should eq authenticable
     end
+
+    it 'return 401 when reserve_fund is already annulled' do
+      reserve_fund.stub(:status => ReserveFundStatus::ANNULLED)
+
+      get :new, :reserve_fund_id => 1
+
+      response.code.should eq "401"
+    end
   end
 
   describe 'POST #create' do
     it 'should change reserve fund status' do
       reserve_fund = ReserveFund.make!(:detran_2012)
-      ReserveFund.stub(:find).and_return(reserve_fund)
-      ReserveFundAnnul.any_instance.stub(:reserve_fund).and_return(reserve_fund)
-      ReserveFundStatusChanger.any_instance.should_receive(:change!)
+      ReserveFund.any_instance.should_receive(:annul!)
 
-      post :create
+      post :create, :resource_annul => { :annullable_id => reserve_fund.id }
+    end
+
+    it 'should return 401 is reserve_fund is already annulled' do
+      reserve_fund = ReserveFund.make!(:anulado)
+
+      post :create, :resource_annul => { :annullable_id => reserve_fund.id }
+
+      response.code.should eq "401"
     end
   end
 end

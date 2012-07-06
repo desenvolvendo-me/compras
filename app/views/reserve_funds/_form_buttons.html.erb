@@ -1,11 +1,5 @@
 <div class="buttons">
   <%= f.button :submit unless f.object.persisted? %>
-  <% if f.object.persisted? %>
-    <% if f.object.reserve_fund_annul %>
-      <%= link_to "Anulação", edit_reserve_fund_annul_path(f.object.reserve_fund_annul), :class => 'button primary' %>
-    <% else %>
-      <%= link_to "Anular", new_reserve_fund_annul_path(:reserve_fund_id => resource.id), :class => 'button primary' %>
-    <% end %>
-  <% end %>
+  <%= annul_link(:param_name => :reserve_fund_id) %>
   <%= f.button :cancel %>
 </div>

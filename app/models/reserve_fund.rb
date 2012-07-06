@@ -16,7 +16,7 @@ class ReserveFund < Compras::Model
 
   has_many :pledges, :dependent => :restrict
 
-  has_one :reserve_fund_annul, :dependent => :destroy
+  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   delegate :real_amount, :amount, :function, :subfunction, :government_program, :government_action, :budget_structure,
            :expense_nature, :reserved_value, :to => :budget_allocation, :allow_nil => true, :prefix => true
@@ -48,6 +48,10 @@ class ReserveFund < Compras::Model
 
   def to_s
     "#{id}/#{year}"
+  end
+
+  def annul!
+    update_attribute :status, ReserveFundStatus::ANNULLED
   end
 
   protected

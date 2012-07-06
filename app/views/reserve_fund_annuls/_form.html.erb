@@ -1,10 +1,6 @@
-<%= f.input :reserve_fund_id, :as => :hidden %>
-<%= f.input :employee %>
-<%= f.input :date %>
-<%= f.input :description %>
+<%= f.input :annullable_id, :as => :hidden %>
+<%= f.input :annullable_type, :as => :hidden %>
 
-<script>
-  <% if f.object.persisted? %>
-    $('form.reserve_fund_annul :input').attr('disabled', true);
-  <% end %>
-</script>
+<%= f.input :employee, :disabled => f.object.persisted? %>
+<%= f.input :date, :disabled => f.object.persisted? %>
+<%= f.input :description, :disabled => f.object.persisted? %>
