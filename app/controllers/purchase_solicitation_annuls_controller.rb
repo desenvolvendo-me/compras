@@ -23,6 +23,6 @@ class PurchaseSolicitationAnnulsController < CrudController
   def create_resource(object)
     return unless super
 
-    PurchaseSolicitationAnnulment.new(object.annullable).annul!
+    ObjectAnnulment.new(object.annullable).annul!
   end
 end
