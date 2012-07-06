@@ -134,7 +134,7 @@ describe Creditor do
 
   describe '#user?' do
     let :user do
-      double('User')
+      double('User', :persisted? => false, :present? => false)
     end
 
     before do
@@ -146,7 +146,7 @@ describe Creditor do
     end
 
     it 'returns true when has user and it is persisted' do
-      user = double("User", :persisted => true)
+      user = double("User", :persisted? => true)
 
       subject.stub(:user).and_return(user)
 
@@ -154,7 +154,7 @@ describe Creditor do
     end
 
     it 'returns false when has user and it is not persisted' do
-      user = double("User", :persisted => false)
+      user = double("User", :persisted? => false)
 
       subject.stub(:user).and_return(user)
 
