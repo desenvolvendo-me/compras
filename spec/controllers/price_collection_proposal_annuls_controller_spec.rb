@@ -32,6 +32,8 @@ describe PriceCollectionProposalAnnulsController do
   describe "POST 'create'" do
     before do
       ResourceAnnul.any_instance.stub(:save).and_return true
+      ResourceAnnul.any_instance.stub(:annullable => proposal)
+
       post :create, :resource_annul => { :annullable_id => proposal.id }
     end
 
