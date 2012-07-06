@@ -1,9 +1,11 @@
 # encoding: utf-8
 require 'model_helper'
+require 'lib/annullable'
+require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
-require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/resource_annul'
 
 describe PurchaseSolicitation do
   it 'should return the code/accounting_year in to_s method' do
@@ -17,6 +19,7 @@ describe PurchaseSolicitation do
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
+  it { should have_one(:annul).dependent(:destroy) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }
