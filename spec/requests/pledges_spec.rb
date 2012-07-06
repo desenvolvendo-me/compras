@@ -860,6 +860,8 @@ feature "Pledges" do
 
     within_tab 'Complementar' do
       within_modal 'Contrato' do
+        scroll_modal_to_bottom :field => 'Ano do contrato'
+
         click_button 'Pesquisar'
 
         page.should have_content '001'
