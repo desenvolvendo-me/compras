@@ -5,6 +5,7 @@ require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/purchase_solicitation_budget_allocation_item'
+require 'app/models/purchase_solicitation_liberation'
 require 'app/models/resource_annul'
 
 describe PurchaseSolicitation do
@@ -20,6 +21,7 @@ describe PurchaseSolicitation do
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_one(:annul).dependent(:destroy) }
+  it { should have_one(:liberation).dependent(:destroy) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }
@@ -68,6 +70,19 @@ describe PurchaseSolicitation do
       subject.should_receive(:update_attribute).with(:service_status, PurchaseSolicitationServiceStatus::ANNULLED)
 
       subject.annul!
+    end
+  end
+
+  describe '#liberate!' do
+    let :liberation do
+      double :liberation
+    end
+
+    it 'should updates the service status to annulled' do
+      subject.stub(:liberation).and_return(liberation)
+      subject.should_receive(:update_attribute).with(:service_status, PurchaseSolicitationServiceStatus::LIBERATED)
+
+      subject.liberate!
     end
   end
 

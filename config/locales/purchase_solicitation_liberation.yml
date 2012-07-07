@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation_liberation:
+        one: "Liberação de Solicitação de Compra"
+        other: "Liberações de Solicitações de Compra"
+
+    attributes:
+      purchase_solicitation_liberation:
+        date: "Data"
+        justification: "Justificativa"
+        purchase_solicitation: "Solicitação de compras"
+        responsible: "Responsável"

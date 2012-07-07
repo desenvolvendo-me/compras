@@ -16,6 +16,7 @@ class PurchaseSolicitation < Compras::Model
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation, :order => :id
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
+  has_one :liberation, :class_name => 'PurchaseSolicitationLiberation', :dependent => :destroy
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
@@ -33,6 +34,8 @@ class PurchaseSolicitation < Compras::Model
   orderize :request_date
   filterize
 
+  scope :pending, where { service_status.eq PurchaseSolicitationServiceStatus::PENDING }
+
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end
@@ -43,6 +46,12 @@ class PurchaseSolicitation < Compras::Model
 
   def annul!
     update_attribute :service_status, PurchaseSolicitationServiceStatus::ANNULLED
+  end
+
+  def liberate!
+    return false unless liberation.present?
+
+    update_attribute :service_status, PurchaseSolicitationServiceStatus::LIBERATED
   end
 
   def next_code

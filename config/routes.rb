@@ -701,6 +701,13 @@ Compras::Application.routes.draw do
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 
+  resources :purchase_solicitation_liberations, :only => [:new, :create, :edit] do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :reference_units do
     collection do
       get :modal
