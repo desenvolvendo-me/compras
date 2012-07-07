@@ -12,8 +12,8 @@ Gestão de compras e licitações do município.
 
 [Why?](http://stevenharman.net/blog/archive/2011/06/09/git-pull-with-automatic-rebase.aspx)
 
-     $ git config branch.autosetuprebase always --global
-     $ git config branch.master.rebase true
+    $ git config branch.autosetuprebase always --global
+    $ git config branch.master.rebase true
 
 ### PhantomJS
 
