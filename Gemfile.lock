@@ -33,8 +33,8 @@ GIT
       validates_timeliness (~> 3.0.11)
 
 GIT
-  remote: https://github.com/jonleighton/poltergeist.git
-  revision: 29428a7da7494685ba8ee1fdd4f95dc0280547ef
+  remote: https://github.com/sobrinho/poltergeist.git
+  revision: e38cafdbd7543754cf084a8a981a2e3f03d4e36e
   specs:
     poltergeist (0.6.0)
       capybara (~> 1.1)

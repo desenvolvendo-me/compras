@@ -175,8 +175,6 @@ feature "Pledges" do
         page.should have_disabled_field 'Elemento da despesa'
         page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
 
-        scroll_modal_to_bottom :field => 'Elemento da despesa'
-
         click_button 'Pesquisar'
 
         page.should_not have_content '3.0.10.01.11'
@@ -207,8 +205,6 @@ feature "Pledges" do
         page.should have_disabled_field 'Elemento da despesa'
         page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
 
-        scroll_modal_to_bottom :field => 'Grupo da despesa'
-
         click_button 'Pesquisar'
 
         page.should_not have_content     '3.0.10.01.11'
@@ -238,8 +234,6 @@ feature "Pledges" do
         page.should have_disabled_field 'Elemento da despesa'
         page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
 
-        scroll_modal_to_bottom :field => 'Elemento da despesa'
-
         click_button 'Pesquisar'
 
         page.should_not have_content '3.0.10.01.11'
@@ -263,8 +257,6 @@ feature "Pledges" do
 
     within_tab 'Principal' do
       within_modal 'Desdobramento' do
-        scroll_modal_to_bottom :field => 'Natureza da despesa'
-
         page.should have_disabled_field 'Categoria da despesa'
         page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
         page.should have_disabled_field 'Grupo da despesa'
@@ -622,8 +614,6 @@ feature "Pledges" do
       fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
 
       within_modal 'Dotação' do
-        scroll_modal_to_bottom :field => 'Código'
-
         click_button 'Pesquisar'
 
         click_record '2011 - Detran'
@@ -847,8 +837,6 @@ feature "Pledges" do
 
     within_tab 'Principal' do
       within_modal 'Contrato de dívida' do
-        scroll_modal_to_bottom :field => 'Ano do contrato'
-
         click_button 'Pesquisar'
 
         page.should_not have_content '001'
@@ -860,8 +848,6 @@ feature "Pledges" do
 
     within_tab 'Complementar' do
       within_modal 'Contrato' do
-        scroll_modal_to_bottom :field => 'Ano do contrato'
-
         click_button 'Pesquisar'
 
         page.should have_content '001'
@@ -886,8 +872,6 @@ feature "Pledges" do
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       within_modal 'Dotação' do
-        scroll_modal_to_bottom :field => 'Natureza da despesa'
-
         click_button 'Pesquisar'
 
         click_record '2011 - Secretaria de Educação'
@@ -932,7 +916,6 @@ ExpenseNature.make!(:compra_de_material)
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
       select 'Global', :from => 'Tipo de empenho'
       within_modal 'Dotação' do
-        scroll_modal_to_bottom :field => 'Natureza da despesa'
         click_button 'Pesquisar'
         click_record '2012 - Detran'
       end

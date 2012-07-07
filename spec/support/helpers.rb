@@ -52,33 +52,10 @@ module Helpers
 
       yield if block_given?
 
-      # Scroll modal to bottom
-      # See https://github.com/jonleighton/poltergeist/issues/83
-      page.execute_script '$(".ui-dialog-content").scrollTop($(".ui-dialog-content").prop("scrollHeight"))'
-
       click_button 'Pesquisar'
 
       click_record options.fetch(:with)
     end
-  end
-
-  # Move the scroll of modal to bottom
-  #
-  # ==== Examples
-  #
-  #     scroll_modal_to_bottom :field => "Nome"
-  #
-  # A field is required because we need to make sure that the fields have
-  # appeared on screen for only then do the rolling.
-  #
-  def scroll_modal_to_bottom(options = {})
-    wait_until do
-      page.should have_content(options.fetch(:field))
-    end if options
-
-    # Scroll modal to bottom
-    # See https://github.com/jonleighton/poltergeist/issues/83
-    page.execute_script '$(".ui-dialog-content").scrollTop($(".ui-dialog-content").prop("scrollHeight"))'
   end
 
   def within_modal(locator)
