@@ -15,10 +15,9 @@ Gestão de compras e licitações do município.
      $ git config branch.autosetuprebase always --global
      $ git config branch.master.rebase true
 
-### Qt
+### PhantomJS
 
-Instale o Qt:
-https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+    $ brew install phantomjs
 
 ### Bundler
 
