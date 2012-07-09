@@ -6,11 +6,19 @@ class PurchaseSolicitationDecorator < Decorator
     "Estrutura orçamentaria solicitante: #{budget_structure} / Responsável pela solicitação: #{responsible} / Status: #{service_status_humanize}"
   end
 
-  def link_to_liberation
+  def liberation_url
     if component.pending?
-      helpers.link_to("Liberar", routes.new_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id), :class => 'button primary')
+      routes.new_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id)
     elsif component.liberated?
-      helpers.link_to("Liberação", routes.edit_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id, :id => component.liberation.id), :class => 'button primary')
+      routes.edit_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id, :id => component.liberation.id)
+    end
+  end
+
+  def liberation_label
+    if component.pending?
+      'Liberar'
+    elsif component.liberated?
+      'Liberação'
     end
   end
 end
