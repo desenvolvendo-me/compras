@@ -13,8 +13,8 @@ DirectPurchase.blueprint(:compra) do
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
-  price_collection { "9,99" }
-  price_registration { "8,88" }
+  price_collection { 9.99 }
+  price_registration { 8.88 }
   observation { "Observacoes" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -35,8 +35,8 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
-  price_collection { "9,99" }
-  price_registration { "8,88" }
+  price_collection { 9.99 }
+  price_registration { 8.88 }
   observation { "Compra de 2012 ainda não autorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -57,8 +57,8 @@ DirectPurchase.blueprint(:compra_2011) do
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
-  price_collection { "9,99" }
-  price_registration { "8,88" }
+  price_collection { 9.99 }
+  price_registration { 8.88 }
   observation { "Compra feita em 2011 e não authorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -79,8 +79,8 @@ DirectPurchase.blueprint(:compra_2011_dez) do
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
-  price_collection { "9,99" }
-  price_registration { "8,88" }
+  price_collection { 9.99 }
+  price_registration { 8.88 }
   observation { "Compra feita em 2011 e não authorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -101,8 +101,8 @@ DirectPurchase.blueprint(:company_purchase) do
   delivery_location { DeliveryLocation.make!(:education) }
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
-  price_collection { "9,99" }
-  price_registration { "8,88" }
+  price_collection { 9.99 }
+  price_registration { 8.88 }
   observation { "Compra feita em 2011 e não autorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
