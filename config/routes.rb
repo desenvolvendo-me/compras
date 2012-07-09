@@ -592,12 +592,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :pledge_parcels, :only => [:show] do
-    collection do
-      get :modal
-    end
-  end
-
   resources :pledge_liquidation_annuls, :except => [:destroy, :update]
 
   resources :pledge_liquidations, :except => [:destroy, :update] do
