@@ -36,7 +36,7 @@
     var urlModal = "<%= modal_budget_structures_path %>?",
         params = {
           locked_fields: ["budget_structure_configuration", "budget_structure_level"],
-          only_synthetic: true,
+          synthetic: true,
           budget_structure:{
             budget_structure_configuration_id: configuration_id(),
             budget_structure_level_id: level_id

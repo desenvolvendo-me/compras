@@ -6,7 +6,8 @@ class PurchaseSolicitation < Compras::Model
   attr_readonly :code
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
-  has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus, :create_helpers => true
+  has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
+    :create_helpers => true, :create_scopes => true
 
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :delivery_location
@@ -33,8 +34,6 @@ class PurchaseSolicitation < Compras::Model
 
   orderize :request_date
   filterize
-
-  scope :pending, where { service_status.eq PurchaseSolicitationServiceStatus::PENDING }
 
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"

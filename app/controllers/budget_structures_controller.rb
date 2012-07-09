@@ -1,3 +1,3 @@
 class BudgetStructuresController < CrudController
-  has_scope :only_synthetic, :type => :boolean
+  has_scope :synthetic, :type => :boolean
 end

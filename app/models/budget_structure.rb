@@ -5,7 +5,8 @@ class BudgetStructure < Compras::Model
   attr_accessible :budget_structure_responsibles_attributes, :kind
   attr_accessible :budget_structure_level_id, :parent_id
 
-  has_enumeration_for :kind, :with => BudgetStructureKind, :create_helpers => true
+  has_enumeration_for :kind, :with => BudgetStructureKind,
+    :create_helpers => true, :create_scopes => true
 
   belongs_to :budget_structure_configuration
   belongs_to :administration_type
@@ -35,8 +36,6 @@ class BudgetStructure < Compras::Model
 
   orderize :description
   filterize
-
-  scope :only_synthetic, where { kind.eq BudgetStructureKind::SYNTHETIC }
 
   scope :search_by_code_and_configuration_and_level, lambda { |code, configuration_id, level|
     joins{ budget_structure_configuration }.
