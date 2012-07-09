@@ -7,8 +7,6 @@ class PurchaseSolicitationDecorator < Decorator
   end
 
   def link_to_liberation
-    return unless component.persisted?
-
     if component.pending?
       helpers.link_to("Liberar", routes.new_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id), :class => 'button primary')
     elsif component.liberated?
