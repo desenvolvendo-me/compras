@@ -1,6 +1,14 @@
 <%= f.input :annullable_id, :as => :hidden %>
 <%= f.input :annullable_type, :as => :hidden %>
 
-<%= f.input :employee, :disabled => f.object.persisted? %>
-<%= f.input :date, :disabled => f.object.persisted? %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :employee, :disabled => f.object.persisted? %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :date, :disabled => f.object.persisted? %>
+  </div>
+</div>
+
 <%= f.input :description, :disabled => f.object.persisted? %>
