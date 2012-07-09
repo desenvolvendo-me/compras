@@ -23,7 +23,5 @@ class OccurrenceContractualHistoricsController < CrudController
       @parent = Contract.find(params[:contract_id])
       return @parent
     end
-
-    super
   end
 end

@@ -21,8 +21,6 @@ class ContractTerminationsController < CrudController
       @parent = Contract.find(params[:contract_id])
       return @parent
     end
-
-    super
   end
 
   protected

@@ -34,8 +34,6 @@ class LicitationProcessBiddersController < CrudController
       @parent = LicitationProcess.find(params[:licitation_process_id])
       return @parent
     end
-
-    super
   end
 
   protected

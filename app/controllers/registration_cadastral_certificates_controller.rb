@@ -23,7 +23,5 @@ class RegistrationCadastralCertificatesController < CrudController
       @parent = Creditor.find(params[:creditor_id])
       return @parent
     end
-
-    super
   end
 end
