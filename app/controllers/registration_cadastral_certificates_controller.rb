@@ -11,7 +11,7 @@ class RegistrationCadastralCertificatesController < CrudController
   end
 
   def update
-    update! { registration_cadastral_cerificates_path(:creditor_id => resource.creditor_id) }
+    update! { registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
   end
 
   def destroy
