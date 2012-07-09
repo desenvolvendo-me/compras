@@ -543,6 +543,58 @@ feature "Creditors" do
     page.should have_field 'Data da revogação', :with => '05/04/2014'
   end
 
+  scenario 'update a CRC for a creditor' do
+    Creditor.make!(:sobrinho)
+
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
+
+    click_link 'Gabriel Sobrinho'
+
+    click_link 'CRC'
+
+    click_link '1/2012'
+
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Gabriel Sobrinho'
+
+    fill_in 'Exercício', :with => '2013'
+    page.should have_field 'Número', :with => '1'
+    fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral do Sobrinho'
+    fill_in 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    fill_in 'Data da validade', :with => '05/04/2014'
+    fill_in 'Data da revogação', :with => '05/04/2015'
+    fill_in 'Capital social', :with => '987.654,31'
+    fill_in 'Capital integral', :with => '123.456,79'
+    fill_in 'Faturamento mensal', :with => '456.789,00'
+    fill_in 'Área construída (m²)', :with => '88,88'
+    fill_in 'Área total (m²)', :with => '99,99'
+    fill_in 'Total de empregados', :with => '99'
+    fill_in 'Data de registro na junta comercial', :with => '05/05/2011'
+    fill_in 'Número na junta comercial', :with => '123456789'
+
+    click_button 'Salvar'
+
+    page.should have_notice 'Certificado de Registro Cadastral editado com sucesso.'
+
+    click_link '1/2013'
+
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Gabriel Sobrinho'
+
+    page.should have_field 'Exercício', :with => '2013'
+    page.should have_field 'Número', :with => '1'
+    page.should have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral do Sobrinho'
+    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    page.should have_field 'Data da validade', :with => '05/04/2014'
+    page.should have_field 'Data da revogação', :with => '05/04/2015'
+    page.should have_field 'Capital social', :with => '987.654,31'
+    page.should have_field 'Capital integral', :with => '123.456,79'
+    page.should have_field 'Faturamento mensal', :with => '456.789,00'
+    page.should have_field 'Área construída (m²)', :with => '88,88'
+    page.should have_field 'Área total (m²)', :with => '99,99'
+    page.should have_field 'Total de empregados', :with => '99'
+    page.should have_field 'Data de registro na junta comercial', :with => '05/05/2011'
+    page.should have_field 'Número na junta comercial', :with => '123456789'
+  end
+
   scenario 'update a creditor when people is special entry' do
     Creditor.make!(:mateus)
     Agency.make!(:santander)
