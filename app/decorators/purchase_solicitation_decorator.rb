@@ -12,7 +12,7 @@ class PurchaseSolicitationDecorator < Decorator
     if component.pending?
       helpers.link_to("Liberar", routes.new_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id), :class => 'button primary')
     elsif component.liberated?
-      helpers.link_to("Liberar", routes.edit_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id, :id => component.liberation.id), :class => 'button primary')
+      helpers.link_to("Liberação", routes.edit_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id, :id => component.liberation.id), :class => 'button primary')
     end
   end
 end

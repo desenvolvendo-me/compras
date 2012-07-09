@@ -453,7 +453,7 @@ feature "PurchaseSolicitations" do
     # button liberate can be seen when purchase_solicitation is pending
     click_link 'Liberar'
 
-    page.should have_content 'Criar Liberação de Solicitação de Compra'
+    page.should have_content 'Liberar a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
 
     click_link 'Cancelar'
 

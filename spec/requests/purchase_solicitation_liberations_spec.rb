@@ -22,7 +22,7 @@ feature "PurchaseSolicitationLiberations" do
     # button liberate can be seen when purchase_solicitation is pending
     click_link 'Liberar'
 
-    page.should have_field 'Solicitação de compras', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    page.should have_content 'Liberar a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     page.should have_field 'Data', :with => I18n.l(Date.current)
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
@@ -34,13 +34,13 @@ feature "PurchaseSolicitationLiberations" do
 
     page.should have_select 'Status de atendimento', :selected => 'Liberada'
 
-    click_link 'Liberar'
+    click_link 'Liberação'
 
     page.should have_disabled_field 'Justificativa'
     page.should have_disabled_field 'Data'
     page.should have_disabled_field 'Responsável'
 
-    page.should have_field 'Solicitação de compras', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    page.should have_content 'Liberação da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     page.should have_field 'Justificativa', :with => 'Compra justificada'
     page.should have_field 'Data', :with =>  I18n.l(Date.current)
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'

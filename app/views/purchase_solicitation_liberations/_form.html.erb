@@ -1,16 +1,12 @@
+<%= f.input :purchase_solicitation, :as => :hidden %>
+
 <div class='yui3-g'>
   <div class='yui3-u-1-2'>
-    <%= f.input :purchase_solicitation, :disabled => true %>
+    <%= f.input :responsible, :disabled => true %>
   </div>
 
   <div class='yui3-u-1-6'>
     <%= f.input :date, :disabled => f.object.persisted? %>
-  </div>
-</div>
-
-<div class='yui3-g'>
-  <div class='yui3-u-1-2'>
-    <%= f.input :responsible, :disabled => f.object.persisted? %>
   </div>
 </div>
 
