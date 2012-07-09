@@ -20,7 +20,7 @@ class SupplyAuthorizationDecorator < Decorator
     return unless component.direct_purchase && component.period
 
     if component.period > 1
-      helpers.t("enumerations.period_unit_plural.#{period_unit}")
+      helpers.t("enumerations.period_unit.#{period_unit}")
     else
       component.period_unit_humanize
     end

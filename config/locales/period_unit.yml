@@ -4,8 +4,3 @@ pt-BR:
       day: "dia/dias"
       month: "mês/meses"
       year: "ano/anos"
-
-    period_unit_plural:
-      day: "dias"
-      month: "meses"
-      year: "anos"

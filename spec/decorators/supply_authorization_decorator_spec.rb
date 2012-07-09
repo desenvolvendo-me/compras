@@ -40,11 +40,11 @@ describe SupplyAuthorizationDecorator do
   end
 
   it "should pluralize the period unit when period is greater than 1" do
-    helpers.stub(:t).with("enumerations.period_unit_plural.month").and_return("meses")
+    helpers.stub(:t).with("enumerations.period_unit.month").and_return("mês/meses")
     component.stub(:direct_purchase => direct_purchase)
     component.stub(:period => 2)
     component.stub(:period_unit => PeriodUnit::MONTH)
-    subject.pluralized_period_unit.should eq 'meses'
+    subject.pluralized_period_unit.should eq 'mês/meses'
   end
 
   it "should not pluralize the period unit when period is less than 2" do
