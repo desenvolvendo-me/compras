@@ -12,15 +12,4 @@ builder resource, json do
   json.balance                              resource.decorator.balance
   json.balance_as_currency                  resource.decorator.balance_as_currency
   json.description                          resource.description
-
-  json.parcels resource.pledge_parcels do |json, parcel|
-    json.number                      parcel.number
-    json.expiration_date             parcel.decorator.expiration_date
-    json.value                       parcel.decorator.value
-    json.balance                     parcel.decorator.balance_as_currency
-    json.liquidations_value          parcel.decorator.liquidations_value
-    json.canceled_liquidations_value parcel.decorator.canceled_liquidations_value
-    json.canceled_value              parcel.decorator.canceled_value
-    json.liquidations_value          parcel.decorator.liquidations_value
-  end
 end

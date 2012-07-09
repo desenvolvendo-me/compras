@@ -4,7 +4,7 @@ class Pledge < Compras::Model
   attr_accessible :pledge_historic_id, :contract_id, :licitation_modality_id
   attr_accessible :description, :licitation, :process, :reserve_fund_id, :material_kind
   attr_accessible :founded_debt_contract_id, :creditor_id, :pledge_items_attributes
-  attr_accessible :pledge_parcels_attributes, :licitation_process_id, :expense_nature_id
+  attr_accessible :licitation_process_id, :expense_nature_id
 
   attr_readonly :code
 
@@ -28,13 +28,11 @@ class Pledge < Compras::Model
   belongs_to :expense_nature
 
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
-  has_many :pledge_parcels, :dependent => :destroy, :order => :number
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
   has_many :pledge_liquidation_cancellations, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
-  accepts_nested_attributes_for :pledge_parcels, :allow_destroy => true
 
   delegate :signature_date, :to => :contract, :allow_nil => true, :prefix => true
   delegate :value, :to => :reserve_fund, :allow_nil => true, :prefix => true
@@ -54,9 +52,6 @@ class Pledge < Compras::Model
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
   validate :cannot_have_more_than_once_item_with_the_same_material
-  validate :parcels_should_have_date_greater_than_or_equals_emission_date
-  validate :parcels_should_have_date_greater_than_last_parcel_date
-  validate :pledge_parcels_value_should_be_equals_value
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
@@ -82,20 +77,8 @@ class Pledge < Compras::Model
      "#{code} - #{entity}/#{year}"
   end
 
-  def pledge_parcels_sum
-    pledge_parcels.map(&:value).compact.sum
-  end
-
   def items_total_value
     pledge_items.sum(&:estimated_total_price)
-  end
-
-  def pledge_parcels_with_balance
-    pledge_parcels.select { |pledge_parcel| pledge_parcel.balance > 0 }
-  end
-
-  def pledge_parcels_with_liquidations
-    pledge_parcels.select { |pledge_parcel| pledge_parcel.liquidations_value > 0 }
   end
 
   def balance
@@ -130,36 +113,6 @@ class Pledge < Compras::Model
 
   def last_code
     self.class.where { self.descriptor_id.eq(descriptor_id) }.maximum(:code).to_i
-  end
-
-  def pledge_parcels_value_should_be_equals_value
-    return unless value
-
-    if pledge_parcels_sum != value
-      errors.add(:pledge_parcels_sum, :pledge_parcels_sum_must_be_equals_to_pledge_value)
-    end
-  end
-
-  def parcels_should_have_date_greater_than_last_parcel_date
-    last_parcel = nil
-
-    pledge_parcels.each do |parcel|
-      if last_parcel && parcel.expiration_date && parcel.expiration_date < last_parcel.expiration_date
-        parcel.errors.add(:expiration_date, :must_be_greater_than_last_expiration_date)
-        errors.add(:pledge_parcels, :invalid)
-      end
-
-      last_parcel = parcel
-    end
-  end
-
-  def parcels_should_have_date_greater_than_or_equals_emission_date
-    pledge_parcels.each do |parcel|
-      next unless emission_date && parcel.expiration_date && parcel.expiration_date < emission_date
-
-      parcel.errors.add(:expiration_date, :must_be_greater_than_or_equals_pledge_emission_date)
-      errors.add(:pledge_parcels, :invalid)
-    end
   end
 
   def value_should_not_be_greater_than_budget_allocation_real_amount

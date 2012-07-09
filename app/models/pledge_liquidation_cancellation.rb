@@ -25,12 +25,6 @@ class PledgeLiquidationCancellation < Compras::Model
   orderize :id
   filterize
 
-  def movimentable_pledge_parcels
-    return unless pledge
-
-    pledge.pledge_parcels_with_liquidations
-  end
-
   def to_s
     id.to_s
   end

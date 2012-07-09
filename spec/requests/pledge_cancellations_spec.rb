@@ -15,13 +15,6 @@ feature "PledgeCancellations" do
 
     fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
 
-    within '.pledge_totals' do
-      page.find('#pledge_value').should have_content 'R$ 200,00'
-      page.find('#pledge_cancellations_sum').should have_content 'R$ 0,00'
-      page.find('#pledge_liquidations_sum').should have_content 'R$ 0,00'
-      page.find('#pledge_balance').should have_content 'R$ 200,00'
-    end
-
     fill_in 'Valor a ser anulado', :with => '150,00'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
     select 'Normal', :from => 'Natureza da ocorrência'
@@ -38,13 +31,6 @@ feature "PledgeCancellations" do
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-
-    within '.pledge_totals' do
-      page.find('#pledge_value').should have_content 'R$ 200,00'
-      page.find('#pledge_cancellations_sum').should have_content 'R$ 150,00'
-      page.find('#pledge_liquidations_sum').should have_content 'R$ 0,00'
-      page.find('#pledge_balance').should have_content 'R$ 50,00'
-    end
 
     page.should have_field 'Valor a ser anulado', :with => '150,00'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
@@ -64,20 +50,10 @@ feature "PledgeCancellations" do
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
 
-    within '.pledge_totals' do
-      page.find('#pledge_value').should have_content 'R$ 9,99'
-      page.find('#pledge_cancellations_sum').should have_content 'R$ 0,00'
-      page.find('#pledge_liquidations_sum').should have_content 'R$ 0,00'
-      page.find('#pledge_balance').should have_content 'R$ 9,99'
-    end
-
     clear_modal 'Empenho'
 
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => ''
-
-    page.should_not have_content('R$ 9,99')
-    page.should_not have_content('R$ 0,00')
   end
 
   scenario 'should have all fields disabled when editing an existent pledge' do

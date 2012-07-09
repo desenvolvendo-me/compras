@@ -9,7 +9,6 @@ feature "PledgeLiquidationCancellations" do
   scenario 'create a new pledge_liquidation_cancellation' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
     PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
-    PledgeParcelMovimentation.make!(:liquidacao_para_dois_vencimentos)
 
     navigate_through 'Contabilidade > Execução > Empenho > Anulações de Liquidações de Empenho'
 
@@ -32,29 +31,6 @@ feature "PledgeLiquidationCancellations" do
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
 
-    within '#parcel_1' do
-      page.should have_content '1'
-      page.should have_content I18n.l(Date.current + 1.day)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 90,00'
-      find('.canceled_liquidations_value').should have_content 'R$ 90,00'
-      find('.balance').should have_content 'R$ 100,00'
-    end
-
-    within '#parcel_2' do
-      page.should have_content '2'
-      page.should have_content I18n.l(Date.current + 2.day)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 0,00'
-      find('.canceled_liquidations_value').should have_content 'R$ 0,00'
-      find('.balance').should have_content 'R$ 100,00'
-    end
-
-    page.find('#pledge_value').should have_content 'R$ 200,00'
-    page.find('#pledge_liquidations_sum').should have_content 'R$ 90,00'
-    page.find('#pledge_liquidation_cancellations_sum').should have_content 'R$ 90,00'
-    page.find('#pledge_balance').should have_content 'R$ 200,00'
-
     page.should have_field 'Valor liquidado a ser anulado', :with => '90,00'
     page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
     page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
@@ -63,7 +39,6 @@ feature "PledgeLiquidationCancellations" do
   scenario 'when fill/clear pledge should fill/clear delegateds fields' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
     PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
-    PledgeParcelMovimentation.make!(:liquidacao_para_dois_vencimentos)
 
     navigate_through 'Contabilidade > Execução > Empenho > Anulações de Liquidações de Empenho'
 
@@ -74,44 +49,15 @@ feature "PledgeLiquidationCancellations" do
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
 
-    within '#parcel_1' do
-      page.should have_content '1'
-      page.should have_content I18n.l(Date.current + 1.day)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 90,00'
-      find('.canceled_liquidations_value').should have_content 'R$ 0,00'
-      find('.balance').should have_content 'R$ 10,00'
-    end
-
-    within '#parcel_2' do
-      page.should have_content '2'
-      page.should have_content I18n.l(Date.current + 2.day)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 0,00'
-      find('.canceled_liquidations_value').should have_content 'R$ 0,00'
-      find('.balance').should have_content 'R$ 100,00'
-    end
-
-    page.find('#pledge_value').should have_content 'R$ 200,00'
-    page.find('#pledge_liquidations_sum').should have_content 'R$ 90,00'
-    page.find('#pledge_liquidation_cancellations_sum').should have_content 'R$ 0,00'
-    page.find('#pledge_balance').should have_content 'R$ 110,00'
-
     clear_modal 'Empenho'
     page.should have_field 'Empenho', :with => ''
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => ''
-
-    within '#pledge_parcels' do
-      page.should_not have_content I18n.l(Date.current + 1.day)
-      page.should_not have_content 'R$ 100,00'
-    end
   end
 
   scenario 'should have all fields disabled when editing an existent pledge' do
     Pledge.make!(:empenho)
     PledgeLiquidation.make!(:liquidacao_total)
-    PledgeParcelMovimentation.make!(:liquidacao_total)
     pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
 
     navigate_through 'Contabilidade > Execução > Empenho > Anulações de Liquidações de Empenho'
@@ -132,7 +78,6 @@ feature "PledgeLiquidationCancellations" do
 
   scenario 'should not have a button to destroy an existent pledge' do
     PledgeLiquidation.make!(:liquidacao_total)
-    PledgeParcelMovimentation.make!(:liquidacao_total)
     pledge_liquidation_cancellation = PledgeLiquidationCancellation.make!(:empenho_2012)
 
     navigate_through 'Contabilidade > Execução > Empenho > Anulações de Liquidações de Empenho'

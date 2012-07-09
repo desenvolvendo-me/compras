@@ -3,7 +3,6 @@
     <li><a href="#general">Principal</a></li>
     <li><a href="#complement">Complementar</a></li>
     <li><a href="#items">Itens</a></li>
-    <li><a href="#parcels">Vencimentos</a></li>
   </ul>
 
   <div id="general">
@@ -16,10 +15,6 @@
 
   <div id="items">
     <%= render 'items', :f => f %>
-  </div>
-
-  <div id="parcels">
-    <%= render 'parcels', :f => f %>
   </div>
 </div>
 
@@ -43,10 +38,6 @@
           expenseElementId = '<%= f.object.expense_element_id %>',
           expenseNature = '<%= f.object.expense_nature_expense_nature %>';
 
-      function uniqPledgeParcel(){
-        return $('div.pledge-parcel .destroy[value=false]').length == 1;
-      }
-
       function pledgeItemsTotalValue() {
         var total = 0,
             value;
@@ -60,27 +51,6 @@
         });
 
         $('#pledge_items_total_value').val(numberWithDelimiter(total));
-      }
-
-      function pledgeParcelsTotalValue() {
-        var total = 0,
-            value;
-
-        $('.pledge-parcel .value:visible').each(function() {
-          value = $(this).val();
-
-          if (value != '') {
-            total += parsePtBrFloat(value);
-          }
-        });
-
-        $('#pledge_pledge_parcels_sum').val(numberWithDelimiter(total));
-      }
-
-      function fillParcelNumber() {
-        $('div.pledge-parcel .destroy[value=false]').each(function(index, item){
-          $(this).parents('.pledge-parcel').find('.order').html(index + 1);
-        });
       }
 
       function subcategoryModalUrl() {
@@ -134,18 +104,6 @@
         }
       });
 
-      $("#pledge_emission_date").change(function() {
-        if (uniqPledgeParcel()) {
-          $('div.pledge-parcel .destroy[value=false]:first').parents('div.pledge-parcel').find('.expiration_date').val($(this).val());
-        };
-      }).change();
-
-      $('form.pledge').delegate('#pledge_value', 'keyup', function() {
-        if (uniqPledgeParcel()) {
-          $('div.pledge-parcel .destroy[value=false]:first').parents('div.pledge-parcel').find('.value').val($(this).val());
-        };
-      });
-
       $("#pledge_budget_allocation_id").change(function (event, budget_allocation) {
         if (budget_allocation) {
           if (reserveFundBudgetAllocationId != budget_allocation.id) {
@@ -180,15 +138,9 @@
         }
       });
 
-      $('form.pledge').delegate('.remove-pledge-parcel', 'click', fillParcelNumber);
-      $('form.pledge').delegate('.add-pledge-parcel', 'click', pledgeParcelsTotalValue);
-      $('form.pledge').bind('append.mustache', pledgeParcelsTotalValue);
-      $('form.pledge').delegate('.value', 'keyup', pledgeParcelsTotalValue);
-      $('form.pledge').bind('append.mustache', fillParcelNumber);
       $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', pledgeItemsTotalValue);
       $('form.pledge').delegate('.remove-pledge-item', 'click', pledgeItemsTotalValue);
 
-      fillParcelNumber();
       $('#pledge_expense_nature').attr('data-modal-url', subcategoryModalUrl);
     })();
   <% end %>

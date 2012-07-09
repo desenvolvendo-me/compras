@@ -5,7 +5,6 @@ class PledgeLiquidation < Compras::Model
 
   belongs_to :pledge
 
-  has_many :pledge_parcel_movimentations, :dependent => :restrict, :as => :pledge_parcel_modifiable
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   delegate :emission_date, :to => :pledge, :allow_nil => true
@@ -29,12 +28,6 @@ class PledgeLiquidation < Compras::Model
 
   orderize :id
   filterize
-
-  def movimentable_pledge_parcels
-    return unless pledge
-
-    pledge.pledge_parcels_with_balance
-  end
 
   def annul!
     update_attribute :status, PledgeLiquidationStatus::ANNULLED

@@ -17,7 +17,6 @@ Pledge.blueprint(:empenho) do
   founded_debt_contract { Contract.make!(:contrato_detran) }
   creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
@@ -40,10 +39,6 @@ Pledge.blueprint(:empenho_com_dois_vencimentos) do
   founded_debt_contract { Contract.make!(:contrato_detran) }
   creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_parcels { [
-    PledgeParcel.make!(:vencimento_primario),
-    PledgeParcel.make!(:vencimento_secundario)
-  ] }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
@@ -66,7 +61,6 @@ Pledge.blueprint(:empenho_em_quinze_dias) do
   founded_debt_contract { Contract.make!(:contrato_detran) }
   creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_parcels { [PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)] }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
@@ -88,7 +82,6 @@ Pledge.blueprint(:founded_debt) do
   founded_debt_contract { Contract.make!(:primeiro_contrato) }
   creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_parcels { [PledgeParcel.make!(:vencimento_para_empenho_em_quinze_dias)] }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
@@ -111,7 +104,6 @@ Pledge.blueprint(:empenho_saldo_maior_mil) do
   founded_debt_contract { Contract.make!(:contrato_detran) }
   creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
@@ -134,7 +126,6 @@ Pledge.blueprint(:empenho_estimativo) do
   founded_debt_contract { Contract.make!(:contrato_detran) }
   creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
@@ -157,6 +148,5 @@ Pledge.blueprint(:empenho_ordinario) do
   founded_debt_contract { Contract.make!(:contrato_detran) }
   creditor { Creditor.make!(:wenderson_sa) }
   pledge_items { [PledgeItem.make!(:item)]}
-  pledge_parcels { [PledgeParcel.make!(:vencimento)]}
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end

@@ -32,14 +32,6 @@ describe PledgeLiquidationsController do
   end
 
   context 'POST #create' do
-    it 'should call the PledgeParcelMovimentationGenerator on action create' do
-      PledgeLiquidation.any_instance.stub(:valid?).and_return(true)
-
-      PledgeParcelMovimentationGenerator.any_instance.should_receive(:generate!)
-
-      post :create
-    end
-
     it 'should use active as default status' do
       post :create
 

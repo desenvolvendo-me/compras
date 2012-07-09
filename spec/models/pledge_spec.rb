@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/pledge'
 require 'app/models/pledge_item'
-require 'app/models/pledge_parcel'
 require 'app/models/pledge_cancellation'
 require 'app/models/pledge_liquidation'
 require 'app/models/pledge_liquidation_cancellation'
@@ -22,7 +21,6 @@ describe Pledge do
   it { should belong_to :licitation_process }
   it { should belong_to :expense_nature }
 
-  it { should have_many(:pledge_parcels).dependent(:destroy).order(:number) }
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
@@ -37,75 +35,10 @@ describe Pledge do
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :expense_nature }
 
-  context 'pledge_parcels with balance' do
-    let :pledge_parcel_one do
-      double('PledgeParcelOne', :balance => 100)
-    end
-
-    let :pledge_parcel_two do
-      double('PledgeParcelTow', :balance => 0)
-    end
-
-    it 'should return only with balance' do
-      subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
-
-      subject.pledge_parcels_with_balance.should eq [pledge_parcel_one]
-    end
-  end
-
-  context 'pledge_parcels_sum' do
-    let :pledge_parcel_one do
-      double('PledgeParcel', :value => 10)
-    end
-
-    let :pledge_parcel_two do
-      double('PledgeParcel', :value => 12)
-    end
-
-    it 'should return correct pledge_parcels_sum' do
-      subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
-      subject.pledge_parcels_sum.should eq 22
-    end
-  end
-
-  context 'validate pledge_parcels_sum' do
-    let :pledge_parcel_one do
-      double('PledgeParcel', :value => 10)
-    end
-
-    let :pledge_parcel_two do
-      double('PledgeParcel', :value => 12)
-    end
-
-    it 'should return correct pledge_parcels_sum' do
-      subject.value = 15
-
-      subject.valid?
-
-      subject.errors.messages[:pledge_parcels_sum].should include 'deve ser igual ao valor'
-    end
-  end
-
   it 'should return correct liquidation_value' do
     subject.stub(:pledge_liquidations_sum).and_return(200)
     subject.stub(:pledge_liquidation_cancellations_sum).and_return(90)
     subject.liquidation_value.should eq 110
-  end
-
-  context 'pledge_parcels with liquidations' do
-    let :pledge_parcel_one do
-      double('PledgeParcelOne', :liquidations_value => 100)
-    end
-
-    let :pledge_parcel_two do
-      double('PledgeParcelTow', :liquidations_value => 0)
-    end
-
-    it 'should return only with balance' do
-      subject.stub(:pledge_parcels).and_return([pledge_parcel_one, pledge_parcel_two])
-
-      subject.pledge_parcels_with_liquidations.should eq [pledge_parcel_one]
-    end
   end
 
   it 'should return correct balance' do

@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/pledge_liquidation'
-require 'app/models/pledge_parcel_movimentation'
 require 'lib/annullable'
 require 'app/models/resource_annul'
 
@@ -18,8 +17,6 @@ describe PledgeLiquidation do
   it { should validate_numericality_of :value }
 
   it { should belong_to :pledge }
-
-  it { should have_many(:pledge_parcel_movimentations).dependent(:restrict) }
 
   it { should have_one(:annul).dependent(:destroy) }
 
@@ -62,27 +59,6 @@ describe PledgeLiquidation do
     it 'should not be valid when date is older then emission_date' do
       subject.stub(:pledge).and_return(double('Pledge', :emission_date => Date.new(2012, 3, 29)))
       subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho')
-    end
-  end
-
-  context 'movimentable pledge_parcels' do
-    before do
-      subject.stub(:pledge).and_return(pledge)
-    end
-
-    let :pledge do
-      double('Pledge', :pledge_parcels_with_balance => pledge_parcels)
-    end
-
-    let :pledge_parcels do
-      [
-        double('PledgeParcelOne', :balance => 100),
-        double('PledgeParcelTwo', :balance => 100)
-      ]
-    end
-
-    it 'should return pledge_parcels with balance' do
-      subject.movimentable_pledge_parcels.should eq pledge_parcels
     end
   end
 end

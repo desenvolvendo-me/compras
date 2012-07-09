@@ -10,13 +10,6 @@ class PledgesController < CrudController
     super
   end
 
-  def create
-    object = build_resource
-    GenerateNumberPledgeParcels.new(object.pledge_parcels).generate!
-
-    super
-  end
-
   protected
 
   def create_resource(object)

@@ -57,25 +57,4 @@ describe PledgeCancellation do
       subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message("deve ser igual ou maior que a data de emissão")
     end
   end
-
-  context 'movimentable pledge_parcels' do
-    before do
-      subject.stub(:pledge).and_return(pledge)
-    end
-
-    let :pledge do
-      double('Pledge', :pledge_parcels_with_balance => pledge_parcels)
-    end
-
-    let :pledge_parcels do
-      [
-        double('PledgeParcelOne', :balance => 100),
-        double('PledgeParcelTwo', :balance => 500)
-      ]
-    end
-
-    it 'should return pledge parcels with balance' do
-      subject.movimentable_pledge_parcels.should eq pledge_parcels
-    end
-  end
 end

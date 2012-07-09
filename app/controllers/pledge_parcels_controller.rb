@@ -1,2 +1,0 @@
-class PledgeParcelsController < CrudController
-end

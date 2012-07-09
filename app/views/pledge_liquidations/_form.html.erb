@@ -12,8 +12,6 @@
   </div>
 </div>
 
-<%= render 'pledge_parcels', :f => f %>
-
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :value %>
@@ -26,26 +24,6 @@
 
 <%= f.input :description %>
 
-<%= mustache 'pledge-parcels-template' do %>
-  <tr id="parcel_{{number}}">
-    <td>
-      {{number}}
-    </td>
-    <td>
-      {{expiration_date}}
-    </td>
-    <td class="value">
-      {{value}}
-    </td>
-    <td class="liquidations_value">
-      {{liquidations_value}}
-    </td>
-    <td class="balance">
-      {{balance}}
-    </td>
-  </tr>
-<% end %>
-
 <script>
   <% if f.object.persisted? %>
     $('form.pledge_liquidation :input').attr('disabled', true);
@@ -53,27 +31,6 @@
     (function() {
       var pledgeId = $('#pledge_liquidation_pledge_id').val(),
           pledgeValue;
-
-      function clearExistingPledgeParcels() {
-        $('#pledge_parcels tbody').html('');
-      }
-
-      function createPledgeParcelsFromPledge(pledgeParcels) {
-        var template = $('#pledge-parcels-template'),
-            rendered = '';
-
-        $(pledgeParcels).each(function() {
-          rendered += template.mustache({
-            expiration_date: this.expiration_date,
-            value: this.value,
-            number: this.number,
-            liquidations_value: this.liquidations_value,
-            balance: this.balance
-          });
-        });
-
-        $('#pledge_parcels tbody').html(rendered);
-      }
 
       $('#pledge_liquidation_pledge_id').change(function (event, pledge) {
         if (pledge) {
@@ -84,7 +41,6 @@
           $('#pledge_liquidation_sum').html(pledge.liquidation_value_as_currency);
           $('#pledge_balance').html(pledge.balance_as_currency);
 
-          createPledgeParcelsFromPledge(pledge.parcels);
           pledgeValue = pledge.balance;
         } else {
           $('#pledge_liquidation_emission_date').val('');
@@ -96,7 +52,6 @@
           $('#pledge_value').html('');
           $('#pledge_liquidation_value').html('');
 
-          clearExistingPledgeParcels();
           pledgeValue = null;
         }
       });

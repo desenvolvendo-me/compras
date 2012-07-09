@@ -30,26 +30,6 @@ feature "PledgeLiquidations" do
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
 
-    within '#parcel_1' do
-      page.should have_content '1'
-      page.should have_content I18n.l(Date.tomorrow)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 100,00'
-      find('.balance').should have_content 'R$ 0,00'
-    end
-
-    within '#parcel_2' do
-      page.should have_content '2'
-      page.should have_content I18n.l(Date.current + 2.day)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 50,00'
-      find('.balance').should have_content 'R$ 50,00'
-    end
-
-    page.find('#pledge_value').should have_content 'R$ 200,00'
-    page.find('#pledge_liquidation_sum').should have_content 'R$ 150,00'
-    page.find('#pledge_balance').should have_content 'R$ 50,00'
-
     page.should have_field 'Valor a ser liquidado', :with => '150,00'
     page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Objeto do empenho', :with => 'Para empenho 2012'
@@ -67,26 +47,6 @@ feature "PledgeLiquidations" do
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
     page.should have_field 'Objeto do empenho', :with => 'Descricao'
-
-    within '#parcel_1' do
-      page.should have_content '1'
-      page.should have_content I18n.l(Date.tomorrow)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 0,00'
-      find('.balance').should have_content 'R$ 100,00'
-    end
-
-    within '#parcel_2' do
-      page.should have_content '2'
-      page.should have_content I18n.l(Date.current + 2.day)
-      find('.value').should have_content 'R$ 100,00'
-      find('.liquidations_value').should have_content 'R$ 0,00'
-      find('.balance').should have_content 'R$ 100,00'
-    end
-
-    page.find('#pledge_value').should have_content 'R$ 200,00'
-    page.find('#pledge_liquidation_sum').should have_content 'R$ 0,00'
-    page.find('#pledge_balance').should have_content 'R$ 200,00'
 
     clear_modal 'Empenho'
 

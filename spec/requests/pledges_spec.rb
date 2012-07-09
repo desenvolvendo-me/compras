@@ -21,6 +21,7 @@ feature "Pledges" do
     Contract.make!(:contrato_detran)
     Creditor.make!(:wenderson_sa)
     Material.make!(:arame_farpado)
+    Material.make!(:antivirus)
 
     navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
 
@@ -76,23 +77,15 @@ feature "Pledges" do
       # calculating total item price via javascript
       page.should have_disabled_field 'Valor total dos itens'
       page.should have_field 'Valor total dos itens', :with => "10,00"
-    end
 
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
-        fill_in 'Valor', :with => '5,00'
-      end
+      click_button "Adicionar Item"
 
-      click_button 'Adicionar Vencimento'
+      fill_modal 'Item', :with => "Antivirus", :field => "Descrição"
 
-      within '.pledge-parcel:last' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
-        fill_in 'Valor', :with => '5,00'
-      end
+      page.should have_field 'Unidade', :with => "UN"
 
-      page.should have_disabled_field 'Valor total das parcelas'
-      page.should have_field 'Valor total das parcelas', :with => '10,00'
+      fill_in 'Quantidade', :with => "1"
+      fill_in 'Valor unitário', :with => "1,00"
     end
 
     click_button 'Salvar'
@@ -134,23 +127,6 @@ feature "Pledges" do
       page.should have_field 'Valor unitário', :with => "5,00"
       page.should have_field 'Unidade', :with => "UN"
       page.should have_field 'Valor total', :with => "10,00"
-    end
-
-    within_tab 'Vencimentos' do
-      page.should have_field 'Valor', :with => '10,00'
-      page.should have_field 'Valor total das parcelas', :with => '10,00'
-
-      within '.pledge-parcel:first' do
-        page.should have_content 'Parcela 1'
-        page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
-        page.should have_field 'Valor', :with => '5,00'
-      end
-
-      within '.pledge-parcel:last' do
-        page.should have_content 'Parcela 2'
-        page.should have_field 'Vencimento', :with => I18n.l(Date.current + 1.month)
-        page.should have_field 'Valor', :with => '5,00'
-      end
     end
   end
 
@@ -348,20 +324,6 @@ feature "Pledges" do
       fill_in 'Objeto', :with => 'Objeto de empenho'
     end
 
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
-        fill_in 'Valor', :with => '5,00'
-      end
-
-      click_button 'Adicionar Vencimento'
-
-      within '.pledge-parcel:last' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 1.month)
-        fill_in 'Valor', :with => '5,00'
-      end
-    end
-
     click_button 'Salvar'
 
     within_tab 'Principal' do
@@ -370,156 +332,6 @@ feature "Pledges" do
 
     within_tab 'Itens' do
       page.should_not have_content 'não pode ficar em branco'
-    end
-
-    within_tab 'Vencimentos' do
-      page.should_not have_content 'não pode ficar em branco'
-    end
-  end
-
-  scenario 'when create should fill first pledge_parcel date and value' do
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
-
-    click_link 'Criar Empenho'
-
-    within_tab 'Principal' do
-      fill_in 'Data de emissão', :with => '30/12/2011'
-      fill_in 'Valor', :with => '31,66'
-    end
-
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        page.should have_field 'Vencimento', :with => '30/12/2011'
-        page.should have_field 'Valor', :with => '31,66'
-      end
-    end
-  end
-
-  scenario 'when create should not fill first pledge_parcel date and value if already add pledge parcels' do
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
-
-    click_link 'Criar Empenho'
-
-    within_tab 'Principal' do
-      fill_in 'Data de emissão', :with => '01/11/2011'
-      fill_in 'Valor', :with => '31,66'
-    end
-
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        page.should have_field 'Vencimento', :with => '01/11/2011'
-        page.should have_field 'Valor', :with => '31,66'
-      end
-
-      click_button 'Adicionar Vencimento'
-    end
-
-    within_tab 'Principal' do
-      fill_in 'Data de emissão', :with => '10/11/2011'
-      fill_in 'Valor', :with => '336,60'
-    end
-
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        page.should have_field 'Vencimento', :with => '01/11/2011'
-        page.should have_field 'Valor', :with => '31,66'
-      end
-    end
-  end
-
-  scenario 'validate expiration_date on pledge_parcels should be greater than emission_date' do
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
-
-    click_link 'Criar Empenho'
-
-    within_tab 'Principal' do
-      fill_in 'Data de emissão', :with => I18n.l(Date.current)
-    end
-
-    within_tab 'Vencimentos' do
-      fill_in 'Vencimento', :with => I18n.l(Date.current - 10.days)
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Vencimentos' do
-      page.should have_content 'deve ser maior ou igual a data de emissão'
-    end
-  end
-
-  scenario 'should not have error on expiration_date when pledge_parcels is equals than emission_date' do
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
-
-    click_link 'Criar Empenho'
-
-    within_tab 'Principal' do
-      fill_in 'Data de emissão', :with => I18n.l(Date.current)
-    end
-
-    within_tab 'Vencimentos' do
-      fill_in 'Vencimento', :with => I18n.l(Date.current)
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Vencimentos' do
-      page.should_not have_content 'deve ser maior ou igual a data de emissão'
-    end
-  end
-
-  scenario 'validate expiration_date on pledge_parcels should be greater than last expiration date' do
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
-
-    click_link 'Criar Empenho'
-
-    within_tab 'Principal' do
-      fill_in 'Data de emissão', :with => I18n.l(Date.current)
-    end
-
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 10.days)
-      end
-
-      click_button 'Adicionar Vencimento'
-
-      within '.pledge-parcel:last' do
-        fill_in 'Vencimento', :with => I18n.l(Date.current + 5.days)
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:last' do
-        page.should have_content 'deve ser maior que a data da parcela anterior'
-      end
-    end
-  end
-
-  scenario 'set sequencial pledge parcel number' do
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
-
-    click_link 'Criar Empenho'
-
-    within_tab 'Vencimentos' do
-      within '.pledge-parcel:first' do
-        page.should have_content 'Parcela 1'
-      end
-
-      click_button 'Adicionar Vencimento'
-
-      within '.pledge-parcel:last' do
-        page.should have_content 'Parcela 2'
-      end
-
-      within '.pledge-parcel:first' do
-        click_button 'Remover Vencimento'
-      end
-
-      within '.pledge-parcel:last' do
-        page.should have_content 'Parcela 1'
-      end
     end
   end
 
@@ -565,13 +377,6 @@ feature "Pledges" do
       page.should have_disabled_field 'Quantidade'
       page.should have_disabled_field 'Valor unitário'
       page.should have_disabled_field 'Valor total'
-    end
-
-    within_tab 'Vencimentos' do
-      page.should have_disabled_field 'Vencimento'
-      page.should have_disabled_field 'Valor'
-      page.should_not have_button 'Adicionar Vencimento'
-      page.should_not have_button 'Remover Vencimento'
     end
   end
 
