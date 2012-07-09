@@ -18,7 +18,7 @@ pt-BR:
         object_description: "Objeto"
         observations: "Observações"
         proposal_validity: "Validade da proposta"
-        proposal_validity_unit: "Unidade da validade da proposta"
+        proposal_validity_unit: "Período"
         expiration: "Vencimento"
         creditors: "Fornecedor"
         type_of_calculation: "Tipo de apuração"
