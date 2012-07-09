@@ -52,32 +52,18 @@ describe PledgeDecorator do
     subject.value.should eq 'R$ 100,00'
   end
 
-  it 'should return formatted liquidation_value' do
-    component.stub(:liquidation_value).and_return(100.0)
+  it 'should return formatted pledge_liquidations_sum' do
+    component.stub(:pledge_liquidations_sum).and_return(100.0)
     helpers.stub(:number_with_precision).with(100.0).and_return('100,00')
 
-    subject.liquidation_value.should eq '100,00'
+    subject.pledge_liquidations_sum.should eq '100,00'
   end
 
-  it 'should return formatted liquidation_value as currency' do
-    component.stub(:liquidation_value).and_return(100.0)
-    helpers.stub(:number_to_currency).with(100.0).and_return('100,00')
-
-    subject.liquidation_value_as_currency.should eq '100,00'
-  end
-
-  it 'should return formatted pledge_liquidation_cancellations_sum' do
-    component.stub(:pledge_liquidation_cancellations_sum).and_return(100.0)
-    helpers.stub(:number_to_currency).with(100.0).and_return('100,00')
-
-    subject.pledge_liquidation_cancellations_sum.should eq '100,00'
-  end
-
-  it 'should return formatted pledge_liquidations_sum' do
+  it 'should return formatted pledge_liquidations_sum as currency' do
     component.stub(:pledge_liquidations_sum).and_return(100.0)
     helpers.stub(:number_to_currency).with(100.0).and_return('100,00')
 
-    subject.pledge_liquidations_sum.should eq '100,00'
+    subject.pledge_liquidations_sum_as_currency.should eq '100,00'
   end
 
   it 'should return formatted contract_signature_date' do

@@ -4,7 +4,6 @@ require 'app/models/pledge'
 require 'app/models/pledge_item'
 require 'app/models/pledge_cancellation'
 require 'app/models/pledge_liquidation'
-require 'app/models/pledge_liquidation_cancellation'
 
 describe Pledge do
   it { should belong_to :descriptor }
@@ -24,7 +23,6 @@ describe Pledge do
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
-  it { should have_many(:pledge_liquidation_cancellations).dependent(:restrict) }
 
   it { should validate_presence_of :descriptor }
   it { should validate_presence_of :management_unit }
@@ -35,18 +33,11 @@ describe Pledge do
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :expense_nature }
 
-  it 'should return correct liquidation_value' do
-    subject.stub(:pledge_liquidations_sum).and_return(200)
-    subject.stub(:pledge_liquidation_cancellations_sum).and_return(90)
-    subject.liquidation_value.should eq 110
-  end
-
   it 'should return correct balance' do
     subject.value = 21
     subject.stub(:pledge_cancellations_sum).and_return(2)
     subject.stub(:pledge_liquidations_sum).and_return(1)
-    subject.stub(:pledge_liquidation_cancellations_sum).and_return(4)
-    subject.balance.should eq 22
+    subject.balance.should eq 18
   end
 
   it 'validate value based on budeget_allocation_real_amount' do

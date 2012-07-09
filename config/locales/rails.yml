@@ -232,7 +232,6 @@ pt-BR:
       must_not_be_greater_than_total_pledge_balance: "não pode ser superior ao total do empenho a subempenhar"
       must_not_be_greater_than_pledge_liquidation_value: "não pode ser superior a soma das liquidações do empenho (R$ %{value})"
       must_be_greater_or_equal_to_last_pledge_cancellation_date: "não pode ser menor que a data da última anulação (%{restriction})"
-      must_be_greater_or_equal_to_last_pledge_liquidation_cancellation_date: "não pode ser menor que a data da última anulação de liquidação (%{restriction})"
       must_be_greater_or_equal_to_last_pledge_liquidation_date: "não pode ser menor que a data da última liquidação (%{restriction})"
       must_not_be_greater_to_first_pledge_parcel_avaliable: "não pode ser superior ao vencimento da primeira parcela do empenho com saldo disponível (%{restriction})"
       difference_must_be_equals_to_zero: "deve ser igual a zero"

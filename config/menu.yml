@@ -98,7 +98,6 @@ menu:
         - pledges
         - pledge_cancellations
         - pledge_liquidations
-        - pledge_liquidation_cancellations
 
   - others:
     - people

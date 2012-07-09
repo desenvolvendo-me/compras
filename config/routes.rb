@@ -598,13 +598,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :pledge_liquidation_cancellations, :except => [:destroy, :update] do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :pledge_liquidation_annuls, :except => [:destroy, :update]
 
   resources :pledge_liquidations, :except => [:destroy, :update] do

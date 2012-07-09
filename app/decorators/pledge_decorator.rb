@@ -34,23 +34,15 @@ class PledgeDecorator < Decorator
     helpers.number_to_currency super if super
   end
 
-  def liquidation_value
+  def pledge_liquidations_sum
     helpers.number_with_precision super if super
   end
 
-  def liquidation_value_as_currency
-    helpers.number_to_currency component.liquidation_value if component.liquidation_value
+  def pledge_liquidations_sum_as_currency
+    helpers.number_to_currency component.pledge_liquidations_sum if component.pledge_liquidations_sum
   end
 
   def value
-    helpers.number_to_currency super if super
-  end
-
-  def pledge_liquidation_cancellations_sum
-    helpers.number_to_currency super if super
-  end
-
-  def pledge_liquidations_sum
     helpers.number_to_currency super if super
   end
 end

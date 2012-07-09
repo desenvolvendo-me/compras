@@ -30,7 +30,6 @@ class Pledge < Compras::Model
   has_many :pledge_items, :dependent => :destroy, :inverse_of => :pledge, :order => :id
   has_many :pledge_cancellations, :dependent => :restrict
   has_many :pledge_liquidations, :dependent => :restrict
-  has_many :pledge_liquidation_cancellations, :dependent => :restrict
 
   accepts_nested_attributes_for :pledge_items, :allow_destroy => true
 
@@ -82,23 +81,15 @@ class Pledge < Compras::Model
   end
 
   def balance
-    value - pledge_cancellations_sum - liquidation_value
+    value - pledge_cancellations_sum - pledge_liquidations_sum
   end
 
   def pledge_liquidations_sum
     pledge_liquidations.sum(:value)
   end
 
-  def liquidation_value
-    pledge_liquidations_sum - pledge_liquidation_cancellations_sum
-  end
-
   def pledge_cancellations_sum
     pledge_cancellations.sum(:value)
-  end
-
-  def pledge_liquidation_cancellations_sum
-    pledge_liquidation_cancellations.sum(:value)
   end
 
   def next_code
