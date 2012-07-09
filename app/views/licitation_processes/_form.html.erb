@@ -40,7 +40,7 @@
     var template = $('#administrative-process-budget-allocations-template'),
         target = $('#budget-allocations');
 
-    $(budgetAllocations).each(function() {
+    $(budgetAllocations).each(function () {
       target.append(template.mustache({id: this.id,
                                        description: this.description,
                                        administrative_process_id: this.administrative_process_id,
@@ -59,8 +59,8 @@
   });
 
   function calcItemOrder() {
-    $('fieldset.licitation-process-budget-allocation').each(function(index, item){
-      $(this).find('.item .hidden .destroy[value=false]').each(function(index, item){
+    $('fieldset.licitation-process-budget-allocation').each(function (index, item) {
+      $(this).find('.item .hidden .destroy[value=false]').each(function (index, item) {
         $(this).closest('.licitation-process-budget-allocation').find('.order').val(index + 1);
       });
     });
@@ -70,19 +70,19 @@
     var itemPrices = administrativeProcessBudgetAllocation.find('.item-price:visible'),
         totalValue = 0;
 
-    itemPrices.each(function() {
+    itemPrices.each(function () {
       totalValue += parsePtBrFloat(this.value);
     });
 
     administrativeProcessBudgetAllocation.find('.total-value').val(numberWithDelimiter(totalValue));
   }
 
-  $('form.licitation_process').delegate('.remove-item', 'click', function() {
+  $('form.licitation_process').delegate('.remove-item', 'click', function () {
     calcItemOrder();
     calculateTotalOfItems($(this).closest('.licitation-process-budget-allocation'));
   });
 
-  $('form.licitation_process').bind('append.mustache', function(){
+  $('form.licitation_process').bind('append.mustache', function (){
     calcItemOrder();
   });
 
@@ -98,7 +98,7 @@
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
-  $('form.licitation_process').delegate('.item-price', 'keyup', function() {
+  $('form.licitation_process').delegate('.item-price', 'keyup', function () {
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-price').val() || '0')),
@@ -167,7 +167,7 @@
                            '<%= f.object.administrative_process_object_type %>',
                            '<%= f.object.administrative_process_modality %>');
 
-  $('#licitation_process_judgment_form_id').change(function(e, record) {
+  $('#licitation_process_judgment_form_id').change(function (e, record) {
     filterTypesOfCalculation(record.kind, '<%= f.object.administrative_process_object_type %>', '<%= f.object.administrative_process_modality %>');
   });
 

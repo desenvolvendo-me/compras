@@ -28,8 +28,8 @@
   });
 
   function calcItemOrder() {
-    $('div.direct-purchase-budget-allocation').each(function(index, item){
-      $(this).find('.item .hidden .destroy[value=false]').each(function(index, item){
+    $('div.direct-purchase-budget-allocation').each(function (index, item) {
+      $(this).find('.item .hidden .destroy[value=false]').each(function (index, item) {
         $(this).closest('.item').find('.order').val(index + 1);
       });
     });
@@ -103,7 +103,7 @@
     setLicitationExemption();
   });
 
-  $('form.direct_purchase').bind('append.mustache', function(){
+  $('form.direct_purchase').bind('append.mustache', function () {
     calcItemOrder();
   });
 
