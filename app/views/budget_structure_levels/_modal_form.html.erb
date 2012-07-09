@@ -1,10 +1,12 @@
-<%= f.input :budget_structure_configuration %>
-<%= f.input :description %>
+<div class='modal_budget_structure_level'>
+  <%= f.input :budget_structure_configuration %>
+  <%= f.input :description %>
+</div>
 
 <script>
   function enabledDisabledBudgetStructureConfiguration(){
     var value = $('#filter_budget_structure_configuration_id').val() != '';
-    $('#filter_budget_structure_configuration').attr('DISABLED', value); 
+    $('.modal_budget_structure_level #filter_budget_structure_configuration').attr('DISABLED', value); 
   }
 
   enabledDisabledBudgetStructureConfiguration();
