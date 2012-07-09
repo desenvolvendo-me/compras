@@ -164,6 +164,7 @@
 
           $('#pledge_expense_nature').attr('disabled', false).attr('data-modal-url', subcategoryModalUrl);
         } else {
+          $('#pledge_expense_nature').attr('disabled', 'disabled');
           $('#pledge_budget_allocation_real_amount').val('');
           $('#pledge_budget_allocation_expense_nature').val('');
           $('#pledge_expense_nature').val('');
@@ -188,7 +189,7 @@
       $('form.pledge').delegate('.remove-pledge-item', 'click', pledgeItemsTotalValue);
 
       fillParcelNumber();
-      $('#pledge_expense_nature').attr('disabled', false).attr('data-modal-url', subcategoryModalUrl);
+      $('#pledge_expense_nature').attr('data-modal-url', subcategoryModalUrl);
     })();
   <% end %>
 </script>

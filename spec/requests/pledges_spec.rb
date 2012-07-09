@@ -964,4 +964,31 @@ ExpenseNature.make!(:compra_de_material)
       page.should have_field 'Unidade', :with => ''
     end
   end
+
+  scenario 'expense_nature shuold be disabed if does not have a budget_allocation selected' do
+    BudgetAllocation.make!(:alocacao)
+    ReserveFund.make!(:detran_2012)
+
+    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+
+    click_link 'Criar Empenho'
+
+    within_tab 'Principal' do
+      page.should have_field 'Dotação', :with => ''
+      page.should have_disabled_field 'Desdobramento'
+
+      fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
+
+      page.should have_field 'Dotação', :with => '1 - Alocação'
+      page.should_not have_disabled_field 'Desdobramento'
+
+      clear_modal 'Dotação'
+
+      page.should have_disabled_field 'Desdobramento'
+
+      fill_modal 'Dotação', :with => '1', :field => 'Código'
+
+      page.should_not have_disabled_field 'Desdobramento'
+    end
+  end
 end
