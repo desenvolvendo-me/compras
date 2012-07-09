@@ -99,6 +99,12 @@ feature "BudgetStructure" do
 
     within_tab 'Informações' do
       fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
+      within_modal 'Nível' do
+        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        click_button 'Pesquisar'
+        click_record 'Orgão'
+      end
       fill_in 'Código', :with => '2'
       page.should have_field 'Estrutura orçamentaria', :with => '2'
       fill_in 'Código TCE', :with => '081'
