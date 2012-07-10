@@ -89,7 +89,7 @@
     selectFirstTabVisible();
   };
 
-  $("#creditor_person_id").change( function() {
+  function hideFields(){
     switch ($('#creditor_personable_type').val()){
       case 'Individual':
         showOnlyIndividualFields();
@@ -103,6 +103,10 @@
       default:
         showCommonTabs();
     }
+  };
+
+  $("#creditor_person_id").change( function() {
+    hideFields();
   });
 
   $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {
@@ -146,4 +150,5 @@
   });
 
   showCommonTabs();
+  hideFields();
 </script>

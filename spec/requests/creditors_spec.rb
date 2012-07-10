@@ -72,6 +72,8 @@ feature "Creditors" do
     click_link 'Mateus Lorandi'
 
     page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
+    page.should_not have_field 'Porte da empresa'
+    page.should_not have_field 'PIS/PASEP'
 
     within_tab 'Contas Bancárias' do
       page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
@@ -247,6 +249,7 @@ feature "Creditors" do
       page.should have_checked_field 'Optante pelo simples'
       page.should have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
+      page.should_not have_field 'PIS/PASEP'
     end
 
     within_tab 'Cnaes secundários' do
@@ -394,6 +397,7 @@ feature "Creditors" do
       page.should have_checked_field 'Autônomo'
       page.should have_field 'PIS/PASEP', :with => '123456'
       page.should have_field 'Início do contrato', :with => '05/04/2012'
+      page.should_not have_field 'Porte da empresa'
     end
 
     within_tab 'Materiais' do
