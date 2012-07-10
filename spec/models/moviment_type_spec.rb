@@ -12,6 +12,7 @@ describe MovimentType do
   it { should validate_presence_of :name }
   it { should validate_presence_of :operation }
   it { should validate_presence_of :character }
+  it { should validate_presence_of :source }
 
   it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
 end

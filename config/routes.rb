@@ -533,7 +533,12 @@ Compras::Application.routes.draw do
     end
   end
 
-  get "moviment_types/modal", :as => :modal_moviment_types
+  resources :moviment_types do
+    collection do
+      get :modal
+      get :filter
+    end
+  end
 
   resources :neighborhoods do
     collection do
