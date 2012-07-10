@@ -8,5 +8,5 @@ pt-BR:
     attributes:
       moviment_type:
         name: "Nome"
-        operation: "Operacão"
+        operation: "Operação"
         character: "Atributo"
