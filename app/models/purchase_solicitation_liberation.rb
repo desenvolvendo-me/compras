@@ -14,6 +14,6 @@ class PurchaseSolicitationLiberation < Compras::Model
   filterize
 
   def to_s
-    "Liberação da Solicitação de Compras #{purchase_solicitation}"
+    "Liberação da Solicitação de Compra #{purchase_solicitation}"
   end
 end
