@@ -53,6 +53,7 @@ describe BudgetAllocation do
   it { should validate_presence_of :government_action }
   it { should validate_presence_of :government_program }
   it { should validate_presence_of :subfunction }
+  it { should validate_presence_of :function }
 
   it { should belong_to(:descriptor) }
   it { should belong_to(:budget_structure) }
@@ -111,6 +112,38 @@ describe BudgetAllocation do
       subject.stub(:last_code).and_return(1)
       subject.run_callbacks(:create)
       subject.code.should eq 2
+    end
+  end
+
+  context '#function' do
+    let :subfunction do
+      double(:subfunction, :id => 1, :function => 'Subfunction-Function', :function_id => 2)
+    end
+
+    it "should return funtion value if has not a subfunction" do
+      subject.function = 'Function'
+
+      subject.function.should eq 'Function'
+    end
+
+    it "should return subfunction.function value if has a subfunction" do
+      subject.stub(:subfunction_id? => true)
+      subject.stub(:subfunction => subfunction)
+
+      subject.function.should eq 'Subfunction-Function'
+    end
+
+    it "should return funtion_id value if has not a subfunction" do
+      subject.function_id = 1
+
+      subject.function_id.should eq 1
+    end
+
+    it "should return subfunction.function_id value if has a subfunction" do
+      subject.stub(:subfunction_id? => true)
+      subject.stub(:subfunction => subfunction)
+
+      subject.function_id.should eq 2
     end
   end
 end

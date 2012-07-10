@@ -4,7 +4,9 @@ class BudgetAllocation < Compras::Model
   attr_accessible :government_action_id, :foresight, :education, :description
   attr_accessible :expense_nature_id, :capability_id, :goal, :kind
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
-  attr_accessible :alienation_appeal
+  attr_accessible :alienation_appeal, :function, :function_id
+
+  attr_accessor :function, :function_id
 
   attr_readonly :code
 
@@ -27,7 +29,6 @@ class BudgetAllocation < Compras::Model
   has_many :extra_credit_moviment_types, :dependent => :restrict
   has_many :administrative_process_budget_allocations, :dependent => :restrict
 
-  delegate :function, :function_id, :to => :subfunction, :allow_nil => true
   delegate :expense_nature, :to => :expense_nature, :allow_nil => true, :prefix => true
   delegate :expense_category_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_group_id, :to => :expense_nature, :allow_nil => true
@@ -37,7 +38,7 @@ class BudgetAllocation < Compras::Model
 
   validates :descriptor, :budget_structure, :subfunction, :goal, :date,
             :government_program, :government_action, :budget_allocation_type,
-            :expense_nature, :capability, :description, :presence => true
+            :expense_nature, :capability, :description, :function, :presence => true
   validates :amount, :presence => true, :if => :divide?
   validates :description, :uniqueness => { :allow_blank => true }
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
@@ -69,6 +70,18 @@ class BudgetAllocation < Compras::Model
 
   def to_s
     "#{budget_structure_code} - #{description}"
+  end
+
+  def function
+    return subfunction.function if subfunction_id?
+
+    @function
+  end
+
+  def function_id
+    return subfunction.function_id if subfunction_id?
+
+    @function_id
   end
 
   protected
