@@ -65,6 +65,8 @@
         $.each(expenseNatureSelects, function(key, value) {
           if(value) {
             expenseNatureFilter[key] = value;
+          } else {
+            expenseNatureFilter[key] = 0;
           }
         });
 

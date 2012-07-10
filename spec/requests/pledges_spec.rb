@@ -188,6 +188,148 @@ feature "Pledges" do
     end
   end
 
+  context 'should filter missing fields using nil' do
+    scenario 'to expense_category' do
+      expense_nature = ExpenseNature.make(:compra_de_material, :expense_category => nil)
+      expense_nature.save(:validate => false)
+
+      budget_allocation = BudgetAllocation.make(:reparo_2011, :expense_nature => expense_nature)
+      budget_allocation.save(:validate => false)
+
+      other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_category => nil)
+      other_expense_nature.save(:validate => false)
+
+      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+
+      click_link 'Criar Empenho'
+
+      within_tab 'Principal' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+
+        within_modal 'Desdobramento' do
+          page.should have_disabled_field 'Categoria da despesa'
+          page.should have_field 'Categoria da despesa', :with => ''
+          page.should have_disabled_field 'Grupo da despesa'
+          page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+          page.should have_disabled_field 'Modalidade da despesa'
+          page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+          page.should have_disabled_field 'Elemento da despesa'
+          page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
+
+          click_button 'Pesquisar'
+
+          page.should have_content '3.0.10.01.12'
+          page.should_not have_content '3.0.10.01.10'
+        end
+      end
+    end
+
+    scenario 'to expense_group' do
+      expense_nature = ExpenseNature.make(:compra_de_material, :expense_group => nil)
+      expense_nature.save(:validate => false)
+
+      budget_allocation = BudgetAllocation.make(:reparo_2011, :expense_nature => expense_nature)
+      budget_allocation.save(:validate => false)
+
+      other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_group => nil)
+      other_expense_nature.save(:validate => false)
+
+      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+
+      click_link 'Criar Empenho'
+
+      within_tab 'Principal' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+
+        within_modal 'Desdobramento' do
+          page.should have_disabled_field 'Categoria da despesa'
+          page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
+          page.should have_disabled_field 'Grupo da despesa'
+          page.should have_field 'Grupo da despesa', :with => ''
+          page.should have_disabled_field 'Modalidade da despesa'
+          page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+          page.should have_disabled_field 'Elemento da despesa'
+          page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
+
+          click_button 'Pesquisar'
+
+          page.should have_content '3.0.10.01.12'
+          page.should_not have_content '3.0.10.01.10'
+        end
+      end
+    end
+
+    scenario 'to expense_modality' do
+      expense_nature = ExpenseNature.make(:compra_de_material, :expense_modality => nil)
+      expense_nature.save(:validate => false)
+
+      budget_allocation = BudgetAllocation.make(:reparo_2011, :expense_nature => expense_nature)
+      budget_allocation.save(:validate => false)
+
+      other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_modality => nil)
+      other_expense_nature.save(:validate => false)
+
+      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+
+      click_link 'Criar Empenho'
+
+      within_tab 'Principal' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+
+        within_modal 'Desdobramento' do
+          page.should have_disabled_field 'Categoria da despesa'
+          page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
+          page.should have_disabled_field 'Grupo da despesa'
+          page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+          page.should have_disabled_field 'Modalidade da despesa'
+          page.should have_field 'Modalidade da despesa', :with => ''
+          page.should have_disabled_field 'Elemento da despesa'
+          page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
+
+          click_button 'Pesquisar'
+
+          page.should have_content '3.0.10.01.12'
+          page.should_not have_content '3.0.10.01.10'
+        end
+      end
+    end
+
+    scenario 'to expense_element' do
+      expense_nature = ExpenseNature.make(:compra_de_material, :expense_element => nil)
+      expense_nature.save(:validate => false)
+
+      budget_allocation = BudgetAllocation.make(:reparo_2011, :expense_nature => expense_nature)
+      budget_allocation.save(:validate => false)
+
+      other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_element => nil)
+      other_expense_nature.save(:validate => false)
+
+      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+
+      click_link 'Criar Empenho'
+
+      within_tab 'Principal' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+
+        within_modal 'Desdobramento' do
+          page.should have_disabled_field 'Categoria da despesa'
+          page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
+          page.should have_disabled_field 'Grupo da despesa'
+          page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+          page.should have_disabled_field 'Modalidade da despesa'
+          page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+          page.should have_disabled_field 'Elemento da despesa'
+          page.should have_field 'Elemento da despesa', :with => ''
+
+          click_button 'Pesquisar'
+
+          page.should have_content '3.0.10.01.12'
+          page.should_not have_content '3.0.10.01.10'
+        end
+      end
+    end
+  end
+
   scenario 'when submit a form with some error should return filtered expense_nature' do
     BudgetAllocation.make!(:reparo_2011)
 

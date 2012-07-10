@@ -73,6 +73,152 @@ feature "ExpenseNatures" do
     page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12'
   end
 
+  context 'filtering' do
+    scenario 'should filter by expense_nature' do
+      ExpenseNature.make!(:vencimento_e_salarios)
+      ExpenseNature.make!(:compra_de_material)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_in 'Natureza da despesa', :with => '3.0.10.01.12'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '3.0.10.01.12'
+      page.should_not have_content '3.0.10.01.11'
+    end
+
+    scenario 'should filter by description' do
+      ExpenseNature.make!(:vencimento_e_salarios)
+      ExpenseNature.make!(:compra_de_material)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_in 'Descrição', :with => 'Vencimentos e Salários'
+
+      click_button 'Pesquisar'
+
+      page.should have_content 'Vencimentos e Salários'
+      page.should_not have_content 'Compra de Material'
+    end
+
+    scenario 'should filter by descriptor' do
+      ExpenseNature.make!(:vencimento_e_salario_2011)
+      ExpenseNature.make!(:compra_de_material)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+
+      click_button 'Pesquisar'
+
+      page.should have_content 'Vencimentos e Salários'
+      page.should_not have_content 'Compra de Material'
+    end
+
+    scenario 'should filter by regulatory_act' do
+      ExpenseNature.make!(:vencimento_e_salario_2011)
+      ExpenseNature.make!(:compra_de_material)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
+
+      click_button 'Pesquisar'
+
+      page.should have_content 'Vencimentos e Salários'
+      page.should_not have_content 'Compra de Material'
+    end
+
+    scenario 'should filter by kind' do
+      ExpenseNature.make!(:vencimento_e_salario_2011)
+      ExpenseNature.make!(:compra_de_material)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      select 'Ambos', :from => 'Tipo'
+
+      click_button 'Pesquisar'
+
+      page.should have_content 'Vencimentos e Salários'
+      page.should_not have_content 'Compra de Material'
+    end
+
+    scenario 'should filter by expense_category' do
+      ExpenseNature.make!(:compra_de_material)
+      ExpenseNature.make!(:despesas_correntes)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '3.0.10.01.11'
+      page.should_not have_content '4.4.20.03.11'
+    end
+
+    scenario 'should filter by expense_group' do
+      ExpenseNature.make!(:compra_de_material)
+      ExpenseNature.make!(:despesas_correntes)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '3.0.10.01.11'
+      page.should_not have_content '4.4.20.03.11'
+    end
+
+    scenario 'should filter by expense_modality' do
+      ExpenseNature.make!(:compra_de_material)
+      ExpenseNature.make!(:despesas_correntes)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_modal 'Modalidade da despesa', :with => '10', :field => 'Código'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '3.0.10.01.11'
+      page.should_not have_content '4.4.20.03.11'
+    end
+
+    scenario 'should filter by expense_element' do
+      ExpenseNature.make!(:compra_de_material)
+      ExpenseNature.make!(:despesas_correntes)
+
+      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+
+      click_link 'Filtrar Naturezas das Despesas'
+
+      fill_modal 'Elemento da despesa', :with => '1', :field => 'Código'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '3.0.10.01.11'
+      page.should_not have_content '4.4.20.03.11'
+    end
+  end
+
   scenario 'update an existent expense_nature' do
     ExpenseNature.make!(:vencimento_e_salarios)
     Descriptor.make!(:secretaria_de_educacao_2011)
