@@ -60,12 +60,10 @@
               expense_modality_id: expenseModalityId,
               expense_element_id: expenseElementId
             },
-            disabledKeys = [],
             expenseNatureFilter = {};
 
         $.each(expenseNatureSelects, function(key, value) {
           if(value) {
-            disabledKeys.push(key.replace('_id', ''));
             expenseNatureFilter[key] = value;
           }
         });
@@ -73,7 +71,7 @@
         var url = "<%= modal_expense_natures_path %>?",
             params = {
               expense_nature_not_eq: expenseNature,
-              locked_fields: disabledKeys,
+              locked_fields: ["expense_category", "expense_group", "expense_modality", "expense_element"],
               expense_nature: expenseNatureFilter
             };
 
