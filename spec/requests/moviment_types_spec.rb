@@ -74,5 +74,5 @@ feature "MovimentTypes" do
     within_records do
       page.should_not have_link 'Adicionar dotação'
     end
-    end
+  end
 end
