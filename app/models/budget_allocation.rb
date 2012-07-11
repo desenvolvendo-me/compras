@@ -6,7 +6,7 @@ class BudgetAllocation < Compras::Model
   attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
   attr_accessible :alienation_appeal, :function, :function_id
 
-  attr_accessor :function, :function_id
+  attr_writer :function, :function_id
 
   attr_readonly :code
 
@@ -73,15 +73,11 @@ class BudgetAllocation < Compras::Model
   end
 
   def function
-    return subfunction.function if subfunction_id?
-
-    @function
+    subfunction.try(:function) || @function
   end
 
   def function_id
-    return subfunction.function_id if subfunction_id?
-
-    @function_id
+    subfunction.try(:function_id) || @function_id
   end
 
   protected

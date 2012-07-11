@@ -127,7 +127,6 @@ describe BudgetAllocation do
     end
 
     it "should return subfunction.function value if has a subfunction" do
-      subject.stub(:subfunction_id? => true)
       subject.stub(:subfunction => subfunction)
 
       subject.function.should eq 'Subfunction-Function'
@@ -140,7 +139,6 @@ describe BudgetAllocation do
     end
 
     it "should return subfunction.function_id value if has a subfunction" do
-      subject.stub(:subfunction_id? => true)
       subject.stub(:subfunction => subfunction)
 
       subject.function_id.should eq 2
