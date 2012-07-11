@@ -47,7 +47,7 @@ group :assets do
 end
 
 group :production, :staging do
-  gem 'airbrake', '3.0.9'
+  gem 'sentry-raven', :git => 'git://github.com/coderanger/raven-ruby.git'
   gem 'newrelic_rpm', '3.3.1'
 end
 

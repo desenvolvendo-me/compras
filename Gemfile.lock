@@ -8,6 +8,16 @@ GIT
       i18n (~> 0.5)
 
 GIT
+  remote: git://github.com/coderanger/raven-ruby.git
+  revision: 7f5f05bb1cc0b9314aa287c9c964dde100f25972
+  specs:
+    sentry-raven (0.2)
+      faraday (~> 0.8.0.rc2)
+      hashie
+      uuidtools
+      yajl-ruby
+
+GIT
   remote: git://github.com/ryanb/cancan.git
   revision: ccd24ab30fdd0b48ac0ad71080445f5366788208
   branch: 2.0
@@ -77,9 +87,6 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.8)
-    airbrake (3.0.9)
-      activesupport
-      builder
     arel (3.0.2)
     awesome_nested_set (2.1.3)
       activerecord (>= 3.0.0)
@@ -115,12 +122,15 @@ GEM
     eventmachine (0.12.10)
     execjs (1.3.2)
       multi_json (~> 1.0)
+    faraday (0.8.1)
+      multipart-post (~> 1.1)
     faye-websocket (0.4.5)
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
     foreigner (1.1.4)
       activerecord (>= 3.0.0)
     has_scope (0.5.1)
+    hashie (1.2.0)
     hike (1.2.1)
     http_parser.rb (0.5.3)
     i18n (0.6.0)
@@ -148,6 +158,7 @@ GEM
       activerecord (>= 3.0)
     mime-types (1.19)
     multi_json (1.3.6)
+    multipart-post (1.1.5)
     newrelic_rpm (3.3.1)
     nokogiri (1.5.5)
     orm_adapter (0.0.7)
@@ -230,6 +241,7 @@ GEM
       kgio (~> 2.4)
       rack
       raindrops (~> 0.6)
+    uuidtools (2.1.2)
     validates_timeliness (3.0.11)
       timeliness (~> 0.3.6)
     warden (1.1.1)
@@ -237,6 +249,7 @@ GEM
     will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -244,7 +257,6 @@ PLATFORMS
 DEPENDENCIES
   activerecord-connections (= 0.0.3)
   activerecord-jdbcpostgresql-adapter (= 1.2.0)
-  airbrake (= 3.0.9)
   awesome_nested_set (= 2.1.3)
   cancan!
   capybara (= 1.1.2)
@@ -271,6 +283,7 @@ DEPENDENCIES
   rails-footnotes (>= 3.7.5.rc4)
   responders (= 0.6.4)
   rspec-rails (= 2.11.0)
+  sentry-raven!
   shoulda-matchers (= 1.1.0)
   simple_form (= 2.0.1)
   squeel (= 1.0.0)
