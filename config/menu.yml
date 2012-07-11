@@ -55,6 +55,7 @@ menu:
       - target_audiences
       - macro_objectives
       - products
+      - moviment_types
 
       - precatory:
         - precatories
@@ -130,4 +131,3 @@ menu:
     - administration_types
     - government_actions
     - expense_kinds
-    - moviment_types

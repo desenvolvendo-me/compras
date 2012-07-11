@@ -7,7 +7,7 @@ feature "MovimentTypes" do
   end
 
   scenario "create a new moviment type" do
-    navigate_through 'Outros > Tipos de Movimentos'
+    navigate_through 'Contabilidade > Comum > Tipos de Movimentos'
 
     click_link 'Criar Tipo de Movimento'
 
@@ -33,7 +33,7 @@ feature "MovimentTypes" do
   scenario "edit an exiting moviment type" do
     MovimentType.make!(:adicionar_dotacao)
 
-    navigate_through 'Outros > Tipos de Movimentos'
+    navigate_through 'Contabilidade > Comum > Tipos de Movimentos'
 
     within_records do
       click_link 'Adicionar dotação'
@@ -61,7 +61,7 @@ feature "MovimentTypes" do
   scenario "destroy an exiting moviment type" do
     MovimentType.make!(:adicionar_dotacao)
 
-    navigate_through 'Outros > Tipos de Movimentos'
+    navigate_through 'Contabilidade > Comum > Tipos de Movimentos'
 
     within_records do
       click_link 'Adicionar dotação'
