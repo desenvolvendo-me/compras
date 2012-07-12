@@ -274,6 +274,7 @@ pt-BR:
       should_be_on_or_after_administrative_process_date: "deve ser igual ou posterior a data do processo administrativo (%{restriction})"
       should_be_on_or_after_creation_date: "deve ser igual ou posterior a data de criação (%{restriction})"
       should_be_on_or_before_vigor_date: "deve ser em ou antes da data a vigorar (%{restriction})"
+      must_be_equals_to_value: "deve ser igual ao valor (%{value})"
 
   activerecord:
     errors:

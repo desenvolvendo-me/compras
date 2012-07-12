@@ -37,5 +37,11 @@ describe PledgeLiquidationsController do
 
       assigns(:pledge_liquidation).status.should eq PledgeLiquidationStatus::ACTIVE
     end
+
+    it 'should call the GenerateNumberPledgeParcels on action create' do
+      GenerateNumberParcels.any_instance.should_receive(:generate!)
+
+      post :create
+    end
   end
 end

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      pledge_liquidation_parcel:
+        one: "Parcela"
+        other: "Parcelas"
+
+    attributes:
+      pledge_liquidation_parcel:
+        value: "Valor"
+        number: "Parcela"

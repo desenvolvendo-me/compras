@@ -47,4 +47,18 @@ describe PledgeLiquidationDecorator do
 
     subject.pledge_liquidation_value.should eq 'R$ 100,00'
   end
+
+  it 'should return parcels_sum' do
+    component.stub(:parcels_sum).and_return(10.0)
+    helpers.stub(:number_with_precision).with(10.0).and_return('10,00')
+
+    subject.parcels_sum.should eq '10,00'
+  end
+
+  it 'should return value' do
+    component.stub(:value).and_return(100.0)
+    helpers.stub(:number_to_currency).with(100.0).and_return('R$ 100,00')
+
+    subject.value.should eq 'R$ 100,00'
+  end
 end

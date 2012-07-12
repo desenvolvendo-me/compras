@@ -15,3 +15,5 @@ pt-BR:
         pledge_parcel: "Parcela"
         expiration_date: "Vencimento"
         balance: "Saldo"
+        parcels_sum: "Valor total das parcelas"
+        parcel_replicated_value: "Valor"

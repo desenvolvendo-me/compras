@@ -22,4 +22,12 @@ class PledgeLiquidationDecorator < Decorator
   def pledge_liquidation_value
     helpers.number_to_currency super if super
   end
+
+  def parcels_sum
+    helpers.number_with_precision super if super
+  end
+
+  def value
+    helpers.number_to_currency super if super
+  end
 end

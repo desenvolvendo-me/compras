@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/pledge_liquidation'
+require 'app/models/pledge_liquidation_parcel'
 require 'lib/annullable'
 require 'app/models/resource_annul'
 
@@ -19,14 +20,22 @@ describe PledgeLiquidation do
   it { should belong_to :pledge }
 
   it { should have_one(:annul).dependent(:destroy) }
+  it { should have_many(:pledge_liquidation_parcels).dependent(:destroy).order(:number) }
 
-  it { should allow_value(23).for(:value) }
-  it { should_not allow_value(0).for(:value) }
-  it { should_not allow_value(-23).for(:value) }
+  context 'validate value' do
+    before do
+      subject.stub(:decorator).and_return(double(:value => 'R$ 0,00'))
+    end
+
+    it { should allow_value(23).for(:value) }
+    it { should_not allow_value(0).for(:value) }
+    it { should_not allow_value(-23).for(:value) }
+  end
 
   context 'validate value' do
     before do
       subject.stub(:pledge).and_return(pledge)
+      subject.stub(:decorator).and_return(double(:value => 'R$ 100,00'))
     end
 
     let :pledge do
@@ -59,6 +68,20 @@ describe PledgeLiquidation do
     it 'should not be valid when date is older then emission_date' do
       subject.stub(:pledge).and_return(double('Pledge', :emission_date => Date.new(2012, 3, 29)))
       subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho')
+    end
+  end
+
+  context 'parcels_sum' do
+    let :parcels do
+      [
+        double('ParcelOne', :value => 10),
+        double('ParcelTwo', :value => 90)
+      ]
+    end
+
+    it 'should return correct parcels_sum' do
+      subject.stub(:pledge_liquidation_parcels).and_return(parcels)
+      subject.parcels_sum.should eq 100
     end
   end
 end

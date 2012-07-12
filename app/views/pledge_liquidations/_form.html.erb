@@ -1,36 +1,37 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :pledge %>
+<div class="tabs">
+  <ul>
+    <li><a href="#general">Principal</a></li>
+    <li><a href="#parcels">Parcelas</a></li>
+  </ul>
+
+  <div id="general">
+    <%= render 'general', :f => f %>
   </div>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :emission_date, :disabled => true, :input_html => { :value => f.object.decorator.emission_date } %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= f.input :status, :disabled => true %>
-  </div>
-</div>
-
-<div class="yui3-g">
-  <div class="yui3-u-1-4">
-    <%= f.input :value %>
-  </div>
-
-  <div class="yui3-u-1-6">
-    <%= f.input :date %>
+  <div id="parcels">
+    <%= render 'parcels', :f => f %>
   </div>
 </div>
-
-<%= f.input :description %>
 
 <script>
+  $('.tabs').tabs({
+    select: function() {
+      $('.replicated_value').val($('#pledge_liquidation_value').val());
+    }
+  });
+
   <% if f.object.persisted? %>
     $('form.pledge_liquidation :input').attr('disabled', true);
   <% else %>
     (function() {
       var pledgeId = $('#pledge_liquidation_pledge_id').val(),
           pledgeValue;
+
+      function fillParcelNumber() {
+        $('div.parcel .destroy[value=false]').each(function (index, item) {
+          $(this).parents('.parcel').find('.order').val(index + 1);
+        });
+      }
 
       $('#pledge_liquidation_pledge_id').change(function (event, pledge) {
         if (pledge) {
@@ -55,6 +56,10 @@
           pledgeValue = null;
         }
       });
+
+      $('form.pledge_liquidation').delegate('.remove-parcel', 'click', fillParcelNumber);
+      $('form.pledge_liquidation').bind('append.mustache', fillParcelNumber);
+      fillParcelNumber();
     })();
   <% end %>
 </script>
