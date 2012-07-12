@@ -10,15 +10,6 @@ feature 'PledgeLiquidationAnnuls' do
     sign_in
   end
 
-  scenario 'should not have a annul link when was creating a new solicitation' do
-    navigate_through 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
-
-    click_link 'Criar Liquidação de Empenho'
-
-    page.should_not have_link 'Anular'
-    page.should_not have_link 'Anulação'
-  end
-
   scenario 'annuling a pledge_liquidation' do
     pledge = Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
