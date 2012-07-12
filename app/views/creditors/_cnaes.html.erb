@@ -1,3 +1,5 @@
+<%= f.input :main_cnae %>
+
 <div class="yui3-g modal-finder">
   <div class="yui3-u-1-2">
     <%= f.association :cnaes, :as => :modal, :hidden_field => false, :input_html => { :value => nil }, :modal_url => modal_cnaes_path(:cnaes_remainder => ( f.object.selected_cnaes ) ) %>

@@ -146,11 +146,12 @@ feature "Creditors" do
       fill_modal 'Porte da empressa', :with => 'Microempresa', :field => 'Nome'
       check 'Optante pelo simples'
 
-      fill_modal 'CNAE principal', :with => '4712100', :field => 'Código'
       fill_modal 'Natureza jurídica', :with => 'Administração Pública'
     end
 
-    within_tab 'Cnaes secundários' do
+    within_tab 'CNAEs' do
+      fill_modal 'CNAE principal', :with => '4712100', :field => 'Código'
+
       within_modal 'Cnaes' do
         fill_in 'Código', :with => '94308'
         click_button 'Pesquisar'
@@ -247,12 +248,12 @@ feature "Creditors" do
     within_tab 'Principal' do
       page.should have_field 'Porte da empressa', :with => 'Microempresa'
       page.should have_checked_field 'Optante pelo simples'
-      page.should have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
       page.should_not have_field 'PIS/PASEP'
     end
 
-    within_tab 'Cnaes secundários' do
+    within_tab 'CNAEs' do
+      page.should have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
       page.should have_content '7739099'
       page.should have_content 'Aluguel de outras máquinas'
       page.should have_content '94308'
@@ -730,11 +731,11 @@ feature "Creditors" do
     within_tab 'Principal' do
       fill_modal 'Porte da empressa', :with => 'Empresa de grande porte', :field => 'Nome'
       uncheck 'Optante pelo simples'
-
-      fill_modal 'CNAE principal', :with => '7739099', :field => 'Código'
     end
 
-    within_tab 'Cnaes secundários' do
+    within_tab 'CNAEs' do
+      fill_modal 'CNAE principal', :with => '7739099', :field => 'Código'
+
       page.should have_content 'Aluguel de outras máquinas'
 
       click_button 'Remover'
@@ -848,10 +849,10 @@ feature "Creditors" do
     within_tab 'Principal' do
       page.should have_field 'Porte da empressa', :with => 'Empresa de grande porte'
       page.should have_unchecked_field 'Optante pelo simples'
-      page.should have_field 'CNAE principal', :with => 'Aluguel de outras máquinas'
     end
 
-    within_tab 'Cnaes secundários' do
+    within_tab 'CNAEs' do
+      page.should have_field 'CNAE principal', :with => 'Aluguel de outras máquinas'
       page.should have_content '94308'
       page.should have_content 'Atividades de associações de defesa de direitos sociais'
       page.should_not have_content '7739099'
@@ -1096,7 +1097,7 @@ feature "Creditors" do
 
     within "#creditor-tabs" do
        page.should_not have_link "Principal"
-       page.should_not have_link "Cnaes secundários"
+       page.should_not have_link "CNAEs"
        page.should_not have_link "Documentos"
        page.should have_link "Materiais"
        page.should_not have_link "Representantes"
@@ -1117,7 +1118,7 @@ feature "Creditors" do
 
     within "#creditor-tabs" do
        page.should_not have_link "Principal"
-       page.should_not have_link "Cnaes secundários"
+       page.should_not have_link "CNAEs"
        page.should_not have_link "Documentos"
        page.should have_link "Materiais"
        page.should_not have_link "Representantes"
@@ -1138,7 +1139,7 @@ feature "Creditors" do
 
     within "#creditor-tabs" do
        page.should have_link "Principal"
-       page.should_not have_link "Cnaes secundários"
+       page.should_not have_link "CNAEs"
        page.should_not have_link "Documentos"
        page.should have_link "Materiais"
        page.should_not have_link "Representantes"
@@ -1159,7 +1160,7 @@ feature "Creditors" do
 
     within "#creditor-tabs" do
        page.should have_link "Principal"
-       page.should have_link "Cnaes secundários"
+       page.should have_link "CNAEs"
        page.should have_link "Documentos"
        page.should have_link "Materiais"
        page.should have_link "Representantes"
