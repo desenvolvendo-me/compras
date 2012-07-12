@@ -29,7 +29,6 @@ class ExpenseNature < Compras::Model
   validates :descriptor, :regulatory_act, :expense_category, :presence => true
 
   orderize :description
-  #filterize
 
   def self.filter(params)
     relation = scoped
