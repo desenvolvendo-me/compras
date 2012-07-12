@@ -1,7 +1,20 @@
 module RSpec
   module Core
     class Example
-      def set_exception(exception)
+      def set_exception(exception, context=nil)
+        if @exception
+          # An error has already been set; we don't want to override it,
+          # but we also don't want silence the error, so let's print it.
+          msg = <<-EOS
+
+  An error occurred #{context}
+    #{exception.class}: #{exception.message}
+    occurred at #{exception.backtrace.first}
+
+          EOS
+          RSpec.configuration.reporter.message(msg)
+        end
+
         @exception ||= exception
 
         screenshot if screenshot_on_errors? && is_metadata_type_request?
