@@ -4,7 +4,7 @@ class PledgeLiquidation < Compras::Model
 
   attr_accessor :parcel_replicated_value
 
-  has_enumeration_for :status, :with => PledgeLiquidationStatus, :create_helpers => true
+  has_enumeration_for :status, :with => PledgeLiquidationStatus, :create_helpers => true, :create_scopes => true
 
   belongs_to :pledge
 
