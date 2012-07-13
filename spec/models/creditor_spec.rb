@@ -26,15 +26,10 @@ describe Creditor do
     it 'uses false as default for autonomous' do
       subject.autonomous.should be false
     end
-
-    it 'uses false as default for choose_simple' do
-      subject.choose_simple.should be false
-    end
   end
 
   it { should belong_to :person }
   it { should belong_to :occupation_classification }
-  it { should belong_to :company_size }
   it { should belong_to :main_cnae }
   it { should have_many :creditor_secondary_cnaes }
   it { should have_many(:cnaes).through(:creditor_secondary_cnaes) }
@@ -53,8 +48,6 @@ describe Creditor do
   it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_bidders) }
 
   it { should validate_presence_of :person }
-  it { should_not validate_presence_of :legal_nature }
-  it { should_not validate_presence_of :company_size }
   it { should_not validate_presence_of :main_cnae }
   it { should_not validate_presence_of :contract_start_date }
   it { should_not validate_presence_of :social_identification_number }
@@ -64,9 +57,7 @@ describe Creditor do
       subject.stub(:company?).and_return(true)
     end
 
-    it { should validate_presence_of :company_size }
     it { should validate_presence_of :main_cnae }
-    it { should validate_presence_of :legal_nature }
   end
 
   context 'when is autonomous' do

@@ -1,17 +1,14 @@
 class Creditor < Compras::Model
-  attr_accessible :person_id, :occupation_classification_id, :company_size_id
+  attr_accessible :person_id, :occupation_classification_id
   attr_accessible :main_cnae_id, :municipal_public_administration, :autonomous
-  attr_accessible :social_identification_number, :choose_simple
+  attr_accessible :social_identification_number
   attr_accessible :contract_start_date, :cnae_ids, :documents_attributes
   attr_accessible :representative_person_ids, :representative_ids
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
-  attr_accessible :legal_nature_id
 
   attr_readonly :person_id
 
-  belongs_to :company_size
-  belongs_to :legal_nature
   belongs_to :main_cnae, :class_name => 'Cnae'
   belongs_to :occupation_classification
   belongs_to :person
@@ -50,6 +47,8 @@ class Creditor < Compras::Model
   delegate :bank_id, :to => :accounts, :allow_nil => true
   delegate :materials_class, :materials_group, :to => :materials, :allow_nil => true
   delegate :login, :email, :to => :user, :allow_nil => true
+  delegate :company_size, :choose_simple, :legal_nature, :to => :person,
+           :allow_nil => true
 
   accepts_nested_attributes_for :accounts, :allow_destroy => true
   accepts_nested_attributes_for :creditor_balances, :allow_destroy => true
@@ -62,7 +61,7 @@ class Creditor < Compras::Model
   validates :person_id, :uniqueness => true, :allow_blank => true
   validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
-  validates :company_size, :main_cnae, :legal_nature, :presence => true, :if => :company?
+  validates :main_cnae, :presence => true, :if => :company?
   validate :uniqueness_of_document_type
   validate :person_in_representatives
   validate :secondary_cnae_in_main_cnae

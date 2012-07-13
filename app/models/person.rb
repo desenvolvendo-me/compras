@@ -46,4 +46,22 @@ class Person < Unico::Person
   def special?
     personable_type == "SpecialEntry"
   end
+
+  def company_size
+    return if !company?
+
+    personable.company_size
+  end
+
+  def choose_simple
+    return if !company?
+
+    personable.choose_simple
+  end
+
+  def legal_nature
+    return if !company?
+
+    personable.legal_nature
+  end
 end

@@ -61,12 +61,9 @@ end
 
 Creditor.blueprint(:nohup) do
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object, :number => 45678) ] }
-  choose_simple { false }
   cnaes { [ Cnae.make!(:aluguel) ] }
-  company_size { CompanySize.make!(:micro_empresa) }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   documents { [ CreditorDocument.make!(:documento) ] }
-  legal_nature { LegalNature.make!(:administracao_publica) }
   main_cnae { Cnae.make!(:varejo) }
   materials { [ Material.make!(:antivirus), Material.make!(:arame_comum) ] }
   person { Person.make!(:nohup) }

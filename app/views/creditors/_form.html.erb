@@ -105,8 +105,13 @@
     }
   };
 
-  $("#creditor_person_id").change( function() {
+  $("#creditor_person_id").change( function(event, person) {
     hideFields();
+    if (person && person.isCompany) {
+      $('#creditor_company_size').val(person.companySize);
+      $('#creditor_choose_simple').attr('checked', person.chooseSimple);
+      $('#creditor_legal_nature').val(person.legalNature);
+    }
   });
 
   $('form.creditor').on('change', '.wrapper-creditor-account-bank input:hidden', function() {

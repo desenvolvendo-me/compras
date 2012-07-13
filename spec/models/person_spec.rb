@@ -84,4 +84,51 @@ describe Person do
     subject.stub(:cnpj).and_return('76.238.594/0001-35')
     subject.identity_document.should eq '76.238.594/0001-35'
   end
+
+  context 'company_size' do
+    let :company_size do
+      double('CompanySize')
+    end
+
+    it 'should not return company_size if is not company' do
+      subject.stub(:company?).and_return false
+      subject.company_size.should be_nil
+    end
+
+    it 'should return company_size if is company' do
+      subject.stub(:company_size).and_return company_size
+      subject.stub(:company?).and_return false
+      subject.company_size.should eq company_size
+    end
+  end
+
+  context 'choose_simple' do
+    it 'should not return choose_simple if is not company' do
+      subject.stub(:company?).and_return false
+      subject.choose_simple.should be_nil
+    end
+
+    it 'should return choose_simple if is company' do
+      subject.stub(:choose_simple).and_return true
+      subject.stub(:company?).and_return false
+      subject.company_size.should be_false
+    end
+  end
+
+  context 'legal_nature' do
+    let :legal_nature do
+      double('LegalNature')
+    end
+
+    it 'should not return legal_nature if is not company' do
+      subject.stub(:company?).and_return false
+      subject.legal_nature.should be_nil
+    end
+
+    it 'should return legal_nature if is company' do
+      subject.stub(:legal_nature).and_return legal_nature
+      subject.stub(:company?).and_return false
+      subject.legal_nature.should eq legal_nature
+    end
+  end
 end

@@ -143,10 +143,12 @@ feature "Creditors" do
     fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
 
     within_tab 'Principal' do
-      fill_modal 'Porte da empressa', :with => 'Microempresa', :field => 'Nome'
-      check 'Optante pelo simples'
-
-      fill_modal 'Natureza jurídica', :with => 'Administração Pública'
+      page.should have_disabled_field 'Porte da empresa'
+      page.should have_field 'Porte da empresa', :with => 'Microempresa'
+      page.should have_disabled_field 'Optante pelo simples'
+      page.should_not have_checked_field 'Optante pelo simples'
+      page.should have_disabled_field 'Natureza jurídica'
+      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
     end
 
     within_tab 'CNAEs' do
@@ -246,8 +248,11 @@ feature "Creditors" do
     page.should have_field 'Pessoa', :with => 'Nohup'
 
     within_tab 'Principal' do
-      page.should have_field 'Porte da empressa', :with => 'Microempresa'
-      page.should have_checked_field 'Optante pelo simples'
+      page.should have_disabled_field 'Porte da empresa'
+      page.should have_field 'Porte da empresa', :with => 'Microempresa'
+      page.should have_disabled_field 'Optante pelo simples'
+      page.should_not have_checked_field 'Optante pelo simples'
+      page.should have_disabled_field 'Natureza jurídica'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
       page.should_not have_field 'PIS/PASEP'
     end
@@ -729,8 +734,12 @@ feature "Creditors" do
     click_link 'Nohup'
 
     within_tab 'Principal' do
-      fill_modal 'Porte da empressa', :with => 'Empresa de grande porte', :field => 'Nome'
-      uncheck 'Optante pelo simples'
+      page.should have_disabled_field 'Porte da empresa'
+      page.should have_field 'Porte da empresa', :with => 'Microempresa'
+      page.should have_disabled_field 'Optante pelo simples'
+      page.should_not have_checked_field 'Optante pelo simples'
+      page.should have_disabled_field 'Natureza jurídica'
+      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
     end
 
     within_tab 'CNAEs' do
@@ -847,8 +856,12 @@ feature "Creditors" do
     page.should have_field 'Pessoa', :with => 'Nohup'
 
     within_tab 'Principal' do
-      page.should have_field 'Porte da empressa', :with => 'Empresa de grande porte'
-      page.should have_unchecked_field 'Optante pelo simples'
+      page.should have_disabled_field 'Porte da empresa'
+      page.should have_field 'Porte da empresa', :with => 'Microempresa'
+      page.should have_disabled_field 'Optante pelo simples'
+      page.should_not have_checked_field 'Optante pelo simples'
+      page.should have_disabled_field 'Natureza jurídica'
+      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
     end
 
     within_tab 'CNAEs' do

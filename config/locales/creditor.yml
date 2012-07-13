@@ -9,7 +9,7 @@ pt-BR:
       creditor:
         autonomous: "Autônomo"
         choose_simple: "Optante pelo simples"
-        company_size: "Porte da empressa"
+        company_size: "Porte da empresa"
         contract_start_date: "Início do contrato"
         legal_nature: "Natureza jurídica"
         main_cnae: "CNAE principal"
