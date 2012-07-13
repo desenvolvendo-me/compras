@@ -1,4 +1,4 @@
-class GenerateNumberParcels
+class ParcelNumberGenerator
   attr_accessor :parcels
 
   def initialize(parcels)

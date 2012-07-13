@@ -1,7 +1,7 @@
 require 'unit_helper'
-require 'app/business/generate_number_parcels'
+require 'app/business/parcel_number_generator'
 
-describe GenerateNumberParcels do
+describe ParcelNumberGenerator do
   let :parcel_one do
     double
   end

@@ -12,7 +12,7 @@ class PledgeLiquidationsController < CrudController
   def create
     object = build_resource
     object.status = PledgeLiquidationStatus::ACTIVE
-    GenerateNumberParcels.new(object.pledge_liquidation_parcels).generate!
+    ParcelNumberGenerator.new(object.pledge_liquidation_parcels).generate!
 
     super
   end

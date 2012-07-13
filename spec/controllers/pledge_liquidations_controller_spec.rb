@@ -39,7 +39,7 @@ describe PledgeLiquidationsController do
     end
 
     it 'should call the GenerateNumberPledgeParcels on action create' do
-      GenerateNumberParcels.any_instance.should_receive(:generate!)
+      ParcelNumberGenerator.any_instance.should_receive(:generate!)
 
       post :create
     end
