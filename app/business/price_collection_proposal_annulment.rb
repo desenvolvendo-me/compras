@@ -4,7 +4,7 @@ class PriceCollectionProposalAnnulment
   end
 
   def change!
-    return unless @proposal.annul.present?
+    return if @proposal.annul.present?
 
     @proposal.annul!
   end

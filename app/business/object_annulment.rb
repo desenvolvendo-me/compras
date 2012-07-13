@@ -4,7 +4,7 @@ class ObjectAnnulment
   end
 
   def annul!
-    return false unless @object.annul.present?
+    return false if  @object.annul.present?
 
     @object.annul!
   end

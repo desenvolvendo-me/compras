@@ -1,4 +1,0 @@
-pt-BR:
-  contract_termination_annuls:
-    new: "Anulação da Rescisão do Contrato %{resource}"
-    edit: "Anulação da Rescisão do Contrato %{resource}"

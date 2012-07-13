@@ -9,16 +9,16 @@ describe PriceCollectionProposalAnnulment do
   subject{ described_class.new(proposal) }
 
   describe '#change!' do
-    it 'should not annul the proposal when annul is not present' do
+    it 'should not annul the proposal when annul is already present' do
       proposal.should_not_receive(:annul!)
-      proposal.stub_chain(:annul, :present?).and_return false
+      proposal.stub_chain(:annul, :present?).and_return true
 
       subject.change!
     end
 
-    it 'should annul the proposal when annul is present' do
+    it 'should annul the proposal when annul is not present' do
       proposal.should_receive(:annul!)
-      proposal.stub_chain(:annul, :present?).and_return true
+      proposal.stub_chain(:annul, :present?).and_return false
 
       subject.change!
     end

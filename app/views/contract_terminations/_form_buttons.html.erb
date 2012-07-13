@@ -1,5 +1,5 @@
 <div class="buttons">
   <%= f.button :submit unless f.object.annulled? %>
-  <%= annul_link(:param_name => :contract_termination_id) %>
+  <%= annul_link %>
   <%= f.button :cancel, :href => contract_terminations_path(:contract_id => resource.contract_id) %>
 </div>
