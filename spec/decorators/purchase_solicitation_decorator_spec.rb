@@ -56,4 +56,68 @@ describe PurchaseSolicitationDecorator do
       subject.liberation_label.should eq 'Liberação'
     end
   end
+
+  it "should hide_liberation_button when not persisted and has no liberation neither is annulled" do
+    component.stub(:persisted? => false)
+    component.stub(:liberation => nil)
+    component.stub(:annulled? => false)
+
+    subject.should be_hide_liberation_button
+  end
+
+  it "should hide_liberation_button when not persisted and has liberation neither is annulled" do
+    component.stub(:persisted? => false)
+    component.stub(:liberation => true)
+    component.stub(:annulled? => false)
+
+    subject.should be_hide_liberation_button
+  end
+
+  it "should hide_liberation_button when not persisted and has no liberation but is annulled" do
+    component.stub(:persisted? => false)
+    component.stub(:liberation => false)
+    component.stub(:annulled? => true)
+
+    subject.should be_hide_liberation_button
+  end
+
+  it "should hide_liberation_button when not persisted but has liberation and is annulled" do
+    component.stub(:persisted? => false)
+    component.stub(:liberation => true)
+    component.stub(:annulled? => true)
+
+    subject.should be_hide_liberation_button
+  end
+
+  it "should hide_liberation_button when is persisted and is annulled but has no liberation" do
+    component.stub(:persisted? => true)
+    component.stub(:liberation => nil)
+    component.stub(:annulled? => true)
+
+    subject.should be_hide_liberation_button
+  end
+
+  it "should not hide_liberation_button when is persisted and has liberation but is not annulled" do
+    component.stub(:persisted? => true)
+    component.stub(:liberation => true)
+    component.stub(:annulled? => false)
+
+    subject.should_not be_hide_liberation_button
+  end
+
+  it "should not hide_liberation_button when is persisted and has liberation and is annulled" do
+    component.stub(:persisted? => true)
+    component.stub(:liberation => true)
+    component.stub(:annulled? => true)
+
+    subject.should_not be_hide_liberation_button
+  end
+
+  it "should not hide_liberation_button when is persisted but has no liberation neither is annulled" do
+    component.stub(:persisted? => true)
+    component.stub(:liberation => nil)
+    component.stub(:annulled? => false)
+
+    subject.should_not be_hide_liberation_button
+  end
 end

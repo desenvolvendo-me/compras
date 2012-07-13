@@ -6,6 +6,10 @@ class PurchaseSolicitationDecorator < Decorator
     "Estrutura orçamentaria solicitante: #{budget_structure} / Responsável pela solicitação: #{responsible} / Status: #{service_status_humanize}"
   end
 
+  def hide_liberation_button?
+    (component.annulled? && component.liberation.nil?) || !component.persisted?
+  end
+
   def liberation_url
     if component.pending?
       routes.new_purchase_solicitation_liberation_path(:purchase_solicitation_id => component.id)

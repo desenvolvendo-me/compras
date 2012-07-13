@@ -1,7 +1,7 @@
 <div class="buttons">
   <%= annul_link(:param_name => :purchase_solicitation_id) %>
   <%= f.button :submit unless f.object.annulled? %>
-  <% if f.object.persisted? %>
+  <% unless f.object.decorator.hide_liberation_button? %>
     <%= link_to f.object.decorator.liberation_label, f.object.decorator.liberation_url, :class => 'button primary' %>
   <% end %>
   <%= f.button :cancel %>
