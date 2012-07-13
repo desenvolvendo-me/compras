@@ -131,4 +131,34 @@ describe Person do
       subject.legal_nature.should eq legal_nature
     end
   end
+
+  context 'commercial_registration_date' do
+    let :date do
+      Date.new(2012, 07, 13)
+    end
+
+    it 'should not return commercial_registration_date if is not company' do
+      subject.stub(:company?).and_return false
+      subject.commercial_registration_date.should be_nil
+    end
+
+    it 'should return commercial_registration_date if is company' do
+      subject.stub(:commercial_registration_date).and_return date
+      subject.stub(:company?).and_return false
+      subject.commercial_registration_date.should eq date
+    end
+  end
+
+  context 'commercial_registration_number' do
+    it 'should not return commercial_registration_number if is not company' do
+      subject.stub(:company?).and_return false
+      subject.commercial_registration_number.should be_nil
+    end
+
+    it 'should return commercial_registration_number if is company' do
+      subject.stub(:commercial_registration_number).and_return '1234'
+      subject.stub(:company?).and_return false
+      subject.commercial_registration_number.should eq '1234'
+    end
+  end
 end

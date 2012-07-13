@@ -64,4 +64,16 @@ class Person < Unico::Person
 
     personable.legal_nature
   end
+
+  def commercial_registration_date
+    return if !company?
+
+    personable.commercial_registration_date
+  end
+
+  def commercial_registration_number
+    return if !company?
+
+    personable.commercial_registration_number
+  end
 end

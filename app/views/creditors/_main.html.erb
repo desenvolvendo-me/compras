@@ -36,6 +36,16 @@
     </div>
 
     <%= f.input :legal_nature, :disabled => true %>
+
+    <div class='yui3-g'>
+      <div class='yui3-u-1-2'>
+        <%= f.input :commercial_registration_number, :disabled => true %>
+      </div>
+
+      <div class='yui3-u-1-2'>
+        <%= f.input :commercial_registration_date, :disabled => true, :input_html => { :value => f.object.decorator.commercial_registration_date } %>
+      </div>
+    </div>
   </div>
 </div>
 

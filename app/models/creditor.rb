@@ -47,8 +47,9 @@ class Creditor < Compras::Model
   delegate :bank_id, :to => :accounts, :allow_nil => true
   delegate :materials_class, :materials_group, :to => :materials, :allow_nil => true
   delegate :login, :email, :to => :user, :allow_nil => true
-  delegate :company_size, :choose_simple, :legal_nature, :to => :person,
-           :allow_nil => true
+  delegate :company_size, :choose_simple, :legal_nature,
+           :commercial_registration_number, :commercial_registration_date,
+           :to => :person, :allow_nil => true
 
   accepts_nested_attributes_for :accounts, :allow_destroy => true
   accepts_nested_attributes_for :creditor_balances, :allow_destroy => true

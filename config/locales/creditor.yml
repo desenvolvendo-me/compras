@@ -20,3 +20,5 @@ pt-BR:
         registration_cadastral_certificates: 'Certificado de registro cadastral' 
         representative_people: "Representantes"
         social_identification_number: "PIS/PASEP"
+        commercial_registration_number: "Número do registro na junta comercial"
+        commercial_registration_date: "Data do registro na junta comercial"

@@ -149,6 +149,10 @@ feature "Creditors" do
       page.should_not have_checked_field 'Optante pelo simples'
       page.should have_disabled_field 'Natureza jurídica'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
+      page.should have_disabled_field 'Número do registro na junta comercial'
+      page.should have_field 'Número do registro na junta comercial', :with => '099901'
+      page.should have_disabled_field 'Data do registro na junta comercial'
+      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
     within_tab 'CNAEs' do
@@ -254,6 +258,10 @@ feature "Creditors" do
       page.should_not have_checked_field 'Optante pelo simples'
       page.should have_disabled_field 'Natureza jurídica'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
+      page.should have_disabled_field 'Número do registro na junta comercial'
+      page.should have_field 'Número do registro na junta comercial', :with => '099901'
+      page.should have_disabled_field 'Data do registro na junta comercial'
+      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
       page.should_not have_field 'PIS/PASEP'
     end
 
@@ -740,6 +748,10 @@ feature "Creditors" do
       page.should_not have_checked_field 'Optante pelo simples'
       page.should have_disabled_field 'Natureza jurídica'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
+      page.should have_disabled_field 'Número do registro na junta comercial'
+      page.should have_field 'Número do registro na junta comercial', :with => '099901'
+      page.should have_disabled_field 'Data do registro na junta comercial'
+      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
     within_tab 'CNAEs' do
@@ -862,6 +874,10 @@ feature "Creditors" do
       page.should_not have_checked_field 'Optante pelo simples'
       page.should have_disabled_field 'Natureza jurídica'
       page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
+      page.should have_disabled_field 'Número do registro na junta comercial'
+      page.should have_field 'Número do registro na junta comercial', :with => '099901'
+      page.should have_disabled_field 'Data do registro na junta comercial'
+      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
     within_tab 'CNAEs' do
