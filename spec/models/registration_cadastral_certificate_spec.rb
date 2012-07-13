@@ -32,4 +32,23 @@ describe RegistrationCadastralCertificate do
                                                     with_message("deve ser igual ou anterior a hoje (#{I18n.l(Date.current)})")
     end
   end
+
+  it "should not allow revocation_date before registration_date" do
+    subject.stub(:registration_date => Date.current)
+
+    subject.should_not allow_value(Date.yesterday).for(:revocation_date).
+                                                   with_message("deve ser igual ou posterior a data da inscrição (#{I18n.l(Date.current)})")
+  end
+
+  it "should allow revocation_date on registration_date" do
+    subject.stub(:registration_date => Date.current)
+
+    subject.should allow_value(Date.current).for(:revocation_date)
+  end
+
+  it "should allow revocation_date after registration_date" do
+    subject.stub(:registration_date => Date.current)
+
+    subject.should allow_value(Date.tomorrow).for(:revocation_date)
+  end
 end

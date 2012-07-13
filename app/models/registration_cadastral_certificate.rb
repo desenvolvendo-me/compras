@@ -9,13 +9,19 @@ class RegistrationCadastralCertificate < Compras::Model
 
   validates :fiscal_year, :specification, :creditor, :presence => true
   validates :registration_date, :validity_date, :presence => true
-  validates :commercial_registry_registration_date, :revocation_date, :timeliness => { :type => :date, :on => :create }, :allow_blank => true
+  validates :commercial_registry_registration_date, :timeliness => { :type => :date, :on => :create }, :allow_blank => true
   validates :registration_date,
     :timeliness => {
       :on_or_before => :today,
       :on_or_before_message => :should_be_on_or_before_today,
       :type => :date,
       :on => :create
+    }, :allow_blank => true
+  validates :revocation_date,
+    :timeliness => {
+      :on_or_after => :registration_date,
+      :on_or_after_message => :should_be_on_or_after_registration_date,
+      :type => :date
     }, :allow_blank => true
   validates :fiscal_year, :mask => '9999', :allow_blank => true
 
