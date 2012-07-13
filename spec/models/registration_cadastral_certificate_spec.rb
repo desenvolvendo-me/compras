@@ -10,7 +10,6 @@ describe RegistrationCadastralCertificate do
   it { should validate_presence_of :creditor }
   it { should validate_presence_of :registration_date }
   it { should validate_presence_of :validity_date }
-  it { should validate_presence_of :revocation_date }
 
   it { should allow_value('2012').for(:fiscal_year) }
   it { should_not allow_value('212').for(:fiscal_year) }

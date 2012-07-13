@@ -8,7 +8,7 @@ class RegistrationCadastralCertificate < Compras::Model
   belongs_to :creditor
 
   validates :fiscal_year, :specification, :creditor, :presence => true
-  validates :registration_date, :validity_date, :revocation_date, :presence => true
+  validates :registration_date, :validity_date, :presence => true
   validates :commercial_registry_registration_date, :revocation_date, :timeliness => { :type => :date, :on => :create }, :allow_blank => true
   validates :registration_date,
     :timeliness => {
