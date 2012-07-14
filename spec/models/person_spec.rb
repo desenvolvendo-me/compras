@@ -134,7 +134,7 @@ describe Person do
 
   context 'commercial_registration_date' do
     let :date do
-      Date.new(2012, 07, 13)
+      Date.new(2012, 7, 13)
     end
 
     it 'should not return commercial_registration_date if is not company' do
