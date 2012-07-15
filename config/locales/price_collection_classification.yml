@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      price_collection_classification:
+        one: "Classificação de Coleta de Preço"
+        other: "Classificações de Coletas de Preços"
+
+    attributes:
+      price_collection_classification:
+        unit_price: "Preço unitário"
+        creditor: "Fornecedor"
+        total_value: "Valor Total"
+        classification: "Classificação"
+        winner: "Vencedor"
