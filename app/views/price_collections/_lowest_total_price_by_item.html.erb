@@ -1,43 +1,10 @@
-<table class="records">
-  <thead>
-    <tr>
-      <th>
-        Item
-      </th>
-      <th>
-        Quantidade
-      </th>
-      <th>
-        Valor cotado
-      </th>
-      <th>
-        Total
-      </th>
-      <th>
-        Fornecedor vencedor
-      </th>
-    </tr>
-  </thead>
+<tr class="<%= "classification-#{classification.classification}-#{index}" %>">
+  <td><%= classification.description %></td>
+  <td><%= classification.reference_unit %></td>
+  <td><%= classification.brand %></td>
+  <td align="right"><%= classification.quantity %></td>
+  <td align="right"><%= classification.decorator.unit_value %></td>
+  <td align="right"><%= classification.decorator.total_value %></td>
+  <td><%= price_collection_winner(classification.classification) %></td>
+</tr>
 
-  <tbody>
-    <% localized(resource.items).each_with_index do |item, index| %>
-      <tr>
-        <td>
-          <%= item.description %>
-        </td>
-        <td>
-          <%= item.quantity %>
-        </td>
-        <td>
-          <%= item.winner_proposal.decorator.unit_price %>
-        </td>
-        <td>
-          <%= item.winner_proposal.decorator.total_price %>
-        </td>
-        <td>
-          <%= item.winner_proposal_creditor %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>

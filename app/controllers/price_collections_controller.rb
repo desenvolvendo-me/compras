@@ -11,6 +11,17 @@ class PriceCollectionsController < CrudController
     super
   end
 
+  # generate classifications before show price_collection
+  def show
+    resource.all_price_collection_classifications.each { |c| c.destroy }
+
+    price_collection_classifications = PriceCollectionClassificationGenerator.new(resource).generate!
+
+    resource.transaction do
+      price_collection_classifications.each {|c| c.save! }
+    end
+  end
+
   protected
 
   def create_resource(object)

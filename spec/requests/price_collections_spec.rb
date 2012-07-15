@@ -479,61 +479,6 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'calc by lowest_total_price_by_item' do
-    PriceCollection.make!(:coleta_de_precos)
-    PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
-
-    navigate_through 'Compras e Licitações > Coletas de Preços'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apurar'
-
-    page.should have_content 'Apuração: Menor preço total por item'
-    page.should have_content 'Antivirus'
-    page.should have_content '10'
-    page.should have_content '50,00 '
-    page.should have_content '500,00 '
-    page.should have_content 'Wenderson Malheiros'
-  end
-
-  scenario 'calc by lowest_total_price_by_item' do
-    PriceCollection.make!(:coleta_de_precos, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
-    PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
-
-    navigate_through 'Compras e Licitações > Coletas de Preços'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apurar'
-
-    page.should have_content 'Apuração: Menor preço por lote'
-    page.should have_content 'Lote 1'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content '500,00 '
-  end
-
-  scenario 'calc by lowest_global_price' do
-    PriceCollection.make!(:coleta_de_precos, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE)
-    PriceCollectionProposalItem.first.update_attributes!(:unit_price => 50)
-
-    navigate_through 'Compras e Licitações > Coletas de Preços'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apurar'
-
-    page.should have_content 'Apuração: Menor preço global'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content '500,00 '
-  end
-
   scenario 'showing numberd labels on each lot' do
     PriceCollection.make!(:coleta_de_precos)
 
@@ -564,6 +509,150 @@ feature "PriceCollections" do
       page.should have_content 'Lote 1'
       page.should have_content 'Lote 2'
       page.should_not have_content 'Lote 3'
+    end
+  end
+
+  scenario 'calc by lowest_total_price_by_item' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+
+    make_proposals_dependencies!(price_collection)
+
+    navigate_through 'Compras e Licitações > Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apurar'
+
+    page.should have_content 'Apuração: Menor preço total por item'
+
+    page.should have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      page.should have_content 'Antivirus'
+      page.should have_content '40,00'
+      page.should have_content '400,00'
+      page.should have_content 'Sim'
+    end
+
+    within '.classification-2-1' do
+      page.should have_content 'Arame comum'
+      page.should have_content '3,00'
+      page.should have_content '600,00'
+      page.should have_content 'Não'
+    end
+
+    page.should have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0' do
+      page.should have_content 'Antivirus'
+      page.should have_content '50,00'
+      page.should have_content '500,00'
+      page.should have_content 'Não'
+    end
+
+    within '.classification-1-1' do
+      page.should have_content 'Arame comum'
+      page.should have_content '2,00'
+      page.should have_content '400,00'
+      page.should have_content 'Sim'
+    end
+  end
+
+  scenario 'calc by lowest_price_by_lot' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
+
+    make_proposals_dependencies!(price_collection)
+
+    navigate_through 'Compras e Licitações > Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apurar'
+
+    page.should have_content 'Apuração: Menor preço por lote'
+
+    page.should have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0' do
+      page.should have_content 'Antivirus'
+      page.should have_content '50,00'
+      page.should have_content '500,00'
+      page.should have_content 'Não'
+    end
+
+    within '.classification-1-1' do
+      page.should have_content 'Arame comum'
+      page.should have_content '2,00'
+      page.should have_content '400,00'
+      page.should have_content 'Sim'
+    end
+
+    page.should have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      page.should have_content 'Antivirus'
+      page.should have_content '40,00'
+      page.should have_content '400,00'
+      page.should have_content 'Sim'
+    end
+
+    within 'tr.classification-2-1' do
+      page.should have_content 'Arame comum'
+      page.should have_content '3,00'
+      page.should have_content '600,00'
+      page.should have_content 'Não'
+    end
+  end
+
+  scenario 'calc by lowest_global_price' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE)
+
+    make_proposals_dependencies!(price_collection)
+
+    navigate_through 'Compras e Licitações > Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Apurar'
+
+    page.should have_content 'Apuração: Menor preço global'
+
+    page.should have_content 'Wenderson Malheiros'
+
+    within '.classification-1-0' do
+      page.should have_content 'Antivirus'
+      page.should have_content '50,00'
+      page.should have_content '500,00'
+      page.should have_content 'Sim'
+    end
+
+    within '.classification-1-1' do
+      page.should have_content 'Arame comum'
+      page.should have_content '2,00'
+      page.should have_content '400,00'
+      page.should have_content 'Sim'
+    end
+
+    page.should have_content 'Gabriel Sobrinho'
+
+    within '.classification-2-0' do
+      page.should have_content 'Antivirus'
+      page.should have_content '40,00'
+      page.should have_content '400,00'
+      page.should have_content 'Não'
+    end
+
+    within '.classification-2-1' do
+      page.should have_content 'Arame comum'
+      page.should have_content '3,00'
+      page.should have_content '600,00'
+      page.should have_content 'Não'
     end
   end
 
@@ -676,5 +765,24 @@ feature "PriceCollections" do
     end
 
     page.should_not have_button 'Salvar'
+  end
+
+  def make_proposals_dependencies!(price_collection)
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
+
+    PriceCollectionProposalItem.make!(:wenderson_antivirus,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.first)
+    PriceCollectionProposalItem.make!(:wenderson_arame,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.last)
+
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.first)
+    PriceCollectionProposalItem.make!(:sobrinho_arame,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.last)
   end
 end

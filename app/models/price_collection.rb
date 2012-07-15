@@ -21,6 +21,7 @@ class PriceCollection < Compras::Model
   has_many :items, :through => :price_collection_lots
   has_many :price_collection_proposals, :dependent => :destroy, :order => :id
   has_many :creditors, :through => :price_collection_proposals
+  has_many :price_collection_classifications, :as => :classifiable, :dependent => :destroy
 
   delegate :creditor, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
 
@@ -68,6 +69,10 @@ class PriceCollection < Compras::Model
 
   def annul!
     update_attribute :status, PriceCollectionStatus::ANNULLED
+  end
+
+  def all_price_collection_classifications
+    PriceCollectionClassification.by_price_classification_or_lot_or_item(id, price_collection_lot_ids, item_ids)
   end
 
   protected

@@ -5,6 +5,7 @@ require 'app/models/price_collection_lot'
 require 'app/models/price_collection_proposal'
 require 'lib/annullable'
 require 'app/models/price_collection_annul'
+require 'app/models/price_collection_classification'
 
 describe PriceCollection do
   context 'relationships' do
@@ -16,6 +17,7 @@ describe PriceCollection do
     it { should have_many(:price_collection_proposals).dependent(:destroy).order(:id) }
     it { should have_many(:creditors).through(:price_collection_proposals) }
     it { should have_many(:items).through(:price_collection_lots) }
+    it { should have_many(:price_collection_classifications).dependent(:destroy) }
   end
 
   context 'validations' do

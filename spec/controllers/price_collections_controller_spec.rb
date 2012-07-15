@@ -112,4 +112,36 @@ describe PriceCollectionsController do
       end
     end
   end
+
+  context 'GET #show' do
+    let :classification_1 do
+      double('PriceCollectionClassification')
+    end
+
+    let :classification_2 do
+      double('PriceCollectionClassification')
+    end
+
+    let :price_collection_classifications do
+      [classification_1, classification_2]
+    end
+
+    let :price_collection do
+      double('PriceCollection', :all_price_collection_classifications => price_collection_classifications,
+             :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE)
+    end
+
+    it 'delete classifications e call classification generator' do
+      PriceCollection.stub(:find).and_return(price_collection)
+
+      classification_1.should_receive(:destroy).and_return(true)
+      classification_2.should_receive(:destroy).and_return(true)
+
+      PriceCollectionClassificationGenerator.any_instance.should_receive(:generate!)
+
+      price_collection.should_receive(:transaction)
+
+      get :show
+    end
+  end
 end

@@ -60,6 +60,15 @@ class PriceCollectionProposal < Compras::Model
             creditor_id.eq(params.fetch(:creditor_id)) }
   end
 
+  def self.by_price_collection_id_sum_items(price_collection)
+    joins { items.price_collection_lot_item }.
+    select { creditor_id }.
+    select { sum(items.unit_price * items.price_collection_lot_item.quantity).as(total_value) }.
+    where { status.not_eq(PriceCollectionStatus::ANNULLED) & price_collection_id.eq(price_collection) }.
+    group { creditor_id }.
+    order { 'total_value' }
+  end
+
   protected
 
   def must_have_a_valid_creditor_user

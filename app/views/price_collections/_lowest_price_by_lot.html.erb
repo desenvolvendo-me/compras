@@ -1,31 +1,11 @@
-<table class="records">
-  <thead>
-    <tr>
-      <th>
-        Lote
-      </th>
-      <th>
-        Fornecedor vencedor
-      </th>
-      <th>
-        Valor cotado
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% localized(resource.price_collection_lots).each_with_index do |lot, index| %>
-      <tr>
-        <td>
-          Lote <%= index.succ %>
-        </td>
-        <td>
-          <%= lot.winner_proposal.creditor %>
-        </td>
-        <td>
-          <%= lot.winner_proposal.decorator.item_total_value_by_lot(lot) %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% classification.items.each do |item| %>
+  <tr class="<%= "classification-#{classification.classification}-#{index}" %>">
+    <td><%= item.description %></td>
+    <td><%= item.reference_unit %></td>
+    <td><%= item.brand %></td>
+    <td align="right"><%= item.quantity %></td>
+    <td align="right"><%= item.decorator.unit_price_by_price_collection_and_creditor(resource, classification.creditor) %></td>
+    <td align="right"><%= item.decorator.total_value_by_price_collection_and_creditor(resource, classification.creditor) %></td>
+    <td><%= price_collection_winner(classification.classification) %></td>
+  </tr>
+<% end %>
