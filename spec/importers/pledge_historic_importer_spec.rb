@@ -19,7 +19,7 @@ describe PledgeHistoricImporter do
     storage
   end
 
-  it 'imports cities' do
+  it 'imports pledge_historics' do
     null_storage.should_receive(:create!).with('description' => 'Comum', 'source' => 'default')
     null_storage.should_receive(:create!).with('description' => 'Auxilio', 'source' => 'default')
     null_storage.should_receive(:create!).with('description' => 'Outras Antecipações', 'source' => 'default')
