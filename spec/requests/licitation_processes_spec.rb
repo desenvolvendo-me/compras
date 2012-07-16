@@ -55,14 +55,14 @@ feature "LicitationProcesses" do
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'licitation_process_expiration_unit'
+      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => '14:00'
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_in 'Hora da abertura', :with => '14:00'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'licitation_process_period_unit'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -123,14 +123,14 @@ feature "LicitationProcesses" do
       page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
       page.should have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       page.should have_field 'Validade da proposta', :with => '5'
-      page.should have_select 'licitation_process_expiration_unit', :selected => 'dia/dias'
+      page.should have_select 'Período da validade da proposta', :selected => 'dia/dias'
       page.should have_field 'Índice de reajuste', :with => 'XPTO'
       page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       page.should have_field 'Hora da entrega', :with => '14:00'
       page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Hora da abertura', :with => '14:00'
       page.should have_field 'Prazo de entrega', :with => '1'
-      page.should have_select 'licitation_process_period_unit', :selected => 'ano/anos'
+      page.should have_select 'Período do prazo de entrega', :selected => 'ano/anos'
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Valor da caução', :with => '50,00'
       page.should have_select 'Parecer jurídico', :selected => 'Favorável'
@@ -226,14 +226,14 @@ feature "LicitationProcesses" do
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10'
-      select 'dia/dias', :from => 'licitation_process_expiration_unit'
+      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'SELIC', :field => 'Nome'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_in 'Hora da entrega', :with => '15:00'
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
       fill_in 'Hora da abertura', :with => '15:00'
       fill_in 'Prazo de entrega', :with => '3'
-      select  'mês/meses', :from => 'licitation_process_period_unit'
+      select  'mês/meses', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '60,00'
       select 'Contrário', :from => 'Parecer jurídico'
@@ -279,14 +279,14 @@ feature "LicitationProcesses" do
       page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
       page.should have_field 'Fonte de recurso', :with => 'Construção'
       page.should have_field 'Validade da proposta', :with => '10'
-      page.should have_select 'licitation_process_expiration_unit', :selected => 'dia/dias'
+      page.should have_select 'Período da validade da proposta', :selected => 'dia/dias'
       page.should have_field 'Índice de reajuste', :with => 'SELIC'
       page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
       page.should have_field 'Hora da entrega', :with => '15:00'
       page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
       page.should have_field 'Hora da abertura', :with => '15:00'
       page.should have_field 'Prazo de entrega', :with => '3'
-      page.should have_select 'licitation_process_period_unit', :selected => 'mês/meses'
+      page.should have_select 'Período do prazo de entrega', :selected => 'mês/meses'
       page.should have_field 'Forma de pagamento', :with => 'Cheque'
       page.should have_field 'Valor da caução', :with => '60,00'
       page.should have_select 'Parecer jurídico', :selected => 'Contrário'
@@ -340,14 +340,14 @@ feature "LicitationProcesses" do
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
-      select 'dia/dias', :from => 'licitation_process_expiration_unit'
+      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => '15:00'
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_in 'Hora da abertura', :with => '15:00'
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'licitation_process_period_unit'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
@@ -801,14 +801,14 @@ feature "LicitationProcesses" do
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
-      select 'dia/dias', :from => 'licitation_process_expiration_unit'
+      select 'dia/dias', :from => 'Período da validade da proposta'
       fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => I18n.l(Date.current, :format => 'time')
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da abertura', :with => I18n.l(Date.current, :format => 'time')
       fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'licitation_process_period_unit'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Valor da caução', :with => '50,00'
       select 'Favorável', :from => 'Parecer jurídico'
