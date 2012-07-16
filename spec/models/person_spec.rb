@@ -132,7 +132,7 @@ describe Person do
     end
   end
 
-  context 'commercial_registration_date' do
+  context '#commercial_registration_date' do
     let :date do
       Date.new(2012, 7, 13)
     end
@@ -149,7 +149,7 @@ describe Person do
     end
   end
 
-  context 'commercial_registration_number' do
+  context '#commercial_registration_number' do
     it 'should not return commercial_registration_number if is not company' do
       subject.stub(:company?).and_return false
       subject.commercial_registration_number.should be_nil
