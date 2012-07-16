@@ -8,6 +8,8 @@
   </div>
 </div>
 
+<%= render 'pledges/values_table', :f => f %>
+
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :value %>
@@ -37,17 +39,21 @@
       $('#pledge_cancellation_pledge_id').change(function (event, pledge) {
         if (pledge) {
           $('#pledge_cancellation_emission_date').val(pledge.emission_date);
+
           $('#pledge_value').html(pledge.pledge_value_as_currency);
           $('#pledge_cancellations_sum').html(pledge.pledge_cancellations_sum);
           $('#pledge_balance').html(pledge.balance_as_currency);
-          $('#pledge_liquidations_sum').html(pledge.pledge_liquidations_sum);
+          $('#pledge_liquidations_sum').html(pledge.pledge_liquidations_sum_as_currency);
+
           pledgeValue = pledge.balance;
         } else {
           $('#pledge_cancellation_emission_date').val('');
+
           $('#pledge_value').html('');
           $('#pledge_cancellations_sum').html('');
           $('#pledge_balance').html('');
           $('#pledge_liquidations_sum').html('');
+
           pledgeValue = null;
         }
       });
