@@ -30,9 +30,9 @@ feature "PriceCollections" do
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
       fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
-      select 'ano/anos', :from => 'price_collection_period_unit'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_in 'Validade da proposta', :with => '1'
-      select 'ano/anos', :from => 'price_collection_proposal_validity_unit'
+      select 'ano/anos', :from => 'Período da validade da proposta'
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
@@ -96,9 +96,9 @@ feature "PriceCollections" do
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
       fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
-      select 'ano/anos', :from => 'price_collection_period_unit'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_in 'Validade da proposta', :with => '1'
-      select 'ano/anos', :from => 'price_collection_proposal_validity_unit'
+      select 'ano/anos', :from => 'Período da validade da proposta'
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
@@ -152,9 +152,9 @@ feature "PriceCollections" do
       page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
       page.should have_field 'Prazo de entrega', :with => '1'
       page.should have_field 'Vencimento', :with => I18n.l(Date.tomorrow)
-      page.should have_select 'price_collection_period_unit', :selected => 'ano/anos'
+      page.should have_select 'Período do prazo de entrega', :selected => 'ano/anos'
       page.should have_field 'Validade da proposta', :with => '1'
-      page.should have_select 'price_collection_proposal_validity_unit', :selected => 'ano/anos'
+      page.should have_select 'Período da validade da proposta', :selected => 'ano/anos'
       page.should have_field 'Objeto', :with => 'objeto da coleta'
       page.should have_field 'Observações', :with => 'observacoes da coleta'
     end
@@ -204,9 +204,9 @@ feature "PriceCollections" do
       fill_modal 'Forma de pagamento', :with => 'Cheque', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '3'
       fill_in 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
-      select 'mês/meses', :from => 'price_collection_period_unit'
+      select 'mês/meses', :from => 'Período do prazo de entrega'
       fill_in 'Validade da proposta', :with => '3'
-      select 'mês/meses', :from => 'price_collection_proposal_validity_unit'
+      select 'mês/meses', :from => 'Período da validade da proposta'
       fill_in 'Objeto', :with => 'novo objeto da coleta'
       fill_in 'Observações', :with => 'novo observacoes da coleta'
     end
@@ -260,9 +260,9 @@ feature "PriceCollections" do
       page.should have_field 'Forma de pagamento', :with => 'Cheque'
       page.should have_field 'Prazo de entrega', :with => '3'
       page.should have_field 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
-      page.should have_select 'price_collection_period_unit', :selected => 'mês/meses'
+      page.should have_select 'Período do prazo de entrega', :selected => 'mês/meses'
       page.should have_field 'Validade da proposta', :with => '3'
-      page.should have_select 'price_collection_proposal_validity_unit', :selected => 'mês/meses'
+      page.should have_select 'Período da validade da proposta', :selected => 'mês/meses'
       page.should have_field 'Objeto', :with => 'novo objeto da coleta'
       page.should have_field 'Observações', :with => 'novo observacoes da coleta'
     end
@@ -312,9 +312,9 @@ feature "PriceCollections" do
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
       fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
-      select 'ano/anos', :from => 'price_collection_period_unit'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_in 'Validade da proposta', :with => '1'
-      select 'ano/anos', :from => 'price_collection_proposal_validity_unit'
+      select 'ano/anos', :from => 'Período da validade da proposta'
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
@@ -417,9 +417,9 @@ feature "PriceCollections" do
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Prazo de entrega', :with => '1'
       fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
-      select 'ano/anos', :from => 'price_collection_period_unit'
+      select 'ano/anos', :from => 'Período do prazo de entrega'
       fill_in 'Validade da proposta', :with => '1'
-      select 'ano/anos', :from => 'price_collection_proposal_validity_unit'
+      select 'ano/anos', :from => 'Período da validade da proposta'
       fill_in 'Objeto', :with => 'objeto da coleta'
       fill_in 'Observações', :with => 'observacoes da coleta'
     end
@@ -736,9 +736,9 @@ feature "PriceCollections" do
       page.should have_disabled_field 'Forma de pagamento'
       page.should have_disabled_field 'Prazo de entrega'
       page.should have_disabled_field 'Vencimento'
-      page.should have_disabled_field 'price_collection_period_unit'
+      page.should have_disabled_field 'Período do prazo de entrega'
       page.should have_disabled_field 'Validade da proposta'
-      page.should have_disabled_field 'price_collection_proposal_validity_unit'
+      page.should have_disabled_field 'Período da validade da proposta'
       page.should have_disabled_field 'Objeto'
       page.should have_disabled_field 'Observações'
     end
