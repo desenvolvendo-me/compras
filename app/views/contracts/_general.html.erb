@@ -36,7 +36,7 @@
   </div>
 
   <div class="yui3-u-1-5">
-    <%= link_to f.object.contract_file_identifier, f.object.contract_file_url if f.object.contract_file? %>
+    <%= link_to f.object.contract_file_identifier, f.object.contract_file_url, :target => '_blank' if f.object.contract_file? %>
   </div>
 </div>
 
