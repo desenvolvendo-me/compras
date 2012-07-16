@@ -55,11 +55,7 @@ class ResourceAnnulsController < CrudController
     parent_model_name.camelize
   end
 
-  def should_block?(object)
-    object.annullable.annulled?
-  end
-
   def validate_parent!(object)
-    raise Exceptions::Unauthorized if should_block?(object)
+    raise Exceptions::Unauthorized if object.annulled?
   end
 end
