@@ -16,7 +16,7 @@ class ResourceAnnulsController < CrudController
   end
 
   def create
-    create!{ edit_parent_path }
+    create! { edit_parent_path }
   end
 
   def edit_parent_path
