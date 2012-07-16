@@ -30,7 +30,7 @@ class ResourceAnnulsController < CrudController
   protected
 
   def annul(object)
-    ObjectAnnulment.new(object.annullable).annul!
+    ObjectAnnulment.annul! object.annullable
   end
 
   def create_resource(object)
