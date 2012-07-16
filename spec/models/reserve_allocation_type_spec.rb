@@ -9,6 +9,10 @@ describe ReserveAllocationType do
     subject.to_s.should eq 'Reserva'
   end
 
+  it "should return active as default_status" do
+    subject.class.default_status.should eq 'active'
+  end
+
   it "should return true for is_licitation? method when description is Licitação" do
     subject.description = "Licitação"
 
