@@ -14,9 +14,9 @@ class PledgeLiquidation < Compras::Model
 
   accepts_nested_attributes_for :pledge_liquidation_parcels, :allow_destroy => true
 
-  delegate :emission_date, :to => :pledge, :allow_nil => true
+  delegate :emission_date, :pledge_liquidations_sum,
+           :pledge_cancellations_sum, :to => :pledge, :allow_nil => true
   delegate :value, :balance, :to => :pledge, :prefix => true, :allow_nil => true
-  delegate :liquidation_value, :to => :pledge, :prefix => true, :allow_nil => true
 
   validates :pledge, :date, :presence => true
   validates :value, :presence => true, :numericality => { :greater_than => 0 }

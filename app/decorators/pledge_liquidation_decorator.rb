@@ -19,7 +19,11 @@ class PledgeLiquidationDecorator < Decorator
     helpers.number_to_currency super if super
   end
 
-  def pledge_liquidation_value
+  def pledge_liquidations_sum
+    helpers.number_to_currency super if super
+  end
+
+  def pledge_cancellations_sum
     helpers.number_to_currency super if super
   end
 

@@ -1,0 +1,35 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        Valor inicial
+      </th>
+      <th>
+        Valor anulado
+      </th>
+      <th>
+        Valor liquidado
+      </th>
+      <th>
+        Valor atual
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td id="pledge_value">
+        <%= f.object.decorator.pledge_value %>
+      </td>
+      <td id="pledge_cancellations_sum">
+        <%= f.object.decorator.pledge_cancellations_sum %>
+      </td>
+      <td id="pledge_liquidations_sum">
+        <%= f.object.decorator.pledge_liquidations_sum %>
+      </td>
+      <td id="pledge_balance">
+        <%= f.object.decorator.pledge_balance %>
+      </td>
+    </tr>
+  </tbody>
+</table>
