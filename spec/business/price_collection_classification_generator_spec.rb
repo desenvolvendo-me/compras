@@ -48,7 +48,7 @@ describe PriceCollectionClassificationGenerator do
   end
 
   let :lots_with_total_value do
-    [double(:total_price => 500)]
+    [double(:total_value => 500, :creditor_id => 1)]
   end
 
   let :classifications do
