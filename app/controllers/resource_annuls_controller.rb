@@ -20,7 +20,7 @@ class ResourceAnnulsController < CrudController
   end
 
   def edit_parent_path
-    send "edit_#{parent_model_name}_path", resource.annullable
+    [:edit, resource.annullable]
   end
 
   def parent_model_name

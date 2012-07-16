@@ -16,13 +16,12 @@ describe ResourceAnnulsController do
     end
 
     it "should show have the edit parent url" do
-      subject.stub(:controller_name => 'contract_termination_annuls')
       subject.stub(:annullable_id => annullable.id)
       subject.stub(:resource => resource)
 
       resource.stub(:annullable => annullable)
 
-      subject.edit_parent_path.should eq '/contract_terminations/1/edit'
+      subject.edit_parent_path.should eq [:edit, annullable]
     end
   end
 
@@ -51,7 +50,7 @@ describe ResourceAnnulsController do
       post :create, :resource_annul => { :annullable_id => pledge_liquidation.id, :annullable_type => 'PledgeLiquidation' }
 
       response.should be_success
-      response.location.should eq '/pledge_liquidations/1/edit'
+      response.location.should match '/pledge_liquidations/1/edit'
     end
 
     it "should return 401 if parent is already annulled" do
@@ -80,8 +79,6 @@ describe ResourceAnnulsController do
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
     subject.stub(:controller_name => 'pledge_liquidation_annuls')
-    subject.should_receive(:parent_model_name).and_return('pledge_liquidation')
-
-    post :create, :resource_annul => { :annullable_id => pledge_liquidation.id, :annullable_type => 'PledgeLiquidation' }
+    subject.parent_model_name.should eq 'pledge_liquidation'
   end
 end
