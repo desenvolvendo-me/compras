@@ -24,6 +24,7 @@ menu:
       - communication_sources
       - company_sizes
       - service_or_contract_types
+      - purchase_solicitation_item_groups
 
     - purchase_solicitations
     - price_collections

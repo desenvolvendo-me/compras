@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation_item_group_purchase_solicitation:
+        one: "Solicitação de Compra do Agrupamento de Item"
+        other: "Solicitações de Compras dos Agrupamentos de Itens"
+
+    attributes:
+      purchase_solicitation_item_group_purchase_solicitation:
+        purchase_solicitation_item_group: "Solicitação de compra"

@@ -15,7 +15,10 @@ class PurchaseSolicitation < Compras::Model
   belongs_to :budget_structure
 
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation, :order => :id
+  has_many :items, :through => :purchase_solicitation_budget_allocations
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
+  has_many :purchase_solicitation_item_group_purchase_solicitations, :dependent => :destroy
+  has_many :purchase_solicitation_item_groups, :through => :purchase_solicitation_item_group_purchase_solicitations, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
   has_one :liberation, :class_name => 'PurchaseSolicitationLiberation', :dependent => :destroy
 
@@ -34,6 +37,10 @@ class PurchaseSolicitation < Compras::Model
 
   orderize :request_date
   filterize
+
+  scope :by_material_id, lambda { |material_id| joins {items}.where {
+    items.material_id.eq(material_id) &
+    items.status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) }}
 
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
@@ -55,6 +62,12 @@ class PurchaseSolicitation < Compras::Model
 
   def next_code
     last_code.succ
+  end
+
+  def quantity_by_material(material_id)
+    PurchaseSolicitation.joins {items}.
+      where { |purchase| purchase.items.material_id.eq(material_id) &
+                         purchase.id.eq( self.id ) }.sum(:quantity)
   end
 
   protected

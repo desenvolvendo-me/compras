@@ -27,3 +27,5 @@ pt-BR:
         budget_allocation_id: "Id"
         total_allocations_items_value: "Valor total dos itens"
         code: "Código"
+        quantity_by_material: 'Quantidade'
+        purchase_solicitation: 'Solicitação de compra'

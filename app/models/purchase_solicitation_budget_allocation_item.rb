@@ -17,4 +17,12 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   def estimated_total_price
     (quantity || 0) * (unit_price || 0)
   end
+
+  def self.grouped!
+    update_all(:status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
+  end
+
+  def self.pending!
+    update_all(:status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING)
+  end
 end

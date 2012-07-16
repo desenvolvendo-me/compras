@@ -1,0 +1,12 @@
+<tr class="record purchase-solicitation">
+  <td>
+    <%= purchase_solicitation %>
+  </td>
+  <td>
+    <%= quantity_by_material %>
+  </td>
+  <td>
+    <input id="<%= f.sanitized_object_name %>_purchase_solicitations_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" value="<%= id %>" />
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>

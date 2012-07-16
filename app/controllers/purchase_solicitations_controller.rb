@@ -1,4 +1,6 @@
 class PurchaseSolicitationsController < CrudController
+  has_scope :by_material_id
+
   def new
     object = build_resource
     object.service_status = PurchaseSolicitationServiceStatus::PENDING

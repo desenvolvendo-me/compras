@@ -1,0 +1,66 @@
+<%= f.input :material %>
+
+<div class="yui3-g modal-finder">
+  <div class="yui3-u-1-2">
+    <%= f.association :purchase_solicitations, :as => :modal, :hidden_field => false, :input_html => { :value => nil }, :modal_url => modal_purchase_solicitations_path %>
+  </div>
+</div>
+
+<input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" />
+
+<%= f.error :purchase_solicitations  %>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>
+        <%= PurchaseSolicitation.human_attribute_name :purchase_solicitation %>
+      </th>
+      <th>
+        <%= PurchaseSolicitation.human_attribute_name :quantity_by_material %>
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="<%= f.sanitized_object_name %>_purchase_solicitations_records">
+    <% f.object.purchase_solicitations.each do |purchase_solicitation| %>
+      <%= render 'purchase_solicitations/list_form', :purchase_solicitation => purchase_solicitation,  :id => purchase_solicitation.id, :quantity_by_material => purchase_solicitation.quantity_by_material(f.object.material_id), :f => f %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache "#{f.sanitized_object_name}_purchase_solicitations_template" do %>
+  <%= f.association :purchase_solicitations, :collection => f.object.purchase_solicitations.build do |p| %>
+    <%= render 'purchase_solicitations/list_form', :purchase_solicitation => '{{purchase_solicitation}}', :id => '{{id}}', :quantity_by_material => "{{quantity_by_material}}", :f => f %>
+  <% end %>
+<% end %>
+
+<script>
+  function enableDisablePurchaseSolicitation(){
+    var value = $('#purchase_solicitation_item_group_material_id').val() == ''
+
+    $('#purchase_solicitation_item_group_purchase_solicitations').attr('disabled', value);
+  };
+
+  function filterModalUrl(){
+    var url = "<%= modal_purchase_solicitations_path %>?",
+    params = {
+      by_material_id: $('#purchase_solicitation_item_group_material_id').val()
+    };
+
+    url += jQuery.param(params);
+    $("#purchase_solicitation_item_group_purchase_solicitations").attr('data-modal-url', url); 
+  };
+
+
+  $('#purchase_solicitation_item_group_material_id').change( function(){
+    filterModalUrl();
+    enableDisablePurchaseSolicitation();
+    $('.purchase_solicitation_item_group_purchase_solicitations_records').html('');
+  });
+
+  filterModalUrl();
+  enableDisablePurchaseSolicitation();
+</script>
