@@ -85,7 +85,7 @@ class Pledge < Compras::Model
   end
 
   def pledge_liquidations_sum
-    pledge_liquidations.active.sum(:value)
+    pledge_liquidations.total_value_by_activated
   end
 
   def pledge_cancellations_sum

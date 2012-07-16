@@ -37,6 +37,10 @@ class PledgeLiquidation < Compras::Model
   orderize :id
   filterize
 
+  def self.total_value_by_activated
+    active.sum(:value)
+  end
+
   def annul!
     update_attribute :status, PledgeLiquidationStatus::ANNULLED
   end
