@@ -31,7 +31,9 @@ describe ResourceAnnulsController do
       resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
       subject.stub(:controller_name => 'contract_termination_annuls')
-      subject.should_receive(:validate_parent!).with(instance_of(ResourceAnnul)).and_raise(Exceptions::Unauthorized)
+      subject.should_receive(:validate_parent!).
+              with(instance_of(ResourceAnnul)).
+              and_raise(Exceptions::Unauthorized)
 
       get :new, :annullable_id => resource_annul.annullable_id
 
@@ -55,7 +57,9 @@ describe ResourceAnnulsController do
     it "should return 401 if parent is already annulled" do
       resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-      subject.should_receive(:validate_parent!).with(instance_of(ResourceAnnul)).and_raise(Exceptions::Unauthorized)
+      subject.should_receive(:validate_parent!).
+              with(instance_of(ResourceAnnul)).
+              and_raise(Exceptions::Unauthorized)
 
       post :create, :resource_annul => resource_annul.attributes
 
