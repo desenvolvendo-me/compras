@@ -10,7 +10,7 @@
 
     <%= f.association :user_attributes, :collection => f.object.build_user do |u| %>
       <div class="yui3-u-1-3">
-        <%= u.input :email, :disabled => f.object.persisted? %>
+        <%= u.input :email, :disabled => f.object.persisted?, :hint => false %>
       </div>
     <% end %>
   </div>
