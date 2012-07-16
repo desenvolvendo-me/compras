@@ -1,5 +1,5 @@
 class PledgeHistoric < Compras::Model
-  attr_accessible :descriptor_id, :description
+  attr_accessible :descriptor_id, :description, :source
 
   has_enumeration_for :source
 
@@ -15,5 +15,9 @@ class PledgeHistoric < Compras::Model
 
   def to_s
     description
+  end
+
+  def self.default_source
+    Source::DEFAULT
   end
 end
