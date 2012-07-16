@@ -1,0 +1,9 @@
+name;operation;character
+Adicionar dotação;sum;budget_allocation
+Subtrair dotação;subtraction;budget_allocation
+Subtrair do excesso arrecadado;subtraction;capability
+Subtrair de outros casos;subtraction;capability
+Adicionar em outros casos;sum;capability
+Subtrair superávit financeiro;subtraction;capability
+Subtrair operações de crédito;subtraction;capability
+Subtrair convênio;subtraction;capability
