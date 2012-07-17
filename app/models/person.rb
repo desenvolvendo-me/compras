@@ -48,32 +48,22 @@ class Person < Unico::Person
   end
 
   def company_size
-    return if !company?
-
-    personable.company_size
+    personable.company_size if personable.respond_to?(:company_size)
   end
 
   def choose_simple
-    return if !company?
-
-    personable.choose_simple
+    personable.choose_simple if personable.respond_to?(:choose_simple)
   end
 
   def legal_nature
-    return if !company?
-
-    personable.legal_nature
+    personable.legal_nature if personable.respond_to?(:legal_nature)
   end
 
   def commercial_registration_date
-    return if !company?
-
-    personable.commercial_registration_date
+    personable.commercial_registration_date if personable.respond_to?(:commercial_registration_date)
   end
 
   def commercial_registration_number
-    return if !company?
-
-    personable.commercial_registration_number
+    personable.commercial_registration_number if personable.respond_to?(:commercial_registration_number)
   end
 end
