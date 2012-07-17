@@ -3,11 +3,7 @@ require 'app/business/purchase_solicitation_budget_allocation_item_status_change
 
 describe PurchaseSolicitationBudgetAllocationItemStatusChanger do
   subject do
-    described_class.new(items_ids, old_items_ids, status)
-  end
-
-  let :status do
-    double :status
+    described_class.new(items_ids, old_items_ids)
   end
 
   let :items do

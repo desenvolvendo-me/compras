@@ -1,10 +1,9 @@
 class PurchaseSolicitationBudgetAllocationItemStatusChanger
-  attr_accessor :items_ids, :old_items_ids, :status
+  attr_accessor :items_ids, :old_items_ids
 
-  def initialize(items_ids = nil, old_items_ids = nil, status = PurchaseSolicitationBudgetAllocationItemStatus)
+  def initialize(items_ids = nil, old_items_ids = nil)
     self.items_ids = items_ids
     self.old_items_ids = old_items_ids
-    self.status = status
   end
 
   def change
