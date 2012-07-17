@@ -23,11 +23,11 @@ class ExpenseNature < Compras::Model
   delegate :code, :to => :expense_modality, :prefix => true, :allow_nil => true
   delegate :code, :to => :expense_element, :prefix => true, :allow_nil => true
 
-  validates :expense_nature, :kind, :description, :expense_group, :presence => true
-  validates :expense_modality, :expense_element, :expense_split, :presence => true
+  validates :expense_nature, :kind, :description, :expense_group, :descriptor,
+            :regulatory_act, :expense_category, :expense_modality,
+            :expense_element, :expense_split, :presence => true
   validates :expense_split, :mask => '99', :allow_blank => true
   validates :expense_nature, :mask => '9.9.99.99.99', :allow_blank => true
-  validates :descriptor, :regulatory_act, :expense_category, :presence => true
 
   orderize :description
 
