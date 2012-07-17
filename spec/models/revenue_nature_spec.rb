@@ -19,6 +19,10 @@ describe RevenueNature do
   it { should validate_presence_of :docket }
   it { should validate_presence_of :descriptor }
 
+  it { should allow_value('9.9.9.9.99.99').for(:revenue_nature) }
+  it { should_not allow_value('99999999').for(:revenue_nature) }
+  it { should_not allow_value('a.b.c.9.99.99').for(:revenue_nature) }
+
   it { should allow_value('12.34').for(:classification) }
   it { should_not allow_value('1a34').for(:classification) }
   it { should_not allow_value('1a.34').for(:classification) }

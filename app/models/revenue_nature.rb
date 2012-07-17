@@ -27,6 +27,7 @@ class RevenueNature < Compras::Model
   validates :regulatory_act, :kind, :docket, :revenue_category, :presence => true
   validates :descriptor, :specification, :classification, :presence => true
   validates :classification, :mask => '99.99', :allow_blank => true
+  validates :revenue_nature, :mask => '9.9.9.9.99.99', :allow_blank => true
   validate :revenue_subcategory_must_be_related_with_revenue_category
   validate :revenue_source_must_be_related_with_revenue_subcategory
   validate :revenue_rubric_must_be_related_with_revenue_source
