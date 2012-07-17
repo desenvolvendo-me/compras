@@ -22,6 +22,7 @@
 
   <% if f.object.persisted? %>
     $('form.pledge_liquidation :input').attr('disabled', true);
+    $('form.pledge_liquidation .add-parcel, form.pledge_liquidation .nested-remove').hide();
   <% else %>
     (function() {
       var pledgeId = $('#pledge_liquidation_pledge_id').val(),

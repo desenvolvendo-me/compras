@@ -195,6 +195,11 @@ feature "PledgeLiquidations" do
       page.should have_disabled_field 'Objeto do empenho'
       page.should have_field 'Objeto do empenho', :with => 'Para empenho 2012'
     end
+
+    within_tab 'Parcelas' do
+      page.should_not have_button 'Adicionar Parcela'
+      page.should_not have_button 'Remover Parcela'
+    end
   end
 
   scenario 'should not have a button to destroy an existent pledge_liquidation' do
