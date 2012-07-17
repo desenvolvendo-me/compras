@@ -38,7 +38,7 @@ class PurchaseSolicitation < Compras::Model
   orderize :request_date
   filterize
 
-  scope :by_material_id, lambda { |material_id| joins {items}.where {
+  scope :by_material_id, lambda { |material_id| joins { items }.where {
     items.material_id.eq(material_id) &
     items.status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) }}
 
@@ -65,7 +65,7 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def quantity_by_material(material_id)
-    PurchaseSolicitation.joins {items}.
+    PurchaseSolicitation.joins { items }.
       where { |purchase| purchase.items.material_id.eq(material_id) &
                          purchase.id.eq( self.id ) }.sum(:quantity)
   end
