@@ -13,11 +13,14 @@ feature "Capabilities" do
 
     click_link 'Criar Recurso'
 
+
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Reforma e Ampliação'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     select 'Ordinário', :from => 'Tipo'
-    select 'Ativo', :from => 'Status'
+
+    page.should have_disabled_field 'Status'
+    page.should have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 

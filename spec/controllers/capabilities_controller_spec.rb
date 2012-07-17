@@ -6,9 +6,25 @@ describe CapabilitiesController do
     controller.stub(:authorize_resource!)
   end
 
-  it 'uses manual as default value for source' do
-    post :create
+  context '#new' do
+    it 'should use active as default value for status' do
+      get :new
 
-    assigns(:capability).source.should eq Source::MANUAL
+      assigns(:capability).status.should eq Status::ACTIVE
+    end
+  end
+
+  context '#create' do
+    it 'should use active as default value for status' do
+      post :create
+
+      assigns(:capability).status.should eq Status::ACTIVE
+    end
+
+    it 'uses manual as default value for source' do
+      post :create
+
+      assigns(:capability).source.should eq Source::MANUAL
+    end
   end
 end
