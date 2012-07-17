@@ -22,9 +22,8 @@
     $('#filter_budget_structure_configuration').attr('DISABLED', value);
   }
 
-  function enabledDisabledLevel(){
-    var value = $('#filter_budget_structure_level_id').val() == '';
-    $('#filter_budget_structure_level').attr('DISABLED', value);
+  function disabledLevel(){
+    $('#filter_budget_structure_level').attr('DISABLED', true);
   }
 
   $('#filter_budget_structure_configuration_id').change( function() {
@@ -38,5 +37,5 @@
   });
 
   enabledDisabledBudgetStructureConfiguration();
-  enabledDisabledLevel();
+  disabledLevel();
 </script>
