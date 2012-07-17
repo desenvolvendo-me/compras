@@ -55,8 +55,6 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def liberate!
-    return false unless liberation.present?
-
     update_attribute :service_status, PurchaseSolicitationServiceStatus::LIBERATED
   end
 

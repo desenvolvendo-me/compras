@@ -22,6 +22,8 @@ class PurchaseSolicitationLiberationsController < CrudController
     object.transaction do
       return unless super
 
+      return false unless @purchase_solicitation.liberation.present?
+
       @purchase_solicitation.liberate!
     end
   end
