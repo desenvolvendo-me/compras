@@ -37,4 +37,8 @@ describe ExpenseNature do
 
   it { should allow_value('12').for(:expense_split) }
   it { should_not allow_value('4a').for(:expense_split) }
+
+  it { should allow_value('9.9.99.99.99').for(:expense_nature) }
+  it { should_not allow_value('99999999').for(:expense_nature) }
+  it { should_not allow_value('a.b.c9.99.99').for(:expense_nature) }
 end
