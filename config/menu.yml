@@ -56,7 +56,6 @@ menu:
       - target_audiences
       - macro_objectives
       - products
-      - moviment_types
 
       - precatory:
         - precatories
@@ -75,6 +74,7 @@ menu:
       - extra_credit:
         - extra_credit_natures
         - extra_credits
+        - moviment_types
 
       - budget_allocation:
         - expense_natures
