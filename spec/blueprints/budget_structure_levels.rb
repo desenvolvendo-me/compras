@@ -27,3 +27,9 @@ BudgetStructureLevel.blueprint(:level_2) do
   separator { BudgetStructureSeparator::POINT }
 end
 
+BudgetStructureLevel.blueprint(:level_3) do
+  description { 'Nível 3' }
+  level { 3 }
+  digits { 3 }
+  separator { BudgetStructureSeparator::POINT }
+end

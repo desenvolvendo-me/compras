@@ -176,6 +176,23 @@ feature "BudgetStructure" do
     end
   end
 
+  scenario 'update an existent budget structure' do
+    BudgetStructure.make!(:secretaria_de_desenvolvimento_level_3 )
+
+    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Informações' do
+      fill_modal 'Nível', :with => 'Unidade', :field => 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    page.should have_disabled_field 'Código'
+    page.should have_field 'Código', :with => ''
+  end
+
   scenario 'should not create a new budget structure when already exist a code in the same level and configuration' do
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructureConfiguration.make!(:detran_sopa)
