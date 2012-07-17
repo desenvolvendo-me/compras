@@ -23,4 +23,8 @@ class PriceCollectionLotItem < Compras::Model
   def total_value_by_price_collection_and_creditor(price_collection, creditor)
     unit_price_by_price_collection_and_creditor(price_collection, creditor) * quantity
   end
+
+  def proposal_items
+    PriceCollectionProposalItem.by_item_order_by_unit_price(id)
+  end
 end

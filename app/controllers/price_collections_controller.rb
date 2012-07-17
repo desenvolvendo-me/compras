@@ -11,15 +11,16 @@ class PriceCollectionsController < CrudController
     super
   end
 
-  # generate classifications before show price_collection
-  def show
-    resource.all_price_collection_classifications.each { |c| c.destroy }
-
-    price_collection_classifications = PriceCollectionClassificationGenerator.new(resource).generate!
-
-    resource.transaction do
-      price_collection_classifications.each {|c| c.save! }
+  def update
+    if params[:commit] == 'Apurar'
+      update! { resource }
+    else
+      update! { price_collections_path }
     end
+  end
+
+  def show
+    render :layout => 'report'
   end
 
   protected
@@ -40,6 +41,15 @@ class PriceCollectionsController < CrudController
       return unless super
 
       CreditorUserCreator.new(object).generate
+    end
+
+    # clean classifications and generate
+    if object.type_of_calculation
+      object.all_price_collection_classifications.destroy_all
+
+      object.transaction do
+        price_collection_classifications = PriceCollectionClassificationGenerator.new(object).generate!
+      end
     end
   end
 

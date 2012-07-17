@@ -14,6 +14,10 @@ class PriceCollectionLot < Compras::Model
   validate :must_have_at_least_one_item
   validate :cannot_have_duplicated_materials
 
+  def lots_with_total_value
+    PriceCollectionProposalItem.by_lot_item_order_by_unit_price(id)
+  end
+
   protected
 
   def must_have_at_least_one_item
