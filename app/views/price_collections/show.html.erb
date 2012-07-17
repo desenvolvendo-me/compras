@@ -1,31 +1,25 @@
-<h1>Quadro Comparativo de Preços</h1>
-
-<h2>Coleta de preços <%= resource %></h2>
+<h1>Quadro Comparativo de Preços da Coleta de preço <%= resource %></h1>
 
 <h3>Apuração: <%= resource.type_of_calculation_humanize %></h3>
 
-<table class="records">
-  <thead>
-    <th><%= Material.human_attribute_name :description %></th>
-    <th><%= Material.human_attribute_name :reference_unit %></th>
-    <th><%= PriceCollectionLotItem.human_attribute_name :brand %></th>
-    <th><%= PriceCollectionLotItem.human_attribute_name :quantity %></th>
-    <th><%= PriceCollectionProposalItem.human_attribute_name :unit_price %></th>
-    <th><%= PriceCollectionClassification.human_attribute_name :total_value %></th>
-    <th><%= PriceCollectionClassification.human_attribute_name :winner %></th>
-  </thead>
+<% resource.decorator.all_price_collection_classifications_groupped.each do |creditor, classifications| %>
+  <h3>Fornecedor: <%= creditor %></h3>
 
-  <tbody>
-    <% resource.decorator.all_price_collection_classifications_groupped.each do |creditor, classifications| %>
-      <tr>
-        <td colspan="10"><b>Fornecedor: <%= creditor %></b></td>
-      </tr>
+  <table class="records">
+    <thead>
+      <th><%= Material.human_attribute_name :description %></th>
+      <th><%= Material.human_attribute_name :reference_unit %></th>
+      <th><%= PriceCollectionLotItem.human_attribute_name :brand %></th>
+      <th><%= PriceCollectionLotItem.human_attribute_name :quantity %></th>
+      <th><%= PriceCollectionProposalItem.human_attribute_name :unit_price %></th>
+      <th><%= PriceCollectionClassification.human_attribute_name :total_value %></th>
+      <th><%= PriceCollectionClassification.human_attribute_name :winner %></th>
+    </thead>
 
+    <tbody>
       <% classifications.each_with_index do |classification, index| %>
         <%= render :partial => resource.type_of_calculation, :locals => { :classification => classification, :index => index } %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to 'Voltar', edit_price_collection_path(resource), :class => "button primary" %>
+    </tbody>
+  </table>
+<% end %>

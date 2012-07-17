@@ -83,6 +83,9 @@ feature "PriceCollections" do
 
     click_link 'Criar Coleta de Preços'
 
+    page.should_not have_button 'Apurar'
+    page.should_not have_link 'Relatório'
+
     within_tab 'Principal' do
       page.should have_disabled_field 'Número'
       page.should have_disabled_field 'Status'
@@ -523,7 +526,9 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_link 'Apurar'
+    click_button 'Apurar'
+
+    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
 
     page.should have_content 'Apuração: Menor preço total por item'
 
@@ -558,6 +563,12 @@ feature "PriceCollections" do
       page.should have_content '400,00'
       page.should have_content 'Sim'
     end
+
+    click_link 'cancelar'
+
+    click_link 'Relatório'
+
+    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
   end
 
   scenario 'calc by lowest_price_by_lot' do
@@ -571,7 +582,9 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_link 'Apurar'
+    click_button 'Apurar'
+
+    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
 
     page.should have_content 'Apuração: Menor preço por lote'
 
@@ -619,7 +632,9 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    click_link 'Apurar'
+    click_button 'Apurar'
+
+    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
 
     page.should have_content 'Apuração: Menor preço global'
 
@@ -776,13 +791,13 @@ feature "PriceCollections" do
                                       :price_collection_lot_item => price_collection.items.first)
     PriceCollectionProposalItem.make!(:wenderson_arame,
                                       :price_collection_proposal => proposal_1,
-                                      :price_collection_lot_item => price_collection.items.last)
+                                      :price_collection_lot_item => price_collection.items.second)
 
     PriceCollectionProposalItem.make!(:sobrinho_antivirus,
                                       :price_collection_proposal => proposal_2,
                                       :price_collection_lot_item => price_collection.items.first)
     PriceCollectionProposalItem.make!(:sobrinho_arame,
                                       :price_collection_proposal => proposal_2,
-                                      :price_collection_lot_item => price_collection.items.last)
+                                      :price_collection_lot_item => price_collection.items.second)
   end
 end

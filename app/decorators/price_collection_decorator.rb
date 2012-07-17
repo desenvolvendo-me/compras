@@ -1,8 +1,9 @@
+# encoding: utf-8
 class PriceCollectionDecorator < Decorator
   def count_link
     return unless component.persisted?
 
-    helpers.link_to('Apurar', routes.price_collection_path(component), :class => "button primary")
+    helpers.link_to('Relatório', routes.price_collection_path(component), :class => "button primary")
   end
 
   def proposals_link

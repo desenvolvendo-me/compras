@@ -11,7 +11,7 @@ Creditor.blueprint(:sobrinho) do
 end
 
 Creditor.blueprint(:sobrinho_sa) do
-  accounts { [ CreditorBankAccount.make!(:conta, :creditor => object) ] }
+  accounts { [ CreditorBankAccount.make!(:conta_2, :creditor => object) ] }
   autonomous { false }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   municipal_public_administration { false }

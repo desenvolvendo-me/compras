@@ -51,3 +51,12 @@ User.blueprint(:creditor_with_password) do
   authenticable { Creditor.make!(:sobrinho_sa) }
   confirmed_at  { 2.days.ago }
 end
+
+User.blueprint(:geraldi) do
+  name          { 'Tiago Geraldi' }
+  email         { 'tiago.geraldi@gmail.com' }
+  password      { '123456' }
+  login         { 'tiago.geraldi' }
+  administrator { true }
+  confirmed_at  { 1.day.ago }
+end
