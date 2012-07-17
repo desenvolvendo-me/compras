@@ -23,13 +23,18 @@
   }
 
   function enabledDisabledLevel(){
-    var value = $('#filter_budget_structure_level_id').val() != '';
+    var value = $('#filter_budget_structure_level_id').val() == '';
     $('#filter_budget_structure_level').attr('DISABLED', value);
   }
 
   $('#filter_budget_structure_configuration_id').change( function() {
-    $('#filter_budget_structure_level').attr('DISABLED', $(this).val() == '' );
-    setModalUrlToBudgetStructureLevel();
+    if ($(this).val() == '') {
+      $('#filter_budget_structure_level').attr('DISABLED', true );
+      $('#filter_budget_structure_level, #filter_budget_structure_level_id').val('');
+    } else {
+      $('#filter_budget_structure_level').attr('DISABLED', false );
+      setModalUrlToBudgetStructureLevel();
+    }
   });
 
   enabledDisabledBudgetStructureConfiguration();
