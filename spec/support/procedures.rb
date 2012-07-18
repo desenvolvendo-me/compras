@@ -1,32 +1,28 @@
 module ProceduresHelper
-  def create_procedures
-    ActiveRecord::Base.connection.execute <<-SQL
-      CREATE FUNCTION iptu_2010(integer, integer)
-      RETURNS INTEGER AS
-      'SELECT $1 + $2'
-      LANGUAGE SQL;
+  def procedures
+    before do
+      ActiveRecord::Base.connection.execute <<-SQL
+        CREATE FUNCTION iptu(integer)
+          RETURNS integer AS
+        'SELECT $1;'
+          LANGUAGE SQL;
 
-      CREATE FUNCTION iptu_2011(integer, integer)
-      RETURNS INTEGER AS
-      'SELECT $1 - $2'
-      LANGUAGE SQL;
+        CREATE FUNCTION itbi(integer)
+          RETURNS integer AS
+        'SELECT $1;'
+          LANGUAGE SQL;
+      SQL
+    end
 
-      CREATE FUNCTION one_argument(integer)
-      RETURNS INTEGER AS
-      'SELECT $1'
-      LANGUAGE SQL;
-    SQL
-  end
-
-  def drop_procedures
-    ActiveRecord::Base.connection.execute <<-SQL
-      DROP FUNCTION iptu_2010(integer, integer);
-      DROP FUNCTION iptu_2011(integer, integer);
-      DROP FUNCTION one_argument(integer);
-    SQL
+    after do
+      ActiveRecord::Base.connection.execute <<-SQL
+        DROP FUNCTION iptu(integer);
+        DROP FUNCTION itbi(integer);
+      SQL
+    end
   end
 end
 
 RSpec.configure do |config|
-  config.include ProceduresHelper
+  config.extend ProceduresHelper
 end
