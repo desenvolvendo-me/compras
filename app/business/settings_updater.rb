@@ -1,15 +1,15 @@
 class SettingsUpdater
-  attr_accessor :storage, :i18n
+  attr_accessor :repository, :i18n
 
-  def initialize(storage = Setting, i18n = I18n)
-    self.storage = storage
+  def initialize(repository = Setting, i18n = I18n)
+    self.repository = repository
     self.i18n = i18n
   end
 
   def update
-    storage.transaction do
+    repository.transaction do
       i18n.translate(:settings).each_pair do |key, _|
-        storage.find_or_create_by_key(key.to_s)
+        repository.find_or_create_by_key(key.to_s)
       end
     end
   end

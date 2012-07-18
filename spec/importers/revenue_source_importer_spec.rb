@@ -5,30 +5,30 @@ require 'active_support/core_ext/object/try'
 
 describe RevenueSourceImporter do
   subject do
-    described_class.new(null_storage, subcategory_storage)
+    described_class.new(null_repository, subcategory_repository)
   end
 
-  let :null_storage do
-    storage = double.as_null_object
+  let :null_repository do
+    repository = double.as_null_object
 
-    storage.stub(:transaction) do |&block|
+    repository.stub(:transaction) do |&block|
       block.call
     end
 
-    storage
+    repository
   end
 
-  let :subcategory_storage do
+  let :subcategory_repository do
     double(:id => 1)
   end
 
   it 'imports revenue subcategories' do
-    subcategory_storage.stub(:where).and_return([subcategory_storage])
-    subcategory_storage.stub(:joins).and_return(subcategory_storage)
+    subcategory_repository.stub(:where).and_return([subcategory_repository])
+    subcategory_repository.stub(:joins).and_return(subcategory_repository)
 
-    null_storage.should_receive(:create!).with('code' => '1', 'description' => 'IMPOSTOS', 'revenue_subcategory_id' => 1)
-    null_storage.should_receive(:create!).with('code' => '2', 'description' => 'CONTRIBUIÇÕES ECONÔMICAS - INTRA-ORÇAMENTÁRIAS', 'revenue_subcategory_id' => 1)
-    null_storage.should_receive(:create!).with('code' => '6', 'description' => 'RECEITA DE CESSÃO DE DIREITOS', 'revenue_subcategory_id' => 1)
+    null_repository.should_receive(:create!).with('code' => '1', 'description' => 'IMPOSTOS', 'revenue_subcategory_id' => 1)
+    null_repository.should_receive(:create!).with('code' => '2', 'description' => 'CONTRIBUIÇÕES ECONÔMICAS - INTRA-ORÇAMENTÁRIAS', 'revenue_subcategory_id' => 1)
+    null_repository.should_receive(:create!).with('code' => '6', 'description' => 'RECEITA DE CESSÃO DE DIREITOS', 'revenue_subcategory_id' => 1)
 
     subject.import!
   end

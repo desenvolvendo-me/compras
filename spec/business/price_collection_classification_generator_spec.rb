@@ -14,7 +14,7 @@ describe PriceCollectionClassificationGenerator do
     )
   end
 
-  let :price_collection_classification_storage do
+  let :price_collection_classification_repository do
     double('PriceCollectionClassification')
   end
 
@@ -54,25 +54,25 @@ describe PriceCollectionClassificationGenerator do
     it "when type of calculation equals lowest total price by item" do
       price_collection.stub(:type_of_calculation => 'lowest_total_price_by_item')
 
-      price_collection_classification_storage.should_receive(:create!)
+      price_collection_classification_repository.should_receive(:create!)
 
-      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_storage).generate!
+      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).generate!
     end
 
     it "when type of calculation equals lowest global price" do
       price_collection.stub(:type_of_calculation => 'lowest_global_price')
 
-      price_collection_classification_storage.should_receive(:create!)
+      price_collection_classification_repository.should_receive(:create!)
 
-      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_storage).generate!
+      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).generate!
     end
 
     it "when type of calculation equals lowest total price by item" do
       price_collection.stub(:type_of_calculation => 'lowest_price_by_lot')
 
-      price_collection_classification_storage.should_receive(:create!)
+      price_collection_classification_repository.should_receive(:create!)
 
-      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_storage).generate!
+      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).generate!
     end
   end
 end

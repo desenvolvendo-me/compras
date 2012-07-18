@@ -1,22 +1,22 @@
 # encoding: utf-8
 class RevenueNatureImporter < Importer
-  attr_accessor :storage, :revenue_category_storage
-  attr_accessor :revenue_subcategory_storage, :revenue_source_storage
-  attr_accessor :revenue_rubric_storage, :code_generator
+  attr_accessor :repository, :revenue_category_repository
+  attr_accessor :revenue_subcategory_repository, :revenue_source_repository
+  attr_accessor :revenue_rubric_repository, :code_generator
 
-  def initialize(storage = RevenueNature, revenue_category_storage = RevenueCategory, revenue_subcategory_storage = RevenueSubcategory, revenue_source_storage = RevenueSource, revenue_rubric_storage = RevenueRubric, code_generator = RevenueNatureCodeGenerator)
-    self.storage                     = storage
-    self.revenue_category_storage    = revenue_category_storage
-    self.revenue_subcategory_storage = revenue_subcategory_storage
-    self.revenue_source_storage      = revenue_source_storage
-    self.revenue_rubric_storage      = revenue_rubric_storage
+  def initialize(repository = RevenueNature, revenue_category_repository = RevenueCategory, revenue_subcategory_repository = RevenueSubcategory, revenue_source_repository = RevenueSource, revenue_rubric_repository = RevenueRubric, code_generator = RevenueNatureCodeGenerator)
+    self.repository                     = repository
+    self.revenue_category_repository    = revenue_category_repository
+    self.revenue_subcategory_repository = revenue_subcategory_repository
+    self.revenue_source_repository      = revenue_source_repository
+    self.revenue_rubric_repository      = revenue_rubric_repository
     self.code_generator              = code_generator
   end
 
   def import!
     transaction do
       parser.foreach(file, options) do |row|
-        revenue_nature = storage.new(normalize_attributes(row.to_hash))
+        revenue_nature = repository.new(normalize_attributes(row.to_hash))
         code_generator.new(revenue_nature).generate!
         revenue_nature.save(:validate => false)
       end
@@ -32,10 +32,10 @@ class RevenueNatureImporter < Importer
     rubric_code      = attributes['code'][3]
     classification   = attributes['code'][4..7]
 
-    category    = revenue_category_storage.where(:code => category_code).first
-    subcategory = revenue_subcategory_storage.where(:code => subcategory_code, :revenue_category_id => category.try(:id)).first
-    source      = revenue_source_storage.where(:code => source_code, :revenue_subcategory_id => subcategory.try(:id)).first
-    rubric      = revenue_rubric_storage.where(:code => rubric_code, :revenue_source_id => source.try(:id)).first
+    category    = revenue_category_repository.where(:code => category_code).first
+    subcategory = revenue_subcategory_repository.where(:code => subcategory_code, :revenue_category_id => category.try(:id)).first
+    source      = revenue_source_repository.where(:code => source_code, :revenue_subcategory_id => subcategory.try(:id)).first
+    rubric      = revenue_rubric_repository.where(:code => rubric_code, :revenue_source_id => source.try(:id)).first
 
     attributes.merge(
       'revenue_category_id' => category.try(:id),

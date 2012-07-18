@@ -1,8 +1,8 @@
 class CityImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = City)
-    self.storage = storage
+  def initialize(repository = City)
+    self.repository = repository
   end
 
   protected

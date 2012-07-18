@@ -7,13 +7,13 @@ describe DirectPurchaseModalityLimitVerificator do
                               :licitation_object_build_licitation_exemption => 500.0)
   end
 
-  let :limit_storage do
+  let :limit_repository do
     double('modality limit', :current_limit_material_or_service_without_bidding => 500,
                              :current_limit_engineering_works_without_bidding => 700)
   end
 
   let :subject do
-    DirectPurchaseModalityLimitVerificator.new(direct_purchase, limit_storage)
+    DirectPurchaseModalityLimitVerificator.new(direct_purchase, limit_repository)
   end
 
   it 'should return true with modality mateiral_or_service and total of item equal to 100' do

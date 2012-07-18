@@ -4,25 +4,25 @@ require 'app/importers/pledge_historic_importer'
 
 describe PledgeHistoricImporter do
   subject do
-    PledgeHistoricImporter.new(null_storage)
+    PledgeHistoricImporter.new(null_repository)
   end
 
-  let :null_storage do
-    storage = double.as_null_object
+  let :null_repository do
+    repository = double.as_null_object
 
-    storage.stub(:transaction) do |&block|
+    repository.stub(:transaction) do |&block|
       block.call
     end
 
-    storage.stub(:default_source).and_return('default')
+    repository.stub(:default_source).and_return('default')
 
-    storage
+    repository
   end
 
   it 'imports pledge_historics' do
-    null_storage.should_receive(:create!).with('description' => 'Comum', 'source' => 'default')
-    null_storage.should_receive(:create!).with('description' => 'Auxilio', 'source' => 'default')
-    null_storage.should_receive(:create!).with('description' => 'Outras Antecipações', 'source' => 'default')
+    null_repository.should_receive(:create!).with('description' => 'Comum', 'source' => 'default')
+    null_repository.should_receive(:create!).with('description' => 'Auxilio', 'source' => 'default')
+    null_repository.should_receive(:create!).with('description' => 'Outras Antecipações', 'source' => 'default')
 
     subject.import!
   end

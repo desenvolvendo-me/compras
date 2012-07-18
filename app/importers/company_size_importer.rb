@@ -1,8 +1,8 @@
 class CompanySizeImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = CompanySize)
-    self.storage = storage
+  def initialize(repository = CompanySize)
+    self.repository = repository
   end
 
   protected

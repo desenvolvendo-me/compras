@@ -1,8 +1,8 @@
 class ReserveAllocationTypeImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = ReserveAllocationType)
-    self.storage = storage
+  def initialize(repository = ReserveAllocationType)
+    self.repository = repository
   end
 
   protected
@@ -12,7 +12,7 @@ class ReserveAllocationTypeImporter < Importer
   end
 
   def default_status
-    storage.default_status
+    repository.default_status
   end
 
   def file

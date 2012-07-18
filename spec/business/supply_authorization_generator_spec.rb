@@ -3,14 +3,14 @@ require 'app/business/supply_authorization_generator'
 
 describe SupplyAuthorizationGenerator do
   subject do
-    described_class.new(direct_purchase_object, supply_authorization_storage)
+    described_class.new(direct_purchase_object, supply_authorization_repository)
   end
 
   let :direct_purchase_object do
     double(:id => 1, :year => 2012)
   end
 
-  let :supply_authorization_storage do
+  let :supply_authorization_repository do
     double
   end
 
@@ -27,7 +27,7 @@ describe SupplyAuthorizationGenerator do
   it 'should generate supply_authorization' do
     direct_purchase_object.stub(:authorized?).and_return(false)
 
-    supply_authorization_storage.should_receive(:create!).with(
+    supply_authorization_repository.should_receive(:create!).with(
       :direct_purchase_id => 1,
       :year => 2012
     ).and_return(supply_authorization_object)

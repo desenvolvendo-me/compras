@@ -4,26 +4,26 @@ require 'app/importers/reserve_allocation_type_importer'
 
 describe ReserveAllocationTypeImporter do
   subject do
-    ReserveAllocationTypeImporter.new(null_storage)
+    ReserveAllocationTypeImporter.new(null_repository)
   end
 
-  let :null_storage do
-    storage = double.as_null_object
+  let :null_repository do
+    repository = double.as_null_object
 
-    storage.stub(:transaction) do |&block|
+    repository.stub(:transaction) do |&block|
       block.call
     end
 
-    storage.stub(:default_status).and_return('active')
+    repository.stub(:default_status).and_return('active')
 
-    storage
+    repository
   end
 
   it 'imports reserve allocation types' do
-    null_storage.should_receive(:create!).with('description' => 'Comum', 'status' => 'active')
-    null_storage.should_receive(:create!).with('description' => 'Licitação', 'status' => 'active')
-    null_storage.should_receive(:create!).with('description' => 'Cotas mensais', 'status' => 'active')
-    null_storage.should_receive(:create!).with('description' => 'Limitações de empenho', 'status' => 'active')
+    null_repository.should_receive(:create!).with('description' => 'Comum', 'status' => 'active')
+    null_repository.should_receive(:create!).with('description' => 'Licitação', 'status' => 'active')
+    null_repository.should_receive(:create!).with('description' => 'Cotas mensais', 'status' => 'active')
+    null_repository.should_receive(:create!).with('description' => 'Limitações de empenho', 'status' => 'active')
 
     subject.import!
   end

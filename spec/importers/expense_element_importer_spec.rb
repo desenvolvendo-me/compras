@@ -5,23 +5,23 @@ require 'active_support/core_ext/object/try'
 
 describe ExpenseElementImporter do
   subject do
-    described_class.new(null_storage)
+    described_class.new(null_repository)
   end
 
-  let :null_storage do
-    storage = double.as_null_object
+  let :null_repository do
+    repository = double.as_null_object
 
-    storage.stub(:transaction) do |&block|
+    repository.stub(:transaction) do |&block|
       block.call
     end
 
-    storage
+    repository
   end
 
   it 'imports expense elements' do
-    null_storage.should_receive(:create!).with('code' => '1', 'description' => 'APOSENTADORIAS')
-    null_storage.should_receive(:create!).with('code' => '42', 'description' => 'AUXÍLIOS')
-    null_storage.should_receive(:create!).with('code' => '70', 'description' => 'RATEIO PELA PARTICIPAÇÃO EM CONSÓRCIO PÚBLICO')
+    null_repository.should_receive(:create!).with('code' => '1', 'description' => 'APOSENTADORIAS')
+    null_repository.should_receive(:create!).with('code' => '42', 'description' => 'AUXÍLIOS')
+    null_repository.should_receive(:create!).with('code' => '70', 'description' => 'RATEIO PELA PARTICIPAÇÃO EM CONSÓRCIO PÚBLICO')
 
     subject.import!
   end

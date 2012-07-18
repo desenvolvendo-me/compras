@@ -1,9 +1,9 @@
 # encoding: utf-8
 class ExpenseGroupImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = ExpenseGroup)
-    self.storage = storage
+  def initialize(repository = ExpenseGroup)
+    self.repository = repository
   end
 
   protected

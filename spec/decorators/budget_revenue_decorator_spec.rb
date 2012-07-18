@@ -17,7 +17,7 @@ describe BudgetRevenueDecorator do
   end
 
   context 'when have not created_at' do
-    let :date_storage do
+    let :date_repository do
       double(:current => date)
     end
 
@@ -25,7 +25,7 @@ describe BudgetRevenueDecorator do
       component.stub(:persisted?).and_return(false)
       helpers.stub(:l).with(date).and_return('13/04/2012')
 
-      subject.date(date_storage).should eq '13/04/2012'
+      subject.date(date_repository).should eq '13/04/2012'
     end
   end
 end

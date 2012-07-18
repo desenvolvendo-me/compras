@@ -1,8 +1,8 @@
 class CountryImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = Country)
-    self.storage = storage
+  def initialize(repository = Country)
+    self.repository = repository
   end
 
   protected

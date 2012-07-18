@@ -12,7 +12,7 @@ describe MaterialCodeGenerator do
     )
   end
 
-  let :material_storage do
+  let :material_repository do
     double('Material', :last_by_materials_class_and_group => double('Material', :code => '01.02.00001'))
   end
 
@@ -32,7 +32,7 @@ describe MaterialCodeGenerator do
     it "should generate a new code" do
       material_object.should_receive(:code=).with("01.02.00002")
 
-      MaterialCodeGenerator.new(material_object, material_storage).generate!
+      MaterialCodeGenerator.new(material_object, material_repository).generate!
     end
   end
 
@@ -44,7 +44,7 @@ describe MaterialCodeGenerator do
     it "should generate a new code" do
       material_object.should_receive(:code=).never
 
-      MaterialCodeGenerator.new(material_object, material_storage).generate!
+      MaterialCodeGenerator.new(material_object, material_repository).generate!
     end
   end
 
@@ -56,7 +56,7 @@ describe MaterialCodeGenerator do
     it "should generate a new code" do
       material_object.should_receive(:code=).never
 
-      MaterialCodeGenerator.new(material_object, material_storage).generate!
+      MaterialCodeGenerator.new(material_object, material_repository).generate!
     end
   end
 
@@ -68,7 +68,7 @@ describe MaterialCodeGenerator do
     it "should generate a new code" do
       material_object.should_receive(:code=).never
 
-      MaterialCodeGenerator.new(material_object, material_storage).generate!
+      MaterialCodeGenerator.new(material_object, material_repository).generate!
     end
   end
 end

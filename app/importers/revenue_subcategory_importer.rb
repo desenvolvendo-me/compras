@@ -1,16 +1,16 @@
 class RevenueSubcategoryImporter < Importer
-  attr_accessor :storage, :revenue_category_storage
+  attr_accessor :repository, :revenue_category_repository
 
-  def initialize(storage = RevenueSubcategory, revenue_category_storage = RevenueCategory)
-    self.storage = storage
-    self.revenue_category_storage = revenue_category_storage
+  def initialize(repository = RevenueSubcategory, revenue_category_repository = RevenueCategory)
+    self.repository = repository
+    self.revenue_category_repository = revenue_category_repository
   end
 
   protected
 
   def normalize_attributes(attributes)
     revenue_category_code = attributes['code'][0]
-    revenue_category = revenue_category_storage.find_by_code(revenue_category_code)
+    revenue_category = revenue_category_repository.find_by_code(revenue_category_code)
 
     code = attributes['code'][1]
 

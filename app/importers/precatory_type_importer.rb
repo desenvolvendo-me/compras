@@ -1,8 +1,8 @@
 class PrecatoryTypeImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = PrecatoryType)
-    self.storage = storage
+  def initialize(repository = PrecatoryType)
+    self.repository = repository
   end
 
   def file

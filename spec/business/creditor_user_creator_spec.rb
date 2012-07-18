@@ -22,11 +22,11 @@ describe CreditorUserCreator do
     double('Creditor 2', :id => 2, :name => 'Manoel Pereira', :email => 'manoel@pereira.com', :login => 'manoel.pereira')
   end
 
-  let :user_storage do
+  let :user_repository do
     double('User Storage')
   end
 
-  subject{ described_class.new(price_collection, 'Creditor', user_storage) }
+  subject{ described_class.new(price_collection, 'Creditor', user_repository) }
 
   context 'none of the users exists' do
     before do
@@ -35,8 +35,8 @@ describe CreditorUserCreator do
     end
 
     it 'generates a user for each creditor in price_collection' do
-      user_storage.should_receive(:create!).with(:name => 'João da Silva', :email => 'joao@silva.com', :login => 'joao.silva', :authenticable_id => 1, :authenticable_type => 'Creditor')
-      user_storage.should_receive(:create!).with(:name => 'Manoel Pereira', :email => 'manoel@pereira.com', :login => 'manoel.pereira', :authenticable_id => 2, :authenticable_type => 'Creditor')
+      user_repository.should_receive(:create!).with(:name => 'João da Silva', :email => 'joao@silva.com', :login => 'joao.silva', :authenticable_id => 1, :authenticable_type => 'Creditor')
+      user_repository.should_receive(:create!).with(:name => 'Manoel Pereira', :email => 'manoel@pereira.com', :login => 'manoel.pereira', :authenticable_id => 2, :authenticable_type => 'Creditor')
 
       subject.generate
     end
@@ -49,7 +49,7 @@ describe CreditorUserCreator do
     end
 
     it 'generates a user for each creditor in price_collection' do
-      user_storage.should_receive(:create!).with(:name => 'Manoel Pereira', :email => 'manoel@pereira.com', :login => 'manoel.pereira', :authenticable_id => 2, :authenticable_type => 'Creditor')
+      user_repository.should_receive(:create!).with(:name => 'Manoel Pereira', :email => 'manoel@pereira.com', :login => 'manoel.pereira', :authenticable_id => 2, :authenticable_type => 'Creditor')
 
       subject.generate
     end

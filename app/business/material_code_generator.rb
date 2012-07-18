@@ -1,11 +1,11 @@
 class MaterialCodeGenerator
-  attr_accessor :material_object, :material_storage
+  attr_accessor :material_object, :material_repository
 
   delegate :materials_class_id_changed?, :materials_class_id?, :materials_group, :materials_class, :to => :material_object
 
-  def initialize(material_object, material_storage = Material)
+  def initialize(material_object, material_repository = Material)
     self.material_object = material_object
-    self.material_storage = material_storage
+    self.material_repository = material_repository
   end
 
   def generate!
@@ -31,7 +31,7 @@ class MaterialCodeGenerator
   end
 
   def previous_material
-   @previous_material ||= material_storage.last_by_materials_class_and_group(:materials_class_id => materials_class.id)
+   @previous_material ||= material_repository.last_by_materials_class_and_group(:materials_class_id => materials_class.id)
   end
 
   def materials_code_can_changed?

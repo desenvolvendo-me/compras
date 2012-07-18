@@ -1,10 +1,10 @@
 class ItbiCalculator
-  attr_accessor :property_transfer_object, :setting_storage, :property_object
+  attr_accessor :property_transfer_object, :setting_repository, :property_object
 
-  def initialize(property_transfer_object, setting_storage = Setting)
+  def initialize(property_transfer_object, setting_repository = Setting)
     self.property_transfer_object = property_transfer_object
     self.property_object = property_transfer_object.property
-    self.setting_storage = setting_storage
+    self.setting_repository = setting_repository
   end
 
   def call
@@ -30,10 +30,10 @@ class ItbiCalculator
   end
 
   def calculate_amount_tax
-    (amount * setting_storage.fetch(:rate_property_transfer).to_f) / 100
+    (amount * setting_repository.fetch(:rate_property_transfer).to_f) / 100
   end
 
   def calculate_amount_financed_tax
-    (amount_financed * setting_storage.fetch(:rate_property_transfer_funded).to_f) / 100
+    (amount_financed * setting_repository.fetch(:rate_property_transfer_funded).to_f) / 100
   end
 end

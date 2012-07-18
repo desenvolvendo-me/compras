@@ -1,9 +1,9 @@
 class RevenueSourceImporter < Importer
-  attr_accessor :storage, :revenue_subcategory_storage
+  attr_accessor :repository, :revenue_subcategory_repository
 
-  def initialize(storage = RevenueSource, revenue_subcategory_storage = RevenueSubcategory)
-    self.storage = storage
-    self.revenue_subcategory_storage = revenue_subcategory_storage
+  def initialize(repository = RevenueSource, revenue_subcategory_repository = RevenueSubcategory)
+    self.repository = repository
+    self.revenue_subcategory_repository = revenue_subcategory_repository
   end
 
   protected
@@ -13,7 +13,7 @@ class RevenueSourceImporter < Importer
     subcategory_code = attributes['code'][1]
     source_code      = attributes['code'][2]
 
-    subcategory = revenue_subcategory_storage.joins { revenue_category }.
+    subcategory = revenue_subcategory_repository.joins { revenue_category }.
       where { revenue_category.code.eq(category_code) & code.eq(subcategory_code) }.first
 
     attributes.merge('revenue_subcategory_id' => subcategory.try(:id), 'code' => source_code)

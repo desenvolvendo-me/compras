@@ -1,9 +1,9 @@
 # encoding: utf-8
 class RevenueCategoryImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = RevenueCategory)
-    self.storage = storage
+  def initialize(repository = RevenueCategory)
+    self.repository = repository
   end
 
   protected

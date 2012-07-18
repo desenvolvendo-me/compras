@@ -1,8 +1,8 @@
 class StateImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = State)
-    self.storage = storage
+  def initialize(repository = State)
+    self.repository = repository
   end
 
   protected

@@ -6,19 +6,19 @@ class Importer
     transaction do
       parser.foreach(file, options) do |row|
         attributes = normalize_attributes(row.to_hash)
-        storage.create!(attributes)
+        repository.create!(attributes)
       end
     end
   end
 
   protected
 
-  def storage
+  def repository
     raise NotImplementedError
   end
 
   def transaction(&block)
-    storage.transaction(&block)
+    repository.transaction(&block)
   end
 
   def parser

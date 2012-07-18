@@ -1,9 +1,9 @@
 class DirectPurchaseModalityLimitVerificator
-  attr_accessor :direct_purchase, :limit_storage, :modality
+  attr_accessor :direct_purchase, :limit_repository, :modality
 
-  def initialize(direct_purchase, limit_storage = ModalityLimit)
+  def initialize(direct_purchase, limit_repository = ModalityLimit)
     self.direct_purchase = direct_purchase
-    self.limit_storage = limit_storage
+    self.limit_repository = limit_repository
   end
 
   def value_less_than_available_limit?
@@ -20,9 +20,9 @@ class DirectPurchaseModalityLimitVerificator
   # current modality limit value for the modality selected
   def current_limit
     if direct_purchase.material_or_service?
-      limit_storage.current_limit_material_or_service_without_bidding
+      limit_repository.current_limit_material_or_service_without_bidding
     elsif direct_purchase.engineering_works?
-      limit_storage.current_limit_engineering_works_without_bidding
+      limit_repository.current_limit_engineering_works_without_bidding
     end
   end
 

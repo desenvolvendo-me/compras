@@ -3,10 +3,10 @@ require 'app/business/settings_updater'
 
 describe SettingsUpdater do
   subject do
-    SettingsUpdater.new(storage, i18n)
+    SettingsUpdater.new(repository, i18n)
   end
 
-  let :storage do
+  let :repository do
     double('Storage')
   end
 
@@ -17,8 +17,8 @@ describe SettingsUpdater do
   it "should create missing settings" do
     i18n.should_receive(:translate).with(:settings).and_return(:default_city => 'City')
 
-    storage.should_receive(:transaction).and_yield
-    storage.should_receive(:find_or_create_by_key).with("default_city")
+    repository.should_receive(:transaction).and_yield
+    repository.should_receive(:find_or_create_by_key).with("default_city")
 
     subject.update
   end

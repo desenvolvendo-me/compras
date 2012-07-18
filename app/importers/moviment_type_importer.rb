@@ -1,8 +1,8 @@
 class MovimentTypeImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = MovimentType)
-    self.storage = storage
+  def initialize(repository = MovimentType)
+    self.repository = repository
   end
 
   protected
@@ -18,23 +18,23 @@ class MovimentTypeImporter < Importer
   def operation(operation)
     case operation
     when 'sum'
-      storage.sum_operation
+      repository.sum_operation
     when 'subtraction'
-      storage.subtraction_operation
+      repository.subtraction_operation
     end
   end
 
   def character(character)
     case character
     when 'budget_allocation'
-      storage.budget_allocation_character
+      repository.budget_allocation_character
     when 'capability'
-      storage.capability_character
+      repository.capability_character
     end
   end
 
   def default_source
-    storage.default_source
+    repository.default_source
   end
 
   def file

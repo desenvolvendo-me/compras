@@ -1,8 +1,8 @@
 class OccupationClassificationImporter < Importer
-  attr_accessor :storage
+  attr_accessor :repository
 
-  def initialize(storage = OccupationClassification)
-    self.storage = storage
+  def initialize(repository = OccupationClassification)
+    self.repository = repository
   end
 
   def import!
@@ -13,16 +13,16 @@ class OccupationClassificationImporter < Importer
   protected
 
   def find_and_update_parent
-    storage.order('id asc').each do |occupation|
+    repository.order('id asc').each do |occupation|
       code = occupation.code
       name = occupation.name
       parent = case code.size
       when 6
-        storage.where(:code => code[0..3]).try(:first)
+        repository.where(:code => code[0..3]).try(:first)
       when 4
-        storage.where(:code => code[0..2]).try(:first)
+        repository.where(:code => code[0..2]).try(:first)
       when 3
-        storage.where(:code => code[0..1]).try(:first)
+        repository.where(:code => code[0..1]).try(:first)
       else
         nil
       end
