@@ -119,7 +119,7 @@ describe PriceCollectionsController do
     end
 
     let :price_collection do
-      double('PriceCollection', :all_price_collection_classifications => price_collection_classifications,
+      double('PriceCollection', :id => 1, :all_price_collection_classifications => price_collection_classifications,
              :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE, :annulled? => false)
     end
 
@@ -130,7 +130,7 @@ describe PriceCollectionsController do
 
       price_collection.should_receive(:transaction).twice
 
-      put :update
+      put :update, :id => price_collection.id, :commit => 'Apurar'
     end
   end
 end
