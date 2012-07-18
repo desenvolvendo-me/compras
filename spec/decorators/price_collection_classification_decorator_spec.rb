@@ -44,4 +44,16 @@ describe PriceCollectionClassificationDecorator do
 
     subject.total_value_by_price_collection_and_creditor(nil, nil).should eq '220,00'
   end
+
+  it 'should return yes when classification was 1 on the winner calls' do
+    component.stub(:classification => 1)
+
+    subject.winner.should eq 'Sim'
+  end
+
+  it 'should return no when classification not equals 1 on the winner calls' do
+    component.stub(:classification => 2)
+
+    subject.winner.should eq 'Não'
+  end
 end
