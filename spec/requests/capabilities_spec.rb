@@ -13,7 +13,6 @@ feature "Capabilities" do
 
     click_link 'Criar Recurso'
 
-
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Reforma e Ampliação'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
