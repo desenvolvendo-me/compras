@@ -48,12 +48,16 @@ describe PriceCollectionClassificationDecorator do
   it 'should return yes when classification was 1 on the winner calls' do
     component.stub(:classification => 1)
 
-    subject.winner.should eq 'Sim'
+    helpers.stub(:t).with('true').and_return('Sim')
+
+    subject.classification.should eq 'Sim'
   end
 
   it 'should return no when classification not equals 1 on the winner calls' do
     component.stub(:classification => 2)
 
-    subject.winner.should eq 'Não'
+    helpers.stub(:t).with('false').and_return('Não')
+
+    subject.classification.should eq 'Não'
   end
 end

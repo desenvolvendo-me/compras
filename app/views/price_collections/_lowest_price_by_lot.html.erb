@@ -6,6 +6,6 @@
     <td align="right"><%= item.quantity %></td>
     <td align="right"><%= item.decorator.unit_price_by_price_collection_and_creditor(resource, classification.creditor) %></td>
     <td align="right"><%= item.decorator.total_value_by_price_collection_and_creditor(resource, classification.creditor) %></td>
-    <td><%= classification.decorator.winner %></td>
+    <td><%= classification.decorator.classification %></td>
   </tr>
 <% end %>

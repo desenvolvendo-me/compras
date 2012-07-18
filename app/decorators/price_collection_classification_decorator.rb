@@ -24,7 +24,7 @@ class PriceCollectionClassificationDecorator < Decorator
     helpers.number_with_precision super if super
   end
 
-  def winner
-    component.classification == 1 ? 'Sim' : 'Não'
+  def classification
+    helpers.t((component.classification == 1).to_s)
   end
 end
