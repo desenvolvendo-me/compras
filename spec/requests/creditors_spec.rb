@@ -449,17 +449,17 @@ feature "Creditors" do
   end
 
   scenario 'acessing a CRC for a creditor and returnig to creditor' do
-    Creditor.make!(:mateus)
+    Creditor.make!(:nohup)
 
     navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
-    click_link 'Mateus Lorandi'
+    click_link 'Nohup'
 
     click_link 'CRC'
 
     click_link '1/2012'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Mateus Lorandi'
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
 
     page.should have_field 'Exercício', :with => '2012'
     page.should have_field 'Número', :with => '1'
@@ -480,21 +480,21 @@ feature "Creditors" do
 
     click_link 'Voltar ao credor'
 
-    page.should have_content 'Editar Mateus Lorandi'
+    page.should have_content 'Editar Nohup'
   end
 
   scenario 'create a CRC for a creditor' do
-    Creditor.make!(:mateus)
+    Creditor.make!(:nohup)
 
     navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
-    click_link 'Mateus Lorandi'
+    click_link 'Nohup'
 
     click_link 'CRC'
 
     click_link 'Criar Certificado de Registro Cadastral'
 
-    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Mateus Lorandi'
+    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Nohup'
 
     fill_in 'Exercício', :with => '2013'
     fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral'
@@ -516,7 +516,7 @@ feature "Creditors" do
 
     click_link '1/2013'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Mateus Lorandi'
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Nohup'
 
     page.should have_field 'Exercício', :with => '2013'
     page.should have_field 'Número', :with => '1'
@@ -537,7 +537,7 @@ feature "Creditors" do
 
     click_link 'Criar Certificado de Registro Cadastral'
 
-    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Mateus Lorandi'
+    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Nohup'
 
     fill_in 'Exercício', :with => '2013'
     fill_in 'Especificação', :with => 'Especificação do CRC'
@@ -551,7 +551,7 @@ feature "Creditors" do
 
     click_link '2/2013'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 2/2013 do Credor Mateus Lorandi'
+    page.should have_content 'Editar Certificado de Registro Cadastral 2/2013 do Credor Nohup'
 
     page.should have_field 'Exercício', :with => '2013'
     page.should have_field 'Número', :with => '2'
@@ -562,21 +562,21 @@ feature "Creditors" do
   end
 
   scenario 'update a CRC for a creditor' do
-    Creditor.make!(:sobrinho)
+    Creditor.make!(:nohup)
 
     navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
-    click_link 'Gabriel Sobrinho'
+    click_link 'Nohup'
 
     click_link 'CRC'
 
     click_link '1/2012'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Gabriel Sobrinho'
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
 
     fill_in 'Exercício', :with => '2013'
     page.should have_field 'Número', :with => '1'
-    fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral do Sobrinho'
+    fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral da Nohup'
     fill_in 'Data da inscrição', :with => I18n.l(Date.yesterday)
     fill_in 'Data da validade', :with => '05/04/2014'
     fill_in 'Data da revogação', :with => '05/04/2015'
@@ -595,11 +595,11 @@ feature "Creditors" do
 
     click_link '1/2013'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Gabriel Sobrinho'
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Nohup'
 
     page.should have_field 'Exercício', :with => '2013'
     page.should have_field 'Número', :with => '1'
-    page.should have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral do Sobrinho'
+    page.should have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral da Nohup'
     page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
     page.should have_field 'Data da validade', :with => '05/04/2014'
     page.should have_field 'Data da revogação', :with => '05/04/2015'
@@ -611,6 +611,26 @@ feature "Creditors" do
     page.should have_field 'Total de empregados', :with => '99'
     page.should have_field 'Data de registro na junta comercial', :with => '05/05/2011'
     page.should have_field 'Número na junta comercial', :with => '123456789'
+  end
+
+  scenario 'should not show CRC when creditor is' do
+    Creditor.make!(:nohup)
+
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
+
+    click_link 'Nohup'
+
+    page.should have_link 'CRC'
+  end
+
+  scenario 'should not show CRC when creditor is company' do
+    Creditor.make!(:sobrinho)
+
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
+
+    click_link 'Gabriel Sobrinho'
+
+    page.should_not have_link 'CRC'
   end
 
   scenario 'update a creditor when people is special entry' do
@@ -1214,17 +1234,17 @@ feature "Creditors" do
   end
 
   scenario 'destroy a CRC for a creditor' do
-    Creditor.make!(:mateus)
+    Creditor.make!(:nohup)
 
     navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
 
-    click_link 'Mateus Lorandi'
+    click_link 'Nohup'
 
     click_link 'CRC'
 
     click_link '1/2012'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Mateus Lorandi'
+    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
 
     click_link 'Apagar', :confirm => true
 
