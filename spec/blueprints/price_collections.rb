@@ -55,7 +55,7 @@ PriceCollection.blueprint(:coleta_de_precos_com_2_propostas) do
   expiration { Date.tomorrow }
   status { PriceCollectionStatus::ACTIVE }
   price_collection_lots { [PriceCollectionLot.make!(:lote_da_coleta)] }
-  price_collection_proposals { [PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object), PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => object)] }
+  price_collection_proposals { [PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => object), PriceCollectionProposal.make!(:sobrinho_sa_proposta_without_user, :price_collection => object)] }
 end
 
 PriceCollection.blueprint(:coleta_de_precos_com_2_lotes) do

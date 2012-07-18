@@ -4,6 +4,12 @@ PriceCollectionProposal.blueprint(:proposta_de_coleta_de_precos) do
   status { PriceCollectionStatus::ACTIVE }
 end
 
+PriceCollectionProposal.blueprint(:sobrinho_sa_proposta_without_user) do
+  price_collection { PriceCollection.make!(:coleta_de_precos) }
+  creditor { Creditor.make!(:sobrinho_sa) }
+  status { PriceCollectionStatus::ACTIVE }
+end
+
 PriceCollectionProposal.blueprint(:sobrinho_sa_proposta) do
   price_collection { PriceCollection.make!(:coleta_de_precos) }
   creditor { Creditor.make!(:sobrinho_sa, :user => User.make!(:geraldi)) }
