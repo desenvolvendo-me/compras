@@ -19,7 +19,9 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
-    <%= f.input :code %>
+    <label for="fake_budget_structure_code" class="integer required"><%= resource_class.human_attribute_name :code %></label>
+    <%= text_field_tag 'fake_budget_structure_code', '', { :class => 'numeric integer required' } %>
+    <%= f.input :code, :as => :hidden %>
   </div>
 
   <div class="yui3-u-1-3">

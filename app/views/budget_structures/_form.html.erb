@@ -19,9 +19,17 @@
 </div>
 
 <script>
-  budgetStructureCode = $('#budget_structure_code');
-  budgetStructureParent = $('#budget_structure_parent');
-  budgetStructureBudgetStructure = $('#budget_structure_budget_structure');
+
+  (function () {
+    fakeBudgetStructureCode = $('#fake_budget_structure_code');
+    budgetStructureCode = $('#budget_structure_code');
+    budgetStructureParent = $('#budget_structure_parent');
+    budgetStructureBudgetStructure = $('#budget_structure_budget_structure');
+  })();
+
+  (function () {
+    fakeBudgetStructureCode.val(budgetStructureCode.val());
+  })();
 
   function configuration_id() {
     return $('#budget_structure_budget_structure_configuration_id').val();
@@ -30,7 +38,7 @@
   function addMaskToLevel(){
     var digits = parseInt($('#budget_structure_digits').val()) + 1 ;
     if (digits > 0){
-      budgetStructureCode.attr('data-mask', Array(digits).join('9') );
+      fakeBudgetStructureCode.attr('data-mask', Array(digits).join('9') );
     }
   };
 
@@ -82,6 +90,7 @@
   $('#budget_structure_budget_structure_configuration_id').change( function(){
     setModalUrlToBudgetStructureLevel();
     budgetStructureCode.val('');
+    fakeBudgetStructureCode.val('');
     budgetStructureBudgetStructure.val('');
     $('#budget_structure_budget_structure_level, #budget_structure_budget_structure_level_id').val('');
     budgetStructureParent.parent().hide();
@@ -90,25 +99,26 @@
 
   $('#budget_structure_budget_structure_level_id').change(function (event, level) {
     budgetStructureCode.val('');
+    fakeBudgetStructureCode.val('');
     budgetStructureBudgetStructure.val('');
     $('#budget_structure_parent, #budget_structure_parent_id').val('');
 
     if (level) {
-      budgetStructureCode.attr('data-mask', Array(level.digits + 1).join('9') );
+      fakeBudgetStructureCode.attr('data-mask', Array(level.digits + 1).join('9') );
       budgetStructureParent.requiredField(false);
 
       if (level.level <= 1){
         budgetStructureParent.parent().hide();
-        budgetStructureCode.attr('disabled', false);
+        fakeBudgetStructureCode.attr('disabled', false);
         budgedt_structure_mask = '';
       } else {
         budgetStructureParent.parent().show();
         budgetStructureParent.requiredField(true);
         setModalUrlToBudgetStructureParent(level.upper_budget_structure_level.id);
-        budgetStructureCode.attr('disabled', true);
+        fakeBudgetStructureCode.attr('disabled', true);
       }
     } else {
-      budgetStructureCode.attr('data-mask', '');
+      fakeBudgetStructureCode.attr('data-mask', '');
       budgetStructureParent.parent().hide();
       budgetStructureParent.attr('data-modal-url', '');
     }
@@ -120,17 +130,18 @@
 
   function enableDisableBudgetStructureCode() {
     var value = $('#budget_structure_parent_id').val() == ''
-    budgetStructureCode.attr('disabled', value);
+    fakeBudgetStructureCode.attr('disabled', value);
   };
 
   $('#budget_structure_parent_id').change(function (event, parent) {
     if (parent) {
       budgedt_structure_mask = parent.budget_structure + parent.separator;
-      budgetStructureCode.attr('disabled', false);
+      fakeBudgetStructureCode.attr('disabled', false);
     } else {
       budgedt_structure_mask = '';
-      budgetStructureCode.attr('disabled', true);
+      fakeBudgetStructureCode.attr('disabled', true);
       budgetStructureCode.val('');
+      fakeBudgetStructureCode.val('');
       budgetStructureBudgetStructure.val('');
     }
   });
@@ -142,7 +153,14 @@
   requiredFields();
   enableDisableBudgetStructureCode();
 
-  budgetStructureCode.on('change keyup', function() {
+  $('#fake_budget_structure_code').on('change keyup', function() {
+    $('#budget_structure_code').val($(this).val());
     budgetStructureBudgetStructure.val(budgedt_structure_mask + $(this).val() );
   });
+
+  function enabledBudgetStructureCode(){
+    $('#budget_structure_code').attr('disabled', false);
+  };
+
+  enabledBudgetStructureCode();
 </script>
