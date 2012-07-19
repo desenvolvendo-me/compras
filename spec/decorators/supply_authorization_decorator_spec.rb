@@ -5,26 +5,34 @@ require 'enumerate_it'
 require 'app/enumerations/period_unit'
 
 describe SupplyAuthorizationDecorator do
-  let :direct_purchase do
-    double(:id => 1, :year => 2012)
-  end
-
   let :date do
     Date.new(2012, 12, 1)
   end
 
-  it 'should return formatted direct_purchase' do
-    helpers.stub(:l).with(date).and_return('01/12/2012')
-    subject.stub(:direct_purchase).and_return(direct_purchase)
-
-    subject.direct_purchase.should eq '1/2012'
+  let :direct_purchase do
+    double('DirectPurchase', :id => 1, :year => 2012)
   end
 
-  it 'should return localized direct_purchase date' do
-    helpers.stub(:l).with(date).and_return('01/12/2012')
-    component.stub(:date).and_return(date)
+  context '#direct_purchase' do
+    before do
+      helpers.stub(:l).with(date).and_return('01/12/2012')
+      subject.stub(:direct_purchase).and_return(direct_purchase)
+    end
 
-    subject.date.should eq '01/12/2012'
+    it 'should localize' do
+      subject.direct_purchase.should eq '1/2012'
+    end
+  end
+
+  context '#date' do
+    before do
+      helpers.stub(:l).with(date).and_return('01/12/2012')
+      component.stub(:date).and_return(date)
+    end
+
+    it 'should localize' do
+      subject.date.should eq '01/12/2012'
+    end
   end
 
   context '#message' do
@@ -39,31 +47,33 @@ describe SupplyAuthorizationDecorator do
     end
   end
 
-  it "should pluralize the period unit when period is greater than 1" do
-    helpers.stub(:t).with("enumerations.period_unit.month").and_return("mês/meses")
-    component.stub(:direct_purchase => direct_purchase)
-    component.stub(:period => 2)
-    component.stub(:period_unit => PeriodUnit::MONTH)
-    subject.pluralized_period_unit.should eq 'mês/meses'
-  end
+  context '#pluralized_period_unit' do
+    it "should pluralize the period unit when period is greater than 1" do
+      helpers.stub(:t).with("enumerations.period_unit.month").and_return("mês/meses")
+      component.stub(:direct_purchase => direct_purchase)
+      component.stub(:period => 2)
+      component.stub(:period_unit => PeriodUnit::MONTH)
+      subject.pluralized_period_unit.should eq 'mês/meses'
+    end
 
-  it "should not pluralize the period unit when period is less than 2" do
-    component.stub(:direct_purchase => direct_purchase)
-    component.stub(:period => 1)
-    component.stub(:period_unit => PeriodUnit::MONTH)
-    component.stub(:period_unit_humanize).and_return("mês")
-    subject.pluralized_period_unit.should eq 'mês'
-  end
+    it "should not pluralize the period unit when period is less than 2" do
+      component.stub(:direct_purchase => direct_purchase)
+      component.stub(:period => 1)
+      component.stub(:period_unit => PeriodUnit::MONTH)
+      component.stub(:period_unit_humanize).and_return("mês")
+      subject.pluralized_period_unit.should eq 'mês'
+    end
 
-  it "should not pluralize the period unit when period is nil" do
-    component.stub(:direct_purchase => direct_purchase)
-    component.stub(:period => nil)
-    subject.pluralized_period_unit.should be_nil
-  end
+    it "should not pluralize the period unit when period is nil" do
+      component.stub(:direct_purchase => direct_purchase)
+      component.stub(:period => nil)
+      subject.pluralized_period_unit.should be_nil
+    end
 
-  it "should not pluralize the period unit when direct_purchase is nill" do
-    component.stub(:direct_purchase => nil)
-    component.stub(:period => 1)
-    subject.pluralized_period_unit.should be_nil
+    it "should not pluralize the period unit when direct_purchase is nill" do
+      component.stub(:direct_purchase => nil)
+      component.stub(:period => 1)
+      subject.pluralized_period_unit.should be_nil
+    end
   end
 end

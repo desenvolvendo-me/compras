@@ -3,10 +3,14 @@ require 'decorator_helper'
 require 'app/decorators/reserve_fund_decorator'
 
 describe ReserveFundDecorator do
-  it 'should return budget_allocation_real_amount with precision' do
-    component.stub(:budget_allocation_real_amount).and_return(5000.0)
-    helpers.stub(:number_with_precision).with(5000.0).and_return("5.000,00")
+  context '#budget_allocation_real_amount' do
+    before do
+      component.stub(:budget_allocation_real_amount).and_return(5000.0)
+      helpers.stub(:number_with_precision).with(5000.0).and_return("5.000,00")
+    end
 
-    subject.budget_allocation_real_amount.should eq '5.000,00'
+    it 'should applies precision' do
+      subject.budget_allocation_real_amount.should eq '5.000,00'
+    end
   end
 end

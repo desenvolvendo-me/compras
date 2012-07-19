@@ -3,17 +3,25 @@ require 'decorator_helper'
 require 'app/decorators/licitation_object_decorator'
 
 describe LicitationObjectDecorator do
-  it 'should return purchase_licitation_exemption_with_precision' do
-    component.stub(:purchase_licitation_exemption).and_return(500.0)
-    helpers.should_receive(:number_with_precision).with(500.0).and_return("500,00")
+  context '#purchase_licitation_exemption_with_precision' do
+    before do
+      component.stub(:purchase_licitation_exemption).and_return(500.0)
+      helpers.should_receive(:number_with_precision).with(500.0).and_return("500,00")
+    end
 
-    subject.purchase_licitation_exemption_with_precision.should eq '500,00'
+    it 'should applies precision' do
+      subject.purchase_licitation_exemption_with_precision.should eq '500,00'
+    end
   end
 
-  it 'should return build_licitation_exemption_with_precision' do
-    component.stub(:build_licitation_exemption).and_return(300.0)
-    helpers.should_receive(:number_with_precision).with(300.0).and_return("300,00")
+  context '#build_licitation_exemption_with_precision' do
+    before do
+      component.stub(:build_licitation_exemption).and_return(300.0)
+      helpers.should_receive(:number_with_precision).with(300.0).and_return("300,00")
+    end
 
-    subject.build_licitation_exemption_with_precision.should eq '300,00'
+    it 'should applies precision' do
+      subject.build_licitation_exemption_with_precision.should eq '300,00'
+    end
   end
 end

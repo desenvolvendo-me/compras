@@ -3,8 +3,13 @@ require 'decorator_helper'
 require 'app/decorators/reference_unit_decorator'
 
 describe ReferenceUnitDecorator do
-  it "should return name as summary" do
-    component.stub(:name => 'Meters')
-    subject.summary.should eq 'Meters'
+  context '#summary' do
+    before do
+      component.stub(:name => 'Meters')
+    end
+
+    it "should use name" do
+      subject.summary.should eq 'Meters'
+    end
   end
 end

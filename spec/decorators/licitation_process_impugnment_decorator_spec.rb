@@ -3,31 +3,55 @@ require 'decorator_helper'
 require 'app/decorators/licitation_process_impugnment_decorator'
 
 describe LicitationProcessImpugnmentDecorator do
-  it 'should return localized licitation_process_envelope_delivery_date' do
-    component.stub(:licitation_process_envelope_delivery_date).and_return(Date.new(2012, 1, 4))
-    helpers.stub(:l).with(Date.new(2012, 1, 4)).and_return('01/04/2012')
-
-    subject.licitation_process_envelope_delivery_date.should eq '01/04/2012'
+  let :date do
+    Date.new(2012, 1, 4)
   end
 
-  it 'should return localized licitation_process_envelope_delivery_time' do
-    component.stub(:licitation_process_envelope_delivery_time).and_return(Time.new(2012, 1, 4, 10))
-    helpers.stub(:l).with(Time.new(2012, 1, 4, 10), :format => :hour).and_return('10:00')
-
-    subject.licitation_process_envelope_delivery_time.should eq '10:00'
+  let :time do
+    Time.new(2012, 1, 3, 10)
   end
 
-  it 'should return localized licitation_process_envelope_opening_date' do
-    component.stub(:licitation_process_envelope_opening_date).and_return(Date.new(2012, 2, 4))
-    helpers.stub(:l).with(Date.new(2012, 2, 4)).and_return('02/04/2012')
+  context '#licitation_process_envelope_delivery_date' do
+    before do
+      component.stub(:licitation_process_envelope_delivery_date).and_return(date)
+      helpers.stub(:l).with(date).and_return('01/04/2012')
+    end
 
-    subject.licitation_process_envelope_opening_date.should eq '02/04/2012'
+    it 'should return localized licitation_process_envelope_delivery_date' do
+      subject.licitation_process_envelope_delivery_date.should eq '01/04/2012'
+    end
   end
 
-  it 'should return localized licitation_process_envelope_opening_time' do
-    component.stub(:licitation_process_envelope_opening_time).and_return(Time.new(2012, 2, 4, 11))
-    helpers.stub(:l).with(Time.new(2012, 2, 4, 11), :format => :hour).and_return('11:00')
+  context '#licitation_process_envelope_delivery_time' do
+    before do
+      component.stub(:licitation_process_envelope_delivery_time).and_return(time)
+      helpers.stub(:l).with(time, :format => :hour).and_return('10:00')
+    end
 
-    subject.licitation_process_envelope_opening_time.should eq '11:00'
+    it 'should return localized licitation_process_envelope_delivery_time' do
+      subject.licitation_process_envelope_delivery_time.should eq '10:00'
+    end
+  end
+
+  context '#licitation_process_envelope_opening_date' do
+    before do
+      component.stub(:licitation_process_envelope_opening_date).and_return(date)
+      helpers.stub(:l).with(date).and_return('01/04/2012')
+    end
+
+    it 'should return localized licitation_process_envelope_opening_date' do
+      subject.licitation_process_envelope_opening_date.should eq '01/04/2012'
+    end
+  end
+
+  context '#licitation_process_envelope_opening_time' do
+    before do
+      component.stub(:licitation_process_envelope_opening_time).and_return(time)
+      helpers.stub(:l).with(time, :format => :hour).and_return('10:00')
+    end
+
+    it 'should return localized licitation_process_envelope_opening_time' do
+      subject.licitation_process_envelope_opening_time.should eq '10:00'
+    end
   end
 end

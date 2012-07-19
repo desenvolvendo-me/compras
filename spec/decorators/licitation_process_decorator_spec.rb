@@ -3,40 +3,60 @@ require 'decorator_helper'
 require 'app/decorators/licitation_process_decorator'
 
 describe LicitationProcessDecorator do
-  it 'should return localized envelope_delivery_time' do
-    component.stub(:envelope_delivery_time).and_return(Time.new(2012, 1, 4, 10))
-    helpers.stub(:l).with(Time.new(2012, 1, 4, 10), :format => :hour).and_return('10:00')
-
-    subject.envelope_delivery_time.should eq '10:00'
+  let :time do
+    Time.new(2012, 1, 4, 10)
   end
 
-  it 'should return localized opening_delivery_time' do
-    component.stub(:envelope_opening_time).and_return(Time.new(2012, 2, 4, 11))
-    helpers.stub(:l).with(Time.new(2012, 2, 4, 11), :format => :hour).and_return('11:00')
+  context '#envelope_delivery_time' do
+    before do
+      component.stub(:envelope_delivery_time).and_return(time)
+      helpers.stub(:l).with(time, :format => :hour).and_return('10:00')
+    end
 
-    subject.envelope_opening_time.should eq '11:00'
+    it 'should localize envelope_delivery_time' do
+      subject.envelope_delivery_time.should eq '10:00'
+    end
   end
 
-  it 'should return a link to count when envelope_opening? is true' do
-    component.stub(:persisted?).and_return(true)
-    component.stub(:envelope_opening? => true)
-    routes.stub(:licitation_process_path).and_return('#')
-    helpers.stub(:link_to).with('Apurar', '#', :class => "button primary").and_return('link')
+  context '#envelope_opening_time' do
+    before do
+      component.stub(:envelope_opening_time).and_return(time)
+      helpers.stub(:l).with(time, :format => :hour).and_return('10:00')
+    end
 
-    subject.count_link.should eq 'link'
+    it 'should return localized opening_delivery_time' do
+      subject.envelope_opening_time.should eq '10:00'
+    end
   end
 
-  it 'should not return a link to count when envelope_opening? is false' do
-    component.stub(:persisted?).and_return(true)
-    component.stub(:envelope_opening? => false)
+  context '#count_link' do
+    before do
+      component.stub(:persisted?).and_return(true)
+      routes.stub(:licitation_process_path).and_return('#')
+      helpers.stub(:link_to).with('Apurar', '#', :class => "button primary").and_return('link')
+    end
 
-    subject.count_link.should eq nil
+    it 'should return a link to count when envelope_opening? is true' do
+      component.stub(:envelope_opening? => true)
+
+      subject.count_link.should eq 'link'
+    end
+
+    it 'should not return a link to count when envelope_opening? is false' do
+      component.stub(:envelope_opening? => false)
+
+      subject.count_link.should eq nil
+    end
   end
 
-  it 'should return formatted winner_proposal_total_price' do
-    component.stub(:winner_proposal_total_price).and_return(9.99)
-    helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
+  context '#winner_proposal_total_price' do
+    before do
+      component.stub(:winner_proposal_total_price).and_return(9.99)
+      helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
+    end
 
-    subject.winner_proposal_total_price.should eq 'R$ 9,99'
+    it 'should applies currency' do
+      subject.winner_proposal_total_price.should eq 'R$ 9,99'
+    end
   end
 end
