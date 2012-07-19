@@ -40,9 +40,12 @@ class Creditor < Compras::Model
 
   has_one :user, :as => :authenticable
 
-  delegate :personable_type, :company?, :to => :person, :allow_nil => true
+  delegate :personable_type, :cnpj, :state_registration, :responsible,
+           :identity_document, :company?, :to => :person, :allow_nil => true
+  delegate :identity_document, :to => :responsible, :prefix => true, :allow_nil => true
   delegate :phone, :fax, :name, :to => :person, :allow_nil => true
   delegate :address, :city, :zip_code, :to => :person, :allow_nil => true
+  delegate :neighborhood, :state, :country, :zip_code, :to => :address, :allow_nil => true
   delegate :email, :to => :person, :allow_nil => true, :prefix => true
   delegate :bank_id, :to => :accounts, :allow_nil => true
   delegate :materials_class, :materials_group, :to => :materials, :allow_nil => true
@@ -50,6 +53,7 @@ class Creditor < Compras::Model
   delegate :company_size, :choose_simple, :legal_nature,
            :commercial_registration_number, :commercial_registration_date,
            :to => :person, :allow_nil => true
+  delegate :code, :to => :main_cnae, :prefix => true, :allow_nil => true
 
   accepts_nested_attributes_for :accounts, :allow_destroy => true
   accepts_nested_attributes_for :creditor_balances, :allow_destroy => true

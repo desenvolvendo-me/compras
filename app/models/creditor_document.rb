@@ -22,4 +22,8 @@ class CreditorDocument < Compras::Model
       :on_or_after_message => :validity_should_be_on_or_after_emission_date
     },
     :allow_blank => true
+
+  def to_s
+    document_type
+  end
 end

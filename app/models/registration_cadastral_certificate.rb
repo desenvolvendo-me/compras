@@ -7,6 +7,11 @@ class RegistrationCadastralCertificate < Compras::Model
 
   belongs_to :creditor
 
+  delegate :id, :name, :address, :neighborhood, :email, :city, :state, :country,
+           :zip_code, :phone, :cnpj, :state_registration, :responsible,
+           :responsible_identity_document, :main_cnae_code, :main_cnae, :cnaes,
+           :documents, :to => :creditor, :prefix => true
+
   validates :fiscal_year, :specification, :creditor, :presence => true
   validates :registration_date, :validity_date, :presence => true
   validates :commercial_registry_registration_date, :timeliness => { :type => :date, :on => :create }, :allow_blank => true
@@ -38,5 +43,13 @@ class RegistrationCadastralCertificate < Compras::Model
 
   def count_crc
     RegistrationCadastralCertificate.same_fiscal_year_and_creditor_and_less_than_or_equal_me(fiscal_year, creditor_id, id).count
+  end
+
+  def signatures(signature_configuration_item = SignatureConfigurationItem)
+    signature_configuration_item.all_by_configuration_report(SignatureReport::REGISTRATION_CADASTRAL_CERTIFICATES)
+  end
+
+  def signatures_grouped
+    signatures.in_groups_of(4, false)
   end
 end

@@ -476,6 +476,8 @@ feature "Creditors" do
     page.should have_field 'Data de registro na junta comercial', :with => I18n.l(Date.current)
     page.should have_field 'Número na junta comercial', :with => '12345678-x'
 
+    page.should have_link 'Imprimir certificado de registro cadastral'
+
     click_link 'Cancelar'
 
     click_link 'Voltar ao credor'
@@ -510,6 +512,8 @@ feature "Creditors" do
     fill_in 'Data de registro na junta comercial', :with => '05/04/2011'
     fill_in 'Número na junta comercial', :with => '12345678'
 
+    page.should_not have_link 'Imprimir certificado de registro cadastral'
+
     click_button 'Salvar'
 
     page.should have_notice 'Certificado de Registro Cadastral criado com sucesso.'
@@ -532,6 +536,8 @@ feature "Creditors" do
     page.should have_field 'Total de empregados', :with => '2'
     page.should have_field 'Data de registro na junta comercial', :with => '05/04/2011'
     page.should have_field 'Número na junta comercial', :with => '12345678'
+
+    page.should have_link 'Imprimir certificado de registro cadastral'
 
     click_link 'Cancelar'
 
@@ -588,6 +594,8 @@ feature "Creditors" do
     fill_in 'Total de empregados', :with => '99'
     fill_in 'Data de registro na junta comercial', :with => '05/05/2011'
     fill_in 'Número na junta comercial', :with => '123456789'
+
+    page.should have_link 'Imprimir certificado de registro cadastral'
 
     click_button 'Salvar'
 

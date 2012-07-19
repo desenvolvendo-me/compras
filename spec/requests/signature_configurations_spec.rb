@@ -45,7 +45,7 @@ feature "SignatureConfigurations" do
 
     click_link 'Criar Configuração de Assinatura'
 
-    page.should have_css '#signature_configuration_report option', :count => 2
+    page.should have_css '#signature_configuration_report option', :count => 3
     page.should have_select 'Relatório', :options => ['', 'Processos Administrativos']
   end
 
@@ -56,8 +56,8 @@ feature "SignatureConfigurations" do
 
     click_link 'Autorizações de Fornecimento'
 
-    page.should have_css '#signature_configuration_report option', :count => 3
-    page.should have_select 'Relatório', :options => ['', 'Processos Administrativos', 'Autorizações de Fornecimento']
+    page.should have_css '#signature_configuration_report option', :count => 4
+    page.should have_select 'Relatório', :options => ['', 'Processos Administrativos', 'Autorizações de Fornecimento', 'Certificados de Registro Cadastral']
   end
 
   scenario 'when fill signature should fill position' do

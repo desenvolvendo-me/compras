@@ -34,3 +34,16 @@ a {
     width: auto;
   }
 }
+
+.table-border {
+  border: 1px solid;
+  padding: 10px;
+}
+
+.table-border .yui3-g {
+  padding-top: 7px;
+}
+
+.table-border .label {
+  font-weight: bold;
+}

@@ -13,6 +13,18 @@ describe CreditorDocument do
   it { should validate_presence_of :validity }
   it { should validate_presence_of :issuer }
 
+  describe 'document type' do
+    let :document_type do
+      double :document_type
+    end
+
+    it "return document_type when call to_s" do
+      subject.stub(:document_type).and_return(document_type)
+
+      subject.to_s.should eq document_type
+    end
+  end
+
   context 'validate emission_date related with today' do
     it { should allow_value(Date.current).for(:emission_date) }
 

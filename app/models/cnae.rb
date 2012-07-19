@@ -9,7 +9,6 @@ class Cnae < Compras::Model
   has_many :creditor_secondary_cnaes, :dependent => :restrict
   has_many :creditors, :through => :creditor_secondary_cnaes
 
-
   validates :name, :code, :presence => true
 
   filterize

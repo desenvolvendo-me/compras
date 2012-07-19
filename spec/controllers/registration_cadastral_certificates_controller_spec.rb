@@ -38,4 +38,12 @@ describe RegistrationCadastralCertificatesController do
       end
     end
   end
+
+  describe 'GET #show' do
+    it 'should render report layout' do
+      get :show
+
+      response.should render_template("layouts/report")
+    end
+  end
 end

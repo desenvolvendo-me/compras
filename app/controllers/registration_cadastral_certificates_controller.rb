@@ -10,6 +10,10 @@ class RegistrationCadastralCertificatesController < CrudController
     create! { registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
   end
 
+  def show
+    render :layout => 'report'
+  end
+
   def update
     update! { registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) }
   end

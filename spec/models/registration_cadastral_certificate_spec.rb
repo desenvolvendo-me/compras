@@ -51,4 +51,62 @@ describe RegistrationCadastralCertificate do
 
     subject.should allow_value(Date.tomorrow).for(:revocation_date)
   end
+
+  context 'signatures' do
+    let :signature_configuration_item1 do
+      double('SignatureConfigurationItem1')
+    end
+
+    let :signature_configuration_item2 do
+      double('SignatureConfigurationItem2')
+    end
+
+    let :signature_configuration_item3 do
+      double('SignatureConfigurationItem3')
+    end
+
+    let :signature_configuration_item4 do
+      double('SignatureConfigurationItem4')
+    end
+
+    let :signature_configuration_item5 do
+      double('SignatureConfigurationItem5')
+    end
+
+    let :signature_configuration_items do
+      [
+        signature_configuration_item1,
+        signature_configuration_item2,
+        signature_configuration_item3,
+        signature_configuration_item4,
+        signature_configuration_item5,
+      ]
+    end
+
+    let :signature_configuration_item_store do
+      double('SignatureConfigurationItemStore')
+    end
+
+    it 'should return related signatures' do
+      signature_configuration_item_store.should_receive(:all_by_configuration_report).
+                                         with('registration_cadastral_certificates').
+                                         and_return(signature_configuration_items)
+      subject.signatures(signature_configuration_item_store).should eq signature_configuration_items
+    end
+
+    it "should group signatures" do
+      subject.stub(:signatures => signature_configuration_items)
+      subject.signatures_grouped.should eq [
+        [
+          signature_configuration_item1,
+          signature_configuration_item2,
+          signature_configuration_item3,
+          signature_configuration_item4
+        ],
+        [
+          signature_configuration_item5
+        ]
+      ]
+    end
+  end
 end

@@ -10,6 +10,8 @@ class Person < Unico::Person
   has_one :employee
 
   delegate :city, :zip_code, :to => 'personable'
+  #FIXME https://github.com/nohupbrasil/unico/pull/11
+  delegate :state_registration, :responsible, :to => :personable, :if => :company?
 
   orderize
 

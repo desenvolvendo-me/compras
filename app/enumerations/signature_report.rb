@@ -1,5 +1,5 @@
 class SignatureReport < EnumerateIt::Base
-  associate_values :supply_authorizations, :administrative_processes
+  associate_values :supply_authorizations, :administrative_processes, :registration_cadastral_certificates
 
   def self.availables
     to_a_by_keys(availables_keys)
