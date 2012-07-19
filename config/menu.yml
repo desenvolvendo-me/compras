@@ -32,6 +32,7 @@ menu:
 
     - administrative_and_licitation_processes:
       - administrative_processes
+      - licitation_processes
 
       - licitation_process:
         - licitation_notices
@@ -126,7 +127,7 @@ menu:
     - indexers
     - currencies
     - prefecture
-    - regularization_or_administrative_sanction_reasons 
+    - regularization_or_administrative_sanction_reasons
     - descriptors
     - legal_references
     - administration_types

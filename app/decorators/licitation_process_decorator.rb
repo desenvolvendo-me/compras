@@ -1,5 +1,5 @@
 class LicitationProcessDecorator < Decorator
-  attr_modal :process, :year, :process_date, :licitation_number, :administrative_process
+  attr_modal :process, :year, :process_date, :licitation_number, :administrative_process_id
 
   def envelope_delivery_time
     helpers.l(super, :format => :hour) if super
@@ -9,14 +9,12 @@ class LicitationProcessDecorator < Decorator
     helpers.l(super, :format => :hour) if super
   end
 
-  def count_link
-    return unless component.persisted?
-
-    helpers.link_to('Apurar', routes.licitation_process_path(component), :class => "button primary") if component.envelope_opening?
-  end
-
-  def lots_link
-    helpers.link_to('Lotes de itens', routes.licitation_process_lots_path(:licitation_process_id => component.id), :class => "button primary")
+  def parent_url(parent)
+    if parent
+      routes.edit_administrative_process_path(parent)
+    else
+      routes.licitation_processes_path
+    end
   end
 
   def winner_proposal_total_price

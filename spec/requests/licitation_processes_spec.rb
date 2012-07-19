@@ -6,6 +6,20 @@ feature "LicitationProcesses" do
     sign_in
   end
 
+  scenario 'acessing from index cancel should return to index' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Cancelar'
+
+    page.should have_link('1/2012')
+  end
+
   scenario 'create a new licitation_process' do
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
     budget_allocation = administrative_process.administrative_process_budget_allocations.first.budget_allocation

@@ -29,23 +29,21 @@ describe LicitationProcessDecorator do
     end
   end
 
-  context '#count_link' do
-    before do
-      component.stub(:persisted?).and_return(true)
-      routes.stub(:licitation_process_path).and_return('#')
-      helpers.stub(:link_to).with('Apurar', '#', :class => "button primary").and_return('link')
+  context '#parent_url' do
+    let :parent do
+      double('AdministrativeProcess', :id => 1)
     end
 
-    it 'should return a link to count when envelope_opening? is true' do
-      component.stub(:envelope_opening? => true)
+    it 'should return a url to administrative process when has parent' do
+      routes.stub(:edit_administrative_process_path).with(parent).and_return('link')
 
-      subject.count_link.should eq 'link'
+      subject.parent_url(parent).should eq 'link'
     end
 
-    it 'should not return a link to count when envelope_opening? is false' do
-      component.stub(:envelope_opening? => false)
+    it 'should return a url to licitation processes when has not parent' do
+      routes.stub(:licitation_processes_path).and_return('link')
 
-      subject.count_link.should eq nil
+      subject.parent_url(nil).should eq 'link'
     end
   end
 

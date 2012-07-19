@@ -31,6 +31,7 @@ describe AdministrativeProcessDecorator do
         component.stub(:persisted?).and_return(true)
         component.stub(:released?).and_return(true)
         component.stub(:licitation_process => licitation_process)
+        component.stub(:id => 1)
       end
 
       let :licitation_process do
@@ -38,7 +39,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it "should return a link to a new licitation process" do
-        routes.stub(:new_licitation_process_path).with(component).and_return('url')
+        routes.stub(:new_licitation_process_path).with(:administrative_process_id => 1).and_return('url')
 
         helpers.stub(:link_to).with('Novo processo licitatório', 'url', :class => "button primary").and_return('link_novo')
 
@@ -50,7 +51,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it "should return a link to edit licitation process" do
-        routes.stub(:edit_licitation_process_path).with(component.licitation_process).and_return('url')
+        routes.stub(:edit_licitation_process_path).with(component.licitation_process, :administrative_process_id => 1).and_return('url')
 
         helpers.stub(:link_to).with('Editar processo licitatório', 'url', :class => "button secondary").and_return('link_edit')
 

@@ -1,7 +1,8 @@
 class LicitationProcessesController < CrudController
-  actions :all, :except => [ :destroy, :index ]
+  actions :all, :except => [ :destroy ]
 
   before_filter :block_administrative_process_not_allowed, :only => [:new, :create]
+  before_filter :localize_administrative_process
 
   def new
     object = build_resource
@@ -47,5 +48,11 @@ class LicitationProcessesController < CrudController
     @administrative_process = AdministrativeProcess.find(administrative_process_id)
 
     raise Exceptions::Unauthorized unless @administrative_process.allow_licitation_process?
+  end
+
+  def localize_administrative_process
+    if params[:administrative_process_id]
+      @parent = AdministrativeProcess.find(params[:administrative_process_id])
+    end
   end
 end
