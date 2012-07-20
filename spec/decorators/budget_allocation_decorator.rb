@@ -6,7 +6,6 @@ describe BudgetAllocationDecorator do
   context '#real_amount' do
     before do
       component.stub(:real_amount => 500.0)
-      helpers.stub(:number_with_precision).with(500.0).and_return("500,00")
     end
 
     it 'should applies precision' do
@@ -17,7 +16,6 @@ describe BudgetAllocationDecorator do
   context '#reserved_value' do
     before do
       component.stub(:reserved_value => 500.0)
-      helpers.stub(:number_with_precision).with(500.0).and_return("500,00")
     end
 
     it 'should applies precision' do
