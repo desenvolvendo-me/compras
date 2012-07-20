@@ -18,7 +18,7 @@ feature "DirectPurchases" do
     Material.make!(:antivirus)
     ModalityLimit.make!(:modalidade_de_compra)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     click_link 'Gerar Compra Direta'
 
@@ -121,7 +121,7 @@ feature "DirectPurchases" do
   scenario 'should edit an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     within_records do
       page.find('a').click
@@ -158,7 +158,7 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Solicitação de Compra Direta editada com sucesso.'
+    page.should have_notice 'Compra Direta editada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -200,7 +200,7 @@ feature "DirectPurchases" do
     direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
     SupplyAuthorization.make!(:compra_2012)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     within_records do
       page.find('a').click
@@ -236,7 +236,7 @@ feature "DirectPurchases" do
   scenario 'it should generate supply authorization' do
     direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     within_records do
       page.find('a').click
@@ -270,7 +270,7 @@ feature "DirectPurchases" do
   scenario 'should not have destroy button when edit an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     within_records do
       page.find('a').click
@@ -291,7 +291,7 @@ feature "DirectPurchases" do
     Material.make!(:antivirus)
     ModalityLimit.make!(:modalidade_de_compra)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     click_link 'Gerar Compra Direta'
 
@@ -341,9 +341,9 @@ feature "DirectPurchases" do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
-    click_link 'Filtrar Solitações de Compra Direta'
+    click_link 'Filtrar Compras Diretas'
 
     fill_in 'Ano', :with => '2011'
 
@@ -359,9 +359,9 @@ feature "DirectPurchases" do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011_dez)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
-    click_link 'Filtrar Solitações de Compra Direta'
+    click_link 'Filtrar Compras Diretas'
 
     fill_in 'Data da compra', :with => '20/12/2011'
 
@@ -377,9 +377,9 @@ feature "DirectPurchases" do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
-    click_link 'Filtrar Solitações de Compra Direta'
+    click_link 'Filtrar Compras Diretas'
 
     select 'Obras de engenharia', :from => 'Modalidade'
 
@@ -392,7 +392,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'calculate total value of items' do
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     click_link 'Gerar Compra Direta'
 
@@ -457,7 +457,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'set sequencial item order' do
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     click_link 'Gerar Compra Direta'
 
@@ -501,7 +501,7 @@ feature "DirectPurchases" do
   scenario 'it must have at least one budget allocation with at least one item' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra Direta'
+    navigate_through 'Compras e Licitações > Compras Diretas'
 
     click_link 'Gerar Compra Direta'
 
