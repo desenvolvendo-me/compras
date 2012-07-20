@@ -1,7 +1,7 @@
 class PurchaseSolicitationBudgetAllocationItemStatusChanger
   attr_accessor :items_ids, :old_items_ids
 
-  def initialize(items_ids = nil, old_items_ids = nil)
+  def initialize(items_ids = [], old_items_ids = [])
     self.items_ids = items_ids
     self.old_items_ids = old_items_ids
   end
@@ -23,10 +23,6 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   end
 
   def removed_items_ids
-    if items_ids
-      old_items_ids - items_ids
-    else
-      old_items_ids
-    end
+    old_items_ids - items_ids
   end
 end
