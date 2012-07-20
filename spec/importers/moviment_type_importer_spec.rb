@@ -4,7 +4,29 @@ require 'app/importers/moviment_type_importer'
 
 describe MovimentTypeImporter do
   subject do
-    MovimentTypeImporter.new(null_repository)
+    MovimentTypeImporter.new(null_repository, operation, character, source)
+  end
+
+  before do
+    operation.stub(:value_for).with('SUM').and_return('sum')
+    operation.stub(:value_for).with('SUBTRACTION').and_return('subtraction')
+
+    character.stub(:value_for).with('BUDGET_ALLOCATION').and_return('budget_allocation')
+    character.stub(:value_for).with('CAPABILITY').and_return('capability')
+
+    source.stub(:value_for).with('DEFAULT').and_return('default')
+  end
+
+  let :operation do
+    double('Operation')
+  end
+
+  let :character do
+    double('Character')
+  end
+
+  let :source do
+    double('Source')
   end
 
   let :null_repository do
@@ -13,12 +35,6 @@ describe MovimentTypeImporter do
     repository.stub(:transaction) do |&block|
       block.call
     end
-
-    repository.stub(:sum_operation).and_return('sum')
-    repository.stub(:subtraction_operation).and_return('subtraction')
-    repository.stub(:budget_allocation_character).and_return('budget_allocation')
-    repository.stub(:capability_character).and_return('capability')
-    repository.stub(:default_source).and_return('default')
 
     repository
   end

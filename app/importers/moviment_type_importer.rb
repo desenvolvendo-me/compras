@@ -1,40 +1,27 @@
 class MovimentTypeImporter < Importer
-  attr_accessor :repository
+  attr_accessor :repository, :operation_repository, :character_repository,
+                :source_repository
 
-  def initialize(repository = MovimentType)
+  def initialize(repository = MovimentType, operation_repository = MovimentTypeOperation, character_repository = MovimentTypeCharacter, source_repository = Source)
+
     self.repository = repository
+    self.operation_repository = operation_repository
+    self.character_repository = character_repository
+    self.source_repository = source_repository
   end
 
   protected
 
   def normalize_attributes(attributes)
     attributes.merge(
-      'operation' => operation(attributes['operation']),
-      'character' => character(attributes['character']),
+      'operation' => operation_repository.value_for(attributes['operation'].upcase),
+      'character' => character_repository.value_for(attributes['character'].upcase),
       'source' => default_source
     )
   end
 
-  def operation(operation)
-    case operation
-    when 'sum'
-      repository.sum_operation
-    when 'subtraction'
-      repository.subtraction_operation
-    end
-  end
-
-  def character(character)
-    case character
-    when 'budget_allocation'
-      repository.budget_allocation_character
-    when 'capability'
-      repository.capability_character
-    end
-  end
-
   def default_source
-    repository.default_source
+    source_repository.value_for('DEFAULT')
   end
 
   def file
