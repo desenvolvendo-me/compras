@@ -1,3 +1,4 @@
+require 'active_support/concern'
 # Auto generate a number for a group of unique fields
 #
 # Options available:
@@ -30,6 +31,14 @@
 #    auto_increment :code, :by => [:cpf]
 #    auto_increment :code, :by => [:cpf], :on => :before_create
 module SequenceGenerator
+  extend ActiveSupport::Concern
+
+  included do
+      self.class_attribute :sequencer_field
+      self.class_attribute :sequencer_callback
+      self.class_attribute :sequence_group
+  end
+
   module ClassMethods
     def auto_increment(field, options)
       self.sequencer_field = field
@@ -46,15 +55,6 @@ module SequenceGenerator
     end
   end
 
-  def self.included(base)
-    base.extend(ClassMethods)
-
-    base.class_eval do
-      self.class_attribute :sequencer_field
-      self.class_attribute :sequencer_callback
-      self.class_attribute :sequence_group
-    end
-  end
 
   protected
 
