@@ -18,8 +18,14 @@ describe PriceCollectionClassificationGenerator do
     double('PriceCollectionClassification')
   end
 
+  let :proposal do
+    double('PriceCollectionProposal', :id => 10,
+           :creditor => double('Creditor'), :items => proposal_items,
+           :total_price => 200, :creditor_id => 1)
+  end
+
   let :price_collection_proposals do
-    [double('PriceCollectionProposal', :id => 10, :creditor => double('Creditor'))]
+    [proposal]
   end
 
   let :item do
@@ -38,8 +44,12 @@ describe PriceCollectionClassificationGenerator do
     [lot]
   end
 
+  let :proposal_item do
+    double(:unit_price => 20, :creditor => double('Creditor'), :quantity => 2)
+  end
+
   let :proposal_items do
-    [double(:unit_price => 20, :creditor => double('Creditor'))]
+    [proposal_item]
   end
 
   let :proposals_with_total_value do
@@ -51,8 +61,16 @@ describe PriceCollectionClassificationGenerator do
   end
 
   context "generete a list of price collection classifications" do
+    before do
+      price_collection.should_receive(:destroy_all_price_collection_classifications).and_return(true)
+    end
+
     it "when type of calculation equals lowest total price by item" do
       price_collection.stub(:type_of_calculation => 'lowest_total_price_by_item')
+
+      proposal.should_receive(:classification_by_item).with(proposal_item).and_return(1)
+
+      proposal_item.should_receive(:price_collection_lot_item).and_return(item)
 
       price_collection_classification_repository.should_receive(:create!)
 
@@ -62,6 +80,8 @@ describe PriceCollectionClassificationGenerator do
     it "when type of calculation equals lowest global price" do
       price_collection.stub(:type_of_calculation => 'lowest_global_price')
 
+      proposal.should_receive(:classification).and_return(1)
+
       price_collection_classification_repository.should_receive(:create!)
 
       PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).generate!
@@ -69,6 +89,9 @@ describe PriceCollectionClassificationGenerator do
 
     it "when type of calculation equals lowest total price by item" do
       price_collection.stub(:type_of_calculation => 'lowest_price_by_lot')
+
+      proposal.should_receive(:classification_by_lot).with(lot).and_return(1)
+      proposal.should_receive(:item_total_value_by_lot).with(lot).and_return(100)
 
       price_collection_classification_repository.should_receive(:create!)
 
