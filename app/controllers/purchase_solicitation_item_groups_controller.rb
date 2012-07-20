@@ -26,7 +26,7 @@ class PurchaseSolicitationItemGroupsController < CrudController
 
       return unless super
 
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.new(nil, old_purchase_solicitation_ids).change
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.new([], old_purchase_solicitation_ids).change
     end
   end
 end
