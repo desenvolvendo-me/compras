@@ -11,6 +11,7 @@ require 'squeel'
 
 # Shoulda Matchers
 require 'shoulda-matchers'
+require 'spec/support/sequence_generator'
 
 # ActiveRecord::Filter
 require 'lib/active_record/filters/base'
@@ -26,6 +27,12 @@ require 'lib/active_record/modal'
 
 class ActiveRecord::Base
   include ActiveRecord::Modal
+end
+
+require 'lib/sequence_generator'
+
+class ActiveRecord::Base
+  include SequenceGenerator
 end
 
 # Validations
