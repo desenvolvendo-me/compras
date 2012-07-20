@@ -4,7 +4,7 @@ class PriceCollectionProposal < Compras::Model
   belongs_to :price_collection
   belongs_to :creditor
 
-  has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :id
+  has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :unit_price
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
@@ -37,6 +37,30 @@ class PriceCollectionProposal < Compras::Model
     items.sum(&:total_price)
   end
 
+  def classification
+    proposals = price_collection.price_collection_proposals.sort_by &:total_price
+
+    proposals.each_with_index do |proposal, index|
+      return index + 1 if proposal == self
+    end
+  end
+
+  def classification_by_lot(lot)
+    items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot.id)
+
+    items_with_creditor.each_with_index do |item_with_creditor, index|
+      return index + 1 if item_with_creditor.creditor_id.to_i == creditor_id.to_i
+    end
+  end
+
+  def classification_by_item(proposal_item)
+    proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_lot_item)
+
+    proposal_items.each_with_index do |item, index|
+      return index + 1 if item == proposal_item
+    end
+  end
+
   def items_by_lot(lot)
     items.select { |item| item.price_collection_lot == lot }
   end
@@ -53,20 +77,6 @@ class PriceCollectionProposal < Compras::Model
 
   def annul!
     update_attribute :status, PriceCollectionStatus::ANNULLED
-  end
-
-  def self.by_price_collection_and_creditor(params = {})
-    where { price_collection_id.eq(params.fetch(:price_collection_id)) &
-            creditor_id.eq(params.fetch(:creditor_id)) }
-  end
-
-  def self.by_price_collection_id_sum_items(price_collection)
-    joins { items.price_collection_lot_item }.
-    select { creditor_id }.
-    select { sum(items.unit_price * items.price_collection_lot_item.quantity).as(total_value) }.
-    where { status.not_eq(PriceCollectionStatus::ANNULLED) & price_collection_id.eq(price_collection) }.
-    group { creditor_id }.
-    order { 'total_value' }
   end
 
   protected

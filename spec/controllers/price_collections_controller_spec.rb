@@ -126,9 +126,7 @@ describe PriceCollectionsController do
     it 'delete classifications e call classification generator' do
       PriceCollection.stub(:find).and_return(price_collection)
 
-      price_collection_classifications.should_receive(:destroy_all).and_return(true)
-
-      price_collection.should_receive(:transaction).twice
+      price_collection.should_receive(:transaction)
 
       put :update, :id => price_collection.id, :commit => 'Apurar'
     end

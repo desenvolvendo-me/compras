@@ -75,8 +75,8 @@ class PriceCollection < Compras::Model
     PriceCollectionClassification.by_price_classification_or_lot_or_item(id, price_collection_lot_ids, item_ids)
   end
 
-  def proposals_with_total_value
-    PriceCollectionProposal.by_price_collection_id_sum_items(id)
+  def destroy_all_price_collection_classifications
+    price_collection_classifications.destroy_all
   end
 
   protected

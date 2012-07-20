@@ -13,8 +13,11 @@ class PriceCollectionsController < CrudController
 
   def update
     if params[:commit] == 'Apurar'
-      clean_and_generate_classifications(resource)
-      update! { price_collection_path(resource) }
+      resource.transaction do
+        price_collection_classifications = PriceCollectionClassificationGenerator.new(resource).generate!
+      end
+
+      redirect_to price_collection_path(resource)
     else
       super
     end
@@ -48,17 +51,6 @@ class PriceCollectionsController < CrudController
   def should_not_be_annuled!
     if resource.annulled?
       raise Exceptions::Unauthorized
-    end
-  end
-
-  def clean_and_generate_classifications(object)
-    # clean classifications and generate
-    if object.type_of_calculation
-      object.all_price_collection_classifications.destroy_all
-
-      object.transaction do
-        price_collection_classifications = PriceCollectionClassificationGenerator.new(object).generate!
-      end
     end
   end
 end

@@ -534,14 +534,14 @@ feature "PriceCollections" do
 
     page.should have_content 'Gabriel Sobrinho'
 
-    within '.classification-1-0' do
+    within '.classification-1-1' do
       page.should have_content 'Antivirus'
       page.should have_content '40,00'
       page.should have_content '400,00'
       page.should have_content 'Sim'
     end
 
-    within '.classification-2-1' do
+    within '.classification-2-0' do
       page.should have_content 'Arame comum'
       page.should have_content '3,00'
       page.should have_content '600,00'
@@ -550,14 +550,14 @@ feature "PriceCollections" do
 
     page.should have_content 'Wenderson Malheiros'
 
-    within '.classification-2-0' do
+    within '.classification-2-1' do
       page.should have_content 'Antivirus'
       page.should have_content '50,00'
       page.should have_content '500,00'
       page.should have_content 'Não'
     end
 
-    within '.classification-1-1' do
+    within '.classification-1-0' do
       page.should have_content 'Arame comum'
       page.should have_content '2,00'
       page.should have_content '400,00'
