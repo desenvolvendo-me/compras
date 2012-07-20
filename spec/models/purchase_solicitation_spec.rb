@@ -102,4 +102,37 @@ describe PurchaseSolicitation do
       end
     end
   end
+
+  it 'should be released if liberation is present' do
+    subject.stub(:liberation).and_return(true)
+
+    subject.should be_released
+  end
+
+  it 'should not be released if liberation is not present' do
+    subject.stub(:liberation).and_return(nil)
+
+    subject.should_not be_released
+  end
+
+  it 'should be releasable when does not have liberation and is pending' do
+    subject.stub(:liberation).and_return(nil)
+    subject.service_status = PurchaseSolicitationServiceStatus::PENDING
+
+    subject.should be_releasable
+  end
+
+  it 'should be not releasable when does have liberation and is pending' do
+    subject.stub(:liberation).and_return(true)
+    subject.service_status = PurchaseSolicitationServiceStatus::PENDING
+
+    subject.should_not be_releasable
+  end
+
+  it 'should be not releasable when have liberation and is not pending' do
+    subject.stub(:liberation).and_return(true)
+    subject.service_status = PurchaseSolicitationServiceStatus::ANNULLED
+
+    subject.should_not be_releasable
+  end
 end

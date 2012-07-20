@@ -1,8 +1,6 @@
 <div class="buttons">
   <%= annul_link %>
   <%= f.button :submit unless f.object.annulled? %>
-  <% unless f.object.decorator.hide_liberation_button? %>
-    <%= link_to f.object.decorator.liberation_label, f.object.decorator.liberation_url, :class => 'button primary' %>
-  <% end %>
+  <%= release_liberation_link %>
   <%= f.button :cancel %>
 </div>
