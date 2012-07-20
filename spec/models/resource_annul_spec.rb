@@ -10,4 +10,16 @@ describe ResourceAnnul do
   it { should validate_presence_of :date }
   it { should validate_presence_of :employee }
   it { should validate_presence_of :annullable }
+
+  context '#annulled?' do
+    let :annullable do
+      double(:annullable, :annulled? => true)
+    end
+
+    it 'delegates to annullable' do
+      subject.stub(:annullable => annullable)
+
+      subject.should be_annulled
+    end
+  end
 end
