@@ -33,7 +33,7 @@ module SequenceGenerator
   module ClassMethods
     def auto_increment(field, options)
       self.sequencer_field = field
-      self.sequence_group = Array(options[:by]) || []
+      self.sequence_group = Array(options[:by])
       self.sequencer_callback = options[:on] || :before_create
 
       set_sequence_updater_callback
