@@ -13,10 +13,6 @@ class ReserveAllocationType < Compras::Model
   orderize :description
   filterize
 
-  def self.default_status
-    Status::ACTIVE
-  end
-
   def to_s
     description
   end

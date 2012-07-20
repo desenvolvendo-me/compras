@@ -1,5 +1,7 @@
 # encoding: utf-8
 require 'importer_helper'
+require 'enumerate_it'
+require 'app/enumerations/status'
 require 'app/importers/reserve_allocation_type_importer'
 
 describe ReserveAllocationTypeImporter do
