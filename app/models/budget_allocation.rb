@@ -10,6 +10,8 @@ class BudgetAllocation < Compras::Model
 
   attr_readonly :code
 
+  auto_increment :code, :by => [:descriptor_id]
+
   has_enumeration_for :debt_type
   has_enumeration_for :kind, :with => BudgetAllocationKind, :create_helpers => true
 
@@ -42,8 +44,6 @@ class BudgetAllocation < Compras::Model
   validates :amount, :presence => true, :if => :divide?
   validates :description, :uniqueness => { :allow_blank => true }
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
-
-  before_create :set_code
 
   orderize :description
   filterize
@@ -78,17 +78,5 @@ class BudgetAllocation < Compras::Model
 
   def function_id
     subfunction.try(:function_id) || @function_id
-  end
-
-  protected
-
-  def set_code
-    self.code = last_code.succ
-  end
-
-  def last_code
-    self.class.where { |budget_allocation|
-      budget_allocation.descriptor_id.eq(descriptor_id)
-    }.maximum(:code).to_i
   end
 end
