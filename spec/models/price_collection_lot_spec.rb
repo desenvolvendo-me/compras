@@ -41,7 +41,9 @@ describe PriceCollectionLot do
 
   it "the diferent itens should be valid" do
     item_one = subject.items.build(:material_id => 1)
-    item_two = subject.items.build(:material_id => 2)
+    item_two = subject.items.build(:material_id => 1)
+
+    item_one.stub(:marked_for_destruction? => true)
 
     subject.valid?
 

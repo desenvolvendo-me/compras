@@ -25,7 +25,7 @@ class PriceCollectionLot < Compras::Model
   def cannot_have_duplicated_materials
    single_materials = []
 
-   items.each do |item|
+   items.reject(&:marked_for_destruction?).each do |item|
      if single_materials.include?(item.material_id)
        errors.add(:items)
        item.errors.add(:material_id, :taken)
