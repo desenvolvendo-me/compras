@@ -1,3 +1,34 @@
+# Auto generate a number for a group of unique fields
+#
+# Options available:
+#   - by (optional)
+#   - on (optional)
+#
+#   By:
+#    This option defines the fields to be grouped. When the combination of
+#    these fields repeats the sequence is incremented
+#
+#    - can be a single field or an array of fields
+#    - default value is an empty array (Every new record will generate a new sequence)
+#
+#   On:
+#     Defines when the callback that generate a new sequence will be executed.
+#
+#     - Default value is :before_create
+#     - Values allowed are all callbacks previously defined by rails
+#
+#
+#  How to use
+#
+#  class Person < ActiveRecord::Base
+#    auto_increment :code, :by => :cpf
+#  end
+#
+#  Same thing:
+#    auto_increment :code, :by => :cpf
+#    auto_increment :code, :by => :cpf, :on => :before_create
+#    auto_increment :code, :by => [:cpf]
+#    auto_increment :code, :by => [:cpf], :on => :before_create
 module SequenceGenerator
   module ClassMethods
     def auto_increment(field, options)
