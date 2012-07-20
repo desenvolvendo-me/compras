@@ -81,7 +81,7 @@ module SequenceGenerator
   end
 
   def last_sequence
-    sequence_query.maximum(sequencer_field) || 0
+    sequence_query.maximum(sequencer_field).to_i
   end
 
   def next_sequence
