@@ -5,7 +5,6 @@ describe LicitationCommissionDecorator do
   context '#regulatory_act_publication_date' do
     before do
       component.stub(:regulatory_act_publication_date).and_return(date)
-      helpers.stub(:l).with(date).and_return('16/02/2012')
     end
 
     let :date do

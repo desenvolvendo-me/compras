@@ -1,5 +1,9 @@
-class PurchaseSolicitationBudgetAllocationItemDecorator < Decorator
+class PurchaseSolicitationBudgetAllocationItemDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
+
   def estimated_total_price
-    helpers.number_with_precision super
+    number_with_precision super
   end
 end

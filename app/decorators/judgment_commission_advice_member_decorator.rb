@@ -1,4 +1,7 @@
-class JudgmentCommissionAdviceMemberDecorator < Decorator
+class JudgmentCommissionAdviceMemberDecorator
+  include Decore
+  include Decore::Proxy
+
   def licitation_commission_member_id_or_mustache_variable
     component.licitation_commission_member_id || "{{licitation_commission_member_id}}"
   end

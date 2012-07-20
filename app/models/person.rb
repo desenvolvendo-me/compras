@@ -1,4 +1,6 @@
 class Person < Unico::Person
+  attr_modal :name, :cpf, :cnpj
+
   has_many :economic_registrations, :dependent => :restrict
   has_many :licitation_process_impugnments, :dependent => :restrict
   has_many :licitation_process_appeals, :dependent => :restrict

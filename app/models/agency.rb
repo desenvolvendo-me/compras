@@ -1,6 +1,8 @@
 class Agency < Compras::Model
   attr_accessible :name, :number, :digit, :bank_id, :phone, :fax, :email
 
+  attr_modal :name, :number, :bank_id
+
   belongs_to :bank
 
   has_many :bank_accounts, :dependent => :restrict

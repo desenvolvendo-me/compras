@@ -1,6 +1,8 @@
 class PrecatoryType < Compras::Model
   attr_accessible :description, :status, :deactivation_date
 
+  attr_modal :description
+
   has_enumeration_for :status, :with => PrecatoryTypeStatus, :create_helpers => true, :create_scopes => true
 
   has_many :precatories, :dependent => :restrict

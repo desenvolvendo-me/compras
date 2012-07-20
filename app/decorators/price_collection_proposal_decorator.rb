@@ -1,9 +1,14 @@
-class PriceCollectionProposalDecorator < Decorator
+class PriceCollectionProposalDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
+  include ActionView::Helpers::TranslationHelper
+
   def price_collection_date
-    helpers.l(super) if super
+    localize(super) if super
   end
 
   def item_total_value_by_lot(lot)
-    helpers.number_with_precision super(lot)
+    number_with_precision super(lot)
   end
 end

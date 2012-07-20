@@ -6,7 +6,6 @@ describe LicitationProcessBidderProposalDecorator do
   context '#unit_price' do
     before do
       component.stub(:unit_price).and_return(5000.0)
-      helpers.stub(:number_to_currency).with(5000.0, {:format => "%n"}).and_return("5.000,00", {:format => "%n"} )
     end
 
     it 'should applies precision' do
@@ -17,7 +16,6 @@ describe LicitationProcessBidderProposalDecorator do
   context '#total_price' do
     before do
       component.stub(:total_price).and_return(5000.0)
-      helpers.stub(:number_to_currency).with(5000.0, {:format => "%n"}).and_return("5.000,00", {:format => "%n"} )
     end
 
     it 'should applies precision' do

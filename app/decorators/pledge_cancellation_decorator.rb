@@ -1,29 +1,34 @@
-class PledgeCancellationDecorator < Decorator
+class PledgeCancellationDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
+  include ActionView::Helpers::TranslationHelper
+
   def emission_date
-    helpers.l super if super
+    localize super if super
   end
 
   def expiration_date
-    helpers.l super if super
+    localize super if super
   end
 
   def balance
-    helpers.number_with_precision super if super
+    number_with_precision super if super
   end
 
   def pledge_balance
-    helpers.number_to_currency super if super
+    number_to_currency super if super
   end
 
   def pledge_value
-    helpers.number_to_currency super if super
+    number_to_currency super if super
   end
 
   def pledge_cancellations_sum
-    helpers.number_to_currency super if super
+    number_to_currency super if super
   end
 
   def pledge_liquidations_sum
-    helpers.number_to_currency super if super
+    number_to_currency super if super
   end
 end

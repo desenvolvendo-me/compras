@@ -5,7 +5,7 @@
         <td>
           <p><%= link_to resource, edit_resource_path(resource) %></p>
 
-          <% if resource.decorator? && resource.decorator.summary? %>
+          <% if resource.decorated? && resource.decorator.respond_to?(:summary) %>
             <p><%= resource.decorator.summary %></p>
           <% end %>
         </td>

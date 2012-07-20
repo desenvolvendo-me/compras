@@ -6,7 +6,6 @@ describe AdministrativeProcessDecorator do
   context '#value_estimated' do
     before do
       component.stub(:value_estimated).and_return(500)
-      helpers.stub(:number_to_currency).with(500).and_return('R$ 500,00')
     end
 
     it 'should applies currency' do
@@ -17,7 +16,6 @@ describe AdministrativeProcessDecorator do
   context '#total_allocations_value' do
     before do
       component.stub(:total_allocations_value).and_return(400)
-      helpers.stub(:number_with_precision).with(400).and_return('400,00')
     end
 
     it 'should applies precision' do
@@ -41,25 +39,22 @@ describe AdministrativeProcessDecorator do
       it "should return a link to a new licitation process" do
         routes.stub(:new_licitation_process_path).with(:administrative_process_id => 1).and_return('url')
 
-        helpers.stub(:link_to).with('Novo processo licitatório', 'url', :class => "button primary").and_return('link_novo')
-
         licitation_process.stub(:nil?).and_return(true)
 
         component.stub(:allow_licitation_process? => true)
 
-        subject.build_licitation_process_link.should eq 'link_novo'
+        subject.build_licitation_process_link.should eq '<a href="url" class="button primary">Novo processo licitatório</a>'
       end
 
       it "should return a link to edit licitation process" do
         routes.stub(:edit_licitation_process_path).with(component.licitation_process, :administrative_process_id => 1).and_return('url')
 
-        helpers.stub(:link_to).with('Editar processo licitatório', 'url', :class => "button secondary").and_return('link_edit')
 
         licitation_process.stub(:nil?).and_return(false)
 
         component.stub(:allow_licitation_process? => true)
 
-        subject.build_licitation_process_link.should eq 'link_edit'
+        subject.build_licitation_process_link.should eq '<a href="url" class="button secondary">Editar processo licitatório</a>'
       end
 
 
@@ -116,11 +111,10 @@ describe AdministrativeProcessDecorator do
         component.stub(:persisted? => true)
         component.stub(:waiting? => true)
         routes.stub(:new_administrative_process_liberation_path).with(:administrative_process_id => 1).and_return('new_path')
-        helpers.stub(:link_to).with('Liberar', 'new_path', { :class => 'button primary' }).and_return('new_link')
       end
 
       it "should return a link to new administrative process liberation when is waiting" do
-        subject.release_button.should eq 'new_link'
+        subject.release_button.should eq '<a href="new_path" class="button primary">Liberar</a>'
       end
     end
 
@@ -131,7 +125,6 @@ describe AdministrativeProcessDecorator do
         component.stub(:waiting? => false)
         component.stub(:released? => true)
         routes.stub(:edit_administrative_process_liberation_path).and_return('edit_path')
-        helpers.stub(:link_to).with('Liberação', 'edit_path', { :class => 'button secondary' }).and_return('edit_link')
       end
 
       let :administrative_process_liberation do
@@ -139,8 +132,18 @@ describe AdministrativeProcessDecorator do
       end
 
       it "should return a link to new administrative process liberation" do
-        subject.release_button.should eq 'edit_link'
+        subject.release_button.should eq '<a href="edit_path" class="button secondary">Liberação</a>'
       end
+    end
+  end
+
+  context '#date' do
+    before do
+      component.stub(:date).and_return(Date.new(2012, 12, 31))
+    end
+
+    it 'should localize' do
+      subject.date.should eq '31/12/2012'
     end
   end
 end

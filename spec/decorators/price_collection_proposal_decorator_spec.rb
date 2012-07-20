@@ -9,7 +9,6 @@ describe PriceCollectionProposalDecorator do
   context '#price_collection_date' do
     before do
       component.stub(:price_collection_date).and_return(date)
-      helpers.stub(:l).with(date).and_return('01/12/2012')
     end
 
     it 'should localize' do
@@ -20,7 +19,6 @@ describe PriceCollectionProposalDecorator do
   context '#item_total_value_by_lot' do
     before do
       component.stub(:item_total_value_by_lot).with(1).and_return(500.0)
-      helpers.stub(:number_with_precision).with(500.0).and_return("500,00")
     end
 
     it 'should applies precision' do

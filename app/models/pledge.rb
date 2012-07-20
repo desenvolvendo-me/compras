@@ -10,6 +10,9 @@ class Pledge < Compras::Model
 
   attr_accessor :licitation, :process, :item_replicated_value, :parcel_replicated_value
 
+  attr_modal :id, :descriptor_id, :emission_date, :management_unit_id,
+             :budget_allocation_id, :creditor_id
+
   has_enumeration_for :material_kind
   has_enumeration_for :pledge_type, :create_helpers => true
 

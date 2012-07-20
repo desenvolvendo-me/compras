@@ -1,12 +1,17 @@
-class LicitationProcessDecorator < Decorator
-  attr_modal :process, :year, :process_date, :licitation_number, :administrative_process_id
+class LicitationProcessDecorator
+  include Decore
+  include Decore::Proxy
+  include Decore::Routes
+  include ActionView::Helpers::NumberHelper
+  include ActionView::Helpers::TranslationHelper
+  include ActionView::Helpers::UrlHelper
 
   def envelope_delivery_time
-    helpers.l(super, :format => :hour) if super
+    localize(super, :format => :hour) if super
   end
 
   def envelope_opening_time
-    helpers.l(super, :format => :hour) if super
+    localize(super, :format => :hour) if super
   end
 
   def parent_url(parent)
@@ -18,6 +23,6 @@ class LicitationProcessDecorator < Decorator
   end
 
   def winner_proposal_total_price
-    helpers.number_to_currency super if super
+    number_to_currency super if super
   end
 end

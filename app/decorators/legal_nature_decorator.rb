@@ -1,5 +1,6 @@
-class LegalNatureDecorator < Decorator
-  attr_modal :code, :name
+class LegalNatureDecorator
+  include Decore
+  include Decore::Proxy
 
   def summary
     component.code

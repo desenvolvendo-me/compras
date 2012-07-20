@@ -5,6 +5,8 @@ class AdministrativeProcess < Compras::Model
 
   attr_readonly :process, :year
 
+  attr_modal :year, :process, :protocol
+
   has_enumeration_for :modality, :with => AdministrativeProcessModality, :create_helpers => true
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType, :create_helpers => true
   has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true, :create_scopes => true

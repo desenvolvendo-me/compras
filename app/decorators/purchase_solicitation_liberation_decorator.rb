@@ -1,2 +1,0 @@
-class PurchaseSolicitationLiberationDecorator < Decorator
-end

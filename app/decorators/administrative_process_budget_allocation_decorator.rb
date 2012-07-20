@@ -1,4 +1,8 @@
-class AdministrativeProcessBudgetAllocationDecorator < Decorator
+class AdministrativeProcessBudgetAllocationDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
+
   def id_or_mustache_variable
     component.id || "{{id}}"
   end
@@ -16,14 +20,14 @@ class AdministrativeProcessBudgetAllocationDecorator < Decorator
   end
 
   def budget_allocation_amount_or_mustache_variable
-    helpers.number_with_precision(component.budget_allocation_amount) || "{{amount}}"
+    number_with_precision(component.budget_allocation_amount) || "{{amount}}"
   end
 
   def value_or_mustache_variable
-    helpers.number_with_precision(component.value) || "{{value}}"
+    number_with_precision(component.value) || "{{value}}"
   end
 
   def total_items_value
-    helpers.number_with_precision(super)
+    number_with_precision(super)
   end
 end

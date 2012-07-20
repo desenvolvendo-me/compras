@@ -6,7 +6,6 @@ describe PersonDecorator do
   context '#commercial_registration_date' do
     before do
       component.stub(:commercial_registration_date).and_return(date)
-      helpers.stub(:l).with(date).and_return('14/12/2012')
     end
 
     let :date do

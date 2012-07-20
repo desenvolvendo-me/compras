@@ -1,5 +1,9 @@
-class IndexerValueDecorator < Decorator
+class IndexerValueDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
+
   def value
-    helpers.number_with_precision(original_component.value, :precision => scale_of_value)
+    number_with_precision(component.value, :precision => scale_of_value)
   end
 end

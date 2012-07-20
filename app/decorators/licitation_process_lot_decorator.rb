@@ -1,5 +1,9 @@
-class LicitationProcessLotDecorator < Decorator
+class LicitationProcessLotDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
+
   def winner_proposal_total_price
-    helpers.number_to_currency super if super
+    number_to_currency super if super
   end
 end

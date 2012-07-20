@@ -9,6 +9,8 @@ class Creditor < Compras::Model
 
   attr_readonly :person_id
 
+  attr_modal :person_id, :main_cnae_id
+
   belongs_to :main_cnae, :class_name => 'Cnae'
   belongs_to :occupation_classification
   belongs_to :person

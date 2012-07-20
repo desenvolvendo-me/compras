@@ -1,6 +1,9 @@
 # encoding: utf-8
-class PurchaseSolicitationDecorator < Decorator
-  attr_modal :accounting_year, :kind, :delivery_location_id, :budget_structure_id
+class PurchaseSolicitationDecorator
+  include Decore
+  include Decore::Routes
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
 
   def summary
     "Estrutura orçamentaria solicitante: #{budget_structure} / Responsável pela solicitação: #{responsible} / Status: #{service_status_humanize}"
@@ -27,6 +30,6 @@ class PurchaseSolicitationDecorator < Decorator
   end
 
   def quantity_by_material(material_id)
-    helpers.number_with_precision(super(material_id)) if super
+    number_with_precision(super(material_id)) if super
   end
 end

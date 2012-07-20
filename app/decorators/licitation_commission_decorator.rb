@@ -1,7 +1,9 @@
-class LicitationCommissionDecorator < Decorator
-  attr_modal :commission_type, :nomination_date, :expiration_date, :exoneration_date
+class LicitationCommissionDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::TranslationHelper
 
   def regulatory_act_publication_date
-    helpers.l super if super
+    localize super if super
   end
 end

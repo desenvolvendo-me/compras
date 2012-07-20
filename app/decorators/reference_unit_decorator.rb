@@ -1,4 +1,7 @@
-class ReferenceUnitDecorator < Decorator
+class ReferenceUnitDecorator
+  include Decore
+  include Decore::Proxy
+
   def summary
     component.name
   end

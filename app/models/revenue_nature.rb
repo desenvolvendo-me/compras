@@ -4,6 +4,11 @@ class RevenueNature < Compras::Model
   attr_accessible :revenue_category_id, :revenue_subcategory_id
   attr_accessible :revenue_source_id
 
+  attr_modal :revenue_nature, :specification, :descriptor_id,
+             :regulatory_act_id, :kind, :revenue_category_id,
+             :revenue_subcategory_id, :revenue_source_id, :revenue_rubric_id,
+             :classification
+
   has_enumeration_for :kind, :with => RevenueNatureKind
 
   belongs_to :descriptor

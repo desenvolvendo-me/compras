@@ -1,6 +1,8 @@
 class MaterialsClass < Compras::Model
   attr_accessible :materials_group_id, :class_number, :description, :details
 
+  attr_modal :materials_group_id, :class_number, :description
+
   belongs_to :materials_group
 
   has_many :materials, :dependent => :restrict

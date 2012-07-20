@@ -10,7 +10,6 @@ describe BudgetRevenueDecorator do
     before do
       component.stub(:created_at).and_return(Time.new(2012, 4, 13))
       component.stub(:persisted?).and_return(true)
-      helpers.stub(:l).with(date).and_return('13/04/2012')
     end
 
     it 'should localize' do
@@ -21,7 +20,6 @@ describe BudgetRevenueDecorator do
   context 'when have not persisted' do
     before do
       component.stub(:persisted?).and_return(false)
-      helpers.stub(:l).with(date).and_return('13/04/2012')
     end
 
     let :date_repository do

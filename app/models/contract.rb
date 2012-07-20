@@ -6,6 +6,8 @@ class Contract < Compras::Model
   attr_accessible :direct_purchase_id, :budget_structure_id, :budget_structure_responsible_id, :lawyer_id, :parent_id
   attr_accessible :delivery_schedules_attributes
 
+  attr_modal :year, :contract_number, :sequential_number, :signature_date
+
   acts_as_nested_set
   mount_uploader :contract_file, DocumentUploader
 

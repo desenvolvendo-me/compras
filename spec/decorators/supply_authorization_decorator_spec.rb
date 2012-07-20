@@ -15,8 +15,17 @@ describe SupplyAuthorizationDecorator do
 
   context '#direct_purchase' do
     before do
-      helpers.stub(:l).with(date).and_return('01/12/2012')
-      subject.stub(:direct_purchase).and_return(direct_purchase)
+      component.stub(:direct_purchase).and_return(direct_purchase)
+
+      I18n.backend.store_translations 'pt-BR', :enumerations => {
+          :period_unit => {
+            :month => 'mês/meses'
+        }
+      }
+    end
+
+    let :direct_purchase do
+      double('DirectPurchase', :id => 1, :year => 2012)
     end
 
     it 'should localize' do
@@ -26,7 +35,6 @@ describe SupplyAuthorizationDecorator do
 
   context '#date' do
     before do
-      helpers.stub(:l).with(date).and_return('01/12/2012')
       component.stub(:date).and_return(date)
     end
 
@@ -49,7 +57,6 @@ describe SupplyAuthorizationDecorator do
 
   context '#pluralized_period_unit' do
     it "should pluralize the period unit when period is greater than 1" do
-      helpers.stub(:t).with("enumerations.period_unit.month").and_return("mês/meses")
       component.stub(:direct_purchase => direct_purchase)
       component.stub(:period => 2)
       component.stub(:period_unit => PeriodUnit::MONTH)

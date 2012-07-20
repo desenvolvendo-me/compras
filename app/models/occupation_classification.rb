@@ -1,6 +1,8 @@
 class OccupationClassification < Compras::Model
   attr_accessible :code, :name, :parent_id
 
+  attr_modal :name
+
   acts_as_nested_set
 
   has_many :creditors, :dependent => :restrict

@@ -1,5 +1,6 @@
-class IndexerDecorator < Decorator
-  attr_modal :name
+class IndexerDecorator
+  include Decore
+  include Decore::Proxy
 
   def summary
     currency

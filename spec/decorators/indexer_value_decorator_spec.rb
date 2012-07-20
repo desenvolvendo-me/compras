@@ -6,7 +6,6 @@ describe IndexerValueDecorator do
     before do
       component.stub(:value).and_return(12.12)
       component.stub(:scale_of_value).and_return(6)
-      helpers.stub(:number_with_precision).with(12.12, :precision => component.scale_of_value).and_return('12,120000')
     end
 
     it 'should applies precision with 6 of scale' do

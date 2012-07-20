@@ -10,7 +10,6 @@ describe LicitationProcessDecorator do
   context '#envelope_delivery_time' do
     before do
       component.stub(:envelope_delivery_time).and_return(time)
-      helpers.stub(:l).with(time, :format => :hour).and_return('10:00')
     end
 
     it 'should localize envelope_delivery_time' do
@@ -21,7 +20,6 @@ describe LicitationProcessDecorator do
   context '#envelope_opening_time' do
     before do
       component.stub(:envelope_opening_time).and_return(time)
-      helpers.stub(:l).with(time, :format => :hour).and_return('10:00')
     end
 
     it 'should return localized opening_delivery_time' do
@@ -50,7 +48,6 @@ describe LicitationProcessDecorator do
   context '#winner_proposal_total_price' do
     before do
       component.stub(:winner_proposal_total_price).and_return(9.99)
-      helpers.stub(:number_to_currency).with(9.99).and_return('R$ 9,99')
     end
 
     it 'should applies currency' do

@@ -6,7 +6,6 @@ describe LicitationObjectDecorator do
   context '#purchase_licitation_exemption_with_precision' do
     before do
       component.stub(:purchase_licitation_exemption).and_return(500.0)
-      helpers.should_receive(:number_with_precision).with(500.0).and_return("500,00")
     end
 
     it 'should applies precision' do
@@ -17,7 +16,6 @@ describe LicitationObjectDecorator do
   context '#build_licitation_exemption_with_precision' do
     before do
       component.stub(:build_licitation_exemption).and_return(300.0)
-      helpers.should_receive(:number_with_precision).with(300.0).and_return("300,00")
     end
 
     it 'should applies precision' do

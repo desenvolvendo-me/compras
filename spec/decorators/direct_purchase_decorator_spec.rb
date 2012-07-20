@@ -6,7 +6,6 @@ describe DirectPurchaseDecorator do
   context '#total_allocations_item_value' do
     before do
       component.stub(:total_allocations_items_value).and_return(512.34)
-      helpers.stub(:number_with_precision).with(512.34).and_return('512,34')
     end
 
     it 'should applies precision' do

@@ -9,6 +9,8 @@ class LicitationProcess < Compras::Model
 
   attr_readonly :process, :year, :licitation_number
 
+  attr_modal :process, :year, :process_date, :licitation_number, :administrative_process_id
+
   has_enumeration_for :legal_advice, :with => LicitationProcessLegalAdvice
   has_enumeration_for :modality, :with => AbreviatedProcessModality, :create_helpers => true
   has_enumeration_for :pledge_type

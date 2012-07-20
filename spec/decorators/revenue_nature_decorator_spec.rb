@@ -5,7 +5,6 @@ describe RevenueNatureDecorator do
   context '#publication_date' do
     before do
       component.stub(:publication_date).and_return(date)
-      helpers.stub(:l).with(date).and_return('09/04/2012')
     end
 
     let :date do

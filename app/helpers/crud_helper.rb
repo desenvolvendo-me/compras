@@ -14,11 +14,8 @@ module CrudHelper
 
   # Get modal attributes and intersect with +params[:attributes]+ if exists
   def attributes
-    if resource.decorator?
-      attributes = resource.decorator.modal_attributes
-    else
-      attributes = resource_class.accessible_attributes.to_set
-    end
+    attributes = resource_class.modal_attributes
+
     attributes &= params[:attributes].split(',') if params[:attributes]
 
     associations = resource_class.reflect_on_all_associations

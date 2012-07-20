@@ -1,6 +1,11 @@
-class LicitationProcessBidderDecorator < Decorator
+class LicitationProcessBidderDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
+  include ActionView::Helpers::TranslationHelper
+
   def process_date
-    helpers.l component.licitation_process_process_date if component.licitation_process_process_date
+    localize component.licitation_process_process_date if component.licitation_process_process_date
   end
 
   def show_proposal_tabs
@@ -11,15 +16,15 @@ class LicitationProcessBidderDecorator < Decorator
         'licitation_process_bidders/proposal_by_lots'
       end
     else
-      { :text =>  helpers.t("other.compras.messages.to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist") }
+      { :text =>  t("other.compras.messages.to_add_proposals_all_items_must_belong_to_any_lot_or_any_lot_must_exist") }
     end
   end
 
   def proposal_total_value_by_lot(lot_id)
-    helpers.number_with_precision super
+    number_with_precision super
   end
 
   def proposal_total_value
-    helpers.number_to_currency(super, :format => "%n") if super
+    number_to_currency(super, :format => "%n") if super
   end
 end

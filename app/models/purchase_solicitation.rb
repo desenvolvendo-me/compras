@@ -5,6 +5,8 @@ class PurchaseSolicitation < Compras::Model
 
   attr_readonly :code
 
+  attr_modal :accounting_year, :kind, :delivery_location_id, :budget_structure_id
+
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
     :create_helpers => true, :create_scopes => true

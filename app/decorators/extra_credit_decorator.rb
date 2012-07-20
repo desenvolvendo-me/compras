@@ -1,6 +1,10 @@
 # encoding: utf-8
-class ExtraCreditDecorator < Decorator
+class ExtraCreditDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::TranslationHelper
+
   def publication_date
-    helpers.l super if super
+    localize super if super
   end
 end

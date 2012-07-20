@@ -2,6 +2,8 @@ class BudgetStructureConfiguration < Compras::Model
   attr_accessible :description, :entity_id, :regulatory_act_id
   attr_accessible :budget_structure_levels, :budget_structure_levels_attributes
 
+  attr_modal :description, :entity_id, :regulatory_act_id
+
   belongs_to :regulatory_act
   belongs_to :entity
 

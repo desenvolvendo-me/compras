@@ -9,7 +9,11 @@ module RSpec
         metadata[:type] = :decorator
 
         subject do
-          described_class.new(component, routes, helpers)
+          described_class.new(component)
+        end
+
+        before do
+          subject.stub(:routes).and_return(routes) if subject.respond_to?(:routes)
         end
 
         let :component do
@@ -18,10 +22,6 @@ module RSpec
 
         let :routes do
           double(:routes)
-        end
-
-        let :helpers do
-          double(:helpers)
         end
       end
     end

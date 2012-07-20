@@ -5,6 +5,8 @@ class LicitationObject < Compras::Model
   attr_readonly :purchase_public_concurrency, :build_invitation_letter, :build_taking_price
   attr_readonly :build_public_concurrency, :special_auction, :special_unenforceability, :special_contest
 
+  attr_modal :description, :year
+
   has_many :direct_purchases, :dependent => :restrict
   has_many :items, :through => :direct_purchases
 

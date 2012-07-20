@@ -1,6 +1,8 @@
 class Profile < Compras::Model
   attr_accessible :name, :roles_attributes
 
+  attr_modal :name
+
   has_many :roles, :dependent => :destroy, :inverse_of => :profile
   has_many :users, :dependent => :restrict
 

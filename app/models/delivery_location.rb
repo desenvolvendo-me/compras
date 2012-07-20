@@ -1,6 +1,8 @@
 class DeliveryLocation < Compras::Model
   attr_accessible :address_attributes, :description
 
+  attr_modal :description
+
   belongs_to :address
 
   has_many :purchase_solicitations, :dependent => :restrict

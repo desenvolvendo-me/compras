@@ -27,7 +27,7 @@ describe PurchaseSolicitationDecorator do
 
     it 'should return label' do
       component.stub(:pending?).and_return(true)
-      helpers.stub(:link_to).with('Liberar', 'new_path', { :class => 'button primary' }).and_return('new_link')
+
       subject.liberation_label.should eq 'Liberar'
     end
 
@@ -35,7 +35,6 @@ describe PurchaseSolicitationDecorator do
       component.stub(:pending?).and_return(false)
       component.stub(:liberated?).and_return(true)
       component.stub(:liberation).and_return(purchase_solicitation_liberation)
-      helpers.stub(:link_to).with('Liberar', 'edit_path', { :class => 'button primary' }).and_return('edit_link')
       subject.liberation_label.should eq 'Liberação'
     end
   end
@@ -43,10 +42,11 @@ describe PurchaseSolicitationDecorator do
   context '#liberation_url' do
     context 'persisted and pending' do
       before do
-        component.stub(:persisted?).and_return(true)
         component.stub(:pending?).and_return(true)
         component.stub(:id).and_return(1)
-        routes.stub(:new_purchase_solicitation_liberation_path).with({:purchase_solicitation_id => 1}).and_return('new_path')
+        routes.stub(:new_purchase_solicitation_liberation_path).
+               with(:purchase_solicitation_id => 1).
+               and_return('new_path')
       end
 
       it "should return a route" do
@@ -143,7 +143,6 @@ describe PurchaseSolicitationDecorator do
   context '#quantity_by_material' do
     before do
       component.stub(:quantity_by_material).with(material.id).and_return(400)
-      helpers.stub(:number_with_precision).with(400).and_return('400,00')
     end
 
     let :material do

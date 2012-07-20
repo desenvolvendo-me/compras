@@ -5,6 +5,9 @@ class ReserveFund < Compras::Model
 
   attr_readonly :date
 
+  attr_modal :date, :licitation_modality_id, :creditor_id, :status,
+             :descriptor_id, :budget_allocation_id, :reserve_allocation_type_id
+
   has_enumeration_for :status, :with => ReserveFundStatus, :create_helpers => true
 
   belongs_to :licitation_process

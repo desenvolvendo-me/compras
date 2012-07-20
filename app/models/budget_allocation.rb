@@ -10,6 +10,8 @@ class BudgetAllocation < Compras::Model
 
   attr_readonly :code
 
+  attr_modal :code, :descriptor_id, :description
+
   auto_increment :code, :by => :descriptor_id
 
   has_enumeration_for :debt_type

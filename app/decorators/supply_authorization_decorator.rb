@@ -1,7 +1,13 @@
 # encoding: utf-8
-class SupplyAuthorizationDecorator < Decorator
+class SupplyAuthorizationDecorator
+  include Decore
+  include Decore::Proxy
+  include Decore::Routes
+  include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::TranslationHelper
+
   def date
-    helpers.l super
+    localize super
   end
 
   def direct_purchase
@@ -20,7 +26,7 @@ class SupplyAuthorizationDecorator < Decorator
     return unless component.direct_purchase && component.period
 
     if component.period > 1
-      helpers.t("enumerations.period_unit.#{period_unit}")
+      I18n.translate("enumerations.period_unit.#{period_unit}")
     else
       component.period_unit_humanize
     end

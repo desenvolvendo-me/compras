@@ -1,7 +1,9 @@
-class CreditorDecorator < Decorator
-  attr_modal :person_id, :main_cnae_id
+class CreditorDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::TranslationHelper
 
   def commercial_registration_date
-    helpers.l super if super
+    localize super if super
   end
 end

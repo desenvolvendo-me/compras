@@ -1,7 +1,9 @@
-class PersonDecorator < Decorator
-  attr_modal :name, :cpf, :cnpj
+class PersonDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::TranslationHelper
 
   def commercial_registration_date
-    helpers.l super if super
+    localize super if super
   end
 end

@@ -4,6 +4,10 @@ class ExpenseNature < Compras::Model
   attr_accessible :description, :docket, :expense_category_id
   attr_accessible :expense_modality_id, :expense_element_id
 
+  attr_modal :expense_nature, :description, :descriptor_id, :regulatory_act_id,
+             :kind, :expense_category_id, :expense_group_id,
+             :expense_modality_id, :expense_element_id
+
   has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
 
   belongs_to :descriptor

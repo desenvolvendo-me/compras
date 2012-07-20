@@ -5,6 +5,8 @@ class BudgetStructure < Compras::Model
   attr_accessible :budget_structure_responsibles_attributes, :kind
   attr_accessible :budget_structure_level_id, :parent_id
 
+  attr_modal :parent, :budget_structure_level, :description
+
   has_enumeration_for :kind, :with => BudgetStructureKind,
     :create_helpers => true, :create_scopes => true
 

@@ -6,7 +6,6 @@ describe ReserveFundDecorator do
   context '#budget_allocation_real_amount' do
     before do
       component.stub(:budget_allocation_real_amount).and_return(5000.0)
-      helpers.stub(:number_with_precision).with(5000.0).and_return("5.000,00")
     end
 
     it 'should applies precision' do

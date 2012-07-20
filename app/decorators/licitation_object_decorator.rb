@@ -1,12 +1,14 @@
 # encoding: utf-8
-class LicitationObjectDecorator < Decorator
-  attr_modal :description, :year
+class LicitationObjectDecorator
+  include Decore
+  include Decore::Proxy
+  include ActionView::Helpers::NumberHelper
 
   def purchase_licitation_exemption_with_precision
-    helpers.number_with_precision(component.purchase_licitation_exemption)
+    number_with_precision(component.purchase_licitation_exemption)
   end
 
   def build_licitation_exemption_with_precision
-    helpers.number_with_precision(component.build_licitation_exemption)
+    number_with_precision(component.build_licitation_exemption)
   end
 end

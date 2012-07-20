@@ -6,7 +6,6 @@ describe PriceCollectionClassificationDecorator do
   context '#unit_value' do
     before do
       component.stub(:unit_value).and_return(50.0)
-      helpers.should_receive(:number_with_precision).with(50.0).and_return("50,00")
     end
 
     it 'should applies precision' do
@@ -17,7 +16,6 @@ describe PriceCollectionClassificationDecorator do
   context '#total_value' do
     before do
       component.stub(:total_value).and_return(80.0)
-      helpers.should_receive(:number_with_precision).with(80.0).and_return("80,00")
     end
 
     it 'should applies precision' do
@@ -28,7 +26,6 @@ describe PriceCollectionClassificationDecorator do
   context '#unit_price_by_proposal' do
     before do
       component.stub(:unit_price_by_proposal).and_return(500.0)
-      helpers.should_receive(:number_with_precision).with(500.0).and_return("500,00")
     end
 
     it 'should applies currency' do
@@ -39,7 +36,6 @@ describe PriceCollectionClassificationDecorator do
   context '#total_value_by_proposal' do
     before do
       component.stub(:total_value_by_proposal).and_return(780.0)
-      helpers.should_receive(:number_with_precision).with(780.0).and_return("780,00")
     end
 
     it 'should applies precision' do
@@ -50,7 +46,6 @@ describe PriceCollectionClassificationDecorator do
   context '#unit_price_by_price_collection_and_creditor' do
     before do
       component.stub(:unit_price_by_price_collection_and_creditor).and_return(330.0)
-      helpers.should_receive(:number_with_precision).with(330.0).and_return("330,00")
     end
 
     it 'should applies precision' do
@@ -61,7 +56,6 @@ describe PriceCollectionClassificationDecorator do
   context '#total_value_by_price_collection_and_creditor' do
     before do
       component.stub(:total_value_by_price_collection_and_creditor).and_return(220.0)
-      helpers.should_receive(:number_with_precision).with(220.0).and_return("220,00")
     end
 
     it 'should applies precision' do
@@ -70,18 +64,19 @@ describe PriceCollectionClassificationDecorator do
   end
 
   context '#classification' do
+    before do
+      I18n.backend.store_translations 'pt-BR', :true => 'Sim'
+      I18n.backend.store_translations 'pt-BR', :false => 'Não'
+    end
+
     it 'should localize true when is equals to 1' do
       component.stub(:classification => 1)
-
-      helpers.stub(:t).with('true').and_return('Sim')
 
       subject.classification.should eq 'Sim'
     end
 
     it 'should localize false when is not equals to 1' do
       component.stub(:classification => 2)
-
-      helpers.stub(:t).with('false').and_return('Não')
 
       subject.classification.should eq 'Não'
     end

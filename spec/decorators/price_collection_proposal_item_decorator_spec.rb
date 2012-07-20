@@ -5,11 +5,20 @@ describe PriceCollectionProposalItemDecorator do
   context '#total_price' do
     before do
       component.stub(:total_price).and_return(500.0)
-      helpers.stub(:number_with_precision).with(500.0).and_return("500,00")
     end
 
     it 'should applies precision' do
       subject.total_price.should eq "500,00"
+    end
+  end
+
+  context '#unit_price' do
+    before do
+      component.stub(:unit_price).and_return(500.0)
+    end
+
+    it 'should applies precision' do
+      subject.unit_price.should eq "500,00"
     end
   end
 end
