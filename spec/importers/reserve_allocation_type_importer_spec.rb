@@ -8,11 +8,7 @@ describe ReserveAllocationTypeImporter do
   end
 
   let :status do
-    status = double.as_null_object
-
-    status.stub(:value_for).with(:ACTIVE).and_return('active')
-
-    status
+    double(:status)
   end
 
   let :null_repository do
@@ -26,6 +22,8 @@ describe ReserveAllocationTypeImporter do
   end
 
   it 'imports reserve allocation types' do
+    status.stub(:value_for).with(:ACTIVE).and_return('active')
+
     null_repository.should_receive(:create!).with('description' => 'Comum', 'status' => 'active')
     null_repository.should_receive(:create!).with('description' => 'Licitação', 'status' => 'active')
     null_repository.should_receive(:create!).with('description' => 'Cotas mensais', 'status' => 'active')
