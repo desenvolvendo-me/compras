@@ -10,7 +10,7 @@ class BudgetAllocation < Compras::Model
 
   attr_readonly :code
 
-  auto_increment :code, :by => [:descriptor_id]
+  auto_increment :code, :by => :descriptor_id
 
   has_enumeration_for :debt_type
   has_enumeration_for :kind, :with => BudgetAllocationKind, :create_helpers => true
