@@ -143,7 +143,7 @@ feature "BudgetAllocations" do
     end
   end
 
-  scenario 'create a new budget_allocation with 1 as code when is other year' do
+  scenario 'create a new budget_allocation with 1 as code when is other descriptor' do
     Descriptor.make!(:detran_2012)
     BudgetAllocation.make!(:reparo_2011)
 
