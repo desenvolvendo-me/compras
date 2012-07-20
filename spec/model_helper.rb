@@ -11,7 +11,7 @@ require 'squeel'
 
 # Shoulda Matchers
 require 'shoulda-matchers'
-require 'spec/support/sequence_generator'
+require 'spec/support/sequence_generator_matcher'
 
 # ActiveRecord::Filter
 require 'lib/active_record/filters/base'

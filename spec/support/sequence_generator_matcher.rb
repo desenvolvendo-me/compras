@@ -1,6 +1,17 @@
 module Shoulda
   module Matchers
     module ActiveModel
+      # Allow use of auto_increment to test models that makes use of auto_increment
+      # How to use
+      #   it { should auto_increment(:code) }
+      #   or
+      #   it { should auto_increment(:code).by(:year) }
+      #   or
+      #   it { should auto_increment(:code).by([:year]) }
+      #   or
+      #   it { should auto_increment(:code).by([:year]).on(:before_create) }
+      #   or
+      #   it { should auto_increment(:code).by([:year]) }
       def auto_increment(attr)
         SequenceGeneratorMatcher.new(attr)
       end
