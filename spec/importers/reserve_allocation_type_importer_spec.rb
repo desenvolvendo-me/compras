@@ -1,12 +1,18 @@
 # encoding: utf-8
 require 'importer_helper'
-require 'enumerate_it'
-require 'app/enumerations/status'
 require 'app/importers/reserve_allocation_type_importer'
 
 describe ReserveAllocationTypeImporter do
   subject do
-    ReserveAllocationTypeImporter.new(null_repository)
+    ReserveAllocationTypeImporter.new(null_repository, status)
+  end
+
+  let :status do
+    status = double.as_null_object
+
+    status.stub(:value_for).with(:ACTIVE).and_return('active')
+
+    status
   end
 
   let :null_repository do
@@ -15,8 +21,6 @@ describe ReserveAllocationTypeImporter do
     repository.stub(:transaction) do |&block|
       block.call
     end
-
-    repository.stub(:default_status).and_return('active')
 
     repository
   end
