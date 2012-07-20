@@ -72,7 +72,7 @@ describe SequenceGenerator, 'ActiveRecord' do
   context 'class with options' do
     class BudgetAllocationWithOptions < Compras::Model
       self.table_name = 'compras_budget_allocations'
-      auto_increment :code, :by => [:descriptor_id], :on => :before_save
+      auto_increment :code, :by => :descriptor_id, :on => :before_save
     end
 
     it 'should have :before_save as callback' do
@@ -82,6 +82,10 @@ describe SequenceGenerator, 'ActiveRecord' do
                                   select { |cb| cb.kind.eql?(:before) }.
                                   collect(&:filter).
                                   should include(:set_next_sequence)
+    end
+
+    it 'should force by to array' do
+      BudgetAllocationWithOptions.new.sequence_group.should eq [:descriptor_id]
     end
   end
 end
