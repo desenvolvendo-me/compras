@@ -14,7 +14,7 @@ class PriceCollectionsController < CrudController
   def update
     if params[:commit] == 'Apurar'
       resource.transaction do
-        price_collection_classifications = PriceCollectionClassificationGenerator.new(resource).generate!
+        PriceCollectionClassificationGenerator.new(resource).generate!
       end
 
       redirect_to price_collection_path(resource)
