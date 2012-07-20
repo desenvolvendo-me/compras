@@ -25,4 +25,8 @@ class PurchaseSolicitationDecorator < Decorator
       'Liberação'
     end
   end
+
+  def quantity_by_material(material_id)
+    helpers.number_with_precision(super(material_id)) if super
+  end
 end

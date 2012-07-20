@@ -139,4 +139,19 @@ describe PurchaseSolicitationDecorator do
       subject.should_not be_hide_liberation_button
     end
   end
+
+  context '#quantity_by_material' do
+    before do
+      component.stub(:quantity_by_material).with(material.id).and_return(400)
+      helpers.stub(:number_with_precision).with(400).and_return('400,00')
+    end
+
+    let :material do
+      double :material, :id => 1
+    end
+
+    it 'should applies precision' do
+      subject.quantity_by_material(material.id).should eq '400,00'
+    end
+  end
 end

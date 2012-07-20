@@ -26,7 +26,7 @@
 
   <tbody class="<%= f.sanitized_object_name %>_purchase_solicitations_records">
     <% f.object.purchase_solicitations.each do |purchase_solicitation| %>
-      <%= render 'purchase_solicitations/list_form', :purchase_solicitation => purchase_solicitation,  :id => purchase_solicitation.id, :quantity_by_material => purchase_solicitation.quantity_by_material(f.object.material_id), :f => f %>
+      <%= render 'purchase_solicitations/list_form', :purchase_solicitation => purchase_solicitation,  :id => purchase_solicitation.id, :quantity_by_material => purchase_solicitation.decorator.quantity_by_material(f.object.material_id), :f => f %>
     <% end %>
   </tbody>
 </table>
