@@ -50,7 +50,7 @@ describe ResourceAnnulsController do
       post :create, :resource_annul => { :annullable_id => pledge_liquidation.id, :annullable_type => 'PledgeLiquidation' }
 
       response.should be_success
-      response.location.should match '/pledge_liquidations/1/edit'
+      response.location.should match "/pledge_liquidations/#{pledge_liquidation.id}/edit"
     end
 
     it "should return 401 if parent is already annulled" do
