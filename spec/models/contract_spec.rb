@@ -57,8 +57,6 @@ describe Contract do
   it { should validate_presence_of :end_date }
   it { should validate_presence_of :budget_structure }
   it { should validate_presence_of :budget_structure_responsible }
-  it { should validate_presence_of :lawyer }
-  it { should validate_presence_of :lawyer_code }
   it { should validate_presence_of :kind }
   it { should validate_presence_of :service_or_contract_type }
 

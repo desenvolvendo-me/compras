@@ -36,7 +36,7 @@ class Contract < Compras::Model
   validates :sequential_number, :year, :contract_number, :publication_date, :presence => true
   validates :dissemination_source, :content, :creditor, :execution_type, :service_or_contract_type, :presence => true
   validates :contract_guarantees, :contract_value, :contract_validity, :signature_date, :presence => true
-  validates :end_date, :budget_structure, :budget_structure_responsible, :lawyer, :lawyer_code, :kind, :presence => true
+  validates :end_date, :budget_structure, :budget_structure_responsible, :kind, :presence => true
   validates :parent, :presence => true, :if => :amendment?
   validates :end_date, :timeliness => {
     :after => :signature_date,
