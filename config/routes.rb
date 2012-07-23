@@ -636,12 +636,6 @@ Compras::Application.routes.draw do
 
   resource :prefecture, :except => :destroy
 
-  resources :procedures, :only => %w(index show) do
-    collection do
-      get :modal
-    end
-  end
-
   resources :price_collections, :except => :destroy do
     collection do
       get :filter
