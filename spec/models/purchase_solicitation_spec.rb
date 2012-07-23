@@ -32,6 +32,8 @@ describe PurchaseSolicitation do
   it { should belong_to :liberator }
   it { should belong_to :budget_structure }
 
+  it { should auto_increment(:code).by(:accounting_year) }
+
   it "must delegate the amount to budget_allocation" do
     subject.stub(:budget_allocation).and_return double("Allocation", :amount  => '400,00')
 
@@ -88,18 +90,6 @@ describe PurchaseSolicitation do
       subject.should_receive(:update_attribute).with(:service_status, PurchaseSolicitationServiceStatus::LIBERATED)
 
       subject.liberate!
-    end
-  end
-
-  describe '#next_code' do
-    context 'when the code of last purchase_solicitation is 5' do
-      before do
-        subject.stub(:last_code).and_return(5)
-      end
-
-      it 'should return 6 as next_code' do
-        subject.next_code.should eq 6
-      end
     end
   end
 

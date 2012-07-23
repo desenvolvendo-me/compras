@@ -5,6 +5,8 @@ class PurchaseSolicitation < Compras::Model
 
   attr_readonly :code
 
+  auto_increment :code, :by => :accounting_year
+
   attr_modal :accounting_year, :kind, :delivery_location_id, :budget_structure_id
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
@@ -36,8 +38,6 @@ class PurchaseSolicitation < Compras::Model
   validate :must_have_at_least_one_budget_allocation
   validate :cannot_have_duplicated_budget_allocations
 
-  before_create :set_next_code
-
   orderize :request_date
   filterize
 
@@ -61,10 +61,6 @@ class PurchaseSolicitation < Compras::Model
     update_attribute :service_status, PurchaseSolicitationServiceStatus::LIBERATED
   end
 
-  def next_code
-    last_code.succ
-  end
-
   def quantity_by_material(material_id)
     PurchaseSolicitation.joins { items }.
       where { |purchase| purchase.items.material_id.eq(material_id) &
@@ -80,14 +76,6 @@ class PurchaseSolicitation < Compras::Model
   end
 
   protected
-
-  def set_next_code
-    self.code = next_code
-  end
-
-  def last_code
-    self.class.where { self.accounting_year.eq(accounting_year) }.maximum(:code).to_i
-  end
 
   def cannot_have_duplicated_budget_allocations
    single_allocations = []
