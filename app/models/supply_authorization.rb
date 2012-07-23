@@ -1,5 +1,9 @@
 class SupplyAuthorization < Compras::Model
-  attr_accessible :year, :code, :direct_purchase_id
+  attr_accessible :year, :direct_purchase_id
+
+  attr_readonly :code
+
+  auto_increment :code, :by => :year
 
   belongs_to :direct_purchase
 
@@ -10,8 +14,6 @@ class SupplyAuthorization < Compras::Model
 
   validates :year, :direct_purchase, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
-
-  before_create :set_code
 
   orderize :year
   filterize
@@ -30,17 +32,5 @@ class SupplyAuthorization < Compras::Model
 
   def signatures_grouped
     signatures.in_groups_of(4, false)
-  end
-
-  protected
-
-  def set_code
-    last = self.class.where(:year => year).last
-
-    if last
-      self.code = last.code.succ
-    else
-      self.code = 1
-    end
   end
 end

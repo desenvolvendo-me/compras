@@ -17,6 +17,8 @@ describe SupplyAuthorization do
   it { should_not allow_value('212').for(:year) }
   it { should_not allow_value('2a12').for(:year) }
 
+  it { should auto_increment(:code).by(:year) }
+
   it { should have_db_index([:code, :year]).unique(true) }
 
   context 'signatures' do
