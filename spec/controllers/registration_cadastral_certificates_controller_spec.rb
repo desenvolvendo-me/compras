@@ -7,7 +7,7 @@ describe RegistrationCadastralCertificatesController do
 
   context 'with creditor' do
     let :creditor do
-      Creditor.make!(:sobrinho)
+      Creditor.make!(:nohup)
     end
 
     describe 'POST #create' do
