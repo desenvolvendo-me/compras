@@ -12,7 +12,7 @@ feature "SupplyAuthorizations" do
     supply_authorization = SupplyAuthorization.make!(:compra_2012)
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate_through 'Compras e Licitações > Compras Diretas'
+    navigate_through 'Compras e Licitações > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -52,7 +52,7 @@ feature "SupplyAuthorizations" do
     supply_authorization = SupplyAuthorization.make!(:nohup)
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate_through 'Compras e Licitações > Compras Diretas'
+    navigate_through 'Compras e Licitações > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
