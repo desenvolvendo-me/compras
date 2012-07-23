@@ -34,9 +34,9 @@ module SequenceGenerator
   extend ActiveSupport::Concern
 
   included do
-      self.class_attribute :sequencer_field
-      self.class_attribute :sequencer_callback
-      self.class_attribute :sequence_group
+    self.class_attribute :sequencer_field
+    self.class_attribute :sequencer_callback
+    self.class_attribute :sequence_group
   end
 
   module ClassMethods
