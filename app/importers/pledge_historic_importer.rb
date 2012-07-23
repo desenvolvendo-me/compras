@@ -1,8 +1,9 @@
 class PledgeHistoricImporter < Importer
-  attr_accessor :repository
+  attr_accessor :repository, :source_repository
 
-  def initialize(repository = PledgeHistoric)
+  def initialize(repository = PledgeHistoric, source_repository = Source)
     self.repository = repository
+    self.source_repository = source_repository
   end
 
   protected
@@ -12,7 +13,7 @@ class PledgeHistoricImporter < Importer
   end
 
   def default_source
-    repository.default_source
+    source_repository.value_for('DEFAULT')
   end
 
   def file
