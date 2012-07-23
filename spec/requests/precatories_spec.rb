@@ -209,6 +209,18 @@ feature "Precatories" do
     end
   end
 
+  scenario 'BugFix: should filter precatories' do
+    Precatory.make!(:precatorio)
+
+    navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
+
+    click_link 'Filtrar Precatórios'
+
+    fill_in 'Número do precatório', :with => '1234/2012'
+
+    page.should have_content '1234/2012'
+  end
+
   scenario 'should return empty erro when try create a empty parcel' do
     navigate_through 'Contabilidade > Comum > Precatório > Precatórios'
 

@@ -1,4 +1,7 @@
 class Precatory < Compras::Model
+  attr_modal :number, :creditor_id, :precatory_type_id, :date, :judgment_date,
+             :apresentation_date, :lawsuit_number, :value
+
   attr_accessible :number, :creditor_id, :historic, :precatory_type_id
   attr_accessible :date, :judgment_date, :apresentation_date, :lawsuit_number
   attr_accessible :value, :precatory_parcels_attributes
