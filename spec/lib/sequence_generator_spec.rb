@@ -3,31 +3,12 @@ require 'spec_helper'
 describe SequenceGenerator, 'ActiveRecord' do
   it 'should defines methods for the class' do
     ActiveRecord::Base.should respond_to(:auto_increment)
-    ActiveRecord::Base.should respond_to(:set_sequence_updater_callback)
-  end
-
-  it 'should defines variables for the class' do
-    ActiveRecord::Base.should respond_to(:sequencer_field)
-    ActiveRecord::Base.should respond_to(:sequencer_callback)
-    ActiveRecord::Base.should respond_to(:sequence_group)
-
-    ActiveRecord::Base.should respond_to(:sequencer_field=)
-    ActiveRecord::Base.should respond_to(:sequencer_callback=)
-    ActiveRecord::Base.should respond_to(:sequence_group=)
   end
 
   context 'class without' do
     class BudgetAllocationWithoutOptions < Compras::Model
       self.table_name = 'compras_budget_allocations'
       auto_increment :code, :by => [:description]
-    end
-
-    it 'should defines methods for the instance' do
-      BudgetAllocationWithoutOptions.new.should respond_to(:set_next_sequence)
-      BudgetAllocationWithoutOptions.new.should respond_to(:sequence_value)
-      BudgetAllocationWithoutOptions.new.should respond_to(:sequence_query)
-      BudgetAllocationWithoutOptions.new.should respond_to(:last_sequence)
-      BudgetAllocationWithoutOptions.new.should respond_to(:next_sequence)
     end
 
     it 'should store values in variables when call auto_increment' do
