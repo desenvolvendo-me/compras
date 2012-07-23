@@ -138,6 +138,10 @@ module Helpers
       yield
     end
   end
+
+  def close_dialog
+    page.find(:xpath, '(//a[contains(@class, "ui-dialog-titlebar-close")])[last()]').click
+  end
 end
 
 RSpec.configure do |config|
