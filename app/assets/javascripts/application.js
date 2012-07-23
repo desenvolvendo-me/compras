@@ -14,6 +14,7 @@
 //= require simple_form.numeric_input
 //= require simple_form.nested_form
 //= require simple_form.toogle_required_input
+//= require link.modal
 //= require rails
 //= require compras
 //= require filter

@@ -132,6 +132,12 @@ module Helpers
       click_link link.strip
     end
   end
+
+  def within_dialog
+    within ".ui-dialog" do
+      yield
+    end
+  end
 end
 
 RSpec.configure do |config|
