@@ -19,148 +19,147 @@
 </div>
 
 <script>
-
   (function () {
-    fakeBudgetStructureCode = $('#fake_budget_structure_code');
-    budgetStructureCode = $('#budget_structure_code');
-    budgetStructureParent = $('#budget_structure_parent');
-    budgetStructureBudgetStructure = $('#budget_structure_budget_structure');
-  })();
+    var fakeBudgetStructureCode = $('#fake_budget_structure_code');
+    var budgetStructureCode = $('#budget_structure_code');
+    var budgetStructureParent = $('#budget_structure_parent');
+    var budgetStructureBudgetStructure = $('#budget_structure_budget_structure');
 
-  (function () {
-    fakeBudgetStructureCode.val(budgetStructureCode.val());
-  })();
+    (function () {
+      fakeBudgetStructureCode.val(budgetStructureCode.val());
+    })();
 
-  function configuration_id() {
-    return $('#budget_structure_budget_structure_configuration_id').val();
-  };
+    function configuration_id() {
+      return $('#budget_structure_budget_structure_configuration_id').val();
+    };
 
-  function addMaskToLevel(){
-    var digits = parseInt($('#budget_structure_digits').val()) + 1 ;
-    if (digits > 0){
-      fakeBudgetStructureCode.attr('data-mask', Array(digits).join('9') );
-    }
-  };
-
-  addMaskToLevel();
-
-  function setModalUrlToBudgetStructureParent( level_id ){
-    var urlModal = "<%= modal_budget_structures_path %>?",
-        params = {
-          locked_fields: ["budget_structure_configuration", "budget_structure_level"],
-          synthetic: true,
-          budget_structure:{
-            budget_structure_configuration_id: configuration_id(),
-            budget_structure_level_id: level_id
-          }
-        }
-
-    urlModal += jQuery.param(params);
-    budgetStructureParent.attr('data-modal-url', urlModal);
-  };
-
-  function budgetStructureLevelValidations() {
-    if ( $('#budget_structure_level').val() <= 1 ){
-      budgetStructureParent.parent().hide();
-    }
-  };
-
-  budgetStructureLevelValidations();
-
-  function setModalUrlToBudgetStructureLevel(){
-    var urlModal = "<%= modal_budget_structure_levels_path %>?",
-        params = {
-          budget_structure_level:{
-            budget_structure_configuration_id: configuration_id()
-          }
-        };
-
-    urlModal += jQuery.param(params);
-    $('#budget_structure_budget_structure_level').attr('data-modal-url', urlModal);
-
-    if (configuration_id == ''){
-      $('#budget_structure_budget_structure_level').attr('disabled', true);
-    } else {
-      $('#budget_structure_budget_structure_level').attr('disabled', false);
-    }
-  };
-
-  setModalUrlToBudgetStructureLevel();
-
-  $('#budget_structure_budget_structure_configuration_id').change( function(){
-    setModalUrlToBudgetStructureLevel();
-    budgetStructureCode.val('');
-    fakeBudgetStructureCode.val('');
-    budgetStructureBudgetStructure.val('');
-    $('#budget_structure_budget_structure_level, #budget_structure_budget_structure_level_id').val('');
-    budgetStructureParent.parent().hide();
-    budgetStructureParent.attr('data-modal-url', '');
-  });
-
-  $('#budget_structure_budget_structure_level_id').change(function (event, level) {
-    budgetStructureCode.val('');
-    fakeBudgetStructureCode.val('');
-    budgetStructureBudgetStructure.val('');
-    $('#budget_structure_parent, #budget_structure_parent_id').val('');
-
-    if (level) {
-      fakeBudgetStructureCode.attr('data-mask', Array(level.digits + 1).join('9') );
-      budgetStructureParent.requiredField(false);
-
-      if (level.level <= 1){
-        budgetStructureParent.parent().hide();
-        fakeBudgetStructureCode.attr('disabled', false);
-        budgedt_structure_mask = '';
-      } else {
-        budgetStructureParent.parent().show();
-        budgetStructureParent.requiredField(true);
-        setModalUrlToBudgetStructureParent(level.upper_budget_structure_level.id);
-        fakeBudgetStructureCode.attr('disabled', true);
+    function addMaskToLevel(){
+      var digits = parseInt($('#budget_structure_digits').val()) + 1 ;
+      if (digits > 0){
+        fakeBudgetStructureCode.attr('data-mask', Array(digits).join('9') );
       }
-    } else {
-      fakeBudgetStructureCode.attr('data-mask', '');
-      budgetStructureParent.parent().hide();
-      budgetStructureParent.attr('data-modal-url', '');
-    }
-  });
+    };
 
-  setModalUrlToBudgetStructureParent("<%= f.object.parent_budget_structure_level_id %>");
+    addMaskToLevel();
 
-  var budgedt_structure_mask = "<%= f.object.parent_budget_structure(f.object.parent) %>";
+    function setModalUrlToBudgetStructureParent( level_id ){
+      var urlModal = "<%= modal_budget_structures_path %>?",
+      params = {
+        locked_fields: ["budget_structure_configuration", "budget_structure_level"],
+        synthetic: true,
+        budget_structure:{
+          budget_structure_configuration_id: configuration_id(),
+          budget_structure_level_id: level_id
+        }
+      }
 
-  function enableDisableBudgetStructureCode() {
-    var value = $('#budget_structure_parent_id').val() == ''
-    fakeBudgetStructureCode.attr('disabled', value);
-  };
+      urlModal += jQuery.param(params);
+      budgetStructureParent.attr('data-modal-url', urlModal);
+    };
 
-  $('#budget_structure_parent_id').change(function (event, parent) {
-    if (parent) {
-      budgedt_structure_mask = parent.budget_structure + parent.separator;
-      fakeBudgetStructureCode.attr('disabled', false);
-    } else {
-      budgedt_structure_mask = '';
-      fakeBudgetStructureCode.attr('disabled', true);
+    function budgetStructureLevelValidations() {
+      if ( $('#budget_structure_level').val() <= 1 ){
+        budgetStructureParent.parent().hide();
+      }
+    };
+
+    budgetStructureLevelValidations();
+
+    function setModalUrlToBudgetStructureLevel(){
+      var urlModal = "<%= modal_budget_structure_levels_path %>?",
+          params = {
+            budget_structure_level:{
+              budget_structure_configuration_id: configuration_id()
+            }
+          };
+
+      urlModal += jQuery.param(params);
+      $('#budget_structure_budget_structure_level').attr('data-modal-url', urlModal);
+
+      if (configuration_id == ''){
+        $('#budget_structure_budget_structure_level').attr('disabled', true);
+      } else {
+        $('#budget_structure_budget_structure_level').attr('disabled', false);
+      }
+    };
+
+    setModalUrlToBudgetStructureLevel();
+
+    $('#budget_structure_budget_structure_configuration_id').change( function(){
+      setModalUrlToBudgetStructureLevel();
       budgetStructureCode.val('');
       fakeBudgetStructureCode.val('');
       budgetStructureBudgetStructure.val('');
-    }
-  });
+      $('#budget_structure_budget_structure_level, #budget_structure_budget_structure_level_id').val('');
+      budgetStructureParent.parent().hide();
+      budgetStructureParent.attr('data-modal-url', '');
+    });
 
-  function requiredFields(){
-    budgetStructureParent.requiredField( $('#budget_structure_budget_structure_level_id').val() != '' );
-  };
+    $('#budget_structure_budget_structure_level_id').change(function (event, level) {
+      budgetStructureCode.val('');
+      fakeBudgetStructureCode.val('');
+      budgetStructureBudgetStructure.val('');
+      $('#budget_structure_parent, #budget_structure_parent_id').val('');
 
-  requiredFields();
-  enableDisableBudgetStructureCode();
+      if (level) {
+        fakeBudgetStructureCode.attr('data-mask', Array(level.digits + 1).join('9') );
+        budgetStructureParent.requiredField(false);
 
-  $('#fake_budget_structure_code').on('change keyup', function() {
-    $('#budget_structure_code').val($(this).val());
-    budgetStructureBudgetStructure.val(budgedt_structure_mask + $(this).val() );
-  });
+        if (level.level <= 1){
+          budgetStructureParent.parent().hide();
+          fakeBudgetStructureCode.attr('disabled', false);
+          budgedt_structure_mask = '';
+        } else {
+          budgetStructureParent.parent().show();
+          budgetStructureParent.requiredField(true);
+          setModalUrlToBudgetStructureParent(level.upper_budget_structure_level.id);
+          fakeBudgetStructureCode.attr('disabled', true);
+        }
+      } else {
+        fakeBudgetStructureCode.attr('data-mask', '');
+        budgetStructureParent.parent().hide();
+        budgetStructureParent.attr('data-modal-url', '');
+      }
+    });
 
-  function enabledBudgetStructureCode(){
-    $('#budget_structure_code').attr('disabled', false);
-  };
+    setModalUrlToBudgetStructureParent("<%= f.object.parent_budget_structure_level_id %>");
 
-  enabledBudgetStructureCode();
+    var budgedt_structure_mask = "<%= f.object.parent_budget_structure(f.object.parent) %>";
+
+    function enableDisableBudgetStructureCode() {
+      var value = $('#budget_structure_parent_id').val() == ''
+      fakeBudgetStructureCode.attr('disabled', value);
+    };
+
+    $('#budget_structure_parent_id').change(function (event, parent) {
+      if (parent) {
+        budgedt_structure_mask = parent.budget_structure + parent.separator;
+        fakeBudgetStructureCode.attr('disabled', false);
+      } else {
+        budgedt_structure_mask = '';
+        fakeBudgetStructureCode.attr('disabled', true);
+        budgetStructureCode.val('');
+        fakeBudgetStructureCode.val('');
+        budgetStructureBudgetStructure.val('');
+      }
+    });
+
+    function requiredFields(){
+      budgetStructureParent.requiredField( $('#budget_structure_budget_structure_level_id').val() != '' );
+    };
+
+    requiredFields();
+    enableDisableBudgetStructureCode();
+
+    $('#fake_budget_structure_code').on('change keyup', function() {
+      $('#budget_structure_code').val($(this).val());
+      budgetStructureBudgetStructure.val(budgedt_structure_mask + $(this).val() );
+    });
+
+    function enabledBudgetStructureCode(){
+      $('#budget_structure_code').attr('disabled', false);
+    };
+
+    enabledBudgetStructureCode();
+  })();
 </script>
