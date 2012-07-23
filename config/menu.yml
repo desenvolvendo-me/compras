@@ -96,6 +96,7 @@ menu:
         - reserve_funds
 
       - pledge:
+        - expense_kinds
         - pledge_historics
         - pledge_categories
         - pledges
@@ -132,4 +133,3 @@ menu:
     - legal_references
     - administration_types
     - government_actions
-    - expense_kinds
