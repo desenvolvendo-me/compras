@@ -133,7 +133,7 @@
 
   <tbody>
     <tr>
-      <td>
+      <td class="right">
         <%= resource.creditor_main_cnae_code %>
       </td>
 
@@ -144,7 +144,7 @@
 
     <% resource.creditor_cnaes.each do |cnae| %>
       <tr>
-        <td>
+        <td class="right">
           <%= cnae.code %>
         </td>
 
@@ -188,7 +188,7 @@
           <%= document %>
         </td>
 
-        <td>
+        <td class="right">
           <%= document.document_number %>
         </td>
 

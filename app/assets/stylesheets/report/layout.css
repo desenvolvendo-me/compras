@@ -20,6 +20,10 @@ a {
   width: 1002px;
 }
 
+.right {
+  text-align: right !important;
+}
+
 .signature {
   margin-top: 50px;
 }

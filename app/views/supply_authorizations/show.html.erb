@@ -261,11 +261,11 @@
     <tbody>
       <% localized(dpba.items).each_with_index do |item, idx| %>
         <tr id="<%= dom_id item %>">
-          <td>
+          <td class="right">
             <%= idx + 1 %>
           </td>
 
-          <td>
+          <td class="right">
             <%= item.quantity %>
           </td>
 
@@ -281,11 +281,11 @@
             <%= item.brand %>
           </td>
 
-          <td>
+          <td class="right">
             <%= item.unit_price %>
           </td>
 
-          <td>
+          <td class="right">
             <%= number_with_precision item.estimated_total_price %>
           </td>
         <% end %>
@@ -313,14 +313,14 @@
 
   <tbody>
     <tr>
-      <td>
-          <%= resource.direct_purchase.decorator.total_allocations_items_value %>
+      <td class="right">
+        <%= resource.direct_purchase.decorator.total_allocations_items_value %>
       </td>
 
       <td></td>
 
-      <td>
-          <%= resource.direct_purchase.decorator.total_allocations_items_value %>
+      <td class="right">
+        <%= resource.direct_purchase.decorator.total_allocations_items_value %>
       </td>
     </tr>
   </tbody>
