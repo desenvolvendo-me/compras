@@ -45,9 +45,7 @@ class PriceCollectionProposal < Compras::Model
   def classification_by_lot(lot)
     items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot.id)
 
-    items_with_creditor.each_with_index do |item_with_creditor, index|
-      return index.succ if item_with_creditor.creditor_id.to_i == creditor_id.to_i
-    end
+    items_with_creditor.index { |item| item.creditor_id.to_i == creditor_id.to_i }.succ
   end
 
   def classification_by_item(proposal_item)
