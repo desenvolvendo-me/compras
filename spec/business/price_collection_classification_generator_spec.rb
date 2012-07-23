@@ -80,7 +80,7 @@ describe PriceCollectionClassificationGenerator do
     it "when type of calculation equals lowest global price" do
       price_collection.stub(:type_of_calculation => 'lowest_global_price')
 
-      proposal.should_receive(:classification).and_return(1)
+      proposal.should_receive(:global_classification).and_return(1)
 
       price_collection_classification_repository.should_receive(:create!)
 

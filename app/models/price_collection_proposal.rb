@@ -37,28 +37,22 @@ class PriceCollectionProposal < Compras::Model
     items.sum(&:total_price)
   end
 
-  def classification
+  def global_classification
     proposals = price_collection.price_collection_proposals.sort_by &:total_price
-
-    proposals.each_with_index do |proposal, index|
-      return index + 1 if proposal == self
-    end
+    proposals.index(self).succ
   end
 
   def classification_by_lot(lot)
     items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot.id)
 
     items_with_creditor.each_with_index do |item_with_creditor, index|
-      return index + 1 if item_with_creditor.creditor_id.to_i == creditor_id.to_i
+      return index.succ if item_with_creditor.creditor_id.to_i == creditor_id.to_i
     end
   end
 
   def classification_by_item(proposal_item)
     proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_lot_item)
-
-    proposal_items.each_with_index do |item, index|
-      return index + 1 if item == proposal_item
-    end
+    proposal_items.index(proposal_item).succ
   end
 
   def items_by_lot(lot)

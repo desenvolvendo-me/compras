@@ -33,7 +33,7 @@ class PriceCollectionClassificationGenerator
   def lowest_global_price(proposal)
     price_collection_classification_repository.create!(
       :total_value => proposal.total_price,
-      :classification => proposal.classification,
+      :classification => proposal.global_classification,
       :creditor => proposal.creditor,
       :classifiable => price_collection
     )
