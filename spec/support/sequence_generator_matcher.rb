@@ -18,7 +18,7 @@ module Shoulda
 
       class SequenceGeneratorMatcher < ValidationMatcher
         def by(sequence_group)
-          @sequence_group = sequence_group
+          @sequence_group = Array(sequence_group)
 
           self
         end
