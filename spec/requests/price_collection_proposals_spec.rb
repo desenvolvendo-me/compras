@@ -160,6 +160,7 @@ feature "PriceCollectionProposals" do
       page.should have_field 'Valor unitário', :with => '50,00'
       page.should have_field 'Valor total', :with => '500,00'
       page.should have_field 'Valor total do lote', :with => '500,00'
+      page.should have_field 'Quantidade', :with => '10'
     end
 
     scenario "I can not update other's proposals" do
