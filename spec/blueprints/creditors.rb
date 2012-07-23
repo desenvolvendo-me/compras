@@ -5,7 +5,6 @@ Creditor.blueprint(:sobrinho) do
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
   person { Person.make!(:sobrinho) }
-  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456" }
 end
@@ -17,7 +16,6 @@ Creditor.blueprint(:sobrinho_sa) do
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
   person { Person.make!(:sobrinho) }
-  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456" }
 end
@@ -29,7 +27,6 @@ Creditor.blueprint(:sobrinho_sa_without_email) do
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
   person { Person.make!(:sobrinho_without_email) }
-  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456" }
 end
@@ -41,7 +38,6 @@ Creditor.blueprint(:wenderson_sa) do
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
   person { Person.make!(:wenderson) }
-  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456789" }
 end
@@ -53,7 +49,6 @@ Creditor.blueprint(:wenderson_sa_with_user) do
   municipal_public_administration { false }
   occupation_classification { OccupationClassification.make!(:armed_forces) }
   person { Person.make!(:wenderson) }
-  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
   social_identification_number { "123456789" }
   user { User.make!(:wenderson) }
@@ -76,6 +71,5 @@ Creditor.blueprint(:mateus) do
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object, :number => 56789) ] }
   creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
   person { Person.make!(:mateus) }
-  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
   regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
 end

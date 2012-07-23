@@ -29,6 +29,7 @@ class RegistrationCadastralCertificate < Compras::Model
       :type => :date
     }, :allow_blank => true
   validates :fiscal_year, :mask => '9999', :allow_blank => true
+  validate :creditor_must_be_company
 
   orderize :fiscal_year, :id
   filterize
@@ -51,5 +52,13 @@ class RegistrationCadastralCertificate < Compras::Model
 
   def signatures_grouped
     signatures.in_groups_of(4, false)
+  end
+
+  protected
+
+  def creditor_must_be_company
+    return unless creditor
+
+    errors.add(:creditor, :invalid) unless creditor.company?
   end
 end

@@ -22,6 +22,30 @@ describe RegistrationCadastralCertificate do
     subject.to_s.should eq "1/2012"
   end
 
+  context 'validate creditor' do
+    before do
+      subject.stub(:creditor).and_return(creditor)
+    end
+
+    let :creditor do
+      double('Creditor')
+    end
+
+    it 'should not be valid with creditor that is not company' do
+      creditor.stub(:company?).and_return(false)
+
+      subject.valid?
+      subject.errors[:creditor].should_not be_empty
+    end
+
+    it 'should be valid with creditor that is company' do
+      creditor.stub(:company?).and_return(true)
+
+      subject.valid?
+      subject.errors[:creditor].should be_empty
+    end
+  end
+
   context 'validate registration_date related with today' do
     it { should allow_value(Date.current).for(:registration_date) }
 
