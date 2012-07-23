@@ -22,7 +22,7 @@ describe PurchaseSolicitationsHelper do
         with(:purchase_solicitation_id => resource.id).
         and_return('release_link')
 
-      helper.release_liberation_link.should eq '<a href="release_link">Liberar</a>'
+      helper.release_liberation_link.should eq '<a href="release_link" class="button primary">Liberar</a>'
     end
 
     it 'should return release link when released?' do
@@ -34,7 +34,7 @@ describe PurchaseSolicitationsHelper do
         with(:purchase_solicitation_id => resource.id, :id => resource.liberation_id).
         and_return('liberation_link')
 
-      helper.release_liberation_link.should eq '<a href="liberation_link">Liberação</a>'
+      helper.release_liberation_link.should eq '<a href="liberation_link" class="button primary">Liberação</a>'
     end
 
     it 'should return nil if is not released neither releasable' do
