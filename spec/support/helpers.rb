@@ -69,10 +69,6 @@ module Helpers
     end
   end
 
-  def close_dialog
-    page.find(:xpath, '(//a[contains(@class, "ui-dialog-titlebar-close")])[last()]').click
-  end
-
   def within_links
     within '.links' do
       yield
