@@ -11,7 +11,7 @@ class ExtraCreditMovimentType < Compras::Model
   validates :budget_allocation_id, :uniqueness => { :scope => :extra_credit_id , :allow_blank => true }
   validates :capability_id, :uniqueness => { :scope => :extra_credit_id, :allow_blank => true }
 
-  delegate :budget_allocation?, :subtraction?, :to => :moviment_type, :allow_nil => true
+  delegate :budget_allocation?, :subtract?, :to => :moviment_type, :allow_nil => true
   delegate :operation, :to => :moviment_type, :allow_nil => true
   delegate :real_amount, :to => :budget_allocation, :prefix => true, :allow_nil => true
 

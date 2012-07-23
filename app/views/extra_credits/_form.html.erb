@@ -27,9 +27,9 @@
       if ($(this).find('.destroy').val() == 'false' && !isNaN(value)) {
         var operation = $(this).find('.operation').val();
 
-        if (operation == '<%= MovimentTypeOperation::SUM %>') {
+        if (operation == '<%= MovimentTypeOperation::ADD %>') {
           supplement_total += value;
-        } else if (operation == '<%= MovimentTypeOperation::SUBTRACTION %>') {
+        } else if (operation == '<%= MovimentTypeOperation::SUBTRACT %>') {
           reduced_total += value;
         }
       }

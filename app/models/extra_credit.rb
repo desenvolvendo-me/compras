@@ -63,7 +63,7 @@ class ExtraCredit < Compras::Model
 
   def subtraction_item_value_cant_be_greater_than_budget_allocation(numeric_parser = ::I18n::Alchemy::NumericParser)
     extra_credit_moviment_types.each do |item|
-      next unless item.budget_allocation? && item.subtraction? && item.value && item.value > item.budget_allocation_real_amount
+      next unless item.budget_allocation? && item.subtract? && item.value && item.value > item.budget_allocation_real_amount
 
       item.errors.add(:value, :must_not_be_greater_than_budget_allocation_real_amount, :value => numeric_parser.localize(item.budget_allocation_real_amount))
       errors.add(:extra_credit_moviment_types, :invalid)
@@ -75,9 +75,9 @@ class ExtraCredit < Compras::Model
 
     extra_credit_moviment_types.each do |item|
       if item.moviment_type.present? && item.value.present?
-        if item.moviment_type.sum?
+        if item.moviment_type.add?
           self.supplement += item.value
-        else item.moviment_type.subtraction?
+        else item.moviment_type.subtract?
           self.reduced += item.value
         end
       end
