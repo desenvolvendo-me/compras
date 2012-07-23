@@ -12,7 +12,7 @@ feature "MovimentTypes" do
     click_link 'Criar Tipo de Movimento'
 
     fill_in 'Nome', :with => 'Adicionar pagamento'
-    select 'Soma', :from => 'Operação'
+    select 'Adicionar', :from => 'Operação'
     select 'Dotação', :from => 'Atributo'
     select 'Manual', :from => 'Fonte'
 
@@ -25,7 +25,7 @@ feature "MovimentTypes" do
     end
 
     page.should have_field 'Nome', :with => 'Adicionar pagamento'
-    page.should have_select 'Operação', :selected => 'Soma'
+    page.should have_select 'Operação', :selected => 'Adicionar'
     page.should have_select 'Atributo', :selected => 'Dotação'
     page.should have_select 'Fonte', :selected => 'Manual'
   end
@@ -39,8 +39,8 @@ feature "MovimentTypes" do
       click_link 'Adicionar dotação'
     end
 
-    fill_in 'Nome', :with => 'Subtrair recurso'
-    select 'Subtração', :from => 'Operação'
+    fill_in 'Nome', :with => 'Subtração recurso'
+    select 'Subtrair', :from => 'Operação'
     select 'Recurso', :from => 'Atributo'
     select 'Default', :from => 'Fonte'
 
@@ -49,11 +49,11 @@ feature "MovimentTypes" do
     page.should have_notice 'Tipo de Movimento editado com sucesso.'
 
     within_records do
-      click_link 'Subtrair recurso'
+      click_link 'Subtração recurso'
     end
 
-    page.should have_field 'Nome', :with => 'Subtrair recurso'
-    page.should have_select 'Operação', :selected => 'Subtração'
+    page.should have_field 'Nome', :with => 'Subtração recurso'
+    page.should have_select 'Operação', :selected => 'Subtrair'
     page.should have_select 'Atributo', :selected => 'Recurso'
     page.should have_select 'Fonte', :selected => 'Default'
   end

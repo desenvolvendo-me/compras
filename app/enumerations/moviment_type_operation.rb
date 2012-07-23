@@ -1,3 +1,3 @@
 class MovimentTypeOperation < EnumerateIt::Base
-  associate_values :sum, :subtraction
+  associate_values :add, :subtract
 end
