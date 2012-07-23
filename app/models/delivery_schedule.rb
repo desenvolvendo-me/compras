@@ -3,23 +3,9 @@ class DeliverySchedule < Compras::Model
 
   attr_readonly :sequence
 
+  auto_increment :sequence, :by => :contract_id
+
   has_enumeration_for :delivery_schedule_status
 
   belongs_to :contract
-
-  before_create :set_code
-
-  def next_code
-    last_code.succ
-  end
-
-  protected
-
-  def set_code
-    self.sequence = next_code
-  end
-
-  def last_code
-    self.class.where { self.contract_id.eq(contract_id) }.maximum(:sequence).to_i
-  end
 end
