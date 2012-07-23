@@ -134,7 +134,7 @@ module Helpers
   end
 
   def within_dialog
-    within ".ui-dialog" do
+    within :xpath, '(//div[contains(@class, "ui-dialog")])[last()]' do
       yield
     end
   end
