@@ -3,6 +3,8 @@ class BudgetRevenue < Compras::Model
 
   attr_readonly :code
 
+  auto_increment :code, :by => :descriptor_id
+
   has_enumeration_for :kind, :with => BudgetRevenueKind, :create_helpers => true
 
   belongs_to :descriptor
@@ -18,24 +20,10 @@ class BudgetRevenue < Compras::Model
   validates :revenue_nature_id, :uniqueness => true, :allow_blank => true
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
 
-  before_create :set_code
-
   orderize :code
   filterize
 
   def to_s
     "#{code}/#{year}"
-  end
-
-  private
-
-  def set_code
-    self.code = last_code.succ
-  end
-
-  def last_code
-    self.class.where { |budget_revenue|
-      budget_revenue.descriptor_id.eq(descriptor_id)
-    }.maximum(:code).to_i
   end
 end

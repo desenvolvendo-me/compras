@@ -17,6 +17,8 @@ describe BudgetRevenue do
   it { should validate_presence_of :capability }
   it { should validate_presence_of :kind }
 
+  it { should auto_increment(:code).by(:descriptor_id) }
+
   it 'should validate presence of value if kind is average' do
     subject.stub(:divide?).and_return(true)
     subject.should validate_presence_of :value
@@ -25,18 +27,5 @@ describe BudgetRevenue do
   it 'should not validate presence of value if kind is average' do
     subject.stub(:divide?).and_return(false)
     subject.should_not validate_presence_of :value
-  end
-
-  context 'auto set code' do
-    it 'should set 1 as code when have not other' do
-      subject.run_callbacks(:create)
-      subject.code.should eq 1
-    end
-
-    it 'should set 2 as code when have other' do
-      subject.stub(:last_code).and_return(1)
-      subject.run_callbacks(:create)
-      subject.code.should eq 2
-    end
   end
 end
