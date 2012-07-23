@@ -13,6 +13,7 @@ describe PurchaseSolicitationItemGroup do
   it { should belong_to(:material) }
 
   it {should validate_presence_of :material }
+  it {should validate_presence_of(:purchase_solicitations).with_message("deve ter ao menos uma solicitação de compras") }
 
   it 'should be material - count as #to_s method' do
     subject.stub(:count_groups).and_return(5)
