@@ -44,23 +44,40 @@
     $('#purchase_solicitation_item_group_purchase_solicitations').attr('disabled', value);
   };
 
-  function filterModalUrl(){
+  $('#purchase_solicitation_item_group_purchase_solicitations').focus(purchaseSolicitationModalUrl);
+
+  function purchaseSolicitationModalUrl(){
+    var objectPurchaseSolicitationIds = '<%= f.object.purchase_solicitation_ids.join(",") %>';
+    objectPurchaseSolicitationIds = objectPurchaseSolicitationIds.split(',');
+
+    var tableItems = [];
+    var deletedItems = [];
+
+    $('table.records td').children('input').each(function(index, item) {
+      tableItems.push($(item).val());
+    });
+
+    $(objectPurchaseSolicitationIds).each(function(index, item) {
+      if (item != null && item.length > 0 && $.inArray(item, tableItems) == -1) {
+        deletedItems.push(item);
+      }
+    });
+
     var url = "<%= modal_purchase_solicitations_path %>?",
     params = {
-      by_material_id: $('#purchase_solicitation_item_group_material_id').val()
+      by_material_id: $('#purchase_solicitation_item_group_material_id').val(),
+      by_pending_or_ids: deletedItems,
+      except_ids: tableItems
     };
 
     url += jQuery.param(params);
     $("#purchase_solicitation_item_group_purchase_solicitations").attr('data-modal-url', url); 
   };
 
-
   $('#purchase_solicitation_item_group_material_id').change( function(){
-    filterModalUrl();
     enableDisablePurchaseSolicitation();
     $('.purchase_solicitation_item_group_purchase_solicitations_records').html('');
   });
 
-  filterModalUrl();
   enableDisablePurchaseSolicitation();
 </script>

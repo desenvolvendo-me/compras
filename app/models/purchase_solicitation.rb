@@ -42,8 +42,13 @@ class PurchaseSolicitation < Compras::Model
   filterize
 
   scope :by_material_id, lambda { |material_id| joins { items }.where {
-    items.material_id.eq(material_id) &
-    items.status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) }}
+    items.material_id.eq(material_id) }}
+
+  scope :by_pending_or_ids, lambda { |ids| joins { items }.where {
+    (items.status.eq(PurchaseSolicitationBudgetAllocationItemStatus::PENDING) |
+     id.in(ids) )}}
+
+  scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"

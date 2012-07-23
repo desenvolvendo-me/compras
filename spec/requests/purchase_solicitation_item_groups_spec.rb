@@ -51,6 +51,119 @@ feature "PurchaseSolicitationItemGroups" do
     end
   end
 
+  scenario 'validating modal of purchase solicitation' do
+    PurchaseSolicitation.make!(:reparo)
+    PurchaseSolicitation.make!(:reparo_2013)
+
+    navigate_through 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Criar Agrupamento de Item de Solicitação de Compra'
+
+    fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+    page.execute_script 'purchaseSolicitationModalUrl();'
+
+    within_modal 'Solicitação de compra' do
+
+      click_button 'Pesquisar'
+
+      wait_until(2) do
+        page.should have_content '2012'
+      end
+
+      page.should have_css 'table.records tbody tr', :count => 2
+
+      fill_in 'Ano', :with => '2012'
+
+      click_button 'Pesquisar'
+
+      click_record '2012'
+    end
+
+    page.execute_script 'purchaseSolicitationModalUrl();'
+
+    # asserting that a purchase solicitation cannot be seletected twice
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      wait_until(2) do
+        page.should have_content '2013'
+      end
+
+      page.should have_css 'table.records tbody tr', :count => 1
+
+      fill_in 'Ano', :with => '2013'
+
+      click_button 'Pesquisar'
+
+      click_record '2013'
+    end
+
+    page.execute_script 'purchaseSolicitationModalUrl();'
+
+    # asserting that a purchase solicitation cannot be seletected twice
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      page.should_not have_css 'table.records tbody tr'
+
+      click_link 'Cancelar'
+    end
+
+    click_button 'Salvar'
+
+    click_link '01.01.00001 - Antivirus - 1'
+
+    page.execute_script 'purchaseSolicitationModalUrl();'
+
+    # asserting that a purchase solicitation cannot be seletected twice
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      page.should_not have_css 'table.records tbody tr'
+
+      click_link 'Cancelar'
+    end
+
+    within 'table.records' do
+      click_button 'Remover'
+    end
+
+    page.execute_script 'purchaseSolicitationModalUrl();'
+
+    # asserting that a purchase solicitation removed can be seletected again
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      wait_until(2) do
+        page.should have_content '2012'
+      end
+
+      page.should have_css 'table.records tbody tr', :count => 1
+
+      fill_in 'Ano', :with => '2012'
+
+      click_button 'Pesquisar'
+
+      click_record '2012'
+    end
+
+    within 'table.records' do
+      click_button 'Remover'
+      click_button 'Remover'
+    end
+
+    page.execute_script 'purchaseSolicitationModalUrl();'
+
+    # asserting that a removing all purchase solicitation, all can be seletect again
+    within_modal 'Solicitação de compra' do
+
+      click_button 'Pesquisar'
+
+      page.should have_css 'table.records tbody tr', :count => 2
+    end
+  end
+
   scenario 'destroy an existent purchase_solicitation_item_group' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 

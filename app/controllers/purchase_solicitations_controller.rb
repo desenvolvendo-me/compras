@@ -1,5 +1,7 @@
 class PurchaseSolicitationsController < CrudController
   has_scope :by_material_id
+  has_scope :by_pending_or_ids, :allow_blank => true, :type => :array
+  has_scope :except_ids, :type => :array
 
   def new
     object = build_resource
