@@ -820,7 +820,7 @@ feature "Pledges" do
   scenario 'when create a new pledge with a descriptor that not exist the code should restart at 1' do
     Pledge.make!(:empenho)
     Descriptor.make!(:detran_2011)
-ExpenseNature.make!(:compra_de_material)
+    ExpenseNature.make!(:compra_de_material)
 
     navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
 
