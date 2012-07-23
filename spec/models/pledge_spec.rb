@@ -20,6 +20,8 @@ describe Pledge do
   it { should belong_to :licitation_process }
   it { should belong_to :expense_nature }
 
+  it { should auto_increment(:code).by(:descriptor_id) }
+
   it { should have_many(:pledge_items).dependent(:destroy).order(:id) }
   it { should have_many(:pledge_cancellations).dependent(:restrict) }
   it { should have_many(:pledge_liquidations).dependent(:restrict) }
@@ -108,18 +110,5 @@ describe Pledge do
     subject.valid?
 
     subject.errors.messages[:items_total_value].should include "não pode ser superior ao valor do empenho"
-  end
-
-  context 'auto set code' do
-    it 'should set 1 as code when have not other' do
-      subject.run_callbacks(:create)
-      subject.code.should eq 1
-    end
-
-    it 'should set 2 as code when have other' do
-      subject.stub(:last_code).and_return(1)
-      subject.run_callbacks(:create)
-      subject.code.should eq 2
-    end
   end
 end

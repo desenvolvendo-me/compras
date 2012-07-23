@@ -8,6 +8,8 @@ class Pledge < Compras::Model
 
   attr_readonly :code
 
+  auto_increment :code, :by => :descriptor_id
+
   attr_accessor :licitation, :process, :item_replicated_value, :parcel_replicated_value
 
   attr_modal :id, :descriptor_id, :emission_date, :management_unit_id,
@@ -66,8 +68,6 @@ class Pledge < Compras::Model
       }
   end
 
-  before_create :set_code
-
   orderize :emission_date
   filterize accessible_attributes + [:id]
 
@@ -95,19 +95,7 @@ class Pledge < Compras::Model
     pledge_cancellations.sum(:value)
   end
 
-  def next_code
-    last_code.succ
-  end
-
   protected
-
-  def set_code
-    self.code = next_code
-  end
-
-  def last_code
-    self.class.where { self.descriptor_id.eq(descriptor_id) }.maximum(:code).to_i
-  end
 
   def value_should_not_be_greater_than_budget_allocation_real_amount
     return unless value && budget_allocation_real_amount

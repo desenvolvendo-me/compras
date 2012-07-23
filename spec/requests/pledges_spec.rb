@@ -783,7 +783,7 @@ feature "Pledges" do
     click_link 'Criar Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
       fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
       fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
@@ -808,7 +808,7 @@ feature "Pledges" do
     click_button 'Salvar'
 
     within_records do
-      click_link '2 - Secretaria de Educação/2012'
+      click_link '2 - Detran/2011'
     end
 
     within_tab 'Principal' do
