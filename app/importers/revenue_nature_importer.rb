@@ -30,7 +30,7 @@ class RevenueNatureImporter < Importer
     subcategory_code = attributes['code'][1]
     source_code      = attributes['code'][2]
     rubric_code      = attributes['code'][3]
-    classification   = attributes['code'][4..7]
+    classification   = [ attributes['code'][4..5], attributes['code'][6..7] ].join('.')
 
     category    = revenue_category_repository.where(:code => category_code).first
     subcategory = revenue_subcategory_repository.where(:code => subcategory_code, :revenue_category_id => category.try(:id)).first
