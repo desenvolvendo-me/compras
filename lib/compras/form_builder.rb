@@ -52,7 +52,7 @@ module Compras
       options[:class]     = "#{options[:class].join(" ")} negative".strip
       options[:href]    ||= template.resource_url
       options[:method]  ||= :delete
-      options[:confirm] ||= template.translate('.are_you_sure', :cascade => true, :resource => object)
+      options[:data]    ||= { :confirm => template.translate('.are_you_sure', :cascade => true, :resource => object) }
       options[:id]      ||= "#{object_name}_destroy"
 
       template.link_to value, options.delete(:href), options
