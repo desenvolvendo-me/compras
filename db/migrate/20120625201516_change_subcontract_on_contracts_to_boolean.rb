@@ -7,7 +7,7 @@ class ChangeSubcontractOnContractsToBoolean < ActiveRecord::Migration
     add_column :compras_contracts, :subcontracting, :boolean
 
     Contract.find_each do |contract|
-      contract.update_attribute :subcontracting, contract.subcontracting_aux == "yes"
+      contract.update_column :subcontracting, contract.subcontracting_aux == "yes"
     end
 
     remove_column :compras_contracts, :subcontracting_aux

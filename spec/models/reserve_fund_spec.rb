@@ -62,7 +62,7 @@ describe ReserveFund do
 
   describe '#annul!' do
     it 'update the status attribute to annulled' do
-      subject.should_receive(:update_attribute).with(:status, 'annulled')
+      subject.should_receive(:update_column).with(:status, 'annulled')
 
       subject.annul!
     end

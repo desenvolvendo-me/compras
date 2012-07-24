@@ -54,7 +54,7 @@ class ReserveFund < Compras::Model
   end
 
   def annul!
-    update_attribute :status, ReserveFundStatus::ANNULLED
+    update_column :status, ReserveFundStatus::ANNULLED
   end
 
   protected

@@ -42,7 +42,7 @@ class PledgeLiquidation < Compras::Model
   end
 
   def annul!
-    update_attribute :status, PledgeLiquidationStatus::ANNULLED
+    update_column :status, PledgeLiquidationStatus::ANNULLED
   end
 
   def to_s

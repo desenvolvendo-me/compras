@@ -113,7 +113,7 @@ describe PriceCollection do
 
   describe '#annul!' do
     it 'should change the subject status to annuled' do
-      subject.should_receive(:update_attribute).with(:status, PriceCollectionStatus::ANNULLED)
+      subject.should_receive(:update_column).with(:status, PriceCollectionStatus::ANNULLED)
 
       subject.annul!
     end

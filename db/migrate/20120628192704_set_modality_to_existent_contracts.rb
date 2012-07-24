@@ -5,7 +5,7 @@ class SetModalityToExistentContracts < ActiveRecord::Migration
     Contract.find_each do |contract|
       modality = contract.direct_purchase_id ? 'direct_purchase' : 'licitation_process'
 
-      contract.update_attribute :modality, modality
+      contract.update_column :modality, modality
     end
   end
 end

@@ -59,11 +59,11 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def annul!
-    update_attribute :service_status, PurchaseSolicitationServiceStatus::ANNULLED
+    update_column :service_status, PurchaseSolicitationServiceStatus::ANNULLED
   end
 
   def liberate!
-    update_attribute :service_status, PurchaseSolicitationServiceStatus::LIBERATED
+    update_column :service_status, PurchaseSolicitationServiceStatus::LIBERATED
   end
 
   def quantity_by_material(material_id)

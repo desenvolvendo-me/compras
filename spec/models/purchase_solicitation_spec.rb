@@ -74,7 +74,7 @@ describe PurchaseSolicitation do
 
   describe '#annul!' do
     it 'should updates the service status to annulled' do
-      subject.should_receive(:update_attribute).with(:service_status, PurchaseSolicitationServiceStatus::ANNULLED)
+      subject.should_receive(:update_column).with(:service_status, PurchaseSolicitationServiceStatus::ANNULLED)
 
       subject.annul!
     end
@@ -87,7 +87,7 @@ describe PurchaseSolicitation do
 
     it 'should updates the service status to annulled' do
       subject.stub(:liberation).and_return(liberation)
-      subject.should_receive(:update_attribute).with(:service_status, PurchaseSolicitationServiceStatus::LIBERATED)
+      subject.should_receive(:update_column).with(:service_status, PurchaseSolicitationServiceStatus::LIBERATED)
 
       subject.liberate!
     end

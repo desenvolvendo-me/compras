@@ -57,7 +57,7 @@ class AdministrativeProcess < Compras::Model
   end
 
   def update_status(new_status)
-    update_attribute :status, new_status
+    update_column :status, new_status
   end
 
   def allow_licitation_process?

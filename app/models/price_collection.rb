@@ -68,7 +68,7 @@ class PriceCollection < Compras::Model
   end
 
   def annul!
-    update_attribute :status, PriceCollectionStatus::ANNULLED
+    update_column :status, PriceCollectionStatus::ANNULLED
   end
 
   def all_price_collection_classifications

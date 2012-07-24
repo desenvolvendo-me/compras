@@ -27,7 +27,7 @@ class OccupationClassificationImporter < Importer
         nil
       end
 
-      occupation.update_attribute(:parent_id, parent.id) if parent.present?
+      occupation.update_column(:parent_id, parent.id) if parent.present?
     end
   end
 
