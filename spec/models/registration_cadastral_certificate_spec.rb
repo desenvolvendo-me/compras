@@ -103,7 +103,7 @@ describe RegistrationCadastralCertificate do
         signature_configuration_item2,
         signature_configuration_item3,
         signature_configuration_item4,
-        signature_configuration_item5,
+        signature_configuration_item5
       ]
     end
 
