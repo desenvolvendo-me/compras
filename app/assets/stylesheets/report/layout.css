@@ -11,6 +11,12 @@ a {
   text-decoration: underline;
 }
 
+hr {
+  background: #333;
+  border: 0;
+  height: 1px;
+}
+
 #container {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
