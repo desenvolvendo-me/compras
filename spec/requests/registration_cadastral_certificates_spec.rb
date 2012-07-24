@@ -24,7 +24,7 @@ feature "RegistrationCadastralCertificates" do
     page.should have_content I18n.l(Date.yesterday)
     page.should have_content I18n.l(Date.current)
 
-    within '#dados-gerais' do
+    within '#general-data' do
       page.should have_content 'Nohup'
       page.should have_content '1'
       page.should have_content 'Rua Girassol, 9874 - São Francisco'
@@ -42,7 +42,7 @@ feature "RegistrationCadastralCertificates" do
 
     page.should have_content 'RAMO DE ATIVIDADE'
 
-    within '#ramo-de-atividade' do
+    within '#branch-activity' do
       page.should have_content '4712100'
       page.should have_content 'Comércio varejista de mercadorias em geral'
       page.should have_content '7739099'
@@ -51,7 +51,7 @@ feature "RegistrationCadastralCertificates" do
 
     page.should have_content 'DOCUMENTAÇÃO'
 
-    within '#documentacao' do
+    within '#documentation' do
       page.should have_content 'Fiscal'
       page.should have_content '123456'
       page.should have_content I18n.l(Date.current)
