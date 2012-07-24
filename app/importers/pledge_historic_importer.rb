@@ -1,19 +1,15 @@
 class PledgeHistoricImporter < Importer
-  attr_accessor :repository, :source_repository
+  attr_accessor :repository, :default_source
 
-  def initialize(repository = PledgeHistoric, source_repository = Source)
+  def initialize(repository = PledgeHistoric, default_source = Source::DEFAULT)
     self.repository = repository
-    self.source_repository = source_repository
+    self.default_source = default_source
   end
 
   protected
 
   def normalize_attributes(attributes)
     attributes.merge('source' => default_source)
-  end
-
-  def default_source
-    source_repository.value_for('DEFAULT')
   end
 
   def file

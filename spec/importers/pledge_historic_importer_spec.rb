@@ -8,11 +8,10 @@ describe PledgeHistoricImporter do
   end
 
   before do
-    source.stub(:value_for).with('DEFAULT').and_return('default')
   end
 
   let :source do
-    double('Source')
+    'default'
   end
 
   let :null_repository do
