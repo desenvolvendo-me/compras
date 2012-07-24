@@ -5,7 +5,7 @@ env.roledefs["staging"] = ["compras@nobesistemas.com.br"]
 env.repository = "git@github.com:nohupbrasil/compras.git"
 env.path = "$HOME/compras"
 env.shared_path = "$HOME/shared"
-env.symlinks = ["config/database.yml", "config/newrelic.yml", "config/initializers/raven.rb", "config/initializers/mailgun.rb"]
+env.symlinks = ["config/database.yml", "config/initializers/raven.rb", "config/initializers/mailgun.rb"]
 
 " deploy "
 def setup():
