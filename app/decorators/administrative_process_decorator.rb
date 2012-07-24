@@ -38,4 +38,8 @@ class AdministrativeProcessDecorator
   def date
     localize super if super
   end
+
+  def signatures_grouped
+    component.signatures.in_groups_of(4, false)
+  end
 end

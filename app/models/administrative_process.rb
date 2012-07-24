@@ -56,10 +56,6 @@ class AdministrativeProcess < Compras::Model
     signature_configuration_item.all_by_configuration_report(SignatureReport::ADMINISTRATIVE_PROCESSES)
   end
 
-  def signatures_grouped
-    signatures.in_groups_of(4, false)
-  end
-
   def update_status(new_status)
     update_attribute :status, new_status
   end

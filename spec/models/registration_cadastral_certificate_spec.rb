@@ -117,20 +117,5 @@ describe RegistrationCadastralCertificate do
                                          and_return(signature_configuration_items)
       subject.signatures(signature_configuration_item_store).should eq signature_configuration_items
     end
-
-    it "should group signatures" do
-      subject.stub(:signatures => signature_configuration_items)
-      subject.signatures_grouped.should eq [
-        [
-          signature_configuration_item1,
-          signature_configuration_item2,
-          signature_configuration_item3,
-          signature_configuration_item4
-        ],
-        [
-          signature_configuration_item5
-        ]
-      ]
-    end
   end
 end

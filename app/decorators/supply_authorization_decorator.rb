@@ -31,4 +31,8 @@ class SupplyAuthorizationDecorator
       component.period_unit_humanize
     end
   end
+
+  def signatures_grouped
+    component.signatures.in_groups_of(4, false)
+  end
 end
