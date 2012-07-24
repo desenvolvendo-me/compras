@@ -85,7 +85,7 @@ describe PriceCollectionsController do
       it 'should generate users for any creditor' do
         CreditorUserCreator.any_instance.should_receive(:generate)
 
-        put :update
+        put :update, :id => 1
       end
     end
 
@@ -97,7 +97,7 @@ describe PriceCollectionsController do
       it 'should not generate users for any creditor' do
         CreditorUserCreator.any_instance.should_not_receive(:generate)
 
-        put :update
+        put :update, :id => 1
       end
     end
 
@@ -105,7 +105,7 @@ describe PriceCollectionsController do
       it 'should raises a unauthorized error' do
         price_collection.stub(:annulled?).and_return true
 
-        put :update
+        put :update, :id => 1
 
         response.code.should eq '401'
         response.body.should =~ /Você não tem acesso a essa página/

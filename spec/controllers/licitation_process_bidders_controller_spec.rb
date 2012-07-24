@@ -83,9 +83,10 @@ describe LicitationProcessBiddersController do
     end
 
     it 'should redirect to 401 when can not update a bidder' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
+      bidder = licitation_process.licitation_process_bidders.first
 
-      put :update, :licitation_process_id => licitation_process.id
+      put :update, :id => bidder.id
 
       response.code.should eq '401'
       response.body.should =~ /Você não tem acesso a essa página/
@@ -94,9 +95,10 @@ describe LicitationProcessBiddersController do
 
   describe 'DELETE #destroy' do
     it 'should redirect to 401 when can not destroy a bidder' do
-      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+      licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
+      bidder = licitation_process.licitation_process_bidders.first
 
-      delete :destroy, :licitation_process_id => licitation_process.id
+      delete :destroy, :id => bidder.id
 
       response.code.should eq '401'
       response.body.should =~ /Você não tem acesso a essa página/

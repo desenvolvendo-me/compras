@@ -19,7 +19,7 @@ describe PriceCollectionProposalsController do
     it 'should not be acessible when the user has not access to update them' do
       proposal.should_receive(:editable_by?).and_return false
 
-      put :update
+      put :update, :id => 1
 
       response.code.should eq '401'
       response.body.should =~ /Você não tem acesso a essa página/
@@ -30,7 +30,7 @@ describe PriceCollectionProposalsController do
       proposal.stub(:update_attributes)
       proposal.should_receive(:editable_by?).and_return true
 
-      put :update
+      put :update, :id => 1
 
       #update always redirect :)
       response.code.should eq '302'

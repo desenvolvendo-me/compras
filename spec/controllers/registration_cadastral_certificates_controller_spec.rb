@@ -41,7 +41,7 @@ describe RegistrationCadastralCertificatesController do
 
   describe 'GET #show' do
     it 'should render report layout' do
-      get :show
+      get :show, :id => 1
 
       response.should render_template("layouts/report")
     end

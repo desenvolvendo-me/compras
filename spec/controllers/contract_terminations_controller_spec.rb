@@ -58,7 +58,7 @@ describe ContractTerminationsController do
       ContractTermination.any_instance.stub(:contract_id).and_return contract.id
       ContractTermination.stub(:find).and_return ContractTermination.new
 
-      put :update
+      put :update, :id => 1
     end
 
     it 'should redirect to the index path passing the contract_id' do
