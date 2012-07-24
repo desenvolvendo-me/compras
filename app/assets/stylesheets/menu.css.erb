@@ -35,14 +35,14 @@
   vertical-align: middle;
 }
 
-#menu li:active > a, #menu li:hover > a, #menu li.active > a {
+#menu li.hover, #menu li.active > a {
   background: url(<%= image_path 'menu-active-left.gif' %>) left top no-repeat,
               url(<%= image_path 'menu-active-right.gif' %>) right top no-repeat,
               #FFF;
   color: #37638E;
 }
 
-#menu li:active > ul, #menu li:hover > ul, #menu li.active > ul {
+#menu li.hover, #menu li.active > ul {
   display: block;
 }
 
@@ -83,7 +83,7 @@
   margin-right: 0;
 }
 
-#menu li li:active > a, #menu li li:hover > a, #menu li.active > a {
+#menu li li.hover, #menu li.active > a {
   background: #FEFFE1;
   background: -moz-linear-gradient(#FDFEF6, #FEFFE1);
   background: -webkit-linear-gradient(#FDFEF6, #FEFFE1);

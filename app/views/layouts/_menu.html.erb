@@ -1,15 +1,1 @@
 <%= render_menu %>
-
-<script>
-  $("#menu li").click(function (event) {
-    $(this).addClass("active");
-
-    if ($(event.target).is("a[href=#]")) {
-      event.preventDefault();
-    }
-  });
-
-  $("#menu li").mouseout(function () {
-    $(this).removeClass("active");
-  });
-</script>

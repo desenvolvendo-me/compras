@@ -6,6 +6,7 @@
 //= require jquery.masked_input
 //= require jquery.mustache
 //= require jquery.price_format
+//= require jquery.superfish
 //= require jquery.singlemask
 //= require simple_form.datepicker_input
 //= require simple_form.decimal_input
@@ -17,6 +18,7 @@
 //= require link.modal
 //= require rails
 //= require compras
+//= require menu
 //= require filter
 //= require currency_manipulation
 //= require date
