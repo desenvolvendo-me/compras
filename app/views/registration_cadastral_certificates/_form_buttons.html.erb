@@ -1,9 +1,9 @@
 <div class="buttons">
-  <%= f.button :destroy if f.object.persisted? %>
   <%= f.button :submit %>
 
   <% if f.object.persisted? %>
-      <%= link_to "Imprimir certificado de registro cadastral", resource_url, :class => 'clear button neutral' %>
+    <%= f.button :destroy %>
+    <%= link_to "Imprimir certificado de registro cadastral", resource_url, :class => 'clear button neutral' %>
   <% end %>
 
   <%= f.button :cancel, :href => registration_cadastral_certificates_path(:creditor_id => resource.creditor_id) %>
