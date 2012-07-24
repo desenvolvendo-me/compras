@@ -4,14 +4,7 @@ require 'app/importers/pledge_historic_importer'
 
 describe PledgeHistoricImporter do
   subject do
-    PledgeHistoricImporter.new(null_repository, source)
-  end
-
-  before do
-  end
-
-  let :source do
-    'default'
+    PledgeHistoricImporter.new(null_repository, 'default')
   end
 
   let :null_repository do
