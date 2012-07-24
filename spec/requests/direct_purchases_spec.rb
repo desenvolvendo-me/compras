@@ -210,7 +210,7 @@ feature "DirectPurchases" do
 
     click_link 'Imprimir autorização de fornecimento'
 
-    page.should have_content 'Autorização de Fornecimento'
+    page.should have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
     page.should have_content "#{direct_purchase.id}/2012"
     page.should have_content '01/12/2012'
     page.should have_content 'Wenderson Malheiros'
@@ -244,7 +244,7 @@ feature "DirectPurchases" do
 
     click_button 'Gerar autorização de fornecimento'
 
-    page.should have_content 'Autorização de Fornecimento'
+    page.should have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
     page.should have_content "#{direct_purchase.id}/2012"
     page.should have_content '01/12/2012'
     page.should have_content 'Wenderson Malheiros'
