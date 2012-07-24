@@ -17,8 +17,8 @@ def setup():
     _compile_assets()
     unicorn_start()
 
-def deploy():
-    _update_code()
+def deploy(branch = "master"):
+    _update_code(branch)
     _bundle_gems()
     _make_symlinks()
     _migrate_database()
@@ -50,8 +50,9 @@ def _make_symlinks():
 def _create_database():
     run("cd %(path)s && bundle exec rake db:create RAILS_ENV=staging" % env)
 
-def _update_code():
-    run("cd %(path)s && git fetch origin && git reset --hard origin/master" % env)
+def _update_code(branch):
+    env.branch = branch
+    run("cd %(path)s && git fetch origin && git reset --hard %(branch)s" % env)
 
 def _compile_assets():
     run("cd %(path)s && bundle exec rake assets:precompile RAILS_ENV=staging" % env)
