@@ -1,6 +1,6 @@
 class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   attr_accessible :purchase_solicitation_budget_allocation_id, :material_id
-  attr_accessible :brand, :quantity, :unit_price
+  attr_accessible :brand, :quantity, :unit_price, :status
 
   attr_accessor :order
 
