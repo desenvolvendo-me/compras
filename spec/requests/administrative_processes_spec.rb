@@ -16,9 +16,9 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    page.should be_on_tab 'Dados gerais'
+    page.should be_on_tab 'Principal'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Status do processo administrativo'
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
@@ -48,7 +48,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Processo'
       page.should have_field 'Process', :with => '1'
       page.should have_disabled_field 'Ano'
@@ -81,7 +81,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Processo'
       page.should have_disabled_field 'Ano'
       page.should have_disabled_field 'Data do processo'
@@ -172,7 +172,7 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Status do processo administrativo'
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
@@ -217,7 +217,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Status do processo administrativo'
       page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
@@ -242,7 +242,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Processo'
       page.should have_field 'Process', :with => '1'
       page.should have_disabled_field 'Ano'
