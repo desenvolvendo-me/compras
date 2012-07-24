@@ -3,6 +3,7 @@ PurchaseSolicitationItemGroup.blueprint(:antivirus) do
   purchase_solicitation_item_group_purchase_solicitations {
     [ PurchaseSolicitationItemGroupPurchaseSolicitation.make(:reparo, :purchase_solicitation_item_group => object) ]
   }
+  purchase_solicitations { [PurchaseSolicitation.make!(:reparo)] }
 end
 
 PurchaseSolicitationItemGroup.blueprint(:reparo_2013) do
