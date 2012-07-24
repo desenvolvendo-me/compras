@@ -1,7 +1,20 @@
-table.records tr:nth-child(even) td {
-  background-color: #FCFCFC;
+table.records {
+  width: 100%;
 }
 
-table.records.black{
+table.records td, table.records th {
+  border: 0;
+  padding: 1em;
+}
+
+table.records th {
+  text-align: left;
+}
+
+table.records tr:nth-child(even) td {
+  background-color: #F0F0F0;
+}
+
+table.records.black {
   color: #000;
 }
