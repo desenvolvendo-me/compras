@@ -74,12 +74,12 @@ class ExtraCredit < Compras::Model
     self.supplement, self.reduced = 0.0, 0.0
 
     extra_credit_moviment_types.each do |item|
-      if item.moviment_type.present? && item.value.present?
-        if item.moviment_type.add?
-          self.supplement += item.value
-        elsif item.moviment_type.subtract?
-          self.reduced += item.value
-        end
+      next unless item.moviment_type.present? && item.value.present?
+
+      if item.moviment_type.add?
+        self.supplement += item.value
+      elsif item.moviment_type.subtract?
+        self.reduced += item.value
       end
     end
   end
