@@ -36,7 +36,7 @@ class ExtraCredit < Compras::Model
     }
   end
 
-  before_validation :save_total
+  before_validation :set_total
 
   orderize :id
   filterize
@@ -70,7 +70,7 @@ class ExtraCredit < Compras::Model
     end
   end
 
-  def save_total
+  def set_total
     self.supplement, self.reduced = 0.0, 0.0
 
     extra_credit_moviment_types.each do |item|
