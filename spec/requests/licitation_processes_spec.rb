@@ -42,7 +42,7 @@ feature "LicitationProcesses" do
 
     page.should_not have_link 'Publicações'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Processo'
       page.should have_disabled_field 'Modalidade'
       page.should have_disabled_field 'Tipo de objeto'
@@ -116,7 +116,7 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Processo'
       page.should have_disabled_field 'Ano'
 
@@ -203,7 +203,7 @@ feature "LicitationProcesses" do
 
     page.should_not have_link 'Publicações'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
       select 'Menor preço por lote', :from => 'Tipo da apuração'
 
@@ -234,7 +234,7 @@ feature "LicitationProcesses" do
 
     page.should have_link 'Publicações'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       fill_in 'Data do processo', :with => '21/03/2013'
       select 'Estimativo', :from => 'Tipo de empenho'
       select 'Menor preço global', :from => 'Tipo da apuração'
@@ -286,7 +286,7 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Data do processo', :with => '21/03/2013'
       page.should have_field 'Processo administrativo', :with => '1/2012'
       page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
@@ -345,7 +345,7 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Processo'
 
       fill_in 'Ano', :with => '2013'
@@ -377,7 +377,7 @@ feature "LicitationProcesses" do
 
     click_link "Editar processo licitatório"
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Processo', :with => last_licitation_process.process.succ.to_s
       page.should have_field 'Número da licitação', :with => last_licitation_process.licitation_number.succ.to_s
     end
@@ -542,7 +542,7 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       fill_in 'Data da abertura dos envelopes', :with => "#{I18n.l(Date.current)}"
     end
 
@@ -741,7 +741,7 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Ano', :with => "#{Date.current.year}"
       page.should have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
       page.should have_field 'Processo administrativo', :with => "1/2012"
@@ -762,7 +762,7 @@ feature "LicitationProcesses" do
 
     click_link 'Cancelar'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Processo', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data do processo', :with => '07/03/2012'
@@ -809,7 +809,7 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       select 'Global', :from => 'Tipo de empenho'
 
       select 'Menor preço global', :from => 'Tipo da apuração'
