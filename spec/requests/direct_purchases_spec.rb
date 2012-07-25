@@ -24,7 +24,7 @@ feature "DirectPurchases" do
 
     page.should have_content 'Gerar Compra Direta'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Ano', :with => "#{Date.current.year}"
 
       fill_in 'Ano', :with => '2012'
@@ -82,7 +82,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Compra', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da compra', :with => '19/03/2012'
@@ -127,7 +127,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Compra'
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
@@ -164,7 +164,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Compra', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da compra', :with => '19/03/2012'
@@ -295,7 +295,7 @@ feature "DirectPurchases" do
 
     click_link 'Gerar Compra Direta'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
