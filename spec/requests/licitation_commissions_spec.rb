@@ -15,7 +15,7 @@ feature "LicitationCommissions" do
 
     click_link 'Criar Comissão de Licitação'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       select 'Especial', :from => 'Tipo de comissão'
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
@@ -56,7 +56,7 @@ feature "LicitationCommissions" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_select 'Tipo de comissão', :selected => 'Especial'
       page.should have_field 'Data da nomeação', :with => '20/03/2012'
       page.should have_field 'Data da expiração', :with => '22/03/2012'
@@ -90,7 +90,7 @@ feature "LicitationCommissions" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       select 'Pregão', :from => 'Tipo de comissão'
 
       fill_modal 'Ato regulamentador', :with => '8901', :field => 'Número'
@@ -138,7 +138,7 @@ feature "LicitationCommissions" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_select 'Tipo de comissão', :selected => 'Pregão'
       page.should have_field 'Data da nomeação', :with => '20/03/2013'
       page.should have_field 'Data da expiração', :with => '22/03/2013'
@@ -174,7 +174,7 @@ feature "LicitationCommissions" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       select 'Pregão', :from => 'Tipo de comissão'
 
       page.should have_field 'Ato regulamentador', :with => '1234'
@@ -304,7 +304,7 @@ feature "LicitationCommissions" do
 
     click_link 'Criar Comissão de Licitação'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       select 'Especial', :from => 'Tipo de comissão'
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
@@ -350,7 +350,7 @@ feature "LicitationCommissions" do
 
     click_link 'Criar Comissão de Licitação'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       select 'Especial', :from => 'Tipo de comissão'
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
