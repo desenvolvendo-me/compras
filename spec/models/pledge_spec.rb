@@ -34,6 +34,7 @@ describe Pledge do
   it { should validate_presence_of :creditor }
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :expense_nature }
+  it { should validate_duplication_of(:material_id).on(:pledge_items) }
 
   it 'should return correct balance' do
     subject.value = 21
@@ -76,26 +77,6 @@ describe Pledge do
             ])
 
     subject.items_total_value.should eq(300)
-  end
-
-  it "the items with the same material should be invalid except the first" do
-    item_one = subject.pledge_items.build(:material_id => 1)
-    item_two = subject.pledge_items.build(:material_id => 1)
-
-    subject.valid?
-
-    item_one.errors.messages[:material_id].should be_nil
-    item_two.errors.messages[:material_id].should include "já está em uso"
-  end
-
-  it "the items with the different material should be valid" do
-    item_one = subject.pledge_items.build(:material_id => 1)
-    item_two = subject.pledge_items.build(:material_id => 2)
-
-    subject.valid?
-
-    item_one.errors.messages[:material_id].should be_nil
-    item_two.errors.messages[:material_id].should be_nil
   end
 
   it "should not have error when the value is equal to items total value" do

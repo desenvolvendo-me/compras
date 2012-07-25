@@ -53,9 +53,9 @@ class Pledge < Compras::Model
   validates :emission_date, :pledge_type, :value, :creditor, :presence => true
   validates :expense_nature, :presence => true
   validates :code, :uniqueness => { :scope => [:descriptor_id], :allow_blank => true }
+  validates :pledge_items, :no_duplication => :material_id
   validate :value_should_not_be_greater_than_budget_allocation_real_amount
   validate :items_total_value_should_not_be_greater_than_value
-  validate :cannot_have_more_than_once_item_with_the_same_material
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :licitation, :process, :format => /^(\d+)\/\d{4}$/
@@ -106,18 +106,6 @@ class Pledge < Compras::Model
   def items_total_value_should_not_be_greater_than_value
     if value && items_total_value > value
       errors.add(:items_total_value, :should_not_be_greater_than_pledge_value)
-    end
-  end
-
-  def cannot_have_more_than_once_item_with_the_same_material
-    single_materials = []
-
-    pledge_items.each do |item|
-      if single_materials.include?(item.material_id)
-        errors.add(:pledge_items)
-        item.errors.add(:material_id, :taken)
-      end
-      single_materials << item.material_id
     end
   end
 

@@ -47,29 +47,10 @@ describe PurchaseSolicitation do
     it { should validate_presence_of :delivery_location }
     it { should validate_presence_of :responsible }
     it { should validate_presence_of :kind }
+    it { should validate_duplication_of(:budget_allocation_id).on(:purchase_solicitation_budget_allocations) }
 
     it { should_not allow_value('a2012').for(:accounting_year) }
     it { should allow_value('2012').for(:accounting_year) }
-
-    it "the duplicated budget_allocations should be invalid except the first" do
-      item_one = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 1)
-      item_two = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 1)
-
-      subject.valid?
-
-      item_one.errors.messages[:budget_allocation_id].should be_nil
-      item_two.errors.messages[:budget_allocation_id].should include "já está em uso"
-    end
-
-    it "the diferent budget_allocations should be valid" do
-      item_one = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 1)
-      item_two = subject.purchase_solicitation_budget_allocations.build(:budget_allocation_id => 2)
-
-      subject.valid?
-
-      item_one.errors.messages[:budget_allocation_id].should be_nil
-      item_two.errors.messages[:budget_allocation_id].should be_nil
-    end
   end
 
   describe '#annul!' do

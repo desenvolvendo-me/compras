@@ -23,8 +23,8 @@ class JudgmentCommissionAdvice < Compras::Model
   validates :judgment_start_date, :judgment_start_time, :judgment_end_date, :presence => true
   validates :judgment_end_time, :companies_minutes, :companies_documentation_minutes, :presence => true
   validates :justification_minutes, :judgment_minutes, :presence => true
+  validates :judgment_commission_advice_members, :no_duplication => :individual_id
 
-  validate :cannot_have_duplicated_individuals_on_members
   validate :start_date_time_should_not_be_greater_than_end_date_time
 
   before_validation :set_minutes_number, :on => :create
@@ -71,18 +71,6 @@ class JudgmentCommissionAdvice < Compras::Model
 
   def last_by_self_year
     self.class.where { |p| p.year.eq(year) }.order { id }.last
-  end
-
-  def cannot_have_duplicated_individuals_on_members
-    single_individuals = []
-
-    judgment_commission_advice_members_not_marked_for_destruction.each do |member|
-      if single_individuals.include?(member.individual_identification)
-        errors.add(:judgment_commission_advice_members)
-        member.errors.add(:individual_id, :taken)
-      end
-      single_individuals << member.individual_identification
-    end
   end
 
   def judgment_commission_advice_members_not_marked_for_destruction

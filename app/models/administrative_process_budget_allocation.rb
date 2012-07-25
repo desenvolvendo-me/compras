@@ -15,8 +15,7 @@ class AdministrativeProcessBudgetAllocation < Compras::Model
   delegate :type_of_calculation, :to => :administrative_process, :allow_nil => true
 
   validates :budget_allocation, :value, :presence => true
-
-  validate :cannot_have_duplicated_materials_on_items
+  validates :items, :no_duplication => :material_id
 
   def total_items_value
     items.reject(&:marked_for_destruction?).sum(&:estimated_total_price)
@@ -24,19 +23,5 @@ class AdministrativeProcessBudgetAllocation < Compras::Model
 
   def clean_items!
     items.destroy_all
-  end
-
-  protected
-
-  def cannot_have_duplicated_materials_on_items
-    single_materials = []
-
-    items.each do |item|
-      if single_materials.include?(item.material_id)
-        errors.add(:items)
-        item.errors.add(:material_id, :taken)
-      end
-      single_materials << item.material_id
-    end
   end
 end

@@ -11,26 +11,7 @@ describe AdministrativeProcessBudgetAllocation do
 
   it { should validate_presence_of :budget_allocation }
   it { should validate_presence_of :value }
-
-  it "the duplicated materials should be invalid except the first" do
-    item_one = subject.items.build(:material_id => 1)
-    item_two = subject.items.build(:material_id => 1)
-
-    subject.valid?
-
-    item_one.errors.messages[:material_id].should be_nil
-    item_two.errors.messages[:material_id].should include "já está em uso"
-  end
-
-  it "the diferent materials should be valid" do
-    item_one = subject.items.build(:material_id => 1)
-    item_two = subject.items.build(:material_id => 2)
-
-    subject.valid?
-
-    item_one.errors.messages[:material_id].should be_nil
-    item_two.errors.messages[:material_id].should be_nil
-  end
+  it { should validate_duplication_of(:material_id).on(:items) }
 
   it 'should return the total value of the items' do
     item_one = double(:estimated_total_price => 100, :marked_for_destruction? => false)

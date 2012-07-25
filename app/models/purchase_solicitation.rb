@@ -34,9 +34,9 @@ class PurchaseSolicitation < Compras::Model
   validates :request_date, :responsible, :delivery_location, :presence => true
   validates :accounting_year, :kind, :delivery_location, :presence => true
   validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
+  validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
 
   validate :must_have_at_least_one_budget_allocation
-  validate :cannot_have_duplicated_budget_allocations
 
   orderize :request_date
   filterize
@@ -84,18 +84,6 @@ class PurchaseSolicitation < Compras::Model
   end
 
   protected
-
-  def cannot_have_duplicated_budget_allocations
-   single_allocations = []
-
-   purchase_solicitation_budget_allocations.each do |allocation|
-     if single_allocations.include?(allocation.budget_allocation_id)
-       errors.add(:purchase_solicitation_budget_allocations)
-       allocation.errors.add(:budget_allocation_id, :taken)
-     end
-     single_allocations << allocation.budget_allocation_id
-   end
-  end
 
   def must_have_at_least_one_budget_allocation
     unless purchase_solicitation_budget_allocations?

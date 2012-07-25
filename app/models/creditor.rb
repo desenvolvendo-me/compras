@@ -69,7 +69,7 @@ class Creditor < Compras::Model
   validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :main_cnae, :presence => true, :if => :company?
-  validate :uniqueness_of_document_type
+  validates :documents, :no_duplication => :document_type_id
   validate :person_in_representatives
   validate :secondary_cnae_in_main_cnae
 
@@ -97,19 +97,6 @@ class Creditor < Compras::Model
 
     self.contract_start_date = nil
     self.social_identification_number = nil
-  end
-
-  def uniqueness_of_document_type
-    single_documents = []
-
-    documents.each do |document|
-      if single_documents.include? document.document_type_id
-        errors.add(:documents, :invalid)
-
-        document.errors.add(:document_type_id, :taken)
-      end
-      single_documents << document.document_type_id
-    end
   end
 
   def person_in_representatives

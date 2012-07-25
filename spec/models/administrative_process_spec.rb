@@ -25,6 +25,7 @@ describe AdministrativeProcess do
   it { should have_one(:administrative_process_liberation).dependent(:destroy) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).through(:administrative_process_budget_allocations) }
+  it { should validate_duplication_of(:budget_allocation_id).on(:administrative_process_budget_allocations) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }
@@ -106,26 +107,6 @@ describe AdministrativeProcess do
     subject.administrative_process_budget_allocations.should be_empty
 
     subject.total_allocations_value.should eq 0
-  end
-
-  it "the duplicated budget_allocations should be invalid except the first" do
-    allocation_one = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
-    allocation_two = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
-
-    subject.valid?
-
-    allocation_one.errors.messages[:budget_allocation_id].should be_nil
-    allocation_two.errors.messages[:budget_allocation_id].should include "já está em uso"
-  end
-
-  it "the diferent budget_allocations should be valid" do
-    allocation_one = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 1)
-    allocation_two = subject.administrative_process_budget_allocations.build(:budget_allocation_id => 2)
-
-    subject.valid?
-
-    allocation_one.errors.messages[:budget_allocation_id].should be_nil
-    allocation_two.errors.messages[:budget_allocation_id].should be_nil
   end
 
   it 'should be invite when modality is INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES' do

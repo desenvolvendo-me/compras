@@ -31,9 +31,9 @@ class AdministrativeProcess < Compras::Model
   validates :responsible, :status, :presence => true
   validates :description, :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
+  validates :administrative_process_budget_allocations, :no_duplication => :budget_allocation_id
 
   validate :validate_modality
-  validate :cannot_have_duplicated_budget_allocations
 
   before_create :set_process
 
@@ -81,18 +81,6 @@ class AdministrativeProcess < Compras::Model
 
     unless verificator.verify_modality(object_type, modality)
       errors.add(:modality, :inclusion)
-    end
-  end
-
-  def cannot_have_duplicated_budget_allocations
-    single_allocations = []
-
-    administrative_process_budget_allocations.each do |allocation|
-      if single_allocations.include?(allocation.budget_allocation_id)
-        errors.add(:administrative_process_budget_allocations)
-        allocation.errors.add(:budget_allocation_id, :taken)
-      end
-      single_allocations << allocation.budget_allocation_id
     end
   end
 end

@@ -27,6 +27,7 @@ describe BudgetStructure do
   it { should validate_presence_of :kind }
   it { should validate_presence_of :budget_structure_level }
   it { should_not validate_presence_of :parent }
+  it { should validate_duplication_of(:responsible_id).on(:budget_structure_responsibles) }
 
   it { should have_one :address }
   it { should have_many(:budget_allocations).dependent(:restrict) }
@@ -67,28 +68,6 @@ describe BudgetStructure do
     it 'should return nil as upper_budget_structure_level' do
       subject.stub(:parent).and_return( nil )
       subject.upper_budget_structure_level.should be nil
-    end
-  end
-
-  context 'validating duplicated responsibles' do
-    it "duplicated budget_structure_responsibles should be invalid except the first" do
-      responsible_one = subject.budget_structure_responsibles.build(:responsible_id => 1)
-      responsible_two = subject.budget_structure_responsibles.build(:responsible_id => 1)
-
-      subject.valid?
-
-      responsible_one.errors.messages[:responsible_id].should be_nil
-      responsible_two.errors.messages[:responsible_id].should include "já está em uso"
-    end
-
-    it "the diferent budget_structure_responsibles should be valid" do
-      responsible_one = subject.budget_structure_responsibles.build(:responsible_id => 1)
-      responsible_two = subject.budget_structure_responsibles.build(:responsible_id => 2)
-
-      subject.valid?
-
-      responsible_one.errors.messages[:responsible_id].should be_nil
-      responsible_two.errors.messages[:responsible_id].should be_nil
     end
   end
 

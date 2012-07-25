@@ -26,6 +26,7 @@ describe DirectPurchase do
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_one(:supply_authorization).dependent(:restrict) }
+  it { should validate_duplication_of(:budget_allocation_id).on(:direct_purchase_budget_allocations) }
 
   it 'should return 0 for total items value of all budget allocations when have no allocations' do
     subject.direct_purchase_budget_allocations.should be_empty

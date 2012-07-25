@@ -30,7 +30,7 @@ class BudgetStructure < Compras::Model
   validates :administration_type, :kind, :presence => true
   validates :budget_structure_level, :presence => true
   validates :parent, :presence => true, :if => :level_greater_than_1?
-  validate :cannot_have_duplicated_responsibles
+  validates :budget_structure_responsibles, :no_duplication => :responsible_id
   validate :parent_level_must_be_immediate_superior
 
   accepts_nested_attributes_for :address

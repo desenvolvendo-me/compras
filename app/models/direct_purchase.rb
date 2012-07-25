@@ -36,8 +36,8 @@ class DirectPurchase < Compras::Model
   validates :budget_structure, :licitation_object, :delivery_location, :presence => true
   validates :creditor, :employee, :payment_method, :pledge_type, :presence => true
   validates :period, :period_unit, :presence => true
+  validates :direct_purchase_budget_allocations, :no_duplication => :budget_allocation_id
 
-  validate :cannot_have_duplicated_budget_allocations
   validate :must_have_at_least_budget_allocation
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
 
@@ -74,18 +74,6 @@ class DirectPurchase < Compras::Model
   end
 
   protected
-
-  def cannot_have_duplicated_budget_allocations
-   single_allocations = []
-
-   direct_purchase_budget_allocations.each do |allocation|
-     if single_allocations.include?(allocation.budget_allocation_id)
-       errors.add(:direct_purchase_budget_allocations)
-       allocation.errors.add(:budget_allocation_id, :taken)
-     end
-     single_allocations << allocation.budget_allocation_id
-   end
-  end
 
   def must_have_at_least_budget_allocation
     if direct_purchase_budget_allocations.empty?

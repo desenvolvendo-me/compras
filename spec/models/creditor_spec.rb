@@ -46,6 +46,7 @@ describe Creditor do
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:licitation_process_bidders).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_bidders) }
+  it { should validate_duplication_of(:document_type_id).on(:documents) }
 
   it { should validate_presence_of :person }
   it { should_not validate_presence_of :main_cnae }
@@ -179,25 +180,5 @@ describe Creditor do
 
       subject.errors.messages[:representatives].should be_nil
     end
-  end
-
-  it 'document should_not be invalid when not duplicated' do
-    document_one = subject.documents.build(:document_type_id => 1)
-    document_two = subject.documents.build(:document_type_id => 2)
-
-    subject.valid?
-
-    document_one.errors.messages[:document_type_id].should be_nil
-    document_two.errors.messages[:document_type_id].should be_nil
-  end
-
-  it 'document should be invalid when duplicated' do
-    document_one = subject.documents.build(:document_type_id => 1)
-    document_two = subject.documents.build(:document_type_id => 1)
-
-    subject.valid?
-
-    document_one.errors.messages[:document_type_id].should be_nil
-    document_two.errors.messages[:document_type_id].should include "já está em uso"
   end
 end
