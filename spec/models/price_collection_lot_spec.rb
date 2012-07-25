@@ -10,6 +10,7 @@ describe PriceCollectionLot do
   it { should have_many :items }
   it { should have_many(:price_collection_proposals).through(:price_collection) }
   it { should have_many(:price_collection_classifications).dependent(:destroy) }
+  it { should validate_duplication_of(:material_id).on(:items) }
 
   it 'should have at least one item' do
     subject.items.should be_empty
@@ -27,27 +28,5 @@ describe PriceCollectionLot do
     subject.valid?
 
     subject.errors[:items].should include 'é necessário cadastrar pelo menos um item'
-  end
-
-  it "the duplicated items should be invalid except the first" do
-    item_one = subject.items.build(:material_id => 1)
-    item_two = subject.items.build(:material_id => 1)
-
-    subject.valid?
-
-    item_one.errors.messages[:material_id].should be_nil
-    item_two.errors.messages[:material_id].should include "já está em uso"
-  end
-
-  it "the diferent itens should be valid" do
-    item_one = subject.items.build(:material_id => 1)
-    item_two = subject.items.build(:material_id => 1)
-
-    item_one.stub(:marked_for_destruction? => true)
-
-    subject.valid?
-
-    item_one.errors.messages[:material_id].should be_nil
-    item_two.errors.messages[:material_id].should be_nil
   end
 end
