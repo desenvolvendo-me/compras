@@ -62,7 +62,7 @@ feature 'PurchaseSolicitationAnnul' do
     page.should have_content "Editar #{solicitation}"
     page.should have_select 'Status de atendimento', :selected => 'Anulada'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Ano'
       page.should have_disabled_field 'Data da solicitação'
       page.should have_disabled_field 'Estrutura orçamentaria solicitante'

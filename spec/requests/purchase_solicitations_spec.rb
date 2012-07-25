@@ -22,7 +22,7 @@ feature "PurchaseSolicitations" do
 
     click_link 'Criar Solicitação de Compra'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_disabled_field 'Código'
       page.should have_disabled_field 'Liberação'
       page.should have_disabled_field 'Por'
@@ -73,7 +73,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
@@ -120,7 +120,7 @@ feature "PurchaseSolicitations" do
 
     page.should_not have_link 'Apagar'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       fill_in 'Ano', :with => '2013'
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
@@ -167,7 +167,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Código', :with => '1'
       page.should have_field 'Ano', :with => '2013'
       page.should have_field 'Data da solicitação', :with => '01/02/2013'
@@ -206,7 +206,7 @@ feature "PurchaseSolicitations" do
 
     click_link 'Criar Solicitação de Compra'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
       fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -367,7 +367,7 @@ feature "PurchaseSolicitations" do
 
     click_link 'Criar Solicitação de Compra'
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
       fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -403,7 +403,7 @@ feature "PurchaseSolicitations" do
       click_link '2/2012'
     end
 
-    within_tab 'Dados gerais' do
+    within_tab 'Principal' do
       page.should have_field 'Código', :with => '2'
       page.should have_field 'Ano', :with => '2012'
       page.should have_field 'Data da solicitação', :with => '01/02/2012'
