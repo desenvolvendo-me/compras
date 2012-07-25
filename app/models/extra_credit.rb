@@ -77,7 +77,7 @@ class ExtraCredit < Compras::Model
       if item.moviment_type.present? && item.value.present?
         if item.moviment_type.add?
           self.supplement += item.value
-        else item.moviment_type.subtract?
+        elsif item.moviment_type.subtract?
           self.reduced += item.value
         end
       end
