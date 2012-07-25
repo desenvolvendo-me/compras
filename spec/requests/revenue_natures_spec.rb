@@ -241,4 +241,180 @@ feature "RevenueNatures" do
 
     page.should_not have_content '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
   end
+
+  context 'filtering' do
+    scenario 'should filter by revenue_nature' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      fill_in 'Natureza da receita', :with => '1.1.1.2.12.34'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by specification' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      fill_in 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by descriptor' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      within_modal 'Descritor' do
+        fill_in 'Exercício', :with => '2009'
+
+        click_button 'Pesquisar'
+
+        click_record '2009'
+      end
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by kind' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      select 'Ambos', :from => 'Tipo'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by revenue_category' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      within_modal 'Categoria da receita' do
+        fill_in 'Código', :with => '1'
+
+        click_button 'Pesquisar'
+
+        click_record 'RECEITAS CORRENTES'
+      end
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by revenue_subcategory' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      within_modal 'Subcategoria da receita' do
+        fill_in 'Código', :with => '1'
+
+        click_button 'Pesquisar'
+
+        click_record 'RECEITA TRIBUTÁRIA'
+      end
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by revenue_source' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      within_modal 'Fonte da receita' do
+        fill_in 'Código', :with => '1'
+
+        click_button 'Pesquisar'
+
+        click_record 'IMPOSTOS'
+      end
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by revenue_rubric' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      within_modal 'Rúbrica da receita' do
+        fill_in 'Código', :with => '2'
+
+        click_button 'Pesquisar'
+
+        click_record 'IMPOSTOS SOBRE O PATRIMÔNIO E A RENDA'
+      end
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+
+    scenario 'should filter by classification' do
+      RevenueNature.make!(:imposto)
+      RevenueNature.make!(:receitas_intra_orcamentaria)
+
+      navigate_through 'Contabilidade > Orçamento > Receita Orçamentária > Naturezas das Receitas'
+
+      click_link 'Filtrar Naturezas das Receitas'
+
+      fill_in 'Classificação', :with => '12.34'
+
+      click_button 'Pesquisar'
+
+      page.should have_content '1.1.1.2.12.34'
+      page.should_not have_content '7.9.4.0.00.00'
+    end
+  end
 end

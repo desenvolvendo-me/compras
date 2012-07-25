@@ -10,3 +10,9 @@ RevenueRubric.blueprint(:imposto_sobre_a_producao_e_a_circulacao) do
   description { 'IMPOSTOS SOBRE A PRODUÇÃO E A CIRCULAÇÃO' }
   revenue_source { RevenueSource.make!(:impostos) }
 end
+
+RevenueRubric.blueprint(:multa) do
+  code { '0' }
+  description { 'MULTA' }
+  revenue_source { RevenueSource.make!(:multas) }
+end

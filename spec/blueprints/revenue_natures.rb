@@ -26,3 +26,17 @@ RevenueNature.blueprint(:imposto_sobre_renda) do
   kind { RevenueNatureKind::BOTH }
   docket { 'Registra o valor da arrecadação da receita referente a renda' }
 end
+
+RevenueNature.blueprint(:receitas_intra_orcamentaria) do
+  descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
+  regulatory_act { RegulatoryAct.make!(:emenda) }
+  revenue_category { RevenueCategory.make!(:receitas_correntes) }
+  revenue_subcategory { RevenueSubcategory.make!(:outras_receitas_correntes) }
+  revenue_source { RevenueSource.make!(:multas) }
+  revenue_rubric { RevenueRubric.make!(:multa) }
+  classification { '00.00' }
+  revenue_nature { '7.9.4.0.00.00' }
+  specification { 'RECEITAS INTRA-ORÇAMENTÁRIA DECORRENTES DE APORTES PERIÓDICOS PARA AMORTIZAÇÃO DE DÉFICIT ATUARIAL DO RPPS' }
+  kind { RevenueNatureKind::ANALYTICAL }
+  docket { 'INCLUSÃO - JANEIRO 2012' }
+end
