@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'decorator_helper'
-require 'app/decorators/price_collection_classification_decorator'
+require 'app/decorators/price_collection_lot_item_decorator'
 
-describe PriceCollectionClassificationDecorator do
+describe PriceCollectionLotItemDecorator do
   context '#unit_price_by_price_collection_and_creditor' do
     before do
       component.stub(:unit_price_by_price_collection_and_creditor).and_return(330.0)
