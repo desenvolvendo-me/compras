@@ -6,6 +6,7 @@ describe LicitationProcessBidderProposal do
 
   it { should belong_to :licitation_process_bidder }
   it { should belong_to :administrative_process_budget_allocation_item }
+  it { should belong_to :licitation_process_ratification }
   it { should have_one(:licitation_process_lot).through(:administrative_process_budget_allocation_item) }
 
   it "should return total price when has unit_price and quantity" do
@@ -25,5 +26,8 @@ describe LicitationProcessBidderProposal do
     subject.stub(:quantity).and_return(nil)
     subject.total_price.should eq 0
   end
-end
 
+  it 'uses false as default for ratification' do
+    subject.ratificated.should be false
+  end
+end

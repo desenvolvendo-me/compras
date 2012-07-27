@@ -1,0 +1,99 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :licitation_process %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :licitation_process_bidder, :disabled => true %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-5">
+    <%= f.input :ratification_date %>
+  </div>
+
+  <div class="yui3-u-1-5">
+    <%= f.input :adjudication_date %>
+  </div>
+</div>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th><input type="checkbox" id="checkAll"/></th>
+      <th><%= Material.human_attribute_name :code %></th>
+      <th><%= Material.human_attribute_name :description %></th>
+      <th><%= Material.human_attribute_name :reference_unit %></th>
+      <th><%= LicitationProcessBidderProposal.human_attribute_name :quantity %></th>
+      <th><%= LicitationProcessBidderProposal.human_attribute_name :unit_price %></th>
+      <th><%= LicitationProcessBidderProposal.human_attribute_name :total_price %></th>
+    </tr>
+  </thead>
+
+  <tbody id="proposals">
+    <%= f.association :licitation_process_bidder_proposals, :collection => localized(f.object.licitation_process_bidder_proposals) do |i| %>
+      <%= render 'licitation_process_bidder_proposals/licitation_process_bidder_proposal', :f => i %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= mustache 'item-template' do %>
+  <%= f.association :licitation_process_bidder_proposals_attributes, :collection => f.object.licitation_process_bidder_proposals.build, :index => '{{uuid_item}}' do |i| %>
+    <%= render 'licitation_process_bidder_proposals/licitation_process_bidder_proposal', :f => i %>
+  <% end %>
+<% end %>
+
+
+<script>
+  $("#item-template").nestedForm({
+    target: '#proposals',
+    append_item: false,
+    uuid: 'uuid_item'
+  });
+
+  $('#checkAll').change( function() {
+    $('table.records input:checkbox').attr('checked', this.checked);
+  });
+
+  $("#licitation_process_ratification_licitation_process_id").change(function (event, data) {
+    if (!this.value) {
+      return;
+    }
+
+    $("#licitation_process_ratification_licitation_process_bidder").attr("data-modal-url",
+    "<%= modal_licitation_process_bidders_path %>?filter[licitation_process_id]=" + this.value).attr("disabled", false);
+  }).change();
+
+  function clearExistingItems() {
+    $('.bidder-proposal').each(function() {
+      $(this).find('input.destroy').attr('value', 'true');
+      $(this).hide();
+    });
+  }
+
+  $('#licitation_process_ratification_licitation_process_bidder_id').change(function (event, licitation_process_bidder) {
+    clearExistingItems();
+
+    if (licitation_process_bidder) {
+      var template = $('#item-template'),
+          target = $('#proposals'),
+          item;
+
+      $.each(licitation_process_bidder.proposals, function() {
+        item = $('#item-template').mustache({ uuid_item: _.uniqueId('fresh-'),
+                                              id: this.id,
+                                              code: this.code,
+                                              description: this.description,
+                                              quantity: this.quantity,
+                                              unit_price: this.unit_price,
+                                              reference_unit: this.reference_unit,
+                                              total_price: this.total_price });
+
+        target.prepend(item);
+      });
+    } else {
+      clearExistingItems();
+    }
+  })
+</script>

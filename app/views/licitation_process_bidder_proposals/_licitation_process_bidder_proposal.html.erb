@@ -1,0 +1,15 @@
+<tr class="ratification_item inherited nested">
+  <td align="center">
+    <%= f.check_box :ratificated %>
+
+    <%= f.input :id, :as => 'hidden', :input_html => { :value => f.object.decorator.id_or_mustache_variable } %>
+    <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+  </td>
+
+  <td align="right"><%= f.object.decorator.code_or_mustache_variable %></td>
+  <td><%= f.object.decorator.description_or_mustache_variable %></td>
+  <td align="right"><%= f.object.decorator.reference_unit_or_mustache_variable %></td>
+  <td align="right"><%= f.object.decorator.quantity_or_mustache_variable %></td>
+  <td align="right"> <%= f.object.decorator.unit_price_or_mustache_variable %></td>
+  <td align="right"> <%= f.object.decorator.total_price_or_mustache_variable %></td>
+</tr>

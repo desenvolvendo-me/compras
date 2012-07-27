@@ -1,5 +1,4 @@
 Compras::Application.routes.draw do
-
   resources :contract_terminations, :except => [:show, :destroy]
 
   resources :creditors do
@@ -455,6 +454,13 @@ Compras::Application.routes.draw do
   end
 
   resources :licitation_process_impugnments do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :licitation_process_ratifications do
     collection do
       get :filter
       get :modal

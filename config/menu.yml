@@ -38,6 +38,7 @@ menu:
         - licitation_notices
         - licitation_process_impugnments
         - licitation_process_appeals
+        - licitation_process_ratifications
 
   - accounting:
     - commom:
