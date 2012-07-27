@@ -15,7 +15,8 @@ describe SupplyAuthorizationDecorator do
 
   context '#direct_purchase' do
     before do
-      component.stub(:direct_purchase).and_return(direct_purchase)
+      component.stub(:direct_purchase_id).and_return(1)
+      component.stub(:direct_purchase_year).and_return(2012)
 
       I18n.backend.store_translations 'pt-BR', :enumerations => {
           :period_unit => {
@@ -24,9 +25,6 @@ describe SupplyAuthorizationDecorator do
       }
     end
 
-    let :direct_purchase do
-      double('DirectPurchase', :id => 1, :year => 2012)
-    end
 
     it 'should localize' do
       subject.direct_purchase.should eq '1/2012'

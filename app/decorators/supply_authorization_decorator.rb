@@ -11,7 +11,7 @@ class SupplyAuthorizationDecorator
   end
 
   def direct_purchase
-    "#{component.direct_purchase.id}/#{component.direct_purchase.year}"
+    "#{component.direct_purchase_id}/#{component.direct_purchase_year}"
   end
 
   def message
