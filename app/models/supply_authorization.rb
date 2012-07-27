@@ -7,12 +7,12 @@ class SupplyAuthorization < Compras::Model
 
   belongs_to :direct_purchase
 
-  delegate :phone, :fax, :address, :city, :zip_code, :to => :direct_purchase, :allow_nil => true
-  delegate :accounts, :agencies, :banks, :creditor, :to => :direct_purchase, :allow_nil => true
-  delegate :period, :period_unit, :period_unit_humanize, :licitation_object, :observation, :payment_method, :to => :direct_purchase, :allow_nil => true
-  delegate :date, :budget_structure, :delivery_location, :to => :direct_purchase, :allow_nil => true
+  delegate :phone, :fax, :address, :city, :zip_code, :accounts, :agencies,
+           :banks, :creditor, :date, :budget_structure, :delivery_location,
+           :period, :period_unit, :period_unit_humanize, :licitation_object,
+           :observation, :payment_method, :to => :direct_purchase,
+           :allow_nil => true
   delegate :id, :year, :to => :direct_purchase, :prefix => true, :allow_nil => true
-
 
   validates :year, :direct_purchase, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
