@@ -9,6 +9,6 @@ class PriceCollectionProposalDecorator
   end
 
   def item_total_value_by_lot(lot)
-    number_with_precision super(lot)
+    number_with_precision super if super
   end
 end

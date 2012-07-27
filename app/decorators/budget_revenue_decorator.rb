@@ -2,7 +2,6 @@ class BudgetRevenueDecorator
   include Decore
   include Decore::Proxy
   include ActionView::Helpers::TranslationHelper
-  include ActionView::Helpers::UrlHelper
 
   def date(date_repository = ::Date)
     if component.persisted?

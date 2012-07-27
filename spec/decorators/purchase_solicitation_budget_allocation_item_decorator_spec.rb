@@ -4,12 +4,24 @@ require 'app/decorators/purchase_solicitation_budget_allocation_item_decorator'
 
 describe PurchaseSolicitationBudgetAllocationItemDecorator do
   context '#estimated_total_price' do
-    before do
-      component.stub(:estimated_total_price).and_return(300.0)
+    context 'when do not have estimated_total_price' do
+      before do
+        component.stub(:estimated_total_price).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.estimated_total_price.should be_nil
+      end
     end
 
-    it 'should applies precision' do
-      subject.estimated_total_price.should eq '300,00'
+    context 'when have estimated_total_price' do
+      before do
+        component.stub(:estimated_total_price).and_return(300.0)
+      end
+
+      it 'should applies precision' do
+        subject.estimated_total_price.should eq '300,00'
+      end
     end
   end
 end

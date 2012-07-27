@@ -4,6 +4,6 @@ class IndexerValueDecorator
   include ActionView::Helpers::NumberHelper
 
   def value
-    number_with_precision(component.value, :precision => scale_of_value)
+    number_with_precision(super, :precision => scale_of_value) if super
   end
 end

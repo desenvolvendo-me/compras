@@ -2,10 +2,6 @@ require 'decorator_helper'
 require 'app/decorators/budget_revenue_decorator'
 
 describe BudgetRevenueDecorator do
-  let :date do
-    Date.new(2012, 4, 13)
-  end
-
   context 'when have persisted' do
     before do
       component.stub(:created_at).and_return(Time.new(2012, 4, 13))
@@ -23,10 +19,10 @@ describe BudgetRevenueDecorator do
     end
 
     let :date_repository do
-      double(:current => date)
+      double('DateRepository', :current => Date.new(2012, 4, 13))
     end
 
-    it 'should localize' do
+    it 'should localize Date.current' do
       subject.date(date_repository).should eq '13/04/2012'
     end
   end

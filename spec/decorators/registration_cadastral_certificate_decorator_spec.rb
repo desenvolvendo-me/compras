@@ -1,84 +1,103 @@
 require 'decorator_helper'
+require 'active_support/core_ext/array/grouping'
 require 'app/decorators/registration_cadastral_certificate_decorator'
 
 describe RegistrationCadastralCertificateDecorator do
   context '#number' do
-    it 'should be empty when count_crc is 0' do
-      component.stub(:count_crc).and_return(0)
+    context 'count_crc is empty' do
+      before do
+        component.stub(:count_crc).and_return(0)
+      end
 
-      subject.number.should be_empty
+      it 'should be empty when count_crc is 0' do
+        subject.number.should be_empty
+      end
     end
 
-    it 'should return number when count_crc greater than 0' do
-      component.stub(:count_crc).and_return(3)
+    context 'when do not have count_crc' do
+      before do
+        component.stub(:count_crc).and_return(nil)
+      end
 
-      subject.number.should eq 3
+      it 'should be nil' do
+        subject.number.should be_nil
+      end
+    end
+
+    context 'when have count_crc' do
+      before do
+        component.stub(:count_crc).and_return(3)
+      end
+
+      it 'should return count_crc' do
+        subject.number.should eq 3
+      end
     end
   end
 
   context 'signatures' do
-    let :signature_configuration_item1 do
-      double('SignatureConfigurationItem1')
+    context 'when do not have signatures' do
+      before do
+        component.stub(:signatures).and_return([])
+      end
+
+      it 'should return empty array' do
+        subject.signatures_grouped.should be_empty
+      end
     end
 
-    let :signature_configuration_item2 do
-      double('SignatureConfigurationItem2')
-    end
+    context 'when have signatures' do
+      let :signature_configuration_item1 do
+        double('SignatureConfigurationItem1')
+      end
 
-    let :signature_configuration_item3 do
-      double('SignatureConfigurationItem3')
-    end
+      let :signature_configuration_item2 do
+        double('SignatureConfigurationItem2')
+      end
 
-    let :signature_configuration_item4 do
-      double('SignatureConfigurationItem4')
-    end
+      let :signature_configuration_item3 do
+        double('SignatureConfigurationItem3')
+      end
 
-    let :signature_configuration_item5 do
-      double('SignatureConfigurationItem5')
-    end
+      let :signature_configuration_item4 do
+        double('SignatureConfigurationItem4')
+      end
 
-    let :signature_configuration_items do
-      [
-        signature_configuration_item1,
-        signature_configuration_item2,
-        signature_configuration_item3,
-        signature_configuration_item4,
-        signature_configuration_item5
-      ]
-    end
+      let :signature_configuration_item5 do
+        double('SignatureConfigurationItem5')
+      end
 
-    let :signature_configuration_item_store do
-      double('SignatureConfigurationItemStore')
-    end
-
-    let :signature_configuration_items_grouped do
-      [
+      let :signature_configuration_items do
         [
           signature_configuration_item1,
           signature_configuration_item2,
           signature_configuration_item3,
-          signature_configuration_item4
-        ],
-          [
-            signature_configuration_item5
+          signature_configuration_item4,
+          signature_configuration_item5
         ]
-      ]
-    end
+      end
 
-    it "should group signatures" do
-      subject.stub(:signatures_grouped).and_return(signature_configuration_items_grouped)
-      subject.stub(:signatures => signature_configuration_items)
-      subject.signatures_grouped.should eq [
-        [
-          signature_configuration_item1,
-          signature_configuration_item2,
-          signature_configuration_item3,
-          signature_configuration_item4
-        ],
+      let :signature_configuration_item_store do
+        double('SignatureConfigurationItemStore')
+      end
+
+      before do
+        component.stub(:signatures).and_return(signature_configuration_items)
+      end
+
+      it "should group signatures" do
+        subject.signatures_grouped.should eq [
+          [
+            signature_configuration_item1,
+            signature_configuration_item2,
+            signature_configuration_item3,
+            signature_configuration_item4
+          ],
           [
             signature_configuration_item5
+          ]
         ]
-      ]
+      end
     end
   end
 end

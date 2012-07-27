@@ -7,7 +7,7 @@ class SupplyAuthorizationDecorator
   include ActionView::Helpers::TranslationHelper
 
   def date
-    localize super
+    localize super if super
   end
 
   def direct_purchase

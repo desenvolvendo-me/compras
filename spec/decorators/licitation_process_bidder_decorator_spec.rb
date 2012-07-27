@@ -4,16 +4,24 @@ require 'app/decorators/licitation_process_bidder_decorator'
 
 describe LicitationProcessBidderDecorator do
   context '#process_date' do
-    before do
-      component.stub(:licitation_process_process_date).and_return(date)
+    context 'when do not have licitation_process_process_date' do
+      before do
+        component.stub(:licitation_process_process_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.process_date.should be_nil
+      end
     end
 
-    let :date do
-      Date.new(2012, 12, 1)
-    end
+    context 'when have licitation_process_process_date' do
+      before do
+        component.stub(:licitation_process_process_date).and_return(Date.new(2012, 12, 1))
+      end
 
-    it 'should localize' do
-      subject.process_date.should eq '01/12/2012'
+      it 'should localize' do
+        subject.process_date.should eq '01/12/2012'
+      end
     end
   end
 
@@ -49,26 +57,50 @@ describe LicitationProcessBidderDecorator do
   end
 
   describe "#proposal_total_value_by_lot" do
-    before do
-      component.stub(:proposal_total_value_by_lot).with(lot).and_return(5000.0)
+    context 'when do not have proposal_total_value_by_lot' do
+      before do
+        component.stub(:proposal_total_value_by_lot).and_return(0)
+      end
+
+      it 'should applies precision to zero' do
+        subject.proposal_total_value_by_lot.should eq '0,00'
+      end
     end
 
-    let :lot do
-      double :lot
-    end
+    context 'when have proposal_total_value_by_lot' do
+      before do
+        component.stub(:proposal_total_value_by_lot).with(lot).and_return(5000.0)
+      end
 
-    it 'should applies precision' do
-      subject.proposal_total_value_by_lot(lot).should eq '5.000,00'
+      let :lot do
+        double :lot
+      end
+
+      it 'should applies precision' do
+        subject.proposal_total_value_by_lot(lot).should eq '5.000,00'
+      end
     end
   end
 
   context '#proposal_total_value' do
-    before do
-      component.stub(:proposal_total_value).and_return(10.0)
+    context 'when do not have proposal_total_value' do
+      before do
+        component.stub(:proposal_total_value).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.proposal_total_value.should be_nil
+      end
     end
 
-    it 'should applies precision' do
-      subject.proposal_total_value.should eq '10,00'
+    context 'when have proposal_total_value' do
+      before do
+        component.stub(:proposal_total_value).and_return(10.0)
+      end
+
+      it 'should applies precision' do
+        subject.proposal_total_value.should eq '10,00'
+      end
     end
   end
 end

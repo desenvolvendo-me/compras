@@ -7,22 +7,46 @@ describe PriceCollectionProposalDecorator do
   end
 
   context '#price_collection_date' do
-    before do
-      component.stub(:price_collection_date).and_return(date)
+    context 'when do not have price_collection_date' do
+      before do
+        component.stub(:price_collection_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.price_collection_date.should be_nil
+      end
     end
 
-    it 'should localize' do
-      subject.price_collection_date.should eq '01/12/2012'
+    context 'when have price_collection_date' do
+      before do
+        component.stub(:price_collection_date).and_return(date)
+      end
+
+      it 'should localize' do
+        subject.price_collection_date.should eq '01/12/2012'
+      end
     end
   end
 
   context '#item_total_value_by_lot' do
-    before do
-      component.stub(:item_total_value_by_lot).with(1).and_return(500.0)
+    context 'when do not have item_total_value_by_lot' do
+      before do
+        component.stub(:item_total_value_by_lot).with(1).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.item_total_value_by_lot(1).should be_nil
+      end
     end
 
-    it 'should applies precision' do
-      subject.item_total_value_by_lot(1).should eq "500,00"
+    context 'when have item_total_value_by_lot' do
+      before do
+        component.stub(:item_total_value_by_lot).with(1).and_return(500.0)
+      end
+
+      it 'should applies precision' do
+        subject.item_total_value_by_lot(1).should eq "500,00"
+      end
     end
   end
 end

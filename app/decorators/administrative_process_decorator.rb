@@ -8,11 +8,11 @@ class AdministrativeProcessDecorator
   include ActionView::Helpers::UrlHelper
 
   def value_estimated
-    number_to_currency(super)
+    number_to_currency super if super
   end
 
   def total_allocations_value
-    number_with_precision(super)
+    number_with_precision super if super
   end
 
   def build_licitation_process_link

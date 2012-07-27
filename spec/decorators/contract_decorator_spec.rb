@@ -4,12 +4,24 @@ require 'app/decorators/contract_decorator'
 
 describe ContractDecorator do
   context '#all_pledges_total_value' do
-    before do
-      component.stub(:all_pledges_total_value => 100.0)
+    context 'when do not have all_pledges_total_value' do
+      before do
+        component.stub(:all_pledges_total_value).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.all_pledges_total_value.should be_nil
+      end
     end
 
-    it 'should applies currency' do
-      subject.all_pledges_total_value.should eq 'R$ 100,00'
+    context 'when have all_pledges_total_value' do
+      before do
+        component.stub(:all_pledges_total_value).and_return(100.0)
+      end
+
+      it 'should applies currency' do
+        subject.all_pledges_total_value.should eq 'R$ 100,00'
+      end
     end
   end
 end

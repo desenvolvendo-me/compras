@@ -10,6 +10,6 @@ class PurchaseSolicitationDecorator
   end
 
   def quantity_by_material(material_id)
-    number_with_precision(super(material_id)) if super
+    number_with_precision super if super
   end
 end

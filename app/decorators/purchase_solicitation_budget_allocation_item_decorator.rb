@@ -4,6 +4,6 @@ class PurchaseSolicitationBudgetAllocationItemDecorator
   include ActionView::Helpers::NumberHelper
 
   def estimated_total_price
-    number_with_precision super
+    number_with_precision super if super
   end
 end

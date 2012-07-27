@@ -3,16 +3,24 @@ require 'app/decorators/licitation_commission_decorator'
 
 describe LicitationCommissionDecorator do
   context '#regulatory_act_publication_date' do
-    before do
-      component.stub(:regulatory_act_publication_date).and_return(date)
+    context 'when do not have regulatory_act_publication_date' do
+      before do
+        component.stub(:regulatory_act_publication_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.regulatory_act_publication_date.should be_nil
+      end
     end
 
-    let :date do
-      Date.new(2012, 2, 16)
-    end
+    context 'when have regulatory_act_publication_date' do
+      before do
+        component.stub(:regulatory_act_publication_date).and_return(Date.new(2012, 2, 16))
+      end
 
-    it 'should localize' do
-      subject.regulatory_act_publication_date.should eq '16/02/2012'
+      it 'should localize' do
+        subject.regulatory_act_publication_date.should eq '16/02/2012'
+      end
     end
   end
 end

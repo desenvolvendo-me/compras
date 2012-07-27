@@ -12,42 +12,90 @@ describe LicitationProcessImpugnmentDecorator do
   end
 
   context '#licitation_process_envelope_delivery_date' do
-    before do
-      component.stub(:licitation_process_envelope_delivery_date).and_return(date)
+    context 'when have licitation_process_envelope_delivery_date' do
+      before do
+        component.stub(:licitation_process_envelope_delivery_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.licitation_process_envelope_delivery_date.should be_nil
+      end
     end
 
-    it 'should return localized licitation_process_envelope_delivery_date' do
-      subject.licitation_process_envelope_delivery_date.should eq '04/01/2012'
+    context 'when have licitation_process_envelope_delivery_date' do
+      before do
+        component.stub(:licitation_process_envelope_delivery_date).and_return(date)
+      end
+
+      it 'should return localized licitation_process_envelope_delivery_date' do
+        subject.licitation_process_envelope_delivery_date.should eq '04/01/2012'
+      end
     end
   end
 
   context '#licitation_process_envelope_delivery_time' do
-    before do
-      component.stub(:licitation_process_envelope_delivery_time).and_return(time)
+    context 'when have licitation_process_envelope_delivery_time' do
+      before do
+        component.stub(:licitation_process_envelope_delivery_time).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.licitation_process_envelope_delivery_time.should be_nil
+      end
     end
 
-    it 'should return localized licitation_process_envelope_delivery_time' do
-      subject.licitation_process_envelope_delivery_time.should eq '10:00'
+    context 'when have licitation_process_envelope_delivery_time' do
+      before do
+        component.stub(:licitation_process_envelope_delivery_time).and_return(time)
+      end
+
+      it 'should return localized licitation_process_envelope_delivery_time' do
+        subject.licitation_process_envelope_delivery_time.should eq '10:00'
+      end
     end
   end
 
   context '#licitation_process_envelope_opening_date' do
-    before do
-      component.stub(:licitation_process_envelope_opening_date).and_return(date)
+    context 'when do not have licitation_process_envelope_opening_date' do
+      before do
+        component.stub(:licitation_process_envelope_opening_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.licitation_process_envelope_opening_date.should be_nil
+      end
     end
 
-    it 'should return localized licitation_process_envelope_opening_date' do
-      subject.licitation_process_envelope_opening_date.should eq '04/01/2012'
+    context 'when have licitation_process_envelope_opening_date' do
+      before do
+        component.stub(:licitation_process_envelope_opening_date).and_return(date)
+      end
+
+      it 'should return localized licitation_process_envelope_opening_date' do
+        subject.licitation_process_envelope_opening_date.should eq '04/01/2012'
+      end
     end
   end
 
   context '#licitation_process_envelope_opening_time' do
-    before do
-      component.stub(:licitation_process_envelope_opening_time).and_return(time)
+    context 'when have licitation_process_envelope_opening_time' do
+      before do
+        component.stub(:licitation_process_envelope_opening_time).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.licitation_process_envelope_opening_time.should be_nil
+      end
     end
 
-    it 'should return localized licitation_process_envelope_opening_time' do
-      subject.licitation_process_envelope_opening_time.should eq '10:00'
+    context 'when have licitation_process_envelope_opening_time' do
+      before do
+        component.stub(:licitation_process_envelope_opening_time).and_return(time)
+      end
+
+      it 'should return localized licitation_process_envelope_opening_time' do
+        subject.licitation_process_envelope_opening_time.should eq '10:00'
+      end
     end
   end
 end

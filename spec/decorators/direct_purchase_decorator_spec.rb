@@ -4,12 +4,24 @@ require 'app/decorators/direct_purchase_decorator'
 
 describe DirectPurchaseDecorator do
   context '#total_allocations_item_value' do
-    before do
-      component.stub(:total_allocations_items_value).and_return(512.34)
+    context 'when do not have total_allocations_item_value' do
+      before do
+        component.stub(:total_allocations_items_value).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.total_allocations_items_value.should be_nil
+      end
     end
 
-    it 'should applies precision' do
-      subject.total_allocations_items_value.should eq '512,34'
+    context 'when have total_allocations_items_value' do
+      before do
+        component.stub(:total_allocations_items_value).and_return(512.34)
+      end
+
+      it 'should applies precision' do
+        subject.total_allocations_items_value.should eq '512,34'
+      end
     end
   end
 

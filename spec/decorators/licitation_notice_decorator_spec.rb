@@ -3,16 +3,24 @@ require 'app/decorators/licitation_notice_decorator'
 
 describe LicitationNoticeDecorator do
   context '#licitation_process_process_date' do
-    before do
-      component.stub(:licitation_process_process_date).and_return(date)
+    context 'when do not have licitation_process_process_date' do
+      before do
+        component.stub(:licitation_process_process_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.licitation_process_process_date.should be_nil
+      end
     end
 
-    let :date do
-      Date.new(2012, 12, 1)
-    end
+    context 'when have licitation_process_process_date' do
+      before do
+        component.stub(:licitation_process_process_date).and_return(Date.new(2012, 12, 13))
+      end
 
-    it 'should localized' do
-      subject.licitation_process_process_date.should eq '01/12/2012'
+      it 'should localized' do
+        subject.licitation_process_process_date.should eq '13/12/2012'
+      end
     end
   end
 end

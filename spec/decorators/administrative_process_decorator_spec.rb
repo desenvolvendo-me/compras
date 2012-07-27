@@ -1,25 +1,50 @@
 # encoding: utf-8
 require 'decorator_helper'
+require 'active_support/core_ext/array/grouping'
 require 'app/decorators/administrative_process_decorator'
 
 describe AdministrativeProcessDecorator do
   context '#value_estimated' do
-    before do
-      component.stub(:value_estimated).and_return(500)
+    context 'when do not have value_estimated' do
+      before do
+        subject.stub(:value_estimated).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.value_estimated.should be_nil
+      end
     end
 
-    it 'should applies currency' do
-      subject.value_estimated.should eq 'R$ 500,00'
+    context 'when have value_estimated' do
+      before do
+        component.stub(:value_estimated).and_return(500)
+      end
+
+      it 'should applies currency' do
+        subject.value_estimated.should eq 'R$ 500,00'
+      end
     end
   end
 
   context '#total_allocations_value' do
-    before do
-      component.stub(:total_allocations_value).and_return(400)
+    context 'when do not have total_allocations_value' do
+      before do
+        component.stub(:total_allocations_value).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.total_allocations_value.should be_nil
+      end
     end
 
-    it 'should applies precision' do
-      subject.total_allocations_value.should eq '400,00'
+    context 'when have total_allocations_value' do
+      before do
+        component.stub(:total_allocations_value).and_return(400)
+      end
+
+      it 'should applies precision' do
+        subject.total_allocations_value.should eq '400,00'
+      end
     end
   end
 
@@ -28,8 +53,8 @@ describe AdministrativeProcessDecorator do
       before do
         component.stub(:persisted?).and_return(true)
         component.stub(:released?).and_return(true)
-        component.stub(:licitation_process => licitation_process)
-        component.stub(:id => 1)
+        component.stub(:licitation_process).and_return(licitation_process)
+        component.stub(:id).and_return(1)
       end
 
       let :licitation_process do
@@ -41,7 +66,7 @@ describe AdministrativeProcessDecorator do
 
         licitation_process.stub(:nil?).and_return(true)
 
-        component.stub(:allow_licitation_process? => true)
+        component.stub(:allow_licitation_process?).and_return(true)
 
         subject.build_licitation_process_link.should eq '<a href="url" class="button primary">Novo processo licitatório</a>'
       end
@@ -52,14 +77,14 @@ describe AdministrativeProcessDecorator do
 
         licitation_process.stub(:nil?).and_return(false)
 
-        component.stub(:allow_licitation_process? => true)
+        component.stub(:allow_licitation_process?).and_return(true)
 
         subject.build_licitation_process_link.should eq '<a href="url" class="button secondary">Editar processo licitatório</a>'
       end
 
 
       it "should not return a link to edit neither new licitation process when not allow licitation process" do
-        component.stub(:allow_licitation_process? => false)
+        component.stub(:allow_licitation_process?).and_return(false)
 
         subject.build_licitation_process_link.should be_nil
       end
@@ -85,7 +110,7 @@ describe AdministrativeProcessDecorator do
   context '#release_button' do
     context 'not persisted' do
       before do
-        component.stub(:persisted? => false)
+        component.stub(:persisted?).and_return(false)
       end
 
       it "should be nil" do
@@ -95,9 +120,9 @@ describe AdministrativeProcessDecorator do
 
     context 'not persisted, not waiting neither released' do
       before do
-        component.stub(:persisted? => false)
-        component.stub(:waiting? => false)
-        component.stub(:released? => false)
+        component.stub(:persisted?).and_return(false)
+        component.stub(:waiting?).and_return(false)
+        component.stub(:released?).and_return(false)
       end
 
       it "should be nil" do
@@ -107,9 +132,9 @@ describe AdministrativeProcessDecorator do
 
     context 'persisted and waiting' do
       before do
-        component.stub(:id => 1)
-        component.stub(:persisted? => true)
-        component.stub(:waiting? => true)
+        component.stub(:id).and_return(1)
+        component.stub(:persisted?).and_return(true)
+        component.stub(:waiting?).and_return(true)
         routes.stub(:new_administrative_process_liberation_path).with(:administrative_process_id => 1).and_return('new_path')
       end
 
@@ -120,10 +145,10 @@ describe AdministrativeProcessDecorator do
 
     context "persisted and released but not waiting" do
       before do
-        component.stub(:administrative_process_liberation => administrative_process_liberation)
-        component.stub(:persisted? => true)
-        component.stub(:waiting? => false)
-        component.stub(:released? => true)
+        component.stub(:administrative_process_liberation).and_return(administrative_process_liberation)
+        component.stub(:persisted?).and_return(true)
+        component.stub(:waiting?).and_return(false)
+        component.stub(:released?).and_return(true)
         routes.stub(:edit_administrative_process_liberation_path).and_return('edit_path')
       end
 
@@ -138,78 +163,86 @@ describe AdministrativeProcessDecorator do
   end
 
   context '#date' do
-    before do
-      component.stub(:date).and_return(Date.new(2012, 12, 31))
+    context 'when do not have date' do
+      before do
+        component.stub(:date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        subject.date.should eq nil
+      end
     end
 
-    it 'should localize' do
-      subject.date.should eq '31/12/2012'
+    context 'when have date' do
+      before do
+        component.stub(:date).and_return(Date.new(2012, 12, 31))
+      end
+
+      it 'should localize' do
+        subject.date.should eq '31/12/2012'
+      end
     end
   end
 
   context 'signatures' do
-    let :signature_configuration_item1 do
-      double('SignatureConfigurationItem1')
+    context 'when do not have signatures' do
+      before do
+        component.stub(:signatures).and_return([])
+      end
+
+      it 'should return empty array' do
+        subject.signatures_grouped.should eq []
+      end
     end
 
-    let :signature_configuration_item2 do
-      double('SignatureConfigurationItem2')
-    end
+    context 'when have signatures' do
+      before do
+        component.stub(:signatures).and_return(signature_configuration_items)
+      end
 
-    let :signature_configuration_item3 do
-      double('SignatureConfigurationItem3')
-    end
+      let :signature_configuration_item1 do
+        double('SignatureConfigurationItem1')
+      end
 
-    let :signature_configuration_item4 do
-      double('SignatureConfigurationItem4')
-    end
+      let :signature_configuration_item2 do
+        double('SignatureConfigurationItem2')
+      end
 
-    let :signature_configuration_item5 do
-      double('SignatureConfigurationItem5')
-    end
+      let :signature_configuration_item3 do
+        double('SignatureConfigurationItem3')
+      end
 
-    let :signature_configuration_items do
-      [
-        signature_configuration_item1,
-        signature_configuration_item2,
-        signature_configuration_item3,
-        signature_configuration_item4,
-        signature_configuration_item5
-      ]
-    end
+      let :signature_configuration_item4 do
+        double('SignatureConfigurationItem4')
+      end
 
-    let :signature_configuration_item_store do
-      double('SignatureConfigurationItemStore')
-    end
+      let :signature_configuration_item5 do
+        double('SignatureConfigurationItem5')
+      end
 
-    let :signature_configuration_items_grouped do
-      [
+      let :signature_configuration_items do
         [
           signature_configuration_item1,
           signature_configuration_item2,
           signature_configuration_item3,
-          signature_configuration_item4
-        ],
-          [
-            signature_configuration_item5
+          signature_configuration_item4,
+          signature_configuration_item5
         ]
-      ]
-    end
+      end
 
-    it "should group signatures" do
-      subject.stub(:signatures_grouped).and_return(signature_configuration_items_grouped)
-      subject.stub(:signatures => signature_configuration_items)
-      subject.signatures_grouped.should eq [
-        [
-          signature_configuration_item1,
-          signature_configuration_item2,
-          signature_configuration_item3,
-          signature_configuration_item4
-        ],
+      it "should group signatures" do
+        subject.signatures_grouped.should eq [
+          [
+            signature_configuration_item1,
+            signature_configuration_item2,
+            signature_configuration_item3,
+            signature_configuration_item4
+          ],
           [
             signature_configuration_item5
+          ]
         ]
-      ]
+      end
     end
   end
 end

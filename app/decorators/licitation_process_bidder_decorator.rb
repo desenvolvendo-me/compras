@@ -20,7 +20,7 @@ class LicitationProcessBidderDecorator
     end
   end
 
-  def proposal_total_value_by_lot(lot_id)
+  def proposal_total_value_by_lot(lot_id = nil)
     number_with_precision super
   end
 

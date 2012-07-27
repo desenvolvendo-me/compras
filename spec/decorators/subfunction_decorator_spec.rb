@@ -9,7 +9,7 @@ describe SubfunctionDecorator do
     end
 
     let :function do
-      double(:to_s => 'Administração')
+      double('Function', :to_s => 'Administração')
     end
 
     it 'should return function as summary' do
