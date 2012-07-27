@@ -5,12 +5,4 @@
       <%= render 'licitation_process_budget_allocations/form', :f => p %>
     <% end %>
   <% end %>
-
-  <%= f.association :administrative_process, :collection => AdministrativeProcess.new do |a| %>
-    <%= mustache 'administrative-process-budget-allocations-template' do %>
-      <%= a.association :administrative_process_budget_allocations_attributes, :collection => a.object.administrative_process_budget_allocations.build, :index => '{{uuid_administrative_process_budget_allocation}}' do |p| %>
-        <%= render 'licitation_process_budget_allocations/form', :f => p %>
-      <% end %>
-    <% end %>
-  <% end %>
 </div>
