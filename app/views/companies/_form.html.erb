@@ -56,11 +56,11 @@
     </div>
 
     <div id="company_address">
-      <%= c.association :address, :collection => c.object.address || Address.new do |a| %>
+      <%= f.association :address, :collection => f.object.address || Address.new do |a| %>
         <%= render "addresses/address", :a => a %>
       <% end %>
 
-      <%= render "addresses/correspondence", :f => c %>
+      <%= render "addresses/correspondence", :f => f %>
     </div>
 
     <div id="company-partners">

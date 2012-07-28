@@ -78,10 +78,10 @@
     </div>
 
     <div id="individual_address">
-      <%= p.association :address, :collection => p.object.address || Address.new do |a| %>
+      <%= f.association :address, :collection => f.object.address || Address.new do |a| %>
         <%= render "addresses/address", :a => a %>
       <% end %>
 
-      <%= render "addresses/correspondence", :f => p %>
+      <%= render "addresses/correspondence", :f => f %>
     </div>
 <% end %>

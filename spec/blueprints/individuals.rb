@@ -6,7 +6,6 @@ Individual.blueprint(:sobrinho) do
   birthdate { Date.new(1990, 5, 28) }
   gender    { Gender::MALE }
   identity  { Identity.make(:sobrinho, :individual => object) }
-  address   { Address.make(:apto, :addressable => object) }
 end
 
 Individual.blueprint(:wenderson) do
@@ -15,7 +14,6 @@ Individual.blueprint(:wenderson) do
   birthdate { Date.new(1973, 3, 21) }
   gender    { Gender::MALE }
   identity  { Identity.make(:wenderson, :individual => object) }
-  address   { Address.make(:apto, :addressable => object) }
 end
 
 Individual.blueprint(:joao_da_silva) do
@@ -24,7 +22,6 @@ Individual.blueprint(:joao_da_silva) do
   birthdate { Date.new(1950, 9, 21) }
   gender    { Gender::MALE }
   identity  { Identity.make(:joao_da_silva, :individual => object) }
-  address   { Address.make(:apto, :addressable => object) }
 end
 
 Individual.blueprint(:pedro_dos_santos) do
@@ -33,7 +30,6 @@ Individual.blueprint(:pedro_dos_santos) do
   birthdate { Date.new(1950, 9, 21) }
   gender    { Gender::MALE }
   identity  { Identity.make(:sobrinho, :individual => object) }
-  address   { Address.make(:apto, :addressable => object) }
 end
 
 Individual.blueprint(:maria_de_souza) do
@@ -42,5 +38,4 @@ Individual.blueprint(:maria_de_souza) do
   birthdate { Date.new(1957, 9, 21) }
   gender    { Gender::FEMALE }
   identity  { Identity.make(:sobrinho, :individual => object) }
-  address   { Address.make(:apto, :addressable => object) }
 end

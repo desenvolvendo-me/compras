@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: git@github.com:nohupbrasil/unico.git
-  revision: 392a4655d7adc0e10a7902cdffa2d5ed13e49974
+  revision: a89284703956ba26b6051e8a69194466400dd53c
   specs:
     unico (0.0.1)
       actionpack (~> 3.2.0)
@@ -148,7 +148,7 @@ GEM
       activesupport (>= 3.0.0)
       blankslate (>= 2.1.2.4)
     journey (1.0.4)
-    json (1.7.3)
+    json (1.7.4)
     kgio (2.7.4)
     libwebsocket (0.1.3)
       addressable

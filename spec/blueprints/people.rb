@@ -7,6 +7,7 @@ Person.blueprint(:sobrinho) do
   mobile { '(99) 9999-9999' }
   email  { 'gabriel.sobrinho@gmail.com' }
   personable { Individual.make!(:sobrinho) }
+  address   { Address.make(:apto, :addressable => object) }
 end
 
 Person.blueprint(:sobrinho_without_email) do
@@ -16,6 +17,7 @@ Person.blueprint(:sobrinho_without_email) do
   mobile { '(99) 9999-9999' }
   email  { '' }
   personable { Individual.make!(:sobrinho) }
+  address   { Address.make(:apto, :addressable => object) }
 end
 
 Person.blueprint(:wenderson) do
@@ -25,6 +27,7 @@ Person.blueprint(:wenderson) do
   mobile { '(99) 9999-9999' }
   email  { 'wenderson.malheiros@gmail.com' }
   personable { Individual.make!(:wenderson) }
+  address   { Address.make(:apto, :addressable => object) }
 end
 
 Person.blueprint(:joao_da_silva) do
@@ -34,6 +37,7 @@ Person.blueprint(:joao_da_silva) do
   mobile { '(99) 9999-9999' }
   email  { 'joao.da.silva@gmail.com' }
   personable { Individual.make!(:joao_da_silva) }
+  address   { Address.make(:apto, :addressable => object) }
 end
 
 Person.blueprint(:pedro_dos_santos) do
@@ -43,6 +47,7 @@ Person.blueprint(:pedro_dos_santos) do
   mobile { '(99) 9999-9999' }
   email  { 'pedro.dos.santos@gmail.com' }
   personable { Individual.make!(:pedro_dos_santos) }
+  address   { Address.make(:apto, :addressable => object) }
 end
 
 Person.blueprint(:nohup) do
@@ -52,6 +57,7 @@ Person.blueprint(:nohup) do
   mobile { "(33) 7070-7777" }
   email  { "wenderson@gmail.com" }
   personable { Company.make!(:nohup) }
+  address   { Address.make(:apto, :addressable => object) }
 end
 
 Person.blueprint(:mateus) do
@@ -61,4 +67,5 @@ Person.blueprint(:mateus) do
   mobile { "(44) 3499-7777" }
   email  { "mcomogo@gmail.com" }
   personable { SpecialEntry.make!(:especial) }
+  address   { Address.make(:apto, :addressable => object) }
 end

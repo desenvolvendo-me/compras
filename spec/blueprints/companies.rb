@@ -10,7 +10,6 @@ Company.blueprint(:nohup) do
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { false }
   responsible_role { "Administrador" }
-  address { Address.make(:apto, :addressable => object) }
   partners { [Partner.make!(:wenderson)] }
 end
 
@@ -24,6 +23,5 @@ Company.blueprint(:nobe) do
   company_size { CompanySize.make!(:micro_empresa) }
   choose_simple { false }
   responsible_role { "Administrador" }
-  address { Address.make(:apto, :addressable => object) }
   partners { [Partner.make!(:wenderson)] }
 end
