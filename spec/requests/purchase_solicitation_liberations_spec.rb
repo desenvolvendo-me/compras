@@ -22,6 +22,8 @@ feature "PurchaseSolicitationLiberations" do
     # button liberate can be seen when purchase_solicitation is pending
     click_link 'Liberar'
 
+    page.should_not have_disabled_field 'Responsável'
+
     page.should have_content 'Liberar a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     page.should have_field 'Data', :with => I18n.l(Date.current)
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'

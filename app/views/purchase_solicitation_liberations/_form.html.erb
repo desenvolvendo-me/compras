@@ -2,7 +2,7 @@
 
 <div class='yui3-g'>
   <div class='yui3-u-1-2'>
-    <%= f.input :responsible, :disabled => true %>
+    <%= f.input :responsible, :disabled => f.object.persisted? %>
   </div>
 
   <div class='yui3-u-1-6'>
