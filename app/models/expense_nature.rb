@@ -36,38 +36,38 @@ class ExpenseNature < Compras::Model
   orderize :description
 
   def self.filter(params)
-    relation = scoped
-    relation = relation.where { expense_nature.eq(params[:expense_nature]) } if params[:expense_nature].present?
-    relation = relation.where { description.eq(params[:description]) } if params[:description].present?
-    relation = relation.where { descriptor_id.eq(params[:descriptor_id]) } if params[:descriptor_id].present?
-    relation = relation.where { regulatory_act_id.eq(params[:regulatory_act_id]) } if params[:regulatory_act_id].present?
-    relation = relation.where { kind.eq(params[:kind]) } if params[:kind].present?
+    query = scoped
+    query = query.where { expense_nature.eq(params[:expense_nature]) } if params[:expense_nature].present?
+    query = query.where { description.eq(params[:description]) } if params[:description].present?
+    query = query.where { descriptor_id.eq(params[:descriptor_id]) } if params[:descriptor_id].present?
+    query = query.where { regulatory_act_id.eq(params[:regulatory_act_id]) } if params[:regulatory_act_id].present?
+    query = query.where { kind.eq(params[:kind]) } if params[:kind].present?
 
     if params[:expense_category_id].present?
       category_id = value_or_nil(params[:expense_category_id])
 
-      relation = relation.where { expense_category_id.eq(category_id) }
+      query = query.where { expense_category_id.eq(category_id) }
     end
 
     if params[:expense_group_id].present?
       group_id = value_or_nil(params[:expense_group_id])
 
-      relation = relation.where { expense_group_id.eq(group_id) }
+      query = query.where { expense_group_id.eq(group_id) }
     end
 
     if params[:expense_modality_id].present?
       modality_id = value_or_nil(params[:expense_modality_id])
 
-      relation = relation.where { expense_modality_id.eq(modality_id) }
+      query = query.where { expense_modality_id.eq(modality_id) }
     end
 
     if params[:expense_element_id].present?
       element_id = value_or_nil(params[:expense_element_id])
 
-      relation = relation.where { expense_element_id.eq(element_id) }
+      query = query.where { expense_element_id.eq(element_id) }
     end
 
-    relation
+    query
   end
 
   scope :expense_nature_not_eq, lambda { |code| where { expense_nature.not_eq(code) } }

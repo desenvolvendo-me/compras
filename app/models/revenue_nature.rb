@@ -39,19 +39,18 @@ class RevenueNature < Compras::Model
 
   orderize :id
 
-  #filterize
   def self.filter(params)
-    relation = scoped
-    relation = relation.where { revenue_nature.eq(params[:revenue_nature]) } if params[:revenue_nature].present?
-    relation = relation.where { specification.eq(params[:specification]) } if params[:specification].present?
-    relation = relation.where { descriptor_id.eq(params[:descriptor_id]) } if params[:descriptor_id].present?
-    relation = relation.where { kind.eq(params[:kind]) } if params[:kind].present?
-    relation = relation.where { revenue_category_id.eq(params[:revenue_category_id]) } if params[:revenue_category_id].present?
-    relation = relation.where { revenue_subcategory_id.eq(params[:revenue_subcategory_id]) } if params[:revenue_subcategory_id].present?
-    relation = relation.where { revenue_source_id.eq(params[:revenue_source_id]) } if params[:revenue_source_id].present?
-    relation = relation.where { revenue_rubric_id.eq(params[:revenue_rubric_id]) } if params[:revenue_rubric_id].present?
-    relation = relation.where { classification.eq(params[:classification]) } if params[:classification].present?
-    relation
+    query = scoped
+    query = query.where { revenue_nature.eq(params[:revenue_nature]) } if params[:revenue_nature].present?
+    query = query.where { specification.eq(params[:specification]) } if params[:specification].present?
+    query = query.where { descriptor_id.eq(params[:descriptor_id]) } if params[:descriptor_id].present?
+    query = query.where { kind.eq(params[:kind]) } if params[:kind].present?
+    query = query.where { revenue_category_id.eq(params[:revenue_category_id]) } if params[:revenue_category_id].present?
+    query = query.where { revenue_subcategory_id.eq(params[:revenue_subcategory_id]) } if params[:revenue_subcategory_id].present?
+    query = query.where { revenue_source_id.eq(params[:revenue_source_id]) } if params[:revenue_source_id].present?
+    query = query.where { revenue_rubric_id.eq(params[:revenue_rubric_id]) } if params[:revenue_rubric_id].present?
+    query = query.where { classification.eq(params[:classification]) } if params[:classification].present?
+    query
   end
 
   def to_s

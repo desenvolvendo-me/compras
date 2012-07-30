@@ -19,19 +19,18 @@ class Person < Unico::Person
 
   scope :except_special_entry, where { personable_type.not_eq 'SpecialEntry' }
 
-  def self.filter(params = {})
-    relation = scoped
-    relation = relation.where{ name.matches "#{params[:name]}%" } unless params[:name].blank?
-    relation = relation.joins{ personable Individual }.where{ personable(Individual).cpf == params[:cpf] } unless params[:cpf].blank?
-    relation = relation.joins{ personable Company }.where{ personable(Company).cnpj == params[:cnpj] } unless params[:cnpj].blank?
-
-    relation
+  def self.filter(params)
+    query = scoped
+    query = query.where{ name.matches "#{params[:name]}%" } unless params[:name].blank?
+    query = query.joins{ personable Individual }.where{ personable(Individual).cpf == params[:cpf] } unless params[:cpf].blank?
+    query = query.joins{ personable Company }.where{ personable(Company).cnpj == params[:cnpj] } unless params[:cnpj].blank?
+    query
   end
 
   def self.search(options = {})
-    relation = scoped
-    relation = relation.where { id.in_any options[:ids] } if options[:ids].present?
-    relation
+    query = scoped
+    query = query.where { id.in_any options[:ids] } if options[:ids].present?
+    query
   end
 
   def personable_attributes=(personable_attributes, options = {})

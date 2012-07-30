@@ -48,18 +48,17 @@ class BudgetAllocation < Compras::Model
   validates :code, :uniqueness => { :scope => [:descriptor_id] }, :allow_blank => true
 
   orderize :description
-  filterize
 
-  def self.filter(options={})
-    relation = scoped
-    relation = relation.where { budget_structure_id.eq(options[:budget_structure_id]) } if options[:budget_structure_id].present?
-    relation = relation.where { subfunction_id.eq(options[:subfunction_id]) } if options[:subfunction_id].present?
-    relation = relation.where { government_program_id.eq(options[:government_program_id]) } if options[:government_program_id].present?
-    relation = relation.where { government_action_id.eq(options[:government_action_id]) } if options[:government_action_id].present?
-    relation = relation.where { expense_nature_id.eq(options[:expense_nature_id]) } if options[:expense_nature_id].present?
-    relation = relation.joins { subfunction }.where { subfunction.function_id.eq(options[:function_id]) } if options[:function_id].present?
-    relation = relation.where { descriptor_id.eq(options[:descriptor_id]) } if options[:descriptor_id].present?
-    relation
+  def self.filter(options)
+    query = scoped
+    query = query.where { budget_structure_id.eq(options[:budget_structure_id]) } if options[:budget_structure_id].present?
+    query = query.where { subfunction_id.eq(options[:subfunction_id]) } if options[:subfunction_id].present?
+    query = query.where { government_program_id.eq(options[:government_program_id]) } if options[:government_program_id].present?
+    query = query.where { government_action_id.eq(options[:government_action_id]) } if options[:government_action_id].present?
+    query = query.where { expense_nature_id.eq(options[:expense_nature_id]) } if options[:expense_nature_id].present?
+    query = query.joins { subfunction }.where { subfunction.function_id.eq(options[:function_id]) } if options[:function_id].present?
+    query = query.where { descriptor_id.eq(options[:descriptor_id]) } if options[:descriptor_id].present?
+    query
   end
 
   def reserved_value

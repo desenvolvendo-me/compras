@@ -61,12 +61,12 @@ class DirectPurchase < Compras::Model
     direct_purchase_budget_allocations.collect(&:total_items_value).sum
   end
 
-  def self.filter(params={})
-    relation = scoped
-    relation = relation.where{ year.eq(params[:year]) } unless params[:year].blank?
-    relation = relation.where{ date.eq(params[:date].to_date) } if !params[:date].blank? && params[:date].date?
-    relation = relation.where{ modality.eq(params[:modality]) } unless params[:modality].blank?
-    relation
+  def self.filter(params)
+    query = scoped
+    query = query.where{ year.eq(params[:year]) } unless params[:year].blank?
+    query = query.where{ date.eq(params[:date].to_date) } if !params[:date].blank? && params[:date].date?
+    query = query.where{ modality.eq(params[:modality]) } unless params[:modality].blank?
+    query
   end
 
   def authorized?
