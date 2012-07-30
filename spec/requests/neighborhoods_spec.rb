@@ -25,13 +25,7 @@ feature "Neighborhoods" do
 
     fill_in 'Nome', :with => 'Alvorada'
 
-    within_modal 'Cidade' do
-      fill_in 'Nome', :with => 'Porto Alegre'
-
-      click_button 'Pesquisar'
-
-      click_record 'Porto Alegre'
-    end
+    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
 
     click_button 'Salvar'
 
@@ -99,32 +93,14 @@ feature "Neighborhoods" do
 
     fill_in 'Nome', :with => 'Portugal'
 
-    within_modal 'Cidade' do
-      fill_in 'Nome', :with => 'Porto Alegre'
+    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
 
-      click_button 'Pesquisar'
-
-      click_record 'Porto Alegre'
-    end
-
-    within_modal 'Distrito' do
-      fill_in 'Nome', :with => 'Leste'
-
-      click_button 'Pesquisar'
-
-      click_record 'Leste'
-    end
+    fill_modal 'Distrito', :with => 'Leste', :field => 'Nome'
 
     click_button 'Salvar'
     page.should have_content 'já está em uso'
 
-    within_modal 'Distrito' do
-      fill_in 'Nome', :with => 'Oeste'
-
-      click_button 'Pesquisar'
-
-      click_record 'Oeste'
-    end
+    fill_modal 'Distrito', :with => 'Oeste', :field => 'Nome'
 
     click_button 'Salvar'
     page.should have_notice 'Bairro criado com sucesso.'
