@@ -18,6 +18,6 @@
       return;
     }
 
-    $("#neighborhood_district").attr("data-modal-url", "<%= modal_districts_path %>?filter[city_id]=" + this.value).attr("disabled", false);
+    $("#neighborhood_district").attr("data-modal-url", "<%= modal_districts_path %>?locked_fields=[city]&filter[city_id]=" + this.value).attr("disabled", false);
   }).change();
 </script>

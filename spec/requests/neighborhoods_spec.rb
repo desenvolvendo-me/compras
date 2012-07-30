@@ -129,4 +129,37 @@ feature "Neighborhoods" do
     click_button 'Salvar'
     page.should have_notice 'Bairro criado com sucesso.'
   end
+
+  scenario 'should lock district by city' do
+    City.make!(:porto_alegre)
+
+    navigate_through 'Outros > Bairros'
+
+    click_link 'Criar Bairro'
+
+    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
+
+    within_modal 'Distrito' do
+      page.should have_disabled_field 'Cidade'
+      page.should have_field 'Cidade', :with => 'Porto Alegre'
+    end
+  end
+
+  scenario 'should filter district by city' do
+    District.make!(:centro)
+    District.make!(:leste)
+
+    navigate_through 'Outros > Bairros'
+
+    click_link 'Criar Bairro'
+
+    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
+
+    within_modal 'Distrito' do
+      click_button 'Pesquisar'
+
+      page.should have_content 'Leste'
+      page.should_not have_content 'Centro'
+    end
+  end
 end
