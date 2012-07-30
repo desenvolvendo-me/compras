@@ -1,5 +1,6 @@
 class MigrateMovimentTypeOperation < ActiveRecord::Migration
-  class MovimentType < Compras::Model; end
+  class MovimentType < Compras::Model
+  end
 
   def change
     MovimentType.where(:operation => 'sum').update_all(:operation => 'add')
