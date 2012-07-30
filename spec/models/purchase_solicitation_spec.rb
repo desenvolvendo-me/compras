@@ -68,9 +68,9 @@ describe PurchaseSolicitation do
 
     it 'should updates the service status to annulled' do
       subject.stub(:liberation).and_return(liberation)
-      subject.should_receive(:update_column).with(:service_status, PurchaseSolicitationServiceStatus::LIBERATED)
+      subject.should_receive(:update_column).with(:service_status, 'liberated')
 
-      subject.liberate!
+      subject.liberate!('liberated')
     end
   end
 

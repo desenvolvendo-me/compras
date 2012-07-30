@@ -30,6 +30,8 @@ feature "PurchaseSolicitationLiberations" do
 
     fill_in 'Justificativa', :with => 'Compra justificada'
 
+    select 'Liberada', :from => 'Status de atendimento'
+
     click_button 'Salvar'
 
     page.should have_notice 'Solicitação de Compras liberada com sucesso'
@@ -41,6 +43,7 @@ feature "PurchaseSolicitationLiberations" do
     page.should have_disabled_field 'Justificativa'
     page.should have_disabled_field 'Data'
     page.should have_disabled_field 'Responsável'
+    page.should have_disabled_field 'Status de atendimento'
 
     page.should have_content 'Liberação da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     page.should have_field 'Justificativa', :with => 'Compra justificada'
