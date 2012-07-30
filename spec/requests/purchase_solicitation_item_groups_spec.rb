@@ -52,7 +52,6 @@ feature "PurchaseSolicitationItemGroups" do
   end
 
   scenario 'validating modal of purchase solicitation' do
-    pending 'Poltergeist break at random places'
     PurchaseSolicitation.make!(:reparo)
     PurchaseSolicitation.make!(:reparo_2013)
 
