@@ -49,17 +49,6 @@ GIT
       railties (~> 3.2.0)
       validates_timeliness (~> 3.0.11)
 
-GIT
-  remote: https://github.com/sobrinho/poltergeist.git
-  revision: e38cafdbd7543754cf084a8a981a2e3f03d4e36e
-  specs:
-    poltergeist (0.6.0)
-      capybara (~> 1.1)
-      childprocess (~> 0.3)
-      faye-websocket (~> 0.4, >= 0.4.4)
-      http_parser.rb (~> 0.5.3)
-      multi_json (~> 1.0)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -131,7 +120,7 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.1)
       multipart-post (~> 1.1)
-    faye-websocket (0.4.5)
+    faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
     foreigner (1.1.4)
@@ -169,6 +158,12 @@ GEM
     nokogiri (1.5.5)
     orm_adapter (0.0.7)
     pg (0.12.2)
+    poltergeist (0.7.0)
+      capybara (~> 1.1)
+      childprocess (~> 0.3)
+      faye-websocket (~> 0.4, >= 0.4.4)
+      http_parser.rb (~> 0.5.3)
+      multi_json (~> 1.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -284,7 +279,7 @@ DEPENDENCIES
   mail_validator (= 0.2.0)
   mask_validator (= 0.2.1)
   pg (= 0.12.2)
-  poltergeist!
+  poltergeist (= 0.7.0)
   rails (= 3.2.7)
   rails-footnotes (>= 3.7.5.rc4)
   responders (= 0.6.4)

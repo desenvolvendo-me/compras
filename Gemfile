@@ -65,5 +65,5 @@ group :test do
   gem 'machinist-caching', '0.0.1'
   gem 'capybara', '1.1.2'
   gem 'database_cleaner', '0.8.0'
-  gem 'poltergeist', :git => 'https://github.com/sobrinho/poltergeist.git'
+  gem 'poltergeist', '0.7.0'
 end
