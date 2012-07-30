@@ -10,6 +10,7 @@ feature "PurchaseSolicitationLiberations" do
 
   scenario 'create a new purchase_solicitation_liberation' do
     PurchaseSolicitation.make!(:reparo)
+    Employee.make!(:wenderson)
 
     navigate_through 'Compras e Licitações > Solicitações de Compra'
 
@@ -28,6 +29,7 @@ feature "PurchaseSolicitationLiberations" do
     page.should have_field 'Data', :with => I18n.l(Date.current)
     page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
+    fill_modal 'Responsável', :field => 'Matrícula', :with => '12903412'
     fill_in 'Justificativa', :with => 'Compra justificada'
 
     select 'Liberada', :from => 'Status de atendimento'
@@ -48,6 +50,6 @@ feature "PurchaseSolicitationLiberations" do
     page.should have_content 'Liberação da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     page.should have_field 'Justificativa', :with => 'Compra justificada'
     page.should have_field 'Data', :with =>  I18n.l(Date.current)
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
   end
 end
