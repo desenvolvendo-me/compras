@@ -90,3 +90,7 @@ require 'unico/model'
 require 'compras'
 
 $:.append Unico::Engine.config.root
+
+Dir["#{Unico::Engine.config.root}/app/enumerations/*.rb"].each do |file|
+  require File.expand_path(file)
+end
