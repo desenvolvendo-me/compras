@@ -19,4 +19,10 @@ class PurchaseSolicitationsController < CrudController
 
     super
   end
+
+  def update
+    raise Exceptions::Unauthorized unless resource.editable?
+
+    super
+  end
 end

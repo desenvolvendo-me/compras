@@ -38,4 +38,26 @@ describe PurchaseSolicitationsController do
       assigns(:purchase_solicitation).service_status.should eq PurchaseSolicitationServiceStatus::PENDING
     end
   end
+
+  context 'PUT #update' do
+    it 'should return 401 when is not editable' do
+      purchase_solicitation = double(:purchase_solicitation, :id => 1,
+                                     :editable? => false)
+
+      PurchaseSolicitation.stub(:find).and_return(purchase_solicitation)
+
+      put :update, :id => 1
+
+      response.code.should eq "401"
+    end
+
+    it 'should allow edit when is editable' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      put :update, :id => purchase_solicitation.id,
+                   :purchase_solicitation => { :accounting_year => 2013 }
+
+      assigns(:purchase_solicitation).accounting_year.should eq 2013
+    end
+  end
 end

@@ -459,4 +459,30 @@ feature "PurchaseSolicitations" do
 
     page.should have_content 'Editar 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
   end
+
+  scenario 'should not show edit button when is not editable' do
+    PurchaseSolicitation.make!(:reparo,
+                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should_not have_button 'Salvar'
+  end
+
+  scenario 'should show edit button when is returned' do
+    PurchaseSolicitation.make!(:reparo,
+                               :service_status => PurchaseSolicitationServiceStatus::RETURNED)
+
+    navigate_through 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    page.should have_button 'Salvar'
+  end
 end

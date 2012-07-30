@@ -83,6 +83,10 @@ class PurchaseSolicitation < Compras::Model
     pending? && !released?
   end
 
+  def editable?
+    pending? || returned?
+  end
+
   protected
 
   def must_have_at_least_one_budget_allocation
