@@ -433,33 +433,6 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'button liberate cannot be seen when purchase_solicitation is not pending' do
-    navigate_through 'Compras e Licitações > Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    page.should_not have_link 'Liberar'
-  end
-
-  scenario 'should return to edit if cancel a purchase_solicitation_liberation' do
-    PurchaseSolicitation.make!(:reparo)
-
-    navigate_through 'Compras e Licitações > Solicitações de Compra'
-
-    within_records do
-      page.find('a').click
-    end
-
-    # button liberate can be seen when purchase_solicitation is pending
-    click_link 'Liberar'
-
-    page.should have_content 'Liberar a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
-
-    click_link 'Cancelar'
-
-    page.should have_content 'Editar 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
-  end
-
   scenario 'should not show edit button when is not editable' do
     PurchaseSolicitation.make!(:reparo,
                                :service_status => PurchaseSolicitationServiceStatus::LIBERATED)

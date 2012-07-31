@@ -23,13 +23,12 @@ class PurchaseSolicitation < Compras::Model
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :purchase_solicitation_item_group_purchase_solicitations, :dependent => :destroy
   has_many :purchase_solicitation_item_groups, :through => :purchase_solicitation_item_group_purchase_solicitations, :dependent => :restrict
+  has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
-  has_one :liberation, :class_name => 'PurchaseSolicitationLiberation', :dependent => :destroy
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
   delegate :amount, :description, :id, :to => :budget_allocation, :prefix => true, :allow_nil => true
-  delegate :id, :to => :liberation, :prefix => true, :allow_nil => true
 
   validates :request_date, :responsible, :delivery_location, :presence => true
   validates :accounting_year, :kind, :delivery_location, :presence => true
@@ -73,14 +72,6 @@ class PurchaseSolicitation < Compras::Model
     PurchaseSolicitation.joins { items }.
       where { |purchase| purchase.items.material_id.eq(material_id) &
                          purchase.id.eq( self.id ) }.sum(:quantity)
-  end
-
-  def released?
-    liberation.present?
-  end
-
-  def releasable?
-    pending? && !released?
   end
 
   def editable?

@@ -1,0 +1,10 @@
+<div class="actions">
+  <ul>
+    <li>
+      <%= link_to 'Voltar para a Solicitação de Compras', edit_purchase_solicitation_path(@parent) %>
+    </li>
+    <li>
+      <%= create_link(:purchase_solicitation_id => @parent.id) if @parent.pending? %>
+    </li>
+  </ul>
+</div>

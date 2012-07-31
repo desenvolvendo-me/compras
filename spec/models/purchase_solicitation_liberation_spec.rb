@@ -11,7 +11,7 @@ describe PurchaseSolicitationLiberation do
   it { should validate_presence_of :responsible }
 
   it 'should validate #to_s' do
-    subject.stub(:purchase_solicitation).and_return('1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho')
-    subject.to_s.should eq 'Liberação da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    subject.stub(:sequence => 1)
+    subject.to_s.should eq '1'
   end
 end

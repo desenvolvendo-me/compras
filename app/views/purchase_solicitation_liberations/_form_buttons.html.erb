@@ -1,4 +1,4 @@
 <div class="buttons">
   <%= f.button :submit unless f.object.persisted? %>
-  <%= link_to "Cancelar", edit_purchase_solicitation_path(:id => params[:purchase_solicitation_id]), :class => 'button' %>
+  <%= f.button :cancel, :href => purchase_solicitation_liberations_path(:purchase_solicitation_id => f.object.purchase_solicitation_id) %>
 </div>

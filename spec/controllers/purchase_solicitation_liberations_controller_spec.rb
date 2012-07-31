@@ -47,11 +47,19 @@ describe PurchaseSolicitationLiberationsController do
     end
 
     it 'should assign the purchase solicitation' do
-      assigns(:purchase_solicitation).id.should eq purchase_solicitation.id
+      assigns(:parent).id.should eq purchase_solicitation.id
     end
 
-    it 'should redirect to edit purchase solicitation path' do
-      response.should redirect_to edit_purchase_solicitation_path(purchase_solicitation)
+    it 'should redirect to index' do
+      response.should redirect_to purchase_solicitation_liberations_path(:purchase_solicitation_id => purchase_solicitation.id)
     end
+  end
+
+  it 'GET #new with purchase solicitation liberated' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
+
+    get :new, :purchase_solicitation_id => purchase_solicitation.id
+
+    response.code.should eq '401'
   end
 end

@@ -12,10 +12,12 @@ class PurchaseSolicitationLiberation < Compras::Model
             :purchase_solicitation, :presence => true
   validates :date, :timeliness => { :type => :date }, :allow_blank => true
 
+  auto_increment :sequence, :by => :purchase_solicitation_id
+
   orderize :justification
   filterize
 
   def to_s
-    "Liberação da Solicitação de Compra #{purchase_solicitation}"
+    sequence.to_s
   end
 end

@@ -7,13 +7,20 @@ class PurchaseSolicitationLiberationsController < CrudController
     object = build_resource
     object.responsible = current_user.authenticable
     object.date = Date.current
-    object.purchase_solicitation = @purchase_solicitation
+    object.purchase_solicitation = @parent
 
     super
   end
 
   def create
-    create!(:notice => t('compras.messages.purchase_solicitation_liberated_successful')) { edit_purchase_solicitation_path(@purchase_solicitation) }
+    create!(:notice => t('compras.messages.purchase_solicitation_liberated_successful')) { purchase_solicitation_liberations_path(:purchase_solicitation_id => @parent.id) }
+  end
+
+  def begin_of_association_chain
+    if params[:purchase_solicitation_id]
+      @parent = PurchaseSolicitation.find(params[:purchase_solicitation_id])
+      return @parent
+    end
   end
 
   protected
@@ -22,15 +29,16 @@ class PurchaseSolicitationLiberationsController < CrudController
     object.transaction do
       return unless super
 
-      return false unless @purchase_solicitation.liberation.present?
-
-      @purchase_solicitation.change_status!(object.service_status)
+      @parent.change_status!(object.service_status)
     end
   end
 
   def check_purchase_solicitation
-    purchase_solicitation_id = params[:purchase_solicitation_id] || params[:purchase_solicitation_liberation][:purchase_solicitation_id]
+    @parent ||= PurchaseSolicitation.find(params[:purchase_solicitation_id] ||
+                                          params[:purchase_solicitation_liberation][:purchase_solicitation_id])
 
-    @purchase_solicitation = PurchaseSolicitation.pending.find(purchase_solicitation_id)
+    return if @parent.pending?
+
+    raise Exceptions::Unauthorized
   end
 end
