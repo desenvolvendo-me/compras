@@ -1,6 +1,6 @@
 <div class="buttons">
-  <%= f.object.decorator.count_link %>
-  <%= f.object.decorator.proposals_link %>
+  <%= count_link %>
+  <%= proposals_link %>
   <%= f.button :submit, 'Apurar' if f.object.persisted? %>
   <%= annul_link(:param_name => 'price_collection_id') %>
   <%= f.button :submit unless f.object.annulled? %>

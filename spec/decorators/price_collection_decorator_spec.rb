@@ -24,27 +24,4 @@ describe PriceCollectionDecorator do
       end
     end
   end
-
-  context '#proposals_link' do
-    context 'when not persisted' do
-      before do
-        component.stub(:persisted?).and_return false
-      end
-
-      it 'should not return the link for proposal when the price collection is not persisted' do
-        subject.proposals_link.should be_nil
-      end
-    end
-
-    context 'when persisted' do
-      before do
-        component.stub(:persisted?).and_return true
-        routes.stub(:price_collection_price_collection_proposals_path).with(component).and_return '#'
-      end
-
-      it 'should return the link for proposal when the price collection is persisted' do
-        subject.proposals_link.should eq '<a href="#" class="button primary">Propostas</a>'
-      end
-    end
-  end
 end
