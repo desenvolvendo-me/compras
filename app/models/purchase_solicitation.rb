@@ -65,7 +65,7 @@ class PurchaseSolicitation < Compras::Model
     update_column :service_status, PurchaseSolicitationServiceStatus::ANNULLED
   end
 
-  def liberate!(status)
+  def change_status!(status)
     update_column :service_status, status
   end
 

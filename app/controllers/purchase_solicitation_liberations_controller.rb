@@ -24,7 +24,7 @@ class PurchaseSolicitationLiberationsController < CrudController
 
       return false unless @purchase_solicitation.liberation.present?
 
-      @purchase_solicitation.liberate!(object.service_status)
+      @purchase_solicitation.change_status!(object.service_status)
     end
   end
 

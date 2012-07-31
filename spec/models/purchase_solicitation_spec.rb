@@ -61,7 +61,7 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '#liberate!' do
+  describe '#change_status!' do
     let :liberation do
       double :liberation
     end
@@ -70,7 +70,7 @@ describe PurchaseSolicitation do
       subject.stub(:liberation).and_return(liberation)
       subject.should_receive(:update_column).with(:service_status, 'liberated')
 
-      subject.liberate!('liberated')
+      subject.change_status!('liberated')
     end
   end
 
