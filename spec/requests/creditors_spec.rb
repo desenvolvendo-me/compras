@@ -76,8 +76,8 @@ feature "Creditors" do
     page.should_not have_field 'PIS/PASEP'
 
     within_tab 'Contas Bancárias' do
-      page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
-      page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should have_field 'Banco', :with => 'Itaú'
+      page.should have_field 'Agência', :with => 'Agência Itaú'
       page.should have_select 'Status', :selected => 'Ativo'
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '12345'
@@ -287,8 +287,8 @@ feature "Creditors" do
     end
 
     within_tab 'Contas Bancárias' do
-      page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
-      page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should have_field 'Banco', :with => 'Itaú'
+      page.should have_field 'Agência', :with => 'Agência Itaú'
       page.should have_select 'Status', :selected => 'Ativo'
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '12345'
@@ -420,8 +420,8 @@ feature "Creditors" do
     end
 
     within_tab 'Contas Bancárias' do
-      page.should have_field 'Banco', :with => 'Itaú', :field => 'Nome'
-      page.should have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should have_field 'Banco', :with => 'Itaú'
+      page.should have_field 'Agência', :with => 'Agência Itaú'
       page.should have_select 'Status', :selected => 'Ativo'
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '12345'
@@ -716,11 +716,11 @@ feature "Creditors" do
     page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
 
     within_tab 'Contas Bancárias' do
-      page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
-      page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should_not have_field 'Banco', :with => 'Itaú'
+      page.should_not have_field 'Agência', :with => 'Agência Itaú'
 
-      page.should have_field 'Banco', :with => 'Santander', :field => 'Nome'
-      page.should have_field 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      page.should have_field 'Banco', :with => 'Santander'
+      page.should have_field 'Agência', :with => 'Agência Santander'
       page.should have_select 'Status', :selected => 'Ativo'
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '98765'
@@ -943,11 +943,11 @@ feature "Creditors" do
     end
 
     within_tab 'Contas Bancárias' do
-      page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
-      page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should_not have_field 'Banco', :with => 'Itaú'
+      page.should_not have_field 'Agência', :with => 'Agência Itaú'
 
-      page.should have_field 'Banco', :with => 'Santander', :field => 'Nome'
-      page.should have_field 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      page.should have_field 'Banco', :with => 'Santander'
+      page.should have_field 'Agência', :with => 'Agência Santander'
       page.should have_select 'Status', :selected => 'Ativo'
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '98765'
@@ -1076,11 +1076,11 @@ feature "Creditors" do
     end
 
     within_tab 'Contas Bancárias' do
-      page.should_not have_field 'Banco', :with => 'Itaú', :field => 'Nome'
-      page.should_not have_field 'Agência', :with => 'Agência Itaú', :field => 'Nome'
+      page.should_not have_field 'Banco', :with => 'Itaú'
+      page.should_not have_field 'Agência', :with => 'Agência Itaú'
 
-      page.should have_field 'Banco', :with => 'Santander', :field => 'Nome'
-      page.should have_field 'Agência', :with => 'Agência Santander', :field => 'Nome'
+      page.should have_field 'Banco', :with => 'Santander'
+      page.should have_field 'Agência', :with => 'Agência Santander'
       page.should have_select 'Status', :selected => 'Ativo'
       page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
       page.should have_field 'Número da conta', :with => '98765'

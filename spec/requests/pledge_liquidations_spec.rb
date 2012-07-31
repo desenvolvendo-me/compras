@@ -198,9 +198,9 @@ feature "PledgeLiquidations" do
 
     within_tab 'Parcelas' do
       page.should have_disabled_field 'Parcela'
-      page.should have_field 'Parcela', :field => '1'
+      page.should have_field 'Parcela', :with => '1'
       page.should have_disabled_field 'Valor *'
-      page.should have_field 'Valor *', :field => '1,00'
+      page.should have_field 'Valor *', :with => '1,00'
 
       page.should_not have_button 'Adicionar Parcela'
       page.should_not have_button 'Remover Parcela'
