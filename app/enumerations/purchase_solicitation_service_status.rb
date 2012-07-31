@@ -3,9 +3,7 @@ class PurchaseSolicitationServiceStatus < EnumerateIt::Base
 
   def self.liberation_availables
     to_a.select do |item|
-      item[1] == PurchaseSolicitationServiceStatus::LIBERATED ||
-      item[1] == PurchaseSolicitationServiceStatus::NOT_LIBERATED ||
-      item[1] == PurchaseSolicitationServiceStatus::RETURNED
+      [LIBERATED,  NOT_LIBERATED, RETURNED].include?(item[1])
     end
   end
 end
