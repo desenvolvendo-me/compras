@@ -25,7 +25,7 @@ feature "Neighborhoods" do
 
     fill_in 'Nome', :with => 'Alvorada'
 
-    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
+    fill_modal 'Cidade', :with => 'Porto Alegre'
 
     click_button 'Salvar'
 
@@ -93,14 +93,14 @@ feature "Neighborhoods" do
 
     fill_in 'Nome', :with => 'Portugal'
 
-    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
+    fill_modal 'Cidade', :with => 'Porto Alegre'
 
-    fill_modal 'Distrito', :with => 'Leste', :field => 'Nome'
+    fill_modal 'Distrito', :with => 'Leste'
 
     click_button 'Salvar'
     page.should have_content 'já está em uso'
 
-    fill_modal 'Distrito', :with => 'Oeste', :field => 'Nome'
+    fill_modal 'Distrito', :with => 'Oeste'
 
     click_button 'Salvar'
     page.should have_notice 'Bairro criado com sucesso.'
@@ -113,7 +113,7 @@ feature "Neighborhoods" do
 
     click_link 'Criar Bairro'
 
-    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
+    fill_modal 'Cidade', :with => 'Porto Alegre'
 
     within_modal 'Distrito' do
       page.should have_disabled_field 'Cidade'
@@ -129,7 +129,7 @@ feature "Neighborhoods" do
 
     click_link 'Criar Bairro'
 
-    fill_modal 'Cidade', :with => 'Porto Alegre', :field => 'Nome'
+    fill_modal 'Cidade', :with => 'Porto Alegre'
 
     within_modal 'Distrito' do
       click_button 'Pesquisar'
