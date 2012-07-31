@@ -4,7 +4,6 @@ class LicitationProcessDecorator
   include Decore::Routes
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
-  include ActionView::Helpers::UrlHelper
 
   def envelope_delivery_time
     localize(super, :format => :hour) if super

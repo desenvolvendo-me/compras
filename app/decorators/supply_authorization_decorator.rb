@@ -2,8 +2,6 @@
 class SupplyAuthorizationDecorator
   include Decore
   include Decore::Proxy
-  include Decore::Routes
-  include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TranslationHelper
 
   def date
