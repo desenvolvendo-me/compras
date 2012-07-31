@@ -17,7 +17,7 @@ feature "LicitationProcessAppeals" do
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
     fill_in 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
     select 'Edital', :from => 'Referente ao'
-    fill_modal 'Autor', :with => 'Gabriel Sobrinho', :field => 'Nome'
+    fill_modal 'Autor', :with => 'Gabriel Sobrinho'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
     fill_in 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
     fill_in 'Nova hora da abertura dos envelopes', :with => '15:30'
@@ -54,7 +54,7 @@ feature "LicitationProcessAppeals" do
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
     fill_in 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
     select 'Revogação', :from => 'Referente ao'
-    fill_modal 'Autor', :with => 'Wenderson Malheiros', :field => 'Nome'
+    fill_modal 'Autor', :with => 'Wenderson Malheiros'
     fill_in 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
     fill_in 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
     fill_in 'Nova hora da abertura dos envelopes', :with => '16:00'

@@ -17,7 +17,7 @@ feature "Precatories" do
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123456'
       within_modal 'Beneficiário' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
@@ -141,7 +141,7 @@ feature "Precatories" do
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123455'
       within_modal 'Beneficiário' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
         click_button 'Pesquisar'
         click_record 'Gabriel Sobrinho'
       end

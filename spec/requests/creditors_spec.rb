@@ -16,12 +16,12 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Mateus', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Mateus'
 
     within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta Bancária'
 
-      fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
+      fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
         page.should have_disabled_field 'Banco'
@@ -116,7 +116,7 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Nohup'
 
     click_link 'Mais informações'
 
@@ -140,7 +140,7 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Nohup'
 
     within_tab 'Principal' do
       page.should have_disabled_field 'Porte da empresa'
@@ -203,7 +203,7 @@ feature "Creditors" do
     within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta Bancária'
 
-      fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
+      fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
         page.should have_disabled_field 'Banco'
@@ -322,7 +322,7 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
     click_button 'Salvar'
 
@@ -340,10 +340,10 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
     within_tab 'Principal' do
-      fill_modal 'CBO', :with => 'MEMBROS DAS FORÇAS ARMADAS', :field => 'Nome'
+      fill_modal 'CBO', :with => 'MEMBROS DAS FORÇAS ARMADAS'
       check 'Admnistração pública municipal'
       check 'Autônomo'
       fill_in 'PIS/PASEP', :with => '123456'
@@ -357,7 +357,7 @@ feature "Creditors" do
     within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta Bancária'
 
-      fill_modal 'Banco', :with => 'Itaú', :field => 'Nome'
+      fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
         page.should have_disabled_field 'Banco'
@@ -655,7 +655,7 @@ feature "Creditors" do
       click_button 'Remover Conta Bancária'
       click_button 'Adicionar Conta Bancária'
 
-      fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
+      fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
         page.should have_disabled_field 'Banco'
@@ -826,7 +826,7 @@ feature "Creditors" do
       page.should have_content '003.151.987-37'
       click_button 'Remover'
 
-      fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Materiais' do
@@ -839,7 +839,7 @@ feature "Creditors" do
       click_button 'Remover Conta Bancária'
       click_button 'Adicionar Conta Bancária'
 
-      fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
+      fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
         page.should have_disabled_field 'Banco'
@@ -989,7 +989,7 @@ feature "Creditors" do
     click_link 'Gabriel Sobrinho'
 
     within_tab 'Principal' do
-      fill_modal 'CBO', :with => 'Engenheiro', :field => 'Nome'
+      fill_modal 'CBO', :with => 'Engenheiro'
       check 'Autônomo'
       fill_in 'PIS/PASEP', :with => '6789'
       fill_in 'Início do contrato', :with => '05/04/2011'
@@ -1004,7 +1004,7 @@ feature "Creditors" do
       click_button 'Remover Conta Bancária'
       click_button 'Adicionar Conta Bancária'
 
-      fill_modal 'Banco', :with => 'Santander', :field => 'Nome'
+      fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
         page.should have_disabled_field 'Banco'
@@ -1171,7 +1171,7 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Mateus Lorandi', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Mateus Lorandi'
 
     within "#creditor-tabs" do
        page.should_not have_link "Principal"
@@ -1192,7 +1192,7 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
     within "#creditor-tabs" do
        page.should have_link "Principal"
@@ -1213,7 +1213,7 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Nohup', :field => 'Nome'
+    fill_modal 'Pessoa', :with => 'Nohup'
 
     within "#creditor-tabs" do
        page.should have_link "Principal"

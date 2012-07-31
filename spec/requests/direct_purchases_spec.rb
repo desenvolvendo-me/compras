@@ -33,7 +33,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
@@ -135,7 +135,7 @@ feature "DirectPurchases" do
       select 'Global', :from => 'Tipo do empenho'
 
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
@@ -302,7 +302,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end

@@ -70,7 +70,7 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
-      fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => '14:00'
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
@@ -241,7 +241,7 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10'
       select 'dia/dias', :from => 'Período da validade da proposta'
-      fill_modal 'Índice de reajuste', :with => 'SELIC', :field => 'Nome'
+      fill_modal 'Índice de reajuste', :with => 'SELIC'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
       fill_in 'Hora da entrega', :with => '15:00'
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
@@ -355,7 +355,7 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
       select 'dia/dias', :from => 'Período da validade da proposta'
-      fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => '15:00'
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
@@ -816,7 +816,7 @@ feature "LicitationProcesses" do
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
-      fill_modal 'Índice de reajuste', :with => 'XPTO', :field => 'Nome'
+      fill_modal 'Índice de reajuste', :with => 'XPTO'
       fill_in 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
       fill_in 'Hora da entrega', :with => I18n.l(Date.current, :format => 'time')
       fill_in 'Data da abertura dos envelopes', :with => I18n.l(Date.current)

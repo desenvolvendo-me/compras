@@ -50,7 +50,7 @@ feature "LicitationProcessBidders" do
     page.should have_field 'Processo administrativo', :with => '1/2013'
 
     within_modal 'Fornecedor' do
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       click_button 'Pesquisar'
       click_record 'Gabriel Sobrinho'
     end
@@ -61,8 +61,8 @@ feature "LicitationProcessBidders" do
     fill_in 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
     within_tab 'Representantes credenciados' do
-      fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
-      fill_modal 'Representantes', :with => 'Joao da Silva', :field => 'Nome'
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
+      fill_modal 'Representantes', :with => 'Joao da Silva'
     end
 
     within_tab 'Documentos' do
@@ -168,7 +168,7 @@ feature "LicitationProcessBidders" do
     page.should have_field 'Processo administrativo', :with => '1/2013'
 
     within_modal 'Fornecedor' do
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       click_button 'Pesquisar'
       click_record 'Gabriel Sobrinho'
     end
@@ -181,7 +181,7 @@ feature "LicitationProcessBidders" do
     within_tab 'Representantes credenciados' do
       click_button 'Remover Pessoa'
 
-      fill_modal 'Representantes', :with => 'Wenderson Malheiros', :field => 'Nome'
+      fill_modal 'Representantes', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Documentos' do
@@ -355,7 +355,7 @@ feature "LicitationProcessBidders" do
     click_link 'Criar Licitante'
 
     within_modal 'Fornecedor' do
-      fill_modal 'Pessoa', :with => 'Wenderson', :field => 'Nome'
+      fill_modal 'Pessoa', :with => 'Wenderson'
       click_button 'Pesquisar'
       click_record 'Wenderson'
     end

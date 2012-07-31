@@ -80,7 +80,7 @@ feature "Contracts" do
     fill_modal 'Local de publicação', :with => 'Jornal Oficial do Município', :field => 'Descrição'
 
     within_modal 'Fornecedor' do
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho', :field => 'Nome'
+      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
       click_button 'Pesquisar'
       click_record 'Gabriel Sobrinho'
     end

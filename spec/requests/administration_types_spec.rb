@@ -16,7 +16,7 @@ feature "AdministrationTypes" do
     fill_in 'Descrição', :with => 'Pública'
     select 'Direta', :from => 'Administração'
     select 'Autarquia', :from => 'Tipo do órgão'
-    fill_modal 'Natureza jurídica', :with => 'Administração Pública', :field => 'Nome'
+    fill_modal 'Natureza jurídica', :with => 'Administração Pública'
 
     click_button 'Salvar'
 
@@ -43,7 +43,7 @@ feature "AdministrationTypes" do
     fill_in 'Descrição', :with => 'Privada'
     select 'Indireta', :from => 'Administração'
     select 'Fundo especial', :from => 'Tipo do órgão'
-    fill_modal 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal', :field => 'Nome'
+    fill_modal 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
 
     click_button 'Salvar'
 

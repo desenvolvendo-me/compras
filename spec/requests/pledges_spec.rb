@@ -40,7 +40,7 @@ feature "Pledges" do
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
@@ -421,7 +421,7 @@ feature "Pledges" do
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
@@ -799,7 +799,7 @@ feature "Pledges" do
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
@@ -842,7 +842,7 @@ feature "Pledges" do
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end

@@ -57,7 +57,7 @@ feature "PriceCollections" do
       click_on 'Adicionar Fornecedor'
 
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho SA', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho SA'
         click_button 'Pesquisar'
         click_record 'Gabriel Sobrinho SA'
       end
@@ -126,7 +126,7 @@ feature "PriceCollections" do
       click_on 'Adicionar Fornecedor'
 
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
@@ -235,7 +235,7 @@ feature "PriceCollections" do
       click_on 'Adicionar Fornecedor'
 
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'José Gomes', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'José Gomes'
         click_button 'Pesquisar'
         click_record 'José Gomes'
       end
@@ -724,7 +724,7 @@ feature "PriceCollections" do
       click_button 'Adicionar Fornecedor'
 
       within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end

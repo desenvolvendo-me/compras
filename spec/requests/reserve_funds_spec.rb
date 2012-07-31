@@ -33,7 +33,7 @@ feature "ReserveFunds" do
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
     within_modal 'Favorecido' do
-      fill_modal 'Pessoa', :with => 'Wenderson Malheiros', :field => 'Nome'
+      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
