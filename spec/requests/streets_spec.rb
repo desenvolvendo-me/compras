@@ -77,4 +77,19 @@ feature "Streets" do
 
     page.should_not have_content 'Girassol'
   end
+
+  scenario 'should not allow more than one time neighborhood' do
+    Neighborhood.make!(:centro)
+
+    navigate_through 'Outros > Logradouros'
+
+    click_link 'Criar Logradouro'
+
+    fill_modal 'Bairro', :with => 'Centro'
+    fill_modal 'Bairro', :with => 'Centro'
+
+    page.should have_content 'Centro'
+
+    page.should have_css 'tr.record', :count => 1
+  end
 end
