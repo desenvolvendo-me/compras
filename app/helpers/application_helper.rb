@@ -94,7 +94,7 @@ module ApplicationHelper
   end
 
   def cancel_link
-    link_to 'cancelar', :back
+    link_to 'voltar', :back
   end
 
   def print_link

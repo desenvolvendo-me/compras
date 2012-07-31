@@ -564,7 +564,7 @@ feature "PriceCollections" do
       page.should have_content 'Sim'
     end
 
-    click_link 'cancelar'
+    click_link 'voltar'
 
     click_link 'Relatório'
 
