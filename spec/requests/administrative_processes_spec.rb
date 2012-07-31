@@ -131,6 +131,7 @@ feature "AdministrativeProcesses" do
     page.should have_content 'Gerente'
     page.should have_content 'Wenderson Malheiros'
     page.should have_content 'Supervisor'
+    page.should have_content '1 - Alocação'
   end
 
   scenario 'value calculation on budget allocations' do

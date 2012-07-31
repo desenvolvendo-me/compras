@@ -61,3 +61,7 @@ hr {
 .table-border .label {
   font-weight: bold;
 }
+
+.top-margin {
+  margin-top: 20px;
+}
