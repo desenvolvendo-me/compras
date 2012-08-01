@@ -37,7 +37,7 @@ describe PriceCollectionClassificationGenerator do
   end
 
   let :lot do
-    double('PriceCollectionLot', :id => 20, :creditor => double('Creditor'), :lots_with_total_value => lots_with_total_value)
+    double('PriceCollectionLot', :id => 20, :creditor => double('Creditor'), :lots_with_total_value => lots_with_total_value, :items => items)
   end
 
   let :price_collection_lots do
