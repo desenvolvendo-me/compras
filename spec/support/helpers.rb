@@ -127,12 +127,6 @@ module Helpers
     end
   end
 
-  def navigate_through(path)
-    path.split('>').each do |link|
-      click_link link.strip
-    end
-  end
-
   def within_dialog
     within :xpath, '(//div[contains(@class, "ui-dialog")])[last()]' do
       yield
