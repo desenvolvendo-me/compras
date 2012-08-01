@@ -10,11 +10,11 @@
   <div class="yui3-g">
     <% signature_group.each do |signature| %>
       <div class="yui3-u-1<%= "-#{signature_group.size}" if signature_group.size > 1 %>">
-        <div class="name-position">
+        <div class="name-position center">
           <%= signature.person %>
         </div>
 
-        <div class="name-position">
+        <div class="name-position center">
           <%= signature.position %>
         </div>
       </div>

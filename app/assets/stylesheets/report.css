@@ -6,4 +6,5 @@
  *= require report/footer
  *= require report/compras-layout
  *= require report/compras-records
+ *= require report/signature
  */
