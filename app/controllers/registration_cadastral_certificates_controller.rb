@@ -25,7 +25,6 @@ class RegistrationCadastralCertificatesController < CrudController
   def begin_of_association_chain
     if params[:creditor_id]
       @parent = Creditor.find(params[:creditor_id])
-      return @parent
     end
   end
 end

@@ -23,7 +23,6 @@ class LicitationProcessLotsController < CrudController
   def begin_of_association_chain
     if params[:licitation_process_id]
       @parent = LicitationProcess.find(params[:licitation_process_id])
-      return @parent
     end
   end
 
