@@ -41,12 +41,14 @@ class PriceCollectionClassificationGenerator
 
   def lowest_price_by_lot(proposal)
     price_collection_lots.each do |lot|
-      price_collection_classification_repository.create!(
-        :total_value => proposal.item_total_value_by_lot(lot),
-        :classification => proposal.classification_by_lot(lot),
-        :creditor_id => proposal.creditor_id,
-        :classifiable => lot
-      )
+      unless lot.items.empty?
+        price_collection_classification_repository.create!(
+          :total_value => proposal.item_total_value_by_lot(lot),
+          :classification => proposal.classification_by_lot(lot),
+          :creditor_id => proposal.creditor_id,
+          :classifiable => lot
+        )
+      end
     end
   end
 end

@@ -76,7 +76,7 @@ class PriceCollection < Compras::Model
   end
 
   def destroy_all_price_collection_classifications
-    price_collection_classifications.destroy_all
+    all_price_collection_classifications.destroy_all
   end
 
   protected
