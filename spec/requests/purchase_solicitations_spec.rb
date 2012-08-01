@@ -60,6 +60,8 @@ feature "PurchaseSolicitations" do
       fill_in 'Valor unitário', :with => '200,00'
 
       page.should have_disabled_field 'Valor total'
+      page.should have_disabled_field 'Status'
+      page.should have_select 'Status', :selected => 'Pendente'
 
       # asserting calculated total price of the item
       page.should have_field 'Valor total', :with => '700,00'
@@ -98,6 +100,8 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Quantidade', :with => '3,50'
       page.should have_field 'Valor unitário', :with => '200,00'
       page.should have_field 'Valor total', :with => '700,00'
+      page.should have_select 'Status', :selected => 'Pendente'
+      page.should have_disabled_field 'Status'
 
       page.should have_field 'Item', :with => '1'
     end
@@ -154,6 +158,8 @@ feature "PurchaseSolicitations" do
       fill_in 'Marca/Referência', :with => 'Ferro SA'
       fill_in 'Quantidade', :with => '200,00'
       fill_in 'Valor unitário', :with => '25,00'
+      page.should have_disabled_field 'Status'
+      page.should have_select 'Status', :selected => 'Pendente'
 
       # asserting calculated unit price of the item
       page.should have_field 'Valor total', :with => '5.000,00'
@@ -189,6 +195,8 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Quantidade', :with => '200,00'
       page.should have_field 'Valor unitário', :with => '25,00'
       page.should have_field 'Valor total', :with => '5.000,00'
+      page.should have_select 'Status', :selected => 'Pendente'
+      page.should have_disabled_field 'Status'
 
       page.should have_field 'Item', :with => '1'
     end
@@ -393,6 +401,8 @@ feature "PurchaseSolicitations" do
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,00'
       fill_in 'Valor unitário', :with => '200,00'
+      page.should have_disabled_field 'Status'
+      page.should have_select 'Status', :selected => 'Pendente'
     end
 
     click_button 'Salvar'
@@ -428,6 +438,8 @@ feature "PurchaseSolicitations" do
       page.should have_field 'Quantidade', :with => '3,00'
       page.should have_field 'Valor unitário', :with => '200,00'
       page.should have_field 'Valor total', :with => '600,00'
+      page.should have_select 'Status', :selected => 'Pendente'
+      page.should have_disabled_field 'Status'
 
       page.should have_field 'Item', :with => '1'
     end
