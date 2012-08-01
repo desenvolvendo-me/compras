@@ -19,7 +19,6 @@ class PurchaseSolicitationLiberationsController < CrudController
   def begin_of_association_chain
     if params[:purchase_solicitation_id]
       @parent = PurchaseSolicitation.find(params[:purchase_solicitation_id])
-      return @parent
     end
   end
 
