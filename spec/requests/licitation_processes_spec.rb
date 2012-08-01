@@ -836,4 +836,25 @@ feature "LicitationProcesses" do
 
     page.should_not have_content 'Routing Error No route matches'
   end
+
+  scenario 'should filter by process' do
+    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio_computador, :process => 2)
+
+    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.should have_css 'a', :count => 2
+    end
+
+    click_link 'Filtrar Processos Licitatórios'
+
+    fill_in 'Processo', :with => 1
+
+    click_button 'Pesquisar'
+
+    within_records do
+      page.should have_css 'a', :count => 1
+    end
+  end
 end
