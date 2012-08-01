@@ -30,16 +30,16 @@
   </div>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-12">
      <span class="label"><%= Creditor.human_attribute_name :id %></span>: <%= resource.creditor_id %>
     </div>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-8">
     <span class="label"><%#= "Atividade Econômica:" %></span>
     </div>
 
-    <div class="yui3-u-1-3">
-    <span class="label"><%#= "Tipo da Empresa:" %></span>
+    <div class="yui3-u-2-3">
+    <span class="label">Tipo da Empresa</span>: <%= resource.creditor_main_cnae %>
     </div>
   </div>
 
@@ -79,7 +79,7 @@
     </div>
 
     <div class="yui3-u-1-4">
-      <span class="label"><%#= "Fax" %></span>
+      <span class="label"><%= Person.human_attribute_name :fax %></span>: <%= resource.creditor_fax %></span>
     </div>
   </div>
 

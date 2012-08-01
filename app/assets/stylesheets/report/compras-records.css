@@ -1,16 +1,12 @@
-table.records {
-  width: 100%;
+table.records.black {
+  color: #000;
 }
 
 table.records td, table.records th {
-  border: 0;
+  border: 1px solid #000;
   padding: 1em;
 }
 
-table.records th {
-  text-align: left;
-}
-
 table.records tr:nth-child(even) td, table.records tr.zebra td {
-  background-color: #F0F0F0;
+  background-color: #FFF;
 }

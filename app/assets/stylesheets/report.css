@@ -4,4 +4,6 @@
  *= require report/header
  *= require report/records
  *= require report/footer
+ *= require report/compras-layout
+ *= require report/compras-records
  */

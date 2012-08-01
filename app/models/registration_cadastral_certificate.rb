@@ -8,9 +8,9 @@ class RegistrationCadastralCertificate < Compras::Model
   belongs_to :creditor
 
   delegate :id, :name, :address, :neighborhood, :email, :city, :state, :country,
-           :zip_code, :phone, :cnpj, :state_registration, :responsible,
+           :zip_code, :phone, :fax, :cnpj, :state_registration, :responsible,
            :responsible_identity_document, :main_cnae_code, :main_cnae, :cnaes,
-           :documents, :to => :creditor, :prefix => true
+           :documents, :to => :creditor, :prefix => true, :allow_nil => true
 
   validates :fiscal_year, :specification, :creditor, :presence => true
   validates :registration_date, :validity_date, :presence => true
