@@ -17,7 +17,7 @@ def setup():
     _compile_assets()
     unicorn_start()
 
-def deploy(branch = "master"):
+def deploy(branch = "origin/master"):
     _update_code(branch)
     _bundle_gems()
     _make_symlinks()
