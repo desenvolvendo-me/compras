@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase_solicitation_item_group_material:
+        one: "Material da Solicitação de Compra do Agrupamento de Item"
+        other: "Materiais da Solicitação de Compra do Agrupamento de Item"
+
+    attributes:
+      purchase_solicitation_item_group_material:
+        material: "Material"
+        purchase_solicitation_item_group: "Agrupamento de itens de solicitação de compra"
+        purchase_solicitations: "Solicitação de compra"
+

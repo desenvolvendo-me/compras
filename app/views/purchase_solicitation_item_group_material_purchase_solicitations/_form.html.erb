@@ -1,0 +1,13 @@
+<div class="material-purchase-solicitation nested">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <%= f.input :purchase_solicitation_item_group_material %>
+  <%= f.input :purchase_solicitation %>
+
+  <div class="yui3-g">
+    <p class="yui3-u">
+      <input type="button" class="button negative remove-material-purchase-solicitation" value="Remover Solicitação de Compras">
+    </p>
+  </div>
+</div>

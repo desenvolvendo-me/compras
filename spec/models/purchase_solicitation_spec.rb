@@ -7,8 +7,7 @@ require 'app/models/purchase_solicitation_budget_allocation'
 require 'app/models/purchase_solicitation_budget_allocation_item'
 require 'app/models/purchase_solicitation_liberation'
 require 'app/models/resource_annul'
-require 'app/models/purchase_solicitation_item_group'
-require 'app/models/purchase_solicitation_item_group_purchase_solicitation'
+require 'app/models/purchase_solicitation_item_group_material_purchase_solicitation'
 
 describe PurchaseSolicitation do
   it 'should return the code/accounting_year in to_s method' do
@@ -23,9 +22,8 @@ describe PurchaseSolicitation do
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:items).through(:purchase_solicitation_budget_allocations)}
-  it { should have_many(:purchase_solicitation_item_group_purchase_solicitations)}
-  it { should have_many(:purchase_solicitation_item_groups).through(:purchase_solicitation_item_group_purchase_solicitations)}
   it { should have_many(:purchase_solicitation_liberations).dependent(:destroy).order(:sequence) }
+  it { should have_many(:purchase_solicitation_item_group_material_purchase_solicitations).dependent(:destroy)}
   it { should have_one(:annul).dependent(:destroy) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }

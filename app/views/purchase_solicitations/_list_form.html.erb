@@ -6,7 +6,7 @@
     <%= quantity_by_material %>
   </td>
   <td>
-    <input id="<%= f.sanitized_object_name %>_purchase_solicitations_record_<%= id %>_id" type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" value="<%= id %>" />
+    <input id="<%= f.sanitized_object_name %>_purchase_solicitations_record_<%= id %>_id" type="hidden" name="<%= f.object_name %><%= "[purchase_solicitation_ids]" if f.object.persisted? || f.object.errors.any? %>[]" value="<%= id %>" />
     <button class="button negative modal-finder-remove">Remover</button>
   </td>
 </tr>

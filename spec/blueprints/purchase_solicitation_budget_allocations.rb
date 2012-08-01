@@ -10,5 +10,5 @@ PurchaseSolicitationBudgetAllocation.blueprint(:alocacao_primaria_2013) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   expense_nature { ExpenseNature.make!(:compra_de_material) }
   blocked { false }
-  items { [PurchaseSolicitationBudgetAllocationItem.make!(:item, :quantity => 99)] }
+  items { [PurchaseSolicitationBudgetAllocationItem.make!(:arame_farpado)] }
 end

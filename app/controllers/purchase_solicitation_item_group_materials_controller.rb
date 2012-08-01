@@ -1,0 +1,2 @@
+class PurchaseSolicitationItemGroupMaterialsController < CrudController
+end

@@ -18,11 +18,11 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
     (quantity || 0) * (unit_price || 0)
   end
 
-  def self.grouped!
-    update_all(:status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
+  def self.group!(ids)
+    where { id.in(ids) }.update_all(:status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED )
   end
 
-  def self.pending!
-    update_all(:status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING)
+  def self.pending!(ids)
+    where { id.in(ids) }.update_all(:status => PurchaseSolicitationBudgetAllocationItemStatus::PENDING)
   end
 end

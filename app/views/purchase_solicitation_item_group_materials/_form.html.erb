@@ -1,0 +1,19 @@
+<div class="purchase-solicitation-item-group-material nested">
+
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <%= f.input :material, :wrapper_html => { :class => 'material-modal' } %>
+    </div>
+  </div>
+
+  <%= render 'purchase_solicitation_item_group_materials/purchase_solicitation', :f => f %>
+
+  <div class="yui3-g">
+    <p class="yui3-u">
+      <input type="button" class="button negative remove-purchase-solicitation-item-group-material" value="Remover Material">
+    </p>
+  </div>
+</div>

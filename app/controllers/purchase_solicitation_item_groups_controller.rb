@@ -6,7 +6,9 @@ class PurchaseSolicitationItemGroupsController < CrudController
     object.transaction do
       return unless super
 
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.new(object.purchase_solicitation_ids).change
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.new({
+        :new_item_ids => object.purchase_solicitation_ids
+      }).change
     end
   end
 
@@ -16,7 +18,10 @@ class PurchaseSolicitationItemGroupsController < CrudController
 
       return unless super
 
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.new(object.purchase_solicitation_ids, old_purchase_solicitation_ids).change
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.new({
+        :new_item_ids => object.purchase_solicitation_ids,
+        :old_item_ids => old_purchase_solicitation_ids
+      }).change
     end
   end
 
@@ -26,7 +31,9 @@ class PurchaseSolicitationItemGroupsController < CrudController
 
       return unless super
 
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.new([], old_purchase_solicitation_ids).change
+      PurchaseSolicitationBudgetAllocationItemStatusChanger.new({
+        :old_item_ids => old_purchase_solicitation_ids
+      }).change
     end
   end
 end

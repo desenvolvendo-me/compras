@@ -700,7 +700,12 @@ Compras::Application.routes.draw do
     end
   end
 
-  get 'purchase_solicitation_item_group_purchase_solicitations/modal', :as => :modal_purchase_solicitation_item_group_purchase_solicitations
+  resources :purchase_solicitation_item_group_materials do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
 
   resources :purchase_solicitation_liberations, :only => [:index, :new, :create, :edit] do
     collection do

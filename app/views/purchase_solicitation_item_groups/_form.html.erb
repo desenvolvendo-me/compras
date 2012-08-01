@@ -1,59 +1,54 @@
-<%= f.input :material %>
+<%= f.error :purchase_solicitation_item_group_materials %>
 
-<div class="yui3-g modal-finder">
-  <div class="yui3-u-1-2">
-    <%= f.association :purchase_solicitations, :as => :modal, :hidden_field => false, :input_html => { :value => nil }, :modal_url => modal_purchase_solicitations_path %>
-  </div>
+<p>
+  <input type="button" class="button affirmative add-purchase-solicitation-item-group-material" value="Adicionar Material">
+</p>
+
+<div id="materials-association">
+  <%= f.association :purchase_solicitation_item_group_materials, :collection => localized(f.object.purchase_solicitation_item_group_materials) do |p| %>
+    <%= render 'purchase_solicitation_item_group_materials/form', :f => p %>
+  <% end %>
 </div>
 
-<input type="hidden" name="<%= f.sanitized_object_name %>[purchase_solicitation_ids][]" />
-
-<%= f.error :purchase_solicitation_item_group_purchase_solicitations  %>
-
-<table class="records">
-  <thead>
-    <tr>
-      <th>
-        <%= PurchaseSolicitation.human_attribute_name :purchase_solicitation %>
-      </th>
-      <th>
-        <%= PurchaseSolicitation.human_attribute_name :quantity_by_material %>
-      </th>
-      <th>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody class="<%= f.sanitized_object_name %>_purchase_solicitations_records">
-    <% f.object.purchase_solicitations.each do |purchase_solicitation| %>
-      <%= render 'purchase_solicitations/list_form', :purchase_solicitation => purchase_solicitation,  :id => purchase_solicitation.id, :quantity_by_material => purchase_solicitation.decorator.quantity_by_material(f.object.material_id), :f => f %>
-    <% end %>
-  </tbody>
-</table>
-
-<%= mustache "#{f.sanitized_object_name}_purchase_solicitations_template" do %>
-  <%= f.association :purchase_solicitations, :collection => f.object.purchase_solicitations.build do |p| %>
-    <%= render 'purchase_solicitations/list_form', :purchase_solicitation => '{{purchase_solicitation}}', :id => '{{id}}', :quantity_by_material => "{{quantity_by_material}}", :f => f %>
+<%= mustache 'purchase-solicitation-item-group-materials-template' do %>
+  <%= f.association :purchase_solicitation_item_group_materials_attributes, :collection => f.object.purchase_solicitation_item_group_materials.build, :index => '{{uuid_purchase_solicitation_item_group_material}}' do |p| %>
+    <%= render 'purchase_solicitation_item_group_materials/form', :f => p %>
   <% end %>
 <% end %>
 
 <script>
-  function enableDisablePurchaseSolicitation(){
-    var value = $('#purchase_solicitation_item_group_material_id').val() == ''
+  $("#purchase-solicitation-item-group-materials-template").nestedForm({
+    add: '.add-purchase-solicitation-item-group-material',
+    remove: '.remove-purchase-solicitation-item-group-material',
+    target: '#materials-association',
+    uuid: 'uuid_purchase_solicitation_item_group_material',
+    fieldToRemove: '.purchase-solicitation-item-group-material',
+    appendItem: false
+  });
 
-    $('#purchase_solicitation_item_group_purchase_solicitations').attr('disabled', value);
-  };
+  $('form.purchase_solicitation_item_group').on('change', '.material-modal', function(){
+     filterModalUrl($(this));
+     enableDisablePurchaseSolicitation($(this));
+     clearPurchaseSolicitation($(this));
+  });
 
-  $('#purchase_solicitation_item_group_purchase_solicitations').focus(purchaseSolicitationModalUrl);
+  $('form.purchase_solicitation_item_group').on('focus', '.purchase-solicitation-modal', function(){
+    filterModalUrl($(this));
+  });
 
-  function purchaseSolicitationModalUrl(){
-    var objectPurchaseSolicitationIds = '<%= f.object.purchase_solicitation_ids.join(",") %>';
-    objectPurchaseSolicitationIds = objectPurchaseSolicitationIds.split(',');
+  function filterModalUrl(object){
+    object = object.closest('.purchase-solicitation-item-group-material');
+    objectPurchaseSolicitationIds = object.find('.purchase-solicitation-ids').val();
+
+    if (typeof objectPurchaseSolicitationIds != 'undefined') {
+      objectPurchaseSolicitationIds = objectPurchaseSolicitationIds.replace('[', '').replace(']','');
+      objectPurchaseSolicitationIds = objectPurchaseSolicitationIds.split(',');
+    }
 
     var tableItems = [];
     var deletedItems = [];
 
-    $('table.records td').children('input').each(function(index, item) {
+    object.find('table.records td').children('input').each(function(index, item) {
       tableItems.push($(item).val());
     });
 
@@ -64,20 +59,29 @@
     });
 
     var url = "<%= modal_purchase_solicitations_path %>?",
-    params = {
-      by_material_id: $('#purchase_solicitation_item_group_material_id').val(),
-      by_pending_or_ids: deletedItems,
-      except_ids: tableItems
-    };
+        params = {
+          by_material_id: object.find('.material-modal input:hidden').val(),
+          by_pending_or_ids: deletedItems,
+          except_ids: tableItems
+        };
 
     url += jQuery.param(params);
-    $("#purchase_solicitation_item_group_purchase_solicitations").attr('data-modal-url', url); 
+    object.find(".purchase-solicitation-modal").attr('data-modal-url', url);
   };
 
-  $('#purchase_solicitation_item_group_material_id').change( function(){
-    enableDisablePurchaseSolicitation();
-    $('.purchase_solicitation_item_group_purchase_solicitations_records').html('');
-  });
+  function enableDisablePurchaseSolicitation(object){
+    var value = object.closest('.purchase-solicitation-item-group-material').find('.material-modal input:hidden').val() == ''
 
-  enableDisablePurchaseSolicitation();
+    object.closest('.purchase-solicitation-item-group-material').find(".purchase-solicitation-modal").attr('disabled', value);
+  };
+
+  function clearPurchaseSolicitation(object){
+    object.closest('.purchase-solicitation-item-group-material').find(".record, .purchase-solicitation").html('');
+  }
+
+  (function(){
+    $('.purchase-solicitation-item-group-material').each(function(){
+      filterModalUrl($(this));
+    })
+  })();
 </script>

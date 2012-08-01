@@ -1,0 +1,5 @@
+class RenameComprasPurchaseSolicitationItemGroupMaterialPurchaseSolicitations < ActiveRecord::Migration
+  def change
+    rename_table :compras_purchase_solicitation_item_group_purchase_solicitations, :compras_item_group_material_purchase_solicitations
+  end
+end

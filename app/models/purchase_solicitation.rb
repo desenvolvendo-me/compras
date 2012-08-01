@@ -21,9 +21,8 @@ class PurchaseSolicitation < Compras::Model
   has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation, :order => :id
   has_many :items, :through => :purchase_solicitation_budget_allocations
   has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
-  has_many :purchase_solicitation_item_group_purchase_solicitations, :dependent => :destroy
-  has_many :purchase_solicitation_item_groups, :through => :purchase_solicitation_item_group_purchase_solicitations, :dependent => :restrict
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence
+  has_many :purchase_solicitation_item_group_material_purchase_solicitations, :dependent => :destroy
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true

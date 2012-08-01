@@ -125,7 +125,7 @@ pt-BR:
     program_kinds: "Tipos de Programas"
     purchase_solicitation_annuls: "Anulações de Solicitações de Compras"
     purchase_solicitation_item_groups: "Agrupamentos de Itens de Solicitações de Compra"
-    purchase_solicitation_item_group_purchase_solicitations: "Solicitações de Compras dos Agrupamentos de Itens"
+    purchase_solicitation_item_group_material_purchase_solicitations: "Solicitações de Compras dos Agrupamentos de Itens"
     purchase_solicitation_liberations: "Liberações de Solicitações de Compra"
     registration_cadastral_certificates: "Registros de Certidões de Cadastros"
     reserve_fund_annuls: "Anulações de Reserveas de Dotações"
@@ -158,3 +158,4 @@ pt-BR:
     budget_revenue: "Receita Orçamentária"
     occurrence_contractual_historics: "Históricos de Ocorrências Contratuais"
     licitation_process_ratifications: "Homologações e Adjudicações de Processos Licitatórios"
+    purchase_solicitation_item_group_materials: "Materiais da Solicitação de Compra do Agrupamento de Item"
