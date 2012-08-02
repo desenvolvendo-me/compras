@@ -7,15 +7,10 @@ class DirectPurchaseModalityLimitVerificator
   end
 
   def value_less_than_available_limit?
-    resultant_total_of_licitation_object <= current_limit
+    total_items_value <= current_limit
   end
 
   protected
-
-  # future total when the direct purchase that is being created was saved
-  def resultant_total_of_licitation_object
-    current_total_of_licitation_object + value_to_be_added
-  end
 
   # current modality limit value for the modality selected
   def current_limit
@@ -26,18 +21,8 @@ class DirectPurchaseModalityLimitVerificator
     end
   end
 
-  # sum of all item values of all direct purchase items that belongs to selected
-  # licitation object
-  def current_total_of_licitation_object
-    if direct_purchase.material_or_service?
-      direct_purchase.licitation_object_purchase_licitation_exemption
-    elsif direct_purchase.engineering_works?
-      direct_purchase.licitation_object_build_licitation_exemption
-    end
-  end
-
   # total items value for direct purchase that is being created
-  def value_to_be_added
+  def total_items_value
     direct_purchase.total_allocations_items_value
   end
 end

@@ -12,3 +12,8 @@ DirectPurchaseBudgetAllocation.blueprint(:alocacao_compra_engenharia) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
   items { [DirectPurchaseBudgetAllocationItem.make!(:compra_direta_item_engenharia)] }
 end
+
+DirectPurchaseBudgetAllocation.blueprint(:valores_proximo_ao_limite) do
+  budget_allocation { BudgetAllocation.make!(:alocacao) }
+  items { [DirectPurchaseBudgetAllocationItem.make!(:kaspersky)] }
+end

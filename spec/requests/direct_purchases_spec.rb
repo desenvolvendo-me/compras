@@ -521,4 +521,50 @@ feature "DirectPurchases" do
       page.should have_content 'é necessário cadastrar pelo menos um item'
     end
   end
+
+  scenario 'when is not over limit should show error' do
+    DirectPurchase.make!(:compra_perto_do_limite)
+
+    navigate_through 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações' do
+      fill_in 'Quantidade', :with => '2,00'
+      fill_in 'Valor unitário *', :with => '1.000,00'
+    end
+
+    click_button 'Salvar'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações' do
+      page.should_not have_content 'está acima do valor disponível no limite em vigor para esta modalidade'
+    end
+  end
+
+  scenario 'when is over limit should show error' do
+    DirectPurchase.make!(:compra_perto_do_limite)
+
+    navigate_through 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações' do
+      fill_in 'Quantidade', :with => '1,00'
+      fill_in 'Valor unitário *', :with => '100.000,00'
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Dotações' do
+      page.should have_content 'está acima do valor disponível no limite em vigor para esta modalidade'
+    end
+  end
 end

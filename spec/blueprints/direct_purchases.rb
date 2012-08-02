@@ -108,3 +108,27 @@ DirectPurchase.blueprint(:company_purchase) do
   period_unit { PeriodUnit::YEAR }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_engenharia)] }
 end
+
+DirectPurchase.blueprint(:compra_perto_do_limite) do
+  ModalityLimit.make!(:modalidade_de_compra)
+  direct_purchase { 1 }
+  year { 2012 }
+  date { Date.new(2012, 3, 2) }
+  legal_reference { LegalReference.make!(:referencia) }
+  modality { DirectPurchaseModality::MATERIAL_OR_SERVICE }
+  pledge_type { DirectPurchasePledgeType::GLOBAL }
+  creditor { Creditor.make!(:wenderson_sa) }
+  budget_structure { BudgetStructure.make!(:secretaria_de_educacao) }
+  licitation_object { LicitationObject.make!(:ponte) }
+  delivery_location { DeliveryLocation.make!(:education) }
+  employee { Employee.make!(:sobrinho) }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  price_collection { 9.99 }
+  price_registration { 8.88 }
+  observation { "Observacoes" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  direct_purchase_budget_allocations { [
+    DirectPurchaseBudgetAllocation.make!(:valores_proximo_ao_limite)
+  ] }
+end
