@@ -5,15 +5,15 @@
 <div class="table-border">
   <div class="yui3-g">
     <div class="yui3-u-1-3">
-      <span class="label">Número da autorização</span>: <%= resource %>
+      <span class="label">Número</span>: <%= resource %>
     </div>
 
     <div class="yui3-u-1-3">
-      <span class="label"><%= resource_class.human_attribute_name :direct_purchase %></span>: <%= resource.decorator.direct_purchase %>
+      <span class="label">Compra Direta Número</span>: <%= resource.decorator.direct_purchase %>
     </div>
 
     <div class="yui3-u-1-3">
-      <span class="label">Número da autorização</span>: <%= resource.decorator.date %>
+      <span class="label">Data da compra</span>: <%= resource.decorator.date %>
     </div>
   </div>
 </div>

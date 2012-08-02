@@ -21,6 +21,9 @@ feature "SupplyAuthorizations" do
     click_link 'Imprimir autorização de fornecimento'
 
     page.should have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
+    page.should have_content 'Número'
+    page.should have_content 'Compra Direta Número'
+    page.should have_content 'Data da compra'
     page.should have_content "#{supply_authorization}"
     page.should have_content "#{direct_purchase.id}/2012"
     page.should have_content '01/12/2012'
