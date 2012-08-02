@@ -45,7 +45,7 @@ module ActiveRecord
 
       def columns
         @columns ||= begin
-          columns = attributes.map do |attribute|
+          columns = klass.modal_attributes.map do |attribute|
             find_column(klass, attribute)
           end
 

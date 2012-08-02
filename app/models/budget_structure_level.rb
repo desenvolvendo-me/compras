@@ -2,7 +2,7 @@ class BudgetStructureLevel < Compras::Model
   attr_accessible :level, :description, :digits, :separator
   attr_accessible :budget_structure_configuration_id
 
-  attr_modal :budget_structure_configuration, :level, :description
+  attr_modal :budget_structure_configuration_id, :level, :description
 
   has_enumeration_for :separator, :with => BudgetStructureSeparator, :create_helpers => true
 
