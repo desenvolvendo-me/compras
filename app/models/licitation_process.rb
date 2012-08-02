@@ -91,7 +91,7 @@ class LicitationProcess < Compras::Model
   before_update :assign_bidders_documents
 
   orderize :id
-  filterize accessible_attributes << :process
+  filterize
 
   def to_s
     "#{process}/#{year}"
