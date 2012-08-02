@@ -10,7 +10,7 @@ feature "RegistrationCadastralCertificates" do
     Prefecture.make!(:belo_horizonte)
     Creditor.make!(:nohup)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Credores'
+    navigate 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Nohup'
 

@@ -9,7 +9,7 @@ feature "AdministrationTypes" do
   scenario 'create a new administration_type' do
     make_dependencies!
 
-    navigate_through 'Outros > Tipos de Administração'
+    navigate 'Outros > Tipos de Administração'
 
     click_link 'Criar Tipo de Administração'
 
@@ -36,7 +36,7 @@ feature "AdministrationTypes" do
     AdministrationType.make!(:publica)
     LegalNature.make!(:executivo_federal)
 
-    navigate_through 'Outros > Tipos de Administração'
+    navigate 'Outros > Tipos de Administração'
 
     click_link 'Pública'
 
@@ -60,7 +60,7 @@ feature "AdministrationTypes" do
   scenario 'destroy an existent administration_type' do
     AdministrationType.make!(:publica)
 
-    navigate_through 'Outros > Tipos de Administração'
+    navigate 'Outros > Tipos de Administração'
 
     click_link 'Pública'
 
@@ -74,7 +74,7 @@ feature "AdministrationTypes" do
   scenario 'validates uniqueness of description' do
     AdministrationType.make!(:publica)
 
-    navigate_through 'Outros > Tipos de Administração'
+    navigate 'Outros > Tipos de Administração'
 
     click_link 'Criar Tipo de Administração'
 

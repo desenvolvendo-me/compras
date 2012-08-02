@@ -12,7 +12,7 @@ feature "PurchaseSolicitationLiberations" do
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
 
-    navigate_through 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Compras e Licitações > Solicitações de Compra'
 
     within_records do
       page.find('a').click

@@ -9,7 +9,7 @@ feature "Neighborhoods" do
   scenario 'fetch default city from settings' do
     Setting.make!(:default_city)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -19,7 +19,7 @@ feature "Neighborhoods" do
   scenario 'create a new neighborhood' do
     City.make!(:porto_alegre)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -40,7 +40,7 @@ feature "Neighborhoods" do
   scenario 'update a neighborhood' do
     Neighborhood.make!(:centro)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Centro'
 
@@ -59,7 +59,7 @@ feature "Neighborhoods" do
   scenario 'destroy a neighborhood' do
     Neighborhood.make!(:centro)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Centro'
 
@@ -73,7 +73,7 @@ feature "Neighborhoods" do
   scenario 'cannot destroy a neighborhood with streets' do
     Street.make!(:girassol)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Centro'
 
@@ -87,7 +87,7 @@ feature "Neighborhoods" do
     Neighborhood.make!(:portugal)
     District.make!(:oeste)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -109,7 +109,7 @@ feature "Neighborhoods" do
   scenario 'should lock district by city' do
     City.make!(:porto_alegre)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -125,7 +125,7 @@ feature "Neighborhoods" do
     District.make!(:centro)
     District.make!(:leste)
 
-    navigate_through 'Outros > Bairros'
+    navigate 'Outros > Bairros'
 
     click_link 'Criar Bairro'
 

@@ -9,7 +9,7 @@ feature "LicitationNotices" do
   scenario 'create a new licitation_notice' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
 
     click_link 'Criar Aviso de Licitação'
 
@@ -46,7 +46,7 @@ feature "LicitationNotices" do
     licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
 
     click_link licitation_notice.to_s
 
@@ -74,7 +74,7 @@ feature "LicitationNotices" do
     LicitationNotice.make!(:aviso_de_licitacao)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
 
     click_link 'Criar Aviso de Licitação'
 
@@ -103,7 +103,7 @@ feature "LicitationNotices" do
   scenario 'create a new licitation_notice when already exists a licitation_notice with other licitation process year' do
     LicitationNotice.make!(:aviso_de_licitacao)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
 
     click_link 'Criar Aviso de Licitação'
 
@@ -132,7 +132,7 @@ feature "LicitationNotices" do
   scenario 'destroy an existent licitation_notice' do
     licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
 
     click_link licitation_notice.to_s
 
@@ -147,7 +147,7 @@ feature "LicitationNotices" do
   scenario 'delegate fields should be empty when clear licitaion process' do
     licitation_notice = LicitationNotice.make!(:aviso_de_licitacao)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Avisos de Licitações'
 
     click_link licitation_notice.to_s
 

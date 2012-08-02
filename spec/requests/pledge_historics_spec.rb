@@ -9,7 +9,7 @@ feature "PledgeHistorics" do
   scenario 'create a new pledge_historic' do
     Descriptor.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Históricos de Empenho'
+    navigate 'Contabilidade > Execução > Empenho > Históricos de Empenho'
 
     click_link 'Criar Histórico de Empenho'
 
@@ -30,7 +30,7 @@ feature "PledgeHistorics" do
     PledgeHistoric.make!(:semestral)
     Descriptor.make!(:secretaria_de_educacao_2013)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Históricos de Empenho'
+    navigate 'Contabilidade > Execução > Empenho > Históricos de Empenho'
 
     click_link 'Semestral'
 
@@ -50,7 +50,7 @@ feature "PledgeHistorics" do
   scenario 'destroy an existent pledge_historic' do
     PledgeHistoric.make!(:semestral)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Históricos de Empenho'
+    navigate 'Contabilidade > Execução > Empenho > Históricos de Empenho'
 
     click_link 'Semestral'
 

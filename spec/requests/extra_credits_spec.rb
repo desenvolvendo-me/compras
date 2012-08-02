@@ -15,7 +15,7 @@ feature "ExtraCredits" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Capability.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link 'Criar Crédito Suplementar'
 
@@ -105,7 +105,7 @@ feature "ExtraCredits" do
     BudgetAllocation.make!(:alocacao)
     Capability.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link 'Criar Crédito Suplementar'
 
@@ -157,7 +157,7 @@ feature "ExtraCredits" do
     BudgetAllocation.make!(:alocacao)
     Capability.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link 'Criar Crédito Suplementar'
 
@@ -189,7 +189,7 @@ feature "ExtraCredits" do
   scenario 'when fill administractive act should fill regulatory_act_type and publication_date too' do
     RegulatoryAct.make!(:sopa)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link 'Criar Crédito Suplementar'
 
@@ -202,7 +202,7 @@ feature "ExtraCredits" do
   scenario 'when fill additional credit opening should fill kind too' do
     ExtraCreditNature.make!(:abre_credito)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link 'Criar Crédito Suplementar'
 
@@ -215,7 +215,7 @@ feature "ExtraCredits" do
     scenario 'when already stored' do
       extra_credit = ExtraCredit.make!(:detran_2012)
 
-      navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+      navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
       click_link "#{extra_credit.id}"
 
@@ -232,7 +232,7 @@ feature "ExtraCredits" do
       extra_credit = ExtraCredit.make!(:detran_2012)
       BudgetAllocation.make!(:alocacao_extra)
 
-      navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+      navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
       click_link extra_credit.to_s
 
@@ -249,7 +249,7 @@ feature "ExtraCredits" do
       MovimentType.make!(:adicionar_dotacao)
       BudgetAllocation.make!(:alocacao_extra)
 
-      navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+      navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
       click_link 'Criar Crédito Suplementar'
 
@@ -272,7 +272,7 @@ feature "ExtraCredits" do
     scenario 'when already stored' do
       extra_credit = ExtraCredit.make!(:detran_2012)
 
-      navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+      navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
       click_link extra_credit.to_s
 
@@ -291,7 +291,7 @@ feature "ExtraCredits" do
       extra_credit = ExtraCredit.make!(:detran_2012)
       Capability.make!(:construcao)
 
-      navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+      navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
       click_link extra_credit.to_s
 
@@ -312,7 +312,7 @@ feature "ExtraCredits" do
       MovimentType.make!(:subtrair_do_excesso_arrecadado)
       Capability.make!(:construcao)
 
-      navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+      navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
       click_link 'Criar Crédito Suplementar'
 
@@ -336,7 +336,7 @@ feature "ExtraCredits" do
   scenario 'remove extra_credit_moviment_type' do
     extra_credit = ExtraCredit.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link extra_credit.to_s
 
@@ -365,7 +365,7 @@ feature "ExtraCredits" do
     MovimentType.make!(:subtrair_do_excesso_arrecadado)
     Capability.make!(:reforma)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link extra_credit.to_s
 
@@ -419,7 +419,7 @@ feature "ExtraCredits" do
     BudgetAllocation.make!(:alocacao)
     extra_credit = ExtraCredit.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link extra_credit.to_s
 
@@ -443,7 +443,7 @@ feature "ExtraCredits" do
     BudgetAllocation.make!(:alocacao)
     extra_credit = ExtraCredit.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link extra_credit.to_s
 
@@ -466,7 +466,7 @@ feature "ExtraCredits" do
   scenario 'validate uniqueness of administractive act' do
     ExtraCredit.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link 'Criar Crédito Suplementar'
 
@@ -480,7 +480,7 @@ feature "ExtraCredits" do
   scenario 'destroy an existent extra_credit' do
     extra_credit = ExtraCredit.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link extra_credit.to_s
 
@@ -496,7 +496,7 @@ feature "ExtraCredits" do
   scenario 'access modal' do
     extra_credit = ExtraCredit.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+    navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
     click_link 'Filtrar Créditos Suplementares'
 

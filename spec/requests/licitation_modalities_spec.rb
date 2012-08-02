@@ -9,7 +9,7 @@ feature "LicitationModalities" do
   scenario 'create a new licitation_modality' do
     RegulatoryAct.make!(:sopa)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
+    navigate 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
 
     click_link 'Criar Modalidade de Licitação'
 
@@ -34,7 +34,7 @@ feature "LicitationModalities" do
     LicitationModality.make!(:publica)
     RegulatoryAct.make!(:emenda)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
+    navigate 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
 
     click_link 'Pública'
 
@@ -58,7 +58,7 @@ feature "LicitationModalities" do
   scenario 'destroy an existent licitation_modality' do
     LicitationModality.make!(:publica)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
+    navigate 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
 
     click_link 'Pública'
 
@@ -75,7 +75,7 @@ feature "LicitationModalities" do
   scenario 'should get the publication date when administractive act is selected' do
     RegulatoryAct.make!(:sopa)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
+    navigate 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
 
     click_link 'Criar Modalidade de Licitação'
 
@@ -91,7 +91,7 @@ feature "LicitationModalities" do
   scenario 'should clean the publication date when administractive act is removed' do
     LicitationModality.make!(:publica)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
+    navigate 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
 
     click_link 'Pública'
 
@@ -107,7 +107,7 @@ feature "LicitationModalities" do
   scenario 'should validate initial and final value range taken' do
     LicitationModality.make!(:publica)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
+    navigate 'Compras e Licitações > Cadastros Gerais > Modalidades de Licitação'
 
     click_link 'Criar Modalidade de Licitação'
 

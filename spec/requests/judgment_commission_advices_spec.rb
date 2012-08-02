@@ -12,7 +12,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:sobrinho)
     Person.make!(:wenderson)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -122,7 +122,7 @@ feature "JudgmentCommissionAdvices" do
     new_licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     new_licitation_commission = LicitationCommission.make!(:comissao_nova)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -196,7 +196,7 @@ feature "JudgmentCommissionAdvices" do
   scenario 'destroy an existent judgment_commission_advice' do
     advice = JudgmentCommissionAdvice.make!(:parecer)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -224,7 +224,7 @@ feature "JudgmentCommissionAdvices" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationCommission.make!(:comissao)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -269,7 +269,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:sobrinho)
     Person.make!(:wenderson)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -332,7 +332,7 @@ feature "JudgmentCommissionAdvices" do
     Person.make!(:wenderson)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click

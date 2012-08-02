@@ -14,7 +14,7 @@ feature "ReserveFunds" do
     Creditor.make!(:wenderson_sa)
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link 'Criar Reserva de Dotação'
 
@@ -62,7 +62,7 @@ feature "ReserveFunds" do
     ReserveFund.make!(:detran_2012)
     budget_allocation = BudgetAllocation.make!(:alocacao)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link '2012'
 
@@ -91,7 +91,7 @@ feature "ReserveFunds" do
   scenario 'should not have link to destroy an existent reserve_fund' do
     ReserveFund.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link '2012'
 
@@ -101,7 +101,7 @@ feature "ReserveFunds" do
   scenario 'getting and cleaning budget_allocation amount via javascript' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link 'Criar Reserva de Dotação'
 
@@ -121,7 +121,7 @@ feature "ReserveFunds" do
   scenario 'show modal info of budget allocation' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link 'Criar Reserva de Dotação'
 
@@ -150,7 +150,7 @@ feature "ReserveFunds" do
     ReserveAllocationType.make!(:licitation)
     ReserveAllocationType.make!(:comum)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link 'Criar Reserva de Dotação'
 
@@ -178,7 +178,7 @@ feature "ReserveFunds" do
     ReserveAllocationType.make!(:comum)
     LicitationModality.make!(:publica)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link 'Criar Reserva de Dotação'
 
@@ -196,7 +196,7 @@ feature "ReserveFunds" do
   scenario 'should fill/clear delegate liciation_process fields' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate_through 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
+    navigate 'Contabilidade > Execução > Reserva de Dotação > Reservas de Dotação'
 
     click_link 'Criar Reserva de Dotação'
 

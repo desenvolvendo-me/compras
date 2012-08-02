@@ -10,7 +10,7 @@ feature "Streets" do
     Neighborhood.make!(:centro)
     StreetType.make!(:rua)
 
-    navigate_through 'Outros > Logradouros'
+    navigate 'Outros > Logradouros'
 
     click_link 'Criar Logradouro'
 
@@ -40,7 +40,7 @@ feature "Streets" do
     StreetType.make!(:avenida)
     Street.make!(:girassol)
 
-    navigate_through 'Outros > Logradouros'
+    navigate 'Outros > Logradouros'
 
     click_link 'Girassol'
 
@@ -67,7 +67,7 @@ feature "Streets" do
   scenario 'destroy a street' do
     Street.make!(:girassol)
 
-    navigate_through 'Outros > Logradouros'
+    navigate 'Outros > Logradouros'
 
     click_link 'Girassol'
 
@@ -81,7 +81,7 @@ feature "Streets" do
   scenario 'should not allow more than one time neighborhood' do
     Neighborhood.make!(:centro)
 
-    navigate_through 'Outros > Logradouros'
+    navigate 'Outros > Logradouros'
 
     click_link 'Criar Logradouro'
 

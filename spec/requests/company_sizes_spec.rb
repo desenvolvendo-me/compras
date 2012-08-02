@@ -7,7 +7,7 @@ feature "CompanySizes" do
   end
 
   scenario 'create a new company_size' do
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Portes das Empresas'
+    navigate 'Compras e Licitações > Cadastros Gerais > Portes das Empresas'
 
     click_link 'Criar Porte da Empresa'
 
@@ -31,7 +31,7 @@ feature "CompanySizes" do
   scenario 'update an existent company_size' do
     CompanySize.make!(:micro_empresa)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Portes das Empresas'
+    navigate 'Compras e Licitações > Cadastros Gerais > Portes das Empresas'
 
     click_link 'Microempresa'
 
@@ -53,7 +53,7 @@ feature "CompanySizes" do
   scenario 'destroy an existent company_size' do
     CompanySize.make!(:empresa_de_grande_porte)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Portes das Empresas'
+    navigate 'Compras e Licitações > Cadastros Gerais > Portes das Empresas'
 
     click_link 'Empresa de grande porte'
 

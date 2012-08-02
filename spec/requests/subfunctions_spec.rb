@@ -10,7 +10,7 @@ feature "Subfunctions" do
     Function.make!(:administracao)
     Descriptor.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
+    navigate 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
 
     click_link 'Criar Subfunção'
 
@@ -36,7 +36,7 @@ feature "Subfunctions" do
     Function.make!(:execucao)
     Descriptor.make!(:secretaria_de_educacao_2011)
 
-    navigate_through 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
+    navigate 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
 
     click_link '01'
 
@@ -60,7 +60,7 @@ feature "Subfunctions" do
   scenario 'destroy an existent subfunction' do
     Subfunction.make!(:geral)
 
-    navigate_through 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
+    navigate 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
 
     click_link '01'
 
@@ -75,7 +75,7 @@ feature "Subfunctions" do
   scenario 'validate uniqueness of code' do
     Subfunction.make!(:geral)
 
-    navigate_through 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
+    navigate 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
 
     click_link 'Criar Subfunção'
 
@@ -89,7 +89,7 @@ feature "Subfunctions" do
   scenario 'validate uniqueness of description' do
     Subfunction.make!(:geral)
 
-    navigate_through 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
+    navigate 'Contabilidade > Orçamento > Classificação Funcional > Subfunções'
 
     click_link 'Criar Subfunção'
 

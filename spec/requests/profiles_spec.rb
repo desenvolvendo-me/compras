@@ -7,7 +7,7 @@ feature "Profiles" do
   end
 
   scenario 'create a new profile' do
-    navigate_through 'Outros > Perfis'
+    navigate 'Outros > Perfis'
 
     click_link 'Criar Perfil'
 
@@ -25,7 +25,7 @@ feature "Profiles" do
   scenario 'update a profile' do
     Profile.make!(:manager)
 
-    navigate_through 'Outros > Perfis'
+    navigate 'Outros > Perfis'
 
     click_link 'Gestor'
 
@@ -43,7 +43,7 @@ feature "Profiles" do
   scenario 'destroy a profile' do
     Profile.make!(:manager)
 
-    navigate_through 'Outros > Perfis'
+    navigate 'Outros > Perfis'
 
     click_link 'Gestor'
 

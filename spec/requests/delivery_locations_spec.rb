@@ -9,7 +9,7 @@ feature "DeliveryLocations" do
   scenario 'create a new delivery_location' do
     Address.make!(:general)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
+    navigate 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
 
     click_link 'Criar Local de Entrega'
 
@@ -54,7 +54,7 @@ feature "DeliveryLocations" do
     Address.make!(:general)
     DeliveryLocation.make!(:education)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
+    navigate 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
 
     click_link 'Secretaria da Educação'
 
@@ -97,7 +97,7 @@ feature "DeliveryLocations" do
   scenario 'destroy an existent delivery_location' do
     DeliveryLocation.make!(:education)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
+    navigate 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
 
     click_link 'Secretaria da Educação'
 
@@ -111,7 +111,7 @@ feature "DeliveryLocations" do
   scenario 'create a new delivery_location' do
     DeliveryLocation.make!(:health)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
+    navigate 'Compras e Licitações > Cadastros Gerais > Locais de Entrega'
 
     click_link 'Criar Local de Entrega'
 

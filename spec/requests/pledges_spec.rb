@@ -23,7 +23,7 @@ feature "Pledges" do
     Material.make!(:arame_farpado)
     Material.make!(:antivirus)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -134,7 +134,7 @@ feature "Pledges" do
     ReserveFund.make!(:reparo_2011)
     ExpenseNature.make!(:vencimento_e_salarios)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -163,7 +163,7 @@ feature "Pledges" do
     BudgetAllocation.make!(:reparo_2011)
     ExpenseNature.make!(:vencimento_e_salarios)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -199,7 +199,7 @@ feature "Pledges" do
       other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_category => nil)
       other_expense_nature.save(:validate => false)
 
-      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+      navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
       click_link 'Criar Empenho'
 
@@ -234,7 +234,7 @@ feature "Pledges" do
       other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_group => nil)
       other_expense_nature.save(:validate => false)
 
-      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+      navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
       click_link 'Criar Empenho'
 
@@ -269,7 +269,7 @@ feature "Pledges" do
       other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_modality => nil)
       other_expense_nature.save(:validate => false)
 
-      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+      navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
       click_link 'Criar Empenho'
 
@@ -304,7 +304,7 @@ feature "Pledges" do
       other_expense_nature = ExpenseNature.make(:vencimento_e_salarios, :expense_element => nil)
       other_expense_nature.save(:validate => false)
 
-      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+      navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
       click_link 'Criar Empenho'
 
@@ -333,7 +333,7 @@ feature "Pledges" do
   scenario 'when submit a form with some error should return filtered expense_nature' do
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -361,7 +361,7 @@ feature "Pledges" do
     scenario 'when already stored' do
       pledge = Pledge.make!(:empenho)
 
-      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+      navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
       click_link pledge.to_s
 
@@ -375,7 +375,7 @@ feature "Pledges" do
     scenario 'when change budget_allocation' do
       BudgetAllocation.make!(:reparo_2011)
 
-      navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+      navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
       click_link 'Criar Empenho'
 
@@ -406,7 +406,7 @@ feature "Pledges" do
     Contract.make!(:contrato_detran)
     Material.make!(:arame_farpado)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -450,7 +450,7 @@ feature "Pledges" do
   scenario 'should have all fields disabled when editing an existent pledge' do
     Pledge.make!(:empenho)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     within_records do
       page.find('a').click
@@ -495,7 +495,7 @@ feature "Pledges" do
   scenario 'should not have a button to destroy an existent pledge' do
     pledge = Pledge.make!(:empenho)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link pledge.to_s
 
@@ -506,7 +506,7 @@ feature "Pledges" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     ReserveFund.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -523,7 +523,7 @@ feature "Pledges" do
     BudgetAllocation.make!(:alocacao_extra)
     ReserveFund.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -544,7 +544,7 @@ feature "Pledges" do
   scenario 'clear reserve_fund_value field when clear' do
     ReserveFund.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -565,7 +565,7 @@ feature "Pledges" do
   scenario 'getting and cleaning budget delegated fields depending on budget allocation field' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -590,7 +590,7 @@ feature "Pledges" do
   scenario 'clear delegate fields for licitation process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -610,7 +610,7 @@ feature "Pledges" do
   scenario 'getting and cleaning signature date depending on contract' do
     Contract.make!(:primeiro_contrato)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -640,7 +640,7 @@ feature "Pledges" do
     Contract.make!(:primeiro_contrato)
     Material.make!(:arame_farpado)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -685,7 +685,7 @@ feature "Pledges" do
   end
 
   scenario 'should recalculate the total of items on item exclusion' do
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -717,7 +717,7 @@ feature "Pledges" do
   scenario 'should have localized budget_allocation_amount and reserve_fund_value for a new pledge' do
     ReserveFund.make!(:reparo_2011)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -732,7 +732,7 @@ feature "Pledges" do
   scenario 'should have localized budget_allocation_amount and reserve_fund_value for an existent pledge' do
     Pledge.make!(:empenho_saldo_maior_mil)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     within_records do
       page.find('a').click
@@ -748,7 +748,7 @@ feature "Pledges" do
     Contract.make!(:primeiro_contrato)
     Contract.make!(:contrato_detran)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -778,7 +778,7 @@ feature "Pledges" do
     ReserveFund.make!(:detran_2012)
     ExpenseNature.make!(:compra_de_material)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -822,7 +822,7 @@ feature "Pledges" do
     Descriptor.make!(:detran_2011)
     ExpenseNature.make!(:compra_de_material)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -863,7 +863,7 @@ feature "Pledges" do
   scenario 'validating javascript to item modal' do
     Material.make!(:arame_farpado)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 
@@ -886,7 +886,7 @@ feature "Pledges" do
     BudgetAllocation.make!(:alocacao)
     ReserveFund.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Execução > Empenho > Empenhos'
+    navigate 'Contabilidade > Execução > Empenho > Empenhos'
 
     click_link 'Criar Empenho'
 

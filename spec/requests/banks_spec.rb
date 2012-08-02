@@ -7,7 +7,7 @@ feature "Banks" do
   end
 
   scenario 'create a new bank' do
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Bancos'
+    navigate 'Compras e Licitações > Cadastros Gerais > Bancos'
 
     click_link 'Criar Banco'
 
@@ -29,7 +29,7 @@ feature "Banks" do
   scenario 'update an existent bank' do
     Bank.make!(:santander)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Bancos'
+    navigate 'Compras e Licitações > Cadastros Gerais > Bancos'
 
     click_link 'Santander'
 
@@ -51,7 +51,7 @@ feature "Banks" do
   scenario 'destroy an existent bank' do
     Bank.make!(:itau)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Bancos'
+    navigate 'Compras e Licitações > Cadastros Gerais > Bancos'
 
     click_link 'Itaú'
 

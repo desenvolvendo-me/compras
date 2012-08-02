@@ -9,7 +9,7 @@ feature "BankAccounts" do
   scenario 'create a new bank_account' do
     Agency.make!(:itau)
 
-    navigate_through 'Outros > Contas Bancárias / Convênios'
+    navigate 'Outros > Contas Bancárias / Convênios'
 
     click_link 'Criar Conta Bancária / Convênio'
 
@@ -46,7 +46,7 @@ feature "BankAccounts" do
   scenario 'update an existent bank_account' do
     BankAccount.make!(:itau_tributos)
 
-    navigate_through 'Outros > Contas Bancárias / Convênios'
+    navigate 'Outros > Contas Bancárias / Convênios'
 
     click_link 'Itaú Tributos'
 
@@ -71,7 +71,7 @@ feature "BankAccounts" do
   scenario 'destroy an existent bank_account' do
     BankAccount.make!(:itau_tributos)
 
-    navigate_through 'Outros > Contas Bancárias / Convênios'
+    navigate 'Outros > Contas Bancárias / Convênios'
 
     click_link 'Itaú Tributos'
 

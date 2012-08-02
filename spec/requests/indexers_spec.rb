@@ -9,7 +9,7 @@ feature "Indexers" do
   scenario 'create a new indexer' do
     Currency.make!(:real)
 
-    navigate_through 'Outros > Indexadores'
+    navigate 'Outros > Indexadores'
 
     click_link 'Criar Indexador'
 
@@ -37,7 +37,7 @@ feature "Indexers" do
   scenario 'update a indexer' do
     Indexer.make!(:selic)
 
-    navigate_through 'Outros > Indexadores'
+    navigate 'Outros > Indexadores'
 
     click_link 'SELIC'
 
@@ -55,7 +55,7 @@ feature "Indexers" do
   scenario 'destroy an existent indexer' do
     Indexer.make!(:selic)
 
-    navigate_through 'Outros > Indexadores'
+    navigate 'Outros > Indexadores'
 
     click_link 'SELIC'
 

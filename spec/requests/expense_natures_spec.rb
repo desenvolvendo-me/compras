@@ -14,7 +14,7 @@ feature "ExpenseNatures" do
     ExpenseModality.make!(:transferencias_intragovernamentais)
     ExpenseElement.make!(:aposentadorias)
 
-    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link 'Criar Natureza da Despesa'
 
@@ -54,7 +54,7 @@ feature "ExpenseNatures" do
     ExpenseModality.make!(:transferencias_intragovernamentais)
     ExpenseElement.make!(:aposentadorias)
 
-    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link 'Criar Natureza da Despesa'
 
@@ -78,7 +78,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:vencimento_e_salarios)
       ExpenseNature.make!(:compra_de_material)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -94,7 +94,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:vencimento_e_salarios)
       ExpenseNature.make!(:compra_de_material)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -110,7 +110,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:vencimento_e_salario_2011)
       ExpenseNature.make!(:compra_de_material)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -126,7 +126,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:vencimento_e_salario_2011)
       ExpenseNature.make!(:compra_de_material)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -142,7 +142,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:vencimento_e_salario_2011)
       ExpenseNature.make!(:compra_de_material)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -158,7 +158,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:compra_de_material)
       ExpenseNature.make!(:despesas_correntes)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -174,7 +174,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:compra_de_material)
       ExpenseNature.make!(:despesas_correntes)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -190,7 +190,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:compra_de_material)
       ExpenseNature.make!(:despesas_correntes)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -206,7 +206,7 @@ feature "ExpenseNatures" do
       ExpenseNature.make!(:compra_de_material)
       ExpenseNature.make!(:despesas_correntes)
 
-      navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+      navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
       click_link 'Filtrar Naturezas das Despesas'
 
@@ -228,7 +228,7 @@ feature "ExpenseNatures" do
     ExpenseModality.make!(:transferencias_a_uniao)
     ExpenseElement.make!(:pensoes)
 
-    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
@@ -265,7 +265,7 @@ feature "ExpenseNatures" do
   scenario 'destroy an existent expense_nature' do
     ExpenseNature.make!(:vencimento_e_salarios)
 
-    navigate_through 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
+    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Naturezas das Despesas'
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 

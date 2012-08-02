@@ -10,7 +10,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
@@ -52,7 +52,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
     LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -85,7 +85,7 @@ feature "LicitationProcessRatifications" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
 
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 

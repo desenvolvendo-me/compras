@@ -7,7 +7,7 @@ feature "ServiceOrContractType" do
   end
 
   scenario 'create a new service' do
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
+    navigate 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
 
     click_link 'Criar Tipo de Serviço ou Contrato'
 
@@ -29,7 +29,7 @@ feature "ServiceOrContractType" do
   scenario 'validates uniqueness of description' do
     ServiceOrContractType.make!(:trainees)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
+    navigate 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
 
     click_link 'Criar Tipo de Serviço ou Contrato'
 
@@ -45,7 +45,7 @@ feature "ServiceOrContractType" do
   scenario 'update an existent service' do
     ServiceOrContractType.make!(:trainees)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
+    navigate 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
 
     click_link 'Contratação de estagiários'
 
@@ -65,7 +65,7 @@ feature "ServiceOrContractType" do
   scenario 'destroy an existent service' do
     ServiceOrContractType.make!(:trainees)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
+    navigate 'Compras e Licitações > Cadastros Gerais > Tipos de Serviço ou Contrato'
 
     click_link 'Contratação de estagiários'
 

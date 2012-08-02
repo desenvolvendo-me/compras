@@ -9,7 +9,7 @@ feature "PurchaseSolicitationItemGroups" do
   scenario 'create a new purchase_solicitation_item_group' do
     PurchaseSolicitation.make!(:reparo)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
@@ -36,7 +36,7 @@ feature "PurchaseSolicitationItemGroups" do
     PurchaseSolicitationItemGroup.make!(:antivirus)
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link '1'
 
@@ -66,7 +66,7 @@ feature "PurchaseSolicitationItemGroups" do
     PurchaseSolicitation.make!(:reparo)
     PurchaseSolicitation.make!(:reparo_2013)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
@@ -174,7 +174,7 @@ feature "PurchaseSolicitationItemGroups" do
   scenario 'destroy an existent purchase_solicitation_item_group' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link '1'
 

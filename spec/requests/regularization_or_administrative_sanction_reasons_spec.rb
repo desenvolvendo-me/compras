@@ -7,7 +7,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
   end
 
   scenario 'create a new regularization_or_administrative_sanction_reason' do
-    navigate_through 'Outros > Motivos de Sanções Administrativas ou Regularizações'
+    navigate 'Outros > Motivos de Sanções Administrativas ou Regularizações'
 
     click_link 'Criar Motivo de Sanção Administrativa ou Regularização'
 
@@ -27,7 +27,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
   scenario 'update an existent regularization_or_administrative_sanction_reason' do
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    navigate_through 'Outros > Motivos de Sanções Administrativas ou Regularizações'
+    navigate 'Outros > Motivos de Sanções Administrativas ou Regularizações'
 
     click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 
@@ -47,7 +47,7 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
   scenario 'destroy an existent regularization_or_administrative_sanction_reason' do
     RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
 
-    navigate_through 'Outros > Motivos de Sanções Administrativas ou Regularizações'
+    navigate 'Outros > Motivos de Sanções Administrativas ou Regularizações'
 
     click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 

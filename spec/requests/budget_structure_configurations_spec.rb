@@ -11,7 +11,7 @@ feature "BudgetStructureConfigurations" do
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
 
-    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
 
     click_link 'Criar Configuração de Estrutura Orçamentaria'
 
@@ -40,7 +40,7 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'calculate mask with javascript' do
-    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
 
     click_link 'Criar Configuração de Estrutura Orçamentaria'
 
@@ -66,7 +66,7 @@ feature "BudgetStructureConfigurations" do
   scenario 'update an existent budget_structure_configuration' do
     BudgetStructureConfiguration.make!(:detran_sopa)
 
-    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
 
     click_link 'Configuração do Detran'
 
@@ -86,7 +86,7 @@ feature "BudgetStructureConfigurations" do
   scenario 'destroy an existent budget_structure_configuration' do
     BudgetStructureConfiguration.make!(:detran_sopa)
 
-    navigate_through 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
 
     click_link 'Configuração do Detran'
 

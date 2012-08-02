@@ -9,7 +9,7 @@ feature "GovernmentActions" do
   scenario 'create a new government_action' do
     Descriptor.make!(:detran_2012)
 
-    navigate_through 'Contabilidade > Orçamento > Ações do Governo'
+    navigate 'Contabilidade > Orçamento > Ações do Governo'
 
     click_link 'Criar Ação do Governo'
 
@@ -33,7 +33,7 @@ feature "GovernmentActions" do
     GovernmentAction.make!(:governamental)
     Descriptor.make!(:secretaria_de_educacao_2011)
 
-    navigate_through 'Contabilidade > Orçamento > Ações do Governo'
+    navigate 'Contabilidade > Orçamento > Ações do Governo'
 
     click_link 'Ação Governamental'
 
@@ -55,7 +55,7 @@ feature "GovernmentActions" do
   scenario 'destroy an existent government_action' do
     GovernmentAction.make!(:governamental)
 
-    navigate_through 'Contabilidade > Orçamento > Ações do Governo'
+    navigate 'Contabilidade > Orçamento > Ações do Governo'
 
     click_link 'Ação Governamental'
 

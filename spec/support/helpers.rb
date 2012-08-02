@@ -99,9 +99,15 @@ module Helpers
     end
   end
 
-  def navigate_through(path)
-    path.split('>').each do |link|
-      click_link link.strip
+  def navigate(path)
+    first, second = path.split(/ > /, 2)
+
+    click_link first
+
+    return unless second
+
+    within "li:contains('#{first}')" do
+      navigate second
     end
   end
 

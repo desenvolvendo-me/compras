@@ -10,7 +10,7 @@ feature "LegalNatures" do
     LegalNature.make!(:administracao_publica)
     LegalNature.make!(:executivo_federal)
 
-    navigate_through 'Compras e Licitações > Cadastros Gerais > Naturezas Jurídicas'
+    navigate 'Compras e Licitações > Cadastros Gerais > Naturezas Jurídicas'
 
     within_records do
       page.should have_content '100'

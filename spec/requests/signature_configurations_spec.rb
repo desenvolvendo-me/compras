@@ -9,7 +9,7 @@ feature "SignatureConfigurations" do
   scenario 'create a new signature_configuration' do
     Signature.make!(:gerente_sobrinho)
 
-    navigate_through 'Outros > Configurações de Assinatura'
+    navigate 'Outros > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -41,7 +41,7 @@ feature "SignatureConfigurations" do
   scenario 'should have only availables reports' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate_through 'Outros > Configurações de Assinatura'
+    navigate 'Outros > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -52,7 +52,7 @@ feature "SignatureConfigurations" do
   scenario 'should have only availables reports when edit' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate_through 'Outros > Configurações de Assinatura'
+    navigate 'Outros > Configurações de Assinatura'
 
     click_link 'Autorizações de Fornecimento'
 
@@ -63,7 +63,7 @@ feature "SignatureConfigurations" do
   scenario 'when fill signature should fill position' do
     Signature.make!(:gerente_sobrinho)
 
-    navigate_through 'Outros > Configurações de Assinatura'
+    navigate 'Outros > Configurações de Assinatura'
 
     click_link 'Criar Configuração de Assinatura'
 
@@ -88,7 +88,7 @@ feature "SignatureConfigurations" do
     Signature.make!(:supervisor_wenderson)
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate_through 'Outros > Configurações de Assinatura'
+    navigate 'Outros > Configurações de Assinatura'
 
     click_link 'Autorizações de Fornecimento'
 
@@ -120,7 +120,7 @@ feature "SignatureConfigurations" do
   scenario 'destroy an existent signature_configuration' do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
-    navigate_through 'Outros > Configurações de Assinatura'
+    navigate 'Outros > Configurações de Assinatura'
 
     click_link 'Autorizações de Fornecimento'
 
@@ -137,7 +137,7 @@ feature "SignatureConfigurations" do
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
     SignatureConfiguration.make!(:processo_administrativo)
 
-    navigate_through 'Outros > Configurações de Assinatura'
+    navigate 'Outros > Configurações de Assinatura'
 
     click_link 'Filtrar Configurações de Assinatura'
 
