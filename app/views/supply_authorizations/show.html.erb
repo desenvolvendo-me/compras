@@ -2,73 +2,73 @@
   AUTORIZAÇÃO DE FORNECIMENTO
 </h1>
 
-<div class='table-border'>
-  <div class='yui3-g'>
-    <div class='yui3-u-1-3'>
-      <span class='label'>Número da autorização</span>: <%= resource %>
+<div class="table-border">
+  <div class="yui3-g">
+    <div class="yui3-u-1-3">
+      <span class="label">Número da autorização</span>: <%= resource %>
     </div>
 
-    <div class='yui3-u-1-3'>
-      <span class='label'><%= resource_class.human_attribute_name :direct_purchase %></span>: <%= resource.decorator.direct_purchase %>
+    <div class="yui3-u-1-3">
+      <span class="label"><%= resource_class.human_attribute_name :direct_purchase %></span>: <%= resource.decorator.direct_purchase %>
     </div>
 
-    <div class='yui3-u-1-3'>
-      <span class='label'>Número da autorização</span>: <%= resource.decorator.date %>
+    <div class="yui3-u-1-3">
+      <span class="label">Número da autorização</span>: <%= resource.decorator.date %>
     </div>
   </div>
 </div>
 
 <h2>DADOS DO FORNECEDOR</h2>
 
-<div id='general-data' class='table-border'>
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource_class.human_attribute_name :creditor %></span>: <%= resource.creditor %>
+<div id="general-data" class="table-border">
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource_class.human_attribute_name :creditor %></span>: <%= resource.creditor %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource_class.human_attribute_name :address %></span>: <%= resource.address %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource_class.human_attribute_name :address %></span>: <%= resource.address %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1-2'>
-      <span class='label'><%= resource_class.human_attribute_name :city %></span>: <%= resource.city %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <span class="label"><%= resource_class.human_attribute_name :city %></span>: <%= resource.city %>
     </div>
 
-    <div class='yui3-u-1-2'>
-      <span class='label'><%= resource_class.human_attribute_name :zip_code %></span>: <%= resource.zip_code %>
+    <div class="yui3-u-1-2">
+      <span class="label"><%= resource_class.human_attribute_name :zip_code %></span>: <%= resource.zip_code %>
     </div>
   </div>
 
   <h3>Contato</h3>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1-2'>
-      <span class='label'><%= resource_class.human_attribute_name :phone %></span>: <%= resource.phone %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <span class="label"><%= resource_class.human_attribute_name :phone %></span>: <%= resource.phone %>
     </div>
 
-    <div class='yui3-u-1-2'>
-      <span class='label'><%= resource_class.human_attribute_name :fax %></span>: <%= resource.fax %>
+    <div class="yui3-u-1-2">
+      <span class="label"><%= resource_class.human_attribute_name :fax %></span>: <%= resource.fax %>
     </div>
   </div>
 
   <h3>Dados Bancários<h3>
 
   <% resource.accounts.try(:each) do |account| %>
-    <div class='yui3-g'>
-      <div class='yui3-u-1-3'>
-        <span class='label'><%= resource_class.human_attribute_name :bank_account %></span>: <%= account %>
+    <div class="yui3-g">
+      <div class="yui3-u-1-3">
+        <span class="label"><%= resource_class.human_attribute_name :bank_account %></span>: <%= account %>
       </div>
 
-      <div class='yui3-u-1-3'>
-        <span class='label'><%= resource_class.human_attribute_name :agency %></span>: <%= account.agency %>
+      <div class="yui3-u-1-3">
+        <span class="label"><%= resource_class.human_attribute_name :agency %></span>: <%= account.agency %>
       </div>
 
-      <div class='yui3-u-1-3'>
-        <span class='label'><%= resource_class.human_attribute_name :bank %></span>: <%= account.bank %>
+      <div class="yui3-u-1-3">
+        <span class="label"><%= resource_class.human_attribute_name :bank %></span>: <%= account.bank %>
       </div>
     </div>
   <% end %>
@@ -76,9 +76,9 @@
 
 <br/>
 
-<div id='general-data' class='table-border'>
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
+<div id="general-data" class="table-border">
+  <div class="yui3-g">
+    <div class="yui3-u-1">
       <p>Prezados Senhores,<br> <%= resource.decorator.message %></p>
     </div>
   </div>
@@ -86,47 +86,47 @@
 
 <h2>IDENTIFICAÇÃO DA DESPESA</h2>
 
-<div id='general-data' class='table-border'>
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource.class.human_attribute_name :budget_structure %></span>: <%= resource.budget_structure %>
+<div id="general-data" class="table-border">
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource.class.human_attribute_name :budget_structure %></span>: <%= resource.budget_structure %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource.class.human_attribute_name :payment_method %></span>: <%= resource.payment_method %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource.class.human_attribute_name :payment_method %></span>: <%= resource.payment_method %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource.class.human_attribute_name :period %></span>: <%= "#{resource.period} #{resource.decorator.pluralized_period_unit}" %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource.class.human_attribute_name :period %></span>: <%= "#{resource.period} #{resource.decorator.pluralized_period_unit}" %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource.class.human_attribute_name :delivery_location %></span>: <%= resource.delivery_location %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource.class.human_attribute_name :delivery_location %></span>: <%= resource.delivery_location %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource.class.human_attribute_name :licitation_object %></span>: <%= resource.licitation_object %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource.class.human_attribute_name :licitation_object %></span>: <%= resource.licitation_object %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1'>
-      <span class='label'><%= resource.class.human_attribute_name :observation %></span>: <%= resource.observation %>
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      <span class="label"><%= resource.class.human_attribute_name :observation %></span>: <%= resource.observation %>
     </div>
   </div>
 </div>
 
 <h2>DOTAÇÕES ORÇAMENTÁRIAS</h2>
 
-<div id='general-data' class='table-border'>
+<div id="general-data" class="table-border">
   <% resource.direct_purchase.direct_purchase_budget_allocations.each_with_index do |dpba, idx| %>
     <h3><%= idx + 1 %> - <%= dpba.budget_allocation.description %></h3>
 
@@ -204,31 +204,31 @@
 
 <br/>
 
-<div id='general-data' class='table-border right'>
-  <div class='yui3-g'>
-    <div class='yui3-u-1-6'>
-      <span class='label'>Total bruto</span>:
+<div id="general-data" class="table-border right">
+  <div class="yui3-g">
+    <div class="yui3-u-1-6">
+      <span class="label">Total bruto</span>:
     </div>
 
-    <div class='yui3-u-1-6'>
+    <div class="yui3-u-1-6">
       <%= resource.direct_purchase.decorator.total_allocations_items_value %>
     </div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1-6'>
-      <span class='label'>Descontos</span>:
+  <div class="yui3-g">
+    <div class="yui3-u-1-6">
+      <span class="label">Descontos</span>:
     </div>
 
-    <div class='yui3-u-1-6'></div>
+    <div class="yui3-u-1-6"></div>
   </div>
 
-  <div class='yui3-g'>
-    <div class='yui3-u-1-6'>
-      <span class='label'>Total líquido</span>:
+  <div class="yui3-g">
+    <div class="yui3-u-1-6">
+      <span class="label">Total líquido</span>:
     </div>
 
-    <div class='yui3-u-1-6'>
+    <div class="yui3-u-1-6">
       <%= resource.direct_purchase.decorator.total_allocations_items_value %>
     </div>
   </div>
