@@ -27,7 +27,7 @@
     }
   });
 
-  $(".licitation_commission").delegate('.individual', 'change', function (event, individual) {
+  $(".licitation_commission").on('change', '.individual', function (event, individual) {
     if (individual){
       $(this).closest('.nested').find('.cpf').val(individual.cpf);
     } else {
@@ -35,7 +35,7 @@
     }
   });
 
-  $(".licitation_commission").delegate('.role', 'change', function () {
+  $(".licitation_commission").on('change', '.role', function () {
     var classRegisterNeeded = $(this).val() == '<%= LicitationCommissionResponsibleRole::LAWYER %>';
 
     $(this).closest('.responsible').find('.class_register').attr('disabled', !classRegisterNeeded);

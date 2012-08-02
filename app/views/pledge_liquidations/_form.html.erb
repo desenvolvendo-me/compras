@@ -51,8 +51,8 @@
         }
       });
 
-      $('form.pledge_liquidation').delegate('.remove-parcel', 'click', fillParcelNumber);
-      $('form.pledge_liquidation').bind('append.mustache', fillParcelNumber);
+      $('form.pledge_liquidation').on('click', '.remove-parcel', fillParcelNumber);
+      $('form.pledge_liquidation').on('append.mustache', fillParcelNumber);
       fillParcelNumber();
     })();
   <% end %>

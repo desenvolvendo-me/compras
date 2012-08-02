@@ -19,7 +19,7 @@
 </div>
 
 <script>
-  $('form.price_collection').delegate('.material', 'change', function (event, material) {
+  $('form.price_collection').on('change', '.material', function (event, material) {
     if (material) {
       $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }

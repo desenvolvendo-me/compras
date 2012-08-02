@@ -39,7 +39,7 @@
     });
   }
 
-  $('#price-collection-lots').bind('append.mustache remove.mustache', setLotLabels);
+  $('#price-collection-lots').on('append.mustache remove.mustache', setLotLabels);
 
   setLotLabels();
 </script>

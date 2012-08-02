@@ -27,7 +27,7 @@
     right: true
   });
 
-  $('form.signature_configuration').delegate('.signature', 'change', function (event, signature) {
+  $('form.signature_configuration').on('change', '.signature', function (event, signature) {
     if (signature) {
       $(this).closest('.signature_configuration_item').find('.position').val(signature.position);
     } else {

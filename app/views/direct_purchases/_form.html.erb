@@ -14,14 +14,14 @@
 </div>
 
 <script>
-  $('form.direct_purchase').delegate('.budget-allocation', 'change', function (event, budget_allocation) {
+  $('form.direct_purchase').on('change', '.budget-allocation', function (event, budget_allocation) {
     if (budget_allocation) {
       $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(budget_allocation.expense_nature);
       $(this).closest('div.direct-purchase-budget-allocation').find('.amount').val(budget_allocation.amount);
     }
   });
 
-  $('form.direct_purchase').delegate('.material', 'change', function (event, material) {
+  $('form.direct_purchase').on('change', '.material', function (event, material) {
     if (material) {
       $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }
@@ -47,7 +47,7 @@
     $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(parseFloat(total)));
   }
 
-  $('form.direct_purchase').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
+  $('form.direct_purchase').on('keyup', '.item-quantity, .item-unit-price', function() {
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
@@ -57,7 +57,7 @@
     calculateItemsTotalValue();
   });
 
-  $('form.direct_purchase').delegate('.remove-direct-purchase-budget-allocation, .remove-item', 'click', function() {
+  $('form.direct_purchase').on('click', '.remove-direct-purchase-budget-allocation, .remove-item', function() {
     calculateItemsTotalValue();
     calcItemOrder();
   });
@@ -87,7 +87,7 @@
     }
   }
 
-  $('form.direct_purchase').delegate('#direct_purchase_licitation_object_id', 'change', function (event, licitation_object) {
+  $('form.direct_purchase').on('change', '#direct_purchase_licitation_object_id', function (event, licitation_object) {
     if (licitation_object) {
       purchaseLicitationExemption = licitation_object.purchase_licitation_exemption;
       buildLicitationExemption    = licitation_object.build_licitation_exemption;
@@ -99,11 +99,11 @@
     setLicitationExemption();
   });
 
-  $('form.direct_purchase').delegate('#direct_purchase_modality', 'change', function () {
+  $('form.direct_purchase').on('change', '#direct_purchase_modality', function () {
     setLicitationExemption();
   });
 
-  $('form.direct_purchase').bind('append.mustache', function () {
+  $('form.direct_purchase').on('append.mustache', function () {
     calcItemOrder();
   });
 

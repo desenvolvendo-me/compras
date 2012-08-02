@@ -34,7 +34,7 @@
     appendItem: false
   });
 
-  $('form.pledge').delegate('.material', 'change', function (event, material) {
+  $('form.pledge').on('change', '.material', function (event, material) {
     if (material) {
       $(this).closest('.pledge-item').find('.item-reference-unit').val(material.reference_unit);
     } else {
@@ -42,7 +42,7 @@
     }
   });
 
-  $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', function(){
+  $('form.pledge').on('keyup', '.item-quantity, .item-unit-price', function(){
     var itemDiv = $(this).closest('.pledge-item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),

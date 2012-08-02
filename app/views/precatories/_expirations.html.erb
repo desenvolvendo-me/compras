@@ -35,11 +35,11 @@
     fieldToRemove: '.parcel'
   });
 
-  $('form.precatory').delegate('.parcel-value', 'keyup', function() {
+  $('form.precatory').on('keyup', '.parcel-value', function() {
     calculateParceledValue();
   });
 
-  $('form.precatory').delegate('.remove-parcel', 'click',  function() {
+  $('form.precatory').on('click', '.remove-parcel', function() {
     calculateParceledValue();
   });
 

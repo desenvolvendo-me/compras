@@ -86,5 +86,5 @@
     }
   }).change();
 
-  $('form.budget_allocation').delegate('#budget_allocation_amount', 'keyup', calculateDivide);
+  $('form.budget_allocation').on('keyup', '#budget_allocation_amount', calculateDivide);
 </script>

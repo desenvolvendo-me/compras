@@ -55,7 +55,7 @@
     }
   });
 
-  $(".judgment_commission_advice").delegate('.individual', 'change', function (event, individual) {
+  $(".judgment_commission_advice").on('change', '.individual', function (event, individual) {
     if (individual){
       $(this).closest('.nested').find('.cpf').val(individual.cpf);
     } else {

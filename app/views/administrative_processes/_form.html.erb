@@ -62,15 +62,15 @@
     $('#administrative_process_total_allocations_value').val(numberWithDelimiter(total));
   }
 
-  $('form.administrative_process').delegate('.allocation-value', 'keyup', function() {
+  $('form.administrative_process').on('keyup', '.allocation-value', function() {
     calculateAllocationsTotalValue();
   });
 
-  $('form.administrative_process').delegate('.remove-administrative-process-budget-allocation', 'click', function() {
+  $('form.administrative_process').on('click', '.remove-administrative-process-budget-allocation', function() {
     calculateAllocationsTotalValue();
   });
 
-  $('form.administrative_process').delegate('.budget-allocation', 'change', function (event, budget_allocation) {
+  $('form.administrative_process').on('change', '.budget-allocation', function (event, budget_allocation) {
     if (budget_allocation){
       $(this).closest('.administrative-process-budget-allocation').find('.amount').val(budget_allocation.amount);
     } else {

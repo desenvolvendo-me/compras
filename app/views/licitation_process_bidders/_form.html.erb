@@ -119,7 +119,7 @@
     container.find('.proposal-total-value').val(numberWithDelimiter(total, '.', ','));
   };
 
-  $('form.licitation_process_bidder').delegate('.item-unit-price', 'keyup', function() {
+  $('form.licitation_process_bidder').on('keyup', '.item-unit-price', function() {
      var itemDiv = $(this).closest('div.item'),
          unitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
          quantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),

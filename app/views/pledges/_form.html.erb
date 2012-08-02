@@ -138,8 +138,8 @@
         }
       });
 
-      $('form.pledge').delegate('.item-quantity, .item-unit-price', 'keyup', pledgeItemsTotalValue);
-      $('form.pledge').delegate('.remove-pledge-item', 'click', pledgeItemsTotalValue);
+      $('form.pledge').on('keyup', '.item-quantity, .item-unit-price', pledgeItemsTotalValue);
+      $('form.pledge').on('click', '.remove-pledge-item', pledgeItemsTotalValue);
 
       $('#pledge_expense_nature').attr('data-modal-url', subcategoryModalUrl);
     })();

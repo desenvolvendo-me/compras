@@ -52,7 +52,7 @@
     });
   }
 
-  $('form.licitation_process').delegate('.material', 'change', function (event, material) {
+  $('form.licitation_process').on('change', '.material', function (event, material) {
     if (material){
       $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }
@@ -77,18 +77,18 @@
     administrativeProcessBudgetAllocation.find('.total-value').val(numberWithDelimiter(totalValue));
   }
 
-  $('form.licitation_process').delegate('.remove-item', 'click', function () {
+  $('form.licitation_process').on('click', '.remove-item', function () {
     calcItemOrder();
     calculateTotalOfItems($(this).closest('.licitation-process-budget-allocation'));
   });
 
-  $('form.licitation_process').bind('append.mustache', function (){
+  $('form.licitation_process').on('append.mustache', function (){
     calcItemOrder();
   });
 
   calcItemOrder();
 
-  $('form.licitation_process').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
+  $('form.licitation_process').on('keyup', '.item-quantity, .item-unit-price', function() {
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
@@ -98,7 +98,7 @@
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
-  $('form.licitation_process').delegate('.item-price', 'keyup', function () {
+  $('form.licitation_process').on('keyup', '.item-price', function () {
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-price').val() || '0')),

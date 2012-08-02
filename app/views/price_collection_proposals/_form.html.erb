@@ -59,7 +59,7 @@
     lotDiv.find('.item-total-value-by-lot').val(numberWithDelimiter(totalValue));
   }
 
-  $('form.price_collection_proposal').delegate('.item-unit-price', 'keyup', function() {
+  $('form.price_collection_proposal').on('keyup', '.item-unit-price', function() {
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemUnitPrice = (parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
@@ -69,7 +69,7 @@
     calculateLotTotalItems(itemDiv);
   });
 
-  $('form.price_collection_proposal').delegate('.item-total-price', 'keyup', function() {
+  $('form.price_collection_proposal').on('keyup', '.item-total-price', function() {
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemTotalPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-total-price').val() || '0')),

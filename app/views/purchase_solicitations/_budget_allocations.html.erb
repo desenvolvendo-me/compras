@@ -37,7 +37,7 @@
     appendItem: false
   });
 
-  $('form').delegate('.budget-allocation', 'change', function (event, budget_allocation) {
+  $('form').on('change', '.budget-allocation', function (event, budget_allocation) {
     if (budget_allocation) {
       var inputs = $(this).closest('div.nested').find(':input');
     }

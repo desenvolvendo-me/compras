@@ -40,20 +40,20 @@
     difference_element.val(numberWithDelimiter(supplement_total - reduced_total));
   }
 
-  $('form.extra_credit').delegate('#extra_credit_regulatory_act_id', 'change', function (event, regulatory_act) {
+  $('form.extra_credit').on('change', '#extra_credit_regulatory_act_id', function (event, regulatory_act) {
     if (regulatory_act) {
       $('#extra_credit_regulatory_act_type').val(regulatory_act.regulatory_act_type);
       $('#extra_credit_publication_date').val(regulatory_act.publication_date);
     }
   });
 
-  $('form.extra_credit').delegate('#extra_credit_extra_credit_nature_id', 'change', function (event, extra_credit_nature) {
+  $('form.extra_credit').on('change', '#extra_credit_extra_credit_nature_id', function (event, extra_credit_nature) {
     if (extra_credit_nature) {
       $('#extra_credit_kind').val(extra_credit_nature.kind);
     }
   });
 
-  $('form.extra_credit').delegate('.moviment-type', 'change', function (event, moviment_type) {
+  $('form.extra_credit').on('change', '.moviment-type', function (event, moviment_type) {
     if (moviment_type){
       $(this).closest('fieldset').find('.operation').val(moviment_type.operation);
 
@@ -73,11 +73,11 @@
     }
   });
 
-  $('form.extra_credit').delegate('.remove-extra-credit-moviment-type', 'click', function() {
+  $('form.extra_credit').on('click', '.remove-extra-credit-moviment-type', function() {
     calcTotal();
   });
 
-  $('form.extra_credit').delegate('.value', 'keyup', function() {
+  $('form.extra_credit').on('keyup', '.value', function() {
     calcTotal();
   });
 

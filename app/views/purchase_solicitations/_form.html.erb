@@ -14,7 +14,7 @@
 </div>
 
 <script>
-  $('form.purchase_solicitation').delegate('.material', 'change', function (event, material) {
+  $('form.purchase_solicitation').on('change', '.material', function (event, material) {
     if (material) {
       $(this).closest('.item').find('.reference-unit').val(material.reference_unit);
     }
@@ -40,7 +40,7 @@
     $('#purchase_solicitation_total_allocations_items_value').val(numberWithDelimiter(parseFloat(total)));
   }
 
-  $('form.purchase_solicitation').delegate('.item-quantity, .item-unit-price', 'keyup', function() {
+  $('form.purchase_solicitation').on('keyup', '.item-quantity, .item-unit-price', function() {
     var itemDiv = $(this).closest('.item'),
         itemQuantity = new BigNumber(parsePtBrFloat(itemDiv.find('.item-quantity').val() || '0')),
         itemUnitPrice = new BigNumber(parsePtBrFloat(itemDiv.find('.item-unit-price').val() || '0')),
@@ -50,12 +50,12 @@
     calculateItemsTotalValue();
   });
 
-  $('form.purchase_solicitation').delegate('.remove-purchase-solicitation-budget-allocation, .remove-item', 'click', function() {
+  $('form.purchase_solicitation').on('click', '.remove-purchase-solicitation-budget-allocation, .remove-item', function() {
     calculateItemsTotalValue();
     calcItemOrder();
   });
 
-  $('form.purchase_solicitation').bind('append.mustache', function(){
+  $('form.purchase_solicitation').on('append.mustache', function(){
     calcItemOrder();
   });
 

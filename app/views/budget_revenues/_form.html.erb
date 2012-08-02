@@ -52,5 +52,5 @@
     }
   }).change();
 
-  $('form.budget_revenue').delegate('#budget_revenue_value', 'keyup', calculateDivide);
+  $('form.budget_revenue').on('keyup', '#budget_revenue_value', calculateDivide);
 </script>

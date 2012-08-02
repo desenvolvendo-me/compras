@@ -49,6 +49,6 @@
     $('#budget_structure_configuration_mask').attr('value', mask);
   }
 
-  $('#budget_structure_levels').delegate('input:visible.numeric', 'keyup', calculeMask);
-  $('#budget_structure_levels').delegate('select', 'change', calculeMask);
+  $('#budget_structure_levels').on('keyup', 'input:visible.numeric', calculeMask);
+  $('#budget_structure_levels').on('change', 'select', calculeMask);
 </script>
