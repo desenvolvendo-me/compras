@@ -116,6 +116,7 @@ class Person < ActiveRecord::Base
   orderize
   filterize
 
+  default_scope :order { id }
   scope :search_by_parent, lambda { |term| where { parent.eq(term) } }
 
   def self.search_by_name(term)
