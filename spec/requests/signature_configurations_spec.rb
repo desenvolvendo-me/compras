@@ -132,4 +132,22 @@ feature "SignatureConfigurations" do
       page.should_not have_content 'Autorizações de Fornecimento'
     end
   end
+
+  scenario 'acces modal' do
+    SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
+    SignatureConfiguration.make!(:processo_administrativo)
+
+    navigate_through 'Outros > Configurações de Assinatura'
+
+    click_link 'Filtrar Configurações de Assinatura'
+
+    select 'Processos Administrativos', :from => 'Relatório'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      page.should have_link 'Processos Administrativos'
+      page.should_not have_link 'Autorizações de Fornecimento'
+    end
+  end
 end

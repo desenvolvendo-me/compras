@@ -1,6 +1,8 @@
 class SignatureConfiguration < Compras::Model
   attr_accessible :report, :signature_configuration_items_attributes
 
+  attr_modal :report
+
   has_enumeration_for :report, :with => SignatureReport
 
   has_many :signature_configuration_items, :dependent => :destroy, :order => :order
