@@ -8,7 +8,7 @@ describe PriceCollectionClassificationGenerator do
     double('PriceCollection',
       :id => 1,
       :price_collection_proposals => price_collection_proposals,
-      :price_collection_lots => price_collection_lots,
+      :price_collection_lots_with_items => price_collection_lots_with_items,
       :items => items,
       :proposals_with_total_value => proposals_with_total_value
     )
@@ -40,7 +40,7 @@ describe PriceCollectionClassificationGenerator do
     double('PriceCollectionLot', :id => 20, :creditor => double('Creditor'), :lots_with_total_value => lots_with_total_value, :items => items)
   end
 
-  let :price_collection_lots do
+  let :price_collection_lots_with_items do
     [lot]
   end
 

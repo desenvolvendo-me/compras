@@ -118,4 +118,17 @@ describe PriceCollection do
       subject.annul!
     end
   end
+
+  context 'lots with items' do
+    let :lot_with_items do
+      [double("PriceCollectionLot", :items => [double("PriceCollectionLotItem")]),
+       double("PriceCollectionLot", :items => [])]
+    end
+
+    it 'should filter lots with items' do
+      subject.should_receive(:price_collection_lots).and_return(lot_with_items)
+
+      subject.price_collection_lots_with_items.size.should eq 1
+    end
+  end
 end

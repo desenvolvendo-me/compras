@@ -79,6 +79,10 @@ class PriceCollection < Compras::Model
     all_price_collection_classifications.destroy_all
   end
 
+  def price_collection_lots_with_items
+    price_collection_lots.select {|l| l unless l.items.empty? }
+  end
+
   protected
 
   def generate_proposal_items

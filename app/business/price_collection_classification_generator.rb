@@ -1,7 +1,7 @@
 class PriceCollectionClassificationGenerator
   attr_accessor :price_collection, :price_collection_classification_repository
 
-  delegate :type_of_calculation, :price_collection_proposals, :price_collection_lots, :items, :to => :price_collection
+  delegate :type_of_calculation, :price_collection_proposals, :price_collection_lots_with_items, :items, :to => :price_collection
 
   def initialize(price_collection, price_collection_classification_repository = PriceCollectionClassification)
     self.price_collection = price_collection
@@ -40,15 +40,13 @@ class PriceCollectionClassificationGenerator
   end
 
   def lowest_price_by_lot(proposal)
-    price_collection_lots.each do |lot|
-      unless lot.items.empty?
-        price_collection_classification_repository.create!(
-          :total_value => proposal.item_total_value_by_lot(lot),
-          :classification => proposal.classification_by_lot(lot),
-          :creditor_id => proposal.creditor_id,
-          :classifiable => lot
-        )
-      end
+    price_collection_lots_with_items.each do |lot|
+      price_collection_classification_repository.create!(
+        :total_value => proposal.item_total_value_by_lot(lot),
+        :classification => proposal.classification_by_lot(lot),
+        :creditor_id => proposal.creditor_id,
+        :classifiable => lot
+      )
     end
   end
 end
