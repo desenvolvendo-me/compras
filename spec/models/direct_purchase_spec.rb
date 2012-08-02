@@ -134,10 +134,11 @@ describe DirectPurchase do
       subject.stub(:modality).and_return(double)
 
       DirectPurchaseModalityLimitVerificator.any_instance.stub(:value_less_than_available_limit?).and_return(false)
+      DirectPurchaseModalityLimitVerificator.any_instance.stub(:current_limit).and_return(5)
 
       subject.valid?
 
-      subject.errors[:total_allocations_items_value].should include 'está acima do valor disponível no limite em vigor para esta modalidade'
+      subject.errors[:total_allocations_items_value].should include "está acima do valor acumulado para este objeto (#{subject.to_s}), está acima do limite permitido (5)"
     end
 
     it 'should not have error when limit verificator returns true' do

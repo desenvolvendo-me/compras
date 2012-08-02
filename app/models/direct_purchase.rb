@@ -81,11 +81,15 @@ class DirectPurchase < Compras::Model
     end
   end
 
-  def total_value_of_items_should_not_be_greater_than_modality_limit_value(limit_validator = DirectPurchaseModalityLimitVerificator)
+  def total_value_of_items_should_not_be_greater_than_modality_limit_value(limit_validator = DirectPurchaseModalityLimitVerificator,
+                                                                           numeric_parser = ::I18n::Alchemy::NumericParser)
     return if licitation_object.nil? || modality.blank?
 
-    unless limit_validator.new(self).value_less_than_available_limit?
-      errors.add(:total_allocations_items_value, :greater_than_actual_modality_limit)
+    validator = limit_validator.new(self)
+
+    unless validator.value_less_than_available_limit?
+      errors.add(:total_allocations_items_value, :greater_than_actual_object_limit,
+                 :target => self, :limit => numeric_parser.localize(validator.current_limit))
     end
   end
 

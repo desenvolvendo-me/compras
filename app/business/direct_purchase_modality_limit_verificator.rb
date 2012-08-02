@@ -10,8 +10,6 @@ class DirectPurchaseModalityLimitVerificator
     total_items_value <= current_limit
   end
 
-  protected
-
   # current modality limit value for the modality selected
   def current_limit
     if direct_purchase.material_or_service?
@@ -20,6 +18,8 @@ class DirectPurchaseModalityLimitVerificator
       limit_repository.current_limit_engineering_works_without_bidding
     end
   end
+
+  protected
 
   # total items value for direct purchase that is being created
   def total_items_value
