@@ -1,7 +1,7 @@
 class Capability < Compras::Model
   attr_accessible :descriptor_id, :description, :goal, :kind, :status
 
-  attr_modal :descriptor, :description, :kind, :status
+  attr_modal :descriptor_id, :description, :kind, :status
 
   has_enumeration_for :kind, :with => CapabilityKind
   has_enumeration_for :status, :create_helpers => true
