@@ -4,9 +4,9 @@ require 'app/models/licitation_process_ratification'
 require 'app/models/licitation_process_bidder_proposal'
 
 describe LicitationProcessRatification do
-  it 'should return licitation_process as to_s' do
-    subject.stub(:licitation_process => double('LicitationProcess', :to_s => '1/2012'))
-    subject.to_s.should eq '1/2012'
+  it 'should return sequence as to_s' do
+    subject.stub(:sequence => 1)
+    subject.to_s.should eq '1'
   end
 
   it { should belong_to :licitation_process }

@@ -12,10 +12,12 @@ class LicitationProcessRatification < Compras::Model
   validates :licitation_process, :licitation_process_bidder, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true
 
+  auto_increment :sequence, :by => :licitation_process_id
+
   filterize
   orderize :licitation_process_id
 
   def to_s
-    licitation_process.to_s
+    sequence.to_s
   end
 end

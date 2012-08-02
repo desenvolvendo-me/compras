@@ -1,9 +1,13 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-8">
+    <%= f.input :sequence, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
     <%= f.input :licitation_process %>
   </div>
 
-  <div class="yui3-u-1-2">
+  <div class="yui3-u-1-3">
     <%= f.input :licitation_process_bidder, :disabled => true %>
   </div>
 </div>
@@ -66,9 +70,10 @@
   }).change();
 
   function clearExistingItems() {
-    $('.bidder-proposal').each(function() {
+    $('.ratification_item').each(function() {
       $(this).find('input.destroy').attr('value', 'true');
       $(this).hide();
+      $(this).find('.description').remove();
     });
   }
 
