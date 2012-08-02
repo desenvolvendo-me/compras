@@ -13,7 +13,9 @@ class PurchaseSolicitationLiberationsController < CrudController
   end
 
   def create
-    create!(:notice => t('compras.messages.purchase_solicitation_liberated_successful')) { purchase_solicitation_liberations_path(:purchase_solicitation_id => @parent.id) }
+    create!(:notice => t('compras.messages.purchase_solicitation_liberated_successful')) do
+      purchase_solicitation_liberations_path(:purchase_solicitation_id => @parent.id)
+    end
   end
 
   def begin_of_association_chain
