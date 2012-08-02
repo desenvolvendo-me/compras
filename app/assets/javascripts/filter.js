@@ -1,5 +1,5 @@
 (function ($) {
-  $("div.actions a.filter").live("click", function () {
+  $(document).on("click", "div.actions a.filter", function () {
     var modal = $('<div class="ui-modal"><div class="ui-modal-loading"></div></div>');
 
     modal.one('ajaxComplete', function () {
