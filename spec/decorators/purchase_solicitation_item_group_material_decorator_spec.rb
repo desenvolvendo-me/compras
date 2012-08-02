@@ -1,5 +1,0 @@
-require 'decorator_helper'
-require 'app/decorators/purchase_solicitation_item_group_material_decorator'
-
-describe PurchaseSolicitationItemGroupMaterialDecorator do
-end
