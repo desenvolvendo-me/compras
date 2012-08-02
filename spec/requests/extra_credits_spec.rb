@@ -492,4 +492,20 @@ feature "ExtraCredits" do
     page.should_not have_content '2012'
     page.should_not have_content 'Especial'
   end
+
+  scenario 'access modal' do
+    extra_credit = ExtraCredit.make!(:detran_2012)
+
+    navigate_through 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
+
+    click_link 'Filtrar Créditos Suplementares'
+
+    select 'Suplementar', :from => 'Tipo de crédito'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      page.should_not have_css('a')
+    end
+  end
 end

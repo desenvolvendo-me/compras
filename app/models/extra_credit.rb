@@ -5,6 +5,9 @@ class ExtraCredit < Compras::Model
 
   attr_accessor :difference
 
+  attr_modal :descriptor_id, :credit_type, :regulatory_act_id, :credit_date,
+             :extra_credit_nature_id
+
   has_enumeration_for :credit_type, :with => ExtraCreditKind
 
   belongs_to :descriptor
