@@ -17,7 +17,7 @@ class AdministrativeProcess < Compras::Model
   has_one :licitation_process, :dependent => :restrict
   has_one :administrative_process_liberation, :dependent => :destroy
   has_many :administrative_process_budget_allocations, :dependent => :destroy, :order => :id
-  has_many :items, :through => :administrative_process_budget_allocations
+  has_many :items, :through => :administrative_process_budget_allocations, :order => :id
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
 

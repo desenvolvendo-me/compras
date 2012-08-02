@@ -24,8 +24,6 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   orderize :id
   filterize
 
-  default_scope order { id }
-
   scope :administrative_process_id, lambda { |administrative_process_id|
     joins { administrative_process_budget_allocation }.
     where { administrative_process_budget_allocation.administrative_process_id.eq administrative_process_id }
