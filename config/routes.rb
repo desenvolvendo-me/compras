@@ -460,7 +460,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :licitation_process_ratifications do
+  resources :licitation_process_ratifications, :except => :destroy do
     collection do
       get :filter
       get :modal
