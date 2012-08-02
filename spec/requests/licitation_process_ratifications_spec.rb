@@ -81,23 +81,6 @@ feature "LicitationProcessRatifications" do
     page.should_not have_checked_field bidder_checkbok_html_name(0)
   end
 
-  scenario 'destroy a ratification' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    LicitationProcessRatification.make!(:processo_licitatorio_computador, :licitation_process_bidder_proposals => [])
-
-    navigate_through 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Apagar'
-
-    page.should have_content 'Homologação e Adjudicação de Processo Licitatório apagado com sucesso.'
-
-    page.should_not have_content licitation_process.to_s
-  end
-
   scenario 'cleaning items' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
