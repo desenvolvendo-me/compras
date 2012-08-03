@@ -11,6 +11,7 @@ class LicitationProcessRatification < Compras::Model
 
   validates :licitation_process, :licitation_process_bidder, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true
+  validate :licitation_process_bidder_belongs_to_licitation_process, :if => :licitation_process_bidder
 
   auto_increment :sequence, :by => :licitation_process_id
 
@@ -19,5 +20,13 @@ class LicitationProcessRatification < Compras::Model
 
   def to_s
     sequence.to_s
+  end
+
+  def licitation_process_bidder_belongs_to_licitation_process
+    if licitation_process_bidder.licitation_process != licitation_process
+      errors.add(:licitation_process_bidder,
+                 :should_belongs_to_licitation_process,
+                 :licitation_process => licitation_process)
+    end
   end
 end

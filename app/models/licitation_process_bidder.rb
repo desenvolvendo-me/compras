@@ -3,7 +3,7 @@ class LicitationProcessBidder < Compras::Model
   attr_accessible :receipt_date, :invited, :documents_attributes, :proposals_attributes
   attr_accessible :technical_score, :person_ids, :licitation_process_id
 
-  attr_modal :licitation_process, :creditor, :protocol, :protocol_date, :status
+  attr_modal :licitation_process_id, :creditor_id, :protocol, :protocol_date, :status
 
   has_enumeration_for :status, :with => LicitationProcessBidderStatus
 

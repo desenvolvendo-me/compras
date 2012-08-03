@@ -7,7 +7,7 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'creating a new ratification' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
@@ -20,7 +20,12 @@ feature "LicitationProcessRatifications" do
 
     page.should_not have_disabled_field 'Participante vencedor'
 
-    fill_modal 'Participante vencedor', :with => 'Wenderson Malheiros', :field => 'Fornecedor'
+    within_modal 'Participante vencedor' do
+      page.should have_field 'Processo licitatório', :with => licitation_process.to_s
+      page.should have_disabled_field 'Processo licitatório'
+      click_button 'Pesquisar'
+      click_record 'Wenderson Malheiros'
+    end
 
     page.should have_content 'Antivirus'
     page.should have_content '10,00'
@@ -89,13 +94,28 @@ feature "LicitationProcessRatifications" do
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
+    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
+
+    within_modal 'Participante vencedor' do
+      page.should have_field 'Processo licitatório', :with => licitation_process.to_s
+      page.should have_disabled_field 'Processo licitatório'
+      click_button 'Pesquisar'
+      click_record 'Wenderson Malheiros'
+    end
+
+    clear_modal 'Processo licitatório'
+
     page.should have_disabled_field 'Participante vencedor'
+    page.should have_field 'Participante vencedor', :with => ''
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
-    page.should_not have_disabled_field 'Participante vencedor'
-
-    fill_modal 'Participante vencedor', :with => 'Wenderson Malheiros', :field => 'Fornecedor'
+    within_modal 'Participante vencedor' do
+      page.should have_field 'Processo licitatório', :with => licitation_process.to_s
+      page.should have_disabled_field 'Processo licitatório'
+      click_button 'Pesquisar'
+      click_record 'Wenderson Malheiros'
+    end
 
     page.should have_content 'Antivirus'
     page.should have_content '10,00'
