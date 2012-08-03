@@ -130,7 +130,7 @@ describe DirectPurchase do
     end
 
     it 'should have error when limit verificator returns false' do
-      subject.stub(:licitation_object).and_return(double)
+      subject.stub(:licitation_object).and_return(double(:to_s => 'objeto de licitacao'))
       subject.stub(:modality).and_return(double)
 
       DirectPurchaseModalityLimitVerificator.any_instance.stub(:value_less_than_available_limit?).and_return(false)
@@ -138,7 +138,7 @@ describe DirectPurchase do
 
       subject.valid?
 
-      subject.errors[:total_allocations_items_value].should include "está acima do valor acumulado para este objeto (#{subject.to_s}), está acima do limite permitido (5)"
+      subject.errors[:total_allocations_items_value].should include "está acima do valor acumulado para este objeto (objeto de licitacao), está acima do limite permitido (5)"
     end
 
     it 'should not have error when limit verificator returns true' do

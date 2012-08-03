@@ -89,7 +89,7 @@ class DirectPurchase < Compras::Model
 
     unless validator.value_less_than_available_limit?
       errors.add(:total_allocations_items_value, :greater_than_actual_object_limit,
-                 :target => self, :limit => numeric_parser.localize(validator.current_limit))
+                 :target => licitation_object, :limit => numeric_parser.localize(validator.current_limit))
     end
   end
 

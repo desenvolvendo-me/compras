@@ -564,7 +564,7 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     within_tab 'Dotações' do
-      page.should have_content 'Valor total dos itens está acima do valor acumulado para este objeto (1/2012), está acima do limite permitido (10.000,00)'
+      page.should have_content 'Valor total dos itens está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
     end
   end
 end
