@@ -13,8 +13,16 @@ class LicitationProcessBidderProposal < Compras::Model
   delegate :reference_unit, :description, :code, :to => :material, :allow_nil => true
   delegate :creditor, :to => :licitation_process_bidder, :allow_nil => true
 
+  after_initialize :set_default_situation
+
   def total_price
     return 0 unless quantity && unit_price
     quantity * unit_price
+  end
+
+  protected
+
+  def set_default_situation
+    self.situation ||= SituationOfProposal::UNDEFINED
   end
 end
