@@ -28,22 +28,6 @@ describe DirectPurchase do
   it { should have_one(:supply_authorization).dependent(:restrict) }
   it { should validate_duplication_of(:budget_allocation_id).on(:direct_purchase_budget_allocations) }
 
-  it 'should return 0 for total items value of all budget allocations when have no allocations' do
-    subject.direct_purchase_budget_allocations.should be_empty
-
-    subject.total_allocations_items_value.should eq 0
-  end
-
-  it 'should return total items value of all budget allocations' do
-    subject.stub(:direct_purchase_budget_allocations).and_return([
-      double(:total_items_value => 20),
-      double(:total_items_value => 30),
-      double(:total_items_value => 45)
-    ])
-
-    subject.total_allocations_items_value.should eq 95
-  end
-
   it 'should return 0 for licitation_exemption when no licitation object' do
     subject.licitation_exemption.should eq 0
   end

@@ -3,6 +3,7 @@ class DirectPurchase < Compras::Model
   attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :price_collection, :price_registration, :observation, :pledge_type
   attr_accessible :direct_purchase_budget_allocations_attributes, :period, :period_unit
+  attr_accessible :total_allocations_items_value
 
   attr_modal :year, :date, :modality
 
@@ -41,6 +42,8 @@ class DirectPurchase < Compras::Model
   validate :must_have_at_least_budget_allocation
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
 
+  before_validation :set_total_allocations_items_value
+
   orderize :year
 
   def to_s
@@ -55,10 +58,6 @@ class DirectPurchase < Compras::Model
     return 0 if licitation_object.nil? || modality.empty?
 
     licitation_object.licitation_exemption(modality)
-  end
-
-  def total_allocations_items_value
-    direct_purchase_budget_allocations.collect(&:total_items_value).sum
   end
 
   def self.filter(params)
@@ -95,5 +94,9 @@ class DirectPurchase < Compras::Model
 
   def last_purchase_of_self_year
     self.class.where { self.year.eq(year) }.maximum(:direct_purchase).to_i
+  end
+
+  def set_total_allocations_items_value
+    self.total_allocations_items_value = direct_purchase_budget_allocations.collect(&:total_items_value).sum
   end
 end
