@@ -3,7 +3,6 @@ pt-BR:
     messages:
       administrative_process_released_successful: 'Processo Administrativo liberado com sucesso'
       administrative_process_annulled_successful: 'Processo Administrativo anulado com sucesso'
-      purchase_solicitation_liberated_successful: 'Solicitação de Compras liberada com sucesso'
 
   errors:
     compras:

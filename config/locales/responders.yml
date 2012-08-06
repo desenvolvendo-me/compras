@@ -109,6 +109,11 @@ pt-BR:
     purchase_solicitations:
       <<: *female
 
+    purchase_solicitation_liberations:
+      <<: *female
+      create:
+        notice: "Solicitação de Compras liberada com sucesso"
+
     reference_units:
       <<: *female
 
