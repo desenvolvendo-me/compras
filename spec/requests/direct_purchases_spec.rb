@@ -522,7 +522,7 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'when is not over limit should show error' do
+  scenario 'when is not over limit should not show error' do
     DirectPurchase.make!(:compra_perto_do_limite)
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
