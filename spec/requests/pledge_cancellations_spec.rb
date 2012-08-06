@@ -13,7 +13,7 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
-    fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
+    fill_modal 'Empenho', :with => pledge.code.to_s, :field => 'Código'
 
     fill_in 'Valor a ser anulado', :with => '150,00'
     fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
@@ -50,7 +50,7 @@ feature "PledgeCancellations" do
 
     click_link 'Criar Anulação de Empenho'
 
-    fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
+    fill_modal 'Empenho', :with => pledge.code.to_s, :field => 'Código'
     page.should have_field 'Empenho', :with => pledge.to_s
     page.should have_disabled_field 'Data de emissão'
     page.should have_field 'Data de emissão', :with => I18n.l(Date.current)

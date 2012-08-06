@@ -14,7 +14,7 @@ feature "PledgeLiquidations" do
     click_link 'Criar Liquidação de Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
+      fill_modal 'Empenho', :with => pledge.code.to_s, :field => 'Código'
       fill_in 'Valor a ser liquidado', :with => '150,00'
       fill_in 'Data *', :with => I18n.l(Date.tomorrow)
       fill_in 'Objeto do empenho', :with => 'Para empenho 2012'
@@ -126,7 +126,7 @@ feature "PledgeLiquidations" do
     click_link 'Criar Liquidação de Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
+      fill_modal 'Empenho', :with => pledge.code.to_s, :field => 'Código'
       fill_in 'Data *', :with => I18n.l(Date.tomorrow)
       fill_in 'Objeto do empenho', :with => 'Para empenho 2012'
     end
@@ -156,7 +156,7 @@ feature "PledgeLiquidations" do
     click_link 'Criar Liquidação de Empenho'
 
     within_tab 'Principal' do
-      fill_modal 'Empenho', :with => pledge.id.to_s, :field => 'Id'
+      fill_modal 'Empenho', :with => pledge.code.to_s, :field => 'Código'
       page.should have_field 'Empenho', :with => pledge.to_s
       page.should have_disabled_field 'Data de emissão'
       page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
@@ -238,9 +238,9 @@ feature "PledgeLiquidations" do
       click_link 'Filtrar Liquidações de Empenhos'
 
       within_modal 'Empenho' do
-        fill_in 'Id', :with => pledge.id.to_s
+        fill_in 'Código', :with => pledge.code.to_s
         click_button 'Pesquisar'
-        click_record pledge.id.to_s
+        click_record pledge.code.to_s
       end
 
       click_button 'Pesquisar'
