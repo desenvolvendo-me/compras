@@ -58,7 +58,7 @@ feature "LicitationProcesses" do
       select 'Global', :from => 'Tipo de empenho'
 
       # testing delegated fields of administrative process (filled by javascript)
-      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
+      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços'
       page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
       page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
@@ -127,7 +127,7 @@ feature "LicitationProcesses" do
       page.should have_select 'Tipo de empenho', :selected => 'Global'
 
       # testing delegated fields of administrative process
-      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
+      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços'
       page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
       page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
       page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'

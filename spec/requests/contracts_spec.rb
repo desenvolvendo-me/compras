@@ -18,7 +18,7 @@ feature "Contracts" do
     page.should have_disabled_field 'Compra direta'
     page.should have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
     page.should have_disabled_field 'Modalidade'
-    page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
+    page.should have_field 'Modalidade', :with => 'Convite para compras e serviços'
   end
 
   scenario 'picking a direct purchase' do
@@ -140,7 +140,7 @@ feature "Contracts" do
     page.should have_select 'Forma de execução', :selected => 'Empreitada integral'
     page.should have_select 'Garantias do contrato', :selected => 'Fiança bancária'
     page.should have_select 'Subcontratação', :selected => 'Sim'
-    page.should have_field 'Modalidade', :with => 'Convite para compras e serviços de engenharia'
+    page.should have_field 'Modalidade', :with => 'Convite para compras e serviços'
     page.should have_field 'Unidade orçamentaria gestora responsável', :with => '1 - Secretaria de Educação'
     page.should have_field 'Responsável pela unidade orçamentaria gestora', :with => 'Wenderson Malheiros'
     page.should have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'

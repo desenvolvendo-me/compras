@@ -122,7 +122,7 @@ feature "AdministrativeProcesses" do
     page.should have_content "00088/2012"
     page.should have_content "07/03/2012"
     page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
-    page.should have_content "Convite para compras e serviços de engenharia"
+    page.should have_content "Convite para compras e serviços"
     page.should have_content "Compras e serviços"
     page.should have_content "Forma Global com Menor Preço"
     page.should have_content "Licitação para compra de carteiras"
