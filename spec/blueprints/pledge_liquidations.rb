@@ -7,6 +7,14 @@ PledgeLiquidation.blueprint(:empenho_2012) do
   pledge_liquidation_parcels { [PledgeLiquidationParcel.make!(:parcela_de_valor_1)] }
 end
 
+PledgeLiquidation.blueprint(:empenho_em_15_dias) do
+  pledge { Pledge.make!(:empenho) }
+  value { 1 }
+  date { Date.current + 15.day }
+  description { 'Para 15 dias' }
+  pledge_liquidation_parcels { [PledgeLiquidationParcel.make!(:parcela_de_valor_1)] }
+end
+
 PledgeLiquidation.blueprint(:liquidacao_para_dois_vencimentos) do
   pledge { Pledge.make!(:empenho_com_dois_vencimentos) }
   value { 90 }

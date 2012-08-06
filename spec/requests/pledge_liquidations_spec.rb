@@ -226,4 +226,59 @@ feature "PledgeLiquidations" do
     page.should_not have_link 'Anular'
     page.should_not have_link 'Anulação'
   end
+
+  context 'filtering' do
+    scenario 'filter by pledge' do
+      pledge = Pledge.make!(:empenho)
+      liquidation_2012 = PledgeLiquidation.make!(:empenho_2012)
+      liquidation_other = PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
+
+      navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+
+      click_link 'Filtrar Liquidações de Empenhos'
+
+      within_modal 'Empenho' do
+        fill_in 'Id', :with => pledge.id.to_s
+        click_button 'Pesquisar'
+        click_record pledge.id.to_s
+      end
+
+      click_button 'Pesquisar'
+
+      page.should have_content liquidation_2012.id.to_s
+      page.should_not have_content liquidation_other.id.to_s
+    end
+
+    scenario 'filter by value' do
+      liquidation_2012 = PledgeLiquidation.make!(:empenho_2012)
+      liquidation_other = PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
+
+      navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+
+      click_link 'Filtrar Liquidações de Empenhos'
+
+      fill_in 'Valor', :with => '1,00'
+
+      click_button 'Pesquisar'
+
+      page.should have_content liquidation_2012.id.to_s
+      page.should_not have_content liquidation_other.id.to_s
+    end
+
+    scenario 'filter by date' do
+      liquidation_2012 = PledgeLiquidation.make!(:empenho_2012)
+      liquidation_other = PledgeLiquidation.make!(:empenho_em_15_dias)
+
+      navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+
+      click_link 'Filtrar Liquidações de Empenhos'
+
+      fill_in 'Data', :with => I18n.l(Date.tomorrow)
+
+      click_button 'Pesquisar'
+
+      page.should have_content liquidation_2012.id.to_s
+      page.should_not have_content liquidation_other.id.to_s
+    end
+  end
 end
