@@ -15,6 +15,15 @@ h1 {
   text-align: center;
 }
 
-.top-margin {
+.margin-top {
   margin-top: 20px;
+}
+
+ol.alpha-list, ol.alpha-list li {
+  list-style: lower-alpha outside !important;
+}
+
+ol.alpha-list li {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
