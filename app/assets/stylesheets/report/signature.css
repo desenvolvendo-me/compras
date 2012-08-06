@@ -1,3 +1,7 @@
 .signature {
   margin-top: 40px;
 }
+
+.signature hr {
+  max-width: 250px;
+}
