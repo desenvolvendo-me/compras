@@ -45,7 +45,7 @@ describe PriceCollectionClassificationGenerator do
   end
 
   let :proposal_item do
-    double(:unit_price => 20, :creditor => double('Creditor'), :quantity => 2)
+    double(:unit_price => 20, :quantity => 2)
   end
 
   let :proposal_items do
@@ -63,6 +63,8 @@ describe PriceCollectionClassificationGenerator do
   context "generete a list of price collection classifications" do
     before do
       price_collection.should_receive(:destroy_all_price_collection_classifications).and_return(true)
+
+      proposal_item.stub(:price_collection_proposal => proposal)
     end
 
     it "when type of calculation equals lowest total price by item" do

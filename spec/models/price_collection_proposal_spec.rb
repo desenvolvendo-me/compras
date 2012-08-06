@@ -10,6 +10,7 @@ describe PriceCollectionProposal do
   it { should belong_to :creditor }
 
   it { should have_many :items }
+  it { should have_many :price_collection_classifications }
   it { should have_one :annul }
 
   it { should validate_presence_of :creditor }

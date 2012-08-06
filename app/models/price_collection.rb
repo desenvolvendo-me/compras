@@ -72,11 +72,13 @@ class PriceCollection < Compras::Model
   end
 
   def all_price_collection_classifications
-    PriceCollectionClassification.by_price_classification_or_lot_or_item(id, price_collection_lot_ids, item_ids)
+    classifications = []
+    price_collection_proposals.each { |p| classifications += p.price_collection_classifications }
+    classifications
   end
 
   def destroy_all_price_collection_classifications
-    all_price_collection_classifications.destroy_all
+    all_price_collection_classifications.each { |p| p.destroy }
   end
 
   def price_collection_lots_with_items

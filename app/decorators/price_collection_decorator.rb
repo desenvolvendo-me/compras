@@ -9,6 +9,6 @@ class PriceCollectionDecorator
   end
 
   def all_price_collection_classifications_groupped
-    all_price_collection_classifications.group_by(&:creditor)
+    all_price_collection_classifications.group_by(&:price_collection_proposal)
   end
 end

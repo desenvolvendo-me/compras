@@ -2,8 +2,8 @@
 
 <h3>Apuração: <%= resource.type_of_calculation_humanize %></h3>
 
-<% resource.decorator.all_price_collection_classifications_groupped.each do |creditor, classifications| %>
-  <h3>Fornecedor: <%= creditor %></h3>
+<% resource.decorator.all_price_collection_classifications_groupped.each do |proposal, classifications| %>
+  <h3>Fornecedor: <%= proposal.creditor %></h3>
 
   <table class="records">
     <thead>

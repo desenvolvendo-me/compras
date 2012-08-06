@@ -36,20 +36,20 @@ describe PriceCollectionLotItem do
       double('Creditor')
     end
 
-    it 'should return unit price by price collection and creditor' do
-      subject.unit_price_by_price_collection_and_creditor(price_collection, creditor).should eq 10
+    it 'should return unit price by proposal' do
+      subject.unit_price_by_proposal(proposal).should eq 10
     end
 
-    it 'should return total value by price collection and creditor' do
+    it 'should return total value by proposal' do
       subject.quantity = 4
-      subject.total_value_by_price_collection_and_creditor(price_collection, creditor).should eq 40
+      subject.total_value_by_proposal(proposal).should eq 40
     end
 
     it 'should return zero when unit price equals nil' do
       price_collection_proposal_item.stub(:unit_price => nil)
       subject.quantity = 3
 
-      subject.total_value_by_price_collection_and_creditor(price_collection, creditor).should eq 0
+      subject.total_value_by_proposal(proposal).should eq 0
     end
   end
 end

@@ -14,14 +14,12 @@ class PriceCollectionLotItem < Compras::Model
   validates :material, :quantity, :presence => true
   validates :quantity, :numericality => { :greater_than_or_equal_to => 1 }
 
-  def unit_price_by_price_collection_and_creditor(price_collection, creditor)
-    proposal = price_collection.price_collection_proposals.select { |p| p.creditor == creditor }.first
-
+  def unit_price_by_proposal(proposal)
     proposal.items.select { |item| item.price_collection_lot_item == self }.first.unit_price
   end
 
-  def total_value_by_price_collection_and_creditor(price_collection, creditor)
-    (unit_price_by_price_collection_and_creditor(price_collection, creditor) || 0) * quantity
+  def total_value_by_proposal(proposal)
+    (unit_price_by_proposal(proposal) || 0) * quantity
   end
 
   def proposal_items

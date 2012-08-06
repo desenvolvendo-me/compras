@@ -5,6 +5,7 @@ class PriceCollectionProposal < Compras::Model
   belongs_to :creditor
 
   has_many :items, :class_name => 'PriceCollectionProposalItem', :dependent => :destroy, :order => :unit_price
+  has_many :price_collection_classifications, :dependent => :destroy, :order => :id
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true

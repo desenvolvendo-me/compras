@@ -24,7 +24,7 @@ class PriceCollectionClassificationGenerator
         :unit_value => proposal_item.unit_price,
         :total_value => proposal_item.unit_price * proposal_item.quantity,
         :classification => proposal.classification_by_item(proposal_item),
-        :creditor => proposal_item.creditor,
+        :price_collection_proposal => proposal_item.price_collection_proposal,
         :classifiable => proposal_item.price_collection_lot_item
       )
     end
@@ -34,7 +34,7 @@ class PriceCollectionClassificationGenerator
     price_collection_classification_repository.create!(
       :total_value => proposal.total_price,
       :classification => proposal.global_classification,
-      :creditor => proposal.creditor,
+      :price_collection_proposal => proposal,
       :classifiable => price_collection
     )
   end
@@ -44,7 +44,7 @@ class PriceCollectionClassificationGenerator
       price_collection_classification_repository.create!(
         :total_value => proposal.item_total_value_by_lot(lot),
         :classification => proposal.classification_by_lot(lot),
-        :creditor_id => proposal.creditor_id,
+        :price_collection_proposal => proposal,
         :classifiable => lot
       )
     end
