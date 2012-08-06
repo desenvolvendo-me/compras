@@ -1,9 +1,11 @@
 class DirectPurchase < Compras::Model
-  attr_accessible :direct_purchase, :year, :date, :legal_reference_id, :modality, :creditor_id, :budget_structure_id
-  attr_accessible :licitation_object_id, :delivery_location_id, :employee_id, :payment_method_id
-  attr_accessible :price_collection, :price_registration, :observation, :pledge_type
-  attr_accessible :direct_purchase_budget_allocations_attributes, :period, :period_unit
-  attr_accessible :total_allocations_items_value
+  attr_accessible :direct_purchase, :year, :date, :legal_reference_id,
+                  :modality, :creditor_id, :budget_structure_id,
+                  :licitation_object_id, :delivery_location_id, :employee_id,
+                  :payment_method_id, :price_collection, :price_registration,
+                  :observation, :pledge_type, :period, :period_unit,
+                  :direct_purchase_budget_allocations_attributes,
+                  :total_allocations_items_value
 
   attr_modal :year, :date, :modality
 
