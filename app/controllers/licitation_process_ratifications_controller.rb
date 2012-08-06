@@ -8,4 +8,8 @@ class LicitationProcessRatificationsController < CrudController
 
     super
   end
+
+  def show
+    render :layout => 'report'
+  end
 end

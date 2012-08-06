@@ -1,4 +1,7 @@
 <div class="buttons">
   <%= f.button :submit %>
+  <% if f.object.persisted? %>
+    <%= link_to 'Imprimir termo', resource_url(resource), :class => 'button neutral' %>
+  <% end %>
   <%= f.button :cancel %>
 </div>

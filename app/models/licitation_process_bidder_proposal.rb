@@ -11,7 +11,7 @@ class LicitationProcessBidderProposal < Compras::Model
   belongs_to :administrative_process_budget_allocation_item
   belongs_to :licitation_process_ratification
 
-  delegate :material, :quantity, :to => :administrative_process_budget_allocation_item, :allow_nil => true
+  delegate :material, :quantity, :budget_allocation, :to => :administrative_process_budget_allocation_item, :allow_nil => true
   delegate :reference_unit, :description, :code, :to => :material, :allow_nil => true
   delegate :creditor, :to => :licitation_process_bidder, :allow_nil => true
 

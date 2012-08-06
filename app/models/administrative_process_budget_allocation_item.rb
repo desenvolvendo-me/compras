@@ -13,7 +13,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   has_many :licitation_process_bidder_proposals
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
-  delegate :administrative_process_id, :to => :administrative_process_budget_allocation, :allow_nil => true
+  delegate :administrative_process_id, :budget_allocation, :to => :administrative_process_budget_allocation, :allow_nil => true
 
   delegate :type_of_calculation, :to => :administrative_process_budget_allocation, :allow_nil => true
 
@@ -39,6 +39,10 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
 
   def self.without_lot?
     without_lot.any?
+  end
+
+  def to_s
+    material.to_s
   end
 
   def estimated_total_price

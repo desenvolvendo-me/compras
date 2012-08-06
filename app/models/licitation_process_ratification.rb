@@ -9,6 +9,9 @@ class LicitationProcessRatification < Compras::Model
 
   accepts_nested_attributes_for :licitation_process_bidder_proposals, :allow_destroy => true
 
+  delegate :process, :modality_humanize, :administrative_process_description,
+           :to => :licitation_process, :prefix => true, :allow_nil => true
+
   validates :licitation_process, :licitation_process_bidder, :presence => true
   validates :adjudication_date, :ratification_date, :presence => true
   validate :licitation_process_bidder_belongs_to_licitation_process, :if => :licitation_process_bidder
@@ -28,5 +31,18 @@ class LicitationProcessRatification < Compras::Model
                  :should_belongs_to_licitation_process,
                  :licitation_process => licitation_process)
     end
+  end
+
+  def proposals_total_value
+    total = self.class.joins { licitation_process_bidder_proposals.administrative_process_budget_allocation_item }.
+      where { |ratification| ratification.id.eq id }.
+      select { sum(licitation_process_bidder_proposals.administrative_process_budget_allocation_item.quantity * licitation_process_bidder_proposals.unit_price).
+      as(proposal_total) }.first.proposal_total
+
+    BigDecimal.new(total || 0)
+  end
+
+  def signatures(signature_configuration_item = SignatureConfigurationItem)
+    signature_configuration_item.all_by_configuration_report(SignatureReport::LICITATION_PROCESS_RATIFICATIONS)
   end
 end

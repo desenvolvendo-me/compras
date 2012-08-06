@@ -125,6 +125,34 @@ feature "LicitationProcessRatifications" do
     page.should_not have_content 'Antivirus'
   end
 
+  scenario 'print report' do
+    Prefecture.make!(:belo_horizonte)
+    LicitationProcess.make!(:processo_licitatorio_computador)
+    LicitationProcessRatification.make!(:processo_licitatorio_computador)
+    LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Imprimir termo'
+
+    page.should have_content '1'
+    page.should have_content '1/2013'
+    page.should have_content 'CV'
+    page.should have_content '07/08/2012'
+    page.should have_content 'Licitação para compra de carteiras'
+    page.should have_content 'Wenderson Malheiros'
+    page.should have_content '01.01.00001 - Antivirus'
+    page.should have_content '10'
+    page.should have_content '-'
+    page.should have_content '10,00'
+    page.should have_content '20,00'
+    page.should have_content '1 - Alocação Belo Horizonte'
+  end
+
   def bidder_checkbok_html_name(number)
     "licitation_process_ratification[licitation_process_bidder_proposals_attributes][#{number}][ratificated]"
   end

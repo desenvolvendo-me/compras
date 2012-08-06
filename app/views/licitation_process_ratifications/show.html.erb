@@ -1,0 +1,179 @@
+<h1>
+  TERMO DE HOMOLOGAÇÃO E ADJUDICAÇÃO DE PROCESSO LICITATÓRIO
+</h1>
+
+<p>
+  O Prefeito Municipal, <%= current_prefecture.mayor_name %>, no uso das atribuições
+  que lhe são conferidas pela legislação em vigor, especialmente pela Lei Nr.
+  8.666/93 e alterações posteriores, a vista do parecer conclusivo exarado pela
+  Comissão de Licitações, resolve:
+</p>
+
+<div class="margin-top"></div>
+
+<p>
+  01 - HOMOLOGAR E ADJUDICAR a presente Licitação nestes termos:
+</p>
+
+<ol class="alpha-list">
+  <li>
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        Processo Nr.:
+      </div>
+
+      <div class="yui3-u-5-6">
+        <%= resource.licitation_process.process %>
+      </div>
+    </div>
+  </li>
+
+  <li>
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        Licitação Nr.:
+      </div>
+
+      <div class="yui3-u-5-6">
+        <%= resource.licitation_process %>
+      </div>
+    </div>
+  </li>
+
+  <li>
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        Modalidade:
+      </div>
+
+      <div class="yui3-u-5-6">
+        <%= resource.licitation_process_modality_humanize %>
+      </div>
+    </div>
+  </li>
+
+  <li>
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        <%= resource_class.human_attribute_name :ratification_date %>:
+      </div>
+
+      <div class="yui3-u-5-6">
+        <%= resource.decorator.ratification_date %>
+      </div>
+    </div>
+  </li>
+
+  <li>
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        <%= resource_class.human_attribute_name :adjudication_date %>:
+      </div>
+
+      <div class="yui3-u-1-6">
+        <%= resource.decorator.adjudication_date %>
+      </div>
+
+      <div class="yui3-u-1-6">
+        <%= resource_class.human_attribute_name :sequence %>:
+        <%= resource.sequence %>
+      </div>
+    </div>
+  </li>
+
+  <li>
+    <div class="yui3-g">
+      <div class="yui3-u-1-6">
+        Objeto da licitação:
+      </div>
+
+      <div class="yui3-u-5-6">
+        <%= resource.licitation_process_administrative_process_description %>
+      </div>
+    </div>
+  </li>
+
+  <li>
+    <div class="yui3-g">
+      <div class="yui3-u-1-4">
+        Fornecedores e itens vencedores:
+      </div>
+    </div>
+  </li>
+</ol>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3 level2">
+    <strong><%= resource.licitation_process_bidder %></strong>
+  </div>
+
+  <div class="yui3-u-1-8 right">
+    Quantidade
+  </div>
+
+  <div class="yui3-u-1-8 right">
+    Desconto (%)
+  </div>
+
+  <div class="yui3-u-1-8 right">
+    Preço Unitário
+  </div>
+
+  <div class="yui3-u-1-5 right">
+    Total do Item (em Reais R$)
+  </div>
+</div>
+
+<% resource.licitation_process_bidder_proposals.each do |proposal| %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-3 level3">
+      <%= proposal.administrative_process_budget_allocation_item %>
+    </div>
+
+    <div class="yui3-u-1-8 right">
+      <%= proposal.quantity %>
+    </div>
+
+    <div class="yui3-u-1-8 right">
+      -
+    </div>
+
+    <div class="yui3-u-1-8 right">
+      <%= proposal.decorator.unit_price %>
+    </div>
+
+    <div class="yui3-u-1-5 right">
+      <%= proposal.decorator.total_price %>
+    </div>
+  </div>
+<% end %>
+
+<div class="yui3-g">
+  <div class="yui3-u-17-24 right">
+    <strong>
+      Total Geral:
+    </strong>
+  </div>
+
+  <div class="yui3-u-1-5 right">
+    <%= resource.decorator.proposals_total_value %>
+  </div>
+</div>
+
+<div class="margin-top"></div>
+
+<p>
+  02 - Autorizar a emissão da(s) nota(s) de empenho correspondente(s).
+</p>
+
+<p class="level1">
+  Dotação(ões): <%= resource.decorator.budget_allocations %>
+</p>
+
+<hr />
+
+<div class="margin-top">
+  <%= current_prefecture %>,  <%= l(Date.current, :format => :long) %>
+</div>
+
+<%= render 'reports/signatures' %>

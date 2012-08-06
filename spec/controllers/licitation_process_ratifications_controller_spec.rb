@@ -15,4 +15,12 @@ describe LicitationProcessRatificationsController do
   it 'should not allow destroy' do
     lambda { delete :destroy, :id => 1 }.should raise_exception(ActionController::RoutingError)
   end
+
+  it 'should render report layout on #show' do
+    ratification = LicitationProcessRatification.make!(:processo_licitatorio_computador)
+
+    get :show, :id => ratification.id
+
+    response.should render_template('layout')
+  end
 end

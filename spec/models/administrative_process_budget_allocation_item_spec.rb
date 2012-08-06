@@ -15,6 +15,20 @@ describe AdministrativeProcessBudgetAllocationItem do
 
   it { should have_many :licitation_process_bidder_proposals }
 
+  context 'with material' do
+    let :material do
+      double(:material)
+    end
+
+    it 'should return materiali.to_s as to_s' do
+      subject.stub(:material).and_return(material)
+
+      material.stub(:to_s).and_return('Cadeira')
+
+      subject.to_s.should eq 'Cadeira'
+    end
+  end
+
   it 'should calculate the estimated total price' do
     subject.estimated_total_price.should eq 0
 
