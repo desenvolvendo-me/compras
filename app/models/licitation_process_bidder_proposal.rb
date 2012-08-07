@@ -2,7 +2,7 @@ class LicitationProcessBidderProposal < Compras::Model
   attr_accessible :licitation_process_bidder, :ratificated, :brand, :unit_price,
                   :administrative_process_budget_allocation_item,
                   :licitation_process_bidder_id,
-                  :administrative_process_budget_allocation_item_id,
+                  :administrative_process_budget_allocation_item_id
 
   has_enumeration_for :situation, :with => SituationOfProposal
 
