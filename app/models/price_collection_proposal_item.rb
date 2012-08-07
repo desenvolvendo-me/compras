@@ -11,6 +11,8 @@ class PriceCollectionProposalItem < Compras::Model
   delegate :material, :brand, :reference_unit, :quantity, :to => :price_collection_lot_item, :allow_nil => true
   delegate :creditor, :editable_by?, :price_collection, :to => :price_collection_proposal, :allow_nil => true
 
+  after_initialize :set_default_values
+
   def total_price
     (unit_price || 0) * (quantity || 0)
   end
@@ -42,6 +44,12 @@ class PriceCollectionProposalItem < Compras::Model
     group { price_collection_lot_item.price_collection_lot_id }.
 
     order { 'total_value' }
+  end
+
+  private
+
+  def set_default_values
+    self.unit_price ||= 0
   end
 end
 
