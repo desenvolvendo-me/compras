@@ -45,7 +45,7 @@ describe Precatory do
     subject.stub(:parceled_value => 3000.0)
 
     subject.valid?
-    subject.errors[:parceled_value].should include "deve ser igual ao valor do precatório"
+    subject.errors[:parceled_value].should include "deve ser igual ao valor do precatório (R$ 4.000,00)"
   end
 
   it "should allow parceled_value equals value" do
@@ -53,6 +53,6 @@ describe Precatory do
     subject.stub(:parceled_value => 4000.0)
 
     subject.valid?
-    subject.errors[:parceled_value].should_not include "deve ser igual ao valor do precatório"
+    subject.errors[:parceled_value].should_not include "deve ser igual ao valor do precatório (R$ 4.000,00)"
   end
 end

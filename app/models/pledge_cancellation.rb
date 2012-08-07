@@ -43,11 +43,11 @@ class PledgeCancellation < Compras::Model
     self.class.any?
   end
 
-  def value_validation
+  def value_validation(numeric_parser = ::I18n::Alchemy::NumericParser)
     return unless pledge && value
 
     if value > pledge_balance
-      errors.add(:value, :must_not_be_greater_than_pledge_balance)
+      errors.add(:value, :must_not_be_greater_than_pledge_balance, :value => numeric_parser.localize(pledge_balance))
     end
   end
 end

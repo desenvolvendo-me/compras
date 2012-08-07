@@ -33,7 +33,6 @@ class PurchaseSolicitation < Compras::Model
   validates :accounting_year, :kind, :delivery_location, :presence => true
   validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
   validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
-
   validate :must_have_at_least_one_budget_allocation
 
   orderize :request_date

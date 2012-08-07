@@ -14,26 +14,33 @@ describe LicitationProcessLot do
     subject.to_s.should eq "Lote 1"
   end
 
-  it "items from related administrative process should be valid" do
-    item = double(:administrative_process_id => 1)
+  context 'item validation' do
+    before do
+      subject.stub(:administrative_process).and_return(administrative_process)
+    end
 
-    subject.stub(:administrative_process_budget_allocation_items).and_return([item])
-    subject.stub(:administrative_process_id).and_return(1)
+    let :administrative_process do
+      double('AdministrativeProcess', :id => 1, :to_s => '1/2012')
+    end
 
-    subject.valid?
+    it "items from related administrative process should be valid" do
+      item = double(:administrative_process_id => 1)
+      subject.stub(:administrative_process_budget_allocation_items).and_return([item])
 
-    subject.errors.messages[:administrative_process_budget_allocation_items].should be_nil
-  end
+      subject.valid?
 
-  it "items from another administrative process should not be valid" do
-    item = double(:administrative_process_id => 1)
+      subject.errors.messages[:administrative_process_budget_allocation_items].should be_nil
+    end
 
-    subject.stub(:administrative_process_budget_allocation_items).and_return([item])
-    subject.stub(:administrative_process_id).and_return(2)
+    it "items from another administrative process should not be valid" do
+      item = double(:administrative_process_id => 2)
 
-    subject.valid?
+      subject.stub(:administrative_process_budget_allocation_items).and_return([item])
 
-    subject.errors.messages[:administrative_process_budget_allocation_items].should include "somente são permitidos itens do processo administrativo relacionado"
+      subject.valid?
+
+      subject.errors.messages[:administrative_process_budget_allocation_items].should include "somente são permitidos itens do processo administrativo relacionado (1/2012)"
+    end
   end
 
   it 'should return the winner proposal by lot total value' do

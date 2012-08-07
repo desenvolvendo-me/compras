@@ -31,9 +31,9 @@ class Precatory < Compras::Model
 
   private
 
-  def must_parceled_value_be_equal_value
+  def must_parceled_value_be_equal_value(numeric_parser = ::I18n::Alchemy::NumericParser)
     if parceled_value != value
-      errors.add(:parceled_value, :must_be_equal_precatory_value)
+      errors.add(:parceled_value, :must_be_equal_precatory_value, :value => numeric_parser.localize(value))
     end
   end
 end

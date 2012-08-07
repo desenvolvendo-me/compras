@@ -97,15 +97,17 @@ class Pledge < Compras::Model
 
   protected
 
-  def value_should_not_be_greater_than_budget_allocation_real_amount
+  def value_should_not_be_greater_than_budget_allocation_real_amount(numeric_parser = ::I18n::Alchemy::NumericParser)
     return unless value && budget_allocation_real_amount
 
-    errors.add(:value, :must_not_be_greater_than_budget_allocation_real_amount_with_reserved_values) if value > budget_allocation_real_amount
+    if value > budget_allocation_real_amount
+      errors.add(:value, :must_not_be_greater_than_budget_allocation_real_amount_with_reserved_values, :value => numeric_parser.localize(budget_allocation_real_amount))
+    end
   end
 
-  def items_total_value_should_not_be_greater_than_value
+  def items_total_value_should_not_be_greater_than_value(numeric_parser = ::I18n::Alchemy::NumericParser)
     if value && items_total_value > value
-      errors.add(:items_total_value, :should_not_be_greater_than_pledge_value)
+      errors.add(:items_total_value, :should_not_be_greater_than_pledge_value, :value => numeric_parser.localize(items_total_value))
     end
   end
 

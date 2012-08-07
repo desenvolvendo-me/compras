@@ -232,13 +232,13 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de julgamento'
+    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de julgamento (Menor preço total por item)'
 
     LicitationProcessTypesOfCalculationByJudgmentFormKind.any_instance.stub(:correct_type_of_calculation?).and_return(true)
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de julgamento'
+    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de julgamento (Menor preço total por item)'
   end
 
   it "should validate type_of_calculation by object type" do
@@ -249,13 +249,13 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de objeto'
+    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de objeto (Menor preço total por item)'
 
     LicitationProcessTypesOfCalculationByObjectType.any_instance.stub(:correct_type_of_calculation?).and_return(true)
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de objeto'
+    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de objeto (Menor preço total por item)'
   end
 
   it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is presence_trading' do
@@ -267,7 +267,7 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade'
+    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade (Menor preço total por item)'
   end
 
   it 'should allow lowest_total_price_by_item as type_of_calculation when modality is presence_trading' do
@@ -315,7 +315,7 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade'
+    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade (Menor preço total por item)'
   end
 
   it "should have filled lots" do

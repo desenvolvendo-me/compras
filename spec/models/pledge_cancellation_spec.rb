@@ -26,11 +26,11 @@ describe PledgeCancellation do
     end
 
     let :pledge do
-      double('Pledge', :emission_date => nil, :balance => 3)
+      double('Pledge', :emission_date => nil, :balance => 3.0)
     end
 
     it 'should not be valid if value greater than pledge balance' do
-      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho")
+      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho (R$ 3,00)")
     end
 
     it 'should be valid if value is not greater than pledge balance' do

@@ -44,11 +44,11 @@ describe Pledge do
   end
 
   it 'validate value based on budeget_allocation_real_amount' do
-    subject.stub(:budget_allocation_real_amount).and_return(99)
+    subject.stub(:budget_allocation_real_amount).and_return(99.0)
 
     should allow_value(1).for(:value)
     should allow_value(99).for(:value)
-    should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação, contando com os valores reservados')
+    should_not allow_value(100).for(:value).with_message('não pode ser maior do que o saldo da dotação, contando com os valores reservados (R$ 99,00)')
   end
 
   it 'should return "code - Entity/Year" as to_s method' do
@@ -87,9 +87,10 @@ describe Pledge do
   end
 
   it "should have error when the value is less than items total value" do
-    subject.stub(:value => 200, :items_total_value => 201)
+    subject.stub(:value).and_return(200.0)
+    subject.stub(:items_total_value).and_return(201.0)
     subject.valid?
 
-    subject.errors.messages[:items_total_value].should include "não pode ser superior ao valor do empenho"
+    subject.errors.messages[:items_total_value].should include "não pode ser superior ao valor do empenho (R$ 201,00)"
   end
 end

@@ -81,7 +81,7 @@ describe JudgmentCommissionAdvice do
 
       subject.valid?
 
-      subject.errors.messages[:judgment_end_date].should include "data do fim do julgamento não pode ser anterior a data do início do julgamento"
+      subject.errors.messages[:judgment_end_date].should include "data do fim do julgamento não pode ser anterior a data do início do julgamento (10/03/2012 - 09:59)"
     end
   end
 end

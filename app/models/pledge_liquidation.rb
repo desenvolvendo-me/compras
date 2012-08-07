@@ -73,15 +73,15 @@ class PledgeLiquidation < Compras::Model
     return unless pledge && date
 
     if date < emission_date
-      errors.add(:date, :must_be_greater_than_pledge_emission_date)
+      errors.add(:date, :must_be_greater_than_pledge_emission_date, :restriction => I18n.l(emission_date))
     end
   end
 
-  def validate_value
+  def validate_value(numeric_parser = ::I18n::Alchemy::NumericParser)
     return unless pledge && value
 
     if value > pledge_balance
-      errors.add(:value, :must_not_be_greater_than_pledge_balance)
+      errors.add(:value, :must_not_be_greater_than_pledge_balance, :value => numeric_parser.localize(pledge_balance))
     end
   end
 end

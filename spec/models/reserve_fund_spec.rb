@@ -44,7 +44,7 @@ describe ReserveFund do
   end
 
   it 'should validate that the value not exceed available reserve' do
-    budget_allocation = double(:amount => 500, :reserved_value => 300)
+    budget_allocation = double(:amount => 500.0, :reserved_value => 300)
     subject.stub(:budget_allocation).and_return(budget_allocation)
 
     subject.value = 200
@@ -57,7 +57,7 @@ describe ReserveFund do
 
     subject.valid?
 
-    subject.errors.messages[:value].should include 'está acima do valor disponível para a dotação selecionada'
+    subject.errors.messages[:value].should include 'está acima do valor disponível para a dotação selecionada (R$ 200,00)'
   end
 
   describe '#annul!' do

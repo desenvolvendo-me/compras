@@ -202,7 +202,7 @@ class LicitationProcess < Compras::Model
     return if type_of_calculation.nil? || administrative_process_judgment_form_kind.nil?
 
     unless verificator.correct_type_of_calculation?(administrative_process_judgment_form_kind, type_of_calculation)
-      errors.add(:type_of_calculation, :not_permited_for_judgment_form_kind)
+      errors.add(:type_of_calculation, :not_permited_for_judgment_form_kind, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
     end
   end
 
@@ -210,7 +210,7 @@ class LicitationProcess < Compras::Model
     return if type_of_calculation.nil? || administrative_process_object_type.nil?
 
     unless verificator.correct_type_of_calculation?(administrative_process_object_type, type_of_calculation)
-      errors.add(:type_of_calculation, :not_permited_for_object_type)
+      errors.add(:type_of_calculation, :not_permited_for_object_type, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
     end
   end
 
@@ -218,7 +218,7 @@ class LicitationProcess < Compras::Model
     return if type_of_calculation.nil? || administrative_process_modality.nil?
 
     unless verificator.correct_type_of_calculation?(administrative_process_modality, type_of_calculation)
-      errors.add(:type_of_calculation, :not_permited_for_modality)
+      errors.add(:type_of_calculation, :not_permited_for_modality, :kind => LicitationProcessTypeOfCalculation.t(type_of_calculation))
     end
   end
 

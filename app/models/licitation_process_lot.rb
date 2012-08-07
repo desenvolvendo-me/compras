@@ -27,8 +27,8 @@ class LicitationProcessLot < Compras::Model
 
   def items_should_belong_to_administrative_process
     administrative_process_budget_allocation_items.each do |item|
-      if item.administrative_process_id != administrative_process_id
-        errors.add(:administrative_process_budget_allocation_items, :item_is_not_from_correct_administrative_process)
+      if item.administrative_process_id != administrative_process.id
+        errors.add(:administrative_process_budget_allocation_items, :item_is_not_from_correct_administrative_process, :administrative_process => administrative_process)
       end
     end
   end

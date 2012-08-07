@@ -59,11 +59,13 @@ class ReserveFund < Compras::Model
 
   protected
 
-  def value_should_not_exceed_available_reserve
+  def value_should_not_exceed_available_reserve(numeric_parser = ::I18n::Alchemy::NumericParser)
     return unless budget_allocation
 
-    if budget_allocation_reserved_value + value > budget_allocation_amount
-      errors.add(:value, :should_not_exceed_reserved_value)
+    available_reserve = budget_allocation_amount - budget_allocation_reserved_value
+
+    if value > available_reserve
+      errors.add(:value, :should_not_exceed_reserved_value, :value => numeric_parser.localize(available_reserve))
     end
   end
 
