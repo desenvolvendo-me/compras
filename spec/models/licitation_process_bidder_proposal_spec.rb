@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_bidder_proposal'
+require 'app/enumerations/situation_of_proposal.rb'
 
 describe LicitationProcessBidderProposal do
 
@@ -29,5 +30,10 @@ describe LicitationProcessBidderProposal do
 
   it 'uses false as default for ratification' do
     subject.ratificated.should be false
+  end
+
+  it 'situation should be by default undefined' do
+    subject.should_receive(:situation=).with(SituationOfProposal::UNDEFINED)
+    subject.send(:initialize)
   end
 end
