@@ -782,6 +782,27 @@ feature "PriceCollections" do
     page.should_not have_button 'Salvar'
   end
 
+  scenario 'show modal' do
+    PriceCollection.make!(:coleta_de_precos)
+    PriceCollection.make!(:coleta_de_precos_anulada)
+
+    navigate 'Compras e Licitações > Coletas de Preços'
+
+    within_records do
+      page.should have_css('a', :count => 2)
+    end
+
+    click_link 'Filtrar Coletas de Preços'
+
+    select 'Anulado', :from => 'Status'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      page.should have_css('a', :count => 1)
+    end
+  end
+
   def make_proposals_dependencies!(price_collection)
     proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
     proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)

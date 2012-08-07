@@ -7,6 +7,11 @@ class PriceCollection < Compras::Model
 
   attr_readonly :year, :collection_number
 
+  attr_modal :collection_number, :year, :date, :delivery_location_id, :employee_id,
+             :payment_method_id, :object_description, :observations, :expiration,
+             :period, :period_unit, :proposal_validity, :proposal_validity_unit,
+             :type_of_calculation, :status
+
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit
   has_enumeration_for :proposal_validity_unit, :with => PeriodUnit
