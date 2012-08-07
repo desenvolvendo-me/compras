@@ -104,7 +104,6 @@ feature "PledgeCancellations" do
     page.should_not have_link "Apagar"
   end
 
-
   scenario 'access modal' do
     pledge_cancellation = PledgeCancellation.make!(:empenho_2012)
     pledge_cancellation_quize_dias = PledgeCancellation.make!(:cancelamento_para_empenho_em_quinze_dias)
@@ -121,6 +120,5 @@ feature "PledgeCancellations" do
       page.should have_link pledge_cancellation.to_s
       page.should_not have_link pledge_cancellation_quize_dias.to_s
     end
-
   end
 end
