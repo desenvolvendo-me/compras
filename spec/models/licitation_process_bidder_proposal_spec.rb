@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_bidder_proposal'
-require 'app/enumerations/situation_of_proposal.rb'
+require 'app/enumerations/situation_of_proposal'
 
 describe LicitationProcessBidderProposal do
 
