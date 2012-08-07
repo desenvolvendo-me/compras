@@ -13,7 +13,7 @@ class AdministrativeProcessLiberationsController < CrudController
   end
 
   def create
-    create!(:notice => t('compras.messages.administrative_process_released_successful')) { edit_administrative_process_path(@administrative_process) }
+    create! { edit_administrative_process_path(@administrative_process) }
   end
 
   protected

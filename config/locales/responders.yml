@@ -25,6 +25,11 @@ pt-BR:
     actions:
       <<: *male
 
+    administrative_process_liberations:
+      <<: *male
+      create:
+        notice: "Processo Administrativo liberado com sucesso"
+
     agencies:
       <<: *female
 
