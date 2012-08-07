@@ -31,7 +31,7 @@ class LicitationProcessBidder < Compras::Model
   validates :protocol, :protocol_date, :receipt_date, :presence => true, :if => :invited
   validates :creditor_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
   validates :technical_score, :presence => true, :if => :validate_technical_score?
-  validate :validate_licitaton_process_envelope_opening_date
+  validate :validate_licitation_process_envelope_opening_date
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :protocol_date,
@@ -110,7 +110,7 @@ class LicitationProcessBidder < Compras::Model
 
   protected
 
-  def validate_licitaton_process_envelope_opening_date
+  def validate_licitation_process_envelope_opening_date
     return if licitation_process.nil?
 
     unless allow_bidders?
