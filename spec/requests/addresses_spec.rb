@@ -10,7 +10,7 @@ feature "Addresses" do
     Street.make!(:amazonas)
     Street.make!(:girassol)
 
-    navigate  'Outros > Prefeitura'
+    navigate 'Outros > Prefeitura'
 
     within_tab 'Endereço' do
       page.should have_disabled_field "Bairro"
