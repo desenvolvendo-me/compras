@@ -11,6 +11,8 @@ class PriceCollectionLotItem < Compras::Model
   delegate :creditor, :total_price, :to => :winner_proposal, :allow_nil => true, :prefix => true
   delegate :annulled?, :to => :price_collection_lot, :allow_nil => true
 
+  after_initialize :set_default_values
+
   validates :material, :quantity, :presence => true
   validates :quantity, :numericality => { :greater_than_or_equal_to => 1 }
 
@@ -24,5 +26,11 @@ class PriceCollectionLotItem < Compras::Model
 
   def proposal_items
     PriceCollectionProposalItem.by_item_order_by_unit_price(id)
+  end
+
+  private
+
+  def set_default_values
+    self.quantity ||= 0
   end
 end

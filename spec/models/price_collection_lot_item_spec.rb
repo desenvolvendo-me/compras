@@ -52,4 +52,8 @@ describe PriceCollectionLotItem do
       subject.total_value_by_proposal(proposal).should eq 0
     end
   end
+
+  it 'should return 0 as the quantity default value' do
+    subject.quantity.should eq 0
+  end
 end
