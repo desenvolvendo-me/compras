@@ -4,12 +4,10 @@ require 'app/models/licitation_process_bidder_proposal'
 require 'app/enumerations/situation_of_proposal'
 
 describe LicitationProcessBidderProposal do
-
   it { should belong_to :licitation_process_bidder }
   it { should belong_to :administrative_process_budget_allocation_item }
   it { should belong_to :licitation_process_ratification }
   it { should have_one(:licitation_process_lot).through(:administrative_process_budget_allocation_item) }
-
   it "should return total price when has unit_price and quantity" do
     subject.unit_price = 3
     subject.stub(:quantity).and_return(14)
