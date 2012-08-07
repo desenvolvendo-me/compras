@@ -22,7 +22,7 @@ gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 gem 'simple_form', '2.0.1'
 gem 'will_paginate', '3.0.3'
 
-gem 'squeel', '1.0.0'
+gem 'squeel', '1.0.9'
 gem 'carrierwave', '0.6.2'
 gem 'awesome_nested_set', '2.1.3'
 
