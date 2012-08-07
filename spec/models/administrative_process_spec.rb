@@ -78,10 +78,8 @@ describe AdministrativeProcess do
     end
 
     test_type(AdministrativeProcessObjectType::PURCHASE_AND_SERVICES, [
-              AdministrativeProcessModality::MAKING_COST_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES,
               AdministrativeProcessModality::MAKING_COST_FOR_PURCHASES_AND_SERVICES,
               AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES,
-              AdministrativeProcessModality::COMPETITION_FOR_PURCHASES_AND_SERVICES,
               AdministrativeProcessModality::PRESENCE_TRADING,
               AdministrativeProcessModality::ELECTRONIC_TRADING,
               AdministrativeProcessModality::EXEMPTION_FOR_PURCHASES_AND_SERVICES,
@@ -94,13 +92,14 @@ describe AdministrativeProcess do
               AdministrativeProcessModality::ELECTRONIC_TRADING,
               AdministrativeProcessModality::EXEMPTION_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES,
               AdministrativeProcessModality::UNENFORCEABILITY,
-              AdministrativeProcessModality::COMPETITION])
+              AdministrativeProcessModality::COMPETITION,
+              AdministrativeProcessModality::PRESENCE_TRADING])
 
-    test_type(AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS, [AdministrativeProcessModality::AUCTION])
+    test_type(AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS, [AdministrativeProcessModality::AUCTION, AdministrativeProcessModality::PRESENCE_TRADING])
 
     test_type(AdministrativeProcessObjectType::CONCESSIONS_AND_PERMITS, [AdministrativeProcessModality::COMPETITION_FOR_GRANTS])
 
-    test_type(AdministrativeProcessObjectType::CALL_NOTICE, [AdministrativeProcessModality::COMPETITION, AdministrativeProcessModality::OTHER_MODALITIES])
+    test_type(AdministrativeProcessObjectType::CALL_NOTICE, [AdministrativeProcessModality::COMPETITION])
   end
 
   it 'should return 0 for total value of all budget allocations when have no allocations' do
