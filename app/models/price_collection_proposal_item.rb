@@ -11,7 +11,8 @@ class PriceCollectionProposalItem < Compras::Model
   delegate :material, :brand, :reference_unit, :quantity, :to => :price_collection_lot_item, :allow_nil => true
   delegate :creditor, :editable_by?, :price_collection, :to => :price_collection_proposal, :allow_nil => true
 
-  after_initialize :set_default_values
+  # FIXME Error on queries with custom fields
+  # after_initialize :set_default_values
 
   def total_price
     (unit_price || 0) * (quantity || 0)
