@@ -74,6 +74,10 @@ class DirectPurchase < Compras::Model
     supply_authorization.present?
   end
 
+  def total_direct_purchase_budget_allocations_sum
+    direct_purchase_budget_allocations.collect(&:total_items_value).sum
+  end
+
   protected
 
   def must_have_at_least_budget_allocation
@@ -99,6 +103,6 @@ class DirectPurchase < Compras::Model
   end
 
   def set_total_allocations_items_value
-    self.total_allocations_items_value = direct_purchase_budget_allocations.collect(&:total_items_value).sum
+    self.total_allocations_items_value = total_direct_purchase_budget_allocations_sum
   end
 end

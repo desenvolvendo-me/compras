@@ -148,4 +148,21 @@ describe DirectPurchase do
       end
     end
   end
+
+  context 'total_direct_purchase_budget_allocations_sum' do
+    before do
+      subject.stub(:direct_purchase_budget_allocations).and_return(direct_purchase_budget_allocations)
+    end
+
+    let :direct_purchase_budget_allocations do
+      [
+        double('ItemOne', :total_items_value => 10),
+        double('ItemTwo', :total_items_value => 1)
+      ]
+    end
+
+    it 'should return sum of total_items_value' do
+      subject.total_direct_purchase_budget_allocations_sum.should eq 11
+    end
+  end
 end
