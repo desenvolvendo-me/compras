@@ -142,7 +142,7 @@ feature "LicitationProcessRatifications" do
     page.should have_content '1'
     page.should have_content '1/2013'
     page.should have_content 'CV'
-    page.should have_content '07/08/2012'
+    page.should have_content I18n.l Date.current
     page.should have_content 'Licitação para compra de carteiras'
     page.should have_content 'Wenderson Malheiros'
     page.should have_content '01.01.00001 - Antivirus'
