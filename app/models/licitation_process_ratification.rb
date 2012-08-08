@@ -1,3 +1,4 @@
+# encoding: utf-8
 class LicitationProcessRatification < Compras::Model
   attr_accessible :adjudication_date, :ratification_date, :licitation_process_id, :licitation_process_bidder_id
   attr_accessible :licitation_process_bidder_proposals_attributes
@@ -22,7 +23,7 @@ class LicitationProcessRatification < Compras::Model
   orderize :licitation_process_id
 
   def to_s
-    sequence.to_s
+    "#{sequence} - Processo Licitatório #{licitation_process.to_s}"
   end
 
   def licitation_process_bidder_belongs_to_licitation_process
