@@ -15,11 +15,11 @@ feature "Profiles" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Perfil criado com sucesso.'
+    expect(page).to have_notice 'Perfil criado com sucesso.'
 
     click_link 'Gestor'
 
-    page.should have_field 'Nome', :with => 'Gestor'
+    expect(page).to have_field 'Nome', :with => 'Gestor'
   end
 
   scenario 'update a profile' do
@@ -33,11 +33,11 @@ feature "Profiles" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Perfil editado com sucesso.'
+    expect(page).to have_notice 'Perfil editado com sucesso.'
 
     click_link 'Gestão'
 
-    page.should have_field 'Nome', :with => 'Gestão'
+    expect(page).to have_field 'Nome', :with => 'Gestão'
   end
 
   scenario 'destroy a profile' do
@@ -49,10 +49,10 @@ feature "Profiles" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Perfil apagado com sucesso.'
+    expect(page).to have_notice 'Perfil apagado com sucesso.'
 
     within_records do
-      page.should_not have_content 'Gestor'
+      expect(page).not_to have_content 'Gestor'
     end
   end
 end

@@ -28,15 +28,15 @@ feature "Users" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Usuário criado com sucesso.'
+    expect(page).to have_notice 'Usuário criado com sucesso.'
 
     click_link 'wenderson.malheiros'
 
-    page.should have_field 'Funcionário', :with => 'Wenderson Malheiros'
-    page.should have_field 'Login', :with => 'wenderson.malheiros'
-    page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
-    page.should have_field 'Senha', :with => ''
-    page.should have_field 'Confirme a senha', :with => ''
+    expect(page).to have_field 'Funcionário', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Login', :with => 'wenderson.malheiros'
+    expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+    expect(page).to have_field 'Senha', :with => ''
+    expect(page).to have_field 'Confirme a senha', :with => ''
   end
 
   scenario 'update an user' do
@@ -56,13 +56,13 @@ feature "Users" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Usuário editado com sucesso.'
+    expect(page).to have_notice 'Usuário editado com sucesso.'
 
     within_records do
       click_link 'wenderson.malheiros'
     end
 
-    page.should have_field 'Funcionário', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Funcionário', :with => 'Gabriel Sobrinho'
   end
 
   scenario 'destroy an user' do
@@ -74,9 +74,9 @@ feature "Users" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Usuário apagado com sucesso.'
+    expect(page).to have_notice 'Usuário apagado com sucesso.'
 
-    page.should_not have_content 'Wenderson Malheiros'
+    expect(page).not_to have_content 'Wenderson Malheiros'
   end
 
   scenario 'open the window to new perfil through the perfil modal' do
@@ -87,7 +87,7 @@ feature "Users" do
     within_modal 'Perfil' do
       click_button 'Pesquisar'
 
-      page.should have_link 'Novo', :href => new_profile_path
+      expect(page).to have_link 'Novo', :href => new_profile_path
     end
   end
 
@@ -99,11 +99,11 @@ feature "Users" do
     navigate 'Outros > Usuários'
 
     within_records do
-      page.should have_link 'wenderson.malheiros'
-      page.should_not have_link 'gabriel.sobrinho'
-      page.should_not have_link 'sobrinhosa'
+      expect(page).to have_link 'wenderson.malheiros'
+      expect(page).not_to have_link 'gabriel.sobrinho'
+      expect(page).not_to have_link 'sobrinhosa'
 
-      page.should have_css 'a', :count => 1
+      expect(page).to have_css 'a', :count => 1
     end
   end
 end

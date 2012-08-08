@@ -12,17 +12,17 @@ feature "ReserveAllocationTypes" do
     click_link 'Criar Tipo de Reserva de Dotação'
 
     fill_in 'Descrição', :with => 'Reserva para Educação'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Reserva de Dotação criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Reserva de Dotação criado com sucesso.'
 
     click_link 'Reserva para Educação'
 
-    page.should have_field 'Descrição', :with => 'Reserva para Educação'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descrição', :with => 'Reserva para Educação'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent reserve_allocation_type' do
@@ -37,12 +37,12 @@ feature "ReserveAllocationTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Reserva de Dotação editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Reserva de Dotação editado com sucesso.'
 
     click_link 'Descrição do Tipo'
 
-    page.should have_field 'Descrição', :with => 'Descrição do Tipo'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descrição', :with => 'Descrição do Tipo'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent reserve_allocation_type' do
@@ -54,10 +54,10 @@ feature "ReserveAllocationTypes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipo de Reserva de Dotação apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Reserva de Dotação apagado com sucesso.'
 
-    page.should_not have_field 'Descrição', :with => 'Reserva para Educação'
-    page.should_not have_select 'Status', :selected => 'Ativo'
+    expect(page).not_to have_field 'Descrição', :with => 'Reserva para Educação'
+    expect(page).not_to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'validate uniqueness of description' do
@@ -71,6 +71,6 @@ feature "ReserveAllocationTypes" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

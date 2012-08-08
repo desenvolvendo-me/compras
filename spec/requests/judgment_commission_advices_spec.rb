@@ -29,23 +29,23 @@ feature "JudgmentCommissionAdvices" do
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
       # testing delegated president name from licitation commission
-      page.should have_disabled_field 'Presidente da comissão'
-      page.should have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
+      expect(page).to have_disabled_field 'Presidente da comissão'
+      expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Membros' do
       # Verifying member that comes from Licitation Commission
-      page.should have_disabled_field 'Membro'
-      page.should have_disabled_field 'CPF'
-      page.should have_disabled_field 'Função'
-      page.should have_disabled_field 'Natureza do cargo'
-      page.should have_disabled_field 'Matrícula'
+      expect(page).to have_disabled_field 'Membro'
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_disabled_field 'Função'
+      expect(page).to have_disabled_field 'Natureza do cargo'
+      expect(page).to have_disabled_field 'Matrícula'
 
-      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
-      page.should have_field 'CPF', :with => '003.149.513-34'
-      page.should have_field 'Função', :with => 'Presidente'
-      page.should have_field 'Natureza do cargo', :with => 'Servidor efetivo'
-      page.should have_field 'Matrícula', :with => '38'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_field 'Função', :with => 'Presidente'
+      expect(page).to have_field 'Natureza do cargo', :with => 'Servidor efetivo'
+      expect(page).to have_field 'Matrícula', :with => '38'
 
       click_button 'Adicionar Membro'
 
@@ -70,50 +70,50 @@ feature "JudgmentCommissionAdvices" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
+    expect(page).to have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Número da ata', :with => '1'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Comissão julgadora', :with => licitation_commission.to_s
-      page.should have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Número da ata', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Comissão julgadora', :with => licitation_commission.to_s
+      expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Membros' do
       # Verifying member that comes from Licitation Commission
-      page.should have_disabled_field 'Membro'
-      page.should have_disabled_field 'CPF'
-      page.should have_disabled_field 'Função'
-      page.should have_disabled_field 'Natureza do cargo'
-      page.should have_disabled_field 'Matrícula'
+      expect(page).to have_disabled_field 'Membro'
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_disabled_field 'Função'
+      expect(page).to have_disabled_field 'Natureza do cargo'
+      expect(page).to have_disabled_field 'Matrícula'
 
-      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
-      page.should have_field 'CPF', :with => '003.149.513-34'
-      page.should have_field 'Função', :with => 'Presidente'
-      page.should have_field 'Natureza do cargo', :with => 'Servidor efetivo'
-      page.should have_field 'Matrícula', :with => '38'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_field 'Função', :with => 'Presidente'
+      expect(page).to have_field 'Natureza do cargo', :with => 'Servidor efetivo'
+      expect(page).to have_field 'Matrícula', :with => '38'
 
       within '.member:last' do
-        page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
-        page.should have_select 'Função', :selected => 'Presidente'
-        page.should have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
-        page.should have_field 'Matrícula', :with => '3456789'
+        expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
+        expect(page).to have_select 'Função', :selected => 'Presidente'
+        expect(page).to have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
+        expect(page).to have_field 'Matrícula', :with => '3456789'
       end
     end
 
     within_tab 'Parecer' do
-      page.should have_field "Data do início do julgamento", :with => "20/01/2012"
-      page.should have_field "Hora do início do julgamento", :with => "12:00"
-      page.should have_field "Data do fim do julgamento", :with => "21/01/2012"
-      page.should have_field "Hora do fim do julgamento", :with => "13:00"
-      page.should have_field "Texto da ata sobre as empresas licitantes", :with => "texto 1"
-      page.should have_field "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
-      page.should have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
-      page.should have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
+      expect(page).to have_field "Data do início do julgamento", :with => "20/01/2012"
+      expect(page).to have_field "Hora do início do julgamento", :with => "12:00"
+      expect(page).to have_field "Data do fim do julgamento", :with => "21/01/2012"
+      expect(page).to have_field "Hora do fim do julgamento", :with => "13:00"
+      expect(page).to have_field "Texto da ata sobre as empresas licitantes", :with => "texto 1"
+      expect(page).to have_field "Texto da ata sobre documentação das empresas licitantes", :with => "texto 2"
+      expect(page).to have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "texto 3"
+      expect(page).to have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "texto 4"
     end
   end
 
@@ -142,10 +142,10 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Membros' do
-      page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
 
       within '.member:last' do
-        page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+        expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
 
         click_button 'Remover'
       end
@@ -164,32 +164,32 @@ feature "JudgmentCommissionAdvices" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Parecer da Comissão Julgadora editado com sucesso.'
+    expect(page).to have_notice 'Parecer da Comissão Julgadora editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Número da ata', :with => '1'
-      page.should have_field 'Ano', :with => '2013'
-      page.should have_field 'Comissão julgadora', :with => new_licitation_commission.to_s
+      expect(page).to have_field 'Número da ata', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2013'
+      expect(page).to have_field 'Comissão julgadora', :with => new_licitation_commission.to_s
     end
 
     within_tab 'Membros' do
-      page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
-      page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
+      expect(page).not_to have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
     end
 
     within_tab 'Parecer' do
-      page.should have_field "Data do início do julgamento", :with => "20/01/2013"
-      page.should have_field "Hora do início do julgamento", :with => "14:00"
-      page.should have_field "Data do fim do julgamento", :with => "21/01/2013"
-      page.should have_field "Hora do fim do julgamento", :with => "15:00"
-      page.should have_field "Texto da ata sobre as empresas licitantes", :with => "novo texto 1"
-      page.should have_field "Texto da ata sobre documentação das empresas licitantes", :with => "novo texto 2"
-      page.should have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "novo texto 3"
-      page.should have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "novo texto 4"
+      expect(page).to have_field "Data do início do julgamento", :with => "20/01/2013"
+      expect(page).to have_field "Hora do início do julgamento", :with => "14:00"
+      expect(page).to have_field "Data do fim do julgamento", :with => "21/01/2013"
+      expect(page).to have_field "Hora do fim do julgamento", :with => "15:00"
+      expect(page).to have_field "Texto da ata sobre as empresas licitantes", :with => "novo texto 1"
+      expect(page).to have_field "Texto da ata sobre documentação das empresas licitantes", :with => "novo texto 2"
+      expect(page).to have_field "Texto da ata sobre julgamento das propostas / justificativas", :with => "novo texto 3"
+      expect(page).to have_field "Texto da ata sobre julgamento - pareceres diversos", :with => "novo texto 4"
     end
   end
 
@@ -206,7 +206,7 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Pareceres da comissão julgadora'
 
-    page.should have_link advice.to_s
+    expect(page).to have_link advice.to_s
 
     within_records do
       page.find('a').click
@@ -214,9 +214,9 @@ feature "JudgmentCommissionAdvices" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Parecer da Comissão Julgadora apagado com sucesso.'
+    expect(page).to have_notice 'Parecer da Comissão Julgadora apagado com sucesso.'
 
-    page.should_not have_link advice.to_s
+    expect(page).not_to have_link advice.to_s
   end
 
   scenario 'create another judgment_commission_advice to test the generated minutes number and judgment sequence' do
@@ -254,12 +254,12 @@ feature "JudgmentCommissionAdvices" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
+    expect(page).to have_notice 'Parecer da Comissão Julgadora criado com sucesso.'
 
     click_link JudgmentCommissionAdvice.last.to_s
 
     within_tab 'Principal' do
-      page.should have_field 'Número da ata', :with => '2'
+      expect(page).to have_field 'Número da ata', :with => '2'
     end
   end
 
@@ -286,8 +286,8 @@ feature "JudgmentCommissionAdvices" do
       fill_modal 'Comissão julgadora', :with => '20/03/2012', :field => 'Data da nomeação'
 
       # testing delegated president name from licitation commission
-      page.should have_disabled_field 'Presidente da comissão'
-      page.should have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
+      expect(page).to have_disabled_field 'Presidente da comissão'
+      expect(page).to have_field 'Presidente da comissão', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Membros' do
@@ -324,7 +324,7 @@ feature "JudgmentCommissionAdvices" do
     click_button 'Salvar'
 
     within_tab 'Membros' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -349,12 +349,12 @@ feature "JudgmentCommissionAdvices" do
 
       fill_modal 'Membro', :with => 'Wenderson Malheiros'
 
-      page.should have_disabled_field 'CPF'
-      page.should have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34'
 
       clear_modal 'Membro'
-      page.should have_disabled_field 'CPF'
-      page.should have_field 'CPF', :with => ''
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', :with => ''
     end
   end
 end

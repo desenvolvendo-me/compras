@@ -17,13 +17,13 @@ feature "Banks" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Banco criado com sucesso.'
+    expect(page).to have_notice 'Banco criado com sucesso.'
 
     click_link 'Banco do Brasil'
 
-    page.should have_field 'Nome', :with => 'Banco do Brasil'
-    page.should have_field 'Código', :with => '1'
-    page.should have_field 'Sigla', :with => 'BB'
+    expect(page).to have_field 'Nome', :with => 'Banco do Brasil'
+    expect(page).to have_field 'Código', :with => '1'
+    expect(page).to have_field 'Sigla', :with => 'BB'
   end
 
   scenario 'update an existent bank' do
@@ -39,13 +39,13 @@ feature "Banks" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Banco editado com sucesso.'
+    expect(page).to have_notice 'Banco editado com sucesso.'
 
     click_link 'Banco Real'
 
-    page.should have_field 'Nome', :with => 'Banco Real'
-    page.should have_field 'Código', :with => '123'
-    page.should have_field 'Sigla', :with => 'BRE'
+    expect(page).to have_field 'Nome', :with => 'Banco Real'
+    expect(page).to have_field 'Código', :with => '123'
+    expect(page).to have_field 'Sigla', :with => 'BRE'
   end
 
   scenario 'destroy an existent bank' do
@@ -57,8 +57,8 @@ feature "Banks" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Banco apagado com sucesso.'
+    expect(page).to have_notice 'Banco apagado com sucesso.'
 
-    page.should_not have_content 'Itaú'
+    expect(page).not_to have_content 'Itaú'
   end
 end

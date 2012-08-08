@@ -15,7 +15,7 @@ feature 'A user confirming your account' do
 
     click_button 'Confirmar'
 
-    page.should have_notice 'Usuário confirmado com sucesso'
+    expect(page).to have_notice 'Usuário confirmado com sucesso'
   end
 
   scenario 'can confirm a already confirmed account' do
@@ -23,6 +23,6 @@ feature 'A user confirming your account' do
 
     visit "/users/confirmation?confirmation_token=#{user_without_password.confirmation_token}"
 
-    page.should have_content 'Por favor, efetue seu login.'
+    expect(page).to have_content 'Por favor, efetue seu login.'
   end
 end

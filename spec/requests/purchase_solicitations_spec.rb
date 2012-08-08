@@ -23,12 +23,12 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Código'
-      page.should have_disabled_field 'Liberação'
-      page.should have_disabled_field 'Por'
-      page.should have_disabled_field 'Observações do atendimento'
-      page.should have_disabled_field 'Justificativa para não atendimento'
-      page.should have_disabled_field 'Status de atendimento'
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_disabled_field 'Liberação'
+      expect(page).to have_disabled_field 'Por'
+      expect(page).to have_disabled_field 'Observações do atendimento'
+      expect(page).to have_disabled_field 'Justificativa para não atendimento'
+      expect(page).to have_disabled_field 'Status de atendimento'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da solicitação', :with => '01/02/2012'
@@ -53,57 +53,57 @@ feature "PurchaseSolicitations" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
-      page.should have_disabled_field 'Valor total'
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Pendente'
+      expect(page).to have_disabled_field 'Valor total'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Pendente'
 
       # asserting calculated total price of the item
-      page.should have_field 'Valor total', :with => '700,00'
+      expect(page).to have_field 'Valor total', :with => '700,00'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to have_notice 'Solicitação de Compra criada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data da solicitação', :with => '01/02/2012'
-      page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
-      page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
-      page.should have_select 'Tipo de solicitação', :selected => 'Bens'
-      page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data da solicitação', :with => '01/02/2012'
+      expect(page).to have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      expect(page).to have_field 'Local para entrega', :selected => 'Secretaria da Educação'
+      expect(page).to have_select 'Tipo de solicitação', :selected => 'Bens'
+      expect(page).to have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
 
       # Testing the pending status applied automatically
-      page.should have_select 'Status de atendimento', :selected => 'Pendente'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_field "Dotação", :with => budget_allocation.to_s
-      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Marca/Referência', :with => 'Norton'
-      page.should have_field 'Quantidade', :with => '3,50'
-      page.should have_field 'Valor unitário', :with => '200,00'
-      page.should have_field 'Valor total', :with => '700,00'
-      page.should have_select 'Status', :selected => 'Pendente'
-      page.should have_disabled_field 'Status'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+      expect(page).to have_field 'Quantidade', :with => '3,50'
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_field 'Valor total', :with => '700,00'
+      expect(page).to have_select 'Status', :selected => 'Pendente'
+      expect(page).to have_disabled_field 'Status'
 
-      page.should have_field 'Item', :with => '1'
+      expect(page).to have_field 'Item', :with => '1'
     end
   end
 
@@ -122,7 +122,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_link 'Apagar'
 
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2013'
@@ -153,52 +153,52 @@ feature "PurchaseSolicitations" do
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Ferro SA'
       fill_in 'Quantidade', :with => '200,00'
       fill_in 'Valor unitário', :with => '25,00'
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Pendente'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Pendente'
 
       # asserting calculated unit price of the item
-      page.should have_field 'Valor total', :with => '5.000,00'
+      expect(page).to have_field 'Valor total', :with => '5.000,00'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Solicitação de Compra editada com sucesso.'
+    expect(page).to have_notice 'Solicitação de Compra editada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Ano', :with => '2013'
-      page.should have_field 'Data da solicitação', :with => '01/02/2013'
-      page.should have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
-      page.should have_field 'Estrutura orçamentaria solicitante', :with => '1.2 - Secretaria de Desenvolvimento'
-      page.should have_field 'Justificativa da solicitação', :with => 'Novas mesas'
-      page.should have_field 'Local para entrega', :with => 'Secretaria da Saúde'
-      page.should have_select 'Tipo de solicitação', :selected => 'Serviços'
-      page.should have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2013'
+      expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
+      expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1.2 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas mesas'
+      expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
+      expect(page).to have_select 'Tipo de solicitação', :selected => 'Serviços'
+      expect(page).to have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_field "Dotação", :with => budget_allocation.to_s
-      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
+      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
 
-      page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Marca/Referência', :with => 'Ferro SA'
-      page.should have_field 'Quantidade', :with => '200,00'
-      page.should have_field 'Valor unitário', :with => '25,00'
-      page.should have_field 'Valor total', :with => '5.000,00'
-      page.should have_select 'Status', :selected => 'Pendente'
-      page.should have_disabled_field 'Status'
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Marca/Referência', :with => 'Ferro SA'
+      expect(page).to have_field 'Quantidade', :with => '200,00'
+      expect(page).to have_field 'Valor unitário', :with => '25,00'
+      expect(page).to have_field 'Valor total', :with => '5.000,00'
+      expect(page).to have_select 'Status', :selected => 'Pendente'
+      expect(page).to have_disabled_field 'Status'
 
-      page.should have_field 'Item', :with => '1'
+      expect(page).to have_field 'Item', :with => '1'
     end
   end
 
@@ -242,7 +242,7 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -254,7 +254,7 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_content 'é necessário cadastrar pelo menos uma dotação'
+      expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
 
       click_button 'Adicionar Dotação'
     end
@@ -262,7 +262,7 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_content 'é necessário cadastrar pelo menos um item'
+      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
 
@@ -276,7 +276,7 @@ feature "PurchaseSolicitations" do
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_field 'Item'
+      expect(page).to have_field 'Item'
 
       click_button 'Remover Item'
     end
@@ -284,10 +284,10 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      page.should_not have_field 'Item'
-      page.should have_content 'é necessário cadastrar pelo menos um item'
+      expect(page).not_to have_field 'Item'
+      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
 
-      page.should have_field 'Dotação'
+      expect(page).to have_field 'Dotação'
 
       click_button 'Remover Dotação'
     end
@@ -295,8 +295,8 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      page.should_not have_field 'Dotação'
-      page.should have_content 'é necessário cadastrar pelo menos uma dotação'
+      expect(page).not_to have_field 'Dotação'
+      expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
     end
   end
 
@@ -306,7 +306,7 @@ feature "PurchaseSolicitations" do
     click_link 'Criar Solicitação de Compra'
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_disabled_field 'Valor total dos itens'
+      expect(page).to have_disabled_field 'Valor total dos itens'
 
       click_button 'Adicionar Dotação'
 
@@ -316,7 +316,7 @@ feature "PurchaseSolicitations" do
         within '.item:last' do
           fill_in 'Quantidade', :with => '3,00'
           fill_in 'Valor unitário', :with => '10,00'
-          page.should have_field 'Valor total', :with => '30,00'
+          expect(page).to have_field 'Valor total', :with => '30,00'
         end
 
         click_button 'Adicionar Item'
@@ -324,7 +324,7 @@ feature "PurchaseSolicitations" do
         within '.item:last' do
           fill_in 'Quantidade', :with => '5,00'
           fill_in 'Valor unitário', :with => '2,00'
-          page.should have_field 'Valor total', :with => '10,00'
+          expect(page).to have_field 'Valor total', :with => '10,00'
         end
       end
 
@@ -336,11 +336,11 @@ feature "PurchaseSolicitations" do
         within '.item:last' do
           fill_in 'Quantidade', :with => '10,00'
           fill_in 'Valor unitário', :with => '5,50'
-          page.should have_field 'Valor total', :with => '55,00'
+          expect(page).to have_field 'Valor total', :with => '55,00'
         end
       end
 
-      page.should have_field 'Valor total dos itens', :with => '95,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '95,00'
 
       # removing an item
 
@@ -350,7 +350,7 @@ feature "PurchaseSolicitations" do
         end
       end
 
-      page.should have_field 'Valor total dos itens', :with => '85,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '85,00'
 
       # removing an entire budget allocation
 
@@ -358,7 +358,7 @@ feature "PurchaseSolicitations" do
         click_button 'Remover Dotação'
       end
 
-      page.should have_field 'Valor total dos itens', :with => '30,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '30,00'
     end
   end
 
@@ -401,47 +401,47 @@ feature "PurchaseSolicitations" do
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,00'
       fill_in 'Valor unitário', :with => '200,00'
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Pendente'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Pendente'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to have_notice 'Solicitação de Compra criada com sucesso.'
 
     within_records do
       click_link '2/2012'
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Código', :with => '2'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data da solicitação', :with => '01/02/2012'
-      page.should have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
-      page.should have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      page.should have_field 'Local para entrega', :selected => 'Secretaria da Educação'
-      page.should have_select 'Tipo de solicitação', :selected => 'Bens'
-      page.should have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+      expect(page).to have_field 'Código', :with => '2'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data da solicitação', :with => '01/02/2012'
+      expect(page).to have_field 'Responsável pela solicitação', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      expect(page).to have_field 'Local para entrega', :selected => 'Secretaria da Educação'
+      expect(page).to have_select 'Tipo de solicitação', :selected => 'Bens'
+      expect(page).to have_field 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
 
       # Testing the pending status applied automatically
-      page.should have_select 'Status de atendimento', :selected => 'Pendente'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_field "Dotação", :with => budget_allocation.to_s
-      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field "Dotação", :with => budget_allocation.to_s
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Marca/Referência', :with => 'Norton'
-      page.should have_field 'Quantidade', :with => '3,00'
-      page.should have_field 'Valor unitário', :with => '200,00'
-      page.should have_field 'Valor total', :with => '600,00'
-      page.should have_select 'Status', :selected => 'Pendente'
-      page.should have_disabled_field 'Status'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+      expect(page).to have_field 'Quantidade', :with => '3,00'
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_field 'Valor total', :with => '600,00'
+      expect(page).to have_select 'Status', :selected => 'Pendente'
+      expect(page).to have_disabled_field 'Status'
 
-      page.should have_field 'Item', :with => '1'
+      expect(page).to have_field 'Item', :with => '1'
     end
   end
 
@@ -455,7 +455,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_button 'Salvar'
   end
 
   scenario 'should show edit button when is returned' do
@@ -468,6 +468,6 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    page.should have_button 'Salvar'
+    expect(page).to have_button 'Salvar'
   end
 end

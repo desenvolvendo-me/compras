@@ -16,12 +16,12 @@ feature "MaterialsGroups" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Grupo de Materiais criado com sucesso.'
+    expect(page).to have_notice 'Grupo de Materiais criado com sucesso.'
 
     click_link 'Informática'
 
-    page.should have_field 'Código', :with => '01'
-    page.should have_field 'Descrição', :with => 'Informática'
+    expect(page).to have_field 'Código', :with => '01'
+    expect(page).to have_field 'Descrição', :with => 'Informática'
   end
 
   scenario 'update an existent materials_group' do
@@ -36,12 +36,12 @@ feature "MaterialsGroups" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Grupo de Materiais editado com sucesso.'
+    expect(page).to have_notice 'Grupo de Materiais editado com sucesso.'
 
     click_link 'Materiais de escritorio'
 
-    page.should have_field 'Código', :with => '02'
-    page.should have_field 'Descrição', :with => 'Materiais de escritorio'
+    expect(page).to have_field 'Código', :with => '02'
+    expect(page).to have_field 'Descrição', :with => 'Materiais de escritorio'
   end
 
   scenario 'destroy an existent materials_group' do
@@ -53,10 +53,10 @@ feature "MaterialsGroups" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Grupo de Materiais apagado com sucesso.'
+    expect(page).to have_notice 'Grupo de Materiais apagado com sucesso.'
 
-    page.should_not have_content '01'
-    page.should_not have_content 'Informática'
+    expect(page).not_to have_content '01'
+    expect(page).not_to have_content 'Informática'
   end
 
   scenario 'should validate uniqueness of group' do
@@ -70,7 +70,7 @@ feature "MaterialsGroups" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'should validate uniqueness of name' do
@@ -84,6 +84,6 @@ feature "MaterialsGroups" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

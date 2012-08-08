@@ -15,11 +15,11 @@ feature "LandSubdivisions" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Loteamento criado com sucesso.'
+    expect(page).to have_notice 'Loteamento criado com sucesso.'
 
     click_link 'Oportunity'
 
-    page.should have_field 'Nome', :with => 'Oportunity'
+    expect(page).to have_field 'Nome', :with => 'Oportunity'
   end
 
   scenario 'update a land subdivision' do
@@ -33,11 +33,11 @@ feature "LandSubdivisions" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Loteamento editado com sucesso.'
+    expect(page).to have_notice 'Loteamento editado com sucesso.'
 
     click_link 'Monte Verde'
 
-    page.should have_field 'Nome', :with => 'Monte Verde'
+    expect(page).to have_field 'Nome', :with => 'Monte Verde'
   end
 
   scenario 'destroy a land subdivision' do
@@ -49,10 +49,10 @@ feature "LandSubdivisions" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Loteamento apagado com sucesso.'
+    expect(page).to have_notice 'Loteamento apagado com sucesso.'
 
     within_records do
-      page.should_not have_content 'Terra Prometida'
+      expect(page).not_to have_content 'Terra Prometida'
     end
   end
 end

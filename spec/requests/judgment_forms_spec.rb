@@ -17,13 +17,13 @@ feature "JudgmentForms" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Forma de Julgamento de Licitação criado com sucesso.'
+    expect(page).to have_notice 'Forma de Julgamento de Licitação criado com sucesso.'
 
     click_link 'Forma Global com Menor Preço'
 
-    page.should have_field 'Descrição', :with => 'Forma Global com Menor Preço'
-    page.should have_select 'Tipo de julgamento', :selected => 'Global'
-    page.should have_select 'Tipo de licitação', :selected => 'Menor preço'
+    expect(page).to have_field 'Descrição', :with => 'Forma Global com Menor Preço'
+    expect(page).to have_select 'Tipo de julgamento', :selected => 'Global'
+    expect(page).to have_select 'Tipo de licitação', :selected => 'Menor preço'
   end
 
   scenario 'update an existent judgment_form' do
@@ -39,13 +39,13 @@ feature "JudgmentForms" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Forma de Julgamento de Licitação editado com sucesso.'
+    expect(page).to have_notice 'Forma de Julgamento de Licitação editado com sucesso.'
 
     click_link 'Por item com melhor técnica'
 
-    page.should have_field 'Descrição', :with => 'Por item com melhor técnica'
-    page.should have_select 'Tipo de julgamento', :selected => 'Por item'
-    page.should have_select 'Tipo de licitação', :selected => 'Melhor técnica'
+    expect(page).to have_field 'Descrição', :with => 'Por item com melhor técnica'
+    expect(page).to have_select 'Tipo de julgamento', :selected => 'Por item'
+    expect(page).to have_select 'Tipo de licitação', :selected => 'Melhor técnica'
   end
 
   scenario 'destroy an existent judgment_form' do
@@ -57,11 +57,11 @@ feature "JudgmentForms" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Forma de Julgamento de Licitação apagado com sucesso.'
+    expect(page).to have_notice 'Forma de Julgamento de Licitação apagado com sucesso.'
 
-    page.should_not have_content 'Forma Global com Menor Preço'
-    page.should_not have_content 'Global'
-    page.should_not have_content 'Menor preço'
+    expect(page).not_to have_content 'Forma Global com Menor Preço'
+    expect(page).not_to have_content 'Global'
+    expect(page).not_to have_content 'Menor preço'
   end
 
   scenario 'should validate uniqueness of description' do
@@ -75,6 +75,6 @@ feature "JudgmentForms" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

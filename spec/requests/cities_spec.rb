@@ -19,13 +19,13 @@ feature "Cities" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Cidade criada com sucesso.'
+    expect(page).to have_notice 'Cidade criada com sucesso.'
 
     click_link 'Porto Alegre'
 
-    page.should have_field 'Nome', :with => 'Porto Alegre'
-    page.should have_field 'Código', :with => '4929'
-    page.should have_field 'Estado', :with => 'Rio Grande do Sul'
+    expect(page).to have_field 'Nome', :with => 'Porto Alegre'
+    expect(page).to have_field 'Código', :with => '4929'
+    expect(page).to have_field 'Estado', :with => 'Rio Grande do Sul'
   end
 
   scenario 'update a city' do
@@ -40,13 +40,13 @@ feature "Cities" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Cidade editada com sucesso.'
+    expect(page).to have_notice 'Cidade editada com sucesso.'
 
     click_link 'B. Horizonte'
 
-    page.should have_field 'Nome', :with => 'B. Horizonte'
-    page.should have_field 'Código', :with => 'BHORIZO'
-    page.should have_field 'Estado', :with => 'Minas Gerais'
+    expect(page).to have_field 'Nome', :with => 'B. Horizonte'
+    expect(page).to have_field 'Código', :with => 'BHORIZO'
+    expect(page).to have_field 'Estado', :with => 'Minas Gerais'
   end
 
   scenario 'destroy a city' do
@@ -58,8 +58,8 @@ feature "Cities" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Cidade apagada com sucesso.'
+    expect(page).to have_notice 'Cidade apagada com sucesso.'
 
-    page.should_not have_content 'Porto Alegre'
+    expect(page).not_to have_content 'Porto Alegre'
   end
 end

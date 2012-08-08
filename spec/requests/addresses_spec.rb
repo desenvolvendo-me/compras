@@ -13,7 +13,7 @@ feature "Addresses" do
     navigate 'Outros > Prefeitura'
 
     within_tab 'Endereço' do
-      page.should have_disabled_field "Bairro"
+      expect(page).to have_disabled_field "Bairro"
 
       fill_modal 'Logradouro', :with => 'Amazonas'
 
@@ -22,8 +22,8 @@ feature "Addresses" do
 
         # 'Amazonas' is located in 'Portugal'
         # 'Girassol' is located in 'Centro' and 'São Francisco'
-        page.should have_content 'Portugal'
-        page.should_not have_content 'Girassol'
+        expect(page).to have_content 'Portugal'
+        expect(page).not_to have_content 'Girassol'
 
         click_record 'Portugal'
       end
@@ -37,13 +37,13 @@ feature "Addresses" do
     navigate 'Outros > Prefeitura'
 
     within_tab 'Endereço' do
-      page.should have_disabled_field "Bairro"
+      expect(page).to have_disabled_field "Bairro"
 
       fill_modal 'Logradouro', :with => 'Amazonas'
       fill_modal 'Bairro', :with => 'Portugal'
 
-      page.should have_field 'Cidade', :with => 'Porto Alegre'
-      page.should have_field 'Estado', :with => 'Rio Grande do Sul'
+      expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
+      expect(page).to have_field 'Estado', :with => 'Rio Grande do Sul'
     end
   end
 end

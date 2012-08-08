@@ -19,13 +19,13 @@ feature 'PriceCollectionProposalAnnul' do
 
     click_link 'Anular'
 
-    page.should have_content 'Anular Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
+    expect(page).to have_content 'Anular Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
 
-    page.should have_field 'Data', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
 
     click_link 'Cancelar'
 
-    page.should have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
+    expect(page).to have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
   end
 
   scenario 'creating an annul' do
@@ -53,15 +53,15 @@ feature 'PriceCollectionProposalAnnul' do
 
     click_on 'Anulação'
 
-    page.should have_content 'Anulação da Proposta de Wenderson Malheiros para a Coleta de Preço 1/2012'
-    page.should have_disabled_field 'Responsável'
-    page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Justificativa'
-    page.should have_field 'Justificativa', :with => 'Something'
+    expect(page).to have_content 'Anulação da Proposta de Wenderson Malheiros para a Coleta de Preço 1/2012'
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_field 'Justificativa', :with => 'Something'
 
-    page.should_not have_link 'Apagar'
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_link 'Apagar'
+    expect(page).not_to have_button 'Salvar'
   end
 end

@@ -29,22 +29,22 @@ feature "Prefecture" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Prefeitura criada com sucesso.'
+    expect(page).to have_notice 'Prefeitura criada com sucesso.'
 
     within_tab 'Prefeitura' do
-      page.should have_field 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
-      page.should have_field 'CNPJ', :with => '39.067.716/0001-41'
+      expect(page).to have_field 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
+      expect(page).to have_field 'CNPJ', :with => '39.067.716/0001-41'
 
-      page.should have_field 'Telefone', :with => '(56) 2345-9876'
-      page.should have_field 'Fax', :with => '(56) 1234-5432'
-      page.should have_field 'E-mail', :with => 'curitiba@curitiba.com.br'
-      page.should have_field 'Prefeito', :with => 'Prefeito de Porto Alegre'
+      expect(page).to have_field 'Telefone', :with => '(56) 2345-9876'
+      expect(page).to have_field 'Fax', :with => '(56) 1234-5432'
+      expect(page).to have_field 'E-mail', :with => 'curitiba@curitiba.com.br'
+      expect(page).to have_field 'Prefeito', :with => 'Prefeito de Porto Alegre'
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
-      page.should have_field 'Bairro', :with => 'Portugal'
-      page.should have_field 'CEP', :with => '33400-500'
+      expect(page).to have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
+      expect(page).to have_field 'Bairro', :with => 'Portugal'
+      expect(page).to have_field 'CEP', :with => '33400-500'
     end
   end
 
@@ -74,26 +74,26 @@ feature "Prefecture" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Prefeitura editada com sucesso.'
+    expect(page).to have_notice 'Prefeitura editada com sucesso.'
 
     within_tab 'Prefeitura' do
-      page.should have_field 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
+      expect(page).to have_field 'Nome', :with => 'Prefeitura Municipal de Porto Alegre'
 
       # this is randomly failing on CI
       Capybara.using_wait_time 30 do
-        page.should have_field 'CNPJ', :with => '39.067.716/0001-41'
+        expect(page).to have_field 'CNPJ', :with => '39.067.716/0001-41'
       end
 
-      page.should have_field 'Telefone', :with => '(56) 2345-9876'
-      page.should have_field 'Fax', :with => '(56) 1234-5432'
-      page.should have_field 'E-mail', :with => 'curitiba@curitiba.com.br'
-      page.should have_field 'Prefeito', :with => 'Prefeito de Porto Alegre'
+      expect(page).to have_field 'Telefone', :with => '(56) 2345-9876'
+      expect(page).to have_field 'Fax', :with => '(56) 1234-5432'
+      expect(page).to have_field 'E-mail', :with => 'curitiba@curitiba.com.br'
+      expect(page).to have_field 'Prefeito', :with => 'Prefeito de Porto Alegre'
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
-      page.should have_field 'Bairro', :with => 'Portugal'
-      page.should have_field 'CEP', :with => '33400-500'
+      expect(page).to have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
+      expect(page).to have_field 'Bairro', :with => 'Portugal'
+      expect(page).to have_field 'CEP', :with => '33400-500'
     end
   end
 end

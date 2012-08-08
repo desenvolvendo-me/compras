@@ -42,7 +42,7 @@ feature "Precatories" do
         fill_in 'Valor pago', :with => '10.000.000,00'
         fill_in 'Observação', :with => 'pagamento efetuado'
 
-        page.should have_content 'Parcela 1'
+        expect(page).to have_content 'Parcela 1'
       end
 
       click_button 'Adicionar Parcela'
@@ -53,49 +53,49 @@ feature "Precatories" do
         select 'A vencer', :from => 'Situação'
         fill_in 'Valor pago', :with => '0,00'
 
-        page.should have_content 'Parcela 2'
+        expect(page).to have_content 'Parcela 2'
       end
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Precatório criado com sucesso.'
+    expect(page).to have_notice 'Precatório criado com sucesso.'
 
     within_records do
       click_link '123456'
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Número do precatório', :with => '123456'
-      page.should have_field 'Beneficiário', :with => 'Wenderson Malheiros'
-      page.should have_field 'Número da ação', :with => '001.111.2222/2012'
-      page.should have_field 'Data do precatório', :with => '10/05/2012'
-      page.should have_field 'Data da decisão judicial', :with => '05/01/2012'
-      page.should have_field 'Data da apresentação', :with => '10/01/2012'
-      page.should have_field 'Tipo', :with => 'Precatórios Alimentares'
-      page.should have_field 'Histórico', :with => 'Histórico'
+      expect(page).to have_field 'Número do precatório', :with => '123456'
+      expect(page).to have_field 'Beneficiário', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Número da ação', :with => '001.111.2222/2012'
+      expect(page).to have_field 'Data do precatório', :with => '10/05/2012'
+      expect(page).to have_field 'Data da decisão judicial', :with => '05/01/2012'
+      expect(page).to have_field 'Data da apresentação', :with => '10/01/2012'
+      expect(page).to have_field 'Tipo', :with => 'Precatórios Alimentares'
+      expect(page).to have_field 'Histórico', :with => 'Histórico'
     end
 
     within_tab 'Vencimentos' do
-      page.should have_field 'Valor', :with => '20.000.000,00'
-      page.should have_field 'Valor parcelado', :with => '20.000.000,00'
+      expect(page).to have_field 'Valor', :with => '20.000.000,00'
+      expect(page).to have_field 'Valor parcelado', :with => '20.000.000,00'
 
       within '.parcel:first' do
-        page.should have_field 'Data do vencimento', :with => '15/05/2012'
-        page.should have_field 'Valor', :with => '10.000.000,00'
-        page.should have_select 'Situação', :selected => 'Pago'
-        page.should have_field 'Data do pagamento', :with => '15/05/2012'
-        page.should have_field 'Valor pago', :with => '10.000.000,00'
-        page.should have_field 'Observação', :with => 'pagamento efetuado'
+        expect(page).to have_field 'Data do vencimento', :with => '15/05/2012'
+        expect(page).to have_field 'Valor', :with => '10.000.000,00'
+        expect(page).to have_select 'Situação', :selected => 'Pago'
+        expect(page).to have_field 'Data do pagamento', :with => '15/05/2012'
+        expect(page).to have_field 'Valor pago', :with => '10.000.000,00'
+        expect(page).to have_field 'Observação', :with => 'pagamento efetuado'
       end
 
       within '.parcel:last' do
-        page.should have_field 'Data do vencimento', :with => '15/06/2012'
-        page.should have_field 'Valor', :with => '10.000.000,00'
-        page.should have_select 'Situação', :selected => 'A vencer'
-        page.should have_field 'Data do pagamento', :with => ''
-        page.should have_field 'Valor pago', :with => '0,00'
-        page.should have_field 'Observação', :with => ''
+        expect(page).to have_field 'Data do vencimento', :with => '15/06/2012'
+        expect(page).to have_field 'Valor', :with => '10.000.000,00'
+        expect(page).to have_select 'Situação', :selected => 'A vencer'
+        expect(page).to have_field 'Data do pagamento', :with => ''
+        expect(page).to have_field 'Valor pago', :with => '0,00'
+        expect(page).to have_field 'Observação', :with => ''
       end
     end
   end
@@ -109,20 +109,20 @@ feature "Precatories" do
       click_button 'Adicionar Parcela'
 
       within '.parcel:first' do
-        page.should have_content 'Parcela 1'
+        expect(page).to have_content 'Parcela 1'
       end
 
       click_button 'Adicionar Parcela'
 
       within '.parcel:last' do
-        page.should have_content 'Parcela 2'
+        expect(page).to have_content 'Parcela 2'
       end
 
       click_button 'Remover Parcela'
       click_button 'Adicionar Parcela'
 
       within '.parcel:last' do
-        page.should have_content 'Parcela 2'
+        expect(page).to have_content 'Parcela 2'
       end
     end
   end
@@ -168,43 +168,43 @@ feature "Precatories" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Precatório editado com sucesso.'
+    expect(page).to have_notice 'Precatório editado com sucesso.'
 
     within_records do
       click_link '123455'
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Número do precatório', :with => '123455'
-      page.should have_field 'Beneficiário', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Número da ação', :with => '002.111.2222/2012'
-      page.should have_field 'Data do precatório', :with => '09/05/2012'
-      page.should have_field 'Data da decisão judicial', :with => '06/01/2012'
-      page.should have_field 'Data da apresentação', :with => '11/01/2012'
-      page.should have_field 'Tipo', :with => 'Ordinário - Demais Casos'
-      page.should have_field 'Histórico', :with => 'Histórico atualizado'
+      expect(page).to have_field 'Número do precatório', :with => '123455'
+      expect(page).to have_field 'Beneficiário', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Número da ação', :with => '002.111.2222/2012'
+      expect(page).to have_field 'Data do precatório', :with => '09/05/2012'
+      expect(page).to have_field 'Data da decisão judicial', :with => '06/01/2012'
+      expect(page).to have_field 'Data da apresentação', :with => '11/01/2012'
+      expect(page).to have_field 'Tipo', :with => 'Ordinário - Demais Casos'
+      expect(page).to have_field 'Histórico', :with => 'Histórico atualizado'
     end
 
     within_tab 'Vencimentos' do
-      page.should have_field 'Valor', :with => '5.000.000,00'
-      page.should have_field 'Valor parcelado', :with => '5.000.000,00'
+      expect(page).to have_field 'Valor', :with => '5.000.000,00'
+      expect(page).to have_field 'Valor parcelado', :with => '5.000.000,00'
 
       within '.parcel:first' do
-        page.should have_field 'Data do vencimento', :with => '12/05/2012'
-        page.should have_field 'Valor', :with => '2.500.000,00'
-        page.should have_select 'Situação', :selected => 'Pago'
-        page.should have_field 'Data do pagamento', :with => '12/05/2012'
-        page.should have_field 'Valor pago', :with => '2.500.000,00'
-        page.should have_field 'Observação', :with => 'pagamento efetuado'
+        expect(page).to have_field 'Data do vencimento', :with => '12/05/2012'
+        expect(page).to have_field 'Valor', :with => '2.500.000,00'
+        expect(page).to have_select 'Situação', :selected => 'Pago'
+        expect(page).to have_field 'Data do pagamento', :with => '12/05/2012'
+        expect(page).to have_field 'Valor pago', :with => '2.500.000,00'
+        expect(page).to have_field 'Observação', :with => 'pagamento efetuado'
       end
 
       within '.parcel:last' do
-        page.should have_field 'Data do vencimento', :with => '20/05/2012'
-        page.should have_field 'Valor', :with => '2.500.000,00'
-        page.should have_select 'Situação', :selected => 'A vencer'
-        page.should have_field 'Data do pagamento', :with => ''
-        page.should have_field 'Valor pago', :with => '0,00'
-        page.should have_field 'Observação', :with => ''
+        expect(page).to have_field 'Data do vencimento', :with => '20/05/2012'
+        expect(page).to have_field 'Valor', :with => '2.500.000,00'
+        expect(page).to have_select 'Situação', :selected => 'A vencer'
+        expect(page).to have_field 'Data do pagamento', :with => ''
+        expect(page).to have_field 'Valor pago', :with => '0,00'
+        expect(page).to have_field 'Observação', :with => ''
       end
     end
   end
@@ -218,7 +218,7 @@ feature "Precatories" do
 
     fill_in 'Número do precatório', :with => '1234/2012'
 
-    page.should have_content '1234/2012'
+    expect(page).to have_content '1234/2012'
   end
 
   scenario 'should return empty erro when try create a empty parcel' do
@@ -233,7 +233,7 @@ feature "Precatories" do
 
     click_button 'Salvar'
 
-    page.should have_content 'não pode ficar em branco'
+    expect(page).to have_content 'não pode ficar em branco'
   end
 
   scenario 'destroy an existent precatory' do
@@ -247,9 +247,9 @@ feature "Precatories" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Precatório apagado com sucesso.'
+    expect(page).to have_notice 'Precatório apagado com sucesso.'
 
-    page.should_not have_link '1234/2012'
+    expect(page).not_to have_link '1234/2012'
 
   end
 
@@ -261,7 +261,7 @@ feature "Precatories" do
     within_tab 'Vencimentos' do
       fill_in 'Valor', :with => '20.000.000,00'
 
-      page.should have_field 'Valor parcelado', :with => '0,00'
+      expect(page).to have_field 'Valor parcelado', :with => '0,00'
 
       click_button 'Adicionar Parcela'
 
@@ -269,7 +269,7 @@ feature "Precatories" do
         fill_in 'Valor', :with => '10.000.000,00'
       end
 
-      page.should have_field 'Valor parcelado', :with => '10.000.000,00'
+      expect(page).to have_field 'Valor parcelado', :with => '10.000.000,00'
 
       click_button 'Adicionar Parcela'
 
@@ -277,7 +277,7 @@ feature "Precatories" do
         fill_in 'Valor', :with => '5.000.000,00'
       end
 
-      page.should have_field 'Valor parcelado', :with => '15.000.000,00'
+      expect(page).to have_field 'Valor parcelado', :with => '15.000.000,00'
     end
   end
 
@@ -305,13 +305,13 @@ feature "Precatories" do
         click_button 'Remover Parcela'
       end
 
-      page.should have_field 'Valor parcelado', :with => '5.000.000,00'
+      expect(page).to have_field 'Valor parcelado', :with => '5.000.000,00'
 
       within '.parcel:first' do
         click_button 'Remover Parcela'
       end
 
-      page.should have_field 'Valor parcelado', :with => '0,00'
+      expect(page).to have_field 'Valor parcelado', :with => '0,00'
     end
   end
 
@@ -328,10 +328,10 @@ feature "Precatories" do
       within_modal 'Tipo' do
         click_button 'Pesquisar'
 
-        page.should have_css("table.records tbody tr", :count => 2)
-        page.should have_content 'Precatórios Alimentares'
-        page.should have_content 'Ordinário - Demais Casos'
-        page.should_not have_content 'De pequeno valor'
+        expect(page).to have_css("table.records tbody tr", :count => 2)
+        expect(page).to have_content 'Precatórios Alimentares'
+        expect(page).to have_content 'Ordinário - Demais Casos'
+        expect(page).not_to have_content 'De pequeno valor'
       end
     end
   end

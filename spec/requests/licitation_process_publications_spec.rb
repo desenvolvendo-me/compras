@@ -19,9 +19,9 @@ feature "LicitationProcessPublications" do
 
     click_link 'Publicações'
 
-    page.should have_link 'Voltar ao processo licitatório'
-    page.should have_link 'Criar Publicação'
-    page.should have_content "Publicações do Processo Licitatório #{licitation_process}"
+    expect(page).to have_link 'Voltar ao processo licitatório'
+    expect(page).to have_link 'Criar Publicação'
+    expect(page).to have_content "Publicações do Processo Licitatório #{licitation_process}"
   end
 
   scenario 'create a new publication' do
@@ -39,7 +39,7 @@ feature "LicitationProcessPublications" do
 
     click_link 'Criar Publicação'
 
-    page.should have_content "Criar Publicação para o Processo Licitatório #{licitation_process}"
+    expect(page).to have_content "Criar Publicação para o Processo Licitatório #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
     fill_in "Data da publicação", :with => '20/04/2012'
@@ -48,15 +48,15 @@ feature "LicitationProcessPublications" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Publicação criado com sucesso'
+    expect(page).to have_notice 'Publicação criado com sucesso'
 
     within_records do
       click_link 'Jornal'
     end
 
-    page.should have_field 'Nome do veículo de comunicação', :with => 'Jornal'
-    page.should have_field 'Data da publicação', :with => '20/04/2012'
-    page.should have_select 'Publicação do(a)', :selected => 'Edital'
+    expect(page).to have_field 'Nome do veículo de comunicação', :with => 'Jornal'
+    expect(page).to have_field 'Data da publicação', :with => '20/04/2012'
+    expect(page).to have_select 'Publicação do(a)', :selected => 'Edital'
   end
 
   scenario 'update an existing publication' do
@@ -76,7 +76,7 @@ feature "LicitationProcessPublications" do
       click_link 'Publicacao'
     end
 
-    page.should have_content "Editar Publicação Publicacao do Processo Licitatório #{licitation_process}"
+    expect(page).to have_content "Editar Publicação Publicacao do Processo Licitatório #{licitation_process}"
 
     fill_in "Nome do veículo de comunicação", :with => 'Jornal'
     fill_in "Data da publicação", :with => '20/04/2012'
@@ -85,15 +85,15 @@ feature "LicitationProcessPublications" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Publicação editado com sucesso'
+    expect(page).to have_notice 'Publicação editado com sucesso'
 
     within_records do
       click_link 'Jornal'
     end
 
-    page.should have_field 'Nome do veículo de comunicação', :with => 'Jornal'
-    page.should have_field 'Data da publicação', :with => '20/04/2012'
-    page.should have_select 'Publicação do(a)', :selected => 'Edital'
+    expect(page).to have_field 'Nome do veículo de comunicação', :with => 'Jornal'
+    expect(page).to have_field 'Data da publicação', :with => '20/04/2012'
+    expect(page).to have_select 'Publicação do(a)', :selected => 'Edital'
   end
 
   scenario 'destroy a publication' do
@@ -115,8 +115,8 @@ feature "LicitationProcessPublications" do
 
     click_link 'Apagar'
 
-    page.should have_notice 'Publicação apagado com sucesso'
+    expect(page).to have_notice 'Publicação apagado com sucesso'
 
-    page.should_not have_link 'Publicacao'
+    expect(page).not_to have_link 'Publicacao'
   end
 end

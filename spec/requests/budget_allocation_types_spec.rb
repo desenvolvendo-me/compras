@@ -12,17 +12,17 @@ feature "BudgetAllocationTypes" do
     click_link 'Criar Tipo de Dotação'
 
     fill_in 'Descrição', :with => 'Administrativa'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Dotação criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Dotação criado com sucesso.'
 
     click_link 'Administrativa'
 
-    page.should have_field 'Descrição', :with => 'Administrativa'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descrição', :with => 'Administrativa'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent budget_allocation_type' do
@@ -37,12 +37,12 @@ feature "BudgetAllocationTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Dotação editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Dotação editado com sucesso.'
 
     click_link 'Executiva'
 
-    page.should have_field 'Descrição', :with => 'Executiva'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descrição', :with => 'Executiva'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent budget_allocation_type' do
@@ -54,9 +54,9 @@ feature "BudgetAllocationTypes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipo de Dotação apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Dotação apagado com sucesso.'
 
-    page.should_not have_content 'Administrativation'
+    expect(page).not_to have_content 'Administrativation'
   end
 
   scenario 'validate uniqueness of description' do
@@ -70,6 +70,6 @@ feature "BudgetAllocationTypes" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

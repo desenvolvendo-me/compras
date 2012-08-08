@@ -26,15 +26,15 @@ feature "OccurrenceContractualHistorics" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Histórico de Ocorrências Contratuais criado com sucesso.'
+    expect(page).to have_notice 'Histórico de Ocorrências Contratuais criado com sucesso.'
 
     click_link '1'
 
-    page.should have_field 'Sequência', :with => '1'
-    page.should have_field 'Data da ocorrência', :with => '01/07/2012'
-    page.should have_field 'Observações', :with => 'divergência contratual'
-    page.should have_select 'Tipo de alteração', :selected => 'Bilateral'
-    page.should have_select 'Tipo de histórico', :selected => 'Outros'
+    expect(page).to have_field 'Sequência', :with => '1'
+    expect(page).to have_field 'Data da ocorrência', :with => '01/07/2012'
+    expect(page).to have_field 'Observações', :with => 'divergência contratual'
+    expect(page).to have_select 'Tipo de alteração', :selected => 'Bilateral'
+    expect(page).to have_select 'Tipo de histórico', :selected => 'Outros'
   end
 
   scenario 'update an existent occurrence_contractual_historic' do
@@ -55,12 +55,12 @@ feature "OccurrenceContractualHistorics" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Histórico de Ocorrências Contratuais editado com sucesso.'
+    expect(page).to have_notice 'Histórico de Ocorrências Contratuais editado com sucesso.'
 
     click_link '1'
 
-    page.should have_field 'Data da ocorrência', :with => '10/07/2012'
-    page.should have_field 'Observações', :with => 'problemas judiciais'
+    expect(page).to have_field 'Data da ocorrência', :with => '10/07/2012'
+    expect(page).to have_field 'Observações', :with => 'problemas judiciais'
   end
 
   scenario 'destroy an existent occurrence_contractual_historic' do
@@ -78,6 +78,6 @@ feature "OccurrenceContractualHistorics" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Histórico de Ocorrências Contratuais apagado com sucesso.'
+    expect(page).to have_notice 'Histórico de Ocorrências Contratuais apagado com sucesso.'
   end
 end

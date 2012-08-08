@@ -56,43 +56,43 @@ feature "People" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Pessoa criada com sucesso.'
+    expect(page).to have_notice 'Pessoa criada com sucesso.'
 
     click_link 'Wenderson Malheiros'
 
     within_tab "Pessoa" do
-      page.should have_field 'Nome', :with => 'Wenderson Malheiros'
-      page.should have_checked_field 'Masculino'
-      page.should have_field 'Mãe', :with => 'Alaine Agnes'
-      page.should have_field 'Pai', :with => "Wenderson Primeiro"
-      page.should have_field "CPF", :with => '003.215.785-11'
-      page.should have_field 'Data de nascimento', :with => '21/03/1973'
+      expect(page).to have_field 'Nome', :with => 'Wenderson Malheiros'
+      expect(page).to have_checked_field 'Masculino'
+      expect(page).to have_field 'Mãe', :with => 'Alaine Agnes'
+      expect(page).to have_field 'Pai', :with => "Wenderson Primeiro"
+      expect(page).to have_field "CPF", :with => '003.215.785-11'
+      expect(page).to have_field 'Data de nascimento', :with => '21/03/1973'
     end
 
     within_tab 'Identidade' do
-      page.should have_field 'Número', :with => 'MG23912702'
-      page.should have_field 'Orgão emissor', :with => 'SSP-MG'
-      page.should have_field 'Data de emissão', :with => '03/07/2004'
-      page.should have_field 'Estado', :with => 'Minas Gerais'
+      expect(page).to have_field 'Número', :with => 'MG23912702'
+      expect(page).to have_field 'Orgão emissor', :with => 'SSP-MG'
+      expect(page).to have_field 'Data de emissão', :with => '03/07/2004'
+      expect(page).to have_field 'Estado', :with => 'Minas Gerais'
     end
 
     within_tab 'Contato' do
-      page.should have_field 'Telefone', :with => '(33) 3333-3333'
-      page.should have_field 'Celular', :with => '(33) 3333-3334'
-      page.should have_field 'Fax', :with => '(99) 9999-9999'
-      page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+      expect(page).to have_field 'Telefone', :with => '(33) 3333-3333'
+      expect(page).to have_field 'Celular', :with => '(33) 3333-3334'
+      expect(page).to have_field 'Fax', :with => '(99) 9999-9999'
+      expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
-      page.should have_field "Complemento", :with => "Apartamento 12"
-      page.should have_field 'Bairro', :with => 'Portugal'
-      page.should have_field "CEP", :with => "31400-223"
+      expect(page).to have_field 'Logradouro', :with => 'Avenida Amazonas'
+      expect(page).to have_field "Complemento", :with => "Apartamento 12"
+      expect(page).to have_field 'Bairro', :with => 'Portugal'
+      expect(page).to have_field "CEP", :with => "31400-223"
 
       within_fieldset 'Endereço de Correspondência' do
-        page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
-        page.should have_field 'Bairro', :with => 'Portugal'
-        page.should have_field 'CEP', :with => '89009-187'
+        expect(page).to have_field 'Logradouro', :with => 'Avenida Amazonas'
+        expect(page).to have_field 'Bairro', :with => 'Portugal'
+        expect(page).to have_field 'CEP', :with => '89009-187'
       end
     end
   end
@@ -104,8 +104,8 @@ feature "People" do
 
     click_link 'Wenderson'
 
-    page.should_not have_field 'Pessoa Física'
-    page.should_not have_field 'Pessoa Jurídica'
+    expect(page).not_to have_field 'Pessoa Física'
+    expect(page).not_to have_field 'Pessoa Jurídica'
 
     within_tab "Pessoa" do
       fill_in 'Nome', :with => 'Gabriel Sobrinho'
@@ -118,19 +118,19 @@ feature "People" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Pessoa editada com sucesso.'
+    expect(page).to have_notice 'Pessoa editada com sucesso.'
 
     within_records do
       click_link 'Gabriel Sobrinho'
     end
 
     within_tab "Pessoa" do
-      page.should have_field 'Nome', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Nome', :with => 'Gabriel Sobrinho'
     end
 
     within_tab 'Endereço' do
-      page.should have_field "CEP", :with => "41600-223"
-      page.should have_field 'Complemento', :with => "Apto das alfalfas"
+      expect(page).to have_field "CEP", :with => "41600-223"
+      expect(page).to have_field 'Complemento', :with => "Apto das alfalfas"
     end
   end
 
@@ -143,9 +143,9 @@ feature "People" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Pessoa apagada com sucesso.'
+    expect(page).to have_notice 'Pessoa apagada com sucesso.'
 
-    page.should_not have_content 'Wenderson Malheiros'
+    expect(page).not_to have_content 'Wenderson Malheiros'
   end
 
   scenario "create a new person as company" do
@@ -206,47 +206,47 @@ feature "People" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Pessoa criada com sucesso.'
+    expect(page).to have_notice 'Pessoa criada com sucesso.'
 
     click_link 'Nohup'
 
     within_tab "Contribuinte" do
-      page.should have_field 'Nome', :with => 'Nohup'
-      page.should have_field 'CNPJ', :with => '00.000.000/9983-03'
-      page.should have_field 'Inscrição estadual', :with => '01237070'
-      page.should have_field 'Número do registro na junta comercial', :with => '1234909034'
-      page.should have_field 'Data do registro na junta comercial', :with => '30/06/2011'
-      page.should have_field "Natureza jurídica", :with => 'Administração Pública'
-      page.should have_field "Pessoa responsável pela empresa", :with => "Wenderson Malheiros"
-      page.should have_field 'Função do responsável', :with => 'Administrador'
-      page.should have_field 'Porte da empresa', :with => 'Microempresa'
-      page.should have_checked_field 'Optante pelo Simples'
+      expect(page).to have_field 'Nome', :with => 'Nohup'
+      expect(page).to have_field 'CNPJ', :with => '00.000.000/9983-03'
+      expect(page).to have_field 'Inscrição estadual', :with => '01237070'
+      expect(page).to have_field 'Número do registro na junta comercial', :with => '1234909034'
+      expect(page).to have_field 'Data do registro na junta comercial', :with => '30/06/2011'
+      expect(page).to have_field "Natureza jurídica", :with => 'Administração Pública'
+      expect(page).to have_field "Pessoa responsável pela empresa", :with => "Wenderson Malheiros"
+      expect(page).to have_field 'Função do responsável', :with => 'Administrador'
+      expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
+      expect(page).to have_checked_field 'Optante pelo Simples'
     end
 
     within_tab 'Contato' do
-      page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
-      page.should have_field 'Telefone', :with => '(11) 7070-6432'
-      page.should have_field 'Celular', :with => '(11) 9090-3334'
-      page.should have_field 'Fax', :with => '(99) 1111-2222'
+      expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+      expect(page).to have_field 'Telefone', :with => '(11) 7070-6432'
+      expect(page).to have_field 'Celular', :with => '(11) 9090-3334'
+      expect(page).to have_field 'Fax', :with => '(99) 1111-2222'
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
-      page.should have_field 'Complemento', :with => 'Setor 7, Sala 2'
-      page.should have_field 'Bairro', :with => 'Portugal'
-      page.should have_field "CEP", :with => "31600-223"
+      expect(page).to have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
+      expect(page).to have_field 'Complemento', :with => 'Setor 7, Sala 2'
+      expect(page).to have_field 'Bairro', :with => 'Portugal'
+      expect(page).to have_field "CEP", :with => "31600-223"
 
       within_fieldset 'Endereço de Correspondência' do
-        page.should have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
-        page.should have_field 'Complemento', :with => 'Setor 7, Sala 2'
-        page.should have_field 'Bairro', :with => 'Portugal'
-        page.should have_field "CEP", :with => "31600-223"
+        expect(page).to have_field 'Logradouro', :with => 'Rua Bento Gonçalves'
+        expect(page).to have_field 'Complemento', :with => 'Setor 7, Sala 2'
+        expect(page).to have_field 'Bairro', :with => 'Portugal'
+        expect(page).to have_field "CEP", :with => "31600-223"
       end
     end
 
     within_tab 'Sócios'do
-      page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Percentual de cotas societárias', :with => '100,00'
+      expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Percentual de cotas societárias', :with => '100,00'
     end
   end
 
@@ -258,8 +258,8 @@ feature "People" do
 
     click_link 'Nohup'
 
-    page.should_not have_field 'Pessoa Física'
-    page.should_not have_field 'Pessoa Jurídica'
+    expect(page).not_to have_field 'Pessoa Física'
+    expect(page).not_to have_field 'Pessoa Jurídica'
 
     within_tab "Contribuinte" do
       fill_in 'Nome', :with => 'MoneyLabs'
@@ -281,22 +281,22 @@ feature "People" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Pessoa editada com sucesso.'
+    expect(page).to have_notice 'Pessoa editada com sucesso.'
 
     click_link 'MoneyLabs'
 
     within_tab "Contribuinte" do
-      page.should have_field 'Nome', :with => 'MoneyLabs'
+      expect(page).to have_field 'Nome', :with => 'MoneyLabs'
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'CEP', :with => '55554-333'
-      page.should have_field 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
+      expect(page).to have_field 'CEP', :with => '55554-333'
+      expect(page).to have_field 'Complemento', :with => "Apto das alfalfas, Depto. Sobrinho"
     end
 
     within_tab 'Sócios'do
-      page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Percentual de cotas societárias', :with => '100,00'
+      expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Percentual de cotas societárias', :with => '100,00'
     end
   end
 
@@ -314,8 +314,8 @@ feature "People" do
       fill_modal 'Bairro', :with => '' do
         click_button 'Pesquisar'
 
-        page.should have_content 'Portugal'
-        page.should_not have_content 'Centro'
+        expect(page).to have_content 'Portugal'
+        expect(page).not_to have_content 'Centro'
       end
 
       fill_modal 'Logradouro', :with => 'Cristiano Machado', :field => 'Nome do logradouro'
@@ -323,8 +323,8 @@ feature "People" do
       fill_modal 'Bairro', :with => '' do
         click_button 'Pesquisar'
 
-        page.should have_content 'Centro'
-        page.should_not have_content 'Portugal'
+        expect(page).to have_content 'Centro'
+        expect(page).not_to have_content 'Portugal'
       end
     end
   end
@@ -367,31 +367,31 @@ feature "People" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Pessoa criada com sucesso.'
+    expect(page).to have_notice 'Pessoa criada com sucesso.'
 
     click_link 'Wenderson Malheiros'
 
     within_tab "Inscrição especial" do
-      page.should have_field 'Nome', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Nome', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Contato' do
-      page.should have_field 'Telefone', :with => '(33) 3333-3333'
-      page.should have_field 'Celular', :with => '(33) 3333-3334'
-      page.should have_field 'Fax', :with => '(99) 9999-9999'
-      page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+      expect(page).to have_field 'Telefone', :with => '(33) 3333-3333'
+      expect(page).to have_field 'Celular', :with => '(33) 3333-3334'
+      expect(page).to have_field 'Fax', :with => '(99) 9999-9999'
+      expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
     end
 
     within_tab 'Endereço' do
-      page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
-      page.should have_field "Complemento", :with => "Apartamento 12"
-      page.should have_field 'Bairro', :with => 'Portugal'
-      page.should have_field "CEP", :with => "31400-223"
+      expect(page).to have_field 'Logradouro', :with => 'Avenida Amazonas'
+      expect(page).to have_field "Complemento", :with => "Apartamento 12"
+      expect(page).to have_field 'Bairro', :with => 'Portugal'
+      expect(page).to have_field "CEP", :with => "31400-223"
 
       within_fieldset 'Endereço de Correspondência' do
-        page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
-        page.should have_field 'Bairro', :with => 'Portugal'
-        page.should have_field 'CEP', :with => '89009-187'
+        expect(page).to have_field 'Logradouro', :with => 'Avenida Amazonas'
+        expect(page).to have_field 'Bairro', :with => 'Portugal'
+        expect(page).to have_field 'CEP', :with => '89009-187'
       end
     end
   end
@@ -403,9 +403,9 @@ feature "People" do
 
     click_link 'Mateus Lorandi'
 
-    page.should_not have_field 'Pessoa Física'
-    page.should_not have_field 'Pessoa Jurídica'
-    page.should_not have_field 'Inscrição Especial'
+    expect(page).not_to have_field 'Pessoa Física'
+    expect(page).not_to have_field 'Pessoa Jurídica'
+    expect(page).not_to have_field 'Inscrição Especial'
 
     within_tab "Inscrição especial" do
       fill_in 'Nome', :with => 'Gabriel Sobrinho'
@@ -418,19 +418,19 @@ feature "People" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Pessoa editada com sucesso.'
+    expect(page).to have_notice 'Pessoa editada com sucesso.'
 
     within_records do
       click_link 'Gabriel Sobrinho'
     end
 
     within_tab "Inscrição especial" do
-      page.should have_field 'Nome', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Nome', :with => 'Gabriel Sobrinho'
     end
 
     within_tab 'Endereço' do
-      page.should have_field "CEP", :with => "41600-223"
-      page.should have_field 'Complemento', :with => "Apto das alfalfas"
+      expect(page).to have_field "CEP", :with => "41600-223"
+      expect(page).to have_field 'Complemento', :with => "Apto das alfalfas"
     end
   end
 
@@ -443,9 +443,9 @@ feature "People" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Pessoa apagada com sucesso.'
+    expect(page).to have_notice 'Pessoa apagada com sucesso.'
 
-    page.should_not have_content 'Mateus Lorandi'
+    expect(page).not_to have_content 'Mateus Lorandi'
   end
 
   scenario 'should have the uniqueness validation to partner on new form' do
@@ -474,7 +474,7 @@ feature "People" do
     click_button 'Salvar'
 
     within_tab 'Sócios' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -495,7 +495,7 @@ feature "People" do
     click_button 'Salvar'
 
     within_tab 'Sócios' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -511,7 +511,7 @@ feature "People" do
     click_button 'Salvar'
 
     within_tab 'Sócios' do
-      page.should have_content 'deve haver ao menos um sócio'
+      expect(page).to have_content 'deve haver ao menos um sócio'
 
       click_button 'Adicionar Sócio'
 
@@ -522,7 +522,7 @@ feature "People" do
     click_button 'Salvar'
 
     within_tab 'Sócios' do
-      page.should_not have_content 'deve haver ao menos um sócio'
+      expect(page).not_to have_content 'deve haver ao menos um sócio'
     end
   end
 end

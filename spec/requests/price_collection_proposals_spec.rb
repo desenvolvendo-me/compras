@@ -17,8 +17,8 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      page.should have_content 'Propostas para a Coleta 1/2012'
-      page.should_not have_link 'Criar Proposta Para Coleta de Preços'
+      expect(page).to have_content 'Propostas para a Coleta 1/2012'
+      expect(page).not_to have_link 'Criar Proposta Para Coleta de Preços'
     end
 
     scenario 'the proposal should be created automatically when the price collection is created' do
@@ -30,7 +30,7 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      page.should have_link '1/2012 - Wenderson Malheiros'
+      expect(page).to have_link '1/2012 - Wenderson Malheiros'
     end
 
     scenario 'should not have a button to delete a proposal' do
@@ -44,9 +44,9 @@ feature "PriceCollectionProposals" do
 
       click_link '1/2012 - Wenderson Malheiros'
 
-      page.should have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
+      expect(page).to have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
 
-      page.should_not have_link 'Apagar'
+      expect(page).not_to have_link 'Apagar'
     end
 
     scenario 'editing proposal' do
@@ -60,16 +60,16 @@ feature "PriceCollectionProposals" do
 
       click_link '1/2012 - Wenderson Malheiros'
 
-      page.should have_disabled_field 'Valor total'
-      page.should have_disabled_field 'Valor total do lote'
-      page.should have_disabled_field 'Status'
+      expect(page).to have_disabled_field 'Valor total'
+      expect(page).to have_disabled_field 'Valor total do lote'
+      expect(page).to have_disabled_field 'Status'
 
-      page.should_not have_button 'Salvar'
-      page.should have_link 'Anular'
+      expect(page).not_to have_button 'Salvar'
+      expect(page).to have_link 'Anular'
 
       click_link 'Cancelar'
 
-      page.should have_content 'Editar 1/2012'
+      expect(page).to have_content 'Editar 1/2012'
     end
   end
 
@@ -91,9 +91,9 @@ feature "PriceCollectionProposals" do
 
       click_link 'Propostas'
 
-      page.should have_content 'Coletas de Preço'
-      page.should_not have_content '1/2012 - Wenderson Malheiros'
-      page.should have_content '1/2012 - Gabriel Sobrinho'
+      expect(page).to have_content 'Coletas de Preço'
+      expect(page).not_to have_content '1/2012 - Wenderson Malheiros'
+      expect(page).to have_content '1/2012 - Gabriel Sobrinho'
     end
 
     scenario 'I can see the information about the price collection' do
@@ -107,30 +107,30 @@ feature "PriceCollectionProposals" do
 
       click_link '1/2012 - Gabriel Sobrinho'
 
-      page.should have_content 'Proposta do Fornecedor Gabriel Sobrinho para a Coleta de Preço 1/2012'
+      expect(page).to have_content 'Proposta do Fornecedor Gabriel Sobrinho para a Coleta de Preço 1/2012'
 
-      page.should have_disabled_field 'Coleta de preços'
-      page.should have_field 'Coleta de preços', :with => '1/2012'
+      expect(page).to have_disabled_field 'Coleta de preços'
+      expect(page).to have_field 'Coleta de preços', :with => '1/2012'
 
-      page.should have_disabled_field 'Data de início'
-      page.should have_field 'Data de início', :with => I18n.l(Date.current)
+      expect(page).to have_disabled_field 'Data de início'
+      expect(page).to have_field 'Data de início', :with => I18n.l(Date.current)
 
-      page.should have_disabled_field 'Prazo de entrega'
-      page.should have_field 'Prazo de entrega', :with => '1 ano/anos'
+      expect(page).to have_disabled_field 'Prazo de entrega'
+      expect(page).to have_field 'Prazo de entrega', :with => '1 ano/anos'
 
-      page.should have_disabled_field 'Fornecedor'
-      page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+      expect(page).to have_disabled_field 'Fornecedor'
+      expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
 
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
 
-      page.should have_field 'Valor unitário'
-      page.should have_disabled_field 'Valor total'
-      page.should have_disabled_field 'Valor total do lote'
+      expect(page).to have_field 'Valor unitário'
+      expect(page).to have_disabled_field 'Valor total'
+      expect(page).to have_disabled_field 'Valor total do lote'
 
       click_link 'Cancelar'
 
-      page.should have_content 'Propostas Para Coletas de Preços'
+      expect(page).to have_content 'Propostas Para Coletas de Preços'
     end
 
     scenario 'I can update my own proposals' do
@@ -146,21 +146,21 @@ feature "PriceCollectionProposals" do
 
       fill_in 'Valor unitário', :with => '50,00'
 
-      page.should have_field 'Valor total', :with => '500,00'
-      page.should have_field 'Valor total do lote', :with => '500,00'
+      expect(page).to have_field 'Valor total', :with => '500,00'
+      expect(page).to have_field 'Valor total do lote', :with => '500,00'
 
-      page.should_not have_link 'Anular'
+      expect(page).not_to have_link 'Anular'
 
       click_button 'Salvar'
 
-      page.should have_notice 'Proposta Para Coleta de Preços editada com sucesso.'
+      expect(page).to have_notice 'Proposta Para Coleta de Preços editada com sucesso.'
 
       click_link '1/2012 - Gabriel Sobrinho'
 
-      page.should have_field 'Valor unitário', :with => '50,00'
-      page.should have_field 'Valor total', :with => '500,00'
-      page.should have_field 'Valor total do lote', :with => '500,00'
-      page.should have_field 'Quantidade', :with => '10'
+      expect(page).to have_field 'Valor unitário', :with => '50,00'
+      expect(page).to have_field 'Valor total', :with => '500,00'
+      expect(page).to have_field 'Valor total do lote', :with => '500,00'
+      expect(page).to have_field 'Quantidade', :with => '10'
     end
 
     scenario "I can not update other's proposals" do
@@ -169,7 +169,7 @@ feature "PriceCollectionProposals" do
 
        visit "/price_collection_proposals/#{proposal.id}/edit"
 
-       page.should_not have_field "Coleta de Preços", :with => '1/2012'
+       expect(page).not_to have_field "Coleta de Preços", :with => '1/2012'
     end
   end
 end

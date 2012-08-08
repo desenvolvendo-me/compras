@@ -18,16 +18,16 @@ feature "MovimentTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Movimento criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Movimento criado com sucesso.'
 
     within_records do
       click_link 'Adicionar pagamento'
     end
 
-    page.should have_field 'Nome', :with => 'Adicionar pagamento'
-    page.should have_select 'Operação', :selected => 'Adicionar'
-    page.should have_select 'Atributo', :selected => 'Dotação'
-    page.should have_select 'Fonte', :selected => 'Manual'
+    expect(page).to have_field 'Nome', :with => 'Adicionar pagamento'
+    expect(page).to have_select 'Operação', :selected => 'Adicionar'
+    expect(page).to have_select 'Atributo', :selected => 'Dotação'
+    expect(page).to have_select 'Fonte', :selected => 'Manual'
   end
 
   scenario "edit an exiting moviment type" do
@@ -46,16 +46,16 @@ feature "MovimentTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Movimento editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Movimento editado com sucesso.'
 
     within_records do
       click_link 'Subtração recurso'
     end
 
-    page.should have_field 'Nome', :with => 'Subtração recurso'
-    page.should have_select 'Operação', :selected => 'Subtrair'
-    page.should have_select 'Atributo', :selected => 'Recurso'
-    page.should have_select 'Fonte', :selected => 'Default'
+    expect(page).to have_field 'Nome', :with => 'Subtração recurso'
+    expect(page).to have_select 'Operação', :selected => 'Subtrair'
+    expect(page).to have_select 'Atributo', :selected => 'Recurso'
+    expect(page).to have_select 'Fonte', :selected => 'Default'
   end
 
   scenario "destroy an exiting moviment type" do
@@ -69,10 +69,10 @@ feature "MovimentTypes" do
 
     click_link 'Apagar'
 
-    page.should have_notice 'Tipo de Movimento apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Movimento apagado com sucesso.'
 
     within_records do
-      page.should_not have_link 'Adicionar dotação'
+      expect(page).not_to have_link 'Adicionar dotação'
     end
   end
 end

@@ -24,8 +24,8 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
-        page.should have_disabled_field 'Banco'
-        page.should have_field 'Banco', :with => 'Itaú'
+        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', :with => 'Itaú'
 
         fill_in 'Nome', :with => 'Agência Itaú'
         click_button 'Pesquisar'
@@ -67,45 +67,45 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Credor criado com sucesso.'
+    expect(page).to have_notice 'Credor criado com sucesso.'
 
     click_link 'Mateus Lorandi'
 
-    page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
-    page.should_not have_field 'Porte da empresa'
-    page.should_not have_field 'PIS/PASEP'
+    expect(page).to have_field 'Pessoa', :with => 'Mateus Lorandi'
+    expect(page).not_to have_field 'Porte da empresa'
+    expect(page).not_to have_field 'PIS/PASEP'
 
     within_tab 'Contas Bancárias' do
-      page.should have_field 'Banco', :with => 'Itaú'
-      page.should have_field 'Agência', :with => 'Agência Itaú'
-      page.should have_select 'Status', :selected => 'Ativo'
-      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
-      page.should have_field 'Número da conta', :with => '12345'
-      page.should have_field 'Dígito da conta', :with => 'x'
+      expect(page).to have_field 'Banco', :with => 'Itaú'
+      expect(page).to have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
+      expect(page).to have_field 'Número da conta', :with => '12345'
+      expect(page).to have_field 'Dígito da conta', :with => 'x'
     end
 
     within_tab 'Materiais' do
-      page.should have_content '02.02.00001'
-      page.should have_content 'Arame farpado'
+      expect(page).to have_content '02.02.00001'
+      expect(page).to have_content 'Arame farpado'
     end
 
     within_tab 'Balanço' do
-      page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Ativo circulante', :with => '10,00'
-      page.should have_field 'Realizável em longo prazo', :with => '20,00'
-      page.should have_field 'Passivo circulante', :with => '30,00'
-      page.should have_field 'Patrimônio líquido', :with => '40,00'
-      page.should have_field 'Exigível em longo prazo', :with => '50,00'
-      page.should have_field 'Liquidez geral', :with => '60,00'
-      page.should have_field 'Liquidez corrente', :with => '70,00'
-      page.should have_field 'Capital circulante líquido', :with => '80,00'
+      expect(page).to have_field 'Exercício', :with => '2012'
+      expect(page).to have_field 'Ativo circulante', :with => '10,00'
+      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
+      expect(page).to have_field 'Passivo circulante', :with => '30,00'
+      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
+      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
+      expect(page).to have_field 'Liquidez geral', :with => '60,00'
+      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
+      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Suspenso até', :with => '05/04/2012'
-      page.should have_field 'Data da ocorrência', :with => '05/05/2012'
+      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
+      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2012'
     end
   end
 
@@ -120,9 +120,9 @@ feature "Creditors" do
 
     click_link 'Mais informações'
 
-    page.should have_content 'Nohup'
-    page.should have_content 'Sócios'
-    page.should have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Nohup'
+    expect(page).to have_content 'Sócios'
+    expect(page).to have_content 'Wenderson Malheiros'
   end
 
   scenario 'create a new creditor when people is a company' do
@@ -143,16 +143,16 @@ feature "Creditors" do
     fill_modal 'Pessoa', :with => 'Nohup'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Porte da empresa'
-      page.should have_field 'Porte da empresa', :with => 'Microempresa'
-      page.should have_disabled_field 'Optante pelo simples'
-      page.should_not have_checked_field 'Optante pelo simples'
-      page.should have_disabled_field 'Natureza jurídica'
-      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
-      page.should have_disabled_field 'Número do registro na junta comercial'
-      page.should have_field 'Número do registro na junta comercial', :with => '099901'
-      page.should have_disabled_field 'Data do registro na junta comercial'
-      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
+      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
+      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
+      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
+      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
     within_tab 'CNAEs' do
@@ -206,8 +206,8 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
-        page.should have_disabled_field 'Banco'
-        page.should have_field 'Banco', :with => 'Itaú'
+        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', :with => 'Itaú'
 
         fill_in 'Nome', :with => 'Agência Itaú'
         click_button 'Pesquisar'
@@ -245,73 +245,73 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Credor criado com sucesso.'
+    expect(page).to have_notice 'Credor criado com sucesso.'
 
     click_link 'Nohup'
 
-    page.should have_field 'Pessoa', :with => 'Nohup'
+    expect(page).to have_field 'Pessoa', :with => 'Nohup'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Porte da empresa'
-      page.should have_field 'Porte da empresa', :with => 'Microempresa'
-      page.should have_disabled_field 'Optante pelo simples'
-      page.should_not have_checked_field 'Optante pelo simples'
-      page.should have_disabled_field 'Natureza jurídica'
-      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
-      page.should have_disabled_field 'Número do registro na junta comercial'
-      page.should have_field 'Número do registro na junta comercial', :with => '099901'
-      page.should have_disabled_field 'Data do registro na junta comercial'
-      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
-      page.should_not have_field 'PIS/PASEP'
+      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
+      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
+      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
+      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
+      expect(page).not_to have_field 'PIS/PASEP'
     end
 
     within_tab 'CNAEs' do
-      page.should have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
-      page.should have_content '7739099'
-      page.should have_content 'Aluguel de outras máquinas'
-      page.should have_content '94308'
-      page.should have_content 'Atividades de associações de defesa de direitos sociais'
+      expect(page).to have_field 'CNAE principal', :with => 'Comércio varejista de mercadorias em geral'
+      expect(page).to have_content '7739099'
+      expect(page).to have_content 'Aluguel de outras máquinas'
+      expect(page).to have_content '94308'
+      expect(page).to have_content 'Atividades de associações de defesa de direitos sociais'
     end
 
     within_tab 'Documentos' do
-      page.should have_field 'Tipo de documento', :with => 'Fiscal'
-      page.should have_field 'Número', :with => '1234'
-      page.should have_field 'Data de emissão', :with => '05/04/2012'
-      page.should have_field 'Data de validade', :with => '05/04/2013'
-      page.should have_field 'Órgão emissor', :with => 'SSP'
+      expect(page).to have_field 'Tipo de documento', :with => 'Fiscal'
+      expect(page).to have_field 'Número', :with => '1234'
+      expect(page).to have_field 'Data de emissão', :with => '05/04/2012'
+      expect(page).to have_field 'Data de validade', :with => '05/04/2013'
+      expect(page).to have_field 'Órgão emissor', :with => 'SSP'
     end
 
     within_tab 'Materiais' do
-      page.should have_content '02.02.00001'
-      page.should have_content 'Arame farpado'
+      expect(page).to have_content '02.02.00001'
+      expect(page).to have_content 'Arame farpado'
     end
 
     within_tab 'Contas Bancárias' do
-      page.should have_field 'Banco', :with => 'Itaú'
-      page.should have_field 'Agência', :with => 'Agência Itaú'
-      page.should have_select 'Status', :selected => 'Ativo'
-      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
-      page.should have_field 'Número da conta', :with => '12345'
-      page.should have_field 'Dígito da conta', :with => 'x'
+      expect(page).to have_field 'Banco', :with => 'Itaú'
+      expect(page).to have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
+      expect(page).to have_field 'Número da conta', :with => '12345'
+      expect(page).to have_field 'Dígito da conta', :with => 'x'
     end
 
     within_tab 'Balanço' do
-      page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Ativo circulante', :with => '10,00'
-      page.should have_field 'Realizável em longo prazo', :with => '20,00'
-      page.should have_field 'Passivo circulante', :with => '30,00'
-      page.should have_field 'Patrimônio líquido', :with => '40,00'
-      page.should have_field 'Exigível em longo prazo', :with => '50,00'
-      page.should have_field 'Liquidez geral', :with => '60,00'
-      page.should have_field 'Liquidez corrente', :with => '70,00'
-      page.should have_field 'Capital circulante líquido', :with => '80,00'
+      expect(page).to have_field 'Exercício', :with => '2012'
+      expect(page).to have_field 'Ativo circulante', :with => '10,00'
+      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
+      expect(page).to have_field 'Passivo circulante', :with => '30,00'
+      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
+      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
+      expect(page).to have_field 'Liquidez geral', :with => '60,00'
+      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
+      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Suspenso até', :with => '05/04/2012'
-      page.should have_field 'Data da ocorrência', :with => '05/05/2012'
+      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
+      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2012'
     end
   end
 
@@ -326,7 +326,7 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'create a new creditor when people is individual' do
@@ -360,8 +360,8 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Itaú'
 
       within_modal 'Agência' do
-        page.should have_disabled_field 'Banco'
-        page.should have_field 'Banco', :with => 'Itaú'
+        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', :with => 'Itaú'
 
         fill_in 'Nome', :with => 'Agência Itaú'
         click_button 'Pesquisar'
@@ -399,52 +399,52 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Credor criado com sucesso.'
+    expect(page).to have_notice 'Credor criado com sucesso.'
 
     click_link 'Gabriel Sobrinho'
 
-    page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
 
     within_tab 'Principal' do
-      page.should have_field 'CBO', :with => '01 - MEMBROS DAS FORÇAS ARMADAS'
-      page.should have_checked_field 'Admnistração pública municipal'
-      page.should have_checked_field 'Autônomo'
-      page.should have_field 'PIS/PASEP', :with => '123456'
-      page.should have_field 'Início do contrato', :with => '05/04/2012'
-      page.should_not have_field 'Porte da empresa'
+      expect(page).to have_field 'CBO', :with => '01 - MEMBROS DAS FORÇAS ARMADAS'
+      expect(page).to have_checked_field 'Admnistração pública municipal'
+      expect(page).to have_checked_field 'Autônomo'
+      expect(page).to have_field 'PIS/PASEP', :with => '123456'
+      expect(page).to have_field 'Início do contrato', :with => '05/04/2012'
+      expect(page).not_to have_field 'Porte da empresa'
     end
 
     within_tab 'Materiais' do
-      page.should have_content '02.02.00001'
-      page.should have_content 'Arame farpado'
+      expect(page).to have_content '02.02.00001'
+      expect(page).to have_content 'Arame farpado'
     end
 
     within_tab 'Contas Bancárias' do
-      page.should have_field 'Banco', :with => 'Itaú'
-      page.should have_field 'Agência', :with => 'Agência Itaú'
-      page.should have_select 'Status', :selected => 'Ativo'
-      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
-      page.should have_field 'Número da conta', :with => '12345'
-      page.should have_field 'Dígito da conta', :with => 'x'
+      expect(page).to have_field 'Banco', :with => 'Itaú'
+      expect(page).to have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
+      expect(page).to have_field 'Número da conta', :with => '12345'
+      expect(page).to have_field 'Dígito da conta', :with => 'x'
     end
 
     within_tab 'Balanço' do
-      page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Ativo circulante', :with => '10,00'
-      page.should have_field 'Realizável em longo prazo', :with => '20,00'
-      page.should have_field 'Passivo circulante', :with => '30,00'
-      page.should have_field 'Patrimônio líquido', :with => '40,00'
-      page.should have_field 'Exigível em longo prazo', :with => '50,00'
-      page.should have_field 'Liquidez geral', :with => '60,00'
-      page.should have_field 'Liquidez corrente', :with => '70,00'
-      page.should have_field 'Capital circulante líquido', :with => '80,00'
+      expect(page).to have_field 'Exercício', :with => '2012'
+      expect(page).to have_field 'Ativo circulante', :with => '10,00'
+      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
+      expect(page).to have_field 'Passivo circulante', :with => '30,00'
+      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
+      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
+      expect(page).to have_field 'Liquidez geral', :with => '60,00'
+      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
+      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Suspenso até', :with => '05/04/2012'
-      page.should have_field 'Data da ocorrência', :with => '05/05/2012'
+      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
+      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2012'
     end
   end
 
@@ -459,30 +459,30 @@ feature "Creditors" do
 
     click_link '1/2012'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
+    expect(page).to have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
 
-    page.should have_field 'Exercício', :with => '2012'
-    page.should have_field 'Número', :with => '1'
-    page.should have_field 'Especificação', :with => 'Especificação do certificado do registro cadastral'
-    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
-    page.should have_field 'Data da validade', :with => I18n.l(Date.current)
-    page.should have_field 'Data da revogação', :with => I18n.l(Date.tomorrow)
-    page.should have_field 'Capital social', :with => '12.349,99'
-    page.should have_field 'Capital integral', :with => '56.789,99'
-    page.should have_field 'Faturamento mensal', :with => '123.456.789,99'
-    page.should have_field 'Área construída (m²)', :with => '99,99'
-    page.should have_field 'Área total (m²)', :with => '123,99'
-    page.should have_field 'Total de empregados', :with => '1'
-    page.should have_field 'Data de registro na junta comercial', :with => I18n.l(Date.current)
-    page.should have_field 'Número na junta comercial', :with => '12345678-x'
+    expect(page).to have_field 'Exercício', :with => '2012'
+    expect(page).to have_field 'Número', :with => '1'
+    expect(page).to have_field 'Especificação', :with => 'Especificação do certificado do registro cadastral'
+    expect(page).to have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    expect(page).to have_field 'Data da validade', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data da revogação', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Capital social', :with => '12.349,99'
+    expect(page).to have_field 'Capital integral', :with => '56.789,99'
+    expect(page).to have_field 'Faturamento mensal', :with => '123.456.789,99'
+    expect(page).to have_field 'Área construída (m²)', :with => '99,99'
+    expect(page).to have_field 'Área total (m²)', :with => '123,99'
+    expect(page).to have_field 'Total de empregados', :with => '1'
+    expect(page).to have_field 'Data de registro na junta comercial', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Número na junta comercial', :with => '12345678-x'
 
-    page.should have_link 'Imprimir certificado de registro cadastral'
+    expect(page).to have_link 'Imprimir certificado de registro cadastral'
 
     click_link 'Cancelar'
 
     click_link 'Voltar ao credor'
 
-    page.should have_content 'Editar Nohup'
+    expect(page).to have_content 'Editar Nohup'
   end
 
   scenario 'create a CRC for a creditor' do
@@ -496,7 +496,7 @@ feature "Creditors" do
 
     click_link 'Criar Certificado de Registro Cadastral'
 
-    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Nohup'
+    expect(page).to have_content 'Criar Certificado de Registro Cadastral para o Credor Nohup'
 
     fill_in 'Exercício', :with => '2013'
     fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral'
@@ -512,38 +512,38 @@ feature "Creditors" do
     fill_in 'Data de registro na junta comercial', :with => '05/04/2011'
     fill_in 'Número na junta comercial', :with => '12345678'
 
-    page.should_not have_link 'Imprimir certificado de registro cadastral'
+    expect(page).not_to have_link 'Imprimir certificado de registro cadastral'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Certificado de Registro Cadastral criado com sucesso.'
+    expect(page).to have_notice 'Certificado de Registro Cadastral criado com sucesso.'
 
     click_link '1/2013'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Nohup'
+    expect(page).to have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Nohup'
 
-    page.should have_field 'Exercício', :with => '2013'
-    page.should have_field 'Número', :with => '1'
-    page.should have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral'
-    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
-    page.should have_field 'Data da validade', :with => '05/04/2013'
-    page.should have_field 'Data da revogação', :with => '05/04/2014'
-    page.should have_field 'Capital social', :with => '987.654,32'
-    page.should have_field 'Capital integral', :with => '123.456,78'
-    page.should have_field 'Faturamento mensal', :with => '456.789,99'
-    page.should have_field 'Área construída (m²)', :with => '99,99'
-    page.should have_field 'Área total (m²)', :with => '123,50'
-    page.should have_field 'Total de empregados', :with => '2'
-    page.should have_field 'Data de registro na junta comercial', :with => '05/04/2011'
-    page.should have_field 'Número na junta comercial', :with => '12345678'
+    expect(page).to have_field 'Exercício', :with => '2013'
+    expect(page).to have_field 'Número', :with => '1'
+    expect(page).to have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral'
+    expect(page).to have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    expect(page).to have_field 'Data da validade', :with => '05/04/2013'
+    expect(page).to have_field 'Data da revogação', :with => '05/04/2014'
+    expect(page).to have_field 'Capital social', :with => '987.654,32'
+    expect(page).to have_field 'Capital integral', :with => '123.456,78'
+    expect(page).to have_field 'Faturamento mensal', :with => '456.789,99'
+    expect(page).to have_field 'Área construída (m²)', :with => '99,99'
+    expect(page).to have_field 'Área total (m²)', :with => '123,50'
+    expect(page).to have_field 'Total de empregados', :with => '2'
+    expect(page).to have_field 'Data de registro na junta comercial', :with => '05/04/2011'
+    expect(page).to have_field 'Número na junta comercial', :with => '12345678'
 
-    page.should have_link 'Imprimir certificado de registro cadastral'
+    expect(page).to have_link 'Imprimir certificado de registro cadastral'
 
     click_link 'Cancelar'
 
     click_link 'Criar Certificado de Registro Cadastral'
 
-    page.should have_content 'Criar Certificado de Registro Cadastral para o Credor Nohup'
+    expect(page).to have_content 'Criar Certificado de Registro Cadastral para o Credor Nohup'
 
     fill_in 'Exercício', :with => '2013'
     fill_in 'Especificação', :with => 'Especificação do CRC'
@@ -553,18 +553,18 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Certificado de Registro Cadastral criado com sucesso.'
+    expect(page).to have_notice 'Certificado de Registro Cadastral criado com sucesso.'
 
     click_link '2/2013'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 2/2013 do Credor Nohup'
+    expect(page).to have_content 'Editar Certificado de Registro Cadastral 2/2013 do Credor Nohup'
 
-    page.should have_field 'Exercício', :with => '2013'
-    page.should have_field 'Número', :with => '2'
-    page.should have_field 'Especificação', :with => 'Especificação do CRC'
-    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
-    page.should have_field 'Data da validade', :with => '05/04/2013'
-    page.should have_field 'Data da revogação', :with => '05/04/2014'
+    expect(page).to have_field 'Exercício', :with => '2013'
+    expect(page).to have_field 'Número', :with => '2'
+    expect(page).to have_field 'Especificação', :with => 'Especificação do CRC'
+    expect(page).to have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    expect(page).to have_field 'Data da validade', :with => '05/04/2013'
+    expect(page).to have_field 'Data da revogação', :with => '05/04/2014'
   end
 
   scenario 'update a CRC for a creditor' do
@@ -578,10 +578,10 @@ feature "Creditors" do
 
     click_link '1/2012'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
+    expect(page).to have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
 
     fill_in 'Exercício', :with => '2013'
-    page.should have_field 'Número', :with => '1'
+    expect(page).to have_field 'Número', :with => '1'
     fill_in 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral da Nohup'
     fill_in 'Data da inscrição', :with => I18n.l(Date.yesterday)
     fill_in 'Data da validade', :with => '05/04/2014'
@@ -595,30 +595,30 @@ feature "Creditors" do
     fill_in 'Data de registro na junta comercial', :with => '05/05/2011'
     fill_in 'Número na junta comercial', :with => '123456789'
 
-    page.should have_link 'Imprimir certificado de registro cadastral'
+    expect(page).to have_link 'Imprimir certificado de registro cadastral'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Certificado de Registro Cadastral editado com sucesso.'
+    expect(page).to have_notice 'Certificado de Registro Cadastral editado com sucesso.'
 
     click_link '1/2013'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Nohup'
+    expect(page).to have_content 'Editar Certificado de Registro Cadastral 1/2013 do Credor Nohup'
 
-    page.should have_field 'Exercício', :with => '2013'
-    page.should have_field 'Número', :with => '1'
-    page.should have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral da Nohup'
-    page.should have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
-    page.should have_field 'Data da validade', :with => '05/04/2014'
-    page.should have_field 'Data da revogação', :with => '05/04/2015'
-    page.should have_field 'Capital social', :with => '987.654,31'
-    page.should have_field 'Capital integral', :with => '123.456,79'
-    page.should have_field 'Faturamento mensal', :with => '456.789,00'
-    page.should have_field 'Área construída (m²)', :with => '88,88'
-    page.should have_field 'Área total (m²)', :with => '99,99'
-    page.should have_field 'Total de empregados', :with => '99'
-    page.should have_field 'Data de registro na junta comercial', :with => '05/05/2011'
-    page.should have_field 'Número na junta comercial', :with => '123456789'
+    expect(page).to have_field 'Exercício', :with => '2013'
+    expect(page).to have_field 'Número', :with => '1'
+    expect(page).to have_field 'Especificação', :with => 'Especificação do Certificado do Registro Cadastral da Nohup'
+    expect(page).to have_field 'Data da inscrição', :with => I18n.l(Date.yesterday)
+    expect(page).to have_field 'Data da validade', :with => '05/04/2014'
+    expect(page).to have_field 'Data da revogação', :with => '05/04/2015'
+    expect(page).to have_field 'Capital social', :with => '987.654,31'
+    expect(page).to have_field 'Capital integral', :with => '123.456,79'
+    expect(page).to have_field 'Faturamento mensal', :with => '456.789,00'
+    expect(page).to have_field 'Área construída (m²)', :with => '88,88'
+    expect(page).to have_field 'Área total (m²)', :with => '99,99'
+    expect(page).to have_field 'Total de empregados', :with => '99'
+    expect(page).to have_field 'Data de registro na junta comercial', :with => '05/05/2011'
+    expect(page).to have_field 'Número na junta comercial', :with => '123456789'
   end
 
   scenario 'should not show CRC when creditor is' do
@@ -628,7 +628,7 @@ feature "Creditors" do
 
     click_link 'Nohup'
 
-    page.should have_link 'CRC'
+    expect(page).to have_link 'CRC'
   end
 
   scenario 'should not show CRC when creditor is company' do
@@ -638,7 +638,7 @@ feature "Creditors" do
 
     click_link 'Gabriel Sobrinho'
 
-    page.should_not have_link 'CRC'
+    expect(page).not_to have_link 'CRC'
   end
 
   scenario 'update a creditor when people is special entry' do
@@ -658,8 +658,8 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
-        page.should have_disabled_field 'Banco'
-        page.should have_field 'Banco', :with => 'Santander'
+        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', :with => 'Santander'
 
         fill_in 'Nome', :with => 'Agência Santander'
         click_button 'Pesquisar'
@@ -693,10 +693,10 @@ feature "Creditors" do
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Suspenso até', :with => '05/04/2012'
-      page.should have_field 'Data da ocorrência', :with => '04/01/2012'
+      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
+      expect(page).to have_field 'Data da ocorrência', :with => '04/01/2012'
 
       click_button 'Remover Sanção Administrativa / Regularização'
 
@@ -709,48 +709,48 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Credor editado com sucesso.'
+    expect(page).to have_notice 'Credor editado com sucesso.'
 
     click_link 'Mateus Lorandi'
 
-    page.should have_field 'Pessoa', :with => 'Mateus Lorandi'
+    expect(page).to have_field 'Pessoa', :with => 'Mateus Lorandi'
 
     within_tab 'Contas Bancárias' do
-      page.should_not have_field 'Banco', :with => 'Itaú'
-      page.should_not have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).not_to have_field 'Banco', :with => 'Itaú'
+      expect(page).not_to have_field 'Agência', :with => 'Agência Itaú'
 
-      page.should have_field 'Banco', :with => 'Santander'
-      page.should have_field 'Agência', :with => 'Agência Santander'
-      page.should have_select 'Status', :selected => 'Ativo'
-      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
-      page.should have_field 'Número da conta', :with => '98765'
-      page.should have_field 'Dígito da conta', :with => '4'
+      expect(page).to have_field 'Banco', :with => 'Santander'
+      expect(page).to have_field 'Agência', :with => 'Agência Santander'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
+      expect(page).to have_field 'Número da conta', :with => '98765'
+      expect(page).to have_field 'Dígito da conta', :with => '4'
     end
 
     within_tab 'Materiais' do
-      page.should have_content '02.02.00001'
-      page.should have_content 'Arame farpado'
+      expect(page).to have_content '02.02.00001'
+      expect(page).to have_content 'Arame farpado'
     end
 
     within_tab 'Balanço' do
-      page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Ativo circulante', :with => '10,00'
-      page.should have_field 'Realizável em longo prazo', :with => '20,00'
-      page.should have_field 'Passivo circulante', :with => '30,00'
-      page.should have_field 'Patrimônio líquido', :with => '40,00'
-      page.should have_field 'Exigível em longo prazo', :with => '50,00'
-      page.should have_field 'Liquidez geral', :with => '60,00'
-      page.should have_field 'Liquidez corrente', :with => '70,00'
-      page.should have_field 'Capital circulante líquido', :with => '80,00'
+      expect(page).to have_field 'Exercício', :with => '2012'
+      expect(page).to have_field 'Ativo circulante', :with => '10,00'
+      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
+      expect(page).to have_field 'Passivo circulante', :with => '30,00'
+      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
+      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
+      expect(page).to have_field 'Liquidez geral', :with => '60,00'
+      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
+      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
-      page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
-      page.should have_field 'Tipo', :with => 'Regularização'
-      page.should have_field 'Suspenso até', :with => '05/04/2011'
-      page.should have_field 'Data da ocorrência', :with => '05/05/2011'
+      expect(page).to have_field 'Motivo', :with => 'Ativação do registro cadastral'
+      expect(page).to have_field 'Tipo', :with => 'Regularização'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2011'
+      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2011'
     end
   end
 
@@ -770,22 +770,22 @@ feature "Creditors" do
     click_link 'Nohup'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Porte da empresa'
-      page.should have_field 'Porte da empresa', :with => 'Microempresa'
-      page.should have_disabled_field 'Optante pelo simples'
-      page.should_not have_checked_field 'Optante pelo simples'
-      page.should have_disabled_field 'Natureza jurídica'
-      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
-      page.should have_disabled_field 'Número do registro na junta comercial'
-      page.should have_field 'Número do registro na junta comercial', :with => '099901'
-      page.should have_disabled_field 'Data do registro na junta comercial'
-      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
+      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
+      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
+      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
+      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
     within_tab 'CNAEs' do
       fill_modal 'CNAE principal', :with => '7739099', :field => 'Código'
 
-      page.should have_content 'Aluguel de outras máquinas'
+      expect(page).to have_content 'Aluguel de outras máquinas'
 
       click_button 'Remover'
 
@@ -822,8 +822,8 @@ feature "Creditors" do
     end
 
     within_tab 'Representantes' do
-      page.should have_content 'Gabriel Sobrinho'
-      page.should have_content '003.151.987-37'
+      expect(page).to have_content 'Gabriel Sobrinho'
+      expect(page).to have_content '003.151.987-37'
       click_button 'Remover'
 
       fill_modal 'Representantes', :with => 'Wenderson Malheiros'
@@ -842,8 +842,8 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
-        page.should have_disabled_field 'Banco'
-        page.should have_field 'Banco', :with => 'Santander'
+        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', :with => 'Santander'
 
         fill_in 'Nome', :with => 'Agência Santander'
         click_button 'Pesquisar'
@@ -873,10 +873,10 @@ feature "Creditors" do
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Suspenso até', :with => '05/04/2012'
-      page.should have_field 'Data da ocorrência', :with => '04/01/2012'
+      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
+      expect(page).to have_field 'Data da ocorrência', :with => '04/01/2012'
 
       click_button 'Remover Sanção Administrativa / Regularização'
 
@@ -889,90 +889,90 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Credor editado com sucesso.'
+    expect(page).to have_notice 'Credor editado com sucesso.'
 
     click_link 'Nohup'
 
-    page.should have_field 'Pessoa', :with => 'Nohup'
+    expect(page).to have_field 'Pessoa', :with => 'Nohup'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Porte da empresa'
-      page.should have_field 'Porte da empresa', :with => 'Microempresa'
-      page.should have_disabled_field 'Optante pelo simples'
-      page.should_not have_checked_field 'Optante pelo simples'
-      page.should have_disabled_field 'Natureza jurídica'
-      page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
-      page.should have_disabled_field 'Número do registro na junta comercial'
-      page.should have_field 'Número do registro na junta comercial', :with => '099901'
-      page.should have_disabled_field 'Data do registro na junta comercial'
-      page.should have_field 'Data do registro na junta comercial', :with => '29/06/2011'
+      expect(page).to have_disabled_field 'Porte da empresa'
+      expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
+      expect(page).to have_disabled_field 'Optante pelo simples'
+      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to have_disabled_field 'Natureza jurídica'
+      expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
+      expect(page).to have_disabled_field 'Número do registro na junta comercial'
+      expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
+      expect(page).to have_disabled_field 'Data do registro na junta comercial'
+      expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
     end
 
     within_tab 'CNAEs' do
-      page.should have_field 'CNAE principal', :with => 'Aluguel de outras máquinas'
-      page.should have_content '94308'
-      page.should have_content 'Atividades de associações de defesa de direitos sociais'
-      page.should_not have_content '7739099'
-      page.should_not have_content 'Aluguel de outras máquinas'
+      expect(page).to have_field 'CNAE principal', :with => 'Aluguel de outras máquinas'
+      expect(page).to have_content '94308'
+      expect(page).to have_content 'Atividades de associações de defesa de direitos sociais'
+      expect(page).not_to have_content '7739099'
+      expect(page).not_to have_content 'Aluguel de outras máquinas'
     end
 
     within_tab 'Documentos' do
-      page.should have_field 'Tipo de documento', :with => 'Oficial'
-      page.should have_field 'Número', :with => '12345'
-      page.should have_field 'Data de emissão', :with => '05/05/2012'
-      page.should have_field 'Data de validade', :with => '05/05/2013'
-      page.should have_field 'Órgão emissor', :with => 'PM'
+      expect(page).to have_field 'Tipo de documento', :with => 'Oficial'
+      expect(page).to have_field 'Número', :with => '12345'
+      expect(page).to have_field 'Data de emissão', :with => '05/05/2012'
+      expect(page).to have_field 'Data de validade', :with => '05/05/2013'
+      expect(page).to have_field 'Órgão emissor', :with => 'PM'
 
-      page.should_not have_content 'SSP'
+      expect(page).not_to have_content 'SSP'
     end
 
     within_tab 'Representantes' do
-      page.should_not have_content 'Gabriel Sobrinho'
-      page.should_not have_content '003.151.987-37'
+      expect(page).not_to have_content 'Gabriel Sobrinho'
+      expect(page).not_to have_content '003.151.987-37'
 
-      page.should have_content 'Wenderson Malheiros'
-      page.should have_content '003.149.513-34'
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content '003.149.513-34'
     end
 
     within_tab 'Materiais' do
-      page.should_not have_content '01.01.00001'
-      page.should_not have_content 'Antivirus'
+      expect(page).not_to have_content '01.01.00001'
+      expect(page).not_to have_content 'Antivirus'
 
-      page.should have_content '02.02.00001'
-      page.should have_content 'Arame farpado'
+      expect(page).to have_content '02.02.00001'
+      expect(page).to have_content 'Arame farpado'
     end
 
     within_tab 'Contas Bancárias' do
-      page.should_not have_field 'Banco', :with => 'Itaú'
-      page.should_not have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).not_to have_field 'Banco', :with => 'Itaú'
+      expect(page).not_to have_field 'Agência', :with => 'Agência Itaú'
 
-      page.should have_field 'Banco', :with => 'Santander'
-      page.should have_field 'Agência', :with => 'Agência Santander'
-      page.should have_select 'Status', :selected => 'Ativo'
-      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
-      page.should have_field 'Número da conta', :with => '98765'
-      page.should have_field 'Dígito da conta', :with => '4'
+      expect(page).to have_field 'Banco', :with => 'Santander'
+      expect(page).to have_field 'Agência', :with => 'Agência Santander'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
+      expect(page).to have_field 'Número da conta', :with => '98765'
+      expect(page).to have_field 'Dígito da conta', :with => '4'
     end
 
     within_tab 'Balanço' do
-      page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Ativo circulante', :with => '10,00'
-      page.should have_field 'Realizável em longo prazo', :with => '20,00'
-      page.should have_field 'Passivo circulante', :with => '30,00'
-      page.should have_field 'Patrimônio líquido', :with => '40,00'
-      page.should have_field 'Exigível em longo prazo', :with => '50,00'
-      page.should have_field 'Liquidez geral', :with => '60,00'
-      page.should have_field 'Liquidez corrente', :with => '70,00'
-      page.should have_field 'Capital circulante líquido', :with => '80,00'
+      expect(page).to have_field 'Exercício', :with => '2012'
+      expect(page).to have_field 'Ativo circulante', :with => '10,00'
+      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
+      expect(page).to have_field 'Passivo circulante', :with => '30,00'
+      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
+      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
+      expect(page).to have_field 'Liquidez geral', :with => '60,00'
+      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
+      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
-      page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
-      page.should have_field 'Tipo', :with => 'Regularização'
-      page.should have_field 'Suspenso até', :with => '05/04/2011'
-      page.should have_field 'Data da ocorrência', :with => '05/05/2011'
+      expect(page).to have_field 'Motivo', :with => 'Ativação do registro cadastral'
+      expect(page).to have_field 'Tipo', :with => 'Regularização'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2011'
+      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2011'
     end
   end
 
@@ -1007,8 +1007,8 @@ feature "Creditors" do
       fill_modal 'Banco', :with => 'Santander'
 
       within_modal 'Agência' do
-        page.should have_disabled_field 'Banco'
-        page.should have_field 'Banco', :with => 'Santander'
+        expect(page).to have_disabled_field 'Banco'
+        expect(page).to have_field 'Banco', :with => 'Santander'
 
         fill_in 'Nome', :with => 'Agência Santander'
         click_button 'Pesquisar'
@@ -1038,10 +1038,10 @@ feature "Creditors" do
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-      page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Suspenso até', :with => '05/04/2012'
-      page.should have_field 'Data da ocorrência', :with => '04/01/2012'
+      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2012'
+      expect(page).to have_field 'Data da ocorrência', :with => '04/01/2012'
 
       click_button 'Remover Sanção Administrativa / Regularização'
 
@@ -1054,58 +1054,58 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Credor editado com sucesso.'
+    expect(page).to have_notice 'Credor editado com sucesso.'
 
     click_link 'Gabriel Sobrinho'
 
-    page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
 
     within_tab 'Principal' do
-      page.should have_field 'CBO', :with => '214 - Engenheiro'
-      page.should have_unchecked_field 'Admnistração pública municipal'
-      page.should have_checked_field 'Autônomo'
-      page.should have_field 'PIS/PASEP', :with => '6789'
-      page.should have_field 'Início do contrato', :with => '05/04/2011'
+      expect(page).to have_field 'CBO', :with => '214 - Engenheiro'
+      expect(page).to have_unchecked_field 'Admnistração pública municipal'
+      expect(page).to have_checked_field 'Autônomo'
+      expect(page).to have_field 'PIS/PASEP', :with => '6789'
+      expect(page).to have_field 'Início do contrato', :with => '05/04/2011'
     end
 
     within_tab 'Materiais' do
-      page.should have_content '02.02.00001'
-      page.should have_content 'Arame farpado'
-      page.should have_content '02.02.00002'
-      page.should have_content 'Arame comum'
+      expect(page).to have_content '02.02.00001'
+      expect(page).to have_content 'Arame farpado'
+      expect(page).to have_content '02.02.00002'
+      expect(page).to have_content 'Arame comum'
     end
 
     within_tab 'Contas Bancárias' do
-      page.should_not have_field 'Banco', :with => 'Itaú'
-      page.should_not have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).not_to have_field 'Banco', :with => 'Itaú'
+      expect(page).not_to have_field 'Agência', :with => 'Agência Itaú'
 
-      page.should have_field 'Banco', :with => 'Santander'
-      page.should have_field 'Agência', :with => 'Agência Santander'
-      page.should have_select 'Status', :selected => 'Ativo'
-      page.should have_select 'Tipo da conta', :selected => 'Conta corrente'
-      page.should have_field 'Número da conta', :with => '98765'
-      page.should have_field 'Dígito da conta', :with => '4'
+      expect(page).to have_field 'Banco', :with => 'Santander'
+      expect(page).to have_field 'Agência', :with => 'Agência Santander'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Tipo da conta', :selected => 'Conta corrente'
+      expect(page).to have_field 'Número da conta', :with => '98765'
+      expect(page).to have_field 'Dígito da conta', :with => '4'
     end
 
     within_tab 'Balanço' do
-      page.should have_field 'Exercício', :with => '2012'
-      page.should have_field 'Ativo circulante', :with => '10,00'
-      page.should have_field 'Realizável em longo prazo', :with => '20,00'
-      page.should have_field 'Passivo circulante', :with => '30,00'
-      page.should have_field 'Patrimônio líquido', :with => '40,00'
-      page.should have_field 'Exigível em longo prazo', :with => '50,00'
-      page.should have_field 'Liquidez geral', :with => '60,00'
-      page.should have_field 'Liquidez corrente', :with => '70,00'
-      page.should have_field 'Capital circulante líquido', :with => '80,00'
+      expect(page).to have_field 'Exercício', :with => '2012'
+      expect(page).to have_field 'Ativo circulante', :with => '10,00'
+      expect(page).to have_field 'Realizável em longo prazo', :with => '20,00'
+      expect(page).to have_field 'Passivo circulante', :with => '30,00'
+      expect(page).to have_field 'Patrimônio líquido', :with => '40,00'
+      expect(page).to have_field 'Exigível em longo prazo', :with => '50,00'
+      expect(page).to have_field 'Liquidez geral', :with => '60,00'
+      expect(page).to have_field 'Liquidez corrente', :with => '70,00'
+      expect(page).to have_field 'Capital circulante líquido', :with => '80,00'
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
-      page.should have_field 'Motivo', :with => 'Ativação do registro cadastral'
-      page.should have_field 'Tipo', :with => 'Regularização'
-      page.should have_field 'Suspenso até', :with => '05/04/2011'
-      page.should have_field 'Data da ocorrência', :with => '05/05/2011'
+      expect(page).to have_field 'Motivo', :with => 'Ativação do registro cadastral'
+      expect(page).to have_field 'Tipo', :with => 'Regularização'
+      expect(page).to have_field 'Suspenso até', :with => '05/04/2011'
+      expect(page).to have_field 'Data da ocorrência', :with => '05/05/2011'
     end
   end
 
@@ -1122,12 +1122,12 @@ feature "Creditors" do
 
       fill_modal 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada', :field => 'Descrição'
 
-      page.should have_field 'Tipo', :with => 'Sanção administrativa'
-      page.should have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to have_field 'Tipo', :with => 'Sanção administrativa'
+      expect(page).to have_field 'Motivo', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
 
       fill_in 'Motivo', :with => ''
 
-      page.should have_field 'Tipo', :with => ''
+      expect(page).to have_field 'Tipo', :with => ''
     end
   end
 
@@ -1143,8 +1143,8 @@ feature "Creditors" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Mateus Lorandi'
-    page.should_not have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Mateus Lorandi'
+    expect(page).not_to have_content 'Gabriel Sobrinho'
   end
 
   scenario 'show only the tabs that are common to all personable of people when has not a people.' do
@@ -1153,14 +1153,14 @@ feature "Creditors" do
     click_link 'Criar Credor'
 
     within "#creditor-tabs" do
-       page.should_not have_link "Principal"
-       page.should_not have_link "CNAEs"
-       page.should_not have_link "Documentos"
-       page.should have_link "Materiais"
-       page.should_not have_link "Representantes"
-       page.should have_link "Contas Bancárias"
-       page.should have_link "Balanço"
-       page.should have_link "Sanções Administrativas / Regularizações"
+       expect(page).not_to have_link "Principal"
+       expect(page).not_to have_link "CNAEs"
+       expect(page).not_to have_link "Documentos"
+       expect(page).to have_link "Materiais"
+       expect(page).not_to have_link "Representantes"
+       expect(page).to have_link "Contas Bancárias"
+       expect(page).to have_link "Balanço"
+       expect(page).to have_link "Sanções Administrativas / Regularizações"
     end
   end
 
@@ -1174,14 +1174,14 @@ feature "Creditors" do
     fill_modal 'Pessoa', :with => 'Mateus Lorandi'
 
     within "#creditor-tabs" do
-       page.should_not have_link "Principal"
-       page.should_not have_link "CNAEs"
-       page.should_not have_link "Documentos"
-       page.should have_link "Materiais"
-       page.should_not have_link "Representantes"
-       page.should have_link "Contas Bancárias"
-       page.should have_link "Balanço"
-       page.should have_link "Sanções Administrativas / Regularizações"
+       expect(page).not_to have_link "Principal"
+       expect(page).not_to have_link "CNAEs"
+       expect(page).not_to have_link "Documentos"
+       expect(page).to have_link "Materiais"
+       expect(page).not_to have_link "Representantes"
+       expect(page).to have_link "Contas Bancárias"
+       expect(page).to have_link "Balanço"
+       expect(page).to have_link "Sanções Administrativas / Regularizações"
     end
   end
 
@@ -1195,14 +1195,14 @@ feature "Creditors" do
     fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
     within "#creditor-tabs" do
-       page.should have_link "Principal"
-       page.should_not have_link "CNAEs"
-       page.should_not have_link "Documentos"
-       page.should have_link "Materiais"
-       page.should_not have_link "Representantes"
-       page.should have_link "Contas Bancárias"
-       page.should have_link "Balanço"
-       page.should have_link "Sanções Administrativas / Regularizações"
+       expect(page).to have_link "Principal"
+       expect(page).not_to have_link "CNAEs"
+       expect(page).not_to have_link "Documentos"
+       expect(page).to have_link "Materiais"
+       expect(page).not_to have_link "Representantes"
+       expect(page).to have_link "Contas Bancárias"
+       expect(page).to have_link "Balanço"
+       expect(page).to have_link "Sanções Administrativas / Regularizações"
     end
   end
 
@@ -1216,14 +1216,14 @@ feature "Creditors" do
     fill_modal 'Pessoa', :with => 'Nohup'
 
     within "#creditor-tabs" do
-       page.should have_link "Principal"
-       page.should have_link "CNAEs"
-       page.should have_link "Documentos"
-       page.should have_link "Materiais"
-       page.should have_link "Representantes"
-       page.should have_link "Contas Bancárias"
-       page.should have_link "Balanço"
-       page.should have_link "Sanções Administrativas / Regularizações"
+       expect(page).to have_link "Principal"
+       expect(page).to have_link "CNAEs"
+       expect(page).to have_link "Documentos"
+       expect(page).to have_link "Materiais"
+       expect(page).to have_link "Representantes"
+       expect(page).to have_link "Contas Bancárias"
+       expect(page).to have_link "Balanço"
+       expect(page).to have_link "Sanções Administrativas / Regularizações"
     end
   end
 
@@ -1235,10 +1235,10 @@ feature "Creditors" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Credor apagado com sucesso.'
+    expect(page).to have_notice 'Credor apagado com sucesso.'
 
-    page.should_not have_content 'Nohup'
-    page.should_not have_content 'Microempresa'
+    expect(page).not_to have_content 'Nohup'
+    expect(page).not_to have_content 'Microempresa'
   end
 
   scenario 'destroy a CRC for a creditor' do
@@ -1252,13 +1252,13 @@ feature "Creditors" do
 
     click_link '1/2012'
 
-    page.should have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
+    expect(page).to have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Certificado de Registro Cadastral apagado com sucesso.'
+    expect(page).to have_notice 'Certificado de Registro Cadastral apagado com sucesso.'
 
-    page.should_not have_link '2012'
-    page.should_not have_content '2012'
+    expect(page).not_to have_link '2012'
+    expect(page).not_to have_content '2012'
   end
 end

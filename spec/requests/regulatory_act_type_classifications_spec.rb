@@ -15,11 +15,11 @@ feature "RegulatoryActTypeClassifications" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Classificação de Tipos de Ato Regulamentador criado com sucesso.'
+    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador criado com sucesso.'
 
     click_link 'description'
 
-    page.should have_field 'Descrição', :with => 'description'
+    expect(page).to have_field 'Descrição', :with => 'description'
   end
 
   scenario 'validates uniqueness of description' do
@@ -33,9 +33,9 @@ feature "RegulatoryActTypeClassifications" do
 
     click_button 'Salvar'
 
-    page.should_not have_notice 'Classificação Tipos de Ato Regulamentador criado com sucesso.'
+    expect(page).not_to have_notice 'Classificação Tipos de Ato Regulamentador criado com sucesso.'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'update an existent regulatory_act_type_classification' do
@@ -49,11 +49,11 @@ feature "RegulatoryActTypeClassifications" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Classificação de Tipos de Ato Regulamentador editado com sucesso.'
+    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador editado com sucesso.'
 
     click_link 'Segundo Tipo'
 
-    page.should have_field 'Descrição', :with => 'Segundo Tipo'
+    expect(page).to have_field 'Descrição', :with => 'Segundo Tipo'
   end
 
   scenario 'destroy an existent regulatory_act_type_classification' do
@@ -65,8 +65,8 @@ feature "RegulatoryActTypeClassifications" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Classificação de Tipos de Ato Regulamentador apagado com sucesso.'
+    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador apagado com sucesso.'
 
-    page.should_not have_content 'description'
+    expect(page).not_to have_content 'description'
   end
 end

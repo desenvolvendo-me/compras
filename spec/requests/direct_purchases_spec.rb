@@ -22,10 +22,10 @@ feature "DirectPurchases" do
 
     click_link 'Gerar Compra Direta'
 
-    page.should have_content 'Gerar Compra Direta'
+    expect(page).to have_content 'Gerar Compra Direta'
 
     within_tab 'Principal' do
-      page.should have_field 'Ano', :with => "#{Date.current.year}"
+      expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data da compra', :with => '19/03/2012'
@@ -55,66 +55,66 @@ feature "DirectPurchases" do
       fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
       # getting data from modal
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      page.should have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,50'
       fill_in 'Valor unitário', :with => '200,00'
 
       # asserting calculated total price of the item
-      page.should have_disabled_field 'Valor total'
-      page.should have_field 'Valor total', :with => '700,00'
+      expect(page).to have_disabled_field 'Valor total'
+      expect(page).to have_field 'Valor total', :with => '700,00'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Compra Direta criada com sucesso.'
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Compra', :with => '1'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data da compra', :with => '19/03/2012'
-      page.should have_field 'Referência legal', :with => 'Referencia legal'
-      page.should have_select 'Modalidade', :selected => 'Material ou serviços'
-      page.should have_select 'Tipo do empenho', :selected => 'Global'
-      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
-      page.should have_field 'Objeto da licitação', :with => 'Ponte'
-      page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Prazo', :with => '1'
-      page.should have_select 'Período do prazo', :selected => 'ano/anos'
-      page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
-      page.should have_field 'Coleta de preços', :with => '99'
-      page.should have_field 'Registro de preços', :with => '88'
-      page.should have_field 'Observações gerais', :with => 'obs'
+      expect(page).to have_field 'Compra', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data da compra', :with => '19/03/2012'
+      expect(page).to have_field 'Referência legal', :with => 'Referencia legal'
+      expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'
+      expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
+      expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Prazo', :with => '1'
+      expect(page).to have_select 'Período do prazo', :selected => 'ano/anos'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Coleta de preços', :with => '99'
+      expect(page).to have_field 'Registro de preços', :with => '88'
+      expect(page).to have_field 'Observações gerais', :with => 'obs'
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      page.should have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
 
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Marca/Referência', :with => 'Norton'
-      page.should have_field 'Quantidade', :with => '3,50'
-      page.should have_field 'Valor unitário', :with => '200,00'
-      page.should have_field 'Valor total', :with => '700,00'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+      expect(page).to have_field 'Quantidade', :with => '3,50'
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_field 'Valor total', :with => '700,00'
 
-      page.should have_field 'Item', :with => '1'
+      expect(page).to have_field 'Item', :with => '1'
     end
   end
 
@@ -128,7 +128,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Compra'
+      expect(page).to have_disabled_field 'Compra'
       fill_in 'Data da compra', :with => '19/03/2012'
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
@@ -158,41 +158,41 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Gerar Compra Direta editada com sucesso.'
+    expect(page).to have_notice 'Gerar Compra Direta editada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Compra', :with => '1'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data da compra', :with => '19/03/2012'
-      page.should have_field 'Referência legal', :with => 'Referencia legal'
-      page.should have_select 'Modalidade', :selected => 'Material ou serviços'
-      page.should have_select 'Tipo do empenho', :selected => 'Global'
-      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
-      page.should have_field 'Objeto da licitação', :with => 'Ponte'
-      page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Prazo', :with => '1'
-      page.should have_select 'Período do prazo', :selected => 'ano/anos'
-      page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
-      page.should have_field 'Coleta de preços', :with => '99'
-      page.should have_field 'Registro de preços', :with => '88'
-      page.should have_field 'Observações gerais', :with => 'obs'
+      expect(page).to have_field 'Compra', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data da compra', :with => '19/03/2012'
+      expect(page).to have_field 'Referência legal', :with => 'Referencia legal'
+      expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'
+      expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
+      expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Prazo', :with => '1'
+      expect(page).to have_select 'Período do prazo', :selected => 'ano/anos'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Coleta de preços', :with => '99'
+      expect(page).to have_field 'Registro de preços', :with => '88'
+      expect(page).to have_field 'Observações gerais', :with => 'obs'
     end
 
     within_tab 'Dotações' do
-      page.should have_disabled_field 'Valor total dos itens'
-      page.should have_disabled_field 'Compl. do elemento'
-      page.should have_disabled_field 'Saldo da dotação'
-      page.should have_disabled_field 'Item'
-      page.should have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Valor total dos itens'
+      expect(page).to have_disabled_field 'Compl. do elemento'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+      expect(page).to have_disabled_field 'Item'
+      expect(page).to have_disabled_field 'Unidade'
 
-      page.should have_field 'Quantidade', :with => '2,00'
-      page.should have_field 'Valor total dos itens', :with => '400,00'
+      expect(page).to have_field 'Quantidade', :with => '2,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '400,00'
     end
   end
 
@@ -206,31 +206,31 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    page.should have_link 'Imprimir autorização de fornecimento'
+    expect(page).to have_link 'Imprimir autorização de fornecimento'
 
     click_link 'Imprimir autorização de fornecimento'
 
-    page.should have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
-    page.should have_content "#{direct_purchase.id}/2012"
-    page.should have_content '01/12/2012'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content 'Girassol, 9874 - São Francisco'
-    page.should have_content 'Curitiba'
-    page.should have_content '33400-500'
-    page.should have_content '(33) 3333-3333'
-    page.should have_content '(33) 3333-3334'
-    page.should have_content '23456-0'
-    page.should have_content 'Agência Itaú'
-    page.should have_content 'Itaú'
-    page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
-    page.should have_content '1 - Secretaria de Educação'
-    page.should have_content 'Dinheiro'
-    page.should have_content '1 ano'
-    page.should have_content 'Secretaria da Educação'
-    page.should have_content 'Ponte'
-    page.should have_content 'Compra de 2012 ainda não autorizada'
-    page.should have_content 'Antivirus'
-    page.should have_content 'Norton'
+    expect(page).to have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
+    expect(page).to have_content "#{direct_purchase.id}/2012"
+    expect(page).to have_content '01/12/2012'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Girassol, 9874 - São Francisco'
+    expect(page).to have_content 'Curitiba'
+    expect(page).to have_content '33400-500'
+    expect(page).to have_content '(33) 3333-3333'
+    expect(page).to have_content '(33) 3333-3334'
+    expect(page).to have_content '23456-0'
+    expect(page).to have_content 'Agência Itaú'
+    expect(page).to have_content 'Itaú'
+    expect(page).to have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+    expect(page).to have_content '1 - Secretaria de Educação'
+    expect(page).to have_content 'Dinheiro'
+    expect(page).to have_content '1 ano'
+    expect(page).to have_content 'Secretaria da Educação'
+    expect(page).to have_content 'Ponte'
+    expect(page).to have_content 'Compra de 2012 ainda não autorizada'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content 'Norton'
   end
 
   scenario 'it should generate supply authorization' do
@@ -244,27 +244,27 @@ feature "DirectPurchases" do
 
     click_button 'Gerar autorização de fornecimento'
 
-    page.should have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
-    page.should have_content "#{direct_purchase.id}/2012"
-    page.should have_content '01/12/2012'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content 'Girassol, 9874 - São Francisco'
-    page.should have_content 'Curitiba'
-    page.should have_content '33400-500'
-    page.should have_content '(33) 3333-3333'
-    page.should have_content '(33) 3333-3334'
-    page.should have_content '23456-0'
-    page.should have_content 'Agência Itaú'
-    page.should have_content 'Itaú'
-    page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
-    page.should have_content '1 - Secretaria de Educação'
-    page.should have_content 'Dinheiro'
-    page.should have_content '1 ano'
-    page.should have_content 'Secretaria da Educação'
-    page.should have_content 'Ponte'
-    page.should have_content 'Compra de 2012 ainda não autorizada'
-    page.should have_content 'Antivirus'
-    page.should have_content 'Norton'
+    expect(page).to have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
+    expect(page).to have_content "#{direct_purchase.id}/2012"
+    expect(page).to have_content '01/12/2012'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Girassol, 9874 - São Francisco'
+    expect(page).to have_content 'Curitiba'
+    expect(page).to have_content '33400-500'
+    expect(page).to have_content '(33) 3333-3333'
+    expect(page).to have_content '(33) 3333-3334'
+    expect(page).to have_content '23456-0'
+    expect(page).to have_content 'Agência Itaú'
+    expect(page).to have_content 'Itaú'
+    expect(page).to have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+    expect(page).to have_content '1 - Secretaria de Educação'
+    expect(page).to have_content 'Dinheiro'
+    expect(page).to have_content '1 ano'
+    expect(page).to have_content 'Secretaria da Educação'
+    expect(page).to have_content 'Ponte'
+    expect(page).to have_content 'Compra de 2012 ainda não autorizada'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content 'Norton'
   end
 
   scenario 'should not have destroy button when edit an existent direct_purchase' do
@@ -276,7 +276,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    page.should_not have_button 'Apagar'
+    expect(page).not_to have_button 'Apagar'
   end
 
   scenario 'asserting that duplicated budget allocations cannot be saved' do
@@ -333,7 +333,7 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     within_tab 'Dotações' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -350,8 +350,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      expect(page).not_to have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -368,8 +368,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      expect(page).not_to have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -386,8 +386,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      page.should_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
+      expect(page).not_to have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -397,7 +397,7 @@ feature "DirectPurchases" do
     click_link 'Gerar Compra Direta'
 
     within_tab 'Dotações' do
-      page.should have_disabled_field 'Valor total dos itens'
+      expect(page).to have_disabled_field 'Valor total dos itens'
 
       click_button 'Adicionar Dotação'
 
@@ -407,8 +407,8 @@ feature "DirectPurchases" do
         within '.item:first' do
           fill_in 'Quantidade', :with => '3,00'
           fill_in 'Valor unitário', :with => '10,00'
-          page.should have_field 'Valor total', :with => '30,00'
-          page.should have_disabled_field 'Valor total'
+          expect(page).to have_field 'Valor total', :with => '30,00'
+          expect(page).to have_disabled_field 'Valor total'
         end
 
         click_button 'Adicionar Item'
@@ -416,8 +416,8 @@ feature "DirectPurchases" do
         within '.item:first' do
           fill_in 'Quantidade', :with => '5,00'
           fill_in 'Valor unitário', :with => '2,00'
-          page.should have_field 'Valor total', :with => '10,00'
-          page.should have_disabled_field 'Valor total'
+          expect(page).to have_field 'Valor total', :with => '10,00'
+          expect(page).to have_disabled_field 'Valor total'
         end
       end
 
@@ -429,12 +429,12 @@ feature "DirectPurchases" do
         within '.item:first' do
           fill_in 'Quantidade', :with => '10,00'
           fill_in 'Valor unitário', :with => '5,00'
-          page.should have_field 'Valor total', :with => '50,00'
-          page.should have_disabled_field 'Valor total'
+          expect(page).to have_field 'Valor total', :with => '50,00'
+          expect(page).to have_disabled_field 'Valor total'
         end
       end
 
-      page.should have_field 'Valor total dos itens', :with => '90,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '90,00'
 
       # removing an item
 
@@ -444,7 +444,7 @@ feature "DirectPurchases" do
         end
       end
 
-      page.should have_field 'Valor total dos itens', :with => '80,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '80,00'
 
       # removing an entire budget allocation
 
@@ -452,7 +452,7 @@ feature "DirectPurchases" do
         click_button 'Remover Dotação'
       end
 
-      page.should have_field 'Valor total dos itens', :with => '50,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '50,00'
     end
   end
 
@@ -468,13 +468,13 @@ feature "DirectPurchases" do
         click_button 'Adicionar Item'
 
         within '.item:first' do
-          page.should have_field 'Item', :with => '1'
+          expect(page).to have_field 'Item', :with => '1'
         end
 
         click_button 'Adicionar Item'
 
         within '.item:last' do
-          page.should have_field 'Item', :with => '2'
+          expect(page).to have_field 'Item', :with => '2'
         end
       end
 
@@ -484,7 +484,7 @@ feature "DirectPurchases" do
         click_button 'Adicionar Item'
 
         within '.item:first' do
-          page.should have_field 'Item', :with => '1'
+          expect(page).to have_field 'Item', :with => '1'
         end
       end
 
@@ -493,7 +493,7 @@ feature "DirectPurchases" do
           click_button 'Remover Item'
         end
 
-        page.should have_field 'Item', :with => '1'
+        expect(page).to have_field 'Item', :with => '1'
       end
     end
   end
@@ -508,7 +508,7 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     within_tab 'Dotações' do
-      page.should have_content 'é necessário cadastrar pelo menos uma dotação'
+      expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
 
       click_button 'Adicionar Dotação'
 
@@ -518,7 +518,7 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     within_tab 'Dotações' do
-      page.should have_content 'é necessário cadastrar pelo menos um item'
+      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
 
@@ -543,7 +543,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Dotações' do
-      page.should_not have_content 'está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
+      expect(page).not_to have_content 'está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
     end
   end
 
@@ -564,7 +564,7 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     within_tab 'Dotações' do
-      page.should have_content 'está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
+      expect(page).to have_content 'está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
     end
   end
 
@@ -579,6 +579,6 @@ feature "DirectPurchases" do
 
     click_button 'Reenviar autorização de fornecimento por e-mail'
 
-    page.should have_content 'Autorização de fornecimento enviado por e-mail com sucesso'
+    expect(page).to have_content 'Autorização de fornecimento enviado por e-mail com sucesso'
   end
 end

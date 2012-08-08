@@ -27,15 +27,15 @@ feature "SignatureConfigurations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Configuração de Assinatura criado com sucesso.'
+    expect(page).to have_notice 'Configuração de Assinatura criado com sucesso.'
 
     click_link 'Autorizações de Fornecimento'
 
-    page.should have_select 'Relatório', :selected => 'Autorizações de Fornecimento'
-    page.should have_field 'Assinatura', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Ordem', :with => '1'
-    page.should have_disabled_field 'Cargo'
-    page.should have_field 'Cargo', :with => 'Gerente'
+    expect(page).to have_select 'Relatório', :selected => 'Autorizações de Fornecimento'
+    expect(page).to have_field 'Assinatura', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Ordem', :with => '1'
+    expect(page).to have_disabled_field 'Cargo'
+    expect(page).to have_field 'Cargo', :with => 'Gerente'
   end
 
   scenario 'should have only availables reports' do
@@ -45,8 +45,8 @@ feature "SignatureConfigurations" do
 
     click_link 'Criar Configuração de Assinatura'
 
-    page.should have_css '#signature_configuration_report option', :count => 4
-    page.should have_select 'Relatório', :options => ['', 'Processos Administrativos']
+    expect(page).to have_css '#signature_configuration_report option', :count => 4
+    expect(page).to have_select 'Relatório', :options => ['', 'Processos Administrativos']
   end
 
   scenario 'should have only availables reports when edit' do
@@ -56,8 +56,8 @@ feature "SignatureConfigurations" do
 
     click_link 'Autorizações de Fornecimento'
 
-    page.should have_css '#signature_configuration_report option', :count => 5
-    page.should have_select 'Relatório', :options => ['', 'Processos Administrativos', 'Autorizações de Fornecimento', 'Certificados de Registro Cadastral']
+    expect(page).to have_css '#signature_configuration_report option', :count => 5
+    expect(page).to have_select 'Relatório', :options => ['', 'Processos Administrativos', 'Autorizações de Fornecimento', 'Certificados de Registro Cadastral']
   end
 
   scenario 'when fill signature should fill position' do
@@ -76,12 +76,12 @@ feature "SignatureConfigurations" do
       click_record 'Gerente'
     end
 
-    page.should have_disabled_field 'Cargo'
-    page.should have_field 'Cargo', :with => 'Gerente'
+    expect(page).to have_disabled_field 'Cargo'
+    expect(page).to have_field 'Cargo', :with => 'Gerente'
 
     clear_modal 'Assinatura'
 
-    page.should_not have_field 'Cargo', :with => 'Gerente'
+    expect(page).not_to have_field 'Cargo', :with => 'Gerente'
   end
 
   scenario 'update an existent signature_configuration' do
@@ -107,14 +107,14 @@ feature "SignatureConfigurations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Configuração de Assinatura editado com sucesso.'
+    expect(page).to have_notice 'Configuração de Assinatura editado com sucesso.'
 
     click_link 'Processos Administrativos'
 
-    page.should have_select 'Relatório', :selected => 'Processos Administrativos'
-    page.should have_field 'Assinatura', :with => 'Wenderson Malheiros'
-    page.should have_disabled_field 'Cargo'
-    page.should have_field 'Ordem', :with => '1'
+    expect(page).to have_select 'Relatório', :selected => 'Processos Administrativos'
+    expect(page).to have_field 'Assinatura', :with => 'Wenderson Malheiros'
+    expect(page).to have_disabled_field 'Cargo'
+    expect(page).to have_field 'Ordem', :with => '1'
   end
 
   scenario 'destroy an existent signature_configuration' do
@@ -126,10 +126,10 @@ feature "SignatureConfigurations" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Configuração de Assinatura apagado com sucesso.'
+    expect(page).to have_notice 'Configuração de Assinatura apagado com sucesso.'
 
     within_records do
-      page.should_not have_content 'Autorizações de Fornecimento'
+      expect(page).not_to have_content 'Autorizações de Fornecimento'
     end
   end
 
@@ -146,8 +146,8 @@ feature "SignatureConfigurations" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_link 'Processos Administrativos'
-      page.should_not have_link 'Autorizações de Fornecimento'
+      expect(page).to have_link 'Processos Administrativos'
+      expect(page).not_to have_link 'Autorizações de Fornecimento'
     end
   end
 end

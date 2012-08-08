@@ -20,15 +20,15 @@ feature "Employees" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Funcionário criado com sucesso.'
+    expect(page).to have_notice 'Funcionário criado com sucesso.'
 
     within_records do
       click_link 'Gabriel Sobrinho'
     end
 
-    page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Cargo', :with => 'Gerente'
-    page.should have_field 'Matrícula', :with => '958473'
+    expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Cargo', :with => 'Gerente'
+    expect(page).to have_field 'Matrícula', :with => '958473'
   end
 
   scenario 'update an existent employee' do
@@ -48,13 +48,13 @@ feature "Employees" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Funcionário editado com sucesso.'
+    expect(page).to have_notice 'Funcionário editado com sucesso.'
 
     click_link 'Wenderson Malheiros'
 
-    page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
-    page.should have_field 'Cargo', :with => 'Supervisor'
-    page.should have_field 'Matrícula', :with => '123456'
+    expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Cargo', :with => 'Supervisor'
+    expect(page).to have_field 'Matrícula', :with => '123456'
   end
 
   scenario 'destroy an existent employee' do
@@ -68,11 +68,11 @@ feature "Employees" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Funcionário apagado com sucesso.'
+    expect(page).to have_notice 'Funcionário apagado com sucesso.'
 
     within_records do
-      page.should_not have_content 'Gabriel Sobrinho'
-      page.should_not have_content '958473'
+      expect(page).not_to have_content 'Gabriel Sobrinho'
+      expect(page).not_to have_content '958473'
     end
   end
 
@@ -87,7 +87,7 @@ feature "Employees" do
 
     click_button 'Salvar'
 
-    page.should have_content "já está em uso"
+    expect(page).to have_content "já está em uso"
   end
 
   scenario 'should validate uniqueness of registration' do
@@ -101,6 +101,6 @@ feature "Employees" do
 
     click_button 'Salvar'
 
-    page.should have_content "já está em uso"
+    expect(page).to have_content "já está em uso"
   end
 end

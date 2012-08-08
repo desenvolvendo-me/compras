@@ -16,14 +16,14 @@ feature 'Products' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Produto criado com sucesso.'
+    expect(page).to have_notice 'Produto criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Especificação', :with => 'Papel A4'
-    page.should have_field 'Observação', :with => 'Papel A4'
+    expect(page).to have_field 'Especificação', :with => 'Papel A4'
+    expect(page).to have_field 'Observação', :with => 'Papel A4'
   end
 
   scenario 'update an existing product' do
@@ -40,14 +40,14 @@ feature 'Products' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Produto editado com sucesso.'
+    expect(page).to have_notice 'Produto editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Especificação', :with => 'Papel A4'
-    page.should have_field 'Observação', :with => 'Papel A4'
+    expect(page).to have_field 'Especificação', :with => 'Papel A4'
+    expect(page).to have_field 'Observação', :with => 'Papel A4'
   end
 
   scenario 'destroy and existing product' do
@@ -59,8 +59,8 @@ feature 'Products' do
 
     click_link 'Apagar'
 
-    page.should have_notice 'Produto apagado com sucesso.'
+    expect(page).to have_notice 'Produto apagado com sucesso.'
 
-    page.should_not have_link 'Caneta'
+    expect(page).not_to have_link 'Caneta'
   end
 end

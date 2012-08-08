@@ -16,14 +16,14 @@ feature 'MacroObjectives' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Macro Objetivo criado com sucesso.'
+    expect(page).to have_notice 'Macro Objetivo criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Especificação', :with => 'Pavimentação'
-    page.should have_field 'Observação', :with => 'Pavimentação das vias urbanas'
+    expect(page).to have_field 'Especificação', :with => 'Pavimentação'
+    expect(page).to have_field 'Observação', :with => 'Pavimentação das vias urbanas'
   end
 
   scenario 'update an existing macro_objective' do
@@ -40,14 +40,14 @@ feature 'MacroObjectives' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Macro Objetivo editado com sucesso.'
+    expect(page).to have_notice 'Macro Objetivo editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Especificação', :with => 'Pavimentação'
-    page.should have_field 'Observação', :with => 'Pavimentação das vias urbanas'
+    expect(page).to have_field 'Especificação', :with => 'Pavimentação'
+    expect(page).to have_field 'Observação', :with => 'Pavimentação das vias urbanas'
   end
 
   scenario 'destroy and existing macro_objective' do
@@ -59,8 +59,8 @@ feature 'MacroObjectives' do
 
     click_link 'Apagar'
 
-    page.should have_notice 'Macro Objetivo apagado com sucesso.'
+    expect(page).to have_notice 'Macro Objetivo apagado com sucesso.'
 
-    page.should_not have_link 'Melhorar qualidade do ensino'
+    expect(page).not_to have_link 'Melhorar qualidade do ensino'
   end
 end

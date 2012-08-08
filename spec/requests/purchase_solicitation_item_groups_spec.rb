@@ -20,15 +20,15 @@ feature "PurchaseSolicitationItemGroups" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Agrupamento de Item de Solicitação de Compra criado com sucesso.'
+    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra criado com sucesso.'
 
     click_link '1'
 
-    page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
+    expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
 
     within '.records' do
-      page.should have_content '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
-      page.should have_content '3'
+      expect(page).to have_content '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      expect(page).to have_content '3'
     end
   end
 
@@ -49,15 +49,15 @@ feature "PurchaseSolicitationItemGroups" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Agrupamento de Item de Solicitação de Compra editado com sucesso.'
+    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra editado com sucesso.'
 
     click_link '1'
 
-    page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
+    expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
 
     within '.records' do
-      page.should have_content '1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
-      page.should have_content '99'
+      expect(page).to have_content '1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      expect(page).to have_content '99'
     end
   end
 
@@ -80,9 +80,9 @@ feature "PurchaseSolicitationItemGroups" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '2012'
+      expect(page).to have_content '2012'
 
-      page.should have_css 'table.records tbody tr', :count => 2
+      expect(page).to have_css 'table.records tbody tr', :count => 2
 
       fill_in 'Ano', :with => '2012'
 
@@ -97,9 +97,9 @@ feature "PurchaseSolicitationItemGroups" do
     within_modal 'Solicitação de compra' do
       click_button 'Pesquisar'
 
-      page.should have_content '2013'
+      expect(page).to have_content '2013'
 
-      page.should have_css 'table.records tbody tr', :count => 1
+      expect(page).to have_css 'table.records tbody tr', :count => 1
 
       fill_in 'Ano', :with => '2013'
 
@@ -114,7 +114,7 @@ feature "PurchaseSolicitationItemGroups" do
     within_modal 'Solicitação de compra' do
       click_button 'Pesquisar'
 
-      page.should_not have_css 'table.records tbody tr'
+      expect(page).not_to have_css 'table.records tbody tr'
 
       click_link 'Cancelar'
     end
@@ -129,7 +129,7 @@ feature "PurchaseSolicitationItemGroups" do
     within_modal 'Solicitação de compra' do
       click_button 'Pesquisar'
 
-      page.should_not have_css 'table.records tbody tr'
+      expect(page).not_to have_css 'table.records tbody tr'
 
       click_link 'Cancelar'
     end
@@ -144,9 +144,9 @@ feature "PurchaseSolicitationItemGroups" do
     within_modal 'Solicitação de compra' do
       click_button 'Pesquisar'
 
-      page.should have_content '2012'
+      expect(page).to have_content '2012'
 
-      page.should have_css 'table.records tbody tr', :count => 1
+      expect(page).to have_css 'table.records tbody tr', :count => 1
 
       fill_in 'Ano', :with => '2012'
 
@@ -167,7 +167,7 @@ feature "PurchaseSolicitationItemGroups" do
 
       click_button 'Pesquisar'
 
-      page.should have_css 'table.records tbody tr', :count => 2
+      expect(page).to have_css 'table.records tbody tr', :count => 2
     end
   end
 
@@ -180,9 +180,9 @@ feature "PurchaseSolicitationItemGroups" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Agrupamento de Item de Solicitação de Compra apagado com sucesso.'
+    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra apagado com sucesso.'
 
-    page.should_not have_content 'Antivirus'
+    expect(page).not_to have_content 'Antivirus'
   end
 
   scenario 'filter by material' do
@@ -192,7 +192,7 @@ feature "PurchaseSolicitationItemGroups" do
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     within_records do
-      page.should have_css('a', :count => 2)
+      expect(page).to have_css('a', :count => 2)
     end
 
     click_link 'Filtrar Agrupamentos de Itens de Solicitações de Compra'
@@ -202,7 +202,7 @@ feature "PurchaseSolicitationItemGroups" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_css('a', :count => 1)
+      expect(page).to have_css('a', :count => 1)
     end
   end
 
@@ -213,7 +213,7 @@ feature "PurchaseSolicitationItemGroups" do
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     within_records do
-      page.should have_css('a', :count => 2)
+      expect(page).to have_css('a', :count => 2)
     end
 
     click_link 'Filtrar Agrupamentos de Itens de Solicitações de Compra'
@@ -223,7 +223,7 @@ feature "PurchaseSolicitationItemGroups" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_css('a', :count => 1)
+      expect(page).to have_css('a', :count => 1)
     end
   end
 end

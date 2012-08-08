@@ -20,14 +20,14 @@ feature "LicitationModalities" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Modalidade de Licitação criada com sucesso.'
+    expect(page).to have_notice 'Modalidade de Licitação criada com sucesso.'
 
     click_link 'Pública'
 
-    page.should have_field 'Ato regulamentador', :with => '1234'
-    page.should have_field 'Modalidade', :with => 'Pública'
-    page.should have_field 'Valor inicial', :with => '500,00'
-    page.should have_field 'Valor final', :with => '800,00'
+    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Modalidade', :with => 'Pública'
+    expect(page).to have_field 'Valor inicial', :with => '500,00'
+    expect(page).to have_field 'Valor final', :with => '800,00'
   end
 
   scenario 'update an existent licitation_modality' do
@@ -45,14 +45,14 @@ feature "LicitationModalities" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Modalidade de Licitação editada com sucesso.'
+    expect(page).to have_notice 'Modalidade de Licitação editada com sucesso.'
 
     click_link 'Privada'
 
-    page.should have_field 'Ato regulamentador', :with => '4567'
-    page.should have_field 'Modalidade', :with => 'Privada'
-    page.should have_field 'Valor inicial', :with => '600,00'
-    page.should have_field 'Valor final', :with => '900,00'
+    expect(page).to have_field 'Ato regulamentador', :with => '4567'
+    expect(page).to have_field 'Modalidade', :with => 'Privada'
+    expect(page).to have_field 'Valor inicial', :with => '600,00'
+    expect(page).to have_field 'Valor final', :with => '900,00'
   end
 
   scenario 'destroy an existent licitation_modality' do
@@ -64,12 +64,12 @@ feature "LicitationModalities" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Modalidade de Licitação apagada com sucesso.'
+    expect(page).to have_notice 'Modalidade de Licitação apagada com sucesso.'
 
-    page.should_not have_content 'Pública'
-    page.should_not have_content '1234'
-    page.should_not have_content '500,00'
-    page.should_not have_content '700,00'
+    expect(page).not_to have_content 'Pública'
+    expect(page).not_to have_content '1234'
+    expect(page).not_to have_content '500,00'
+    expect(page).not_to have_content '700,00'
   end
 
   scenario 'should get the publication date when administractive act is selected' do
@@ -79,13 +79,13 @@ feature "LicitationModalities" do
 
     click_link 'Criar Modalidade de Licitação'
 
-    page.should have_disabled_field 'Data da publicação'
-    page.should have_field 'Data da publicação', :with => ''
+    expect(page).to have_disabled_field 'Data da publicação'
+    expect(page).to have_field 'Data da publicação', :with => ''
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-    page.should have_disabled_field 'Data da publicação'
-    page.should have_field 'Data da publicação', :with => '02/01/2012'
+    expect(page).to have_disabled_field 'Data da publicação'
+    expect(page).to have_field 'Data da publicação', :with => '02/01/2012'
   end
 
   scenario 'should clean the publication date when administractive act is removed' do
@@ -95,13 +95,13 @@ feature "LicitationModalities" do
 
     click_link 'Pública'
 
-    page.should have_disabled_field 'Data da publicação'
-    page.should have_field 'Data da publicação', :with => '02/01/2012'
+    expect(page).to have_disabled_field 'Data da publicação'
+    expect(page).to have_field 'Data da publicação', :with => '02/01/2012'
 
     clear_modal 'Ato regulamentador'
 
-    page.should have_disabled_field 'Data da publicação'
-    page.should have_field 'Data da publicação', :with => ''
+    expect(page).to have_disabled_field 'Data da publicação'
+    expect(page).to have_field 'Data da publicação', :with => ''
   end
 
   scenario 'should validate initial and final value range taken' do
@@ -116,6 +116,6 @@ feature "LicitationModalities" do
 
     click_button 'Salvar'
 
-    page.should have_content 'esta combinação de valor inicial e valor final já está em uso'
+    expect(page).to have_content 'esta combinação de valor inicial e valor final já está em uso'
   end
 end

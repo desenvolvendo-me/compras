@@ -26,20 +26,20 @@ feature "LicitationProcessAppeals" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Interposição de Recurso do Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório criado com sucesso.'
 
     click_link LicitationProcessAppeal.last.to_s
 
-    page.should have_field 'Processo licitatório', :with => '1/2012'
-    page.should have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
-    page.should have_select 'Referente ao', :selected => 'Edital'
-    page.should have_field 'Autor', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
-    page.should have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-    page.should have_field 'Nova hora da abertura dos envelopes', :with => '15:30'
-    page.should have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
-    page.should have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação'
-    page.should have_select 'Situação', :selected => 'Pendente'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+    expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2012, 3, 20))
+    expect(page).to have_select 'Referente ao', :selected => 'Edital'
+    expect(page).to have_field 'Autor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Nova hora da abertura dos envelopes', :with => '15:30'
+    expect(page).to have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório'
+    expect(page).to have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação'
+    expect(page).to have_select 'Situação', :selected => 'Pendente'
   end
 
   scenario 'update an existent licitation_process_appeal' do
@@ -63,20 +63,20 @@ feature "LicitationProcessAppeals" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Interposição de Recurso do Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório editado com sucesso.'
 
     click_link interposicao_processo_licitatorio.to_s
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
-    page.should have_select 'Referente ao', :selected => 'Revogação'
-    page.should have_field 'Autor', :with => 'Wenderson Malheiros'
-    page.should have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
-    page.should have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
-    page.should have_field 'Nova hora da abertura dos envelopes', :with => '16:00'
-    page.should have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
-    page.should have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
-    page.should have_select 'Situação', :selected => 'Deferido'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do recurso', :with => I18n.l(Date.new(2013, 3, 20))
+    expect(page).to have_select 'Referente ao', :selected => 'Revogação'
+    expect(page).to have_field 'Autor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Objeto do Processo', :with => 'Licitação para compra de carteiras'
+    expect(page).to have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 2)
+    expect(page).to have_field 'Nova hora da abertura dos envelopes', :with => '16:00'
+    expect(page).to have_field 'Motivo fundamentado do recurso', :with => 'Interposição de recurso licitatório do computador'
+    expect(page).to have_field 'Parecer da comissão de licitação', :with => 'Parecer da comissão de licitação - wenderson'
+    expect(page).to have_select 'Situação', :selected => 'Deferido'
   end
 
   scenario 'destroy an existent licitation_process_appeal' do
@@ -88,14 +88,14 @@ feature "LicitationProcessAppeals" do
 
     click_link "Apagar", :confirm => true
 
-    page.should have_notice 'Interposição de Recurso do Processo Licitatório apagado com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagado com sucesso.'
 
-    page.should_not have_content '1/2013'
-    page.should_not have_content I18n.l(Date.new(2012, 3, 20))
-    page.should_not have_content 'Revogação'
-    page.should_not have_content 'Wenderson Malheiros'
-    page.should_not have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow )
-    page.should_not have_field 'Nova hora da abertura dos envelopes', :with => '14:00'
-    page.should_not have_content "#{interposicao_processo_licitatorio}"
+    expect(page).not_to have_content '1/2013'
+    expect(page).not_to have_content I18n.l(Date.new(2012, 3, 20))
+    expect(page).not_to have_content 'Revogação'
+    expect(page).not_to have_content 'Wenderson Malheiros'
+    expect(page).not_to have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow )
+    expect(page).not_to have_field 'Nova hora da abertura dos envelopes', :with => '14:00'
+    expect(page).not_to have_content "#{interposicao_processo_licitatorio}"
   end
 end

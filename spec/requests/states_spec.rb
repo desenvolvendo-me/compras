@@ -19,13 +19,13 @@ feature "States" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Estado criado com sucesso.'
+    expect(page).to have_notice 'Estado criado com sucesso.'
 
     click_link 'Minas Gerais'
 
-    page.should have_field 'Nome', :with => 'Minas Gerais'
-    page.should have_field 'Sigla', :with => 'MG'
-    page.should have_field 'País', :with => 'Brasil'
+    expect(page).to have_field 'Nome', :with => 'Minas Gerais'
+    expect(page).to have_field 'Sigla', :with => 'MG'
+    expect(page).to have_field 'País', :with => 'Brasil'
   end
 
   scenario 'update a state' do
@@ -39,11 +39,11 @@ feature "States" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Estado editado com sucesso.'
+    expect(page).to have_notice 'Estado editado com sucesso.'
 
     click_link 'Rio Grande do Norte'
 
-    page.should have_field 'Nome', :with => 'Rio Grande do Norte'
+    expect(page).to have_field 'Nome', :with => 'Rio Grande do Norte'
   end
 
   scenario 'destroy a state' do
@@ -55,9 +55,9 @@ feature "States" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Estado apagado com sucesso.'
+    expect(page).to have_notice 'Estado apagado com sucesso.'
 
-    page.should_not have_content 'Rio Grande do Sul'
-    page.should_not have_content 'RS'
+    expect(page).not_to have_content 'Rio Grande do Sul'
+    expect(page).not_to have_content 'RS'
   end
 end

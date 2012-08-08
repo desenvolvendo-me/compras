@@ -31,33 +31,33 @@ feature 'PledgeLiquidationAnnuls' do
 
     click_button 'Salvar'
 
-    page.should have_content 'Anulação de Recurso criado com sucesso.'
+    expect(page).to have_content 'Anulação de Recurso criado com sucesso.'
 
-    page.should have_select 'Status', :selected => 'Anulada'
+    expect(page).to have_select 'Status', :selected => 'Anulada'
 
-    page.should have_field 'Empenho', :with => pledge.to_s
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Empenho', :with => pledge.to_s
+    expect(page).to have_disabled_field 'Data de emissão'
+    expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
 
-    page.should have_field 'Valor a ser liquidado', :with => '1,00'
-    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
-    page.should have_disabled_field 'Objeto do empenho'
-    page.should have_field 'Objeto do empenho', :with => 'Para empenho 2012'
+    expect(page).to have_field 'Valor a ser liquidado', :with => '1,00'
+    expect(page).to have_field 'Data *', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_disabled_field 'Objeto do empenho'
+    expect(page).to have_field 'Objeto do empenho', :with => 'Para empenho 2012'
 
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_button 'Salvar'
 
     click_link 'Anulação'
 
-    page.should have_disabled_field 'Responsável'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => '10/06/2012'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', :with => '10/06/2012'
 
-    page.should have_disabled_field 'Justificativa'
-    page.should have_field 'Justificativa', :with => 'Não mais necessário'
+    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_field 'Justificativa', :with => 'Não mais necessário'
 
-    page.should_not have_button 'Salvar'
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_button 'Salvar'
+    expect(page).not_to have_link 'Apagar'
   end
 end

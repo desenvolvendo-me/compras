@@ -20,10 +20,10 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-      page.should have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => '1234'
 
-      page.should have_disabled_field 'Data da publicação do ato'
-      page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       fill_in 'Data da nomeação', :with => '20/03/2012'
       fill_in 'Data da expiração', :with => '22/03/2012'
@@ -50,31 +50,31 @@ feature "LicitationCommissions" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Comissão de Licitação criada com sucesso.'
+    expect(page).to have_notice 'Comissão de Licitação criada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_select 'Tipo de comissão', :selected => 'Especial'
-      page.should have_field 'Data da nomeação', :with => '20/03/2012'
-      page.should have_field 'Data da expiração', :with => '22/03/2012'
-      page.should have_field 'Data da exoneração', :with => '25/03/2012'
-      page.should have_field 'Descrição e finalidade da comissão', :with => 'descrição'
+      expect(page).to have_select 'Tipo de comissão', :selected => 'Especial'
+      expect(page).to have_field 'Data da nomeação', :with => '20/03/2012'
+      expect(page).to have_field 'Data da expiração', :with => '22/03/2012'
+      expect(page).to have_field 'Data da exoneração', :with => '25/03/2012'
+      expect(page).to have_field 'Descrição e finalidade da comissão', :with => 'descrição'
     end
 
     within_tab 'Responsáveis' do
-      page.should have_field 'Autoridade', :with => 'Wenderson Malheiros'
-      page.should have_select 'Cargo', :selected => 'Advogado'
-      page.should have_field 'Registro da classe', :with => '123456'
+      expect(page).to have_field 'Autoridade', :with => 'Wenderson Malheiros'
+      expect(page).to have_select 'Cargo', :selected => 'Advogado'
+      expect(page).to have_field 'Registro da classe', :with => '123456'
     end
 
     within_tab 'Membros' do
-      page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Matrícula', :with => '3456789'
-      page.should have_select 'Função', :selected => 'Presidente'
-      page.should have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
+      expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Matrícula', :with => '3456789'
+      expect(page).to have_select 'Função', :selected => 'Presidente'
+      expect(page).to have_select 'Natureza do cargo', :selected => 'Servidor efetivo'
     end
   end
 
@@ -95,10 +95,10 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '8901', :field => 'Número'
 
-      page.should have_field 'Ato regulamentador', :with => '8901'
+      expect(page).to have_field 'Ato regulamentador', :with => '8901'
 
-      page.should have_disabled_field 'Data da publicação do ato'
-      page.should have_field 'Data da publicação do ato', :with => '02/01/2013'
+      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2013'
 
       fill_in 'Data da nomeação', :with => '20/03/2013'
       fill_in 'Data da expiração', :with => '22/03/2013'
@@ -116,7 +116,7 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Membros' do
-      page.should have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Membro', :with => 'Wenderson Malheiros'
 
       click_button 'Remover Membro'
 
@@ -132,35 +132,35 @@ feature "LicitationCommissions" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Comissão de Licitação editada com sucesso.'
+    expect(page).to have_notice 'Comissão de Licitação editada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_select 'Tipo de comissão', :selected => 'Pregão'
-      page.should have_field 'Data da nomeação', :with => '20/03/2013'
-      page.should have_field 'Data da expiração', :with => '22/03/2013'
-      page.should have_field 'Data da exoneração', :with => '25/03/2013'
-      page.should have_field 'Descrição e finalidade da comissão', :with => 'nova descrição'
+      expect(page).to have_select 'Tipo de comissão', :selected => 'Pregão'
+      expect(page).to have_field 'Data da nomeação', :with => '20/03/2013'
+      expect(page).to have_field 'Data da expiração', :with => '22/03/2013'
+      expect(page).to have_field 'Data da exoneração', :with => '25/03/2013'
+      expect(page).to have_field 'Descrição e finalidade da comissão', :with => 'nova descrição'
     end
 
     within_tab 'Responsáveis' do
-      page.should_not have_field 'Autoridade', :with => 'Wenderson Malheiros'
+      expect(page).not_to have_field 'Autoridade', :with => 'Wenderson Malheiros'
 
-      page.should have_field 'Autoridade', :with => 'Gabriel Sobrinho'
-      page.should have_select 'Cargo', :selected => 'Prefeito municipal'
+      expect(page).to have_field 'Autoridade', :with => 'Gabriel Sobrinho'
+      expect(page).to have_select 'Cargo', :selected => 'Prefeito municipal'
     end
 
     within_tab 'Membros' do
-      page.should_not have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).not_to have_field 'Membro', :with => 'Wenderson Malheiros'
 
       within '.member' do
-        page.should have_field 'Membro', :with => 'Gabriel Sobrinho'
-        page.should have_field 'Matrícula', :with => '987654'
-        page.should have_select 'Função', :selected => 'Apoio'
-        page.should have_select 'Natureza do cargo', :selected => 'Outros'
+        expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
+        expect(page).to have_field 'Matrícula', :with => '987654'
+        expect(page).to have_select 'Função', :selected => 'Apoio'
+        expect(page).to have_select 'Natureza do cargo', :selected => 'Outros'
       end
     end
   end
@@ -177,13 +177,13 @@ feature "LicitationCommissions" do
     within_tab 'Principal' do
       select 'Pregão', :from => 'Tipo de comissão'
 
-      page.should have_field 'Ato regulamentador', :with => '1234'
-      page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       clear_modal 'Ato regulamentador'
 
-      page.should have_field 'Ato regulamentador', :with => ''
-      page.should have_field 'Data da publicação do ato', :with => ''
+      expect(page).to have_field 'Ato regulamentador', :with => ''
+      expect(page).to have_field 'Data da publicação do ato', :with => ''
     end
   end
 
@@ -198,9 +198,9 @@ feature "LicitationCommissions" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Comissão de Licitação apagada com sucesso.'
+    expect(page).to have_notice 'Comissão de Licitação apagada com sucesso.'
 
-    page.should_not have_link "#{licitation_commission.id}"
+    expect(page).not_to have_link "#{licitation_commission.id}"
   end
 
   scenario 'should get the CPF number when selecting individual' do
@@ -215,12 +215,12 @@ feature "LicitationCommissions" do
 
       fill_modal 'Autoridade', :with => 'Wenderson Malheiros'
 
-      page.should have_disabled_field 'CPF'
-      page.should have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34'
 
       clear_modal 'Autoridade'
-      page.should have_disabled_field 'CPF'
-      page.should have_field 'CPF', :with => ''
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', :with => ''
     end
 
     within_tab 'Membros' do
@@ -228,12 +228,12 @@ feature "LicitationCommissions" do
 
       fill_modal 'Membro', :with => 'Wenderson Malheiros'
 
-      page.should have_disabled_field 'CPF'
-      page.should have_field 'CPF', :with => '003.149.513-34'
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', :with => '003.149.513-34'
 
       clear_modal 'Membro'
-      page.should have_disabled_field 'CPF'
-      page.should have_field 'CPF', :with => ''
+      expect(page).to have_disabled_field 'CPF'
+      expect(page).to have_field 'CPF', :with => ''
     end
   end
 
@@ -246,22 +246,22 @@ feature "LicitationCommissions" do
       click_button 'Adicionar Responsável'
 
       select 'Prefeito municipal', :from => 'Cargo'
-      page.should have_disabled_field 'Registro da classe'
+      expect(page).to have_disabled_field 'Registro da classe'
 
       select 'Secretário de finanças', :from => 'Cargo'
-      page.should have_disabled_field 'Registro da classe'
+      expect(page).to have_disabled_field 'Registro da classe'
 
       select 'Secretário de administração', :from => 'Cargo'
-      page.should have_disabled_field 'Registro da classe'
+      expect(page).to have_disabled_field 'Registro da classe'
 
       select 'Diretor de compras e licitações', :from => 'Cargo'
-      page.should have_disabled_field 'Registro da classe'
+      expect(page).to have_disabled_field 'Registro da classe'
 
       select 'Chefe do setor de compras e licitações', :from => 'Cargo'
-      page.should have_disabled_field 'Registro da classe'
+      expect(page).to have_disabled_field 'Registro da classe'
 
       select 'Advogado', :from => 'Cargo'
-      page.should_not have_disabled_field 'Registro da classe'
+      expect(page).not_to have_disabled_field 'Registro da classe'
     end
   end
 
@@ -275,24 +275,24 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Responsáveis' do
-      page.should have_select 'Cargo', :selected => 'Advogado'
-      page.should have_field 'Registro da classe', :with => '123457'
+      expect(page).to have_select 'Cargo', :selected => 'Advogado'
+      expect(page).to have_field 'Registro da classe', :with => '123457'
 
       select 'Prefeito municipal', :from => 'Cargo'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Comissão de Licitação editada com sucesso.'
+    expect(page).to have_notice 'Comissão de Licitação editada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Responsáveis' do
-      page.should have_select 'Cargo', :selected => 'Prefeito municipal'
-      page.should have_disabled_field 'Registro da classe'
-      page.should have_field 'Registro da classe', :with => ''
+      expect(page).to have_select 'Cargo', :selected => 'Prefeito municipal'
+      expect(page).to have_disabled_field 'Registro da classe'
+      expect(page).to have_field 'Registro da classe', :with => ''
     end
   end
 
@@ -309,10 +309,10 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-      page.should have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => '1234'
 
-      page.should have_disabled_field 'Data da publicação do ato'
-      page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       fill_in 'Data da nomeação', :with => '20/03/2012'
       fill_in 'Data da expiração', :with => '22/03/2012'
@@ -338,7 +338,7 @@ feature "LicitationCommissions" do
     click_button 'Salvar'
 
     within_tab 'Responsáveis' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -355,10 +355,10 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-      page.should have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => '1234'
 
-      page.should have_disabled_field 'Data da publicação do ato'
-      page.should have_field 'Data da publicação do ato', :with => '02/01/2012'
+      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       fill_in 'Data da nomeação', :with => '20/03/2012'
       fill_in 'Data da expiração', :with => '22/03/2012'
@@ -387,7 +387,7 @@ feature "LicitationCommissions" do
     click_button 'Salvar'
 
     within_tab 'Membros' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -403,7 +403,7 @@ feature "LicitationCommissions" do
     click_button 'Salvar'
 
     within_tab 'Membros' do
-      page.should have_content 'deve haver um presidente'
+      expect(page).to have_content 'deve haver um presidente'
     end
 
     # testing with one member that is no president
@@ -417,7 +417,7 @@ feature "LicitationCommissions" do
     click_button 'Salvar'
 
     within_tab 'Membros' do
-      page.should have_content 'deve haver um presidente'
+      expect(page).to have_content 'deve haver um presidente'
     end
 
     # testing with one president
@@ -428,7 +428,7 @@ feature "LicitationCommissions" do
     click_button 'Salvar'
 
     within_tab 'Membros' do
-      page.should_not have_content 'deve haver um presidente'
+      expect(page).not_to have_content 'deve haver um presidente'
     end
 
     # testing with two presidents
@@ -444,7 +444,7 @@ feature "LicitationCommissions" do
     click_button 'Salvar'
 
     within_tab 'Membros' do
-      page.should have_content 'deve haver apenas um presidente'
+      expect(page).to have_content 'deve haver apenas um presidente'
     end
   end
 end

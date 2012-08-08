@@ -19,7 +19,7 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Anular'
 
-    page.should have_content "Anular Rescisão Contratual 1/2012"
+    expect(page).to have_content "Anular Rescisão Contratual 1/2012"
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '28/06/2012'
@@ -27,15 +27,15 @@ feature 'ContractTerminationAnnuls' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Anulação de Recurso criado com sucesso.'
+    expect(page).to have_notice 'Anulação de Recurso criado com sucesso.'
 
     click_link 'Anulação'
 
-    page.should have_content "Anulação da Rescisão Contratual 1/2012"
+    expect(page).to have_content "Anulação da Rescisão Contratual 1/2012"
 
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Data', :with => '28/06/2012'
-    page.should have_field 'Justificativa', :with => 'Anulação da rescisão do contrato'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data', :with => '28/06/2012'
+    expect(page).to have_field 'Justificativa', :with => 'Anulação da rescisão do contrato'
   end
 
   scenario 'a contract termination annul should have all fields disabled' do
@@ -51,19 +51,19 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Anulação'
 
-    page.should have_content "Anulação da Rescisão Contratual 1/2012"
+    expect(page).to have_content "Anulação da Rescisão Contratual 1/2012"
 
-    page.should have_disabled_field 'Responsável'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => '28/06/2012'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', :with => '28/06/2012'
 
-    page.should have_disabled_field 'Justificativa'
-    page.should have_field 'Justificativa', :with => 'Rescisão Anulada'
+    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_field 'Justificativa', :with => 'Rescisão Anulada'
 
-    page.should_not have_button 'Salvar'
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_button 'Salvar'
+    expect(page).not_to have_link 'Apagar'
   end
 
   scenario 'a contract termination annul cancel should bat to contract termination' do
@@ -81,6 +81,6 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Cancelar'
 
-    page.should have_content 'Editar Rescisão 1/2012 do Contrato 001'
+    expect(page).to have_content 'Editar Rescisão 1/2012 do Contrato 001'
   end
 end

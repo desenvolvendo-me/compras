@@ -17,7 +17,7 @@ feature "LicitationProcesses" do
 
     click_link 'Cancelar'
 
-    page.should have_link('1/2012')
+    expect(page).to have_link('1/2012')
   end
 
   scenario 'create a new licitation_process' do
@@ -38,33 +38,33 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    page.should have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
+    expect(page).to have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
 
-    page.should_not have_link 'Publicações'
+    expect(page).not_to have_link 'Publicações'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Processo'
-      page.should have_disabled_field 'Modalidade'
-      page.should have_disabled_field 'Tipo de objeto'
-      page.should have_disabled_field 'Objeto do processo licitatório'
-      page.should have_disabled_field 'Responsável'
-      page.should have_disabled_field 'Inciso'
-      page.should have_disabled_field 'Data da homologação'
-      page.should have_disabled_field 'Data da adjudicação'
-      page.should have_disabled_field 'Processo administrativo'
+      expect(page).to have_disabled_field 'Processo'
+      expect(page).to have_disabled_field 'Modalidade'
+      expect(page).to have_disabled_field 'Tipo de objeto'
+      expect(page).to have_disabled_field 'Objeto do processo licitatório'
+      expect(page).to have_disabled_field 'Responsável'
+      expect(page).to have_disabled_field 'Inciso'
+      expect(page).to have_disabled_field 'Data da homologação'
+      expect(page).to have_disabled_field 'Data da adjudicação'
+      expect(page).to have_disabled_field 'Processo administrativo'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '21/03/2012'
       select 'Global', :from => 'Tipo de empenho'
 
       # testing delegated fields of administrative process (filled by javascript)
-      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços'
-      page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
-      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
-      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Inciso', :with => 'Item 1'
-      page.should have_field 'Abrev. modalidade', :with => 'CV'
+      expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
+      expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Inciso', :with => 'Item 1'
+      expect(page).to have_field 'Abrev. modalidade', :with => 'CV'
 
       select 'Menor preço global', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
@@ -91,92 +91,92 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_field 'Valor previsto', :with => '20,00'
+      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Valor previsto', :with => '20,00'
 
       click_button 'Adicionar Item'
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Quantidade', :with => '2'
       fill_in 'Valor unitário', :with => '10,00'
 
       # asserting calculated total price of the item
-      page.should have_field 'Valor total', :with => '20,00'
+      expect(page).to have_field 'Valor total', :with => '20,00'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
 
     click_link 'Editar processo licitatório'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Processo'
-      page.should have_disabled_field 'Ano'
+      expect(page).to have_disabled_field 'Processo'
+      expect(page).to have_disabled_field 'Ano'
 
-      page.should have_field 'Processo', :with => '1'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data do processo', :with => '21/03/2012'
-      page.should have_field 'Processo administrativo', :with => '1/2012'
-      page.should have_select 'Tipo de empenho', :selected => 'Global'
+      expect(page).to have_field 'Processo', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data do processo', :with => '21/03/2012'
+      expect(page).to have_field 'Processo administrativo', :with => '1/2012'
+      expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
 
       # testing delegated fields of administrative process
-      page.should have_field 'Modalidade', :with => 'Convite para compras e serviços'
-      page.should have_field 'Tipo de objeto', :with => 'Compras e serviços'
-      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
-      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Inciso', :with => 'Item 1'
+      expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
+      expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Inciso', :with => 'Item 1'
 
-      page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
-      page.should have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
-      page.should have_field 'Validade da proposta', :with => '5'
-      page.should have_select 'Período da validade da proposta', :selected => 'dia/dias'
-      page.should have_field 'Índice de reajuste', :with => 'XPTO'
-      page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
-      page.should have_field 'Hora da entrega', :with => '14:00'
-      page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
-      page.should have_field 'Hora da abertura', :with => '14:00'
-      page.should have_field 'Prazo de entrega', :with => '1'
-      page.should have_select 'Período do prazo de entrega', :selected => 'ano/anos'
-      page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
-      page.should have_field 'Valor da caução', :with => '50,00'
-      page.should have_select 'Parecer jurídico', :selected => 'Favorável'
-      page.should have_field 'Data do parecer', :with => '30/03/2012'
-      page.should have_field 'Data do contrato', :with => '31/03/2012'
-      page.should have_field 'Validade do contrato (meses)', :with => '5'
-      page.should have_field 'Observações gerais', :with => 'observacoes'
+      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço global'
+      expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Validade da proposta', :with => '5'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+      expect(page).to have_field 'Índice de reajuste', :with => 'XPTO'
+      expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Hora da entrega', :with => '14:00'
+      expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
+      expect(page).to have_field 'Hora da abertura', :with => '14:00'
+      expect(page).to have_field 'Prazo de entrega', :with => '1'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Valor da caução', :with => '50,00'
+      expect(page).to have_select 'Parecer jurídico', :selected => 'Favorável'
+      expect(page).to have_field 'Data do parecer', :with => '30/03/2012'
+      expect(page).to have_field 'Data do contrato', :with => '31/03/2012'
+      expect(page).to have_field 'Validade do contrato (meses)', :with => '5'
+      expect(page).to have_field 'Observações gerais', :with => 'observacoes'
 
       # testing fields of licitation number
-      page.should have_field 'Número da licitação', :with => '1'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Abrev. modalidade', :with => 'CV'
+      expect(page).to have_field 'Número da licitação', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Abrev. modalidade', :with => 'CV'
     end
 
     within_tab 'Documentos' do
-      page.should have_content 'Fiscal'
-      page.should have_content '10'
+      expect(page).to have_content 'Fiscal'
+      expect(page).to have_content '10'
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_field 'Valor previsto', :with => '20,00'
+      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Valor previsto', :with => '20,00'
 
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Quantidade', :with => '2'
-      page.should have_field 'Valor unitário', :with => '10,00'
-      page.should have_field 'Valor total', :with => '20,00'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '2'
+      expect(page).to have_field 'Valor unitário', :with => '10,00'
+      expect(page).to have_field 'Valor total', :with => '20,00'
 
-      page.should have_field 'Item', :with => '1'
+      expect(page).to have_field 'Item', :with => '1'
     end
   end
 
@@ -199,9 +199,9 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    page.should have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
+    expect(page).to have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
 
-    page.should_not have_link 'Publicações'
+    expect(page).not_to have_link 'Publicações'
 
     within_tab 'Principal' do
       fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
@@ -230,9 +230,9 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    page.should have_content "Editar Processo Licitatório 1/2012 do Processo Administrativo 1/2012"
+    expect(page).to have_content "Editar Processo Licitatório 1/2012 do Processo Administrativo 1/2012"
 
-    page.should have_link 'Publicações'
+    expect(page).to have_link 'Publicações'
 
     within_tab 'Principal' do
       fill_in 'Data do processo', :with => '21/03/2013'
@@ -271,64 +271,64 @@ feature "LicitationProcesses" do
       fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
 
       # getting data from modal
-      page.should have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor total', :with => '20,00'
 
       # asserting calculated unit price of the item
-      page.should have_field 'Valor unitário', :with => '4,00'
+      expect(page).to have_field 'Valor unitário', :with => '4,00'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
 
     click_link 'Editar processo licitatório'
 
     within_tab 'Principal' do
-      page.should have_field 'Data do processo', :with => '21/03/2013'
-      page.should have_field 'Processo administrativo', :with => '1/2012'
-      page.should have_select 'Tipo de empenho', :selected => 'Estimativo'
-      page.should have_select 'Tipo da apuração', :selected => 'Menor preço global'
-      page.should have_field 'Fonte de recurso', :with => 'Construção'
-      page.should have_field 'Validade da proposta', :with => '10'
-      page.should have_select 'Período da validade da proposta', :selected => 'dia/dias'
-      page.should have_field 'Índice de reajuste', :with => 'SELIC'
-      page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
-      page.should have_field 'Hora da entrega', :with => '15:00'
-      page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
-      page.should have_field 'Hora da abertura', :with => '15:00'
-      page.should have_field 'Prazo de entrega', :with => '3'
-      page.should have_select 'Período do prazo de entrega', :selected => 'mês/meses'
-      page.should have_field 'Forma de pagamento', :with => 'Cheque'
-      page.should have_field 'Valor da caução', :with => '60,00'
-      page.should have_select 'Parecer jurídico', :selected => 'Contrário'
-      page.should have_field 'Data do parecer', :with => '30/03/2013'
-      page.should have_field 'Data do contrato', :with => '31/03/2013'
-      page.should have_field 'Validade do contrato (meses)', :with => '6'
-      page.should have_field 'Observações gerais', :with => 'novas observacoes'
+      expect(page).to have_field 'Data do processo', :with => '21/03/2013'
+      expect(page).to have_field 'Processo administrativo', :with => '1/2012'
+      expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
+      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço global'
+      expect(page).to have_field 'Fonte de recurso', :with => 'Construção'
+      expect(page).to have_field 'Validade da proposta', :with => '10'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
+      expect(page).to have_field 'Índice de reajuste', :with => 'SELIC'
+      expect(page).to have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.tomorrow)
+      expect(page).to have_field 'Hora da entrega', :with => '15:00'
+      expect(page).to have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow + 1.day)
+      expect(page).to have_field 'Hora da abertura', :with => '15:00'
+      expect(page).to have_field 'Prazo de entrega', :with => '3'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'mês/meses'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Cheque'
+      expect(page).to have_field 'Valor da caução', :with => '60,00'
+      expect(page).to have_select 'Parecer jurídico', :selected => 'Contrário'
+      expect(page).to have_field 'Data do parecer', :with => '30/03/2013'
+      expect(page).to have_field 'Data do contrato', :with => '31/03/2013'
+      expect(page).to have_field 'Validade do contrato (meses)', :with => '6'
+      expect(page).to have_field 'Observações gerais', :with => 'novas observacoes'
     end
 
     within_tab 'Documentos' do
-      page.should_not have_content 'Fiscal'
+      expect(page).not_to have_content 'Fiscal'
 
-      page.should have_content 'Oficial'
+      expect(page).to have_content 'Oficial'
     end
 
     within_tab 'Dotações' do
-      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
-      page.should have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_field 'Valor previsto', :with => '20,00'
+      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Valor previsto', :with => '20,00'
 
-      page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Quantidade', :with => '5'
-      page.should have_field 'Valor unitário', :with => '4,00'
-      page.should have_field 'Valor total', :with => '20,00'
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '5'
+      expect(page).to have_field 'Valor unitário', :with => '4,00'
+      expect(page).to have_field 'Valor total', :with => '20,00'
 
-      page.should have_field 'Item', :with => '1'
+      expect(page).to have_field 'Item', :with => '1'
     end
   end
 
@@ -346,7 +346,7 @@ feature "LicitationProcesses" do
     click_link 'Novo processo licitatório'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Processo'
+      expect(page).to have_disabled_field 'Processo'
 
       fill_in 'Ano', :with => '2013'
       fill_in 'Data do processo', :with => '21/04/2013'
@@ -373,13 +373,13 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
 
     click_link "Editar processo licitatório"
 
     within_tab 'Principal' do
-      page.should have_field 'Processo', :with => last_licitation_process.process.succ.to_s
-      page.should have_field 'Número da licitação', :with => last_licitation_process.licitation_number.succ.to_s
+      expect(page).to have_field 'Processo', :with => last_licitation_process.process.succ.to_s
+      expect(page).to have_field 'Número da licitação', :with => last_licitation_process.licitation_number.succ.to_s
     end
   end
 
@@ -414,7 +414,7 @@ feature "LicitationProcesses" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -430,18 +430,18 @@ feature "LicitationProcesses" do
     click_link 'Editar processo licitatório'
 
     within_tab 'Dotações' do
-      page.should have_field 'Valor previsto', :with => "20,00"
-      page.should have_field 'Valor total dos itens', :with => "20,00"
+      expect(page).to have_field 'Valor previsto', :with => "20,00"
+      expect(page).to have_field 'Valor total dos itens', :with => "20,00"
 
       fill_in 'Valor total', :with => '21,00'
 
-      page.should have_field 'Valor total dos itens', :with => "21,00"
+      expect(page).to have_field 'Valor total dos itens', :with => "21,00"
     end
 
     click_button 'Salvar'
 
     within_tab 'Dotações' do
-      page.should have_content 'deve ser menor ou igual ao valor previsto (R$ 20,00)'
+      expect(page).to have_content 'deve ser menor ou igual ao valor previsto (R$ 20,00)'
     end
   end
 
@@ -462,7 +462,7 @@ feature "LicitationProcesses" do
       fill_in 'Quantidade', :with => '5'
       fill_in 'Valor unitário', :with => '10,00'
 
-      page.should have_field 'Valor total dos itens', :with => '50,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '50,00'
 
       click_button 'Adicionar Item'
 
@@ -471,13 +471,13 @@ feature "LicitationProcesses" do
         fill_in 'Valor unitário', :with => '20,00'
       end
 
-      page.should have_field 'Valor total dos itens', :with => '130,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '130,00'
 
       within '.item:last' do
         click_button 'Remover Item'
       end
 
-      page.should have_field 'Valor total dos itens', :with => '80,00'
+      expect(page).to have_field 'Valor total dos itens', :with => '80,00'
     end
   end
 
@@ -500,7 +500,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Documentos' do
-      page.should have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Documento', :with => 'Fiscal'
     end
 
     click_link 'Cancelar'
@@ -515,7 +515,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
 
     click_link 'Editar processo licitatório'
 
@@ -526,8 +526,8 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Documentos' do
-      page.should_not have_field 'Documento', :with => 'Fiscal'
-      page.should have_field 'Documento', :with => 'Oficial'
+      expect(page).not_to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Documento', :with => 'Oficial'
     end
   end
 
@@ -550,7 +550,7 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    page.should have_link 'Apurar'
+    expect(page).to have_link 'Apurar'
   end
 
   scenario "count link should not be available when envelope opening date is not the current date" do
@@ -564,7 +564,7 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    page.should_not have_link 'Apurar'
+    expect(page).not_to have_link 'Apurar'
   end
 
   scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
@@ -578,15 +578,15 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_button 'Salvar'
 
     within_tab 'Documentos' do
-      page.should_not have_button 'Remover'
+      expect(page).not_to have_button 'Remover'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should_not have_button 'Adicionar Item'
-      page.should_not have_button 'Remover Item'
+      expect(page).not_to have_button 'Adicionar Item'
+      expect(page).not_to have_button 'Remover Item'
     end
   end
 
@@ -601,7 +601,7 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    page.should_not have_link 'Lotes de itens'
+    expect(page).not_to have_link 'Lotes de itens'
   end
 
   scenario "should show the count report by type_of_calculation being lowest_total_price_by_item" do
@@ -617,16 +617,16 @@ feature "LicitationProcesses" do
 
     click_link 'Apurar'
 
-    page.should have_content 'Apuração: Menor preço total por item'
-    page.should have_content 'Antivirus'
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content '2'
-    page.should have_content '9,00'
-    page.should have_content '18,00'
+    expect(page).to have_content 'Apuração: Menor preço total por item'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content '2'
+    expect(page).to have_content '9,00'
+    expect(page).to have_content '18,00'
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being sort_participants_by_item" do
@@ -642,20 +642,20 @@ feature "LicitationProcesses" do
 
     click_link 'Apurar'
 
-    page.should have_content 'Apuração: Classificar participantes por item (pregão presencial)'
-    page.should have_content 'Antivirus'
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content '9,00'
-    page.should have_content '2'
-    page.should have_content '18,00'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content '10,00'
-    page.should have_content '2'
-    page.should have_content '20,00'
+    expect(page).to have_content 'Apuração: Classificar participantes por item (pregão presencial)'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content '9,00'
+    expect(page).to have_content '2'
+    expect(page).to have_content '18,00'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content '10,00'
+    expect(page).to have_content '2'
+    expect(page).to have_content '20,00'
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being lowest_price_by_lot" do
@@ -672,14 +672,14 @@ feature "LicitationProcesses" do
 
     click_link 'Apurar'
 
-    page.should have_content 'Apuração: Menor preço por lote'
-    page.should have_content 'Lote 1'
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content '18,00'
+    expect(page).to have_content 'Apuração: Menor preço por lote'
+    expect(page).to have_content 'Lote 1'
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content '18,00'
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being sort_participants_by_lot" do
@@ -696,16 +696,16 @@ feature "LicitationProcesses" do
 
     click_link 'Apurar'
 
-    page.should have_content 'Apuração: Classificar participantes por lote (pregão presencial)'
-    page.should have_content 'Lote 1'
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content '18,00'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content '20,00'
+    expect(page).to have_content 'Apuração: Classificar participantes por lote (pregão presencial)'
+    expect(page).to have_content 'Lote 1'
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content '18,00'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content '20,00'
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should show the count report by type_of_calculation being lowest_global_price" do
@@ -721,13 +721,13 @@ feature "LicitationProcesses" do
 
     click_link 'Apurar'
 
-    page.should have_content 'Apuração: Menor preço global'
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content '18,00'
+    expect(page).to have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content '18,00'
 
     # back to form
     click_link 'Voltar'
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should brings some filled fields when creating a new licitatoin process" do
@@ -742,10 +742,10 @@ feature "LicitationProcesses" do
     click_link 'Novo processo licitatório'
 
     within_tab 'Principal' do
-      page.should have_field 'Ano', :with => "#{Date.current.year}"
-      page.should have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
-      page.should have_field 'Processo administrativo', :with => "1/2012"
-      page.should have_field 'Abrev. modalidade', :with => "CV"
+      expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
+      expect(page).to have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
+      expect(page).to have_field 'Processo administrativo', :with => "1/2012"
+      expect(page).to have_field 'Abrev. modalidade', :with => "CV"
     end
   end
 
@@ -763,10 +763,10 @@ feature "LicitationProcesses" do
     click_link 'Cancelar'
 
     within_tab 'Principal' do
-      page.should have_field 'Processo', :with => '1'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data do processo', :with => '07/03/2012'
-      page.should have_field 'Número do protocolo', :with => '00088/2012'
+      expect(page).to have_field 'Processo', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data do processo', :with => '07/03/2012'
+      expect(page).to have_field 'Número do protocolo', :with => '00088/2012'
     end
   end
 
@@ -787,7 +787,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Valor total', :with => '20,00'
 
-      page.should have_field 'Valor unitário', :with => '0,00'
+      expect(page).to have_field 'Valor unitário', :with => '0,00'
     end
   end
 
@@ -834,7 +834,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    page.should_not have_content 'Routing Error No route matches'
+    expect(page).not_to have_content 'Routing Error No route matches'
   end
 
   scenario 'should filter by process' do
@@ -844,7 +844,7 @@ feature "LicitationProcesses" do
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
-      page.should have_css 'a', :count => 2
+      expect(page).to have_css 'a', :count => 2
     end
 
     click_link 'Filtrar Processos Licitatórios'
@@ -854,7 +854,7 @@ feature "LicitationProcesses" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_css 'a', :count => 1
+      expect(page).to have_css 'a', :count => 1
     end
   end
 end

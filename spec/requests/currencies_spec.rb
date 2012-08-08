@@ -16,12 +16,12 @@ feature "Currencies" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Moeda criada com sucesso.'
+    expect(page).to have_notice 'Moeda criada com sucesso.'
 
     click_link 'Real'
 
-    page.should have_field 'Nome', :with => 'Real'
-    page.should have_field 'Sigla', :with => 'R$'
+    expect(page).to have_field 'Nome', :with => 'Real'
+    expect(page).to have_field 'Sigla', :with => 'R$'
   end
 
   scenario 'update a currency' do
@@ -36,12 +36,12 @@ feature "Currencies" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Moeda editada com sucesso.'
+    expect(page).to have_notice 'Moeda editada com sucesso.'
 
     click_link 'Peso'
 
-    page.should have_field 'Nome', :with => 'Peso'
-    page.should have_field 'Sigla', :with => '$'
+    expect(page).to have_field 'Nome', :with => 'Peso'
+    expect(page).to have_field 'Sigla', :with => '$'
   end
 
   scenario 'destroy a currency' do
@@ -53,8 +53,8 @@ feature "Currencies" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Moeda apagada com sucesso.'
+    expect(page).to have_notice 'Moeda apagada com sucesso.'
 
-    page.should_not have_content 'Real'
+    expect(page).not_to have_content 'Real'
   end
 end

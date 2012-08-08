@@ -16,12 +16,12 @@ feature "RiskDegrees" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Grau de Risco criado com sucesso.'
+    expect(page).to have_notice 'Grau de Risco criado com sucesso.'
 
     click_link 'Médio'
 
-    page.should have_field 'Nível', :with => "1"
-    page.should have_field 'Nome', :with => "Médio"
+    expect(page).to have_field 'Nível', :with => "1"
+    expect(page).to have_field 'Nome', :with => "Médio"
   end
 
   scenario 'update an existent risk_degree' do
@@ -36,12 +36,12 @@ feature "RiskDegrees" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Grau de Risco editado com sucesso.'
+    expect(page).to have_notice 'Grau de Risco editado com sucesso.'
 
     click_link 'Muito Grave'
 
-    page.should have_field 'Nível', :with => "4"
-    page.should have_field 'Nome', :with => "Muito Grave"
+    expect(page).to have_field 'Nível', :with => "4"
+    expect(page).to have_field 'Nome', :with => "Muito Grave"
   end
 
   scenario 'destroy an existent risk_degree' do
@@ -53,8 +53,8 @@ feature "RiskDegrees" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Grau de Risco apagado com sucesso.'
+    expect(page).to have_notice 'Grau de Risco apagado com sucesso.'
 
-    page.should_not have_content 'Grave'
+    expect(page).not_to have_content 'Grave'
   end
 end

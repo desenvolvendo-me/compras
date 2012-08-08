@@ -12,17 +12,17 @@ feature "ExpenseKinds" do
     click_link 'Criar Tipo de Despesa'
 
     fill_in 'Descrição', :with => 'Pagamentos'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Despesa criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Despesa criado com sucesso.'
 
     click_link 'Pagamentos'
 
-    page.should have_field 'Descrição', :with => 'Pagamentos'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descrição', :with => 'Pagamentos'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent expense_kind' do
@@ -37,12 +37,12 @@ feature "ExpenseKinds" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Despesa editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Despesa editado com sucesso.'
 
     click_link 'Limpeza'
 
-    page.should have_field 'Descrição', :with => 'Limpeza'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descrição', :with => 'Limpeza'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent expense_kind' do
@@ -54,10 +54,10 @@ feature "ExpenseKinds" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipo de Despesa apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Despesa apagado com sucesso.'
 
-    page.should_not have_content 'Pagamentos'
-    page.should_not have_content 'Ativo'
+    expect(page).not_to have_content 'Pagamentos'
+    expect(page).not_to have_content 'Ativo'
   end
 
   scenario 'validate uniqueness of description' do
@@ -71,6 +71,6 @@ feature "ExpenseKinds" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

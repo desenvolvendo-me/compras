@@ -13,16 +13,16 @@ feature "Settings" do
 
     click_link 'Cidade padrão'
 
-    page.should have_field 'Chave', :with => 'Cidade padrão'
+    expect(page).to have_field 'Chave', :with => 'Cidade padrão'
 
     fill_in 'Valor', :with => '1'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Configuração editada com sucesso.'
+    expect(page).to have_notice 'Configuração editada com sucesso.'
 
     click_link 'Cidade padrão'
 
-    page.should have_field 'Valor', :with => '1'
+    expect(page).to have_field 'Valor', :with => '1'
   end
 end

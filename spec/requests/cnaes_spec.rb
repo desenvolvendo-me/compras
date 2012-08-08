@@ -19,13 +19,13 @@ feature "Cnaes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'CNAE criado com sucesso.'
+    expect(page).to have_notice 'CNAE criado com sucesso.'
 
     click_link 'Condomínios prediais'
 
-    page.should have_field 'Código', :with => '8112500'
-    page.should have_field 'Descrição', :with => 'Condomínios prediais'
-    page.should have_field 'Grau de risco', :with => 'Leve'
+    expect(page).to have_field 'Código', :with => '8112500'
+    expect(page).to have_field 'Descrição', :with => 'Condomínios prediais'
+    expect(page).to have_field 'Grau de risco', :with => 'Leve'
   end
 
   scenario 'update an existent cnae' do
@@ -42,13 +42,13 @@ feature "Cnaes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'CNAE editado com sucesso.'
+    expect(page).to have_notice 'CNAE editado com sucesso.'
 
     click_link 'Comércio varejista de bebidas'
 
-    page.should have_field 'Código', :with => '4723700'
-    page.should have_field 'Descrição', :with => 'Comércio varejista de bebidas'
-    page.should have_field 'Grau de risco', :with => 'Médio'
+    expect(page).to have_field 'Código', :with => '4723700'
+    expect(page).to have_field 'Descrição', :with => 'Comércio varejista de bebidas'
+    expect(page).to have_field 'Grau de risco', :with => 'Médio'
   end
 
   scenario 'destroy an existent cnae' do
@@ -60,8 +60,8 @@ feature "Cnaes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'CNAE apagado com sucesso.'
+    expect(page).to have_notice 'CNAE apagado com sucesso.'
 
-    page.should_not have_content 'Aluguel de outras máquinas'
+    expect(page).not_to have_content 'Aluguel de outras máquinas'
   end
 end

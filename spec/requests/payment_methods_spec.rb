@@ -15,11 +15,11 @@ feature "PaymentMethods" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Forma de Pagamento criada com sucesso.'
+    expect(page).to have_notice 'Forma de Pagamento criada com sucesso.'
 
     click_link 'Dinheiro'
 
-    page.should have_field 'Descrição', :with => 'Dinheiro'
+    expect(page).to have_field 'Descrição', :with => 'Dinheiro'
   end
 
   scenario 'update an existent payment_method' do
@@ -33,11 +33,11 @@ feature "PaymentMethods" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Forma de Pagamento editada com sucesso.'
+    expect(page).to have_notice 'Forma de Pagamento editada com sucesso.'
 
     click_link 'Cheque'
 
-    page.should have_field 'Descrição', :with => 'Cheque'
+    expect(page).to have_field 'Descrição', :with => 'Cheque'
   end
 
   scenario 'destroy an existent payment_method' do
@@ -49,9 +49,9 @@ feature "PaymentMethods" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Forma de Pagamento apagada com sucesso.'
+    expect(page).to have_notice 'Forma de Pagamento apagada com sucesso.'
 
-    page.should_not have_content 'Dinheiro'
+    expect(page).not_to have_content 'Dinheiro'
   end
 
   scenario 'validate presence of description' do
@@ -65,6 +65,6 @@ feature "PaymentMethods" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

@@ -21,7 +21,7 @@ feature "BudgetAllocations" do
     click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Código'
+      expect(page).to have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -45,36 +45,36 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria criado com sucesso.'
 
     click_link '1 - Alocação'
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2012 - Detran'
-      page.should have_disabled_field 'Código'
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
-      page.should have_field 'Função', :with => '04 - Administração'
-      page.should have_field 'Subfunção', :with => '01 - Administração Geral'
-      page.should have_field 'Programa do governo', :with => 'Habitação'
-      page.should have_field 'Ação do governo', :with => 'Ação Governamental'
-      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
-      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
-      page.should have_field 'Descrição', :with => 'Alocação'
-      page.should have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa'
-      page.should have_select 'Tipo de dívida', :selected => 'Nenhuma'
-      page.should have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
-      page.should have_checked_field 'Refinanciamento'
-      page.should_not have_checked_field 'Saúde'
-      page.should_not have_checked_field 'Recurso alienação'
-      page.should_not have_checked_field 'Educação'
-      page.should_not have_checked_field 'Previdência'
-      page.should_not have_checked_field 'Pessoal'
-      page.should have_field 'Data', :with => '17/02/2012'
+      expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Função', :with => '04 - Administração'
+      expect(page).to have_field 'Subfunção', :with => '01 - Administração Geral'
+      expect(page).to have_field 'Programa do governo', :with => 'Habitação'
+      expect(page).to have_field 'Ação do governo', :with => 'Ação Governamental'
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Descrição', :with => 'Alocação'
+      expect(page).to have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa'
+      expect(page).to have_select 'Tipo de dívida', :selected => 'Nenhuma'
+      expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
+      expect(page).to have_checked_field 'Refinanciamento'
+      expect(page).not_to have_checked_field 'Saúde'
+      expect(page).not_to have_checked_field 'Recurso alienação'
+      expect(page).not_to have_checked_field 'Educação'
+      expect(page).not_to have_checked_field 'Previdência'
+      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to have_field 'Data', :with => '17/02/2012'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo da programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+      expect(page).to have_select 'Tipo da programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
     end
   end
 
@@ -86,7 +86,7 @@ feature "BudgetAllocations" do
     click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Código'
+      expect(page).to have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -110,36 +110,36 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria criado com sucesso.'
 
     click_link '1 - Alocação para o ano de 2011'
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-      page.should have_disabled_field 'Código'
-      page.should have_field 'Código', :with => '2'
-      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
-      page.should have_field 'Função', :with => '05 - Execução'
-      page.should have_field 'Subfunção', :with => '02 - Supervisor'
-      page.should have_field 'Programa do governo', :with => 'Educação'
-      page.should have_field 'Ação do governo', :with => 'Ação Nacional'
-      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
-      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
-      page.should have_field 'Descrição', :with => 'Alocação para o ano de 2011'
-      page.should have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa do ano de 2011'
-      page.should have_select 'Tipo de dívida', :selected => 'Nenhuma'
-      page.should have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
-      page.should have_checked_field 'Refinanciamento'
-      page.should_not have_checked_field 'Saúde'
-      page.should_not have_checked_field 'Recurso alienação'
-      page.should_not have_checked_field 'Educação'
-      page.should_not have_checked_field 'Previdência'
-      page.should_not have_checked_field 'Pessoal'
-      page.should have_field 'Data', :with => '17/02/2012'
+      expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_field 'Código', :with => '2'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Função', :with => '05 - Execução'
+      expect(page).to have_field 'Subfunção', :with => '02 - Supervisor'
+      expect(page).to have_field 'Programa do governo', :with => 'Educação'
+      expect(page).to have_field 'Ação do governo', :with => 'Ação Nacional'
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
+      expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Descrição', :with => 'Alocação para o ano de 2011'
+      expect(page).to have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa do ano de 2011'
+      expect(page).to have_select 'Tipo de dívida', :selected => 'Nenhuma'
+      expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
+      expect(page).to have_checked_field 'Refinanciamento'
+      expect(page).not_to have_checked_field 'Saúde'
+      expect(page).not_to have_checked_field 'Recurso alienação'
+      expect(page).not_to have_checked_field 'Educação'
+      expect(page).not_to have_checked_field 'Previdência'
+      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to have_field 'Data', :with => '17/02/2012'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo da programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+      expect(page).to have_select 'Tipo da programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
     end
   end
 
@@ -152,7 +152,7 @@ feature "BudgetAllocations" do
     click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Código'
+      expect(page).to have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
@@ -176,36 +176,36 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Dotação Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria criado com sucesso.'
 
     click_link '1 - Alocação para o ano de 2012'
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2012 - Detran'
-      page.should have_disabled_field 'Código'
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
-      page.should have_field 'Função', :with => '05 - Execução'
-      page.should have_field 'Subfunção', :with => '02 - Supervisor'
-      page.should have_field 'Programa do governo', :with => 'Educação'
-      page.should have_field 'Ação do governo', :with => 'Ação Nacional'
-      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
-      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
-      page.should have_field 'Descrição', :with => 'Alocação para o ano de 2012'
-      page.should have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa do ano de 2012'
-      page.should have_select 'Tipo de dívida', :selected => 'Nenhuma'
-      page.should have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
-      page.should have_checked_field 'Refinanciamento'
-      page.should_not have_checked_field 'Saúde'
-      page.should_not have_checked_field 'Recurso alienação'
-      page.should_not have_checked_field 'Educação'
-      page.should_not have_checked_field 'Previdência'
-      page.should_not have_checked_field 'Pessoal'
-      page.should have_field 'Data', :with => '17/02/2012'
+      expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Função', :with => '05 - Execução'
+      expect(page).to have_field 'Subfunção', :with => '02 - Supervisor'
+      expect(page).to have_field 'Programa do governo', :with => 'Educação'
+      expect(page).to have_field 'Ação do governo', :with => 'Ação Nacional'
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
+      expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Descrição', :with => 'Alocação para o ano de 2012'
+      expect(page).to have_field 'Objetivo', :with => 'Manutenção da Unidade Administrativa do ano de 2012'
+      expect(page).to have_select 'Tipo de dívida', :selected => 'Nenhuma'
+      expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
+      expect(page).to have_checked_field 'Refinanciamento'
+      expect(page).not_to have_checked_field 'Saúde'
+      expect(page).not_to have_checked_field 'Recurso alienação'
+      expect(page).not_to have_checked_field 'Educação'
+      expect(page).not_to have_checked_field 'Previdência'
+      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to have_field 'Data', :with => '17/02/2012'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo da programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+      expect(page).to have_select 'Tipo da programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
     end
   end
 
@@ -215,17 +215,17 @@ feature "BudgetAllocations" do
     click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Programação' do
-      page.should have_disabled_field 'Valor'
+      expect(page).to have_disabled_field 'Valor'
 
       select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
-      page.should have_field 'Valor', :with => ''
-      page.should have_disabled_field 'Valor'
-      page.should have_content '0,00'
+      expect(page).to have_field 'Valor', :with => ''
+      expect(page).to have_disabled_field 'Valor'
+      expect(page).to have_content '0,00'
 
       select 'Dividir valor previsto por 12', :from => 'Tipo'
       fill_in 'Valor', :with => '222,22'
-      page.should have_content '18,51'
-      page.should have_content '18,61'
+      expect(page).to have_content '18,51'
+      expect(page).to have_content '18,61'
     end
   end
 
@@ -272,37 +272,37 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Dotação Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
-      page.should have_field 'Estrutura orçamentaria', :with => '1.2 - Secretaria de Desenvolvimento'
-      page.should have_field 'Função', :with => '04 - Administração'
-      page.should have_field 'Subfunção', :with => '02 - Gerente Geral'
-      page.should have_field 'Programa do governo', :with => 'Educação'
-      page.should have_field 'Ação do governo', :with => 'Ação Nacional'
-      page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
-      page.should have_field 'Recurso', :with => 'Construção'
-      page.should have_field 'Descrição', :with => 'Novo nome'
-      page.should have_field 'Objetivo', :with => 'Construção da Unidade Administrativa'
-      page.should have_select 'Tipo de dívida', :selected => 'Contrato'
-      page.should have_field 'Tipo de dotação', :with => 'Dotação Presidencial'
-      page.should_not have_checked_field 'Refinanciamento'
-      page.should have_checked_field 'Saúde'
-      page.should_not have_checked_field 'Recurso alienação'
-      page.should_not have_checked_field 'Educação'
-      page.should_not have_checked_field 'Previdência'
-      page.should_not have_checked_field 'Pessoal'
-      page.should have_field 'Data', :with => '01/02/2012'
+      expect(page).to have_field 'Descritor', :with => '2013 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1.2 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Função', :with => '04 - Administração'
+      expect(page).to have_field 'Subfunção', :with => '02 - Gerente Geral'
+      expect(page).to have_field 'Programa do governo', :with => 'Educação'
+      expect(page).to have_field 'Ação do governo', :with => 'Ação Nacional'
+      expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
+      expect(page).to have_field 'Recurso', :with => 'Construção'
+      expect(page).to have_field 'Descrição', :with => 'Novo nome'
+      expect(page).to have_field 'Objetivo', :with => 'Construção da Unidade Administrativa'
+      expect(page).to have_select 'Tipo de dívida', :selected => 'Contrato'
+      expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Presidencial'
+      expect(page).not_to have_checked_field 'Refinanciamento'
+      expect(page).to have_checked_field 'Saúde'
+      expect(page).not_to have_checked_field 'Recurso alienação'
+      expect(page).not_to have_checked_field 'Educação'
+      expect(page).not_to have_checked_field 'Previdência'
+      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to have_field 'Data', :with => '01/02/2012'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo da programação', :selected => 'Dividir valor previsto por 12'
-      page.should have_field 'Valor', :with => '800,00'
+      expect(page).to have_select 'Tipo da programação', :selected => 'Dividir valor previsto por 12'
+      expect(page).to have_field 'Valor', :with => '800,00'
     end
   end
 
@@ -314,15 +314,15 @@ feature "BudgetAllocations" do
     click_link 'Criar Dotação Orçamentaria'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Subfunção'
+      expect(page).to have_disabled_field 'Subfunção'
 
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
 
-      page.should_not have_disabled_field 'Subfunção'
+      expect(page).not_to have_disabled_field 'Subfunção'
 
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição' do
-        page.should have_field 'filter_function', :with => '04 - Administração'
+        expect(page).to have_field 'filter_function', :with => '04 - Administração'
       end
     end
   end
@@ -337,7 +337,7 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      page.should_not have_disabled_field 'Subfunção'
+      expect(page).not_to have_disabled_field 'Subfunção'
     end
   end
 
@@ -356,8 +356,8 @@ feature "BudgetAllocations" do
 
       clear_modal 'Função'
 
-      page.should have_disabled_field 'Subfunção'
-      page.should have_field 'Função', :with => ''
+      expect(page).to have_disabled_field 'Subfunção'
+      expect(page).to have_field 'Função', :with => ''
     end
   end
 
@@ -375,7 +375,7 @@ feature "BudgetAllocations" do
 
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
 
-      page.should have_field 'Subfunção', :with => ''
+      expect(page).to have_field 'Subfunção', :with => ''
     end
   end
 
@@ -390,9 +390,9 @@ feature "BudgetAllocations" do
 
     click_link "Apagar", :confirm => true
 
-    page.should have_notice 'Dotação Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria apagado com sucesso.'
 
-    page.should_not have_content 'Alocação extra'
+    expect(page).not_to have_content 'Alocação extra'
   end
 
   scenario 'validates uniqueness of name' do
@@ -409,7 +409,7 @@ feature "BudgetAllocations" do
     click_button 'Salvar'
 
     within_tab 'Principal' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -425,8 +425,8 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    page.should have_content 'Manutenção e Reparo'
-    page.should_not have_content 'Alocação'
+    expect(page).to have_content 'Manutenção e Reparo'
+    expect(page).not_to have_content 'Alocação'
   end
 
   scenario 'should filter by descriptor' do
@@ -441,8 +441,8 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    page.should_not have_content 'Manutenção e Reparo'
-    page.should have_content 'Alocação'
+    expect(page).not_to have_content 'Manutenção e Reparo'
+    expect(page).to have_content 'Alocação'
   end
 
   scenario 'should filter by subfunction' do
@@ -457,8 +457,8 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    page.should have_content 'Manutenção e Reparo'
-    page.should_not have_content 'Alocação'
+    expect(page).to have_content 'Manutenção e Reparo'
+    expect(page).not_to have_content 'Alocação'
   end
 
   scenario 'should filter by government program' do
@@ -473,8 +473,8 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    page.should have_content 'Manutenção e Reparo'
-    page.should_not have_content 'Alocação'
+    expect(page).to have_content 'Manutenção e Reparo'
+    expect(page).not_to have_content 'Alocação'
   end
 
   scenario 'should filter by government action' do
@@ -489,8 +489,8 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    page.should have_content 'Manutenção e Reparo'
-    page.should_not have_content 'Alocação'
+    expect(page).to have_content 'Manutenção e Reparo'
+    expect(page).not_to have_content 'Alocação'
   end
 
   scenario 'should filter by expense nature' do
@@ -505,8 +505,8 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    page.should have_content 'Manutenção e Reparo'
-    page.should_not have_content 'Alocação'
+    expect(page).to have_content 'Manutenção e Reparo'
+    expect(page).not_to have_content 'Alocação'
   end
 
   scenario 'should filter by function' do
@@ -521,7 +521,7 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    page.should have_content 'Manutenção e Reparo'
-    page.should_not have_content 'Alocação'
+    expect(page).to have_content 'Manutenção e Reparo'
+    expect(page).not_to have_content 'Alocação'
   end
 end

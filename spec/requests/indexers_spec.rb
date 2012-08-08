@@ -24,14 +24,14 @@ feature "Indexers" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Indexador criado com sucesso.'
+    expect(page).to have_notice 'Indexador criado com sucesso.'
 
     click_link 'SELIC'
 
-    page.should have_field 'Nome', :with => 'SELIC'
-    page.should have_field 'Moeda', :with => 'Real'
-    page.should have_field 'Data', :with => '01/05/2011'
-    page.should have_field 'Valor', :with => '0,990000'
+    expect(page).to have_field 'Nome', :with => 'SELIC'
+    expect(page).to have_field 'Moeda', :with => 'Real'
+    expect(page).to have_field 'Data', :with => '01/05/2011'
+    expect(page).to have_field 'Valor', :with => '0,990000'
   end
 
   scenario 'update a indexer' do
@@ -45,11 +45,11 @@ feature "Indexers" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Indexador editado com sucesso.'
+    expect(page).to have_notice 'Indexador editado com sucesso.'
 
     click_link 'SELIC'
 
-    page.should have_field 'Valor', :with => '0,840000'
+    expect(page).to have_field 'Valor', :with => '0,840000'
   end
 
   scenario 'destroy an existent indexer' do
@@ -61,11 +61,11 @@ feature "Indexers" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Indexador apagado com sucesso.'
+    expect(page).to have_notice 'Indexador apagado com sucesso.'
 
-    page.should_not have_content 'SELIC'
-    page.should_not have_content 'Real'
-    page.should_not have_content '01/05/2011'
-    page.should_not have_content '0,990000'
+    expect(page).not_to have_content 'SELIC'
+    expect(page).not_to have_content 'Real'
+    expect(page).not_to have_content '01/05/2011'
+    expect(page).not_to have_content '0,990000'
   end
 end

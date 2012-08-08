@@ -16,18 +16,18 @@ feature 'ContractTerminations' do
 
     click_link 'Rescisões'
 
-    page.should have_content 'Rescisões do Contrato 001'
-    page.should have_link 'Voltar para o Contrato 001'
+    expect(page).to have_content 'Rescisões do Contrato 001'
+    expect(page).to have_link 'Voltar para o Contrato 001'
 
     click_link 'Criar Rescisão Contratual'
 
-    page.should have_content 'Criar nova Rescisão Contratual para Contrato 001'
+    expect(page).to have_content 'Criar nova Rescisão Contratual para Contrato 001'
 
-    page.should have_disabled_field 'Número da rescisão'
-    page.should have_field 'Número da rescisão', :with => '1'
+    expect(page).to have_disabled_field 'Número da rescisão'
+    expect(page).to have_field 'Número da rescisão', :with => '1'
 
-    page.should have_disabled_field 'Ano'
-    page.should have_field 'Ano', :with => "#{Date.current.year}"
+    expect(page).to have_disabled_field 'Ano'
+    expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
     fill_in 'Motivo da rescisão', :with => 'Foo Bar'
     fill_in 'Data do termo', :with => '15/06/2012'
@@ -40,34 +40,34 @@ feature 'ContractTerminations' do
 
     click_button 'Salvar'
 
-    page.should have_content 'Rescisão Contratual criado com sucesso.'
+    expect(page).to have_content 'Rescisão Contratual criado com sucesso.'
 
     click_link "1/#{Date.current.year}"
 
-    page.should have_content "Editar Rescisão 1/#{Date.current.year} do Contrato 001"
+    expect(page).to have_content "Editar Rescisão 1/#{Date.current.year} do Contrato 001"
 
-    page.should have_link 'Anular'
+    expect(page).to have_link 'Anular'
 
-    page.should have_disabled_field 'Número da rescisão'
-    page.should have_field 'Número da rescisão', :with => '1'
+    expect(page).to have_disabled_field 'Número da rescisão'
+    expect(page).to have_field 'Número da rescisão', :with => '1'
 
-    page.should have_disabled_field 'Ano'
-    page.should have_field 'Ano', :with => "#{Date.current.year}"
+    expect(page).to have_disabled_field 'Ano'
+    expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
 
-    page.should have_field 'Motivo da rescisão', :with => 'Foo Bar'
-    page.should have_field 'Data do termo', :with => '15/06/2012'
-    page.should have_field 'Data da rescisão', :with => '20/06/2012'
-    page.should have_field 'Data da publicação', :with => '19/06/2012'
-    page.should have_field 'Local da publicação', :with => 'Jornal Oficial do Bairro'
-    page.should have_field 'Valor da multa', :with => '150,00'
-    page.should have_field 'Valor da indenização', :with => '30,00'
-    page.should have_link 'example_document.txt'
+    expect(page).to have_field 'Motivo da rescisão', :with => 'Foo Bar'
+    expect(page).to have_field 'Data do termo', :with => '15/06/2012'
+    expect(page).to have_field 'Data da rescisão', :with => '20/06/2012'
+    expect(page).to have_field 'Data da publicação', :with => '19/06/2012'
+    expect(page).to have_field 'Local da publicação', :with => 'Jornal Oficial do Bairro'
+    expect(page).to have_field 'Valor da multa', :with => '150,00'
+    expect(page).to have_field 'Valor da indenização', :with => '30,00'
+    expect(page).to have_link 'example_document.txt'
 
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_link 'Apagar'
 
     click_link 'Cancelar'
 
-    page.should have_content 'Rescisões do Contrato 001'
+    expect(page).to have_content 'Rescisões do Contrato 001'
   end
 
   scenario 'editing a contract termination' do
@@ -85,11 +85,11 @@ feature 'ContractTerminations' do
 
     click_button 'Salvar'
 
-    page.should have_content 'Rescisão Contratual editado com sucesso.'
+    expect(page).to have_content 'Rescisão Contratual editado com sucesso.'
 
     click_link '1/2012'
 
-    page.should have_field 'Motivo da rescisão', :with => 'Motivo vai aqui'
+    expect(page).to have_field 'Motivo da rescisão', :with => 'Motivo vai aqui'
   end
 
   scenario 'contract termination annulled should have fields disabled' do
@@ -103,19 +103,19 @@ feature 'ContractTerminations' do
 
     click_link '1/2012'
 
-    page.should have_disabled_field 'Número da rescisão'
-    page.should have_disabled_field 'Ano'
-    page.should have_disabled_field 'Motivo da rescisão'
-    page.should have_disabled_field 'Data do termo'
-    page.should have_disabled_field 'Data da rescisão'
-    page.should have_disabled_field 'Data da publicação'
-    page.should have_disabled_field 'Local da publicação'
-    page.should have_disabled_field 'Valor da multa'
-    page.should have_disabled_field 'Valor da indenização'
+    expect(page).to have_disabled_field 'Número da rescisão'
+    expect(page).to have_disabled_field 'Ano'
+    expect(page).to have_disabled_field 'Motivo da rescisão'
+    expect(page).to have_disabled_field 'Data do termo'
+    expect(page).to have_disabled_field 'Data da rescisão'
+    expect(page).to have_disabled_field 'Data da publicação'
+    expect(page).to have_disabled_field 'Local da publicação'
+    expect(page).to have_disabled_field 'Valor da multa'
+    expect(page).to have_disabled_field 'Valor da indenização'
 
-    page.should_not have_link 'Anular'
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_link 'Anular'
+    expect(page).not_to have_button 'Salvar'
 
-    page.should have_link 'Anulação'
+    expect(page).to have_link 'Anulação'
   end
 end

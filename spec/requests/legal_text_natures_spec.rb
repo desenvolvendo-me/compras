@@ -15,11 +15,11 @@ feature "LegalTextNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza de Textos Jurídicos criada com sucesso.'
+    expect(page).to have_notice 'Natureza de Textos Jurídicos criada com sucesso.'
 
     click_link 'Natureza Cívica'
 
-    page.should have_field 'Descrição', :with => 'Natureza Cívica'
+    expect(page).to have_field 'Descrição', :with => 'Natureza Cívica'
   end
 
   scenario 'update an existent legal_texts_nature' do
@@ -33,11 +33,11 @@ feature "LegalTextNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza de Textos Jurídicos editada com sucesso.'
+    expect(page).to have_notice 'Natureza de Textos Jurídicos editada com sucesso.'
 
     click_link 'Natureza Jurídica'
 
-    page.should have_field 'Descrição', :with => 'Natureza Jurídica'
+    expect(page).to have_field 'Descrição', :with => 'Natureza Jurídica'
   end
 
   scenario 'destroy an existent legal_texts_nature' do
@@ -49,9 +49,9 @@ feature "LegalTextNatures" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Natureza de Textos Jurídicos apagada com sucesso.'
+    expect(page).to have_notice 'Natureza de Textos Jurídicos apagada com sucesso.'
 
-    page.should_not have_content 'Natureza Cívica'
+    expect(page).not_to have_content 'Natureza Cívica'
   end
 
   scenario 'validate uniqueness of name' do
@@ -65,6 +65,6 @@ feature "LegalTextNatures" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

@@ -17,13 +17,13 @@ feature "ServiceOrContractType" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
 
     click_link 'Contratação de estagiários'
 
-    page.should have_field 'Código do TCE', :with => '123'
-    page.should have_field 'Descrição', :with => 'Contratação de estagiários'
-    page.should have_select 'Finalidade', :selected => 'Estagiário'
+    expect(page).to have_field 'Código do TCE', :with => '123'
+    expect(page).to have_field 'Descrição', :with => 'Contratação de estagiários'
+    expect(page).to have_select 'Finalidade', :selected => 'Estagiário'
   end
 
   scenario 'validates uniqueness of description' do
@@ -37,9 +37,9 @@ feature "ServiceOrContractType" do
 
     click_button 'Salvar'
 
-    page.should_not have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
+    expect(page).not_to have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'update an existent service' do
@@ -53,13 +53,13 @@ feature "ServiceOrContractType" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Serviço ou Contrato editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Serviço ou Contrato editado com sucesso.'
 
     click_link 'Contratação de 10 estagiários'
 
-    page.should have_field 'Código do TCE', :with => '123'
-    page.should have_field 'Descrição', :with => 'Contratação de 10 estagiários'
-    page.should have_select 'Finalidade', :selected => 'Estagiário'
+    expect(page).to have_field 'Código do TCE', :with => '123'
+    expect(page).to have_field 'Descrição', :with => 'Contratação de 10 estagiários'
+    expect(page).to have_select 'Finalidade', :selected => 'Estagiário'
   end
 
   scenario 'destroy an existent service' do
@@ -71,10 +71,10 @@ feature "ServiceOrContractType" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipo de Serviço ou Contrato apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Serviço ou Contrato apagado com sucesso.'
 
-    page.should_not have_content '123'
-    page.should_not have_content 'Contratação de estagiários'
-    page.should_not have_content 'Estagiário'
+    expect(page).not_to have_content '123'
+    expect(page).not_to have_content 'Contratação de estagiários'
+    expect(page).not_to have_content 'Estagiário'
   end
 end

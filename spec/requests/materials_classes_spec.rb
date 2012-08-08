@@ -20,14 +20,14 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Classe de Materiais criado com sucesso.'
+    expect(page).to have_notice 'Classe de Materiais criado com sucesso.'
 
     click_link 'Materiais de Escritório'
 
-    page.should have_field 'Grupo', :with => '01 - Informática'
-    page.should have_field 'Código', :with => '01'
-    page.should have_field 'Descrição', :with => 'Materiais de Escritório'
-    page.should have_field 'Detalhamento', :with => 'materiais para escritório'
+    expect(page).to have_field 'Grupo', :with => '01 - Informática'
+    expect(page).to have_field 'Código', :with => '01'
+    expect(page).to have_field 'Descrição', :with => 'Materiais de Escritório'
+    expect(page).to have_field 'Detalhamento', :with => 'materiais para escritório'
   end
 
   scenario 'update an existent materials_class' do
@@ -45,14 +45,14 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Classe de Materiais editado com sucesso.'
+    expect(page).to have_notice 'Classe de Materiais editado com sucesso.'
 
     click_link 'Lampada'
 
-    page.should have_field 'Grupo', :with => '03 - Componentes elétricos e eletrônicos'
-    page.should have_field 'Código', :with => '02'
-    page.should have_field 'Descrição', :with => 'Lampada'
-    page.should have_field 'Detalhamento', :with => 'descricao'
+    expect(page).to have_field 'Grupo', :with => '03 - Componentes elétricos e eletrônicos'
+    expect(page).to have_field 'Código', :with => '02'
+    expect(page).to have_field 'Descrição', :with => 'Lampada'
+    expect(page).to have_field 'Detalhamento', :with => 'descricao'
   end
 
   scenario 'destroy an existent materials_class' do
@@ -64,11 +64,11 @@ feature "MaterialsClasses" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Classe de Materiais apagado com sucesso.'
+    expect(page).to have_notice 'Classe de Materiais apagado com sucesso.'
 
-    page.should_not have_content '01 - Informática'
-    page.should_not have_content 'Software'
-    page.should_not have_content 'Softwares de computador'
+    expect(page).not_to have_content '01 - Informática'
+    expect(page).not_to have_content 'Software'
+    expect(page).not_to have_content 'Softwares de computador'
   end
 
   scenario 'should validate uniqueness of class_number scoped to materials_group' do
@@ -83,7 +83,7 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'should not validate uniqueness of class_number when not scoped to materials_group' do
@@ -99,7 +99,7 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    page.should_not have_content 'já está em uso'
+    expect(page).not_to have_content 'já está em uso'
   end
 
   scenario 'should validate uniqueness of description scoped to materials_class' do
@@ -115,7 +115,7 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'should not validate uniqueness of description when is not scoped to materials_class' do
@@ -131,6 +131,6 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    page.should_not have_content 'já está em uso'
+    expect(page).not_to have_content 'já está em uso'
   end
 end

@@ -20,13 +20,13 @@ feature "LicitationProcessLots" do
 
     click_link 'Lotes de itens'
 
-    page.should have_link 'Criar Lote de itens'
+    expect(page).to have_link 'Criar Lote de itens'
 
-    page.should have_link lot.to_s
+    expect(page).to have_link lot.to_s
 
     click_link 'Voltar ao processo licitatório'
 
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario 'creating a new lot' do
@@ -49,15 +49,15 @@ feature "LicitationProcessLots" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_content 'Lote de itens criado com sucesso.'
 
     within_records do
       click_link licitation_process.licitation_process_lots.last.to_s
     end
 
-    page.should have_field 'Observações', :with => 'observacoes teste'
-    page.should have_content '01.01.00001 - Antivirus'
-    page.should have_content '10,00'
+    expect(page).to have_field 'Observações', :with => 'observacoes teste'
+    expect(page).to have_content '01.01.00001 - Antivirus'
+    expect(page).to have_content '10,00'
   end
 
 
@@ -74,7 +74,7 @@ feature "LicitationProcessLots" do
 
     click_link 'Lotes de itens'
 
-    page.should_not have_link 'Criar Lote de itens'
+    expect(page).not_to have_link 'Criar Lote de itens'
   end
 
   scenario 'should not have Salvar neither Apagar buttons when updating a lot if licitation process is not updatable' do
@@ -94,9 +94,9 @@ feature "LicitationProcessLots" do
       page.find('a').click
     end
 
-    page.should_not have_button 'Salvar'
-    page.should_not have_button 'Apagar'
-    page.should_not have_button 'Remover'
+    expect(page).not_to have_button 'Salvar'
+    expect(page).not_to have_button 'Apagar'
+    expect(page).not_to have_button 'Remover'
   end
 
   scenario 'all fields should be disabled when updating a lot if licitation process is not updatable' do
@@ -116,8 +116,8 @@ feature "LicitationProcessLots" do
       page.find('a').click
     end
 
-    page.should have_disabled_field 'Observações'
-    page.should have_disabled_field 'Itens'
+    expect(page).to have_disabled_field 'Observações'
+    expect(page).to have_disabled_field 'Itens'
   end
 
   scenario 'updating an existing lot' do
@@ -142,15 +142,15 @@ feature "LicitationProcessLots" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Lote de itens editado com sucesso.'
+    expect(page).to have_notice 'Lote de itens editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Observações', :with => 'Arame'
-    page.should have_content '01.01.00001 - Antivirus'
-    page.should have_content '02.02.00002 - Arame comum'
+    expect(page).to have_field 'Observações', :with => 'Arame'
+    expect(page).to have_content '01.01.00001 - Antivirus'
+    expect(page).to have_content '02.02.00002 - Arame comum'
   end
 
   scenario 'deleting a lot' do
@@ -172,10 +172,10 @@ feature "LicitationProcessLots" do
 
     click_link 'Apagar'
 
-    page.should have_notice 'Lote de itens apagado com sucesso'
+    expect(page).to have_notice 'Lote de itens apagado com sucesso'
 
     within_records do
-      page.should_not have_css 'a'
+      expect(page).not_to have_css 'a'
     end
   end
 
@@ -199,8 +199,8 @@ feature "LicitationProcessLots" do
     within_modal 'Itens' do
       click_button 'Pesquisar'
 
-      page.should_not have_content '01.01.00001 - Antivirus'
-      page.should have_content '02.02.00002 - Arame comum'
+      expect(page).not_to have_content '01.01.00001 - Antivirus'
+      expect(page).to have_content '02.02.00002 - Arame comum'
 
       click_record '02.02.00002 - Arame comum'
     end
@@ -208,8 +208,8 @@ feature "LicitationProcessLots" do
     within_modal 'Itens' do
       click_button 'Pesquisar'
 
-      page.should_not have_content '01.01.00001 - Antivirus'
-      page.should_not have_content '02.02.00002 - Arame comum'
+      expect(page).not_to have_content '01.01.00001 - Antivirus'
+      expect(page).not_to have_content '02.02.00002 - Arame comum'
     end
   end
 
@@ -235,35 +235,35 @@ feature "LicitationProcessLots" do
       click_button 'Pesquisar'
 
       # item 'Arame farpado' is not part of the administrative process and should not appear
-      page.should_not have_content 'Arame farpado'
+      expect(page).not_to have_content 'Arame farpado'
 
-      page.should have_content 'Antivirus'
-      page.should have_content 'Arame comum'
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content 'Arame comum'
     end
 
     fill_modal 'Itens', :with => '01.01.00001 - Antivirus', :field => 'Material'
 
     click_button 'Salvar'
 
-    page.should have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_content 'Lote de itens criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_content 'Antivirus'
+    expect(page).to have_content 'Antivirus'
 
     fill_modal 'Itens', :with => '', :field => 'Material' do
       click_button 'Pesquisar'
 
       # item 'Arame farpado' is not part of the administrative process and should not appear
-      page.should_not have_content 'Arame farpado'
+      expect(page).not_to have_content 'Arame farpado'
 
       # item 'Arame comum' is available and should appear
-      page.should have_content 'Arame comum'
+      expect(page).to have_content 'Arame comum'
 
       # item 'Antivirus' was taken and should not appear
-      page.should_not have_content 'Antivirus'
+      expect(page).not_to have_content 'Antivirus'
     end
 
     # removing 'Antivirus' item
@@ -273,25 +273,25 @@ feature "LicitationProcessLots" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Lote de itens editado com sucesso.'
+    expect(page).to have_content 'Lote de itens editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_content 'Arame comum'
+    expect(page).to have_content 'Arame comum'
 
     fill_modal 'Itens', :with => '', :field => 'Material' do
       click_button 'Pesquisar'
 
       # item 'Arame farpado' is not part of the administrative process and should not appear
-      page.should_not have_content 'Arame farpado'
+      expect(page).not_to have_content 'Arame farpado'
 
       # item 'Arame comum' was taken available and should not appear
-      page.should_not have_content 'Arame comum'
+      expect(page).not_to have_content 'Arame comum'
 
       # item 'Antivirus' is available now and should appear
-      page.should have_content 'Antivirus'
+      expect(page).to have_content 'Antivirus'
     end
   end
 
@@ -308,7 +308,7 @@ feature "LicitationProcessLots" do
 
     click_link 'Lotes de itens'
 
-    page.should have_content "Lotes de itens do Processo Licitatório 1/2013"
+    expect(page).to have_content "Lotes de itens do Processo Licitatório 1/2013"
   end
 
   scenario "edit shoud have title Editar Lotes de itens do Processo Licitatório 1/2013" do
@@ -337,7 +337,7 @@ feature "LicitationProcessLots" do
       page.find('a').click
     end
 
-    page.should have_content "Editar Lote 1 do Processo Licitatório 1/2013"
+    expect(page).to have_content "Editar Lote 1 do Processo Licitatório 1/2013"
   end
 
   scenario "new shoud have title Criar Lotes de itens no Processo Licitatório 1/2013" do
@@ -355,6 +355,6 @@ feature "LicitationProcessLots" do
 
     click_link 'Criar Lote de itens'
 
-    page.should have_content "Criar Lote de itens no Processo Licitatório 1/2013"
+    expect(page).to have_content "Criar Lote de itens no Processo Licitatório 1/2013"
   end
 end

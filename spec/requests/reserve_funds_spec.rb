@@ -20,14 +20,14 @@ feature "ReserveFunds" do
 
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
 
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Reservado'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Reservado'
 
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
     fill_in 'Data', :with => '22/02/2012'
     fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
-    page.should have_field 'Valor reservado', :with => '10,50'
+    expect(page).to have_field 'Valor reservado', :with => '10,50'
 
     fill_in 'Valor *', :with => '10,00'
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
@@ -41,21 +41,21 @@ feature "ReserveFunds" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Reserva de Dotação criado com sucesso.'
+    expect(page).to have_notice 'Reserva de Dotação criado com sucesso.'
 
     click_link '2012'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Tipo', :with => 'Licitação'
-    page.should have_field 'Data', :with => '22/02/2012'
-    page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
-    page.should have_field 'Valor reservado', :with => '20,50'
-    page.should have_field 'Valor *', :with => '10,00'
-    page.should have_field 'Modalidade', :with => 'Pública'
-    page.should have_field 'Processo licitatório', :with => '1/2012'
-    page.should have_field 'Processo administrativo', :with => '1/2012'
-    page.should have_field 'Favorecido', :with => 'Wenderson Malheiros'
-    page.should have_field 'Motivo', :with => 'Motivo para reserva de dotação'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Tipo', :with => 'Licitação'
+    expect(page).to have_field 'Data', :with => '22/02/2012'
+    expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+    expect(page).to have_field 'Valor reservado', :with => '20,50'
+    expect(page).to have_field 'Valor *', :with => '10,00'
+    expect(page).to have_field 'Modalidade', :with => 'Pública'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2012'
+    expect(page).to have_field 'Favorecido', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Motivo', :with => 'Motivo para reserva de dotação'
   end
 
   scenario 'should have all fields disabled when editing an existent reserve fund' do
@@ -68,24 +68,24 @@ feature "ReserveFunds" do
 
     should_not have_button 'Salvar'
 
-    page.should have_disabled_field 'Descritor'
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_disabled_field 'Tipo'
-    page.should have_field 'Tipo', :with => 'Licitação'
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => '22/02/2012'
-    page.should have_disabled_field 'Dotação orçamentaria'
-    page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
-    page.should have_disabled_field 'Valor *'
-    page.should have_field 'Valor *', :with => '10,50'
-    page.should have_disabled_field 'Modalidade'
-    page.should have_field 'Modalidade', :with => 'Pública'
-    page.should have_disabled_field 'Processo licitatório'
-    page.should have_disabled_field 'Processo administrativo'
-    page.should have_disabled_field 'Favorecido'
-    page.should have_field 'Favorecido', :with => 'Wenderson Malheiros'
-    page.should have_disabled_field 'Motivo'
-    page.should have_field 'Motivo', :with => 'Motivo para a reserva de dotação'
+    expect(page).to have_disabled_field 'Descritor'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_disabled_field 'Tipo'
+    expect(page).to have_field 'Tipo', :with => 'Licitação'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', :with => '22/02/2012'
+    expect(page).to have_disabled_field 'Dotação orçamentaria'
+    expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+    expect(page).to have_disabled_field 'Valor *'
+    expect(page).to have_field 'Valor *', :with => '10,50'
+    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_field 'Modalidade', :with => 'Pública'
+    expect(page).to have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Processo administrativo'
+    expect(page).to have_disabled_field 'Favorecido'
+    expect(page).to have_field 'Favorecido', :with => 'Wenderson Malheiros'
+    expect(page).to have_disabled_field 'Motivo'
+    expect(page).to have_field 'Motivo', :with => 'Motivo para a reserva de dotação'
   end
 
   scenario 'should not have link to destroy an existent reserve_fund' do
@@ -95,7 +95,7 @@ feature "ReserveFunds" do
 
     click_link '2012'
 
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_link 'Apagar'
   end
 
   scenario 'getting and cleaning budget_allocation amount via javascript' do
@@ -105,17 +105,17 @@ feature "ReserveFunds" do
 
     click_link 'Criar Reserva de Dotação'
 
-    page.should have_disabled_field 'Saldo orçamentário'
+    expect(page).to have_disabled_field 'Saldo orçamentário'
 
     fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
-    page.should have_disabled_field 'Saldo orçamentário'
-    page.should have_field 'Saldo orçamentário', :with => '500,00'
+    expect(page).to have_disabled_field 'Saldo orçamentário'
+    expect(page).to have_field 'Saldo orçamentário', :with => '500,00'
 
     clear_modal 'Dotação orçamentaria'
 
-    page.should have_disabled_field 'Saldo orçamentário'
-    page.should have_field 'Saldo orçamentário', :with => ''
+    expect(page).to have_disabled_field 'Saldo orçamentário'
+    expect(page).to have_field 'Saldo orçamentário', :with => ''
   end
 
   scenario 'show modal info of budget allocation' do
@@ -130,19 +130,19 @@ feature "ReserveFunds" do
     click_link 'reserve_fund_budget_allocation_info_link'
 
     within '#record' do
-      page.should have_content 'Detran'
-      page.should have_content '2012'
-      page.should have_content 'Alocação'
-      page.should have_content '1 - Secretaria de Educação'
-      page.should have_content '01 - Administração Geral'
-      page.should have_content 'Habitação'
-      page.should have_content '500,00'
-      page.should have_content 'Ação Governamental'
-      page.should have_content '3.0.10.01.12'
-      page.should have_content 'Reforma e Ampliação'
-      page.should have_content 'Manutenção da Unidade Administrativa'
-      page.should have_content 'Nenhuma'
-      page.should have_content 'Dotação Administrativa'
+      expect(page).to have_content 'Detran'
+      expect(page).to have_content '2012'
+      expect(page).to have_content 'Alocação'
+      expect(page).to have_content '1 - Secretaria de Educação'
+      expect(page).to have_content '01 - Administração Geral'
+      expect(page).to have_content 'Habitação'
+      expect(page).to have_content '500,00'
+      expect(page).to have_content 'Ação Governamental'
+      expect(page).to have_content '3.0.10.01.12'
+      expect(page).to have_content 'Reforma e Ampliação'
+      expect(page).to have_content 'Manutenção da Unidade Administrativa'
+      expect(page).to have_content 'Nenhuma'
+      expect(page).to have_content 'Dotação Administrativa'
     end
   end
 
@@ -154,23 +154,23 @@ feature "ReserveFunds" do
 
     click_link 'Criar Reserva de Dotação'
 
-    page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_disabled_field 'Processo licitatório'
 
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
 
-    page.should_not have_disabled_field 'Modalidade'
-    page.should_not have_disabled_field 'Processo licitatório'
+    expect(page).not_to have_disabled_field 'Modalidade'
+    expect(page).not_to have_disabled_field 'Processo licitatório'
 
     clear_modal 'Tipo'
 
-    page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_disabled_field 'Processo licitatório'
 
     fill_modal 'Tipo', :with => 'Tipo Comum', :field => 'Descrição'
 
-    page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_disabled_field 'Processo licitatório'
   end
 
   scenario 'should clean licitation modality and licitation number/year when changing type to diferent of licitation' do
@@ -185,12 +185,12 @@ feature "ReserveFunds" do
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
 
-    page.should have_field 'Modalidade', :with => 'Pública'
+    expect(page).to have_field 'Modalidade', :with => 'Pública'
 
     fill_modal 'Tipo', :with => 'Tipo Comum', :field => 'Descrição'
 
-    page.should have_disabled_field 'Modalidade'
-    page.should have_disabled_field 'Modalidade'
+    expect(page).to have_disabled_field 'Modalidade'
+    expect(page).to have_disabled_field 'Modalidade'
   end
 
   scenario 'should fill/clear delegate liciation_process fields' do
@@ -202,11 +202,11 @@ feature "ReserveFunds" do
 
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
 
-    page.should have_field 'Processo licitatório', :with => '1/2012'
-    page.should have_field 'Processo administrativo', :with => '1/2012'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2012'
 
     clear_modal 'Processo licitatório'
 
-    page.should have_field 'Processo administrativo', :with => ''
+    expect(page).to have_field 'Processo administrativo', :with => ''
   end
 end

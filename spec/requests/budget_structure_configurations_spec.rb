@@ -25,18 +25,18 @@ feature "BudgetStructureConfigurations" do
     select 'Ponto', :from => 'Separador'
     click_button 'Salvar'
 
-    page.should have_notice 'Configuração de Estrutura Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria criado com sucesso.'
 
     click_link 'Nome da Configuração'
 
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Ato regulamentador', :with => '1234'
-    page.should have_field 'Máscara', :with => '99'
-    page.should have_field 'Descrição', :with => 'Nome da Configuração'
-    page.should have_field 'Nível', :with => '1'
-    page.should have_field 'budget_structure_configuration_budget_structure_levels_attributes_0_description', :with => 'Órgão'
-    page.should have_field 'Dígitos', :with => '2'
-    page.should have_select 'Separador', :selected => 'Ponto'
+    expect(page).to have_field 'Entidade', :with => 'Detran'
+    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Máscara', :with => '99'
+    expect(page).to have_field 'Descrição', :with => 'Nome da Configuração'
+    expect(page).to have_field 'Nível', :with => '1'
+    expect(page).to have_field 'budget_structure_configuration_budget_structure_levels_attributes_0_description', :with => 'Órgão'
+    expect(page).to have_field 'Dígitos', :with => '2'
+    expect(page).to have_select 'Separador', :selected => 'Ponto'
   end
 
   scenario 'calculate mask with javascript' do
@@ -60,7 +60,7 @@ feature "BudgetStructureConfigurations" do
       select 'Ponto', :from => 'Separador'
     end
 
-    page.should have_field 'Máscara', :with => '999.99'
+    expect(page).to have_field 'Máscara', :with => '999.99'
   end
 
   scenario 'update an existent budget_structure_configuration' do
@@ -74,13 +74,13 @@ feature "BudgetStructureConfigurations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Configuração de Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria editado com sucesso.'
 
     click_link 'Outro Nome da Configuração'
 
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Ato regulamentador', :with => '1234'
-    page.should have_field 'Descrição', :with => 'Outro Nome da Configuração'
+    expect(page).to have_field 'Entidade', :with => 'Detran'
+    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Descrição', :with => 'Outro Nome da Configuração'
   end
 
   scenario 'destroy an existent budget_structure_configuration' do
@@ -92,10 +92,10 @@ feature "BudgetStructureConfigurations" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Configuração de Estrutura Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria apagado com sucesso.'
 
-    page.should_not have_content 'Detran'
-    page.should_not have_content '1234'
-    page.should_not have_content 'Configuração do Detran'
+    expect(page).not_to have_content 'Detran'
+    expect(page).not_to have_content '1234'
+    expect(page).not_to have_content 'Configuração do Detran'
   end
 end

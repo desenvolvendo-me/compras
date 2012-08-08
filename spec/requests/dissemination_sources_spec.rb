@@ -18,12 +18,12 @@ feature "DisseminationSources" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Fonte de Divulgação criado com sucesso.'
+    expect(page).to have_notice 'Fonte de Divulgação criado com sucesso.'
 
     click_link 'Jornal Oficial do Município'
 
-    page.should have_field 'Descrição', :with => 'Jornal Oficial do Município'
-    page.should have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
+    expect(page).to have_field 'Descrição', :with => 'Jornal Oficial do Município'
+    expect(page).to have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
   end
 
   scenario 'validates uniqueness of description' do
@@ -37,9 +37,9 @@ feature "DisseminationSources" do
 
     click_button 'Salvar'
 
-    page.should_not have_notice 'Fonte de Divulgação criado com sucesso.'
+    expect(page).not_to have_notice 'Fonte de Divulgação criado com sucesso.'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'update an existent dissemination_source' do
@@ -56,13 +56,13 @@ feature "DisseminationSources" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Fonte de Divulgação editado com sucesso.'
+    expect(page).to have_notice 'Fonte de Divulgação editado com sucesso.'
 
     click_link 'Jornal Não Oficial do Município'
 
-    page.should have_field 'Descrição', :with => 'Jornal Não Oficial do Município'
+    expect(page).to have_field 'Descrição', :with => 'Jornal Não Oficial do Município'
 
-    page.should have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Estadual'
+    expect(page).to have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Estadual'
   end
 
   scenario 'destroy an existent dissemination_source' do
@@ -74,10 +74,10 @@ feature "DisseminationSources" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Fonte de Divulgação apagado com sucesso.'
+    expect(page).to have_notice 'Fonte de Divulgação apagado com sucesso.'
 
-    page.should_not have_content 'Jornal Oficial do Município'
-    page.should_not have_content 'Jornal de Circulação Municipal'
+    expect(page).not_to have_content 'Jornal Oficial do Município'
+    expect(page).not_to have_content 'Jornal de Circulação Municipal'
   end
 
   scenario 'cannot destroy an existent dissemination_source with regulatory_act relationship' do
@@ -89,6 +89,6 @@ feature "DisseminationSources" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should_not have_notice 'Fonte de Divulgação apagado com sucesso.'
+    expect(page).not_to have_notice 'Fonte de Divulgação apagado com sucesso.'
   end
 end

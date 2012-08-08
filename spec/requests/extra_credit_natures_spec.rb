@@ -17,12 +17,12 @@ feature "ExtraCreditNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza de Crédito Suplementar criado com sucesso.'
+    expect(page).to have_notice 'Natureza de Crédito Suplementar criado com sucesso.'
 
     click_link 'Abre crédito suplementar'
 
-    page.should have_field 'Descrição', :with => 'Abre crédito suplementar'
-    page.should have_select 'Classificação', :selected => 'Outros'
+    expect(page).to have_field 'Descrição', :with => 'Abre crédito suplementar'
+    expect(page).to have_select 'Classificação', :selected => 'Outros'
   end
 
   scenario 'update an existent extra_credig_nature' do
@@ -37,12 +37,12 @@ feature "ExtraCreditNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza de Crédito Suplementar editado com sucesso.'
+    expect(page).to have_notice 'Natureza de Crédito Suplementar editado com sucesso.'
 
     click_link 'Abre crédito suplementar - superavit financeiro'
 
-    page.should have_field 'Descrição', :with => 'Abre crédito suplementar - superavit financeiro'
-    page.should have_select 'Classificação', :selected => 'Remanejamento'
+    expect(page).to have_field 'Descrição', :with => 'Abre crédito suplementar - superavit financeiro'
+    expect(page).to have_select 'Classificação', :selected => 'Remanejamento'
   end
 
   scenario 'destroy an existent extra_credig_nature' do
@@ -54,11 +54,11 @@ feature "ExtraCreditNatures" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
+    expect(page).to have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
 
     within_records do
-      page.should_not have_content 'Abre crédito suplementar'
-      page.should_not have_content 'Outros'
+      expect(page).not_to have_content 'Abre crédito suplementar'
+      expect(page).not_to have_content 'Outros'
     end
   end
 end

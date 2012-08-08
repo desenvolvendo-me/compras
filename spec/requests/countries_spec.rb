@@ -15,11 +15,11 @@ feature "Countries" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'País criado com sucesso.'
+    expect(page).to have_notice 'País criado com sucesso.'
 
     click_link 'Argentina'
 
-    page.should have_field 'Nome', :with => 'Argentina'
+    expect(page).to have_field 'Nome', :with => 'Argentina'
   end
 
   scenario 'update a country' do
@@ -33,11 +33,11 @@ feature "Countries" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'País editado com sucesso.'
+    expect(page).to have_notice 'País editado com sucesso.'
 
     click_link 'Argentina'
 
-    page.should have_field 'Nome', :with => 'Argentina'
+    expect(page).to have_field 'Nome', :with => 'Argentina'
   end
 
   scenario 'destroy a country' do
@@ -49,8 +49,8 @@ feature "Countries" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'País apagado com sucesso.'
+    expect(page).to have_notice 'País apagado com sucesso.'
 
-    page.should_not have_content 'Argentina'
+    expect(page).not_to have_content 'Argentina'
   end
 end

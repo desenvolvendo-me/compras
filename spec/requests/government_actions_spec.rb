@@ -15,18 +15,18 @@ feature "GovernmentActions" do
 
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Ação Governamental'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Ação do Governo criada com sucesso.'
+    expect(page).to have_notice 'Ação do Governo criada com sucesso.'
 
     click_link 'Ação Governamental'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Descrição', :with => 'Ação Governamental'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Descrição', :with => 'Ação Governamental'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent government_action' do
@@ -43,13 +43,13 @@ feature "GovernmentActions" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Ação do Governo editada com sucesso.'
+    expect(page).to have_notice 'Ação do Governo editada com sucesso.'
 
     click_link 'Ação Estatal'
 
-    page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-    page.should have_field 'Descrição', :with => 'Ação Estatal'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
+    expect(page).to have_field 'Descrição', :with => 'Ação Estatal'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent government_action' do
@@ -61,9 +61,9 @@ feature "GovernmentActions" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Ação do Governo apagada com sucesso.'
+    expect(page).to have_notice 'Ação do Governo apagada com sucesso.'
 
-    page.should_not have_content 'Ação Governamental'
-    page.should_not have_content '2012'
+    expect(page).not_to have_content 'Ação Governamental'
+    expect(page).not_to have_content '2012'
   end
 end

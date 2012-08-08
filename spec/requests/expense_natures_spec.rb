@@ -31,21 +31,21 @@ feature "ExpenseNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza da Despesa criado com sucesso'
+    expect(page).to have_notice 'Natureza da Despesa criado com sucesso'
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Ato regulamentador', :with => '1234'
-    page.should have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
-    page.should have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
-    page.should have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
-    page.should have_field 'Desdobramento da despesa', :with => '12'
-    page.should have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12'
-    page.should have_select 'Tipo', :selected => 'Ambos'
-    page.should have_field 'Descrição', :with => 'Vencimentos e Salários'
-    page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
+    expect(page).to have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+    expect(page).to have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
+    expect(page).to have_field 'Desdobramento da despesa', :with => '12'
+    expect(page).to have_field 'Categoria da despesa', :with => '3 - DESPESA CORRENTE'
+    expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12'
+    expect(page).to have_select 'Tipo', :selected => 'Ambos'
+    expect(page).to have_field 'Descrição', :with => 'Vencimentos e Salários'
+    expect(page).to have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos'
   end
 
   scenario 'should generate mask' do
@@ -61,16 +61,16 @@ feature "ExpenseNatures" do
     fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
 
     fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
-    page.should have_field 'Natureza da despesa', :with => '3.0.00.00.00'
+    expect(page).to have_field 'Natureza da despesa', :with => '3.0.00.00.00'
 
     fill_modal 'Modalidade da despesa', :with => '10', :field => 'Código'
 
     fill_modal 'Elemento da despesa', :with => '1', :field => 'Código'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.00'
+    expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.00'
 
     fill_in 'Desdobramento da despesa', :with => '12'
 
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12'
+    expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12'
   end
 
   context 'filtering' do
@@ -86,8 +86,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '3.0.10.01.12'
-      page.should_not have_content '3.0.10.01.11'
+      expect(page).to have_content '3.0.10.01.12'
+      expect(page).not_to have_content '3.0.10.01.11'
     end
 
     scenario 'should filter by description' do
@@ -102,8 +102,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content 'Vencimentos e Salários'
-      page.should_not have_content 'Compra de Material'
+      expect(page).to have_content 'Vencimentos e Salários'
+      expect(page).not_to have_content 'Compra de Material'
     end
 
     scenario 'should filter by descriptor' do
@@ -118,8 +118,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content 'Vencimentos e Salários'
-      page.should_not have_content 'Compra de Material'
+      expect(page).to have_content 'Vencimentos e Salários'
+      expect(page).not_to have_content 'Compra de Material'
     end
 
     scenario 'should filter by regulatory_act' do
@@ -134,8 +134,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content 'Vencimentos e Salários'
-      page.should_not have_content 'Compra de Material'
+      expect(page).to have_content 'Vencimentos e Salários'
+      expect(page).not_to have_content 'Compra de Material'
     end
 
     scenario 'should filter by kind' do
@@ -150,8 +150,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content 'Vencimentos e Salários'
-      page.should_not have_content 'Compra de Material'
+      expect(page).to have_content 'Vencimentos e Salários'
+      expect(page).not_to have_content 'Compra de Material'
     end
 
     scenario 'should filter by expense_category' do
@@ -166,8 +166,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '3.0.10.01.11'
-      page.should_not have_content '4.4.20.03.11'
+      expect(page).to have_content '3.0.10.01.11'
+      expect(page).not_to have_content '4.4.20.03.11'
     end
 
     scenario 'should filter by expense_group' do
@@ -182,8 +182,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '3.0.10.01.11'
-      page.should_not have_content '4.4.20.03.11'
+      expect(page).to have_content '3.0.10.01.11'
+      expect(page).not_to have_content '4.4.20.03.11'
     end
 
     scenario 'should filter by expense_modality' do
@@ -198,8 +198,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '3.0.10.01.11'
-      page.should_not have_content '4.4.20.03.11'
+      expect(page).to have_content '3.0.10.01.11'
+      expect(page).not_to have_content '4.4.20.03.11'
     end
 
     scenario 'should filter by expense_element' do
@@ -214,8 +214,8 @@ feature "ExpenseNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '3.0.10.01.11'
-      page.should_not have_content '4.4.20.03.11'
+      expect(page).to have_content '3.0.10.01.11'
+      expect(page).not_to have_content '4.4.20.03.11'
     end
   end
 
@@ -245,21 +245,21 @@ feature "ExpenseNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza da Despesa editado com sucesso.'
+    expect(page).to have_notice 'Natureza da Despesa editado com sucesso.'
 
     click_link '4.4.20.03.11'
 
-    page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-    page.should have_field 'Ato regulamentador', :with => '4567'
-    page.should have_field 'Grupo da despesa', :with => '4 - INVESTIMENTOS'
-    page.should have_field 'Modalidade da despesa', :with => '20 - TRANSFERÊNCIAS À UNIÃO'
-    page.should have_field 'Elemento da despesa', :with => '3 - PENSÕES'
-    page.should have_field 'Desdobramento da despesa', :with => '11'
-    page.should have_field 'Categoria da despesa', :with => '4 - DESPESA DE CAPITAL'
-    page.should have_field 'Natureza da despesa', :with => '4.4.20.03.11'
-    page.should have_select 'Tipo', :selected => 'Analítico'
-    page.should have_field 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
-    page.should have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
+    expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
+    expect(page).to have_field 'Ato regulamentador', :with => '4567'
+    expect(page).to have_field 'Grupo da despesa', :with => '4 - INVESTIMENTOS'
+    expect(page).to have_field 'Modalidade da despesa', :with => '20 - TRANSFERÊNCIAS À UNIÃO'
+    expect(page).to have_field 'Elemento da despesa', :with => '3 - PENSÕES'
+    expect(page).to have_field 'Desdobramento da despesa', :with => '11'
+    expect(page).to have_field 'Categoria da despesa', :with => '4 - DESPESA DE CAPITAL'
+    expect(page).to have_field 'Natureza da despesa', :with => '4.4.20.03.11'
+    expect(page).to have_select 'Tipo', :selected => 'Analítico'
+    expect(page).to have_field 'Descrição', :with => 'Vencimentos e Salários e Pagamento'
+    expect(page).to have_field 'Súmula', :with => 'Registra o valor das despesas com vencimentos de salários'
   end
 
   scenario 'destroy an existent expense_nature' do
@@ -271,8 +271,8 @@ feature "ExpenseNatures" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Natureza da Despesa apagado com sucesso.'
+    expect(page).to have_notice 'Natureza da Despesa apagado com sucesso.'
 
-    page.should_not have_field '3.0.10.01.12'
+    expect(page).not_to have_field '3.0.10.01.12'
   end
 end

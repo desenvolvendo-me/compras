@@ -15,8 +15,8 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Criar Solicitação de Compra'
 
-    page.should_not have_link 'Anular'
-    page.should_not have_link 'Anulação'
+    expect(page).not_to have_link 'Anular'
+    expect(page).not_to have_link 'Anulação'
   end
 
   scenario 'should see the default values on the screen' do
@@ -28,13 +28,13 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Anular'
 
-    page.should have_content "Anular Solicitação de Compra #{solicitation}"
+    expect(page).to have_content "Anular Solicitação de Compra #{solicitation}"
 
-    page.should have_field 'Data', :with => I18n.l(Date.current)
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
-    page.should have_button 'Salvar'
-    page.should_not have_link 'Apagar'
+    expect(page).to have_button 'Salvar'
+    expect(page).not_to have_link 'Apagar'
   end
 
   scenario 'annuling a purchase solicitation' do
@@ -57,63 +57,63 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_button 'Salvar'
 
-    page.should have_content 'Anulação de Recurso criado com sucesso.'
+    expect(page).to have_content 'Anulação de Recurso criado com sucesso.'
 
-    page.should have_content "Editar #{solicitation}"
-    page.should have_select 'Status de atendimento', :selected => 'Anulada'
+    expect(page).to have_content "Editar #{solicitation}"
+    expect(page).to have_select 'Status de atendimento', :selected => 'Anulada'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Ano'
-      page.should have_disabled_field 'Data da solicitação'
-      page.should have_disabled_field 'Estrutura orçamentaria solicitante'
-      page.should have_disabled_field 'Responsável pela solicitação'
-      page.should have_disabled_field 'Justificativa da solicitação'
-      page.should have_disabled_field 'Local para entrega'
-      page.should have_disabled_field 'Tipo de solicitação'
-      page.should have_disabled_field 'Observações gerais'
-      page.should have_disabled_field 'Status de atendimento'
-      page.should have_disabled_field 'Liberação'
-      page.should have_disabled_field 'Por'
-      page.should have_disabled_field 'Observações do atendimento'
-      page.should have_disabled_field 'Justificativa para não atendimento'
+      expect(page).to have_disabled_field 'Ano'
+      expect(page).to have_disabled_field 'Data da solicitação'
+      expect(page).to have_disabled_field 'Estrutura orçamentaria solicitante'
+      expect(page).to have_disabled_field 'Responsável pela solicitação'
+      expect(page).to have_disabled_field 'Justificativa da solicitação'
+      expect(page).to have_disabled_field 'Local para entrega'
+      expect(page).to have_disabled_field 'Tipo de solicitação'
+      expect(page).to have_disabled_field 'Observações gerais'
+      expect(page).to have_disabled_field 'Status de atendimento'
+      expect(page).to have_disabled_field 'Liberação'
+      expect(page).to have_disabled_field 'Por'
+      expect(page).to have_disabled_field 'Observações do atendimento'
+      expect(page).to have_disabled_field 'Justificativa para não atendimento'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_disabled_field 'Valor total dos itens'
+      expect(page).to have_disabled_field 'Valor total dos itens'
 
-      page.should_not have_button 'Adicionar Dotação'
+      expect(page).not_to have_button 'Adicionar Dotação'
 
-      page.should have_disabled_field 'Dotação'
-      page.should have_disabled_field 'Natureza da despesa'
+      expect(page).to have_disabled_field 'Dotação'
+      expect(page).to have_disabled_field 'Natureza da despesa'
 
-      page.should_not have_button 'Adicionar Item'
+      expect(page).not_to have_button 'Adicionar Item'
 
-      page.should have_disabled_field 'Item'
-      page.should have_disabled_field 'Material'
-      page.should have_disabled_field 'Marca/Referência'
-      page.should have_disabled_field 'Unidade'
-      page.should have_disabled_field 'Quantidade'
-      page.should have_disabled_field 'Valor unitário'
-      page.should have_disabled_field 'Valor total'
+      expect(page).to have_disabled_field 'Item'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Marca/Referência'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Valor unitário'
+      expect(page).to have_disabled_field 'Valor total'
 
-      page.should_not have_button 'Remover Item'
-      page.should_not have_button 'Remover Dotação'
+      expect(page).not_to have_button 'Remover Item'
+      expect(page).not_to have_button 'Remover Dotação'
     end
 
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_button 'Salvar'
 
     click_link 'Anulação'
 
-    page.should have_disabled_field 'Responsável'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => '10/06/2012'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', :with => '10/06/2012'
 
-    page.should have_disabled_field 'Justificativa'
-    page.should have_field 'Justificativa', :with => 'Foo Bar'
+    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_field 'Justificativa', :with => 'Foo Bar'
 
-    page.should_not have_button 'Salvar'
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_button 'Salvar'
+    expect(page).not_to have_link 'Apagar'
   end
 end

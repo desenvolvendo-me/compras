@@ -14,42 +14,42 @@ feature "LicitationProcessRatifications" do
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
-    page.should have_disabled_field 'Participante vencedor'
+    expect(page).to have_disabled_field 'Participante vencedor'
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
-    page.should_not have_disabled_field 'Participante vencedor'
+    expect(page).not_to have_disabled_field 'Participante vencedor'
 
     within_modal 'Participante vencedor' do
-      page.should have_field 'Processo licitatório', :with => licitation_process.to_s
-      page.should have_disabled_field 'Processo licitatório'
+      expect(page).to have_field 'Processo licitatório', :with => licitation_process.to_s
+      expect(page).to have_disabled_field 'Processo licitatório'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
 
-    page.should have_content 'Antivirus'
-    page.should have_content '10,00'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content '10,00'
 
     check 'checkAll'
 
     click_button 'Salvar'
 
-    page.should have_content 'Homologação e Adjudicação de Processo Licitatório criado com sucesso.'
+    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório criado com sucesso.'
 
     within_records do
       click_link '1'
     end
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
-    page.should have_field 'Data de homologação', :with => I18n.l(Date.current)
-    page.should have_field 'Data de adjudicação', :with => I18n.l(Date.current)
-    page.should have_field 'Sequência', :with => '1'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Sequência', :with => '1'
 
-    page.should have_content 'Antivirus'
-    page.should have_content '10,00'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content '10,00'
 
-    page.should have_checked_field bidder_checkbok_html_name(0)
+    expect(page).to have_checked_field bidder_checkbok_html_name(0)
   end
 
   scenario 'updating a ratification' do
@@ -63,27 +63,27 @@ feature "LicitationProcessRatifications" do
       page.find('a').click
     end
 
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_link 'Apagar'
 
     uncheck bidder_checkbok_html_name(0)
 
     click_button 'Salvar'
 
-    page.should have_content 'Homologação e Adjudicação de Processo Licitatório editado com sucesso.'
+    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório editado com sucesso.'
 
     within_records do
       click_link '1'
     end
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
-    page.should have_field 'Data de homologação', :with => I18n.l(Date.current)
-    page.should have_field 'Data de adjudicação', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
 
-    page.should have_content 'Antivirus'
-    page.should have_content '10,00'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content '10,00'
 
-    page.should_not have_checked_field bidder_checkbok_html_name(0)
+    expect(page).not_to have_checked_field bidder_checkbok_html_name(0)
   end
 
   scenario 'cleaning items' do
@@ -97,32 +97,32 @@ feature "LicitationProcessRatifications" do
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      page.should have_field 'Processo licitatório', :with => licitation_process.to_s
-      page.should have_disabled_field 'Processo licitatório'
+      expect(page).to have_field 'Processo licitatório', :with => licitation_process.to_s
+      expect(page).to have_disabled_field 'Processo licitatório'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
 
     clear_modal 'Processo licitatório'
 
-    page.should have_disabled_field 'Participante vencedor'
-    page.should have_field 'Participante vencedor', :with => ''
+    expect(page).to have_disabled_field 'Participante vencedor'
+    expect(page).to have_field 'Participante vencedor', :with => ''
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
     within_modal 'Participante vencedor' do
-      page.should have_field 'Processo licitatório', :with => licitation_process.to_s
-      page.should have_disabled_field 'Processo licitatório'
+      expect(page).to have_field 'Processo licitatório', :with => licitation_process.to_s
+      expect(page).to have_disabled_field 'Processo licitatório'
       click_button 'Pesquisar'
       click_record 'Wenderson Malheiros'
     end
 
-    page.should have_content 'Antivirus'
-    page.should have_content '10,00'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content '10,00'
 
     clear_modal 'Participante vencedor'
 
-    page.should_not have_content 'Antivirus'
+    expect(page).not_to have_content 'Antivirus'
   end
 
   scenario 'print report' do
@@ -139,18 +139,18 @@ feature "LicitationProcessRatifications" do
 
     click_link 'Imprimir termo'
 
-    page.should have_content '1'
-    page.should have_content '1/2013'
-    page.should have_content 'CV'
-    page.should have_content I18n.l Date.current
-    page.should have_content 'Licitação para compra de carteiras'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content '01.01.00001 - Antivirus'
-    page.should have_content '10'
-    page.should have_content '-'
-    page.should have_content '10,00'
-    page.should have_content '20,00'
-    page.should have_content '1 - Alocação Belo Horizonte'
+    expect(page).to have_content '1'
+    expect(page).to have_content '1/2013'
+    expect(page).to have_content 'CV'
+    expect(page).to have_content I18n.l Date.current
+    expect(page).to have_content 'Licitação para compra de carteiras'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content '01.01.00001 - Antivirus'
+    expect(page).to have_content '10'
+    expect(page).to have_content '-'
+    expect(page).to have_content '10,00'
+    expect(page).to have_content '20,00'
+    expect(page).to have_content '1 - Alocação Belo Horizonte'
   end
 
   def bidder_checkbok_html_name(number)

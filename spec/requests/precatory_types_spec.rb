@@ -12,21 +12,21 @@ feature "PrecatoryTypes" do
     click_link 'Criar Tipos de Precatório'
 
     fill_in 'Descrição', :with => 'Precatórios Alimentares'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipos de Precatório criado com sucesso.'
+    expect(page).to have_notice 'Tipos de Precatório criado com sucesso.'
 
     within_records do
       click_link 'Precatórios Alimentares'
     end 
 
-    page.should have_field 'Descrição', :with => 'Precatórios Alimentares'
-    page.should have_select 'Status', :selected => 'Ativo'
-    page.should have_disabled_field 'Data de desativação'
-    page.should have_field 'Data de desativação', :with => ''
+    expect(page).to have_field 'Descrição', :with => 'Precatórios Alimentares'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Data de desativação'
+    expect(page).to have_field 'Data de desativação', :with => ''
   end
 
   scenario 'update an existent precatory_type' do
@@ -44,15 +44,15 @@ feature "PrecatoryTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipos de Precatório editado com sucesso.'
+    expect(page).to have_notice 'Tipos de Precatório editado com sucesso.'
 
     within_records do
       click_link 'De pequeno valor'
     end
 
-    page.should have_field 'Descrição', :with => 'De pequeno valor'
-    page.should have_select 'Status', :selected => 'Inativo'
-    page.should have_field 'Data de desativação', :with => '08/05/2012'
+    expect(page).to have_field 'Descrição', :with => 'De pequeno valor'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Data de desativação', :with => '08/05/2012'
   end
 
   scenario 'destroy an existent precatory_type' do
@@ -66,10 +66,10 @@ feature "PrecatoryTypes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipos de Precatório apagado com sucesso.'
+    expect(page).to have_notice 'Tipos de Precatório apagado com sucesso.'
 
-    page.should_not have_content 'Precatórios Alimentares'
-    page.should_not have_content 'Ativo'
+    expect(page).not_to have_content 'Precatórios Alimentares'
+    expect(page).not_to have_content 'Ativo'
   end
 
   scenario "disable deactivation_date when status is not inactive" do
@@ -79,7 +79,7 @@ feature "PrecatoryTypes" do
 
     select 'Ativo', :from => 'Status'
 
-    page.should have_disabled_field 'Data de desativação'
+    expect(page).to have_disabled_field 'Data de desativação'
   end
 
   scenario "enable deactivation_date when status is inactive" do
@@ -89,6 +89,6 @@ feature "PrecatoryTypes" do
 
     select 'Inativo', :from => 'Status'
 
-    page.should_not have_disabled_field 'Data de desativação *'
+    expect(page).not_to have_disabled_field 'Data de desativação *'
   end
 end

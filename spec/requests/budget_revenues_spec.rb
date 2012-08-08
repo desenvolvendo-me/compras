@@ -16,7 +16,7 @@ feature "BudgetRevenues" do
     click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Código'
+      expect(page).to have_disabled_field 'Código'
 
       fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
       fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
@@ -29,24 +29,24 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2012 - Detran'
-      page.should have_field 'Data', :with => I18n.l(Date.current)
-      page.should have_disabled_field 'Código'
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
-      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
-      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+      expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
+      expect(page).to have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
+      expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+      expect(page).to have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
     end
   end
 
@@ -70,24 +70,24 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria criado com sucesso.'
 
     within_records do
       click_link '2/2012'
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2012 - Detran'
-      page.should have_field 'Data', :with => I18n.l(Date.current)
-      page.should have_disabled_field 'Código'
-      page.should have_field 'Código', :with => '2'
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
-      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
-      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+      expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_field 'Código', :with => '2'
+      expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
+      expect(page).to have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
+      expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+      expect(page).to have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
     end
   end
 
@@ -113,24 +113,24 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria criado com sucesso.'
 
     within_records do
       click_link '1/2011'
     end
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2011 - Detran'
-      page.should have_field 'Data', :with => I18n.l(Date.current)
-      page.should have_disabled_field 'Código'
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
-      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
-      page.should have_field 'Recurso', :with => 'Reforma e Ampliação'
+      expect(page).to have_field 'Descritor', :with => '2011 - Detran'
+      expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
+      expect(page).to have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
+      expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
+      expect(page).to have_select 'Tipo de programação', :selected => 'Média de arrecadação mensal dos últimos 3 anos'
     end
   end
 
@@ -144,12 +144,12 @@ feature "BudgetRevenues" do
     within_tab 'Principal' do
       fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
 
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
-      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
+      expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
+      expect(page).to have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita'
 
       clear_modal 'Natureza da receita'
-      page.should have_field 'Natureza da receita', :with => ''
-      page.should have_field 'Descrição da natureza da receita', :with => ''
+      expect(page).to have_field 'Natureza da receita', :with => ''
+      expect(page).to have_field 'Descrição da natureza da receita', :with => ''
     end
   end
 
@@ -159,17 +159,17 @@ feature "BudgetRevenues" do
     click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Programação' do
-      page.should have_disabled_field 'Valor previsto'
+      expect(page).to have_disabled_field 'Valor previsto'
 
       select 'Média de arrecadação mensal dos últimos 3 anos', :from => 'Tipo'
-      page.should have_field 'Valor previsto', :with => ''
-      page.should have_disabled_field 'Valor previsto'
-      page.should have_content '0,00'
+      expect(page).to have_field 'Valor previsto', :with => ''
+      expect(page).to have_disabled_field 'Valor previsto'
+      expect(page).to have_content '0,00'
 
       select 'Dividir valor previsto por 12', :from => 'Tipo'
       fill_in 'Valor previsto', :with => '222,22'
-      page.should have_content '18,51'
-      page.should have_content '18,61'
+      expect(page).to have_content '18,51'
+      expect(page).to have_content '18,61'
     end
   end
 
@@ -196,23 +196,23 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Receita Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria editado com sucesso.'
 
     click_link '1'
 
     within_tab 'Principal' do
-      page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-      page.should have_disabled_field 'Código'
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
-      page.should have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
-      page.should have_field 'Recurso', :with => 'Construção'
+      expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
+      expect(page).to have_disabled_field 'Código'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.12.34 - Imposto sobre a renda'
+      expect(page).to have_field 'Descrição da natureza da receita', :with => 'Registra o valor da arrecadação da receita referente a renda'
+      expect(page).to have_field 'Recurso', :with => 'Construção'
     end
 
     within_tab 'Programação' do
-      page.should have_select 'Tipo', :selected => 'Dividir valor previsto por 12'
-      page.should have_content '18,51'
-      page.should have_content '18,61'
+      expect(page).to have_select 'Tipo', :selected => 'Dividir valor previsto por 12'
+      expect(page).to have_content '18,51'
+      expect(page).to have_content '18,61'
     end
   end
 
@@ -230,7 +230,7 @@ feature "BudgetRevenues" do
     click_button 'Salvar'
 
     within_tab 'Principal' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -243,8 +243,8 @@ feature "BudgetRevenues" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Receita Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria apagado com sucesso.'
 
-    page.should_not have_content '1'
+    expect(page).not_to have_content '1'
   end
 end

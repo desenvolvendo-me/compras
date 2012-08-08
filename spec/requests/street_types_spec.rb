@@ -16,12 +16,12 @@ feature "StreetTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Logradouro criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Logradouro criado com sucesso.'
 
     click_link 'Alameda'
 
-    page.should have_field 'Nome', :with => 'Alameda'
-    page.should have_field 'Sigla', :with => 'ALA'
+    expect(page).to have_field 'Nome', :with => 'Alameda'
+    expect(page).to have_field 'Sigla', :with => 'ALA'
   end
 
   scenario 'update a street type' do
@@ -37,12 +37,12 @@ feature "StreetTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Logradouro editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Logradouro editado com sucesso.'
 
     click_link 'Travessa'
 
-    page.should have_field 'Nome', :with => 'Travessa'
-    page.should have_field 'Sigla', :with => 'TRA'
+    expect(page).to have_field 'Nome', :with => 'Travessa'
+    expect(page).to have_field 'Sigla', :with => 'TRA'
   end
 
   scenario 'destroy a street type' do
@@ -54,8 +54,8 @@ feature "StreetTypes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipo de Logradouro apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Logradouro apagado com sucesso.'
 
-    page.should_not have_content 'Rua'
+    expect(page).not_to have_content 'Rua'
   end
 end

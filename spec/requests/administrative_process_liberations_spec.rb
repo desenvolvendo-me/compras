@@ -18,21 +18,21 @@ feature "AdministrativeProcessLiberations" do
 
     click_link 'Liberar'
 
-    page.should have_content 'Liberar Processo Administrativo 1/2012'
+    expect(page).to have_content 'Liberar Processo Administrativo 1/2012'
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '15/06/2012'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Processo Administrativo liberado com sucesso'
+    expect(page).to have_notice 'Processo Administrativo liberado com sucesso'
 
     click_link 'Liberação'
 
-    page.should have_disabled_field 'Responsável'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data',  :with => '15/06/2012'
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data',  :with => '15/06/2012'
   end
 
   scenario 'when edit a liberation all fields should be disabled' do
@@ -46,15 +46,15 @@ feature "AdministrativeProcessLiberations" do
 
     click_link 'Liberação'
 
-    page.should have_content 'Liberação do Processo Administrativo 1/2012'
+    expect(page).to have_content 'Liberação do Processo Administrativo 1/2012'
 
-    page.should have_disabled_field 'Responsável'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => '01/02/2012'
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', :with => '01/02/2012'
 
-    page.should_not have_button 'Salvar'
-    page.should_not have_button 'Apagar'
+    expect(page).not_to have_button 'Salvar'
+    expect(page).not_to have_button 'Apagar'
   end
 
   scenario 'cancel should return to edit_administrative_process' do
@@ -71,6 +71,6 @@ feature "AdministrativeProcessLiberations" do
 
     click_link 'Cancelar'
 
-    page.should have_content 'Editar 1/2012'
+    expect(page).to have_content 'Editar 1/2012'
   end
 end

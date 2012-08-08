@@ -15,18 +15,18 @@ feature "GovernmentPrograms" do
 
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Habitação'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Programa do Governo criado com sucesso.'
+    expect(page).to have_notice 'Programa do Governo criado com sucesso.'
 
     click_link 'Habitação'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Descrição', :with => 'Habitação'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Descrição', :with => 'Habitação'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent government_program' do
@@ -43,13 +43,13 @@ feature "GovernmentPrograms" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Programa do Governo editado com sucesso.'
+    expect(page).to have_notice 'Programa do Governo editado com sucesso.'
 
     click_link 'Educação'
 
-    page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
-    page.should have_field 'Descrição', :with => 'Educação'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descritor', :with => '2013 - Secretaria de Educação'
+    expect(page).to have_field 'Descrição', :with => 'Educação'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent government_program' do
@@ -61,11 +61,11 @@ feature "GovernmentPrograms" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Programa do Governo apagado com sucesso.'
+    expect(page).to have_notice 'Programa do Governo apagado com sucesso.'
 
-    page.should_not have_content 'Detran'
-    page.should_not have_content '2012'
-    page.should_not have_content 'Habitação'
-    page.should_not have_content 'Ativo'
+    expect(page).not_to have_content 'Detran'
+    expect(page).not_to have_content '2012'
+    expect(page).not_to have_content 'Habitação'
+    expect(page).not_to have_content 'Ativo'
   end
 end

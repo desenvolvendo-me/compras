@@ -18,9 +18,9 @@ feature "PriceCollections" do
     click_link 'Criar Coleta de Preços'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Número'
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data', :with => I18n.l(Date.current)
@@ -46,8 +46,8 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
-      page.should have_disabled_field 'Unidade'
-      page.should have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca', :with => 'Norton'
       fill_in 'Quantidade', :with => '10'
@@ -65,10 +65,10 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    page.should_not have_content 'Coleta de Preços criada com sucesso'
+    expect(page).not_to have_content 'Coleta de Preços criada com sucesso'
 
     within_tab 'Fornecedores' do
-      page.should have_content 'não pode ficar em branco'
+      expect(page).to have_content 'não pode ficar em branco'
     end
   end
 
@@ -83,13 +83,13 @@ feature "PriceCollections" do
 
     click_link 'Criar Coleta de Preços'
 
-    page.should_not have_button 'Apurar'
-    page.should_not have_link 'Relatório'
+    expect(page).not_to have_button 'Apurar'
+    expect(page).not_to have_link 'Relatório'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Número'
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data', :with => I18n.l(Date.current)
@@ -115,8 +115,8 @@ feature "PriceCollections" do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
       # testing fill reference unit with javascript
-      page.should have_disabled_field 'Unidade'
-      page.should have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Marca', :with => 'Norton'
       fill_in 'Quantidade', :with => '10'
@@ -131,59 +131,59 @@ feature "PriceCollections" do
         click_record 'Wenderson Malheiros'
       end
 
-      page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
+      expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Coleta de Preços criada com sucesso.'
+    expect(page).to have_notice 'Coleta de Preços criada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Número'
-      page.should have_field 'Número', :with => '1'
-      page.should have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_field 'Número', :with => '1'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
 
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data', :with => I18n.l(Date.current)
-      page.should have_select 'Tipo de apuração', :selected => 'Menor preço total por item'
-      page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
-      page.should have_field 'Prazo de entrega', :with => '1'
-      page.should have_field 'Vencimento', :with => I18n.l(Date.tomorrow)
-      page.should have_select 'Período do prazo de entrega', :selected => 'ano/anos'
-      page.should have_field 'Validade da proposta', :with => '1'
-      page.should have_select 'Período da validade da proposta', :selected => 'ano/anos'
-      page.should have_field 'Objeto', :with => 'objeto da coleta'
-      page.should have_field 'Observações', :with => 'observacoes da coleta'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+      expect(page).to have_select 'Tipo de apuração', :selected => 'Menor preço total por item'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Prazo de entrega', :with => '1'
+      expect(page).to have_field 'Vencimento', :with => I18n.l(Date.tomorrow)
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
+      expect(page).to have_field 'Validade da proposta', :with => '1'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'ano/anos'
+      expect(page).to have_field 'Objeto', :with => 'objeto da coleta'
+      expect(page).to have_field 'Observações', :with => 'observacoes da coleta'
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_field 'Observações', :with => 'lote 1'
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_disabled_field 'Unidade'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Marca', :with => 'Norton'
-      page.should have_field 'Quantidade', :with => '10'
+      expect(page).to have_field 'Observações', :with => 'lote 1'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Marca', :with => 'Norton'
+      expect(page).to have_field 'Quantidade', :with => '10'
     end
 
     within_tab 'Fornecedores' do
-      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_disabled_field 'Fornecedor'
-      page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
-      page.should have_disabled_field 'E-mail'
+      expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      expect(page).to have_disabled_field 'Fornecedor'
+      expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+      expect(page).to have_disabled_field 'E-mail'
     end
 
     click_link 'Propostas'
 
     click_link '1/2012 - Wenderson Malheiros'
 
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent price_collection' do
@@ -228,7 +228,7 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
 
       click_button 'Remover'
 
@@ -239,50 +239,50 @@ feature "PriceCollections" do
         click_button 'Pesquisar'
         click_record 'José Gomes'
       end
-      page.should_not have_disabled_field 'Email'
+      expect(page).not_to have_disabled_field 'Email'
       fill_in 'Email', :with => 'contato@sobrinho.com'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Coleta de Preços editada com sucesso.'
+    expect(page).to have_notice 'Coleta de Preços editada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Número'
-      page.should have_field 'Número', :with => '1'
-      page.should have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_field 'Número', :with => '1'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
 
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data', :with => I18n.l(Date.current + 10.days)
-      page.should have_field 'Local de entrega', :with => 'Secretaria da Saúde'
-      page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
-      page.should have_field 'Forma de pagamento', :with => 'Cheque'
-      page.should have_field 'Prazo de entrega', :with => '3'
-      page.should have_field 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
-      page.should have_select 'Período do prazo de entrega', :selected => 'mês/meses'
-      page.should have_field 'Validade da proposta', :with => '3'
-      page.should have_select 'Período da validade da proposta', :selected => 'mês/meses'
-      page.should have_field 'Objeto', :with => 'novo objeto da coleta'
-      page.should have_field 'Observações', :with => 'novo observacoes da coleta'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data', :with => I18n.l(Date.current + 10.days)
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
+      expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Cheque'
+      expect(page).to have_field 'Prazo de entrega', :with => '3'
+      expect(page).to have_field 'Vencimento', :with => I18n.l(Date.tomorrow + 10.days)
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'mês/meses'
+      expect(page).to have_field 'Validade da proposta', :with => '3'
+      expect(page).to have_select 'Período da validade da proposta', :selected => 'mês/meses'
+      expect(page).to have_field 'Objeto', :with => 'novo objeto da coleta'
+      expect(page).to have_field 'Observações', :with => 'novo observacoes da coleta'
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_field 'Observações', :with => 'lote 2'
-      page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      page.should have_disabled_field 'Unidade'
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Marca', :with => 'Aço inox'
-      page.should have_field 'Quantidade', :with => '100'
+      expect(page).to have_field 'Observações', :with => 'lote 2'
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Marca', :with => 'Aço inox'
+      expect(page).to have_field 'Quantidade', :with => '100'
     end
 
     within_tab 'Fornecedores' do
-      page.should_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      page.should have_field 'Fornecedor', :with => 'José Gomes'
-      page.should have_field 'E-mail', :with => 'contato@sobrinho.com'
+      expect(page).not_to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Fornecedor', :with => 'José Gomes'
+      expect(page).to have_field 'E-mail', :with => 'contato@sobrinho.com'
     end
   end
 
@@ -295,7 +295,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    page.should_not have_button 'Apagar'
+    expect(page).not_to have_button 'Apagar'
   end
 
   scenario 'trying to create without items to see the error message' do
@@ -331,7 +331,7 @@ feature "PriceCollections" do
     click_button 'Salvar'
 
     within_tab 'Lotes de itens' do
-      page.should have_content 'é necessário cadastrar pelo menos um item'
+      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
 
@@ -351,7 +351,7 @@ feature "PriceCollections" do
     click_button 'Salvar'
 
     within_tab 'Lotes de itens' do
-      page.should have_content 'é necessário cadastrar pelo menos um item'
+      expect(page).to have_content 'é necessário cadastrar pelo menos um item'
     end
   end
 
@@ -366,9 +366,9 @@ feature "PriceCollections" do
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_field 'Marca', :with => 'Norton'
-      page.should have_field 'Quantidade', :with => '10'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Marca', :with => 'Norton'
+      expect(page).to have_field 'Quantidade', :with => '10'
 
       click_button 'Remover Item'
 
@@ -381,20 +381,20 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Coleta de Preços editada com sucesso.'
+    expect(page).to have_notice 'Coleta de Preços editada com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_field 'Material', :with => '02.02.00001 - Arame farpado'
-      page.should have_field 'Marca', :with => 'Aço inox'
-      page.should have_field 'Quantidade', :with => '100'
+      expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+      expect(page).to have_field 'Marca', :with => 'Aço inox'
+      expect(page).to have_field 'Quantidade', :with => '100'
 
-      page.should_not have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should_not have_field 'Marca', :with => 'Norton'
-      page.should_not have_field 'Quantidade', :with => '10'
+      expect(page).not_to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).not_to have_field 'Marca', :with => 'Norton'
+      expect(page).not_to have_field 'Quantidade', :with => '10'
     end
   end
 
@@ -409,9 +409,9 @@ feature "PriceCollections" do
     click_link 'Criar Coleta de Preços'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Número'
-      page.should have_disabled_field 'Status'
-      page.should have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_disabled_field 'Número'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data', :with => I18n.l(Date.current)
@@ -452,7 +452,7 @@ feature "PriceCollections" do
     click_button 'Salvar'
 
     within_tab 'Lotes de itens' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -466,7 +466,7 @@ feature "PriceCollections" do
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_field 'Observações', :with => 'lote da coleta'
+      expect(page).to have_field 'Observações', :with => 'lote da coleta'
 
       click_button 'Remover Lote'
     end
@@ -478,7 +478,7 @@ feature "PriceCollections" do
     end
 
     within_tab 'Lotes de itens' do
-      page.should_not have_field 'Observações', :with => 'lote da coleta'
+      expect(page).not_to have_field 'Observações', :with => 'lote da coleta'
     end
   end
 
@@ -492,26 +492,26 @@ feature "PriceCollections" do
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_content 'Lote 1'
-      page.should_not have_content 'Lote 2'
+      expect(page).to have_content 'Lote 1'
+      expect(page).not_to have_content 'Lote 2'
 
       click_button 'Adicionar Lote'
 
-      page.should have_content 'Lote 1'
-      page.should have_content 'Lote 2'
+      expect(page).to have_content 'Lote 1'
+      expect(page).to have_content 'Lote 2'
 
       click_button 'Adicionar Lote'
 
-      page.should have_content 'Lote 1'
-      page.should have_content 'Lote 2'
-      page.should have_content 'Lote 3'
+      expect(page).to have_content 'Lote 1'
+      expect(page).to have_content 'Lote 2'
+      expect(page).to have_content 'Lote 3'
 
       # removing the first lot to se that it re-order all the others
       click_button 'Remover Lote'
 
-      page.should have_content 'Lote 1'
-      page.should have_content 'Lote 2'
-      page.should_not have_content 'Lote 3'
+      expect(page).to have_content 'Lote 1'
+      expect(page).to have_content 'Lote 2'
+      expect(page).not_to have_content 'Lote 3'
     end
   end
 
@@ -528,47 +528,47 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
 
-    page.should have_content 'Apuração: Menor preço total por item'
+    expect(page).to have_content 'Apuração: Menor preço total por item'
 
-    page.should have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Gabriel Sobrinho'
 
     within '.classification-1-1' do
-      page.should have_content 'Antivirus'
-      page.should have_content '40,00'
-      page.should have_content '400,00'
-      page.should have_content 'Sim'
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '40,00'
+      expect(page).to have_content '400,00'
+      expect(page).to have_content 'Sim'
     end
 
     within '.classification-2-0' do
-      page.should have_content 'Arame comum'
-      page.should have_content '3,00'
-      page.should have_content '600,00'
-      page.should have_content 'Não'
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '3,00'
+      expect(page).to have_content '600,00'
+      expect(page).to have_content 'Não'
     end
 
-    page.should have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Wenderson Malheiros'
 
     within '.classification-2-1' do
-      page.should have_content 'Antivirus'
-      page.should have_content '50,00'
-      page.should have_content '500,00'
-      page.should have_content 'Não'
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '50,00'
+      expect(page).to have_content '500,00'
+      expect(page).to have_content 'Não'
     end
 
     within '.classification-1-0' do
-      page.should have_content 'Arame comum'
-      page.should have_content '2,00'
-      page.should have_content '400,00'
-      page.should have_content 'Sim'
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '2,00'
+      expect(page).to have_content '400,00'
+      expect(page).to have_content 'Sim'
     end
 
     click_link 'voltar'
 
     click_link 'Relatório'
 
-    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
   end
 
   scenario 'calc by lowest_price_by_lot' do
@@ -584,40 +584,40 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
 
-    page.should have_content 'Apuração: Menor preço por lote'
+    expect(page).to have_content 'Apuração: Menor preço por lote'
 
-    page.should have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Wenderson Malheiros'
 
     within '.classification-2-0' do
-      page.should have_content 'Antivirus'
-      page.should have_content '50,00'
-      page.should have_content '500,00'
-      page.should have_content 'Não'
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '50,00'
+      expect(page).to have_content '500,00'
+      expect(page).to have_content 'Não'
     end
 
     within '.classification-1-1' do
-      page.should have_content 'Arame comum'
-      page.should have_content '2,00'
-      page.should have_content '400,00'
-      page.should have_content 'Sim'
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '2,00'
+      expect(page).to have_content '400,00'
+      expect(page).to have_content 'Sim'
     end
 
-    page.should have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Gabriel Sobrinho'
 
     within '.classification-1-0' do
-      page.should have_content 'Antivirus'
-      page.should have_content '40,00'
-      page.should have_content '400,00'
-      page.should have_content 'Sim'
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '40,00'
+      expect(page).to have_content '400,00'
+      expect(page).to have_content 'Sim'
     end
 
     within 'tr.classification-2-1' do
-      page.should have_content 'Arame comum'
-      page.should have_content '3,00'
-      page.should have_content '600,00'
-      page.should have_content 'Não'
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '3,00'
+      expect(page).to have_content '600,00'
+      expect(page).to have_content 'Não'
     end
   end
 
@@ -634,40 +634,40 @@ feature "PriceCollections" do
 
     click_button 'Apurar'
 
-    page.should have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
 
-    page.should have_content 'Apuração: Menor preço global'
+    expect(page).to have_content 'Apuração: Menor preço global'
 
-    page.should have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Wenderson Malheiros'
 
     within '.classification-1-0' do
-      page.should have_content 'Antivirus'
-      page.should have_content '50,00'
-      page.should have_content '500,00'
-      page.should have_content 'Sim'
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '50,00'
+      expect(page).to have_content '500,00'
+      expect(page).to have_content 'Sim'
     end
 
     within '.classification-1-1' do
-      page.should have_content 'Arame comum'
-      page.should have_content '2,00'
-      page.should have_content '400,00'
-      page.should have_content 'Sim'
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '2,00'
+      expect(page).to have_content '400,00'
+      expect(page).to have_content 'Sim'
     end
 
-    page.should have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Gabriel Sobrinho'
 
     within '.classification-2-0' do
-      page.should have_content 'Antivirus'
-      page.should have_content '40,00'
-      page.should have_content '400,00'
-      page.should have_content 'Não'
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '40,00'
+      expect(page).to have_content '400,00'
+      expect(page).to have_content 'Não'
     end
 
     within '.classification-2-1' do
-      page.should have_content 'Arame comum'
-      page.should have_content '3,00'
-      page.should have_content '600,00'
-      page.should have_content 'Não'
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '3,00'
+      expect(page).to have_content '600,00'
+      expect(page).to have_content 'Não'
     end
   end
 
@@ -681,26 +681,26 @@ feature "PriceCollections" do
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_content 'Item 1'
-      page.should_not have_content 'Item 2'
+      expect(page).to have_content 'Item 1'
+      expect(page).not_to have_content 'Item 2'
 
       click_button 'Adicionar Item'
 
-      page.should have_content 'Item 1'
-      page.should have_content 'Item 2'
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_content 'Item 2'
 
       click_button 'Adicionar Item'
 
-      page.should have_content 'Item 1'
-      page.should have_content 'Item 2'
-      page.should have_content 'Item 3'
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_content 'Item 2'
+      expect(page).to have_content 'Item 3'
 
       # removing the first item to se that it re-order all the others
       click_button 'Remover Item'
 
-      page.should have_content 'Item 1'
-      page.should have_content 'Item 2'
-      page.should_not have_content 'Item 3'
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_content 'Item 2'
+      expect(page).not_to have_content 'Item 3'
 
       # adding another lot to see that its items are numbered independently of the first lot
       click_button 'Adicionar Lote'
@@ -708,7 +708,7 @@ feature "PriceCollections" do
       within '.price-collection-lot:last' do
         click_button 'Adicionar Item'
 
-        page.should have_content 'Item 1'
+        expect(page).to have_content 'Item 1'
       end
     end
   end
@@ -729,8 +729,8 @@ feature "PriceCollections" do
         click_record 'Wenderson Malheiros'
       end
 
-      page.should have_disabled_field 'Email'
-      page.should have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
+      expect(page).to have_disabled_field 'Email'
+      expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
     end
   end
 
@@ -742,44 +742,44 @@ feature "PriceCollections" do
     click_link '1/2012'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Ano'
-      page.should have_disabled_field 'Data'
-      page.should have_disabled_field 'Status'
-      page.should have_disabled_field 'Tipo de apuração'
-      page.should have_disabled_field 'Local de entrega'
-      page.should have_disabled_field 'Responsável'
-      page.should have_disabled_field 'Forma de pagamento'
-      page.should have_disabled_field 'Prazo de entrega'
-      page.should have_disabled_field 'Vencimento'
-      page.should have_disabled_field 'Período do prazo de entrega'
-      page.should have_disabled_field 'Validade da proposta'
-      page.should have_disabled_field 'Período da validade da proposta'
-      page.should have_disabled_field 'Objeto'
-      page.should have_disabled_field 'Observações'
+      expect(page).to have_disabled_field 'Ano'
+      expect(page).to have_disabled_field 'Data'
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_disabled_field 'Tipo de apuração'
+      expect(page).to have_disabled_field 'Local de entrega'
+      expect(page).to have_disabled_field 'Responsável'
+      expect(page).to have_disabled_field 'Forma de pagamento'
+      expect(page).to have_disabled_field 'Prazo de entrega'
+      expect(page).to have_disabled_field 'Vencimento'
+      expect(page).to have_disabled_field 'Período do prazo de entrega'
+      expect(page).to have_disabled_field 'Validade da proposta'
+      expect(page).to have_disabled_field 'Período da validade da proposta'
+      expect(page).to have_disabled_field 'Objeto'
+      expect(page).to have_disabled_field 'Observações'
     end
 
     within_tab 'Lotes de itens' do
-      page.should have_disabled_field 'Observações'
-      page.should have_disabled_field 'Material'
-      page.should have_disabled_field 'Marca'
-      page.should have_disabled_field 'Unidade'
-      page.should have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Observações'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Marca'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
 
-      page.should_not have_button 'Remover Item'
-      page.should_not have_button 'Adicionar Item'
-      page.should_not have_button 'Remover Lote'
-      page.should_not have_button 'Adicionar Lote'
+      expect(page).not_to have_button 'Remover Item'
+      expect(page).not_to have_button 'Adicionar Item'
+      expect(page).not_to have_button 'Remover Lote'
+      expect(page).not_to have_button 'Adicionar Lote'
     end
 
     within_tab 'Fornecedores' do
-      page.should have_disabled_field 'Fornecedor'
-      page.should have_disabled_field 'E-mail'
+      expect(page).to have_disabled_field 'Fornecedor'
+      expect(page).to have_disabled_field 'E-mail'
 
-      page.should_not have_button 'Adicionar Fornecedor'
-      page.should_not have_button 'Remover Fornecedor'
+      expect(page).not_to have_button 'Adicionar Fornecedor'
+      expect(page).not_to have_button 'Remover Fornecedor'
     end
 
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_button 'Salvar'
   end
 
   scenario 'opening the filter modal' do
@@ -789,7 +789,7 @@ feature "PriceCollections" do
     navigate 'Compras e Licitações > Coletas de Preços'
 
     within_records do
-      page.should have_css('a', :count => 2)
+      expect(page).to have_css('a', :count => 2)
     end
 
     click_link 'Filtrar Coletas de Preços'
@@ -799,7 +799,7 @@ feature "PriceCollections" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_css('a', :count => 1)
+      expect(page).to have_css('a', :count => 1)
     end
   end
 

@@ -19,12 +19,12 @@ feature "Signatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Assinatura criado com sucesso.'
+    expect(page).to have_notice 'Assinatura criado com sucesso.'
 
     click_link 'Gabriel Sobrinho'
 
-    page.should have_field 'Pessoa', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Cargo', :with => 'Gerente'
+    expect(page).to have_field 'Pessoa', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Cargo', :with => 'Gerente'
   end
 
   scenario 'update an existent signature' do
@@ -41,12 +41,12 @@ feature "Signatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Assinatura editado com sucesso.'
+    expect(page).to have_notice 'Assinatura editado com sucesso.'
 
     click_link 'Wenderson Malheiros'
 
-    page.should have_field 'Pessoa', :with => 'Wenderson Malheiros'
-    page.should have_field 'Cargo', :with => 'Supervisor'
+    expect(page).to have_field 'Pessoa', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Cargo', :with => 'Supervisor'
   end
 
   scenario 'destroy an existent signature' do
@@ -58,9 +58,9 @@ feature "Signatures" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Assinatura apagado com sucesso.'
+    expect(page).to have_notice 'Assinatura apagado com sucesso.'
 
-    page.should_not have_content 'Gabriel Sobrinho'
-    page.should_not have_content 'Gerente'
+    expect(page).not_to have_content 'Gabriel Sobrinho'
+    expect(page).not_to have_content 'Gerente'
   end
 end

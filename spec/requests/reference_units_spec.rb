@@ -16,12 +16,12 @@ feature "ReferenceUnits" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Unidade de Referência criada com sucesso.'
+    expect(page).to have_notice 'Unidade de Referência criada com sucesso.'
 
     click_link 'R$'
 
-    page.should have_field 'Descrição', :with => 'Reais'
-    page.should have_field 'Sigla', :with => 'R$'
+    expect(page).to have_field 'Descrição', :with => 'Reais'
+    expect(page).to have_field 'Sigla', :with => 'R$'
   end
 
   scenario 'update a reference_unit' do
@@ -36,12 +36,12 @@ feature "ReferenceUnits" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Unidade de Referência editada com sucesso.'
+    expect(page).to have_notice 'Unidade de Referência editada com sucesso.'
 
     click_link 'cm'
 
-    page.should have_field 'Descrição', :with => 'Centímetro'
-    page.should have_field 'Sigla', :with => 'cm'
+    expect(page).to have_field 'Descrição', :with => 'Centímetro'
+    expect(page).to have_field 'Sigla', :with => 'cm'
   end
 
   scenario 'destroy an existent reference_unit' do
@@ -53,8 +53,8 @@ feature "ReferenceUnits" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Unidade de Referência apagada com sucesso.'
+    expect(page).to have_notice 'Unidade de Referência apagada com sucesso.'
 
-    page.should_not have_content 'Metro'
+    expect(page).not_to have_content 'Metro'
   end
 end

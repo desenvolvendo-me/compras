@@ -20,96 +20,96 @@ feature "LicitationObjects" do
 
     within_tab 'Total acumulado' do
       within_fieldset 'Total acumulado de compras e serviços' do
-        page.should have_disabled_field  'Dispensa de licitação'
-        page.should have_disabled_field  'Carta convite'
-        page.should have_disabled_field  'Tomada de preço'
-        page.should have_disabled_field  'Concorrência pública'
+        expect(page).to have_disabled_field  'Dispensa de licitação'
+        expect(page).to have_disabled_field  'Carta convite'
+        expect(page).to have_disabled_field  'Tomada de preço'
+        expect(page).to have_disabled_field  'Concorrência pública'
 
-        page.should have_field 'Dispensa de licitação', :with => '0,00'
-        page.should have_field 'Carta convite', :with => '0,00'
-        page.should have_field 'Tomada de preço', :with => '0,00'
-        page.should have_field 'Concorrência pública', :with => '0,00'
+        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
+        expect(page).to have_field 'Carta convite', :with => '0,00'
+        expect(page).to have_field 'Tomada de preço', :with => '0,00'
+        expect(page).to have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de obras e engenharia' do
-        page.should have_disabled_field  'Dispensa de licitação'
-        page.should have_disabled_field  'Carta convite'
-        page.should have_disabled_field  'Tomada de preço'
-        page.should have_disabled_field  'Concorrência pública'
+        expect(page).to have_disabled_field  'Dispensa de licitação'
+        expect(page).to have_disabled_field  'Carta convite'
+        expect(page).to have_disabled_field  'Tomada de preço'
+        expect(page).to have_disabled_field  'Concorrência pública'
 
-        page.should have_field 'Dispensa de licitação', :with => '0,00'
-        page.should have_field 'Carta convite', :with => '0,00'
-        page.should have_field 'Tomada de preço', :with => '0,00'
-        page.should have_field 'Concorrência pública', :with => '0,00'
+        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
+        expect(page).to have_field 'Carta convite', :with => '0,00'
+        expect(page).to have_field 'Tomada de preço', :with => '0,00'
+        expect(page).to have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de modalidades especiais' do
-        page.should have_disabled_field  'Leilão'
-        page.should have_disabled_field  'Inexigibilidade'
-        page.should have_disabled_field  'Concurso'
+        expect(page).to have_disabled_field  'Leilão'
+        expect(page).to have_disabled_field  'Inexigibilidade'
+        expect(page).to have_disabled_field  'Concurso'
 
-        page.should have_field 'Leilão', :with => '0,00'
-        page.should have_field 'Inexigibilidade', :with => '0,00'
-        page.should have_field 'Concurso', :with => '0,00'
+        expect(page).to have_field 'Leilão', :with => '0,00'
+        expect(page).to have_field 'Inexigibilidade', :with => '0,00'
+        expect(page).to have_field 'Concurso', :with => '0,00'
       end
     end
 
     within_tab 'Materiais' do
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
-      page.should have_content '01.01.00001'
-      page.should have_content 'Antivirus'
+      expect(page).to have_content '01.01.00001'
+      expect(page).to have_content 'Antivirus'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Objeto de Licitação criado com sucesso.'
+    expect(page).to have_notice 'Objeto de Licitação criado com sucesso.'
 
     click_link 'Ponte'
 
     within_tab 'Principal' do
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Descrição', :with => 'Ponte'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Descrição', :with => 'Ponte'
     end
 
     within_tab 'Total acumulado' do
       within_fieldset 'Total acumulado de compras e serviços' do
-        page.should have_disabled_field  'Dispensa de licitação'
-        page.should have_disabled_field  'Carta convite'
-        page.should have_disabled_field  'Tomada de preço'
-        page.should have_disabled_field  'Concorrência pública'
+        expect(page).to have_disabled_field  'Dispensa de licitação'
+        expect(page).to have_disabled_field  'Carta convite'
+        expect(page).to have_disabled_field  'Tomada de preço'
+        expect(page).to have_disabled_field  'Concorrência pública'
 
-        page.should have_field 'Dispensa de licitação', :with => '0,00'
-        page.should have_field 'Carta convite', :with => '0,00'
-        page.should have_field 'Tomada de preço', :with => '0,00'
-        page.should have_field 'Concorrência pública', :with => '0,00'
+        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
+        expect(page).to have_field 'Carta convite', :with => '0,00'
+        expect(page).to have_field 'Tomada de preço', :with => '0,00'
+        expect(page).to have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de obras e engenharia' do
-        page.should have_disabled_field  'Dispensa de licitação'
-        page.should have_disabled_field  'Carta convite'
-        page.should have_disabled_field  'Tomada de preço'
-        page.should have_disabled_field  'Concorrência pública'
+        expect(page).to have_disabled_field  'Dispensa de licitação'
+        expect(page).to have_disabled_field  'Carta convite'
+        expect(page).to have_disabled_field  'Tomada de preço'
+        expect(page).to have_disabled_field  'Concorrência pública'
 
-        page.should have_field 'Dispensa de licitação', :with => '0,00'
-        page.should have_field 'Carta convite', :with => '0,00'
-        page.should have_field 'Tomada de preço', :with => '0,00'
-        page.should have_field 'Concorrência pública', :with => '0,00'
+        expect(page).to have_field 'Dispensa de licitação', :with => '0,00'
+        expect(page).to have_field 'Carta convite', :with => '0,00'
+        expect(page).to have_field 'Tomada de preço', :with => '0,00'
+        expect(page).to have_field 'Concorrência pública', :with => '0,00'
       end
 
       within_fieldset 'Total acumulado de modalidades especiais' do
-        page.should have_disabled_field  'Leilão'
-        page.should have_disabled_field  'Inexigibilidade'
-        page.should have_disabled_field  'Concurso'
+        expect(page).to have_disabled_field  'Leilão'
+        expect(page).to have_disabled_field  'Inexigibilidade'
+        expect(page).to have_disabled_field  'Concurso'
 
-        page.should have_field 'Leilão', :with => '0,00'
-        page.should have_field 'Inexigibilidade', :with => '0,00'
-        page.should have_field 'Concurso', :with => '0,00'
+        expect(page).to have_field 'Leilão', :with => '0,00'
+        expect(page).to have_field 'Inexigibilidade', :with => '0,00'
+        expect(page).to have_field 'Concurso', :with => '0,00'
       end
     end
 
     within_tab 'Materiais' do
-      page.should have_content 'Antivirus'
+      expect(page).to have_content 'Antivirus'
     end
   end
 
@@ -121,18 +121,18 @@ feature "LicitationObjects" do
     click_link 'Viaduto'
 
     within_tab 'Materiais' do
-      page.should have_content 'Arame comum'
+      expect(page).to have_content 'Arame comum'
       click_button 'Remover Material'
     end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Objeto de Licitação editado com sucesso.'
+    expect(page).to have_notice 'Objeto de Licitação editado com sucesso.'
 
     click_link 'Viaduto'
 
     within_tab 'Materiais' do
-      page.should_not have_content 'Arame comum'
+      expect(page).not_to have_content 'Arame comum'
     end
   end
 
@@ -155,17 +155,17 @@ feature "LicitationObjects" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Objeto de Licitação editado com sucesso.'
+    expect(page).to have_notice 'Objeto de Licitação editado com sucesso.'
 
     click_link 'Viaduto'
 
     within_tab 'Principal' do
-      page.should have_field 'Ano', :with => '2013'
-      page.should have_field 'Descrição', :with => 'Viaduto'
+      expect(page).to have_field 'Ano', :with => '2013'
+      expect(page).to have_field 'Descrição', :with => 'Viaduto'
     end
 
     within_tab 'Materiais' do
-      page.should have_content 'Arame comum'
+      expect(page).to have_content 'Arame comum'
     end
   end
 
@@ -178,10 +178,10 @@ feature "LicitationObjects" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Objeto de Licitação apagado com sucesso.'
+    expect(page).to have_notice 'Objeto de Licitação apagado com sucesso.'
 
-    page.should_not have_content 'Ponte'
-    page.should_not have_content '2012'
+    expect(page).not_to have_content 'Ponte'
+    expect(page).not_to have_content '2012'
   end
 
   scenario 'validate uniqueness of description and year together' do
@@ -199,7 +199,7 @@ feature "LicitationObjects" do
     click_button 'Salvar'
 
     within_tab 'Principal' do
-      page.should have_content 'já existe para o ano informado'
+      expect(page).to have_content 'já existe para o ano informado'
     end
   end
 
@@ -214,11 +214,11 @@ feature "LicitationObjects" do
 
     within_tab 'Total acumulado' do
       within_fieldset 'Total acumulado de compras e serviços' do
-        page.should have_field 'Dispensa de licitação', :with => '1.200,00'
+        expect(page).to have_field 'Dispensa de licitação', :with => '1.200,00'
       end
 
       within_fieldset 'Total acumulado de obras e engenharia' do
-        page.should have_field 'Dispensa de licitação', :with => '600,00'
+        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
       end
     end
   end

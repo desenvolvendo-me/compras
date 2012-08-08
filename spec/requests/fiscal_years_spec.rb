@@ -15,11 +15,11 @@ feature "FiscalYears" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Exercício Fiscal criado com sucesso.'
+    expect(page).to have_notice 'Exercício Fiscal criado com sucesso.'
 
     click_link '2011'
 
-    page.should have_field 'Ano', :with => '2011'
+    expect(page).to have_field 'Ano', :with => '2011'
   end
 
   scenario 'update an existent fiscal year' do
@@ -33,11 +33,11 @@ feature "FiscalYears" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Exercício Fiscal editado com sucesso.'
+    expect(page).to have_notice 'Exercício Fiscal editado com sucesso.'
 
     click_link '2012'
 
-    page.should have_field 'Ano', :with => '2012'
+    expect(page).to have_field 'Ano', :with => '2012'
   end
 
   scenario 'destroy an existent fiscal_year' do
@@ -49,8 +49,8 @@ feature "FiscalYears" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Exercício Fiscal apagado com sucesso.'
+    expect(page).to have_notice 'Exercício Fiscal apagado com sucesso.'
 
-    page.should_not have_content '2011'
+    expect(page).not_to have_content '2011'
   end
 end

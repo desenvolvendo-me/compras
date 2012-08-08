@@ -23,17 +23,17 @@ feature "Agencies" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Agência criada com sucesso.'
+    expect(page).to have_notice 'Agência criada com sucesso.'
 
     click_link 'Comercial BB'
 
-    page.should have_field 'Banco', :with => 'Banco do Brasil'
-    page.should have_field 'Nome', :with => 'Comercial BB'
-    page.should have_field 'Número', :with => '10000'
-    page.should have_field 'Dígito', :with => '3'
-    page.should have_field 'Telefone', :with => '(33) 3333-3333'
-    page.should have_field 'Fax', :with => '(99) 9999-9999'
-    page.should have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
+    expect(page).to have_field 'Banco', :with => 'Banco do Brasil'
+    expect(page).to have_field 'Nome', :with => 'Comercial BB'
+    expect(page).to have_field 'Número', :with => '10000'
+    expect(page).to have_field 'Dígito', :with => '3'
+    expect(page).to have_field 'Telefone', :with => '(33) 3333-3333'
+    expect(page).to have_field 'Fax', :with => '(99) 9999-9999'
+    expect(page).to have_field 'E-mail', :with => 'wenderson.malheiros@gmail.com'
   end
 
   scenario 'update an existent agency' do
@@ -49,12 +49,12 @@ feature "Agencies" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Agência editada com sucesso.'
+    expect(page).to have_notice 'Agência editada com sucesso.'
 
     click_link 'Agência ST'
 
-    page.should have_field 'Banco', :with => 'Santander'
-    page.should have_field 'Nome', :with => 'Agência ST'
+    expect(page).to have_field 'Banco', :with => 'Santander'
+    expect(page).to have_field 'Nome', :with => 'Agência ST'
   end
 
   scenario 'destroy an existent agency' do
@@ -66,8 +66,8 @@ feature "Agencies" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Agência apagada com sucesso.'
+    expect(page).to have_notice 'Agência apagada com sucesso.'
 
-    page.should_not have_content 'Agência Santander'
+    expect(page).not_to have_content 'Agência Santander'
   end
 end

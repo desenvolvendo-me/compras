@@ -16,10 +16,10 @@ feature 'Account' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Usuário editado com sucesso.'
+    expect(page).to have_notice 'Usuário editado com sucesso.'
 
-    page.should have_field 'Nome', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Login', :with => 'sobrinho.campos.gabriel'
-    page.should have_field 'E-mail', :with => 'sobrinho.gabriel@gmail.com'
+    expect(page).to have_field 'Nome', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Login', :with => 'sobrinho.campos.gabriel'
+    expect(page).to have_field 'E-mail', :with => 'sobrinho.gabriel@gmail.com'
   end
 end

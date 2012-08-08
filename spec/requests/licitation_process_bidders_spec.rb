@@ -20,11 +20,11 @@ feature "LicitationProcessBidders" do
 
     click_link 'Licitantes'
 
-    page.should have_link bidder.to_s
+    expect(page).to have_link bidder.to_s
 
     click_link 'Voltar ao processo licitatório'
 
-    page.should have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
+    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario 'creating a new bidder' do
@@ -45,9 +45,9 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Licitante'
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
-    page.should have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
     within_modal 'Fornecedor' do
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
@@ -67,8 +67,8 @@ feature "LicitationProcessBidders" do
 
     within_tab 'Documentos' do
       # testing that document type from licitation process are automaticaly included in bidder
-      page.should have_disabled_field 'Documento'
-      page.should have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_disabled_field 'Documento'
+      expect(page).to have_field 'Documento', :with => 'Fiscal'
 
       fill_in 'Número/certidão', :with => '222222'
       fill_in 'Data de emissão', :with => I18n.l(Date.current)
@@ -76,72 +76,72 @@ feature "LicitationProcessBidders" do
     end
 
     within_tab 'Propostas' do
-      page.should have_content 'Item 1'
-      page.should have_disabled_field 'Preço total dos itens'
-      page.should have_disabled_field 'Material'
-      page.should have_disabled_field 'Situação'
-      page.should have_disabled_field 'Classificação'
-      page.should have_disabled_field 'Unidade'
-      page.should have_disabled_field 'Quantidade'
-      page.should have_disabled_field 'Preço total'
-      page.should have_select 'Situação', :selected => 'Indefinido'
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
+      expect(page).to have_select 'Situação', :selected => 'Indefinido'
 
       fill_in 'Marca', :with => 'Apple'
       fill_in 'Preço unitário', :with => '11,22'
 
-      page.should have_field 'Preço total', :with => '22,44'
-      page.should have_field 'Preço total dos itens', :with => '22,44'
+      expect(page).to have_field 'Preço total', :with => '22,44'
+      expect(page).to have_field 'Preço total dos itens', :with => '22,44'
     end
 
     click_button 'Salvar'
 
-    page.should have_content 'Licitante criado com sucesso.'
+    expect(page).to have_content 'Licitante criado com sucesso.'
 
     within_records do
       click_link licitation_process.licitation_process_bidders.last.to_s
     end
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
-    page.should have_field 'Processo administrativo', :with => '1/2013'
-    page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Protocolo', :with => '123456'
-    page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
-    page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Protocolo', :with => '123456'
+    expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
     within_tab 'Representantes credenciados' do
-      page.should have_content 'Wenderson Malheiros'
-      page.should have_content '003.149.513-34'
-      page.should have_content 'Joao da Silva'
-      page.should have_content '206.538.014-40'
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content '003.149.513-34'
+      expect(page).to have_content 'Joao da Silva'
+      expect(page).to have_content '206.538.014-40'
     end
 
     within_tab 'Documentos' do
-      page.should have_field 'Documento', :with => 'Fiscal'
-      page.should have_field 'Número/certidão', :with => '222222'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-      page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
+      expect(page).to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Número/certidão', :with => '222222'
+      expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
+      expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 5.days)
     end
 
     within_tab 'Propostas' do
-      page.should have_content 'Item 1'
-      page.should have_disabled_field 'Preço total dos itens'
-      page.should have_disabled_field 'Material'
-      page.should have_disabled_field 'Situação'
-      page.should have_disabled_field 'Classificação'
-      page.should have_disabled_field 'Unidade'
-      page.should have_disabled_field 'Quantidade'
-      page.should have_disabled_field 'Preço total'
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
 
-      page.should have_field 'Preço total dos itens', :with => '22,44'
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_select 'Situação', :selected => 'Indefinido'
-      page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Quantidade', :with => '2'
-      page.should have_field 'Preço unitário', :with => '11,22'
-      page.should have_field 'Preço total', :with => '22,44'
-      page.should have_field 'Marca', :with => 'Apple'
+      expect(page).to have_field 'Preço total dos itens', :with => '22,44'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_select 'Situação', :selected => 'Indefinido'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '2'
+      expect(page).to have_field 'Preço unitário', :with => '11,22'
+      expect(page).to have_field 'Preço total', :with => '22,44'
+      expect(page).to have_field 'Marca', :with => 'Apple'
     end
   end
 
@@ -164,9 +164,9 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
-    page.should have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
     within_modal 'Fornecedor' do
       fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
@@ -192,72 +192,72 @@ feature "LicitationProcessBidders" do
     end
 
     within_tab 'Propostas' do
-      page.should have_content 'Item 1'
-      page.should have_disabled_field 'Preço total dos itens'
-      page.should have_disabled_field 'Material'
-      page.should have_disabled_field 'Situação'
-      page.should have_disabled_field 'Classificação'
-      page.should have_disabled_field 'Unidade'
-      page.should have_disabled_field 'Quantidade'
-      page.should have_disabled_field 'Preço total'
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
 
       fill_in 'Marca', :with => 'LG'
       fill_in 'Preço unitário', :with => '10,01'
 
-      page.should have_field 'Preço unitário', :with => '10,01'
-      page.should have_field 'Preço total', :with => '20,02'
+      expect(page).to have_field 'Preço unitário', :with => '10,01'
+      expect(page).to have_field 'Preço total', :with => '20,02'
     end
 
     click_button 'Salvar'
 
-    page.should have_content 'Licitante editado com sucesso.'
+    expect(page).to have_content 'Licitante editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
-    page.should have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
-    page.should have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Protocolo', :with => '111111'
-    page.should have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
-    page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
+    expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Protocolo', :with => '111111'
+    expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
 
     within_tab 'Representantes credenciados' do
-      page.should_not have_content 'Gabriel Sobrinho'
-      page.should_not have_content '003.151.987-37'
-      page.should have_content 'Wenderson Malheiros'
-      page.should have_content '003.149.513-34'
+      expect(page).not_to have_content 'Gabriel Sobrinho'
+      expect(page).not_to have_content '003.151.987-37'
+      expect(page).to have_content 'Wenderson Malheiros'
+      expect(page).to have_content '003.149.513-34'
     end
 
     within_tab 'Documentos' do
-      page.should have_field 'Documento', :with => 'Fiscal'
-      page.should have_field 'Número/certidão', :with => '333333'
-      page.should have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
-      page.should have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
+      expect(page).to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to have_field 'Número/certidão', :with => '333333'
+      expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.yesterday)
+      expect(page).to have_field 'Validade', :with => I18n.l(Date.tomorrow + 6.days)
     end
 
     within_tab 'Propostas' do
-      page.should have_content 'Item 1'
-      page.should have_disabled_field 'Preço total dos itens'
-      page.should have_disabled_field 'Material'
-      page.should have_disabled_field 'Situação'
-      page.should have_disabled_field 'Classificação'
-      page.should have_disabled_field 'Unidade'
-      page.should have_disabled_field 'Quantidade'
-      page.should have_disabled_field 'Preço total'
+      expect(page).to have_content 'Item 1'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço total'
 
-      page.should have_field 'Preço total dos itens', :with => '20,02'
-      page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-      page.should have_select 'Situação', :selected => 'Indefinido'
-      page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Unidade', :with => 'UN'
-      page.should have_field 'Quantidade', :with => '2'
-      page.should have_field 'Preço unitário', :with => '10,01'
-      page.should have_field 'Preço total', :with => '20,02'
-      page.should have_field 'Marca', :with => 'LG'
+      expect(page).to have_field 'Preço total dos itens', :with => '20,02'
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_select 'Situação', :selected => 'Indefinido'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_field 'Quantidade', :with => '2'
+      expect(page).to have_field 'Preço unitário', :with => '10,01'
+      expect(page).to have_field 'Preço total', :with => '20,02'
+      expect(page).to have_field 'Marca', :with => 'LG'
     end
   end
 
@@ -275,7 +275,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Licitantes'
 
-    page.should have_link bidder.to_s
+    expect(page).to have_link bidder.to_s
 
     within_records do
       page.find('a').click
@@ -283,9 +283,9 @@ feature "LicitationProcessBidders" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Licitante apagado com sucesso.'
+    expect(page).to have_notice 'Licitante apagado com sucesso.'
 
-    page.should_not have_link bidder.to_s
+    expect(page).not_to have_link bidder.to_s
   end
 
   scenario 'when is not invited should disable and clear date, protocol fields' do
@@ -305,24 +305,24 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    page.should have_field 'Protocolo', :with => '123456'
-    page.should have_field 'Data do protocolo', :with => I18n.l(Date.current)
-    page.should have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_field 'Protocolo', :with => '123456'
+    expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
-    page.should_not have_disabled_field 'Protocolo'
-    page.should_not have_disabled_field 'Data do protocolo'
-    page.should_not have_disabled_field 'Data do recebimento'
+    expect(page).not_to have_disabled_field 'Protocolo'
+    expect(page).not_to have_disabled_field 'Data do protocolo'
+    expect(page).not_to have_disabled_field 'Data do recebimento'
 
     uncheck 'Convidado'
 
-    page.should have_disabled_field 'Protocolo'
-    page.should have_disabled_field 'Data do protocolo'
-    page.should have_disabled_field 'Data do recebimento'
+    expect(page).to have_disabled_field 'Protocolo'
+    expect(page).to have_disabled_field 'Data do protocolo'
+    expect(page).to have_disabled_field 'Data do recebimento'
 
-    page.should_not have_checked_field 'Convidado'
-    page.should have_field 'Protocolo', :with => ''
-    page.should have_field 'Data do protocolo', :with => ''
-    page.should have_field 'Data do recebimento', :with => ''
+    expect(page).not_to have_checked_field 'Convidado'
+    expect(page).to have_field 'Protocolo', :with => ''
+    expect(page).to have_field 'Data do protocolo', :with => ''
+    expect(page).to have_field 'Data do recebimento', :with => ''
 
     click_button 'Salvar'
 
@@ -330,14 +330,14 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    page.should_not have_checked_field 'Convidado'
-    page.should have_field 'Protocolo', :with => ''
-    page.should have_field 'Data do protocolo', :with => ''
-    page.should have_field 'Data do recebimento', :with => ''
+    expect(page).not_to have_checked_field 'Convidado'
+    expect(page).to have_field 'Protocolo', :with => ''
+    expect(page).to have_field 'Data do protocolo', :with => ''
+    expect(page).to have_field 'Data do recebimento', :with => ''
 
-    page.should have_disabled_field 'Protocolo'
-    page.should have_disabled_field 'Data do protocolo'
-    page.should have_disabled_field 'Data do recebimento'
+    expect(page).to have_disabled_field 'Protocolo'
+    expect(page).to have_disabled_field 'Data do protocolo'
+    expect(page).to have_disabled_field 'Data do recebimento'
   end
 
   scenario 'validating uniqueness of creditor on licitation process scope' do
@@ -363,7 +363,7 @@ feature "LicitationProcessBidders" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'showing some items without lot on proposals' do
@@ -382,53 +382,53 @@ feature "LicitationProcessBidders" do
 
     click_link bidder.to_s
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
-    page.should have_field 'Processo administrativo', :with => '1/2013'
-    page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-    page.should have_field 'Protocolo', :with => '123456'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Protocolo', :with => '123456'
 
     within_tab 'Propostas' do
 
       within '.proposal' do
-        page.should have_content 'Item 1'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 1'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '2'
+        expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '2'
 
         fill_in 'Marca', :with => 'mcafee'
         fill_in 'Preço unitário', :with => '99,99'
 
-        page.should have_field 'Preço total', :with => '199,98'
+        expect(page).to have_field 'Preço total', :with => '199,98'
       end
 
       within 'div.proposal:last' do
-        page.should have_content 'Item 2'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 2'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '1'
+        expect(page).to have_field 'Material', :with => '02.02.00002 - Arame comum'
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '1'
 
         fill_in 'Marca', :with => 'Arame Forte'
         fill_in 'Preço unitário', :with => '9,99'
 
-        page.should have_field 'Preço total', :with => '9,99'
+        expect(page).to have_field 'Preço total', :with => '9,99'
       end
 
-      page.should have_field 'Preço total dos itens', :with => '209,97'
+      expect(page).to have_field 'Preço total dos itens', :with => '209,97'
     end
 
     click_button 'Salvar'
@@ -438,45 +438,45 @@ feature "LicitationProcessBidders" do
     within_tab 'Propostas' do
 
       within '.proposal' do
-        page.should have_content 'Item 1'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 1'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_select 'Situação', :selected => 'Indefinido'
-        page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '2'
-        page.should have_field 'Preço unitário', :with => '99,99'
-        page.should have_field 'Preço total', :with => '199,98'
-        page.should have_field 'Marca', :with => 'mcafee'
+        expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+        expect(page).to have_select 'Situação', :selected => 'Indefinido'
+        expect(page).to have_field 'Classificação', :with => ''
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '2'
+        expect(page).to have_field 'Preço unitário', :with => '99,99'
+        expect(page).to have_field 'Preço total', :with => '199,98'
+        expect(page).to have_field 'Marca', :with => 'mcafee'
       end
 
       within '.proposal:last' do
-        page.should have_content 'Item 2'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 2'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
-        page.should have_select 'Situação', :selected => 'Indefinido'
-        page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '1'
-        page.should have_field 'Preço unitário', :with => '9,99'
-        page.should have_field 'Preço total', :with => '9,99'
-        page.should have_field 'Marca', :with => 'Arame Forte'
+        expect(page).to have_field 'Material', :with => '02.02.00002 - Arame comum'
+        expect(page).to have_select 'Situação', :selected => 'Indefinido'
+        expect(page).to have_field 'Classificação', :with => ''
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '1'
+        expect(page).to have_field 'Preço unitário', :with => '9,99'
+        expect(page).to have_field 'Preço total', :with => '9,99'
+        expect(page).to have_field 'Marca', :with => 'Arame Forte'
       end
 
-      page.should have_disabled_field 'Preço total dos itens'
-      page.should have_field 'Preço total dos itens', :with => '209,97'
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_field 'Preço total dos itens', :with => '209,97'
     end
   end
 
@@ -501,16 +501,16 @@ feature "LicitationProcessBidders" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_content 'Lote de itens criado com sucesso.'
 
     within_records do
       click_link licitation_process.licitation_process_lots.last.to_s
     end
 
-    page.should have_field 'Observações', :with => 'Lote 1'
-    page.should have_content '01.01.00001 - Antivirus'
-    page.should have_content '2'
-    page.should have_content '10,00'
+    expect(page).to have_field 'Observações', :with => 'Lote 1'
+    expect(page).to have_content '01.01.00001 - Antivirus'
+    expect(page).to have_content '2'
+    expect(page).to have_content '10,00'
 
     click_link 'Cancelar'
 
@@ -521,21 +521,21 @@ feature "LicitationProcessBidders" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_content 'Lote de itens criado com sucesso.'
 
     within_records do
       click_link licitation_process.licitation_process_lots.last.to_s
     end
 
-    page.should have_field 'Observações', :with => 'Lote 2'
-    page.should have_content '02.02.00002 - Arame comum'
-    page.should have_content '1'
-    page.should have_content '10,00'
+    expect(page).to have_field 'Observações', :with => 'Lote 2'
+    expect(page).to have_content '02.02.00002 - Arame comum'
+    expect(page).to have_content '1'
+    expect(page).to have_content '10,00'
 
     click_link 'Cancelar'
 
-    page.should have_content 'Lote 1'
-    page.should have_content 'Lote 2'
+    expect(page).to have_content 'Lote 1'
+    expect(page).to have_content 'Lote 2'
 
     click_link 'Voltar ao processo licitatório'
 
@@ -543,56 +543,56 @@ feature "LicitationProcessBidders" do
 
     click_link bidder.to_s
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
-    page.should have_field 'Processo administrativo', :with => '1/2013'
-    page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-    page.should have_field 'Protocolo', :with => '123456'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Protocolo', :with => '123456'
 
     within_tab 'Propostas' do
-      page.should have_content 'Lote 1'
-      page.should have_content 'Lote 2'
+      expect(page).to have_content 'Lote 1'
+      expect(page).to have_content 'Lote 2'
 
       within_tab 'Lote 1' do
-        page.should have_content 'Item 1'
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 1'
+        expect(page).to have_disabled_field 'Preço total dos itens'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '2'
+        expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '2'
 
         fill_in 'Marca', :with => 'mcafee'
         fill_in 'Preço unitário', :with => '99,99'
 
-        page.should have_field 'Preço total', :with => '199,98'
-        page.should have_field 'Preço total dos itens', :with => '199,98'
+        expect(page).to have_field 'Preço total', :with => '199,98'
+        expect(page).to have_field 'Preço total dos itens', :with => '199,98'
       end
 
       within_tab 'Lote 2' do
-        page.should have_content 'Item 1'
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 1'
+        expect(page).to have_disabled_field 'Preço total dos itens'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '1'
+        expect(page).to have_field 'Material', :with => '02.02.00002 - Arame comum'
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '1'
 
         fill_in 'Marca', :with => 'Arame Forte'
         fill_in 'Preço unitário', :with => '9,99'
 
-        page.should have_field 'Preço total', :with => '9,99'
-        page.should have_field 'Preço total dos itens', :with => '9,99'
+        expect(page).to have_field 'Preço total', :with => '9,99'
+        expect(page).to have_field 'Preço total dos itens', :with => '9,99'
       end
     end
 
@@ -602,45 +602,45 @@ feature "LicitationProcessBidders" do
 
     within_tab 'Propostas' do
       within_tab 'Lote 1' do
-        page.should have_content 'Item 1'
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 1'
+        expect(page).to have_disabled_field 'Preço total dos itens'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Preço total dos itens', :with => '199,98'
-        page.should have_field 'Material', :with => '01.01.00001 - Antivirus'
-        page.should have_select 'Situação', :selected => 'Indefinido'
-        page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '2'
-        page.should have_field 'Preço unitário', :with => '99,99'
-        page.should have_field 'Preço total', :with => '199,98'
-        page.should have_field 'Marca', :with => 'mcafee'
+        expect(page).to have_field 'Preço total dos itens', :with => '199,98'
+        expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+        expect(page).to have_select 'Situação', :selected => 'Indefinido'
+        expect(page).to have_field 'Classificação', :with => ''
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '2'
+        expect(page).to have_field 'Preço unitário', :with => '99,99'
+        expect(page).to have_field 'Preço total', :with => '199,98'
+        expect(page).to have_field 'Marca', :with => 'mcafee'
       end
 
       within_tab 'Lote 2' do
-        page.should have_content 'Item 1'
-        page.should have_disabled_field 'Preço total dos itens'
-        page.should have_disabled_field 'Material'
-        page.should have_disabled_field 'Situação'
-        page.should have_disabled_field 'Classificação'
-        page.should have_disabled_field 'Unidade'
-        page.should have_disabled_field 'Quantidade'
-        page.should have_disabled_field 'Preço total'
+        expect(page).to have_content 'Item 1'
+        expect(page).to have_disabled_field 'Preço total dos itens'
+        expect(page).to have_disabled_field 'Material'
+        expect(page).to have_disabled_field 'Situação'
+        expect(page).to have_disabled_field 'Classificação'
+        expect(page).to have_disabled_field 'Unidade'
+        expect(page).to have_disabled_field 'Quantidade'
+        expect(page).to have_disabled_field 'Preço total'
 
-        page.should have_field 'Preço total dos itens', :with => '9,99'
-        page.should have_field 'Material', :with => '02.02.00002 - Arame comum'
-        page.should have_select 'Situação', :selected => 'Indefinido'
-        page.should have_field 'Classificação', :with => ''
-        page.should have_field 'Unidade', :with => 'UN'
-        page.should have_field 'Quantidade', :with => '1'
-        page.should have_field 'Preço unitário', :with => '9,99'
-        page.should have_field 'Preço total', :with => '9,99'
-        page.should have_field 'Marca', :with => 'Arame Forte'
+        expect(page).to have_field 'Preço total dos itens', :with => '9,99'
+        expect(page).to have_field 'Material', :with => '02.02.00002 - Arame comum'
+        expect(page).to have_select 'Situação', :selected => 'Indefinido'
+        expect(page).to have_field 'Classificação', :with => ''
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '1'
+        expect(page).to have_field 'Preço unitário', :with => '9,99'
+        expect(page).to have_field 'Preço total', :with => '9,99'
+        expect(page).to have_field 'Marca', :with => 'Arame Forte'
       end
     end
   end
@@ -666,20 +666,20 @@ feature "LicitationProcessBidders" do
 
     click_button 'Salvar'
 
-    page.should have_content 'Lote de itens criado com sucesso.'
+    expect(page).to have_content 'Lote de itens criado com sucesso.'
 
     within_records do
       click_link licitation_process.licitation_process_lots.last.to_s
     end
 
-    page.should have_field 'Observações', :with => 'Lote 1'
-    page.should have_content '01.01.00001 - Antivirus'
-    page.should have_content '2'
-    page.should have_content '10,00'
+    expect(page).to have_field 'Observações', :with => 'Lote 1'
+    expect(page).to have_content '01.01.00001 - Antivirus'
+    expect(page).to have_content '2'
+    expect(page).to have_content '10,00'
 
     click_link 'Cancelar'
 
-    page.should have_content 'Lote 1'
+    expect(page).to have_content 'Lote 1'
 
     click_link 'Voltar ao processo licitatório'
 
@@ -687,14 +687,14 @@ feature "LicitationProcessBidders" do
 
     click_link bidder.to_s
 
-    page.should have_field 'Processo licitatório', :with => '1/2013'
-    page.should have_field 'Data do processo licitatório', :with => '20/03/2013'
-    page.should have_field 'Processo administrativo', :with => '1/2013'
-    page.should have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-    page.should have_field 'Protocolo', :with => '123456'
+    expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
+    expect(page).to have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Protocolo', :with => '123456'
 
     within_tab 'Propostas' do
-      page.should have_content 'Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir.'
+      expect(page).to have_content 'Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir.'
     end
   end
 
@@ -714,7 +714,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Licitante'
 
-    page.should have_button 'Salvar'
+    expect(page).to have_button 'Salvar'
   end
 
   scenario 'create bidder linkd does not show when envelope opening date is not today' do
@@ -722,7 +722,7 @@ feature "LicitationProcessBidders" do
 
     visit licitation_process_bidders_path(:licitation_process_id => licitation_process.id)
 
-    page.should_not have_link 'Criar Licitante'
+    expect(page).not_to have_link 'Criar Licitante'
   end
 
   scenario "index shoud have title Licitantes do Processo Licitatório 1/2013" do
@@ -738,7 +738,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Licitantes'
 
-    page.should have_content "Licitantes do Processo Licitatório 1/2013"
+    expect(page).to have_content "Licitantes do Processo Licitatório 1/2013"
   end
 
   scenario "edit shoud have title Editar Licitante do Processo Licitatório 1/2013" do
@@ -760,7 +760,7 @@ feature "LicitationProcessBidders" do
 
     licitation_process_bidder = licitation_process.licitation_process_bidders.last
 
-    page.should have_content "Editar Licitante(#{licitation_process_bidder}) do Processo Licitatório 1/2013"
+    expect(page).to have_content "Editar Licitante(#{licitation_process_bidder}) do Processo Licitatório 1/2013"
   end
 
   scenario "new shoud have title Novo Licitante do Processo Licitatório 1/2013" do
@@ -778,7 +778,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Licitante'
 
-    page.should have_content "Criar Licitante no Processo Licitatório 1/2013"
+    expect(page).to have_content "Criar Licitante no Processo Licitatório 1/2013"
   end
 
  scenario 'should have field technical_score when licitation kind is technical_and_price' do
@@ -797,7 +797,7 @@ feature "LicitationProcessBidders" do
 
     click_link bidder.to_s
 
-    page.should have_field 'Pontuação técnica'
+    expect(page).to have_field 'Pontuação técnica'
   end
 
   scenario 'should have field technical_score when licitation kind is best_technique' do
@@ -816,7 +816,7 @@ feature "LicitationProcessBidders" do
 
     click_link bidder.to_s
 
-    page.should have_field 'Pontuação técnica'
+    expect(page).to have_field 'Pontuação técnica'
   end
 
   scenario 'should not have field technical_score when licitation kind is not(best_technique, technical_and_price)' do
@@ -835,7 +835,7 @@ feature "LicitationProcessBidders" do
 
     click_link bidder.to_s
 
-    page.should_not have_field 'Pontuação técnica'
+    expect(page).not_to have_field 'Pontuação técnica'
   end
 
   scenario "Save and destroy buttons should not be shown if licitation process envelope opening date is not today" do
@@ -855,8 +855,8 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    page.should_not have_button 'Salvar'
-    page.should_not have_link 'Apagar'
+    expect(page).not_to have_button 'Salvar'
+    expect(page).not_to have_link 'Apagar'
   end
 
   scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do
@@ -876,7 +876,7 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    page.should have_button 'Salvar'
-    page.should have_link 'Apagar'
+    expect(page).to have_button 'Salvar'
+    expect(page).to have_link 'Apagar'
   end
 end

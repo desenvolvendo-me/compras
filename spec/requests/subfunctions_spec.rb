@@ -21,14 +21,14 @@ feature "Subfunctions" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Subfunção criada com sucesso.'
+    expect(page).to have_notice 'Subfunção criada com sucesso.'
 
     click_link '01'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Código', :with => '01'
-    page.should have_field 'Descrição', :with => 'Administração Geral'
-    page.should have_field 'Função', :with => '04 - Administração'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Código', :with => '01'
+    expect(page).to have_field 'Descrição', :with => 'Administração Geral'
+    expect(page).to have_field 'Função', :with => '04 - Administração'
   end
 
   scenario 'update an existent subfunction' do
@@ -47,14 +47,14 @@ feature "Subfunctions" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Subfunção editada com sucesso.'
+    expect(page).to have_notice 'Subfunção editada com sucesso.'
 
     click_link '02'
 
-    page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-    page.should have_field 'Código', :with => '02'
-    page.should have_field 'Descrição', :with => 'Legislativa'
-    page.should have_field 'Função', :with => '05 - Execução'
+    expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
+    expect(page).to have_field 'Código', :with => '02'
+    expect(page).to have_field 'Descrição', :with => 'Legislativa'
+    expect(page).to have_field 'Função', :with => '05 - Execução'
   end
 
   scenario 'destroy an existent subfunction' do
@@ -66,10 +66,10 @@ feature "Subfunctions" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Subfunção apagada com sucesso.'
+    expect(page).to have_notice 'Subfunção apagada com sucesso.'
 
-    page.should_not have_content '01'
-    page.should_not have_content 'Adminstração Geral'
+    expect(page).not_to have_content '01'
+    expect(page).not_to have_content 'Adminstração Geral'
   end
 
   scenario 'validate uniqueness of code' do
@@ -83,7 +83,7 @@ feature "Subfunctions" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'validate uniqueness of description' do
@@ -97,6 +97,6 @@ feature "Subfunctions" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

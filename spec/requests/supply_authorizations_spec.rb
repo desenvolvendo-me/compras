@@ -20,33 +20,33 @@ feature "SupplyAuthorizations" do
 
     click_link 'Imprimir autorização de fornecimento'
 
-    page.should have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
-    page.should have_content 'Número'
-    page.should have_content 'Compra Direta Número'
-    page.should have_content 'Data da compra'
-    page.should have_content "#{supply_authorization}"
-    page.should have_content "#{direct_purchase.id}/2012"
-    page.should have_content '01/12/2012'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content 'Girassol, 9874 - São Francisco'
-    page.should have_content 'Curitiba'
-    page.should have_content '33400-500'
-    page.should have_content '(33) 3333-3333'
-    page.should have_content '23456-0'
-    page.should have_content 'Agência Itaú'
-    page.should have_content 'Itaú'
-    page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
-    page.should have_content '1 - Secretaria de Educação'
-    page.should have_content 'Dinheiro'
-    page.should have_content '1 ano'
-    page.should have_content 'Secretaria da Educação'
-    page.should have_content 'Ponte'
-    page.should have_content 'Compra de 2012 ainda não autorizada'
-    page.should have_content 'Antivirus'
-    page.should have_content 'Norton'
-    page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content 'Gerente'
+    expect(page).to have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
+    expect(page).to have_content 'Número'
+    expect(page).to have_content 'Compra Direta Número'
+    expect(page).to have_content 'Data da compra'
+    expect(page).to have_content "#{supply_authorization}"
+    expect(page).to have_content "#{direct_purchase.id}/2012"
+    expect(page).to have_content '01/12/2012'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Girassol, 9874 - São Francisco'
+    expect(page).to have_content 'Curitiba'
+    expect(page).to have_content '33400-500'
+    expect(page).to have_content '(33) 3333-3333'
+    expect(page).to have_content '23456-0'
+    expect(page).to have_content 'Agência Itaú'
+    expect(page).to have_content 'Itaú'
+    expect(page).to have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+    expect(page).to have_content '1 - Secretaria de Educação'
+    expect(page).to have_content 'Dinheiro'
+    expect(page).to have_content '1 ano'
+    expect(page).to have_content 'Secretaria da Educação'
+    expect(page).to have_content 'Ponte'
+    expect(page).to have_content 'Compra de 2012 ainda não autorizada'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content 'Norton'
+    expect(page).to have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Gerente'
   end
 
   scenario 'should be printable with a company' do
@@ -63,29 +63,29 @@ feature "SupplyAuthorizations" do
 
     click_link 'Imprimir autorização de fornecimento'
 
-    page.should have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
-    page.should have_content "#{supply_authorization}"
-    page.should have_content "#{direct_purchase.id}/2011"
-    page.should have_content '20/12/2011'
-    page.should have_content 'Nohup'
-    page.should have_content 'Girassol, 9874 - São Francisco'
-    page.should have_content 'Curitiba'
-    page.should have_content '33400-500'
-    page.should have_content '(11) 7070-9999'
-    page.should have_content '45678-0'
-    page.should have_content 'Agência Itaú'
-    page.should have_content 'Itaú'
-    page.should have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
-    page.should have_content '1 - Secretaria de Educação'
-    page.should have_content 'Dinheiro'
-    page.should have_content '1 ano'
-    page.should have_content 'Secretaria da Educação'
-    page.should have_content 'Ponte'
-    page.should have_content 'Compra feita em 2011 e não autorizada'
-    page.should have_content 'Antivirus'
-    page.should have_content 'Norton'
-    page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content 'Gerente'
+    expect(page).to have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
+    expect(page).to have_content "#{supply_authorization}"
+    expect(page).to have_content "#{direct_purchase.id}/2011"
+    expect(page).to have_content '20/12/2011'
+    expect(page).to have_content 'Nohup'
+    expect(page).to have_content 'Girassol, 9874 - São Francisco'
+    expect(page).to have_content 'Curitiba'
+    expect(page).to have_content '33400-500'
+    expect(page).to have_content '(11) 7070-9999'
+    expect(page).to have_content '45678-0'
+    expect(page).to have_content 'Agência Itaú'
+    expect(page).to have_content 'Itaú'
+    expect(page).to have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+    expect(page).to have_content '1 - Secretaria de Educação'
+    expect(page).to have_content 'Dinheiro'
+    expect(page).to have_content '1 ano'
+    expect(page).to have_content 'Secretaria da Educação'
+    expect(page).to have_content 'Ponte'
+    expect(page).to have_content 'Compra feita em 2011 e não autorizada'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content 'Norton'
+    expect(page).to have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Gerente'
   end
 end

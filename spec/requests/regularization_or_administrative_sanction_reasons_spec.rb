@@ -16,12 +16,12 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Motivo de Sanção Administrativa ou Regularização criado com sucesso.'
+    expect(page).to have_notice 'Motivo de Sanção Administrativa ou Regularização criado com sucesso.'
 
     click_link 'Advertência por desistência parcial da proposta devidamente justificada'
 
-    page.should have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
-    page.should have_select 'Tipo', :selected => 'Regularização'
+    expect(page).to have_field 'Descrição', :with => 'Advertência por desistência parcial da proposta devidamente justificada'
+    expect(page).to have_select 'Tipo', :selected => 'Regularização'
   end
 
   scenario 'update an existent regularization_or_administrative_sanction_reason' do
@@ -36,12 +36,12 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Motivo de Sanção Administrativa ou Regularização editado com sucesso.'
+    expect(page).to have_notice 'Motivo de Sanção Administrativa ou Regularização editado com sucesso.'
 
     click_link 'Ativação do registro cadastral'
 
-    page.should have_field 'Descrição', :with => 'Ativação do registro cadastral'
-    page.should have_select 'Tipo', :selected => 'Sanção administrativa'
+    expect(page).to have_field 'Descrição', :with => 'Ativação do registro cadastral'
+    expect(page).to have_select 'Tipo', :selected => 'Sanção administrativa'
   end
 
   scenario 'destroy an existent regularization_or_administrative_sanction_reason' do
@@ -53,8 +53,8 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Motivo de Sanção Administrativa ou Regularização apagado com sucesso.'
+    expect(page).to have_notice 'Motivo de Sanção Administrativa ou Regularização apagado com sucesso.'
 
-    page.should_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+    expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
   end
 end

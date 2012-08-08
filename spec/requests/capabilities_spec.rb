@@ -18,20 +18,20 @@ feature "Capabilities" do
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     select 'Ordinário', :from => 'Tipo'
 
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Recurso criado com sucesso.'
+    expect(page).to have_notice 'Recurso criado com sucesso.'
 
     click_link 'Reforma e Ampliação'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Descrição', :with => 'Reforma e Ampliação'
-    page.should have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
-    page.should have_select 'Tipo', :selected => 'Ordinário'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Descrição', :with => 'Reforma e Ampliação'
+    expect(page).to have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
+    expect(page).to have_select 'Tipo', :selected => 'Ordinário'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent capability' do
@@ -50,15 +50,15 @@ feature "Capabilities" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Recurso editado com sucesso.'
+    expect(page).to have_notice 'Recurso editado com sucesso.'
 
     click_link 'Reforma e Ampliação do Posto'
 
-    page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
-    page.should have_field 'Descrição', :with => 'Reforma e Ampliação do Posto'
-    page.should have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios no posto'
-    page.should have_select 'Tipo', :selected => 'Vinculado'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descritor', :with => '2013 - Secretaria de Educação'
+    expect(page).to have_field 'Descrição', :with => 'Reforma e Ampliação do Posto'
+    expect(page).to have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios no posto'
+    expect(page).to have_select 'Tipo', :selected => 'Vinculado'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent capability' do
@@ -70,12 +70,12 @@ feature "Capabilities" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Recurso apagado com sucesso.'
+    expect(page).to have_notice 'Recurso apagado com sucesso.'
 
-    page.should_not have_content 'Detran'
-    page.should_not have_content '2012'
-    page.should_not have_content 'Reforma e Ampliação'
-    page.should_not have_content 'Ordinário'
-    page.should_not have_content 'Ativo'
+    expect(page).not_to have_content 'Detran'
+    expect(page).not_to have_content '2012'
+    expect(page).not_to have_content 'Reforma e Ampliação'
+    expect(page).not_to have_content 'Ordinário'
+    expect(page).not_to have_content 'Ativo'
   end
 end

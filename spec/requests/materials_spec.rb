@@ -13,8 +13,8 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    page.should have_disabled_field 'Tipo de material'
-    page.should have_disabled_field 'Tipo de serviço'
+    expect(page).to have_disabled_field 'Tipo de material'
+    expect(page).to have_disabled_field 'Tipo de serviço'
 
     fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
     fill_modal 'Classe', :with => 'Software', :field => 'Descrição'
@@ -28,10 +28,10 @@ feature "Materials" do
 
     # testing javascript
     select 'Material', :from => 'Característica'
-    page.should have_disabled_field 'Tipo de serviço'
+    expect(page).to have_disabled_field 'Tipo de serviço'
 
     select 'Serviço', :from => 'Característica'
-    page.should have_disabled_field 'Tipo de material'
+    expect(page).to have_disabled_field 'Tipo de material'
     #end of javascript test
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
@@ -39,24 +39,24 @@ feature "Materials" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Material criado com sucesso.'
+    expect(page).to have_notice 'Material criado com sucesso.'
 
     click_link 'Caixa'
 
-    page.should have_field 'Grupo', :with => '01 - Informática'
-    page.should have_field 'Classe', :with => '01 - Software'
-    page.should have_field 'Descrição', :with => 'Caixa'
-    page.should have_field 'Descrição detalhada', :with => 'Uma caixa'
-    page.should have_field 'Estoque mínimo', :with => '10'
-    page.should have_field 'Unidade', :with => 'UN'
-    page.should have_field 'Referência do fabricante', :with => 'manufacturer'
-    page.should have_checked_field 'Material perecível'
-    page.should have_checked_field 'Material estocável'
-    page.should_not have_checked_field 'Material combustível'
-    page.should have_select 'Característica', :selected => 'Serviço'
-    page.should have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
-    page.should have_disabled_field 'Tipo de material'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
+    expect(page).to have_field 'Grupo', :with => '01 - Informática'
+    expect(page).to have_field 'Classe', :with => '01 - Software'
+    expect(page).to have_field 'Descrição', :with => 'Caixa'
+    expect(page).to have_field 'Descrição detalhada', :with => 'Uma caixa'
+    expect(page).to have_field 'Estoque mínimo', :with => '10'
+    expect(page).to have_field 'Unidade', :with => 'UN'
+    expect(page).to have_field 'Referência do fabricante', :with => 'manufacturer'
+    expect(page).to have_checked_field 'Material perecível'
+    expect(page).to have_checked_field 'Material estocável'
+    expect(page).not_to have_checked_field 'Material combustível'
+    expect(page).to have_select 'Característica', :selected => 'Serviço'
+    expect(page).to have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
+    expect(page).to have_disabled_field 'Tipo de material'
+    expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
   end
 
   scenario 'generate code' do
@@ -83,9 +83,9 @@ feature "Materials" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Material criado com sucesso.'
+    expect(page).to have_notice 'Material criado com sucesso.'
 
-    page.should have_content '01.01.00001'
+    expect(page).to have_content '01.01.00001'
   end
 
   scenario 'update an existent material' do
@@ -120,7 +120,7 @@ feature "Materials" do
     select 'Material', :from => 'Característica'
 
     # testing javascript
-    page.should have_disabled_field 'Tipo de serviço'
+    expect(page).to have_disabled_field 'Tipo de serviço'
     # end of javascript test
 
     select 'De consumo', :from => 'Tipo de material'
@@ -128,25 +128,25 @@ feature "Materials" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Material editado com sucesso.'
+    expect(page).to have_notice 'Material editado com sucesso.'
 
     click_link 'Parafuso'
 
-    page.should have_field 'Grupo', :with => '02 - Ferro e Aço'
-    page.should have_field 'Classe', :with => '02 - Arames'
-    page.should have_field 'Código', :with => '02.02.00003'
-    page.should have_field 'Descrição', :with => 'Parafuso'
-    page.should have_field 'Descrição detalhada', :with => 'de rosca'
-    page.should have_field 'Estoque mínimo', :with => '20'
-    page.should have_field 'Unidade', :with => 'M'
-    page.should have_field 'Referência do fabricante', :with => 'outro fabricante'
-    page.should_not have_checked_field 'Material perecível'
-    page.should_not have_checked_field 'Material estocável'
-    page.should have_checked_field 'Material combustível'
-    page.should have_select 'Característica', :selected => 'Material'
-    page.should have_disabled_field 'Tipo de serviço'
-    page.should have_select 'Tipo de material', :selected => 'De consumo'
-    page.should have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
+    expect(page).to have_field 'Grupo', :with => '02 - Ferro e Aço'
+    expect(page).to have_field 'Classe', :with => '02 - Arames'
+    expect(page).to have_field 'Código', :with => '02.02.00003'
+    expect(page).to have_field 'Descrição', :with => 'Parafuso'
+    expect(page).to have_field 'Descrição detalhada', :with => 'de rosca'
+    expect(page).to have_field 'Estoque mínimo', :with => '20'
+    expect(page).to have_field 'Unidade', :with => 'M'
+    expect(page).to have_field 'Referência do fabricante', :with => 'outro fabricante'
+    expect(page).not_to have_checked_field 'Material perecível'
+    expect(page).not_to have_checked_field 'Material estocável'
+    expect(page).to have_checked_field 'Material combustível'
+    expect(page).to have_select 'Característica', :selected => 'Material'
+    expect(page).to have_disabled_field 'Tipo de serviço'
+    expect(page).to have_select 'Tipo de material', :selected => 'De consumo'
+    expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.11 - Compra de Material'
   end
 
   scenario 'destroy an existent material' do
@@ -158,9 +158,9 @@ feature "Materials" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Material apagado com sucesso.'
+    expect(page).to have_notice 'Material apagado com sucesso.'
 
-    page.should_not have_content 'Antivirus'
+    expect(page).not_to have_content 'Antivirus'
   end
 
   scenario 'cannot destroy an existent material with licitation_objects' do
@@ -172,7 +172,7 @@ feature "Materials" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should_not have_notice 'Material apagado com sucesso.'
+    expect(page).not_to have_notice 'Material apagado com sucesso.'
   end
 
   scenario 'should validate uniqueness of name' do
@@ -186,7 +186,7 @@ feature "Materials" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'should clean the unnecessary type of material or service depending on characteristic' do
@@ -206,7 +206,7 @@ feature "Materials" do
 
     select 'Serviço', :from => "Característica"
 
-    page.should have_field 'Tipo de serviço', :with => ''
+    expect(page).to have_field 'Tipo de serviço', :with => ''
 
     fill_modal 'Tipo de serviço', :with => 'Reparos', :field => 'Descrição'
 
@@ -216,7 +216,7 @@ feature "Materials" do
 
     select 'Material', :from => "Característica"
 
-    page.should have_select 'Tipo de material', :selected => ''
+    expect(page).to have_select 'Tipo de material', :selected => ''
   end
 
   it 'should show selected group on class modal' do
@@ -226,14 +226,14 @@ feature "Materials" do
 
     click_link 'Criar Material'
 
-    page.should have_disabled_field 'Classe'
+    expect(page).to have_disabled_field 'Classe'
 
     fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
 
-    page.should_not have_disabled_field 'Classe'
+    expect(page).not_to have_disabled_field 'Classe'
 
     fill_modal 'Classe', :with => 'Software', :field => 'Descrição' do
-      page.should have_field 'filter_materials_group', :with => '01 - Informática'
+      expect(page).to have_field 'filter_materials_group', :with => '01 - Informática'
     end
   end
 
@@ -246,7 +246,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    page.should_not have_disabled_field 'Classe'
+    expect(page).not_to have_disabled_field 'Classe'
   end
 
   it 'should disable and empty the class when the group is removed' do
@@ -262,8 +262,8 @@ feature "Materials" do
 
     clear_modal 'Grupo'
 
-    page.should have_disabled_field 'Classe'
-    page.should have_field 'Classe', :with => ''
+    expect(page).to have_disabled_field 'Classe'
+    expect(page).to have_field 'Classe', :with => ''
   end
 
   it 'should empty the class when the group are changed' do
@@ -280,7 +280,7 @@ feature "Materials" do
 
     fill_modal 'Grupo', :with => 'Ferro e Aço', :field => 'Descrição'
 
-    page.should have_field 'Classe', :with => ''
+    expect(page).to have_field 'Classe', :with => ''
   end
 
   it 'should not have the expense economic classification disabled when editing material' do
@@ -292,7 +292,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    page.should_not have_disabled_field 'Natureza da despesa'
+    expect(page).not_to have_disabled_field 'Natureza da despesa'
   end
 
   def make_dependencies!

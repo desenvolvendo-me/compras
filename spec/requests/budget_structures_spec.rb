@@ -21,14 +21,14 @@ feature "BudgetStructure" do
       select 'Sintético', :from => 'Tipo'
 
       within_modal 'Nível' do
-        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
 
       fill_in 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentaria', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
       fill_in 'Código TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
@@ -54,35 +54,35 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Estrutura Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria criado com sucesso.'
 
     click_link 'Secretaria de Educação'
 
     within_tab 'Informações' do
-      page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-      page.should have_select 'Tipo', :selected => 'Sintético'
-      page.should have_field 'Nível', :with => '1 - Orgão'
-      page.should have_field 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentaria', :with => '1'
-      page.should have_field 'Código TCE', :with => '051'
-      page.should have_field 'Descrição', :with => 'Secretaria de Educação'
-      page.should have_field 'Sigla', :with => 'SEMUEDU'
-      page.should have_field 'Tipo de administração', :with => 'Pública'
-      page.should have_field 'Área de atuação', :with => 'Desenvolvimento Educacional'
+      expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+      expect(page).to have_select 'Tipo', :selected => 'Sintético'
+      expect(page).to have_field 'Nível', :with => '1 - Orgão'
+      expect(page).to have_field 'Código', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
+      expect(page).to have_field 'Código TCE', :with => '051'
+      expect(page).to have_field 'Descrição', :with => 'Secretaria de Educação'
+      expect(page).to have_field 'Sigla', :with => 'SEMUEDU'
+      expect(page).to have_field 'Tipo de administração', :with => 'Pública'
+      expect(page).to have_field 'Área de atuação', :with => 'Desenvolvimento Educacional'
     end
 
     within_tab 'Endereços' do
-      page.should have_field 'Logradouro', :with => 'Rua Girassol'
-      page.should have_field 'Bairro', :with => 'São Francisco'
-      page.should have_field 'CEP', :with => '33400-500'
+      expect(page).to have_field 'Logradouro', :with => 'Rua Girassol'
+      expect(page).to have_field 'Bairro', :with => 'São Francisco'
+      expect(page).to have_field 'CEP', :with => '33400-500'
     end
 
     within_tab 'Responsáveis' do
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_field 'Ato regulamentador', :with => '1234'
-      page.should have_field 'Data de início', :with => '01/02/2012'
-      page.should have_field 'Data de término', :with => '10/02/2012'
-      page.should have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Data de início', :with => '01/02/2012'
+      expect(page).to have_field 'Data de término', :with => '10/02/2012'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
     end
   end
 
@@ -100,13 +100,13 @@ feature "BudgetStructure" do
     within_tab 'Informações' do
       fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
       within_modal 'Nível' do
-        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
       fill_in 'Código', :with => '2'
-      page.should have_field 'Estrutura orçamentaria', :with => '2'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '2'
       fill_in 'Código TCE', :with => '081'
       fill_in 'Descrição', :with => 'Secretaria de Transporte'
       fill_in 'Sigla', :with => 'SEMUTRA'
@@ -130,35 +130,35 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
 
     click_link 'Secretaria de Transporte'
 
     within_tab 'Informações' do
-      page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-      page.should have_select 'Tipo', :selected => 'Sintético'
-      page.should have_field 'Nível', :with => '1 - Orgão'
-      page.should have_field 'Código', :with => '2'
-      page.should have_field 'Estrutura orçamentaria', :with => '2'
-      page.should have_field 'Código TCE', :with => '081'
-      page.should have_field 'Descrição', :with => 'Secretaria de Transporte'
-      page.should have_field 'Sigla', :with => 'SEMUTRA'
-      page.should have_field 'Tipo de administração', :with => 'Executivo'
-      page.should have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
+      expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+      expect(page).to have_select 'Tipo', :selected => 'Sintético'
+      expect(page).to have_field 'Nível', :with => '1 - Orgão'
+      expect(page).to have_field 'Código', :with => '2'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '2'
+      expect(page).to have_field 'Código TCE', :with => '081'
+      expect(page).to have_field 'Descrição', :with => 'Secretaria de Transporte'
+      expect(page).to have_field 'Sigla', :with => 'SEMUTRA'
+      expect(page).to have_field 'Tipo de administração', :with => 'Executivo'
+      expect(page).to have_field 'Área de atuação', :with => 'Desenvolvimento de Transporte'
     end
 
     within_tab 'Endereços' do
-      page.should have_field 'Logradouro', :with => 'Avenida Amazonas'
-      page.should have_field 'Bairro', :with => 'Portugal'
-      page.should have_field 'CEP', :with => '33600-500'
+      expect(page).to have_field 'Logradouro', :with => 'Avenida Amazonas'
+      expect(page).to have_field 'Bairro', :with => 'Portugal'
+      expect(page).to have_field 'CEP', :with => '33600-500'
     end
 
     within_tab 'Responsáveis' do
-      page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
-      page.should have_field 'Ato regulamentador', :with => '4567'
-      page.should have_field 'Data de início', :with => '01/02/2012'
-      page.should have_field  'Data de término', :with => '10/02/2012'
-      page.should have_select 'Status', :selected => 'Inativo'
+      expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Ato regulamentador', :with => '4567'
+      expect(page).to have_field 'Data de início', :with => '01/02/2012'
+      expect(page).to have_field  'Data de término', :with => '10/02/2012'
+      expect(page).to have_select 'Status', :selected => 'Inativo'
     end
   end
 
@@ -172,7 +172,7 @@ feature "BudgetStructure" do
     within_tab 'Informações' do
       fill_in 'Código', :with => '12'
 
-      page.should have_field 'Estrutura orçamentaria', :with => '1.12'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1.12'
     end
   end
 
@@ -189,8 +189,8 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    page.should have_disabled_field 'Código'
-    page.should have_field 'Código', :with => ''
+    expect(page).to have_disabled_field 'Código'
+    expect(page).to have_field 'Código', :with => ''
   end
 
   scenario 'should not create a new budget structure when already exist a code in the same level and configuration' do
@@ -209,14 +209,14 @@ feature "BudgetStructure" do
       select 'Sintético', :from => 'Tipo'
 
       within_modal 'Nível' do
-        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
 
       fill_in 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentaria', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
       fill_in 'Código TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
@@ -242,7 +242,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já existe um código para este nível desta configuração Estrutura orçamentaria Código TCE'
+    expect(page).to have_content 'já existe um código para este nível desta configuração Estrutura orçamentaria Código TCE'
   end
 
   scenario 'validating modal of level' do
@@ -258,10 +258,10 @@ feature "BudgetStructure" do
       within_modal 'Nível' do
          click_button 'Pesquisar'
 
-         page.should have_content 'Orgão'
-         page.should have_content 'Unidade'
-         page.should_not have_content 'Nível 1'
-         page.should_not have_content 'Nível 2'
+         expect(page).to have_content 'Orgão'
+         expect(page).to have_content 'Unidade'
+         expect(page).not_to have_content 'Nível 1'
+         expect(page).not_to have_content 'Nível 2'
       end
     end
   end
@@ -279,22 +279,22 @@ feature "BudgetStructure" do
       select 'Sintético', :from => 'Tipo'
 
       within_modal 'Nível' do
-        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
         click_button 'Pesquisar'
         click_record 'Unidade'
       end
 
       within_modal 'Estrutura orçamentaria superior' do
-        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
-        page.should have_field 'Nível', :with => '1 - Orgão'
-        page.should have_disabled_field 'Nível'
+        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Nível', :with => '1 - Orgão'
+        expect(page).to have_disabled_field 'Nível'
 
         click_button 'Pesquisar'
 
-        page.should have_content 'Secretaria de Educação'
-        page.should_not have_content 'Secretaria de Desenvolvimento'
+        expect(page).to have_content 'Secretaria de Educação'
+        expect(page).not_to have_content 'Secretaria de Desenvolvimento'
       end
     end
   end
@@ -312,16 +312,16 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
 
     click_link 'Secretaria de Educação'
 
     within_tab 'Responsáveis' do
-      page.should_not have_field 'Responsável', :with => 'Wenderson Malheiros'
-      page.should_not have_field 'Ato regulamentador', :with => '4567'
-      page.should_not have_field 'Data de início', :with => '01/02/2012'
-      page.should_not have_field  'Data de término', :with => '10/02/2012'
-      page.should_not have_select 'Status', :selected => 'Inativo'
+      expect(page).not_to have_field 'Responsável', :with => 'Wenderson Malheiros'
+      expect(page).not_to have_field 'Ato regulamentador', :with => '4567'
+      expect(page).not_to have_field 'Data de início', :with => '01/02/2012'
+      expect(page).not_to have_field  'Data de término', :with => '10/02/2012'
+      expect(page).not_to have_select 'Status', :selected => 'Inativo'
     end
   end
 
@@ -334,15 +334,15 @@ feature "BudgetStructure" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Estrutura Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria apagado com sucesso.'
 
-    page.should_not have_content 'Secretaria de Educação'
-    page.should_not have_content 'Configuração do Detran'
-    page.should_not have_content '02.00'
-    page.should_not have_content '051'
-    page.should_not have_content 'SEMUEDU'
-    page.should_not have_content 'Pública'
-    page.should_not have_content 'Desenvolvimento Educacional'
+    expect(page).not_to have_content 'Secretaria de Educação'
+    expect(page).not_to have_content 'Configuração do Detran'
+    expect(page).not_to have_content '02.00'
+    expect(page).not_to have_content '051'
+    expect(page).not_to have_content 'SEMUEDU'
+    expect(page).not_to have_content 'Pública'
+    expect(page).not_to have_content 'Desenvolvimento Educacional'
   end
 
   scenario 'trying to create an budget structure with duplicated responsibles as the only error to ensure that it will not be saved' do
@@ -360,14 +360,14 @@ feature "BudgetStructure" do
       select 'Sintético', :from => 'Tipo'
 
       within_modal 'Nível' do
-        page.should have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        page.should have_disabled_field 'Configuração de estrutura orçamentaria'
+        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
+        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
         click_button 'Pesquisar'
         click_record 'Orgão'
       end
 
       fill_in 'Código', :with => '1'
-      page.should have_field 'Estrutura orçamentaria', :with => '1'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
       fill_in 'Código TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
@@ -404,7 +404,7 @@ feature "BudgetStructure" do
     click_button 'Salvar'
 
     within_tab 'Responsáveis' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 end

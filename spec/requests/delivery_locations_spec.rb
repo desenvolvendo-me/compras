@@ -23,31 +23,31 @@ feature "DeliveryLocations" do
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
 
-    page.should have_field "Cidade", :with => 'Curitiba'
-    page.should have_field "Distrito", :with => ''
+    expect(page).to have_field "Cidade", :with => 'Curitiba'
+    expect(page).to have_field "Distrito", :with => ''
 
     fill_in 'CEP', :with => '88900-000'
 
-    page.should have_field "Estado", :with => 'Parana'
+    expect(page).to have_field "Estado", :with => 'Parana'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Local de Entrega criado com sucesso.'
+    expect(page).to have_notice 'Local de Entrega criado com sucesso.'
 
     click_link 'Secretaria da Educação'
 
-    page.should have_field 'Descrição', :with => 'Secretaria da Educação'
-    page.should have_field 'Logradouro', :with => 'Rua Girassol'
-    page.should have_field 'Número', :with => '13'
-    page.should have_field 'Bloco', :with => '20'
-    page.should have_field 'Sala/Apartamento', :with => '202'
-    page.should have_field 'Complemento', :with => 'Perto da prefeitura'
-    page.should have_field 'Bairro', :with => 'São Francisco'
-    page.should have_field 'Condomínio', :with => 'Parque das Flores'
-    page.should have_field 'Loteamento', :with => 'Solar da Serra'
-    page.should have_field "Cidade", :with => 'Curitiba'
-    page.should have_field 'CEP', :with => '88900-000'
-    page.should have_field "Estado", :with => 'Parana'
+    expect(page).to have_field 'Descrição', :with => 'Secretaria da Educação'
+    expect(page).to have_field 'Logradouro', :with => 'Rua Girassol'
+    expect(page).to have_field 'Número', :with => '13'
+    expect(page).to have_field 'Bloco', :with => '20'
+    expect(page).to have_field 'Sala/Apartamento', :with => '202'
+    expect(page).to have_field 'Complemento', :with => 'Perto da prefeitura'
+    expect(page).to have_field 'Bairro', :with => 'São Francisco'
+    expect(page).to have_field 'Condomínio', :with => 'Parque das Flores'
+    expect(page).to have_field 'Loteamento', :with => 'Solar da Serra'
+    expect(page).to have_field "Cidade", :with => 'Curitiba'
+    expect(page).to have_field 'CEP', :with => '88900-000'
+    expect(page).to have_field "Estado", :with => 'Parana'
   end
 
   scenario 'update an existent delivery_location' do
@@ -68,30 +68,30 @@ feature "DeliveryLocations" do
     fill_modal 'Condomínio', :with => 'Parque das Flores'
     fill_modal 'Loteamento', :with => 'Solar da Serra'
 
-    page.should have_field "Cidade", :with => 'Curitiba'
+    expect(page).to have_field "Cidade", :with => 'Curitiba'
 
     fill_in 'CEP', :with => '88900-000'
 
-    page.should have_field "Estado", :with => 'Parana'
+    expect(page).to have_field "Estado", :with => 'Parana'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Local de Entrega editado com sucesso.'
+    expect(page).to have_notice 'Local de Entrega editado com sucesso.'
 
     click_link 'Secretaria da Saúde'
 
-    page.should have_field 'Descrição', :with => 'Secretaria da Saúde'
-    page.should have_field 'Logradouro', :with => 'Rua Girassol'
-    page.should have_field 'Número', :with => '13'
-    page.should have_field 'Bloco', :with => '20'
-    page.should have_field 'Sala/Apartamento', :with => '202'
-    page.should have_field 'Complemento', :with => 'Perto da prefeitura'
-    page.should have_field 'Bairro', :with => 'São Francisco'
-    page.should have_field 'Condomínio', :with => 'Parque das Flores'
-    page.should have_field 'Loteamento', :with => 'Solar da Serra'
-    page.should have_field "Cidade", :with => 'Curitiba'
-    page.should have_field 'CEP', :with => '88900-000'
-    page.should have_field "Estado", :with => 'Parana'
+    expect(page).to have_field 'Descrição', :with => 'Secretaria da Saúde'
+    expect(page).to have_field 'Logradouro', :with => 'Rua Girassol'
+    expect(page).to have_field 'Número', :with => '13'
+    expect(page).to have_field 'Bloco', :with => '20'
+    expect(page).to have_field 'Sala/Apartamento', :with => '202'
+    expect(page).to have_field 'Complemento', :with => 'Perto da prefeitura'
+    expect(page).to have_field 'Bairro', :with => 'São Francisco'
+    expect(page).to have_field 'Condomínio', :with => 'Parque das Flores'
+    expect(page).to have_field 'Loteamento', :with => 'Solar da Serra'
+    expect(page).to have_field "Cidade", :with => 'Curitiba'
+    expect(page).to have_field 'CEP', :with => '88900-000'
+    expect(page).to have_field "Estado", :with => 'Parana'
   end
 
   scenario 'destroy an existent delivery_location' do
@@ -103,9 +103,9 @@ feature "DeliveryLocations" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Local de Entrega apagado com sucesso.'
+    expect(page).to have_notice 'Local de Entrega apagado com sucesso.'
 
-    page.should_not have_content 'Secretaria da Educação'
+    expect(page).not_to have_content 'Secretaria da Educação'
   end
 
   scenario 'create a new delivery_location' do
@@ -128,6 +128,6 @@ feature "DeliveryLocations" do
 
     click_button 'Salvar'
 
-    page.should have_content "já está em uso"
+    expect(page).to have_content "já está em uso"
   end
 end

@@ -13,7 +13,7 @@ feature "Neighborhoods" do
 
     click_link 'Criar Bairro'
 
-    page.should have_field 'Cidade', :with => 'Belo Horizonte'
+    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
   end
 
   scenario 'create a new neighborhood' do
@@ -29,12 +29,12 @@ feature "Neighborhoods" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Bairro criado com sucesso.'
+    expect(page).to have_notice 'Bairro criado com sucesso.'
 
     click_link 'Alvorada'
 
-    page.should have_field 'Nome', :with => 'Alvorada'
-    page.should have_field 'Cidade', :with => 'Porto Alegre'
+    expect(page).to have_field 'Nome', :with => 'Alvorada'
+    expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
   end
 
   scenario 'update a neighborhood' do
@@ -48,12 +48,12 @@ feature "Neighborhoods" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Bairro editado com sucesso.'
+    expect(page).to have_notice 'Bairro editado com sucesso.'
 
     click_link 'Alvorada'
 
-    page.should have_field 'Nome', :with => 'Alvorada'
-    page.should have_field 'Cidade', :with => 'Belo Horizonte'
+    expect(page).to have_field 'Nome', :with => 'Alvorada'
+    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
   end
 
   scenario 'destroy a neighborhood' do
@@ -65,9 +65,9 @@ feature "Neighborhoods" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Bairro apagado com sucesso.'
+    expect(page).to have_notice 'Bairro apagado com sucesso.'
 
-    page.should_not have_content 'Centro'
+    expect(page).not_to have_content 'Centro'
   end
 
   scenario 'cannot destroy a neighborhood with streets' do
@@ -79,7 +79,7 @@ feature "Neighborhoods" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should_not have_notice 'Bairro apagado com sucesso.'
+    expect(page).not_to have_notice 'Bairro apagado com sucesso.'
   end
 
   scenario 'validate uniquenes of name scoped to district' do
@@ -98,12 +98,12 @@ feature "Neighborhoods" do
     fill_modal 'Distrito', :with => 'Leste'
 
     click_button 'Salvar'
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
 
     fill_modal 'Distrito', :with => 'Oeste'
 
     click_button 'Salvar'
-    page.should have_notice 'Bairro criado com sucesso.'
+    expect(page).to have_notice 'Bairro criado com sucesso.'
   end
 
   scenario 'should lock district by city' do
@@ -116,8 +116,8 @@ feature "Neighborhoods" do
     fill_modal 'Cidade', :with => 'Porto Alegre'
 
     within_modal 'Distrito' do
-      page.should have_disabled_field 'Cidade'
-      page.should have_field 'Cidade', :with => 'Porto Alegre'
+      expect(page).to have_disabled_field 'Cidade'
+      expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
     end
   end
 
@@ -134,8 +134,8 @@ feature "Neighborhoods" do
     within_modal 'Distrito' do
       click_button 'Pesquisar'
 
-      page.should have_content 'Leste'
-      page.should_not have_content 'Centro'
+      expect(page).to have_content 'Leste'
+      expect(page).not_to have_content 'Centro'
     end
   end
 end

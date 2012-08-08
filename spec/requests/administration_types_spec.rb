@@ -20,14 +20,14 @@ feature "AdministrationTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Administração criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Administração criado com sucesso.'
 
     click_link 'Pública'
 
-    page.should have_field 'Descrição', :with => 'Pública'
-    page.should have_select 'Administração', :selected => 'Direta'
-    page.should have_select 'Tipo do órgão', :selected => 'Autarquia'
-    page.should have_field 'Natureza jurídica', :with => 'Administração Pública'
+    expect(page).to have_field 'Descrição', :with => 'Pública'
+    expect(page).to have_select 'Administração', :selected => 'Direta'
+    expect(page).to have_select 'Tipo do órgão', :selected => 'Autarquia'
+    expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
   end
 
   scenario 'update an existent administration_type' do
@@ -47,14 +47,14 @@ feature "AdministrationTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Administração editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Administração editado com sucesso.'
 
     click_link 'Privada'
 
-    page.should have_field 'Descrição', :with => 'Privada'
-    page.should have_select 'Administração', :selected => 'Indireta'
-    page.should have_select 'Tipo do órgão', :selected => 'Fundo especial'
-    page.should have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
+    expect(page).to have_field 'Descrição', :with => 'Privada'
+    expect(page).to have_select 'Administração', :selected => 'Indireta'
+    expect(page).to have_select 'Tipo do órgão', :selected => 'Fundo especial'
+    expect(page).to have_field 'Natureza jurídica', :with => 'Orgão Público do Poder Executivo Federal'
   end
 
   scenario 'destroy an existent administration_type' do
@@ -66,9 +66,9 @@ feature "AdministrationTypes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipo de Administração apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Administração apagado com sucesso.'
 
-    page.should_not have_content 'Pública'
+    expect(page).not_to have_content 'Pública'
   end
 
   scenario 'validates uniqueness of description' do
@@ -82,7 +82,7 @@ feature "AdministrationTypes" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   def make_dependencies!

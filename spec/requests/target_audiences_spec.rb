@@ -16,14 +16,14 @@ feature 'TargetAudiences' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Público Alvo criado com sucesso.'
+    expect(page).to have_notice 'Público Alvo criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Especificação', :with => 'Alunos da rede estudantil'
-    page.should have_field 'Observação', :with => 'Alunos da rede pública'
+    expect(page).to have_field 'Especificação', :with => 'Alunos da rede estudantil'
+    expect(page).to have_field 'Observação', :with => 'Alunos da rede pública'
   end
 
   scenario 'update an existing program_kind' do
@@ -40,14 +40,14 @@ feature 'TargetAudiences' do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Público Alvo editado com sucesso.'
+    expect(page).to have_notice 'Público Alvo editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Especificação', :with => 'Alunos da rede estudantil'
-    page.should have_field 'Observação', :with => 'Alunos da rede pública'
+    expect(page).to have_field 'Especificação', :with => 'Alunos da rede estudantil'
+    expect(page).to have_field 'Observação', :with => 'Alunos da rede pública'
   end
 
   scenario 'destroy and existing program_kind' do
@@ -59,8 +59,8 @@ feature 'TargetAudiences' do
 
     click_link 'Apagar'
 
-    page.should have_notice 'Público Alvo apagado com sucesso.'
+    expect(page).to have_notice 'Público Alvo apagado com sucesso.'
 
-    page.should_not have_link 'Professores Públicos'
+    expect(page).not_to have_link 'Professores Públicos'
   end
 end

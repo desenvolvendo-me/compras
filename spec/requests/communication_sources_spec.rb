@@ -15,11 +15,11 @@ feature "CommunicationSources" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Fonte de Comunicação criado com sucesso.'
+    expect(page).to have_notice 'Fonte de Comunicação criado com sucesso.'
 
     click_link 'Jornal de Circulação Municipal'
 
-    page.should have_field 'Descrição', :with => 'Jornal de Circulação Municipal'
+    expect(page).to have_field 'Descrição', :with => 'Jornal de Circulação Municipal'
   end
 
   scenario 'validates uniqueness of description' do
@@ -33,9 +33,9 @@ feature "CommunicationSources" do
 
     click_button 'Salvar'
 
-    page.should_not have_notice 'Fonte de Comunicação criado com sucesso.'
+    expect(page).not_to have_notice 'Fonte de Comunicação criado com sucesso.'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'update an existent communication_source' do
@@ -49,11 +49,11 @@ feature "CommunicationSources" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Fonte de Comunicação editado com sucesso.'
+    expect(page).to have_notice 'Fonte de Comunicação editado com sucesso.'
 
     click_link 'Revista de Circulação Municipal'
 
-    page.should have_field 'Descrição', :with => 'Revista de Circulação Municipal'
+    expect(page).to have_field 'Descrição', :with => 'Revista de Circulação Municipal'
   end
 
   scenario 'destroy an existent communication_source' do
@@ -65,8 +65,8 @@ feature "CommunicationSources" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Fonte de Comunicação apagado com sucesso.'
+    expect(page).to have_notice 'Fonte de Comunicação apagado com sucesso.'
 
-    page.should_not have_content 'Jornal de Circulação Municipal'
+    expect(page).not_to have_content 'Jornal de Circulação Municipal'
   end
 end

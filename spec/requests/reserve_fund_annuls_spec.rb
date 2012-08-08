@@ -25,20 +25,20 @@ feature 'ReserveFundAnnuls' do
 
     click_button 'Salvar'
 
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Anulado'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Anulado'
 
     click_link 'Anulação'
 
-    page.should have_content "Anulação da Reserva de Dotação #{reserve_fund}"
-    page.should have_disabled_field 'Responsável'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_disabled_field 'Data'
-    page.should have_field 'Data', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Justificativa'
-    page.should have_field 'Justificativa', :with => 'Não necessário'
+    expect(page).to have_content "Anulação da Reserva de Dotação #{reserve_fund}"
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_field 'Justificativa', :with => 'Não necessário'
 
-    page.should_not have_link 'Apagar'
-    page.should_not have_button 'Salvar'
+    expect(page).not_to have_link 'Apagar'
+    expect(page).not_to have_button 'Salvar'
   end
 end

@@ -12,17 +12,17 @@ feature "PledgeCategories" do
     click_link 'Criar Categoria de Empenho'
 
     fill_in 'Descrição', :with => 'Geral'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Categoria de Empenho criada com sucesso.'
+    expect(page).to have_notice 'Categoria de Empenho criada com sucesso.'
 
     click_link 'Geral'
 
-    page.should have_field 'Descrição', :with => 'Geral'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descrição', :with => 'Geral'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent pledge_category' do
@@ -37,12 +37,12 @@ feature "PledgeCategories" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Categoria de Empenho editada com sucesso.'
+    expect(page).to have_notice 'Categoria de Empenho editada com sucesso.'
 
     click_link 'Municipal'
 
-    page.should have_field 'Descrição', :with => 'Municipal'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descrição', :with => 'Municipal'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent pledge_category' do
@@ -54,10 +54,10 @@ feature "PledgeCategories" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Categoria de Empenho apagada com sucesso.'
+    expect(page).to have_notice 'Categoria de Empenho apagada com sucesso.'
 
-    page.should_not have_content 'Geral'
-    page.should_not have_content 'Ativo'
+    expect(page).not_to have_content 'Geral'
+    expect(page).not_to have_content 'Ativo'
   end
 
   scenario 'validate uniqueness of description' do
@@ -71,6 +71,6 @@ feature "PledgeCategories" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

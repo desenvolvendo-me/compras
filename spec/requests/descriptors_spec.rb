@@ -18,12 +18,12 @@ feature "Descriptors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Descritor criado com sucesso.'
+    expect(page).to have_notice 'Descritor criado com sucesso.'
 
     click_link '2012 - Detran'
 
-    page.should have_field 'Entidade', :with => 'Detran'
-    page.should have_field 'Exercício', :with => '2012'
+    expect(page).to have_field 'Entidade', :with => 'Detran'
+    expect(page).to have_field 'Exercício', :with => '2012'
   end
 
   scenario 'update an existent descriptor' do
@@ -39,12 +39,12 @@ feature "Descriptors" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Descritor editado com sucesso.'
+    expect(page).to have_notice 'Descritor editado com sucesso.'
 
     click_link '2011 - Secretaria de Educação'
 
-    page.should have_field 'Entidade', :with => 'Secretaria de Educação'
-    page.should have_field 'Exercício', :with => '2011'
+    expect(page).to have_field 'Entidade', :with => 'Secretaria de Educação'
+    expect(page).to have_field 'Exercício', :with => '2011'
   end
 
   scenario 'should validate uniqueness of entity' do
@@ -60,7 +60,7 @@ feature "Descriptors" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já existe para o ano informado'
+    expect(page).to have_content 'já existe para o ano informado'
   end
 
   scenario 'destroy an existent descriptor' do
@@ -72,9 +72,9 @@ feature "Descriptors" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Descritor apagado com sucesso.'
+    expect(page).to have_notice 'Descritor apagado com sucesso.'
 
-    page.should_not have_content 'Detran'
-    page.should_not have_content '2012'
+    expect(page).not_to have_content 'Detran'
+    expect(page).not_to have_content '2012'
   end
 end

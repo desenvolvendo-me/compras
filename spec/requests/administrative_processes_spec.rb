@@ -16,11 +16,11 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    page.should be_on_tab 'Principal'
+    expect(page).to be_on_tab 'Principal'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Status do processo administrativo'
-      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      expect(page).to have_disabled_field 'Status do processo administrativo'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '07/03/2012'
@@ -42,33 +42,33 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Processo Administrativo criado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Processo'
-      page.should have_field 'Process', :with => '1'
-      page.should have_disabled_field 'Ano'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data do processo', :with => '07/03/2012'
-      page.should have_field 'Número do protocolo', :with => '00099/2012'
-      page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
-      page.should have_select 'Modalidade', :selected => 'Pregão presencial'
-      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
-      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      expect(page).to have_disabled_field 'Processo'
+      expect(page).to have_field 'Process', :with => '1'
+      expect(page).to have_disabled_field 'Ano'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data do processo', :with => '07/03/2012'
+      expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
+      expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      expect(page).to have_select 'Modalidade', :selected => 'Pregão presencial'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
-      page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_field 'Valor previsto', :with => '20,00'
+      expect(page).to have_field 'Dotação orçamentaria', :with => budget_allocation.to_s
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Valor previsto', :with => '20,00'
 
-      page.should have_field 'Valor total', :with => '20,00'
+      expect(page).to have_field 'Valor total', :with => '20,00'
     end
   end
 
@@ -82,25 +82,25 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Processo'
-      page.should have_disabled_field 'Ano'
-      page.should have_disabled_field 'Data do processo'
-      page.should have_disabled_field 'Número do protocolo'
-      page.should have_disabled_field 'Tipo de objeto'
-      page.should have_disabled_field 'Modalidade'
-      page.should have_disabled_field 'Forma de julgamento'
-      page.should have_disabled_field 'Objeto do processo licitatório'
-      page.should have_disabled_field 'Responsável'
-      page.should have_disabled_field 'Status do processo administrativo'
+      expect(page).to have_disabled_field 'Processo'
+      expect(page).to have_disabled_field 'Ano'
+      expect(page).to have_disabled_field 'Data do processo'
+      expect(page).to have_disabled_field 'Número do protocolo'
+      expect(page).to have_disabled_field 'Tipo de objeto'
+      expect(page).to have_disabled_field 'Modalidade'
+      expect(page).to have_disabled_field 'Forma de julgamento'
+      expect(page).to have_disabled_field 'Objeto do processo licitatório'
+      expect(page).to have_disabled_field 'Responsável'
+      expect(page).to have_disabled_field 'Status do processo administrativo'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_disabled_field 'Dotação orçamentaria'
-      page.should have_disabled_field 'Saldo da dotação'
-      page.should have_disabled_field 'Valor previsto'
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+      expect(page).to have_disabled_field 'Valor previsto'
 
-      page.should_not have_button 'Adicionar Dotação'
-      page.should_not have_button 'Remover Dotação'
+      expect(page).not_to have_button 'Adicionar Dotação'
+      expect(page).not_to have_button 'Remover Dotação'
     end
   end
 
@@ -118,20 +118,20 @@ feature "AdministrativeProcesses" do
 
     click_link 'Solicitação de abertura de processo licitatório'
 
-    page.should have_content administrative_process.to_s
-    page.should have_content "00088/2012"
-    page.should have_content "07/03/2012"
-    page.should have_content "Excelentíssimo Sr. Márcio Lacerda"
-    page.should have_content "Convite para compras e serviços"
-    page.should have_content "Compras e serviços"
-    page.should have_content "Forma Global com Menor Preço"
-    page.should have_content "Licitação para compra de carteiras"
-    page.should have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
-    page.should have_content 'Gabriel Sobrinho'
-    page.should have_content 'Gerente'
-    page.should have_content 'Wenderson Malheiros'
-    page.should have_content 'Supervisor'
-    page.should have_content '1 - Alocação'
+    expect(page).to have_content administrative_process.to_s
+    expect(page).to have_content "00088/2012"
+    expect(page).to have_content "07/03/2012"
+    expect(page).to have_content "Excelentíssimo Sr. Márcio Lacerda"
+    expect(page).to have_content "Convite para compras e serviços"
+    expect(page).to have_content "Compras e serviços"
+    expect(page).to have_content "Forma Global com Menor Preço"
+    expect(page).to have_content "Licitação para compra de carteiras"
+    expect(page).to have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content 'Gerente'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Supervisor'
+    expect(page).to have_content '1 - Alocação'
   end
 
   scenario 'value calculation on budget allocations' do
@@ -144,7 +144,7 @@ feature "AdministrativeProcesses" do
 
       fill_in 'Valor previsto', :with => '20,00'
 
-      page.should have_field 'Valor total', :with => '20,00'
+      expect(page).to have_field 'Valor total', :with => '20,00'
 
       click_button 'Adicionar Dotação'
 
@@ -152,13 +152,13 @@ feature "AdministrativeProcesses" do
         fill_in 'Valor previsto', :with => '30,00'
       end
 
-      page.should have_field 'Valor total', :with => '50,00'
+      expect(page).to have_field 'Valor total', :with => '50,00'
 
       within 'div.administrative-process-budget-allocation:last' do
         click_button 'Remover Dotação'
       end
 
-      page.should have_field 'Valor total', :with => '30,00'
+      expect(page).to have_field 'Valor total', :with => '30,00'
     end
   end
 
@@ -174,8 +174,8 @@ feature "AdministrativeProcesses" do
     click_link 'Criar Processo Administrativo'
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Status do processo administrativo'
-      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      expect(page).to have_disabled_field 'Status do processo administrativo'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '07/03/2012'
@@ -205,7 +205,7 @@ feature "AdministrativeProcesses" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -219,8 +219,8 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Status do processo administrativo'
-      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      expect(page).to have_disabled_field 'Status do processo administrativo'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Compras e serviços', :from => 'Tipo de objeto'
@@ -237,30 +237,30 @@ feature "AdministrativeProcesses" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Processo Administrativo editado com sucesso.'
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
     within_tab 'Principal' do
-      page.should have_disabled_field 'Processo'
-      page.should have_field 'Process', :with => '1'
-      page.should have_disabled_field 'Ano'
-      page.should have_field 'Ano', :with => '2012'
-      page.should have_field 'Data do processo', :with => '07/03/2012'
-      page.should have_field 'Número do protocolo', :with => '00099/2012'
-      page.should have_select 'Tipo de objeto', :selected => 'Compras e serviços'
-      page.should have_select 'Modalidade', :selected => 'Pregão presencial'
-      page.should have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
-      page.should have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
-      page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      expect(page).to have_disabled_field 'Processo'
+      expect(page).to have_field 'Process', :with => '1'
+      expect(page).to have_disabled_field 'Ano'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data do processo', :with => '07/03/2012'
+      expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
+      expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      expect(page).to have_select 'Modalidade', :selected => 'Pregão presencial'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
     end
 
     within_tab 'Dotações orçamentarias' do
-      page.should have_field 'Saldo da dotação', :with => '500,00'
-      page.should have_field 'Valor previsto', :with => '30,00'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_field 'Valor previsto', :with => '30,00'
     end
   end
 
@@ -273,8 +273,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should_not have_select 'Status do processo administrativo', :selected => 'Liberado'
-    page.should_not have_link 'Solicitação de abertura de processo licitatório'
+    expect(page).not_to have_select 'Status do processo administrativo', :selected => 'Liberado'
+    expect(page).not_to have_link 'Solicitação de abertura de processo licitatório'
   end
 
   scenario 'should have print button if status equals released' do
@@ -286,8 +286,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should have_select 'Status do processo administrativo', :selected => 'Liberado'
-    page.should have_link 'Solicitação de abertura de processo licitatório'
+    expect(page).to have_select 'Status do processo administrativo', :selected => 'Liberado'
+    expect(page).to have_link 'Solicitação de abertura de processo licitatório'
   end
 
   scenario "should have a release button when editing an administrative process with status waiting" do
@@ -299,8 +299,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    page.should have_link 'Liberar'
+    expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    expect(page).to have_link 'Liberar'
   end
 
   scenario "should not have a release button when editing an administrative process without status waiting" do
@@ -312,8 +312,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should_not have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    page.should_not have_link 'Liberar'
+    expect(page).not_to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    expect(page).not_to have_link 'Liberar'
   end
 
   scenario "should have a annul button when editing an administrative process with status waiting" do
@@ -325,8 +325,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    page.should have_button 'Anular'
+    expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    expect(page).to have_button 'Anular'
   end
 
   scenario "should not have an annul button when editing an administrative process without status waiting" do
@@ -338,8 +338,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should_not have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    page.should_not have_button 'Anular'
+    expect(page).not_to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    expect(page).not_to have_button 'Anular'
   end
 
   scenario "annuling an administrative process" do
@@ -353,7 +353,7 @@ feature "AdministrativeProcesses" do
 
     click_button 'Anular'
 
-    page.should have_notice 'Processo Administrativo anulado com sucesso'
+    expect(page).to have_notice 'Processo Administrativo anulado com sucesso'
   end
 
   scenario "show new licitation process link" do
@@ -365,7 +365,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should have_link 'Novo processo licitatório'
+    expect(page).to have_link 'Novo processo licitatório'
   end
 
   scenario "show edit licitation process link" do
@@ -377,7 +377,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should have_link 'Editar processo licitatório'
+    expect(page).to have_link 'Editar processo licitatório'
   end
 
   scenario "should not have new licitation process link if not released" do
@@ -389,8 +389,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should_not have_link 'Novo processo licitatório'
-    page.should_not have_link 'Editar processo licitatório'
+    expect(page).not_to have_link 'Novo processo licitatório'
+    expect(page).not_to have_link 'Editar processo licitatório'
   end
 
   scenario "should not have a release and annull button at new" do
@@ -398,8 +398,8 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    page.should_not have_button 'Anular'
-    page.should_not have_button 'Liberar'
+    expect(page).not_to have_button 'Anular'
+    expect(page).not_to have_button 'Liberar'
   end
 
   scenario 'should not have licitation_process button if not allow licitation_process' do
@@ -411,6 +411,6 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    page.should_not have_link 'Novo processo licitatório'
+    expect(page).not_to have_link 'Novo processo licitatório'
   end
 end

@@ -16,12 +16,12 @@ feature "DocumentTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Documento criado com sucesso.'
+    expect(page).to have_notice 'Tipo de Documento criado com sucesso.'
 
     click_link 'Fiscal'
 
-    page.should have_field 'Validade em dias', :with => '10'
-    page.should have_field 'Descrição', :with => 'Fiscal'
+    expect(page).to have_field 'Validade em dias', :with => '10'
+    expect(page).to have_field 'Descrição', :with => 'Fiscal'
   end
 
   scenario 'update an existent document_type' do
@@ -36,12 +36,12 @@ feature "DocumentTypes" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Tipo de Documento editado com sucesso.'
+    expect(page).to have_notice 'Tipo de Documento editado com sucesso.'
 
     click_link 'Oficial'
 
-    page.should have_field 'Validade em dias', :with => '20'
-    page.should have_field 'Descrição', :with => 'Oficial'
+    expect(page).to have_field 'Validade em dias', :with => '20'
+    expect(page).to have_field 'Descrição', :with => 'Oficial'
   end
 
   scenario 'cannot destroy an existent document_type with licitation_process relationship' do
@@ -53,7 +53,7 @@ feature "DocumentTypes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should_not have_notice 'Tipo de Documento apagado com sucesso.'
+    expect(page).not_to have_notice 'Tipo de Documento apagado com sucesso.'
   end
 
   scenario 'destroy an existent document_type' do
@@ -64,10 +64,10 @@ feature "DocumentTypes" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Tipo de Documento apagado com sucesso.'
+    expect(page).to have_notice 'Tipo de Documento apagado com sucesso.'
 
-    page.should_not have_content '10'
-    page.should_not have_content 'Fiscal'
+    expect(page).not_to have_content '10'
+    expect(page).not_to have_content 'Fiscal'
   end
 
   scenario 'validate uniqueness of description' do
@@ -81,6 +81,6 @@ feature "DocumentTypes" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 end

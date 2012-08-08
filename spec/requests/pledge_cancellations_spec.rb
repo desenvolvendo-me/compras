@@ -22,25 +22,25 @@ feature "PledgeCancellations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Anulação de Empenho criado com sucesso.'
+    expect(page).to have_notice 'Anulação de Empenho criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Empenho', :with => pledge.to_s
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Empenho', :with => pledge.to_s
+    expect(page).to have_disabled_field 'Data de emissão'
+    expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
 
     page.find('#pledge_value').should have_content 'R$ 200,00'
     page.find('#pledge_liquidations_sum').should have_content 'R$ 0,00'
     page.find('#pledge_cancellations_sum').should have_content 'R$ 150,00'
     page.find('#pledge_balance').should have_content 'R$ 50,00'
 
-    page.should have_field 'Valor a ser anulado', :with => '150,00'
-    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
-    page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
-    page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
+    expect(page).to have_field 'Valor a ser anulado', :with => '150,00'
+    expect(page).to have_field 'Data *', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_select 'Natureza da ocorrência', :selected => 'Normal'
+    expect(page).to have_field 'Motivo', :with => 'Motivo para o anulamento'
   end
 
   scenario 'when fill/clear pledge should fill/clear delegateds fields' do
@@ -51,9 +51,9 @@ feature "PledgeCancellations" do
     click_link 'Criar Anulação de Empenho'
 
     fill_modal 'Empenho', :with => pledge.code.to_s, :field => 'Código'
-    page.should have_field 'Empenho', :with => pledge.to_s
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Empenho', :with => pledge.to_s
+    expect(page).to have_disabled_field 'Data de emissão'
+    expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
 
     page.find('#pledge_value').should have_content 'R$ 9,99'
     page.find('#pledge_liquidations_sum').should have_content 'R$ 0,00'
@@ -62,8 +62,8 @@ feature "PledgeCancellations" do
 
     clear_modal 'Empenho'
 
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_field 'Data de emissão', :with => ''
+    expect(page).to have_disabled_field 'Data de emissão'
+    expect(page).to have_field 'Data de emissão', :with => ''
   end
 
   scenario 'should have all fields disabled when editing an existent pledge' do
@@ -78,18 +78,18 @@ feature "PledgeCancellations" do
 
     should_not have_button 'Criar Anulação de Empenho'
 
-    page.should have_disabled_field 'Empenho'
-    page.should have_field 'Empenho', :with => pledge.to_s
-    page.should have_disabled_field 'Data de emissão'
-    page.should have_field 'Data de emissão', :with => I18n.l(Date.current)
-    page.should have_disabled_field 'Valor a ser anulado'
-    page.should have_field 'Valor a ser anulado', :with => '1,00'
-    page.should have_disabled_field 'Data *'
-    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
-    page.should have_disabled_field 'Natureza da ocorrência'
-    page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
-    page.should have_disabled_field 'Motivo'
-    page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
+    expect(page).to have_disabled_field 'Empenho'
+    expect(page).to have_field 'Empenho', :with => pledge.to_s
+    expect(page).to have_disabled_field 'Data de emissão'
+    expect(page).to have_field 'Data de emissão', :with => I18n.l(Date.current)
+    expect(page).to have_disabled_field 'Valor a ser anulado'
+    expect(page).to have_field 'Valor a ser anulado', :with => '1,00'
+    expect(page).to have_disabled_field 'Data *'
+    expect(page).to have_field 'Data *', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_disabled_field 'Natureza da ocorrência'
+    expect(page).to have_select 'Natureza da ocorrência', :selected => 'Normal'
+    expect(page).to have_disabled_field 'Motivo'
+    expect(page).to have_field 'Motivo', :with => 'Motivo para o anulamento'
   end
 
   scenario 'should not have a button to destroy an existent pledge' do
@@ -101,7 +101,7 @@ feature "PledgeCancellations" do
       page.find('a').click
     end
 
-    page.should_not have_link "Apagar"
+    expect(page).not_to have_link "Apagar"
   end
 
   scenario 'access modal' do
@@ -117,8 +117,8 @@ feature "PledgeCancellations" do
     click_button 'Pesquisar'
 
     within_records do
-      page.should have_link pledge_cancellation.to_s
-      page.should_not have_link pledge_cancellation_quize_dias.to_s
+      expect(page).to have_link pledge_cancellation.to_s
+      expect(page).not_to have_link pledge_cancellation_quize_dias.to_s
     end
   end
 end

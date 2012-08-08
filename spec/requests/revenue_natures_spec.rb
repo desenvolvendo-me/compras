@@ -28,22 +28,22 @@ feature "RevenueNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza da Receita criado com sucesso.'
+    expect(page).to have_notice 'Natureza da Receita criado com sucesso.'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Ato regulamentador', :with => '1234'
-    page.should have_field 'Tipo', :with => 'Lei'
-    page.should have_field 'Data de publicação', :with => '02/01/2012'
-    page.should have_field 'Classificação', :with => '12.34'
-    page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34'
-    page.should have_field 'Rúbrica da receita', :with => '2 - IMPOSTOS SOBRE O PATRIMÔNIO E A RENDA'
-    page.should have_field 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
-    page.should have_select 'Tipo', :selected => 'Ambos'
-    page.should have_field 'Súmula', :with => 'Registra o valor da arrecadação da receita'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Tipo', :with => 'Lei'
+    expect(page).to have_field 'Data de publicação', :with => '02/01/2012'
+    expect(page).to have_field 'Classificação', :with => '12.34'
+    expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.12.34'
+    expect(page).to have_field 'Rúbrica da receita', :with => '2 - IMPOSTOS SOBRE O PATRIMÔNIO E A RENDA'
+    expect(page).to have_field 'Especificação', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana'
+    expect(page).to have_select 'Tipo', :selected => 'Ambos'
+    expect(page).to have_field 'Súmula', :with => 'Registra o valor da arrecadação da receita'
   end
 
   scenario 'generate full code using js' do
@@ -54,19 +54,19 @@ feature "RevenueNatures" do
     click_link 'Criar Natureza da Receita'
 
     fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Natureza da receita', :with => '1.0.0.0.00.00'
+    expect(page).to have_field 'Natureza da receita', :with => '1.0.0.0.00.00'
 
     fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Natureza da receita', :with => '1.1.0.0.00.00'
+    expect(page).to have_field 'Natureza da receita', :with => '1.1.0.0.00.00'
 
     fill_modal 'Fonte da receita', :with => '1', :field => 'Código'
-    page.should have_field 'Natureza da receita', :with => '1.1.1.0.00.00'
+    expect(page).to have_field 'Natureza da receita', :with => '1.1.1.0.00.00'
 
     fill_modal 'Rúbrica da receita', :with => '2', :field => 'Código'
-    page.should have_field 'Natureza da receita', :with => '1.1.1.2.00.00'
+    expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.00.00'
 
     fill_in 'Classificação', :with => '12.34'
-    page.should have_field 'Natureza da receita', :with => '1.1.1.2.12.34'
+    expect(page).to have_field 'Natureza da receita', :with => '1.1.1.2.12.34'
   end
 
   context 'should cascate clear fields' do
@@ -85,16 +85,16 @@ feature "RevenueNatures" do
 
       clear_modal 'Categoria da receita'
 
-      page.should have_field 'Categoria da receita', :with => ''
-      page.should have_disabled_field 'Subcategoria da receita'
-      page.should have_field 'Subcategoria da receita', :with => ''
-      page.should have_disabled_field 'Fonte da receita'
-      page.should have_field 'Fonte da receita', :with => ''
-      page.should have_disabled_field 'Rúbrica da receita'
-      page.should have_field 'Rúbrica da receita', :with => ''
-      page.should have_disabled_field 'Classificação'
-      page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Natureza da receita', :with => '0.0.0.0.00.00'
+      expect(page).to have_field 'Categoria da receita', :with => ''
+      expect(page).to have_disabled_field 'Subcategoria da receita'
+      expect(page).to have_field 'Subcategoria da receita', :with => ''
+      expect(page).to have_disabled_field 'Fonte da receita'
+      expect(page).to have_field 'Fonte da receita', :with => ''
+      expect(page).to have_disabled_field 'Rúbrica da receita'
+      expect(page).to have_field 'Rúbrica da receita', :with => ''
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Natureza da receita', :with => '0.0.0.0.00.00'
     end
 
     scenario 'when clear subcategory' do
@@ -112,15 +112,15 @@ feature "RevenueNatures" do
 
       clear_modal 'Subcategoria da receita'
 
-      page.should have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
-      page.should have_field 'Subcategoria da receita', :with => ''
-      page.should have_disabled_field 'Fonte da receita'
-      page.should have_field 'Fonte da receita', :with => ''
-      page.should have_disabled_field 'Rúbrica da receita'
-      page.should have_field 'Rúbrica da receita', :with => ''
-      page.should have_disabled_field 'Classificação'
-      page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Natureza da receita', :with => '1.0.0.0.00.00'
+      expect(page).to have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
+      expect(page).to have_field 'Subcategoria da receita', :with => ''
+      expect(page).to have_disabled_field 'Fonte da receita'
+      expect(page).to have_field 'Fonte da receita', :with => ''
+      expect(page).to have_disabled_field 'Rúbrica da receita'
+      expect(page).to have_field 'Rúbrica da receita', :with => ''
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Natureza da receita', :with => '1.0.0.0.00.00'
     end
 
     scenario 'when clear source' do
@@ -138,14 +138,14 @@ feature "RevenueNatures" do
 
       clear_modal 'Fonte da receita'
 
-      page.should have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
-      page.should have_field 'Subcategoria da receita', :with => '1 - RECEITA TRIBUTÁRIA'
-      page.should have_field 'Fonte da receita', :with => ''
-      page.should have_disabled_field 'Rúbrica da receita'
-      page.should have_field 'Rúbrica da receita', :with => ''
-      page.should have_disabled_field 'Classificação'
-      page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Natureza da receita', :with => '1.1.0.0.00.00'
+      expect(page).to have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
+      expect(page).to have_field 'Subcategoria da receita', :with => '1 - RECEITA TRIBUTÁRIA'
+      expect(page).to have_field 'Fonte da receita', :with => ''
+      expect(page).to have_disabled_field 'Rúbrica da receita'
+      expect(page).to have_field 'Rúbrica da receita', :with => ''
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Natureza da receita', :with => '1.1.0.0.00.00'
     end
 
     scenario 'when clear rubric' do
@@ -163,13 +163,13 @@ feature "RevenueNatures" do
 
       clear_modal 'Rúbrica da receita'
 
-      page.should have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
-      page.should have_field 'Subcategoria da receita', :with => '1 - RECEITA TRIBUTÁRIA'
-      page.should have_field 'Fonte da receita', :with => '1 - IMPOSTOS'
-      page.should have_field 'Rúbrica da receita', :with => ''
-      page.should have_disabled_field 'Classificação'
-      page.should have_field 'Classificação', :with => ''
-      page.should have_field 'Natureza da receita', :with => '1.1.1.0.00.00'
+      expect(page).to have_field 'Categoria da receita', :with => '1 - RECEITAS CORRENTES'
+      expect(page).to have_field 'Subcategoria da receita', :with => '1 - RECEITA TRIBUTÁRIA'
+      expect(page).to have_field 'Fonte da receita', :with => '1 - IMPOSTOS'
+      expect(page).to have_field 'Rúbrica da receita', :with => ''
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_field 'Natureza da receita', :with => '1.1.1.0.00.00'
     end
   end
 
@@ -182,14 +182,14 @@ feature "RevenueNatures" do
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-    page.should have_field 'Tipo', :with => 'Lei'
-    page.should have_field 'Data de publicação', :with => '02/01/2012'
+    expect(page).to have_field 'Tipo', :with => 'Lei'
+    expect(page).to have_field 'Data de publicação', :with => '02/01/2012'
 
     # and should clear fields too
     clear_modal 'Ato regulamentador'
 
-    page.should have_field 'Tipo', :with => ''
-    page.should have_field 'Data de publicação', :with => ''
+    expect(page).to have_field 'Tipo', :with => ''
+    expect(page).to have_field 'Data de publicação', :with => ''
   end
 
   scenario 'update an existent revenue_nature' do
@@ -212,20 +212,20 @@ feature "RevenueNatures" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Natureza da Receita editado com sucesso.'
+    expect(page).to have_notice 'Natureza da Receita editado com sucesso.'
 
     click_link '1.1.1.3.11.11 - Imposto sobre Propriedade Predial e Territorial Urbana'
 
-    page.should have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-    page.should have_field 'Ato regulamentador', :with => '4567'
-    page.should have_field 'Tipo', :with => 'Emenda constitucional'
-    page.should have_field 'Data de publicação', :with => '02/01/2012'
-    page.should have_field 'Classificação', :with => '11.11'
-    page.should have_field 'Natureza da receita', :with => '1.1.1.3.11.11'
-    page.should have_field 'Rúbrica da receita', :with => '3 - IMPOSTOS SOBRE A PRODUÇÃO E A CIRCULAÇÃO'
-    page.should have_field 'Especificação', :with => 'Imposto sobre Propriedade Predial e Territorial Urbana'
-    page.should have_select 'Tipo', :selected => 'Analítico'
-    page.should have_field 'Súmula', :with => 'Registra o valor da arrecadação do imposto'
+    expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
+    expect(page).to have_field 'Ato regulamentador', :with => '4567'
+    expect(page).to have_field 'Tipo', :with => 'Emenda constitucional'
+    expect(page).to have_field 'Data de publicação', :with => '02/01/2012'
+    expect(page).to have_field 'Classificação', :with => '11.11'
+    expect(page).to have_field 'Natureza da receita', :with => '1.1.1.3.11.11'
+    expect(page).to have_field 'Rúbrica da receita', :with => '3 - IMPOSTOS SOBRE A PRODUÇÃO E A CIRCULAÇÃO'
+    expect(page).to have_field 'Especificação', :with => 'Imposto sobre Propriedade Predial e Territorial Urbana'
+    expect(page).to have_select 'Tipo', :selected => 'Analítico'
+    expect(page).to have_field 'Súmula', :with => 'Registra o valor da arrecadação do imposto'
   end
 
   scenario 'destroy an existent revenue_nature' do
@@ -237,9 +237,9 @@ feature "RevenueNatures" do
 
     click_link "Apagar", :confirm => true
 
-    page.should have_notice 'Natureza da Receita apagado com sucesso.'
+    expect(page).to have_notice 'Natureza da Receita apagado com sucesso.'
 
-    page.should_not have_content '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
+    expect(page).not_to have_content '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
   end
 
   context 'filtering' do
@@ -255,8 +255,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by specification' do
@@ -271,8 +271,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by descriptor' do
@@ -293,8 +293,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by kind' do
@@ -309,8 +309,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_category' do
@@ -331,8 +331,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_subcategory' do
@@ -353,8 +353,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_source' do
@@ -375,8 +375,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_rubric' do
@@ -397,8 +397,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by classification' do
@@ -413,8 +413,8 @@ feature "RevenueNatures" do
 
       click_button 'Pesquisar'
 
-      page.should have_content '1.1.1.2.12.34'
-      page.should_not have_content '7.9.4.0.00.00'
+      expect(page).to have_content '1.1.1.2.12.34'
+      expect(page).not_to have_content '7.9.4.0.00.00'
     end
   end
 end

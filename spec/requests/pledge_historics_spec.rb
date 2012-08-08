@@ -18,12 +18,12 @@ feature "PledgeHistorics" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Histórico de Empenho criado com sucesso.'
+    expect(page).to have_notice 'Histórico de Empenho criado com sucesso.'
 
     click_link 'Mensal'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Descrição', :with => 'Mensal'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Descrição', :with => 'Mensal'
   end
 
   scenario 'update an existent pledge_historic' do
@@ -39,12 +39,12 @@ feature "PledgeHistorics" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Histórico de Empenho editado com sucesso.'
+    expect(page).to have_notice 'Histórico de Empenho editado com sucesso.'
 
     click_link 'Anual'
 
-    page.should have_field 'Descrição', :with => 'Anual'
-    page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
+    expect(page).to have_field 'Descrição', :with => 'Anual'
+    expect(page).to have_field 'Descritor', :with => '2013 - Secretaria de Educação'
   end
 
   scenario 'destroy an existent pledge_historic' do
@@ -56,9 +56,9 @@ feature "PledgeHistorics" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Histórico de Empenho apagado com sucesso.'
+    expect(page).to have_notice 'Histórico de Empenho apagado com sucesso.'
 
-    page.should_not have_content 'Semestral'
-    page.should_not have_content 'Detran'
+    expect(page).not_to have_content 'Semestral'
+    expect(page).not_to have_content 'Detran'
   end
 end

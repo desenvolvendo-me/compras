@@ -21,18 +21,18 @@ feature "Streets" do
     fill_in 'Zona fiscal', :with => '000'
 
     fill_modal 'Bairro', :with => 'Centro'
-    page.should have_content "Bairro"
+    expect(page).to have_content "Bairro"
 
     click_button 'Salvar'
 
-    page.should have_notice 'Logradouro criado com sucesso.'
+    expect(page).to have_notice 'Logradouro criado com sucesso.'
 
     click_link 'Cristiano do O'
 
-    page.should have_field 'Nome', :with => 'Cristiano do O'
-    page.should have_field 'Tipo do logradouro', :with => 'Rua'
-    page.should have_field 'Zona fiscal', :with => '000'
-    page.should have_content 'Centro'
+    expect(page).to have_field 'Nome', :with => 'Cristiano do O'
+    expect(page).to have_field 'Tipo do logradouro', :with => 'Rua'
+    expect(page).to have_field 'Zona fiscal', :with => '000'
+    expect(page).to have_content 'Centro'
   end
 
   scenario 'update a street' do
@@ -54,14 +54,14 @@ feature "Streets" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Logradouro editado com sucesso.'
+    expect(page).to have_notice 'Logradouro editado com sucesso.'
 
     click_link 'Francisco de Assis'
 
-    page.should have_field 'Nome', :with => 'Francisco de Assis'
-    page.should have_field 'Tipo do logradouro', :with => 'Avenida'
-    page.should have_field 'Zona fiscal', :with => '003'
-    page.should have_content 'Portugal'
+    expect(page).to have_field 'Nome', :with => 'Francisco de Assis'
+    expect(page).to have_field 'Tipo do logradouro', :with => 'Avenida'
+    expect(page).to have_field 'Zona fiscal', :with => '003'
+    expect(page).to have_content 'Portugal'
   end
 
   scenario 'destroy a street' do
@@ -73,9 +73,9 @@ feature "Streets" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Logradouro apagado com sucesso.'
+    expect(page).to have_notice 'Logradouro apagado com sucesso.'
 
-    page.should_not have_content 'Girassol'
+    expect(page).not_to have_content 'Girassol'
   end
 
   scenario 'should not allow more than one time neighborhood' do
@@ -88,8 +88,8 @@ feature "Streets" do
     fill_modal 'Bairro', :with => 'Centro'
     fill_modal 'Bairro', :with => 'Centro'
 
-    page.should have_content 'Centro'
+    expect(page).to have_content 'Centro'
 
-    page.should have_css 'tr.record', :count => 1
+    expect(page).to have_css 'tr.record', :count => 1
   end
 end

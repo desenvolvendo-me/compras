@@ -19,12 +19,12 @@ feature "Condominia" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Condomínio criado com sucesso.'
+    expect(page).to have_notice 'Condomínio criado com sucesso.'
 
     click_link 'Tambuata'
 
-    page.should have_field 'Nome', :with => 'Tambuata'
-    page.should have_select 'Tipo de condomínio', :selected => 'Vertical'
+    expect(page).to have_field 'Nome', :with => 'Tambuata'
+    expect(page).to have_select 'Tipo de condomínio', :selected => 'Vertical'
   end
 
   scenario 'update a condominium' do
@@ -38,11 +38,11 @@ feature "Condominia" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Condomínio editado com sucesso.'
+    expect(page).to have_notice 'Condomínio editado com sucesso.'
 
     click_link 'Parque das Flores'
 
-    page.should have_field 'Nome', :with => 'Parque das Flores'
+    expect(page).to have_field 'Nome', :with => 'Parque das Flores'
   end
 
   scenario 'destroy a condominium' do
@@ -54,8 +54,8 @@ feature "Condominia" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Condomínio apagado com sucesso.'
+    expect(page).to have_notice 'Condomínio apagado com sucesso.'
 
-    page.should_not have_content 'Tambuata'
+    expect(page).not_to have_content 'Tambuata'
   end
 end

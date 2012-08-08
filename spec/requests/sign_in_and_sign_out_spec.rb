@@ -14,7 +14,7 @@ feature "SignInAndSignOut" do
 
     click_button 'Login'
 
-    page.should have_alert 'Login ou senha inválidos.'
+    expect(page).to have_alert 'Login ou senha inválidos.'
   end
 
   scenario 'sign in with valid credentials' do
@@ -25,7 +25,7 @@ feature "SignInAndSignOut" do
 
     click_button 'Login'
 
-    page.should have_notice 'Login efetuado com sucesso.'
+    expect(page).to have_notice 'Login efetuado com sucesso.'
   end
 
   scenario 'sign out' do
@@ -36,10 +36,10 @@ feature "SignInAndSignOut" do
 
     click_button 'Login'
 
-    page.should have_notice 'Login efetuado com sucesso.'
+    expect(page).to have_notice 'Login efetuado com sucesso.'
 
     click_link 'Sair'
 
-    page.should have_notice 'Logout efetuado com sucesso.'
+    expect(page).to have_notice 'Logout efetuado com sucesso.'
   end
 end

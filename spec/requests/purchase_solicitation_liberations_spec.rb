@@ -18,21 +18,21 @@ feature "PurchaseSolicitationLiberations" do
       page.find('a').click
     end
 
-    page.should have_select 'Status de atendimento', :selected => 'Pendente'
+    expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
 
     # button liberate can be seen when purchase_solicitation is pending
     click_link 'Liberações'
 
-    page.should have_content 'Liberações da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    expect(page).to have_content 'Liberações da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
 
     click_link 'Criar Liberação de Solicitação de Compra'
 
-    page.should_not have_disabled_field 'Responsável'
+    expect(page).not_to have_disabled_field 'Responsável'
 
-    page.should have_content 'Criar Liberação para a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    expect(page).to have_content 'Criar Liberação para a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
 
-    page.should have_field 'Data', :with => I18n.l(Date.current)
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
     fill_modal 'Responsável', :field => 'Matrícula', :with => '12903412'
     fill_in 'Justificativa', :with => 'Compra justificada'
@@ -41,29 +41,29 @@ feature "PurchaseSolicitationLiberations" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Solicitação de Compras liberada com sucesso'
+    expect(page).to have_notice 'Solicitação de Compras liberada com sucesso'
 
     click_link 'Voltar para a Solicitação de Compra'
 
-    page.should have_select 'Status de atendimento', :selected => 'Liberada'
+    expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
 
     click_link 'Liberações'
 
-    page.should_not have_link 'Criar Liberação de Solicitação de Compra'
+    expect(page).not_to have_link 'Criar Liberação de Solicitação de Compra'
 
     within_records do
       page.find('a').click
     end
 
-    page.should have_disabled_field 'Justificativa'
-    page.should have_disabled_field 'Data'
-    page.should have_disabled_field 'Responsável'
-    page.should have_disabled_field 'Status de atendimento'
+    expect(page).to have_disabled_field 'Justificativa'
+    expect(page).to have_disabled_field 'Data'
+    expect(page).to have_disabled_field 'Responsável'
+    expect(page).to have_disabled_field 'Status de atendimento'
 
-    page.should have_content 'Editar Liberação 1 da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
-    page.should have_field 'Justificativa', :with => 'Compra justificada'
-    page.should have_field 'Data', :with =>  I18n.l(Date.current)
-    page.should have_field 'Responsável', :with => 'Wenderson Malheiros'
-    page.should have_field 'Sequência', :with => '1'
+    expect(page).to have_content 'Editar Liberação 1 da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    expect(page).to have_field 'Justificativa', :with => 'Compra justificada'
+    expect(page).to have_field 'Data', :with =>  I18n.l(Date.current)
+    expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Sequência', :with => '1'
   end
 end

@@ -18,12 +18,12 @@ feature "Districts" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Distrito criado com sucesso.'
+    expect(page).to have_notice 'Distrito criado com sucesso.'
 
     click_link 'Leste'
 
-    page.should have_field 'Nome', :with => 'Leste'
-    page.should have_field 'Cidade', :with => 'Belo Horizonte'
+    expect(page).to have_field 'Nome', :with => 'Leste'
+    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
   end
 
   scenario 'update a district' do
@@ -37,11 +37,11 @@ feature "Districts" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Distrito editado com sucesso.'
+    expect(page).to have_notice 'Distrito editado com sucesso.'
 
     click_link 'Oeste'
 
-    page.should have_field 'Nome', :with => 'Oeste'
+    expect(page).to have_field 'Nome', :with => 'Oeste'
   end
 
   scenario 'destroy a district' do
@@ -53,8 +53,8 @@ feature "Districts" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Distrito apagado com sucesso.'
+    expect(page).to have_notice 'Distrito apagado com sucesso.'
 
-    page.should_not have_content 'Sul'
+    expect(page).not_to have_content 'Sul'
   end
 end

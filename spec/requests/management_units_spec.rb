@@ -16,19 +16,19 @@ feature "ManagementUnits" do
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
     fill_in 'Descrição', :with => 'Unidade Central'
     fill_in 'Sigla', :with => 'UGC'
-    page.should have_disabled_field 'Status'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
 
     click_button 'Salvar'
 
-    page.should have_notice 'Unidade Gestora criada com sucesso.'
+    expect(page).to have_notice 'Unidade Gestora criada com sucesso.'
 
     click_link 'Unidade Central'
 
-    page.should have_field 'Descritor', :with => '2012 - Detran'
-    page.should have_field 'Descrição', :with => 'Unidade Central'
-    page.should have_field 'Sigla', :with => 'UGC'
-    page.should have_select 'Status', :selected => 'Ativo'
+    expect(page).to have_field 'Descritor', :with => '2012 - Detran'
+    expect(page).to have_field 'Descrição', :with => 'Unidade Central'
+    expect(page).to have_field 'Sigla', :with => 'UGC'
+    expect(page).to have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'update an existent management_unit' do
@@ -46,14 +46,14 @@ feature "ManagementUnits" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Unidade Gestora editada com sucesso.'
+    expect(page).to have_notice 'Unidade Gestora editada com sucesso.'
 
     click_link 'Unidade Auxiliar'
 
-    page.should have_field 'Descritor', :with => '2013 - Secretaria de Educação'
-    page.should have_field 'Descrição', :with => 'Unidade Auxiliar'
-    page.should have_field 'Sigla', :with => 'UGA'
-    page.should have_select 'Status', :selected => 'Inativo'
+    expect(page).to have_field 'Descritor', :with => '2013 - Secretaria de Educação'
+    expect(page).to have_field 'Descrição', :with => 'Unidade Auxiliar'
+    expect(page).to have_field 'Sigla', :with => 'UGA'
+    expect(page).to have_select 'Status', :selected => 'Inativo'
   end
 
   scenario 'destroy an existent management_unit' do
@@ -65,10 +65,10 @@ feature "ManagementUnits" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Unidade Gestora apagada com sucesso.'
+    expect(page).to have_notice 'Unidade Gestora apagada com sucesso.'
 
-    page.should_not have_content 'Unidade Central'
-    page.should_not have_content 'UGC'
-    page.should_not have_content 'Ativo'
+    expect(page).not_to have_content 'Unidade Central'
+    expect(page).not_to have_content 'UGC'
+    expect(page).not_to have_content 'Ativo'
   end
 end
