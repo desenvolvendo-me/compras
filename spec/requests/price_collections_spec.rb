@@ -782,7 +782,7 @@ feature "PriceCollections" do
     page.should_not have_button 'Salvar'
   end
 
-  scenario 'show modal' do
+  scenario 'opening the filter modal' do
     PriceCollection.make!(:coleta_de_precos)
     PriceCollection.make!(:coleta_de_precos_anulada)
 
