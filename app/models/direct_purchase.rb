@@ -28,6 +28,7 @@ class DirectPurchase < Compras::Model
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :allow_destroy => true
 
   delegate :phone, :fax, :address, :city, :zip_code, :to => :creditor, :allow_nil => true
+  delegate :person_email, :to => :creditor, :allow_nil => true, :prefix => true
   delegate :accounts, :agencies, :banks, :to => :creditor, :allow_nil => true
   delegate :purchase_licitation_exemption, :build_licitation_exemption,
            :to => :licitation_object, :allow_nil => true, :prefix => true

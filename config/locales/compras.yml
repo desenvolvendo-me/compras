@@ -2,6 +2,7 @@ pt-BR:
   compras:
     messages:
       administrative_process_annulled_successful: 'Processo Administrativo anulado com sucesso'
+      supply_authorization_mailer_successful: 'Autorização de fornecimento enviado por e-mail com sucesso'
 
   errors:
     compras:

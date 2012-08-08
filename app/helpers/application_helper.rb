@@ -110,4 +110,8 @@ module ApplicationHelper
     json.value resource.to_s
     yield
   end
+
+  def current_prefecture
+    ApplicationController.current_prefecture
+  end
 end

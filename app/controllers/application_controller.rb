@@ -20,9 +20,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_prefecture
-
-  def current_prefecture
+  def self.current_prefecture
     Prefecture.last
   end
 

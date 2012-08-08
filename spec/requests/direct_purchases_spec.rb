@@ -567,4 +567,18 @@ feature "DirectPurchases" do
       page.should have_content 'Valor total dos itens está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
     end
   end
+
+  scenario 'resend email authorization' do
+    SupplyAuthorization.make!(:compra_2012)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Reenviar autorização de fornecimento por e-mail'
+
+    page.should have_content 'Autorização de fornecimento enviado por e-mail com sucesso'
+  end
 end
