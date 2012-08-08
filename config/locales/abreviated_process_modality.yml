@@ -4,7 +4,7 @@ pt-BR:
       making_cost_for_constructions_and_engineering_services: "TP"
       making_cost_for_purchases_and_services: "TP"
       invitation_for_constructions_engineering_services: "CV"
-      invitation_for_purchases_and_engineering_services: "CV"
+      invitation_for_purchases_and_services: "CV"
       competition_for_constructions_and_engineering_services: "CC"
       competition_for_purchases_and_services: "CC"
       presence_trading: "PP"
