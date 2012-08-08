@@ -25,12 +25,23 @@ describe LicitationProcessBidderProposal do
     subject.total_price.should eq 0
   end
 
-  it 'uses false as default for ratification' do
-    subject.ratificated.should be false
-  end
+  context 'default values' do
+    context 'to ratification' do
+      it 'uses false as default for ratification' do
+        subject.ratificated.should be false
+      end
+    end
 
-  it 'situation should be by default undefined' do
-    subject.should_receive(:situation=).with(SituationOfProposal::UNDEFINED)
-    subject.send(:initialize)
+    context 'to situation' do
+      it 'situation should be by default undefined' do
+        subject.situation.should be SituationOfProposal::UNDEFINED
+      end
+
+      it 'situation should not be undefined when was not nil' do
+        subject.situation = SituationOfProposal::WON
+        subject.run_callbacks(:initialize)
+        subject.situation.should_not be SituationOfProposal::UNDEFINED
+      end
+    end
   end
 end
