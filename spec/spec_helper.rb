@@ -38,4 +38,9 @@ RSpec.configure do |config|
   # config.screenshot_full = true
   # config.clear_screenshots_before_run =  true
   # config.screenshot_on_errors = ENV['SCREENSHOT']
+
+  config.expect_with :rspec do |c|
+    # disable 'should' syntax
+    c.syntax = :expect
+  end
 end
