@@ -56,4 +56,10 @@ describe PriceCollectionLotItem do
   it 'should return 0 as the quantity default value' do
     subject.quantity.should eq 0
   end
+
+  it 'should return the current value for quantity if not use default value' do
+    subject.quantity = 5
+
+    expect(subject.quantity).to eq 5
+  end
 end
