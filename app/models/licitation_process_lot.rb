@@ -7,7 +7,8 @@ class LicitationProcessLot < Compras::Model
   has_many :licitation_process_bidder_proposals, :through => :administrative_process_budget_allocation_items
   has_many :licitation_process_bidders, :through => :licitation_process_bidder_proposals
 
-  delegate :administrative_process_id, :to => :licitation_process, :allow_nil => true
+  delegate :administrative_process, :administrative_process_id,
+           :to => :licitation_process, :allow_nil => true
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
   delegate :updatable?, :to => :licitation_process, :allow_nil => true, :prefix => true
 
