@@ -12,7 +12,7 @@ describe ContractsController do
     end
 
     it 'should have the current year as default year' do
-      assigns(:contract).year.should eq Date.current.year
+      expect(assigns(:contract).year).to eq Date.current.year
     end
   end
 
@@ -20,7 +20,7 @@ describe ContractsController do
     it 'render nothing when no param was given' do
       get :next_sequential
 
-      response.body.should be_blank
+      expect(response.body).to be_blank
     end
 
     it 'returns a json with the given sequential' do

@@ -11,7 +11,7 @@ describe LicitationProcessImpugnmentsController do
     it 'uses pending as default value for situation' do
       get :new
 
-      assigns(:licitation_process_impugnment).situation.should eq Situation::PENDING
+      expect(assigns(:licitation_process_impugnment).situation).to eq Situation::PENDING
     end
   end
 
@@ -21,7 +21,7 @@ describe LicitationProcessImpugnmentsController do
 
       post :create, :licitation_process_impugnment => { :licitation_process_id => licitation_process.id }
 
-      assigns(:licitation_process_impugnment).situation.should eq Situation::PENDING
+      expect(assigns(:licitation_process_impugnment).situation).to eq Situation::PENDING
     end
   end
 
@@ -32,7 +32,7 @@ describe LicitationProcessImpugnmentsController do
       put :update, :id => licitation_process_impugnment.id, :licitation_process_impugnment => {:valid_reason => "Outro motivo qualquer."}
 
       licitation_process_impugnment = LicitationProcessImpugnment.find(licitation_process_impugnment.id)
-      licitation_process_impugnment.valid_reason.should eq "Outro motivo qualquer."
+      expect(licitation_process_impugnment.valid_reason).to eq "Outro motivo qualquer."
     end
 
     it "should can't update any field when situation is not pending " do

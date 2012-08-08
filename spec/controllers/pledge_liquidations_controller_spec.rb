@@ -12,7 +12,7 @@ describe PledgeLiquidationsController do
 
       get :new
 
-      assigns(:pledge_liquidation).date.should eq nil
+      expect(assigns(:pledge_liquidation).date).to eq nil
     end
 
     it 'should set date as last pledge_liquidation' do
@@ -21,13 +21,13 @@ describe PledgeLiquidationsController do
 
       get :new
 
-      assigns(:pledge_liquidation).date.should eq Date.new(2012, 1, 1)
+      expect(assigns(:pledge_liquidation).date).to eq Date.new(2012, 1, 1)
     end
 
     it 'should use active as default status' do
       get :new
 
-      assigns(:pledge_liquidation).status.should eq PledgeLiquidationStatus::ACTIVE
+      expect(assigns(:pledge_liquidation).status).to eq PledgeLiquidationStatus::ACTIVE
     end
   end
 
@@ -35,7 +35,7 @@ describe PledgeLiquidationsController do
     it 'should use active as default status' do
       post :create
 
-      assigns(:pledge_liquidation).status.should eq PledgeLiquidationStatus::ACTIVE
+      expect(assigns(:pledge_liquidation).status).to eq PledgeLiquidationStatus::ACTIVE
     end
 
     it 'should call the GenerateNumberPledgeParcels on action create' do

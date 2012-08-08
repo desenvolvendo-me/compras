@@ -9,7 +9,7 @@ describe PledgesController do
   it 'uses current date as default value for emission date' do
     get :new
 
-    assigns(:pledge).emission_date.should eq Date.current
+    expect(assigns(:pledge).emission_date).to eq Date.current
   end
 
   it 'should call the budget allocation amount subtractor on action create' do

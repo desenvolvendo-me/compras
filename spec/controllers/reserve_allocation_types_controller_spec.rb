@@ -10,7 +10,7 @@ describe ReserveAllocationTypesController do
     it 'should use active as default status' do
       get :new
 
-      assigns(:reserve_allocation_type).status.should eq Status::ACTIVE
+      expect(assigns(:reserve_allocation_type).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,13 +18,13 @@ describe ReserveAllocationTypesController do
     it 'uses manual as default value for source' do
       post :create
 
-      assigns(:reserve_allocation_type).source.should eq Source::MANUAL
+      expect(assigns(:reserve_allocation_type).source).to eq Source::MANUAL
     end
 
     it 'uses active as default value for status' do
       post :create
 
-      assigns(:reserve_allocation_type).status.should eq Status::ACTIVE
+      expect(assigns(:reserve_allocation_type).status).to eq Status::ACTIVE
     end
   end
 end

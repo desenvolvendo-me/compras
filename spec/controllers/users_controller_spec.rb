@@ -38,7 +38,7 @@ describe UsersController do
 
         post :create
 
-        assigns(:user).authenticable_type.should eq AuthenticableType::EMPLOYEE
+        expect(assigns(:user).authenticable_type).to eq AuthenticableType::EMPLOYEE
       end
     end
   end

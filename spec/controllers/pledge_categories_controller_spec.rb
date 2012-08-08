@@ -10,7 +10,7 @@ describe PledgeCategoriesController do
     it 'should use active as default value for status' do
       get :new
 
-      assigns(:pledge_category).status.should eq Status::ACTIVE
+      expect(assigns(:pledge_category).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,13 +18,13 @@ describe PledgeCategoriesController do
     it 'uses manual as default value for source' do
       post :create
 
-      assigns(:pledge_category).source.should eq Source::MANUAL
+      expect(assigns(:pledge_category).source).to eq Source::MANUAL
     end
 
     it 'should use active as default value for status' do
       post :create
 
-      assigns(:pledge_category).status.should eq Status::ACTIVE
+      expect(assigns(:pledge_category).status).to eq Status::ACTIVE
     end
   end
 end

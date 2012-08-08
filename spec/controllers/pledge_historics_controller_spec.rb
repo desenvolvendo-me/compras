@@ -9,6 +9,6 @@ describe PledgeHistoricsController do
   it 'uses manual as default value for source' do
     post :create
 
-    assigns(:pledge_historic).source.should eq Source::MANUAL
+    expect(assigns(:pledge_historic).source).to eq Source::MANUAL
   end
 end

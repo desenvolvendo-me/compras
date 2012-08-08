@@ -9,12 +9,12 @@ describe ReserveFundsController do
   it 'uses reserved as default value for status on action new' do
     get :new
 
-    assigns(:reserve_fund).status.should eq ReserveFundStatus::RESERVED
+    expect(assigns(:reserve_fund).status).to eq ReserveFundStatus::RESERVED
   end
 
   it 'uses reserved as default value for status on action create' do
     post :create
 
-    assigns(:reserve_fund).status.should eq ReserveFundStatus::RESERVED
+    expect(assigns(:reserve_fund).status).to eq ReserveFundStatus::RESERVED
   end
 end

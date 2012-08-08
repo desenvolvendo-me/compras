@@ -10,7 +10,7 @@ describe CapabilitiesController do
     it 'should use active as default value for status' do
       get :new
 
-      assigns(:capability).status.should eq Status::ACTIVE
+      expect(assigns(:capability).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,13 +18,13 @@ describe CapabilitiesController do
     it 'should use active as default value for status' do
       post :create
 
-      assigns(:capability).status.should eq Status::ACTIVE
+      expect(assigns(:capability).status).to eq Status::ACTIVE
     end
 
     it 'uses manual as default value for source' do
       post :create
 
-      assigns(:capability).source.should eq Source::MANUAL
+      expect(assigns(:capability).source).to eq Source::MANUAL
     end
   end
 end

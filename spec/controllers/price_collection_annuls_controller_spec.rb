@@ -23,15 +23,15 @@ describe PriceCollectionAnnulsController do
     end
 
     it 'should have the current date as default date' do
-      assigns(:price_collection_annul).date.should eq Date.current
+      expect(assigns(:price_collection_annul).date).to eq Date.current
     end
 
     it 'should have the current user authenticable as default responsible' do
-      assigns(:price_collection_annul).employee.should == authenticable
+      expect(assigns(:price_collection_annul).employee).to eq authenticable
     end
 
     it 'should have the param price_collection as default price_collection' do
-      assigns(:price_collection_annul).price_collection.should == price_collection
+      expect(assigns(:price_collection_annul).price_collection).to eq price_collection
     end
   end
 

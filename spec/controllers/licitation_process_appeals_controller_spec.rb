@@ -10,7 +10,7 @@ describe LicitationProcessAppealsController do
     it 'uses pending as default value for situation' do
       get :new
 
-      assigns(:licitation_process_appeal).situation.should eq Situation::PENDING
+      expect(assigns(:licitation_process_appeal).situation).to eq Situation::PENDING
     end
   end
 end

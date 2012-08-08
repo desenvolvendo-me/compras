@@ -8,19 +8,19 @@ describe DirectPurchasesController do
   it 'uses current employee as default value for employee' do
     get :new
 
-    assigns(:direct_purchase).employee.should eq controller.current_user.authenticable
+    expect(assigns(:direct_purchase).employee).to eq controller.current_user.authenticable
   end
 
   it 'show today as default value for date' do
     get :new
 
-    assigns(:direct_purchase).date.should eq Date.current
+    expect(assigns(:direct_purchase).date).to eq Date.current
   end
 
   it 'show current year as default value for year' do
     get :new
 
-    assigns(:direct_purchase).year.should eq Date.current.year
+    expect(assigns(:direct_purchase).year).to eq Date.current.year
   end
 
   context 'next direct purchase' do
@@ -33,7 +33,7 @@ describe DirectPurchasesController do
 
       post :create
 
-      assigns(:direct_purchase).direct_purchase.should eq 2
+      expect(assigns(:direct_purchase).direct_purchase).to eq 2
     end
   end
 end

@@ -31,7 +31,7 @@ describe AdministrativeProcessesHelper do
           with(:administrative_process_id => 1).
           and_return('url')
 
-        helper.build_licitation_process_link.should eq '<a href="url" class="button primary">Novo processo licitatório</a>'
+        expect(helper.build_licitation_process_link).to eq '<a href="url" class="button primary">Novo processo licitatório</a>'
       end
 
       it "should return a link to edit licitation process" do
@@ -42,14 +42,14 @@ describe AdministrativeProcessesHelper do
           with(licitation_process, :administrative_process_id => 1).
           and_return('url')
 
-        helper.build_licitation_process_link.should eq '<a href="url" class="button secondary">Editar processo licitatório</a>'
+        expect(helper.build_licitation_process_link).to eq '<a href="url" class="button secondary">Editar processo licitatório</a>'
       end
 
 
       it "should not return a link to edit neither new licitation process when not allow licitation process" do
         resource.stub(:allow_licitation_process?).and_return(false)
 
-        helper.build_licitation_process_link.should be_nil
+        expect(helper.build_licitation_process_link).to be_nil
       end
     end
 
@@ -58,14 +58,14 @@ describe AdministrativeProcessesHelper do
         resource.stub(:persisted?).and_return(false)
         resource.stub(:released?).and_return(true)
 
-        helper.build_licitation_process_link.should be_nil
+        expect(helper.build_licitation_process_link).to be_nil
       end
 
       it "should not return a link to new neither edit licitation_process if not released" do
         resource.stub(:persisted?).and_return(true)
         resource.stub(:released?).and_return(false)
 
-        helper.build_licitation_process_link.should be_nil
+        expect(helper.build_licitation_process_link).to be_nil
       end
     end
   end
@@ -77,7 +77,7 @@ describe AdministrativeProcessesHelper do
       end
 
       it "should be nil" do
-        helper.release_button.should be_nil
+        expect(helper.release_button).to be_nil
       end
     end
 
@@ -89,7 +89,7 @@ describe AdministrativeProcessesHelper do
       end
 
       it "should be nil" do
-        helper.release_button.should be_nil
+        expect(helper.release_button).to be_nil
       end
     end
 
@@ -105,7 +105,7 @@ describe AdministrativeProcessesHelper do
           with(:administrative_process_id => 1).
           and_return('new_path')
 
-        helper.release_button.should eq '<a href="new_path" class="button primary">Liberar</a>'
+        expect(helper.release_button).to eq '<a href="new_path" class="button primary">Liberar</a>'
       end
     end
 
@@ -125,7 +125,7 @@ describe AdministrativeProcessesHelper do
       end
 
       it "should return a link to new administrative process liberation" do
-        helper.release_button.should eq '<a href="edit_path" class="button secondary">Liberação</a>'
+        expect(helper.release_button).to eq '<a href="edit_path" class="button secondary">Liberação</a>'
       end
     end
   end

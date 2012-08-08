@@ -15,15 +15,15 @@ describe AdministrativeProcessLiberationsController do
     end
 
     it 'uses current employee as default value for employee' do
-      assigns(:administrative_process_liberation).employee.should eq controller.current_user.authenticable
+      expect(assigns(:administrative_process_liberation).employee).to eq controller.current_user.authenticable
     end
 
     it 'uses current date as default date' do
-      assigns(:administrative_process_liberation).date.should eq Date.current
+      expect(assigns(:administrative_process_liberation).date).to eq Date.current
     end
 
     it 'associate the administrative_process from params' do
-      assigns(:administrative_process_liberation).administrative_process_id.should eq administrative_process.id
+      expect(assigns(:administrative_process_liberation).administrative_process_id).to eq administrative_process.id
     end
   end
 
@@ -44,7 +44,7 @@ describe AdministrativeProcessLiberationsController do
 
       post :create, :administrative_process_liberation => { :administrative_process_id => administrative_process.id, :employee_id => employee.id, :date => "15/06/2012" }
 
-      assigns(:administrative_process_liberation).administrative_process.status.should eq AdministrativeProcessStatus::RELEASED
+      expect(assigns(:administrative_process_liberation).administrative_process.status).to eq AdministrativeProcessStatus::RELEASED
 
       expect(response).to redirect_to(edit_administrative_process_path(administrative_process))
     end

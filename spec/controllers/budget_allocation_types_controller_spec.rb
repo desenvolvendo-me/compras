@@ -10,7 +10,7 @@ describe BudgetAllocationTypesController do
     it 'should use active as default value for status' do
       get :new
 
-      assigns(:budget_allocation_type).status.should eq Status::ACTIVE
+      expect(assigns(:budget_allocation_type).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,13 +18,13 @@ describe BudgetAllocationTypesController do
     it 'should use active as default value for status' do
       post :create
 
-      assigns(:budget_allocation_type).status.should eq Status::ACTIVE
+      expect(assigns(:budget_allocation_type).status).to eq Status::ACTIVE
     end
 
     it 'uses manual as default value for source' do
       post :create
 
-      assigns(:budget_allocation_type).source.should eq Source::MANUAL
+      expect(assigns(:budget_allocation_type).source).to eq Source::MANUAL
     end
   end
 end

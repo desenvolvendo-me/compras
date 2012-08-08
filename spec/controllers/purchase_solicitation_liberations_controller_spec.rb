@@ -22,15 +22,15 @@ describe PurchaseSolicitationLiberationsController do
     end
 
     it 'should have the current date as default date' do
-      assigns(:purchase_solicitation_liberation).date.should == Date.current
+      expect(assigns(:purchase_solicitation_liberation).date).to eq Date.current
     end
 
     it 'should have current user related authenticable as default responsible' do
-      assigns(:purchase_solicitation_liberation).responsible.should == current_user.authenticable
+      expect(assigns(:purchase_solicitation_liberation).responsible).to eq current_user.authenticable
     end
 
     it 'should have the given purchase solicitation as default purchase_solicitation' do
-      assigns(:purchase_solicitation_liberation).purchase_solicitation.should == purchase_solicitation
+      expect(assigns(:purchase_solicitation_liberation).purchase_solicitation).to eq purchase_solicitation
     end
   end
 
@@ -47,7 +47,7 @@ describe PurchaseSolicitationLiberationsController do
     end
 
     it 'should assign the purchase solicitation' do
-      assigns(:parent).id.should eq purchase_solicitation.id
+      expect(assigns(:parent).id).to eq purchase_solicitation.id
     end
 
     it 'should redirect to index' do

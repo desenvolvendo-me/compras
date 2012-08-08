@@ -11,7 +11,7 @@ describe MenuHelper do
       I18n.should_receive(:t).with('menu.item1').and_return('Item 1')
       I18n.should_receive(:t).with('menu.item2').and_return('Item 2')
 
-      helper.render_menu(:path => 'spec/fixtures/menu.yml').should eq '<ul><li><a href="#">Menu Principal</a><ul><li><a href="#">Submenu</a><ul><li><a href="/item_um">Item 1</a></li><li><a href="/item_dois">Item 2</a></li></ul></li></ul></li></ul>'
+      expect(helper.render_menu(:path => 'spec/fixtures/menu.yml')).to eq '<ul><li><a href="#">Menu Principal</a><ul><li><a href="#">Submenu</a><ul><li><a href="/item_um">Item 1</a></li><li><a href="/item_dois">Item 2</a></li></ul></li></ul></li></ul>'
     end
   end
 end

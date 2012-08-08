@@ -10,7 +10,7 @@ describe GovernmentProgramsController do
     it 'should use active as default status' do
       get :new
 
-      assigns(:government_program).status.should eq Status::ACTIVE
+      expect(assigns(:government_program).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,7 +18,7 @@ describe GovernmentProgramsController do
     it 'uses active as default value for status' do
       post :create
 
-      assigns(:government_program).status.should eq Status::ACTIVE
+      expect(assigns(:government_program).status).to eq Status::ACTIVE
     end
   end
 end

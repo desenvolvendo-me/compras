@@ -17,7 +17,7 @@ describe PriceCollectionsHelper do
       end
 
       it 'should be nil' do
-        helper.proposals_link.should be_nil
+        expect(helper.proposals_link).to be_nil
       end
     end
 
@@ -29,7 +29,7 @@ describe PriceCollectionsHelper do
       end
 
       it 'should return the link' do
-        helper.proposals_link.should eq '<a href="path" class="button primary">Propostas</a>'
+        expect(helper.proposals_link).to eq '<a href="path" class="button primary">Propostas</a>'
       end
     end
   end
@@ -41,7 +41,7 @@ describe PriceCollectionsHelper do
       end
 
       it 'should be nil' do
-        helper.count_link.should be_nil
+        expect(helper.count_link).to be_nil
       end
     end
 
@@ -53,7 +53,7 @@ describe PriceCollectionsHelper do
       it 'should return the link' do
         helper.should_receive(:price_collection_path).
           with(resource).and_return 'path'
-        helper.count_link.should eq '<a href="path" class="button primary">Relatório</a>'
+        expect(helper.count_link).to eq '<a href="path" class="button primary">Relatório</a>'
       end
     end
   end

@@ -9,25 +9,25 @@ describe AdministrativeProcessesController do
     it 'uses waiting as default value for status' do
       get :new
 
-      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
+      expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::WAITING
     end
 
     it 'uses current date as default value for date' do
       get :new
 
-      assigns(:administrative_process).date.should eq Date.current
+      expect(assigns(:administrative_process).date).to eq Date.current
     end
 
     it 'uses current year as default value for year' do
       get :new
 
-      assigns(:administrative_process).year.should eq Date.current.year
+      expect(assigns(:administrative_process).year).to eq Date.current.year
     end
 
     it 'uses current employee as default value for employee' do
       get :new
 
-      assigns(:administrative_process).responsible.should eq controller.current_user.authenticable
+      expect(assigns(:administrative_process).responsible).to eq controller.current_user.authenticable
     end
   end
 
@@ -35,7 +35,7 @@ describe AdministrativeProcessesController do
     it 'uses waiting as default value for status' do
       post :create
 
-      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
+      expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::WAITING
     end
   end
 
@@ -61,7 +61,7 @@ describe AdministrativeProcessesController do
 
       put :update, :id => administrative_process.id, :commit => 'Anular'
 
-      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::ANNULLED
+      expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::ANNULLED
     end
 
     it "should not cancel an administrative process without status waiting" do
@@ -69,7 +69,7 @@ describe AdministrativeProcessesController do
 
       put :update, :id => administrative_process.id
 
-      assigns(:administrative_process).status.should eq AdministrativeProcessStatus::WAITING
+      expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::WAITING
     end
   end
 end

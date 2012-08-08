@@ -10,6 +10,6 @@ describe JudgmentCommissionAdvicesController do
 
     get :new, :licitation_process_id => licitation_process.id
 
-    assigns(:judgment_commission_advice).year.should eq Date.current.year
+    expect(assigns(:judgment_commission_advice).year).to eq Date.current.year
   end
 end

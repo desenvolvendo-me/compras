@@ -8,8 +8,8 @@ describe LicitationProcessRatificationsController do
   it 'uses current date as default value for date fields' do
     get :new
 
-    assigns(:licitation_process_ratification).ratification_date.should eq Date.current
-    assigns(:licitation_process_ratification).adjudication_date.should eq Date.current
+    expect(assigns(:licitation_process_ratification).ratification_date).to eq Date.current
+    expect(assigns(:licitation_process_ratification).adjudication_date).to eq Date.current
   end
 
   it 'should not allow destroy' do

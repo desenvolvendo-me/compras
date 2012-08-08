@@ -19,15 +19,15 @@ describe ContractTerminationsController do
     end
 
     it 'should assign the current year as default' do
-      assigns(:contract_termination).year.should == Date.current.year
+      expect(assigns(:contract_termination).year).to eq Date.current.year
     end
 
     it 'should assign the sequential as the next based on the year' do
-      assigns(:contract_termination).number.should == 1
+      expect(assigns(:contract_termination).number).to eq 1
     end
 
     it 'should assign the contract as default contract' do
-      assigns(:contract_termination).contract.should == contract
+      expect(assigns(:contract_termination).contract).to eq contract
     end
   end
 

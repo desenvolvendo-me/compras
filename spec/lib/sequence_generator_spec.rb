@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SequenceGenerator, 'ActiveRecord' do
   it 'should defines methods for the class' do
-    ActiveRecord::Base.should respond_to(:auto_increment)
+    expect(ActiveRecord::Base).to respond_to(:auto_increment)
   end
 
   context 'class without' do
@@ -21,10 +21,10 @@ describe SequenceGenerator, 'ActiveRecord' do
     end
 
     it 'should set sequence update callback on auto_increment' do
-      BudgetAllocationWithoutOptions._create_callbacks.
+      expect(BudgetAllocationWithoutOptions._create_callbacks.
                                      select { |cb| cb.kind.eql?(:before) }.
-                                     collect(&:filter).
-                                     should include(:set_next_sequence)
+                                     collect(&:filter)).
+                                     to include(:set_next_sequence)
     end
 
     it 'should return the correct sequential number' do
@@ -59,10 +59,10 @@ describe SequenceGenerator, 'ActiveRecord' do
     it 'should have :before_save as callback' do
       expect(BudgetAllocationWithOptions.new.sequencer_callback).to eq :before_save
 
-      BudgetAllocationWithOptions._save_callbacks.
+      expect(BudgetAllocationWithOptions._save_callbacks.
                                   select { |cb| cb.kind.eql?(:before) }.
-                                  collect(&:filter).
-                                  should include(:set_next_sequence)
+                                  collect(&:filter)).
+                                  to include(:set_next_sequence)
     end
 
     it 'should force by to array' do

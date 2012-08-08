@@ -14,7 +14,7 @@ describe LicitationProcessLotsController do
       get :new, :licitation_process_id => licitation_process.id
 
       expect(response.code).to eq '401'
-      response.body.should have_content 'Você não tem acesso a essa página'
+      expect(response.body).to have_content 'Você não tem acesso a essa página'
     end
 
     it 'should show new when licitation process is updatable' do
@@ -33,7 +33,7 @@ describe LicitationProcessLotsController do
       post :create, :licitation_process_id => licitation_process.id
 
       expect(response.code).to eq '401'
-      response.body.should have_content 'Você não tem acesso a essa página'
+      expect(response.body).to have_content 'Você não tem acesso a essa página'
     end
 
     it 'should create when licitation process is updatable' do
@@ -53,7 +53,7 @@ describe LicitationProcessLotsController do
       put :update, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
       expect(response.code).to eq '401'
-      response.body.should have_content 'Você não tem acesso a essa página'
+      expect(response.body).to have_content 'Você não tem acesso a essa página'
     end
 
     it 'should update when licitation process is updatable' do
@@ -74,7 +74,7 @@ describe LicitationProcessLotsController do
       delete :destroy, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
       expect(response.code).to eq '401'
-      response.body.should have_content 'Você não tem acesso a essa página'
+      expect(response.body).to have_content 'Você não tem acesso a essa página'
     end
 
     it 'should destroy when licitation process is updatable' do

@@ -9,25 +9,25 @@ describe PurchaseSolicitationsController do
     it 'uses pending as default value for service_status' do
       get :new
 
-      assigns(:purchase_solicitation).service_status.should eq PurchaseSolicitationServiceStatus::PENDING
+      expect(assigns(:purchase_solicitation).service_status).to eq PurchaseSolicitationServiceStatus::PENDING
     end
 
     it 'uses current year as default value for year' do
       get :new
 
-      assigns(:purchase_solicitation).accounting_year.should eq Date.current.year
+      expect(assigns(:purchase_solicitation).accounting_year).to eq Date.current.year
     end
 
     it 'uses current date as default value for date' do
       get :new
 
-      assigns(:purchase_solicitation).request_date.should eq Date.current
+      expect(assigns(:purchase_solicitation).request_date).to eq Date.current
     end
 
     it 'uses current employee as default value for employee' do
       get :new
 
-      assigns(:purchase_solicitation).responsible.should eq controller.current_user.authenticable
+      expect(assigns(:purchase_solicitation).responsible).to eq controller.current_user.authenticable
     end
   end
 
@@ -35,7 +35,7 @@ describe PurchaseSolicitationsController do
     it 'should mark purchase_solicitation as pending' do
       post :create
 
-      assigns(:purchase_solicitation).service_status.should eq PurchaseSolicitationServiceStatus::PENDING
+      expect(assigns(:purchase_solicitation).service_status).to eq PurchaseSolicitationServiceStatus::PENDING
     end
   end
 
@@ -57,7 +57,7 @@ describe PurchaseSolicitationsController do
       put :update, :id => purchase_solicitation.id,
                    :purchase_solicitation => { :accounting_year => 2013 }
 
-      assigns(:purchase_solicitation).accounting_year.should eq 2013
+      expect(assigns(:purchase_solicitation).accounting_year).to eq 2013
     end
   end
 end

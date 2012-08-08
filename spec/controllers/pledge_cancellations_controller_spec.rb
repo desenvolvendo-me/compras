@@ -11,7 +11,7 @@ describe PledgeCancellationsController do
 
     get :new
 
-    assigns(:pledge_cancellation).date.should eq nil
+    expect(assigns(:pledge_cancellation).date).to eq nil
   end
 
   it 'should set date as last pledge_cancellation' do
@@ -20,6 +20,6 @@ describe PledgeCancellationsController do
 
     get :new
 
-    assigns(:pledge_cancellation).date.should eq Date.new(2012, 1, 1)
+    expect(assigns(:pledge_cancellation).date).to eq Date.new(2012, 1, 1)
   end
 end

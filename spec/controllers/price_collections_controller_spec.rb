@@ -11,19 +11,19 @@ describe PriceCollectionsController do
     it 'uses current date as default value for date' do
       get :new
 
-      assigns(:price_collection).date.should eq Date.current
+      expect(assigns(:price_collection).date).to eq Date.current
     end
 
     it 'uses current year as default value for year' do
       get :new
 
-      assigns(:price_collection).year.should eq Date.current.year
+      expect(assigns(:price_collection).year).to eq Date.current.year
     end
 
     it 'uses active as default value for status' do
       get :new
 
-      assigns(:price_collection).status.should eq Status::ACTIVE
+      expect(assigns(:price_collection).status).to eq Status::ACTIVE
     end
   end
 
@@ -33,13 +33,13 @@ describe PriceCollectionsController do
 
       post :create
 
-      assigns(:price_collection).collection_number.should eq 2
+      expect(assigns(:price_collection).collection_number).to eq 2
     end
 
     it 'uses active as default value for status' do
       post :create
 
-      assigns(:price_collection).status.should eq Status::ACTIVE
+      expect(assigns(:price_collection).status).to eq Status::ACTIVE
     end
 
     describe 'successfull' do

@@ -10,7 +10,7 @@ describe ManagementUnitsController do
     it 'should use active as default value for status' do
       get :new
 
-      assigns(:management_unit).status.should eq Status::ACTIVE
+      expect(assigns(:management_unit).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,7 +18,7 @@ describe ManagementUnitsController do
     it 'should use active as default value for status' do
       post :create
 
-      assigns(:management_unit).status.should eq Status::ACTIVE
+      expect(assigns(:management_unit).status).to eq Status::ACTIVE
     end
   end
 end

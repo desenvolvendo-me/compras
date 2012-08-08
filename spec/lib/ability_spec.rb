@@ -24,45 +24,45 @@ describe Ability do
     ability = Ability.new
     ability.can(:modify, :something)
 
-    ability.should be_able_to :read, :something
-    ability.should be_able_to :create, :something
-    ability.should be_able_to :update, :something
+    expect(ability).to be_able_to :read, :something
+    expect(ability).to be_able_to :create, :something
+    expect(ability).to be_able_to :update, :something
   end
 
   it 'alias filter and modal to read' do
     ability = Ability.new
     ability.can(:read, :something)
 
-    ability.should be_able_to :filter, :something
-    ability.should be_able_to :modal, :something
+    expect(ability).to be_able_to :filter, :something
+    expect(ability).to be_able_to :modal, :something
   end
 
   it 'should be able to access accounts and bookmarks' do
     ability = Ability.new(user)
 
-    ability.should be_able_to :access, :accounts
-    ability.should be_able_to :access, :bookmarks
+    expect(ability).to be_able_to :access, :accounts
+    expect(ability).to be_able_to :access, :bookmarks
   end
 
   it 'should be able to access all if user is administrator' do
     ability = Ability.new(admin)
 
-    ability.should be_able_to :access, :all
+    expect(ability).to be_able_to :access, :all
   end
 
   it 'should not be able to access all if user is administrator' do
     ability = Ability.new(user)
 
-    ability.should_not be_able_to :access, :all
+    expect(ability).not_to be_able_to :access, :all
   end
 
   it 'should be able to access which roles permits' do
     ability = Ability.new(user)
 
-    ability.should be_able_to :read, :something
-    ability.should be_able_to :create, :something
-    ability.should be_able_to :update, :something
-    ability.should be_able_to :destroy, :something
+    expect(ability).to be_able_to :read, :something
+    expect(ability).to be_able_to :create, :something
+    expect(ability).to be_able_to :update, :something
+    expect(ability).to be_able_to :destroy, :something
   end
 
   context 'ability for creditor user' do

@@ -33,19 +33,19 @@ describe LicitationProcessesController do
     it 'uses current year as default value for year' do
       get :new, :administrative_process_id => administrative_process.id
 
-      assigns(:licitation_process).year.should eq Date.current.year
+      expect(assigns(:licitation_process).year).to eq Date.current.year
     end
 
     it 'uses current year as default value for judgment form' do
       get :new, :administrative_process_id => administrative_process.id
 
-      assigns(:licitation_process).judgment_form.description.should eq 'Forma Global com Menor Preço'
+      expect(assigns(:licitation_process).judgment_form.description).to eq 'Forma Global com Menor Preço'
     end
 
     it 'uses current date as default value for process_date' do
       get :new, :administrative_process_id => administrative_process.id
 
-      assigns(:licitation_process).process_date.should eq Date.current
+      expect(assigns(:licitation_process).process_date).to eq Date.current
     end
 
     it 'should assign the process' do
@@ -54,7 +54,7 @@ describe LicitationProcessesController do
 
       post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
 
-      assigns(:licitation_process).process.should eq 2
+      expect(assigns(:licitation_process).process).to eq 2
     end
 
     it 'should assign the licitation number' do
@@ -63,7 +63,7 @@ describe LicitationProcessesController do
 
       post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
 
-      assigns(:licitation_process).licitation_number.should eq 2
+      expect(assigns(:licitation_process).licitation_number).to eq 2
     end
   end
 
@@ -84,7 +84,7 @@ describe LicitationProcessesController do
 
         put :update, :id => licitation_process.to_param, :licitation_process => { :observations => "Descrição do objeto" }
 
-        assigns(:licitation_process).observations.should eq 'observacoes'
+        expect(assigns(:licitation_process).observations).to eq 'observacoes'
       end
 
       it 'should update any field when has not publication or when publication allow update licitation process' do
@@ -92,7 +92,7 @@ describe LicitationProcessesController do
 
         put :update, :id => licitation_process.id, :licitation_process => { :observations => "Descrição do objeto" }
 
-        assigns(:licitation_process).observations.should eq 'Descrição do objeto'
+        expect(assigns(:licitation_process).observations).to eq 'Descrição do objeto'
       end
 
       it 'should redirect to administrative process edit page after update' do

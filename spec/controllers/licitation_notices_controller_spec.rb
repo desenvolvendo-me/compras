@@ -10,7 +10,7 @@ describe LicitationNoticesController do
     it 'uses current date as default value for date' do
       get :new
 
-      assigns(:licitation_notice).date.should eq Date.current
+      expect(assigns(:licitation_notice).date).to eq Date.current
     end
   end
 
@@ -20,7 +20,7 @@ describe LicitationNoticesController do
 
       post :create
 
-      assigns(:licitation_notice).number.should eq 2
+      expect(assigns(:licitation_notice).number).to eq 2
     end
   end
 end

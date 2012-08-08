@@ -10,7 +10,7 @@ describe ExpenseKindsController do
     it 'should use active as default value for status' do
       get :new
 
-      assigns(:expense_kind).status.should eq Status::ACTIVE
+      expect(assigns(:expense_kind).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,7 +18,7 @@ describe ExpenseKindsController do
     it 'should use active as default value for status' do
       post :create
 
-      assigns(:expense_kind).status.should eq Status::ACTIVE
+      expect(assigns(:expense_kind).status).to eq Status::ACTIVE
     end
   end
 end

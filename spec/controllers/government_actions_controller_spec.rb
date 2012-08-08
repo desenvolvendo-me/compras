@@ -10,7 +10,7 @@ describe GovernmentActionsController do
     it 'should have active as default status' do
       get :new
 
-      assigns(:government_action).status.should eq Status::ACTIVE
+      expect(assigns(:government_action).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,7 +18,7 @@ describe GovernmentActionsController do
     it 'should have active as default for status' do
       post :create
 
-      assigns(:government_action).status.should eq Status::ACTIVE
+      expect(assigns(:government_action).status).to eq Status::ACTIVE
     end
   end
 end
