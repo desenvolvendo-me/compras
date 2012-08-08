@@ -5,7 +5,7 @@ AdministrativeProcess.blueprint(:compra_de_cadeiras) do
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -21,7 +21,7 @@ AdministrativeProcess.blueprint(:compra_de_computadores) do
   date { Date.new(2012, 3, 7) }
   protocol { '00099/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de computadores' }
   responsible { Employee.make!(:sobrinho) }
@@ -53,7 +53,7 @@ AdministrativeProcess.blueprint(:compra_com_itens) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -69,7 +69,7 @@ AdministrativeProcess.blueprint(:compra_com_itens_2) do
   date { Date.new(2013, 3, 7) }
   protocol { '00089/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -85,7 +85,7 @@ AdministrativeProcess.blueprint(:compra_com_itens_3) do
   date { Date.new(2013, 3, 7) }
   protocol { '00089/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -101,7 +101,7 @@ AdministrativeProcess.blueprint(:compra_liberada) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -117,7 +117,7 @@ AdministrativeProcess.blueprint(:compra_aguardando) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -132,7 +132,7 @@ AdministrativeProcess.blueprint(:apuracao_por_itens) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:por_item_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -196,7 +196,7 @@ AdministrativeProcess.blueprint(:apuracao_por_lote) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -228,7 +228,7 @@ AdministrativeProcess.blueprint(:apuracao_global) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:global) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -244,7 +244,7 @@ AdministrativeProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:por_lote_com_tecnica_e_preco) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }

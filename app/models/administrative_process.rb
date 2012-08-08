@@ -49,7 +49,7 @@ class AdministrativeProcess < Compras::Model
   end
 
   def invited?
-    invitation_for_constructions_engineering_services? || invitation_for_purchases_and_engineering_services?
+    invitation_for_constructions_engineering_services? || invitation_for_purchases_and_services?
   end
 
   def signatures(signature_configuration_item = SignatureConfigurationItem)

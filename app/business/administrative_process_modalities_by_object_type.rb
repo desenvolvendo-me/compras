@@ -10,7 +10,7 @@ class AdministrativeProcessModalitiesByObjectType
     {
       object_type::PURCHASE_AND_SERVICES => [
         modality::MAKING_COST_FOR_PURCHASES_AND_SERVICES,
-        modality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES,
+        modality::INVITATION_FOR_PURCHASES_AND_SERVICES,
         modality::PRESENCE_TRADING,
         modality::ELECTRONIC_TRADING,
         modality::EXEMPTION_FOR_PURCHASES_AND_SERVICES,

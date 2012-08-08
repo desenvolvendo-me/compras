@@ -77,7 +77,7 @@ describe AdministrativeProcess do
 
     test_type(AdministrativeProcessObjectType::PURCHASE_AND_SERVICES, [
               AdministrativeProcessModality::MAKING_COST_FOR_PURCHASES_AND_SERVICES,
-              AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES,
+              AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES,
               AdministrativeProcessModality::PRESENCE_TRADING,
               AdministrativeProcessModality::ELECTRONIC_TRADING,
               AdministrativeProcessModality::EXEMPTION_FOR_PURCHASES_AND_SERVICES,
@@ -111,12 +111,12 @@ describe AdministrativeProcess do
     subject.should be_invited
   end
 
-  it 'should be invite when modality is INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES' do
-    subject.modality = AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES
+  it 'should be invite when modality is INVITATION_FOR_PURCHASES_AND_SERVICES' do
+    subject.modality = AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES
     subject.should be_invited
   end
 
-  it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_ENGINEERING_SERVICES)' do
+  it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_SERVICES)' do
     subject.modality = AdministrativeProcessModality::MAKING_COST_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES
     subject.should_not be_invited
   end
