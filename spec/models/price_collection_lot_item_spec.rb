@@ -59,6 +59,7 @@ describe PriceCollectionLotItem do
 
   it 'should return the current value for quantity if not use default value' do
     subject.quantity = 5
+    subject.run_callbacks(:initialize)
 
     expect(subject.quantity).to eq 5
   end
