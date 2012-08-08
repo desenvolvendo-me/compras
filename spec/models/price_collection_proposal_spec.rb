@@ -19,7 +19,7 @@ describe PriceCollectionProposal do
     subject.stub(:price_collection).and_return('Price Collection 1')
     subject.stub(:creditor).and_return('creditor 1')
 
-    subject.to_s.should eq 'Price Collection 1 - creditor 1'
+    expect(subject.to_s).to eq 'Price Collection 1 - creditor 1'
   end
 
   describe '#build_user' do
@@ -34,7 +34,7 @@ describe PriceCollectionProposal do
       end
 
       it 'should return the user' do
-        subject.build_user.should eq user
+        expect(subject.build_user).to eq user
       end
     end
 
@@ -72,13 +72,13 @@ describe PriceCollectionProposal do
     it 'should return the items by lot' do
       subject.stub(:items).and_return([item_1, item_2, item_3])
 
-      subject.items_by_lot('lot 1').should eq [item_1, item_3]
+      expect(subject.items_by_lot('lot 1')).to eq [item_1, item_3]
     end
 
     it 'should return the item total value by lot' do
       subject.stub(:items).and_return([item_1, item_2, item_3])
 
-      subject.item_total_value_by_lot('lot 1').should eq 50
+      expect(subject.item_total_value_by_lot('lot 1')).to eq 50
     end
   end
 
@@ -94,13 +94,13 @@ describe PriceCollectionProposal do
     it 'should be true when the creditor is the given user' do
       user = double('User', :authenticable => creditor)
 
-      subject.editable_by?(user).should be_true
+      expect(subject.editable_by?(user)).to be_true
     end
 
     it 'should not be true for when the creditor is not the given user' do
       user = double('User', :authenticable => double)
 
-      subject.editable_by?(user).should be_false
+      expect(subject.editable_by?(user)).to be_false
     end
   end
 
@@ -113,7 +113,7 @@ describe PriceCollectionProposal do
   end
 
   it 'should return 0 as the total price when there are no items' do
-    subject.total_price.should eq 0
+    expect(subject.total_price).to eq 0
   end
 
   it 'should return the total price' do
@@ -122,6 +122,6 @@ describe PriceCollectionProposal do
 
     subject.stub(:items).and_return([item_1, item_2])
 
-    subject.total_price.should eq 500
+    expect(subject.total_price).to eq 500
   end
 end

@@ -13,7 +13,7 @@ describe AdministrativeProcess do
   it 'should return process/year as to_s' do
     subject.process = '1'
     subject.year = '2012'
-    subject.to_s.should eq '1/2012'
+    expect(subject.to_s).to eq '1/2012'
   end
 
   it { should belong_to :responsible }
@@ -53,7 +53,7 @@ describe AdministrativeProcess do
       signature_configuration_item_store.should_receive(:all_by_configuration_report).
                                          with('administrative_processes').
                                          and_return([signature_configuration_item])
-      subject.signatures(signature_configuration_item_store).should eq [signature_configuration_item]
+      expect(subject.signatures(signature_configuration_item_store)).to eq [signature_configuration_item]
     end
   end
 
@@ -64,14 +64,14 @@ describe AdministrativeProcess do
         subject.modality = modality
 
         subject.valid?
-        subject.errors[:modality].should_not include(I18n.translate('errors.messages.inclusion'))
+        expect(subject.errors[:modality]).to_not include(I18n.translate('errors.messages.inclusion'))
       end
 
       (AdministrativeProcessModality.to_a - modalities_for_type).each do |modality|
         subject.modality = modality
 
         subject.valid?
-        subject.errors[:modality].should include(I18n.translate('errors.messages.inclusion'))
+        expect(subject.errors[:modality]).to include(I18n.translate('errors.messages.inclusion'))
       end
     end
 
@@ -101,9 +101,9 @@ describe AdministrativeProcess do
   end
 
   it 'should return 0 for total value of all budget allocations when have no allocations' do
-    subject.administrative_process_budget_allocations.should be_empty
+    expect(subject.administrative_process_budget_allocations).to be_empty
 
-    subject.total_allocations_value.should eq 0
+    expect(subject.total_allocations_value).to eq 0
   end
 
   it 'should be invite when modality is INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES' do
@@ -118,7 +118,7 @@ describe AdministrativeProcess do
 
   it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_SERVICES)' do
     subject.modality = AdministrativeProcessModality::MAKING_COST_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES
-    subject.should_not be_invited
+    expect(subject).not_to be_invited
   end
 
   context 'signatures' do
@@ -158,7 +158,7 @@ describe AdministrativeProcess do
 
     it 'should return related signatures' do
       signature_configuration_item_store.should_receive(:all_by_configuration_report).with('administrative_processes').and_return(signature_configuration_items)
-      subject.signatures(signature_configuration_item_store).should eq signature_configuration_items
+      expect(subject.signatures(signature_configuration_item_store)).to eq signature_configuration_items
     end
   end
 
@@ -182,6 +182,6 @@ describe AdministrativeProcess do
 
   it "should not allow licitation process when object type is not construction_and_engineering_services neither purchase_and_services" do
     subject.stub(:object_type => AdministrativeProcessObjectType::CALL_NOTICE)
-    subject.should_not be_allow_licitation_process
+    expect(subject).not_to be_allow_licitation_process
   end
 end

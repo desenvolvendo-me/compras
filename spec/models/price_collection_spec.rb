@@ -45,7 +45,7 @@ describe PriceCollection do
       it { should allow_value(Date.tomorrow).for(:date) }
 
       it 'should not allow date before today' do
-        subject.should_not allow_value(Date.yesterday).for(:date).
+        expect(subject).not_to allow_value(Date.yesterday).for(:date).
                                                       with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
       end
     end
@@ -56,7 +56,7 @@ describe PriceCollection do
       it { should allow_value(Date.tomorrow).for(:expiration) }
 
       it 'should not allow expiration before today' do
-        subject.should_not allow_value(Date.yesterday).for(:expiration).
+        expect(subject).not_to allow_value(Date.yesterday).for(:expiration).
           with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
       end
     end
@@ -66,7 +66,7 @@ describe PriceCollection do
     subject.collection_number = 5
     subject.year = 2012
 
-    subject.to_s.should eq '5/2012'
+    expect(subject.to_s).to eq '5/2012'
   end
 
   describe '#next_collection_number' do
@@ -76,7 +76,7 @@ describe PriceCollection do
       end
 
       it 'should be 1' do
-        subject.next_collection_number.should eq 1
+        expect(subject.next_collection_number).to eq 1
       end
     end
 
@@ -90,7 +90,7 @@ describe PriceCollection do
       end
 
       it 'should be 5' do
-        subject.next_collection_number.should eq 5
+        expect(subject.next_collection_number).to eq 5
       end
     end
   end
@@ -101,14 +101,14 @@ describe PriceCollection do
 
     subject.stub(:price_collection_proposals => [proposal_1, proposal_2])
 
-    subject.winner_proposal.should eq proposal_2
+    expect(subject.winner_proposal).to eq proposal_2
   end
 
   it 'should return the full period' do
     subject.period = 10
     subject.stub(:period_unit_humanize).and_return('dias')
 
-    subject.full_period.should eq '10 dias'
+    expect(subject.full_period).to eq '10 dias'
   end
 
   describe '#annul!' do
@@ -128,7 +128,7 @@ describe PriceCollection do
     it 'should filter lots with items' do
       subject.should_receive(:price_collection_lots).and_return(lot_with_items)
 
-      subject.price_collection_lots_with_items.size.should eq 1
+      expect(subject.price_collection_lots_with_items.size).to eq 1
     end
   end
 end

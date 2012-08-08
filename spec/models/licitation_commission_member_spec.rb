@@ -19,6 +19,6 @@ describe LicitationCommissionMember do
 
     subject.stub(:individual).and_return(individual)
 
-    subject.to_s.should eq 'name 1'
+    expect(subject.to_s).to eq 'name 1'
   end
 end

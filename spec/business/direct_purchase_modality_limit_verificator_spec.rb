@@ -30,7 +30,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -40,7 +40,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -50,7 +50,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should_not be_value_less_than_available_limit
+          expect(subject).not_to be_value_less_than_available_limit
         end
       end
     end
@@ -67,7 +67,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should return true with modality engineering_works and total of item equal to 200' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -77,7 +77,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -87,7 +87,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should_not be_value_less_than_available_limit
+          expect(subject).not_to be_value_less_than_available_limit
         end
       end
     end
@@ -121,7 +121,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -131,7 +131,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -141,7 +141,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should_not be_value_less_than_available_limit
+          expect(subject).not_to be_value_less_than_available_limit
         end
       end
     end
@@ -158,7 +158,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should return true with modality engineering_works and total of item equal to 200' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -168,7 +168,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should be_value_less_than_available_limit
+          expect(subject).to be_value_less_than_available_limit
         end
       end
 
@@ -178,7 +178,7 @@ describe DirectPurchaseModalityLimitVerificator do
         end
 
         it 'should be value_less_than_available_limit' do
-          subject.should_not be_value_less_than_available_limit
+          expect(subject).not_to be_value_less_than_available_limit
         end
       end
     end

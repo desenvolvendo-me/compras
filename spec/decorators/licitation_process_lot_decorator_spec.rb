@@ -9,7 +9,7 @@ describe LicitationProcessLotDecorator do
       end
 
       it 'should be nil' do
-        subject.winner_proposal_total_price.should be_nil
+        expect(subject.winner_proposal_total_price).to be_nil
       end
     end
 
@@ -19,7 +19,7 @@ describe LicitationProcessLotDecorator do
       end
 
       it 'should applies currency' do
-        subject.winner_proposal_total_price.should eq 'R$ 9,99'
+        expect(subject.winner_proposal_total_price).to eq 'R$ 9,99'
       end
     end
   end

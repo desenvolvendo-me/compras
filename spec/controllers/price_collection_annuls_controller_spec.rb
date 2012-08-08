@@ -48,7 +48,7 @@ describe PriceCollectionAnnulsController do
     it 'should redirect to edit price collection after creates the annul' do
       post :create
 
-      response.should redirect_to(edit_price_collection_path(price_collection))
+      expect(response).to redirect_to(edit_price_collection_path(price_collection))
     end
 
     it 'should annul the proposal' do

@@ -16,7 +16,7 @@ describe PurchaseSolicitation do
     subject.stub(:responsible => "CARLOS DORNELES")
     subject.code = 2
 
-    subject.to_s.should eq "2/2012 01.01.001 - SECRETARIA DA EDUCAÇÃO - RESP: CARLOS DORNELES"
+    expect(subject.to_s).to eq "2/2012 01.01.001 - SECRETARIA DA EDUCAÇÃO - RESP: CARLOS DORNELES"
   end
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
@@ -35,7 +35,7 @@ describe PurchaseSolicitation do
   it "must delegate the amount to budget_allocation" do
     subject.stub(:budget_allocation).and_return double("Allocation", :amount  => '400,00')
 
-    subject.budget_allocation_amount.should eq("400,00")
+    expect(subject.budget_allocation_amount).to eq("400,00")
   end
 
   context "validations" do
@@ -87,6 +87,6 @@ describe PurchaseSolicitation do
   it 'should not be editable when is not returned neither pending' do
     subject.service_status = PurchaseSolicitationServiceStatus::ANNULLED
 
-    subject.should_not be_editable
+    expect(subject).not_to be_editable
   end
 end

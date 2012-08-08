@@ -9,7 +9,7 @@ describe ReserveFund do
   it 'should return to_s as id/year' do
     subject.id = 1
     subject.stub(:year).and_return(2012)
-    subject.to_s.should eql '1/2012'
+    expect(subject.to_s).to eql '1/2012'
   end
 
   it { should belong_to :descriptor }
@@ -39,7 +39,7 @@ describe ReserveFund do
     end
 
     it 'should not be valid when date is greater than last' do
-      subject.should_not allow_value(Date.new(2011, 12, 21)).for(:date).with_message("deve ser maior ou igual a data da última reserva (31/12/2011)")
+      expect(subject).not_to allow_value(Date.new(2011, 12, 21)).for(:date).with_message("deve ser maior ou igual a data da última reserva (31/12/2011)")
     end
   end
 
@@ -51,13 +51,13 @@ describe ReserveFund do
 
     subject.valid?
 
-    subject.errors.messages[:value].should be_nil
+    expect(subject.errors.messages[:value]).to be_nil
 
     subject.value = 201
 
     subject.valid?
 
-    subject.errors.messages[:value].should include 'está acima do valor disponível para a dotação selecionada (R$ 200,00)'
+    expect(subject.errors.messages[:value]).to include 'está acima do valor disponível para a dotação selecionada (R$ 200,00)'
   end
 
   describe '#annul!' do

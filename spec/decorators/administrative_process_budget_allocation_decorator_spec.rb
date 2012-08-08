@@ -10,7 +10,7 @@ describe AdministrativeProcessBudgetAllocationDecorator do
       end
 
       it 'should be nil' do
-        subject.budget_allocation_amount.should be_nil
+        expect(subject.budget_allocation_amount).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe AdministrativeProcessBudgetAllocationDecorator do
       end
 
       it 'should return budget_allocation_amount' do
-        subject.budget_allocation_amount.should eq "10,00"
+        expect(subject.budget_allocation_amount).to eq "10,00"
       end
     end
   end
@@ -32,7 +32,7 @@ describe AdministrativeProcessBudgetAllocationDecorator do
       end
 
       it 'should be nil' do
-        subject.value.should be_nil
+        expect(subject.value).to be_nil
       end
     end
 
@@ -42,7 +42,7 @@ describe AdministrativeProcessBudgetAllocationDecorator do
       end
 
       it 'should return value' do
-        subject.value.should eq "15,00"
+        expect(subject.value).to eq "15,00"
       end
     end
   end
@@ -54,7 +54,7 @@ describe AdministrativeProcessBudgetAllocationDecorator do
       end
 
       it 'should be nil' do
-        subject.total_items_value.should eq nil
+        expect(subject.total_items_value).to eq nil
       end
     end
 
@@ -64,7 +64,7 @@ describe AdministrativeProcessBudgetAllocationDecorator do
       end
 
       it 'should return total items value' do
-        subject.total_items_value.should eq "100,00"
+        expect(subject.total_items_value).to eq "100,00"
       end
     end
   end

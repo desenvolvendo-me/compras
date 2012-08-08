@@ -15,7 +15,7 @@ describe ConfirmationsController do
       it 'should render the confirm page' do
         user.should_receive(:confirmed?).and_return false
         get :show
-        response.should be_success
+        expect(response).to be_success
       end
     end
 
@@ -26,7 +26,7 @@ describe ConfirmationsController do
 
         user.should_receive(:confirmed?).at_least(:once).and_return true
         get :show
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -38,7 +38,7 @@ describe ConfirmationsController do
       it 'should redirect to the root path' do
         get :show, :confirmation_token => 'abc'
 
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
   end

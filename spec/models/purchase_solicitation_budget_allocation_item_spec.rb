@@ -14,11 +14,11 @@ describe PurchaseSolicitationBudgetAllocationItem do
   it { should validate_presence_of :status }
 
   it 'should calculate total price' do
-    subject.estimated_total_price.should eq 0
+    expect(subject.estimated_total_price).to eq 0
 
     subject.quantity = 10
     subject.unit_price = 5
 
-    subject.estimated_total_price.should eq 50
+    expect(subject.estimated_total_price).to eq 50
   end
 end

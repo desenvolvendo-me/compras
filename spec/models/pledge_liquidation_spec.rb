@@ -8,7 +8,7 @@ require 'app/models/resource_annul'
 describe PledgeLiquidation do
   it 'should return id as to_s' do
     subject.id = 1
-    subject.to_s.should eq '1'
+    expect(subject.to_s).to eq '1'
   end
 
   it { should validate_presence_of :pledge }
@@ -43,11 +43,11 @@ describe PledgeLiquidation do
     end
 
     it 'should not be valid if value greater than pledge balance' do
-      subject.should_not allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho (R$ 3,00)")
+      expect(subject).not_to allow_value(4).for(:value).with_message("não pode ser superior ao saldo do empenho (R$ 3,00)")
     end
 
     it 'should be valid if value is not greater than pledge balance' do
-      subject.should allow_value(1).for(:value)
+      expect(subject).to allow_value(1).for(:value)
     end
   end
 
@@ -58,16 +58,16 @@ describe PledgeLiquidation do
     end
 
     it 'should be valid when date is equal to last' do
-      subject.should allow_value(Date.new(2012, 3, 1)).for(:date)
+      expect(subject).to allow_value(Date.new(2012, 3, 1)).for(:date)
     end
 
     it 'should not be valid when date is older to last' do
-      subject.should_not allow_value(Date.new(2011, 1, 1)).for(:date).with_message('não pode ser menor que a data da última liquidação (01/03/2012)')
+      expect(subject).not_to allow_value(Date.new(2011, 1, 1)).for(:date).with_message('não pode ser menor que a data da última liquidação (01/03/2012)')
     end
 
     it 'should not be valid when date is older then emission_date' do
       subject.stub(:pledge).and_return(double('Pledge', :emission_date => Date.new(2012, 3, 29)))
-      subject.should_not allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho (29/03/2012)')
+      expect(subject).not_to allow_value(Date.new(2012, 3, 1)).for(:date).with_message('deve ser maior que a data de emissão do empenho (29/03/2012)')
     end
   end
 
@@ -81,7 +81,7 @@ describe PledgeLiquidation do
 
     it 'should return correct parcels_sum' do
       subject.stub(:pledge_liquidation_parcels).and_return(parcels)
-      subject.parcels_sum.should eq 100
+      expect(subject.parcels_sum).to eq 100
     end
   end
 end

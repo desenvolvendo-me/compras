@@ -13,10 +13,10 @@ describe LicitationCommissionResponsible do
   it { should validate_presence_of :role }
 
   it 'should validate presence of class_register when role is lawyer' do
-    subject.should_not validate_presence_of :class_register
+    expect(subject).not_to validate_presence_of :class_register
 
     subject.role = LicitationCommissionResponsibleRole::LAWYER
 
-    subject.should validate_presence_of :class_register
+    expect(subject).to validate_presence_of :class_register
   end
 end

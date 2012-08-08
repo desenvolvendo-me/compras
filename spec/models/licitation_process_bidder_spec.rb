@@ -11,7 +11,7 @@ require 'app/models/accredited_representative'
 describe LicitationProcessBidder do
   describe 'default values' do
     it 'uses false as default for invited' do
-      subject.invited.should be false
+      expect(subject.invited).to be false
     end
   end
 
@@ -62,7 +62,7 @@ describe LicitationProcessBidder do
     it { should allow_value(Date.tomorrow).for(:protocol_date) }
 
     it 'should not allow date after today' do
-      subject.should_not allow_value(Date.yesterday).for(:protocol_date).
+      expect(subject).not_to allow_value(Date.yesterday).for(:protocol_date).
         with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
     end
   end
@@ -78,15 +78,15 @@ describe LicitationProcessBidder do
     end
 
     it 'should allow receipt_date date after protocol_date' do
-      subject.should allow_value(Date.current + 15.days).for(:receipt_date)
+      expect(subject).to allow_value(Date.current + 15.days).for(:receipt_date)
     end
 
     it 'should allow receipt_date date equals to protocol_date' do
-      subject.should allow_value(protocol_date).for(:receipt_date)
+      expect(subject).to allow_value(protocol_date).for(:receipt_date)
     end
 
     it 'should not allow receipt_date date before protocol_date' do
-      subject.should_not allow_value(Date.current).for(:receipt_date).
+      expect(subject).not_to allow_value(Date.current).for(:receipt_date).
                                                     with_message("deve ser igual ou posterior a data do protocolo (#{I18n.l protocol_date})")
     end
   end
@@ -96,9 +96,9 @@ describe LicitationProcessBidder do
 
     subject.valid?
 
-    subject.errors.messages[:protocol].should be_nil
-    subject.errors.messages[:protocol_date].should be_nil
-    subject.errors.messages[:receipt_date].should be_nil
+    expect(subject.errors.messages[:protocol]).to be_nil
+    expect(subject.errors.messages[:protocol_date]).to be_nil
+    expect(subject.errors.messages[:receipt_date]).to be_nil
   end
 
   it "should not validate presence of dates, protocol when it is invite" do
@@ -106,15 +106,15 @@ describe LicitationProcessBidder do
 
     subject.valid?
 
-    subject.errors.messages[:protocol].should include "não pode ficar em branco"
-    subject.errors.messages[:protocol_date].should include "não pode ficar em branco"
-    subject.errors.messages[:receipt_date].should include "não pode ficar em branco"
+    expect(subject.errors.messages[:protocol]).to include "não pode ficar em branco"
+    expect(subject.errors.messages[:protocol_date]).to include "não pode ficar em branco"
+    expect(subject.errors.messages[:receipt_date]).to include "não pode ficar em branco"
   end
 
   it 'should return licitation process  - id as to_s method' do
     subject.stub(:creditor => double(:to_s => 'Fulano'))
 
-    subject.to_s.should eq 'Fulano'
+    expect(subject.to_s).to eq 'Fulano'
   end
 
   describe 'before_save' do
@@ -127,9 +127,9 @@ describe LicitationProcessBidder do
       subject.run_callbacks(:save)
 
       subject.invited = false
-      subject.protocol.should be nil
-      subject.protocol_date.should be nil
-      subject.receipt_date.should be nil
+      expect(subject.protocol).to be nil
+      expect(subject.protocol_date).to be nil
+      expect(subject.receipt_date).to be nil
     end
 
     describe "proposal" do
@@ -183,13 +183,13 @@ describe LicitationProcessBidder do
 
   it "should can update proposals when all licitation process lots are filled" do
     subject.stub_chain(:licitation_process, :filled_lots?).and_return(true)
-    subject.should be_can_update_proposals
+    expect(subject).to be_can_update_proposals
   end
 
   it "should can update proposals when has not any lots" do
     subject.stub_chain(:licitation_process, :filled_lots?).and_return(false)
     subject.stub(:licitation_process_lots).and_return( Array.new )
-    subject.should be_can_update_proposals
+    expect(subject).to be_can_update_proposals
   end
 
   context "with licitation_process" do
@@ -205,14 +205,14 @@ describe LicitationProcessBidder do
       licitation_process.stub(:allow_bidders?).and_return(false)
 
       subject.valid?
-      subject.errors[:licitation_process].should include "deve ser a data da abertura do envelope do processo licitatório"
+      expect(subject.errors[:licitation_process]).to include "deve ser a data da abertura do envelope do processo licitatório"
     end
 
     it "shuld allow changes if licitation_process allow bidders" do
       licitation_process.stub(:allow_bidders?).and_return(true)
 
       subject.valid?
-      subject.errors[:licitation_process].should_not include "deve ser a data da abertura do envelope do processo licitatório"
+      expect(subject.errors[:licitation_process]).to_not include "deve ser a data da abertura do envelope do processo licitatório"
     end
   end
 end

@@ -9,7 +9,7 @@ describe PriceCollectionProposalItemDecorator do
       end
 
       it 'should be nil' do
-        subject.total_price.should be_nil
+        expect(subject.total_price).to be_nil
       end
     end
 
@@ -19,7 +19,7 @@ describe PriceCollectionProposalItemDecorator do
       end
 
       it 'should applies precision' do
-        subject.total_price.should eq "500,00"
+        expect(subject.total_price).to eq "500,00"
       end
     end
   end
@@ -31,7 +31,7 @@ describe PriceCollectionProposalItemDecorator do
       end
 
       it 'should be nil' do
-        subject.unit_price.should be_nil
+        expect(subject.unit_price).to be_nil
       end
     end
 
@@ -41,7 +41,7 @@ describe PriceCollectionProposalItemDecorator do
       end
 
       it 'should applies precision' do
-        subject.unit_price.should eq "500,00"
+        expect(subject.unit_price).to eq "500,00"
       end
     end
   end

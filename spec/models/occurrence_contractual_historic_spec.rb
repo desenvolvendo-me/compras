@@ -14,6 +14,6 @@ describe OccurrenceContractualHistoric do
 
   it 'should return sequence as to_s method' do
     subject.sequence = 1
-    subject.to_s.should eq '1'
+    expect(subject.to_s).to eq '1'
   end
 end

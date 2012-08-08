@@ -21,8 +21,8 @@ describe PriceCollectionProposalsController do
 
       put :update, :id => 1
 
-      response.code.should eq '401'
-      response.body.should =~ /Você não tem acesso a essa página/
+      expect(response.code).to eq '401'
+      expect(response.body).to match /Você não tem acesso a essa página/
     end
 
     it 'should be acessible when the user has acess' do
@@ -33,7 +33,7 @@ describe PriceCollectionProposalsController do
       put :update, :id => 1
 
       #update always redirect :)
-      response.code.should eq '302'
+      expect(response.code).to eq '302'
     end
   end
 end

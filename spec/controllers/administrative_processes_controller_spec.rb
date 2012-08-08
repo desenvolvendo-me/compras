@@ -45,7 +45,7 @@ describe AdministrativeProcessesController do
 
       put :update, :id => administrative_process.id
 
-      response.should redirect_to(edit_administrative_process_path(administrative_process.id))
+      expect(response).to redirect_to(edit_administrative_process_path(administrative_process.id))
     end
 
     it 'should update when administrative process status is waiting' do
@@ -53,7 +53,7 @@ describe AdministrativeProcessesController do
 
       put :update, :id => administrative_process.id
 
-      response.should redirect_to(administrative_processes_path)
+      expect(response).to redirect_to(administrative_processes_path)
     end
 
     it "should calcel an administrative process with status waiting" do

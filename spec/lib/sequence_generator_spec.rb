@@ -12,12 +12,12 @@ describe SequenceGenerator, 'ActiveRecord' do
     end
 
     it 'should store values in variables when call auto_increment' do
-      BudgetAllocationWithoutOptions.new.sequencer_field.should eq :code
-      BudgetAllocationWithoutOptions.new.sequence_group.should eq [:description]
+      expect(BudgetAllocationWithoutOptions.new.sequencer_field).to eq :code
+      expect(BudgetAllocationWithoutOptions.new.sequence_group).to eq [:description]
     end
 
     it 'should have :before_create as default sequence update callback' do
-      BudgetAllocationWithoutOptions.new.sequencer_callback.should eq :before_create
+      expect(BudgetAllocationWithoutOptions.new.sequencer_callback).to eq :before_create
     end
 
     it 'should set sequence update callback on auto_increment' do
@@ -32,13 +32,13 @@ describe SequenceGenerator, 'ActiveRecord' do
       b.should_receive(:last_sequence).and_return(0)
       b.save
 
-      b.code.should eq 1
+      expect(b.code).to eq 1
 
       b = BudgetAllocationWithoutOptions.new(:description => 'description')
       b.should_receive(:last_sequence).and_return(1)
       b.save
 
-      b.code.should eq 2
+      expect(b.code).to eq 2
     end
 
     it 'should not increase the sequence if has already a sequence' do
@@ -46,7 +46,7 @@ describe SequenceGenerator, 'ActiveRecord' do
       b.should_not_receive(:next_sequence)
       b.save
 
-      b.code.should eq 1
+      expect(b.code).to eq 1
     end
   end
 
@@ -57,7 +57,7 @@ describe SequenceGenerator, 'ActiveRecord' do
     end
 
     it 'should have :before_save as callback' do
-      BudgetAllocationWithOptions.new.sequencer_callback.should eq :before_save
+      expect(BudgetAllocationWithOptions.new.sequencer_callback).to eq :before_save
 
       BudgetAllocationWithOptions._save_callbacks.
                                   select { |cb| cb.kind.eql?(:before) }.
@@ -66,7 +66,7 @@ describe SequenceGenerator, 'ActiveRecord' do
     end
 
     it 'should force by to array' do
-      BudgetAllocationWithOptions.new.sequence_group.should eq [:descriptor_id]
+      expect(BudgetAllocationWithOptions.new.sequence_group).to eq [:descriptor_id]
     end
   end
 end

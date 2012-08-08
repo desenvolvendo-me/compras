@@ -8,7 +8,7 @@ describe IndexerDecorator do
     end
 
     it 'uses currency' do
-      subject.summary.should eq 'Real'
+      expect(subject.summary).to eq 'Real'
     end
   end
 end

@@ -12,6 +12,6 @@ describe PurchaseSolicitationLiberation do
 
   it 'should validate #to_s' do
     subject.stub(:sequence => 1)
-    subject.to_s.should eq '1'
+    expect(subject.to_s).to eq '1'
   end
 end

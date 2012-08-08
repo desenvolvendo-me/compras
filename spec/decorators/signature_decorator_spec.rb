@@ -12,7 +12,7 @@ describe SignatureDecorator do
     end
 
     it 'should return position as summary' do
-      subject.summary.should eq 'Gerente'
+      expect(subject.summary).to eq 'Gerente'
     end
   end
 end

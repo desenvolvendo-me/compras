@@ -6,6 +6,6 @@ describe FiscalYear do
 
   it 'cast to string using year' do
     subject.year = 2011
-    subject.to_s.should eq '2011'
+    expect(subject.to_s).to eq '2011'
   end
 end

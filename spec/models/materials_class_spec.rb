@@ -19,6 +19,6 @@ describe MaterialsClass do
     subject.class_number = '01'
     subject.description = 'Hortifrutigranjeiros'
 
-    subject.to_s.should eq '01 - Hortifrutigranjeiros'
+    expect(subject.to_s).to eq '01 - Hortifrutigranjeiros'
   end
 end

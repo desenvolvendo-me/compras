@@ -8,7 +8,7 @@ describe RevenueSubcategory do
   it 'should return code as to_s' do
     subject.code = 1
     subject.description = "Receita tributária"
-    subject.to_s.should eq '1 - Receita tributária'
+    expect(subject.to_s).to eq '1 - Receita tributária'
   end
 
   it { should validate_presence_of :code }

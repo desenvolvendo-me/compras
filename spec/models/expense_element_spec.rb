@@ -6,7 +6,7 @@ describe ExpenseElement do
   it 'should return code as to_s' do
     subject.code = 1
     subject.description = 'APOSENTADORIAS'
-    subject.to_s.should eq '1 - APOSENTADORIAS'
+    expect(subject.to_s).to eq '1 - APOSENTADORIAS'
   end
 
   it { should validate_presence_of :code }

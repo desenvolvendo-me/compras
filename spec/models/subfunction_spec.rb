@@ -8,7 +8,7 @@ describe Subfunction do
     subject.code = '01'
     subject.description = 'Subfunção'
 
-    subject.to_s.should eq '01 - Subfunção'
+    expect(subject.to_s).to eq '01 - Subfunção'
   end
 
   it { should belong_to :descriptor }

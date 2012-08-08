@@ -41,7 +41,7 @@ describe LicitationProcessImpugnmentsController do
       put :update, :id => licitation_process_impugnment.id, :licitation_process_impugnment => {:valid_reason => "Outro motivo qualquer."}
 
       licitation_process_impugnment = LicitationProcessImpugnment.find(licitation_process_impugnment.id)
-      licitation_process_impugnment.valid_reason.should eq "Não há a necessidade de comprar cadeiras."
+      expect(licitation_process_impugnment.valid_reason).to eq "Não há a necessidade de comprar cadeiras."
     end
   end
 end

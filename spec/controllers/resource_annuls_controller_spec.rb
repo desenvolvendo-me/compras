@@ -21,7 +21,7 @@ describe ResourceAnnulsController do
 
       resource.stub(:annullable => annullable)
 
-      subject.edit_parent_path.should eq [:edit, annullable]
+      expect(subject.edit_parent_path).to eq [:edit, annullable]
     end
   end
 
@@ -31,13 +31,13 @@ describe ResourceAnnulsController do
       resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
       subject.stub(:controller_name => 'contract_termination_annuls')
-      subject.should_receive(:validate_parent!).
+      expect(subject).to_receive(:validate_parent!).
               with(instance_of(ResourceAnnul)).
               and_raise(Exceptions::Unauthorized)
 
       get :new, :annullable_id => resource_annul.annullable_id
 
-      response.code.should eq '401'
+      expect(response.code).to eq '401'
     end
   end
 
@@ -46,12 +46,12 @@ describe ResourceAnnulsController do
       pending 'Waiting solution for rails update'
       pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-      subject.should_receive(:annul)
+      expect(subject).to_receive(:annul)
       subject.stub(:controller_name => 'pledge_liquidation_annuls')
 
       post :create, :resource_annul => { :annullable_id => pledge_liquidation.id, :annullable_type => 'PledgeLiquidation' }
 
-      response.should be_success
+      expect(response).to be_success
       response.location.should match "/pledge_liquidations/#{pledge_liquidation.id}/edit"
     end
 
@@ -59,13 +59,13 @@ describe ResourceAnnulsController do
       pending 'Waiting solution for rails update'
       resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-      subject.should_receive(:validate_parent!).
+      expect(subject).to_receive(:validate_parent!).
               with(instance_of(ResourceAnnul)).
               and_raise(Exceptions::Unauthorized)
 
       post :create, :resource_annul => resource_annul.attributes
 
-      response.code.should eq '401'
+      expect(response.code).to eq '401'
     end
   end
 
@@ -74,7 +74,7 @@ describe ResourceAnnulsController do
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
     subject.stub(:controller_name => 'pledge_liquidation_annuls')
-    subject.should_receive(:annullable_id).twice.and_return(pledge_liquidation.id)
+    expect(subject).to_receive(:annullable_id).twice.and_return(pledge_liquidation.id)
 
     get :new, :annulable_id => pledge_liquidation.id
   end
@@ -83,6 +83,6 @@ describe ResourceAnnulsController do
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
     subject.stub(:controller_name => 'pledge_liquidation_annuls')
-    subject.parent_model_name.should eq 'pledge_liquidation'
+    expect(subject.parent_model_name).to eq 'pledge_liquidation'
   end
 end

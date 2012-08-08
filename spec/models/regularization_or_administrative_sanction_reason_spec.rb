@@ -9,6 +9,6 @@ describe RegularizationOrAdministrativeSanctionReason do
   it "should return description like to_s" do
     subject.description = 'Advertência por desistência parcial da proposta devidamente justificada'
 
-    subject.to_s.should eq 'Advertência por desistência parcial da proposta devidamente justificada'
+    expect(subject.to_s).to eq 'Advertência por desistência parcial da proposta devidamente justificada'
   end
 end

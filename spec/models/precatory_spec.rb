@@ -22,7 +22,7 @@ describe Precatory do
   it "should return id when call to_s method" do
     subject.number = '1234/2012'
 
-    subject.to_s.should eq "1234/2012"
+    expect(subject.to_s).to eq "1234/2012"
   end
 
   context "parceled_value" do
@@ -36,7 +36,7 @@ describe Precatory do
     it "should be the sum of all parcel values" do
       subject.stub(:precatory_parcels => precatory_parcels)
 
-      subject.parceled_value.should eq 3000.0
+      expect(subject.parceled_value).to eq 3000.0
     end
   end
 
@@ -45,7 +45,7 @@ describe Precatory do
     subject.stub(:parceled_value => 3000.0)
 
     subject.valid?
-    subject.errors[:parceled_value].should include "deve ser igual ao valor do precatório (R$ 4.000,00)"
+    expect(subject.errors[:parceled_value]).to include "deve ser igual ao valor do precatório (R$ 4.000,00)"
   end
 
   it "should allow parceled_value equals value" do
@@ -53,6 +53,6 @@ describe Precatory do
     subject.stub(:parceled_value => 4000.0)
 
     subject.valid?
-    subject.errors[:parceled_value].should_not include "deve ser igual ao valor do precatório (R$ 4.000,00)"
+    expect(subject.errors[:parceled_value]).not_to include "deve ser igual ao valor do precatório (R$ 4.000,00)"
   end
 end

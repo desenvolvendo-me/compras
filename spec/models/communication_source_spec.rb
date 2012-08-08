@@ -5,7 +5,7 @@ require 'app/models/dissemination_source'
 describe CommunicationSource do
   it 'should return to_s as description' do
     subject.description = 'Jornal'
-    subject.to_s.should eq 'Jornal'
+    expect(subject.to_s).to eq 'Jornal'
   end
 
   it { should have_many(:dissemination_sources).dependent(:restrict) }

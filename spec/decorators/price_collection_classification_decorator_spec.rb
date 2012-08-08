@@ -10,7 +10,7 @@ describe PriceCollectionClassificationDecorator do
       end
 
       it 'should be nil' do
-        subject.unit_value.should be_nil
+        expect(subject.unit_value).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe PriceCollectionClassificationDecorator do
       end
 
       it 'should applies precision' do
-        subject.unit_value.should eq '50,00'
+        expect(subject.unit_value).to eq '50,00'
       end
     end
   end
@@ -32,7 +32,7 @@ describe PriceCollectionClassificationDecorator do
       end
 
       it 'should be nil' do
-        subject.total_value.should be_nil
+        expect(subject.total_value).to be_nil
       end
     end
 
@@ -42,7 +42,7 @@ describe PriceCollectionClassificationDecorator do
       end
 
       it 'should applies precision' do
-        subject.total_value.should eq '80,00'
+        expect(subject.total_value).to eq '80,00'
       end
     end
   end
@@ -59,7 +59,7 @@ describe PriceCollectionClassificationDecorator do
       end
 
       it 'should localize true when is equals to 1' do
-        subject.classification.should eq 'Sim'
+        expect(subject.classification).to eq 'Sim'
       end
     end
 
@@ -69,7 +69,7 @@ describe PriceCollectionClassificationDecorator do
       end
 
       it 'should localize false when is not equals to 1' do
-        subject.classification.should eq 'Não'
+        expect(subject.classification).to eq 'Não'
       end
     end
 
@@ -79,7 +79,7 @@ describe PriceCollectionClassificationDecorator do
       end
 
       it 'should localize false when is not equals to 1' do
-        subject.classification.should eq 'Não'
+        expect(subject.classification).to eq 'Não'
       end
     end
   end

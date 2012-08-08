@@ -31,7 +31,7 @@ describe JudgmentCommissionAdvice do
     subject.id = 1
     subject.year = 2012
 
-    subject.to_s.should eq '1/2012'
+    expect(subject.to_s).to eq '1/2012'
   end
 
   context "inherited and not inherited members" do
@@ -50,9 +50,9 @@ describe JudgmentCommissionAdvice do
     it "it should return the inherited members" do
       subject.stub(:judgment_commission_advice_members).and_return([member1, member2, member3])
 
-      subject.inherited_members.should eq [member1, member3]
+      expect(subject.inherited_members).to eq [member1, member3]
 
-      subject.not_inherited_members.should eq [member2]
+      expect(subject.not_inherited_members).to eq [member2]
     end
 
     it "should not have judgment end date/time before judgment start date/time" do
@@ -65,7 +65,7 @@ describe JudgmentCommissionAdvice do
 
       subject.valid?
 
-      subject.errors.messages[:judgment_start_date].should be_nil
+      expect(subject.errors.messages[:judgment_start_date]).to be_nil
 
       # end after start should be valid
       subject.judgment_end_date = Date.new(2012, 3, 11)
@@ -73,7 +73,7 @@ describe JudgmentCommissionAdvice do
 
       subject.valid?
 
-      subject.errors.messages[:judgment_start_date].should be_nil
+      expect(subject.errors.messages[:judgment_start_date]).to be_nil
 
       # end before start should be invalid
       subject.judgment_end_date = Date.new(2012, 3, 10)
@@ -81,7 +81,7 @@ describe JudgmentCommissionAdvice do
 
       subject.valid?
 
-      subject.errors.messages[:judgment_end_date].should include "data do fim do julgamento não pode ser anterior a data do início do julgamento (10/03/2012 - 09:59)"
+      expect(subject.errors.messages[:judgment_end_date]).to include "data do fim do julgamento não pode ser anterior a data do início do julgamento (10/03/2012 - 09:59)"
     end
   end
 end

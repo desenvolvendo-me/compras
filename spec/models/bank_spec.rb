@@ -6,7 +6,7 @@ require 'app/models/agency'
 describe Bank do
   it "return the name of the banck when it call to_s" do
     subject.name = 'Itaú'
-    subject.to_s.should eq subject.name
+    expect(subject.to_s).to eq subject.name
   end
 
   it "validates length of code" do
@@ -15,10 +15,10 @@ describe Bank do
     subject.acronym = 'IT'
 
     subject.code = '87ITA'
-    subject.should be_valid
+    expect(subject).to be_valid
 
     subject.code = '87ITAU'
-    subject.should be_invalid
+    expect(subject).to be_invalid
   end
 
   it { should have_many :agencies }

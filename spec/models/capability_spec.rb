@@ -9,7 +9,7 @@ require 'app/models/budget_revenue'
 describe Capability do
   it 'should return to_s as description' do
     subject.description = 'Reforma e Ampliação'
-    subject.to_s.should eq 'Reforma e Ampliação'
+    expect(subject.to_s).to eq 'Reforma e Ampliação'
   end
 
   it { should belong_to :descriptor }

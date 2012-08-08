@@ -27,7 +27,7 @@ describe ContractTermination do
     subject.stub(:number).and_return 1
     subject.stub(:year).and_return 2012
 
-    subject.to_s.should eq '1/2012'
+    expect(subject.to_s).to eq '1/2012'
   end
 
   describe '#next_number' do
@@ -37,7 +37,7 @@ describe ContractTermination do
     end
 
     it 'returns the last number + 1' do
-      subject.next_number.should eq 2
+      expect(subject.next_number).to eq 2
     end
   end
 
@@ -49,7 +49,7 @@ describe ContractTermination do
     it 'assigns the next_number' do
       subject.run_callbacks(:create)
 
-      subject.number.should eq 2
+      expect(subject.number).to eq 2
     end
   end
 
@@ -61,11 +61,11 @@ describe ContractTermination do
     it "should be annulled when it has an annul" do
       subject.stub(:annul => annul)
 
-      subject.should be_annulled
+      expect(subject).to be_annulled
     end
   end
 
   it "should not be annulled when it does not have an annul" do
-    subject.should_not be_annulled
+    expect(subject).not_to be_annulled
   end
 end

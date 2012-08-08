@@ -9,7 +9,7 @@ describe LicitationNoticeDecorator do
       end
 
       it 'should be nil' do
-        subject.licitation_process_process_date.should be_nil
+        expect(subject.licitation_process_process_date).to be_nil
       end
     end
 
@@ -19,7 +19,7 @@ describe LicitationNoticeDecorator do
       end
 
       it 'should localized' do
-        subject.licitation_process_process_date.should eq '13/12/2012'
+        expect(subject.licitation_process_process_date).to eq '13/12/2012'
       end
     end
   end

@@ -48,7 +48,7 @@ describe PurchaseSolicitationsController do
 
       put :update, :id => 1
 
-      response.code.should eq "401"
+      expect(response.code).to eq "401"
     end
 
     it 'should allow edit when is editable' do

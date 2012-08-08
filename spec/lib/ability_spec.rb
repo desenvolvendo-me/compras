@@ -73,13 +73,13 @@ describe Ability do
     subject { Ability.new(creditor) } 
 
     it 'should be able to access accounts and bookmarks' do
-      subject.should be_able_to :access, :bookmarks
-      subject.should be_able_to :access, :accounts
+      expect(subject).to be_able_to :access, :bookmarks
+      expect(subject).to be_able_to :access, :accounts
     end
 
     it 'should be able to read and update his owm proposals' do
-      subject.should be_able_to :read, :price_collection_proposals
-      subject.should be_able_to :update, :price_collection_proposals
+      expect(subject).to be_able_to :read, :price_collection_proposals
+      expect(subject).to be_able_to :update, :price_collection_proposals
     end
   end
 end

@@ -7,7 +7,7 @@ require 'app/models/descriptor'
 describe Entity do
   it 'should return the name as to_s method' do
     subject.name = 'Denatran'
-    subject.to_s.should eq 'Denatran'
+    expect(subject.to_s).to eq 'Denatran'
   end
 
   it { should have_many(:budget_structure_configurations).dependent(:restrict) }

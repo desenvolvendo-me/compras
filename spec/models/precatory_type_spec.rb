@@ -12,7 +12,7 @@ describe PrecatoryType do
   it "should return id as to_s" do
     subject.description = 'Alimentares'
 
-    subject.to_s.should eq 'Alimentares'
+    expect(subject.to_s).to eq 'Alimentares'
   end
 
   context 'validate deactivation_date related with today' do
@@ -21,7 +21,7 @@ describe PrecatoryType do
     it { should allow_value(Date.yesterday).for(:deactivation_date) }
 
     it 'should not allow date after today' do
-      subject.should_not allow_value(Date.tomorrow).for(:deactivation_date).
+      expect(subject).not_to allow_value(Date.tomorrow).for(:deactivation_date).
                                                     with_message("deve ser igual ou anterior a data atual (#{I18n.l(Date.current)})")
     end
   end
@@ -32,7 +32,7 @@ describe PrecatoryType do
     end
 
     it 'should not validate presence of deactivation_date' do
-      subject.should_not validate_presence_of :deactivation_date
+      expect(subject).not_to validate_presence_of :deactivation_date
     end
 
     it "should clean deactivation_date when status is active" do
@@ -40,7 +40,7 @@ describe PrecatoryType do
       subject.deactivation_date = Date.current
 
       subject.run_callbacks(:save)
-      subject.deactivation_date.should be_nil
+      expect(subject.deactivation_date).to be_nil
     end
   end
 
@@ -50,7 +50,7 @@ describe PrecatoryType do
     end
 
     it 'should validate presence of deactivation_date' do
-      subject.should validate_presence_of :deactivation_date
+      expect(subject).to validate_presence_of :deactivation_date
     end
   end
 end

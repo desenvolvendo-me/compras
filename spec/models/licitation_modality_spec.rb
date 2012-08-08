@@ -20,14 +20,14 @@ describe LicitationModality do
   it 'should have final value greater or equal to initial value' do
     subject.initial_value = 100.00
 
-    subject.should allow_value(100.00).for(:final_value)
-    subject.should allow_value(100.01).for(:final_value)
-    subject.should_not allow_value(99.99).for(:final_value).with_message("não pode ser menor que o valor inicial")
+    expect(subject).to allow_value(100.00).for(:final_value)
+    expect(subject).to allow_value(100.01).for(:final_value)
+    expect(subject).not_to allow_value(99.99).for(:final_value).with_message("não pode ser menor que o valor inicial")
   end
 
   it 'should return description as to_s method' do
     subject.description = 'Modalidade'
 
-    subject.to_s.should eq 'Modalidade'
+    expect(subject.to_s).to eq 'Modalidade'
   end
 end

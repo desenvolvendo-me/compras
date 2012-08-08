@@ -11,7 +11,7 @@ describe LicitationProcessLot do
 
   it "should return 'Lote x' as to_s method" do
     subject.stub(:count_lots).and_return(1)
-    subject.to_s.should eq "Lote 1"
+    expect(subject.to_s).to eq "Lote 1"
   end
 
   context 'item validation' do
@@ -29,7 +29,7 @@ describe LicitationProcessLot do
 
       subject.valid?
 
-      subject.errors.messages[:administrative_process_budget_allocation_items].should be_nil
+      expect(subject.errors.messages[:administrative_process_budget_allocation_items]).to be_nil
     end
 
     it "items from another administrative process should not be valid" do
@@ -39,7 +39,7 @@ describe LicitationProcessLot do
 
       subject.valid?
 
-      subject.errors.messages[:administrative_process_budget_allocation_items].should include "somente são permitidos itens do processo administrativo relacionado (1/2012)"
+      expect(subject.errors.messages[:administrative_process_budget_allocation_items]).to include "somente são permitidos itens do processo administrativo relacionado (1/2012)"
     end
   end
 
@@ -47,12 +47,12 @@ describe LicitationProcessLot do
     classificator = double(:winner_proposals => 'the winner proposals')
     classificator_class = double(:new => classificator)
 
-    subject.winner_proposals(classificator_class).should eq 'the winner proposals'
+    expect(subject.winner_proposals(classificator_class)).to eq 'the winner proposals'
   end
 
   it 'administrative process budget allocation items should have at least one' do
     subject.stub(:administrative_process_budget_allocation_items => [])
     subject.valid?
-    subject.errors.messages[:administrative_process_budget_allocation_items].should include "deve haver ao menos um item"
+    expect(subject.errors.messages[:administrative_process_budget_allocation_items]).to include "deve haver ao menos um item"
   end
 end

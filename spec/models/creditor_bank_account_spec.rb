@@ -19,6 +19,6 @@ describe CreditorBankAccount do
     subject.number = 1234
     subject.digit = 1
 
-    subject.to_s.should eq '1234-1'
+    expect(subject.to_s).to eq '1234-1'
   end
 end

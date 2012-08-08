@@ -8,6 +8,6 @@ describe Product do
   it "should return specification as to_s" do
     subject.specification = 'Lápis'
 
-    subject.to_s.should eq 'Lápis'
+    expect(subject.to_s).to eq 'Lápis'
   end
 end

@@ -11,7 +11,7 @@ require 'app/models/licitation_modality'
 describe RegulatoryAct do
   it 'should return act_number as to_s method' do
     subject.act_number = '01'
-    subject.to_s.should eq '01'
+    expect(subject.to_s).to eq '01'
   end
 
   it { should belong_to :regulatory_act_type }
@@ -37,15 +37,15 @@ describe RegulatoryAct do
   it { should validate_numericality_of :act_number }
 
   it 'should have zero as default value to budget_law_percent' do
-    subject.budget_law_percent.should eq 0.0
+    expect(subject.budget_law_percent).to eq 0.0
   end
 
   it 'should have zero as default value to revenue_antecipation_percent' do
-    subject.revenue_antecipation_percent.should eq 0.0
+    expect(subject.revenue_antecipation_percent).to eq 0.0
   end
 
   it 'should have zero as default value to authorized_debt_value' do
-    subject.authorized_debt_value.should eq 0.0
+    expect(subject.authorized_debt_value).to eq 0.0
   end
 
   context 'validate vigor_date related with creation_date' do
@@ -58,15 +58,15 @@ describe RegulatoryAct do
     end
 
     it 'should allow vigor_date date after creation_date' do
-      subject.should allow_value(Date.current + 15.days).for(:vigor_date)
+      expect(subject).to allow_value(Date.current + 15.days).for(:vigor_date)
     end
 
     it 'should allow vigor_date date equals to creation_date' do
-      subject.should allow_value(creation_date).for(:vigor_date)
+      expect(subject).to allow_value(creation_date).for(:vigor_date)
     end
 
     it 'should not allow vigor_date date before creation_date' do
-      subject.should_not allow_value(Date.current).for(:vigor_date).
+      expect(subject).not_to allow_value(Date.current).for(:vigor_date).
                                                    with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
     end
   end
@@ -82,15 +82,15 @@ describe RegulatoryAct do
     end
 
     it 'should allow publication_date date after creation_date' do
-      subject.should allow_value(Date.current + 15.days).for(:publication_date)
+      expect(subject).to allow_value(Date.current + 15.days).for(:publication_date)
     end
 
     it 'should allow publication_date date equals to creation_date' do
-      subject.should allow_value(creation_date).for(:publication_date)
+      expect(subject).to allow_value(creation_date).for(:publication_date)
     end
 
     it 'should not allow publication_date date before creation_date' do
-      subject.should_not allow_value(Date.current).for(:publication_date).
+      expect(subject).not_to allow_value(Date.current).for(:publication_date).
                                                    with_message("deve ser igual ou posterior a data de criação (#{I18n.l creation_date})")
     end
   end
@@ -106,26 +106,26 @@ describe RegulatoryAct do
     end
 
     it 'should allow publication_date before vigor_date' do
-      subject.should allow_value(vigor_date - 5.days).for(:publication_date)
+      expect(subject).to allow_value(vigor_date - 5.days).for(:publication_date)
     end
 
     it 'should allow publication_date equals to vigor_date' do
-      subject.should allow_value(vigor_date).for(:publication_date)
+      expect(subject).to allow_value(vigor_date).for(:publication_date)
     end
 
     it 'should not allow publication_date after vigor_date' do
-      subject.should_not allow_value(vigor_date + 5.days).for(:publication_date).
+      expect(subject).not_to allow_value(vigor_date + 5.days).for(:publication_date).
                                                           with_message("deve ser em ou antes da data a vigorar (#{I18n.l vigor_date})")
     end
   end
 
   it 'should not allow budget_law_percent greater than 100' do
-    subject.should_not allow_value(101).for(:budget_law_percent).
+    expect(subject).not_to allow_value(101).for(:budget_law_percent).
                                            with_message('deve ser menor ou igual a 100')
   end
 
   it 'should not allow revenue_antecipation_percent greater than 100' do
-    subject.should_not allow_value(101).for(:revenue_antecipation_percent).
+    expect(subject).not_to allow_value(101).for(:revenue_antecipation_percent).
                                            with_message('deve ser menor ou igual a 100')
   end
 end

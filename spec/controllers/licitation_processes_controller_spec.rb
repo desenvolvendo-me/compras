@@ -15,13 +15,13 @@ describe LicitationProcessesController do
     it 'should return 401 on access new url' do
       get :new, :administrative_process_id => administrative_process.id
 
-      response.code.should eq "401"
+      expect(response.code).to eq "401"
     end
 
     it 'should return 401 on access create url' do
       post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
 
-      response.code.should eq "401"
+      expect(response.code).to eq "401"
     end
   end
 
@@ -98,7 +98,7 @@ describe LicitationProcessesController do
       it 'should redirect to administrative process edit page after update' do
         put :update, :id => licitation_process.id
 
-        response.should redirect_to(edit_administrative_process_path(licitation_process.administrative_process))
+        expect(response).to redirect_to(edit_administrative_process_path(licitation_process.administrative_process))
       end
     end
   end

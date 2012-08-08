@@ -13,7 +13,7 @@ describe SubfunctionDecorator do
     end
 
     it 'should return function as summary' do
-      subject.summary.should eq 'Administração'
+      expect(subject.summary).to eq 'Administração'
     end
   end
 end

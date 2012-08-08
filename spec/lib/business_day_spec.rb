@@ -19,10 +19,10 @@ describe BusinessDay do
   end
 
   it "should calculate the previous working day" do
-    subject.previous_business_day.should eq friday
+    expect(subject.previous_business_day).to eq friday
   end
 
   it "should calculate the next working day" do
-    subject.next_business_day.should eq monday
+    expect(subject.next_business_day).to eq monday
   end
 end

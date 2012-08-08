@@ -17,22 +17,22 @@ describe LicitationObjectValue do
   end
 
   it 'should return limits for modality purchase' do
-    LicitationObjectValue.new(object, :modality => :purchase, :limit => :licitation_exemption).value.should eq 10
-    LicitationObjectValue.new(object, :modality => :purchase, :limit => :invitation_letter).value.should eq 20
-    LicitationObjectValue.new(object, :modality => :purchase, :limit => :taking_price).value.should eq 30
-    LicitationObjectValue.new(object, :modality => :purchase, :limit => :public_concurrency).value.should eq 40
+    expect(LicitationObjectValue.new(object, :modality => :purchase, :limit => :licitation_exemption).value).to eq 10
+    expect(LicitationObjectValue.new(object, :modality => :purchase, :limit => :invitation_letter).value).to eq 20
+    expect(LicitationObjectValue.new(object, :modality => :purchase, :limit => :taking_price).value).to eq 30
+    expect(LicitationObjectValue.new(object, :modality => :purchase, :limit => :public_concurrency).value).to eq 40
   end
 
   it 'should return limits for modality build' do
-    LicitationObjectValue.new(object, :modality => :build, :limit => :licitation_exemption).value.should eq 50
-    LicitationObjectValue.new(object, :modality => :build, :limit => :invitation_letter).value.should eq 60
-    LicitationObjectValue.new(object, :modality => :build, :limit => :taking_price).value.should eq 70
-    LicitationObjectValue.new(object, :modality => :build, :limit => :public_concurrency).value.should eq 80
+    expect(LicitationObjectValue.new(object, :modality => :build, :limit => :licitation_exemption).value).to eq 50
+    expect(LicitationObjectValue.new(object, :modality => :build, :limit => :invitation_letter).value).to eq 60
+    expect(LicitationObjectValue.new(object, :modality => :build, :limit => :taking_price).value).to eq 70
+    expect(LicitationObjectValue.new(object, :modality => :build, :limit => :public_concurrency).value).to eq 80
   end
 
   it 'should return limits for modality special' do
-    LicitationObjectValue.new(object, :modality => :special, :limit => :auction).value.should eq 90
-    LicitationObjectValue.new(object, :modality => :special, :limit => :unenforceability).value.should eq 100
-    LicitationObjectValue.new(object, :modality => :special, :limit => :contest).value.should eq 110
+    expect(LicitationObjectValue.new(object, :modality => :special, :limit => :auction).value).to eq 90
+    expect(LicitationObjectValue.new(object, :modality => :special, :limit => :unenforceability).value).to eq 100
+    expect(LicitationObjectValue.new(object, :modality => :special, :limit => :contest).value).to eq 110
   end
 end

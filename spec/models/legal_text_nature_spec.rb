@@ -11,6 +11,6 @@ describe LegalTextNature do
   it "should return description as to_s method" do
     subject.description = "Natureza Cívica"
 
-    subject.to_s.should eq "Natureza Cívica"
+    expect(subject.to_s).to eq "Natureza Cívica"
   end
 end

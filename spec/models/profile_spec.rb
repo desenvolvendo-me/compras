@@ -11,16 +11,16 @@ describe Profile do
 
   context '#build_role' do
     it 'builds role' do
-      subject.roles.should have(:no).records
+      expect(subject.roles).to have(:no).records
 
       subject.build_role(:controller => 'customers')
-      subject.roles.should have(1).record
+      expect(subject.roles).to have(1).record
     end
   end
 
   it 'return name on to_s' do
     subject.name = 'management'
-    subject.to_s.should eq 'management'
+    expect(subject.to_s).to eq 'management'
   end
 
   context '#delete_role' do
@@ -37,10 +37,10 @@ describe Profile do
     end
 
     it 'deletes role' do
-      subject.roles.should have(1).record
+      expect(subject.roles).to have(1).record
 
       subject.delete_role(role)
-      subject.roles.should have(:no).records
+      expect(subject.roles).to have(:no).records
     end
   end
 end

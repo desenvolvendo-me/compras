@@ -9,7 +9,7 @@ describe BankAccount do
 
   it 'return name when converted to string' do
     subject.name = 'Banco do Brasil'
-    subject.name.should eq subject.to_s
+    expect(subject.name).to eq subject.to_s
   end
 
   it "should delegate bank to agency" do

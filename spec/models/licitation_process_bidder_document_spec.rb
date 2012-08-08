@@ -17,7 +17,7 @@ describe LicitationProcessBidderDocument do
       it { should allow_value(Date.yesterday).for(:emission_date) }
 
       it 'should not allow date after today' do
-        subject.should_not allow_value(Date.tomorrow).for(:emission_date).
+        expect(subject).not_to allow_value(Date.tomorrow).for(:emission_date).
                                                       with_message("deve ser igual ou anterior a data atual (#{I18n.l(Date.current)})")
       end
     end
@@ -33,15 +33,15 @@ describe LicitationProcessBidderDocument do
     end
 
     it 'should allow validity date after emission_date' do
-      subject.should allow_value(Date.current + 15.days).for(:validity)
+      expect(subject).to allow_value(Date.current + 15.days).for(:validity)
     end
 
     it 'should allow validity date equals to emission_date' do
-      subject.should allow_value(emission_date).for(:validity)
+      expect(subject).to allow_value(emission_date).for(:validity)
     end
 
     it 'should not allow validity date before emission_date' do
-      subject.should_not allow_value(Date.current).for(:validity).
+      expect(subject).not_to allow_value(Date.current).for(:validity).
                                                    with_message("deve ser igual ou posterior a data de emissão (#{I18n.l emission_date})")
     end
   end

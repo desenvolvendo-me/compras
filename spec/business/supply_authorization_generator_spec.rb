@@ -21,7 +21,7 @@ describe SupplyAuthorizationGenerator do
   it 'should return supply_authorization if already have' do
     direct_purchase_object.stub(:supply_authorization).and_return(supply_authorization_object)
     direct_purchase_object.stub(:authorized?).and_return(true)
-    subject.generate!.should eq supply_authorization_object
+    expect(subject.generate!).to eq supply_authorization_object
   end
 
   it 'should generate supply_authorization' do
@@ -32,6 +32,6 @@ describe SupplyAuthorizationGenerator do
       :year => 2012
     ).and_return(supply_authorization_object)
 
-    subject.generate!.should eq supply_authorization_object
+    expect(subject.generate!).to eq supply_authorization_object
   end
 end

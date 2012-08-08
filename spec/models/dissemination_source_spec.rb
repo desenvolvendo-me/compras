@@ -5,7 +5,7 @@ require 'app/models/dissemination_source'
 describe DisseminationSource do
   it 'should return to_s method with description' do
     subject.description = 'Jornal Oficial do Município'
-    subject.to_s.should eq 'Jornal Oficial do Município'
+    expect(subject.to_s).to eq 'Jornal Oficial do Município'
   end
 
   it { should belong_to :communication_source }
@@ -23,13 +23,13 @@ describe DisseminationSource do
 
       subject.run_callbacks(:destroy)
 
-      subject.errors[:base].should include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
+      expect(subject.errors[:base]).to include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
     end
   end
 
   it "should destroy if does not have relationship with regulatory_acts" do
     subject.run_callbacks(:destroy)
 
-    subject.errors[:base].should_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
+    expect(subject.errors[:base]).to_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
   end
 end

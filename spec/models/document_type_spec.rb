@@ -8,7 +8,7 @@ describe DocumentType do
   it 'should return description as to_s method' do
     subject.description = 'Fiscal'
 
-    subject.to_s.should eq 'Fiscal'
+    expect(subject.to_s).to eq 'Fiscal'
   end
 
   it { should validate_presence_of :validity }
@@ -28,13 +28,13 @@ describe DocumentType do
 
       subject.run_callbacks(:destroy)
 
-      subject.errors[:base].should include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
+      expect(subject.errors[:base]).to include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
     end
   end
 
   it "should destroy if does not have relationship with licitation_process" do
     subject.run_callbacks(:destroy)
 
-    subject.errors[:base].should_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
+    expect(subject.errors[:base]).to_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
   end
 end

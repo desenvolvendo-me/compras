@@ -11,7 +11,7 @@ describe ExpenseNature do
   it 'should return expense nature and description as to_s method' do
     subject.expense_nature = '4.4.20.03.11111111'
     subject.description = "Descrição"
-    subject.to_s.should eq '4.4.20.03.11111111 - Descrição'
+    expect(subject.to_s).to eq '4.4.20.03.11111111 - Descrição'
   end
 
   it { should belong_to :descriptor }

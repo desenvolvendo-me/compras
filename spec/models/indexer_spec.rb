@@ -13,11 +13,11 @@ describe Indexer do
 
   it 'cast to string using name' do
     subject.name = 'UFM'
-    subject.name.should eq 'UFM'
+    expect(subject.name).to eq 'UFM'
   end
 
   it 'fetch the current value from current indexer value' do
     subject.stub(:indexer_values).and_return(double(:current_value => 3.00))
-    subject.current_value.should eq 3.00
+    expect(subject.current_value).to eq 3.00
   end
 end

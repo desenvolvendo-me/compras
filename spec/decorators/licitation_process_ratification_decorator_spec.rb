@@ -6,31 +6,31 @@ describe LicitationProcessRatificationDecorator do
   it 'should return nil when does not have ratification_date' do
     component.stub(:ratification_date).and_return(nil)
 
-    subject.ratification_date.should eq nil
+    expect(subject.ratification_date).to eq nil
   end
 
   it 'should return localized ratification_date' do
     component.stub(:ratification_date).and_return(Date.new(2012, 8, 6))
 
-    subject.ratification_date.should eq "06/08/2012"
+    expect(subject.ratification_date).to eq "06/08/2012"
   end
 
   it 'should return nil when does not have adjudication_date' do
     component.stub(:adjudication_date).and_return(nil)
 
-    subject.adjudication_date.should eq nil
+    expect(subject.adjudication_date).to eq nil
   end
 
   it 'should return localized adjudication_date' do
     component.stub(:adjudication_date).and_return(Date.new(2012, 8, 6))
 
-    subject.adjudication_date.should eq "06/08/2012"
+    expect(subject.adjudication_date).to eq "06/08/2012"
   end
 
   it 'should return formated proposals_total_value' do
     component.stub(:proposals_total_value).and_return(5480.9)
 
-    subject.proposals_total_value.should eq "5.480,90"
+    expect(subject.proposals_total_value).to eq "5.480,90"
   end
 
   context 'with proposals' do
@@ -57,7 +57,7 @@ describe LicitationProcessRatificationDecorator do
     it 'should return unique budget_allocations' do
       component.stub(:licitation_process_bidder_proposals).and_return(proposals)
 
-      subject.budget_allocations.should eq 'Alocação 1, Alocação 3'
+      expect(subject.budget_allocations).to eq 'Alocação 1, Alocação 3'
     end
   end
 end

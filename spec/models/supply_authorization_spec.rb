@@ -5,7 +5,7 @@ describe SupplyAuthorization do
   it 'should return to_s as code/year' do
     subject.code = '1'
     subject.year = 2012
-    subject.to_s.should eq '1/2012'
+    expect(subject.to_s).to eq '1/2012'
   end
 
   it { should belong_to :direct_purchase }
@@ -60,7 +60,7 @@ describe SupplyAuthorization do
       signature_configuration_item_store.should_receive(:all_by_configuration_report).
                                          with('supply_authorizations').
                                          and_return(signature_configuration_items)
-      subject.signatures(signature_configuration_item_store).should eq signature_configuration_items
+      expect(subject.signatures(signature_configuration_item_store)).to eq signature_configuration_items
     end
   end
 end

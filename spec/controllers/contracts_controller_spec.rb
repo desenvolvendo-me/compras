@@ -28,7 +28,7 @@ describe ContractsController do
 
       get :next_sequential, :format => :json, :entity_id => 1, :year => 2012
 
-      JSON(response.body).should eq({"sequential" => 1})
+      JSON(expect(response.body)).to eq({"sequential" => 1})
     end
   end
 end

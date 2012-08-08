@@ -10,7 +10,7 @@ describe DirectPurchaseDecorator do
       end
 
       it 'should be nil' do
-        subject.total_allocations_items_value.should be_nil
+        expect(subject.total_allocations_items_value).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe DirectPurchaseDecorator do
       end
 
       it 'should applies precision' do
-        subject.total_allocations_items_value.should eq '512,34'
+        expect(subject.total_allocations_items_value).to eq '512,34'
       end
     end
   end
@@ -32,7 +32,7 @@ describe DirectPurchaseDecorator do
     end
 
     it 'should uses budget_structure and creditor' do
-      subject.summary.should eq "Estrutura orçamentaria: Secretaria de educação / Fornecedor: Nohup"
+      expect(subject.summary).to eq "Estrutura orçamentaria: Secretaria de educação / Fornecedor: Nohup"
     end
   end
 end

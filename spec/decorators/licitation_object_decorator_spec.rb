@@ -10,7 +10,7 @@ describe LicitationObjectDecorator do
       end
 
       it 'should be nil' do
-        subject.purchase_licitation_exemption_with_precision.should be_nil
+        expect(subject.purchase_licitation_exemption_with_precision).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe LicitationObjectDecorator do
       end
 
       it 'should applies precision' do
-        subject.purchase_licitation_exemption_with_precision.should eq '500,00'
+        expect(subject.purchase_licitation_exemption_with_precision).to eq '500,00'
       end
     end
   end
@@ -32,7 +32,7 @@ describe LicitationObjectDecorator do
       end
 
       it 'should be nil' do
-        subject.build_licitation_exemption_with_precision.should be_nil
+        expect(subject.build_licitation_exemption_with_precision).to be_nil
       end
     end
 
@@ -42,7 +42,7 @@ describe LicitationObjectDecorator do
       end
 
       it 'should applies precision' do
-        subject.build_licitation_exemption_with_precision.should eq '300,00'
+        expect(subject.build_licitation_exemption_with_precision).to eq '300,00'
       end
     end
   end

@@ -10,7 +10,7 @@ describe LicitationProcessBidderDecorator do
       end
 
       it 'should be nil' do
-        subject.process_date.should be_nil
+        expect(subject.process_date).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe LicitationProcessBidderDecorator do
       end
 
       it 'should localize' do
-        subject.process_date.should eq '01/12/2012'
+        expect(subject.process_date).to eq '01/12/2012'
       end
     end
   end
@@ -29,13 +29,13 @@ describe LicitationProcessBidderDecorator do
     it "should return items partial when can update proposals and haven't lots" do
       component.stub(:can_update_proposals?).and_return(true)
       component.stub_chain(:licitation_process_lots, :empty?).and_return(true)
-      subject.show_proposal_tabs.should eq "licitation_process_bidders/proposal_by_items"
+      expect(subject.show_proposal_tabs).to eq "licitation_process_bidders/proposal_by_items"
     end
 
     it "should return lots partial when can update proposals and have lots" do
       component.stub(:can_update_proposals?).and_return(true)
       component.stub_chain(:licitation_process_lots, :empty?).and_return(false)
-      subject.show_proposal_tabs.should eq "licitation_process_bidders/proposal_by_lots"
+      expect(subject.show_proposal_tabs).to eq "licitation_process_bidders/proposal_by_lots"
     end
 
     context 'when cannot update proposals' do
@@ -51,7 +51,7 @@ describe LicitationProcessBidderDecorator do
 
       it "should return erro message" do
         component.stub(:can_update_proposals?).and_return(false)
-        subject.show_proposal_tabs.should eq :text => "Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir."
+        expect(subject.show_proposal_tabs).to eq :text => "Para adicionar propostas, todos os itens devem pertencer a algum Lote ou nenhum lote deve existir."
       end
     end
   end
@@ -63,7 +63,7 @@ describe LicitationProcessBidderDecorator do
       end
 
       it 'should applies precision to zero' do
-        subject.proposal_total_value_by_lot.should eq '0,00'
+        expect(subject.proposal_total_value_by_lot).to eq '0,00'
       end
     end
 
@@ -77,7 +77,7 @@ describe LicitationProcessBidderDecorator do
       end
 
       it 'should applies precision' do
-        subject.proposal_total_value_by_lot(lot).should eq '5.000,00'
+        expect(subject.proposal_total_value_by_lot(lot)).to eq '5.000,00'
       end
     end
   end
@@ -89,7 +89,7 @@ describe LicitationProcessBidderDecorator do
       end
 
       it 'should be nil' do
-        subject.proposal_total_value.should be_nil
+        expect(subject.proposal_total_value).to be_nil
       end
     end
 
@@ -99,7 +99,7 @@ describe LicitationProcessBidderDecorator do
       end
 
       it 'should applies precision' do
-        subject.proposal_total_value.should eq '10,00'
+        expect(subject.proposal_total_value).to eq '10,00'
       end
     end
   end

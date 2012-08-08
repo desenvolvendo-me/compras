@@ -29,13 +29,13 @@ describe LicitationProcessImpugnment do
     it 'should be equal or greater than impugnment_date' do
       subject.stub(:judgment_date => Date.yesterday, :impugnment_date => Date.current)
       subject.valid?
-      subject.errors[:judgment_date].should include "deve ser maior ou igual a data da impugnação"
+      expect(subject.errors[:judgment_date]).to include "deve ser maior ou igual a data da impugnação"
     end
 
     it 'should be valid when is blank' do
       subject.stub(:judgment_date => '')
       subject.valid?
-      subject.errors[:judgment_date].should_not include ["não é uma data válida", "não pode ser vazio"]
+      expect(subject.errors[:judgment_date]).to_not include ["não é uma data válida", "não pode ser vazio"]
     end
   end
 
@@ -49,15 +49,15 @@ describe LicitationProcessImpugnment do
     end
 
     it 'be valid when impugnment_date is after process_date' do
-      subject.should allow_value(Date.new(2012, 12, 20)).for(:impugnment_date)
+      expect(subject).to allow_value(Date.new(2012, 12, 20)).for(:impugnment_date)
     end
 
     it 'be valid when impugnment_date is equals to process_date' do
-      subject.should allow_value(Date.new(2012, 12, 13)).for(:impugnment_date)
+      expect(subject).to allow_value(Date.new(2012, 12, 13)).for(:impugnment_date)
     end
 
     it 'be invalid when impugnment_date is before process_date' do
-      subject.should_not allow_value(Date.new(2012, 1, 1)).for(:impugnment_date).
+      expect(subject).not_to allow_value(Date.new(2012, 1, 1)).for(:impugnment_date).
                                                            with_message('deve ser maior ou igual a data do processo (13/12/2012)')
     end
   end

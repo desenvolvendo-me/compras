@@ -8,7 +8,7 @@ describe RevenueNature do
     subject.specification = 'Receitas correntes'
     subject.stub(:revenue_nature).and_return('1.0.0.0')
 
-    subject.to_s.should eq '1.0.0.0 - Receitas correntes'
+    expect(subject.to_s).to eq '1.0.0.0 - Receitas correntes'
   end
 
   it { should validate_presence_of :regulatory_act }
@@ -45,13 +45,13 @@ describe RevenueNature do
       it 'with invalid subcategory' do
         subject.stub(:revenue_category_id).and_return(2)
         subject.valid?
-        subject.errors[:revenue_subcategory].should include('subcategoria da receita deve estar relacionada com categoria da receita')
+        expect(subject.errors[:revenue_subcategory]).to include('subcategoria da receita deve estar relacionada com categoria da receita')
       end
 
       it 'with valid subcategory' do
         subject.stub(:revenue_category_id).and_return(1)
         subject.valid?
-        subject.errors[:revenue_subcategory].should be_blank
+        expect(subject.errors[:revenue_subcategory]).to be_blank
       end
     end
 
@@ -63,13 +63,13 @@ describe RevenueNature do
       it 'with invalid source' do
         subject.stub(:revenue_subcategory_id).and_return(2)
         subject.valid?
-        subject.errors[:revenue_source].should include('fonte da receita deve estar relacionada com subcategoria da receita')
+        expect(subject.errors[:revenue_source]).to include('fonte da receita deve estar relacionada com subcategoria da receita')
       end
 
       it 'with valid source' do
         subject.stub(:revenue_source_id).and_return(1)
         subject.valid?
-        subject.errors[:revenue_source].should_not include('fonte da receita deve estar relacionada com subcategoria da receita')
+        expect(subject.errors[:revenue_source]).to_not include('fonte da receita deve estar relacionada com subcategoria da receita')
       end
     end
 
@@ -81,13 +81,13 @@ describe RevenueNature do
       it 'with invalid rubric' do
         subject.stub(:revenue_source_id).and_return(2)
         subject.valid?
-        subject.errors[:revenue_rubric].should include('rúbrica da receita deve estar relacionada com fonte da receita')
+        expect(subject.errors[:revenue_rubric]).to include('rúbrica da receita deve estar relacionada com fonte da receita')
       end
 
       it 'with valid rubric' do
         subject.stub(:revenue_source_id).and_return(1)
         subject.valid?
-        subject.errors[:revenue_rubric].should_not include('rúbrica da receita deve estar relacionada com fonte da receita')
+        expect(subject.errors[:revenue_rubric]).to_not include('rúbrica da receita deve estar relacionada com fonte da receita')
       end
     end
   end

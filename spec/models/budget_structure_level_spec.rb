@@ -6,7 +6,7 @@ describe BudgetStructureLevel do
   it 'should respond to to_s with level and description' do
     subject.level = 1
     subject.description = 'Orgão'
-    subject.to_s.should eq '1 - Orgão'
+    expect(subject.to_s).to eq '1 - Orgão'
   end
 
   it { should validate_presence_of :description }

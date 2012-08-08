@@ -13,7 +13,7 @@ describe LicitationProcessLotsController do
 
       get :new, :licitation_process_id => licitation_process.id
 
-      response.code.should eq '401'
+      expect(response.code).to eq '401'
       response.body.should have_content 'Você não tem acesso a essa página'
     end
 
@@ -22,7 +22,7 @@ describe LicitationProcessLotsController do
 
       get :new, :licitation_process_id => licitation_process.id
 
-      response.code.should eq '200'
+      expect(response.code).to eq '200'
     end
   end
 
@@ -32,7 +32,7 @@ describe LicitationProcessLotsController do
 
       post :create, :licitation_process_id => licitation_process.id
 
-      response.code.should eq '401'
+      expect(response.code).to eq '401'
       response.body.should have_content 'Você não tem acesso a essa página'
     end
 
@@ -41,7 +41,7 @@ describe LicitationProcessLotsController do
 
       post :create, :licitation_process_id => licitation_process.id
 
-      response.code.should eq '200'
+      expect(response.code).to eq '200'
     end
   end
 
@@ -52,7 +52,7 @@ describe LicitationProcessLotsController do
 
       put :update, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
-      response.code.should eq '401'
+      expect(response.code).to eq '401'
       response.body.should have_content 'Você não tem acesso a essa página'
     end
 
@@ -62,7 +62,7 @@ describe LicitationProcessLotsController do
 
       put :update, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
-      response.should redirect_to(licitation_process_lots_path(:licitation_process_id => licitation_process.id))
+      expect(response).to redirect_to(licitation_process_lots_path(:licitation_process_id => licitation_process.id))
     end
   end
 
@@ -73,7 +73,7 @@ describe LicitationProcessLotsController do
 
       delete :destroy, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
-      response.code.should eq '401'
+      expect(response.code).to eq '401'
       response.body.should have_content 'Você não tem acesso a essa página'
     end
 
@@ -83,7 +83,7 @@ describe LicitationProcessLotsController do
 
       delete :destroy, :licitation_process_id => licitation_process.id, :id => licitation_process_lot.id
 
-      response.should redirect_to(licitation_process_lots_path(:licitation_process_id => licitation_process.id))
+      expect(response).to redirect_to(licitation_process_lots_path(:licitation_process_id => licitation_process.id))
     end
   end
 end

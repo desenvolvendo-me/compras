@@ -6,7 +6,7 @@ require 'app/models/extra_credit_moviment_type'
 describe ExtraCredit do
   it 'should return year as to_s' do
     subject.id = 2
-    subject.to_s.should eq '2'
+    expect(subject.to_s).to eq '2'
   end
 
   it { should belong_to :descriptor }
@@ -22,15 +22,15 @@ describe ExtraCredit do
   it 'should not be valid when difference is not zero' do
     subject.stub(:supplement).and_return(10.0)
     subject.stub(:reduced).and_return(1.0)
-    subject.should_not be_valid
-    subject.errors[:difference].should include 'deve ser igual a zero'
+    expect(subject).not_to be_valid
+    expect(subject.errors[:difference]).to include 'deve ser igual a zero'
   end
 
   it 'should be valid when difference is zero' do
     subject.stub(:supplement).and_return(10.0)
     subject.stub(:reduced).and_return(10.0)
-    subject.should_not be_valid
-    subject.errors[:difference].should be_empty
+    expect(subject).not_to be_valid
+    expect(subject.errors[:difference]).to be_empty
   end
 
   context 'validating uniquess at extra_credit_moviment_type' do
@@ -45,8 +45,8 @@ describe ExtraCredit do
 
       it 'should not be valid' do
         subject.extra_credit_moviment_types = [budget_allocation_one, budget_allocation_two]
-        subject.should_not be_valid
-        subject.errors.messages[:extra_credit_moviment_types].should include('já está em uso')
+        expect(subject).not_to be_valid
+        expect(subject.errors.messages[:extra_credit_moviment_types]).to include('já está em uso')
       end
     end
 
@@ -61,8 +61,8 @@ describe ExtraCredit do
 
       it 'should not be valid' do
         subject.extra_credit_moviment_types = [capability_one, capability_two]
-        subject.should_not be_valid
-        subject.errors.messages[:base].should include('já está em uso')
+        expect(subject).not_to be_valid
+        expect(subject.errors.messages[:base]).to include('já está em uso')
       end
     end
   end
@@ -75,11 +75,11 @@ describe ExtraCredit do
       end
 
       it 'should be valid when credit date is equal' do
-        subject.should allow_value(Date.new(2012, 3, 1)).for(:credit_date)
+        expect(subject).to allow_value(Date.new(2012, 3, 1)).for(:credit_date)
       end
 
       it 'should not be valid when credit date is older' do
-        subject.should_not allow_value(Date.new(2011, 1, 1)).for(:credit_date).with_message("não pode ser menor que a data do último crédito suplementar (01/03/2012)")
+        expect(subject).not_to allow_value(Date.new(2011, 1, 1)).for(:credit_date).with_message("não pode ser menor que a data do último crédito suplementar (01/03/2012)")
       end
     end
 
@@ -89,11 +89,11 @@ describe ExtraCredit do
       end
 
       it 'should be valid when credit date is equal' do
-        subject.should allow_value(Date.new(2012, 3, 1)).for(:credit_date)
+        expect(subject).to allow_value(Date.new(2012, 3, 1)).for(:credit_date)
       end
 
       it 'should not be valid when credit date is older' do
-        subject.should_not allow_value(Date.new(2011, 1, 1)).for(:credit_date).with_message("deve ser maior ou igual a data de publicação do ato administrativo (01/03/2012)")
+        expect(subject).not_to allow_value(Date.new(2011, 1, 1)).for(:credit_date).with_message("deve ser maior ou igual a data de publicação do ato administrativo (01/03/2012)")
       end
     end
   end

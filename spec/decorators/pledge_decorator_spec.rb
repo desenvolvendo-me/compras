@@ -10,7 +10,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.budget_allocation_real_amount.should be_nil
+        expect(subject.budget_allocation_real_amount).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies precision' do
-        subject.budget_allocation_real_amount.should eq '500,00'
+        expect(subject.budget_allocation_real_amount).to eq '500,00'
       end
     end
   end
@@ -32,7 +32,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.reserve_fund_value.should be_nil
+        expect(subject.reserve_fund_value).to be_nil
       end
     end
 
@@ -42,7 +42,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies precision' do
-        subject.reserve_fund_value.should eq '300,00'
+        expect(subject.reserve_fund_value).to eq '300,00'
       end
     end
   end
@@ -54,7 +54,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.pledge_parcels_sum.should be_nil
+        expect(subject.pledge_parcels_sum).to be_nil
       end
     end
 
@@ -64,7 +64,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies precision' do
-        subject.pledge_parcels_sum.should eq '300,00'
+        expect(subject.pledge_parcels_sum).to eq '300,00'
       end
     end
   end
@@ -76,7 +76,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.balance.should be_nil
+        expect(subject.balance).to be_nil
       end
     end
 
@@ -86,7 +86,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies precision' do
-        subject.balance.should eq '100,00'
+        expect(subject.balance).to eq '100,00'
       end
     end
   end
@@ -98,7 +98,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.balance_as_currency.should be_nil
+        expect(subject.balance_as_currency).to be_nil
       end
     end
 
@@ -108,7 +108,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies currency' do
-        subject.balance_as_currency.should eq 'R$ 100,00'
+        expect(subject.balance_as_currency).to eq 'R$ 100,00'
       end
     end
   end
@@ -120,7 +120,7 @@ describe PledgeDecorator do
       end
 
       it 'should nil' do
-        subject.pledge_cancellations_sum.should be_nil
+        expect(subject.pledge_cancellations_sum).to be_nil
       end
     end
 
@@ -130,7 +130,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies currency' do
-        subject.pledge_cancellations_sum.should eq 'R$ 100,00'
+        expect(subject.pledge_cancellations_sum).to eq 'R$ 100,00'
       end
     end
   end
@@ -142,7 +142,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.value.should be_nil
+        expect(subject.value).to be_nil
       end
     end
 
@@ -152,7 +152,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies currency' do
-        subject.value.should eq 'R$ 100,00'
+        expect(subject.value).to eq 'R$ 100,00'
       end
     end
   end
@@ -164,7 +164,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.pledge_liquidations_sum.should be_nil
+        expect(subject.pledge_liquidations_sum).to be_nil
       end
     end
 
@@ -174,7 +174,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies precision' do
-        subject.pledge_liquidations_sum.should eq '100,00'
+        expect(subject.pledge_liquidations_sum).to eq '100,00'
       end
     end
   end
@@ -186,7 +186,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.pledge_liquidations_sum_as_currency.should be_nil
+        expect(subject.pledge_liquidations_sum_as_currency).to be_nil
       end
     end
 
@@ -196,7 +196,7 @@ describe PledgeDecorator do
       end
 
       it 'should applies currency' do
-        subject.pledge_liquidations_sum_as_currency.should eq 'R$ 100,00'
+        expect(subject.pledge_liquidations_sum_as_currency).to eq 'R$ 100,00'
       end
     end
   end
@@ -208,7 +208,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.contract_signature_date.should be_nil
+        expect(subject.contract_signature_date).to be_nil
       end
     end
 
@@ -218,7 +218,7 @@ describe PledgeDecorator do
       end
 
       it 'should localize' do
-        subject.contract_signature_date.should eq '12/06/2012'
+        expect(subject.contract_signature_date).to eq '12/06/2012'
       end
     end
   end
@@ -230,7 +230,7 @@ describe PledgeDecorator do
       end
 
       it 'should be nil' do
-        subject.emission_date.should be_nil
+        expect(subject.emission_date).to be_nil
       end
     end
 
@@ -240,7 +240,7 @@ describe PledgeDecorator do
       end
 
       it 'should localize' do
-        subject.emission_date.should eq '12/06/2012'
+        expect(subject.emission_date).to eq '12/06/2012'
       end
     end
   end

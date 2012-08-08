@@ -6,7 +6,7 @@ require 'app/models/material'
 describe ServiceOrContractType do
   it 'should return description as to_s method' do
     subject.description = 'Contratação de estagiários'
-    subject.to_s.should eq 'Contratação de estagiários'
+    expect(subject.to_s).to eq 'Contratação de estagiários'
   end
 
   it { should have_many(:materials).dependent(:restrict) }

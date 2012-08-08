@@ -5,7 +5,7 @@ require 'app/models/indexer'
 describe Currency do
   it 'return name when converted to string' do
     subject.name = 'Real'
-    subject.name.should eq subject.to_s
+    expect(subject.name).to eq subject.to_s
   end
 
   it { should validate_presence_of :name }

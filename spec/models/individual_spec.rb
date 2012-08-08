@@ -16,7 +16,7 @@ describe Individual do
   it "delegate to person to_s method" do
     subject.build_person
     subject.person.name = 'Gabriel Sobrinho'
-    subject.person.name.should eq subject.to_s
+    expect(subject.person.name).to eq subject.to_s
   end
 
   it { should have_many(:licitation_commission_responsibles).dependent(:restrict) }

@@ -15,7 +15,7 @@ describe LicitationProcessBiddersController do
 
       get :new, :licitation_process_id => licitation_process.id
 
-      response.code.should eq '200'
+      expect(response.code).to eq '200'
     end
 
     it 'should redirect to 401 when can not create a bidder' do
@@ -23,8 +23,8 @@ describe LicitationProcessBiddersController do
 
       get :new, :licitation_process_id => licitation_process.id
 
-      response.code.should eq '401'
-      response.body.should =~ /Você não tem acesso a essa página/
+      expect(response.code).to eq '401'
+      expect(response.body).to match /Você não tem acesso a essa página/
     end
   end
 
@@ -58,8 +58,8 @@ describe LicitationProcessBiddersController do
 
       post :create, :licitation_process_id => licitation_process.id
 
-      response.code.should eq '401'
-      response.body.should =~ /Você não tem acesso a essa página/
+      expect(response.code).to eq '401'
+      expect(response.body).to match /Você não tem acesso a essa página/
     end
   end
 
@@ -88,8 +88,8 @@ describe LicitationProcessBiddersController do
 
       put :update, :id => bidder.id
 
-      response.code.should eq '401'
-      response.body.should =~ /Você não tem acesso a essa página/
+      expect(response.code).to eq '401'
+      expect(response.body).to match /Você não tem acesso a essa página/
     end
   end
 
@@ -100,8 +100,8 @@ describe LicitationProcessBiddersController do
 
       delete :destroy, :id => bidder.id
 
-      response.code.should eq '401'
-      response.body.should =~ /Você não tem acesso a essa página/
+      expect(response.code).to eq '401'
+      expect(response.body).to match /Você não tem acesso a essa página/
     end
   end
 end

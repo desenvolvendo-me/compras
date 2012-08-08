@@ -20,11 +20,11 @@ require 'app/models/licitation_process'
 describe Creditor do
   describe 'default values' do
     it 'uses false as default for municipal_public_administration' do
-      subject.municipal_public_administration.should be false
+      expect(subject.municipal_public_administration).to be false
     end
 
     it 'uses false as default for autonomous' do
-      subject.autonomous.should be false
+      expect(subject.autonomous).to be false
     end
   end
 
@@ -80,7 +80,7 @@ describe Creditor do
 
       subject.run_callbacks(:save)
 
-      subject.contract_start_date.should be nil
+      expect(subject.contract_start_date).to be nil
     end
 
     it "social_identification_number should be nil" do
@@ -88,7 +88,7 @@ describe Creditor do
 
       subject.run_callbacks(:save)
 
-      subject.social_identification_number.should be nil
+      expect(subject.social_identification_number).to be nil
     end
   end
 
@@ -96,7 +96,7 @@ describe Creditor do
     it "should return selected_cnaes" do
       subject.stub(:cnae_ids).and_return( [1, 2, 3] )
       subject.main_cnae_id = 4
-      subject.selected_cnaes.should == [1, 2, 3, 4]
+      expect(subject.selected_cnaes).to eq [1, 2, 3, 4]
     end
 
     let :main_cnae do
@@ -110,7 +110,7 @@ describe Creditor do
 
       subject.valid?
 
-      subject.errors.messages[:cnaes].should include "não pode haver um CNAE secundário igual ao CNAE principal"
+      expect(subject.errors.messages[:cnaes]).to include "não pode haver um CNAE secundário igual ao CNAE principal"
     end
 
     it "should be valid when has not a secondary cnae equal a main cnae" do
@@ -120,7 +120,7 @@ describe Creditor do
 
       subject.valid?
 
-      subject.errors.messages[:cnaes].should be_nil
+      expect(subject.errors.messages[:cnaes]).to be_nil
     end
   end
 
@@ -134,7 +134,7 @@ describe Creditor do
     end
 
     it 'returns false when has not user' do
-      subject.should_not be_user
+      expect(subject).not_to be_user
     end
 
     it 'returns true when has user and it is persisted' do
@@ -142,7 +142,7 @@ describe Creditor do
 
       subject.stub(:user).and_return(user)
 
-      subject.should be_user
+      expect(subject).to be_user
     end
 
     it 'returns false when has user and it is not persisted' do
@@ -150,7 +150,7 @@ describe Creditor do
 
       subject.stub(:user).and_return(user)
 
-      subject.should_not be_user
+      expect(subject).not_to be_user
     end
   end
 
@@ -167,7 +167,7 @@ describe Creditor do
 
       subject.valid?
 
-      subject.errors.messages[:representatives].should include "não pode haver um representante igual ao credor"
+      expect(subject.errors.messages[:representatives]).to include "não pode haver um representante igual ao credor"
     end
 
     it "should be valid when has not a representative equal a person" do
@@ -178,7 +178,7 @@ describe Creditor do
 
       subject.valid?
 
-      subject.errors.messages[:representatives].should be_nil
+      expect(subject.errors.messages[:representatives]).to be_nil
     end
   end
 end

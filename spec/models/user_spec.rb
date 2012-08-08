@@ -5,13 +5,13 @@ require 'app/models/bookmark'
 describe User do
   describe 'default values' do
     it 'uses false as default for administrator' do
-      subject.administrator.should be false
+      expect(subject.administrator).to be false
     end
   end
 
   it "return login on to_s" do
     subject.stub(:login).and_return('gabriel.sobrinho')
-    subject.to_s.should eq 'gabriel.sobrinho'
+    expect(subject.to_s).to eq 'gabriel.sobrinho'
   end
 
   it "require password" do
@@ -20,7 +20,7 @@ describe User do
 
   it "require password unless persisted" do
     subject.should_receive(:persisted?).and_return(true)
-    subject.should_not be_password_required
+    expect(subject).not_to be_password_required
   end
 
   it "require password if password is present" do
@@ -46,7 +46,7 @@ describe User do
   it 'do not require login if the use is a creditor' do
     subject.stub(:creditor?).and_return true
 
-    subject.should_not validate_presence_of :login
+    expect(subject).not_to validate_presence_of :login
   end
 
   it 'require the login for persisted users' do
@@ -60,7 +60,7 @@ describe User do
       subject.should_receive(:creditor?).and_return true
       subject.should_receive(:persisted?).and_return false
 
-      subject.should_not be_password_required
+      expect(subject).not_to be_password_required
     end
 
     it 'should require the password if the user is a creditor and is persisted but not confimed' do
@@ -76,7 +76,7 @@ describe User do
       subject.should_receive(:persisted?).and_return true
       subject.should_receive(:confirmed?).and_return true
 
-      subject.should_not be_password_required
+      expect(subject).not_to be_password_required
     end
   end
 
@@ -87,7 +87,7 @@ describe User do
 
   it "shoud not validate presence of profile when user is an admin" do
     subject.stub(:administrator?).and_return(true)
-    subject.should_not validate_presence_of :profile
+    expect(subject).not_to validate_presence_of :profile
   end
 
   it "shoud validate presence of profile when user is not an admin" do
@@ -102,7 +102,7 @@ describe User do
 
   it 'should not validate presence of profile when user is a creditor' do
     subject.stub(:creditor?).and_return true
-    subject.should_not validate_presence_of :profile
+    expect(subject).not_to validate_presence_of :profile
   end
 
   describe '#administrator_or_creditor?' do
@@ -119,7 +119,7 @@ describe User do
     end
 
     it 'should be false when is not an administrator neither a creditor' do
-      subject.should_not be_administrator_or_creditor
+      expect(subject).not_to be_administrator_or_creditor
     end
   end
 end

@@ -7,6 +7,6 @@ describe TargetAudience do
   it "should return specification as to_s" do
     subject.specification = 'Alunos da rede estudantil'
 
-    subject.to_s.should eq 'Alunos da rede estudantil'
+    expect(subject.to_s).to eq 'Alunos da rede estudantil'
   end
 end

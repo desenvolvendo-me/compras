@@ -23,7 +23,7 @@ describe LicitationCommission do
   it 'should return id as to_s method' do
     subject.id = 2
 
-    subject.to_s.should eq '2'
+    expect(subject.to_s).to eq '2'
   end
 
   context 'validate dates based on nomination_date' do
@@ -33,38 +33,38 @@ describe LicitationCommission do
 
     context 'expiration_date' do
       it 'should not allow expiration_date before nomination_date' do
-        subject.should_not allow_value(Date.new(2012, 11, 1)).for(:expiration_date).
+        expect(subject).not_to allow_value(Date.new(2012, 11, 1)).for(:expiration_date).
                                                               with_message('deve ser igual ou posterior a data da nomeação (20/12/2012)')
       end
 
       it 'should allow expiration_date equals to nomination_date' do
-        subject.should allow_value(Date.new(2012, 12, 20)).for(:expiration_date)
+        expect(subject).to allow_value(Date.new(2012, 12, 20)).for(:expiration_date)
       end
 
       it 'should allow expiration_date after nomination_date' do
-        subject.should allow_value(Date.new(2012, 12, 31)).for(:expiration_date)
+        expect(subject).to allow_value(Date.new(2012, 12, 31)).for(:expiration_date)
       end
     end
 
     context 'exoneration_date' do
       it 'should not allow exoneration_date before nomination_date' do
-        subject.should_not allow_value(Date.new(2012, 11, 1)).for(:exoneration_date).
+        expect(subject).not_to allow_value(Date.new(2012, 11, 1)).for(:exoneration_date).
                                                               with_message('deve ser igual ou posterior a data da nomeação (20/12/2012)')
       end
 
       it 'should allow exoneration_date equals to nomination_date' do
-        subject.should allow_value(Date.new(2012, 12, 20)).for(:exoneration_date)
+        expect(subject).to allow_value(Date.new(2012, 12, 20)).for(:exoneration_date)
       end
 
       it 'should allow exoneration_date after nomination_date' do
-        subject.should allow_value(Date.new(2012, 12, 31)).for(:exoneration_date)
+        expect(subject).to allow_value(Date.new(2012, 12, 31)).for(:exoneration_date)
       end
     end
   end
 
   it "should delegate publication_date to regulatory_act with prefix" do
     subject.stub(:regulatory_act).and_return stub(:publication_date => Date.new(2012, 2, 28))
-    subject.regulatory_act_publication_date.should eq Date.new(2012, 2, 28)
+    expect(subject.regulatory_act_publication_date).to eq Date.new(2012, 2, 28)
   end
 
   it "the duplicated individuals on responsibles should be invalid except the first" do
@@ -125,7 +125,7 @@ describe LicitationCommission do
 
       subject.valid?
 
-      subject.errors.messages[:licitation_commission_members].should include 'deve haver um presidente'
+      expect(subject.errors.messages[:licitation_commission_members]).to include 'deve haver um presidente'
     end
 
     it "must be invalid when there are two presidents" do
@@ -133,7 +133,7 @@ describe LicitationCommission do
 
       subject.valid?
 
-      subject.errors.messages[:licitation_commission_members].should include 'deve haver apenas um presidente'
+      expect(subject.errors.messages[:licitation_commission_members]).to include 'deve haver apenas um presidente'
     end
 
     it "must be valid when there are one president" do
@@ -141,7 +141,7 @@ describe LicitationCommission do
 
       subject.valid?
 
-      subject.errors.messages[:licitation_commission_members].should be_nil
+      expect(subject.errors.messages[:licitation_commission_members]).to be_nil
     end
   end
 end

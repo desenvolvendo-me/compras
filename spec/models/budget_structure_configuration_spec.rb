@@ -7,7 +7,7 @@ require 'app/models/budget_structure'
 describe BudgetStructureConfiguration do
   it 'should respond to to_s as description' do
     subject.description = 'Organograma 2012'
-    subject.to_s.should eq 'Organograma 2012'
+    expect(subject.to_s).to eq 'Organograma 2012'
   end
 
   it { should have_many(:budget_structures).dependent(:restrict) }
@@ -31,19 +31,19 @@ describe BudgetStructureConfiguration do
     end
 
     it 'should return correct mask' do
-      subject.mask.should eq '9-99'
+      expect(subject.mask).to eq '9-99'
     end
 
     it 'should validate presence of level only on last mask' do
       level1.separator = nil
-      subject.should_not be_valid
-      subject.ordered_budget_structure_levels.first.errors[:separator].should include 'não pode ficar em branco'
-      subject.ordered_budget_structure_levels.last.errors[:separator].should_not include 'não pode ficar em branco'
+      expect(subject).not_to be_valid
+      expect(subject.ordered_budget_structure_levels.first.errors[:separator]).to include 'não pode ficar em branco'
+      expect(subject.ordered_budget_structure_levels.last.errors[:separator]).to_not include 'não pode ficar em branco'
     end
 
     it 'should return incorrect mask when digits is missing' do
       level1.digits = nil
-      subject.mask.should eq '99'
+      expect(subject.mask).to eq '99'
     end
   end
 end

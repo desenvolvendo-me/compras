@@ -11,11 +11,11 @@ describe ExtraCreditMovimentType do
 
   it 'should validate presence of budget_allocation if moviment_type is as budget_allocation' do
     subject.stub(:moviment_type_as_budget_allocation? => true)
-    subject.should validate_presence_of :budget_allocation
+    expect(subject).to validate_presence_of :budget_allocation
   end
 
   it 'should validate presence of budget_allocation if moviment_type is as budget_allocation' do
     subject.stub(:moviment_type_as_capability? => true)
-    subject.should validate_presence_of :capability
+    expect(subject).to validate_presence_of :capability
   end
 end

@@ -6,19 +6,20 @@ require 'app/enumerations/administrative_process_modality'
 
 describe LicitationProcessTypesOfCalculationByModality do
   it 'should verify the content of types_of_calculations by judgment_kind' do
-    subject.types_of_calculation_groups[AdministrativeProcessModality::PRESENCE_TRADING].should
-      eq [ LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM, LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_LOT]
+    expect(subject.types_of_calculation_groups[AdministrativeProcessModality::PRESENCE_TRADING]).to eq (
+      [ LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM, LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_LOT]
+    )
   end
 
   it 'should verify if type_of_calculation is included in group' do
-    subject.correct_type_of_calculation?(AdministrativeProcessModality::PRESENCE_TRADING,
-                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM).should be_true
-    subject.correct_type_of_calculation?(AdministrativeProcessModality::PRESENCE_TRADING,
-                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_LOT).should be_true
+    expect(subject.correct_type_of_calculation?(AdministrativeProcessModality::PRESENCE_TRADING,
+                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM)).to be_true
+    expect(subject.correct_type_of_calculation?(AdministrativeProcessModality::PRESENCE_TRADING,
+                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_LOT)).to be_true
 
-    subject.correct_type_of_calculation?(AdministrativeProcessModality::AUCTION,
-                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM).should be_false
-    subject.correct_type_of_calculation?(AdministrativeProcessModality::AUCTION,
-                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_LOT).should be_false
+    expect(subject.correct_type_of_calculation?(AdministrativeProcessModality::AUCTION,
+                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM)).to be_false
+    expect(subject.correct_type_of_calculation?(AdministrativeProcessModality::AUCTION,
+                                         LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_LOT)).to be_false
   end
 end

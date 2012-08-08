@@ -8,6 +8,6 @@ describe Bookmark do
   it { should validate_presence_of :user }
 
   it 'convert to string using human model name' do
-    subject.to_s.should eq 'Favoritos'
+    expect(subject.to_s).to eq 'Favoritos'
   end
 end

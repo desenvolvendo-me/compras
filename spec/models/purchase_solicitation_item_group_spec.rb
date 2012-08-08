@@ -12,6 +12,6 @@ describe PurchaseSolicitationItemGroup do
   it 'should be id as #to_s method' do
     subject.id = 1
 
-    subject.to_s.should eq '1'
+    expect(subject.to_s).to eq '1'
   end
 end

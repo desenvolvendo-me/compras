@@ -10,7 +10,7 @@ describe ReserveFundDecorator do
       end
 
       it 'should be nil' do
-        subject.budget_allocation_real_amount.should be_nil
+        expect(subject.budget_allocation_real_amount).to be_nil
       end
     end
   end
@@ -22,7 +22,7 @@ describe ReserveFundDecorator do
       end
 
       it 'should applies precision' do
-        subject.budget_allocation_real_amount.should eq '5.000,00'
+        expect(subject.budget_allocation_real_amount).to eq '5.000,00'
       end
     end
   end

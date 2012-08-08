@@ -9,7 +9,7 @@ describe BudgetRevenueDecorator do
     end
 
     it 'should localize' do
-      subject.date.should eq '13/04/2012'
+      expect(subject.date).to eq '13/04/2012'
     end
   end
 
@@ -23,7 +23,7 @@ describe BudgetRevenueDecorator do
     end
 
     it 'should localize Date.current' do
-      subject.date(date_repository).should eq '13/04/2012'
+      expect(subject.date(date_repository)).to eq '13/04/2012'
     end
   end
 end

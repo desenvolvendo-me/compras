@@ -18,7 +18,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should be nil' do
-        subject.licitation_process_envelope_delivery_date.should be_nil
+        expect(subject.licitation_process_envelope_delivery_date).to be_nil
       end
     end
 
@@ -28,7 +28,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should return localized licitation_process_envelope_delivery_date' do
-        subject.licitation_process_envelope_delivery_date.should eq '04/01/2012'
+        expect(subject.licitation_process_envelope_delivery_date).to eq '04/01/2012'
       end
     end
   end
@@ -40,7 +40,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should be nil' do
-        subject.licitation_process_envelope_delivery_time.should be_nil
+        expect(subject.licitation_process_envelope_delivery_time).to be_nil
       end
     end
 
@@ -50,7 +50,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should return localized licitation_process_envelope_delivery_time' do
-        subject.licitation_process_envelope_delivery_time.should eq '10:00'
+        expect(subject.licitation_process_envelope_delivery_time).to eq '10:00'
       end
     end
   end
@@ -62,7 +62,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should be nil' do
-        subject.licitation_process_envelope_opening_date.should be_nil
+        expect(subject.licitation_process_envelope_opening_date).to be_nil
       end
     end
 
@@ -72,7 +72,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should return localized licitation_process_envelope_opening_date' do
-        subject.licitation_process_envelope_opening_date.should eq '04/01/2012'
+        expect(subject.licitation_process_envelope_opening_date).to eq '04/01/2012'
       end
     end
   end
@@ -84,7 +84,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should be nil' do
-        subject.licitation_process_envelope_opening_time.should be_nil
+        expect(subject.licitation_process_envelope_opening_time).to be_nil
       end
     end
 
@@ -94,7 +94,7 @@ describe LicitationProcessImpugnmentDecorator do
       end
 
       it 'should return localized licitation_process_envelope_opening_time' do
-        subject.licitation_process_envelope_opening_time.should eq '10:00'
+        expect(subject.licitation_process_envelope_opening_time).to eq '10:00'
       end
     end
   end

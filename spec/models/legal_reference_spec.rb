@@ -7,7 +7,7 @@ describe LegalReference do
   it 'should return description as to_s method' do
     subject.description = 'Referencia legal'
 
-    subject.to_s.should eq 'Referencia legal'
+    expect(subject.to_s).to eq 'Referencia legal'
   end
 
   it { should validate_presence_of :description }

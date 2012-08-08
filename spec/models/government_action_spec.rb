@@ -7,7 +7,7 @@ describe GovernmentAction do
   it "should return the description ad to_s method" do
     subject.description = "Ação Governamental"
 
-    subject.to_s.should eq "Ação Governamental"
+    expect(subject.to_s).to eq "Ação Governamental"
   end
 
   it { should belong_to :descriptor }

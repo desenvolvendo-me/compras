@@ -6,7 +6,7 @@ require 'app/models/extra_credit'
 describe ExtraCreditNature do
   it 'should return description as to_s' do
     subject.description = 'Abre crédito'
-    subject.to_s.should eq 'Abre crédito'
+    expect(subject.to_s).to eq 'Abre crédito'
   end
 
   it { should validate_presence_of :description }

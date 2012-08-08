@@ -9,7 +9,7 @@ describe ReferenceUnitDecorator do
     end
 
     it "should use name" do
-      subject.summary.should eq 'Meters'
+      expect(subject.summary).to eq 'Meters'
     end
   end
 end

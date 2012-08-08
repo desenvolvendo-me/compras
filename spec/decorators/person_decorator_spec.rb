@@ -10,7 +10,7 @@ describe PersonDecorator do
       end
 
       it 'should be nil' do
-        subject.commercial_registration_date.should be_nil
+        expect(subject.commercial_registration_date).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe PersonDecorator do
       end
 
       it 'should localize' do
-        subject.commercial_registration_date.should eq '14/12/2012'
+        expect(subject.commercial_registration_date).to eq '14/12/2012'
       end
     end
   end

@@ -12,34 +12,34 @@ require 'app/models/administrative_process_budget_allocation'
 describe BudgetAllocation do
   describe 'default values' do
     it 'uses false as default for refinancing' do
-      subject.refinancing.should be false
+      expect(subject.refinancing).to be false
     end
 
     it 'uses false as default for health' do
-      subject.health.should be false
+      expect(subject.health).to be false
     end
 
     it 'uses false as default for alienation_appeal' do
-      subject.alienation_appeal.should be false
+      expect(subject.alienation_appeal).to be false
     end
 
     it 'uses false as default for education' do
-      subject.education.should be false
+      expect(subject.education).to be false
     end
 
     it 'uses false as default for foresight' do
-      subject.foresight.should be false
+      expect(subject.foresight).to be false
     end
 
     it 'uses false as default for personal' do
-      subject.personal.should be false
+      expect(subject.personal).to be false
     end
   end
 
   it 'should return "budget structure code - description" as to_s' do
     subject.description = 'Secretaria de educação'
     subject.stub(:budget_structure_code => '1')
-    subject.to_s.should eq '1 - Secretaria de educação'
+    expect(subject.to_s).to eq '1 - Secretaria de educação'
   end
 
   it { should validate_presence_of :budget_allocation_type }
@@ -74,33 +74,33 @@ describe BudgetAllocation do
 
   it 'should validate presence of amount if kind is average' do
     subject.stub(:divide?).and_return(true)
-    subject.should validate_presence_of :amount
+    expect(subject).to validate_presence_of :amount
   end
 
   it 'should not validate presence of amount if kind is average' do
     subject.stub(:divide?).and_return(false)
-    subject.should_not validate_presence_of :amount
+    expect(subject).not_to validate_presence_of :amount
   end
 
   it 'should calculate reserved value' do
-    subject.reserved_value.should eq 0
+    expect(subject.reserved_value).to eq 0
 
     fund1 = double(:value => 3200)
     fund2 = double(:value => 2500)
     subject.stub(:reserve_funds).and_return([fund1, fund2])
 
-    subject.reserved_value.should eq 5700
+    expect(subject.reserved_value).to eq 5700
   end
 
   context '#real_amount' do
     it 'should calculate the right real value when the amount is not nil' do
       subject.stub(:amount => 400.0, :reserved_value => 200.0)
-      subject.real_amount.should eq(200.0)
+      expect(subject.real_amount).to eq(200.0)
     end
 
     it 'should calculate the right real value when the amount is nil' do
       subject.stub(:amount => nil, :reserved_value => 200.0)
-      subject.real_amount.should eq(-200.0)
+      expect(subject.real_amount).to eq(-200.0)
     end
   end
 
@@ -112,25 +112,25 @@ describe BudgetAllocation do
     it "should return funtion value if has not a subfunction" do
       subject.function = 'Function'
 
-      subject.function.should eq 'Function'
+      expect(subject.function).to eq 'Function'
     end
 
     it "should return subfunction.function value if has a subfunction" do
       subject.stub(:subfunction => subfunction)
 
-      subject.function.should eq 'Subfunction-Function'
+      expect(subject.function).to eq 'Subfunction-Function'
     end
 
     it "should return funtion_id value if has not a subfunction" do
       subject.function_id = 1
 
-      subject.function_id.should eq 1
+      expect(subject.function_id).to eq 1
     end
 
     it "should return subfunction.function_id value if has a subfunction" do
       subject.stub(:subfunction => subfunction)
 
-      subject.function_id.should eq 2
+      expect(subject.function_id).to eq 2
     end
   end
 end

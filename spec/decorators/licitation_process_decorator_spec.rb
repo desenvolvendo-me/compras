@@ -14,7 +14,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should be nil' do
-        subject.envelope_delivery_time.should be_nil
+        expect(subject.envelope_delivery_time).to be_nil
       end
     end
 
@@ -24,7 +24,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should localize envelope_delivery_time' do
-        subject.envelope_delivery_time.should eq '10:00'
+        expect(subject.envelope_delivery_time).to eq '10:00'
       end
     end
   end
@@ -36,7 +36,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should be nil' do
-        subject.envelope_opening_time.should be_nil
+        expect(subject.envelope_opening_time).to be_nil
       end
     end
 
@@ -46,7 +46,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should return localized opening_delivery_time' do
-        subject.envelope_opening_time.should eq '10:00'
+        expect(subject.envelope_opening_time).to eq '10:00'
       end
     end
   end
@@ -62,7 +62,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should return a url to administrative process when has parent' do
-        subject.parent_url(parent).should eq 'link'
+        expect(subject.parent_url(parent)).to eq 'link'
       end
     end
 
@@ -72,7 +72,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should return a url to licitation processes when has not parent' do
-        subject.parent_url(nil).should eq 'link'
+        expect(subject.parent_url(nil)).to eq 'link'
       end
     end
   end
@@ -84,7 +84,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should be nil' do
-        subject.winner_proposal_total_price.should be_nil
+        expect(subject.winner_proposal_total_price).to be_nil
       end
     end
 
@@ -94,7 +94,7 @@ describe LicitationProcessDecorator do
       end
 
       it 'should applies currency' do
-        subject.winner_proposal_total_price.should eq 'R$ 9,99'
+        expect(subject.winner_proposal_total_price).to eq 'R$ 9,99'
       end
     end
   end

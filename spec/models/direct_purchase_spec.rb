@@ -13,7 +13,7 @@ describe DirectPurchase do
     subject.direct_purchase = 1
     subject.year = 2012
 
-    subject.to_s.should eq '1/2012'
+    expect(subject.to_s).to eq '1/2012'
   end
 
   it { should belong_to :legal_reference }
@@ -29,7 +29,7 @@ describe DirectPurchase do
   it { should validate_duplication_of(:budget_allocation_id).on(:direct_purchase_budget_allocations) }
 
   it 'should return 0 for licitation_exemption when no licitation object' do
-    subject.licitation_exemption.should eq 0
+    expect(subject.licitation_exemption).to eq 0
   end
 
   it 'should propagate licitation_exemption method to licitation object passing modality' do
@@ -43,19 +43,19 @@ describe DirectPurchase do
   end
 
   it 'should delegate purchase_licitation_exemption to licitation object' do
-    subject.licitation_object_purchase_licitation_exemption.should eq nil
+    expect(subject.licitation_object_purchase_licitation_exemption).to eq nil
 
     subject.stub(:licitation_object).and_return(double(:purchase_licitation_exemption => 300.0))
 
-    subject.licitation_object_purchase_licitation_exemption.should eq 300.0
+    expect(subject.licitation_object_purchase_licitation_exemption).to eq 300.0
   end
 
   it 'should delegate build_licitation_exemption to licitation object' do
-    subject.licitation_object_build_licitation_exemption.should eq nil
+    expect(subject.licitation_object_build_licitation_exemption).to eq nil
 
     subject.stub(:licitation_object).and_return(double(:build_licitation_exemption => 200.0))
 
-    subject.licitation_object_build_licitation_exemption.should eq 200.0
+    expect(subject.licitation_object_build_licitation_exemption).to eq 200.0
   end
 
   context "validations" do
@@ -96,21 +96,21 @@ describe DirectPurchase do
     context '#authorized?' do
       it 'should return true when associated with supply_authorization' do
         subject.stub(:supply_authorization).and_return(double)
-        subject.should be_authorized
+        expect(subject).to be_authorized
       end
 
       it 'should return false when not associated with supply_authorization' do
         subject.stub(:supply_authorization).and_return(nil)
-        subject.should_not be_authorized
+        expect(subject).not_to be_authorized
       end
     end
 
     it 'should have at least one budget allocation' do
-      subject.direct_purchase_budget_allocations.should be_empty
+      expect(subject.direct_purchase_budget_allocations).to be_empty
 
       subject.valid?
 
-      subject.errors[:direct_purchase_budget_allocations].should include 'é necessário cadastrar pelo menos uma dotação'
+      expect(subject.errors[:direct_purchase_budget_allocations]).to include 'é necessário cadastrar pelo menos uma dotação'
     end
 
     it 'should have error when limit verificator returns false' do
@@ -122,7 +122,7 @@ describe DirectPurchase do
 
       subject.valid?
 
-      subject.errors[:total_allocations_items_value].should include "está acima do valor acumulado para este objeto (objeto de licitacao), está acima do limite permitido (5)"
+      expect(subject.errors[:total_allocations_items_value]).to include "está acima do valor acumulado para este objeto (objeto de licitacao), está acima do limite permitido (5)"
     end
 
     it 'should not have error when limit verificator returns true' do
@@ -133,7 +133,7 @@ describe DirectPurchase do
 
       subject.valid?
 
-      subject.errors[:total_allocations_items_value].should_not include 'está acima do valor disponível no limite em vigor para esta modalidade'
+      expect(subject.errors[:total_allocations_items_value]).to_not include 'está acima do valor disponível no limite em vigor para esta modalidade'
     end
   end
 
@@ -144,7 +144,7 @@ describe DirectPurchase do
       end
 
       it 'should be 5' do
-        subject.next_purchase.should eq 5
+        expect(subject.next_purchase).to eq 5
       end
     end
   end

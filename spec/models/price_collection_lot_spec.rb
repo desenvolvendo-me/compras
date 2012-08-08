@@ -13,11 +13,11 @@ describe PriceCollectionLot do
   it { should validate_duplication_of(:material_id).on(:items) }
 
   it 'should have at least one item' do
-    subject.items.should be_empty
+    expect(subject.items).to be_empty
 
     subject.valid?
 
-    subject.errors[:items].should include 'é necessário cadastrar pelo menos um item'
+    expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
   end
 
   it 'should have at least one item without considering the marked for destruction ones' do
@@ -27,6 +27,6 @@ describe PriceCollectionLot do
 
     subject.valid?
 
-    subject.errors[:items].should include 'é necessário cadastrar pelo menos um item'
+    expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
   end
 end

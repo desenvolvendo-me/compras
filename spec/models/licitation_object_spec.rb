@@ -7,7 +7,7 @@ describe LicitationObject do
   it 'should return description as to_s method' do
     subject.description = 'Objeto'
 
-    subject.to_s.should eq 'Objeto'
+    expect(subject.to_s).to eq 'Objeto'
   end
 
   it { should validate_presence_of :description }

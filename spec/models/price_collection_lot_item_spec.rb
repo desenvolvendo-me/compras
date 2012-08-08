@@ -15,7 +15,7 @@ describe PriceCollectionLotItem do
   it { should validate_numericality_of :quantity }
 
   it 'should not have quantity less than 1' do
-    subject.should_not allow_value(0).for(:quantity).
+    expect(subject).not_to allow_value(0).for(:quantity).
                                       with_message("deve ser maior ou igual a 1")
   end
 
@@ -37,24 +37,24 @@ describe PriceCollectionLotItem do
     end
 
     it 'should return unit price by proposal' do
-      subject.unit_price_by_proposal(proposal).should eq 10
+      expect(subject.unit_price_by_proposal(proposal)).to eq 10
     end
 
     it 'should return total value by proposal' do
       subject.quantity = 4
-      subject.total_value_by_proposal(proposal).should eq 40
+      expect(subject.total_value_by_proposal(proposal)).to eq 40
     end
 
     it 'should return zero when unit price equals nil' do
       price_collection_proposal_item.stub(:unit_price => nil)
       subject.quantity = 3
 
-      subject.total_value_by_proposal(proposal).should eq 0
+      expect(subject.total_value_by_proposal(proposal)).to eq 0
     end
   end
 
   it 'should return 0 as the quantity default value' do
-    subject.quantity.should eq 0
+    expect(subject.quantity).to eq 0
   end
 
   it 'should return the current value for quantity if not use default value' do

@@ -6,7 +6,7 @@ describe ManagementUnit do
   it "should return the description as to_s method" do
     subject.description = "Central Unit"
 
-    subject.to_s.should eq "Central Unit"
+    expect(subject.to_s).to eq "Central Unit"
   end
 
   it { should validate_presence_of(:descriptor) }

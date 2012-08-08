@@ -8,6 +8,6 @@ describe MacroObjective do
   it "should return specification as to_s" do
     subject.specification = 'Desenvolvimento econômico'
 
-    subject.to_s.should eq 'Desenvolvimento econômico'
+    expect(subject.to_s).to eq 'Desenvolvimento econômico'
   end
 end

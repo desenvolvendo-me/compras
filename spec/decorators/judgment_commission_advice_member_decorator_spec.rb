@@ -10,7 +10,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return mustache variable' do
-        subject.licitation_commission_member_id_or_mustache_variable.should eq "{{licitation_commission_member_id}}"
+        expect(subject.licitation_commission_member_id_or_mustache_variable).to eq "{{licitation_commission_member_id}}"
       end
     end
 
@@ -20,7 +20,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return licitation_commission_member_id' do
-        subject.licitation_commission_member_id_or_mustache_variable.should eq 1
+        expect(subject.licitation_commission_member_id_or_mustache_variable).to eq 1
       end
     end
   end
@@ -32,7 +32,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return mustache variable' do
-        subject.registration_or_mustache_variable.should eq "{{registration}}"
+        expect(subject.registration_or_mustache_variable).to eq "{{registration}}"
       end
     end
 
@@ -42,7 +42,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return registration' do
-        subject.registration_or_mustache_variable.should eq "registration"
+        expect(subject.registration_or_mustache_variable).to eq "registration"
       end
     end
   end
@@ -54,7 +54,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return mustache variable' do
-        subject.individual_name_or_mustache_variable.should eq "{{individual_name}}"
+        expect(subject.individual_name_or_mustache_variable).to eq "{{individual_name}}"
       end
     end
 
@@ -64,7 +64,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return individual name' do
-        subject.individual_name_or_mustache_variable.should eq "name"
+        expect(subject.individual_name_or_mustache_variable).to eq "name"
       end
     end
   end
@@ -76,7 +76,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return cpf' do
-        subject.cpf_or_mustache_variable.should eq "{{cpf}}"
+        expect(subject.cpf_or_mustache_variable).to eq "{{cpf}}"
       end
     end
 
@@ -86,7 +86,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return cpf' do
-        subject.cpf_or_mustache_variable.should eq "cpf"
+        expect(subject.cpf_or_mustache_variable).to eq "cpf"
       end
     end
   end
@@ -98,7 +98,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return mustache variable' do
-        subject.role_humanize_or_mustache_variable.should eq "{{role_humanize}}"
+        expect(subject.role_humanize_or_mustache_variable).to eq "{{role_humanize}}"
       end
     end
 
@@ -108,7 +108,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return licitation_commission_member_role_humanize' do
-        subject.role_humanize_or_mustache_variable.should eq "role humanize"
+        expect(subject.role_humanize_or_mustache_variable).to eq "role humanize"
       end
     end
   end
@@ -120,7 +120,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return mustache variable' do
-        subject.role_nature_humanize_or_mustache_variable.should eq "{{role_nature_humanize}}"
+        expect(subject.role_nature_humanize_or_mustache_variable).to eq "{{role_nature_humanize}}"
       end
     end
 
@@ -130,7 +130,7 @@ describe JudgmentCommissionAdviceMemberDecorator do
       end
 
       it 'should return licitation_commission_member_role_nature_humanize' do
-        subject.role_nature_humanize_or_mustache_variable.should eq "role_nature_humanize"
+        expect(subject.role_nature_humanize_or_mustache_variable).to eq "role_nature_humanize"
       end
     end
   end

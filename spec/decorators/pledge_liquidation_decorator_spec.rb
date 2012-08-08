@@ -13,7 +13,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.emission_date.should be_nil
+        expect(subject.emission_date).to be_nil
       end
     end
 
@@ -23,7 +23,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should localize' do
-        subject.emission_date.should eq '01/12/2012'
+        expect(subject.emission_date).to eq '01/12/2012'
       end
     end
   end
@@ -35,7 +35,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.expiration_date.should be_nil
+        expect(subject.expiration_date).to be_nil
       end
     end
 
@@ -45,7 +45,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should localize' do
-        subject.expiration_date.should eq '01/12/2012'
+        expect(subject.expiration_date).to eq '01/12/2012'
       end
     end
   end
@@ -57,7 +57,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.balance.should be_nil
+        expect(subject.balance).to be_nil
       end
     end
 
@@ -67,7 +67,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should applies precision' do
-        subject.balance.should eq '9,99'
+        expect(subject.balance).to eq '9,99'
       end
     end
   end
@@ -79,7 +79,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.pledge_value.should be_nil
+        expect(subject.pledge_value).to be_nil
       end
     end
 
@@ -89,7 +89,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should applies currency' do
-        subject.pledge_value.should eq 'R$ 10,00'
+        expect(subject.pledge_value).to eq 'R$ 10,00'
       end
     end
   end
@@ -101,7 +101,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.pledge_balance.should be_nil
+        expect(subject.pledge_balance).to be_nil
       end
     end
 
@@ -111,7 +111,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should applies currency' do
-        subject.pledge_balance.should eq 'R$ 100,00'
+        expect(subject.pledge_balance).to eq 'R$ 100,00'
       end
     end
   end
@@ -123,7 +123,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.pledge_liquidations_sum.should be_nil
+        expect(subject.pledge_liquidations_sum).to be_nil
       end
     end
 
@@ -133,7 +133,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should applies currency' do
-        subject.pledge_liquidations_sum.should eq 'R$ 100,00'
+        expect(subject.pledge_liquidations_sum).to eq 'R$ 100,00'
       end
     end
   end
@@ -145,7 +145,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.pledge_cancellations_sum.should be_nil
+        expect(subject.pledge_cancellations_sum).to be_nil
       end
     end
 
@@ -155,7 +155,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should applies currency' do
-        subject.pledge_cancellations_sum.should eq 'R$ 100,00'
+        expect(subject.pledge_cancellations_sum).to eq 'R$ 100,00'
       end
     end
   end
@@ -167,7 +167,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.parcels_sum.should be_nil
+        expect(subject.parcels_sum).to be_nil
       end
     end
 
@@ -177,7 +177,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should applies precision' do
-        subject.parcels_sum.should eq '10,00'
+        expect(subject.parcels_sum).to eq '10,00'
       end
     end
   end
@@ -189,7 +189,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should be nil' do
-        subject.value.should be_nil
+        expect(subject.value).to be_nil
       end
     end
 
@@ -199,7 +199,7 @@ describe PledgeLiquidationDecorator do
       end
 
       it 'should applies precision' do
-        subject.value.should eq 'R$ 100,00'
+        expect(subject.value).to eq 'R$ 100,00'
       end
     end
   end

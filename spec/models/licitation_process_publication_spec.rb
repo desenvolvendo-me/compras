@@ -14,6 +14,6 @@ describe LicitationProcessPublication do
   it "should return name as to_s" do
     subject.name = 'Jornal'
 
-    subject.to_s.should eq 'Jornal'
+    expect(subject.to_s).to eq 'Jornal'
   end
 end

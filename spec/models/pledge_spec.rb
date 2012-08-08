@@ -40,7 +40,7 @@ describe Pledge do
     subject.value = 21
     subject.stub(:pledge_cancellations_sum).and_return(2)
     subject.stub(:pledge_liquidations_sum).and_return(1)
-    subject.balance.should eq 18
+    expect(subject.balance).to eq 18
   end
 
   it 'validate value based on budeget_allocation_real_amount' do
@@ -55,7 +55,7 @@ describe Pledge do
     subject.code = 1
     subject.stub(:descriptor => double(:entity => 'Detran', :year => 2012))
 
-    subject.to_s.should eq '1 - Detran/2012'
+    expect(subject.to_s).to eq '1 - Detran/2012'
   end
 
   context 'validate emission_date related with today' do
@@ -64,7 +64,7 @@ describe Pledge do
     it { should allow_value(Date.tomorrow).for(:emission_date) }
 
     it 'should not allow emission_date before today' do
-      subject.should_not allow_value(Date.yesterday).for(:emission_date).
+      expect(subject).not_to allow_value(Date.yesterday).for(:emission_date).
                                                     with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
     end
   end
@@ -76,14 +76,14 @@ describe Pledge do
               double(:estimated_total_price => 200)
             ])
 
-    subject.items_total_value.should eq(300)
+    expect(subject.items_total_value).to eq(300)
   end
 
   it "should not have error when the value is equal to items total value" do
     subject.stub(:value => 100, :items_total_value => 100)
     subject.valid?
 
-    subject.errors.messages[:items_total_value].should be_nil
+    expect(subject.errors.messages[:items_total_value]).to be_nil
   end
 
   it "should have error when the value is less than items total value" do
@@ -91,6 +91,6 @@ describe Pledge do
     subject.stub(:items_total_value).and_return(201.0)
     subject.valid?
 
-    subject.errors.messages[:items_total_value].should include "não pode ser superior ao valor do empenho (R$ 201,00)"
+    expect(subject.errors.messages[:items_total_value]).to include "não pode ser superior ao valor do empenho (R$ 201,00)"
   end
 end

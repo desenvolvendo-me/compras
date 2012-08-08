@@ -6,7 +6,7 @@ require 'app/models/licitation_process_bidder_proposal'
 describe LicitationProcessRatification do
   it 'should return sequence as to_s' do
     subject.stub(:sequence => 1)
-    subject.to_s.should eq '1'
+    expect(subject.to_s).to eq '1'
   end
 
   it { should belong_to :licitation_process }
@@ -41,7 +41,7 @@ describe LicitationProcessRatification do
 
       subject.valid?
 
-      subject.errors[:licitation_process_bidder].should be_empty
+      expect(subject.errors[:licitation_process_bidder]).to be_empty
     end
 
     it 'should be invalid' do
@@ -49,7 +49,7 @@ describe LicitationProcessRatification do
 
       subject.valid?
 
-      subject.errors[:licitation_process_bidder].should include "deve pertencer ao processo licitatório 1/2012"
+      expect(subject.errors[:licitation_process_bidder]).to include "deve pertencer ao processo licitatório 1/2012"
     end
   end
 end

@@ -6,7 +6,7 @@ require 'app/models/budget_allocation'
 describe GovernmentProgram do
   it 'should return description' do
     subject.description = 'Habitação'
-    subject.to_s.should eq 'Habitação'
+    expect(subject.to_s).to eq 'Habitação'
   end
 
   it { should belong_to :descriptor }

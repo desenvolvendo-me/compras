@@ -17,7 +17,7 @@ require 'app/models/contract_termination'
 describe Contract do
   describe 'default values' do
     it 'uses false as default for subcontracting' do
-      subject.subcontracting.should be false
+      expect(subject.subcontracting).to be false
     end
   end
 
@@ -37,7 +37,7 @@ describe Contract do
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'
-    subject.to_s.should eq '001'
+    expect(subject.to_s).to eq '001'
   end
 
   it { should have_many(:pledges).dependent(:restrict) }
@@ -67,13 +67,13 @@ describe Contract do
     it 'should be required when the kind is amendment' do
       subject.stub(:amendment?).and_return true
 
-      subject.should validate_presence_of :parent
+      expect(subject).to validate_presence_of :parent
     end
 
     it 'should not be required when the kind is not amendment' do
       subject.stub(:amendment?).and_return false
 
-      subject.should_not validate_presence_of :parent
+      expect(subject).not_to validate_presence_of :parent
     end
   end
 
@@ -83,16 +83,16 @@ describe Contract do
     end
 
     it 'be valid when the end_date is after signature_date' do
-      subject.should allow_value(Date.new(2012, 2, 10)).for(:end_date)
+      expect(subject).to allow_value(Date.new(2012, 2, 10)).for(:end_date)
     end
 
     it 'be invalid when the signature_date is after end_date' do
-      subject.should_not allow_value(Date.new(2012, 1, 1)).for(:end_date).
+      expect(subject).not_to allow_value(Date.new(2012, 1, 1)).for(:end_date).
                                                            with_message('deve ser depois da data de assinatura (01/02/2012)')
     end
 
     it 'be invalid when the end_date is equal to signature' do
-      subject.should_not allow_value(Date.new(2012, 2, 1)).for(:end_date).
+      expect(subject).not_to allow_value(Date.new(2012, 2, 1)).for(:end_date).
                                                            with_message('deve ser depois da data de assinatura (01/02/2012)')
     end
   end
@@ -109,25 +109,25 @@ describe Contract do
     it 'only licitation process must be valid' do
       subject.stub(:licitation_process => licitation_process)
       subject.valid?
-      subject.errors[:licitation_process].should be_empty
+      expect(subject.errors[:licitation_process]).to be_empty
     end
 
     it 'only direct purchase must be valid' do
       subject.stub(:direct_purchase => direct_purchase)
       subject.valid?
-      subject.errors[:licitation_process].should be_empty
+      expect(subject.errors[:licitation_process]).to be_empty
     end
 
     it 'no licitation_process and no direct_purchase must be invalid' do
       subject.valid?
-      subject.errors[:licitation_process].should eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
+      expect(subject.errors[:licitation_process]).to eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
     end
 
     it 'both must be invalid' do
       subject.stub(:direct_purchase => direct_purchase)
       subject.stub(:licitation_process => licitation_process)
       subject.valid?
-      subject.errors[:licitation_process].should eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
+      expect(subject.errors[:licitation_process]).to eq ["selecione um processo licitário ou uma compra direta, mas não ambos"]
     end
   end
 
@@ -142,7 +142,7 @@ describe Contract do
       end
 
       it 'should return the licitation process modality' do
-        subject.modality_humanize.should eq 'xpto'
+        expect(subject.modality_humanize).to eq 'xpto'
       end
     end
 
@@ -156,7 +156,7 @@ describe Contract do
       end
 
       it 'should return the direct purchase modality' do
-        subject.modality_humanize.should eq 'xxto'
+        expect(subject.modality_humanize).to eq 'xxto'
       end
     end
   end
@@ -174,20 +174,20 @@ describe Contract do
       subject.stub(:pledges => [pledge_1])
       subject.stub(:founded_debt_pledges => [pledge_2])
 
-      subject.all_pledges.size.should eq 2
+      expect(subject.all_pledges.size).to eq 2
     end
 
     it 'should return pledges as a uniq list' do
       subject.stub(:pledges => [pledge_1])
       subject.stub(:founded_debt_pledges => [pledge_1])
 
-      subject.all_pledges.size.should eq 1
+      expect(subject.all_pledges.size).to eq 1
     end
 
     it 'should return pledges total value with founded debt pledges on all_pledges_total_value' do
       subject.stub(:all_pledges => [double(:value => 100), double(:value => 50)])
 
-      subject.all_pledges_total_value.should eq 150
+      expect(subject.all_pledges_total_value).to eq 150
     end
   end
 end

@@ -12,7 +12,7 @@ describe UsersController do
 
       get :edit, user.attributes
 
-      response.should be_success
+      expect(response).to be_success
     end
 
     it 'when the user does not have Employee as authenticable type should not be editable' do
@@ -49,7 +49,7 @@ describe UsersController do
 
       delete :destroy, user.attributes
 
-      response.should redirect_to(users_path)
+      expect(response).to redirect_to(users_path)
     end
 
     it 'when the user does no have Employee as authenticable type should not be destroyed' do
@@ -67,7 +67,7 @@ describe UsersController do
 
       put :update, user.attributes
 
-      response.should redirect_to(users_path)
+      expect(response).to redirect_to(users_path)
     end
 
     it 'when the user does not have Employee as authenticable type should not be editable' do

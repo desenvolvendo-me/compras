@@ -5,7 +5,7 @@ require 'app/models/identity'
 describe Identity do
   it 'return number when converted to string' do
     subject.number = 'MG16236013'
-    subject.number.should eq subject.to_s
+    expect(subject.number).to eq subject.to_s
   end
 
   it { should belong_to :individual }

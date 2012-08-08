@@ -51,7 +51,7 @@ describe PurchaseSolicitationLiberationsController do
     end
 
     it 'should redirect to index' do
-      response.should redirect_to purchase_solicitation_liberations_path(:purchase_solicitation_id => purchase_solicitation.id)
+      expect(response).to redirect_to purchase_solicitation_liberations_path(:purchase_solicitation_id => purchase_solicitation.id)
     end
   end
 
@@ -60,6 +60,6 @@ describe PurchaseSolicitationLiberationsController do
 
     get :new, :purchase_solicitation_id => purchase_solicitation.id
 
-    response.code.should eq '401'
+    expect(response.code).to eq '401'
   end
 end

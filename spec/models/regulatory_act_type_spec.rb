@@ -5,7 +5,7 @@ require 'app/models/regulatory_act'
 describe RegulatoryActType do
   it 'should return description as to_s method' do
     subject.description = 'Lei'
-    subject.to_s.should eq 'Lei'
+    expect(subject.to_s).to eq 'Lei'
   end
 
   it { should have_many(:regulatory_acts).dependent(:restrict) }

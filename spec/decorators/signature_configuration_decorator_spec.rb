@@ -20,7 +20,7 @@ describe SignatureConfigurationDecorator do
       end
 
       it 'should return all keys' do
-        subject.availables(signature_report_enumeration).should eq [
+        expect(subject.availables(signature_report_enumeration)).to eq [
           ['Autorizações de Fornecimento', 'supply_authorizations'],
           ['Processos Administrativos', 'administrative_processes']
         ]
@@ -41,7 +41,7 @@ describe SignatureConfigurationDecorator do
       end
 
       it 'should return all keys plus current' do
-        subject.availables(signature_report_enumeration).should eq [
+        expect(subject.availables(signature_report_enumeration)).to eq [
           ['Processos Administrativos', 'administrative_processes'],
           ['Autorizações de Fornecimento', 'supply_authorizations']
         ]

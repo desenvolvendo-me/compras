@@ -6,12 +6,12 @@ require 'app/models/bank_account'
 describe Agency do
   it "return the name when call to_s" do
     subject.name = "Agência Santander"
-    subject.to_s.should eq 'Agência Santander'
+    expect(subject.to_s).to eq 'Agência Santander'
   end
 
   it "should not validate presence of email" do
     subject.valid?
-    subject.errors[:email].should be_empty
+    expect(subject.errors[:email]).to be_empty
   end
 
   it { should belong_to :bank }

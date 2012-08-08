@@ -14,7 +14,7 @@ describe RegistrationCadastralCertificatesController do
       it 'should redirect to registration_cadastral_certificates_path with creditor_id as param' do
         post :create, :registration_cadastral_certificate => { :creditor_id => creditor.id }
 
-        response.redirect_url.should eq registration_cadastral_certificates_path(:creditor_id => creditor.id)
+        expect(response.redirect_url).to eq registration_cadastral_certificates_path(:creditor_id => creditor.id)
       end
     end
 
@@ -24,7 +24,7 @@ describe RegistrationCadastralCertificatesController do
 
         put :update, :id => crc.id
 
-        response.should redirect_to(registration_cadastral_certificates_path(:creditor_id => creditor.id))
+        expect(response).to redirect_to(registration_cadastral_certificates_path(:creditor_id => creditor.id))
       end
     end
 
@@ -34,7 +34,7 @@ describe RegistrationCadastralCertificatesController do
 
         delete :destroy, :id => crc.id
 
-        response.should redirect_to(registration_cadastral_certificates_path(:creditor_id => creditor.id))
+        expect(response).to redirect_to(registration_cadastral_certificates_path(:creditor_id => creditor.id))
       end
     end
   end
@@ -43,7 +43,7 @@ describe RegistrationCadastralCertificatesController do
     it 'should render report layout' do
       get :show, :id => 1
 
-      response.should render_template("layouts/report")
+      expect(response).to render_template("layouts/report")
     end
   end
 end

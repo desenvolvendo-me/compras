@@ -11,11 +11,11 @@ describe Link do
     people = mock('link', :to_s => 'Pessoas')
 
     described_class.should_receive(:all).and_return([users, people])
-    described_class.ordered.should eq [people, users]
+    expect(described_class.ordered).to eq [people, users]
   end
 
   it 'convert to string using controller name' do
     subject.controller_name = 'users'
-    subject.to_s.should eq 'Usuários'
+    expect(subject.to_s).to eq 'Usuários'
   end
 end

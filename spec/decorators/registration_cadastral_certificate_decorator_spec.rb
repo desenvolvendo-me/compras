@@ -10,7 +10,7 @@ describe RegistrationCadastralCertificateDecorator do
       end
 
       it 'should be empty when count_crc is 0' do
-        subject.number.should be_empty
+        expect(subject.number).to be_empty
       end
     end
 
@@ -20,7 +20,7 @@ describe RegistrationCadastralCertificateDecorator do
       end
 
       it 'should be nil' do
-        subject.number.should be_nil
+        expect(subject.number).to be_nil
       end
     end
 
@@ -30,7 +30,7 @@ describe RegistrationCadastralCertificateDecorator do
       end
 
       it 'should return count_crc' do
-        subject.number.should eq 3
+        expect(subject.number).to eq 3
       end
     end
   end
@@ -42,7 +42,7 @@ describe RegistrationCadastralCertificateDecorator do
       end
 
       it 'should return empty array' do
-        subject.signatures_grouped.should be_empty
+        expect(subject.signatures_grouped).to be_empty
       end
     end
 
@@ -86,7 +86,7 @@ describe RegistrationCadastralCertificateDecorator do
       end
 
       it "should group signatures" do
-        subject.signatures_grouped.should eq [
+        expect(subject.signatures_grouped).to eq [
           [
             signature_configuration_item1,
             signature_configuration_item2,

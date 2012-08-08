@@ -10,39 +10,39 @@ describe JudgmentCommissionAdviceMember do
   it "should not validate attributes when is inherited" do
     subject.stub(:inherited?).and_return(true)
 
-    subject.should_not validate_presence_of :individual
-    subject.should_not validate_presence_of :role
-    subject.should_not validate_presence_of :role_nature
-    subject.should_not validate_presence_of :registration
+    expect(subject).not_to validate_presence_of :individual
+    expect(subject).not_to validate_presence_of :role
+    expect(subject).not_to validate_presence_of :role_nature
+    expect(subject).not_to validate_presence_of :registration
   end
 
   it "should validate attributes when is not inherited" do
     subject.stub(:inherited?).and_return(false)
 
-    subject.should validate_presence_of :individual
-    subject.should validate_presence_of :role
-    subject.should validate_presence_of :role_nature
-    subject.should validate_presence_of :registration
+    expect(subject).to validate_presence_of :individual
+    expect(subject).to validate_presence_of :role
+    expect(subject).to validate_presence_of :role_nature
+    expect(subject).to validate_presence_of :registration
   end
 
   it "should verify if is inherited" do
     subject.stub(:licitation_commission_member).and_return(nil)
 
-    subject.inherited?.should be_false
+    expect(subject.inherited?).to be_false
 
     subject.stub(:licitation_commission_member).and_return(double)
 
-    subject.inherited?.should be_true
+    expect(subject.inherited?).to be_true
   end
 
   it "should return the correct individual id depending on presence of licitation_commission_member" do
     subject.stub(:individual_id).and_return(3)
     subject.stub(:licitation_commission_member).and_return(nil)
 
-    subject.individual_identification.should eq 3
+    expect(subject.individual_identification).to eq 3
 
     subject.stub(:licitation_commission_member).and_return(double(:individual_id => 5))
 
-    subject.individual_identification.should eq 5
+    expect(subject.individual_identification).to eq 5
   end
 end

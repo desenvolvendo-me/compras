@@ -44,7 +44,7 @@ describe ContractTerminationsController do
     end
 
     it 'should redirect to the index path passing the contract_id' do
-      response.should redirect_to(contract_terminations_path(:contract_id => contract.id))
+      expect(response).to redirect_to(contract_terminations_path(:contract_id => contract.id))
     end
   end
 
@@ -62,7 +62,7 @@ describe ContractTerminationsController do
     end
 
     it 'should redirect to the index path passing the contract_id' do
-      response.should redirect_to(contract_terminations_path(:contract_id => contract.id))
+      expect(response).to redirect_to(contract_terminations_path(:contract_id => contract.id))
     end
   end
 end

@@ -5,7 +5,7 @@ describe BudgetRevenue do
   it 'should return code as to_s' do
     subject.code = '150'
     subject.stub(:year).and_return(2012)
-    subject.to_s.should eq '150/2012'
+    expect(subject.to_s).to eq '150/2012'
   end
 
   it { should belong_to :descriptor }
@@ -21,11 +21,11 @@ describe BudgetRevenue do
 
   it 'should validate presence of value if kind is average' do
     subject.stub(:divide?).and_return(true)
-    subject.should validate_presence_of :value
+    expect(subject).to validate_presence_of :value
   end
 
   it 'should not validate presence of value if kind is average' do
     subject.stub(:divide?).and_return(false)
-    subject.should_not validate_presence_of :value
+    expect(subject).not_to validate_presence_of :value
   end
 end

@@ -11,11 +11,11 @@ describe PledgeItem do
   it { should validate_presence_of :unit_price }
 
   it "should calculate the estimated_total_price" do
-    subject.estimated_total_price.should eq(0)
+    expect(subject.estimated_total_price).to eq(0)
 
     subject.quantity = 10
     subject.unit_price = 50
 
-    subject.estimated_total_price.should eq(500)
+    expect(subject.estimated_total_price).to eq(500)
   end
 end

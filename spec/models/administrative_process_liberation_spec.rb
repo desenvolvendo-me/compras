@@ -22,7 +22,7 @@ describe AdministrativeProcessLiberation do
       subject.stub(:employee => employee)
       subject.date = Date.new(2012, 06, 10)
 
-      subject.to_s.should eq 'João - 10/06/2012'
+      expect(subject.to_s).to eq 'João - 10/06/2012'
     end
   end
 end

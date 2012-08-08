@@ -42,7 +42,7 @@ describe LicitationProcessProposalsClassificatorByLot do
     end
 
     it "it should return the winner proposal for lowest_price_by_lot not considering zero" do
-      subject.winner_proposals.should eq bidder_2
+      expect(subject.winner_proposals).to eq bidder_2
     end
   end
 
@@ -56,7 +56,7 @@ describe LicitationProcessProposalsClassificatorByLot do
     end
 
     it "it should return the 4 classified proposals as winners not considering zero" do
-      subject.winner_proposals.should eq [bidder_2, bidder_1, bidder_3, bidder_4]
+      expect(subject.winner_proposals).to eq [bidder_2, bidder_1, bidder_3, bidder_4]
     end
   end
 
@@ -70,7 +70,7 @@ describe LicitationProcessProposalsClassificatorByLot do
     end
 
     it "it should return the tree best proposals as winners not considering zero" do
-      subject.winner_proposals.should eq [bidder_5, bidder_2, bidder_1]
+      expect(subject.winner_proposals).to eq [bidder_5, bidder_2, bidder_1]
     end
   end
 
@@ -84,7 +84,7 @@ describe LicitationProcessProposalsClassificatorByLot do
     end
 
     it "it should return the winner proposal for highest_bidder_by_lot not considering" do
-      subject.winner_proposals.should eq bidder_4
+      expect(subject.winner_proposals).to eq bidder_4
     end
   end
 end

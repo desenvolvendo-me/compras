@@ -18,7 +18,7 @@ describe Descriptor do
   it 'should return year and entity as to_s' do
     subject.year = 2012
     subject.stub(:entity).and_return(double(:to_s => 'Detran'))
-    subject.to_s.should eq '2012 - Detran'
+    expect(subject.to_s).to eq '2012 - Detran'
   end
 
   it { should belong_to :entity }

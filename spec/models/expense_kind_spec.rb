@@ -7,7 +7,7 @@ describe ExpenseKind do
   it 'should return description as to_s method' do
     subject.description = 'Pagamentos'
 
-    subject.to_s.should eq 'Pagamentos'
+    expect(subject.to_s).to eq 'Pagamentos'
   end
 
   it { should validate_presence_of :description }

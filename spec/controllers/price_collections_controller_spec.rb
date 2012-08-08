@@ -107,8 +107,8 @@ describe PriceCollectionsController do
 
         put :update, :id => 1
 
-        response.code.should eq '401'
-        response.body.should =~ /Você não tem acesso a essa página/
+        expect(response.code).to eq '401'
+        expect(response.body).to match /Você não tem acesso a essa página/
       end
     end
   end

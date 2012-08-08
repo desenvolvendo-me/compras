@@ -6,7 +6,7 @@ require 'app/models/extra_credit_moviment_type'
 describe MovimentType do
   it 'should return name as to_s' do
     subject.name = 'Adicionar dotação'
-    subject.to_s.should eq 'Adicionar dotação'
+    expect(subject.to_s).to eq 'Adicionar dotação'
   end
 
   it { should validate_presence_of :name }

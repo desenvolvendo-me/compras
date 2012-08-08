@@ -17,7 +17,7 @@ describe ItbiCalculator do
     setting_repository.should_receive(:fetch).with(:rate_property_transfer).and_return("2")
     setting_repository.should_receive(:fetch).with(:rate_property_transfer_funded).and_return("0.5")
 
-    subject.call.should eql 2000.0
+    expect(subject.call).to eql 2000.0
   end
 
   it "should calculate the tax without amount financed" do
@@ -29,6 +29,6 @@ describe ItbiCalculator do
     setting_repository.should_receive(:fetch).with(:rate_property_transfer).and_return("2")
     setting_repository.should_receive(:fetch).with(:rate_property_transfer_funded).and_return("0.5")
 
-    subject.call.should eql 800.0
+    expect(subject.call).to eql 800.0
   end
 end

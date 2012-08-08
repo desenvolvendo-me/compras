@@ -6,7 +6,7 @@ require 'app/models/regulatory_act_type'
 describe RegulatoryActTypeClassification do
   it 'should return description as to_s method' do
     subject.description = 'Classification of Types'
-    subject.to_s.should eq 'Classification of Types'
+    expect(subject.to_s).to eq 'Classification of Types'
   end
 
   it { should validate_presence_of(:description) }

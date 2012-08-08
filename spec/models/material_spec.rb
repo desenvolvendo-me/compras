@@ -12,22 +12,22 @@ require 'app/models/purchase_solicitation_item_group_material'
 describe Material do
   describe 'default values' do
     it 'uses false as default for perishable' do
-      subject.perishable.should be false
+      expect(subject.perishable).to be false
     end
 
     it 'uses false as default for storable' do
-      subject.storable.should be false
+      expect(subject.storable).to be false
     end
 
     it 'uses false as default for combustible' do
-      subject.combustible.should be false
+      expect(subject.combustible).to be false
     end
   end
 
   it 'should return code and description as to_s method' do
     subject.code = '01'
     subject.description = 'Manga'
-    subject.to_s.should eq '01 - Manga'
+    expect(subject.to_s).to eq '01 - Manga'
   end
 
   it { should belong_to :expense_nature }
@@ -47,31 +47,31 @@ describe Material do
   it { should validate_presence_of :reference_unit }
 
   it "should validate presence of material_type only if material_characteristic is material" do
-    subject.should_not validate_presence_of(:material_type)
+    expect(subject).not_to validate_presence_of(:material_type)
 
     subject.material_characteristic = MaterialCharacteristic::MATERIAL
 
-    subject.should validate_presence_of(:material_type)
+    expect(subject).to validate_presence_of(:material_type)
   end
 
   it "should validate presence of service_or_contract_type only if material_characteristic is service" do
-    subject.should_not validate_presence_of(:service_or_contract_type)
+    expect(subject).not_to validate_presence_of(:service_or_contract_type)
 
     subject.material_characteristic = MaterialCharacteristic::SERVICE
 
-    subject.should validate_presence_of(:service_or_contract_type)
+    expect(subject).to validate_presence_of(:service_or_contract_type)
   end
 
   it "should have false as the default value of perishable" do
-    subject.perishable.should eq false
+    expect(subject.perishable).to eq false
   end
 
   it "should have false as the default value of storable" do
-    subject.storable.should eq false
+    expect(subject.storable).to eq false
   end
 
   it "should have false as the default value of combustible" do
-    subject.combustible.should eq false
+    expect(subject.combustible).to eq false
   end
 
   context "with licitation_object" do
@@ -84,13 +84,13 @@ describe Material do
 
       subject.run_callbacks(:destroy)
 
-      subject.errors[:base].should include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
+      expect(subject.errors[:base]).to include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
     end
   end
 
   it "should destroy if does not have licitation_processes" do
     subject.run_callbacks(:destroy)
 
-    subject.errors[:base].should_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
+    expect(subject.errors[:base]).to_not include "Este registro não pôde ser apagado pois há outros cadastros que dependem dele"
   end
 end

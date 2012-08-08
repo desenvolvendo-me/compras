@@ -7,7 +7,7 @@ describe RevenueSource do
   it 'should return code as to_s' do
     subject.code = 1
     subject.description = 'Imposto'
-    subject.to_s.should eq '1 - Imposto'
+    expect(subject.to_s).to eq '1 - Imposto'
   end
 
   it { should validate_presence_of :code }

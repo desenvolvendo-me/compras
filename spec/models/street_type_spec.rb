@@ -8,20 +8,20 @@ require 'app/models/street'
 describe StreetType do
   it 'return name when converted to string' do
     subject.name = 'Avenida'
-    subject.name.should eq subject.to_s
+    expect(subject.name).to eq subject.to_s
   end
 
   describe 'acronym' do
     it 'should be valid when size is equal to three' do
       subject.acronym = 'RUA'
-      subject.should be_invalid
-      subject.errors[:acronym].should be_empty
+      expect(subject).to be_invalid
+      expect(subject.errors[:acronym]).to be_empty
     end
 
     it "should validates the mask" do
       subject.acronym = '123'
-      subject.should be_invalid
-      subject.errors[:acronym].should include 'não é válido'
+      expect(subject).to be_invalid
+      expect(subject.errors[:acronym]).to include 'não é válido'
     end
   end
 

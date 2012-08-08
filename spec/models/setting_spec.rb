@@ -8,7 +8,7 @@ describe Setting do
   it 'fetch setting value' do
     Setting.should_receive(:find_by_key).with('default_city').and_return(double(:value => '1'))
 
-    Setting.fetch('default_city').should eq '1'
+    expect(Setting.fetch('default_city')).to eq '1'
   end
 
   it 'do not fetch value for inexistent setting' do
@@ -21,6 +21,6 @@ describe Setting do
     I18n.should_receive(:translate).with('default_city', :scope => :settings).and_return('Cidade')
 
     subject.key = 'default_city'
-    subject.to_s.should eq 'Cidade'
+    expect(subject.to_s).to eq 'Cidade'
   end
 end

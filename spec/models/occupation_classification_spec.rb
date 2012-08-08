@@ -7,7 +7,7 @@ describe OccupationClassification do
   it "return code and description when call to_s" do
     subject.code = '010315'
     subject.name = 'Praça da marinha'
-    subject.to_s.should eq "#{subject.code} - #{subject.name}"
+    expect(subject.to_s).to eq "#{subject.code} - #{subject.name}"
   end
 
   it { should have_many(:creditors).dependent(:restrict) }

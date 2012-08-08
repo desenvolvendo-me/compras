@@ -19,7 +19,7 @@ describe RegistrationCadastralCertificate do
     subject.fiscal_year = 2012
     subject.stub(:count_crc).and_return(1)
 
-    subject.to_s.should eq "1/2012"
+    expect(subject.to_s).to eq "1/2012"
   end
 
   context 'validate creditor' do
@@ -35,14 +35,14 @@ describe RegistrationCadastralCertificate do
       creditor.stub(:company?).and_return(false)
 
       subject.valid?
-      subject.errors[:creditor].should_not be_empty
+      expect(subject.errors[:creditor]).to_not be_empty
     end
 
     it 'should be valid with creditor that is company' do
       creditor.stub(:company?).and_return(true)
 
       subject.valid?
-      subject.errors[:creditor].should be_empty
+      expect(subject.errors[:creditor]).to be_empty
     end
   end
 
@@ -52,7 +52,7 @@ describe RegistrationCadastralCertificate do
     it { should allow_value(Date.yesterday).for(:registration_date) }
 
     it 'should not allow date after today' do
-      subject.should_not allow_value(Date.tomorrow).for(:registration_date).
+      expect(subject).not_to allow_value(Date.tomorrow).for(:registration_date).
                                                     with_message("deve ser igual ou anterior a data atual (#{I18n.l(Date.current)})")
     end
   end
@@ -60,20 +60,20 @@ describe RegistrationCadastralCertificate do
   it "should not allow revocation_date before registration_date" do
     subject.stub(:registration_date => Date.current)
 
-    subject.should_not allow_value(Date.yesterday).for(:revocation_date).
+    expect(subject).not_to allow_value(Date.yesterday).for(:revocation_date).
                                                    with_message("deve ser igual ou posterior a data da inscrição (#{I18n.l(Date.current)})")
   end
 
   it "should allow revocation_date on registration_date" do
     subject.stub(:registration_date => Date.current)
 
-    subject.should allow_value(Date.current).for(:revocation_date)
+    expect(subject).to allow_value(Date.current).for(:revocation_date)
   end
 
   it "should allow revocation_date after registration_date" do
     subject.stub(:registration_date => Date.current)
 
-    subject.should allow_value(Date.tomorrow).for(:revocation_date)
+    expect(subject).to allow_value(Date.tomorrow).for(:revocation_date)
   end
 
   context 'signatures' do
@@ -115,7 +115,7 @@ describe RegistrationCadastralCertificate do
       signature_configuration_item_store.should_receive(:all_by_configuration_report).
                                          with('registration_cadastral_certificates').
                                          and_return(signature_configuration_items)
-      subject.signatures(signature_configuration_item_store).should eq signature_configuration_items
+      expect(subject.signatures(signature_configuration_item_store)).to eq signature_configuration_items
     end
   end
 end

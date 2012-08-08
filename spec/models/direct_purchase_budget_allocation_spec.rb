@@ -14,17 +14,17 @@ describe DirectPurchaseBudgetAllocation do
   it { should validate_presence_of :budget_allocation }
 
   it 'should have at least one item' do
-    subject.items.should be_empty
+    expect(subject.items).to be_empty
 
     subject.valid?
 
-    subject.errors[:items].should include 'é necessário cadastrar pelo menos um item'
+    expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
   end
 
   it 'should return 0 as the total value of items when have no items' do
-    subject.items.should be_empty
+    expect(subject.items).to be_empty
 
-    subject.total_items_value.should eq 0
+    expect(subject.total_items_value).to eq 0
   end
 
   it 'should calculate the total value of items' do
@@ -34,6 +34,6 @@ describe DirectPurchaseBudgetAllocation do
       double(:estimated_total_price => 15)
     ])
 
-    subject.total_items_value.should eq 45
+    expect(subject.total_items_value).to eq 45
   end
 end

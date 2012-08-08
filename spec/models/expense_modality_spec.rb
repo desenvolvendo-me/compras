@@ -7,7 +7,7 @@ describe ExpenseModality do
   it 'should return code as to_s' do
     subject.code = 1
     subject.description = 'TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
-    subject.to_s.should eq '1 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
+    expect(subject.to_s).to eq '1 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
   end
 
   it { should validate_presence_of :code }

@@ -7,7 +7,7 @@ require 'app/models/creditor_secondary_cnae'
 describe Cnae do
   it "return name when call to_s" do
     subject.name = "Produção de lavouras temporária"
-    subject.to_s.should eq subject.name
+    expect(subject.to_s).to eq subject.name
   end
 
   it { should belong_to :risk_degree }

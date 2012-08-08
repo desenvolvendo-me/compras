@@ -10,7 +10,7 @@ describe PurchaseSolicitationBudgetAllocationItemDecorator do
       end
 
       it 'should be nil' do
-        subject.estimated_total_price.should be_nil
+        expect(subject.estimated_total_price).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe PurchaseSolicitationBudgetAllocationItemDecorator do
       end
 
       it 'should applies precision' do
-        subject.estimated_total_price.should eq '300,00'
+        expect(subject.estimated_total_price).to eq '300,00'
       end
     end
   end

@@ -8,7 +8,7 @@ describe Function do
     subject.code = '4'
     subject.description = 'Administração'
 
-    subject.to_s.should eq '4 - Administração'
+    expect(subject.to_s).to eq '4 - Administração'
   end
 
   it { should validate_presence_of :code }

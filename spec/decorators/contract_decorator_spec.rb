@@ -10,7 +10,7 @@ describe ContractDecorator do
       end
 
       it 'should be nil' do
-        subject.all_pledges_total_value.should be_nil
+        expect(subject.all_pledges_total_value).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe ContractDecorator do
       end
 
       it 'should applies currency' do
-        subject.all_pledges_total_value.should eq 'R$ 100,00'
+        expect(subject.all_pledges_total_value).to eq 'R$ 100,00'
       end
     end
   end

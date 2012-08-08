@@ -9,7 +9,7 @@ describe RevenueNatureDecorator do
       end
 
       it 'should be nil' do
-        subject.publication_date.should be_nil
+        expect(subject.publication_date).to be_nil
       end
     end
 
@@ -19,7 +19,7 @@ describe RevenueNatureDecorator do
       end
 
       it 'should localize' do
-        subject.publication_date.should eq '15/12/2012'
+        expect(subject.publication_date).to eq '15/12/2012'
       end
     end
   end

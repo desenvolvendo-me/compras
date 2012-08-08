@@ -11,7 +11,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it 'should be nil' do
-        subject.value_estimated.should be_nil
+        expect(subject.value_estimated).to be_nil
       end
     end
 
@@ -21,7 +21,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it 'should applies currency' do
-        subject.value_estimated.should eq 'R$ 500,00'
+        expect(subject.value_estimated).to eq 'R$ 500,00'
       end
     end
   end
@@ -33,7 +33,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it 'should be nil' do
-        subject.total_allocations_value.should be_nil
+        expect(subject.total_allocations_value).to be_nil
       end
     end
 
@@ -43,7 +43,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it 'should applies precision' do
-        subject.total_allocations_value.should eq '400,00'
+        expect(subject.total_allocations_value).to eq '400,00'
       end
     end
   end
@@ -55,7 +55,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it 'should be nil' do
-        subject.date.should eq nil
+        expect(subject.date).to eq nil
       end
     end
 
@@ -65,7 +65,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it 'should localize' do
-        subject.date.should eq '31/12/2012'
+        expect(subject.date).to eq '31/12/2012'
       end
     end
   end
@@ -77,7 +77,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it 'should return empty array' do
-        subject.signatures_grouped.should eq []
+        expect(subject.signatures_grouped).to eq []
       end
     end
 
@@ -117,7 +117,7 @@ describe AdministrativeProcessDecorator do
       end
 
       it "should group signatures" do
-        subject.signatures_grouped.should eq [
+        expect(subject.signatures_grouped).to eq [
           [
             signature_configuration_item1,
             signature_configuration_item2,

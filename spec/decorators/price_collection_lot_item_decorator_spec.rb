@@ -10,7 +10,7 @@ describe PriceCollectionLotItemDecorator do
       end
 
       it 'should be nil' do
-        subject.unit_price_by_proposal(nil).should be_nil
+        expect(subject.unit_price_by_proposal(nil)).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe PriceCollectionLotItemDecorator do
       end
 
       it 'should applies currency' do
-        subject.unit_price_by_proposal(nil).should eq '330,00'
+        expect(subject.unit_price_by_proposal(nil)).to eq '330,00'
       end
     end
   end
@@ -32,7 +32,7 @@ describe PriceCollectionLotItemDecorator do
       end
 
       it 'should be nil' do
-        subject.total_value_by_proposal(nil).should be_nil
+        expect(subject.total_value_by_proposal(nil)).to be_nil
       end
     end
 
@@ -42,7 +42,7 @@ describe PriceCollectionLotItemDecorator do
       end
 
       it 'should applies precision' do
-        subject.total_value_by_proposal(nil).should eq '220,00'
+        expect(subject.total_value_by_proposal(nil)).to eq '220,00'
       end
     end
   end

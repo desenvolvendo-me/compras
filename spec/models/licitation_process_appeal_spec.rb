@@ -10,7 +10,7 @@ describe LicitationProcessAppeal do
   it 'should return id as to_s method' do
     subject.id = 2
 
-    subject.to_s.should eq '2'
+    expect(subject.to_s).to eq '2'
   end
 
   it { should belong_to :person }
@@ -30,15 +30,15 @@ describe LicitationProcessAppeal do
     end
 
     it 'be valid when appeal_date is after process_date' do
-      subject.should allow_value(Date.new(2012, 12, 20)).for(:appeal_date)
+      expect(subject).to allow_value(Date.new(2012, 12, 20)).for(:appeal_date)
     end
 
     it 'be valid when appeal_date is equals to process_date' do
-      subject.should allow_value(Date.new(2012, 12, 13)).for(:appeal_date)
+      expect(subject).to allow_value(Date.new(2012, 12, 13)).for(:appeal_date)
     end
 
     it 'be invalid when appeal_date is before process_date' do
-      subject.should_not allow_value(Date.new(2012, 1, 1)).for(:appeal_date).
+      expect(subject).not_to allow_value(Date.new(2012, 1, 1)).for(:appeal_date).
                                                            with_message('deve ser maior ou igual a data do processo (13/12/2012)')
     end
   end

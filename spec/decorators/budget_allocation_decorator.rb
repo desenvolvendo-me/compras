@@ -10,7 +10,7 @@ describe BudgetAllocationDecorator do
       end
 
       it 'should be nil' do
-        subject.real_amount.should be_nil
+        expect(subject.real_amount).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe BudgetAllocationDecorator do
       end
 
       it 'should applies precision' do
-        subject.real_amount.should eq '500,00'
+        expect(subject.real_amount).to eq '500,00'
       end
     end
   end
@@ -32,7 +32,7 @@ describe BudgetAllocationDecorator do
       end
 
       it 'should be nil' do
-        subject.reserved_value.should be_nil
+        expect(subject.reserved_value).to be_nil
       end
     end
 
@@ -42,7 +42,7 @@ describe BudgetAllocationDecorator do
       end
 
       it 'should applies precision' do
-        subject.reserved_value.should eq '500,00'
+        expect(subject.reserved_value).to eq '500,00'
       end
     end
   end

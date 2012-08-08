@@ -9,7 +9,7 @@ describe IndexerValueDecorator do
       end
 
       it 'should be nil' do
-        subject.value.should be_nil
+        expect(subject.value).to be_nil
       end
     end
 
@@ -20,7 +20,7 @@ describe IndexerValueDecorator do
       end
 
       it 'should applies precision with 6 of scale' do
-        subject.value.should eq '12,120000'
+        expect(subject.value).to eq '12,120000'
       end
     end
   end

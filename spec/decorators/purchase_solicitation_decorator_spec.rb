@@ -11,7 +11,7 @@ describe PurchaseSolicitationDecorator do
     end
 
     it 'should use budget_structure, responsible and status' do
-      subject.summary.should eq "Estrutura orçamentaria solicitante: Secretaria de educação / Responsável pela solicitação: Nohup / Status: Pendente"
+      expect(subject.summary).to eq "Estrutura orçamentaria solicitante: Secretaria de educação / Responsável pela solicitação: Nohup / Status: Pendente"
     end
   end
 
@@ -25,7 +25,7 @@ describe PurchaseSolicitationDecorator do
     end
 
     it 'should applies precision' do
-      subject.quantity_by_material(material.id).should eq '400,00'
+      expect(subject.quantity_by_material(material.id)).to eq '400,00'
     end
   end
 end

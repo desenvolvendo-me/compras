@@ -8,7 +8,7 @@ describe PaymentMethod do
   it 'should return description as to_s method' do
     subject.description = 'Dinheiro'
 
-    subject.to_s.should eq 'Dinheiro'
+    expect(subject.to_s).to eq 'Dinheiro'
   end
 
   it { should have_many(:direct_purchases).dependent(:restrict) }

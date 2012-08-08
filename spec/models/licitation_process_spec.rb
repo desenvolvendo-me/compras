@@ -24,7 +24,7 @@ describe LicitationProcess do
   it 'should return process/year as to_s' do
     subject.process = '1'
     subject.year = '2012'
-    subject.to_s.should eq '1/2012'
+    expect(subject.to_s).to eq '1/2012'
   end
 
   it { should belong_to :administrative_process }
@@ -78,7 +78,7 @@ describe LicitationProcess do
     it { should allow_value(Date.tomorrow).for(:envelope_delivery_date) }
 
     it 'should not allow envelope_delivery_date before today' do
-      subject.should_not allow_value(Date.yesterday).for(:envelope_delivery_date).
+      expect(subject).not_to allow_value(Date.yesterday).for(:envelope_delivery_date).
                                                     with_message("deve ser igual ou posterior a data atual (#{I18n.l(Date.current)})")
     end
   end
@@ -93,15 +93,15 @@ describe LicitationProcess do
     end
 
     it 'should allow envelope_opening_date date after envelope_delivery_date' do
-      subject.should allow_value(Date.current + 15.days).for(:envelope_opening_date)
+      expect(subject).to allow_value(Date.current + 15.days).for(:envelope_opening_date)
     end
 
     it 'should allow envelope_opening_date date equals to envelope_delivery_date' do
-      subject.should allow_value(envelope_delivery_date).for(:envelope_opening_date)
+      expect(subject).to allow_value(envelope_delivery_date).for(:envelope_opening_date)
     end
 
     it 'should not allow envelope_opening_date date before envelope_delivery_date' do
-      subject.should_not allow_value(Date.current).for(:envelope_opening_date).
+      expect(subject).not_to allow_value(Date.current).for(:envelope_opening_date).
                                                     with_message("deve ser igual ou posterior a data da entrega dos envelopes (#{I18n.l envelope_delivery_date})")
     end
   end
@@ -116,15 +116,15 @@ describe LicitationProcess do
     end
 
     it 'should allow process_date after administrative_process_date' do
-      subject.should allow_value(Date.current + 15.days).for(:process_date)
+      expect(subject).to allow_value(Date.current + 15.days).for(:process_date)
     end
 
     it 'should allow process_date equals to administrative_process_date' do
-      subject.should allow_value(administrative_process_date).for(:process_date)
+      expect(subject).to allow_value(administrative_process_date).for(:process_date)
     end
 
     it 'should not allow process_date before administrative_process_date' do
-      subject.should_not allow_value(Date.current).for(:process_date).
+      expect(subject).not_to allow_value(Date.current).for(:process_date).
                                                    with_message("deve ser igual ou posterior a data do processo administrativo (#{I18n.l administrative_process_date})")
     end
   end
@@ -140,7 +140,7 @@ describe LicitationProcess do
       end
 
       it 'should be 5' do
-        subject.next_process.should eq 5
+        expect(subject.next_process).to eq 5
       end
     end
   end
@@ -152,7 +152,7 @@ describe LicitationProcess do
       end
 
       it 'should be 5' do
-        subject.next_licitation_number.should eq 5
+        expect(subject.next_licitation_number).to eq 5
       end
     end
   end
@@ -160,21 +160,21 @@ describe LicitationProcess do
   it 'should tell if it allow invitation bidders' do
     subject.stub(:envelope_opening_date).and_return(Date.tomorrow)
 
-    subject.should_not be_allow_bidders
+    expect(subject).not_to be_allow_bidders
 
     subject.stub(:envelope_opening_date).and_return(Date.current)
 
-    subject.should be_allow_bidders
+    expect(subject).to be_allow_bidders
 
     subject.stub(:envelope_opening_date).and_return(Date.yesterday)
 
-    subject.should_not be_allow_bidders
+    expect(subject).not_to be_allow_bidders
    end
 
   it 'should return the advice number correctly' do
     subject.stub(:judgment_commission_advices).and_return([1, 2, 3])
 
-    subject.advice_number.should eq 3
+    expect(subject.advice_number).to eq 3
   end
 
   describe 'publication' do
@@ -183,12 +183,12 @@ describe LicitationProcess do
     end
 
     it 'should can be updated when is a new record' do
-      subject.should be_updatable
+      expect(subject).to be_updatable
     end
 
     it 'should can be updated when is not a new record, but has not publication' do
       subject.stub!(:new_record? => false)
-      subject.should be_updatable
+      expect(subject).to be_updatable
     end
 
     it 'should can be updated when is not a new record, has publication but licitation process publication is updatable' do
@@ -196,7 +196,7 @@ describe LicitationProcess do
       subject.stub(:licitation_process_publications => licitation_process_publications)
       licitation_process_publications.should_receive(:empty?).and_return(false)
       licitation_process_publications.stub(:current_updatable? => true)
-      subject.should be_updatable
+      expect(subject).to be_updatable
     end
 
     it 'should can not be updated when is not a new record, has publication and licitation process publication not updatable' do
@@ -204,7 +204,7 @@ describe LicitationProcess do
       licitation_process_publications.stub(:current_updatable? => false)
       licitation_process_publications.should_receive(:empty?).and_return(false)
       subject.stub(:licitation_process_publications => licitation_process_publications)
-      subject.should_not be_updatable
+      expect(subject).not_to be_updatable
     end
   end
 
@@ -212,7 +212,7 @@ describe LicitationProcess do
     it "should return false for envelope_opening? method" do
       subject.envelope_opening_date = Date.tomorrow
 
-      subject.should_not be_envelope_opening
+      expect(subject).not_to be_envelope_opening
     end
   end
 
@@ -220,7 +220,7 @@ describe LicitationProcess do
     it "should return true for envelope_opening? method" do
       subject.envelope_opening_date = Date.current
 
-      subject.should be_envelope_opening
+      expect(subject).to be_envelope_opening
     end
   end
 
@@ -232,13 +232,13 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de julgamento (Menor preço total por item)'
+    expect(subject.errors[:type_of_calculation]).to include 'não permitido para este tipo de julgamento (Menor preço total por item)'
 
     LicitationProcessTypesOfCalculationByJudgmentFormKind.any_instance.stub(:correct_type_of_calculation?).and_return(true)
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de julgamento (Menor preço total por item)'
+    expect(subject.errors[:type_of_calculation]).not_to include 'não permitido para este tipo de julgamento (Menor preço total por item)'
   end
 
   it "should validate type_of_calculation by object type" do
@@ -249,13 +249,13 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para este tipo de objeto (Menor preço total por item)'
+    expect(subject.errors[:type_of_calculation]).to include 'não permitido para este tipo de objeto (Menor preço total por item)'
 
     LicitationProcessTypesOfCalculationByObjectType.any_instance.stub(:correct_type_of_calculation?).and_return(true)
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should_not include 'não permitido para este tipo de objeto (Menor preço total por item)'
+    expect(subject.errors[:type_of_calculation]).not_to include 'não permitido para este tipo de objeto (Menor preço total por item)'
   end
 
   it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is presence_trading' do
@@ -267,7 +267,7 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade (Menor preço total por item)'
+    expect(subject.errors[:type_of_calculation]).to include 'não permitido para esta modalidade (Menor preço total por item)'
   end
 
   it 'should allow lowest_total_price_by_item as type_of_calculation when modality is presence_trading' do
@@ -279,7 +279,7 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
+    expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
   end
 
   it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
@@ -291,7 +291,7 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
+    expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
   end
 
   it 'should allow lowest_global_price as type_of_calculation when modality is auction' do
@@ -303,7 +303,7 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should_not include 'não permitido para esta modalidade'
+    expect(subject.errors[:type_of_calculation]).to_not include 'não permitido para esta modalidade'
   end
 
   it 'should not allow lowest_total_price_by_item as type_of_calculation when modality is auction' do
@@ -315,13 +315,13 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:type_of_calculation].should include 'não permitido para esta modalidade (Menor preço total por item)'
+    expect(subject.errors[:type_of_calculation]).to include 'não permitido para esta modalidade (Menor preço total por item)'
   end
 
   it "should have filled lots" do
     subject.stub(:items).and_return(true)
     subject.items.stub(:without_lot?).and_return(false)
-    subject.should be_filled_lots
+    expect(subject).to be_filled_lots
   end
 
   it 'should return the winner proposal by global total value' do
@@ -329,8 +329,8 @@ describe LicitationProcess do
     bidder_2 = double(:proposal_total_value => 500.0, :creditor => 'creditor 2')
     subject.stub(:licitation_process_bidders).and_return([bidder_1, bidder_2])
 
-    subject.winner_proposal_creditor.should eq 'creditor 2'
-    subject.winner_proposal_total_price.should eq 500.0
+    expect(subject.winner_proposal_creditor).to eq 'creditor 2'
+    expect(subject.winner_proposal_total_price).to eq 500.0
   end
 
   it "should validate administrative_process_status" do
@@ -338,13 +338,13 @@ describe LicitationProcess do
 
     subject.valid?
 
-    subject.errors[:administrative_process].should include 'o status deve ser liberado'
+    expect(subject.errors[:administrative_process]).to include 'o status deve ser liberado'
 
     subject.stub(:administrative_process_released?).and_return(true)
 
     subject.valid?
 
-    subject.errors[:administrative_process].should_not include 'o status deve ser liberado'
+    expect(subject.errors[:administrative_process]).to_not include 'o status deve ser liberado'
   end
 
   context "with adminsitrative process" do
@@ -371,11 +371,11 @@ describe LicitationProcess do
 
       subject.valid?
 
-      subject.errors[:administrative_process].should include 'não permite processo licitatório'
+      expect(subject.errors[:administrative_process]).to include 'não permite processo licitatório'
     end
 
     it 'should validate that selected administrative process is available' do
-      subject.errors.messages[:administrative_process].should be_nil
+      expect(subject.errors.messages[:administrative_process]).to be_nil
 
       subject.stub(:administrative_process_licitation_process).and_return(true)
 
@@ -384,7 +384,7 @@ describe LicitationProcess do
 
       subject.valid?
 
-      subject.errors.messages[:administrative_process].should include 'já está em uso'
+      expect(subject.errors.messages[:administrative_process]).to include 'já está em uso'
     end
 
     it "should not be valid if administrative_process have another licitation_process" do
@@ -393,7 +393,7 @@ describe LicitationProcess do
 
       subject.valid?
 
-      subject.errors[:administrative_process].should include "já tem um processo licitatório"
+      expect(subject.errors[:administrative_process]).to include "já tem um processo licitatório"
     end
 
     it "should be valid if administrative_process have the current licitation_process" do
@@ -402,7 +402,7 @@ describe LicitationProcess do
 
       subject.valid?
 
-      subject.errors[:administrative_process].should_not include "já tem um processo licitatório"
+      expect(subject.errors[:administrative_process]).to_not include "já tem um processo licitatório"
     end
 
     it "should be valid if administrative_process do not have licitation_process" do
@@ -411,7 +411,7 @@ describe LicitationProcess do
 
       subject.valid?
 
-      subject.errors[:administrative_process].should_not include "já tem um processo licitatório"
+      expect(subject.errors[:administrative_process]).to_not include "já tem um processo licitatório"
     end
   end
 end

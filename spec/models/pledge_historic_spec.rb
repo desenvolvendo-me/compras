@@ -6,7 +6,7 @@ describe PledgeHistoric do
   it "should return the description as to_s method" do
     subject.description = "Historico"
 
-    subject.to_s.should eq "Historico"
+    expect(subject.to_s).to eq "Historico"
   end
 
   it { should belong_to :descriptor }
@@ -18,11 +18,11 @@ describe PledgeHistoric do
 
   it 'should validate descriptor presence if source is manual' do
     subject.source = Source::MANUAL
-    subject.should validate_presence_of(:descriptor)
+    expect(subject).to validate_presence_of(:descriptor)
   end
 
   it 'should not validate descriptor presence if source is default' do
     subject.source = Source::DEFAULT
-    subject.should_not validate_presence_of(:descriptor)
+    expect(subject).not_to validate_presence_of(:descriptor)
   end
 end

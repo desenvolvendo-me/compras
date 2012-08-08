@@ -9,7 +9,7 @@ describe LicitationCommissionDecorator do
       end
 
       it 'should be nil' do
-        subject.regulatory_act_publication_date.should be_nil
+        expect(subject.regulatory_act_publication_date).to be_nil
       end
     end
 
@@ -19,7 +19,7 @@ describe LicitationCommissionDecorator do
       end
 
       it 'should localize' do
-        subject.regulatory_act_publication_date.should eq '16/02/2012'
+        expect(subject.regulatory_act_publication_date).to eq '16/02/2012'
       end
     end
   end

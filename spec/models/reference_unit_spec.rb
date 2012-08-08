@@ -5,7 +5,7 @@ require 'app/models/material'
 describe ReferenceUnit do
   it 'return acronym when converted to string' do
     subject.acronym = 'M'
-    subject.to_s.should eq 'M'
+    expect(subject.to_s).to eq 'M'
   end
 
   it 'validates length of acronym' do
@@ -13,13 +13,13 @@ describe ReferenceUnit do
     subject.name = 'Unidade'
 
     subject.acronym = 'UN'
-    subject.should be_valid
+    expect(subject).to be_valid
 
     subject.acronym = 'UNI'
-    subject.should be_invalid
+    expect(subject).to be_invalid
 
     subject.acronym = 'U'
-    subject.should be_valid
+    expect(subject).to be_valid
   end
 
   it { should have_many(:materials).dependent(:restrict) }

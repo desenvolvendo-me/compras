@@ -7,7 +7,7 @@ describe MaterialsGroup do
     subject.group_number = '01'
     subject.description = 'Grupo de materiais'
 
-    subject.to_s.should eq("01 - Grupo de materiais")
+    expect(subject.to_s).to eq("01 - Grupo de materiais")
   end
 
   it { should have_many(:materials_classes).dependent(:restrict) }

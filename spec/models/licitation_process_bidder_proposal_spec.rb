@@ -10,31 +10,31 @@ describe LicitationProcessBidderProposal do
   it "should return total price when has unit_price and quantity" do
     subject.unit_price = 3
     subject.stub(:quantity).and_return(14)
-    subject.total_price.should eq 42
+    expect(subject.total_price).to eq 42
   end
 
   it "should return 0 when unit_price is 0" do
     subject.unit_price = 0
     subject.stub(:quantity).and_return(14)
-    subject.total_price.should eq 0
+    expect(subject.total_price).to eq 0
   end
 
   it "should return 0 when has not quantity" do
     subject.unit_price = 3
     subject.stub(:quantity).and_return(nil)
-    subject.total_price.should eq 0
+    expect(subject.total_price).to eq 0
   end
 
   context 'default values' do
     context 'to ratification' do
       it 'uses false as default for ratification' do
-        subject.ratificated.should be false
+        expect(subject.ratificated).to be false
       end
     end
 
     context 'to situation' do
       it 'situation should be by default undefined' do
-        subject.situation.should be SituationOfProposal::UNDEFINED
+        expect(subject.situation).to be SituationOfProposal::UNDEFINED
       end
 
       it 'situation should not be undefined when was not nil' do

@@ -6,19 +6,19 @@ require 'app/models/reserve_fund'
 describe ReserveAllocationType do
   it 'should return to_s as description' do
     subject.description = 'Reserva'
-    subject.to_s.should eq 'Reserva'
+    expect(subject.to_s).to eq 'Reserva'
   end
 
   it "should return true for is_licitation? method when description is Licitação" do
     subject.description = "Licitação"
 
-    subject.should be_licitation
+    expect(subject).to be_licitation
   end
 
   it "should return false for is_licitation? method when description is not Licitação" do
     subject.description = "Comum"
 
-    subject.should_not be_licitation
+    expect(subject).not_to be_licitation
   end
 
   it { should validate_presence_of :description }

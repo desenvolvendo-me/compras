@@ -14,7 +14,7 @@ describe BudgetStructure do
   it 'should respond to to_s with budget_structure - description' do
     subject.stub(:budget_structure).and_return('99/00')
     subject.description = 'Secretaria de Educação'
-    subject.to_s.should eq '99/00 - Secretaria de Educação'
+    expect(subject.to_s).to eq '99/00 - Secretaria de Educação'
   end
 
   it { should validate_presence_of :description }
@@ -60,14 +60,14 @@ describe BudgetStructure do
     it 'should return 1 as budget_structure_level' do
       subject.stub(:parent).and_return( parent )
       subject.stub(:upper_budget_structure_level).and_return( upper_budget_structure_level )
-      subject.parent_budget_structure_level_id.should be 1
+      expect(subject.parent_budget_structure_level_id).to be 1
     end
   end
 
   context "when has not a parent" do
     it 'should return nil as upper_budget_structure_level' do
       subject.stub(:parent).and_return( nil )
-      subject.upper_budget_structure_level.should be nil
+      expect(subject.upper_budget_structure_level).to be nil
     end
   end
 
@@ -82,7 +82,7 @@ describe BudgetStructure do
 
       subject.valid?
 
-      subject.errors.messages[:parent].should include 'deve ser uma estrutura com nível superior imediato (nível 2)'
+      expect(subject.errors.messages[:parent]).to include 'deve ser uma estrutura com nível superior imediato (nível 2)'
     end
 
     it 'validating that parent is an immediate superior when level is 2' do
@@ -91,7 +91,7 @@ describe BudgetStructure do
 
       subject.valid?
 
-      subject.errors.messages[:parent].should be nil
+      expect(subject.errors.messages[:parent]).to be nil
     end
   end
 
@@ -106,7 +106,7 @@ describe BudgetStructure do
         subject.code = 123
         subject.description = 'prefeitura'
 
-        subject.to_s.should eq '123 - prefeitura'
+        expect(subject.to_s).to eq '123 - prefeitura'
       end
     end
 
@@ -125,7 +125,7 @@ describe BudgetStructure do
         subject.code = 123
         subject.description = 'prefeitura'
 
-        subject.to_s.should eq '1-123 - prefeitura'
+        expect(subject.to_s).to eq '1-123 - prefeitura'
       end
     end
 
@@ -152,7 +152,7 @@ describe BudgetStructure do
         subject.code = 123
         subject.description = 'prefeitura'
 
-        subject.to_s.should eq '1-12/123 - prefeitura'
+        expect(subject.to_s).to eq '1-12/123 - prefeitura'
       end
     end
   end

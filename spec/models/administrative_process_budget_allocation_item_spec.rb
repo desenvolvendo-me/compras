@@ -25,17 +25,17 @@ describe AdministrativeProcessBudgetAllocationItem do
 
       material.stub(:to_s).and_return('Cadeira')
 
-      subject.to_s.should eq 'Cadeira'
+      expect(subject.to_s).to eq 'Cadeira'
     end
   end
 
   it 'should calculate the estimated total price' do
-    subject.estimated_total_price.should eq 0
+    expect(subject.estimated_total_price).to eq 0
 
     subject.quantity = 5
     subject.unit_price = 10.1
 
-    subject.estimated_total_price.should eq 50.5
+    expect(subject.estimated_total_price).to eq 50.5
   end
 
   it "should without_lot? be true when has not lot" do

@@ -7,7 +7,7 @@ describe DeliveryLocation do
   context "#to_s" do
     it "should return description" do
       subject.description = "Secretaria"
-      subject.to_s.should eq("Secretaria")
+      expect(subject.to_s).to eq("Secretaria")
     end
   end
 

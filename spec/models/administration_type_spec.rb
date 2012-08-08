@@ -7,7 +7,7 @@ describe AdministrationType do
   it 'should return code and description as to_s method' do
     subject.description = 'Privada'
 
-    subject.to_s.should eq 'Privada'
+    expect(subject.to_s).to eq 'Privada'
   end
 
   it { should belong_to :legal_nature }

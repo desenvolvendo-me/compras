@@ -19,7 +19,7 @@ describe ResourceAnnul do
     it 'delegates to annullable' do
       subject.stub(:annullable => annullable)
 
-      subject.should be_annulled
+      expect(subject).to be_annulled
     end
   end
 end

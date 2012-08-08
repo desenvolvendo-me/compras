@@ -32,7 +32,7 @@ describe PriceCollectionProposalAnnulment do
     it 'builds the annul on the current proposal, and save' do
       proposal.should_receive(:build_annul).with(:employee_id => 1, :date => 'current date', :description => 'foo bar').and_return double(:save => true)
 
-      subject.create_annul!(annul).should eq true
+      expect(subject.create_annul!(annul)).to eq true
     end
   end
 

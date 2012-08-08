@@ -8,6 +8,6 @@ describe ProgramKind do
   it 'should return specification as to_s' do
     subject.specification = 'Apoio Administrativo'
 
-    subject.to_s.should eq 'Apoio Administrativo'
+    expect(subject.to_s).to eq 'Apoio Administrativo'
   end
 end

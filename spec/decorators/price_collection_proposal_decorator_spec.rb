@@ -13,7 +13,7 @@ describe PriceCollectionProposalDecorator do
       end
 
       it 'should be nil' do
-        subject.price_collection_date.should be_nil
+        expect(subject.price_collection_date).to be_nil
       end
     end
 
@@ -23,7 +23,7 @@ describe PriceCollectionProposalDecorator do
       end
 
       it 'should localize' do
-        subject.price_collection_date.should eq '01/12/2012'
+        expect(subject.price_collection_date).to eq '01/12/2012'
       end
     end
   end
@@ -35,7 +35,7 @@ describe PriceCollectionProposalDecorator do
       end
 
       it 'should be nil' do
-        subject.item_total_value_by_lot(1).should be_nil
+        expect(subject.item_total_value_by_lot(1)).to be_nil
       end
     end
 
@@ -45,7 +45,7 @@ describe PriceCollectionProposalDecorator do
       end
 
       it 'should applies precision' do
-        subject.item_total_value_by_lot(1).should eq "500,00"
+        expect(subject.item_total_value_by_lot(1)).to eq "500,00"
       end
     end
   end

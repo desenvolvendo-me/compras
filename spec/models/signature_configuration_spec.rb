@@ -7,7 +7,7 @@ require 'app/models/signature'
 describe SignatureConfiguration do
   it 'should return report_humanize as to_s' do
     subject.stub(:report_humanize).and_return('Autorizações de Fornecimento')
-    subject.to_s.should eq 'Autorizações de Fornecimento'
+    expect(subject.to_s).to eq 'Autorizações de Fornecimento'
   end
 
   it { should have_many(:signature_configuration_items).dependent(:destroy).order(:order) }

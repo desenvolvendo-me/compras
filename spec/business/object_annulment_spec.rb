@@ -10,7 +10,7 @@ describe ObjectAnnulment do
     it 'returns false when annul object is already present' do
       object.stub_chain(:annul, :present?).and_return true
 
-      described_class.annul!(object).should be_false
+      expect(described_class.annul!(object)).to be_false
     end
 
     it 'delegates the annulation to the object' do

@@ -10,7 +10,7 @@ describe SupplyAuthorizationDecorator do
     end
 
     it 'should return id/year' do
-      subject.direct_purchase.should eq '1/2012'
+      expect(subject.direct_purchase).to eq '1/2012'
     end
   end
 
@@ -21,7 +21,7 @@ describe SupplyAuthorizationDecorator do
       end
 
       it 'should be nil' do
-        subject.date.should be_nil
+        expect(subject.date).to be_nil
       end
     end
 
@@ -31,7 +31,7 @@ describe SupplyAuthorizationDecorator do
       end
 
       it 'should localize' do
-        subject.date.should eq '15/12/2012'
+        expect(subject.date).to eq '15/12/2012'
       end
     end
   end
@@ -39,12 +39,12 @@ describe SupplyAuthorizationDecorator do
   context '#message' do
     it 'show singular message' do
       subject.stub(:items_count).and_return(1)
-      subject.message.should eq 'Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+      expect(subject.message).to eq 'Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
     end
 
     it 'show pluralized message' do
       subject.stub(:items_count).and_return(2)
-      subject.message.should eq 'Pedimos fornecer-nos os materiais e ou execução dos serviços abaixo discriminados, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+      expect(subject.message).to eq 'Pedimos fornecer-nos os materiais e ou execução dos serviços abaixo discriminados, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
     end
   end
 
@@ -61,7 +61,7 @@ describe SupplyAuthorizationDecorator do
       component.stub(:direct_purchase).and_return(true)
       component.stub(:period).and_return(2)
       component.stub(:period_unit).and_return('month')
-      subject.pluralized_period_unit.should eq 'mês/meses'
+      expect(subject.pluralized_period_unit).to eq 'mês/meses'
     end
 
     it "should not pluralize the period unit when period is less than 2" do
@@ -69,19 +69,19 @@ describe SupplyAuthorizationDecorator do
       component.stub(:period).and_return(1)
       component.stub(:period_unit).and_return('month')
       component.stub(:period_unit_humanize).and_return("mês")
-      subject.pluralized_period_unit.should eq 'mês'
+      expect(subject.pluralized_period_unit).to eq 'mês'
     end
 
     it "should not pluralize the period unit when period is nil" do
       component.stub(:direct_purchase).and_return(true)
       component.stub(:period).and_return(nil)
-      subject.pluralized_period_unit.should be_nil
+      expect(subject.pluralized_period_unit).to be_nil
     end
 
     it "should not pluralize the period unit when direct_purchase is nill" do
       component.stub(:direct_purchase).and_return(nil)
       component.stub(:period).and_return(1)
-      subject.pluralized_period_unit.should be_nil
+      expect(subject.pluralized_period_unit).to be_nil
     end
   end
 
@@ -92,7 +92,7 @@ describe SupplyAuthorizationDecorator do
       end
 
       it 'should return empty array' do
-        subject.signatures_grouped.should be_empty
+        expect(subject.signatures_grouped).to be_empty
       end
     end
 
@@ -148,7 +148,7 @@ describe SupplyAuthorizationDecorator do
       it "should group signatures" do
         subject.stub(:signatures_grouped).and_return(signature_configuration_items_grouped)
         subject.stub(:signatures).and_return(signature_configuration_items)
-        subject.signatures_grouped.should eq [
+        expect(subject.signatures_grouped).to eq [
           [
             signature_configuration_item1,
             signature_configuration_item2,

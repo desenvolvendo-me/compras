@@ -13,7 +13,7 @@ describe LicitationProcessRatificationsController do
   end
 
   it 'should not allow destroy' do
-    lambda { delete :destroy, :id => 1 }.should raise_exception(ActionController::RoutingError)
+    expect { delete :destroy, :id => 1 }.to raise_exception(ActionController::RoutingError)
   end
 
   it 'should render report layout on #show' do
@@ -21,6 +21,6 @@ describe LicitationProcessRatificationsController do
 
     get :show, :id => ratification.id
 
-    response.should render_template('layout')
+    expect(response).to render_template('layout')
   end
 end

@@ -33,7 +33,7 @@ describe AdministrativeProcessLiberationsController do
 
       get :new, :administrative_process_id => administrative_process.id
 
-      response.code.should eq '401'
+      expect(response.spon).to eqo eq '401'
     end
   end
 
@@ -46,7 +46,7 @@ describe AdministrativeProcessLiberationsController do
 
       assigns(:administrative_process_liberation).administrative_process.status.should eq AdministrativeProcessStatus::RELEASED
 
-      response.should redirect_to(edit_administrative_process_path(administrative_process))
+      expect(response).to redirect_to(edit_administrative_process_path(administrative_process))
     end
 
     it 'should redirect to administrative_process after create' do
@@ -55,7 +55,7 @@ describe AdministrativeProcessLiberationsController do
 
       post :create, :administrative_process_liberation => { :administrative_process_id => administrative_process.id, :employee_id => employee.id, :date => "15/06/2012" }
 
-      response.code.should eq '401'
+      expect(response.code).to eq '401'
     end
   end
 end

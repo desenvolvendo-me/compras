@@ -22,7 +22,7 @@ describe AdministrativeProcessBudgetAllocation do
 
     subject.stub(:items).and_return([item_one, item_two, item_three])
 
-    subject.total_items_value.should eq 400
+    expect(subject.total_items_value).to eq 400
   end
 
   it 'should call the destroy_all method on items when calling clean_items method' do
