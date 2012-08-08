@@ -8,3 +8,4 @@ pt-BR:
     attributes:
       purchase_solicitation_item_group:
         material: "Material"
+        purchase_solicitation: "Solicitação de compra"

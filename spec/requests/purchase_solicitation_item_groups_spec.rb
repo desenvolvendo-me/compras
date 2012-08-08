@@ -184,4 +184,46 @@ feature "PurchaseSolicitationItemGroups" do
 
     page.should_not have_content 'Antivirus'
   end
+
+  scenario 'filter by material' do
+    PurchaseSolicitationItemGroup.make!(:reparo_arame_farpado)
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.should have_css('a', :count => 2)
+    end
+
+    click_link 'Filtrar Agrupamentos de Itens de Solicitações de Compra'
+
+    fill_modal 'Material', :field => 'Descrição', :with => 'Antivirus'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      page.should have_css('a', :count => 1)
+    end
+  end
+
+  scenario 'filter by purchase_solicitation' do
+    PurchaseSolicitationItemGroup.make!(:reparo_arame_farpado)
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.should have_css('a', :count => 2)
+    end
+
+    click_link 'Filtrar Agrupamentos de Itens de Solicitações de Compra'
+
+    fill_modal 'Solicitação de compra', :field => 'Ano', :with => '2012'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      page.should have_css('a', :count => 1)
+    end
+  end
 end

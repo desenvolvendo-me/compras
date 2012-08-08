@@ -15,3 +15,12 @@ PurchaseSolicitationItemGroup.blueprint(:reparo_2013) do
     ]
   }
 end
+
+PurchaseSolicitationItemGroup.blueprint(:reparo_arame_farpado) do
+  purchase_solicitation_item_group_materials {
+    [PurchaseSolicitationItemGroupMaterial.make(
+      :reparo_arame_farpado,
+      :purchase_solicitation_item_group => object)
+    ]
+  }
+end
