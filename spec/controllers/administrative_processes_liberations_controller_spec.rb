@@ -33,7 +33,7 @@ describe AdministrativeProcessLiberationsController do
 
       get :new, :administrative_process_id => administrative_process.id
 
-      expect(response.spon).to eqo eq '401'
+      expect(response.code).to eq '401'
     end
   end
 
