@@ -4,7 +4,6 @@ require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission'
 require 'app/models/unico/individual'
 require 'app/models/individual'
-require 'app/enumerations/licitation_commission_responsible_role'
 
 describe LicitationCommissionResponsible do
   it { should belong_to :licitation_commission }

@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/budget_structure_configuration'
 require 'app/models/budget_structure_level'
-require 'app/enumerations/budget_structure_separator'
 require 'app/models/budget_structure'
 
 describe BudgetStructureConfiguration do

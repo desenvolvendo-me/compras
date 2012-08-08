@@ -6,8 +6,6 @@ require 'app/models/licitation_process'
 require 'app/models/administrative_process_budget_allocation'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/budget_allocation'
-require 'app/enumerations/administrative_process_modality'
-require 'app/enumerations/administrative_process_object_type'
 require 'app/business/administrative_process_modalities_by_object_type'
 require 'app/models/administrative_process_liberation'
 
