@@ -1,7 +1,7 @@
 PledgeCancellation.blueprint(:empenho_2012) do
   pledge { Pledge.make!(:empenho) }
   value { 1 }
-  date { Date.current + 1.day }
+  date { Date.tomorrow }
   nature { PledgeCancellationNature::NORMAL }
   reason { "Motivo para o anulamento" }
 end

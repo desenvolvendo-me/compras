@@ -16,7 +16,7 @@ feature "PledgeCancellations" do
     fill_modal 'Empenho', :with => pledge.code.to_s, :field => 'Código'
 
     fill_in 'Valor a ser anulado', :with => '150,00'
-    fill_in 'Data *', :with => I18n.l(Date.current + 1.day)
+    fill_in 'Data *', :with => I18n.l(Date.tomorrow)
     select 'Normal', :from => 'Natureza da ocorrência'
     fill_in 'Motivo', :with => 'Motivo para o anulamento'
 
@@ -38,7 +38,7 @@ feature "PledgeCancellations" do
     page.find('#pledge_balance').should have_content 'R$ 50,00'
 
     page.should have_field 'Valor a ser anulado', :with => '150,00'
-    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
     page.should have_field 'Motivo', :with => 'Motivo para o anulamento'
   end
@@ -85,7 +85,7 @@ feature "PledgeCancellations" do
     page.should have_disabled_field 'Valor a ser anulado'
     page.should have_field 'Valor a ser anulado', :with => '1,00'
     page.should have_disabled_field 'Data *'
-    page.should have_field 'Data *', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data *', :with => I18n.l(Date.tomorrow)
     page.should have_disabled_field 'Natureza da ocorrência'
     page.should have_select 'Natureza da ocorrência', :selected => 'Normal'
     page.should have_disabled_field 'Motivo'
@@ -112,7 +112,7 @@ feature "PledgeCancellations" do
 
     click_link 'Filtrar Anulações de Empenho'
 
-    fill_in 'Data', :with => I18n.l(Date.current + 1.day)
+    fill_in 'Data', :with => I18n.l(Date.tomorrow)
 
     click_button 'Pesquisar'
 

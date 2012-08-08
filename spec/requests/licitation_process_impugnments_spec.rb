@@ -62,7 +62,7 @@ feature "LicitationProcessImpugnments" do
 
     page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
     page.should have_field 'Hora da entrega', :with => '14:00'
-    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Hora da abertura', :with => '14:00'
 
     click_button 'Salvar'
@@ -82,7 +82,7 @@ feature "LicitationProcessImpugnments" do
     page.should have_field 'Observação', :with => ''
     page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
     page.should have_field 'Hora da entrega', :with => '14:00'
-    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Hora da abertura', :with => '14:00'
   end
 
@@ -129,7 +129,7 @@ feature "LicitationProcessImpugnments" do
 
     page.should have_field 'Data da entrega dos envelopes', :with => I18n.l(Date.current)
     page.should have_field 'Hora da entrega', :with => '14:00'
-    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.current + 1.day)
+    page.should have_field 'Data da abertura dos envelopes', :with => I18n.l(Date.tomorrow)
     page.should have_field 'Hora da abertura', :with => '14:00'
   end
 
