@@ -1,4 +1,6 @@
 class SupplyAuthorization < Compras::Model
+  include Signable
+
   attr_accessible :year, :direct_purchase_id
 
   attr_readonly :code
@@ -26,9 +28,5 @@ class SupplyAuthorization < Compras::Model
 
   def items_count
     direct_purchase.direct_purchase_budget_allocations.map(&:items).flatten.count
-  end
-
-  def signatures(signature_configuration_item = SignatureConfigurationItem)
-    signature_configuration_item.all_by_configuration_report(SignatureReport::SUPPLY_AUTHORIZATIONS)
   end
 end
