@@ -8,7 +8,7 @@ class BudgetStructureResponsible < Compras::Model
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :regulatory_act
 
-  validates :responsible, :regulatory_act, :start_date, :end_date, :status, :presence => true
+  validates :responsible, :regulatory_act, :start_date, :status, :presence => true
   validates :end_date, :timeliness => {
     :after => :start_date,
     :type => :date,

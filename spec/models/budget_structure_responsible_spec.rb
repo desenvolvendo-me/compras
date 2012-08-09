@@ -6,7 +6,6 @@ describe BudgetStructureResponsible do
   it { should validate_presence_of :responsible }
   it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :start_date }
-  it { should validate_presence_of :end_date }
   it { should validate_presence_of :status }
 
   it { should belong_to :budget_structure }
