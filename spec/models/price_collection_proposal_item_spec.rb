@@ -12,8 +12,28 @@ describe PriceCollectionProposalItem do
   end
 
   it 'should return 0 as the unit price default value' do
-    pending 'Wait for after_initialize #FIXME'
-    expect(subject.unit_price).to eq 0
+    expect(subject.unit_price).to eq 0.0
+  end
+
+  describe '#total_price' do
+    it 'when both values is filled' do
+      subject.unit_price = 5
+      subject.stub(:quantity).and_return(5)
+
+      expect(subject.total_price).to eq 25
+    end
+
+    it 'when has unit_price only' do
+      subject.unit_price = 5
+
+      expect(subject.total_price).to eq 0.00
+    end
+
+    it 'when has quantity only' do
+      subject.stub(:quantity).and_return(5)
+
+      expect(subject.total_price).to eq 0.00
+    end
   end
 
   it 'should return the total price with quantity and unit_price' do
