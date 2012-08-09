@@ -81,7 +81,7 @@ class PriceCollection < Compras::Model
   end
 
   def destroy_all_price_collection_classifications
-    all_price_collection_classifications.destroy_all
+    price_collection_proposals.destroy_all_classifications
   end
 
   def price_collection_lots_with_items

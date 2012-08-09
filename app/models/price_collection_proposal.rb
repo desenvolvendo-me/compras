@@ -22,6 +22,10 @@ class PriceCollectionProposal < Compras::Model
   orderize :id
   filterize
 
+  def self.destroy_all_classifications
+    classifications.destroy_all
+  end
+
   def self.classifications
     PriceCollectionClassification.where do |classification|
       classification.price_collection_proposal_id.in(pluck(:id))
