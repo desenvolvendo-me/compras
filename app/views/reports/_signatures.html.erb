@@ -1,4 +1,4 @@
-<% resource.decorator.signatures_grouped.each do |signature_group| %>
+<% signatures_grouped(:signed_object => resource).each do |signature_group| %>
   <div class="yui3-g signature">
     <% signature_group.each do |signature| %>
       <div class="yui3-u-1<%= "-#{signature_group.size}" if signature_group.size > 1 %>">

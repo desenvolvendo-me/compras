@@ -26,4 +26,30 @@ describe ApplicationHelper do
       expect(helper.message_about_environment?).to be_true
     end
   end
+
+  context 'with signatures' do
+    let :resource do
+      double(:resource)
+    end
+
+    it 'should group resource signatures by 4 by default' do
+      resource.stub(:signatures).and_return([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+      helper.should_receive(:resource).and_return(resource)
+
+      expect(helper.signatures_grouped).to eq [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
+    end
+
+    it 'should allow change asigned object' do
+      resource.stub(:signatures).and_return([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+      expect(helper.signatures_grouped(:signed_object => resource)).to eq [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
+    end
+
+    it 'should allow change grouping number' do
+      resource.stub(:signatures).and_return([1, 2, 3, 4, 5])
+      helper.should_receive(:resource).and_return(resource)
+
+      expect(helper.signatures_grouped(:grouped_by => 2)).to eq [[1, 2], [3, 4], [5]]
+    end
+  end
 end
