@@ -9,6 +9,7 @@ feature "RegistrationCadastralCertificates" do
   scenario 'should be printable' do
     Prefecture.make!(:belo_horizonte)
     Creditor.make!(:nohup)
+    SignatureConfiguration.make!(:crc)
 
     navigate 'Compras e Licitações > Cadastros Gerais > Credores'
 
@@ -62,5 +63,7 @@ feature "RegistrationCadastralCertificates" do
 
     expect(page).to have_content 'Este certificado obedece o estipulado na lei 8.666 de 21.06.1993 e suas atualizações.'
     expect(page).to have_content "Belo Horizonte, #{I18n.l(Date.current, :format => :long)}"
+    expect(page).to have_content 'Gerente'
+    expect(page).to have_content 'Gabriel Sobrinho'
   end
 end

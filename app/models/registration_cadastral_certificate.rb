@@ -1,4 +1,6 @@
 class RegistrationCadastralCertificate < Compras::Model
+  include Signable
+
   attr_accessible :building_area, :capital_stock, :capital_whole, :total_area
   attr_accessible :commercial_registry_registration_date, :fiscal_year, :number
   attr_accessible :registration_date, :revocation_date, :specification
@@ -44,10 +46,6 @@ class RegistrationCadastralCertificate < Compras::Model
 
   def count_crc
     RegistrationCadastralCertificate.same_fiscal_year_and_creditor_and_less_than_or_equal_me(fiscal_year, creditor_id, id).count
-  end
-
-  def signatures(signature_configuration_item = SignatureConfigurationItem)
-    signature_configuration_item.all_by_configuration_report(SignatureReport::REGISTRATION_CADASTRAL_CERTIFICATES)
   end
 
   protected

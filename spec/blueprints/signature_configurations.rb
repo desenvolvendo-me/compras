@@ -18,3 +18,8 @@ SignatureConfiguration.blueprint(:homologacao_e_adjudicao_do_processo_licitatori
     SignatureConfigurationItem.make!(:segundo_como_supervisor)
   ] }
 end
+
+SignatureConfiguration.blueprint(:crc) do
+  report { SignatureReport::REGISTRATION_CADASTRAL_CERTIFICATES }
+  signature_configuration_items { [SignatureConfigurationItem.make!(:primeiro_como_gerente)] }
+end
