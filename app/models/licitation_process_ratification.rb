@@ -1,14 +1,15 @@
 # encoding: utf-8
 class LicitationProcessRatification < Compras::Model
   attr_accessible :adjudication_date, :ratification_date, :licitation_process_id, :licitation_process_bidder_id
-  attr_accessible :licitation_process_bidder_proposals_attributes
+  attr_accessible :licitation_process_ratification_items_attributes
 
   belongs_to :licitation_process
   belongs_to :licitation_process_bidder
 
-  has_many :licitation_process_bidder_proposals, :dependent => :restrict, :order => :id
+  has_many :licitation_process_ratification_items, :dependent => :destroy
+  has_many :licitation_process_bidder_proposals, :through => :licitation_process_ratification_items
 
-  accepts_nested_attributes_for :licitation_process_bidder_proposals, :allow_destroy => true
+  accepts_nested_attributes_for :licitation_process_ratification_items, :allow_destroy => true
 
   delegate :process, :modality_humanize, :administrative_process_description,
            :to => :licitation_process, :prefix => true, :allow_nil => true

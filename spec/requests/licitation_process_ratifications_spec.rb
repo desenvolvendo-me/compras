@@ -53,9 +53,10 @@ feature "LicitationProcessRatifications" do
   end
 
   scenario 'updating a ratification' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
-    LicitationProcessRatification.make!(:processo_licitatorio_computador)
-    LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    bidder = LicitationProcessBidder.make!(:licitante_sobrinho, :licitation_process => licitation_process)
+    LicitationProcessRatification.make!(:processo_licitatorio_computador, :licitation_process => licitation_process)
+    LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => bidder)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
@@ -65,7 +66,11 @@ feature "LicitationProcessRatifications" do
 
     expect(page).not_to have_link 'Apagar'
 
-    uncheck bidder_checkbok_html_name(0)
+    within_modal 'Participante vencedor' do
+      page.driver.render '/home/tiago/debug.png'
+        click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
 
     click_button 'Salvar'
 
@@ -76,7 +81,7 @@ feature "LicitationProcessRatifications" do
     end
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2013'
-    expect(page).to have_field 'Participante vencedor', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Participante vencedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data de homologação', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data de adjudicação', :with => I18n.l(Date.current)
 
@@ -154,6 +159,6 @@ feature "LicitationProcessRatifications" do
   end
 
   def bidder_checkbok_html_name(number)
-    "licitation_process_ratification[licitation_process_bidder_proposals_attributes][#{number}][ratificated]"
+    "licitation_process_ratification[licitation_process_ratification_items_attributes][#{number}][ratificated]"
   end
 end

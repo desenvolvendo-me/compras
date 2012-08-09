@@ -5,8 +5,9 @@ require 'app/models/licitation_process_bidder_proposal'
 describe LicitationProcessBidderProposal do
   it { should belong_to :licitation_process_bidder }
   it { should belong_to :administrative_process_budget_allocation_item }
-  it { should belong_to :licitation_process_ratification }
   it { should have_one(:licitation_process_lot).through(:administrative_process_budget_allocation_item) }
+  it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
+
   it "should return total price when has unit_price and quantity" do
     subject.unit_price = 3
     subject.stub(:quantity).and_return(14)
@@ -26,12 +27,6 @@ describe LicitationProcessBidderProposal do
   end
 
   context 'default values' do
-    context 'to ratification' do
-      it 'uses false as default for ratification' do
-        expect(subject).not_to be_ratificated
-      end
-    end
-
     context 'to situation' do
       it 'situation should be by default undefined' do
         expect(subject.situation).to be SituationOfProposal::UNDEFINED

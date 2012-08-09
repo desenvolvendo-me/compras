@@ -2,7 +2,9 @@
   <td align="center">
     <%= f.check_box :ratificated %>
 
-    <%= f.input :id, :as => 'hidden', :input_html => { :value => f.object.decorator.id_or_mustache_variable } %>
+    <%= f.input :id, :as => 'hidden' %>
+    <%= f.input :licitation_process_bidder_proposal_id, :as => 'hidden',
+                :input_html => { :value => f.object.decorator.id_or_mustache_variable } %>
     <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
   </td>
 

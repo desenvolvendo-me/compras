@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_ratification'
-require 'app/models/licitation_process_bidder_proposal'
+require 'app/models/licitation_process_ratification_item'
 
 describe LicitationProcessRatification do
   it 'should return sequence as to_s' do
@@ -10,9 +10,9 @@ describe LicitationProcessRatification do
   end
 
   it { should belong_to :licitation_process }
-  it { should belong_to :licitation_process_bidder }
 
-  it { should have_many(:licitation_process_bidder_proposals).dependent(:restrict).order(:id) }
+  it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
+  it { should have_many(:licitation_process_bidder_proposals) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :ratification_date }

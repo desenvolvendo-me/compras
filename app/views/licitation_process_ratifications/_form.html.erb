@@ -35,23 +35,23 @@
     </tr>
   </thead>
 
-  <tbody id="proposals">
-    <%= f.association :licitation_process_bidder_proposals, :collection => localized(f.object.licitation_process_bidder_proposals) do |i| %>
-      <%= render 'licitation_process_bidder_proposals/licitation_process_bidder_proposal', :f => i %>
+  <tbody id="ratification_items">
+    <%= f.association :licitation_process_ratification_items, :collection => localized(f.object.licitation_process_ratification_items) do |i| %>
+      <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i %>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache 'item-template' do %>
-  <%= f.association :licitation_process_bidder_proposals_attributes, :collection => f.object.licitation_process_bidder_proposals.build, :index => '{{uuid_item}}' do |i| %>
-    <%= render 'licitation_process_bidder_proposals/licitation_process_bidder_proposal', :f => i %>
+  <%= f.association :licitation_process_ratification_items_attributes, :collection => f.object.licitation_process_ratification_items.build, :index => '{{uuid_item}}' do |i| %>
+    <%= render 'licitation_process_ratification_items/licitation_process_ratification_item', :f => i %>
   <% end %>
 <% end %>
 
 
 <script>
   $("#item-template").nestedForm({
-    target: '#proposals',
+    target: '#ratification_items',
     append_item: false,
     uuid: 'uuid_item'
   });
@@ -93,7 +93,7 @@
 
     if (licitation_process_bidder) {
       var template = $('#item-template'),
-          target = $('#proposals'),
+          target = $('#ratification_items'),
           item;
 
       $.each(licitation_process_bidder.proposals, function() {
