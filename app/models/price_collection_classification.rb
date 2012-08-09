@@ -9,8 +9,4 @@ class PriceCollectionClassification < Compras::Model
 
   orderize
   filterize
-
-  scope :by_price_collection_proposal_ids, lambda { |ids|
-    where { price_collection_proposal_id.in(ids) }
-  }
 end
