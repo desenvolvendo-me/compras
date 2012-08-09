@@ -43,8 +43,12 @@ describe DirectPurchasesController do
       DirectPurchase.make!(:compra)
     end
 
+    let :prefecture do
+      Prefecture.make!(:belo_horizonte)
+    end
+
     it 'should send e-mail to creditor on update' do
-      SupplyAuthorizationMailer.should_receive(:authorization_to_creditor).with(direct_purchase).and_return(double(:deliver => true))
+      SupplyAuthorizationMailer.should_receive(:authorization_to_creditor).with(direct_purchase, prefecture).and_return(double(:deliver => true))
 
       put :update, :id => direct_purchase.id, :commit => 'Reenviar autorização de fornecimento por e-mail'
     end

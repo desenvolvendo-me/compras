@@ -1,5 +1,6 @@
 <%= @direct_purchase.creditor %>, você foi autorizado a fornecer a compra direta <%= @direct_purchase %>.
 
 <% if @direct_purchase.supply_authorization %>
-  <%= render :partial => '/supply_authorizations/show', :locals => { :resource => @direct_purchase.supply_authorization } %>
+  <%= render :partial => '/supply_authorizations/show', :locals => { :resource => @direct_purchase.supply_authorization,
+                                                                     :current_prefecture => @prefecture } %>
 <% end %>

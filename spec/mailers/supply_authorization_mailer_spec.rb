@@ -3,8 +3,12 @@ require "spec_helper"
 
 describe SupplyAuthorizationMailer do
   context 'authorization to creditor' do
+    let :prefecture do
+      double
+    end
+
     let :mail do
-      SupplyAuthorizationMailer.authorization_to_creditor(direct_purchase)
+      SupplyAuthorizationMailer.authorization_to_creditor(direct_purchase, prefecture)
     end
 
     let :direct_purchase do

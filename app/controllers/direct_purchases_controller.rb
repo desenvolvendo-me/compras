@@ -17,13 +17,13 @@ class DirectPurchasesController < CrudController
     if params[:commit] == 'Gerar autorização de fornecimento'
       supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
 
-      SupplyAuthorizationMailer.authorization_to_creditor(resource).deliver
+      SupplyAuthorizationMailer.authorization_to_creditor(resource, current_prefecture).deliver
 
       redirect_to supply_authorization
       return
 
     elsif params[:commit] == 'Reenviar autorização de fornecimento por e-mail'
-      SupplyAuthorizationMailer.authorization_to_creditor(resource).deliver
+      SupplyAuthorizationMailer.authorization_to_creditor(resource, current_prefecture).deliver
 
       redirect_to edit_direct_purchase_path(resource), :notice => t('compras.messages.supply_authorization_mailer_successful')
       return
