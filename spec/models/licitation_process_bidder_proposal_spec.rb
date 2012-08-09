@@ -28,7 +28,7 @@ describe LicitationProcessBidderProposal do
   context 'default values' do
     context 'to ratification' do
       it 'uses false as default for ratification' do
-        expect(subject.ratificated).to be false
+        expect(subject).not_to be_ratificated
       end
     end
 
