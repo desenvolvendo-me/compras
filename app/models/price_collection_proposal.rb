@@ -22,6 +22,12 @@ class PriceCollectionProposal < Compras::Model
   orderize :id
   filterize
 
+  def self.classifications
+    PriceCollectionClassification.where do |classification|
+      classification.price_collection_proposal_id.in(pluck(:id))
+    end
+  end
+
   def build_user
     return user if user.present?
 

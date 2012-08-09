@@ -77,7 +77,7 @@ class PriceCollection < Compras::Model
   end
 
   def all_price_collection_classifications
-    PriceCollectionClassification.by_price_collection_proposal_ids(price_collection_proposal_ids)
+    price_collection_proposals.classifications
   end
 
   def destroy_all_price_collection_classifications
