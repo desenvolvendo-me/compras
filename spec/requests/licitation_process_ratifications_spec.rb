@@ -135,6 +135,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
     LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
+    SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
@@ -156,6 +157,10 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content '10,00'
     expect(page).to have_content '20,00'
     expect(page).to have_content '1 - Alocação Belo Horizonte'
+    expect(page).to have_content 'Supervisor'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Gerente'
+    expect(page).to have_content 'Gabriel Sobrinho'
   end
 
   def bidder_checkbok_html_name(number)

@@ -1,5 +1,7 @@
 # encoding: utf-8
 class LicitationProcessRatification < Compras::Model
+  include Signable
+
   attr_accessible :adjudication_date, :ratification_date, :licitation_process_id, :licitation_process_bidder_id
   attr_accessible :licitation_process_ratification_items_attributes
 
@@ -42,9 +44,5 @@ class LicitationProcessRatification < Compras::Model
       as(proposal_total) }.first.proposal_total
 
     BigDecimal.new(total || 0)
-  end
-
-  def signatures(signature_configuration_item = SignatureConfigurationItem)
-    signature_configuration_item.all_by_configuration_report(SignatureReport::LICITATION_PROCESS_RATIFICATIONS)
   end
 end

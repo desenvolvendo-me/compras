@@ -21,8 +21,4 @@ class LicitationProcessRatificationDecorator
     component.licitation_process_bidder_proposals.map { |p| p.budget_allocation }.
                                                   uniq.join(', ')
   end
-
-  def signatures_grouped
-    component.signatures.in_groups_of(4, false)
-  end
 end
