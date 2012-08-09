@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'lib/signable'
 require 'app/models/administrative_process'
 require 'app/models/employee'
 require 'app/models/licitation_process'
@@ -39,23 +40,6 @@ describe AdministrativeProcess do
   it { should_not allow_value('2a12').for(:year) }
 
   it { should have_db_index([:process, :year]).unique(true) }
-
-  context 'signatures' do
-    let :signature_configuration_item do
-      double('SignatureConfigurationItem')
-    end
-
-    let :signature_configuration_item_store do
-      double('SignatureConfigurationItemStore')
-    end
-
-    it 'should return related signatures' do
-      signature_configuration_item_store.should_receive(:all_by_configuration_report).
-                                         with('administrative_processes').
-                                         and_return([signature_configuration_item])
-      expect(subject.signatures(signature_configuration_item_store)).to eq [signature_configuration_item]
-    end
-  end
 
   it "should validate the modality depending on object_type" do
     def test_type(type, modalities_for_type)

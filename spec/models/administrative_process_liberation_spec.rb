@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'lib/signable'
 require 'app/models/employee'
 require 'app/models/administrative_process'
 require 'app/models/administrative_process_liberation'

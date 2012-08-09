@@ -1,4 +1,6 @@
 class AdministrativeProcess < Compras::Model
+  include Signable
+
   attr_accessible :responsible_id, :process, :year, :date
   attr_accessible :modality, :protocol, :object_type, :status, :description
   attr_accessible :judgment_form_id, :administrative_process_budget_allocations_attributes
@@ -50,10 +52,6 @@ class AdministrativeProcess < Compras::Model
 
   def invited?
     invitation_for_constructions_engineering_services? || invitation_for_purchases_and_services?
-  end
-
-  def signatures(signature_configuration_item = SignatureConfigurationItem)
-    signature_configuration_item.all_by_configuration_report(SignatureReport::ADMINISTRATIVE_PROCESSES)
   end
 
   def update_status(new_status)
