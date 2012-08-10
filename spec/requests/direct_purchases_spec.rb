@@ -235,6 +235,7 @@ feature "DirectPurchases" do
 
   scenario 'it should generate supply authorization' do
     direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
+    Prefecture.make!(:belo_horizonte)
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
@@ -570,6 +571,7 @@ feature "DirectPurchases" do
 
   scenario 'resend email authorization' do
     SupplyAuthorization.make!(:compra_2012)
+    Prefecture.make!(:belo_horizonte)
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
