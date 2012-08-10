@@ -126,7 +126,7 @@ feature "Creditors" do
   end
 
   scenario 'create a new creditor when people is a company' do
-    Person.make!(:nohup)
+    Person.make!(:ibrama)
     Cnae.make!(:varejo)
     Cnae.make!(:aluguel)
     Cnae.make!(:direito_social)
@@ -140,13 +140,13 @@ feature "Creditors" do
 
     click_link 'Criar Credor'
 
-    fill_modal 'Pessoa', :with => 'Nohup'
+    fill_modal 'Pessoa', :with => 'Ibrama'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Porte da empresa'
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
       expect(page).to have_disabled_field 'Optante pelo simples'
-      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to have_checked_field 'Optante pelo simples'
       expect(page).to have_disabled_field 'Natureza jurídica'
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
       expect(page).to have_disabled_field 'Número do registro na junta comercial'
@@ -247,15 +247,15 @@ feature "Creditors" do
 
     expect(page).to have_notice 'Credor criado com sucesso.'
 
-    click_link 'Nohup'
+    click_link 'Ibrama'
 
-    expect(page).to have_field 'Pessoa', :with => 'Nohup'
+    expect(page).to have_field 'Pessoa', :with => 'Ibrama'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Porte da empresa'
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
       expect(page).to have_disabled_field 'Optante pelo simples'
-      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to have_checked_field 'Optante pelo simples'
       expect(page).to have_disabled_field 'Natureza jurídica'
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
       expect(page).to have_disabled_field 'Número do registro na junta comercial'

@@ -69,3 +69,13 @@ Person.blueprint(:mateus) do
   personable { SpecialEntry.make!(:especial) }
   address   { Address.make(:apto, :addressable => object) }
 end
+
+Person.blueprint(:ibrama) do
+  name   { "Ibrama" }
+  phone  { "(11) 7070-9991" }
+  fax    { "(11) 7070-8881" }
+  mobile { "(33) 7070-7771" }
+  email  { "wenderson@gmail.com" }
+  personable { Company.make!(:ibrama) }
+  address { Address.make(:apto, :addressable => object) }
+end
