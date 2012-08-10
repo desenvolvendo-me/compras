@@ -6,7 +6,10 @@ class SupplyAuthorizationMailer < ActionMailer::Base
     @direct_purchase = direct_purchase
     @prefecture = prefecture
 
-    mail :to => @direct_purchase.creditor_person_email, :subject => 'Autorização de Fornecimento'
-    mail :from => prefecture.email unless prefecture.email.empty?
+    if prefecture.email.blank?
+      mail :to => @direct_purchase.creditor_person_email, :subject => 'Autorização de Fornecimento'
+    else
+      mail :to => @direct_purchase.creditor_person_email, :subject => 'Autorização de Fornecimento', :from => prefecture.email
+    end
   end
 end

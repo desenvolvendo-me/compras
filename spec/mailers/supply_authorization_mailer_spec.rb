@@ -4,7 +4,7 @@ require "spec_helper"
 describe SupplyAuthorizationMailer do
   context 'authorization to creditor' do
     let :prefecture do
-      double
+      double(:email => 'prefeitura@nobesistemas.com.br')
     end
 
     let :mail do
@@ -25,6 +25,16 @@ describe SupplyAuthorizationMailer do
 
     it 'should render creditor name' do
       mail.body.encoded.should match('Wenderson Malheiros')
+    end
+
+    it 'should render prefecture email' do
+      mail.from.should include 'prefeitura@nobesistemas.com.br'
+    end
+
+    it 'should not render prefecture email' do
+      prefecture.stub(:email => nil)
+
+      mail.from.should be_nil
     end
   end
 end
