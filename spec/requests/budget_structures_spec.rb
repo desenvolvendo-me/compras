@@ -121,11 +121,11 @@ feature "BudgetStructure" do
     end
 
     within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
-      fill_in 'Data de início', :with => '01/02/2012'
-      fill_in 'Data de término', :with => '10/02/2012'
-      select 'Inativo', :from => 'Status'
+      fill_in 'Data de início', :with => I18n.l(Date.current)
+      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
@@ -154,11 +154,13 @@ feature "BudgetStructure" do
     end
 
     within_tab 'Responsáveis' do
-      expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Ato regulamentador', :with => '4567'
-      expect(page).to have_field 'Data de início', :with => '01/02/2012'
-      expect(page).to have_field  'Data de término', :with => '10/02/2012'
-      expect(page).to have_select 'Status', :selected => 'Inativo'
+      within 'fieldset:nth-child(2)' do
+        expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+        expect(page).to have_field 'Ato regulamentador', :with => '4567'
+        expect(page).to have_field 'Data de início', :with => I18n.l(Date.current)
+        expect(page).to have_field  'Data de término', :with => ''
+        expect(page).to have_select 'Status', :selected => 'Ativo'
+      end
     end
   end
 
@@ -299,32 +301,6 @@ feature "BudgetStructure" do
     end
   end
 
-  scenario 'remove a responsible' do
-    BudgetStructure.make!(:secretaria_de_educacao)
-
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
-
-    click_link 'Secretaria de Educação'
-
-    within_tab 'Responsáveis' do
-      click_button 'Remover Responsável'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
-
-    click_link 'Secretaria de Educação'
-
-    within_tab 'Responsáveis' do
-      expect(page).not_to have_field 'Responsável', :with => 'Wenderson Malheiros'
-      expect(page).not_to have_field 'Ato regulamentador', :with => '4567'
-      expect(page).not_to have_field 'Data de início', :with => '01/02/2012'
-      expect(page).not_to have_field  'Data de término', :with => '10/02/2012'
-      expect(page).not_to have_select 'Status', :selected => 'Inativo'
-    end
-  end
-
   scenario 'destroy an existent budget structure' do
     BudgetStructure.make!(:secretaria_de_educacao)
 
@@ -345,66 +321,146 @@ feature "BudgetStructure" do
     expect(page).not_to have_content 'Desenvolvimento Educacional'
   end
 
-  scenario 'trying to create an budget structure with duplicated responsibles as the only error to ensure that it will not be saved' do
-    BudgetStructureConfiguration.make!(:detran_sopa)
-    AdministrationType.make!(:publica)
-    Address.make!(:general)
-    Employee.make!(:sobrinho)
+  scenario 'validate uniqueness of responsible' do
+    BudgetStructure.make!(:secretaria_de_educacao)
 
     navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
-    click_link 'Criar Estrutura Orçamentaria'
-
-    within_tab 'Informações' do
-      fill_modal 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran', :field => 'Descrição'
-      select 'Sintético', :from => 'Tipo'
-
-      within_modal 'Nível' do
-        expect(page).to have_field 'Configuração de estrutura orçamentaria', :with => 'Configuração do Detran'
-        expect(page).to have_disabled_field 'Configuração de estrutura orçamentaria'
-        click_button 'Pesquisar'
-        click_record 'Orgão'
-      end
-
-      fill_in 'Código', :with => '1'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
-      fill_in 'Código TCE', :with => '051'
-      fill_in 'Descrição', :with => 'Secretaria de Educação'
-      fill_in 'Sigla', :with => 'SEMUEDU'
-      fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
-      fill_in 'Área de atuação', :with => 'Desenvolvimento Educacional'
-    end
-
-    within_tab 'Endereços' do
-      fill_modal 'Logradouro', :with => 'Girassol'
-      fill_modal 'Bairro', :with => 'São Francisco'
-      fill_in 'CEP', :with => "33400-500"
-    end
+    click_link 'Secretaria de Educação'
 
     within_tab 'Responsáveis' do
       click_button 'Adicionar Responsável'
 
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-      fill_in 'Data de início', :with => '01/02/2012'
-      fill_in 'Data de término', :with => '10/02/2012'
-      select 'Ativo', :from => 'Status'
-
-      click_button 'Adicionar Responsável'
-
-      within 'fieldset:first' do
-        fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-        fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-        fill_in 'Data de início', :with => '01/02/2012'
-        fill_in 'Data de término', :with => '10/02/2012'
-        select 'Ativo', :from => 'Status'
-      end
     end
 
     click_button 'Salvar'
 
     within_tab 'Responsáveis' do
-      expect(page).to have_content 'já está em uso'
+      page.should have_content 'já está em uso'
+    end
+  end
+
+  scenario 'should allow one responsible by time when new form' do
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Criar Estrutura Orçamentaria'
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      expect(page).to have_css('.remove-budget-structure-responsible', :count => 1)
+
+      page.should have_disabled_button 'Adicionar Responsável'
+
+      click_button 'Remover Responsável'
+
+      expect(page).to_not have_button 'Remover Responsável'
+
+      click_button 'Adicionar Responsável'
+
+      expect(page).to have_css('.remove-budget-structure-responsible', :count => 1)
+    end
+  end
+
+  scenario 'should allow one responsialbe by time when edit' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      expect(page).to have_css('.remove-budget-structure-responsible', :count => 1)
+
+      page.should have_disabled_button 'Adicionar Responsável'
+    end
+  end
+
+  scenario 'should all responsialbe fields disabled when alread stored' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      expect(page).to have_disabled_field 'Responsável'
+      expect(page).to have_disabled_field 'Ato regulamentador'
+      expect(page).to have_disabled_field 'Data de início'
+      expect(page).to have_disabled_field 'Data de término'
+      expect(page).to have_disabled_field 'Status'
+
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Data de início', :with => '01/02/2012'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+    end
+  end
+
+  scenario 'should store last responsible end_date as Date.current' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    Employee.make!(:wenderson)
+
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+      fill_in 'Data de início', :with => I18n.l(Date.current)
+      select 'Ativo', :from => 'Status'
+    end
+
+    click_button 'Salvar'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      within 'fieldset' do
+        page.should have_field 'Data de término', :with => I18n.l(Date.current)
+      end
+    end
+  end
+
+  scenario 'should store last responsible end_date as Date.current when already have 2 responsibles' do
+    BudgetStructure.make!(:secretaria_de_educacao_com_dois_responsaveis)
+    Employee.make!(:joao_da_silva)
+
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      fill_modal 'Responsável', :with => '21430921', :field => 'Matrícula'
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+      fill_in 'Data de início', :with => I18n.l(Date.current)
+      select 'Ativo', :from => 'Status'
+    end
+
+    click_button 'Salvar'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      within 'fieldset:nth-child(1)' do
+        page.should have_field 'Data de término', :with => '01/04/2012'
+      end
+
+      within 'fieldset:nth-child(2)' do
+        page.should have_field 'Data de término', :with => I18n.l(Date.current)
+      end
+
+      within 'fieldset:nth-child(3)' do
+        page.should have_field 'Data de término', :with => ''
+      end
     end
   end
 end

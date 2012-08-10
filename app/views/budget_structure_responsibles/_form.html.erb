@@ -1,31 +1,32 @@
 <fieldset>
-
   <div class="yui3-g">
     <div class="yui3-u-1-2">
-      <%= f.input :responsible %>
+      <%= f.input :responsible, :disabled => f.object.persisted? %>
     </div>
 
     <div class="yui3-u-1-2">
-      <%= f.input :regulatory_act %>
+      <%= f.input :regulatory_act, :disabled => f.object.persisted? %>
     </div>
   </div>
 
   <div class="yui3-g">
     <div class="yui3-u-1-6">
-      <%= f.input :start_date %>
+      <%= f.input :start_date, :disabled => f.object.persisted? %>
     </div>
 
     <div class="yui3-u-1-6">
-      <%= f.input :end_date %>
+      <%= f.input :end_date, :disabled => f.object.persisted? %>
     </div>
   </div>
 
-  <%= f.input :status %>
+  <%= f.input :status, :disabled => f.object.persisted? %>
 
   <%= f.input :id, :as => :hidden %>
   <%= f.input :_destroy, :as => :hidden, :input_html => { :class => :destroy } %>
 
-  <p>
-    <input type="button" class="button negative remove-budget-structure-responsible" value="Remover Responsável">
-  </p>
+  <% if f.object.new_record? %>
+    <p>
+      <input type="button" class="button negative remove-budget-structure-responsible" value="Remover Responsável">
+    </p>
+  <% end %>
 </fieldset>

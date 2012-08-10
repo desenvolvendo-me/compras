@@ -129,6 +129,14 @@
       fakeBudgetStructureCode.attr('disabled', value);
     };
 
+    $('form.budget_structure').on('click', '.remove-budget-structure-responsible', function(){
+      $('.add-budget-structure-responsible').removeAttr('disabled');
+    });
+
+    $('form.budget_structure').on('append.mustache', function() {
+      $('.add-budget-structure-responsible').attr('disabled', 'disabled');
+    });
+
     $('#budget_structure_parent_id').change(function (event, parent) {
       if (parent) {
         budgedt_structure_mask = parent.budget_structure + parent.separator;
