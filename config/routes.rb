@@ -272,7 +272,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :direct_purchases, :except => :destroy do
+  resources :direct_purchases, :except => [:destroy, :show] do
     collection do
       get :filter
       get :modal
