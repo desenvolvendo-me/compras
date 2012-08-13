@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/validators/presence_at_least_one_validator'
 require 'app/models/unico/company'
 require 'app/models/unico/partner'
 require 'app/models/partner'
