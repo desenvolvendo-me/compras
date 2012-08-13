@@ -20,7 +20,7 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
 
       expect(page).to have_disabled_field 'Data da publicação do ato'
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
@@ -95,7 +95,7 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '8901', :field => 'Número'
 
-      expect(page).to have_field 'Ato regulamentador', :with => '8901'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 8901'
 
       expect(page).to have_disabled_field 'Data da publicação do ato'
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2013'
@@ -177,7 +177,7 @@ feature "LicitationCommissions" do
     within_tab 'Principal' do
       select 'Pregão', :from => 'Tipo de comissão'
 
-      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
 
       clear_modal 'Ato regulamentador'
@@ -309,7 +309,7 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
 
       expect(page).to have_disabled_field 'Data da publicação do ato'
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
@@ -355,7 +355,7 @@ feature "LicitationCommissions" do
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
 
-      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
 
       expect(page).to have_disabled_field 'Data da publicação do ato'
       expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'

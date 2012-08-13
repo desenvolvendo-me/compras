@@ -36,7 +36,7 @@ feature "ExpenseNatures" do
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
     expect(page).to have_field 'Descritor', :with => '2012 - Detran'
-    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
     expect(page).to have_field 'Grupo da despesa', :with => '0 - RESTOS A PAGAR'
     expect(page).to have_field 'Modalidade da despesa', :with => '10 - TRANSFERÊNCIAS INTRAGOVERNAMENTAIS'
     expect(page).to have_field 'Elemento da despesa', :with => '1 - APOSENTADORIAS'
@@ -250,7 +250,7 @@ feature "ExpenseNatures" do
     click_link '4.4.20.03.11'
 
     expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-    expect(page).to have_field 'Ato regulamentador', :with => '4567'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
     expect(page).to have_field 'Grupo da despesa', :with => '4 - INVESTIMENTOS'
     expect(page).to have_field 'Modalidade da despesa', :with => '20 - TRANSFERÊNCIAS À UNIÃO'
     expect(page).to have_field 'Elemento da despesa', :with => '3 - PENSÕES'

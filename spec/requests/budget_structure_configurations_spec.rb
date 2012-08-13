@@ -30,7 +30,7 @@ feature "BudgetStructureConfigurations" do
     click_link 'Nome da Configuração'
 
     expect(page).to have_field 'Entidade', :with => 'Detran'
-    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
     expect(page).to have_field 'Máscara', :with => '99'
     expect(page).to have_field 'Descrição', :with => 'Nome da Configuração'
     expect(page).to have_field 'Nível', :with => '1'
@@ -79,7 +79,7 @@ feature "BudgetStructureConfigurations" do
     click_link 'Outro Nome da Configuração'
 
     expect(page).to have_field 'Entidade', :with => 'Detran'
-    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
     expect(page).to have_field 'Descrição', :with => 'Outro Nome da Configuração'
   end
 

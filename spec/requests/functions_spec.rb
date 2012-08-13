@@ -25,7 +25,7 @@ feature "Functions" do
 
     expect(page).to have_field 'Código', :with => '04'
     expect(page).to have_field 'Descrição', :with => 'Administração'
-    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
   end
 
   scenario 'should have modal info to regulatory_act' do
@@ -91,7 +91,7 @@ feature "Functions" do
 
     expect(page).to have_field 'Código', :with => '05'
     expect(page).to have_field 'Descrição', :with => 'Execução'
-    expect(page).to have_field 'Ato regulamentador', :with => '4567'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
   end
 
   scenario 'destroy an existent function' do

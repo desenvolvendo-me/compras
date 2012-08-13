@@ -79,7 +79,7 @@ feature "BudgetStructure" do
 
     within_tab 'Responsáveis' do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_field 'Data de início', :with => '01/02/2012'
       expect(page).to have_field 'Data de término', :with => '10/02/2012'
       expect(page).to have_select 'Status', :selected => 'Ativo'
@@ -156,7 +156,7 @@ feature "BudgetStructure" do
     within_tab 'Responsáveis' do
       within 'fieldset:nth-child(2)' do
         expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
-        expect(page).to have_field 'Ato regulamentador', :with => '4567'
+        expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
         expect(page).to have_field 'Data de início', :with => I18n.l(Date.current)
         expect(page).to have_field  'Data de término', :with => ''
         expect(page).to have_select 'Status', :selected => 'Ativo'
@@ -394,7 +394,7 @@ feature "BudgetStructure" do
       expect(page).to have_disabled_field 'Status'
 
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_field 'Data de início', :with => '01/02/2012'
       expect(page).to have_select 'Status', :selected => 'Ativo'
     end

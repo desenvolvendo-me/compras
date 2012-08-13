@@ -65,7 +65,7 @@ feature "ExtraCredits" do
     within_tab 'Principal' do
       expect(page).to have_field 'Descritor', :with => '2012 - Detran'
       expect(page).to have_select 'Tipo de crédito', :selected => 'Especial'
-      expect(page).to have_field 'Ato regulamentador', :with => '1234'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_field 'Tipo de ato regulamentador', :with => 'Lei'
       expect(page).to have_field 'Data de publicação', :with => '02/01/2012'
       expect(page).to have_field 'Natureza de crédito', :with => 'Abre crédito suplementar'
@@ -396,7 +396,7 @@ feature "ExtraCredits" do
     within_tab 'Principal' do
       expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
       expect(page).to have_select 'Tipo de crédito', :selected => 'Suplementar'
-      expect(page).to have_field 'Ato regulamentador', :with => '4567'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
       expect(page).to have_field 'Tipo de ato regulamentador', :with => 'Emenda constitucional'
       expect(page).to have_field 'Natureza de crédito', :with => 'Abre crédito suplementar de transferência'
       expect(page).to have_field 'Classificação da natureza de crédito', :with => 'Transferência'

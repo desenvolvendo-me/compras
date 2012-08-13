@@ -10,8 +10,9 @@ require 'app/models/licitation_modality'
 
 describe RegulatoryAct do
   it 'should return act_number as to_s method' do
+    subject.stub(:regulatory_act_type).and_return('Lei')
     subject.act_number = '01'
-    expect(subject.to_s).to eq '01'
+    expect(subject.to_s).to eq 'Lei 01'
   end
 
   it { should belong_to :regulatory_act_type }

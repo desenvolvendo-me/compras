@@ -52,6 +52,6 @@ class RegulatoryAct < Compras::Model
   filterize
 
   def to_s
-    act_number
+    "#{regulatory_act_type} #{act_number}"
   end
 end
