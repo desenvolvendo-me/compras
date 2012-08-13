@@ -13,6 +13,8 @@ class Person < Unico::Person
 
   delegate :city, :zip_code, :to => :address
 
+  validates :address, :presence => true
+
   orderize
 
   scope :except_special_entry, where { personable_type.not_eq 'SpecialEntry' }

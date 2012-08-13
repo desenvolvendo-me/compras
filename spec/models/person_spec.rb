@@ -59,6 +59,8 @@ describe Person do
   it { should have_many(:licitation_process_bidders).through(:accredited_representatives) }
   it { should have_many(:accredited_representatives).dependent(:restrict) }
 
+  it { should validate_presence_of(:address) }
+
   it 'should be special when personable_type is SpecialEntry' do
     subject.stub(:personable_type).and_return('SpecialEntry')
 
