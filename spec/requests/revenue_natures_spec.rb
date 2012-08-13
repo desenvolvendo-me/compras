@@ -35,7 +35,7 @@ feature "RevenueNatures" do
     end
 
     expect(page).to have_field 'Descritor', :with => '2012 - Detran'
-    expect(page).to have_field 'Ato regulamentador', :with => '1234'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
     expect(page).to have_field 'Tipo', :with => 'Lei'
     expect(page).to have_field 'Data de publicação', :with => '02/01/2012'
     expect(page).to have_field 'Classificação', :with => '12.34'
@@ -217,7 +217,7 @@ feature "RevenueNatures" do
     click_link '1.1.1.3.11.11 - Imposto sobre Propriedade Predial e Territorial Urbana'
 
     expect(page).to have_field 'Descritor', :with => '2011 - Secretaria de Educação'
-    expect(page).to have_field 'Ato regulamentador', :with => '4567'
+    expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
     expect(page).to have_field 'Tipo', :with => 'Emenda constitucional'
     expect(page).to have_field 'Data de publicação', :with => '02/01/2012'
     expect(page).to have_field 'Classificação', :with => '11.11'
