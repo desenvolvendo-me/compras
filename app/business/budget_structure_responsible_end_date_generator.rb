@@ -1,8 +1,8 @@
 class BudgetStructureResponsibleEndDateGenerator
-  attr_accessor :budget_structure_responsible_repository
+  attr_accessor :budget_structure_object
 
-  def initialize(budget_structure_responsible_repository)
-    self.budget_structure_responsible_repository = budget_structure_responsible_repository
+  def initialize(budget_structure_object)
+    self.budget_structure_object = budget_structure_object
   end
 
   def change!
@@ -14,6 +14,6 @@ class BudgetStructureResponsibleEndDateGenerator
   end
 
   def responsibles
-    budget_structure_responsible_repository.budget_structure_responsibles
+    budget_structure_object.budget_structure_responsibles
   end
 end
