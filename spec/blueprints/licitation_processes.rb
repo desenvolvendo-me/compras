@@ -26,6 +26,9 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
+  disqualify_by_documentation_problem { true }
+  disqualify_by_maximum_value { true }
+  consider_law_of_proposals { false }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_computador) do

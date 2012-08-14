@@ -110,6 +110,11 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor total', :with => '20,00'
     end
 
+    within_tab 'Configuração da apuração' do
+      check 'Desclassificar participantes com problemas da documentação'
+      check 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
@@ -177,6 +182,11 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor total', :with => '20,00'
 
       expect(page).to have_field 'Item', :with => '1'
+    end
+
+    within_tab 'Configuração da apuração' do
+      expect(page).to have_checked_field 'Desclassificar participantes com problemas da documentação'
+      expect(page).to have_checked_field 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
     end
   end
 
@@ -280,6 +290,10 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor unitário', :with => '4,00'
     end
 
+    within_tab 'Configuração da apuração' do
+      uncheck 'Desclassificar participantes com problemas da documentação'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
@@ -329,6 +343,11 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Valor total', :with => '20,00'
 
       expect(page).to have_field 'Item', :with => '1'
+    end
+
+    within_tab 'Configuração da apuração' do
+      expect(page).to have_unchecked_field 'Desclassificar participantes com problemas da documentação'
+      expect(page).to have_checked_field 'Desclassificar participantes com cotações acima do valor máximo estabelecido no edital'
     end
   end
 

@@ -6,6 +6,7 @@ class LicitationProcess < Compras::Model
   attr_accessible :pledge_type, :administrative_process_attributes, :type_of_calculation
   attr_accessible :period, :period_unit, :expiration, :expiration_unit
   attr_accessible :licitation_process_bidders_attributes, :judgment_form_id
+  attr_accessible :disqualify_by_documentation_problem, :disqualify_by_maximum_value, :consider_law_of_proposals
 
   attr_readonly :process, :year, :licitation_number
 

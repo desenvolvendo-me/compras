@@ -61,6 +61,14 @@ describe LicitationProcess do
   it { should validate_presence_of :pledge_type }
   it { should validate_presence_of :type_of_calculation }
 
+  describe 'default values' do
+    it 'uses false as default for boolean fields' do
+      expect(subject.disqualify_by_documentation_problem).to be false
+      expect(subject.disqualify_by_maximum_value).to be false
+      expect(subject.consider_law_of_proposals).to be false
+    end
+  end
+
   context 'new_envelope_opening_date is not equal to new_envelope_delivery_date' do
     before do
       subject.stub(:new_envelope_opening_date_equal_new_envelope_delivery_date?).and_return(false)
