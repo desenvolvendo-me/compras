@@ -34,7 +34,7 @@ describe SupplyAuthorizationMailer do
     it 'should not render prefecture email' do
       prefecture.stub(:email => nil)
 
-      mail.from.should be_nil
+      mail.from.should include 'noreply@nobesistemas.com.br'
     end
   end
 end

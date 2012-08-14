@@ -36,5 +36,5 @@ Compras::Application.configure do
   config.assets.debug = false
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
-  config.action_mailer.default :from => 'noreply@nobesistemas.com.br'
+  ActionMailer::Base.default :from => 'noreply@nobesistemas.com.br'
 end

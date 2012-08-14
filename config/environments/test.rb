@@ -42,4 +42,6 @@ Compras::Application.configure do
   config.log_level = :fatal
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
+
+  ActionMailer::Base.default :from => 'noreply@nobesistemas.com.br'
 end
