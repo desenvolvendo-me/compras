@@ -7,7 +7,6 @@ describe LicitationProcessRatificationItem do
   it { should belong_to :licitation_process_bidder_proposal }
 
   it 'uses false as default for ratificated' do
-      expect(subject.ratificated).to be false
-    end
-
+    expect(subject.ratificated).to be false
+  end
 end
