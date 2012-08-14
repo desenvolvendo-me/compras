@@ -1,0 +1,2 @@
+class CapabilityAllocationDetailsController < CrudController
+end

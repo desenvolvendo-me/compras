@@ -89,7 +89,10 @@ menu:
 
       - government_programs
       - government_actions
-      - capabilities
+
+      - capability:
+        - capabilities
+        - capability_allocation_details
 
     - execution:
       - reserve_fund:
