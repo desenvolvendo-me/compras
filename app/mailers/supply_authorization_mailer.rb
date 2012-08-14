@@ -10,6 +10,6 @@ class SupplyAuthorizationMailer < ActionMailer::Base
   end
 
   def email
-    @prefecture.email.blank? ? ActionMailer::Base.default[:from] : @prefecture.email
+    @prefecture.email.presence || ActionMailer::Base.default[:from]
   end
 end
