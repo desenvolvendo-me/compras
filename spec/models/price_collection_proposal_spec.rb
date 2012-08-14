@@ -124,4 +124,18 @@ describe PriceCollectionProposal do
 
     expect(subject.total_price).to eq 500
   end
+
+  context 'item with unit price equals zero' do
+    it 'should return true' do
+      subject.stub(:items => [double(:unit_price => 0), double(:unit_price => 1)])
+
+      expect(subject.has_item_with_unit_price_equals_zero).to eq true
+    end
+
+    it 'should return false' do
+      subject.stub(:items => [double(:unit_price => 2), double(:unit_price => 1)])
+
+      expect(subject.has_item_with_unit_price_equals_zero).to eq false
+    end
+  end
 end

@@ -100,4 +100,33 @@ describe PriceCollectionClassificationGenerator do
       PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).generate!
     end
   end
+
+  context 'check if winner has item with zero in unit price' do
+    let :classification_1 do
+      double(:classifiable_type => 'PriceCollection', :classifiable_id => 1, :classification => 2)
+    end
+
+    let :classification_2 do
+      double(:classifiable_type => 'PriceCollection', :classifiable_id => 1, :classification => 1)
+    end
+
+    before do
+      price_collection.stub(:all_price_collection_classifications => [classification_1, classification_2])
+    end
+
+    it 'should check if has classification -1' do
+      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).check_if_winner_has_zero!
+
+      expect(classification_1.classification).to eq 2
+      expect(classification_2.classification).to eq 1
+    end
+
+    it 'should update classification' do
+      classification_2.stub(:classification => -1)
+
+      classification_1.should_receive(:update_column).with(:classification, 1).and_return(true)
+
+      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).check_if_winner_has_zero!
+    end
+  end
 end

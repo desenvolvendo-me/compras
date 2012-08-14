@@ -14,6 +14,11 @@ class PriceCollectionLot < Compras::Model
   validates :items, :no_duplication => :material_id
   validate :must_have_at_least_one_item
 
+  def has_item_with_unit_price_equals_zero(proposal)
+    proposal.items.each { |i| return true if i.price_collection_lot == self && i.unit_price <= 0 }
+    false
+  end
+
   protected
 
   def must_have_at_least_one_item

@@ -1,5 +1,5 @@
-<% classification.items.each do |item| %>
-  <tr class="<%= "classification-#{classification.classification}-#{index}" %>">
+<% classification.items.each_with_index do |item, i| %>
+  <tr class="<%= "classification-#{classification.classification}-#{index}-#{i}" %>">
     <td><%= item.description %></td>
     <td><%= item.reference_unit %></td>
     <td><%= item.brand %></td>

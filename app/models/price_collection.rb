@@ -23,7 +23,7 @@ class PriceCollection < Compras::Model
 
   has_one :annul, :class_name => 'PriceCollectionAnnul'
   has_many :price_collection_lots, :dependent => :destroy, :order => :id
-  has_many :items, :through => :price_collection_lots
+  has_many :items, :through => :price_collection_lots, :order => :id
   has_many :price_collection_proposals, :dependent => :destroy, :order => :id
   has_many :creditors, :through => :price_collection_proposals
   has_many :price_collection_classifications, :as => :classifiable, :dependent => :destroy

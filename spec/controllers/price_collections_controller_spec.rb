@@ -115,7 +115,8 @@ describe PriceCollectionsController do
 
   context 'GET #show' do
     let :price_collection_classifications do
-      [double('PriceCollectionClassification'), double('PriceCollectionClassification')]
+      [double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 1),
+       double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 2)]
     end
 
     let :price_collection do
@@ -127,6 +128,8 @@ describe PriceCollectionsController do
       PriceCollection.stub(:find).and_return(price_collection)
 
       price_collection.should_receive(:transaction)
+
+      PriceCollectionClassificationGenerator.any_instance.should_receive(:check_if_winner_has_zero!)
 
       put :update, :id => price_collection.id, :commit => 'Apurar'
     end

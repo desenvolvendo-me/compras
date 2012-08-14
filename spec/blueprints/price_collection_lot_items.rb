@@ -4,8 +4,20 @@ PriceCollectionLotItem.blueprint(:item_da_coleta) do
   quantity { 10 }
 end
 
+PriceCollectionLotItem.blueprint(:office) do
+  material { Material.make!(:office) }
+  brand { 'MS' }
+  quantity { 2 }
+end
+
 PriceCollectionLotItem.blueprint(:arame) do
   material { Material.make!(:arame_comum) }
+  brand { 'Tal' }
+  quantity { 200 }
+end
+
+PriceCollectionLotItem.blueprint(:arame_farpado) do
+  material { Material.make!(:arame_farpado) }
   brand { 'Tal' }
   quantity { 200 }
 end

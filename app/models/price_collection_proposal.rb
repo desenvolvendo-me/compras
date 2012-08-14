@@ -50,18 +50,31 @@ class PriceCollectionProposal < Compras::Model
 
   def global_classification
     proposals = price_collection.price_collection_proposals.sort_by &:total_price
-    proposals.index(self).succ
+
+    classification = proposals.index(self).succ
+    classification = -1 if has_item_with_unit_price_equals_zero
+    classification
   end
 
   def classification_by_lot(lot)
     items_with_creditor = PriceCollectionProposalItem.by_lot_item_order_by_unit_price(lot.id)
 
-    items_with_creditor.index { |item| item.creditor_id.to_i == creditor_id.to_i }.succ
+    classification = items_with_creditor.index { |item| item.creditor_id.to_i == creditor_id.to_i }.succ
+    classification = -1 if lot.has_item_with_unit_price_equals_zero(self)
+    classification
   end
 
   def classification_by_item(proposal_item)
     proposal_items = PriceCollectionProposalItem.by_item_order_by_unit_price(proposal_item.price_collection_lot_item)
-    proposal_items.index(proposal_item).succ
+
+    classification = proposal_items.index(proposal_item).succ
+    classification = -1 if proposal_item.unit_price <= 0
+    classification
+  end
+
+  def has_item_with_unit_price_equals_zero
+    items.each { |i| return true if i.unit_price <= 0 }
+    false
   end
 
   def items_by_lot(lot)

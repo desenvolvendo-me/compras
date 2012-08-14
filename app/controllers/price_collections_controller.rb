@@ -13,9 +13,13 @@ class PriceCollectionsController < CrudController
 
   def update
     if params[:commit] == 'Apurar'
+      generator = PriceCollectionClassificationGenerator.new(resource)
+
       resource.transaction do
-        PriceCollectionClassificationGenerator.new(resource).generate!
+        generator.generate!
       end
+
+      generator.check_if_winner_has_zero!
 
       redirect_to price_collection_path(resource)
     else

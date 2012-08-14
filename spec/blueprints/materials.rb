@@ -15,6 +15,23 @@ Material.blueprint(:antivirus) do
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
 end
 
+Material.blueprint(:office) do
+  materials_class { MaterialsClass.make!(:software) }
+  code { "01.01.00002" }
+  description { "Office" }
+  detailed_description { "MS Office" }
+  minimum_stock_balance { 100 }
+  reference_unit { ReferenceUnit.make!(:unidade) }
+  manufacturer { "MS" }
+  perishable { true }
+  storable { true }
+  combustible { false }
+  material_characteristic { "material" }
+  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  material_type { 'consumption' }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
+end
+
 Material.blueprint(:arame_farpado) do
   materials_class { MaterialsClass.make!(:arames) }
   code { "02.02.00001" }

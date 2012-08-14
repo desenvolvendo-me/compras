@@ -16,6 +16,18 @@ class PriceCollectionClassificationGenerator
     end
   end
 
+  def check_if_winner_has_zero!
+    price_collection.all_price_collection_classifications.group_by(&:classifiable_id).each do |classifiable_id, classifications|
+      classifications = classifications.sort_by(&:classification)
+
+      if classifications.first.classification == -1
+        classifications.each do |classification|
+          classification.update_column(:classification, 1) if classification.classification != -1
+        end
+      end
+    end
+  end
+
   protected
 
   def lowest_total_price_by_item(proposal)

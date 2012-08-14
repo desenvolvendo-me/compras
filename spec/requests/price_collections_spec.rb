@@ -571,6 +571,70 @@ feature "PriceCollections" do
     expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
   end
 
+  scenario 'calc by lowest_total_price_by_item with zero item' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM)
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
+
+    PriceCollectionProposalItem.make!(:wenderson_antivirus,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 0)
+    PriceCollectionProposalItem.make!(:wenderson_arame,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.second,
+                                      :unit_price => 3)
+
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 50)
+    PriceCollectionProposalItem.make!(:sobrinho_arame,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.second,
+                                      :unit_price => 2)
+
+    navigate 'Compras e Licitações > Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço total por item'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification--1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Não'
+    end
+
+    within '.classification-2-1' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '3,00'
+      expect(page).to have_content 'Não'
+    end
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification-1-1' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '50,00'
+      expect(page).to have_content 'Sim'
+    end
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '2,00'
+      expect(page).to have_content 'Sim'
+    end
+  end
+
   scenario 'calc by lowest_price_by_lot' do
     price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
 
@@ -590,14 +654,14 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification-2-0' do
+    within '.classification-2-0-0' do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '50,00'
       expect(page).to have_content '500,00'
       expect(page).to have_content 'Não'
     end
 
-    within '.classification-1-1' do
+    within '.classification-1-1-0' do
       expect(page).to have_content 'Arame comum'
       expect(page).to have_content '2,00'
       expect(page).to have_content '400,00'
@@ -606,18 +670,80 @@ feature "PriceCollections" do
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
-    within '.classification-1-0' do
+    within '.classification-1-0-0' do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '40,00'
       expect(page).to have_content '400,00'
       expect(page).to have_content 'Sim'
     end
 
-    within 'tr.classification-2-1' do
+    within 'tr.classification-2-1-0' do
       expect(page).to have_content 'Arame comum'
       expect(page).to have_content '3,00'
       expect(page).to have_content '600,00'
       expect(page).to have_content 'Não'
+    end
+  end
+
+  scenario 'calc by lowest_price_by_lot with item zero' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_itens_no_mesmo_lote, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_PRICE_BY_LOT)
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
+
+    PriceCollectionProposalItem.make!(:wenderson_antivirus,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 0)
+    PriceCollectionProposalItem.make!(:wenderson_office,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.second)
+
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 30)
+    PriceCollectionProposalItem.make!(:sobrinho_office,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.second)
+
+    navigate 'Compras e Licitações > Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço por lote'
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification--1-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Não'
+    end
+
+    within '.classification--1-0-1' do
+      expect(page).to have_content 'Office'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content 'Não'
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '30,00'
+      expect(page).to have_content 'Sim'
+    end
+
+    within 'tr.classification-1-0-1' do
+      expect(page).to have_content 'Office'
+      expect(page).to have_content '5,00'
+      expect(page).to have_content 'Sim'
     end
   end
 
@@ -668,6 +794,70 @@ feature "PriceCollections" do
       expect(page).to have_content '3,00'
       expect(page).to have_content '600,00'
       expect(page).to have_content 'Não'
+    end
+  end
+
+  scenario 'calc by lowest_global_price with unit price equals zero' do
+    price_collection = PriceCollection.make!(:coleta_de_precos_com_2_lotes, :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE)
+    proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
+    proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
+
+    PriceCollectionProposalItem.make!(:wenderson_antivirus,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 0)
+    PriceCollectionProposalItem.make!(:wenderson_arame,
+                                      :price_collection_proposal => proposal_1,
+                                      :price_collection_lot_item => price_collection.items.second,
+                                      :unit_price => 10)
+
+    PriceCollectionProposalItem.make!(:sobrinho_antivirus,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.first,
+                                      :unit_price => 10)
+    PriceCollectionProposalItem.make!(:sobrinho_arame,
+                                      :price_collection_proposal => proposal_2,
+                                      :price_collection_lot_item => price_collection.items.second,
+                                      :unit_price => 10)
+
+    navigate 'Compras e Licitações > Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Quadro Comparativo de Preços da Coleta de preço 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification--1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Não'
+    end
+
+    within '.classification--1-1' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content 'Não'
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content 'Sim'
+    end
+
+    within '.classification-1-1' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content 'Sim'
     end
   end
 
