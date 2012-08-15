@@ -157,4 +157,62 @@ describe BudgetStructure do
       end
     end
   end
+
+  context 'when getting persisted responsibles' do
+    before do
+      subject.stub(:budget_structure_responsibles).and_return(
+        [persisted_responsible, new_responsible]
+      )
+    end
+
+    let :persisted_responsible do
+      double(:persisted? => true)
+    end
+
+    let :new_responsible do
+      double(:persisted? => false)
+    end
+
+    it 'should return only persisted' do
+      expect(subject.persisted_budget_structure_responsibles).to eq [persisted_responsible]
+    end
+  end
+
+  context 'when check responsible changes' do
+    context 'and have new responsible' do
+      before do
+        subject.stub(:budget_structure_responsibles).and_return(
+          [persisted_responsible, new_responsible]
+        )
+      end
+
+      let :persisted_responsible do
+        double(:persisted? => true)
+      end
+
+      let :new_responsible do
+        double(:persisted? => false)
+      end
+
+      it 'should return true if has a responsible as new_record?' do
+        expect(subject).to be_budget_structure_responsibles_changed
+      end
+    end
+
+    context 'and do not have new responsible' do
+      before do
+        subject.stub(:budget_structure_responsibles).and_return(
+          [persisted_responsible]
+        )
+      end
+
+      let :persisted_responsible do
+        double(:persisted? => true)
+      end
+
+      it 'should return false if do not have a responsible as new_record?' do
+        expect(subject).to_not be_budget_structure_responsibles_changed
+      end
+    end
+  end
 end

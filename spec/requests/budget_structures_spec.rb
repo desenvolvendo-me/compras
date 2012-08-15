@@ -463,4 +463,24 @@ feature "BudgetStructure" do
       end
     end
   end
+
+  scenario 'when update budget_structure without add new responsible should not set end_date' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Informações' do
+      fill_in 'Código', :with => '2'
+    end
+
+    click_button 'Salvar'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      page.should have_field 'Data de término', :with => ''
+    end
+  end
 end

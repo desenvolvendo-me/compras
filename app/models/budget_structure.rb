@@ -55,6 +55,14 @@ class BudgetStructure < Compras::Model
     upper_budget_structure_level.id if parent
   end
 
+  def persisted_budget_structure_responsibles
+    budget_structure_responsibles.select(&:persisted?)
+  end
+
+  def budget_structure_responsibles_changed?
+    persisted_budget_structure_responsibles.size != budget_structure_responsibles.size
+  end
+
   def to_s
     "#{budget_structure} - #{description}"
   end
