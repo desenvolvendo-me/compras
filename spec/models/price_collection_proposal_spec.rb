@@ -127,15 +127,15 @@ describe PriceCollectionProposal do
 
   context 'item with unit price equals zero' do
     it 'should return true' do
-      subject.stub(:items => [double(:unit_price => 0), double(:unit_price => 1)])
+      subject.stub(:items => double(:any_without_unit_price? => true))
 
-      expect(subject.has_item_with_unit_price_equals_zero).to eq true
+      expect(subject.has_item_with_unit_price_equals_zero).to be true
     end
 
     it 'should return false' do
-      subject.stub(:items => [double(:unit_price => 2), double(:unit_price => 1)])
+      subject.stub(:items => double(:any_without_unit_price? => false))
 
-      expect(subject.has_item_with_unit_price_equals_zero).to eq false
+      expect(subject.has_item_with_unit_price_equals_zero).to be false
     end
   end
 end

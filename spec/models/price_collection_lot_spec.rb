@@ -29,30 +29,4 @@ describe PriceCollectionLot do
 
     expect(subject.errors[:items]).to include 'é necessário cadastrar pelo menos um item'
   end
-
-  context 'item with unit price equals zero' do
-    let :item_1 do
-      double(:price_collection_lot => subject, :unit_price => 0)
-    end
-
-    let :item_2 do
-      double(:price_collection_lot => subject, :unit_price => 1)
-    end
-
-    let :proposal do
-      double
-    end
-
-    it 'should return true' do
-      proposal.stub(:items => [item_1, item_2])
-
-      expect(subject.has_item_with_unit_price_equals_zero(proposal)).to eq true
-    end
-
-    it 'should return false' do
-      proposal.stub(:items => [item_2])
-
-      expect(subject.has_item_with_unit_price_equals_zero(proposal)).to eq false
-    end
-  end
 end

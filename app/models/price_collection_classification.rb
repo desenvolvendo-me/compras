@@ -9,4 +9,8 @@ class PriceCollectionClassification < Compras::Model
 
   orderize
   filterize
+
+  def disqualified?
+    classification == -1
+  end
 end

@@ -11,6 +11,10 @@ class PriceCollectionProposalItem < Compras::Model
   delegate :material, :brand, :reference_unit, :quantity, :to => :price_collection_lot_item, :allow_nil => true
   delegate :creditor, :editable_by?, :price_collection, :to => :price_collection_proposal, :allow_nil => true
 
+  scope :by_lot, lambda { |lot_id|
+    where { price_collection_lot_item_id.eq(lot_id) }
+  }
+
   def total_price
     unit_price * (quantity || 0)
   end
@@ -42,5 +46,13 @@ class PriceCollectionProposalItem < Compras::Model
     group { price_collection_lot_item.price_collection_lot_id }.
 
     order { 'total_value' }
+  end
+
+  def self.any_without_unit_price?(lot = nil)
+    query = scoped
+    query = query.by_lot(lot.id) if lot
+    query = query.where { unit_price.eq(0) }
+
+    query.any?
   end
 end

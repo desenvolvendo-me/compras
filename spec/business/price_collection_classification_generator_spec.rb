@@ -103,11 +103,11 @@ describe PriceCollectionClassificationGenerator do
 
   context 'check if winner has item with zero in unit price' do
     let :classification_1 do
-      double(:classifiable_type => 'PriceCollection', :classifiable_id => 1, :classification => 2)
+      double(:classifiable_type => 'PriceCollection', :classifiable_id => 1, :disqualified? => false, :classification => 2)
     end
 
     let :classification_2 do
-      double(:classifiable_type => 'PriceCollection', :classifiable_id => 1, :classification => 1)
+      double(:classifiable_type => 'PriceCollection', :classifiable_id => 1, :disqualified? => false, :classification => 1)
     end
 
     before do
@@ -122,7 +122,7 @@ describe PriceCollectionClassificationGenerator do
     end
 
     it 'should update classification' do
-      classification_2.stub(:classification => -1)
+      classification_2.stub(:disqualified? => true, :classification => -1)
 
       classification_1.should_receive(:update_column).with(:classification, 1).and_return(true)
 
