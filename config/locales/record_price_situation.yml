@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    record_price_situation:
+      active: "Ativo"
+      canceled: "Cancelado"
+      extended: "Prorrogado"

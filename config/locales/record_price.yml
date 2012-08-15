@@ -1,0 +1,25 @@
+pt-BR:
+  activerecord:
+    models:
+      record_price:
+        one: "Registro de Preço"
+        other: "Registros de Preços"
+
+    attributes:
+      record_price:
+        number: "Número"
+        year: "Ano"
+        date: "Data"
+        validaty_date: "Data da validade"
+        situation: "Situação"
+        licitation_process: "Processo licitatório"
+        description: "Objeto"
+        delivery_location: "Local de entrega"
+        management_unit: "Unidade gestora"
+        responsible: "Responsável"
+        payment_method: "Forma de pagamento"
+        delivery: "Entrega"
+        delivery_unit: "Período da entrega"
+        validity: "Validade"
+        validaty_unit: "Período da validade"
+        observations: "Observações"

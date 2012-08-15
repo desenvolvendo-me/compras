@@ -29,6 +29,7 @@ menu:
     - purchase_solicitations
     - price_collections
     - direct_purchases
+    - record_prices
 
     - administrative_and_licitation_processes:
       - administrative_processes

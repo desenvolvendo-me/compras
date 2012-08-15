@@ -1,0 +1,2 @@
+class RecordPricesController < CrudController
+end
