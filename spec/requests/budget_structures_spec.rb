@@ -337,7 +337,7 @@ feature "BudgetStructure" do
     click_button 'Salvar'
 
     within_tab 'Responsáveis' do
-      page.should have_content 'já está em uso'
+      expect(page).to have_content 'já está em uso'
     end
   end
 
@@ -351,7 +351,7 @@ feature "BudgetStructure" do
 
       expect(page).to have_css('.remove-budget-structure-responsible', :count => 1)
 
-      page.should have_disabled_button 'Adicionar Responsável'
+      expect(page).to have_disabled_button 'Adicionar Responsável'
 
       click_button 'Remover Responsável'
 
@@ -375,7 +375,7 @@ feature "BudgetStructure" do
 
       expect(page).to have_css('.remove-budget-structure-responsible', :count => 1)
 
-      page.should have_disabled_button 'Adicionar Responsável'
+      expect(page).to have_disabled_button 'Adicionar Responsável'
     end
   end
 
@@ -423,7 +423,7 @@ feature "BudgetStructure" do
 
     within_tab 'Responsáveis' do
       within 'fieldset' do
-        page.should have_field 'Data de término', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de término', :with => I18n.l(Date.current)
       end
     end
   end
@@ -451,15 +451,15 @@ feature "BudgetStructure" do
 
     within_tab 'Responsáveis' do
       within 'fieldset:nth-child(1)' do
-        page.should have_field 'Data de término', :with => '01/04/2012'
+        expect(page).to have_field 'Data de término', :with => '01/04/2012'
       end
 
       within 'fieldset:nth-child(2)' do
-        page.should have_field 'Data de término', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de término', :with => I18n.l(Date.current)
       end
 
       within 'fieldset:nth-child(3)' do
-        page.should have_field 'Data de término', :with => ''
+        expect(page).to have_field 'Data de término', :with => ''
       end
     end
   end
@@ -480,7 +480,7 @@ feature "BudgetStructure" do
     click_link 'Secretaria de Educação'
 
     within_tab 'Responsáveis' do
-      page.should have_field 'Data de término', :with => ''
+      expect(page).to have_field 'Data de término', :with => ''
     end
   end
 end

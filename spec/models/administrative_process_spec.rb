@@ -92,12 +92,12 @@ describe AdministrativeProcess do
 
   it 'should be invite when modality is INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES' do
     subject.modality = AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES
-    subject.should be_invited
+    expect(subject).to be_invited
   end
 
   it 'should be invite when modality is INVITATION_FOR_PURCHASES_AND_SERVICES' do
     subject.modality = AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES
-    subject.should be_invited
+    expect(subject).to be_invited
   end
 
   it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_SERVICES)' do
@@ -156,12 +156,12 @@ describe AdministrativeProcess do
 
   it "should allow licitation process when object type is purchase and services" do
     subject.stub(:object_type => AdministrativeProcessObjectType::PURCHASE_AND_SERVICES)
-    subject.should be_allow_licitation_process
+    expect(subject).to be_allow_licitation_process
   end
 
   it "should allow licitation process when object type is construction_and_engineering_services" do
     subject.stub(:object_type => AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES)
-    subject.should be_allow_licitation_process
+    expect(subject).to be_allow_licitation_process
   end
 
   it "should not allow licitation process when object type is not construction_and_engineering_services neither purchase_and_services" do

@@ -75,13 +75,13 @@ describe PurchaseSolicitation do
   it 'should be editable when is pending' do
     subject.service_status = PurchaseSolicitationServiceStatus::PENDING
 
-    subject.should be_editable
+    expect(subject).to be_editable
   end
 
   it 'should be editable when is returned' do
     subject.service_status = PurchaseSolicitationServiceStatus::RETURNED
 
-    subject.should be_editable
+    expect(subject).to be_editable
   end
 
   it 'should not be editable when is not returned neither pending' do

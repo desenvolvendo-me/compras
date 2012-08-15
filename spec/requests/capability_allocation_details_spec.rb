@@ -15,11 +15,11 @@ feature "CapabilityAllocationDetails" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Detalhamento das Destinações de Recursos criado com sucesso.'
+    expect(page).to have_notice 'Detalhamento das Destinações de Recursos criado com sucesso.'
 
     click_link 'Educação'
 
-    page.should have_field 'Descrição', :with => 'Educação'
+    expect(page).to have_field 'Descrição', :with => 'Educação'
   end
 
   scenario 'validate uniqueness of description' do
@@ -33,7 +33,7 @@ feature "CapabilityAllocationDetails" do
 
     click_button 'Salvar'
 
-    page.should have_content 'já está em uso'
+    expect(page).to have_content 'já está em uso'
   end
 
   scenario 'update an existent capability_allocation_detail' do
@@ -47,11 +47,11 @@ feature "CapabilityAllocationDetails" do
 
     click_button 'Salvar'
 
-    page.should have_notice 'Detalhamento das Destinações de Recursos editado com sucesso.'
+    expect(page).to have_notice 'Detalhamento das Destinações de Recursos editado com sucesso.'
 
     click_link 'Reforma'
 
-    page.should have_field 'Descrição', :with => 'Reforma'
+    expect(page).to have_field 'Descrição', :with => 'Reforma'
   end
 
   scenario 'destroy an existent capability_allocation_detail' do
@@ -63,8 +63,8 @@ feature "CapabilityAllocationDetails" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Detalhamento das Destinações de Recursos apagado com sucesso.'
+    expect(page).to have_notice 'Detalhamento das Destinações de Recursos apagado com sucesso.'
 
-    page.should_not have_content 'Educação'
+    expect(page).to_not have_content 'Educação'
   end
 end

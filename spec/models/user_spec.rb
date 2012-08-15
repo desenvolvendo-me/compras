@@ -15,7 +15,7 @@ describe User do
   end
 
   it "require password" do
-    subject.should be_password_required
+    expect(subject).to be_password_required
   end
 
   it "require password unless persisted" do
@@ -27,14 +27,14 @@ describe User do
     subject.should_receive(:persisted?).and_return(true)
     subject.password = '123456'
 
-    subject.should be_password_required
+    expect(subject).to be_password_required
   end
 
   it "required password if password confirmation is present" do
     subject.should_receive(:persisted?).and_return(true)
     subject.password_confirmation = '123456'
 
-    subject.should be_password_required
+    expect(subject).to be_password_required
   end
 
   it 'requires login if the user is not an creditor' do
@@ -68,7 +68,7 @@ describe User do
       subject.should_receive(:persisted?).and_return true
       subject.should_receive(:confirmed?).and_return false
 
-      subject.should be_password_required
+      expect(subject).to be_password_required
     end
 
     it 'should not require the password if the user is a creditor, is persisted and confirmed' do
@@ -109,13 +109,13 @@ describe User do
     it 'should be true when is a administrator?' do
       subject.stub(:administrator?).and_return true
 
-      subject.should be_administrator_or_creditor
+      expect(subject).to be_administrator_or_creditor
     end
 
     it 'should be true when is a creditor?' do
       subject.stub(:creditor?).and_return true
 
-      subject.should be_administrator_or_creditor
+      expect(subject).to be_administrator_or_creditor
     end
 
     it 'should be false when is not an administrator neither a creditor' do
