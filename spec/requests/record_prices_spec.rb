@@ -17,7 +17,6 @@ feature "RecordPrices" do
 
     click_link 'Criar Registro de Preço'
 
-    fill_in 'Número', :with => '2'
     fill_in 'Ano', :with => '2012'
     fill_in 'Data', :with => '05/04/2012'
     fill_in 'Data da validade', :with => '05/04/2013'
@@ -48,7 +47,7 @@ feature "RecordPrices" do
 
     click_link '2012/1'
 
-    page.should have_field 'Número', :with => '2'
+    page.should have_field 'Número', :with => '1'
     page.should have_field 'Ano', :with => '2012'
     page.should have_field 'Data', :with => '05/04/2012'
     page.should have_field 'Data da validade', :with => '05/04/2013'
@@ -73,7 +72,6 @@ feature "RecordPrices" do
 
     click_link '2012/1'
 
-    fill_in 'Número', :with => '2'
     fill_in 'Ano', :with => '2013'
     fill_in 'Data', :with => '05/04/2013'
     fill_in 'Data da validade', :with => '05/04/2014'
@@ -104,7 +102,7 @@ feature "RecordPrices" do
 
     click_link '2013/1'
 
-    page.should have_field 'Número', :with => '2'
+    page.should have_field 'Número', :with => '1'
     page.should have_field 'Ano', :with => '2013'
     page.should have_field 'Data', :with => '05/04/2013'
     page.should have_field 'Data da validade', :with => '05/04/2014'

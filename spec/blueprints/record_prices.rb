@@ -1,6 +1,5 @@
 # encoding: utf-8
 RecordPrice.blueprint(:registro_de_precos) do
-  number { 1 }
   year { 2012 }
   date { Date.new(2012, 4, 5) }
   validaty_date { Date.new(2013, 4, 5) }

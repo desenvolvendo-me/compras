@@ -9,11 +9,18 @@ describe RecordPrice do
   it { should belong_to :responsible }
 
   it { should validate_presence_of :licitation_process }
+  it { should validate_presence_of :year }
 
   it 'should id as to_s' do
+    subject.number = 1
     subject.year = 2012
-    subject.stub(:count_by_year_and_less_than_me).and_return(1)
 
     expect(subject.to_s).to eq '2012/1'
   end
+
+  it { should allow_value('2012').for(:year) }
+  it { should_not allow_value('212').for(:year) }
+  it { should_not allow_value('2a12').for(:year) }
+
+  it { should auto_increment(:number).by(:year) }
 end
