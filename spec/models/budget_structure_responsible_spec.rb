@@ -20,15 +20,5 @@ describe BudgetStructureResponsible do
     it 'be valid when the end_date is after of start_date' do
       expect(subject).to allow_value(Date.new(2012, 2, 11)).for(:end_date)
     end
-
-    it 'be invalid when the start_date is after of end_date' do
-      expect(subject).not_to allow_value(Date.new(2012, 2, 1)).for(:end_date).
-                                                           with_message('deve ser depois da data de início (10/02/2012)')
-    end
-
-    it 'be invalid when the start_date is equal to end_date' do
-      expect(subject).not_to allow_value(Date.new(2012, 2, 10)).for(:end_date).
-                                                           with_message('deve ser depois da data de início (10/02/2012)')
-    end
   end
 end

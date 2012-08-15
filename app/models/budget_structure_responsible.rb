@@ -9,9 +9,4 @@ class BudgetStructureResponsible < Compras::Model
   belongs_to :regulatory_act
 
   validates :responsible, :regulatory_act, :start_date, :status, :presence => true
-  validates :end_date, :timeliness => {
-    :after => :start_date,
-    :type => :date,
-    :after_message => :end_date_should_be_after_start_date
-  }, :allow_blank => true
 end
