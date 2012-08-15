@@ -46,7 +46,7 @@ feature "RecordPrices" do
 
     page.should have_notice 'Registro de Preço criado com sucesso.'
 
-    click_link '2'
+    click_link '2012/1'
 
     page.should have_field 'Número', :with => '2'
     page.should have_field 'Ano', :with => '2012'
@@ -71,7 +71,7 @@ feature "RecordPrices" do
 
     navigate 'Compras e Licitações > Registros de Preços'
 
-    click_link '1'
+    click_link '2012/1'
 
     fill_in 'Número', :with => '2'
     fill_in 'Ano', :with => '2013'
@@ -102,7 +102,7 @@ feature "RecordPrices" do
 
     page.should have_notice 'Registro de Preço editado com sucesso.'
 
-    click_link '2'
+    click_link '2013/1'
 
     page.should have_field 'Número', :with => '2'
     page.should have_field 'Ano', :with => '2013'
@@ -127,7 +127,7 @@ feature "RecordPrices" do
 
     navigate 'Compras e Licitações > Registros de Preços'
 
-    click_link '1'
+    click_link '2012/1'
 
     click_link 'Apagar', :confirm => true
 

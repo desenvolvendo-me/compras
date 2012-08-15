@@ -16,11 +16,23 @@ class RecordPrice < Compras::Model
   belongs_to :responsible, :class_name => 'Employee'
 
   validates :licitation_process, :presence => true
+  validates :date, :validaty_date, :timeliness => { :type => :date },
+    :allow_blank => true
 
   orderize :id
   filterize
 
+  scope :by_year_and_less_than_me, lambda { |year, id|
+    where { |record| record.year.eq(year) & record.id.lteq(id) }
+  }
+
   def to_s
-    "#{number}"
+    "#{year}/#{count_by_year_and_less_than_me}"
+  end
+
+  protected
+
+  def count_by_year_and_less_than_me
+    RecordPrice.by_year_and_less_than_me(year, id).count
   end
 end

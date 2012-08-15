@@ -11,8 +11,9 @@ describe RecordPrice do
   it { should validate_presence_of :licitation_process }
 
   it 'should id as to_s' do
-    subject.number = 123
+    subject.year = 2012
+    subject.stub(:count_by_year_and_less_than_me).and_return(1)
 
-    expect(subject.to_s).to eq '123'
+    expect(subject.to_s).to eq '2012/1'
   end
 end
