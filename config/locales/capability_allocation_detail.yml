@@ -7,4 +7,5 @@ pt-BR:
 
     attributes:
       capability_allocation_detail:
+        id: "Código"
         description: "Descrição"

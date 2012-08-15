@@ -19,6 +19,7 @@ feature "CapabilityAllocationDetails" do
 
     click_link 'Educação'
 
+    expect(page).to have_field 'Código', :with => CapabilityAllocationDetail.last.id.to_s
     expect(page).to have_field 'Descrição', :with => 'Educação'
   end
 
@@ -37,7 +38,7 @@ feature "CapabilityAllocationDetails" do
   end
 
   scenario 'update an existent capability_allocation_detail' do
-    CapabilityAllocationDetail.make!(:educacao)
+    capibality_allocation_detail = CapabilityAllocationDetail.make!(:educacao)
 
     navigate 'Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
 
@@ -51,6 +52,7 @@ feature "CapabilityAllocationDetails" do
 
     click_link 'Reforma'
 
+    expect(page).to have_field 'Código', :with => capibality_allocation_detail.id.to_s
     expect(page).to have_field 'Descrição', :with => 'Reforma'
   end
 
