@@ -1,0 +1,2 @@
+class CapabilityDestinationsController < CrudController
+end

@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    capability_destination_group:
+      treasury_current_year: "Recursos do tesouro - exercício corrente"
+      other_current_year: "Recursos de outras fontes - exercício corrente"
+      treasury_previous_years: "Recursos do tesouro - exercícios anteriores"
+      other_previous_years: "Recursos do outras fontes - exercícios anteriores"
+      conditional: "Recursos condicionais"

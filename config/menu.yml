@@ -94,6 +94,7 @@ menu:
       - capability:
         - capabilities
         - capability_allocation_details
+        - capability_destinations
 
     - execution:
       - reserve_fund:

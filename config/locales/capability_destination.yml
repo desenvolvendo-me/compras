@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      capability_destination:
+        one: "Destinação de Recursos"
+        other: "Destinações de Recursos"
+
+    attributes:
+      capability_destination:
+        capability_destination_use: "Uso"
+        capability_destination_group: "Grupo destinação de recursos"
+        specification: "Especificação da destinação de recursos"
+        description: "Descrição"
+        destination: "Destinação"

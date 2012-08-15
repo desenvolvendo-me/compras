@@ -1,0 +1,9 @@
+pt-BR:
+  enumerations:
+    capability_destination_use:
+      resources_not_for_counterpart: "Recursos não destinados à contrapartida"
+      bird: "Contrapartida - Banco Internacional para a Reconstrução e o Desenvolvimento - BIRD"
+      bid: "Contrapartida - Banco Interamericano de Desenvolvimento - BID"
+      sector_loans: "Contrapartida de empréstimos com enfoque setorial amplo"
+      other_loans: "Contrapartida de outros empréstimos"
+      donations: "Contrapartida de doações"

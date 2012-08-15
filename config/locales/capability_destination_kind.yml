@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    capability_destination_kind:
+      primary: "Primária"
+      no_primary: "Não primária"
