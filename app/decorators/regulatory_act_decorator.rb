@@ -4,6 +4,6 @@ class RegulatoryActDecorator
   include ActionView::Helpers::TranslationHelper
 
   def summary
-    "Criado em #{localize created_at}"
+    "Criado em #{localize creation_date}"
   end
 end

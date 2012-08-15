@@ -4,7 +4,7 @@ require 'app/decorators/regulatory_act_decorator'
 
 describe RegulatoryActDecorator do
   before do
-    component.stub(:created_at).and_return(Date.new(2012, 8, 13))
+    component.stub(:creation_date).and_return(Date.new(2012, 8, 13))
   end
 
   it 'should return correct summary' do
