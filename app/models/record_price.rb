@@ -1,9 +1,10 @@
 class RecordPrice < Compras::Model
-  attr_accessible :date, :delivery, :delivery_unit, :description, :number,
+  attr_accessible :date, :delivery, :delivery_unit, :description,
                   :observations, :situation, :validaty_date, :validaty_unit,
-                  :validity, :year, :licitation_process_id,
-                  :delivery_location_id, :management_unit_id, :responsible_id,
-                  :payment_method_id
+                  :validity, :year, :licitation_process_id, :payment_method_id,
+                  :delivery_location_id, :management_unit_id, :responsible_id
+
+  attr_readonly :number
 
   has_enumeration_for :delivery_unit, :with => PeriodUnit
   has_enumeration_for :situation, :with => RecordPriceSituation
