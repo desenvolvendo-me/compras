@@ -11,9 +11,7 @@ feature "<%= controller_class_name %>" do
     make_dependencies!
 
     <%- end -%>
-    click_link '<%= dashboard %>'
-
-    click_link '<%= plural %>'
+    navigate '<%= dashboard %> > <%= plural %>'
 
     click_link 'Criar <%= singular %>'
 
@@ -39,9 +37,7 @@ feature "<%= controller_class_name %>" do
     <%- end -%>
     <%= class_name %>.make!(:example)
 
-    click_link '<%= dashboard %>'
-
-    click_link '<%= plural %>'
+    navigate '<%= dashboard %> > <%= plural %>'
 
     click_link 'Example'
 
@@ -62,9 +58,7 @@ feature "<%= controller_class_name %>" do
 
   scenario 'destroy an existent <%= singular_name %>' do
     <%= class_name %>.make!(:example)
-    click_link '<%= dashboard %>'
-
-    click_link '<%= plural %>'
+    navigate '<%= dashboard %> > <%= plural %>'
 
     click_link 'Example'
 
