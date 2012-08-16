@@ -24,7 +24,7 @@ class SupplyAuthorizationDecorator
     return unless component.direct_purchase && component.period
 
     if component.period > 1
-      I18n.translate("enumerations.period_unit.#{period_unit}")
+      translate("enumerations.period_unit.#{period_unit}")
     else
       component.period_unit_humanize
     end

@@ -3,6 +3,7 @@ class PriceCollectionClassificationDecorator
   include Decore
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper
+  include ActionView::Helpers::TranslationHelper
 
   def unit_value
     number_with_precision super if super
@@ -13,6 +14,6 @@ class PriceCollectionClassificationDecorator
   end
 
   def classification
-    I18n.translate((component.classification == 1).to_s)
+    translate((component.classification == 1).to_s)
   end
 end
