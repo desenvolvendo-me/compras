@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
+require 'lib/signable'
 require 'app/models/creditor'
 require 'app/models/creditor_document'
 require 'app/models/creditor_representative'

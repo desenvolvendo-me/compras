@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_bidder_proposal'
+require 'app/models/licitation_process_ratification_item'
 
 describe LicitationProcessBidderProposal do
   it { should belong_to :licitation_process_bidder }

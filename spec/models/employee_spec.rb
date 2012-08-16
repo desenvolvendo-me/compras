@@ -1,4 +1,5 @@
 require 'model_helper'
+require 'lib/signable'
 require 'app/models/employee'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_liberation'

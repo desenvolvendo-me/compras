@@ -11,6 +11,8 @@ require 'app/models/partner'
 require 'app/models/creditor'
 require 'app/models/licitation_process_bidder'
 require 'app/models/accredited_representative'
+require 'app/models/unico/address'
+require 'app/models/address'
 
 describe Person do
   it "return name when call to_s" do

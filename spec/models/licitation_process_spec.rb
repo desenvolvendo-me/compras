@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process'
+require 'lib/signable'
 require 'app/models/administrative_process'
 require 'app/models/capability'
 require 'app/models/payment_method'

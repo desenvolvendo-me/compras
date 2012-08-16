@@ -1,6 +1,8 @@
 require 'model_helper'
+require 'lib/signable'
 require 'app/models/judgment_form'
 require 'app/models/administrative_process'
+require 'app/models/licitation_process'
 
 describe JudgmentForm do
   it 'should return description as to_s' do

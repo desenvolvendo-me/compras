@@ -4,6 +4,7 @@ require 'app/models/price_collection_proposal'
 require 'app/models/price_collection_proposal_item'
 require 'lib/annullable'
 require 'app/models/resource_annul'
+require 'app/models/price_collection_classification'
 
 describe PriceCollectionProposal do
   it { should belong_to :price_collection }
