@@ -48,7 +48,6 @@ feature "BudgetStructure" do
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
-      fill_in 'Data de término', :with => '10/02/2012'
     end
 
     click_button 'Salvar'
@@ -80,8 +79,8 @@ feature "BudgetStructure" do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_field 'Data de início', :with => '01/02/2012'
-      expect(page).to have_field 'Data de término', :with => '10/02/2012'
-      expect(page).to have_select 'Status', :selected => 'Inativo'
+      expect(page).to have_field 'Data de término', :with => ''
+      expect(page).to have_select 'Status', :selected => 'Ativo'
     end
   end
 
