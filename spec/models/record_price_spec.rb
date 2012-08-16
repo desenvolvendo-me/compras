@@ -15,7 +15,7 @@ describe RecordPrice do
     subject.number = 1
     subject.year = 2012
 
-    expect(subject.to_s).to eq '2012/1'
+    expect(subject.to_s).to eq '1/2012'
   end
 
   it { should allow_value('2012').for(:year) }

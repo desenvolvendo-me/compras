@@ -27,6 +27,6 @@ class RecordPrice < Compras::Model
   filterize
 
   def to_s
-    "#{year}/#{number}"
+    "#{number}/#{year}"
   end
 end
