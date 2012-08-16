@@ -1,5 +1,5 @@
 pt-BR:
   enumerations:
     status:
-      active: Ativo
-      inactive: Inativo
+      active: "Ativo"
+      inactive: "Inativo"
