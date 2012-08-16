@@ -1,7 +1,7 @@
 class BudgetStructureResponsibleEndDateGenerator
   attr_accessor :budget_structure_object
 
-  delegate :persisted_budget_structure_responsibles,
+  delegate :persisted_budget_structure_responsibles_without_end_date,
            :budget_structure_responsibles_changed?,
            :to => :budget_structure_object
 
@@ -12,10 +12,8 @@ class BudgetStructureResponsibleEndDateGenerator
   def change!
     return unless budget_structure_responsibles_changed?
 
-    persisted_budget_structure_responsibles.each do |responsible|
-      if responsible.end_date.nil?
-        responsible.end_date = Date.current
-      end
+    persisted_budget_structure_responsibles_without_end_date.each do |responsible|
+      responsible.end_date = Date.current
     end
   end
 end

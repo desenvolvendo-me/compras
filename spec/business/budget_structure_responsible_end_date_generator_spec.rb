@@ -11,43 +11,18 @@ describe BudgetStructureResponsibleEndDateGenerator do
     Date.new(2012, 8, 8)
   end
 
-  context 'when have one persisted responsible' do
+  context 'when have persisted responsible without end_date' do
     let :budget do
       double('Budget', :budget_structure_responsibles_changed? => true,
-             :persisted_budget_structure_responsibles => [responsible_one])
+             :persisted_budget_structure_responsibles_without_end_date => [responsible])
     end
 
-    let :responsible_one do
-      double('ResponsibleOne', :persisted? => true, :end_date => nil)
+    let :responsible do
+      double('Responsible', :persisted? => true, :end_date => Date.new(2012, 1, 1))
     end
 
     it 'should set end_date' do
-      responsible_one.should_receive(:end_date=).with(current_date).and_return(true)
-
-      described_class.new(budget).change!
-    end
-  end
-
-  context 'when have two persisted responsibles' do
-    let :budget do
-      double('Budget', :budget_structure_responsibles_changed? => true,
-             :persisted_budget_structure_responsibles => responsibles)
-    end
-
-    let :responsibles do
-      [ responsible_one, responsible_two ]
-    end
-
-    let :responsible_one do
-      double('ResponsibleOne', :persisted? => true, :end_date => Date.new(2012, 1, 1))
-    end
-
-    let :responsible_two do
-      double('ResponsibleTwo', :persisted? => true, :end_date => nil)
-    end
-
-    it 'should set end_date only to last' do
-      responsible_two.should_receive(:end_date=).with(current_date).and_return(true)
+      responsible.should_receive(:end_date=).with(current_date).and_return(true)
 
       described_class.new(budget).change!
     end

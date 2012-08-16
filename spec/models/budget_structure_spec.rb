@@ -215,4 +215,36 @@ describe BudgetStructure do
       end
     end
   end
+
+  context '#persisted_budget_structure_responsibles_without_end_date' do
+    before do
+      subject.stub(:budget_structure_responsibles).and_return(responsibles)
+    end
+
+    let :responsibles do
+      [
+        responsible_persisted_with_end_date,
+        responsible_persisted_without_end_date,
+        responsible_not_persisted,
+      ]
+    end
+
+    let :responsible_persisted_with_end_date do
+      double('ResponsiblePersistedWithEndDate', :persisted? => true, :end_date => Date.today)
+    end
+
+    let :responsible_persisted_without_end_date do
+      double('ResponsiblePersistedWithoutEndDate', :persisted? => true, :end_date => nil)
+    end
+
+    let :responsible_not_persisted do
+      double('ResponsibleNotPersisted', :persisted? => false)
+    end
+
+    it 'should return only persisted without date' do
+      expect(subject.persisted_budget_structure_responsibles_without_end_date).to eq [
+        responsible_persisted_without_end_date
+      ]
+    end
+  end
 end

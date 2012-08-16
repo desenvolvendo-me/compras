@@ -55,6 +55,12 @@ class BudgetStructure < Compras::Model
     upper_budget_structure_level.id if parent
   end
 
+  def persisted_budget_structure_responsibles_without_end_date
+    persisted_budget_structure_responsibles.select do |responsible|
+      responsible.end_date.blank?
+    end
+  end
+
   def persisted_budget_structure_responsibles
     budget_structure_responsibles.select(&:persisted?)
   end
