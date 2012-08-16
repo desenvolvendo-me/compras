@@ -52,5 +52,35 @@ describe LicitationProcessRatification do
 
       expect(subject.errors[:licitation_process_bidder]).to include "deve pertencer ao processo licitatório 1/2012"
     end
+
+    it 'should delegate administrative_process_modality_humanize to licitation_process' do
+      subject.stub(:licitation_process).and_return(nil)
+
+      expect(subject.licitation_process_administrative_process_modality_humanize).to be_nil
+
+      subject.stub(:licitation_process).and_return(double(:administrative_process_modality_humanize => 'Modalidade'))
+
+      expect(subject.licitation_process_administrative_process_modality_humanize).to eq 'Modalidade'
+    end
+
+    it 'should delegate administrative_process_description to licitation_process' do
+      subject.stub(:licitation_process).and_return(nil)
+
+      expect(subject.licitation_process_administrative_process_description).to be_nil
+
+      subject.stub(:licitation_process).and_return(double(:administrative_process_description => 'Description'))
+
+      expect(subject.licitation_process_administrative_process_description).to eq 'Description'
+    end
+
+    it 'should delegate process to licitation_process' do
+      subject.stub(:licitation_process).and_return(nil)
+
+      expect(subject.licitation_process_process).to be_nil
+
+      subject.stub(:licitation_process).and_return(double(:process => 1))
+
+      expect(subject.licitation_process_process).to eq 1
+    end
   end
 end
