@@ -15,6 +15,20 @@ module Matchers
     end
   end
 
+  matcher :have_readonly_field do |field|
+    match do |page|
+      page.find_field(field)[:readonly].should eq 'readonly'
+    end
+
+    failure_message_for_should do |page|
+      "expected #{page.text.inspect} to have readonly field #{field.inspect}"
+    end
+
+    failure_message_for_should_not do |page|
+      "expected #{page.text.inspect} not to have readonly field #{field.inspect}"
+    end
+  end
+
   matcher :have_disabled_button do |field|
     match do |page|
       page.find_button(field)[:disabled].should eq 'disabled'
