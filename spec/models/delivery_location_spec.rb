@@ -2,6 +2,7 @@ require 'model_helper'
 require 'app/models/delivery_location'
 require 'app/models/purchase_solicitation'
 require 'app/models/direct_purchase'
+require 'app/models/record_price'
 require 'app/models/price_collection'
 
 describe DeliveryLocation do
@@ -22,5 +23,6 @@ describe DeliveryLocation do
     it { should have_many(:purchase_solicitations).dependent(:restrict) }
     it { should have_many(:direct_purchases).dependent(:restrict) }
     it { should have_many(:price_collections).dependent(:restrict) }
+    it { should have_many(:record_prices).dependent(:restrict) }
   end
 end

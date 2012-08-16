@@ -8,6 +8,7 @@ class DeliveryLocation < Compras::Model
   has_many :purchase_solicitations, :dependent => :restrict
   has_many :direct_purchases, :dependent => :restrict
   has_many :price_collections, :dependent => :restrict
+  has_many :record_prices, :dependent => :restrict
 
   validates :address, :description, :presence => true
   validates :description, :uniqueness => { :allow_blank => true }

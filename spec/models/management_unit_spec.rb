@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/models/management_unit'
 require 'app/models/pledge'
+require 'app/models/record_price'
 
 describe ManagementUnit do
   it "should return the description as to_s method" do
@@ -17,4 +18,5 @@ describe ManagementUnit do
   it { should belong_to(:descriptor) }
 
   it { should have_many(:pledges).dependent(:restrict) }
+  it { should have_many(:record_prices).dependent(:restrict) }
 end
