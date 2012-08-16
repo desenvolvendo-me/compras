@@ -6,7 +6,6 @@ describe BudgetStructureResponsible do
   it { should validate_presence_of :responsible }
   it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :start_date }
-  it { should validate_presence_of :status }
 
   it { should belong_to :budget_structure }
   it { should belong_to :responsible }
@@ -20,5 +19,11 @@ describe BudgetStructureResponsible do
     it 'be valid when the end_date is after of start_date' do
       expect(subject).to allow_value(Date.new(2012, 2, 11)).for(:end_date)
     end
+  end
+
+  it 'should be active if Date.current is greater than start_date and end_date is empty' do
+    subject.stub(:end_date).and_return(nil)
+    subject.stub(:start_date).and_return(Date.yesterday)
+    expect(subject.status).to eq 'active'
   end
 end

@@ -49,7 +49,6 @@ feature "BudgetStructure" do
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
       fill_in 'Data de término', :with => '10/02/2012'
-      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
@@ -82,7 +81,7 @@ feature "BudgetStructure" do
       expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_field 'Data de início', :with => '01/02/2012'
       expect(page).to have_field 'Data de término', :with => '10/02/2012'
-      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_select 'Status', :selected => 'Inativo'
     end
   end
 
@@ -125,7 +124,6 @@ feature "BudgetStructure" do
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
       fill_in 'Data de início', :with => I18n.l(Date.current)
-      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
@@ -239,7 +237,6 @@ feature "BudgetStructure" do
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => '01/02/2012'
       fill_in 'Data de término', :with => '10/02/2012'
-      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
@@ -414,7 +411,6 @@ feature "BudgetStructure" do
       fill_modal 'Responsável', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => I18n.l(Date.current)
-      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
@@ -442,7 +438,6 @@ feature "BudgetStructure" do
       fill_modal 'Responsável', :with => '21430921', :field => 'Matrícula'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       fill_in 'Data de início', :with => I18n.l(Date.current)
-      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
