@@ -14,6 +14,102 @@
 </div>
 
 <script>
+  (function () {
+    var purchaseSolicitationItemGroupId = $("#direct_purchase_purchase_solicitation_item_group_id").val();
+
+    if (purchaseSolicitationItemGroupId) {
+      disableBudgetAllocations();
+    }
+  })();
+
+  $("#direct_purchase_purchase_solicitation_item_group_id").on("change", function (event, purchase_solicitation_item_group) {
+    $("#budget-allocations").empty();
+
+    if (purchase_solicitation_item_group) {
+      $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(purchase_solicitation_item_group.total));
+
+      $.each(purchase_solicitation_item_group.purchase_solicitations, function (i, purchase_solicitation) {
+        $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
+          renderBudgetAllocation(budget_allocation);
+        });
+      });
+
+      disableBudgetAllocations();
+    } else {
+      $('#direct_purchase_total_allocations_items_value').val("0,00");
+      enableBudgetAllocations();
+    }
+  });
+
+  function renderBudgetAllocation(budget_allocation) {
+    var budgetAllocationBinds = [];
+    var budgetAllocationUUID = _.uniqueId();
+
+    budgetAllocationBinds["uuid_direct_purchase_budget_allocation"] = "fresh-" + budgetAllocationUUID;
+
+    $("#budget-allocations").append(
+      $("#direct-purchase-budget-allocations-template").mustache(budgetAllocationBinds)
+      ).trigger("append.mustache");
+
+    fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
+
+
+    $.each(budget_allocation.items, function (i, budget_allocation_item) {
+      renderBudgetAllocationItem(budgetAllocationUUID, budget_allocation_item);
+    });
+  }
+
+  function renderBudgetAllocationItem(budget_allocation_uuid, budget_allocation_item) {
+    var budgetAllocationItemBinds = [];
+    var itemsID = "#items-fresh-" + budget_allocation_uuid;
+    var itemMustacheId = "#items-template-fresh-" + budget_allocation_uuid;
+    var budgetAllocationItemUUID = _.uniqueId();
+
+    budgetAllocationItemBinds["uuid_item"] = "fresh-" + budgetAllocationItemUUID;
+
+    $(itemsID).append(
+      $(itemMustacheId).mustache(budgetAllocationItemBinds)
+      ).trigger("append.mustache");
+
+    fillBudgetAllocationItem(budgetAllocationItemUUID, budget_allocation_item);
+  }
+
+  function fillBudgetAllocation(uuid, budget_allocation) {
+    var prefixNameUuid = "#direct_purchase_direct_purchase_budget_allocations_attributes_fresh-" + uuid;
+
+    $(prefixNameUuid + "_budget_allocation").val(budget_allocation.description);
+    $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.id);
+    $(prefixNameUuid + "_expense_nature").val(budget_allocation.expense_nature);
+    $(prefixNameUuid + "_amount").val(numberWithDelimiter(budget_allocation.amount));
+  }
+
+  function fillBudgetAllocationItem(uuid, budget_allocation_item) {
+    var prefixNameUuid = "#direct_purchase_direct_purchase_budget_allocations_attributes___uuid_direct_purchase_budget_allocation___items_attributes_fresh-" + uuid;
+
+    $(prefixNameUuid + "_material").val(budget_allocation_item.material_description);
+    $(prefixNameUuid + "_material_id").val(budget_allocation_item.material_id);
+    $(prefixNameUuid + "_brand").val(budget_allocation_item.brand);
+    $(prefixNameUuid + "_reference_unit").val(budget_allocation_item.reference_unit);
+    $(prefixNameUuid + "_quantity").val(numberWithDelimiter(budget_allocation_item.quantity));
+    $(prefixNameUuid + "_unit_price").val(numberWithDelimiter(budget_allocation_item.unit_price));
+    $(prefixNameUuid + "_estimated_total_price").val(numberWithDelimiter(budget_allocation_item.estimated_total_price));
+  }
+
+  function disableBudgetAllocations() {
+    $("#allocations :input").attr("readonly", "readonly");
+    $("#allocations .modal").attr("disabled", "disabled");
+    $("#allocations .remove-item").hide();
+    $("#allocations .remove-direct-purchase-budget-allocation").hide();
+    $("#allocations .add-direct-purchase-budget-allocation").hide();
+    $("#allocations .add-budget-allocation-item").hide();
+  }
+
+
+  function enableBudgetAllocations() {
+    $("#allocations .add-direct-purchase-budget-allocation").attr("disabled", false);
+    $("#allocations .add-direct-purchase-budget-allocation").show();
+  }
+
   $('form.direct_purchase').on('change', '.budget-allocation', function (event, budget_allocation) {
     if (budget_allocation) {
       $(this).closest('div.direct-purchase-budget-allocation').find('.classification').val(budget_allocation.expense_nature);

@@ -4,8 +4,11 @@ class PurchaseSolicitationItemGroup < Compras::Model
   attr_accessor :purchase_solicitation, :purchase_solicitation_id,
                 :material, :material_id
 
+  attr_modal :id
+
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials
+  has_many :direct_purchases, :dependent => :restrict
 
   validates :purchase_solicitation_item_group_materials, :presence => {:message => :must_have_at_least_one_material}
 
@@ -20,6 +23,10 @@ class PurchaseSolicitationItemGroup < Compras::Model
     query = query.joins { purchase_solicitation_item_group_materials }.
                   where { purchase_solicitation_item_group_materials.material_id.eq options[:material_id] } if options[:material_id].present?
     query
+  end
+
+  def total_purchase_solicitation_budget_allocations_sum
+    purchase_solicitations.collect(&:total_allocations_items_value).sum
   end
 
   def to_s

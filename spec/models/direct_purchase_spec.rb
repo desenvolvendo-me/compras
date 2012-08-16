@@ -5,6 +5,7 @@ require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
 require 'app/models/direct_purchase_budget_allocation'
 require 'app/models/direct_purchase_budget_allocation_item'
+require 'app/models/purchase_solicitation_item_group'
 require 'app/models/supply_authorization'
 require 'app/models/modality_limit'
 require 'app/business/direct_purchase_modality_limit_verificator'
@@ -24,6 +25,7 @@ describe DirectPurchase do
   it { should belong_to :delivery_location }
   it { should belong_to :employee }
   it { should belong_to :payment_method }
+  it { should belong_to :purchase_solicitation_item_group }
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_one(:supply_authorization).dependent(:restrict) }

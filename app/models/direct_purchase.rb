@@ -5,7 +5,8 @@ class DirectPurchase < Compras::Model
                   :payment_method_id, :price_collection, :price_registration,
                   :observation, :pledge_type, :period, :period_unit,
                   :direct_purchase_budget_allocations_attributes,
-                  :total_allocations_items_value
+                  :total_allocations_items_value,
+                  :purchase_solicitation_item_group_id
 
   attr_modal :year, :date, :modality
 
@@ -20,6 +21,7 @@ class DirectPurchase < Compras::Model
   belongs_to :delivery_location
   belongs_to :employee
   belongs_to :payment_method
+  belongs_to :purchase_solicitation_item_group
 
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
   has_many :items, :through => :direct_purchase_budget_allocations, :class_name => :DirectPurchaseBudgetAllocationItem
