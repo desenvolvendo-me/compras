@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      capability_source:
+        one: "Fonte de Recursos"
+        other: "Fontes de Recursos"
+
+    attributes:
+      capability_source:
+        code: "Código"
+        name: "Nome"
+        specification: "Especificação"
+        source: "Fonte"

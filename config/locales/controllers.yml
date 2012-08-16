@@ -16,6 +16,7 @@ pt-BR:
     capabilities: "Recursos"
     capability_allocation_details: "Detalhamentos das Destinações de Recursos"
     capability_destinations: "Destinações de Recursos"
+    capability_sources: "Fontes de Recursos"
     cities: "Cidades"
     cnaes: "CNAES"
     communication_sources: "Fontes de Comunicação"

@@ -195,6 +195,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :capability_sources do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :company_sizes do
     collection do
       get :modal
