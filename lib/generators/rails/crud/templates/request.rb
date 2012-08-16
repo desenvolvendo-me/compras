@@ -23,12 +23,12 @@ feature "<%= controller_class_name %>" do
 
     click_button 'Salvar'
 
-    page.should have_notice '<%= singular %> criado com sucesso.'
+    expect(page).to have_notice '<%= singular %> criado com sucesso.'
 
     click_link '<%= fields.first.first %>'
 
     <%- fields.each do |name, i18n| -%>
-    page.should have_field '<%= i18n %>', :with => '<%= name %>'
+    expect(page).to have_field '<%= i18n %>', :with => '<%= name %>'
     <%- end -%>
   end
 
@@ -51,12 +51,12 @@ feature "<%= controller_class_name %>" do
 
     click_button 'Salvar'
 
-    page.should have_notice '<%= singular %> editado com sucesso.'
+    expect(page).to have_notice '<%= singular %> editado com sucesso.'
 
     click_link '<%= fields.first.first %>'
 
     <%- fields.each do |name, i18n| -%>
-    page.should have_field '<%= i18n %>', :with => '<%= name %>'
+    expect(page).to have_field '<%= i18n %>', :with => '<%= name %>'
     <%- end -%>
   end
 
@@ -70,10 +70,10 @@ feature "<%= controller_class_name %>" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice '<%= singular %> apagado com sucesso.'
+    expect(page).to have_notice '<%= singular %> apagado com sucesso.'
 
     <%- attributes.each do |attribute| -%>
-    page.should_not have_content '<%= attribute.name %>'
+    expect(page).to_not have_content '<%= attribute.name %>'
     <%- end -%>
   end
   <%- if associations? -%>
