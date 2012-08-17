@@ -1,0 +1,51 @@
+code;variable;name;specification
+100;S;GERAL TOTAL- Convênios/entidades/fundos;Recursos específicos para aplicação em convênios, entidades ou fundos não vinculados a outras categorias pré-determinadas.Recursos  da entidade de livre aplicação
+110;N;GERAL;Recursos próprios da entidade de livre aplicação
+111;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos de livre movimentação. Utilizado apenas para a classificação de receitas.
+120;N;ALIENAÇÃO DE BENS;Recursos advindos de alienações de bens cuja aplicação deverá ser vinculada
+121;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos de alienação de bens. Utilizado apenas para a classificação de receitas.
+130;S;CIDE-CONTRIBUIÇÃO DE INTERVENÇÃO NO DOMÍNIO ECONÔMICO;Recursos advindos da CIDE ou de convênios, entidades ou fundos a ela vinculadas.
+131;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos da CIDE. Utilizado apenas para a classificação de receitas.
+200;S;EDUCAÇÃO;Recursos vinculados à Educação
+210;S;EDUCAÇÃO INFANTIL;Recursos vinculados à Educação Infantil
+211;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados da Educação Infantil. Utilizado apenas para a classificação de receitas.
+220;S;ENSINO FUNDAMENTAL;Recursos vinculados à convênios, entidades ou fundos do Ensino Fundamental
+221;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados do Ensino Fundamental. Utilizado apenas para a classificação de receitas.
+230;N;ENSINO MÉDIO;Recursos vinculados ao Ensino Médio
+230;S;ENSINO MÉDIO-Convênios/entidades/fundos;Recursos vinculados à convênios, entidades ou fundos do Ensino Médio
+231;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados do Ensino Médio. Utilizado apenas para a classificação de receitas.
+240;N;EDUCAÇÃO ESPECIAL;Recursos vinculados ao Ensino Médio
+241;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados do Ensino Especial. Utilizado apenas para a classificação de receitas.
+250;N;EDUCAÇÃO-FUNDEF;Recursos vinculados ao FUNDEF
+251;N;EDUCAÇÃO-FUNDEF-MAGISTÉRIO;Recursos vinculados ao FUNDEF para aplicação no magistério
+252;N;EDUCAÇÃO-FUNDEF-OUTROS;Recursos vinculados ao FUNDEF para aplicação em outras despesas
+253;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados do FUNDEF. Utilizado apenas para a classificação de receitas.
+260;S;EDUCAÇÃO-FUNDEB;Recursos vinculados ao FUNDEB
+261;N;"EDUCAÇÃO-FUNDEB-MAGISTÉRIO ";Recursos vinculados ao FUNDEB para aplicação no magistério
+262;N;"EDUCAÇÃO-FUNDEB-OUTROS ";Recursos vinculados ao FUNDEB para aplicação em outras despesas
+263;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados do FUNDEB. Utilizado apenas para a classificação de receitas.
+264;S;EDUCAÇÃO-FUNDEB-MAGISTÉRIO-Ano Anterior;Recursos vinculados ao FUNDEB para aplicação no magistério, advindos de exercícios anteriores. Identificado pelo ano de ingresso dos recursos.
+265;S;"EDUCAÇÃO-FUNDEB-OUTROS-Ano Anterior ";Recursos vinculados ao FUNDEB para aplicação em outras despesas, advindos de exercícios anteriores. Identificado pelo ano de ingresso dos recursos.
+300;S;SAÚDE;Recursos vinculados à Saúde
+310;N;SAÚDE–GERAL;Recursos vinculados à Saúde Geral
+311;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados da Saúde. Utilizado apenas para a classificação de receitas.
+320;N;SAÚDE–TAXAS;Recursos advindos das receitas de taxas vinculadas à Saúde cuja aplicação deverá ser vinculada à Saúde
+330;N;SAÚDE–SERVIÇOS;Recursos advindos das receitas de serviços vinculadas à Saúde cuja aplicação deverá ser vinculada à Saúde
+340;N;SAÚDE-OUTROS;Recursos advindos das outras receitas vinculadas à Saúde cuja aplicação deverá ser vinculada à Saúde
+400;S;TRÂNSITO;Recursos vinculados ao Trânsito
+410;N;TRÂNSITO-SINALIZAÇÃO;Recursos vinculados ao Trânsito, para aplicação em sinalização
+411;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados do Trânsito-Sinalização. Utilizado apenas para a classificação de receitas.
+420;N;TRÂNSITO-ENGENHARIA DE TRÂNSITO;Recursos vinculados ao Trânsito, para aplicação em engenharia de trânsito.
+430;N;TRÂNSITO-ENGENHARIA DE CAMPO;Recursos vinculados ao Trânsito, para aplicação em engenharia de campo..
+440;N;TRÂNSITO-POLICIAMENTO;Recursos vinculados ao Trânsito, para aplicação em policiamento.
+450;N;TRÂNSITO-FISCALIZAÇÃO;Recursos vinculados ao Trânsito, para aplicação em fiscalização.
+460;N;TRÂNSITO-EDUCAÇÃO DE TRÂNSITO;Recursos vinculados ao Trânsito, para aplicação em educação de trânsito.
+470;N;TRÂNSITO-FUNSET;Recursos vinculados ao Trânsito-FUNSET.
+500;S;ASSISTÊNCIA SOCIAL;Recursos vinculados à Assistência Social.
+510;N;ASSISTÊNCIA SOCIAL-GERAL;Recursos vinculados à Assistência Social-Geral
+511;N;REMUNERAÇÃO DE APLICAÇÕES FINANCEIRAS;Recursos advindos de aplicações financeiras dos recursos vinculados à Assistência Social. Utilizado apenas para a classificação de receitas.
+600;S;REGIME PRÓPRIO DE PREVIDÊNCIA SOCIAL;Recursos vinculados ao RPPS
+610;N;RPPS-CONTRIBUIÇÕES;Recursos advindos das receitas de contribuições vinculadas ao RPPS cuja aplicação deverá ser vinculada ao RPPS
+611;N;RPPS-CONTRIBUIÇÃO PATRONAL;Recursos advindos das receitas de contribuições patronais ao RPPS cuja aplicação deverá ser vinculada ao RPPS
+612;N;RPPS-CONTRIBUIÇÃO SEGURADOS;Recursos advindos das receitas de contribuições dos segurados ao RPPS cuja aplicação deverá ser vinculada ao RPPS
+620;N;RPPS-COMPENSAÇÃO PREVIDENCIÁRIA;Recursos advindos das receitas de compensação previdenciária ao RPPS cuja aplicação deverá ser vinculada ao RPPS
