@@ -1,4 +1,11 @@
 Compras::Application.routes.draw do
+  resources :application_codes do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :contract_terminations, :except => [:show, :destroy]
 
   resources :creditors do

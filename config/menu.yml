@@ -96,6 +96,7 @@ menu:
         - capability_allocation_details
         - capability_destinations
         - capability_sources
+        - application_codes
 
     - execution:
       - reserve_fund:
