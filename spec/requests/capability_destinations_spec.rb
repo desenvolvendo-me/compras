@@ -11,11 +11,13 @@ feature "CapabilityDestinations" do
 
     click_link 'Criar Destinação de Recursos'
 
-    select 'Contrapartida de doações', :from => 'Uso'
-    select 'Recursos condicionais', :from => 'Grupo'
-    fill_in 'Especificação', :with => '1'
-    fill_in 'Descrição', :with => 'Programa de linha de crédito'
-    select 'Primária', :from => 'Destinação *'
+    within_tab 'Principal' do
+      select 'Contrapartida de doações', :from => 'Uso'
+      select 'Recursos condicionais', :from => 'Grupo'
+      fill_in 'Especificação', :with => '1'
+      fill_in 'Descrição', :with => 'Programa de linha de crédito'
+      select 'Primária', :from => 'Destinação *'
+    end
 
     click_button 'Salvar'
 
@@ -23,11 +25,13 @@ feature "CapabilityDestinations" do
 
     click_link 'Programa de linha de crédito'
 
-    expect(page).to have_select 'Uso *', :selected => 'Contrapartida de doações'
-    expect(page).to have_select 'Grupo', :selected => 'Recursos condicionais'
-    expect(page).to have_field 'Especificação', :with => '1'
-    expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito'
-    expect(page).to have_select 'Destinação', :selected => 'Primária'
+    within_tab 'Principal' do
+      expect(page).to have_select 'Uso *', :selected => 'Contrapartida de doações'
+      expect(page).to have_select 'Grupo', :selected => 'Recursos condicionais'
+      expect(page).to have_field 'Especificação', :with => '1'
+      expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito'
+      expect(page).to have_select 'Destinação', :selected => 'Primária'
+    end
   end
 
   scenario 'update an existent capability_destination' do
@@ -37,11 +41,13 @@ feature "CapabilityDestinations" do
 
     click_link 'Programa de linha de crédito'
 
-    select 'Contrapartida de outros empréstimos', :from => 'Uso'
-    select 'Recursos do tesouro - exercício corrente', :from => 'Grupo'
-    fill_in 'Especificação', :with => '2'
-    fill_in 'Descrição', :with => 'Programa de linha de crédito para projetos'
-    select 'Não primária', :from => 'Destinação *'
+    within_tab 'Principal' do
+      select 'Contrapartida de outros empréstimos', :from => 'Uso'
+      select 'Recursos do tesouro - exercício corrente', :from => 'Grupo'
+      fill_in 'Especificação', :with => '2'
+      fill_in 'Descrição', :with => 'Programa de linha de crédito para projetos'
+      select 'Não primária', :from => 'Destinação *'
+    end
 
     click_button 'Salvar'
 
@@ -49,11 +55,13 @@ feature "CapabilityDestinations" do
 
     click_link 'Programa de linha de crédito para projetos'
 
-    expect(page).to have_select 'Uso *', :selected => 'Contrapartida de outros empréstimos'
-    expect(page).to have_select 'Grupo', :selected => 'Recursos do tesouro - exercício corrente'
-    expect(page).to have_field 'Especificação', :with => '2'
-    expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito para projetos'
-    expect(page).to have_select 'Destinação', :selected => 'Não primária'
+    within_tab 'Principal' do
+      expect(page).to have_select 'Uso *', :selected => 'Contrapartida de outros empréstimos'
+      expect(page).to have_select 'Grupo', :selected => 'Recursos do tesouro - exercício corrente'
+      expect(page).to have_field 'Especificação', :with => '2'
+      expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito para projetos'
+      expect(page).to have_select 'Destinação', :selected => 'Não primária'
+    end
   end
 
   scenario 'destroy an existent capability_destination' do
