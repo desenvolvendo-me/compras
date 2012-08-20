@@ -27,7 +27,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def total_purchase_solicitation_budget_allocations_sum
-    purchase_solicitations.collect(&:total_allocations_items_value).sum
+    purchase_solicitations.sum(&:total_allocations_items_value)
   end
 
   def to_s
