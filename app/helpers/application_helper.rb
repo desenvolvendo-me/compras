@@ -112,8 +112,8 @@ module ApplicationHelper
   end
 
   def signatures_grouped(options = {})
-    signed_object = options[:signed_object] || resource
-    grouped_by    = options[:grouped_by] || 4
+    signed_object = options.fetch(:signed_object) { resource }
+    grouped_by    = options.fetch(:grouped_by) { 4 }
 
     signed_object.signatures.in_groups_of(grouped_by, false)
   end
