@@ -4,6 +4,7 @@ class AdministrativeProcess < Compras::Model
   attr_accessible :responsible_id, :process, :year, :date
   attr_accessible :modality, :protocol, :object_type, :status, :description
   attr_accessible :judgment_form_id, :administrative_process_budget_allocations_attributes
+  attr_accessible :purchase_solicitation_item_group_id
 
   attr_readonly :process, :year
 
@@ -15,6 +16,7 @@ class AdministrativeProcess < Compras::Model
 
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
+  belongs_to :purchase_solicitation_item_group
 
   has_one :licitation_process, :dependent => :restrict
   has_one :administrative_process_liberation, :dependent => :destroy

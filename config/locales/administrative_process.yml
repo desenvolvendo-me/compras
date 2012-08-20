@@ -20,3 +20,4 @@ pt-BR:
         status: "Status do processo administrativo"
         delivery_date: "Data de liberação"
         total_allocations_value: "Valor total"
+        purchase_solicitation_item_group: "Agrupamento de solicitações de compra"

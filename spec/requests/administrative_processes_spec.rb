@@ -72,6 +72,162 @@ feature "AdministrativeProcesses" do
     end
   end
 
+  scenario 'fill budget allocations from purchase solicitation item group' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    JudgmentForm.make!(:global_com_menor_preco)
+    Employee.make!(:sobrinho)
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record '1'
+      end
+
+      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      select 'Aguardando', :from => 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).not_to have_button 'Adicionar Dotação'
+      expect(page).not_to have_button 'Remover Dotação'
+
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+      fill_in 'Valor previsto', :with => '20,00'
+
+      expect(page).to have_field 'Valor total', :with => '20,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Processo'
+      expect(page).to have_field 'Process', :with => '1'
+      expect(page).to have_disabled_field 'Ano'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data do processo', :with => '07/03/2012'
+      expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
+      expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      expect(page).to have_select 'Modalidade', :selected => 'Pregão presencial'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).not_to have_button 'Adicionar Dotação'
+      expect(page).not_to have_button 'Remover Dotação'
+
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+      expect(page).to have_field 'Valor previsto', :with => '20,00'
+
+      expect(page).to have_field 'Valor total', :with => '20,00'
+    end
+  end
+
+  scenario 'when clear purchase solicitation item group budget allocations should clear too' do
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record '1'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).not_to have_button 'Adicionar Dotação'
+      expect(page).not_to have_button 'Remover Dotação'
+
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+    end
+
+    within_tab 'Principal' do
+      clear_modal 'Agrupamento de solicitações de compra'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_button 'Adicionar Dotação'
+
+      expect(page).not_to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).not_to have_field 'Saldo da dotação', :with => '500,00'
+    end
+  end
+
+  scenario 'when has budget allocations and select a purchase solicitation item group should clear old budget allocations' do
+    BudgetAllocation.make!(:alocacao)
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Dotações orçamentarias' do
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record '1'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).not_to have_button 'Adicionar Dotação'
+      expect(page).not_to have_button 'Remover Dotação'
+
+      expect(page).not_to have_field 'Dotação orçamentaria', :with => ''
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).not_to have_field 'Valor previsto', :with => '20,00'
+
+      expect(page).not_to have_field 'Valor total', :with => '20,00'
+    end
+  end
+
   scenario 'should have all fields disabled on edit when status is different from waiting' do
     AdministrativeProcess.make!(:compra_liberada)
 

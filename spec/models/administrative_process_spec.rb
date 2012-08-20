@@ -9,6 +9,7 @@ require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/budget_allocation'
 require 'app/business/administrative_process_modalities_by_object_type'
 require 'app/models/administrative_process_liberation'
+require 'app/models/purchase_solicitation_item_group'
 
 describe AdministrativeProcess do
   it 'should return process/year as to_s' do
@@ -19,6 +20,7 @@ describe AdministrativeProcess do
 
   it { should belong_to :responsible }
   it { should belong_to :judgment_form }
+  it { should belong_to :purchase_solicitation_item_group }
 
   it { should have_one(:licitation_process).dependent(:restrict) }
   it { should have_one(:administrative_process_liberation).dependent(:destroy) }

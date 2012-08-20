@@ -8,13 +8,13 @@
   <%= f.association :administrative_process_budget_allocations, :collection => localized(f.object.administrative_process_budget_allocations) do |p| %>
     <%= render 'administrative_process_budget_allocations/form', :f => p %>
   <% end %>
-
-  <%= mustache 'administrative-process-budget-allocations-template' do %>
-    <%= f.association :administrative_process_budget_allocations_attributes, :collection => f.object.administrative_process_budget_allocations.build, :index => '{{uuid_administrative_process_budget_allocation}}' do |p| %>
-      <%= render 'administrative_process_budget_allocations/form', :f => p %>
-    <% end %>
-  <% end %>
 </div>
+
+<%= mustache 'administrative-process-budget-allocations-template' do %>
+  <%= f.association :administrative_process_budget_allocations_attributes, :collection => f.object.administrative_process_budget_allocations.build, :index => '{{uuid_administrative_process_budget_allocation}}' do |p| %>
+    <%= render 'administrative_process_budget_allocations/form', :f => p %>
+  <% end %>
+<% end %>
 
 <script>
   $("#administrative-process-budget-allocations-template").nestedForm({

@@ -1,13 +1,16 @@
 # encoding: utf-8
 require 'model_helper'
+require 'lib/signable'
 require 'app/models/purchase_solicitation_item_group'
 require 'app/models/purchase_solicitation_item_group_material'
 require 'app/models/direct_purchase'
+require 'app/models/administrative_process'
 
 describe PurchaseSolicitationItemGroup do
   it { should have_many(:purchase_solicitation_item_group_materials).dependent(:destroy) }
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_item_group_materials) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
+  it { should have_many(:administrative_processes).dependent(:restrict) }
 
   it { should validate_presence_of(:purchase_solicitation_item_group_materials).with_message("deve ter ao menos um material") }
 
