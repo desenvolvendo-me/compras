@@ -11,4 +11,6 @@ describe CapabilitySource do
   it { should validate_presence_of :name }
   it { should validate_presence_of :specification }
   it { should validate_presence_of :source }
+
+  it { should have_many :tce_specification_capabilities }
 end

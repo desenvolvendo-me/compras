@@ -1,0 +1,2 @@
+class TceSpecificationCapabilitiesController < CrudController
+end

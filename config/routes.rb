@@ -873,6 +873,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :tce_specification_capabilities do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :type_improvements do
     collection do
       get :modal

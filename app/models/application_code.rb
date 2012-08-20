@@ -3,6 +3,8 @@ class ApplicationCode < Compras::Model
 
   has_enumeration_for :source
 
+  has_many :tce_specification_capabilities
+
   validates :code, :name, :specification, :source, :presence => true
   validates :code, :uniqueness => { :scope => :variable, :message => :taken_for_variable }, :allow_blank => true
 

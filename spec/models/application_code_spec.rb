@@ -12,6 +12,8 @@ describe ApplicationCode do
   it { should validate_presence_of :specification }
   it { should validate_presence_of :source }
 
+  it { should have_many :tce_specification_capabilities }
+
   it 'variable should be by default false' do
     expect(subject.variable).to be_false
   end
