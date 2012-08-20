@@ -11,4 +11,4 @@ pt-BR:
         group: "Grupo destinação de recursos"
         specification: "Especificação da destinação de recursos"
         description: "Descrição"
-        destination: "Destinação"
+        kind: "Destinação"
