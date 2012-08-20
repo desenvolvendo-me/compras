@@ -6,9 +6,9 @@ class BudgetStructureResponsible < Compras::Model
 
   def status
     if end_date.blank? && start_date.present? && Date.current >= start_date
-      'active'
+      Status::ACTIVE
     else
-      'inactive'
+      Status::INACTIVE
     end
   end
 
