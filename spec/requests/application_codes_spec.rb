@@ -43,7 +43,7 @@ feature "ApplicationCodes" do
 
       click_button 'Salvar'
 
-      expect(page).to have_content 'já está em uso'
+      expect(page).to have_content 'já existe para a variável selecionada'
     end
 
     scenario 'should be invalid if with other variable'do
