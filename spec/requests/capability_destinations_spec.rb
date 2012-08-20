@@ -12,8 +12,8 @@ feature "CapabilityDestinations" do
     click_link 'Criar Destinação de Recursos'
 
     select 'Contrapartida de doações', :from => 'Uso'
-    select 'Recursos condicionais', :from => 'Grupo destinação de recursos'
-    fill_in 'Especificação da destinação de recursos', :with => '1'
+    select 'Recursos condicionais', :from => 'Grupo'
+    fill_in 'Especificação', :with => '1'
     fill_in 'Descrição', :with => 'Programa de linha de crédito'
     select 'Primária', :from => 'Destinação *'
 
@@ -24,8 +24,8 @@ feature "CapabilityDestinations" do
     click_link 'Programa de linha de crédito'
 
     expect(page).to have_select 'Uso *', :selected => 'Contrapartida de doações'
-    expect(page).to have_select 'Grupo destinação de recursos', :selected => 'Recursos condicionais'
-    expect(page).to have_field 'Especificação da destinação de recursos', :with => '1'
+    expect(page).to have_select 'Grupo', :selected => 'Recursos condicionais'
+    expect(page).to have_field 'Especificação', :with => '1'
     expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito'
     expect(page).to have_select 'Destinação', :selected => 'Primária'
   end
@@ -38,8 +38,8 @@ feature "CapabilityDestinations" do
     click_link 'Programa de linha de crédito'
 
     select 'Contrapartida de outros empréstimos', :from => 'Uso'
-    select 'Recursos do tesouro - exercício corrente', :from => 'Grupo destinação de recursos'
-    fill_in 'Especificação da destinação de recursos', :with => '2'
+    select 'Recursos do tesouro - exercício corrente', :from => 'Grupo'
+    fill_in 'Especificação', :with => '2'
     fill_in 'Descrição', :with => 'Programa de linha de crédito para projetos'
     select 'Não primária', :from => 'Destinação *'
 
@@ -50,8 +50,8 @@ feature "CapabilityDestinations" do
     click_link 'Programa de linha de crédito para projetos'
 
     expect(page).to have_select 'Uso *', :selected => 'Contrapartida de outros empréstimos'
-    expect(page).to have_select 'Grupo destinação de recursos', :selected => 'Recursos do tesouro - exercício corrente'
-    expect(page).to have_field 'Especificação da destinação de recursos', :with => '2'
+    expect(page).to have_select 'Grupo', :selected => 'Recursos do tesouro - exercício corrente'
+    expect(page).to have_field 'Especificação', :with => '2'
     expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito para projetos'
     expect(page).to have_select 'Destinação', :selected => 'Não primária'
   end

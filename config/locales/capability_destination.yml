@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       capability_destination:
         use: "Uso"
-        group: "Grupo destinação de recursos"
-        specification: "Especificação da destinação de recursos"
+        group: "Grupo"
+        specification: "Especificação"
         description: "Descrição"
         kind: "Destinação"
