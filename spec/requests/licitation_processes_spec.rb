@@ -6,6 +6,118 @@ feature "LicitationProcesses" do
     sign_in
   end
 
+  scenario 'calc by bidder' do
+    licitation_process = LicitationProcess.make!(:apuracao_global)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Venceu'
+    end
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Perdeu'
+    end
+  end
+
+  scenario 'calc by lote' do
+    licitation_process = LicitationProcess.make!(:apuracao_por_lote)
+    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
+                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
+    LicitationProcessLot.make!(:lote_antivirus, :licitation_process => licitation_process,
+                               :administrative_process_budget_allocation_items => [licitation_process.items.second])
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço por lote'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Venceu'
+    end
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Perdeu'
+    end
+  end
+
+  scenario 'calc by item' do
+    licitation_process = LicitationProcess.make!(:apuracao_por_itens)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço total por item'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Venceu'
+    end
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Perdeu'
+    end
+
+    click_link 'voltar'
+
+    click_link 'Relatório'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+  end
+
   scenario 'acessing from index cancel should return to index' do
     LicitationProcess.make!(:processo_licitatorio)
 
@@ -41,6 +153,8 @@ feature "LicitationProcesses" do
     expect(page).to have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
 
     expect(page).not_to have_link 'Publicações'
+
+    expect(page).not_to have_button 'Apurar'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
@@ -550,28 +664,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario "count link should be available when envelope opening date is the current date" do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    within_tab 'Principal' do
-      fill_in 'Data da abertura dos envelopes', :with => "#{I18n.l(Date.current)}"
-    end
-
-    click_button 'Salvar'
-
-    click_link 'Editar processo licitatório'
-
-    expect(page).to have_link 'Apurar'
-  end
-
   scenario "count link should not be available when envelope opening date is not the current date" do
     LicitationProcess.make!(:processo_licitatorio)
 
@@ -621,132 +713,6 @@ feature "LicitationProcesses" do
     click_link 'Novo processo licitatório'
 
     expect(page).not_to have_link 'Lotes de itens'
-  end
-
-  scenario "should show the count report by type_of_calculation being lowest_total_price_by_item" do
-    licitation_process = LicitationProcess.make!(:apuracao_por_itens)
-
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Apurar'
-
-    expect(page).to have_content 'Apuração: Menor preço total por item'
-    expect(page).to have_content 'Antivirus'
-    expect(page).to have_content 'Gabriel Sobrinho'
-    expect(page).to have_content '2'
-    expect(page).to have_content '9,00'
-    expect(page).to have_content '18,00'
-
-    # back to form
-    click_link 'Voltar'
-    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
-  end
-
-  scenario "should show the count report by type_of_calculation being sort_participants_by_item" do
-    licitation_process = LicitationProcess.make!(:classificar_por_itens)
-
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Apurar'
-
-    expect(page).to have_content 'Apuração: Classificar participantes por item (pregão presencial)'
-    expect(page).to have_content 'Antivirus'
-    expect(page).to have_content 'Gabriel Sobrinho'
-    expect(page).to have_content '9,00'
-    expect(page).to have_content '2'
-    expect(page).to have_content '18,00'
-    expect(page).to have_content 'Wenderson Malheiros'
-    expect(page).to have_content '10,00'
-    expect(page).to have_content '2'
-    expect(page).to have_content '20,00'
-
-    # back to form
-    click_link 'Voltar'
-    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
-  end
-
-  scenario "should show the count report by type_of_calculation being lowest_price_by_lot" do
-    licitation_process = LicitationProcess.make!(:apuracao_por_lote)
-    LicitationProcessLot.make!(:lote_antivirus, :licitation_process_id => licitation_process.id)
-
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Apurar'
-
-    expect(page).to have_content 'Apuração: Menor preço por lote'
-    expect(page).to have_content 'Lote 1'
-    expect(page).to have_content 'Gabriel Sobrinho'
-    expect(page).to have_content '18,00'
-
-    # back to form
-    click_link 'Voltar'
-    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
-  end
-
-  scenario "should show the count report by type_of_calculation being sort_participants_by_lot" do
-    licitation_process = LicitationProcess.make!(:classificar_por_lote)
-    LicitationProcessLot.make!(:lote_antivirus, :licitation_process_id => licitation_process.id)
-
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Apurar'
-
-    expect(page).to have_content 'Apuração: Classificar participantes por lote (pregão presencial)'
-    expect(page).to have_content 'Lote 1'
-    expect(page).to have_content 'Gabriel Sobrinho'
-    expect(page).to have_content '18,00'
-    expect(page).to have_content 'Wenderson Malheiros'
-    expect(page).to have_content '20,00'
-
-    # back to form
-    click_link 'Voltar'
-    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
-  end
-
-  scenario "should show the count report by type_of_calculation being lowest_global_price" do
-    licitation_process = LicitationProcess.make!(:apuracao_global)
-
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Apurar'
-
-    expect(page).to have_content 'Apuração: Menor preço global'
-    expect(page).to have_content 'Gabriel Sobrinho'
-    expect(page).to have_content '18,00'
-
-    # back to form
-    click_link 'Voltar'
-    expect(page).to have_content "Editar Processo Licitatório #{licitation_process} do Processo Administrativo #{licitation_process.administrative_process}"
   end
 
   scenario "should brings some filled fields when creating a new licitatoin process" do

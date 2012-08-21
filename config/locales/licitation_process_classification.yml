@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      licitation_process_classification:
+        one: "Classificação de Processo Licitatório"
+        other: "Classificações de Processos Licitatórios"
+
+    attributes:
+      licitation_process_classification:
+        unit_price: "Preço unitário"
+        licitation_process_bidder: "Licitante"
+        total_value: "Valor Total"
+        classification: "Classificação"
+        situation: "Situação"

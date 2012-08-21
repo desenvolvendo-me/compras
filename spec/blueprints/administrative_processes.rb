@@ -180,7 +180,7 @@ AdministrativeProcess.blueprint(:classificacao_por_lote) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  modality { AdministrativeProcessModality::PRESENCE_TRADING }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
   judgment_form { JudgmentForm.make!(:por_lote_com_melhor_tecnica) }
   description { 'Licitação para compra de carteiras' }
   responsible { Employee.make!(:sobrinho) }
@@ -202,7 +202,7 @@ AdministrativeProcess.blueprint(:apuracao_por_lote) do
   responsible { Employee.make!(:sobrinho) }
   status { AdministrativeProcessStatus::RELEASED }
   item { 'Item 1' }
-  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_2_itens)] }
   administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
 
@@ -252,4 +252,18 @@ AdministrativeProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
+end
+
+AdministrativeProcess.blueprint(:without_allocations) do
+  process { 1 }
+  year { 2012 }
+  date { Date.new(2012, 3, 7) }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  modality { AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES }
+  judgment_form { JudgmentForm.make!(:por_lote_com_tecnica_e_preco) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  status { AdministrativeProcessStatus::RELEASED }
+  item { 'Item 1' }
 end

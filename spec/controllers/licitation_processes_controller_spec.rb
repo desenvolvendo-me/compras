@@ -102,4 +102,24 @@ describe LicitationProcessesController do
       end
     end
   end
+
+  context 'GET #show' do
+    let :licitation_process_classifications do
+      [double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 1),
+       double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 2)]
+    end
+
+    let :licitation_process do
+      double('LicitationProcess', :id => 1, :all_licitation_process_classifications => licitation_process_classifications,
+             :type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE)
+    end
+
+    it 'delete classifications e call classification generator' do
+      LicitationProcess.stub(:find).and_return(licitation_process)
+
+      licitation_process.should_receive(:transaction)
+
+      put :update, :id => licitation_process.id, :commit => 'Apurar'
+    end
+  end
 end

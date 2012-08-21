@@ -46,46 +46,46 @@ describe AdministrativeProcessBudgetAllocationItemDecorator do
     end
   end
 
-  context '#winner_proposals_unit_price' do
-    context 'when do not have winner_proposals_unit_price' do
+  context '#unit_price_by_bidder' do
+    context 'when unit_price_by_bider is nil' do
       before do
-        component.stub(:winner_proposals_unit_price).and_return(nil)
+        component.stub(:unit_price_by_bidder).and_return(nil)
       end
 
       it 'should be nil' do
-        expect(subject.winner_proposals_unit_price).to eq nil
+        expect(subject.unit_price_by_bidder(nil)).to be_nil
       end
     end
 
-    context 'when have winner_proposals_unit_price' do
+    context 'when have unit_price_by_bidder' do
       before do
-        component.stub(:winner_proposals_unit_price).and_return(9.99)
+        component.stub(:unit_price_by_bidder).and_return 330.0
       end
 
-      it 'should applies precision' do
-        expect(subject.winner_proposals_unit_price).to eq '9,99'
+      it 'should applies currency' do
+        expect(subject.unit_price_by_bidder(nil)).to eq '330,00'
       end
     end
   end
 
-  context '#winner_proposals_total_price' do
-    context 'when do not have winner_proposals_total_price' do
+  context '#total_value_by_bidder' do
+    context 'when total_value_by_bidder is nil' do
       before do
-        component.stub(:winner_proposals_total_price).and_return(nil)
+        component.stub(:total_value_by_bidder).and_return(nil)
       end
 
       it 'should be nil' do
-        expect(subject.winner_proposals_total_price).to eq nil
+        expect(subject.total_value_by_bidder(nil)).to be_nil
       end
     end
 
-    context 'when have winner_proposals_total_price' do
+    context 'when total_value_by_bidder has value' do
       before do
-        component.stub(:winner_proposals_total_price).and_return(9.99)
+        component.stub(:total_value_by_bidder).and_return(220.0)
       end
 
       it 'should applies precision' do
-        expect(subject.winner_proposals_total_price).to eq '9,99'
+        expect(subject.total_value_by_bidder(nil)).to eq '220,00'
       end
     end
   end

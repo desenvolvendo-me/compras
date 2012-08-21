@@ -1,23 +1,11 @@
-<table class="records">
-  <thead>
-    <tr>
-      <th>
-        Fornecedor vencedor
-      </th>
-      <th>
-        Valor cotado
-      </th>
-    </tr>
-  </thead>
+<% classification.items.each_with_index do |item, index| %>
+  <tr class="<%= "classification-#{classification.classification}-#{index}" %>">
+    <td><%= item.description %></td>
+    <td><%= item.reference_unit %></td>
+    <td align="right"><%= item.quantity %></td>
+    <td align="right"><%= item.decorator.unit_price_by_bidder(classification.licitation_process_bidder) %></td>
+    <td align="right"><%= item.decorator.total_value_by_bidder(classification.licitation_process_bidder) %></td>
 
-  <tbody>
-    <tr>
-      <td>
-        <%= resource.winner_proposal_creditor %>
-      </td>
-      <td>
-        <%= resource.decorator.winner_proposal_total_price %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <td><%= classification.situation_humanize %></td>
+  </tr>
+<% end %>

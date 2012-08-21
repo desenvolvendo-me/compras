@@ -22,6 +22,7 @@ describe LicitationProcessBidder do
   it { should have_many(:document_types).through(:documents) }
   it { should have_many(:accredited_representatives).dependent(:destroy) }
   it { should have_many(:people).through(:accredited_representatives) }
+  it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
   it { should validate_presence_of :creditor }
 
@@ -213,6 +214,79 @@ describe LicitationProcessBidder do
 
       subject.valid?
       expect(subject.errors[:licitation_process]).to_not include "deve ser a data da abertura do envelope do processo licitatório"
+    end
+  end
+
+  it 'should return 0 as the total price when there are no proposals' do
+    expect(subject.total_price).to eq 0
+  end
+
+  it 'should return the total price' do
+    item_1 = double('item 1', :total_price => 300)
+    item_2 = double('item 2', :total_price => 200)
+
+    subject.stub(:proposals).and_return([item_1, item_2])
+
+    expect(subject.total_price).to eq 500
+  end
+
+  context 'item with unit price equals zero' do
+    it 'should return true' do
+      subject.stub(:proposals => double(:any_without_unit_price? => true))
+
+      expect(subject.has_item_with_unit_price_equals_zero).to be true
+    end
+
+    it 'should return false' do
+      subject.stub(:proposals => double(:any_without_unit_price? => false))
+
+      expect(subject.has_item_with_unit_price_equals_zero).to be false
+    end
+  end
+
+  context '#expired documents' do
+    it 'should return true' do
+      subject.stub(:documents => [double(:expired? => true), double(:expired? => false)])
+
+      expect(subject.expired_documents?).to be true
+    end
+
+    it 'should return false' do
+      subject.stub(:documents => [double(:expired? => false), double(:expired? => false)])
+
+      expect(subject.expired_documents?).to be false
+    end
+  end
+
+  describe '#disable!' do
+    it 'should change the subject status to disabled' do
+      subject.should_receive(:update_column).with(:status, LicitationProcessBidderStatus::DISABLED)
+
+      subject.disable!
+    end
+  end
+
+  describe '#enable!' do
+    it 'should change the subject status to enabled' do
+      subject.should_receive(:update_column).with(:status, LicitationProcessBidderStatus::ENABLED)
+
+      subject.enable!
+    end
+  end
+
+  context 'has proposals unit price greater than budget allocation unit price' do
+    it 'should return true' do
+      subject.stub(:proposals => [double(:unit_price_greater_than_budget_allocation_unit_price => true),
+                                  double(:unit_price_greater_than_budget_allocation_unit_price => false)])
+
+      expect(subject.has_proposals_unit_price_greater_than_budget_allocation_unit_price).to be true
+    end
+
+    it 'should return false' do
+      subject.stub(:proposals => [double(:unit_price_greater_than_budget_allocation_unit_price => false),
+                                  double(:unit_price_greater_than_budget_allocation_unit_price => false)])
+
+      expect(subject.has_proposals_unit_price_greater_than_budget_allocation_unit_price).to be false
     end
   end
 end

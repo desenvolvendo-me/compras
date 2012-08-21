@@ -336,15 +336,6 @@ describe LicitationProcess do
     expect(subject).to be_filled_lots
   end
 
-  it 'should return the winner proposal by global total value' do
-    bidder_1 = double(:proposal_total_value => 1000.0, :creditor => 'creditor 1')
-    bidder_2 = double(:proposal_total_value => 500.0, :creditor => 'creditor 2')
-    subject.stub(:licitation_process_bidders).and_return([bidder_1, bidder_2])
-
-    expect(subject.winner_proposal_creditor).to eq 'creditor 2'
-    expect(subject.winner_proposal_total_price).to eq 500.0
-  end
-
   it "should validate administrative_process_status" do
     subject.stub(:administrative_process_released?).and_return(false)
 
@@ -424,6 +415,44 @@ describe LicitationProcess do
       subject.valid?
 
       expect(subject.errors[:administrative_process]).to_not include "já tem um processo licitatório"
+    end
+  end
+
+  context 'lots with items' do
+    let :lot_with_items do
+      [double("LicitationProcessLot", :administrative_process_budget_allocation_items => [double("LicitationProcessLotItem")],
+              :licitation_process_bidder_proposals => [double]),
+       double("LicitationProcessLot", :administrative_process_budget_allocation_items => [],
+              :licitation_process_bidder_proposals => [double])]
+    end
+
+    it 'should filter lots with items' do
+      subject.should_receive(:licitation_process_lots).and_return(lot_with_items)
+
+      expect(subject.lots_with_items.size).to eq 1
+    end
+  end
+
+  context 'has bidders and is available for classification' do
+    it 'should return true' do
+      subject.stub(:licitation_process_bidders => [double])
+      subject.stub(:is_available_for_licitation_process_classification? => true)
+
+      expect(subject.has_bidders_and_is_available_for_classification).to be true
+    end
+
+    it 'should return false' do
+      subject.stub(:licitation_process_bidders => [])
+      subject.stub(:is_available_for_licitation_process_classification? => true)
+
+      expect(subject.has_bidders_and_is_available_for_classification).to be false
+    end
+
+    it 'should return false' do
+      subject.stub(:licitation_process_bidders => [double])
+      subject.stub(:is_available_for_licitation_process_classification? => false)
+
+      expect(subject.has_bidders_and_is_available_for_classification).to be false
     end
   end
 end

@@ -43,13 +43,6 @@ describe LicitationProcessLot do
     end
   end
 
-  it 'should return the winner proposal by lot total value' do
-    classificator = double(:winner_proposals => 'the winner proposals')
-    classificator_class = double(:new => classificator)
-
-    expect(subject.winner_proposals(classificator_class)).to eq 'the winner proposals'
-  end
-
   it 'administrative process budget allocation items should have at least one' do
     subject.stub(:administrative_process_budget_allocation_items => [])
     subject.valid?

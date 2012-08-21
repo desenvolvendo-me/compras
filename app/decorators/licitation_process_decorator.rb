@@ -21,7 +21,7 @@ class LicitationProcessDecorator
     end
   end
 
-  def winner_proposal_total_price
-    number_to_currency super if super
+  def all_licitation_process_classifications_groupped
+    all_licitation_process_classifications.group_by(&:licitation_process_bidder)
   end
 end

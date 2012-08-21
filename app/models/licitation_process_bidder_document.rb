@@ -19,4 +19,8 @@ class LicitationProcessBidderDocument < Compras::Model
       :on_or_after => :emission_date,
       :on_or_after_message => :validity_should_be_on_or_after_emission_date
     }, :allow_blank => true
+
+  def expired?
+    validity && validity < Date.current
+  end
 end

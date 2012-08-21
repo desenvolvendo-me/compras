@@ -2,6 +2,23 @@
 
 <h2>Apuração: <%= resource.type_of_calculation_humanize %></h2>
 
-<%= render resource.type_of_calculation %>
+<% resource.decorator.all_licitation_process_classifications_groupped.each do |bidder, classifications| %>
+  <h3>Fornecedor: <%= bidder.creditor %></h3>
 
-<%= link_to 'Voltar', edit_licitation_process_path(resource), :class => "button primary" %>
+  <table class="records">
+    <thead>
+      <th><%= Material.human_attribute_name :description %></th>
+      <th><%= Material.human_attribute_name :reference_unit %></th>
+      <th><%= AdministrativeProcessBudgetAllocationItem.human_attribute_name :quantity %></th>
+      <th><%= LicitationProcessBidderProposal.human_attribute_name :unit_price %></th>
+      <th><%= LicitationProcessClassification.human_attribute_name :total_value %></th>
+      <th><%= LicitationProcessClassification.human_attribute_name :situation %></th>
+    </thead>
+
+    <tbody>
+      <% classifications.each_with_index do |classification, index| %>
+        <%= render :partial => resource.type_of_calculation, :locals => { :classification => classification, :index => index } %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

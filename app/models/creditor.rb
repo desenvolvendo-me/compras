@@ -45,7 +45,7 @@ class Creditor < Compras::Model
   delegate :personable_type, :cnpj, :state_registration, :responsible,
            :identity_document, :company?, :to => :person, :allow_nil => true
   delegate :identity_document, :to => :responsible, :prefix => true, :allow_nil => true
-  delegate :phone, :fax, :name, :to => :person, :allow_nil => true
+  delegate :phone, :fax, :name, :benefited, :to => :person, :allow_nil => true
   delegate :address, :city, :zip_code, :to => :person, :allow_nil => true
   delegate :neighborhood, :state, :country, :zip_code, :to => :address, :allow_nil => true
   delegate :email, :to => :person, :allow_nil => true, :prefix => true

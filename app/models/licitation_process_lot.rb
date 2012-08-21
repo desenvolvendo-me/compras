@@ -34,10 +34,6 @@ class LicitationProcessLot < Compras::Model
     end
   end
 
-  def winner_proposals(classificator = LicitationProcessProposalsClassificatorByLot)
-    classificator.new(self, type_of_calculation).winner_proposals
-  end
-
   def count_lots
     self.class.licitation_process_less_than_me(licitation_process_id, id).count
   end

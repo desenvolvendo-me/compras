@@ -12,6 +12,7 @@ class Person < Unico::Person
   has_one :employee
 
   delegate :city, :zip_code, :to => :address
+  delegate :benefited, :to => :company_size, :allow_nil => true
 
   validates :address, :presence => true
 

@@ -17,8 +17,6 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
 
   delegate :type_of_calculation, :to => :administrative_process_budget_allocation, :allow_nil => true
 
-  delegate :creditor, :total_price, :unit_price, :to => :winner_proposals, :allow_nil => true, :prefix => true
-
   validates :material, :quantity, :unit_price, :presence => true
 
   orderize :id
@@ -53,11 +51,15 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
     end
   end
 
-  def winner_proposals(classificator = LicitationProcessProposalsClassificatorByItem)
-    classificator.new(self, type_of_calculation).winner_proposals
-  end
-
   def bidder_proposal?(bidder)
     licitation_process_bidder_proposals.where { licitation_process_bidder_id.eq(bidder.id) }.any?
+  end
+
+  def unit_price_by_bidder(bidder)
+    bidder.proposals.select { |item| item.administrative_process_budget_allocation_item == self }.first.unit_price
+  end
+
+  def total_value_by_bidder(bidder)
+    (unit_price_by_bidder(bidder) || 0) * quantity
   end
 end

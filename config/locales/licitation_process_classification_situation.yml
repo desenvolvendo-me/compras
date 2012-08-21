@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    licitation_process_classification_situation:
+      won: "Venceu"
+      lost: "Perdeu"
+      equalized: "Empatou"

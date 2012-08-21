@@ -45,4 +45,18 @@ describe LicitationProcessBidderDocument do
                                                    with_message("deve ser igual ou posterior a data de emissão (#{I18n.l emission_date})")
     end
   end
+
+  context '#expired' do
+    it 'should return false' do
+      subject.stub(:validity => Date.new(4000, 1, 1))
+
+      expect(subject.expired?).to be false
+    end
+
+    it 'should return true' do
+      subject.stub(:validity => Date.new(2000, 1, 1))
+
+      expect(subject.expired?).to be true
+    end
+  end
 end

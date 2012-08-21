@@ -42,12 +42,13 @@ class LicitationProcess < Compras::Model
   accepts_nested_attributes_for :licitation_process_bidders, :allow_destroy => true
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
-  delegate :modality, :modality_humanize, :object_type_humanize,
+  delegate :modality, :modality_humanize, :object_type_humanize, :presence_trading?,
            :released?, :judgment_form, :description, :responsible,
            :item, :licitation_process, :date, :object_type, :judgment_form_kind,
            :to => :administrative_process, :allow_nil => true, :prefix => true
 
   delegate :administrative_process_budget_allocations, :items, :to => :administrative_process, :allow_nil => true
+  delegate :is_available_for_licitation_process_classification?, :items, :to => :administrative_process, :allow_nil => true
 
   validates :process_date, :administrative_process, :capability, :presence => true
   validates :period, :period_unit, :expiration, :expiration_unit, :presence => true
@@ -128,23 +129,23 @@ class LicitationProcess < Compras::Model
     items && !items.without_lot?
   end
 
-  def winner_proposal_creditor
-    return unless winner_proposal
-
-    winner_proposal.creditor
+  def all_licitation_process_classifications
+    licitation_process_bidders.classifications
   end
 
-  def winner_proposal_total_price
-    return unless winner_proposal
+  def destroy_all_licitation_process_classifications
+    licitation_process_bidders.destroy_all_classifications
+  end
 
-    winner_proposal.proposal_total_value
+  def lots_with_items
+    licitation_process_lots.select {|l| l unless l.administrative_process_budget_allocation_items.empty? || l.licitation_process_bidder_proposals.empty? }
+  end
+
+  def has_bidders_and_is_available_for_classification
+    !licitation_process_bidders.empty? && is_available_for_licitation_process_classification?
   end
 
   protected
-
-  def winner_proposal
-    licitation_process_bidders.min_by(&:proposal_total_value)
-  end
 
   def set_modality
     self.modality = administrative_process.modality

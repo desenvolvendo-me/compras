@@ -15,6 +15,7 @@ class LicitationProcessBidder < Compras::Model
   has_many :proposals, :class_name => :LicitationProcessBidderProposal, :dependent => :destroy, :order => :id
   has_many :accredited_representatives, :dependent => :destroy
   has_many :people, :through => :accredited_representatives
+  has_many :licitation_process_classifications, :dependent => :destroy
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true
@@ -23,6 +24,7 @@ class LicitationProcessBidder < Compras::Model
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
   delegate :items, :allow_bidders?, :to => :licitation_process, :allow_nil => true
+  delegate :benefited, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
   accepts_nested_attributes_for :proposals, :allow_destroy => true
@@ -72,8 +74,39 @@ class LicitationProcessBidder < Compras::Model
     true
   end
 
+  def expired_documents?
+    documents.each do |document|
+      return true if document.expired?
+    end
+
+    false
+  end
+
+  def disable!
+    update_column :status, LicitationProcessBidderStatus::DISABLED
+  end
+
+  def enable!
+    update_column :status, LicitationProcessBidderStatus::ENABLED
+  end
+
+  def has_proposals_unit_price_greater_than_budget_allocation_unit_price
+    proposals.select(&:unit_price_greater_than_budget_allocation_unit_price).any?
+  end
+
   def to_s
     creditor.to_s
+  end
+
+  def self.destroy_all_classifications
+    classifications.destroy_all
+  end
+
+  def self.classifications
+    LicitationProcessClassification.where do |classification|
+      classification.licitation_process_bidder_id.in(pluck(:id)) &
+        classification.licitation_process_bidder.status != LicitationProcessBidderStatus::DISABLED
+    end
   end
 
   def assign_document_types
@@ -106,6 +139,40 @@ class LicitationProcessBidder < Compras::Model
       select { sum(proposals.administrative_process_budget_allocation_item.quantity * proposals.unit_price).as(proposal_total) }.first.proposal_total
 
     BigDecimal.new(total || 0)
+  end
+
+  def global_classification
+    bidders = licitation_process.licitation_process_bidders.sort_by &:total_price
+
+    classification = bidders.index(self).succ
+    classification = -1 if has_item_with_unit_price_equals_zero
+    classification
+  end
+
+  def classification_by_lot(lot)
+    items_with_creditor = LicitationProcessBidderProposal.by_lot_item_order_by_unit_price(lot.id)
+
+    classification = items_with_creditor.index { |item| item.creditor_id.to_i == creditor_id.to_i }.succ
+    classification = -1 if has_item_with_unit_price_equals_zero(lot)
+    classification
+  end
+
+  def classification_by_item(proposal)
+    proposals = LicitationProcessBidderProposal.by_item_order_by_unit_price(proposal.administrative_process_budget_allocation_item)
+
+    classification = proposals.index(proposal).succ
+    classification = -1 if proposal.unit_price <= 0
+    classification
+  end
+
+  def has_item_with_unit_price_equals_zero(lot = nil)
+    proposals.any_without_unit_price?(lot)
+  end
+
+  def total_price
+    return 0 if proposals.empty?
+
+    proposals.sum(&:total_price)
   end
 
   protected

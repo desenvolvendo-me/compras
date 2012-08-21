@@ -7,6 +7,8 @@ class CompanySize < Unico::CompanySize
 
   accepts_nested_attributes_for :extended_company_size
 
+  delegate :benefited, :to => :extended_company_size, :allow_nil => true
+
   filterize
   orderize
 end

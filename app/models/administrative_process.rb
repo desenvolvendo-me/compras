@@ -64,6 +64,10 @@ class AdministrativeProcess < Compras::Model
     purchase_and_services? || construction_and_engineering_services?
   end
 
+  def is_available_for_licitation_process_classification?
+    AdministrativeProcessModality.available_for_licitation_process_classification?(modality)
+  end
+
   protected
 
   def set_process

@@ -11,11 +11,11 @@ class AdministrativeProcessBudgetAllocationItemDecorator
     number_with_precision super if super
   end
 
-  def winner_proposals_unit_price
-    number_with_precision(super) if super
+  def unit_price_by_bidder(bidder)
+    number_with_precision super if super
   end
 
-  def winner_proposals_total_price
-    number_with_precision(super) if super
+  def total_value_by_bidder(bidder)
+    number_with_precision super if super
   end
 end

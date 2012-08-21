@@ -20,7 +20,21 @@ class LicitationProcessesController < CrudController
   end
 
   def update
-    update!{ edit_administrative_process_path(resource.administrative_process) }
+    if params[:commit] == 'Apurar'
+      generator = LicitationProcessClassificationGenerator.new(resource)
+
+      resource.transaction do
+        generator.generate!
+      end
+
+      redirect_to licitation_process_path(resource)
+    else
+      update!{ edit_administrative_process_path(resource.administrative_process) }
+    end
+  end
+
+  def show
+    render :layout => 'report'
   end
 
   protected

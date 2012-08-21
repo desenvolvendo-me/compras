@@ -4,7 +4,10 @@
   <% if f.object.persisted? %>
     <%= link_to('Licitantes', licitation_process_bidders_path(:licitation_process_id => resource.id), :class => "button primary") %>
     <%= link_to('Publicações', licitation_process_publications_path(:licitation_process_id => resource.id), :class => "button primary") %>
-    <%= link_to('Apurar', licitation_process_path(resource), :class => "button primary") if resource.envelope_opening? %>
+
+    <%= classification_link %>
+    <%= calculation_link %>
+
     <%= link_to('Lotes de itens', licitation_process_lots_path(:licitation_process_id => resource.id), :class => "button primary") %>
   <% end %>
 
