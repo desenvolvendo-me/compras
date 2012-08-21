@@ -67,8 +67,7 @@ feature "LicitationProcessRatifications" do
     expect(page).not_to have_link 'Apagar'
 
     within_modal 'Participante vencedor' do
-      page.driver.render '/home/tiago/debug.png'
-        click_button 'Pesquisar'
+      click_button 'Pesquisar'
       click_record 'Gabriel Sobrinho'
     end
 
