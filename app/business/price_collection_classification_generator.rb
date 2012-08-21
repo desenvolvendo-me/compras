@@ -14,7 +14,11 @@ class PriceCollectionClassificationGenerator
     price_collection_proposals.each do |proposal|
       send(type_of_calculation, proposal)
     end
+
+    check_if_winner_has_zero!
   end
+
+  protected
 
   def check_if_winner_has_zero!
     price_collection.all_price_collection_classifications.group_by(&:classifiable_id).each do |classifiable_id, classifications|
@@ -26,8 +30,6 @@ class PriceCollectionClassificationGenerator
       end
     end
   end
-
-  protected
 
   def lowest_total_price_by_item(proposal)
     proposal.items.each do |proposal_item|

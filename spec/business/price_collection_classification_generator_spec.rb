@@ -10,7 +10,9 @@ describe PriceCollectionClassificationGenerator do
       :price_collection_proposals => price_collection_proposals,
       :price_collection_lots_with_items => price_collection_lots_with_items,
       :items => items,
-      :proposals_with_total_value => proposals_with_total_value
+      :proposals_with_total_value => proposals_with_total_value,
+      :all_price_collection_classifications => [],
+      :destroy_all_price_collection_classifications => true
     )
   end
 
@@ -111,11 +113,11 @@ describe PriceCollectionClassificationGenerator do
     end
 
     before do
-      price_collection.stub(:all_price_collection_classifications => [classification_1, classification_2])
+      price_collection.stub(:all_price_collection_classifications => [classification_1, classification_2], :price_collection_proposals => [])
     end
 
     it 'should check if has classification -1' do
-      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).check_if_winner_has_zero!
+      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).generate!
 
       expect(classification_1.classification).to eq 2
       expect(classification_2.classification).to eq 1
@@ -126,7 +128,7 @@ describe PriceCollectionClassificationGenerator do
 
       classification_1.should_receive(:update_column).with(:classification, 1).and_return(true)
 
-      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).check_if_winner_has_zero!
+      PriceCollectionClassificationGenerator.new(price_collection, price_collection_classification_repository).generate!
     end
   end
 end

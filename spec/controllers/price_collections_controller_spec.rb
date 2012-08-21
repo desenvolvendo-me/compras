@@ -129,8 +129,6 @@ describe PriceCollectionsController do
 
       price_collection.should_receive(:transaction)
 
-      PriceCollectionClassificationGenerator.any_instance.should_receive(:check_if_winner_has_zero!)
-
       put :update, :id => price_collection.id, :commit => 'Apurar'
     end
   end

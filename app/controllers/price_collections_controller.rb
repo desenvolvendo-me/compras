@@ -19,8 +19,6 @@ class PriceCollectionsController < CrudController
         generator.generate!
       end
 
-      generator.check_if_winner_has_zero!
-
       redirect_to price_collection_path(resource)
     else
       super
