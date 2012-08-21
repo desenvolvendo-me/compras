@@ -10,6 +10,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials
   has_many :direct_purchases, :dependent => :restrict
   has_many :administrative_processes, :dependent => :restrict
+  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   validates :purchase_solicitation_item_group_materials, :presence => {:message => :must_have_at_least_one_material}
 
@@ -32,5 +33,9 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   def to_s
     "#{id}"
+  end
+
+  def annulled?
+    annul.present?
   end
 end

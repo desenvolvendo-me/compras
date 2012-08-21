@@ -33,16 +33,10 @@ describe PurchaseSolicitationItemGroupsController do
   end
 
   describe 'DELETE #destroy' do
-    before do
-      PurchaseSolicitationItemGroup.any_instance.stub(:save).and_return true
-    end
-
     it 'should update an item group' do
       purchase_solicitation_item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.any_instance.should_receive(:change)
-
-      delete :destroy, :id => purchase_solicitation_item_group.id
+      expect { delete :destroy, :id => purchase_solicitation_item_group.id }.to raise_exception(ActionController::RoutingError)
     end
   end
 end

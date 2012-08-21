@@ -721,7 +721,9 @@ Compras::Application.routes.draw do
 
   resources :purchase_solicitation_annuls, :only => [:new, :create, :edit, :update]
 
-  resources :purchase_solicitation_item_groups do
+  resources :purchase_solicitation_item_group_annuls, :only => [:new, :create, :edit, :update]
+
+  resources :purchase_solicitation_item_groups, :except => :destroy do
     collection do
       get :filter
       get :modal

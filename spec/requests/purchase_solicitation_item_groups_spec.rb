@@ -40,6 +40,8 @@ feature "PurchaseSolicitationItemGroups" do
 
     click_link '1'
 
+    expect(page).should_not have_link 'Apagar'
+
     click_button 'Remover Material'
 
     click_button 'Adicionar Material'
@@ -169,20 +171,6 @@ feature "PurchaseSolicitationItemGroups" do
 
       expect(page).to have_css 'table.records tbody tr', :count => 2
     end
-  end
-
-  scenario 'destroy an existent purchase_solicitation_item_group' do
-    PurchaseSolicitationItemGroup.make!(:reparo_2013)
-
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
-
-    click_link '1'
-
-    click_link 'Apagar', :confirm => true
-
-    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra apagado com sucesso.'
-
-    expect(page).not_to have_content 'Antivirus'
   end
 
   scenario 'filter by material' do

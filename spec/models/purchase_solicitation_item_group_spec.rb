@@ -1,16 +1,19 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
+require 'lib/annullable'
 require 'app/models/purchase_solicitation_item_group'
 require 'app/models/purchase_solicitation_item_group_material'
 require 'app/models/direct_purchase'
 require 'app/models/administrative_process'
+require 'app/models/resource_annul'
 
 describe PurchaseSolicitationItemGroup do
   it { should have_many(:purchase_solicitation_item_group_materials).dependent(:destroy) }
   it { should have_many(:purchase_solicitations).through(:purchase_solicitation_item_group_materials) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:administrative_processes).dependent(:restrict) }
+  it { should have_one(:annul).dependent(:destroy) }
 
   it { should validate_presence_of(:purchase_solicitation_item_group_materials).with_message("deve ter ao menos um material") }
 
@@ -33,5 +36,17 @@ describe PurchaseSolicitationItemGroup do
 
       expect(subject.total_purchase_solicitation_budget_allocations_sum).to eq 35
     end
+  end
+
+  it 'should be annulled if has a related annul object' do
+    subject.stub(:annul).and_return(double(:annul))
+
+    expect(subject).to be_annulled
+  end
+
+  it 'should not be annulled if does not have a related annul object' do
+    subject.stub(:annul).and_return(nil)
+
+    expect(subject).not_to be_annulled
   end
 end
