@@ -19,7 +19,7 @@ class BudgetStructure < Compras::Model
 
   has_many :budget_allocations, :dependent => :restrict
   has_many :purchase_solicitations, :dependent => :restrict
-  has_many :budget_structure_responsibles, :dependent => :destroy, :order => :id
+  has_many :budget_structure_responsibles, :dependent => :destroy, :order => 'id'
   has_many :direct_purchases, :dependent => :restrict
   has_many :children, :class_name => 'BudgetStructure', :foreign_key => :parent_id, :dependent => :restrict
 
@@ -53,6 +53,12 @@ class BudgetStructure < Compras::Model
 
   def parent_budget_structure_level_id
     upper_budget_structure_level.id if parent
+  end
+
+  def budget_structure_responsibles_new_records_first
+    budget_structure_responsibles.sort { |x, y|
+      x.new_record? ? 0 : 1
+    }
   end
 
   def persisted_budget_structure_responsibles_without_end_date

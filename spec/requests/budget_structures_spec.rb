@@ -151,7 +151,7 @@ feature "BudgetStructure" do
     end
 
     within_tab 'Responsáveis' do
-      within 'fieldset:nth-child(2)' do
+      within 'fieldset:nth-child(1)' do
         expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
         expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
         expect(page).to have_field 'Data de início', :with => I18n.l(Date.current)
@@ -417,7 +417,7 @@ feature "BudgetStructure" do
     click_link 'Secretaria de Educação'
 
     within_tab 'Responsáveis' do
-      within 'fieldset' do
+      within 'fieldset:nth-child(2)' do
         expect(page).to have_field 'Data de término', :with => I18n.l(Date.current)
       end
     end
@@ -445,7 +445,7 @@ feature "BudgetStructure" do
 
     within_tab 'Responsáveis' do
       within 'fieldset:nth-child(1)' do
-        expect(page).to have_field 'Data de término', :with => '01/04/2012'
+        expect(page).to have_field 'Data de término', :with => ''
       end
 
       within 'fieldset:nth-child(2)' do
@@ -453,7 +453,29 @@ feature "BudgetStructure" do
       end
 
       within 'fieldset:nth-child(3)' do
-        expect(page).to have_field 'Data de término', :with => ''
+        expect(page).to have_field 'Data de término', :with => '01/04/2012'
+      end
+    end
+  end
+
+  scenario 'when have errors on new responsible should show first new responsible' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    Employee.make!(:wenderson)
+
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+
+    click_link 'Secretaria de Educação'
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+      fill_in 'Data de início', :with => I18n.l(Date.current)
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Responsáveis' do
+      within 'fieldset:nth-child(1)' do
+        expect(page).to have_content 'não pode ficar em branco'
       end
     end
   end

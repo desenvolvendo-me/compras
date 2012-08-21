@@ -5,7 +5,7 @@
 </p>
 
 <div id="budget_structure-responsibles">
-  <%= f.association :budget_structure_responsibles, :collection => localized(f.object.budget_structure_responsibles) do |p| %>
+  <%= f.association :budget_structure_responsibles, :collection => localized(f.object.budget_structure_responsibles_new_records_first) do |p| %>
     <%= render 'budget_structure_responsibles/form', :f => p %>
   <% end %>
 </div>
