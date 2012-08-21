@@ -49,4 +49,43 @@ describe PurchaseSolicitationItemGroup do
 
     expect(subject).not_to be_annulled
   end
+
+  context 'editable' do
+    let :direct_purchases do
+      [
+        double(:direct_purchase1),
+        double(:direct_purchase2)
+      ]
+    end
+
+    let :administrative_processes do
+      [
+        double(:administrative_process1),
+        double(:administrative_process2)
+      ]
+    end
+
+    it 'should not be editable if has direct_purchases' do
+      subject.stub(:direct_purchases).and_return(direct_purchases)
+
+      expect(subject).not_to be_editable
+    end
+
+    it 'should not be editable if has administrative_processes' do
+      subject.stub(:administrative_processes).and_return(administrative_processes)
+
+      expect(subject).not_to be_editable
+    end
+
+    it 'should not be editable if has administrative_processes and direct_purchases' do
+      subject.stub(:administrative_processes).and_return(administrative_processes)
+      subject.stub(:direct_purchases).and_return(direct_purchases)
+
+      expect(subject).not_to be_editable
+    end
+
+    it 'should be editable if does not have administrative_process neither direct_purchases' do
+      expect(subject).to be_editable
+    end
+  end
 end

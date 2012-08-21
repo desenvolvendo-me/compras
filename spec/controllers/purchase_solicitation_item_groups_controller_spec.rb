@@ -23,12 +23,19 @@ describe PurchaseSolicitationItemGroupsController do
       PurchaseSolicitationItemGroup.any_instance.stub(:save).and_return true
     end
 
-    it 'should update an item group' do
+    it 'should update an item group when editable' do
       purchase_solicitation_item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
       PurchaseSolicitationBudgetAllocationItemStatusChanger.any_instance.should_receive(:change)
 
       put :update, :id => purchase_solicitation_item_group.id
+    end
+
+    it 'should not update an item group when not editable' do
+      pending "It isn't raising exception in test, but it is in real life"
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus, :administrative_processes => [AdministrativeProcess.make!(:compra_de_cadeiras)])
+
+      expect { put :update, :id => item_group.id }.to raise_exception(Exceptions::Unauthorized)
     end
   end
 

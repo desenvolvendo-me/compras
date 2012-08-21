@@ -1,5 +1,5 @@
 <div class="buttons">
   <%= annul_link %>
-  <%= f.button :submit unless f.object.annulled? %>
+  <%= f.button :submit if f.object.decorator.allow_submit_button? %>
   <%= f.button :cancel %>
 </div>

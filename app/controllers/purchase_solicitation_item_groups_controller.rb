@@ -14,6 +14,8 @@ class PurchaseSolicitationItemGroupsController < CrudController
   end
 
   def update_resource(object, attributes)
+    raise Exceptions::Unauthorized unless object.editable?
+
     object.transaction do
       old_purchase_solicitation_ids = object.purchase_solicitation_ids
 

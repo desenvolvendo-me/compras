@@ -38,4 +38,8 @@ class PurchaseSolicitationItemGroup < Compras::Model
   def annulled?
     annul.present?
   end
+
+  def editable?
+    administrative_processes.empty? && direct_purchases.empty?
+  end
 end

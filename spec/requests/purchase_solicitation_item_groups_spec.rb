@@ -214,4 +214,23 @@ feature "PurchaseSolicitationItemGroups" do
       expect(page).to have_css('a', :count => 1)
     end
   end
+
+  scenario 'disable fields and hiden buttons when not editable' do
+    PurchaseSolicitationItemGroup.make!(:antivirus,
+                                        :administrative_processes => [
+                                          AdministrativeProcess.make!(:compra_de_cadeiras)
+                                        ])
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link '1'
+
+    expect(page).to have_disabled_field 'Material'
+    expect(page).to have_disabled_field 'Solicitação de compra'
+
+    expect(page).not_to have_button 'Adicionar Material'
+    expect(page).not_to have_button 'Remover Material'
+    expect(page).not_to have_button 'Remover'
+    expect(page).not_to have_button 'Salvar'
+  end
 end

@@ -79,9 +79,17 @@
     object.closest('.purchase-solicitation-item-group-material').find(".record, .purchase-solicitation").html('');
   }
 
+
+  <% unless resource.editable? %>
+    $("form.purchase_solicitation_item_group :input").attr("disabled", true);
+    $(".add-purchase-solicitation-item-group-material").hide();
+    $(".remove-purchase-solicitation-item-group-material").hide();
+    $(".modal-finder-remove").hide();
+  <% end %>
+
   (function(){
     $('.purchase-solicitation-item-group-material').each(function(){
       filterModalUrl($(this));
-    })
+    });
   })();
 </script>
