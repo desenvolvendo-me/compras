@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/record_price'
+require 'app/models/record_price_item'
 
 describe RecordPrice do
   it { should belong_to :delivery_location }
@@ -7,6 +8,8 @@ describe RecordPrice do
   it { should belong_to :management_unit }
   it { should belong_to :payment_method }
   it { should belong_to :responsible }
+
+  it { should have_many(:items).dependent(:destroy) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :year }

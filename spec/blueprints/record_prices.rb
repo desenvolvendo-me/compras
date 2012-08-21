@@ -15,4 +15,5 @@ RecordPrice.blueprint(:registro_de_precos) do
   validity { 1 }
   validaty_unit { PeriodUnit::YEAR  }
   observations { "Aquisição de combustíveis" }
+  items { [RecordPriceItem.make(:antivirus, :record_price => object)] }
 end

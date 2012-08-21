@@ -2,7 +2,8 @@ class RecordPrice < Compras::Model
   attr_accessible :date, :delivery, :delivery_unit, :description,
                   :observations, :situation, :validaty_date, :validaty_unit,
                   :validity, :year, :licitation_process_id, :payment_method_id,
-                  :delivery_location_id, :management_unit_id, :responsible_id
+                  :delivery_location_id, :management_unit_id, :responsible_id,
+                  :items_attributes
 
   attr_readonly :number
 
@@ -15,6 +16,10 @@ class RecordPrice < Compras::Model
   belongs_to :management_unit
   belongs_to :payment_method
   belongs_to :responsible, :class_name => 'Employee'
+
+  has_many :items, :class_name => 'RecordPriceItem', :dependent => :destroy, :inverse_of => :record_price
+
+  accepts_nested_attributes_for :items, :allow_destroy => true
 
   validates :licitation_process, :year, :presence => true
   validates :date, :validaty_date, :timeliness => { :type => :date },

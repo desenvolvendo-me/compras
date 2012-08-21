@@ -12,57 +12,94 @@ feature "RecordPrices" do
     ManagementUnit.make!(:unidade_central)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
     navigate 'Compras e Licitações > Registros de Preços'
 
     click_link 'Criar Registro de Preço'
 
-    fill_in 'Ano', :with => '2012'
-    fill_in 'Data', :with => '05/04/2012'
-    fill_in 'Data da validade', :with => '05/04/2013'
-    select 'Ativo', :from => 'Situação'
-    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-    fill_in 'Objeto', :with => 'Aquisição de combustíveis'
-    fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-    fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data', :with => '05/04/2012'
+      fill_in 'Data da validade', :with => '05/04/2013'
+      select 'Ativo', :from => 'Situação'
+      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+      fill_in 'Objeto', :with => 'Aquisição de combustíveis'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
 
-    within_modal 'Responsável' do
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      within_modal 'Responsável' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
-      click_button 'Pesquisar'
+        click_button 'Pesquisar'
 
-      click_record 'Gabriel Sobrinho'
+        click_record 'Gabriel Sobrinho'
+      end
+
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Entrega', :with => '1'
+      select 'mês/meses', :from => 'Período da entrega'
+      fill_in 'Validade', :with => '2'
+      select 'ano/anos', :from => 'Período da validade'
+      fill_in 'Observações', :with => 'Aquisição de combustíveis'
     end
 
-    fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
-    fill_in 'Entrega', :with => '1'
-    select 'mês/meses', :from => 'Período da entrega'
-    fill_in 'Validade', :with => '2'
-    select 'ano/anos', :from => 'Período da validade'
-    fill_in 'Observações', :with => 'Aquisição de combustíveis'
+    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+      click_button 'Adicionar Material'
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Material'
+
+      click_button 'Adicionar Dotação'
+
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_in 'Quantidade solicitada', :with => '100,00'
+
+      click_button 'Adicionar Dotação'
+
+      within '.record-price-budget-structure:first' do
+        fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+        fill_in 'Quantidade solicitada', :with => '200,00'
+      end
+    end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Registro de Preço criado com sucesso.'
+    expect(page).to have_notice 'Registro de Preço criado com sucesso.'
 
     click_link '1/2012'
 
-    page.should have_field 'Número', :with => '1'
-    page.should have_field 'Ano', :with => '2012'
-    page.should have_field 'Data', :with => '05/04/2012'
-    page.should have_field 'Data da validade', :with => '05/04/2013'
-    page.should have_select 'Situação', :selected => 'Ativo'
-    page.should have_field 'Processo licitatório', :with => '1/2012'
-    page.should have_field 'Objeto', :with => 'Aquisição de combustíveis'
-    page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
-    page.should have_field 'Unidade gestora', :with => 'Unidade Central'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
-    page.should have_field 'Entrega', :with => '1'
-    page.should have_select 'Período da entrega', :selected => 'mês/meses'
-    page.should have_field 'Validade', :with => '2'
-    page.should have_select 'Período da validade', :selected => 'ano/anos'
-    page.should have_field 'Observações', :with => 'Aquisição de combustíveis'
+    within_tab 'Principal' do
+      expect(page).to have_field 'Número', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data', :with => '05/04/2012'
+      expect(page).to have_field 'Data da validade', :with => '05/04/2013'
+      expect(page).to have_select 'Situação', :selected => 'Ativo'
+      expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+      expect(page).to have_field 'Objeto', :with => 'Aquisição de combustíveis'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      expect(page).to have_field 'Unidade gestora', :with => 'Unidade Central'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Entrega', :with => '1'
+      expect(page).to have_select 'Período da entrega', :selected => 'mês/meses'
+      expect(page).to have_field 'Validade', :with => '2'
+      expect(page).to have_select 'Período da validade', :selected => 'ano/anos'
+      expect(page).to have_field 'Observações', :with => 'Aquisição de combustíveis'
+    end
+
+    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
+      expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
+      expect(page).to have_select 'Carona', :selected => 'Não' 
+
+      within 'div.record-price-budget-structure:last' do
+        expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+        expect(page).to have_field 'Quantidade solicitada', :with => '100,00'
+        expect(page).to have_select 'Carona', :selected => 'Não' 
+      end
+    end
   end
 
   scenario 'update an existent record_price' do
@@ -72,52 +109,73 @@ feature "RecordPrices" do
 
     click_link '1/2012'
 
-    fill_in 'Ano', :with => '2013'
-    fill_in 'Data', :with => '05/04/2013'
-    fill_in 'Data da validade', :with => '05/04/2014'
-    select 'Ativo', :from => 'Situação'
-    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-    fill_in 'Objeto', :with => 'Aquisição de combustíveis'
-    fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-    fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2013'
+      fill_in 'Data', :with => '05/04/2013'
+      fill_in 'Data da validade', :with => '05/04/2014'
+      select 'Ativo', :from => 'Situação'
+      fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+      fill_in 'Objeto', :with => 'Aquisição de combustíveis'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Unidade gestora', :with => 'Unidade Central', :field => 'Descrição'
 
-    within_modal 'Responsável' do
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+      within_modal 'Responsável' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
 
-      click_button 'Pesquisar'
+        click_button 'Pesquisar'
 
-      click_record 'Gabriel Sobrinho'
+        click_record 'Gabriel Sobrinho'
+      end
+
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+      fill_in 'Entrega', :with => '2'
+      select 'mês/meses', :from => 'Período da entrega'
+      fill_in 'Validade', :with => '3'
+      select 'ano/anos', :from => 'Período da validade'
+      fill_in 'Observações', :with => 'Aquisição de carne'
     end
 
-    fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
-    fill_in 'Entrega', :with => '2'
-    select 'mês/meses', :from => 'Período da entrega'
-    fill_in 'Validade', :with => '3'
-    select 'ano/anos', :from => 'Período da validade'
-    fill_in 'Observações', :with => 'Aquisição de carne'
+    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+      fill_in 'Quantidade solicitada', :with => '400,00'
+    end
 
     click_button 'Salvar'
 
-    page.should have_notice 'Registro de Preço editado com sucesso.'
+    expect(page).to have_notice 'Registro de Preço editado com sucesso.'
 
     click_link '1/2013'
 
-    page.should have_field 'Número', :with => '1'
-    page.should have_field 'Ano', :with => '2013'
-    page.should have_field 'Data', :with => '05/04/2013'
-    page.should have_field 'Data da validade', :with => '05/04/2014'
-    page.should have_select 'Situação', :selected => 'Ativo'
-    page.should have_field 'Processo licitatório', :with => '1/2012'
-    page.should have_field 'Objeto', :with => 'Aquisição de combustíveis'
-    page.should have_field 'Local de entrega', :with => 'Secretaria da Educação'
-    page.should have_field 'Unidade gestora', :with => 'Unidade Central'
-    page.should have_field 'Responsável', :with => 'Gabriel Sobrinho'
-    page.should have_field 'Forma de pagamento', :with => 'Dinheiro'
-    page.should have_field 'Entrega', :with => '2'
-    page.should have_select 'Período da entrega', :selected => 'mês/meses'
-    page.should have_field 'Validade', :with => '3'
-    page.should have_select 'Período da validade', :selected => 'ano/anos'
-    page.should have_field 'Observações', :with => 'Aquisição de carne'
+    within_tab 'Principal' do
+      expect(page).to have_field 'Número', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2013'
+      expect(page).to have_field 'Data', :with => '05/04/2013'
+      expect(page).to have_field 'Data da validade', :with => '05/04/2014'
+      expect(page).to have_select 'Situação', :selected => 'Ativo'
+      expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+      expect(page).to have_field 'Objeto', :with => 'Aquisição de combustíveis'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      expect(page).to have_field 'Unidade gestora', :with => 'Unidade Central'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+      expect(page).to have_field 'Entrega', :with => '2'
+      expect(page).to have_select 'Período da entrega', :selected => 'mês/meses'
+      expect(page).to have_field 'Validade', :with => '3'
+      expect(page).to have_select 'Período da validade', :selected => 'ano/anos'
+      expect(page).to have_field 'Observações', :with => 'Aquisição de carne'
+    end
+
+    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Quantidade solicitada', :with => '400,00'
+      expect(page).to have_select 'Carona', :selected => 'Não' 
+
+      within 'div.record-price-budget-structure:last' do
+        expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
+        expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
+        expect(page).to have_select 'Carona', :selected => 'Não' 
+      end
+    end
   end
 
   scenario 'destroy an existent record_price' do
@@ -129,10 +187,10 @@ feature "RecordPrices" do
 
     click_link 'Apagar', :confirm => true
 
-    page.should have_notice 'Registro de Preço apagado com sucesso.'
+    expect(page).to have_notice 'Registro de Preço apagado com sucesso.'
 
-    page.should_not have_content '1'
-    page.should_not have_content '05/04/2012'
-    page.should_not have_content 'Aquisição de combustíveis'
+    expect(page).not_to have_content '1'
+    expect(page).not_to have_content '05/04/2012'
+    expect(page).not_to have_content 'Aquisição de combustíveis'
   end
 end

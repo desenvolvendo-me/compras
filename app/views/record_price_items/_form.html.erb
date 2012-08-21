@@ -1,0 +1,34 @@
+<div class="record-price-item">
+  <%= f.input :administrative_process_budget_allocation_item %>
+
+  <p>
+    <input type="button" class="button affirmative add-record-price-budget-structure" value="Adicionar Dotação">
+  </p>
+
+  <div id="record-price-budget-structures-<%= f.nested_identifier %>">
+    <%= f.association :record_price_budget_structures, :collection => localized(f.object.record_price_budget_structures) do |p| %>
+      <%= render 'record_price_budget_structures/form', :f => p %>
+    <% end %>
+
+    <%= mustache "record-price-budget-structures-template-#{f.nested_identifier}" do %>
+      <%= f.association :record_price_budget_structures_attributes, :collection => f.object.record_price_budget_structures.build, :index => '{{uuid_record_price_budget_structure}}' do |p| %>
+        <%= render 'record_price_budget_structures/form', :f => p %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-record-price-item" value="Remover Item">
+  </p>
+</div>
+
+<script>
+  $("#record-price-budget-structures-template-<%= f.nested_identifier %>").nestedForm({
+    add: ".add-record-price-budget-structure",
+    remove: ".remove-record-price-budget-structure",
+    target: "#record-price-budget-structures-<%= f.nested_identifier %>",
+    uuid: "uuid_record_price_budget_structure",
+    fieldToRemove: ".record-price-budget-structure",
+    appendItem: false
+  });
+</script>

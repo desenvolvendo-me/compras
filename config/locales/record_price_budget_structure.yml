@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      record_price_budget_structure:
+        one: "Estrutura Orçamentária do Registro de Preço"
+        other: "Estruturas Orçamentárias do Registro de Preço"
+
+    attributes:
+      record_price_budget_structure:
+        record_price: "Registro de preço"
+        budget_structure: "Estrutura orçamentária"
+        quantity_requested: "Quantidade solicitada"
+        budget_structure_balance: "Saldo"
+        ride: "Carona"
