@@ -66,7 +66,7 @@ feature 'ContractTerminationAnnuls' do
     expect(page).not_to have_link 'Apagar'
   end
 
-  scenario 'a contract termination annul cancel should bat to contract termination' do
+  scenario 'a contract termination annul cancel should back to contract termination' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
     navigate 'Contabilidade > Comum > Contratos'
