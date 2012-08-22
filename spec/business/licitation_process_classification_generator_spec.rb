@@ -199,6 +199,7 @@ describe LicitationProcessClassificationGenerator do
 
       classification_1.should_receive(:lost!).and_return(true)
       classification_2.should_receive(:won!).and_return(true)
+      classification_2.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
@@ -211,6 +212,8 @@ describe LicitationProcessClassificationGenerator do
 
       classification_1.should_receive(:equalized!).and_return(true)
       classification_2.should_receive(:equalized!).and_return(true)
+      classification_1.should_receive(:save!).and_return(true)
+      classification_2.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
@@ -223,6 +226,8 @@ describe LicitationProcessClassificationGenerator do
 
       classification_1.should_receive(:equalized!).and_return(true)
       classification_2.should_receive(:equalized!).and_return(true)
+      classification_1.should_receive(:save!).and_return(true)
+      classification_2.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
@@ -235,6 +240,8 @@ describe LicitationProcessClassificationGenerator do
 
       classification_2.should_receive(:won!).and_return(true)
       classification_1.should_receive(:lost!).and_return(true)
+      classification_1.should_receive(:save!).and_return(true)
+      classification_2.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
@@ -247,6 +254,8 @@ describe LicitationProcessClassificationGenerator do
 
       classification_2.should_receive(:won!).and_return(true)
       classification_1.should_receive(:lost!).and_return(true)
+      classification_1.should_receive(:save!).and_return(true)
+      classification_2.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
@@ -259,6 +268,8 @@ describe LicitationProcessClassificationGenerator do
 
       classification_1.should_receive(:won!).and_return(true)
       classification_2.should_receive(:lost!).and_return(true)
+      classification_1.should_receive(:save!).exactly(3).times.and_return(true)
+      classification_2.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
