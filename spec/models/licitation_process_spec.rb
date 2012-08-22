@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'lib/signable'
 require 'app/models/licitation_process'
-require 'lib/signable'
 require 'app/models/administrative_process'
 require 'app/models/capability'
 require 'app/models/payment_method'
