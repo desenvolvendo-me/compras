@@ -1,0 +1,28 @@
+<div id="details-content">
+  <p>
+    <input type="button" class="button affirmative add-detail" value="Adicionar Detalhamento">
+  </p>
+
+  <div id="capability-destination-details">
+    <%= f.association :capability_destination_details, :collection => localized(f.object.capability_destination_details) do |p| %>
+      <%= render 'capability_destination_details/form', :f => p %>
+    <% end %>
+  </div>
+</div>
+
+<%= mustache 'capability-destination-details-template' do %>
+  <%= f.association :capability_destination_details_attributes, :collection => f.object.capability_destination_details.build, :index => '{{uuid_capability_destination_detail}}' do |p| %>
+    <%= render 'capability_destination_details/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#capability-destination-details-template").nestedForm({
+    add: '.add-detail',
+    remove: '.remove-detail',
+    target: '#capability-destination-details',
+    uuid: 'uuid_capability_destination_detail',
+    fieldToRemove: '.capability-destination-detail',
+    appendItem: false
+  });
+</script>

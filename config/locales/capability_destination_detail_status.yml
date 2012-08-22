@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    capability_destination_detail_status:
+      active: "Ativo"
+      inactive: "Inativo"

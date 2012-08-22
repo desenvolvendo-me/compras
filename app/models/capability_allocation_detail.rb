@@ -1,6 +1,8 @@
 class CapabilityAllocationDetail < Compras::Model
   attr_accessible :description
 
+  has_many :capability_destination_details
+
   orderize :description
   filterize
 

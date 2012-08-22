@@ -7,6 +7,8 @@ feature "CapabilityDestinations" do
   end
 
   scenario 'create a new capability_destination' do
+    CapabilityAllocationDetail.make!(:educacao)
+
     navigate 'Contabilidade > Orçamento > Recurso > Destinações de Recursos'
 
     click_link 'Criar Destinação de Recursos'
@@ -17,6 +19,13 @@ feature "CapabilityDestinations" do
       fill_in 'Especificação', :with => '1'
       fill_in 'Descrição', :with => 'Programa de linha de crédito'
       select 'Primária', :from => 'Destinação *'
+    end
+
+    within_tab 'Detalhamento' do
+      click_button 'Adicionar Detalhamento'
+
+      fill_modal 'Detalhamento', :with => 'Educação', :field => 'Descrição'
+      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
@@ -31,6 +40,11 @@ feature "CapabilityDestinations" do
       expect(page).to have_field 'Especificação', :with => '1'
       expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito'
       expect(page).to have_select 'Destinação', :selected => 'Primária'
+    end
+
+    within_tab 'Detalhamento' do
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_field 'Detalhamento', :with => 'Educação'
     end
   end
 
@@ -49,6 +63,10 @@ feature "CapabilityDestinations" do
       select 'Não primária', :from => 'Destinação *'
     end
 
+    within_tab 'Detalhamento' do
+      click_button 'Remover Detalhamento'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Destinação de Recursos editado com sucesso.'
@@ -61,6 +79,10 @@ feature "CapabilityDestinations" do
       expect(page).to have_field 'Especificação', :with => '2'
       expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito para projetos'
       expect(page).to have_select 'Destinação', :selected => 'Não primária'
+    end
+
+    within_tab 'Detalhamento' do
+      expect(page).to_not have_field 'Detalhamento', :with => 'Educação'
     end
   end
 

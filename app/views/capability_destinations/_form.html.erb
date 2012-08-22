@@ -1,9 +1,14 @@
 <div class="tabs">
   <ul>
     <li><a href="#main">Principal</a></li>
+    <li><a href="#details">Detalhamento</a></li>
   </ul>
 
   <div id="main">
     <%= render 'main', :f => f %>
+  </div>
+
+  <div id="details">
+    <%= render 'details', :f => f %>
   </div>
 </div>

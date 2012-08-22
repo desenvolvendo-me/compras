@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      capability_destination_detail:
+        one: "Detalhamento das Destinações de Recursos"
+        other: "Detalhamentos das Destinações de Recursos"
+
+    attributes:
+      capability_destination_detail:
+        status: "Status"
+        capability_allocation_detail: "Detalhamento"

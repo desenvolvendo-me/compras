@@ -5,4 +5,5 @@ CapabilityDestination.blueprint(:linha_de_credito) do
   specification { 1 }
   description { "Programa de linha de crédito" }
   kind { CapabilityDestinationKind::PRIMARY }
+  capability_destination_details { [CapabilityDestinationDetail.make!(:educacao)] }
 end

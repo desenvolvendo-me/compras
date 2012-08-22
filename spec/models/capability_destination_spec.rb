@@ -8,6 +8,8 @@ describe CapabilityDestination do
     expect(subject.to_s).to eq 'Programa de Linha de Crédito'
   end
 
+  it { should have_many(:capability_destination_details).dependent(:destroy) }
+
   it { should validate_presence_of :use }
   it { should validate_presence_of :group }
   it { should validate_presence_of :specification }

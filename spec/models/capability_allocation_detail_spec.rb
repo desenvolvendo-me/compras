@@ -8,5 +8,7 @@ describe CapabilityAllocationDetail do
     expect(subject.to_s).to eq 'Educação'
   end
 
+  it { should have_many(:capability_destination_details) }
+
   it { should validate_presence_of :description }
 end
