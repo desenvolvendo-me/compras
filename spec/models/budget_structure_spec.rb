@@ -32,7 +32,7 @@ describe BudgetStructure do
 
   it { should have_one :address }
   it { should have_many(:budget_allocations).dependent(:restrict) }
-  it { should have_many(:budget_structure_responsibles).dependent(:destroy).order('id') }
+  it { should have_many(:budget_structure_responsibles).dependent(:destroy).order(:id) }
   it { should have_many(:purchase_solicitations).dependent(:restrict) }
   it { should belong_to :budget_structure_configuration }
   it { should belong_to :administration_type }

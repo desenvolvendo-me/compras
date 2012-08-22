@@ -19,7 +19,7 @@ class BudgetStructure < Compras::Model
 
   has_many :budget_allocations, :dependent => :restrict
   has_many :purchase_solicitations, :dependent => :restrict
-  has_many :budget_structure_responsibles, :dependent => :destroy, :order => 'id'
+  has_many :budget_structure_responsibles, :dependent => :destroy, :order => :id
   has_many :direct_purchases, :dependent => :restrict
   has_many :children, :class_name => 'BudgetStructure', :foreign_key => :parent_id, :dependent => :restrict
 
