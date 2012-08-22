@@ -78,7 +78,7 @@
     var prefixNameUuid = "#direct_purchase_direct_purchase_budget_allocations_attributes_fresh-" + uuid;
 
     $(prefixNameUuid + "_budget_allocation").val(budget_allocation.description);
-    $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.id);
+    $(prefixNameUuid + "_budget_allocation_id").val(budget_allocation.budget_allocation_id);
     $(prefixNameUuid + "_expense_nature").val(budget_allocation.expense_nature);
     $(prefixNameUuid + "_amount").val(numberWithDelimiter(budget_allocation.amount));
   }
