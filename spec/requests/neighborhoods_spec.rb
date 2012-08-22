@@ -17,7 +17,7 @@ feature "Neighborhoods" do
   end
 
   scenario 'create a new neighborhood' do
-    City.make!(:porto_alegre)
+    District.make!(:leste)
 
     navigate 'Outros > Bairros'
 
@@ -27,6 +27,14 @@ feature "Neighborhoods" do
 
     fill_modal 'Cidade', :with => 'Porto Alegre'
 
+    within_modal 'Distrito' do
+      expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
+      expect(page).to have_disabled_field 'Cidade'
+
+      click_button 'Pesquisar'
+      click_record 'Leste'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Bairro criado com sucesso.'
@@ -35,6 +43,7 @@ feature "Neighborhoods" do
 
     expect(page).to have_field 'Nome', :with => 'Alvorada'
     expect(page).to have_field 'Cidade', :with => 'Porto Alegre'
+    expect(page).to have_field 'Distrito', :with => 'Leste'
   end
 
   scenario 'update a neighborhood' do

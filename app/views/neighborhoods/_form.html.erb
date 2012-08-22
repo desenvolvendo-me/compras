@@ -7,17 +7,35 @@
     </div>
 
     <div class="yui3-u-1-2">
-      <%= f.input :district, :disabled => true %>
+      <%= f.input :district %>
     </div>
   </div>
 </fieldset>
 
 <script>
-  $("#neighborhood_city_id").change(function (event, data) {
-    if (!this.value) {
-      return;
-    }
+  function setModalUrlToDistrict() {
+    var url = "<%=  modal_districts_path %>?",
 
-    $("#neighborhood_district").attr("data-modal-url", "<%= modal_districts_path %>?locked_fields=[city]&filter[city_id]=" + this.value).attr("disabled", false);
-  }).change();
+    params = {
+      locked_fields: ["city"],
+      district: {
+        city_id: $("#neighborhood_city_id").val()
+      }
+    };
+
+    url += jQuery.param(params);
+
+    $("#neighborhood_district").attr("data-modal-url", url);
+  };
+
+  $("#neighborhood_city_id").change(function (event, data) {
+    setModalUrlToDistrict();
+    $("#neighborhood_district").attr("disabled", !this.value);
+    $("#neighborhood_district").val('');
+  });
+
+  (function() {
+    $("#neighborhood_district").attr("disabled", !$("#neighborhood_city").val());
+    setModalUrlToDistrict();
+  })();
 </script>
