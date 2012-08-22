@@ -1,43 +1,75 @@
-<%= f.input :name %>
 <div class='yui3-g'>
-  <div class='yui3-u-1-2'>
-    <%= f.input :bank, :as => :modal, :hidden_field => :bank_id %>
+  <div class='yui3-u-1-4'>
+    <%= f.input :kind %>
   </div>
 
-  <div class='yui3-u-1-2'>
-    <%= f.input :agency %>
+  <div class='yui3-u-1-4'>
+    <%= f.input :status, :disabled => f.object.new_record? %>
+  </div>
+</div>
+
+<%= f.input :bank, :as => :modal, :hidden_field => :bank_id %>
+
+<%= f.input :agency %>
+
+<div class='yui3-g'>
+  <div class='yui3-u-1-6'>
+    <%= f.input :agency_number, :disabled => true %>
+  </div>
+
+  <div class='yui3-u-1-6'>
+    <%= f.input :agency_digit, :disabled => true %>
   </div>
 </div>
 
 <div class='yui3-g'>
   <div class='yui3-u-1-4'>
-    <%= f.input :account_number %>
+    <%= f.input :account_number, :input_html => { :data => { :numeric => true } } %>
   </div>
 
   <div class='yui3-u-1-4'>
-    <%= f.input :originator %>
-  </div>
-  <div class='yui3-u-1-4'>
-    <%= f.input :number_agreement %>
+    <%= f.input :digit %>
   </div>
 </div>
+
+<%= f.input :description %>
 
 <script>
-  $("#bank_account_bank_id").change(function () {
-    var url = "<%= modal_agencies_path %>?",
-    params = {
-      locked_fields: ["bank"],
-      bank_id: $(this).val()
-    };
+  $('#bank_account_agency_id').on('change', function (event, agency) {
+    if (agency) {
+      $('#bank_account_agency_number').val(agency.number);
+      $('#bank_account_agency_digit').val(agency.digit);
 
-    url += jQuery.param(params);
-
-    $("#bank_account_agency").attr('data-modal-url', url);
-
-    if (this.value) {
-      $("#bank_account_agency").attr('disabled', false);
+      if ( !$('#bank_account_bank').val() ) {
+        $('#bank_account_bank').val(agency.bank);
+        $('#bank_account_bank_id').val(agency.bank_id);
+      }
     } else {
-      $("#bank_account_agency").attr('disabled', true);
+      $('#bank_account_agency_number').val('');
+      $('#bank_account_agency_digit').val('');
     }
-  })
+  });
+
+  $("#bank_account_bank_id").on('change', function (event, bank) {
+    if (bank) {
+      var url = "<%= modal_agencies_path %>?",
+      params = {
+        locked_fields: ["bank"],
+        bank_id: $(this).val()
+      };
+
+      url += jQuery.param(params);
+
+      $("#bank_account_agency").attr('data-modal-url', url);
+
+      if (this.value) {
+        $("#bank_account_agency").attr('disabled', false);
+      } else {
+        $("#bank_account_agency").attr('disabled', true);
+      }
+    } else {
+      $('#bank_account_agency, #bank_account_agency_id').val('');
+      $("#bank_account_agency").attr('data-modal-url', "<%= modal_agencies_path %>");
+    }
+  });
 </script>

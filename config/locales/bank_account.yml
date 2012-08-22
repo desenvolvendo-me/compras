@@ -7,9 +7,14 @@ pt-BR:
 
     attributes:
       bank_account:
-        name: "Nome"
+        description: "Descrição"
         bank: "Banco"
         agency: "Agência"
         account_number: "Número da conta corrente"
         originator: "Código do cedente"
         number_agreement: "Número do contrato"
+        status: "Status"
+        kind: "Tipo"
+        agency_number: "Número da agência"
+        agency_digit: "Dígito da agência"
+        digit: "Dígito da conta corrente"

@@ -53,6 +53,7 @@ menu:
           - regulatory_act_type_classifications
           - regulatory_acts
 
+      - bank_accounts
       - contracts
       - creditors
       - program_kinds
@@ -131,7 +132,6 @@ menu:
     - condominia
     - positions
     - settings
-    - bank_accounts
     - fiscal_years
     - risk_degrees
     - indexers

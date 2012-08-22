@@ -1,0 +1,8 @@
+pt-BR:
+  enumerations:
+    bank_account_kind:
+      treasury: "Tesouraria"
+      moviment: "Movimento"
+      linked: "Vinculada"
+      savings: "Poupança"
+      application: "Aplicação"
