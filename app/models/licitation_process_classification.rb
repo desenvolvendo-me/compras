@@ -1,7 +1,7 @@
 class LicitationProcessClassification < Compras::Model
   attr_accessible :classification, :situation, :total_value, :unit_value, :licitation_process_bidder, :classifiable
 
-  has_enumeration_for :situation, :with => LicitationProcessClassificationSituation
+  has_enumeration_for :situation, :with => LicitationProcessClassificationSituation, :create_helpers => true
 
   belongs_to :licitation_process_bidder
   belongs_to :classifiable, :polymorphic => true
@@ -15,18 +15,6 @@ class LicitationProcessClassification < Compras::Model
 
   def disqualified?
     classification == -1
-  end
-
-  def won!
-    update_column(:situation, LicitationProcessClassificationSituation::WON)
-  end
-
-  def lost!
-    update_column(:situation, LicitationProcessClassificationSituation::LOST)
-  end
-
-  def equalized!
-    update_column(:situation, LicitationProcessClassificationSituation::EQUALIZED)
   end
 
   def benefited_value(current_percentage)

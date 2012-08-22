@@ -68,23 +68,33 @@ class LicitationProcessClassificationGenerator
     classifications = all_licitation_process_classifications.reject(&:disqualified?).sort_by(&:classification)
     first = classifications.first
 
-    first.won! if classifications.size == 1
+    if classifications.size == 1
+      first.won!
+      first.save!
+    end
 
     classifications.reject { |c| c == first }.each do |classification|
       total_value = classification.benefited_value(current_percentage)
 
       if total_value == first.total_value
         first.equalized!
+
         classification.equalized!
       elsif total_value < first.total_value
         first.lost!
+        first.save!
+
         classification.won!
+        classification.save!
 
         first = classification
       else
         first.won!
         classification.lost!
       end
+
+      first.save!
+      classification.save!
     end
   end
 
