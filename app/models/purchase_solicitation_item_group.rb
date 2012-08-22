@@ -42,4 +42,8 @@ class PurchaseSolicitationItemGroup < Compras::Model
   def editable?
     administrative_processes.empty? && direct_purchases.empty?
   end
+
+  def annullable?
+    editable?
+  end
 end

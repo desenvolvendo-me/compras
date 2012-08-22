@@ -72,4 +72,17 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).not_to have_link 'Apagar'
     expect(page).to have_link 'Cancelar'
   end
+
+  scenario 'does not show destroy button if not annullable' do
+    PurchaseSolicitationItemGroup.make!(:antivirus,
+                                        :administrative_processes => [
+                                          AdministrativeProcess.make!(:compra_de_cadeiras)
+                                        ])
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link '1'
+
+    expect(page).not_to have_button 'Anular'
+  end
 end
