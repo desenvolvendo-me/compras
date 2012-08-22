@@ -49,14 +49,14 @@ class LicitationProcessClassificationGenerator
       if !bidder.filled_documents? || bidder.expired_documents?
         if (consider_law_of_proposals && !bidder.benefited) || !consider_law_of_proposals
           bidder.disable!
-          bidder.save!
         end
       else
         unless bidder.benefited
           bidder.enable!
-          bidder.save!
         end
       end
+
+      bidder.save!
     end
   end
 
