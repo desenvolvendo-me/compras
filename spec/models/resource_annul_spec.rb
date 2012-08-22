@@ -22,4 +22,24 @@ describe ResourceAnnul do
       expect(subject).to be_annulled
     end
   end
+
+  context 'with annullable' do
+    let :annullable do
+      double(:annullable)
+    end
+
+    it 'should return purchase_solicitation_ids if annullable respond_to? it' do
+      annullable.stub(:purchase_solicitation_ids).and_return([1, 2, 3])
+
+      subject.stub(:annullable).and_return(annullable)
+
+      expect(subject.purchase_solicitation_ids).to eq [1, 2, 3]
+    end
+
+    it 'should return nil if annullable does not respond_to? purchase_solicitation_ids' do
+      subject.stub(:annullable).and_return(annullable)
+
+      expect(subject.purchase_solicitation_ids).to eq nil
+    end
+  end
 end
