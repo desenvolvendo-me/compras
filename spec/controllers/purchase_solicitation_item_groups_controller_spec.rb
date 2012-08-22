@@ -33,7 +33,7 @@ describe PurchaseSolicitationItemGroupsController do
   end
 
   describe 'DELETE #destroy' do
-    it 'should update an item group' do
+    it 'should raise exception when try destroy' do
       purchase_solicitation_item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
       expect { delete :destroy, :id => purchase_solicitation_item_group.id }.to raise_exception(ActionController::RoutingError)
