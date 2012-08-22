@@ -27,56 +27,60 @@ describe ResourceAnnulsController do
 
   describe 'GET #new' do
     it "should return 401 if parent is already annulled" do
-      pending 'Waiting solution for rails update'
-      resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
+      pending 'Waiting solution for rails update' do
+        resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-      subject.stub(:controller_name => 'contract_termination_annuls')
-      expect(subject).to_receive(:validate_parent!).
-              with(instance_of(ResourceAnnul)).
-              and_raise(Exceptions::Unauthorized)
+        subject.stub(:controller_name => 'contract_termination_annuls')
+        subject.should_receive(:validate_parent!).
+          with(instance_of(ResourceAnnul)).
+          and_raise(Exceptions::Unauthorized)
 
-      get :new, :annullable_id => resource_annul.annullable_id
+        get :new, :annullable_id => resource_annul.annullable_id
 
-      expect(response.code).to eq '401'
+        expect(response.code).to eq '401'
+      end
     end
   end
 
   describe 'POST #create' do
     it "should redirect to edit parent path after create" do
-      pending 'Waiting solution for rails update'
-      pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
+      pending 'Waiting solution for rails update' do
+        pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-      expect(subject).to_receive(:annul)
-      subject.stub(:controller_name => 'pledge_liquidation_annuls')
+        subject.should_receive(:annul)
+        subject.stub(:controller_name => 'pledge_liquidation_annuls')
 
-      post :create, :resource_annul => { :annullable_id => pledge_liquidation.id, :annullable_type => 'PledgeLiquidation' }
+        post :create, :resource_annul => { :annullable_id => pledge_liquidation.id, :annullable_type => 'PledgeLiquidation' }
 
-      expect(response).to be_success
-      expect(response.location).to match "/pledge_liquidations/#{pledge_liquidation.id}/edit"
+        expect(response).to be_success
+        expect(response.location).to match "/pledge_liquidations/#{pledge_liquidation.id}/edit"
+      end
     end
 
     it "should return 401 if parent is already annulled" do
-      pending 'Waiting solution for rails update'
-      resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
+      pending 'Waiting solution for rails update' do
+        resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-      expect(subject).to_receive(:validate_parent!).
-              with(instance_of(ResourceAnnul)).
-              and_raise(Exceptions::Unauthorized)
+        subject.should_receive(:validate_parent!).
+          with(instance_of(ResourceAnnul)).
+          and_raise(Exceptions::Unauthorized)
 
-      post :create, :resource_annul => resource_annul.attributes
+        post :create, :resource_annul => resource_annul.attributes
 
-      expect(response.code).to eq '401'
+        expect(response.code).to eq '401'
+      end
     end
   end
 
   it "should return annullable_id from params at annulable_id method" do
-    pending 'Waiting solution for rails update'
-    pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
+    pending 'Waiting solution for rails update' do
+      pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-    subject.stub(:controller_name => 'pledge_liquidation_annuls')
-    expect(subject).to_receive(:annullable_id).twice.and_return(pledge_liquidation.id)
+      subject.stub(:controller_name => 'pledge_liquidation_annuls')
+      subject.should_receive(:annullable_id).twice.and_return(pledge_liquidation.id)
 
-    get :new, :annulable_id => pledge_liquidation.id
+      get :new, :annulable_id => pledge_liquidation.id
+    end
   end
 
   it "should return the parent model name at parent_model_name method" do
