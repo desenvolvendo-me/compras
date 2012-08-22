@@ -218,7 +218,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Unidade', :with => 'UN'
 
       fill_in 'Quantidade', :with => '2'
-      fill_in 'Valor unitário', :with => '10,00'
+      fill_in 'Valor unitário máximo', :with => '10,00'
 
       # asserting calculated total price of the item
       expect(page).to have_field 'Valor total', :with => '20,00'
@@ -292,7 +292,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '2'
-      expect(page).to have_field 'Valor unitário', :with => '10,00'
+      expect(page).to have_field 'Valor unitário máximo', :with => '10,00'
       expect(page).to have_field 'Valor total', :with => '20,00'
 
       expect(page).to have_field 'Item', :with => '1'
@@ -401,7 +401,7 @@ feature "LicitationProcesses" do
       fill_in 'Valor total', :with => '20,00'
 
       # asserting calculated unit price of the item
-      expect(page).to have_field 'Valor unitário', :with => '4,00'
+      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
     end
 
     within_tab 'Configuração da apuração' do
@@ -453,7 +453,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Quantidade', :with => '5'
-      expect(page).to have_field 'Valor unitário', :with => '4,00'
+      expect(page).to have_field 'Valor unitário máximo', :with => '4,00'
       expect(page).to have_field 'Valor total', :with => '20,00'
 
       expect(page).to have_field 'Item', :with => '1'
@@ -533,14 +533,14 @@ feature "LicitationProcesses" do
 
       fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
       fill_in 'Quantidade', :with => 2
-      fill_in 'Valor unitário', :with => 1
+      fill_in 'Valor unitário máximo', :with => 1
 
       click_button 'Adicionar Item'
 
       within '.item:last' do
         fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
         fill_in 'Quantidade', :with => 3
-        fill_in 'Valor unitário', :with => 4
+        fill_in 'Valor unitário máximo', :with => 4
       end
     end
 
@@ -593,7 +593,7 @@ feature "LicitationProcesses" do
       click_button 'Adicionar Item'
 
       fill_in 'Quantidade', :with => '5'
-      fill_in 'Valor unitário', :with => '10,00'
+      fill_in 'Valor unitário máximo', :with => '10,00'
 
       expect(page).to have_field 'Valor total dos itens', :with => '50,00'
 
@@ -601,7 +601,7 @@ feature "LicitationProcesses" do
 
       within '.item:first' do
         fill_in 'Quantidade', :with => '4'
-        fill_in 'Valor unitário', :with => '20,00'
+        fill_in 'Valor unitário máximo', :with => '20,00'
       end
 
       expect(page).to have_field 'Valor total dos itens', :with => '130,00'
@@ -772,7 +772,7 @@ feature "LicitationProcesses" do
 
       fill_in 'Valor total', :with => '20,00'
 
-      expect(page).to have_field 'Valor unitário', :with => '0,00'
+      expect(page).to have_field 'Valor unitário máximo', :with => '0,00'
     end
   end
 

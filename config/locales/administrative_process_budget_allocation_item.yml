@@ -10,5 +10,5 @@ pt-BR:
         order: "Item"
         reference_unit: "Unidade"
         quantity: "Quantidade"
-        unit_price: "Valor unitário"
+        unit_price: "Valor unitário máximo"
         estimated_total_price: "Valor total"
