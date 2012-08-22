@@ -137,6 +137,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.stub(:benefited => false, :filled_documents? => false, :expired_documents? => true)
 
       bidder.should_receive(:disable!).and_return(true)
+      bidder.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
@@ -145,6 +146,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => true)
 
       bidder.should_receive(:disable!).and_return(true)
+      bidder.should_receive(:save!).and_return(true)
 
       generator.generate!
     end
@@ -159,6 +161,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => false)
 
       bidder.should_receive(:enable!).and_return(true)
+      bidder.should_receive(:save!).and_return(true)
 
       generator.generate!
     end

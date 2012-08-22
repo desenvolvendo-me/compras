@@ -5,7 +5,7 @@ class LicitationProcessBidder < Compras::Model
 
   attr_modal :licitation_process_id, :creditor_id, :protocol, :protocol_date, :status
 
-  has_enumeration_for :status, :with => LicitationProcessBidderStatus
+  has_enumeration_for :status, :with => LicitationProcessBidderStatus, :create_helpers => true
 
   belongs_to :licitation_process
   belongs_to :creditor
@@ -80,14 +80,6 @@ class LicitationProcessBidder < Compras::Model
     end
 
     false
-  end
-
-  def disable!
-    update_column :status, LicitationProcessBidderStatus::DISABLED
-  end
-
-  def enable!
-    update_column :status, LicitationProcessBidderStatus::ENABLED
   end
 
   def has_proposals_unit_price_greater_than_budget_allocation_unit_price

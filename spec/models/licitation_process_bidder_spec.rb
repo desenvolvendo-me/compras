@@ -258,22 +258,6 @@ describe LicitationProcessBidder do
     end
   end
 
-  describe '#disable!' do
-    it 'should change the subject status to disabled' do
-      subject.should_receive(:update_column).with(:status, LicitationProcessBidderStatus::DISABLED)
-
-      subject.disable!
-    end
-  end
-
-  describe '#enable!' do
-    it 'should change the subject status to enabled' do
-      subject.should_receive(:update_column).with(:status, LicitationProcessBidderStatus::ENABLED)
-
-      subject.enable!
-    end
-  end
-
   context 'has proposals unit price greater than budget allocation unit price' do
     it 'should return true' do
       subject.stub(:proposals => [double(:unit_price_greater_than_budget_allocation_unit_price => true),
