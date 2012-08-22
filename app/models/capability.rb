@@ -1,5 +1,6 @@
 class Capability < Compras::Model
   attr_accessible :descriptor_id, :description, :goal, :kind, :status
+  attr_accessible :capability_destination_id, :tce_specification_capability_id
 
   attr_modal :descriptor_id, :description, :kind, :status
 
@@ -8,6 +9,8 @@ class Capability < Compras::Model
   has_enumeration_for :source
 
   belongs_to :descriptor
+  belongs_to :capability_destination
+  belongs_to :tce_specification_capability
 
   has_many :budget_allocations, :dependent => :restrict
   has_many :licitation_processes, :dependent => :restrict

@@ -13,6 +13,8 @@ describe Capability do
   end
 
   it { should belong_to :descriptor }
+  it { should belong_to :capability_destination }
+  it { should belong_to :tce_specification_capability }
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
   it { should have_many(:licitation_processes).dependent(:restrict) }

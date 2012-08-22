@@ -12,3 +12,5 @@ pt-BR:
         goal: "Finalidade"
         kind: "Tipo"
         source: "Fonte"
+        capability_destination: "Destinação de recursos"
+        tce_specification_capability: "Especificação de recursos do TCE"
