@@ -1,6 +1,8 @@
 class TceSpecificationCapability < Compras::Model
   attr_accessible :description, :capability_source_id, :application_code_id
 
+  has_many :capabilities, :dependent => :restrict
+
   belongs_to :capability_source
   belongs_to :application_code
 

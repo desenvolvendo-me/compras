@@ -8,6 +8,7 @@ class CapabilityDestination < Compras::Model
   has_enumeration_for :kind, :with => CapabilityDestinationKind
 
   has_many :capability_destination_details, :dependent => :destroy
+  has_many :capabilities, :dependent => :restrict
 
   accepts_nested_attributes_for :capability_destination_details, :allow_destroy => true
 

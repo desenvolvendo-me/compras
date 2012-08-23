@@ -9,6 +9,7 @@ describe CapabilityDestination do
   end
 
   it { should have_many(:capability_destination_details).dependent(:destroy) }
+  it { should have_many(:capabilities).dependent(:restrict) }
 
   it { should validate_presence_of :use }
   it { should validate_presence_of :group }

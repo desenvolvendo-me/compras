@@ -14,4 +14,5 @@ describe TceSpecificationCapability do
 
   it { should belong_to :capability_source }
   it { should belong_to :application_code }
+  it { should have_many(:capabilities).dependent(:restrict) }
 end
