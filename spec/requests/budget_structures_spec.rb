@@ -458,7 +458,7 @@ feature "BudgetStructure" do
     end
   end
 
-  scenario 'when have errors on new responsible should show first new responsible' do
+  scenario 'when have errors on new responsible should show first new responsible and should not set end_date' do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
@@ -476,6 +476,10 @@ feature "BudgetStructure" do
     within_tab 'Responsáveis' do
       within 'fieldset:nth-child(1)' do
         expect(page).to have_content 'não pode ficar em branco'
+      end
+
+      within 'fieldset:nth-child(2)' do
+        expect(page).to have_field 'Data de término', :with => ''
       end
     end
   end

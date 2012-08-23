@@ -11,9 +11,20 @@ describe BudgetStructureResponsibleEndDateGenerator do
     Date.new(2012, 8, 8)
   end
 
+  context 'when is invalid' do
+    let :budget do
+      double('InvalidBudget', :valid? => false)
+    end
+
+    it 'should not set end_date' do
+      described_class.new(budget).change!
+    end
+  end
+
   context 'when have persisted responsible without end_date' do
     let :budget do
       double('Budget', :budget_structure_responsibles_changed? => true,
+             :valid? => true,
              :persisted_budget_structure_responsibles_without_end_date => [responsible])
     end
 

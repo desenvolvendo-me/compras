@@ -10,7 +10,7 @@ class BudgetStructureResponsibleEndDateGenerator
   end
 
   def change!
-    return unless budget_structure_responsibles_changed?
+    return unless budget_structure_object.valid? && budget_structure_responsibles_changed?
 
     persisted_budget_structure_responsibles_without_end_date.each do |responsible|
       responsible.end_date = Date.current
