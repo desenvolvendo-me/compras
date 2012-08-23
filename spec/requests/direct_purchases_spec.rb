@@ -32,11 +32,13 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
+
       within_modal 'Fornecedor' do
         fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
+
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -583,11 +585,13 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
+
       within_modal 'Fornecedor' do
         fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
         click_button 'Pesquisar'
         click_record 'Wenderson Malheiros'
       end
+
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
