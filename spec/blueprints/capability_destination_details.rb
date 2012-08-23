@@ -1,5 +1,5 @@
 # encoding: utf-8
 CapabilityDestinationDetail.blueprint(:educacao) do
-  status { CapabilityDestinationDetailStatus::ACTIVE }
+  status { Status::ACTIVE }
   capability_allocation_detail { CapabilityAllocationDetail.make!(:educacao) }
 end
