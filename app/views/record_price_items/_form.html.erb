@@ -2,7 +2,7 @@
   <%= f.input :administrative_process_budget_allocation_item %>
 
   <p>
-    <input type="button" class="button affirmative add-record-price-budget-structure" value="Adicionar Dotação">
+    <input type="button" class="button affirmative add-record-price-budget-structure<%= f.nested_identifier %>" value="Adicionar Dotação">
   </p>
 
   <div id="record-price-budget-structures-<%= f.nested_identifier %>">
@@ -24,7 +24,7 @@
 
 <script>
   $("#record-price-budget-structures-template-<%= f.nested_identifier %>").nestedForm({
-    add: ".add-record-price-budget-structure",
+    add: ".add-record-price-budget-structure<%= f.nested_identifier %>",
     remove: ".remove-record-price-budget-structure",
     target: "#record-price-budget-structures-<%= f.nested_identifier %>",
     uuid: "uuid_record_price_budget_structure",

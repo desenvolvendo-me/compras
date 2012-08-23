@@ -8,12 +8,14 @@ feature "RecordPrices" do
 
   scenario 'create a new record_price' do
     LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio_canetas)
     DeliveryLocation.make!(:education)
     ManagementUnit.make!(:unidade_central)
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
+    BudgetStructure.make!(:secretaria_de_educacao_com_dois_responsaveis)
 
     navigate 'Compras e Licitações > Registros de Preços'
 
@@ -61,6 +63,17 @@ feature "RecordPrices" do
         fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
         fill_in 'Quantidade solicitada', :with => '200,00'
       end
+
+      click_button 'Adicionar Material'
+
+      within 'div.record-price-item:first' do
+        fill_modal 'Material', :with => 'Arame comum', :field => 'Material'
+
+        click_button 'Adicionar Dotação'
+
+        fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação com dois responsaveis', :field => 'Descrição'
+        fill_in 'Quantidade solicitada', :with => '300,00'
+      end
     end
 
     click_button 'Salvar'
@@ -89,15 +102,25 @@ feature "RecordPrices" do
     end
 
     within_tab 'Itens por Estruturas Orçamentárias Participantes' do
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
-      expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
-      expect(page).to have_select 'Carona', :selected => 'Não' 
 
-      within 'div.record-price-budget-structure:last' do
-        expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
-        expect(page).to have_field 'Quantidade solicitada', :with => '100,00'
+      within 'div.record-price-item:last' do
+        expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+        expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
+        expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
         expect(page).to have_select 'Carona', :selected => 'Não' 
+
+        within 'div.record-price-budget-structure:last' do
+          expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+          expect(page).to have_field 'Quantidade solicitada', :with => '100,00'
+          expect(page).to have_select 'Carona', :selected => 'Não' 
+        end
+      end
+
+      within 'div.record-price-item:first' do
+        expect(page).to have_field 'Material', :with => '02.02.00002 - Arame comum'
+        expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação com dois responsaveis', :field => 'Descrição'
+        expect(page).to have_field 'Quantidade solicitada', :with => '300,00'
+        expect(page).to have_select 'Carona', :selected => 'Não'
       end
     end
   end
