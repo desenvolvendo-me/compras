@@ -46,6 +46,7 @@ class DirectPurchase < Compras::Model
 
   validate :must_have_at_least_budget_allocation
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
+  validate :purchase_solicitation_item_group_annulled
 
   before_validation :set_total_allocations_items_value
 
@@ -107,5 +108,13 @@ class DirectPurchase < Compras::Model
 
   def set_total_allocations_items_value
     self.total_allocations_items_value = total_direct_purchase_budget_allocations_sum
+  end
+
+  def purchase_solicitation_item_group_annulled
+    return unless purchase_solicitation_item_group.present?
+
+    if purchase_solicitation_item_group.annulled?
+      errors.add(:purchase_solicitation_item_group, :cannot_be_annulled)
+    end
   end
 end

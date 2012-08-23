@@ -569,4 +569,25 @@ feature "AdministrativeProcesses" do
 
     expect(page).not_to have_link 'Novo processo licitatório'
   end
+
+  scenario 'should show only purchase_solicitation_item_group not annulled' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+
+    ResourceAnnul.make!(:anulacao_generica,
+                            :annullable => PurchaseSolicitationItemGroup.make!(:reparo_2013))
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        within_records do
+          expect(page).to have_css 'td', :count => 1
+        end
+      end
+    end
+  end
 end

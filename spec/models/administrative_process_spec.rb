@@ -170,4 +170,26 @@ describe AdministrativeProcess do
     subject.stub(:object_type => AdministrativeProcessObjectType::CALL_NOTICE)
     expect(subject).not_to be_allow_licitation_process
   end
+
+  context 'with purchase_solicitation_item_group' do
+    let :purchase_solicitation_item_group do
+      double(:purchase_solcitation_item_group)
+    end
+
+    it 'should not allow purchase_solicitation_item_group annulled' do
+      purchase_solicitation_item_group.stub(:annulled?).and_return(true)
+      subject.stub(:purchase_solicitation_item_group).and_return(purchase_solicitation_item_group)
+
+      subject.valid?
+      expect(subject.errors[:purchase_solicitation_item_group]).to include(I18n.translate('errors.messages.cannot_be_annulled'))
+    end
+
+    it 'should allow purchase_solicitation_item_group not annulled' do
+      purchase_solicitation_item_group.stub(:annulled?).and_return(false)
+      subject.stub(:purchase_solicitation_item_group).and_return(purchase_solicitation_item_group)
+
+      subject.valid?
+      expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.cannot_be_annulled'))
+    end
+  end
 end

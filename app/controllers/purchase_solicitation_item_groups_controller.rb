@@ -1,6 +1,8 @@
 class PurchaseSolicitationItemGroupsController < CrudController
   actions :all, :except => :destroy
 
+  has_scope :not_annulled, :type => :boolean
+
   protected
 
   def create_resource(object)

@@ -38,6 +38,7 @@ class AdministrativeProcess < Compras::Model
   validates :administrative_process_budget_allocations, :no_duplication => :budget_allocation_id
 
   validate :validate_modality
+  validate :purchase_solicitation_item_group_annulled
 
   before_create :set_process
 
@@ -85,6 +86,14 @@ class AdministrativeProcess < Compras::Model
 
     unless verificator.verify_modality(object_type, modality)
       errors.add(:modality, :inclusion)
+    end
+  end
+
+  def purchase_solicitation_item_group_annulled
+    return unless purchase_solicitation_item_group.present?
+
+    if purchase_solicitation_item_group.annulled?
+      errors.add(:purchase_solicitation_item_group, :cannot_be_annulled)
     end
   end
 end

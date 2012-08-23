@@ -27,6 +27,10 @@ class PurchaseSolicitationItemGroup < Compras::Model
     query
   end
 
+  def self.not_annulled
+    joins { annul.outer }.where { annul.id.eq nil }
+  end
+
   def total_purchase_solicitation_budget_allocations_sum
     purchase_solicitations.sum(&:total_allocations_items_value)
   end

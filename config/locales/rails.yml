@@ -280,6 +280,7 @@ pt-BR:
       must_be_equals_to_value: "deve ser igual ao valor (%{value})"
       should_be_on_or_after_registration_date: "deve ser igual ou posterior a data da inscrição (%{restriction})"
       should_belongs_to_licitation_process: "deve pertencer ao processo licitatório %{licitation_process}"
+      cannot_be_annulled: "não pode estar anulado"
 
   activerecord:
     errors:
