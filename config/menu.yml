@@ -52,6 +52,8 @@ menu:
           - regulatory_act_types
           - regulatory_act_type_classifications
           - regulatory_acts
+      - agreements:
+        - agreement_kinds
 
       - bank_accounts
       - contracts

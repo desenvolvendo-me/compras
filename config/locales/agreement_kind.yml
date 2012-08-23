@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      agreement_kind:
+        one: "Tipo de Convênio"
+        other: "Tipos de Convênios"
+
+    attributes:
+      agreement_kind:
+        description: "Descrição"
+        tce_code: "Cógido TCE"
