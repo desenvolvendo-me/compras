@@ -429,7 +429,7 @@ feature "BudgetStructure" do
 
     navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
-    click_link 'Secretaria de Educação'
+    click_link 'Secretaria de Educação com dois responsaveis'
 
     within_tab 'Responsáveis' do
       click_button 'Adicionar Responsável'
@@ -441,7 +441,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    click_link 'Secretaria de Educação'
+    click_link 'Secretaria de Educação com dois responsaveis'
 
     within_tab 'Responsáveis' do
       within 'fieldset:nth-child(1)' do

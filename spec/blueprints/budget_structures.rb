@@ -32,7 +32,7 @@ BudgetStructure.blueprint(:secretaria_de_educacao_com_dois_responsaveis) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
   code { 1 }
   tce_code { '051' }
-  description { 'Secretaria de Educação' }
+  description { 'Secretaria de Educação com dois responsaveis' }
   kind { BudgetStructureKind::SYNTHETIC }
   acronym { 'SEMUEDU' }
   administration_type { AdministrationType.make!(:publica) }
