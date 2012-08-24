@@ -97,7 +97,7 @@ class LicitationProcessBidder < Compras::Model
   def self.classifications
     LicitationProcessClassification.where do |classification|
       classification.licitation_process_bidder_id.in(pluck(:id)) &
-        classification.licitation_process_bidder.status != LicitationProcessBidderStatus::DISABLED
+      classification.licitation_process_bidder.status != LicitationProcessBidderStatus::DISABLED
     end
   end
 
