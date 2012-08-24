@@ -8,7 +8,7 @@ describe AdministrativeProcessModality do
       expect(described_class.available_for_licitation_process_classification?('competition_for_purchases_and_services')).to be true
     end
 
-    it 'should return true' do
+    it 'should return false' do
       expect(described_class.available_for_licitation_process_classification?('auction')).to be false
     end
   end
