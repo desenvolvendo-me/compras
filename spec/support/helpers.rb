@@ -112,8 +112,12 @@ module Helpers
   end
 
   def click_record(record)
-    within_records do
-      page.find('td', :text => record).click
+    begin
+      within_records do
+        page.find('td', :text => record).click
+      end
+    rescue Capybara::ElementNotFound
+      raise Capybara::ElementNotFound, "Unable to find text '#{record}' on css 'td'"
     end
   end
 
