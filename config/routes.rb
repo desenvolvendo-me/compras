@@ -1,4 +1,12 @@
 Compras::Application.routes.draw do
+  resources :agreements do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+
   resources :agreement_kinds do
     collection do
       get :filter

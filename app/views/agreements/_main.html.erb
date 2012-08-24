@@ -1,0 +1,78 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :code %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :number_year %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :category %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :agreement_kind %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :value %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :counterpart_value %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :parcels_number %>
+  </div>
+</div>
+
+<%= f.input :description %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :number_year_process %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :process_date %>
+  </div>
+</div>
+
+<%= f.input :regulatory_act %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <%= f.input :creation_date, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :publication_date, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-3">
+    <%= f.input :end_date, :disabled => true %>
+  </div>
+</div>
+
+<%= f.input :agreement_file %>
+<%= link_to f.object.agreement_file_identifier, f.object.agreement_file_url, :target => '_blank' if f.object.agreement_file? %>
+
+<script>
+  $("#agreement_regulatory_act_id").change(function (event, regulatory_act) {
+    if (regulatory_act) {
+      $('#agreement_creation_date').val(regulatory_act.creation_date);
+      $('#agreement_publication_date').val(regulatory_act.publication_date);
+      $('#agreement_end_date').val(regulatory_act.end_date);
+    } else {
+      $('#agreement_creation_date').val('');
+      $('#agreement_publication_date').val('');
+      $('#agreement_end_date').val('');
+    }
+  });
+</script>

@@ -9,4 +9,6 @@ describe AgreementKind do
   end
 
   it { should validate_presence_of :description }
+
+  it { should have_many(:agreements).dependent(:restrict) }
 end

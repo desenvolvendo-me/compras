@@ -1,0 +1,2 @@
+class AgreementsController < CrudController
+end

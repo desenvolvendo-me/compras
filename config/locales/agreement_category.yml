@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    agreement_category:
+      repassed: "Convênio repassado"
+      received: "Convênio recebido"

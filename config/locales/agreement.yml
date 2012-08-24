@@ -1,0 +1,30 @@
+pt-BR:
+  activerecord:
+    models:
+      agreement:
+        one: "Convênio"
+        other: "Convênios"
+
+    attributes:
+      agreement:
+        code: "Código"
+        number_year: "Número e ano do convênio"
+        category: "Categoria"
+        agreement_kind: "Tipo de convênio"
+        value: "Valor"
+        counterpart_value: "Valor da contrapartida"
+        parcels_number: "Número de parcelas"
+        description: "Objeto"
+        number_year_process: "Processo administrativo"
+        process_date: "Data do processo"
+        regulatory_act: "Ato regulamentador"
+        agreement_file: "Arquivo"
+        creation_date: "Data da criação"
+        publication_date: "Data da publicação"
+        end_date: "Data do término"
+
+  simple_form:
+    hints:
+      agreement:
+        number_year: 'Exemplo: "39/2011"'
+        number_year_process: 'Exemplo: "39/2011"'
