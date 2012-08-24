@@ -15,6 +15,8 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
+    expect(page).not_to have_button 'Relatório'
+
     click_button 'Apurar'
 
     expect(page).to have_content 'Processo Licitatório 1/2012'

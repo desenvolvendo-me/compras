@@ -95,10 +95,12 @@ class LicitationProcessBidder < Compras::Model
   end
 
   def self.classifications
-    LicitationProcessClassification.where do |classification|
-      classification.licitation_process_bidder_id.in(pluck(:id)) &
-      classification.licitation_process_bidder.status != LicitationProcessBidderStatus::DISABLED
-    end
+    LicitationProcessClassification.joins { licitation_process_bidder }.readonly(false).
+      where do |classification|
+        classification.licitation_process_bidder_id.in(pluck(:id)) &
+        (classification.licitation_process_bidder.status.not_eq(LicitationProcessBidderStatus::DISABLED) |
+         classification.licitation_process_bidder.status.eq(nil))
+      end
   end
 
   def assign_document_types
