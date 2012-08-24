@@ -69,7 +69,13 @@ describe PriceCollectionsController do
 
   context 'PUT #update' do
     let :price_collection do
-      PriceCollection.new
+      double('PriceCollection', :id => 1, :all_price_collection_classifications => price_collection_classifications,
+             :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE, :annulled? => false)
+    end
+
+    let :price_collection_classifications do
+      [double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 1),
+       double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 2)]
     end
 
     before do
@@ -83,6 +89,8 @@ describe PriceCollectionsController do
       end
 
       it 'should generate users for any creditor' do
+        price_collection.should_receive(:transaction).and_yield
+
         CreditorUserCreator.any_instance.should_receive(:generate)
 
         put :update, :id => 1
@@ -95,6 +103,8 @@ describe PriceCollectionsController do
       end
 
       it 'should not generate users for any creditor' do
+        price_collection.should_receive(:transaction).and_yield
+
         CreditorUserCreator.any_instance.should_not_receive(:generate)
 
         put :update, :id => 1
@@ -111,25 +121,25 @@ describe PriceCollectionsController do
         expect(response.body).to match /Você não tem acesso a essa página/
       end
     end
-  end
-
-  context 'GET #show' do
-    let :price_collection_classifications do
-      [double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 1),
-       double('PriceCollectionClassification', :classifiable_id => 1, :classifiable_type => 'PriceCollection', :classification => 2)]
-    end
-
-    let :price_collection do
-      double('PriceCollection', :id => 1, :all_price_collection_classifications => price_collection_classifications,
-             :type_of_calculation => PriceCollectionTypeOfCalculation::LOWEST_GLOBAL_PRICE, :annulled? => false)
-    end
 
     it 'delete classifications e call classification generator' do
       PriceCollection.stub(:find).and_return(price_collection)
 
-      price_collection.should_receive(:transaction)
+      price_collection.should_receive(:transaction).and_yield
+
+      PriceCollectionClassificationGenerator.any_instance.should_receive(:generate!)
 
       put :update, :id => price_collection.id, :commit => 'Apurar'
+
+      expect(response).to redirect_to(price_collection_path(price_collection))
+    end
+  end
+
+  context 'GET #show' do
+    it 'should render report layout' do
+      get :show, :id => 1
+
+      expect(response).to render_template("layouts/report")
     end
   end
 end
