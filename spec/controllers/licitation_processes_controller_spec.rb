@@ -76,7 +76,16 @@ describe LicitationProcessesController do
 
     context "with licitation_process" do
       let :licitation_process do
-        LicitationProcess.make!(:processo_licitatorio)
+        LicitationProcess.make!(:processo_licitatorio, :type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE)
+      end
+
+      let :licitation_process_classifications do
+        [double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 1),
+         double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 2)]
+      end
+
+      before do
+        licitation_process.stub(:all_licitation_process_classifications => licitation_process_classifications)
       end
 
       it 'should not update any field when publication not allow update licitation process' do
@@ -100,26 +109,25 @@ describe LicitationProcessesController do
 
         expect(response).to redirect_to(edit_administrative_process_path(licitation_process.administrative_process))
       end
+
+      it 'delete classifications e call classification generator' do
+        LicitationProcess.stub(:find).and_return(licitation_process)
+        licitation_process.should_receive(:transaction).and_yield
+
+        LicitationProcessClassificationGenerator.any_instance.should_receive(:generate!)
+
+        put :update, :id => licitation_process.id, :commit => 'Apurar'
+
+        expect(response).to redirect_to(licitation_process_path(licitation_process))
+      end
     end
   end
 
   context 'GET #show' do
-    let :licitation_process_classifications do
-      [double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 1),
-       double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 2)]
-    end
+    it 'should render report layout' do
+      get :show, :id => 1
 
-    let :licitation_process do
-      double('LicitationProcess', :id => 1, :all_licitation_process_classifications => licitation_process_classifications,
-             :type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE)
-    end
-
-    it 'delete classifications e call classification generator' do
-      LicitationProcess.stub(:find).and_return(licitation_process)
-
-      licitation_process.should_receive(:transaction)
-
-      put :update, :id => licitation_process.id, :commit => 'Apurar'
+      expect(response).to render_template("layouts/report")
     end
   end
 end
