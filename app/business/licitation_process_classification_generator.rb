@@ -4,9 +4,14 @@ class LicitationProcessClassificationGenerator
 
   attr_accessor :licitation_process, :licitation_process_classification_repository
 
-  delegate :type_of_calculation, :licitation_process_bidders, :lots_with_items, :items, :to => :licitation_process, :allow_nil => true
-  delegate :disqualify_by_documentation_problem, :disqualify_by_maximum_value, :consider_law_of_proposals, :to => :licitation_process, :allow_nil => true
-  delegate :administrative_process_presence_trading?, :all_licitation_process_classifications, :to => :licitation_process, :allow_nil => true
+  delegate :type_of_calculation, :licitation_process_bidders, :lots_with_items, :items,
+           :to => :licitation_process, :allow_nil => true
+  delegate :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
+           :consider_law_of_proposals,
+           :to => :licitation_process, :allow_nil => true
+  delegate :administrative_process_presence_trading?,
+           :all_licitation_process_classifications,
+           :to => :licitation_process, :allow_nil => true
 
   def initialize(licitation_process, licitation_process_classification_repository = LicitationProcessClassification)
     self.licitation_process = licitation_process
