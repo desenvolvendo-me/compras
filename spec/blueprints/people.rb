@@ -60,6 +60,16 @@ Person.blueprint(:nohup) do
   address   { Address.make(:apto, :addressable => object) }
 end
 
+Person.blueprint(:ibm) do
+  name   { "IBM" }
+  phone  { "(11) 2323-2323" }
+  fax    { "(11) 2323-2424" }
+  mobile { "(11) 2323-2525" }
+  email  { "ibm@gmail.com" }
+  personable { Company.make!(:ibm) }
+  address   { Address.make(:apto, :addressable => object) }
+end
+
 Person.blueprint(:mateus) do
   name   { "Mateus Lorandi" }
   phone  { "(44) 3499-9999" }

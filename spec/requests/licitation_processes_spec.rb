@@ -6,7 +6,132 @@ feature "LicitationProcesses" do
     sign_in
   end
 
-  scenario 'calc by bidder' do
+  scenario 'genereate calculation with equalized result' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Empatou'
+    end
+
+    expect(page).to have_content 'Wenderson Malheiros'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '10,00'
+      expect(page).to have_content '20,00'
+      expect(page).to have_content 'Empatou'
+    end
+  end
+
+  scenario 'genereate calculation with companies without documents and considering law of proposals' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => true,
+                                                 :disqualify_by_documentation_problem => true)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to_not have_content 'IBM'
+  end
+
+  scenario 'genereate calculation with companies without documents' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => false,
+                                                 :disqualify_by_documentation_problem => true)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to_not have_content 'Nohup'
+
+    expect(page).to_not have_content 'IBM'
+  end
+
+  scenario 'genereate calculation between a small company and a big company' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Perdeu'
+    end
+  end
+
+  scenario 'genereate calculation when type of calculation is global' do
     licitation_process = LicitationProcess.make!(:apuracao_global)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
@@ -62,7 +187,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'calc by lote' do
+  scenario 'genereate calculation when type of calculation is by lot' do
     licitation_process = LicitationProcess.make!(:apuracao_por_lote)
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.first])
@@ -122,7 +247,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'calc by item' do
+  scenario 'genereate calculation when type of calculation is by item' do
     licitation_process = LicitationProcess.make!(:apuracao_por_itens)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'

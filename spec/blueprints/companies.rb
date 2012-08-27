@@ -38,3 +38,16 @@ Company.blueprint(:ibrama) do
   responsible_role { "Administrador" }
   partners { [Partner.make!(:wenderson)] }
 end
+
+Company.blueprint(:ibm) do
+  cnpj { "85.113.468/0001-45" }
+  legal_nature { LegalNature.make!(:administracao_publica) }
+  responsible { Person.make!(:wenderson) }
+  state_registration { "SP" }
+  commercial_registration_number { "093401" }
+  commercial_registration_date { "1980-06-29" }
+  company_size { CompanySize.make!(:empresa_de_grande_porte) }
+  choose_simple { true }
+  responsible_role { "Administrador" }
+  partners { [Partner.make!(:wenderson)] }
+end

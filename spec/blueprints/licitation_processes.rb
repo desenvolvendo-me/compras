@@ -276,12 +276,12 @@ LicitationProcess.blueprint(:apuracao_global) do
                                 LicitationProcessBidder.make!(:licitante_com_proposta_2)] }
 end
 
-LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
+LicitationProcess.blueprint(:apuracao_global_empatou) do
   year { 2012 }
   process { 1 }
   process_date { Date.new(2012, 3, 19) }
   licitation_number { 1 }
-  administrative_process { AdministrativeProcess.make!(:apuracao_melhor_tecnica_e_preco) }
+  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
   pledge_type { PledgeType::GLOBAL }
   capability { Capability.make!(:reforma) }
   expiration { 10 }
@@ -303,8 +303,70 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
-  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante_com_proposta_1),
-                                LicitationProcessBidder.make!(:licitante_com_proposta_2)] }
+  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante_com_proposta_5),
+                                LicitationProcessBidder.make!(:licitante_com_proposta_6)] }
+end
+
+LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
+  year { 2012 }
+  process { 1 }
+  process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
+  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
+  pledge_type { PledgeType::GLOBAL }
+  capability { Capability.make!(:reforma) }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
+  readjustment_index { Indexer.make!(:xpto) }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "00:00" }
+  envelope_opening_date { I18n.l(Date.current) }
+  envelope_opening_time { "00:00" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
+  contract_expiration { 3 }
+  observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante_com_proposta_3, :documents => []),
+                                LicitationProcessBidder.make!(:licitante_com_proposta_4, :documents => [])] }
+end
+
+LicitationProcess.blueprint(:apuracao_global_small_company) do
+  year { 2012 }
+  process { 1 }
+  process_date { Date.new(2012, 3, 19) }
+  licitation_number { 1 }
+  administrative_process { AdministrativeProcess.make!(:apuracao_global) }
+  pledge_type { PledgeType::GLOBAL }
+  capability { Capability.make!(:reforma) }
+  expiration { 10 }
+  expiration_unit { PeriodUnit::DAY }
+  readjustment_index { Indexer.make!(:xpto) }
+  envelope_delivery_date { I18n.l(Date.current) }
+  envelope_delivery_time { "00:00" }
+  envelope_opening_date { I18n.l(Date.current) }
+  envelope_opening_time { "00:00" }
+  period { 1 }
+  period_unit { PeriodUnit::YEAR }
+  payment_method { PaymentMethod.make!(:dinheiro) }
+  caution_value { 9.99 }
+  legal_advice { LicitationProcessLegalAdvice::FAVORABLE }
+  legal_advice_date { Date.new(2012, 3, 19) }
+  contract_date { Date.new(2012, 3, 19) }
+  contract_expiration { 3 }
+  observations { "observacoes" }
+  document_types { [DocumentType.make!(:fiscal)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
+  licitation_process_bidders { [LicitationProcessBidder.make!(:licitante_com_proposta_3),
+                                LicitationProcessBidder.make!(:licitante_com_proposta_4)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
