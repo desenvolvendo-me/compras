@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      agreement_bank_account:
+        one: "Conta"
+        other: "Conta"
+
+    attributes:
+      agreement_bank_account:
+        status: "Status"
+        bank_account: "Conta"
+        creation_date: "Data inclusão"
+        desactivation_date: "Data de desativação"

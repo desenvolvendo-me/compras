@@ -13,4 +13,5 @@ Agreement.blueprint(:apoio_ao_turismo) do
   process_year { 2008 }
   process_date { Date.new(2012, 11, 22) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
+  agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
 end

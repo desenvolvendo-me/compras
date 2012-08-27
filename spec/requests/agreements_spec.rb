@@ -9,6 +9,7 @@ feature "Agreements" do
   scenario 'create a new agreement' do
     AgreementKind.make!(:contribuicao)
     RegulatoryAct.make!(:sopa)
+    BankAccount.make!(:itau_tributos)
 
     navigate 'Contabilidade > Comum > Convênio > Convênios'
 
@@ -27,6 +28,14 @@ feature "Agreements" do
       fill_in 'Data do processo', :with => '22/11/2012'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       attach_file 'Arquivo', 'spec/fixtures/other_example_document.txt'
+    end
+
+    within_tab 'Conta Bancária' do
+      click_button 'Adicionar Conta'
+
+      fill_modal 'Conta *', :with => 'Itaú Tributos', :field => 'Descrição'
+      fill_in 'Data inclusão', :with => I18n.l(Date.current)
+      select 'Ativo', :from => 'Status'
     end
 
     click_button 'Salvar'
@@ -48,6 +57,12 @@ feature "Agreements" do
       expect(page).to have_field 'Data do processo', :with => '22/11/2012'
       expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_link 'other_example_document.txt'
+    end
+
+    within_tab 'Conta Bancária' do
+      expect(page).to have_field 'Conta *', :with => 'Itaú Tributos'
+      expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
+      expect(page).to have_select 'Status', :selected => 'Ativo'
     end
   end
 
@@ -77,6 +92,7 @@ feature "Agreements" do
     AgreementKind.make!(:auxilio)
     RegulatoryAct.make!(:emenda)
     Agreement.make!(:apoio_ao_turismo)
+    BankAccount.make!(:santander_folha)
 
     navigate 'Contabilidade > Comum > Convênio > Convênios'
 
@@ -94,6 +110,24 @@ feature "Agreements" do
       fill_in 'Processo administrativo', :with => '85721/2007'
       fill_in 'Data do processo', :with => '13/11/2012'
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
+    end
+
+    within_tab 'Conta Bancária' do
+      click_button 'Remover Conta'
+
+      click_button 'Adicionar Conta'
+
+      fill_modal 'Conta *', :with => 'Itaú Tributos', :field => 'Descrição'
+      fill_in 'Data inclusão', :with => I18n.l(Date.current)
+      select 'Ativo', :from => 'Status'
+
+      click_button 'Adicionar Conta'
+
+      within '.agreement-bank-account:nth-child(3)' do
+        fill_modal 'Conta *', :with => 'Santander - Folha de Pagamento', :field => 'Descrição'
+        fill_in 'Data inclusão', :with => I18n.l(Date.current)
+        select 'Ativo', :from => 'Status'
+      end
     end
 
     click_button 'Salvar'
@@ -114,6 +148,20 @@ feature "Agreements" do
       expect(page).to have_field 'Processo administrativo', :with => '85721/2007'
       expect(page).to have_field 'Data do processo', :with => '13/11/2012'
       expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
+    end
+
+    within_tab 'Conta Bancária' do
+      within '.agreement-bank-account:nth-child(1)' do
+        expect(page).to have_field 'Conta *', :with => 'Itaú Tributos'
+        expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_select 'Status', :selected => 'Ativo'
+      end
+
+      within '.agreement-bank-account:nth-child(2)' do
+        expect(page).to have_field 'Conta *', :with => 'Santander - Folha de Pagamento'
+        expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_select 'Status', :selected => 'Ativo'
+      end
     end
   end
 

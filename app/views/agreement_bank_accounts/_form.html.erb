@@ -1,0 +1,25 @@
+<div class="agreement-bank-account nested">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <%= f.input :bank_account %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :creation_date %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :desactivation_date %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :status %>
+    </div>
+  </div>
+
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-agreement-bank-account" value="Remover Conta">
+  </p>
+</div>

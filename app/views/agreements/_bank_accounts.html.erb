@@ -1,0 +1,25 @@
+<p>
+  <input type="button" class="button affirmative add-agreement-bank-account" value="Adicionar Conta">
+</p>
+
+<div id="agreement-bank-accounts">
+  <%= f.association :agreement_bank_accounts, :collection => localized(f.object.agreement_bank_accounts) do |b| %>
+    <%= render 'agreement_bank_accounts/form', :f => b %>
+  <% end %>
+</div>
+
+<%= mustache 'agreement-bank-accounts-template' do %>
+  <%= f.association :agreement_bank_accounts_attributes, :collection => f.object.agreement_bank_accounts.build, :index => '{{uuid_agreement_bank_account}}' do |b| %>
+    <%= render 'agreement_bank_accounts/form', :f => b %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#agreement-bank-accounts-template").nestedForm({
+    add: '.add-agreement-bank-account',
+    remove: '.remove-agreement-bank-account',
+    target: '#agreement-bank-accounts',
+    uuid: 'uuid_agreement_bank_account',
+    fieldToRemove: '.agreement-bank-account'
+  });
+</script>

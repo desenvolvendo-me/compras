@@ -11,6 +11,8 @@ describe Agreement do
   it { should belong_to :agreement_kind }
   it { should belong_to :regulatory_act }
 
+  it { should have_many(:agreement_bank_accounts).dependent(:destroy) }
+
   it { should validate_presence_of :code }
   it { should validate_presence_of :number }
   it { should validate_presence_of :year }

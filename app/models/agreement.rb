@@ -2,7 +2,8 @@ class Agreement < Compras::Model
   attr_accessible :category, :code, :counterpart_value, :description,
                   :parcels_number, :process_date, :value,
                   :number_year, :number_year_process, :agreement_kind_id,
-                  :regulatory_act_id, :agreement_file
+                  :regulatory_act_id, :agreement_file,
+                  :agreement_bank_accounts_attributes
 
   mount_uploader :agreement_file, DocumentUploader
 
@@ -10,6 +11,10 @@ class Agreement < Compras::Model
 
   belongs_to :agreement_kind
   belongs_to :regulatory_act
+
+  has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
+
+  accepts_nested_attributes_for :agreement_bank_accounts, :allow_destroy => true
 
   delegate :creation_date, :publication_date, :end_date, :to => :regulatory_act,
            :allow_nil => true
