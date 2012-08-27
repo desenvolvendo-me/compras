@@ -22,7 +22,7 @@ class RegulatoryAct < Compras::Model
 
   has_one :extra_credit
 
-  validates :regulatory_act_type, :creation_date, :publication_date, :content
+  validates :regulatory_act_type, :creation_date, :publication_date, :content,
             :signature_date, :vigor_date, :legal_text_nature, :act_number
 
   with_options :allow_blank => true do |allowing_blank|
