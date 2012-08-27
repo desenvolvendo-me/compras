@@ -65,9 +65,15 @@ describe LicitationProcess do
   it { should validate_presence_of :type_of_calculation }
 
   describe 'default values' do
-    it 'uses false as default for boolean fields' do
+    it 'disqualify_by_documentation_problem should be false' do
       expect(subject.disqualify_by_documentation_problem).to be false
+    end
+
+    it 'disqualify_by_maximum_value should be false' do
       expect(subject.disqualify_by_maximum_value).to be false
+    end
+
+    it 'consider_law_of_proposals should be false' do
       expect(subject.consider_law_of_proposals).to be false
     end
   end
