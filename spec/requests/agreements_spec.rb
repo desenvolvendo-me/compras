@@ -56,6 +56,9 @@ feature "Agreements" do
       expect(page).to have_field 'Processo administrativo', :with => '12758/2008'
       expect(page).to have_field 'Data do processo', :with => '22/11/2012'
       expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
+      expect(page).to have_field 'Data da criação', :with => '01/01/2012'
+      expect(page).to have_field 'Data da publicação', :with => '02/01/2012'
+      expect(page).to have_field 'Data do término', :with => '09/01/2012'
       expect(page).to have_link 'other_example_document.txt'
     end
 
@@ -148,6 +151,9 @@ feature "Agreements" do
       expect(page).to have_field 'Processo administrativo', :with => '85721/2007'
       expect(page).to have_field 'Data do processo', :with => '13/11/2012'
       expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
+      expect(page).to have_field 'Data da criação', :with => '01/01/2012'
+      expect(page).to have_field 'Data da publicação', :with => '02/01/2012'
+      expect(page).to have_field 'Data do término', :with => '09/01/2012'
     end
 
     within_tab 'Conta Bancária' do
