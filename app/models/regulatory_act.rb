@@ -22,9 +22,8 @@ class RegulatoryAct < Compras::Model
 
   has_one :extra_credit
 
-  validates :regulatory_act_type, :creation_date, :publication_date, :presence => true
-  validates :signature_date, :vigor_date, :legal_text_nature, :content, :presence => true
-  validates :act_number, :presence => true
+  validates :regulatory_act_type, :creation_date, :publication_date, :content
+            :signature_date, :vigor_date, :legal_text_nature, :act_number
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :revenue_antecipation_percent, :numericality => { :less_than_or_equal_to => 100 }
