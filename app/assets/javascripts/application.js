@@ -24,6 +24,7 @@
 //= require date
 //= require modal_info_link
 //= require tabs
+//= require nested_forms
 
 $(':input[data-property-id]').live('change', function() {
   var property = $(this);
