@@ -29,7 +29,7 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '9,00'
       expect(page).to have_content '18,00'
-      expect(page).to have_content 'Venceu'
+      expect(page).to have_content 'Ganhou'
     end
 
     expect(page).to have_content 'Wenderson Malheiros'
@@ -39,6 +39,26 @@ feature "LicitationProcesses" do
       expect(page).to have_content '10,00'
       expect(page).to have_content '20,00'
       expect(page).to have_content 'Perdeu'
+    end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Wenderson Malheiros'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Perdeu'
+      expect(page).to have_field 'Classificação', :with => '2'
+    end
+
+    click_link 'Cancelar'
+
+    click_link 'Gabriel Sobrinho'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Ganhou'
+      expect(page).to have_field 'Classificação', :with => '1'
     end
   end
 
@@ -67,7 +87,7 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '9,00'
       expect(page).to have_content '18,00'
-      expect(page).to have_content 'Venceu'
+      expect(page).to have_content 'Ganhou'
     end
 
     expect(page).to have_content 'Wenderson Malheiros'
@@ -77,6 +97,28 @@ feature "LicitationProcesses" do
       expect(page).to have_content '10,00'
       expect(page).to have_content '20,00'
       expect(page).to have_content 'Perdeu'
+    end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Wenderson Malheiros'
+
+    within_tab 'Propostas' do
+      within_tab 'Lote 2' do
+        expect(page).to have_select 'Situação', :selected => 'Indefinido'
+        expect(page).to have_field 'Classificação', :with => ''
+      end
+    end
+
+    click_link 'Cancelar'
+
+    click_link 'Gabriel Sobrinho'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Ganhou'
+      expect(page).to have_field 'Classificação', :with => '1'
     end
   end
 
@@ -101,7 +143,7 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '9,00'
       expect(page).to have_content '18,00'
-      expect(page).to have_content 'Venceu'
+      expect(page).to have_content 'Ganhou'
     end
 
     expect(page).to have_content 'Wenderson Malheiros'
@@ -118,6 +160,26 @@ feature "LicitationProcesses" do
     click_link 'Relatório'
 
     expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Wenderson Malheiros'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Indefinido'
+      expect(page).to have_field 'Classificação', :with => ''
+    end
+
+    click_link 'Cancelar'
+
+    click_link 'Gabriel Sobrinho'
+
+    within_tab 'Propostas' do
+      expect(page).to have_select 'Situação', :selected => 'Ganhou'
+      expect(page).to have_field 'Classificação', :with => '1'
+    end
   end
 
   scenario 'acessing from index cancel should return to index' do

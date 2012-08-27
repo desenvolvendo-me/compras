@@ -16,6 +16,7 @@ class LicitationProcessBidder < Compras::Model
   has_many :accredited_representatives, :dependent => :destroy
   has_many :people, :through => :accredited_representatives
   has_many :licitation_process_classifications, :dependent => :destroy
+  has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true

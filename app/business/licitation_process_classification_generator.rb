@@ -22,7 +22,7 @@ class LicitationProcessClassificationGenerator
     licitation_process.destroy_all_licitation_process_classifications
 
     licitation_process_bidders.each do |bidder|
-      send(type_of_calculation, bidder)
+      send(type_of_calculation, bidder) if type_of_calculation
     end
 
     check_if_winner_has_zero!
@@ -32,6 +32,12 @@ class LicitationProcessClassificationGenerator
     disable_bidders_by_maximum_value!
 
     generate_situation!
+
+    change_proposal_situation_by_bidder!
+
+    change_proposal_situation_by_lot!
+
+    change_proposal_situation_by_item!
   end
 
   protected
@@ -106,6 +112,48 @@ class LicitationProcessClassificationGenerator
 
       first.save!
       classification.save!
+    end
+  end
+
+  def change_proposal_situation_by_bidder!
+    licitation_process_bidders.each do |bidder|
+      unless bidder.licitation_process_classifications_by_classifiable.empty?
+        classification = bidder.licitation_process_classifications_by_classifiable.first
+
+        change_proposals_situation!(bidder.proposals, classification)
+      end
+    end
+  end
+
+  def change_proposal_situation_by_lot!
+    lots_with_items.each do |lot|
+      unless lot.licitation_process_classifications.empty?
+        classification = lot.licitation_process_classifications.first
+
+        proposals = classification.proposals.map { |p| p if p.licitation_process_lot == lot }
+
+        change_proposals_situation!(proposals, classification)
+      end
+    end
+  end
+
+  def change_proposal_situation_by_item!
+    items.each do |item|
+      unless item.licitation_process_classifications.empty?
+        classification = item.licitation_process_classifications.first
+
+        proposals = classification.proposals.map { |p| p if p.administrative_process_budget_allocation_item == item }
+
+        change_proposals_situation!(proposals, classification)
+      end
+    end
+  end
+
+  def change_proposals_situation!(proposals, classification)
+    proposals.each do |proposal|
+      proposal.classification = classification.classification
+      proposal.situation = classification.situation
+      proposal.save!
     end
   end
 

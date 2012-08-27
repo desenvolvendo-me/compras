@@ -23,6 +23,7 @@ describe LicitationProcessBidder do
   it { should have_many(:accredited_representatives).dependent(:destroy) }
   it { should have_many(:people).through(:accredited_representatives) }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
+  it { should have_many(:licitation_process_classifications_by_classifiable).dependent(:destroy) }
 
   it { should validate_presence_of :creditor }
 

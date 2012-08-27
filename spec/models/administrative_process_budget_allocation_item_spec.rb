@@ -12,8 +12,7 @@ describe AdministrativeProcessBudgetAllocationItem do
   it { should belong_to :material }
   it { should belong_to :licitation_process_lot }
   it { should have_many :licitation_process_bidder_proposals }
-
-  it { should have_many :licitation_process_bidder_proposals }
+  it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
   context 'with material' do
     let :material do
