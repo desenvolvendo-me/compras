@@ -2,6 +2,7 @@ class RegulatoryAct < Compras::Model
   attr_accessible :act_number, :regulatory_act_type_id, :creation_date, :legal_text_nature_id
   attr_accessible :publication_date, :vigor_date, :end_date, :content, :budget_law_percent
   attr_accessible :revenue_antecipation_percent, :authorized_debt_value, :dissemination_source_ids
+  attr_accessible :signature_date
 
   attr_modal :act_number, :regulatory_act_type_id, :legal_text_nature_id
 
@@ -21,7 +22,7 @@ class RegulatoryAct < Compras::Model
   has_one :extra_credit
 
   validates :regulatory_act_type, :creation_date, :publication_date, :presence => true
-  validates :vigor_date, :legal_text_nature, :content, :presence => true
+  validates :signature_date, :vigor_date, :legal_text_nature, :content, :presence => true
   validates :act_number, :presence => true
 
   with_options :allow_blank => true do |allowing_blank|
