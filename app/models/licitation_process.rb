@@ -139,7 +139,7 @@ class LicitationProcess < Compras::Model
 
   def lots_with_items
     licitation_process_lots.select do |lot|
-      lot unless lot.administrative_process_budget_allocation_items.empty? || lot.licitation_process_bidder_proposals.empty?
+      !lot.administrative_process_budget_allocation_items.empty? && !lot.licitation_process_bidder_proposals.empty?
     end
   end
 
