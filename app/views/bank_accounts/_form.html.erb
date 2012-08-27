@@ -1,38 +1,14 @@
-<div class='yui3-g'>
-  <div class='yui3-u-1-4'>
-    <%= f.input :kind %>
-  </div>
+<div class="tabs">
+  <ul>
+    <li>
+      <a href="#main">Principal</a>
+    </li>
+  </ul>
 
-  <div class='yui3-u-1-4'>
-    <%= f.input :status, :disabled => f.object.new_record? %>
-  </div>
-</div>
-
-<%= f.input :bank, :as => :modal, :hidden_field => :bank_id %>
-
-<%= f.input :agency %>
-
-<div class='yui3-g'>
-  <div class='yui3-u-1-6'>
-    <%= f.input :agency_number, :disabled => true %>
-  </div>
-
-  <div class='yui3-u-1-6'>
-    <%= f.input :agency_digit, :disabled => true %>
+  <div id="main">
+    <%= render 'main', :f => f %>
   </div>
 </div>
-
-<div class='yui3-g'>
-  <div class='yui3-u-1-4'>
-    <%= f.input :account_number, :input_html => { :data => { :numeric => true } } %>
-  </div>
-
-  <div class='yui3-u-1-4'>
-    <%= f.input :digit %>
-  </div>
-</div>
-
-<%= f.input :description %>
 
 <script>
   $('#bank_account_agency_id').on('change', function (event, agency) {
