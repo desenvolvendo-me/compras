@@ -36,6 +36,42 @@ feature "TceSpecificationCapabilities" do
     end
   end
 
+  scenario 'when fill/clear capability_source should fill/clear related field' do
+    CapabilitySource.make!(:imposto)
+
+    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+
+    click_link 'Criar Especificação de Recursos do TCE'
+
+    within_tab 'Principal' do
+      fill_modal 'Fonte de recursos', :with => 'Imposto'
+
+      expect(page).to have_field 'Especificação da fonte de recursos', :with => 'Especificação'
+
+      clear_modal 'Fonte de recursos'
+
+      expect(page).to have_field 'Especificação da fonte de recursos', :with => ''
+    end
+  end
+
+  scenario 'when fill/clear application_code should fill/clear related field' do
+    ApplicationCode.make!(:geral)
+
+    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+
+    click_link 'Criar Especificação de Recursos do TCE'
+
+    within_tab 'Principal' do
+      fill_modal 'Código da aplicação', :with => 'Geral'
+
+      expect(page).to have_field 'Especificação do código da aplicação', :with => 'Recursos próprios da entidade de livre aplicação'
+
+      clear_modal 'Código da aplicação'
+
+      expect(page).to have_field 'Especificação do código da aplicação', :with => ''
+    end
+  end
+
   scenario 'update an existent tce_specification_capability' do
     CapabilitySource.make!(:transferencia)
     ApplicationCode.make!(:transito)
