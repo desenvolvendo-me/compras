@@ -1,26 +1,15 @@
 <p>
-  <input type="button" class="button affirmative add-creditor-balance" value="Adicionar Balanço">
+  <input type="button" class="button affirmative add-creditor-balances" value="Adicionar Balanço">
 </p>
 
-<div id="creditor-balances">
+<div id="creditor-balances" class="nested-form" data-nested-form="creditor-balances" data-append-item=false >
   <%= f.association :creditor_balances, :collection => localized(f.object.creditor_balances) do |p| %>
     <%= render 'creditor_balances/form', :f => p %>
   <% end %>
 </div>
 
 <%= mustache 'creditor-balances-template' do %>
-  <%= f.association :creditor_balances_attributes, :collection => f.object.creditor_balances.build, :index => '{{uuid_creditor_balance}}' do |p| %>
+  <%= f.association :creditor_balances_attributes, :collection => f.object.creditor_balances.build, :index => '{{uuid-creditor-balances}}' do |p| %>
     <%= render 'creditor_balances/form', :f => p %>
   <% end %>
 <% end %>
-
-<script>
-  $("#creditor-balances-template").nestedForm({
-    add: '.add-creditor-balance',
-    remove: '.remove-creditor-balance',
-    target: '#creditor-balances',
-    uuid: 'uuid_creditor_balance',
-    fieldToRemove: '.creditor-balance',
-    appendItem: false
-  });
-</script>
