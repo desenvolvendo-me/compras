@@ -143,7 +143,7 @@ describe LicitationProcessClassificationGenerator do
     it 'should disable bidder' do
       bidder.stub(:benefited => false, :filled_documents? => false, :expired_documents? => true)
 
-      bidder.should_receive(:disabled!).and_return(true)
+      bidder.should_receive(:inactive!).and_return(true)
       bidder.should_receive(:save!).and_return(true)
 
       generator.generate!
@@ -152,7 +152,7 @@ describe LicitationProcessClassificationGenerator do
     it 'should disable bidder' do
       bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => true)
 
-      bidder.should_receive(:disabled!).and_return(true)
+      bidder.should_receive(:inactive!).and_return(true)
       bidder.should_receive(:save!).and_return(true)
 
       generator.generate!
@@ -167,7 +167,7 @@ describe LicitationProcessClassificationGenerator do
     it 'should enable bidder' do
       bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => false)
 
-      bidder.should_receive(:enabled!).and_return(true)
+      bidder.should_receive(:active!).and_return(true)
       bidder.should_receive(:save!).and_return(true)
 
       generator.generate!
