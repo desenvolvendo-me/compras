@@ -73,7 +73,6 @@ feature "Creditors" do
 
     expect(page).to have_field 'Pessoa', :with => 'Mateus Lorandi'
     expect(page).not_to have_field 'Porte da empresa'
-    expect(page).not_to have_field 'PIS/PASEP'
 
     within_tab 'Contas Bancárias' do
       expect(page).to have_field 'Banco', :with => 'Itaú'
@@ -1151,27 +1150,6 @@ feature "Creditors" do
     navigate 'Compras e Licitações > Cadastros Gerais > Credores'
 
     click_link 'Criar Credor'
-
-    within "#creditor-tabs" do
-       expect(page).not_to have_link "Principal"
-       expect(page).not_to have_link "CNAEs"
-       expect(page).not_to have_link "Documentos"
-       expect(page).to have_link "Materiais"
-       expect(page).not_to have_link "Representantes"
-       expect(page).to have_link "Contas Bancárias"
-       expect(page).to have_link "Balanço"
-       expect(page).to have_link "Sanções Administrativas / Regularizações"
-    end
-  end
-
-  scenario 'should only show only tabs for special people' do
-    Person.make!(:mateus)
-
-    navigate 'Compras e Licitações > Cadastros Gerais > Credores'
-
-    click_link 'Criar Credor'
-
-    fill_modal 'Pessoa', :with => 'Mateus Lorandi'
 
     within "#creditor-tabs" do
        expect(page).not_to have_link "Principal"

@@ -76,7 +76,7 @@ Person.blueprint(:mateus) do
   fax    { "(44) 3499-8888" }
   mobile { "(44) 3499-7777" }
   email  { "mcomogo@gmail.com" }
-  personable { SpecialEntry.make!(:especial) }
+  personable { Individual.make!(:pedro_dos_santos) }
   address   { Address.make(:apto, :addressable => object) }
 end
 
