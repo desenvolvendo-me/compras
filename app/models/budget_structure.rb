@@ -86,18 +86,6 @@ class BudgetStructure < Compras::Model
     parent_budget_structure(parent) + code.to_s
   end
 
-  def cannot_have_duplicated_responsibles
-    single_responsibles = []
-
-    budget_structure_responsibles.each do |budget_structure_responsible|
-      if single_responsibles.include?(budget_structure_responsible.responsible_id)
-        errors.add(:budget_structure_responsibles)
-        budget_structure_responsible.errors.add(:responsible_id, :taken)
-      end
-      single_responsibles << budget_structure_responsible.responsible_id
-    end
-  end
-
   def parent_level_must_be_immediate_superior
     return unless parent
 
