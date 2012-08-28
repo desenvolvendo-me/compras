@@ -575,7 +575,7 @@ feature "AdministrativeProcesses" do
     PurchaseSolicitationItemGroup.make!(:antivirus)
 
     ResourceAnnul.make!(:anulacao_generica,
-                            :annullable => PurchaseSolicitationItemGroup.make!(:reparo_2013))
+                        :annullable => PurchaseSolicitationItemGroup.make!(:reparo_2013))
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
