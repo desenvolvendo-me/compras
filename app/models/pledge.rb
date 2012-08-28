@@ -107,10 +107,6 @@ class Pledge < Compras::Model
     end
   end
 
-  def licitation?
-    licitation_number && licitation_year
-  end
-
   def process?
     process_number && process_year
   end
