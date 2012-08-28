@@ -1,5 +1,0 @@
-pt-BR:
-  enumerations:
-    licitation_process_bidder_status:
-      enabled: "Habilitado"
-      disabled: "Inabilitado"

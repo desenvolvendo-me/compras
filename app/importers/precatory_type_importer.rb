@@ -12,6 +12,6 @@ class PrecatoryTypeImporter < Importer
   protected
 
   def normalize_attributes(attributes)
-    attributes.merge('status' => PrecatoryTypeStatus::ACTIVE)
+    attributes.merge('status' => Status::ACTIVE)
   end
 end

@@ -5,7 +5,7 @@ class LicitationProcessBidder < Compras::Model
 
   attr_modal :licitation_process_id, :creditor_id, :protocol, :protocol_date, :status
 
-  has_enumeration_for :status, :with => LicitationProcessBidderStatus, :create_helpers => true
+  has_enumeration_for :status, :create_helpers => true
 
   belongs_to :licitation_process
   belongs_to :creditor
@@ -99,7 +99,7 @@ class LicitationProcessBidder < Compras::Model
     LicitationProcessClassification.joins { licitation_process_bidder }.readonly(false).
       where do |classification|
         classification.licitation_process_bidder_id.in(pluck(:id)) &
-        (classification.licitation_process_bidder.status.not_eq(LicitationProcessBidderStatus::DISABLED) |
+        (classification.licitation_process_bidder.status.not_eq(Status::INACTIVE) |
          classification.licitation_process_bidder.status.eq(nil))
       end
   end
@@ -137,7 +137,7 @@ class LicitationProcessBidder < Compras::Model
   end
 
   def global_classification
-    bidders = licitation_process.licitation_process_bidders.sort_by &:total_price
+    bidders = licitation_process.licitation_process_bidders.sort_by(&:total_price)
 
     classification = bidders.index(self).succ
     classification = -1 if has_item_with_unit_price_equals_zero

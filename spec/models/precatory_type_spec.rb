@@ -28,7 +28,7 @@ describe PrecatoryType do
 
   context "with active status" do
     before do
-      subject.status = PrecatoryTypeStatus::ACTIVE
+      subject.status = Status::ACTIVE
     end
 
     it 'should not validate presence of deactivation_date' do
@@ -46,7 +46,7 @@ describe PrecatoryType do
 
   context "with inactive status" do
     before do
-      subject.status = PrecatoryTypeStatus::INACTIVE
+      subject.status = Status::INACTIVE
     end
 
     it 'should validate presence of deactivation_date' do

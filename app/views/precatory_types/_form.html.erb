@@ -16,7 +16,7 @@
   });
 
   function enableOrDisableDeactivationDate() {
-    if ($('#precatory_type_status').val() == '<%= PrecatoryTypeStatus::INACTIVE %>'){
+    if ($('#precatory_type_status').val() == '<%= Status::INACTIVE %>'){
       $('#precatory_type_deactivation_date').removeAttr('disabled');
       setDeactivationDateRequired();
     }else {

@@ -10,7 +10,7 @@ describe PrecatoryTypesController do
     it 'should use active as default value for status' do
       get :new
 
-      expect(assigns(:precatory_type).status).to eq PrecatoryTypeStatus::ACTIVE
+      expect(assigns(:precatory_type).status).to eq Status::ACTIVE
     end
   end
 
@@ -18,7 +18,7 @@ describe PrecatoryTypesController do
     it 'should use active as default value for status' do
       post :create
 
-      expect(assigns(:precatory_type).status).to eq PrecatoryTypeStatus::ACTIVE
+      expect(assigns(:precatory_type).status).to eq Status::ACTIVE
     end
   end
 end

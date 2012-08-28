@@ -4,20 +4,15 @@ require 'app/business/bidder_status_changer'
 
 describe BidderStatusChanger do
   subject do
-    described_class.new(licitation_process, licitation_process_bidder_status)
-  end
-
-  before do
-    subject.stub(:enabled_status).and_return(true)
-    subject.stub(:disabled_status).and_return(false)
+    described_class.new(licitation_process, status)
   end
 
   let :licitation_process do
     double('licitation_process', :licitation_process_bidders => bidders)
   end
 
-  let :licitation_process_bidder_status do
-    double
+  let :status do
+    double("Status")
   end
 
   let :bidder do
@@ -29,11 +24,10 @@ describe BidderStatusChanger do
   end
 
   context 'when the bidder has not filled documents' do
-    before do
+    it 'should be inactive' do
       bidder.stub(:filled_documents?).and_return(false)
-    end
 
-    it 'should be disabled' do
+      status.should_receive(:value_for).with(:INACTIVE).and_return(false)
       bidder.should_receive("status=").with(false)
 
       subject.change
@@ -41,11 +35,11 @@ describe BidderStatusChanger do
   end
 
   context 'when the bidder has filled documents' do
-    before do
+    it 'should be active' do
       bidder.stub(:filled_documents?).and_return(true)
-    end
 
-    it 'should be enabled' do
+      status.should_receive(:value_for).with(:ACTIVE).and_return(true)
+
       bidder.should_receive("status=").with(true)
 
       subject.change

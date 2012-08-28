@@ -3,14 +3,14 @@ class PrecatoryTypesController < CrudController
 
   def new
     object = build_resource
-    object.status = PrecatoryTypeStatus::ACTIVE
+    object.status = Status::ACTIVE
 
     super
   end
 
   def create
     object = build_resource
-    object.status = PrecatoryTypeStatus::ACTIVE
+    object.status = Status::ACTIVE
 
     super
   end

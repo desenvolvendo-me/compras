@@ -1,5 +1,0 @@
-pt-BR:
-  enumerations:
-    precatory_type_status:
-      active: 'Ativo'
-      inactive: 'Inativo'

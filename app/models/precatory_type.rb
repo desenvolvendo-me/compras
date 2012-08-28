@@ -3,7 +3,7 @@ class PrecatoryType < Compras::Model
 
   attr_modal :description
 
-  has_enumeration_for :status, :with => PrecatoryTypeStatus, :create_helpers => true, :create_scopes => true
+  has_enumeration_for :status, :create_helpers => true, :create_scopes => true
 
   has_many :precatories, :dependent => :restrict
 
