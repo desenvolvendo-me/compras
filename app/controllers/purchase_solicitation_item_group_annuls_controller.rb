@@ -3,7 +3,7 @@ class PurchaseSolicitationItemGroupAnnulsController < ResourceAnnulsController
 
   def annul(object)
     PurchaseSolicitationBudgetAllocationItemStatusChanger.new({
-      :old_item_ids => object.purchase_solicitation_ids,
+      :old_item_ids => object.purchase_solicitation_ids
     }).change
   end
 
