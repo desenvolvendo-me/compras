@@ -94,7 +94,7 @@ class AdministrativeProcess < Compras::Model
     return unless purchase_solicitation_item_group.present?
 
     if purchase_solicitation_item_group.annulled?
-      errors.add(:purchase_solicitation_item_group, :cannot_be_annulled)
+      errors.add(:purchase_solicitation_item_group, :is_annulled)
     end
   end
 

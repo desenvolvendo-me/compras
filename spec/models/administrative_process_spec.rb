@@ -218,7 +218,7 @@ describe AdministrativeProcess do
       subject.stub(:purchase_solicitation_item_group).and_return(purchase_solicitation_item_group)
 
       subject.valid?
-      expect(subject.errors[:purchase_solicitation_item_group]).to include(I18n.translate('errors.messages.cannot_be_annulled'))
+      expect(subject.errors[:purchase_solicitation_item_group]).to include(I18n.translate('errors.messages.is_annulled'))
     end
 
     it 'should allow purchase_solicitation_item_group not annulled' do
@@ -226,7 +226,7 @@ describe AdministrativeProcess do
       subject.stub(:purchase_solicitation_item_group).and_return(purchase_solicitation_item_group)
 
       subject.valid?
-      expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.cannot_be_annulled'))
+      expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.is_annulled'))
     end
   end
 end
