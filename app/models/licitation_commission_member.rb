@@ -1,7 +1,8 @@
 class LicitationCommissionMember < Compras::Model
   attr_accessible :licitation_commission_id, :individual_id, :role, :role_nature, :registration
 
-  has_enumeration_for :role, :with => LicitationCommissionMemberRole, :create_helpers => true
+  has_enumeration_for :role, :with => LicitationCommissionMemberRole,
+    :create_helpers => true, :create_scopes => true
   has_enumeration_for :role_nature, :with => LicitationCommissionMemberRoleNature
 
   belongs_to :licitation_commission

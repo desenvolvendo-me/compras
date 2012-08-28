@@ -38,7 +38,7 @@ class LicitationCommission < Compras::Model
   end
 
   def president
-    licitation_commission_members.first(:conditions => "role = '#{LicitationCommissionMemberRole::PRESIDENT}'")
+    licitation_commission_members.president.first
   end
 
   def president_name
