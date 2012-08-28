@@ -19,12 +19,4 @@ class JudgmentCommissionAdviceMember < Compras::Model
   def inherited?
     licitation_commission_member.present?
   end
-
-  def individual_identification
-    if licitation_commission_member.present?
-      licitation_commission_member_individual_id
-    else
-      individual_id
-    end
-  end
 end

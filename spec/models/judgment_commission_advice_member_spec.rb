@@ -34,15 +34,4 @@ describe JudgmentCommissionAdviceMember do
 
     expect(subject.inherited?).to be_true
   end
-
-  it "should return the correct individual id depending on presence of licitation_commission_member" do
-    subject.stub(:individual_id).and_return(3)
-    subject.stub(:licitation_commission_member).and_return(nil)
-
-    expect(subject.individual_identification).to eq 3
-
-    subject.stub(:licitation_commission_member).and_return(double(:individual_id => 5))
-
-    expect(subject.individual_identification).to eq 5
-  end
 end
