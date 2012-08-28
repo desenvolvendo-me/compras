@@ -17,7 +17,7 @@
 
     <tbody>
       <% classifications.each_with_index do |classification, index| %>
-        <%= render :partial => resource.type_of_calculation, :locals => { :classification => classification, :index => index } %>
+        <%= render resource.type_of_calculation, :classification => classification, :index => index %>
       <% end %>
     </tbody>
   </table>
