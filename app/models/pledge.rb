@@ -71,10 +71,6 @@ class Pledge < Compras::Model
   orderize :emission_date
   filterize accessible_attributes + [:id]
 
-  def self.global_or_estimated
-    where { pledge_type.eq(PledgeType::GLOBAL) | pledge_type.eq(PledgeType::ESTIMATED) }
-  end
-
   def to_s
      "#{code} - #{entity}/#{year}"
   end

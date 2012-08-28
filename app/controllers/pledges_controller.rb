@@ -1,8 +1,6 @@
 class PledgesController < CrudController
   actions :all, :except => [:update, :destroy]
 
-  has_scope :global_or_estimated, :type => :boolean
-
   def new
     object = build_resource
     object.emission_date = Date.current
