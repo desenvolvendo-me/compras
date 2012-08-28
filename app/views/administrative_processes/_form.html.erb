@@ -136,4 +136,18 @@
       $(this).closest('.administrative-process-budget-allocation').find('.amount').val("");
     }
   });
+
+  function filterJudgmentFormLicitationObject() {
+    var licitationObject = $("#administrative_process_object_type").val(),
+        modalUrl = "<%= modal_judgment_forms_path %>?licitation_object=";
+
+    $("#administrative_process_judgment_form").attr("data-modal-url",
+                                                    modalUrl + licitationObject);
+  }
+
+  $("#administrative_process_object_type").change(function() {
+    filterJudgmentFormLicitationObject();
+  });
+
+  filterJudgmentFormLicitationObject();
 </script>

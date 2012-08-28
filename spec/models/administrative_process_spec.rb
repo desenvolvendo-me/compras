@@ -10,6 +10,7 @@ require 'app/models/budget_allocation'
 require 'app/business/administrative_process_modalities_by_object_type'
 require 'app/models/administrative_process_liberation'
 require 'app/models/purchase_solicitation_item_group'
+require 'app/business/judgment_form_licitation_kind_by_object_type'
 
 describe AdministrativeProcess do
   it 'should return process/year as to_s' do
@@ -84,6 +85,42 @@ describe AdministrativeProcess do
     test_type(AdministrativeProcessObjectType::CONCESSIONS_AND_PERMITS, [AdministrativeProcessModality::COMPETITION_FOR_GRANTS])
 
     test_type(AdministrativeProcessObjectType::CALL_NOTICE, [AdministrativeProcessModality::COMPETITION])
+  end
+
+  context 'with judgment_form' do
+    let :judgment_form do
+      double(:judgment_form)
+    end
+
+    it 'should not be valid when valid_licitation_kind is false' do
+      judgment_form.stub(:licitation_kind).and_return(:licitation_kind)
+
+      subject.stub(:judgment_form).and_return(judgment_form)
+      subject.stub(:object_type).and_return(:disposals_of_assets)
+
+
+      JudgmentFormLicitationKindByObjectType.any_instance.should_receive(:valid_licitation_kind?).
+                                             with(:disposals_of_assets, :licitation_kind).
+                                             and_return(false)
+
+      subject.valid?
+      expect(subject.errors[:judgment_form]).to include "tipo de licitação da forma de julgamento inválida para o tipo de objeto ()"
+    end
+
+    it 'should be valid when valid_licitation_kind is true' do
+      judgment_form.stub(:licitation_kind).and_return(:licitation_kind)
+
+      subject.stub(:judgment_form).and_return(judgment_form)
+      subject.stub(:object_type).and_return(:disposals_of_assets)
+
+
+      JudgmentFormLicitationKindByObjectType.any_instance.should_receive(:valid_licitation_kind?).
+                                             with(:disposals_of_assets, :licitation_kind).
+                                             and_return(true)
+
+      subject.valid?
+      expect(subject.errors[:judgment_form]).not_to include "tipo de licitação da forma de julgamento inválida para o tipo de objeto ()"
+    end
   end
 
   it 'should return 0 for total value of all budget allocations when have no allocations' do

@@ -1,0 +1,29 @@
+<% attributes.each do |attribute| %>
+  <%= f.input attribute, :required => false, :hint => false, :disabled => params[:locked_fields].try(:include?, attribute.to_s) %>
+<% end %>
+
+<% if params[:licitation_object] %>
+<script>
+  (function () {
+    var licitationKindGroups = <%= JudgmentFormLicitationKindByObjectType.new.licitation_kind_groups.to_json.html_safe %>,
+        licitationKindOptions = _(<%= LicitationKind.to_a.to_json.html_safe %>),
+        value = "<%= params[:licitation_object] %>";
+        options = _(licitationKindGroups[value]);
+
+    if (!options.isUndefined()) {
+
+      $("#filter_licitation_kind").html("").closest("div.input").show();
+
+      licitationKindOptions.each(function (option) {
+        if (!options.include(option[1])) {
+          return;
+        }
+
+        $("#filter_licitation_kind").append(function () {
+          return $("<option>").text(option[0]).val(option[1]);
+        });
+      })
+    }
+  })();
+</script>
+<% end %>

@@ -25,7 +25,7 @@ class AdministrativeProcess < Compras::Model
 
   accepts_nested_attributes_for :administrative_process_budget_allocations, :allow_destroy => true
 
-  delegate :kind, :best_technique?, :technical_and_price?,
+  delegate :kind, :best_technique?, :technical_and_price?, :licitation_kind,
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
@@ -39,6 +39,7 @@ class AdministrativeProcess < Compras::Model
 
   validate :validate_modality
   validate :purchase_solicitation_item_group_annulled
+  validate :validate_judgment_form_licitation_kind
 
   before_create :set_process
 
@@ -94,6 +95,14 @@ class AdministrativeProcess < Compras::Model
 
     if purchase_solicitation_item_group.annulled?
       errors.add(:purchase_solicitation_item_group, :cannot_be_annulled)
+    end
+  end
+
+  def validate_judgment_form_licitation_kind(verificator = JudgmentFormLicitationKindByObjectType.new)
+    return unless judgment_form.present? && object_type.present?
+
+    unless verificator.valid_licitation_kind?(object_type, judgment_form_licitation_kind)
+      errors.add(:judgment_form, :invalid_licitation_kind_of_judgment_form_for_object_type, :object_type => object_type_humanize)
     end
   end
 end

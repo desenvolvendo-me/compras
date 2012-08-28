@@ -6,6 +6,7 @@ LicitationProcessBidder.blueprint(:licitante) do
   receipt_date { Date.tomorrow }
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   people { [Person.make!(:sobrinho)] }
+  technical_score { 50 }
 end
 
 LicitationProcessBidder.blueprint(:licitante_sobrinho) do
@@ -15,6 +16,7 @@ LicitationProcessBidder.blueprint(:licitante_sobrinho) do
   protocol_date { Date.current }
   receipt_date { Date.tomorrow }
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
+  technical_score { 100 }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_1) do

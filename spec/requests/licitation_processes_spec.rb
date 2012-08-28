@@ -363,13 +363,13 @@ feature "LicitationProcesses" do
       # testing delegated fields of administrative process (filled by javascript)
       expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
       expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
       expect(page).to have_field 'Abrev. modalidade', :with => 'CV'
 
-      select 'Menor preço global', :from => 'Tipo da apuração'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -437,12 +437,12 @@ feature "LicitationProcesses" do
       # testing delegated fields of administrative process
       expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
       expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
-      expect(page).to have_field 'Forma de julgamento', :with => 'Forma Global com Menor Preço'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
 
-      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço global'
+      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       expect(page).to have_field 'Validade da proposta', :with => '5'
       expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
@@ -503,6 +503,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
+    JudgmentForm.make!(:por_item_com_menor_preco)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -520,8 +521,8 @@ feature "LicitationProcesses" do
       fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
       select 'Menor preço por lote', :from => 'Tipo da apuração'
 
-      fill_modal 'Forma de julgamento', :with => 'Forma Global com Menor Preço', :field => 'Descrição'
-      select 'Menor preço global', :from => 'Tipo da apuração'
+      fill_modal 'Forma de julgamento', :with => 'Por Item com Menor Preço', :field => 'Descrição'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
     end
   end
 
@@ -550,7 +551,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       fill_in 'Data do processo', :with => '21/03/2013'
       select 'Estimativo', :from => 'Tipo de empenho'
-      select 'Menor preço global', :from => 'Tipo da apuração'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Construção', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '10'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -607,7 +608,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Data do processo', :with => '21/03/2013'
       expect(page).to have_field 'Processo administrativo', :with => '1/2012'
       expect(page).to have_select 'Tipo de empenho', :selected => 'Estimativo'
-      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço global'
+      expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_field 'Fonte de recurso', :with => 'Construção'
       expect(page).to have_field 'Validade da proposta', :with => '10'
       expect(page).to have_select 'Período da validade da proposta', :selected => 'dia/dias'
@@ -673,7 +674,7 @@ feature "LicitationProcesses" do
       fill_in 'Ano', :with => '2013'
       fill_in 'Data do processo', :with => '21/04/2013'
       select 'Global', :from => 'Tipo de empenho'
-      select 'Menor preço global', :from => 'Tipo da apuração'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5 dias'
       select 'dia/dias', :from => 'Período da validade da proposta'
@@ -986,7 +987,7 @@ feature "LicitationProcesses" do
     within_tab 'Principal' do
       select 'Global', :from => 'Tipo de empenho'
 
-      select 'Menor preço global', :from => 'Tipo da apuração'
+      select 'Menor preço total por item', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
       select 'dia/dias', :from => 'Período da validade da proposta'

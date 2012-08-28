@@ -281,6 +281,7 @@ pt-BR:
       should_be_on_or_after_registration_date: "deve ser igual ou posterior a data da inscrição (%{restriction})"
       should_belongs_to_licitation_process: "deve pertencer ao processo licitatório %{licitation_process}"
       cannot_be_annulled: "não pode estar anulado"
+      invalid_licitation_kind_of_judgment_form_for_object_type: "tipo de licitação da forma de julgamento inválida para o tipo de objeto (%{object_type})"
 
   activerecord:
     errors:

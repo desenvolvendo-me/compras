@@ -55,6 +55,7 @@ feature "LicitationProcessBidders" do
       click_record 'Gabriel Sobrinho'
     end
 
+    fill_in 'Pontuação técnica', :with => '10,00'
     check 'Convidado'
     fill_in 'Protocolo', :with => '123456'
     fill_in 'Data do protocolo', :with => I18n.l(Date.current)
@@ -105,6 +106,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Processo administrativo', :with => '1/2013'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Pontuação técnica', :with => '10,00'
     expect(page).to have_field 'Protocolo', :with => '123456'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
@@ -174,6 +176,7 @@ feature "LicitationProcessBidders" do
       click_record 'Gabriel Sobrinho'
     end
 
+    fill_in 'Pontuação técnica', :with => '10,00'
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
@@ -221,6 +224,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Pontuação técnica', :with => '10,00'
     expect(page).to have_field 'Protocolo', :with => '111111'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.tomorrow)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)

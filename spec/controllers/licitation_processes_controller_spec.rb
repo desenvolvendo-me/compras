@@ -39,7 +39,7 @@ describe LicitationProcessesController do
     it 'uses current year as default value for judgment form' do
       get :new, :administrative_process_id => administrative_process.id
 
-      expect(assigns(:licitation_process).judgment_form.description).to eq 'Forma Global com Menor Preço'
+      expect(assigns(:licitation_process).judgment_form.description).to eq 'Por Item com Melhor Técnica'
     end
 
     it 'uses current date as default value for process_date' do
@@ -76,7 +76,7 @@ describe LicitationProcessesController do
 
     context "with licitation_process" do
       let :licitation_process do
-        LicitationProcess.make!(:processo_licitatorio, :type_of_calculation => LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE)
+        LicitationProcess.make!(:processo_licitatorio)
       end
 
       let :licitation_process_classifications do
