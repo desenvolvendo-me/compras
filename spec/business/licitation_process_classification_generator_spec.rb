@@ -12,11 +12,7 @@ describe LicitationProcessClassificationGenerator do
       :type_of_calculation => 'lowest_total_price_by_item',
       :destroy_all_licitation_process_classifications => true,
       :lots_with_items => [lot],
-      :disqualify_by_documentation_problem => false,
-      :disqualify_by_maximum_value => false,
-      :consider_law_of_proposals => false,
       :all_licitation_process_classifications => [],
-      :administrative_process_presence_trading? => false,
       :items => [],
       :licitation_process_bidders => []
     )
@@ -36,7 +32,7 @@ describe LicitationProcessClassificationGenerator do
 
   let :bidder do
     double('LicitationProcessBidder', :id => 11, :proposals => proposals, :benefited => false, :status => :enabled,
-           :administrative_process_budget_allocation_item => item, :licitation_process_classifications_by_classifiable => [])
+           :administrative_process_budget_allocation_item => item)
   end
 
   let :licitation_process_bidders do
@@ -66,8 +62,6 @@ describe LicitationProcessClassificationGenerator do
 
   context 'generate classifications by type of calculation' do
     before do
-      generator.should_receive(:generate_situation!).and_return(true)
-
       licitation_process.stub(:licitation_process_bidders => [bidder])
     end
 
@@ -111,8 +105,6 @@ describe LicitationProcessClassificationGenerator do
     before do
       licitation_process.stub(:all_licitation_process_classifications => [classification_1, classification_2],
                               :licitation_process_bidders => [])
-
-      generator.should_receive(:generate_situation!).and_return(true)
     end
 
     it 'should check if has classification -1' do
@@ -126,221 +118,6 @@ describe LicitationProcessClassificationGenerator do
       classification_2.stub(:disqualified? => true, :classification => -1)
 
       classification_1.should_receive(:update_column).with(:classification, 1).and_return(true)
-
-      generator.generate!
-    end
-  end
-
-  context 'disable bidders by documentation problem' do
-    before do
-      bidder.stub(:proposals => [])
-      licitation_process.stub(:licitation_process_bidders => [bidder])
-      licitation_process.stub(:disqualify_by_documentation_problem => true)
-
-      generator.should_receive(:generate_situation!).and_return(true)
-    end
-
-    it 'should disable bidder' do
-      bidder.stub(:benefited => false, :filled_documents? => false, :expired_documents? => true)
-
-      bidder.should_receive(:inactive!).and_return(true)
-      bidder.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should disable bidder' do
-      bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => true)
-
-      bidder.should_receive(:inactive!).and_return(true)
-      bidder.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should do nothing' do
-      licitation_process.stub(:disqualify_by_documentation_problem => false)
-
-      generator.generate!
-    end
-
-    it 'should enable bidder' do
-      bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => false)
-
-      bidder.should_receive(:active!).and_return(true)
-      bidder.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-  end
-
-  context 'disable bidders if unit price is greater than item unit price' do
-    before do
-      bidder.stub(:proposals => [])
-      licitation_process.stub(:licitation_process_bidders => [bidder])
-      licitation_process.stub(:disqualify_by_maximum_value => true)
-
-      generator.should_receive(:generate_situation!).and_return(true)
-    end
-
-    it 'should disable bidder' do
-      bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_unit_price => true)
-
-      bidder.should_receive(:disable!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should do nothing' do
-      bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_unit_price => false)
-
-      generator.generate!
-    end
-  end
-
-  context 'generate situation of classifications' do
-    before do
-      licitation_process.stub(:all_licitation_process_classifications => [classification_1, classification_2],
-                              :licitation_process_bidders => [])
-    end
-
-    it 'should change classification situation to won and to lost the disqualified' do
-      classification_1.stub(:disqualified? => true)
-
-      classification_1.should_receive(:lost!).and_return(true)
-      classification_2.should_receive(:won!).and_return(true)
-      classification_2.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should change classifications situation to equalized' do
-      classification_1.stub(:total_value => 10, :benefited => false)
-      classification_2.stub(:total_value => 10, :benefited => false)
-
-      classification_1.should_receive(:benefited_value).with(10).and_return(10)
-
-      classification_1.should_receive(:equalized!).and_return(true)
-      classification_2.should_receive(:equalized!).and_return(true)
-      classification_1.should_receive(:save!).and_return(true)
-      classification_2.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should change classifications situation to equalized' do
-      classification_2.stub(:total_value => 9, :benefited => false)
-      classification_1.stub(:total_value => 10, :benefited => true)
-
-      classification_1.should_receive(:benefited_value).with(10).and_return(9)
-
-      classification_1.should_receive(:equalized!).and_return(true)
-      classification_2.should_receive(:equalized!).and_return(true)
-      classification_1.should_receive(:save!).and_return(true)
-      classification_2.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should change classifications to won and lost' do
-      classification_2.stub(:total_value => 9, :benefited => false)
-      classification_1.stub(:total_value => 10, :benefited => false)
-
-      classification_1.should_receive(:benefited_value).with(10).and_return(10)
-
-      classification_2.should_receive(:won!).and_return(true)
-      classification_1.should_receive(:lost!).and_return(true)
-      classification_1.should_receive(:save!).and_return(true)
-      classification_2.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should change classifications to won and lost' do
-      classification_2.stub(:total_value => 9, :benefited => false)
-      classification_1.stub(:total_value => 11, :benefited => true)
-
-      classification_1.should_receive(:benefited_value).with(10).and_return(10)
-
-      classification_2.should_receive(:won!).and_return(true)
-      classification_1.should_receive(:lost!).and_return(true)
-      classification_1.should_receive(:save!).and_return(true)
-      classification_2.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-
-    it 'should change classifications to benefited won' do
-      classification_2.stub(:total_value => 19, :benefited => false)
-      classification_1.stub(:total_value => 20, :benefited => true)
-
-      classification_1.should_receive(:benefited_value).with(10).and_return(18)
-
-      classification_1.should_receive(:won!).and_return(true)
-      classification_2.should_receive(:lost!).and_return(true)
-      classification_1.should_receive(:save!).exactly(3).times.and_return(true)
-      classification_2.should_receive(:save!).and_return(true)
-
-      generator.generate!
-    end
-  end
-
-  context 'change situation and classification of proposals by lot' do
-    let :classification_lot do
-      double('LicitationProcessClassification', :classification => 1, :situation => 'won',
-             :classifiable => 'LicitationProcessLot', :proposals => proposals)
-    end
-
-    before do
-      lot.stub(:licitation_process_classifications => [classification_lot])
-      proposal.stub(:licitation_process_lot => lot)
-    end
-
-    it 'it should change classification and situation of proposal' do
-      proposal.should_receive(:save!).and_return(true)
-      proposal.should_receive(:situation=).with('won')
-      proposal.should_receive(:classification=).with(1)
-
-      generator.generate!
-    end
-  end
-
-  context 'change situation and classification of proposals by bidder' do
-    let :classification_bidder do
-      double('LicitationProcessClassification', :classification => 1, :situation => 'won',
-             :classifiable => 'LicitationProcessBidder', :proposals => proposals)
-    end
-
-    before do
-      licitation_process.stub(:licitation_process_bidders => licitation_process_bidders, :type_of_calculation => nil)
-      bidder.stub(:licitation_process_classifications_by_classifiable => [classification_bidder])
-    end
-
-    it 'it should change classification and situation of proposal' do
-      proposal.should_receive(:save!).and_return(true)
-      proposal.should_receive(:situation=).with('won')
-      proposal.should_receive(:classification=).with(1)
-
-      generator.generate!
-    end
-  end
-
-  context 'change situation and classification of proposals by item' do
-    let :classification_item do
-      double('LicitationProcessClassification', :classification => 1, :situation => 'won',
-             :classifiable => 'AdministrativeProcessBudgetAllocationItem', :proposals => proposals)
-    end
-
-    before do
-      item.stub(:licitation_process_classifications => [classification_item])
-      licitation_process.stub(:items => [item])
-      proposal.stub(:administrative_budget_allocation_item => item)
-    end
-
-    it 'it should change classification and situation of proposal' do
-      proposal.should_receive(:save!).and_return(true)
-      proposal.should_receive(:situation=).with('won')
-      proposal.should_receive(:classification=).with(1)
 
       generator.generate!
     end

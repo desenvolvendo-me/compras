@@ -115,6 +115,8 @@ describe LicitationProcessesController do
         licitation_process.should_receive(:transaction).and_yield
 
         LicitationProcessClassificationGenerator.any_instance.should_receive(:generate!)
+        LicitationProcessClassificationSituationGenerator.any_instance.should_receive(:generate!)
+        LicitationProcessClassificationBiddersVerifier.any_instance.should_receive(:verify!)
 
         put :update, :id => licitation_process.id, :commit => 'Apurar'
 

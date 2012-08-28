@@ -21,10 +21,12 @@ class LicitationProcessesController < CrudController
 
   def update
     if params[:commit] == 'Apurar'
-      generator = LicitationProcessClassificationGenerator.new(resource)
-
       resource.transaction do
-        generator.generate!
+        LicitationProcessClassificationGenerator.new(resource).generate!
+
+        LicitationProcessClassificationBiddersVerifier.new(resource).verify!
+
+        LicitationProcessClassificationSituationGenerator.new(resource).generate!
       end
 
       redirect_to licitation_process_path(resource)
