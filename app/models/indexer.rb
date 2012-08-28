@@ -15,8 +15,6 @@ class Indexer < Compras::Model
   filterize
   orderize
 
-  delegate :current_value, :to => :indexer_values
-
   def to_s
     name.to_s
   end

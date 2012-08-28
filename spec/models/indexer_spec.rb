@@ -15,9 +15,4 @@ describe Indexer do
     subject.name = 'UFM'
     expect(subject.name).to eq 'UFM'
   end
-
-  it 'fetch the current value from current indexer value' do
-    subject.stub(:indexer_values).and_return(double(:current_value => 3.00))
-    expect(subject.current_value).to eq 3.00
-  end
 end
