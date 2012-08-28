@@ -94,7 +94,7 @@ feature "SignatureConfigurations" do
 
     select 'Processos Administrativos', :from => 'Relatório'
 
-    click_button 'Remover Assinatura'
+    click_button 'Remover'
     click_button 'Adicionar Assinatura'
 
     fill_in 'Ordem', :with => '1'
