@@ -18,8 +18,6 @@ class Person < Unico::Person
 
   orderize
 
-  scope :except_special_entry, where { personable_type.not_eq 'SpecialEntry' }
-
   def self.filter(params)
     query = scoped
     query = query.where{ name.matches "#{params[:name]}%" } unless params[:name].blank?
@@ -45,10 +43,6 @@ class Person < Unico::Person
 
   def correspondence_address?
     correspondence_address.present?
-  end
-
-  def special?
-    personable_type == "SpecialEntry"
   end
 
   def company_size

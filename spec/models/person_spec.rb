@@ -63,18 +63,6 @@ describe Person do
 
   it { should validate_presence_of(:address) }
 
-  it 'should be special when personable_type is SpecialEntry' do
-    subject.stub(:personable_type).and_return('SpecialEntry')
-
-    expect(subject).to be_special
-  end
-
-  it 'should not be special if personable_tye is not SpecialEntry' do
-    subject.stub(:personable_type).and_return('Company')
-
-    expect(subject).not_to be_special
-  end
-
   it "should return an empty string on identity document when personable doesn't respond_to both cpf and cnpj" do
     expect(subject.identity_document).to eq ''
   end
