@@ -73,10 +73,6 @@ class JudgmentCommissionAdvice < Compras::Model
     self.class.where { |p| p.year.eq(year) }.order { id }.last
   end
 
-  def judgment_commission_advice_members_not_marked_for_destruction
-    judgment_commission_advice_members.reject(&:marked_for_destruction?)
-  end
-
   def start_date_time_should_not_be_greater_than_end_date_time
     return unless judgment_start_date || judgment_start_time ||
                   judgment_end_date || judgment_end_time
