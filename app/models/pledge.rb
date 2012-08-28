@@ -106,8 +106,4 @@ class Pledge < Compras::Model
       errors.add(:items_total_value, :should_not_be_greater_than_pledge_value, :value => numeric_parser.localize(items_total_value))
     end
   end
-
-  def process?
-    process_number && process_year
-  end
 end
