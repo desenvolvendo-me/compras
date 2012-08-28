@@ -20,8 +20,4 @@ class AdministrativeProcessBudgetAllocation < Compras::Model
   def total_items_value
     items.reject(&:marked_for_destruction?).sum(&:estimated_total_price)
   end
-
-  def clean_items!
-    items.destroy_all
-  end
 end
