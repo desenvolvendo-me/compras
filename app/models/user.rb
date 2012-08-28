@@ -16,7 +16,7 @@ class User < Compras::Model
 
   validates :login, :presence => true, :unless => lambda { |u| !u.persisted? && u.creditor? }
   validates :authenticable, :presence => true, :unless => :administrator?
-  validates :profile, :presence => true, :unless => :administrator_or_creditor? 
+  validates :profile, :presence => true, :unless => :administrator_or_creditor?
   validates :login, :uniqueness => true, :format => /\A[a-z0-9.]+\z/i, :allow_blank => true
 
   has_enumeration_for :authenticable_type, :with => AuthenticableType, :create_helpers => true, :create_scopes => true
