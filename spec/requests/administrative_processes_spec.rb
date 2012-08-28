@@ -586,7 +586,8 @@ feature "AdministrativeProcesses" do
         click_button 'Pesquisar'
 
         within_records do
-          expect(page).to have_css 'td', :count => 1
+          expect(page).not_to have_content 'Agrupamento de reparo 2013'
+          expect(page).to have_content 'Agrupamento de antivirus'
         end
       end
     end
