@@ -6,7 +6,7 @@ feature "LicitationProcesses" do
     sign_in
   end
 
-  scenario 'genereate calculation with equalized result' do
+  scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
@@ -42,7 +42,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'genereate calculation with companies without documents and considering law of proposals' do
+  scenario 'generate calculation with companies without documents and considering law of proposals' do
     licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => true,
                                                  :disqualify_by_documentation_problem => true)
 
@@ -72,7 +72,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_content 'IBM'
   end
 
-  scenario 'genereate calculation with companies without documents' do
+  scenario 'generate calculation with companies without documents' do
     licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => false,
                                                  :disqualify_by_documentation_problem => true)
 
@@ -95,7 +95,7 @@ feature "LicitationProcesses" do
     expect(page).to_not have_content 'IBM'
   end
 
-  scenario 'genereate calculation between a small company and a big company' do
+  scenario 'generate calculation between a small company and a big company' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
@@ -131,7 +131,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'genereate calculation when type of calculation is global' do
+  scenario 'generate calculation when type of calculation is global' do
     licitation_process = LicitationProcess.make!(:apuracao_global)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
@@ -187,7 +187,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'genereate calculation when type of calculation is by lot' do
+  scenario 'generate calculation when type of calculation is by lot' do
     licitation_process = LicitationProcess.make!(:apuracao_por_lote)
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.first])
@@ -247,7 +247,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'genereate calculation when type of calculation is by item' do
+  scenario 'generate calculation when type of calculation is by item' do
     licitation_process = LicitationProcess.make!(:apuracao_por_itens)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
