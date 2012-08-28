@@ -91,7 +91,7 @@ feature "AdministrativeProcesses" do
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
-        click_record '1'
+        click_record 'Agrupamento de reparo 2013'
       end
 
       select 'Pregão presencial', :from => 'Modalidade'
@@ -166,7 +166,7 @@ feature "AdministrativeProcesses" do
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
-        click_record '1'
+        click_record 'Agrupamento de reparo 2013'
       end
     end
 
@@ -212,7 +212,7 @@ feature "AdministrativeProcesses" do
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
-        click_record '1'
+        click_record 'Agrupamento de reparo 2013'
       end
     end
 

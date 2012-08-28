@@ -7,5 +7,6 @@ pt-BR:
 
     attributes:
       purchase_solicitation_item_group:
+        description: "Descrição"
         material: "Material"
         purchase_solicitation: "Solicitação de compra"

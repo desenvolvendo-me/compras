@@ -15,12 +15,13 @@ describe PurchaseSolicitationItemGroup do
   it { should have_many(:administrative_processes).dependent(:restrict) }
   it { should have_one(:annul).dependent(:destroy) }
 
+  it { should validate_presence_of(:description) }
   it { should validate_presence_of(:purchase_solicitation_item_group_materials).with_message("deve ter ao menos um material") }
 
-  it 'should be id as #to_s method' do
-    subject.id = 1
+  it 'should be description as #to_s method' do
+    subject.description = 'agrupamento de gasolina'
 
-    expect(subject.to_s).to eq '1'
+    expect(subject.to_s).to eq 'agrupamento de gasolina'
   end
 
   context 'total_purchase_solicitation_budget_allocations_sum' do

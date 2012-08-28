@@ -13,6 +13,8 @@ feature "PurchaseSolicitationItemGroups" do
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
+    fill_in 'Descrição', :with => 'Agrupamento de antivirus'
+
     click_button 'Adicionar Material'
 
     fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -22,7 +24,7 @@ feature "PurchaseSolicitationItemGroups" do
 
     expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra criado com sucesso.'
 
-    click_link '1'
+    click_link 'Agrupamento de antivirus'
 
     expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
 
@@ -33,12 +35,11 @@ feature "PurchaseSolicitationItemGroups" do
   end
 
   scenario 'update an existent purchase_solicitation_item_group' do
-    PurchaseSolicitationItemGroup.make!(:antivirus)
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
-    click_link '1'
+    click_link 'Agrupamento de reparo 2013'
 
     expect(page).should_not have_link 'Apagar'
 
@@ -53,7 +54,7 @@ feature "PurchaseSolicitationItemGroups" do
 
     expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra editado com sucesso.'
 
-    click_link '1'
+    click_link 'Agrupamento de reparo 2013'
 
     expect(page).to have_field 'Material', :with => '02.02.00001 - Arame farpado'
 
@@ -223,7 +224,7 @@ feature "PurchaseSolicitationItemGroups" do
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
-    click_link '1'
+    click_link 'Agrupamento de antivirus'
 
     expect(page).to have_disabled_field 'Material'
     expect(page).to have_disabled_field 'Solicitação de compra'

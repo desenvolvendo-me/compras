@@ -22,13 +22,13 @@ feature 'PurchaseSolicitationAnnul' do
   scenario 'should see the default values on the screen' do
     purchase_solicitation_item_group = PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
-    click_link "#{purchase_solicitation_item_group}"
+    click_link "Agrupamento de reparo 2013"
 
     click_link 'Anular'
 
-    expect(page).to have_content "Anular Solicitação de Compra #{purchase_solicitation_item_group}"
+    expect(page).to have_content "Anular Agrupamento de Item de Solicitação de Compra Agrupamento de reparo 2013"
 
     expect(page).to have_field 'Data', :with => I18n.l(Date.current)
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -43,7 +43,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
-    click_link '1'
+    click_link 'Agrupamento de reparo 2013'
 
     click_link 'Anular', :confirm => true
 
@@ -81,7 +81,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
-    click_link '1'
+    click_link 'Agrupamento de antivirus'
 
     expect(page).not_to have_button 'Anular'
   end

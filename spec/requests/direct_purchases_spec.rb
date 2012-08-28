@@ -145,7 +145,7 @@ feature "DirectPurchases" do
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
-        click_record '1'
+        click_record 'Agrupamento de reparo 2013'
       end
 
       within_modal 'Fornecedor' do
@@ -223,7 +223,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Referência legal', :with => 'Referencia legal'
       expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'
       expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
-      expect(page).to have_field 'Agrupamento de solicitações de compra', :with => '1'
+      expect(page).to have_field 'Agrupamento de solicitações de compra', :with => 'Agrupamento de reparo 2013'
       expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
@@ -291,7 +291,7 @@ feature "DirectPurchases" do
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
-        click_record '1'
+        click_record 'Agrupamento de reparo 2013'
       end
     end
 
@@ -354,7 +354,7 @@ feature "DirectPurchases" do
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
-        click_record '1'
+        click_record 'Agrupamento de reparo 2013'
       end
     end
 

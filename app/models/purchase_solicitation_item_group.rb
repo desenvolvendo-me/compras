@@ -1,10 +1,11 @@
 class PurchaseSolicitationItemGroup < Compras::Model
-  attr_accessible :purchase_solicitation_item_group_materials_attributes
+  attr_accessible :description,
+                  :purchase_solicitation_item_group_materials_attributes
 
   attr_accessor :purchase_solicitation, :purchase_solicitation_id,
                 :material, :material_id
 
-  attr_modal :id
+  attr_modal :description
 
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials
@@ -12,6 +13,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   has_many :administrative_processes, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
+  validates :description, :presence => true
   validates :purchase_solicitation_item_group_materials, :presence => {:message => :must_have_at_least_one_material}
 
   accepts_nested_attributes_for :purchase_solicitation_item_group_materials, :allow_destroy => true
@@ -36,7 +38,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def to_s
-    "#{id}"
+    "#{description}"
   end
 
   def annulled?
