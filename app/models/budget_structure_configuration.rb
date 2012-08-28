@@ -39,10 +39,6 @@ class BudgetStructureConfiguration < Compras::Model
     final_mask
   end
 
-  def as_json(options = {})
-    super.merge(:mask => mask)
-  end
-
   protected
 
   def separator_for_budget_structure_levels
