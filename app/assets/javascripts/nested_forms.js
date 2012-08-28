@@ -11,7 +11,7 @@ loadNestedForms = function() {
       appendItem: $(this).data('append-item'),
       right: $(this).data('right')
     });
-  })
+  });
 }
 
 $(loadNestedForms);
