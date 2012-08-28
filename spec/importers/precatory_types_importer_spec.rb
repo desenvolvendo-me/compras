@@ -2,7 +2,7 @@
 require 'importer_helper'
 require 'app/importers/precatory_type_importer'
 require 'enumerate_it'
-require 'app/enumerations/precatory_type_status'
+require 'app/enumerations/status'
 
 describe PrecatoryTypeImporter do
   subject do
