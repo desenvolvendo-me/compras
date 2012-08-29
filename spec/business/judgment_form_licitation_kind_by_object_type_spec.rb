@@ -51,16 +51,16 @@ describe JudgmentFormLicitationKindByObjectType do
           :best_auction_or_offer
         ],
         :concessions_and_permits => [
-            :best_auction_or_offer
+          :best_auction_or_offer
         ],
         :call_notice => [
-            :best_technique
+          :best_technique
         ],
         :construction_and_engineering_services => [
-            :lowest_price, :best_technique
+          :lowest_price, :best_technique
         ],
         :purchase_and_services => [
-            :lowest_price, :best_technique
+          :lowest_price, :best_technique
         ]
       })
     end
