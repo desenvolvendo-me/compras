@@ -16,25 +16,32 @@ describe JudgmentFormLicitationKindByObjectType do
 
   context 'with object_type and licitation_kind' do
     before do
-      object_type.should_receive(:value_for).with(:DISPOSALS_OF_ASSETS).at_least(:once).
+      object_type.should_receive(:value_for).with(:DISPOSALS_OF_ASSETS).
+                                             at_least(:once).
                                              and_return(:disposals_of_assets)
-      object_type.should_receive(:value_for).with(:CONCESSIONS_AND_PERMITS).at_least(:once).
+      object_type.should_receive(:value_for).with(:CONCESSIONS_AND_PERMITS).
+                                             at_least(:once).
                                              and_return(:concessions_and_permits)
-      object_type.should_receive(:value_for).with(:CALL_NOTICE).at_least(:once).
+      object_type.should_receive(:value_for).with(:CALL_NOTICE).
+                                             at_least(:once).
                                              and_return(:call_notice)
       object_type.should_receive(:value_for).
-                  with(:CONSTRUCTION_AND_ENGINEERING_SERVICES).at_least(:once).
+                  with(:CONSTRUCTION_AND_ENGINEERING_SERVICES).
+                  at_least(:once).
                   and_return(:construction_and_engineering_services)
 
-      object_type.should_receive(:value_for).with(:PURCHASE_AND_SERVICES).at_least(:once).
+      object_type.should_receive(:value_for).with(:PURCHASE_AND_SERVICES).
+                                             at_least(:once).
                                              and_return(:purchase_and_services)
 
       licitation_kind.should_receive(:value_for).with(:BEST_AUCTION_OR_OFFER).
                                                  at_least(:once).
                                                  and_return(:best_auction_or_offer)
-      licitation_kind.should_receive(:value_for).with(:BEST_TECHNIQUE).at_least(:once).
+      licitation_kind.should_receive(:value_for).with(:BEST_TECHNIQUE).
+                                                 at_least(:once).
                                                  and_return(:best_technique)
-      licitation_kind.should_receive(:value_for).with(:LOWEST_PRICE).at_least(:once).
+      licitation_kind.should_receive(:value_for).with(:LOWEST_PRICE).
+                                                 at_least(:once).
                                                  and_return(:lowest_price)
     end
 
