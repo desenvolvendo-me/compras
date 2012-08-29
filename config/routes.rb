@@ -6,7 +6,6 @@ Compras::Application.routes.draw do
     end
   end
 
-
   resources :agreement_kinds do
     collection do
       get :filter
@@ -836,6 +835,13 @@ Compras::Application.routes.draw do
   end
 
   resources :signatures do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
+  resources :special_entries do
     collection do
       get :filter
       get :modal

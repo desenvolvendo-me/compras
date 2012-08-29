@@ -68,6 +68,8 @@ menu:
         - precatories
         - precatory_types
 
+      - special_entries
+
     - estimate:
       - funtional_classification:
         - functions

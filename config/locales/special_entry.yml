@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      special_entry:
+        one: "Inscrição Especial"
+        other: "Inscrições Especiais"
+
+    attributes:
+      special_entry:
+        name: "Nome"
