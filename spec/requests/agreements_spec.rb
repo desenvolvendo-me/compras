@@ -38,6 +38,14 @@ feature "Agreements" do
       select 'Ativo', :from => 'Status'
     end
 
+    within_tab 'Ocorrências' do
+      click_button 'Adicionar Ocorrência'
+
+      fill_in 'Data', :with => '15/04/2011'
+      select 'Em andamento', :from => 'Tipo'
+      fill_in 'Descrição', :with => 'Convênio Iniciado'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Convênio criado com sucesso.'
@@ -66,6 +74,12 @@ feature "Agreements" do
       expect(page).to have_field 'Conta *', :with => 'Itaú Tributos'
       expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
       expect(page).to have_select 'Status', :selected => 'Ativo'
+    end
+
+    within_tab 'Ocorrências' do
+      expect(page).to have_field 'Data', :with => '15/04/2011'
+      expect(page).to have_select 'Tipo', :selected => 'Em andamento'
+      expect(page).to have_field 'Descrição', :with => 'Convênio Iniciado'
     end
   end
 
@@ -133,6 +147,24 @@ feature "Agreements" do
       end
     end
 
+    within_tab 'Ocorrências' do
+      click_button 'Remover Ocorrência'
+
+      click_button 'Adicionar Ocorrência'
+
+      fill_in 'Data', :with => '15/04/2011'
+      select 'Em andamento', :from => 'Tipo'
+      fill_in 'Descrição', :with => 'Convênio Iniciado'
+
+      click_button 'Adicionar Ocorrência'
+
+      within '.nested-agreement-occurrences:nth-child(3)' do
+        fill_in 'Data', :with => '18/06/2012'
+        select 'Paralisado', :from => 'Tipo'
+        fill_in 'Descrição', :with => 'Falta prestação de contas'
+      end
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Convênio editado com sucesso.'
@@ -167,6 +199,20 @@ feature "Agreements" do
         expect(page).to have_field 'Conta *', :with => 'Santander - Folha de Pagamento'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
         expect(page).to have_select 'Status', :selected => 'Ativo'
+      end
+    end
+
+    within_tab 'Ocorrências' do
+      within '.nested-agreement-occurrences:nth-child(1)' do
+        expect(page).to have_field 'Data', :with => '18/06/2012'
+        expect(page).to have_select 'Tipo', :selected => 'Paralisado'
+        expect(page).to have_field 'Descrição', :with => 'Falta prestação de contas'
+      end
+
+      within '.nested-agreement-occurrences:nth-child(2)' do
+        expect(page).to have_field 'Data', :with => '15/04/2011'
+        expect(page).to have_select 'Tipo', :selected => 'Em andamento'
+        expect(page).to have_field 'Descrição', :with => 'Convênio Iniciado'
       end
     end
   end

@@ -1,0 +1,22 @@
+<div class="nested-agreement-occurrences">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-6">
+      <%= f.input :date %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :kind %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :description %>
+    </div>
+  </div>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-agreement-occurrences" value="Remover Ocorrência">
+  </p>
+</div>

@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      agreement_occurrence:
+        one: "Ocorrência"
+        other: "Ocorrência"
+
+    attributes:
+      agreement_occurrence:
+        kind: "Tipo"
+        description: "Descrição"
+        date: "Data"

@@ -14,6 +14,7 @@ Agreement.blueprint(:apoio_ao_turismo) do
   process_date { Date.new(2012, 11, 22) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
+  agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
 end
 
 Agreement.blueprint(:apoio_a_cultura) do
@@ -31,4 +32,5 @@ Agreement.blueprint(:apoio_a_cultura) do
   process_date { Date.new(2012, 11, 22) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
+  agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
 end
