@@ -1,11 +1,27 @@
 <div class="yui3-g">
-  <div class="yui3-u-1-4">
+  <div class="yui3-u-1-6">
     <%= f.input :id, :disabled => true %>
   </div>
 </div>
 
 <%= f.input :description %>
-<%= f.input :capability_source %>
-<%= f.input :capability_source_specification, :disabled => true %>
-<%= f.input :application_code %>
-<%= f.input :application_code_specification, :disabled => true %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :capability_source %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :capability_source_specification, :disabled => true %>
+  </div>
+</div>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :application_code %>
+  </div>
+
+  <div class="yui3-u-1-2">
+    <%= f.input :application_code_specification, :disabled => true %>
+  </div>
+</div>
