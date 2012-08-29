@@ -5,6 +5,8 @@ class Agreement < Compras::Model
                   :regulatory_act_id, :agreement_file,
                   :agreement_bank_accounts_attributes
 
+  attr_modal :code, :description, :process_date, :regulatory_act_id, :category
+
   mount_uploader :agreement_file, DocumentUploader
 
   has_enumeration_for :category, :with => AgreementCategory
@@ -13,6 +15,10 @@ class Agreement < Compras::Model
   belongs_to :regulatory_act
 
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
+
+  has_many :tce_capability_agreements, :dependent => :restrict
+  has_many :tce_specification_capabilities, :through => :tce_capability_agreements,
+           :dependent => :restrict
 
   accepts_nested_attributes_for :agreement_bank_accounts, :allow_destroy => true
 

@@ -12,6 +12,8 @@ describe Agreement do
   it { should belong_to :regulatory_act }
 
   it { should have_many(:agreement_bank_accounts).dependent(:destroy) }
+  it { should have_many(:tce_specification_capabilities).dependent(:restrict).through(:tce_capability_agreements) }
+  it { should have_many(:tce_capability_agreements).dependent(:restrict) }
 
   it { should validate_presence_of :code }
   it { should validate_presence_of :number }

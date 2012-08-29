@@ -1,0 +1,12 @@
+<tr class="record agreement">
+  <td>
+    <%= category %>
+  </td>
+  <td>
+    <%= description %>
+  </td>
+  <td>
+    <input id="<%= f.sanitized_object_name %>_agreements_record_<%= id %>_id" class="agreement-id" type="hidden" name="<%= f.sanitized_object_name %>[agreement_ids][]" value="<%= id %>" />
+    <button class="button negative modal-finder-remove">Remover</button>
+  </td>
+</tr>
