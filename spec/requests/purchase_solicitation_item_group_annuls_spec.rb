@@ -20,7 +20,7 @@ feature 'PurchaseSolicitationAnnul' do
   end
 
   scenario 'should see the default values on the screen' do
-    purchase_solicitation_item_group = PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
