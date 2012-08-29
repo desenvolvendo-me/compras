@@ -18,10 +18,6 @@ class LicitationProcessBidderProposal < Compras::Model
 
   after_initialize :set_default_values
 
-  scope :by_licitation_process, lambda { |lp_id|
-    where { licitation_process_bidder.licitation_process.eq(lp_id) }
-  }
-
   scope :by_lot, lambda { |lot_id|
     joins { administrative_process_budget_allocation_item.licitation_process_lot }.
     where { administrative_process_budget_allocation_item.licitation_process_lot.id.eq(lot_id) }
@@ -55,10 +51,6 @@ class LicitationProcessBidderProposal < Compras::Model
     query = query.where { unit_price.eq(0) }
 
     query.any?
-  end
-
-  def unit_price_greater_than_budget_allocation_item_unit_price?
-    unit_price > administrative_process_budget_allocation_item_unit_price
   end
 
   def self.classifications
