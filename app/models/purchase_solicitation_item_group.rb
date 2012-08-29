@@ -38,7 +38,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def to_s
-    "#{description}"
+    description
   end
 
   def annulled?
