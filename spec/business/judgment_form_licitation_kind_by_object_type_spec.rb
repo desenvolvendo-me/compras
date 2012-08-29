@@ -33,7 +33,6 @@ describe JudgmentFormLicitationKindByObjectType do
                                                  at_least(:once).
                                                  and_return(:best_auction_or_offer)
       licitation_kind.should_receive(:value_for).with(:BEST_TECHNIQUE).at_least(:once).
-                                                 times.
                                                  and_return(:best_technique)
       licitation_kind.should_receive(:value_for).with(:LOWEST_PRICE).at_least(:once).
                                                  and_return(:lowest_price)
