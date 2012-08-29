@@ -99,7 +99,6 @@ feature "TceSpecificationCapabilities" do
     end
 
     within_tab 'Convênios' do
-
       click_button 'Remover'
 
       fill_modal 'Convênios', :with => 'Apoio ao turismo', :field => 'Objeto'
