@@ -15,7 +15,6 @@ class Agreement < Compras::Model
   belongs_to :regulatory_act
 
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
-
   has_many :tce_capability_agreements, :dependent => :restrict
   has_many :tce_specification_capabilities, :through => :tce_capability_agreements,
            :dependent => :restrict
