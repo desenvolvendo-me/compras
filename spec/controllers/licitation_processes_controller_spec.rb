@@ -110,7 +110,7 @@ describe LicitationProcessesController do
         expect(response).to redirect_to(edit_administrative_process_path(licitation_process.administrative_process))
       end
 
-      it 'delete classifications e call classification generator' do
+      it 'delete classifications and call classification generator' do
         LicitationProcess.stub(:find).and_return(licitation_process)
         licitation_process.should_receive(:transaction).and_yield
 
