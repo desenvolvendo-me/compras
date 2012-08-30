@@ -7,8 +7,6 @@ class Creditor < Compras::Model
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
 
-  attr_readonly :creditable_id
-
   attr_modal :creditable_id, :main_cnae_id
 
   belongs_to :main_cnae, :class_name => 'Cnae'
