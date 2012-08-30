@@ -15,6 +15,7 @@ Agreement.blueprint(:apoio_ao_turismo) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
+  agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
 end
 
 Agreement.blueprint(:apoio_a_cultura) do
@@ -33,4 +34,5 @@ Agreement.blueprint(:apoio_a_cultura) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
+  agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
 end

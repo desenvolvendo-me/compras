@@ -1,0 +1,24 @@
+<div class="nested-agreement-participants">
+  <%= f.input :id, :as => 'hidden' %>
+  <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
+
+  <%= f.input :creditor %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :value %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :kind %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :governmental_sphere %>
+    </div>
+  </div>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-agreement-participants" value="Remover Participante">
+  </p>
+</div>

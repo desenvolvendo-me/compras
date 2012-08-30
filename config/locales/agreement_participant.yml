@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      agreement_participant:
+        one: "Participante"
+        other: "Participantes"
+
+    attributes:
+      agreement_participant:
+        kind: "Tipo"
+        creditor: "Credor"
+        value: "Valor"
+        governmental_sphere: "Esfera governamental"

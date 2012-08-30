@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    agreement_governmental_sphere:
+      state: "Estadual"
+      federal: "Federal"
+      municipal: "Municipal"
+      non_governmental: "Não Governamental"

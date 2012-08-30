@@ -10,6 +10,7 @@ feature "Agreements" do
     AgreementKind.make!(:contribuicao)
     RegulatoryAct.make!(:sopa)
     BankAccount.make!(:itau_tributos)
+    Creditor.make!(:sobrinho)
 
     navigate 'Contabilidade > Comum > Convênio > Convênios'
 
@@ -36,6 +37,19 @@ feature "Agreements" do
       fill_modal 'Conta *', :with => 'Itaú Tributos', :field => 'Descrição'
       fill_in 'Data inclusão', :with => I18n.l(Date.current)
       select 'Ativo', :from => 'Status'
+    end
+
+    within_tab 'Participantes' do
+      click_button 'Adicionar Participante'
+
+      within_modal 'Credor' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+        click_button 'Pesquisar'
+        click_record 'Gabriel Sobrinho'
+      end
+      fill_in 'Valor', :with => '100,00'
+      select 'Concedente', :from => 'Tipo'
+      select 'Estadual', :from => 'Esfera governamental'
     end
 
     within_tab 'Ocorrências' do
@@ -76,6 +90,13 @@ feature "Agreements" do
       expect(page).to have_select 'Status', :selected => 'Ativo'
     end
 
+    within_tab 'Participantes' do
+      expect(page).to have_field 'Credor', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Valor', :with => '100,00'
+      expect(page).to have_select 'Tipo', :selected => 'Concedente'
+      expect(page).to have_select 'Esfera governamental', :selected => 'Estadual'
+    end
+
     within_tab 'Ocorrências' do
       expect(page).to have_field 'Data', :with => '15/04/2011'
       expect(page).to have_select 'Tipo', :selected => 'Em andamento'
@@ -110,6 +131,7 @@ feature "Agreements" do
     RegulatoryAct.make!(:emenda)
     Agreement.make!(:apoio_ao_turismo)
     BankAccount.make!(:santander_folha)
+    Creditor.make!(:wenderson_sa)
 
     navigate 'Contabilidade > Comum > Convênio > Convênios'
 
@@ -144,6 +166,34 @@ feature "Agreements" do
         fill_modal 'Conta *', :with => 'Santander - Folha de Pagamento', :field => 'Descrição'
         fill_in 'Data inclusão', :with => I18n.l(Date.current)
         select 'Ativo', :from => 'Status'
+      end
+    end
+
+    within_tab 'Participantes' do
+      click_button 'Remover Participante'
+
+      click_button 'Adicionar Participante'
+
+      within_modal 'Credor' do
+        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
+        click_button 'Pesquisar'
+        click_record 'Gabriel Sobrinho'
+      end
+      fill_in 'Valor', :with => '100,00'
+      select 'Concedente', :from => 'Tipo'
+      select 'Estadual', :from => 'Esfera governamental'
+
+      click_button 'Adicionar Participante'
+
+      within '.nested-agreement-participants:nth-child(3)' do
+        within_modal 'Credor' do
+          fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
+          click_button 'Pesquisar'
+          click_record 'Wenderson Malheiros'
+        end
+        fill_in 'Valor', :with => '200,00'
+        select 'Convenente', :from => 'Tipo'
+        select 'Federal', :from => 'Esfera governamental'
       end
     end
 
@@ -199,6 +249,22 @@ feature "Agreements" do
         expect(page).to have_field 'Conta *', :with => 'Santander - Folha de Pagamento'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
         expect(page).to have_select 'Status', :selected => 'Ativo'
+      end
+    end
+
+    within_tab 'Participantes' do
+      within '.nested-agreement-participants:nth-child(1)' do
+        expect(page).to have_field 'Credor', :with => 'Wenderson Malheiros'
+        expect(page).to have_field 'Valor', :with => '200,00'
+        expect(page).to have_select 'Tipo', :selected => 'Convenente'
+        expect(page).to have_select 'Esfera governamental', :selected => 'Federal'
+      end
+
+      within '.nested-agreement-participants:nth-child(2)' do
+        expect(page).to have_field 'Credor', :with => 'Gabriel Sobrinho'
+        expect(page).to have_field 'Valor', :with => '100,00'
+        expect(page).to have_select 'Tipo', :selected => 'Concedente'
+        expect(page).to have_select 'Esfera governamental', :selected => 'Estadual'
       end
     end
 

@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    agreement_participant_kind:
+      granting: "Concedente"
+      convenente: "Convenente"

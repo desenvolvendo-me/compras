@@ -4,7 +4,8 @@ class Agreement < Compras::Model
                   :number_year, :number_year_process, :agreement_kind_id,
                   :regulatory_act_id, :agreement_file,
                   :agreement_bank_accounts_attributes,
-                  :agreement_occurrences_attributes
+                  :agreement_occurrences_attributes,
+                  :agreement_participants_attributes
 
   attr_modal :code, :description, :process_date, :regulatory_act_id, :category
 
@@ -15,6 +16,7 @@ class Agreement < Compras::Model
   belongs_to :agreement_kind
   belongs_to :regulatory_act
 
+  has_many :agreement_participants, :dependent => :destroy
   has_many :agreement_occurrences, :dependent => :destroy
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
   has_many :tce_capability_agreements, :dependent => :restrict
@@ -23,6 +25,7 @@ class Agreement < Compras::Model
 
   accepts_nested_attributes_for :agreement_bank_accounts, :allow_destroy => true
   accepts_nested_attributes_for :agreement_occurrences, :allow_destroy => true
+  accepts_nested_attributes_for :agreement_participants, :allow_destroy => true
 
   delegate :creation_date, :publication_date, :end_date, :to => :regulatory_act,
            :allow_nil => true
