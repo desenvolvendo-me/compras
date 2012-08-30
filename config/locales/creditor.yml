@@ -17,9 +17,10 @@ pt-BR:
         materials: "Materiais"
         municipal_public_administration: "Admnistração pública municipal"
         occupation_classification: "CBO"
-        person: "Pessoa"
-        registration_cadastral_certificates: 'Certificado de registro cadastral' 
+        registration_cadastral_certificates: 'Certificado de registro cadastral'
         representative_people: "Representantes"
         social_identification_number: "PIS/PASEP"
         commercial_registration_number: "Número do registro na junta comercial"
         commercial_registration_date: "Data do registro na junta comercial"
+        creditable_type: "Tipo de credor"
+        creditable: "Inscrição especial"

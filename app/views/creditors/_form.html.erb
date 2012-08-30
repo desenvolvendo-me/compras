@@ -1,9 +1,13 @@
-<%= f.input :person, :disabled => f.object.persisted?  %>
+<%= f.input :creditable_type, :as => :radio_buttons, :disabled => f.object.persisted?,
+            :collection => [['Inscrição especial', 'SpecialEntry'],
+                            ['Pessoa física ou jurídica', 'Person']] %>
+
+<%= f.input :creditable, :as => :modal, :disabled => f.object.persisted?, :modal_url => modal_special_entries_path  %>
 
 <%= f.input :personable_type, :as => :hidden %>
 
 <p>
-  <%= link_to_modal_info 'creditor_person', f.object.person %>
+  <%= link_to_modal_info 'creditor_creditable', f.object.creditable %>
 </p>
 
 <div id="creditor-tabs" class="tabs">
@@ -52,8 +56,25 @@
 </div>
 
 <script>
-  $('#creditor_person_id').change(function (event, people) {
-    if (people) {
+  $('input:radio[name=creditor[creditable_type]]').click(function () {
+    $('#creditor_creditable_id').val('');
+    $('#creditor_creditable').val('');
+
+    var url = "<%= modal_people_path %>",
+        label = 'Pessoa física ou jurídica',
+        value = $('[name=creditor[creditable_type]]:checked').val();
+
+    if (value == 'SpecialEntry') {
+      url = "<%= modal_special_entries_path %>";
+      label = 'Inscrição especial';
+    }
+
+    $('#creditor_creditable').attr('data-modal-url', url);
+    $('label[for=creditor_creditable]').html(label);
+  });
+
+  $('#creditor_creditable_id').change(function (event, people) {
+    if (people && people.personable_type) {
       $('#creditor_personable_type').val(people.personable_type);
     } else {
       $('#creditor_personable_type').val('');
@@ -65,20 +86,18 @@
   };
 
   function showCommonTabs() {
-    if ( $('#creditor_person_id').val() == '') {
-      $('.special-field, .individual-field, .company-field').hide();
-      selectFirstTabVisible();
-    }
+    $('.individual-field, .company-field').hide();
+    selectFirstTabVisible();
   };
 
   function showOnlyIndividualFields(){
-    $('.special-field, .company-field').hide();
+    $('.company-field').hide();
     $('.individual-field').show();
     selectFirstTabVisible();
   };
 
   function showOnlyCompanyFields(){
-    $('.special-field, .individual-field').hide();
+    $('.individual-field').hide();
     $('.company-field').show();
     selectFirstTabVisible();
   };
@@ -91,15 +110,12 @@
       case 'Company':
         showOnlyCompanyFields();
         break;
-      case 'SpecialEntry':
-        showOnlySpecialEntryFields();
-        break;
       default:
         showCommonTabs();
     }
   };
 
-  $("#creditor_person_id").change( function(event, person) {
+  $("#creditor_creditable_id").change( function(event, person) {
     hideFields();
     if (person && person.isCompany) {
       $('#creditor_company_size').val(person.companySize);

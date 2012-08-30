@@ -1,5 +1,5 @@
 class Creditor < Compras::Model
-  attr_accessible :person_id, :occupation_classification_id
+  attr_accessible :creditable_type, :creditable_id, :occupation_classification_id
   attr_accessible :main_cnae_id, :municipal_public_administration, :autonomous
   attr_accessible :social_identification_number
   attr_accessible :contract_start_date, :cnae_ids, :documents_attributes
@@ -7,13 +7,13 @@ class Creditor < Compras::Model
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
 
-  attr_readonly :person_id
+  attr_readonly :creditable_id
 
-  attr_modal :person_id, :main_cnae_id
+  attr_modal :creditable_id, :main_cnae_id
 
   belongs_to :main_cnae, :class_name => 'Cnae'
   belongs_to :occupation_classification
-  belongs_to :person
+  belongs_to :creditable, :polymorphic => true
 
   has_many :accounts, :class_name => 'CreditorBankAccount', :inverse_of => :creditor, :dependent => :destroy
   has_many :agencies, :through => :accounts
@@ -64,8 +64,8 @@ class Creditor < Compras::Model
   accepts_nested_attributes_for :representatives, :allow_destroy => true
   accepts_nested_attributes_for :user
 
-  validates :person, :presence => true
-  validates :person_id, :uniqueness => true, :allow_blank => true
+  validates :creditable, :presence => true
+  validates :creditable_id, :uniqueness => { :scope => :creditable_type }, :if => :person
   validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :main_cnae, :presence => true, :if => :company?
@@ -79,7 +79,11 @@ class Creditor < Compras::Model
   filterize
 
   def to_s
-    person.to_s
+    creditable.to_s
+  end
+
+  def person
+    creditable if creditable_type && creditable_type == 'Person'
   end
 
   def selected_cnaes
@@ -102,7 +106,7 @@ class Creditor < Compras::Model
   def person_in_representatives
     return unless person && representatives
 
-    if representative_person_ids.include? person.id
+    if person && representative_person_ids.include?(person.id)
       errors.add(:representatives, :cannot_have_representative_equal_creditor)
     end
   end
