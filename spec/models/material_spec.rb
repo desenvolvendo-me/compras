@@ -39,6 +39,7 @@ describe Material do
   it { should have_many(:price_collection_lot_items).dependent(:restrict) }
   it { should have_many(:creditor_materials).dependent(:restrict) }
   it { should have_many(:purchase_solicitation_item_group_materials).dependent(:destroy) }
+  it { should have_many(:purchase_solicitation_budget_allocations).dependent(:restrict) }
 
   it { should validate_presence_of :materials_class }
   it { should validate_presence_of :code }

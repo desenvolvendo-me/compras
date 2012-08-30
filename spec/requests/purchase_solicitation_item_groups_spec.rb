@@ -176,7 +176,7 @@ feature "PurchaseSolicitationItemGroups" do
 
   scenario 'filter by material' do
     PurchaseSolicitationItemGroup.make!(:reparo_arame_farpado)
-    PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento)
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -197,7 +197,7 @@ feature "PurchaseSolicitationItemGroups" do
 
   scenario 'filter by purchase_solicitation' do
     PurchaseSolicitationItemGroup.make!(:reparo_arame_farpado)
-    PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento)
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 

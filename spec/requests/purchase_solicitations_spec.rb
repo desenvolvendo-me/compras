@@ -369,7 +369,7 @@ feature "PurchaseSolicitations" do
     ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
     budget_allocation = BudgetAllocation.make!(:alocacao)
-    Material.make!(:antivirus)
+    Material.make!(:office)
 
     navigate 'Compras e Licitações > Solicitações de Compra'
 
@@ -396,7 +396,7 @@ feature "PurchaseSolicitations" do
 
       click_button 'Adicionar Item'
 
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+      fill_modal 'Material', :with => 'Office', :field => 'Descrição'
 
       fill_in 'Marca/Referência', :with => 'Norton'
       fill_in 'Quantidade', :with => '3,00'
@@ -432,7 +432,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field "Dotação", :with => budget_allocation.to_s
       expect(page).to have_field 'Natureza da despesa', :with => '3.0.10.01.12 - Vencimentos e Salários'
 
-      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_field 'Material', :with => '01.01.00002 - Office'
       expect(page).to have_field 'Unidade', :with => 'UN'
       expect(page).to have_field 'Marca/Referência', :with => 'Norton'
       expect(page).to have_field 'Quantidade', :with => '3,00'
@@ -469,5 +469,75 @@ feature "PurchaseSolicitations" do
     end
 
     expect(page).to have_button 'Salvar'
+  end
+
+  scenario 'create a new purchase_solicitation with same budget_structure and material' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+    Employee.make!(:sobrinho)
+    ExpenseNature.make!(:vencimento_e_salarios)
+    DeliveryLocation.make!(:education)
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    click_link 'Criar Solicitação de Compra'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da solicitação', :with => '01/02/2012'
+      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
+      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
+      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      select 'Bens', :from => 'Tipo de solicitação'
+      fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
+
+      click_button 'Adicionar Item'
+
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+      fill_in 'Marca/Referência', :with => 'Norton'
+      fill_in 'Quantidade', :with => '3,50'
+      fill_in 'Valor unitário', :with => '200,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).not_to have_notice 'Solicitação de Compra criada com sucesso.'
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"
+    end
+  end
+
+  scenario 'update an existent purchase_solicitation' do
+     PurchaseSolicitation.make!(:reparo)
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013)
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      click_link purchase_solicitation.to_s
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).not_to have_notice 'Solicitação de Compra criada com sucesso.'
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"
+    end
   end
 end

@@ -8,6 +8,8 @@ require 'app/models/purchase_solicitation_budget_allocation_item'
 require 'app/models/purchase_solicitation_liberation'
 require 'app/models/resource_annul'
 require 'app/models/purchase_solicitation_item_group_material_purchase_solicitation'
+require 'app/models/material.rb'
+require 'app/models/budget_structure.rb'
 
 describe PurchaseSolicitation do
   it 'should return the code/accounting_year in to_s method' do

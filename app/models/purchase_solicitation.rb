@@ -34,6 +34,7 @@ class PurchaseSolicitation < Compras::Model
   validates :accounting_year, :numericality => true, :mask => '9999', :allow_blank => true
   validates :purchase_solicitation_budget_allocations, :no_duplication => :budget_allocation_id
   validate :must_have_at_least_one_budget_allocation
+  validate :validate_budget_structure_and_materials
 
   orderize :request_date
   filterize
@@ -86,5 +87,21 @@ class PurchaseSolicitation < Compras::Model
 
   def purchase_solicitation_budget_allocations?
     !purchase_solicitation_budget_allocations.reject(&:marked_for_destruction?).empty?
+  end
+
+  def materials_of_other_peding_purchase_solicitation
+    materials = Material.by_pending_purchase_solicitation_budget_structure_id(budget_structure_id)
+    materials.not_purchase_solicitation(id)
+  end
+
+  def validate_budget_structure_and_materials
+    purchase_solicitation_budget_allocations.each do |ps_budget_allocation|
+      ps_budget_allocation.items.each do |item|
+        if materials_of_other_peding_purchase_solicitation.include?(item.material)
+          item.errors.add(:material, :already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material)
+          errors.add(:base, :invalid)
+        end
+      end
+    end
   end
 end

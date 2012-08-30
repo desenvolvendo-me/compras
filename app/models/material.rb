@@ -24,6 +24,7 @@ class Material < Compras::Model
   has_many :price_collection_lot_items, :dependent => :restrict
   has_many :creditor_materials, :dependent => :restrict
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
+  has_many :purchase_solicitation_budget_allocations, :through => :purchase_solicitation_budget_allocation_items, :dependent => :restrict
 
   delegate :materials_group, :materials_group_id, :to => :materials_class, :allow_nil => true
 
@@ -53,6 +54,23 @@ class Material < Compras::Model
 
   def to_s
     "#{code} - #{description}"
+  end
+
+  def self.by_pending_purchase_solicitation_budget_structure_id(budget_structure_id)
+    joins { purchase_solicitation_budget_allocation_items }.
+    joins { purchase_solicitation_budget_allocations.purchase_solicitation }.
+    where do |material|
+      material.purchase_solicitation_budget_allocations.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
+      material.purchase_solicitation_budget_allocations.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
+    end
+  end
+
+  def self.not_purchase_solicitation(purchase_solicitation_id)
+    joins { purchase_solicitation_budget_allocation_items }.
+    joins { purchase_solicitation_budget_allocations }.
+    where do |material|
+      material.purchase_solicitation_budget_allocations.purchase_solicitation_id.not_eq(purchase_solicitation_id)
+    end
   end
 
   protected
