@@ -1,13 +1,15 @@
 <div class="direct-purchase-budget-allocation contrasted">
-  <div class="yui3-g">
     <%= f.input :id, :as => 'hidden' %>
     <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-    <div class="yui3-u-1-2">
+  <div class="yui3-g">
+    <div class="yui3-u-1">
       <%= f.input :budget_allocation, :input_html => { :class => 'budget-allocation' } %>
     </div>
+  </div>
 
-    <div class="yui3-u-1-4">
+  <div class="yui3-g">
+    <div class="yui3-u-3-4">
       <%= f.input :expense_nature, :disabled => true, :input_html => { :class => 'classification' } %>
     </div>
 
