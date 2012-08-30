@@ -1,11 +1,11 @@
 #encoding: utf-8
 module CrudHelper
-  def plural
-    resource_class.model_name.human(:count => 'many')
+  def plural(class_name=resource_class)
+    class_name.model_name.human(:count => 'many')
   end
 
-  def singular
-    resource_class.model_name.human
+  def singular(class_name=resource_class)
+    class_name.model_name.human
   end
 
   def paginate
