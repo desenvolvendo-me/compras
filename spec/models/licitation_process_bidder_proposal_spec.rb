@@ -40,4 +40,22 @@ describe LicitationProcessBidderProposal do
       end
     end
   end
+
+  context 'unit price greater than budget allocation unit price' do
+    before do
+      subject.stub(:unit_price => 10)
+    end
+
+    it 'should return false' do
+      subject.stub(:administrative_process_budget_allocation_item_unit_price => 11)
+
+      expect(subject.unit_price_greater_than_budget_allocation_item_unit_price?).to be false
+    end
+
+    it 'should return true' do
+      subject.stub(:administrative_process_budget_allocation_item_unit_price => 9)
+
+      expect(subject.unit_price_greater_than_budget_allocation_item_unit_price?).to be true
+    end
+  end
 end

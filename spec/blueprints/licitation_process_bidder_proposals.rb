@@ -42,3 +42,10 @@ LicitationProcessBidderProposal.blueprint(:proposta_licitante_5) do
   brand { 'brand' }
   situation { SituationOfProposal::UNDEFINED }
 end
+
+LicitationProcessBidderProposal.blueprint(:proposta_licitante_7) do
+  administrative_process_budget_allocation_item { AdministrativeProcessBudgetAllocationItem.make!(:item) }
+  unit_price { 11.0 }
+  brand { 'brand' }
+  situation { SituationOfProposal::UNDEFINED }
+end

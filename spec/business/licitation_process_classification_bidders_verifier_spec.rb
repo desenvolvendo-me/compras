@@ -72,15 +72,16 @@ describe LicitationProcessClassificationBiddersVerifier do
     end
 
     it 'should disable bidder' do
-      bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_unit_price => true)
+      bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_item_unit_price => true)
 
-      bidder.should_receive(:disable!).and_return(true)
+      bidder.should_receive(:inactive!).and_return(true)
+      bidder.should_receive(:save!).and_return(true)
 
       verifier.verify!
     end
 
     it 'should do nothing' do
-      bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_unit_price => false)
+      bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_item_unit_price => false)
 
       verifier.verify!
     end

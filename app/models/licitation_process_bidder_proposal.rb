@@ -64,6 +64,10 @@ class LicitationProcessBidderProposal < Compras::Model
     quantity * unit_price
   end
 
+  def unit_price_greater_than_budget_allocation_item_unit_price?
+    unit_price > administrative_process_budget_allocation_item_unit_price
+  end
+
   protected
 
   def set_default_values

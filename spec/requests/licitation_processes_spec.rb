@@ -6,6 +6,37 @@ feature "LicitationProcesses" do
     sign_in
   end
 
+  scenario 'generate calculation and disable a bidder by maximum value' do
+    licitation_process = LicitationProcess.make!(:valor_maximo_ultrapassado, :disqualify_by_maximum_value => true)
+    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
+                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço por lote'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to_not have_content 'IBM'
+  end
+
   scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 

@@ -261,17 +261,17 @@ describe LicitationProcessBidder do
 
   context 'has proposals unit price greater than budget allocation unit price' do
     it 'should return true' do
-      subject.stub(:proposals => [double(:unit_price_greater_than_budget_allocation_unit_price => true),
-                                  double(:unit_price_greater_than_budget_allocation_unit_price => false)])
+      subject.stub(:proposals => [double(:unit_price_greater_than_budget_allocation_item_unit_price? => true),
+                                  double(:unit_price_greater_than_budget_allocation_item_unit_price? => false)])
 
-      expect(subject.has_proposals_unit_price_greater_than_budget_allocation_unit_price).to be true
+      expect(subject.has_proposals_unit_price_greater_than_budget_allocation_item_unit_price).to be true
     end
 
     it 'should return false' do
-      subject.stub(:proposals => [double(:unit_price_greater_than_budget_allocation_unit_price => false),
-                                  double(:unit_price_greater_than_budget_allocation_unit_price => false)])
+      subject.stub(:proposals => [double(:unit_price_greater_than_budget_allocation_item_unit_price? => false),
+                                  double(:unit_price_greater_than_budget_allocation_item_unit_price? => false)])
 
-      expect(subject.has_proposals_unit_price_greater_than_budget_allocation_unit_price).to be false
+      expect(subject.has_proposals_unit_price_greater_than_budget_allocation_item_unit_price).to be false
     end
   end
 end
