@@ -42,11 +42,8 @@ feature "Agreements" do
     within_tab 'Participantes' do
       click_button 'Adicionar Participante'
 
-      within_modal 'Credor' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-        click_button 'Pesquisar'
-        click_record 'Gabriel Sobrinho'
-      end
+      fill_modal 'Credor', :with => 'Gabriel Sobrinho'
+
       fill_in 'Valor', :with => '100,00'
       select 'Concedente', :from => 'Tipo'
       select 'Estadual', :from => 'Esfera governamental'
@@ -190,11 +187,8 @@ feature "Agreements" do
 
       click_button 'Adicionar Participante'
 
-      within_modal 'Credor' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-        click_button 'Pesquisar'
-        click_record 'Gabriel Sobrinho'
-      end
+      fill_modal 'Credor', :with => 'Gabriel Sobrinho'
+
       fill_in 'Valor', :with => '100,00'
       select 'Concedente', :from => 'Tipo'
       select 'Estadual', :from => 'Esfera governamental'
@@ -202,11 +196,8 @@ feature "Agreements" do
       click_button 'Adicionar Participante'
 
       within '.nested-agreement-participants:nth-child(3)' do
-        within_modal 'Credor' do
-          fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-          click_button 'Pesquisar'
-          click_record 'Wenderson Malheiros'
-        end
+        fill_modal 'Credor', :with => 'Wenderson Malheiros'
+
         fill_in 'Valor', :with => '200,00'
         select 'Convenente', :from => 'Tipo'
         select 'Federal', :from => 'Esfera governamental'

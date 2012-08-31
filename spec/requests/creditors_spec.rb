@@ -6,6 +6,25 @@ feature "Creditors" do
     sign_in
   end
 
+  scenario 'creditor filter by person or special entry' do
+    Creditor.make!(:nohup)
+    Creditor.make!(:special)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Credores'
+
+    click_link 'Filtrar Credores'
+    fill_in 'Nome', :with => 'Nohup'
+    click_button 'Pesquisar'
+
+    expect(page).to have_link 'Nohup'
+
+    click_link 'Filtrar Credores'
+    fill_in 'Nome', :with => 'Tal'
+    click_button 'Pesquisar'
+
+    expect(page).to have_link 'Tal'
+  end
+
   scenario 'switch type of creditor between special entry and person' do
     navigate 'Compras e Licitações > Cadastros Gerais > Credores'
 

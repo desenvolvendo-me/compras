@@ -7,7 +7,9 @@ class Creditor < Compras::Model
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
 
-  attr_modal :creditable_id, :main_cnae_id
+  attr_accessor :name
+
+  attr_modal :name
 
   belongs_to :main_cnae, :class_name => 'Cnae'
   belongs_to :occupation_classification
@@ -75,6 +77,15 @@ class Creditor < Compras::Model
 
   orderize :id
   filterize
+
+  def self.filter(params)
+    query = scoped
+    query = query.joins { creditable(Person).outer }
+    query = query.joins { creditable(SpecialEntry).outer }
+    query = query.where { creditable(Person).name.matches("#{params[:name]}%") |
+                          creditable(SpecialEntry).name.matches("#{params[:name]}%") }
+    query
+  end
 
   def to_s
     creditable.to_s

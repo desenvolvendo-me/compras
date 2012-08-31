@@ -33,11 +33,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
@@ -148,11 +144,7 @@ feature "DirectPurchases" do
         click_record 'Agrupamento de reparo 2013'
       end
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
@@ -417,11 +409,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
@@ -586,11 +574,7 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'

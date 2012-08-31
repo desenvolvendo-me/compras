@@ -32,11 +32,9 @@ feature "ReserveFunds" do
     fill_in 'Valor *', :with => '10,00'
     fill_modal 'Modalidade', :with => 'Pública', :field => 'Modalidade'
     fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
-    within_modal 'Favorecido' do
-      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-      click_button 'Pesquisar'
-      click_record 'Wenderson Malheiros'
-    end
+
+    fill_modal 'Favorecido', :with => 'Wenderson Malheiros'
+
     fill_in 'Motivo', :with => 'Motivo para reserva de dotação'
 
     click_button 'Salvar'

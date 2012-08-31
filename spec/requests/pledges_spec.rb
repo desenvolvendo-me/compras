@@ -39,11 +39,7 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
       expect(page).to have_disabled_field 'Código'
     end
@@ -420,11 +416,7 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
     end
 
     within_tab 'Complementar' do
@@ -798,11 +790,7 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
     end
 
     click_button 'Salvar'
@@ -841,11 +829,7 @@ feature "Pledges" do
       select 'Patrimonial', :from => 'Tipo de bem'
       fill_modal 'Categoria', :with => 'Geral', :field => 'Descrição'
       fill_modal 'Contrato de dívida', :with => '2012', :field => 'Ano do contrato'
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
     end
 
     click_button 'Salvar'

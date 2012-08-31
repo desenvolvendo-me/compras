@@ -16,11 +16,7 @@ feature "Precatories" do
 
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123456'
-      within_modal 'Beneficiário' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Beneficiário', :with => 'Wenderson Malheiros'
       fill_in 'Número da ação', :with => '001.111.2222/2012'
       fill_in 'Data do precatório', :with => '10/05/2012'
       fill_in 'Data da decisão judicial', :with => '05/01/2012'
@@ -140,11 +136,7 @@ feature "Precatories" do
 
     within_tab 'Principal' do
       fill_in 'Número do precatório', :with => '123455'
-      within_modal 'Beneficiário' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-        click_button 'Pesquisar'
-        click_record 'Gabriel Sobrinho'
-      end
+      fill_modal 'Beneficiário', :with => 'Gabriel Sobrinho'
       fill_in 'Número da ação', :with => '002.111.2222/2012'
       fill_in 'Data do precatório', :with => '09/05/2012'
       fill_in 'Data da decisão judicial', :with => '06/01/2012'

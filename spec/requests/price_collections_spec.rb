@@ -56,11 +56,7 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       click_on 'Adicionar Fornecedor'
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho SA'
-        click_button 'Pesquisar'
-        click_record 'Gabriel Sobrinho SA'
-      end
+      fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho SA'
     end
 
     click_button 'Salvar'
@@ -125,11 +121,7 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       click_on 'Adicionar Fornecedor'
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
       expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'
     end
@@ -192,7 +184,7 @@ feature "PriceCollections" do
     Employee.make!(:wenderson)
     PaymentMethod.make!(:cheque)
     Material.make!(:arame_farpado)
-    Creditor.make!(:sobrinho_sa, :person => Person.make!(:sobrinho_without_email, :name => 'José Gomes'))
+    Creditor.make!(:sobrinho_sa, :creditable => Person.make!(:sobrinho_without_email, :name => 'José Gomes'))
 
     navigate 'Compras e Licitações > Coletas de Preços'
 
@@ -234,11 +226,8 @@ feature "PriceCollections" do
 
       click_on 'Adicionar Fornecedor'
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'José Gomes'
-        click_button 'Pesquisar'
-        click_record 'José Gomes'
-      end
+      fill_modal 'Fornecedor', :with => 'José Gomes'
+
       expect(page).not_to have_disabled_field 'Email'
       fill_in 'Email', :with => 'contato@sobrinho.com'
     end
@@ -913,11 +902,7 @@ feature "PriceCollections" do
     within_tab 'Fornecedores' do
       click_button 'Adicionar Fornecedor'
 
-      within_modal 'Fornecedor' do
-        fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-        click_button 'Pesquisar'
-        click_record 'Wenderson Malheiros'
-      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
       expect(page).to have_disabled_field 'Email'
       expect(page).to have_field 'Email', :with => 'wenderson.malheiros@gmail.com'

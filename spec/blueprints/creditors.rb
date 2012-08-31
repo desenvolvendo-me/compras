@@ -9,6 +9,17 @@ Creditor.blueprint(:sobrinho) do
   social_identification_number { "123456" }
 end
 
+Creditor.blueprint(:special) do
+  accounts { [ CreditorBankAccount.make!(:conta_2, :creditor => object) ] }
+  autonomous { false }
+  creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
+  municipal_public_administration { false }
+  occupation_classification { OccupationClassification.make!(:armed_forces) }
+  creditable { SpecialEntry.make!(:example) }
+  regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
+  social_identification_number { "123456" }
+end
+
 Creditor.blueprint(:sobrinho_sa) do
   accounts { [ CreditorBankAccount.make!(:conta_2, :creditor => object) ] }
   autonomous { false }

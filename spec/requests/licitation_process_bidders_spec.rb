@@ -49,11 +49,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
-    within_modal 'Fornecedor' do
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     fill_in 'Pontuação técnica', :with => '10,00'
     check 'Convidado'
@@ -170,11 +166,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
-    within_modal 'Fornecedor' do
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-      click_button 'Pesquisar'
-      click_record 'Gabriel Sobrinho'
-    end
+    fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     fill_in 'Pontuação técnica', :with => '10,00'
     check 'Convidado'
@@ -359,11 +351,7 @@ feature "LicitationProcessBidders" do
 
     click_link 'Criar Licitante'
 
-    within_modal 'Fornecedor' do
-      fill_modal 'Pessoa', :with => 'Wenderson'
-      click_button 'Pesquisar'
-      click_record 'Wenderson'
-    end
+    fill_modal 'Fornecedor', :with => 'Wenderson'
 
     click_button 'Salvar'
 
