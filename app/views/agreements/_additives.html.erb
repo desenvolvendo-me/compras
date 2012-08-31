@@ -1,0 +1,15 @@
+<p>
+  <input type="button" class="button affirmative add-agreement-additives" value="Adicionar Aditivo">
+</p>
+
+<div id="agreement-additives" class="nested-form" data-nested-form="agreement-additives">
+  <%= f.association :agreement_additives, :collection => localized(f.object.agreement_additives) do |o| %>
+    <%= render 'agreement_additives/form', :f => o %>
+  <% end %>
+</div>
+
+<%= mustache 'agreement-additives-template' do %>
+  <%= f.association :agreement_additives_attributes, :collection => f.object.agreement_additives.build, :index => '{{uuid-agreement-additives}}' do |o| %>
+    <%= render 'agreement_additives/form', :f => o %>
+  <% end %>
+<% end %>

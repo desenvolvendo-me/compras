@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      agreement_additive:
+        one: "Aditivo"
+        other: "Aditivo"
+
+    attributes:
+      agreement_additive:
+        kind: "Tipo"
+        regulatory_act: "Ato regulamentador"
+        value: "Valor"
+        description: "Descrição"

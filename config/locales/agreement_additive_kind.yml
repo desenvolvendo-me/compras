@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    agreement_additive_kind:
+      value: "Valor"
+      term: "Prazo"
+      others: "Outros"

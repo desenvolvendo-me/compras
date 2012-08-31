@@ -16,6 +16,7 @@ Agreement.blueprint(:apoio_ao_turismo) do
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
   agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
+  agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }
 end
 
 Agreement.blueprint(:apoio_a_cultura) do
@@ -35,4 +36,5 @@ Agreement.blueprint(:apoio_a_cultura) do
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
   agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
+  agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }
 end
