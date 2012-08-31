@@ -1,6 +1,7 @@
 builder resource, json do
-  json.id resource.id
-  json.total resource.total_purchase_solicitation_budget_allocations_sum.to_f
+  json.id               resource.id
+  json.total            resource.total_purchase_solicitation_budget_allocations_sum.to_f
+  json.modal_info_url   purchase_solicitation_item_group_path(resource, :format => :js)
 
   json.purchase_solicitations resource.purchase_solicitations do |json, purchase_solicitation|
     json.id purchase_solicitation.id

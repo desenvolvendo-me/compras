@@ -1,0 +1,21 @@
+<div id="record">
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= plural PurchaseSolicitation %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% resource.purchase_solicitations.each do |purchase_solicitation| %>
+        <tr>
+          <td>
+            <%= purchase_solicitation %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

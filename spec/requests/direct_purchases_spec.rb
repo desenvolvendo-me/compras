@@ -890,4 +890,25 @@ feature "DirectPurchases" do
       end
     end
   end
+
+  scenario 'viewing purchase solicitations of purchase solicitation item group' do
+    PurchaseSolicitationItemGroup.make!(:reparo_2013)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de reparo 2013'
+      end
+    end
+
+    click_link 'Mais informações'
+
+    expect(page).to have_content 'Solicitações de Compra'
+    expect(page).to have_content '1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+  end
 end
