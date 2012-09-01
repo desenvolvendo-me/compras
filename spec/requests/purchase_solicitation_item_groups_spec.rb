@@ -18,7 +18,7 @@ feature "PurchaseSolicitationItemGroups" do
     click_button 'Adicionar Material'
 
     fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-    fill_modal 'Solicitação de compra', :with => '2012', :field => 'Ano'
+    fill_modal 'Solicitações de compra', :with => '2012', :field => 'Ano'
 
     click_button 'Salvar'
 
@@ -48,7 +48,7 @@ feature "PurchaseSolicitationItemGroups" do
     click_button 'Adicionar Material'
 
     fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
-    fill_modal 'Solicitação de compra', :with => '2013', :field => 'Ano'
+    fill_modal 'Solicitações de compra', :with => '2013', :field => 'Ano'
 
     click_button 'Salvar'
 
@@ -227,7 +227,7 @@ feature "PurchaseSolicitationItemGroups" do
     click_link 'Agrupamento de antivirus'
 
     expect(page).to have_disabled_field 'Material'
-    expect(page).to have_disabled_field 'Solicitação de compra'
+    expect(page).to have_disabled_field 'Solicitações de compra'
 
     expect(page).not_to have_button 'Adicionar Material'
     expect(page).not_to have_button 'Remover Material'
