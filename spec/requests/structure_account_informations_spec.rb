@@ -9,9 +9,9 @@ feature "StructureAccountInformations" do
   scenario 'create a new structure_account_information' do
     CapabilitySource.make!(:imposto)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura Conta Corrente'
+    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
 
-    click_link 'Criar Identificação da Estrutura Conta Corrente'
+    click_link 'Criar Identificação da Estrutura de Conta Corrente'
 
     fill_in 'Nome', :with => 'Fonte de Recursos'
     fill_in 'Cógido TCE', :with => '11'
@@ -19,7 +19,7 @@ feature "StructureAccountInformations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Identificação da Estrutura Conta Corrente criado com sucesso.'
+    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente criado com sucesso.'
 
     click_link 'Fonte de Recursos'
 
@@ -32,7 +32,7 @@ feature "StructureAccountInformations" do
     StructureAccountInformation.make!(:fonte_de_recursos)
     CapabilitySource.make!(:transferencia)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura Conta Corrente'
+    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
 
     click_link 'Fonte de Recursos'
 
@@ -42,7 +42,7 @@ feature "StructureAccountInformations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Identificação da Estrutura Conta Corrente editado com sucesso.'
+    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente editado com sucesso.'
 
     click_link 'Recursos'
 
@@ -54,13 +54,13 @@ feature "StructureAccountInformations" do
   scenario 'destroy an existent structure_account_information' do
     StructureAccountInformation.make!(:fonte_de_recursos)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura Conta Corrente'
+    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
 
     click_link 'Fonte de Recursos'
 
     click_link 'Apagar', :confirm => true
 
-    expect(page).to have_notice 'Identificação da Estrutura Conta Corrente apagado com sucesso.'
+    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente apagado com sucesso.'
 
     expect(page).to_not have_content 'Fonte de Recursos'
   end
