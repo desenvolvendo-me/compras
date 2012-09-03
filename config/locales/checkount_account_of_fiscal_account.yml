@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      checkount_account_of_fiscal_account:
+        one: "Conta Corrente da Conta Contábil"
+        other: "Contas Corrente da Conta Contábil"
+
+    attributes:
+      checkount_account_of_fiscal_account:
+        tce_code: "Cógido TCE"
+        name: "Nome"
+        main_tag: "Tag principal"
+        function: "Função"
