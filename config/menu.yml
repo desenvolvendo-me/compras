@@ -56,6 +56,9 @@ menu:
         - agreements
         - agreement_kinds
 
+      - account_plan:
+        - structure_account_informations
+
       - bank_accounts
       - contracts
       - creditors

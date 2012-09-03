@@ -4,6 +4,7 @@ class CapabilitySource < Compras::Model
   has_enumeration_for :source
 
   has_many :tce_specification_capabilities
+  has_many :structure_account_informations
 
   validates :code, :name, :specification, :source, :presence => true
   validates :code, :uniqueness => true, :allow_blank => true

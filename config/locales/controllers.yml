@@ -104,6 +104,7 @@ pt-BR:
     states: "Estados"
     streets: "Logradouros"
     street_types: "Tipos de Logradouros"
+    structure_account_informations: "Identificações da Estrutura Conta Corrente"
     subfunctions: "Subfunções"
     supply_authorizations: "Autorizações de Fornecimento"
     target_audiences: "Públicos Alvo"
@@ -145,6 +146,7 @@ pt-BR:
   menu:
     <<: *controllers
     accounting: "Contabilidade"
+    account_plan: "Plano de Contas"
     administrative_and_licitation_processes: "Processo Administrativo/Licitatório"
     administration: "Administração"
     agreement: "Convênio"

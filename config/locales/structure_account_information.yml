@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      structure_account_information:
+        one: "Identificação da Estrutura Conta Corrente"
+        other: "Identificações da Estrutura Conta Corrente"
+
+    attributes:
+      structure_account_information:
+        name: "Nome"
+        tce_code: "Cógido TCE"
+        capability_source: "Fonte de recurso"

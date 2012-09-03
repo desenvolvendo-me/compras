@@ -869,6 +869,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :structure_account_informations do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :settings, :only => %w(index edit update) do
     collection do
       get :filter
