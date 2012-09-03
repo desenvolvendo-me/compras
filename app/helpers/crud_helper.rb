@@ -1,10 +1,10 @@
 #encoding: utf-8
 module CrudHelper
-  def plural(class_name=resource_class)
+  def plural(class_name = resource_class)
     class_name.model_name.human(:count => 'many')
   end
 
-  def singular(class_name=resource_class)
+  def singular(class_name = resource_class)
     class_name.model_name.human
   end
 
@@ -45,7 +45,7 @@ module CrudHelper
     end
   end
 
-  def link_to_modal_info(id, href="#")
+  def link_to_modal_info(id, href = "#")
     link_to I18n.translate("other.compras.messages.more_information"), href, :id => id.concat('_info_link'), :class => 'modal_info'
   end
 
@@ -53,7 +53,7 @@ module CrudHelper
     can?(:create, controller_name) && respond_to?("new_#{controller_name.singularize}_path")
   end
 
-  def create_link(optional_params={})
+  def create_link(optional_params = {})
     link_to t("#{controller_name}.new", :resource => singular, :cascade => true), new_resource_path(optional_params||{})
   end
 
@@ -65,7 +65,7 @@ module CrudHelper
     link_to t("#{controller_name}.filter", :resource => plural, :cascade => true), filter_resources_path(current_scopes), :class => 'filter'
   end
 
-  def annul_link(options={})
+  def annul_link(options = {})
     annul_controller_name = options[:annul_controller_name] || "#{controller_name.singularize}_annuls"
 
     return unless can? :modify, annul_controller_name.to_sym
