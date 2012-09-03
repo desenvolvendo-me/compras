@@ -1,7 +1,8 @@
 class PurchaseSolicitation < Compras::Model
-  attr_accessible :accounting_year, :request_date, :responsible_id, :justification
-  attr_accessible :delivery_location_id, :kind, :general_observations
-  attr_accessible :purchase_solicitation_budget_allocations_attributes, :budget_structure_id
+  attr_accessible :accounting_year, :request_date, :responsible_id, :kind,
+                  :delivery_location_id, :general_observations, :justification,
+                  :purchase_solicitation_budget_allocations_attributes,
+                  :budget_structure_id
 
   attr_readonly :code
 
@@ -11,23 +12,27 @@ class PurchaseSolicitation < Compras::Model
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
-    :create_helpers => true, :create_scopes => true
+                      :create_helpers => true, :create_scopes => true
 
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => 'responsible_id'
   belongs_to :delivery_location
   belongs_to :liberator, :class_name => 'Employee', :foreign_key => 'liberator_id'
   belongs_to :budget_structure
 
-  has_many :purchase_solicitation_budget_allocations, :dependent => :destroy, :inverse_of => :purchase_solicitation, :order => :id
+  has_many :purchase_solicitation_budget_allocations, :dependent => :destroy,
+           :inverse_of => :purchase_solicitation, :order => :id
   has_many :items, :through => :purchase_solicitation_budget_allocations
-  has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations, :dependent => :restrict
+  has_many :budget_allocations, :through => :purchase_solicitation_budget_allocations,
+           :dependent => :restrict
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence
-  has_many :purchase_solicitation_item_group_material_purchase_solicitations, :dependent => :destroy
+  has_many :purchase_solicitation_item_group_material_purchase_solicitations,
+           :dependent => :destroy
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
-  delegate :amount, :description, :id, :to => :budget_allocation, :prefix => true, :allow_nil => true
+  delegate :amount, :description, :id, :to => :budget_allocation,
+           :prefix => true, :allow_nil => true
 
   validates :request_date, :responsible, :delivery_location, :presence => true
   validates :accounting_year, :kind, :delivery_location, :presence => true
