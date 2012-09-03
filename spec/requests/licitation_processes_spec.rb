@@ -126,8 +126,8 @@ feature "LicitationProcesses" do
     expect(page).to_not have_content 'IBM'
   end
 
-  scenario 'generate calculation between a small company and a big company' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company)
+  scenario 'generate calculation between a small company and a big company without consider law of proposals' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => false)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
 
@@ -149,7 +149,7 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '9,10'
       expect(page).to have_content '18,20'
-      expect(page).to have_content 'Ganhou'
+      expect(page).to have_content 'Perdeu'
     end
 
     expect(page).to have_content 'IBM'
@@ -158,7 +158,79 @@ feature "LicitationProcesses" do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '9,00'
       expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
+    end
+  end
+
+  scenario 'generate calculation between a small company and a big company and consider law of proposals' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2, :consider_law_of_proposals => true)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
       expect(page).to have_content 'Perdeu'
+    end
+  end
+
+  scenario 'generate calculation between a small company and a big company and consider law of proposals' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Empatou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Empatou'
     end
   end
 

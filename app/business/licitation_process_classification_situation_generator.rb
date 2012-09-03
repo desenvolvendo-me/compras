@@ -6,6 +6,7 @@ class LicitationProcessClassificationSituationGenerator
 
   delegate :licitation_process_bidders, :all_licitation_process_classifications,
            :administrative_process_presence_trading?, :lots_with_items, :items,
+           :consider_law_of_proposals,
            :to => :licitation_process, :allow_nil => true
 
   def initialize(licitation_process)
@@ -36,28 +37,56 @@ class LicitationProcessClassificationSituationGenerator
     end
 
     classifications.reject { |c| c == first }.each do |classification|
-      total_value = classification.benefited_value(current_percentage)
-
-      if total_value == first.total_value
-        first.equalized!
-
-        classification.equalized!
-      elsif total_value < first.total_value
-        first.lost!
-        first.save!
-
-        classification.won!
-        classification.save!
-
-        first = classification
+      if first.benefited && classification.benefited || !first.benefited && !classification.benefited || !consider_law_of_proposals
+        first = classificate_by_same_company_size(first, classification)
       else
-        first.won!
-        classification.lost!
+        first = classificate_by_different_company_size(first, classification)
       end
-
-      first.save!
-      classification.save!
     end
+  end
+
+  def classificate_by_same_company_size(first, classification)
+    if classification.total_value == first.total_value
+      first.equalized!
+      classification.equalized!
+    elsif classification.total_value < first.total_value
+      first.lost!
+      classification.won!
+    else
+      first.won!
+      classification.lost!
+    end
+
+    first.save!
+    classification.save!
+
+    first
+  end
+
+  # should equalize if benefited company has until 10% difference of big company proposal
+  def classificate_by_different_company_size(first, classification)
+    first_benefited_value = first.benefited_value(current_percentage)
+    classification_benefited_value = classification.benefited_value(current_percentage)
+
+    if (first.benefited && first.total_value > classification.total_value && first_benefited_value <= classification.total_value) ||
+      (classification.benefited && classification.total_value > first.total_value && classification_benefited_value <= first.total_value) ||
+      (first_benefited_value == classification_benefited_value)
+
+      first.equalized!
+      classification.equalized!
+
+    elsif first_benefited_value < classification_benefited_value
+      first.won!
+      classification.lost!
+    else
+      classification.won!
+      first.lost!
+    end
+
+    classification.save!
+    first.save!
+
+    first
   end
 
   def change_proposal_situation_by_bidder!

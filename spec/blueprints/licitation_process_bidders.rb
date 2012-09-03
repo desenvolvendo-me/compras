@@ -95,3 +95,25 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_7) do
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_7)] }
   technical_score { 100 }
 end
+
+LicitationProcessBidder.blueprint(:licitante_com_proposta_8) do
+  creditor { Creditor.make!(:nohup) }
+  invited { true }
+  protocol { "123456" }
+  protocol_date { Date.current }
+  receipt_date { Date.tomorrow }
+  documents { [LicitationProcessBidderDocument.make!(:documento)] }
+  proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_4)] }
+  technical_score { 100 }
+end
+
+LicitationProcessBidder.blueprint(:licitante_com_proposta_9) do
+  creditor { Creditor.make!(:ibm) }
+  invited { true }
+  protocol { "123456" }
+  protocol_date { Date.current }
+  receipt_date { Date.tomorrow }
+  documents { [LicitationProcessBidderDocument.make!(:documento)] }
+  proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_3)] }
+  technical_score { 100 }
+end

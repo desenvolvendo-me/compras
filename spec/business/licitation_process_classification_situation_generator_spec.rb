@@ -11,7 +11,8 @@ describe LicitationProcessClassificationSituationGenerator do
       :licitation_process_bidders => [bidder],
       :lots_with_items => [lot],
       :items => [],
-      :administrative_process_presence_trading? => false
+      :administrative_process_presence_trading? => false,
+      :consider_law_of_proposals => true
     )
   end
 
@@ -74,8 +75,6 @@ describe LicitationProcessClassificationSituationGenerator do
       classification_1.stub(:total_value => 10, :benefited => false)
       classification_2.stub(:total_value => 10, :benefited => false)
 
-      classification_1.should_receive(:benefited_value).with(10).and_return(10)
-
       classification_1.should_receive(:equalized!).and_return(true)
       classification_2.should_receive(:equalized!).and_return(true)
       classification_1.should_receive(:save!).and_return(true)
@@ -85,10 +84,12 @@ describe LicitationProcessClassificationSituationGenerator do
     end
 
     it 'should change classifications situation to equalized' do
+      licitation_process.stub(:consider_law_of_proposals => true)
       classification_2.stub(:total_value => 9, :benefited => false)
       classification_1.stub(:total_value => 10, :benefited => true)
 
       classification_1.should_receive(:benefited_value).with(10).and_return(9)
+      classification_2.should_receive(:benefited_value).with(10).and_return(9)
 
       classification_1.should_receive(:equalized!).and_return(true)
       classification_2.should_receive(:equalized!).and_return(true)
@@ -102,8 +103,6 @@ describe LicitationProcessClassificationSituationGenerator do
       classification_2.stub(:total_value => 9, :benefited => false)
       classification_1.stub(:total_value => 10, :benefited => false)
 
-      classification_1.should_receive(:benefited_value).with(10).and_return(10)
-
       classification_2.should_receive(:won!).and_return(true)
       classification_1.should_receive(:lost!).and_return(true)
       classification_1.should_receive(:save!).and_return(true)
@@ -113,10 +112,12 @@ describe LicitationProcessClassificationSituationGenerator do
     end
 
     it 'should change classifications to won and lost' do
+      licitation_process.stub(:consider_law_of_proposals => true)
       classification_2.stub(:total_value => 9, :benefited => false)
       classification_1.stub(:total_value => 11, :benefited => true)
 
       classification_1.should_receive(:benefited_value).with(10).and_return(10)
+      classification_2.should_receive(:benefited_value).with(10).and_return(9)
 
       classification_2.should_receive(:won!).and_return(true)
       classification_1.should_receive(:lost!).and_return(true)
@@ -127,14 +128,16 @@ describe LicitationProcessClassificationSituationGenerator do
     end
 
     it 'should change classifications to benefited won' do
-      classification_2.stub(:total_value => 19, :benefited => false)
-      classification_1.stub(:total_value => 20, :benefited => true)
+      licitation_process.stub(:consider_law_of_proposals => true)
+      classification_2.stub(:total_value => 19, :benefited => true)
+      classification_1.stub(:total_value => 20, :benefited => false)
 
-      classification_1.should_receive(:benefited_value).with(10).and_return(18)
+      classification_1.should_receive(:benefited_value).with(10).and_return(19)
+      classification_2.should_receive(:benefited_value).with(10).and_return(20)
 
       classification_1.should_receive(:won!).and_return(true)
       classification_2.should_receive(:lost!).and_return(true)
-      classification_1.should_receive(:save!).exactly(3).times.and_return(true)
+      classification_1.should_receive(:save!).and_return(true)
       classification_2.should_receive(:save!).and_return(true)
 
       generator.generate!
