@@ -37,6 +37,44 @@ feature "LicitationProcesses" do
     expect(page).to_not have_content 'IBM'
   end
 
+  # É CONSIDERADO EMPATE NAS PROPOSTAS FINANCEIRAS, MESMO QUE A ME OU EPP TENHA COTADO SEUS PREÇOS 10% ACIMA DO PRIMEIRO COLOCADO
+  # DESDE QUE O PRIMEIRO COLOCADO NÃO SEJA UMA ME OU EPP.
+  scenario 'a benefit company must win the same amount 10% higher than a company does not benefit from the law.' do
+    licitation_process = LicitationProcess.make!(:benefited_company_win_over_not_benefited_company, :consider_law_of_proposals => true)
+    LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
+                               :administrative_process_budget_allocation_items => [licitation_process.items.first])
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço por lote'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '11,50'
+      expect(page).to have_content '23,00'
+      expect(page).to have_content 'Empatou'
+    end
+
+    within '.classification-1-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '11,00'
+      expect(page).to have_content '22,00'
+      expect(page).to have_content 'Empatou'
+    end
+  end
+
   scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
