@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/capability_source'
+require 'app/models/tce_specification_capability'
 
 describe CapabilitySource do
   it 'should return name as to_s' do
