@@ -29,10 +29,6 @@ class JudgmentFormLicitationKindByObjectType
   end
 
   def valid_licitation_kind?(object_type, licitation_kind)
-    if licitation_kind_groups.include?(object_type)
-      return licitation_kind_groups[object_type].include?(licitation_kind)
-    end
-
-    false
+    licitation_kind_groups.include?(object_type) && licitation_kind_groups[object_type].include?(licitation_kind)
   end
 end
