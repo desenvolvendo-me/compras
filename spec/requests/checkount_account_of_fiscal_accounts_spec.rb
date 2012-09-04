@@ -7,7 +7,7 @@ feature "CheckountAccountOfFiscalAccounts" do
   end
 
   scenario 'create a new checkount_account_of_fiscal_account' do
-    navigate 'Contabilidade > Comum > Plano de Contas > Contas Corrente da Conta Contábil'
+    navigate 'Contabilidade > Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Criar Conta Corrente da Conta Contábil'
 
@@ -31,7 +31,7 @@ feature "CheckountAccountOfFiscalAccounts" do
   scenario 'update an existent checkount_account_of_fiscal_account' do
     CheckountAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Contas Corrente da Conta Contábil'
+    navigate 'Contabilidade > Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Disponibilidade financeira'
 
@@ -55,7 +55,7 @@ feature "CheckountAccountOfFiscalAccounts" do
   scenario 'destroy an existent checkount_account_of_fiscal_account' do
     CheckountAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Contas Corrente da Conta Contábil'
+    navigate 'Contabilidade > Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Disponibilidade financeira'
 

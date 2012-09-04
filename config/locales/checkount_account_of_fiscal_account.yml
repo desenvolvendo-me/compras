@@ -3,7 +3,7 @@ pt-BR:
     models:
       checkount_account_of_fiscal_account:
         one: "Conta Corrente da Conta Contábil"
-        other: "Contas Corrente da Conta Contábil"
+        other: "Contas Correntes das Contas Contabéis"
 
     attributes:
       checkount_account_of_fiscal_account:
