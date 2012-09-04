@@ -9,6 +9,8 @@ class Creditor < Compras::Model
 
   attr_accessor :name, :cpf, :cnpj
 
+  attr_modal :name, :cpf, :cnpj
+
   has_enumeration_for :creditable_type, :create_helpers => true
 
   belongs_to :main_cnae, :class_name => 'Cnae'
