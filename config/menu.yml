@@ -60,6 +60,7 @@ menu:
         - checking_account_structure_informations
         - checking_account_of_fiscal_accounts
         - account_plan_configurations
+        - checking_account_structures
 
       - bank_accounts
       - contracts

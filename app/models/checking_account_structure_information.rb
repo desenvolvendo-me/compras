@@ -3,6 +3,8 @@ class CheckingAccountStructureInformation < Compras::Model
 
   belongs_to :capability_source
 
+  has_many :checking_account_structures, :dependent => :restrict
+
   validates :name, :tce_code, :presence => true
 
   orderize

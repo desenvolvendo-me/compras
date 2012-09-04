@@ -10,4 +10,6 @@ describe CheckingAccountOfFiscalAccount do
   it { should validate_presence_of :tce_code }
   it { should validate_presence_of :name }
   it { should validate_presence_of :main_tag }
+
+  it { should have_many(:checking_account_structures).dependent(:restrict) }
 end

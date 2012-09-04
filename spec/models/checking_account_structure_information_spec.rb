@@ -11,4 +11,6 @@ describe CheckingAccountStructureInformation do
   it { should validate_presence_of :tce_code }
 
   it { should belong_to :capability_source }
+
+  it { should have_many(:checking_account_structures).dependent(:restrict) }
 end
