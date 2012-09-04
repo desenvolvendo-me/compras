@@ -83,7 +83,7 @@ class LicitationProcessBidder < Compras::Model
     false
   end
 
-  def has_proposals_unit_price_greater_than_budget_allocation_item_unit_price
+  def has_proposals_unit_price_greater_than_budget_allocation_item_unit_price?
     proposals.select(&:unit_price_greater_than_budget_allocation_item_unit_price?).any?
   end
 

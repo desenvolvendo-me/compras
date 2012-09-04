@@ -39,7 +39,7 @@ class LicitationProcessClassificationBiddersVerifier
     return unless disqualify_by_maximum_value
 
     licitation_process_bidders.each do |bidder|
-      if bidder.has_proposals_unit_price_greater_than_budget_allocation_item_unit_price
+      if bidder.has_proposals_unit_price_greater_than_budget_allocation_item_unit_price?
         bidder.inactive!
         bidder.save!
       end
