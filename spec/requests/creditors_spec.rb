@@ -6,7 +6,7 @@ feature "Creditors" do
     sign_in
   end
 
-  scenario 'creditor filter by person or special entry' do
+   scenario 'creditor filter by person or special entry' do
     Creditor.make!(:nohup)
     Creditor.make!(:special)
 
@@ -17,12 +17,35 @@ feature "Creditors" do
     click_button 'Pesquisar'
 
     expect(page).to have_link 'Nohup'
+    expect(page).to_not have_link 'Tal'
 
     click_link 'Filtrar Credores'
     fill_in 'Nome', :with => 'Tal'
     click_button 'Pesquisar'
 
     expect(page).to have_link 'Tal'
+    expect(page).to_not have_link 'Nohup'
+  end
+
+   scenario 'creditor filter by CNPJ or CPF' do
+    Creditor.make!(:nohup)
+    Creditor.make!(:sobrinho)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Credores'
+
+    click_link 'Filtrar Credores'
+    fill_in 'CPF', :with => '003.151.987-37'
+    click_button 'Pesquisar'
+
+    expect(page).to_not have_link 'Nohup'
+    expect(page).to have_link 'Gabriel Sobrinho'
+
+    click_link 'Filtrar Credores'
+    fill_in 'CNPJ', :with => '00.000.000/9999-62'
+    click_button 'Pesquisar'
+
+    expect(page).to have_link 'Nohup'
+    expect(page).to_not have_link 'Gabriel Sobrinho'
   end
 
   scenario 'switch type of creditor between special entry and person' do

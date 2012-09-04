@@ -7,9 +7,7 @@ class Creditor < Compras::Model
   attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
   attr_accessible :regularization_or_administrative_sanctions_attributes
 
-  attr_accessor :name
-
-  attr_modal :name
+  attr_accessor :name, :cpf, :cnpj
 
   has_enumeration_for :creditable_type, :create_helpers => true
 
@@ -82,10 +80,13 @@ class Creditor < Compras::Model
 
   def self.filter(params)
     query = scoped
-    query = query.joins { creditable(Person).outer }
+    query = query.joins { creditable(Person).outer.personable(Company).outer }
+    query = query.joins { creditable(Person).outer.personable(Individual).outer }
     query = query.joins { creditable(SpecialEntry).outer }
     query = query.where { creditable(Person).name.matches("#{params[:name]}%") |
-                          creditable(SpecialEntry).name.matches("#{params[:name]}%") }
+                          creditable(SpecialEntry).name.matches("#{params[:name]}%") } unless params[:name].blank?
+    query = query.where { creditable(Person).personable(Individual).cpf.eq(params[:cpf]) } unless params[:cpf].blank?
+    query = query.where { creditable(Person).personable(Company).cnpj.eq(params[:cnpj]) } unless params[:cnpj].blank?
     query
   end
 

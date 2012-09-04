@@ -25,3 +25,5 @@ pt-BR:
         creditable_type: "Tipo de credor"
         creditable: "Inscrição especial"
         name: "Nome"
+        cpf: "CPF"
+        cnpj: "CNPJ"
