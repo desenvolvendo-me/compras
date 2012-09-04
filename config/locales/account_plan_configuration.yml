@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      account_plan_configuration:
+        one: "Configuração de Plano de Contas"
+        other: "Configurações de Plano de Contas"
+
+    attributes:
+      account_plan_configuration:
+        year: "Ano de exercício"
+        state: "Estado"
+        description: "Descrição"

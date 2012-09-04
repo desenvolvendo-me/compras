@@ -1,0 +1,2 @@
+class AccountPlanConfigurationsController < CrudController
+end
