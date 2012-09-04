@@ -19,6 +19,8 @@ gem 'unico', :git => 'git@github.com:nohupbrasil/unico.git'
 gem 'devise', '2.0.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
+gem 'pdfkit', '0.5.2'
+gem 'wkhtmltopdf-binary'
 gem 'simple_form', '2.0.1'
 gem 'will_paginate', '3.0.3'
 

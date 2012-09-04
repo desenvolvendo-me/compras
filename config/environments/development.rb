@@ -6,6 +6,9 @@ Compras::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  config.action_controller.asset_host = "http://0.0.0.0:8080"
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = false
 
@@ -37,4 +40,12 @@ Compras::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
   ActionMailer::Base.default :from => 'noreply@nobesistemas.com.br'
+
+  PDFKit.configure do |config|
+    config.default_options = {
+      :page_size => 'Legal',
+      :print_media_type => true
+    }
+    config.root_url = "http://0.0.0.0:8080"
+  end
 end

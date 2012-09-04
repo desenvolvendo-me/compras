@@ -43,7 +43,7 @@ Compras::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = "https://staging.compras.nobesistemas.com.br"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( devise.css report.css )
@@ -64,4 +64,11 @@ Compras::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  PDFKit.configure do |config|
+    config.default_options = {
+      :page_size => 'Legal',
+      :print_media_type => true
+    }
+  end
 end

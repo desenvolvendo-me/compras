@@ -66,4 +66,11 @@ Compras::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   ActionMailer::Base.default :from => 'noreply@nobesistemas.com.br'
+
+  PDFKit.configure do |config|
+    config.default_options = {
+      :page_size => 'Legal',
+      :print_media_type => true
+    }
+  end
 end
