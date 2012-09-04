@@ -63,9 +63,6 @@ feature "CheckountAccountOfFiscalAccounts" do
 
     expect(page).to have_notice 'Conta Corrente da Conta Contábil apagado com sucesso.'
 
-    expect(page).to_not have_content 'tce_code'
-    expect(page).to_not have_content 'name'
-    expect(page).to_not have_content 'main_tag'
-    expect(page).to_not have_content 'function'
+    expect(page).to_not have_content 'Disponibilidade financeira'
   end
 end
