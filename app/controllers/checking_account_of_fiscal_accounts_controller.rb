@@ -1,0 +1,2 @@
+class CheckingAccountOfFiscalAccountsController < CrudController
+end

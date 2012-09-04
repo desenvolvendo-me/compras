@@ -58,7 +58,7 @@ menu:
 
       - account_plan:
         - structure_account_informations
-        - checkount_account_of_fiscal_accounts
+        - checking_account_of_fiscal_accounts
 
       - bank_accounts
       - contracts

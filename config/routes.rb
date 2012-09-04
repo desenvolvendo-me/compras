@@ -22,7 +22,7 @@ Compras::Application.routes.draw do
 
   resources :contract_terminations, :except => [:show, :destroy]
 
-  resources :checkount_account_of_fiscal_accounts do
+  resources :checking_account_of_fiscal_accounts do
     collection do
       get :filter
       get :modal

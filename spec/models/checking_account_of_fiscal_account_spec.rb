@@ -1,7 +1,7 @@
 require 'model_helper'
-require 'app/models/checkount_account_of_fiscal_account'
+require 'app/models/checking_account_of_fiscal_account'
 
-describe CheckountAccountOfFiscalAccount do
+describe CheckingAccountOfFiscalAccount do
   it 'should return name as to_s' do
     subject.name = 'Disponibilidade financeira'
     expect(subject.to_s).to eq 'Disponibilidade financeira'

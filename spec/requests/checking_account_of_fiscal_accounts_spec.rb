@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "CheckountAccountOfFiscalAccounts" do
+feature "CheckingAccountOfFiscalAccounts" do
   background do
     sign_in
   end
 
-  scenario 'create a new checkount_account_of_fiscal_account' do
+  scenario 'create a new checking_account_of_fiscal_account' do
     navigate 'Contabilidade > Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Criar Conta Corrente da Conta Contábil'
@@ -28,8 +28,8 @@ feature "CheckountAccountOfFiscalAccounts" do
     expect(page).to have_field 'Função', :with => 'Detalhar as movimentações financeiras'
   end
 
-  scenario 'update an existent checkount_account_of_fiscal_account' do
-    CheckountAccountOfFiscalAccount.make!(:disponibilidade_financeira)
+  scenario 'update an existent checking_account_of_fiscal_account' do
+    CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
     navigate 'Contabilidade > Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
 
@@ -52,8 +52,8 @@ feature "CheckountAccountOfFiscalAccounts" do
     expect(page).to have_field 'Função', :with => 'Detalhar as movimentações dos recursos'
   end
 
-  scenario 'destroy an existent checkount_account_of_fiscal_account' do
-    CheckountAccountOfFiscalAccount.make!(:disponibilidade_financeira)
+  scenario 'destroy an existent checking_account_of_fiscal_account' do
+    CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
     navigate 'Contabilidade > Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
 
