@@ -1,14 +1,14 @@
 class LicitationProcessClassificationGenerator
 
-  attr_accessor :licitation_process, :licitation_process_classification_repository
+  attr_accessor :licitation_process, :classification_repository
 
-  delegate :type_of_calculation, :licitation_process_bidders, :lots_with_items, :items,
+  delegate :type_of_calculation, :licitation_process_bidders, :lots_with_items,
            :all_licitation_process_classifications,
            :to => :licitation_process, :allow_nil => true
 
-  def initialize(licitation_process, licitation_process_classification_repository = LicitationProcessClassification)
+  def initialize(licitation_process, classification_repository = LicitationProcessClassification)
     self.licitation_process = licitation_process
-    self.licitation_process_classification_repository = licitation_process_classification_repository
+    self.classification_repository = classification_repository
   end
 
   def generate!
@@ -36,7 +36,7 @@ class LicitationProcessClassificationGenerator
 
   def lowest_total_price_by_item(bidder)
     bidder.proposals.each do |proposal|
-      licitation_process_classification_repository.create!(
+      classification_repository.create!(
         :unit_value => proposal.unit_price,
         :total_value => proposal.unit_price * proposal.quantity,
         :classification => bidder.classification_by_item(proposal),
@@ -47,7 +47,7 @@ class LicitationProcessClassificationGenerator
   end
 
   def lowest_global_price(bidder)
-    licitation_process_classification_repository.create!(
+    classification_repository.create!(
       :total_value => bidder.total_price,
       :classification => bidder.global_classification,
       :licitation_process_bidder => bidder,
@@ -57,7 +57,7 @@ class LicitationProcessClassificationGenerator
 
   def lowest_price_by_lot(bidder)
     lots_with_items.each do |lot|
-      licitation_process_classification_repository.create!(
+      classification_repository.create!(
         :total_value => bidder.proposal_total_value_by_lot(lot),
         :classification => bidder.classification_by_lot(lot),
         :licitation_process_bidder => bidder,

@@ -18,7 +18,7 @@ describe LicitationProcessClassificationGenerator do
     )
   end
 
-  let :licitation_process_classification_repository do
+  let :classification_repository do
     double('LicitationProcessClassification')
   end
 
@@ -57,7 +57,7 @@ describe LicitationProcessClassificationGenerator do
   end
 
   let :generator do
-    LicitationProcessClassificationGenerator.new(licitation_process, licitation_process_classification_repository)
+    LicitationProcessClassificationGenerator.new(licitation_process, classification_repository)
   end
 
   context 'generate classifications by type of calculation' do
@@ -70,7 +70,7 @@ describe LicitationProcessClassificationGenerator do
 
       bidder.should_receive(:classification_by_item).with(proposals.first).and_return(1)
 
-      licitation_process_classification_repository.should_receive(:create!).with(
+      classification_repository.should_receive(:create!).with(
         :unit_value => 8, :total_value => 40, :classification => 1, :licitation_process_bidder => bidder, :classifiable => item)
 
       generator.generate!
@@ -82,7 +82,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.should_receive(:global_classification).and_return(1)
       bidder.should_receive(:total_price).and_return(50)
 
-      licitation_process_classification_repository.should_receive(:create!).with(
+      classification_repository.should_receive(:create!).with(
         :total_value => 50, :classification => 1, :licitation_process_bidder => bidder, :classifiable => bidder)
 
       generator.generate!
@@ -94,7 +94,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.should_receive(:classification_by_lot).with(lot).and_return(1)
       bidder.should_receive(:proposal_total_value_by_lot).with(lot).and_return(100)
 
-      licitation_process_classification_repository.should_receive(:create!).with(
+      classification_repository.should_receive(:create!).with(
         :total_value => 100, :classification => 1, :licitation_process_bidder => bidder, :classifiable => lot)
 
       generator.generate!
