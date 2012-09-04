@@ -11,6 +11,8 @@ class Creditor < Compras::Model
 
   attr_modal :name
 
+  has_enumeration_for :creditable_type, :create_helpers => true
+
   belongs_to :main_cnae, :class_name => 'Cnae'
   belongs_to :occupation_classification
   belongs_to :creditable, :polymorphic => true
@@ -65,7 +67,7 @@ class Creditor < Compras::Model
   accepts_nested_attributes_for :user
 
   validates :creditable, :presence => true
-  validates :creditable_id, :uniqueness => { :scope => :creditable_type }, :if => :person
+  validates :creditable_id, :uniqueness => { :scope => :creditable_type }, :allow_blank => true
   validates :contract_start_date, :timeliness => { :type => :date }, :allow_blank => true
   validates :contract_start_date, :social_identification_number, :presence => true, :if => :autonomous?
   validates :main_cnae, :presence => true, :if => :company?
@@ -92,7 +94,7 @@ class Creditor < Compras::Model
   end
 
   def person
-    creditable if creditable_type && creditable_type == 'Person'
+    creditable if person?
   end
 
   def selected_cnaes

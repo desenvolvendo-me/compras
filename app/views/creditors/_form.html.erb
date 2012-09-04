@@ -1,6 +1,4 @@
-<%= f.input :creditable_type, :as => :radio_buttons, :disabled => f.object.persisted?,
-            :collection => [['Inscrição especial', 'SpecialEntry'],
-                            ['Pessoa física ou jurídica', 'Person']] %>
+<%= f.input :creditable_type, :as => :radio_buttons, :disabled => f.object.persisted? %>
 
 <%= f.input :creditable, :as => :modal, :disabled => f.object.persisted?, :modal_url => modal_special_entries_path  %>
 

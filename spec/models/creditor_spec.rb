@@ -189,13 +189,13 @@ describe Creditor do
     end
 
     it 'should return person' do
-      subject.stub(:creditable => person, :creditable_type => 'Person')
+      subject.stub(:creditable => person, :person? => true)
 
       expect(subject.person).to eq person
     end
 
     it 'should return nil' do
-      subject.stub(:creditable => double, :creditable_type => 'SpecialEntry')
+      subject.stub(:creditable => double, :person? => false)
 
       expect(subject.person).to be nil
     end

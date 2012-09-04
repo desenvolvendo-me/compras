@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    creditable_type:
+      person: "Pessoa física ou jurídica"
+      special_entry: "Inscrição especial"
