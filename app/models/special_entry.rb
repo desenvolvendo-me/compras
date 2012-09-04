@@ -3,7 +3,7 @@ class SpecialEntry < Compras::Model
 
   has_many :creditors, :as => :creditable, :dependent => :restrict
 
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => true
 
   orderize
   filterize
