@@ -1,7 +1,7 @@
 require 'model_helper'
 require 'app/models/capability_source'
 require 'app/models/tce_specification_capability'
-require 'app/models/structure_account_information'
+require 'app/models/checking_account_structure_information'
 
 describe CapabilitySource do
   it 'should return name as to_s' do
@@ -15,5 +15,5 @@ describe CapabilitySource do
   it { should validate_presence_of :source }
 
   it { should have_many :tce_specification_capabilities }
-  it { should have_many :structure_account_informations }
+  it { should have_many :checking_account_structure_informations }
 end

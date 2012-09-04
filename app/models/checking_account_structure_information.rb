@@ -1,4 +1,4 @@
-class StructureAccountInformation < Compras::Model
+class CheckingAccountStructureInformation < Compras::Model
   attr_accessible :name, :tce_code, :capability_source_id
 
   belongs_to :capability_source

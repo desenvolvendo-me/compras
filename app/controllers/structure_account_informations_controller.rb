@@ -1,2 +1,0 @@
-class StructureAccountInformationsController < CrudController
-end

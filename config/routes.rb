@@ -36,6 +36,13 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :checking_account_structure_informations do
+    collection do
+      get :filter
+      get :modal
+    end
+  end
+
   resources :creditors do
     collection do
       get :filter
@@ -880,13 +887,6 @@ Compras::Application.routes.draw do
     collection do
       get :modal
       get :filter
-    end
-  end
-
-  resources :structure_account_informations do
-    collection do
-      get :filter
-      get :modal
     end
   end
 

@@ -1,0 +1,2 @@
+class CheckingAccountStructureInformationsController < CrudController
+end

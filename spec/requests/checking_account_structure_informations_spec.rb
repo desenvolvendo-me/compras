@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "StructureAccountInformations" do
+feature "CheckingAccountStructureInformations" do
   background do
     sign_in
   end
 
-  scenario 'create a new structure_account_information' do
+  scenario 'create a new checking_account_structure' do
     CapabilitySource.make!(:imposto)
 
     navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
@@ -28,8 +28,8 @@ feature "StructureAccountInformations" do
     expect(page).to have_field 'Fonte de recurso', :with => 'Imposto'
   end
 
-  scenario 'update an existent structure_account_information' do
-    StructureAccountInformation.make!(:fonte_de_recursos)
+  scenario 'update an existent checking_account_structure' do
+    CheckingAccountStructureInformation.make!(:fonte_de_recursos)
     CapabilitySource.make!(:transferencia)
 
     navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
@@ -51,8 +51,8 @@ feature "StructureAccountInformations" do
     expect(page).to have_field 'Fonte de recurso', :with => 'Transferência'
   end
 
-  scenario 'destroy an existent structure_account_information' do
-    StructureAccountInformation.make!(:fonte_de_recursos)
+  scenario 'destroy an existent checking_account_structure' do
+    CheckingAccountStructureInformation.make!(:fonte_de_recursos)
 
     navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
 
