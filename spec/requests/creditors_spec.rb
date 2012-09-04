@@ -6,7 +6,7 @@ feature "Creditors" do
     sign_in
   end
 
-   scenario 'creditor filter by person or special entry' do
+  scenario 'creditor filter by person or special entry' do
     Creditor.make!(:nohup)
     Creditor.make!(:special)
 
@@ -27,7 +27,7 @@ feature "Creditors" do
     expect(page).to_not have_link 'Nohup'
   end
 
-   scenario 'creditor filter by CNPJ or CPF' do
+  scenario 'creditor filter by CNPJ or CPF' do
     Creditor.make!(:nohup)
     Creditor.make!(:sobrinho)
 
