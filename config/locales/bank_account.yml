@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       bank_account:
-        one: "Conta Bancária / Convênio"
-        other: "Contas Bancárias / Convênios"
+        one: "Conta Bancária"
+        other: "Contas Bancárias"
 
     attributes:
       bank_account:

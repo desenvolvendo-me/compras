@@ -9,9 +9,9 @@ feature "BankAccounts" do
   scenario 'create a new bank_account' do
     Agency.make!(:itau)
 
-    navigate 'Contabilidade > Comum > Contas Bancárias / Convênios'
+    navigate 'Contabilidade > Comum > Contas Bancárias'
 
-    click_link 'Criar Conta Bancária / Convênio'
+    click_link 'Criar Conta Bancária'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Status'
@@ -37,7 +37,7 @@ feature "BankAccounts" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Conta Bancária / Convênio criado com sucesso.'
+    expect(page).to have_notice 'Conta Bancária criado com sucesso.'
 
     click_link 'IPTU'
 
@@ -56,7 +56,7 @@ feature "BankAccounts" do
   scenario 'update an existent bank_account' do
     BankAccount.make!(:itau_tributos)
 
-    navigate 'Contabilidade > Comum > Contas Bancárias / Convênios'
+    navigate 'Contabilidade > Comum > Contas Bancárias'
 
     click_link 'Itaú Tributos'
 
@@ -70,7 +70,7 @@ feature "BankAccounts" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Conta Bancária / Convênio editado com sucesso.'
+    expect(page).to have_notice 'Conta Bancária editado com sucesso.'
 
     click_link 'IPTU'
 
@@ -85,9 +85,9 @@ feature "BankAccounts" do
   scenario 'when fill/clear agency should fill/clear related fields' do
     Agency.make!(:itau)
 
-    navigate 'Contabilidade > Comum > Contas Bancárias / Convênios'
+    navigate 'Contabilidade > Comum > Contas Bancárias'
 
-    click_link 'Criar Conta Bancária / Convênio'
+    click_link 'Criar Conta Bancária'
 
     within_tab 'Principal' do
       fill_modal 'Agência', :with => 'Agência Itaú'
@@ -107,9 +107,9 @@ feature "BankAccounts" do
   scenario 'when clear bank should clear agency too' do
     Agency.make!(:itau)
 
-    navigate 'Contabilidade > Comum > Contas Bancárias / Convênios'
+    navigate 'Contabilidade > Comum > Contas Bancárias'
 
-    click_link 'Criar Conta Bancária / Convênio'
+    click_link 'Criar Conta Bancária'
 
     within_tab 'Principal' do
       fill_modal 'Banco', :with => 'Itaú'
@@ -127,9 +127,9 @@ feature "BankAccounts" do
   scenario 'when select agency before bank, bank should fill bank' do
     Agency.make!(:itau)
 
-    navigate 'Contabilidade > Comum > Contas Bancárias / Convênios'
+    navigate 'Contabilidade > Comum > Contas Bancárias'
 
-    click_link 'Criar Conta Bancária / Convênio'
+    click_link 'Criar Conta Bancária'
 
     within_tab 'Principal' do
       fill_modal 'Agência', :with => 'Agência Itaú'
@@ -141,9 +141,9 @@ feature "BankAccounts" do
   scenario 'when fill bank and submit form with errors should return with bank' do
     Agency.make!(:itau)
 
-    navigate 'Contabilidade > Comum > Contas Bancárias / Convênios'
+    navigate 'Contabilidade > Comum > Contas Bancárias'
 
-    click_link 'Criar Conta Bancária / Convênio'
+    click_link 'Criar Conta Bancária'
 
     within_tab 'Principal' do
       fill_modal 'Banco', :with => 'Itaú'
@@ -159,13 +159,13 @@ feature "BankAccounts" do
   scenario 'destroy an existent bank_account' do
     BankAccount.make!(:itau_tributos)
 
-    navigate 'Contabilidade > Comum > Contas Bancárias / Convênios'
+    navigate 'Contabilidade > Comum > Contas Bancárias'
 
     click_link 'Itaú Tributos'
 
     click_link 'Apagar', :confirm => true
 
-    expect(page).to have_notice 'Conta Bancária / Convênio apagado com sucesso.'
+    expect(page).to have_notice 'Conta Bancária apagado com sucesso.'
 
     expect(page).not_to have_content 'Itaú Tributos'
   end
