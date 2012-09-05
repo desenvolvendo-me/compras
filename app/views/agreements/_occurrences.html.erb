@@ -2,7 +2,7 @@
   <input type="button" class="button affirmative add-agreement-occurrences" value="Adicionar Ocorrência">
 </p>
 
-<div id="agreement-occurrences" class="nested-form" data-nested-form="agreement-occurrences">
+<div id="agreement-occurrences" class="nested-form" data-nested-form="agreement-occurrences" data-right="true">
   <%= f.association :agreement_occurrences, :collection => localized(f.object.agreement_occurrences) do |o| %>
     <%= render 'agreement_occurrences/form', :f => o %>
   <% end %>
