@@ -225,7 +225,7 @@ feature "Agreements" do
     end
 
     within_tab 'Ocorrências' do
-      click_button 'Remover Ocorrência'
+      click_button 'Remover'
 
       click_button 'Adicionar Ocorrência'
 
