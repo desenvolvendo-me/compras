@@ -86,9 +86,9 @@ class Creditor < Compras::Model
     query = query.joins { creditable(Person).outer.personable(Individual).outer }
     query = query.joins { creditable(SpecialEntry).outer }
     query = query.where { creditable(Person).name.matches("#{params[:name]}%") |
-                          creditable(SpecialEntry).name.matches("#{params[:name]}%") } unless params[:name].blank?
-    query = query.where { creditable(Person).personable(Individual).cpf.eq(params[:cpf]) } unless params[:cpf].blank?
-    query = query.where { creditable(Person).personable(Company).cnpj.eq(params[:cnpj]) } unless params[:cnpj].blank?
+                          creditable(SpecialEntry).name.matches("#{params[:name]}%") } if params[:name].present?
+    query = query.where { creditable(Person).personable(Individual).cpf.eq(params[:cpf]) } if params[:cpf].present?
+    query = query.where { creditable(Person).personable(Company).cnpj.eq(params[:cnpj]) } if params[:cnpj].present?
     query
   end
 
