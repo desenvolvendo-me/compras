@@ -519,7 +519,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'update an existent purchase_solicitation' do
-     PurchaseSolicitation.make!(:reparo)
+    PurchaseSolicitation.make!(:reparo)
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013)
 
     navigate 'Compras e Licitações > Solicitações de Compra'
