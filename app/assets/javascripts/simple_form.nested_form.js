@@ -26,11 +26,13 @@
     var options = $.extend({}, defaults, options);
 
     var displayFirstLabels = function() {
+      if (options.right) {
         $(options.target + " " + options.fieldToRemove + ' label').hide();
         $(options.target + " " + options.fieldToRemove + ' .button').parent().css('padding-top', '4px');
 
         $(options.target + " " + options.fieldToRemove + ':visible:first label').show();
         $(options.target + " " + options.fieldToRemove + ':visible:first .button').parent().css('padding-top', '30px');
+      }
     }
 
     $(options.target).closest('form').on('click', options.add, function () {
@@ -43,23 +45,17 @@
         $(options.target).prepend(template.mustache(binds)).trigger('append.mustache');
       }
 
-      if (options.right) {
-        displayFirstLabels();
-      }
+      displayFirstLabels();
     });
 
     $(options.target).delegate(options.remove, 'click', function () {
       $(this).closest(options.fieldToRemove).hide().find(options.hiddenDestroyInput).val('true');
       $(options.target).trigger('remove.mustache');
 
-      if (options.right) {
-        displayFirstLabels();
-      }
+      displayFirstLabels();
     });
 
-    if (options.right) {
-      displayFirstLabels();
-    }
+    displayFirstLabels();
 
     // hidding the elements marked for destruction
     $(options.fieldToRemove).each(function() {
