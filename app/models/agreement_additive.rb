@@ -6,5 +6,5 @@ class AgreementAdditive < Compras::Model
   belongs_to :agreement
   belongs_to :regulatory_act
 
-  validates :kind, :regulatory_act, :value, :presence => true
+  validates :description, :kind, :regulatory_act, :value, :presence => true
 end
