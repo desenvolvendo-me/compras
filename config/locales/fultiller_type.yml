@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    fulfiller_type:
+      direct_purchase: "Compra direta"
+      administrative_process: "Processo administrativo"

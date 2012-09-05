@@ -36,7 +36,10 @@ class DirectPurchasesController < CrudController
 
   def create_resource(object)
     object.direct_purchase = object.next_purchase
+    object.transaction do
+      super
 
-    super
+      PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
+    end
   end
 end

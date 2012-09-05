@@ -52,4 +52,8 @@ class PurchaseSolicitationItemGroup < Compras::Model
   def annullable?
     editable?
   end
+
+  def purchase_solicitation_items_by_materials
+    purchase_solicitation_item_group_materials.map(&:purchase_solicitation_items_by_material).flatten
+  end
 end

@@ -25,6 +25,7 @@ class DirectPurchase < Compras::Model
 
   has_many :direct_purchase_budget_allocations, :dependent => :destroy, :order => :id
   has_many :items, :through => :direct_purchase_budget_allocations, :class_name => :DirectPurchaseBudgetAllocationItem
+  has_many :purchase_solicitation_budget_allocation_items, :as => :fulfiller
   has_one :supply_authorization, :dependent => :restrict
 
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :allow_destroy => true

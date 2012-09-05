@@ -37,6 +37,13 @@ describe AdministrativeProcessesController do
 
       expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::WAITING
     end
+
+    it 'should assign the fulfill of purchase_solicitation_budget_allocation_item' do
+      AdministrativeProcess.any_instance.stub(:transaction).and_yield
+      PurchaseSolicitationBudgetAllocationItemFulfiller.any_instance.should_receive(:fulfill)
+
+      post :create
+    end
   end
 
   describe "PUT #update" do

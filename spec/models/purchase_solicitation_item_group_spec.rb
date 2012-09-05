@@ -128,4 +128,22 @@ describe PurchaseSolicitationItemGroup do
       expect(subject).to be_annullable
     end
   end
+
+  context "#purchase_solicitation_items_by_material" do
+    let :group_material_1 do
+      double(:group_material,
+             :purchase_solicitation_items_by_material => [1, 2])
+    end
+
+    let :group_material_2 do
+      double(:group_material,
+             :purchase_solicitation_items_by_material => [3, 4])
+    end
+
+    it "should return all the purchase solicitation items with the same materials of the items in this group" do
+      subject.stub(:purchase_solicitation_item_group_materials).and_return([group_material_1, group_material_2])
+      expect(subject.purchase_solicitation_items_by_materials).to eq [1, 2, 3, 4]
+    end
+  end
+
 end

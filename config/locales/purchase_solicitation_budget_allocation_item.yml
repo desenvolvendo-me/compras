@@ -14,3 +14,4 @@ pt-BR:
         unit_price: "Valor unitário"
         estimated_total_price: "Valor total"
         order: "Item"
+        fulfiller: "Atendido por"

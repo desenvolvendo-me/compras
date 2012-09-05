@@ -24,17 +24,21 @@ describe DirectPurchasesController do
     expect(assigns(:direct_purchase).year).to eq Date.current.year
   end
 
-  context 'next direct purchase' do
-    let :direct_purchase do
-      DirectPurchase.make!(:compra)
-    end
-
+  context 'POST #create' do
     it 'should assign the direct purchase' do
+      direct_purchase = DirectPurchase.make!(:compra)
       DirectPurchase.any_instance.stub(:next_purchase).and_return(2)
 
       post :create
 
       expect(assigns(:direct_purchase).direct_purchase).to eq 2
+    end
+
+    it 'should assign the fulfill of purchase_solicitation_budget_allocation_item' do
+      DirectPurchase.any_instance.stub(:transaction).and_yield
+      PurchaseSolicitationBudgetAllocationItemFulfiller.any_instance.should_receive(:fulfill)
+
+      post :create
     end
   end
 

@@ -41,4 +41,14 @@ class AdministrativeProcessesController < CrudController
       redirect_to edit_administrative_process_path(resource)
     end
   end
+
+  protected
+
+  def create_resource(object)
+    object.transaction do
+      super
+
+      PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
+    end
+  end
 end

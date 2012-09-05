@@ -9,6 +9,7 @@ require 'app/models/purchase_solicitation_item_group'
 require 'app/models/supply_authorization'
 require 'app/models/modality_limit'
 require 'app/business/direct_purchase_modality_limit_verificator'
+require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe DirectPurchase do
   it 'should return direct_purchase/year as to_s method' do
@@ -28,6 +29,7 @@ describe DirectPurchase do
   it { should belong_to :purchase_solicitation_item_group }
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
+  it { should have_many(:purchase_solicitation_budget_allocation_items) }
   it { should have_one(:supply_authorization).dependent(:restrict) }
   it { should validate_duplication_of(:budget_allocation_id).on(:direct_purchase_budget_allocations) }
 

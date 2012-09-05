@@ -697,4 +697,52 @@ feature "AdministrativeProcesses" do
       end
     end
   end
+
+  scenario 'assigns a fulfiller to the purchase solicitation budget allocation item when assign a purchase_solicitation_item_group to administrative_process' do
+    BudgetStructure.make!(:secretaria_de_educacao)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    Employee.make!(:sobrinho)
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+
+      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      select 'Aguardando', :from => 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+    end
+  end
 end
