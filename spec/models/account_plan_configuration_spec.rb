@@ -2,6 +2,8 @@ require 'model_helper'
 require 'app/models/account_plan_configuration'
 
 describe AccountPlanConfiguration do
+  it { should belong_to :state }
+
   it { should validate_presence_of :description }
   it { should validate_presence_of :state }
   it { should validate_presence_of :year }
