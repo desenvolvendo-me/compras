@@ -26,11 +26,11 @@
     var options = $.extend({}, defaults, options);
 
     var displayFirstLabels = function() {
-      $(options.target + ' .nested label').hide();
-      $(options.target + ' .nested label').closest('.nested').find('.nested-remove').css('padding-top', '4px');
+        $(options.target + " " + options.fieldToRemove + ' label').hide();
+        $(options.target + " " + options.fieldToRemove + ' .button').parent().css('padding-top', '4px');
 
-      $(options.target + " .nested:visible:first label").show();
-      $(options.target + " .nested:visible:first .nested-remove").css('padding-top', '30px');
+        $(options.target + " " + options.fieldToRemove + ':visible:first label').show();
+        $(options.target + " " + options.fieldToRemove + ':visible:first .button').parent().css('padding-top', '30px');
     }
 
     $(options.target).closest('form').on('click', options.add, function () {
