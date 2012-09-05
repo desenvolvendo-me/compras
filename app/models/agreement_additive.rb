@@ -1,5 +1,5 @@
 class AgreementAdditive < Compras::Model
-  attr_accessible :kind, :regulatory_act_id, :value, :description
+  attr_accessible :kind, :regulatory_act_id, :value, :description, :number
 
   has_enumeration_for :kind, :with => AgreementAdditiveKind
 

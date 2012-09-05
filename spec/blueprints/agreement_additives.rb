@@ -4,4 +4,5 @@ AgreementAdditive.blueprint(:termo_de_aditamento) do
   kind { AgreementAdditiveKind::OTHERS }
   value { 100.00 }
   description { 'Termo de aditamento' }
+  number { 1 }
 end

@@ -2,7 +2,15 @@
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <%= f.input :regulatory_act %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-6">
+      <%= f.input :number, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-2">
+      <%= f.input :regulatory_act %>
+    </div>
+  </div>
 
   <div class="yui3-g">
     <div class="yui3-u-1-6">

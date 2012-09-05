@@ -7,6 +7,7 @@ pt-BR:
 
     attributes:
       agreement_additive:
+        number: "Número/Ano"
         kind: "Tipo"
         regulatory_act: "Ato regulamentador"
         value: "Valor"

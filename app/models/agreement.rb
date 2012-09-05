@@ -17,7 +17,7 @@ class Agreement < Compras::Model
   belongs_to :agreement_kind
   belongs_to :regulatory_act
 
-  has_many :agreement_additives, :dependent => :destroy
+  has_many :agreement_additives, :dependent => :destroy, :order => :number
   has_many :agreement_participants, :dependent => :destroy
   has_many :agreement_occurrences, :dependent => :destroy
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
@@ -59,6 +59,10 @@ class Agreement < Compras::Model
     return unless process_number && process_year
 
     [process_number, process_year].join('/')
+  end
+
+  def last_persisted_additive
+    agreement_additives.select(&:persisted?).last
   end
 
   def to_s
