@@ -84,4 +84,24 @@ describe Agreement do
       expect(subject.number_year_process).to eq '234/2008'
     end
   end
+
+  context '#status' do
+    it 'should return inactive if last occurrence kind is inactive' do
+      subject.stub(:agreement_occurrences => [double(:inactive? => true, :date => Date.current + 1.day), double(:inactive? => false, :date => Date.current)])
+
+      expect(subject.status).to eq 'inactive'
+    end
+
+    it 'should return false if last occurrence kind is not inactive' do
+      subject.stub(:agreement_occurrences => [double(:inactive? => false, :date => Date.current), double(:inactive? => false, :date => Date.current)])
+
+      expect(subject.status).to eq 'active'
+    end
+
+    it 'should return false if last occurrence kind is not inactive' do
+      subject.stub(:agreement_occurrences => [double(:inactive? => true, :date => Date.current), double(:inactive? => false, :date => Date.current + 1.day)])
+
+      expect(subject.status).to eq 'active'
+    end
+  end
 end

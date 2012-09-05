@@ -6,6 +6,40 @@ feature "TceSpecificationCapabilities" do
     sign_in
   end
 
+  scenario 'try create a new tce_specification_capability with inactive agreement' do
+    Agreement.make!(:apoio_ao_turismo_inactive)
+
+    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+
+    click_link 'Criar Especificação de Recursos do TCE'
+
+    within_tab 'Convênios' do
+      fill_modal 'Convênios', :with => 'Apoio ao turismo', :field => 'Objeto'
+
+      expect(page).to have_content 'Inativo'
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Convênios' do
+      expect(page).to have_content 'Não deve haver nenhum convênio inativo'
+    end
+  end
+
+  scenario 'agreement should be active if inactive occurrence was not be the last' do
+    Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
+
+    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+
+    click_link 'Criar Especificação de Recursos do TCE'
+
+    within_tab 'Convênios' do
+      fill_modal 'Convênios', :with => 'Apoio ao turismo', :field => 'Objeto'
+
+      expect(page).to have_content 'Ativo'
+    end
+  end
+
   scenario 'create a new tce_specification_capability' do
     CapabilitySource.make!(:imposto)
     ApplicationCode.make!(:geral)
@@ -43,6 +77,7 @@ feature "TceSpecificationCapabilities" do
     within_tab 'Convênios' do
       expect(page).to have_content 'Convênio repassado'
       expect(page).to have_content 'Apoio ao turismo'
+      expect(page).to have_content 'Ativo'
     end
   end
 
@@ -105,11 +140,13 @@ feature "TceSpecificationCapabilities" do
 
       expect(page).to have_content 'Convênio repassado'
       expect(page).to have_content 'Apoio ao turismo'
+      expect(page).to have_content 'Ativo'
 
       fill_modal 'Convênios', :with => 'Apoio a cultura', :field => 'Objeto'
 
       expect(page).to have_content 'Convênio recebido'
       expect(page).to have_content 'Apoio a cultura'
+      expect(page).to have_content 'Ativo'
     end
 
     click_button 'Salvar'

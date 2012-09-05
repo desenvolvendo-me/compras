@@ -5,4 +5,10 @@ class AgreementOccurrenceKind < EnumerateIt::Base
                    :completed,
                    :paralyzed,
                    :other
+
+  def self.inactive_kinds
+    to_a.select do |item|
+      [PARALYZED,  RETURNED, COMPLETED, OTHER, TERMINATED].include?(item[1])
+    end
+  end
 end

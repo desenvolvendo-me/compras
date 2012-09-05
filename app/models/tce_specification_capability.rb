@@ -17,11 +17,20 @@ class TceSpecificationCapability < Compras::Model
 
   validates :description, :capability_source, :application_code,
             :presence => true
+  validate :has_inactive_agreement
 
   orderize :description
   filterize
 
   def to_s
     description
+  end
+
+  protected
+
+  def has_inactive_agreement
+    if agreements.select { |a| a.status == Status::INACTIVE }.any?
+      errors.add(:agreements, :should_has_not_inactive_agreement)
+    end
   end
 end

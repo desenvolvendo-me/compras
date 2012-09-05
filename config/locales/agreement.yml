@@ -22,6 +22,7 @@ pt-BR:
         creation_date: "Data da criação"
         publication_date: "Data da publicação"
         end_date: "Data do término"
+        status: "Status"
 
   simple_form:
     hints:

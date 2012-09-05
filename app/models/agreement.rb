@@ -13,6 +13,7 @@ class Agreement < Compras::Model
   mount_uploader :agreement_file, DocumentUploader
 
   has_enumeration_for :category, :with => AgreementCategory
+  has_enumeration_for :status
 
   belongs_to :agreement_kind
   belongs_to :regulatory_act
@@ -67,5 +68,17 @@ class Agreement < Compras::Model
 
   def to_s
     description
+  end
+
+  def status
+    is_last_occurrence_inactive? ? Status::INACTIVE : Status::ACTIVE
+  end
+
+  protected
+
+  def is_last_occurrence_inactive?
+    return if agreement_occurrences.empty?
+
+    agreement_occurrences.sort_by { |o| o.date }.last.inactive?
   end
 end

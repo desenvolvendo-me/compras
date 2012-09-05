@@ -6,4 +6,8 @@ class AgreementOccurrence < Compras::Model
   belongs_to :agreement
 
   validates :kind, :date, :description, :presence => true
+
+  def inactive?
+    AgreementOccurrenceKind.inactive_kinds.map { |k| k[1] }.include? kind
+  end
 end

@@ -283,6 +283,7 @@ pt-BR:
       is_annulled: "está anulado"
       invalid_licitation_kind_of_judgment_form_for_object_type: "tipo de licitação da forma de julgamento inválida para o tipo de objeto (%{object_type})"
       already_exists_a_pending_purchase_solicitation_with_this_budget_structure_and_material: "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"
+      should_has_not_inactive_agreement: "Não deve haver nenhum convênio inativo"
 
   activerecord:
     errors:

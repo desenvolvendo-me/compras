@@ -16,19 +16,30 @@
         <%= Agreement.human_attribute_name :description %>
       </th>
       <th>
+        <%= Agreement.human_attribute_name :status %>
+      </th>
+      <th>
       </th>
     </tr>
   </thead>
 
   <tbody class="<%= f.sanitized_object_name %>_agreements_records">
     <% f.object.agreements.each do |agreement| %>
-      <%= render 'agreements/list_form', :description => agreement.description, :id => agreement.id, :category => agreement.category_humanize, :f => f %>
+      <%= render 'agreements/list_form', :description => agreement.description,
+                                         :id => agreement.id,
+                                         :category => agreement.category_humanize,
+                                         :status => agreement.status_humanize,
+                                         :f => f %>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache "tce_specification_capability_agreements_template" do %>
   <%= f.association :agreements, :collection => f.object.agreements.build do |p| %>
-    <%= render 'agreements/list_form', :description => '{{description}}', :id => '{{id}}', :category => '{{category}}', :f => f %>
+    <%= render 'agreements/list_form', :description => '{{description}}',
+                                       :id => '{{id}}',
+                                       :category => '{{category}}',
+                                       :status => '{{status}}',
+                                       :f => f %>
   <% end %>
 <% end %>
