@@ -1,12 +1,15 @@
 class LicitationProcess < Compras::Model
-  attr_accessible :administrative_process_id, :capability_id, :payment_method_id, :year, :process_date
-  attr_accessible :readjustment_index_id, :caution_value, :legal_advice, :legal_advice_date
-  attr_accessible :contract_date, :contract_expiration, :observations, :envelope_delivery_date
-  attr_accessible :envelope_delivery_time, :envelope_opening_date, :envelope_opening_time, :document_type_ids
-  attr_accessible :pledge_type, :administrative_process_attributes, :type_of_calculation
-  attr_accessible :period, :period_unit, :expiration, :expiration_unit
-  attr_accessible :licitation_process_bidders_attributes, :judgment_form_id
-  attr_accessible :disqualify_by_documentation_problem, :disqualify_by_maximum_value, :consider_law_of_proposals
+  attr_accessible :administrative_process_id, :capability_id, :payment_method_id,
+                  :year, :process_date,:readjustment_index_id, :caution_value,
+                  :legal_advice, :legal_advice_date, :contract_date,
+                  :contract_expiration, :observations, :envelope_delivery_date,
+                  :envelope_delivery_time, :envelope_opening_date,
+                  :envelope_opening_time, :document_type_ids, :type_of_calculation,
+                  :pledge_type, :administrative_process_attributes,
+                  :period, :period_unit, :expiration, :expiration_unit,
+                  :licitation_process_bidders_attributes, :judgment_form_id,
+                  :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
+                  :consider_law_of_proposals
 
   attr_readonly :process, :year, :licitation_number
 
