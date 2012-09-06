@@ -62,8 +62,10 @@ class Agreement < Compras::Model
     [process_number, process_year].join('/')
   end
 
-  def last_persisted_additive
-    agreement_additives.select(&:persisted?).last
+  def last_additive_number
+    return 0 unless last_persisted_additive
+
+    last_persisted_additive.number
   end
 
   def to_s
@@ -80,5 +82,9 @@ class Agreement < Compras::Model
     return if agreement_occurrences.empty?
 
     agreement_occurrences.sort_by { |o| o.date }.last.inactive?
+  end
+
+  def last_persisted_additive
+    agreement_additives.select(&:persisted?).last
   end
 end

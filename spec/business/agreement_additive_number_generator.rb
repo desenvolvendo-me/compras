@@ -15,7 +15,7 @@ describe AgreementAdditiveNumberGenerator do
     let :agreement do
       double('AgreementWithTwoAdditives',
              :agreement_additives => [additive_one, additive_two],
-             :last_persisted_additive => nil)
+             :last_additive_number => 0)
     end
 
     it 'should set number to additives' do
@@ -38,7 +38,7 @@ describe AgreementAdditiveNumberGenerator do
     let :agreement do
       double('AgreementWithTwoAdditives',
              :agreement_additives => [additive_one, additive_two],
-             :last_persisted_additive => additive_one)
+             :last_additive_number => 1)
     end
 
     it 'should set number to additives' do
@@ -61,7 +61,7 @@ describe AgreementAdditiveNumberGenerator do
     let :agreement do
       double('AgreementWithTwoAdditives',
              :agreement_additives => [additive_one, additive_two],
-             :last_persisted_additive => additive_one)
+             :last_additive_number => 2)
     end
 
     it 'should set number to additives' do
