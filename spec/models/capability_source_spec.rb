@@ -15,5 +15,4 @@ describe CapabilitySource do
   it { should validate_presence_of :source }
 
   it { should have_many :tce_specification_capabilities }
-  it { should have_many :checking_account_structure_informations }
 end

@@ -9,4 +9,4 @@ pt-BR:
       checking_account_structure_information:
         name: "Nome"
         tce_code: "Cógido TCE"
-        capability_source: "Fonte de recurso"
+        referenced_table: "Tabela referenciada"

@@ -1,7 +1,5 @@
 class CheckingAccountStructureInformation < Compras::Model
-  attr_accessible :name, :tce_code, :capability_source_id
-
-  belongs_to :capability_source
+  attr_accessible :name, :tce_code, :referenced_table
 
   has_many :checking_account_structures, :dependent => :restrict
 

@@ -15,7 +15,7 @@ feature "CheckingAccountStructureInformations" do
 
     fill_in 'Nome', :with => 'Fonte de Recursos'
     fill_in 'Cógido TCE', :with => '11'
-    fill_modal 'Fonte de recurso', :with => '1', :field => 'Código'
+    fill_in 'Tabela referenciada', :with => 'Tabela fonte de recursos'
 
     click_button 'Salvar'
 
@@ -25,7 +25,7 @@ feature "CheckingAccountStructureInformations" do
 
     expect(page).to have_field 'Nome', :with => 'Fonte de Recursos'
     expect(page).to have_field 'Cógido TCE', :with => '11'
-    expect(page).to have_field 'Fonte de recurso', :with => 'Imposto'
+    expect(page).to have_field 'Tabela referenciada', :with => 'Tabela fonte de recursos'
   end
 
   scenario 'update an existent checking_account_structure' do
@@ -38,7 +38,7 @@ feature "CheckingAccountStructureInformations" do
 
     fill_in 'Nome', :with => 'Recursos'
     fill_in 'Cógido TCE', :with => '222'
-    fill_modal 'Fonte de recurso', :with => '2', :field => 'Código'
+    fill_in 'Tabela referenciada', :with => 'Identificação dos recursos'
 
     click_button 'Salvar'
 
@@ -48,7 +48,7 @@ feature "CheckingAccountStructureInformations" do
 
     expect(page).to have_field 'Nome', :with => 'Recursos'
     expect(page).to have_field 'Cógido TCE', :with => '222'
-    expect(page).to have_field 'Fonte de recurso', :with => 'Transferência'
+    expect(page).to have_field 'Tabela referenciada', :with => 'Identificação dos recursos'
   end
 
   scenario 'destroy an existent checking_account_structure' do
