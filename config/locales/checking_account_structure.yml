@@ -7,10 +7,10 @@ pt-BR:
 
     attributes:
       checking_account_structure:
-        checking_account_of_fiscal_account: "Conta corrente da conta contábil"
+        checking_account_of_fiscal_account: "Conta corrente"
         name: "Nome"
         tag: "Tag"
         description: "Descrição"
         fill: "Preenchimento"
         reference: "Referência"
-        checking_account_structure_information: "Identificação da Estrutura de Conta Corrente"
+        checking_account_structure_information: "Identificação"
