@@ -75,7 +75,7 @@ feature "PledgeLiquidations" do
       end
 
       within '.parcel:first' do
-        click_button 'Remover Parcela'
+        click_button 'Remover'
       end
 
       within '.parcel:last' do
@@ -203,7 +203,7 @@ feature "PledgeLiquidations" do
       expect(page).to have_field 'Valor *', :with => '1,00'
 
       expect(page).not_to have_button 'Adicionar Parcela'
-      expect(page).not_to have_button 'Remover Parcela'
+      expect(page).not_to have_button 'Remover'
     end
   end
 
