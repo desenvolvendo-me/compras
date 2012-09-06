@@ -23,9 +23,7 @@ describe PurchaseSolicitationItemGroupMaterial do
     end
 
     let :items do
-      [
-        double(:item)
-      ]
+      [double(:item)]
     end
 
     it "should return the purchase solicitation items with the same material as the group's" do

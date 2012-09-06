@@ -17,18 +17,16 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
     end
 
     let :items_by_materials do
-      [
-        item1
-      ]
+      [item]
     end
 
-    let :item1 do
+    let :item do
       double(:item)
     end
 
     it 'should return nil when purchase_solicitation_item_group is not present' do
       purchase_solicitation_item_group.stub(:present?).and_return(false)
-      item1.should_not_receive(:update_fulfiller)
+      item.should_not_receive(:update_fulfiller)
 
       subject.fulfill 
     end
@@ -38,7 +36,7 @@ describe PurchaseSolicitationBudgetAllocationItemFulfiller do
       purchase_solicitation_item_group.stub(:purchase_solicitation_items_by_materials).
                                        and_return(items_by_materials)
 
-      item1.should_receive(:update_fulfiller).with(direct_purchase)
+      item.should_receive(:update_fulfiller).with(direct_purchase)
 
       subject.fulfill
     end
