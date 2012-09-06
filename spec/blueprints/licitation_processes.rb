@@ -24,6 +24,7 @@ LicitationProcess.blueprint(:processo_licitatorio) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  price_registration { true }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   licitation_process_lots { [LicitationProcessLot.make(:lote_antivirus, :licitation_process => object)] }
   disqualify_by_documentation_problem { true }

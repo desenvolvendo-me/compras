@@ -9,7 +9,7 @@ class LicitationProcess < Compras::Model
                   :period, :period_unit, :expiration, :expiration_unit,
                   :licitation_process_bidders_attributes, :judgment_form_id,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
-                  :consider_law_of_proposals
+                  :consider_law_of_proposals, :price_registration
 
   attr_readonly :process, :year, :licitation_number
 

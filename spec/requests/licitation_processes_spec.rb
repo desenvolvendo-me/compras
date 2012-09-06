@@ -472,6 +472,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Inciso', :with => 'Item 1'
       expect(page).to have_field 'Abrev. modalidade', :with => 'CV'
 
+      check 'Registro de preço'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
       fill_modal 'Fonte de recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
       fill_in 'Validade da proposta', :with => '5'
@@ -545,6 +546,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
 
+      expect(page).to have_checked_field 'Registro de preço'
       expect(page).to have_select 'Tipo da apuração', :selected => 'Menor preço total por item'
       expect(page).to have_field 'Fonte de recurso', :with => 'Reforma e Ampliação'
       expect(page).to have_field 'Validade da proposta', :with => '5'
@@ -672,6 +674,7 @@ feature "LicitationProcesses" do
       fill_in 'Data do contrato', :with => '31/03/2013'
       fill_in 'Validade do contrato (meses)', :with => '6'
       fill_in 'Observações gerais', :with => 'novas observacoes'
+      uncheck 'Registro de preço'
     end
 
     within_tab 'Documentos' do
@@ -729,6 +732,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Data do contrato', :with => '31/03/2013'
       expect(page).to have_field 'Validade do contrato (meses)', :with => '6'
       expect(page).to have_field 'Observações gerais', :with => 'novas observacoes'
+      expect(page).not_to have_checked_field 'Registro de preço'
     end
 
     within_tab 'Documentos' do
