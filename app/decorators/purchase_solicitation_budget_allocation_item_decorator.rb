@@ -8,6 +8,6 @@ class PurchaseSolicitationBudgetAllocationItemDecorator
   end
 
   def fulfiller
-    "#{fulfiller_type_humanize} #{component.fulfiller}" if component.fulfiller.present?
+    "#{fulfiller_type_humanize} #{component.fulfiller}" if super.present?
   end
 end
