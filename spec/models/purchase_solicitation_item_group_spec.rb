@@ -129,20 +129,15 @@ describe PurchaseSolicitationItemGroup do
     end
   end
 
-  context "#purchase_solicitation_items_by_material" do
-    let :group_material_1 do
-      double(:group_material,
-             :purchase_solicitation_items_by_material => [1, 2])
-    end
+  context "#fulfill_items" do
+    let (:process) { double(:process) } 
+    let (:group_material) { PurchaseSolicitationItemGroupMaterial.new } 
 
-    let :group_material_2 do
-      double(:group_material,
-             :purchase_solicitation_items_by_material => [3, 4])
-    end
+    it "updates the fulfiller process of each item in the group" do
+      subject.purchase_solicitation_item_group_materials = [group_material]
 
-    it "should return all the purchase solicitation items with the same materials of the items in this group" do
-      subject.stub(:purchase_solicitation_item_group_materials).and_return([group_material_1, group_material_2])
-      expect(subject.purchase_solicitation_items_by_materials).to eq [1, 2, 3, 4]
+      group_material.should_receive(:fulfill_items).with(process)
+      subject.fulfill_items(process)
     end
   end
 

@@ -8,9 +8,6 @@ class PurchaseSolicitationBudgetAllocationItemFulfiller
 
   def fulfill
     return unless purchase_solicitation_item_group.present?
-
-    purchase_solicitation_item_group.purchase_solicitation_items_by_materials.each do |purchase_solicitation_item|
-      purchase_solicitation_item.update_fulfiller(process)
-    end
+    purchase_solicitation_item_group.fulfill_items(process)
   end
 end

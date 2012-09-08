@@ -53,7 +53,9 @@ class PurchaseSolicitationItemGroup < Compras::Model
     editable?
   end
 
-  def purchase_solicitation_items_by_materials
-    purchase_solicitation_item_group_materials.map(&:purchase_solicitation_items_by_material).flatten
+  def fulfill_items(process)
+    purchase_solicitation_item_group_materials.each do |group_material|
+      group_material.fulfill_items(process)
+    end
   end
 end

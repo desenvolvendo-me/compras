@@ -16,20 +16,25 @@ describe PurchaseSolicitationItemGroupMaterial do
   it {should validate_presence_of(:purchase_solicitations).with_message("deve ter ao menos uma solicitação de compras") }
   it {should validate_presence_of :material }
 
-  context "#purchase_solicitation_items_by_material" do
+  context "#fulfill_items" do
     let :purchase_solicitation_items do
       double(:purchase_solicitation_items,
-             :by_material => items)
+             :by_material => [item])
     end
 
-    let :items do
-      [double(:item)]
+    let :item do
+      double(:item)
+    end
+    
+    let :process do
+      double(:process)
     end
 
     it "should return the purchase solicitation items with the same material as the group's" do
       subject.stub(:purchase_solicitation_items).and_return(purchase_solicitation_items)
 
-      expect(subject.purchase_solicitation_items_by_material).to eq items
+      item.should_receive(:update_fulfiller).with(process)
+      subject.fulfill_items(process)
     end
   end
 end

@@ -12,6 +12,14 @@ class PurchaseSolicitationItemGroupMaterial < Compras::Model
   validates :purchase_solicitations, :presence => { :message => :must_have_at_least_one_purchase_solicitation }
   validates :material, :presence => true
 
+  def fulfill_items(process)
+    purchase_solicitation_items_by_material.each do |item|
+      item.update_fulfiller(process)
+    end
+  end
+  
+  private
+
   def purchase_solicitation_items_by_material
     purchase_solicitation_items.by_material(material_id)
   end
