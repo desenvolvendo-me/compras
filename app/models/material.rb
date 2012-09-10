@@ -59,17 +59,17 @@ class Material < Compras::Model
   def self.by_pending_purchase_solicitation_budget_structure_id(budget_structure_id)
     joins { purchase_solicitation_budget_allocation_items }.
     joins { purchase_solicitation_budget_allocations.purchase_solicitation }.
-    where do |material|
-      material.purchase_solicitation_budget_allocations.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
-      material.purchase_solicitation_budget_allocations.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
+    where do
+      purchase_solicitation_budget_allocations.purchase_solicitation.budget_structure_id.eq(budget_structure_id) &
+      purchase_solicitation_budget_allocations.purchase_solicitation.service_status.eq(PurchaseSolicitationServiceStatus::PENDING)
     end
   end
 
   def self.not_purchase_solicitation(purchase_solicitation_id)
     joins { purchase_solicitation_budget_allocation_items }.
     joins { purchase_solicitation_budget_allocations }.
-    where do |material|
-      material.purchase_solicitation_budget_allocations.purchase_solicitation_id.not_eq(purchase_solicitation_id)
+    where do
+      purchase_solicitation_budget_allocations.purchase_solicitation_id.not_eq(purchase_solicitation_id)
     end
   end
 
