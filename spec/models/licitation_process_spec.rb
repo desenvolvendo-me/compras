@@ -68,6 +68,7 @@ describe LicitationProcess do
     it { expect(subject.consider_law_of_proposals).to be false }
     it { expect(subject.disqualify_by_documentation_problem).to be false }
     it { expect(subject.disqualify_by_maximum_value).to be false }
+    it { expect(subject.price_registration).to be false }
   end
 
   context 'new_envelope_opening_date is not equal to new_envelope_delivery_date' do
