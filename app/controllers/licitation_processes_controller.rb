@@ -1,6 +1,8 @@
 class LicitationProcessesController < CrudController
   actions :all, :except => [ :destroy ]
 
+  has_scope :with_price_registration, :type => :boolean
+
   before_filter :block_administrative_process_not_allowed, :only => [:new, :create]
   before_filter :localize_administrative_process
 

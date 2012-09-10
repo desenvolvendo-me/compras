@@ -216,4 +216,27 @@ feature "RecordPrices" do
     expect(page).not_to have_content '05/04/2012'
     expect(page).not_to have_content 'Aquisição de combustíveis'
   end
+
+  scenario 'licitation process modal should list only records with price_registrations' do
+    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio_computador)
+
+    navigate 'Compras e Licitações > Registros de Preços'
+
+    click_link 'Criar Registro de Preço'
+
+    within_tab 'Principal' do
+      within_modal 'Processo licitatório' do
+        click_button 'Pesquisar'
+
+        within_records do
+          expect(page).to_not have_content '2013'
+          expect(page).to_not have_content '2/2013'
+
+          expect(page).to have_content '2012'
+          expect(page).to have_content '1/2012'
+        end
+      end
+    end
+  end
 end

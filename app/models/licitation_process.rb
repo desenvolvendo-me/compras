@@ -99,6 +99,10 @@ class LicitationProcess < Compras::Model
   orderize :id
   filterize
 
+  def self.with_price_registration
+    where { price_registration.eq true }
+  end
+
   def to_s
     "#{process}/#{year}"
   end
