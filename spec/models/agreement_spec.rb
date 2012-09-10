@@ -19,8 +19,7 @@ describe Agreement do
   it { should have_many(:agreement_additives).dependent(:destroy).order(:number) }
 
   it { should validate_presence_of :code }
-  it { should validate_presence_of :number }
-  it { should validate_presence_of :year }
+  it { should validate_presence_of :number_year }
   it { should validate_presence_of :category }
   it { should validate_presence_of :agreement_kind }
   it { should validate_presence_of :value }
@@ -28,9 +27,16 @@ describe Agreement do
   it { should validate_presence_of :parcels_number }
   it { should validate_presence_of :description }
   it { should validate_presence_of :process_date }
-  it { should validate_presence_of :process_year }
-  it { should validate_presence_of :process_number }
+  it { should validate_presence_of :number_year_process }
   it { should validate_presence_of :regulatory_act }
+
+  it { should allow_value('111/2012').for(:number_year) }
+  it { should_not allow_value('111').for(:number_year) }
+  it { should_not allow_value('1a1/2012').for(:number_year) }
+
+  it { should allow_value('111/2012').for(:number_year_process) }
+  it { should_not allow_value('111').for(:number_year_process) }
+  it { should_not allow_value('1a1/2012').for(:number_year_process) }
 
   context 'delegate to regulatory_act' do
     before do
@@ -55,34 +61,6 @@ describe Agreement do
 
     it "end_date" do
       expect(subject.end_date).to eq Date.new(2012, 12, 31)
-    end
-  end
-
-  context '#number_year' do
-    it 'should split to number and year' do
-      subject.should_receive(:number=).with('10')
-      subject.should_receive(:year=).with('2012')
-      subject.number_year = "10/2012"
-    end
-
-    it 'should return joined' do
-      subject.number = 10
-      subject.year = 2012
-      expect(subject.number_year).to eq '10/2012'
-    end
-  end
-
-  context '#number_year_process' do
-    it 'should split to number and year' do
-      subject.should_receive(:process_number=).with('10')
-      subject.should_receive(:process_year=).with('2012')
-      subject.number_year_process = "10/2012"
-    end
-
-    it 'should return joined' do
-      subject.process_number = 234
-      subject.process_year = 2008
-      expect(subject.number_year_process).to eq '234/2008'
     end
   end
 

@@ -17,11 +17,11 @@ describe AgreementAdditive do
     end
 
     let :agreement do
-      double('Agreement', :year => 2009)
+      double('Agreement', :number_year => '1/2009')
     end
 
     it 'should delegate year to agreement' do
-      expect(subject.year).to eq 2009
+      expect(subject.year).to eq '2009'
     end
   end
 end

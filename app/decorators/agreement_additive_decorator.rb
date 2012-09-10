@@ -3,6 +3,6 @@ class AgreementAdditiveDecorator
   include Decore::Proxy
 
   def number_and_year
-    [ number, year ].join('/')
+    [number, year].join('/') if number
   end
 end
