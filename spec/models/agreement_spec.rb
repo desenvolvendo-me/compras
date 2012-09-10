@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/uploaders/document_uploader'
 require 'app/models/agreement'
+require 'app/models/tce_capability_agreement'
 
 describe Agreement do
   it 'should return description as to_s' do
