@@ -7,6 +7,7 @@ LicitationProcessBidder.blueprint(:licitante) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   people { [Person.make!(:sobrinho)] }
   technical_score { 50 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_sobrinho) do
@@ -17,6 +18,7 @@ LicitationProcessBidder.blueprint(:licitante_sobrinho) do
   receipt_date { Date.tomorrow }
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_1) do
@@ -28,6 +30,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_1) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_1)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_2) do
@@ -39,6 +42,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_2) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_2)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_3) do
@@ -50,6 +54,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_3) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_3)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_4) do
@@ -61,6 +66,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_4) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_4)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_5) do
@@ -72,6 +78,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_5) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_5)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_6) do
@@ -83,6 +90,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_6) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_1)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_7) do
@@ -94,6 +102,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_7) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_7)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_8) do
@@ -105,6 +114,7 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_8) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_4)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end
 
 LicitationProcessBidder.blueprint(:licitante_com_proposta_9) do
@@ -116,4 +126,5 @@ LicitationProcessBidder.blueprint(:licitante_com_proposta_9) do
   documents { [LicitationProcessBidderDocument.make!(:documento)] }
   proposals { [LicitationProcessBidderProposal.make!(:proposta_licitante_3)] }
   technical_score { 100 }
+  will_submit_new_proposal_when_draw { true }
 end

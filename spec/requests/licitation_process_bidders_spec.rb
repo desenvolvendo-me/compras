@@ -48,6 +48,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Processo licitatório', :with => '1/2013'
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Processo administrativo', :with => '1/2013'
+    expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
@@ -106,6 +107,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Protocolo', :with => '123456'
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
+    expect(page).to have_checked_field 'Apresentará nova proposta em caso de empate'
 
     within_tab 'Representantes credenciados' do
       expect(page).to have_content 'Wenderson Malheiros'
@@ -169,6 +171,7 @@ feature "LicitationProcessBidders" do
     fill_modal 'Fornecedor', :with => 'Gabriel Sobrinho'
 
     fill_in 'Pontuação técnica', :with => '10,00'
+    uncheck 'Apresentará nova proposta em caso de empate'
     check 'Convidado'
     fill_in 'Protocolo', :with => '111111'
     fill_in 'Data do protocolo', :with => I18n.l(Date.tomorrow)
@@ -215,6 +218,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Data do processo licitatório', :with => '20/03/2013'
     expect(page).to have_field 'Processo administrativo', :with => '1/2013'
 
+    expect(page).to_not have_checked_field 'Apresentará nova proposta em caso de empate'
     expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Pontuação técnica', :with => '10,00'
     expect(page).to have_field 'Protocolo', :with => '111111'

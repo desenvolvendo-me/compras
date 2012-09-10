@@ -12,6 +12,7 @@ require 'app/models/licitation_process_classification'
 describe LicitationProcessBidder do
   describe 'default values' do
     it { expect(subject.invited).to be false }
+    it { expect(subject.will_submit_new_proposal_when_draw).to be true }
   end
 
   it { should belong_to :licitation_process }
