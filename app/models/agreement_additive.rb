@@ -3,6 +3,8 @@ class AgreementAdditive < Compras::Model
 
   has_enumeration_for :kind, :with => AgreementAdditiveKind
 
+  delegate :year, :to => :agreement, :allow_nil => true
+
   belongs_to :agreement
   belongs_to :regulatory_act
 

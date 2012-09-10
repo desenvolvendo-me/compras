@@ -104,7 +104,7 @@ feature "Agreements" do
     end
 
     within_tab 'Aditivos' do
-      expect(page).to have_field 'Número/Ano', :with => '1'
+      expect(page).to have_field 'Número/Ano', :with => '1/2012'
       expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_select 'Tipo', :selected => 'Outros'
       expect(page).to have_field 'Valor', :with => '100,00'
@@ -298,7 +298,7 @@ feature "Agreements" do
 
     within_tab 'Aditivos' do
       within '.nested-agreement-additives:nth-child(1)' do
-        expect(page).to have_field 'Número/Ano', :with => '2'
+        expect(page).to have_field 'Número/Ano', :with => '2/2011'
         expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
         expect(page).to have_select 'Tipo', :selected => 'Prazo'
         expect(page).to have_field 'Descrição', :with => 'Termo de aditamento'
@@ -306,7 +306,7 @@ feature "Agreements" do
       end
 
       within '.nested-agreement-additives:nth-child(2)' do
-        expect(page).to have_field 'Número/Ano', :with => '3'
+        expect(page).to have_field 'Número/Ano', :with => '3/2011'
         expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
         expect(page).to have_select 'Tipo', :selected => 'Outros'
         expect(page).to have_field 'Descrição', :with => 'Terceiro termo de aditamento'

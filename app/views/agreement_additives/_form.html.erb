@@ -4,7 +4,7 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-6">
-      <%= f.input :number, :disabled => true %>
+      <%= f.input :number, :disabled => true, :input_html => { :value => f.object.decorator.number_and_year } %>
     </div>
 
     <div class="yui3-u-1-2">

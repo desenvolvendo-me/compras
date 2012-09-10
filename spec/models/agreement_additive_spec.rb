@@ -10,4 +10,18 @@ describe AgreementAdditive do
 
   it { should belong_to(:agreement) }
   it { should belong_to(:regulatory_act) }
+
+  context 'when have agreement' do
+    before do
+      subject.stub(:agreement).and_return(agreement)
+    end
+
+    let :agreement do
+      double('Agreement', :year => 2009)
+    end
+
+    it 'should delegate year to agreement' do
+      expect(subject.year).to eq 2009
+    end
+  end
 end
