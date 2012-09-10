@@ -7,6 +7,7 @@ require 'app/models/licitation_process'
 require 'app/models/creditor'
 require 'app/models/licitation_process_bidder'
 require 'app/models/accredited_representative'
+require 'app/models/licitation_process_classification'
 
 describe LicitationProcessBidder do
   describe 'default values' do
