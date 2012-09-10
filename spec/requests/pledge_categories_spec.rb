@@ -52,7 +52,7 @@ feature "PledgeCategories" do
 
     click_link 'Geral'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Categoria de Empenho apagada com sucesso.'
 

@@ -163,7 +163,7 @@ feature "BankAccounts" do
 
     click_link 'Itaú Tributos'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Conta Bancária apagado com sucesso.'
 

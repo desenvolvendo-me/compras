@@ -47,7 +47,7 @@ feature "LandSubdivisions" do
 
     click_link 'Terra Prometida'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Loteamento apagado com sucesso.'
 

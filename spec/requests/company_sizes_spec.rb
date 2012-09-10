@@ -57,7 +57,7 @@ feature "CompanySizes" do
 
     click_link 'Empresa de grande porte'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Porte da Empresa apagado com sucesso.'
 

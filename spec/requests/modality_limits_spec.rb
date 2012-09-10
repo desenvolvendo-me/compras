@@ -111,7 +111,7 @@ feature "ModalityLimits" do
 
     click_link '0001'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Limite por Modalidade apagado com sucesso.'
 

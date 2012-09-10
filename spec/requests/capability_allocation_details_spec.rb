@@ -63,7 +63,7 @@ feature "CapabilityAllocationDetails" do
 
     click_link 'Educação'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Detalhamento das Destinações de Recursos apagado com sucesso.'
 

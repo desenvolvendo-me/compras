@@ -187,7 +187,7 @@ feature "Contracts" do
       page.find('a').click
     end
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Contrato apagado com sucesso.'
 

@@ -64,7 +64,7 @@ feature "Subfunctions" do
 
     click_link '01'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Subfunção apagada com sucesso.'
 

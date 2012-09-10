@@ -70,7 +70,7 @@ feature "Descriptors" do
 
     click_link '2012 - Detran'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Descritor apagado com sucesso.'
 

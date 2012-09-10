@@ -47,7 +47,7 @@ feature "FiscalYears" do
 
     click_link '2011'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Exercício Fiscal apagado com sucesso.'
 

@@ -54,7 +54,7 @@ feature "PledgeHistorics" do
 
     click_link 'Semestral'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Histórico de Empenho apagado com sucesso.'
 

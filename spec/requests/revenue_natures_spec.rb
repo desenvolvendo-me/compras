@@ -235,7 +235,7 @@ feature "RevenueNatures" do
 
     click_link '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
-    click_link "Apagar", :confirm => true
+    click_link "Apagar"
 
     expect(page).to have_notice 'Natureza da Receita apagado com sucesso.'
 

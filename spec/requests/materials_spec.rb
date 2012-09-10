@@ -156,7 +156,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Material apagado com sucesso.'
 
@@ -170,7 +170,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).not_to have_notice 'Material apagado com sucesso.'
   end

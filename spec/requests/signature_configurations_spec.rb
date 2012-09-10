@@ -124,7 +124,7 @@ feature "SignatureConfigurations" do
 
     click_link 'Autorizações de Fornecimento'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Configuração de Assinatura apagado com sucesso.'
 

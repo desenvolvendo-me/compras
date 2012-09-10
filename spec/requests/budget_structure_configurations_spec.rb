@@ -90,7 +90,7 @@ feature "BudgetStructureConfigurations" do
 
     click_link 'Configuração do Detran'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Configuração de Estrutura Orçamentaria apagado com sucesso.'
 

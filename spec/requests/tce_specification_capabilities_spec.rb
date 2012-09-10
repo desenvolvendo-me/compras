@@ -172,7 +172,7 @@ feature "TceSpecificationCapabilities" do
 
     click_link 'Ampliação do Posto de Saúde'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Especificação de Recursos do TCE apagado com sucesso.'
 

@@ -47,7 +47,7 @@ feature "PaymentMethods" do
 
     click_link 'Dinheiro'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Forma de Pagamento apagada com sucesso.'
 

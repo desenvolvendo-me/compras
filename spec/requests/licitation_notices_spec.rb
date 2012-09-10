@@ -136,7 +136,7 @@ feature "LicitationNotices" do
 
     click_link licitation_notice.to_s
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Aviso de Licitação apagado com sucesso.'
 

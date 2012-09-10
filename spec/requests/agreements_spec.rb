@@ -336,7 +336,7 @@ feature "Agreements" do
 
     click_link 'Apoio ao turismo'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Convênio apagado com sucesso.'
 

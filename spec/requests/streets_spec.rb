@@ -71,7 +71,7 @@ feature "Streets" do
 
     click_link 'Girassol'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Logradouro apagado com sucesso.'
 

@@ -237,7 +237,7 @@ feature "Precatories" do
       click_link '1234/2012'
     end
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Precatório apagado com sucesso.'
 

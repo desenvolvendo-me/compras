@@ -93,7 +93,7 @@ feature "CapabilityDestinations" do
 
     click_link 'Programa de linha de crédito'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Destinação de Recursos apagado com sucesso.'
 

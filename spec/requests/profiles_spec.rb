@@ -47,7 +47,7 @@ feature "Profiles" do
 
     click_link 'Gestor'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Perfil apagado com sucesso.'
 

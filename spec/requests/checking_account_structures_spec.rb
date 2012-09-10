@@ -76,7 +76,7 @@ feature "CheckingAccountStructures" do
 
     click_link 'Fonte de Recursos'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Estrutura da Conta Corrente apagado com sucesso.'
 

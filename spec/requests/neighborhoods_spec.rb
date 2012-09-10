@@ -72,7 +72,7 @@ feature "Neighborhoods" do
 
     click_link 'Centro'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Bairro apagado com sucesso.'
 
@@ -86,7 +86,7 @@ feature "Neighborhoods" do
 
     click_link 'Centro'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).not_to have_notice 'Bairro apagado com sucesso.'
   end

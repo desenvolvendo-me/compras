@@ -52,7 +52,7 @@ feature "ExpenseKinds" do
 
     click_link 'Pagamentos'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Despesa apagado com sucesso.'
 

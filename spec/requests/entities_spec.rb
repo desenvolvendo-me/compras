@@ -47,7 +47,7 @@ feature "Entities" do
 
     click_link 'Detran'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Entidade apagada com sucesso.'
 

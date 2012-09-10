@@ -97,7 +97,7 @@ feature "ApplicationCodes" do
 
     click_link 'Geral'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Código de Aplicação apagado com sucesso.'
 

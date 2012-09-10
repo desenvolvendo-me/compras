@@ -47,7 +47,7 @@ feature "Positions" do
 
     click_link 'Gerente'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Cargo apagado com sucesso.'
 

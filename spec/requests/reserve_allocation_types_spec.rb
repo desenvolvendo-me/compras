@@ -52,7 +52,7 @@ feature "ReserveAllocationTypes" do
 
     click_link 'Tipo Comum'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Reserva de Dotação apagado com sucesso.'
 

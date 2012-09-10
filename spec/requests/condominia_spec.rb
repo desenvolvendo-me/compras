@@ -52,7 +52,7 @@ feature "Condominia" do
 
     click_link 'Tambuata'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Condomínio apagado com sucesso.'
 

@@ -57,7 +57,7 @@ feature "AccountPlanConfigurations" do
 
     click_link 'Plano1'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Configuração de Plano de Contas apagado com sucesso.'
 

@@ -72,7 +72,7 @@ feature "DisseminationSources" do
 
     click_link 'Jornal Oficial do Município'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Fonte de Divulgação apagado com sucesso.'
 
@@ -87,7 +87,7 @@ feature "DisseminationSources" do
 
     click_link 'Jornal Oficial do Bairro'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).not_to have_notice 'Fonte de Divulgação apagado com sucesso.'
   end

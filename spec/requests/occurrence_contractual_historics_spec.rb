@@ -76,7 +76,7 @@ feature "OccurrenceContractualHistorics" do
 
     click_link '1'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Histórico de Ocorrências Contratuais apagado com sucesso.'
   end

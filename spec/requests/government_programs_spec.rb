@@ -59,7 +59,7 @@ feature "GovernmentPrograms" do
 
     click_link 'Habitação'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Programa do Governo apagado com sucesso.'
 

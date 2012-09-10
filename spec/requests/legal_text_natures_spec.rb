@@ -47,7 +47,7 @@ feature "LegalTextNatures" do
 
     click_link 'Natureza Cívica'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Natureza de Textos Jurídicos apagada com sucesso.'
 

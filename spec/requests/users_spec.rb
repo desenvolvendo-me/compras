@@ -72,7 +72,7 @@ feature "Users" do
 
     click_link 'wenderson.malheiros'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Usuário apagado com sucesso.'
 

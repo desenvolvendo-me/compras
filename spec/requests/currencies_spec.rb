@@ -51,7 +51,7 @@ feature "Currencies" do
 
     click_link 'Real'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Moeda apagada com sucesso.'
 

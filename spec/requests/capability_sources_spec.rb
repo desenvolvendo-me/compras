@@ -77,7 +77,7 @@ feature "CapabilitySources" do
 
     click_link 'Imposto'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Fonte de Recursos apagado com sucesso.'
 

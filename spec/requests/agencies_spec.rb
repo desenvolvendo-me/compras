@@ -64,7 +64,7 @@ feature "Agencies" do
 
     click_link 'Agência Santander'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Agência apagada com sucesso.'
 

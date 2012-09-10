@@ -52,7 +52,7 @@ feature "BudgetAllocationTypes" do
 
     click_link 'Dotação Administrativa'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Dotação apagado com sucesso.'
 

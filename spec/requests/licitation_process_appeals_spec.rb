@@ -86,7 +86,7 @@ feature "LicitationProcessAppeals" do
 
     click_link "#{interposicao_processo_licitatorio}"
 
-    click_link "Apagar", :confirm => true
+    click_link "Apagar"
 
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagado com sucesso.'
 

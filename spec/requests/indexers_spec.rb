@@ -59,7 +59,7 @@ feature "Indexers" do
 
     click_link 'SELIC'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Indexador apagado com sucesso.'
 

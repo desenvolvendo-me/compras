@@ -70,7 +70,7 @@ feature "RegulatoryActTypes" do
 
     click_link 'Lei'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Ato Regulamentador apagado com sucesso.'
 

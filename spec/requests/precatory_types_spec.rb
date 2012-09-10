@@ -64,7 +64,7 @@ feature "PrecatoryTypes" do
       click_link 'Precatórios Alimentares'
     end
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipos de Precatório apagado com sucesso.'
 

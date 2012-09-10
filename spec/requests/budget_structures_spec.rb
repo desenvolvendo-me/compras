@@ -304,7 +304,7 @@ feature "BudgetStructure" do
 
     click_link 'Secretaria de Educação'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Estrutura Orçamentaria apagado com sucesso.'
 

@@ -101,7 +101,7 @@ feature "Functions" do
 
     click_link '04'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Função apagada com sucesso.'
 

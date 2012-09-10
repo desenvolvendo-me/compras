@@ -53,7 +53,7 @@ feature "States" do
 
     click_link 'Rio Grande do Sul'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Estado apagado com sucesso.'
 

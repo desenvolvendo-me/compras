@@ -269,7 +269,7 @@ feature "ExpenseNatures" do
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Natureza da Despesa apagado com sucesso.'
 

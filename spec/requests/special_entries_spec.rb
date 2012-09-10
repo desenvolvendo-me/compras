@@ -61,7 +61,7 @@ feature "SpecialEntries" do
 
     click_link 'Tal'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Inscrição Especial apagado com sucesso.'
 

@@ -55,7 +55,7 @@ feature "Banks" do
 
     click_link 'Itaú'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Banco apagado com sucesso.'
 

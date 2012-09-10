@@ -55,7 +55,7 @@ feature "JudgmentForms" do
 
     click_link 'Forma Global com Menor Preço'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Forma de Julgamento de Licitação apagado com sucesso.'
 

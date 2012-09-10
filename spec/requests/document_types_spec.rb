@@ -51,7 +51,7 @@ feature "DocumentTypes" do
 
     click_link 'Fiscal'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).not_to have_notice 'Tipo de Documento apagado com sucesso.'
   end
@@ -62,7 +62,7 @@ feature "DocumentTypes" do
 
     click_link 'Fiscal'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Documento apagado com sucesso.'
 

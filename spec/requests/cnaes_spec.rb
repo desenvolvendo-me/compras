@@ -58,7 +58,7 @@ feature "Cnaes" do
 
     click_link 'Aluguel de outras máquinas'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'CNAE apagado com sucesso.'
 

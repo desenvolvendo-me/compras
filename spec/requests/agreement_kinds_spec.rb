@@ -51,7 +51,7 @@ feature "AgreementKinds" do
 
     click_link 'Contribuição'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Convênio apagado com sucesso.'
 

@@ -59,7 +59,7 @@ feature "GovernmentActions" do
 
     click_link 'Ação Governamental'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Ação do Governo apagada com sucesso.'
 

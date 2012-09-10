@@ -63,7 +63,7 @@ feature "CommunicationSources" do
 
     click_link 'Jornal de Circulação Municipal'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Fonte de Comunicação apagado com sucesso.'
 

@@ -45,7 +45,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Agrupamento de reparo 2013'
 
-    click_link 'Anular', :confirm => true
+    click_link 'Anular'
 
     fill_modal 'Responsável', :field => 'Matrícula', :with => '958473'
 

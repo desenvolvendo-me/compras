@@ -59,7 +59,7 @@ feature "CheckingAccountOfFiscalAccounts" do
 
     click_link 'Disponibilidade financeira'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Conta Corrente da Conta Contábil apagado com sucesso.'
 

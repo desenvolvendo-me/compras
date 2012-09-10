@@ -52,7 +52,7 @@ feature "StreetTypes" do
 
     click_link 'Rua'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Tipo de Logradouro apagado com sucesso.'
 

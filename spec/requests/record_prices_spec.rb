@@ -208,7 +208,7 @@ feature "RecordPrices" do
 
     click_link '1/2012'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Registro de Preço apagado com sucesso.'
 

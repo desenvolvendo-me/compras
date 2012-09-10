@@ -1293,7 +1293,7 @@ feature "Creditors" do
 
     click_link 'Nohup'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Credor apagado com sucesso.'
 
@@ -1314,7 +1314,7 @@ feature "Creditors" do
 
     expect(page).to have_content 'Editar Certificado de Registro Cadastral 1/2012 do Credor Nohup'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Certificado de Registro Cadastral apagado com sucesso.'
 

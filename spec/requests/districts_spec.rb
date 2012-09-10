@@ -51,7 +51,7 @@ feature "Districts" do
 
     click_link 'Sul'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Distrito apagado com sucesso.'
 

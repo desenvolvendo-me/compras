@@ -63,7 +63,7 @@ feature "RegulatoryActTypeClassifications" do
 
     click_link 'Tipo 01'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador apagado com sucesso.'
 

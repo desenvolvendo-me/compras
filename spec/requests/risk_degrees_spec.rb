@@ -51,7 +51,7 @@ feature "RiskDegrees" do
 
     click_link 'Grave'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Grau de Risco apagado com sucesso.'
 

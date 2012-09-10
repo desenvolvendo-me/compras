@@ -51,7 +51,7 @@ feature "ReferenceUnits" do
 
     click_link 'M'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Unidade de Referência apagada com sucesso.'
 

@@ -51,7 +51,7 @@ feature "MaterialsGroups" do
 
     click_link 'Informática'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Grupo de Materiais apagado com sucesso.'
 

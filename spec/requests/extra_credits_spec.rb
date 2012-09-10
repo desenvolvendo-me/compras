@@ -484,7 +484,7 @@ feature "ExtraCredits" do
 
     click_link extra_credit.to_s
 
-    click_link "Apagar", :confirm => true
+    click_link "Apagar"
 
     expect(page).to have_notice 'Crédito Suplementar apagado com sucesso.'
 

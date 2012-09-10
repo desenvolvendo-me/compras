@@ -101,7 +101,7 @@ feature "DeliveryLocations" do
 
     click_link 'Secretaria da Educação'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Local de Entrega apagado com sucesso.'
 

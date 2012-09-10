@@ -52,7 +52,7 @@ feature "ExtraCreditNatures" do
 
     click_link 'Abre crédito suplementar'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
 

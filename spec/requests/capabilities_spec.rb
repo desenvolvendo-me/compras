@@ -74,7 +74,7 @@ feature "Capabilities" do
 
     click_link 'Reforma e Ampliação'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice 'Recurso apagado com sucesso.'
 
