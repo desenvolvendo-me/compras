@@ -11,9 +11,7 @@ require 'app/models/licitation_process_classification'
 
 describe LicitationProcessBidder do
   describe 'default values' do
-    it 'uses false as default for invited' do
-      expect(subject.invited).to be false
-    end
+    it { expect(subject.invited).to be false }
   end
 
   it { should belong_to :licitation_process }
