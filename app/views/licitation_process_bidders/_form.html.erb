@@ -31,10 +31,9 @@
 </div>
 
 <% if f.object.administrative_process_invited? %>
+  <%= f.input :invited %>
+
   <div class="yui3-g">
-    <div class="yui3-u-1-4">
-      <%= f.input :invited %>
-    </div>
 
     <div class="yui3-u-1-4">
       <%= f.input :protocol  %>
