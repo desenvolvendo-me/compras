@@ -99,7 +99,7 @@ class LicitationProcess < Compras::Model
   orderize :id
   filterize
 
-  def self.with_price_registration
+  def self.with_price_registrations
     where { price_registration.eq true }
   end
 
