@@ -85,6 +85,32 @@ describe Agreement do
     end
   end
 
+  context 'last additive number' do
+    before do
+      subject.stub(:agreement_additives).and_return(additives)
+    end
+
+    context 'when dont have additives' do
+      let :additives do
+        []
+      end
+
+      it 'should return last additive number' do
+        expect(subject.last_additive_number).to eq 0
+      end
+    end
+
+    context 'when have one additive' do
+      let :additives do
+        [ double('Additive', :number => 2, :persisted? => true) ]
+      end
+
+      it 'should return last additive number' do
+        expect(subject.last_additive_number).to eq 2
+      end
+    end
+  end
+
   context '#status' do
     it 'should return inactive if last occurrence kind is inactive' do
       subject.stub(:agreement_occurrences => [double(:inactive? => true, :date => Date.current + 1.day), double(:inactive? => false, :date => Date.current)])
