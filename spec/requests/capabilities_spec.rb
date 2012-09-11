@@ -16,7 +16,7 @@ feature "Capabilities" do
     click_link 'Criar Recurso'
 
     fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
-    fill_in 'Descrição', :with => 'Reforma e Ampliação'
+    fill_in 'Descrição', :with => 'Reforma'
     fill_modal 'Destinação de recursos', :with => 'Programa de linha de crédito', :field => 'Descrição'
     fill_modal 'Especificação de recursos do TCE', :with => 'Ampliação do Posto de Saúde', :field => 'Descrição'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
@@ -29,10 +29,10 @@ feature "Capabilities" do
 
     expect(page).to have_notice 'Recurso criado com sucesso.'
 
-    click_link 'Reforma e Ampliação'
+    click_link 'Reforma'
 
     expect(page).to have_field 'Descritor', :with => '2012 - Detran'
-    expect(page).to have_field 'Descrição', :with => 'Reforma e Ampliação'
+    expect(page).to have_field 'Descrição', :with => 'Reforma'
     expect(page).to have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     expect(page).to have_field 'Destinação de recursos', :with => 'Programa de linha de crédito'
     expect(page).to have_field 'Especificação de recursos do TCE', :with => 'Ampliação do Posto de Saúde'
