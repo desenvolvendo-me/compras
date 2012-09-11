@@ -17,6 +17,7 @@ feature "DirectPurchases" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     ModalityLimit.make!(:modalidade_de_compra)
+    PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
@@ -43,7 +44,7 @@ feature "DirectPurchases" do
       select 'ano/anos',  :from => 'Período do prazo'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
-      fill_in 'Registro de preços', :with => '88'
+      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
       fill_in 'Observações gerais', :with => 'obs'
     end
 
@@ -96,7 +97,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Período do prazo', :selected => 'ano/anos'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Coleta de preços', :with => '99'
-      expect(page).to have_field 'Registro de preços', :with => '88'
+      expect(page).to have_field 'Registro de preços', :with => '1/2012'
       expect(page).to have_field 'Observações gerais', :with => 'obs'
     end
 
@@ -126,6 +127,7 @@ feature "DirectPurchases" do
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
     ModalityLimit.make!(:modalidade_de_compra_ponte)
+    PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
@@ -154,7 +156,7 @@ feature "DirectPurchases" do
       select 'ano/anos',  :from => 'Período do prazo'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
-      fill_in 'Registro de preços', :with => '88'
+      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
       fill_in 'Observações gerais', :with => 'obs'
     end
 
@@ -225,7 +227,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Período do prazo', :selected => 'ano/anos'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Coleta de preços', :with => '99'
-      expect(page).to have_field 'Registro de preços', :with => '88'
+      expect(page).to have_field 'Registro de preços', :with => '1/2012'
       expect(page).to have_field 'Observações gerais', :with => 'obs'
     end
 
@@ -419,7 +421,7 @@ feature "DirectPurchases" do
       select 'ano/anos',  :from => 'Período do prazo'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
-      fill_in 'Registro de preços', :with => '88'
+      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
       fill_in 'Observações gerais', :with => 'obs'
     end
 
@@ -451,7 +453,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Período do prazo', :selected => 'ano/anos'
       expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
       expect(page).to have_field 'Coleta de preços', :with => '99'
-      expect(page).to have_field 'Registro de preços', :with => '88'
+      expect(page).to have_field 'Registro de preços', :with => '1/2012'
       expect(page).to have_field 'Observações gerais', :with => 'obs'
     end
 
@@ -562,6 +564,7 @@ feature "DirectPurchases" do
     BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
     ModalityLimit.make!(:modalidade_de_compra)
+    PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
@@ -584,7 +587,7 @@ feature "DirectPurchases" do
       select 'ano/anos', :from => 'Período do prazo'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
-      fill_in 'Registro de preços', :with => '88'
+      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
       fill_in 'Observações gerais', :with => 'obs'
     end
 
@@ -906,6 +909,7 @@ feature "DirectPurchases" do
     Employee.make!(:sobrinho)
     PaymentMethod.make!(:dinheiro)
     ModalityLimit.make!(:modalidade_de_compra)
+    PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
@@ -934,7 +938,7 @@ feature "DirectPurchases" do
       select 'ano/anos',  :from => 'Período do prazo'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
       fill_in 'Coleta de preços', :with => '99'
-      fill_in 'Registro de preços', :with => '88'
+      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
       fill_in 'Observações gerais', :with => 'obs'
     end
 

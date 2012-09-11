@@ -14,7 +14,7 @@ DirectPurchase.blueprint(:compra) do
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   price_collection { 9.99 }
-  price_registration { 8.88 }
+  price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Observacoes" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -37,7 +37,7 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   price_collection { 9.99 }
-  price_registration { 8.88 }
+  price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra de 2012 ainda não autorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -60,7 +60,7 @@ DirectPurchase.blueprint(:compra_2011) do
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   price_collection { 9.99 }
-  price_registration { 8.88 }
+  price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra feita em 2011 e não authorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -83,7 +83,7 @@ DirectPurchase.blueprint(:compra_2011_dez) do
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   price_collection { 9.99 }
-  price_registration { 8.88 }
+  price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra feita em 2011 e não authorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -106,7 +106,7 @@ DirectPurchase.blueprint(:company_purchase) do
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   price_collection { 9.99 }
-  price_registration { 8.88 }
+  price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra feita em 2011 e não autorizada" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
@@ -129,7 +129,7 @@ DirectPurchase.blueprint(:compra_perto_do_limite) do
   employee { Employee.make!(:sobrinho) }
   payment_method { PaymentMethod.make!(:dinheiro) }
   price_collection { 9.99 }
-  price_registration { 8.88 }
+  price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Observacoes" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }

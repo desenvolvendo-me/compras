@@ -1,4 +1,5 @@
 require 'model_helper'
+require 'app/models/direct_purchase'
 require 'app/models/price_registration'
 require 'app/models/price_registration_item'
 
@@ -10,6 +11,8 @@ describe PriceRegistration do
   it { should belong_to :responsible }
 
   it { should have_many(:items).dependent(:destroy) }
+
+  it { should have_one(:direct_purchase).dependent(:restrict) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :year }

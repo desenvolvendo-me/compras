@@ -7,6 +7,8 @@ class PriceRegistration < Compras::Model
 
   attr_readonly :number
 
+  attr_modal :number, :year, :description
+
   has_enumeration_for :delivery_unit, :with => PeriodUnit
   has_enumeration_for :situation, :with => PriceRegistrationSituation
   has_enumeration_for :validaty_unit, :with => PeriodUnit
@@ -18,6 +20,8 @@ class PriceRegistration < Compras::Model
   belongs_to :responsible, :class_name => 'Employee'
 
   has_many :items, :class_name => 'PriceRegistrationItem', :dependent => :destroy, :inverse_of => :price_registration
+
+  has_one :direct_purchase, :dependent => :restrict
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 

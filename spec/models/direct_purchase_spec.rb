@@ -27,6 +27,7 @@ describe DirectPurchase do
   it { should belong_to :employee }
   it { should belong_to :payment_method }
   it { should belong_to :purchase_solicitation_item_group }
+  it { should belong_to :price_registration }
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:purchase_solicitation_budget_allocation_items) }
