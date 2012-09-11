@@ -23,6 +23,42 @@ describe PurchaseSolicitationBudgetAllocationItem do
     expect(subject.estimated_total_price).to eq 50
   end
 
+  context '.fulfill_items' do
+    let (:item) { double(:item).as_null_object }
+    let (:process) { double(:process) }
+    let (:material_id) { -1 }
+
+    it "fulfills each of the purchase solicitation items with the purchase process" do
+      item.should_receive(:update_fulfiller).with(process)
+
+      PurchaseSolicitationBudgetAllocationItem.fulfill_items({
+        :material_id => material_id,
+        :process => process,
+        :items => [item]
+      })
+    end
+
+    it "raises an exception if no process is given" do
+      expect {
+        PurchaseSolicitationBudgetAllocationItem.fulfill_items({
+          :material_id => material_id,
+          :process => nil,
+          :items => [item]
+        })
+      }.to raise_error(ArgumentError, 'Expected :process, got nil instead.')
+    end
+
+    it "raises an exception if no material is given" do
+      expect {
+        PurchaseSolicitationBudgetAllocationItem.fulfill_items({
+          :material_id => nil,
+          :process => process,
+          :items => [item]
+        })
+      }.to raise_error(ArgumentError, 'Expected :material_id, got nil instead.')
+    end
+  end
+
   context '#update_fulfiller' do
     let :process do
       double(:process, :id => 1)

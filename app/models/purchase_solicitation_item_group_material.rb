@@ -13,14 +13,9 @@ class PurchaseSolicitationItemGroupMaterial < Compras::Model
   validates :material, :presence => true
 
   def fulfill_items(process)
-    purchase_solicitation_items_by_material.each do |item|
-      item.update_fulfiller(process)
-    end
-  end
-  
-  private
-
-  def purchase_solicitation_items_by_material
-    purchase_solicitation_items.by_material(material_id)
+    purchase_solicitation_items.fulfill_items({
+      :material_id => material_id,
+      :process => process
+    })
   end
 end

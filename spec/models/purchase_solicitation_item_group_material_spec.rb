@@ -17,23 +17,19 @@ describe PurchaseSolicitationItemGroupMaterial do
   it {should validate_presence_of :material }
 
   context "#fulfill_items" do
-    let :purchase_solicitation_items do
-      double(:purchase_solicitation_items,
-             :by_material => [item])
-    end
+    let (:purchase_solicitation_items) { double(:purchase_solicitation_items) }
+    let (:process) { double(:process) }
+    let (:material_id) { -1 }
 
-    let :item do
-      double(:item)
-    end
-    
-    let :process do
-      double(:process)
-    end
-
-    it "should return the purchase solicitation items with the same material as the group's" do
+    it "fulfills all the items with the same material as the group's" do
       subject.stub(:purchase_solicitation_items).and_return(purchase_solicitation_items)
+      subject.material_id = material_id
 
-      item.should_receive(:update_fulfiller).with(process)
+      purchase_solicitation_items.should_receive(:fulfill_items).with({
+        :material_id => subject.material_id,
+        :process => process
+      })
+
       subject.fulfill_items(process)
     end
   end

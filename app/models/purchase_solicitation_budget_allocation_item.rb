@@ -37,6 +37,17 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
     where { |item| item.material_id.eq material_id }
   end
 
+  def self.fulfill_items(options = {})
+    raise ArgumentError, 'Expected :process, got nil instead.' unless options[:process].present?
+    raise ArgumentError, 'Expected :material_id, got nil instead.' unless options[:material_id].present?
+
+    process = options[:process]
+    material_id = options[:material_id]
+    purchase_items = options[:items] || scoped.by_material(material_id)
+
+    purchase_items.each { |item| item.update_fulfiller(process) }
+  end
+
   def update_fulfiller(process)
     update_attributes :fulfiller_id => process.id,
                       :fulfiller_type => process.class.name
