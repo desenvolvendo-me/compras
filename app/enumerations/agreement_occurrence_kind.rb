@@ -7,8 +7,6 @@ class AgreementOccurrenceKind < EnumerateIt::Base
                    :other
 
   def self.inactive_kinds
-    to_a.select do |item|
-      [PARALYZED,  RETURNED, COMPLETED, OTHER, TERMINATED].include?(item[1])
-    end
+    to_a.reject { |e| e[1] == 'in_progress' }
   end
 end
