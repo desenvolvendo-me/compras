@@ -76,7 +76,7 @@ feature "Neighborhoods" do
 
     expect(page).to have_notice 'Bairro apagado com sucesso.'
 
-    expect(page).not_to have_content 'Centro'
+    expect(page).to_not have_content 'Centro'
   end
 
   scenario 'cannot destroy a neighborhood with streets' do
@@ -88,7 +88,7 @@ feature "Neighborhoods" do
 
     click_link 'Apagar'
 
-    expect(page).not_to have_notice 'Bairro apagado com sucesso.'
+    expect(page).to_not have_notice 'Bairro apagado com sucesso.'
   end
 
   scenario 'validate uniquenes of name scoped to district' do
@@ -144,7 +144,7 @@ feature "Neighborhoods" do
       click_button 'Pesquisar'
 
       expect(page).to have_content 'Leste'
-      expect(page).not_to have_content 'Centro'
+      expect(page).to_not have_content 'Centro'
     end
   end
 end

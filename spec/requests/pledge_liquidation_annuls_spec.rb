@@ -44,7 +44,7 @@ feature 'PledgeLiquidationAnnuls' do
     expect(page).to have_disabled_field 'Objeto do empenho'
     expect(page).to have_field 'Objeto do empenho', :with => 'Para empenho 2012'
 
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_button 'Salvar'
 
     click_link 'Anulação'
 
@@ -57,7 +57,7 @@ feature 'PledgeLiquidationAnnuls' do
     expect(page).to have_disabled_field 'Justificativa'
     expect(page).to have_field 'Justificativa', :with => 'Não mais necessário'
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
   end
 end

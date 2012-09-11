@@ -63,9 +63,9 @@ feature "GovernmentPrograms" do
 
     expect(page).to have_notice 'Programa do Governo apagado com sucesso.'
 
-    expect(page).not_to have_content 'Detran'
-    expect(page).not_to have_content '2012'
-    expect(page).not_to have_content 'Habitação'
-    expect(page).not_to have_content 'Ativo'
+    expect(page).to_not have_content 'Detran'
+    expect(page).to_not have_content '2012'
+    expect(page).to_not have_content 'Habitação'
+    expect(page).to_not have_content 'Ativo'
   end
 end

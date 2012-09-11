@@ -60,7 +60,7 @@ feature "Signatures" do
 
     expect(page).to have_notice 'Assinatura apagado com sucesso.'
 
-    expect(page).not_to have_content 'Gabriel Sobrinho'
-    expect(page).not_to have_content 'Gerente'
+    expect(page).to_not have_content 'Gabriel Sobrinho'
+    expect(page).to_not have_content 'Gerente'
   end
 end

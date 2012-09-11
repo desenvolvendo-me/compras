@@ -58,7 +58,7 @@ feature "PledgeHistorics" do
 
     expect(page).to have_notice 'Histórico de Empenho apagado com sucesso.'
 
-    expect(page).not_to have_content 'Semestral'
-    expect(page).not_to have_content 'Detran'
+    expect(page).to_not have_content 'Semestral'
+    expect(page).to_not have_content 'Detran'
   end
 end

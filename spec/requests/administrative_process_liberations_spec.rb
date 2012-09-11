@@ -53,8 +53,8 @@ feature "AdministrativeProcessLiberations" do
     expect(page).to have_disabled_field 'Data'
     expect(page).to have_field 'Data', :with => '01/02/2012'
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_button 'Apagar'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_button 'Apagar'
   end
 
   scenario 'cancel should return to edit_administrative_process' do
@@ -62,7 +62,7 @@ feature "AdministrativeProcessLiberations" do
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
-    
+
     within_records do
       page.find('a').click
     end

@@ -149,7 +149,7 @@ feature "Pledges" do
 
         click_button 'Pesquisar'
 
-        expect(page).not_to have_content '3.0.10.01.11'
+        expect(page).to_not have_content '3.0.10.01.11'
         expect(page).to have_content '3.0.10.01.12'
       end
     end
@@ -178,7 +178,7 @@ feature "Pledges" do
 
         click_button 'Pesquisar'
 
-        expect(page).not_to have_content '3.0.10.01.11'
+        expect(page).to_not have_content '3.0.10.01.11'
         expect(page).to have_content '3.0.10.01.12'
       end
     end
@@ -215,7 +215,7 @@ feature "Pledges" do
           click_button 'Pesquisar'
 
           expect(page).to have_content '3.0.10.01.12'
-          expect(page).not_to have_content '3.0.10.01.10'
+          expect(page).to_not have_content '3.0.10.01.10'
         end
       end
     end
@@ -250,7 +250,7 @@ feature "Pledges" do
           click_button 'Pesquisar'
 
           expect(page).to have_content '3.0.10.01.12'
-          expect(page).not_to have_content '3.0.10.01.10'
+          expect(page).to_not have_content '3.0.10.01.10'
         end
       end
     end
@@ -285,7 +285,7 @@ feature "Pledges" do
           click_button 'Pesquisar'
 
           expect(page).to have_content '3.0.10.01.12'
-          expect(page).not_to have_content '3.0.10.01.10'
+          expect(page).to_not have_content '3.0.10.01.10'
         end
       end
     end
@@ -320,7 +320,7 @@ feature "Pledges" do
           click_button 'Pesquisar'
 
           expect(page).to have_content '3.0.10.01.12'
-          expect(page).not_to have_content '3.0.10.01.10'
+          expect(page).to_not have_content '3.0.10.01.10'
         end
       end
     end
@@ -435,7 +435,7 @@ feature "Pledges" do
     end
 
     within_tab 'Itens' do
-      expect(page).not_to have_content 'não pode ficar em branco'
+      expect(page).to_not have_content 'não pode ficar em branco'
     end
   end
 
@@ -491,7 +491,7 @@ feature "Pledges" do
 
     click_link pledge.to_s
 
-    expect(page).not_to have_link "Apagar"
+    expect(page).to_not have_link "Apagar"
   end
 
   scenario 'Fill budget allocation informations when select reserve fund' do
@@ -748,7 +748,7 @@ feature "Pledges" do
       within_modal 'Contrato de dívida' do
         click_button 'Pesquisar'
 
-        expect(page).not_to have_content '001'
+        expect(page).to_not have_content '001'
         expect(page).to have_content '101'
 
         click_link 'Cancelar'
@@ -760,7 +760,7 @@ feature "Pledges" do
         click_button 'Pesquisar'
 
         expect(page).to have_content '001'
-        expect(page).not_to have_content '101'
+        expect(page).to_not have_content '101'
       end
     end
   end
@@ -881,7 +881,7 @@ feature "Pledges" do
       fill_modal 'Reserva de dotação', :with => '22/02/2012', :field => 'Data'
 
       expect(page).to have_field 'Dotação', :with => '1 - Alocação'
-      expect(page).not_to have_disabled_field 'Desdobramento'
+      expect(page).to_not have_disabled_field 'Desdobramento'
 
       clear_modal 'Dotação'
 
@@ -889,7 +889,7 @@ feature "Pledges" do
 
       fill_modal 'Dotação', :with => '1', :field => 'Código'
 
-      expect(page).not_to have_disabled_field 'Desdobramento'
+      expect(page).to_not have_disabled_field 'Desdobramento'
     end
   end
 end

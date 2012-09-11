@@ -130,7 +130,7 @@ feature "Creditors" do
     click_link 'Tal'
 
     expect(page).to have_field 'Inscrição especial', :with => 'Tal'
-    expect(page).not_to have_field 'Porte da empresa'
+    expect(page).to_not have_field 'Porte da empresa'
 
     within_tab 'Contas Bancárias' do
       expect(page).to have_field 'Banco', :with => 'Itaú'
@@ -323,7 +323,7 @@ feature "Creditors" do
       expect(page).to have_field 'Número do registro na junta comercial', :with => '099901'
       expect(page).to have_disabled_field 'Data do registro na junta comercial'
       expect(page).to have_field 'Data do registro na junta comercial', :with => '29/06/2011'
-      expect(page).not_to have_field 'PIS/PASEP'
+      expect(page).to_not have_field 'PIS/PASEP'
     end
 
     within_tab 'CNAEs' do
@@ -490,7 +490,7 @@ feature "Creditors" do
       expect(page).to have_checked_field 'Autônomo'
       expect(page).to have_field 'PIS/PASEP', :with => '123456'
       expect(page).to have_field 'Início do contrato', :with => '05/04/2012'
-      expect(page).not_to have_field 'Porte da empresa'
+      expect(page).to_not have_field 'Porte da empresa'
     end
 
     within_tab 'Materiais' do
@@ -591,7 +591,7 @@ feature "Creditors" do
     fill_in 'Data de registro na junta comercial', :with => '05/04/2011'
     fill_in 'Número na junta comercial', :with => '12345678'
 
-    expect(page).not_to have_link 'Imprimir certificado de registro cadastral'
+    expect(page).to_not have_link 'Imprimir certificado de registro cadastral'
 
     click_button 'Salvar'
 
@@ -717,7 +717,7 @@ feature "Creditors" do
 
     click_link 'Gabriel Sobrinho'
 
-    expect(page).not_to have_link 'CRC'
+    expect(page).to_not have_link 'CRC'
   end
 
   scenario 'update a creditor when people is special entry' do
@@ -795,8 +795,8 @@ feature "Creditors" do
     expect(page).to have_field 'creditor_creditable', :with => 'Mateus Lorandi'
 
     within_tab 'Contas Bancárias' do
-      expect(page).not_to have_field 'Banco', :with => 'Itaú'
-      expect(page).not_to have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).to_not have_field 'Banco', :with => 'Itaú'
+      expect(page).to_not have_field 'Agência', :with => 'Agência Itaú'
 
       expect(page).to have_field 'Banco', :with => 'Santander'
       expect(page).to have_field 'Agência', :with => 'Agência Santander'
@@ -824,7 +824,7 @@ feature "Creditors" do
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
       expect(page).to have_field 'Motivo', :with => 'Ativação do registro cadastral'
       expect(page).to have_field 'Tipo', :with => 'Regularização'
@@ -852,7 +852,7 @@ feature "Creditors" do
       expect(page).to have_disabled_field 'Porte da empresa'
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
       expect(page).to have_disabled_field 'Optante pelo simples'
-      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to_not have_checked_field 'Optante pelo simples'
       expect(page).to have_disabled_field 'Natureza jurídica'
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
       expect(page).to have_disabled_field 'Número do registro na junta comercial'
@@ -978,7 +978,7 @@ feature "Creditors" do
       expect(page).to have_disabled_field 'Porte da empresa'
       expect(page).to have_field 'Porte da empresa', :with => 'Microempresa'
       expect(page).to have_disabled_field 'Optante pelo simples'
-      expect(page).not_to have_checked_field 'Optante pelo simples'
+      expect(page).to_not have_checked_field 'Optante pelo simples'
       expect(page).to have_disabled_field 'Natureza jurídica'
       expect(page).to have_field 'Natureza jurídica', :with => 'Administração Pública'
       expect(page).to have_disabled_field 'Número do registro na junta comercial'
@@ -991,8 +991,8 @@ feature "Creditors" do
       expect(page).to have_field 'CNAE principal', :with => 'Aluguel de outras máquinas'
       expect(page).to have_content '94308'
       expect(page).to have_content 'Atividades de associações de defesa de direitos sociais'
-      expect(page).not_to have_content '7739099'
-      expect(page).not_to have_content 'Aluguel de outras máquinas'
+      expect(page).to_not have_content '7739099'
+      expect(page).to_not have_content 'Aluguel de outras máquinas'
     end
 
     within_tab 'Documentos' do
@@ -1002,28 +1002,28 @@ feature "Creditors" do
       expect(page).to have_field 'Data de validade', :with => '05/05/2013'
       expect(page).to have_field 'Órgão emissor', :with => 'PM'
 
-      expect(page).not_to have_content 'SSP'
+      expect(page).to_not have_content 'SSP'
     end
 
     within_tab 'Representantes' do
-      expect(page).not_to have_content 'Gabriel Sobrinho'
-      expect(page).not_to have_content '003.151.987-37'
+      expect(page).to_not have_content 'Gabriel Sobrinho'
+      expect(page).to_not have_content '003.151.987-37'
 
       expect(page).to have_content 'Wenderson Malheiros'
       expect(page).to have_content '003.149.513-34'
     end
 
     within_tab 'Materiais' do
-      expect(page).not_to have_content '01.01.00001'
-      expect(page).not_to have_content 'Antivirus'
+      expect(page).to_not have_content '01.01.00001'
+      expect(page).to_not have_content 'Antivirus'
 
       expect(page).to have_content '02.02.00001'
       expect(page).to have_content 'Arame farpado'
     end
 
     within_tab 'Contas Bancárias' do
-      expect(page).not_to have_field 'Banco', :with => 'Itaú'
-      expect(page).not_to have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).to_not have_field 'Banco', :with => 'Itaú'
+      expect(page).to_not have_field 'Agência', :with => 'Agência Itaú'
 
       expect(page).to have_field 'Banco', :with => 'Santander'
       expect(page).to have_field 'Agência', :with => 'Agência Santander'
@@ -1046,7 +1046,7 @@ feature "Creditors" do
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
       expect(page).to have_field 'Motivo', :with => 'Ativação do registro cadastral'
       expect(page).to have_field 'Tipo', :with => 'Regularização'
@@ -1155,8 +1155,8 @@ feature "Creditors" do
     end
 
     within_tab 'Contas Bancárias' do
-      expect(page).not_to have_field 'Banco', :with => 'Itaú'
-      expect(page).not_to have_field 'Agência', :with => 'Agência Itaú'
+      expect(page).to_not have_field 'Banco', :with => 'Itaú'
+      expect(page).to_not have_field 'Agência', :with => 'Agência Itaú'
 
       expect(page).to have_field 'Banco', :with => 'Santander'
       expect(page).to have_field 'Agência', :with => 'Agência Santander'
@@ -1179,7 +1179,7 @@ feature "Creditors" do
     end
 
     within_tab 'Sanções Administrativas / Regularizações' do
-      expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+      expect(page).to_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
 
       expect(page).to have_field 'Motivo', :with => 'Ativação do registro cadastral'
       expect(page).to have_field 'Tipo', :with => 'Regularização'
@@ -1230,11 +1230,11 @@ feature "Creditors" do
     click_link 'Criar Credor'
 
     within "#creditor-tabs" do
-       expect(page).not_to have_link "Principal"
-       expect(page).not_to have_link "CNAEs"
-       expect(page).not_to have_link "Documentos"
+       expect(page).to_not have_link "Principal"
+       expect(page).to_not have_link "CNAEs"
+       expect(page).to_not have_link "Documentos"
        expect(page).to have_link "Materiais"
-       expect(page).not_to have_link "Representantes"
+       expect(page).to_not have_link "Representantes"
        expect(page).to have_link "Contas Bancárias"
        expect(page).to have_link "Balanço"
        expect(page).to have_link "Sanções Administrativas / Regularizações"
@@ -1254,10 +1254,10 @@ feature "Creditors" do
 
     within "#creditor-tabs" do
        expect(page).to have_link "Principal"
-       expect(page).not_to have_link "CNAEs"
-       expect(page).not_to have_link "Documentos"
+       expect(page).to_not have_link "CNAEs"
+       expect(page).to_not have_link "Documentos"
        expect(page).to have_link "Materiais"
-       expect(page).not_to have_link "Representantes"
+       expect(page).to_not have_link "Representantes"
        expect(page).to have_link "Contas Bancárias"
        expect(page).to have_link "Balanço"
        expect(page).to have_link "Sanções Administrativas / Regularizações"
@@ -1297,8 +1297,8 @@ feature "Creditors" do
 
     expect(page).to have_notice 'Credor apagado com sucesso.'
 
-    expect(page).not_to have_content 'Nohup'
-    expect(page).not_to have_content 'Microempresa'
+    expect(page).to_not have_content 'Nohup'
+    expect(page).to_not have_content 'Microempresa'
   end
 
   scenario 'destroy a CRC for a creditor' do
@@ -1318,7 +1318,7 @@ feature "Creditors" do
 
     expect(page).to have_notice 'Certificado de Registro Cadastral apagado com sucesso.'
 
-    expect(page).not_to have_link '2012'
-    expect(page).not_to have_content '2012'
+    expect(page).to_not have_link '2012'
+    expect(page).to_not have_content '2012'
   end
 end

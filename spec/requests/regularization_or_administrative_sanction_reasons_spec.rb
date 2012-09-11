@@ -55,6 +55,6 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     expect(page).to have_notice 'Motivo de Sanção Administrativa ou Regularização apagado com sucesso.'
 
-    expect(page).not_to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+    expect(page).to_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
   end
 end

@@ -81,7 +81,7 @@ feature "SignatureConfigurations" do
 
     clear_modal 'Assinatura'
 
-    expect(page).not_to have_field 'Cargo', :with => 'Gerente'
+    expect(page).to_not have_field 'Cargo', :with => 'Gerente'
   end
 
   scenario 'update an existent signature_configuration' do
@@ -129,7 +129,7 @@ feature "SignatureConfigurations" do
     expect(page).to have_notice 'Configuração de Assinatura apagado com sucesso.'
 
     within_records do
-      expect(page).not_to have_content 'Autorizações de Fornecimento'
+      expect(page).to_not have_content 'Autorizações de Fornecimento'
     end
   end
 
@@ -147,7 +147,7 @@ feature "SignatureConfigurations" do
 
     within_records do
       expect(page).to have_link 'Processos Administrativos'
-      expect(page).not_to have_link 'Autorizações de Fornecimento'
+      expect(page).to_not have_link 'Autorizações de Fornecimento'
     end
   end
 end

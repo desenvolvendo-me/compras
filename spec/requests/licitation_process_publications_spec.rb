@@ -117,6 +117,6 @@ feature "LicitationProcessPublications" do
 
     expect(page).to have_notice 'Publicação apagado com sucesso'
 
-    expect(page).not_to have_link 'Publicacao'
+    expect(page).to_not have_link 'Publicacao'
   end
 end

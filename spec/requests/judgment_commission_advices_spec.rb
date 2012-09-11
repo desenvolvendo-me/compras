@@ -177,7 +177,7 @@ feature "JudgmentCommissionAdvices" do
     end
 
     within_tab 'Membros' do
-      expect(page).not_to have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to_not have_field 'Membro', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
     end
 
@@ -216,7 +216,7 @@ feature "JudgmentCommissionAdvices" do
 
     expect(page).to have_notice 'Parecer da Comissão Julgadora apagado com sucesso.'
 
-    expect(page).not_to have_link advice.to_s
+    expect(page).to_not have_link advice.to_s
   end
 
   scenario 'create another judgment_commission_advice to test the generated minutes number and judgment sequence' do

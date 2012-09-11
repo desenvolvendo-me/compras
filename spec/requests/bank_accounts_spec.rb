@@ -278,6 +278,6 @@ feature "BankAccounts" do
 
     expect(page).to have_notice 'Conta Bancária apagado com sucesso.'
 
-    expect(page).not_to have_content 'Itaú Tributos'
+    expect(page).to_not have_content 'Itaú Tributos'
   end
 end

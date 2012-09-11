@@ -51,6 +51,6 @@ feature "FiscalYears" do
 
     expect(page).to have_notice 'Exercício Fiscal apagado com sucesso.'
 
-    expect(page).not_to have_content '2011'
+    expect(page).to_not have_content '2011'
   end
 end

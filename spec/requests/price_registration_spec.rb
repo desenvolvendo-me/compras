@@ -107,12 +107,12 @@ feature "PriceRegistration" do
         expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
         expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
-        expect(page).to have_select 'Carona', :selected => 'Não' 
+        expect(page).to have_select 'Carona', :selected => 'Não'
 
         within 'div.price-registration-budget-structure:last' do
           expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
           expect(page).to have_field 'Quantidade solicitada', :with => '100,00'
-          expect(page).to have_select 'Carona', :selected => 'Não' 
+          expect(page).to have_select 'Carona', :selected => 'Não'
         end
       end
 
@@ -191,12 +191,12 @@ feature "PriceRegistration" do
       expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
       expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Quantidade solicitada', :with => '400,00'
-      expect(page).to have_select 'Carona', :selected => 'Não' 
+      expect(page).to have_select 'Carona', :selected => 'Não'
 
       within 'div.price-registration-budget-structure:last' do
         expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
-        expect(page).to have_select 'Carona', :selected => 'Não' 
+        expect(page).to have_select 'Carona', :selected => 'Não'
       end
     end
   end
@@ -212,9 +212,9 @@ feature "PriceRegistration" do
 
     expect(page).to have_notice 'Registro de Preço apagado com sucesso.'
 
-    expect(page).not_to have_content '1'
-    expect(page).not_to have_content '05/04/2012'
-    expect(page).not_to have_content 'Aquisição de combustíveis'
+    expect(page).to_not have_content '1'
+    expect(page).to_not have_content '05/04/2012'
+    expect(page).to_not have_content 'Aquisição de combustíveis'
   end
 
   scenario 'licitation process modal should list only records with price_registrations' do

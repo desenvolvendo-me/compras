@@ -102,8 +102,8 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).not_to have_button 'Adicionar Dotação'
-      expect(page).not_to have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to_not have_button 'Remover Dotação'
 
       expect(page).to have_disabled_field 'Dotação orçamentaria'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -140,8 +140,8 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).not_to have_button 'Adicionar Dotação'
-      expect(page).not_to have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to_not have_button 'Remover Dotação'
 
       expect(page).to have_disabled_field 'Dotação orçamentaria'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -171,8 +171,8 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).not_to have_button 'Adicionar Dotação'
-      expect(page).not_to have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to_not have_button 'Remover Dotação'
 
       expect(page).to have_disabled_field 'Dotação orçamentaria'
       expect(page).to have_disabled_field 'Saldo da dotação'
@@ -188,8 +188,8 @@ feature "AdministrativeProcesses" do
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_button 'Adicionar Dotação'
 
-      expect(page).not_to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).not_to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
   end
 
@@ -217,14 +217,14 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).not_to have_button 'Adicionar Dotação'
-      expect(page).not_to have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to_not have_button 'Remover Dotação'
 
-      expect(page).not_to have_field 'Dotação orçamentaria', :with => ''
+      expect(page).to_not have_field 'Dotação orçamentaria', :with => ''
       expect(page).to have_field 'Saldo da dotação', :with => '500,00'
-      expect(page).not_to have_field 'Valor previsto', :with => '20,00'
+      expect(page).to_not have_field 'Valor previsto', :with => '20,00'
 
-      expect(page).not_to have_field 'Valor total', :with => '20,00'
+      expect(page).to_not have_field 'Valor total', :with => '20,00'
     end
   end
 
@@ -255,8 +255,8 @@ feature "AdministrativeProcesses" do
       expect(page).to have_disabled_field 'Saldo da dotação'
       expect(page).to have_disabled_field 'Valor previsto'
 
-      expect(page).not_to have_button 'Adicionar Dotação'
-      expect(page).not_to have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to_not have_button 'Remover Dotação'
     end
   end
 
@@ -430,8 +430,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_select 'Status do processo administrativo', :selected => 'Liberado'
-    expect(page).not_to have_link 'Solicitação de abertura de processo licitatório'
+    expect(page).to_not have_select 'Status do processo administrativo', :selected => 'Liberado'
+    expect(page).to_not have_link 'Solicitação de abertura de processo licitatório'
   end
 
   scenario 'should have print button if status equals released' do
@@ -469,8 +469,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    expect(page).not_to have_link 'Liberar'
+    expect(page).to_not have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    expect(page).to_not have_link 'Liberar'
   end
 
   scenario "should have a annul button when editing an administrative process with status waiting" do
@@ -495,8 +495,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    expect(page).not_to have_button 'Anular'
+    expect(page).to_not have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    expect(page).to_not have_button 'Anular'
   end
 
   scenario "annuling an administrative process" do
@@ -546,8 +546,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_link 'Novo processo licitatório'
-    expect(page).not_to have_link 'Editar processo licitatório'
+    expect(page).to_not have_link 'Novo processo licitatório'
+    expect(page).to_not have_link 'Editar processo licitatório'
   end
 
   scenario "should not have a release and annull button at new" do
@@ -555,8 +555,8 @@ feature "AdministrativeProcesses" do
 
     click_link 'Criar Processo Administrativo'
 
-    expect(page).not_to have_button 'Anular'
-    expect(page).not_to have_button 'Liberar'
+    expect(page).to_not have_button 'Anular'
+    expect(page).to_not have_button 'Liberar'
   end
 
   scenario 'should not have licitation_process button if not allow licitation_process' do
@@ -568,7 +568,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_link 'Novo processo licitatório'
+    expect(page).to_not have_link 'Novo processo licitatório'
   end
 
   scenario 'should show only purchase_solicitation_item_group not annulled' do
@@ -586,7 +586,7 @@ feature "AdministrativeProcesses" do
         click_button 'Pesquisar'
 
         within_records do
-          expect(page).not_to have_content 'Agrupamento de reparo 2013'
+          expect(page).to_not have_content 'Agrupamento de reparo 2013'
           expect(page).to have_content 'Agrupamento de antivirus'
         end
       end

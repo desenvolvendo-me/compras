@@ -56,7 +56,7 @@ feature 'PriceCollectionAnnuls' do
     expect(page).to have_disabled_field 'Tipo da anulação'
     expect(page).to have_select 'Tipo da anulação', :selected => 'Anulação'
 
-    expect(page).not_to have_link 'Apagar'
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
+    expect(page).to_not have_button 'Salvar'
   end
 end

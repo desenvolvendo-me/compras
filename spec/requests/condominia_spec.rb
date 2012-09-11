@@ -56,6 +56,6 @@ feature "Condominia" do
 
     expect(page).to have_notice 'Condomínio apagado com sucesso.'
 
-    expect(page).not_to have_content 'Tambuata'
+    expect(page).to_not have_content 'Tambuata'
   end
 end

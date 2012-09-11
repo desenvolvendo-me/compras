@@ -23,7 +23,7 @@ feature "Addresses" do
         # 'Amazonas' is located in 'Portugal'
         # 'Girassol' is located in 'Centro' and 'São Francisco'
         expect(page).to have_content 'Portugal'
-        expect(page).not_to have_content 'Girassol'
+        expect(page).to_not have_content 'Girassol'
 
         click_record 'Portugal'
       end

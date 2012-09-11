@@ -74,7 +74,7 @@ feature "LicitationProcessLots" do
 
     click_link 'Lotes de itens'
 
-    expect(page).not_to have_link 'Criar Lote de itens'
+    expect(page).to_not have_link 'Criar Lote de itens'
   end
 
   scenario 'should not have Salvar neither Apagar buttons when updating a lot if licitation process is not updatable' do
@@ -94,9 +94,9 @@ feature "LicitationProcessLots" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_button 'Apagar'
-    expect(page).not_to have_button 'Remover'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_button 'Apagar'
+    expect(page).to_not have_button 'Remover'
   end
 
   scenario 'all fields should be disabled when updating a lot if licitation process is not updatable' do
@@ -175,7 +175,7 @@ feature "LicitationProcessLots" do
     expect(page).to have_notice 'Lote de itens apagado com sucesso'
 
     within_records do
-      expect(page).not_to have_css 'a'
+      expect(page).to_not have_css 'a'
     end
   end
 
@@ -199,7 +199,7 @@ feature "LicitationProcessLots" do
     within_modal 'Itens' do
       click_button 'Pesquisar'
 
-      expect(page).not_to have_content '01.01.00001 - Antivirus'
+      expect(page).to_not have_content '01.01.00001 - Antivirus'
       expect(page).to have_content '02.02.00002 - Arame comum'
 
       click_record '02.02.00002 - Arame comum'
@@ -208,8 +208,8 @@ feature "LicitationProcessLots" do
     within_modal 'Itens' do
       click_button 'Pesquisar'
 
-      expect(page).not_to have_content '01.01.00001 - Antivirus'
-      expect(page).not_to have_content '02.02.00002 - Arame comum'
+      expect(page).to_not have_content '01.01.00001 - Antivirus'
+      expect(page).to_not have_content '02.02.00002 - Arame comum'
     end
   end
 
@@ -235,7 +235,7 @@ feature "LicitationProcessLots" do
       click_button 'Pesquisar'
 
       # item 'Arame farpado' is not part of the administrative process and should not appear
-      expect(page).not_to have_content 'Arame farpado'
+      expect(page).to_not have_content 'Arame farpado'
 
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content 'Arame comum'
@@ -257,13 +257,13 @@ feature "LicitationProcessLots" do
       click_button 'Pesquisar'
 
       # item 'Arame farpado' is not part of the administrative process and should not appear
-      expect(page).not_to have_content 'Arame farpado'
+      expect(page).to_not have_content 'Arame farpado'
 
       # item 'Arame comum' is available and should appear
       expect(page).to have_content 'Arame comum'
 
       # item 'Antivirus' was taken and should not appear
-      expect(page).not_to have_content 'Antivirus'
+      expect(page).to_not have_content 'Antivirus'
     end
 
     # removing 'Antivirus' item
@@ -285,10 +285,10 @@ feature "LicitationProcessLots" do
       click_button 'Pesquisar'
 
       # item 'Arame farpado' is not part of the administrative process and should not appear
-      expect(page).not_to have_content 'Arame farpado'
+      expect(page).to_not have_content 'Arame farpado'
 
       # item 'Arame comum' was taken available and should not appear
-      expect(page).not_to have_content 'Arame comum'
+      expect(page).to_not have_content 'Arame comum'
 
       # item 'Antivirus' is available now and should appear
       expect(page).to have_content 'Antivirus'

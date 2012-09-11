@@ -74,7 +74,7 @@ feature "Descriptors" do
 
     expect(page).to have_notice 'Descritor apagado com sucesso.'
 
-    expect(page).not_to have_content 'Detran'
-    expect(page).not_to have_content '2012'
+    expect(page).to_not have_content 'Detran'
+    expect(page).to_not have_content '2012'
   end
 end

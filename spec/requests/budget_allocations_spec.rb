@@ -65,11 +65,11 @@ feature "BudgetAllocations" do
       expect(page).to have_select 'Tipo de dívida', :selected => 'Nenhuma'
       expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
       expect(page).to have_checked_field 'Refinanciamento'
-      expect(page).not_to have_checked_field 'Saúde'
-      expect(page).not_to have_checked_field 'Recurso alienação'
-      expect(page).not_to have_checked_field 'Educação'
-      expect(page).not_to have_checked_field 'Previdência'
-      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to_not have_checked_field 'Saúde'
+      expect(page).to_not have_checked_field 'Recurso alienação'
+      expect(page).to_not have_checked_field 'Educação'
+      expect(page).to_not have_checked_field 'Previdência'
+      expect(page).to_not have_checked_field 'Pessoal'
       expect(page).to have_field 'Data', :with => '17/02/2012'
     end
 
@@ -130,11 +130,11 @@ feature "BudgetAllocations" do
       expect(page).to have_select 'Tipo de dívida', :selected => 'Nenhuma'
       expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
       expect(page).to have_checked_field 'Refinanciamento'
-      expect(page).not_to have_checked_field 'Saúde'
-      expect(page).not_to have_checked_field 'Recurso alienação'
-      expect(page).not_to have_checked_field 'Educação'
-      expect(page).not_to have_checked_field 'Previdência'
-      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to_not have_checked_field 'Saúde'
+      expect(page).to_not have_checked_field 'Recurso alienação'
+      expect(page).to_not have_checked_field 'Educação'
+      expect(page).to_not have_checked_field 'Previdência'
+      expect(page).to_not have_checked_field 'Pessoal'
       expect(page).to have_field 'Data', :with => '17/02/2012'
     end
 
@@ -196,11 +196,11 @@ feature "BudgetAllocations" do
       expect(page).to have_select 'Tipo de dívida', :selected => 'Nenhuma'
       expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Administrativa'
       expect(page).to have_checked_field 'Refinanciamento'
-      expect(page).not_to have_checked_field 'Saúde'
-      expect(page).not_to have_checked_field 'Recurso alienação'
-      expect(page).not_to have_checked_field 'Educação'
-      expect(page).not_to have_checked_field 'Previdência'
-      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to_not have_checked_field 'Saúde'
+      expect(page).to_not have_checked_field 'Recurso alienação'
+      expect(page).to_not have_checked_field 'Educação'
+      expect(page).to_not have_checked_field 'Previdência'
+      expect(page).to_not have_checked_field 'Pessoal'
       expect(page).to have_field 'Data', :with => '17/02/2012'
     end
 
@@ -291,12 +291,12 @@ feature "BudgetAllocations" do
       expect(page).to have_field 'Objetivo', :with => 'Construção da Unidade Administrativa'
       expect(page).to have_select 'Tipo de dívida', :selected => 'Contrato'
       expect(page).to have_field 'Tipo de dotação', :with => 'Dotação Presidencial'
-      expect(page).not_to have_checked_field 'Refinanciamento'
+      expect(page).to_not have_checked_field 'Refinanciamento'
       expect(page).to have_checked_field 'Saúde'
-      expect(page).not_to have_checked_field 'Recurso alienação'
-      expect(page).not_to have_checked_field 'Educação'
-      expect(page).not_to have_checked_field 'Previdência'
-      expect(page).not_to have_checked_field 'Pessoal'
+      expect(page).to_not have_checked_field 'Recurso alienação'
+      expect(page).to_not have_checked_field 'Educação'
+      expect(page).to_not have_checked_field 'Previdência'
+      expect(page).to_not have_checked_field 'Pessoal'
       expect(page).to have_field 'Data', :with => '01/02/2012'
     end
 
@@ -319,7 +319,7 @@ feature "BudgetAllocations" do
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
 
-      expect(page).not_to have_disabled_field 'Subfunção'
+      expect(page).to_not have_disabled_field 'Subfunção'
 
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição' do
         expect(page).to have_field 'filter_function', :with => '04 - Administração'
@@ -337,7 +337,7 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      expect(page).not_to have_disabled_field 'Subfunção'
+      expect(page).to_not have_disabled_field 'Subfunção'
     end
   end
 
@@ -392,7 +392,7 @@ feature "BudgetAllocations" do
 
     expect(page).to have_notice 'Dotação Orçamentaria apagado com sucesso.'
 
-    expect(page).not_to have_content 'Alocação extra'
+    expect(page).to_not have_content 'Alocação extra'
   end
 
   scenario 'validates uniqueness of name' do
@@ -426,7 +426,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     expect(page).to have_content 'Manutenção e Reparo'
-    expect(page).not_to have_content 'Alocação'
+    expect(page).to_not have_content 'Alocação'
   end
 
   scenario 'should filter by descriptor' do
@@ -441,7 +441,7 @@ feature "BudgetAllocations" do
 
     click_button 'Pesquisar'
 
-    expect(page).not_to have_content 'Manutenção e Reparo'
+    expect(page).to_not have_content 'Manutenção e Reparo'
     expect(page).to have_content 'Alocação'
   end
 
@@ -458,7 +458,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     expect(page).to have_content 'Manutenção e Reparo'
-    expect(page).not_to have_content 'Alocação'
+    expect(page).to_not have_content 'Alocação'
   end
 
   scenario 'should filter by government program' do
@@ -474,7 +474,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     expect(page).to have_content 'Manutenção e Reparo'
-    expect(page).not_to have_content 'Alocação'
+    expect(page).to_not have_content 'Alocação'
   end
 
   scenario 'should filter by government action' do
@@ -490,7 +490,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     expect(page).to have_content 'Manutenção e Reparo'
-    expect(page).not_to have_content 'Alocação'
+    expect(page).to_not have_content 'Alocação'
   end
 
   scenario 'should filter by expense nature' do
@@ -506,7 +506,7 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     expect(page).to have_content 'Manutenção e Reparo'
-    expect(page).not_to have_content 'Alocação'
+    expect(page).to_not have_content 'Alocação'
   end
 
   scenario 'should filter by function' do
@@ -522,6 +522,6 @@ feature "BudgetAllocations" do
     click_button 'Pesquisar'
 
     expect(page).to have_content 'Manutenção e Reparo'
-    expect(page).not_to have_content 'Alocação'
+    expect(page).to_not have_content 'Alocação'
   end
 end

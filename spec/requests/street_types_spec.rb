@@ -56,6 +56,6 @@ feature "StreetTypes" do
 
     expect(page).to have_notice 'Tipo de Logradouro apagado com sucesso.'
 
-    expect(page).not_to have_content 'Rua'
+    expect(page).to_not have_content 'Rua'
   end
 end

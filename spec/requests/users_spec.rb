@@ -76,7 +76,7 @@ feature "Users" do
 
     expect(page).to have_notice 'Usuário apagado com sucesso.'
 
-    expect(page).not_to have_content 'Wenderson Malheiros'
+    expect(page).to_not have_content 'Wenderson Malheiros'
   end
 
   scenario 'open the window to new perfil through the perfil modal' do
@@ -100,8 +100,8 @@ feature "Users" do
 
     within_records do
       expect(page).to have_link 'wenderson.malheiros'
-      expect(page).not_to have_link 'gabriel.sobrinho'
-      expect(page).not_to have_link 'sobrinhosa'
+      expect(page).to_not have_link 'gabriel.sobrinho'
+      expect(page).to_not have_link 'sobrinhosa'
 
       expect(page).to have_css 'a', :count => 1
     end

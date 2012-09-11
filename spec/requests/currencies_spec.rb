@@ -55,6 +55,6 @@ feature "Currencies" do
 
     expect(page).to have_notice 'Moeda apagada com sucesso.'
 
-    expect(page).not_to have_content 'Real'
+    expect(page).to_not have_content 'Real'
   end
 end

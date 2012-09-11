@@ -71,10 +71,10 @@ feature "LegalReferences" do
 
     expect(page).to have_notice 'Referência Legal apagada com sucesso.'
 
-    expect(page).not_to have_content 'Referencia'
-    expect(page).not_to have_content '001'
-    expect(page).not_to have_content '002'
-    expect(page).not_to have_content '003'
-    expect(page).not_to have_content '004'
+    expect(page).to_not have_content 'Referencia'
+    expect(page).to_not have_content '001'
+    expect(page).to_not have_content '002'
+    expect(page).to_not have_content '003'
+    expect(page).to_not have_content '004'
   end
 end

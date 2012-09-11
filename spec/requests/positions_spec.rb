@@ -51,7 +51,7 @@ feature "Positions" do
 
     expect(page).to have_notice 'Cargo apagado com sucesso.'
 
-    expect(page).not_to have_content 'Gerente'
+    expect(page).to_not have_content 'Gerente'
   end
 
   scenario 'validate uniqueness of code' do

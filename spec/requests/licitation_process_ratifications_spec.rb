@@ -18,7 +18,7 @@ feature "LicitationProcessRatifications" do
 
     fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
 
-    expect(page).not_to have_disabled_field 'Participante vencedor'
+    expect(page).to_not have_disabled_field 'Participante vencedor'
 
     within_modal 'Participante vencedor' do
       expect(page).to have_field 'Processo licitatório', :with => licitation_process.to_s
@@ -64,7 +64,7 @@ feature "LicitationProcessRatifications" do
       page.find('a').click
     end
 
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'
@@ -87,7 +87,7 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content 'Antivirus'
     expect(page).to have_content '10,00'
 
-    expect(page).not_to have_checked_field bidder_checkbok_html_name(0)
+    expect(page).to_not have_checked_field bidder_checkbok_html_name(0)
   end
 
   scenario 'cleaning items' do
@@ -126,7 +126,7 @@ feature "LicitationProcessRatifications" do
 
     clear_modal 'Participante vencedor'
 
-    expect(page).not_to have_content 'Antivirus'
+    expect(page).to_not have_content 'Antivirus'
   end
 
   scenario 'print report' do

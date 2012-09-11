@@ -17,7 +17,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -46,7 +46,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -83,7 +83,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -113,7 +113,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -135,7 +135,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -171,7 +171,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -207,7 +207,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -243,7 +243,7 @@ feature "LicitationProcesses" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Relatório'
+    expect(page).to_not have_button 'Relatório'
 
     click_button 'Apurar'
 
@@ -444,9 +444,9 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
 
-    expect(page).not_to have_link 'Publicações'
+    expect(page).to_not have_link 'Publicações'
 
-    expect(page).not_to have_button 'Apurar'
+    expect(page).to_not have_button 'Apurar'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
@@ -620,7 +620,7 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content "Criar Processo Licitatório no Processo Administrativo 1/2012"
 
-    expect(page).not_to have_link 'Publicações'
+    expect(page).to_not have_link 'Publicações'
 
     within_tab 'Principal' do
       fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
@@ -732,11 +732,11 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Data do contrato', :with => '31/03/2013'
       expect(page).to have_field 'Validade do contrato (meses)', :with => '6'
       expect(page).to have_field 'Observações gerais', :with => 'novas observacoes'
-      expect(page).not_to have_checked_field 'Registro de preço'
+      expect(page).to_not have_checked_field 'Registro de preço'
     end
 
     within_tab 'Documentos' do
-      expect(page).not_to have_content 'Fiscal'
+      expect(page).to_not have_content 'Fiscal'
 
       expect(page).to have_content 'Oficial'
     end
@@ -956,7 +956,7 @@ feature "LicitationProcesses" do
     end
 
     within_tab 'Documentos' do
-      expect(page).not_to have_field 'Documento', :with => 'Fiscal'
+      expect(page).to_not have_field 'Documento', :with => 'Fiscal'
       expect(page).to have_field 'Documento', :with => 'Oficial'
     end
   end
@@ -972,7 +972,7 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    expect(page).not_to have_link 'Apurar'
+    expect(page).to_not have_link 'Apurar'
   end
 
   scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
@@ -986,15 +986,15 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_button 'Salvar'
 
     within_tab 'Documentos' do
-      expect(page).not_to have_button 'Remover'
+      expect(page).to_not have_button 'Remover'
     end
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).not_to have_button 'Adicionar Item'
-      expect(page).not_to have_button 'Remover Item'
+      expect(page).to_not have_button 'Adicionar Item'
+      expect(page).to_not have_button 'Remover Item'
     end
   end
 
@@ -1009,7 +1009,7 @@ feature "LicitationProcesses" do
 
     click_link 'Novo processo licitatório'
 
-    expect(page).not_to have_link 'Lotes de itens'
+    expect(page).to_not have_link 'Lotes de itens'
   end
 
   scenario "should brings some filled fields when creating a new licitatoin process" do
@@ -1116,7 +1116,7 @@ feature "LicitationProcesses" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_content 'Routing Error No route matches'
+    expect(page).to_not have_content 'Routing Error No route matches'
   end
 
   scenario 'should filter by process' do

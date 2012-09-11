@@ -51,7 +51,7 @@ feature "PaymentMethods" do
 
     expect(page).to have_notice 'Forma de Pagamento apagada com sucesso.'
 
-    expect(page).not_to have_content 'Dinheiro'
+    expect(page).to_not have_content 'Dinheiro'
   end
 
   scenario 'validate presence of description' do

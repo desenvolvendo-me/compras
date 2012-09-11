@@ -62,8 +62,8 @@ feature 'ContractTerminationAnnuls' do
     expect(page).to have_disabled_field 'Justificativa'
     expect(page).to have_field 'Justificativa', :with => 'Rescisão Anulada'
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
   end
 
   scenario 'a contract termination annul cancel should back to contract termination' do

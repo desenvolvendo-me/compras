@@ -50,7 +50,7 @@ feature "Streets" do
 
     fill_in 'Zona fiscal', :with => '003'
 
-    fill_modal 'Bairro', :with => 'Portugal' 
+    fill_modal 'Bairro', :with => 'Portugal'
 
     click_button 'Salvar'
 
@@ -75,7 +75,7 @@ feature "Streets" do
 
     expect(page).to have_notice 'Logradouro apagado com sucesso.'
 
-    expect(page).not_to have_content 'Girassol'
+    expect(page).to_not have_content 'Girassol'
   end
 
   scenario 'should not allow more than one time neighborhood' do

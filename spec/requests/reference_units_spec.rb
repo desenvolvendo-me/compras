@@ -55,6 +55,6 @@ feature "ReferenceUnits" do
 
     expect(page).to have_notice 'Unidade de Referência apagada com sucesso.'
 
-    expect(page).not_to have_content 'Metro'
+    expect(page).to_not have_content 'Metro'
   end
 end

@@ -56,8 +56,8 @@ feature "ReserveAllocationTypes" do
 
     expect(page).to have_notice 'Tipo de Reserva de Dotação apagado com sucesso.'
 
-    expect(page).not_to have_field 'Descrição', :with => 'Reserva para Educação'
-    expect(page).not_to have_select 'Status', :selected => 'Ativo'
+    expect(page).to_not have_field 'Descrição', :with => 'Reserva para Educação'
+    expect(page).to_not have_select 'Status', :selected => 'Ativo'
   end
 
   scenario 'validate uniqueness of description' do

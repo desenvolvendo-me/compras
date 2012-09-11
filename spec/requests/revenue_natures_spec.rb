@@ -239,7 +239,7 @@ feature "RevenueNatures" do
 
     expect(page).to have_notice 'Natureza da Receita apagado com sucesso.'
 
-    expect(page).not_to have_content '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
+    expect(page).to_not have_content '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
   end
 
   context 'filtering' do
@@ -256,7 +256,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by specification' do
@@ -272,7 +272,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by descriptor' do
@@ -294,7 +294,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by kind' do
@@ -310,7 +310,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_category' do
@@ -332,7 +332,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_subcategory' do
@@ -354,7 +354,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_source' do
@@ -376,7 +376,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by revenue_rubric' do
@@ -398,7 +398,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
 
     scenario 'should filter by classification' do
@@ -414,7 +414,7 @@ feature "RevenueNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '1.1.1.2.12.34'
-      expect(page).not_to have_content '7.9.4.0.00.00'
+      expect(page).to_not have_content '7.9.4.0.00.00'
     end
   end
 end

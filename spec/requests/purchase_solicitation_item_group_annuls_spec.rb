@@ -15,8 +15,8 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
-    expect(page).not_to have_link 'Anular'
-    expect(page).not_to have_link 'Anulação'
+    expect(page).to_not have_link 'Anular'
+    expect(page).to_not have_link 'Anulação'
   end
 
   scenario 'should see the default values on the screen' do
@@ -34,7 +34,7 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
     expect(page).to have_button 'Salvar'
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
   end
 
 
@@ -56,8 +56,8 @@ feature 'PurchaseSolicitationAnnul' do
 
     expect(page).to have_content 'Anulação de Recurso criado com sucesso.'
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_link 'Anular'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Anular'
 
     click_link 'Anulação'
 
@@ -68,8 +68,8 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to have_field 'Justificativa', :with => 'Foo Bar'
     expect(page).to have_disabled_field 'Justificativa'
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
     expect(page).to have_link 'Cancelar'
   end
 
@@ -83,6 +83,6 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Agrupamento de antivirus'
 
-    expect(page).not_to have_button 'Anular'
+    expect(page).to_not have_button 'Anular'
   end
 end

@@ -66,9 +66,9 @@ feature "MaterialsClasses" do
 
     expect(page).to have_notice 'Classe de Materiais apagado com sucesso.'
 
-    expect(page).not_to have_content '01 - Informática'
-    expect(page).not_to have_content 'Software'
-    expect(page).not_to have_content 'Softwares de computador'
+    expect(page).to_not have_content '01 - Informática'
+    expect(page).to_not have_content 'Software'
+    expect(page).to_not have_content 'Softwares de computador'
   end
 
   scenario 'should validate uniqueness of class_number scoped to materials_group' do
@@ -99,7 +99,7 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_content 'já está em uso'
+    expect(page).to_not have_content 'já está em uso'
   end
 
   scenario 'should validate uniqueness of description scoped to materials_class' do
@@ -131,6 +131,6 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_content 'já está em uso'
+    expect(page).to_not have_content 'já está em uso'
   end
 end

@@ -68,8 +68,8 @@ feature "Subfunctions" do
 
     expect(page).to have_notice 'Subfunção apagada com sucesso.'
 
-    expect(page).not_to have_content '01'
-    expect(page).not_to have_content 'Adminstração Geral'
+    expect(page).to_not have_content '01'
+    expect(page).to_not have_content 'Adminstração Geral'
   end
 
   scenario 'validate uniqueness of code' do

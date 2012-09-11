@@ -56,8 +56,8 @@ feature "ExpenseKinds" do
 
     expect(page).to have_notice 'Tipo de Despesa apagado com sucesso.'
 
-    expect(page).not_to have_content 'Pagamentos'
-    expect(page).not_to have_content 'Ativo'
+    expect(page).to_not have_content 'Pagamentos'
+    expect(page).to_not have_content 'Ativo'
   end
 
   scenario 'validate uniqueness of description' do

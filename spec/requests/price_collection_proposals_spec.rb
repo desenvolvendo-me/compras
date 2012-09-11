@@ -18,7 +18,7 @@ feature "PriceCollectionProposals" do
       click_link 'Propostas'
 
       expect(page).to have_content 'Propostas para a Coleta 1/2012'
-      expect(page).not_to have_link 'Criar Proposta Para Coleta de Preços'
+      expect(page).to_not have_link 'Criar Proposta Para Coleta de Preços'
     end
 
     scenario 'the proposal should be created automatically when the price collection is created' do
@@ -46,7 +46,7 @@ feature "PriceCollectionProposals" do
 
       expect(page).to have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
 
-      expect(page).not_to have_link 'Apagar'
+      expect(page).to_not have_link 'Apagar'
     end
 
     scenario 'editing proposal' do
@@ -64,7 +64,7 @@ feature "PriceCollectionProposals" do
       expect(page).to have_disabled_field 'Valor total do lote'
       expect(page).to have_disabled_field 'Status'
 
-      expect(page).not_to have_button 'Salvar'
+      expect(page).to_not have_button 'Salvar'
       expect(page).to have_link 'Anular'
 
       click_link 'Cancelar'
@@ -92,7 +92,7 @@ feature "PriceCollectionProposals" do
       click_link 'Propostas'
 
       expect(page).to have_content 'Coletas de Preço'
-      expect(page).not_to have_content '1/2012 - Wenderson Malheiros'
+      expect(page).to_not have_content '1/2012 - Wenderson Malheiros'
       expect(page).to have_content '1/2012 - Gabriel Sobrinho'
     end
 
@@ -149,7 +149,7 @@ feature "PriceCollectionProposals" do
       expect(page).to have_field 'Valor total', :with => '500,00'
       expect(page).to have_field 'Valor total do lote', :with => '500,00'
 
-      expect(page).not_to have_link 'Anular'
+      expect(page).to_not have_link 'Anular'
 
       click_button 'Salvar'
 
@@ -169,7 +169,7 @@ feature "PriceCollectionProposals" do
 
        visit "/price_collection_proposals/#{proposal.id}/edit"
 
-       expect(page).not_to have_field "Coleta de Preços", :with => '1/2012'
+       expect(page).to_not have_field "Coleta de Preços", :with => '1/2012'
     end
   end
 end

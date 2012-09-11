@@ -43,12 +43,12 @@ feature "Contracts" do
 
     expect(page).to have_disabled_field 'Contrato principal'
     select 'Aditivo', :from => 'Tipo'
-    expect(page).not_to have_disabled_field 'Contrato principal'
+    expect(page).to_not have_disabled_field 'Contrato principal'
 
     click_button 'Salvar'
 
     expect(page).to have_select 'Tipo', :selected => 'Aditivo'
-    expect(page).not_to have_disabled_field 'Contrato principal'
+    expect(page).to_not have_disabled_field 'Contrato principal'
   end
 
   scenario 'create a new contract' do
@@ -70,7 +70,7 @@ feature "Contracts" do
     expect(page).to have_disabled_field 'Modalidade'
 
     select 'Aditivo', :from => 'Tipo'
-    expect(page).not_to have_disabled_field 'Contrato principal'
+    expect(page).to_not have_disabled_field 'Contrato principal'
     select 'Contrato principal', :from => 'Tipo'
     expect(page).to have_disabled_field 'Contrato principal'
 
@@ -191,12 +191,12 @@ feature "Contracts" do
 
     expect(page).to have_notice 'Contrato apagado com sucesso.'
 
-    expect(page).not_to have_content '2012'
-    expect(page).not_to have_content 'Detran'
-    expect(page).not_to have_content '001'
-    expect(page).not_to have_content '002'
-    expect(page).not_to have_content '23/02/2012'
-    expect(page).not_to have_content '24/02/2012'
+    expect(page).to_not have_content '2012'
+    expect(page).to_not have_content 'Detran'
+    expect(page).to_not have_content '001'
+    expect(page).to_not have_content '002'
+    expect(page).to_not have_content '23/02/2012'
+    expect(page).to_not have_content '24/02/2012'
   end
 
   scenario 'show pledges' do
@@ -283,9 +283,9 @@ feature "Contracts" do
 
     click_link 'Cronogramas de entrega'
 
-    expect(page).not_to have_field 'Observações', :with => 'entregue com atraso'
-    expect(page).not_to have_field 'Data de entrega', :with => '02/01/2012'
-    expect(page).not_to have_field 'Data prevista', :with => '01/01/2012'
-    expect(page).not_to have_select 'Status', :selected => 'Entregue'
+    expect(page).to_not have_field 'Observações', :with => 'entregue com atraso'
+    expect(page).to_not have_field 'Data de entrega', :with => '02/01/2012'
+    expect(page).to_not have_field 'Data prevista', :with => '01/01/2012'
+    expect(page).to_not have_select 'Status', :selected => 'Entregue'
   end
 end

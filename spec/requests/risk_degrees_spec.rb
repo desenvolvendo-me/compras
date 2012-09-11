@@ -55,6 +55,6 @@ feature "RiskDegrees" do
 
     expect(page).to have_notice 'Grau de Risco apagado com sucesso.'
 
-    expect(page).not_to have_content 'Grave'
+    expect(page).to_not have_content 'Grave'
   end
 end

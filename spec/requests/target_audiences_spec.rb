@@ -61,6 +61,6 @@ feature 'TargetAudiences' do
 
     expect(page).to have_notice 'Público Alvo apagado com sucesso.'
 
-    expect(page).not_to have_link 'Professores Públicos'
+    expect(page).to_not have_link 'Professores Públicos'
   end
 end

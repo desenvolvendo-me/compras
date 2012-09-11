@@ -62,6 +62,6 @@ feature "Cnaes" do
 
     expect(page).to have_notice 'CNAE apagado com sucesso.'
 
-    expect(page).not_to have_content 'Aluguel de outras máquinas'
+    expect(page).to_not have_content 'Aluguel de outras máquinas'
   end
 end

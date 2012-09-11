@@ -122,7 +122,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
 
     within_tab 'Principal' do
       fill_in 'Ano', :with => '2013'
@@ -284,7 +284,7 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).not_to have_field 'Item'
+      expect(page).to_not have_field 'Item'
       expect(page).to have_content 'é necessário cadastrar pelo menos um item'
 
       expect(page).to have_field 'Dotação'
@@ -295,7 +295,7 @@ feature "PurchaseSolicitations" do
     click_button 'Salvar'
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).not_to have_field 'Dotação'
+      expect(page).to_not have_field 'Dotação'
       expect(page).to have_content 'é necessário cadastrar pelo menos uma dotação'
     end
   end
@@ -455,7 +455,7 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_button 'Salvar'
   end
 
   scenario 'should show edit button when is returned' do
@@ -511,7 +511,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
 
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"
@@ -534,7 +534,7 @@ feature "PurchaseSolicitations" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_notice 'Solicitação de Compra criada com sucesso.'
+    expect(page).to_not have_notice 'Solicitação de Compra criada com sucesso.'
 
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"

@@ -350,10 +350,10 @@ feature "ExtraCredits" do
     click_link extra_credit.to_s
 
     within_tab 'Movimentos' do
-      expect(page).not_to have_field 'Tipo de movimento'
-      expect(page).not_to have_field 'Dotação'
-      expect(page).not_to have_field 'Recurso'
-      expect(page).not_to have_field 'Valor'
+      expect(page).to_not have_field 'Tipo de movimento'
+      expect(page).to_not have_field 'Dotação'
+      expect(page).to_not have_field 'Recurso'
+      expect(page).to_not have_field 'Valor'
     end
   end
 
@@ -488,9 +488,9 @@ feature "ExtraCredits" do
 
     expect(page).to have_notice 'Crédito Suplementar apagado com sucesso.'
 
-    expect(page).not_to have_content 'Detran'
-    expect(page).not_to have_content '2012'
-    expect(page).not_to have_content 'Especial'
+    expect(page).to_not have_content 'Detran'
+    expect(page).to_not have_content '2012'
+    expect(page).to_not have_content 'Especial'
   end
 
   scenario 'access modal' do
@@ -505,7 +505,7 @@ feature "ExtraCredits" do
     click_button 'Pesquisar'
 
     within_records do
-      expect(page).not_to have_css('a')
+      expect(page).to_not have_css('a')
     end
   end
 end

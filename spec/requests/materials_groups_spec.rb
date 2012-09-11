@@ -55,8 +55,8 @@ feature "MaterialsGroups" do
 
     expect(page).to have_notice 'Grupo de Materiais apagado com sucesso.'
 
-    expect(page).not_to have_content '01'
-    expect(page).not_to have_content 'Informática'
+    expect(page).to_not have_content '01'
+    expect(page).to_not have_content 'Informática'
   end
 
   scenario 'should validate uniqueness of group' do

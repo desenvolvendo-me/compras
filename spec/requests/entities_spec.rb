@@ -51,7 +51,7 @@ feature "Entities" do
 
     expect(page).to have_notice 'Entidade apagada com sucesso.'
 
-    expect(page).not_to have_content 'Detran'
+    expect(page).to_not have_content 'Detran'
   end
 
   scenario 'should validate uniqueness of name' do

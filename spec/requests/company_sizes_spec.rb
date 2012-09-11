@@ -61,6 +61,6 @@ feature "CompanySizes" do
 
     expect(page).to have_notice 'Porte da Empresa apagado com sucesso.'
 
-    expect(page).not_to have_content 'Empresa de grande porte'
+    expect(page).to_not have_content 'Empresa de grande porte'
   end
 end

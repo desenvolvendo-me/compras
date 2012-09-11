@@ -55,6 +55,6 @@ feature "Districts" do
 
     expect(page).to have_notice 'Distrito apagado com sucesso.'
 
-    expect(page).not_to have_content 'Sul'
+    expect(page).to_not have_content 'Sul'
   end
 end

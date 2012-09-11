@@ -63,7 +63,7 @@ feature "GovernmentActions" do
 
     expect(page).to have_notice 'Ação do Governo apagada com sucesso.'
 
-    expect(page).not_to have_content 'Ação Governamental'
-    expect(page).not_to have_content '2012'
+    expect(page).to_not have_content 'Ação Governamental'
+    expect(page).to_not have_content '2012'
   end
 end

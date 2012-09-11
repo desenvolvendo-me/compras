@@ -548,7 +548,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Apagar'
+    expect(page).to_not have_button 'Apagar'
   end
 
   scenario 'asserting that duplicated budget allocations cannot be saved' do
@@ -621,7 +621,7 @@ feature "DirectPurchases" do
 
     within_records do
       expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      expect(page).not_to have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -639,7 +639,7 @@ feature "DirectPurchases" do
 
     within_records do
       expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      expect(page).not_to have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -657,7 +657,7 @@ feature "DirectPurchases" do
 
     within_records do
       expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      expect(page).not_to have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
     end
   end
 
@@ -813,7 +813,7 @@ feature "DirectPurchases" do
     end
 
     within_tab 'Dotações' do
-      expect(page).not_to have_content 'está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
+      expect(page).to_not have_content 'está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
     end
   end
 
@@ -868,7 +868,7 @@ feature "DirectPurchases" do
         click_button 'Pesquisar'
 
         within_records do
-          expect(page).not_to have_content 'Agrupamento de reparo 2013'
+          expect(page).to_not have_content 'Agrupamento de reparo 2013'
           expect(page).to have_content 'Agrupamento de antivirus'
         end
       end

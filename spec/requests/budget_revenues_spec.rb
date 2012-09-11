@@ -245,6 +245,6 @@ feature "BudgetRevenues" do
 
     expect(page).to have_notice 'Receita Orçamentaria apagado com sucesso.'
 
-    expect(page).not_to have_content '1'
+    expect(page).to_not have_content '1'
   end
 end

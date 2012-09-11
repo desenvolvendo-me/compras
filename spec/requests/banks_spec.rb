@@ -59,6 +59,6 @@ feature "Banks" do
 
     expect(page).to have_notice 'Banco apagado com sucesso.'
 
-    expect(page).not_to have_content 'Itaú'
+    expect(page).to_not have_content 'Itaú'
   end
 end

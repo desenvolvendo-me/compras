@@ -15,8 +15,8 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Criar Solicitação de Compra'
 
-    expect(page).not_to have_link 'Anular'
-    expect(page).not_to have_link 'Anulação'
+    expect(page).to_not have_link 'Anular'
+    expect(page).to_not have_link 'Anulação'
   end
 
   scenario 'should see the default values on the screen' do
@@ -34,7 +34,7 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
     expect(page).to have_button 'Salvar'
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
   end
 
   scenario 'annuling a purchase solicitation' do
@@ -81,12 +81,12 @@ feature 'PurchaseSolicitationAnnul' do
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_disabled_field 'Valor total dos itens'
 
-      expect(page).not_to have_button 'Adicionar Dotação'
+      expect(page).to_not have_button 'Adicionar Dotação'
 
       expect(page).to have_disabled_field 'Dotação'
       expect(page).to have_disabled_field 'Natureza da despesa'
 
-      expect(page).not_to have_button 'Adicionar Item'
+      expect(page).to_not have_button 'Adicionar Item'
 
       expect(page).to have_disabled_field 'Item'
       expect(page).to have_disabled_field 'Material'
@@ -96,11 +96,11 @@ feature 'PurchaseSolicitationAnnul' do
       expect(page).to have_disabled_field 'Valor unitário'
       expect(page).to have_disabled_field 'Valor total'
 
-      expect(page).not_to have_button 'Remover Item'
-      expect(page).not_to have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Remover Item'
+      expect(page).to_not have_button 'Remover Dotação'
     end
 
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_button 'Salvar'
 
     click_link 'Anulação'
 
@@ -113,7 +113,7 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to have_disabled_field 'Justificativa'
     expect(page).to have_field 'Justificativa', :with => 'Foo Bar'
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
   end
 end

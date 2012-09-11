@@ -57,7 +57,7 @@ feature "States" do
 
     expect(page).to have_notice 'Estado apagado com sucesso.'
 
-    expect(page).not_to have_content 'Rio Grande do Sul'
-    expect(page).not_to have_content 'RS'
+    expect(page).to_not have_content 'Rio Grande do Sul'
+    expect(page).to_not have_content 'RS'
   end
 end

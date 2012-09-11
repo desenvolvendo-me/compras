@@ -117,7 +117,7 @@ feature "PurchaseSolicitationItemGroups" do
     within_modal 'Solicitação de compra' do
       click_button 'Pesquisar'
 
-      expect(page).not_to have_css 'table.records tbody tr'
+      expect(page).to_not have_css 'table.records tbody tr'
 
       click_link 'Cancelar'
     end
@@ -132,7 +132,7 @@ feature "PurchaseSolicitationItemGroups" do
     within_modal 'Solicitação de compra' do
       click_button 'Pesquisar'
 
-      expect(page).not_to have_css 'table.records tbody tr'
+      expect(page).to_not have_css 'table.records tbody tr'
 
       click_link 'Cancelar'
     end
@@ -229,9 +229,9 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to have_disabled_field 'Material'
     expect(page).to have_disabled_field 'Solicitações de compra'
 
-    expect(page).not_to have_button 'Adicionar Material'
-    expect(page).not_to have_button 'Remover Material'
-    expect(page).not_to have_button 'Remover'
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_button 'Adicionar Material'
+    expect(page).to_not have_button 'Remover Material'
+    expect(page).to_not have_button 'Remover'
+    expect(page).to_not have_button 'Salvar'
   end
 end

@@ -101,7 +101,7 @@ feature "PledgeCancellations" do
       page.find('a').click
     end
 
-    expect(page).not_to have_link "Apagar"
+    expect(page).to_not have_link "Apagar"
   end
 
   scenario 'access modal' do
@@ -118,7 +118,7 @@ feature "PledgeCancellations" do
 
     within_records do
       expect(page).to have_link pledge_cancellation.to_s
-      expect(page).not_to have_link pledge_cancellation_quize_dias.to_s
+      expect(page).to_not have_link pledge_cancellation_quize_dias.to_s
     end
   end
 end

@@ -90,12 +90,12 @@ feature "LicitationProcessAppeals" do
 
     expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagado com sucesso.'
 
-    expect(page).not_to have_content '1/2013'
-    expect(page).not_to have_content I18n.l(Date.new(2012, 3, 20))
-    expect(page).not_to have_content 'Revogação'
-    expect(page).not_to have_content 'Wenderson Malheiros'
-    expect(page).not_to have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow )
-    expect(page).not_to have_field 'Nova hora da abertura dos envelopes', :with => '14:00'
-    expect(page).not_to have_content "#{interposicao_processo_licitatorio}"
+    expect(page).to_not have_content '1/2013'
+    expect(page).to_not have_content I18n.l(Date.new(2012, 3, 20))
+    expect(page).to_not have_content 'Revogação'
+    expect(page).to_not have_content 'Wenderson Malheiros'
+    expect(page).to_not have_field 'Nova data da abertura dos envelopes', :with => I18n.l(Date.tomorrow )
+    expect(page).to_not have_field 'Nova hora da abertura dos envelopes', :with => '14:00'
+    expect(page).to_not have_content "#{interposicao_processo_licitatorio}"
   end
 end

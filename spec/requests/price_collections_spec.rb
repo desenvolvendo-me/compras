@@ -61,7 +61,7 @@ feature "PriceCollections" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_content 'Coleta de Preços criada com sucesso'
+    expect(page).to_not have_content 'Coleta de Preços criada com sucesso'
 
     within_tab 'Fornecedores' do
       expect(page).to have_content 'não pode ficar em branco'
@@ -79,8 +79,8 @@ feature "PriceCollections" do
 
     click_link 'Criar Coleta de Preços'
 
-    expect(page).not_to have_button 'Apurar'
-    expect(page).not_to have_link 'Relatório'
+    expect(page).to_not have_button 'Apurar'
+    expect(page).to_not have_link 'Relatório'
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Número'
@@ -228,7 +228,7 @@ feature "PriceCollections" do
 
       fill_modal 'Fornecedor', :with => 'José Gomes'
 
-      expect(page).not_to have_disabled_field 'Email'
+      expect(page).to_not have_disabled_field 'Email'
       fill_in 'Email', :with => 'contato@sobrinho.com'
     end
 
@@ -269,7 +269,7 @@ feature "PriceCollections" do
     end
 
     within_tab 'Fornecedores' do
-      expect(page).not_to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      expect(page).to_not have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Fornecedor', :with => 'José Gomes'
       expect(page).to have_field 'E-mail', :with => 'contato@sobrinho.com'
     end
@@ -284,7 +284,7 @@ feature "PriceCollections" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Apagar'
+    expect(page).to_not have_button 'Apagar'
   end
 
   scenario 'trying to create without items to see the error message' do
@@ -381,9 +381,9 @@ feature "PriceCollections" do
       expect(page).to have_field 'Marca', :with => 'Aço inox'
       expect(page).to have_field 'Quantidade', :with => '100'
 
-      expect(page).not_to have_field 'Material', :with => '01.01.00001 - Antivirus'
-      expect(page).not_to have_field 'Marca', :with => 'Norton'
-      expect(page).not_to have_field 'Quantidade', :with => '10'
+      expect(page).to_not have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to_not have_field 'Marca', :with => 'Norton'
+      expect(page).to_not have_field 'Quantidade', :with => '10'
     end
   end
 
@@ -467,7 +467,7 @@ feature "PriceCollections" do
     end
 
     within_tab 'Lotes de itens' do
-      expect(page).not_to have_field 'Observações', :with => 'lote da coleta'
+      expect(page).to_not have_field 'Observações', :with => 'lote da coleta'
     end
   end
 
@@ -482,7 +482,7 @@ feature "PriceCollections" do
 
     within_tab 'Lotes de itens' do
       expect(page).to have_content 'Lote 1'
-      expect(page).not_to have_content 'Lote 2'
+      expect(page).to_not have_content 'Lote 2'
 
       click_button 'Adicionar Lote'
 
@@ -500,7 +500,7 @@ feature "PriceCollections" do
 
       expect(page).to have_content 'Lote 1'
       expect(page).to have_content 'Lote 2'
-      expect(page).not_to have_content 'Lote 3'
+      expect(page).to_not have_content 'Lote 3'
     end
   end
 
@@ -861,7 +861,7 @@ feature "PriceCollections" do
 
     within_tab 'Lotes de itens' do
       expect(page).to have_content 'Item 1'
-      expect(page).not_to have_content 'Item 2'
+      expect(page).to_not have_content 'Item 2'
 
       click_button 'Adicionar Item'
 
@@ -879,7 +879,7 @@ feature "PriceCollections" do
 
       expect(page).to have_content 'Item 1'
       expect(page).to have_content 'Item 2'
-      expect(page).not_to have_content 'Item 3'
+      expect(page).to_not have_content 'Item 3'
 
       # adding another lot to see that its items are numbered independently of the first lot
       click_button 'Adicionar Lote'
@@ -940,21 +940,21 @@ feature "PriceCollections" do
       expect(page).to have_disabled_field 'Unidade'
       expect(page).to have_disabled_field 'Quantidade'
 
-      expect(page).not_to have_button 'Remover Item'
-      expect(page).not_to have_button 'Adicionar Item'
-      expect(page).not_to have_button 'Remover Lote'
-      expect(page).not_to have_button 'Adicionar Lote'
+      expect(page).to_not have_button 'Remover Item'
+      expect(page).to_not have_button 'Adicionar Item'
+      expect(page).to_not have_button 'Remover Lote'
+      expect(page).to_not have_button 'Adicionar Lote'
     end
 
     within_tab 'Fornecedores' do
       expect(page).to have_disabled_field 'Fornecedor'
       expect(page).to have_disabled_field 'E-mail'
 
-      expect(page).not_to have_button 'Adicionar Fornecedor'
-      expect(page).not_to have_button 'Remover Fornecedor'
+      expect(page).to_not have_button 'Adicionar Fornecedor'
+      expect(page).to_not have_button 'Remover Fornecedor'
     end
 
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_button 'Salvar'
   end
 
   scenario 'opening the filter modal' do

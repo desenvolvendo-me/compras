@@ -115,9 +115,9 @@ feature "ModalityLimits" do
 
     expect(page).to have_notice 'Limite por Modalidade apagado com sucesso.'
 
-    expect(page).not_to have_content '0001'
-    expect(page).not_to have_content '01/02/2012'
-    expect(page).not_to have_content '02/03/2012'
+    expect(page).to_not have_content '0001'
+    expect(page).to_not have_content '01/02/2012'
+    expect(page).to_not have_content '02/03/2012'
   end
 
   scenario 'destroy an existent modality_limit' do

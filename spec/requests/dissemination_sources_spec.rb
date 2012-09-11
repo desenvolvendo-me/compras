@@ -37,7 +37,7 @@ feature "DisseminationSources" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_notice 'Fonte de Divulgação criado com sucesso.'
+    expect(page).to_not have_notice 'Fonte de Divulgação criado com sucesso.'
 
     expect(page).to have_content 'já está em uso'
   end
@@ -76,8 +76,8 @@ feature "DisseminationSources" do
 
     expect(page).to have_notice 'Fonte de Divulgação apagado com sucesso.'
 
-    expect(page).not_to have_content 'Jornal Oficial do Município'
-    expect(page).not_to have_content 'Jornal de Circulação Municipal'
+    expect(page).to_not have_content 'Jornal Oficial do Município'
+    expect(page).to_not have_content 'Jornal de Circulação Municipal'
   end
 
   scenario 'cannot destroy an existent dissemination_source with regulatory_act relationship' do
@@ -89,6 +89,6 @@ feature "DisseminationSources" do
 
     click_link 'Apagar'
 
-    expect(page).not_to have_notice 'Fonte de Divulgação apagado com sucesso.'
+    expect(page).to_not have_notice 'Fonte de Divulgação apagado com sucesso.'
   end
 end

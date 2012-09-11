@@ -94,8 +94,8 @@ feature "BudgetStructureConfigurations" do
 
     expect(page).to have_notice 'Configuração de Estrutura Orçamentaria apagado com sucesso.'
 
-    expect(page).not_to have_content 'Detran'
-    expect(page).not_to have_content '1234'
-    expect(page).not_to have_content 'Configuração do Detran'
+    expect(page).to_not have_content 'Detran'
+    expect(page).to_not have_content '1234'
+    expect(page).to_not have_content 'Configuração do Detran'
   end
 end

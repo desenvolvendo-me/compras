@@ -104,8 +104,8 @@ feature "People" do
 
     click_link 'Wenderson'
 
-    expect(page).not_to have_field 'Pessoa Física'
-    expect(page).not_to have_field 'Pessoa Jurídica'
+    expect(page).to_not have_field 'Pessoa Física'
+    expect(page).to_not have_field 'Pessoa Jurídica'
 
     within_tab "Pessoa" do
       fill_in 'Nome', :with => 'Gabriel Sobrinho'
@@ -145,7 +145,7 @@ feature "People" do
 
     expect(page).to have_notice 'Pessoa apagada com sucesso.'
 
-    expect(page).not_to have_content 'Wenderson Malheiros'
+    expect(page).to_not have_content 'Wenderson Malheiros'
   end
 
   scenario "create a new person as company" do
@@ -258,8 +258,8 @@ feature "People" do
 
     click_link 'Nohup'
 
-    expect(page).not_to have_field 'Pessoa Física'
-    expect(page).not_to have_field 'Pessoa Jurídica'
+    expect(page).to_not have_field 'Pessoa Física'
+    expect(page).to_not have_field 'Pessoa Jurídica'
 
     within_tab "Contribuinte" do
       fill_in 'Nome', :with => 'MoneyLabs'
@@ -315,7 +315,7 @@ feature "People" do
         click_button 'Pesquisar'
 
         expect(page).to have_content 'Portugal'
-        expect(page).not_to have_content 'Centro'
+        expect(page).to_not have_content 'Centro'
       end
 
       fill_modal 'Logradouro', :with => 'Cristiano Machado', :field => 'Nome do logradouro'
@@ -324,7 +324,7 @@ feature "People" do
         click_button 'Pesquisar'
 
         expect(page).to have_content 'Centro'
-        expect(page).not_to have_content 'Portugal'
+        expect(page).to_not have_content 'Portugal'
       end
     end
   end
@@ -403,7 +403,7 @@ feature "People" do
     click_button 'Salvar'
 
     within_tab 'Sócios' do
-      expect(page).not_to have_content 'deve haver ao menos um sócio'
+      expect(page).to_not have_content 'deve haver ao menos um sócio'
     end
   end
 end

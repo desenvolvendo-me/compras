@@ -53,7 +53,7 @@ feature "DocumentTypes" do
 
     click_link 'Apagar'
 
-    expect(page).not_to have_notice 'Tipo de Documento apagado com sucesso.'
+    expect(page).to_not have_notice 'Tipo de Documento apagado com sucesso.'
   end
 
   scenario 'destroy an existent document_type' do
@@ -66,8 +66,8 @@ feature "DocumentTypes" do
 
     expect(page).to have_notice 'Tipo de Documento apagado com sucesso.'
 
-    expect(page).not_to have_content '10'
-    expect(page).not_to have_content 'Fiscal'
+    expect(page).to_not have_content '10'
+    expect(page).to_not have_content 'Fiscal'
   end
 
   scenario 'validate uniqueness of description' do

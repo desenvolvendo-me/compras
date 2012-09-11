@@ -52,7 +52,7 @@ feature "Profiles" do
     expect(page).to have_notice 'Perfil apagado com sucesso.'
 
     within_records do
-      expect(page).not_to have_content 'Gestor'
+      expect(page).to_not have_content 'Gestor'
     end
   end
 end

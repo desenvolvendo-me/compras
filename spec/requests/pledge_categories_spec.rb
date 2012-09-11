@@ -56,8 +56,8 @@ feature "PledgeCategories" do
 
     expect(page).to have_notice 'Categoria de Empenho apagada com sucesso.'
 
-    expect(page).not_to have_content 'Geral'
-    expect(page).not_to have_content 'Ativo'
+    expect(page).to_not have_content 'Geral'
+    expect(page).to_not have_content 'Ativo'
   end
 
   scenario 'validate uniqueness of description' do

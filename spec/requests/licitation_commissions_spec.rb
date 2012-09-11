@@ -147,14 +147,14 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Responsáveis' do
-      expect(page).not_to have_field 'Autoridade', :with => 'Wenderson Malheiros'
+      expect(page).to_not have_field 'Autoridade', :with => 'Wenderson Malheiros'
 
       expect(page).to have_field 'Autoridade', :with => 'Gabriel Sobrinho'
       expect(page).to have_select 'Cargo', :selected => 'Prefeito municipal'
     end
 
     within_tab 'Membros' do
-      expect(page).not_to have_field 'Membro', :with => 'Wenderson Malheiros'
+      expect(page).to_not have_field 'Membro', :with => 'Wenderson Malheiros'
 
       within '.member' do
         expect(page).to have_field 'Membro', :with => 'Gabriel Sobrinho'
@@ -200,7 +200,7 @@ feature "LicitationCommissions" do
 
     expect(page).to have_notice 'Comissão de Licitação apagada com sucesso.'
 
-    expect(page).not_to have_link "#{licitation_commission.id}"
+    expect(page).to_not have_link "#{licitation_commission.id}"
   end
 
   scenario 'should get the CPF number when selecting individual' do
@@ -261,7 +261,7 @@ feature "LicitationCommissions" do
       expect(page).to have_disabled_field 'Registro da classe'
 
       select 'Advogado', :from => 'Cargo'
-      expect(page).not_to have_disabled_field 'Registro da classe'
+      expect(page).to_not have_disabled_field 'Registro da classe'
     end
   end
 
@@ -428,7 +428,7 @@ feature "LicitationCommissions" do
     click_button 'Salvar'
 
     within_tab 'Membros' do
-      expect(page).not_to have_content 'deve haver um presidente'
+      expect(page).to_not have_content 'deve haver um presidente'
     end
 
     # testing with two presidents

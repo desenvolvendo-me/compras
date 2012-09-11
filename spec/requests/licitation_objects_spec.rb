@@ -132,7 +132,7 @@ feature "LicitationObjects" do
     click_link 'Viaduto'
 
     within_tab 'Materiais' do
-      expect(page).not_to have_content 'Arame comum'
+      expect(page).to_not have_content 'Arame comum'
     end
   end
 
@@ -180,8 +180,8 @@ feature "LicitationObjects" do
 
     expect(page).to have_notice 'Objeto de Licitação apagado com sucesso.'
 
-    expect(page).not_to have_content 'Ponte'
-    expect(page).not_to have_content '2012'
+    expect(page).to_not have_content 'Ponte'
+    expect(page).to_not have_content '2012'
   end
 
   scenario 'validate uniqueness of description and year together' do

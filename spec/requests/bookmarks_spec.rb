@@ -54,7 +54,7 @@ feature 'Bookmarks' do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_link 'Cidades'
+    expect(page).to_not have_link 'Cidades'
     expect(page).to have_link 'Países'
 
     click_link 'Editar'

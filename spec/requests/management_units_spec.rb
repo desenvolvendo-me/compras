@@ -67,8 +67,8 @@ feature "ManagementUnits" do
 
     expect(page).to have_notice 'Unidade Gestora apagada com sucesso.'
 
-    expect(page).not_to have_content 'Unidade Central'
-    expect(page).not_to have_content 'UGC'
-    expect(page).not_to have_content 'Ativo'
+    expect(page).to_not have_content 'Unidade Central'
+    expect(page).to_not have_content 'UGC'
+    expect(page).to_not have_content 'Ativo'
   end
 end

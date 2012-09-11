@@ -105,8 +105,8 @@ feature "Functions" do
 
     expect(page).to have_notice 'Função apagada com sucesso.'
 
-    expect(page).not_to have_content '04'
-    expect(page).not_to have_content '1234'
+    expect(page).to_not have_content '04'
+    expect(page).to_not have_content '1234'
   end
 
   scenario 'have error when have duplicated code of same regulatory_act' do
@@ -137,7 +137,7 @@ feature "Functions" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_content 'já existe para o ato regulamentador informado'
+    expect(page).to_not have_content 'já existe para o ato regulamentador informado'
   end
 
   scenario 'should get and clean the vigor date depending on administractive act' do

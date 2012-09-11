@@ -140,8 +140,8 @@ feature "LicitationNotices" do
 
     expect(page).to have_notice 'Aviso de Licitação apagado com sucesso.'
 
-    expect(page).not_to have_content I18n.l(Date.current)
-    expect(page).not_to have_content "A licitação começou."
+    expect(page).to_not have_content I18n.l(Date.current)
+    expect(page).to_not have_content "A licitação começou."
   end
 
   scenario 'delegate fields should be empty when clear licitaion process' do

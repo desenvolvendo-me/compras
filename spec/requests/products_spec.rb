@@ -61,6 +61,6 @@ feature 'Products' do
 
     expect(page).to have_notice 'Produto apagado com sucesso.'
 
-    expect(page).not_to have_link 'Caneta'
+    expect(page).to_not have_link 'Caneta'
   end
 end

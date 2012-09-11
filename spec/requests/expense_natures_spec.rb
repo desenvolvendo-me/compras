@@ -87,7 +87,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '3.0.10.01.12'
-      expect(page).not_to have_content '3.0.10.01.11'
+      expect(page).to_not have_content '3.0.10.01.11'
     end
 
     scenario 'should filter by description' do
@@ -103,7 +103,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content 'Vencimentos e Salários'
-      expect(page).not_to have_content 'Compra de Material'
+      expect(page).to_not have_content 'Compra de Material'
     end
 
     scenario 'should filter by descriptor' do
@@ -119,7 +119,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content 'Vencimentos e Salários'
-      expect(page).not_to have_content 'Compra de Material'
+      expect(page).to_not have_content 'Compra de Material'
     end
 
     scenario 'should filter by regulatory_act' do
@@ -135,7 +135,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content 'Vencimentos e Salários'
-      expect(page).not_to have_content 'Compra de Material'
+      expect(page).to_not have_content 'Compra de Material'
     end
 
     scenario 'should filter by kind' do
@@ -151,7 +151,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content 'Vencimentos e Salários'
-      expect(page).not_to have_content 'Compra de Material'
+      expect(page).to_not have_content 'Compra de Material'
     end
 
     scenario 'should filter by expense_category' do
@@ -167,7 +167,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '3.0.10.01.11'
-      expect(page).not_to have_content '4.4.20.03.11'
+      expect(page).to_not have_content '4.4.20.03.11'
     end
 
     scenario 'should filter by expense_group' do
@@ -183,7 +183,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '3.0.10.01.11'
-      expect(page).not_to have_content '4.4.20.03.11'
+      expect(page).to_not have_content '4.4.20.03.11'
     end
 
     scenario 'should filter by expense_modality' do
@@ -199,7 +199,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '3.0.10.01.11'
-      expect(page).not_to have_content '4.4.20.03.11'
+      expect(page).to_not have_content '4.4.20.03.11'
     end
 
     scenario 'should filter by expense_element' do
@@ -215,7 +215,7 @@ feature "ExpenseNatures" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '3.0.10.01.11'
-      expect(page).not_to have_content '4.4.20.03.11'
+      expect(page).to_not have_content '4.4.20.03.11'
     end
   end
 
@@ -273,6 +273,6 @@ feature "ExpenseNatures" do
 
     expect(page).to have_notice 'Natureza da Despesa apagado com sucesso.'
 
-    expect(page).not_to have_field '3.0.10.01.12'
+    expect(page).to_not have_field '3.0.10.01.12'
   end
 end

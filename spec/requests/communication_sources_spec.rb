@@ -33,7 +33,7 @@ feature "CommunicationSources" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_notice 'Fonte de Comunicação criado com sucesso.'
+    expect(page).to_not have_notice 'Fonte de Comunicação criado com sucesso.'
 
     expect(page).to have_content 'já está em uso'
   end
@@ -67,6 +67,6 @@ feature "CommunicationSources" do
 
     expect(page).to have_notice 'Fonte de Comunicação apagado com sucesso.'
 
-    expect(page).not_to have_content 'Jornal de Circulação Municipal'
+    expect(page).to_not have_content 'Jornal de Circulação Municipal'
   end
 end

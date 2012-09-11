@@ -51,6 +51,6 @@ feature "Countries" do
 
     expect(page).to have_notice 'País apagado com sucesso.'
 
-    expect(page).not_to have_content 'Argentina'
+    expect(page).to_not have_content 'Argentina'
   end
 end

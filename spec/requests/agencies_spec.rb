@@ -68,6 +68,6 @@ feature "Agencies" do
 
     expect(page).to have_notice 'Agência apagada com sucesso.'
 
-    expect(page).not_to have_content 'Agência Santander'
+    expect(page).to_not have_content 'Agência Santander'
   end
 end

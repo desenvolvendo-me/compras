@@ -68,7 +68,7 @@ feature "AdministrationTypes" do
 
     expect(page).to have_notice 'Tipo de Administração apagado com sucesso.'
 
-    expect(page).not_to have_content 'Pública'
+    expect(page).to_not have_content 'Pública'
   end
 
   scenario 'validates uniqueness of description' do

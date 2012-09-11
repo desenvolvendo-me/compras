@@ -105,7 +105,7 @@ feature "DeliveryLocations" do
 
     expect(page).to have_notice 'Local de Entrega apagado com sucesso.'
 
-    expect(page).not_to have_content 'Secretaria da Educação'
+    expect(page).to_not have_content 'Secretaria da Educação'
   end
 
   scenario 'create a new delivery_location' do

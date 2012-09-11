@@ -63,7 +63,7 @@ feature 'ContractTerminations' do
     expect(page).to have_field 'Valor da indenização', :with => '30,00'
     expect(page).to have_link 'example_document.txt'
 
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
 
     click_link 'Cancelar'
 
@@ -113,8 +113,8 @@ feature 'ContractTerminations' do
     expect(page).to have_disabled_field 'Valor da multa'
     expect(page).to have_disabled_field 'Valor da indenização'
 
-    expect(page).not_to have_link 'Anular'
-    expect(page).not_to have_button 'Salvar'
+    expect(page).to_not have_link 'Anular'
+    expect(page).to_not have_button 'Salvar'
 
     expect(page).to have_link 'Anulação'
   end

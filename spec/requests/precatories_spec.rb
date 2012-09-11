@@ -241,7 +241,7 @@ feature "Precatories" do
 
     expect(page).to have_notice 'Precatório apagado com sucesso.'
 
-    expect(page).not_to have_link '1234/2012'
+    expect(page).to_not have_link '1234/2012'
 
   end
 
@@ -323,7 +323,7 @@ feature "Precatories" do
         expect(page).to have_css("table.records tbody tr", :count => 2)
         expect(page).to have_content 'Precatórios Alimentares'
         expect(page).to have_content 'Ordinário - Demais Casos'
-        expect(page).not_to have_content 'De pequeno valor'
+        expect(page).to_not have_content 'De pequeno valor'
       end
     end
   end

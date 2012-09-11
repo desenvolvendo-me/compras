@@ -27,7 +27,7 @@ feature "PurchaseSolicitationLiberations" do
 
     click_link 'Criar Liberação de Solicitação de Compra'
 
-    expect(page).not_to have_disabled_field 'Responsável'
+    expect(page).to_not have_disabled_field 'Responsável'
 
     expect(page).to have_content 'Criar Liberação para a Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
 
@@ -49,7 +49,7 @@ feature "PurchaseSolicitationLiberations" do
 
     click_link 'Liberações'
 
-    expect(page).not_to have_link 'Criar Liberação de Solicitação de Compra'
+    expect(page).to_not have_link 'Criar Liberação de Solicitação de Compra'
 
     within_records do
       page.find('a').click

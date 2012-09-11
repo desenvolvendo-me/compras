@@ -60,6 +60,6 @@ feature "Cities" do
 
     expect(page).to have_notice 'Cidade apagada com sucesso.'
 
-    expect(page).not_to have_content 'Porto Alegre'
+    expect(page).to_not have_content 'Porto Alegre'
   end
 end

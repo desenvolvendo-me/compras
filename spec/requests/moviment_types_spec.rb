@@ -72,7 +72,7 @@ feature "MovimentTypes" do
     expect(page).to have_notice 'Tipo de Movimento apagado com sucesso.'
 
     within_records do
-      expect(page).not_to have_link 'Adicionar dotação'
+      expect(page).to_not have_link 'Adicionar dotação'
     end
   end
 end

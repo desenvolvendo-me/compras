@@ -144,7 +144,7 @@ feature "PledgeLiquidations" do
     end
 
     within_tab 'Parcelas' do
-      expect(page).not_to have_content 'não pode ficar em branco'
+      expect(page).to_not have_content 'não pode ficar em branco'
     end
   end
 
@@ -202,8 +202,8 @@ feature "PledgeLiquidations" do
       expect(page).to have_disabled_field 'Valor *'
       expect(page).to have_field 'Valor *', :with => '1,00'
 
-      expect(page).not_to have_button 'Adicionar Parcela'
-      expect(page).not_to have_button 'Remover'
+      expect(page).to_not have_button 'Adicionar Parcela'
+      expect(page).to_not have_button 'Remover'
     end
   end
 
@@ -215,7 +215,7 @@ feature "PledgeLiquidations" do
 
     click_link pledge_liquidation.to_s
 
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
   end
 
   scenario 'should not have a annul link when was creating a new solicitation' do
@@ -223,8 +223,8 @@ feature "PledgeLiquidations" do
 
     click_link 'Criar Liquidação de Empenho'
 
-    expect(page).not_to have_link 'Anular'
-    expect(page).not_to have_link 'Anulação'
+    expect(page).to_not have_link 'Anular'
+    expect(page).to_not have_link 'Anulação'
   end
 
   context 'filtering' do
@@ -246,7 +246,7 @@ feature "PledgeLiquidations" do
       click_button 'Pesquisar'
 
       expect(page).to have_content liquidation_2012.id.to_s
-      expect(page).not_to have_content liquidation_other.id.to_s
+      expect(page).to_not have_content liquidation_other.id.to_s
     end
 
     scenario 'filter by value' do
@@ -262,7 +262,7 @@ feature "PledgeLiquidations" do
       click_button 'Pesquisar'
 
       expect(page).to have_content liquidation_2012.id.to_s
-      expect(page).not_to have_content liquidation_other.id.to_s
+      expect(page).to_not have_content liquidation_other.id.to_s
     end
 
     scenario 'filter by date' do
@@ -278,7 +278,7 @@ feature "PledgeLiquidations" do
       click_button 'Pesquisar'
 
       expect(page).to have_content liquidation_2012.id.to_s
-      expect(page).not_to have_content liquidation_other.id.to_s
+      expect(page).to_not have_content liquidation_other.id.to_s
     end
   end
 end

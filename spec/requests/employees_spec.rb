@@ -71,8 +71,8 @@ feature "Employees" do
     expect(page).to have_notice 'Funcionário apagado com sucesso.'
 
     within_records do
-      expect(page).not_to have_content 'Gabriel Sobrinho'
-      expect(page).not_to have_content '958473'
+      expect(page).to_not have_content 'Gabriel Sobrinho'
+      expect(page).to_not have_content '958473'
     end
   end
 

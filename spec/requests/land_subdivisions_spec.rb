@@ -52,7 +52,7 @@ feature "LandSubdivisions" do
     expect(page).to have_notice 'Loteamento apagado com sucesso.'
 
     within_records do
-      expect(page).not_to have_content 'Terra Prometida'
+      expect(page).to_not have_content 'Terra Prometida'
     end
   end
 end

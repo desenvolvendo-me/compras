@@ -57,6 +57,6 @@ feature "ProgramKinds" do
 
     expect(page).to have_notice 'Tipo de Programa apagado com sucesso.'
 
-    expect(page).not_to have_link 'Apoio Administrativo'
+    expect(page).to_not have_link 'Apoio Administrativo'
   end
 end

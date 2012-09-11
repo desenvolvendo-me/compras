@@ -37,7 +37,7 @@ feature "RegulatoryActTypes" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_notice 'Tipo de Ato Regulamentador criado com sucesso.'
+    expect(page).to_not have_notice 'Tipo de Ato Regulamentador criado com sucesso.'
 
     expect(page).to have_content 'já está em uso'
   end
@@ -74,6 +74,6 @@ feature "RegulatoryActTypes" do
 
     expect(page).to have_notice 'Tipo de Ato Regulamentador apagado com sucesso.'
 
-    expect(page).not_to have_content 'Lei'
+    expect(page).to_not have_content 'Lei'
   end
 end

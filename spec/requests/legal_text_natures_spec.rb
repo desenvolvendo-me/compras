@@ -51,7 +51,7 @@ feature "LegalTextNatures" do
 
     expect(page).to have_notice 'Natureza de Textos Jurídicos apagada com sucesso.'
 
-    expect(page).not_to have_content 'Natureza Cívica'
+    expect(page).to_not have_content 'Natureza Cívica'
   end
 
   scenario 'validate uniqueness of name' do

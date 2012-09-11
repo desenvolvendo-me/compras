@@ -37,7 +37,7 @@ feature "ServiceOrContractType" do
 
     click_button 'Salvar'
 
-    expect(page).not_to have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
+    expect(page).to_not have_notice 'Tipo de Serviço ou Contrato criado com sucesso.'
 
     expect(page).to have_content 'já está em uso'
   end
@@ -73,8 +73,8 @@ feature "ServiceOrContractType" do
 
     expect(page).to have_notice 'Tipo de Serviço ou Contrato apagado com sucesso.'
 
-    expect(page).not_to have_content '123'
-    expect(page).not_to have_content 'Contratação de estagiários'
-    expect(page).not_to have_content 'Estagiário'
+    expect(page).to_not have_content '123'
+    expect(page).to_not have_content 'Contratação de estagiários'
+    expect(page).to_not have_content 'Estagiário'
   end
 end

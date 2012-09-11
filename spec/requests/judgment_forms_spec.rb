@@ -59,9 +59,9 @@ feature "JudgmentForms" do
 
     expect(page).to have_notice 'Forma de Julgamento de Licitação apagado com sucesso.'
 
-    expect(page).not_to have_content 'Forma Global com Menor Preço'
-    expect(page).not_to have_content 'Global'
-    expect(page).not_to have_content 'Menor preço'
+    expect(page).to_not have_content 'Forma Global com Menor Preço'
+    expect(page).to_not have_content 'Global'
+    expect(page).to_not have_content 'Menor preço'
   end
 
   scenario 'should validate uniqueness of description' do

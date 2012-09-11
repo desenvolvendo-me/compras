@@ -78,10 +78,10 @@ feature "Capabilities" do
 
     expect(page).to have_notice 'Recurso apagado com sucesso.'
 
-    expect(page).not_to have_content 'Detran'
-    expect(page).not_to have_content '2012'
-    expect(page).not_to have_content 'Reforma e Ampliação'
-    expect(page).not_to have_content 'Ordinário'
-    expect(page).not_to have_content 'Ativo'
+    expect(page).to_not have_content 'Detran'
+    expect(page).to_not have_content '2012'
+    expect(page).to_not have_content 'Reforma e Ampliação'
+    expect(page).to_not have_content 'Ordinário'
+    expect(page).to_not have_content 'Ativo'
   end
 end

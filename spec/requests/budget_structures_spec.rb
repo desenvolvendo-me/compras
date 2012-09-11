@@ -258,8 +258,8 @@ feature "BudgetStructure" do
 
          expect(page).to have_content 'Orgão'
          expect(page).to have_content 'Unidade'
-         expect(page).not_to have_content 'Nível 1'
-         expect(page).not_to have_content 'Nível 2'
+         expect(page).to_not have_content 'Nível 1'
+         expect(page).to_not have_content 'Nível 2'
       end
     end
   end
@@ -292,7 +292,7 @@ feature "BudgetStructure" do
         click_button 'Pesquisar'
 
         expect(page).to have_content 'Secretaria de Educação'
-        expect(page).not_to have_content 'Secretaria de Desenvolvimento'
+        expect(page).to_not have_content 'Secretaria de Desenvolvimento'
       end
     end
   end
@@ -308,13 +308,13 @@ feature "BudgetStructure" do
 
     expect(page).to have_notice 'Estrutura Orçamentaria apagado com sucesso.'
 
-    expect(page).not_to have_content 'Secretaria de Educação'
-    expect(page).not_to have_content 'Configuração do Detran'
-    expect(page).not_to have_content '02.00'
-    expect(page).not_to have_content '051'
-    expect(page).not_to have_content 'SEMUEDU'
-    expect(page).not_to have_content 'Pública'
-    expect(page).not_to have_content 'Desenvolvimento Educacional'
+    expect(page).to_not have_content 'Secretaria de Educação'
+    expect(page).to_not have_content 'Configuração do Detran'
+    expect(page).to_not have_content '02.00'
+    expect(page).to_not have_content '051'
+    expect(page).to_not have_content 'SEMUEDU'
+    expect(page).to_not have_content 'Pública'
+    expect(page).to_not have_content 'Desenvolvimento Educacional'
   end
 
   scenario 'validate uniqueness of responsible' do

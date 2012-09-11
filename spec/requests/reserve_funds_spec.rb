@@ -93,7 +93,7 @@ feature "ReserveFunds" do
 
     click_link '2012'
 
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
   end
 
   scenario 'getting and cleaning budget_allocation amount via javascript' do
@@ -157,8 +157,8 @@ feature "ReserveFunds" do
 
     fill_modal 'Tipo', :with => 'Licitação', :field => 'Descrição'
 
-    expect(page).not_to have_disabled_field 'Modalidade'
-    expect(page).not_to have_disabled_field 'Processo licitatório'
+    expect(page).to_not have_disabled_field 'Modalidade'
+    expect(page).to_not have_disabled_field 'Processo licitatório'
 
     clear_modal 'Tipo'
 

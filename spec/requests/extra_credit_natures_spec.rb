@@ -57,8 +57,8 @@ feature "ExtraCreditNatures" do
     expect(page).to have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
 
     within_records do
-      expect(page).not_to have_content 'Abre crédito suplementar'
-      expect(page).not_to have_content 'Outros'
+      expect(page).to_not have_content 'Abre crédito suplementar'
+      expect(page).to_not have_content 'Outros'
     end
   end
 end

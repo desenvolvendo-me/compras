@@ -66,10 +66,10 @@ feature "LicitationModalities" do
 
     expect(page).to have_notice 'Modalidade de Licitação apagada com sucesso.'
 
-    expect(page).not_to have_content 'Pública'
-    expect(page).not_to have_content '1234'
-    expect(page).not_to have_content '500,00'
-    expect(page).not_to have_content '700,00'
+    expect(page).to_not have_content 'Pública'
+    expect(page).to_not have_content '1234'
+    expect(page).to_not have_content '500,00'
+    expect(page).to_not have_content '700,00'
   end
 
   scenario 'should get the publication date when administractive act is selected' do

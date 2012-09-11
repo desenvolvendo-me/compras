@@ -52,7 +52,7 @@ feature "Materials" do
     expect(page).to have_field 'Referência do fabricante', :with => 'manufacturer'
     expect(page).to have_checked_field 'Material perecível'
     expect(page).to have_checked_field 'Material estocável'
-    expect(page).not_to have_checked_field 'Material combustível'
+    expect(page).to_not have_checked_field 'Material combustível'
     expect(page).to have_select 'Característica', :selected => 'Serviço'
     expect(page).to have_field 'Tipo de serviço', :with => 'Contratação de estagiários'
     expect(page).to have_disabled_field 'Tipo de material'
@@ -140,8 +140,8 @@ feature "Materials" do
     expect(page).to have_field 'Estoque mínimo', :with => '20'
     expect(page).to have_field 'Unidade', :with => 'M'
     expect(page).to have_field 'Referência do fabricante', :with => 'outro fabricante'
-    expect(page).not_to have_checked_field 'Material perecível'
-    expect(page).not_to have_checked_field 'Material estocável'
+    expect(page).to_not have_checked_field 'Material perecível'
+    expect(page).to_not have_checked_field 'Material estocável'
     expect(page).to have_checked_field 'Material combustível'
     expect(page).to have_select 'Característica', :selected => 'Material'
     expect(page).to have_disabled_field 'Tipo de serviço'
@@ -160,7 +160,7 @@ feature "Materials" do
 
     expect(page).to have_notice 'Material apagado com sucesso.'
 
-    expect(page).not_to have_content 'Antivirus'
+    expect(page).to_not have_content 'Antivirus'
   end
 
   scenario 'cannot destroy an existent material with licitation_objects' do
@@ -172,7 +172,7 @@ feature "Materials" do
 
     click_link 'Apagar'
 
-    expect(page).not_to have_notice 'Material apagado com sucesso.'
+    expect(page).to_not have_notice 'Material apagado com sucesso.'
   end
 
   scenario 'should validate uniqueness of name' do
@@ -230,7 +230,7 @@ feature "Materials" do
 
     fill_modal 'Grupo', :with => 'Informática', :field => 'Descrição'
 
-    expect(page).not_to have_disabled_field 'Classe'
+    expect(page).to_not have_disabled_field 'Classe'
 
     fill_modal 'Classe', :with => 'Software', :field => 'Descrição' do
       expect(page).to have_field 'filter_materials_group', :with => '01 - Informática'
@@ -246,7 +246,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    expect(page).not_to have_disabled_field 'Classe'
+    expect(page).to_not have_disabled_field 'Classe'
   end
 
   it 'should disable and empty the class when the group is removed' do
@@ -292,7 +292,7 @@ feature "Materials" do
 
     click_link 'Antivirus'
 
-    expect(page).not_to have_disabled_field 'Natureza da despesa'
+    expect(page).to_not have_disabled_field 'Natureza da despesa'
   end
 
   def make_dependencies!

@@ -137,7 +137,7 @@ feature "RegulatoryActs" do
 
     expect(page).to have_notice 'Ato Regulamentador apagado com sucesso.'
 
-    expect(page).not_to have_link '1234'
+    expect(page).to_not have_link '1234'
   end
 
   scenario 'should validate uniqueness of act_number' do
@@ -186,7 +186,7 @@ feature "RegulatoryActs" do
     click_link '1234'
 
     within_tab 'Fontes de divulgação' do
-      expect(page).not_to have_content 'Jornal Oficial do Bairro'
+      expect(page).to_not have_content 'Jornal Oficial do Bairro'
     end
   end
 

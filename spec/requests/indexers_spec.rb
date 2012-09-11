@@ -63,9 +63,9 @@ feature "Indexers" do
 
     expect(page).to have_notice 'Indexador apagado com sucesso.'
 
-    expect(page).not_to have_content 'SELIC'
-    expect(page).not_to have_content 'Real'
-    expect(page).not_to have_content '01/05/2011'
-    expect(page).not_to have_content '0,990000'
+    expect(page).to_not have_content 'SELIC'
+    expect(page).to_not have_content 'Real'
+    expect(page).to_not have_content '01/05/2011'
+    expect(page).to_not have_content '0,990000'
   end
 end

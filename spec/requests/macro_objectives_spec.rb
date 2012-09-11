@@ -61,6 +61,6 @@ feature 'MacroObjectives' do
 
     expect(page).to have_notice 'Macro Objetivo apagado com sucesso.'
 
-    expect(page).not_to have_link 'Melhorar qualidade do ensino'
+    expect(page).to_not have_link 'Melhorar qualidade do ensino'
   end
 end

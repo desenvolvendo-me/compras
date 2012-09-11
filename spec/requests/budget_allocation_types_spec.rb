@@ -56,7 +56,7 @@ feature "BudgetAllocationTypes" do
 
     expect(page).to have_notice 'Tipo de Dotação apagado com sucesso.'
 
-    expect(page).not_to have_content 'Administrativation'
+    expect(page).to_not have_content 'Administrativation'
   end
 
   scenario 'validate uniqueness of description' do

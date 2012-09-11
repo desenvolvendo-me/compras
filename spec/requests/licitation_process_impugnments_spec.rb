@@ -105,7 +105,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_disabled_field 'Data da abertura dos envelopes'
     expect(page).to have_disabled_field 'Hora da abertura'
 
-    expect(page).not_to have_button 'Atualizar Impugnação do Processo Licitatório'
+    expect(page).to_not have_button 'Atualizar Impugnação do Processo Licitatório'
   end
 
   scenario 'destroy an existent licitation_process_impugnment' do
@@ -115,7 +115,7 @@ feature "LicitationProcessImpugnments" do
 
     click_link licitation_process_impugnment.to_s
 
-    expect(page).not_to have_link "Apagar"
+    expect(page).to_not have_link "Apagar"
   end
 
   scenario 'envelope dates should be filled when licitation process selected' do

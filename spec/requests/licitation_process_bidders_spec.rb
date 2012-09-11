@@ -226,8 +226,8 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow + 1.day)
 
     within_tab 'Representantes credenciados' do
-      expect(page).not_to have_content 'Gabriel Sobrinho'
-      expect(page).not_to have_content '003.151.987-37'
+      expect(page).to_not have_content 'Gabriel Sobrinho'
+      expect(page).to_not have_content '003.151.987-37'
       expect(page).to have_content 'Wenderson Malheiros'
       expect(page).to have_content '003.149.513-34'
     end
@@ -285,7 +285,7 @@ feature "LicitationProcessBidders" do
 
     expect(page).to have_notice 'Licitante apagado com sucesso.'
 
-    expect(page).not_to have_link bidder.to_s
+    expect(page).to_not have_link bidder.to_s
   end
 
   scenario 'when is not invited should disable and clear date, protocol fields' do
@@ -309,9 +309,9 @@ feature "LicitationProcessBidders" do
     expect(page).to have_field 'Data do protocolo', :with => I18n.l(Date.current)
     expect(page).to have_field 'Data do recebimento', :with => I18n.l(Date.tomorrow)
 
-    expect(page).not_to have_disabled_field 'Protocolo'
-    expect(page).not_to have_disabled_field 'Data do protocolo'
-    expect(page).not_to have_disabled_field 'Data do recebimento'
+    expect(page).to_not have_disabled_field 'Protocolo'
+    expect(page).to_not have_disabled_field 'Data do protocolo'
+    expect(page).to_not have_disabled_field 'Data do recebimento'
 
     uncheck 'Convidado'
 
@@ -319,7 +319,7 @@ feature "LicitationProcessBidders" do
     expect(page).to have_disabled_field 'Data do protocolo'
     expect(page).to have_disabled_field 'Data do recebimento'
 
-    expect(page).not_to have_checked_field 'Convidado'
+    expect(page).to_not have_checked_field 'Convidado'
     expect(page).to have_field 'Protocolo', :with => ''
     expect(page).to have_field 'Data do protocolo', :with => ''
     expect(page).to have_field 'Data do recebimento', :with => ''
@@ -330,7 +330,7 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    expect(page).not_to have_checked_field 'Convidado'
+    expect(page).to_not have_checked_field 'Convidado'
     expect(page).to have_field 'Protocolo', :with => ''
     expect(page).to have_field 'Data do protocolo', :with => ''
     expect(page).to have_field 'Data do recebimento', :with => ''
@@ -718,7 +718,7 @@ feature "LicitationProcessBidders" do
 
     visit licitation_process_bidders_path(:licitation_process_id => licitation_process.id)
 
-    expect(page).not_to have_link 'Criar Licitante'
+    expect(page).to_not have_link 'Criar Licitante'
   end
 
   scenario "index shoud have title Licitantes do Processo Licitatório 1/2013" do
@@ -831,7 +831,7 @@ feature "LicitationProcessBidders" do
 
     click_link bidder.to_s
 
-    expect(page).not_to have_field 'Pontuação técnica'
+    expect(page).to_not have_field 'Pontuação técnica'
   end
 
   scenario "Save and destroy buttons should not be shown if licitation process envelope opening date is not today" do
@@ -851,8 +851,8 @@ feature "LicitationProcessBidders" do
       page.find('a').click
     end
 
-    expect(page).not_to have_button 'Salvar'
-    expect(page).not_to have_link 'Apagar'
+    expect(page).to_not have_button 'Salvar'
+    expect(page).to_not have_link 'Apagar'
   end
 
   scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do
