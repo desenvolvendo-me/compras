@@ -6,7 +6,7 @@ class ManagementUnit < Compras::Model
   belongs_to :descriptor
 
   has_many :pledges, :dependent => :restrict
-  has_many :record_prices, :dependent => :restrict
+  has_many :price_registrations, :dependent => :restrict
 
   validates :descriptor, :description, :acronym, :status, :presence => true
 

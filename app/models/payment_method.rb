@@ -4,7 +4,7 @@ class PaymentMethod < Compras::Model
   has_many :direct_purchases, :dependent => :restrict
   has_many :licitation_processes, :dependent => :restrict
   has_many :price_collections, :dependent => :restrict
-  has_many :record_prices, :dependent => :restrict
+  has_many :price_registrations, :dependent => :restrict
 
   validates :description, :presence => true
   validates :description, :uniqueness => { :allow_blank => true }

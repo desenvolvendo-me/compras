@@ -1,3 +1,3 @@
-class RecordPriceSituation < EnumerateIt::Base
+class PriceRegistrationSituation < EnumerateIt::Base
   associate_values :active, :canceled, :extended
 end

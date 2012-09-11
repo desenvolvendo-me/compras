@@ -1,14 +1,14 @@
 require 'model_helper'
-require 'app/models/record_price_item'
-require 'app/models/record_price_budget_structure'
+require 'app/models/price_registration_item'
+require 'app/models/price_registration_budget_structure'
 
-describe RecordPriceItem do
-  it { should belong_to :record_price }
+describe PriceRegistrationItem do
+  it { should belong_to :price_registration }
   it { should belong_to :administrative_process_budget_allocation_item }
 
-  it { should have_many(:record_price_budget_structures).dependent(:destroy) }
+  it { should have_many(:price_registration_budget_structures).dependent(:destroy) }
 
-  it { should validate_presence_of :record_price }
+  it { should validate_presence_of :price_registration }
   it { should validate_presence_of :administrative_process_budget_allocation_item }
 
   context "with material" do

@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-feature "RecordPrices" do
+feature "PriceRegistration" do
   background do
     sign_in
   end
 
-  scenario 'create a new record_price' do
+  scenario 'create a new price_registration' do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_canetas)
     DeliveryLocation.make!(:education)
@@ -59,14 +59,14 @@ feature "RecordPrices" do
 
       click_button 'Adicionar Dotação'
 
-      within '.record-price-budget-structure:first' do
+      within '.price-registration-budget-structure:first' do
         fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
         fill_in 'Quantidade solicitada', :with => '200,00'
       end
 
       click_button 'Adicionar Material'
 
-      within 'div.record-price-item:first' do
+      within 'div.price-registration-item:first' do
         fill_modal 'Material', :with => 'Arame comum', :field => 'Material'
 
         click_button 'Adicionar Dotação'
@@ -103,20 +103,20 @@ feature "RecordPrices" do
 
     within_tab 'Itens por Estruturas Orçamentárias Participantes' do
 
-      within 'div.record-price-item:last' do
+      within 'div.price-registration-item:last' do
         expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
         expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
         expect(page).to have_select 'Carona', :selected => 'Não' 
 
-        within 'div.record-price-budget-structure:last' do
+        within 'div.price-registration-budget-structure:last' do
           expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
           expect(page).to have_field 'Quantidade solicitada', :with => '100,00'
           expect(page).to have_select 'Carona', :selected => 'Não' 
         end
       end
 
-      within 'div.record-price-item:first' do
+      within 'div.price-registration-item:first' do
         expect(page).to have_field 'Material', :with => '02.02.00002 - Arame comum'
         expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação com dois responsaveis', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '300,00'
@@ -125,8 +125,8 @@ feature "RecordPrices" do
     end
   end
 
-  scenario 'update an existent record_price' do
-    RecordPrice.make!(:registro_de_precos)
+  scenario 'update an existent price_registration' do
+    PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Compras e Licitações > Registros de Preços'
 
@@ -193,7 +193,7 @@ feature "RecordPrices" do
       expect(page).to have_field 'Quantidade solicitada', :with => '400,00'
       expect(page).to have_select 'Carona', :selected => 'Não' 
 
-      within 'div.record-price-budget-structure:last' do
+      within 'div.price-registration-budget-structure:last' do
         expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
         expect(page).to have_select 'Carona', :selected => 'Não' 
@@ -201,8 +201,8 @@ feature "RecordPrices" do
     end
   end
 
-  scenario 'destroy an existent record_price' do
-    RecordPrice.make!(:registro_de_precos)
+  scenario 'destroy an existent price-registration' do
+    PriceRegistration.make!(:registro_de_precos)
 
     navigate 'Compras e Licitações > Registros de Preços'
 

@@ -1,9 +1,9 @@
 # encoding: utf-8
-RecordPrice.blueprint(:registro_de_precos) do
+PriceRegistration.blueprint(:registro_de_precos) do
   year { 2012 }
   date { Date.new(2012, 4, 5) }
   validaty_date { Date.new(2013, 4, 5) }
-  situation { RecordPriceSituation::ACTIVE }
+  situation { PriceRegistrationSituation::ACTIVE }
   licitation_process { LicitationProcess.make(:processo_licitatorio) }
   description { "Aquisição de combustíveis" }
   delivery_location { DeliveryLocation.make(:education) }
@@ -15,5 +15,5 @@ RecordPrice.blueprint(:registro_de_precos) do
   validity { 1 }
   validaty_unit { PeriodUnit::YEAR  }
   observations { "Aquisição de combustíveis" }
-  items { [RecordPriceItem.make(:antivirus, :record_price => object)] }
+  items { [PriceRegistrationItem.make(:antivirus, :price_registration => object)] }
 end

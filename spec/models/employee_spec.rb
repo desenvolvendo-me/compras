@@ -7,7 +7,7 @@ require 'app/models/direct_purchase'
 require 'app/models/administrative_process'
 require 'app/models/budget_structure_responsible'
 require 'app/models/price_collection'
-require 'app/models/record_price'
+require 'app/models/price_registration'
 
 describe Employee do
   it { should belong_to :person }
@@ -19,7 +19,7 @@ describe Employee do
   it { should have_many(:direct_purchases).dependent(:restrict) }
   it { should have_many(:administrative_processes).dependent(:restrict) }
   it { should have_many(:price_collections).dependent(:restrict) }
-  it { should have_many(:record_prices).dependent(:restrict) }
+  it { should have_many(:price_registrations).dependent(:restrict) }
 
   it { should validate_presence_of :person }
   it { should validate_presence_of :registration }

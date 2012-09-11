@@ -1,10 +1,10 @@
 pt-BR:
   activerecord:
     models:
-      record_price_item:
+      price_registration_item:
         one: "Item do Registro de Preço"
         other: "Itens do Registro de Preço"
 
     attributes:
-      record_price_item:
+      price_registration_item:
         administrative_process_budget_allocation_item: "Material"

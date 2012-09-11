@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      record_price:
+      price_registration:
         one: "Registro de Preço"
         other: "Registros de Preços"
 
     attributes:
-      record_price:
+      price_registration:
         number: "Número"
         year: "Ano"
         date: "Data"

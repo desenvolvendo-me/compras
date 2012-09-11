@@ -1,6 +1,6 @@
 pt-BR:
   enumerations:
-    record_price_situation:
+    price_registration_situation:
       active: "Ativo"
       canceled: "Cancelado"
       extended: "Prorrogado"

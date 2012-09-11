@@ -1,8 +1,8 @@
 require 'model_helper'
-require 'app/models/record_price'
-require 'app/models/record_price_item'
+require 'app/models/price_registration'
+require 'app/models/price_registration_item'
 
-describe RecordPrice do
+describe PriceRegistration do
   it { should belong_to :delivery_location }
   it { should belong_to :licitation_process }
   it { should belong_to :management_unit }

@@ -930,7 +930,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :record_prices do
+  resources :price_registrations do
     collection do
       get :filter
       get :modal
