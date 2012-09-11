@@ -11,7 +11,7 @@ class BankAccount < Compras::Model
 
   belongs_to :agency
 
-  has_many :capabilities, :dependent => :destroy, :class_name => 'BankAccountCapability', :order => :status
+  has_many :capabilities, :dependent => :destroy, :class_name => 'BankAccountCapability', :order => 'status, id'
 
   accepts_nested_attributes_for :capabilities, :allow_destroy => true
 

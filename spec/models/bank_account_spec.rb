@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/bank_account'
+require 'app/models/bank_account_capability'
 require 'app/models/agency'
 
 describe BankAccount do
@@ -30,7 +31,7 @@ describe BankAccount do
 
   it { should belong_to :agency }
 
-  it { should have_many(:capabilities).dependent(:destroy) }
+  it { should have_many(:capabilities).dependent(:destroy).order('status, id') }
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :agency }
