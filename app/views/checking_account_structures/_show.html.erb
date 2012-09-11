@@ -1,0 +1,85 @@
+<div id="record">
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= CheckingAccountStructure.human_attribute_name :name %>
+        </th>
+        <th>
+          <%= CheckingAccountStructure.human_attribute_name :tag %>
+        </th>
+        <th>
+          <%= CheckingAccountStructure.human_attribute_name :checking_account_structure_information %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+          <td>
+            <%= resource.name %>
+          </td>
+          <td>
+            <%= resource.tag %>
+          </td>
+          <td>
+            <%= resource.checking_account_structure_information %>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= CheckingAccountStructure.human_attribute_name :description %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.description %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= CheckingAccountStructure.human_attribute_name :fill %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.fill %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= CheckingAccountStructure.human_attribute_name :reference %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.reference %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
