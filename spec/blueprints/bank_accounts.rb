@@ -6,6 +6,7 @@ BankAccount.blueprint(:itau_tributos) do
   status { Status::ACTIVE }
   kind { BankAccountKind::APPLICATION }
   digit { 2 }
+  capabilities { [BankAccountCapability.make!(:reforma)] }
 end
 
 BankAccount.blueprint(:santander_folha) do

@@ -8,6 +8,8 @@ feature "BankAccounts" do
 
   scenario 'create a new bank_account' do
     Agency.make!(:itau)
+    Capability.make!(:reforma)
+    Capability.make!(:construcao)
 
     navigate 'Contabilidade > Comum > Contas Bancárias'
 
@@ -35,6 +37,34 @@ feature "BankAccounts" do
       fill_in 'Dígito da conta corrente', :with => '1'
     end
 
+    within_tab 'Recursos' do
+      click_button 'Adicionar'
+
+      fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+
+      expect(page).to have_disabled_field 'Status'
+      expect(page).to have_disabled_field 'Data de inclusão'
+      expect(page).to have_disabled_field 'Data de desativação'
+
+      expect(page).to have_select 'Status', :selected => 'Ativo'
+      expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+
+      click_button 'Adicionar'
+
+      within '.nested-bank-account-capabilities:first' do
+        fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
+        expect(page).to have_select 'Status', :selected => 'Ativo'
+        expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+      end
+
+      within '.nested-bank-account-capabilities:last' do
+        fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+        expect(page).to have_select 'Status', :selected => 'Inativo'
+        expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
+      end
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Conta Bancária criado com sucesso.'
@@ -51,10 +81,27 @@ feature "BankAccounts" do
       expect(page).to have_field 'Número da conta corrente', :with => '1111113'
       expect(page).to have_field 'Dígito da conta corrente', :with => '1'
     end
+
+    within_tab 'Recursos' do
+      within 'div.nested-bank-account-capabilities:first' do
+        expect(page).to have_field 'Recurso', :with => 'Construção'
+        expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de desativação', :with => ''
+        expect(page).to have_select 'Status', :selected => 'Ativo'
+      end
+
+      within 'div.nested-bank-account-capabilities:last' do
+        expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
+        expect(page).to have_select 'Status', :selected => 'Inativo'
+        expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
+      end
+    end
   end
 
   scenario 'update an existent bank_account' do
     BankAccount.make!(:itau_tributos)
+    Capability.make!(:construcao)
 
     navigate 'Contabilidade > Comum > Contas Bancárias'
 
@@ -68,6 +115,14 @@ feature "BankAccounts" do
       fill_in 'Número da conta corrente', :with => '1111114'
     end
 
+    within_tab 'Recursos' do
+      click_button 'Adicionar'
+
+      within '.nested-bank-account-capabilities:first' do
+        fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
+      end
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Conta Bancária editado com sucesso.'
@@ -79,6 +134,62 @@ feature "BankAccounts" do
       expect(page).to have_select 'Tipo', :selected => 'Movimento'
       expect(page).to have_field 'Descrição', :with => 'IPTU'
       expect(page).to have_field 'Número da conta corrente', :with => '1111114'
+    end
+
+    within_tab 'Recursos' do
+      within 'div.nested-bank-account-capabilities:first' do
+        expect(page).to have_field 'Recurso', :with => 'Construção'
+        expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_field 'Data de desativação', :with => ''
+        expect(page).to have_select 'Status', :selected => 'Ativo'
+      end
+
+      within 'div.nested-bank-account-capabilities:last' do
+        expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
+        expect(page).to have_select 'Status', :selected => 'Inativo'
+        expect(page).to have_field 'Data de inclusão', :with => '01/01/2012'
+        expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
+      end
+    end
+  end
+
+  scenario 'removing a bank account capability' do
+    BankAccount.make!(:itau_tributos)
+    Capability.make!(:construcao)
+
+    navigate 'Contabilidade > Comum > Contas Bancárias'
+
+    click_link 'Itaú Tributos'
+
+    within_tab 'Principal' do
+      fill_in 'Descrição', :with => 'IPTU'
+
+      select 'Inativo', :from => 'Status'
+      select 'Movimento', :from => 'Tipo'
+      fill_in 'Número da conta corrente', :with => '1111114'
+    end
+
+    within_tab 'Recursos' do
+      click_button 'Remover'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Conta Bancária editado com sucesso.'
+
+    click_link 'IPTU'
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status', :selected => 'Inativo'
+      expect(page).to have_select 'Tipo', :selected => 'Movimento'
+      expect(page).to have_field 'Descrição', :with => 'IPTU'
+      expect(page).to have_field 'Número da conta corrente', :with => '1111114'
+    end
+
+    within_tab 'Recursos' do
+      expect(page).to_not have_field 'Recurso', :with => 'Reforma e Ampliação'
+      expect(page).to_not have_field 'Data de inclusão', :with => I18n.l(Date.current)
+      expect(page).to_not have_field 'Data de desativação', :with => I18n.l(Date.current)
     end
   end
 

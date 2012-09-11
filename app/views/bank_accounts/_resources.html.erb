@@ -1,0 +1,28 @@
+<p>
+  <input type="button" class="button affirmative add-bank-account-capabilities" value="Adicionar">
+</p>
+
+<div id="bank-account-capabilities" class="nested-form" data-nested-form="bank-account-capabilities" data-append-item=false>
+  <%= f.association :capabilities, :collection => localized(f.object.capabilities) do |p| %>
+    <%= render 'bank_account_capabilities/form', :f => p %>
+  <% end %>
+</div>
+
+<%= mustache 'bank-account-capabilities-template' do %>
+  <%= f.association :capabilities_attributes,
+                    :collection => f.object.capabilities.build(:status => Status::ACTIVE, :date => I18n.l(Date.current)),
+                    :index => '{{uuid-bank-account-capabilities}}' do |p| %>
+    <%= render 'bank_account_capabilities/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $('.add-bank-account-capabilities').click(function() {
+    var currentDate = '<%= l Date.current %>';
+
+    $('.select-status option:selected[value="<%= Status::ACTIVE %>"]').closest(".nested-bank-account-capabilities").find('.input-date').val(currentDate);
+
+    $('select.select-status').val('<%= Status::INACTIVE %>');
+    $('select.select-status[selected="<%= Status::ACTIVE %>"').val('<%= Status::INACTIVE %>');
+  });
+</script>

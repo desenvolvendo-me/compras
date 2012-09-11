@@ -20,6 +20,7 @@ describe Capability do
   it { should have_many(:licitation_processes).dependent(:restrict) }
   it { should have_many(:extra_credit_moviment_types).dependent(:restrict) }
   it { should have_many(:budget_revenues).dependent(:restrict) }
+  it { should have_many(:bank_account_capabilities).dependent(:restrict) }
 
   it { should validate_presence_of :descriptor }
   it { should validate_presence_of :status }

@@ -16,6 +16,7 @@ class Capability < Compras::Model
   has_many :licitation_processes, :dependent => :restrict
   has_many :extra_credit_moviment_types, :dependent => :restrict
   has_many :budget_revenues, :dependent => :restrict
+  has_many :bank_account_capabilities, :dependent => :restrict
 
   validates :descriptor, :description, :goal, :kind, :status, :presence => true
 

@@ -30,6 +30,8 @@ describe BankAccount do
 
   it { should belong_to :agency }
 
+  it { should have_many(:capabilities).dependent(:destroy) }
+
   it { should validate_presence_of :description }
   it { should validate_presence_of :agency }
   it { should validate_presence_of :account_number }

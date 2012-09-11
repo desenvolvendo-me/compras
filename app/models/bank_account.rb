@@ -1,6 +1,6 @@
 class BankAccount < Compras::Model
   attr_accessible :description, :agency_id, :account_number, :status, :kind,
-                  :digit, :bank, :bank_id
+                  :digit, :bank, :bank_id, :capabilities_attributes
 
   attr_modal :description, :agency_id, :account_number
 
@@ -10,6 +10,10 @@ class BankAccount < Compras::Model
   has_enumeration_for :kind, :with => BankAccountKind
 
   belongs_to :agency
+
+  has_many :capabilities, :dependent => :destroy, :class_name => 'BankAccountCapability', :order => :status
+
+  accepts_nested_attributes_for :capabilities, :allow_destroy => true
 
   delegate :number, :digit, :to => :agency, :allow_nil => true, :prefix => true
 

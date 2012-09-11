@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      bank_account_capability:
+        one: "Recurso de Conta Bancária"
+        other: "Recursos de Contas Bancárias"
+
+    attributes:
+      bank_account_capability:
+        capability: "Recurso"
+        date: "Data de inclusão"
+        inactivation_date: "Data de desativação"
+        status: "Status"
+        bank_account: "Conta bancária"
