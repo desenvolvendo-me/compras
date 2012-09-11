@@ -8,7 +8,8 @@ class LicitationProcessClassification < Compras::Model
 
   delegate :description, :reference_unit, :quantity, :to => :classifiable, :allow_nil => true
   delegate :administrative_process_budget_allocation_items, :items, :to => :classifiable, :allow_nil => true
-  delegate :benefited, :proposals, :to => :bidder, :allow_nil => true
+  delegate :benefited, :proposals, :will_submit_new_proposal_when_draw,
+           :to => :bidder, :allow_nil => true
 
   orderize :id
   filterize

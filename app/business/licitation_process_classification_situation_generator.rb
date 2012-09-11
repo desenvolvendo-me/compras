@@ -76,9 +76,9 @@ class LicitationProcessClassificationSituationGenerator
     benefited_value_a = classification_a.benefited_value(current_percentage)
     benefited_value_b = classification_b.benefited_value(current_percentage)
 
-    if (classification_a.benefited && classification_a.total_value > classification_b.total_value && benefited_value_a <= classification_b.total_value) ||
-       (classification_b.benefited && classification_b.total_value > classification_a.total_value && benefited_value_b <= classification_a.total_value) ||
-       (benefited_value_a == benefited_value_b)
+    if ((classification_a.benefited && classification_a.total_value > classification_b.total_value && benefited_value_a <= classification_b.total_value) ||
+        (classification_b.benefited && classification_b.total_value > classification_a.total_value && benefited_value_b <= classification_a.total_value) ||
+        (benefited_value_a == benefited_value_b)) && classification_a.will_submit_new_proposal_when_draw
 
       classification_a.equalize!
       classification_b.equalize!

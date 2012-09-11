@@ -129,6 +129,7 @@ describe LicitationProcessClassificationSituationGenerator do
 
       licitation_process.stub(:consider_law_of_proposals => true)
       classification_2.stub(:total_value => 9, :benefited => false)
+      classification_2.stub(:will_submit_new_proposal_when_draw => true)
       classification_1.stub(:total_value => 10, :benefited => true)
 
       classification_1.should_receive(:benefited_value).with(10).and_return(9)
@@ -136,6 +137,22 @@ describe LicitationProcessClassificationSituationGenerator do
 
       classification_1.should_receive(:equalize!).and_return(true)
       classification_2.should_receive(:equalize!).and_return(true)
+
+      generator.generate!
+    end
+
+    it 'should change classifications situation to lost' do
+      classifications.stub(:disqualified).and_return([])
+      licitation_process.stub(:consider_law_of_proposals => true)
+      classification_2.stub(:total_value => 9, :benefited => false)
+      classification_2.stub(:will_submit_new_proposal_when_draw => false)
+      classification_1.stub(:total_value => 10, :benefited => true)
+
+      classification_1.should_receive(:benefited_value).with(10).and_return(9)
+      classification_2.should_receive(:benefited_value).with(10).and_return(9)
+
+      classification_2.should_receive(:lose!).and_return(true)
+      classification_1.should_receive(:win!).and_return(true)
 
       generator.generate!
     end

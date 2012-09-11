@@ -234,6 +234,42 @@ feature "LicitationProcesses" do
     end
   end
 
+  scenario 'generate calculation between a small company and a big company with will_submit_new_proposal_when_draw unchecked' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_without_new_proposal, :consider_law_of_proposals => true)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_button 'Relatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Empatou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Empatou'
+    end
+  end
+
   scenario 'generate calculation when type of calculation is global' do
     licitation_process = LicitationProcess.make!(:apuracao_global)
 
