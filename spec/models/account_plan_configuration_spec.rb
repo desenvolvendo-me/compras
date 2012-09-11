@@ -1,8 +1,11 @@
 require 'model_helper'
+require 'app/models/account_plan_level'
 require 'app/models/account_plan_configuration'
 
 describe AccountPlanConfiguration do
   it { should belong_to :state }
+
+  it { should have_many(:account_plan_levels).dependent(:destroy) }
 
   it { should validate_presence_of :description }
   it { should validate_presence_of :state }

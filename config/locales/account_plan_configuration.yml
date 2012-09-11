@@ -10,3 +10,4 @@ pt-BR:
         year: "Ano de exercício"
         state: "Estado"
         description: "Descrição"
+        mask: "Máscara"

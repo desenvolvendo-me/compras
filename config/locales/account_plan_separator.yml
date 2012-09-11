@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    account_plan_separator:
+      point: "Ponto"
+      hyphen: "Hífem"
+      slash: "Barra"

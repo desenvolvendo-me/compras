@@ -17,6 +17,14 @@ feature "AccountPlanConfigurations" do
     fill_modal 'Estado', :with => 'Minas Gerais'
     fill_in 'Descrição', :with => 'Plano1'
 
+    click_button 'Adicionar Estrutura'
+    within 'div.nested-account-plan-level:first' do
+      fill_in 'Nível', :with => '1'
+      fill_in 'Descrição', :with => 'Órgão'
+      fill_in 'Dígitos', :with => '2'
+      select 'Ponto', :from => 'Separador'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Configuração de Plano de Contas criado com sucesso.'
@@ -26,6 +34,35 @@ feature "AccountPlanConfigurations" do
     expect(page).to have_field 'Ano de exercício', :with => '2012'
     expect(page).to have_field 'Estado', :with => 'Minas Gerais'
     expect(page).to have_field 'Descrição', :with => 'Plano1'
+
+    within 'div.nested-account-plan-level:first' do
+      expect(page).to have_field 'Descrição', :with => 'Órgão'
+      expect(page).to have_field 'Dígitos', :with => '2'
+      expect(page).to have_select 'Separador', :selected => 'Ponto'
+    end
+  end
+
+  scenario 'calculate mask with javascript' do
+    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+
+    click_link 'Criar Configuração de Plano de Contas'
+
+    click_button 'Adicionar Estrutura'
+
+    fill_in 'Nível', :with => '2'
+
+    fill_in 'Dígitos', :with => '2'
+
+    click_button 'Adicionar Estrutura'
+    within 'div.nested-account-plan-level:last' do
+      fill_in 'Nível', :with => '1'
+
+      fill_in 'Dígitos', :with => '3'
+
+      select 'Ponto', :from => 'Separador'
+    end
+
+    expect(page).to have_field 'Máscara', :with => '999.99'
   end
 
   scenario 'update an existent account_plan_configuration' do
