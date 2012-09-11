@@ -6,7 +6,7 @@ feature "TceSpecificationCapabilities" do
     sign_in
   end
 
-  scenario 'try create a new tce_specification_capability with inactive agreement' do
+  scenario 'should not show inactive agreement at modal list' do
     Agreement.make!(:apoio_ao_turismo_inactive)
 
     navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
@@ -14,15 +14,11 @@ feature "TceSpecificationCapabilities" do
     click_link 'Criar Especificação de Recursos do TCE'
 
     within_tab 'Convênios' do
-      fill_modal 'Convênios', :with => 'Apoio ao turismo', :field => 'Objeto'
+      within_modal 'Convênios' do
+        click_button 'Pesquisar'
 
-      expect(page).to have_content 'Inativo'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Convênios' do
-      expect(page).to have_content 'Não deve haver nenhum convênio inativo'
+        expect(page).to_not have_content 'Apoio ao turismo'
+      end
     end
   end
 

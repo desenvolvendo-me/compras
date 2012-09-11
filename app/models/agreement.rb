@@ -13,7 +13,7 @@ class Agreement < Compras::Model
   mount_uploader :agreement_file, DocumentUploader
 
   has_enumeration_for :category, :with => AgreementCategory
-  has_enumeration_for :status
+  has_enumeration_for :status, :create_helpers => true
 
   belongs_to :agreement_kind
   belongs_to :regulatory_act
@@ -42,6 +42,10 @@ class Agreement < Compras::Model
 
   orderize :description
   filterize
+
+  scope :actives,
+    joins { agreement_occurrences }.
+    where { agreement_occurrences.kind.in(AgreementOccurrenceKind.inactive_kinds.map{ |k| k[1] }) }
 
   def last_additive_number
     return 0 unless last_persisted_additive

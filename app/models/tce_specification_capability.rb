@@ -3,7 +3,7 @@ class TceSpecificationCapability < Compras::Model
                   :agreement_ids
 
   has_many :capabilities, :dependent => :restrict
-  has_many :tce_capability_agreements, :dependent => :destroy
+  has_many :tce_capability_agreements, :dependent => :destroy, :inverse_of => :tce_specification_capability
   has_many :agreements, :through => :tce_capability_agreements,
            :dependent => :restrict
 
@@ -29,7 +29,7 @@ class TceSpecificationCapability < Compras::Model
   protected
 
   def has_inactive_agreement
-    if agreements.select { |a| a.status == Status::INACTIVE }.any?
+    if tce_capability_agreements.select { |a| a.inactive? && a.new_record? }.any?
       errors.add(:agreements, :should_has_not_inactive_agreement)
     end
   end

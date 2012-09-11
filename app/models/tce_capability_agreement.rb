@@ -4,5 +4,7 @@ class TceCapabilityAgreement < Compras::Model
   belongs_to :tce_specification_capability
   belongs_to :agreement
 
+  delegate :inactive?, :to => :agreement, :allow_nil => true
+
   validates :tce_specification_capability, :agreement, :presence => true
 end

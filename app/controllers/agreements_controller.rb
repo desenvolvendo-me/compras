@@ -1,4 +1,6 @@
 class AgreementsController < CrudController
+  has_scope :actives, :type => :boolean
+
   def create
     object = build_resource
     AgreementAdditiveNumberGenerator.new(object).generate!
