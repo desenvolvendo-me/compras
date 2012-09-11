@@ -62,7 +62,7 @@ feature "<%= controller_class_name %>" do
 
     click_link 'Example'
 
-    click_link 'Apagar', :confirm => true
+    click_link 'Apagar'
 
     expect(page).to have_notice '<%= singular %> apagado com sucesso.'
 
