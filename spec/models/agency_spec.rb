@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/agency'
+require 'app/models/bank_account_capability'
 require 'app/models/bank_account'
 
 describe Agency do
