@@ -18,7 +18,7 @@ describe BankAccountsController do
     it 'should use active as default value for status and call status verifier' do
       BankAccount.any_instance.should_receive(:transaction).and_yield
 
-      BankAccountCapabilitiesStatusVerifier.any_instance.should_receive(:verify!)
+      BankAccountCapabilitiesStatusChanger.any_instance.should_receive(:change!)
 
       post :create
 
@@ -30,7 +30,7 @@ describe BankAccountsController do
     it 'should call status verifier' do
       bank_account = BankAccount.make!(:itau_tributos)
 
-      BankAccountCapabilitiesStatusVerifier.any_instance.should_receive(:verify!)
+      BankAccountCapabilitiesStatusChanger.any_instance.should_receive(:change!)
 
       post :update, :id => bank_account.id
     end

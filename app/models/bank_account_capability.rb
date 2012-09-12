@@ -8,10 +8,18 @@ class BankAccountCapability < Compras::Model
 
   validates :capability, :presence => true
 
-  def to_s
-    capability
+  def activate!(update_date)
+    active!
+    self.date = update_date
+
+    save!
   end
 
-  orderize :id
-  filterize
+  def inactivate!(update_date)
+    inactive!
+    self.date ||= update_date
+    self.inactivation_date = update_date
+
+    save!
+  end
 end

@@ -38,4 +38,12 @@ class BankAccount < Compras::Model
   def bank_id
     agency.try(:bank_id) || @bank_id
   end
+
+  def capabilities_without_status
+    capabilities.select { |c| c.status.nil? }
+  end
+
+  def first_capability_without_status
+    capabilities_without_status.try(:first)
+  end
 end

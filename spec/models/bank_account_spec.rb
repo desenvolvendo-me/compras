@@ -42,4 +42,26 @@ describe BankAccount do
   it { should allow_value('0077').for(:account_number) }
   it { should allow_value('77').for(:account_number) }
   it { should_not allow_value('0a077').for(:account_number) }
+
+  describe 'capabilities without status' do
+    let :capability_without_status do
+      double(:status => nil)
+    end
+
+    let :capabilities do
+      [double(:status => 'a'), double(:status => 'b'), capability_without_status]
+    end
+
+    before do
+      subject.stub(:capabilities => capabilities)
+    end
+
+    it 'should filter capabilities whose status is not nil' do
+      expect(subject.capabilities_without_status.size).to eq 1
+    end
+
+    it 'should return first capability whose status is nil' do
+      expect(subject.first_capability_without_status).to eq capability_without_status
+    end
+  end
 end

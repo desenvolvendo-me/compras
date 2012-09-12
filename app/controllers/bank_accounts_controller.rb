@@ -14,18 +14,18 @@ class BankAccountsController < CrudController
   end
 
   def create_resource(object)
-    super
-
     object.transaction do
-      BankAccountCapabilitiesStatusVerifier.new(object.capabilities, Date.current).verify!
+      super
+
+      BankAccountCapabilitiesStatusChanger.new(object, Date.current).change!
     end
   end
 
   def update_resource(object, attributes)
-    super
-
     object.transaction do
-      BankAccountCapabilitiesStatusVerifier.new(object.capabilities, Date.current).verify!
+      super
+
+      BankAccountCapabilitiesStatusChanger.new(object, Date.current).change!
     end
   end
 end

@@ -1,5 +1,6 @@
 require 'model_helper'
 require 'app/models/bank_account_capability'
+require 'app/enumerations/status'
 
 describe BankAccountCapability do
   it { should belong_to :bank_account }
@@ -7,11 +8,29 @@ describe BankAccountCapability do
 
   it { should validate_presence_of :capability }
 
-  describe "#to_s" do
-    it 'should return capability on to_s calls' do
-      subject.stub(:capability => 'Recurso')
+   describe "activate!" do
+    it 'should change status and date' do
+      subject.status = Status::INACTIVE
 
-      expect(subject.to_s).to eq 'Recurso'
+      subject.should_receive(:save!).and_return(true)
+
+      subject.activate!(Date.current)
+
+      expect(subject.status).to eq Status::ACTIVE
+      expect(subject.date).to eq Date.current
+    end
+  end
+
+   describe "inactivate!" do
+    it 'should change status and inactivation date' do
+      subject.status = Status::ACTIVE
+
+      subject.should_receive(:save!).and_return(true)
+
+      subject.inactivate!(Date.current)
+
+      expect(subject.status).to eq Status::INACTIVE
+      expect(subject.inactivation_date).to eq Date.current
     end
   end
 end
