@@ -9,6 +9,8 @@ describe BudgetStructureLevel do
     expect(subject.to_s).to eq '1 - Orgão'
   end
 
+  it { should belong_to :budget_structure_configuration }
+
   it { should validate_presence_of :description }
   it { should validate_presence_of :level }
   it { should validate_presence_of :digits }
