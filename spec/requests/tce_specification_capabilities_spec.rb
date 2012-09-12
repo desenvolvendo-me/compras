@@ -8,6 +8,7 @@ feature "TceSpecificationCapabilities" do
 
   scenario 'should not show inactive agreement at modal list' do
     Agreement.make!(:apoio_ao_turismo_inactive)
+    Agreement.make!(:apoio_a_cultura)
 
     navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
@@ -17,7 +18,9 @@ feature "TceSpecificationCapabilities" do
       within_modal 'Convênios' do
         click_button 'Pesquisar'
 
-        expect(page).to_not have_content 'Apoio ao turismo'
+        within_records do
+          expect(page).to_not have_content 'Apoio ao turismo'
+        end
       end
     end
   end
@@ -131,12 +134,6 @@ feature "TceSpecificationCapabilities" do
 
     within_tab 'Convênios' do
       click_button 'Remover'
-
-      fill_modal 'Convênios', :with => 'Apoio ao turismo', :field => 'Objeto'
-
-      expect(page).to have_content 'Convênio repassado'
-      expect(page).to have_content 'Apoio ao turismo'
-      expect(page).to have_content 'Ativo'
 
       fill_modal 'Convênios', :with => 'Apoio a cultura', :field => 'Objeto'
 

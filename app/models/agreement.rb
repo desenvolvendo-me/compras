@@ -20,7 +20,7 @@ class Agreement < Compras::Model
 
   has_many :agreement_additives, :dependent => :destroy, :order => :number
   has_many :agreement_participants, :dependent => :destroy
-  has_many :agreement_occurrences, :dependent => :destroy
+  has_many :agreement_occurrences, :dependent => :destroy, :order => 'date desc', :inverse_of => :agreement
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
   has_many :tce_capability_agreements, :dependent => :restrict
   has_many :tce_specification_capabilities, :through => :tce_capability_agreements,
@@ -45,7 +45,7 @@ class Agreement < Compras::Model
 
   scope :actives,
     joins { agreement_occurrences }.
-    where { agreement_occurrences.kind.in(AgreementOccurrenceKind.inactive_kinds.map{ |k| k[1] }) }
+    where { agreement_occurrences.kind.eq(AgreementOccurrenceKind::IN_PROGRESS) }
 
   def last_additive_number
     return 0 unless last_persisted_additive
@@ -58,7 +58,11 @@ class Agreement < Compras::Model
   end
 
   def status
-    is_last_occurrence_inactive? ? Status::INACTIVE : Status::ACTIVE
+    if first_agreement_occurrence_is_active?
+      Status::ACTIVE
+    else
+      Status::INACTIVE
+    end
   end
 
   def year
@@ -67,10 +71,10 @@ class Agreement < Compras::Model
 
   protected
 
-  def is_last_occurrence_inactive?
-    return if agreement_occurrences.empty?
+  def first_agreement_occurrence_is_active?
+    return if agreement_occurrences.blank?
 
-    agreement_occurrences.sort_by { |o| o.date }.last.inactive?
+    agreement_occurrences.first.active?
   end
 
   def last_persisted_additive

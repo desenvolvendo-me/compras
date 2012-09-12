@@ -94,34 +94,16 @@ describe Agreement do
   end
 
   context '#status' do
-    let :occurrence_1 do
-      double(:inactive? => true, :date => Date.tomorrow)
+    it "should be inactive" do
+      subject.agreement_occurrences.build(:kind => AgreementOccurrenceKind::OTHER)
+
+      expect(subject.status).to eq(Status::INACTIVE)
     end
 
-    let :occurrence_2 do
-      double(:inactive? => false, :date => Date.current)
-    end
+    it "should be active" do
+      subject.agreement_occurrences.build(:kind => AgreementOccurrenceKind::IN_PROGRESS)
 
-    let :occurrence_3 do
-      double(:inactive? => false, :date => Date.tomorrow)
-    end
-
-    it 'should return inactive if last occurrence kind is inactive' do
-      subject.stub(:agreement_occurrences => [occurrence_1, occurrence_2])
-
-      expect(subject.status).to eq 'inactive'
-    end
-
-    it 'should return false if last occurrence kind is not inactive' do
-      subject.stub(:agreement_occurrences => [occurrence_2, occurrence_2])
-
-      expect(subject.status).to eq 'active'
-    end
-
-    it 'should return false if last occurrence kind is not inactive' do
-      subject.stub(:agreement_occurrences => [occurrence_1, occurrence_3])
-
-      expect(subject.status).to eq 'active'
+      expect(subject.status).to eq(Status::ACTIVE)
     end
   end
 end

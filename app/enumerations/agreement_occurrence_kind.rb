@@ -5,8 +5,4 @@ class AgreementOccurrenceKind < EnumerateIt::Base
                    :completed,
                    :paralyzed,
                    :other
-
-  def self.inactive_kinds
-    to_a.reject { |e| e[1] == 'in_progress' }
-  end
 end
