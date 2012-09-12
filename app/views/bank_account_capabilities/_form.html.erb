@@ -18,13 +18,9 @@
     <div class="yui3-u-1-6">
       <%= f.input :inactivation_date, :disabled => true, :input_html => { :class => 'input-date' } %>
     </div>
-
-    <div class="yui3-u-1-6">
-      <%= link_to_modal_info 'bank_account_capability_capability', f.object.capability %>
-    </div>
   </div>
 
-  <p class="yui3-u">
-    <input type="button" class="button negative remove-bank-account-capabilities" value="Remover">
+  <p>
+    <%= link_to_modal_info "#{'bank_account_capabilities_attributes_' unless f.object.persisted?}#{f.nested_identifier}_capability", f.object.capability %>
   </p>
 </div>

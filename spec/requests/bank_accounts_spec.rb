@@ -6,6 +6,25 @@ feature "BankAccounts" do
     sign_in
   end
 
+  scenario 'opening modal info in a new capability' do
+    Agency.make!(:itau)
+    Capability.make!(:reforma)
+
+    navigate 'Contabilidade > Comum > Contas Bancárias'
+
+    click_link 'Criar Conta Bancária'
+
+    within_tab 'Recursos' do
+      click_button 'Adicionar'
+
+      fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
+
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content 'Otimizar o atendimento a todos'
+  end
+
   scenario 'create a new bank_account' do
     Agency.make!(:itau)
     Capability.make!(:reforma)
@@ -149,48 +168,12 @@ feature "BankAccounts" do
         expect(page).to have_select 'Status', :selected => 'Inativo'
         expect(page).to have_field 'Data de inclusão', :with => '01/01/2012'
         expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
+
+        click_link 'Mais informações'
       end
     end
-  end
 
-  scenario 'removing a bank account capability' do
-    BankAccount.make!(:itau_tributos)
-    Capability.make!(:construcao)
-
-    navigate 'Contabilidade > Comum > Contas Bancárias'
-
-    click_link 'Itaú Tributos'
-
-    within_tab 'Principal' do
-      fill_in 'Descrição', :with => 'IPTU'
-
-      select 'Inativo', :from => 'Status'
-      select 'Movimento', :from => 'Tipo'
-      fill_in 'Número da conta corrente', :with => '1111114'
-    end
-
-    within_tab 'Recursos' do
-      click_button 'Remover'
-    end
-
-    click_button 'Salvar'
-
-    expect(page).to have_notice 'Conta Bancária editado com sucesso.'
-
-    click_link 'IPTU'
-
-    within_tab 'Principal' do
-      expect(page).to have_select 'Status', :selected => 'Inativo'
-      expect(page).to have_select 'Tipo', :selected => 'Movimento'
-      expect(page).to have_field 'Descrição', :with => 'IPTU'
-      expect(page).to have_field 'Número da conta corrente', :with => '1111114'
-    end
-
-    within_tab 'Recursos' do
-      expect(page).to_not have_field 'Recurso', :with => 'Reforma e Ampliação'
-      expect(page).to_not have_field 'Data de inclusão', :with => I18n.l(Date.current)
-      expect(page).to_not have_field 'Data de desativação', :with => I18n.l(Date.current)
-    end
+    expect(page).to have_content 'Otimizar o atendimento a todos'
   end
 
   scenario 'when fill/clear agency should fill/clear related fields' do
