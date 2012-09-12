@@ -1,6 +1,9 @@
 require 'model_helper'
 require 'app/uploaders/document_uploader'
 require 'app/models/agreement'
+require 'app/models/agreement_occurrence'
+require 'app/models/agreement_bank_account'
+require 'app/models/agreement_additive'
 require 'app/models/tce_capability_agreement'
 
 describe Agreement do
@@ -91,20 +94,32 @@ describe Agreement do
   end
 
   context '#status' do
+    let :occurrence_1 do
+      double(:inactive? => true, :date => Date.tomorrow)
+    end
+
+    let :occurrence_2 do
+      double(:inactive? => false, :date => Date.current)
+    end
+
+    let :occurrence_3 do
+      double(:inactive? => false, :date => Date.tomorrow)
+    end
+
     it 'should return inactive if last occurrence kind is inactive' do
-      subject.stub(:agreement_occurrences => [double(:inactive? => true, :date => Date.current + 1.day), double(:inactive? => false, :date => Date.current)])
+      subject.stub(:agreement_occurrences => [occurrence_1, occurrence_2])
 
       expect(subject.status).to eq 'inactive'
     end
 
     it 'should return false if last occurrence kind is not inactive' do
-      subject.stub(:agreement_occurrences => [double(:inactive? => false, :date => Date.current), double(:inactive? => false, :date => Date.current)])
+      subject.stub(:agreement_occurrences => [occurrence_2, occurrence_2])
 
       expect(subject.status).to eq 'active'
     end
 
     it 'should return false if last occurrence kind is not inactive' do
-      subject.stub(:agreement_occurrences => [double(:inactive? => true, :date => Date.current), double(:inactive? => false, :date => Date.current + 1.day)])
+      subject.stub(:agreement_occurrences => [occurrence_1, occurrence_3])
 
       expect(subject.status).to eq 'active'
     end
