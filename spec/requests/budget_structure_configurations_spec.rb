@@ -18,10 +18,12 @@ feature "BudgetStructureConfigurations" do
     fill_modal 'Entidade', :with => 'Detran'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
     click_button 'Adicionar Estrutura'
-    fill_in 'Nível', :with => '1'
-    fill_in 'budget_structure_configuration_budget_structure_levels_attributes_fresh-0_description', :with => 'Órgão'
-    fill_in 'Dígitos', :with => '2'
-    select 'Ponto', :from => 'Separador'
+    within 'div.nested-budget-structure-level:first' do
+      fill_in 'Nível', :with => '1'
+      fill_in 'Descrição', :with => 'Órgão'
+      fill_in 'Dígitos', :with => '2'
+      select 'Ponto', :from => 'Separador'
+    end
     click_button 'Salvar'
 
     expect(page).to have_notice 'Configuração de Estrutura Orçamentaria criado com sucesso.'
@@ -32,10 +34,12 @@ feature "BudgetStructureConfigurations" do
     expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
     expect(page).to have_field 'Máscara', :with => '99'
     expect(page).to have_field 'Descrição', :with => 'Nome da Configuração'
-    expect(page).to have_field 'Nível', :with => '1'
-    expect(page).to have_field 'budget_structure_configuration_budget_structure_levels_attributes_0_description', :with => 'Órgão'
-    expect(page).to have_field 'Dígitos', :with => '2'
-    expect(page).to have_select 'Separador', :selected => 'Ponto'
+    within 'div.nested-budget-structure-level:first' do
+      expect(page).to have_field 'Nível', :with => '1'
+      expect(page).to have_field 'Descrição', :with => 'Órgão'
+      expect(page).to have_field 'Dígitos', :with => '2'
+      expect(page).to have_select 'Separador', :selected => 'Ponto'
+    end
   end
 
   scenario 'calculate mask with javascript' do
@@ -51,7 +55,7 @@ feature "BudgetStructureConfigurations" do
 
     click_button 'Adicionar Estrutura'
 
-    within 'div.budget-structure-level:first' do
+    within 'div.nested-budget-structure-level:last' do
       fill_in 'Nível', :with => '1'
 
       fill_in 'Dígitos', :with => '3'
