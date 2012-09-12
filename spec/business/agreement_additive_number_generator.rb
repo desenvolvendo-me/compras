@@ -26,7 +26,7 @@ describe AgreementAdditiveNumberGenerator do
     end
   end
 
-  context 'when have one additives as persisted and one not' do
+  context 'when have one persisted additive and a non persisted' do
     let :additive_one do
       double('AdditiveOne', :persisted? => true, :number => 1)
     end
@@ -49,7 +49,7 @@ describe AgreementAdditiveNumberGenerator do
     end
   end
 
-  context 'when have one deleted additive, one persisted and one not persisted' do
+  context 'when have a deleted additive, a non persisted and a persisted' do
     let :additive_one do
       double('AdditiveOne', :persisted? => true, :number => 2)
     end
