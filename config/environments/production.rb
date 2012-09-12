@@ -69,8 +69,9 @@ Compras::Application.configure do
 
   PDFKit.configure do |config|
     config.default_options = {
-      :page_size => 'Legal',
-      :print_media_type => true
+      :page_size => 'A4',
+      :print_media_type => true,
+      :encoding => 'UTF-8'
     }
   end
 end

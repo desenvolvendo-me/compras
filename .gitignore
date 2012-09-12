@@ -6,6 +6,8 @@ bin/
 config/database.yml
 config/newrelic.yml
 config/initializers/airbrake.rb
+config/initializers/setup_email.rb
+config/unicorn.conf
 db/*.sqlite3
 db/schema.*
 log/*.log

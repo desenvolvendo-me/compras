@@ -8,11 +8,15 @@ describe SupplyAuthorizationMailer do
     end
 
     let :mail do
-      SupplyAuthorizationMailer.authorization_to_creditor(direct_purchase, prefecture)
+      SupplyAuthorizationMailer.authorization_to_creditor(direct_purchase, prefecture, supply_authorization_pdf)
     end
 
     let :direct_purchase do
       double(:creditor_person_email => 'wenderson.malheiros@gmail.com', :creditor => 'Wenderson Malheiros', :supply_authorization => nil)
+    end
+
+    let :supply_authorization_pdf do
+      double(:supply_authorization_pdf, :length => 10)
     end
 
     it 'should render subject' do
@@ -35,6 +39,10 @@ describe SupplyAuthorizationMailer do
       prefecture.stub(:email => nil)
 
       mail.from.should include 'noreply@nobesistemas.com.br'
+    end
+
+    it 'should has one attachment' do
+      mail.attachments.first.filename.should eq 'autorização de fornecimento.pdf'
     end
   end
 end
