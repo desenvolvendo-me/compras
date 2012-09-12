@@ -62,7 +62,6 @@ feature "AdministrativeProcessLiberations" do
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
-
     within_records do
       page.find('a').click
     end
