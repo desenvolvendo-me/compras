@@ -149,6 +149,7 @@ pt-BR:
     <<: *controllers
     accounting: "Contabilidade"
     account_plan: "Plano de Contas"
+    account_plan_configurations: "Configurações de Plano de Contas"
     administrative_and_licitation_processes: "Processo Administrativo/Licitatório"
     administration: "Administração"
     agreement: "Convênio"
@@ -174,4 +175,3 @@ pt-BR:
     licitation_process_ratifications: "Homologações e Adjudicações de Processos Licitatórios"
     purchase_solicitation_item_group_materials: "Materiais da Solicitação de Compra do Agrupamento de Item"
     special_entries: "Inscrições Especiais"
-    account_plan_configurations: "Configurações de Plano de Contas"
