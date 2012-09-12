@@ -7,7 +7,6 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'create a new budget_structure_configuration' do
-
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
 
