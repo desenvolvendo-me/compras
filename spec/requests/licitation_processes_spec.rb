@@ -410,18 +410,22 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'acessing from index cancel should return to index' do
-    LicitationProcess.make!(:processo_licitatorio)
+  scenario 'button Administrative Process should take user to the administrative process view' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    visit edit_licitation_process_path(licitation_process)
+    click_link 'Processo Administrativo'
 
-    within_records do
-      page.find('a').click
-    end
+    expect(current_path).to eq edit_administrative_process_path(licitation_process.administrative_process)
+  end
 
-    click_link 'Cancelar'
+  scenario "button Back to Listings should take user to licitation_process#index" do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    expect(page).to have_link('1/2012')
+    visit edit_licitation_process_path(licitation_process)
+    click_link 'Voltar à listagem'
+
+    expect(current_path).to eq licitation_processes_path
   end
 
   scenario 'create a new licitation_process' do
@@ -1028,27 +1032,6 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
       expect(page).to have_field 'Processo administrativo', :with => "1/2012"
       expect(page).to have_field 'Abrev. modalidade', :with => "CV"
-    end
-  end
-
-  scenario "cancelar button should redirect to the respective administrative_process" do
-    LicitationProcess.make!(:processo_licitatorio)
-
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Cancelar'
-
-    within_tab 'Principal' do
-      expect(page).to have_field 'Processo', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Data do processo', :with => '07/03/2012'
-      expect(page).to have_field 'Número do protocolo', :with => '00088/2012'
     end
   end
 
