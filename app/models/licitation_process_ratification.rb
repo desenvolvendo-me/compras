@@ -5,6 +5,8 @@ class LicitationProcessRatification < Compras::Model
   attr_accessible :adjudication_date, :ratification_date, :licitation_process_id, :licitation_process_bidder_id
   attr_accessible :licitation_process_ratification_items_attributes
 
+  attr_modal :sequence, :licitation_process_id, :ratification_date, :adjudication_date
+
   belongs_to :licitation_process
   belongs_to :licitation_process_bidder
 
