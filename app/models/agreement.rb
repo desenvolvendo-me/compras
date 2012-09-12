@@ -57,6 +57,10 @@ class Agreement < Compras::Model
     is_last_occurrence_inactive? ? Status::INACTIVE : Status::ACTIVE
   end
 
+  def year
+    number_year.split('/').last
+  end
+
   protected
 
   def is_last_occurrence_inactive?
