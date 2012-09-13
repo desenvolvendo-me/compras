@@ -29,6 +29,9 @@ module Compras
       #{config.root}/app/validators
     )
 
+    # Custom route files you want to be loaded.
+    config.paths['config/routes'] += Dir["#{config.root}/config/routes/*.rb"]
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
