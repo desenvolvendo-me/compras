@@ -18,6 +18,12 @@ GIT
       yajl-ruby
 
 GIT
+  remote: git://github.com/comogo/pdfkit.git
+  revision: 3419d6daa8843b6c64af5e543016225635fbe3b2
+  specs:
+    pdfkit (0.5.2)
+
+GIT
   remote: git://github.com/nohupbrasil/decore.git
   revision: a5bb876702ff010f5ade1edc9222540d4b9059bb
   specs:
@@ -157,7 +163,6 @@ GEM
     multipart-post (1.1.5)
     nokogiri (1.5.5)
     orm_adapter (0.0.7)
-    pdfkit (0.5.2)
     pg (0.12.2)
     poltergeist (0.7.0)
       capybara (~> 1.1)
@@ -280,7 +285,7 @@ DEPENDENCIES
   machinist-caching (= 0.0.1)
   mail_validator (= 0.2.0)
   mask_validator (= 0.2.1)
-  pdfkit (= 0.5.2)
+  pdfkit!
   pg (= 0.12.2)
   poltergeist (= 0.7.0)
   rails (= 3.2.8)

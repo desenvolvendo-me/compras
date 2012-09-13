@@ -49,7 +49,7 @@ class DirectPurchasesController < CrudController
 
     pdf_instance = PDFKit.new html
 
-    pdf_instance.stylesheets << "#{Rails.root}/public/assets/report.css"
+    pdf_instance.stylesheets << "#{request.protocol}#{request.host_with_port}/assets/report.css"
 
     pdf_instance.to_pdf
   end
