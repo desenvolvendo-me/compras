@@ -1,6 +1,7 @@
 pt-BR:
   controllers: &controllers
     addresses: "Endereços"
+    account_plan_configurations: "Configurações de Plano de Contas"
     administration_types: "Tipos de Administração"
     administrative_processes: "Processos Administrativos"
     administrative_process_liberations: "Liberações de Processos Administrativos"
@@ -149,7 +150,6 @@ pt-BR:
     <<: *controllers
     accounting: "Contabilidade"
     account_plan: "Plano de Contas"
-    account_plan_configurations: "Configurações de Plano de Contas"
     administrative_and_licitation_processes: "Processo Administrativo/Licitatório"
     administration: "Administração"
     agreement: "Convênio"
