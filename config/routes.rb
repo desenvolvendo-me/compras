@@ -91,9 +91,17 @@ Compras::Application.routes.draw do
   end
 
   # Keep routes sorted alphabetically
-  root :to => 'bookmarks#show'
-
   devise_for :users, :controllers => { :confirmations => 'confirmations' }
+
+  devise_scope :user do
+    authenticated do
+      root :to => 'bookmarks#show'
+    end
+
+    unauthenticated do
+      root :to => 'devise/sessions#new'
+    end
+  end
 
   devise_scope :user do
     put '/confirm' => 'confirmations#confirm'
