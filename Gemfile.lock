@@ -296,4 +296,4 @@ DEPENDENCIES
   unicorn (= 4.1.1)
   validates_timeliness (= 3.0.11)
   will_paginate (= 3.0.3)
-  wkhtmltopdf-binary
+  wkhtmltopdf-binary (= 0.9.9.1)
