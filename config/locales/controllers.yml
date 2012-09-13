@@ -1,5 +1,6 @@
 pt-BR:
   controllers: &controllers
+    account_plans: "Planos de Contas"
     addresses: "Endereços"
     account_plan_configurations: "Configurações de Plano de Contas"
     administration_types: "Tipos de Administração"

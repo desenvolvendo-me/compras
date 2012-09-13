@@ -57,6 +57,7 @@ menu:
         - agreement_kinds
 
       - account_plan:
+        - account_plans
         - checking_account_structure_informations
         - checking_account_of_fiscal_accounts
         - account_plan_configurations

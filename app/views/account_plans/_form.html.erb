@@ -1,0 +1,21 @@
+<div class="tabs">
+  <ul>
+    <li><a href="#main">Principal</a></li>
+  </ul>
+
+  <div id="main">
+    <%= render 'main', :f => f %>
+  </div>
+</div>
+
+<script>
+  (function () {
+    $('#account_plan_account_plan_configuration').on('change', function(event, account_plan_configuration) {
+      if (account_plan_configuration) {
+        $('#account_plan_checking_account').attr('disabled', false).attr('data-mask', account_plan_configuration.mask);
+      } else {
+        $('#account_plan_checking_account').attr('disabled', true).val('');
+      }
+    });
+  })();
+</script>

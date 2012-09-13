@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      account_plan:
+        one: "Plano de Conta"
+        other: "Planos de Contas"
+
+    attributes:
+      account_plan:
+        account_plan_configuration: "Configuração do plano de contas"
+        checking_account: "Conta contábil"
+        title: "Título"
+        function: "Função"
