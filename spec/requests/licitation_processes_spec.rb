@@ -411,21 +411,31 @@ feature "LicitationProcesses" do
   end
 
   scenario 'button Administrative Process should take user to the administrative process view' do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio)
 
-    visit edit_licitation_process_path(licitation_process)
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    within_records do
+      page.find('a').click
+    end
     click_link 'Processo Administrativo'
 
-    expect(current_path).to eq edit_administrative_process_path(licitation_process.administrative_process)
+    within_tab 'Principal' do
+      expect(page).to have_field 'Processo', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Número do protocolo', :with => '00088/2012'
+    end
   end
 
   scenario "button Back to Listings should take user to licitation_process#index" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    visit edit_licitation_process_path(licitation_process)
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    within_records do
+      page.find('a').click
+    end
     click_link 'Voltar à listagem'
 
-    expect(current_path).to eq licitation_processes_path
+    expect(page).to have_link '1/2012'
   end
 
   scenario 'create a new licitation_process' do
