@@ -3,7 +3,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'pdfkit'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -78,6 +77,6 @@ module Compras
     config.action_controller.include_all_helpers = false
 
     # Include way to get a PDF view of any page on your site by appending .pdf to the URL.
-    config.middleware.use PDFKit::Middleware, :print_media_type => true
+    # config.middleware.use 'PDFKit::Middleware', :print_media_type => true
   end
 end
