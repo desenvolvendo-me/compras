@@ -38,12 +38,11 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   end
 
   def self.fulfill_items(options = {})
-    raise ArgumentError, 'Expected :process, got nil instead.' unless options[:process].present?
-    raise ArgumentError, 'Expected :material_id, got nil instead.' unless options[:material_id].present?
+    validate_options(options)
 
-    process = options[:process]
-    material_id = options[:material_id]
-    purchase_items = options[:items] || scoped.by_material(material_id)
+    process = options.fetch(:process)
+    material_id = options.fetch(:material_id)
+    purchase_items = options.fetch(:items) { scoped.by_material(material_id) }
 
     purchase_items.each { |item| item.update_fulfiller(process) }
   end
@@ -51,5 +50,12 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   def update_fulfiller(process)
     update_attributes :fulfiller_id => process.id,
                       :fulfiller_type => process.class.name
+  end
+
+  private
+
+  def self.validate_options(options)
+    raise ArgumentError, 'Expected :process, got nil instead.' unless options[:process].present?
+    raise ArgumentError, 'Expected :material_id, got nil instead.' unless options[:material_id].present?
   end
 end
