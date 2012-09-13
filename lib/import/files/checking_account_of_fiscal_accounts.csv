@@ -1,0 +1,36 @@
+tce_code;name;main_tag;function
+1;DISPONIBILIDADE FINANCEIRA;DisponibilidadeFinanceira;.
+2;DOMICÍLIO BANCÁRIO;DomicilioBancario;.
+3;CREDOR/FORNECEDOR;CredorFornecedor;.
+4;IDENTIFICADOR DE RECEITAS;IdentificadorReceitas;.
+5;RECEITA A ARRECADAR;ReceitaArrecadar;.
+6;PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;PrevisaoReceitaOrcamentaria;.
+7;DOTAÇÃO ORÇAMENTÁRIA;DotacaoOrcamentaria;.
+8;ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;AlteracaoDotacaoOrcamentaria;.
+9;EMISSÃO DE EMPENHO;EmissaoEmpenho;.
+10;REFORÇO DE EMPENHO;ReforcoEmpenho;.
+11;ANULAÇÃO DE EMPENHO;AnulacaoEmpenho;.
+12;CRONOGRAMA DE DESEMBOLSO MENSAL;CronogramaDesembolsoMensal;.
+13;INSCRIÇÃO GENÉRICA;InscricaoGenerica;.
+14;VENCIMENTO DO EMPENHO;VencimentoEmpenho;.
+15;INSCRIÇÃO DE RP NÃO PROCESSADO;InscricaoRPNaoProcessado;.
+16;PAGAMENTO DO EMPENHO;PagamentoEmpenho;.
+17;CANCELAMENTO DE RP;CancelamentoRP;.
+18;ARRECADAÇÃO DIÁRIA;ArrecadacaoDiaria;.
+19;ADIANTAMENTOS-CONCESSÃO;ConcessaoAdiantamentos;.
+20;ADIANTAMENTOS-UTILIZADO;UtilizadoAdiantamentos;.
+21;ADIANTAMENTOS-DEVOLUÇÃO;DevolucaoAdiantamentos;.
+22;CONVÊNIOS-CONCESSÃO;ConcessaoConvenios;.
+23;CONVÊNIOS-RECEBIMENTO;RecebimentoConvenios;.
+24;CONVÊNIOS-QUITAÇÃO;QuitacaoConvenios;.
+25;CONTRATOS;Contratos;.
+26;PRÉ-EMPENHO;PreEmpenho;.
+27;DOTAÇÃO UTILIZADA;DotacaoUtilizada;.
+28;EMPENHO EMITIDO;EmpenhoEmitido;.
+29;LIQUIDAÇÃO DO EMPENHO;LiquidacaoEmpenho;.
+30;ÓRGÃO RECEBEDOR;OrgaoRecebedor;.
+31;TRANSFERÊNCIA PREVIDENCIÁRIA;TransferenciaPrevidenciaria;.
+32;ÓRGÃO CONCESSOR;OrgaoConcessor;.
+33;CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;CronogramaTransferenciasFinanceiras;.
+34;CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;CronogramaTransferenciasPrevidenciarias;.
+35;ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;AntecipacaoReceitaOrcamentaria;.
