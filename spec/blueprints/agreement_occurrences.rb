@@ -10,3 +10,9 @@ AgreementOccurrence.blueprint(:other) do
   kind { AgreementOccurrenceKind::OTHER }
   description { 'Convênio Iniciado' }
 end
+
+AgreementOccurrence.blueprint(:other_2) do
+  date { Date.new(2012, 3, 15) }
+  kind { AgreementOccurrenceKind::OTHER }
+  description { 'Convênio Iniciado' }
+end

@@ -92,18 +92,4 @@ describe Agreement do
       end
     end
   end
-
-  context '#status' do
-    it "should be inactive" do
-      subject.agreement_occurrences.build(:kind => AgreementOccurrenceKind::OTHER)
-
-      expect(subject.status).to eq(Status::INACTIVE)
-    end
-
-    it "should be active" do
-      subject.agreement_occurrences.build(:kind => AgreementOccurrenceKind::IN_PROGRESS)
-
-      expect(subject.status).to eq(Status::ACTIVE)
-    end
-  end
 end
