@@ -37,7 +37,7 @@ class AccountPlanConfiguration < Compras::Model
   end
 
   def ordered_account_plan_levels
-    account_plan_levels.sort { |x, y| x.level <=> y.level }
+    account_plan_levels.sort_by(&:level)
   end
 
   protected
