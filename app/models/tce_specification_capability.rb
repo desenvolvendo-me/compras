@@ -29,12 +29,12 @@ class TceSpecificationCapability < Compras::Model
   protected
 
   def has_inactive_agreement
-    if new_inactive_tce_capability_agreements
+    if any_new_inactive_tce_capability_agreements?
       errors.add(:agreements, :should_has_not_inactive_agreement)
     end
   end
 
-  def new_inactive_tce_capability_agreements
+  def any_new_inactive_tce_capability_agreements?
     tce_capability_agreements.select do |tce_capability_agreement|
       tce_capability_agreement.inactive? && tce_capability_agreement.new_record?
     end.any?
