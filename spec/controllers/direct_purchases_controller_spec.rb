@@ -51,12 +51,20 @@ describe DirectPurchasesController do
       Prefecture.make!(:belo_horizonte)
     end
 
-    it 'should send e-mail to creditor on update' do
-      pending 'we will a make a PR on pdfkit' do
-        SupplyAuthorizationMailer.should_receive(:authorization_to_creditor).with(direct_purchase, prefecture).and_return(double(:deliver => true))
+    let :pdf do
+      double
+    end
 
-        put :update, :id => direct_purchase.id, :commit => 'Reenviar autorização de fornecimento por e-mail'
-      end
+    let :html do
+      double
+    end
+
+    it 'should send e-mail to creditor on update' do
+      Pdf.any_instance.should_receive(:generate!).and_return(html)
+
+      SupplyAuthorizationMailer.should_receive(:authorization_to_creditor).with(direct_purchase, prefecture, html).and_return(double(:deliver => true))
+
+      put :update, :id => direct_purchase.id, :commit => 'Enviar autorização de fornecimento por e-mail'
     end
   end
 end

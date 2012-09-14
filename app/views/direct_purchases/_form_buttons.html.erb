@@ -4,7 +4,7 @@
   <% if f.object.persisted? %>
     <% if resource.authorized? %>
       <%= link_to "Imprimir autorização de fornecimento", supply_authorization_path(resource.supply_authorization), :class => 'clear button neutral' %>
-      <%= f.button :submit, 'Reenviar autorização de fornecimento por e-mail' %>
+      <%= f.button :submit, 'Enviar autorização de fornecimento por e-mail' %>
     <% else %>
       <%= f.button :submit, 'Gerar autorização de fornecimento', :id => 'print' %>
     <% end %>

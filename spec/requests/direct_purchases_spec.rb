@@ -851,9 +851,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    click_button 'Reenviar autorização de fornecimento por e-mail'
-
-    expect(page).to have_content 'Autorização de fornecimento enviado por e-mail com sucesso'
+    expect(page).to have_button 'Enviar autorização de fornecimento por e-mail'
   end
 
   scenario 'should show only purchase_solicitation_item_group not annulled' do
