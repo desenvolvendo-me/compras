@@ -10,9 +10,9 @@ class AccountPlan < Compras::Model
   has_enumeration_for :surplus_indicator
   has_enumeration_for :movimentation_kind
 
-  delegate :mask, :to => :account_plan_configuration, :allow_nil => true
-
   belongs_to :account_plan_configuration
+
+  delegate :mask, :to => :account_plan_configuration, :allow_nil => true
 
   validates :account_plan_configuration, :checking_account, :function, :title,
             :nature_balance, :nature_information, :nature_balance_variation,
