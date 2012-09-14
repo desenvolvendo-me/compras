@@ -23,7 +23,7 @@ class BudgetStructureConfiguration < Compras::Model
   end
 
   def ordered_budget_structure_levels
-    budget_structure_levels.sort { |x, y| x.level <=> y.level }
+    budget_structure_levels.sort_by(&:level)
   end
 
   def mask
