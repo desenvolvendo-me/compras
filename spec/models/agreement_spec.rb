@@ -1,7 +1,7 @@
 require 'model_helper'
 require 'app/uploaders/document_uploader'
-require 'app/models/agreement'
 require 'app/models/agreement_occurrence'
+require 'app/models/agreement'
 require 'app/models/agreement_bank_account'
 require 'app/models/agreement_additive'
 require 'app/models/tce_capability_agreement'
