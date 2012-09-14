@@ -20,6 +20,15 @@ feature "AccountPlans" do
       fill_in 'Função', :with => 'Registra a movimentação'
     end
 
+    within_tab 'Atributos' do
+      select 'Crédito', :from => 'Natureza do saldo'
+      select 'Patrimonial', :from => 'Natureza da informação'
+      select 'Inverte saldo', :from => 'Variação da natureza da informação'
+      check 'Escrituração'
+      select 'Financeiro', :from => 'Indicador de superávit financeiro'
+      select 'Bilateral', :from => 'Tipo de movimentação'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Plano de Conta criado com sucesso.'
@@ -31,6 +40,15 @@ feature "AccountPlans" do
       expect(page).to have_field 'Conta contábil', :with => '9.99'
       expect(page).to have_field 'Título', :with => 'Bancos conta movimento'
       expect(page).to have_field 'Função', :with => 'Registra a movimentação'
+    end
+
+    within_tab 'Atributos' do
+      expect(page).to have_select 'Natureza do saldo', :selected => 'Crédito'
+      expect(page).to have_select 'Natureza da informação', :selected => 'Patrimonial'
+      expect(page).to have_select 'Variação da natureza da informação', :selected => 'Inverte saldo'
+      expect(page).to have_checked_field 'Escrituração'
+      expect(page).to have_select 'Indicador de superávit financeiro', :selected => 'Financeiro'
+      expect(page).to have_select 'Tipo de movimentação', :selected => 'Bilateral'
     end
   end
 
@@ -66,6 +84,15 @@ feature "AccountPlans" do
       fill_in 'Função', :with => 'Registra movimentações de conta própria'
     end
 
+    within_tab 'Atributos' do
+      select 'Mista', :from => 'Natureza do saldo'
+      select 'Compensado', :from => 'Natureza da informação'
+      select 'Inverte saldo', :from => 'Variação da natureza da informação'
+      uncheck 'Escrituração'
+      select 'Permanente', :from => 'Indicador de superávit financeiro'
+      select 'Unilateral devedora', :from => 'Tipo de movimentação'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Plano de Conta editado com sucesso.'
@@ -77,6 +104,15 @@ feature "AccountPlans" do
       expect(page).to have_field 'Conta contábil', :with => '99.99'
       expect(page).to have_field 'Título', :with => 'Bancos contas próprias'
       expect(page).to have_field 'Função', :with => 'Registra movimentações de conta própria'
+    end
+
+    within_tab 'Atributos' do
+      expect(page).to have_select 'Natureza do saldo', :selected => 'Mista'
+      expect(page).to have_select 'Natureza da informação', :selected => 'Compensado'
+      expect(page).to have_select 'Variação da natureza da informação', :selected => 'Inverte saldo'
+      expect(page).to_not have_checked_field 'Escrituração'
+      expect(page).to have_select 'Indicador de superávit financeiro', :selected => 'Permanente'
+      expect(page).to have_select 'Tipo de movimentação', :selected => 'Unilateral devedora'
     end
   end
 

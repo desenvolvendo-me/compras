@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    movimentation_kind:
+      bilateral: "Bilateral"
+      unilateral_borrowing: "Unilateral devedora"
+      unilaterial_creditor: "Unilaterial credora"

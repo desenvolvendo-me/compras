@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    nature_balance_variation:
+      not_reverse_balance: "Não inverte saldo"
+      reverse_balance: "Inverte saldo"

@@ -14,6 +14,14 @@ describe AccountPlan do
   it { should validate_presence_of :function }
   it { should validate_presence_of :account_plan_configuration }
 
+  it { should validate_presence_of :nature_balance }
+  it { should validate_presence_of :nature_information }
+  it { should validate_presence_of :nature_balance_variation }
+  it { should validate_presence_of :surplus_indicator }
+  it { should validate_presence_of :movimentation_kind }
+
+  it { expect(subject.bookkeeping).to be_false }
+
   context 'validate mask' do
     before do
       subject.stub(:mask).and_return('99/9')

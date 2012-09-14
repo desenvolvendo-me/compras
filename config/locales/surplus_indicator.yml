@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    surplus_indicator:
+      financial: "Financeiro"
+      permanent: "Permanente"

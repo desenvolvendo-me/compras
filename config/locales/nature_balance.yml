@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    nature_balance:
+      debt: "Débito"
+      credit: "Crédito"
+      mixed: "Mista"

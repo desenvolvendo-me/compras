@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    nature_information:
+      patrimonial: "Patrimonial"
+      budget: "Orçamentária"
+      compensated: "Compensado"
