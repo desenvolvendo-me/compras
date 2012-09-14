@@ -1,0 +1,266 @@
+checking_account_of_fiscal_account;name;description;tag;fill;reference;checking_account_structure_information
+DISPONIBILIDADE FINANCEIRA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+DISPONIBILIDADE FINANCEIRA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+DISPONIBILIDADE FINANCEIRA;Entidade;;Entidade;;;
+DISPONIBILIDADE FINANCEIRA;ContaContabil;;ContaContabil;;;
+DISPONIBILIDADE FINANCEIRA;MovimentoContabil;;MovimentoContabil;;;
+DOMICÍLIO BANCÁRIO;Banco;;Banco;;;
+DOMICÍLIO BANCÁRIO;Agencia;;Agencia;;;
+DOMICÍLIO BANCÁRIO;DVAgencia;;DVAgencia;;;
+DOMICÍLIO BANCÁRIO;ContaCorrente;;ContaCorrente;;;
+DOMICÍLIO BANCÁRIO;DVContaCorrente;;DVContaCorrente;;;
+DOMICÍLIO BANCÁRIO;Entidade;;Entidade;;;
+DOMICÍLIO BANCÁRIO;ContaContabil;;ContaContabil;;;
+DOMICÍLIO BANCÁRIO;MovimentoContabil;;MovimentoContabil;;;
+CREDOR/FORNECEDOR;Identificacao;;Identificacao;;;
+CREDOR/FORNECEDOR;Entidade;;Entidade;;;
+CREDOR/FORNECEDOR;ContaContabil;;ContaContabil;;;
+CREDOR/FORNECEDOR;MovimentoContabil;;MovimentoContabil;;;
+IDENTIFICADOR DE RECEITAS;ClassificacaoEconomicaReceita;;ClassificacaoEconomicaReceita;;;CLASSIFICAÇÃO ECONÔMICA DA RECEITA ORÇAMENTÁRIA
+IDENTIFICADOR DE RECEITAS;Entidade;;Entidade;;;
+IDENTIFICADOR DE RECEITAS;ContaContabil;;ContaContabil;;;
+IDENTIFICADOR DE RECEITAS;MovimentoContabil;;MovimentoContabil;;;
+RECEITA A ARRECADAR;ClassificacaoOrcamentariaReceita;;ClassificacaoOrcamentariaReceita;;;CLASSIFICAÇÃO ECONÔMICA DA RECEITA ORÇAMENTÁRIA
+RECEITA A ARRECADAR;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+RECEITA A ARRECADAR;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+RECEITA A ARRECADAR;Entidade;;Entidade;;;
+RECEITA A ARRECADAR;ContaContabil;;ContaContabil;;;
+RECEITA A ARRECADAR;MovimentoContabil;;MovimentoContabil;;;
+PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;ClassificacaoOrcamentariaReceita;;ClassificacaoOrcamentariaReceita;;;CLASSIFICAÇÃO ECONÔMICA DA RECEITA ORÇAMENTÁRIA
+PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;Mês;;Mês;;;
+PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;Entidade;;Entidade;;;
+PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;ContaContabil;;ContaContabil;;;
+PREVISÃO / ARRECADAÇÃO DA RECEITA ORÇAMENTÁRIA;MovimentoContabil;;MovimentoContabil;;;
+DOTAÇÃO ORÇAMENTÁRIA;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+DOTAÇÃO ORÇAMENTÁRIA;UnidadeExecutora;;UnidadeExecutora;;;
+DOTAÇÃO ORÇAMENTÁRIA;Funcao;;Funcao;;;FUNÇÃO DE GOVERNO
+DOTAÇÃO ORÇAMENTÁRIA;Subfuncao;;Subfuncao;;;SUBFUNÇÃO DE GOVERNO
+DOTAÇÃO ORÇAMENTÁRIA;Programa;;Programa;;;
+DOTAÇÃO ORÇAMENTÁRIA;Acao;;Acao;;;
+DOTAÇÃO ORÇAMENTÁRIA;ClassificacaoDespesa;;ClassificacaoDespesa;;;CLASSIFICAÇÃO ECONÔMICA DA DESPESA
+DOTAÇÃO ORÇAMENTÁRIA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+DOTAÇÃO ORÇAMENTÁRIA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+DOTAÇÃO ORÇAMENTÁRIA;Entidade;;Entidade;;;
+DOTAÇÃO ORÇAMENTÁRIA;ContaContabil;;ContaContabil;;;
+DOTAÇÃO ORÇAMENTÁRIA;MovimentoContabil;;MovimentoContabil;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;UnidadeExecutora;;UnidadeExecutora;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;Funcao;;Funcao;;;FUNÇÃO DE GOVERNO
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;Subfuncao;;Subfuncao;;;SUBFUNÇÃO DE GOVERNO
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;Programa;;Programa;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;Acao;;Acao;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;ClassificacaoDespesa;;ClassificacaoDespesa;;;CLASSIFICAÇÃO ECONÔMICA DA DESPESA
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;DataPublicacaoAto;;DataPublicacaoAto;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;Entidade;;Entidade;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;ContaContabil;;ContaContabil;;;
+ALTERAÇÃO DA DOTAÇÃO ORÇAMENTÁRIA;MovimentoContabil;;MovimentoContabil;;;
+EMISSÃO DE EMPENHO;NumeroEmpenho;;NumeroEmpenho;;;
+EMISSÃO DE EMPENHO;TipoEmpenho;;TipoEmpenho;;;TIPO DE EMPENHO
+EMISSÃO DE EMPENHO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+EMISSÃO DE EMPENHO;UnidadeExecutora;;UnidadeExecutora;;;
+EMISSÃO DE EMPENHO;Funcao;;Funcao;;;FUNÇÃO DE GOVERNO
+EMISSÃO DE EMPENHO;Subfuncao;;Subfuncao;;;SUBFUNÇÃO DE GOVERNO
+EMISSÃO DE EMPENHO;Programa;;Programa;;;
+EMISSÃO DE EMPENHO;Acao;;Acao;;;
+EMISSÃO DE EMPENHO;ClassificacaoDespesa;;ClassificacaoDespesa;;;CLASSIFICAÇÃO ECONÔMICA DA DESPESA
+EMISSÃO DE EMPENHO;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+EMISSÃO DE EMPENHO;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+EMISSÃO DE EMPENHO;Credor;;Credor;;;
+EMISSÃO DE EMPENHO;ModalidadeLicitacao;;ModalidadeLicitacao;;;MODALIDADE DE LICITAÇÃO
+EMISSÃO DE EMPENHO;NumeroLicitacao;;NumeroLicitacao;;;
+EMISSÃO DE EMPENHO;DataEmissao;;DataEmissao;;;
+EMISSÃO DE EMPENHO;Entidade;;Entidade;;;
+EMISSÃO DE EMPENHO;ContaContabil;;ContaContabil;;;
+EMISSÃO DE EMPENHO;MovimentoContabil;;MovimentoContabil;;;
+REFORÇO DE EMPENHO;NumeroEmpenho;;NumeroEmpenho;;;
+REFORÇO DE EMPENHO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+REFORÇO DE EMPENHO;UnidadeExecutora;;UnidadeExecutora;;;
+REFORÇO DE EMPENHO;DataEmissaoReforco;;DataEmissaoReforco;;;
+REFORÇO DE EMPENHO;Entidade;;Entidade;;;
+REFORÇO DE EMPENHO;ContaContabil;;ContaContabil;;;
+REFORÇO DE EMPENHO;MovimentoContabil;;MovimentoContabil;;;
+ANULAÇÃO DE EMPENHO;NumeroEmpenho;;NumeroEmpenho;;;
+ANULAÇÃO DE EMPENHO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+ANULAÇÃO DE EMPENHO;UnidadeExecutora;;UnidadeExecutora;;;
+ANULAÇÃO DE EMPENHO;DataEmissaoAnulacao;;DataEmissaoAnulacao;;;
+ANULAÇÃO DE EMPENHO;Entidade;;Entidade;;;
+ANULAÇÃO DE EMPENHO;ContaContabil;;ContaContabil;;;
+ANULAÇÃO DE EMPENHO;MovimentoContabil;;MovimentoContabil;;;
+CRONOGRAMA DE DESEMBOLSO MENSAL;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+CRONOGRAMA DE DESEMBOLSO MENSAL;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+CRONOGRAMA DE DESEMBOLSO MENSAL;GrupoDespesa;;GrupoDespesa;;;
+CRONOGRAMA DE DESEMBOLSO MENSAL;Mês;;Mês;;;
+CRONOGRAMA DE DESEMBOLSO MENSAL;Entidade;;Entidade;;;
+CRONOGRAMA DE DESEMBOLSO MENSAL;ContaContabil;;ContaContabil;;;
+CRONOGRAMA DE DESEMBOLSO MENSAL;MovimentoContabil;;MovimentoContabil;;;
+VENCIMENTO DO EMPENHO;NumeroEmpenho;;NumeroEmpenho;;;
+VENCIMENTO DO EMPENHO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+VENCIMENTO DO EMPENHO;UnidadeExecutora;;UnidadeExecutora;;;
+VENCIMENTO DO EMPENHO;DataVencimento;;DataVencimento;;;
+VENCIMENTO DO EMPENHO;Entidade;;Entidade;;;
+VENCIMENTO DO EMPENHO;ContaContabil;;ContaContabil;;;
+VENCIMENTO DO EMPENHO;MovimentoContabil;;MovimentoContabil;;;
+INSCRIÇÃO DE RP NÃO PROCESSADO;NumeroEmpenho;;NumeroEmpenho;;;
+INSCRIÇÃO DE RP NÃO PROCESSADO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+INSCRIÇÃO DE RP NÃO PROCESSADO;UnidadeExecutora;;UnidadeExecutora;;;
+INSCRIÇÃO DE RP NÃO PROCESSADO;DataInscricao;;DataInscricao;;;
+INSCRIÇÃO DE RP NÃO PROCESSADO;Entidade;;Entidade;;;
+INSCRIÇÃO DE RP NÃO PROCESSADO;ContaContabil;;ContaContabil;;;
+INSCRIÇÃO DE RP NÃO PROCESSADO;MovimentoContabil;;MovimentoContabil;;;
+PAGAMENTO DO EMPENHO;NumeroEmpenho;;NumeroEmpenho;;;
+PAGAMENTO DO EMPENHO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+PAGAMENTO DO EMPENHO;UnidadeExecutora;;UnidadeExecutora;;;
+PAGAMENTO DO EMPENHO;DataPagamento;;DataPagamento;;;
+PAGAMENTO DO EMPENHO;Entidade;;Entidade;;;
+PAGAMENTO DO EMPENHO;ContaContabil;;ContaContabil;;;
+PAGAMENTO DO EMPENHO;MovimentoContabil;;MovimentoContabil;;;
+CANCELAMENTO DE RP;NumeroEmpenho;;NumeroEmpenho;;;
+CANCELAMENTO DE RP;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+CANCELAMENTO DE RP;UnidadeExecutora;;UnidadeExecutora;;;
+CANCELAMENTO DE RP;DataCancelamento;;DataCancelamento;;;
+CANCELAMENTO DE RP;Entidade;;Entidade;;;
+CANCELAMENTO DE RP;ContaContabil;;ContaContabil;;;
+CANCELAMENTO DE RP;MovimentoContabil;;MovimentoContabil;;;
+ARRECADAÇÃO DIÁRIA;ClassificacaoReceita;;ClassificacaoReceita;;;
+ARRECADAÇÃO DIÁRIA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+ARRECADAÇÃO DIÁRIA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+ARRECADAÇÃO DIÁRIA;MesDia;;MesDia;;;
+ARRECADAÇÃO DIÁRIA;Entidade;;Entidade;;;
+ARRECADAÇÃO DIÁRIA;ContaContabil;;ContaContabil;;;
+ARRECADAÇÃO DIÁRIA;MovimentoContabil;;MovimentoContabil;;;
+ADIANTAMENTOS-CONCESSÃO;NumeroEmpenho;;NumeroEmpenho;;;
+ADIANTAMENTOS-CONCESSÃO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+ADIANTAMENTOS-CONCESSÃO;UnidadeExecutora;;UnidadeExecutora;;;
+ADIANTAMENTOS-CONCESSÃO;PeriodoAplicacao;;PeriodoAplicacao;;;
+ADIANTAMENTOS-CONCESSÃO;DataPagamento;;DataPagamento;;;
+ADIANTAMENTOS-CONCESSÃO;Credor;;Credor;;;
+ADIANTAMENTOS-CONCESSÃO;Entidade;;Entidade;;;
+ADIANTAMENTOS-CONCESSÃO;ContaContabil;;ContaContabil;;;
+ADIANTAMENTOS-CONCESSÃO;MovimentoContabil;;MovimentoContabil;;;
+ADIANTAMENTOS-UTILIZADO;NumeroEmpenho;;NumeroEmpenho;;;
+ADIANTAMENTOS-UTILIZADO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+ADIANTAMENTOS-UTILIZADO;UnidadeExecutora;;UnidadeExecutora;;;
+ADIANTAMENTOS-UTILIZADO;DataPrestacaoContas;;DataPrestacaoContas;;;
+ADIANTAMENTOS-UTILIZADO;Credor;;Credor;;;
+ADIANTAMENTOS-UTILIZADO;Entidade;;Entidade;;;
+ADIANTAMENTOS-UTILIZADO;ContaContabil;;ContaContabil;;;
+ADIANTAMENTOS-UTILIZADO;MovimentoContabil;;MovimentoContabil;;;
+ADIANTAMENTOS-DEVOLUÇÃO;NumeroEmpenho;;NumeroEmpenho;;;
+ADIANTAMENTOS-DEVOLUÇÃO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+ADIANTAMENTOS-DEVOLUÇÃO;UnidadeExecutora;;UnidadeExecutora;;;
+ADIANTAMENTOS-DEVOLUÇÃO;DataDevolucao;;DataDevolucao;;;
+ADIANTAMENTOS-DEVOLUÇÃO;Credor;;Credor;;;
+ADIANTAMENTOS-DEVOLUÇÃO;Entidade;;Entidade;;;
+ADIANTAMENTOS-DEVOLUÇÃO;ContaContabil;;ContaContabil;;;
+ADIANTAMENTOS-DEVOLUÇÃO;MovimentoContabil;;MovimentoContabil;;;
+CONVÊNIOS-CONCESSÃO;Identificacao;;Identificacao;;;
+CONVÊNIOS-CONCESSÃO;NumeroConvenio;;NumeroConvenio;;;
+CONVÊNIOS-CONCESSÃO;DataConcessao;;DataConcessao;;;
+CONVÊNIOS-CONCESSÃO;Entidade;;Entidade;;;
+CONVÊNIOS-CONCESSÃO;ContaContabil;;ContaContabil;;;
+CONVÊNIOS-CONCESSÃO;MovimentoContabil;;MovimentoContabil;;;
+CONVÊNIOS-RECEBIMENTO;Identificacao;;Identificacao;;;
+CONVÊNIOS-RECEBIMENTO;NumeroConvenio;;NumeroConvenio;;;
+CONVÊNIOS-RECEBIMENTO;DataRecebimento;;DataRecebimento;;;
+CONVÊNIOS-RECEBIMENTO;Entidade;;Entidade;;;
+CONVÊNIOS-RECEBIMENTO;ContaContabil;;ContaContabil;;;
+CONVÊNIOS-RECEBIMENTO;MovimentoContabil;;MovimentoContabil;;;
+CONVÊNIOS-QUITAÇÃO;Identificacao;;Identificacao;;;
+CONVÊNIOS-QUITAÇÃO;NumeroConvenio;;NumeroConvenio;;;
+CONVÊNIOS-QUITAÇÃO;DataQuitacao;;DataQuitacao;;;
+CONVÊNIOS-QUITAÇÃO;Entidade;;Entidade;;;
+CONVÊNIOS-QUITAÇÃO;ContaContabil;;ContaContabil;;;
+CONVÊNIOS-QUITAÇÃO;MovimentoContabil;;MovimentoContabil;;;
+CONTRATOS;Identificacao;;Identificacao;;;
+CONTRATOS;NumeroContrato;;NumeroContrato;;;
+CONTRATOS;Entidade;;Entidade;;;
+CONTRATOS;ContaContabil;;ContaContabil;;;
+CONTRATOS;MovimentoContabil;;MovimentoContabil;;;
+PRÉ-EMPENHO;NumeroProcessoNoOrgao;;NumeroProcessoNoOrgao;;;
+PRÉ-EMPENHO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+PRÉ-EMPENHO;UnidadeExecutora;;UnidadeExecutora;;;
+PRÉ-EMPENHO;Funcao;;Funcao;;;FUNÇÃO DE GOVERNO
+PRÉ-EMPENHO;Subfuncao;;Subfuncao;;;SUBFUNÇÃO DE GOVERNO
+PRÉ-EMPENHO;Programa;;Programa;;;
+PRÉ-EMPENHO;Acao;;Acao;;;
+PRÉ-EMPENHO;ClassificacaoDespesa;;ClassificacaoDespesa;;;CLASSIFICAÇÃO ECONÔMICA DA DESPESA
+PRÉ-EMPENHO;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+PRÉ-EMPENHO;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+PRÉ-EMPENHO;DataEmissao;;DataEmissao;;;
+PRÉ-EMPENHO;Entidade;;Entidade;;;
+PRÉ-EMPENHO;ContaContabil;;ContaContabil;;;
+PRÉ-EMPENHO;MovimentoContabil;;MovimentoContabil;;;
+DOTAÇÃO UTILIZADA;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+DOTAÇÃO UTILIZADA;UnidadeExecutora;;UnidadeExecutora;;;
+DOTAÇÃO UTILIZADA;Funcao;;Funcao;;;FUNÇÃO DE GOVERNO
+DOTAÇÃO UTILIZADA;Subfuncao;;Subfuncao;;;SUBFUNÇÃO DE GOVERNO
+DOTAÇÃO UTILIZADA;Programa;;Programa;;;
+DOTAÇÃO UTILIZADA;Acao;;Acao;;;
+DOTAÇÃO UTILIZADA;ClassificacaoDespesa;;ClassificacaoDespesa;;;CLASSIFICAÇÃO ECONÔMICA DA DESPESA
+DOTAÇÃO UTILIZADA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+DOTAÇÃO UTILIZADA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+DOTAÇÃO UTILIZADA;Entidade;;Entidade;;;
+DOTAÇÃO UTILIZADA;ContaContabil;;ContaContabil;;;
+DOTAÇÃO UTILIZADA;MovimentoContabil;;MovimentoContabil;;;
+EMPENHO EMITIDO;NumeroEmpenho;;NumeroEmpenho;;;
+EMPENHO EMITIDO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+EMPENHO EMITIDO;UnidadeExecutora;;UnidadeExecutora;;;
+EMPENHO EMITIDO;Entidade;;Entidade;;;
+EMPENHO EMITIDO;ContaContabil;;ContaContabil;;;
+EMPENHO EMITIDO;MovimentoContabil;;MovimentoContabil;;;
+LIQUIDAÇÃO DO EMPENHO;NumeroEmpenho;;NumeroEmpenho;;;
+LIQUIDAÇÃO DO EMPENHO;UnidadeOrcamentaria;;UnidadeOrcamentaria;;;
+LIQUIDAÇÃO DO EMPENHO;UnidadeExecutora;;UnidadeExecutora;;;
+LIQUIDAÇÃO DO EMPENHO;DataLiquidacao;;DataLiquidacao;;;
+LIQUIDAÇÃO DO EMPENHO;Entidade;;Entidade;;;
+LIQUIDAÇÃO DO EMPENHO;ContaContabil;;ContaContabil;;;
+LIQUIDAÇÃO DO EMPENHO;MovimentoContabil;;MovimentoContabil;;;
+ÓRGÃO RECEBEDOR;Orgao;;Orgao;;;
+ÓRGÃO RECEBEDOR;Entidade;;Entidade;;;
+ÓRGÃO RECEBEDOR;ContaContabil;;ContaContabil;;;
+ÓRGÃO RECEBEDOR;MovimentoContabil;;MovimentoContabil;;;
+TRANSFERÊNCIA PREVIDENCIÁRIA;Funcao;;Funcao;;;FUNÇÃO DE GOVERNO
+TRANSFERÊNCIA PREVIDENCIÁRIA;Subfuncao;;Subfuncao;;;SUBFUNÇÃO DE GOVERNO
+TRANSFERÊNCIA PREVIDENCIÁRIA;Programa;;Programa;;;
+TRANSFERÊNCIA PREVIDENCIÁRIA;Acao;;Acao;;;
+TRANSFERÊNCIA PREVIDENCIÁRIA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+TRANSFERÊNCIA PREVIDENCIÁRIA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+TRANSFERÊNCIA PREVIDENCIÁRIA;Orgao;;Orgao;;;
+TRANSFERÊNCIA PREVIDENCIÁRIA;Entidade;;Entidade;;;
+TRANSFERÊNCIA PREVIDENCIÁRIA;ContaContabil;;ContaContabil;;;
+TRANSFERÊNCIA PREVIDENCIÁRIA;MovimentoContabil;;MovimentoContabil;;;
+ÓRGÃO CONCESSOR;Orgao;;Orgao;;;
+ÓRGÃO CONCESSOR;Entidade;;Entidade;;;
+ÓRGÃO CONCESSOR;ContaContabil;;ContaContabil;;;
+ÓRGÃO CONCESSOR;MovimentoContabil;;MovimentoContabil;;;
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;OrgaoConcessor;;OrgaoConcessor;;;
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;OrgaRecebedor;;OrgaRecebedor;;;
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;Mês;;Mês;;;
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;Entidade;;Entidade;;;
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;ContaContabil;;ContaContabil;;;
+CRONOGRAMA TRANSFERÊNCIAS FINANCEIRAS;MovimentoContabil;;MovimentoContabil;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;OrgaoConcessor;;OrgaoConcessor;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;OrgaoRecebedor;;OrgaoRecebedor;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;CodigoContribuicao;;CodigoContribuicao;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;ExercicioCompetencia;;ExercicioCompetencia;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;Mês;;Mês;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;Entidade;;Entidade;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;ContaContabil;;ContaContabil;;;
+CRONOGRAMA TRANSFERÊNCIAS PREVIDENCIÁRIAS;MovimentoContabil;;MovimentoContabil;;;
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;Credor;;Credor;;;
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;FonteRecursos;;FonteRecursos;;;FONTE DE RECURSOS
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;CodigoAplicacao;;CodigoAplicacao;;;CÓDIGO DE APLICAÇÃO
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;NumeroContrato;;NumeroContrato;;;
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;Data;;Data;;;
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;Entidade;;Entidade;;;
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;ContaContabil;;ContaContabil;;;
+ANTECIPAÇÃO DE RECEITA ORÇAMENTÁRIA;MovimentoContabil;;MovimentoContabil;;;
+DOTAÇÃO ORÇAMENTÁRIA;GrupoDespesa;;GrupoDespesa;;;GRUPO DE DESPESA
