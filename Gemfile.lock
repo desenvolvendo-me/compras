@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git://github.com/comogo/pdfkit.git
-  revision: 3419d6daa8843b6c64af5e543016225635fbe3b2
+  revision: 46e50719947cb207996b6a2bc4ca77194a5d6c95
   specs:
     pdfkit (0.5.2)
 
