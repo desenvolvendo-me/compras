@@ -4,10 +4,8 @@ class MigrateNumberYearAndNumberYearProcessAtAgreements < ActiveRecord::Migratio
 
   def change
     Agreement.find_each do |agreement|
-      agreement.update_columns(
-        :number_year => [agreement.number, agreement.year].join('/'),
-        :number_year_process => [agreement.process_number, agreement.process_year].join('/')
-      )
+      agreement.update_column([agreement.number, agreement.year].join('/'))
+      agreement.update_column([agreement.process_number, agreement.process_year].join('/'))
     end
   end
 end
