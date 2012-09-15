@@ -16,7 +16,7 @@ end
 
 gem 'activerecord-connections', '0.0.3'
 
-gem 'unico', '1.0.0'
+gem 'unico', '1.1.0'
 gem 'devise', '2.0.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
@@ -51,7 +51,7 @@ group :assets do
 end
 
 group :production, :staging do
-  gem 'sentry-raven', :git => 'git://github.com/coderanger/raven-ruby.git'
+  gem 'sentry-raven', :git => 'git://github.com/coderanger/raven-ruby.git', :require => 'raven'
 end
 
 group :development, :test do
