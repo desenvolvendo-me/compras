@@ -10,7 +10,7 @@ end
 
 platform :ruby do
   gem 'pg', '0.12.2'
-  gem 'unicorn', '4.1.1', :require => false
+  gem 'puma', '1.6.3', :require => false
 end
 
 gem 'activerecord-connections', '0.0.3'
