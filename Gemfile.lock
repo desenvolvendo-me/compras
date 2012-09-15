@@ -37,26 +37,9 @@ GIT
   specs:
     cancan (2.0.0.alpha)
 
-GIT
-  remote: git@github.com:nohupbrasil/unico.git
-  revision: 930067405bf5b48bb17a06f8b2e5b9692a53d70b
-  specs:
-    unico (0.0.1)
-      actionpack (~> 3.2.0)
-      activerecord (~> 3.2.0)
-      awesome_nested_set (~> 2.1.3)
-      carrierwave (~> 0.6.2)
-      cnpj_validator (~> 0.3.1)
-      cpf_validator (~> 0.2.0)
-      enumerate_it (~> 0.7.14)
-      foreigner (~> 1.1.1)
-      mail_validator (~> 0.2.0)
-      mask_validator (~> 0.2.0)
-      railties (~> 3.2.0)
-      validates_timeliness (~> 3.0.11)
-
 GEM
   remote: http://rubygems.org/
+  remote: https://gems.gemfury.com/SEqawpNNEx65yrzYS9p8/
   specs:
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
@@ -129,7 +112,7 @@ GEM
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
-    foreigner (1.1.4)
+    foreigner (1.2.1)
       activerecord (>= 3.0.0)
     has_scope (0.5.1)
     hashie (1.2.0)
@@ -244,6 +227,19 @@ GEM
     uglifier (1.2.1)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    unico (1.0.0)
+      actionpack (~> 3.2.0)
+      activerecord (~> 3.2.0)
+      awesome_nested_set (~> 2.1.3)
+      carrierwave (~> 0.6.2)
+      cnpj_validator (~> 0.3.1)
+      cpf_validator (~> 0.2.0)
+      enumerate_it (~> 0.7.14)
+      foreigner (~> 1.2.1)
+      mail_validator (~> 0.2.0)
+      mask_validator (~> 0.2.0)
+      railties (~> 3.2.0)
+      validates_timeliness (~> 3.0.11)
     uuidtools (2.1.2)
     validates_timeliness (3.0.11)
       timeliness (~> 0.3.6)
@@ -271,7 +267,7 @@ DEPENDENCIES
   decore!
   devise (= 2.0.4)
   enumerate_it (= 0.7.16)
-  foreigner (= 1.1.4)
+  foreigner (= 1.2.1)
   has_scope (= 0.5.1)
   i18n_alchemy!
   inherited_resources (= 1.3.0)
@@ -294,7 +290,7 @@ DEPENDENCIES
   simple_form (= 2.0.1)
   squeel (= 1.0.9)
   uglifier (= 1.2.1)
-  unico!
+  unico (= 1.0.0)
   validates_timeliness (= 3.0.11)
   will_paginate (= 3.0.3)
   wkhtmltopdf-binary (= 0.9.9.1)

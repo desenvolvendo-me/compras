@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 source 'http://rubygems.org'
+source 'https://gems.gemfury.com/SEqawpNNEx65yrzYS9p8/'
 
 gem 'rails', '3.2.8'
 
@@ -15,7 +16,7 @@ end
 
 gem 'activerecord-connections', '0.0.3'
 
-gem 'unico', :git => 'git@github.com:nohupbrasil/unico.git'
+gem 'unico', '1.0.0'
 gem 'devise', '2.0.4'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
@@ -39,7 +40,7 @@ gem 'has_scope', '0.5.1'
 gem 'responders', '0.6.4'
 gem 'jbuilder', '0.4.0'
 
-gem 'foreigner', '1.1.4'
+gem 'foreigner', '1.2.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
 gem 'enumerate_it', '0.7.16'
