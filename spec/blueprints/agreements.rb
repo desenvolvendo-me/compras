@@ -1,6 +1,5 @@
 # encoding: utf-8
 Agreement.blueprint(:apoio_ao_turismo) do
-  code { 134 }
   number_year { '59/2012' }
   category { AgreementCategory::REPASSED }
   agreement_kind { AgreementKind.make!(:contribuicao) }
@@ -18,7 +17,6 @@ Agreement.blueprint(:apoio_ao_turismo) do
 end
 
 Agreement.blueprint(:apoio_ao_turismo_with_2_occurrences) do
-  code { 134 }
   number_year { '59/2012' }
   category { AgreementCategory::REPASSED }
   agreement_kind { AgreementKind.make!(:contribuicao) }
@@ -36,7 +34,6 @@ Agreement.blueprint(:apoio_ao_turismo_with_2_occurrences) do
 end
 
 Agreement.blueprint(:apoio_ao_turismo_with_2_occurrences_inactive) do
-  code { 134 }
   number_year { '59/2012' }
   category { AgreementCategory::REPASSED }
   agreement_kind { AgreementKind.make!(:contribuicao) }
@@ -54,7 +51,6 @@ Agreement.blueprint(:apoio_ao_turismo_with_2_occurrences_inactive) do
 end
 
 Agreement.blueprint(:apoio_ao_turismo_inactive) do
-  code { 134 }
   number_year { '59/2012' }
   category { AgreementCategory::REPASSED }
   agreement_kind { AgreementKind.make!(:contribuicao) }
@@ -72,7 +68,6 @@ Agreement.blueprint(:apoio_ao_turismo_inactive) do
 end
 
 Agreement.blueprint(:apoio_a_cultura) do
-  code { 567 }
   number_year { '60/2012' }
   category { AgreementCategory::RECEIVED }
   agreement_kind { AgreementKind.make!(:contribuicao) }

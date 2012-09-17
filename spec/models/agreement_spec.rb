@@ -21,7 +21,6 @@ describe Agreement do
   it { should have_many(:agreement_occurrences).dependent(:destroy) }
   it { should have_many(:agreement_additives).dependent(:destroy).order(:number) }
 
-  it { should validate_presence_of :code }
   it { should validate_presence_of :number_year }
   it { should validate_presence_of :category }
   it { should validate_presence_of :agreement_kind }

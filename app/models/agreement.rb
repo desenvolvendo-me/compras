@@ -1,5 +1,5 @@
 class Agreement < Compras::Model
-  attr_accessible :category, :code, :counterpart_value, :description,
+  attr_accessible :category, :counterpart_value, :description,
                   :parcels_number, :process_date, :value,
                   :number_year, :number_year_process, :agreement_kind_id,
                   :regulatory_act_id, :agreement_file,
@@ -8,7 +8,7 @@ class Agreement < Compras::Model
                   :agreement_participants_attributes,
                   :agreement_additives_attributes
 
-  attr_modal :code, :description, :process_date, :regulatory_act_id, :category
+  attr_modal :description, :process_date, :regulatory_act_id, :category
 
   mount_uploader :agreement_file, DocumentUploader
 
@@ -34,7 +34,7 @@ class Agreement < Compras::Model
   delegate :creation_date, :publication_date, :end_date, :to => :regulatory_act,
            :allow_nil => true
 
-  validates :code, :number_year, :category, :agreement_kind, :value,
+  validates :number_year, :category, :agreement_kind, :value,
             :counterpart_value, :parcels_number, :description,
             :number_year_process, :regulatory_act, :process_date,
             :presence => true

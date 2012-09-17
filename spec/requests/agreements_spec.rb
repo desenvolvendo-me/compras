@@ -17,7 +17,6 @@ feature "Agreements" do
     click_link 'Criar Convênio'
 
     within_tab 'Principal' do
-      fill_in 'Código', :with => '134'
       fill_in 'Número e ano do convênio', :with => '59/2012'
       select 'Convênio repassado', :from => 'Categoria'
       fill_modal 'Tipo de convênio', :with => 'Contribuição', :field => 'Descrição'
@@ -73,7 +72,6 @@ feature "Agreements" do
     click_link 'Apoio ao turismo'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Código', :with => '134'
       expect(page).to have_field 'Número e ano do convênio', :with => '59/2012'
       expect(page).to have_select 'Categoria', :with => 'Convênio repassado'
       expect(page).to have_field 'Tipo de convênio', :with => 'Contribuição'
@@ -152,7 +150,6 @@ feature "Agreements" do
     click_link 'Apoio ao turismo'
 
     within_tab 'Principal' do
-      fill_in 'Código', :with => '321'
       fill_in 'Número e ano do convênio', :with => '95/2011'
       select 'Convênio recebido', :from => 'Categoria'
       fill_modal 'Tipo de convênio', :with => 'Auxílio', :field => 'Descrição'
@@ -250,7 +247,6 @@ feature "Agreements" do
     click_link 'Apoio ao fomento do turismo'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Código', :with => '321'
       expect(page).to have_field 'Número e ano do convênio', :with => '95/2011'
       expect(page).to have_select 'Categoria', :with => 'Convênio recebido'
       expect(page).to have_field 'Tipo de convênio', :with => 'Auxílio'
