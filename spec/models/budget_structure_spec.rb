@@ -28,7 +28,6 @@ describe BudgetStructure do
   it { should validate_presence_of :kind }
   it { should validate_presence_of :budget_structure_level }
   it { should_not validate_presence_of :parent }
-  it { should validate_duplication_of(:responsible_id).on(:budget_structure_responsibles) }
 
   it { should have_one :address }
   it { should have_many(:budget_allocations).dependent(:restrict) }

@@ -317,26 +317,6 @@ feature "BudgetStructure" do
     expect(page).to_not have_content 'Desenvolvimento Educacional'
   end
 
-  scenario 'validate uniqueness of responsible' do
-    BudgetStructure.make!(:secretaria_de_educacao)
-
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
-
-    click_link 'Secretaria de Educação'
-
-    within_tab 'Responsáveis' do
-      click_button 'Adicionar Responsável'
-
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Responsáveis' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'should allow one responsible by time when new form' do
     navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
