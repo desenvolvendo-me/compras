@@ -9,13 +9,13 @@ GIT
 
 GIT
   remote: git://github.com/coderanger/raven-ruby.git
-  revision: 7f5f05bb1cc0b9314aa287c9c964dde100f25972
+  revision: 0d60bb4d454e29d443e25f828051d42ad837d890
   specs:
-    sentry-raven (0.2)
+    sentry-raven (0.3)
       faraday (~> 0.8.0.rc2)
       hashie
+      multi_json (~> 1.0)
       uuidtools
-      yajl-ruby
 
 GIT
   remote: git://github.com/comogo/pdfkit.git
@@ -108,7 +108,7 @@ GEM
     excon (0.16.2)
     execjs (1.3.2)
       multi_json (~> 1.0)
-    faraday (0.8.1)
+    faraday (0.8.4)
       multipart-post (~> 1.1)
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
@@ -257,7 +257,7 @@ GEM
       mask_validator (~> 0.2.0)
       railties (~> 3.2.0)
       validates_timeliness (~> 3.0.11)
-    uuidtools (2.1.2)
+    uuidtools (2.1.3)
     validates_timeliness (3.0.11)
       timeliness (~> 0.3.6)
     warden (1.1.1)
@@ -266,7 +266,6 @@ GEM
     wkhtmltopdf-binary (0.9.9.1)
     xpath (0.1.4)
       nokogiri (~> 1.3)
-    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
