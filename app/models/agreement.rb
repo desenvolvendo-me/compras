@@ -74,7 +74,7 @@ class Agreement < Compras::Model
   def first_agreement_occurrence_is_active?
     return if agreement_occurrences.blank?
 
-    agreement_occurrences.first.active?
+    agreement_occurrences.first.try(:active?)
   end
 
   def last_persisted_additive
