@@ -273,4 +273,23 @@ describe Bidder do
       expect(subject.has_proposals_unit_price_greater_than_budget_allocation_item_unit_price?).to be false
     end
   end
+
+  context '#benefited_by_law_of_proposals?' do
+    it 'returns true if law of proposals should not be taken into account' do
+      subject.stub(:consider_law_of_proposals => false)
+      expect(subject.benefited_by_law_of_proposals?).to be false
+    end
+
+    it 'returns true if bidder is benefited' do
+      subject.stub(:consider_law_of_proposals => true,
+                   :benefited => true)
+      expect(subject.benefited_by_law_of_proposals?).to be true
+    end
+
+    it 'returns false if bidder is not benefited' do
+      subject.stub(:consider_law_of_proposals => true,
+                   :benefited => false)
+      expect(subject.benefited_by_law_of_proposals?).to be false
+    end
+  end
 end

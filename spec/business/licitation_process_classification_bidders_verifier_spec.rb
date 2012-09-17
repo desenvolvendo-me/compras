@@ -31,35 +31,42 @@ describe LicitationProcessClassificationBiddersVerifier do
       licitation_process.stub(:disqualify_by_documentation_problem => true)
     end
 
-    it 'should disable bidder' do
-      bidder.stub(:benefited => false, :filled_documents? => false, :expired_documents? => true)
-
-      bidder.should_receive(:inactive!).and_return(true)
-      bidder.should_receive(:save!).and_return(true)
-
-      verifier.verify!
-    end
-
-    it 'should disable bidder' do
-      bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => true)
-
-      bidder.should_receive(:inactive!).and_return(true)
-      bidder.should_receive(:save!).and_return(true)
-
-      verifier.verify!
-    end
-
-    it 'should do nothing' do
+    it 'does nothing if no bidders are disqualified because of documentation problems' do
       licitation_process.stub(:disqualify_by_documentation_problem => false)
-
-      verifier.verify!
-    end
-
-    it 'should enable bidder' do
       bidder.stub(:filled_documents? => true, :expired_documents? => false)
 
-      bidder.should_receive(:active!).and_return(true)
-      bidder.should_receive(:save!).and_return(true)
+      bidder.should_not_receive(:inactivate!)
+      bidder.should_not_receive(:activate!)
+
+      verifier.verify!
+    end
+
+    context 'bidder is not benefited by law of proposals' do
+      it 'inactivates the bidder if documents are expired' do
+        bidder.stub(:benefited_by_law_of_proposals? => false,
+                    :filled_documents? => true,
+                    :expired_documents? => true)
+
+        bidder.should_receive(:inactivate!)
+
+        verifier.verify!
+      end
+
+      it 'inactivates the bidder if documents are not filled' do
+        bidder.stub(:benefited_by_law_of_proposals? => false,
+                    :filled_documents? => false,
+                    :expired_documents? => false)
+
+        bidder.should_receive(:inactivate!)
+
+        verifier.verify!
+      end
+    end
+
+    it 'activates the bidder if documents are OK' do
+      bidder.stub(:filled_documents? => true, :expired_documents? => false)
+
+      bidder.should_receive(:activate!).and_return(true)
 
       verifier.verify!
     end
@@ -74,8 +81,7 @@ describe LicitationProcessClassificationBiddersVerifier do
     it 'should disable bidder' do
       bidder.stub(:has_proposals_unit_price_greater_than_budget_allocation_item_unit_price? => true)
 
-      bidder.should_receive(:inactive!).and_return(true)
-      bidder.should_receive(:save!).and_return(true)
+      bidder.should_receive(:inactivate!).and_return(true)
 
       verifier.verify!
     end

@@ -1,8 +1,7 @@
 class LicitationProcessClassificationBiddersVerifier
   attr_accessor :licitation_process
 
-  delegate :bidders, :consider_law_of_proposals,
-           :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
+  delegate :bidders, :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
            :to => :licitation_process, :allow_nil => true
 
   def initialize(licitation_process)
@@ -21,15 +20,11 @@ class LicitationProcessClassificationBiddersVerifier
     return unless disqualify_by_documentation_problem
 
     bidders.each do |bidder|
-      if !bidder.filled_documents? || bidder.expired_documents?
-        if (consider_law_of_proposals && !bidder.benefited) || !consider_law_of_proposals
-          bidder.inactive!
-        end
+      if has_documentation_problem?(bidder)
+        bidder.inactivate! unless bidder.benefited_by_law_of_proposals?
       else
-        bidder.active!
+        bidder.activate!
       end
-
-      bidder.save!
     end
   end
 
@@ -38,9 +33,15 @@ class LicitationProcessClassificationBiddersVerifier
 
     bidders.each do |bidder|
       if bidder.has_proposals_unit_price_greater_than_budget_allocation_item_unit_price?
-        bidder.inactive!
-        bidder.save!
+        bidder.inactivate!
       end
     end
   end
+
+  private
+
+  def has_documentation_problem?(bidder)
+    !bidder.filled_documents? || bidder.expired_documents?
+  end
+
 end

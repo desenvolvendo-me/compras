@@ -25,7 +25,7 @@ class Bidder < Compras::Model
   delegate :licitation_process_lots, :to => :licitation_process
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
-  delegate :items, :allow_bidders?, :to => :licitation_process, :allow_nil => true
+  delegate :items, :allow_bidders?, :consider_law_of_proposals, :to => :licitation_process, :allow_nil => true
   delegate :benefited, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
@@ -169,6 +169,20 @@ class Bidder < Compras::Model
     return 0 if proposals.empty?
 
     proposals.sum(&:total_price)
+  end
+
+  def benefited_by_law_of_proposals?
+    (consider_law_of_proposals && benefited) && consider_law_of_proposals
+  end
+
+  def inactivate!
+    inactive!
+    save!
+  end
+
+  def activate!
+    active!
+    save!
   end
 
   protected
