@@ -38,9 +38,17 @@ describe AccountPlanConfiguration do
       described_class.new :account_plan_levels => [level_2, level_1]
     end
 
-    context 'generate' do
-      it 'should return correct mask' do
-        expect(subject.mask).to eq '9/99'
+    context 'when generate' do
+      before do
+        mask_generator.stub(:new).and_return(mask_generator)
+      end
+
+      let :mask_generator do
+        double('Generator', :generate! => '9/99')
+      end
+
+      it 'should return correct mask using MaskGenerator' do
+        expect(subject.mask(mask_generator)).to eq '9/99'
       end
     end
 
@@ -50,11 +58,6 @@ describe AccountPlanConfiguration do
         expect(subject).not_to be_valid
         expect(subject.ordered_account_plan_levels.first.errors[:separator]).to include 'não pode ficar em branco'
         expect(subject.ordered_account_plan_levels.last.errors[:separator]).to_not include 'não pode ficar em branco'
-      end
-
-      it 'should return incorrect mask when digits is missing' do
-        level_1.digits = nil
-        expect(subject.mask).to eq '99'
       end
     end
   end

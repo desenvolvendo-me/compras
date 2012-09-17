@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SettingsController do
   before do
-    sign_in User.make!(:sobrinho_as_admin)
+    controller.stub(:authenticate_user!)
   end
 
   it "should create all settings on index" do

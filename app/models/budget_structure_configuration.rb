@@ -26,17 +26,8 @@ class BudgetStructureConfiguration < Compras::Model
     budget_structure_levels.sort_by(&:level)
   end
 
-  def mask
-    final_mask = ''
-
-    ordered_budget_structure_levels.each_with_index do |budget_structure_level, index|
-      next unless budget_structure_level.digits?
-
-      final_mask += '9' * budget_structure_level.digits
-      final_mask += budget_structure_level.separator unless budget_structure_level.separator.blank? || (index + 1) == budget_structure_levels.size
-    end
-
-    final_mask
+  def mask(mask_generator = ConfigurationMaskGenerator)
+    mask_generator.new(ordered_budget_structure_levels).generate!
   end
 
   protected
