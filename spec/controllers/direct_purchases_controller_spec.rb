@@ -52,11 +52,11 @@ describe DirectPurchasesController do
     end
 
     let :pdf do
-      double
+      double(:pdf)
     end
 
     let :html do
-      double
+      double(:html)
     end
 
     it 'should send e-mail to creditor on update' do
