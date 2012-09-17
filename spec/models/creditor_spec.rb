@@ -15,7 +15,7 @@ require 'app/models/creditor_balance'
 require 'app/models/regularization_or_administrative_sanction'
 require 'app/models/registration_cadastral_certificate'
 require 'app/models/direct_purchase'
-require 'app/models/licitation_process_bidder'
+require 'app/models/bidder'
 require 'app/models/licitation_process'
 
 describe Creditor do
@@ -45,8 +45,8 @@ describe Creditor do
   it { should have_many(:regularization_or_administrative_sanctions).dependent(:destroy) }
   it { should have_many(:registration_cadastral_certificates).dependent(:destroy) }
   it { should have_many(:direct_purchases).dependent(:restrict) }
-  it { should have_many(:licitation_process_bidders).dependent(:restrict) }
-  it { should have_many(:licitation_processes).dependent(:restrict).through(:licitation_process_bidders) }
+  it { should have_many(:bidders).dependent(:restrict) }
+  it { should have_many(:licitation_processes).dependent(:restrict).through(:bidders) }
   it { should validate_duplication_of(:document_type_id).on(:documents) }
 
   it { should validate_presence_of :creditable }

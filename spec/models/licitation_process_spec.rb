@@ -6,7 +6,7 @@ require 'app/models/administrative_process'
 require 'app/models/capability'
 require 'app/models/payment_method'
 require 'app/models/licitation_process_publication'
-require 'app/models/licitation_process_bidder'
+require 'app/models/bidder'
 require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
 require 'app/models/budget_allocation'
@@ -38,12 +38,12 @@ describe LicitationProcess do
   it { should have_and_belong_to_many(:document_types) }
   it { should have_many(:licitation_notices).dependent(:destroy) }
   it { should have_many(:licitation_process_publications).dependent(:destroy).order(:id) }
-  it { should have_many(:licitation_process_bidders).dependent(:destroy).order(:id) }
+  it { should have_many(:bidders).dependent(:destroy).order(:id) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict).order(:id) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
-  it { should have_many(:creditors).dependent(:restrict).through(:licitation_process_bidders) }
+  it { should have_many(:creditors).dependent(:restrict).through(:bidders) }
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
@@ -419,9 +419,9 @@ describe LicitationProcess do
   context 'lots with items' do
     let :lot_with_items do
       [double("LicitationProcessLot", :administrative_process_budget_allocation_items => [double("LicitationProcessLotItem")],
-              :licitation_process_bidder_proposals => [double]),
+              :bidder_proposals => [double]),
        double("LicitationProcessLot", :administrative_process_budget_allocation_items => [],
-              :licitation_process_bidder_proposals => [double])]
+              :bidder_proposals => [double])]
     end
 
     it 'should filter lots with items' do
@@ -433,21 +433,21 @@ describe LicitationProcess do
 
   context 'has bidders and is available for classification' do
     it 'should return true' do
-      subject.stub(:licitation_process_bidders => [double])
+      subject.stub(:bidders => [double])
       subject.stub(:is_available_for_licitation_process_classification? => true)
 
       expect(subject.has_bidders_and_is_available_for_classification).to be true
     end
 
     it 'should return false' do
-      subject.stub(:licitation_process_bidders => [])
+      subject.stub(:bidders => [])
       subject.stub(:is_available_for_licitation_process_classification? => true)
 
       expect(subject.has_bidders_and_is_available_for_classification).to be false
     end
 
     it 'should return false' do
-      subject.stub(:licitation_process_bidders => [double])
+      subject.stub(:bidders => [double])
       subject.stub(:is_available_for_licitation_process_classification? => false)
 
       expect(subject.has_bidders_and_is_available_for_classification).to be false

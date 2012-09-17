@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      bidder_document:
+        one: "Documento"
+        other: "Documentos"
+
+    attributes:
+      bidder_document:
+        document_type: "Tipo de documento"
+        description: "Documento"
+        document_number: "Número/certidão"
+        emission_date: "Data de emissão"
+        validity: "Validade"

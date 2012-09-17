@@ -8,7 +8,7 @@ pt-BR:
     attributes:
       licitation_process_classification:
         unit_price: "Preço unitário"
-        licitation_process_bidder: "Licitante"
+        bidder: "Licitante"
         total_value: "Valor Total"
         classification: "Classificação"
         situation: "Situação"

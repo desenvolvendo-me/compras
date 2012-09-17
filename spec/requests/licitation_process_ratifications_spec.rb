@@ -8,7 +8,7 @@ feature "LicitationProcessRatifications" do
 
   scenario 'creating a new ratification' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
+    BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
@@ -54,9 +54,9 @@ feature "LicitationProcessRatifications" do
 
   scenario 'updating a ratification' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    bidder = LicitationProcessBidder.make!(:licitante_sobrinho, :licitation_process => licitation_process)
+    bidder = Bidder.make!(:licitante_sobrinho, :licitation_process => licitation_process)
     LicitationProcessRatification.make!(:processo_licitatorio_computador, :licitation_process => licitation_process)
-    LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => bidder)
+    BidderProposal.make!(:proposta_licitante_1, :bidder => bidder)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
@@ -92,7 +92,7 @@ feature "LicitationProcessRatifications" do
 
   scenario 'cleaning items' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
-    LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
+    BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
@@ -133,7 +133,7 @@ feature "LicitationProcessRatifications" do
     Prefecture.make!(:belo_horizonte)
     LicitationProcess.make!(:processo_licitatorio_computador)
     LicitationProcessRatification.make!(:processo_licitatorio_computador)
-    LicitationProcessBidderProposal.make!(:proposta_licitante_1, :licitation_process_bidder => LicitationProcessBidder.make!(:licitante))
+    BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
     SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'

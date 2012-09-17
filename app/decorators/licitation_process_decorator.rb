@@ -22,6 +22,6 @@ class LicitationProcessDecorator
   end
 
   def all_licitation_process_classifications_groupped
-    all_licitation_process_classifications.group_by(&:licitation_process_bidder)
+    all_licitation_process_classifications.group_by(&:bidder)
   end
 end

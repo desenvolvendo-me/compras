@@ -1,27 +1,27 @@
 <div id="bidders-content">
   <p>
-    <input type="button" class="button affirmative add-licitation-process-bidder" value="Adicionar Licitante">
+    <input type="button" class="button affirmative add-bidder" value="Adicionar Licitante">
   </p>
 
   <div id="bidders">
-    <%= f.association :licitation_process_bidders, :collection => localized(f.object.licitation_process_bidders) do |p| %>
-      <%= render 'licitation_process_bidders/form', :f => p %>
+    <%= f.association :bidders, :collection => localized(f.object.bidders) do |p| %>
+      <%= render 'bidders/form', :f => p %>
     <% end %>
   </div>
 </div>
 
-<%= mustache 'licitation-process-bidders-template' do %>
-  <%= f.association :licitation_process_bidders_attributes, :collection => f.object.licitation_process_bidders.build, :index => '{{uuid_licitation_process_bidder}}' do |p| %>
-    <%= render 'licitation_process_bidders/form', :f => p %>
+<%= mustache 'bidders-template' do %>
+  <%= f.association :bidders_attributes, :collection => f.object.bidders.build, :index => '{{uuid_bidder}}' do |p| %>
+    <%= render 'bidders/form', :f => p %>
   <% end %>
 <% end %>
 
 <script>
-  $("#licitation-process-bidders-template").nestedForm({
-    add: '.add-licitation-process-bidder',
-    remove: '.remove-licitation-process-bidder',
+  $("#bidders-template").nestedForm({
+    add: '.add-bidder',
+    remove: '.remove-bidder',
     target: '#bidders',
-    uuid: 'uuid_licitation_process_bidder',
+    uuid: 'uuid_bidder',
     appendItem: false
   });
 </script>

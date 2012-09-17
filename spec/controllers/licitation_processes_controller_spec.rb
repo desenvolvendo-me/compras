@@ -80,8 +80,8 @@ describe LicitationProcessesController do
       end
 
       let :licitation_process_classifications do
-        [double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 1),
-         double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'LicitationProcessBidder', :classification => 2)]
+        [double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'Bidder', :classification => 1),
+         double('LicitationProcessClassification', :classifiable_id => 1, :classifiable_type => 'Bidder', :classification => 2)]
       end
 
       before do

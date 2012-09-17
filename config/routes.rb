@@ -559,7 +559,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :licitation_process_bidders do
+  resources :bidders do
     collection do
       get :filter
       get :modal

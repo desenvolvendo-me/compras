@@ -2,7 +2,7 @@ class LicitationProcessClassificationGenerator
 
   attr_accessor :licitation_process, :classification_repository
 
-  delegate :type_of_calculation, :licitation_process_bidders, :lots_with_items,
+  delegate :type_of_calculation, :bidders, :lots_with_items,
            :all_licitation_process_classifications,
            :to => :licitation_process, :allow_nil => true
 
@@ -14,7 +14,7 @@ class LicitationProcessClassificationGenerator
   def generate!
     licitation_process.destroy_all_licitation_process_classifications
 
-    licitation_process_bidders.each do |bidder|
+    bidders.each do |bidder|
       send(type_of_calculation, bidder) if type_of_calculation
     end
 
@@ -40,7 +40,7 @@ class LicitationProcessClassificationGenerator
         :unit_value => proposal.unit_price,
         :total_value => proposal.unit_price * proposal.quantity,
         :classification => bidder.classification_by_item(proposal),
-        :licitation_process_bidder => bidder,
+        :bidder => bidder,
         :classifiable => proposal.administrative_process_budget_allocation_item
       )
     end
@@ -50,7 +50,7 @@ class LicitationProcessClassificationGenerator
     classification_repository.create!(
       :total_value => bidder.total_price,
       :classification => bidder.global_classification,
-      :licitation_process_bidder => bidder,
+      :bidder => bidder,
       :classifiable => bidder
     )
   end
@@ -60,7 +60,7 @@ class LicitationProcessClassificationGenerator
       classification_repository.create!(
         :total_value => bidder.proposal_total_value_by_lot(lot),
         :classification => bidder.classification_by_lot(lot),
-        :licitation_process_bidder => bidder,
+        :bidder => bidder,
         :classifiable => lot
       )
     end

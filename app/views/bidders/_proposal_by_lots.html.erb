@@ -1,0 +1,30 @@
+<div id="lot" class="tabs">
+  <ul>
+    <% f.object.licitation_process_lots.each do |lot| %>
+      <li><%= link_to lot, "#lot#{lot.id}" %></li>
+    <% end %>
+  </ul>
+
+  <% f.object.licitation_process_lots.each do |lot| %>
+    <div id="lot<%= lot.id %>" class="licitation-process-lot container">
+
+      <div class="yui3-g">
+        <div class="yui3-u-1-4">
+          <%= f.input :proposal_total_value_by_lot, :input_html => { :class => 'proposal-total-value', :value => f.object.decorator.proposal_total_value_by_lot(lot.id), :disabled => true } %>
+        </div>
+      </div>
+
+     <%= f.association :proposals, :collection => f.object.proposals_by_lot(lot) do |p| %>
+        <%= render 'bidder_proposals/form', :f => p %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $('.licitation-process-lot').each( function(index, item) {
+    $(this).find('.item-number').each( function(index, item) {
+      $(this).html(index + 1);
+    });
+  });
+</script>

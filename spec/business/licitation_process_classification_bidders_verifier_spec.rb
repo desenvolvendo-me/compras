@@ -14,10 +14,10 @@ describe LicitationProcessClassificationBiddersVerifier do
   end
 
   let :bidder do
-    double('LicitationProcessBidder', :id => 11, :benefited => false, :status => :enabled)
+    double('Bidder', :id => 11, :benefited => false, :status => :enabled)
   end
 
-  let :licitation_process_bidders do
+  let :bidders do
     [bidder]
   end
 
@@ -27,7 +27,7 @@ describe LicitationProcessClassificationBiddersVerifier do
 
   context 'disable bidders by documentation problem' do
     before do
-      licitation_process.stub(:licitation_process_bidders => [bidder])
+      licitation_process.stub(:bidders => [bidder])
       licitation_process.stub(:disqualify_by_documentation_problem => true)
     end
 
@@ -67,7 +67,7 @@ describe LicitationProcessClassificationBiddersVerifier do
 
   context 'disable bidders if unit price is greater than item unit price' do
     before do
-      licitation_process.stub(:licitation_process_bidders => [bidder])
+      licitation_process.stub(:bidders => [bidder])
       licitation_process.stub(:disqualify_by_maximum_value => true)
     end
 

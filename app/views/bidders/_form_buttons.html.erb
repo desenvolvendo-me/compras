@@ -1,0 +1,6 @@
+<div class="buttons">
+  <%= f.button :submit if resource.allow_bidders? %>
+  <%= f.button :cancel, :href => bidders_path(:licitation_process_id => resource.licitation_process_id) %>
+  <%= f.button :destroy if resource.allow_bidders? && f.object.persisted? %>
+</div>
+

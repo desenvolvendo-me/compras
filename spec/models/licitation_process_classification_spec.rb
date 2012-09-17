@@ -3,7 +3,7 @@ require 'model_helper'
 require 'app/models/licitation_process_classification'
 
 describe LicitationProcessClassification do
-  it { should belong_to :licitation_process_bidder }
+  it { should belong_to :bidder }
   it { should belong_to :classifiable }
 
   context '#disqualified' do

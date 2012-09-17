@@ -4,7 +4,7 @@ class LicitationProcessClassificationSituationGenerator
 
   attr_accessor :licitation_process
 
-  delegate :licitation_process_bidders, :all_licitation_process_classifications,
+  delegate :bidders, :all_licitation_process_classifications,
            :administrative_process_presence_trading?, :lots_with_items, :items,
            :consider_law_of_proposals,
            :to => :licitation_process, :allow_nil => true
@@ -90,7 +90,7 @@ class LicitationProcessClassificationSituationGenerator
   end
 
   def change_proposal_situation_by_bidder!
-    licitation_process_bidders.each do |bidder|
+    bidders.each do |bidder|
       unless bidder.licitation_process_classifications_by_classifiable.empty?
         classification = bidder.licitation_process_classifications_by_classifiable.first
 

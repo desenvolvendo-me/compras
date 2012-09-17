@@ -1,7 +1,8 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/administrative_process_budget_allocation_item'
-require 'app/models/licitation_process_bidder_proposal'
+require 'app/models/licitation_process_classification'
+require 'app/models/bidder_proposal'
 
 describe AdministrativeProcessBudgetAllocationItem do
   it { should validate_presence_of :material }
@@ -11,7 +12,7 @@ describe AdministrativeProcessBudgetAllocationItem do
   it { should belong_to :administrative_process_budget_allocation }
   it { should belong_to :material }
   it { should belong_to :licitation_process_lot }
-  it { should have_many :licitation_process_bidder_proposals }
+  it { should have_many :bidder_proposals }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
 
   context 'with material' do
@@ -49,7 +50,7 @@ describe AdministrativeProcessBudgetAllocationItem do
 
   context 'unit price and total value in a licitation_process' do
     let :bidder do
-      double('LicitationProcessBidder', :proposals => [proposal])
+      double('Bidder', :proposals => [proposal])
     end
 
     let :proposal do

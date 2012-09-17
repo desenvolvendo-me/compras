@@ -104,7 +104,7 @@
 
 <div class="yui3-g">
   <div class="yui3-u-1-3 level2">
-    <strong><%= resource.licitation_process_bidder %></strong>
+    <strong><%= resource.bidder %></strong>
   </div>
 
   <div class="yui3-u-1-8 right">
@@ -124,7 +124,7 @@
   </div>
 </div>
 
-<% resource.licitation_process_bidder_proposals.each do |proposal| %>
+<% resource.bidder_proposals.each do |proposal| %>
   <div class="yui3-g">
     <div class="yui3-u-1-3 level3">
       <%= proposal.administrative_process_budget_allocation_item %>

@@ -27,8 +27,8 @@ class Creditor < Compras::Model
   has_many :direct_purchases, :dependent => :restrict
   has_many :document_types, :through => :documents
   has_many :documents, :class_name => 'CreditorDocument', :dependent => :destroy, :order => :id
-  has_many :licitation_process_bidders, :dependent => :restrict
-  has_many :licitation_processes, :through => :licitation_process_bidders, :dependent => :restrict
+  has_many :bidders, :dependent => :restrict
+  has_many :licitation_processes, :through => :bidders, :dependent => :restrict
   has_many :materials, :through => :creditor_materials
   has_many :materials_classes, :through => :materials
   has_many :materials_groups, :through => :materials_classes

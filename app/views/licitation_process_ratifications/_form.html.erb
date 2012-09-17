@@ -8,7 +8,7 @@
   </div>
 
   <div class="yui3-u-1-3">
-    <%= f.input :licitation_process_bidder, :disabled => true %>
+    <%= f.input :bidder, :disabled => true %>
   </div>
 </div>
 
@@ -29,9 +29,9 @@
       <th><%= Material.human_attribute_name :code %></th>
       <th><%= Material.human_attribute_name :description %></th>
       <th><%= Material.human_attribute_name :reference_unit %></th>
-      <th><%= LicitationProcessBidderProposal.human_attribute_name :quantity %></th>
-      <th><%= LicitationProcessBidderProposal.human_attribute_name :unit_price %></th>
-      <th><%= LicitationProcessBidderProposal.human_attribute_name :total_price %></th>
+      <th><%= BidderProposal.human_attribute_name :quantity %></th>
+      <th><%= BidderProposal.human_attribute_name :unit_price %></th>
+      <th><%= BidderProposal.human_attribute_name :total_price %></th>
     </tr>
   </thead>
 
@@ -62,13 +62,13 @@
 
   $("#licitation_process_ratification_licitation_process_id").change(function (event, data) {
     if (!this.value) {
-      $('#licitation_process_ratification_licitation_process_bidder_id').val('');
-      $('#licitation_process_ratification_licitation_process_bidder').val('').attr('disabled', true);
+      $('#licitation_process_ratification_bidder_id').val('');
+      $('#licitation_process_ratification_bidder').val('').attr('disabled', true);
 
       return;
     }
 
-    var urlModal = "<%= modal_licitation_process_bidders_path %>?",
+    var urlModal = "<%= modal_bidders_path %>?",
     params = {
       locked_fields: ['licitation_process'],
       licitation_process_id: this.value
@@ -76,7 +76,7 @@
 
     urlModal += jQuery.param(params);
 
-    $("#licitation_process_ratification_licitation_process_bidder").attr("data-modal-url", urlModal).
+    $("#licitation_process_ratification_bidder").attr("data-modal-url", urlModal).
                                                                     attr("disabled", false);
   }).change();
 
@@ -88,15 +88,15 @@
     });
   }
 
-  $('#licitation_process_ratification_licitation_process_bidder_id').change(function (event, licitation_process_bidder) {
+  $('#licitation_process_ratification_bidder_id').change(function (event, bidder) {
     clearExistingItems();
 
-    if (licitation_process_bidder) {
+    if (bidder) {
       var template = $('#item-template'),
           target = $('#ratification_items'),
           item;
 
-      $.each(licitation_process_bidder.proposals, function() {
+      $.each(bidder.proposals, function() {
         item = $('#item-template').mustache({ uuid_item: _.uniqueId('fresh-'),
                                               id: this.id,
                                               code: this.code,

@@ -1,6 +1,6 @@
 class AccreditedRepresentative < Compras::Model
-  attr_accessible :person_id, :licitation_process_bidder_id
+  attr_accessible :person_id, :bidder_id
 
   belongs_to :person
-  belongs_to :licitation_process_bidder
+  belongs_to :bidder
 end

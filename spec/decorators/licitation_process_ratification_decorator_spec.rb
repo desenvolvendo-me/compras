@@ -55,7 +55,7 @@ describe LicitationProcessRatificationDecorator do
     end
 
     it 'should return unique budget_allocations' do
-      component.stub(:licitation_process_bidder_proposals).and_return(proposals)
+      component.stub(:bidder_proposals).and_return(proposals)
 
       expect(subject.budget_allocations).to eq 'Alocação 1, Alocação 3'
     end

@@ -4,8 +4,8 @@ class LicitationProcessLot < Compras::Model
   belongs_to :licitation_process
 
   has_many :administrative_process_budget_allocation_items, :dependent => :nullify, :order => :id
-  has_many :licitation_process_bidder_proposals, :through => :administrative_process_budget_allocation_items
-  has_many :licitation_process_bidders, :through => :licitation_process_bidder_proposals
+  has_many :bidder_proposals, :through => :administrative_process_budget_allocation_items
+  has_many :bidders, :through => :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
 
   delegate :administrative_process, :administrative_process_id,

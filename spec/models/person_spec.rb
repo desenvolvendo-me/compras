@@ -9,7 +9,7 @@ require 'app/models/licitation_process_appeal'
 require 'app/models/unico/partner'
 require 'app/models/partner'
 require 'app/models/creditor'
-require 'app/models/licitation_process_bidder'
+require 'app/models/bidder'
 require 'app/models/accredited_representative'
 require 'app/models/unico/address'
 require 'app/models/address'
@@ -58,7 +58,7 @@ describe Person do
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many :partners }
   it { should have_many(:creditors).dependent(:restrict) }
-  it { should have_many(:licitation_process_bidders).through(:accredited_representatives) }
+  it { should have_many(:bidders).through(:accredited_representatives) }
   it { should have_many(:accredited_representatives).dependent(:restrict) }
 
   it { should validate_presence_of(:address) }

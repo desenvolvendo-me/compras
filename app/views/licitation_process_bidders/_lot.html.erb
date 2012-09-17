@@ -1,5 +1,0 @@
-<div id="lot<%= lot.id %>">
-  <%= f.association :proposals, :collection => f.object.proposals_by_lot(lot) do |p| %>
-    <%= render 'licitation_process_bidder_proposals/form', :f => p %>
-  <% end %>
-</div>

@@ -1,8 +1,9 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/licitation_process_lot'
-require 'app/models/licitation_process_bidder'
-require 'app/models/licitation_process_bidder_proposal'
+require 'app/models/bidder'
+require 'app/models/bidder_proposal'
+require 'app/models/licitation_process_classification'
 require 'app/models/administrative_process_budget_allocation_item'
 
 describe LicitationProcessLot do

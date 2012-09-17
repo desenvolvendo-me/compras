@@ -1,0 +1,47 @@
+<div class="proposal">
+    <%= f.input :id, :as => 'hidden' %>
+    <%= f.input :bidder_id, :as => 'hidden' %>
+    <%= f.input :administrative_process_budget_allocation_item_id, :as => 'hidden' %>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1">
+      Item <span class="item-number"></span>
+    </div>
+  </div>
+
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :material, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :brand %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :situation, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :classification, :disabled => true %>
+    </div>
+  </div>
+
+  <div class="yui3-g item">
+    <div class="yui3-u-1-4">
+      <%= f.input :reference_unit, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :quantity, :disabled => true, :input_html => { :class => 'item-quantity' } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :unit_price, :input_html => { :class => 'item-unit-price', :value => f.object.decorator.unit_price } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :total_price, :input_html => { :class => 'item-total-price', :value => f.object.decorator.total_price }, :disabled => true %>
+    </div>
+  </div>
+</div>

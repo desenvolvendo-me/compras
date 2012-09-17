@@ -1,7 +1,7 @@
 <div class="buttons">
   <div class="button-row">
     <% if f.object.persisted? %>
-      <%= link_to('Licitantes', licitation_process_bidders_path(:licitation_process_id => resource.id), :class => "button primary") %>
+      <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.id), :class => "button primary") %>
       <%= link_to('Publicações', licitation_process_publications_path(:licitation_process_id => resource.id), :class => "button primary") %>
 
       <%= classification_link %>

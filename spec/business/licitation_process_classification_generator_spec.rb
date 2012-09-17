@@ -14,7 +14,7 @@ describe LicitationProcessClassificationGenerator do
       :lots_with_items => [lot],
       :all_licitation_process_classifications => [],
       :items => [],
-      :licitation_process_bidders => []
+      :bidders => []
     )
   end
 
@@ -31,11 +31,11 @@ describe LicitationProcessClassificationGenerator do
   end
 
   let :bidder do
-    double('LicitationProcessBidder', :id => 11, :proposals => proposals, :benefited => false, :status => :enabled,
+    double('Bidder', :id => 11, :proposals => proposals, :benefited => false, :status => :enabled,
            :administrative_process_budget_allocation_item => item)
   end
 
-  let :licitation_process_bidders do
+  let :bidders do
     [bidder]
   end
 
@@ -49,11 +49,11 @@ describe LicitationProcessClassificationGenerator do
   end
 
   let :classification_1 do
-    double(:classifiable_type => 'LicitationProcessBidder', :classifiable_id => 1, :disqualified? => false, :classification => 2)
+    double(:classifiable_type => 'Bidder', :classifiable_id => 1, :disqualified? => false, :classification => 2)
   end
 
   let :classification_2 do
-    double(:classifiable_type => 'LicitationProcessBidder', :classifiable_id => 1, :disqualified? => false, :classification => 1)
+    double(:classifiable_type => 'Bidder', :classifiable_id => 1, :disqualified? => false, :classification => 1)
   end
 
   let :generator do
@@ -62,7 +62,7 @@ describe LicitationProcessClassificationGenerator do
 
   context 'generate classifications by type of calculation' do
     before do
-      licitation_process.stub(:licitation_process_bidders => [bidder])
+      licitation_process.stub(:bidders => [bidder])
     end
 
     it "when type of calculation equals lowest total price by item" do
@@ -71,7 +71,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.should_receive(:classification_by_item).with(proposals.first).and_return(1)
 
       classification_repository.should_receive(:create!).with(
-        :unit_value => 8, :total_value => 40, :classification => 1, :licitation_process_bidder => bidder, :classifiable => item)
+        :unit_value => 8, :total_value => 40, :classification => 1, :bidder => bidder, :classifiable => item)
 
       generator.generate!
     end
@@ -83,7 +83,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.should_receive(:total_price).and_return(50)
 
       classification_repository.should_receive(:create!).with(
-        :total_value => 50, :classification => 1, :licitation_process_bidder => bidder, :classifiable => bidder)
+        :total_value => 50, :classification => 1, :bidder => bidder, :classifiable => bidder)
 
       generator.generate!
     end
@@ -95,7 +95,7 @@ describe LicitationProcessClassificationGenerator do
       bidder.should_receive(:proposal_total_value_by_lot).with(lot).and_return(100)
 
       classification_repository.should_receive(:create!).with(
-        :total_value => 100, :classification => 1, :licitation_process_bidder => bidder, :classifiable => lot)
+        :total_value => 100, :classification => 1, :bidder => bidder, :classifiable => lot)
 
       generator.generate!
     end
@@ -104,7 +104,7 @@ describe LicitationProcessClassificationGenerator do
   context 'check if winner has item with zero in unit price' do
     before do
       licitation_process.stub(:all_licitation_process_classifications => [classification_1, classification_2],
-                              :licitation_process_bidders => [])
+                              :bidders => [])
     end
 
     it 'should check if has classification -1' do

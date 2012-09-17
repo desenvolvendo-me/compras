@@ -18,7 +18,6 @@ class LicitationProcessRatificationDecorator
   end
 
   def budget_allocations
-    component.licitation_process_bidder_proposals.map { |p| p.budget_allocation }.
-                                                  uniq.join(', ')
+    component.bidder_proposals.map { |p| p.budget_allocation }.uniq.join(', ')
   end
 end

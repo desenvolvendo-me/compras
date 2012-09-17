@@ -7,7 +7,7 @@ class Person < Unico::Person
   has_many :partners, :dependent => :destroy
   has_many :creditors, :as => :creditable, :dependent => :restrict
   has_many :accredited_representatives, :dependent => :restrict
-  has_many :licitation_process_bidders, :through => :accredited_representatives
+  has_many :bidders, :through => :accredited_representatives
 
   has_one :employee
 

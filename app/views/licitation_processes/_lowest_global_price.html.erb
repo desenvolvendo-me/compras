@@ -3,8 +3,8 @@
     <td><%= item.description %></td>
     <td><%= item.reference_unit %></td>
     <td align="right"><%= item.quantity %></td>
-    <td align="right"><%= item.decorator.unit_price_by_bidder(classification.licitation_process_bidder) %></td>
-    <td align="right"><%= item.decorator.total_value_by_bidder(classification.licitation_process_bidder) %></td>
+    <td align="right"><%= item.decorator.unit_price_by_bidder(classification.bidder) %></td>
+    <td align="right"><%= item.decorator.total_value_by_bidder(classification.bidder) %></td>
 
     <td><%= classification.situation_humanize %></td>
   </tr>

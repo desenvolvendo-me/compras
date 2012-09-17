@@ -1,7 +1,7 @@
 class BidderStatusChanger
   attr_accessor :licitation_process, :status
 
-  delegate :licitation_process_bidders, :to => :licitation_process
+  delegate :bidders, :to => :licitation_process
 
   def initialize(licitation_process, status = Status)
     self.licitation_process = licitation_process
@@ -9,7 +9,7 @@ class BidderStatusChanger
   end
 
   def change
-    licitation_process_bidders.each do |bidder|
+    bidders.each do |bidder|
       if bidder.filled_documents?
         bidder.status = active_status
       else

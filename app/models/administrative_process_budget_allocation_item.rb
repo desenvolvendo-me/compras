@@ -10,7 +10,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   belongs_to :material
   belongs_to :licitation_process_lot
 
-  has_many :licitation_process_bidder_proposals
+  has_many :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
 
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
@@ -53,7 +53,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   end
 
   def bidder_proposal?(bidder)
-    licitation_process_bidder_proposals.where { licitation_process_bidder_id.eq(bidder.id) }.any?
+    bidder_proposals.where { bidder_id.eq(bidder.id) }.any?
   end
 
   def unit_price_by_bidder(bidder)

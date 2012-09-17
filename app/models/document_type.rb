@@ -3,7 +3,7 @@ class DocumentType < Compras::Model
 
   has_and_belongs_to_many :licitation_processes, :join_table => :compras_document_types_compras_licitation_processes
 
-  has_many :licitation_process_bidder_documents, :dependent => :restrict
+  has_many :bidder_documents, :dependent => :restrict
 
   validates :validity, :description, :presence => true
   validates :description, :uniqueness => { :allow_blank => true }

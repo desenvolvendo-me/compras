@@ -8,7 +8,7 @@ describe LicitationProcessClassificationSituationGenerator do
     double('LicitationProcess',
       :id => 1,
       :all_licitation_process_classifications => [],
-      :licitation_process_bidders => [bidder],
+      :bidders => [bidder],
       :lots_with_items => [lot],
       :items => [],
       :administrative_process_presence_trading? => false,
@@ -16,12 +16,12 @@ describe LicitationProcessClassificationSituationGenerator do
     )
   end
 
-  let :licitation_process_bidders do
+  let :bidders do
     [bidder]
   end
 
   let :bidder do
-    double('LicitationProcessBidder', :id => 11, :proposals => proposals, :benefited => false, :status => :enabled,
+    double('Bidder', :id => 11, :proposals => proposals, :benefited => false, :status => :enabled,
            :licitation_process_classifications_by_classifiable => [])
   end
 
@@ -34,11 +34,11 @@ describe LicitationProcessClassificationSituationGenerator do
   end
 
   let :classification_1 do
-    double(:classifiable_type => 'LicitationProcessBidder', :classifiable_id => 1, :disqualified? => false, :classification => 2)
+    double(:classifiable_type => 'Bidder', :classifiable_id => 1, :disqualified? => false, :classification => 2)
   end
 
   let :classification_2 do
-    double(:classifiable_type => 'LicitationProcessBidder', :classifiable_id => 1, :disqualified? => false, :classification => 1)
+    double(:classifiable_type => 'Bidder', :classifiable_id => 1, :disqualified? => false, :classification => 1)
   end
 
   let :lot do
@@ -58,7 +58,7 @@ describe LicitationProcessClassificationSituationGenerator do
   context 'generate situation of classifications' do
     before do
       licitation_process.stub(:all_licitation_process_classifications => [classification_1, classification_2],
-                              :licitation_process_bidders => [])
+                              :bidders => [])
     end
 
     it 'should change classification situation to won and to lost the disqualified' do
@@ -167,11 +167,11 @@ describe LicitationProcessClassificationSituationGenerator do
   context 'change situation and classification of proposals by bidder' do
     let :classification_bidder do
       double('LicitationProcessClassification', :classification => 1, :situation => 'won',
-             :classifiable => 'LicitationProcessBidder', :proposals => proposals)
+             :classifiable => 'Bidder', :proposals => proposals)
     end
 
     before do
-      licitation_process.stub(:licitation_process_bidders => licitation_process_bidders, :type_of_calculation => nil)
+      licitation_process.stub(:bidders => bidders, :type_of_calculation => nil)
       bidder.stub(:licitation_process_classifications_by_classifiable => [classification_bidder])
     end
 

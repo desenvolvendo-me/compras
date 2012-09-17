@@ -8,7 +8,7 @@ describe BidderStatusChanger do
   end
 
   let :licitation_process do
-    double('licitation_process', :licitation_process_bidders => bidders)
+    double('licitation_process', :bidders => bidders)
   end
 
   let :status do

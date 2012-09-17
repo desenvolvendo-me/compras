@@ -1,0 +1,3 @@
+<%= f.association :documents, :collection => localized(f.object.documents) do |p| %>
+  <%= render 'bidder_documents/form', :f => p %>
+<% end %>

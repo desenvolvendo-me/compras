@@ -13,12 +13,12 @@ describe LicitationProcessRatification do
   it { should belong_to :licitation_process }
 
   it { should have_many(:licitation_process_ratification_items).dependent(:destroy) }
-  it { should have_many(:licitation_process_bidder_proposals) }
+  it { should have_many(:bidder_proposals) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :ratification_date }
   it { should validate_presence_of :adjudication_date }
-  it { should validate_presence_of :licitation_process_bidder }
+  it { should validate_presence_of :bidder }
 
   context 'bidder should belongs to licitation process' do
     let :bidder_with_licitation_process do
@@ -38,19 +38,19 @@ describe LicitationProcessRatification do
     end
 
     it 'should be valid' do
-      subject.stub(:licitation_process_bidder => bidder_with_licitation_process)
+      subject.stub(:bidder => bidder_with_licitation_process)
 
       subject.valid?
 
-      expect(subject.errors[:licitation_process_bidder]).to be_empty
+      expect(subject.errors[:bidder]).to be_empty
     end
 
     it 'should be invalid' do
-      subject.stub(:licitation_process_bidder => bidder_with_new_licitation_process)
+      subject.stub(:bidder => bidder_with_new_licitation_process)
 
       subject.valid?
 
-      expect(subject.errors[:licitation_process_bidder]).to include "deve pertencer ao processo licitatório 1/2012"
+      expect(subject.errors[:bidder]).to include "deve pertencer ao processo licitatório 1/2012"
     end
 
     it 'should delegate administrative_process_modality_humanize to licitation_process' do
