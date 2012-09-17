@@ -18,11 +18,12 @@ feature 'A user confirming your account' do
     expect(page).to have_notice 'Usuário confirmado com sucesso'
   end
 
-  scenario 'can confirm a already confirmed account' do
+  scenario 'users should be redirected to the login page if he tries to reconfirm his account' do
     user_without_password.confirm!
 
     visit "/users/confirmation?confirmation_token=#{user_without_password.confirmation_token}"
 
-    expect(page).to have_content 'Por favor, efetue seu login.'
+    expect(page).to have_field 'user_login'
+    expect(page).to have_field 'user_password'
   end
 end
