@@ -26,9 +26,7 @@ class LicitationProcessClassificationBiddersVerifier
           bidder.inactive!
         end
       else
-        unless bidder.benefited
-          bidder.active!
-        end
+        bidder.active!
       end
 
       bidder.save!

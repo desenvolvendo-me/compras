@@ -56,7 +56,7 @@ describe LicitationProcessClassificationBiddersVerifier do
     end
 
     it 'should enable bidder' do
-      bidder.stub(:benefited => false, :filled_documents? => true, :expired_documents? => false)
+      bidder.stub(:filled_documents? => true, :expired_documents? => false)
 
       bidder.should_receive(:active!).and_return(true)
       bidder.should_receive(:save!).and_return(true)
