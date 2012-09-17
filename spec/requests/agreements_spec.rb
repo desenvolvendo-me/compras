@@ -6,6 +6,19 @@ feature "Agreements" do
     sign_in
   end
 
+  scenario 'editing an agreement should show date and kind of first occurrence' do
+    Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Data da última ocorrência', :with => '15/04/2011'
+      expect(page).to have_field 'Tipo da última ocorrência', :with => 'Em andamento'
+    end
+  end
+
   scenario 'create a new agreement' do
     AgreementKind.make!(:contribuicao)
     RegulatoryAct.make!(:sopa)
@@ -17,6 +30,9 @@ feature "Agreements" do
     click_link 'Criar Convênio'
 
     within_tab 'Principal' do
+      expect(page).to_not have_field 'Tipo da última ocorrência'
+      expect(page).to_not have_field 'Data da última ocorrência'
+
       fill_in 'Número e ano do convênio', :with => '59/2012'
       select 'Convênio repassado', :from => 'Categoria'
       fill_modal 'Tipo de convênio', :with => 'Contribuição', :field => 'Descrição'

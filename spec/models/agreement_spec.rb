@@ -91,4 +91,24 @@ describe Agreement do
       end
     end
   end
+
+  context '#persisted_and_has_occurrences?' do
+     it 'should return true when is persisted and agreement_occurrences is present' do
+      subject.stub(:persisted? => true, :agreement_occurrences => [double])
+
+      expect(subject.persisted_and_has_occurrences?).to be true
+    end
+
+     it 'should return false when is not persisted' do
+      subject.stub(:persisted? => false, :agreement_occurrences => [double])
+
+      expect(subject.persisted_and_has_occurrences?).to be false
+    end
+
+    it 'should return false when agreement_occurrences is empty' do
+      subject.stub(:persisted? => true, :agreement_occurrences => [])
+
+      expect(subject.persisted_and_has_occurrences?).to be false
+    end
+  end
 end

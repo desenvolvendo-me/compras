@@ -14,4 +14,8 @@ class AgreementDecorator
   def end_date
     localize super if super
   end
+
+  def first_occurrence_date
+    localize super if super
+  end
 end

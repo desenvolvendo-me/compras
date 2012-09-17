@@ -68,4 +68,26 @@ describe AgreementDecorator do
       end
     end
   end
+
+  context '#first_occurrence_date' do
+    context 'when do not have date' do
+      before do
+        component.stub(:first_occurrence_date).and_return(nil)
+      end
+
+      it 'should be nil' do
+        expect(subject.first_occurrence_date).to be_nil
+      end
+    end
+
+    context 'when have date' do
+      before do
+        component.stub(:first_occurrence_date).and_return(Date.new(2012, 12, 31))
+      end
+
+      it 'should localize' do
+        expect(subject.first_occurrence_date).to eq '31/12/2012'
+      end
+    end
+  end
 end

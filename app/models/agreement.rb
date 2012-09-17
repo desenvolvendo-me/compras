@@ -33,6 +33,7 @@ class Agreement < Compras::Model
 
   delegate :creation_date, :publication_date, :end_date, :to => :regulatory_act,
            :allow_nil => true
+  delegate :date, :active?, :kind_humanize, :to => :first_occurrence, :allow_nil => true, :prefix => true
 
   validates :number_year, :category, :agreement_kind, :value,
             :counterpart_value, :parcels_number, :description,
@@ -58,7 +59,7 @@ class Agreement < Compras::Model
   end
 
   def status
-    if first_agreement_occurrence_is_active?
+    if first_occurrence_active?
       Status::ACTIVE
     else
       Status::INACTIVE
@@ -69,12 +70,16 @@ class Agreement < Compras::Model
     number_year.split('/').last
   end
 
+  def persisted_and_has_occurrences?
+    persisted? && agreement_occurrences.present?
+  end
+
   protected
 
-  def first_agreement_occurrence_is_active?
+  def first_occurrence
     return if agreement_occurrences.blank?
 
-    agreement_occurrences.first.try(:active?)
+    agreement_occurrences.first
   end
 
   def last_persisted_additive

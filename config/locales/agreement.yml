@@ -23,6 +23,8 @@ pt-BR:
         publication_date: "Data da publicação"
         end_date: "Data do término"
         status: "Status"
+        first_occurrence_kind_humanize: "Tipo da última ocorrência"
+        first_occurrence_date: "Data da última ocorrência"
 
   simple_form:
     hints:

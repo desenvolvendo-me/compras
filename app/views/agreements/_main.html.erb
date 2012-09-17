@@ -1,3 +1,15 @@
+<% if f.object.persisted_and_has_occurrences? %>
+  <div class="yui3-g">
+    <div class="yui3-u-1-4">
+      <%= f.input :first_occurrence_date, :disabled => true, :input_html => { :value => f.object.decorator.first_occurrence_date } %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <%= f.input :first_occurrence_kind_humanize, :disabled => true %>
+    </div>
+  </div>
+<% end %>
+
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :number_year %>
