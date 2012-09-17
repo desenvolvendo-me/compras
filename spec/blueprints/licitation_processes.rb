@@ -367,7 +367,7 @@ LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   bidders { [Bidder.make!(:licitante_com_proposta_3, :documents => []),
-                                Bidder.make!(:licitante_com_proposta_4, :documents => [])] }
+             Bidder.make!(:licitante_com_proposta_4, :documents => [])] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company) do
