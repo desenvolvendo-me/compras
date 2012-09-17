@@ -8,6 +8,7 @@ feature "AccountPlans" do
 
   scenario 'create a new account_plan' do
     AccountPlanConfiguration.make!(:plano1)
+    CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
     navigate 'Contabilidade > Comum > Plano de Contas > Planos de Contas'
 
@@ -27,6 +28,18 @@ feature "AccountPlans" do
       check 'Escrituração'
       select 'Financeiro', :from => 'Indicador de superávit financeiro'
       select 'Bilateral', :from => 'Tipo de movimentação'
+    end
+
+    within_tab 'Atributos TCE' do
+      check 'Mês 12'
+      check 'Mês 13'
+      check 'Mês 14'
+      check 'Não encerra'
+      check 'Detalhamento obrigatório abertura'
+      check 'Detalhamento obrigatório mês 13'
+      check 'Detalhamento obrigatório mês 14'
+
+      fill_modal 'Conta corrente', :with => 'Disponibilidade financeira'
     end
 
     click_button 'Salvar'
@@ -49,6 +62,18 @@ feature "AccountPlans" do
       expect(page).to have_checked_field 'Escrituração'
       expect(page).to have_select 'Indicador de superávit financeiro', :selected => 'Financeiro'
       expect(page).to have_select 'Tipo de movimentação', :selected => 'Bilateral'
+    end
+
+    within_tab 'Atributos TCE' do
+      expect(page).to have_checked_field 'Mês 12'
+      expect(page).to have_checked_field 'Mês 13'
+      expect(page).to have_checked_field 'Mês 14'
+      expect(page).to have_checked_field 'Não encerra'
+      expect(page).to have_checked_field 'Detalhamento obrigatório abertura'
+      expect(page).to have_checked_field 'Detalhamento obrigatório mês 13'
+      expect(page).to have_checked_field 'Detalhamento obrigatório mês 14'
+
+      expect(page).to have_field 'Conta corrente', :with => 'Disponibilidade financeira'
     end
   end
 
@@ -93,6 +118,11 @@ feature "AccountPlans" do
       select 'Unilateral devedora', :from => 'Tipo de movimentação'
     end
 
+    within_tab 'Atributos TCE' do
+      check 'Mês 12'
+      uncheck 'Detalhamento obrigatório abertura'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Plano de Conta editado com sucesso.'
@@ -113,6 +143,11 @@ feature "AccountPlans" do
       expect(page).to_not have_checked_field 'Escrituração'
       expect(page).to have_select 'Indicador de superávit financeiro', :selected => 'Permanente'
       expect(page).to have_select 'Tipo de movimentação', :selected => 'Unilateral devedora'
+    end
+
+    within_tab 'Atributos TCE' do
+      expect(page).to have_checked_field 'Mês 12'
+      expect(page).to have_unchecked_field 'Detalhamento obrigatório abertura'
     end
   end
 

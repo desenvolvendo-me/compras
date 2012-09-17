@@ -8,6 +8,7 @@ describe AccountPlan do
   end
 
   it { should belong_to :account_plan_configuration }
+  it { should belong_to :checking_account_of_fiscal_account }
 
   it { should validate_presence_of :title }
   it { should validate_presence_of :checking_account }
@@ -29,5 +30,15 @@ describe AccountPlan do
 
     it { should allow_value('12/3').for(:checking_account) }
     it { should_not allow_value('0a-0').for(:checking_account) }
+  end
+
+  describe 'default values' do
+    it { expect(subject.ends_at_twelfth_month).to be false }
+    it { expect(subject.ends_at_thirteenth_month).to be false }
+    it { expect(subject.ends_at_fourteenth_month).to be false }
+    it { expect(subject.does_not_ends).to be false }
+    it { expect(subject.detailing_required_thirteenth).to be false }
+    it { expect(subject.detailing_required_fourteenth).to be false }
+    it { expect(subject.detailing_required_opening).to be false }
   end
 end

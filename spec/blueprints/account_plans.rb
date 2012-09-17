@@ -10,4 +10,5 @@ AccountPlan.blueprint(:bancos) do
   surplus_indicator { SurplusIndicator::FINANCIAL }
   nature_balance_variation { NatureBalanceVariation::REVERSE_BALANCE }
   movimentation_kind { MovimentationKind::BILATERAL }
+  detailing_required_opening { true }
 end
