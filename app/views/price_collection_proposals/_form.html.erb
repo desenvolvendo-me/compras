@@ -20,7 +20,9 @@
 <div id="lot" class="tabs">
   <ul>
     <% f.object.price_collection_lots.each_with_index do |lot, index| %>
-      <li><%= link_to "Lote #{index.succ}", "#lot#{lot.id}" %></li>
+      <li>
+        <%= link_to "Lote #{index.succ}", "#lot#{lot.id}" %>
+      </li>
     <% end %>
   </ul>
 

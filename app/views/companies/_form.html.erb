@@ -1,10 +1,21 @@
 <%= f.association :personable, :collection => f.object.personable.is_a?(Company) ? f.object.personable.localized : Company.new do |c| %>
   <div class="tabs">
     <ul>
-      <li><a href="#company">Contribuinte</a></li>
-      <li><a href="#company_contact">Contato</a></li>
-      <li><a href="#company_address">Endereço</a></li>
-      <li><a href="#company-partners">Sócios</a></li>
+      <li>
+        <a href="#company">Contribuinte</a>
+      </li>
+
+      <li>
+        <a href="#company_contact">Contato</a>
+      </li>
+
+      <li>
+        <a href="#company_address">Endereço</a>
+      </li>
+
+      <li>
+        <a href="#company-partners">Sócios</a>
+      </li>
     </ul>
 
     <div id="company">

@@ -1,7 +1,9 @@
 <div id="lot" class="tabs">
   <ul>
     <% f.object.licitation_process_lots.each do |lot| %>
-      <li><%= link_to lot, "#lot#{lot.id}" %></li>
+      <li>
+        <%= link_to lot, "#lot#{lot.id}" %>
+      </li>
     <% end %>
   </ul>
 
