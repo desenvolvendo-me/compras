@@ -108,9 +108,7 @@ Compras::Application.routes.draw do
     unauthenticated do
       root :to => 'devise/sessions#new'
     end
-  end
 
-  devise_scope :user do
     put '/confirm' => 'confirmations#confirm'
   end
 
