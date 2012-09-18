@@ -3,13 +3,9 @@ class MaskConfigurationParser
     final_mask = ''
 
     levels.each_with_index do |level, index|
-      next if level.digits.blank?
+      final_mask << digits(level)
 
-      final_mask << '9' * level.digits
-
-      if level.separator && index.succ < levels.count
-        final_mask << level.separator
-      end
+      final_mask << separator(level, index, levels.size)
     end
 
     final_mask
@@ -27,8 +23,8 @@ class MaskConfigurationParser
     '9' * level.digits
   end
 
-  def self.separator(level, index)
-    return '' unless level.separator && index.succ < levels.size
+  def self.separator(level, index, size)
+    return '' unless level.separator && index.succ < size
 
     level.separator
   end
