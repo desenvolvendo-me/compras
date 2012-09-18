@@ -27,8 +27,8 @@ class AccountPlanConfiguration < Compras::Model
     account_plan_levels.sort_by(&:level)
   end
 
-  def mask(mask_generator = ConfigurationMaskGenerator)
-    mask_generator.new(ordered_account_plan_levels).generate!
+  def mask(mask_generator = MaskConfigurationParser)
+    mask_generator.from_levels(ordered_account_plan_levels)
   end
 
   protected

@@ -31,12 +31,8 @@ describe BudgetStructureConfiguration do
     end
 
     context 'when generate' do
-      before do
-        mask_generator.stub(:new).and_return(mask_generator)
-      end
-
       let :mask_generator do
-        double('Generator', :generate! => '9/99')
+        double('Generator', :from_levels => '9/99')
       end
 
       it 'should return correct mask using MaskGenerator' do

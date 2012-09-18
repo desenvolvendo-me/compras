@@ -1,7 +1,11 @@
 require 'unit_helper'
-require 'app/business/configuration_mask_generator'
+require 'app/business/mask_configuration_parser'
 
-describe ConfigurationMaskGenerator do
+describe MaskConfigurationParser do
+  subject do
+    MaskConfigurationParser
+  end
+
   context 'when all separators and digits' do
     let :level_1 do
       double :digits => 2, :separator => '/', :level => 1
@@ -11,12 +15,8 @@ describe ConfigurationMaskGenerator do
       double :digits => 1, :separator => '/', :level => 2
     end
 
-    subject do
-      described_class.new([level_1, level_2])
-    end
-
     it 'should generate mask' do
-      expect(subject.generate!).to eq '99/9'
+      expect(subject.from_levels([level_1, level_2])).to eq '99/9'
     end
   end
 
@@ -29,13 +29,10 @@ describe ConfigurationMaskGenerator do
       double :digits => 1, :separator => nil, :level => 2
     end
 
-    subject do
-      described_class.new([level_1, level_2])
-    end
-
     it 'should generate mask without last separator' do
       level_2.stub(:separator => nil)
-      expect(subject.generate!).to eq '99/9'
+
+      expect(subject.from_levels([level_1, level_2])).to eq '99/9'
     end
   end
 end

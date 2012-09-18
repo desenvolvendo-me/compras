@@ -26,8 +26,8 @@ class BudgetStructureConfiguration < Compras::Model
     budget_structure_levels.sort_by(&:level)
   end
 
-  def mask(mask_generator = ConfigurationMaskGenerator)
-    mask_generator.new(ordered_budget_structure_levels).generate!
+  def mask(mask_generator = MaskConfigurationParser)
+    mask_generator.from_levels(ordered_budget_structure_levels)
   end
 
   protected

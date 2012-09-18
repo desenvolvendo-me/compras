@@ -1,11 +1,5 @@
-class ConfigurationMaskGenerator
-  attr_accessor :levels
-
-  def initialize(levels)
-    self.levels = levels
-  end
-
-  def generate!
+class MaskConfigurationParser
+  def self.from_levels(levels)
     final_mask = ''
 
     levels.each_with_index do |level, index|
@@ -23,17 +17,17 @@ class ConfigurationMaskGenerator
 
   protected
 
-  def partial_mask(level, index)
+  def self.partial_mask(level, index)
     digits(level) + separator(level, index)
   end
 
-  def digits(level)
+  def self.digits(level)
     return '' if level.digits.blank?
 
     '9' * level.digits
   end
 
-  def separator(level, index)
+  def self.separator(level, index)
     return '' unless level.separator && index.succ < levels.size
 
     level.separator
