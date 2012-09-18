@@ -6,8 +6,6 @@ class ConfigurationMaskGenerator
   end
 
   def generate!
-    return if empty?
-
     final_mask = ''
 
     levels.each_with_index do |level, index|
@@ -15,7 +13,7 @@ class ConfigurationMaskGenerator
 
       final_mask << '9' * level.digits
 
-      if level.separator && index.succ < count
+      if level.separator && index.succ < levels.count
         final_mask << level.separator
       end
     end
@@ -25,11 +23,19 @@ class ConfigurationMaskGenerator
 
   protected
 
-  def count
-    levels.size
+  def partial_mask(level, index)
+    digits(level) + separator(level, index)
   end
 
-  def empty?
-    levels.empty?
+  def digits(level)
+    return '' if level.digits.blank?
+
+    '9' * level.digits
+  end
+
+  def separator(level, index)
+    return '' unless level.separator && index.succ < levels.size
+
+    level.separator
   end
 end
