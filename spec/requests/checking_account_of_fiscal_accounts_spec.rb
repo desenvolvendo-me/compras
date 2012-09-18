@@ -12,7 +12,7 @@ feature "CheckingAccountOfFiscalAccounts" do
     click_link 'Criar Conta Corrente da Conta Contábil'
 
     within_tab 'Principal' do
-      fill_in 'Cógido TCE', :with => '14'
+      fill_in 'Cógido do TCE', :with => '14'
       fill_in 'Nome', :with => 'Disponibilidade financeira'
       fill_in 'Tag principal', :with => 'DisponibilidadeFinanceira'
       fill_in 'Função', :with => 'Detalhar as movimentações financeiras'
@@ -25,7 +25,7 @@ feature "CheckingAccountOfFiscalAccounts" do
     click_link 'Disponibilidade financeira'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Cógido TCE', :with => '14'
+      expect(page).to have_field 'Cógido do TCE', :with => '14'
       expect(page).to have_field 'Nome', :with => 'Disponibilidade financeira'
       expect(page).to have_field 'Tag principal', :with => 'DisponibilidadeFinanceira'
       expect(page).to have_field 'Função', :with => 'Detalhar as movimentações financeiras'
@@ -40,7 +40,7 @@ feature "CheckingAccountOfFiscalAccounts" do
     click_link 'Disponibilidade financeira'
 
     within_tab 'Principal' do
-      fill_in 'Cógido TCE', :with => '400'
+      fill_in 'Cógido do TCE', :with => '400'
       fill_in 'Nome', :with => 'Disponibilidade'
       fill_in 'Tag principal', :with => 'Disponibilidade'
       fill_in 'Função', :with => 'Detalhar as movimentações dos recursos'
@@ -53,7 +53,7 @@ feature "CheckingAccountOfFiscalAccounts" do
     click_link 'Disponibilidade'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Cógido TCE', :with => '400'
+      expect(page).to have_field 'Cógido do TCE', :with => '400'
       expect(page).to have_field 'Nome', :with => 'Disponibilidade'
       expect(page).to have_field 'Tag principal', :with => 'Disponibilidade'
       expect(page).to have_field 'Função', :with => 'Detalhar as movimentações dos recursos'

@@ -29,7 +29,7 @@ feature "BudgetStructure" do
 
       fill_in 'Código', :with => '1'
       expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
-      fill_in 'Código TCE', :with => '051'
+      fill_in 'Código do TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
       fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
@@ -62,7 +62,7 @@ feature "BudgetStructure" do
       expect(page).to have_field 'Nível', :with => '1 - Orgão'
       expect(page).to have_field 'Código', :with => '1'
       expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
-      expect(page).to have_field 'Código TCE', :with => '051'
+      expect(page).to have_field 'Código do TCE', :with => '051'
       expect(page).to have_field 'Descrição', :with => 'Secretaria de Educação'
       expect(page).to have_field 'Sigla', :with => 'SEMUEDU'
       expect(page).to have_field 'Tipo de administração', :with => 'Pública'
@@ -105,7 +105,7 @@ feature "BudgetStructure" do
       end
       fill_in 'Código', :with => '2'
       expect(page).to have_field 'Estrutura orçamentaria', :with => '2'
-      fill_in 'Código TCE', :with => '081'
+      fill_in 'Código do TCE', :with => '081'
       fill_in 'Descrição', :with => 'Secretaria de Transporte'
       fill_in 'Sigla', :with => 'SEMUTRA'
       fill_modal 'Tipo de administração', :with => 'Executivo', :field => 'Descrição'
@@ -137,7 +137,7 @@ feature "BudgetStructure" do
       expect(page).to have_field 'Nível', :with => '1 - Orgão'
       expect(page).to have_field 'Código', :with => '2'
       expect(page).to have_field 'Estrutura orçamentaria', :with => '2'
-      expect(page).to have_field 'Código TCE', :with => '081'
+      expect(page).to have_field 'Código do TCE', :with => '081'
       expect(page).to have_field 'Descrição', :with => 'Secretaria de Transporte'
       expect(page).to have_field 'Sigla', :with => 'SEMUTRA'
       expect(page).to have_field 'Tipo de administração', :with => 'Executivo'
@@ -216,7 +216,7 @@ feature "BudgetStructure" do
 
       fill_in 'Código', :with => '1'
       expect(page).to have_field 'Estrutura orçamentaria', :with => '1'
-      fill_in 'Código TCE', :with => '051'
+      fill_in 'Código do TCE', :with => '051'
       fill_in 'Descrição', :with => 'Secretaria de Educação'
       fill_in 'Sigla', :with => 'SEMUEDU'
       fill_modal 'Tipo de administração', :with => 'Pública', :field => 'Descrição'
@@ -240,7 +240,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'já existe um código para este nível desta configuração Estrutura orçamentaria Código TCE'
+    expect(page).to have_content 'já existe um código para este nível desta configuração Estrutura orçamentaria Código do TCE'
   end
 
   scenario 'validating modal of level' do

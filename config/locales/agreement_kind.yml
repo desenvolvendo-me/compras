@@ -8,4 +8,4 @@ pt-BR:
     attributes:
       agreement_kind:
         description: "Descrição"
-        tce_code: "Cógido TCE"
+        tce_code: "Cógido do TCE"

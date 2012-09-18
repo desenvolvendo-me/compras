@@ -12,7 +12,7 @@ feature "AgreementKinds" do
     click_link 'Criar Tipo de Convênio'
 
     fill_in 'Descrição', :with => 'Contribuição'
-    fill_in 'Cógido TCE', :with => '1'
+    fill_in 'Cógido do TCE', :with => '1'
 
     click_button 'Salvar'
 
@@ -21,7 +21,7 @@ feature "AgreementKinds" do
     click_link 'Contribuição'
 
     expect(page).to have_field 'Descrição', :with => 'Contribuição'
-    expect(page).to have_field 'Cógido TCE', :with => '1'
+    expect(page).to have_field 'Cógido do TCE', :with => '1'
   end
 
   scenario 'update an existent agreement_kind' do
@@ -32,7 +32,7 @@ feature "AgreementKinds" do
     click_link 'Contribuição'
 
     fill_in 'Descrição', :with => 'Auxílio'
-    fill_in 'Cógido TCE', :with => '2'
+    fill_in 'Cógido do TCE', :with => '2'
 
     click_button 'Salvar'
 
@@ -41,7 +41,7 @@ feature "AgreementKinds" do
     click_link 'Auxílio'
 
     expect(page).to have_field 'Descrição', :with => 'Auxílio'
-    expect(page).to have_field 'Cógido TCE', :with => '2'
+    expect(page).to have_field 'Cógido do TCE', :with => '2'
   end
 
   scenario 'destroy an existent agreement_kind' do

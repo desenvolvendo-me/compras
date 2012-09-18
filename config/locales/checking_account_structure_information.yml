@@ -8,5 +8,5 @@ pt-BR:
     attributes:
       checking_account_structure_information:
         name: "Nome"
-        tce_code: "Cógido TCE"
+        tce_code: "Cógido do TCE"
         referenced_table: "Tabela referenciada"
