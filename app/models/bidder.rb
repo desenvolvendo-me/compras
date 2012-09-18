@@ -172,7 +172,7 @@ class Bidder < Compras::Model
   end
 
   def benefited_by_law_of_proposals?
-    (consider_law_of_proposals && benefited) && consider_law_of_proposals
+    consider_law_of_proposals && benefited
   end
 
   def inactivate!
