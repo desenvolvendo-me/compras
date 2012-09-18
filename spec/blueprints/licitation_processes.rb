@@ -181,7 +181,7 @@ LicitationProcess.blueprint(:apuracao_por_itens) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
-                                Bidder.make!(:licitante_com_proposta_2)] }
+             Bidder.make!(:licitante_com_proposta_2)] }
 end
 
 LicitationProcess.blueprint(:apuracao_por_lote) do
@@ -212,7 +212,7 @@ LicitationProcess.blueprint(:apuracao_por_lote) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
-                                Bidder.make!(:licitante_com_proposta_2)] }
+             Bidder.make!(:licitante_com_proposta_2)] }
 end
 
 LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
@@ -243,7 +243,7 @@ LicitationProcess.blueprint(:valor_maximo_ultrapassado) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_PRICE_BY_LOT }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
-                                Bidder.make!(:licitante_com_proposta_7)] }
+             Bidder.make!(:licitante_com_proposta_7)] }
 end
 
 LicitationProcess.blueprint(:maior_lance_por_lote) do
@@ -274,7 +274,7 @@ LicitationProcess.blueprint(:maior_lance_por_lote) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::HIGHEST_BIDDER_BY_LOT}
   bidders { [Bidder.make!(:licitante_com_proposta_1),
-                                Bidder.make!(:licitante_com_proposta_2)] }
+             Bidder.make!(:licitante_com_proposta_2)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global) do
@@ -305,7 +305,7 @@ LicitationProcess.blueprint(:apuracao_global) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
-                                Bidder.make!(:licitante_com_proposta_2)] }
+             Bidder.make!(:licitante_com_proposta_2)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_empatou) do
@@ -336,7 +336,7 @@ LicitationProcess.blueprint(:apuracao_global_empatou) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   bidders { [Bidder.make!(:licitante_com_proposta_5),
-                                Bidder.make!(:licitante_com_proposta_6)] }
+             Bidder.make!(:licitante_com_proposta_6)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_sem_documentos) do
@@ -398,7 +398,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   bidders { [Bidder.make!(:licitante_com_proposta_3),
-                                Bidder.make!(:licitante_com_proposta_4)] }
+             Bidder.make!(:licitante_com_proposta_4)] }
 end
 
 LicitationProcess.blueprint(:apuracao_global_small_company_2) do
@@ -429,7 +429,7 @@ LicitationProcess.blueprint(:apuracao_global_small_company_2) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_GLOBAL_PRICE }
   bidders { [Bidder.make!(:licitante_com_proposta_8),
-                                Bidder.make!(:licitante_com_proposta_9)] }
+             Bidder.make!(:licitante_com_proposta_9)] }
 end
 
 LicitationProcess.blueprint(:processo_licitatorio_nao_atualizavel) do
@@ -520,5 +520,5 @@ LicitationProcess.blueprint(:apuracao_melhor_tecnica_e_preco) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
   bidders { [Bidder.make!(:licitante_com_proposta_1),
-                                Bidder.make!(:licitante_com_proposta_2)] }
+             Bidder.make!(:licitante_com_proposta_2)] }
 end
