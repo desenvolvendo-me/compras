@@ -24,6 +24,7 @@ feature "Agreements" do
     RegulatoryAct.make!(:sopa)
     BankAccount.make!(:itau_tributos)
     Creditor.make!(:sobrinho)
+    Creditor.make!(:wenderson_sa)
 
     navigate 'Contabilidade > Comum > Convênio > Convênios'
 
@@ -59,9 +60,19 @@ feature "Agreements" do
 
       fill_modal 'Credor', :with => 'Gabriel Sobrinho'
 
-      fill_in 'Valor', :with => '100,00'
+      fill_in 'Valor', :with => '190.000,00'
       select 'Concedente', :from => 'Tipo'
       select 'Estadual', :from => 'Esfera governamental'
+
+      click_button 'Adicionar Participante'
+
+      within '.nested-agreement-participants:nth-child(2)' do
+        fill_modal 'Credor', :with => 'Wenderson Malheiros'
+
+        fill_in 'Valor', :with => '190.000,00'
+        select 'Convenente', :from => 'Tipo'
+        select 'Federal', :from => 'Esfera governamental'
+      end
     end
 
     within_tab 'Aditivos' do
@@ -69,7 +80,7 @@ feature "Agreements" do
 
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       select 'Outros', :from => 'Tipo'
-      fill_in 'Valor', :with => '100,00'
+      fill_in 'Valor', :with => '190.000,00'
       fill_in 'Descrição', :with => 'Termo de aditamento 002/2012'
     end
 
@@ -112,7 +123,7 @@ feature "Agreements" do
 
     within_tab 'Participantes' do
       expect(page).to have_field 'Credor', :with => 'Gabriel Sobrinho'
-      expect(page).to have_field 'Valor', :with => '100,00'
+      expect(page).to have_field 'Valor', :with => '190.000,00'
       expect(page).to have_select 'Tipo', :selected => 'Concedente'
       expect(page).to have_select 'Esfera governamental', :selected => 'Estadual'
     end
@@ -121,7 +132,7 @@ feature "Agreements" do
       expect(page).to have_field 'Número/Ano', :with => '1/2012'
       expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
       expect(page).to have_select 'Tipo', :selected => 'Outros'
-      expect(page).to have_field 'Valor', :with => '100,00'
+      expect(page).to have_field 'Valor', :with => '190.000,00'
       expect(page).to have_field 'Descrição', :with => 'Termo de aditamento 002/2012'
     end
 
@@ -197,22 +208,26 @@ feature "Agreements" do
     end
 
     within_tab 'Participantes' do
+      within '.nested-agreement-participants:nth-child(1)' do
+        click_button 'Remover Participante'
+      end
+
       click_button 'Remover Participante'
 
       click_button 'Adicionar Participante'
 
       fill_modal 'Credor', :with => 'Gabriel Sobrinho'
 
-      fill_in 'Valor', :with => '100,00'
+      fill_in 'Valor', :with => '390.000,00'
       select 'Concedente', :from => 'Tipo'
       select 'Estadual', :from => 'Esfera governamental'
 
       click_button 'Adicionar Participante'
 
-      within '.nested-agreement-participants:nth-child(3)' do
+      within '.nested-agreement-participants:nth-child(4)' do
         fill_modal 'Credor', :with => 'Wenderson Malheiros'
 
-        fill_in 'Valor', :with => '200,00'
+        fill_in 'Valor', :with => '390.000,00'
         select 'Convenente', :from => 'Tipo'
         select 'Federal', :from => 'Esfera governamental'
       end
@@ -295,14 +310,14 @@ feature "Agreements" do
     within_tab 'Participantes' do
       within '.nested-agreement-participants:nth-child(1)' do
         expect(page).to have_field 'Credor', :with => 'Wenderson Malheiros'
-        expect(page).to have_field 'Valor', :with => '200,00'
+        expect(page).to have_field 'Valor', :with => '390.000,00'
         expect(page).to have_select 'Tipo', :selected => 'Convenente'
         expect(page).to have_select 'Esfera governamental', :selected => 'Federal'
       end
 
       within '.nested-agreement-participants:nth-child(2)' do
         expect(page).to have_field 'Credor', :with => 'Gabriel Sobrinho'
-        expect(page).to have_field 'Valor', :with => '100,00'
+        expect(page).to have_field 'Valor', :with => '390.000,00'
         expect(page).to have_select 'Tipo', :selected => 'Concedente'
         expect(page).to have_select 'Esfera governamental', :selected => 'Estadual'
       end
@@ -338,6 +353,58 @@ feature "Agreements" do
         expect(page).to have_select 'Tipo', :selected => 'Em andamento'
         expect(page).to have_field 'Descrição', :with => 'Convênio Iniciado'
       end
+    end
+  end
+
+  scenario 'validating sum of value of participants whose kind equals granting' do
+    Agreement.make!(:apoio_ao_turismo)
+    Creditor.make!(:wenderson_sa)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Participantes' do
+      click_button 'Adicionar Participante'
+
+      fill_modal 'Credor', :with => 'Gabriel Sobrinho'
+
+      fill_in 'Valor', :with => '10.000,00'
+      select 'Concedente', :from => 'Tipo'
+      select 'Estadual', :from => 'Esfera governamental'
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Participantes' do
+      expect(page).to have_content 'a soma do valor dos participantes concedentes deve ser igual a R$ 190.000,00'
+    end
+  end
+
+  scenario 'validating sum of value of participants whose kind equals convenente' do
+    Agreement.make!(:apoio_ao_turismo)
+    Creditor.make!(:wenderson_sa)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Participantes' do
+      click_button 'Adicionar Participante'
+
+      within '.nested-agreement-participants:nth-child(3)' do
+        fill_modal 'Credor', :with => 'Gabriel Sobrinho'
+
+        fill_in 'Valor', :with => '10.000,00'
+        select 'Convenente', :from => 'Tipo'
+        select 'Estadual', :from => 'Esfera governamental'
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Participantes' do
+      expect(page).to have_content 'a soma do valor dos participantes convenentes deve ser igual a R$ 190.000,00'
     end
   end
 

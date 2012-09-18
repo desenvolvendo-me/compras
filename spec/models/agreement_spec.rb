@@ -1,6 +1,7 @@
 require 'model_helper'
 require 'app/uploaders/document_uploader'
 require 'app/models/agreement_occurrence'
+require 'app/models/agreement_participant'
 require 'app/models/agreement'
 require 'app/models/agreement_bank_account'
 require 'app/models/agreement_additive'
@@ -93,13 +94,13 @@ describe Agreement do
   end
 
   context '#persisted_and_has_occurrences?' do
-     it 'should return true when is persisted and agreement_occurrences is present' do
+    it 'should return true when is persisted and agreement_occurrences is present' do
       subject.stub(:persisted? => true, :agreement_occurrences => [double])
 
       expect(subject.persisted_and_has_occurrences?).to be true
     end
 
-     it 'should return false when is not persisted' do
+    it 'should return false when is not persisted' do
       subject.stub(:persisted? => false, :agreement_occurrences => [double])
 
       expect(subject.persisted_and_has_occurrences?).to be false
@@ -109,6 +110,64 @@ describe Agreement do
       subject.stub(:persisted? => true, :agreement_occurrences => [])
 
       expect(subject.persisted_and_has_occurrences?).to be false
+    end
+  end
+
+  describe 'validating participants' do
+    let :participants_grantings do
+      [double(:granting? => true, :convenente? => false, :value => 200, :marked_for_destruction? => false),
+       double(:granting? => true, :convenente? => false, :value => 100, :marked_for_destruction? => false)]
+    end
+
+    let :participants_convenentes do
+      [double(:granting? => false, :convenente? => true, :value => 300, :marked_for_destruction? => false),
+       double(:granting? => false, :convenente? => true, :value => 400, :marked_for_destruction? => false)]
+    end
+
+    context 'validates if sum of value of participants grantings is equals value + counterpart_value' do
+      before do
+        subject.stub(:agreement_participants => participants_grantings,
+                     :if_sum_of_participants_convenente_equals_total_value => true)
+      end
+
+      it 'should be valid' do
+        subject.stub(:value => 250, :counterpart_value => 50)
+
+        subject.valid?
+
+        expect(subject.errors[:agreement_participants]).to be_empty
+      end
+
+      it 'should be invalid' do
+        subject.stub(:value => 50, :counterpart_value => 60)
+
+        subject.valid?
+
+        expect(subject.errors[:agreement_participants]).to include 'a soma do valor dos participantes concedentes deve ser igual a R$ 110,00'
+      end
+    end
+
+    context 'validates if sum of value of participants convenentes is equals value + counterpart_value' do
+      before do
+        subject.stub(:agreement_participants => participants_convenentes,
+                     :if_sum_of_participants_granting_equals_total_value => true)
+      end
+
+      it 'should be valid' do
+        subject.stub(:value => 500, :counterpart_value => 200)
+
+        subject.valid?
+
+        expect(subject.errors[:agreement_participants]).to be_empty
+      end
+
+      it 'should be invalid' do
+        subject.stub(:value => 100, :counterpart_value => 100)
+
+        subject.valid?
+
+        expect(subject.errors[:agreement_participants]).to include 'a soma do valor dos participantes convenentes deve ser igual a R$ 200,00'
+      end
     end
   end
 end

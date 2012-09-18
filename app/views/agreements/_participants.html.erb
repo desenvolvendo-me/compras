@@ -2,6 +2,8 @@
   <input type="button" class="button affirmative add-agreement-participants" value="Adicionar Participante">
 </p>
 
+<%= f.error :agreement_participants %>
+
 <div id="agreement-participants" class="nested-form" data-nested-form="agreement-participants">
   <%= f.association :agreement_participants, :collection => localized(f.object.agreement_participants) do |o| %>
     <%= render 'agreement_participants/form', :f => o %>

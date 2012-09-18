@@ -19,7 +19,7 @@ class Agreement < Compras::Model
   belongs_to :regulatory_act
 
   has_many :agreement_additives, :dependent => :destroy, :order => :number
-  has_many :agreement_participants, :dependent => :destroy
+  has_many :agreement_participants, :dependent => :destroy, :inverse_of => :agreement
   has_many :agreement_occurrences, :dependent => :destroy, :order => [AgreementOccurrence.arel_table[:date].desc], :inverse_of => :agreement
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
   has_many :tce_capability_agreements, :dependent => :restrict
@@ -40,6 +40,8 @@ class Agreement < Compras::Model
             :number_year_process, :regulatory_act, :process_date,
             :presence => true
   validates :number_year, :number_year_process, :format => /^(\d+)\/\d{4}$/
+  validate :if_sum_of_participants_granting_equals_total_value
+  validate :if_sum_of_participants_convenente_equals_total_value
 
   orderize :description
   filterize
@@ -74,7 +76,41 @@ class Agreement < Compras::Model
     persisted? && agreement_occurrences.present?
   end
 
+  def if_sum_of_participants_granting_equals_total_value(numeric_parser = ::I18n::Alchemy::NumericParser)
+    return if agreement_participants.blank? || total_value.blank?
+
+    total_granting = sum_value_of_participants_granting
+
+    if total_granting != total_value
+      errors.add :agreement_participants, :agreement_participants_granting_should_be_equals_total,
+                 :total => numeric_parser.localize(total_value)
+    end
+  end
+
+  def if_sum_of_participants_convenente_equals_total_value(numeric_parser = ::I18n::Alchemy::NumericParser)
+    return if agreement_participants.blank? || total_value.blank?
+
+    total_convenente = sum_value_of_participants_convenente
+
+    if total_convenente != total_value
+      errors.add :agreement_participants, :agreement_participants_convenente_should_be_equals_total,
+                 :total => numeric_parser.localize(total_value)
+    end
+  end
+
   protected
+
+  def total_value
+    value.to_f + counterpart_value.to_f
+  end
+
+  def sum_value_of_participants_granting
+    agreement_participants.reject(&:marked_for_destruction?).select(&:granting?).sum(&:value)
+  end
+
+  def sum_value_of_participants_convenente
+    agreement_participants.reject(&:marked_for_destruction?).select(&:convenente?).sum(&:value)
+  end
 
   def first_occurrence
     return if agreement_occurrences.blank?

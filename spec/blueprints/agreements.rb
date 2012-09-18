@@ -12,7 +12,7 @@ Agreement.blueprint(:apoio_ao_turismo) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
-  agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
+  agreement_participants { [AgreementParticipant.make!(:sobrinho), AgreementParticipant.make!(:sobrinho_granting)] }
   agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }
 end
 
@@ -29,7 +29,7 @@ Agreement.blueprint(:apoio_ao_turismo_with_2_occurrences) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento), AgreementOccurrence.make!(:other)] }
-  agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
+  agreement_participants { [AgreementParticipant.make!(:sobrinho), AgreementParticipant.make!(:sobrinho_granting)] }
   agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }
 end
 
@@ -46,7 +46,7 @@ Agreement.blueprint(:apoio_ao_turismo_with_2_occurrences_inactive) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento), AgreementOccurrence.make!(:other_2)] }
-  agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
+  agreement_participants { [AgreementParticipant.make!(:sobrinho), AgreementParticipant.make!(:sobrinho_granting)] }
   agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }
 end
 
@@ -63,7 +63,7 @@ Agreement.blueprint(:apoio_ao_turismo_inactive) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:other)] }
-  agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
+  agreement_participants { [AgreementParticipant.make!(:sobrinho), AgreementParticipant.make!(:sobrinho_granting)] }
   agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }
 end
 
@@ -80,6 +80,7 @@ Agreement.blueprint(:apoio_a_cultura) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
   agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento)] }
-  agreement_participants { [AgreementParticipant.make!(:sobrinho)] }
+  agreement_participants { [AgreementParticipant.make!(:sobrinho, :value => 390000.00),
+                            AgreementParticipant.make!(:sobrinho_granting, :value => 390000.00)] }
   agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }
 end
