@@ -27,6 +27,10 @@ class LicitationProcessLot < Compras::Model
     "Lote #{count_lots}"
   end
 
+  def order_bidders_by_total_price
+    bidders.sort { |a,b| a.proposal_total_value_by_lot(self) <=> b.proposal_total_value_by_lot(self) }
+  end
+
   def items_should_belong_to_administrative_process
     administrative_process_budget_allocation_items.each do |item|
       if item.administrative_process_id != administrative_process.id

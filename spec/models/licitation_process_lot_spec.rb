@@ -50,4 +50,32 @@ describe LicitationProcessLot do
     subject.valid?
     expect(subject.errors.messages[:administrative_process_budget_allocation_items]).to include "deve haver ao menos um item"
   end
+
+  context '#order_bidders_by_total_price' do
+    let :bidders do
+      [bidder1, bidder2, bidder3]
+    end
+
+    let :bidder1 do
+      double(:bidder1)
+    end
+
+    let :bidder2 do
+      double(:bidder2)
+    end
+
+    let :bidder3 do
+      double(:bidder3)
+    end
+
+    it 'should order bidders by total price by lot' do
+      subject.stub(:bidders).and_return(bidders)
+
+      bidder1.stub(:proposal_total_value_by_lot).with(subject).and_return(10)
+      bidder2.stub(:proposal_total_value_by_lot).with(subject).and_return(1)
+      bidder3.stub(:proposal_total_value_by_lot).with(subject).and_return(5)
+
+      expect(subject.order_bidders_by_total_price).to eq [bidder2, bidder3, bidder1]
+    end
+  end
 end

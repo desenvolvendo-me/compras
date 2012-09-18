@@ -1,68 +1,76 @@
 class LicitationProcessClassificationGenerator
+  attr_accessor :licitation_process, :classification_repository, :proposal_repository
 
-  attr_accessor :licitation_process, :classification_repository
-
-  delegate :type_of_calculation, :bidders, :lots_with_items,
+  delegate :type_of_calculation, :bidders, :items,
            :all_licitation_process_classifications,
            :to => :licitation_process, :allow_nil => true
 
-  def initialize(licitation_process, classification_repository = LicitationProcessClassification)
+  def initialize(licitation_process,
+    classification_repository = LicitationProcessClassification,
+    proposal_repository = BidderProposal)
     self.licitation_process = licitation_process
     self.classification_repository = classification_repository
+    self.proposal_repository = proposal_repository
   end
 
   def generate!
     licitation_process.destroy_all_licitation_process_classifications
 
-    bidders.each do |bidder|
-      send(type_of_calculation, bidder) if type_of_calculation
-    end
-
-    check_if_winner_has_zero!
+    send(type_of_calculation) if type_of_calculation
   end
 
   protected
 
-  def check_if_winner_has_zero!
-    all_licitation_process_classifications.group_by(&:classifiable_id).each do |classifiable_id, classifications|
-      classifications = classifications.sort_by(&:classification)
+  def lowest_total_price_by_item
+    items.each do |item|
+      proposals = proposal_repository.by_item_order_by_unit_price(item.id)
+      ordered_proposals = proposals.reject { |proposal| proposal.unit_price <= 0 }
 
-      if classifications.first.disqualified?
-        classification = classifications.reject(&:disqualified?).first
-        classification.update_column(:classification, 1) if classification
+      proposals.each do |proposal|
+        classification_repository.create!(
+          :unit_value => proposal.unit_price,
+          :total_value => proposal.total_price,
+          :classification => classify_item(proposal, ordered_proposals),
+          :bidder => proposal.bidder,
+          :classifiable => proposal.administrative_process_budget_allocation_item
+        )
       end
     end
   end
 
-  def lowest_total_price_by_item(bidder)
-    bidder.proposals.each do |proposal|
+  def lowest_global_price
+    ordered_bidders = bidders.reject(&:has_item_with_unit_price_equals_zero).
+                              sort_by(&:total_price)
+
+    bidders.each do |bidder|
       classification_repository.create!(
-        :unit_value => proposal.unit_price,
-        :total_value => proposal.unit_price * proposal.quantity,
-        :classification => bidder.classification_by_item(proposal),
+        :total_value => bidder.total_price,
+        :classification => classify_item(bidder, ordered_bidders),
         :bidder => bidder,
-        :classifiable => proposal.administrative_process_budget_allocation_item
+        :classifiable => bidder
       )
     end
   end
 
-  def lowest_global_price(bidder)
-    classification_repository.create!(
-      :total_value => bidder.total_price,
-      :classification => bidder.global_classification,
-      :bidder => bidder,
-      :classifiable => bidder
-    )
+  def lowest_price_by_lot
+    licitation_process.licitation_process_lots.each do |lot|
+      ordered_bidders = lot.order_bidders_by_total_price.
+                            reject { |bidder| bidder.has_item_with_unit_price_equals_zero(lot) }
+
+      bidders.each do |bidder|
+        classification_repository.create!(
+          :total_value => bidder.proposal_total_value_by_lot(lot),
+          :classification => classify_item(bidder, ordered_bidders),
+          :bidder => bidder,
+          :classifiable => lot
+        )
+      end
+    end
   end
 
-  def lowest_price_by_lot(bidder)
-    lots_with_items.each do |lot|
-      classification_repository.create!(
-        :total_value => bidder.proposal_total_value_by_lot(lot),
-        :classification => bidder.classification_by_lot(lot),
-        :bidder => bidder,
-        :classifiable => lot
-      )
-    end
+  def classify_item(item, ordered_items)
+    item_index = ordered_items.index(item)
+
+    item_index.nil? ? -1 : item_index.succ
   end
 end

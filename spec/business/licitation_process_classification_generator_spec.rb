@@ -3,18 +3,18 @@ require 'active_support/core_ext/module/delegation'
 require 'app/business/licitation_process_classification_generator'
 
 describe LicitationProcessClassificationGenerator do
+  subject do
+    LicitationProcessClassificationGenerator.new(
+      licitation_process,
+      classification_repository,
+      proposal_repository
+    )
+  end
 
   let :licitation_process do
     double('LicitationProcess',
       :id => 1,
-      :licitation_process_lots => [lot],
-      :modality => 'modality',
-      :type_of_calculation => 'lowest_total_price_by_item',
       :destroy_all_licitation_process_classifications => true,
-      :lots_with_items => [lot],
-      :all_licitation_process_classifications => [],
-      :items => [],
-      :bidders => []
     )
   end
 
@@ -22,104 +22,305 @@ describe LicitationProcessClassificationGenerator do
     double('LicitationProcessClassification')
   end
 
-  let :lot do
-    double(:administrative_process_budget_allocation_items => [item], :licitation_process_classifications => [])
+  let :proposal_repository do
+    double('BidderProposal')
   end
 
-  let :item do
-    double(:material => double, :unit_price => 10, :licitation_process_classifications => [])
-  end
-
-  let :bidder do
-    double('Bidder', :id => 11, :proposals => proposals, :benefited => false, :status => :enabled,
-           :administrative_process_budget_allocation_item => item)
-  end
-
-  let :bidders do
-    [bidder]
-  end
-
-  let :proposal do
-    double(:administrative_process_budget_allocation_item => item, :unit_price => 8,
-           :disqualified => false, :quantity => 5, :situation => nil, :classification => nil)
-  end
-
-  let :proposals do
-    [proposal]
-  end
-
-  let :classification_1 do
-    double(:classifiable_type => 'Bidder', :classifiable_id => 1, :disqualified? => false, :classification => 2)
-  end
-
-  let :classification_2 do
-    double(:classifiable_type => 'Bidder', :classifiable_id => 1, :disqualified? => false, :classification => 1)
-  end
-
-  let :generator do
-    LicitationProcessClassificationGenerator.new(licitation_process, classification_repository)
-  end
-
-  context 'generate classifications by type of calculation' do
+  context 'classification by lowest_global_price' do
     before do
-      licitation_process.stub(:bidders => [bidder])
+      licitation_process.stub(
+        :type_of_calculation => 'lowest_global_price',
+        :bidders => [bidder1, bidder2, bidder3]
+      )
     end
 
-    it "when type of calculation equals lowest total price by item" do
-      licitation_process.stub(:type_of_calculation => 'lowest_total_price_by_item')
-
-      bidder.should_receive(:classification_by_item).with(proposals.first).and_return(1)
-
-      classification_repository.should_receive(:create!).with(
-        :unit_value => 8, :total_value => 40, :classification => 1, :bidder => bidder, :classifiable => item)
-
-      generator.generate!
+    let :bidder1 do
+      double(:bidder1)
     end
 
-    it "when type of calculation equals lowest global price" do
-      licitation_process.stub(:type_of_calculation => 'lowest_global_price')
-
-      bidder.should_receive(:global_classification).and_return(1)
-      bidder.should_receive(:total_price).and_return(50)
-
-      classification_repository.should_receive(:create!).with(
-        :total_value => 50, :classification => 1, :bidder => bidder, :classifiable => bidder)
-
-      generator.generate!
+    let :bidder2 do
+      double(:bidder2)
     end
 
-    it "when type of calculation equals lowest total price by item" do
-      licitation_process.stub(:type_of_calculation => 'lowest_price_by_lot')
+    let :bidder3 do
+      double(:bidder3)
+    end
 
-      bidder.should_receive(:classification_by_lot).with(lot).and_return(1)
-      bidder.should_receive(:proposal_total_value_by_lot).with(lot).and_return(100)
+    it 'should classify bidders' do
+      bidder1.stub(:total_price).and_return(10)
+      bidder1.stub(:has_item_with_unit_price_equals_zero => false)
+
+      bidder2.stub(:total_price).and_return(15)
+      bidder2.stub(:has_item_with_unit_price_equals_zero => false)
+
+      bidder3.stub(:total_price).and_return(5)
+      bidder3.stub(:has_item_with_unit_price_equals_zero => false)
 
       classification_repository.should_receive(:create!).with(
-        :total_value => 100, :classification => 1, :bidder => bidder, :classifiable => lot)
+        :total_value => 10,
+        :classification => 2,
+        :bidder => bidder1,
+        :classifiable => bidder1
+      )
 
-      generator.generate!
+      classification_repository.should_receive(:create!).with(
+        :total_value => 15,
+        :classification => 3,
+        :bidder => bidder2,
+        :classifiable => bidder2
+      )
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 5,
+        :classification => 1,
+        :bidder => bidder3,
+        :classifiable => bidder3
+      )
+
+      subject.generate!
+    end
+
+    it 'should classify disqualifying bidders that has_item_with_unit_price_equals_zero' do
+      bidder1.stub(:total_price).and_return(10)
+      bidder1.stub(:has_item_with_unit_price_equals_zero => false)
+
+      bidder2.stub(:total_price).and_return(0)
+      bidder2.stub(:has_item_with_unit_price_equals_zero => true)
+
+      bidder3.stub(:total_price).and_return(5)
+      bidder3.stub(:has_item_with_unit_price_equals_zero => false)
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 10,
+        :classification => 2,
+        :bidder => bidder1,
+        :classifiable => bidder1
+      )
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 0,
+        :classification => -1,
+        :bidder => bidder2,
+        :classifiable => bidder2
+      )
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 5,
+        :classification => 1,
+        :bidder => bidder3,
+        :classifiable => bidder3
+      )
+
+      subject.generate!
     end
   end
 
-  context 'check if winner has item with zero in unit price' do
+  context 'classification by lowest_total_price_by_item' do
     before do
-      licitation_process.stub(:all_licitation_process_classifications => [classification_1, classification_2],
-                              :bidders => [])
+      licitation_process.stub(
+        :type_of_calculation => 'lowest_total_price_by_item',
+        :items => [item],
+      )
     end
 
-    it 'should check if has classification -1' do
-      expect(classification_1.classification).to eq 2
-      expect(classification_2.classification).to eq 1
-
-      generator.generate!
+    let :item do
+      double(:item, :id => 1)
     end
 
-    it 'should update classification' do
-      classification_2.stub(:disqualified? => true, :classification => -1)
+    let :proposal1 do
+      double(:proposal1, :bidder => 'Bidder1')
+    end
 
-      classification_1.should_receive(:update_column).with(:classification, 1).and_return(true)
+    let :proposal2 do
+      double(:proposal2, :bidder => 'Bidder2')
+    end
 
-      generator.generate!
+    let :proposal3 do
+      double(:proposal3, :bidder => 'Bidder3')
+    end
+
+    it 'should classify proposals' do
+      proposal1.stub(:unit_price).and_return(10)
+      proposal1.stub(:total_price).and_return(20)
+      proposal1.stub(:administrative_process_budget_allocation_item).and_return(item)
+
+      proposal2.stub(:unit_price).and_return(1)
+      proposal2.stub(:total_price).and_return(5)
+      proposal2.stub(:administrative_process_budget_allocation_item).and_return(item)
+
+      proposal3.stub(:unit_price).and_return(5)
+      proposal3.stub(:total_price).and_return(15)
+      proposal3.stub(:administrative_process_budget_allocation_item).and_return(item)
+
+      proposal_repository.should_receive(:by_item_order_by_unit_price).
+                          with(1).and_return([proposal2, proposal3, proposal1])
+
+     classification_repository.should_receive(:create!).with(
+       :unit_value => 1,
+       :total_value => 5,
+       :classification => 1,
+       :bidder => 'Bidder2',
+       :classifiable => item
+     )
+
+     classification_repository.should_receive(:create!).with(
+       :unit_value => 5,
+       :total_value => 15,
+       :classification => 2,
+       :bidder => 'Bidder3',
+       :classifiable => item
+     )
+
+     classification_repository.should_receive(:create!).with(
+       :unit_value => 10,
+       :total_value => 20,
+       :classification => 3,
+       :bidder => 'Bidder1',
+       :classifiable => item
+     )
+
+      subject.generate!
+    end
+
+    it 'should classify disqualifying proposals that has unit_price less or equal zero' do
+      proposal1.stub(:unit_price).and_return(10)
+      proposal1.stub(:total_price).and_return(20)
+      proposal1.stub(:administrative_process_budget_allocation_item).and_return(item)
+
+      proposal2.stub(:unit_price).and_return(0)
+      proposal2.stub(:total_price).and_return(0)
+      proposal2.stub(:administrative_process_budget_allocation_item).and_return(item)
+
+      proposal3.stub(:unit_price).and_return(5)
+      proposal3.stub(:total_price).and_return(15)
+      proposal3.stub(:administrative_process_budget_allocation_item).and_return(item)
+
+      proposal_repository.should_receive(:by_item_order_by_unit_price).
+                          with(1).and_return([proposal2, proposal3, proposal1])
+
+     classification_repository.should_receive(:create!).with(
+       :unit_value => 0,
+       :total_value => 0,
+       :classification => -1,
+       :bidder => 'Bidder2',
+       :classifiable => item
+     )
+
+     classification_repository.should_receive(:create!).with(
+       :unit_value => 5,
+       :total_value => 15,
+       :classification => 1,
+       :bidder => 'Bidder3',
+       :classifiable => item
+     )
+
+     classification_repository.should_receive(:create!).with(
+       :unit_value => 10,
+       :total_value => 20,
+       :classification => 2,
+       :bidder => 'Bidder1',
+       :classifiable => item
+     )
+
+      subject.generate!
+    end
+  end
+
+  context '#lowest_price_by_lot' do
+    before do
+      licitation_process.stub(
+        :type_of_calculation => 'lowest_price_by_lot',
+        :bidders => [bidder1, bidder2, bidder3],
+        :licitation_process_lots => [lot]
+      )
+    end
+
+    let :lot do
+      double(:lot)
+    end
+
+    let :bidder1 do
+      double(:bidder1)
+    end
+
+    let :bidder2 do
+      double(:bidder2)
+    end
+
+    let :bidder3 do
+      double(:bidder3)
+    end
+
+    it 'should classify by lot' do
+      lot.should_receive(:order_bidders_by_total_price).and_return([bidder2, bidder1, bidder3])
+
+      bidder1.stub(:has_item_with_unit_price_equals_zero => false)
+      bidder1.stub(:proposal_total_value_by_lot).with(lot).and_return(10)
+
+      bidder2.stub(:has_item_with_unit_price_equals_zero => false)
+      bidder2.stub(:proposal_total_value_by_lot).with(lot).and_return(5)
+
+      bidder3.stub(:has_item_with_unit_price_equals_zero => false)
+      bidder3.stub(:proposal_total_value_by_lot).with(lot).and_return(15)
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 10,
+        :classification => 2,
+        :bidder => bidder1,
+        :classifiable => lot
+      )
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 5,
+        :classification => 1,
+        :bidder => bidder2,
+        :classifiable => lot
+      )
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 15,
+        :classification => 3,
+        :bidder => bidder3,
+        :classifiable => lot
+      )
+
+      subject.generate!
+    end
+
+    it 'should classify disqualifying bidders that has_item_with_unit_price_equals_zero' do
+      lot.should_receive(:order_bidders_by_total_price).and_return([bidder2, bidder1, bidder3])
+
+      bidder1.stub(:has_item_with_unit_price_equals_zero => false)
+      bidder1.stub(:proposal_total_value_by_lot).with(lot).and_return(10)
+
+      bidder2.stub(:has_item_with_unit_price_equals_zero => true)
+      bidder2.stub(:proposal_total_value_by_lot).with(lot).and_return(0)
+
+      bidder3.stub(:has_item_with_unit_price_equals_zero => false)
+      bidder3.stub(:proposal_total_value_by_lot).with(lot).and_return(15)
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 10,
+        :classification => 1,
+        :bidder => bidder1,
+        :classifiable => lot
+      )
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 0,
+        :classification => -1,
+        :bidder => bidder2,
+        :classifiable => lot
+      )
+
+      classification_repository.should_receive(:create!).with(
+        :total_value => 15,
+        :classification => 2,
+        :bidder => bidder3,
+        :classifiable => lot
+      )
+
+      subject.generate!
     end
   end
 end

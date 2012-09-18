@@ -137,30 +137,6 @@ class Bidder < Compras::Model
     BigDecimal.new(total || 0)
   end
 
-  def global_classification
-    bidders = licitation_process.bidders.sort_by(&:total_price)
-
-    classification = bidders.index(self).succ
-    classification = -1 if has_item_with_unit_price_equals_zero
-    classification
-  end
-
-  def classification_by_lot(lot)
-    items_with_creditor = BidderProposal.by_lot_item_order_by_unit_price(lot.id)
-
-    classification = items_with_creditor.index { |item| item.creditor_id.to_i == creditor_id.to_i }.succ
-    classification = -1 if has_item_with_unit_price_equals_zero(lot)
-    classification
-  end
-
-  def classification_by_item(proposal)
-    proposals = BidderProposal.by_item_order_by_unit_price(proposal.administrative_process_budget_allocation_item)
-
-    classification = proposals.index(proposal).succ
-    classification = -1 if proposal.unit_price <= 0
-    classification
-  end
-
   def has_item_with_unit_price_equals_zero(lot = nil)
     proposals.any_without_unit_price?(lot)
   end
