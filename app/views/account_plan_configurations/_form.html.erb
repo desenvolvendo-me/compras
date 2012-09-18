@@ -9,7 +9,12 @@
 </div>
 
 <%= f.input :description %>
-<%= f.input :mask, :disabled => true %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :mask, :disabled => true %>
+  </div>
+</div>
 
 <%= render 'account_plan_levels', :f => f %>
 
