@@ -2,6 +2,8 @@
 source 'http://rubygems.org'
 source 'https://gems.gemfury.com/SEqawpNNEx65yrzYS9p8/'
 
+ruby "1.9.3"
+
 gem 'rails', '3.2.8'
 
 platform :jruby do
