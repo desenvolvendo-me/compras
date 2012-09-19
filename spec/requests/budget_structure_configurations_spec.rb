@@ -101,4 +101,58 @@ feature "BudgetStructureConfigurations" do
     expect(page).to_not have_content '1234'
     expect(page).to_not have_content 'Configuração do Detran'
   end
+
+  scenario 'create with error' do
+    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
+
+    click_link 'Criar Configuração de Estrutura Orçamentaria'
+
+    click_button 'Adicionar Estrutura'
+
+    within 'div.nested-budget-structure-level' do
+      fill_in 'Nível', :with => '1'
+      fill_in 'Descrição', :with => 'Uso interno'
+      fill_in 'Dígitos', :with => '2'
+      select 'Barra', :from => 'Separador'
+    end
+
+    click_button 'Adicionar Estrutura'
+
+    within 'div.nested-budget-structure-level:nth-child(2)' do
+      fill_in 'Nível', :with => '2'
+      fill_in 'Descrição', :with => 'Indicador de quantidade'
+      fill_in 'Dígitos', :with => '2'
+      select 'Hífem', :from => 'Separador'
+    end
+
+    click_button 'Adicionar Estrutura'
+
+    within 'div.nested-budget-structure-level:nth-child(3)' do
+      fill_in 'Nível', :with => '3'
+      fill_in 'Descrição', :with => 'Definido pelo fornecedor'
+      fill_in 'Dígitos', :with => '2'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to_not have_notice 'Configuração de Estrutura Orçamentaria criado com sucesso.'
+
+    within 'div.nested-budget-structure-level:nth-child(1)' do
+      expect(page).to have_field 'Nível', :with => '1'
+      expect(page).to have_field 'Descrição', :with => 'Uso interno'
+      expect(page).to have_field 'Dígitos', :with => '2'
+    end
+
+    within 'div.nested-budget-structure-level:nth-child(2)' do
+      expect(page).to have_field 'Nível', :with => '2'
+      expect(page).to have_field 'Descrição', :with => 'Indicador de quantidade'
+      expect(page).to have_field 'Dígitos', :with => '2'
+    end
+
+    within 'div.nested-budget-structure-level:nth-child(3)' do
+      expect(page).to have_field 'Nível', :with => '3'
+      expect(page).to have_field 'Descrição', :with => 'Definido pelo fornecedor'
+      expect(page).to have_field 'Dígitos', :with => '2'
+    end
+  end
 end

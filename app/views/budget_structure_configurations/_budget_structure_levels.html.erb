@@ -10,7 +10,7 @@
   </div>
 
   <%= mustache 'budget-structure-level-template' do %>
-    <%= f.association :budget_structure_levels_attributes, :collection => f.object.budget_structure_levels.build, :index => '{{uuid_budget_structure_level}}' do |p| %>
+    <%= f.association :budget_structure_levels_attributes, :collection => f.object.budget_structure_levels.build, :index => '{{uuid-budget-structure-level}}' do |p| %>
       <%= render 'budget_structure_levels/form', :f => p %>
     <% end %>
   <% end %>
