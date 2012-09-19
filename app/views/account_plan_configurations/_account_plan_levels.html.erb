@@ -10,7 +10,7 @@
   </div>
 
   <%= mustache 'account-plan-level-template' do %>
-    <%= f.association :account_plan_levels_attributes, :collection => f.object.account_plan_levels.build, :index => '{{uuid_account_plan_level}}' do |p| %>
+    <%= f.association :account_plan_levels_attributes, :collection => f.object.account_plan_levels.build, :index => '{{uuid-account-plan-level}}' do |p| %>
       <%= render 'account_plan_levels/form', :f => p %>
     <% end %>
   <% end %>
