@@ -1,5 +1,5 @@
 <div class="buttons">
-  <div class="button-row">
+  <p>
     <% if f.object.persisted? %>
       <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.id), :class => "button primary") %>
       <%= link_to('Publicações', licitation_process_publications_path(:licitation_process_id => resource.id), :class => "button primary") %>
@@ -10,11 +10,9 @@
       <%= link_to('Lotes de itens', licitation_process_lots_path(:licitation_process_id => resource.id), :class => "button primary") %>
     <% end %>
     <%= link_to('Pareceres da comissão julgadora', judgment_commission_advices_path(:licitation_process_id => resource.id), :class => "button primary") %>
-  </div>
+  </p>
 
-  <div class="button-row-last">
-    <%= f.button :submit if f.object.updatable? %>
-    <%= link_to('Processo Administrativo', edit_administrative_process_path(resource.administrative_process), :class => 'button primary') %>
-    <%= link_to('Voltar à listagem', licitation_processes_path, :class => 'button primary') %>
-  </div>
+  <%= f.button :submit if f.object.updatable? %>
+  <%= link_to('Processo Administrativo', edit_administrative_process_path(resource.administrative_process), :class => 'button primary') %>
+  <%= link_to('Voltar à listagem', licitation_processes_path, :class => 'button primary') %>
 </div>
