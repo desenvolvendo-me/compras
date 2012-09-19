@@ -1,17 +1,15 @@
-<div class="nested-form" data-nested-form="account-plan-level" data-right="true">
-  <p>
-    <input type="button" class="button affirmative add-account-plan-level" value="Adicionar Estrutura">
-  </p>
+<p>
+  <input type="button" class="button affirmative add-account-plan-level" value="Adicionar Estrutura">
+</p>
 
-  <div id="account-plan-level">
-    <%= f.association :account_plan_levels, :collection => localized(f.object.account_plan_levels) do |p| %>
-      <%= render 'account_plan_levels/form', :f => p %>
-    <% end %>
-  </div>
+<div id="account-plan-level" class="nested-form" data-nested-form="account-plan-level" data-right="true">
+  <%= f.association :account_plan_levels, :collection => localized(f.object.account_plan_levels) do |p| %>
+    <%= render 'account_plan_levels/form', :f => p %>
+  <% end %>
+</div>
 
   <%= mustache 'account-plan-level-template' do %>
     <%= f.association :account_plan_levels_attributes, :collection => f.object.account_plan_levels.build, :index => '{{uuid-account-plan-level}}' do |p| %>
       <%= render 'account_plan_levels/form', :f => p %>
     <% end %>
   <% end %>
-</div>
