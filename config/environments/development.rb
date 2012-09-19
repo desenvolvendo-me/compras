@@ -37,13 +37,4 @@ Compras::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
   ActionMailer::Base.default :from => 'noreply@nobesistemas.com.br'
-
-  PDFKit.configure do |config|
-    config.default_options = {
-      :page_size => 'A4',
-      :print_media_type => true,
-      :encoding => 'UTF-8'
-    }
-    config.root_url = "http://0.0.0.0:8080"
-  end
 end
