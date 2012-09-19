@@ -1,5 +1,5 @@
 class PurchaseSolicitationServiceStatus < EnumerateIt::Base
-  associate_values :pending, :liberated, :not_liberated, :attended, :annulled, :returned
+  associate_values :pending, :liberated, :not_liberated, :attended, :annulled, :returned, :partially_fulfilled
 
   def self.liberation_availables
     to_a.select do |item|
