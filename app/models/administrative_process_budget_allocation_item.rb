@@ -57,7 +57,9 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   end
 
   def unit_price_by_bidder(bidder)
-    bidder.proposals.select { |item| item.administrative_process_budget_allocation_item == self }.first.unit_price
+    first = bidder.proposals.select { |item| item.administrative_process_budget_allocation_item == self }.first
+
+    first.nil? ? 0 : first.unit_price
   end
 
   def total_value_by_bidder(bidder)
