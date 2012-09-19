@@ -1,0 +1,105 @@
+<div id="record">
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= resource_class.human_attribute_name :name %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.creditable %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= Person.human_attribute_name :email %>
+        </th>
+        <th>
+          <%= Person.human_attribute_name :phone %>
+        </th>
+        <th>
+          <%= Person.human_attribute_name :fax %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.email %>
+        </td>
+        <td>
+          <%= resource.phone %>
+        </td>
+        <td>
+          <%= resource.fax %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= Address.human_attribute_name :neighborhood %>
+        </th>
+        <th>
+          <%= Person.human_attribute_name :address %>
+        </th>
+        <th>
+          <%= Address.human_attribute_name :zip_code %>
+        <th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.neighborhood %>
+        </td>
+        <td>
+          <%= resource.address %>
+        </td>
+        <td>
+          <%= resource.zip_code %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>
+          <%= Address.human_attribute_name :city %>
+        </th>
+        <th>
+          <%= Address.human_attribute_name :state %>
+        </th>
+        <th>
+          <%= Address.human_attribute_name :country %>
+        <th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= resource.city %>
+        </td>
+        <td>
+          <%= resource.state %>
+        </td>
+        <td>
+          <%= resource.country %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

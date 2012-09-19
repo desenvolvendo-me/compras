@@ -19,6 +19,42 @@ feature "Agreements" do
     end
   end
 
+  scenario 'checking creditor modal info in a new agreement' do
+    Creditor.make!(:sobrinho)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Criar Convênio'
+
+    within_tab 'Participantes' do
+      click_button 'Adicionar Participante'
+
+      fill_modal 'Credor', :with => 'Gabriel Sobrinho'
+
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content '(33) 3333-3333'
+    expect(page).to have_content 'Curitiba'
+  end
+
+  scenario 'checking creditor modal info in a existing agreement' do
+    Agreement.make!(:apoio_ao_turismo)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Participantes' do
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+    expect(page).to have_content '(33) 3333-3333'
+    expect(page).to have_content 'Curitiba'
+  end
+
   scenario 'create a new agreement' do
     AgreementKind.make!(:contribuicao)
     RegulatoryAct.make!(:sopa)
@@ -311,14 +347,14 @@ feature "Agreements" do
     end
 
     within_tab 'Participantes' do
-      within '.nested-agreement-participants:nth-child(1)' do
+      within '.nested-agreement-participants:nth-child(2)' do
         expect(page).to have_field 'Credor', :with => 'Wenderson Malheiros'
         expect(page).to have_field 'Valor', :with => '390.000,00'
         expect(page).to have_select 'Tipo', :selected => 'Convenente'
         expect(page).to have_select 'Esfera governamental', :selected => 'Federal'
       end
 
-      within '.nested-agreement-participants:nth-child(2)' do
+      within '.nested-agreement-participants:nth-child(1)' do
         expect(page).to have_field 'Credor', :with => 'Gabriel Sobrinho'
         expect(page).to have_field 'Valor', :with => '390.000,00'
         expect(page).to have_select 'Tipo', :selected => 'Concedente'

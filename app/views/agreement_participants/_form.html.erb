@@ -4,6 +4,10 @@
 
   <%= f.input :creditor %>
 
+  <p>
+    <%= link_to_modal_info "#{'agreement_agreement_participants_attributes_' unless f.object.persisted?}#{f.nested_identifier}_creditor", f.object.creditor %>
+  </p>
+
   <div class="yui3-g">
     <div class="yui3-u-1-4">
       <%= f.input :value %>
