@@ -19,7 +19,7 @@ end
 gem 'activerecord-connections', '0.0.3'
 
 gem 'unico', '1.1.0'
-gem 'devise', '2.0.4'
+gem 'devise', '2.1.2'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
 gem 'pdfkit', :git => 'git://github.com/comogo/pdfkit.git'
