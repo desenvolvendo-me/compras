@@ -254,6 +254,9 @@ feature "Agreements" do
     end
 
     within_tab 'Ocorrências' do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Data'
+
       click_button 'Remover'
 
       click_button 'Adicionar Ocorrência'
