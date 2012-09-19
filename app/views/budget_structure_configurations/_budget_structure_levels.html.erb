@@ -1,17 +1,15 @@
-<div class="nested-form" data-nested-form="budget-structure-level" data-right="true">
-  <p>
-    <input type="button" class="button affirmative add-budget-structure-level" value="Adicionar Estrutura">
-  </p>
+<p>
+  <input type="button" class="button affirmative add-budget-structure-level" value="Adicionar Estrutura">
+</p>
 
-  <div id="budget-structure-level">
-    <%= f.association :budget_structure_levels, :collection => localized(f.object.budget_structure_levels) do |p| %>
-      <%= render 'budget_structure_levels/form', :f => p %>
-    <% end %>
-  </div>
+<div id="budget-structure-level" class="nested-form" data-nested-form="budget-structure-level" data-right="true">
+  <%= f.association :budget_structure_levels, :collection => localized(f.object.budget_structure_levels) do |p| %>
+    <%= render 'budget_structure_levels/form', :f => p %>
+  <% end %>
+</div>
 
   <%= mustache 'budget-structure-level-template' do %>
     <%= f.association :budget_structure_levels_attributes, :collection => f.object.budget_structure_levels.build, :index => '{{uuid-budget-structure-level}}' do |p| %>
       <%= render 'budget_structure_levels/form', :f => p %>
     <% end %>
   <% end %>
-</div>
