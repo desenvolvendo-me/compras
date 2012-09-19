@@ -396,8 +396,8 @@ feature "LicitationProcesses" do
     click_link 'Wenderson Malheiros'
 
     within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Indefinido'
-      expect(page).to have_field 'Classificação', :with => ''
+      expect(page).to have_select 'Situação', :selected => 'Perdeu'
+      expect(page).to have_field 'Classificação', :with => '2'
     end
 
     click_link 'Cancelar'

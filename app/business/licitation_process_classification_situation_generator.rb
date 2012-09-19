@@ -25,75 +25,77 @@ class LicitationProcessClassificationSituationGenerator
 
   protected
 
-  def generate_situation!
-    all_licitation_process_classifications.each { |c| c.lost! if c.disqualified? }
+  def set_lost_to_all_classifications_disqualified
+    all_licitation_process_classifications.disqualified.each do |c|
+      c.lose!
+    end
+  end
 
-    classifications = all_licitation_process_classifications.reject(&:disqualified?).sort_by(&:classification)
-    first = classifications.first
+  def is_benefited_classification?(classification_a, classification_b)
+    classification_a.benefited == classification_b.benefited || !consider_law_of_proposals
+  end
+
+  def generate_situation!
+    set_lost_to_all_classifications_disqualified
+
+    classifications = all_licitation_process_classifications.reject(&:disqualified?).
+                                                             sort_by(&:classification)
+    classification_a = classifications.first
 
     if classifications.size == 1
-      first.won!
-      first.save!
+      classification_a.win!
+      return
     end
 
-    classifications.reject { |c| c == first }.each do |classification|
-      if first.benefited && classification.benefited || !first.benefited && !classification.benefited || !consider_law_of_proposals
-        first = classificate_by_same_company_size(first, classification)
+    classifications.reject { |c| c == classification_a }.each do |classification_b|
+      if is_benefited_classification?(classification_a, classification_b)
+        classification_a = classificate_by_same_company_size(classification_a, classification_b)
       else
-        first = classificate_by_different_company_size(first, classification)
+        classification_a = classificate_by_different_company_size(classification_a, classification_b)
       end
     end
   end
 
-  def classificate_by_same_company_size(first, classification)
-    if classification.total_value == first.total_value
-      first.equalized!
-      classification.equalized!
-    elsif classification.total_value < first.total_value
-      first.lost!
-      classification.won!
+  def classificate_by_same_company_size(classification_a, classification_b)
+    if classification_b.total_value == classification_a.total_value
+      classification_a.equalize!
+      classification_b.equalize!
+    elsif classification_b.total_value < classification_a.total_value
+      classification_a.lose!
+      classification_b.win!
     else
-      first.won!
-      classification.lost!
+      classification_a.win!
+      classification_b.lose!
     end
 
-    first.save!
-    classification.save!
-
-    first
+    classification_a
   end
 
   # should equalize if benefited company has until 10% difference of big company proposal
-  def classificate_by_different_company_size(first, classification)
-    first_benefited_value = first.benefited_value(current_percentage)
-    classification_benefited_value = classification.benefited_value(current_percentage)
+  def classificate_by_different_company_size(classification_a, classification_b)
+    benefited_value_a = classification_a.benefited_value(current_percentage)
+    benefited_value_b = classification_b.benefited_value(current_percentage)
 
-    if (first.benefited && first.total_value > classification.total_value && first_benefited_value <= classification.total_value) ||
-      (classification.benefited && classification.total_value > first.total_value && classification_benefited_value <= first.total_value) ||
-      (first_benefited_value == classification_benefited_value)
+    if (classification_a.benefited && classification_a.total_value > classification_b.total_value && benefited_value_a <= classification_b.total_value) ||
+       (classification_b.benefited && classification_b.total_value > classification_a.total_value && benefited_value_b <= classification_a.total_value) ||
+       (benefited_value_a == benefited_value_b)
 
-      first.equalized!
-      classification.equalized!
-
-    elsif first_benefited_value < classification_benefited_value
-      first.won!
-      classification.lost!
+      classification_a.equalize!
+      classification_b.equalize!
+    elsif benefited_value_a < benefited_value_b
+      classification_a.win!
+      classification_b.lose!
     else
-      classification.won!
-      first.lost!
+      classification_b.win!
+      classification_a.lose!
     end
 
-    classification.save!
-    first.save!
-
-    first
+    classification_a
   end
 
   def change_proposal_situation_by_bidder!
     bidders.each do |bidder|
-      unless bidder.licitation_process_classifications_by_classifiable.empty?
-        classification = bidder.licitation_process_classifications_by_classifiable.first
-
+      bidder.licitation_process_classifications_by_classifiable.each do |classification|
         change_proposals_situation!(bidder.proposals, classification)
       end
     end
@@ -101,9 +103,7 @@ class LicitationProcessClassificationSituationGenerator
 
   def change_proposal_situation_by_lot!
     lots_with_items.each do |lot|
-      unless lot.licitation_process_classifications.empty?
-        classification = lot.licitation_process_classifications.first
-
+      lot.licitation_process_classifications.each do |classification|
         proposals = classification.proposals.map { |p| p if p.licitation_process_lot == lot }
 
         change_proposals_situation!(proposals, classification)
@@ -113,9 +113,7 @@ class LicitationProcessClassificationSituationGenerator
 
   def change_proposal_situation_by_item!
     items.each do |item|
-      unless item.licitation_process_classifications.empty?
-        classification = item.licitation_process_classifications.first
-
+      item.licitation_process_classifications.each do |classification|
         proposals = classification.proposals.map { |p| p if p.administrative_process_budget_allocation_item == item }
 
         change_proposals_situation!(proposals, classification)

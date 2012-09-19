@@ -33,4 +33,25 @@ describe LicitationProcessClassification do
       expect(subject.benefited_value(10)).to eq 90
     end
   end
+
+  it 'should set situation as lost when lose!' do
+    subject.should_receive(:lost!)
+    subject.should_receive(:save!)
+
+    subject.lose!
+  end
+
+  it 'should set situation as won when win!' do
+    subject.should_receive(:won!)
+    subject.should_receive(:save!)
+
+    subject.win!
+  end
+
+    it 'should set situation as equalized when equalize!' do
+    subject.should_receive(:equalized!)
+    subject.should_receive(:save!)
+
+    subject.equalize!
+  end
 end

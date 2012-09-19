@@ -13,6 +13,8 @@ class LicitationProcessClassification < Compras::Model
   orderize :id
   filterize
 
+  scope :disqualified, where { classification.eq(-1) }
+
   def disqualified?
     classification == -1
   end
@@ -21,5 +23,20 @@ class LicitationProcessClassification < Compras::Model
     return total_value unless benefited
 
     total_value - (total_value * current_percentage / 100)
+  end
+
+  def lose!
+    lost!
+    save!
+  end
+
+  def win!
+    won!
+    save!
+  end
+
+  def equalize!
+    equalized!
+    save!
   end
 end
