@@ -4,25 +4,14 @@
   <input type="button" class="button affirmative add-administrative-process-budget-allocation" value="Adicionar Dotação">
 </p>
 
-<div id="allocations">
+<div id="administrative-process-budget-allocation" data-nested-form="administrative-process-budget-allocation" data-append-item=false>
   <%= f.association :administrative_process_budget_allocations, :collection => localized(f.object.administrative_process_budget_allocations) do |p| %>
     <%= render 'administrative_process_budget_allocations/form', :f => p %>
   <% end %>
 </div>
 
-<%= mustache 'administrative-process-budget-allocations-template' do %>
-  <%= f.association :administrative_process_budget_allocations_attributes, :collection => f.object.administrative_process_budget_allocations.build, :index => '{{uuid_administrative_process_budget_allocation}}' do |p| %>
+<%= mustache 'administrative-process-budget-allocation-template' do %>
+  <%= f.association :administrative_process_budget_allocations_attributes, :collection => f.object.administrative_process_budget_allocations.build, :index => '{{uuid-administrative-process-budget-allocation}}' do |p| %>
     <%= render 'administrative_process_budget_allocations/form', :f => p %>
   <% end %>
 <% end %>
-
-<script>
-  $("#administrative-process-budget-allocations-template").nestedForm({
-    add: '.add-administrative-process-budget-allocation',
-    remove: '.remove-administrative-process-budget-allocation',
-    target: '#allocations',
-    uuid: 'uuid_administrative_process_budget_allocation',
-    fieldToRemove: '.administrative-process-budget-allocation',
-    appendItem: false
-  });
-</script>

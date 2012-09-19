@@ -54,7 +54,7 @@
 
     $("#budget-allocations").append(
       $("#direct-purchase-budget-allocations-template").mustache(budgetAllocationBinds)
-      ).trigger("append.mustache");
+      ).trigger("nestedForm:afterAdd");
 
     fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
 
@@ -74,7 +74,7 @@
 
     $(itemsID).append(
       $(itemMustacheId).mustache(budgetAllocationItemBinds)
-      ).trigger("append.mustache");
+      ).trigger("nestedForm:afterAdd");
 
     fillBudgetAllocationItem(budgetAllocationItemUUID, budget_allocation_item);
   }
@@ -204,7 +204,7 @@
     setLicitationExemption();
   });
 
-  $('form.direct_purchase').on('append.mustache', function () {
+  $('form.direct_purchase').on('nestedForm:afterAdd', function () {
     calcItemOrder();
   });
 

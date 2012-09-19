@@ -21,7 +21,7 @@
     add: '.add-price-collection-lot',
     remove: '.remove-price-collection-lot',
     target: '#price-collection-lots',
-    fieldToRemove: '.price-collection-lot',
+    fieldsWrapper: '.price-collection-lot',
     uuid: 'uuid_price_collection_lot',
     appendItem: true
   });
@@ -39,7 +39,7 @@
     });
   }
 
-  $('#price-collection-lots').on('append.mustache remove.mustache', setLotLabels);
+  $('#price-collection-lots').on('nestedForm:afterAdd nestedForm:afterRemove', setLotLabels);
 
   setLotLabels();
 </script>

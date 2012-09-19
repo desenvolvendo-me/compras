@@ -19,7 +19,7 @@ module Helpers
   end
 
   def clear_modal(locator)
-    page.should have_field locator
+    expect(page).to have_field locator
 
     field = page.find_field(locator)
     page.execute_script %{ $('##{field[:id]}').modal({autoClear: true}) }

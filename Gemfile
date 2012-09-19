@@ -19,6 +19,7 @@ end
 gem 'activerecord-connections', '0.0.3'
 
 gem 'unico', '1.1.0'
+gem 'unico-assets', :git => 'git@github.com:nohupbrasil/unico-assets.git'
 gem 'devise', '2.1.2'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 

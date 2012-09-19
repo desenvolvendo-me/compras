@@ -1,9 +1,0 @@
-#sidebar {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  display: none;
-  vertical-align: top;
-  width: 250px;
-  padding-left: 1em;
-}

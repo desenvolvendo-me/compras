@@ -1,26 +1,15 @@
 <p>
-  <input type="button" class="button affirmative add-account" value="Adicionar Conta Bancária">
+  <input type="button" class="button affirmative add-bank-account" value="Adicionar Conta Bancária">
 </p>
 
-<div id="accounts">
+<div id="bank-account" data-nested-form="bank-account" data-append-item=false>
   <%= f.association :accounts, :collection => localized(f.object.accounts) do |p| %>
     <%= render 'creditor_bank_accounts/form', :f => p %>
   <% end %>
 </div>
 
-<%= mustache 'accounts-template' do %>
-  <%= f.association :accounts_attributes, :collection => f.object.accounts.build, :index => '{{uuid_account}}' do |p| %>
+<%= mustache 'bank-account-template' do %>
+  <%= f.association :accounts_attributes, :collection => f.object.accounts.build, :index => '{{uuid-bank-account}}' do |p| %>
     <%= render 'creditor_bank_accounts/form', :f => p %>
   <% end %>
 <% end %>
-
-<script>
-  $("#accounts-template").nestedForm({
-    add: '.add-account',
-    remove: '.remove-account',
-    target: '#accounts',
-    uuid: 'uuid_account',
-    appendItem: false,
-    fieldToRemove: '.creditor-account'
-  });
-</script>

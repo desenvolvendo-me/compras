@@ -1,26 +1,15 @@
 <p>
-  <input type="button" class="button affirmative add_item" value="Adicionar Cronograma de Entrega">
+  <input type="button" class="button affirmative add-delivery-schedule" value="Adicionar Cronograma de Entrega">
 </p>
 
-<div id="delivery_schedules">
+<div id="delivery-schedule" data-nested-form="delivery-schedule" data-append-item=true>
   <%= f.association :delivery_schedules, :collection => localized(f.object.delivery_schedules) do |p| %>
     <%= render 'delivery_schedules/form', :f => p %>
   <% end %>
 </div>
 
-<%= mustache 'delivery_schedules_template' do %>
-  <%= f.association :delivery_schedules_attributes, :collection => f.object.delivery_schedules.build, :index => '{{uuid_delivery_schedule}}' do |p| %>
+<%= mustache 'delivery-schedule-template' do %>
+  <%= f.association :delivery_schedules_attributes, :collection => f.object.delivery_schedules.build, :index => '{{uuid-delivery-schedule}}' do |p| %>
     <%= render 'delivery_schedules/form', :f => p %>
   <% end %>
 <% end %>
-
-<script>
-  $("#delivery_schedules_template").nestedForm({
-    add: '.add_item',
-    remove: '.remove_item',
-    target: '#delivery_schedules',
-    uuid: 'uuid_delivery_schedule',
-    fieldToRemove: '.delivery_schedule',
-    appendItem: true
-  });
-</script>

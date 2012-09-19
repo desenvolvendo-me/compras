@@ -24,7 +24,7 @@
     remove: '.remove-purchase-solicitation-item-group-material',
     target: '#materials-association',
     uuid: 'uuid_purchase_solicitation_item_group_material',
-    fieldToRemove: '.purchase-solicitation-item-group-material',
+    fieldsWrapper: '.purchase-solicitation-item-group-material',
     appendItem: false
   });
 
@@ -69,7 +69,7 @@
         };
 
     url += jQuery.param(params);
-    object.find(".purchase-solicitation-modal").attr('data-modal-url', url);
+    object.find(".purchase-solicitation-modal").data('modal-url', url);
   };
 
   function enableDisablePurchaseSolicitation(object){

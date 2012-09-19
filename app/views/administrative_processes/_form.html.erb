@@ -57,7 +57,7 @@
   })();
 
   $("#administrative_process_purchase_solicitation_item_group_id").on("change", function (event, purchase_solicitation_item_group) {
-    $("#allocations").empty();
+    $("#administrative-process-budget-allocation").empty();
 
     if (purchase_solicitation_item_group) {
       $.each(purchase_solicitation_item_group.purchase_solicitations, function (i, purchase_solicitation) {
@@ -78,11 +78,11 @@
     var budgetAllocationBinds = [];
     var budgetAllocationUUID = _.uniqueId();
 
-    budgetAllocationBinds["uuid_administrative_process_budget_allocation"] = "fresh-" + budgetAllocationUUID;
+    budgetAllocationBinds["uuid-administrative-process-budget-allocation"] = "fresh-" + budgetAllocationUUID;
 
-    $("#allocations").append(
-      $("#administrative-process-budget-allocations-template").mustache(budgetAllocationBinds)
-      ).trigger("append.mustache");
+    $("#administrative-process-budget-allocation").append(
+      $("#administrative-process-budget-allocation-template").mustache(budgetAllocationBinds)
+      ).trigger("nestedForm:afterAdd");
 
     fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
   }

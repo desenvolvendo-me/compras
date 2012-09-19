@@ -98,7 +98,7 @@
     calculateTotalOfItems($(this).closest('.licitation-process-budget-allocation'));
   });
 
-  $('form.licitation_process').on('append.mustache', function (){
+  $('form.licitation_process').on('nestedForm:afterAdd', function (){
     calcItemOrder();
   });
 

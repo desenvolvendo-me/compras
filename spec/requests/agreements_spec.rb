@@ -155,7 +155,7 @@ feature "Agreements" do
 
       click_button 'Adicionar Participante'
 
-      within '.nested-agreement-participants:nth-child(2)' do
+      within '.nested-agreement-participant:nth-child(2)' do
         fill_modal 'Credor', :with => 'Wenderson Malheiros'
 
         fill_in 'Valor', :with => '190.000,00'
@@ -290,13 +290,13 @@ feature "Agreements" do
 
       click_button 'Adicionar Conta'
 
-      within '.agreement-bank-account:nth-child(3)' do
+      within '.nested-agreement-bank-account:nth-child(3)' do
         fill_modal 'Conta bancária *', :with => 'Santander - Folha de Pagamento', :field => 'Descrição'
       end
     end
 
     within_tab 'Participantes' do
-      within '.nested-agreement-participants:nth-child(1)' do
+      within '.nested-agreement-participant:nth-child(1)' do
         click_button 'Remover Participante'
       end
 
@@ -312,7 +312,7 @@ feature "Agreements" do
 
       click_button 'Adicionar Participante'
 
-      within '.nested-agreement-participants:nth-child(4)' do
+      within '.nested-agreement-participant:nth-child(4)' do
         fill_modal 'Credor', :with => 'Wenderson Malheiros'
 
         fill_in 'Valor', :with => '390.000,00'
@@ -333,7 +333,7 @@ feature "Agreements" do
 
       click_button 'Adicionar Aditivo'
 
-      within '.nested-agreement-additives:nth-child(3)' do
+      within '.nested-agreement-additive:nth-child(3)' do
         fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
         select 'Outros', :from => 'Tipo'
         fill_in 'Descrição', :with => 'Terceiro termo de aditamento'
@@ -355,7 +355,7 @@ feature "Agreements" do
 
       click_button 'Adicionar Ocorrência'
 
-      within '.nested-agreement-occurrences:nth-child(3)' do
+      within '.nested-agreement-occurrence:nth-child(3)' do
         fill_in 'Data', :with => '18/06/2012'
         select 'Paralisado', :from => 'Tipo'
         fill_in 'Descrição', :with => 'Falta prestação de contas'
@@ -385,7 +385,7 @@ feature "Agreements" do
     end
 
     within_tab 'Conta Bancária' do
-      within '.agreement-bank-account:nth-child(1)' do
+      within '.nested-agreement-bank-account:nth-child(1)' do
         expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
         expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
@@ -393,7 +393,7 @@ feature "Agreements" do
         expect(page).to have_select 'Status', :selected => 'Inativo'
       end
 
-      within '.agreement-bank-account:nth-child(2)' do
+      within '.nested-agreement-bank-account:nth-child(2)' do
         expect(page).to have_field 'Conta bancária *', :with => 'Santander - Folha de Pagamento'
         expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
@@ -403,14 +403,14 @@ feature "Agreements" do
     end
 
     within_tab 'Participantes' do
-      within '.nested-agreement-participants:nth-child(2)' do
+      within '.nested-agreement-participant:nth-child(2)' do
         expect(page).to have_field 'Credor', :with => 'Wenderson Malheiros'
         expect(page).to have_field 'Valor', :with => '390.000,00'
         expect(page).to have_select 'Tipo', :selected => 'Convenente'
         expect(page).to have_select 'Esfera governamental', :selected => 'Federal'
       end
 
-      within '.nested-agreement-participants:nth-child(1)' do
+      within '.nested-agreement-participant:nth-child(1)' do
         expect(page).to have_field 'Credor', :with => 'Gabriel Sobrinho'
         expect(page).to have_field 'Valor', :with => '390.000,00'
         expect(page).to have_select 'Tipo', :selected => 'Concedente'
@@ -419,7 +419,7 @@ feature "Agreements" do
     end
 
     within_tab 'Aditivos' do
-      within '.nested-agreement-additives:nth-child(1)' do
+      within '.nested-agreement-additive:nth-child(1)' do
         expect(page).to have_field 'Número/Ano', :with => '2/2011'
         expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
         expect(page).to have_select 'Tipo', :selected => 'Prazo'
@@ -427,7 +427,7 @@ feature "Agreements" do
         expect(page).to have_field 'Valor', :with => '200,00'
       end
 
-      within '.nested-agreement-additives:nth-child(2)' do
+      within '.nested-agreement-additive:nth-child(2)' do
         expect(page).to have_field 'Número/Ano', :with => '3/2011'
         expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
         expect(page).to have_select 'Tipo', :selected => 'Outros'
@@ -437,13 +437,13 @@ feature "Agreements" do
     end
 
     within_tab 'Ocorrências' do
-      within '.nested-agreement-occurrences:nth-child(1)' do
+      within '.nested-agreement-occurrence:nth-child(1)' do
         expect(page).to have_field 'Data', :with => '18/06/2012'
         expect(page).to have_select 'Tipo', :selected => 'Paralisado'
         expect(page).to have_field 'Descrição', :with => 'Falta prestação de contas'
       end
 
-      within '.nested-agreement-occurrences:nth-child(2)' do
+      within '.nested-agreement-occurrence:nth-child(2)' do
         expect(page).to have_field 'Data', :with => '15/04/2011'
         expect(page).to have_select 'Tipo', :selected => 'Em andamento'
         expect(page).to have_field 'Descrição', :with => 'Convênio Iniciado'
@@ -487,7 +487,7 @@ feature "Agreements" do
     within_tab 'Participantes' do
       click_button 'Adicionar Participante'
 
-      within '.nested-agreement-participants:nth-child(3)' do
+      within '.nested-agreement-participant:nth-child(3)' do
         fill_modal 'Credor', :with => 'Gabriel Sobrinho'
 
         fill_in 'Valor', :with => '10.000,00'

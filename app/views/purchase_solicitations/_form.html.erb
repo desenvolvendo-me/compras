@@ -60,7 +60,7 @@
     calcItemOrder();
   });
 
-  $('form.purchase_solicitation').on('append.mustache', function(){
+  $('form.purchase_solicitation').on('nestedForm:afterAdd', function(){
     calcItemOrder();
   });
 

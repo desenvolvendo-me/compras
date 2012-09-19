@@ -90,7 +90,7 @@
       label = 'Inscrição especial';
     }
 
-    $('#creditor_creditable').attr('data-modal-url', url);
+    $('#creditor_creditable').data('modal-url', url);
     $('label[for=creditor_creditable]').html(label);
   });
 
@@ -156,15 +156,15 @@
 
     url += jQuery.param(params);
 
-    $(this).closest('.creditor-account').find('.creditor-account-agency').attr('data-modal-url', url);
+    $(this).closest('.nested-bank-account').find('.creditor-account-agency').data('modal-url', url);
   });
 
   function setModalUrlToCnae(){
     var mainCnaeId = $('#creditor_main_cnae_id').val();
-    var urlModal = $('#creditor_cnaes').attr('data-modal-url');
+    var urlModal = $('#creditor_cnaes').data('modal-url');
     urlModal += '&cnaes_remainder[]=' + mainCnaeId;
 
-    $('#creditor_cnaes').attr('data-modal-url', urlModal);
+    $('#creditor_cnaes').data('modal-url', urlModal);
   };
 
   $('#creditor_main_cnae_id').change(setModalUrlToCnae);

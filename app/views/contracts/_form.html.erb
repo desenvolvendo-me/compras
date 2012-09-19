@@ -28,11 +28,11 @@
 
 <script>
   function fillSequence() {
-    $('div.delivery_schedule .destroy[value=false]').each(function(index, item){
-      $(this).parents('.delivery_schedule').find('.auto_sequence').val(index + 1);
+    $('div.nested-delivery-schedule .destroy[value=false]').each(function(index, item){
+      $(this).parents('.nested-delivery-schedule').find('.auto_sequence').val(index + 1);
     });
   }
 
   $('form.contract').on('click', '.remove_item', fillSequence);
-  $('form.contract').on('append.mustache', fillSequence);
+  $('form.contract').on('nestedForm:afterAdd', fillSequence);
 </script>

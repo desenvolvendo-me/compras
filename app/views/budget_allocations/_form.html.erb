@@ -24,7 +24,7 @@
   $('#budget_allocation_function_id').change(function() {
     if (this.value) {
       $('#budget_allocation_subfunction').attr('disabled', false);
-      $('#budget_allocation_subfunction').attr('data-modal-url', subfunctionModalUrl);
+      $('#budget_allocation_subfunction').data('modal-url', subfunctionModalUrl());
     } else {
       $('#budget_allocation_subfunction').attr('disabled', true);
     }

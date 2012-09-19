@@ -130,7 +130,7 @@
     $('#revenue_nature_revenue_category_id').on('change', function(event, revenue_category) {
       if (revenue_category) {
         $('#revenue_nature_revenue_subcategory').attr('disabled', false);
-        $('#revenue_nature_revenue_subcategory').attr('data-modal-url', subcategoryModalUrl);
+        $('#revenue_nature_revenue_subcategory').data('modal-url', subcategoryModalUrl());
         categoryCode = revenue_category.code;
       } else {
         $('#revenue_nature_revenue_subcategory').attr('disabled', true).val('');
@@ -152,7 +152,7 @@
     $('#revenue_nature_revenue_subcategory_id').on('change', function(event, revenue_subcategory) {
       if (revenue_subcategory) {
         $('#revenue_nature_revenue_source').attr('disabled', false);
-        $('#revenue_nature_revenue_source').attr('data-modal-url', sourceModalUrl);
+        $('#revenue_nature_revenue_source').data('modal-url', sourceModalUrl());
         subcategoryCode = revenue_subcategory.code;
       } else {
         $('#revenue_nature_revenue_source').attr('disabled', true).val('');
@@ -172,7 +172,7 @@
       if (revenue_source) {
 
         $('#revenue_nature_revenue_rubric').attr('disabled', false);
-        $('#revenue_nature_revenue_rubric').attr('data-modal-url', rubricModalUrl);
+        $('#revenue_nature_revenue_rubric').data('modal-url', rubricModalUrl());
         sourceCode = revenue_source.code;
       } else {
         $('#revenue_nature_classification').val('').attr('disabled', true);

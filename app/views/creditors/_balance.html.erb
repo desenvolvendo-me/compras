@@ -1,15 +1,15 @@
 <p>
-  <input type="button" class="button affirmative add-creditor-balances" value="Adicionar Balanço">
+  <input type="button" class="button affirmative add-creditor-balance" value="Adicionar Balanço">
 </p>
 
-<div id="creditor-balances" class="nested-form" data-nested-form="creditor-balances" data-append-item=false >
+<div id="creditor-balance" data-nested-form="creditor-balance" data-append-item=false >
   <%= f.association :creditor_balances, :collection => localized(f.object.creditor_balances) do |p| %>
     <%= render 'creditor_balances/form', :f => p %>
   <% end %>
 </div>
 
-<%= mustache 'creditor-balances-template' do %>
-  <%= f.association :creditor_balances_attributes, :collection => f.object.creditor_balances.build, :index => '{{uuid-creditor-balances}}' do |p| %>
+<%= mustache 'creditor-balance-template' do %>
+  <%= f.association :creditor_balances_attributes, :collection => f.object.creditor_balances.build, :index => '{{uuid-creditor-balance}}' do |p| %>
     <%= render 'creditor_balances/form', :f => p %>
   <% end %>
 <% end %>

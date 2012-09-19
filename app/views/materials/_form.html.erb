@@ -94,7 +94,7 @@
   $('#material_materials_group_id').change(function() {
     if (this.value) {
       $('#material_materials_class').attr('disabled', false);
-      $('#material_materials_class').attr('data-modal-url', materialsClassModalUrl);
+      $('#material_materials_class').data('modal-url', materialsClassModalUrl());
     } else {
       $('#material_materials_class').attr('disabled', true);
     }

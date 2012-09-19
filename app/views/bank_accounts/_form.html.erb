@@ -44,7 +44,7 @@
 
       url += jQuery.param(params);
 
-      $("#bank_account_agency").attr('data-modal-url', url);
+      $("#bank_account_agency").data('modal-url', url);
 
       if (this.value) {
         $("#bank_account_agency").attr('disabled', false);
@@ -53,7 +53,7 @@
       }
     } else {
       $('#bank_account_agency, #bank_account_agency_id').val('');
-      $("#bank_account_agency").attr('data-modal-url', "<%= modal_agencies_path %>");
+      $("#bank_account_agency").data('modal-url', "<%= modal_agencies_path %>");
     }
   });
 </script>

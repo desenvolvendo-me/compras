@@ -57,7 +57,7 @@
       });
 
       $('form.pledge_liquidation').on('click', '.remove-parcel', fillParcelNumber);
-      $('form.pledge_liquidation').on('append.mustache', fillParcelNumber);
+      $('form.pledge_liquidation').on('nestedForm:afterAdd', fillParcelNumber);
       fillParcelNumber();
     })();
   <% end %>

@@ -26,6 +26,6 @@
   }
 
   $('form.precatory').on('click', '.remove-parcel', fillParcelNumber)
-  $('form.precatory').on('append.mustache', fillParcelNumber);
+  $('form.precatory').on('nestedForm:afterAdd', fillParcelNumber);
   fillParcelNumber();
 </script>

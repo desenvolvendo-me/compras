@@ -1,15 +1,15 @@
 <p>
-  <input type="button" class="button affirmative add-agreement-occurrences" value="Adicionar Ocorrência">
+  <input type="button" class="button affirmative add-agreement-occurrence" value="Adicionar Ocorrência">
 </p>
 
-<div id="agreement-occurrences" class="nested-form" data-nested-form="agreement-occurrences">
+<div id="agreement-occurrence" data-nested-form="agreement-occurrence" data-inline=true>
   <%= f.association :agreement_occurrences, :collection => localized(f.object.agreement_occurrences) do |o| %>
     <%= render 'agreement_occurrences/form', :f => o %>
   <% end %>
 </div>
 
-<%= mustache 'agreement-occurrences-template' do %>
-  <%= f.association :agreement_occurrences_attributes, :collection => f.object.agreement_occurrences.build, :index => '{{uuid-agreement-occurrences}}' do |o| %>
+<%= mustache 'agreement-occurrence-template' do %>
+  <%= f.association :agreement_occurrences_attributes, :collection => f.object.agreement_occurrences.build, :index => '{{uuid-agreement-occurrence}}' do |o| %>
     <%= render 'agreement_occurrences/form', :f => o %>
   <% end %>
 <% end %>

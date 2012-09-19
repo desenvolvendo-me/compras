@@ -42,7 +42,7 @@
     function addMaskToLevel(){
       var digits = parseInt($('#budget_structure_digits').val()) + 1 ;
       if (digits > 0){
-        fakeBudgetStructureCode.attr('data-mask', Array(digits).join('9') );
+        fakeBudgetStructureCode.data('mask', Array(digits).join('9') );
       }
     };
 
@@ -60,7 +60,7 @@
       }
 
       urlModal += jQuery.param(params);
-      budgetStructureParent.attr('data-modal-url', urlModal);
+      budgetStructureParent.data('modal-url', urlModal);
     };
 
     function budgetStructureLevelValidations() {
@@ -80,7 +80,7 @@
           };
 
       urlModal += jQuery.param(params);
-      $('#budget_structure_budget_structure_level').attr('data-modal-url', urlModal);
+      $('#budget_structure_budget_structure_level').data('modal-url', urlModal);
 
       if (configuration_id == ''){
         $('#budget_structure_budget_structure_level').attr('disabled', true);
@@ -98,7 +98,7 @@
       budgetStructureBudgetStructure.val('');
       $('#budget_structure_budget_structure_level, #budget_structure_budget_structure_level_id').val('');
       budgetStructureParent.parent().hide();
-      budgetStructureParent.attr('data-modal-url', '');
+      budgetStructureParent.data('modal-url', '');
     });
 
     $('#budget_structure_budget_structure_level_id').change(function (event, level) {
@@ -108,7 +108,7 @@
       $('#budget_structure_parent, #budget_structure_parent_id').val('');
 
       if (level) {
-        fakeBudgetStructureCode.attr('data-mask', Array(level.digits + 1).join('9') );
+        fakeBudgetStructureCode.data('mask', Array(level.digits + 1).join('9') );
         budgetStructureParent.requiredField(false);
 
         if (level.level <= 1){
@@ -122,9 +122,9 @@
           fakeBudgetStructureCode.attr('disabled', true);
         }
       } else {
-        fakeBudgetStructureCode.attr('data-mask', '');
+        fakeBudgetStructureCode.data('mask', '');
         budgetStructureParent.parent().hide();
-        budgetStructureParent.attr('data-modal-url', '');
+        budgetStructureParent.data('modal-url', '');
       }
     });
 
@@ -141,7 +141,7 @@
       $('.add-budget-structure-responsible').removeAttr('disabled');
     });
 
-    $('form.budget_structure').on('append.mustache', function() {
+    $('form.budget_structure').on('nestedForm:afterAdd', function() {
       $('.add-budget-structure-responsible').attr('disabled', 'disabled');
     });
 

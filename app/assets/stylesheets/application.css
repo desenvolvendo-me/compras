@@ -1,19 +1,5 @@
 /*
- *= require yui
- *= require layout
- *= require header
- *= require account
- *= require menu
- *= require environment
- *= require flash
- *= require content
- *= require actions
- *= require records
- *= require will_paginate
- *= require simple_form
- *= require buttons
- *= require sidebar
- *= require devise
- *= require modal
- *= require jquery-ui
+ *= require unico-assets
+ *= require compras/content
+ *= require compras/sidebar
  */

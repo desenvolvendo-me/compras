@@ -70,13 +70,13 @@ feature "BankAccounts" do
 
       click_button 'Adicionar'
 
-      within '.nested-bank-account-capabilities:first' do
+      within '.nested-bank-account-capability:first' do
         fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
         expect(page).to have_select 'Status', :selected => 'Ativo'
         expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
       end
 
-      within '.nested-bank-account-capabilities:last' do
+      within '.nested-bank-account-capability:last' do
         fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
         expect(page).to have_select 'Status', :selected => 'Inativo'
         expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
@@ -102,14 +102,14 @@ feature "BankAccounts" do
     end
 
     within_tab 'Recursos' do
-      within 'div.nested-bank-account-capabilities:first' do
+      within 'div.nested-bank-account-capability:first' do
         expect(page).to have_field 'Recurso', :with => 'Construção'
         expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
         expect(page).to have_field 'Data de desativação', :with => ''
         expect(page).to have_select 'Status', :selected => 'Ativo'
       end
 
-      within 'div.nested-bank-account-capabilities:last' do
+      within 'div.nested-bank-account-capability:last' do
         expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
         expect(page).to have_select 'Status', :selected => 'Inativo'
         expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
@@ -137,7 +137,7 @@ feature "BankAccounts" do
     within_tab 'Recursos' do
       click_button 'Adicionar'
 
-      within '.nested-bank-account-capabilities:first' do
+      within '.nested-bank-account-capability:first' do
         fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
       end
     end
@@ -156,14 +156,14 @@ feature "BankAccounts" do
     end
 
     within_tab 'Recursos' do
-      within 'div.nested-bank-account-capabilities:first' do
+      within 'div.nested-bank-account-capability:first' do
         expect(page).to have_field 'Recurso', :with => 'Construção'
         expect(page).to have_field 'Data de inclusão', :with => I18n.l(Date.current)
         expect(page).to have_field 'Data de desativação', :with => ''
         expect(page).to have_select 'Status', :selected => 'Ativo'
       end
 
-      within 'div.nested-bank-account-capabilities:last' do
+      within 'div.nested-bank-account-capability:last' do
         expect(page).to have_field 'Recurso', :with => 'Reforma e Ampliação'
         expect(page).to have_select 'Status', :selected => 'Inativo'
         expect(page).to have_field 'Data de inclusão', :with => '01/01/2012'
