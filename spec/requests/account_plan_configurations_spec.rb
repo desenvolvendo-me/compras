@@ -157,6 +157,36 @@ feature "AccountPlanConfigurations" do
     end
   end
 
+  scenario 'when add duplicated level should show error' do
+    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+
+    click_link 'Criar Configuração de Plano de Contas'
+
+    click_button 'Adicionar Estrutura'
+
+    within 'div.nested-account-plan-level' do
+      fill_in 'Nível', :with => '1'
+      fill_in 'Descrição', :with => 'Uso interno'
+      fill_in 'Dígitos', :with => '2'
+      select 'Ponto', :from => 'Separador'
+    end
+
+    click_button 'Adicionar Estrutura'
+
+    within 'div.nested-account-plan-level:nth-child(2)' do
+      fill_in 'Nível', :with => '1'
+      fill_in 'Descrição', :with => 'Indicador de quantidade'
+      fill_in 'Dígitos', :with => '2'
+      select 'Barra', :from => 'Separador'
+    end
+
+    click_button 'Salvar'
+
+    within 'div.nested-account-plan-level:nth-child(2)' do
+      expect(page).to have_content 'já está em uso'
+    end
+  end
+
   def make_dependencies!
     State.make!(:mg)
   end

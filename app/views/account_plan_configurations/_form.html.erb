@@ -19,28 +19,43 @@
 <%= render 'account_plan_levels', :f => f %>
 
 <script>
-  function calculeMask() {
-    var levels = [];
-    var mask = '';
+  function orderedLevels() {
+    var levels = {};
 
     $('#account-plan-level').children('.nested-account-plan-level').each(function() {
-      var level     = $(this).find('input.level').val(),
-          digits    = $(this).find('input.digits').val(),
-          separator = $(this).find('select.separator').val();
+      var levelInput = $(this).find('input.level'),
+          level      = levelInput.val(),
+          digits     = $(this).find('input.digits').val(),
+          separator  = $(this).find('select.separator').val();
 
-      levels.push([level, digits, separator]);
+      levelInput.parents('div.input').removeClass('field_with_errors');
+      levelInput.parents('div.input').find('p').remove();
+
+      if ( _.has(levels, level) ) {
+        levelInput.parents('div.input').addClass('field_with_errors');
+        levelInput.parents('div.input').append('<p class="error"><%= t 'activerecord.errors.messages.taken' %></p>');
+      } else {
+        levels[level] = {
+          level: level,
+          digits: digits,
+          separator: separator
+        };
+      }
     });
 
-    var ordered_levels = levels.sort(function(a, b) {
-      return (a[0] < b[0]) ? -1 : (a[0] > b[0]) ? 1 : 0;
-    })
+    return _.sortBy(levels, 'level');
+  }
 
-    $.each(ordered_levels, function(index) {
-      for (var i = 1; i <= this[1]; i++) {
+  function calculeMask() {
+    var mask = '';
+    var levels = orderedLevels();
+
+    $.each(levels, function(index) {
+      for (var i = 1; i <= this['digits']; i++) {
         mask += '9';
       }
       if ((index+1) < levels.length) {
-        mask += this[2];
+        mask += this['separator'];
       }
     });
 
