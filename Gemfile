@@ -27,7 +27,7 @@ gem 'wkhtmltopdf-binary', '0.9.9.1'
 gem 'simple_form', '2.0.2'
 gem 'will_paginate', '3.0.3'
 
-gem 'squeel', '1.0.9'
+gem 'squeel', '1.0.11'
 gem 'carrierwave', '0.6.2'
 gem 'awesome_nested_set', '2.1.3'
 
