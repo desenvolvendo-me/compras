@@ -22,11 +22,11 @@ class PriceRegistrationItem < Compras::Model
   end
 
   def unit_price
-    winning_bid.unit_value
+    winning_bid.unit_value if winning_bid
   end
 
   def winning_bidder
-    winning_bid.bidder
+    winning_bid.bidder if winning_bid
   end
 
   def winning_bid

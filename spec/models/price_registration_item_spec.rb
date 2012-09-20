@@ -30,6 +30,12 @@ describe PriceRegistrationItem do
 
       expect(subject.unit_price).to eq 10.5
     end
+
+    it 'returns nil if bids were not classified yet' do
+      subject.stub(:winning_bid => nil)
+
+      expect(subject.unit_price).to be_nil
+    end
   end
 
   context '#winning_bid' do
@@ -71,6 +77,12 @@ describe PriceRegistrationItem do
 
       winning_bid.should_receive(:bidder)
       subject.winning_bidder
+    end
+
+    it 'returns nil if bids were not classified yet' do
+      subject.stub(:winning_bid => nil)
+
+      expect(subject.winning_bidder).to be_nil
     end
   end
 
