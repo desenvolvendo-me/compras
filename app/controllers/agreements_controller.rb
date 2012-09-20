@@ -4,6 +4,7 @@ class AgreementsController < CrudController
   def create
     object = build_resource
     AgreementAdditiveNumberGenerator.new(object).generate!
+    AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts).change!
 
     super
   end
@@ -12,6 +13,7 @@ class AgreementsController < CrudController
     object.localized.assign_attributes(*attributes)
 
     AgreementAdditiveNumberGenerator.new(object).generate!
+    AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts).change!
 
     object.save
   end
