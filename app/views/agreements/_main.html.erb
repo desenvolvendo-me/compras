@@ -52,6 +52,10 @@
 
 <%= f.input :regulatory_act %>
 
+<p>
+  <%= link_to_modal_info 'agreement_regulatory_act', f.object.regulatory_act %>
+</p>
+
 <div class="yui3-g">
   <div class="yui3-u-1-3">
     <%= f.input :creation_date, :disabled => true, :input_html => { :value => f.object.decorator.creation_date } %>

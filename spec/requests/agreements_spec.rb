@@ -6,6 +6,21 @@ feature "Agreements" do
     sign_in
   end
 
+  scenario 'checking regulatory act modal info' do
+    Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Principal' do
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content '1234'
+    expect(page).to have_content '01/01/2012'
+  end
+
   scenario 'editing an agreement should show date and kind of first occurrence' do
     Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
 
