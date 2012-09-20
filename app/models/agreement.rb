@@ -40,6 +40,7 @@ class Agreement < Compras::Model
             :number_year_process, :regulatory_act, :process_date,
             :presence => true
   validates :number_year, :number_year_process, :format => /^(\d+)\/\d{4}$/
+  validates :agreement_bank_accounts, :no_duplication => :bank_account_id
   validate :if_sum_of_participants_granting_equals_total_value
   validate :if_sum_of_participants_convenente_equals_total_value
 

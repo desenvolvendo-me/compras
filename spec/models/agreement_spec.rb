@@ -4,6 +4,8 @@ require 'app/models/agreement_occurrence'
 require 'app/models/agreement_participant'
 require 'app/models/agreement'
 require 'app/models/agreement_bank_account'
+require 'app/models/bank_account_capability'
+require 'app/models/bank_account'
 require 'app/models/agreement_additive'
 require 'app/models/tce_capability_agreement'
 
@@ -32,6 +34,8 @@ describe Agreement do
   it { should validate_presence_of :process_date }
   it { should validate_presence_of :number_year_process }
   it { should validate_presence_of :regulatory_act }
+  it { should validate_duplication_of(:bank_account_id).on(:agreement_bank_accounts) }
+
 
   it { should allow_value('111/2012').for(:number_year) }
   it { should_not allow_value('111').for(:number_year) }
