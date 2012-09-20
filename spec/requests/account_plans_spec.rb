@@ -24,7 +24,7 @@ feature "AccountPlans" do
     within_tab 'Atributos' do
       select 'Crédito', :from => 'Natureza do saldo'
       select 'Patrimonial', :from => 'Natureza da informação'
-      select 'Inverte saldo', :from => 'Variação da natureza da informação'
+      select 'Inverte saldo', :from => 'Variação na natureza do saldo'
       check 'Escrituração'
       select 'Financeiro', :from => 'Indicador de superávit financeiro'
       select 'Bilateral', :from => 'Tipo de movimentação'
@@ -58,7 +58,7 @@ feature "AccountPlans" do
     within_tab 'Atributos' do
       expect(page).to have_select 'Natureza do saldo', :selected => 'Crédito'
       expect(page).to have_select 'Natureza da informação', :selected => 'Patrimonial'
-      expect(page).to have_select 'Variação da natureza da informação', :selected => 'Inverte saldo'
+      expect(page).to have_select 'Variação na natureza do saldo', :selected => 'Inverte saldo'
       expect(page).to have_checked_field 'Escrituração'
       expect(page).to have_select 'Indicador de superávit financeiro', :selected => 'Financeiro'
       expect(page).to have_select 'Tipo de movimentação', :selected => 'Bilateral'
@@ -112,7 +112,7 @@ feature "AccountPlans" do
     within_tab 'Atributos' do
       select 'Mista', :from => 'Natureza do saldo'
       select 'Compensado', :from => 'Natureza da informação'
-      select 'Inverte saldo', :from => 'Variação da natureza da informação'
+      select 'Inverte saldo', :from => 'Variação na natureza do saldo'
       uncheck 'Escrituração'
       select 'Permanente', :from => 'Indicador de superávit financeiro'
       select 'Unilateral devedora', :from => 'Tipo de movimentação'
@@ -139,7 +139,7 @@ feature "AccountPlans" do
     within_tab 'Atributos' do
       expect(page).to have_select 'Natureza do saldo', :selected => 'Mista'
       expect(page).to have_select 'Natureza da informação', :selected => 'Compensado'
-      expect(page).to have_select 'Variação da natureza da informação', :selected => 'Inverte saldo'
+      expect(page).to have_select 'Variação na natureza do saldo', :selected => 'Inverte saldo'
       expect(page).to_not have_checked_field 'Escrituração'
       expect(page).to have_select 'Indicador de superávit financeiro', :selected => 'Permanente'
       expect(page).to have_select 'Tipo de movimentação', :selected => 'Unilateral devedora'

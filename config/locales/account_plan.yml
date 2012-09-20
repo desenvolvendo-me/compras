@@ -13,7 +13,7 @@ pt-BR:
         function: "Função"
         nature_balance: "Natureza do saldo"
         nature_information: "Natureza da informação"
-        nature_balance_variation: "Variação da natureza da informação"
+        nature_balance_variation: "Variação na natureza do saldo"
         bookkeeping: "Escrituração"
         surplus_indicator: "Indicador de superávit financeiro"
         movimentation_kind: "Tipo de movimentação"
