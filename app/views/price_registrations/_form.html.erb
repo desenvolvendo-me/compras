@@ -7,6 +7,10 @@
     <li>
       <a href="#tab-price-registration-items">Itens por Estruturas Orçamentárias Participantes</a>
     </li>
+
+    <li>
+      <a href="#tab-winning-bidder">Fornecedores Vencedores</a>
+    </li>
   </ul>
 
   <div id="tab-price-registration-main">
@@ -15,5 +19,9 @@
 
   <div id="tab-price-registration-items">
     <%= render 'items', :f => f %>
+  </div>
+
+  <div id="tab-winning-bidder">
+    <%= render 'winning_bidders', :f => f %>
   </div>
 </div>

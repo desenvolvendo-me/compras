@@ -453,4 +453,15 @@ describe LicitationProcess do
       expect(subject.has_bidders_and_is_available_for_classification).to be false
     end
   end
+
+  context "#winning_bid" do
+    it 'returns the classification that has won the bid' do
+      classification_1 = double(:classification, :situation => SituationOfProposal::LOST)
+      classification_2 = double(:classification, :situation => SituationOfProposal::WON)
+
+      subject.stub(:all_licitation_process_classifications => [classification_1, classification_2])
+
+      expect(subject.winning_bid).to eq classification_2
+    end
+  end
 end

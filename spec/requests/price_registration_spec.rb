@@ -239,4 +239,28 @@ feature "PriceRegistration" do
       end
     end
   end
+
+  context 'winning bids' do
+    scenario 'displaying winning bids on Fornecedores Vencedores tab' do
+      PriceRegistration.make!(:registro_de_precos,
+                              :licitation_process => LicitationProcess.make!(:apuracao_global))
+
+      navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+      click_link '1/2012'
+      click_button 'Apurar'
+
+      click_link 'voltar'
+      navigate  'Compras e Licitações > Registros de Preços'
+
+      click_link '1/2012'
+
+      within_tab 'Fornecedores Vencedores' do
+        expect(page).to have_field 'Fornecedor', :with => 'Gabriel Sobrinho'
+        expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+        expect(page).to have_field 'Unidade', :with => 'UN'
+        expect(page).to have_field 'Quantidade', :with => '2'
+        expect(page).to have_field 'Saldo', :with => '2'
+      end
+    end
+  end
 end

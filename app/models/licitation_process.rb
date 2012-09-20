@@ -152,6 +152,10 @@ class LicitationProcess < Compras::Model
     !bidders.empty? && is_available_for_licitation_process_classification?
   end
 
+  def winning_bid
+    all_licitation_process_classifications.detect { |classification| classification.situation == SituationOfProposal::WON}
+  end
+
   protected
 
   def set_modality

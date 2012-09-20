@@ -1,0 +1,5 @@
+<div id="price-registration-items-<%= f.nested_identifier %>">
+  <%= f.association :items do |p| %>
+    <%= render 'price_registration_items/winning_bid', :f => p unless p.object.new_record? %>
+  <% end %>
+</div>

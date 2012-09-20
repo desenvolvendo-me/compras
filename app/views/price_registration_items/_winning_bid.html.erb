@@ -1,0 +1,31 @@
+<div class="price-registration-item">
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :administrative_process_budget_allocation_item, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :reference_unit, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :quantity, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :unit_price, :disabled => true,
+                  :input_html => { :value => f.object.decorator.unit_price } %>
+    </div>
+  </div>
+  <div class="yui3-g">
+    <div class="yui3-u-1-2">
+      <%= f.input :winning_bidder, :disabled => true %>
+    </div>
+
+    <div class="yui3-u-1-6"></div>
+
+    <div class="yui3-u-1-6">
+      <%= f.input :balance, :disabled => true %>
+    </div>
+  </div>
+</div>

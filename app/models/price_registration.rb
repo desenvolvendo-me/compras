@@ -25,6 +25,8 @@ class PriceRegistration < Compras::Model
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
+  delegate :type_of_calculation, :to => :licitation_process
+
   validates :licitation_process, :year, :presence => true
   validates :date, :validaty_date, :timeliness => { :type => :date },
     :allow_blank => true

@@ -43,6 +43,10 @@ class LicitationProcessLot < Compras::Model
     self.class.licitation_process_less_than_me(licitation_process_id, id).count
   end
 
+  def winning_bid
+    licitation_process_classifications.detect { |classification| classification.situation == SituationOfProposal::WON }
+  end
+
   private
 
   def administrative_process_budget_allocation_items_should_have_at_least_one

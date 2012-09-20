@@ -73,4 +73,15 @@ describe AdministrativeProcessBudgetAllocationItem do
       expect(subject.total_value_by_bidder(bidder)).to eq 0
     end
   end
+
+  context "#winning_bid" do
+    it 'returns the classification that has won the bid' do
+      classification_1 = double(:classification, :situation => SituationOfProposal::LOST)
+      classification_2 = double(:classification, :situation => SituationOfProposal::WON)
+
+      subject.stub(:licitation_process_classifications => [classification_1, classification_2])
+
+      expect(subject.winning_bid).to eq classification_2
+    end
+  end
 end

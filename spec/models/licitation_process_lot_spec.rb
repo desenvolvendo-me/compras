@@ -78,4 +78,15 @@ describe LicitationProcessLot do
       expect(subject.order_bidders_by_total_price).to eq [bidder2, bidder3, bidder1]
     end
   end
+
+  context "#winning_bid" do
+    it 'returns the classification that has won the bid' do
+      classification_1 = double(:classification, :situation => SituationOfProposal::LOST)
+      classification_2 = double(:classification, :situation => SituationOfProposal::WON)
+
+      subject.stub(:licitation_process_classifications => [classification_1, classification_2])
+
+      expect(subject.winning_bid).to eq classification_2
+    end
+  end
 end

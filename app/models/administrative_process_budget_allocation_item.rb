@@ -65,4 +65,8 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   def total_value_by_bidder(bidder)
     (unit_price_by_bidder(bidder) || 0) * quantity
   end
+
+  def winning_bid
+    licitation_process_classifications.detect { |classification| classification.situation == SituationOfProposal::WON}
+  end
 end
