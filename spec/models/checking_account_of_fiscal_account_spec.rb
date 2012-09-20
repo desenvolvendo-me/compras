@@ -12,4 +12,5 @@ describe CheckingAccountOfFiscalAccount do
   it { should validate_presence_of :main_tag }
 
   it { should have_many(:checking_account_structures).dependent(:restrict) }
+  it { should have_many(:account_plans).dependent(:restrict) }
 end
