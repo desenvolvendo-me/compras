@@ -17,6 +17,8 @@ describe AccountPlanConfiguration do
   it { should_not allow_value('212').for(:year) }
   it { should_not allow_value('2a12').for(:year) }
 
+  it { should validate_duplication_of(:level).on(:account_plan_levels) }
+
   context '#to_s' do
     it 'should return description at to_s call' do
       subject.description = 'Plano1'

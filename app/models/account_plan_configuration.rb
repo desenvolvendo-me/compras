@@ -14,6 +14,7 @@ class AccountPlanConfiguration < Compras::Model
 
   validates :description, :year, :state, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
+  validates :account_plan_levels, :no_duplication => :level
   validate :separator_for_levels
 
   orderize :id
