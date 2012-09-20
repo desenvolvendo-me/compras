@@ -45,7 +45,7 @@ gem 'jbuilder', '0.4.0'
 gem 'foreigner', '1.2.1'
 gem 'i18n_alchemy', :git => 'git://github.com/carlosantoniodasilva/i18n_alchemy.git'
 
-gem 'enumerate_it', '0.7.16'
+gem 'enumerate_it', '0.7.17'
 gem 'decore', :git => 'git://github.com/nohupbrasil/decore.git'
 
 group :assets do
