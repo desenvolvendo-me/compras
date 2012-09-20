@@ -24,7 +24,7 @@ gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
 gem 'pdfkit', :git => 'git://github.com/comogo/pdfkit.git'
 gem 'wkhtmltopdf-binary', '0.9.9.1'
-gem 'simple_form', '2.0.1'
+gem 'simple_form', '2.0.2'
 gem 'will_paginate', '3.0.3'
 
 gem 'squeel', '1.0.9'
