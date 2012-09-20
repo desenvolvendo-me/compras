@@ -4,6 +4,10 @@
 
   <%= f.input :bank_account %>
 
+  <p>
+    <%= link_to_modal_info "#{'agreement_agreement_bank_accounts_attributes_' unless f.object.persisted?}#{f.nested_identifier}_bank_account", f.object.bank_account %>
+  </p>
+
   <div class="yui3-g">
     <div class="yui3-u-1-4">
       <%= f.input :creation_date %>

@@ -8,6 +8,6 @@ pt-BR:
     attributes:
       agreement_bank_account:
         status: "Status"
-        bank_account: "Conta"
+        bank_account: "Conta bancária"
         creation_date: "Data inclusão"
         desactivation_date: "Data de desativação"

@@ -34,6 +34,26 @@ feature "Agreements" do
     end
   end
 
+  scenario 'checking bank_account modal info in a new agreement' do
+    BankAccount.make!(:itau_tributos)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Criar Convênio'
+
+    within_tab 'Conta Bancária' do
+      click_button 'Adicionar Conta'
+
+      fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
+
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content 'Itaú Tributos'
+    expect(page).to have_content '1111'
+    expect(page).to have_content 'Ativo'
+  end
+
   scenario 'checking creditor modal info in a new agreement' do
     Creditor.make!(:sobrinho)
 
@@ -70,6 +90,23 @@ feature "Agreements" do
     expect(page).to have_content 'Curitiba'
   end
 
+
+  scenario 'checking bank_account modal info in a existing agreement' do
+    Agreement.make!(:apoio_ao_turismo)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Conta Bancária' do
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content 'Itaú Tributos'
+    expect(page).to have_content '1111'
+    expect(page).to have_content 'Ativo'
+  end
+
   scenario 'create a new agreement' do
     AgreementKind.make!(:contribuicao)
     RegulatoryAct.make!(:sopa)
@@ -101,7 +138,7 @@ feature "Agreements" do
     within_tab 'Conta Bancária' do
       click_button 'Adicionar Conta'
 
-      fill_modal 'Conta *', :with => 'Itaú Tributos', :field => 'Descrição'
+      fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
       fill_in 'Data inclusão', :with => I18n.l(Date.current)
       select 'Ativo', :from => 'Status'
     end
@@ -167,7 +204,7 @@ feature "Agreements" do
     end
 
     within_tab 'Conta Bancária' do
-      expect(page).to have_field 'Conta *', :with => 'Itaú Tributos'
+      expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
       expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
       expect(page).to have_select 'Status', :selected => 'Ativo'
     end
@@ -245,14 +282,14 @@ feature "Agreements" do
 
       click_button 'Adicionar Conta'
 
-      fill_modal 'Conta *', :with => 'Itaú Tributos', :field => 'Descrição'
+      fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
       fill_in 'Data inclusão', :with => I18n.l(Date.current)
       select 'Ativo', :from => 'Status'
 
       click_button 'Adicionar Conta'
 
       within '.agreement-bank-account:nth-child(3)' do
-        fill_modal 'Conta *', :with => 'Santander - Folha de Pagamento', :field => 'Descrição'
+        fill_modal 'Conta bancária *', :with => 'Santander - Folha de Pagamento', :field => 'Descrição'
         fill_in 'Data inclusão', :with => I18n.l(Date.current)
         select 'Ativo', :from => 'Status'
       end
@@ -349,13 +386,13 @@ feature "Agreements" do
 
     within_tab 'Conta Bancária' do
       within '.agreement-bank-account:nth-child(1)' do
-        expect(page).to have_field 'Conta *', :with => 'Itaú Tributos'
+        expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
         expect(page).to have_select 'Status', :selected => 'Ativo'
       end
 
       within '.agreement-bank-account:nth-child(2)' do
-        expect(page).to have_field 'Conta *', :with => 'Santander - Folha de Pagamento'
+        expect(page).to have_field 'Conta bancária *', :with => 'Santander - Folha de Pagamento'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
         expect(page).to have_select 'Status', :selected => 'Ativo'
       end
