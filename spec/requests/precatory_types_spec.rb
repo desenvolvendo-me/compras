@@ -73,9 +73,13 @@ feature "PrecatoryTypes" do
   end
 
   scenario "disable deactivation_date when status is not inactive" do
+    PrecatoryType.make!(:tipo_de_precatorio_ativo)
+
     navigate 'Contabilidade > Comum > Precatório > Tipos de Precatório'
 
-    click_link 'Criar Tipos de Precatório'
+    within_records do
+      click_link 'Precatórios Alimentares'
+    end
 
     select 'Ativo', :from => 'Status'
 
@@ -83,9 +87,13 @@ feature "PrecatoryTypes" do
   end
 
   scenario "enable deactivation_date when status is inactive" do
+    PrecatoryType.make!(:tipo_de_precatorio_ativo)
+
     navigate 'Contabilidade > Comum > Precatório > Tipos de Precatório'
 
-    click_link 'Criar Tipos de Precatório'
+    within_records do
+      click_link 'Precatórios Alimentares'
+    end
 
     select 'Inativo', :from => 'Status'
 
