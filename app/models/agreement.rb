@@ -19,7 +19,7 @@ class Agreement < Compras::Model
   belongs_to :regulatory_act
 
   has_many :agreement_additives, :dependent => :destroy, :order => :number
-  has_many :agreement_participants, :dependent => :destroy, :inverse_of => :agreement
+  has_many :agreement_participants, :dependent => :destroy, :order => AgreementParticipant.arel_table[:id], :inverse_of => :agreement
   has_many :agreement_occurrences, :dependent => :destroy, :order => [AgreementOccurrence.arel_table[:date].desc], :inverse_of => :agreement
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => :id
   has_many :tce_capability_agreements, :dependent => :restrict
