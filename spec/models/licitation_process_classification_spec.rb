@@ -35,22 +35,19 @@ describe LicitationProcessClassification do
   end
 
   it 'should set situation as lost when lose!' do
-    subject.should_receive(:lost!)
-    subject.should_receive(:save!)
+    subject.should_receive(:update_column).with(:situation, 'lost')
 
     subject.lose!
   end
 
   it 'should set situation as won when win!' do
-    subject.should_receive(:won!)
-    subject.should_receive(:save!)
+    subject.should_receive(:update_column).with(:situation, 'won')
 
     subject.win!
   end
 
     it 'should set situation as equalized when equalize!' do
-    subject.should_receive(:equalized!)
-    subject.should_receive(:save!)
+    subject.should_receive(:update_column).with(:situation, 'equalized')
 
     subject.equalize!
   end

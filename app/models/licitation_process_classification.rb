@@ -26,17 +26,14 @@ class LicitationProcessClassification < Compras::Model
   end
 
   def lose!
-    lost!
-    save!
+    update_column(:situation, SituationOfProposal::LOST)
   end
 
   def win!
-    won!
-    save!
+    update_column(:situation, SituationOfProposal::WON)
   end
 
   def equalize!
-    equalized!
-    save!
+    update_column(:situation, SituationOfProposal::EQUALIZED)
   end
 end
