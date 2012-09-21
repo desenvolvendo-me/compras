@@ -28,7 +28,6 @@ class AccountPlanImporter < Importer
   def normalize_attributes(attributes)
     attributes.merge(
       "title" => attributes["title"],
-      "nature_balance" => value_for_nature_balance(attributes),
       "bookkeeping" => value_for_bookkeeping(attributes),
       "nature_balance" => value_for_nature_balance(attributes),
       "nature_information" => value_for_nature_information(attributes),
