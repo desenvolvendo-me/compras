@@ -15,7 +15,7 @@ describe AgreementBankAccountCreationDateGenerator do
       double('BankAccount', :creation_date? => true)
     end
 
-    it 'should not set end_date' do
+    it 'should not set creation_date' do
       described_class.new([bank_account]).change!
 
       bank_account.should_receive(:creation_date=).never
@@ -27,7 +27,7 @@ describe AgreementBankAccountCreationDateGenerator do
       double('BankAccount', :creation_date? => false)
     end
 
-    it 'should set end_date' do
+    it 'should set creation_date' do
       bank_account.should_receive(:creation_date=).with(current_date).and_return(true)
 
       described_class.new([bank_account]).change!
