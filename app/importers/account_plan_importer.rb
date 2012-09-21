@@ -48,7 +48,8 @@ class AccountPlanImporter < Importer
 
   def value_for_checking_account_of_fiscal_account_id(attributes)
     unless attributes["checking_account_of_fiscal_account"].blank?
-      checking_account_repository.find_by_name!(attributes["checking_account_of_fiscal_account"]).try(:id)
+      tce_code = attributes["checking_account_of_fiscal_account"].match(/[0-9]+/)[0]
+      checking_account_repository.find_by_tce_code!(tce_code).try(:id)
     end
   end
 

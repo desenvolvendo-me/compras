@@ -100,7 +100,7 @@ describe AccountPlanImporter do
                       with('UNILATERAL_CREDITOR').
                       and_return('unilateral_creditor')
 
-    checking_account_repository.should_receive(:find_by_name!).
+    checking_account_repository.should_receive(:find_by_tce_code!).
                                 any_number_of_times.
                                 and_return(checking_account_object)
 
