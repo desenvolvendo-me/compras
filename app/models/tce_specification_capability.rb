@@ -2,6 +2,8 @@ class TceSpecificationCapability < Compras::Model
   attr_accessible :description, :capability_source_id, :application_code_id,
                   :agreement_ids
 
+  attr_modal :description, :capability_source_id, :application_code_id
+
   has_many :capabilities, :dependent => :restrict
   has_many :tce_capability_agreements, :dependent => :destroy, :inverse_of => :tce_specification_capability
   has_many :agreements, :through => :tce_capability_agreements,
