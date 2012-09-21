@@ -91,4 +91,15 @@ describe PurchaseSolicitation do
 
     expect(subject).not_to be_editable
   end
+
+  describe "#purchase_solicitation_budget_allocations_by_material" do
+    it "returns all budget allocations with materials of a given set" do
+      material_ids = [-1, -2]
+      budget_allocations = double(:budget_allocations)
+      subject.stub(:purchase_solicitation_budget_allocations => budget_allocations)
+
+      budget_allocations.should_receive(:by_material).with(material_ids)
+      subject.purchase_solicitation_budget_allocations_by_material(material_ids)
+    end
+  end
 end

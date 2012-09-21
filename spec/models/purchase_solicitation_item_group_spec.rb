@@ -141,4 +141,15 @@ describe PurchaseSolicitationItemGroup do
     end
   end
 
+  context '#purchase_solicitations_by_material' do
+    it "return the purchase solicitations which have items with the same materials as the group's" do
+      group_material = double(:group_material, :material_id => -1)
+      purchase_solicitations = double(:purchase_solicitations)
+      subject.stub(:purchase_solicitation_item_group_materials).and_return([group_material])
+      subject.stub(:purchase_solicitations).and_return(purchase_solicitations)
+
+      purchase_solicitations.should_receive(:by_material).with([-1])
+      subject.purchase_solicitations_by_material
+    end
+  end
 end

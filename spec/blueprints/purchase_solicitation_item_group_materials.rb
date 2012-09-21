@@ -6,7 +6,7 @@ end
 
 PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_2013) do
   purchase_solicitation_item_group { nil }
-  material { Material.make!(:antivirus) }
+  material { Material.make!(:arame_farpado) }
   purchase_solicitations { [PurchaseSolicitation.make(:reparo_2013)] }
 end
 

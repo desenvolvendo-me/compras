@@ -53,9 +53,17 @@ class PurchaseSolicitationItemGroup < Compras::Model
     editable?
   end
 
+  def purchase_solicitations_by_material
+    purchase_solicitations.by_material(material_ids)
+  end
+
   def fulfill_items(process)
     purchase_solicitation_item_group_materials.each do |group_material|
       group_material.fulfill_items(process)
     end
+  end
+
+  def material_ids
+    purchase_solicitation_item_group_materials.map(&:material_id)
   end
 end

@@ -82,6 +82,15 @@ class PurchaseSolicitation < Compras::Model
     pending? || returned?
   end
 
+  def self.by_material(material_ids)
+    joins { items }.
+      where { |purchase| purchase.items.material_id.in(material_ids) }
+  end
+
+  def purchase_solicitation_budget_allocations_by_material(material_ids)
+    purchase_solicitation_budget_allocations.by_material(material_ids)
+  end
+
   protected
 
   def must_have_at_least_one_budget_allocation

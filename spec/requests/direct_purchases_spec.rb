@@ -954,4 +954,26 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Atendido por', :with => 'Compra direta 1/2012'
     end
   end
+
+  scenario 'when choosing an item group to create a direct purchase,
+            all the items should have the same material' do
+    group = PurchaseSolicitationItemGroup.make!(:antivirus)
+    new_item = PurchaseSolicitationBudgetAllocationItem.make!(:arame_farpado,
+               :purchase_solicitation_budget_allocation => group.purchase_solicitations.first.purchase_solicitation_budget_allocations.first)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).not_to have_field 'Material', :with => '02.02.00001 - Arame farpado'
+    end
+  end
 end

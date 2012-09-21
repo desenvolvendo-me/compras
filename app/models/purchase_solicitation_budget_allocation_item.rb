@@ -33,8 +33,9 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
     )
   end
 
-  def self.by_material(material_id)
-    where { |item| item.material_id.eq material_id }
+  def self.by_material(material_ids)
+    material_ids = [material_ids] unless material_ids.kind_of?(Array)
+    where { |item| item.material_id.in material_ids }
   end
 
   def self.fulfill_items(options = {})

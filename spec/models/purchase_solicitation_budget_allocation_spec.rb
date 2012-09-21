@@ -43,4 +43,15 @@ describe PurchaseSolicitationBudgetAllocation do
 
     expect(subject.total_items_value).to eq 45
   end
+
+  describe "#items_by_material" do
+    it "returns all the items which have a material belonging to a given set" do
+      material_ids = [-1, -2]
+      items = double(:items)
+      subject.stub(:items => items)
+
+      items.should_receive(:by_material).with(material_ids)
+      subject.items_by_material(material_ids)
+    end
+  end
 end

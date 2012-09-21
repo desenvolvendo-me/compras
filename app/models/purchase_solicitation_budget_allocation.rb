@@ -20,6 +20,15 @@ class PurchaseSolicitationBudgetAllocation < Compras::Model
     items.collect(&:estimated_total_price).sum
   end
 
+  def self.by_material(material_ids)
+    joins { items }.
+      where { |budget_allocation| budget_allocation.items.material_id.in(material_ids) }
+  end
+
+  def items_by_material(material_ids)
+    items.by_material(material_ids)
+  end
+
   protected
 
   def must_have_at_least_one_item
