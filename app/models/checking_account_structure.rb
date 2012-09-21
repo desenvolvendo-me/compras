@@ -12,6 +12,6 @@ class CheckingAccountStructure < Compras::Model
   filterize
 
   def to_s
-    name
+    "#{checking_account_of_fiscal_account} - #{name}"
   end
 end

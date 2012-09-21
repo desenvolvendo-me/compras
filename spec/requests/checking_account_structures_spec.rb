@@ -26,7 +26,7 @@ feature "CheckingAccountStructures" do
 
     expect(page).to have_notice 'Estrutura da Conta Corrente criado com sucesso.'
 
-    click_link 'Fonte de Recursos'
+    click_link 'Disponibilidade financeira - Fonte de Recursos'
 
     expect(page).to have_field 'Conta corrente', :with => 'Disponibilidade financeira'
     expect(page).to have_field 'Nome', :with => 'Fonte de Recursos'
@@ -44,7 +44,7 @@ feature "CheckingAccountStructures" do
 
     navigate 'Contabilidade > Comum > Plano de Contas > Estruturas das Contas Correntes'
 
-    click_link 'Fonte de Recursos'
+    click_link 'Disponibilidade financeira - Fonte de Recursos'
 
     fill_modal 'Conta corrente', :with => 'Disponibilidade'
     fill_in 'Nome', :with => 'Outra Fonte de Recursos'
@@ -58,7 +58,7 @@ feature "CheckingAccountStructures" do
 
     expect(page).to have_notice 'Estrutura da Conta Corrente editado com sucesso.'
 
-    click_link 'Outra Fonte de Recursos'
+    click_link 'Disponibilidade - Outra Fonte de Recursos'
 
     expect(page).to have_field 'Conta corrente', :with => 'Disponibilidade'
     expect(page).to have_field 'Nome', :with => 'Outra Fonte de Recursos'
@@ -74,7 +74,7 @@ feature "CheckingAccountStructures" do
 
     navigate 'Contabilidade > Comum > Plano de Contas > Estruturas das Contas Correntes'
 
-    click_link 'Fonte de Recursos'
+    click_link 'Disponibilidade financeira - Fonte de Recursos'
 
     click_link 'Apagar'
 
