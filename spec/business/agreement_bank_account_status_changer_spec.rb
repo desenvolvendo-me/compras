@@ -19,7 +19,7 @@ describe AgreementBankAccountStatusChanger do
       double('Account2')
     end
 
-    it 'should generate mask' do
+    it 'should set status' do
       status.stub(:value_for).with(:INACTIVE).and_return('inactive')
       status.stub(:value_for).with(:ACTIVE).and_return('active')
 
@@ -39,7 +39,7 @@ describe AgreementBankAccountStatusChanger do
       double('Account1')
     end
 
-    it 'should generate mask' do
+    it 'should set status as active' do
       status.stub(:value_for).with(:ACTIVE).and_return('active')
 
       account_1.should_receive(:status=).with('active')
