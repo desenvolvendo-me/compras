@@ -234,4 +234,36 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to_not have_button 'Remover'
     expect(page).to_not have_button 'Salvar'
   end
+
+  scenario 'provide purchase solicitation search by code and responsible' do
+    PurchaseSolicitation.make!(:reparo)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Criar Agrupamento de Item de Solicitação de Compra'
+
+    fill_in 'Descrição', :with => 'Descrição Teste'
+    click_button 'Adicionar Material'
+
+    fill_modal 'Solicitações de compra', :field => 'Código', :with => '1'
+
+    expect(page).to have_content '1/2012'
+
+    click_button 'Remover'
+
+    within_modal 'Solicitações de compra' do
+      within_modal 'Responsável' do
+
+        fill_modal 'Pessoa', :field => 'Nome', :with => 'Gabriel Sobrinho'
+        click_button 'Pesquisar'
+        click_record 'Gabriel Sobrinho'
+
+      end
+
+      click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+  end
 end

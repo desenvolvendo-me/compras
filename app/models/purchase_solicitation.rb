@@ -8,7 +8,7 @@ class PurchaseSolicitation < Compras::Model
 
   auto_increment :code, :by => :accounting_year
 
-  attr_modal :accounting_year, :kind, :delivery_location_id, :budget_structure_id
+  attr_modal :code, :accounting_year, :kind, :delivery_location_id, :budget_structure_id, :responsible_id
 
   has_enumeration_for :kind, :with => PurchaseSolicitationKind, :create_helpers => true
   has_enumeration_for :service_status, :with => PurchaseSolicitationServiceStatus,
