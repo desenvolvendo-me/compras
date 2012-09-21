@@ -10,9 +10,7 @@ describe CheckingAccountOfFiscalAccountImporter do
   let :null_repository do
     repository = double.as_null_object
 
-    repository.should_receive(:transaction) do |&block|
-      block.call
-    end
+    repository.should_receive(:transaction).and_yield
 
     repository
   end
