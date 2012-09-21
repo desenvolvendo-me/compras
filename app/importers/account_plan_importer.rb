@@ -1,10 +1,9 @@
 # encoding: utf-8
 class AccountPlanImporter < Importer
-  attr_accessor :repository, :nature_balance, :nature_information,
-                :surplus_indicator, :nature_balance_variation,
-                :movimentation_kind, :checking_account_repository
+  attr_accessor :repository, :nature_balance, :nature_information, :surplus_indicator, :nature_balance_variation,
+                :movimentation_kind, :checking_account_repository, :config_importer
 
-  def initialize(repository = AccountPlan, nature_balance = NatureBalance, nature_information = NatureInformation, surplus_indicator = SurplusIndicator, nature_balance_variation = NatureBalanceVariation, movimentation_kind = MovimentationKind, checking_account_repository = CheckingAccountOfFiscalAccount)
+  def initialize(repository = AccountPlan, nature_balance = NatureBalance, nature_information = NatureInformation, surplus_indicator = SurplusIndicator, nature_balance_variation = NatureBalanceVariation, movimentation_kind = MovimentationKind, checking_account_repository = CheckingAccountOfFiscalAccount, config_importer = AccountPlanConfigurationImporter.new)
     self.repository = repository
     self.nature_balance = nature_balance
     self.nature_information = nature_information
@@ -12,6 +11,7 @@ class AccountPlanImporter < Importer
     self.nature_balance_variation = nature_balance_variation
     self.movimentation_kind = movimentation_kind
     self.checking_account_repository = checking_account_repository
+    self.config_importer = config_importer
   end
 
   def import!
@@ -41,8 +41,13 @@ class AccountPlanImporter < Importer
       "detailing_required_opening" => value_for_detailing_required_opening(attributes),
       "detailing_required_thirteenth" => value_for_detailing_required_thirteenth(attributes),
       "detailing_required_fourteenth" => value_for_detailing_required_thirteenth(attributes),
-      "checking_account_of_fiscal_account_id" => value_for_checking_account_of_fiscal_account_id(attributes)
+      "checking_account_of_fiscal_account_id" => value_for_checking_account_of_fiscal_account_id(attributes),
+      "account_plan_configuration_id" => account_plan_configuration.id
     ).except('end', 'checking_account_of_fiscal_account')
+  end
+
+  def account_plan_configuration
+    @account_plan_configuration ||= config_importer.import!
   end
 
   def value_for_checking_account_of_fiscal_account_id(attributes)

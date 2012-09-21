@@ -5,4 +5,8 @@ class State < Unico::State
 
   filterize
   orderize
+
+  def self.id_by_name!(name)
+    find_by_name!(name).id
+  end
 end
