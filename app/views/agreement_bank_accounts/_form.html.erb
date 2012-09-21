@@ -10,7 +10,7 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-4">
-      <%= f.input :creation_date %>
+      <%= f.input :creation_date, :disabled => true, :input_html => { :value => f.object.decorator.creation_date } %>
     </div>
 
     <div class="yui3-u-1-4">

@@ -6,16 +6,24 @@ describe AgreementsController do
     controller.stub(:authorize_resource!)
   end
 
-  it 'should call the AgreementAdditiveNumberGenerator on action create' do
-    AgreementAdditiveNumberGenerator.any_instance.should_receive(:generate!)
+  context 'POST #create' do
+    it 'should call the AgreementAdditiveNumberGenerator on action create' do
+      AgreementAdditiveNumberGenerator.any_instance.should_receive(:generate!)
 
-    post :create
-  end
+      post :create
+    end
 
-  it 'should call the AgreementBankAccountStatusChanger on action create' do
-    AgreementBankAccountStatusChanger.any_instance.should_receive(:change!)
+    it 'should call the AgreementBankAccountStatusChanger on action create' do
+      AgreementBankAccountStatusChanger.any_instance.should_receive(:change!)
 
-    post :create
+      post :create
+    end
+
+    it 'should call the AgreementBankAccountCreationDateGenerator on action create' do
+      AgreementBankAccountCreationDateGenerator.any_instance.should_receive(:change!)
+
+      post :create
+    end
   end
 
   context 'PUT #update' do
@@ -31,6 +39,14 @@ describe AgreementsController do
       Agreement.stub(:find).and_return(double.as_null_object)
 
       AgreementBankAccountStatusChanger.any_instance.should_receive(:change!)
+
+      put :update, :id => '1'
+    end
+
+    it 'should call AgreementAdditiveNumberGenerator' do
+      Agreement.stub(:find).and_return(double.as_null_object)
+
+      AgreementBankAccountCreationDateGenerator.any_instance.should_receive(:change!)
 
       put :update, :id => '1'
     end

@@ -139,7 +139,8 @@ feature "Agreements" do
       click_button 'Adicionar Conta'
 
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
-      fill_in 'Data inclusão', :with => I18n.l(Date.current)
+      expect(page).to have_disabled_field 'Data inclusão'
+      expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
       expect(page).to have_disabled_field 'Status'
     end
 
@@ -205,6 +206,7 @@ feature "Agreements" do
 
     within_tab 'Conta Bancária' do
       expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
+      expect(page).to have_disabled_field 'Data inclusão'
       expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
       expect(page).to have_disabled_field 'Status'
       expect(page).to have_field 'Status', :selected => 'Ativo'
@@ -290,7 +292,6 @@ feature "Agreements" do
 
       within '.agreement-bank-account:nth-child(3)' do
         fill_modal 'Conta bancária *', :with => 'Santander - Folha de Pagamento', :field => 'Descrição'
-        fill_in 'Data inclusão', :with => I18n.l(Date.current)
       end
     end
 
@@ -386,6 +387,7 @@ feature "Agreements" do
     within_tab 'Conta Bancária' do
       within '.agreement-bank-account:nth-child(1)' do
         expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
+        expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
         expect(page).to have_disabled_field 'Status'
         expect(page).to have_select 'Status', :selected => 'Inativo'
@@ -393,6 +395,7 @@ feature "Agreements" do
 
       within '.agreement-bank-account:nth-child(2)' do
         expect(page).to have_field 'Conta bancária *', :with => 'Santander - Folha de Pagamento'
+        expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
         expect(page).to have_disabled_field 'Status'
         expect(page).to have_select 'Status', :selected => 'Ativo'
