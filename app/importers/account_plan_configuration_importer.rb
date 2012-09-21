@@ -11,7 +11,7 @@ class AccountPlanConfigurationImporter
 
   def import!
     account_plan_configuration_repository.create!(:year =>  2013,
-                                                 :state_id => state.id_by_name!("São Paulo"),
+                                                 :state_id => state.id_by_acronym!("SP"),
                                                  :description => "Novo Código AUDESP",
                                                  :account_plan_levels_attributes => levels
                                                 )

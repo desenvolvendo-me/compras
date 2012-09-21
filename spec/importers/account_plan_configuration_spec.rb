@@ -25,7 +25,7 @@ describe AccountPlanConfigurationImporter do
   end
 
   it "should import the configuration" do
-    state.should_receive(:id_by_name!).with("São Paulo").and_return(1)
+    state.should_receive(:id_by_acronym!).with("SP").and_return(1)
 
     account_plan_configuration_repository.should_receive(:create!).with({ :year => 2013,
                                                                           :state_id => 1,

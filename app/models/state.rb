@@ -6,7 +6,7 @@ class State < Unico::State
   filterize
   orderize
 
-  def self.id_by_name!(name)
-    find_by_name!(name).id
+  def self.id_by_acronym!(acronym)
+    find_by_acronym!(acronym).id
   end
 end
