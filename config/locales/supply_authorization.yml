@@ -21,7 +21,7 @@ pt-BR:
         bank: "Banco"
         budget_structure: "Estrutura orçamentaria"
         payment_method: "Método de pagamento"
-        period: "Prazo"
+        delivery_term: "Prazo de entrega"
         delivery_location: "Local de entrega"
         licitation_object: "Objeto da licitatação"
         observation: "Observação"

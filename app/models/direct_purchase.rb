@@ -3,7 +3,7 @@ class DirectPurchase < Compras::Model
                   :modality, :creditor_id, :budget_structure_id,
                   :licitation_object_id, :delivery_location_id, :employee_id,
                   :payment_method_id, :price_collection, :price_registration_id,
-                  :observation, :pledge_type, :period, :period_unit,
+                  :observation, :pledge_type, :delivery_term, :delivery_term_period,
                   :direct_purchase_budget_allocations_attributes,
                   :total_allocations_items_value,
                   :purchase_solicitation_item_group_id
@@ -12,7 +12,7 @@ class DirectPurchase < Compras::Model
 
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
-  has_enumeration_for :period_unit, :with => PeriodUnit
+  has_enumeration_for :delivery_term_period, :with => PeriodUnit
 
   belongs_to :legal_reference
   belongs_to :creditor
@@ -43,7 +43,7 @@ class DirectPurchase < Compras::Model
   validates :year, :date, :legal_reference, :modality, :presence => true
   validates :budget_structure, :licitation_object, :delivery_location, :presence => true
   validates :creditor, :employee, :payment_method, :pledge_type, :presence => true
-  validates :period, :period_unit, :presence => true
+  validates :delivery_term, :delivery_term_period, :presence => true
   validates :direct_purchase_budget_allocations, :no_duplication => :budget_allocation_id
 
   validate :must_have_at_least_budget_allocation

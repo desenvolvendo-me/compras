@@ -16,8 +16,8 @@ DirectPurchase.blueprint(:compra) do
   price_collection { 9.99 }
   price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Observacoes" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
+  delivery_term{ 1 }
+  delivery_term_period { PeriodUnit::YEAR }
   total_allocations_items_value { 600.00 }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra)] }
 end
@@ -39,8 +39,8 @@ DirectPurchase.blueprint(:compra_nao_autorizada) do
   price_collection { 9.99 }
   price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra de 2012 ainda não autorizada" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
+  delivery_term{ 1 }
+  delivery_term_period { PeriodUnit::YEAR }
   total_allocations_items_value { 600.00 }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_extra)] }
 end
@@ -62,8 +62,8 @@ DirectPurchase.blueprint(:compra_2011) do
   price_collection { 9.99 }
   price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra feita em 2011 e não authorizada" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
+  delivery_term{ 1 }
+  delivery_term_period { PeriodUnit::YEAR }
   total_allocations_items_value { 600.00 }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_engenharia)] }
 end
@@ -85,8 +85,8 @@ DirectPurchase.blueprint(:compra_2011_dez) do
   price_collection { 9.99 }
   price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra feita em 2011 e não authorizada" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
+  delivery_term{ 1 }
+  delivery_term_period { PeriodUnit::YEAR }
   total_allocations_items_value { 600.00 }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_engenharia)] }
 end
@@ -108,8 +108,8 @@ DirectPurchase.blueprint(:company_purchase) do
   price_collection { 9.99 }
   price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Compra feita em 2011 e não autorizada" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
+  delivery_term{ 1 }
+  delivery_term_period { PeriodUnit::YEAR }
   total_allocations_items_value { 600.00 }
   direct_purchase_budget_allocations { [DirectPurchaseBudgetAllocation.make!(:alocacao_compra_engenharia)] }
 end
@@ -131,8 +131,8 @@ DirectPurchase.blueprint(:compra_perto_do_limite) do
   price_collection { 9.99 }
   price_registration { PriceRegistration.make!(:registro_de_precos) }
   observation { "Observacoes" }
-  period { 1 }
-  period_unit { PeriodUnit::YEAR }
+  delivery_term{ 1 }
+  delivery_term_period { PeriodUnit::YEAR }
   total_allocations_items_value { 90000 }
   direct_purchase_budget_allocations { [
     DirectPurchaseBudgetAllocation.make!(:valores_proximo_ao_limite)

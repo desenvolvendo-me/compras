@@ -20,13 +20,13 @@ class SupplyAuthorizationDecorator
     end
   end
 
-  def pluralized_period_unit
-    return unless component.direct_purchase && component.period
+  def pluralized_delivery_term_period
+    return unless component.direct_purchase && component.delivery_term
 
-    if component.period > 1
-      translate("enumerations.period_unit.#{period_unit}")
+    if component.delivery_term > 1
+      translate("enumerations.period_unit.#{delivery_term_period}")
     else
-      component.period_unit_humanize
+      component.delivery_term_period_humanize
     end
   end
 end

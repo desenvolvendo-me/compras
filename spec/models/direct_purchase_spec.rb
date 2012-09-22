@@ -95,8 +95,8 @@ describe DirectPurchase do
     it { should validate_presence_of :creditor }
     it { should validate_presence_of :employee }
     it { should validate_presence_of :payment_method }
-    it { should validate_presence_of :period }
-    it { should validate_presence_of :period_unit }
+    it { should validate_presence_of :delivery_term }
+    it { should validate_presence_of :delivery_term_period }
     it { should validate_presence_of :pledge_type }
 
     context '#authorized?' do
