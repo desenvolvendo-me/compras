@@ -64,7 +64,8 @@
         params = {
           by_material_id: object.find('.material-modal input:hidden').val(),
           by_pending_or_ids: deletedItems,
-          except_ids: tableItems
+          except_ids: tableItems,
+          can_be_grouped: true
         };
 
     url += jQuery.param(params);

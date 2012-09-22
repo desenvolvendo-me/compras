@@ -56,6 +56,12 @@ class PurchaseSolicitation < Compras::Model
 
   scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
 
+  scope :can_be_grouped, where { service_status.in [
+    PurchaseSolicitationServiceStatus::LIBERATED,
+    PurchaseSolicitationServiceStatus::PENDING,
+    PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
+  }
+
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end

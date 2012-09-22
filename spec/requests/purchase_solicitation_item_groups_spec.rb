@@ -243,6 +243,7 @@ feature "PurchaseSolicitationItemGroups" do
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
     fill_in 'Descrição', :with => 'Descrição Teste'
+
     click_button 'Adicionar Material'
 
     fill_modal 'Solicitações de compra', :field => 'Código', :with => '1'
@@ -265,5 +266,38 @@ feature "PurchaseSolicitationItemGroups" do
     end
 
     expect(page).to have_content 'Gabriel Sobrinho'
+  end
+
+  scenario 'an annulled purchase solicitation cannot be selected on purchase solicitation item group' do
+    PurchaseSolicitation.make!(:reparo)
+    PurchaseSolicitation.make!(:reparo_2013_anulado)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Criar Agrupamento de Item de Solicitação de Compra'
+
+    fill_in 'Descrição', :with => 'Agrupamento de antivirus'
+
+    click_button 'Adicionar Material'
+
+    fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+    within_modal 'Solicitações de compra' do
+      fill_in 'Ano', :with => '2012'
+
+      click_button 'Pesquisar'
+
+      within '.records' do
+        expect(page).to have_content '2012'
+      end
+
+      fill_in 'Ano', :with => '2013'
+
+      click_button 'Pesquisar'
+
+      within '.records' do
+        expect(page).to_not have_content '2013'
+      end
+    end
   end
 end
