@@ -23,6 +23,8 @@ class BudgetStructureConfiguration < Compras::Model
   end
 
   def ordered_budget_structure_levels
+    return budget_structure_levels if any_not_persisted_level?
+
     budget_structure_levels.sort_by(&:level)
   end
 
@@ -31,6 +33,10 @@ class BudgetStructureConfiguration < Compras::Model
   end
 
   protected
+
+  def any_not_persisted_level?
+    budget_structure_levels.select(&:new_record?).present?
+  end
 
   def separator_for_budget_structure_levels
     ordered_budget_structure_levels.each_with_index do |budget_structure_level, idx|

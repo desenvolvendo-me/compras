@@ -47,4 +47,34 @@ describe BudgetStructureConfiguration do
       expect(subject.ordered_budget_structure_levels.last.errors[:separator]).to_not include 'não pode ficar em branco'
     end
   end
+
+  describe '#ordered_budget_structure_levels' do
+    let :level_1 do
+      double(:level_1, :new_record? => false, :level => 1)
+    end
+
+    let :level_2 do
+      double(:level_2, :new_record? => true, :level => 2)
+    end
+
+    let :level_3 do
+        double(:level_3, :new_record? => false, :level => 3)
+    end
+
+    let :level_4 do
+        double(:level_4, :new_record? => false, :level => 4)
+    end
+
+    it "should return the same order if have any level not persisted" do
+      subject.stub(:budget_structure_levels).and_return([level_3, level_4, level_2, level_1])
+
+      expect(subject.ordered_budget_structure_levels).to eq [level_3, level_4, level_2, level_1]
+    end
+
+    it "should return ordered if have not any level not persisted" do
+      subject.stub(:budget_structure_levels).and_return([level_3, level_4, level_1])
+
+      expect(subject.ordered_budget_structure_levels).to eq [level_1, level_3, level_4]
+    end
+  end
 end
