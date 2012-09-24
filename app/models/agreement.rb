@@ -77,6 +77,8 @@ class Agreement < Compras::Model
     persisted? && agreement_occurrences.present?
   end
 
+  protected
+
   def if_sum_of_participants_granting_equals_total_value(numeric_parser = ::I18n::Alchemy::NumericParser)
     return if agreement_participants.blank? || total_value.blank?
 
@@ -98,8 +100,6 @@ class Agreement < Compras::Model
                  :total => numeric_parser.localize(total_value)
     end
   end
-
-  protected
 
   def total_value
     value.to_f + counterpart_value.to_f
