@@ -28,8 +28,8 @@ describe Precatory do
   context "parceled_value" do
     let :precatory_parcels do
       [
-        double('parcel1', :value => 1000.0),
-        double('parcel2', :value => 2000.0)
+        double('parcel1', :value => 1000.0, :marked_for_destruction? => false),
+        double('parcel2', :value => 2000.0, :marked_for_destruction? => false)
       ]
     end
 

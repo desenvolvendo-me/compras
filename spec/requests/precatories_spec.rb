@@ -6,6 +6,28 @@ feature "Precatories" do
     sign_in
   end
 
+  scenario 'should validate parceled value when parcels is empty or with removed item' do
+    Precatory.make!(:precatorio)
+
+    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+
+    within_records do
+      click_link '1234/2012'
+    end
+
+    within_tab 'Vencimentos' do
+      within '.parcel:first' do
+        click_button 'Remover Parcela'
+      end
+
+      click_button 'Remover Parcela'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'deve ser igual ao valor do precatório (R$ 6.000.000,00)'
+  end
+
   scenario 'create a new precatory' do
     Creditor.make!(:wenderson_sa)
     PrecatoryType.make!(:tipo_de_precatorio_ativo)

@@ -22,7 +22,7 @@ class Precatory < Compras::Model
   filterize
 
   def parceled_value
-    precatory_parcels.map(&:value).compact.sum
+    precatory_parcels.reject(&:marked_for_destruction?).map(&:value).compact.sum
   end
 
   def to_s
