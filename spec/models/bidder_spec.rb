@@ -292,4 +292,18 @@ describe Bidder do
       expect(subject.benefited_by_law_of_proposals?).to be false
     end
   end
+
+  context '#inactivate!' do
+    it 'changes the bidder status to Inactive' do
+      subject.should_receive(:update_column).with(:status, "inactive")
+      subject.inactivate!
+    end
+  end
+
+  context '#activate!' do
+    it 'changes the bidder status to Active' do
+      subject.should_receive(:update_column).with(:status, "active")
+      subject.activate!
+    end
+  end
 end

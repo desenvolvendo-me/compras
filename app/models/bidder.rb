@@ -152,13 +152,11 @@ class Bidder < Compras::Model
   end
 
   def inactivate!
-    inactive!
-    save!
+    update_column(:status, Status::INACTIVE)
   end
 
   def activate!
-    active!
-    save!
+    update_column(:status, Status::ACTIVE)
   end
 
   protected
