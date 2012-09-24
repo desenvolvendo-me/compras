@@ -8,7 +8,7 @@
     </div>
 
     <div class="yui3-u-1-4">
-      <%= f.input :status %>
+      <%= f.input :status, :disabled => f.object.new_record? %>
     </div>
   </div>
 

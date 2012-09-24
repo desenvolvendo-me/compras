@@ -6,6 +6,28 @@ feature "CapabilityDestinations" do
     sign_in
   end
 
+  scenario 'should edit status of capability_destination_detail in an existent capability_destination' do
+    CapabilityDestination.make!(:linha_de_credito)
+
+    navigate 'Contabilidade > Orçamento > Recurso > Destinações de Recursos'
+
+    click_link 'Programa de linha de crédito'
+
+    within_tab 'Detalhamento' do
+      select 'Inativo', :from => 'Status'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Destinação de Recursos editado com sucesso.'
+
+    click_link 'Programa de linha de crédito'
+
+    within_tab 'Detalhamento' do
+      expect(page).to have_select 'Status', :selected => 'Inativo'
+    end
+  end
+
   scenario 'create a new capability_destination' do
     CapabilityAllocationDetail.make!(:educacao)
 
@@ -25,7 +47,8 @@ feature "CapabilityDestinations" do
       click_button 'Adicionar Detalhamento'
 
       fill_modal 'Detalhamento', :with => 'Educação', :field => 'Descrição'
-      select 'Ativo', :from => 'Status'
+
+      expect(page).to have_disabled_field 'Status'
     end
 
     click_button 'Salvar'
