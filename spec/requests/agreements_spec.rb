@@ -76,7 +76,7 @@ feature "Agreements" do
     click_link 'Criar Convênio'
 
     within_tab 'Contas Bancárias' do
-      click_button 'Adicionar Conta'
+      click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
 
@@ -170,7 +170,7 @@ feature "Agreements" do
     end
 
     within_tab 'Contas Bancárias' do
-      click_button 'Adicionar Conta'
+      click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
       expect(page).to have_disabled_field 'Data inclusão'
@@ -317,13 +317,13 @@ feature "Agreements" do
     end
 
     within_tab 'Contas Bancárias' do
-      click_button 'Remover Conta'
+      click_button 'Remover Conta Bancária'
 
-      click_button 'Adicionar Conta'
+      click_button 'Adicionar Conta Bancária'
 
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
 
-      click_button 'Adicionar Conta'
+      click_button 'Adicionar Conta Bancária'
 
       within '.nested-agreement-bank-account:nth-child(3)' do
         fill_modal 'Conta bancária *', :with => 'Santander - Folha de Pagamento', :field => 'Descrição'
