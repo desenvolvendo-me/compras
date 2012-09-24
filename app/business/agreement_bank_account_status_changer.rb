@@ -9,6 +9,7 @@ class AgreementBankAccountStatusChanger
   def change!
     bank_accounts.each_with_index do |bank, index|
       bank.status = bank_status(bank, index)
+      bank.desactivation_date = nil if bank.active?
     end
   end
 

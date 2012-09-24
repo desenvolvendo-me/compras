@@ -15,7 +15,7 @@ class AgreementsController < CrudController
     object.localized.assign_attributes(*attributes)
 
     AgreementAdditiveNumberGenerator.new(object).generate!
-    AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts).change!
+    AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts_not_marked_for_destruction).change!
     AgreementBankAccountCreationDateGenerator.new(object.agreement_bank_accounts).change!
     AgreementBankAccountDesactivationDateGenerator.new(object.agreement_bank_accounts).change!
 

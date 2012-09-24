@@ -27,7 +27,10 @@ Agreement.blueprint(:apoio_ao_turismo_with_2_occurrences) do
   number_year_process { '12758/2008' }
   process_date { Date.new(2012, 11, 22) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  agreement_bank_accounts { [AgreementBankAccount.make!(:itau)] }
+  agreement_bank_accounts { [
+    AgreementBankAccount.make!(:itau),
+    AgreementBankAccount.make!(:santander)
+  ] }
   agreement_occurrences { [AgreementOccurrence.make!(:em_andamento), AgreementOccurrence.make!(:other)] }
   agreement_participants { [AgreementParticipant.make!(:sobrinho), AgreementParticipant.make!(:sobrinho_granting)] }
   agreement_additives { [AgreementAdditive.make!(:termo_de_aditamento)] }

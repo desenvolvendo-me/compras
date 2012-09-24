@@ -77,6 +77,10 @@ class Agreement < Compras::Model
     persisted? && agreement_occurrences.present?
   end
 
+  def agreement_bank_accounts_not_marked_for_destruction
+    agreement_bank_accounts.reject(&:marked_for_destruction?)
+  end
+
   protected
 
   def if_sum_of_participants_granting_equals_total_value(numeric_parser = ::I18n::Alchemy::NumericParser)

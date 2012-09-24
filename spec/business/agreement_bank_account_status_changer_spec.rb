@@ -12,18 +12,19 @@ describe AgreementBankAccountStatusChanger do
     end
 
     let :account_1 do
-      double('Account1')
+      double('Account1', :active? => false)
     end
 
     let :account_2 do
-      double('Account2')
+      double('Account2', :active? => true)
     end
 
-    it 'should set status' do
+    it 'should set status and clear desactivation_date if was active' do
       status.stub(:value_for).with(:INACTIVE).and_return('inactive')
       status.stub(:value_for).with(:ACTIVE).and_return('active')
 
       account_1.should_receive(:status=).with('inactive')
+      account_2.should_receive(:desactivation_date=).with(nil)
       account_2.should_receive(:status=).with('active')
 
       subject.change!
@@ -36,13 +37,14 @@ describe AgreementBankAccountStatusChanger do
     end
 
     let :account_1 do
-      double('Account1')
+      double('Account1', :active? => true)
     end
 
-    it 'should set status as active' do
+    it 'should set status as active and clear desactivation_date' do
       status.stub(:value_for).with(:ACTIVE).and_return('active')
 
       account_1.should_receive(:status=).with('active')
+      account_1.should_receive(:desactivation_date=).with(nil)
 
       subject.change!
     end
