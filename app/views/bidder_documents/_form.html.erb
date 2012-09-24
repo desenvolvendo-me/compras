@@ -4,19 +4,19 @@
   <%= f.input :document_type_id, :as => 'hidden', :input_html => { :class => 'bidder-document-type-id', :value => (f.object.document_type_id || "{{docId}}") } %>
 
   <div class="yui3-g">
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-2">
       <%= f.input :description, :disabled => true, :input_html => { :value => (f.object.description || "{{docDescription}}") } %>
     </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-6">
       <%= f.input :document_number %>
     </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-6">
       <%= f.input :emission_date %>
     </div>
 
-    <div class="yui3-u-1-4">
+    <div class="yui3-u-1-6">
       <%= f.input :validity %>
     </div>
   </div>
