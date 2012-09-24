@@ -5,11 +5,11 @@ class AgreementBankAccountDecorator
 
   def creation_date(date_repository = ::Date)
     if component.creation_date?
-      date_current_or_creation_date = component.creation_date
+      current_date_or_creation_date = component.creation_date
     else
-      date_current_or_creation_date = date_repository.current
+      current_date_or_creation_date = date_repository.current
     end
 
-    localize date_current_or_creation_date
+    localize current_date_or_creation_date
   end
 end
