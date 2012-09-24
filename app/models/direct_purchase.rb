@@ -41,7 +41,8 @@ class DirectPurchase < Compras::Model
 
   validates :year, :mask => "9999", :allow_blank => true
   validates :year, :date, :legal_reference, :modality, :presence => true
-  validates :budget_structure, :licitation_object, :delivery_location, :presence => true
+  validates :licitation_object, :delivery_location, :presence => true
+  validates :budget_structure, :presence => true, :unless => 'purchase_solicitation_item_group.present?'
   validates :creditor, :employee, :payment_method, :pledge_type, :presence => true
   validates :delivery_term, :delivery_term_period, :presence => true
   validates :direct_purchase_budget_allocations, :no_duplication => :budget_allocation_id

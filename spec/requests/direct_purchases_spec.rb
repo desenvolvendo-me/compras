@@ -976,4 +976,49 @@ feature "DirectPurchases" do
       expect(page).not_to have_field 'Material', :with => '02.02.00001 - Arame farpado'
     end
   end
+
+  scenario 'when a puchase solicitation group is selected, the "budget structure" becomes optional' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    LegalReference.make!(:referencia)
+    Creditor.make!(:wenderson_sa)
+    LicitationObject.make!(:ponte)
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    ModalityLimit.make!(:modalidade_de_compra)
+    PriceRegistration.make!(:registro_de_precos)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      expect(page).to have_content 'Estrutura orçamentaria *'
+
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+        click_record 'Agrupamento de antivirus'
+      end
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo', :with => '1'
+      select 'ano/anos',  :from => 'Período do prazo'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+    end
+
+    expect(page).not_to have_content 'Estrutura orçamentaria *'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+  end
 end
