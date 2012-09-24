@@ -22,7 +22,7 @@
   function orderedLevels() {
     var levels = {};
 
-    $('#account-plan-level').children('.nested-account-plan-level').each(function() {
+    $('#account-plan-level').children('.nested-account-plan-level:visible').each(function() {
       var levelInput = $(this).find('input.level'),
           level      = levelInput.val(),
           digits     = $(this).find('input.digits').val(),

@@ -187,6 +187,29 @@ feature "AccountPlanConfigurations" do
     end
   end
 
+  scenario 'when remove a level should not generate error for duplicated level' do
+    AccountPlanConfiguration.make!(:segundo_plano)
+
+    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+
+    click_link 'Segundo plano de MG'
+
+    within 'div.nested-account-plan-level:nth-child(1)' do
+      click_button 'Remover'
+    end
+
+    click_button 'Adicionar Estrutura'
+
+    within 'div.nested-account-plan-level:nth-child(3)' do
+      fill_in 'Nível', :with => '2'
+      fill_in 'Descrição', :with => 'Indicador de quantidade'
+      fill_in 'Dígitos', :with => '4'
+      select 'Barra', :from => 'Separador'
+
+      expect(page).to_not have_content 'já está em uso'
+    end
+  end
+
   def make_dependencies!
     State.make!(:mg)
   end
