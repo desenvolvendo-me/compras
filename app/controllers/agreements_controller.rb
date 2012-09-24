@@ -6,6 +6,7 @@ class AgreementsController < CrudController
     AgreementAdditiveNumberGenerator.new(object).generate!
     AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts).change!
     AgreementBankAccountCreationDateGenerator.new(object.agreement_bank_accounts).change!
+    AgreementBankAccountDesactivationDateGenerator.new(object.agreement_bank_accounts).change!
 
     super
   end
@@ -16,6 +17,7 @@ class AgreementsController < CrudController
     AgreementAdditiveNumberGenerator.new(object).generate!
     AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts).change!
     AgreementBankAccountCreationDateGenerator.new(object.agreement_bank_accounts).change!
+    AgreementBankAccountDesactivationDateGenerator.new(object.agreement_bank_accounts).change!
 
     object.save
   end

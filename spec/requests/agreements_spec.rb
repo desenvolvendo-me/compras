@@ -141,6 +141,7 @@ feature "Agreements" do
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
       expect(page).to have_disabled_field 'Data inclusão'
       expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
+      expect(page).to have_disabled_field 'Data de desativação'
       expect(page).to have_disabled_field 'Status'
     end
 
@@ -208,6 +209,7 @@ feature "Agreements" do
       expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
       expect(page).to have_disabled_field 'Data inclusão'
       expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
+      expect(page).to have_disabled_field 'Data de desativação'
       expect(page).to have_disabled_field 'Status'
       expect(page).to have_field 'Status', :selected => 'Ativo'
     end
@@ -286,7 +288,6 @@ feature "Agreements" do
       click_button 'Adicionar Conta'
 
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
-      fill_in 'Data inclusão', :with => I18n.l(Date.current)
 
       click_button 'Adicionar Conta'
 
@@ -389,6 +390,8 @@ feature "Agreements" do
         expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
         expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_disabled_field 'Data de desativação'
+        expect(page).to have_field 'Data de desativação', :with => I18n.l(Date.current)
         expect(page).to have_disabled_field 'Status'
         expect(page).to have_select 'Status', :selected => 'Inativo'
       end
@@ -397,6 +400,7 @@ feature "Agreements" do
         expect(page).to have_field 'Conta bancária *', :with => 'Santander - Folha de Pagamento'
         expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
+        expect(page).to have_disabled_field 'Data de desativação'
         expect(page).to have_disabled_field 'Status'
         expect(page).to have_select 'Status', :selected => 'Ativo'
       end
