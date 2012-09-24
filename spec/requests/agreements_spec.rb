@@ -6,6 +6,40 @@ feature "Agreements" do
     sign_in
   end
 
+  scenario 'checking regulatory act model info at additivies tab in a new agreement' do
+    RegulatoryAct.make!(:sopa)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Criar Convênio'
+
+    within_tab 'Aditivos' do
+      click_button 'Adicionar Aditivo'
+
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content 'Lei'
+    expect(page).to have_content '1234'
+  end
+
+  scenario 'checking regulatory act model info at additivies tab in an existing agreement' do
+    Agreement.make!(:apoio_ao_turismo)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Aditivos' do
+      click_link 'Mais informações'
+    end
+
+    expect(page).to have_content 'Lei'
+    expect(page).to have_content '1234'
+  end
+
   scenario 'checking regulatory act modal info' do
     Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
 

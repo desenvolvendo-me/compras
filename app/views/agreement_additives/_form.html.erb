@@ -9,6 +9,11 @@
 
     <div class="yui3-u-1-2">
       <%= f.input :regulatory_act %>
+
+      <p>
+        <%= link_to_modal_info "#{'agreement_agreement_additives_attributes_' unless f.object.persisted?}#{f.nested_identifier}_regulatory_act",
+            f.object.regulatory_act %>
+      </p>
     </div>
   </div>
 
