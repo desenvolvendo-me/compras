@@ -75,7 +75,7 @@ feature "Agreements" do
 
     click_link 'Criar Convênio'
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta'
 
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
@@ -132,7 +132,7 @@ feature "Agreements" do
 
     click_link 'Apoio ao turismo'
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_link 'Mais informações'
     end
 
@@ -169,7 +169,7 @@ feature "Agreements" do
       attach_file 'Arquivo', 'spec/fixtures/other_example_document.txt'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Adicionar Conta'
 
       fill_modal 'Conta bancária *', :with => 'Itaú Tributos', :field => 'Descrição'
@@ -239,7 +239,7 @@ feature "Agreements" do
       expect(page).to have_link 'other_example_document.txt'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
       expect(page).to have_disabled_field 'Data inclusão'
       expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
@@ -316,7 +316,7 @@ feature "Agreements" do
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       click_button 'Remover Conta'
 
       click_button 'Adicionar Conta'
@@ -419,7 +419,7 @@ feature "Agreements" do
       expect(page).to have_field 'Data do término', :with => '09/01/2012'
     end
 
-    within_tab 'Conta Bancária' do
+    within_tab 'Contas Bancárias' do
       within '.nested-agreement-bank-account:nth-child(1)' do
         expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
         expect(page).to have_disabled_field 'Data inclusão'
