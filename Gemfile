@@ -5,16 +5,9 @@ source 'https://gems.gemfury.com/SEqawpNNEx65yrzYS9p8/'
 ruby "1.9.3"
 
 gem 'rails', '3.2.8'
+gem 'puma', '1.6.3', :require => false
 
-platform :jruby do
-  gem 'jruby-openssl', '0.7.4'
-  gem 'activerecord-jdbcpostgresql-adapter', '1.2.0'
-end
-
-platform :ruby do
-  gem 'pg', '0.12.2'
-  gem 'puma', '1.6.3', :require => false
-end
+gem 'pg', '0.14.0'
 
 gem 'activerecord-connections', '0.0.3'
 
