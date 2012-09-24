@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       capability_destination:
-        use: "Uso"
+        use: "Identificador de uso"
         group: "Grupo"
         specification: "Especificação"
         description: "Descrição"

@@ -14,7 +14,7 @@ feature "CapabilityDestinations" do
     click_link 'Criar Destinação de Recursos'
 
     within_tab 'Principal' do
-      select 'Contrapartida de doações', :from => 'Uso'
+      select 'Contrapartida de doações', :from => 'Identificador de uso'
       select 'Recursos condicionais', :from => 'Grupo'
       fill_in 'Especificação', :with => '1'
       fill_in 'Descrição', :with => 'Programa de linha de crédito'
@@ -35,7 +35,7 @@ feature "CapabilityDestinations" do
     click_link 'Programa de linha de crédito'
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Uso *', :selected => 'Contrapartida de doações'
+      expect(page).to have_select 'Identificador de uso *', :selected => 'Contrapartida de doações'
       expect(page).to have_select 'Grupo', :selected => 'Recursos condicionais'
       expect(page).to have_field 'Especificação', :with => '1'
       expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito'
@@ -56,7 +56,7 @@ feature "CapabilityDestinations" do
     click_link 'Programa de linha de crédito'
 
     within_tab 'Principal' do
-      select 'Contrapartida de outros empréstimos', :from => 'Uso'
+      select 'Contrapartida de outros empréstimos', :from => 'Identificador de uso'
       select 'Recursos do tesouro - exercício corrente', :from => 'Grupo'
       fill_in 'Especificação', :with => '2'
       fill_in 'Descrição', :with => 'Programa de linha de crédito para projetos'
@@ -74,7 +74,7 @@ feature "CapabilityDestinations" do
     click_link 'Programa de linha de crédito para projetos'
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Uso *', :selected => 'Contrapartida de outros empréstimos'
+      expect(page).to have_select 'Identificador de uso *', :selected => 'Contrapartida de outros empréstimos'
       expect(page).to have_select 'Grupo', :selected => 'Recursos do tesouro - exercício corrente'
       expect(page).to have_field 'Especificação', :with => '2'
       expect(page).to have_field 'Descrição', :with => 'Programa de linha de crédito para projetos'
