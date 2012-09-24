@@ -28,23 +28,6 @@ class BidderProposal < Compras::Model
     order {  unit_price }
   end
 
-  def self.by_lot_item_order_by_unit_price(lot_id)
-    select { situation }.
-    select { bidder.creditor_id }.
-    select { sum(unit_price).as(total_value) }.
-
-    joins { bidder }.
-    joins { administrative_process_budget_allocation_item.licitation_process_lot }.
-
-    where { administrative_process_budget_allocation_item.licitation_process_lot.id.eq(lot_id) }.
-
-    group { situation }.
-    group { bidder.creditor_id }.
-    group { administrative_process_budget_allocation_item.licitation_process_lot.id }.
-
-    order { 'total_value' }
-  end
-
   def self.any_without_unit_price?(lot = nil)
     query = scoped
     query = query.by_lot(lot.id) if lot
