@@ -36,7 +36,7 @@ feature "DirectPurchases" do
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -89,7 +89,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'
       expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
       expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -148,7 +148,7 @@ feature "DirectPurchases" do
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -219,7 +219,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
       expect(page).to have_field 'Agrupamento de solicitações de compra', :with => 'Agrupamento de reparo 2013'
       expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -413,7 +413,7 @@ feature "DirectPurchases" do
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -445,7 +445,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'
       expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
       expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -579,7 +579,7 @@ feature "DirectPurchases" do
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -928,7 +928,7 @@ feature "DirectPurchases" do
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
-      fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -995,7 +995,7 @@ feature "DirectPurchases" do
     click_link 'Gerar Compra Direta'
 
     within_tab 'Principal' do
-      expect(page).to have_content 'Estrutura orçamentaria *'
+      expect(page).to have_content 'Estrutura orçamentária *'
 
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       within_modal 'Agrupamento de solicitações de compra' do
@@ -1015,7 +1015,7 @@ feature "DirectPurchases" do
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
     end
 
-    expect(page).not_to have_content 'Estrutura orçamentaria *'
+    expect(page).not_to have_content 'Estrutura orçamentária *'
 
     click_button 'Salvar'
 
