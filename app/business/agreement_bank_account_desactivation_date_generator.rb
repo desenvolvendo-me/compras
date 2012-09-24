@@ -7,7 +7,7 @@ class AgreementBankAccountDesactivationDateGenerator
 
   def change!
     bank_accounts.each do |bank_account|
-      next if bank_account.desactivation_date?
+      next if bank_account.desactivation_date? || bank_account.active?
 
       bank_account.desactivation_date = Date.current
     end

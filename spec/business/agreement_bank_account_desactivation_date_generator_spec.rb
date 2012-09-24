@@ -10,9 +10,9 @@ describe AgreementBankAccountDesactivationDateGenerator do
     Date.new(2012, 12, 20)
   end
 
-  context 'when have desactivation_date' do
+  context 'when have desactivation_date and is not active' do
     let :bank_account do
-      double('BankAccount', :desactivation_date? => true)
+      double('BankAccount', :desactivation_date? => true, :active? => false)
     end
 
     it 'should do nothing' do
@@ -26,14 +26,15 @@ describe AgreementBankAccountDesactivationDateGenerator do
     let :bank_account_1 do
       double('BankAccount1',
              :desactivation_date? => true,
-             :desactivation_date => Date.current)
+             :desactivation_date => Date.current,
+             :active? => false)
     end
 
     let :bank_account_2 do
-      double('BankAccount2', :desactivation_date? => false)
+      double('BankAccount2', :desactivation_date? => false, :active? => false)
     end
 
-    it 'should set desactivation_date if is blank' do
+    it 'should set desactivation_date if is blank and status is not active' do
       bank_account_1.should_receive(:desactivation_date=).never
       bank_account_2.should_receive(:desactivation_date=).with(current_date).and_return(true)
 

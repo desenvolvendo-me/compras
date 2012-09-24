@@ -2,7 +2,7 @@ class AgreementBankAccount < Compras::Model
   attr_accessible :bank_account_id, :creation_date, :status,
                   :desactivation_date
 
-  has_enumeration_for :status
+  has_enumeration_for :status, :create_helpers => true
 
   belongs_to :agreement
   belongs_to :bank_account
