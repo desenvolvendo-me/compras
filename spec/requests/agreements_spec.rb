@@ -420,7 +420,7 @@ feature "Agreements" do
     end
 
     within_tab 'Contas Bancárias' do
-      within '.nested-agreement-bank-account:nth-child(1)' do
+      within '.nested-agreement-bank-account:nth-child(2)' do
         expect(page).to have_field 'Conta bancária *', :with => 'Itaú Tributos'
         expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
@@ -430,7 +430,7 @@ feature "Agreements" do
         expect(page).to have_select 'Status', :selected => 'Inativo'
       end
 
-      within '.nested-agreement-bank-account:nth-child(2)' do
+      within '.nested-agreement-bank-account:nth-child(1)' do
         expect(page).to have_field 'Conta bancária *', :with => 'Santander - Folha de Pagamento'
         expect(page).to have_disabled_field 'Data inclusão'
         expect(page).to have_field 'Data inclusão', :with => I18n.l(Date.current)
