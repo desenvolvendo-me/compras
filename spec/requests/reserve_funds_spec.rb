@@ -125,7 +125,7 @@ feature "ReserveFunds" do
 
     fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
 
-    click_link 'reserve_fund_budget_allocation_info_link'
+    click_link 'Mais informações'
 
     within '#record' do
       expect(page).to have_content 'Detran'

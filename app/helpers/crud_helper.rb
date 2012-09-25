@@ -45,8 +45,12 @@ module CrudHelper
     end
   end
 
-  def link_to_modal_info(id, href = "#")
-    link_to I18n.translate("other.compras.messages.more_information"), href, :id => id.concat('_info_link'), :class => 'modal_info'
+  def link_to_modal_info(options)
+    options[:label] ||= I18n.translate("other.compras.messages.more_information")
+
+    content_tag(:p, :class => :modal_info) do
+      link_to options[:label], options.fetch(:href, "#")
+    end
   end
 
   def create?

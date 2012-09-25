@@ -11,10 +11,7 @@
   </div>
 </div>
 
-<p>
-  <%= f.input :budget_allocation %>
-  <%= link_to_modal_info 'reserve_fund_budget_allocation', f.object.budget_allocation %>
-</p>
+<%= f.input :budget_allocation, :modal_info => true %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-4">

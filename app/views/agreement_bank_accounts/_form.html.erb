@@ -2,11 +2,7 @@
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
 
-  <%= f.input :bank_account %>
-
-  <p>
-    <%= link_to_modal_info "#{'agreement_agreement_bank_accounts_attributes_' unless f.object.persisted?}#{f.nested_identifier}_bank_account", f.object.bank_account %>
-  </p>
+  <%= f.input :bank_account, :modal_info => true %>
 
   <div class="yui3-g">
     <div class="yui3-u-1-4">

@@ -365,7 +365,7 @@ feature "Pledges" do
         click_link 'Mais informações'
       end
 
-      expect(page).to have_content 'Informações de: Alocação'
+      expect(page).to have_content 'Informações de: 1 - Alocação'
     end
 
     scenario 'when change budget_allocation' do
@@ -381,7 +381,7 @@ feature "Pledges" do
         click_link 'Mais informações'
       end
 
-      expect(page).to have_content 'Informações de: Manutenção e Reparo'
+      expect(page).to have_content 'Informações de: 2 - Manutenção e Reparo'
       expect(page).to have_content '2011'
       expect(page).to have_content 'Manutenção e Reparo'
     end

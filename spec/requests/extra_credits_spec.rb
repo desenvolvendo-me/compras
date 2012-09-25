@@ -225,7 +225,7 @@ feature "ExtraCredits" do
         end
       end
 
-      expect(page).to have_content 'Informações de: Alocação'
+      expect(page).to have_content 'Informações de: 1 - Alocação'
     end
 
     scenario 'when change budget_allocation' do
@@ -242,7 +242,7 @@ feature "ExtraCredits" do
         end
       end
 
-      expect(page).to have_content 'Informações de: Alocação'
+      expect(page).to have_content 'Informações de: 1 - Alocação'
     end
 
     scenario 'when add a new record' do
@@ -264,7 +264,7 @@ feature "ExtraCredits" do
         end
       end
 
-      expect(page).to have_content 'Informações de: Alocação extra'
+      expect(page).to have_content 'Informações de: 1 - Alocação extra'
     end
   end
 

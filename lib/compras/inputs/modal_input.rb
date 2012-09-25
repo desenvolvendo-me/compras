@@ -2,10 +2,12 @@ module Compras
   module Inputs
     class ModalInput < SimpleForm::Inputs::Base
       def input
-        modal_field + hidden_field
+        modal_field + hidden_field + modal_info_html
       end
 
       protected
+
+      include Compras::ModalInfo
 
       def modal_field
         @builder.text_field(label_target, input_html_options)

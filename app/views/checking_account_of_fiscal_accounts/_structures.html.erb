@@ -28,7 +28,7 @@
             <%= resource.checking_account_structure_information %>
           </td>
           <td>
-            <%= link_to_modal_info 'a', resource %>
+            <%= link_to_modal_info :label => 'Detalhes', :href => checking_account_structure_path(resource) %>
           </td>
         </tr>
       <% end %>

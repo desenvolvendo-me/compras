@@ -95,7 +95,7 @@ feature "CheckingAccountOfFiscalAccounts" do
     click_link 'Disponibilidade financeira'
 
     within_tab 'Estruturas' do
-      click_link 'Mais informações'
+      click_link 'Detalhes'
     end
 
     expect(page).to have_content 'Fonte de Recursos'

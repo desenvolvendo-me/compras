@@ -50,11 +50,7 @@
   </div>
 </div>
 
-<%= f.input :regulatory_act %>
-
-<p>
-  <%= link_to_modal_info 'agreement_regulatory_act', f.object.regulatory_act %>
-</p>
+<%= f.input :regulatory_act, :modal_info => true %>
 
 <div class="yui3-g">
   <div class="yui3-u-1-3">
