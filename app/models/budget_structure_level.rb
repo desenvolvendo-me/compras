@@ -21,6 +21,10 @@ class BudgetStructureLevel < Compras::Model
     "#{level} - #{description}"
   end
 
+  def mask
+    '9' * digits
+  end
+
   def upper_budget_structure_level
     return nil if level == 1
     upper_level_number = level.pred

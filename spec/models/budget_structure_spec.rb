@@ -64,6 +64,20 @@ describe BudgetStructure do
     end
   end
 
+  context 'validate code mask' do
+    before do
+      subject.stub(:budget_structure_level).and_return(budget_structure_level)
+    end
+
+    let :budget_structure_level do
+      double('BudgetStructureLevel', :level => 1, :mask => '999')
+    end
+
+    it { should allow_value('123').for(:code) }
+    it { should_not allow_value('1a3').for(:code) }
+    it { should_not allow_value('12').for(:code) }
+  end
+
   context "when has not a parent" do
     it 'should return nil as upper_budget_structure_level' do
       subject.stub(:parent).and_return( nil )

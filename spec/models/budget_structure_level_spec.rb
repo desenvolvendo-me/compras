@@ -14,4 +14,14 @@ describe BudgetStructureLevel do
   it { should validate_presence_of :description }
   it { should validate_presence_of :level }
   it { should validate_presence_of :digits }
+
+  context '#mask' do
+    before do
+      subject.stub(:digits).and_return(3)
+    end
+
+    it 'should return correct mask' do
+      expect(subject.mask).to eq '999'
+    end
+  end
 end

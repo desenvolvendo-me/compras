@@ -15,7 +15,7 @@ end
 
 BudgetStructure.blueprint(:secretaria_de_desenvolvimento) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  code { 2 }
+  code { 29 }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
   kind { BudgetStructureKind::SYNTHETIC }
@@ -47,7 +47,7 @@ end
 
 BudgetStructure.blueprint(:secretaria_de_desenvolvimento_level_3) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  code { 2 }
+  code { 299 }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
   kind { BudgetStructureKind::SYNTHETIC }

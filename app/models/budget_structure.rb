@@ -24,11 +24,14 @@ class BudgetStructure < Compras::Model
   has_many :children, :class_name => 'BudgetStructure', :foreign_key => :parent_id, :dependent => :restrict
 
   delegate :digits, :level, :separator, :upper_budget_structure_level, :to => :budget_structure_level, :allow_nil => true
+  delegate :mask, :to => :budget_structure_level, :prefix => true,
+           :allow_nil => true
 
   validates :description, :code, :tce_code, :acronym, :presence => true
   validates :performance_field, :budget_structure_configuration, :presence => true
   validates :administration_type, :kind, :presence => true
   validates :budget_structure_level, :presence => true
+  validates :code, :mask => :budget_structure_level_mask
   validates :parent, :presence => true, :if => :level_greater_than_1?
   validate :parent_level_must_be_immediate_superior
 
