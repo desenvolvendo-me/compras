@@ -4,7 +4,6 @@ require 'app/decorators/agreement_bank_account_decorator'
 describe AgreementBankAccountDecorator do
   context 'when have creation_date' do
     before do
-      component.stub(:creation_date?).and_return(true)
       component.stub(:creation_date).and_return(Date.new(2012, 9, 20))
     end
 
@@ -15,7 +14,7 @@ describe AgreementBankAccountDecorator do
 
   context 'when have not creation_date' do
     before do
-      component.stub(:creation_date?).and_return(false)
+      component.stub(:creation_date).and_return(nil)
     end
 
     let :date_repository do
