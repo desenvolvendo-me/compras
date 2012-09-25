@@ -1,0 +1,15 @@
+<p>
+  <input type="button" class="button affirmative add-agreement-file" value="Adicionar Arquivo">
+</p>
+
+<div id="agreement-file" data-inline="true" data-nested-form="agreement-file">
+  <%= f.association :agreement_files, :collection => localized(f.object.agreement_files) do |o| %>
+    <%= render 'agreement_files/form', :f => o %>
+  <% end %>
+</div>
+
+<%= mustache 'agreement-file-template' do %>
+  <%= f.association :agreement_files_attributes, :collection => f.object.agreement_files.build, :index => '{{uuid-agreement-file}}' do |o| %>
+    <%= render 'agreement_files/form', :f => o %>
+  <% end %>
+<% end %>

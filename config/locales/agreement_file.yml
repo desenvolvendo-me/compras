@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      agreement_file:
+        one: "Arquivo"
+        other: "Arquivos"
+
+    attributes:
+      agreement_file:
+        name: "Nome"
+        file: "Arquivo"

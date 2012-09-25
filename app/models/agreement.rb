@@ -2,15 +2,14 @@ class Agreement < Compras::Model
   attr_accessible :category, :counterpart_value, :description,
                   :parcels_number, :process_date, :value,
                   :number_year, :number_year_process, :agreement_kind_id,
-                  :regulatory_act_id, :agreement_file,
+                  :regulatory_act_id,
                   :agreement_bank_accounts_attributes,
                   :agreement_occurrences_attributes,
                   :agreement_participants_attributes,
-                  :agreement_additives_attributes
+                  :agreement_additives_attributes,
+                  :agreement_files_attributes
 
   attr_modal :description, :process_date, :regulatory_act_id, :category
-
-  mount_uploader :agreement_file, DocumentUploader
 
   has_enumeration_for :category, :with => AgreementCategory
   has_enumeration_for :status, :create_helpers => true
@@ -19,6 +18,7 @@ class Agreement < Compras::Model
   belongs_to :regulatory_act
 
   has_many :agreement_additives, :dependent => :destroy, :order => :number
+  has_many :agreement_files, :dependent => :destroy
   has_many :agreement_participants, :dependent => :destroy, :order => :id, :inverse_of => :agreement
   has_many :agreement_occurrences, :dependent => :destroy, :order => [AgreementOccurrence.arel_table[:date].desc], :inverse_of => :agreement
   has_many :agreement_bank_accounts, :dependent => :destroy, :order => [AgreementBankAccount.arel_table[:creation_date],
@@ -31,6 +31,7 @@ class Agreement < Compras::Model
   accepts_nested_attributes_for :agreement_occurrences, :allow_destroy => true
   accepts_nested_attributes_for :agreement_participants, :allow_destroy => true
   accepts_nested_attributes_for :agreement_additives, :allow_destroy => true
+  accepts_nested_attributes_for :agreement_files, :allow_destroy => true
 
   delegate :creation_date, :publication_date, :end_date, :to => :regulatory_act,
            :allow_nil => true

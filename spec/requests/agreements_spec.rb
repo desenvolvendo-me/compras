@@ -166,7 +166,6 @@ feature "Agreements" do
       fill_in 'Processo administrativo', :with => '12758/2008'
       fill_in 'Data do processo', :with => '22/11/2012'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-      attach_file 'Arquivo', 'spec/fixtures/other_example_document.txt'
     end
 
     within_tab 'Contas Bancárias' do
@@ -216,6 +215,13 @@ feature "Agreements" do
       fill_in 'Descrição', :with => 'Convênio Iniciado'
     end
 
+    within_tab 'Arquivos' do
+      click_button 'Adicionar Arquivo'
+
+      fill_in 'Nome', :with => 'Primeiro arquivo'
+      attach_file 'Arquivo', 'spec/fixtures/example_document.txt'
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Convênio criado com sucesso.'
@@ -236,7 +242,6 @@ feature "Agreements" do
       expect(page).to have_field 'Data da criação', :with => '01/01/2012'
       expect(page).to have_field 'Data da publicação', :with => '02/01/2012'
       expect(page).to have_field 'Data do término', :with => '09/01/2012'
-      expect(page).to have_link 'other_example_document.txt'
     end
 
     within_tab 'Contas Bancárias' do
@@ -267,6 +272,11 @@ feature "Agreements" do
       expect(page).to have_field 'Data', :with => '15/04/2011'
       expect(page).to have_select 'Tipo', :selected => 'Em andamento'
       expect(page).to have_field 'Descrição', :with => 'Convênio Iniciado'
+    end
+
+    within_tab 'Arquivos' do
+      expect(page).to have_field 'Nome', :with => 'Primeiro arquivo'
+      expect(page).to have_link 'example_document.txt'
     end
   end
 
@@ -397,6 +407,22 @@ feature "Agreements" do
       end
     end
 
+    within_tab 'Arquivos' do
+      click_button 'Remover Arquivo'
+
+      click_button 'Adicionar Arquivo'
+
+      fill_in 'Nome', :with => 'Atualização de arquivo'
+      attach_file 'Arquivo', 'spec/fixtures/example_document.txt'
+
+      click_button 'Adicionar Arquivo'
+
+      within '.nested-agreement-file:nth-child(3)' do
+        fill_in 'Nome', :with => 'Segundo arquivo'
+        attach_file 'Arquivo', 'spec/fixtures/other_example_document.txt'
+      end
+    end
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Convênio editado com sucesso.'
@@ -485,6 +511,18 @@ feature "Agreements" do
         expect(page).to have_field 'Data', :with => '15/04/2011'
         expect(page).to have_select 'Tipo', :selected => 'Em andamento'
         expect(page).to have_field 'Descrição', :with => 'Convênio Iniciado'
+      end
+    end
+
+    within_tab 'Arquivos' do
+      within '.nested-agreement-file:nth-child(1)' do
+        expect(page).to have_field 'Nome', :with => 'Segundo arquivo'
+        expect(page).to have_link 'other_example_document.txt'
+      end
+
+      within '.nested-agreement-file:nth-child(2)' do
+        expect(page).to have_field 'Nome', :with => 'Atualização de arquivo'
+        expect(page).to have_link 'example_document.txt'
       end
     end
   end

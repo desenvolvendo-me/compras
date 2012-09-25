@@ -70,9 +70,6 @@
   </div>
 </div>
 
-<%= f.input :agreement_file %>
-<%= link_to f.object.agreement_file_identifier, f.object.agreement_file_url, :target => '_blank' if f.object.agreement_file? %>
-
 <script>
   $("#agreement_regulatory_act_id").change(function (event, regulatory_act) {
     if (regulatory_act) {
