@@ -42,7 +42,7 @@
     function addMaskToLevel(){
       var digits = parseInt($('#budget_structure_digits').val()) + 1 ;
       if (digits > 0){
-        fakeBudgetStructureCode.data('mask', Array(digits).join('9') );
+        fakeBudgetStructureCode.attr('data-mask', Array(digits).join('9') );
       }
     };
 
@@ -108,7 +108,7 @@
       $('#budget_structure_parent, #budget_structure_parent_id').val('');
 
       if (level) {
-        fakeBudgetStructureCode.data('mask', Array(level.digits + 1).join('9') );
+        fakeBudgetStructureCode.attr('data-mask', Array(level.digits + 1).join('9') );
         budgetStructureParent.requiredField(false);
 
         if (level.level <= 1){
@@ -122,7 +122,7 @@
           fakeBudgetStructureCode.attr('disabled', true);
         }
       } else {
-        fakeBudgetStructureCode.data('mask', '');
+        fakeBudgetStructureCode.attr('data-mask', '');
         budgetStructureParent.parent().hide();
         budgetStructureParent.data('modal-url', '');
       }
