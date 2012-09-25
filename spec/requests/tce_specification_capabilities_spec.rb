@@ -6,6 +6,28 @@ feature "TceSpecificationCapabilities" do
     sign_in
   end
 
+  scenario 'try create with variable true and no agreements' do
+    ApplicationCode.make!(:geral, :variable => true)
+
+    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+
+    click_link 'Criar Especificação de Recursos do TCE'
+
+    within_tab 'Principal' do
+      within_modal 'Código da aplicação' do
+        check 'Variável'
+        click_button 'Pesquisar'
+        click_record 'Geral'
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_tab 'Convênios' do
+      expect(page).to have_content 'deve ser informado os Convênios firmados com o Estado e/ou com o Governo Federal'
+    end
+  end
+
   scenario 'should not show inactive agreement at modal list' do
     Agreement.make!(:apoio_ao_turismo_inactive)
     Agreement.make!(:apoio_a_cultura)

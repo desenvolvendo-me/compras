@@ -14,12 +14,13 @@ class TceSpecificationCapability < Compras::Model
 
   delegate :specification, :to => :capability_source, :prefix => true,
            :allow_nil => true
-  delegate :specification, :to => :application_code, :prefix => true,
+  delegate :specification, :variable, :to => :application_code, :prefix => true,
            :allow_nil => true
 
   validates :description, :capability_source, :application_code,
             :presence => true
   validate :has_inactive_agreement
+  validate :at_least_one_agreement, :if => :application_code_variable
 
   orderize :description
   filterize
@@ -40,5 +41,11 @@ class TceSpecificationCapability < Compras::Model
     tce_capability_agreements.select do |tce_capability_agreement|
       tce_capability_agreement.inactive? && tce_capability_agreement.new_record?
     end.any?
+  end
+
+  def at_least_one_agreement
+    if agreements.reject(&:marked_for_destruction?).blank?
+      errors.add :agreements, :should_has_at_least_one_agreement
+    end
   end
 end
