@@ -49,6 +49,7 @@ feature "CapabilityDestinations" do
       fill_modal 'Detalhamento', :with => 'Educação', :field => 'Descrição'
 
       expect(page).to have_disabled_field 'Status'
+      expect(page).to have_select 'Status', :selected => 'Ativo'
     end
 
     click_button 'Salvar'

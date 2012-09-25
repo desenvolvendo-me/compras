@@ -9,7 +9,7 @@
 </div>
 
 <%= mustache 'capability-destination-detail-template' do %>
-  <%= f.association :capability_destination_details_attributes, :collection => f.object.capability_destination_details.build, :index => '{{uuid-capability-destination-detail}}' do |p| %>
+  <%= f.association :capability_destination_details_attributes, :collection => f.object.capability_destination_details.build(:status => Status::ACTIVE), :index => '{{uuid-capability-destination-detail}}' do |p| %>
     <%= render 'capability_destination_details/form', :f => p %>
   <% end %>
 <% end %>
