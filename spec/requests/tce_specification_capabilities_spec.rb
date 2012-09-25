@@ -87,7 +87,6 @@ feature "TceSpecificationCapabilities" do
     click_link 'Ampliação do Posto de Saúde'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Código', :with => TceSpecificationCapability.last.id.to_s
       expect(page).to have_field 'Descrição', :with => 'Ampliação do Posto de Saúde'
       expect(page).to have_field 'Fonte de recursos', :with => 'Imposto'
       expect(page).to have_field 'Especificação da fonte de recursos', :with => 'Especificação'
@@ -171,7 +170,6 @@ feature "TceSpecificationCapabilities" do
     click_link 'Reforma do Posto de Saúde'
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Código', :with => TceSpecificationCapability.last.id.to_s
       expect(page).to have_field 'Descrição *', :with => 'Reforma do Posto de Saúde'
       expect(page).to have_field 'Fonte de recursos', :with => 'Transferência'
       expect(page).to have_field 'Especificação da fonte de recursos', :with => 'Entre convênios'
