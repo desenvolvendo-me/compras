@@ -56,8 +56,6 @@
     $("#budget-allocations").empty();
 
     if (purchase_solicitation) {
-      $("#direct_purchase_budget_structure").requiredField(false);
-
       $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(purchase_solicitation.total));
 
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
@@ -65,12 +63,29 @@
       });
 
       disableBudgetAllocations();
+      fillBudgetStructure(purchase_solicitation.budget_structure);
     } else {
-      $("#direct_purchase_budget_structure").requiredField(true);
       $('#direct_purchase_total_allocations_items_value').val("0,00");
       enableBudgetAllocations();
+      clearBudgetStructure();
     }
   });
+
+  function fillBudgetStructure(budget_structure) {
+    if (budget_structure) {
+      $("#direct_purchase_budget_structure_id").val(budget_structure.id);
+      $("#direct_purchase_budget_structure").val(budget_structure.to_s);
+      $("#direct_purchase_budget_structure").attr("disabled", "disabled");
+      $("#direct_purchase_budget_structure").requiredField(false);
+    }
+  }
+
+  function clearBudgetStructure() {
+    $("#direct_purchase_budget_structure_id").val("");
+    $("#direct_purchase_budget_structure").val("");
+    $("#direct_purchase_budget_structure").removeAttr("disabled");
+    $("#direct_purchase_budget_structure").requiredField(true);
+  }
 
   function renderBudgetAllocation(budget_allocation) {
     var budgetAllocationBinds = [];

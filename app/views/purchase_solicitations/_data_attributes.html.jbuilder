@@ -5,6 +5,8 @@ builder resource, json do
   json.total            resource.total_allocations_items_value.to_f
   json.modal_info_url   purchase_solicitation_path(resource, :format => :js)
 
+  json.budget_structure resource.budget_structure, :id, :to_s if resource.budget_structure
+
   json.budget_allocations resource.purchase_solicitation_budget_allocations do |json, budget_allocation|
     json.id                   budget_allocation.id
     json.description          budget_allocation.budget_allocation.to_s

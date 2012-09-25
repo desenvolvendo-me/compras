@@ -1166,4 +1166,48 @@ feature "DirectPurchases" do
       expect(page).to_not have_button 'Remover Item'
     end
   end
+
+  scenario 'when a purchase solicitation is selected, fill in budget structure automatically' do
+    PurchaseSolicitation.make!(:reparo)
+    LegalReference.make!(:referencia)
+    Creditor.make!(:wenderson_sa)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    LicitationObject.make!(:ponte)
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    ModalityLimit.make!(:modalidade_de_compra_ponte)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos',  :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+    end
+
+    expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+  end
 end
