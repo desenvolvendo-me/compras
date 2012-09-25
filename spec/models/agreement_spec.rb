@@ -175,4 +175,22 @@ describe Agreement do
       end
     end
   end
+
+  context '#agreement_bank_accounts_not_marked_for_destruction' do
+    before do
+      subject.stub(:agreement_bank_accounts).and_return([bank_account_1, bank_account_2])
+    end
+
+    let :bank_account_1 do
+      double('BankAccount1', :marked_for_destruction? => true)
+    end
+
+    let :bank_account_2 do
+      double('BankAccount2', :marked_for_destruction? => false)
+    end
+
+    it 'should return only not marked for destruction' do
+      expect(subject.agreement_bank_accounts_not_marked_for_destruction).to eq [bank_account_2]
+    end
+  end
 end
