@@ -1021,4 +1021,149 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
   end
+
+  scenario 'fill budget allocations from purchase solicitation item group' do
+    PurchaseSolicitation.make!(:reparo)
+    LegalReference.make!(:referencia)
+    Creditor.make!(:wenderson_sa)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    LicitationObject.make!(:ponte)
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    ModalityLimit.make!(:modalidade_de_compra_ponte)
+    PriceRegistration.make!(:registro_de_precos)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos',  :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+    end
+
+    within_tab 'Dotações' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_readonly_field 'Valor total dos itens'
+
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_readonly_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_readonly_field 'Saldo da dotação'
+
+      expect(page).to_not have_button 'Adicionar Item'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_readonly_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_disabled_field 'Material'
+
+      expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+      expect(page).to have_readonly_field 'Marca/Referência'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_readonly_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3,00'
+      expect(page).to have_readonly_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_readonly_field 'Valor unitário'
+
+      expect(page).to have_field 'Valor total', :with => '600,00'
+      expect(page).to have_readonly_field 'Valor total'
+
+      expect(page).to_not have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Remover Item'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_field 'Compra', :with => '1'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data da compra', :with => '19/03/2012'
+      expect(page).to have_field 'Referência legal', :with => 'Referencia legal'
+      expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'
+      expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
+      expect(page).to have_field 'Solicitação de compra',
+                                  :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+      expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Prazo de entrega', :with => '1'
+      expect(page).to have_select 'Período do prazo de entrega', :selected => 'ano/anos'
+      expect(page).to have_field 'Forma de pagamento', :with => 'Dinheiro'
+    end
+
+    within_tab 'Dotações' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total dos itens'
+
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+
+      expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+      expect(page).to have_disabled_field 'Compl. do elemento'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to_not have_button 'Adicionar Item'
+
+      expect(page).to have_field 'Item', :with => '1'
+      expect(page).to have_disabled_field 'Item'
+
+      expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+      expect(page).to have_disabled_field 'Material'
+
+      expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+      expect(page).to have_readonly_field 'Marca/Referência'
+
+      expect(page).to have_field 'Unidade', :with => 'UN'
+      expect(page).to have_disabled_field 'Unidade'
+
+      expect(page).to have_field 'Quantidade', :with => '3,00'
+      expect(page).to have_readonly_field 'Quantidade'
+
+      expect(page).to have_field 'Valor unitário', :with => '200,00'
+      expect(page).to have_readonly_field 'Valor unitário'
+
+      expect(page).to have_field 'Valor total', :with => '600,00'
+      expect(page).to have_disabled_field 'Valor total'
+
+      expect(page).to_not have_button 'Remover Dotação'
+      expect(page).to_not have_button 'Remover Item'
+    end
+  end
 end
