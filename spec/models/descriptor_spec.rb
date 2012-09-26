@@ -36,6 +36,7 @@ describe Descriptor do
   it { should have_many(:budget_revenue).dependent(:restrict) }
   it { should have_many(:revenue_natures).dependent(:restrict) }
   it { should have_many(:subfunctions).dependent(:restrict) }
+  it { should have_many(:event_checking_configurations).dependent(:restrict) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :entity }

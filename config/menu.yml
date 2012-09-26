@@ -62,6 +62,7 @@ menu:
         - checking_account_of_fiscal_accounts
         - account_plan_configurations
         - checking_account_structures
+        - event_checking_configurations
 
       - bank_accounts
       - contracts

@@ -43,6 +43,7 @@ pt-BR:
     document_types: "Tipos de Documento"
     employees: "Funcionários"
     entities: "Entidades"
+    event_checking_configurations: "Configurações de Eventos Contábeis"
     expense_kinds: "Tipos de Despesas"
     expense_natures: "Naturezas das Despesas"
     extra_credits: "Créditos Suplementares"

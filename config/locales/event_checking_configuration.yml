@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      event_checking_configuration:
+        one: "Configuração de Evento Contábil"
+        other: "Configurações de Eventos Contábeis"
+
+    attributes:
+      event_checking_configuration:
+        descriptor: "Descritor"
+        event: "Evento"
+        function: "Função"

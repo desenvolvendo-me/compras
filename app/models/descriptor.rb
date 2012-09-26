@@ -16,6 +16,7 @@ class Descriptor < Compras::Model
   has_many :budget_revenue, :dependent => :restrict
   has_many :revenue_natures, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
+  has_many :event_checking_configurations, :dependent => :restrict
 
   validates :year, :entity, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
