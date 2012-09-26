@@ -381,7 +381,7 @@ feature "Pledges" do
         click_link 'Mais informações'
       end
 
-      expect(page).to have_content 'Informações de: 2 - Manutenção e Reparo'
+      expect(page).to have_content 'Informações de: 29 - Manutenção e Reparo'
       expect(page).to have_content '2011'
       expect(page).to have_content 'Manutenção e Reparo'
     end
