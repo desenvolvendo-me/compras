@@ -198,7 +198,7 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'generate calculation between a small company and a big company and consider law of proposals' do
+  scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
@@ -232,10 +232,50 @@ feature "LicitationProcesses" do
       expect(page).to have_content '18,00'
       expect(page).to have_content 'Empatou'
     end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Nohup'
+
+    within_tab 'Propostas' do
+      fill_in 'Preço unitário', :with => '8,99'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Licitante editado com sucesso.'
+
+    click_link 'Voltar ao processo licitatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '8,99'
+      expect(page).to have_content '17,98'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Perdeu'
+    end
   end
 
-  scenario 'generate calculation between a small company and a big company with will_submit_new_proposal_when_draw unchecked' do
-    licitation_process = LicitationProcess.make!(:apuracao_global_small_company_without_new_proposal, :consider_law_of_proposals => true)
+  scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
+    licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
 
@@ -267,6 +307,44 @@ feature "LicitationProcesses" do
       expect(page).to have_content '9,00'
       expect(page).to have_content '18,00'
       expect(page).to have_content 'Empatou'
+    end
+
+    click_link 'voltar'
+
+    click_link 'Licitantes'
+
+    click_link 'Nohup'
+
+    uncheck 'Apresentará nova proposta em caso de empate'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Licitante editado com sucesso.'
+
+    click_link 'Voltar ao processo licitatório'
+
+    click_button 'Apurar'
+
+    expect(page).to have_content 'Processo Licitatório 1/2012'
+
+    expect(page).to have_content 'Apuração: Menor preço global'
+
+    expect(page).to have_content 'Nohup'
+
+    within '.classification-1-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
+    end
+
+    expect(page).to have_content 'IBM'
+
+    within '.classification-2-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,10'
+      expect(page).to have_content '18,20'
+      expect(page).to have_content 'Perdeu'
     end
   end
 

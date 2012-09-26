@@ -48,49 +48,21 @@ class LicitationProcessClassificationSituationGenerator
     end
 
     classifications.reject { |c| c == classification_a }.each do |classification_b|
-      if is_benefited_classification?(classification_a, classification_b)
-        classification_a = classificate_by_same_company_size(classification_a, classification_b)
+      classificator = LicitationProcessClassificator.new(
+        classification_a,
+        classification_b,
+        :tolerance => current_percentage,
+        :consider_law_of_proposals => consider_law_of_proposals
+      )
+
+      if classificator.draw?
+        classification_b.equalize!
+        classification_a.equalize!
       else
-        classification_a = classificate_by_different_company_size(classification_a, classification_b)
+        classificator.winner.win!
+        classificator.loser.lose!
       end
     end
-  end
-
-  def classificate_by_same_company_size(classification_a, classification_b)
-    if classification_b.total_value == classification_a.total_value
-      classification_a.equalize!
-      classification_b.equalize!
-    elsif classification_b.total_value < classification_a.total_value
-      classification_a.lose!
-      classification_b.win!
-    else
-      classification_a.win!
-      classification_b.lose!
-    end
-
-    classification_a
-  end
-
-  # should equalize if benefited company has until 10% difference of big company proposal
-  def classificate_by_different_company_size(classification_a, classification_b)
-    benefited_value_a = classification_a.benefited_value(current_percentage)
-    benefited_value_b = classification_b.benefited_value(current_percentage)
-
-    if ((classification_a.benefited && classification_a.total_value > classification_b.total_value && benefited_value_a <= classification_b.total_value) ||
-        (classification_b.benefited && classification_b.total_value > classification_a.total_value && benefited_value_b <= classification_a.total_value) ||
-        (benefited_value_a == benefited_value_b)) && classification_a.will_submit_new_proposal_when_draw
-
-      classification_a.equalize!
-      classification_b.equalize!
-    elsif benefited_value_a < benefited_value_b
-      classification_a.win!
-      classification_b.lose!
-    else
-      classification_b.win!
-      classification_a.lose!
-    end
-
-    classification_a
   end
 
   def change_proposal_situation_by_bidder!
