@@ -287,6 +287,7 @@ pt-BR:
       should_has_at_least_one_agreement: "deve ser informado os Convênios firmados com o Estado e/ou com o Governo Federal"
       agreement_participants_convenente_should_be_equals_total: "a soma do valor dos participantes convenentes deve ser igual a R$ %{total}"
       agreement_participants_granting_should_be_equals_total: "a soma do valor dos participantes concedentes deve ser igual a R$ %{total}"
+      should_be_blank_if_item_group_is_present: "deve estar em branco se houver um Agrupamento de solicitações de compra selecionado"
 
   activerecord:
     errors:

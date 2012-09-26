@@ -53,6 +53,7 @@ class DirectPurchase < Compras::Model
   validate :must_have_at_least_budget_allocation
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
   validate :purchase_solicitation_item_group_annulled
+  validate :has_either_purchase_solicitation_or_item_group
 
   before_validation :set_total_allocations_items_value
 
@@ -121,6 +122,12 @@ class DirectPurchase < Compras::Model
 
     if purchase_solicitation_item_group.annulled?
       errors.add(:purchase_solicitation_item_group, :is_annulled)
+    end
+  end
+
+  def has_either_purchase_solicitation_or_item_group
+    if purchase_solicitation.present? && purchase_solicitation_item_group.present?
+      errors.add(:purchase_solicitation, :should_be_blank_if_item_group_is_present)
     end
   end
 end

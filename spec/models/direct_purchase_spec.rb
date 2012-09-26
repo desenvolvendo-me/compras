@@ -142,6 +142,15 @@ describe DirectPurchase do
 
       expect(subject.errors[:total_allocations_items_value]).to_not include 'está acima do valor disponível no limite em vigor para esta modalidade'
     end
+
+    it "should not have a purchase solicitation AND a purchase solicitation item group" do
+      subject.stub(:purchase_solicitation => double)
+      subject.stub(:purchase_solicitation_item_group => double(:annulled? => false))
+
+      subject.valid?
+
+      expect(subject.errors[:purchase_solicitation]).to include 'deve estar em branco se houver um Agrupamento de solicitações de compra selecionado'
+    end
   end
 
   describe '#next_purchase' do

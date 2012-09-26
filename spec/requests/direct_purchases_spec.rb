@@ -160,6 +160,8 @@ feature "DirectPurchases" do
       fill_in 'Observações gerais', :with => 'obs'
     end
 
+    expect(page).to have_disabled_field "Solicitação de compra"
+
     within_tab 'Dotações' do
       expect(page).to_not have_button 'Adicionar Dotação'
 
@@ -1046,7 +1048,6 @@ feature "DirectPurchases" do
       select 'Global', :from => 'Tipo do empenho'
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -1054,6 +1055,8 @@ feature "DirectPurchases" do
       select 'ano/anos',  :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
     end
+
+    expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
 
     within_tab 'Dotações' do
       expect(page).to_not have_button 'Adicionar Dotação'
@@ -1115,7 +1118,6 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Solicitação de compra',
                                   :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
       expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
       expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
