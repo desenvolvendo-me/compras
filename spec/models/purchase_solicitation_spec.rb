@@ -102,4 +102,30 @@ describe PurchaseSolicitation do
       subject.purchase_solicitation_budget_allocations_by_material(material_ids)
     end
   end
+
+  describe "#can_be_grouped?" do
+    it "returns true if purchase solicitation is approved" do
+      subject.service_status = "liberated"
+
+      expect(subject.can_be_grouped?).to be true
+    end
+
+    it "returns true if purchase solicitation is pending" do
+      subject.service_status = "pending"
+
+      expect(subject.can_be_grouped?).to be true
+    end
+
+    it "returns true if purchase solicitation is partially fulfilled" do
+      subject.service_status = "partially_fulfilled"
+
+      expect(subject.can_be_grouped?).to be true
+    end
+
+    it "returns false otherwise" do
+      subject.service_status = "attended"
+
+      expect(subject.can_be_grouped?).to be false
+    end
+  end
 end

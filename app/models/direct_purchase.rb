@@ -54,6 +54,7 @@ class DirectPurchase < Compras::Model
   validate :total_value_of_items_should_not_be_greater_than_modality_limit_value
   validate :purchase_solicitation_item_group_annulled
   validate :has_either_purchase_solicitation_or_item_group
+  validate :purchase_solicitation_can_generate_direct_purchase
 
   before_validation :set_total_allocations_items_value
 
@@ -128,6 +129,14 @@ class DirectPurchase < Compras::Model
   def has_either_purchase_solicitation_or_item_group
     if purchase_solicitation.present? && purchase_solicitation_item_group.present?
       errors.add(:purchase_solicitation, :should_be_blank_if_item_group_is_present)
+    end
+  end
+
+  def purchase_solicitation_can_generate_direct_purchase
+    return unless purchase_solicitation.present?
+
+    unless purchase_solicitation.can_be_grouped?
+      errors.add(:purchase_solicitation, :cannot_generate_direct_purchase)
     end
   end
 end

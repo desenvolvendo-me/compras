@@ -66,6 +66,10 @@ class PurchaseSolicitation < Compras::Model
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end
 
+  def can_be_grouped?
+    liberated? || pending? || partially_fulfilled?
+  end
+
   def total_allocations_items_value
     purchase_solicitation_budget_allocations.collect(&:total_items_value).sum
   end

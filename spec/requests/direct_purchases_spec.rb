@@ -1212,4 +1212,21 @@ feature "DirectPurchases" do
 
     expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
   end
+
+  scenario 'doesnt allow selection of a purchase solicitation that has already been attended' do
+    PurchaseSolicitation.make!(:reparo,
+                               :service_status => 'attended')
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      within_records do
+        expect(page).to_not have_content 'Gabriel Sobrinho'
+      end
+    end
+  end
 end

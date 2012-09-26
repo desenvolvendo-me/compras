@@ -143,13 +143,28 @@ describe DirectPurchase do
       expect(subject.errors[:total_allocations_items_value]).to_not include 'está acima do valor disponível no limite em vigor para esta modalidade'
     end
 
-    it "should not have a purchase solicitation AND a purchase solicitation item group" do
-      subject.stub(:purchase_solicitation => double)
-      subject.stub(:purchase_solicitation_item_group => double(:annulled? => false))
+    context "purchase_solicitations" do
+      let (:purchase_solicitation) do
+        double(:can_be_grouped? => true)
+      end
 
-      subject.valid?
+      it "should not have a purchase solicitation AND a purchase solicitation item group" do
+        subject.stub(:purchase_solicitation => purchase_solicitation)
+        subject.stub(:purchase_solicitation_item_group => double(:annulled? => false))
 
-      expect(subject.errors[:purchase_solicitation]).to include 'deve estar em branco se houver um Agrupamento de solicitações de compra selecionado'
+        subject.valid?
+
+        expect(subject.errors[:purchase_solicitation]).to include 'deve estar em branco se houver um Agrupamento de solicitações de compra selecionado'
+      end
+
+      it "should not have a purchase solicitation that can't generate direct purchases" do
+        purchase_solicitation.stub(:can_be_grouped? => false)
+        subject.stub(:purchase_solicitation => purchase_solicitation)
+        
+        subject.valid?
+
+        expect(subject.errors[:purchase_solicitation]).to include 'não pode gerar compras diretas com a situação atual'
+      end
     end
   end
 
