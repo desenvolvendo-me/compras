@@ -27,7 +27,10 @@
 </div>
 
 <%= f.input :purchase_solicitation %>
-<%= f.input :purchase_solicitation_item_group, :modal_url => modal_purchase_solicitation_item_groups_path(:not_annulled => true), :modal_info => true %>
+<%= f.input :purchase_solicitation_item_group,
+            :modal_url => modal_purchase_solicitation_item_groups_path(:not_annulled => true),
+            :modal_info => true %>
+
 <%= f.input :creditor %>
 <%= f.input :budget_structure %>
 <%= f.input :licitation_object %>
