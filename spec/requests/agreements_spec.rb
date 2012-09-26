@@ -516,13 +516,13 @@ feature "Agreements" do
 
     within_tab 'Arquivos' do
       within '.nested-agreement-file:nth-child(1)' do
-        expect(page).to have_field 'Nome', :with => 'Segundo arquivo'
-        expect(page).to have_link 'other_example_document.txt'
+        expect(page).to have_field 'Nome', :with => 'Atualização de arquivo'
+        expect(page).to have_link 'example_document.txt'
       end
 
       within '.nested-agreement-file:nth-child(2)' do
-        expect(page).to have_field 'Nome', :with => 'Atualização de arquivo'
-        expect(page).to have_link 'example_document.txt'
+        expect(page).to have_field 'Nome', :with => 'Segundo arquivo'
+        expect(page).to have_link 'other_example_document.txt'
       end
     end
   end
