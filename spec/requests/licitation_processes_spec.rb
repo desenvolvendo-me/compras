@@ -423,22 +423,36 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Apuração: Menor preço por lote'
 
-    expect(page).to have_content 'Gabriel Sobrinho'
-
-    within '.classification-1-0-0' do
-      expect(page).to have_content 'Antivirus'
-      expect(page).to have_content '9,00'
-      expect(page).to have_content '18,00'
-      expect(page).to have_content 'Ganhou'
-    end
-
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification-2-0-0' do
+    within '.classification-1-1-0' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Perdeu'
+    end
+
+    within '.classification-1-0-0' do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '10,00'
       expect(page).to have_content '20,00'
       expect(page).to have_content 'Perdeu'
+    end
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+
+    within '.classification-2-1-0' do
+      expect(page).to have_content 'Arame comum'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content '0,00'
+      expect(page).to have_content 'Perdeu'
+    end
+
+    within '.classification-2-0-0' do
+      expect(page).to have_content 'Antivirus'
+      expect(page).to have_content '9,00'
+      expect(page).to have_content '18,00'
+      expect(page).to have_content 'Ganhou'
     end
 
     click_link 'voltar'
@@ -448,6 +462,11 @@ feature "LicitationProcesses" do
     click_link 'Wenderson Malheiros'
 
     within_tab 'Propostas' do
+      within_tab 'Lote 1' do
+        expect(page).to have_select 'Situação', :selected => 'Perdeu'
+        expect(page).to have_field 'Classificação', :with => '2'
+      end
+
       within_tab 'Lote 2' do
         expect(page).to have_select 'Situação', :selected => 'Indefinido'
         expect(page).to have_field 'Classificação', :with => ''
@@ -459,8 +478,15 @@ feature "LicitationProcesses" do
     click_link 'Gabriel Sobrinho'
 
     within_tab 'Propostas' do
-      expect(page).to have_select 'Situação', :selected => 'Ganhou'
-      expect(page).to have_field 'Classificação', :with => '1'
+      within_tab 'Lote 1' do
+        expect(page).to have_select 'Situação', :selected => 'Ganhou'
+        expect(page).to have_field 'Classificação', :with => '1'
+      end
+
+      within_tab 'Lote 2' do
+        expect(page).to have_select 'Situação', :selected => 'Indefinido'
+        expect(page).to have_field 'Classificação', :with => ''
+      end
     end
   end
 

@@ -135,7 +135,7 @@ class LicitationProcess < Compras::Model
   end
 
   def all_licitation_process_classifications
-    bidders.classifications
+    bidders.classifications.order(:bidder_id)
   end
 
   def destroy_all_licitation_process_classifications

@@ -1,5 +1,5 @@
 <% classification.administrative_process_budget_allocation_items.each_with_index do |item, i| %>
-  <tr class="<%= "classification-#{classification.classification}-#{index}-#{i}" %>">
+  <tr class="<%= "classification-#{classification.bidder_id}-#{index}-#{i}" %>">
     <td><%= item.description %></td>
     <td><%= item.reference_unit %></td>
     <td align="right"><%= item.quantity %></td>
