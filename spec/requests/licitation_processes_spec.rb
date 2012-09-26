@@ -1290,7 +1290,6 @@ feature "LicitationProcesses" do
     expect(page).to have_content 'Ganhou'
   end
 
-
   scenario 'budget allocation items should have a sequential item' do
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
 
