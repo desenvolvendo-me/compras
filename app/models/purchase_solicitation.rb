@@ -27,7 +27,8 @@ class PurchaseSolicitation < Compras::Model
   has_many :purchase_solicitation_liberations, :dependent => :destroy, :order => :sequence
   has_many :purchase_solicitation_item_group_material_purchase_solicitations,
            :dependent => :destroy
-  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
+  has_one  :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
+  has_one  :direct_purchase
 
   accepts_nested_attributes_for :purchase_solicitation_budget_allocations, :allow_destroy => true
 
@@ -99,6 +100,11 @@ class PurchaseSolicitation < Compras::Model
 
   def purchase_solicitation_budget_allocations_by_material(material_ids)
     purchase_solicitation_budget_allocations.by_material(material_ids)
+  end
+
+  def budget_structure
+    return super unless direct_purchase.present?
+    super || direct_purchase.budget_structure
   end
 
   protected

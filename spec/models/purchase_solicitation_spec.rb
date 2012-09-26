@@ -9,6 +9,7 @@ require 'app/models/purchase_solicitation_liberation'
 require 'app/models/resource_annul'
 require 'app/models/purchase_solicitation_item_group_material_purchase_solicitation'
 require 'app/models/material.rb'
+require 'app/models/direct_purchase'
 require 'app/models/budget_structure.rb'
 
 describe PurchaseSolicitation do
@@ -27,6 +28,7 @@ describe PurchaseSolicitation do
   it { should have_many(:purchase_solicitation_liberations).dependent(:destroy).order(:sequence) }
   it { should have_many(:purchase_solicitation_item_group_material_purchase_solicitations).dependent(:destroy)}
   it { should have_one(:annul).dependent(:destroy) }
+  it { should have_one(:direct_purchase) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }
