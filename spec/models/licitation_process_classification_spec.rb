@@ -20,20 +20,6 @@ describe LicitationProcessClassification do
     end
   end
 
-  context 'benefited value' do
-    it 'should return total value' do
-      subject.stub(:benefited => false, :total_value => 100)
-
-      expect(subject.benefited_value(10)).to eq 100
-    end
-
-    it 'should return total value discounted percentage' do
-      subject.stub(:benefited => true, :total_value => 100)
-
-      expect(subject.benefited_value(10)).to eq 90
-    end
-  end
-
   it 'should set situation as lost when lose!' do
     subject.should_receive(:update_column).with(:situation, 'lost')
 

@@ -20,12 +20,6 @@ class LicitationProcessClassification < Compras::Model
     classification == -1
   end
 
-  def benefited_value(current_percentage)
-    return total_value unless benefited
-
-    total_value - (total_value * current_percentage / 100)
-  end
-
   def lose!
     update_column(:situation, SituationOfProposal::LOST)
   end
