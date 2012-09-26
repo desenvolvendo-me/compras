@@ -18,37 +18,23 @@ describe AgreementsController do
 
       post :create
     end
-
-    it 'should call the AgreementBankAccountCreationDateGenerator on action create' do
-      AgreementBankAccountCreationDateGenerator.any_instance.should_receive(:change!)
-
-      post :create
-    end
   end
 
   context 'PUT #update' do
     it 'should call AgreementAdditiveNumberGenerator' do
-      Agreement.stub(:find).and_return(double.as_null_object)
+      agreement = Agreement.make!(:apoio_ao_turismo)
 
       AgreementAdditiveNumberGenerator.any_instance.should_receive(:generate!)
 
-      put :update, :id => '1'
+      put :update, :id => agreement.id
     end
 
-    it 'should call AgreementAdditiveNumberGenerator' do
-      Agreement.stub(:find).and_return(double.as_null_object)
+    it 'should call AgreementBankAccountStatusChanger' do
+      agreement = Agreement.make!(:apoio_ao_turismo)
 
       AgreementBankAccountStatusChanger.any_instance.should_receive(:change!)
 
-      put :update, :id => '1'
-    end
-
-    it 'should call AgreementAdditiveNumberGenerator' do
-      Agreement.stub(:find).and_return(double.as_null_object)
-
-      AgreementBankAccountCreationDateGenerator.any_instance.should_receive(:change!)
-
-      put :update, :id => '1'
+      put :update, :id => agreement.id
     end
   end
 end

@@ -1,14 +1,40 @@
 require 'unit_helper'
+require 'active_support/core_ext/module/delegation'
 require 'app/business/agreement_bank_account_status_changer'
 
 describe AgreementBankAccountStatusChanger do
+  subject do
+    described_class.new(agreement,
+                        status,
+                        creation_date_changer,
+                        desactivation_date_changer)
+  end
+
+  before do
+    agreement.stub(:agreement_bank_accounts_not_marked_for_destruction).and_return(accounts)
+    creation_date_changer.stub(:new).and_return(creation_date_changer)
+    desactivation_date_changer.stub(:new).and_return(desactivation_date_changer)
+  end
+
+  let :agreement do
+    double('Agreement', :save => true)
+  end
+
   let :status do
     double('Status')
   end
 
+  let :creation_date_changer do
+    double('CreationDateChanger', :generate! => true)
+  end
+
+  let :desactivation_date_changer do
+    double('DesactivationDateChanger', :generate! => true)
+  end
+
   context 'when have two bank_accounts' do
-    subject do
-      described_class.new([account_1, account_2], status)
+    let :accounts do
+      [account_1, account_2]
     end
 
     let :account_1 do
@@ -27,13 +53,16 @@ describe AgreementBankAccountStatusChanger do
       account_2.should_receive(:desactivation_date=).with(nil)
       account_2.should_receive(:status=).with('active')
 
+      creation_date_changer.should_receive(:change!).and_return(true)
+      desactivation_date_changer.should_receive(:change!).and_return(true)
+
       subject.change!
     end
   end
 
   context 'when have only one bank_account' do
-    subject do
-      described_class.new([account_1], status)
+    let :accounts do
+      [account_1]
     end
 
     let :account_1 do
@@ -45,6 +74,9 @@ describe AgreementBankAccountStatusChanger do
 
       account_1.should_receive(:status=).with('active')
       account_1.should_receive(:desactivation_date=).with(nil)
+
+      creation_date_changer.should_receive(:change!).and_return(true)
+      desactivation_date_changer.should_receive(:change!).and_return(true)
 
       subject.change!
     end

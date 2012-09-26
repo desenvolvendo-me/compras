@@ -3,22 +3,28 @@ class AgreementsController < CrudController
 
   def create
     object = build_resource
+
     AgreementAdditiveNumberGenerator.new(object).generate!
-    AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts).change!
-    AgreementBankAccountCreationDateGenerator.new(object.agreement_bank_accounts).change!
-    AgreementBankAccountDesactivationDateGenerator.new(object.agreement_bank_accounts).change!
 
     super
   end
 
+  protected
+
   def update_resource(object, attributes)
-    object.localized.assign_attributes(*attributes)
+    object.transaction do
+      super
 
-    AgreementAdditiveNumberGenerator.new(object).generate!
-    AgreementBankAccountStatusChanger.new(object.agreement_bank_accounts_not_marked_for_destruction).change!
-    AgreementBankAccountCreationDateGenerator.new(object.agreement_bank_accounts).change!
-    AgreementBankAccountDesactivationDateGenerator.new(object.agreement_bank_accounts).change!
+      AgreementAdditiveNumberGenerator.new(object).generate!
+      AgreementBankAccountStatusChanger.new(object).change!
+    end
+  end
 
-    object.save
+  def create_resource(object)
+    object.transaction do
+      super
+
+      AgreementBankAccountStatusChanger.new(object).change!
+    end
   end
 end
