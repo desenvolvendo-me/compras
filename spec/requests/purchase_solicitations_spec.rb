@@ -178,7 +178,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Ano', :with => '2013'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
-      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1.2 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1.29 - Secretaria de Desenvolvimento'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
       expect(page).to have_select 'Tipo de solicitação', :selected => 'Serviços'

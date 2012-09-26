@@ -105,7 +105,7 @@ feature "PriceRegistration" do
 
       within 'div.price-registration-item:last' do
         expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
-        expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
+        expect(page).to have_field 'Estrutura orçamentária', :with => '1.29 - Secretaria de Desenvolvimento', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
         expect(page).to have_select 'Carona', :selected => 'Não'
 
@@ -194,7 +194,7 @@ feature "PriceRegistration" do
       expect(page).to have_select 'Carona', :selected => 'Não'
 
       within 'div.price-registration-budget-structure:last' do
-        expect(page).to have_field 'Estrutura orçamentária', :with => '1.2 - Secretaria de Desenvolvimento', :field => 'Descrição'
+        expect(page).to have_field 'Estrutura orçamentária', :with => '1.29 - Secretaria de Desenvolvimento', :field => 'Descrição'
         expect(page).to have_field 'Quantidade solicitada', :with => '200,00'
         expect(page).to have_select 'Carona', :selected => 'Não'
       end

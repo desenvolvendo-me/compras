@@ -280,7 +280,7 @@ feature "BudgetAllocations" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Descritor', :with => '2013 - Secretaria de Educação'
-      expect(page).to have_field 'Estrutura orçamentaria', :with => '1.2 - Secretaria de Desenvolvimento'
+      expect(page).to have_field 'Estrutura orçamentaria', :with => '1.29 - Secretaria de Desenvolvimento'
       expect(page).to have_field 'Função', :with => '04 - Administração'
       expect(page).to have_field 'Subfunção', :with => '02 - Gerente Geral'
       expect(page).to have_field 'Programa do governo', :with => 'Educação'
