@@ -5,6 +5,13 @@ AgreementBankAccount.blueprint(:itau) do
   status { Status::INACTIVE }
 end
 
+AgreementBankAccount.blueprint(:itau_2) do
+  bank_account { BankAccount.make!(:itau_tributos) }
+  creation_date { Date.current }
+  desactivation_date { Date.current }
+  status { Status::INACTIVE }
+end
+
 AgreementBankAccount.blueprint(:santander) do
   bank_account { BankAccount.make!(:santander_folha) }
   creation_date { Date.current }

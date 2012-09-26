@@ -21,7 +21,7 @@ class Agreement < Compras::Model
   has_many :agreement_files, :dependent => :destroy
   has_many :agreement_participants, :dependent => :destroy, :order => :id, :inverse_of => :agreement
   has_many :agreement_occurrences, :dependent => :destroy, :order => [AgreementOccurrence.arel_table[:date].desc], :inverse_of => :agreement
-  has_many :agreement_bank_accounts, :dependent => :destroy, :order => [AgreementBankAccount.arel_table[:creation_date],
+  has_many :agreement_bank_accounts, :dependent => :destroy, :order => [AgreementBankAccount.arel_table[:creation_date].desc,
                                                                         AgreementBankAccount.arel_table[:status]]
   has_many :tce_capability_agreements, :dependent => :restrict
   has_many :tce_specification_capabilities, :through => :tce_capability_agreements,
