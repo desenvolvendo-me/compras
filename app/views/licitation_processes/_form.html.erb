@@ -77,7 +77,7 @@
   function calcItemOrder() {
     $('fieldset.licitation-process-budget-allocation').each(function (index, item) {
       $(this).find('.item .hidden .destroy[value=false]').each(function (index, item) {
-        $(this).closest('.licitation-process-budget-allocation').find('.order').val(index + 1);
+        $(this).closest('.licitation-process-budget-allocation .item').find('.order').val(index + 1);
       });
     });
   }

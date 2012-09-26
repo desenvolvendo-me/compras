@@ -1263,4 +1263,35 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Ganhou'
   end
+
+
+  scenario 'budget allocation items should have a sequential item' do
+    administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Novo processo licitatório'
+
+    within_tab 'Dotações' do
+      click_button 'Adicionar Item'
+
+      within '.item:last' do
+        expect(page).to have_field 'Item', :with => '1'
+      end
+
+      click_button 'Adicionar Item'
+
+      within '.item:first' do
+        expect(page).to have_field 'Item', :with => '1'
+      end
+
+      within '.item:last' do
+        expect(page).to have_field 'Item', :with => '2'
+      end
+    end
+  end
 end
