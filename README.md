@@ -34,7 +34,7 @@ Crie um usuário chamado `compras` com permissão para criar banco de dados.
 
 ### Servidor
 
-    $ bundle exec unicorn
+    $ bundle exec puma
 
 ### Testes(RSpec)
 
