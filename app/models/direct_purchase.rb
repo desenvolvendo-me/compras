@@ -11,6 +11,8 @@ class DirectPurchase < Compras::Model
   attr_modal :direct_purchase, :year, :date, :modality,
              :budget_structure_id, :creditor_id
 
+  auto_increment :direct_purchase, :by => :year
+
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
   has_enumeration_for :delivery_term_period, :with => PeriodUnit
@@ -64,10 +66,6 @@ class DirectPurchase < Compras::Model
     "#{direct_purchase}/#{year}"
   end
 
-  def next_purchase
-    last_purchase_of_self_year.succ
-  end
-
   def licitation_exemption
     return 0 if licitation_object.nil? || modality.empty?
 
@@ -100,10 +98,6 @@ class DirectPurchase < Compras::Model
       errors.add(:total_allocations_items_value, :greater_than_actual_object_limit,
                  :target => licitation_object, :limit => numeric_parser.localize(validator.current_limit))
     end
-  end
-
-  def last_purchase_of_self_year
-    self.class.where { self.year.eq(year) }.maximum(:direct_purchase).to_i
   end
 
   def set_total_allocations_items_value

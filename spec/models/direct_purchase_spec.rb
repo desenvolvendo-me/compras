@@ -29,10 +29,15 @@ describe DirectPurchase do
   it { should belong_to :purchase_solicitation }
   it { should belong_to :purchase_solicitation_item_group }
   it { should belong_to :price_registration }
+
   it { should have_many(:items).through(:direct_purchase_budget_allocations) }
   it { should have_many(:direct_purchase_budget_allocations).dependent(:destroy).order(:id) }
   it { should have_many(:purchase_solicitation_budget_allocation_items) }
+
   it { should have_one(:supply_authorization).dependent(:restrict) }
+
+  it { should auto_increment(:direct_purchase).by(:year) }
+
   it { should validate_duplication_of(:budget_allocation_id).on(:direct_purchase_budget_allocations) }
 
   it 'should return 0 for licitation_exemption when no licitation object' do
@@ -164,18 +169,6 @@ describe DirectPurchase do
         subject.valid?
 
         expect(subject.errors[:purchase_solicitation]).to include 'não pode gerar compras diretas com a situação atual'
-      end
-    end
-  end
-
-  describe '#next_purchase' do
-    context 'when the direct_purchase of last purchase is 4' do
-      before do
-        subject.stub(:last_purchase_of_self_year).and_return(4)
-      end
-
-      it 'should be 5' do
-        expect(subject.next_purchase).to eq 5
       end
     end
   end

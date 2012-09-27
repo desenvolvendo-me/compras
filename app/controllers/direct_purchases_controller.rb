@@ -36,7 +36,6 @@ class DirectPurchasesController < CrudController
   protected
 
   def create_resource(object)
-    object.direct_purchase = object.next_purchase
     object.transaction do
       super
 
