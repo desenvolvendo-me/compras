@@ -5,11 +5,11 @@ require 'app/business/agreement_additive_number_generator'
 describe AgreementAdditiveNumberGenerator do
   context 'when have all additives as unpersisted' do
     let :additive_one do
-      double('AdditiveOne', :persisted? => false, :number => nil)
+      double('AdditiveOne', :persisted? => false, :number => nil, :marked_for_destruction? => false)
     end
 
     let :additive_two do
-      double('AdditiveTwo', :persisted? => false, :number => nil)
+      double('AdditiveTwo', :persisted? => false, :number => nil, :marked_for_destruction? => false)
     end
 
     let :agreement do
@@ -28,11 +28,11 @@ describe AgreementAdditiveNumberGenerator do
 
   context 'when have one persisted additive and a non persisted' do
     let :additive_one do
-      double('AdditiveOne', :persisted? => true, :number => 1)
+      double('AdditiveOne', :persisted? => true, :number => 1, :marked_for_destruction? => false)
     end
 
     let :additive_two do
-      double('AdditiveTwo', :persisted? => false, :number => nil)
+      double('AdditiveTwo', :persisted? => false, :number => nil, :marked_for_destruction? => false)
     end
 
     let :agreement do
@@ -51,11 +51,11 @@ describe AgreementAdditiveNumberGenerator do
 
   context 'when have a deleted additive, a non persisted and a persisted' do
     let :additive_one do
-      double('AdditiveOne', :persisted? => true, :number => 2)
+      double('AdditiveOne', :persisted? => true, :number => 2, :marked_for_destruction? => false)
     end
 
     let :additive_two do
-      double('AdditiveTwo', :persisted? => false, :number => nil)
+      double('AdditiveTwo', :persisted? => false, :number => nil, :marked_for_destruction? => false)
     end
 
     let :agreement do

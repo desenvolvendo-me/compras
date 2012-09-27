@@ -11,7 +11,7 @@ class AgreementAdditiveNumberGenerator
   def generate!
     next_number = last_additive_number.succ
 
-    agreement_additives.each do |additive|
+    agreement_additives.reject(&:marked_for_destruction?).each do |additive|
       next if additive.number
 
       additive.number = next_number
