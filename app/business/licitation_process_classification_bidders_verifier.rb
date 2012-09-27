@@ -20,7 +20,7 @@ class LicitationProcessClassificationBiddersVerifier
     return unless disqualify_by_documentation_problem
 
     bidders.each do |bidder|
-      if has_documentation_problem?(bidder)
+      if bidder.has_documentation_problem?
         bidder.inactivate! unless bidder.benefited_by_law_of_proposals?
       else
         bidder.activate!
@@ -37,11 +37,4 @@ class LicitationProcessClassificationBiddersVerifier
       end
     end
   end
-
-  private
-
-  def has_documentation_problem?(bidder)
-    !bidder.filled_documents? || bidder.expired_documents?
-  end
-
 end

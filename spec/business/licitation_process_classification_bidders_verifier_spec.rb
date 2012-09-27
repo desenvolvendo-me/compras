@@ -33,7 +33,7 @@ describe LicitationProcessClassificationBiddersVerifier do
 
     it 'does nothing if no bidders are disqualified because of documentation problems' do
       licitation_process.stub(:disqualify_by_documentation_problem => false)
-      bidder.stub(:filled_documents? => true, :expired_documents? => false)
+      bidder.stub(:has_documentation_problem? => false)
 
       bidder.should_not_receive(:inactivate!)
       bidder.should_not_receive(:activate!)
@@ -42,20 +42,9 @@ describe LicitationProcessClassificationBiddersVerifier do
     end
 
     context 'bidder is not benefited by law of proposals' do
-      it 'inactivates the bidder if documents are expired' do
+      it 'inactivates the bidder if it has documentation problems' do
         bidder.stub(:benefited_by_law_of_proposals? => false,
-                    :filled_documents? => true,
-                    :expired_documents? => true)
-
-        bidder.should_receive(:inactivate!)
-
-        verifier.verify!
-      end
-
-      it 'inactivates the bidder if documents are not filled' do
-        bidder.stub(:benefited_by_law_of_proposals? => false,
-                    :filled_documents? => false,
-                    :expired_documents? => false)
+                    :has_documentation_problem? => true)
 
         bidder.should_receive(:inactivate!)
 
@@ -64,7 +53,7 @@ describe LicitationProcessClassificationBiddersVerifier do
     end
 
     it 'activates the bidder if documents are OK' do
-      bidder.stub(:filled_documents? => true, :expired_documents? => false)
+      bidder.stub(:has_documentation_problem? => false)
 
       bidder.should_receive(:activate!).and_return(true)
 

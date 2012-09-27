@@ -159,6 +159,10 @@ class Bidder < Compras::Model
     update_column(:status, Status::ACTIVE)
   end
 
+  def has_documentation_problem?
+    !filled_documents? || expired_documents?
+  end
+
   protected
 
   def validate_licitation_process_envelope_opening_date

@@ -306,4 +306,27 @@ describe Bidder do
       subject.activate!
     end
   end
+
+  describe "#has_documentation_problem" do
+    it "returns true if bidder's documents have expired" do
+      subject.stub(:expired_documents? => true)
+      subject.stub(:filled_documents? => true)
+
+      expect(subject.has_documentation_problem?).to be true
+    end
+
+    it "returns true if bidder has not filled the documents" do
+      subject.stub(:expired_documents? => false)
+      subject.stub(:filled_documents? => false)
+
+      expect(subject.has_documentation_problem?).to be true
+    end
+
+    it "returns false if documents are ok" do
+      subject.stub(:expired_documents? => false)
+      subject.stub(:filled_documents? => true)
+
+      expect(subject.has_documentation_problem?).to be false
+    end
+  end
 end
