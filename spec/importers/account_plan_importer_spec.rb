@@ -44,7 +44,7 @@ describe AccountPlanImporter do
   end
 
   let :config do
-    double(:config)
+    double(:config, :id => 5)
   end
 
   let :null_repository do
@@ -52,7 +52,6 @@ describe AccountPlanImporter do
   end
 
   it 'should import' do
-    pending
     null_repository.should_receive(:transaction).and_yield
 
     nature_balance.should_receive(:value_for).
@@ -115,22 +114,22 @@ describe AccountPlanImporter do
     null_repository.should_receive(:new).with(
       "checking_account" => "1.0.0.0.0.00.00",
       "title" => "ATIVO",
-      "nature_balance" => "",
+      "nature_balance" => nil,
       "bookkeeping" => false,
-      "nature_information" => "",
-      "surplus_indicator" => "",
-      "nature_balance_variation" => "",
-      "movimentation_kind" => "",
-      "ends_at_twelfth_month" => false,
-      "ends_at_thirteenth_month" => false,
-      "ends_at_fourteenth_month" => false,
-      "does_not_ends" => false,
-      "checking_account_of_fiscal_account_id" => "",
+      "nature_information" => nil,
+      "surplus_indicator" => nil,
+      "nature_balance_variation" => nil,
+      "movimentation_kind" => nil,
+      "checking_account_of_fiscal_account_id" => nil,
       "detailing_required_opening" => false,
       "detailing_required_thirteenth" => false,
       "detailing_required_fourteenth" => false,
       "function" => "COMPREENDE OS RECURSOS CONTROLADOS POR UMA ENTIDADE COMO CONSEQUÊNCIA DE EVENTOS PASSADOS E DOS QUAIS SE ESPERA QUE FLUAM BENEFÍCIOS ECONÔMICOS OU POTENCIAL DE SERVIÇOS FUTUROS A UNIDADE.",
-      "account_plan_configuration_id" => config
+      "ends_at_twelfth_month" => false,
+      "ends_at_thirteenth_month" => false,
+      "ends_at_fourteenth_month" => false,
+      "does_not_ends" => false,
+      "account_plan_configuration_id" => config.id
     )
 
     null_repository.should_receive(:new).with(
@@ -142,16 +141,16 @@ describe AccountPlanImporter do
       "surplus_indicator" => "financial",
       "nature_balance_variation" => "not_reverse_balance",
       "movimentation_kind" => "bilateral",
+      "checking_account_of_fiscal_account_id" => 1,
+      "detailing_required_opening" => true,
+      "detailing_required_thirteenth" => false,
+      "detailing_required_fourteenth" => false,
+      "function" => "REGISTRA O SOMATORIO DE NUMERARIOS EM ESPECIE E OUTROS VALORES EM TESOURARIA.",
       "ends_at_twelfth_month" => false,
       "ends_at_thirteenth_month" => false,
       "ends_at_fourteenth_month" => false,
       "does_not_ends" => true,
-      "checking_account_of_fiscal_account_id" => "",
-      "detailing_required_opening" => true,
-      "detailing_required_thirteenth" => false,
-      "detailing_required_fourteenth" => true,
-      "function" => "REGISTRA O SOMATORIO DE NUMERARIOS EM ESPECIE E OUTROS VALORES EM TESOURARIA.",
-      "account_plan_configuration_id" => config
+      "account_plan_configuration_id" => config.id
     )
 
     null_repository.should_receive(:new).with(
@@ -163,37 +162,16 @@ describe AccountPlanImporter do
       "surplus_indicator" => "permanent",
       "nature_balance_variation" => "not_reverse_balance",
       "movimentation_kind" => "bilateral",
-      "ends_at_twelfth_month" => false,
-      "ends_at_thirteenth_month" => false,
-      "ends_at_fourteenth_month" => false,
-      "does_not_ends" => true,
-      "checking_account_of_fiscal_account_id" => "",
+      "checking_account_of_fiscal_account_id" => nil,
       "detailing_required_opening" => false,
       "detailing_required_thirteenth" => false,
       "detailing_required_fourteenth" => false,
       "function" => "REGISTRA AS RESERVAS CONSTITUIDAS COM PARTE DO LUCRO LIQUIDO DE EXERCICIOS ANTERIORES, COM O OBJETIVO DE ATENDER A PROJETOS DE INVESTIMENTO.",
-      "account_plan_configuration_id" => config
-    )
-
-    null_repository.should_receive(:new).with(
-      "checking_account" => "8.9.4.6.2.04.00",
-      "title" => "OUTROS CONVÊNIOS RECEBIDOS QUITADOS ",
-      "nature_balance" => "credit",
-      "bookkeeping" => true,
-      "nature_information" => "compensated",
-      "surplus_indicator" => "",
-      "nature_balance_variation" => "not_reverse_balance",
-      "movimentation_kind" => "bilateral",
       "ends_at_twelfth_month" => false,
-      "ends_at_thirteenth_month" => true,
+      "ends_at_thirteenth_month" => false,
       "ends_at_fourteenth_month" => false,
-      "does_not_ends" => false,
-      "checking_account_of_fiscal_account_id" => 1,
-      "detailing_required_opening" => false,
-      "detailing_required_thirteenth" => true,
-      "detailing_required_fourteenth" => false,
-      "function" => "REGISTRA O VALOR DA PRESTAÇÃO DE CONTAS DA ENTIDADE POR VALORES RECEBIDOS - QUITAÇÃO.",
-      "account_plan_configuration_id" => config
+      "does_not_ends" => true,
+      "account_plan_configuration_id" => config.id
     )
 
     null_repository.should_receive(:new).with(
@@ -202,19 +180,40 @@ describe AccountPlanImporter do
       "nature_balance" => "credit",
       "bookkeeping" => true,
       "nature_information" => "compensated",
-      "surplus_indicator" => "",
+      "surplus_indicator" => nil,
       "nature_balance_variation" => "not_reverse_balance",
       "movimentation_kind" => "bilateral",
-      "ends_at_twelfth_month" => true,
-      "ends_at_thirteenth_month" => false,
-      "ends_at_fourteenth_month" => false,
-      "does_not_ends" => false,
       "checking_account_of_fiscal_account_id" => 1,
       "detailing_required_opening" => false,
       "detailing_required_thirteenth" => true,
-      "detailing_required_fourteenth" => false,
-      "function" => "REGISTRA O VALOR UTILIZADO PELO SERVIDOR  RESPONSÁVEL, PARA  ATENDER DESPESAS QUE NÃO POSSAM SUBORDINAR-SE AO PROCESSO NORMAL DE APLICAÇÃO, PELA SUA PRESTAÇÃO DE CONTAS.· ",
-      "account_plan_configuration_id" => config
+      "detailing_required_fourteenth" => true,
+      "function" => "REGISTRA O VALOR UTILIZADO PELO SERVIDOR  RESPONSÁVEL, PARA  ATENDER DESPESAS QUE NÃO POSSAM SUBORDINAR-SE AO PROCESSO NORMAL DE APLICAÇÃO, PELA SUA PRESTAÇÃO DE CONTAS.  " ,
+      "ends_at_twelfth_month" => false,
+      "ends_at_thirteenth_month" => true,
+      "ends_at_fourteenth_month" => false,
+      "does_not_ends" => false,
+      "account_plan_configuration_id" => config.id
+    )
+
+    null_repository.should_receive(:new).with(
+      "checking_account" => "8.9.4.6.2.04.00",
+      "title" => "OUTROS CONVÊNIOS RECEBIDOS QUITADOS ",
+      "nature_balance" => "credit",
+      "bookkeeping" => true,
+      "nature_information" => "compensated",
+      "surplus_indicator" => nil,
+      "nature_balance_variation" => "not_reverse_balance",
+      "movimentation_kind" => "bilateral",
+      "checking_account_of_fiscal_account_id" => 1,
+      "detailing_required_opening" => false,
+      "detailing_required_thirteenth" => true,
+      "detailing_required_fourteenth" => true,
+      "function" => "REGISTRA O VALOR DA PRESTAÇÃO DE CONTAS DA ENTIDADE POR VALORES RECEBIDOS - QUITAÇÃO.",
+      "ends_at_twelfth_month" => false,
+      "ends_at_thirteenth_month" => true,
+      "ends_at_fourteenth_month" => false,
+      "does_not_ends" => false,
+      "account_plan_configuration_id" => config.id
     )
 
     subject.import!
