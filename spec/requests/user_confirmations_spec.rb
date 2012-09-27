@@ -23,7 +23,7 @@ feature 'A user confirming your account' do
 
     visit "/users/confirmation?confirmation_token=#{user_without_password.confirmation_token}"
 
-    expect(page).to have_field 'user_login'
-    expect(page).to have_field 'user_password'
+    expect(page).to have_field 'Login'
+    expect(page).to have_field 'Senha'
   end
 end
