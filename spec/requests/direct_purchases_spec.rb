@@ -219,6 +219,7 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Referência legal', :with => 'Referencia legal'
       expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'
       expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
+      expect(page).to have_disabled_field 'Solicitação de compra'
       expect(page).to have_field 'Agrupamento de solicitações de compra', :with => 'Agrupamento de reparo 2013'
       expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
@@ -1117,6 +1118,7 @@ feature "DirectPurchases" do
       expect(page).to have_select 'Tipo do empenho', :selected => 'Global'
       expect(page).to have_field 'Solicitação de compra',
                                   :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
       expect(page).to have_field 'Fornecedor', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Objeto da licitação', :with => 'Ponte'
       expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
@@ -1210,7 +1212,7 @@ feature "DirectPurchases" do
       page.find('a').click
     end
 
-    expect(page).to have_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+    expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
   end
 
   scenario 'doesnt allow selection of a purchase solicitation that has already been attended' do
