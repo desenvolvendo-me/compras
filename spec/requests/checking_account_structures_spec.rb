@@ -28,7 +28,7 @@ feature "CheckingAccountStructures" do
 
     click_link 'Disponibilidade financeira - Fonte de Recursos'
 
-    expect(page).to have_field 'Conta corrente', :with => 'Disponibilidade financeira'
+    expect(page).to have_field 'Conta corrente', :with => '14 - Disponibilidade financeira'
     expect(page).to have_field 'Nome', :with => 'Fonte de Recursos'
     expect(page).to have_field 'Tag', :with => 'FonteRecursos'
     expect(page).to have_field 'Descrição', :with => 'Identificação da origem dos recursos'
@@ -60,7 +60,7 @@ feature "CheckingAccountStructures" do
 
     click_link 'Disponibilidade - Outra Fonte de Recursos'
 
-    expect(page).to have_field 'Conta corrente', :with => 'Disponibilidade'
+    expect(page).to have_field 'Conta corrente', :with => '30 - Disponibilidade'
     expect(page).to have_field 'Nome', :with => 'Outra Fonte de Recursos'
     expect(page).to have_field 'Tag', :with => 'OutraFonte'
     expect(page).to have_field 'Descrição', :with => 'Identificar a origem das outras fontes'

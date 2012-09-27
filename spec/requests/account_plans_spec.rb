@@ -73,7 +73,7 @@ feature "AccountPlans" do
       expect(page).to have_checked_field 'Detalhamento obrigatório mês 13'
       expect(page).to have_checked_field 'Detalhamento obrigatório mês 14'
 
-      expect(page).to have_field 'Conta corrente', :with => 'Disponibilidade financeira'
+      expect(page).to have_field 'Conta corrente', :with => '14 - Disponibilidade financeira'
     end
   end
 

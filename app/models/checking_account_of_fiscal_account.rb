@@ -10,6 +10,6 @@ class CheckingAccountOfFiscalAccount < Compras::Model
   filterize
 
   def to_s
-    name
+    "#{tce_code} - #{name}"
   end
 end
