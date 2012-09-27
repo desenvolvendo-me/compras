@@ -836,6 +836,7 @@ feature "Bidders" do
 
   scenario "Save and destroy buttons should not be shown if licitation process envelope opening date is not today" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
+    licitation_process.update_attributes(:envelope_opening_date => Date.tomorrow)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 

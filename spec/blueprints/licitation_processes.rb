@@ -75,7 +75,7 @@ LicitationProcess.blueprint(:processo_licitatorio_fornecedores) do
   readjustment_index { Indexer.make!(:xpto) }
   envelope_delivery_date { I18n.l(Date.current) }
   envelope_delivery_time { "14:00" }
-  envelope_opening_date { I18n.l(Date.tomorrow) }
+  envelope_opening_date { I18n.l(Date.current) }
   envelope_opening_time { "14:00" }
   period { 1 }
   period_unit { PeriodUnit::YEAR }
