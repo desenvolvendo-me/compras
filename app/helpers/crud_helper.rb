@@ -37,7 +37,7 @@ module CrudHelper
     att = record.send attribute
 
     if att.kind_of?(TrueClass) || att.kind_of?(FalseClass)
-      I18n.t(att)
+      I18n.t(att.to_s)
     elsif record.respond_to?("#{attribute}_humanize")
       record.send "#{attribute}_humanize"
     else
