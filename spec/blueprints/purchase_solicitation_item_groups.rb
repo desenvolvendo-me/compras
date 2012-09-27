@@ -37,3 +37,13 @@ PurchaseSolicitationItemGroup.blueprint(:antivirus_desenvolvimento) do
     ]
   }
 end
+
+PurchaseSolicitationItemGroup.blueprint(:office) do
+  description { 'Agrupamento de office' }
+  purchase_solicitation_item_group_materials {
+    [PurchaseSolicitationItemGroupMaterial.make(
+      :reparo_office,
+      :purchase_solicitation_item_group => object)
+    ]
+  }
+end

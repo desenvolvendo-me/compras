@@ -21,3 +21,9 @@ PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_desenvolvimento) do
   material { Material.make!(:antivirus) }
   purchase_solicitations { [PurchaseSolicitation.make(:reparo_desenvolvimento)] }
 end
+
+PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_office) do
+  purchase_solicitation_item_group { nil }
+  material { Material.make!(:antivirus) }
+  purchase_solicitations { [PurchaseSolicitation.make(:reparo_office)] }
+end
