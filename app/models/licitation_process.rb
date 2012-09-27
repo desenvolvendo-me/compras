@@ -7,7 +7,7 @@ class LicitationProcess < Compras::Model
                   :envelope_opening_time, :document_type_ids, :type_of_calculation,
                   :pledge_type, :administrative_process_attributes,
                   :period, :period_unit, :expiration, :expiration_unit,
-                  :bidders_attributes, :judgment_form_id,
+                  :judgment_form_id,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
                   :consider_law_of_proposals, :price_registration
 
@@ -42,7 +42,6 @@ class LicitationProcess < Compras::Model
   has_many :reserve_funds, :dependent => :restrict
   has_many :price_registrations, :dependent => :restrict
 
-  accepts_nested_attributes_for :bidders, :allow_destroy => true
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
   delegate :modality, :modality_humanize, :object_type_humanize, :presence_trading?,
@@ -209,7 +208,10 @@ class LicitationProcess < Compras::Model
   def assign_bidders_documents
     return unless allow_bidders?
 
-    bidders.each(&:assign_document_types)
+    bidders.each do |bidder|
+      bidder.assign_document_types
+      bidder.save!
+    end
   end
 
   def validate_type_of_calculation_by_judgment_form_kind(verificator = LicitationProcessTypesOfCalculationByJudgmentFormKind.new)
