@@ -43,9 +43,7 @@ class DirectPurchase < Compras::Model
   validates :year, :mask => "9999", :allow_blank => true
   validates :year, :date, :legal_reference, :modality, :presence => true
   validates :licitation_object, :delivery_location, :presence => true
-  validates :budget_structure, :presence => true,
-            :unless => lambda { |purchase| purchase.purchase_solicitation.present? ||
-                                           purchase.purchase_solicitation_item_group.present? }
+  validates :budget_structure, :presence => true, :unless => :budget_structure_optional?
   validates :creditor, :employee, :payment_method, :pledge_type, :presence => true
   validates :delivery_term, :delivery_term_period, :presence => true
   validates :direct_purchase_budget_allocations, :no_duplication => :budget_allocation_id
@@ -138,5 +136,9 @@ class DirectPurchase < Compras::Model
     unless purchase_solicitation.can_be_grouped?
       errors.add(:purchase_solicitation, :cannot_generate_direct_purchase)
     end
+  end
+
+  def budget_structure_optional?
+    purchase_solicitation_item_group.present?
   end
 end
