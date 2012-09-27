@@ -103,8 +103,7 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def budget_structure
-    return super unless direct_purchase.present?
-    super || direct_purchase.budget_structure
+    super || direct_purchase.try(:budget_structure)
   end
 
   protected
