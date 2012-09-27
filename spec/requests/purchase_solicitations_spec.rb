@@ -540,4 +540,30 @@ feature "PurchaseSolicitations" do
       expect(page).to have_content "já existe uma solicitação de compra pendente com esta estrutura orçamentaria solicitante e material"
     end
   end
+
+  scenario 'provide purchase solicitation search by code and responsible' do
+    PurchaseSolicitation.make!(:reparo)
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    click_link 'Filtrar Solicitações de Compra'
+
+    fill_in 'Código', :with => '1'
+
+    click_button 'Pesquisar'
+
+    expect(page).to have_content '1/2012'
+
+    click_link 'Filtrar Solicitações de Compra'
+
+    within_modal 'Responsável' do
+      fill_modal 'Pessoa', :field => 'Nome', :with => 'Gabriel Sobrinho'
+      click_button 'Pesquisar'
+      click_record 'Gabriel Sobrinho'
+    end
+
+    click_button 'Pesquisar'
+
+    expect(page).to have_content 'Gabriel Sobrinho'
+  end
 end
