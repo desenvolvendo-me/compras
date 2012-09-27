@@ -1,8 +1,19 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-2">
-    <%= f.input :descriptor %>
+<div class="tabs">
+  <ul>
+    <li>
+      <a href="#main">Principal</a>
+    </li>
+
+    <li>
+      <a href="#accounts">Contas Contábeis</a>
+    </li>
+  </ul>
+
+  <div id="main">
+    <%= render 'main', :f => f %>
+  </div>
+
+  <div id="accounts">
+    <%= render 'accounts', :f => f %>
   </div>
 </div>
-
-<%= f.input :event %>
-<%= f.input :function %>

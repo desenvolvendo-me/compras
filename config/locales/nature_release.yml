@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    nature_release:
+      debt: "Débito"
+      credit: "Crédito"

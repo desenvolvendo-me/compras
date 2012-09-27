@@ -1,0 +1,15 @@
+<p>
+  <input type="button" class="button affirmative add-event-account" value="Adicionar Conta Contábil">
+</p>
+
+<div id="event-account" data-nested-form="event-account" data-inline="true">
+  <%= f.association :accounts, :collection => localized(f.object.accounts) do |o| %>
+    <%= render 'event_checking_accounts/form', :f => o %>
+  <% end %>
+</div>
+
+<%= mustache 'event-account-template' do %>
+  <%= f.association :accounts_attributes, :collection => f.object.accounts.build, :index => '{{uuid-event-account}}' do |o| %>
+    <%= render 'event_checking_accounts/form', :f => o %>
+  <% end %>
+<% end %>

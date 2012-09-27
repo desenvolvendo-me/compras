@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      event_checking_account:
+        one: "Configuração de Evento Contábil"
+        other: "Configurações de Eventos Contabeis"
+
+    attributes:
+      event_checking_account:
+        checking_account_of_fiscal_account: "Conta Corrente da Conta Contábil"
+        nature_release: "Natureza de lançamento"
+        operation: "Operação"

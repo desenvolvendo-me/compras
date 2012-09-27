@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    operation:
+      sum: "Somar"
+      subtract: "Subtrair"

@@ -1,8 +1,11 @@
 require 'model_helper'
 require 'app/models/event_checking_configuration'
+require 'app/models/event_checking_account'
 
 describe EventCheckingConfiguration do
   it { should belong_to :descriptor }
+
+  it { should have_many :accounts }
 
   it { should validate_presence_of :event }
   it { should validate_presence_of :function }
