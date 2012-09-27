@@ -25,8 +25,12 @@
 
     $("#direct_purchase_budget_structure").requiredField(true);
 
-    if (purchaseSolicitationItemGroupId || purchaseSolicitation) {
+    if (purchaseSolicitationItemGroupId) {
       disableBudgetAllocations();
+      disablePurchaseSolicitation();
+    } else if (purchaseSolicitation) {
+      disableBudgetAllocations();
+      disablePurchaseSolicitationItemGroup();
     }
   })();
 
@@ -75,6 +79,14 @@
       clearBudgetStructure();
     }
   });
+
+  function disablePurchaseSolicitation() {
+    $("#direct_purchase_purchase_solicitation").attr("disabled", "disabled");
+  }
+
+  function disablePurchaseSolicitationItemGroup() {
+    $("#direct_purchase_purchase_solicitation_item_group").attr("disabled", "disabled");
+  }
 
   function fillBudgetStructure(budget_structure) {
     if (budget_structure) {
