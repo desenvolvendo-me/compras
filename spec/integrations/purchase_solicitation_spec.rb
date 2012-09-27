@@ -18,15 +18,5 @@ describe PurchaseSolicitation do
 
       expect(purchase_solicitation.budget_structure).to eq direct_purchase.budget_structure
     end
-
-    it "returns nil if neither objects have a budget structure set" do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-                                                         :budget_structure => nil)
-      direct_purchase = DirectPurchase.make!(:compra,
-                                             :budget_structure => nil,
-                                             :purchase_solicitation => purchase_solicitation)
-
-      expect(purchase_solicitation.budget_structure).to be nil
-    end
   end
 end
