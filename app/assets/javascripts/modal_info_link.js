@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-  $(".modal").live('change', function (event, record) {
+  $("input.modal").live('change', function (event, record) {
     if (record) {
       $(this).parent().find(".modal_info a").attr("href", record.modal_info_url);
     }
