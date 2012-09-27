@@ -38,7 +38,7 @@ class BudgetAllocation < Compras::Model
   delegate :expense_group_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_modality_id, :to => :expense_nature, :allow_nil => true
   delegate :expense_element_id, :to => :expense_nature, :allow_nil => true
-  delegate :code, :to => :budget_structure, :prefix => true, :allow_nil => true
+  delegate :code, :budget_structure, :to => :budget_structure, :prefix => true, :allow_nil => true
 
   validates :descriptor, :budget_structure, :subfunction, :goal, :date,
             :government_program, :government_action, :budget_allocation_type,
@@ -70,7 +70,7 @@ class BudgetAllocation < Compras::Model
   end
 
   def to_s
-    "#{budget_structure_code} - #{description}"
+    "#{budget_structure_budget_structure} - #{description}"
   end
 
   def function

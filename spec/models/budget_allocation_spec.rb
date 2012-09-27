@@ -36,9 +36,9 @@ describe BudgetAllocation do
     end
   end
 
-  it 'should return "budget structure code - description" as to_s' do
+  it 'should return "budget structure budget structure - description" as to_s' do
     subject.description = 'Secretaria de educação'
-    subject.stub(:budget_structure_code => '1')
+    subject.stub(:budget_structure_budget_structure => '1')
     expect(subject.to_s).to eq '1 - Secretaria de educação'
   end
 
