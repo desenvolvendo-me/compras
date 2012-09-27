@@ -7,6 +7,6 @@ pt-BR:
 
     attributes:
       event_checking_account:
-        checking_account_of_fiscal_account: "Conta Corrente da Conta Contábil"
+        checking_account_of_fiscal_account: "Conta corrente da conta contábil"
         nature_release: "Natureza de lançamento"
         operation: "Operação"

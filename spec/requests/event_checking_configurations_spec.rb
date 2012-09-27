@@ -23,7 +23,7 @@ feature "EventCheckingConfigurations" do
     within_tab 'Contas Contábeis' do
       click_button 'Adicionar Conta Contábil'
 
-      fill_modal 'Conta Corrente da Conta Contábil', :with => 'Disponibilidade financeira'
+      fill_modal 'Conta corrente da conta contábil', :with => 'Disponibilidade financeira'
       select 'Crédito', :from => 'Natureza de lançamento'
       select 'Somar', :from => 'Operação'
     end
@@ -41,7 +41,7 @@ feature "EventCheckingConfigurations" do
     end
 
     within_tab 'Contas Contábeis' do
-      expect(page).to have_field 'Conta Corrente da Conta Contábil', :with => '14 - Disponibilidade financeira'
+      expect(page).to have_field 'Conta corrente da conta contábil', :with => '14 - Disponibilidade financeira'
       expect(page).to have_select 'Natureza de lançamento', :selected => 'Crédito'
       expect(page).to have_select 'Operação', :selected => 'Somar'
     end
@@ -64,14 +64,14 @@ feature "EventCheckingConfigurations" do
 
       click_button 'Adicionar Conta Contábil'
 
-      fill_modal 'Conta Corrente da Conta Contábil', :with => 'Disponibilidade financeira'
+      fill_modal 'Conta corrente da conta contábil', :with => 'Disponibilidade financeira'
       select 'Crédito', :from => 'Natureza de lançamento'
       select 'Somar', :from => 'Operação'
 
       click_button 'Adicionar Conta Contábil'
 
       within '.nested-event-account:nth-child(3)' do
-        fill_modal 'Conta Corrente da Conta Contábil', :with => 'Disponibilidade'
+        fill_modal 'Conta corrente da conta contábil', :with => 'Disponibilidade'
         select 'Débito', :from => 'Natureza de lançamento'
         select 'Subtrair', :from => 'Operação'
       end
@@ -91,13 +91,13 @@ feature "EventCheckingConfigurations" do
 
     within_tab 'Contas Contábeis' do
       within '.nested-event-account:nth-child(1)' do
-        expect(page).to have_field 'Conta Corrente da Conta Contábil', :with => '30 - Disponibilidade'
+        expect(page).to have_field 'Conta corrente da conta contábil', :with => '30 - Disponibilidade'
         expect(page).to have_select 'Natureza de lançamento', :selected => 'Débito'
         expect(page).to have_select 'Operação', :selected => 'Subtrair'
       end
 
       within '.nested-event-account:nth-child(2)' do
-        expect(page).to have_field 'Conta Corrente da Conta Contábil', :with => '14 - Disponibilidade financeira'
+        expect(page).to have_field 'Conta corrente da conta contábil', :with => '14 - Disponibilidade financeira'
         expect(page).to have_select 'Natureza de lançamento', :selected => 'Crédito'
         expect(page).to have_select 'Operação', :selected => 'Somar'
       end
