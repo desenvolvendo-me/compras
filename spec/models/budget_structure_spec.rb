@@ -107,6 +107,15 @@ describe BudgetStructure do
 
       expect(subject.errors.messages[:parent]).to be nil
     end
+
+    it 'should not validate if level is nil' do
+      subject.stub(:level).and_return(nil)
+      subject.stub(:parent).and_return(parent)
+
+      subject.valid?
+
+      expect(subject.errors.messages[:parent]).to be nil
+    end
   end
 
   describe 'to_s' do

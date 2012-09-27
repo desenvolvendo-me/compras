@@ -33,7 +33,7 @@ class BudgetStructure < Compras::Model
   validates :budget_structure_level, :presence => true
   validates :code, :mask => :budget_structure_level_mask
   validates :parent, :presence => true, :if => :level_greater_than_1?
-  validate :parent_level_must_be_immediate_superior
+  validate :parent_level_must_be_immediate_superior, :if => :level
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :budget_structure_responsibles, :allow_destroy => true
