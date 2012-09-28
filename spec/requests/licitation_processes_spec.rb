@@ -425,14 +425,14 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Wenderson Malheiros'
 
-    within '.classification-1-1-0' do
+    within '.classification-1-0-0' do
       expect(page).to have_content 'Arame comum'
       expect(page).to have_content '0,00'
       expect(page).to have_content '0,00'
       expect(page).to have_content 'Perdeu'
     end
 
-    within '.classification-1-0-0' do
+    within '.classification-1-1-0' do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '10,00'
       expect(page).to have_content '20,00'
@@ -441,14 +441,14 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content 'Gabriel Sobrinho'
 
-    within '.classification-2-1-0' do
+    within '.classification-2-0-0' do
       expect(page).to have_content 'Arame comum'
       expect(page).to have_content '0,00'
       expect(page).to have_content '0,00'
       expect(page).to have_content 'Perdeu'
     end
 
-    within '.classification-2-0-0' do
+    within '.classification-2-1-0' do
       expect(page).to have_content 'Antivirus'
       expect(page).to have_content '9,00'
       expect(page).to have_content '18,00'
