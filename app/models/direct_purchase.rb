@@ -8,7 +8,8 @@ class DirectPurchase < Compras::Model
                   :total_allocations_items_value, :purchase_solicitation_id,
                   :purchase_solicitation_item_group_id
 
-  attr_modal :year, :date, :modality
+  attr_modal :direct_purchase, :year, :date, :modality,
+             :budget_structure_id, :creditor_id
 
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
@@ -57,6 +58,7 @@ class DirectPurchase < Compras::Model
   before_validation :set_total_allocations_items_value
 
   orderize :year
+  filterize
 
   def to_s
     "#{direct_purchase}/#{year}"
@@ -70,14 +72,6 @@ class DirectPurchase < Compras::Model
     return 0 if licitation_object.nil? || modality.empty?
 
     licitation_object.licitation_exemption(modality)
-  end
-
-  def self.filter(params)
-    query = scoped
-    query = query.where{ year.eq(params[:year]) } unless params[:year].blank?
-    query = query.where{ date.eq(params[:date].to_date) } if !params[:date].blank? && params[:date].date?
-    query = query.where{ modality.eq(params[:modality]) } unless params[:modality].blank?
-    query
   end
 
   def authorized?

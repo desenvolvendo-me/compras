@@ -667,6 +667,70 @@ feature "DirectPurchases" do
     end
   end
 
+  scenario 'should filter by yearly sequence' do
+    DirectPurchase.make!(:compra)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    fill_in 'Compra', :with => 1
+
+    click_button 'Pesquisar'
+
+    within_records do
+      expect(page).to have_content "1/2012"
+    end
+  end
+
+  scenario 'should filter by budget structure' do
+    DirectPurchase.make!(:compra)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação',
+                                         :field => 'Descrição'
+    click_button 'Pesquisar'
+
+    within_records do
+      expect(page).to have_content "1/2012"
+    end
+  end
+
+  scenario 'should filter by creditor' do
+    DirectPurchase.make!(:compra)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    fill_modal 'Fornecedor', :with => 'Wenderson Malheiros',
+                             :field => 'Nome'
+    click_button 'Pesquisar'
+
+    within_records do
+      expect(page).to have_content "1/2012"
+    end
+  end
+
+  scenario 'should filter by purchase date' do
+    DirectPurchase.make!(:compra)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Filtrar Compras Diretas'
+
+    fill_in 'Data da compra', :with => '02/03/2012'
+
+    click_button 'Pesquisar'
+
+    within_records do
+      expect(page).to have_content "1/2012"
+    end
+  end
+
   scenario 'calculate total value of items' do
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
