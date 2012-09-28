@@ -38,7 +38,6 @@ class LicitationObject < Compras::Model
   private
 
   def licitation_exemption(modality)
-    items.by_modality(modality).
-      collect(&:estimated_total_price).sum
+    items.by_modality(modality).collect(&:estimated_total_price).sum
   end
 end
