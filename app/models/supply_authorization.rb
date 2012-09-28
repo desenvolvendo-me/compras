@@ -12,8 +12,8 @@ class SupplyAuthorization < Compras::Model
   delegate :phone, :fax, :address, :city, :zip_code, :accounts, :agencies,
            :banks, :creditor, :date, :budget_structure, :delivery_location,
            :delivery_term, :delivery_term_period, :delivery_term_period_humanize,
-           :licitation_object, :observation, :payment_method, :to => :direct_purchase,
-           :allow_nil => true
+           :licitation_object, :observation, :payment_method, :annulled?,
+           :to => :direct_purchase, :allow_nil => true
   delegate :id, :year, :to => :direct_purchase, :prefix => true, :allow_nil => true
 
   validates :year, :direct_purchase, :presence => true
