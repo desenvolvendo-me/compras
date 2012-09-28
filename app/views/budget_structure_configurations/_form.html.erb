@@ -25,7 +25,7 @@
     var levels = [];
     var mask = '';
 
-    $('#budget-structure-level').children('.nested-budget-structure-level').each(function() {
+    $('#budget-structure-level').children('.nested-budget-structure-level:visible').each(function() {
       var level     = $(this).find('input.level').val(),
           digits    = $(this).find('input.digits').val(),
           separator = $(this).find('select.separator').val();
@@ -49,6 +49,7 @@
     $('#budget_structure_configuration_mask').attr('value', mask);
   }
 
+  $('form.budget_structure_configuration').on('nestedForm:afterRemove', calculeMask);
   $('#budget-structure-level').on('keyup', 'input:visible.numeric', calculeMask);
   $('#budget-structure-level').on('change', 'select', calculeMask);
 </script>
