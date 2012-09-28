@@ -527,6 +527,38 @@ feature "Agreements" do
     end
   end
 
+  scenario 'add additive to agreement without additives' do
+    Agreement.make!(:apoio_ao_turismo_sem_aditivos)
+    RegulatoryAct.make!(:emenda)
+
+    navigate 'Contabilidade > Comum > Convênio > Convênios'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Aditivos' do
+      click_button 'Adicionar Aditivo'
+
+      fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
+      select 'Prazo', :from => 'Tipo'
+      fill_in 'Descrição', :with => 'Termo de aditamento'
+      fill_in 'Valor', :with => '200,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Convênio editado com sucesso.'
+
+    click_link 'Apoio ao turismo'
+
+    within_tab 'Aditivos' do
+      expect(page).to have_field 'Número/Ano', :with => '1/2012'
+      expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
+      expect(page).to have_select 'Tipo', :selected => 'Prazo'
+      expect(page).to have_field 'Descrição', :with => 'Termo de aditamento'
+      expect(page).to have_field 'Valor', :with => '200,00'
+    end
+  end
+
   scenario 'validating sum of value of participants whose kind equals granting' do
     Agreement.make!(:apoio_ao_turismo)
     Creditor.make!(:wenderson_sa)

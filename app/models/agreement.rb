@@ -54,9 +54,7 @@ class Agreement < Compras::Model
     where { agreement_occurrences.kind.eq(AgreementOccurrenceKind::IN_PROGRESS) }
 
   def last_additive_number
-    return 0 unless last_persisted_additive
-
-    last_persisted_additive.number
+    last_persisted_additive.try(:number) || 0
   end
 
   def to_s
