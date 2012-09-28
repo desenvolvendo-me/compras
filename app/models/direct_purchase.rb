@@ -32,6 +32,7 @@ class DirectPurchase < Compras::Model
   has_many :items, :through => :direct_purchase_budget_allocations, :class_name => :DirectPurchaseBudgetAllocationItem
   has_many :purchase_solicitation_budget_allocation_items, :as => :fulfiller
   has_one :supply_authorization, :dependent => :restrict
+  has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
   accepts_nested_attributes_for :direct_purchase_budget_allocations, :allow_destroy => true
 
@@ -64,6 +65,18 @@ class DirectPurchase < Compras::Model
 
   def to_s
     "#{direct_purchase}/#{year}"
+  end
+
+  def annulled?
+    annul.present?
+  end
+
+  def annullable?
+    !annulled?
+  end
+
+  def next_purchase
+    last_purchase_of_self_year.succ
   end
 
   def licitation_exemption

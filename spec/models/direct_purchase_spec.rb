@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
+require 'app/models/resource_annul'
 require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
 require 'app/models/direct_purchase_budget_allocation'
@@ -35,6 +36,7 @@ describe DirectPurchase do
   it { should have_many(:purchase_solicitation_budget_allocation_items) }
 
   it { should have_one(:supply_authorization).dependent(:restrict) }
+  it { should have_one(:annul).dependent(:destroy) }
 
   it { should auto_increment(:direct_purchase).by(:year) }
 
@@ -175,7 +177,7 @@ describe DirectPurchase do
       it "should not have a purchase solicitation that can't generate direct purchases" do
         purchase_solicitation.stub(:can_be_grouped? => false)
         subject.stub(:purchase_solicitation => purchase_solicitation)
-        
+
         subject.valid?
 
         expect(subject.errors[:purchase_solicitation]).to include 'não pode gerar compras diretas com a situação atual'
@@ -219,6 +221,22 @@ describe DirectPurchase do
 
       subject.valid?
       expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.is_annulled'))
+    end
+  end
+
+  context '#annul' do
+    let :annul do
+      double(:annul)
+    end
+
+    it 'should be annuled when annul is present' do
+      subject.stub(:annul).and_return(annul)
+
+      expect(subject.annulled?).to be true
+    end
+
+    it 'should not be annuled when annul is not present' do
+      expect(subject.annulled?).to be false
     end
   end
 end
