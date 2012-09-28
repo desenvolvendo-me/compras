@@ -64,6 +64,12 @@ feature "BudgetStructureConfigurations" do
     end
 
     expect(page).to have_field 'Máscara', :with => '999.99'
+
+    within 'div.nested-budget-structure-level:last' do
+      click_button 'Remover'
+    end
+
+    expect(page).to have_field 'Máscara', :with => '99'
   end
 
   scenario 'update an existent budget_structure_configuration' do
