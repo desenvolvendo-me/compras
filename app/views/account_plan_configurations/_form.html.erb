@@ -64,6 +64,7 @@
     $('#account_plan_configuration_mask').attr('value', mask);
   }
 
+  $('form.account_plan_configuration').on('nestedForm:afterRemove', calculeMask);
   $('#account-plan-level').on('keyup', 'input:visible.numeric', calculeMask);
   $('#account-plan-level').on('change', 'select', calculeMask);
 </script>

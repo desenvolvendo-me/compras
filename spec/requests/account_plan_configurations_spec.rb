@@ -63,6 +63,12 @@ feature "AccountPlanConfigurations" do
     end
 
     expect(page).to have_field 'Máscara', :with => '999.99'
+
+    within 'div.nested-account-plan-level:last' do
+      click_button 'Remover'
+    end
+
+    expect(page).to have_field 'Máscara', :with => '99'
   end
 
   scenario 'update an existent account_plan_configuration' do
