@@ -267,4 +267,37 @@ feature "PurchaseSolicitationItemGroups" do
       end
     end
   end
+
+  scenario 'only purchase solicitations with pending items may compose a group' do
+    item = PurchaseSolicitationBudgetAllocationItem.make(:item,
+                                                         :status => 'grouped')
+    grouped_allocation = PurchaseSolicitationBudgetAllocation.make(:alocacao_primaria,
+                                                                   :items => [item])
+    PurchaseSolicitation.make!(:reparo,
+                               :purchase_solicitation_budget_allocations => [grouped_allocation])
+
+    ungrouped_allocation = PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)
+    PurchaseSolicitation.make!(:reparo_2013,
+                               :budget_structure => BudgetStructure.make!(:secretaria_de_desenvolvimento),
+                               :purchase_solicitation_budget_allocations => [ungrouped_allocation])
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Criar Agrupamento de Item de Solicitação de Compra'
+
+    fill_in 'Descrição', :with => 'Agrupamento de antivirus'
+
+    click_button 'Adicionar Material'
+
+    fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
+
+    within_modal 'Solicitações de compra' do
+      click_button 'Pesquisar'
+
+      within '.records' do
+        expect(page).not_to have_content '2012'
+        expect(page).to have_content '2013'
+      end
+    end
+  end
 end
