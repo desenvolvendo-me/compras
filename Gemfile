@@ -29,7 +29,7 @@ gem 'mail_validator', '0.2.0'
 gem 'cnpj_validator', '0.3.1'
 gem 'cpf_validator', '0.2.0'
 gem 'mask_validator', '0.2.1'
-gem 'validates_timeliness', '3.0.11'
+gem 'validates_timeliness', '3.0.14'
 
 gem 'inherited_resources', '1.3.0'
 gem 'has_scope', '0.5.1'
