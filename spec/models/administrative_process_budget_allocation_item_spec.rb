@@ -20,7 +20,7 @@ describe AdministrativeProcessBudgetAllocationItem do
       double(:material)
     end
 
-    it 'should return materiali.to_s as to_s' do
+    it 'should return material.to_s as to_s' do
       subject.stub(:material).and_return(material)
 
       material.stub(:to_s).and_return('Cadeira')
