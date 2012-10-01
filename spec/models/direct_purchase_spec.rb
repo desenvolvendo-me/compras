@@ -91,11 +91,21 @@ describe DirectPurchase do
       allocation_two.errors.messages[:budget_allocation_id].should be_nil
     end
 
+    context "budget structure validation" do
+      it { should validate_presence_of :budget_structure }
+
+      it "does not validate budget_structure if item group is present" do
+        item_group = double(:item_group, :present? => true, :annulled? => false)
+        subject.stub(:purchase_solicitation_item_group => item_group)
+
+        should_not validate_presence_of :budget_structure
+      end
+    end
+
     it { should validate_presence_of :year }
     it { should validate_presence_of :date }
     it { should validate_presence_of :legal_reference }
     it { should validate_presence_of :modality }
-    it { should validate_presence_of :budget_structure }
     it { should validate_presence_of :licitation_object }
     it { should validate_presence_of :delivery_location }
     it { should validate_presence_of :creditor }
