@@ -217,7 +217,7 @@ feature "ExtraCredits" do
 
       navigate 'Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
 
-      click_link "#{extra_credit.id}"
+      click_link extra_credit.to_s
 
       within_tab 'Movimentos' do
         within 'fieldset:first' do
