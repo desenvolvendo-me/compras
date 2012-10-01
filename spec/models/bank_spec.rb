@@ -10,15 +10,12 @@ describe Bank do
   end
 
   it "validates length of code" do
-    # FIXME: it not care about others attributes
-    subject.name = 'Itaú'
-    subject.acronym = 'IT'
-
     subject.code = '87ITA'
-    expect(subject).to be_valid
+    subject.valid?
+    expect(subject.errors[:code]).to eq []
 
     subject.code = '87ITAU'
-    expect(subject).to be_invalid
+    expect(subject.errors[:code]).to_not include "é muito longo (máximo: 5 caracteres)"
   end
 
   it { should have_many :agencies }
