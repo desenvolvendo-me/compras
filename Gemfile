@@ -31,7 +31,7 @@ gem 'cpf_validator', '0.2.0'
 gem 'mask_validator', '0.2.1'
 gem 'validates_timeliness', '3.0.14'
 
-gem 'inherited_resources', '1.3.0'
+gem 'inherited_resources', '1.3.1'
 gem 'has_scope', '0.5.1'
 gem 'responders', '0.6.4'
 gem 'jbuilder', '0.4.0'
