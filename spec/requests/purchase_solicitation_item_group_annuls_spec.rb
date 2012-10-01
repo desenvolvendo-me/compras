@@ -37,7 +37,6 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to_not have_link 'Apagar'
   end
 
-
   scenario 'annul an existent purchase_solicitation_item_group' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
