@@ -16,7 +16,7 @@
   });
 
   function enableOrDisableDeactivationDate() {
-    booleanStatus = ($('#precatory_type_status').val() == '<%= Status::INACTIVE %>');
+    var booleanStatus = ($('#precatory_type_status').val() == '<%= Status::INACTIVE %>');
     $('#precatory_type_deactivation_date').requiredField(booleanStatus);
     $('#precatory_type_deactivation_date').attr('disabled', !booleanStatus);
   }
