@@ -70,6 +70,18 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Apagar'
     expect(page).to have_link 'Cancelar'
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    click_link '1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_select 'Status', :with => 'Pendente'
+        end
+      end
+    end
   end
 
   scenario 'does not show destroy button if not annullable' do
