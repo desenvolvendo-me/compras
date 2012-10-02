@@ -169,7 +169,7 @@ describe DirectPurchase do
     end
 
     context "purchase_solicitations" do
-      let (:purchase_solicitation) do
+      let(:purchase_solicitation) do
         double(:can_be_grouped? => true)
       end
 
