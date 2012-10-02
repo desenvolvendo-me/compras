@@ -25,3 +25,33 @@
     <%= render 'winning_bidders', :f => f %>
   </div>
 </div>
+
+<script>
+  $('form.price_registration').on('focus', '.budget-structure-modal', function(){
+    filterModalUrl(this);
+  });
+
+  $('form.price_registration').on('click', '.remove-price-registration-budget-structure', function() {
+    $(this).closest('.price-registration-budget-structure').find('.budget-structure-modal').removeClass('budget-structure-modal');
+  });
+
+  function filterModalUrl(modal){
+    var selectedBudgetStructures = [];
+
+    $(modal).closest('.price-registration-item').find('.budget-structure-modal').each(function(index, item) {
+      budgetStructureId = $(item).next('input:hidden').val();
+      if (budgetStructureId) {
+        selectedBudgetStructures.push(budgetStructureId);
+      }
+    });
+
+    var url = "<%= modal_budget_structures_path %>?",
+        params = {
+          except_ids: selectedBudgetStructures
+        };
+
+    url += jQuery.param(params);
+
+    $(modal).closest('.price-registration-item').find('.budget-structure-modal').data('modal-url', url);
+  };
+</script>

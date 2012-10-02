@@ -291,4 +291,37 @@ feature "PriceRegistration" do
       end
     end
   end
+
+  scenario 'does not allow duplicate budget structures for the same material' do
+    Material.make!(:antivirus)
+    LicitationProcess.make!(:processo_licitatorio)
+    BudgetStructure.make!(:secretaria_de_desenvolvimento)
+
+    navigate 'Compras e Licitações > Registros de Preços'
+
+    click_link 'Criar Registro de Preço'
+
+    within_tab 'Itens por Estruturas Orçamentárias Participantes' do
+      click_button 'Adicionar Material'
+      fill_modal 'Material', :with => 'Antivirus', :field => 'Material'
+
+      click_button 'Adicionar Dotação'
+
+      within('.price-registration-budget-structure:first') do
+        fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
+      end
+
+      click_button 'Adicionar Dotação'
+
+      within('.price-registration-budget-structure:first') do
+        find_field('Estrutura orçamentária').click
+      end
+    end
+
+    click_button('Pesquisar')
+    within_records do
+      expect(page).to have_content 'Secretaria de Educação'
+      expect(page).not_to have_content 'Secretaria de Desenvolvimento'
+    end
+  end
 end

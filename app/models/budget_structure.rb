@@ -51,6 +51,8 @@ class BudgetStructure < Compras::Model
     }
   }
 
+  scope :except_ids, lambda { |ids| where { id.not_in(ids) } }
+
   before_create :cannot_have_duplicated_code_in_same_configuration_and_level
 
   def parent_budget_structure_level_id

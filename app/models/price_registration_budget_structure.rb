@@ -7,6 +7,7 @@ class PriceRegistrationBudgetStructure < Compras::Model
 
   validates :price_registration_item, :budget_structure, :quantity_requested,
             :presence => true
+  validates :budget_structure_id, :uniqueness => { :scope => :price_registration_item_id }
 
   filterize
   orderize :id
