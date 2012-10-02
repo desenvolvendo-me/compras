@@ -19,6 +19,18 @@ describe PurchaseSolicitationItemGroupDecorator do
 
       expect(subject).not_to be_allow_submit_button
     end
+
+    it 'should allow_annul_link if it is annullable' do
+      component.stub(:annullable?).and_return(true)
+
+      expect(subject).to be_allow_annul_link
+    end
+
+    it 'should not allow_annul_link if it is not annullable' do
+      component.stub(:annullable?).and_return(false)
+
+      expect(subject).to_not be_allow_annul_link
+    end
   end
 
   context 'when is annulled' do
@@ -36,6 +48,18 @@ describe PurchaseSolicitationItemGroupDecorator do
       component.stub(:editable?).and_return(false)
 
       expect(subject).not_to be_allow_submit_button
+    end
+
+    it 'should allow_annul_link if it is annullable' do
+      component.stub(:annullable?).and_return(true)
+
+      expect(subject).to be_allow_annul_link
+    end
+
+    it 'should allow_annul_link if it is not annullable' do
+      component.stub(:annullable?).and_return(false)
+
+      expect(subject).to be_allow_annul_link
     end
   end
 end
