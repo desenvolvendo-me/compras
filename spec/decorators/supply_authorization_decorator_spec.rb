@@ -84,4 +84,27 @@ describe SupplyAuthorizationDecorator do
       expect(subject.pluralized_delivery_term_period).to be_nil
     end
   end
+
+  context '#status' do
+    before do
+      I18n.backend.store_translations 'pt-BR', :enumerations => {
+          :status => {
+            :active => 'Ativo',
+            :inactive => 'Inativo'
+        }
+      }
+    end
+
+    it 'should translate the status when active' do
+      component.stub(:status).and_return('active')
+
+      expect(subject.status).to eq 'Ativo'
+    end
+
+    it 'should translate the status when inactive' do
+      component.stub(:status).and_return('inactive')
+
+      expect(subject.status).to eq 'Inativo'
+    end
+  end
 end

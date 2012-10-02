@@ -43,4 +43,26 @@ describe SupplyAuthorization do
       expect(subject.annulled?).to be false
     end
   end
+
+  context '#status' do
+    let :status_enumeration do
+      double(:status)
+    end
+
+    it 'should be Active when not annulled' do
+      subject.stub(:annulled?).and_return(false)
+
+      status_enumeration.should_receive(:value_for).with(:ACTIVE).and_return('active')
+
+      expect(subject.status(status_enumeration)).to eq 'active'
+    end
+
+    it 'should be Inactive when annulled' do
+      subject.stub(:annulled?).and_return(true)
+
+      status_enumeration.should_receive(:value_for).with(:INACTIVE).and_return('inactive')
+
+      expect(subject.status(status_enumeration)).to eq 'inactive'
+    end
+  end
 end

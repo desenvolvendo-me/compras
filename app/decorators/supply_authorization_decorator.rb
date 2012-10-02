@@ -29,4 +29,8 @@ class SupplyAuthorizationDecorator
       component.delivery_term_period_humanize
     end
   end
+
+  def status
+    t("enumerations.status.#{super}") if super
+  end
 end

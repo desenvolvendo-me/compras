@@ -29,4 +29,12 @@ class SupplyAuthorization < Compras::Model
   def items_count
     direct_purchase.direct_purchase_budget_allocations.map(&:items).flatten.count
   end
+
+  def status(status_enumeration = Status)
+    if annulled?
+      status_enumeration.value_for(:INACTIVE)
+    else
+      status_enumeration.value_for(:ACTIVE)
+    end
+  end
 end

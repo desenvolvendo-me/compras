@@ -4,7 +4,7 @@
 
 <div class="table-border">
   <div class="yui3-g">
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-4">
       <span class="label">
         Número
       </span>:
@@ -12,7 +12,7 @@
       <%= resource %>
     </div>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-4">
       <span class="label">
         Compra Direta Número
       </span>:
@@ -20,12 +20,20 @@
       <%= resource.decorator.direct_purchase %>
     </div>
 
-    <div class="yui3-u-1-3">
+    <div class="yui3-u-1-4">
       <span class="label">
         Data da compra
       </span>:
 
       <%= resource.decorator.date %>
+    </div>
+
+    <div class="yui3-u-1-4">
+      <span class="label">
+        Status
+      </span>:
+
+      <%= resource.decorator.status %>
     </div>
   </div>
 </div>
