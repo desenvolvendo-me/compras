@@ -15,6 +15,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   validates :description, :presence => true
   validates :purchase_solicitation_item_group_materials, :presence => {:message => :must_have_at_least_one_material}
+  validate :purchase_solicitation_status
 
   accepts_nested_attributes_for :purchase_solicitation_item_group_materials, :allow_destroy => true
 
@@ -65,5 +66,17 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   def material_ids
     purchase_solicitation_item_group_materials.map(&:material_id)
+  end
+
+  private
+
+  def purchase_solicitation_status
+    return unless purchase_solicitations
+
+    purchase_solicitations.each do |purchase_solicitation|
+      unless purchase_solicitation.can_be_grouped?
+        errors.add(:purchase_solicitations, :cannot_have_purchase_solicitation_not_liberated_pending_or_partially_fulfilled, :purchase_solicitation => purchase_solicitation)
+      end
+    end
   end
 end
