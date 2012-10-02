@@ -362,6 +362,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :direct_purchase_annuls, :only => [:new, :create, :edit, :update]
+
   resources :direct_purchases, :except => [:destroy, :show] do
     collection do
       get :filter

@@ -72,6 +72,14 @@ describe DirectPurchase do
     expect(subject.licitation_object_build_licitation_exemption).to eq 200.0
   end
 
+  it 'should delegate items from purchase_solicitation_item_groups' do
+    expect(subject.purchase_solicitation_item_group_purchase_solicitation_item_ids).to eq nil
+
+    subject.stub(:purchase_solicitation_item_group).and_return(double(:purchase_solicitation_item_group, :purchase_solicitation_item_ids => [1, 2]))
+
+    expect(subject.purchase_solicitation_item_group_purchase_solicitation_item_ids).to eq [1, 2]
+  end
+
   context "validations" do
     it "the duplicated budget_allocations should be invalid except the first" do
       allocation_one = subject.direct_purchase_budget_allocations.build(:budget_allocation_id => 1)

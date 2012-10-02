@@ -39,6 +39,8 @@ class DirectPurchase < Compras::Model
   delegate :phone, :fax, :address, :city, :zip_code, :to => :creditor, :allow_nil => true
   delegate :person_email, :to => :creditor, :allow_nil => true, :prefix => true
   delegate :accounts, :agencies, :banks, :to => :creditor, :allow_nil => true
+  delegate :purchase_solicitation_item_ids,
+           :to => :purchase_solicitation_item_group, :allow_nil => true, :prefix => true
   delegate :purchase_licitation_exemption, :build_licitation_exemption,
            :to => :licitation_object, :allow_nil => true, :prefix => true
   delegate :materials, :materials_groups, :materials_classes,

@@ -152,4 +152,76 @@ describe PurchaseSolicitationItemGroup do
       subject.purchase_solicitations_by_material
     end
   end
+
+  context 'purchase_solicitation_items' do
+    let :purchase_solicitation_item_group_materials do
+      []
+    end
+
+    let :purchase_solicitation_item_group_material1 do
+      double(:purchase_solicitation_item_group_material1,
+        :purchase_solicitation_items => [antivirus, office]
+      )
+    end
+
+    let :purchase_solicitation_item_group_material2 do
+      double(:purchase_solicitation_item_group_material2,
+        :purchase_solicitation_items => [cadeira]
+      )
+    end
+
+    let :antivirus do
+      double(:antivirus, :id => 1)
+    end
+
+    let :office do
+      double(:office, :id => 2)
+    end
+
+    let :cadeira do
+      double(:office, :id => 3)
+    end
+
+    describe '#purchase_solicitation_items' do
+      before do
+        subject.stub(:purchase_solicitation_item_group_materials).
+                and_return(purchase_solicitation_item_group_materials)
+      end
+
+      it 'should return items from purchase_solicitation_item_group_material' do
+        purchase_solicitation_item_group_materials << purchase_solicitation_item_group_material1
+        purchase_solicitation_item_group_materials << purchase_solicitation_item_group_material2
+
+        expect(subject.purchase_solicitation_items).to eq [antivirus, office, cadeira]
+      end
+
+      it 'should return an empty array when there are no purchase_solicitation_item_group_materials' do
+        expect(subject.purchase_solicitation_items).to eq []
+      end
+    end
+
+    describe '#purchase_solicitation_item_ids' do
+      before do
+        subject.stub(:purchase_solicitation_item_group_materials).
+                and_return(purchase_solicitation_item_group_materials)
+      end
+
+      it 'should return items_ids from purchase_solicitation_item_group_material' do
+        purchase_solicitation_item_group_materials << purchase_solicitation_item_group_material1
+        purchase_solicitation_item_group_materials << purchase_solicitation_item_group_material2
+
+        subject.stub(:purchase_solicitation_item_group_materials).
+                and_return(purchase_solicitation_item_group_materials)
+
+        expect(subject.purchase_solicitation_item_ids).to eq [1, 2, 3]
+      end
+
+      it 'should return an empty array when there are no purchase_solicitation_item_group_materials' do
+        subject.stub(:purchase_solicitation_item_group_materials).
+                and_return(purchase_solicitation_item_group_materials)
+
+        expect(subject.purchase_solicitation_item_ids).to eq []
+      end
+    end
+  end
 end

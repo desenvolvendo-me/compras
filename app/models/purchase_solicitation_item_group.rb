@@ -42,6 +42,20 @@ class PurchaseSolicitationItemGroup < Compras::Model
     description
   end
 
+  def purchase_solicitation_items
+    items = []
+
+    purchase_solicitation_item_group_materials.each do |item_group_material|
+      items += item_group_material.purchase_solicitation_items
+    end
+
+    items
+  end
+
+  def purchase_solicitation_item_ids
+    purchase_solicitation_items.map { |item| item.id }
+  end
+
   def annulled?
     annul.present?
   end
