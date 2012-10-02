@@ -8,7 +8,6 @@ feature "SupplyAuthorizations" do
 
   scenario 'should be printable' do
     Prefecture.make!(:belo_horizonte)
-    direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
     supply_authorization = SupplyAuthorization.make!(:compra_2012)
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
@@ -26,7 +25,7 @@ feature "SupplyAuthorizations" do
     expect(page).to have_content 'Data da compra'
     expect(page).to have_content 'Status'
     expect(page).to have_content "#{supply_authorization}"
-    expect(page).to have_content "#{direct_purchase.id}/2012"
+    expect(page).to have_content "1/2012"
     expect(page).to have_content '01/12/2012'
     expect(page).to have_content 'Ativo'
     expect(page).to have_content 'Wenderson Malheiros'
@@ -53,7 +52,6 @@ feature "SupplyAuthorizations" do
 
   scenario 'should be printable with a company' do
     Prefecture.make!(:belo_horizonte)
-    direct_purchase = DirectPurchase.make!(:company_purchase)
     supply_authorization = SupplyAuthorization.make!(:nohup)
     SignatureConfiguration.make!(:autorizacoes_de_fornecimento)
 
@@ -67,7 +65,7 @@ feature "SupplyAuthorizations" do
 
     expect(page).to have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
     expect(page).to have_content "#{supply_authorization}"
-    expect(page).to have_content "#{direct_purchase.id}/2011"
+    expect(page).to have_content "1/2011"
     expect(page).to have_content '20/12/2011'
     expect(page).to have_content 'Nohup'
     expect(page).to have_content 'Girassol, 9874 - São Francisco'
