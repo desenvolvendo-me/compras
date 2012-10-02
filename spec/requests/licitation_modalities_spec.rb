@@ -14,6 +14,7 @@ feature "LicitationModalities" do
     click_link 'Criar Modalidade de Licitação'
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+    select  'Compras e serviços', :on => 'Tipo do objeto'
     fill_in 'Modalidade', :with => 'Pública'
     fill_in 'Valor inicial', :with => '500,00'
     fill_in 'Valor final', :with => '800,00'
@@ -25,6 +26,7 @@ feature "LicitationModalities" do
     click_link 'Pública'
 
     expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
+    expect(page).to have_select 'Tipo do objeto', :with => 'Compras e serviços'
     expect(page).to have_field 'Modalidade', :with => 'Pública'
     expect(page).to have_field 'Valor inicial', :with => '500,00'
     expect(page).to have_field 'Valor final', :with => '800,00'
@@ -39,6 +41,7 @@ feature "LicitationModalities" do
     click_link 'Pública'
 
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
+    select  'Compras e serviços', :on => 'Tipo do objeto'
     fill_in 'Modalidade', :with => 'Privada'
     fill_in 'Valor inicial', :with => '600,00'
     fill_in 'Valor final', :with => '900,00'
@@ -50,6 +53,7 @@ feature "LicitationModalities" do
     click_link 'Privada'
 
     expect(page).to have_field 'Ato regulamentador', :with => 'Emenda constitucional 4567'
+    expect(page).to have_select 'Tipo do objeto', :with => 'Compras e serviços'
     expect(page).to have_field 'Modalidade', :with => 'Privada'
     expect(page).to have_field 'Valor inicial', :with => '600,00'
     expect(page).to have_field 'Valor final', :with => '900,00'

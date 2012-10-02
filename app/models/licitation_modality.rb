@@ -2,6 +2,8 @@ class LicitationModality < Compras::Model
   attr_accessible :regulatory_act_id, :description, :initial_value,
                   :final_value, :object_type
 
+  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
+
   belongs_to :regulatory_act
 
   has_many :pledges, :dependent => :restrict
@@ -9,7 +11,8 @@ class LicitationModality < Compras::Model
 
   delegate :publication_date, :to => :regulatory_act, :prefix => true, :allow_nil => true
 
-  validates :description, :regulatory_act, :initial_value, :presence => true
+  validates :description, :regulatory_act, :initial_value, :object_type,
+            :presence => true
   validates :final_value, :presence => true
 
   with_options :allow_blank => true do |allow_blanking|

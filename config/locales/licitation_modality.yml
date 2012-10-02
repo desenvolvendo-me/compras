@@ -12,3 +12,4 @@ pt-BR:
         description: "Modalidade"
         initial_value: "Valor inicial"
         final_value: "Valor final"
+        object_type: "Tipo do objeto"

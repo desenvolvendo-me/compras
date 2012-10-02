@@ -11,6 +11,7 @@ describe LicitationModality do
   it { should validate_presence_of :regulatory_act }
   it { should validate_presence_of :initial_value }
   it { should validate_presence_of :final_value }
+  it { should validate_presence_of :object_type }
   it { should validate_numericality_of :initial_value }
   it { should validate_numericality_of :final_value }
 
