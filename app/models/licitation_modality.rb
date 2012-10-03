@@ -12,8 +12,7 @@ class LicitationModality < Compras::Model
   delegate :publication_date, :to => :regulatory_act, :prefix => true, :allow_nil => true
 
   validates :description, :regulatory_act, :initial_value, :object_type,
-            :presence => true
-  validates :final_value, :presence => true
+            :final_value, :presence => true
 
   with_options :allow_blank => true do |allow_blanking|
     allow_blanking.validates :initial_value, :final_value, :numericality => true
