@@ -134,4 +134,111 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Data', :with => '01/10/2012'
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
   end
+
+  scenario 'annul an existent direct_purchase with purchase_solicitation' do
+    DirectPurchase.make!(
+      :compra,
+      :purchase_solicitation => PurchaseSolicitation.make!(:reparo)
+    )
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Anular'
+
+    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+
+    fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+    fill_in 'Data', :with => '01/10/2012'
+    fill_in 'Justificativa', :with => 'Anulação da compra direta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Anulação de Recurso criado com sucesso.'
+
+    click_link 'Anulação'
+
+    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data', :with => '01/10/2012'
+    expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_select 'Status', :selected => 'Pendente'
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
+    end
+  end
+
+  scenario 'annul an existent direct_purchase with purchase_solicitation and supply_authorization' do
+    SupplyAuthorization.make!(
+      :nohup,
+      :direct_purchase => DirectPurchase.make!(
+        :compra,
+        :purchase_solicitation => PurchaseSolicitation.make!(:reparo)
+      )
+    )
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Anular'
+
+    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+
+    fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+    fill_in 'Data', :with => '01/10/2012'
+    fill_in 'Justificativa', :with => 'Anulação da compra direta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Anulação de Recurso criado com sucesso.'
+
+    click_link 'Anulação'
+
+    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data', :with => '01/10/2012'
+    expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_select 'Status', :selected => 'Pendente'
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
+    end
+  end
 end

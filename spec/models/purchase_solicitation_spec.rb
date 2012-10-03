@@ -130,4 +130,26 @@ describe PurchaseSolicitation do
       expect(subject.can_be_grouped?).to be false
     end
   end
+
+  describe '.clear_items_fulfiller_and_status' do
+    it 'should clear_fulfiller_and_status of all items' do
+      item1 = double(:item1)
+      item2 = double(:item2)
+
+      subject.stub(:items).and_return([item1, item2])
+
+      item1.should_receive(:clear_fulfiller_and_status)
+      item2.should_receive(:clear_fulfiller_and_status)
+
+      subject.clear_items_fulfiller_and_status
+    end
+  end
+
+  describe '.liberate!' do
+    it 'should change service_status to liberated' do
+      subject.should_receive(:update_column).with(:service_status, 'liberated')
+
+      subject.liberate!
+    end
+  end
 end

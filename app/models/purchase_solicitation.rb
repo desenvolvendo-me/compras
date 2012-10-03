@@ -110,6 +110,14 @@ class PurchaseSolicitation < Compras::Model
     super || direct_purchase.try(:budget_structure)
   end
 
+  def clear_items_fulfiller_and_status
+    items.each { |item| item.clear_fulfiller_and_status }
+  end
+
+  def liberate!
+    update_column :service_status, PurchaseSolicitationServiceStatus::LIBERATED
+  end
+
   protected
 
   def must_have_at_least_one_budget_allocation

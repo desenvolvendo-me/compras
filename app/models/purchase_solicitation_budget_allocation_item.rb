@@ -53,6 +53,12 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
                       :fulfiller_type => process.class.name
   end
 
+  def clear_fulfiller_and_status(status_enumeration = PurchaseSolicitationBudgetAllocationItemStatus)
+    update_attributes :fulfiller_id => nil,
+                      :fulfiller_type => nil,
+                      :status => status_enumeration.value_for(:PENDING)
+  end
+
   private
 
   def self.validate_options(options)

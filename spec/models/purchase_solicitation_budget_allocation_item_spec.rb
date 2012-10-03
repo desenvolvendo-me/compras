@@ -71,4 +71,17 @@ describe PurchaseSolicitationBudgetAllocationItem do
       subject.update_fulfiller(process)
     end
   end
+
+  describe '.clear_fulfiller_and_status' do
+    it 'should clear fulfiller and change status to pending' do
+      status_enum = double(:status)
+
+      status_enum.should_receive(:value_for).with(:PENDING).and_return('pending')
+
+      subject.should_receive(:update_attributes).
+              with(:fulfiller_id => nil,:fulfiller_type => nil, :status => 'pending')
+
+      subject.clear_fulfiller_and_status(status_enum)
+    end
+  end
 end
