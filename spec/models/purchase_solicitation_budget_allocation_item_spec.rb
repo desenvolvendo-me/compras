@@ -65,7 +65,8 @@ describe PurchaseSolicitationBudgetAllocationItem do
     end
 
     it 'should update fulfiller' do
-      subject.should_receive(:update_attributes).with(:fulfiller_id => process.id, :fulfiller_type => process.class.name)
+      subject.should_receive(:update_attributes).
+              with(:fulfiller_id => process.id, :fulfiller_type => process.class.name)
 
       subject.update_fulfiller(process)
     end
