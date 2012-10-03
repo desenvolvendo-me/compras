@@ -18,6 +18,7 @@ feature "LicitationModalities" do
     fill_in 'Modalidade', :with => 'Pública'
     fill_in 'Valor inicial', :with => '500,00'
     fill_in 'Valor final', :with => '800,00'
+    check 'Carta convite'
 
     click_button 'Salvar'
 
@@ -30,6 +31,7 @@ feature "LicitationModalities" do
     expect(page).to have_field 'Modalidade', :with => 'Pública'
     expect(page).to have_field 'Valor inicial', :with => '500,00'
     expect(page).to have_field 'Valor final', :with => '800,00'
+    expect(page).to have_checked_field 'Carta convite'
   end
 
   scenario 'update an existent licitation_modality' do
@@ -45,6 +47,7 @@ feature "LicitationModalities" do
     fill_in 'Modalidade', :with => 'Privada'
     fill_in 'Valor inicial', :with => '600,00'
     fill_in 'Valor final', :with => '900,00'
+    check 'Carta convite'
 
     click_button 'Salvar'
 
@@ -57,6 +60,7 @@ feature "LicitationModalities" do
     expect(page).to have_field 'Modalidade', :with => 'Privada'
     expect(page).to have_field 'Valor inicial', :with => '600,00'
     expect(page).to have_field 'Valor final', :with => '900,00'
+    expect(page).to have_checked_field 'Carta convite'
   end
 
   scenario 'destroy an existent licitation_modality' do

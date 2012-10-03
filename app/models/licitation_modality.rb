@@ -1,6 +1,6 @@
 class LicitationModality < Compras::Model
   attr_accessible :regulatory_act_id, :description, :initial_value,
-                  :final_value, :object_type
+                  :final_value, :object_type, :invitation_letter
 
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
 
