@@ -24,9 +24,9 @@ describe PurchaseSolicitationBudgetAllocationItem do
   end
 
   context '.fulfill_items' do
-    let (:item) { double(:item).as_null_object }
-    let (:process) { double(:process) }
-    let (:material_id) { -1 }
+    let(:item) { double(:item).as_null_object }
+    let(:process) { double(:process) }
+    let(:material_id) { -1 }
 
     it "fulfills each of the purchase solicitation items with the purchase process" do
       item.should_receive(:update_fulfiller).with(process)
