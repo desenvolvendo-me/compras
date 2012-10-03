@@ -128,7 +128,6 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Agrupamento de antivirus'
 
-    page.driver.render('tmp/imgage.png', :full => true)
     click_link 'Anulação'
 
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
