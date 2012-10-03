@@ -18,6 +18,11 @@ class DirectPurchaseBudgetAllocationItem < Compras::Model
     where { direct_purchase_budget_allocation.direct_purchase.modality.eq(modality) }
   end
 
+  def self.not_annulled
+    joins { direct_purchase_budget_allocation.direct_purchase.annul.outer }.
+    where { direct_purchase_budget_allocation.direct_purchase.annul.id.eq(nil) }
+  end
+
   def estimated_total_price
     if quantity && unit_price
       quantity * unit_price

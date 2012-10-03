@@ -241,4 +241,65 @@ feature 'DirectPurchaseAnnuls' do
       end
     end
   end
+
+  scenario 'when annul a direct purchase the licitation object balance should be rolled back' do
+    direct_purchase = DirectPurchase.make!(:compra)
+    DirectPurchase.make!(:compra_nao_autorizada)
+    DirectPurchase.make!(:compra_2011)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
+
+    click_link 'Ponte'
+
+    within_tab 'Total acumulado' do
+      within_fieldset 'Total acumulado de compras e serviços' do
+        expect(page).to have_field 'Dispensa de licitação', :with => '1.200,00'
+      end
+
+      within_fieldset 'Total acumulado de obras e engenharia' do
+        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
+      end
+    end
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      click_link "#{direct_purchase}"
+    end
+
+    click_link 'Anular'
+
+    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+
+    fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+    fill_in 'Data', :with => '01/10/2012'
+    fill_in 'Justificativa', :with => 'Anulação da compra direta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Anulação de Recurso criado com sucesso.'
+
+    click_link 'Anulação'
+
+    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data', :with => '01/10/2012'
+    expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
+
+    click_link 'Ponte'
+
+    within_tab 'Total acumulado' do
+      within_fieldset 'Total acumulado de compras e serviços' do
+        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
+      end
+
+      within_fieldset 'Total acumulado de obras e engenharia' do
+        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
+      end
+    end
+
+  end
 end

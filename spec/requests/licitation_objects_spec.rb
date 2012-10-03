@@ -222,4 +222,28 @@ feature "LicitationObjects" do
       end
     end
   end
+
+  scenario 'validating total of purchase and build licitation exemptions when a direct purchase is annulled' do
+    ResourceAnnul.make!(
+      :anulacao_generica,
+      :annullable => DirectPurchase.make!(:compra)
+    )
+
+    DirectPurchase.make!(:compra_nao_autorizada)
+    DirectPurchase.make!(:compra_2011)
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
+
+    click_link 'Ponte'
+
+    within_tab 'Total acumulado' do
+      within_fieldset 'Total acumulado de compras e serviços' do
+        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
+      end
+
+      within_fieldset 'Total acumulado de obras e engenharia' do
+        expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
+      end
+    end
+  end
 end
