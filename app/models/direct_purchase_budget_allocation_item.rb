@@ -13,6 +13,11 @@ class DirectPurchaseBudgetAllocationItem < Compras::Model
   validates :material, :quantity, :unit_price, :presence => true
   validates :unit_price, :numericality => { :greater_than => 0 }, :allow_blank => true
 
+  def self.by_modality(modality)
+    joins{ direct_purchase_budget_allocation.direct_purchase }.
+    where { direct_purchase_budget_allocation.direct_purchase.modality.eq(modality) }
+  end
+
   def estimated_total_price
     if quantity && unit_price
       quantity * unit_price
@@ -20,11 +25,4 @@ class DirectPurchaseBudgetAllocationItem < Compras::Model
       0
     end
   end
-
-  scope :by_modality, lambda { |modality|
-    joins{ direct_purchase_budget_allocation.direct_purchase }.
-    where {
-      direct_purchase_budget_allocation.direct_purchase.modality.eq(modality)
-    }
-  }
 end
