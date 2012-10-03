@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'unit_helper'
+require 'active_support/core_ext/module/delegation'
 require 'app/business/direct_purchase_annulment'
 require 'app/business/purchase_solicitation_budget_allocation_item_status_changer'
 
@@ -54,5 +55,15 @@ describe DirectPurchaseAnnulment do
     item_group_annulment.should_not_receive(:new)
 
     subject.annul
+  end
+
+  it 'should delegates purchase_solicitation_item_group to direct_purchase' do
+    direct_purchase.stub(:purchase_solicitation_item_group).and_return(true)
+
+    expect(subject.purchase_solicitation_item_group).to be true
+
+    direct_purchase.stub(:purchase_solicitation_item_group).and_return(false)
+
+    expect(subject.purchase_solicitation_item_group).to be false
   end
 end

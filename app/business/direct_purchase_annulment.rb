@@ -1,6 +1,9 @@
 class DirectPurchaseAnnulment
   attr_accessor :direct_purchase, :item_group_annulment, :resource_annul
 
+  delegate :purchase_solicitation_item_group,
+           :to => :direct_purchase
+
   def initialize(direct_purchase,
                  resource_annul,
                  item_group_annulment = PurchaseSolicitationItemGroupAnnulment)
@@ -24,9 +27,5 @@ class DirectPurchaseAnnulment
                            resource_annul.date,
                            resource_annul.description
                          )
-  end
-
-  def purchase_solicitation_item_group
-    direct_purchase.purchase_solicitation_item_group
   end
 end
