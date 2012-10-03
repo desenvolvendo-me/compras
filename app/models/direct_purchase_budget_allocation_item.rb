@@ -14,7 +14,7 @@ class DirectPurchaseBudgetAllocationItem < Compras::Model
   validates :unit_price, :numericality => { :greater_than => 0 }, :allow_blank => true
 
   def self.by_modality(modality)
-    joins{ direct_purchase_budget_allocation.direct_purchase }.
+    joins { direct_purchase_budget_allocation.direct_purchase }.
     where { direct_purchase_budget_allocation.direct_purchase.modality.eq(modality) }
   end
 
