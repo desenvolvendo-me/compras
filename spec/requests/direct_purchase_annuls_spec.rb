@@ -126,7 +126,6 @@ feature 'DirectPurchaseAnnuls' do
 
     navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
-
     click_link 'Agrupamento de antivirus'
 
     page.driver.render('tmp/imgage.png', :full => true)
