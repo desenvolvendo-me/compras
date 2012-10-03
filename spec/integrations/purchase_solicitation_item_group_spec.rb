@@ -44,4 +44,3 @@ describe PurchaseSolicitationItemGroup do
     end
   end
 end
-
