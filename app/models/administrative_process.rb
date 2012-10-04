@@ -1,22 +1,23 @@
 class AdministrativeProcess < Compras::Model
   include Signable
 
-  attr_accessible :responsible_id, :process, :year, :date
-  attr_accessible :modality, :protocol, :object_type, :status, :description
-  attr_accessible :judgment_form_id, :administrative_process_budget_allocations_attributes
-  attr_accessible :purchase_solicitation_item_group_id
+  attr_accessible :responsible_id, :process, :year, :date,
+                  :protocol, :object_type, :status, :description,
+                  :judgment_form_id, :purchase_solicitation_item_group_id,
+                  :administrative_process_budget_allocations_attributes,
+                  :licitation_modality_id
 
   attr_readonly :process, :year
 
   attr_modal :year, :process, :protocol
 
-  has_enumeration_for :modality, :with => AdministrativeProcessModality, :create_helpers => true
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType, :create_helpers => true
   has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true, :create_scopes => true
 
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
   belongs_to :purchase_solicitation_item_group
+  belongs_to :licitation_modality
 
   has_one :licitation_process, :dependent => :restrict
   has_one :administrative_process_liberation, :dependent => :destroy
@@ -31,13 +32,13 @@ class AdministrativeProcess < Compras::Model
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
 
   validates :year, :date, :presence => true
-  validates :modality, :object_type, :presence => true
+  validates :object_type, :presence => true
   validates :responsible, :status, :presence => true
   validates :description, :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :administrative_process_budget_allocations, :no_duplication => :budget_allocation_id
 
-  validate :validate_modality
+  validate :validate_object_type_should_equal_modality_object_type
   validate :purchase_solicitation_item_group_annulled
   validate :validate_judgment_form_licitation_kind
 
@@ -50,12 +51,20 @@ class AdministrativeProcess < Compras::Model
     "#{process}/#{year}"
   end
 
+  def modality
+    licitation_modality.try(:modality_type)
+  end
+
+  def modality_humanize
+    licitation_modality.to_s
+  end
+
   def total_allocations_value
     administrative_process_budget_allocations.sum(:value)
   end
 
   def invited?
-    invitation_for_constructions_engineering_services? || invitation_for_purchases_and_services?
+    licitation_modality.invitation_letter?
   end
 
   def update_status(new_status)
@@ -70,7 +79,11 @@ class AdministrativeProcess < Compras::Model
     AdministrativeProcessModality.available_for_licitation_process_classification?(modality)
   end
 
-  protected
+  def presence_trading?
+    licitation_modality.presence_trading?
+  end
+
+  private
 
   def set_process
     last = self.class.where(:year => year).last
@@ -82,11 +95,11 @@ class AdministrativeProcess < Compras::Model
     end
   end
 
-  def validate_modality(verificator = AdministrativeProcessModalitiesByObjectType.new)
-    return unless object_type.present? && modality.present?
+  def validate_object_type_should_equal_modality_object_type
+    return unless object_type.present? && licitation_modality.present?
 
-    unless verificator.verify_modality(object_type, modality)
-      errors.add(:modality, :inclusion)
+    unless licitation_modality.object_type == object_type
+      errors.add(:licitation_modality, :inclusion)
     end
   end
 

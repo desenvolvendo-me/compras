@@ -7,7 +7,6 @@ require 'app/models/licitation_process'
 require 'app/models/administrative_process_budget_allocation'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/budget_allocation'
-require 'app/business/administrative_process_modalities_by_object_type'
 require 'app/models/administrative_process_liberation'
 require 'app/models/purchase_solicitation_item_group'
 require 'app/business/judgment_form_licitation_kind_by_object_type'
@@ -22,6 +21,7 @@ describe AdministrativeProcess do
   it { should belong_to :responsible }
   it { should belong_to :judgment_form }
   it { should belong_to :purchase_solicitation_item_group }
+  it { should belong_to :licitation_modality }
 
   it { should have_one(:licitation_process).dependent(:restrict) }
   it { should have_one(:administrative_process_liberation).dependent(:destroy) }
@@ -31,7 +31,6 @@ describe AdministrativeProcess do
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :date }
-  it { should validate_presence_of :modality }
   it { should validate_presence_of :object_type }
   it { should validate_presence_of :description }
   it { should validate_presence_of :judgment_form }
@@ -45,46 +44,14 @@ describe AdministrativeProcess do
   it { should have_db_index([:process, :year]).unique(true) }
 
   it "should validate the modality depending on object_type" do
-    def test_type(type, modalities_for_type)
-      subject.object_type = type
-      modalities_for_type.each do |modality|
-        subject.modality = modality
+    object_type = AdministrativeProcessObjectType::CALL_NOTICE
+    modality = double(:modality, :object_type => object_type)
+    subject.object_type = object_type
+    subject.stub(:licitation_modality => modality)
 
-        subject.valid?
-        expect(subject.errors[:modality]).to_not include(I18n.translate('errors.messages.inclusion'))
-      end
+    subject.valid?
 
-      (AdministrativeProcessModality.to_a - modalities_for_type).each do |modality|
-        subject.modality = modality
-
-        subject.valid?
-        expect(subject.errors[:modality]).to include(I18n.translate('errors.messages.inclusion'))
-      end
-    end
-
-    test_type(AdministrativeProcessObjectType::PURCHASE_AND_SERVICES, [
-              AdministrativeProcessModality::MAKING_COST_FOR_PURCHASES_AND_SERVICES,
-              AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES,
-              AdministrativeProcessModality::PRESENCE_TRADING,
-              AdministrativeProcessModality::ELECTRONIC_TRADING,
-              AdministrativeProcessModality::EXEMPTION_FOR_PURCHASES_AND_SERVICES,
-              AdministrativeProcessModality::UNENFORCEABILITY])
-
-    test_type(AdministrativeProcessObjectType::CONSTRUCTION_AND_ENGINEERING_SERVICES, [
-              AdministrativeProcessModality::MAKING_COST_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES,
-              AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES,
-              AdministrativeProcessModality::COMPETITION_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES,
-              AdministrativeProcessModality::ELECTRONIC_TRADING,
-              AdministrativeProcessModality::EXEMPTION_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES,
-              AdministrativeProcessModality::UNENFORCEABILITY,
-              AdministrativeProcessModality::COMPETITION,
-              AdministrativeProcessModality::PRESENCE_TRADING])
-
-    test_type(AdministrativeProcessObjectType::DISPOSALS_OF_ASSETS, [AdministrativeProcessModality::AUCTION, AdministrativeProcessModality::PRESENCE_TRADING])
-
-    test_type(AdministrativeProcessObjectType::CONCESSIONS_AND_PERMITS, [AdministrativeProcessModality::COMPETITION_FOR_GRANTS])
-
-    test_type(AdministrativeProcessObjectType::CALL_NOTICE, [AdministrativeProcessModality::COMPETITION])
+    expect(subject.errors[:modality]).to be_empty
   end
 
   context 'with judgment_form' do
@@ -130,17 +97,12 @@ describe AdministrativeProcess do
   end
 
   it 'should be invite when modality is INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES' do
-    subject.modality = AdministrativeProcessModality::INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES
-    expect(subject).to be_invited
-  end
-
-  it 'should be invite when modality is INVITATION_FOR_PURCHASES_AND_SERVICES' do
-    subject.modality = AdministrativeProcessModality::INVITATION_FOR_PURCHASES_AND_SERVICES
+    subject.stub(:licitation_modality => double(:invitation_letter? => true))
     expect(subject).to be_invited
   end
 
   it 'should not be invite when modality is not (INVITATION_FOR_CONSTRUCTIONS_ENGINEERING_SERVICES, INVITATION_FOR_PURCHASES_AND_SERVICES)' do
-    subject.modality = AdministrativeProcessModality::MAKING_COST_FOR_CONSTRUCTIONS_AND_ENGINEERING_SERVICES
+    subject.stub(:licitation_modality => double(:invitation_letter? => false))
     expect(subject).not_to be_invited
   end
 
@@ -227,6 +189,38 @@ describe AdministrativeProcess do
 
       subject.valid?
       expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.is_annulled'))
+    end
+  end
+
+  context "modality-related methods" do 
+    let (:licitation_modality) { double(:modality) } 
+
+    before do
+      subject.stub(:licitation_modality => licitation_modality)
+    end
+
+    describe "#modality" do
+      it "delegates the modality_type to the licitation modality " do
+        licitation_modality.should_receive(:modality_type)
+
+        subject.modality
+      end
+    end
+
+    describe "#modality_humanize" do
+      it "delegates to LicitationModality#to_s" do
+        licitation_modality.should_receive(:to_s)
+
+        subject.modality_humanize
+      end
+    end
+
+    describe "#presence_trading?" do
+      it "delegates to LicitationModality#presence_trading?" do
+        licitation_modality.should_receive(:presence_trading?)
+
+        subject.presence_trading?
+      end
     end
   end
 end

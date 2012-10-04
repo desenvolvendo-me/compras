@@ -14,6 +14,7 @@ feature "LicitationModalities" do
     click_link 'Criar Modalidade de Licitação'
 
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+    select  'Pregão presencial', :on => 'Tipo da modalidade'
     select  'Compras e serviços', :on => 'Tipo do objeto'
     fill_in 'Modalidade', :with => 'Pública'
     fill_in 'Valor inicial', :with => '500,00'
@@ -27,6 +28,7 @@ feature "LicitationModalities" do
     click_link 'Pública'
 
     expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
+    expect(page).to have_select 'Tipo da modalidade', :with => 'Pregão presencial'
     expect(page).to have_select 'Tipo do objeto', :with => 'Compras e serviços'
     expect(page).to have_field 'Modalidade', :with => 'Pública'
     expect(page).to have_field 'Valor inicial', :with => '500,00'

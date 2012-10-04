@@ -11,7 +11,7 @@ pt-BR:
         year: "Ano"
         date: "Data do processo"
         protocol: "Número do protocolo"
-        modality: "Modalidade"
+        licitation_modality: "Modalidade"
         item: "Inciso"
         object_type: "Tipo de objeto"
         judgment_form: "Forma de julgamento"

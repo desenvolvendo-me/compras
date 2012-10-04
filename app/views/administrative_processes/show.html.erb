@@ -66,10 +66,10 @@
   <div class="yui3-g">
     <div class="yui3-u-1-2">
       <span class="label">
-        <%= resource_class.human_attribute_name :modality %>
+        <%= resource_class.human_attribute_name :licitation_modality %>
       </span>:
 
-      <%= resource.modality_humanize %>
+      <%= resource.licitation_modality.to_s %>
     </div>
 
     <div class="yui3-u-1-2">

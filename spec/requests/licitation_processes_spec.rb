@@ -618,13 +618,13 @@ feature "LicitationProcesses" do
       select 'Global', :from => 'Tipo de empenho'
 
       # testing delegated fields of administrative process (filled by javascript)
-      expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
+      expect(page).to have_field 'Modalidade', :with => 'Pública'
       expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
       expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
       expect(page).to have_field 'Inciso', :with => 'Item 1'
-      expect(page).to have_field 'Abrev. modalidade', :with => 'CV'
+      expect(page).to have_field 'Abrev. modalidade', :with => 'CC'
 
       check 'Registro de preço'
       select 'Menor preço total por item', :from => 'Tipo da apuração'
@@ -693,7 +693,7 @@ feature "LicitationProcesses" do
       expect(page).to have_select 'Tipo de empenho', :selected => 'Global'
 
       # testing delegated fields of administrative process
-      expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
+      expect(page).to have_field 'Modalidade', :with => 'Pública'
       expect(page).to have_field 'Tipo de objeto', :with => 'Compras e serviços'
       expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
@@ -723,7 +723,7 @@ feature "LicitationProcesses" do
       # testing fields of licitation number
       expect(page).to have_field 'Número da licitação', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
-      expect(page).to have_field 'Abrev. modalidade', :with => 'CV'
+      expect(page).to have_field 'Abrev. modalidade', :with => 'CC'
     end
 
     within_tab 'Documentos' do
@@ -1181,7 +1181,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
       expect(page).to have_field 'Data do processo', :with => "#{I18n.l(Date.current)}"
       expect(page).to have_field 'Processo administrativo', :with => "1/2012"
-      expect(page).to have_field 'Abrev. modalidade', :with => "CV"
+      expect(page).to have_field 'Abrev. modalidade', :with => "CC"
     end
   end
 

@@ -11,6 +11,7 @@ feature "AdministrativeProcesses" do
     BudgetStructure.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:sobrinho)
+    LicitationModality.make!(:pregao_presencial)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -26,7 +27,7 @@ feature "AdministrativeProcesses" do
       fill_in 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Compras e serviços', :from => 'Tipo de objeto'
-      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -56,7 +57,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Data do processo', :with => '07/03/2012'
       expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
-      expect(page).to have_select 'Modalidade', :selected => 'Pregão presencial'
+      expect(page).to have_field 'Modalidade', :with => 'Pregão presencial'
       expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -77,6 +78,7 @@ feature "AdministrativeProcesses" do
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:sobrinho)
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    LicitationModality.make!(:pregao_presencial)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -94,7 +96,7 @@ feature "AdministrativeProcesses" do
         click_record 'Agrupamento de reparo 2013'
       end
 
-      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -132,7 +134,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Data do processo', :with => '07/03/2012'
       expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
-      expect(page).to have_select 'Modalidade', :selected => 'Pregão presencial'
+      expect(page).to have_field 'Modalidade', :with => 'Pregão presencial'
       expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -263,7 +265,10 @@ feature "AdministrativeProcesses" do
   scenario 'should be printable' do
     Prefecture.make!(:belo_horizonte)
     BudgetAllocation.make!(:alocacao)
-    administrative_process = AdministrativeProcess.make!(:compra_liberada)
+    modality = LicitationModality.make!(:privada,
+                                        :description => "Convite para compras e serviços")
+    administrative_process = AdministrativeProcess.make!(:compra_liberada,
+                                                         :licitation_modality => modality)
     SignatureConfiguration.make!(:processo_administrativo)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
@@ -324,6 +329,7 @@ feature "AdministrativeProcesses" do
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:sobrinho)
     budget_allocation = BudgetAllocation.make!(:alocacao)
+    LicitationModality.make!(:pregao_presencial)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -337,7 +343,7 @@ feature "AdministrativeProcesses" do
       fill_in 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Compras e serviços', :from => 'Tipo de objeto'
-      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -368,6 +374,7 @@ feature "AdministrativeProcesses" do
   scenario 'update an existing administrative process' do
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     AdministrativeProcess.make!(:compra_aguardando)
+    LicitationModality.make!(:pregao_presencial)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -381,7 +388,7 @@ feature "AdministrativeProcesses" do
 
       fill_in 'Número do protocolo', :with => '00099/2012'
       select 'Compras e serviços', :from => 'Tipo de objeto'
-      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -408,7 +415,7 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Data do processo', :with => '07/03/2012'
       expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
       expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
-      expect(page).to have_select 'Modalidade', :selected => 'Pregão presencial'
+      expect(page).to have_field 'Modalidade', :selected => 'Pregão presencial'
       expect(page).to have_field 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica'
       expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras 2'
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
@@ -703,6 +710,7 @@ feature "AdministrativeProcesses" do
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
     Employee.make!(:sobrinho)
     PurchaseSolicitationItemGroup.make!(:antivirus)
+    LicitationModality.make!(:pregao_presencial)
 
     navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -720,7 +728,7 @@ feature "AdministrativeProcesses" do
         click_record 'Agrupamento de antivirus'
       end
 
-      select 'Pregão presencial', :from => 'Modalidade'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
       fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
@@ -743,6 +751,26 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+    end
+  end
+
+  scenario "filtering modalities based on seleted object type" do
+    LicitationModality.make!(:publica)
+    LicitationModality.make!(:privada,
+                             :object_type => 'call_notice')
+
+    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    select 'Compras e serviços', :on => "Tipo de objeto"
+
+    within_modal 'Modalidade' do
+      click_button 'Pesquisar'
+      within_records do
+        expect(page).to have_content "Pública"
+        expect(page).not_to have_content "Privada"
+      end
     end
   end
 end

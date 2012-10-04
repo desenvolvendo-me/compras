@@ -19,34 +19,22 @@
 </div>
 
 <script>
-  (function () {
-    var modalitiesGroups = <%= AdministrativeProcessModalitiesByObjectType.new.modalities_groups.to_json.html_safe %>,
-        modalitiesOptions = _(<%= AdministrativeProcessModality.to_a.to_json.html_safe %>);
+  $(function () {
+    $('form.administrative_process').on('change', '.object-type-select', function() {
+      var objectType = $(this).val();
+      filterModalities(objectType);
+    });
+  });
 
-    function filterModalities () {
-      var options = _(modalitiesGroups[this.value]);
+  function filterModalities(objectType) {
+    var params = {
+      by_object_type: objectType
+    };
 
-      if (options.isUndefined()) {
-        $("#administrative_process_modality").empty().closest("div.input").hide();
-        return;
-      }
+    var url = "<%= modal_licitation_modalities_path %>?" + $.param(params);
 
-      $("#administrative_process_modality").html("<option></option>").closest("div.input").show();
-
-      modalitiesOptions.each(function (option) {
-        if (!options.include(option[1])) {
-          return;
-        }
-
-        $("#administrative_process_modality").append(function () {
-          return $("<option>").text(option[0]).val(option[1]);
-        });
-      })
-    }
-
-    $("#administrative_process_object_type").change(filterModalities).change();
-    $("#administrative_process_modality").val("<%= f.object.modality %>");
-  })();
+    $('.modal-modality').data('modal-url', url);
+  }
 
   (function () {
     var purchaseSolicitationItemGroupId = $("#administrative_process_purchase_solicitation_item_group_id").val();

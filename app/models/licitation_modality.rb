@@ -1,7 +1,11 @@
 class LicitationModality < Compras::Model
   attr_accessible :regulatory_act_id, :description, :initial_value,
-                  :final_value, :object_type, :invitation_letter
+                  :final_value, :object_type, :invitation_letter,
+                  :modality_type
 
+  attr_modal :regulatory_act_id, :description, :object_type
+
+  has_enumeration_for :modality_type, :with => AdministrativeProcessModality, :create_helpers => true
   has_enumeration_for :object_type, :with => AdministrativeProcessObjectType
 
   belongs_to :regulatory_act
@@ -22,6 +26,10 @@ class LicitationModality < Compras::Model
 
   orderize :description
   filterize
+
+  scope :by_object_type, lambda { |object_type|
+    where { |modality| modality.object_type.eq(object_type) }
+  }
 
   def to_s
     description
