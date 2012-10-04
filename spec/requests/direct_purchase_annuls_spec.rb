@@ -300,6 +300,5 @@ feature 'DirectPurchaseAnnuls' do
         expect(page).to have_field 'Dispensa de licitação', :with => '600,00'
       end
     end
-
   end
 end
