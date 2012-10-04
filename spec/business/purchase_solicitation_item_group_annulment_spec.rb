@@ -23,25 +23,18 @@ describe PurchaseSolicitationItemGroupAnnulment do
     double(:item_status_changer, :change => true)
   end
 
-  context '#annul' do
-    it 'should change the status of purchase_solicitation_items to pending' do
-      item_group.stub(:purchase_solicitation_item_ids).and_return([1, 2, 3])
-
-      item_status_changer.should_receive(:new).
-                          with(:old_item_ids => [1, 2, 3]).
-                          and_return(item_status_changer)
-
-      subject.annul
-    end
-  end
-
   context '#create_annulment' do
     let :employee do
       double(:employee, :id => 1)
     end
 
     it 'should create an resouce_annul and annul it' do
+      item_group.stub(:purchase_solicitation_item_ids).and_return([1, 2, 3])
       item_group.stub(:class).and_return(double(:class, :name => 'PurchaseSolicitationItemGroup'))
+
+      item_status_changer.should_receive(:new).
+                          with(:old_item_ids => [1, 2, 3]).
+                          and_return(item_status_changer)
 
       resource_annul_repository.should_receive(:create!).
                                 with(
@@ -51,8 +44,6 @@ describe PurchaseSolicitationItemGroupAnnulment do
                                     :annullable_id => 2,
                                     :annullable_type => 'PurchaseSolicitationItemGroup'
                                   )
-
-      subject.should_receive(:annul)
 
       subject.create_annulment(employee, Date.new(2012, 10, 01), 'Anulação')
     end

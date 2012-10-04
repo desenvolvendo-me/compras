@@ -10,12 +10,6 @@ class PurchaseSolicitationItemGroupAnnulment
     self.resource_annul_repository = resource_annul_repository
   end
 
-  def annul
-    item_status_changer.new({
-      :old_item_ids => purchase_solicitation_item_group.purchase_solicitation_item_ids
-    }).change
-  end
-
   def create_annulment(employee, date, description = '')
     resource_annul_repository.create!(
       :employee_id => employee.id,
@@ -25,6 +19,8 @@ class PurchaseSolicitationItemGroupAnnulment
       :annullable_type => purchase_solicitation_item_group.class.name
     )
 
-    annul
+    item_status_changer.new({
+      :old_item_ids => purchase_solicitation_item_group.purchase_solicitation_item_ids
+    }).change
   end
 end

@@ -4,7 +4,9 @@ class PurchaseSolicitationItemGroupAnnulsController < ResourceAnnulsController
   def annul(object)
     purchase_solicitation_item_group = object.annullable
 
-    PurchaseSolicitationItemGroupAnnulment.new(purchase_solicitation_item_group).annul
+    PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
+      :old_item_ids => purchase_solicitation_item_group.purchase_solicitation_item_ids
+    ).change
   end
 
   def validate_parent!(object)
