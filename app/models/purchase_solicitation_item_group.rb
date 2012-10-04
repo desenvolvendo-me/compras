@@ -43,13 +43,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def purchase_solicitation_items
-    items = []
-
-    purchase_solicitation_item_group_materials.each do |item_group_material|
-      items += item_group_material.purchase_solicitation_items
-    end
-
-    items
+    purchase_solicitation_item_group_materials.map(&:purchase_solicitation_items).flatten
   end
 
   def purchase_solicitation_item_ids
