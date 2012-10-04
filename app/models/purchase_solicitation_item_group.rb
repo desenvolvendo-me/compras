@@ -47,7 +47,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def purchase_solicitation_item_ids
-    purchase_solicitation_items.map { |item| item.id }
+    purchase_solicitation_items.map!(&:id)
   end
 
   def annulled?
