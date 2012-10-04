@@ -286,7 +286,7 @@ AdministrativeProcess.blueprint(:compra_com_itens_menor_preco) do
   date { Date.new(2012, 3, 7) }
   protocol { '00088/2012' }
   object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
-  licitation_modality { LicitationModality.make!(:publica,
+  licitation_modality { LicitationModality.make!(:privada,
                                                  :invitation_letter => true) }
   judgment_form { JudgmentForm.make!(:global_com_menor_preco) }
   description { 'Licitação para compra de carteiras' }
