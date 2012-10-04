@@ -39,7 +39,7 @@
     var selectedBudgetStructures = [];
 
     $(modal).closest('.price-registration-item').find('.budget-structure-modal').each(function(index, item) {
-      budgetStructureId = $(item).next('input:hidden').val();
+      var budgetStructureId = $(item).next('input:hidden').val();
       if (budgetStructureId) {
         selectedBudgetStructures.push(budgetStructureId);
       }
