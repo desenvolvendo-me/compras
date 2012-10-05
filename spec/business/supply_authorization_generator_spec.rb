@@ -34,4 +34,8 @@ describe SupplyAuthorizationGenerator do
 
     expect(subject.generate!).to eq supply_authorization_object
   end
+
+  it 'should not have authorize! on public interface' do
+    expect(subject.respond_to?(:authorize!)).to be false
+  end
 end

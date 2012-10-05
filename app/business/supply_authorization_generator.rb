@@ -14,6 +14,8 @@ class SupplyAuthorizationGenerator
     end
   end
 
+  private
+
   def authorize!
     supply_authorization_repository.create!(
       :direct_purchase_id => direct_purchase_object.id,
