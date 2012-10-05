@@ -146,7 +146,7 @@ feature "LicitationProcessRatifications" do
 
     expect(page).to have_content '1'
     expect(page).to have_content '1/2013'
-    expect(page).to have_content 'Convite para compras e serviços'
+    expect(page).to have_content 'Privada'
     expect(page).to have_content I18n.l Date.current
     expect(page).to have_content 'Licitação para compra de carteiras'
     expect(page).to have_content 'Wenderson Malheiros'
