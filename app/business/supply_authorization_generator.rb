@@ -1,6 +1,9 @@
 class SupplyAuthorizationGenerator
   attr_accessor :direct_purchase_object, :supply_authorization_repository
 
+  delegate :purchase_solicitation,
+           :to => :direct_purchase_object, :allow_nil => true
+
   def initialize(direct_purchase_object, supply_authorization_repository = SupplyAuthorization)
     self.direct_purchase_object = direct_purchase_object
     self.supply_authorization_repository = supply_authorization_repository
@@ -10,6 +13,8 @@ class SupplyAuthorizationGenerator
     if direct_purchase_object.authorized?
       direct_purchase_object.supply_authorization
     else
+      attend_purchase_solicitation
+      attend_purchase_solicitation_items
       authorize!
     end
   end
@@ -21,5 +26,17 @@ class SupplyAuthorizationGenerator
       :direct_purchase_id => direct_purchase_object.id,
       :year => direct_purchase_object.year,
     )
+  end
+
+  def attend_purchase_solicitation
+    return unless purchase_solicitation.present?
+
+    purchase_solicitation.attend!
+  end
+
+  def attend_purchase_solicitation_items
+    return unless purchase_solicitation.present?
+
+    purchase_solicitation.attend_items
   end
 end

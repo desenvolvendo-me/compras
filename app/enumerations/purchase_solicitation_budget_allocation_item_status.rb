@@ -1,3 +1,3 @@
 class PurchaseSolicitationBudgetAllocationItemStatus < EnumerateIt::Base
-  associate_values :pending, :grouped
+  associate_values :pending, :grouped, :attended
 end

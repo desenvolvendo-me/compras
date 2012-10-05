@@ -84,4 +84,12 @@ describe PurchaseSolicitationBudgetAllocationItem do
       subject.clear_fulfiller_and_status(status_enum)
     end
   end
+
+  describe '.attend!' do
+    it 'should update status to attended' do
+      subject.should_receive(:update_column).with(:status, 'attended')
+
+      subject.attend!
+    end
+  end
 end

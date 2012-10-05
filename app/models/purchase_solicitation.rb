@@ -118,6 +118,14 @@ class PurchaseSolicitation < Compras::Model
     update_column :service_status, PurchaseSolicitationServiceStatus::LIBERATED
   end
 
+  def attend!
+    update_column :service_status, PurchaseSolicitationServiceStatus::ATTENDED
+  end
+
+  def attend_items
+    items.each(&:attend!)
+  end
+
   protected
 
   def must_have_at_least_one_budget_allocation

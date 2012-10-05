@@ -59,6 +59,10 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
                       :status => status_enumeration.value_for(:PENDING)
   end
 
+  def attend!
+    update_column :status, PurchaseSolicitationServiceStatus::ATTENDED
+  end
+
   private
 
   def self.validate_options(options)

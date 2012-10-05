@@ -1295,4 +1295,63 @@ feature "DirectPurchases" do
       end
     end
   end
+
+  scenario 'generate supply authorization when direct_purchase has purchase_solicitation' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+    DirectPurchase.make!(
+      :compra_nao_autorizada,
+      :purchase_solicitation => purchase_solicitation
+    )
+    Prefecture.make!(:belo_horizonte)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Gerar autorização de fornecimento'
+
+    expect(page).to have_content 'AUTORIZAÇÃO DE FORNECIMENTO'
+    expect(page).to have_content "1/2012"
+    expect(page).to have_content '01/12/2012'
+    expect(page).to have_content 'Wenderson Malheiros'
+    expect(page).to have_content 'Girassol, 9874 - São Francisco'
+    expect(page).to have_content 'Curitiba'
+    expect(page).to have_content '33400-500'
+    expect(page).to have_content '(33) 3333-3333'
+    expect(page).to have_content '(33) 3333-3334'
+    expect(page).to have_content '23456-0'
+    expect(page).to have_content 'Agência Itaú'
+    expect(page).to have_content 'Itaú'
+    expect(page).to have_content 'Prezados Senhores, Pedimos fornecer-nos o material e ou execução do serviço abaixo discriminado, respeitando as especificações e condições constantes nesta autorização de fornecimento.'
+    expect(page).to have_content '1 - Secretaria de Educação'
+    expect(page).to have_content 'Dinheiro'
+    expect(page).to have_content '1 ano'
+    expect(page).to have_content 'Secretaria da Educação'
+    expect(page).to have_content 'Ponte'
+    expect(page).to have_content 'Compra de 2012 ainda não autorizada'
+    expect(page).to have_content 'Antivirus'
+    expect(page).to have_content 'Norton'
+
+    click_link 'voltar'
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      click_link purchase_solicitation.to_s
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_select 'Status', :selected => 'Atendido'
+        end
+      end
+    end
+  end
 end

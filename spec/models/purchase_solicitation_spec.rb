@@ -152,4 +152,26 @@ describe PurchaseSolicitation do
       subject.liberate!
     end
   end
+
+  describe '.attend!' do
+    it 'should change service_status to attended' do
+      subject.should_receive(:update_column).with(:service_status, 'attended')
+
+      subject.attend!
+    end
+  end
+
+  describe '.attend_items' do
+    it 'should change items status to attended' do
+      item1 = double(:item1)
+      item2 = double(:item2)
+
+      subject.stub(:items).and_return([item1, item2])
+
+      item1.should_receive(:attend!)
+      item2.should_receive(:attend!)
+
+      subject.attend_items
+    end
+  end
 end

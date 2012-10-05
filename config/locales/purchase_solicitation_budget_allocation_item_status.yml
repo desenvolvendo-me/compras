@@ -3,3 +3,4 @@ pt-BR:
     purchase_solicitation_budget_allocation_item_status:
       pending: "Pendente"
       grouped: "Agrupado"
+      attended: "Atendido"
