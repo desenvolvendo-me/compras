@@ -18,7 +18,7 @@ feature "Contracts" do
     expect(page).to have_disabled_field 'Compra direta'
     expect(page).to have_field 'Objeto do contrato', :with => 'Licitação para compra de carteiras'
     expect(page).to have_disabled_field 'Modalidade'
-    expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
+    expect(page).to have_field 'Modalidade', :with => 'Privada'
   end
 
   scenario 'picking a direct purchase' do
@@ -136,7 +136,7 @@ feature "Contracts" do
     expect(page).to have_select 'Forma de execução', :selected => 'Empreitada integral'
     expect(page).to have_select 'Garantias do contrato', :selected => 'Fiança bancária'
     expect(page).to have_select 'Subcontratação', :selected => 'Sim'
-    expect(page).to have_field 'Modalidade', :with => 'Convite para compras e serviços'
+    expect(page).to have_field 'Modalidade', :with => 'Privada'
     expect(page).to have_field 'Unidade orçamentaria gestora responsável', :with => '1 - Secretaria de Educação'
     expect(page).to have_field 'Responsável pela unidade orçamentaria gestora', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Advogado responsável pela gestão do contrato', :with => 'Wenderson Malheiros'
