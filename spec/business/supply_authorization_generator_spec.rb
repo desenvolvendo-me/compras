@@ -7,15 +7,15 @@ describe SupplyAuthorizationGenerator do
   end
 
   let :direct_purchase_object do
-    double(:id => 1, :year => 2012)
+    double(:direct_purchase_object, :id => 1, :year => 2012)
   end
 
   let :supply_authorization_repository do
-    double
+    double(:supply_authorization_repository)
   end
 
   let :supply_authorization_object do
-    double
+    double(:supply_authorization_object)
   end
 
   it 'should return supply_authorization if already have' do
