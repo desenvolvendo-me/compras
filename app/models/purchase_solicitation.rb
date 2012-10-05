@@ -111,7 +111,7 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def clear_items_fulfiller_and_status
-    items.each { |item| item.clear_fulfiller_and_status }
+    items.each(&:clear_fulfiller_and_status)
   end
 
   def liberate!
