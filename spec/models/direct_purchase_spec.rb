@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/signable'
+require 'lib/annullable'
 require 'app/models/resource_annul'
 require 'app/models/direct_purchase'
 require 'app/models/budget_allocation'
