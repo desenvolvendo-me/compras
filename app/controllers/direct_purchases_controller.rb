@@ -30,6 +30,8 @@ class DirectPurchasesController < CrudController
       return
     end
 
+    set_purchase_solicitation(resource, params[:direct_purchase][:purchase_solicitation_id])
+
     super
   end
 
@@ -37,9 +39,24 @@ class DirectPurchasesController < CrudController
 
   def create_resource(object)
     object.transaction do
+      if params[:direct_purchase]
+        set_purchase_solicitation(object, params[:direct_purchase][:purchase_solicitation_id])
+      end
+
       super
 
       PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
     end
   end
+
+  private
+
+  def set_purchase_solicitation(direct_purchase, purchase_solicitation_id)
+    return unless purchase_solicitation_id.present?
+
+    purchase_solicitation = PurchaseSolicitation.find(purchase_solicitation_id)
+    purchase_solicitation_process = PurchaseSolicitationProcess.new(direct_purchase)
+    purchase_solicitation_process.set_solicitation(purchase_solicitation)
+  end
+
 end

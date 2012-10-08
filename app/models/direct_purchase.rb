@@ -134,7 +134,7 @@ class DirectPurchase < Compras::Model
   end
 
   def purchase_solicitation_can_generate_direct_purchase
-    return unless purchase_solicitation.present?
+    return if purchase_solicitation.blank? || !purchase_solicitation_id_changed?
 
     unless purchase_solicitation.can_be_grouped?
       errors.add(:purchase_solicitation, :cannot_generate_direct_purchase)

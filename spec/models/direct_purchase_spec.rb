@@ -185,6 +185,7 @@ describe DirectPurchase do
 
       it "should not have a purchase solicitation that can't generate direct purchases" do
         purchase_solicitation.stub(:can_be_grouped? => false)
+        subject.stub(:purchase_solicitation_id_changed? => true)
         subject.stub(:purchase_solicitation => purchase_solicitation)
 
         subject.valid?
