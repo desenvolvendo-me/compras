@@ -7,5 +7,5 @@ pt-BR:
   edit: "Editar %{resource}"
   destroy: "Apagar"
   are_you_sure: "Você tem certeza?"
-  cancel: "Cancelar"
+  cancel: "Voltar"
   print: "Imprimir"

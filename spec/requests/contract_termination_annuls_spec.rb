@@ -79,7 +79,7 @@ feature 'ContractTerminationAnnuls' do
 
     click_link 'Anulação'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     expect(page).to have_content 'Editar Rescisão 1/2012 do Contrato 001'
   end

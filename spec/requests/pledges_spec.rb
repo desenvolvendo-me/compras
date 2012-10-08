@@ -751,7 +751,7 @@ feature "Pledges" do
         expect(page).to_not have_content '001'
         expect(page).to have_content '101'
 
-        click_link 'Cancelar'
+        click_link 'Voltar'
       end
     end
 

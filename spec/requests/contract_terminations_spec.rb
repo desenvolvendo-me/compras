@@ -65,7 +65,7 @@ feature 'ContractTerminations' do
 
     expect(page).to_not have_link 'Apagar'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     expect(page).to have_content 'Rescisões do Contrato 001'
   end

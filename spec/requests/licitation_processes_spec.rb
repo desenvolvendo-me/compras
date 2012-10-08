@@ -394,7 +394,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Classificação', :with => '2'
     end
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     click_link 'Gabriel Sobrinho'
 
@@ -473,7 +473,7 @@ feature "LicitationProcesses" do
       end
     end
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     click_link 'Gabriel Sobrinho'
 
@@ -540,7 +540,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Classificação', :with => '2'
     end
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     click_link 'Gabriel Sobrinho'
 
@@ -1087,7 +1087,7 @@ feature "LicitationProcesses" do
       expect(page).to have_field 'Documento', :with => 'Fiscal'
     end
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     click_link 'Voltar ao processo licitatório'
 

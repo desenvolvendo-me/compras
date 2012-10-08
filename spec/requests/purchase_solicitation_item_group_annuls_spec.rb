@@ -69,7 +69,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Apagar'
-    expect(page).to have_link 'Cancelar'
+    expect(page).to have_link 'Voltar'
 
     navigate 'Compras e Licitações > Solicitações de Compra'
 

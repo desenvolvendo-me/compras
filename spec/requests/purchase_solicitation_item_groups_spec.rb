@@ -129,7 +129,7 @@ feature "PurchaseSolicitationItemGroups" do
 
       expect(page).to_not have_css 'table.records tbody tr'
 
-      click_link 'Cancelar'
+      click_link 'Voltar'
     end
 
     click_button 'Salvar'
@@ -144,7 +144,7 @@ feature "PurchaseSolicitationItemGroups" do
 
       expect(page).to_not have_css 'table.records tbody tr'
 
-      click_link 'Cancelar'
+      click_link 'Voltar'
     end
 
     within 'table.records' do

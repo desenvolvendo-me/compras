@@ -67,7 +67,7 @@ feature "PriceCollectionProposals" do
       expect(page).to_not have_button 'Salvar'
       expect(page).to have_link 'Anular'
 
-      click_link 'Cancelar'
+      click_link 'Voltar'
 
       expect(page).to have_content 'Editar 1/2012'
     end
@@ -128,7 +128,7 @@ feature "PriceCollectionProposals" do
       expect(page).to have_disabled_field 'Valor total'
       expect(page).to have_disabled_field 'Valor total do lote'
 
-      click_link 'Cancelar'
+      click_link 'Voltar'
 
       expect(page).to have_content 'Propostas Para Coletas de Preços'
     end

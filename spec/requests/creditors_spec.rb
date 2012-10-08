@@ -243,7 +243,7 @@ feature "Creditors" do
 
         page.find('.records').should_not have_content '4712100'
 
-        click_link 'Cancelar'
+        click_link 'Voltar'
       end
     end
 
@@ -557,7 +557,7 @@ feature "Creditors" do
 
     expect(page).to have_link 'Imprimir certificado de registro cadastral'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     click_link 'Voltar ao credor'
 
@@ -618,7 +618,7 @@ feature "Creditors" do
 
     expect(page).to have_link 'Imprimir certificado de registro cadastral'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     click_link 'Criar Certificado de Registro Cadastral'
 
@@ -884,7 +884,7 @@ feature "Creditors" do
 
         page.find('.records').should_not have_content '7739099'
 
-        click_link 'Cancelar'
+        click_link 'Voltar'
       end
     end
 

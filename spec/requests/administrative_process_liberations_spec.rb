@@ -68,7 +68,7 @@ feature "AdministrativeProcessLiberations" do
 
     click_link 'Liberação'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     expect(page).to have_content 'Editar 1/2012'
   end

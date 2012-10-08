@@ -508,7 +508,7 @@ feature "Bidders" do
     expect(page).to have_content '2'
     expect(page).to have_content '10,00'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     click_link 'Criar Lote de itens'
 
@@ -528,7 +528,7 @@ feature "Bidders" do
     expect(page).to have_content '1'
     expect(page).to have_content '10,00'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     expect(page).to have_content 'Lote 1'
     expect(page).to have_content 'Lote 2'
@@ -673,7 +673,7 @@ feature "Bidders" do
     expect(page).to have_content '2'
     expect(page).to have_content '10,00'
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     expect(page).to have_content 'Lote 1'
 

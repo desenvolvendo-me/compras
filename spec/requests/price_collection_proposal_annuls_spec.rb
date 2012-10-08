@@ -23,7 +23,7 @@ feature 'PriceCollectionProposalAnnul' do
 
     expect(page).to have_field 'Data', :with => I18n.l(Date.current)
 
-    click_link 'Cancelar'
+    click_link 'Voltar'
 
     expect(page).to have_content 'Proposta do Fornecedor Wenderson Malheiros para a Coleta de Preço 1/2012'
   end
