@@ -10,7 +10,7 @@ class PurchaseSolicitationItemGroupsController < CrudController
       return unless super
 
       PurchaseSolicitationBudgetAllocationItemStatusChanger.new({
-        :new_item_ids => object.purchase_solicitation_ids
+        :new_item_ids => object.purchase_solicitation_item_ids
       }).change
     end
   end
@@ -19,12 +19,12 @@ class PurchaseSolicitationItemGroupsController < CrudController
     raise Exceptions::Unauthorized unless object.editable?
 
     object.transaction do
-      old_purchase_solicitation_ids = object.purchase_solicitation_ids
+      old_purchase_solicitation_ids = object.purchase_solicitation_item_ids
 
       return unless super
 
       PurchaseSolicitationBudgetAllocationItemStatusChanger.new({
-        :new_item_ids => object.purchase_solicitation_ids,
+        :new_item_ids => object.purchase_solicitation_item_ids,
         :old_item_ids => old_purchase_solicitation_ids
       }).change
     end

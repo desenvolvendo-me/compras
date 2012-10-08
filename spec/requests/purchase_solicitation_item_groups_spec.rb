@@ -32,6 +32,16 @@ feature "PurchaseSolicitationItemGroups" do
       expect(page).to have_content '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
       expect(page).to have_content '3'
     end
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_select 'Status', :selected => 'Agrupado'
+    end
   end
 
   scenario 'update an existent purchase_solicitation_item_group' do
