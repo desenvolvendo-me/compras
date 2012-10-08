@@ -8,9 +8,17 @@
   </div>
 </div>
 
-<%= f.input :object_type %>
+<div class="yui3-g">
+  <div class="yui3-u-1-2">
+    <%= f.input :object_type %>
+  </div>
 
-<%= f.input :modality_type %>
+  <div class="yui3-u-1-2">
+    <%= f.input :modality_type %>
+  </div>
+</div>
+
+<%= f.input :invitation_letter %>
 
 <%= f.input :description %>
 
@@ -23,8 +31,6 @@
     <%= f.input :final_value %>
   </div>
 </div>
-
-<%= f.input :invitation_letter %>
 
 <script>
   $("#licitation_modality_regulatory_act_id").change(function (event, regulatory_act) {
