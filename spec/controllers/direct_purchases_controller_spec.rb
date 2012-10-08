@@ -45,22 +45,8 @@ describe DirectPurchasesController do
       DirectPurchase.make!(:compra)
     end
 
-    let :prefecture do
-      Prefecture.make!(:belo_horizonte)
-    end
-
-    let :pdf do
-      double(:pdf)
-    end
-
-    let :html do
-      double(:html)
-    end
-
     it 'should send e-mail to creditor on update' do
-      Pdf.any_instance.should_receive(:generate!).and_return(html)
-
-      SupplyAuthorizationMailer.should_receive(:authorization_to_creditor).with(direct_purchase, prefecture, html).and_return(double(:deliver => true))
+      SupplyAuthorizationEmailSender.any_instance.should_receive(:deliver)
 
       put :update, :id => direct_purchase.id, :commit => 'Enviar autorização de fornecimento por e-mail'
     end

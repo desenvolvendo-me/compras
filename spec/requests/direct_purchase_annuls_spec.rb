@@ -188,6 +188,7 @@ feature 'DirectPurchaseAnnuls' do
   end
 
   scenario 'annul an existent direct_purchase with purchase_solicitation and supply_authorization' do
+    Prefecture.make!(:belo_horizonte)
     SupplyAuthorization.make!(
       :nohup,
       :direct_purchase => DirectPurchase.make!(

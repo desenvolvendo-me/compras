@@ -10,6 +10,27 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::Unauthorized, :with => :unauthorized
   rescue_from Exceptions::Unauthorized, :with => :unauthorized
 
+  helper_method :current_prefecture, :root_url
+
+  def current_prefecture
+    Prefecture.last
+  end
+
+  def root_url
+    "#{request.protocol}#{request.host_with_port}"
+  end
+
+  def render_to_pdf(partial_name, options = {})
+    locals = options.fetch(:locals, {})
+    stylesheets = options.fetch(:stylesheets, ["#{root_url}/assets/report.css"])
+
+    pdf_instance = PDFKit.new render_to_string(:partial => partial_name, :locals => locals)
+
+    pdf_instance.stylesheets += stylesheets if Rails.env.production?
+
+    pdf_instance.to_pdf
+  end
+
   protected
 
   def layout_by_user
@@ -18,12 +39,6 @@ class ApplicationController < ActionController::Base
     else
       'application'
     end
-  end
-
-  helper_method :current_prefecture
-
-  def current_prefecture
-    Prefecture.last
   end
 
   def authorize_resource!

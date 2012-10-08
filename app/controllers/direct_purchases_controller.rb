@@ -21,10 +21,7 @@ class DirectPurchasesController < CrudController
       return
 
     elsif params[:commit] == 'Enviar autorização de fornecimento por e-mail'
-
-      html = render_to_string(:partial => "supply_authorizations", :locals => { :resource => resource.supply_authorization } )
-      pdf = Pdf.new(self, html).generate!
-      SupplyAuthorizationMailer.authorization_to_creditor(resource, current_prefecture, pdf).deliver
+      SupplyAuthorizationEmailSender.new(resource.supply_authorization, self).deliver
 
       redirect_to edit_direct_purchase_path(resource), :notice => t('compras.messages.supply_authorization_mailer_successful')
       return

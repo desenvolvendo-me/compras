@@ -2,11 +2,18 @@
 require 'unit_helper'
 require 'active_support/core_ext/module/delegation'
 require 'app/business/direct_purchase_annulment'
+require 'app/business/supply_authorization_email_sender'
 require 'app/business/purchase_solicitation_budget_allocation_item_status_changer'
 
 describe DirectPurchaseAnnulment do
   subject do
-    DirectPurchaseAnnulment.new(direct_purchase, resource_annul, item_group_annulment)
+    DirectPurchaseAnnulment.new(
+      direct_purchase,
+      resource_annul,
+      context,
+      item_group_annulment,
+      email_sender
+    )
   end
 
   let :direct_purchase do
@@ -40,6 +47,14 @@ describe DirectPurchaseAnnulment do
       :date => Date.new(2012, 10, 01),
       :description => 'Anulação'
     )
+  end
+
+  let :context do
+    double(:context)
+  end
+
+  let :email_sender do
+    double(:email_sender)
   end
 
   describe '.annul' do
@@ -94,6 +109,8 @@ describe DirectPurchaseAnnulment do
       purchase_solicitation.stub(:present?).and_return(false)
       supply_authorization.stub(:present?).and_return(true)
 
+      email_sender.should_receive(:deliver)
+      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
       purchase_solicitation.should_receive(:liberate!)
 
       subject.annul

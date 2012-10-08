@@ -5,7 +5,7 @@ class DirectPurchaseAnnulsController < ResourceAnnulsController
     direct_purchase = object.annullable
 
     object.transaction do
-      DirectPurchaseAnnulment.new(direct_purchase, object).annul
+      DirectPurchaseAnnulment.new(direct_purchase, object, self).annul
     end
   end
 end

@@ -1,5 +1,6 @@
 class DirectPurchaseAnnulment
-  attr_accessor :direct_purchase, :item_group_annulment, :resource_annul
+  attr_accessor :direct_purchase, :item_group_annulment, :resource_annul,
+                :context, :email_sender
 
   delegate :purchase_solicitation_item_group, :purchase_solicitation,
            :supply_authorization,
@@ -7,10 +8,14 @@ class DirectPurchaseAnnulment
 
   def initialize(direct_purchase,
                  resource_annul,
-                 item_group_annulment = PurchaseSolicitationItemGroupAnnulment)
+                 context,
+                 item_group_annulment = PurchaseSolicitationItemGroupAnnulment,
+                 email_sender = SupplyAuthorizationEmailSender)
     self.direct_purchase = direct_purchase
     self.item_group_annulment = item_group_annulment
     self.resource_annul = resource_annul
+    self.context = context
+    self.email_sender = email_sender
   end
 
   def annul
@@ -19,9 +24,17 @@ class DirectPurchaseAnnulment
     change_purchase_solicitation_items
 
     liberate_purchase_solicitation
+
+    send_supply_authorization_annulment_by_email
   end
 
   private
+
+  def send_supply_authorization_annulment_by_email
+    return unless supply_authorization.present?
+
+    email_sender.new(supply_authorization, context).deliver
+  end
 
   def change_purchase_solicitation_items
     return unless purchase_solicitation.present?
