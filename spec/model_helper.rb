@@ -43,6 +43,10 @@ require 'mail_validator'
 require 'mask_validator'
 require 'validates_timeliness'
 
+ValidatesTimeliness.setup do |config|
+  config.ignore_restriction_errors = true
+end
+
 Dir['app/validators/*.rb'].each do |file|
   require File.expand_path(file)
 end
