@@ -31,7 +31,7 @@ Compras::Application.configure do
 
   # Prevents mailer from trying to send mails to the real world 
   # in test mode.
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
 
   # Raise exception on mass assignment protection for Active Record models
   # config.active_record.mass_assignment_sanitizer = :strict
