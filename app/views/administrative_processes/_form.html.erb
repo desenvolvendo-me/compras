@@ -20,6 +20,11 @@
 
 <script>
   $(function () {
+    var objectType = $(".object-type-select").val();
+    if (objectType) {
+      filterModalities(objectType);
+    }
+
     $('form.administrative_process').on('change', '.object-type-select', function() {
       var objectType = $(this).val();
       filterModalities(objectType);

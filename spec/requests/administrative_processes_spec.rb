@@ -387,6 +387,15 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Número do protocolo', :with => '00099/2012'
+      select 'Alienação de bens', :from => 'Tipo de objeto'
+      within_modal 'Modalidade' do
+        click_button 'Pesquisar'
+        within_records do
+          expect(page).not_to have_content 'Pregão presencial'
+        end
+        click_link 'Voltar'
+      end
+
       select 'Compras e serviços', :from => 'Tipo de objeto'
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Por Lote com Melhor Técnica', :field => 'Descrição'
