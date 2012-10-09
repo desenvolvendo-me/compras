@@ -6,5 +6,3 @@ ActionMailer::Base.smtp_settings = {
   :domain         => ENV['MAILGUN_SMTP_DOMAIN'],
   :authentication => :plain,
 }
-
-ActionMailer::Base.delivery_method = :smtp
