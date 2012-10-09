@@ -3,6 +3,20 @@ class PurchaseSolicitationItemGroupsController < CrudController
 
   has_scope :not_annulled, :type => :boolean
 
+  def new
+    object = build_resource
+    object.status = PurchaseSolicitationItemGroupStatus::PENDING
+
+    super
+  end
+
+  def create
+    object = build_resource
+    object.status = PurchaseSolicitationItemGroupStatus::PENDING
+
+    super
+  end
+
   protected
 
   def create_resource(object)

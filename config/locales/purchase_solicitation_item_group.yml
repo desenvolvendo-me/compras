@@ -10,3 +10,4 @@ pt-BR:
         description: "Descrição"
         material: "Material"
         purchase_solicitation: "Solicitação de compra"
+        status: "Situação"

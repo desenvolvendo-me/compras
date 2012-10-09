@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    purchase_solicitation_item_group_status:
+      pending: "Pendente"
+      fulfilled: "Atendido"
+      in_purchase_process: "Em processo de compra"

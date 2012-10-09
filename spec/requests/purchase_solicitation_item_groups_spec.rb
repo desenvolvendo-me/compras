@@ -15,6 +15,8 @@ feature "PurchaseSolicitationItemGroups" do
 
     fill_in 'Descrição', :with => 'Agrupamento de antivirus'
 
+    expect(page).to have_disabled_field "Situação"
+
     click_button 'Adicionar Material'
 
     fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
@@ -25,6 +27,8 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra criado com sucesso.'
 
     click_link 'Agrupamento de antivirus'
+
+    expect(page).to have_select "Situação", :selected => "Pendente"
 
     expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
 
@@ -52,6 +56,9 @@ feature "PurchaseSolicitationItemGroups" do
     click_link 'Agrupamento de reparo 2013'
 
     expect(page).should_not have_link 'Apagar'
+
+    expect(page).to have_disabled_field "Situação"
+    expect(page).to have_select "Situação", :selected => "Pendente"
 
     click_button 'Remover Material'
 
