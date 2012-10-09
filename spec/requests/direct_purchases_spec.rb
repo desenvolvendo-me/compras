@@ -1090,7 +1090,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'fill budget allocations from purchase solicitation item group' do
-    PurchaseSolicitation.make!(:reparo)
+    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
     LegalReference.make!(:referencia)
     Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
@@ -1236,7 +1236,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'when a purchase solicitation is selected, fill in budget structure automatically' do
-    PurchaseSolicitation.make!(:reparo)
+    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
     LegalReference.make!(:referencia)
     Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
@@ -1279,9 +1279,9 @@ feature "DirectPurchases" do
     expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
   end
 
-  scenario 'doesnt allow selection of a purchase solicitation that has already been attended' do
-    PurchaseSolicitation.make!(:reparo,
-                               :service_status => 'attended')
+  scenario 'only allow selection of purchase solicitations with "liberated" status' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                       :service_status => 'attended')
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
@@ -1292,6 +1292,38 @@ feature "DirectPurchases" do
 
       within_records do
         expect(page).to_not have_content 'Gabriel Sobrinho'
+      end
+
+      click_link 'Voltar'
+    end
+
+    purchase_solicitation.change_status!('pending')
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      within_records do
+        expect(page).to_not have_content 'Gabriel Sobrinho'
+      end
+
+      click_link 'Voltar'
+    end
+
+    purchase_solicitation.change_status!('liberated')
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_modal 'Solicitação de compra' do
+      click_button 'Pesquisar'
+
+      within_records do
+        expect(page).to have_content 'Gabriel Sobrinho'
       end
     end
   end
@@ -1356,7 +1388,7 @@ feature "DirectPurchases" do
   end
 
   scenario "changing the status of a purchase solicitation" do
-    PurchaseSolicitation.make!(:reparo)
+    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
     LegalReference.make!(:referencia)
     Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
@@ -1392,7 +1424,7 @@ feature "DirectPurchases" do
     click_link '1/2012'
     expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
 
-    new_solicitation = PurchaseSolicitation.make!(:reparo_desenvolvimento)
+    new_solicitation = PurchaseSolicitation.make!(:reparo_desenvolvimento, :service_status => 'liberated')
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
     click_link '1/2012'

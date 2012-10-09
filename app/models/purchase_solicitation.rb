@@ -67,6 +67,10 @@ class PurchaseSolicitation < Compras::Model
     PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
   }
 
+  scope :can_be_purchased, where { 
+    service_status.eq(PurchaseSolicitationServiceStatus::LIBERATED)
+  }
+
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end
