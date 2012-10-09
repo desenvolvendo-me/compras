@@ -18,7 +18,7 @@
 
 <script>
   $('.add-bank-account-capability').click(function() {
-    var currentDate = moment().format("DD/MM/YYYY");
+    var currentDate = "<%= I18n.l(Date.current) %>";
 
     $('.select-status option:selected[value="<%= Status::ACTIVE %>"]').closest(".nested-bank-account-capability").find('.input-date').val(currentDate);
 
