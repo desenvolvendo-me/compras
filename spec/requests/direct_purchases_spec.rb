@@ -1313,7 +1313,7 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'doesnt allow selection of purchase solicitations with "pending" status' do
+  scenario 'allows choosing a PurchaseSolicitation with a "liberated" status' do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo,
                                                        :service_status => 'liberated')
 
