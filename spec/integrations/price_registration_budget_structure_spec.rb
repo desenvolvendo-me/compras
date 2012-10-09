@@ -17,7 +17,7 @@ describe PriceRegistrationBudgetStructure do
 
     it "allows the budget structure to be used twice if items are different" do
       new_item = PriceRegistrationItem.make!(:antivirus,
-                                         :price_registration => price_registration)
+                                             :price_registration => price_registration)
 
       new_budget_structure = PriceRegistrationBudgetStructure.make(:secretaria_de_educacao,
                                                                    :budget_structure => budget_structure,
