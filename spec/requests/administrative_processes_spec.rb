@@ -21,11 +21,18 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Status do processo administrativo'
+      expect(page).to have_disabled_field 'Modalidade'
       expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
 
       fill_in 'Ano', :with => '2012'
       fill_in 'Data do processo', :with => '07/03/2012'
       fill_in 'Número do protocolo', :with => '00099/2012'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
+
+      select 'Alienação de bens', :from => 'Tipo de objeto'
+      expect(page).to have_field 'Modalidade', :with => ''
+
       select 'Compras e serviços', :from => 'Tipo de objeto'
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'

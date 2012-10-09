@@ -21,13 +21,23 @@
 <script>
   $(function () {
     var objectType = $(".object-type-select").val();
+
     if (objectType) {
       filterModalities(objectType);
+    } else {
+      disableModalities();
     }
 
     $('form.administrative_process').on('change', '.object-type-select', function() {
+      $('.modal-modality').val('');
+
       var objectType = $(this).val();
-      filterModalities(objectType);
+      if (objectType) {
+        filterModalities(objectType);
+        enableModalities();
+      } else {
+        disableModalities();
+      }
     });
   });
 
@@ -40,6 +50,14 @@
     var url = "<%= modal_licitation_modalities_path %>?" + $.param(params);
 
     $('.modal-modality').data('modal-url', url);
+  }
+
+  function disableModalities() {
+    $('.modal-modality').attr("disabled", "disabled");
+  }
+
+  function enableModalities() {
+    $('.modal-modality').removeAttr("disabled");
   }
 
   (function () {
