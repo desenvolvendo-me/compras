@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe DirectPurchaseAnnulsController do
@@ -6,15 +7,12 @@ describe DirectPurchaseAnnulsController do
   end
 
   context 'POST #create' do
-    let :annullable do
-      DirectPurchase.make!(:compra)
-    end
-
     it 'should annul the direct_purchase' do
+      direct_purchase = DirectPurchase.make!(:compra)
       DirectPurchaseAnnulment.any_instance.should_receive(:annul)
-      ResourceAnnul.any_instance.should_receive(:annullable).at_least(:once).and_return(annullable)
+      ResourceAnnul.any_instance.should_receive(:annullable).at_least(:once).and_return(direct_purchase)
 
-      post :create, :annullable => annullable
+      post :create, :annullable => direct_purchase
     end
 
     it 'should send the annulment email' do
