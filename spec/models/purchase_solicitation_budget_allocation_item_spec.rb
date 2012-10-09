@@ -23,7 +23,7 @@ describe PurchaseSolicitationBudgetAllocationItem do
     expect(subject.estimated_total_price).to eq 50
   end
 
-  context '.fulfill_items' do
+  context '#fulfill_items' do
     let(:item) { double(:item).as_null_object }
     let(:process) { double(:process) }
     let(:material_id) { -1 }
@@ -72,7 +72,7 @@ describe PurchaseSolicitationBudgetAllocationItem do
     end
   end
 
-  describe '.clear_fulfiller_and_status' do
+  describe '#clear_fulfiller_and_status' do
     it 'should clear fulfiller and change status to pending' do
       status_enum = double(:status)
 
@@ -85,7 +85,7 @@ describe PurchaseSolicitationBudgetAllocationItem do
     end
   end
 
-  describe '.attend!' do
+  describe '#attend!' do
     it 'should update status to attended' do
       subject.should_receive(:update_column).with(:status, 'attended')
 

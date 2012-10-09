@@ -57,7 +57,7 @@ describe DirectPurchaseAnnulment do
     double(:email_sender)
   end
 
-  describe '.annul' do
+  describe '#annul' do
     it 'should set items from purchase_solicitation_item_group as pending when has a purchase_solicitation_item_group' do
       purchase_solicitation_item_group.stub(:present?).and_return(true)
       purchase_solicitation.stub(:present?).and_return(false)

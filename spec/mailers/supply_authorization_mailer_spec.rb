@@ -15,7 +15,7 @@ describe SupplyAuthorizationMailer do
       double(:supply_authorization_pdf, :length => 10)
     end
 
-    describe '.authorization_to_creditor' do
+    describe '#authorization_to_creditor' do
       let :mail do
         SupplyAuthorizationMailer.authorization_to_creditor(direct_purchase, prefecture, supply_authorization_pdf)
       end
@@ -47,7 +47,7 @@ describe SupplyAuthorizationMailer do
       end
     end
 
-    describe '.annulment_to_creditor' do
+    describe '#annulment_to_creditor' do
       let :mail do
         SupplyAuthorizationMailer.annulment_to_creditor(direct_purchase, prefecture, supply_authorization_pdf)
       end

@@ -131,7 +131,7 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '.clear_items_fulfiller_and_status' do
+  describe '#clear_items_fulfiller_and_status' do
     it 'should clear_fulfiller_and_status of all items' do
       item1 = double(:item1)
       item2 = double(:item2)
@@ -145,7 +145,7 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '.liberate!' do
+  describe '#liberate!' do
     it 'should change service_status to liberated' do
       subject.should_receive(:update_column).with(:service_status, 'liberated')
 
@@ -153,7 +153,7 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '.attend!' do
+  describe '#attend!' do
     it 'should change service_status to attended' do
       item1 = double(:item1)
       item2 = double(:item2)
