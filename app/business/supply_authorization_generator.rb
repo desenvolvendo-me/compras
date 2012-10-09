@@ -14,7 +14,6 @@ class SupplyAuthorizationGenerator
       direct_purchase_object.supply_authorization
     else
       attend_purchase_solicitation
-      attend_purchase_solicitation_items
       authorize!
     end
   end
@@ -32,11 +31,5 @@ class SupplyAuthorizationGenerator
     return unless purchase_solicitation.present?
 
     purchase_solicitation.attend!
-  end
-
-  def attend_purchase_solicitation_items
-    return unless purchase_solicitation.present?
-
-    purchase_solicitation.attend_items
   end
 end

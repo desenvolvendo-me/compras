@@ -33,9 +33,8 @@ describe SupplyAuthorizationGenerator do
     direct_purchase_object.stub(:purchase_solicitation).and_return(purchase_solicitation)
     direct_purchase_object.stub(:authorized?).and_return(false)
 
-    purchase_solicitation.should_receive(:present?).twice.and_return(true)
+    purchase_solicitation.should_receive(:present?).and_return(true)
     purchase_solicitation.should_receive(:attend!)
-    purchase_solicitation.should_receive(:attend_items)
 
     supply_authorization_repository.should_receive(:create!).with(
       :direct_purchase_id => 1,
@@ -49,9 +48,8 @@ describe SupplyAuthorizationGenerator do
     direct_purchase_object.stub(:purchase_solicitation).and_return(purchase_solicitation)
     direct_purchase_object.stub(:authorized?).and_return(false)
 
-    purchase_solicitation.should_receive(:present?).twice.and_return(false)
+    purchase_solicitation.should_receive(:present?).and_return(false)
     purchase_solicitation.should_not_receive(:attend!)
-    purchase_solicitation.should_not_receive(:attend_items)
 
     supply_authorization_repository.should_receive(:create!).with(
       :direct_purchase_id => 1,
