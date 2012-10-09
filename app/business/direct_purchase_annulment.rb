@@ -43,7 +43,7 @@ class DirectPurchaseAnnulment
   end
 
   def liberate_purchase_solicitation
-    return unless supply_authorization.present?
+    return unless supply_authorization.present? && purchase_solicitation.present?
 
     purchase_solicitation.liberate!
   end

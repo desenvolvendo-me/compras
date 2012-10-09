@@ -111,7 +111,20 @@ describe DirectPurchaseAnnulment do
 
       email_sender.should_receive(:deliver)
       email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
+      purchase_solicitation.should_not_receive(:liberate!)
+
+      subject.annul
+    end
+
+    it 'should change status of purchase solicitation and liberate purchase solicitation when there is a supply_authorization assigned' do
+      purchase_solicitation_item_group.stub(:present?).and_return(false)
+      purchase_solicitation.stub(:present?).and_return(true)
+      supply_authorization.stub(:present?).and_return(true)
+
+      email_sender.should_receive(:deliver)
+      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
       purchase_solicitation.should_receive(:liberate!)
+      purchase_solicitation.should_receive(:clear_items_fulfiller_and_status)
 
       subject.annul
     end
