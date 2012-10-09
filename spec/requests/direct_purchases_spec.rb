@@ -1279,7 +1279,7 @@ feature "DirectPurchases" do
     expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
   end
 
-  scenario 'only allow selection of purchase solicitations with "liberated" status' do
+  scenario 'doesnt allow selection of purchase solicitations with "attended" status' do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo,
                                                        :service_status => 'attended')
 
@@ -1293,11 +1293,12 @@ feature "DirectPurchases" do
       within_records do
         expect(page).to_not have_content 'Gabriel Sobrinho'
       end
-
-      click_link 'Voltar'
     end
+  end
 
-    purchase_solicitation.change_status!('pending')
+  scenario 'doesnt allow selection of purchase solicitations with "pending" status' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                       :service_status => 'pending')
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
@@ -1309,11 +1310,12 @@ feature "DirectPurchases" do
       within_records do
         expect(page).to_not have_content 'Gabriel Sobrinho'
       end
-
-      click_link 'Voltar'
     end
+  end
 
-    purchase_solicitation.change_status!('liberated')
+  scenario 'doesnt allow selection of purchase solicitations with "pending" status' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                       :service_status => 'liberated')
 
     navigate 'Compras e Licitações > Gerar Compra Direta'
 
