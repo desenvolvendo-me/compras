@@ -28,7 +28,8 @@
 
   function filterModalities(objectType) {
     var params = {
-      by_object_type: objectType
+      by_object_type: objectType,
+      locked_fields: ["object_type"]
     };
 
     var url = "<%= modal_licitation_modalities_path %>?" + $.param(params);

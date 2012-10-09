@@ -766,6 +766,9 @@ feature "AdministrativeProcesses" do
     select 'Compras e serviços', :on => "Tipo de objeto"
 
     within_modal 'Modalidade' do
+
+      expect(page).to have_disabled_field "Tipo do objeto"
+
       click_button 'Pesquisar'
       within_records do
         expect(page).to have_content "Pública"
