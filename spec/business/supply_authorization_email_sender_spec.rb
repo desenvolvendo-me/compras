@@ -61,7 +61,6 @@ describe SupplyAuthorizationEmailSender do
       with(direct_purchase, 'Modelo', 'pdf').
       and_return(supply_authorization_mailer)
 
-
     subject.deliver
   end
 
