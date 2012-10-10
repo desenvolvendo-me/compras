@@ -31,6 +31,6 @@ class SupplyAuthorizationDecorator
   end
 
   def status
-    t("enumerations.status.#{super}") if super
+    status_humanize if super
   end
 end

@@ -7,6 +7,8 @@ class SupplyAuthorization < Compras::Model
 
   auto_increment :code, :by => :year
 
+  has_enumeration_for :status
+
   belongs_to :direct_purchase
 
   delegate :phone, :fax, :address, :city, :zip_code, :accounts, :agencies,

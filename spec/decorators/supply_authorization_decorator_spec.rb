@@ -86,23 +86,18 @@ describe SupplyAuthorizationDecorator do
   end
 
   context '#status' do
-    before do
-      I18n.backend.store_translations 'pt-BR', :enumerations => {
-          :status => {
-            :active => 'Ativo',
-            :inactive => 'Inativo'
-        }
-      }
-    end
-
     it 'should translate the status when active' do
       component.stub(:status).and_return('active')
+
+      component.should_receive(:status_humanize).and_return('Ativo')
 
       expect(subject.status).to eq 'Ativo'
     end
 
     it 'should translate the status when inactive' do
       component.stub(:status).and_return('inactive')
+
+      component.should_receive(:status_humanize).and_return('Inativo')
 
       expect(subject.status).to eq 'Inativo'
     end
