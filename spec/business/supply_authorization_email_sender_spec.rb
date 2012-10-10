@@ -49,6 +49,8 @@ describe SupplyAuthorizationEmailSender do
   it 'should send authorization by email' do
     supply_authorization.stub(:annulled?).and_return(false)
 
+    supply_authorization.should_receive(:present?).and_return(true)
+
     context.
       should_receive(:render_to_pdf).
       with("direct_purchases/supply_authorizations", :locals => { :resource => supply_authorization }).
@@ -67,6 +69,8 @@ describe SupplyAuthorizationEmailSender do
 it 'should send annulment by email' do
     supply_authorization.stub(:annulled?).and_return(true)
 
+    supply_authorization.should_receive(:present?).and_return(true)
+
     context.
       should_receive(:render_to_pdf).
       with("direct_purchases/supply_authorizations", :locals => { :resource => supply_authorization }).
@@ -79,6 +83,15 @@ it 'should send annulment by email' do
       with(direct_purchase, 'Modelo', 'pdf').
       and_return(supply_authorization_mailer)
 
+    subject.deliver
+  end
+
+  it 'should not send email when supply_authorization is not present' do
+    supply_authorization.stub(:annulled?).and_return(true)
+
+    supply_authorization.should_receive(:present?).and_return(false)
+
+    supply_authorization_mailer.should_not_receive(:deliver)
 
     subject.deliver
   end

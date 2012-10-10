@@ -63,6 +63,9 @@ describe DirectPurchaseAnnulment do
       purchase_solicitation.stub(:present?).and_return(false)
       supply_authorization.stub(:present?).and_return(false)
 
+      email_sender.should_receive(:deliver)
+      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
+
       item_group_annulment.should_receive(:new).
                            with(purchase_solicitation_item_group).
                            and_return(item_group_annulment)
@@ -78,6 +81,9 @@ describe DirectPurchaseAnnulment do
       purchase_solicitation.stub(:present?).and_return(false)
       supply_authorization.stub(:present?).and_return(false)
 
+      email_sender.should_receive(:deliver)
+      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
+
       item_group_annulment.should_not_receive(:new)
 
       subject.annul
@@ -87,6 +93,9 @@ describe DirectPurchaseAnnulment do
       purchase_solicitation_item_group.stub(:present?).and_return(false)
       purchase_solicitation.stub(:present?).and_return(true)
       supply_authorization.stub(:present?).and_return(false)
+
+      email_sender.should_receive(:deliver)
+      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
 
       purchase_solicitation.should_receive(:clear_items_fulfiller_and_status)
 
@@ -98,6 +107,8 @@ describe DirectPurchaseAnnulment do
       purchase_solicitation.stub(:present?).and_return(false)
       supply_authorization.stub(:present?).and_return(false)
 
+      email_sender.should_receive(:deliver)
+      email_sender.should_receive(:new).with(supply_authorization, context).and_return(email_sender)
 
       purchase_solicitation.should_not_receive(:clear_items_fulfiller_and_status)
 

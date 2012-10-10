@@ -28,8 +28,6 @@ class DirectPurchaseAnnulment
   private
 
   def send_supply_authorization_annulment_by_email
-    return unless supply_authorization.present?
-
     email_sender.new(supply_authorization, context).deliver
   end
 

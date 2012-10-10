@@ -1,7 +1,7 @@
 class SupplyAuthorizationEmailSender
   attr_accessor :supply_authorization, :context, :supply_authorization_mailer
 
-  delegate :direct_purchase, :to => :supply_authorization
+  delegate :direct_purchase, :to => :supply_authorization, :allow_nil => true
   delegate :render_to_pdf, :current_prefecture, :to => :context
 
   def initialize(supply_authorization, context, supply_authorization_mailer = SupplyAuthorizationMailer)
@@ -11,6 +11,8 @@ class SupplyAuthorizationEmailSender
   end
 
   def deliver
+    return unless supply_authorization.present?
+
     if supply_authorization.annulled?
       deliver_annulment
     else
