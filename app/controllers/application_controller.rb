@@ -26,7 +26,9 @@ class ApplicationController < ActionController::Base
 
     pdf_instance = PDFKit.new render_to_string(:partial => partial_name, :locals => locals)
 
-    pdf_instance.stylesheets += stylesheets if Rails.env.production?
+    if Rails.env.production? || Rails.env.staging?
+      pdf_instance.stylesheets += stylesheets
+    end
 
     pdf_instance.to_pdf
   end
