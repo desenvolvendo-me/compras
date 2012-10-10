@@ -36,9 +36,11 @@ class ResourceAnnulsController < CrudController
   def create_resource(object)
     validate_parent!(object)
 
-    annul(object)
+    object.transaction do
+      annul(object)
 
-    super
+      super
+    end
   end
 
   def end_of_association_chain
