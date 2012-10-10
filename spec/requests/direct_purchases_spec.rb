@@ -434,7 +434,7 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Gerar Compra Direta editada com sucesso.'
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
     within_records do
       page.find('a').click

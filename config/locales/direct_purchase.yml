@@ -5,7 +5,7 @@ pt-BR:
   activerecord:
     models:
       direct_purchase:
-        one: "Gerar Compra Direta"
+        one: "Compra Direta"
         other: "Compras Diretas"
 
     attributes:

@@ -73,7 +73,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anular'
 
-    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anular Compra Direta 1/2012"
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '01/10/2012'
@@ -85,7 +85,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anulação'
 
-    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anulação da Compra Direta 1/2012"
 
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data', :with => '01/10/2012'
@@ -106,7 +106,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anular'
 
-    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anular Compra Direta 1/2012"
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '01/10/2012'
@@ -118,7 +118,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anulação'
 
-    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anulação da Compra Direta 1/2012"
 
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data', :with => '01/10/2012'
@@ -149,7 +149,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anular'
 
-    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anular Compra Direta 1/2012"
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '01/10/2012'
@@ -161,7 +161,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anulação'
 
-    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anulação da Compra Direta 1/2012"
 
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data', :with => '01/10/2012'
@@ -205,7 +205,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anular'
 
-    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anular Compra Direta 1/2012"
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '01/10/2012'
@@ -217,7 +217,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anulação'
 
-    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anulação da Compra Direta 1/2012"
 
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data', :with => '01/10/2012'
@@ -270,7 +270,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anular'
 
-    expect(page).to have_content "Anular Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anular Compra Direta 1/2012"
 
     fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
     fill_in 'Data', :with => '01/10/2012'
@@ -282,7 +282,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_link 'Anulação'
 
-    expect(page).to have_content "Anulação da Gerar Compra Direta 1/2012"
+    expect(page).to have_content "Anulação da Compra Direta 1/2012"
 
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     expect(page).to have_field 'Data', :with => '01/10/2012'
