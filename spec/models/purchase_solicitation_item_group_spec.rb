@@ -224,4 +224,11 @@ describe PurchaseSolicitationItemGroup do
       end
     end
   end
+
+  describe "#change_status!" do
+    it "changes the status of the group" do
+      subject.should_receive(:update_column).with(:status, 'foo')
+      subject.change_status!('foo')
+    end
+  end
 end

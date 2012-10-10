@@ -1482,4 +1482,102 @@ feature "DirectPurchases" do
       expect(page).to have_field 'Valor total dos itens', :with => '3.000,00'
     end
   end
+
+  scenario "it updates the status of the item group to 'in purchase process'
+            when direct purchase is created" do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    LegalReference.make!(:referencia)
+    Creditor.make!(:wenderson_sa)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    LicitationObject.make!(:ponte)
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    ModalityLimit.make!(:modalidade_de_compra_ponte)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+        click_record 'Agrupamento de antivirus'
+      end
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos',  :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Agrupamento de antivirus'
+
+    expect(page).to have_select "Situação", :selected => 'Em processo de compra'
+  end
+
+  scenario "it updates the status of the item group to 'in purchase process'
+            when direct purchase is updated" do
+
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    DirectPurchase.make!(:compra)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link '1/2012'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    click_button 'Salvar'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Agrupamento de antivirus'
+
+    expect(page).to have_select "Situação", :selected => 'Em processo de compra'
+  end
+
+  scenario "it updates the status of the item group back to 'pending'
+            when it's dissociated from a direct purchase" do
+    new_item_group = PurchaseSolicitationItemGroup.make!(:office)
+    item_group = PurchaseSolicitationItemGroup.make!(:antivirus,
+                                                     :status => 'in_purchase_process')
+    DirectPurchase.make!(:compra,
+                         :purchase_solicitation_item_group => item_group)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link '1/2012'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+        click_record 'Agrupamento de office'
+      end
+    end
+
+    click_button 'Salvar'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Agrupamento de antivirus'
+
+    expect(page).to have_select "Situação", :selected => 'Pendente'
+  end
 end

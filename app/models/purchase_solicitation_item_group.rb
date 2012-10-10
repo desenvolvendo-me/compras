@@ -78,6 +78,10 @@ class PurchaseSolicitationItemGroup < Compras::Model
     purchase_solicitation_item_group_materials.map(&:material_id)
   end
 
+  def change_status!(status)
+    update_column(:status, status)
+  end
+
   private
 
   def purchase_solicitation_status
