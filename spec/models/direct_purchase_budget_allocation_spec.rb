@@ -29,11 +29,21 @@ describe DirectPurchaseBudgetAllocation do
 
   it 'should calculate the total value of items' do
     subject.stub(:items).and_return([
-      double(:estimated_total_price => 10),
-      double(:estimated_total_price => 20),
-      double(:estimated_total_price => 15)
+      double(:estimated_total_price => 10, :marked_for_destruction? => false),
+      double(:estimated_total_price => 20, :marked_for_destruction? => false),
+      double(:estimated_total_price => 15, :marked_for_destruction? => false)
     ])
 
     expect(subject.total_items_value).to eq 45
+  end
+
+  it 'should calculate the total value of items when an item is marked for destruction' do
+    subject.stub(:items).and_return([
+      double(:estimated_total_price => 10, :marked_for_destruction? => false),
+      double(:estimated_total_price => 20, :marked_for_destruction? => true),
+      double(:estimated_total_price => 15, :marked_for_destruction? => false)
+    ])
+
+    expect(subject.total_items_value).to eq 25
   end
 end
