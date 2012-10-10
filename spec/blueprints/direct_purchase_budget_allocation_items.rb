@@ -25,3 +25,10 @@ DirectPurchaseBudgetAllocationItem.blueprint(:kaspersky) do
   quantity { 1 }
   unit_price { 9000.0 }
 end
+
+DirectPurchaseBudgetAllocationItem.blueprint(:office) do
+  material { Material.make!(:office) }
+  brand { "MS Office" }
+  quantity { 10 }
+  unit_price { 300.0 }
+end

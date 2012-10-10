@@ -1441,4 +1441,45 @@ feature "DirectPurchases" do
     click_link '2/2012'
     expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
   end
+
+  scenario 'calculate total value of items when update' do
+    DirectPurchase.make!(
+      :compra,
+      :direct_purchase_budget_allocations => [
+        DirectPurchaseBudgetAllocation.make!(
+          :alocacao_compra,
+          :items => [
+            DirectPurchaseBudgetAllocationItem.make!(:compra_direta_item),
+            DirectPurchaseBudgetAllocationItem.make!(:office)
+          ]
+        )
+      ]
+    )
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '3.600,00'
+
+      within 'div.direct-purchase-budget-allocation:first' do
+        within '.item:first' do
+          click_button 'Remover Item'
+        end
+      end
+    end
+
+    click_button 'Salvar'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '3.000,00'
+    end
+  end
 end
