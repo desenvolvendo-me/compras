@@ -8,11 +8,11 @@ require 'app/business/purchase_solicitation_budget_allocation_item_status_change
 describe DirectPurchaseAnnulment do
   subject do
     DirectPurchaseAnnulment.new(
-      direct_purchase,
-      resource_annul,
-      context,
-      item_group_annulment,
-      email_sender
+      :direct_purchase => direct_purchase,
+      :resource_annul => resource_annul,
+      :context => context,
+      :item_group_annulment => item_group_annulment,
+      :email_sender => email_sender
     )
   end
 

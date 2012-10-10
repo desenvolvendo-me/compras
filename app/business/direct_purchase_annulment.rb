@@ -6,16 +6,13 @@ class DirectPurchaseAnnulment
            :supply_authorization,
            :to => :direct_purchase
 
-  def initialize(direct_purchase,
-                 resource_annul,
-                 context,
-                 item_group_annulment = PurchaseSolicitationItemGroupAnnulment,
-                 email_sender = SupplyAuthorizationEmailSender)
-    self.direct_purchase = direct_purchase
-    self.item_group_annulment = item_group_annulment
-    self.resource_annul = resource_annul
-    self.context = context
-    self.email_sender = email_sender
+  def initialize(options = {})
+    self.direct_purchase = options.fetch(:direct_purchase)
+    self.resource_annul  = options.fetch(:resource_annul)
+    self.context         = options.fetch(:context)
+
+    self.item_group_annulment = options.fetch(:item_group_annulment) { PurchaseSolicitationItemGroupAnnulment }
+    self.email_sender         = options.fetch(:email_sender) { SupplyAuthorizationEmailSender }
   end
 
   def annul
