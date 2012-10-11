@@ -5,12 +5,12 @@ end
 
 DirectPurchaseBudgetAllocation.blueprint(:alocacao_compra_extra) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
-  items { [DirectPurchaseBudgetAllocationItem.make!(:compra_direta_item)] }
+  items { [DirectPurchaseBudgetAllocationItem.make!(:compra_direta_item, :brand => 'Norton extra')] }
 end
 
 DirectPurchaseBudgetAllocation.blueprint(:alocacao_compra_engenharia) do
   budget_allocation { BudgetAllocation.make!(:alocacao) }
-  items { [DirectPurchaseBudgetAllocationItem.make!(:compra_direta_item)] }
+  items { [DirectPurchaseBudgetAllocationItem.make!(:compra_direta_item, :brand => 'Norton para engenharia')] }
 end
 
 DirectPurchaseBudgetAllocation.blueprint(:valores_proximo_ao_limite) do
