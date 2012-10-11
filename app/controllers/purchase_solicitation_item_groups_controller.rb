@@ -2,6 +2,7 @@ class PurchaseSolicitationItemGroupsController < CrudController
   actions :all, :except => :destroy
 
   has_scope :not_annulled, :type => :boolean
+  has_scope :pending, :type => :boolean
 
   def new
     object = build_resource

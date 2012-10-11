@@ -921,8 +921,9 @@ feature "DirectPurchases" do
     expect(page).to have_button 'Enviar autorização de fornecimento por e-mail'
   end
 
-  scenario 'should show only purchase_solicitation_item_group not annulled' do
+  scenario 'should show only purchase_solicitation_item_group not annulled and pending' do
     PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:office, :status => PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
 
     ResourceAnnul.make!(:anulacao_generica,
                         :annullable => PurchaseSolicitationItemGroup.make!(:reparo_2013))
@@ -937,6 +938,7 @@ feature "DirectPurchases" do
 
         within_records do
           expect(page).to_not have_content 'Agrupamento de reparo 2013'
+          expect(page).to_not have_content 'Agrupamento de office'
           expect(page).to have_content 'Agrupamento de antivirus'
         end
       end

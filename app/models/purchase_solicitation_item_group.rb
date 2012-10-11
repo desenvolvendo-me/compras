@@ -7,7 +7,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   attr_modal :description
 
-  has_enumeration_for :status, :with => PurchaseSolicitationItemGroupStatus
+  has_enumeration_for :status, :with => PurchaseSolicitationItemGroupStatus, :create_scopes => true
 
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
   has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials
