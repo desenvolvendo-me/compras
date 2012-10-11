@@ -4,5 +4,5 @@
   <%= f.button :submit, 'Apurar' if f.object.persisted? %>
   <%= annul_link(:param_name => 'price_collection_id') %>
   <%= f.button :submit unless f.object.annulled? %>
-  <%= f.button :cancel %>
+  <%= f.button :back %>
 </div>

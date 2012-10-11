@@ -3,6 +3,6 @@
   <% if f.object.persisted? && f.object.company? %>
     <%= link_to('CRC', registration_cadastral_certificates_path(:creditor_id => resource.id), :class => "button primary") %>
   <% end %>
-  <%= f.button :cancel %>
+  <%= f.button :back %>
   <%= f.button :destroy if f.object.persisted? %>
 </div>

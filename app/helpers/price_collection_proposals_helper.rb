@@ -6,11 +6,11 @@ module PriceCollectionProposalsHelper
     content_tag :h2, title
   end
 
-  def proposal_cancel_button(form)
+  def proposal_back_button(form)
     if current_user.creditor?
-      form.button :cancel
+      form.button :back
     else
-      form.button :cancel, :href => edit_price_collection_path(resource.price_collection)
+      form.button :back, :href => edit_price_collection_path(resource.price_collection)
     end
   end
 end

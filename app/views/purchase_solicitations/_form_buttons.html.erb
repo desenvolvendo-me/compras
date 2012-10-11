@@ -2,5 +2,5 @@
   <%= annul_link %>
   <%= f.button :submit if f.object.editable? %>
   <%= link_to 'Liberações', purchase_solicitation_liberations_path(:purchase_solicitation_id => resource.id), :class => 'button primary' %>
-  <%= f.button :cancel %>
+  <%= f.button :back %>
 </div>

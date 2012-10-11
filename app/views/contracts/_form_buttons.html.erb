@@ -2,6 +2,6 @@
   <%= link_to 'Rescisões', contract_terminations_path(:contract_id => f.object.id), :class => 'button primary' if f.object.persisted? %>
   <%= link_to 'Históricos de Ocorrências Contratuais', occurrence_contractual_historics_path(:contract_id => f.object.id), :class => 'button primary' if f.object.persisted? %>
   <%= f.button :submit %>
-  <%= f.button :cancel %>
+  <%= f.button :back %>
   <%= f.button :destroy if f.object.persisted? %>
 </div>

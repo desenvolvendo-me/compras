@@ -93,7 +93,7 @@ module ApplicationHelper
     end
   end
 
-  def cancel_link
+  def back_link
     link_to 'voltar', :back
   end
 

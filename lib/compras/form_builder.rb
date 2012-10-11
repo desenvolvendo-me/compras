@@ -59,14 +59,14 @@ module Compras
       template.link_to value, options.delete(:href), options
     end
 
-    def cancel_button(value = nil, options = {})
+    def back_button(value = nil, options = {})
       value, options = nil, value if value.is_a?(Hash)
 
-      value ||= template.translate('.cancel', :cascade => true)
+      value ||= template.translate('.back', :cascade => true)
 
       options[:class]   = "#{options[:class].join(" ")} secondary".strip
       options[:href]  ||= template.smart_collection_url
-      options[:id]    ||= "#{object_name}_cancel"
+      options[:id]    ||= "#{object_name}_back"
 
       template.link_to value, options.delete(:href), options
     end

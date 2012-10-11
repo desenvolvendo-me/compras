@@ -1,5 +1,5 @@
 <div class="buttons">
   <%= annul_link %>
   <%= f.button :submit if f.object.editable_by?(current_user) %>
-  <%= proposal_cancel_button(f) %>
+  <%= proposal_back_button(f) %>
 </div>
