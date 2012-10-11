@@ -6,7 +6,6 @@ class AdministrativeProcessModality < EnumerateIt::Base
                    :competition_for_constructions_and_engineering_services,
                    :competition_for_purchases_and_services,
                    :presence_trading,
-                   :electronic_trading,
                    :auction,
                    :exemption_for_constructions_and_engineering_services,
                    :exemption_for_purchases_and_services,
