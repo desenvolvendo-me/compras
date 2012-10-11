@@ -62,7 +62,7 @@ class DirectPurchase < Compras::Model
 
   before_validation :set_total_allocations_items_value
 
-  orderize :year
+  orderize [:year, :direct_purchase]
   filterize
 
   def to_s
