@@ -1582,4 +1582,25 @@ feature "DirectPurchases" do
 
     expect(page).to have_select "Situação", :selected => 'Pendente'
   end
+
+  scenario "fulfilling item groups when a supply authorization is created" do
+    item_group = PurchaseSolicitationItemGroup.make!(:antivirus,
+                                                     :status => 'in_purchase_process')
+    DirectPurchase.make!(:compra,
+                         :purchase_solicitation_item_group => item_group)
+
+    navigate 'Compras e Licitações > Gerar Compra Direta'
+
+    click_link '1/2012'
+
+    click_button 'Gerar autorização de fornecimento'
+
+    click_link 'voltar'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+
+    click_link 'Agrupamento de antivirus'
+
+    expect(page).to have_select "Situação", :selected => 'Atendido'
+  end
 end

@@ -14,6 +14,7 @@ class SupplyAuthorizationGenerator
       direct_purchase_object.supply_authorization
     else
       attend_purchase_solicitation
+      direct_purchase_object.fulfill_item_group
       authorize!
     end
   end

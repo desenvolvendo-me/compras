@@ -249,4 +249,19 @@ describe DirectPurchase do
       expect(subject.annulled?).to be false
     end
   end
+
+  describe "#fulfill_item_group" do
+    let (:item_group) { double(:item_group) } 
+
+    it "fulfills the item group" do
+      subject.stub(:purchase_solicitation_item_group => item_group)
+
+      item_group.should_receive(:fulfill!)
+      subject.fulfill_item_group
+    end
+
+    it "returns nil if no item group is selected" do
+      expect(subject.fulfill_item_group).to be nil
+    end
+  end
 end

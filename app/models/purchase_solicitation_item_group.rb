@@ -84,6 +84,10 @@ class PurchaseSolicitationItemGroup < Compras::Model
     update_column(:status, status)
   end
 
+  def fulfill!
+    change_status!(PurchaseSolicitationItemGroupStatus::FULFILLED)
+  end
+
   private
 
   def purchase_solicitation_status

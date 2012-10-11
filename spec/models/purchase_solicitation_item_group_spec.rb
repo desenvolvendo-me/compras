@@ -231,4 +231,11 @@ describe PurchaseSolicitationItemGroup do
       subject.change_status!('foo')
     end
   end
+
+  describe "#fulfill!" do
+    it "changes the status to 'FULFILLED'" do
+      subject.should_receive(:update_column).with(:status, 'fulfilled')
+      subject.fulfill!
+    end
+  end
 end

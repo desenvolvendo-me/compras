@@ -95,6 +95,12 @@ class DirectPurchase < Compras::Model
     direct_purchase_budget_allocations.collect(&:total_items_value).sum
   end
 
+  def fulfill_item_group
+    return unless purchase_solicitation_item_group.present?
+
+    purchase_solicitation_item_group.fulfill!
+  end
+
   protected
 
   def must_have_at_least_budget_allocation
