@@ -1,31 +1,33 @@
 require 'unit_helper'
-require 'ostruct'
 require 'enumerate_it'
 require 'app/enumerations/purchase_solicitation_item_group_status'
 require 'app/business/purchase_solicitation_item_group_process'
 
 describe PurchaseSolicitationItemGroupProcess do
-  describe "#set_item_group" do
+  describe "#update_item_group_status" do
 
-    let (:process) { OpenStruct.new } 
-    let (:item_group) { double(:item_group, :change_status! => nil) } 
+    let (:process) { double(:process) }
+    let (:item_group) { double(:item_group,
+                               :change_status! => nil,
+                               :pending? => true) }
 
     subject do
       PurchaseSolicitationItemGroupProcess.new(process)
     end
 
-    before do
-      process.stub(:save! => true)
-    end
-
     it "updates the item group status to 'in_purchase_process'" do
+      process.stub(:purchase_solicitation_item_group => nil)
+
       item_group.should_receive(:change_status!).with(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
-      subject.set_item_group(item_group)
+      subject.update_item_group_status(item_group)
     end
 
-    it "sets the item group of the process" do
-      subject.set_item_group(item_group)
-      expect(process.purchase_solicitation_item_group).to eq item_group
+    it "raises an error if the new item group status is not 'Pending'" do
+      item_group.stub(:pending? => false)
+
+      expect {
+        subject.update_item_group_status(item_group)
+      }.to raise_error(ArgumentError, "Item group status should be 'Pending'")
     end
 
     context "process already has a item group" do
@@ -34,7 +36,7 @@ describe PurchaseSolicitationItemGroupProcess do
         process.stub(:purchase_solicitation_item_group => old_group)
 
         old_group.should_receive(:change_status!).with(PurchaseSolicitationItemGroupStatus::PENDING)
-        subject.set_item_group(item_group)
+        subject.update_item_group_status(item_group)
       end
     end
   end

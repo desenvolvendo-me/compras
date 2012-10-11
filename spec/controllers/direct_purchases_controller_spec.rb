@@ -42,7 +42,7 @@ describe DirectPurchasesController do
     it 'updates the status of the item group through PurchaseSoliciationItemGroupProcess' do
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
-      PurchaseSolicitationItemGroupProcess.any_instance.should_receive(:set_item_group).with(item_group)
+      PurchaseSolicitationItemGroupProcess.any_instance.should_receive(:update_item_group_status).with(item_group)
       post :create, :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
     end
   end
@@ -70,7 +70,7 @@ describe DirectPurchasesController do
       it "should set the new item_group throught a PurchaseSolicitationItemGroupProcess" do
         item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
-        PurchaseSolicitationItemGroupProcess.any_instance.should_receive(:set_item_group).with(item_group)
+        PurchaseSolicitationItemGroupProcess.any_instance.should_receive(:update_item_group_status).with(item_group)
         put :update, :id => direct_purchase.id,
                      :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
       end

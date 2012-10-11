@@ -3,18 +3,21 @@ class PurchaseSolicitationItemGroupProcess
     @process = process
   end
 
-  def set_item_group(purchase_solicitation_item_group)
+  def update_item_group_status(purchase_solicitation_item_group)
+    validate_pending_status(purchase_solicitation_item_group)
+
     unless @process.purchase_solicitation_item_group.nil?
       change_status(@process.purchase_solicitation_item_group, pending_status)
     end
-
-    @process.purchase_solicitation_item_group = purchase_solicitation_item_group
-    @process.save!
 
     change_status(purchase_solicitation_item_group, in_purchase_status)
   end
 
   private
+
+  def validate_pending_status(item_group)
+    raise ArgumentError, "Item group status should be 'Pending'" unless item_group.pending?
+  end
 
   def change_status(item_group, status)
     item_group.change_status!(status)

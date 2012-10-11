@@ -27,9 +27,6 @@ class DirectPurchasesController < CrudController
       return
     end
 
-    set_purchase_solicitation(resource, params[:direct_purchase][:purchase_solicitation_id])
-    set_item_group(resource, params[:direct_purchase][:purchase_solicitation_item_group_id])
-
     super
   end
 
@@ -39,12 +36,21 @@ class DirectPurchasesController < CrudController
     object.transaction do
       if params[:direct_purchase]
         set_purchase_solicitation(object, params[:direct_purchase][:purchase_solicitation_id])
-        set_item_group(object, params[:direct_purchase][:purchase_solicitation_item_group_id])
+        update_item_group_status(object, params[:direct_purchase][:purchase_solicitation_item_group_id])
       end
 
       super
 
       PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
+    end
+  end
+
+  def update_resource(object, attributes)
+    object.transaction do
+      set_purchase_solicitation(object, params[:direct_purchase][:purchase_solicitation_id])
+      update_item_group_status(object, params[:direct_purchase][:purchase_solicitation_item_group_id])
+
+      super
     end
   end
 
@@ -58,11 +64,11 @@ class DirectPurchasesController < CrudController
     purchase_solicitation_process.set_solicitation(purchase_solicitation)
   end
 
-  def set_item_group(direct_purchase, item_group_id)
+  def update_item_group_status(direct_purchase, item_group_id)
     return unless item_group_id.present?
 
     item_group = PurchaseSolicitationItemGroup.find(item_group_id)
     item_group_process = PurchaseSolicitationItemGroupProcess.new(direct_purchase)
-    item_group_process.set_item_group(item_group)
+    item_group_process.update_item_group_status(item_group)
   end
 end
