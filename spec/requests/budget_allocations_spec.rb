@@ -16,7 +16,7 @@ feature "BudgetAllocations" do
     Capability.make!(:reforma)
     BudgetAllocationType.make!(:administrativa)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
 
@@ -81,7 +81,7 @@ feature "BudgetAllocations" do
   scenario 'create a new budget_allocation with 2 as code when is from same descriptor' do
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
 
@@ -147,7 +147,7 @@ feature "BudgetAllocations" do
     Descriptor.make!(:detran_2012)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
 
@@ -210,7 +210,7 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should apply month value based on kind and value' do
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
 
@@ -241,7 +241,7 @@ feature "BudgetAllocations" do
     Capability.make!(:construcao)
     BudgetAllocationType.make!(:presidencial)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -309,7 +309,7 @@ feature "BudgetAllocations" do
   it 'should show selected function on subfunction modal' do
     Subfunction.make!(:geral)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
 
@@ -330,7 +330,7 @@ feature "BudgetAllocations" do
   it 'should not have the subfunction disabled when editing budget_allocation with subfunction' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -344,7 +344,7 @@ feature "BudgetAllocations" do
   it 'should disable and empty the subfunction when the function is removed' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -365,7 +365,7 @@ feature "BudgetAllocations" do
     Subfunction.make!(:geral)
     Function.make!(:execucao)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
 
@@ -382,7 +382,7 @@ feature "BudgetAllocations" do
   scenario 'destroy an existent budget_allocation' do
     BudgetAllocation.make!(:alocacao_extra)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     within_records do
       page.find('a').click
@@ -398,7 +398,7 @@ feature "BudgetAllocations" do
   scenario 'validates uniqueness of name' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
 
@@ -417,7 +417,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Filtrar Dotações Orçamentarias'
 
@@ -433,7 +433,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Filtrar Dotações Orçamentarias'
 
@@ -449,7 +449,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Filtrar Dotações Orçamentarias'
 
@@ -465,7 +465,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Filtrar Dotações Orçamentarias'
 
@@ -481,7 +481,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Filtrar Dotações Orçamentarias'
 
@@ -497,7 +497,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Filtrar Dotações Orçamentarias'
 
@@ -513,7 +513,7 @@ feature "BudgetAllocations" do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
-    navigate 'Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Filtrar Dotações Orçamentarias'
 

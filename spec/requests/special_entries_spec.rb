@@ -9,7 +9,7 @@ feature "SpecialEntries" do
   scenario 'try create with a existing name' do
     SpecialEntry.make!(:example)
 
-    navigate 'Contabilidade > Comum > Inscrições Especiais'
+    navigate 'Comum > Inscrições Especiais'
 
     click_link 'Criar Inscrição Especial'
 
@@ -21,7 +21,7 @@ feature "SpecialEntries" do
   end
 
   scenario 'create a new special_entry' do
-    navigate 'Contabilidade > Comum > Inscrições Especiais'
+    navigate 'Comum > Inscrições Especiais'
 
     click_link 'Criar Inscrição Especial'
 
@@ -39,7 +39,7 @@ feature "SpecialEntries" do
   scenario 'update an existent special_entry' do
     SpecialEntry.make!(:example)
 
-    navigate 'Contabilidade > Comum > Inscrições Especiais'
+    navigate 'Comum > Inscrições Especiais'
 
     click_link 'Tal'
 
@@ -57,7 +57,7 @@ feature "SpecialEntries" do
   scenario 'destroy an existent special_entry' do
     SpecialEntry.make!(:example)
 
-    navigate 'Contabilidade > Comum > Inscrições Especiais'
+    navigate 'Comum > Inscrições Especiais'
 
     click_link 'Tal'
 

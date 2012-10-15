@@ -7,7 +7,7 @@ feature "ApplicationCodes" do
   end
 
   scenario 'create a new application_code' do
-    navigate 'Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
 
     click_link 'Criar Código de Aplicação'
 
@@ -35,7 +35,7 @@ feature "ApplicationCodes" do
     scenario 'should be invalid if with same variable'do
       ApplicationCode.make!(:geral)
 
-      navigate 'Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
+      navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
 
       click_link 'Criar Código de Aplicação'
 
@@ -49,7 +49,7 @@ feature "ApplicationCodes" do
     scenario 'should be invalid if with other variable'do
       ApplicationCode.make!(:geral)
 
-      navigate 'Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
+      navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
 
       click_link 'Criar Código de Aplicação'
       check 'Variável'
@@ -65,7 +65,7 @@ feature "ApplicationCodes" do
   scenario 'update an existent application_code' do
     ApplicationCode.make!(:geral)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
 
     click_link 'Geral'
 
@@ -93,7 +93,7 @@ feature "ApplicationCodes" do
   scenario 'destroy an existent application_code' do
     ApplicationCode.make!(:geral)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
 
     click_link 'Geral'
 

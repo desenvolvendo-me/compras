@@ -11,7 +11,7 @@ feature 'PurchaseSolicitationAnnul' do
   end
 
   scenario 'should not have a annul link when was creating a new purchase_solicitation_item_group' do
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
@@ -22,7 +22,7 @@ feature 'PurchaseSolicitationAnnul' do
   scenario 'should see the default values on the screen' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link "Agrupamento de reparo 2013"
 
@@ -40,7 +40,7 @@ feature 'PurchaseSolicitationAnnul' do
   scenario 'annul an existent purchase_solicitation_item_group' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de reparo 2013'
 
@@ -71,7 +71,7 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to_not have_link 'Apagar'
     expect(page).to have_link 'Voltar'
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Geral > Solicitações de Compra'
 
     click_link '1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
 
@@ -90,7 +90,7 @@ feature 'PurchaseSolicitationAnnul' do
                                           AdministrativeProcess.make!(:compra_de_cadeiras)
                                         ])
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 

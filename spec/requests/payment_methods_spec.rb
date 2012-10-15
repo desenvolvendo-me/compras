@@ -7,7 +7,7 @@ feature "PaymentMethods" do
   end
 
   scenario 'create a new payment_method' do
-    navigate 'Compras e Licitações > Cadastros Gerais > Formas de Pagamento'
+    navigate 'Cadastros Gerais > Formas de Pagamento'
 
     click_link 'Criar Forma de Pagamento'
 
@@ -25,7 +25,7 @@ feature "PaymentMethods" do
   scenario 'update an existent payment_method' do
     PaymentMethod.make!(:dinheiro)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Formas de Pagamento'
+    navigate 'Cadastros Gerais > Formas de Pagamento'
 
     click_link 'Dinheiro'
 
@@ -43,7 +43,7 @@ feature "PaymentMethods" do
   scenario 'destroy an existent payment_method' do
     PaymentMethod.make!(:dinheiro)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Formas de Pagamento'
+    navigate 'Cadastros Gerais > Formas de Pagamento'
 
     click_link 'Dinheiro'
 
@@ -57,7 +57,7 @@ feature "PaymentMethods" do
   scenario 'validate presence of description' do
     PaymentMethod.make!(:dinheiro)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Formas de Pagamento'
+    navigate 'Cadastros Gerais > Formas de Pagamento'
 
     click_link 'Criar Forma de Pagamento'
 

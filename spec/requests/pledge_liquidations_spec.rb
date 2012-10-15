@@ -9,7 +9,7 @@ feature "PledgeLiquidations" do
   scenario 'create a new pledge_liquidation' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -57,7 +57,7 @@ feature "PledgeLiquidations" do
 
 
   scenario 'set sequencial parcel number' do
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -85,7 +85,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'should validate total parcels sum' do
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -107,7 +107,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'should replicate value to parcels tab' do
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -121,7 +121,7 @@ feature "PledgeLiquidations" do
   scenario 'replicate value to parcels tab should not have erros' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -151,7 +151,7 @@ feature "PledgeLiquidations" do
   scenario 'when fill/clear pledge should fill/clear delegateds fields' do
     pledge = Pledge.make!(:empenho_com_dois_vencimentos)
 
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -179,7 +179,7 @@ feature "PledgeLiquidations" do
     pledge = Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link pledge_liquidation.to_s
 
@@ -211,7 +211,7 @@ feature "PledgeLiquidations" do
     Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenhos'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenhos'
 
     click_link pledge_liquidation.to_s
 
@@ -219,7 +219,7 @@ feature "PledgeLiquidations" do
   end
 
   scenario 'should not have a annul link when was creating a new solicitation' do
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenho'
 
     click_link 'Criar Liquidação de Empenho'
 
@@ -233,7 +233,7 @@ feature "PledgeLiquidations" do
       liquidation_2012 = PledgeLiquidation.make!(:empenho_2012)
       liquidation_other = PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
 
-      navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+      navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenho'
 
       click_link 'Filtrar Liquidações de Empenhos'
 
@@ -253,7 +253,7 @@ feature "PledgeLiquidations" do
       liquidation_2012 = PledgeLiquidation.make!(:empenho_2012)
       liquidation_other = PledgeLiquidation.make!(:liquidacao_para_dois_vencimentos)
 
-      navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+      navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenho'
 
       click_link 'Filtrar Liquidações de Empenhos'
 
@@ -269,7 +269,7 @@ feature "PledgeLiquidations" do
       liquidation_2012 = PledgeLiquidation.make!(:empenho_2012)
       liquidation_other = PledgeLiquidation.make!(:empenho_em_15_dias)
 
-      navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+      navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenho'
 
       click_link 'Filtrar Liquidações de Empenhos'
 

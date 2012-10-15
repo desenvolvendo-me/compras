@@ -11,7 +11,7 @@ feature "LicitationProcesses" do
     LicitationProcessLot.make!(:lote, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.first])
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -40,7 +40,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation with equalized result' do
     licitation_process = LicitationProcess.make!(:apuracao_global_empatou)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -77,7 +77,7 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => true,
                                                  :disqualify_by_documentation_problem => true)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -107,7 +107,7 @@ feature "LicitationProcesses" do
     licitation_process = LicitationProcess.make!(:apuracao_global_sem_documentos, :consider_law_of_proposals => false,
                                                  :disqualify_by_documentation_problem => true)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -129,7 +129,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company without consider law of proposals' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => false)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -165,7 +165,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company and consider law of proposals' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company_2, :consider_law_of_proposals => true)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -201,7 +201,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company and consider law of proposals and make a new proposal' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -277,7 +277,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation between a small company and a big company and dont make a new proposal' do
     licitation_process = LicitationProcess.make!(:apuracao_global_small_company, :consider_law_of_proposals => true)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -351,7 +351,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation when type of calculation is global' do
     licitation_process = LicitationProcess.make!(:apuracao_global)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -411,7 +411,7 @@ feature "LicitationProcesses" do
     LicitationProcessLot.make!(:lote_antivirus, :licitation_process => licitation_process,
                                :administrative_process_budget_allocation_items => [licitation_process.items.second])
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -493,7 +493,7 @@ feature "LicitationProcesses" do
   scenario 'generate calculation when type of calculation is by item' do
     licitation_process = LicitationProcess.make!(:apuracao_por_itens)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -553,7 +553,7 @@ feature "LicitationProcesses" do
   scenario 'button Administrative Process should take user to the administrative process view' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
     within_records do
       page.find('a').click
     end
@@ -569,7 +569,7 @@ feature "LicitationProcesses" do
   scenario "button Back to Listings should take user to licitation_process#index" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
     within_records do
       page.find('a').click
     end
@@ -588,7 +588,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -764,7 +764,7 @@ feature "LicitationProcesses" do
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     JudgmentForm.make!(:por_item_com_menor_preco)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -795,7 +795,7 @@ feature "LicitationProcesses" do
     Material.make!(:arame_farpado)
     Indexer.make!(:selic)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -921,7 +921,7 @@ feature "LicitationProcesses" do
     AdministrativeProcess.make!(:compra_com_itens_2)
     Indexer.make!(:xpto)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       click_link '1/2013'
@@ -971,7 +971,7 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio)
     Material.make!(:antivirus)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1005,7 +1005,7 @@ feature "LicitationProcesses" do
   scenario 'budget allocation with total of items diferent than value should not be saved' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1032,7 +1032,7 @@ feature "LicitationProcesses" do
   scenario 'calculating total of items via javascript' do
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1069,7 +1069,7 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     DocumentType.make!(:oficial)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1118,7 +1118,7 @@ feature "LicitationProcesses" do
   scenario "count link should not be available when envelope opening date is not the current date" do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1132,7 +1132,7 @@ feature "LicitationProcesses" do
   scenario 'cannot show update and nested buttons when the publication is (extension, edital, edital_rectification)' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_publicacao_cancelada)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1155,7 +1155,7 @@ feature "LicitationProcesses" do
   scenario "should not have link to lots when creating a new licitation process" do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1169,7 +1169,7 @@ feature "LicitationProcesses" do
   scenario "should brings some filled fields when creating a new licitatoin process" do
     AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1188,7 +1188,7 @@ feature "LicitationProcesses" do
   scenario 'budget allocation with quantity empty and total item value should have 0 as unit value' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1216,7 +1216,7 @@ feature "LicitationProcesses" do
     Material.make!(:antivirus)
     Indexer.make!(:xpto)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -1256,7 +1256,7 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador, :process => 2)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     within_records do
       expect(page).to have_css 'a', :count => 2
@@ -1285,7 +1285,7 @@ feature "LicitationProcesses" do
     price_registration = PriceRegistration.make!(:registro_de_precos,
                                                  :licitation_process => licitation_process)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
 
     click_link '1/2012'
 
@@ -1297,7 +1297,7 @@ feature "LicitationProcesses" do
   scenario 'budget allocation items should have a sequential item' do
     administrative_process = AdministrativeProcess.make!(:compra_de_cadeiras)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click

@@ -14,7 +14,7 @@ feature 'PledgeLiquidationAnnuls' do
     pledge = Pledge.make!(:empenho)
     pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
 
-    navigate 'Contabilidade > Execução > Empenho > Liquidações de Empenho'
+    navigate 'Outros > Contabilidade > Execução > Empenho > Liquidações de Empenho'
 
     click_link pledge_liquidation.to_s
 

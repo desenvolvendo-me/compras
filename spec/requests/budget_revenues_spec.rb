@@ -11,7 +11,7 @@ feature "BudgetRevenues" do
     RevenueNature.make!(:imposto)
     Capability.make!(:reforma)
 
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link 'Criar Receita Orçamentaria'
 
@@ -54,7 +54,7 @@ feature "BudgetRevenues" do
     BudgetRevenue.make!(:reforma)
     RevenueNature.make!(:imposto_sobre_renda)
 
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link 'Criar Receita Orçamentaria'
 
@@ -97,7 +97,7 @@ feature "BudgetRevenues" do
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:reforma)
 
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link 'Criar Receita Orçamentaria'
 
@@ -137,7 +137,7 @@ feature "BudgetRevenues" do
   scenario 'fill/clear revenue_natured docket when select revenue_nature' do
     RevenueNature.make!(:imposto)
 
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link 'Criar Receita Orçamentaria'
 
@@ -154,7 +154,7 @@ feature "BudgetRevenues" do
   end
 
   scenario 'should apply month value based on kind and value' do
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link 'Criar Receita Orçamentaria'
 
@@ -179,7 +179,7 @@ feature "BudgetRevenues" do
     RevenueNature.make!(:imposto_sobre_renda)
     Capability.make!(:construcao)
 
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link '1'
 
@@ -219,7 +219,7 @@ feature "BudgetRevenues" do
   scenario 'validate uniqueness of revenue_nature' do
     BudgetRevenue.make!(:reforma)
 
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link 'Criar Receita Orçamentaria'
 
@@ -237,7 +237,7 @@ feature "BudgetRevenues" do
   scenario 'destroy an existent budget_revenue' do
     BudgetRevenue.make!(:reforma)
 
-    navigate 'Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
 
     click_link '1'
 

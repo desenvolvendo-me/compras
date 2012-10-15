@@ -9,7 +9,7 @@ feature "CheckingAccountStructureInformations" do
   scenario 'create a new checking_account_structure' do
     CapabilitySource.make!(:imposto)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
+    navigate 'Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
 
     click_link 'Criar Identificação da Estrutura de Conta Corrente'
 
@@ -32,7 +32,7 @@ feature "CheckingAccountStructureInformations" do
     CheckingAccountStructureInformation.make!(:fonte_de_recursos)
     CapabilitySource.make!(:transferencia)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
+    navigate 'Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
 
     click_link 'Fonte de Recursos'
 
@@ -54,7 +54,7 @@ feature "CheckingAccountStructureInformations" do
   scenario 'destroy an existent checking_account_structure' do
     CheckingAccountStructureInformation.make!(:fonte_de_recursos)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
+    navigate 'Comum > Plano de Contas > Identificações da Estrutura de Conta Corrente'
 
     click_link 'Fonte de Recursos'
 

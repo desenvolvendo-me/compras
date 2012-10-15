@@ -9,7 +9,7 @@ feature "CapabilityDestinations" do
   scenario 'should edit status of capability_destination_detail in an existent capability_destination' do
     CapabilityDestination.make!(:linha_de_credito)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Destinações de Recursos'
 
     click_link 'Programa de linha de crédito'
 
@@ -31,7 +31,7 @@ feature "CapabilityDestinations" do
   scenario 'create a new capability_destination' do
     CapabilityAllocationDetail.make!(:educacao)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Destinações de Recursos'
 
     click_link 'Criar Destinação de Recursos'
 
@@ -75,7 +75,7 @@ feature "CapabilityDestinations" do
   scenario 'update an existent capability_destination' do
     CapabilityDestination.make!(:linha_de_credito)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Destinações de Recursos'
 
     click_link 'Programa de linha de crédito'
 
@@ -113,7 +113,7 @@ feature "CapabilityDestinations" do
   scenario 'destroy an existent capability_destination' do
     CapabilityDestination.make!(:linha_de_credito)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Destinações de Recursos'
 
     click_link 'Programa de linha de crédito'
 

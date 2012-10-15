@@ -17,7 +17,7 @@ feature "PriceRegistration" do
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
     BudgetStructure.make!(:secretaria_de_educacao_com_dois_responsaveis)
 
-    navigate 'Compras e Licitações > Registros de Preços'
+    navigate 'Geral > Registros de Preços'
 
     click_link 'Criar Registro de Preço'
 
@@ -128,7 +128,7 @@ feature "PriceRegistration" do
   scenario 'update an existent price_registration' do
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Compras e Licitações > Registros de Preços'
+    navigate 'Geral > Registros de Preços'
 
     click_link '1/2012'
 
@@ -209,7 +209,7 @@ feature "PriceRegistration" do
   scenario 'destroy an existent price-registration' do
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Compras e Licitações > Registros de Preços'
+    navigate 'Geral > Registros de Preços'
 
     click_link '1/2012'
 
@@ -226,7 +226,7 @@ feature "PriceRegistration" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Compras e Licitações > Registros de Preços'
+    navigate 'Geral > Registros de Preços'
 
     click_link 'Criar Registro de Preço'
 
@@ -249,7 +249,7 @@ feature "PriceRegistration" do
     scenario 'displaying winning bids on Fornecedores Vencedores tab' do
       licitation_process = LicitationProcess.make!(:apuracao_global)
 
-      navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+      navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
       click_link '1/2012'
       click_button 'Apurar'
       click_link 'voltar'
@@ -273,7 +273,7 @@ feature "PriceRegistration" do
       PriceRegistration.make!(:registro_de_precos,
                               :licitation_process => LicitationProcess.make!(:apuracao_global))
 
-      navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Licitatórios'
+      navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
       click_link '1/2012'
       click_button 'Apurar'
 
@@ -297,7 +297,7 @@ feature "PriceRegistration" do
     LicitationProcess.make!(:processo_licitatorio)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
-    navigate 'Compras e Licitações > Registros de Preços'
+    navigate 'Geral > Registros de Preços'
 
     click_link 'Criar Registro de Preço'
 

@@ -11,7 +11,7 @@ feature "LicitationCommissions" do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     click_link 'Criar Comissão de Licitação'
 
@@ -84,7 +84,7 @@ feature "LicitationCommissions" do
     Person.make!(:sobrinho)
     Person.make!(:wenderson)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     within_records do
       page.find('a').click
@@ -168,7 +168,7 @@ feature "LicitationCommissions" do
   scenario 'should clear publication_date when administractive act is clean' do
     LicitationCommission.make!(:comissao)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     within_records do
       page.find('a').click
@@ -190,7 +190,7 @@ feature "LicitationCommissions" do
   scenario 'destroy an existent licitation_commission' do
     licitation_commission = LicitationCommission.make!(:comissao)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     within_records do
       page.find('a').click
@@ -206,7 +206,7 @@ feature "LicitationCommissions" do
   scenario 'should get the CPF number when selecting individual' do
     Person.make!(:wenderson)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     click_link 'Criar Comissão de Licitação'
 
@@ -238,7 +238,7 @@ feature "LicitationCommissions" do
   end
 
   scenario 'should enable/disable class_register field depending on selected role' do
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     click_link 'Criar Comissão de Licitação'
 
@@ -268,7 +268,7 @@ feature "LicitationCommissions" do
   scenario "should clean the class_register when value selected for role is not lawyer" do
     LicitationCommission.make!(:comissao)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     within_records do
       page.find('a').click
@@ -300,7 +300,7 @@ feature "LicitationCommissions" do
     RegulatoryAct.make!(:sopa)
     Person.make!(:wenderson)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     click_link 'Criar Comissão de Licitação'
 
@@ -346,7 +346,7 @@ feature "LicitationCommissions" do
     RegulatoryAct.make!(:sopa)
     Person.make!(:wenderson)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     click_link 'Criar Comissão de Licitação'
 
@@ -395,7 +395,7 @@ feature "LicitationCommissions" do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Comissões de Licitação'
 
     click_link 'Criar Comissão de Licitação'
 

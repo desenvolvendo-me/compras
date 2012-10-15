@@ -12,7 +12,7 @@ feature "PurchaseSolicitationLiberations" do
     PurchaseSolicitation.make!(:reparo)
     Employee.make!(:wenderson)
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Geral > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -62,7 +62,7 @@ feature "PurchaseSolicitationLiberations" do
 
     expect(page).to have_content 'Editar Liberação 1 da Solicitação de Compra 1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
     expect(page).to have_field 'Justificativa', :with => 'Compra justificada'
-    expect(page).to have_field 'Data', :with =>  I18n.l(Date.current)
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
     expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Sequência', :with => '1'
   end

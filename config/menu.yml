@@ -1,130 +1,76 @@
 menu:
-  - purchasing_and_licitations:
-    - general_entries:
-      - creditors
-      - contracts
-      - materials_groups
-      - materials_classes
-      - materials
-      - reference_units
-      - document_types
-      - regulatory_act_types
-      - legal_natures
-      - employees
-      - judgment_forms
-      - delivery_locations
-      - banks
-      - agencies
-      - payment_methods
-      - licitation_objects
-      - licitation_modalities
-      - modality_limits
-      - licitation_commissions
-      - dissemination_sources
-      - communication_sources
-      - company_sizes
-      - service_or_contract_types
-      - purchase_solicitation_item_groups
-
-    - purchase_solicitations
+  - general:
+    - purchase_solicitation_item_groups
     - price_collections
     - direct_purchases
     - price_registrations
+    - purchase_solicitations
 
-    - administrative_and_licitation_processes:
-      - administrative_processes
-      - licitation_processes
+  - administrative_and_licitation_processes:
+    - administrative_processes
+    - licitation_processes
 
-      - licitation_process:
-        - licitation_notices
-        - licitation_process_impugnments
-        - licitation_process_appeals
-        - licitation_process_ratifications
+    - licitation_process:
+      - licitation_notices
+      - licitation_process_impugnments
+      - licitation_process_appeals
+      - licitation_process_ratifications
 
-  - accounting:
-    - commom:
-      - legislation:
-        - dissemination_sources
-        - communication_sources
-        - legal_text_natures
+  - general_entries:
+    - agencies
+    - banks
+    - bank_accounts
+    - creditors
+    - contracts
+    - materials_classes
+    - agreement:
+      - agreements
+      - agreement_kinds
+    - licitation_commissions
+    - employees
+    - judgment_forms
+    - dissemination_sources
+    - communication_sources
+    - materials_groups
+    - special_entries
+    - materials
+    - reference_units
+    - document_types
+    - regulatory_act_types
+    - legal_natures
+    - delivery_locations
+    - payment_methods
+    - licitation_objects
+    - licitation_modalities
+    - modality_limits
+    - company_sizes
+    - service_or_contract_types
+    - products
+    - legislation:
+      - dissemination_sources
+      - communication_sources
+      - legal_text_natures
 
-        - regulatory_act:
-          - regulatory_act_types
-          - regulatory_act_type_classifications
-          - regulatory_acts
-      - agreement:
-        - agreements
-        - agreement_kinds
+      - regulatory_act:
+        - regulatory_act_types
+        - regulatory_act_type_classifications
+        - regulatory_acts
 
-      - account_plan:
-        - account_plans
-        - checking_account_structure_informations
-        - checking_account_of_fiscal_accounts
-        - account_plan_configurations
-        - checking_account_structures
-        - event_checking_configurations
+    - account_plan:
+      - account_plans
+      - checking_account_structure_informations
+      - checking_account_of_fiscal_accounts
+      - account_plan_configurations
+      - checking_account_structures
+      - event_checking_configurations
 
-      - bank_accounts
-      - contracts
-      - creditors
-      - program_kinds
-      - target_audiences
-      - macro_objectives
-      - products
+    - program_kinds
+    - target_audiences
+    - macro_objectives
 
-      - precatory:
-        - precatories
-        - precatory_types
-
-      - special_entries
-
-    - estimate:
-      - funtional_classification:
-        - functions
-        - subfunctions
-
-      - organizational_structure:
-        - management_units
-        - budget_structure_configurations
-        - budget_structures
-
-      - extra_credit:
-        - extra_credit_natures
-        - extra_credits
-        - moviment_types
-
-      - budget_allocation:
-        - expense_natures
-        - budget_allocation_types
-        - budget_allocations
-
-      - budget_revenue:
-        - revenue_natures
-        - budget_revenues
-
-      - government_programs
-      - government_actions
-
-      - capability:
-        - capabilities
-        - capability_allocation_details
-        - capability_destinations
-        - capability_sources
-        - application_codes
-        - tce_specification_capabilities
-
-    - execution:
-      - reserve_fund:
-        - reserve_allocation_types
-        - reserve_funds
-
-      - pledge:
-        - expense_kinds
-        - pledge_historics
-        - pledge_categories
-        - pledges
-        - pledge_cancellations
-        - pledge_liquidations
+    - precatory:
+      - precatories
+      - precatory_types
 
   - others:
     - people
@@ -155,3 +101,54 @@ menu:
     - legal_references
     - administration_types
     - government_actions
+
+    - accounting:
+      - estimate:
+        - funtional_classification:
+          - functions
+          - subfunctions
+
+        - organizational_structure:
+          - management_units
+          - budget_structure_configurations
+          - budget_structures
+
+        - extra_credit:
+          - extra_credit_natures
+          - extra_credits
+          - moviment_types
+
+        - budget_allocation:
+          - expense_natures
+          - budget_allocation_types
+          - budget_allocations
+
+        - budget_revenue:
+          - revenue_natures
+          - budget_revenues
+
+        - government_programs
+        - government_actions
+
+        - capability:
+          - capabilities
+          - capability_allocation_details
+          - capability_destinations
+          - capability_sources
+          - application_codes
+          - tce_specification_capabilities
+
+      - execution:
+        - reserve_fund:
+          - reserve_allocation_types
+          - reserve_funds
+
+        - pledge:
+          - expense_kinds
+          - pledge_historics
+          - pledge_categories
+          - pledges
+          - pledge_cancellations
+          - pledge_liquidations
+
+

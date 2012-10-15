@@ -9,7 +9,7 @@ feature "Functions" do
   scenario 'create a new function' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link 'Criar Função'
 
@@ -31,7 +31,7 @@ feature "Functions" do
   scenario 'should have modal info to regulatory_act' do
     function = Function.make!(:administracao)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link function.to_s
 
@@ -52,7 +52,7 @@ feature "Functions" do
     function = Function.make!(:administracao)
     RegulatoryAct.make!(:emenda)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link function.to_s
 
@@ -75,7 +75,7 @@ feature "Functions" do
     Function.make!(:administracao)
     RegulatoryAct.make!(:emenda)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link '04'
 
@@ -97,7 +97,7 @@ feature "Functions" do
   scenario 'destroy an existent function' do
     Function.make!(:administracao)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link '04'
 
@@ -112,7 +112,7 @@ feature "Functions" do
   scenario 'have error when have duplicated code of same regulatory_act' do
     Function.make!(:administracao)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link 'Criar Função'
 
@@ -128,7 +128,7 @@ feature "Functions" do
     Function.make!(:administracao)
     RegulatoryAct.make!(:emenda)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link 'Criar Função'
 
@@ -143,7 +143,7 @@ feature "Functions" do
   scenario 'should get and clean the vigor date depending on administractive act' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Orçamento > Classificação Funcional > Funções'
+    navigate 'Outros > Contabilidade > Orçamento > Classificação Funcional > Funções'
 
     click_link 'Criar Função'
 

@@ -7,7 +7,7 @@ feature 'TargetAudiences' do
   end
 
   scenario 'create a new target_audience' do
-    navigate 'Contabilidade > Comum > Públicos Alvo'
+    navigate 'Comum > Públicos Alvo'
 
     click_link 'Criar Público Alvo'
 
@@ -29,7 +29,7 @@ feature 'TargetAudiences' do
   scenario 'update an existing program_kind' do
     TargetAudience.make!(:professores_publicos)
 
-    navigate 'Contabilidade > Comum > Públicos Alvo'
+    navigate 'Comum > Públicos Alvo'
 
     within_records do
       page.find('a').click
@@ -53,7 +53,7 @@ feature 'TargetAudiences' do
   scenario 'destroy and existing program_kind' do
     TargetAudience.make!(:professores_publicos)
 
-    navigate 'Contabilidade > Comum > Públicos Alvo'
+    navigate 'Comum > Públicos Alvo'
 
     click_link 'Professores Públicos'
 

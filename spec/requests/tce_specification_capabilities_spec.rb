@@ -9,7 +9,7 @@ feature "TceSpecificationCapabilities" do
   scenario 'try create with variable true and no agreements' do
     ApplicationCode.make!(:geral, :variable => true)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Criar Especificação de Recursos do TCE'
 
@@ -32,7 +32,7 @@ feature "TceSpecificationCapabilities" do
     Agreement.make!(:apoio_ao_turismo_inactive)
     Agreement.make!(:apoio_a_cultura)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Criar Especificação de Recursos do TCE'
 
@@ -50,7 +50,7 @@ feature "TceSpecificationCapabilities" do
   scenario 'agreement should be active if inactive occurrence was not be the last' do
     Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Criar Especificação de Recursos do TCE'
 
@@ -66,7 +66,7 @@ feature "TceSpecificationCapabilities" do
     ApplicationCode.make!(:geral)
     Agreement.make!(:apoio_ao_turismo)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Criar Especificação de Recursos do TCE'
 
@@ -104,7 +104,7 @@ feature "TceSpecificationCapabilities" do
   scenario 'when fill/clear capability_source should fill/clear related field' do
     CapabilitySource.make!(:imposto)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Criar Especificação de Recursos do TCE'
 
@@ -122,7 +122,7 @@ feature "TceSpecificationCapabilities" do
   scenario 'when fill/clear application_code should fill/clear related field' do
     ApplicationCode.make!(:geral)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Criar Especificação de Recursos do TCE'
 
@@ -143,7 +143,7 @@ feature "TceSpecificationCapabilities" do
     TceSpecificationCapability.make!(:ampliacao)
     Agreement.make!(:apoio_a_cultura)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Ampliação do Posto de Saúde'
 
@@ -181,7 +181,7 @@ feature "TceSpecificationCapabilities" do
   scenario 'destroy an existent tce_specification_capability' do
     TceSpecificationCapability.make!(:ampliacao)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Especificações de Recursos do TCE'
 
     click_link 'Ampliação do Posto de Saúde'
 

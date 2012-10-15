@@ -10,7 +10,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -33,7 +33,7 @@ feature "Bidders" do
     Person.make!(:wenderson)
     Person.make!(:joao_da_silva)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -150,7 +150,7 @@ feature "Bidders" do
     Creditor.make!(:sobrinho_sa)
     Person.make!(:wenderson)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -265,7 +265,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -291,7 +291,7 @@ feature "Bidders" do
   scenario 'when is not invited should disable and clear date, protocol fields' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -343,7 +343,7 @@ feature "Bidders" do
   scenario 'validating uniqueness of creditor on licitation process scope' do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -366,7 +366,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -480,7 +480,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -645,7 +645,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -698,7 +698,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     Creditor.make!(:sobrinho_sa)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -724,7 +724,7 @@ feature "Bidders" do
   scenario "index shoud have title Licitantes do Processo Licitatório 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -740,7 +740,7 @@ feature "Bidders" do
   scenario "edit shoud have title Editar Licitante do Processo Licitatório 1/2013" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -762,7 +762,7 @@ feature "Bidders" do
   scenario "new shoud have title Novo Licitante do Processo Licitatório 1/2013" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -781,7 +781,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:apuracao_melhor_tecnica_e_preco)
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -800,7 +800,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:apuracao_global)
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -819,7 +819,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores, :envelope_opening_date => I18n.l(Date.current))
     bidder = licitation_process.bidders.first
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -838,7 +838,7 @@ feature "Bidders" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
     licitation_process.update_attributes(:envelope_opening_date => Date.tomorrow)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click
@@ -859,7 +859,7 @@ feature "Bidders" do
   scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Compras e Licitações > Processo Administrativo/Licitatório > Processos Administrativos'
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
       page.find('a').click

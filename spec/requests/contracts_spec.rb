@@ -9,7 +9,7 @@ feature "Contracts" do
   scenario 'picking a licitation process' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -24,7 +24,7 @@ feature "Contracts" do
   scenario 'picking a direct purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -37,7 +37,7 @@ feature "Contracts" do
   end
 
   scenario 'selecting a amendment contract, submeting with error, the main contract should still enabled' do
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -60,7 +60,7 @@ feature "Contracts" do
     Employee.make!(:wenderson)
     ServiceOrContractType.make!(:trainees)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     click_link 'Criar Contrato'
 
@@ -149,7 +149,7 @@ feature "Contracts" do
     Contract.make!(:primeiro_contrato)
     Entity.make!(:secretaria_de_educacao)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     within_records do
       page.find('a').click
@@ -181,7 +181,7 @@ feature "Contracts" do
   scenario 'destroy an existent contract' do
     Contract.make!(:primeiro_contrato)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     within_records do
       page.find('a').click
@@ -203,7 +203,7 @@ feature "Contracts" do
     Pledge.make!(:empenho_em_quinze_dias)
     Pledge.make!(:founded_debt)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     within_records do
       page.find('a').click
@@ -219,7 +219,7 @@ feature "Contracts" do
   scenario 'add delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     within_records do
       page.find('a').click
@@ -263,7 +263,7 @@ feature "Contracts" do
   scenario 'remove delivery schedule' do
     DeliverySchedule.make!(:primeira_entrega)
 
-    navigate 'Contabilidade > Comum > Contratos'
+    navigate 'Comum > Contratos'
 
     within_records do
       page.find('a').click

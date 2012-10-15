@@ -7,7 +7,7 @@ feature "CapabilitySources" do
   end
 
   scenario 'create a new capability_source' do
-    navigate 'Contabilidade > Orçamento > Recurso > Fontes de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Fontes de Recursos'
 
     click_link 'Criar Fonte de Recursos'
 
@@ -33,7 +33,7 @@ feature "CapabilitySources" do
   scenario 'update an existent capability_source' do
     CapabilitySource.make!(:imposto)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Fontes de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Fontes de Recursos'
 
     click_link 'Criar Fonte de Recursos'
 
@@ -47,7 +47,7 @@ feature "CapabilitySources" do
   scenario 'update an existent capability_source' do
     CapabilitySource.make!(:imposto)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Fontes de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Fontes de Recursos'
 
     click_link 'Imposto'
 
@@ -73,7 +73,7 @@ feature "CapabilitySources" do
   scenario 'destroy an existent capability_source' do
     CapabilitySource.make!(:imposto)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Fontes de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Fontes de Recursos'
 
     click_link 'Imposto'
 

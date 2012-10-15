@@ -9,7 +9,7 @@ feature "Agreements" do
   scenario 'checking regulatory act model info at additivies tab in a new agreement' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Criar Convênio'
 
@@ -28,7 +28,7 @@ feature "Agreements" do
   scenario 'checking regulatory act model info at additivies tab in an existing agreement' do
     Agreement.make!(:apoio_ao_turismo)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -43,7 +43,7 @@ feature "Agreements" do
   scenario 'checking regulatory act modal info' do
     Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -58,7 +58,7 @@ feature "Agreements" do
   scenario 'editing an agreement should show date and kind of first occurrence' do
     Agreement.make!(:apoio_ao_turismo_with_2_occurrences)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -71,7 +71,7 @@ feature "Agreements" do
   scenario 'checking bank_account modal info in a new agreement' do
     BankAccount.make!(:itau_tributos)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Criar Convênio'
 
@@ -91,7 +91,7 @@ feature "Agreements" do
   scenario 'checking creditor modal info in a new agreement' do
     Creditor.make!(:sobrinho)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Criar Convênio'
 
@@ -111,7 +111,7 @@ feature "Agreements" do
   scenario 'checking creditor modal info in a existing agreement' do
     Agreement.make!(:apoio_ao_turismo)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -128,7 +128,7 @@ feature "Agreements" do
   scenario 'checking bank_account modal info in a existing agreement' do
     Agreement.make!(:apoio_ao_turismo)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -148,7 +148,7 @@ feature "Agreements" do
     Creditor.make!(:sobrinho)
     Creditor.make!(:wenderson_sa)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Criar Convênio'
 
@@ -283,7 +283,7 @@ feature "Agreements" do
   scenario 'when fill/clean regulatory_act should fill/clear related fields' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Criar Convênio'
 
@@ -309,7 +309,7 @@ feature "Agreements" do
     BankAccount.make!(:santander_folha)
     Creditor.make!(:wenderson_sa)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -531,7 +531,7 @@ feature "Agreements" do
     Agreement.make!(:apoio_ao_turismo_sem_aditivos)
     RegulatoryAct.make!(:emenda)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -563,7 +563,7 @@ feature "Agreements" do
     Agreement.make!(:apoio_ao_turismo)
     Creditor.make!(:wenderson_sa)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -588,7 +588,7 @@ feature "Agreements" do
     Agreement.make!(:apoio_ao_turismo)
     Creditor.make!(:wenderson_sa)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 
@@ -614,7 +614,7 @@ feature "Agreements" do
   scenario 'destroy an existent agreement' do
     Agreement.make!(:apoio_ao_turismo)
 
-    navigate 'Contabilidade > Comum > Convênio > Convênios'
+    navigate 'Comum > Convênio > Convênios'
 
     click_link 'Apoio ao turismo'
 

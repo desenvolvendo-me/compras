@@ -7,7 +7,7 @@ feature "AgreementKinds" do
   end
 
   scenario 'create a new agreement_kind' do
-    navigate 'Contabilidade > Comum > Convênio > Tipos de Convênios'
+    navigate 'Comum > Convênio > Tipos de Convênios'
 
     click_link 'Criar Tipo de Convênio'
 
@@ -27,7 +27,7 @@ feature "AgreementKinds" do
   scenario 'update an existent agreement_kind' do
     AgreementKind.make!(:contribuicao)
 
-    navigate 'Contabilidade > Comum > Convênio > Tipos de Convênios'
+    navigate 'Comum > Convênio > Tipos de Convênios'
 
     click_link 'Contribuição'
 
@@ -47,7 +47,7 @@ feature "AgreementKinds" do
   scenario 'destroy an existent agreement_kind' do
     AgreementKind.make!(:contribuicao)
 
-    navigate 'Contabilidade > Comum > Convênio > Tipos de Convênios'
+    navigate 'Comum > Convênio > Tipos de Convênios'
 
     click_link 'Contribuição'
 

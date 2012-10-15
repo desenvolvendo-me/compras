@@ -11,7 +11,7 @@ feature "Capabilities" do
     CapabilityDestination.make!(:linha_de_credito)
     TceSpecificationCapability.make!(:ampliacao)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Recursos'
 
     click_link 'Criar Recurso'
 
@@ -44,7 +44,7 @@ feature "Capabilities" do
     Capability.make!(:reforma)
     Descriptor.make!(:secretaria_de_educacao_2013)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Recursos'
 
     click_link 'Reforma e Ampliação'
 
@@ -70,7 +70,7 @@ feature "Capabilities" do
   scenario 'destroy an existent capability' do
     Capability.make!(:reforma)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Recursos'
 
     click_link 'Reforma e Ampliação'
 

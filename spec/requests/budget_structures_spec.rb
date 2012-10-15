@@ -12,7 +12,7 @@ feature "BudgetStructure" do
     Address.make!(:general)
     Employee.make!(:sobrinho)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Criar Estrutura Orçamentaria'
 
@@ -91,7 +91,7 @@ feature "BudgetStructure" do
     Employee.make!(:wenderson)
     RegulatoryAct.make!(:emenda)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -164,7 +164,7 @@ feature "BudgetStructure" do
   scenario 'assert that javascript return parent mask when budget structure that have a parent' do
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Desenvolvimento'
 
@@ -178,7 +178,7 @@ feature "BudgetStructure" do
   scenario 'update an existent budget structure' do
     BudgetStructure.make!(:secretaria_de_desenvolvimento_level_3 )
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -199,7 +199,7 @@ feature "BudgetStructure" do
     Address.make!(:general)
     Employee.make!(:sobrinho)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Criar Estrutura Orçamentaria'
 
@@ -247,7 +247,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructureConfiguration.make!(:secretaria_de_educacao)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -268,7 +268,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Criar Estrutura Orçamentaria'
 
@@ -300,7 +300,7 @@ feature "BudgetStructure" do
   scenario 'destroy an existent budget structure' do
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -318,7 +318,7 @@ feature "BudgetStructure" do
   end
 
   scenario 'should allow one responsible by time when new form' do
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Criar Estrutura Orçamentaria'
 
@@ -342,7 +342,7 @@ feature "BudgetStructure" do
   scenario 'should allow one responsialbe by time when edit' do
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -358,7 +358,7 @@ feature "BudgetStructure" do
   scenario 'should all responsialbe fields disabled when alread stored' do
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -380,7 +380,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -407,7 +407,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao_com_dois_responsaveis)
     Employee.make!(:joao_da_silva)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação com dois responsaveis'
 
@@ -442,7 +442,7 @@ feature "BudgetStructure" do
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 
@@ -467,7 +467,7 @@ feature "BudgetStructure" do
   scenario 'when update budget_structure without add new responsible should not set end_date' do
     BudgetStructure.make!(:secretaria_de_educacao)
 
-    navigate 'Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
+    navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Secretaria de Educação'
 

@@ -9,7 +9,7 @@ feature "AccountPlanConfigurations" do
   scenario 'create a new account_plan_configuration' do
     make_dependencies!
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Criar Configuração de Plano de Contas'
 
@@ -43,7 +43,7 @@ feature "AccountPlanConfigurations" do
   end
 
   scenario 'calculate mask with javascript' do
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Criar Configuração de Plano de Contas'
 
@@ -76,7 +76,7 @@ feature "AccountPlanConfigurations" do
 
     AccountPlanConfiguration.make!(:plano1)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Plano1'
 
@@ -96,7 +96,7 @@ feature "AccountPlanConfigurations" do
   scenario 'destroy an existent account_plan_configuration' do
     AccountPlanConfiguration.make!(:plano1)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Plano1'
 
@@ -110,7 +110,7 @@ feature "AccountPlanConfigurations" do
   end
 
   scenario 'when submit a form with errors should return all levels' do
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Criar Configuração de Plano de Contas'
 
@@ -164,7 +164,7 @@ feature "AccountPlanConfigurations" do
   end
 
   scenario 'when add duplicated level should show error' do
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Criar Configuração de Plano de Contas'
 
@@ -194,7 +194,7 @@ feature "AccountPlanConfigurations" do
   end
 
   scenario 'when add duplicated level should show error using javascript' do
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Criar Configuração de Plano de Contas'
 
@@ -222,7 +222,7 @@ feature "AccountPlanConfigurations" do
   scenario 'when remove a level should not generate error for duplicated level' do
     AccountPlanConfiguration.make!(:segundo_plano)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Configurações de Plano de Contas'
+    navigate 'Comum > Plano de Contas > Configurações de Plano de Contas'
 
     click_link 'Segundo plano de MG'
 

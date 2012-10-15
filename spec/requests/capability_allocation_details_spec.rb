@@ -7,7 +7,7 @@ feature "CapabilityAllocationDetails" do
   end
 
   scenario 'create a new capability_allocation_detail' do
-    navigate 'Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
 
     click_link 'Criar Detalhamento das Destinações de Recursos'
 
@@ -26,7 +26,7 @@ feature "CapabilityAllocationDetails" do
   scenario 'validate uniqueness of description' do
     CapabilityAllocationDetail.make!(:educacao)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
 
     click_link 'Criar Detalhamento das Destinações de Recursos'
 
@@ -40,7 +40,7 @@ feature "CapabilityAllocationDetails" do
   scenario 'update an existent capability_allocation_detail' do
     capibality_allocation_detail = CapabilityAllocationDetail.make!(:educacao)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
 
     click_link 'Educação'
 
@@ -59,7 +59,7 @@ feature "CapabilityAllocationDetails" do
   scenario 'destroy an existent capability_allocation_detail' do
     CapabilityAllocationDetail.make!(:educacao)
 
-    navigate 'Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
+    navigate 'Outros > Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
 
     click_link 'Educação'
 

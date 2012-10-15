@@ -7,7 +7,7 @@ feature 'DirectPurchaseAnnuls' do
   end
 
   scenario 'annul link should not be visible on create a direct purchase' do
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -17,7 +17,7 @@ feature 'DirectPurchaseAnnuls' do
   scenario 'annul link should be visible on update direct purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -32,7 +32,7 @@ feature 'DirectPurchaseAnnuls' do
       :annullable => DirectPurchase.make!(:compra)
     )
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -51,7 +51,7 @@ feature 'DirectPurchaseAnnuls' do
       :annullable => supply_authorization.direct_purchase
     )
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -65,7 +65,7 @@ feature 'DirectPurchaseAnnuls' do
   scenario 'annul an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -98,7 +98,7 @@ feature 'DirectPurchaseAnnuls' do
       :purchase_solicitation_item_group => PurchaseSolicitationItemGroup.make!(:antivirus)
     )
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -124,7 +124,7 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Data', :with => '01/10/2012'
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 
@@ -141,7 +141,7 @@ feature 'DirectPurchaseAnnuls' do
       :purchase_solicitation => PurchaseSolicitation.make!(:reparo)
     )
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -167,7 +167,7 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Data', :with => '01/10/2012'
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Geral > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -197,7 +197,7 @@ feature 'DirectPurchaseAnnuls' do
       )
     )
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       page.find('a').click
@@ -223,7 +223,7 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Data', :with => '01/10/2012'
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Geral > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -248,7 +248,7 @@ feature 'DirectPurchaseAnnuls' do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
+    navigate 'Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Ponte'
 
@@ -262,7 +262,7 @@ feature 'DirectPurchaseAnnuls' do
       end
     end
 
-    navigate 'Compras e Licitações > Gerar Compra Direta'
+    navigate 'Geral > Gerar Compra Direta'
 
     within_records do
       click_link "#{direct_purchase}"
@@ -288,7 +288,7 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_field 'Data', :with => '01/10/2012'
     expect(page).to have_field 'Justificativa', :with => 'Anulação da compra direta'
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Objetos de Licitação'
+    navigate 'Cadastros Gerais > Objetos de Licitação'
 
     click_link 'Ponte'
 

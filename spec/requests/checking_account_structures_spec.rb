@@ -10,7 +10,7 @@ feature "CheckingAccountStructures" do
     CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
     CheckingAccountStructureInformation.make!(:fonte_de_recursos)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Estruturas das Contas Correntes'
+    navigate 'Comum > Plano de Contas > Estruturas das Contas Correntes'
 
     click_link 'Criar Estrutura da Conta Corrente'
 
@@ -42,7 +42,7 @@ feature "CheckingAccountStructures" do
     CheckingAccountOfFiscalAccount.make!(:disponibilidade)
     CheckingAccountStructure.make!(:fonte_recursos)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Estruturas das Contas Correntes'
+    navigate 'Comum > Plano de Contas > Estruturas das Contas Correntes'
 
     click_link 'Disponibilidade financeira - Fonte de Recursos'
 
@@ -72,7 +72,7 @@ feature "CheckingAccountStructures" do
   scenario 'destroy an existent checking_account_structure' do
     CheckingAccountStructure.make!(:fonte_recursos)
 
-    navigate 'Contabilidade > Comum > Plano de Contas > Estruturas das Contas Correntes'
+    navigate 'Comum > Plano de Contas > Estruturas das Contas Correntes'
 
     click_link 'Disponibilidade financeira - Fonte de Recursos'
 

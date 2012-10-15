@@ -9,7 +9,7 @@ feature "Materials" do
   scenario 'create a new material' do
     make_dependencies!
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Criar Material'
 
@@ -62,7 +62,7 @@ feature "Materials" do
   scenario 'generate code' do
     make_dependencies!
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Criar Material'
 
@@ -103,7 +103,7 @@ feature "Materials" do
     MaterialsClass.make!(:arames)
     ExpenseNature.make!(:compra_de_material)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Antivirus'
 
@@ -152,7 +152,7 @@ feature "Materials" do
   scenario 'destroy an existent material' do
     Material.make!(:antivirus)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Antivirus'
 
@@ -166,7 +166,7 @@ feature "Materials" do
   scenario 'cannot destroy an existent material with licitation_objects' do
     LicitationObject.make!(:ponte)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Antivirus'
 
@@ -178,7 +178,7 @@ feature "Materials" do
   scenario 'should validate uniqueness of name' do
     Material.make!(:antivirus)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Criar Material'
 
@@ -192,7 +192,7 @@ feature "Materials" do
   scenario 'should clean the unnecessary type of material or service depending on characteristic' do
     Material.make!(:antivirus)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Antivirus'
 
@@ -222,7 +222,7 @@ feature "Materials" do
   it 'should show selected group on class modal' do
     make_dependencies!
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Criar Material'
 
@@ -242,7 +242,7 @@ feature "Materials" do
 
     Material.make!(:antivirus)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Antivirus'
 
@@ -252,7 +252,7 @@ feature "Materials" do
   it 'should disable and empty the class when the group is removed' do
     make_dependencies!
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Criar Material'
 
@@ -270,7 +270,7 @@ feature "Materials" do
     MaterialsGroup.make!(:ferro_aco)
     make_dependencies!
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Criar Material'
 
@@ -288,7 +288,7 @@ feature "Materials" do
 
     Material.make!(:antivirus)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Materiais'
+    navigate 'Cadastros Gerais > Materiais'
 
     click_link 'Antivirus'
 

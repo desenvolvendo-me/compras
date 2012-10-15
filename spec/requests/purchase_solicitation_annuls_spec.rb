@@ -11,7 +11,7 @@ feature 'PurchaseSolicitationAnnul' do
   end
 
   scenario 'should not have a annul link when was creating a new solicitation' do
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Geral > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -22,7 +22,7 @@ feature 'PurchaseSolicitationAnnul' do
   scenario 'should see the default values on the screen' do
     solicitation = PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Geral > Solicitações de Compra'
 
     click_link "#{solicitation}"
 
@@ -40,7 +40,7 @@ feature 'PurchaseSolicitationAnnul' do
   scenario 'annuling a purchase solicitation' do
     solicitation = PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Geral > Solicitações de Compra'
 
     click_link "#{solicitation}"
 

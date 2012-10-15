@@ -9,7 +9,7 @@ feature "Agencies" do
   scenario 'create a new agency' do
     Bank.make!(:banco_do_brasil)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agências'
+    navigate 'Cadastros Gerais > Agências'
 
     click_link 'Criar Agência'
 
@@ -40,7 +40,7 @@ feature "Agencies" do
     Bank.make!(:santander)
     Agency.make!(:itau)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agências'
+    navigate 'Cadastros Gerais > Agências'
 
     click_link 'Agência Itaú'
 
@@ -60,7 +60,7 @@ feature "Agencies" do
   scenario 'destroy an existent agency' do
     Agency.make!(:santander)
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agências'
+    navigate 'Cadastros Gerais > Agências'
 
     click_link 'Agência Santander'
 

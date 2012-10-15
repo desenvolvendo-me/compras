@@ -9,7 +9,7 @@ feature "RegulatoryActs" do
   scenario 'create a new regulatory_act' do
     make_dependencies!
 
-    navigate 'Contabilidade > Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link 'Criar Ato Regulamentador'
 
@@ -71,7 +71,7 @@ feature "RegulatoryActs" do
     DisseminationSource.make!(:jornal_bairro)
     LegalTextNature.make!(:trabalhista)
 
-    navigate 'Contabilidade > Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link '1234'
 
@@ -129,7 +129,7 @@ feature "RegulatoryActs" do
   scenario 'destroy an existent regulatory_act' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link '1234'
 
@@ -143,7 +143,7 @@ feature "RegulatoryActs" do
   scenario 'should validate uniqueness of act_number' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link 'Criar Ato Regulamentador'
 
@@ -157,7 +157,7 @@ feature "RegulatoryActs" do
   scenario 'should validate uniqueness of content' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link 'Criar Ato Regulamentador'
 
@@ -171,7 +171,7 @@ feature "RegulatoryActs" do
   scenario 'remove dissemination source from an existent regulatory_act' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Contabilidade > Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link '1234'
 

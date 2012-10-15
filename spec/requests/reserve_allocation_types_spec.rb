@@ -7,7 +7,7 @@ feature "ReserveAllocationTypes" do
   end
 
   scenario 'create a new reserve_allocation_type' do
-    navigate 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
+    navigate 'Outros > Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
     click_link 'Criar Tipo de Reserva de Dotação'
 
@@ -28,7 +28,7 @@ feature "ReserveAllocationTypes" do
   scenario 'update an existent reserve_allocation_type' do
     ReserveAllocationType.make!(:comum)
 
-    navigate 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
+    navigate 'Outros > Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
     click_link 'Tipo Comum'
 
@@ -48,7 +48,7 @@ feature "ReserveAllocationTypes" do
   scenario 'destroy an existent reserve_allocation_type' do
     ReserveAllocationType.make!(:comum)
 
-    navigate 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
+    navigate 'Outros > Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
     click_link 'Tipo Comum'
 
@@ -63,7 +63,7 @@ feature "ReserveAllocationTypes" do
   scenario 'validate uniqueness of description' do
     ReserveAllocationType.make!(:comum)
 
-    navigate 'Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
+    navigate 'Outros > Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
 
     click_link 'Criar Tipo de Reserva de Dotação'
 

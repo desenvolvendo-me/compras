@@ -9,7 +9,7 @@ feature "Precatories" do
   scenario 'should validate parceled value when parcels is empty or with removed item' do
     Precatory.make!(:precatorio)
 
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     within_records do
       click_link '1234/2012'
@@ -32,7 +32,7 @@ feature "Precatories" do
     Creditor.make!(:wenderson_sa)
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -119,7 +119,7 @@ feature "Precatories" do
   end
 
   scenario 'it should update order' do
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -150,7 +150,7 @@ feature "Precatories" do
     Creditor.make!(:sobrinho_sa)
     PrecatoryType.make!(:ordinario_demais_casos)
 
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     within_records do
       click_link '1234/2012'
@@ -226,7 +226,7 @@ feature "Precatories" do
   scenario 'BugFix: should filter precatories' do
     Precatory.make!(:precatorio)
 
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     click_link 'Filtrar Precatórios'
 
@@ -236,7 +236,7 @@ feature "Precatories" do
   end
 
   scenario 'should return empty erro when try create a empty parcel' do
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -253,7 +253,7 @@ feature "Precatories" do
   scenario 'destroy an existent precatory' do
     Precatory.make!(:precatorio)
 
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     within_records do
       click_link '1234/2012'
@@ -268,7 +268,7 @@ feature "Precatories" do
   end
 
   scenario "when writing a value parcel should update automatic parceled_value" do
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -296,7 +296,7 @@ feature "Precatories" do
   end
 
   scenario "when remove a parcel the parceled_value should be recalculated" do
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 
@@ -334,7 +334,7 @@ feature "Precatories" do
     PrecatoryType.make!(:tipo_de_precatorio_inativo)
     PrecatoryType.make!(:ordinario_demais_casos)
 
-    navigate 'Contabilidade > Comum > Precatório > Precatórios'
+    navigate 'Comum > Precatório > Precatórios'
 
     click_link 'Criar Precatório'
 

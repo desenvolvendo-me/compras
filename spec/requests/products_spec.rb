@@ -7,7 +7,7 @@ feature 'Products' do
   end
 
   scenario 'create a new product' do
-    navigate 'Contabilidade > Comum > Produtos'
+    navigate 'Cadastros Gerais > Produtos'
 
     click_link 'Criar Produto'
 
@@ -29,7 +29,7 @@ feature 'Products' do
   scenario 'update an existing product' do
     Product.make!(:caneta)
 
-    navigate 'Contabilidade > Comum > Produtos'
+    navigate 'Cadastros Gerais > Produtos'
 
     within_records do
       page.find('a').click
@@ -53,7 +53,7 @@ feature 'Products' do
   scenario 'destroy and existing product' do
     Product.make!(:caneta)
 
-    navigate 'Contabilidade > Comum > Produtos'
+    navigate 'Cadastros Gerais > Produtos'
 
     click_link 'Caneta'
 
