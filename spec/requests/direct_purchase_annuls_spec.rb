@@ -138,7 +138,8 @@ feature 'DirectPurchaseAnnuls' do
   scenario 'annul an existent direct_purchase with purchase_solicitation' do
     DirectPurchase.make!(
       :compra,
-      :purchase_solicitation => PurchaseSolicitation.make!(:reparo)
+      :purchase_solicitation => PurchaseSolicitation.make!(:reparo,
+                                                           :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
     )
 
     navigate 'Processos de Compra > Gerar Compra Direta'
@@ -174,7 +175,7 @@ feature 'DirectPurchaseAnnuls' do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
+      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
     end
 
     within_tab 'Dotações orçamentarias' do
@@ -193,7 +194,8 @@ feature 'DirectPurchaseAnnuls' do
       :nohup,
       :direct_purchase => DirectPurchase.make!(
         :compra,
-        :purchase_solicitation => PurchaseSolicitation.make!(:reparo)
+        :purchase_solicitation => PurchaseSolicitation.make!(:reparo,
+                                                             :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
       )
     )
 
