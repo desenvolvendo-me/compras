@@ -1282,8 +1282,10 @@ feature "DirectPurchases" do
   end
 
   scenario 'doesnt allow selection of purchase solicitations with "attended" status' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-                                                       :service_status => 'attended')
+    purchase_solicitation = PurchaseSolicitation.make!(
+      :reparo,
+      :service_status => PurchaseSolicitationServiceStatus::ATTENDED
+    )
 
     navigate 'Processos de Compra > Gerar Compra Direta'
 
@@ -1299,8 +1301,10 @@ feature "DirectPurchases" do
   end
 
   scenario 'doesnt allow selection of purchase solicitations with "pending" status' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-                                                       :service_status => 'pending')
+    purchase_solicitation = PurchaseSolicitation.make!(
+      :reparo,
+      :service_status => PurchaseSolicitationServiceStatus::PENDING
+    )
 
     navigate 'Processos de Compra > Gerar Compra Direta'
 
@@ -1316,8 +1320,10 @@ feature "DirectPurchases" do
   end
 
   scenario 'allows choosing a PurchaseSolicitation with a "liberated" status' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-                                                       :service_status => 'liberated')
+    purchase_solicitation = PurchaseSolicitation.make!(
+      :reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED
+    )
 
     navigate 'Processos de Compra > Gerar Compra Direta'
 
