@@ -1333,7 +1333,8 @@ feature "DirectPurchases" do
   end
 
   scenario 'generate supply authorization when direct_purchase has purchase_solicitation' do
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                       :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
     DirectPurchase.make!(
       :compra_nao_autorizada,
       :purchase_solicitation => purchase_solicitation
