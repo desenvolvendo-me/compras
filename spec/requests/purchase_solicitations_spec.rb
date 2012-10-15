@@ -18,7 +18,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -116,7 +116,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao_extra)
     Material.make!(:arame_farpado)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -210,7 +210,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -247,7 +247,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'should have at least one budget allocation with one item' do
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -269,7 +269,7 @@ feature "PurchaseSolicitations" do
   scenario 'should validate presence of budget allocations and items when editing' do
     PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -301,7 +301,7 @@ feature "PurchaseSolicitations" do
   end
 
   scenario 'calculate total value of items' do
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -371,7 +371,7 @@ feature "PurchaseSolicitations" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:office)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -449,7 +449,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo,
                                :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -462,7 +462,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo,
                                :service_status => PurchaseSolicitationServiceStatus::RETURNED)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -477,7 +477,7 @@ feature "PurchaseSolicitations" do
     ExpenseNature.make!(:vencimento_e_salarios)
     DeliveryLocation.make!(:education)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Criar Solicitação de Compra'
 
@@ -522,7 +522,7 @@ feature "PurchaseSolicitations" do
     PurchaseSolicitation.make!(:reparo)
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
       click_link purchase_solicitation.to_s
@@ -544,7 +544,7 @@ feature "PurchaseSolicitations" do
   scenario 'provide purchase solicitation search by code and responsible' do
     PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link 'Filtrar Solicitações de Compra'
 

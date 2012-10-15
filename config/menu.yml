@@ -1,5 +1,5 @@
 menu:
-  - general:
+  - purchasing_processes:
     - purchase_solicitation_item_groups
     - price_collections
     - direct_purchases

@@ -759,7 +759,7 @@ feature "AdministrativeProcesses" do
 
     expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
       page.find('a').click

@@ -9,7 +9,7 @@ feature "PurchaseSolicitationItemGroups" do
   scenario 'create a new purchase_solicitation_item_group' do
     PurchaseSolicitation.make!(:reparo)
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
@@ -37,7 +37,7 @@ feature "PurchaseSolicitationItemGroups" do
       expect(page).to have_content '3'
     end
 
-    navigate 'Geral > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
       page.find('a').click
@@ -51,7 +51,7 @@ feature "PurchaseSolicitationItemGroups" do
   scenario 'update an existent purchase_solicitation_item_group' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de reparo 2013'
 
@@ -86,7 +86,7 @@ feature "PurchaseSolicitationItemGroups" do
     PurchaseSolicitation.make!(:reparo)
     PurchaseSolicitation.make!(:reparo_2013)
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
@@ -195,7 +195,7 @@ feature "PurchaseSolicitationItemGroups" do
     PurchaseSolicitationItemGroup.make!(:reparo_arame_farpado)
     PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento)
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     within_records do
       expect(page).to have_css('a', :count => 2)
@@ -216,7 +216,7 @@ feature "PurchaseSolicitationItemGroups" do
     PurchaseSolicitationItemGroup.make!(:reparo_arame_farpado)
     PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento)
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     within_records do
       expect(page).to have_css('a', :count => 2)
@@ -239,7 +239,7 @@ feature "PurchaseSolicitationItemGroups" do
                                           AdministrativeProcess.make!(:compra_de_cadeiras)
                                         ])
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 
@@ -256,7 +256,7 @@ feature "PurchaseSolicitationItemGroups" do
     PurchaseSolicitation.make!(:reparo)
     PurchaseSolicitation.make!(:reparo_2013_anulado)
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 
@@ -298,7 +298,7 @@ feature "PurchaseSolicitationItemGroups" do
                                :budget_structure => BudgetStructure.make!(:secretaria_de_desenvolvimento),
                                :purchase_solicitation_budget_allocations => [ungrouped_allocation])
 
-    navigate 'Geral > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Criar Agrupamento de Item de Solicitação de Compra'
 

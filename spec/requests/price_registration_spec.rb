@@ -17,7 +17,7 @@ feature "PriceRegistration" do
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
     BudgetStructure.make!(:secretaria_de_educacao_com_dois_responsaveis)
 
-    navigate 'Geral > Registros de Preços'
+    navigate 'Processos de Compra > Registros de Preços'
 
     click_link 'Criar Registro de Preço'
 
@@ -128,7 +128,7 @@ feature "PriceRegistration" do
   scenario 'update an existent price_registration' do
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Geral > Registros de Preços'
+    navigate 'Processos de Compra > Registros de Preços'
 
     click_link '1/2012'
 
@@ -209,7 +209,7 @@ feature "PriceRegistration" do
   scenario 'destroy an existent price-registration' do
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Geral > Registros de Preços'
+    navigate 'Processos de Compra > Registros de Preços'
 
     click_link '1/2012'
 
@@ -226,7 +226,7 @@ feature "PriceRegistration" do
     LicitationProcess.make!(:processo_licitatorio)
     LicitationProcess.make!(:processo_licitatorio_computador)
 
-    navigate 'Geral > Registros de Preços'
+    navigate 'Processos de Compra > Registros de Preços'
 
     click_link 'Criar Registro de Preço'
 
@@ -257,7 +257,7 @@ feature "PriceRegistration" do
       PriceRegistration.make!(:registro_de_precos,
                               :licitation_process => licitation_process)
 
-      navigate 'Geral > Registros de Preços'
+      navigate 'Processos de Compra > Registros de Preços'
       click_link '1/2012'
 
       within_tab 'Fornecedores Vencedores' do
@@ -278,7 +278,7 @@ feature "PriceRegistration" do
       click_button 'Apurar'
 
       click_link 'voltar'
-      navigate 'Geral > Registros de Preços'
+      navigate 'Processos de Compra > Registros de Preços'
 
       click_link '1/2012'
 
@@ -297,7 +297,7 @@ feature "PriceRegistration" do
     LicitationProcess.make!(:processo_licitatorio)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
-    navigate 'Geral > Registros de Preços'
+    navigate 'Processos de Compra > Registros de Preços'
 
     click_link 'Criar Registro de Preço'
 
