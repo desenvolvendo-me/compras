@@ -39,26 +39,26 @@
         disableModalities();
       }
     });
+
+    function filterModalities(objectType) {
+      var params = {
+        by_object_type: objectType,
+        locked_fields: ["object_type"]
+      };
+
+      var url = "<%= modal_licitation_modalities_path %>?" + $.param(params);
+
+      $('.modal-modality').data('modal-url', url);
+    }
+
+    function disableModalities() {
+      $('.modal-modality').attr("disabled", "disabled");
+    }
+
+    function enableModalities() {
+      $('.modal-modality').removeAttr("disabled");
+    }
   });
-
-  function filterModalities(objectType) {
-    var params = {
-      by_object_type: objectType,
-      locked_fields: ["object_type"]
-    };
-
-    var url = "<%= modal_licitation_modalities_path %>?" + $.param(params);
-
-    $('.modal-modality').data('modal-url', url);
-  }
-
-  function disableModalities() {
-    $('.modal-modality').attr("disabled", "disabled");
-  }
-
-  function enableModalities() {
-    $('.modal-modality').removeAttr("disabled");
-  }
 
   (function () {
     var purchaseSolicitationItemGroupId = $("#administrative_process_purchase_solicitation_item_group_id").val();
