@@ -6,12 +6,14 @@ describe PurchaseSolicitation do
     it "should return the budget structure of the purchase solicitation" do
       budget_structure = BudgetStructure.make!(:secretaria_de_educacao)
       purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                         :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
                                                          :budget_structure => budget_structure)
       expect(purchase_solicitation.budget_structure).to eq budget_structure
     end
 
     it "delegates to the direct purchase if budget structure is nil" do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                         :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
                                                          :budget_structure => nil)
       direct_purchase = DirectPurchase.make!(:compra,
                                              :purchase_solicitation => purchase_solicitation)
@@ -22,7 +24,8 @@ describe PurchaseSolicitation do
 
   describe "updating status when a purchase process is created" do
     it "updates the solicitation status to In Purchase Process when a direct purchase is created" do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                         :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
       direct_purchase = DirectPurchase.make(:compra)
 
       PurchaseSolicitationProcess.new(direct_purchase).set_solicitation(purchase_solicitation)
@@ -31,8 +34,10 @@ describe PurchaseSolicitation do
     end
 
     it "sets the status back to 'Pending' in case the purchase solicitation is unlinked from direct purchase" do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo, :service_status => 'in_purchase_process')
-      substitute_purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                         :service_status => PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
+      substitute_purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                                    :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
       direct_purchase = DirectPurchase.make(:compra,
                                             :purchase_solicitation => purchase_solicitation)
 

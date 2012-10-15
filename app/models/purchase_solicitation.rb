@@ -63,7 +63,6 @@ class PurchaseSolicitation < Compras::Model
 
   scope :can_be_grouped, with_pending_items.where { service_status.in [
     PurchaseSolicitationServiceStatus::LIBERATED,
-    PurchaseSolicitationServiceStatus::PENDING,
     PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
   }
 
@@ -76,7 +75,7 @@ class PurchaseSolicitation < Compras::Model
   end
 
   def can_be_grouped?
-    liberated? || pending? || partially_fulfilled?
+    liberated? || partially_fulfilled?
   end
 
   def total_allocations_items_value

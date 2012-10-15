@@ -26,7 +26,7 @@ PurchaseSolicitation.blueprint(:reparo_2013) do
   delivery_location { DeliveryLocation.make!(:education) }
   kind { "goods" }
   general_observations { "Reparos nas instalações superiores" }
-  service_status { "pending" }
+  service_status { "liberated" }
   liberation_date { Date.new(2013, 1, 31) }
   liberator { Employee.make!(:sobrinho) }
   service_observations { "Pronto" }

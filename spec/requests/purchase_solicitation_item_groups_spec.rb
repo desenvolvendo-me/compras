@@ -7,7 +7,8 @@ feature "PurchaseSolicitationItemGroups" do
   end
 
   scenario 'create a new purchase_solicitation_item_group' do
-    PurchaseSolicitation.make!(:reparo)
+    PurchaseSolicitation.make!(:reparo,
+                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -252,9 +253,20 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to_not have_button 'Salvar'
   end
 
-  scenario 'an annulled purchase solicitation cannot be selected on purchase solicitation item group' do
-    PurchaseSolicitation.make!(:reparo)
-    PurchaseSolicitation.make!(:reparo_2013_anulado)
+  scenario 'a purchase solicitation with a status other than "Liberated" may not compose a group' do
+    item_1 = PurchaseSolicitationBudgetAllocationItem.make!(:item, :quantity => 10)
+    item_2 = PurchaseSolicitationBudgetAllocationItem.make!(:item, :quantity => 20)
+
+    allocation_1 = PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
+                                                            :items => [item_1])
+    allocation_2 = PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_2013,
+                                                            :items => [item_2])
+    PurchaseSolicitation.make!(:reparo,
+                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+                               :purchase_solicitation_budget_allocations => [allocation_1])
+    PurchaseSolicitation.make!(:reparo_desenvolvimento,
+                               :service_status => PurchaseSolicitationServiceStatus::PENDING,
+                               :purchase_solicitation_budget_allocations => [allocation_2])
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -267,20 +279,14 @@ feature "PurchaseSolicitationItemGroups" do
     fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
 
     within_modal 'Solicitações de compra' do
-      fill_in 'Ano', :with => '2012'
-
       click_button 'Pesquisar'
 
       within '.records' do
-        expect(page).to have_content '2012'
+        expect(page).to have_content 'Secretaria de Educação'
       end
 
-      fill_in 'Ano', :with => '2013'
-
-      click_button 'Pesquisar'
-
       within '.records' do
-        expect(page).to_not have_content '2013'
+        expect(page).not_to have_content 'Secretaria de Desenvolvimento'
       end
     end
   end
@@ -291,11 +297,13 @@ feature "PurchaseSolicitationItemGroups" do
     grouped_allocation = PurchaseSolicitationBudgetAllocation.make(:alocacao_primaria,
                                                                    :items => [item])
     PurchaseSolicitation.make!(:reparo,
+                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
                                :purchase_solicitation_budget_allocations => [grouped_allocation])
 
     ungrouped_allocation = PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria)
     PurchaseSolicitation.make!(:reparo_2013,
                                :budget_structure => BudgetStructure.make!(:secretaria_de_desenvolvimento),
+                               :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
                                :purchase_solicitation_budget_allocations => [ungrouped_allocation])
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'

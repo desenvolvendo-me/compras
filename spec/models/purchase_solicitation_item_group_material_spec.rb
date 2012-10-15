@@ -33,4 +33,16 @@ describe PurchaseSolicitationItemGroupMaterial do
       subject.fulfill_items(process)
     end
   end
+
+  context "validations" do
+    it "validates if purchase solicitations are pending" do
+      purchase_solicitation = double(:purchase_solicitation,
+                                     :can_be_grouped? => false)
+      subject.stub(:purchase_solicitations => [purchase_solicitation])
+
+      subject.valid?
+
+      expect(subject.errors[:purchase_solicitations]).to include "deve estar com situação Liberada para ser agrupada"
+    end
+  end
 end

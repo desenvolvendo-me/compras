@@ -112,12 +112,6 @@ describe PurchaseSolicitation do
       expect(subject.can_be_grouped?).to be true
     end
 
-    it "returns true if purchase solicitation is pending" do
-      subject.service_status = "pending"
-
-      expect(subject.can_be_grouped?).to be true
-    end
-
     it "returns true if purchase solicitation is partially fulfilled" do
       subject.service_status = "partially_fulfilled"
 

@@ -290,6 +290,7 @@ pt-BR:
       should_be_blank_if_item_group_is_present: "deve estar em branco se houver um Agrupamento de solicitações de compra selecionado"
       cannot_generate_direct_purchase: "não pode gerar compras diretas com a situação atual"
       cannot_have_purchase_solicitation_not_liberated_pending_or_partially_fulfilled: "a solicitação de compras (%{purchase_solicitation}) não está liberada, pendente ou parcialmente preenchida."
+      should_have_liberated_or_partially_fulfilled_status: "deve estar com situação Liberada para ser agrupada"
 
   activerecord:
     errors:

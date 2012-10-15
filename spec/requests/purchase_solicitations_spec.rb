@@ -520,7 +520,8 @@ feature "PurchaseSolicitations" do
 
   scenario 'update an existent purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo)
-    purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013)
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013,
+                                                       :service_status => PurchaseSolicitationServiceStatus::PENDING)
 
     navigate 'Processos de Compra > Solicitações de Compra'
 

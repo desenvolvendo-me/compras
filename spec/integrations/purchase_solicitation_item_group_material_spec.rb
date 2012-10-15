@@ -13,6 +13,7 @@ describe PurchaseSolicitationItemGroupMaterial do
     let :purchase_solicitation do
       PurchaseSolicitation.make(
         :reparo,
+        :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
         :purchase_solicitation_budget_allocations => [
           allocation_with_same_material,
           allocation_with_diferente_material
@@ -34,6 +35,19 @@ describe PurchaseSolicitationItemGroupMaterial do
 
       expect(subject.purchase_solicitation_items).to eq [item_with_same_material]
       expect(subject.purchase_solicitation_items).to_not include item_with_diferent_material
+    end
+  end
+
+  context "validations" do
+    it "only allows purchase solicitations with 'PENDING' status" do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+                                                         :service_status => PurchaseSolicitationServiceStatus::ATTENDED)
+      item_group_material = PurchaseSolicitationItemGroupMaterial.make(:reparo,
+                              :purchase_solicitations => [purchase_solicitation])
+
+      item_group_material.valid?
+
+      expect(item_group_material.errors[:purchase_solicitations]).to include "deve estar com situação Liberada para ser agrupada"
     end
   end
 end
