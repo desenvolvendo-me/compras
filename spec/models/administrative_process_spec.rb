@@ -193,7 +193,7 @@ describe AdministrativeProcess do
   end
 
   context "modality-related methods" do 
-    let (:licitation_modality) { double(:modality) } 
+    let(:licitation_modality) { double(:modality) }
 
     before do
       subject.stub(:licitation_modality => licitation_modality)

@@ -6,8 +6,8 @@ require 'app/business/purchase_solicitation_item_group_process'
 describe PurchaseSolicitationItemGroupProcess do
   describe "#update_item_group_status" do
 
-    let (:process) { double(:process) }
-    let (:item_group) { double(:item_group,
+    let(:process) { double(:process) }
+    let(:item_group) { double(:item_group,
                                :change_status! => nil,
                                :pending? => true) }
 

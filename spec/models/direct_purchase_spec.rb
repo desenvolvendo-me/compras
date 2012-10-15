@@ -251,7 +251,7 @@ describe DirectPurchase do
   end
 
   describe "#fulfill_item_group" do
-    let (:item_group) { double(:item_group) } 
+    let(:item_group) { double(:item_group) }
 
     it "fulfills the item group" do
       subject.stub(:purchase_solicitation_item_group => item_group)

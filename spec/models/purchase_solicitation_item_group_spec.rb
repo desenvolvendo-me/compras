@@ -130,8 +130,8 @@ describe PurchaseSolicitationItemGroup do
   end
 
   context "#fulfill_items" do
-    let (:process) { double(:process) } 
-    let (:group_material) { PurchaseSolicitationItemGroupMaterial.new } 
+    let(:process) { double(:process) }
+    let(:group_material) { PurchaseSolicitationItemGroupMaterial.new }
 
     it "updates the fulfiller process of each item in the group" do
       subject.purchase_solicitation_item_group_materials = [group_material]

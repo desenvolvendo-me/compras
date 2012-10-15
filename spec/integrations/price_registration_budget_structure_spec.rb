@@ -3,9 +3,9 @@ require 'spec_helper'
 
 describe PriceRegistrationBudgetStructure do
   describe "validations" do
-    let (:price_registration) { PriceRegistration.make!(:registro_de_precos) } 
-    let (:item) { price_registration.items.first } 
-    let (:budget_structure) { item.price_registration_budget_structures.first.budget_structure } 
+    let(:price_registration) { PriceRegistration.make!(:registro_de_precos) }
+    let(:item) { price_registration.items.first }
+    let(:budget_structure) { item.price_registration_budget_structures.first.budget_structure }
 
     it "doesn't allow the same budget structure to be selected twice for the same material" do
       duplicate_budget_structure = PriceRegistrationBudgetStructure.make(:secretaria_de_educacao,

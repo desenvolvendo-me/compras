@@ -12,12 +12,12 @@ describe PurchaseSolicitationProcess do
   end
 
   describe "#set_solicitation" do
-    let (:in_process_status) { double(:in_process_status) } 
-    let (:pending_status) { double(:pending_status) } 
-    let (:solicitation) { double(:solicitation).as_null_object } 
-    let (:process) { OpenStruct.new } 
+    let(:in_process_status) { double(:in_process_status) }
+    let(:pending_status) { double(:pending_status) }
+    let(:solicitation) { double(:solicitation).as_null_object }
+    let(:process) { OpenStruct.new }
 
-    let (:purchase_solicitation_process) do 
+    let(:purchase_solicitation_process) do
       PurchaseSolicitationProcess.new(process, :in_process_status => in_process_status,
                                                :pending_status => pending_status)
     end

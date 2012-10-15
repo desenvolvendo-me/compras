@@ -17,9 +17,9 @@ describe PurchaseSolicitationItemGroupMaterial do
   it {should validate_presence_of :material }
 
   context "#fulfill_items" do
-    let (:purchase_solicitation_items) { double(:purchase_solicitation_items) }
-    let (:process) { double(:process) }
-    let (:material_id) { -1 }
+    let(:purchase_solicitation_items) { double(:purchase_solicitation_items) }
+    let(:process) { double(:process) }
+    let(:material_id) { -1 }
 
     it "fulfills all the items with the same material as the group's" do
       subject.stub(:purchase_solicitation_items).and_return(purchase_solicitation_items)
