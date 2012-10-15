@@ -10,4 +10,13 @@ describe DirectPurchase do
       expect(DirectPurchase.ordered.to_a).to eq [direct_purchase_2011, direct_purchase_2012_1, direct_purchase_2012_2]
     end
   end
+
+  context "when annulled" do
+    it "changes the status of the purchase solicitation item group to Annuled" do
+      employee = Employee.make!(:sobrinho)
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+      PurchaseSolicitationItemGroupAnnulment.new(item_group).create_annulment(employee, Date.today)
+      expect(item_group.status).to eq PurchaseSolicitationItemGroupStatus::ANNULLED
+    end
+  end
 end

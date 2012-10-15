@@ -22,5 +22,7 @@ class PurchaseSolicitationItemGroupAnnulment
     item_status_changer.new({
       :old_item_ids => purchase_solicitation_item_group.purchase_solicitation_item_ids
     }).change
+
+    purchase_solicitation_item_group.change_status!(PurchaseSolicitationItemGroupStatus::ANNULLED)
   end
 end
