@@ -24,7 +24,6 @@ menu:
     - contracts
     - materials_classes
     - agreement:
-      - agreements
       - agreement_kinds
     - licitation_commissions
     - employees
