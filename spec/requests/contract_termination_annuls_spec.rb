@@ -9,7 +9,7 @@ feature 'ContractTerminationAnnuls' do
   scenario 'create a contract termination annulment' do
     ContractTermination.make!(:contrato_rescindido)
 
-    navigate 'Comum > Contratos'
+    navigate 'Cadastros Gerais > Contratos'
 
     click_link '001'
 
@@ -41,7 +41,7 @@ feature 'ContractTerminationAnnuls' do
   scenario 'a contract termination annul should have all fields disabled' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-    navigate 'Comum > Contratos'
+    navigate 'Cadastros Gerais > Contratos'
 
     click_link '001'
 
@@ -69,7 +69,7 @@ feature 'ContractTerminationAnnuls' do
   scenario 'a contract termination annul cancel should back to contract termination' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-    navigate 'Comum > Contratos'
+    navigate 'Cadastros Gerais > Contratos'
 
     click_link '001'
 

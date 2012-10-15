@@ -7,7 +7,7 @@ feature "CheckingAccountOfFiscalAccounts" do
   end
 
   scenario 'create a new checking_account_of_fiscal_account' do
-    navigate 'Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Criar Conta Corrente da Conta Contábil'
 
@@ -35,7 +35,7 @@ feature "CheckingAccountOfFiscalAccounts" do
   scenario 'update an existent checking_account_of_fiscal_account' do
     CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
-    navigate 'Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Disponibilidade financeira'
 
@@ -63,7 +63,7 @@ feature "CheckingAccountOfFiscalAccounts" do
   scenario 'destroy an existent checking_account_of_fiscal_account' do
     CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
-    navigate 'Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Disponibilidade financeira'
 
@@ -77,7 +77,7 @@ feature "CheckingAccountOfFiscalAccounts" do
   scenario 'should show structures to checking_account_of_fiscal_account' do
     CheckingAccountStructure.make!(:fonte_recursos)
 
-    navigate 'Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Disponibilidade financeira'
 
@@ -90,7 +90,7 @@ feature "CheckingAccountOfFiscalAccounts" do
   scenario 'should have more info link to structure' do
     CheckingAccountStructure.make!(:fonte_recursos)
 
-    navigate 'Comum > Plano de Contas > Contas Correntes das Contas Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Contas Correntes das Contas Contábeis'
 
     click_link 'Disponibilidade financeira'
 

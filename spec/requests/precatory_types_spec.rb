@@ -7,7 +7,7 @@ feature "PrecatoryTypes" do
   end
 
   scenario 'create a new precatory_type' do
-    navigate 'Comum > Precatório > Tipos de Precatório'
+    navigate 'Cadastros Gerais > Precatório > Tipos de Precatório'
 
     click_link 'Criar Tipos de Precatório'
 
@@ -32,7 +32,7 @@ feature "PrecatoryTypes" do
   scenario 'update an existent precatory_type' do
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    navigate 'Comum > Precatório > Tipos de Precatório'
+    navigate 'Cadastros Gerais > Precatório > Tipos de Precatório'
 
     within_records do
       click_link 'Precatórios Alimentares'
@@ -58,7 +58,7 @@ feature "PrecatoryTypes" do
   scenario 'destroy an existent precatory_type' do
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    navigate 'Comum > Precatório > Tipos de Precatório'
+    navigate 'Cadastros Gerais > Precatório > Tipos de Precatório'
 
     within_records do
       click_link 'Precatórios Alimentares'
@@ -75,7 +75,7 @@ feature "PrecatoryTypes" do
   scenario "disable deactivation_date when status is not inactive" do
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    navigate 'Comum > Precatório > Tipos de Precatório'
+    navigate 'Cadastros Gerais > Precatório > Tipos de Precatório'
 
     within_records do
       click_link 'Precatórios Alimentares'
@@ -89,7 +89,7 @@ feature "PrecatoryTypes" do
   scenario "enable deactivation_date when status is inactive" do
     PrecatoryType.make!(:tipo_de_precatorio_ativo)
 
-    navigate 'Comum > Precatório > Tipos de Precatório'
+    navigate 'Cadastros Gerais > Precatório > Tipos de Precatório'
 
     within_records do
       click_link 'Precatórios Alimentares'

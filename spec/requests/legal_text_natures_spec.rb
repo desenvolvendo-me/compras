@@ -7,7 +7,7 @@ feature "LegalTextNatures" do
   end
 
   scenario 'create a new legal_texts_nature' do
-    navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
+    navigate 'Cadastros Gerais > Legislação > Naturezas de Textos Jurídicos'
 
     click_link 'Criar Natureza de Textos Jurídicos'
 
@@ -25,7 +25,7 @@ feature "LegalTextNatures" do
   scenario 'update an existent legal_texts_nature' do
     LegalTextNature.make!(:civica)
 
-    navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
+    navigate 'Cadastros Gerais > Legislação > Naturezas de Textos Jurídicos'
 
     click_link 'Natureza Cívica'
 
@@ -43,7 +43,7 @@ feature "LegalTextNatures" do
   scenario 'destroy an existent legal_texts_nature' do
     LegalTextNature.make!(:civica)
 
-    navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
+    navigate 'Cadastros Gerais > Legislação > Naturezas de Textos Jurídicos'
 
     click_link 'Natureza Cívica'
 
@@ -57,7 +57,7 @@ feature "LegalTextNatures" do
   scenario 'validate uniqueness of name' do
     LegalTextNature.make!(:civica)
 
-    navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
+    navigate 'Cadastros Gerais > Legislação > Naturezas de Textos Jurídicos'
 
     click_link 'Criar Natureza de Textos Jurídicos'
 

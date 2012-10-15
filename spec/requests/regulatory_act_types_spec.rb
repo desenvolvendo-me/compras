@@ -9,7 +9,7 @@ feature "RegulatoryActTypes" do
   scenario 'create a new regulatory_act_type' do
     RegulatoryActTypeClassification.make!(:primeiro_tipo)
 
-    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
 
     click_link 'Criar Tipo de Ato Regulamentador'
 
@@ -29,7 +29,7 @@ feature "RegulatoryActTypes" do
   scenario 'validates uniqueness of description' do
     RegulatoryActType.make!(:lei)
 
-    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
 
     click_link 'Criar Tipo de Ato Regulamentador'
 
@@ -46,7 +46,7 @@ feature "RegulatoryActTypes" do
     RegulatoryActType.make!(:lei)
     RegulatoryActTypeClassification.make!(:segundo_tipo)
 
-    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
 
     click_link 'Lei'
 
@@ -66,7 +66,7 @@ feature "RegulatoryActTypes" do
   scenario 'destroy an existent regulatory_act_type' do
     RegulatoryActType.make!(:lei)
 
-    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
 
     click_link 'Lei'
 

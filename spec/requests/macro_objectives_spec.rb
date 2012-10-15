@@ -7,7 +7,7 @@ feature 'MacroObjectives' do
   end
 
   scenario 'create a new macro_objective' do
-    navigate 'Comum > Macro Objetivos'
+    navigate 'Cadastros Gerais > Macro Objetivos'
 
     click_link 'Criar Macro Objetivo'
 
@@ -29,7 +29,7 @@ feature 'MacroObjectives' do
   scenario 'update an existing macro_objective' do
     MacroObjective.make!(:macro_objetivo)
 
-    navigate 'Comum > Macro Objetivos'
+    navigate 'Cadastros Gerais > Macro Objetivos'
 
     within_records do
       page.find('a').click
@@ -53,7 +53,7 @@ feature 'MacroObjectives' do
   scenario 'destroy and existing macro_objective' do
     MacroObjective.make!(:macro_objetivo)
 
-    navigate 'Comum > Macro Objetivos'
+    navigate 'Cadastros Gerais > Macro Objetivos'
 
     click_link 'Melhorar qualidade do ensino'
 

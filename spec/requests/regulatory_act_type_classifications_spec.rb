@@ -7,7 +7,7 @@ feature "RegulatoryActTypeClassifications" do
   end
 
   scenario 'create a new regulatory_act_type_classification' do
-    navigate 'Comum > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
 
     click_link 'Criar Classificação de Tipos de Ato Regulamentador'
 
@@ -25,7 +25,7 @@ feature "RegulatoryActTypeClassifications" do
   scenario 'validates uniqueness of description' do
     RegulatoryActTypeClassification.make!(:primeiro_tipo)
 
-    navigate 'Comum > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
 
     click_link 'Criar Classificação de Tipos de Ato Regulamentador'
 
@@ -41,7 +41,7 @@ feature "RegulatoryActTypeClassifications" do
   scenario 'update an existent regulatory_act_type_classification' do
     RegulatoryActTypeClassification.make!(:primeiro_tipo)
 
-    navigate 'Comum > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
 
     click_link 'Tipo 01'
 
@@ -59,7 +59,7 @@ feature "RegulatoryActTypeClassifications" do
   scenario 'destroy an existent regulatory_act_type_classification' do
     RegulatoryActTypeClassification.make!(:primeiro_tipo)
 
-    navigate 'Comum > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
+    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
 
     click_link 'Tipo 01'
 

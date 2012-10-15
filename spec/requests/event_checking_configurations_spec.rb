@@ -10,7 +10,7 @@ feature "EventCheckingConfigurations" do
     Descriptor.make!(:detran_2012)
     CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
-    navigate 'Comum > Plano de Contas > Configurações de Eventos Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Configurações de Eventos Contábeis'
 
     click_link 'Criar Configuração de Evento Contábil'
 
@@ -51,7 +51,7 @@ feature "EventCheckingConfigurations" do
     EventCheckingConfiguration.make!(:detran)
     CheckingAccountOfFiscalAccount.make!(:disponibilidade)
 
-    navigate 'Comum > Plano de Contas > Configurações de Eventos Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Configurações de Eventos Contábeis'
 
     click_link 'Evento Tal'
 
@@ -107,7 +107,7 @@ feature "EventCheckingConfigurations" do
   scenario 'destroy an existent event_checking_configuration' do
     EventCheckingConfiguration.make!(:detran)
 
-    navigate 'Comum > Plano de Contas > Configurações de Eventos Contábeis'
+    navigate 'Cadastros Gerais > Plano de Contas > Configurações de Eventos Contábeis'
 
     click_link 'Evento Tal'
 

@@ -7,7 +7,7 @@ feature "ProgramKinds" do
   end
 
   scenario 'create a new program_kind' do
-    navigate 'Comum > Tipos de Programas'
+    navigate 'Cadastros Gerais > Tipos de Programas'
 
     click_link 'Criar Tipo de Programa'
 
@@ -27,7 +27,7 @@ feature "ProgramKinds" do
   scenario 'update an existing program_kind' do
     ProgramKind.make!(:apoio_administrativo)
 
-    navigate 'Comum > Tipos de Programas'
+    navigate 'Cadastros Gerais > Tipos de Programas'
 
     within_records do
       page.find('a').click
@@ -49,7 +49,7 @@ feature "ProgramKinds" do
   scenario 'destroy and existing program_kind' do
     ProgramKind.make!(:apoio_administrativo)
 
-    navigate 'Comum > Tipos de Programas'
+    navigate 'Cadastros Gerais > Tipos de Programas'
 
     click_link 'Apoio Administrativo'
 

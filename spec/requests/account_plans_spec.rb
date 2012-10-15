@@ -10,7 +10,7 @@ feature "AccountPlans" do
     AccountPlanConfiguration.make!(:plano1)
     CheckingAccountOfFiscalAccount.make!(:disponibilidade_financeira)
 
-    navigate 'Comum > Plano de Contas > Planos de Contas'
+    navigate 'Cadastros Gerais > Plano de Contas > Planos de Contas'
 
     click_link 'Criar Plano de Conta'
 
@@ -80,7 +80,7 @@ feature "AccountPlans" do
   scenario 'should have account_checking disabled before fill account_plan_configuration' do
     AccountPlanConfiguration.make!(:plano1)
 
-    navigate 'Comum > Plano de Contas > Planos de Contas'
+    navigate 'Cadastros Gerais > Plano de Contas > Planos de Contas'
 
     click_link 'Criar Plano de Conta'
 
@@ -98,7 +98,7 @@ feature "AccountPlans" do
     AccountPlan.make!(:bancos)
     AccountPlanConfiguration.make!(:segundo_plano)
 
-    navigate 'Comum > Plano de Contas > Planos de Contas'
+    navigate 'Cadastros Gerais > Plano de Contas > Planos de Contas'
 
     click_link 'Bancos conta movimento'
 
@@ -154,7 +154,7 @@ feature "AccountPlans" do
   scenario 'destroy an existent account_plan' do
     AccountPlan.make!(:bancos)
 
-    navigate 'Comum > Plano de Contas > Planos de Contas'
+    navigate 'Cadastros Gerais > Plano de Contas > Planos de Contas'
 
     click_link 'Bancos conta movimento'
 
