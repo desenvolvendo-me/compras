@@ -257,7 +257,7 @@ feature "PriceRegistration" do
       PriceRegistration.make!(:registro_de_precos,
                               :licitation_process => licitation_process)
 
-      navigate  'Compras e Licitações > Registros de Preços'
+      navigate 'Geral > Registros de Preços'
       click_link '1/2012'
 
       within_tab 'Fornecedores Vencedores' do
@@ -278,7 +278,7 @@ feature "PriceRegistration" do
       click_button 'Apurar'
 
       click_link 'voltar'
-      navigate  'Compras e Licitações > Registros de Preços'
+      navigate 'Geral > Registros de Preços'
 
       click_link '1/2012'
 
