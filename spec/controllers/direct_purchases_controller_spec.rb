@@ -67,6 +67,7 @@ describe DirectPurchasesController do
     context "when updating a purchase_solicitation" do
       it "should set the new purchase_solicitation throught a PurchaseSolicitationProcess" do
         purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+        DirectPurchaseBudgetAllocationCleaner.should_receive(:clear_old_records)
 
         PurchaseSolicitationProcess.should_receive(:update_solicitations_status).
                                     with(direct_purchase.purchase_solicitation, purchase_solicitation)
@@ -77,6 +78,8 @@ describe DirectPurchasesController do
 
       it "should set the new item_group throught a PurchaseSolicitationItemGroupProcess" do
         item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+        DirectPurchaseBudgetAllocationCleaner.should_receive(:clear_old_records)
 
         PurchaseSolicitationItemGroupProcess.
           should_receive(:update_item_group_status).

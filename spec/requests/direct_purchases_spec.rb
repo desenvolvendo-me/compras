@@ -1445,7 +1445,7 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link '1/2012'
     expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
@@ -1460,7 +1460,7 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
-    navigate 'Compras e Licitações > Solicitações de Compra'
+    navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link '1/2012'
     expect(page).to have_select "Status de atendimento", :selected => 'Pendente'
@@ -1554,7 +1554,7 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 
@@ -1582,7 +1582,7 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 
@@ -1616,7 +1616,7 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
-    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 
@@ -1642,5 +1642,163 @@ feature "DirectPurchases" do
     click_link 'Agrupamento de antivirus'
 
     expect(page).to have_select "Situação", :selected => 'Atendido'
+  end
+
+  scenario 'clear budget allocations on clear purchase solicitation item group' do
+    DirectPurchase.make!(
+      :compra,
+      :purchase_solicitation_item_group => PurchaseSolicitationItemGroup.make!(
+        :antivirus,
+        :status => PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS
+      )
+    )
+
+    navigate 'Processos de Compra > Gerar Compra Direta'
+
+    click_link '1/2012'
+
+    within_tab 'Principal' do
+      clear_modal 'Agrupamento de solicitações de compra'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    click_link '1/2012'
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '0,00'
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to_not have_field 'Item'
+    end
+  end
+
+  scenario 'clear budget allocations on clear purchase solicitation item group' do
+    DirectPurchase.make!(
+      :compra,
+      :purchase_solicitation => PurchaseSolicitation.make!(
+        :reparo,
+        :service_status => PurchaseSolicitationServiceStatus::LIBERATED
+      )
+    )
+
+    navigate 'Processos de Compra > Gerar Compra Direta'
+
+    click_link '1/2012'
+
+    within_tab 'Principal' do
+      clear_modal 'Solicitação de compra'
+      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    click_link '1/2012'
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '0,00'
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to_not have_field 'Item'
+    end
+  end
+
+  scenario 'clear old budget_allocations on change purchase_solicitation_item_group' do
+    PurchaseSolicitationItemGroup.make!(:office)
+
+    DirectPurchase.make!(
+      :compra,
+      :purchase_solicitation_item_group => PurchaseSolicitationItemGroup.make!(
+        :antivirus,
+        :status => PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS
+      )
+    )
+
+    navigate 'Processos de Compra > Gerar Compra Direta'
+
+    click_link '1/2012'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+        click_record 'Agrupamento de office'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    click_link '1/2012'
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+
+      within '.direct-purchase-budget-allocation:first' do
+        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação extra'
+        expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+        expect(page).to have_field 'Saldo da dotação', :with => '200,00'
+
+        within '.item:first' do
+          expect(page).to have_field 'Item', :with => '1'
+          expect(page).to have_field 'Material', :with => '01.01.00002 - Office'
+          expect(page).to have_field 'Marca/Referência', :with => 'Office'
+          expect(page).to have_field 'Unidade', :with => 'UN'
+          expect(page).to have_field 'Quantidade', :with => '3,00'
+          expect(page).to have_field 'Valor unitário', :with => '200,00'
+          expect(page).to have_field 'Valor total', :with => '600,00'
+        end
+      end
+    end
+  end
+
+  scenario 'clear budget allocations on clear purchase solicitation item group' do
+    PurchaseSolicitation.make!(:reparo_office,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED
+    )
+
+    DirectPurchase.make!(
+      :compra,
+      :purchase_solicitation => PurchaseSolicitation.make!(
+        :reparo,
+        :service_status => PurchaseSolicitationServiceStatus::LIBERATED
+      )
+    )
+
+    navigate 'Processos de Compra > Gerar Compra Direta'
+
+    click_link '1/2012'
+
+    within_tab 'Principal' do
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    click_link '1/2012'
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+
+      within '.direct-purchase-budget-allocation:first' do
+        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação extra'
+        expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+        expect(page).to have_field 'Saldo da dotação', :with => '200,00'
+
+        within '.item:first' do
+          expect(page).to have_field 'Item', :with => '1'
+          expect(page).to have_field 'Material', :with => '01.01.00002 - Office'
+          expect(page).to have_field 'Marca/Referência', :with => 'Office'
+          expect(page).to have_field 'Unidade', :with => 'UN'
+          expect(page).to have_field 'Quantidade', :with => '3,00'
+          expect(page).to have_field 'Valor unitário', :with => '200,00'
+          expect(page).to have_field 'Valor total', :with => '600,00'
+        end
+      end
+    end
   end
 end

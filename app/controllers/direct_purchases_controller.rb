@@ -50,6 +50,8 @@ class DirectPurchasesController < CrudController
     old_purchase_solicitation = object.purchase_solicitation
 
     object.transaction do
+      DirectPurchaseBudgetAllocationCleaner.clear_old_records(object, new_purchase_solicitation, new_item_group)
+
       if super
         PurchaseSolicitationProcess.update_solicitations_status(old_purchase_solicitation, new_purchase_solicitation)
         PurchaseSolicitationItemGroupProcess.update_item_group_status(old_item_group, new_item_group)
