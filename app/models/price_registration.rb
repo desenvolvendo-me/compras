@@ -19,7 +19,10 @@ class PriceRegistration < Compras::Model
   belongs_to :payment_method
   belongs_to :responsible, :class_name => 'Employee'
 
-  has_many :items, :class_name => 'PriceRegistrationItem', :dependent => :destroy, :inverse_of => :price_registration
+  has_many :items, :class_name => 'PriceRegistrationItem',
+                   :dependent => :destroy,
+                   :inverse_of => :price_registration,
+                   :order => :id
 
   has_one :direct_purchase, :dependent => :restrict
 
