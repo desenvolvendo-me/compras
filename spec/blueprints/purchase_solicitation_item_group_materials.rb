@@ -28,7 +28,7 @@ end
 
 PurchaseSolicitationItemGroupMaterial.blueprint(:reparo_office) do
   purchase_solicitation_item_group { nil }
-  material { Material.make!(:antivirus) }
+  material { Material.make!(:office) }
   purchase_solicitations { [PurchaseSolicitation.make(:reparo_office,
                                                       :service_status => PurchaseSolicitationServiceStatus::LIBERATED)] }
 end
