@@ -878,6 +878,8 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
     within_records do
       page.find('a').click
     end
@@ -1496,6 +1498,8 @@ feature "DirectPurchases" do
     end
 
     click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
     within_records do
       click_link '1/2012'
