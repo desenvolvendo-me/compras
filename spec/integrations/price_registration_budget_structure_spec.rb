@@ -13,6 +13,7 @@ describe PriceRegistrationBudgetStructure do
                                                                          :price_registration_item => item)
 
       expect(duplicate_budget_structure.valid?).to be false
+      expect(duplicate_budget_structure.errors[:budget_structure_id]).to include 'já está em uso'
     end
 
     it "allows the budget structure to be used twice if items are different" do
