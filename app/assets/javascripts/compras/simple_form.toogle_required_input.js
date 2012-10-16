@@ -1,15 +1,14 @@
 (function ($) {
   $.fn.requiredField = function ( required ) {
-    if (required){
-      this.each( function() {
-        var field = 'label[for|="' + $(this).attr('id') + '"]';
-        $(field).append('<abbr title="obrigatório"> *</abbr>');
-      });
-    } else {
-      this.each( function() {
-        var field = 'label[for|="' + $(this).attr('id') + '"] abbr';
-        $(field).remove();
-      });
-    }
+    var label = $('label[for|="' + $(this).attr('id') + '"]');
+    var abbr = label.find('abbr');
+
+    this.each( function() {
+      if (required) {
+        label.append('<abbr title="obrigatório"> *</abbr>');
+      } else if ( !required ) {
+        abbr.remove();
+      }
+    });
   }
 })(jQuery);
