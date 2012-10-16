@@ -1455,6 +1455,7 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Gerar Compra Direta'
     click_link '1/2012'
     fill_modal 'Solicitação de compra', :with => '2', :field => 'Código'
+
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
