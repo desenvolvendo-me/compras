@@ -201,14 +201,24 @@ describe DirectPurchase do
     end
 
     let :direct_purchase_budget_allocations do
-      [
-        double('ItemOne', :total_items_value => 10),
-        double('ItemTwo', :total_items_value => 1)
-      ]
+      [item1, item2]
     end
 
+    let(:item1) { double('ItemOne', :total_items_value => 10) }
+    let(:item2) { double('ItemTwo', :total_items_value => 1) }
+
     it 'should return sum of total_items_value' do
+      item1.stub(:marked_for_destruction?).and_return(false)
+      item2.stub(:marked_for_destruction?).and_return(false)
+
       subject.total_direct_purchase_budget_allocations_sum.should eq 11
+    end
+
+    it 'should return sum of total_items_value ignoring itens marked_for_destruction' do
+      item1.stub(:marked_for_destruction?).and_return(true)
+      item2.stub(:marked_for_destruction?).and_return(false)
+
+      subject.total_direct_purchase_budget_allocations_sum.should eq 1
     end
   end
 

@@ -92,7 +92,9 @@ class DirectPurchase < Compras::Model
   end
 
   def total_direct_purchase_budget_allocations_sum
-    direct_purchase_budget_allocations.collect(&:total_items_value).sum
+    direct_purchase_budget_allocations.
+      reject(&:marked_for_destruction?).
+      sum(&:total_items_value)
   end
 
   def fulfill_item_group
