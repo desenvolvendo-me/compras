@@ -39,6 +39,7 @@ describe DirectPurchasesController do
 
       DirectPurchase.any_instance.stub(:save).and_return(true)
       PurchaseSolicitationProcess.should_receive(:update_solicitations_status).with(nil, purchase_solicitation)
+
       post :create, :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
     end
 
@@ -47,6 +48,7 @@ describe DirectPurchasesController do
 
       DirectPurchase.any_instance.stub(:save).and_return(true)
       PurchaseSolicitationItemGroupProcess.should_receive(:update_item_group_status).with(nil, item_group)
+
       post :create, :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
     end
   end
@@ -68,6 +70,7 @@ describe DirectPurchasesController do
 
         PurchaseSolicitationProcess.should_receive(:update_solicitations_status).
                                     with(direct_purchase.purchase_solicitation, purchase_solicitation)
+
         put :update, :id => direct_purchase.id,
                      :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
       end
@@ -78,6 +81,7 @@ describe DirectPurchasesController do
         PurchaseSolicitationItemGroupProcess.
           should_receive(:update_item_group_status).
           with(direct_purchase.purchase_solicitation_item_group, item_group)
+
         put :update, :id => direct_purchase.id,
                      :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
       end
