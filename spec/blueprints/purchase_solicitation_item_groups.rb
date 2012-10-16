@@ -1,6 +1,6 @@
 PurchaseSolicitationItemGroup.blueprint(:antivirus) do
   description { 'Agrupamento de antivirus' }
-  status { 'pending' }
+  status { PurchaseSolicitationItemGroupStatus::PENDING }
   purchase_solicitation_item_group_materials {
     [PurchaseSolicitationItemGroupMaterial.make(
       :reparo,
@@ -11,7 +11,7 @@ end
 
 PurchaseSolicitationItemGroup.blueprint(:reparo_2013) do
   description { 'Agrupamento de reparo 2013' }
-  status { 'pending' }
+  status { PurchaseSolicitationItemGroupStatus::PENDING }
   purchase_solicitation_item_group_materials {
     [PurchaseSolicitationItemGroupMaterial.make(
       :reparo_2013,
@@ -22,7 +22,7 @@ end
 
 PurchaseSolicitationItemGroup.blueprint(:reparo_arame_farpado) do
   description { 'Agrupamento de arame farpado' }
-  status { 'pending' }
+  status { PurchaseSolicitationItemGroupStatus::PENDING }
   purchase_solicitation_item_group_materials {
     [PurchaseSolicitationItemGroupMaterial.make(
       :reparo_arame_farpado,
@@ -33,7 +33,7 @@ end
 
 PurchaseSolicitationItemGroup.blueprint(:antivirus_desenvolvimento) do
   description { 'Agrupamento de antivirus desenvolvimento' }
-  status { 'pending' }
+  status { PurchaseSolicitationItemGroupStatus::PENDING }
   purchase_solicitation_item_group_materials {
     [PurchaseSolicitationItemGroupMaterial.make(
       :reparo_desenvolvimento,
@@ -44,7 +44,7 @@ end
 
 PurchaseSolicitationItemGroup.blueprint(:office) do
   description { 'Agrupamento de office' }
-  status { 'pending' }
+  status { PurchaseSolicitationItemGroupStatus::PENDING }
   purchase_solicitation_item_group_materials {
     [PurchaseSolicitationItemGroupMaterial.make(
       :reparo_office,
