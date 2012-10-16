@@ -85,7 +85,7 @@ feature "PriceCollectionProposals" do
     scenario 'I can see only my proposals' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 
-      click_link 'Geral'
+      click_link 'Compras e Licitações'
 
       click_link 'Coletas de Preço'
 
