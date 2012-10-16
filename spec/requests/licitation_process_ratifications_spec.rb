@@ -10,7 +10,7 @@ feature "LicitationProcessRatifications" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
-    navigate 'Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
@@ -58,7 +58,7 @@ feature "LicitationProcessRatifications" do
     LicitationProcessRatification.make!(:processo_licitatorio_computador, :licitation_process => licitation_process)
     BidderProposal.make!(:proposta_licitante_1, :bidder => bidder)
 
-    navigate 'Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
       page.find('a').click
@@ -95,7 +95,7 @@ feature "LicitationProcessRatifications" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
 
-    navigate 'Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
 
@@ -137,7 +137,7 @@ feature "LicitationProcessRatifications" do
     BidderProposal.make!(:proposta_licitante_1, :bidder => Bidder.make!(:licitante))
     SignatureConfiguration.make!(:homologacao_e_adjudicao_do_processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processo Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
 
     within_records do
       page.find('a').click

@@ -9,12 +9,10 @@ menu:
   - administrative_and_licitation_processes:
     - administrative_processes
     - licitation_processes
-
-    - licitation_process:
-      - licitation_notices
-      - licitation_process_impugnments
-      - licitation_process_appeals
-      - licitation_process_ratifications
+    - licitation_notices
+    - licitation_process_impugnments
+    - licitation_process_appeals
+    - licitation_process_ratifications
 
   - general_entries:
     - agencies

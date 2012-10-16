@@ -10,7 +10,7 @@ feature "LicitationProcessAppeals" do
     LicitationProcess.make!(:processo_licitatorio)
     Person.make!(:sobrinho)
 
-    navigate 'Processo Administrativo/Licitatório > Processo Licitatório > Interposição de Recursos de Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Interposição de Recursos de Processos Licitatórios'
 
     click_link 'Criar Interposição de Recurso do Processo Licitatório'
 
@@ -47,7 +47,7 @@ feature "LicitationProcessAppeals" do
     LicitationProcess.make!(:processo_licitatorio_computador)
     Person.make!(:wenderson)
 
-    navigate 'Processo Administrativo/Licitatório > Processo Licitatório > Interposição de Recursos de Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Interposição de Recursos de Processos Licitatórios'
 
     click_link interposicao_processo_licitatorio.to_s
 
@@ -82,7 +82,7 @@ feature "LicitationProcessAppeals" do
   scenario 'destroy an existent licitation_process_appeal' do
     interposicao_processo_licitatorio = LicitationProcessAppeal.make!(:interposicao_processo_licitatorio)
 
-    navigate 'Processo Administrativo/Licitatório > Processo Licitatório > Interposição de Recursos de Processos Licitatórios'
+    navigate 'Processo Administrativo/Licitatório > Interposição de Recursos de Processos Licitatórios'
 
     click_link "#{interposicao_processo_licitatorio}"
 
