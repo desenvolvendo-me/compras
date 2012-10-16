@@ -1069,10 +1069,12 @@ feature "DirectPurchases" do
       expect(page).to have_content 'Estrutura orçamentária *'
 
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
         click_record 'Agrupamento de antivirus'
       end
+
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
 
@@ -1532,10 +1534,12 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
+
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
         click_record 'Agrupamento de antivirus'
       end
+
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
