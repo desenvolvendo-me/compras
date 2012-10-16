@@ -1092,7 +1092,9 @@ feature "DirectPurchases" do
   end
 
   scenario 'fill budget allocations from purchase solicitation item group' do
-    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
+    PurchaseSolicitation.make!(:reparo, {
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED
+    })
     LegalReference.make!(:referencia)
     Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
