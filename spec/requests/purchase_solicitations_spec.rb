@@ -123,9 +123,9 @@ feature "PurchaseSolicitations" do
     end
 
     expect(page).to_not have_link 'Apagar'
+    expect(page).to have_disabled_field 'Ano'
 
     within_tab 'Principal' do
-      fill_in 'Ano', :with => '2013'
       fill_in 'Data da solicitação', :with => '01/02/2013'
       fill_modal 'Responsável pela solicitação', :with => '12903412', :field => 'Matrícula'
       fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
@@ -175,7 +175,7 @@ feature "PurchaseSolicitations" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Código', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2013'
+      expect(page).to have_disabled_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da solicitação', :with => '01/02/2013'
       expect(page).to have_field 'Responsável pela solicitação', :with => 'Wenderson Malheiros'
       expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1.29 - Secretaria de Desenvolvimento'

@@ -132,8 +132,9 @@ feature "PriceRegistration" do
 
     click_link '1/2012'
 
+    expect(page).to have_disabled_field 'Ano'
+
     within_tab 'Principal' do
-      fill_in 'Ano', :with => '2013'
       fill_in 'Data', :with => '05/04/2013'
       fill_in 'Data da validade', :with => '05/04/2014'
       select 'Ativo', :from => 'Situação'
@@ -171,11 +172,11 @@ feature "PriceRegistration" do
 
     expect(page).to have_notice 'Registro de Preço editado com sucesso.'
 
-    click_link '1/2013'
+    click_link '1/2012'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Número', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2013'
+      expect(page).to have_disabled_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data', :with => '05/04/2013'
       expect(page).to have_field 'Data da validade', :with => '05/04/2014'
       expect(page).to have_select 'Situação', :selected => 'Ativo'

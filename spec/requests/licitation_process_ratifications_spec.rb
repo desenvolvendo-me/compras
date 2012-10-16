@@ -65,6 +65,7 @@ feature "LicitationProcessRatifications" do
     end
 
     expect(page).to_not have_link 'Apagar'
+    expect(page).to have_disabled_field 'Processo licitatório'
 
     within_modal 'Participante vencedor' do
       click_button 'Pesquisar'

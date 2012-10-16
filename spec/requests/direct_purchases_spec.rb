@@ -442,7 +442,7 @@ feature "DirectPurchases" do
 
     within_tab 'Principal' do
       expect(page).to have_field 'Compra', :with => '1'
-      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_disabled_field 'Ano', :with => '2012'
       expect(page).to have_field 'Data da compra', :with => '19/03/2012'
       expect(page).to have_field 'Referência legal', :with => 'Referencia legal'
       expect(page).to have_select 'Modalidade', :selected => 'Material ou serviços'

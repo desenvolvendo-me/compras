@@ -248,7 +248,6 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2013', :field => 'Exercício'
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Gerente Geral', :field => 'Descrição'
@@ -279,7 +278,7 @@ feature "BudgetAllocations" do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_field 'Descritor', :with => '2013 - Secretaria de Educação'
+      expect(page).to have_disabled_field 'Descritor'
       expect(page).to have_field 'Estrutura orçamentaria', :with => '1.29 - Secretaria de Desenvolvimento'
       expect(page).to have_field 'Função', :with => '04 - Administração'
       expect(page).to have_field 'Subfunção', :with => '02 - Gerente Geral'
