@@ -1,4 +1,7 @@
 class AddLicitationModalityIdToAdministrativeProcess < ActiveRecord::Migration
+  class AdministrativeProcess < Compras::Model
+  end
+
   def change
     add_column :compras_administrative_processes, :licitation_modality_id, :integer
 
