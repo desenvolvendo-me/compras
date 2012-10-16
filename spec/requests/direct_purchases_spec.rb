@@ -1439,18 +1439,24 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
     click_link '1/2012'
     expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
 
-    new_solicitation = PurchaseSolicitation.make!(:reparo_desenvolvimento, :service_status => 'liberated')
+    PurchaseSolicitation.make!(:reparo_desenvolvimento, :service_status => 'liberated')
 
     navigate 'Processos de Compra > Gerar Compra Direta'
     click_link '1/2012'
     fill_modal 'Solicitação de compra', :with => '2', :field => 'Código'
     click_button 'Salvar'
 
-    navigate 'Processos de Compra > Solicitações de Compra'
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    navigate 'Compras e Licitações > Solicitações de Compra'
+
     click_link '1/2012'
     expect(page).to have_select "Status de atendimento", :selected => 'Pendente'
 
@@ -1537,7 +1543,9 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
-    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 
@@ -1563,7 +1571,9 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
-    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 
@@ -1572,11 +1582,15 @@ feature "DirectPurchases" do
 
   scenario "it updates the status of the item group back to 'pending'
             when it's dissociated from a direct purchase" do
-    new_item_group = PurchaseSolicitationItemGroup.make!(:office)
-    item_group = PurchaseSolicitationItemGroup.make!(:antivirus,
-                                                     :status => 'in_purchase_process')
-    DirectPurchase.make!(:compra,
-                         :purchase_solicitation_item_group => item_group)
+    PurchaseSolicitationItemGroup.make!(:office)
+
+    DirectPurchase.make!(
+      :compra,
+      :purchase_solicitation_item_group => PurchaseSolicitationItemGroup.make!(
+        :antivirus,
+        :status => 'in_purchase_process'
+      )
+    )
 
     navigate 'Processos de Compra > Gerar Compra Direta'
 
@@ -1591,7 +1605,9 @@ feature "DirectPurchases" do
 
     click_button 'Salvar'
 
-    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    navigate 'Compras e Licitações > Cadastros Gerais > Agrupamentos de Itens de Solicitações de Compra'
 
     click_link 'Agrupamento de antivirus'
 

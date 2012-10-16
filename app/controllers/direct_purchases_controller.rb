@@ -34,41 +34,40 @@ class DirectPurchasesController < CrudController
 
   def create_resource(object)
     object.transaction do
-      if params[:direct_purchase]
-        set_purchase_solicitation(object, params[:direct_purchase][:purchase_solicitation_id])
-        update_item_group_status(object, params[:direct_purchase][:purchase_solicitation_item_group_id])
+      if super
+        if params[:direct_purchase]
+          PurchaseSolicitationProcess.update_solicitations_status(nil, new_purchase_solicitation)
+          PurchaseSolicitationItemGroupProcess.update_item_group_status(nil, new_item_group)
+        end
+
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
       end
-
-      super
-
-      PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
     end
   end
 
   def update_resource(object, attributes)
-    object.transaction do
-      set_purchase_solicitation(object, params[:direct_purchase][:purchase_solicitation_id])
-      update_item_group_status(object, params[:direct_purchase][:purchase_solicitation_item_group_id])
+    old_item_group = object.purchase_solicitation_item_group
+    old_purchase_solicitation = object.purchase_solicitation
 
-      super
+    object.transaction do
+      if super
+        PurchaseSolicitationProcess.update_solicitations_status(old_purchase_solicitation, new_purchase_solicitation)
+        PurchaseSolicitationItemGroupProcess.update_item_group_status(old_item_group, new_item_group)
+      end
     end
   end
 
   private
 
-  def set_purchase_solicitation(direct_purchase, purchase_solicitation_id)
-    return unless purchase_solicitation_id.present?
+  def new_purchase_solicitation
+    purchase_solicitation_id = params[:direct_purchase][:purchase_solicitation_id]
 
-    purchase_solicitation = PurchaseSolicitation.find(purchase_solicitation_id)
-    purchase_solicitation_process = PurchaseSolicitationProcess.new(direct_purchase)
-    purchase_solicitation_process.set_solicitation(purchase_solicitation)
+    PurchaseSolicitation.find(purchase_solicitation_id) if purchase_solicitation_id.present?
   end
 
-  def update_item_group_status(direct_purchase, item_group_id)
-    return unless item_group_id.present?
+  def new_item_group
+    item_group_id = params[:direct_purchase][:purchase_solicitation_item_group_id]
 
-    item_group = PurchaseSolicitationItemGroup.find(item_group_id)
-    item_group_process = PurchaseSolicitationItemGroupProcess.new(direct_purchase)
-    item_group_process.update_item_group_status(item_group)
+    PurchaseSolicitationItemGroup.find(item_group_id) if item_group_id.present?
   end
 end

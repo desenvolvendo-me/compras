@@ -28,7 +28,7 @@ describe PurchaseSolicitation do
                                                          :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
       direct_purchase = DirectPurchase.make(:compra)
 
-      PurchaseSolicitationProcess.new(direct_purchase).set_solicitation(purchase_solicitation)
+      PurchaseSolicitationProcess.update_solicitations_status(direct_purchase.purchase_solicitation, purchase_solicitation)
 
       expect(purchase_solicitation.service_status).to eq PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS
     end
@@ -41,7 +41,7 @@ describe PurchaseSolicitation do
       direct_purchase = DirectPurchase.make(:compra,
                                             :purchase_solicitation => purchase_solicitation)
 
-      PurchaseSolicitationProcess.new(direct_purchase).set_solicitation(substitute_purchase_solicitation)
+      PurchaseSolicitationProcess.update_solicitations_status(direct_purchase.purchase_solicitation, substitute_purchase_solicitation)
 
       expect(purchase_solicitation.service_status).to eq PurchaseSolicitationServiceStatus::PENDING
     end

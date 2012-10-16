@@ -1,33 +1,22 @@
 class PurchaseSolicitationItemGroupProcess
-  def initialize(process)
-    @process = process
-  end
+  def self.update_item_group_status(old_item_group, new_item_group)
+    validate_pending_status(new_item_group)
 
-  def update_item_group_status(purchase_solicitation_item_group)
-    validate_pending_status(purchase_solicitation_item_group)
-
-    unless @process.purchase_solicitation_item_group.nil?
-      change_status(@process.purchase_solicitation_item_group, pending_status)
-    end
-
-    change_status(purchase_solicitation_item_group, in_purchase_status)
+    change_status(old_item_group, PurchaseSolicitationItemGroupStatus::PENDING)
+    change_status(new_item_group, PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
   end
 
   private
 
-  def validate_pending_status(item_group)
+  def self.validate_pending_status(item_group)
+    return if item_group.nil?
+
     raise ArgumentError, "Item group status should be 'Pending'" unless item_group.pending?
   end
 
-  def change_status(item_group, status)
+  def self.change_status(item_group, status)
+    return if item_group.nil?
+
     item_group.change_status!(status)
-  end
-
-  def in_purchase_status
-    PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS
-  end
-
-  def pending_status
-    PurchaseSolicitationItemGroupStatus::PENDING
   end
 end
