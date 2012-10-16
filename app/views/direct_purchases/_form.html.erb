@@ -28,6 +28,7 @@
     if (purchaseSolicitationItemGroupId) {
       disableBudgetAllocations();
       disablePurchaseSolicitation();
+      $("#direct_purchase_budget_structure").requiredField(false);
     } else if (purchaseSolicitation) {
       disableBudgetAllocations();
       disablePurchaseSolicitationItemGroup();

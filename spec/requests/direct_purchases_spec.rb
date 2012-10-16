@@ -1089,6 +1089,12 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).not_to have_content 'Estrutura orçamentária *'
   end
 
   scenario 'fill budget allocations from purchase solicitation item group' do
