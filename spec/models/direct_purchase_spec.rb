@@ -195,28 +195,21 @@ describe DirectPurchase do
     end
   end
 
-  context 'total_direct_purchase_budget_allocations_sum' do
-    before do
-      subject.stub(:direct_purchase_budget_allocations).and_return(direct_purchase_budget_allocations)
-    end
-
-    let :direct_purchase_budget_allocations do
-      [item1, item2]
-    end
-
-    let(:item1) { double('ItemOne', :total_items_value => 10) }
-    let(:item2) { double('ItemTwo', :total_items_value => 1) }
-
+  describe '#total_direct_purchase_budget_allocations_sum' do
     it 'should return sum of total_items_value' do
-      item1.stub(:marked_for_destruction?).and_return(false)
-      item2.stub(:marked_for_destruction?).and_return(false)
+      item1 = double(:item1, :total_items_value =>10, :marked_for_destruction? => false)
+      item2 = double(:item1, :total_items_value =>1, :marked_for_destruction? => false)
+
+      subject.stub(:direct_purchase_budget_allocations).and_return([item1, item2])
 
       subject.total_direct_purchase_budget_allocations_sum.should eq 11
     end
 
     it 'should return sum of total_items_value ignoring itens marked_for_destruction' do
-      item1.stub(:marked_for_destruction?).and_return(true)
-      item2.stub(:marked_for_destruction?).and_return(false)
+      item1 = double(:item1, :total_items_value =>10, :marked_for_destruction? => true)
+      item2 = double(:item1, :total_items_value =>1, :marked_for_destruction? => false)
+
+      subject.stub(:direct_purchase_budget_allocations).and_return([item1, item2])
 
       subject.total_direct_purchase_budget_allocations_sum.should eq 1
     end
