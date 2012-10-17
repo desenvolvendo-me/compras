@@ -13,11 +13,13 @@ feature "Tradings" do
   scenario "creating a new trading" do
     Entity.make!(:detran)
     Entity.make!(:secretaria_de_educacao)
+    LicitationProcess.make!(:processo_licitatorio)
 
     navigate "Pregão > Pregões Presenciais"
 
     click_link "Criar Pregão Presencial"
     fill_in "Ano", :with => "2012"
+    fill_modal "Processo licitatório", :with => "1", :field => "Processo"
     fill_modal "Órgão/Entidade", :with => "Detran"
     fill_modal "Unidade licitante", :with => "Secretaria de Educação"
     fill_in "Objeto resumido", :with => "Descrição resumida do objeto"
@@ -30,6 +32,7 @@ feature "Tradings" do
 
     expect(page).to have_field "Número", :with => "1"
     expect(page).to have_field "Ano", :with => "2012"
+    expect(page).to have_field "Processo licitatório", :with => "1/2012"
     expect(page).to have_field "Órgão/Entidade", :with => "Detran"
     expect(page).to have_field "Unidade licitante", :with => "Secretaria de Educação"
     expect(page).to have_field "Objeto resumido", :with => "Descrição resumida do objeto"

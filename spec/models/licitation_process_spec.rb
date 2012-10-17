@@ -21,6 +21,7 @@ require 'app/business/licitation_process_types_of_calculation_by_modality'
 require 'app/models/reserve_fund'
 require 'app/models/indexer'
 require 'app/models/price_registration'
+require 'app/models/trading'
 
 describe LicitationProcess do
   it 'should return process/year as to_s' do
@@ -47,6 +48,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
+  it { should have_many(:tradings).dependent(:restrict) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }

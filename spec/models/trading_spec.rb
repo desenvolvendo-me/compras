@@ -8,7 +8,10 @@ describe Trading do
   end
 
   it { should belong_to :entity }
+  it { should belong_to :licitation_process }
   it { should belong_to :licitating_unit }
+
+  it { should validate_presence_of :licitation_process }
 
   describe "#to_s" do
 

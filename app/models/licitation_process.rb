@@ -41,6 +41,7 @@ class LicitationProcess < Compras::Model
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
   has_many :price_registrations, :dependent => :restrict
+  has_many :tradings, :dependent => :restrict
 
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
