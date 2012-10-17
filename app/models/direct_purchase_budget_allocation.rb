@@ -15,7 +15,7 @@ class DirectPurchaseBudgetAllocation < Compras::Model
   validate :must_have_at_least_one_item
 
   def total_items_value
-    items.reject(&:marked_for_destruction?).collect(&:estimated_total_price).sum
+    items.reject(&:marked_for_destruction?).sum(&:estimated_total_price)
   end
 
   protected
