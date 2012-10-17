@@ -7,7 +7,7 @@ feature 'DirectPurchaseAnnuls' do
   end
 
   scenario 'annul link should not be visible on create a direct purchase' do
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -17,7 +17,7 @@ feature 'DirectPurchaseAnnuls' do
   scenario 'annul link should be visible on update direct purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -32,7 +32,7 @@ feature 'DirectPurchaseAnnuls' do
       :annullable => DirectPurchase.make!(:compra)
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -51,7 +51,7 @@ feature 'DirectPurchaseAnnuls' do
       :annullable => supply_authorization.direct_purchase
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -65,7 +65,7 @@ feature 'DirectPurchaseAnnuls' do
   scenario 'annul an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -98,7 +98,7 @@ feature 'DirectPurchaseAnnuls' do
       :purchase_solicitation_item_group => PurchaseSolicitationItemGroup.make!(:antivirus)
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -142,7 +142,7 @@ feature 'DirectPurchaseAnnuls' do
                                                            :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -199,7 +199,7 @@ feature 'DirectPurchaseAnnuls' do
       )
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -264,7 +264,7 @@ feature 'DirectPurchaseAnnuls' do
       end
     end
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       click_link "#{direct_purchase}"

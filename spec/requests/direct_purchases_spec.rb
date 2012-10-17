@@ -19,11 +19,11 @@ feature "DirectPurchases" do
     ModalityLimit.make!(:modalidade_de_compra)
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
-    expect(page).to have_content 'Gerar Compra Direta'
+    expect(page).to have_content 'Compra Direta'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Ano', :with => "#{Date.current.year}"
@@ -129,7 +129,7 @@ feature "DirectPurchases" do
     ModalityLimit.make!(:modalidade_de_compra_ponte)
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -280,7 +280,7 @@ feature "DirectPurchases" do
   scenario 'when clear purchase solicitation item group budget allocations should clear too' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -322,7 +322,7 @@ feature "DirectPurchases" do
     budget_allocation = BudgetAllocation.make!(:alocacao)
     Material.make!(:antivirus)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -401,7 +401,7 @@ feature "DirectPurchases" do
   scenario 'should edit an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -476,7 +476,7 @@ feature "DirectPurchases" do
     direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
     SupplyAuthorization.make!(:compra_2012)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -513,7 +513,7 @@ feature "DirectPurchases" do
     direct_purchase = DirectPurchase.make!(:compra_nao_autorizada)
     Prefecture.make!(:belo_horizonte)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -547,7 +547,7 @@ feature "DirectPurchases" do
   scenario 'should not have destroy button when edit an existent direct_purchase' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -569,7 +569,7 @@ feature "DirectPurchases" do
     ModalityLimit.make!(:modalidade_de_compra)
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -617,7 +617,7 @@ feature "DirectPurchases" do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
 
@@ -635,7 +635,7 @@ feature "DirectPurchases" do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011_dez)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
 
@@ -653,7 +653,7 @@ feature "DirectPurchases" do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
 
@@ -670,7 +670,7 @@ feature "DirectPurchases" do
   scenario 'should filter by yearly sequence' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
 
@@ -686,7 +686,7 @@ feature "DirectPurchases" do
   scenario 'should filter by budget structure' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
 
@@ -702,7 +702,7 @@ feature "DirectPurchases" do
   scenario 'should filter by creditor' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
 
@@ -718,7 +718,7 @@ feature "DirectPurchases" do
   scenario 'should filter by purchase date' do
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Filtrar Compras Diretas'
 
@@ -732,7 +732,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'calculate total value of items' do
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -797,7 +797,7 @@ feature "DirectPurchases" do
   end
 
   scenario 'set sequencial item order' do
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -841,7 +841,7 @@ feature "DirectPurchases" do
   scenario 'it must have at least one budget allocation with at least one item' do
     BudgetAllocation.make!(:alocacao)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -865,7 +865,7 @@ feature "DirectPurchases" do
   scenario 'when is not over limit should not show error' do
     DirectPurchase.make!(:compra_perto_do_limite)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -892,7 +892,7 @@ feature "DirectPurchases" do
   scenario 'when is over limit should show error' do
     DirectPurchase.make!(:compra_perto_do_limite)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -914,7 +914,7 @@ feature "DirectPurchases" do
     SupplyAuthorization.make!(:compra_2012)
     Prefecture.make!(:belo_horizonte)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -930,7 +930,7 @@ feature "DirectPurchases" do
     ResourceAnnul.make!(:anulacao_generica,
                         :annullable => PurchaseSolicitationItemGroup.make!(:reparo_2013))
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -950,7 +950,7 @@ feature "DirectPurchases" do
   scenario 'viewing purchase solicitations of purchase solicitation item group' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -980,7 +980,7 @@ feature "DirectPurchases" do
     ModalityLimit.make!(:modalidade_de_compra)
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1032,7 +1032,7 @@ feature "DirectPurchases" do
     new_item = PurchaseSolicitationBudgetAllocationItem.make!(:arame_farpado,
                :purchase_solicitation_budget_allocation => group.purchase_solicitations.first.purchase_solicitation_budget_allocations.first)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
     click_link 'Gerar Compra Direta'
 
     within_tab 'Principal' do
@@ -1061,7 +1061,7 @@ feature "DirectPurchases" do
     ModalityLimit.make!(:modalidade_de_compra)
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1115,7 +1115,7 @@ feature "DirectPurchases" do
     ModalityLimit.make!(:modalidade_de_compra_ponte)
     PriceRegistration.make!(:registro_de_precos)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1260,7 +1260,7 @@ feature "DirectPurchases" do
     PaymentMethod.make!(:dinheiro)
     ModalityLimit.make!(:modalidade_de_compra_ponte)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1299,7 +1299,7 @@ feature "DirectPurchases" do
       :service_status => PurchaseSolicitationServiceStatus::ATTENDED
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1318,7 +1318,7 @@ feature "DirectPurchases" do
       :service_status => PurchaseSolicitationServiceStatus::PENDING
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1337,7 +1337,7 @@ feature "DirectPurchases" do
       :service_status => PurchaseSolicitationServiceStatus::LIBERATED
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1359,7 +1359,7 @@ feature "DirectPurchases" do
     )
     Prefecture.make!(:belo_horizonte)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       page.find('a').click
@@ -1421,7 +1421,7 @@ feature "DirectPurchases" do
     PaymentMethod.make!(:dinheiro)
     ModalityLimit.make!(:modalidade_de_compra_ponte)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1452,7 +1452,7 @@ feature "DirectPurchases" do
 
     PurchaseSolicitation.make!(:reparo_desenvolvimento, :service_status => 'liberated')
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
     click_link '1/2012'
     fill_modal 'Solicitação de compra', :with => '2', :field => 'Código'
 
@@ -1484,7 +1484,7 @@ feature "DirectPurchases" do
       ]
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     within_records do
       click_link '1/2012'
@@ -1525,7 +1525,7 @@ feature "DirectPurchases" do
     PaymentMethod.make!(:dinheiro)
     ModalityLimit.make!(:modalidade_de_compra_ponte)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
 
@@ -1567,7 +1567,7 @@ feature "DirectPurchases" do
     PurchaseSolicitationItemGroup.make!(:antivirus)
     DirectPurchase.make!(:compra)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
 
@@ -1601,7 +1601,7 @@ feature "DirectPurchases" do
       )
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
 
@@ -1629,7 +1629,7 @@ feature "DirectPurchases" do
     DirectPurchase.make!(:compra,
                          :purchase_solicitation_item_group => item_group)
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
 
@@ -1653,7 +1653,7 @@ feature "DirectPurchases" do
       )
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
 
@@ -1683,7 +1683,7 @@ feature "DirectPurchases" do
       )
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
 
@@ -1716,7 +1716,7 @@ feature "DirectPurchases" do
       )
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
 
@@ -1767,7 +1767,7 @@ feature "DirectPurchases" do
       )
     )
 
-    navigate 'Processos de Compra > Gerar Compra Direta'
+    navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
 
