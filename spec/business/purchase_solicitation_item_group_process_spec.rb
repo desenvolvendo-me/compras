@@ -12,14 +12,14 @@ describe PurchaseSolicitationItemGroupProcess do
     it "updates the item group status to 'in_purchase_process'" do
       item_group.should_receive(:change_status!).with(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
 
-      described_class.update_item_group_status(nil, item_group)
+      described_class.update_item_group_status(item_group)
     end
 
     it "raises an error if the new item group status is not 'Pending'" do
       item_group.stub(:pending?).and_return(false)
 
       expect {
-        described_class.update_item_group_status(nil, item_group)
+        described_class.update_item_group_status(item_group)
       }.to raise_error(ArgumentError, "Item group status should be 'Pending'")
     end
 
@@ -29,7 +29,7 @@ describe PurchaseSolicitationItemGroupProcess do
 
         old_group.should_receive(:change_status!).with(PurchaseSolicitationItemGroupStatus::PENDING)
 
-        described_class.update_item_group_status(old_group, item_group)
+        described_class.update_item_group_status(item_group, old_group)
       end
     end
   end

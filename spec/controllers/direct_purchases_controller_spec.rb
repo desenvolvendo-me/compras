@@ -47,7 +47,7 @@ describe DirectPurchasesController do
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
       DirectPurchase.any_instance.stub(:save).and_return(true)
-      PurchaseSolicitationItemGroupProcess.should_receive(:update_item_group_status).with(nil, item_group)
+      PurchaseSolicitationItemGroupProcess.should_receive(:update_item_group_status).with(item_group)
 
       post :create, :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
     end
@@ -83,7 +83,7 @@ describe DirectPurchasesController do
 
         PurchaseSolicitationItemGroupProcess.
           should_receive(:update_item_group_status).
-          with(direct_purchase.purchase_solicitation_item_group, item_group)
+          with(item_group, direct_purchase.purchase_solicitation_item_group)
 
         put :update, :id => direct_purchase.id,
                      :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }

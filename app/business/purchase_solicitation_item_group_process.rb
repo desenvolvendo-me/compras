@@ -1,5 +1,5 @@
 class PurchaseSolicitationItemGroupProcess
-  def self.update_item_group_status(old_item_group, new_item_group)
+  def self.update_item_group_status(new_item_group, old_item_group = nil)
     validate_pending_status(new_item_group)
 
     change_status(old_item_group, PurchaseSolicitationItemGroupStatus::PENDING)

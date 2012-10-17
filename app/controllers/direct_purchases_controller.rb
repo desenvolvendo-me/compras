@@ -37,7 +37,7 @@ class DirectPurchasesController < CrudController
       if super
         if params[:direct_purchase]
           PurchaseSolicitationProcess.update_solicitations_status(nil, new_purchase_solicitation)
-          PurchaseSolicitationItemGroupProcess.update_item_group_status(nil, new_item_group)
+          PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group)
         end
 
         PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
@@ -54,7 +54,7 @@ class DirectPurchasesController < CrudController
 
       if super
         PurchaseSolicitationProcess.update_solicitations_status(old_purchase_solicitation, new_purchase_solicitation)
-        PurchaseSolicitationItemGroupProcess.update_item_group_status(old_item_group, new_item_group)
+        PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group, old_item_group)
       end
     end
   end
