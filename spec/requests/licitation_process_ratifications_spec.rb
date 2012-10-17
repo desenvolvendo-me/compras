@@ -163,6 +163,28 @@ feature "LicitationProcessRatifications" do
     expect(page).to have_content 'Gabriel Sobrinho'
   end
 
+  scenario 'Update licitation process filter into licicitation process ratification bidder propertly' do
+    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio_computador)
+
+    navigate 'Processo Administrativo/Licitatório > Homologações e Adjudicações de Processos Licitatórios'
+
+    click_link 'Criar Homologação e Adjudicação de Processo Licitatório'
+
+    fill_modal 'Processo licitatório', :with => '2012', :field => 'Ano'
+
+    within_modal 'Participante vencedor' do
+      expect(page).to have_field 'Processo licitatório', :with => '1/2012'
+      click_link 'Voltar'
+    end
+
+    fill_modal 'Processo licitatório', :with => '2013', :field => 'Ano'
+
+    within_modal 'Participante vencedor' do
+      expect(page).to have_field 'Processo licitatório', :with => '1/2013'
+    end
+  end
+
   def bidder_checkbok_html_name(number)
     "licitation_process_ratification[licitation_process_ratification_items_attributes][#{number}][ratificated]"
   end

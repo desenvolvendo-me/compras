@@ -60,25 +60,23 @@
     $('table.records input:checkbox').attr('checked', this.checked);
   });
 
-  $("#licitation_process_ratification_licitation_process_id").change(function (event, data) {
-    if (!this.value) {
+  $("#licitation_process_ratification_licitation_process_id").change(function (event, licitationProcess) {
+    if (licitationProcess) {
+      var urlModal = "<%= modal_bidders_path %>?",
+      params = {
+        locked_fields: ['licitation_process'],
+        licitation_process_id: licitationProcess.id
+      };
+
+      urlModal += jQuery.param(params);
+
+      $("#licitation_process_ratification_bidder").data("modal-url", urlModal).
+                                                   attr("disabled", false); 
+    } else {
       $('#licitation_process_ratification_bidder_id').val('');
       $('#licitation_process_ratification_bidder').val('').attr('disabled', true);
-
-      return;
     }
-
-    var urlModal = "<%= modal_bidders_path %>?",
-    params = {
-      locked_fields: ['licitation_process'],
-      licitation_process_id: this.value
-    };
-
-    urlModal += jQuery.param(params);
-
-    $("#licitation_process_ratification_bidder").attr("data-modal-url", urlModal).
-                                                                    attr("disabled", false);
-  }).change();
+  });
 
   function clearExistingItems() {
     $('.ratification_item').each(function() {
