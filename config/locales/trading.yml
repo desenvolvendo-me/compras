@@ -1,7 +1,4 @@
 pt-BR:
-  tradings:
-    new: "Pregão Presencial"
-
   activerecord:
     models:
       trading:
