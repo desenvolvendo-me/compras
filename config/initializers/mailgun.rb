@@ -6,3 +6,7 @@ ActionMailer::Base.smtp_settings = {
   :domain         => ENV['MAILGUN_SMTP_DOMAIN'],
   :authentication => :plain,
 }
+
+if Rails.env.production? || Rails.env.staging?
+  ActionMailer::Base.delivery_method = :smtp
+end
