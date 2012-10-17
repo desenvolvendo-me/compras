@@ -1,0 +1,15 @@
+<div class="yui3-g">
+  <div class="yui3-u-1-6">
+    <%= f.input :code, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :year, :disabled => f.object.persisted? %>
+  </div>
+</div>
+
+<%= f.input :entity %>
+
+<%= f.input :licitating_unit %>
+
+<%= f.input :summarized_object %>

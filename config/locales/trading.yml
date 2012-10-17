@@ -1,0 +1,17 @@
+pt-BR:
+  tradings:
+    new: "Pregão Presencial"
+
+  activerecord:
+    models:
+      trading:
+        one: "Pregão Presencial"
+        other: "Pregões Presenciais"
+
+    attributes:
+      trading:
+        code: "Número"
+        entity: "Órgão/Entidade"
+        licitating_unit: "Unidade licitante"
+        summarized_object: "Objeto resumido"
+        year: "Ano"

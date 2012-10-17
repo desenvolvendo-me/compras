@@ -961,6 +961,12 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :tradings do
+    collection do
+      get :filter
+    end
+  end
+
   resources :users do
     collection do
       get :filter

@@ -1,0 +1,2 @@
+class TradingsController < CrudController
+end

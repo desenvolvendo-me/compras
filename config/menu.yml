@@ -14,6 +14,9 @@ menu:
     - licitation_process_appeals
     - licitation_process_ratifications
 
+  - trading:
+    - tradings
+
   - general_entries:
     - agencies
     - banks

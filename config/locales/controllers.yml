@@ -148,6 +148,7 @@ pt-BR:
     revenue_rubrics: "Rúbricas de Reiceitas"
     revenue_sources: "Fontes de Receitas"
     revenue_subcategories: "Subcategorias de Receitas"
+    tradings: "Pregões Presenciais"
 
   menu:
     <<: *controllers
@@ -178,3 +179,4 @@ pt-BR:
     licitation_process_ratifications: "Homologações e Adjudicações de Processos Licitatórios"
     purchase_solicitation_item_group_materials: "Materiais da Solicitação de Compra do Agrupamento de Item"
     special_entries: "Inscrições Especiais"
+    trading: "Pregão"
