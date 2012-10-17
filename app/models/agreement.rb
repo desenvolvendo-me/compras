@@ -13,6 +13,7 @@ class Agreement < Compras::Model
 
   has_enumeration_for :category, :with => AgreementCategory
   has_enumeration_for :status, :create_helpers => true
+
   belongs_to :agreement_kind
   belongs_to :regulatory_act
 
