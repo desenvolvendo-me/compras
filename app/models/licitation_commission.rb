@@ -35,7 +35,7 @@ class LicitationCommission < Compras::Model
   filterize
 
   def to_s
-    id.to_s
+    "#{commission_type_humanize} - #{I18n.l(nomination_date)} - #{description}"
   end
 
   def president

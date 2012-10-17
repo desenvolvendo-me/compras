@@ -1,5 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
+require 'enumerate_it'
+require 'app/enumerations/commission_type'
 require 'app/models/licitation_commission'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission_member'
@@ -20,10 +22,16 @@ describe LicitationCommission do
   it { should have_many(:licitation_commission_members).dependent(:destroy).order(:id) }
   it { should have_many(:judgment_commission_advices).dependent(:restrict) }
 
-  it 'should return id as to_s method' do
-    subject.id = 2
+  describe "#to_s" do
+    subject do
+      LicitationCommission.new(:commission_type => CommissionType::TRADING,
+                               :nomination_date => Date.new(2012, 2, 1),
+                               :description => 'Comissão de Licitação')
+    end
 
-    expect(subject.to_s).to eq '2'
+    it "returns the commission type, nomination date and description" do
+      expect(subject.to_s).to eq "Pregão - 01/02/2012 - Comissão de Licitação"
+    end
   end
 
   context 'validate dates based on nomination_date' do
