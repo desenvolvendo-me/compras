@@ -1,7 +1,8 @@
 class LicitationCommission < Compras::Model
-  attr_accessible :commission_type, :nomination_date, :expiration_date, :exoneration_date
-  attr_accessible :description, :regulatory_act_id, :licitation_commission_responsibles_attributes
-  attr_accessible :licitation_commission_members_attributes
+  attr_accessible :commission_type, :nomination_date, :expiration_date,
+                  :exoneration_date, :description, :regulatory_act_id,
+                  :licitation_commission_responsibles_attributes,
+                  :licitation_commission_members_attributes
 
   attr_modal :commission_type, :nomination_date, :expiration_date, :exoneration_date
 
