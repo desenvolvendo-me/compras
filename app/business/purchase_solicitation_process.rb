@@ -1,5 +1,5 @@
 class PurchaseSolicitationProcess
-  def self.update_solicitations_status(old_solicitation, new_solicitation)
+  def self.update_solicitations_status(new_solicitation, old_solicitation = nil)
     change_solicitation_status(old_solicitation, PurchaseSolicitationServiceStatus::PENDING)
     change_solicitation_status(new_solicitation, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
   end

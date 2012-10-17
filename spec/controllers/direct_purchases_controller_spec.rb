@@ -38,7 +38,7 @@ describe DirectPurchasesController do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo)
 
       DirectPurchase.any_instance.stub(:save).and_return(true)
-      PurchaseSolicitationProcess.should_receive(:update_solicitations_status).with(nil, purchase_solicitation)
+      PurchaseSolicitationProcess.should_receive(:update_solicitations_status).with(purchase_solicitation)
 
       post :create, :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
     end
@@ -70,7 +70,7 @@ describe DirectPurchasesController do
         DirectPurchaseBudgetAllocationCleaner.should_receive(:clear_old_records)
 
         PurchaseSolicitationProcess.should_receive(:update_solicitations_status).
-                                    with(direct_purchase.purchase_solicitation, purchase_solicitation)
+                                    with(purchase_solicitation, direct_purchase.purchase_solicitation)
 
         put :update, :id => direct_purchase.id,
                      :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }

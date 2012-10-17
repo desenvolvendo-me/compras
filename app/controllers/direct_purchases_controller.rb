@@ -36,7 +36,7 @@ class DirectPurchasesController < CrudController
     object.transaction do
       if super
         if params[:direct_purchase]
-          PurchaseSolicitationProcess.update_solicitations_status(nil, new_purchase_solicitation)
+          PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation)
           PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group)
         end
 
@@ -53,7 +53,7 @@ class DirectPurchasesController < CrudController
       DirectPurchaseBudgetAllocationCleaner.clear_old_records(object, new_purchase_solicitation, new_item_group)
 
       if super
-        PurchaseSolicitationProcess.update_solicitations_status(old_purchase_solicitation, new_purchase_solicitation)
+        PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation, old_purchase_solicitation)
         PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group, old_item_group)
       end
     end

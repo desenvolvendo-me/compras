@@ -10,13 +10,13 @@ describe PurchaseSolicitationProcess do
 
     it "updates the solicitation status to 'In Purchase Process'" do
       new_solicitation.should_receive(:change_status!).with(PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
-      described_class.update_solicitations_status(nil, new_solicitation)
+      described_class.update_solicitations_status(new_solicitation)
     end
 
     context "when the solicitation is being removed" do
       it "updates the old solicitation's status to 'Pending'" do
         old_solicitation.should_receive(:change_status!).with(PurchaseSolicitationServiceStatus::PENDING)
-        described_class.update_solicitations_status(old_solicitation, nil)
+        described_class.update_solicitations_status(nil, old_solicitation)
       end
     end
 
@@ -25,7 +25,7 @@ describe PurchaseSolicitationProcess do
         new_solicitation.should_receive(:change_status!).with(PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
         old_solicitation.should_receive(:change_status!).with(PurchaseSolicitationServiceStatus::PENDING)
 
-        described_class.update_solicitations_status(old_solicitation, new_solicitation)
+        described_class.update_solicitations_status(new_solicitation, old_solicitation)
       end
     end
   end
