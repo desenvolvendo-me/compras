@@ -5,7 +5,7 @@ class AdministrativeProcess < Compras::Model
                   :protocol, :object_type, :status, :description,
                   :judgment_form_id, :purchase_solicitation_item_group_id,
                   :administrative_process_budget_allocations_attributes,
-                  :licitation_modality_id
+                  :licitation_modality_id, :summarized_object
 
   attr_readonly :process, :year
 

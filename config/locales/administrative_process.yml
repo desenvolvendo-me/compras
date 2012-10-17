@@ -15,6 +15,7 @@ pt-BR:
         item: "Inciso"
         object_type: "Tipo de objeto"
         judgment_form: "Forma de julgamento"
+        summarized_object: "Objeto resumido do processo licitatório"
         description: "Objeto do processo licitatório"
         responsible: "Responsável"
         status: "Status do processo administrativo"
