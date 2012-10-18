@@ -70,6 +70,11 @@ class PurchaseSolicitation < Compras::Model
     service_status.eq(PurchaseSolicitationServiceStatus::LIBERATED)
   }
 
+  def self.by_material(material_ids)
+    joins { items }.
+      where { |purchase| purchase.items.material_id.in(material_ids) }
+  end
+
   def to_s
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end
@@ -98,11 +103,6 @@ class PurchaseSolicitation < Compras::Model
 
   def editable?
     pending? || returned?
-  end
-
-  def self.by_material(material_ids)
-    joins { items }.
-      where { |purchase| purchase.items.material_id.in(material_ids) }
   end
 
   def purchase_solicitation_budget_allocations_by_material(material_ids)
