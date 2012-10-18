@@ -52,12 +52,12 @@ describe Person do
   end
 
   it { should have_one :employee }
+  it { should have_one(:creditor).dependent(:restrict) }
 
   it { should have_many(:economic_registrations).dependent(:restrict) }
   it { should have_many(:licitation_process_impugnments).dependent(:restrict) }
   it { should have_many(:licitation_process_appeals).dependent(:restrict) }
   it { should have_many :partners }
-  it { should have_many(:creditors).dependent(:restrict) }
   it { should have_many(:bidders).through(:accredited_representatives) }
   it { should have_many(:accredited_representatives).dependent(:restrict) }
 

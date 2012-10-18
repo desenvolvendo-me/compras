@@ -5,11 +5,11 @@ class Person < Unico::Person
   has_many :licitation_process_impugnments, :dependent => :restrict
   has_many :licitation_process_appeals, :dependent => :restrict
   has_many :partners, :dependent => :destroy
-  has_many :creditors, :as => :creditable, :dependent => :restrict
   has_many :accredited_representatives, :dependent => :restrict
   has_many :bidders, :through => :accredited_representatives
 
   has_one :employee
+  has_one :creditor, :as => :creditable, :dependent => :restrict
 
   delegate :city, :zip_code, :to => :address
   delegate :benefited, :to => :company_size, :allow_nil => true

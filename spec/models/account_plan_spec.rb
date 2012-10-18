@@ -21,8 +21,6 @@ describe AccountPlan do
   it { should validate_presence_of :surplus_indicator }
   it { should validate_presence_of :movimentation_kind }
 
-  it { expect(subject.bookkeeping).to be_false }
-
   context 'validate mask' do
     before do
       subject.stub(:mask).and_return('99/9')
@@ -33,6 +31,7 @@ describe AccountPlan do
   end
 
   describe 'default values' do
+    it { expect(subject.bookkeeping).to be false }
     it { expect(subject.ends_at_twelfth_month).to be false }
     it { expect(subject.ends_at_thirteenth_month).to be false }
     it { expect(subject.ends_at_fourteenth_month).to be false }
