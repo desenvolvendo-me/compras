@@ -18,6 +18,15 @@ menu:
     - tradings
 
   - general_entries:
+    - address:
+      - street_types
+      - streets
+      - neighborhoods
+      - districts
+      - states
+      - cities
+      - countries
+      - condominia
     - agencies
     - banks
     - bank_accounts
@@ -80,15 +89,7 @@ menu:
     - signatures
     - cnaes
     - entities
-    - states
-    - districts
-    - neighborhoods
-    - cities
-    - countries
-    - streets
-    - street_types
     - land_subdivisions
-    - condominia
     - positions
     - settings
     - fiscal_years

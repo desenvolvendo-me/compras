@@ -7,7 +7,7 @@ feature "Countries" do
   end
 
   scenario 'create a new country' do
-    navigate 'Outros > Países'
+    navigate 'Cadastros Gerais > Endereços > Países'
 
     click_link 'Criar País'
 
@@ -25,7 +25,7 @@ feature "Countries" do
   scenario 'update a country' do
     Country.make!(:brasil)
 
-    navigate 'Outros > Países'
+    navigate 'Cadastros Gerais > Endereços > Países'
 
     click_link 'Brasil'
 
@@ -43,7 +43,7 @@ feature "Countries" do
   scenario 'destroy a country' do
     Country.make!(:argentina)
 
-    navigate 'Outros > Países'
+    navigate 'Cadastros Gerais > Endereços > Países'
 
     click_link 'Argentina'
 
