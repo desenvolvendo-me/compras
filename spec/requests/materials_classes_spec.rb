@@ -9,7 +9,7 @@ feature "MaterialsClasses" do
   scenario 'create a new materials_class' do
     MaterialsGroup.make!(:informatica)
 
-    navigate 'Cadastros Gerais > Classes de Materiais'
+    navigate 'Cadastros Gerais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -34,7 +34,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software)
     MaterialsGroup.make!(:comp_eletricos_eletronicos)
 
-    navigate 'Cadastros Gerais > Classes de Materiais'
+    navigate 'Cadastros Gerais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
@@ -58,7 +58,7 @@ feature "MaterialsClasses" do
   scenario 'destroy an existent materials_class' do
     MaterialsClass.make!(:software)
 
-    navigate 'Cadastros Gerais > Classes de Materiais'
+    navigate 'Cadastros Gerais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
@@ -74,7 +74,7 @@ feature "MaterialsClasses" do
   scenario 'should validate uniqueness of class_number scoped to materials_group' do
     MaterialsClass.make!(:software)
 
-    navigate 'Cadastros Gerais > Classes de Materiais'
+    navigate 'Cadastros Gerais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -90,7 +90,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software)
     MaterialsGroup.make!(:informatica)
 
-    navigate 'Cadastros Gerais > Classes de Materiais'
+    navigate 'Cadastros Gerais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -106,7 +106,7 @@ feature "MaterialsClasses" do
     MaterialsGroup.make!(:informatica)
     MaterialsClass.make!(:software)
 
-    navigate 'Cadastros Gerais > Classes de Materiais'
+    navigate 'Cadastros Gerais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -122,7 +122,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software)
     MaterialsGroup.make!(:informatica)
 
-    navigate 'Cadastros Gerais > Classes de Materiais'
+    navigate 'Cadastros Gerais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 

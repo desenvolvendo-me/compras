@@ -27,12 +27,15 @@ menu:
       - cities
       - countries
       - condominia
+    - materials:
+      - materials_classes
+      - materials_groups
+      - materials
     - agencies
     - banks
     - bank_accounts
     - creditors
     - contracts
-    - materials_classes
     - agreement:
       - agreement_kinds
     - licitation_commissions
@@ -40,9 +43,7 @@ menu:
     - judgment_forms
     - dissemination_sources
     - communication_sources
-    - materials_groups
     - special_entries
-    - materials
     - reference_units
     - document_types
     - regulatory_act_types
