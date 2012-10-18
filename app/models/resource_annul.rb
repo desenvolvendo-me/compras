@@ -5,6 +5,7 @@ class ResourceAnnul < Compras::Model
   belongs_to :annullable, :polymorphic => true
 
   validates :annullable, :presence => true
+  validates :annullable_id, :uniqueness => { :scope => :annullable_type }, :allow_blank => true
 
   delegate :creditor, :price_collection, :to => :annullable, :allow_nil => true
   delegate :to_s, :annulled?, :to => :annullable, :allow_nil => true
