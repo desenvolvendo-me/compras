@@ -1720,6 +1720,26 @@ feature "DirectPurchases" do
 
     click_link '1/2012'
 
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+
+      within '.direct-purchase-budget-allocation:first' do
+        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+        expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+        expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+        within '.item:first' do
+          expect(page).to have_field 'Item', :with => '1'
+          expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+          expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+          expect(page).to have_field 'Unidade', :with => 'UN'
+          expect(page).to have_field 'Quantidade', :with => '3,00'
+          expect(page).to have_field 'Valor unitário', :with => '200,00'
+          expect(page).to have_field 'Valor total', :with => '600,00'
+        end
+      end
+    end
+
     within_tab 'Principal' do
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
@@ -1770,6 +1790,26 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Compra Direta'
 
     click_link '1/2012'
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+
+      within '.direct-purchase-budget-allocation:first' do
+        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+        expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+        expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+        within '.item:first' do
+          expect(page).to have_field 'Item', :with => '1'
+          expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+          expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+          expect(page).to have_field 'Unidade', :with => 'UN'
+          expect(page).to have_field 'Quantidade', :with => '3,00'
+          expect(page).to have_field 'Valor unitário', :with => '200,00'
+          expect(page).to have_field 'Valor total', :with => '600,00'
+        end
+      end
+    end
 
     within_tab 'Principal' do
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
