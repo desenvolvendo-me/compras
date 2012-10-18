@@ -1674,7 +1674,7 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'clear budget allocations on clear purchase solicitation item group' do
+  scenario 'clear budget allocations on clear purchase solicitation' do
     DirectPurchase.make!(
       :compra,
       :purchase_solicitation => PurchaseSolicitation.make!(
@@ -1754,7 +1754,7 @@ feature "DirectPurchases" do
     end
   end
 
-  scenario 'clear budget allocations on clear purchase solicitation item group' do
+  scenario 'clear old budget_allocations on change purchase_solicitation' do
     PurchaseSolicitation.make!(:reparo_office,
       :service_status => PurchaseSolicitationServiceStatus::LIBERATED
     )
