@@ -10,7 +10,7 @@ feature "BankAccounts" do
     Agency.make!(:itau)
     Capability.make!(:reforma)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -30,7 +30,7 @@ feature "BankAccounts" do
     Capability.make!(:reforma)
     Capability.make!(:construcao)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -122,7 +122,7 @@ feature "BankAccounts" do
     BankAccount.make!(:itau_tributos)
     Capability.make!(:construcao)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Itaú Tributos'
 
@@ -179,7 +179,7 @@ feature "BankAccounts" do
   scenario 'when fill/clear agency should fill/clear related fields' do
     Agency.make!(:itau)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -201,7 +201,7 @@ feature "BankAccounts" do
   scenario 'when clear bank should clear agency too' do
     Agency.make!(:itau)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -221,7 +221,7 @@ feature "BankAccounts" do
   scenario 'when select agency before bank, bank should fill bank' do
     Agency.make!(:itau)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -235,7 +235,7 @@ feature "BankAccounts" do
   scenario 'when fill bank and submit form with errors should return with bank' do
     Agency.make!(:itau)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Criar Conta Bancária'
 
@@ -253,7 +253,7 @@ feature "BankAccounts" do
   scenario 'destroy an existent bank_account' do
     BankAccount.make!(:itau_tributos)
 
-    navigate 'Cadastros Gerais > Contas Bancárias'
+    navigate 'Cadastros Gerais > Bancos > Contas Bancárias'
 
     click_link 'Itaú Tributos'
 

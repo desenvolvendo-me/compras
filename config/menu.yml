@@ -31,9 +31,10 @@ menu:
       - materials_classes
       - materials_groups
       - materials
-    - agencies
-    - banks
-    - bank_accounts
+    - banks:
+      - agencies
+      - banks
+      - bank_accounts
     - creditors
     - contracts
     - agreement:
