@@ -4,7 +4,8 @@ class LicitationCommission < Compras::Model
                   :licitation_commission_responsibles_attributes,
                   :licitation_commission_members_attributes
 
-  attr_modal :commission_type, :nomination_date, :expiration_date, :exoneration_date
+  attr_modal :commission_type, :nomination_date, :expiration_date,
+             :exoneration_date, :description
 
   has_enumeration_for :commission_type
 
