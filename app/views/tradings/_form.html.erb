@@ -1,19 +1,11 @@
-<div class="yui3-g">
-  <div class="yui3-u-1-6">
-    <%= f.input :code, :disabled => true %>
-  </div>
+<div class="tabs">
+  <ul>
+    <li>
+      <a href="#main">Principal</a>
+    </li>
+  </ul>
 
-  <div class="yui3-u-1-6">
-    <%= f.input :year, :disabled => f.object.persisted? %>
+  <div id="main">
+    <%= render 'main', :f => f %>
   </div>
 </div>
-
-
-<%= f.input :licitation_process,
-            :modal_url => modal_licitation_processes_path(:by_modality_type => AbreviatedProcessModality::PRESENCE_TRADING) %>
-
-<%= f.input :entity %>
-
-<%= f.input :licitating_unit %>
-
-<%= f.input :summarized_object %>

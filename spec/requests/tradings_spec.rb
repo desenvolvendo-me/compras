@@ -18,11 +18,14 @@ feature "Tradings" do
     navigate "Pregão > Pregões Presenciais"
 
     click_link "Criar Pregão Presencial"
-    fill_in "Ano", :with => "2012"
-    fill_modal "Processo licitatório", :with => "1", :field => "Processo"
-    fill_modal "Órgão/Entidade", :with => "Detran"
-    fill_modal "Unidade licitante", :with => "Secretaria de Educação"
-    fill_in "Objeto resumido", :with => "Descrição resumida do objeto"
+
+    within_tab "Principal" do
+      fill_in "Ano", :with => "2012"
+      fill_modal "Processo licitatório", :with => "1", :field => "Processo"
+      fill_modal "Órgão/Entidade", :with => "Detran"
+      fill_modal "Unidade licitante", :with => "Secretaria de Educação"
+      fill_in "Objeto resumido", :with => "Descrição resumida do objeto"
+    end
 
     click_button "Salvar"
 
