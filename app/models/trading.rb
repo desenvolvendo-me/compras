@@ -10,11 +10,22 @@ class Trading < Compras::Model
                                :foreign_key => "licitating_unit_id"
 
   validates :licitation_process, :presence => true
+  validate :modality_type
 
   orderize :code
   filterize
 
   def to_s
     "#{code}/#{year}"
+  end
+
+  private
+
+  def modality_type
+    return unless licitation_process.present?
+
+    unless licitation_process.presence_trading?
+      errors.add(:licitation_process, :should_be_of_trading_type)
+    end
   end
 end

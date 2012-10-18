@@ -13,7 +13,7 @@ feature "Tradings" do
   scenario "creating a new trading" do
     Entity.make!(:detran)
     Entity.make!(:secretaria_de_educacao)
-    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:pregao_presencial)
 
     navigate "Pregão > Pregões Presenciais"
 
@@ -36,5 +36,23 @@ feature "Tradings" do
     expect(page).to have_field "Órgão/Entidade", :with => "Detran"
     expect(page).to have_field "Unidade licitante", :with => "Secretaria de Educação"
     expect(page).to have_field "Objeto resumido", :with => "Descrição resumida do objeto"
+  end
+
+  scenario "filtering out licitation process with modalities other than 'Trading'" do
+    LicitationProcess.make!(:pregao_presencial)
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate "Pregão > Pregões Presenciais"
+
+    click_link "Criar Pregão Presencial"
+
+    within_modal "Processo licitatório" do
+      click_button "Pesquisar"
+
+      within_records do
+        expect(page).to have_content "1/2012"
+        expect(page).not_to have_content "2/2012"
+      end
+    end
   end
 end

@@ -296,3 +296,19 @@ AdministrativeProcess.blueprint(:compra_com_itens_menor_preco) do
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
 end
+
+AdministrativeProcess.blueprint(:pregao_presencial) do
+  process { 1 }
+  year { 2012 }
+  date { Date.new(2012, 3, 7) }
+  protocol { '00088/2012' }
+  object_type { AdministrativeProcessObjectType::PURCHASE_AND_SERVICES }
+  licitation_modality { LicitationModality.make!(:pregao_presencial) }
+  judgment_form { JudgmentForm.make!(:por_item_com_menor_preco) }
+  description { 'Licitação para compra de carteiras' }
+  responsible { Employee.make!(:sobrinho) }
+  status { AdministrativeProcessStatus::RELEASED }
+  item { 'Item 1' }
+  administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
+  administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
+end

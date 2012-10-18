@@ -9,7 +9,8 @@
 </div>
 
 
-<%= f.input :licitation_process %>
+<%= f.input :licitation_process,
+            :modal_url => modal_licitation_processes_path(:by_modality_type => AbreviatedProcessModality::PRESENCE_TRADING) %>
 
 <%= f.input :entity %>
 

@@ -101,6 +101,12 @@ class LicitationProcess < Compras::Model
 
   scope :with_price_registrations, where { price_registration.eq true }
 
+  scope :by_modality_type, lambda { |modality_type|
+    joins { administrative_process.licitation_modality }.where {
+      administrative_process.licitation_modality.modality_type.eq(modality_type)
+    }
+  }
+
   def to_s
     "#{process}/#{year}"
   end
