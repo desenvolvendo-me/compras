@@ -24,6 +24,12 @@ menu:
       - judgment_forms
       - licitation_objects
       - licitation_modalities
+    - banks:
+      - agencies
+      - banks
+      - bank_accounts
+    - agreement:
+      - agreement_kinds
     - address:
       - street_types
       - streets
@@ -37,10 +43,6 @@ menu:
       - materials_classes
       - materials_groups
       - materials
-    - banks:
-      - agencies
-      - banks
-      - bank_accounts
     - people:
       - people
       - creditors
@@ -48,9 +50,25 @@ menu:
       - special_entries
       - profiles
       - users
+    - legislation:
+      - dissemination_sources
+      - communication_sources
+      - legal_text_natures
+      - regulatory_act:
+        - regulatory_act_types
+        - regulatory_act_type_classifications
+        - regulatory_acts
+    - account_plan:
+      - account_plans
+      - checking_account_structure_informations
+      - checking_account_of_fiscal_accounts
+      - account_plan_configurations
+      - checking_account_structures
+      - event_checking_configurations
+    - precatory:
+      - precatories
+      - precatory_types
     - contracts
-    - agreement:
-      - agreement_kinds
     - dissemination_sources
     - communication_sources
     - reference_units
@@ -62,31 +80,9 @@ menu:
     - company_sizes
     - service_or_contract_types
     - products
-    - legislation:
-      - dissemination_sources
-      - communication_sources
-      - legal_text_natures
-
-      - regulatory_act:
-        - regulatory_act_types
-        - regulatory_act_type_classifications
-        - regulatory_acts
-
-    - account_plan:
-      - account_plans
-      - checking_account_structure_informations
-      - checking_account_of_fiscal_accounts
-      - account_plan_configurations
-      - checking_account_structures
-      - event_checking_configurations
-
     - program_kinds
     - target_audiences
     - macro_objectives
-
-    - precatory:
-      - precatories
-      - precatory_types
 
   - others:
     - signature_configurations
