@@ -1,0 +1,15 @@
+<%= f.input :licitation_commission, :input_html => { :class => 'licitation-commission-modal' } %>
+
+<table class="records table-puchase-solicitation">
+  <thead>
+    <tr>
+      <th>Função</th>
+      <th>Membro</th>
+    </tr>
+  </thead>
+  <tbody id="licitation-commission-members">
+    <%= render :partial => 'tradings/commission_member', :collection => f.object.auctioneer, :as => :member %>
+
+    <%= render :partial => 'tradings/commission_member', :collection => f.object.support_team, :as => :member %>
+  </tbody>
+</table>

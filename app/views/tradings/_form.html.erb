@@ -1,11 +1,45 @@
 <div class="tabs">
   <ul>
-    <li>
-      <a href="#main">Principal</a>
-    </li>
+    <li><a href="#main">Principal</a></li>
+    <li><a href="#auctioneer-and-team">Pregoeiro e equipe</a></li>
   </ul>
 
   <div id="main">
     <%= render 'main', :f => f %>
   </div>
+
+  <div id="auctioneer-and-team">
+    <%= render 'tradings/auctioneer_and_team', :f => f %>
+  </div>
 </div>
+<script>
+  $(function() {
+    $(".licitation-commission-modal").on("change", function(e, licitationCommission) {
+      if (licitationCommission) {
+        clearCommissionMembers();
+        renderLicitationCommission(licitationCommission);
+      } else {
+        clearCommissionMembers();
+      }
+    });
+
+    function renderLicitationCommission(licitationCommission) {
+      $.each(licitationCommission.auctioneer, function(i, auctioneer) {
+        renderCommissionMember(auctioneer);
+      });
+      $.each(licitationCommission.support_team, function(i, supportTeamMember) {
+        renderCommissionMember(supportTeamMember);
+      });
+    }
+
+    function renderCommissionMember(licitationCommissionMember) {
+      $('#licitation-commission-members').append(
+        "<tr><td>" + licitationCommissionMember.role_humanize + "</td><td>" + licitationCommissionMember.individual_name + "</td></tr>"
+      )
+    }
+
+    function clearCommissionMembers(){
+      $('#licitation-commission-members').html('');
+    }
+  });
+</script>

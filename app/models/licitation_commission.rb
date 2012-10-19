@@ -19,6 +19,7 @@ class LicitationCommission < Compras::Model
   accepts_nested_attributes_for :licitation_commission_members, :allow_destroy => true
 
   delegate :publication_date, :to => :regulatory_act, :allow_nil => true, :prefix => true
+  delegate :auctioneer, :support_team, :to => :licitation_commission_members
 
   validates :commission_type, :nomination_date, :expiration_date, :exoneration_date, :regulatory_act, :presence => true
   validates :expiration_date, :exoneration_date,

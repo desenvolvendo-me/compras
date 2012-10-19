@@ -8,4 +8,14 @@ builder resource, json do
     json.individual_name       member.individual.to_s
     json.cpf                   member.individual_cpf
   end
+
+  json.auctioneer resource.auctioneer do |json, member|
+    json.role_humanize         member.role_humanize
+    json.individual_name       member.individual.to_s
+  end
+
+  json.support_team resource.support_team do |json, member|
+    json.role_humanize         member.role_humanize
+    json.individual_name       member.individual.to_s
+  end
 end

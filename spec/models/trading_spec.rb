@@ -9,6 +9,7 @@ describe Trading do
   end
 
   it { should belong_to :entity }
+  it { should belong_to :licitation_commission }
   it { should belong_to :licitation_process }
   it { should belong_to :licitating_unit }
 

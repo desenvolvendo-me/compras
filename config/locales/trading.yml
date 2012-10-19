@@ -9,7 +9,8 @@ pt-BR:
       trading:
         code: "Número"
         entity: "Órgão/Entidade"
-        licitating_unit: "Unidade licitante"
+        licitation_commission: "Comissão de licitação"
         licitation_process: "Processo licitatório"
+        licitating_unit: "Unidade licitante"
         summarized_object: "Objeto resumido"
         year: "Ano"
