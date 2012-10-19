@@ -451,7 +451,7 @@ feature "LicitationCommissions" do
   scenario "using the description field to filter licitation commissions" do
     LicitationCommission.make!(:comissao)
 
-    navigate 'Cadastros Gerais > Comissões de Licitação'
+    navigate 'Cadastros Gerais > Licitação > Comissões de Licitação'
 
     click_link "Filtrar Comissões de Licitação"
 
