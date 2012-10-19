@@ -106,7 +106,7 @@ module Helpers
 
     return unless second
 
-    within "li:contains('#{first}')" do
+    within :xpath, ".//a[contains(., '#{first}')]/following-sibling::ul" do
       navigate second
     end
   end
