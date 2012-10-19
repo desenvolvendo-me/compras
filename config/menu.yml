@@ -13,12 +13,17 @@ menu:
     - licitation_process_impugnments
     - licitation_process_appeals
     - licitation_process_ratifications
-    - modality_limits
 
   - trading:
     - tradings
 
   - general_entries:
+    - licitation:
+      - modality_limits
+      - licitation_commissions
+      - judgment_forms
+      - licitation_objects
+      - licitation_modalities
     - address:
       - street_types
       - streets
@@ -46,8 +51,6 @@ menu:
     - contracts
     - agreement:
       - agreement_kinds
-    - licitation_commissions
-    - judgment_forms
     - dissemination_sources
     - communication_sources
     - reference_units
@@ -56,8 +59,6 @@ menu:
     - legal_natures
     - delivery_locations
     - payment_methods
-    - licitation_objects
-    - licitation_modalities
     - company_sizes
     - service_or_contract_types
     - products
