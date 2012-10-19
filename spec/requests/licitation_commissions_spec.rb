@@ -3,7 +3,7 @@ require 'spec_helper'
 
 feature "LicitationCommissions" do
   background do
-    sign_innavigate 'Cadastros Gerais > Licitação > Limites por Modalidade'
+    sign_in
   end
 
   scenario 'create a new licitation_commission' do
