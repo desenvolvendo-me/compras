@@ -1,7 +1,7 @@
 # encoding: utf-8
 BudgetStructure.blueprint(:secretaria_de_educacao) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  code { 1 }
+  code { '1' }
   tce_code { '051' }
   description { 'Secretaria de Educação' }
   kind { BudgetStructureKind::SYNTHETIC }
@@ -15,7 +15,7 @@ end
 
 BudgetStructure.blueprint(:secretaria_de_desenvolvimento) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  code { 29 }
+  code { '29' }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
   kind { BudgetStructureKind::SYNTHETIC }
@@ -30,7 +30,7 @@ end
 
 BudgetStructure.blueprint(:secretaria_de_educacao_com_dois_responsaveis) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  code { 1 }
+  code { '1' }
   tce_code { '051' }
   description { 'Secretaria de Educação com dois responsaveis' }
   kind { BudgetStructureKind::SYNTHETIC }
@@ -47,7 +47,7 @@ end
 
 BudgetStructure.blueprint(:secretaria_de_desenvolvimento_level_3) do
   budget_structure_configuration { BudgetStructureConfiguration.make!(:detran_sopa) }
-  code { 299 }
+  code { '299' }
   tce_code { '051' }
   description { 'Secretaria de Desenvolvimento' }
   kind { BudgetStructureKind::SYNTHETIC }
