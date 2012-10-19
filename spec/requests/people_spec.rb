@@ -10,7 +10,7 @@ feature "People" do
     State.make!(:mg)
     Street.make!(:amazonas)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -100,7 +100,7 @@ feature "People" do
   scenario 'update an existent person as individual' do
     Person.make!(:wenderson)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Wenderson'
 
@@ -137,7 +137,7 @@ feature "People" do
   scenario 'destroy an existent person' do
     Person.make!(:wenderson)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Wenderson Malheiros'
 
@@ -155,7 +155,7 @@ feature "People" do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -254,7 +254,7 @@ feature "People" do
     Person.make!(:nohup)
     Person.make!(:sobrinho)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Nohup'
 
@@ -304,7 +304,7 @@ feature "People" do
     Street.make!(:amazonas)
     Street.make!(:cristiano_machado)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -332,7 +332,7 @@ feature "People" do
   scenario 'should have the uniqueness validation to partner on new form' do
     Person.make!(:sobrinho)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -362,7 +362,7 @@ feature "People" do
   scenario 'should have the uniqueness validation to partner' do
     Person.make!(:nohup)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Nohup'
 
@@ -383,7 +383,7 @@ feature "People" do
   scenario 'should validate at least one partner' do
     Person.make!(:wenderson)
 
-    navigate 'Outros > Pessoas'
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 

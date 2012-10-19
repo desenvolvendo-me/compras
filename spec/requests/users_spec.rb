@@ -10,7 +10,7 @@ feature "Users" do
     Employee.make!(:wenderson)
     Profile.make!(:manager)
 
-    navigate 'Outros > Usuários'
+    navigate 'Cadastros Gerais > Pessoas > Usuários'
 
     click_link 'Criar Usuário'
 
@@ -43,7 +43,7 @@ feature "Users" do
     User.make!(:wenderson)
     Employee.make!(:sobrinho)
 
-    navigate 'Outros > Usuários'
+    navigate 'Cadastros Gerais > Pessoas > Usuários'
 
     within_records do
       click_link 'wenderson.malheiros'
@@ -68,7 +68,7 @@ feature "Users" do
   scenario 'destroy an user' do
     User.make!(:wenderson)
 
-    navigate 'Outros > Usuários'
+    navigate 'Cadastros Gerais > Pessoas > Usuários'
 
     click_link 'wenderson.malheiros'
 
@@ -80,7 +80,7 @@ feature "Users" do
   end
 
   scenario 'open the window to new perfil through the perfil modal' do
-    navigate 'Outros > Usuários'
+    navigate 'Cadastros Gerais > Pessoas > Usuários'
 
     click_link 'Criar Usuário'
 
@@ -96,7 +96,7 @@ feature "Users" do
     User.make!(:sobrinho_as_admin)
     User.make!(:creditor_with_password)
 
-    navigate 'Outros > Usuários'
+    navigate 'Cadastros Gerais > Pessoas > Usuários'
 
     within_records do
       expect(page).to have_link 'wenderson.malheiros'

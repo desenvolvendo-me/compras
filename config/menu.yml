@@ -35,16 +35,20 @@ menu:
       - agencies
       - banks
       - bank_accounts
-    - creditors
+    - people:
+      - people
+      - creditors
+      - employees
+      - special_entries
+      - profiles
+      - users
     - contracts
     - agreement:
       - agreement_kinds
     - licitation_commissions
-    - employees
     - judgment_forms
     - dissemination_sources
     - communication_sources
-    - special_entries
     - reference_units
     - document_types
     - regulatory_act_types
@@ -84,9 +88,6 @@ menu:
       - precatory_types
 
   - others:
-    - people
-    - profiles
-    - users
     - signature_configurations
     - signatures
     - cnaes
