@@ -91,7 +91,7 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Principal' do
-      select 'Pregão', :from => 'Tipo de comissão'
+      select 'Especial', :from => 'Tipo de comissão'
 
       fill_modal 'Ato regulamentador', :with => '8901', :field => 'Número'
 
@@ -139,7 +139,7 @@ feature "LicitationCommissions" do
     end
 
     within_tab 'Principal' do
-      expect(page).to have_select 'Tipo de comissão', :selected => 'Pregão'
+      expect(page).to have_select 'Tipo de comissão', :selected => 'Especial'
       expect(page).to have_field 'Data da nomeação', :with => '20/03/2013'
       expect(page).to have_field 'Data da expiração', :with => '22/03/2013'
       expect(page).to have_field 'Data da exoneração', :with => '25/03/2013'

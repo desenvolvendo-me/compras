@@ -69,6 +69,24 @@ describe LicitationCommission do
     end
   end
 
+  context "validates auctioneer and support team if trading commission" do
+    before do
+      subject.licitation_commission_members.stub(:auctioneer => [],
+                                                 :support_team => [])
+      subject.stub(:trading? => true)
+
+      subject.valid?
+    end
+
+    it "validates presence of auctioneer" do
+      expect(subject.errors[:licitation_commission_members]).to include "deve ter ao menos um pregoeiro"
+    end
+
+    it "validates presence of support team" do
+      expect(subject.errors[:licitation_commission_members]).to include "deve ter ao menos um membro na equipe de apoio"
+    end
+  end
+
   it "should delegate publication_date to regulatory_act with prefix" do
     subject.stub(:regulatory_act).and_return stub(:publication_date => Date.new(2012, 2, 28))
     expect(subject.regulatory_act_publication_date).to eq Date.new(2012, 2, 28)

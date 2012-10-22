@@ -7,7 +7,7 @@ class LicitationCommission < Compras::Model
   attr_modal :commission_type, :nomination_date, :expiration_date,
              :exoneration_date, :description
 
-  has_enumeration_for :commission_type
+  has_enumeration_for :commission_type, :create_helpers => true
 
   belongs_to :regulatory_act
 
@@ -32,6 +32,8 @@ class LicitationCommission < Compras::Model
   validate :cannot_have_duplicated_individuals_on_responsibles
   validate :cannot_have_duplicated_individuals_on_members
   validate :must_have_one_member_with_role_president
+
+  validate :must_have_auctioneer, :must_have_support_team, :if => :trading?
 
   orderize :id
   filterize
@@ -82,6 +84,22 @@ class LicitationCommission < Compras::Model
       errors.add(:licitation_commission_members, :must_have_one_president)
     elsif presidents.count > 1
       errors.add(:licitation_commission_members, :must_have_only_one_president)
+    end
+  end
+
+  def must_have_auctioneer
+    auctioneer = licitation_commission_members.auctioneer
+
+    if auctioneer.empty?
+      errors.add(:licitation_commission_members, :must_have_one_auctioneer)
+    end
+  end
+
+  def must_have_support_team
+    support_team = licitation_commission_members.support_team
+
+    if support_team.empty?
+      errors.add(:licitation_commission_members, :must_have_one_support_team_member)
     end
   end
 end

@@ -1,7 +1,7 @@
 # encoding: utf-8
 LicitationCommission.blueprint(:comissao) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  commission_type { CommissionType::TRADING }
+  commission_type { CommissionType::PERMANENT }
   nomination_date { Date.new(2012, 3, 20) }
   expiration_date { Date.new(2012, 3, 22) }
   exoneration_date { Date.new(2012, 3, 25) }
