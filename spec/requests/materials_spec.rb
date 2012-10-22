@@ -173,6 +173,8 @@ feature "Materials" do
     click_link 'Apagar'
 
     expect(page).to_not have_notice 'Material apagado com sucesso.'
+
+    expect(page).to have_alert 'Material não pode ser apagado.'
   end
 
   scenario 'should validate uniqueness of name' do

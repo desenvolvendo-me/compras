@@ -108,7 +108,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to_not have_button 'Atualizar Impugnação do Processo Licitatório'
   end
 
-  scenario 'destroy an existent licitation_process_impugnment' do
+  scenario 'should not be able to destroy an existent licitation_process_impugnment' do
     licitation_process_impugnment = LicitationProcessImpugnment.make!(:proibido_cadeiras)
 
     navigate 'Processo Administrativo/Licitatório > Impugnações dos Processos Licitatórios'

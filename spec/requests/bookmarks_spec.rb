@@ -33,6 +33,8 @@ feature 'Bookmarks' do
 
     click_button 'Salvar'
 
+    expect(page).to have_content 'Favoritos criado com sucesso.'
+
     expect(page).to have_link 'Cidades'
     expect(page).to have_link 'Países'
 
@@ -49,10 +51,11 @@ feature 'Bookmarks' do
     click_link 'Editar'
 
     unselect 'Cidades', :from => 'Cadastros'
-    unselect 'Cidades', :from => 'Cadastros'
     select 'Países', :from => 'Cadastros'
 
     click_button 'Salvar'
+
+    expect(page).to have_content 'Favoritos editado com sucesso.'
 
     expect(page).to_not have_link 'Cidades'
     expect(page).to have_link 'Países'
@@ -73,6 +76,25 @@ feature 'Bookmarks' do
     unselect 'Países', :from => 'Cadastros'
 
     click_button 'Salvar'
+
+    expect(page).to have_content 'Favoritos editado com sucesso.'
+
+    expect(page).to have_content 'Sua página inicial está vazia.'
+    expect(page).to have_content 'Clique no botão abaixo para adicionar atalhos para os cadastros que você mais utiliza.'
+
+    expect(page).to have_link 'Adicionar Cadastros'
+  end
+
+  scenario 'delete bookmarks and redirect to empty page' do
+    Bookmark.make!(:sobrinho)
+
+    sign_in
+
+    click_link 'Editar'
+
+    click_link 'Apagar'
+
+    expect(page).to have_content 'Favoritos apagado com sucesso.'
 
     expect(page).to have_content 'Sua página inicial está vazia.'
     expect(page).to have_content 'Clique no botão abaixo para adicionar atalhos para os cadastros que você mais utiliza.'

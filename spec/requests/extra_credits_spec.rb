@@ -347,6 +347,8 @@ feature "ExtraCredits" do
 
     click_button 'Salvar'
 
+    expect(page).to have_notice 'Crédito Suplementar editado com sucesso.'
+
     click_link extra_credit.to_s
 
     within_tab 'Movimentos' do
@@ -439,7 +441,7 @@ feature "ExtraCredits" do
     end
   end
 
-  scenario 'validate uniqueness of capibality' do
+  scenario 'validate uniqueness of capability' do
     BudgetAllocation.make!(:alocacao)
     extra_credit = ExtraCredit.make!(:detran_2012)
 
@@ -463,7 +465,7 @@ feature "ExtraCredits" do
     end
   end
 
-  scenario 'validate uniqueness of administractive act' do
+  scenario 'validate uniqueness of regulatory act' do
     ExtraCredit.make!(:detran_2012)
 
     navigate 'Outros > Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'

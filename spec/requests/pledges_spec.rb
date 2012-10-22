@@ -795,6 +795,8 @@ feature "Pledges" do
 
     click_button 'Salvar'
 
+    expect(page).to have_notice 'Empenho criado com sucesso.'
+
     within_records do
       click_link '2 - Detran/2011'
     end
@@ -834,6 +836,8 @@ feature "Pledges" do
 
     click_button 'Salvar'
 
+    expect(page).to have_notice 'Empenho criado com sucesso.'
+
     within_records do
       click_link '1 - Detran/2012'
     end
@@ -866,7 +870,7 @@ feature "Pledges" do
     end
   end
 
-  scenario 'expense_nature shuold be disabed if does not have a budget_allocation selected' do
+  scenario 'expense_nature should be disabled if does not have a budget_allocation selected' do
     BudgetAllocation.make!(:alocacao)
     ReserveFund.make!(:detran_2012)
 

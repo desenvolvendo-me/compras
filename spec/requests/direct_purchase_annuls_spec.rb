@@ -26,7 +26,7 @@ feature 'DirectPurchaseAnnuls' do
     expect(page).to have_link 'Anular'
   end
 
-  scenario 'should not be possible to save or generate supply_authorizarion when annulded' do
+  scenario 'should not be possible to save or generate supply_authorizarion when annulled' do
     ResourceAnnul.make!(
       :anulacao_generica,
       :annullable => DirectPurchase.make!(:compra)

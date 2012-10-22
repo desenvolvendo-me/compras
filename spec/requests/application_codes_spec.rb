@@ -58,7 +58,7 @@ feature "ApplicationCodes" do
 
       click_button 'Salvar'
 
-      expect(page).to_not have_content 'já está em uso'
+      expect(page).to_not have_content 'já existe para a variável selecionada'
     end
   end
 

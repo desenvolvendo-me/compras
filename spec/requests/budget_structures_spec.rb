@@ -339,7 +339,7 @@ feature "BudgetStructure" do
     end
   end
 
-  scenario 'should allow one responsialbe by time when edit' do
+  scenario 'should allow one responsible by time when edit' do
     BudgetStructure.make!(:secretaria_de_educacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
@@ -355,7 +355,7 @@ feature "BudgetStructure" do
     end
   end
 
-  scenario 'should all responsialbe fields disabled when alread stored' do
+  scenario 'should all responsible fields disabled when already stored' do
     BudgetStructure.make!(:secretaria_de_educacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
@@ -394,6 +394,8 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
+    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
+
     click_link 'Secretaria de Educação'
 
     within_tab 'Responsáveis' do
@@ -420,6 +422,8 @@ feature "BudgetStructure" do
     end
 
     click_button 'Salvar'
+
+    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
 
     click_link 'Secretaria de Educação com dois responsaveis'
 
@@ -476,6 +480,8 @@ feature "BudgetStructure" do
     end
 
     click_button 'Salvar'
+
+    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
 
     click_link 'Secretaria de Educação'
 

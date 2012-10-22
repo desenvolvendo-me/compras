@@ -527,7 +527,7 @@ feature "Creditors" do
     end
   end
 
-  scenario 'acessing a CRC for a creditor and returnig to creditor' do
+  scenario 'acessing a CRC for a creditor and returning to creditor' do
     Creditor.make!(:nohup)
 
     navigate 'Cadastros Gerais > Pessoas > Credores'
@@ -700,7 +700,7 @@ feature "Creditors" do
     expect(page).to have_field 'Número na junta comercial', :with => '123456789'
   end
 
-  scenario 'should not show CRC when creditor is' do
+  scenario 'should not show CRC when creditor is company' do
     Creditor.make!(:nohup)
 
     navigate 'Cadastros Gerais > Pessoas > Credores'
@@ -710,7 +710,7 @@ feature "Creditors" do
     expect(page).to have_link 'CRC'
   end
 
-  scenario 'should not show CRC when creditor is company' do
+  scenario 'should not show CRC when creditor is individual' do
     Creditor.make!(:sobrinho)
 
     navigate 'Cadastros Gerais > Pessoas > Credores'
@@ -1220,6 +1220,8 @@ feature "Creditors" do
     expect(page).to have_disabled_field 'creditor_creditable'
 
     click_button 'Salvar'
+
+    expect(page).to have_notice 'Credor editado com sucesso.'
 
     expect(page).to have_content 'Mateus Lorandi'
   end

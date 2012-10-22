@@ -90,5 +90,7 @@ feature "DisseminationSources" do
     click_link 'Apagar'
 
     expect(page).to_not have_notice 'Fonte de Divulgação apagado com sucesso.'
+
+    expect(page).to have_alert 'Fonte de Divulgação não pode ser apagado.'
   end
 end

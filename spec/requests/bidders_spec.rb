@@ -326,6 +326,8 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
+    expect(page).to have_content 'Licitante editado com sucesso.'
+
     within_records do
       page.find('a').click
     end
@@ -428,6 +430,8 @@ feature "Bidders" do
     end
 
     click_button 'Salvar'
+
+    expect(page).to have_content 'Licitante editado com sucesso.'
 
     click_link bidder.to_s
 
@@ -594,6 +598,8 @@ feature "Bidders" do
 
     click_button 'Salvar'
 
+    expect(page).to have_content 'Licitante editado com sucesso.'
+
     click_link bidder.to_s
 
     within_tab 'Propostas' do
@@ -713,7 +719,7 @@ feature "Bidders" do
     expect(page).to have_button 'Salvar'
   end
 
-  scenario 'create bidder linkd does not show when envelope opening date is not today' do
+  scenario 'create bidder link does not show when envelope opening date is not today' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio)
 
     visit bidders_path(:licitation_process_id => licitation_process.id)
@@ -721,7 +727,7 @@ feature "Bidders" do
     expect(page).to_not have_link 'Criar Licitante'
   end
 
-  scenario "index shoud have title Licitantes do Processo Licitatório 1/2013" do
+  scenario "index should have title Licitantes do Processo Licitatório 1/2013" do
     LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -737,7 +743,7 @@ feature "Bidders" do
     expect(page).to have_content "Licitantes do Processo Licitatório 1/2013"
   end
 
-  scenario "edit shoud have title Editar Licitante do Processo Licitatório 1/2013" do
+  scenario "edit should have title Editar Licitante do Processo Licitatório 1/2013" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -759,7 +765,7 @@ feature "Bidders" do
     expect(page).to have_content "Editar Licitante(#{bidder}) do Processo Licitatório 1/2013"
   end
 
-  scenario "new shoud have title Novo Licitante do Processo Licitatório 1/2013" do
+  scenario "new should have title Novo Licitante do Processo Licitatório 1/2013" do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'

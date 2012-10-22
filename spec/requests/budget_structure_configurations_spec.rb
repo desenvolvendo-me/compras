@@ -108,7 +108,7 @@ feature "BudgetStructureConfigurations" do
     expect(page).to_not have_content 'Configuração do Detran'
   end
 
-  scenario 'create with error' do
+  scenario 'create with error does not clear filled structures' do
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
 
     click_link 'Criar Configuração de Estrutura Orçamentaria'

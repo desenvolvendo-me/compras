@@ -54,6 +54,8 @@ feature "DocumentTypes" do
     click_link 'Apagar'
 
     expect(page).to_not have_notice 'Tipo de Documento apagado com sucesso.'
+
+    expect(page).to have_alert 'Tipo de Documento não pode ser apagado.'
   end
 
   scenario 'destroy an existent document_type' do

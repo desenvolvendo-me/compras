@@ -48,7 +48,7 @@ feature "Functions" do
     end
   end
 
-  scenario 'when cange regulatory_act should have modal info to regulatory_act' do
+  scenario 'when change regulatory_act should have modal info to regulatory_act' do
     function = Function.make!(:administracao)
     RegulatoryAct.make!(:emenda)
 

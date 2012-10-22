@@ -30,7 +30,7 @@ feature "CapabilitySources" do
     expect(page).to have_select 'Fonte', :selected => 'Manual'
   end
 
-  scenario 'update an existent capability_source' do
+  scenario 'create capability_source with existent code' do
     CapabilitySource.make!(:imposto)
 
     navigate 'Outros > Contabilidade > Orçamento > Recurso > Fontes de Recursos'

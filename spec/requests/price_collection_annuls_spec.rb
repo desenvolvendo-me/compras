@@ -44,6 +44,8 @@ feature 'PriceCollectionAnnuls' do
 
     click_on 'Salvar'
 
+    expect(page).to have_notice 'Anulação de Coleta de Preço criado com sucesso.'
+
     click_on 'Anulação'
 
     expect(page).to have_content 'Anulação da Coleta de Preço 1/2012'

@@ -51,6 +51,8 @@ feature 'PriceCollectionProposalAnnul' do
 
     click_on 'Salvar'
 
+    expect(page).to have_notice 'Anulação de Recurso criado com sucesso.'
+
     click_on 'Anulação'
 
     expect(page).to have_content 'Anulação da Proposta de Wenderson Malheiros para a Coleta de Preço 1/2012'

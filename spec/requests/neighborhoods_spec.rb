@@ -89,6 +89,8 @@ feature "Neighborhoods" do
     click_link 'Apagar'
 
     expect(page).to_not have_notice 'Bairro apagado com sucesso.'
+
+    expect(page).to have_alert 'Bairro não pode ser apagado.'
   end
 
   scenario 'validate uniquenes of name scoped to district' do

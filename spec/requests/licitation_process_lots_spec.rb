@@ -60,7 +60,6 @@ feature "LicitationProcessLots" do
     expect(page).to have_content '10,00'
   end
 
-
   scenario 'should not show link to create a new lot if licitation process is not updatable' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 

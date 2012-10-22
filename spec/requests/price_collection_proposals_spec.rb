@@ -52,7 +52,7 @@ feature "PriceCollectionProposals" do
     scenario 'editing proposal' do
       price_collection = PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Processos de Compra > Coletas de Preços'
 
       click_link '1/2012'
 
