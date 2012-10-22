@@ -13,7 +13,6 @@ describe LicitationCommission do
   it { should validate_presence_of :commission_type }
   it { should validate_presence_of :nomination_date }
   it { should validate_presence_of :expiration_date }
-  it { should validate_presence_of :exoneration_date }
   it { should validate_presence_of :regulatory_act }
 
   it { should belong_to :regulatory_act }

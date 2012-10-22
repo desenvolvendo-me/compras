@@ -21,7 +21,7 @@ class LicitationCommission < Compras::Model
   delegate :publication_date, :to => :regulatory_act, :allow_nil => true, :prefix => true
   delegate :auctioneer, :support_team, :to => :licitation_commission_members
 
-  validates :commission_type, :nomination_date, :expiration_date, :exoneration_date, :regulatory_act, :presence => true
+  validates :commission_type, :nomination_date, :expiration_date, :regulatory_act, :presence => true
   validates :expiration_date, :exoneration_date,
     :timeliness => {
       :on_or_after => :nomination_date,
