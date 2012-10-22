@@ -3,12 +3,6 @@ class AgreementKind < Compras::Model
 
   has_many :agreements, :dependent => :restrict
 
-  validates :description, :presence => true
-
   orderize :description
   filterize
-
-  def to_s
-    description
-  end
 end

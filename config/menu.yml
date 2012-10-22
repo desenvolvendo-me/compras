@@ -28,8 +28,6 @@ menu:
       - agencies
       - banks
       - bank_accounts
-    - agreement:
-      - agreement_kinds
     - address:
       - street_types
       - streets

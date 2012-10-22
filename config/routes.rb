@@ -15,12 +15,7 @@ Compras::Application.routes.draw do
 
   get 'agreements/modal', :as => :modal_agreements
 
-  resources :agreement_kinds do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get 'agreement_kinds/modal', :as => :modal_agreement_kinds
 
   resources :application_codes do
     collection do
