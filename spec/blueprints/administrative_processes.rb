@@ -311,4 +311,5 @@ AdministrativeProcess.blueprint(:pregao_presencial) do
   item { 'Item 1' }
   administrative_process_budget_allocations { [AdministrativeProcessBudgetAllocation.make!(:alocacao_com_itens)] }
   administrative_process_liberation { AdministrativeProcessLiberation.make!(:liberacao, :administrative_process => object) }
+  summarized_object { "Descrição resumida do objeto" }
 end

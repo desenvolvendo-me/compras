@@ -10,4 +10,5 @@ builder resource, json do
   json.administrative_process_modality_humanize resource.administrative_process_modality_humanize
   json.administrative_process_description       resource.administrative_process_description
   json.administrative_process                   resource.administrative_process.to_s
+  json.summarized_object                        resource.summarized_object
 end

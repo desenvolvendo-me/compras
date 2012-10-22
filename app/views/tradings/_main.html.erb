@@ -11,10 +11,11 @@
 
 <%= f.input :licitation_process,
   :modal_url => modal_licitation_processes_path(:by_modality_type => AbreviatedProcessModality::PRESENCE_TRADING,
-                                                :without_trading => true) %>
+                                                :without_trading => true),
+  :input_html => { :class => 'licitation-process' }%>
 
 <%= f.input :entity %>
 
 <%= f.input :licitating_unit %>
 
-<%= f.input :summarized_object %>
+<%= f.input :summarized_object, :disabled => true, :input_html => { :class => 'summarized-object' } %>

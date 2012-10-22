@@ -25,7 +25,9 @@ feature "Tradings" do
       fill_modal "Processo licitatório", :with => "1", :field => "Processo"
       fill_modal "Órgão/Entidade", :with => "Detran"
       fill_modal "Unidade licitante", :with => "Secretaria de Educação"
-      fill_in "Objeto resumido", :with => "Descrição resumida do objeto"
+
+      expect(page).to have_disabled_field "Objeto resumido"
+      expect(page).to have_field "Objeto resumido", :with => "Descrição resumida do objeto"
     end
 
     within_tab "Pregoeiro e equipe" do

@@ -14,6 +14,14 @@
 </div>
 <script>
   $(function() {
+    $(".licitation-process").on("change", function(e, licitationProcess) {
+      if (licitationProcess) {
+        $(".summarized-object").val(licitationProcess.summarized_object);
+      } else {
+        $(".summarized-object").val("");
+      }
+    });
+
     $(".licitation-commission-modal").on("change", function(e, licitationCommission) {
       if (licitationCommission) {
         clearCommissionMembers();

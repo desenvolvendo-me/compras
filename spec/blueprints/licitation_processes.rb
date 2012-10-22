@@ -1,3 +1,4 @@
+# encoding: utf-8
 LicitationProcess.blueprint(:processo_licitatorio) do
   year { 2012 }
   process { 1 }
