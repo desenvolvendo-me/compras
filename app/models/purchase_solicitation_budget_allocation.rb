@@ -22,7 +22,8 @@ class PurchaseSolicitationBudgetAllocation < Compras::Model
 
   def self.by_material(material_ids)
     joins { items }.
-      where { |budget_allocation| budget_allocation.items.material_id.in(material_ids) }
+    where { |budget_allocation| budget_allocation.items.material_id.in(material_ids) }.
+    uniq
   end
 
   def items_by_material(material_ids)

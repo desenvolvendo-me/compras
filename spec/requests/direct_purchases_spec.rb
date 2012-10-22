@@ -1841,4 +1841,48 @@ feature "DirectPurchases" do
       end
     end
   end
+
+  scenario 'replicate budget allocations from item group when a purchase solicitation has two items' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_budget_allocations => [
+        PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
+          :items => [
+            PurchaseSolicitationBudgetAllocationItem.make!(:item),
+            PurchaseSolicitationBudgetAllocationItem.make!(:office)
+          ]
+        )
+      ]
+    )
+
+    PurchaseSolicitationItemGroup.make!(:antivirus,
+      :purchase_solicitation_item_group_materials => [
+        PurchaseSolicitationItemGroupMaterial.make(:reparo,
+          :purchase_solicitations => [ purchase_solicitation ]
+        ),
+        PurchaseSolicitationItemGroupMaterial.make(:reparo_office,
+          :purchase_solicitations => [ purchase_solicitation ]
+        )
+      ]
+    )
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    expect(page).to have_content 'Compra Direta'
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    within_tab 'Dotações' do
+      expect(page).to have_css('.direct-purchase-budget-allocation', :count => 1)
+      expect(page).to have_css('.item', :count => 2)
+    end
+  end
 end

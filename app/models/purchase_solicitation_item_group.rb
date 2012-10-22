@@ -12,7 +12,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
                                :create_scopes => true
 
   has_many :purchase_solicitation_item_group_materials, :dependent => :destroy
-  has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials
+  has_many :purchase_solicitations, :through => :purchase_solicitation_item_group_materials, :uniq => true
   has_many :direct_purchases, :dependent => :restrict
   has_many :administrative_processes, :dependent => :restrict
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
@@ -64,10 +64,6 @@ class PurchaseSolicitationItemGroup < Compras::Model
 
   def annullable?
     editable?
-  end
-
-  def purchase_solicitations_by_material
-    purchase_solicitations.by_material(material_ids)
   end
 
   def fulfill_items(process)

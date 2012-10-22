@@ -3,7 +3,7 @@ builder resource, json do
   json.total            resource.total_purchase_solicitation_budget_allocations_sum.to_f
   json.modal_info_url   purchase_solicitation_item_group_path(resource, :format => :js)
 
-  json.purchase_solicitations resource.purchase_solicitations_by_material do |json, purchase_solicitation|
+  json.purchase_solicitations resource.purchase_solicitations do |json, purchase_solicitation|
     json.id purchase_solicitation.id
 
     json.budget_allocations purchase_solicitation.purchase_solicitation_budget_allocations_by_material(resource.material_ids) do |json, ps_budget_allocation|
