@@ -12,7 +12,7 @@ end
 
 LicitationCommission.blueprint(:comissao_nova) do
   regulatory_act { RegulatoryAct.make!(:sopa) }
-  commission_type { CommissionType::TRADING }
+  commission_type { CommissionType::PERMANENT }
   nomination_date { Date.new(2012, 4, 20) }
   expiration_date { Date.new(2012, 4, 22) }
   exoneration_date { Date.new(2012, 4, 25) }
