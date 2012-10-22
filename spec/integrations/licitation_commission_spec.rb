@@ -27,6 +27,14 @@ describe "LicitationCommission" do
 
       expect(licitation_commission.errors.full_messages).to include "Membros da comissão de licitação deve ter ao menos um membro na equipe de apoio"
     end
+
+    it "doesn't validate presence of a 'President' member if commission is of type 'Trading'" do
+      licitation_commission = LicitationCommission.make(:comissao_pregao_presencial)
+
+      licitation_commission.valid?
+
+      expect(licitation_commission.errors[:licitation_commission_members]).to be_empty
+    end
   end
 end
 

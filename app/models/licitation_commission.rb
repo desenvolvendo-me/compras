@@ -31,7 +31,7 @@ class LicitationCommission < Compras::Model
 
   validate :cannot_have_duplicated_individuals_on_responsibles
   validate :cannot_have_duplicated_individuals_on_members
-  validate :must_have_one_member_with_role_president
+  validate :must_have_one_member_with_role_president, :unless => :trading?
 
   validate :must_have_auctioneer, :must_have_support_team, :if => :trading?
 

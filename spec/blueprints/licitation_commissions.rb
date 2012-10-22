@@ -30,8 +30,7 @@ LicitationCommission.blueprint(:comissao_pregao_presencial) do
   description { "Comissão para pregão presencial" }
   licitation_commission_responsibles { [LicitationCommissionResponsible.make!(:advogado)] }
   licitation_commission_members {
-    [LicitationCommissionMember.make!(:membro_presidente),
-     LicitationCommissionMember.make!(:membro_pregoeiro),
+    [LicitationCommissionMember.make!(:membro_pregoeiro),
      LicitationCommissionMember.make!(:membro_equipe_apoio)]
   }
 end
