@@ -11,7 +11,7 @@ class Trading < Compras::Model
   belongs_to :licitating_unit, :class_name => "Entity",
                                :foreign_key => "licitating_unit_id"
 
-  validates :licitation_process, :presence => true
+  validates :licitation_process, :year, :presence => true
   validates :licitation_process_id, :uniqueness => true
   validate :modality_type
 

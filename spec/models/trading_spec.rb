@@ -14,6 +14,7 @@ describe Trading do
   it { should belong_to :licitating_unit }
 
   it { should validate_presence_of :licitation_process }
+  it { should validate_presence_of :year }
 
   describe "#to_s" do
 
