@@ -66,7 +66,7 @@ class PurchaseSolicitation < Compras::Model
     PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
   }
 
-  scope :can_be_purchased, where { 
+  scope :can_be_purchased, where {
     service_status.eq(PurchaseSolicitationServiceStatus::LIBERATED)
   }
 
