@@ -457,5 +457,4 @@ feature "LicitationCommissions" do
 
     expect(page).to have_field "Descrição"
   end
-
 end
