@@ -48,7 +48,8 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
-  it { should have_many(:tradings).dependent(:restrict) }
+
+  it { should have_one(:trading).dependent(:restrict) }
 
   it { should validate_presence_of :year }
   it { should validate_presence_of :process_date }

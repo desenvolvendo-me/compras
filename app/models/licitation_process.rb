@@ -41,7 +41,8 @@ class LicitationProcess < Compras::Model
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
   has_many :price_registrations, :dependent => :restrict
-  has_many :tradings, :dependent => :restrict
+
+  has_one :trading, :dependent => :restrict
 
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
@@ -106,6 +107,8 @@ class LicitationProcess < Compras::Model
       administrative_process.licitation_modality.modality_type.eq(modality_type)
     }
   }
+
+  scope :without_trading, joins { trading.outer }.where { trading.id.eq nil }
 
   def to_s
     "#{process}/#{year}"

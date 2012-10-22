@@ -12,6 +12,7 @@ class Trading < Compras::Model
                                :foreign_key => "licitating_unit_id"
 
   validates :licitation_process, :presence => true
+  validates :licitation_process_id, :uniqueness => true
   validate :modality_type
 
   delegate :auctioneer, :support_team, :licitation_commission_members,
