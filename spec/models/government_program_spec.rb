@@ -12,8 +12,4 @@ describe GovernmentProgram do
   it { should belong_to :descriptor }
 
   it { should have_many(:budget_allocations).dependent(:restrict) }
-
-  it { should validate_presence_of :descriptor }
-  it { should validate_presence_of :description }
-  it { should validate_presence_of :status }
 end

@@ -127,7 +127,6 @@ menu:
           - revenue_natures
           - budget_revenues
 
-        - government_programs
         - government_actions
 
         - capability:

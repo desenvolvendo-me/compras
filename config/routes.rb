@@ -450,12 +450,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :government_programs do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "government_programs/modal", :as => :modal_government_programs
 
   get "individuals/modal", :as => :modal_individuals
 

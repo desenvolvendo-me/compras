@@ -7,8 +7,6 @@ class GovernmentProgram < Compras::Model
 
   has_many :budget_allocations, :dependent => :restrict
 
-  validates :descriptor, :description, :status, :presence => true
-
   orderize :description
   filterize
 
