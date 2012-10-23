@@ -317,6 +317,71 @@ feature "DirectPurchases" do
     end
   end
 
+  scenario 'when clear item group purchase solicitation item should clear fulfiller' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    DirectPurchase.make!(:compra)
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_field 'Atendido por', :with => 'Compra direta 1/2012'
+        end
+      end
+    end
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      clear_modal 'Agrupamento de solicitações de compra'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.purchase-solicitation-budget-allocation:first' do
+        within '.item:first' do
+          expect(page).to have_field 'Atendido por', :with => ''
+        end
+      end
+    end
+  end
+
   scenario 'when has budget allocations and select a purchase solicitation item group should clear old budget allocations' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
     budget_allocation = BudgetAllocation.make!(:alocacao)

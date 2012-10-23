@@ -38,19 +38,12 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
     where { |item| item.material_id.in material_ids }
   end
 
-  def self.fulfill_items(options = {})
-    validate_options(options)
-
-    process = options.fetch(:process)
-    material_id = options.fetch(:material_id)
-    purchase_items = options.fetch(:items) { scoped.by_material(material_id) }
-
-    purchase_items.each { |item| item.update_fulfiller(process) }
-  end
-
-  def update_fulfiller(process)
-    update_attributes :fulfiller_id => process.id,
-                      :fulfiller_type => process.class.name
+  def fulfill(process)
+    if process.present?
+      update_fulfiller(process.id, process.class.name)
+    else
+      update_fulfiller(nil, nil)
+    end
   end
 
   def clear_fulfiller_and_status(status_enumeration = PurchaseSolicitationBudgetAllocationItemStatus)
@@ -65,8 +58,8 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
 
   private
 
-  def self.validate_options(options)
-    raise ArgumentError, 'Expected :process, got nil instead.' unless options[:process].present?
-    raise ArgumentError, 'Expected :material_id, got nil instead.' unless options[:material_id].present?
+  def update_fulfiller(process_id, process_name)
+    update_attributes :fulfiller_id => process_id,
+                      :fulfiller_type => process_name
   end
 end

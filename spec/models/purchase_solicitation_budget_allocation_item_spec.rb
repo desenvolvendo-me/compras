@@ -23,52 +23,39 @@ describe PurchaseSolicitationBudgetAllocationItem do
     expect(subject.estimated_total_price).to eq 50
   end
 
-  context '#fulfill_items' do
-    let(:item) { double(:item).as_null_object }
-    let(:process) { double(:process) }
-    let(:material_id) { -1 }
+  context '#fulfill' do
+    it "fulfills item with process when process is present" do
+      process = double(:process, :id => 1)
+      subject.should_receive(:update_fulfiller).with(1, process.class.name)
 
-    it "fulfills each of the purchase solicitation items with the purchase process" do
-      item.should_receive(:update_fulfiller).with(process)
-
-      PurchaseSolicitationBudgetAllocationItem.fulfill_items({
-        :material_id => material_id,
-        :process => process,
-        :items => [item]
-      })
+      subject.fulfill(process)
     end
 
-    it "raises an exception if no process is given" do
-      expect {
-        PurchaseSolicitationBudgetAllocationItem.fulfill_items({
-          :material_id => material_id,
-          :process => nil,
-          :items => [item]
-        })
-      }.to raise_error(ArgumentError, 'Expected :process, got nil instead.')
-    end
+    it "clear fulfiller item with when process is not present" do
+      process = double(:process, :present? => false)
+      subject.should_receive(:update_fulfiller).with(nil, nil)
 
-    it "raises an exception if no material is given" do
-      expect {
-        PurchaseSolicitationBudgetAllocationItem.fulfill_items({
-          :material_id => nil,
-          :process => process,
-          :items => [item]
-        })
-      }.to raise_error(ArgumentError, 'Expected :material_id, got nil instead.')
+      subject.fulfill(process)
     end
   end
 
   context '#update_fulfiller' do
-    let :process do
-      double(:process, :id => 1)
+    it 'should update fulfiller' do
+      process = double(:process, :id => 1)
+
+      subject.should_receive(:update_attributes).
+              with(:fulfiller_id => 1, :fulfiller_type => process.class.name)
+
+      subject.fulfill(process)
     end
 
-    it 'should update fulfiller' do
-      subject.should_receive(:update_attributes).
-              with(:fulfiller_id => process.id, :fulfiller_type => process.class.name)
+    it 'should clear fulfiller' do
+      process = double(:process, :present? => false)
 
-      subject.update_fulfiller(process)
+      subject.should_receive(:update_attributes).
+              with(:fulfiller_id => nil, :fulfiller_type => nil)
+
+      subject.fulfill(process)
     end
   end
 

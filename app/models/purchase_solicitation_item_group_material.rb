@@ -15,10 +15,9 @@ class PurchaseSolicitationItemGroupMaterial < Compras::Model
   validate  :purchase_solicitation_status, :on => :create
 
   def fulfill_items(process)
-    purchase_solicitation_items.fulfill_items({
-      :material_id => material_id,
-      :process => process
-    })
+    purchase_solicitation_items.each do |item|
+      item.fulfill(process)
+    end
   end
 
   private

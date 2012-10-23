@@ -78,8 +78,21 @@ describe DirectPurchasesController do
 
       it "should set the new item_group throught a PurchaseSolicitationItemGroupProcess" do
         item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+        fulfiller_instance = double(:fulfiller_instance)
 
         DirectPurchaseBudgetAllocationCleaner.should_receive(:clear_old_records)
+
+        fulfiller_instance.should_receive(:fulfill).twice
+
+        PurchaseSolicitationBudgetAllocationItemFulfiller.
+          should_receive(:new).
+          with(nil).
+          and_return(fulfiller_instance)
+
+        PurchaseSolicitationBudgetAllocationItemFulfiller.
+          should_receive(:new).
+          with(item_group, direct_purchase).
+          and_return(fulfiller_instance)
 
         PurchaseSolicitationItemGroupProcess.
           should_receive(:update_item_group_status).

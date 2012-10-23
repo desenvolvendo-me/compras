@@ -55,6 +55,9 @@ class DirectPurchasesController < CrudController
       if super
         PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation, old_purchase_solicitation)
         PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group, old_item_group)
+
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(old_item_group).fulfill
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(new_item_group, object).fulfill
       end
     end
   end
