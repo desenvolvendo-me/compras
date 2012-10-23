@@ -6,13 +6,6 @@ class Subfunction < Compras::Model
 
   has_many :budget_allocations, :dependent => :restrict
 
-  validates :descriptor, :description, :function, :code, :presence => true
-
-  with_options :allow_blank => true do |allowing_blank|
-    allowing_blank.validates :code, :numericality => true
-    allowing_blank.validates :code, :description, :uniqueness => true
-  end
-
   orderize :code
   filterize
 

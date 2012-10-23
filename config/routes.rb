@@ -900,12 +900,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :subfunctions do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "subfunctions/modal", :as => :modal_subfunctions
 
   resources :target_audiences do
     collection do

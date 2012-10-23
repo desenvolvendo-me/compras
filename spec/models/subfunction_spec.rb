@@ -14,11 +14,5 @@ describe Subfunction do
   it { should belong_to :descriptor }
   it { should belong_to :function }
 
-  it { should validate_presence_of :descriptor }
-  it { should validate_presence_of :code }
-  it { should validate_numericality_of :code }
-  it { should validate_presence_of :description }
-  it { should validate_presence_of :function }
-
   it { should have_many(:budget_allocations).dependent(:restrict) }
 end
