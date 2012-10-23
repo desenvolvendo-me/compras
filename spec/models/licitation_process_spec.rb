@@ -467,4 +467,14 @@ describe LicitationProcess do
       expect(subject.winning_bid).to eq classification_2
     end
   end
+
+  context "#admnistrative_process_summarized_object" do
+    it "delegates to AdministrativeProcess#summarized_object" do
+      administrative_process = double(:administrative_process)
+      subject.stub(:administrative_process => administrative_process)
+
+      administrative_process.should_receive(:summarized_object)
+      subject.administrative_process_summarized_object
+    end
+  end
 end
