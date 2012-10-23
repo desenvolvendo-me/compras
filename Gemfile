@@ -7,7 +7,7 @@ ruby "1.9.3"
 gem 'rails', '3.2.8'
 gem 'puma', '1.6.3', :require => false
 
-gem 'pg', '0.14.0'
+gem 'pg', '0.14.1'
 
 gem 'activerecord-connections', '0.0.3'
 
