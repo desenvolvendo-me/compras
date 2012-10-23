@@ -17,7 +17,7 @@ class Trading < Compras::Model
 
   delegate :auctioneer, :support_team, :licitation_commission_members,
            :to => :licitation_commission, :allow_nil => true
-  delegate :summarized_object, :to => :licitation_process,
+  delegate :administrative_process_summarized_object, :to => :licitation_process,
            :allow_nil => true
 
   orderize :code
