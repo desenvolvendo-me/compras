@@ -109,7 +109,10 @@ class LicitationProcess < Compras::Model
     }
   }
 
-  scope :without_trading, joins { trading.outer }.where { trading.id.eq nil }
+  def self.without_trading(except_id)
+    joins { trading.outer }.
+      where { |licitation| licitation.trading.id.eq(nil) | licitation.id.eq(except_id) }
+  end
 
   def to_s
     "#{process}/#{year}"
