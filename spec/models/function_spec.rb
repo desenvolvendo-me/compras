@@ -11,9 +11,5 @@ describe Function do
     expect(subject.to_s).to eq '4 - Administração'
   end
 
-  it { should validate_presence_of :code }
-  it { should validate_presence_of :description }
-  it { should validate_numericality_of :code }
-
   it { should have_many(:subfunctions).dependent(:restrict) }
 end

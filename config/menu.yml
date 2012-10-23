@@ -105,7 +105,6 @@ menu:
     - accounting:
       - estimate:
         - funtional_classification:
-          - functions
           - subfunctions
 
         - organizational_structure:

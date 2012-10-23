@@ -7,11 +7,6 @@ class Function < Compras::Model
 
   delegate :vigor_date, :to => :regulatory_act, :allow_nil => true, :prefix => true
 
-  validates :description, :code, :presence => true
-  validates :code, :uniqueness   => { :scope => :regulatory_act_id, :message => :taken_for_regulatory_act },
-                   :numericality => true,
-                   :allow_blank  => true
-
   orderize :code
   filterize
 
