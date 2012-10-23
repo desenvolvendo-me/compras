@@ -457,4 +457,59 @@ feature "LicitationCommissions" do
 
     expect(page).to have_field "Descrição"
   end
+
+  scenario 'creating a trading licitation commission' do
+    RegulatoryAct.make!(:sopa)
+    Person.make!(:wenderson)
+    Person.make!(:sobrinho)
+    Person.make!(:joao_da_silva)
+
+    navigate 'Cadastros Gerais > Licitação > Comissões de Licitação'
+
+    click_link 'Criar Comissão de Licitação'
+
+    within_tab 'Principal' do
+      select 'Pregão', :from => 'Tipo de comissão'
+
+      fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
+
+      expect(page).to have_field 'Ato regulamentador', :with => 'Lei 1234'
+
+      expect(page).to have_disabled_field 'Data da publicação do ato'
+      expect(page).to have_field 'Data da publicação do ato', :with => '02/01/2012'
+
+      fill_in 'Data da nomeação', :with => '20/03/2012'
+      fill_in 'Data da expiração', :with => '22/03/2012'
+      fill_in 'Data da exoneração', :with => '25/03/2012'
+      fill_in 'Descrição e finalidade da comissão', :with => 'descrição'
+    end
+
+    within_tab 'Responsáveis' do
+      click_button 'Adicionar Responsável'
+
+      fill_modal 'Autoridade', :with => 'Wenderson Malheiros'
+      select 'Advogado', :from => 'Cargo'
+      fill_in 'Registro da classe', :with => '123456'
+    end
+
+    within_tab 'Membros' do
+      click_button 'Adicionar Membro'
+
+      fill_modal 'Membro', :with => 'Gabriel Sobrinho'
+      fill_in 'Matrícula', :with => '3456789'
+      select 'Pregoeiro', :from => 'Função'
+      select 'Servidor efetivo', :from => 'Natureza do cargo'
+
+      click_button 'Adicionar Membro'
+
+      fill_modal 'Membro', :with => 'Joao da Silva'
+      fill_in 'Matrícula', :with => '1234'
+      select 'Equipe de Apoio', :from => 'Função'
+      select 'Servidor efetivo', :from => 'Natureza do cargo'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Comissão de Licitação criada com sucesso.'
+  end
 end
