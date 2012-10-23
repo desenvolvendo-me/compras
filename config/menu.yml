@@ -100,7 +100,6 @@ menu:
     - descriptors
     - legal_references
     - administration_types
-    - government_actions
 
     - accounting:
       - estimate:
@@ -125,8 +124,6 @@ menu:
         - budget_revenue:
           - revenue_natures
           - budget_revenues
-
-        - government_actions
 
         - capability:
           - capabilities
