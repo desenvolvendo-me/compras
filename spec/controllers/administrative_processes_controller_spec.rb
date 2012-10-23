@@ -58,7 +58,7 @@ describe AdministrativeProcessesController do
     it 'should update when administrative process status is waiting' do
       administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
-      put :update, :id => administrative_process.id
+      put :update, :id => administrative_process.id, :administrative_process => {}
 
       expect(response).to redirect_to(administrative_processes_path)
     end
@@ -74,7 +74,7 @@ describe AdministrativeProcessesController do
     it "should not cancel an administrative process without status waiting" do
       administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
-      put :update, :id => administrative_process.id
+      put :update, :id => administrative_process.id, :administrative_process => {}
 
       expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::WAITING
     end
@@ -82,6 +82,30 @@ describe AdministrativeProcessesController do
     it 'should clear old budget_allocations' do
       administrative_process = AdministrativeProcess.make!(:compra_aguardando)
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+      AdministrativeProcessBudgetAllocationCleaner.any_instance.
+                                                   should_receive(:clear_old_records)
+
+      put :update, :id => administrative_process.id,
+                   :administrative_process => { :purchase_solicitation_item_group_id => item_group.id }
+    end
+
+    it 'should update purchase_solicitation fulfiller if has item group' do
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+      fulfiller_instance = double(:fulfiller_instance)
+
+      fulfiller_instance.should_receive(:fulfill).twice
+
+      PurchaseSolicitationBudgetAllocationItemFulfiller.
+        should_receive(:new).
+        with(nil).
+        and_return(fulfiller_instance)
+
+      PurchaseSolicitationBudgetAllocationItemFulfiller.
+        should_receive(:new).
+        with(item_group, administrative_process).
+        and_return(fulfiller_instance)
 
       AdministrativeProcessBudgetAllocationCleaner.any_instance.
                                                    should_receive(:clear_old_records)
