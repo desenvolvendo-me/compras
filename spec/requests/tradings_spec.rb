@@ -83,7 +83,7 @@ feature "Tradings" do
 
     within_tab "Pregoeiro e equipe" do
       fill_modal "Comissão de licitação", :with => "Comissão para pregão presencial", :field => "Descrição"
-      
+
       expect(page).to have_content "Pregoeiro"
       expect(page).to have_content "Equipe de Apoio"
     end
