@@ -51,4 +51,18 @@ class AdministrativeProcessesController < CrudController
       PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
     end
   end
+
+  def update_resource(object, attributes)
+    object.transaction do
+      AdministrativeProcessBudgetAllocationCleaner.new(object, new_item_group).clear_old_records
+
+      super
+    end
+  end
+
+  def new_item_group
+    item_group_id = params[:administrative_process][:purchase_solicitation_item_group_id]
+
+    PurchaseSolicitationItemGroup.find(item_group_id) if item_group_id.present?
+  end
 end

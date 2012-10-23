@@ -78,5 +78,16 @@ describe AdministrativeProcessesController do
 
       expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::WAITING
     end
+
+    it 'should clear old budget_allocations' do
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+
+      AdministrativeProcessBudgetAllocationCleaner.any_instance.
+                                                   should_receive(:clear_old_records)
+
+      put :update, :id => administrative_process.id,
+                   :administrative_process => { :purchase_solicitation_item_group_id => item_group.id }
+    end
   end
 end

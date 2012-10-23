@@ -723,6 +723,59 @@ feature "AdministrativeProcesses" do
     end
   end
 
+  scenario 'when clear item group purchase solicitation item should clear budget_allocations' do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    AdministrativeProcess.make!(:compra_aguardando)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+      within '.nested-administrative-process-budget-allocation:first' do
+        fill_in 'Valor previsto', :with => '10,00'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      clear_modal 'Agrupamento de solicitações de compra'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Valor total', :with => '0,00'
+      expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
+    end
+  end
   scenario 'assigns a fulfiller to the purchase solicitation budget allocation item when assign a purchase_solicitation_item_group to administrative_process' do
     BudgetStructure.make!(:secretaria_de_educacao)
     JudgmentForm.make!(:por_item_com_melhor_tecnica)
