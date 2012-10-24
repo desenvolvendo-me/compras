@@ -49,7 +49,7 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def global_classification
-    proposals = price_collection.price_collection_proposals.sort_by &:total_price
+    proposals = price_collection.price_collection_proposals.sort_by(&:total_price)
 
     classification = proposals.index(self).succ
     classification = -1 if has_item_with_unit_price_equals_zero
