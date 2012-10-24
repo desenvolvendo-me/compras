@@ -1,4 +1,6 @@
-<%= f.input :licitation_commission %>
+<%= f.input :licitation_commission,
+  :modal_url => modal_licitation_commissions_path(:can_take_part_in_trading => true,
+                                                  :locked_fields => ['commission_type', 'exoneration_date']) %>
 
 <table class="records table-puchase-solicitation">
   <thead>

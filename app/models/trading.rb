@@ -14,6 +14,9 @@ class Trading < Compras::Model
   validates :licitation_process, :year, :presence => true
   validates :licitation_process_id, :uniqueness => true
   validate :modality_type
+  validate :licitation_commission_type
+  validate :licitation_commission_expiration_date
+  validate :licitation_commission_exoneration_date
 
   delegate :auctioneer, :support_team, :licitation_commission_members,
            :to => :licitation_commission, :allow_nil => true
@@ -34,6 +37,30 @@ class Trading < Compras::Model
 
     unless licitation_process.presence_trading?
       errors.add(:licitation_process, :should_be_of_trading_type)
+    end
+  end
+
+  def licitation_commission_type
+    return unless licitation_commission.present?
+
+    unless licitation_commission.trading?
+      errors.add(:licitation_commission, :should_be_of_trading_type)
+    end
+  end
+
+  def licitation_commission_expiration_date
+    return unless licitation_commission.present?
+
+    if licitation_commission.expired?
+      errors.add(:licitation_commission, :should_not_be_expired)
+    end
+  end
+
+  def licitation_commission_exoneration_date
+    return unless licitation_commission.present?
+
+    if licitation_commission.exonerated?
+      errors.add(:licitation_commission, :should_not_be_exonerated)
     end
   end
 end

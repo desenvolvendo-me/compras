@@ -135,4 +135,63 @@ feature "Tradings" do
       expect(page).to have_field "Ano", :with => Date.current.year.to_s
     end
   end
+
+  scenario "filtering out licitation commissions with type other than trading" do
+    LicitationCommission.make!(:comissao,
+                               :expiration_date => Date.tomorrow,
+                               :exoneration_date => nil)
+    LicitationCommission.make!(:comissao_pregao_presencial)
+
+    navigate "Pregão > Pregões Presenciais"
+
+    click_link "Criar Pregão Presencial"
+
+    within_tab "Pregoeiro e equipe" do
+      within_modal "Comissão de licitação" do
+        expect(page).to have_disabled_field "Tipo de comissão"
+
+        click_button "Pesquisar"
+        expect(page).to have_content "Comissão para pregão presencial"
+        expect(page).not_to have_content "descricao da comissao"
+      end
+    end
+  end
+
+  scenario "filtering out expired licitation commissions" do
+    LicitationCommission.make!(:comissao_pregao_presencial,
+                               :expiration_date => Date.yesterday)
+
+    navigate "Pregão > Pregões Presenciais"
+
+    click_link "Criar Pregão Presencial"
+
+    within_tab "Pregoeiro e equipe" do
+      within_modal "Comissão de licitação" do
+        click_button "Pesquisar"
+        within_records do
+          expect(page).not_to have_content "Comissão para pregão presencial"
+        end
+      end
+    end
+  end
+
+  scenario "filtering out exonerated licitation commissions" do
+    LicitationCommission.make!(:comissao_pregao_presencial,
+                               :exoneration_date => Date.today)
+
+    navigate "Pregão > Pregões Presenciais"
+
+    click_link "Criar Pregão Presencial"
+
+    within_tab "Pregoeiro e equipe" do
+      within_modal "Comissão de licitação" do
+        expect(page).to have_disabled_field "Data da exoneração"
+
+        click_button "Pesquisar"
+        within_records do
+          expect(page).not_to have_content "Comissão para pregão presencial"
+        end
+      end
+    end
+  end
 end

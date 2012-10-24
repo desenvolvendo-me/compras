@@ -32,5 +32,39 @@ describe Trading do
 
       expect(subject.errors[:licitation_process]).to include "deve ser do tipo Pregão presencial"
     end
+
+    context "licitation commission validations" do
+      let (:licitation_commission) do
+        double(:expired? => false,
+               :trading? => true,
+               :exonerated? => false,
+               :present? => true)
+      end
+
+      before do
+        subject.stub(:licitation_commission => licitation_commission)
+      end
+
+      it "validates if the licitation commission is of 'trading' type" do
+        licitation_commission.stub(:trading? => false)
+        subject.valid?
+
+        expect(subject.errors[:licitation_commission]).to include "deve ser do tipo Pregão presencial"
+      end
+
+      it "validates if the licitation commission is not expired" do
+        licitation_commission.stub(:expired? => true)
+        subject.valid?
+
+        expect(subject.errors[:licitation_commission]).to include "não pode estar expirada"
+      end
+
+      it "validates if the licitation commission is not exonerated" do
+        licitation_commission.stub(:exonerated? => true)
+        subject.valid?
+
+        expect(subject.errors[:licitation_commission]).to include "não pode estar exonerada"
+      end
+    end
   end
 end

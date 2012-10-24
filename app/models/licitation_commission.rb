@@ -8,7 +8,8 @@ class LicitationCommission < Compras::Model
   attr_modal :commission_type, :nomination_date, :expiration_date,
              :exoneration_date, :description
 
-  has_enumeration_for :commission_type, :create_helpers => true
+  has_enumeration_for :commission_type,
+                      :create_helpers => true, :create_scopes => true
 
   belongs_to :regulatory_act
 
@@ -39,6 +40,18 @@ class LicitationCommission < Compras::Model
   orderize :id
   filterize
 
+  def self.can_take_part_in_trading
+    trading.not_expired.not_exonerated
+  end
+
+  def self.not_expired
+    where { expiration_date >= Date.current }
+  end
+
+  def self.not_exonerated
+    where { exoneration_date.eq(nil) }
+  end
+
   def to_s
     "#{description} - Tipo: #{commission_type_humanize} - Data de Nomeação: #{I18n.l(nomination_date)}"
   end
@@ -50,6 +63,14 @@ class LicitationCommission < Compras::Model
   def president_name
     commission_president = president
     commission_president.individual.to_s if commission_president
+  end
+
+  def expired?(base_date=Date.current)
+    expiration_date < base_date
+  end
+
+  def exonerated?
+    exoneration_date.present?
   end
 
   protected

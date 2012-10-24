@@ -169,4 +169,18 @@ describe LicitationCommission do
       expect(subject.errors.messages[:licitation_commission_members]).to be_nil
     end
   end
+
+  describe "#expired?" do
+    it "returns true if expiration_date < current date" do
+      commission = LicitationCommission.new(:expiration_date => Date.new(2012, 2, 1))
+      expect(commission.expired?(Date.new(2012, 2, 2))).to be true
+    end
+  end
+
+  describe "#exonerated?" do
+    it "returns true if exoneration date is present" do
+      commission = LicitationCommission.new(:exoneration_date => Date.new(2012, 2, 1))
+      expect(commission.exonerated?).to be true
+    end
+  end
 end

@@ -294,6 +294,8 @@ pt-BR:
       should_be_of_trading_type: "deve ser do tipo Pregão presencial"
       must_have_one_auctioneer: "deve ter ao menos um pregoeiro"
       must_have_one_support_team_member: "deve ter ao menos um membro na equipe de apoio"
+      should_not_be_expired: "não pode estar expirada"
+      should_not_be_exonerated: "não pode estar exonerada"
 
   activerecord:
     errors:
