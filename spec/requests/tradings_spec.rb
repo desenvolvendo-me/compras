@@ -123,6 +123,22 @@ feature "Tradings" do
       within_records do
         expect(page).not_to have_content '1/2012'
       end
+
+      click_link "Voltar"
+    end
+
+    click_link "Voltar"
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_modal "Processo licitatório" do
+      click_button "Pesquisar"
+
+      within_records do
+        expect(page).to have_content '1/2012'
+      end
     end
   end
 
