@@ -23,13 +23,13 @@ describe LicitationCommission do
 
   describe "#to_s" do
     subject do
-      LicitationCommission.new(:commission_type => CommissionType::TRADING,
+      LicitationCommission.new(:commission_type => CommissionType::PERMANENT,
                                :nomination_date => Date.new(2012, 2, 1),
-                               :description => 'Comissão de Licitação')
+                               :description => 'COMISSÃO PERMANENTE DE LICITAÇÕES PÚBLICAS')
     end
 
     it "returns the commission type, nomination date and description" do
-      expect(subject.to_s).to eq "Pregão - 01/02/2012 - Comissão de Licitação"
+      expect(subject.to_s).to eq "COMISSÃO PERMANENTE DE LICITAÇÕES PÚBLICAS - Tipo: Permanente - Data de Nomeação: 01/02/2012"
     end
   end
 

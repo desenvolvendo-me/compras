@@ -50,7 +50,7 @@ feature "Tradings" do
     end
 
     within_tab "Pregoeiro e equipe" do
-      expect(page).to have_field "Comissão de licitação", :with => "Pregão - 20/03/2012 - Comissão para pregão presencial"
+      expect(page).to have_field "Comissão de licitação", :with => "Comissão para pregão presencial - Tipo: Pregão - Data de Nomeação: 20/03/2012"
       expect(page).to have_content "Pregoeiro"
       expect(page).to have_content "Equipe de Apoio"
     end

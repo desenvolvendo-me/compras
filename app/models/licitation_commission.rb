@@ -1,3 +1,4 @@
+# encoding: utf-8
 class LicitationCommission < Compras::Model
   attr_accessible :commission_type, :nomination_date, :expiration_date,
                   :exoneration_date, :description, :regulatory_act_id,
@@ -39,7 +40,7 @@ class LicitationCommission < Compras::Model
   filterize
 
   def to_s
-    "#{commission_type_humanize} - #{I18n.l(nomination_date)} - #{description}"
+    "#{description} - Tipo: #{commission_type_humanize} - Data de Nomeação: #{I18n.l(nomination_date)}"
   end
 
   def president
