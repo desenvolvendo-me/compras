@@ -100,8 +100,6 @@ class LicitationCommission < Compras::Model
   end
 
   def must_have_one_member_with_role_president
-    presidents = licitation_commission_members.select(&:president?)
-
     if presidents.empty?
       errors.add(:licitation_commission_members, :must_have_one_president)
     elsif presidents.count > 1
@@ -110,18 +108,26 @@ class LicitationCommission < Compras::Model
   end
 
   def must_have_auctioneer
-    auctioneer = licitation_commission_members.select(&:auctioneer?)
-
     if auctioneer.empty?
       errors.add(:licitation_commission_members, :must_have_one_auctioneer)
     end
   end
 
   def must_have_support_team
-    support_team = licitation_commission_members.select(&:support_team?)
-
     if support_team.empty?
       errors.add(:licitation_commission_members, :must_have_one_support_team_member)
     end
+  end
+
+  def auctioneer
+    licitation_commission_members.select(&:auctioneer?)
+  end
+
+  def support_team
+    licitation_commission_members.select(&:support_team?)
+  end
+
+  def presidents
+    licitation_commission_members.select(&:president?)
   end
 end
