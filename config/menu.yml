@@ -104,7 +104,6 @@ menu:
     - accounting:
       - estimate:
         - organizational_structure:
-          - management_units
           - budget_structure_configurations
           - budget_structures
 
