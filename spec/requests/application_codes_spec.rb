@@ -46,7 +46,7 @@ feature "ApplicationCodes" do
       expect(page).to have_content 'já existe para a variável selecionada'
     end
 
-    scenario 'should be invalid if with other variable'do
+    scenario 'should be valid if with other variable'do
       ApplicationCode.make!(:geral)
 
       navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
