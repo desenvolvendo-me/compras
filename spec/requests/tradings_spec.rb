@@ -125,4 +125,14 @@ feature "Tradings" do
       end
     end
   end
+
+  scenario "suggesting the current year as the trading's year" do
+    navigate "Pregão > Pregões Presenciais"
+
+    click_link "Criar Pregão Presencial"
+
+    within_tab "Principal" do
+      expect(page).to have_field "Ano", :with => Date.current.year.to_s
+    end
+  end
 end
