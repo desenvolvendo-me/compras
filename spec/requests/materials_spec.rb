@@ -177,20 +177,6 @@ feature "Materials" do
     expect(page).to have_alert 'Material não pode ser apagado.'
   end
 
-  scenario 'should validate uniqueness of name' do
-    Material.make!(:antivirus)
-
-    navigate 'Cadastros Gerais > Materiais > Materiais'
-
-    click_link 'Criar Material'
-
-    fill_in 'Descrição', :with => 'Antivirus'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'should clean the unnecessary type of material or service depending on characteristic' do
     Material.make!(:antivirus)
 

@@ -329,57 +329,6 @@ feature "People" do
     end
   end
 
-  scenario 'should have the uniqueness validation to partner on new form' do
-    Person.make!(:sobrinho)
-
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
-
-    click_link 'Criar Pessoa'
-
-    choose "Pessoa Jurídica"
-
-    within_tab 'Sócios' do
-      click_button 'Adicionar Sócio'
-
-      fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-      fill_in 'Percentual de cotas societárias', :with => '20,00'
-
-      click_button 'Adicionar Sócio'
-
-      within 'div.partner:first' do
-        fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-        fill_in 'Percentual de cotas societárias', :with => '80,00'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Sócios' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
-  scenario 'should have the uniqueness validation to partner' do
-    Person.make!(:nohup)
-
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
-
-    click_link 'Nohup'
-
-    within_tab 'Sócios' do
-      click_button 'Adicionar Sócio'
-
-      fill_modal 'Pessoa', :with => 'Wenderson Malheiros'
-      fill_in 'Percentual de cotas societárias', :with => '100,00'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Sócios' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'should validate at least one partner' do
     Person.make!(:wenderson)
 

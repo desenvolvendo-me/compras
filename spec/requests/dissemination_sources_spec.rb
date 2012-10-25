@@ -26,22 +26,6 @@ feature "DisseminationSources" do
     expect(page).to have_field 'Fonte de comunicação', :with => 'Jornal de Circulação Municipal'
   end
 
-  scenario 'validates uniqueness of description' do
-    DisseminationSource.make!(:jornal_municipal)
-
-    navigate 'Cadastros Gerais > Legislação > Fontes de Divulgação'
-
-    click_link 'Criar Fonte de Divulgação'
-
-    fill_in 'Descrição', :with => 'Jornal Oficial do Município'
-
-    click_button 'Salvar'
-
-    expect(page).to_not have_notice 'Fonte de Divulgação criado com sucesso.'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'update an existent dissemination_source' do
     DisseminationSource.make!(:jornal_municipal)
     CommunicationSource.make!(:jornal_estadual)

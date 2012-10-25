@@ -58,32 +58,4 @@ feature "MaterialsGroups" do
     expect(page).to_not have_content '01'
     expect(page).to_not have_content 'Informática'
   end
-
-  scenario 'should validate uniqueness of group' do
-    MaterialsGroup.make!(:informatica)
-
-    navigate 'Cadastros Gerais > Materiais > Grupos de Materiais'
-
-    click_link 'Criar Grupo de Materiais'
-
-    fill_in 'Código', :with => '01'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
-  scenario 'should validate uniqueness of name' do
-    MaterialsGroup.make!(:informatica)
-
-    navigate 'Cadastros Gerais > Materiais > Grupos de Materiais'
-
-    click_link 'Criar Grupo de Materiais'
-
-    fill_in 'Descrição', :with => 'Informática'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

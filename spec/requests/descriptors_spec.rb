@@ -47,22 +47,6 @@ feature "Descriptors" do
     expect(page).to have_field 'Exercício', :with => '2011'
   end
 
-  scenario 'should validate uniqueness of entity' do
-    Descriptor.make!(:detran_2012)
-    Entity.make!(:secretaria_de_educacao)
-
-    navigate 'Outros > Descritores'
-
-    click_link 'Criar Descritor'
-
-    fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já existe para o ano informado'
-  end
-
   scenario 'destroy an existent descriptor' do
     Descriptor.make!(:detran_2012)
 

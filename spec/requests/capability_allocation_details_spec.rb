@@ -23,20 +23,6 @@ feature "CapabilityAllocationDetails" do
     expect(page).to have_field 'Descrição', :with => 'Educação'
   end
 
-  scenario 'validate uniqueness of description' do
-    CapabilityAllocationDetail.make!(:educacao)
-
-    navigate 'Outros > Contabilidade > Orçamento > Recurso > Detalhamentos das Destinações de Recursos'
-
-    click_link 'Criar Detalhamento das Destinações de Recursos'
-
-    fill_in 'Descrição', :with => 'Educação'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'update an existent capability_allocation_detail' do
     capibality_allocation_detail = CapabilityAllocationDetail.make!(:educacao)
 

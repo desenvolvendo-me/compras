@@ -184,25 +184,6 @@ feature "LicitationObjects" do
     expect(page).to_not have_content '2012'
   end
 
-  scenario 'validate uniqueness of description and year together' do
-    LicitationObject.make!(:ponte)
-
-    navigate 'Cadastros Gerais > Licitação > Objetos de Licitação'
-
-    click_link 'Criar Objeto de Licitação'
-
-    within_tab 'Principal' do
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Descrição', :with => 'Ponte'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Principal' do
-      expect(page).to have_content 'já existe para o ano informado'
-    end
-  end
-
   scenario 'validating total of purchase and build licitation exemptions' do
     DirectPurchase.make!(:compra)
     DirectPurchase.make!(:compra_nao_autorizada)

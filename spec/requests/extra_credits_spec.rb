@@ -417,68 +417,6 @@ feature "ExtraCredits" do
     end
   end
 
-  scenario 'validate uniqueness of budget_allocation' do
-    BudgetAllocation.make!(:alocacao)
-    extra_credit = ExtraCredit.make!(:detran_2012)
-
-    navigate 'Outros > Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
-
-    click_link extra_credit.to_s
-
-    within_tab 'Movimentos' do
-      click_button 'Adicionar Movimento'
-
-      within 'fieldset:last' do
-        fill_modal 'Tipo de movimento', :with => 'Adicionar dotação'
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Movimentos' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
-  scenario 'validate uniqueness of capability' do
-    BudgetAllocation.make!(:alocacao)
-    extra_credit = ExtraCredit.make!(:detran_2012)
-
-    navigate 'Outros > Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
-
-    click_link extra_credit.to_s
-
-    within_tab 'Movimentos' do
-      click_button 'Adicionar Movimento'
-
-      within 'fieldset:first' do
-        fill_modal 'Tipo de movimento', :with => 'Subtrair do excesso arrecadado'
-        fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Movimentos' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
-  scenario 'validate uniqueness of regulatory act' do
-    ExtraCredit.make!(:detran_2012)
-
-    navigate 'Outros > Contabilidade > Orçamento > Crédito Suplementar > Créditos Suplementares'
-
-    click_link 'Criar Crédito Suplementar'
-
-    fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já utilizado em outro crédito suplementar'
-  end
-
   scenario 'destroy an existent extra_credit' do
     extra_credit = ExtraCredit.make!(:detran_2012)
 

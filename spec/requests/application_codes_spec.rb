@@ -31,37 +31,6 @@ feature "ApplicationCodes" do
     expect(page).to have_select 'Fonte', :selected => 'Manual'
   end
 
-  context 'when validate uniqueness of code' do
-    scenario 'should be invalid if with same variable'do
-      ApplicationCode.make!(:geral)
-
-      navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
-
-      click_link 'Criar Código de Aplicação'
-
-      fill_in 'Código', :with => '110'
-
-      click_button 'Salvar'
-
-      expect(page).to have_content 'já existe para a variável selecionada'
-    end
-
-    scenario 'should be valid if with other variable'do
-      ApplicationCode.make!(:geral)
-
-      navigate 'Outros > Contabilidade > Orçamento > Recurso > Códigos de Aplicações'
-
-      click_link 'Criar Código de Aplicação'
-      check 'Variável'
-
-      fill_in 'Código', :with => '110'
-
-      click_button 'Salvar'
-
-      expect(page).to_not have_content 'já existe para a variável selecionada'
-    end
-  end
-
   scenario 'update an existent application_code' do
     ApplicationCode.make!(:geral)
 

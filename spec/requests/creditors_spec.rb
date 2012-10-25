@@ -376,36 +376,6 @@ feature "Creditors" do
     end
   end
 
-  scenario 'validate uniqueness of person' do
-    Creditor.make!(:sobrinho)
-
-    navigate 'Cadastros Gerais > Pessoas > Credores'
-
-    click_link 'Criar Credor'
-
-    choose 'Pessoa física ou jurídica'
-
-    fill_modal 'creditor_creditable', :with => 'Gabriel Sobrinho'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
-  scenario 'validate uniqueness of special_entry' do
-    Creditor.make!(:special)
-
-    navigate 'Cadastros Gerais > Pessoas > Credores'
-
-    click_link 'Criar Credor'
-
-    fill_modal 'creditor_creditable', :with => 'Tal'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'create a new creditor when people is individual' do
     Person.make!(:sobrinho)
     Material.make!(:arame_farpado)

@@ -216,24 +216,6 @@ feature "BudgetRevenues" do
     end
   end
 
-  scenario 'validate uniqueness of revenue_nature' do
-    BudgetRevenue.make!(:reforma)
-
-    navigate 'Outros > Contabilidade > Orçamento > Receita Orçamentária > Receitas Orçamentarias'
-
-    click_link 'Criar Receita Orçamentaria'
-
-    within_tab 'Principal' do
-      fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Principal' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'destroy an existent budget_revenue' do
     BudgetRevenue.make!(:reforma)
 

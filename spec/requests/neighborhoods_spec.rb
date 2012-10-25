@@ -93,30 +93,6 @@ feature "Neighborhoods" do
     expect(page).to have_alert 'Bairro não pode ser apagado.'
   end
 
-  scenario 'validate uniquenes of name scoped to district' do
-    City.make!(:porto_alegre)
-    Neighborhood.make!(:portugal)
-    District.make!(:oeste)
-
-    navigate 'Cadastros Gerais > Endereços > Bairros'
-
-    click_link 'Criar Bairro'
-
-    fill_in 'Nome', :with => 'Portugal'
-
-    fill_modal 'Cidade', :with => 'Porto Alegre'
-
-    fill_modal 'Distrito', :with => 'Leste'
-
-    click_button 'Salvar'
-    expect(page).to have_content 'já está em uso'
-
-    fill_modal 'Distrito', :with => 'Oeste'
-
-    click_button 'Salvar'
-    expect(page).to have_notice 'Bairro criado com sucesso.'
-  end
-
   scenario 'should lock district by city' do
     City.make!(:porto_alegre)
 

@@ -394,24 +394,6 @@ feature "BudgetAllocations" do
     expect(page).to_not have_content 'Alocação extra'
   end
 
-  scenario 'validates uniqueness of name' do
-    BudgetAllocation.make!(:alocacao)
-
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
-
-    click_link 'Criar Dotação Orçamentaria'
-
-    within_tab 'Principal' do
-      fill_in 'Descrição', :with => 'Alocação'
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Principal' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'should filter by budget structure' do
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)

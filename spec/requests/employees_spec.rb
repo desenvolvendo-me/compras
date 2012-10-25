@@ -75,32 +75,4 @@ feature "Employees" do
       expect(page).to_not have_content '958473'
     end
   end
-
-  scenario 'should validate uniqueness of person' do
-    Employee.make!(:sobrinho)
-
-    navigate 'Cadastros Gerais > Pessoas > Funcionários'
-
-    click_link 'Criar Funcionário'
-
-    fill_modal 'Pessoa', :with => 'Gabriel Sobrinho'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content "já está em uso"
-  end
-
-  scenario 'should validate uniqueness of registration' do
-    Employee.make!(:sobrinho)
-
-    navigate 'Cadastros Gerais > Pessoas > Funcionários'
-
-    click_link 'Criar Funcionário'
-
-    fill_in 'Matrícula', :with => '958473'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content "já está em uso"
-  end
 end

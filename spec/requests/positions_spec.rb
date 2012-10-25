@@ -53,18 +53,4 @@ feature "Positions" do
 
     expect(page).to_not have_content 'Gerente'
   end
-
-  scenario 'validate uniqueness of code' do
-    Position.make!(:gerente)
-
-    navigate 'Cadastros Gerais > Pessoas > Auxiliar > Cargos'
-
-    click_link 'Criar Cargo'
-
-    fill_in 'Nome', :with => 'Gerente'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

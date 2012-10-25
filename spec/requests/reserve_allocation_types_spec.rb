@@ -59,18 +59,4 @@ feature "ReserveAllocationTypes" do
     expect(page).to_not have_field 'Descrição', :with => 'Reserva para Educação'
     expect(page).to_not have_select 'Status', :selected => 'Ativo'
   end
-
-  scenario 'validate uniqueness of description' do
-    ReserveAllocationType.make!(:comum)
-
-    navigate 'Outros > Contabilidade > Execução > Reserva de Dotação > Tipos de Reserva de Dotação'
-
-    click_link 'Criar Tipo de Reserva de Dotação'
-
-    fill_in 'Descrição', :with => 'Tipo Comum'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

@@ -26,22 +26,6 @@ feature "RegulatoryActTypes" do
     expect(page).to have_field 'Descrição', :with => 'Lei'
   end
 
-  scenario 'validates uniqueness of description' do
-    RegulatoryActType.make!(:lei)
-
-    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
-
-    click_link 'Criar Tipo de Ato Regulamentador'
-
-    fill_in 'Descrição', :with => 'Lei'
-
-    click_button 'Salvar'
-
-    expect(page).to_not have_notice 'Tipo de Ato Regulamentador criado com sucesso.'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'update an existent regulatory_act_type' do
     RegulatoryActType.make!(:lei)
     RegulatoryActTypeClassification.make!(:segundo_tipo)

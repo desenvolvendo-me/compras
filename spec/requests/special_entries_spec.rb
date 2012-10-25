@@ -6,20 +6,6 @@ feature "SpecialEntries" do
     sign_in
   end
 
-  scenario 'try create with a existing name' do
-    SpecialEntry.make!(:example)
-
-    navigate 'Cadastros Gerais > Pessoas > Inscrições Especiais'
-
-    click_link 'Criar Inscrição Especial'
-
-    fill_in 'Nome', :with => 'Tal'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'create a new special_entry' do
     navigate 'Cadastros Gerais > Pessoas > Inscrições Especiais'
 

@@ -58,18 +58,4 @@ feature "BudgetAllocationTypes" do
 
     expect(page).to_not have_content 'Administrativation'
   end
-
-  scenario 'validate uniqueness of description' do
-    BudgetAllocationType.make!(:administrativa)
-
-    navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Tipos de Dotação'
-
-    click_link 'Criar Tipo de Dotação'
-
-    fill_in 'Descrição', :with => 'Dotação Administrativa'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

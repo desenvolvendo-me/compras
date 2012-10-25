@@ -71,18 +71,4 @@ feature "DocumentTypes" do
     expect(page).to_not have_content '10'
     expect(page).to_not have_content 'Fiscal'
   end
-
-  scenario 'validate uniqueness of description' do
-    DocumentType.make!(:fiscal)
-
-    navigate 'Cadastros Gerais > Tipos de Documento'
-
-    click_link 'Criar Tipo de Documento'
-
-    fill_in 'Descrição', :with => 'Fiscal'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

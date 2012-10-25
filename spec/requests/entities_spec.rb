@@ -53,18 +53,4 @@ feature "Entities" do
 
     expect(page).to_not have_content 'Detran'
   end
-
-  scenario 'should validate uniqueness of name' do
-    Entity.make!(:detran)
-
-    navigate 'Outros > Entidades'
-
-    click_link 'Criar Entidade'
-
-    fill_in 'Nome', :with => 'Detran'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

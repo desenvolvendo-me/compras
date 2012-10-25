@@ -71,20 +71,6 @@ feature "AdministrationTypes" do
     expect(page).to_not have_content 'Pública'
   end
 
-  scenario 'validates uniqueness of description' do
-    AdministrationType.make!(:publica)
-
-    navigate 'Outros > Tipos de Administração'
-
-    click_link 'Criar Tipo de Administração'
-
-    fill_in 'Descrição', :with => 'Pública'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   def make_dependencies!
     LegalNature.make!(:administracao_publica)
   end

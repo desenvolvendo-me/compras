@@ -342,28 +342,6 @@ feature "Bidders" do
     expect(page).to have_disabled_field 'Data do recebimento'
   end
 
-  scenario 'validating uniqueness of creditor on licitation process scope' do
-    LicitationProcess.make!(:processo_licitatorio_computador)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    click_link 'Licitantes'
-
-    click_link 'Criar Licitante'
-
-    fill_modal 'Fornecedor', :with => 'Wenderson'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'showing some items without lot on proposals' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_canetas_sem_lote)
     bidder = licitation_process.bidders.first

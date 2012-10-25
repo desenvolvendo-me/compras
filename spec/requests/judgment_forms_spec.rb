@@ -63,18 +63,4 @@ feature "JudgmentForms" do
     expect(page).to_not have_content 'Global'
     expect(page).to_not have_content 'Menor preço'
   end
-
-  scenario 'should validate uniqueness of description' do
-    JudgmentForm.make!(:global_com_menor_preco)
-
-    navigate 'Cadastros Gerais > Licitação > Formas de Julgamento das Licitações'
-
-    click_link 'Criar Forma de Julgamento de Licitação'
-
-    fill_in 'Descrição', :with => 'Forma Global com Menor Preço'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

@@ -53,18 +53,4 @@ feature "LegalTextNatures" do
 
     expect(page).to_not have_content 'Natureza Cívica'
   end
-
-  scenario 'validate uniqueness of name' do
-    LegalTextNature.make!(:civica)
-
-    navigate 'Cadastros Gerais > Legislação > Naturezas de Textos Jurídicos'
-
-    click_link 'Criar Natureza de Textos Jurídicos'
-
-    fill_in 'Descrição', :with => 'Natureza Cívica'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

@@ -59,18 +59,4 @@ feature "PledgeCategories" do
     expect(page).to_not have_content 'Geral'
     expect(page).to_not have_content 'Ativo'
   end
-
-  scenario 'validate uniqueness of description' do
-    PledgeCategory.make!(:geral)
-
-    navigate 'Outros > Contabilidade > Execução > Empenho > Categorias de Empenho'
-
-    click_link 'Criar Categoria de Empenho'
-
-    fill_in 'Descrição', :with => 'Geral'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

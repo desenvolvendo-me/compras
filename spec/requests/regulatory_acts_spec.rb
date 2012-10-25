@@ -140,34 +140,6 @@ feature "RegulatoryActs" do
     expect(page).to_not have_link '1234'
   end
 
-  scenario 'should validate uniqueness of act_number' do
-    RegulatoryAct.make!(:sopa)
-
-    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Atos Regulamentadores'
-
-    click_link 'Criar Ato Regulamentador'
-
-    fill_in 'Número', :with => '1234'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
-  scenario 'should validate uniqueness of content' do
-    RegulatoryAct.make!(:sopa)
-
-    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Atos Regulamentadores'
-
-    click_link 'Criar Ato Regulamentador'
-
-    fill_in 'Ementa', :with => 'conteudo'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
-
   scenario 'remove dissemination source from an existent regulatory_act' do
     RegulatoryAct.make!(:sopa)
 
