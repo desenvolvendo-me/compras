@@ -7,7 +7,7 @@ pt-BR:
 
     attributes:
       price_collection:
-        collection_number: "Número"
+        code: "Número"
         year: "Ano"
         date: "Data"
         delivery_location: "Local de entrega"

@@ -1,16 +1,18 @@
 class PriceCollection < Compras::Model
-  attr_accessible :collection_number, :year, :date, :delivery_location_id, :employee_id, :payment_method_id
+  attr_accessible :code, :year, :date, :delivery_location_id, :employee_id, :payment_method_id
   attr_accessible :object_description, :observations, :expiration
   attr_accessible :period, :period_unit, :proposal_validity, :proposal_validity_unit
   attr_accessible :price_collection_lots_attributes, :creditor_ids, :type_of_calculation
   attr_accessible :price_collection_proposals_attributes
 
-  attr_readonly :year, :collection_number
+  attr_readonly :year, :code
 
-  attr_modal :collection_number, :year, :date, :delivery_location_id, :employee_id,
+  attr_modal :code, :year, :date, :delivery_location_id, :employee_id,
              :payment_method_id, :object_description, :observations, :expiration,
              :period, :period_unit, :proposal_validity, :proposal_validity_unit,
              :type_of_calculation, :status
+
+  auto_increment :code, :by => :year
 
   has_enumeration_for :status, :with => PriceCollectionStatus, :create_helpers => true
   has_enumeration_for :period_unit, :with => PeriodUnit
@@ -33,7 +35,7 @@ class PriceCollection < Compras::Model
   accepts_nested_attributes_for :price_collection_lots, :allow_destroy => true
   accepts_nested_attributes_for :price_collection_proposals, :allow_destroy => true
 
-  validates :collection_number, :year, :date, :delivery_location, :employee, :presence => true
+  validates :year, :date, :delivery_location, :employee, :presence => true
   validates :payment_method, :object_description, :expiration, :presence => true
   validates :period, :period_unit, :proposal_validity, :proposal_validity_unit, :presence => true
   validates :type_of_calculation, :presence => true
@@ -51,17 +53,7 @@ class PriceCollection < Compras::Model
   filterize
 
   def to_s
-    "#{collection_number}/#{year}"
-  end
-
-  def next_collection_number
-    return 1 unless last_by_self_year
-
-    last_by_self_year.collection_number.succ
-  end
-
-  def last_by_self_year
-    self.class.where{ |p| p.year.eq(year) }.order{ id }.last
+    "#{code}/#{year}"
   end
 
   def winner_proposal

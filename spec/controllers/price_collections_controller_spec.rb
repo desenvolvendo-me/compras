@@ -28,14 +28,6 @@ describe PriceCollectionsController do
   end
 
   context 'POST #create' do
-    it 'should assign the collection number' do
-      PriceCollection.any_instance.stub(:next_collection_number).and_return(2)
-
-      post :create
-
-      expect(assigns(:price_collection).collection_number).to eq 2
-    end
-
     it 'uses active as default value for status' do
       post :create
 

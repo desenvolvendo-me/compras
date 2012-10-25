@@ -32,7 +32,6 @@ class PriceCollectionsController < CrudController
   protected
 
   def create_resource(object)
-    object.collection_number = object.next_collection_number
     object.status = Status::ACTIVE
 
     object.transaction do

@@ -21,7 +21,6 @@ describe PriceCollection do
   end
 
   context 'validations' do
-    it { should validate_presence_of :collection_number }
     it { should validate_presence_of :year }
     it { should validate_presence_of :date }
     it { should validate_presence_of :delivery_location }
@@ -38,6 +37,8 @@ describe PriceCollection do
     it { should allow_value('2012').for(:year) }
     it { should_not allow_value('201').for(:year) }
     it { should_not allow_value('a201').for(:year) }
+
+    it { should auto_increment(:code).by(:year) }
 
     context 'validate date related with today' do
       it { should allow_value(Date.current).for(:date) }
@@ -62,37 +63,11 @@ describe PriceCollection do
     end
   end
 
-  it "should return number/year as to_s method" do
-    subject.collection_number = 5
+  it "should return code/year as to_s method" do
+    subject.code = 5
     subject.year = 2012
 
     expect(subject.to_s).to eq '5/2012'
-  end
-
-  describe '#next_collection_number' do
-    context 'when do not has a price collection with the same year' do
-      before do
-        subject.stub(:last_by_self_year).and_return(nil)
-      end
-
-      it 'should be 1' do
-        expect(subject.next_collection_number).to eq 1
-      end
-    end
-
-    context 'when the collection_number of last price collection is 4' do
-      before do
-        subject.stub(:last_by_self_year).and_return(last_by_self_year)
-      end
-
-      let :last_by_self_year do
-        double(:last_by_self_year, :collection_number => 4)
-      end
-
-      it 'should be 5' do
-        expect(subject.next_collection_number).to eq 5
-      end
-    end
   end
 
   it 'should return the winner proposal' do
