@@ -8,7 +8,7 @@ class PurchaseSolicitationLiberation < Compras::Model
   belongs_to :responsible, :class_name => 'Employee', :foreign_key => :responsible_id
   belongs_to :purchase_solicitation
 
-  validates :date, :justification, :responsible,
+  validates :date, :justification, :responsible, :service_status,
             :purchase_solicitation, :presence => true
   validates :date, :timeliness => { :type => :date }, :allow_blank => true
 
