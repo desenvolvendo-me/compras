@@ -1,5 +1,5 @@
 class DirectPurchase < Compras::Model
-  attr_accessible :direct_purchase, :year, :date, :legal_reference_id,
+  attr_accessible :code, :year, :date, :legal_reference_id,
                   :modality, :creditor_id, :budget_structure_id,
                   :licitation_object_id, :delivery_location_id, :employee_id,
                   :payment_method_id, :price_collection, :price_registration_id,
@@ -8,10 +8,10 @@ class DirectPurchase < Compras::Model
                   :total_allocations_items_value, :purchase_solicitation_id,
                   :purchase_solicitation_item_group_id
 
-  attr_modal :direct_purchase, :year, :date, :modality,
+  attr_modal :code, :year, :date, :modality,
              :budget_structure_id, :creditor_id
 
-  auto_increment :direct_purchase, :by => :year
+  auto_increment :code, :by => :year
 
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
@@ -62,11 +62,11 @@ class DirectPurchase < Compras::Model
 
   before_validation :set_total_allocations_items_value
 
-  orderize [:year, :direct_purchase]
+  orderize [:year, :code]
   filterize
 
   def to_s
-    "#{direct_purchase}/#{year}"
+    "#{code}/#{year}"
   end
 
   def annulled?

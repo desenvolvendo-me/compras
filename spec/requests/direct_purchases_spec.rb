@@ -691,8 +691,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      expect(page).to_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to have_content "3/2011"
+      expect(page).to_not have_content "1/2012"
     end
   end
 
@@ -709,8 +709,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      expect(page).to_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to have_content "3/2011"
+      expect(page).to_not have_content "1/2012"
     end
   end
 
@@ -727,8 +727,8 @@ feature "DirectPurchases" do
     click_button 'Pesquisar'
 
     within_records do
-      expect(page).to have_content "#{year_2011.direct_purchase}/#{year_2011.year}"
-      expect(page).to_not have_content "#{year_2012.direct_purchase}/#{year_2012.year}"
+      expect(page).to have_content "3/2011"
+      expect(page).to_not have_content "1/2012"
     end
   end
 

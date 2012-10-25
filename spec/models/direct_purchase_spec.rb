@@ -14,8 +14,8 @@ require 'app/business/direct_purchase_modality_limit_verificator'
 require 'app/models/purchase_solicitation_budget_allocation_item'
 
 describe DirectPurchase do
-  it 'should return direct_purchase/year as to_s method' do
-    subject.direct_purchase = 1
+  it 'should return code/year as to_s method' do
+    subject.code = 1
     subject.year = 2012
 
     expect(subject.to_s).to eq '1/2012'
@@ -39,7 +39,7 @@ describe DirectPurchase do
   it { should have_one(:supply_authorization).dependent(:restrict) }
   it { should have_one(:annul).dependent(:destroy) }
 
-  it { should auto_increment(:direct_purchase).by(:year) }
+  it { should auto_increment(:code).by(:year) }
 
   it { should validate_duplication_of(:budget_allocation_id).on(:direct_purchase_budget_allocations) }
 

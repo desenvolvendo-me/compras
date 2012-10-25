@@ -1,7 +1,7 @@
 # encoding: utf-8
 DirectPurchase.blueprint(:compra) do
   ModalityLimit.make!(:modalidade_de_compra)
-  direct_purchase { 1 }
+  code { 1 }
   year { 2012 }
   date { Date.new(2012, 3, 2) }
   legal_reference { LegalReference.make!(:referencia) }
@@ -24,7 +24,7 @@ end
 
 DirectPurchase.blueprint(:compra_nao_autorizada) do
   ModalityLimit.make!(:modalidade_de_compra)
-  direct_purchase { 2 }
+  code { 2 }
   year { 2012 }
   date { Date.new(2012, 12, 1) }
   legal_reference { LegalReference.make!(:referencia) }
@@ -48,7 +48,7 @@ end
 DirectPurchase.blueprint(:compra_2011) do
   ModalityLimit.make!(:modalidade_de_compra)
   year { 2011 }
-  direct_purchase { 3 }
+  code { 3 }
   date { Date.new(2011, 11, 11) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::ENGINEERING_WORKS }
@@ -71,7 +71,7 @@ end
 DirectPurchase.blueprint(:compra_2011_dez) do
   ModalityLimit.make!(:modalidade_de_compra)
   year { 2011 }
-  direct_purchase { 3 }
+  code { 3 }
   date { Date.new(2011, 12, 20) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::ENGINEERING_WORKS }
@@ -94,7 +94,7 @@ end
 DirectPurchase.blueprint(:company_purchase) do
   ModalityLimit.make!(:modalidade_de_compra)
   year { 2011 }
-  direct_purchase { 3 }
+  code { 3 }
   date { Date.new(2011, 12, 20) }
   legal_reference { LegalReference.make!(:referencia) }
   modality { DirectPurchaseModality::ENGINEERING_WORKS }
@@ -116,7 +116,7 @@ end
 
 DirectPurchase.blueprint(:compra_perto_do_limite) do
   ModalityLimit.make!(:modalidade_de_compra)
-  direct_purchase { 1 }
+  code { 1 }
   year { 2012 }
   date { Date.new(2012, 3, 2) }
   legal_reference { LegalReference.make!(:referencia) }
