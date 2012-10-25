@@ -164,14 +164,25 @@ feature "AdministrativeProcesses" do
 
       expect(page).to have_field 'Valor total', :with => '20,00'
     end
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Situação', :selected => 'Em processo de compra'
   end
 
   scenario 'when clear purchase solicitation item group budget allocations should clear too' do
     PurchaseSolicitationItemGroup.make!(:reparo_2013)
+    AdministrativeProcess.make!(:compra_aguardando)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
-    click_link 'Criar Processo Administrativo'
+    within_records do
+      page.find('a').click
+    end
 
     within_tab 'Principal' do
       within_modal 'Agrupamento de solicitações de compra' do
@@ -182,14 +193,15 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Dotações orçamentarias' do
-      expect(page).to_not have_button 'Adicionar Dotação'
-      expect(page).to_not have_button 'Remover Dotação'
+      fill_in 'Valor previsto', :with => '500,00'
+    end
 
-      expect(page).to have_disabled_field 'Dotação orçamentaria'
-      expect(page).to have_disabled_field 'Saldo da dotação'
+    click_button 'Salvar'
 
-      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
-      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    within_records do
+      page.find('a').click
     end
 
     within_tab 'Principal' do
@@ -202,6 +214,18 @@ feature "AdministrativeProcesses" do
       expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
       expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
     end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Situação', :selected => 'Pendente'
   end
 
   scenario 'when has budget allocations and select a purchase solicitation item group should clear old budget allocations' do

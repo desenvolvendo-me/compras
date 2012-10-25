@@ -46,9 +46,13 @@ class AdministrativeProcessesController < CrudController
 
   def create_resource(object)
     object.transaction do
-      super
+      if super
+        if params[:administrative_process]
+          PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group)
+        end
 
-      PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
+      end
     end
   end
 
@@ -59,8 +63,9 @@ class AdministrativeProcessesController < CrudController
       AdministrativeProcessBudgetAllocationCleaner.new(object, new_item_group).clear_old_records
 
       if super
-       PurchaseSolicitationBudgetAllocationItemFulfiller.new(old_item_group).fulfill
-       PurchaseSolicitationBudgetAllocationItemFulfiller.new(new_item_group, object).fulfill
+        PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group, old_item_group)
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(old_item_group).fulfill
+        PurchaseSolicitationBudgetAllocationItemFulfiller.new(new_item_group, object).fulfill
       end
     end
   end
