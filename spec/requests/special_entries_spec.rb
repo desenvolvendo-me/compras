@@ -15,7 +15,7 @@ feature "SpecialEntries" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Inscrição Especial criado com sucesso.'
+    expect(page).to have_notice 'Inscrição Especial criada com sucesso.'
 
     click_link 'Tal'
 
@@ -33,7 +33,7 @@ feature "SpecialEntries" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Inscrição Especial editado com sucesso.'
+    expect(page).to have_notice 'Inscrição Especial editada com sucesso.'
 
     click_link 'Fulano'
 
@@ -49,7 +49,7 @@ feature "SpecialEntries" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Inscrição Especial apagado com sucesso.'
+    expect(page).to have_notice 'Inscrição Especial apagada com sucesso.'
 
     expect(page).to_not have_content 'Tal'
   end

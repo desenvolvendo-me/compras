@@ -27,7 +27,7 @@ feature "AccountPlanConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Plano de Contas criado com sucesso.'
+    expect(page).to have_notice 'Configuração de Plano de Contas criada com sucesso.'
 
     click_link 'Plano1'
 
@@ -84,7 +84,7 @@ feature "AccountPlanConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Plano de Contas editado com sucesso.'
+    expect(page).to have_notice 'Configuração de Plano de Contas editada com sucesso.'
 
     click_link 'Plano1'
 
@@ -102,7 +102,7 @@ feature "AccountPlanConfigurations" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Configuração de Plano de Contas apagado com sucesso.'
+    expect(page).to have_notice 'Configuração de Plano de Contas apagada com sucesso.'
 
     expect(page).to_not have_content '2012'
     expect(page).to_not have_content 'Minas Gerais'

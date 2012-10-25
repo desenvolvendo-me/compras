@@ -53,7 +53,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Anulação de Recurso criado com sucesso.'
+    expect(page).to have_content 'Anulação de Recurso criada com sucesso.'
 
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Anular'

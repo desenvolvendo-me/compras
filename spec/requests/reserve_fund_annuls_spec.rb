@@ -25,7 +25,7 @@ feature 'ReserveFundAnnuls' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Anulação de Recurso criado com sucesso.'
+    expect(page).to have_notice 'Anulação de Recurso criada com sucesso.'
 
     expect(page).to have_disabled_field 'Status'
     expect(page).to have_select 'Status', :selected => 'Anulado'

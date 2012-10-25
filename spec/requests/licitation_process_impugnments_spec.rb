@@ -29,7 +29,7 @@ feature "LicitationProcessImpugnments" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Impugnação do Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Impugnação do Processo Licitatório criada com sucesso.'
     click_link LicitationProcessImpugnment.last.to_s
 
     expect(page).to have_field 'Processo licitatório', :with => '1/2012'
@@ -67,7 +67,7 @@ feature "LicitationProcessImpugnments" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Impugnação do Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Impugnação do Processo Licitatório editada com sucesso.'
 
     click_link licitation_process_impugnment.to_s
 

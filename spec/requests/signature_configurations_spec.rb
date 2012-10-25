@@ -27,7 +27,7 @@ feature "SignatureConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Assinatura criado com sucesso.'
+    expect(page).to have_notice 'Configuração de Assinatura criada com sucesso.'
 
     click_link 'Autorizações de Fornecimento'
 
@@ -107,7 +107,7 @@ feature "SignatureConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Assinatura editado com sucesso.'
+    expect(page).to have_notice 'Configuração de Assinatura editada com sucesso.'
 
     click_link 'Processos Administrativos'
 
@@ -126,7 +126,7 @@ feature "SignatureConfigurations" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Configuração de Assinatura apagado com sucesso.'
+    expect(page).to have_notice 'Configuração de Assinatura apagada com sucesso.'
 
     within_records do
       expect(page).to_not have_content 'Autorizações de Fornecimento'

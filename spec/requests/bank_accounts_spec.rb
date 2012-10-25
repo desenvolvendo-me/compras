@@ -86,7 +86,7 @@ feature "BankAccounts" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Conta Bancária criado com sucesso.'
+    expect(page).to have_notice 'Conta Bancária criada com sucesso.'
 
     click_link 'IPTU'
 
@@ -144,7 +144,7 @@ feature "BankAccounts" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Conta Bancária editado com sucesso.'
+    expect(page).to have_notice 'Conta Bancária editada com sucesso.'
 
     click_link 'IPTU'
 
@@ -259,7 +259,7 @@ feature "BankAccounts" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Conta Bancária apagado com sucesso.'
+    expect(page).to have_notice 'Conta Bancária apagada com sucesso.'
 
     expect(page).to_not have_content 'Itaú Tributos'
   end

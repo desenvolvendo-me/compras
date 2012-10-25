@@ -40,7 +40,7 @@ feature 'ContractTerminations' do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Rescisão Contratual criado com sucesso.'
+    expect(page).to have_content 'Rescisão Contratual criada com sucesso.'
 
     click_link "1/#{Date.current.year}"
 
@@ -85,7 +85,7 @@ feature 'ContractTerminations' do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Rescisão Contratual editado com sucesso.'
+    expect(page).to have_content 'Rescisão Contratual editada com sucesso.'
 
     click_link '1/2012'
 

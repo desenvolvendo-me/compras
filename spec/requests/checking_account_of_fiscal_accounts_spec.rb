@@ -20,7 +20,7 @@ feature "CheckingAccountOfFiscalAccounts" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Conta Corrente da Conta Contábil criado com sucesso.'
+    expect(page).to have_notice 'Conta Corrente da Conta Contábil criada com sucesso.'
 
     click_link 'Disponibilidade financeira'
 
@@ -48,7 +48,7 @@ feature "CheckingAccountOfFiscalAccounts" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Conta Corrente da Conta Contábil editado com sucesso.'
+    expect(page).to have_notice 'Conta Corrente da Conta Contábil editada com sucesso.'
 
     click_link 'Disponibilidade'
 
@@ -69,7 +69,7 @@ feature "CheckingAccountOfFiscalAccounts" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Conta Corrente da Conta Contábil apagado com sucesso.'
+    expect(page).to have_notice 'Conta Corrente da Conta Contábil apagada com sucesso.'
 
     expect(page).to_not have_content 'Disponibilidade financeira'
   end

@@ -26,7 +26,7 @@ feature "LicitationProcessAppeals" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório criado com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório criada com sucesso.'
 
     click_link LicitationProcessAppeal.last.to_s
 
@@ -63,7 +63,7 @@ feature "LicitationProcessAppeals" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório editado com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório editada com sucesso.'
 
     click_link interposicao_processo_licitatorio.to_s
 
@@ -88,7 +88,7 @@ feature "LicitationProcessAppeals" do
 
     click_link "Apagar"
 
-    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagado com sucesso.'
+    expect(page).to have_notice 'Interposição de Recurso do Processo Licitatório apagada com sucesso.'
 
     expect(page).to_not have_content '1/2013'
     expect(page).to_not have_content I18n.l(Date.new(2012, 3, 20))

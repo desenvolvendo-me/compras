@@ -28,7 +28,7 @@ feature "RevenueNatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Natureza da Receita criado com sucesso.'
+    expect(page).to have_notice 'Natureza da Receita criada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -212,7 +212,7 @@ feature "RevenueNatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Natureza da Receita editado com sucesso.'
+    expect(page).to have_notice 'Natureza da Receita editada com sucesso.'
 
     click_link '1.1.1.3.11.11 - Imposto sobre Propriedade Predial e Territorial Urbana'
 
@@ -237,7 +237,7 @@ feature "RevenueNatures" do
 
     click_link "Apagar"
 
-    expect(page).to have_notice 'Natureza da Receita apagado com sucesso.'
+    expect(page).to have_notice 'Natureza da Receita apagada com sucesso.'
 
     expect(page).to_not have_content '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
   end

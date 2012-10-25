@@ -31,7 +31,7 @@ feature "ExpenseNatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Natureza da Despesa criado com sucesso'
+    expect(page).to have_notice 'Natureza da Despesa criada com sucesso'
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
@@ -245,7 +245,7 @@ feature "ExpenseNatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Natureza da Despesa editado com sucesso.'
+    expect(page).to have_notice 'Natureza da Despesa editada com sucesso.'
 
     click_link '4.4.20.03.11'
 
@@ -271,7 +271,7 @@ feature "ExpenseNatures" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Natureza da Despesa apagado com sucesso.'
+    expect(page).to have_notice 'Natureza da Despesa apagada com sucesso.'
 
     expect(page).to_not have_field '3.0.10.01.12'
   end

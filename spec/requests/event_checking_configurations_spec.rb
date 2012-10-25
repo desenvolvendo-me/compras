@@ -30,7 +30,7 @@ feature "EventCheckingConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Evento Contábil criado com sucesso.'
+    expect(page).to have_notice 'Configuração de Evento Contábil criada com sucesso.'
 
     click_link 'Evento Tal'
 
@@ -79,7 +79,7 @@ feature "EventCheckingConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Evento Contábil editado com sucesso.'
+    expect(page).to have_notice 'Configuração de Evento Contábil editada com sucesso.'
 
     click_link 'Evento Tal'
 
@@ -113,7 +113,7 @@ feature "EventCheckingConfigurations" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Configuração de Evento Contábil apagado com sucesso.'
+    expect(page).to have_notice 'Configuração de Evento Contábil apagada com sucesso.'
 
     expect(page).to_not have_content '2012 - Detran'
     expect(page).to_not have_content 'Evento Tal'

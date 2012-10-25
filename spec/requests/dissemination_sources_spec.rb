@@ -18,7 +18,7 @@ feature "DisseminationSources" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Divulgação criado com sucesso.'
+    expect(page).to have_notice 'Fonte de Divulgação criada com sucesso.'
 
     click_link 'Jornal Oficial do Município'
 
@@ -40,7 +40,7 @@ feature "DisseminationSources" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Divulgação editado com sucesso.'
+    expect(page).to have_notice 'Fonte de Divulgação editada com sucesso.'
 
     click_link 'Jornal Não Oficial do Município'
 
@@ -58,7 +58,7 @@ feature "DisseminationSources" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Fonte de Divulgação apagado com sucesso.'
+    expect(page).to have_notice 'Fonte de Divulgação apagada com sucesso.'
 
     expect(page).to_not have_content 'Jornal Oficial do Município'
     expect(page).to_not have_content 'Jornal de Circulação Municipal'
@@ -73,8 +73,8 @@ feature "DisseminationSources" do
 
     click_link 'Apagar'
 
-    expect(page).to_not have_notice 'Fonte de Divulgação apagado com sucesso.'
+    expect(page).to_not have_notice 'Fonte de Divulgação apagada com sucesso.'
 
-    expect(page).to have_alert 'Fonte de Divulgação não pode ser apagado.'
+    expect(page).to have_alert 'Fonte de Divulgação não pode ser apagada.'
   end
 end

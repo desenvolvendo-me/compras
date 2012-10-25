@@ -19,7 +19,7 @@ feature "CapabilitySources" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Recursos criado com sucesso.'
+    expect(page).to have_notice 'Fonte de Recursos criada com sucesso.'
 
     click_link 'Imposto'
 
@@ -59,7 +59,7 @@ feature "CapabilitySources" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Recursos editado com sucesso.'
+    expect(page).to have_notice 'Fonte de Recursos editada com sucesso.'
 
     click_link 'Impostos'
 
@@ -79,7 +79,7 @@ feature "CapabilitySources" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Fonte de Recursos apagado com sucesso.'
+    expect(page).to have_notice 'Fonte de Recursos apagada com sucesso.'
 
     expect(page).to_not have_content 'Imposto'
   end

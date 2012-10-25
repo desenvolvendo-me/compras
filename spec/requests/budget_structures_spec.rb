@@ -52,7 +52,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria criada com sucesso.'
 
     click_link 'Secretaria de Educação'
 
@@ -127,7 +127,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
 
     click_link 'Secretaria de Transporte'
 
@@ -306,7 +306,7 @@ feature "BudgetStructure" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria apagada com sucesso.'
 
     expect(page).to_not have_content 'Secretaria de Educação'
     expect(page).to_not have_content 'Configuração do Detran'
@@ -394,7 +394,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
 
     click_link 'Secretaria de Educação'
 
@@ -423,7 +423,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
 
     click_link 'Secretaria de Educação com dois responsaveis'
 
@@ -481,7 +481,7 @@ feature "BudgetStructure" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Estrutura Orçamentaria editada com sucesso.'
 
     click_link 'Secretaria de Educação'
 

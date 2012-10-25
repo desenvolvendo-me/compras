@@ -22,7 +22,7 @@ feature "PledgeCancellations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Anulação de Empenho criado com sucesso.'
+    expect(page).to have_notice 'Anulação de Empenho criada com sucesso.'
 
     within_records do
       page.find('a').click

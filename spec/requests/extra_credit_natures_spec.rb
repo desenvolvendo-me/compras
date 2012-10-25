@@ -17,7 +17,7 @@ feature "ExtraCreditNatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Natureza de Crédito Suplementar criado com sucesso.'
+    expect(page).to have_notice 'Natureza de Crédito Suplementar criada com sucesso.'
 
     click_link 'Abre crédito suplementar'
 
@@ -37,7 +37,7 @@ feature "ExtraCreditNatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Natureza de Crédito Suplementar editado com sucesso.'
+    expect(page).to have_notice 'Natureza de Crédito Suplementar editada com sucesso.'
 
     click_link 'Abre crédito suplementar - superavit financeiro'
 
@@ -54,7 +54,7 @@ feature "ExtraCreditNatures" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Natureza de Crédito Suplementar apagado com sucesso.'
+    expect(page).to have_notice 'Natureza de Crédito Suplementar apagada com sucesso.'
 
     within_records do
       expect(page).to_not have_content 'Abre crédito suplementar'

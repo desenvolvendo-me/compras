@@ -19,7 +19,7 @@ feature "Signatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Assinatura criado com sucesso.'
+    expect(page).to have_notice 'Assinatura criada com sucesso.'
 
     click_link 'Gabriel Sobrinho'
 
@@ -41,7 +41,7 @@ feature "Signatures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Assinatura editado com sucesso.'
+    expect(page).to have_notice 'Assinatura editada com sucesso.'
 
     click_link 'Wenderson Malheiros'
 
@@ -58,7 +58,7 @@ feature "Signatures" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Assinatura apagado com sucesso.'
+    expect(page).to have_notice 'Assinatura apagada com sucesso.'
 
     expect(page).to_not have_content 'Gabriel Sobrinho'
     expect(page).to_not have_content 'Gerente'

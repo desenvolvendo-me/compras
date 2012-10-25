@@ -29,7 +29,7 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Receita Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria criada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -70,7 +70,7 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Receita Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria criada com sucesso.'
 
     within_records do
       click_link '2/2012'
@@ -113,7 +113,7 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Receita Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria criada com sucesso.'
 
     within_records do
       click_link '1/2011'
@@ -196,7 +196,7 @@ feature "BudgetRevenues" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Receita Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria editada com sucesso.'
 
     click_link '1'
 
@@ -225,7 +225,7 @@ feature "BudgetRevenues" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Receita Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Receita Orçamentaria apagada com sucesso.'
 
     expect(page).to_not have_content '1'
   end

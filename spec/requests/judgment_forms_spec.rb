@@ -17,7 +17,7 @@ feature "JudgmentForms" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Forma de Julgamento de Licitação criado com sucesso.'
+    expect(page).to have_notice 'Forma de Julgamento de Licitação criada com sucesso.'
 
     click_link 'Forma Global com Menor Preço'
 
@@ -39,7 +39,7 @@ feature "JudgmentForms" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Forma de Julgamento de Licitação editado com sucesso.'
+    expect(page).to have_notice 'Forma de Julgamento de Licitação editada com sucesso.'
 
     click_link 'Por item com melhor técnica'
 
@@ -57,7 +57,7 @@ feature "JudgmentForms" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Forma de Julgamento de Licitação apagado com sucesso.'
+    expect(page).to have_notice 'Forma de Julgamento de Licitação apagada com sucesso.'
 
     expect(page).to_not have_content 'Forma Global com Menor Preço'
     expect(page).to_not have_content 'Global'

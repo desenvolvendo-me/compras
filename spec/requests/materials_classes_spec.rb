@@ -20,7 +20,7 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Classe de Materiais criado com sucesso.'
+    expect(page).to have_notice 'Classe de Materiais criada com sucesso.'
 
     click_link 'Materiais de Escritório'
 
@@ -45,7 +45,7 @@ feature "MaterialsClasses" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Classe de Materiais editado com sucesso.'
+    expect(page).to have_notice 'Classe de Materiais editada com sucesso.'
 
     click_link 'Lampada'
 
@@ -64,7 +64,7 @@ feature "MaterialsClasses" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Classe de Materiais apagado com sucesso.'
+    expect(page).to have_notice 'Classe de Materiais apagada com sucesso.'
 
     expect(page).to_not have_content '01 - Informática'
     expect(page).to_not have_content 'Software'

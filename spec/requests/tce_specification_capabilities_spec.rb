@@ -82,7 +82,7 @@ feature "TceSpecificationCapabilities" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Especificação de Recursos do TCE criado com sucesso.'
+    expect(page).to have_notice 'Especificação de Recursos do TCE criada com sucesso.'
 
     click_link 'Ampliação do Posto de Saúde'
 
@@ -165,7 +165,7 @@ feature "TceSpecificationCapabilities" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Especificação de Recursos do TCE editado com sucesso.'
+    expect(page).to have_notice 'Especificação de Recursos do TCE editada com sucesso.'
 
     click_link 'Reforma do Posto de Saúde'
 
@@ -187,7 +187,7 @@ feature "TceSpecificationCapabilities" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Especificação de Recursos do TCE apagado com sucesso.'
+    expect(page).to have_notice 'Especificação de Recursos do TCE apagada com sucesso.'
 
     expect(page).to_not have_content 'Ampliação do Posto de Saúde'
   end

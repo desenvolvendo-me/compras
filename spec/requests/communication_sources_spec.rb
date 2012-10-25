@@ -15,7 +15,7 @@ feature "CommunicationSources" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Comunicação criado com sucesso.'
+    expect(page).to have_notice 'Fonte de Comunicação criada com sucesso.'
 
     click_link 'Jornal de Circulação Municipal'
 
@@ -33,7 +33,7 @@ feature "CommunicationSources" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Fonte de Comunicação editado com sucesso.'
+    expect(page).to have_notice 'Fonte de Comunicação editada com sucesso.'
 
     click_link 'Revista de Circulação Municipal'
 
@@ -49,7 +49,7 @@ feature "CommunicationSources" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Fonte de Comunicação apagado com sucesso.'
+    expect(page).to have_notice 'Fonte de Comunicação apagada com sucesso.'
 
     expect(page).to_not have_content 'Jornal de Circulação Municipal'
   end

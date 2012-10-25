@@ -15,7 +15,7 @@ feature "RegulatoryActTypeClassifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador criado com sucesso.'
+    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador criada com sucesso.'
 
     click_link 'description'
 
@@ -33,7 +33,7 @@ feature "RegulatoryActTypeClassifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador editado com sucesso.'
+    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador editada com sucesso.'
 
     click_link 'Segundo Tipo'
 
@@ -49,7 +49,7 @@ feature "RegulatoryActTypeClassifications" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador apagado com sucesso.'
+    expect(page).to have_notice 'Classificação de Tipos de Ato Regulamentador apagada com sucesso.'
 
     expect(page).to_not have_content 'description'
   end

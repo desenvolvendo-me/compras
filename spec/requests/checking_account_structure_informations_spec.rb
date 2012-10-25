@@ -19,7 +19,7 @@ feature "CheckingAccountStructureInformations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente criado com sucesso.'
+    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente criada com sucesso.'
 
     click_link 'Fonte de Recursos'
 
@@ -42,7 +42,7 @@ feature "CheckingAccountStructureInformations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente editado com sucesso.'
+    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente editada com sucesso.'
 
     click_link 'Recursos'
 
@@ -60,7 +60,7 @@ feature "CheckingAccountStructureInformations" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente apagado com sucesso.'
+    expect(page).to have_notice 'Identificação da Estrutura de Conta Corrente apagada com sucesso.'
 
     expect(page).to_not have_content 'Fonte de Recursos'
   end

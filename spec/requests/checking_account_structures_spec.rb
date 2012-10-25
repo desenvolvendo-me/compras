@@ -24,7 +24,7 @@ feature "CheckingAccountStructures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura da Conta Corrente criado com sucesso.'
+    expect(page).to have_notice 'Estrutura da Conta Corrente criada com sucesso.'
 
     click_link 'Disponibilidade financeira - Fonte de Recursos'
 
@@ -56,7 +56,7 @@ feature "CheckingAccountStructures" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Estrutura da Conta Corrente editado com sucesso.'
+    expect(page).to have_notice 'Estrutura da Conta Corrente editada com sucesso.'
 
     click_link 'Disponibilidade - Outra Fonte de Recursos'
 
@@ -78,7 +78,7 @@ feature "CheckingAccountStructures" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Estrutura da Conta Corrente apagado com sucesso.'
+    expect(page).to have_notice 'Estrutura da Conta Corrente apagada com sucesso.'
 
     expect(page).to_not have_content 'Fonte de Recursos'
   end

@@ -34,7 +34,7 @@ feature "LicitationProcessRatifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório criado com sucesso.'
+    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório criada com sucesso.'
 
     within_records do
       click_link '1'
@@ -74,7 +74,7 @@ feature "LicitationProcessRatifications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório editado com sucesso.'
+    expect(page).to have_content 'Homologação e Adjudicação de Processo Licitatório editada com sucesso.'
 
     within_records do
       click_link '1'

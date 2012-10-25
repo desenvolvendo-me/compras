@@ -19,7 +19,7 @@ feature "CapabilityDestinations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Destinação de Recursos editado com sucesso.'
+    expect(page).to have_notice 'Destinação de Recursos editada com sucesso.'
 
     click_link 'Programa de linha de crédito'
 
@@ -54,7 +54,7 @@ feature "CapabilityDestinations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Destinação de Recursos criado com sucesso.'
+    expect(page).to have_notice 'Destinação de Recursos criada com sucesso.'
 
     click_link 'Programa de linha de crédito'
 
@@ -93,7 +93,7 @@ feature "CapabilityDestinations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Destinação de Recursos editado com sucesso.'
+    expect(page).to have_notice 'Destinação de Recursos editada com sucesso.'
 
     click_link 'Programa de linha de crédito para projetos'
 
@@ -119,7 +119,7 @@ feature "CapabilityDestinations" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Destinação de Recursos apagado com sucesso.'
+    expect(page).to have_notice 'Destinação de Recursos apagada com sucesso.'
 
     expect(page).to_not have_content 'Programa de linha de crédito'
   end

@@ -48,7 +48,7 @@ feature "LicitationProcessPublications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Publicação criado com sucesso'
+    expect(page).to have_notice 'Publicação criada com sucesso'
 
     within_records do
       click_link 'Jornal'
@@ -85,7 +85,7 @@ feature "LicitationProcessPublications" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Publicação editado com sucesso'
+    expect(page).to have_notice 'Publicação editada com sucesso'
 
     within_records do
       click_link 'Jornal'
@@ -115,7 +115,7 @@ feature "LicitationProcessPublications" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Publicação apagado com sucesso'
+    expect(page).to have_notice 'Publicação apagada com sucesso'
 
     expect(page).to_not have_link 'Publicacao'
   end

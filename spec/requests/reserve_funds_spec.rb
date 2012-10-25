@@ -39,7 +39,7 @@ feature "ReserveFunds" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Reserva de Dotação criado com sucesso.'
+    expect(page).to have_notice 'Reserva de Dotação criada com sucesso.'
 
     click_link '2012'
 

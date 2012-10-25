@@ -26,7 +26,7 @@ feature "BudgetStructureConfigurations" do
     end
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria criada com sucesso.'
 
     click_link 'Nome da Configuração'
 
@@ -83,7 +83,7 @@ feature "BudgetStructureConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria editada com sucesso.'
 
     click_link 'Outro Nome da Configuração'
 
@@ -101,7 +101,7 @@ feature "BudgetStructureConfigurations" do
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Configuração de Estrutura Orçamentaria apagada com sucesso.'
 
     expect(page).to_not have_content 'Detran'
     expect(page).to_not have_content '1234'
@@ -141,7 +141,7 @@ feature "BudgetStructureConfigurations" do
 
     click_button 'Salvar'
 
-    expect(page).to_not have_notice 'Configuração de Estrutura Orçamentaria criado com sucesso.'
+    expect(page).to_not have_notice 'Configuração de Estrutura Orçamentaria criada com sucesso.'
 
     within 'div.nested-budget-structure-level:nth-child(1)' do
       expect(page).to have_field 'Nível', :with => '1'

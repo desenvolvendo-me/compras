@@ -28,7 +28,7 @@ feature "PledgeLiquidations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Liquidação de Empenho criado com sucesso.'
+    expect(page).to have_notice 'Liquidação de Empenho criada com sucesso.'
 
     within_records do
       page.find('a').click

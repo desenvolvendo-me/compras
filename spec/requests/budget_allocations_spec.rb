@@ -45,7 +45,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria criada com sucesso.'
 
     click_link '1 - Alocação'
 
@@ -110,7 +110,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria criada com sucesso.'
 
     click_link '1 - Alocação para o ano de 2011'
 
@@ -176,7 +176,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria criado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria criada com sucesso.'
 
     click_link '1 - Alocação para o ano de 2012'
 
@@ -271,7 +271,7 @@ feature "BudgetAllocations" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Dotação Orçamentaria editado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria editada com sucesso.'
 
     within_records do
       page.find('a').click
@@ -389,7 +389,7 @@ feature "BudgetAllocations" do
 
     click_link "Apagar"
 
-    expect(page).to have_notice 'Dotação Orçamentaria apagado com sucesso.'
+    expect(page).to have_notice 'Dotação Orçamentaria apagada com sucesso.'
 
     expect(page).to_not have_content 'Alocação extra'
   end

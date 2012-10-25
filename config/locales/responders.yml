@@ -25,6 +25,9 @@ pt-BR:
     actions:
       <<: *male
 
+    account_plan_configurations:
+      <<: *female
+
     administrative_process_liberations:
       <<: *male
       create:
@@ -33,10 +36,49 @@ pt-BR:
     agencies:
       <<: *female
 
+    bank_accounts:
+      <<: *female
+
     branch_classifications:
       <<: *female
 
+    budget_allocations:
+      <<: *female
+
+    budget_revenues:
+      <<: *female
+
+    budget_structure_configurations:
+      <<: *female
+
+    budget_structures:
+      <<: *female
+
+    capability_destinations:
+      <<: *female
+
+    capability_sources:
+      <<: *female
+
+    checking_account_of_fiscal_accounts:
+      <<: *female
+
+    checking_account_structure_informations:
+      <<: *female
+
+    checking_account_structures:
+      <<: *female
+
     cities:
+      <<: *female
+
+    communication_sources:
+      <<: *female
+
+    contract_terminations:
+      <<: *female
+
+    contract_termination_annuls:
       <<: *female
 
     contribution_improvement_situations:
@@ -51,7 +93,22 @@ pt-BR:
     direct_purchases:
       <<: *female
 
+    direct_purchase_annuls:
+      <<: *female
+
+    dissemination_sources:
+      <<: *female
+
     entities:
+      <<: *female
+
+    event_checking_configurations:
+      <<: *female
+
+    expense_natures:
+      <<: *female
+
+    extra_credit_natures:
       <<: *female
 
     fiscal_execution_movimentations:
@@ -64,6 +121,9 @@ pt-BR:
       <<: *female
 
     government_actions:
+      <<: *female
+
+    judgment_forms:
       <<: *female
 
     judicial_class_processes:
@@ -84,7 +144,22 @@ pt-BR:
     licitation_modalities:
       <<: *female
 
+    licitation_process_appeals:
+      <<: *female
+
+    licitation_process_impugnments:
+      <<: *female
+
+    licitation_process_publications:
+      <<: *female
+
+    licitation_process_ratifications:
+      <<: *female
+
     management_units:
+      <<: *female
+
+    materials_classes:
       <<: *female
 
     payment_methods:
@@ -96,13 +171,25 @@ pt-BR:
     people:
       <<: *female
 
+    pledge_cancellations:
+      <<: *female
+
     pledge_categories:
+      <<: *female
+
+    pledge_liquidations:
+      <<: *female
+
+    pledge_liquidation_annuls:
       <<: *female
 
     prefectures:
       <<: *female
 
     price_collections:
+      <<: *female
+
+    price_collection_annuls:
       <<: *female
 
     price_collection_proposals:
@@ -114,6 +201,12 @@ pt-BR:
     purchase_solicitations:
       <<: *female
 
+    purchase_solicitation_annuls:
+      <<: *female
+
+    purchase_solicitation_item_group_annuls:
+      <<: *female
+
     purchase_solicitation_liberations:
       <<: *female
       create:
@@ -122,11 +215,35 @@ pt-BR:
     reference_units:
       <<: *female
 
+    regulatory_act_type_classifications:
+      <<: *female
+
+    reserve_funds:
+      <<: *female
+
+    reserve_fund_annuls:
+      <<: *female
+
+    revenue_natures:
+      <<: *female
+
     section_streets:
       <<: *female
 
     settings:
       <<: *female
 
+    signatures:
+      <<: *female
+
+    signature_configurations:
+      <<: *female
+
+    special_entries:
+      <<: *female
+
     subfunctions:
+      <<: *female
+
+    tce_specification_capabilities:
       <<: *female
