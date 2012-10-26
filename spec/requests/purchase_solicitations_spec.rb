@@ -141,7 +141,7 @@ feature "PurchaseSolicitations" do
       click_button "Adicionar Dotação"
 
       within_modal 'Dotação' do
-        fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+        fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
         click_button 'Pesquisar'
         click_record '2011 - Detran'
       end

@@ -15,7 +15,7 @@ feature "Capabilities" do
 
     click_link 'Criar Recurso'
 
-    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
     fill_in 'Descrição', :with => 'Reforma'
     fill_modal 'Destinação de recursos', :with => 'Programa de linha de crédito', :field => 'Descrição'
     fill_modal 'Especificação de recursos do TCE', :with => 'Ampliação do Posto de Saúde', :field => 'Descrição'
@@ -48,7 +48,7 @@ feature "Capabilities" do
 
     click_link 'Reforma e Ampliação'
 
-    fill_modal 'Descritor', :with => '2013', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2013', :field => 'Ano do exercício'
     fill_in 'Descrição', :with => 'Reforma e Ampliação do Posto'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios no posto'
     select 'Vinculado', :from => 'Tipo'

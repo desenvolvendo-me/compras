@@ -1,5 +1,7 @@
 class Descriptor < Compras::Model
-  attr_accessible :year, :entity_id
+  attr_accessible :period, :entity_id
+
+  attr_modal :entity, :year
 
   belongs_to :entity
 
@@ -17,14 +19,37 @@ class Descriptor < Compras::Model
   has_many :subfunctions, :dependent => :restrict
   has_many :event_checking_configurations, :dependent => :restrict
 
-  validates :year, :entity, :presence => true
-  validates :year, :mask => '9999', :allow_blank => true
-  validates :entity_id, :uniqueness => { :scope => [:year], :message => :taken_for_informed_year }, :allow_blank => true
+  validates :entity_id, :uniqueness => { :scope => [:period], :message => :taken_for_informed_period }, :allow_blank => true
 
-  orderize :year
-  filterize
+  validates :period, :entity, :presence => true
+
+  localize :period, :using => MonthAndYearParser
+
+  orderize :period
+
+  def self.filter(options)
+    query = scoped
+    query = query.where { entity_id.eq(options[:entity_id]) } if options[:entity_id].present?
+    query = query.by_year(options[:year].to_i) if options[:year]
+    query
+  end
+
+  def self.by_year(value)
+    date = Date.new(value)
+    date_range = date..(date.end_of_year)
+
+    where { period.in(date_range) }
+  end
 
   def to_s
     "#{year} - #{entity}"
+  end
+
+  def year
+    period.try(:year)
+  end
+
+  def month
+    period.try(:month)
   end
 end

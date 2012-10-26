@@ -18,7 +18,7 @@ feature "ExpenseNatures" do
 
     click_link 'Criar Natureza da Despesa'
 
-    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
     fill_modal 'Categoria da despesa', :with => '3', :field => 'Código'
     fill_modal 'Grupo da despesa', :with => '0', :field => 'Código'
@@ -114,7 +114,7 @@ feature "ExpenseNatures" do
 
       click_link 'Filtrar Naturezas das Despesas'
 
-      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
 
       click_button 'Pesquisar'
 
@@ -232,7 +232,7 @@ feature "ExpenseNatures" do
 
     click_link '3.0.10.01.12 - Vencimentos e Salários'
 
-    fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     fill_modal 'Grupo da despesa', :with => '4', :field => 'Código'
     fill_modal 'Modalidade da despesa', :with => '20', :field => 'Código'

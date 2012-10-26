@@ -18,7 +18,7 @@ feature "BudgetRevenues" do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Código'
 
-      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
       fill_modal 'Natureza da receita', :with => 'Imposto s/ Propriedade Predial e Territ. Urbana', :field => 'Especificação'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
@@ -59,7 +59,7 @@ feature "BudgetRevenues" do
     click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
       fill_modal 'Natureza da receita', :with => 'Imposto sobre a renda', :field => 'Especificação'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
@@ -102,7 +102,7 @@ feature "BudgetRevenues" do
     click_link 'Criar Receita Orçamentaria'
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
       fill_modal 'Natureza da receita', :with => 'Imposto sobre a renda', :field => 'Especificação'
       fill_modal 'Recurso', :with => 'Reforma e Ampliação', :field => 'Descrição'
     end
@@ -184,7 +184,7 @@ feature "BudgetRevenues" do
     click_link '1'
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
       fill_modal 'Natureza da receita', :with => 'Imposto sobre a renda', :field => 'Especificação'
       fill_modal 'Recurso', :with => 'Construção', :field => 'Descrição'
     end

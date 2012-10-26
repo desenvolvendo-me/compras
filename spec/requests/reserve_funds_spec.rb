@@ -18,7 +18,7 @@ feature "ReserveFunds" do
 
     click_link 'Criar Reserva de Dotação'
 
-    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
 
     expect(page).to have_disabled_field 'Status'
     expect(page).to have_select 'Status', :selected => 'Reservado'

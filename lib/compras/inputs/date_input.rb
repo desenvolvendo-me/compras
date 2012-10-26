@@ -13,10 +13,18 @@ module Compras
 
       def input_html_options
         super.tap do |options|
-          options[:type]              ||= :string
-          options[:data]              ||= {}
-          options[:data][:datepicker] ||= true
+          options[:type] ||= :string
+          options[:data] ||= {}
+          if mask
+            options[:data][:mask] ||= mask
+          else
+            options[:data][:datepicker] ||= true
+          end
         end
+      end
+
+      def mask
+        options[:mask]
       end
     end
   end

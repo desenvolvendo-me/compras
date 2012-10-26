@@ -8,4 +8,11 @@ pt-BR:
     attributes:
       descriptor:
         entity: "Entidade"
-        year: "Exercício"
+        period: "Exercício"
+        year: "Ano do exercício"
+        month: "Mês do exercício"
+
+  simple_form:
+    hints:
+      descriptor:
+        period: "Exemplo: 10/2012"

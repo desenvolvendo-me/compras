@@ -20,7 +20,7 @@ feature "ExtraCredits" do
     click_link 'Criar Crédito Suplementar'
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
       fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
       select 'Especial', :from => 'Tipo de crédito'
       fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar', :field => 'Descrição'
@@ -372,7 +372,7 @@ feature "ExtraCredits" do
     click_link extra_credit.to_s
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
       fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
       select 'Suplementar', :from => 'Tipo de crédito'
       fill_modal 'Natureza de crédito', :with => 'Abre crédito suplementar de transferência', :field => 'Descrição'

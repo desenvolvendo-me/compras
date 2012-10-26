@@ -15,7 +15,7 @@ feature "EventCheckingConfigurations" do
     click_link 'Criar Configuração de Evento Contábil'
 
     within_tab 'Principal' do
-      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
       fill_in 'Evento', :with => 'Evento Tal'
       fill_in 'Função', :with => 'Função Tal'
     end

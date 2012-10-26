@@ -15,7 +15,7 @@ feature "RevenueNatures" do
 
     click_link 'Criar Natureza da Receita'
 
-    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
     fill_modal 'Ato regulamentador', :with => '1234', :field => 'Número'
     fill_modal 'Categoria da receita', :with => '1', :field => 'Código'
     fill_modal 'Subcategoria da receita', :with => '1', :field => 'Código'
@@ -202,7 +202,7 @@ feature "RevenueNatures" do
 
     click_link '1.1.1.2.12.34 - Imposto s/ Propriedade Predial e Territ. Urbana'
 
-    fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
     fill_modal 'Ato regulamentador', :with => '4567', :field => 'Número'
     fill_in 'Classificação', :with => '11.11'
     fill_modal 'Rúbrica da receita', :with => '3', :field => 'Código'
@@ -283,13 +283,7 @@ feature "RevenueNatures" do
 
       click_link 'Filtrar Naturezas das Receitas'
 
-      within_modal 'Descritor' do
-        fill_in 'Exercício', :with => '2009'
-
-        click_button 'Pesquisar'
-
-        click_record '2009'
-      end
+      fill_modal 'Descritor', :with => '2009', :field => 'Ano do exercício'
 
       click_button 'Pesquisar'
 

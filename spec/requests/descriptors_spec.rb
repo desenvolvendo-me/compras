@@ -14,7 +14,7 @@ feature "Descriptors" do
     click_link 'Criar Descritor'
 
     fill_modal 'Entidade', :with => 'Detran'
-    fill_in 'Exercício', :with => '2012'
+    fill_in 'Exercício', :with => '10/2012'
 
     click_button 'Salvar'
 
@@ -23,7 +23,7 @@ feature "Descriptors" do
     click_link '2012 - Detran'
 
     expect(page).to have_field 'Entidade', :with => 'Detran'
-    expect(page).to have_field 'Exercício', :with => '2012'
+    expect(page).to have_field 'Exercício', :with => '10/2012'
   end
 
   scenario 'update an existent descriptor' do
@@ -35,7 +35,7 @@ feature "Descriptors" do
     click_link '2012 - Detran'
 
     fill_modal 'Entidade', :with => 'Secretaria de Educação'
-    fill_in 'Exercício', :with => '2011'
+    fill_in 'Exercício', :with => '10/2011'
 
     click_button 'Salvar'
 
@@ -44,7 +44,7 @@ feature "Descriptors" do
     click_link '2011 - Secretaria de Educação'
 
     expect(page).to have_field 'Entidade', :with => 'Secretaria de Educação'
-    expect(page).to have_field 'Exercício', :with => '2011'
+    expect(page).to have_field 'Exercício', :with => '10/2011'
   end
 
   scenario 'destroy an existent descriptor' do
@@ -60,5 +60,25 @@ feature "Descriptors" do
 
     expect(page).to_not have_content 'Detran'
     expect(page).to_not have_content '2012'
+  end
+
+  context 'filter' do
+    scenario 'filter by year and entity' do
+      Descriptor.make!(:detran_2011)
+      Descriptor.make!(:detran_2012)
+      Descriptor.make!(:secretaria_de_educacao_2012)
+
+      navigate 'Outros > Descritores'
+
+      click_link 'Filtrar Descritores'
+
+      fill_in 'Ano do exercício', :with => '2011'
+      fill_modal 'Entidade', :with => 'Detran'
+
+      click_button 'Pesquisar'
+
+      expect(page).to have_content '2011 - Detran'
+      expect(page).to_not have_content '2012'
+    end
   end
 end

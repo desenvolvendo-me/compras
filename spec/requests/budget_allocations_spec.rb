@@ -23,7 +23,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Código'
 
-      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Administração', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Administração Geral', :field => 'Descrição'
@@ -88,7 +88,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Código'
 
-      fill_modal 'Descritor', :with => '2011', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2011', :field => 'Ano do exercício'
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
@@ -154,7 +154,7 @@ feature "BudgetAllocations" do
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Código'
 
-      fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+      fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
       fill_modal 'Estrutura orçamentaria', :with => 'Secretaria de Educação', :field => 'Descrição'
       fill_modal 'Função', :with => 'Execução', :field => 'Descrição'
       fill_modal 'Subfunção', :with => 'Supervisor', :field => 'Descrição'
@@ -418,7 +418,7 @@ feature "BudgetAllocations" do
 
     click_link 'Filtrar Dotações Orçamentarias'
 
-    fill_modal 'Descritor', :with => '2012', :field => 'Exercício'
+    fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
 
     click_button 'Pesquisar'
 
