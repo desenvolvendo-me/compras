@@ -2,6 +2,10 @@
 require 'spec_helper'
 
 feature "AdministrativeProcesses" do
+  let :current_user do
+    User.make!(:sobrinho_as_admin_and_employee)
+  end
+
   background do
     sign_in
   end
@@ -560,6 +564,65 @@ feature "AdministrativeProcesses" do
     click_button 'Anular'
 
     expect(page).to have_notice 'Processo Administrativo anulado com sucesso'
+  end
+
+  scenario "annuling an administrative process with purchase_solicitation_item_group" do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    AdministrativeProcess.make!(:compra_aguardando)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Situação', :selected => 'Em processo de compra'
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Anular'
+
+    expect(page).to have_notice 'Processo Administrativo anulado com sucesso'
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Situação', :selected => 'Anulado'
+
+    click_link 'Anulação'
+
+    expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+    expect(page).to have_field 'Data', :with => I18n.l(Date.current)
+    expect(page).to have_field 'Justificativa', :with => 'Anulado através do processo administrativo 1/2012'
   end
 
   scenario "show new licitation process link" do

@@ -59,9 +59,9 @@ describe AdministrativeProcessesController do
     it "should calcel an administrative process with status waiting" do
       administrative_process = AdministrativeProcess.make!(:compra_aguardando)
 
-      put :update, :id => administrative_process.id, :commit => 'Anular'
+      AdministrativeProcessAnnulment.any_instance.should_receive(:annul)
 
-      expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::ANNULLED
+      put :update, :id => administrative_process.id, :commit => 'Anular'
     end
 
     it "should not cancel an administrative process without status waiting" do

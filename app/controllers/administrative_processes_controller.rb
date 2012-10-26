@@ -16,8 +16,8 @@ class AdministrativeProcessesController < CrudController
   def update
     if resource.waiting?
       if params.has_key?(:commit) && params[:commit] == 'Anular'
-        resource.status = AdministrativeProcessStatus::ANNULLED
-        resource.save!
+        AdministrativeProcessAnnulment.new(resource, self).annul
+
         redirect_to administrative_processes_path, :notice => t('compras.messages.administrative_process_annulled_successful')
       else
         super
