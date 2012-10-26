@@ -6,7 +6,6 @@ require 'app/models/extra_credit'
 require 'app/models/government_action'
 require 'app/models/government_program'
 require 'app/models/management_unit'
-require 'app/models/pledge_historic'
 require 'app/models/pledge'
 require 'app/models/reserve_fund'
 require 'app/models/budget_revenue'
@@ -30,7 +29,6 @@ describe Descriptor do
   it { should have_many(:government_actions).dependent(:restrict) }
   it { should have_many(:government_programs).dependent(:restrict) }
   it { should have_many(:management_units).dependent(:restrict) }
-  it { should have_many(:pledge_historics).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:budget_revenue).dependent(:restrict) }

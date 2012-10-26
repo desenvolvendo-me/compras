@@ -8,13 +8,12 @@ describe ExtraCredit do
     it { should validate_uniqueness_of(:regulatory_act_id).with_message(:must_be_uniqueness_on_extra_credit) }
 
     it 'should validate uniqueness of budget_allocation' do
-      extra_credit = ExtraCredit.make!(:detran_2012)
-      extra_credit.extra_credit_moviment_types << ExtraCreditMovimentType.make!(:adicionar_dotacao)
-      extra_credit.extra_credit_moviment_types << ExtraCreditMovimentType.make!(:adicionar_dotacao)
+      subject.extra_credit_moviment_types << ExtraCreditMovimentType.make!(:adicionar_dotacao)
+      subject.extra_credit_moviment_types << ExtraCreditMovimentType.make!(:adicionar_dotacao)
 
-      extra_credit.valid?
+      subject.valid?
 
-      extra_credit.errors[:extra_credit_moviment_types].should include('já está em uso')
+      subject.errors[:extra_credit_moviment_types].should include('já está em uso')
     end
 
     it 'should validate uniqueness of capability' do

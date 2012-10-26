@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/material'
 require 'app/models/purchase_solicitation_budget_allocation_item'
-require 'app/models/pledge_item'
 require 'app/models/direct_purchase_budget_allocation_item'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/price_collection_lot_item'
@@ -31,7 +30,6 @@ describe Material do
   end
 
   it { should belong_to :expense_nature }
-  it { should have_many :pledge_items }
   it { should have_and_belong_to_many :licitation_objects }
   it { should have_many(:direct_purchase_budget_allocation_items).dependent(:restrict) }
   it { should have_many(:administrative_process_budget_allocation_items).dependent(:restrict) }

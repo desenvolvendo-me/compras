@@ -43,20 +43,6 @@ describe ResourceAnnulsController do
   end
 
   describe 'POST #create' do
-    it "should redirect to edit parent path after create" do
-      pending 'Waiting solution for rails update' do
-        pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
-
-        subject.should_receive(:annul)
-        subject.stub(:controller_name => 'pledge_liquidation_annuls')
-
-        post :create, :resource_annul => { :annullable_id => pledge_liquidation.id, :annullable_type => 'PledgeLiquidation' }
-
-        expect(response).to be_success
-        expect(response.location).to match "/pledge_liquidations/#{pledge_liquidation.id}/edit"
-      end
-    end
-
     it "should return 401 if parent is already annulled" do
       pending 'Waiting solution for rails update' do
         resource_annul = ResourceAnnul.make!(:rescisao_de_contrato_anulada)
@@ -70,23 +56,5 @@ describe ResourceAnnulsController do
         expect(response.code).to eq '401'
       end
     end
-  end
-
-  it "should return annullable_id from params at annulable_id method" do
-    pending 'Waiting solution for rails update' do
-      pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
-
-      subject.stub(:controller_name => 'pledge_liquidation_annuls')
-      subject.should_receive(:annullable_id).twice.and_return(pledge_liquidation.id)
-
-      get :new, :annulable_id => pledge_liquidation.id
-    end
-  end
-
-  it "should return the parent model name at parent_model_name method" do
-    pledge_liquidation = PledgeLiquidation.make!(:empenho_2012)
-
-    subject.stub(:controller_name => 'pledge_liquidation_annuls')
-    expect(subject.parent_model_name).to eq 'pledge_liquidation'
   end
 end

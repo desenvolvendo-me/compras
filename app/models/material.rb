@@ -17,7 +17,6 @@ class Material < Compras::Model
 
   has_and_belongs_to_many :licitation_objects, :join_table => :compras_licitation_objects_compras_materials
 
-  has_many :pledge_items, :dependent => :restrict
   has_many :direct_purchase_budget_allocation_items, :dependent => :restrict
   has_many :administrative_process_budget_allocation_items, :dependent => :restrict
   has_many :purchase_solicitation_budget_allocation_items, :dependent => :restrict

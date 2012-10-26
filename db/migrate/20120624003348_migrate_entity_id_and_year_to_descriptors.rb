@@ -1,5 +1,6 @@
 class MigrateEntityIdAndYearToDescriptors < ActiveRecord::Migration
   class RevenueAccounting < Compras::Model; end
+  class PledgeHistoric < Compras::Model; end
 
   def change
     [

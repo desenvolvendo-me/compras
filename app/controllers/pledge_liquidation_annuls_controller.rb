@@ -1,2 +1,0 @@
-class PledgeLiquidationAnnulsController < ResourceAnnulsController
-end

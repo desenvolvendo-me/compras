@@ -171,18 +171,6 @@ pt-BR:
     people:
       <<: *female
 
-    pledge_cancellations:
-      <<: *female
-
-    pledge_categories:
-      <<: *female
-
-    pledge_liquidations:
-      <<: *female
-
-    pledge_liquidation_annuls:
-      <<: *female
-
     prefectures:
       <<: *female
 

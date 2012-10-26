@@ -644,42 +644,17 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :pledge_categories do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "modal/pledge_categories", :as => "modal_pledge_categories"
 
-  resources :pledge_historics do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "modal/pledge_historics", :as => "modal_pledge_historics"
 
-  resources :pledge_cancellations, :except => [:destroy, :update] do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "modal/pledge_cancellations", :as => "modal_pledge_cancellations"
 
   resources :pledge_liquidation_annuls, :except => [:destroy, :update]
 
-  resources :pledge_liquidations, :except => [:destroy, :update] do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "modal/pledge_liquidations", :as => "modal_pledge_liquidations"
 
-  resources :pledges, :except => [:destroy, :update] do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
+  get "modal/pledges", :as => "modal_pledges"
 
   resources :positions do
     collection do

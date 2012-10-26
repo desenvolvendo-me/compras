@@ -136,10 +136,3 @@ menu:
 
         - pledge:
           - expense_kinds
-          - pledge_historics
-          - pledge_categories
-          - pledges
-          - pledge_cancellations
-          - pledge_liquidations
-
-
