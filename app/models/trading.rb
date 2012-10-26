@@ -1,7 +1,7 @@
 class Trading < Compras::Model
   attr_accessible :code, :entity_id, :licitating_unit_id,
                   :summarized_object, :year, :licitation_process_id,
-                  :licitation_commission_id
+                  :trading_items_attributes, :licitation_commission_id
 
   auto_increment :code, :by => :year
 
@@ -10,6 +10,10 @@ class Trading < Compras::Model
   belongs_to :licitation_process
   belongs_to :licitating_unit, :class_name => "Entity",
                                :foreign_key => "licitating_unit_id"
+
+  has_many :trading_items, :dependent => :destroy
+
+  accepts_nested_attributes_for :trading_items
 
   validates :licitation_process, :year, :presence => true
   validates :licitation_process_id, :uniqueness => true

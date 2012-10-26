@@ -89,4 +89,26 @@ describe AdministrativeProcessBudgetAllocationItemDecorator do
       end
     end
   end
+
+  context '#quantity' do
+    context 'when quantity is nil' do
+      before do
+        component.stub(:quantity).and_return(nil)
+      end
+
+      it 'should be nil' do
+        expect(subject.quantity).to be_nil
+      end
+    end
+
+    context 'when quantity has value' do
+      before do
+        component.stub(:quantity).and_return(220.0)
+      end
+
+      it 'should applies precision' do
+        expect(subject.quantity).to eq '220,00'
+      end
+    end
+  end
 end

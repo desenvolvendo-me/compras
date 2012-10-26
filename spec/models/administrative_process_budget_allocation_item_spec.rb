@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/licitation_process_classification'
+require 'app/models/trading_item'
 require 'app/models/bidder_proposal'
 
 describe AdministrativeProcessBudgetAllocationItem do
@@ -14,6 +15,8 @@ describe AdministrativeProcessBudgetAllocationItem do
   it { should belong_to :licitation_process_lot }
   it { should have_many :bidder_proposals }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
+
+  it { should have_one(:trading_item).dependent(:restrict) }
 
   context 'with material' do
     let :material do

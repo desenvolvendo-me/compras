@@ -6,16 +6,24 @@
     <li>
       <a href="#auctioneer-and-team">Pregoeiro e equipe</a>
     </li>
+    <li>
+      <a href="#trading-items">Itens</a>
+    </li>
   </ul>
 
   <div id="main">
-    <%= render 'main', :f => f %>
+    <%= render 'tradings/main', :f => f %>
   </div>
 
   <div id="auctioneer-and-team">
     <%= render 'tradings/auctioneer_and_team', :f => f %>
   </div>
+
+  <div id="trading-items">
+    <%= render 'tradings/items', :f => f %>
+  </div>
 </div>
+
 <script>
   $(function() {
     $("#trading_licitation_process").on("change", function(e, licitationProcess) {
@@ -52,6 +60,42 @@
 
     function clearCommissionMembers(){
       $('#licitation-commission-members').html('');
+    }
+
+    $("#trading_licitation_process_id").on("change", function (event, licitationProcess) {
+      $("#items").empty();
+      if (licitationProcess) {
+        $.each(licitationProcess.items, function (i, item) {
+          var order = i + 1;
+          renderItem(order, item);
+        });
+      }
+    });
+
+    function renderItem(order, item) {
+      var itemBinds = [];
+      var itemUUID = _.uniqueId();
+
+      itemBinds["uuid_trading_item"] = "fresh-" + itemUUID;
+
+      $("#items").append(
+        $("#trading-items-template").mustache(itemBinds)
+      ).trigger("nestedForm:afterAdd");
+
+      fillItem(itemUUID, order, item);
+    }
+
+    function fillItem(uuid, order, item) {
+      var prefixNameUuid = "#trading_trading_items_attributes_fresh-" + uuid;
+
+      $(prefixNameUuid + "_administrative_process_budget_allocation_item_id").val(item.id);
+      $(prefixNameUuid + "_order").val(order);
+      $(prefixNameUuid + "_material").val(item.material_description);
+      $(prefixNameUuid + "_material_id").val(item.material_id);
+      $(prefixNameUuid + "_reference_unit").val(item.reference_unit.acronym);
+      $(prefixNameUuid + "_quantity").val(item.quantity);
+      $(prefixNameUuid + "_unit_price").val(item.unit_price);
+      $(prefixNameUuid + "_detailed_description").val(item.detailed_description);
     }
   });
 </script>

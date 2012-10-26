@@ -12,6 +12,8 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   has_many :bidder_proposals
   has_many :licitation_process_classifications, :as => :classifiable, :dependent => :destroy
 
+  has_one  :trading_item, :dependent => :restrict
+
   delegate :reference_unit, :description, :to => :material, :allow_nil => true
   delegate :administrative_process_id, :budget_allocation, :to => :administrative_process_budget_allocation, :allow_nil => true
 

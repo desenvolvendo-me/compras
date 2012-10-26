@@ -1,5 +1,6 @@
 #encoding: utf-8
 require 'model_helper'
+require 'app/models/trading_item'
 require 'app/models/trading'
 
 describe Trading do
@@ -12,6 +13,8 @@ describe Trading do
   it { should belong_to :licitation_commission }
   it { should belong_to :licitation_process }
   it { should belong_to :licitating_unit }
+
+  it { should have_many(:trading_items).dependent(:destroy) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :year }

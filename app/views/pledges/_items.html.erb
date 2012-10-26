@@ -14,7 +14,7 @@
 
 <div id="pledge-items">
   <%= f.association :pledge_items, :collection => localized(f.object.pledge_items) do |p| %>
-    <%= render 'pledge_items/form', :f => p %>
+    <%= render 'pledge_items/form', :f => p if f.object.persisted? %>
   <% end %>
 </div>
 

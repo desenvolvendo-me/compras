@@ -210,4 +210,44 @@ feature "Tradings" do
       end
     end
   end
+
+  scenario "displaying items information when the licitation process field is filled" do
+    LicitationProcess.make!(:pregao_presencial)
+
+    navigate "Pregão > Pregões Presenciais"
+
+    click_link "Criar Pregão Presencial"
+
+    fill_modal "Processo licitatório", :with => "1", :field => "Processo"
+
+    within_tab "Itens" do
+      expect(page).to have_field "Item", :with => "1"
+      expect(page).to have_field "Material", :with => "01.01.00001 - Antivirus"
+      expect(page).to have_field "Unidade", :with => "UN"
+      expect(page).to have_field "Quantidade", :with => "2,00"
+      expect(page).to have_field "Valor unitário", :with => "10,00"
+      expect(page).to have_field "Descrição detalhada", :with => "Antivirus avast"
+
+      fill_in "Redução mínima admissível entre os lances em %", :with => "15,00"
+      fill_in "Redução mínima admissível entre os lances em valor", :with => "1,20"
+      fill_in "Descrição detalhada", :with => "descrição modificada antivirus avast"
+    end
+
+    click_button "Salvar"
+
+    expect(page).to have_content "Pregão Presencial criado com sucesso"
+
+    click_link "1/2012"
+
+    within_tab "Itens" do
+      expect(page).to have_field "Item", :with => "1"
+      expect(page).to have_field "Material", :with => "01.01.00001 - Antivirus"
+      expect(page).to have_field "Unidade", :with => "UN"
+      expect(page).to have_field "Quantidade", :with => "2,00"
+      expect(page).to have_field "Valor unitário", :with => "10,00"
+      expect(page).to have_field "Redução mínima admissível entre os lances em %", :with => "15,00"
+      expect(page).to have_field "Redução mínima admissível entre os lances em valor", :with => "1,20"
+      expect(page).to have_field "Descrição detalhada", :with => "descrição modificada antivirus avast"
+    end
+  end
 end

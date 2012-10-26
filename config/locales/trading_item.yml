@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      trading_item:
+        one: "Item do Pregão Presencial"
+        other: "Itens do Pregão Presencial"
+
+    attributes:
+      trading_item:
+        order: "Item"
+        reference_unit: "Unidade"
+        quantity: "Quantidade"
+        unit_price: "Valor unitário"
+        minimum_reduction_percent: "Redução mínima admissível entre os lances em %"
+        minimum_reduction_value: "Redução mínima admissível entre os lances em valor"
+        detailed_description: "Descrição detalhada"

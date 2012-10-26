@@ -18,4 +18,8 @@ class AdministrativeProcessBudgetAllocationItemDecorator
   def total_value_by_bidder(bidder)
     number_with_precision super if super
   end
+
+  def quantity
+    number_with_precision super if super
+  end
 end

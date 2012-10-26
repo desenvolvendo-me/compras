@@ -11,4 +11,14 @@ builder resource, json do
   json.administrative_process_description       resource.administrative_process_description
   json.administrative_process                   resource.administrative_process.to_s
   json.summarized_object                        resource.administrative_process_summarized_object
+
+  json.items resource.items do |json, item|
+    json.id                   item.id
+    json.material_id          item.material_id
+    json.material_description item.material.to_s
+    json.reference_unit       item.reference_unit
+    json.quantity             item.decorator.quantity
+    json.unit_price           item.decorator.unit_price
+    json.detailed_description item.material.detailed_description
+  end
 end

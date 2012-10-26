@@ -1,0 +1,24 @@
+<%= f.error :trading_items %>
+
+<div id="items">
+  <%= f.association :trading_items, :collection => localized(f.object.trading_items) do |p| %>
+    <%= render 'trading_items/form', :f => p if f.object.persisted? %>
+  <% end %>
+</div>
+
+<%= mustache 'trading-items-template' do %>
+  <%= f.association :trading_items_attributes, :collection => f.object.trading_items.build, :index => '{{uuid_trading_item}}' do |p| %>
+    <%= render 'trading_items/form', :f => p %>
+  <% end %>
+<% end %>
+
+<script>
+  $("#trading-items-template").nestedForm({
+    add: '.add-trading-item',
+    remove: '.remove-trading-item',
+    target: '#items',
+    uuid: 'uuid_trading_item',
+    fieldsWrapper: '.trading-item',
+    appendItem: false
+  });
+</script>
