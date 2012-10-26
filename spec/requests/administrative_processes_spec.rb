@@ -600,6 +600,16 @@ feature "AdministrativeProcesses" do
 
     expect(page).to have_select 'Situação', :selected => 'Em processo de compra'
 
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+    end
+
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
     within_records do
@@ -609,6 +619,16 @@ feature "AdministrativeProcesses" do
     click_button 'Anular'
 
     expect(page).to have_notice 'Processo Administrativo anulado com sucesso'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Atendido por', :with => ''
+    end
 
     navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
 
@@ -1004,6 +1024,86 @@ feature "AdministrativeProcesses" do
         expect(page).to have_content "Pública"
         expect(page).not_to have_content "Privada"
       end
+    end
+  end
+
+  scenario "changing the purchase_solicitation_item_group should change purchase solicitation items fulfiller" do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:office)
+    AdministrativeProcess.make!(:compra_aguardando)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+    end
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de office'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      fill_in 'Valor previsto', :with => '50,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Atendido por', :with => ''
+    end
+
+    click_link 'Voltar'
+
+    within_records do
+      click_link '2/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
     end
   end
 end
