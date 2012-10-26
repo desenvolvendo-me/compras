@@ -21,7 +21,7 @@ module CrudHelper
     associations = resource_class.reflect_on_all_associations
 
     attributes.map do |attribute|
-      association = associations.detect{|association| association.foreign_key == attribute}
+      association = associations.detect{ |relationship| relationship.foreign_key == attribute }
 
       # If attribute is an association and is not polymorphic, use the association
       # name instead of the foreign key.
