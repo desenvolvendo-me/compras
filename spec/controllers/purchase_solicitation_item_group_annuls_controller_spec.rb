@@ -54,7 +54,7 @@ describe PurchaseSolicitationItemGroupAnnulsController do
     it 'should allow create when is annullable' do
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
-      PurchaseSolicitationBudgetAllocationItemStatusChanger.any_instance.should_receive(:change)
+      PurchaseSolicitationItemGroupAnnulment.any_instance.should_receive(:annul)
 
       post :create, :annullable_id => item_group.id
     end

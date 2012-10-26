@@ -58,6 +58,8 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to_not have_button 'Salvar'
     expect(page).to_not have_link 'Anular'
 
+    expect(page).to have_select 'Situação', :selected => 'Anulado'
+
     click_link 'Anulação'
 
     expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'

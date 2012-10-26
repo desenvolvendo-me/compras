@@ -11,7 +11,7 @@ class DirectPurchaseAnnulment
     self.resource_annul  = options.fetch(:resource_annul)
     self.context         = options.fetch(:context)
 
-    self.item_group_annulment = options.fetch(:item_group_annulment) { PurchaseSolicitationItemGroupAnnulment }
+    self.item_group_annulment = options.fetch(:item_group_annulment) { PurchaseSolicitationItemGroupAnnulmentCreator }
     self.email_sender         = options.fetch(:email_sender) { SupplyAuthorizationEmailSender }
   end
 
