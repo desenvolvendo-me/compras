@@ -45,7 +45,7 @@ module CrudHelper
     end
   end
 
-  def link_to_modal_info(options)
+  def link_to_modal_info(options = {})
     options[:label] ||= I18n.translate("other.compras.messages.more_information")
 
     content_tag(:p, :class => :modal_info) do
