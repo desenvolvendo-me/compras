@@ -103,4 +103,13 @@ describe BidderDecorator do
       end
     end
   end
+
+  describe "#edit_parent_title" do
+    context "when the licitation process is of type trading" do
+      it "returns the link to the trading" do
+        component.stub(:presence_trading? => true)
+        expect(subject.edit_parent_title).to eq edit_trading_path
+      end
+    end
+  end
 end

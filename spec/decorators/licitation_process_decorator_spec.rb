@@ -76,4 +76,68 @@ describe LicitationProcessDecorator do
       end
     end
   end
+
+  describe "edit_parent_path" do
+
+    before do
+      routes.stub(:edit_licitation_process_path).with(component).and_return('licitation_process_link')
+    end
+
+    context "licitation process has a 'trading' modality" do
+
+      before do
+        component.stub(:presence_trading? => true)
+      end
+
+      it "returns the associated trading path if it exists" do
+        trading = double(:trading)
+        routes.stub(:edit_trading_path).with(trading).and_return('trading_link')
+        component.stub(:trading => trading)
+
+        expect(subject.edit_parent_path).to eq 'trading_link'
+      end
+
+      it "returns the licitation process path if there is no associated trading" do
+        component.stub(:trading => nil)
+
+        expect(subject.edit_parent_path).to eq 'licitation_process_link'
+      end
+    end
+
+    it "returns the licitation process type otherwise" do
+      component.stub(:presence_trading? => false)
+
+      expect(subject.edit_parent_path).to eq 'licitation_process_link'
+    end
+  end
+
+  describe "edit_parent_link" do
+
+    context "licitation process has a 'trading' modality" do
+
+      before do
+        component.stub(:presence_trading? => true)
+      end
+
+      it "returns 'Voltar ao pregão presencial' if there is a associated trading" do
+        trading = double(:trading)
+        component.stub(:trading => trading)
+
+        expect(subject.edit_parent_link).to eq 'Voltar ao pregão presencial'
+      end
+
+      it "returns 'Voltar ao processo licitatório' if there is no associated trading" do
+        component.stub(:trading => nil)
+
+        expect(subject.edit_parent_link).to eq 'Voltar ao processo licitatório'
+      end
+    end
+
+    it "returns 'Voltar ao processo licitatório' otherwise" do
+      component.stub(:presence_trading? => false)
+
+      expect(subject.edit_parent_link).to eq 'Voltar ao processo licitatório'
+    end
+  end
+
 end

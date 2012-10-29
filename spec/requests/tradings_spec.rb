@@ -250,4 +250,27 @@ feature "Tradings" do
       expect(page).to have_field "Descrição detalhada", :with => "descrição modificada antivirus avast"
     end
   end
+
+  scenario "adding bidders to the trading" do
+    Trading.make!(:pregao_presencial)
+    Creditor.make!(:sobrinho)
+
+    navigate "Pregão > Pregões Presenciais"
+
+    click_link '1/2012'
+
+    click_link 'Licitantes'
+
+    click_link 'Criar Licitante'
+
+    fill_modal 'Fornecedor', :with => "Gabriel Sobrinho"
+
+    click_button 'Salvar'
+
+    expect(page).to have_content "Licitante criado com sucesso"
+
+    click_link 'Voltar ao pregão presencial'
+
+    expect(page).to have_content "Editar 1/2012"
+  end
 end

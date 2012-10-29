@@ -1,3 +1,4 @@
+#encoding: utf-8
 class LicitationProcessDecorator
   include Decore
   include Decore::Proxy
@@ -23,5 +24,21 @@ class LicitationProcessDecorator
 
   def all_licitation_process_classifications_groupped
     all_licitation_process_classifications.group_by(&:bidder)
+  end
+
+  def edit_parent_path
+    if component.presence_trading? && component.trading.present?
+      routes.edit_trading_path(component.trading)
+    else
+      routes.edit_licitation_process_path(component)
+    end
+  end
+
+  def edit_parent_link
+    if component.presence_trading? && component.trading.present?
+      'Voltar ao pregão presencial'
+    else
+      'Voltar ao processo licitatório'
+    end
   end
 end
