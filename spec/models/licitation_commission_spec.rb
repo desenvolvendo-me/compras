@@ -14,6 +14,8 @@ describe LicitationCommission do
   it { should validate_presence_of :nomination_date }
   it { should validate_presence_of :expiration_date }
   it { should validate_presence_of :regulatory_act }
+  it { should validate_duplication_of(:individual_id).on(:licitation_commission_responsibles) }
+  it { should validate_duplication_of(:individual_id).on(:licitation_commission_members) }
 
   it { should belong_to :regulatory_act }
 
@@ -92,57 +94,17 @@ describe LicitationCommission do
     expect(subject.regulatory_act_publication_date).to eq Date.new(2012, 2, 28)
   end
 
-  it "the duplicated individuals on responsibles should be invalid except the first" do
-    individual_one = subject.licitation_commission_responsibles.build(:individual_id => 1)
-    individual_two = subject.licitation_commission_responsibles.build(:individual_id => 1)
-
-    subject.valid?
-
-    individual_one.errors.messages[:individual_id].should be_nil
-    individual_two.errors.messages[:individual_id].should include "já está em uso"
-  end
-
-  it "the diferent individuals on responsibles should be valid" do
-    individual_one = subject.licitation_commission_responsibles.build(:individual_id => 1)
-    individual_two = subject.licitation_commission_responsibles.build(:individual_id => 2)
-
-    subject.valid?
-
-    individual_one.errors.messages[:individual_id].should be_nil
-    individual_two.errors.messages[:individual_id].should be_nil
-  end
-
-  it "the duplicated individuals on members should be invalid except the first" do
-    individual_one = subject.licitation_commission_members.build(:individual_id => 1)
-    individual_two = subject.licitation_commission_members.build(:individual_id => 1)
-
-    subject.valid?
-
-    individual_one.errors.messages[:individual_id].should be_nil
-    individual_two.errors.messages[:individual_id].should include "já está em uso"
-  end
-
-  it "the diferent individuals on members should be valid" do
-    individual_one = subject.licitation_commission_members.build(:individual_id => 1)
-    individual_two = subject.licitation_commission_members.build(:individual_id => 2)
-
-    subject.valid?
-
-    individual_one.errors.messages[:individual_id].should be_nil
-    individual_two.errors.messages[:individual_id].should be_nil
-  end
-
   context 'must have one president' do
     let(:member_1) do
-      double('member 1', :individual_id => 1, :president? => false)
+      double('member 1', :individual_id => 1, :president? => false, :marked_for_destruction? => false)
     end
 
     let(:president_1) do
-      double('president 1', :individual_id => 3, :president? => true)
+      double('president 1', :individual_id => 3, :president? => true, :marked_for_destruction? => false)
     end
 
     let(:president_2) do
-      double('president 2', :individual_id => 4, :president? => true)
+      double('president 2', :individual_id => 4, :president? => true, :marked_for_destruction? => false)
     end
 
     it "must be invalid when there is no president" do

@@ -30,11 +30,8 @@ class LicitationCommission < Compras::Model
       :type => :date,
       :on_or_after_message => :should_be_on_or_after_nomination_date
     }, :allow_blank => true
-
-  validate :cannot_have_duplicated_individuals_on_responsibles
-  validate :cannot_have_duplicated_individuals_on_members
+  validates :licitation_commission_responsibles, :licitation_commission_members, :no_duplication => :individual_id
   validate :must_have_one_member_with_role_president, :unless => :trading?
-
   validate :must_have_auctioneer, :must_have_support_team, :if => :trading?
 
   orderize :id
@@ -74,30 +71,6 @@ class LicitationCommission < Compras::Model
   end
 
   protected
-
-  def cannot_have_duplicated_individuals_on_responsibles
-    single_individuals = []
-
-    licitation_commission_responsibles.each do |responsible|
-      if single_individuals.include?(responsible.individual_id)
-        errors.add(:licitation_commission_responsibles)
-        responsible.errors.add(:individual_id, :taken)
-      end
-      single_individuals << responsible.individual_id
-    end
-  end
-
-  def cannot_have_duplicated_individuals_on_members
-    single_individuals = []
-
-    licitation_commission_members.each do |responsible|
-      if single_individuals.include?(responsible.individual_id)
-        errors.add(:licitation_commission_members)
-        responsible.errors.add(:individual_id, :taken)
-      end
-      single_individuals << responsible.individual_id
-    end
-  end
 
   def must_have_one_member_with_role_president
     if presidents.empty?
