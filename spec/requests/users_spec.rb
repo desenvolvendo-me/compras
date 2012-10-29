@@ -106,4 +106,10 @@ feature "Users" do
       expect(page).to have_css 'a', :count => 1
     end
   end
+
+  scenario 'translate message when was already authenticated' do
+    visit new_user_session_path
+
+    expect(page).to have_alert 'Você já está autenticado.'
+  end
 end
