@@ -89,11 +89,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  namespace :iss_intel do
-    post 'companies/sync'
-    post 'individuals/sync'
-  end
-
   # Keep routes sorted alphabetically
   devise_for :users, :controllers => { :confirmations => 'confirmations' }
 
