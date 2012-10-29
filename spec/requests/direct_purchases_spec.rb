@@ -1950,4 +1950,58 @@ feature "DirectPurchases" do
       expect(page).to have_css('.item', :count => 2)
     end
   end
+
+  scenario 'save an direct_purchase with item group without change anything no check if is pending' do
+    PurchaseSolicitationItemGroup.make!(:office)
+
+    DirectPurchase.make!(
+      :compra,
+      :purchase_solicitation_item_group => PurchaseSolicitationItemGroup.make!(
+        :antivirus,
+        :status => PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS
+      )
+    )
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    click_link '1/2012'
+
+    within_tab 'Dotações' do
+      expect(page).to have_field 'Valor total dos itens', :with => '600,00'
+
+      within '.direct-purchase-budget-allocation:first' do
+        expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+        expect(page).to have_field 'Compl. do elemento', :with => '3.0.10.01.12 - Vencimentos e Salários'
+        expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+
+        within '.item:first' do
+          expect(page).to have_field 'Item', :with => '1'
+          expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
+          expect(page).to have_field 'Marca/Referência', :with => 'Norton'
+          expect(page).to have_field 'Unidade', :with => 'UN'
+          expect(page).to have_field 'Quantidade', :with => '3,00'
+          expect(page).to have_field 'Valor unitário', :with => '200,00'
+          expect(page).to have_field 'Valor total', :with => '600,00'
+        end
+      end
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+        click_record 'Agrupamento de office'
+      end
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    click_link '1/2012'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+  end
+
 end

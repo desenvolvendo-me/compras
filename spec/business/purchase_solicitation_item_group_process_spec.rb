@@ -32,5 +32,13 @@ describe PurchaseSolicitationItemGroupProcess do
         described_class.update_item_group_status(item_group, old_group)
       end
     end
+
+    context "when old and new solicitation are the same" do
+      it "it should do nothing" do
+        item_group.should_not_receive(:change_status!).with(PurchaseSolicitationItemGroupStatus::PENDING)
+
+        described_class.update_item_group_status(item_group, item_group)
+      end
+    end
   end
 end

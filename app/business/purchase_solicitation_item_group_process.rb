@@ -1,5 +1,7 @@
 class PurchaseSolicitationItemGroupProcess
   def self.update_item_group_status(new_item_group, old_item_group = nil)
+    return unless new_item_group != old_item_group
+
     validate_pending_status(new_item_group)
 
     change_status(old_item_group, PurchaseSolicitationItemGroupStatus::PENDING)
