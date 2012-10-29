@@ -9,4 +9,6 @@ if Rails.env.production? || Rails.env.staging?
   }
 
   ActionMailer::Base.delivery_method = :smtp
+
+  ActionMailer::Base.default :from => 'noreply@nobesistemas.com.br'
 end
