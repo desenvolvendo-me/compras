@@ -387,64 +387,6 @@ feature "PriceCollections" do
     end
   end
 
-  scenario 'trying to add duplicated items to see the error message' do
-    DeliveryLocation.make!(:education)
-    Employee.make!(:sobrinho)
-    PaymentMethod.make!(:dinheiro)
-    Material.make!(:antivirus)
-
-    navigate 'Processos de Compra > Coletas de Preços'
-
-    click_link 'Criar Coleta de Preços'
-
-    within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Número'
-      expect(page).to have_disabled_field 'Status'
-      expect(page).to have_select 'Status', :selected => 'Ativo'
-
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data', :with => I18n.l(Date.current)
-      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
-      fill_in 'Prazo de entrega', :with => '1'
-      fill_in 'Vencimento', :with => I18n.l(Date.tomorrow)
-      select 'ano/anos', :from => 'Período do prazo de entrega'
-      fill_in 'Validade da proposta', :with => '1'
-      select 'ano/anos', :from => 'Período da validade da proposta'
-      fill_in 'Objeto', :with => 'objeto da coleta'
-      fill_in 'Observações', :with => 'observacoes da coleta'
-    end
-
-    within_tab 'Lotes de itens' do
-      click_button 'Adicionar Lote'
-
-      within '.price-collection-lot:last' do
-        fill_in 'Observações', :with => 'lote 1'
-
-        click_button 'Adicionar Item'
-
-        fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-        fill_in 'Marca', :with => 'Norton'
-        fill_in 'Quantidade', :with => '10'
-
-        click_button 'Adicionar Item'
-
-        within '.item:last' do
-          fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-          fill_in 'Marca', :with => 'Norton'
-          fill_in 'Quantidade', :with => '20'
-        end
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Lotes de itens' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'removing a lot' do
     PriceCollection.make!(:coleta_de_precos)
 

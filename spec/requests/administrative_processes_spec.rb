@@ -360,54 +360,6 @@ feature "AdministrativeProcesses" do
     end
   end
 
-  scenario 'asserting that duplicated budget allocations cannot be saved' do
-    budget_allocation = BudgetAllocation.make!(:alocacao)
-    BudgetStructure.make!(:secretaria_de_educacao)
-    JudgmentForm.make!(:por_item_com_melhor_tecnica)
-    Employee.make!(:sobrinho)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
-    LicitationModality.make!(:pregao_presencial)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    click_link 'Criar Processo Administrativo'
-
-    within_tab 'Principal' do
-      expect(page).to have_disabled_field 'Status do processo administrativo'
-      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
-
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data do processo', :with => '07/03/2012'
-      fill_in 'Número do protocolo', :with => '00099/2012'
-      select 'Compras e serviços', :from => 'Tipo de objeto'
-      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
-      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
-      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      select 'Aguardando', :from => 'Status do processo administrativo'
-    end
-
-    within_tab 'Dotações orçamentarias' do
-      click_button 'Adicionar Dotação'
-
-      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
-      fill_in 'Valor previsto', :with => '20,00'
-
-      click_button 'Adicionar Dotação'
-
-      within 'div.nested-administrative-process-budget-allocation:first' do
-        fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
-        fill_in 'Valor previsto', :with => '30,00'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'update an existing administrative process' do
     JudgmentForm.make!(:por_lote_com_melhor_tecnica)
     AdministrativeProcess.make!(:compra_aguardando)

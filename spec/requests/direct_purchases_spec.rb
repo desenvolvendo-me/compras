@@ -621,63 +621,6 @@ feature "DirectPurchases" do
     expect(page).to_not have_button 'Apagar'
   end
 
-  scenario 'asserting that duplicated budget allocations cannot be saved' do
-    LegalReference.make!(:referencia)
-    Creditor.make!(:wenderson_sa)
-    BudgetStructure.make!(:secretaria_de_educacao)
-    LicitationObject.make!(:ponte)
-    DeliveryLocation.make!(:education)
-    Employee.make!(:sobrinho)
-    PaymentMethod.make!(:dinheiro)
-    BudgetAllocation.make!(:alocacao)
-    Material.make!(:antivirus)
-    ModalityLimit.make!(:modalidade_de_compra)
-    PriceRegistration.make!(:registro_de_precos)
-
-    navigate 'Processos de Compra > Compra Direta'
-
-    click_link 'Gerar Compra Direta'
-
-    within_tab 'Principal' do
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data da compra', :with => '19/03/2012'
-      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
-      select 'Material ou serviços', :from => 'Modalidade'
-      select 'Global', :from => 'Tipo do empenho'
-
-      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
-
-      fill_modal 'Estrutura orçamentária', :with => 'Secretaria de Educação', :field => 'Descrição'
-      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
-      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
-      fill_in 'Prazo de entrega', :with => '1'
-      select 'ano/anos', :from => 'Período do prazo de entrega'
-      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
-      fill_in 'Coleta de preços', :with => '99'
-      fill_modal 'Registro de preços', :with => 'Aquisição de combustíveis', :field => 'Objeto'
-      fill_in 'Observações gerais', :with => 'obs'
-    end
-
-    within_tab 'Dotações' do
-      click_button 'Adicionar Dotação'
-
-      fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
-
-      click_button 'Adicionar Dotação'
-
-      within '.direct-purchase-budget-allocation:first' do
-        fill_modal 'Dotação orçamentaria', :with => '1', :field => 'Código'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'should filter by year' do
     year_2012 = DirectPurchase.make!(:compra_nao_autorizada)
     year_2011 = DirectPurchase.make!(:compra_2011)

@@ -53,18 +53,4 @@ feature "PaymentMethods" do
 
     expect(page).to_not have_content 'Dinheiro'
   end
-
-  scenario 'validate presence of description' do
-    PaymentMethod.make!(:dinheiro)
-
-    navigate 'Cadastros Gerais > Formas de Pagamento'
-
-    click_link 'Criar Forma de Pagamento'
-
-    fill_in 'Descrição', :with => 'Dinheiro'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end

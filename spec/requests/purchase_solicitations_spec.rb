@@ -202,50 +202,6 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'trying to create a new purchase_solicitation with duplicated budget_allocations to ensure the error' do
-    BudgetStructure.make!(:secretaria_de_educacao)
-    Employee.make!(:sobrinho)
-    ExpenseNature.make!(:vencimento_e_salarios)
-    DeliveryLocation.make!(:education)
-    budget_allocation = BudgetAllocation.make!(:alocacao)
-    Material.make!(:antivirus)
-
-    navigate 'Processos de Compra > Solicitações de Compra'
-
-    click_link 'Criar Solicitação de Compra'
-
-    within_tab 'Principal' do
-      fill_in 'Ano', :with => '2012'
-      fill_in 'Data da solicitação', :with => '01/02/2012'
-      fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Educação', :field => 'Descrição'
-      fill_modal 'Responsável pela solicitação', :with => '958473', :field => 'Matrícula'
-      fill_in 'Justificativa da solicitação', :with => 'Novas cadeiras'
-      fill_modal 'Local para entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-      select 'Bens', :from => 'Tipo de solicitação'
-      fill_in 'Observações gerais', :with => 'Muitas cadeiras estão quebrando no escritório'
-    end
-
-    within_tab 'Dotações orçamentarias' do
-      click_button "Adicionar Dotação"
-
-      fill_modal 'Dotação', :with => '1', :field => 'Código'
-      fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-
-      click_button "Adicionar Dotação"
-
-      within '.purchase-solicitation-budget-allocation:first' do
-        fill_modal 'Dotação', :with => '1', :field => 'Código'
-        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'should have at least one budget allocation with one item' do
     navigate 'Processos de Compra > Solicitações de Compra'
 
@@ -518,7 +474,7 @@ feature "PurchaseSolicitations" do
     end
   end
 
-  scenario 'update an existent purchase_solicitation' do
+  scenario 'update a purchase_solicitation with same budget_structure and material' do
     PurchaseSolicitation.make!(:reparo)
     purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013,
                                                        :service_status => PurchaseSolicitationServiceStatus::PENDING)

@@ -967,41 +967,6 @@ feature "LicitationProcesses" do
     end
   end
 
-  scenario 'cannot include the same material twice on a budget allocation' do
-    LicitationProcess.make!(:processo_licitatorio)
-    Material.make!(:antivirus)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    click_link 'Editar processo licitatório'
-
-    within_tab 'Dotações orçamentarias' do
-      click_button 'Adicionar Item'
-
-      fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-      fill_in 'Quantidade', :with => 2
-      fill_in 'Valor unitário máximo', :with => 1
-
-      click_button 'Adicionar Item'
-
-      within '.item:last' do
-        fill_modal 'Material', :with => 'Antivirus', :field => 'Descrição'
-        fill_in 'Quantidade', :with => 3
-        fill_in 'Valor unitário máximo', :with => 4
-      end
-    end
-
-    click_button 'Salvar'
-
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'budget allocation with total of items diferent than value should not be saved' do
     LicitationProcess.make!(:processo_licitatorio)
 

@@ -163,36 +163,6 @@ feature "AccountPlanConfigurations" do
     end
   end
 
-  scenario 'when add duplicated level should show error' do
-    navigate 'Cadastros Gerais > Plano de Contas > Configurações de Plano de Contas'
-
-    click_link 'Criar Configuração de Plano de Contas'
-
-    click_button 'Adicionar Estrutura'
-
-    within 'div.nested-account-plan-level' do
-      fill_in 'Nível', :with => '1'
-      fill_in 'Descrição', :with => 'Uso interno'
-      fill_in 'Dígitos', :with => '2'
-      select 'Ponto', :from => 'Separador'
-    end
-
-    click_button 'Adicionar Estrutura'
-
-    within 'div.nested-account-plan-level:nth-child(2)' do
-      fill_in 'Nível', :with => '1'
-      fill_in 'Descrição', :with => 'Indicador de quantidade'
-      fill_in 'Dígitos', :with => '2'
-      select 'Barra', :from => 'Separador'
-    end
-
-    click_button 'Salvar'
-
-    within 'div.nested-account-plan-level:nth-child(2)' do
-      expect(page).to have_content 'já está em uso'
-    end
-  end
-
   scenario 'when add duplicated level should show error using javascript' do
     navigate 'Cadastros Gerais > Plano de Contas > Configurações de Plano de Contas'
 
@@ -216,29 +186,6 @@ feature "AccountPlanConfigurations" do
       select 'Barra', :from => 'Separador'
 
       expect(page).to have_content 'já está em uso'
-    end
-  end
-
-  scenario 'when remove a level should not generate error for duplicated level' do
-    AccountPlanConfiguration.make!(:segundo_plano)
-
-    navigate 'Cadastros Gerais > Plano de Contas > Configurações de Plano de Contas'
-
-    click_link 'Segundo plano de MG'
-
-    within 'div.nested-account-plan-level:nth-child(1)' do
-      click_button 'Remover'
-    end
-
-    click_button 'Adicionar Estrutura'
-
-    within 'div.nested-account-plan-level:nth-child(3)' do
-      fill_in 'Nível', :with => '2'
-      fill_in 'Descrição', :with => 'Indicador de quantidade'
-      fill_in 'Dígitos', :with => '4'
-      select 'Barra', :from => 'Separador'
-
-      expect(page).to_not have_content 'já está em uso'
     end
   end
 

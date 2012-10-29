@@ -119,18 +119,4 @@ feature "ModalityLimits" do
     expect(page).to_not have_content '01/02/2012'
     expect(page).to_not have_content '02/03/2012'
   end
-
-  scenario 'destroy an existent modality_limit' do
-    ModalityLimit.make!(:modalidade_de_compra)
-
-    navigate 'Cadastros Gerais > Licitação > Limites por Modalidade'
-
-    click_link 'Criar Limite por Modalidade'
-
-    fill_in 'Número da portaria', :with => '0001'
-
-    click_button 'Salvar'
-
-    expect(page).to have_content 'já está em uso'
-  end
 end
