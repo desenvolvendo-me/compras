@@ -5,7 +5,6 @@ require 'app/models/expense_nature'
 require 'app/models/budget_structure_configuration'
 require 'app/models/budget_structure_responsible'
 require 'app/models/extra_credit'
-require 'app/models/revenue_nature'
 require 'app/models/licitation_modality'
 
 describe RegulatoryAct do
@@ -23,7 +22,6 @@ describe RegulatoryAct do
   it { should have_many(:budget_structure_configurations).dependent(:restrict) }
   it { should have_many(:budget_structure_responsibles).dependent(:restrict) }
   it { should have_many(:licitation_modalities).dependent(:restrict) }
-  it { should have_many(:revenue_natures).dependent(:restrict) }
   it { should have_many(:agreements).dependent(:restrict) }
 
   it { should have_and_belong_to_many :dissemination_sources}

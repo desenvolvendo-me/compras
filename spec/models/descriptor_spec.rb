@@ -9,8 +9,6 @@ require 'app/models/government_program'
 require 'app/models/management_unit'
 require 'app/models/pledge'
 require 'app/models/reserve_fund'
-require 'app/models/budget_revenue'
-require 'app/models/revenue_nature'
 require 'app/models/subfunction'
 require 'app/models/descriptor'
 require 'app/models/event_checking_configuration'
@@ -33,8 +31,6 @@ describe Descriptor do
   it { should have_many(:management_units).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
-  it { should have_many(:budget_revenue).dependent(:restrict) }
-  it { should have_many(:revenue_natures).dependent(:restrict) }
   it { should have_many(:subfunctions).dependent(:restrict) }
   it { should have_many(:event_checking_configurations).dependent(:restrict) }
 
