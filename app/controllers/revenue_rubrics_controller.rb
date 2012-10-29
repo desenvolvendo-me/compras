@@ -1,2 +1,0 @@
-class RevenueRubricsController < CrudController
-end

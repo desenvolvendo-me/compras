@@ -1,6 +1,0 @@
-pt-BR:
-  enumerations:
-    revenue_nature_kind:
-      analytical: Analítico
-      synthetic: Sintético
-      both: Ambos
