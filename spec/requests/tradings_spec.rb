@@ -229,7 +229,12 @@ feature "Tradings" do
       expect(page).to have_field "Descrição detalhada", :with => "Antivirus avast"
 
       fill_in "Redução mínima admissível entre os lances em %", :with => "15,00"
+      expect(page).to have_disabled_field "Redução mínima admissível entre os lances em valor"
+
+      fill_in "Redução mínima admissível entre os lances em %", :with => "0,00"
       fill_in "Redução mínima admissível entre os lances em valor", :with => "1,20"
+      expect(page).to have_disabled_field "Redução mínima admissível entre os lances em %"
+
       fill_in "Descrição detalhada", :with => "descrição modificada antivirus avast"
     end
 
@@ -245,7 +250,7 @@ feature "Tradings" do
       expect(page).to have_field "Unidade", :with => "UN"
       expect(page).to have_field "Quantidade", :with => "2,00"
       expect(page).to have_field "Valor unitário", :with => "10,00"
-      expect(page).to have_field "Redução mínima admissível entre os lances em %", :with => "15,00"
+      expect(page).to have_disabled_field "Redução mínima admissível entre os lances em %"
       expect(page).to have_field "Redução mínima admissível entre os lances em valor", :with => "1,20"
       expect(page).to have_field "Descrição detalhada", :with => "descrição modificada antivirus avast"
     end

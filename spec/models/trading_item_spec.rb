@@ -57,4 +57,23 @@ describe TradingItem do
       end
     end
   end
+
+  context "validations" do
+    subject do
+      TradingItem.new(:minimum_reduction_value => 1.0,
+                      :minimum_reduction_percent => 1.0)
+    end
+
+    it "validates if minimum percent is zero if minimum_value is present" do
+      subject.valid?
+
+      expect(subject.errors[:minimum_reduction_value]).to include "deve ser igual a 0.0"
+    end
+
+    it "validates if minimum value is zero if minimum_percent is present" do
+      subject.valid?
+
+      expect(subject.errors[:minimum_reduction_percent]).to include "deve ser igual a 0.0"
+    end
+  end
 end

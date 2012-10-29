@@ -29,11 +29,13 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-2">
-      <%= f.input :minimum_reduction_percent %>
+      <%= f.input :minimum_reduction_percent, :input_html => { :class => 'minimum_reduction_percent' },
+                                              :disabled => f.object.minimum_reduction_value.to_f > 0 %>
     </div>
 
     <div class="yui3-u-1-2">
-      <%= f.input :minimum_reduction_value %>
+      <%= f.input :minimum_reduction_value, :input_html => { :class => 'minimum_reduction_value' },
+                                            :disabled => f.object.minimum_reduction_percent.to_f > 0 %>
     </div>
   </div>
   <div class="yui3-g">

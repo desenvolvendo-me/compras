@@ -97,5 +97,28 @@
       $(prefixNameUuid + "_unit_price").val(item.unit_price);
       $(prefixNameUuid + "_detailed_description").val(item.detailed_description);
     }
+
+    $("form.trading").on("focusout", ".minimum_reduction_percent", function() {
+      var minimumReductionPercent = $(this).val();
+
+      if (minimumReductionPercent !== "0,00") {
+        $(this).closest(".item").find(".minimum_reduction_value").val("0,00");
+        $(this).closest(".item").find(".minimum_reduction_value").attr("disabled", "disabled");
+      } else {
+        $(this).closest(".item").find(".minimum_reduction_value").removeAttr("disabled");
+      }
+    });
+
+    $("form.trading").on("focusout", ".minimum_reduction_value", function() {
+      var minimumReductionValue = $(this).val();
+
+      if (minimumReductionValue !== "0,00") {
+        $(this).closest(".item").find(".minimum_reduction_percent").val("0,00");
+        $(this).closest(".item").find(".minimum_reduction_percent").attr("disabled", "disabled");
+      } else {
+        $(this).closest(".item").find(".minimum_reduction_percent").removeAttr("disabled");
+      }
+    });
+
   });
 </script>
