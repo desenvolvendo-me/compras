@@ -8,7 +8,6 @@ class TradingItem < Compras::Model
 
   validates :minimum_reduction_percent, :numericality => { :equal_to  => 0.0 },
             :if => :minimum_reduction_value?
-
   validates :minimum_reduction_value, :numericality => { :equal_to  => 0.0 },
             :if => :minimum_reduction_percent?
 
