@@ -9,7 +9,6 @@ feature "Capabilities" do
   scenario 'create a new capability' do
     Descriptor.make!(:detran_2012)
     CapabilityDestination.make!(:linha_de_credito)
-    TceSpecificationCapability.make!(:ampliacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Recurso > Recursos'
 
@@ -18,7 +17,6 @@ feature "Capabilities" do
     fill_modal 'Descritor', :with => '2012', :field => 'Ano do exercício'
     fill_in 'Descrição', :with => 'Reforma'
     fill_modal 'Destinação de recursos', :with => 'Programa de linha de crédito', :field => 'Descrição'
-    fill_modal 'Especificação de recursos do TCE', :with => 'Ampliação do Posto de Saúde', :field => 'Descrição'
     fill_in 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     select 'Ordinário', :from => 'Tipo'
 
@@ -35,7 +33,6 @@ feature "Capabilities" do
     expect(page).to have_field 'Descrição', :with => 'Reforma'
     expect(page).to have_field 'Finalidade', :with => 'Otimizar o atendimento a todos os municípios'
     expect(page).to have_field 'Destinação de recursos', :with => 'Programa de linha de crédito'
-    expect(page).to have_field 'Especificação de recursos do TCE', :with => 'Ampliação do Posto de Saúde'
     expect(page).to have_select 'Tipo', :selected => 'Ordinário'
     expect(page).to have_select 'Status', :selected => 'Ativo'
   end

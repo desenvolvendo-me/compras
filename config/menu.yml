@@ -123,7 +123,6 @@ menu:
           - capability_destinations
           - capability_sources
           - application_codes
-          - tce_specification_capabilities
 
       - execution:
         - reserve_fund:

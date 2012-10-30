@@ -1,9 +1,0 @@
-pt-BR:
-  enumerations:
-    agreement_occurrence_kind:
-      in_progress: "Em andamento"
-      returned: "Devolvido"
-      terminated: "Rescindido"
-      completed: "Finalizado"
-      paralyzed: "Paralisado"
-      other: "Outro"

@@ -1,2 +1,0 @@
-class AgreementKindsController < CrudController
-end

@@ -17,7 +17,6 @@ class RegulatoryAct < Compras::Model
   has_many :budget_structure_responsibles, :dependent => :restrict
   has_many :licitation_modalities, :dependent => :restrict
   has_many :licitation_commissions, :dependent => :restrict
-  has_many :agreements, :dependent => :restrict
 
   has_one :extra_credit
 
