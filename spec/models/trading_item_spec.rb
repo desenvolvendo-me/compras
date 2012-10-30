@@ -75,5 +75,12 @@ describe TradingItem do
 
       expect(subject.errors[:minimum_reduction_percent]).to include "deve ser igual a 0.0"
     end
+
+    it "validates if reduction percent is less than or equal to 100" do
+      subject.minimum_reduction_percent = 101.0
+      subject.valid?
+
+      expect(subject.errors[:minimum_reduction_percent]).to include "deve ser menor ou igual a 100"
+    end
   end
 end

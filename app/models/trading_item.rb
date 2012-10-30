@@ -10,6 +10,7 @@ class TradingItem < Compras::Model
             :if => :minimum_reduction_value?
   validates :minimum_reduction_value, :numericality => { :equal_to  => 0.0 },
             :if => :minimum_reduction_percent?
+  validates :minimum_reduction_percent, :numericality => { :less_than_or_equal_to => 100 }
 
   delegate :material, :material_id, :reference_unit,
            :quantity, :unit_price,
