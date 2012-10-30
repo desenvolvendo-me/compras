@@ -284,4 +284,69 @@ describe LicitationProcessClassificationSituationGenerator do
       generator.generate!
     end
   end
+
+  context 'proposals with diferente items' do
+    subject do
+      described_class.new(licitation_process)
+    end
+
+    let(:licitation_process) { double(:licitation_process) }
+
+    it 'should not have nil proposals on change_proposals_situation' do
+      classification = double(:classification, :classification => 1, :situation => 'situation')
+      item = double(:item, :id => 1, :licitation_process_classifications => [classification])
+
+      proposal_same_item = double(:proposal_same_item,
+        :administrative_process_budget_allocation_item => item)
+
+      proposal_other_item = double(:proposal_other_item,
+        :administrative_process_budget_allocation_item => 'other')
+
+      classification.should_receive(:proposals).and_return([proposal_same_item, proposal_other_item])
+
+      licitation_process.should_receive(:items).and_return([item])
+
+      subject.should_receive(:generate_situation!)
+      subject.should_receive(:change_proposal_situation_by_bidder!)
+      subject.should_receive(:change_proposal_situation_by_lot!)
+
+      subject.should_receive(:change_proposals_situation!).with([proposal_same_item], classification)
+
+      subject.should_not_receive(:change_proposals_situation!).with([proposal_same_item, nil], classification)
+
+      subject.generate!
+    end
+  end
+
+  context 'proposals with diferente lots' do
+    subject do
+      described_class.new(licitation_process)
+    end
+
+    let(:licitation_process) { double(:licitation_process) }
+
+    it 'should not have nil proposals on change_proposals_situation' do
+      classification = double(:classification, :classification => 1, :situation => 'situation')
+      lot = double(:lot, :id => 1, :licitation_process_classifications => [classification])
+
+      proposal_same_lot = double(:proposal_same_lot,
+        :licitation_process_lot => lot)
+
+      proposal_other_lot = double(:proposal_other_lot,
+        :licitation_process_lot => 'other')
+
+      classification.should_receive(:proposals).and_return([proposal_same_lot, proposal_other_lot])
+
+      licitation_process.should_receive(:lots_with_items).and_return([lot])
+
+      subject.should_receive(:generate_situation!)
+      subject.should_receive(:change_proposal_situation_by_bidder!)
+      subject.should_receive(:change_proposal_situation_by_item!)
+      subject.should_receive(:change_proposals_situation!).with([proposal_same_lot], classification)
+
+      subject.should_not_receive(:change_proposals_situation!).with([proposal_same_lot, nil], classification)
+
+      subject.generate!
+    end
+  end
 end
