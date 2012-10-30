@@ -35,6 +35,13 @@ describe TradingItem do
         subject.material_id
       end
     end
+
+    describe "#to_s" do
+      it "delegates to administrative_process_budget_allocation_item" do
+        administrative_process_item.should_receive(:to_s)
+        subject.to_s
+      end
+    end
     
     describe "#reference_unit" do
       it "delegates to administrative_process_budget_allocation_item" do

@@ -13,7 +13,7 @@ class TradingItem < Compras::Model
   validates :minimum_reduction_percent, :numericality => { :less_than_or_equal_to => 100 }
 
   delegate :material, :material_id, :reference_unit,
-           :quantity, :unit_price,
+           :quantity, :unit_price, :to_s,
            :to => :administrative_process_budget_allocation_item,
            :allow_nil => true
 end
