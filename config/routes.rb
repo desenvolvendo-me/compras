@@ -17,13 +17,6 @@ Compras::Application.routes.draw do
 
   get 'agreement_kinds/modal', :as => :modal_agreement_kinds
 
-  resources :application_codes do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :contract_terminations, :except => [:show, :destroy]
 
   resources :checking_account_of_fiscal_accounts do
