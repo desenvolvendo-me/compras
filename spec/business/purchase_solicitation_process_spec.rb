@@ -31,7 +31,7 @@ describe PurchaseSolicitationProcess do
 
     context "when old and new solicitation are the same" do
       it "it should do nothing" do
-        new_solicitation.should_not_receive(:change_status!).with(PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
+        new_solicitation.should_not_receive(:change_status!)
 
         described_class.update_solicitations_status(new_solicitation, new_solicitation)
       end
