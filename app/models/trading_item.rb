@@ -7,10 +7,10 @@ class TradingItem < Compras::Model
   belongs_to :administrative_process_budget_allocation_item
 
   validates :minimum_reduction_percent, :numericality => { :equal_to  => 0.0 },
-            :if => lambda { |item| item.minimum_reduction_value > 0.0 }
+            :if => :minimum_reduction_value?
 
   validates :minimum_reduction_value, :numericality => { :equal_to  => 0.0 },
-            :if => lambda { |item| item.minimum_reduction_percent > 0.0 }
+            :if => :minimum_reduction_percent?
 
   delegate :material, :material_id, :reference_unit,
            :quantity, :unit_price,
