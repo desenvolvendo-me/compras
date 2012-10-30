@@ -2,7 +2,7 @@
 
 <div id="items">
   <%= f.association :trading_items, :collection => localized(f.object.trading_items) do |p| %>
-    <%= render 'trading_items/form', :f => p if f.object.persisted? %>
+    <%= render 'trading_items/form', :f => p %>
   <% end %>
 </div>
 
