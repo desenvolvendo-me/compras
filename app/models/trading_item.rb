@@ -16,4 +16,6 @@ class TradingItem < Compras::Model
            :quantity, :unit_price, :to_s,
            :to => :administrative_process_budget_allocation_item,
            :allow_nil => true
+
+  orderize :order
 end
