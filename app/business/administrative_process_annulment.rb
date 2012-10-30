@@ -1,13 +1,12 @@
 class AdministrativeProcessAnnulment
-  attr_accessor :administrative_process, :context, :item_group_annulment_creator,
-                :budget_allocation_fulfiller
+  attr_accessor :administrative_process, :item_group_annulment_creator,
+                :budget_allocation_fulfiller, :current_user
 
   delegate :purchase_solicitation_item_group, :to => :administrative_process
-  delegate :current_user, :to => :context
 
-  def initialize(administrative_process, context, options = {})
+  def initialize(administrative_process, current_user, options = {})
     self.administrative_process = administrative_process
-    self.context = context
+    self.current_user = current_user
     self.item_group_annulment_creator = options.fetch(:item_group_annulment_creator) { PurchaseSolicitationItemGroupAnnulmentCreator }
     self.budget_allocation_fulfiller = options.fetch(:budget_allocation_fulfiller) { PurchaseSolicitationBudgetAllocationItemFulfiller }
   end
