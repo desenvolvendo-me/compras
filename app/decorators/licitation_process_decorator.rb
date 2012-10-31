@@ -26,7 +26,7 @@ class LicitationProcessDecorator
     all_licitation_process_classifications.group_by(&:bidder)
   end
 
-  def edit_parent_path
+  def edit_path
     if component.presence_trading? && component.trading.present?
       routes.edit_trading_path(component.trading)
     else
@@ -34,7 +34,7 @@ class LicitationProcessDecorator
     end
   end
 
-  def edit_parent_link
+  def edit_link
     if component.presence_trading? && component.trading.present?
       'Voltar ao pregão presencial'
     else
