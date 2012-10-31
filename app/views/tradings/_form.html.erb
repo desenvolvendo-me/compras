@@ -103,9 +103,9 @@
 
       if (minimumReductionPercent !== "0,00") {
         $(this).closest(".item").find(".minimum_reduction_value").val("0,00");
-        $(this).closest(".item").find(".minimum_reduction_value").attr("disabled", "disabled");
+        $(this).closest(".item").find(".minimum_reduction_value").attr("readonly", "readonly");
       } else {
-        $(this).closest(".item").find(".minimum_reduction_value").removeAttr("disabled");
+        $(this).closest(".item").find(".minimum_reduction_value").removeAttr("readonly");
       }
     });
 
@@ -114,9 +114,9 @@
 
       if (minimumReductionValue !== "0,00") {
         $(this).closest(".item").find(".minimum_reduction_percent").val("0,00");
-        $(this).closest(".item").find(".minimum_reduction_percent").attr("disabled", "disabled");
+        $(this).closest(".item").find(".minimum_reduction_percent").attr("readonly", "readonly");
       } else {
-        $(this).closest(".item").find(".minimum_reduction_percent").removeAttr("disabled");
+        $(this).closest(".item").find(".minimum_reduction_percent").removeAttr("readonly");
       }
     });
 
