@@ -17,6 +17,11 @@ feature TradingItem do
       click_link "Itens/Ofertas"
     end
 
+    expect(page).to have_content "Itens do Pregão Presencial 1/2012"
     expect(page).to have_link "Antivirus"
+
+    click_link "Voltar ao pregão presencial"
+
+    expect(page).to have_content 'Editar 1/2012'
   end
 end
