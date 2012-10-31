@@ -76,7 +76,7 @@
       var itemBinds = [];
       var itemUUID = _.uniqueId();
 
-      itemBinds["uuid_trading_item"] = "fresh-" + itemUUID;
+      itemBinds["uuid_trading_items"] = "fresh-" + itemUUID;
 
       $("#items").append(
         $("#trading-items-template").mustache(itemBinds)
@@ -102,10 +102,10 @@
       var minimumReductionPercent = $(this).val();
 
       if (minimumReductionPercent !== "0,00") {
-        $(this).closest(".item").find(".minimum_reduction_value").val("0,00");
-        $(this).closest(".item").find(".minimum_reduction_value").attr("readonly", "readonly");
+        $(this).closest(".nested-trading-item").find(".minimum_reduction_value").val("0,00");
+        $(this).closest(".nested-trading-item").find(".minimum_reduction_value").attr("readonly", "readonly");
       } else {
-        $(this).closest(".item").find(".minimum_reduction_value").removeAttr("readonly");
+        $(this).closest(".nested-trading-item").find(".minimum_reduction_value").removeAttr("readonly");
       }
     });
 
@@ -113,10 +113,10 @@
       var minimumReductionValue = $(this).val();
 
       if (minimumReductionValue !== "0,00") {
-        $(this).closest(".item").find(".minimum_reduction_percent").val("0,00");
-        $(this).closest(".item").find(".minimum_reduction_percent").attr("readonly", "readonly");
+        $(this).closest(".nested-trading-item").find(".minimum_reduction_percent").val("0,00");
+        $(this).closest(".nested-trading-item").find(".minimum_reduction_percent").attr("readonly", "readonly");
       } else {
-        $(this).closest(".item").find(".minimum_reduction_percent").removeAttr("readonly");
+        $(this).closest(".nested-trading-item").find(".minimum_reduction_percent").removeAttr("readonly");
       }
     });
 
