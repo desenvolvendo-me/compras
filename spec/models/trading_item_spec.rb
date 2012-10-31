@@ -10,6 +10,13 @@ describe TradingItem do
 
   it { should have_many(:trading_item_bids).dependent(:destroy) }
 
+  it { should delegate(:material).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:material_id).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:reference_unit).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:quantity).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:unit_price).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
+  it { should delegate(:licitation_process_id).to(:trading) }
+
   it "has a default value of 0 to minimum_reduction_percent" do
     expect(TradingItem.new.minimum_reduction_percent).to eq 0.0
   end
@@ -20,59 +27,15 @@ describe TradingItem do
 
   context "delegates" do
     let (:administrative_process_item) { double(:process_item) } 
-    let (:trading) { double(:trading) }
 
     before do
       subject.stub(:administrative_process_budget_allocation_item => administrative_process_item)
-      subject.stub(:trading => trading)
-    end
-
-    describe "#material" do
-      it "delegates to administrative_process_budget_allocation_item" do
-        administrative_process_item.should_receive(:material)
-        subject.material
-      end
-    end
-    
-    describe "#material_id" do
-      it "delegates to administrative_process_budget_allocation_item" do
-        administrative_process_item.should_receive(:material_id)
-        subject.material_id
-      end
     end
 
     describe "#to_s" do
       it "delegates to administrative_process_budget_allocation_item" do
         administrative_process_item.should_receive(:to_s)
         subject.to_s
-      end
-    end
-    
-    describe "#reference_unit" do
-      it "delegates to administrative_process_budget_allocation_item" do
-        administrative_process_item.should_receive(:reference_unit)
-        subject.reference_unit
-      end
-    end
-
-    describe "#quantity" do
-      it "delegates to administrative_process_budget_allocation_item" do
-        administrative_process_item.should_receive(:quantity)
-        subject.quantity
-      end
-    end
-
-    describe "#unit_price" do
-      it "delegates to administrative_process_budget_allocation_item" do
-        administrative_process_item.should_receive(:unit_price)
-        subject.unit_price
-      end
-    end
-
-    describe "#licitation_process_id" do
-      it "delegates to trading" do
-        trading.should_receive(:licitation_process_id)
-        subject.licitation_process_id
       end
     end
   end
