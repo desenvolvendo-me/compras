@@ -1946,5 +1946,4 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
   end
-
 end
