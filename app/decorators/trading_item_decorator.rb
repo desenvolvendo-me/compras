@@ -12,14 +12,18 @@ class TradingItemDecorator
   end
 
   def readonly_reduction_percent
-    return {} if component.minimum_reduction_percent?
-
-    { :readonly => 'readonly' }
+    if component.minimum_reduction_value?
+      { :readonly => 'readonly' }
+    else
+      {}
+    end
   end
 
   def readonly_reduction_value
-    return {} if component.minimum_reduction_value?
-
-    { :readonly => 'readonly' }
+    if component.minimum_reduction_percent?
+      { :readonly => 'readonly' }
+    else
+      {}
+    end
   end
 end
