@@ -18,11 +18,11 @@
       <%= f.input :reference_unit, :disabled => true %>
     </div>
 
-    <div class="yui3-u-3-8">
+    <div class="yui3-u-1-4">
       <%= f.input :quantity, :disabled => true, :input_html => { :value => f.object.decorator.quantity } %>
     </div>
 
-    <div class="yui3-u-3-8">
+    <div class="yui3-u-1-4">
       <%= f.input :unit_price, :disabled => true, :input_html => { :value => f.object.decorator.unit_price } %>
     </div>
   </div>
@@ -38,5 +38,6 @@
                                                            merge(f.object.decorator.readonly_reduction_value) %>
     </div>
   </div>
+
   <%= f.input :detailed_description %>
 </div>
