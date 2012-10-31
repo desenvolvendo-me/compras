@@ -1,0 +1,7 @@
+<p><%= @user.name %></p>,
+
+<p>Você foi convidado para participar do registro de preço <%= @price_collection %>.</p>
+
+<p><%= link_to 'Clique aqui', confirmation_url(@user, :confirmation_token => @user.confirmation_token) %> para fazer seu cadastro e dar prosseguimento, se o link não funcionar, copie a url abaixo e cole na barra de endereço do navegador.</p>
+
+<p><%= confirmation_url(@user, :confirmation_token => @user.confirmation_token) %></p>

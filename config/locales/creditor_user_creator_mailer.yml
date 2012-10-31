@@ -1,0 +1,4 @@
+pt-BR:
+  creditor_user_creator_mailer:
+    price_collection_invite:
+      subject: "Autorização de Fornecimento"
