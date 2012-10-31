@@ -2,6 +2,7 @@
     <% if f.object.persisted? %>
       <%= f.button :destroy %>
       <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.licitation_process.id), :class => "button primary") %>
+      <%= link_to('Itens/Ofertas', trading_trading_items_path(resource), :class => 'button primary') %>
     <% end %>
     <%= f.button :submit %>
     <%= link_to('Voltar', tradings_path, :class => 'button primary') %>

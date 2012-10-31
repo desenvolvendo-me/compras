@@ -13,9 +13,7 @@ feature "TradingItemBids" do
 
     click_link "1/2012"
 
-    within_tab "Itens" do
-      click_link "Itens/Ofertas"
-    end
+    click_link "Itens/Ofertas"
 
     click_link "Fazer oferta"
 
