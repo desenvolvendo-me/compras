@@ -7,9 +7,4 @@ describe CapabilitySource do
     subject.name = 'Imposto'
     subject.to_s.should eq 'Imposto'
   end
-
-  it { should validate_presence_of :code }
-  it { should validate_presence_of :name }
-  it { should validate_presence_of :specification }
-  it { should validate_presence_of :source }
 end

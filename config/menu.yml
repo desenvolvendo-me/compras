@@ -110,18 +110,11 @@ menu:
         - extra_credit:
           - extra_credit_natures
           - extra_credits
-          - moviment_types
 
         - budget_allocation:
           - expense_natures
           - budget_allocation_types
           - budget_allocations
-
-        - capability:
-          - capabilities
-          - capability_allocation_details
-          - capability_destinations
-          - capability_sources
 
       - execution:
         - reserve_fund:

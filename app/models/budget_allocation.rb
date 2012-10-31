@@ -30,7 +30,6 @@ class BudgetAllocation < Compras::Model
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
   has_many :direct_purchase_budget_allocations, :dependent => :restrict
-  has_many :extra_credit_moviment_types, :dependent => :restrict
   has_many :administrative_process_budget_allocations, :dependent => :restrict
 
   delegate :expense_nature, :to => :expense_nature, :allow_nil => true, :prefix => true

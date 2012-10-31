@@ -1,7 +1,17 @@
 class MigrateEntityIdAndYearToDescriptors < ActiveRecord::Migration
-  class RevenueAccounting < Compras::Model; end
+  class BudgetAllocation < Compras::Model; end
+  class Capability < Compras::Model; end
+  class ExpenseNature < Compras::Model; end
+  class ExtraCredit < Compras::Model; end
+  class GovernmentAction < Compras::Model; end
+  class GovernmentProgram < Compras::Model; end
+  class ManagementUnit < Compras::Model; end
   class PledgeHistoric < Compras::Model; end
+  class Pledge < Compras::Model; end
+  class ReserveFund < Compras::Model; end
+  class RevenueAccounting < Compras::Model; end
   class RevenueNature < Compras::Model; end
+  class Subfunction < Compras::Model; end
 
   def change
     [

@@ -1,12 +1,6 @@
 class CapabilityAllocationDetail < Compras::Model
-  attr_accessible :description
-
-  has_many :capability_destination_details
-
-  orderize :description
+  orderize :id
   filterize
-
-  validates :description, :presence => true, :uniqueness => true
 
   def to_s
     description

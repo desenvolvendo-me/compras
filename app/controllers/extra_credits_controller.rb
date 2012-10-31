@@ -1,2 +1,0 @@
-class ExtraCreditsController < CrudController
-end
