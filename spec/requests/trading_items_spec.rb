@@ -2,11 +2,6 @@
 require 'spec_helper'
 
 feature TradingItem do
-
-  let :current_user do
-    User.make!(:sobrinho_as_admin_and_employee)
-  end
-
   background do
     sign_in
   end
