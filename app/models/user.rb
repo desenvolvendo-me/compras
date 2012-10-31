@@ -43,4 +43,8 @@ class User < Compras::Model
   def email_required?
     creditor?
   end
+
+  def send_on_create_confirmation_instructions
+    super unless creditor?
+  end
 end
