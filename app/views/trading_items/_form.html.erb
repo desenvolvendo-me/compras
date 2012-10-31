@@ -1,4 +1,4 @@
-<div class="yui3-g item nested">
+<div class="item nested">
   <%= f.input :id, :as => 'hidden' %>
   <%= f.input :administrative_process_budget_allocation_item_id, :as => 'hidden' %>
   <%= f.input :_destroy, :as => 'hidden', :input_html => { :class => 'destroy' } %>
@@ -38,9 +38,5 @@
                                                            merge(f.object.decorator.readonly_reduction_value) %>
     </div>
   </div>
-  <div class="yui3-g">
-    <div class="yui3-u-1">
-      <%= f.input :detailed_description %>
-    </div>
-  </div>
+  <%= f.input :detailed_description %>
 </div>
