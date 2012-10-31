@@ -10,6 +10,4 @@ describe GovernmentProgram do
   end
 
   it { should belong_to :descriptor }
-
-  it { should have_many(:budget_allocations).dependent(:restrict) }
 end

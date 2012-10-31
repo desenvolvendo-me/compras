@@ -10,7 +10,6 @@ class Descriptor < Compras::Model
   has_many :expense_natures, :dependent => :restrict
   has_many :extra_credits, :dependent => :restrict
   has_many :government_actions, :dependent => :restrict
-  has_many :government_programs, :dependent => :restrict
   has_many :management_units, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
