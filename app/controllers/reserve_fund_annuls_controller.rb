@@ -1,2 +1,0 @@
-class ReserveFundAnnulsController < ResourceAnnulsController
-end

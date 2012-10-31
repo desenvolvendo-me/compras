@@ -209,9 +209,6 @@ pt-BR:
     reserve_funds:
       <<: *female
 
-    reserve_fund_annuls:
-      <<: *female
-
     revenue_natures:
       <<: *female
 

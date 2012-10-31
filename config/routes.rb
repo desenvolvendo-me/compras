@@ -769,15 +769,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :reserve_funds, :except => [:destroy, :update] do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :reserve_fund_annuls, :except => [:destroy, :update]
-
+  get 'reserve_funds/modal', :as => :modal_reserve_funds
   get 'revenue_rubrics/modal', :as => :modal_revenue_rubrics
   get 'revenue_sources/modal', :as => :modal_revenue_sources
   get 'revenue_subcategories/modal', :as => :modal_revenue_subcategories
