@@ -14,14 +14,3 @@
     <%= render 'partners/form', :f => p %>
   <% end %>
 <% end %>
-
-<script>
-  $("#partners-template").nestedForm({
-    add: '.add-partner',
-    remove: '.remove-partner',
-    target: '#partners',
-    uuid: 'uuid_partner',
-    fieldsWrapper: '.partner',
-    appendItem: false
-  });
-</script>

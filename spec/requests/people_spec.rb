@@ -355,4 +355,20 @@ feature "People" do
       expect(page).to_not have_content 'deve haver ao menos um sócio'
     end
   end
+
+  scenario "should show only one partner after select 2 times type company at personable" do
+    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+
+    click_link 'Criar Pessoa'
+
+    choose "Pessoa Jurídica"
+    choose "Pessoa Física"
+    choose "Pessoa Jurídica"
+
+    within_tab 'Sócios' do
+      click_button 'Adicionar Sócio'
+
+      expect(page).to have_css('.partner', :count => 1)
+    end
+  end
 end

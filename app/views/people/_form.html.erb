@@ -14,12 +14,28 @@
 <% end %>
 
 <script>
+  var partnerNestedForm = {
+    set: function(){
+      $("#partners-template").nestedForm({
+        add: '.add-partner',
+        remove: '.remove-partner',
+        target: '#partners',
+        uuid: 'uuid_partner',
+        fieldsWrapper: '.partner',
+        appendItem: false
+      });
+
+      this.set = function() {}
+    }
+  }
+
   $("#person_personable_type_individual").click(function () {
     $("#personable").html($("#individual-template").mustache());
   });
 
   $("#person_personable_type_company").click(function () {
     $("#personable").html($("#company-template").mustache());
+    partnerNestedForm.set();
   });
 
   $("input.personable_type[checked]").click();
