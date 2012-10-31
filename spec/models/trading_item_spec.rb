@@ -2,10 +2,13 @@ require 'model_helper'
 require 'app/models/administrative_process_budget_allocation_item'
 require 'app/models/trading'
 require 'app/models/trading_item'
+require 'app/models/trading_item_bid'
 
 describe TradingItem do
   it { should belong_to :trading }
   it { should belong_to :administrative_process_budget_allocation_item }
+
+  it { should have_many(:trading_item_bids).dependent(:destroy) }
 
   it "has a default value of 0 to minimum_reduction_percent" do
     expect(TradingItem.new.minimum_reduction_percent).to eq 0.0
@@ -17,9 +20,11 @@ describe TradingItem do
 
   context "delegates" do
     let (:administrative_process_item) { double(:process_item) } 
+    let (:trading) { double(:trading) }
 
     before do
       subject.stub(:administrative_process_budget_allocation_item => administrative_process_item)
+      subject.stub(:trading => trading)
     end
 
     describe "#material" do
@@ -61,6 +66,13 @@ describe TradingItem do
       it "delegates to administrative_process_budget_allocation_item" do
         administrative_process_item.should_receive(:unit_price)
         subject.unit_price
+      end
+    end
+
+    describe "#licitation_process_id" do
+      it "delegates to trading" do
+        trading.should_receive(:licitation_process_id)
+        subject.licitation_process_id
       end
     end
   end

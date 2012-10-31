@@ -253,7 +253,9 @@ feature "Tradings" do
   end
 
   scenario "adding bidders to the trading" do
-    Trading.make!(:pregao_presencial)
+    Trading.make!(:pregao_presencial, {
+      :licitation_process => LicitationProcess.make!(:pregao_presencial, :bidders => [])
+    })
     Creditor.make!(:sobrinho)
 
     navigate "Pregão Presencial > Pregões Presencial"

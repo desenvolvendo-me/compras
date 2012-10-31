@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      trading_item_bid:
+        one: "Oferta"
+        other: "Ofertas"
+
+    attributes:
+      trading_item_bid:
+        round: "Número da rodada"
+        trading_item: "Item do pregão"
+        bidder: "Licitante"
+        amount: "Valor da proposta"

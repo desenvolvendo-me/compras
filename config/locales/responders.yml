@@ -235,3 +235,6 @@ pt-BR:
 
     tce_specification_capabilities:
       <<: *female
+
+    trading_item_bids:
+      <<: *female

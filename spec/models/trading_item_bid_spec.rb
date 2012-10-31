@@ -1,0 +1,55 @@
+#encoding: utf-8
+require 'model_helper'
+require 'app/models/trading_item_bid'
+
+describe TradingItemBid do
+
+  it { should belong_to :trading_item }
+  it { should belong_to :bidder }
+
+  it { should validate_presence_of :round }
+  it { should validate_presence_of :trading_item }
+  it { should validate_presence_of :bidder }
+  it { should validate_presence_of :amount }
+
+  context "delegates" do
+    let (:trading_item) { double(:trading_item) } 
+
+    before do
+      subject.stub(:trading_item => trading_item)
+    end
+
+    describe "#trading" do
+      it "delegates to TradingItem#trading" do
+        trading_item.should_receive(:trading)
+        subject.trading
+      end
+    end
+
+    describe "#licitation_process_id" do
+      it "delegates to TradingItem#licitation_process_id" do
+        trading_item.should_receive(:licitation_process_id)
+        subject.licitation_process_id
+      end
+    end
+  end
+
+  describe "validations" do
+    it "validates if amount is greater than zero" do
+      subject.amount = 0
+      subject.valid?
+
+      expect(subject.errors[:amount]).to include "deve ser maior que 0"
+    end
+
+    it "validates if bidder is part of the trading" do
+      bidder = double(:bidder, :licitation_process_id => -1)
+      subject.stub(:bidder => bidder,
+                   :licitation_process_id => 0)
+
+      subject.valid?
+
+      expect(subject.errors[:bidder]).to include "deve fazer parte do pregão presencial"
+    end
+  end
+end

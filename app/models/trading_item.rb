@@ -6,6 +6,8 @@ class TradingItem < Compras::Model
   belongs_to :trading
   belongs_to :administrative_process_budget_allocation_item
 
+  has_many :trading_item_bids, :dependent => :destroy
+
   validates :minimum_reduction_percent, :numericality => { :equal_to  => 0.0 },
             :if => :minimum_reduction_value?
   validates :minimum_reduction_value, :numericality => { :equal_to  => 0.0 },
@@ -16,6 +18,7 @@ class TradingItem < Compras::Model
            :quantity, :unit_price, :to_s,
            :to => :administrative_process_budget_allocation_item,
            :allow_nil => true
+  delegate :licitation_process_id, :to => :trading
 
   orderize :order
 end

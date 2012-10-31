@@ -894,6 +894,14 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :trading_items do
+    collection do
+      get :modal
+    end
+  end
+
+  resources :trading_item_bids
+
   resources :users do
     collection do
       get :filter

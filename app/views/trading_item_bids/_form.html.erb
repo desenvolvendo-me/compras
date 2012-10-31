@@ -1,0 +1,17 @@
+<div class="yui3-g">
+  <div class="yui3-u-3-8">
+    <%= f.input :round %>
+  </div>
+
+  <div class="yui3-u-5-8">
+    <%= f.input :trading_item, :disabled => true %>
+  </div>
+</div>
+
+<%= f.input :bidder, :modal_url => modal_bidders_path(:licitation_process_id => resource.licitation_process_id) %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :amount %>
+  </div>
+</div>
