@@ -9,7 +9,7 @@ feature TradingItem do
   scenario "listing trading items" do
     Trading.make!(:pregao_presencial)
 
-    navigate "Pregão Presencial > Pregões Presencial"
+    navigate "Pregão Presencial > Pregões Presenciais"
 
     click_link "1/2012"
 

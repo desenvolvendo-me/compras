@@ -3,7 +3,7 @@ pt-BR:
     models:
       trading:
         one: "Pregão Presencial"
-        other: "Pregões Presencial"
+        other: "Pregões Presenciais"
 
     attributes:
       trading:
