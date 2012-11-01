@@ -417,13 +417,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :expense_kinds do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   get "functions/modal", :as => :modal_functions
 
   get "government_actions/modal", :as => :modal_government_actions

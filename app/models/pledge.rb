@@ -8,7 +8,6 @@ class Pledge < Compras::Model
   belongs_to :management_unit
   belongs_to :budget_allocation
   belongs_to :pledge_category
-  belongs_to :expense_kind
   belongs_to :pledge_historic
   belongs_to :contract
   belongs_to :founded_debt_contract, :class_name => 'Contract'

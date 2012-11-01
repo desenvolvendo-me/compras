@@ -126,6 +126,3 @@ menu:
       - execution:
         - reserve_fund:
           - reserve_allocation_types
-
-        - pledge:
-          - expense_kinds
