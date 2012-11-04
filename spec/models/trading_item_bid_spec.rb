@@ -13,7 +13,7 @@ describe TradingItemBid do
   it { should validate_presence_of :amount }
 
   context "delegates" do
-    let (:trading_item) { double(:trading_item) } 
+    let(:trading_item) { double(:trading_item) }
 
     before do
       subject.stub(:trading_item => trading_item)

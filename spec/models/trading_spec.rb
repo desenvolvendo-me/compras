@@ -37,7 +37,7 @@ describe Trading do
     end
 
     context "licitation commission validations" do
-      let (:licitation_commission) do
+      let(:licitation_commission) do
         double(:expired? => false,
                :trading? => true,
                :exonerated? => false,

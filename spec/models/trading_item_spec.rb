@@ -26,7 +26,7 @@ describe TradingItem do
   end
 
   context "delegates" do
-    let (:administrative_process_item) { double(:process_item) } 
+    let(:administrative_process_item) { double(:process_item) }
 
     before do
       subject.stub(:administrative_process_budget_allocation_item => administrative_process_item)
