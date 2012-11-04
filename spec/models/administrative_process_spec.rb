@@ -27,6 +27,9 @@ describe AdministrativeProcess do
   it { should have_one(:administrative_process_liberation).dependent(:destroy) }
   it { should have_many(:administrative_process_budget_allocations).dependent(:destroy) }
   it { should have_many(:items).through(:administrative_process_budget_allocations) }
+
+  it { should delegate(:modality_type).to(:licitation_modality).allowing_nil(true) }
+
   it { should validate_duplication_of(:budget_allocation_id).on(:administrative_process_budget_allocations) }
 
   it { should validate_presence_of :year }

@@ -30,6 +30,7 @@ class AdministrativeProcess < Compras::Model
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
+  delegate :modality_type, :to => :licitation_modality, :allow_nil => true
 
   validates :year, :date, :presence => true
   validates :object_type, :presence => true
@@ -51,9 +52,7 @@ class AdministrativeProcess < Compras::Model
     "#{process}/#{year}"
   end
 
-  def modality
-    licitation_modality.try(:modality_type)
-  end
+  alias_method :modality, :modality_type
 
   def modality_humanize
     licitation_modality.to_s
