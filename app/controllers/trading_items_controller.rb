@@ -1,4 +1,7 @@
 class TradingItemsController < CrudController
+
+  protected
+
   def begin_of_association_chain
     if params[:trading_id]
       @parent = Trading.find(params[:trading_id])

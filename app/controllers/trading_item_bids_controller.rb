@@ -10,6 +10,8 @@ class TradingItemBidsController < CrudController
     create! { trading_trading_items_path(resource.trading) }
   end
 
+  protected
+
   def begin_of_association_chain
     if params[:trading_item_id]
       @parent = TradingItem.find(params[:trading_item_id])
