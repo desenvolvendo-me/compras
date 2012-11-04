@@ -46,7 +46,7 @@ class LicitationProcess < Compras::Model
 
   accepts_nested_attributes_for :administrative_process, :allow_destroy => true
 
-  delegate :modality, :modality_humanize, :object_type_humanize, :presence_trading?,
+  delegate :modality, :licitation_modality, :object_type_humanize, :presence_trading?,
            :released?, :judgment_form, :description, :responsible,
            :item, :licitation_process, :date, :object_type, :judgment_form_kind,
            :summarized_object, :to => :administrative_process,

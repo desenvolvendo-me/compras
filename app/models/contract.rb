@@ -56,7 +56,7 @@ class Contract < Compras::Model
   end
 
   def modality_humanize
-    licitation_process.try(:administrative_process_modality_humanize) || direct_purchase.try(:modality_humanize)
+    licitation_process.try(:administrative_process_licitation_modality) || direct_purchase.try(:modality_humanize)
   end
 
   def self.next_sequential(year)

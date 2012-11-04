@@ -7,7 +7,7 @@ builder resource, json do
   json.modality_humanize                        resource.decorator.modality_humanize
   json.advice_number                            resource.decorator.advice_number
   json.process_date                             resource.process_date
-  json.administrative_process_modality_humanize resource.administrative_process_modality_humanize
+  json.administrative_process_modality_humanize resource.administrative_process_licitation_modality.to_s
   json.administrative_process_description       resource.administrative_process_description
   json.administrative_process                   resource.administrative_process.to_s
   json.summarized_object                        resource.administrative_process_summarized_object

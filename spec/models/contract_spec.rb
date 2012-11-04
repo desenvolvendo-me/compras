@@ -133,8 +133,10 @@ describe Contract do
 
   describe '#modality_humanize' do
     context 'given a licitation process' do
+      let(:modality) { double(:modality) }
+
       let :licitation_process do
-        double('LicitationProcess', :administrative_process_modality_humanize => 'xpto')
+        double('LicitationProcess', :administrative_process_licitation_modality => modality)
       end
 
       before do
@@ -142,7 +144,7 @@ describe Contract do
       end
 
       it 'should return the licitation process modality' do
-        expect(subject.modality_humanize).to eq 'xpto'
+        expect(subject.modality_humanize).to eq modality
       end
     end
 

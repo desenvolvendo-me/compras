@@ -55,10 +55,6 @@ class AdministrativeProcess < Compras::Model
 
   alias_method :modality, :modality_type
 
-  def modality_humanize
-    licitation_modality.to_s
-  end
-
   def total_allocations_value
     administrative_process_budget_allocations.sum(:value)
   end
