@@ -29,6 +29,7 @@ describe AdministrativeProcess do
   it { should have_many(:items).through(:administrative_process_budget_allocations) }
 
   it { should delegate(:modality_type).to(:licitation_modality).allowing_nil(true) }
+  it { should delegate(:presence_trading?).to(:licitation_modality).allowing_nil(true) }
 
   it { should validate_duplication_of(:budget_allocation_id).on(:administrative_process_budget_allocations) }
 
@@ -192,38 +193,6 @@ describe AdministrativeProcess do
 
       subject.valid?
       expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.is_annulled'))
-    end
-  end
-
-  context "modality-related methods" do 
-    let(:licitation_modality) { double(:modality) }
-
-    before do
-      subject.stub(:licitation_modality => licitation_modality)
-    end
-
-    describe "#modality" do
-      it "delegates the modality_type to the licitation modality " do
-        licitation_modality.should_receive(:modality_type)
-
-        subject.modality
-      end
-    end
-
-    describe "#modality_humanize" do
-      it "delegates to LicitationModality#to_s" do
-        licitation_modality.should_receive(:to_s)
-
-        subject.modality_humanize
-      end
-    end
-
-    describe "#presence_trading?" do
-      it "delegates to LicitationModality#presence_trading?" do
-        licitation_modality.should_receive(:presence_trading?)
-
-        subject.presence_trading?
-      end
     end
   end
 end

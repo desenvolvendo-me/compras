@@ -30,7 +30,8 @@ class AdministrativeProcess < Compras::Model
            :to => :judgment_form, :allow_nil => true, :prefix => true
 
   delegate :type_of_calculation, :to => :licitation_process, :allow_nil => true
-  delegate :modality_type, :to => :licitation_modality, :allow_nil => true
+  delegate :modality_type, :presence_trading?,
+           :to => :licitation_modality, :allow_nil => true
 
   validates :year, :date, :presence => true
   validates :object_type, :presence => true
@@ -76,10 +77,6 @@ class AdministrativeProcess < Compras::Model
 
   def is_available_for_licitation_process_classification?
     AdministrativeProcessModality.available_for_licitation_process_classification?(modality)
-  end
-
-  def presence_trading?
-    licitation_modality.presence_trading?
   end
 
   private
