@@ -36,10 +36,9 @@ describe TradingItemBid do
 
   describe "validations" do
     it "validates if amount is greater than zero" do
-      subject.amount = 0
-      subject.valid?
-
-      expect(subject.errors[:amount]).to include "deve ser maior que 0"
+      should_not allow_value(0).for(:amount)
+      should_not allow_value(-1).for(:amount)
+      should allow_value(1).for(:amount)
     end
 
     it "validates if bidder is part of the trading" do
