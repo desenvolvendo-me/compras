@@ -29,13 +29,13 @@
 
   <div class="yui3-g">
     <div class="yui3-u-1-2">
-      <%= f.input :minimum_reduction_percent, :input_html => { :class => 'minimum_reduction_percent' }.
-                                                             merge(f.object.decorator.readonly_reduction_percent) %>
+      <%= f.input :minimum_reduction_percent, :readonly => f.object.minimum_reduction_value?,
+                                              :input_html => { :class => 'minimum_reduction_percent' }%>
     </div>
 
     <div class="yui3-u-1-2">
-      <%= f.input :minimum_reduction_value, :input_html => { :class => 'minimum_reduction_value' }.
-                                                           merge(f.object.decorator.readonly_reduction_value) %>
+      <%= f.input :minimum_reduction_value, :readonly => f.object.minimum_reduction_percent?,
+                                            :input_html => { :class => 'minimum_reduction_value' } %>
     </div>
   </div>
 
