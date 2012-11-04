@@ -1,7 +1,7 @@
 class TradingItemBidsController < CrudController
   def new
     object = build_resource
-    object.trading_item = TradingItem.find(params[:trading_item_id])
+    object.trading_item = @parent
 
     super
   end
