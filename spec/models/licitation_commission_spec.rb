@@ -1,7 +1,5 @@
 # encoding: utf-8
 require 'model_helper'
-require 'enumerate_it'
-require 'app/enumerations/commission_type'
 require 'app/models/licitation_commission'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission_member'
