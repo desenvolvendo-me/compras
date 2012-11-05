@@ -1,6 +1,5 @@
 require 'model_helper'
 require 'app/models/bank_account_capability'
-require 'app/enumerations/status'
 
 describe BankAccountCapability do
   it { should belong_to :bank_account }
