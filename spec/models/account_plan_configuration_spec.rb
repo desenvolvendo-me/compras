@@ -2,7 +2,6 @@
 require 'model_helper'
 require 'app/models/account_plan_level'
 require 'app/models/account_plan_configuration'
-require 'app/enumerations/account_plan_separator'
 
 describe AccountPlanConfiguration do
   it { should belong_to :state }
