@@ -16,7 +16,7 @@ class TradingItemBid < Compras::Model
 
   def bidder_is_part_of_trading
     return unless bidder.present?
-    
+
     if bidder.licitation_process_id != licitation_process_id
       errors.add(:bidder, :should_be_part_of_trading)
     end
