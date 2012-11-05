@@ -36,4 +36,45 @@ feature TradingItem do
 
     expect(page).to_not have_link 'Apagar'
   end
+
+  scenario 'go back link on form_button' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Pregão Presencial > Pregões Presencial'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Antivirus'
+
+    click_link 'Voltar'
+
+    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
+    expect(page).to have_link "Antivirus"
+  end
+
+  scenario 'edit and existing item' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Pregão Presencial > Pregões Presencial'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Antivirus'
+
+    fill_in 'Descrição detalhada', :with => 'Descrição do antivírus'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Item do Pregão Presencial editado com sucesso.'
+
+    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
+
+    click_link 'Antivirus'
+
+    expect(page).to have_field 'Descrição detalhada', :with => 'Descrição do antivírus'
+  end
 end
