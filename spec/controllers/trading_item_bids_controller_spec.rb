@@ -16,4 +16,15 @@ describe TradingItemBidsController do
       expect(assigns(:trading_item_bid).trading_item).to eq trading_item
     end
   end
+
+  describe 'POST #create' do
+    it 'assigns with_proposal as default status' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+
+      post :create, :trading_id => trading.id, :trading_item_id => trading_item.id
+
+      expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITH_PROPOSAL
+    end
+  end
 end

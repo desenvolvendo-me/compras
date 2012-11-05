@@ -1,0 +1,6 @@
+pt-BR:
+  enumerations:
+    trading_item_bid_status:
+      disqualified: "Desqualificado"
+      without_proposal: "Sem proposta"
+      with_proposal: "Com proposta"

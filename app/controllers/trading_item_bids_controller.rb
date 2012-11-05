@@ -12,6 +12,12 @@ class TradingItemBidsController < CrudController
 
   protected
 
+  def create_resource(object)
+    object.status = TradingItemBidStatus::WITH_PROPOSAL
+
+    super
+  end
+
   def begin_of_association_chain
     if params[:trading_item_id]
       @parent = TradingItem.find(params[:trading_item_id])

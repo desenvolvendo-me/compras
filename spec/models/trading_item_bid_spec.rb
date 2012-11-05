@@ -51,4 +51,11 @@ describe TradingItemBid do
       expect(subject.errors[:bidder]).to include "deve fazer parte do pregão presencial"
     end
   end
+
+  describe '#update_status' do
+    it 'should updates the status' do
+      subject.should_receive(:update_column).with(:status, TradingItemBidStatus::WITHOUT_PROPOSAL)
+      subject.update_status(TradingItemBidStatus::WITHOUT_PROPOSAL)
+    end
+  end
 end
