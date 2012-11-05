@@ -1,4 +1,4 @@
 <div class="buttons">
   <%= f.button :submit %>
-  <%= f.button :back, :href => trading_trading_items_path(@parent) %>
+  <%= f.button :back, :href => trading_items_path(:trading_id => @parent.id) %>
 </div>

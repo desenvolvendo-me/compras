@@ -14,7 +14,7 @@ describe TradingItemsController do
 
       put :update, :id => item.id, :trading_item => item.attributes
 
-      expect(response).to redirect_to(trading_trading_items_path(trading))
+      expect(response).to redirect_to(trading_items_path(:trading_id => trading.id))
     end
   end
 end

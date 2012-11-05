@@ -2,7 +2,7 @@ class TradingItemsController < CrudController
   actions :all, :except => [:new, :create, :destroy]
 
   def update
-    update!{ trading_trading_items_path(@parent) }
+    update!{ trading_items_path(:trading_id => @parent.id) }
   end
 
   protected

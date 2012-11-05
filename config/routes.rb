@@ -873,7 +873,6 @@ Compras::Application.routes.draw do
   end
 
   resources :tradings do
-    resources :trading_items
     collection do
       get :filter
     end

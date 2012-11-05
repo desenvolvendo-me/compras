@@ -3,7 +3,7 @@
     <% collection.each do |resource| %>
       <tr id="<%= dom_id resource %>">
         <td>
-          <%= link_to resource, edit_resource_path(resource) %>
+          <%= link_to resource, edit_trading_item_path(resource, :trading_id => @parent.id) %>
         </td>
         <td class="right">
           <%= link_to "Fazer oferta", new_trading_item_bid_path(:trading_item_id => resource.id), 
