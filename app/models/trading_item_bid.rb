@@ -1,5 +1,6 @@
 class TradingItemBid < Compras::Model
-  attr_accessible :amount, :round, :bidder_id, :trading_item_id
+  attr_accessible :amount, :round, :bidder_id, :trading_item_id,
+                  :disqualification_reason
 
   belongs_to :trading_item
   belongs_to :bidder
