@@ -879,7 +879,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :trading_items do
+  resources :trading_items, :except => [:new, :create, :destroy] do
     collection do
       get :modal
     end

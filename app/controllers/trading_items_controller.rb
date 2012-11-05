@@ -1,4 +1,5 @@
 class TradingItemsController < CrudController
+  actions :all, :except => [:new, :create, :destroy]
 
   protected
 

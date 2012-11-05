@@ -22,4 +22,18 @@ feature TradingItem do
 
     expect(page).to have_content 'Editar 1/2012'
   end
+
+  scenario 'should not have Apagar button' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Pregão Presencial > Pregões Presencial'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Antivirus'
+
+    expect(page).to_not have_link 'Apagar'
+  end
 end
