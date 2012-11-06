@@ -389,20 +389,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :extra_credits do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :extra_credit_natures do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :employees do
     collection do
       get :filter

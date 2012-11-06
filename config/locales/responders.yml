@@ -108,9 +108,6 @@ pt-BR:
     expense_natures:
       <<: *female
 
-    extra_credit_natures:
-      <<: *female
-
     fiscal_execution_movimentations:
       <<: *female
 

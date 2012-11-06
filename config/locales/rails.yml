@@ -215,7 +215,6 @@ pt-BR:
       must_be_greater_or_equal_to_impugnment_date: "deve ser maior ou igual a data da impugnação"
       must_not_be_less_than_last_credit_date: "não pode ser menor que a data do último crédito suplementar (%{restriction})"
       must_be_greater_or_equal_to_publication_date: "deve ser maior ou igual a data de publicação do ato administrativo (%{restriction})"
-      must_be_uniqueness_on_extra_credit: "já utilizado em outro crédito suplementar"
       should_not_exceed_reserved_value: "está acima do valor disponível para a dotação selecionada (R$ %{value})"
       must_not_be_greater_than_budget_allocation_real_amount_with_reserved_values: "não pode ser maior do que o saldo da dotação, contando com os valores reservados (R$ %{value})"
       cannot_be_greater_than_licitation_exemption: "não pode ser superior à dispensa de licitação"

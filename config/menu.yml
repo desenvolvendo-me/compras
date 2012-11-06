@@ -107,10 +107,6 @@ menu:
           - budget_structure_configurations
           - budget_structures
 
-        - extra_credit:
-          - extra_credit_natures
-          - extra_credits
-
         - budget_allocation:
           - expense_natures
           - budget_allocation_types
