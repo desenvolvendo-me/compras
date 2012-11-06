@@ -7,8 +7,9 @@ class TradingItemBid < Compras::Model
   belongs_to :trading_item
   belongs_to :bidder
 
-  delegate :trading, :licitation_process_id, :to => :trading_item,
-           :allow_nil => true
+  has_one :trading, :through => :trading_item
+
+  delegate :licitation_process_id, :to => :trading_item, :allow_nil => true
 
   validates :round, :trading_item, :bidder, :amount, :presence => true
   validates :amount, :numericality => { :greater_than => 0 }

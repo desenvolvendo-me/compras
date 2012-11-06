@@ -7,6 +7,8 @@ describe TradingItemBid do
   it { should belong_to :trading_item }
   it { should belong_to :bidder }
 
+  it { should have_one(:trading).through(:trading_item) }
+
   it { should validate_presence_of :round }
   it { should validate_presence_of :trading_item }
   it { should validate_presence_of :bidder }
@@ -17,13 +19,6 @@ describe TradingItemBid do
 
     before do
       subject.stub(:trading_item => trading_item)
-    end
-
-    describe "#trading" do
-      it "delegates to TradingItem#trading" do
-        trading_item.should_receive(:trading)
-        subject.trading
-      end
     end
 
     describe "#licitation_process_id" do
