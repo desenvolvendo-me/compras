@@ -40,7 +40,7 @@ module Shoulda
         end
 
         def description
-          "attribute #{attribute_normalized} should be delegated to #{@relationship}"
+          "attribute #{attribute_normalized} be delegated to #{@relationship}"
         end
 
         private
