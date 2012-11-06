@@ -24,4 +24,8 @@ class PrefecturesController < CrudController
   def resource
     get_resource_ivar || set_resource_ivar(end_of_association_chain.first)
   end
+
+  def authorize_resource!
+    authorize! action_name, controller_name.singularize
+  end
 end
