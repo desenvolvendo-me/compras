@@ -12,6 +12,7 @@ class Trading < Compras::Model
                                :foreign_key => "licitating_unit_id"
 
   has_many :trading_items, :dependent => :destroy
+  has_many :bidders, :through => :licitation_process
 
   accepts_nested_attributes_for :trading_items
 

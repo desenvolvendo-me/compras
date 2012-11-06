@@ -15,6 +15,7 @@ describe Trading do
   it { should belong_to :licitating_unit }
 
   it { should have_many(:trading_items).dependent(:destroy) }
+  it { should have_many(:bidders).through(:licitation_process) }
 
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :year }
