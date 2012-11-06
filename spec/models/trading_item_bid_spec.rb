@@ -14,20 +14,12 @@ describe TradingItemBid do
   it { should validate_presence_of :bidder }
   it { should validate_presence_of :amount }
 
-  context "delegates" do
-    let(:trading_item) { double(:trading_item) }
-
-    before do
-      subject.stub(:trading_item => trading_item)
-    end
-
-    describe "#licitation_process_id" do
-      it "delegates to TradingItem#licitation_process_id" do
-        trading_item.should_receive(:licitation_process_id)
-        subject.licitation_process_id
-      end
-    end
-  end
+  it { should delegate(:licitation_process_id).to(:trading_item) }
+  it { should delegate(:minimum_reduction_percent).to(:trading_item) }
+  it { should delegate(:minimum_reduction_percent?).to(:trading_item) }
+  it { should delegate(:minimum_reduction_value).to(:trading_item) }
+  it { should delegate(:minimum_reduction_value?).to(:trading_item) }
+  it { should delegate(:last_proposal_value).to(:trading_item).prefix(true) }
 
   describe "validations" do
     it "validates if amount is greater than zero" do
@@ -44,6 +36,78 @@ describe TradingItemBid do
       subject.valid?
 
       expect(subject.errors[:bidder]).to include "deve fazer parte do pregão presencial"
+    end
+
+    it 'validates if amount is greather than minimum reduction value' do
+      subject.stub(:minimum_reduction_value).and_return(2.3)
+      subject.stub(:minimum_reduction_value?).and_return(true)
+      subject.stub(:trading_item_last_proposal_value).and_return(10.0)
+
+      subject.amount = 11.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to include 'deve ser menor ou igual (7,70)'
+    end
+
+    it 'does not validate if amount is greather than minimum reduction value when not minimum reduction value' do
+      subject.stub(:minimum_reduction_value).and_return(2.3)
+      subject.stub(:minimum_reduction_value?).and_return(false)
+      subject.stub(:trading_item_last_proposal_value).and_return(10.0)
+
+      subject.amount = 11.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to eq []
+    end
+
+    it 'does not validate if amount is greather than minimum reduction value when has no one proposal' do
+      subject.stub(:minimum_reduction_value).and_return(2.3)
+      subject.stub(:minimum_reduction_value?).and_return(true)
+      subject.stub(:trading_item_last_proposal_value).and_return(0.0)
+
+      subject.amount = 11.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to eq []
+    end
+
+    it 'validates if amount is greather than minimum reduction percentage' do
+      subject.stub(:minimum_reduction_percent).and_return(10)
+      subject.stub(:minimum_reduction_percent?).and_return(true)
+      subject.stub(:trading_item_last_proposal_value).and_return(100.0)
+
+      subject.amount = 95.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to include 'deve ser menor ou igual (90,00)'
+    end
+
+    it 'does not validate if amount is greather than minimum reduction percentage when not minimum reduction value' do
+      subject.stub(:minimum_reduction_percent).and_return(10)
+      subject.stub(:minimum_reduction_percent?).and_return(false)
+      subject.stub(:trading_item_last_proposal_value).and_return(100.0)
+
+      subject.amount = 95.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to eq []
+    end
+
+    it 'does not validate if amount is greather than minimum reduction percentage when has no one proposal' do
+      subject.stub(:minimum_reduction_percent).and_return(10)
+      subject.stub(:minimum_reduction_percent?).and_return(false)
+      subject.stub(:trading_item_last_proposal_value).and_return(0.0)
+
+      subject.amount = 95.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to eq []
     end
   end
 

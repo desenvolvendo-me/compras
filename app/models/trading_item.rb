@@ -21,4 +21,14 @@ class TradingItem < Compras::Model
   delegate :licitation_process_id, :to => :trading
 
   orderize :order
+
+  def last_proposal_value
+    last_bid_with_proposal.try(:amount) || 0
+  end
+
+  private
+
+  def last_bid_with_proposal
+    trading_item_bids.with_proposal.last
+  end
 end
