@@ -108,6 +108,5 @@ menu:
           - budget_structures
 
         - budget_allocation:
-          - expense_natures
           - budget_allocation_types
           - budget_allocations
