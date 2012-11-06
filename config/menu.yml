@@ -115,7 +115,3 @@ menu:
           - expense_natures
           - budget_allocation_types
           - budget_allocations
-
-      - execution:
-        - reserve_fund:
-          - reserve_allocation_types

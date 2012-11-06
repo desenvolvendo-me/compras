@@ -755,13 +755,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :reserve_allocation_types do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   get 'reserve_funds/modal', :as => :modal_reserve_funds
   get 'revenue_rubrics/modal', :as => :modal_revenue_rubrics
   get 'revenue_sources/modal', :as => :modal_revenue_sources
