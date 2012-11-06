@@ -65,7 +65,17 @@ feature TradingItem do
 
     click_link 'Antivirus'
 
+    fill_in 'Redução mínima admissível entre os lances em %', :with => '9,90'
+
     fill_in 'Descrição detalhada', :with => 'Descrição do antivírus'
+
+    expect(page).to have_readonly_field 'Redução mínima admissível entre os lances em valor'
+
+    fill_in 'Redução mínima admissível entre os lances em %', :with => '0,00'
+
+    fill_in 'Redução mínima admissível entre os lances em valor', :with => '8,80'
+
+    expect(page).to have_readonly_field 'Redução mínima admissível entre os lances em %'
 
     click_button 'Salvar'
 
@@ -76,5 +86,9 @@ feature TradingItem do
     click_link 'Antivirus'
 
     expect(page).to have_field 'Descrição detalhada', :with => 'Descrição do antivírus'
+
+    expect(page).to have_field 'Redução mínima admissível entre os lances em valor', :with => '8,80'
+
+    expect(page).to have_readonly_field 'Redução mínima admissível entre os lances em %'
   end
 end

@@ -41,3 +41,27 @@
 
   <%= f.input :detailed_description %>
 </div>
+
+<script>
+  $(".minimum_reduction_percent").change(function() {
+    var minimumReductionPercent = $(this).val();
+
+    if (minimumReductionPercent !== "0,00") {
+      $(".minimum_reduction_value").val("0,00")
+                                   .attr("readonly", "readonly");
+    } else {
+      $(".minimum_reduction_value").removeAttr("readonly");
+    }
+  });
+
+  $(".minimum_reduction_value").change(function() {
+    var minimumReductionValue = $(this).val();
+
+    if (minimumReductionValue !== "0,00") {
+      $(".minimum_reduction_percent").val("0,00")
+                                     .attr("readonly", "readonly");
+    } else {
+      $(".minimum_reduction_percent").removeAttr("readonly");
+    }
+  });
+</script>
