@@ -1,6 +1,6 @@
 class TradingItemBid < Compras::Model
   attr_accessible :amount, :round, :bidder_id, :trading_item_id,
-                  :disqualification_reason
+                  :disqualification_reason, :status
 
   has_enumeration_for :status, :with => TradingItemBidStatus
 
