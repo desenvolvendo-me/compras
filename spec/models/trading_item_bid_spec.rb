@@ -47,7 +47,7 @@ describe TradingItemBid do
 
       subject.valid?
 
-      expect(subject.errors[:amount]).to include 'deve ser menor ou igual (7,70)'
+      expect(subject.errors[:amount]).to include 'deve ser menor ou igual a 7,70'
     end
 
     it 'does not validate if amount is greather than minimum reduction value when not minimum reduction value' do
@@ -83,7 +83,7 @@ describe TradingItemBid do
 
       subject.valid?
 
-      expect(subject.errors[:amount]).to include 'deve ser menor ou igual (90,00)'
+      expect(subject.errors[:amount]).to include 'deve ser menor ou igual a 90,00'
     end
 
     it 'does not validate if amount is greather than minimum reduction percentage when not minimum reduction value' do
