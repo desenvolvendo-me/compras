@@ -7,6 +7,7 @@ require 'app/models/licitation_process'
 require 'app/models/creditor'
 require 'app/models/accredited_representative'
 require 'app/models/licitation_process_classification'
+require 'app/models/trading_item_bid'
 
 describe Bidder do
   describe 'default values' do
@@ -23,6 +24,7 @@ describe Bidder do
   it { should have_many(:people).through(:accredited_representatives) }
   it { should have_many(:licitation_process_classifications).dependent(:destroy) }
   it { should have_many(:licitation_process_classifications_by_classifiable).dependent(:destroy) }
+  it { should have_many(:trading_item_bids).dependent(:restrict) }
 
   it { should validate_presence_of :creditor }
 

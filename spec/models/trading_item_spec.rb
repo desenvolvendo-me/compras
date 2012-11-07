@@ -9,6 +9,7 @@ describe TradingItem do
   it { should belong_to :administrative_process_budget_allocation_item }
 
   it { should have_many(:trading_item_bids).dependent(:destroy) }
+  it { should have_many(:bidders).through(:trading) }
 
   it { should delegate(:material).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
   it { should delegate(:material_id).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
@@ -88,6 +89,23 @@ describe TradingItem do
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
       expect(subject.last_proposal_value).to eq 0
+    end
+  end
+
+  describe '#last_bid_round' do
+    it 'should return the last bid round' do
+      first_bid = double(:first_bid, :id => 1, :round => 1)
+      second_bid = double(:second_bid, :id => 2, :round => 1)
+
+      subject.should_receive(:trading_item_bids).and_return([first_bid, second_bid])
+
+      expect(subject.last_bid_round).to eq 1
+    end
+
+    it 'should return zero when there are no rounds' do
+      subject.should_receive(:trading_item_bids).and_return([])
+
+      expect(subject.last_bid_round).to eq 0
     end
   end
 end

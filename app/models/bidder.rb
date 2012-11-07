@@ -18,6 +18,7 @@ class Bidder < Compras::Model
   has_many :people, :through => :accredited_representatives
   has_many :licitation_process_classifications, :dependent => :destroy
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
+  has_many :trading_item_bids, :dependent => :restrict
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true
@@ -72,6 +73,14 @@ class Bidder < Compras::Model
         (classification.bidder.status.not_eq(Status::INACTIVE) |
          classification.bidder.status.eq(nil))
       end
+  end
+
+  def self.with_no_proposal_for_trading_item(trading_item_id)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.status.not_eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.trading_item_id.eq(trading_item_id)
+    }.uniq
   end
 
   def proposals_by_lot(lot)

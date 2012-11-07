@@ -19,7 +19,8 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Criar Oferta"
 
-    fill_in "Número da rodada", :with => "1"
+    expect(page).to have_field "Número da rodada", :with => "1"
+    expect(page).to have_disabled_field "Número da rodada"
 
     within_modal "Licitante" do
       click_button "Pesquisar"
