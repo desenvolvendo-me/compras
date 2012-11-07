@@ -61,6 +61,19 @@ class Bidder < Compras::Model
   orderize :id
   filterize
 
+  def self.destroy_all_classifications
+    classifications.destroy_all
+  end
+
+  def self.classifications
+    LicitationProcessClassification.joins { bidder }.readonly(false).
+      where do |classification|
+        classification.bidder_id.in(pluck(:id)) &
+        (classification.bidder.status.not_eq(Status::INACTIVE) |
+         classification.bidder.status.eq(nil))
+      end
+  end
+
   def proposals_by_lot(lot)
     proposals.select { |proposal| proposal.licitation_process_lot == lot }
   end
@@ -90,19 +103,6 @@ class Bidder < Compras::Model
 
   def to_s
     creditor.to_s
-  end
-
-  def self.destroy_all_classifications
-    classifications.destroy_all
-  end
-
-  def self.classifications
-    LicitationProcessClassification.joins { bidder }.readonly(false).
-      where do |classification|
-        classification.bidder_id.in(pluck(:id)) &
-        (classification.bidder.status.not_eq(Status::INACTIVE) |
-         classification.bidder.status.eq(nil))
-      end
   end
 
   def assign_document_types
