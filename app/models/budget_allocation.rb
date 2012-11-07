@@ -3,7 +3,7 @@ class BudgetAllocation < Compras::Model
   attr_accessible :subfunction_id, :government_program_id, :amount, :personal
   attr_accessible :government_action_id, :foresight, :education, :description
   attr_accessible :expense_nature_id, :capability_id, :goal, :kind
-  attr_accessible :debt_type, :budget_allocation_type_id, :refinancing, :health
+  attr_accessible :debt_type, :refinancing, :health
   attr_accessible :alienation_appeal, :function, :function_id
 
   attr_writer :function, :function_id
@@ -24,7 +24,6 @@ class BudgetAllocation < Compras::Model
   belongs_to :government_action
   belongs_to :expense_nature
   belongs_to :capability
-  belongs_to :budget_allocation_type
 
   has_many :purchase_solicitation_budget_allocations, :dependent => :restrict
   has_many :pledges, :dependent => :restrict
@@ -40,7 +39,7 @@ class BudgetAllocation < Compras::Model
   delegate :code, :budget_structure, :to => :budget_structure, :prefix => true, :allow_nil => true
 
   validates :descriptor, :budget_structure, :subfunction, :goal, :date,
-            :government_program, :government_action, :budget_allocation_type,
+            :government_program, :government_action,
             :expense_nature, :capability, :description, :function, :presence => true
   validates :amount, :presence => true, :if => :divide?
   validates :description, :uniqueness => { :allow_blank => true }

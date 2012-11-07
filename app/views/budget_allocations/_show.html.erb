@@ -106,9 +106,6 @@
           <%= resource_class.human_attribute_name :debt_type %>
         </th>
         <th>
-          <%= resource_class.human_attribute_name :budget_allocation_type %>
-        </th>
-        <th>
           <%= resource_class.human_attribute_name :refinancing %>
         </th>
         <th>
@@ -129,9 +126,6 @@
         </td>
         <td>
           <%= resource.debt_type_humanize %>
-        </td>
-        <td>
-          <%= resource.budget_allocation_type %>
         </td>
         <td>
           <%= I18n.t(resource.refinancing.to_s) %>

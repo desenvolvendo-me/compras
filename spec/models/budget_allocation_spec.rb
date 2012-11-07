@@ -41,7 +41,6 @@ describe BudgetAllocation do
     expect(subject.to_s).to eq '1 - Secretaria de educação'
   end
 
-  it { should validate_presence_of :budget_allocation_type }
   it { should validate_presence_of :budget_structure }
   it { should validate_presence_of :capability }
   it { should validate_presence_of :date }

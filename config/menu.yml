@@ -108,5 +108,4 @@ menu:
           - budget_structures
 
         - budget_allocation:
-          - budget_allocation_types
           - budget_allocations

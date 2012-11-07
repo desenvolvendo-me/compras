@@ -9,7 +9,6 @@ pt-BR:
       budget_allocation:
         alienation_appeal: "Recurso alienação"
         amount: "Valor"
-        budget_allocation_type: "Tipo de dotação"
         budget_structure: "Estrutura orçamentaria"
         capability: "Recurso"
         code: "Código"

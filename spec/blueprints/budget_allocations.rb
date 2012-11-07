@@ -11,7 +11,6 @@ BudgetAllocation.blueprint(:alocacao) do
   description { "Alocação" }
   goal { 'Manutenção da Unidade Administrativa' }
   debt_type { DebtType::NOTHING }
-  budget_allocation_type { BudgetAllocationType.make!(:administrativa) }
   refinancing { true }
   health { false }
   alienation_appeal { false }
@@ -36,7 +35,6 @@ BudgetAllocation.blueprint(:alocacao_extra) do
   description { "Alocação extra" }
   goal { 'Manutenção da Unidade Administrativa' }
   debt_type { DebtType::NOTHING }
-  budget_allocation_type { BudgetAllocationType.make!(:administrativa) }
   refinancing { true }
   health { false }
   alienation_appeal { false }
@@ -60,7 +58,6 @@ BudgetAllocation.blueprint(:conserto) do
   description { "Conserto" }
   goal { 'Manutenção da Unidade Administrativa' }
   debt_type { DebtType::NOTHING }
-  budget_allocation_type { BudgetAllocationType.make!(:administrativa) }
   refinancing { true }
   health { false }
   alienation_appeal { false }
@@ -84,7 +81,6 @@ BudgetAllocation.blueprint(:reparo_2011) do
   description { "Manutenção e Reparo" }
   goal { 'Manutenção da Unidade Administrativa' }
   debt_type { DebtType::NOTHING }
-  budget_allocation_type { BudgetAllocationType.make!(:administrativa) }
   refinancing { true }
   health { false }
   alienation_appeal { false }

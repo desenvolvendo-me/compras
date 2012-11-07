@@ -191,13 +191,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :budget_allocation_types do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :budget_revenues do
     collection do
       get :filter
