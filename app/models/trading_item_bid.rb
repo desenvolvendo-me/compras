@@ -17,7 +17,7 @@ class TradingItemBid < Compras::Model
   delegate :last_proposal_value,
            :to => :trading_item, :allow_nil => true, :prefix => true
 
-  validates :round, :trading_item, :bidder, :amount, :presence => true
+  validates :round, :trading_item, :bidder, :amount, :status, :presence => true
   validates :amount, :numericality => { :greater_than => 0 }
 
   validate  :bidder_is_part_of_trading

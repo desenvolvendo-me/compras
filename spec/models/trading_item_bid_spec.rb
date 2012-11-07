@@ -13,6 +13,7 @@ describe TradingItemBid do
   it { should validate_presence_of :trading_item }
   it { should validate_presence_of :bidder }
   it { should validate_presence_of :amount }
+  it { should validate_presence_of :status }
 
   it { should delegate(:licitation_process_id).to(:trading_item) }
   it { should delegate(:minimum_reduction_percent).to(:trading_item) }
