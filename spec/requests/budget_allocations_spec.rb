@@ -14,7 +14,6 @@ feature "BudgetAllocations" do
     GovernmentAction.make!(:governamental)
     ExpenseNature.make!(:vencimento_e_salarios)
     Capability.make!(:reforma)
-    BudgetAllocationType.make!(:administrativa)
 
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
@@ -239,7 +238,6 @@ feature "BudgetAllocations" do
     GovernmentAction.make!(:nacional)
     ExpenseNature.make!(:compra_de_material)
     Capability.make!(:construcao)
-    BudgetAllocationType.make!(:presidencial)
 
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
