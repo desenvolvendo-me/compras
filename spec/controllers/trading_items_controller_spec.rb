@@ -10,7 +10,7 @@ describe TradingItemsController do
       trading = Trading.make!(:pregao_presencial)
       item = trading.trading_items.first
 
-      subject.should_receive(:get_parent).and_return(trading)
+      subject.should_receive(:parent).and_return(trading)
 
       put :update, :id => item.id, :trading_item => item.attributes
 

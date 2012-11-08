@@ -8,10 +8,10 @@ class TradingItemsController < CrudController
   protected
 
   def begin_of_association_chain
-    @parent = get_parent
+    @parent = parent
   end
 
-  def get_parent
+  def parent
     if params[:id]
       TradingItem.find(params[:id]).trading
     elsif params[:trading_id]
