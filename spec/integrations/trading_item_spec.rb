@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe TradingItem do
+  describe '#bidders_available_for_current_round' do
+    it 'should remove all disclassified bidders and all used for current round' do
       sobrinho = Bidder.make!(:licitante_sobrinho)
       wenderson = Bidder.make!(:licitante)
       nohup = Bidder.make!(:licitante_com_proposta_3)
@@ -28,14 +30,7 @@ describe TradingItem do
         :amount => 90.0,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
-      bid_disqualified = TradingItemBid.create!(
-        :round => 1,
-        :trading_item_id => trading_item.id,
-        :bidder_id => sobrinho.id,
-        :amount => 80.0,
-        :status => TradingItemBidStatus::DISQUALIFIED)
-
-      expect(subject.available_bidders).to eq [nohup]
+      expect(subject.bidders_available_for_current_round).to eq [sobrinho]
     end
   end
 end

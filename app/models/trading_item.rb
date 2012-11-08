@@ -31,9 +31,21 @@ class TradingItem < Compras::Model
     last_bid.try(:round) || 0
   end
 
+  def bidders_available_for_current_round(round_calculator = TradingItemBidRoundCalculator)
+    current_round = round_calculator.new(self).calculate
+
+    bidders_available(current_round.pred) - bidders.at_bid_round(current_round)
   end
 
   private
+
+  def bidders_available(round)
+    if round == 0
+      bidders
+    else
+      bidders.with_proposal_for_trading_item_round(round)
+    end
+  end
 
   def last_bid
     trading_item_bids.last

@@ -22,15 +22,72 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
 
-    within_modal "Licitante" do
-      click_button "Pesquisar"
-      click_record "Gabriel Sobrinho"
-    end
+    expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
+    expect(page).to have_disabled_field "Licitante"
 
     fill_in "Valor da proposta", :with => "100,00"
 
     click_button "Salvar"
 
     expect(page).to have_content "Oferta criada com sucesso"
+  end
+
+  scenario 'Increment bidder and round when all bidder have proposals' do
+    sobrinho = Bidder.make!(:licitante_sobrinho)
+    wenderson = Bidder.make!(:licitante)
+
+    licitation_process = LicitationProcess.make!(:pregao_presencial,
+      :bidders => [sobrinho, wenderson])
+
+    trading = Trading.make!(:pregao_presencial,
+                            :licitation_process => licitation_process)
+
+    navigate "Pregão Presencial > Pregões Presenciais"
+
+    click_link "1/2012"
+
+    click_link "Itens/Ofertas"
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_content "Criar Oferta"
+
+    expect(page).to have_field "Número da rodada", :with => "1"
+    expect(page).to have_disabled_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
+    expect(page).to have_disabled_field "Licitante"
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content "Oferta criada com sucesso"
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_content "Criar Oferta"
+
+    expect(page).to have_field "Número da rodada", :with => "1"
+    expect(page).to have_disabled_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Wenderson Malheiros"
+    expect(page).to have_disabled_field "Licitante"
+
+    fill_in "Valor da proposta", :with => "90,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content "Oferta criada com sucesso"
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_content "Criar Oferta"
+
+    expect(page).to have_field "Número da rodada", :with => "2"
+    expect(page).to have_disabled_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
+    expect(page).to have_disabled_field "Licitante"
   end
 end
