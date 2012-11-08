@@ -32,7 +32,7 @@ class TradingItem < Compras::Model
   end
 
   def available_bidders
-      bidders - bidders.with_no_proposal_for_trading_item(id)
+    bidders - bidders.with_no_proposal_for_trading_item(id)
   end
 
   private
