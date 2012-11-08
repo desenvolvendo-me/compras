@@ -12,10 +12,10 @@ class TradingItemsController < CrudController
   end
 
   def parent
-    if params[:id]
-      TradingItem.find(params[:id]).trading
-    elsif params[:trading_id]
+    if params[:trading_id]
       Trading.find(params[:trading_id])
+    elsif params[:id]
+      TradingItem.find(params[:id]).trading
     end
   end
 end
