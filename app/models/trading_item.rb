@@ -7,7 +7,7 @@ class TradingItem < Compras::Model
   belongs_to :administrative_process_budget_allocation_item
 
   has_many :trading_item_bids, :dependent => :destroy, :order => :id
-  has_many :bidders, :through => :trading
+  has_many :bidders, :through => :trading, :order => :id
 
   validates :minimum_reduction_percent, :numericality => { :equal_to  => 0.0 },
             :if => :minimum_reduction_value?
@@ -31,8 +31,6 @@ class TradingItem < Compras::Model
     last_bid.try(:round) || 0
   end
 
-  def available_bidders
-    bidders - bidders.with_no_proposal_for_trading_item(id)
   end
 
   private

@@ -16,10 +16,10 @@ describe TradingItemBidRoundCalculator do
       subject.trading_item_bids
     end
 
-    it 'delegates available_bidders to trading_item' do
-      trading_item.should_receive(:available_bidders)
+    it 'delegates bidders to trading_item' do
+      trading_item.should_receive(:bidders)
 
-      subject.available_bidders
+      subject.bidders
     end
 
     it 'delegates last_bid_round to trading_item' do
@@ -29,35 +29,29 @@ describe TradingItemBidRoundCalculator do
     end
   end
 
-  context '#calculate' do
-    it 'should return next round when all bidders have bid for the round' do
-      trading_item_bids = double(:trading_item_bids)
+  describe '#calculate' do
+    it 'should return 1 when there are no bids' do
+      trading_item.stub(:last_bid_round).and_return(0)
 
-      trading_item.stub(:last_bid_round).and_return(1)
-      trading_item.stub(:trading_item_bids).and_return(trading_item_bids)
-      trading_item.stub(:available_bidders).and_return(['bidder1', 'bidder2'])
+      expect(subject.calculate).to eq 1
+    end
 
-      trading_item_bids.should_receive(:at_round).with(1).and_return(['item1', 'item2'])
+    it 'should return current_round when not all bidders have proposals' do
+      trading_item.stub(:last_bid_round).and_return(2)
+
+      subject.should_receive(:all_bidders_have_bid_for_last_round?).
+              and_return(false)
 
       expect(subject.calculate).to eq 2
     end
 
-    it 'should return current round when not all bidders have bid for the round' do
-      trading_item_bids = double(:trading_item_bids)
+    it 'should return next_round when all bidders have proposals' do
+      trading_item.stub(:last_bid_round).and_return(2)
 
-      trading_item.stub(:last_bid_round).and_return(1)
-      trading_item.stub(:trading_item_bids).and_return(trading_item_bids)
-      trading_item.stub(:available_bidders).and_return(['bidder1', 'bidder2'])
+      subject.should_receive(:all_bidders_have_bid_for_last_round?).
+              and_return(true)
 
-      trading_item_bids.should_receive(:at_round).with(1).and_return(['item1'])
-
-      expect(subject.calculate).to eq 1
-    end
-
-    it 'should return 1 when there are no bids yet' do
-      trading_item.stub(:last_bid_round).and_return(0)
-
-      expect(subject.calculate).to eq 1
+      expect(subject.calculate).to eq 3
     end
   end
 end

@@ -9,7 +9,7 @@ describe TradingItem do
   it { should belong_to :administrative_process_budget_allocation_item }
 
   it { should have_many(:trading_item_bids).dependent(:destroy) }
-  it { should have_many(:bidders).through(:trading) }
+  it { should have_many(:bidders).through(:trading).order(:id) }
 
   it { should delegate(:material).to(:administrative_process_budget_allocation_item).allowing_nil(true) }
   it { should delegate(:material_id).to(:administrative_process_budget_allocation_item).allowing_nil(true) }

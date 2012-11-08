@@ -83,6 +83,19 @@ class Bidder < Compras::Model
     }.uniq
   end
 
+  def self.with_proposal_for_trading_item_round(round)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.round.eq(round)
+    }
+  end
+
+  def self.at_bid_round(round)
+    joins { trading_item_bids }.
+    where { trading_item_bids.round.eq(round) }
+  end
+
   def proposals_by_lot(lot)
     proposals.select { |proposal| proposal.licitation_process_lot == lot }
   end
