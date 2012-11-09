@@ -17,6 +17,7 @@ describe TradingItemBidsController do
 
       expect(assigns(:trading_item_bid).trading_item).to eq trading_item
       expect(assigns(:trading_item_bid).round).to eq 1
+      expect(assigns(:trading_item_bid).amount).to eq 0
     end
   end
 

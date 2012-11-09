@@ -24,6 +24,7 @@ feature "TradingItemBids" do
 
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
     expect(page).to have_disabled_field "Licitante"
+    expect(page).to have_field 'Valor da proposta', :with => '0,00'
 
     fill_in "Valor da proposta", :with => "100,00"
 

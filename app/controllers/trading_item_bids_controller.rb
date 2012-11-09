@@ -4,6 +4,7 @@ class TradingItemBidsController < CrudController
     object.trading_item = @parent
     object.round  = TradingItemBidRoundCalculator.new(@parent).calculate
     object.bidder = TradingItemBidBidderChooser.new(@parent).choose
+    object.amount = 0
 
     super
   end
