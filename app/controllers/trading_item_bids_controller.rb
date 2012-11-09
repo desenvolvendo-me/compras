@@ -15,7 +15,12 @@ class TradingItemBidsController < CrudController
   protected
 
   def create_resource(object)
-    object.status = TradingItemBidStatus::WITH_PROPOSAL
+    if params[:commit] == 'Sem proposta'
+      object.status = TradingItemBidStatus::WITHOUT_PROPOSAL
+    else
+      object.status = TradingItemBidStatus::WITH_PROPOSAL
+    end
+
     object.round  = TradingItemBidRoundCalculator.new(@parent).calculate
     object.bidder = TradingItemBidBidderChooser.new(@parent).choose
 

@@ -32,5 +32,16 @@ describe TradingItemBidsController do
       expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITH_PROPOSAL
       expect(assigns(:trading_item_bid).round).to eq 1
     end
+
+    it 'create and bid without proposal' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+
+      post :create, :trading_id => trading.id, :trading_item_id => trading_item.id,
+           :commit => 'Sem proposta'
+
+      expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITHOUT_PROPOSAL
+      expect(assigns(:trading_item_bid).round).to eq 1
+    end
   end
 end

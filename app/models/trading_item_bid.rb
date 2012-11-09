@@ -2,7 +2,8 @@ class TradingItemBid < Compras::Model
   attr_accessible :amount, :round, :bidder_id, :trading_item_id,
                   :disqualification_reason, :status
 
-  has_enumeration_for :status, :with => TradingItemBidStatus
+  has_enumeration_for :status, :with => TradingItemBidStatus,
+                      :create_helpers => true
 
   belongs_to :trading_item
   belongs_to :bidder
@@ -17,8 +18,9 @@ class TradingItemBid < Compras::Model
   delegate :last_proposal_value,
            :to => :trading_item, :allow_nil => true, :prefix => true
 
-  validates :round, :trading_item, :bidder, :amount, :status, :presence => true
-  validates :amount, :numericality => { :greater_than => 0 }
+  validates :round, :trading_item, :bidder, :status, :presence => true
+  validates :amount, :presence => true, :if => :with_proposal?
+  validates :amount, :numericality => { :greater_than => 0 }, :if => :with_proposal?
 
   validate  :bidder_is_part_of_trading
   validate  :amount_limit_by_percentage

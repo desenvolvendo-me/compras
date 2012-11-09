@@ -12,7 +12,6 @@ describe TradingItemBid do
   it { should validate_presence_of :round }
   it { should validate_presence_of :trading_item }
   it { should validate_presence_of :bidder }
-  it { should validate_presence_of :amount }
   it { should validate_presence_of :status }
 
   it { should delegate(:licitation_process_id).to(:trading_item) }
@@ -23,10 +22,32 @@ describe TradingItemBid do
   it { should delegate(:last_proposal_value).to(:trading_item).prefix(true) }
 
   describe "validations" do
-    it "validates if amount is greater than zero" do
+    it "validates if amount is greater than zero when status is with_proposal" do
+      subject.stub(:with_proposal?).and_return(true)
+
       should_not allow_value(0).for(:amount)
       should_not allow_value(-1).for(:amount)
       should allow_value(1).for(:amount)
+    end
+
+    it "does not validate if amount is greater than zero when status is not with_proposal" do
+      subject.stub(:with_proposal?).and_return(false)
+
+      should allow_value(0).for(:amount)
+      should allow_value(-1).for(:amount)
+      should allow_value(1).for(:amount)
+    end
+
+    it 'validates presence of amount when status is with_proposal' do
+      subject.stub(:with_proposal?).and_return(true)
+
+      should validate_presence_of :amount
+    end
+
+    it 'does not validate presence of amount when status is not with_proposal' do
+      subject.stub(:with_proposal?).and_return(false)
+
+      should_not validate_presence_of :amount
     end
 
     it "validates if bidder is part of the trading" do

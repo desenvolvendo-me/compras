@@ -116,4 +116,23 @@ feature "TradingItemBids" do
 
     expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
   end
+
+  scenario 'without proposal' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Pregão Presencial > Pregões Presenciais'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_content "Criar Oferta"
+
+    click_button 'Sem proposta'
+
+    expect(page).to have_notice 'Oferta criada com sucesso.'
+    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
+  end
 end
