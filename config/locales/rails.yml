@@ -297,6 +297,7 @@ pt-BR:
       should_not_be_expired: "não pode estar expirada"
       should_not_be_exonerated: "não pode estar exonerada"
       should_be_part_of_trading: "deve fazer parte do pregão presencial"
+      extension_white_list_error: "tipo de arquivo inválido"
 
   activerecord:
     errors:
