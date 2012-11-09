@@ -107,11 +107,11 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'não pode ficar em branco'
+    expect(page).to have_content 'deve ser maior que 0'
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'não pode ficar em branco'
+    expect(page).to have_content 'deve ser maior que 0'
 
     click_link 'Voltar'
 
