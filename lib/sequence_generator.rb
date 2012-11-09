@@ -18,6 +18,11 @@ require 'active_support/concern'
 #     - Default value is :before_create
 #     - Values allowed are all callbacks previously defined by rails
 #
+#   Scope:
+#     Allows the use of a scope, instead of fields to group, on the sequence generator
+#
+#     - overrides the by option
+#     - can be a single scope only
 #
 #  How to use
 #
@@ -37,6 +42,7 @@ module SequenceGenerator
     self.class_attribute :sequencer_field
     self.class_attribute :sequencer_callback
     self.class_attribute :sequence_group
+    self.class_attribute :query_scope
   end
 
   module ClassMethods
@@ -44,6 +50,7 @@ module SequenceGenerator
       self.sequencer_field = field
       self.sequence_group = Array(options[:by])
       self.sequencer_callback = options.fetch(:on, :before_create)
+      self.query_scope = options[:scope]
 
       set_sequence_updater_callback
     end
@@ -71,10 +78,14 @@ module SequenceGenerator
   def sequence_query
     query = self.class
 
-    sequence_group.each do |field|
-      field_value = read_attribute field
+    if query_scope
+      query = query.send(query_scope, self)
+    else
+      sequence_group.each do |field|
+        field_value = read_attribute field
 
-      query = query.where(field => field_value)
+        query = query.where(field => field_value)
+      end
     end
 
     query

@@ -69,4 +69,36 @@ describe SequenceGenerator, 'ActiveRecord' do
       expect(BudgetAllocationWithOptions.new.sequence_group).to eq [:descriptor_id]
     end
   end
+
+  context 'class with scope' do
+    class BudgetAllocationWithScope < Compras::Model
+      self.table_name = 'compras_budget_allocations'
+      scope :same_kind_of, lambda { |ba| where(:kind => ba.kind) }
+      auto_increment :code, :scope => :same_kind_of
+    end
+
+    it 'should store values in variables when call auto_increment' do
+      expect(BudgetAllocationWithScope.new.query_scope).to eq :same_kind_of
+    end
+
+    it 'should return the correct sequential number' do
+      b = BudgetAllocationWithScope.new(:kind => 'little')
+      b.should_receive(:last_sequence).and_return(0)
+      b.save
+
+      expect(b.code).to eq 1
+
+      b = BudgetAllocationWithScope.new(:kind => 'little')
+      b.should_receive(:last_sequence).and_return(1)
+      b.save
+
+      expect(b.code).to eq 2
+
+      b = BudgetAllocationWithScope.new(:kind => 'big')
+      b.should_receive(:last_sequence).and_return(0)
+      b.save
+
+      expect(b.code).to eq 1
+    end
+  end
 end
