@@ -363,13 +363,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :economic_registrations do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
-
   get 'expense_categories/modal', :as => :modal_expense_categories
   get 'expense_groups/modal', :as => :modal_expense_groups
   get 'expense_modalities/modal', :as => :modal_expense_modalities
