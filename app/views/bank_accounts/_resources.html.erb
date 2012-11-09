@@ -23,6 +23,6 @@
     $('.select-status option:selected[value="<%= Status::ACTIVE %>"]').closest(".nested-bank-account-capability").find('.input-date').val(currentDate);
 
     $('select.select-status').val('<%= Status::INACTIVE %>');
-    $('select.select-status[selected="<%= Status::ACTIVE %>"').val('<%= Status::INACTIVE %>');
+    $('select.select-status[selected="<%= Status::ACTIVE %>"]').val('<%= Status::INACTIVE %>');
   });
 </script>

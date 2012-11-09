@@ -76,13 +76,13 @@
 </div>
 
 <script>
-  $('input:radio[name=creditor[creditable_type]]').click(function () {
+  $('input:radio[name="creditor[creditable_type]"]').click(function () {
     $('#creditor_creditable_id').val('');
     $('#creditor_creditable').val('');
 
     var url = "<%= modal_people_path %>",
         label = 'Pessoa física ou jurídica',
-        value = $('[name=creditor[creditable_type]]:checked').val();
+        value = $('[name="creditor[creditable_type]"]:checked').val();
 
     if (value == 'SpecialEntry') {
       url = "<%= modal_special_entries_path %>";
