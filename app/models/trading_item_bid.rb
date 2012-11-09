@@ -23,8 +23,8 @@ class TradingItemBid < Compras::Model
   validates :amount, :numericality => { :greater_than => 0 }, :if => :with_proposal?
 
   validate  :bidder_is_part_of_trading
-  validate  :amount_limit_by_percentage
-  validate  :amount_limit_by_value
+  validate  :amount_limit_by_percentage, :if => :with_proposal?
+  validate  :amount_limit_by_value, :if => :with_proposal?
 
   scope :at_round, lambda { |round_number| where { round.eq(round_number) } }
 

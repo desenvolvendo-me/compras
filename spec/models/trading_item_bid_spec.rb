@@ -61,6 +61,7 @@ describe TradingItemBid do
     end
 
     it 'validates if amount is greather than minimum reduction value' do
+      subject.stub(:with_proposal?).and_return(true)
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(10.0)
@@ -72,7 +73,21 @@ describe TradingItemBid do
       expect(subject.errors[:amount]).to include 'deve ser menor ou igual a 7,70'
     end
 
+    it 'does not validate if amount is greather than minimum reduction value when is not with_proposal' do
+      subject.stub(:with_proposal?).and_return(false)
+      subject.stub(:minimum_reduction_value).and_return(2.3)
+      subject.stub(:minimum_reduction_value?).and_return(true)
+      subject.stub(:trading_item_last_proposal_value).and_return(10.0)
+
+      subject.amount = 11.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to eq []
+    end
+
     it 'does not validate if amount is greather than minimum reduction value when not minimum reduction value' do
+      subject.stub(:with_proposal?).and_return(true)
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(false)
       subject.stub(:trading_item_last_proposal_value).and_return(10.0)
@@ -85,6 +100,7 @@ describe TradingItemBid do
     end
 
     it 'does not validate if amount is greather than minimum reduction value when has no one proposal' do
+      subject.stub(:with_proposal?).and_return(true)
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(0.0)
@@ -97,6 +113,7 @@ describe TradingItemBid do
     end
 
     it 'validates if amount is greather than minimum reduction percentage' do
+      subject.stub(:with_proposal?).and_return(true)
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(100.0)
@@ -108,7 +125,21 @@ describe TradingItemBid do
       expect(subject.errors[:amount]).to include 'deve ser menor ou igual a 90,00'
     end
 
+    it 'does not validate if amount is greather than minimum reduction percentage when is not with_proposal' do
+      subject.stub(:with_proposal?).and_return(false)
+      subject.stub(:minimum_reduction_percent).and_return(10)
+      subject.stub(:minimum_reduction_percent?).and_return(true)
+      subject.stub(:trading_item_last_proposal_value).and_return(100.0)
+
+      subject.amount = 95.0
+
+      subject.valid?
+
+      expect(subject.errors[:amount]).to eq []
+    end
+
     it 'does not validate if amount is greather than minimum reduction percentage when not minimum reduction value' do
+      subject.stub(:with_proposal?).and_return(true)
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(false)
       subject.stub(:trading_item_last_proposal_value).and_return(100.0)
@@ -121,6 +152,7 @@ describe TradingItemBid do
     end
 
     it 'does not validate if amount is greather than minimum reduction percentage when has no one proposal' do
+      subject.stub(:with_proposal?).and_return(true)
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(false)
       subject.stub(:trading_item_last_proposal_value).and_return(0.0)
