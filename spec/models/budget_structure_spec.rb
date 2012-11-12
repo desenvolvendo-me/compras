@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'app/models/budget_structure'
-require 'app/models/unico/address'
+require 'app/models/inscriptio_cursualis/address'
 require 'app/models/address'
 require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'

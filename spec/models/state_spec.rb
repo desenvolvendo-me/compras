@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/unico/state'
+require 'app/models/inscriptio_cursualis/state'
 require 'app/models/state'
 require 'app/models/account_plan_configuration'
 

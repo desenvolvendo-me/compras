@@ -19,3 +19,8 @@ Neighborhood.blueprint(:sao_francisco) do
   name  { 'São Francisco' }
   city { City.make!(:curitiba) }
 end
+
+Neighborhood.blueprint(:sao_francisco_bh) do
+  name  { 'São Francisco' }
+  city { City.make!(:belo_horizonte) }
+end

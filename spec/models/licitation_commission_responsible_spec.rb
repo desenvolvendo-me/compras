@@ -2,7 +2,7 @@
 require 'model_helper'
 require 'app/models/licitation_commission_responsible'
 require 'app/models/licitation_commission'
-require 'app/models/unico/individual'
+require 'app/models/persona/individual'
 require 'app/models/individual'
 
 describe LicitationCommissionResponsible do

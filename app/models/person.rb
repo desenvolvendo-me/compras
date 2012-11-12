@@ -1,4 +1,4 @@
-class Person < Unico::Person
+class Person < Persona::Person
   attr_modal :name, :cpf, :cnpj
 
   has_many :licitation_process_impugnments, :dependent => :restrict

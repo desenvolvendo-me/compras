@@ -1,7 +1,8 @@
-class Neighborhood < Unico::Neighborhood
+class Neighborhood < InscriptioCursualis::Neighborhood
   has_many :addresses, :dependent => :restrict
 
   scope :street_id, lambda { |street_id| joins(:streets).where { streets.id.eq(street_id) } }
+  scope :city_id, lambda { |id| where { city_id.eq(id) } }
 
   before_destroy :validate_street_relationship
 

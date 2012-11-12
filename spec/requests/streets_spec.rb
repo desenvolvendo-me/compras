@@ -20,6 +20,8 @@ feature "Streets" do
 
     fill_in 'Zona fiscal', :with => '000'
 
+    fill_modal 'Cidade', :with => 'Belo Horizonte'
+
     fill_modal 'Bairro', :with => 'Centro'
     expect(page).to have_content "Bairro"
 
@@ -32,11 +34,11 @@ feature "Streets" do
     expect(page).to have_field 'Nome', :with => 'Cristiano do O'
     expect(page).to have_field 'Tipo do logradouro', :with => 'Rua'
     expect(page).to have_field 'Zona fiscal', :with => '000'
+    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
     expect(page).to have_content 'Centro'
   end
 
   scenario 'update a street' do
-    Neighborhood.make!(:portugal)
     StreetType.make!(:avenida)
     Street.make!(:girassol)
 
@@ -50,7 +52,7 @@ feature "Streets" do
 
     fill_in 'Zona fiscal', :with => '003'
 
-    fill_modal 'Bairro', :with => 'Portugal'
+    fill_modal 'Bairro', :with => 'São Francisco'
 
     click_button 'Salvar'
 
@@ -61,7 +63,7 @@ feature "Streets" do
     expect(page).to have_field 'Nome', :with => 'Francisco de Assis'
     expect(page).to have_field 'Tipo do logradouro', :with => 'Avenida'
     expect(page).to have_field 'Zona fiscal', :with => '003'
-    expect(page).to have_content 'Portugal'
+    expect(page).to have_content 'São Francisco'
   end
 
   scenario 'destroy a street' do

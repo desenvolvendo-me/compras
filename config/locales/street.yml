@@ -11,6 +11,7 @@ pt-BR:
         street_type: "Tipo do logradouro"
         tax_zone: "Zona fiscal"
         neighborhood: "Bairro"
+        city: "Cidade"
 
   simple_form:
     hints:

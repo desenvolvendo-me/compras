@@ -1,4 +1,4 @@
-class Country < Unico::Country
+class Country < InscriptioCursualis::Country
   filterize
   orderize
 end

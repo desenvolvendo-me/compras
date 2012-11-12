@@ -1,4 +1,4 @@
-class Individual < Unico::Individual
+class Individual < Persona::Individual
   attr_modal :person, :mother, :father, :birthdate, :gender, :cpf
 
   has_many :licitation_commission_responsibles, :dependent => :restrict

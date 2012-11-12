@@ -1,4 +1,4 @@
-class Company < Unico::Company
+class Company < Persona::Company
   delegate :city, :zip_code, :to => :address, :allow_nil => true
 
   validate :at_least_one_partner

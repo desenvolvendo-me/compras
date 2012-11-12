@@ -11,8 +11,10 @@
     </div>
   </div>
 
+  <%= f.input :city %>
+
   <div class="modal-finder" >
-    <%= f.input :neighborhood, :as => :modal , :input_html => { 'data-modal-url' => modal_neighborhoods_path }, :hidden_field => false  %>
+    <%= f.input :neighborhood, :as => :modal , :url => modal_neighborhoods_path(:city_id => f.object.city_id), :hidden_field => false, :disabled => f.object.new_record? %>
   </div>
 
   <table class="records">
@@ -36,3 +38,18 @@
     <%= render 'neighborhood', :id => '{{id}}', :name => '{{value}}' %>
   <% end %>
 </fieldset>
+
+<script>
+  $('#street_city_id').change(function (e, city) {
+    var neighborhood = $('#street_neighborhood'),
+        neighborhood_id = $('#street_neighborhood_id');
+
+    if (city) {
+      neighborhood.attr('disabled', false).val("").data('modal-url', '<%= modal_neighborhoods_path %>?city_id=' + city.id);
+      neighborhood_id.attr('disabled', false).val("");
+    } else {
+      neighborhood.attr('disabled', true).val("").data('modal-url', '<%= modal_neighborhoods_path %>');
+      neighborhood_id.attr('disabled', true).val("");
+    }
+  });
+</script>

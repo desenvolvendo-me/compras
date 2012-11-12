@@ -1,4 +1,4 @@
-class Identity < Unico::Identity
+class Identity < Persona::Identity
   validates :issuer, :state, :issue, :presence => true
 
   def to_s

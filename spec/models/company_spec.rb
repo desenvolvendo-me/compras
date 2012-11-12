@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/unico/company'
-require 'app/models/unico/partner'
+require 'app/models/persona/company'
+require 'app/models/persona/partner'
 require 'app/models/partner'
 require 'app/models/company'
 

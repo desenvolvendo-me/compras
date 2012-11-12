@@ -1,4 +1,4 @@
-class LegalNature < Unico::LegalNature
+class LegalNature < Persona::LegalNature
   attr_modal :code, :name
 
   has_many :administration_types, :dependent => :restrict

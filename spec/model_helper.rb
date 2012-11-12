@@ -87,6 +87,16 @@ class ActiveRecord::Base
   include I18n::Alchemy
 end
 
+# InscriptioCursualis
+require 'inscriptio_cursualis/engine'
+require 'inscriptio_cursualis/model'
+
+$:.append InscriptioCursualis::Engine.config.root
+
+Dir["#{InscriptioCursualis::Engine.config.root}/app/enumerations/*.rb"].each do |file|
+  require File.expand_path(file)
+end
+
 # Unico
 require 'unico/engine'
 require 'unico/model'
@@ -96,6 +106,12 @@ require 'compras'
 
 $:.append Unico::Engine.config.root
 
-Dir["#{Unico::Engine.config.root}/app/enumerations/*.rb"].each do |file|
+# Persona
+require 'persona/engine'
+require 'persona/model'
+
+$:.append Persona::Engine.config.root
+
+Dir["#{Persona::Engine.config.root}/app/enumerations/*.rb"].each do |file|
   require File.expand_path(file)
 end

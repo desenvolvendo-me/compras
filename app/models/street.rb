@@ -1,4 +1,4 @@
-class Street < Unico::Street
+class Street < InscriptioCursualis::Street
   attr_accessor :neighborhood
 
   attr_modal :name, :street_type_id

@@ -1,16 +1,16 @@
 # encoding: utf-8
 require 'model_helper'
-require 'app/models/unico/person'
+require 'app/models/persona/person'
 require 'app/models/person'
 require 'app/models/employee'
 require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
-require 'app/models/unico/partner'
+require 'app/models/persona/partner'
 require 'app/models/partner'
 require 'app/models/creditor'
 require 'app/models/bidder'
 require 'app/models/accredited_representative'
-require 'app/models/unico/address'
+require 'app/models/inscriptio_cursualis/address'
 require 'app/models/address'
 
 describe Person do
