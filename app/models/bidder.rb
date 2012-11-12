@@ -150,7 +150,7 @@ class Bidder < Compras::Model
   end
 
   def proposal_total_value_by_lot(lot_id = nil)
-    return 0 unless lot_id
+    return BigDecimal(0) unless lot_id
 
     total = self.class.joins { proposals.administrative_process_budget_allocation_item.licitation_process_lot }.
       where { |bidder| (bidder.id.eq id) & (bidder.proposals.administrative_process_budget_allocation_item.licitation_process_lot.id.eq lot_id) }.
@@ -164,7 +164,7 @@ class Bidder < Compras::Model
   end
 
   def total_price
-    return 0 if proposals.empty?
+    return BigDecimal(0) if proposals.empty?
 
     proposals.sum(&:total_price)
   end

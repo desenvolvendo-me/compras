@@ -21,7 +21,7 @@ class PriceCollectionLotItem < Compras::Model
   end
 
   def total_value_by_proposal(proposal)
-    (unit_price_by_proposal(proposal) || 0) * quantity
+    (unit_price_by_proposal(proposal) || BigDecimal(0)) * quantity
   end
 
   def proposal_items

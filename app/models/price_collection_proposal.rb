@@ -43,7 +43,7 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def total_price
-    return 0 if items.empty?
+    return BigDecimal(0) if items.empty?
 
     items.sum(&:total_price)
   end
@@ -81,7 +81,7 @@ class PriceCollectionProposal < Compras::Model
   end
 
   def item_total_value_by_lot(lot = nil)
-    return 0 unless lot
+    return BigDecimal(0) unless lot
 
     items_by_lot(lot).sum(&:total_price)
   end

@@ -43,7 +43,7 @@ class BidderProposal < Compras::Model
   end
 
   def total_price
-    return 0 unless quantity && unit_price
+    return BigDecimal(0) unless quantity && unit_price
     quantity * unit_price
   end
 

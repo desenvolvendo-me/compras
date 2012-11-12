@@ -82,7 +82,7 @@ class DirectPurchase < Compras::Model
   end
 
   def licitation_exemption
-    return 0 if licitation_object.nil? || modality.empty?
+    return BigDecimal(0) if licitation_object.nil? || modality.empty?
 
     licitation_object.licitation_exemption(modality)
   end

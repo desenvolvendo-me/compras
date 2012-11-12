@@ -27,7 +27,7 @@ class DirectPurchaseBudgetAllocationItem < Compras::Model
     if quantity && unit_price
       quantity * unit_price
     else
-      0
+      BigDecimal(0)
     end
   end
 end

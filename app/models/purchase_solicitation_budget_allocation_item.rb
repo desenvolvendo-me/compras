@@ -18,7 +18,7 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   validates :material, :quantity, :unit_price, :status, :presence => true
 
   def estimated_total_price
-    (quantity || 0) * (unit_price || 0)
+    (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
   end
 
   def self.group!(ids)

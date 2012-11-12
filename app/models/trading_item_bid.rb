@@ -72,7 +72,7 @@ class TradingItemBid < Compras::Model
   end
 
   def minimum_reduction_percentage
-    minimum_reduction_percent / 100.0
+    minimum_reduction_percent / BigDecimal(100)
   end
 
   def trading_item_last_proposal_value?

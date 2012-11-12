@@ -46,7 +46,7 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   end
 
   def estimated_total_price
-    (quantity || 0) * (unit_price || 0)
+    (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
   end
 
   def bidder_proposal?(bidder)
@@ -56,11 +56,11 @@ class AdministrativeProcessBudgetAllocationItem < Compras::Model
   def unit_price_by_bidder(bidder)
     first = bidder.proposals.select { |item| item.administrative_process_budget_allocation_item == self }.first
 
-    first.nil? ? 0 : first.unit_price
+    first.nil? ? BigDecimal(0) : first.unit_price
   end
 
   def total_value_by_bidder(bidder)
-    (unit_price_by_bidder(bidder) || 0) * quantity
+    (unit_price_by_bidder(bidder) || BigDecimal(0)) * quantity
   end
 
   def winning_bid

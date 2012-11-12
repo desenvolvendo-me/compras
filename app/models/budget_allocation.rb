@@ -64,7 +64,7 @@ class BudgetAllocation < Compras::Model
   end
 
   def real_amount
-    (amount || 0) - reserved_value
+    (amount || BigDecimal(0)) - reserved_value
   end
 
   def to_s

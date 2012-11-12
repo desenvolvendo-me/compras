@@ -24,7 +24,7 @@ class TradingItem < Compras::Model
   orderize :order
 
   def last_proposal_value
-    last_bid_with_proposal.try(:amount) || 0
+    last_bid_with_proposal.try(:amount) || BigDecimal(0)
   end
 
   def last_bid_round
