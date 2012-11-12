@@ -4,7 +4,7 @@ source 'https://gems.gemfury.com/SEqawpNNEx65yrzYS9p8/'
 
 ruby "1.9.3"
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem 'puma', '1.6.3', :require => false
 
 gem 'pg', '0.14.1'
