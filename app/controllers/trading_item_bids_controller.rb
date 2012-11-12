@@ -11,7 +11,7 @@ class TradingItemBidsController < CrudController
   end
 
   def create
-    create! { trading_items_path(:trading_id => @parent.trading.id) }
+    create! { new_trading_item_bid_path(:trading_item_id => resource.trading_item_id) }
   end
 
   protected

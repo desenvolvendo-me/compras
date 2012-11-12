@@ -36,5 +36,18 @@ describe TradingItemBidsController do
       expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITHOUT_PROPOSAL
       expect(assigns(:trading_item_bid).round).to eq 1
     end
+
+    it 'should redirect to new trading item bid after create' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+
+      post :create, :trading_id => trading.id,
+           :trading_item_bid => {
+             :trading_item_id => trading_item.id,
+             :status => TradingItemBidStatus::WITHOUT_PROPOSAL
+           }
+
+      expect(response).to redirect_to(new_trading_item_bid_path(:trading_item_id => trading_item.id))
+    end
   end
 end

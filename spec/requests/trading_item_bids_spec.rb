@@ -69,8 +69,6 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Oferta criada com sucesso"
 
-    click_link "Fazer oferta"
-
     expect(page).to have_content "Criar Oferta"
 
     expect(page).to have_field "Número da rodada", :with => "1"
@@ -84,8 +82,6 @@ feature "TradingItemBids" do
     click_button "Salvar"
 
     expect(page).to have_content "Oferta criada com sucesso"
-
-    click_link "Fazer oferta"
 
     expect(page).to have_content "Criar Oferta"
 
@@ -140,7 +136,7 @@ feature "TradingItemBids" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Oferta criada com sucesso.'
-    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
+    expect(page).to have_field 'Número da rodada', :with => '2'
   end
 
   scenario 'enable disclassification_reason when status is disqualified' do
