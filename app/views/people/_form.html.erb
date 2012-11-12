@@ -29,13 +29,18 @@
     }
   }
 
+  var showTemplate = function(selector) {
+    $("#personable").html($(selector).mustache());
+    loadTabs();
+  }
+
   $("#person_personable_type_individual").click(function () {
-    $("#personable").html($("#individual-template").mustache());
+    showTemplate("#individual-template");
   });
 
   $("#person_personable_type_company").click(function () {
-    $("#personable").html($("#company-template").mustache());
-    partnerNestedForm.set();
+    showTemplate("#company-template");
+    partnerNestedForm.set()
   });
 
   $("input.personable_type[checked]").click();
@@ -43,6 +48,4 @@
   <% if f.object.persisted? %>
     $("#personable-type").hide();
   <% end %>
-
-  $("#personable").change(loadTabs);
 </script>
