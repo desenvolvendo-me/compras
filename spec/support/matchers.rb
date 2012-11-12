@@ -73,7 +73,7 @@ module Matchers
 
   matcher :be_on_tab do |tab|
     match do |page|
-      page.find('.ui-tabs .ui-tabs-selected').should have_link tab
+      page.find('.ui-tabs .ui-tabs-active').should have_link tab
     end
 
     failure_message_for_should do |page|
