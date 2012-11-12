@@ -46,6 +46,6 @@ class LicitationProcessRatification < Compras::Model
       select { sum(bidder_proposals.administrative_process_budget_allocation_item.quantity * bidder_proposals.unit_price).
       as(proposal_total) }.first.proposal_total
 
-    BigDecimal.new(total || 0)
+    BigDecimal(total || 0)
   end
 end

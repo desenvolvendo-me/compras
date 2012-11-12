@@ -44,6 +44,6 @@ class ModalityLimit < Compras::Model
   end
 
   def self.zero
-    BigDecimal.new('0.0')
+    BigDecimal(0)
   end
 end

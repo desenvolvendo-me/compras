@@ -146,7 +146,7 @@ class Bidder < Compras::Model
       where { |bidder| bidder.id.eq id }.
       select { sum(proposals.administrative_process_budget_allocation_item.quantity * proposals.unit_price).as(proposal_total) }.first.proposal_total
 
-    BigDecimal.new(total || 0)
+    BigDecimal(total || 0)
   end
 
   def proposal_total_value_by_lot(lot_id = nil)
@@ -156,7 +156,7 @@ class Bidder < Compras::Model
       where { |bidder| (bidder.id.eq id) & (bidder.proposals.administrative_process_budget_allocation_item.licitation_process_lot.id.eq lot_id) }.
       select { sum(proposals.administrative_process_budget_allocation_item.quantity * proposals.unit_price).as(proposal_total) }.first.proposal_total
 
-    BigDecimal.new(total || 0)
+    BigDecimal(total || 0)
   end
 
   def has_item_with_unit_price_equals_zero(lot = nil)
