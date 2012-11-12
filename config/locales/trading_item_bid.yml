@@ -11,3 +11,4 @@ pt-BR:
         trading_item: "Item do pregão"
         bidder: "Licitante"
         amount: "Valor da proposta"
+        disqualification_reason: "Motivo da desclassificação"
