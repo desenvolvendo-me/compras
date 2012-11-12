@@ -19,6 +19,10 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Criar Oferta"
 
+    expect(page).to have_chosen_field 'Com proposta'
+    expect(page).to_not have_chosen_field 'Sem proposta'
+    expect(page).to_not have_chosen_field 'Desclassificado'
+
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
 
@@ -30,7 +34,7 @@ feature "TradingItemBids" do
 
     click_button "Salvar"
 
-    expect(page).to have_content "Oferta criada com sucesso"
+    expect(page).to have_notice "Oferta criada com sucesso"
   end
 
   scenario 'Increment bidder and round when all bidder have proposals' do
@@ -131,9 +135,53 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Criar Oferta"
 
-    click_button 'Sem proposta'
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
 
     expect(page).to have_notice 'Oferta criada com sucesso.'
     expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
+  end
+
+  scenario 'enable disclassification_reason when status is disqualified' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Pregão Presencial > Pregões Presenciais'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_disabled_field 'Motivo da desclassificação'
+
+    choose 'Desclassificado'
+
+    expect(page).to_not have_disabled_field 'Motivo da desclassificação'
+
+    choose 'Sem proposta'
+
+    expect(page).to have_disabled_field 'Motivo da desclassificação'
+  end
+
+  scenario 'disqualify a bib' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Pregão Presencial > Pregões Presenciais'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    choose 'Desclassificado'
+
+    fill_in 'Motivo da desclassificação', :with => 'Não compareceu ao pregão'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Oferta criada com sucesso'
   end
 end

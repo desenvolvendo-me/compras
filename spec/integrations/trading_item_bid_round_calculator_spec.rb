@@ -63,7 +63,8 @@ describe TradingItemBidRoundCalculator do
         :trading_item_id => trading_item.id,
         :bidder_id => nohup.id,
         :amount => 80.0,
-        :status => TradingItemBidStatus::DISQUALIFIED)
+        :status => TradingItemBidStatus::DISQUALIFIED,
+        :disqualification_reason => 'Disqualified')
 
       expect(described_class.new(trading_item).calculate).to eq 2
     end

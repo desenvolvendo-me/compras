@@ -21,6 +21,7 @@ class TradingItemBid < Compras::Model
   validates :round, :trading_item, :bidder, :status, :presence => true
   validates :amount, :presence => true, :if => :with_proposal?
   validates :amount, :numericality => { :greater_than => 0 }, :if => :with_proposal?
+  validates :disqualification_reason, :presence => true, :if => :disqualified?
 
   validate  :bidder_is_part_of_trading
   validate  :amount_limit_by_percentage, :if => :with_proposal?

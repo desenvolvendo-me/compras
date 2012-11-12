@@ -60,6 +60,18 @@ describe TradingItemBid do
       expect(subject.errors[:bidder]).to include "deve fazer parte do pregão presencial"
     end
 
+    it 'validates presence of disqualification_reason when status is disqualified' do
+      subject.stub(:disqualified?).and_return(true)
+
+      should validate_presence_of :disqualification_reason
+    end
+
+    it 'does not validate presence of disqualification_reason when status is not disqualified' do
+      subject.stub(:disqualified?).and_return(false)
+
+      should_not validate_presence_of :disqualification_reason
+    end
+
     it 'validates if amount is greather than minimum reduction value' do
       subject.stub(:with_proposal?).and_return(true)
       subject.stub(:minimum_reduction_value).and_return(2.3)

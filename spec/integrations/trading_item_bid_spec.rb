@@ -28,7 +28,8 @@ describe TradingItemBid do
         :trading_item_id => trading_item.id,
         :bidder_id => bidder.id,
         :amount => 80.0,
-        :status => TradingItemBidStatus::DISQUALIFIED)
+        :status => TradingItemBidStatus::DISQUALIFIED,
+        :disqualification_reason => 'Disqualified')
 
       expect(described_class.with_proposal).to eq [bid_with_proposal]
     end

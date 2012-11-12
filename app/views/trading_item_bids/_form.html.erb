@@ -12,8 +12,30 @@
 
 <%= f.input :bidder, :disabled => true %>
 
+<%= f.input :status, :as => :radio_buttons %>
+
 <div class="yui3-g">
   <div class="yui3-u-1-4">
     <%= f.input :amount %>
   </div>
 </div>
+
+<%= f.input :disqualification_reason, :required => true %>
+
+<script>
+  $('input[name="trading_item_bid[status]"]').change(function(){
+    disqualificationReasonEnabler();
+  });
+
+  function disqualificationReasonEnabler() {
+    var currentStatus = $('input[name="trading_item_bid[status]"]:checked').val();
+
+    if (currentStatus == '<%= TradingItemBidStatus::DISQUALIFIED %>') {
+      $('#trading_item_bid_disqualification_reason').removeAttr('disabled');
+    } else {
+      $('#trading_item_bid_disqualification_reason').attr('disabled', 'disabled');
+    }
+  }
+
+  disqualificationReasonEnabler();
+</script>
