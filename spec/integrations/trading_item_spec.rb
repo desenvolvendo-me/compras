@@ -3,6 +3,8 @@ require 'spec_helper'
 describe TradingItem do
   describe '#bidders_available_for_current_round' do
     it 'should remove all disclassified bidders and all used for current round' do
+      subject.stub(:minimum_reduction_value).and_return(0.01)
+
       sobrinho = Bidder.make!(:licitante_sobrinho)
       wenderson = Bidder.make!(:licitante)
       nohup = Bidder.make!(:licitante_com_proposta_3)

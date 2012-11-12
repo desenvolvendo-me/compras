@@ -15,6 +15,8 @@ class TradingItem < Compras::Model
             :if => :minimum_reduction_percent?
   validates :minimum_reduction_percent, :numericality => { :less_than_or_equal_to => 100 }
 
+  validate :require_at_least_one_minimum_reduction
+
   delegate :material, :material_id, :reference_unit,
            :quantity, :unit_price, :to_s,
            :to => :administrative_process_budget_allocation_item,
@@ -53,5 +55,12 @@ class TradingItem < Compras::Model
 
   def last_bid_with_proposal
     trading_item_bids.with_proposal.last
+  end
+
+  def require_at_least_one_minimum_reduction
+    return if minimum_reduction_percent > 0 || minimum_reduction_value > 0
+
+    errors.add(:minimum_reduction_percent, :presence_at_least_one)
+    errors.add(:minimum_reduction_value, :presence_at_least_one)
   end
 end
