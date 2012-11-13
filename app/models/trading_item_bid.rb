@@ -37,6 +37,14 @@ class TradingItemBid < Compras::Model
     update_column(:status, new_status)
   end
 
+  def minimum_limit
+    if minimum_reduction_percent?
+      minimum_percentage_value
+    else minimum_reduction_value?
+      minimum_value
+    end
+  end
+
   private
 
   def bidder_is_part_of_trading
@@ -64,6 +72,8 @@ class TradingItemBid < Compras::Model
   end
 
   def minimum_value
+    return BigDecimal(0) unless trading_item_last_proposal_value?
+
     trading_item_last_proposal_value - minimum_reduction_value
   end
 

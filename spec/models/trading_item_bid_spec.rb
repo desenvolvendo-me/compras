@@ -205,4 +205,30 @@ describe TradingItemBid do
       subject.update_status(TradingItemBidStatus::WITHOUT_PROPOSAL)
     end
   end
+
+  describe '#minimum_limit' do
+    it 'should return the minimum limit calculating percentage when is minimum_reduction_percent' do
+      subject.stub(:minimum_reduction_percent?).and_return(true)
+      subject.stub(:minimum_reduction_percent).and_return(10.0)
+      subject.stub(:trading_item_last_proposal_value).and_return(100.00)
+
+      expect(subject.minimum_limit).to eq 90.00
+    end
+
+    it 'should return the minimum limit calculation minimum value when is minimum_reduction_value' do
+      subject.stub(:minimum_reduction_value?).and_return(true)
+      subject.stub(:minimum_reduction_value).and_return(5.0)
+      subject.stub(:trading_item_last_proposal_value).and_return(100.00)
+
+      expect(subject.minimum_limit).to eq 95.00
+    end
+
+    it 'should return 9 when is minimum_reduction_value and has no trading_item_last_proposal_value' do
+      subject.stub(:minimum_reduction_value?).and_return(true)
+      subject.stub(:minimum_reduction_value).and_return(5.0)
+      subject.stub(:trading_item_last_proposal_value?).and_return(false)
+
+      expect(subject.minimum_limit).to eq 0.0
+    end
+  end
 end

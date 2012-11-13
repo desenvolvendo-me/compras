@@ -18,6 +18,14 @@
   <div class="yui3-u-1-4">
     <%= f.input :amount %>
   </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :trading_item_last_proposal_value, :disabled => true, :input_html => { :class => 'decimal', :value => f.object.decorator.trading_item_last_proposal_value } %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :minimum_limit, :disabled => true, :input_html => { :class => 'decimal', :value => f.object.decorator.minimum_limit } %>
+  </div>
 </div>
 
 <%= f.input :disqualification_reason, :required => true %>
