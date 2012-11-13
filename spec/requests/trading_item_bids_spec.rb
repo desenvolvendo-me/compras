@@ -147,7 +147,7 @@ feature "TradingItemBids" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Oferta criada com sucesso.'
-    expect(page).to have_field 'Número da rodada', :with => '2'
+    expect(page).to have_field 'Número da rodada', :with => '1'
   end
 
   scenario 'enable disclassification_reason when status is disqualified' do

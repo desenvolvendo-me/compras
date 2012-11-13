@@ -582,5 +582,5 @@ LicitationProcess.blueprint(:pregao_presencial) do
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM }
-  bidders { [Bidder.make!(:licitante_sobrinho)] }
+  bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:licitante_com_proposta_3)] }
 end
