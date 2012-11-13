@@ -40,7 +40,7 @@ class TradingItemBid < Compras::Model
   def minimum_limit
     if minimum_reduction_percent?
       minimum_percentage_value
-    else minimum_reduction_value?
+    else
       minimum_value
     end
   end
