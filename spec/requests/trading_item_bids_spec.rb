@@ -29,8 +29,8 @@ feature "TradingItemBids" do
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
-    expect(page).to have_disabled_field 'Valor mínimo'
-    expect(page).to have_field 'Valor mínimo', :with => '0,00'
+    expect(page).to have_disabled_field 'Menor preço'
+    expect(page).to have_field 'Menor preço', :with => '0,00'
     expect(page).to have_disabled_field 'Valor limite'
     expect(page).to have_field 'Valor limite', :with => '0,00'
 
@@ -66,7 +66,7 @@ feature "TradingItemBids" do
 
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
     expect(page).to have_disabled_field "Licitante"
-    expect(page).to have_field 'Valor mínimo', :with => '0,00'
+    expect(page).to have_field 'Menor preço', :with => '0,00'
     expect(page).to have_field 'Valor limite', :with => '0,00'
 
     fill_in "Valor da proposta", :with => "100,00"
@@ -84,7 +84,7 @@ feature "TradingItemBids" do
     expect(page).to have_disabled_field "Licitante"
 
     fill_in "Valor da proposta", :with => "90,00"
-    expect(page).to have_field 'Valor mínimo', :with => '100,00'
+    expect(page).to have_field 'Menor preço', :with => '100,00'
     expect(page).to have_field 'Valor limite', :with => '99,99'
 
     click_button "Salvar"
@@ -99,7 +99,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
     expect(page).to have_disabled_field "Licitante"
 
-    expect(page).to have_field 'Valor mínimo', :with => '90,00'
+    expect(page).to have_field 'Menor preço', :with => '90,00'
     expect(page).to have_field 'Valor limite', :with => '89,99'
   end
 
