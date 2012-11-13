@@ -84,20 +84,6 @@ module Matchers
       "expected #{page.text.inspect} to not be on tab #{tab.inspect}"
     end
   end
-
-  matcher :have_chosen_field do |field|
-    match do |page|
-      page.find_field(field)[:checked].should eq true
-    end
-
-    failure_message_for_should do |page|
-      "expected #{page.text.inspect} to have chosen radio button #{field.inspect}"
-    end
-
-    failure_message_for_should_not do |page|
-      "expected #{page.text.inspect} not to have chosen radio button #{field.inspect}"
-    end
-  end
 end
 
 RSpec.configure do |config|

@@ -19,9 +19,9 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Criar Oferta"
 
-    expect(page).to have_chosen_field 'Com proposta'
-    expect(page).to_not have_chosen_field 'Sem proposta'
-    expect(page).to_not have_chosen_field 'Desclassificado'
+    expect(page).to have_checked_field 'Com proposta'
+    expect(page).to_not have_checked_field 'Sem proposta'
+    expect(page).to_not have_checked_field 'Desclassificado'
 
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
