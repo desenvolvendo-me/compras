@@ -68,5 +68,61 @@ describe TradingItemBidRoundCalculator do
 
       expect(subject.calculate).to eq 2
     end
+
+    it 'should calculate the current round' do
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => nohup.id,
+        :amount => 100.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(subject.calculate).to eq 1
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => wenderson.id,
+        :amount => 99.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(subject.calculate).to eq 1
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => sobrinho.id,
+        :amount => 98.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(subject.calculate).to eq 2
+
+      TradingItemBid.create!(
+        :round => 2,
+        :trading_item_id => trading_item.id,
+        :bidder_id => nohup.id,
+        :amount => 0.0,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      expect(subject.calculate).to eq 2
+
+      TradingItemBid.create!(
+        :round => 2,
+        :trading_item_id => trading_item.id,
+        :bidder_id => wenderson.id,
+        :amount => 97.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(subject.calculate).to eq 2
+
+      TradingItemBid.create!(
+        :round => 2,
+        :trading_item_id => trading_item.id,
+        :bidder_id => sobrinho.id,
+        :amount => 96.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      expect(subject.calculate).to eq 3
+    end
   end
 end
