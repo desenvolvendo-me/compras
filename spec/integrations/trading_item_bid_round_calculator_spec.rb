@@ -22,7 +22,7 @@ describe TradingItemBidRoundCalculator do
 
 
     it 'should return 1 when there are no bids' do
-      expect(described_class.new(trading_item).calculate).to eq 1
+      expect(subject.calculate).to eq 1
     end
 
     it 'should return 1 when left one biddder proposal for round 1' do
@@ -40,7 +40,7 @@ describe TradingItemBidRoundCalculator do
         :amount => 90.0,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
-      expect(described_class.new(trading_item).calculate).to eq 1
+      expect(subject.calculate).to eq 1
     end
 
     it 'should return 2 all biddder have proposal for round 1' do
@@ -66,7 +66,7 @@ describe TradingItemBidRoundCalculator do
         :status => TradingItemBidStatus::DISQUALIFIED,
         :disqualification_reason => 'Disqualified')
 
-      expect(described_class.new(trading_item).calculate).to eq 2
+      expect(subject.calculate).to eq 2
     end
   end
 end
