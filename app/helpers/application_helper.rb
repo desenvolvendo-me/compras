@@ -18,6 +18,10 @@ module ApplicationHelper
     "#{number_with_precision(value)} m2"
   end
 
+  def numeric_position(value)
+    "#{value}º lugar"
+  end
+
   def smart_report_url
     url_for :controller => controller_name, :action => :show, :id => 'report'
   end
