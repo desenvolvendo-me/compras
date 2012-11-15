@@ -9,6 +9,7 @@ menu:
         - neighborhoods
         - cities
         - countries
+        - streets
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -41,7 +42,6 @@ menu:
       - bank_accounts
     - address:
       - street_types
-      - streets
       - condominia
     - materials:
       - materials_classes
