@@ -40,7 +40,7 @@ class TradingItemBid < Compras::Model
 
   def minimum_limit
     if minimum_reduction_percent?
-      minimum_percentage_value
+      minimum_percentage_value_rounded
     else
       minimum_value
     end
@@ -59,8 +59,8 @@ class TradingItemBid < Compras::Model
   def amount_limit_by_percentage(numeric_parser = ::I18n::Alchemy::NumericParser)
     return unless amount && minimum_reduction_percent? && trading_item_last_proposal_value?
 
-    if amount > minimum_percentage_value
-      errors.add(:amount, :less_than_or_equal_to, :count => numeric_parser.localize(minimum_percentage_value))
+    if amount > minimum_percentage_value_rounded
+      errors.add(:amount, :less_than_or_equal_to, :count => numeric_parser.localize(minimum_percentage_value_rounded))
     end
   end
 
@@ -76,6 +76,10 @@ class TradingItemBid < Compras::Model
     return BigDecimal(0) unless trading_item_last_proposal_value?
 
     trading_item_last_proposal_value - minimum_reduction_value
+  end
+
+  def minimum_percentage_value_rounded
+    minimum_percentage_value.round(2)
   end
 
   def minimum_percentage_value

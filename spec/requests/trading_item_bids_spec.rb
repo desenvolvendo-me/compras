@@ -256,4 +256,33 @@ feature "TradingItemBids" do
         expect(page.find('.bidder-position')).to have_content '3º lugar'
     end
   end
+
+  scenario 'should validates minimum_limit rounded' do
+    trading_item = TradingItem.make!(:item_pregao_presencial,
+      :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
+
+    Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+
+    navigate 'Pregão Presencial > Pregões Presenciais'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    fill_in 'Valor da proposta', :with => '99,63'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    expect(page).to have_field 'Valor limite', :with => '89,67'
+
+    fill_in 'Valor da proposta', :with => '89,67'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+  end
 end

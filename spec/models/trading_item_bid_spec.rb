@@ -209,10 +209,10 @@ describe TradingItemBid do
   describe '#minimum_limit' do
     it 'should return the minimum limit calculating percentage when is minimum_reduction_percent' do
       subject.stub(:minimum_reduction_percent?).and_return(true)
-      subject.stub(:minimum_reduction_percent).and_return(10.0)
+      subject.stub(:minimum_reduction_percent).and_return(10.12345)
       subject.stub(:trading_item_last_proposal_value).and_return(100.00)
 
-      expect(subject.minimum_limit).to eq 90.00
+      expect(subject.minimum_limit).to eq 89.88 # without rounding 89.87655
     end
 
     it 'should return the minimum limit calculation minimum value when is minimum_reduction_value' do
