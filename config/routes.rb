@@ -569,20 +569,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :precatories do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :precatory_types do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resource :prefecture, :except => :destroy
 
   resources :price_collections, :except => :destroy do

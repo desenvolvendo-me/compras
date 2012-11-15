@@ -253,7 +253,6 @@ pt-BR:
       not_permited_for_judgment_form_kind: "não permitido para este tipo de julgamento (%{kind})"
       not_permited_for_object_type: "não permitido para este tipo de objeto (%{kind})"
       not_permited_for_modality: "não permitido para esta modalidade (%{kind})"
-      must_be_equal_precatory_value: "deve ser igual ao valor do precatório (R$ %{value})"
       status_must_be_released: "o status deve ser liberado"
       already_have_a_licitation_process: "já tem um processo licitatório"
       cannot_be_destroyed_because_have_regulatory_act_relationship: "não pode ser apagado pois há relacionamento com ato regulamentador"

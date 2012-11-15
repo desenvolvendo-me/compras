@@ -1,6 +1,0 @@
-pt-BR:
-  enumerations:
-    precatory_parcel_situation:
-      late: "Em atraso"
-      paid: "Pago"
-      to_expire: "A vencer"

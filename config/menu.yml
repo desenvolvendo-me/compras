@@ -61,9 +61,6 @@ menu:
         - regulatory_act_types
         - regulatory_act_type_classifications
         - regulatory_acts
-    - precatory:
-      - precatories
-      - precatory_types
     - contracts
     - reference_units
     - document_types

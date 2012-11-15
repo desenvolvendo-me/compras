@@ -1,2 +1,0 @@
-class PrecatoriesController < CrudController
-end
