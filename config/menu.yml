@@ -12,6 +12,7 @@ menu:
         - streets
         - street_types
         - land_subdivisions
+        - condominia
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -42,8 +43,6 @@ menu:
       - agencies
       - banks
       - bank_accounts
-    - address:
-      - condominia
     - materials:
       - materials_classes
       - materials_groups
