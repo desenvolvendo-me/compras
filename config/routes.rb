@@ -1,53 +1,11 @@
 Compras::Application.routes.draw do
-  resources :account_plans do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :account_plan_configurations do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   get 'agreements/modal', :as => :modal_agreements
 
   get 'agreement_kinds/modal', :as => :modal_agreement_kinds
 
   resources :contract_terminations, :except => [:show, :destroy]
 
-  resources :checking_account_of_fiscal_accounts do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :checking_account_structures do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :checking_account_structure_informations do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :creditors do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
-  resources :event_checking_configurations do
     collection do
       get :filter
       get :modal

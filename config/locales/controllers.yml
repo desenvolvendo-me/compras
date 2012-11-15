@@ -1,9 +1,7 @@
 pt-BR:
   controllers: &controllers
     auxiliary: "Auxiliar"
-    account_plans: "Planos de Contas"
     addresses: "Endereços"
-    account_plan_configurations: "Configurações de Plano de Contas"
     administration_types: "Tipos de Administração"
     administrative_processes: "Processos Administrativos"
     administrative_process_liberations: "Liberações de Processos Administrativos"
@@ -16,9 +14,6 @@ pt-BR:
     budget_revenues: "Receitas Orçamentarias"
     budget_structures: "Estruturas Orçamentarias"
     budget_structure_configurations: "Configurações de Estrutura Orçamentaria"
-    checking_account_of_fiscal_accounts: "Contas Correntes das Contas Contábeis"
-    checking_account_structures: "Estruturas das Contas Correntes"
-    checking_account_structure_informations: "Identificações da Estrutura de Conta Corrente"
     cities: "Cidades"
     cnaes: "CNAES"
     communication_sources: "Fontes de Comunicação"
@@ -37,7 +32,6 @@ pt-BR:
     document_types: "Tipos de Documento"
     employees: "Funcionários"
     entities: "Entidades"
-    event_checking_configurations: "Configurações de Eventos Contábeis"
     expense_natures: "Naturezas das Despesas"
     fiscal_years: "Exercícios Fiscais"
     indexers: "Indexadores"
@@ -128,7 +122,6 @@ pt-BR:
   menu:
     <<: *controllers
     accounting: "Contabilidade"
-    account_plan: "Plano de Contas"
     administrative_and_licitation_processes: "Processo Administrativo/Licitatório"
     administration: "Administração"
     budget_allocation: "Dotação Orçamentaria"

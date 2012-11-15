@@ -12,7 +12,6 @@ class Descriptor < Compras::Model
   has_many :pledges, :dependent => :restrict
   has_many :reserve_funds, :dependent => :restrict
   has_many :subfunctions, :dependent => :restrict
-  has_many :event_checking_configurations, :dependent => :restrict
 
   validates :entity_id, :uniqueness => { :scope => [:period], :message => :taken_for_informed_period }, :allow_blank => true
 

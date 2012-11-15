@@ -8,7 +8,6 @@ require 'app/models/pledge'
 require 'app/models/reserve_fund'
 require 'app/models/subfunction'
 require 'app/models/descriptor'
-require 'app/models/event_checking_configuration'
 
 describe Descriptor do
   it 'should return year and entity as to_s' do
@@ -26,7 +25,6 @@ describe Descriptor do
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:subfunctions).dependent(:restrict) }
-  it { should have_many(:event_checking_configurations).dependent(:restrict) }
 
   it { should validate_presence_of :entity }
   it { should validate_presence_of :period }

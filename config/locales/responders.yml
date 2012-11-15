@@ -25,9 +25,6 @@ pt-BR:
     actions:
       <<: *male
 
-    account_plan_configurations:
-      <<: *female
-
     administrative_process_liberations:
       <<: *male
       create:
@@ -58,15 +55,6 @@ pt-BR:
       <<: *female
 
     capability_sources:
-      <<: *female
-
-    checking_account_of_fiscal_accounts:
-      <<: *female
-
-    checking_account_structure_informations:
-      <<: *female
-
-    checking_account_structures:
       <<: *female
 
     cities:
@@ -100,9 +88,6 @@ pt-BR:
       <<: *female
 
     entities:
-      <<: *female
-
-    event_checking_configurations:
       <<: *female
 
     expense_natures:

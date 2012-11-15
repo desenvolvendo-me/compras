@@ -1,2 +1,0 @@
-class EventCheckingConfigurationsController < CrudController
-end
