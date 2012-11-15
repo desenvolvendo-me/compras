@@ -7,6 +7,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'create a new budget structure' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructureConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
     Address.make!(:general)
@@ -85,6 +87,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'update an existent budget structure' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
     Address.make!(:education)
     AdministrationType.make!(:executivo)
@@ -162,6 +166,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'assert that javascript return parent mask when budget structure that have a parent' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
@@ -176,6 +182,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'update an existent budget structure' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_desenvolvimento_level_3 )
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
@@ -193,6 +201,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'should not create a new budget structure when already exist a code in the same level and configuration' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructureConfiguration.make!(:detran_sopa)
     AdministrationType.make!(:publica)
@@ -244,6 +254,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'validating modal of level' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructureConfiguration.make!(:secretaria_de_educacao)
 
@@ -265,6 +277,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'validating modal of budget_structure_parent' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructure.make!(:secretaria_de_desenvolvimento)
 
@@ -298,6 +312,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'destroy an existent budget structure' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
@@ -318,6 +334,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'should allow one responsible by time when new form' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
 
     click_link 'Criar Estrutura Orçamentaria'
@@ -340,6 +358,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'should allow one responsible by time when edit' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
@@ -356,6 +376,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'should all responsible fields disabled when already stored' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'
@@ -377,6 +399,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'should store last responsible end_date as Date.current' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
@@ -406,6 +430,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'should store last responsible end_date as Date.current when already have 2 responsibles' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao_com_dois_responsaveis)
     Employee.make!(:joao_da_silva)
 
@@ -443,6 +469,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'when have errors on new responsible should show first new responsible and should not set end_date' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
     Employee.make!(:wenderson)
 
@@ -469,6 +497,8 @@ feature "BudgetStructure" do
   end
 
   scenario 'when update budget_structure without add new responsible should not set end_date' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Estruturas Orçamentarias'

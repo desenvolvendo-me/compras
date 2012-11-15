@@ -88,15 +88,3 @@ menu:
 
   - trading:
     - tradings
-
-
-  - others:
-
-    - accounting:
-      - estimate:
-        - organizational_structure:
-          - budget_structure_configurations
-          - budget_structures
-
-        - budget_allocation:
-          - budget_allocations

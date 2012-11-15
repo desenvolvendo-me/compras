@@ -7,6 +7,8 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'create a new budget_structure_configuration' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     Entity.make!(:detran)
     RegulatoryAct.make!(:sopa)
 
@@ -43,6 +45,8 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'calculate mask with javascript' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
 
     click_link 'Criar Configuração de Estrutura Orçamentaria'
@@ -73,6 +77,8 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'update an existent budget_structure_configuration' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructureConfiguration.make!(:detran_sopa)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
@@ -93,6 +99,8 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'destroy an existent budget_structure_configuration' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructureConfiguration.make!(:detran_sopa)
 
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
@@ -109,6 +117,8 @@ feature "BudgetStructureConfigurations" do
   end
 
   scenario 'create with error does not clear filled structures' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     navigate 'Outros > Contabilidade > Orçamento > Estrutura Organizacional > Configurações de Estrutura Orçamentaria'
 
     click_link 'Criar Configuração de Estrutura Orçamentaria'

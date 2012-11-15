@@ -7,6 +7,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'create a new budget_allocation' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetStructure.make!(:secretaria_de_educacao)
     Descriptor.make!(:detran_2012)
     Subfunction.make!(:geral)
@@ -76,6 +78,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'create a new budget_allocation with 2 as code when is from same descriptor' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:reparo_2011)
 
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
@@ -139,6 +143,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'create a new budget_allocation with 1 as code when is other descriptor' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     Descriptor.make!(:detran_2012)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -203,6 +209,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should apply month value based on kind and value' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
 
     click_link 'Criar Dotação Orçamentaria'
@@ -223,6 +231,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'update an existent budget_allocation' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     parent = BudgetStructure.make!(:secretaria_de_educacao)
     BudgetStructure.make!(:secretaria_de_desenvolvimento, :parent => parent)
@@ -296,6 +306,8 @@ feature "BudgetAllocations" do
   end
 
   it 'should show selected function on subfunction modal' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     Subfunction.make!(:geral)
 
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
@@ -317,6 +329,8 @@ feature "BudgetAllocations" do
   end
 
   it 'should not have the subfunction disabled when editing budget_allocation with subfunction' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
@@ -331,6 +345,8 @@ feature "BudgetAllocations" do
   end
 
   it 'should disable and empty the subfunction when the function is removed' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
 
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
@@ -351,6 +367,8 @@ feature "BudgetAllocations" do
   end
 
   it 'should empty the subfunction when the function are changed' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     Subfunction.make!(:geral)
     Function.make!(:execucao)
 
@@ -369,6 +387,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'destroy an existent budget_allocation' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao_extra)
 
     navigate 'Outros > Contabilidade > Orçamento > Dotação Orçamentaria > Dotações Orçamentarias'
@@ -385,6 +405,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should filter by budget structure' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -401,6 +423,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should filter by descriptor' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -417,6 +441,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should filter by subfunction' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -433,6 +459,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should filter by government program' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -449,6 +477,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should filter by government action' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -465,6 +495,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should filter by expense nature' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
@@ -481,6 +513,8 @@ feature "BudgetAllocations" do
   end
 
   scenario 'should filter by function' do
+    pending "this test will be removed when there is integration with the accounting system"
+
     BudgetAllocation.make!(:alocacao)
     BudgetAllocation.make!(:reparo_2011)
 
