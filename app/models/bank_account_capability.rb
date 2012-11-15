@@ -1,5 +1,6 @@
 class BankAccountCapability < Compras::Model
-  attr_accessible :date, :inactivation_date, :status, :bank_account_id, :capability_id
+  attr_accessible :date, :inactivation_date, :status, :bank_account_id,
+                  :capability_id
 
   has_enumeration_for :status, :create_helpers => true
 

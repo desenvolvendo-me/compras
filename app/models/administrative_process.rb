@@ -11,8 +11,10 @@ class AdministrativeProcess < Compras::Model
 
   attr_modal :year, :process, :protocol
 
-  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType, :create_helpers => true
-  has_enumeration_for :status, :with => AdministrativeProcessStatus, :create_helpers => true, :create_scopes => true
+  has_enumeration_for :object_type, :with => AdministrativeProcessObjectType,
+                      :create_helpers => true
+  has_enumeration_for :status, :with => AdministrativeProcessStatus,
+                      :create_helpers => true, :create_scopes => true
 
   belongs_to :responsible, :class_name => 'Employee'
   belongs_to :judgment_form
@@ -33,10 +35,8 @@ class AdministrativeProcess < Compras::Model
   delegate :modality_type, :presence_trading?,
            :to => :licitation_modality, :allow_nil => true
 
-  validates :year, :date, :presence => true
-  validates :object_type, :presence => true
-  validates :responsible, :status, :presence => true
-  validates :description, :judgment_form, :presence => true
+  validates :year, :date, :object_type, :responsible, :status, :description,
+            :judgment_form, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :administrative_process_budget_allocations, :no_duplication => :budget_allocation_id
 

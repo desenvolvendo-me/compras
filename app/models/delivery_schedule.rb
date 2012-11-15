@@ -1,5 +1,6 @@
 class DeliverySchedule < Compras::Model
-  attr_accessible :delivery_date, :delivery_schedule_status, :observations, :scheduled_date, :contract_id
+  attr_accessible :delivery_date, :delivery_schedule_status, :observations,
+                  :scheduled_date, :contract_id
 
   attr_readonly :sequence
 

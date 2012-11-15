@@ -1,11 +1,11 @@
 class Creditor < Compras::Model
-  attr_accessible :creditable_type, :creditable_id, :occupation_classification_id
-  attr_accessible :main_cnae_id, :municipal_public_administration, :autonomous
-  attr_accessible :social_identification_number
-  attr_accessible :contract_start_date, :cnae_ids, :documents_attributes
-  attr_accessible :representative_person_ids, :representative_ids
-  attr_accessible :accounts_attributes, :material_ids, :creditor_balances_attributes
-  attr_accessible :regularization_or_administrative_sanctions_attributes
+  attr_accessible :creditable_type, :creditable_id, :contract_start_date,
+                  :occupation_classification_id, :main_cnae_id, :cnae_ids,
+                  :municipal_public_administration, :autonomous,
+                  :social_identification_number, :documents_attributes,
+                  :representative_person_ids, :creditor_balances_attributes,
+                  :accounts_attributes, :material_ids, :representative_ids,
+                  :regularization_or_administrative_sanctions_attributes
 
   attr_accessor :name, :cpf, :cnpj
 
