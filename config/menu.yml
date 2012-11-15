@@ -62,6 +62,7 @@ menu:
     - delivery_locations
     - payment_methods
     - service_or_contract_types
+    - administration_types
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -90,7 +91,6 @@ menu:
 
 
   - others:
-    - administration_types
 
     - accounting:
       - estimate:
