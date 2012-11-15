@@ -10,7 +10,7 @@ feature 'ContractTerminations' do
     Contract.make!(:primeiro_contrato)
     DisseminationSource.make!(:jornal_bairro)
 
-    navigate 'Comum > Cadastral > Contratos'
+    navigate 'Comum > Cadastrais > Contratos'
 
     click_link '001'
 
@@ -73,7 +73,7 @@ feature 'ContractTerminations' do
   scenario 'editing a contract termination' do
     ContractTermination.make!(:contrato_rescindido)
 
-    navigate 'Comum > Cadastral > Contratos'
+    navigate 'Comum > Cadastrais > Contratos'
 
     click_link '001'
 
@@ -95,7 +95,7 @@ feature 'ContractTerminations' do
   scenario 'contract termination annulled should have fields disabled' do
     ResourceAnnul.make!(:rescisao_de_contrato_anulada)
 
-    navigate 'Comum > Cadastral > Contratos'
+    navigate 'Comum > Cadastrais > Contratos'
 
     click_link '001'
 
