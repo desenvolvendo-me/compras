@@ -57,7 +57,6 @@ menu:
     - delivery_locations
     - payment_methods
     - service_or_contract_types
-    - program_kinds
 
   - purchasing_processes:
     - purchase_solicitation_item_groups

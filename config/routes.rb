@@ -590,13 +590,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :program_kinds do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
-
   resources :property_variable_setting_options, :only => :index
 
   resources :purchase_solicitations, :except => :destroy do

@@ -1,2 +1,0 @@
-class ProgramKindsController < CrudController
-end
