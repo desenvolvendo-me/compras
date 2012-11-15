@@ -10,7 +10,7 @@ feature "People" do
     State.make!(:mg)
     Street.make!(:amazonas)
 
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -100,7 +100,7 @@ feature "People" do
   scenario 'update an existent person as individual' do
     Person.make!(:wenderson)
 
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Wenderson'
 
@@ -137,7 +137,7 @@ feature "People" do
   scenario 'destroy an existent person' do
     Person.make!(:wenderson)
 
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Wenderson Malheiros'
 
@@ -155,7 +155,7 @@ feature "People" do
     Person.make!(:wenderson)
     Person.make!(:sobrinho)
 
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -254,7 +254,7 @@ feature "People" do
     Person.make!(:nohup)
     Person.make!(:sobrinho)
 
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Nohup'
 
@@ -304,7 +304,7 @@ feature "People" do
     Street.make!(:amazonas)
     Street.make!(:cristiano_machado)
 
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -332,7 +332,7 @@ feature "People" do
   scenario 'should validate at least one partner' do
     Person.make!(:wenderson)
 
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 
@@ -357,7 +357,7 @@ feature "People" do
   end
 
   scenario "should show only one partner after select 2 times type company at personable" do
-    navigate 'Cadastros Gerais > Pessoas > Pessoas'
+    navigate 'Comum > Pessoas > Pessoas'
 
     click_link 'Criar Pessoa'
 

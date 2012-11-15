@@ -7,7 +7,7 @@ feature "MaterialsGroups" do
   end
 
   scenario 'create a new materials_group' do
-    navigate 'Cadastros Gerais > Materiais > Grupos de Materiais'
+    navigate 'Comum > Materiais > Grupos de Materiais'
 
     click_link 'Criar Grupo de Materiais'
 
@@ -27,7 +27,7 @@ feature "MaterialsGroups" do
   scenario 'update an existent materials_group' do
     MaterialsGroup.make!(:informatica)
 
-    navigate 'Cadastros Gerais > Materiais > Grupos de Materiais'
+    navigate 'Comum > Materiais > Grupos de Materiais'
 
     click_link 'Informática'
 
@@ -47,7 +47,7 @@ feature "MaterialsGroups" do
   scenario 'destroy an existent materials_group' do
     MaterialsGroup.make!(:informatica)
 
-    navigate 'Cadastros Gerais > Materiais > Grupos de Materiais'
+    navigate 'Comum > Materiais > Grupos de Materiais'
 
     click_link 'Informática'
 

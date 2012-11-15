@@ -24,31 +24,7 @@ menu:
       - profiles
       - users
 
-  - purchasing_processes:
-    - purchase_solicitation_item_groups
-    - price_collections
-    - direct_purchases
-    - price_registrations
-    - purchase_solicitations
-
-  - administrative_and_licitation_processes:
-    - auxiliary:
-      - modality_limits
-      - licitation_commissions
-      - judgment_forms
-      - licitation_objects
-      - licitation_modalities
-    - administrative_processes
-    - licitation_processes
-    - licitation_notices
-    - licitation_process_impugnments
-    - licitation_process_appeals
-    - licitation_process_ratifications
-
-  - trading:
-    - tradings
-
-  - general_entries:
+  - commom:
     - banks:
       - agencies
       - banks
@@ -84,6 +60,31 @@ menu:
     - program_kinds
     - target_audiences
     - macro_objectives
+
+  - purchasing_processes:
+    - purchase_solicitation_item_groups
+    - price_collections
+    - direct_purchases
+    - price_registrations
+    - purchase_solicitations
+
+  - administrative_and_licitation_processes:
+    - auxiliary:
+      - modality_limits
+      - licitation_commissions
+      - judgment_forms
+      - licitation_objects
+      - licitation_modalities
+    - administrative_processes
+    - licitation_processes
+    - licitation_notices
+    - licitation_process_impugnments
+    - licitation_process_appeals
+    - licitation_process_ratifications
+
+  - trading:
+    - tradings
+
 
   - others:
     - entities

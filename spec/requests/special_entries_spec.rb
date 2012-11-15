@@ -7,7 +7,7 @@ feature "SpecialEntries" do
   end
 
   scenario 'create a new special_entry' do
-    navigate 'Cadastros Gerais > Pessoas > Inscrições Especiais'
+    navigate 'Comum > Pessoas > Inscrições Especiais'
 
     click_link 'Criar Inscrição Especial'
 
@@ -25,7 +25,7 @@ feature "SpecialEntries" do
   scenario 'update an existent special_entry' do
     SpecialEntry.make!(:example)
 
-    navigate 'Cadastros Gerais > Pessoas > Inscrições Especiais'
+    navigate 'Comum > Pessoas > Inscrições Especiais'
 
     click_link 'Tal'
 
@@ -43,7 +43,7 @@ feature "SpecialEntries" do
   scenario 'destroy an existent special_entry' do
     SpecialEntry.make!(:example)
 
-    navigate 'Cadastros Gerais > Pessoas > Inscrições Especiais'
+    navigate 'Comum > Pessoas > Inscrições Especiais'
 
     click_link 'Tal'
 

@@ -7,7 +7,7 @@ feature "DocumentTypes" do
   end
 
   scenario 'create a new document_type' do
-    navigate 'Cadastros Gerais > Tipos de Documento'
+    navigate 'Comum > Tipos de Documento'
 
     click_link 'Criar Tipo de Documento'
 
@@ -27,7 +27,7 @@ feature "DocumentTypes" do
   scenario 'update an existent document_type' do
     DocumentType.make!(:fiscal)
 
-    navigate 'Cadastros Gerais > Tipos de Documento'
+    navigate 'Comum > Tipos de Documento'
 
     click_link 'Fiscal'
 
@@ -47,7 +47,7 @@ feature "DocumentTypes" do
   scenario 'cannot destroy an existent document_type with licitation_process relationship' do
     LicitationProcess.make!(:processo_licitatorio)
 
-    navigate 'Cadastros Gerais > Tipos de Documento'
+    navigate 'Comum > Tipos de Documento'
 
     click_link 'Fiscal'
 
@@ -60,7 +60,7 @@ feature "DocumentTypes" do
 
   scenario 'destroy an existent document_type' do
     DocumentType.make!(:fiscal)
-    navigate 'Cadastros Gerais > Tipos de Documento'
+    navigate 'Comum > Tipos de Documento'
 
     click_link 'Fiscal'
 

@@ -11,7 +11,7 @@ feature "RegistrationCadastralCertificates" do
     Creditor.make!(:nohup)
     SignatureConfiguration.make!(:crc)
 
-    navigate 'Cadastros Gerais > Pessoas > Credores'
+    navigate 'Comum > Pessoas > Credores'
 
     click_link 'Nohup'
 

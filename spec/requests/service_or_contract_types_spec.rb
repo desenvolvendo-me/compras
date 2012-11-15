@@ -7,7 +7,7 @@ feature "ServiceOrContractType" do
   end
 
   scenario 'create a new service' do
-    navigate 'Cadastros Gerais > Tipos de Serviço ou Contrato'
+    navigate 'Comum > Tipos de Serviço ou Contrato'
 
     click_link 'Criar Tipo de Serviço ou Contrato'
 
@@ -29,7 +29,7 @@ feature "ServiceOrContractType" do
   scenario 'update an existent service' do
     ServiceOrContractType.make!(:trainees)
 
-    navigate 'Cadastros Gerais > Tipos de Serviço ou Contrato'
+    navigate 'Comum > Tipos de Serviço ou Contrato'
 
     click_link 'Contratação de estagiários'
 
@@ -49,7 +49,7 @@ feature "ServiceOrContractType" do
   scenario 'destroy an existent service' do
     ServiceOrContractType.make!(:trainees)
 
-    navigate 'Cadastros Gerais > Tipos de Serviço ou Contrato'
+    navigate 'Comum > Tipos de Serviço ou Contrato'
 
     click_link 'Contratação de estagiários'
 

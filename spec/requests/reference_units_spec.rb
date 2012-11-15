@@ -7,7 +7,7 @@ feature "ReferenceUnits" do
   end
 
   scenario 'create a new reference_unit' do
-    navigate 'Cadastros Gerais > Unidades de Referência'
+    navigate 'Comum > Unidades de Referência'
 
     click_link 'Criar Unidade de Referência'
 
@@ -27,7 +27,7 @@ feature "ReferenceUnits" do
   scenario 'update a reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Cadastros Gerais > Unidades de Referência'
+    navigate 'Comum > Unidades de Referência'
 
     click_link 'M'
 
@@ -47,7 +47,7 @@ feature "ReferenceUnits" do
   scenario 'destroy an existent reference_unit' do
     ReferenceUnit.make!(:metro)
 
-    navigate 'Cadastros Gerais > Unidades de Referência'
+    navigate 'Comum > Unidades de Referência'
 
     click_link 'M'
 

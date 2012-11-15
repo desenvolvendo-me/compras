@@ -9,7 +9,7 @@ feature "RegulatoryActs" do
   scenario 'create a new regulatory_act' do
     make_dependencies!
 
-    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link 'Criar Ato Regulamentador'
 
@@ -71,7 +71,7 @@ feature "RegulatoryActs" do
     DisseminationSource.make!(:jornal_bairro)
     LegalTextNature.make!(:trabalhista)
 
-    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link '1234'
 
@@ -129,7 +129,7 @@ feature "RegulatoryActs" do
   scenario 'destroy an existent regulatory_act' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link '1234'
 
@@ -143,7 +143,7 @@ feature "RegulatoryActs" do
   scenario 'remove dissemination source from an existent regulatory_act' do
     RegulatoryAct.make!(:sopa)
 
-    navigate 'Cadastros Gerais > Legislação > Ato Regulamentador > Atos Regulamentadores'
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
     click_link '1234'
 
