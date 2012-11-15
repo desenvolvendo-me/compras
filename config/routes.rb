@@ -371,11 +371,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :legal_natures, :only => [:index, :edit] do
-    collection do
-      get :modal
-    end
-  end
+  get "legal_natures/modal", :as => :modal_legal_natures
 
   resources :legal_references do
     collection do
