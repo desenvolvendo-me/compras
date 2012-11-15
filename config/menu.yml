@@ -72,8 +72,6 @@ menu:
       - precatories
       - precatory_types
     - contracts
-    - dissemination_sources
-    - communication_sources
     - reference_units
     - document_types
     - regulatory_act_types
