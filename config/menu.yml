@@ -27,10 +27,10 @@ menu:
   - commom:
     - cadastral:
       - contracts
-    - banks:
-      - agencies
-      - banks
-      - bank_accounts
+      - banks:
+        - agencies
+        - banks
+        - bank_accounts
     - materials:
       - materials_classes
       - materials_groups
