@@ -11,6 +11,7 @@ menu:
         - countries
         - streets
         - street_types
+        - land_subdivisions
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -83,7 +84,6 @@ menu:
     - signature_configurations
     - signatures
     - entities
-    - land_subdivisions
     - settings
     - fiscal_years
     - risk_degrees

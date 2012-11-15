@@ -7,7 +7,7 @@ feature "LandSubdivisions" do
   end
 
   scenario 'create a new land subdivision' do
-    navigate 'Outros > Loteamentos'
+    navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     click_link 'Criar Loteamento'
 
@@ -25,7 +25,7 @@ feature "LandSubdivisions" do
   scenario 'update a land subdivision' do
     LandSubdivision.make!(:solar_da_serra)
 
-    navigate 'Outros > Loteamentos'
+    navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     click_link 'Solar da Serra'
 
@@ -43,7 +43,7 @@ feature "LandSubdivisions" do
   scenario 'destroy a land subdivision' do
     LandSubdivision.make!(:terra_prometida)
 
-    navigate 'Outros > Loteamentos'
+    navigate 'Geral > Parâmetros > Endereços > Loteamentos'
 
     click_link 'Terra Prometida'
 
