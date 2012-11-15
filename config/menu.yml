@@ -1,4 +1,8 @@
 menu:
+  - general:
+    - parameters:
+      - prefecture
+
   - purchasing_processes:
     - purchase_solicitation_item_groups
     - price_collections
@@ -83,7 +87,6 @@ menu:
     - risk_degrees
     - indexers
     - currencies
-    - prefecture
     - descriptors
     - legal_references
     - administration_types
