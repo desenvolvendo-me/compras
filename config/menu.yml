@@ -25,6 +25,8 @@ menu:
       - users
 
   - commom:
+    - cadastral:
+      - contracts
     - banks:
       - agencies
       - banks
@@ -49,7 +51,6 @@ menu:
         - regulatory_act_types
         - regulatory_act_type_classifications
         - regulatory_acts
-    - contracts
     - reference_units
     - document_types
     - legal_natures
