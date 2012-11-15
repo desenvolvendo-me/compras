@@ -2,6 +2,7 @@ menu:
   - general:
     - parameters:
       - prefecture
+      - descriptors
       - entities
 
       - addresses:
@@ -88,7 +89,6 @@ menu:
 
 
   - others:
-    - descriptors
     - legal_references
     - administration_types
 

@@ -9,7 +9,7 @@ feature "Descriptors" do
   scenario 'create a new descriptor' do
     Entity.make!(:detran)
 
-    navigate 'Outros > Descritores'
+    navigate 'Geral > Parâmetros > Descritores'
 
     click_link 'Criar Descritor'
 
@@ -30,7 +30,7 @@ feature "Descriptors" do
     Descriptor.make!(:detran_2012)
     Entity.make!(:secretaria_de_educacao)
 
-    navigate 'Outros > Descritores'
+    navigate 'Geral > Parâmetros > Descritores'
 
     click_link '2012 - Detran'
 
@@ -50,7 +50,7 @@ feature "Descriptors" do
   scenario 'destroy an existent descriptor' do
     Descriptor.make!(:detran_2012)
 
-    navigate 'Outros > Descritores'
+    navigate 'Geral > Parâmetros > Descritores'
 
     click_link '2012 - Detran'
 
@@ -68,7 +68,7 @@ feature "Descriptors" do
       Descriptor.make!(:detran_2012)
       Descriptor.make!(:secretaria_de_educacao_2012)
 
-      navigate 'Outros > Descritores'
+      navigate 'Geral > Parâmetros > Descritores'
 
       click_link 'Filtrar Descritores'
 
