@@ -21,6 +21,7 @@ menu:
     - users:
       - positions
       - employees
+      - profiles
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -59,7 +60,6 @@ menu:
       - people
       - creditors
       - special_entries
-      - profiles
       - users
       - auxiliary:
         - regularization_or_administrative_sanction_reasons
