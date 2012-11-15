@@ -36,6 +36,8 @@ menu:
         - materials_classes
         - materials_groups
         - materials
+      - indexers
+
     - people:
       - people
       - creditors
@@ -85,7 +87,6 @@ menu:
 
 
   - others:
-    - indexers
     - currencies
     - descriptors
     - legal_references
