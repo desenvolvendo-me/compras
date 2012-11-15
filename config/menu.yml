@@ -5,6 +5,7 @@ menu:
 
       - addresses:
         - states
+        - districts
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -39,7 +40,6 @@ menu:
       - street_types
       - streets
       - neighborhoods
-      - districts
       - cities
       - countries
       - condominia
