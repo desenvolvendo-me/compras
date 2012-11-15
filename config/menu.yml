@@ -31,10 +31,10 @@ menu:
         - agencies
         - banks
         - bank_accounts
-    - materials:
-      - materials_classes
-      - materials_groups
-      - materials
+      - materials:
+        - materials_classes
+        - materials_groups
+        - materials
     - people:
       - people
       - creditors

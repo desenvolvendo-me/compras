@@ -9,7 +9,7 @@ feature "MaterialsClasses" do
   scenario 'create a new materials_class' do
     MaterialsGroup.make!(:informatica)
 
-    navigate 'Comum > Materiais > Classes de Materiais'
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Criar Classe de Materiais'
 
@@ -34,7 +34,7 @@ feature "MaterialsClasses" do
     MaterialsClass.make!(:software)
     MaterialsGroup.make!(:comp_eletricos_eletronicos)
 
-    navigate 'Comum > Materiais > Classes de Materiais'
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
@@ -58,7 +58,7 @@ feature "MaterialsClasses" do
   scenario 'destroy an existent materials_class' do
     MaterialsClass.make!(:software)
 
-    navigate 'Comum > Materiais > Classes de Materiais'
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
 
     click_link 'Software'
 
