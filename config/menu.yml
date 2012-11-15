@@ -57,7 +57,6 @@ menu:
     - delivery_locations
     - payment_methods
     - service_or_contract_types
-    - products
     - program_kinds
     - target_audiences
     - macro_objectives
