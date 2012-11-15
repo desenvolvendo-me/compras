@@ -32,6 +32,12 @@ menu:
     - purchase_solicitations
 
   - administrative_and_licitation_processes:
+    - auxiliary:
+      - modality_limits
+      - licitation_commissions
+      - judgment_forms
+      - licitation_objects
+      - licitation_modalities
     - administrative_processes
     - licitation_processes
     - licitation_notices
@@ -43,12 +49,6 @@ menu:
     - tradings
 
   - general_entries:
-    - licitation:
-      - modality_limits
-      - licitation_commissions
-      - judgment_forms
-      - licitation_objects
-      - licitation_modalities
     - banks:
       - agencies
       - banks

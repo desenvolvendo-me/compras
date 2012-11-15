@@ -9,7 +9,7 @@ feature "LicitationObjects" do
   scenario 'create a new licitation_object' do
     Material.make!(:antivirus)
 
-    navigate 'Cadastros Gerais > Licitação > Objetos de Licitação'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
     click_link 'Criar Objeto de Licitação'
 
@@ -116,7 +116,7 @@ feature "LicitationObjects" do
   scenario 'should remove material' do
     LicitationObject.make!(:viaduto)
 
-    navigate 'Cadastros Gerais > Licitação > Objetos de Licitação'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
     click_link 'Viaduto'
 
@@ -140,7 +140,7 @@ feature "LicitationObjects" do
     LicitationObject.make!(:ponte)
     Material.make!(:arame_comum)
 
-    navigate 'Cadastros Gerais > Licitação > Objetos de Licitação'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
     click_link 'Ponte'
 
@@ -172,7 +172,7 @@ feature "LicitationObjects" do
   scenario 'destroy an existent licitation_object' do
     LicitationObject.make!(:ponte)
 
-    navigate 'Cadastros Gerais > Licitação > Objetos de Licitação'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
     click_link 'Ponte'
 
@@ -189,7 +189,7 @@ feature "LicitationObjects" do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
 
-    navigate 'Cadastros Gerais > Licitação > Objetos de Licitação'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
     click_link 'Ponte'
 
@@ -213,7 +213,7 @@ feature "LicitationObjects" do
     DirectPurchase.make!(:compra_nao_autorizada)
     DirectPurchase.make!(:compra_2011)
 
-    navigate 'Cadastros Gerais > Licitação > Objetos de Licitação'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Objetos de Licitação'
 
     click_link 'Ponte'
 

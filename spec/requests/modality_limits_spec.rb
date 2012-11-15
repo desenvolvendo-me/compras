@@ -7,7 +7,7 @@ feature "ModalityLimits" do
   end
 
   scenario 'create a new modality_limit' do
-    navigate 'Cadastros Gerais > Licitação > Limites por Modalidade'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Limites por Modalidade'
 
     click_link 'Criar Limite por Modalidade'
 
@@ -57,7 +57,7 @@ feature "ModalityLimits" do
   scenario 'update an existent modality_limit' do
     ModalityLimit.make!(:modalidade_de_compra)
 
-    navigate 'Cadastros Gerais > Licitação > Limites por Modalidade'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Limites por Modalidade'
 
     click_link '0001'
 
@@ -107,7 +107,7 @@ feature "ModalityLimits" do
   scenario 'destroy an existent modality_limit' do
     ModalityLimit.make!(:modalidade_de_compra)
 
-    navigate 'Cadastros Gerais > Licitação > Limites por Modalidade'
+    navigate 'Processo Administrativo/Licitatório > Auxiliar > Limites por Modalidade'
 
     click_link '0001'
 
