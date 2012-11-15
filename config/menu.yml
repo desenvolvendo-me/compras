@@ -84,7 +84,6 @@ menu:
 
 
   - others:
-    - settings
     - fiscal_years
     - risk_degrees
     - indexers

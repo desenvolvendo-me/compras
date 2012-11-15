@@ -6,16 +6,6 @@ feature "Neighborhoods" do
     sign_in
   end
 
-  scenario 'fetch default city from settings' do
-    Setting.make!(:default_city)
-
-    navigate 'Geral > Parâmetros > Endereços > Bairros'
-
-    click_link 'Criar Bairro'
-
-    expect(page).to have_field 'Cidade', :with => 'Belo Horizonte'
-  end
-
   scenario 'create a new neighborhood' do
     District.make!(:leste)
 

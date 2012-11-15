@@ -709,12 +709,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :settings, :only => %w(index edit update) do
-    collection do
-      get :filter
-    end
-  end
-
   get "subfunctions/modal", :as => :modal_subfunctions
 
   resources :tce_specification_capabilities do

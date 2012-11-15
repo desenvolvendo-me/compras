@@ -197,9 +197,6 @@ pt-BR:
     section_streets:
       <<: *female
 
-    settings:
-      <<: *female
-
     signatures:
       <<: *female
 

@@ -44,43 +44,6 @@ module ApplicationHelper
     end
   end
 
-  def options_for_input(object_setting)
-    options = {}
-    if object_setting
-      options.merge!(:label => "#{object_setting.name} (Unidade de referência: #{ object_setting.reference_unit})")
-      options.merge!(:collection => object_setting.options.map(&:name)) if object_setting.collection?
-      options.merge!(:as => :boolean) if object_setting.boolean?
-      options.merge!(:as => :date) if object_setting.date?
-      options.merge!(:as => :datetime) if object_setting.datetime?
-      options[:input_html] ||= {}
-      options[:input_html]['data-attribute-name'] = object_setting.name.parameterize.to_s
-      if object_setting.respond_to?(:dependency) && object_setting.dependency.present?
-        options[:input_html]['data-dependency'] = object_setting.dependency.name.parameterize.to_s
-        options[:input_html][:disabled] = :disabled
-      end
-    end
-    options
-  end
-
-  def find_input_for(value, setting)
-    Compras::FindInput.new(value, setting).find
-  end
-
-  def value_by_field_type(value, setting)
-    return if value.blank?
-
-    case setting.field_type
-    when 'boolean'
-      t (value == '1').to_s
-    when 'date' || 'datetime'
-      l value.send("to_#{setting.field_type}")
-    when 'collection'
-      setting.property_variable_setting_options.find(value).name
-    else
-      value
-    end
-  end
-
   def mustache(name, &block)
     content_tag(:script, :id => name, :type => 'text/x-mustache') do
       content = capture(&block)
