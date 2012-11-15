@@ -37,6 +37,7 @@ menu:
         - materials_groups
         - materials
       - indexers
+      - currencies
 
     - people:
       - people
@@ -87,7 +88,6 @@ menu:
 
 
   - others:
-    - currencies
     - descriptors
     - legal_references
     - administration_types
