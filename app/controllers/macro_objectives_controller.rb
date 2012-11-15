@@ -1,2 +1,0 @@
-class MacroObjectivesController < CrudController
-end

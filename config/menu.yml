@@ -58,7 +58,6 @@ menu:
     - payment_methods
     - service_or_contract_types
     - program_kinds
-    - macro_objectives
 
   - purchasing_processes:
     - purchase_solicitation_item_groups

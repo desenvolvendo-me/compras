@@ -470,13 +470,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :macro_objectives do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   get 'management_units/modal', :as => :modal_management_units
 
   resources :materials do
