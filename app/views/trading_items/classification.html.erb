@@ -2,6 +2,9 @@
   Classificação das Ofertas
 </h2>
 
+<%= check_box_tag 'filter_benefited', 'benefited', false %>
+<%= label_tag 'filter_benefited', 'Apenas beneficiados' %>
+
 <table class="records">
   <thead>
     <tr>
@@ -14,7 +17,7 @@
 
   <tbody>
     <% resource.bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
-      <tr id="<%= dom_id bidder %>">
+      <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
         <td class="bidder-name">
           <%= bidder %>
         </td>
@@ -34,3 +37,13 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+  $("#filter_benefited").change(function(){
+    if($(this).attr("checked") == "checked") {
+      $('.records .not-benefited').hide();
+    } else {
+      $('.records .not-benefited').show();
+    }
+  });
+</script>

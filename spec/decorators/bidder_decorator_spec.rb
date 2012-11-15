@@ -141,4 +141,33 @@ describe BidderDecorator do
       expect(subject.trading_item_classification_percent(trading_item)).to be_nil
     end
   end
+
+  describe '#benefited_by_law_of_proposals_class' do
+    it 'should return "benefited" when benefited_by_law_of_proposals and valid_benefited_percent' do
+      trading_item = double(:trading_item)
+
+      component.stub(:benefited_by_law_of_proposals?).and_return(true)
+      subject.stub(:valid_benefited_percent?).and_return(true)
+
+      expect(subject.benefited_by_law_of_proposals_class(trading_item)).to eq 'benefited'
+    end
+
+    it 'should return "not-benefited" when not benefited_by_law_of_proposals and valid_benefited_percent' do
+      trading_item = double(:trading_item)
+
+      component.stub(:benefited_by_law_of_proposals?).and_return(false)
+      subject.stub(:valid_benefited_percent?).and_return(true)
+
+      expect(subject.benefited_by_law_of_proposals_class(trading_item)).to eq 'not-benefited'
+    end
+
+    it 'should return "not-benefited" when benefited_by_law_of_proposals and not valid_benefited_percent' do
+      trading_item = double(:trading_item)
+
+      component.stub(:benefited_by_law_of_proposals?).and_return(true)
+      subject.stub(:valid_benefited_percent?).and_return(false)
+
+      expect(subject.benefited_by_law_of_proposals_class(trading_item)).to eq 'not-benefited'
+    end
+  end
 end

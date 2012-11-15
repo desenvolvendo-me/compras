@@ -35,4 +35,18 @@ class BidderDecorator
   def trading_item_classification_percent(trading_item)
     number_with_precision super(trading_item) if super
   end
+
+  def benefited_by_law_of_proposals_class(trading_item)
+    if component.benefited_by_law_of_proposals? && valid_benefited_percent?(trading_item)
+      'benefited'
+    else
+      'not-benefited'
+    end
+  end
+
+  private
+
+  def valid_benefited_percent?(trading_item, percent = 5.0)
+    component.trading_item_classification_percent(trading_item) <= percent
+  end
 end

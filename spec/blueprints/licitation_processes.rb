@@ -579,6 +579,7 @@ LicitationProcess.blueprint(:pregao_presencial) do
   contract_date { Date.new(2012, 3, 19) }
   contract_expiration { 3 }
   observations { "observacoes" }
+  consider_law_of_proposals { true }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM }
