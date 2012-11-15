@@ -9,7 +9,7 @@ feature "States" do
   scenario 'create a new state' do
     Country.make!(:brasil)
 
-    navigate 'Cadastros Gerais > Endereços > Estados'
+    navigate 'Geral > Parâmetros > Endereços > Estados'
 
     click_link 'Criar Estado'
 
@@ -31,7 +31,7 @@ feature "States" do
   scenario 'update a state' do
     rs = State.make!(:rs)
 
-    navigate 'Cadastros Gerais > Endereços > Estados'
+    navigate 'Geral > Parâmetros > Endereços > Estados'
 
     click_link 'Rio Grande do Sul'
 
@@ -49,7 +49,7 @@ feature "States" do
   scenario 'destroy a state' do
     rs = State.make!(:rs)
 
-    navigate 'Cadastros Gerais > Endereços > Estados'
+    navigate 'Geral > Parâmetros > Endereços > Estados'
 
     click_link 'Rio Grande do Sul'
 

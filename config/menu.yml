@@ -3,6 +3,9 @@ menu:
     - parameters:
       - prefecture
 
+      - addresses:
+        - states
+
   - purchasing_processes:
     - purchase_solicitation_item_groups
     - price_collections
@@ -37,7 +40,6 @@ menu:
       - streets
       - neighborhoods
       - districts
-      - states
       - cities
       - countries
       - condominia
