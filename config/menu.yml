@@ -64,7 +64,6 @@ menu:
     - contracts
     - reference_units
     - document_types
-    - regulatory_act_types
     - legal_natures
     - delivery_locations
     - payment_methods
