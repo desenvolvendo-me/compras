@@ -590,13 +590,6 @@ Compras::Application.routes.draw do
 
   resources :price_collection_proposal_annuls, :except => [:index, :show, :destroy]
 
-  resources :products do
-    collection do
-      get :modal
-      get :filter
-    end
-  end
-
   resources :profiles do
     collection do
       get :modal
