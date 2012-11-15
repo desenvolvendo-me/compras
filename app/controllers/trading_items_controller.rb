@@ -1,11 +1,20 @@
 class TradingItemsController < CrudController
   actions :all, :except => [:new, :create, :destroy]
+  custom_actions :resource => :classification
 
   def update
     update!{ trading_items_path(:trading_id => @parent.id) }
   end
 
   protected
+
+  def authorize_resource!
+    if action_name == 'classification'
+      authorize! :read, controller_name
+    else
+      super
+    end
+  end
 
   def begin_of_association_chain
     @parent = parent

@@ -34,4 +34,43 @@ describe TradingItemBid do
       expect(described_class.with_proposal).to eq [bid_with_proposal]
     end
   end
+
+  describe '.for_trading_item' do
+    it 'should returns bids of and trading item' do
+      trading_item_with_proposal = TradingItem.make!(:item_pregao_presencial)
+      trading_item_without_proposal = TradingItem.make!(:item_pregao_presencial, :order => 2)
+
+      trading = Trading.make!(:pregao_presencial,
+        :trading_items => [trading_item_with_proposal,trading_item_without_proposal])
+
+      bidder1 = trading.bidders.first
+      bidder2 = trading.bidders.second
+      bidder3 = trading.bidders.last
+
+      bid1 = TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder1.id,
+        :amount => 100.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      bid2 = TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item_with_proposal.id,
+        :bidder_id => bidder3.id,
+        :amount => 90.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+
+      bid_another_item = TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item_without_proposal.id,
+        :bidder_id => bidder2.id,
+        :amount => 0.0,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      expect(described_class.for_trading_item(trading_item_with_proposal)).to include(bid1, bid2)
+      expect(described_class.for_trading_item(trading_item_with_proposal)).to_not include bid_another_item
+    end
+  end
 end

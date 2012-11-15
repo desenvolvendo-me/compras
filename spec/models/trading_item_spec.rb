@@ -138,4 +138,53 @@ describe TradingItem do
       expect(subject.last_bid_round).to eq 0
     end
   end
+
+  describe '#bidders_by_lowest_proposal' do
+    it 'should return bidders ordered by lowest proposal by bidder' do
+      bidder1 = double(:bidder1)
+      bidder2 = double(:bidder2)
+      bidder3 = double(:bidder3)
+      bidders = double(:bidders)
+
+      subject.stub(:id).and_return(1)
+      subject.stub(:bidders).and_return(bidders)
+
+      bidder1.should_receive(:lower_trading_item_bid_amount).
+              at_least(1).times.with(subject).and_return(90)
+
+      bidder2.should_receive(:lower_trading_item_bid_amount).
+              at_least(1).times.with(subject).and_return(80)
+
+      bidder3.should_receive(:lower_trading_item_bid_amount).
+              at_least(1).times.with(subject).and_return(100)
+
+      bidders.should_receive(:with_proposal_for_trading_item).
+              with(1).and_return([bidder1, bidder2, bidder3])
+
+      expect(subject.bidders_by_lowest_proposal).to eq [bidder2, bidder1, bidder3]
+    end
+  end
+
+  describe '#lowest_proposal_amount' do
+    it 'should return the lowest bid proposal for the item' do
+      bidder1 = double(:bidder1)
+      bidder2 = double(:bidder2)
+      bidder3 = double(:bidder3)
+
+      subject.should_receive(:bidders_by_lowest_proposal).
+              at_least(1).times.and_return([bidder1, bidder2, bidder3])
+
+      bidder1.should_receive(:lower_trading_item_bid_amount).
+              with(subject).and_return(10)
+
+      expect(subject.lowest_proposal_amount).to eq 10
+    end
+
+    it 'should return nil when there are no proposals' do
+      subject.should_receive(:bidders_by_lowest_proposal).
+              at_least(1).times.and_return([])
+
+      expect(subject.lowest_proposal_amount).to be_nil
+    end
+  end
 end

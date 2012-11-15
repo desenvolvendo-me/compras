@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe TradingItemsController do
-  before do
-    controller.stub(:authenticate_user!)
-    controller.stub(:authorize_resource!)
-  end
-
   describe 'PUT #update' do
+    before do
+      controller.stub(:authenticate_user!)
+      controller.stub(:authorize_resource!)
+    end
+
     it 'should redirect to trading item list when editted' do
       trading = Trading.make!(:pregao_presencial)
       item = trading.trading_items.first
@@ -16,6 +16,18 @@ describe TradingItemsController do
       put :update, :id => item.id, :trading_item => item.attributes
 
       expect(response).to redirect_to(trading_items_path(:trading_id => trading.id))
+    end
+  end
+
+  describe 'GET #classification' do
+    it 'should check permission for read' do
+      trading = Trading.make!(:pregao_presencial)
+      item = trading.trading_items.first
+
+      controller.stub(:authenticate_user!)
+      controller.should_receive(:authorize!).with(:read, 'trading_items')
+
+      get :classification, :id => item.id
     end
   end
 end

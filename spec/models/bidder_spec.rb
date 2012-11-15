@@ -331,4 +331,53 @@ describe Bidder do
       expect(subject.has_documentation_problem?).to be false
     end
   end
+
+  describe '#lower_trading_item_bid_amount' do
+    it 'should return zero when bidder there is no proposal for item' do
+      trading_item = double(:trading_item)
+
+      subject.should_receive(:lower_trading_item_bid).with(trading_item).and_return(nil)
+
+      expect(subject.lower_trading_item_bid_amount(trading_item)).to eq 0
+    end
+
+    it 'should return the amount of lowest proposal of bidder for item' do
+      trading_item = double(:trading_item)
+      lower_bid = double(:lower_bid, :amount => 120.56)
+
+      subject.should_receive(:lower_trading_item_bid).with(trading_item).and_return(lower_bid)
+
+      expect(subject.lower_trading_item_bid_amount(trading_item)).to eq 120.56
+    end
+  end
+
+  describe '#trading_item_classification_percent' do
+    it 'should return nil when there are no proposal for the item' do
+      trading_item = double(:trading_item)
+
+      subject.should_receive(:lower_trading_item_bid).with(trading_item).and_return(nil)
+
+      expect(subject.trading_item_classification_percent(trading_item)).to be_nil
+    end
+
+    it 'should return zero for the first place of the classification' do
+      trading_item = double(:trading_item, :lowest_proposal_amount => 100.0)
+      lower_trading_item_bid = double(:lower_trading_item_bid, :amount => 100.0)
+
+      subject.should_receive(:lower_trading_item_bid).
+              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid)
+
+      expect(subject.trading_item_classification_percent(trading_item)).to eq 0
+    end
+
+    it 'should calculate de percentual based on the first place of the classification' do
+      trading_item = double(:trading_item, :lowest_proposal_amount => 100.0)
+      lower_trading_item_bid = double(:lower_trading_item_bid, :amount => 120.0)
+
+      subject.should_receive(:lower_trading_item_bid).
+              at_least(1).times.with(trading_item).and_return(lower_trading_item_bid)
+
+      expect(subject.trading_item_classification_percent(trading_item)).to eq 20.0
+    end
+  end
 end

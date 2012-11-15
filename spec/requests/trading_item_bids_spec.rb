@@ -191,4 +191,69 @@ feature "TradingItemBids" do
 
     expect(page).to have_notice 'Oferta criada com sucesso'
   end
+
+  scenario 'classification' do
+    Trading.make!(:pregao_presencial)
+
+    navigate 'Pregão Presencial > Pregões Presenciais'
+
+    click_link '1/2012'
+
+    click_link 'Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    fill_in 'Valor da proposta', :with => '100,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '90,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    fill_in 'Valor da proposta', :with => '80,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Oferta criada com sucesso'
+
+    expect(page).to have_content 'Classificação das Ofertas'
+
+    within '.records tbody tr:nth-child(1)' do
+        expect(page.find('.bidder-name')).to have_content 'Nohup'
+        expect(page.find('.bidder-amount')).to have_content '80,00'
+        expect(page.find('.bidder-percent')).to have_content '0,00'
+        expect(page.find('.bidder-position')).to have_content '1º lugar'
+    end
+
+    within '.records tbody tr:nth-child(2)' do
+        expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+        expect(page.find('.bidder-amount')).to have_content '90,00'
+        expect(page.find('.bidder-percent')).to have_content '12,50'
+        expect(page.find('.bidder-position')).to have_content '2º lugar'
+    end
+
+    within '.records tbody tr:nth-child(3)' do
+        expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
+        expect(page.find('.bidder-amount')).to have_content '100,00'
+        expect(page.find('.bidder-percent')).to have_content '25,00'
+        expect(page.find('.bidder-position')).to have_content '3º lugar'
+    end
+  end
 end

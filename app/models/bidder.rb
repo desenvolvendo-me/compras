@@ -83,6 +83,14 @@ class Bidder < Compras::Model
     }.uniq
   end
 
+  def self.with_proposal_for_trading_item(trading_item_id)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.trading_item_id.eq(trading_item_id)
+    }.uniq
+  end
+
   def self.with_proposal_for_trading_item_round(round)
     joins { trading_item_bids }.
     where {
@@ -185,7 +193,29 @@ class Bidder < Compras::Model
     !filled_documents? || expired_documents?
   end
 
+  def lower_trading_item_bid_amount(trading_item)
+    lower_trading_item_bid(trading_item).try(:amount) || BigDecimal(0)
+  end
+
+  def trading_item_classification_percent(trading_item)
+    return unless lower_trading_item_bid(trading_item)
+
+    if trading_item.lowest_proposal_amount == lower_trading_item_bid_amount(trading_item)
+      BigDecimal(0)
+    else
+      classification_percent(trading_item.lowest_proposal_amount, lower_trading_item_bid_amount(trading_item))
+    end
+  end
+
   protected
+
+  def classification_percent(first_place_amount, current_amount)
+    ((current_amount - first_place_amount) / first_place_amount) * BigDecimal(100)
+  end
+
+  def lower_trading_item_bid(trading_item)
+    trading_item_bids.for_trading_item(trading_item.id).with_proposal.last
+  end
 
   def validate_licitation_process_envelope_opening_date
     return if licitation_process.nil?

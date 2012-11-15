@@ -783,6 +783,10 @@ Compras::Application.routes.draw do
   end
 
   resources :trading_items, :except => [:new, :create, :destroy] do
+    member do
+      get :classification
+    end
+
     collection do
       get :modal
     end

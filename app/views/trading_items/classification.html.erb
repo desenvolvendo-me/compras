@@ -1,0 +1,36 @@
+<h2>
+  Classificação das Ofertas
+</h2>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>Licitante</th>
+      <th>Valor</th>
+      <th>%</th>
+      <th>Classificação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
+      <tr id="<%= dom_id bidder %>">
+        <td class="bidder-name">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-amount">
+          <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
+        </td>
+
+        <td class="bidder-percent">
+          <%= bidder.decorator.trading_item_classification_percent(resource) %>
+        </td>
+
+        <td class="bidder-position">
+          <%= numeric_position(index.succ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

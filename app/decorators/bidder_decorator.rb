@@ -27,4 +27,12 @@ class BidderDecorator
   def proposal_total_value
     number_to_currency(super, :format => "%n") if super
   end
+
+  def lower_trading_item_bid_amount(trading_item)
+    number_with_precision super(trading_item) if super
+  end
+
+  def trading_item_classification_percent(trading_item)
+    number_with_precision super(trading_item) if super
+  end
 end

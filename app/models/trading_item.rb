@@ -39,7 +39,31 @@ class TradingItem < Compras::Model
     bidders_available(current_round.pred) - bidders.at_bid_round(current_round)
   end
 
+  def finished_bid_stage?
+     left_only_one_bidder && lowest_proposal_amount.present?
+  end
+
+  def bidders_by_lowest_proposal
+    bidders.with_proposal_for_trading_item(id).sort { |a,b|
+      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
+    }
+  end
+
+  def lowest_proposal_amount
+    return unless bidder_with_lowest_proposal.present?
+
+    bidder_with_lowest_proposal.lower_trading_item_bid_amount(self)
+  end
+
   private
+
+  def left_only_one_bidder
+    bidders.with_no_proposal_for_trading_item(id).count == bidders.count - 1
+  end
+
+  def bidder_with_lowest_proposal
+    bidders_by_lowest_proposal.first
+  end
 
   def bidders_available(round)
     if round == 0

@@ -37,7 +37,7 @@ describe TradingItemBidsController do
       expect(assigns(:trading_item_bid).round).to eq 1
     end
 
-    it 'should redirect to new trading item bid after create' do
+    it 'should redirect to new trading item bid after create when have not finished_bid_stage' do
       trading = Trading.make!(:pregao_presencial)
       trading_item = trading.trading_items.first
 
@@ -48,6 +48,37 @@ describe TradingItemBidsController do
            }
 
       expect(response).to redirect_to(new_trading_item_bid_path(:trading_item_id => trading_item.id))
+    end
+
+    it 'should redirect to the item bid classification when have finished_bid_stage' do
+      trading = Trading.make!(:pregao_presencial)
+      trading_item = trading.trading_items.first
+
+      bidder1 = trading.bidders.first
+      bidder2 = trading.bidders.second
+      bidder3 = trading.bidders.last
+
+       TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder1.id,
+        :amount => 100.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+       TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder2.id,
+        :disqualification_reason => 'Desclassificado',
+        :status => TradingItemBidStatus::DISQUALIFIED)
+
+      post :create, :trading_id => trading.id,
+           :trading_item_bid => {
+             :trading_item_id => trading_item.id,
+             :status => TradingItemBidStatus::WITHOUT_PROPOSAL
+           }
+
+      expect(response).to redirect_to(classification_trading_item_path(trading_item))
     end
   end
 end

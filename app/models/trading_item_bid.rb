@@ -28,6 +28,7 @@ class TradingItemBid < Compras::Model
   validate  :amount_limit_by_value, :if => :with_proposal?
 
   scope :at_round, lambda { |round_number| where { round.eq(round_number) } }
+  scope :for_trading_item, lambda { |item_id| where { trading_item_id.eq(item_id) } }
 
   def self.with_proposal
     where { status.eq(TradingItemBidStatus::WITH_PROPOSAL) }.order { :id }
