@@ -8,6 +8,7 @@ menu:
         - districts
         - neighborhoods
         - cities
+        - countries
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -41,7 +42,6 @@ menu:
     - address:
       - street_types
       - streets
-      - countries
       - condominia
     - materials:
       - materials_classes
