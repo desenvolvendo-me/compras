@@ -9,7 +9,7 @@ feature "Neighborhoods" do
   scenario 'fetch default city from settings' do
     Setting.make!(:default_city)
 
-    navigate 'Cadastros Gerais > Endereços > Bairros'
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -19,7 +19,7 @@ feature "Neighborhoods" do
   scenario 'create a new neighborhood' do
     District.make!(:leste)
 
-    navigate 'Cadastros Gerais > Endereços > Bairros'
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -49,7 +49,7 @@ feature "Neighborhoods" do
   scenario 'update a neighborhood' do
     Neighborhood.make!(:centro)
 
-    navigate 'Cadastros Gerais > Endereços > Bairros'
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Centro'
 
@@ -68,7 +68,7 @@ feature "Neighborhoods" do
   scenario 'destroy a neighborhood' do
     Neighborhood.make!(:centro)
 
-    navigate 'Cadastros Gerais > Endereços > Bairros'
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Centro'
 
@@ -82,7 +82,7 @@ feature "Neighborhoods" do
   scenario 'cannot destroy a neighborhood with streets' do
     Street.make!(:girassol)
 
-    navigate 'Cadastros Gerais > Endereços > Bairros'
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Centro'
 
@@ -96,7 +96,7 @@ feature "Neighborhoods" do
   scenario 'should lock district by city' do
     City.make!(:porto_alegre)
 
-    navigate 'Cadastros Gerais > Endereços > Bairros'
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
 
@@ -112,7 +112,7 @@ feature "Neighborhoods" do
     District.make!(:centro)
     District.make!(:leste)
 
-    navigate 'Cadastros Gerais > Endereços > Bairros'
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
 
     click_link 'Criar Bairro'
 
