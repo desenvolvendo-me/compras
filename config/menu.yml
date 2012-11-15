@@ -14,6 +14,10 @@ menu:
         - land_subdivisions
         - condominia
 
+      - signatures:
+        - signature_configurations
+        - signatures
+
   - purchasing_processes:
     - purchase_solicitation_item_groups
     - price_collections
@@ -80,8 +84,6 @@ menu:
     - macro_objectives
 
   - others:
-    - signature_configurations
-    - signatures
     - entities
     - settings
     - fiscal_years

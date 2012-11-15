@@ -10,7 +10,7 @@ feature "Signatures" do
     Person.make!(:sobrinho)
     Position.make!(:gerente)
 
-    navigate 'Outros > Assinaturas'
+    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
 
     click_link 'Criar Assinatura'
 
@@ -32,7 +32,7 @@ feature "Signatures" do
     Person.make!(:wenderson)
     Position.make!(:supervisor)
 
-    navigate 'Outros > Assinaturas'
+    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
 
     click_link 'Gabriel Sobrinho'
 
@@ -52,7 +52,7 @@ feature "Signatures" do
   scenario 'destroy an existent signature' do
     Signature.make!(:gerente_sobrinho)
 
-    navigate 'Outros > Assinaturas'
+    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
 
     click_link 'Gabriel Sobrinho'
 
