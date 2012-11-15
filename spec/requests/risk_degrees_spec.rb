@@ -7,7 +7,7 @@ feature "RiskDegrees" do
   end
 
   scenario 'create a new risk_degree' do
-    navigate 'Outros > Grau de Riscos'
+    navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
 
     click_link 'Criar Grau de Risco'
 
@@ -27,7 +27,7 @@ feature "RiskDegrees" do
   scenario 'update an existent risk_degree' do
     risk_degree = RiskDegree.make!(:leve)
 
-    navigate 'Outros > Grau de Riscos'
+    navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
 
     click_link 'Leve'
 
@@ -47,7 +47,7 @@ feature "RiskDegrees" do
   scenario 'destroy an existent risk_degree' do
     risk_degree = RiskDegree.make!(:grave)
 
-    navigate 'Outros > Grau de Riscos'
+    navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
 
     click_link 'Grave'
 
