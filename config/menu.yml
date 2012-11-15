@@ -18,6 +18,9 @@ menu:
         - signature_configurations
         - signatures
 
+    - users:
+      - positions
+
   - purchasing_processes:
     - purchase_solicitation_item_groups
     - price_collections
@@ -62,7 +65,6 @@ menu:
         - regularization_or_administrative_sanction_reasons
         - company_sizes
         - cnaes
-        - positions
     - legislation:
       - dissemination_sources
       - communication_sources
