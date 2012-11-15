@@ -12,13 +12,6 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :fiscal_years do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :holidays do
     collection do
       get :filter
