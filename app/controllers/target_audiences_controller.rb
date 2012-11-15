@@ -1,2 +1,0 @@
-class TargetAudiencesController < CrudController
-end

@@ -58,7 +58,6 @@ menu:
     - payment_methods
     - service_or_contract_types
     - program_kinds
-    - target_audiences
     - macro_objectives
 
   - purchasing_processes:

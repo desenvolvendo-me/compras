@@ -735,13 +735,6 @@ Compras::Application.routes.draw do
 
   get "subfunctions/modal", :as => :modal_subfunctions
 
-  resources :target_audiences do
-    collection do
-      get :filter
-      get :modal
-    end
-  end
-
   resources :tce_specification_capabilities do
     collection do
       get :filter
