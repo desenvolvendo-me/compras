@@ -10,7 +10,7 @@ feature "Employees" do
     Person.make!(:sobrinho)
     Position.make!(:gerente)
 
-    navigate 'Cadastros Gerais > Pessoas > Funcionários'
+    navigate 'Geral > Usuários > Funcionários'
 
     click_link 'Criar Funcionário'
 
@@ -36,7 +36,7 @@ feature "Employees" do
     Employee.make!(:sobrinho)
     Position.make!(:supervisor)
 
-    navigate 'Cadastros Gerais > Pessoas > Funcionários'
+    navigate 'Geral > Usuários > Funcionários'
 
     within_records do
       click_link 'Gabriel Sobrinho'
@@ -60,7 +60,7 @@ feature "Employees" do
   scenario 'destroy an existent employee' do
     Employee.make!(:sobrinho)
 
-    navigate 'Cadastros Gerais > Pessoas > Funcionários'
+    navigate 'Geral > Usuários > Funcionários'
 
     within_records do
       click_link 'Gabriel Sobrinho'

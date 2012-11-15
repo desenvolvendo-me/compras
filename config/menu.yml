@@ -20,6 +20,7 @@ menu:
 
     - users:
       - positions
+      - employees
 
   - purchasing_processes:
     - purchase_solicitation_item_groups
@@ -57,7 +58,6 @@ menu:
     - people:
       - people
       - creditors
-      - employees
       - special_entries
       - profiles
       - users
