@@ -32,8 +32,8 @@ class BidderDecorator
     number_with_precision super if super
   end
 
-  def trading_item_classification_percent(trading_item)
-    number_with_precision super(trading_item) if super
+  def trading_item_classification_percent(*)
+    number_with_precision super if super
   end
 
   def benefited_by_law_of_proposals_class(trading_item)
