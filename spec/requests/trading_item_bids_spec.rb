@@ -238,24 +238,24 @@ feature "TradingItemBids" do
     expect(page).to_not have_checked_field 'Apenas beneficiados'
 
     within '.records tbody tr:nth-child(1)' do
-        expect(page.find('.bidder-name')).to have_content 'Nohup'
-        expect(page.find('.bidder-amount')).to have_content '80,00'
-        expect(page.find('.bidder-percent')).to have_content '0,00'
-        expect(page.find('.bidder-position')).to have_content '1º lugar'
+      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-amount')).to have_content '80,00'
+      expect(page.find('.bidder-percent')).to have_content '0,00'
+      expect(page.find('.bidder-position')).to have_content '1º lugar'
     end
 
     within '.records tbody tr:nth-child(2)' do
-        expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
-        expect(page.find('.bidder-amount')).to have_content '90,00'
-        expect(page.find('.bidder-percent')).to have_content '12,50'
-        expect(page.find('.bidder-position')).to have_content '2º lugar'
+      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+      expect(page.find('.bidder-amount')).to have_content '90,00'
+      expect(page.find('.bidder-percent')).to have_content '12,50'
+      expect(page.find('.bidder-position')).to have_content '2º lugar'
     end
 
     within '.records tbody tr:nth-child(3)' do
-        expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
-        expect(page.find('.bidder-amount')).to have_content '100,00'
-        expect(page.find('.bidder-percent')).to have_content '25,00'
-        expect(page.find('.bidder-position')).to have_content '3º lugar'
+      expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
+      expect(page.find('.bidder-amount')).to have_content '100,00'
+      expect(page.find('.bidder-percent')).to have_content '25,00'
+      expect(page.find('.bidder-position')).to have_content '3º lugar'
     end
 
     check 'Apenas beneficiados'
