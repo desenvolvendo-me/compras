@@ -11,7 +11,7 @@ class TradingItemBidsController < CrudController
   end
 
   def create
-    create! { after_creation_redirect_path }
+    create! { @parent.decorator.trading_item_bid_or_classification_path }
   end
 
   protected
@@ -35,13 +35,5 @@ class TradingItemBidsController < CrudController
 
   def parent_id
     params[:trading_item_id] || params[:trading_item_bid][:trading_item_id]
-  end
-
-  def after_creation_redirect_path
-    if @parent.finished_bid_stage?
-      classification_trading_item_path(@parent)
-    else
-      new_trading_item_bid_path(:trading_item_id => resource.trading_item_id)
-    end
   end
 end
