@@ -6,8 +6,7 @@
           <%= link_to resource, edit_trading_item_path(resource, :trading_id => @parent.id) %>
         </td>
         <td class="right">
-          <%= link_to "Fazer oferta", new_trading_item_bid_path(:trading_item_id => resource.id), 
-            :class => "button primary" %>
+          <%= link_to "Fazer oferta", resource.decorator.trading_item_bid_or_classification_path, :class => "button primary" %>
         </td>
       </tr>
     <% end %>
