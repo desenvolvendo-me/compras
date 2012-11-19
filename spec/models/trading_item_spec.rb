@@ -187,4 +187,20 @@ describe TradingItem do
       expect(subject.lowest_proposal_amount).to be_nil
     end
   end
+
+  describe '#first_bidder_available_for_current_round' do
+    it 'should return the first bidder available for the current round' do
+      subject.should_receive(:bidders_available_for_current_round).
+              and_return(['bidder1', 'bidder2', 'bidder3'])
+
+      expect(subject.first_bidder_available_for_current_round).to eq 'bidder1'
+    end
+
+    it 'should return nil when there is no bidder available for the current round' do
+      subject.should_receive(:bidders_available_for_current_round).
+              and_return([])
+
+      expect(subject.first_bidder_available_for_current_round).to eq nil
+    end
+  end
 end

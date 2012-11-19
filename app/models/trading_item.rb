@@ -55,6 +55,10 @@ class TradingItem < Compras::Model
     bidder_with_lowest_proposal.lower_trading_item_bid_amount(self)
   end
 
+  def first_bidder_available_for_current_round
+    bidders_available_for_current_round.first
+  end
+
   private
 
   def left_only_one_bidder
