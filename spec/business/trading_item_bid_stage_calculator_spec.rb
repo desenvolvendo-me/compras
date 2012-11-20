@@ -130,4 +130,34 @@ describe TradingItemBidStageCalculator do
       expect(subject).to be_stage_of_round_of_bids
     end
   end
+
+  describe '#show_proposal_report' do
+    it 'should return true when stage_of_rounds_of_bids is true and dont have bids for stage of round' do
+      subject.stub(:stage_of_round_of_bids?).and_return(true)
+      trading_item_bids = double(:trading_item_bids)
+      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+
+      trading_item_bids.should_receive(:at_stage_of_round_of_bids).and_return(trading_item_bids)
+      trading_item_bids.stub(:empty?).and_return(true)
+
+      expect(subject.show_proposal_report?).to eq true
+    end
+
+    it 'should return false when stage_of_rounds_of_bids is false' do
+      subject.stub(:stage_of_round_of_bids?).and_return(false)
+
+      expect(subject.show_proposal_report?).to eq false
+    end
+
+    it 'should return false when stage_of_rounds_of_bids is true and have bids for stage of round' do
+      subject.stub(:stage_of_round_of_bids?).and_return(true)
+      trading_item_bids = double(:trading_item_bids)
+      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+
+      trading_item_bids.should_receive(:at_stage_of_round_of_bids).and_return(trading_item_bids)
+      trading_item_bids.stub(:empty?).and_return(false)
+
+      expect(subject.show_proposal_report?).to eq false
+    end
+  end
 end

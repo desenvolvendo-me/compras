@@ -740,6 +740,7 @@ Compras::Application.routes.draw do
   resources :trading_items, :except => [:new, :create, :destroy] do
     member do
       get :classification
+      get :proposal_report
     end
 
     collection do

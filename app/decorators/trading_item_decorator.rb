@@ -19,4 +19,12 @@ class TradingItemDecorator
       routes.new_trading_item_bid_path(:trading_item_id => component.id)
     end
   end
+
+  def trading_item_bid_or_classification_or_report_classification_path(stage_calculator = TradingItemBidStageCalculator)
+    if stage_calculator.new(component).show_proposal_report?
+      routes.proposal_report_trading_item_path(component)
+    else
+      trading_item_bid_or_classification_path(stage_calculator)
+    end
+  end
 end

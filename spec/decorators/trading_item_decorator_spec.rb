@@ -82,4 +82,22 @@ describe TradingItemDecorator do
       expect(subject.trading_item_bid_or_classification_path(stage_calculator)).to eq 'new_trading_item_bid_path'
     end
   end
+
+  describe '#trading_item_bid_or_classification_or_report_classification_path' do
+    it 'should return proposal report when \'round of bids\' is the current stage and dont have any proposal' do
+      stage_calculator = double(:stage_calculator)
+
+      stage_calculator.should_receive(:new).
+                       with(component).and_return(stage_calculator)
+
+      stage_calculator.should_receive(:show_proposal_report?).and_return(true)
+
+      component.stub(:id).and_return(1)
+
+      routes.should_receive(:proposal_report_trading_item_path).
+             with(component).and_return('proposal_report_path')
+
+      expect(subject.trading_item_bid_or_classification_or_report_classification_path(stage_calculator)).to eq 'proposal_report_path'
+    end
+  end
 end

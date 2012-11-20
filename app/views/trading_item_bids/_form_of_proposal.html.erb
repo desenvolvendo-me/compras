@@ -1,0 +1,17 @@
+<%= f.input :trading_item, :as => :hidden %>
+
+<div class="yui3-g">
+  <div class="yui3-u-5-6">
+    <%= f.input :trading_item, :disabled => true %>
+  </div>
+</div>
+
+<%= f.input :bidder, :disabled => true %>
+
+<%= f.input :status, :as => :radio_buttons %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :amount %>
+  </div>
+</div>

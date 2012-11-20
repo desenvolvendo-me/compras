@@ -6,6 +6,130 @@ feature "TradingItemBids" do
     sign_in
   end
 
+  scenario "Placing an proposal to an item" do
+    Trading.make!(:pregao_presencial)
+
+    navigate "Pregão Presencial > Pregões Presenciais"
+
+    click_link "1/2012"
+
+    click_link "Itens/Ofertas"
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_content "Criar Oferta"
+
+    expect(page).to have_checked_field 'Com proposta'
+    expect(page).to_not have_checked_field 'Sem proposta'
+    expect(page).to_not have_checked_field 'Desclassificado'
+
+    expect(page).not_to have_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
+    expect(page).to have_disabled_field "Licitante"
+    expect(page).to have_field 'Valor da proposta', :with => '0,00'
+    expect(page).not_to have_field 'Menor preço'
+    expect(page).not_to have_field 'Valor limite'
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Oferta criada com sucesso"
+  end
+
+  scenario "Placing an proposal to an item and showing the proposal report after make all proposals" do
+    trading = Trading.make!(:pregao_presencial)
+
+    navigate "Pregão Presencial > Pregões Presenciais"
+
+    click_link "1/2012"
+
+    click_link "Itens/Ofertas"
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_content "Criar Oferta"
+
+    expect(page).to have_checked_field 'Com proposta'
+    expect(page).to_not have_checked_field 'Sem proposta'
+    expect(page).to_not have_checked_field 'Desclassificado'
+    expect(page).to_not have_checked_field 'Declinou'
+
+    expect(page).not_to have_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
+    expect(page).to have_disabled_field "Licitante"
+    expect(page).to have_field 'Valor da proposta', :with => '0,00'
+    expect(page).not_to have_field 'Menor preço'
+    expect(page).not_to have_field 'Valor limite'
+
+    fill_in "Valor da proposta", :with => "100,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Oferta criada com sucesso"
+
+    expect(page).to have_checked_field 'Com proposta'
+    expect(page).to_not have_checked_field 'Sem proposta'
+    expect(page).to_not have_checked_field 'Desclassificado'
+    expect(page).to_not have_checked_field 'Declinou'
+
+    expect(page).not_to have_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Wenderson Malheiros"
+    expect(page).to have_disabled_field "Licitante"
+    expect(page).to have_field 'Valor da proposta', :with => '0,00'
+    expect(page).not_to have_field 'Menor preço'
+    expect(page).not_to have_field 'Valor limite'
+
+    fill_in "Valor da proposta", :with => "110,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_notice "Oferta criada com sucesso"
+
+    expect(page).to have_checked_field 'Com proposta'
+    expect(page).to_not have_checked_field 'Sem proposta'
+    expect(page).to_not have_checked_field 'Desclassificado'
+    expect(page).to_not have_checked_field 'Declinou'
+
+    expect(page).not_to have_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_disabled_field "Licitante"
+    expect(page).to have_field 'Valor da proposta', :with => '0,00'
+    expect(page).not_to have_field 'Menor preço'
+    expect(page).not_to have_field 'Valor limite'
+
+    fill_in "Valor da proposta", :with => "101,00"
+
+    click_button "Salvar"
+
+    expect(page).to have_content 'Propostas'
+
+    within '.records tbody tr:nth-child(1)' do
+      expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
+      expect(page.find('.bidder-amount')).to have_content '100,00'
+      expect(page.find('.bidder-percent')).to have_content '0,00'
+      expect(page.find('.bidder-position')).to have_content 'Selecionada'
+    end
+
+    within '.records tbody tr:nth-child(2)' do
+      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-amount')).to have_content '101,00'
+      expect(page.find('.bidder-percent')).to have_content '1,00'
+      expect(page.find('.bidder-position')).to have_content 'Selecionada'
+    end
+
+    within '.records tbody tr:nth-child(3)' do
+      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+      expect(page.find('.bidder-amount')).to have_content '110,00'
+      expect(page.find('.bidder-percent')).to have_content '10,00'
+      expect(page.find('.bidder-position')).to have_content 'Selecionada'
+    end
+  end
+
   scenario "Placing an offer to an item" do
     trading = Trading.make!(:pregao_presencial)
 

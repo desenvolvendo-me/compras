@@ -1,6 +1,6 @@
 class TradingItemsController < CrudController
   actions :all, :except => [:new, :create, :destroy]
-  custom_actions :resource => :classification
+  custom_actions :resource => [:classification, :proposal_report]
 
   def update
     update!{ trading_items_path(:trading_id => @parent.id) }
@@ -10,6 +10,8 @@ class TradingItemsController < CrudController
 
   def authorize_resource!
     if action_name == 'classification'
+      authorize! :read, controller_name
+    elsif action_name == 'proposal_report'
       authorize! :read, controller_name
     else
       super

@@ -20,6 +20,10 @@ class TradingItemBidStageCalculator
     !stage_of_proposals? && !stage_of_negotiation?
   end
 
+  def show_proposal_report?
+    stage_of_round_of_bids? && trading_item_bids.at_stage_of_round_of_bids.empty?
+  end
+
   private
 
   def all_bidders_have_proposal_for_proposals_stage?
@@ -29,5 +33,4 @@ class TradingItemBidStageCalculator
   def only_one_bidder_left_at_round_of_bids?
     trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == selected_bidders_at_proposals.size - 1
   end
-
 end

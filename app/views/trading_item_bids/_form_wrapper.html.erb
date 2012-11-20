@@ -1,0 +1,4 @@
+<%= simple_form_for resource.localized, :url => resource.persisted? ? resource_url : collection_url, :remote => request.xhr? do |f| %>
+  <%= render resource.decorator.form, :f => f %>
+  <%= render 'form_buttons', :f => f %>
+<% end %>

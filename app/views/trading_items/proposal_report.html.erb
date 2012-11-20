@@ -1,0 +1,34 @@
+<h2>Propostas</h2>
+
+<table class="records">
+  <thead>
+    <tr>
+      <th>Licitante</th>
+      <th>Valor</th>
+      <th>%</th>
+      <th>Situação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
+      <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
+        <td class="bidder-name">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-amount">
+          <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
+        </td>
+
+        <td class="bidder-percent">
+          <%= bidder.decorator.trading_item_classification_percent(resource) %>
+        </td>
+
+        <td class="bidder-position">
+          <%= 'Selecionada' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
