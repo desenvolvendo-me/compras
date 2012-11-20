@@ -1,3 +1,3 @@
 class TradingItemBidStage < EnumerateIt::Base
-  associate_values :proposals, :negociation, :round_of_bids
+  associate_values :proposals, :negotiation, :round_of_bids
 end

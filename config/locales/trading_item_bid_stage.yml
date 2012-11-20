@@ -2,5 +2,5 @@ pt-BR:
   enumerations:
     trading_item_bid_stage:
       proposals: "Propostas"
-      negociation: "Negociação"
+      negotiation: "Negociação"
       round_of_bids: "Rodada de lances"
