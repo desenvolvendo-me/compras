@@ -103,6 +103,10 @@ class DirectPurchase < Compras::Model
     purchase_solicitation_item_group.fulfill!
   end
 
+  def remove_purchase_solicitation!
+    update_column(:purchase_solicitation_id, nil)
+  end
+
   protected
 
   def must_have_at_least_budget_allocation

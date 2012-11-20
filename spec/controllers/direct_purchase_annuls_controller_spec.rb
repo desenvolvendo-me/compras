@@ -7,10 +7,15 @@ describe DirectPurchaseAnnulsController do
   end
 
   context 'POST #create' do
-    it 'should annul the direct_purchase' do
-      direct_purchase = DirectPurchase.make!(:compra)
+    it 'should annul the direct_purchase and liberate a purchase solicitation' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo_2013)
+      purchase_solicitation_liberate_instance = double(:purchase_solicitation_liberate_instance)
+
+      direct_purchase = DirectPurchase.make!(:compra, :purchase_solicitation => purchase_solicitation)
       DirectPurchaseAnnulment.any_instance.should_receive(:annul)
       ResourceAnnul.any_instance.should_receive(:annullable).at_least(:once).and_return(direct_purchase)
+      PurchaseSolicitationLiberate.should_receive(:new).with(direct_purchase.purchase_solicitation).and_return(purchase_solicitation_liberate_instance)
+      purchase_solicitation_liberate_instance.should_receive(:liberate!)
 
       post :create, :annullable => direct_purchase
     end

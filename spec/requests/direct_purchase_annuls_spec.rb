@@ -136,11 +136,30 @@ feature 'DirectPurchaseAnnuls' do
   end
 
   scenario 'annul an existent direct_purchase with purchase_solicitation' do
-    DirectPurchase.make!(
-      :compra,
-      :purchase_solicitation => PurchaseSolicitation.make!(:reparo,
-                                                           :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
-    )
+    DirectPurchase.make!(:compra)
+    PurchaseSolicitation.make!(:reparo, :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    fill_modal 'Solicitação de compra', :with => '2012', :field => 'Ano'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+    end
 
     navigate 'Processos de Compra > Compra Direta'
 
@@ -186,6 +205,14 @@ feature 'DirectPurchaseAnnuls' do
         end
       end
     end
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_field 'Solicitação de compra', :with => ''
   end
 
   scenario 'annul an existent direct_purchase with purchase_solicitation and supply_authorization' do

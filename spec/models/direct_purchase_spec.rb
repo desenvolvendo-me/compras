@@ -126,6 +126,13 @@ describe DirectPurchase do
     it { should validate_presence_of :delivery_term_period }
     it { should validate_presence_of :pledge_type }
 
+    context '#remove_purchase_solicitation' do
+      it 'should set purchase solicitation to nil' do
+        subject.should_receive(:update_column).with(:purchase_solicitation_id, nil)
+        subject.remove_purchase_solicitation!
+      end
+    end
+
     context '#authorized?' do
       it 'should return true when associated with supply_authorization' do
         subject.stub(:supply_authorization).and_return(double)

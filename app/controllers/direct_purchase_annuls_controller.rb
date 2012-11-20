@@ -8,6 +8,9 @@ class DirectPurchaseAnnulsController < ResourceAnnulsController
       object.save
 
       annul(object)
+
+      direct_purchase = object.annullable
+      PurchaseSolicitationLiberate.new(direct_purchase.purchase_solicitation).liberate!
     end
   end
 
