@@ -2,7 +2,8 @@ class TradingItemBid < Compras::Model
   attr_accessible :amount, :round, :bidder_id, :trading_item_id,
                   :disqualification_reason, :status, :stage
 
-  has_enumeration_for :stage, :with => TradingItemBidStage
+  has_enumeration_for :stage, :with => TradingItemBidStage,
+                      :create_helpers => true
   has_enumeration_for :status, :with => TradingItemBidStatus,
                       :create_helpers => true
 
@@ -28,11 +29,17 @@ class TradingItemBid < Compras::Model
   validate  :amount_limit_by_percentage, :if => :with_proposal?
   validate  :amount_limit_by_value, :if => :with_proposal?
 
+  scope :at_stage_of_proposals, lambda { where { stage.eq(TradingItemBidStage::PROPOSALS)} }
+  scope :at_stage_of_round_of_bids, lambda { where { stage.eq(TradingItemBidStage::ROUND_OF_BIDS)} }
   scope :at_round, lambda { |round_number| where { round.eq(round_number) } }
   scope :for_trading_item, lambda { |item_id| where { trading_item_id.eq(item_id) } }
 
   def self.with_proposal
     where { status.eq(TradingItemBidStatus::WITH_PROPOSAL) }.order { :id }
+  end
+
+  def self.with_no_proposal
+    where { status.not_eq(TradingItemBidStatus::WITH_PROPOSAL) }.order { :id }
   end
 
   def update_status(new_status)
@@ -66,7 +73,7 @@ class TradingItemBid < Compras::Model
   end
 
   def validate_amount_limit_by_percentage?
-    amount && minimum_reduction_percent? && trading_item_last_proposal_value?
+    validate_amount_limit? && minimum_reduction_percent?
   end
 
   def amount_limit_by_value(numeric_parser = ::I18n::Alchemy::NumericParser)
@@ -78,7 +85,11 @@ class TradingItemBid < Compras::Model
   end
 
   def validate_amount_limit_by_value?
-    amount && minimum_reduction_value? && trading_item_last_proposal_value?
+    validate_amount_limit? && minimum_reduction_value?
+  end
+
+  def validate_amount_limit?
+    amount && trading_item_last_proposal_value? && round_of_bids?
   end
 
   def minimum_value

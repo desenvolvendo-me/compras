@@ -24,6 +24,7 @@ describe TradingItemBid do
   describe "validations" do
     it "validates if amount is greater than zero when status is with_proposal" do
       subject.stub(:with_proposal?).and_return(true)
+      subject.stub(:trading_item_last_proposal_value).and_return(0)
 
       should_not allow_value(0).for(:amount)
       should_not allow_value(-1).for(:amount)
@@ -77,6 +78,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(10.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 11.0
 
@@ -90,6 +92,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(10.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.valid?
 
@@ -101,6 +104,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(10.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 11.0
 
@@ -114,6 +118,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(false)
       subject.stub(:trading_item_last_proposal_value).and_return(10.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 11.0
 
@@ -127,6 +132,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_value).and_return(2.3)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(0.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 11.0
 
@@ -140,6 +146,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(100.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 95.0
 
@@ -153,6 +160,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(100.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.valid?
 
@@ -164,6 +172,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(100.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 95.0
 
@@ -177,6 +186,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(false)
       subject.stub(:trading_item_last_proposal_value).and_return(100.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 95.0
 
@@ -190,6 +200,7 @@ describe TradingItemBid do
       subject.stub(:minimum_reduction_percent).and_return(10)
       subject.stub(:minimum_reduction_percent?).and_return(false)
       subject.stub(:trading_item_last_proposal_value).and_return(0.0)
+      subject.stub(:round_of_bids?).and_return(true)
 
       subject.amount = 95.0
 

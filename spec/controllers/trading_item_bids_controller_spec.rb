@@ -58,10 +58,35 @@ describe TradingItemBidsController do
       bidder3 = trading.bidders.last
 
        TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder1.id,
+        :amount => 120.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+       TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder2.id,
+        :amount => 120.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+       TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder3.id,
+        :amount => 120.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+       TradingItemBid.create!(
         :round => 1,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder1.id,
         :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
        TradingItemBid.create!(
@@ -69,6 +94,7 @@ describe TradingItemBidsController do
         :trading_item_id => trading_item.id,
         :bidder_id => bidder2.id,
         :disqualification_reason => 'Desclassificado',
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::DISQUALIFIED)
 
       post :create, :trading_id => trading.id,

@@ -1,5 +1,7 @@
 require 'decorator_helper'
+require 'enumerate_it'
 require 'app/decorators/trading_item_decorator'
+require 'app/enumerations/trading_item_bid_stage'
 
 describe TradingItemDecorator do
   describe '#unit_price' do
@@ -47,26 +49,39 @@ describe TradingItemDecorator do
   end
 
   describe '#trading_item_bid_or_classification_path' do
-    it 'should return classification link when trading_item finished_bid_stage' do
-      component.stub(:finished_bid_stage?).and_return(true)
+    it 'should return classification link when \'negotiation\' is the current stage' do
+      stage_calculator = double(:stage_calculator)
+
+      stage_calculator.should_receive(:new).
+                       with(component).and_return(stage_calculator)
+
+      stage_calculator.should_receive(:current_stage).
+                       and_return(TradingItemBidStage::NEGOTIATION)
+
       component.stub(:id).and_return(1)
 
       routes.should_receive(:classification_trading_item_path).
              with(component).and_return('classification_path')
 
 
-      expect(subject.trading_item_bid_or_classification_path).to eq 'classification_path'
+      expect(subject.trading_item_bid_or_classification_path(stage_calculator)).to eq 'classification_path'
     end
 
-    it 'should return new_trading_item_bid_path link when trading_item not finished_bid_stage' do
-      component.stub(:finished_bid_stage?).and_return(false)
+    it 'should return new_trading_item_bid_path link when it is not on stage of negotiation' do
+      stage_calculator = double(:stage_calculator)
+
+      stage_calculator.should_receive(:new).
+                       with(component).and_return(stage_calculator)
+
+      stage_calculator.should_receive(:current_stage).
+                       and_return(TradingItemBidStage::ROUND_OF_BIDS)
       component.stub(:id).and_return(1)
 
       routes.should_receive(:new_trading_item_bid_path).
              with(:trading_item_id => 1).and_return('new_trading_item_bid_path')
 
 
-      expect(subject.trading_item_bid_or_classification_path).to eq 'new_trading_item_bid_path'
+      expect(subject.trading_item_bid_or_classification_path(stage_calculator)).to eq 'new_trading_item_bid_path'
     end
   end
 end

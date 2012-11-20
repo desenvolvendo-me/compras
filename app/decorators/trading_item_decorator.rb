@@ -12,8 +12,8 @@ class TradingItemDecorator
     number_with_precision super if super
   end
 
-  def trading_item_bid_or_classification_path
-    if component.finished_bid_stage?
+  def trading_item_bid_or_classification_path(stage_calculator = TradingItemBidStageCalculator)
+    if stage_calculator.new(component).current_stage == TradingItemBidStage::NEGOTIATION
       routes.classification_trading_item_path(component)
     else
       routes.new_trading_item_bid_path(:trading_item_id => component.id)
