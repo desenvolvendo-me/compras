@@ -11,20 +11,25 @@ describe AdministrativeProcessesHelper do
   end
 
   context '#build_licitation_process_link' do
+    let :licitation_process do
+      double('licitation_process')
+    end
+
+    let :decorator do
+      double('administrative_process_decorator')
+    end
+
     context "released and persistend" do
       before do
         resource.stub(:persisted?).and_return(true)
         resource.stub(:released?).and_return(true)
         resource.stub(:licitation_process).and_return(licitation_process)
+        resource.stub(:decorator).and_return(decorator)
         resource.stub(:id).and_return(1)
       end
 
-      let :licitation_process do
-        double('licitation_process')
-      end
-
       it "should return a link to a new licitation process" do
-        resource.stub(:allow_licitation_process?).and_return(true)
+        decorator.stub(:cant_build_licitation_process_message).and_return(nil)
         licitation_process.stub(:nil?).and_return(true)
 
         helper.should_receive(:new_licitation_process_path).
@@ -36,7 +41,7 @@ describe AdministrativeProcessesHelper do
 
       it "should return a link to edit licitation process" do
         licitation_process.stub(:nil?).and_return(false)
-        resource.stub(:allow_licitation_process?).and_return(true)
+        decorator.stub(:cant_build_licitation_process_message).and_return(nil)
 
         helper.should_receive(:edit_licitation_process_path).
           with(licitation_process, :administrative_process_id => 1).
@@ -45,27 +50,43 @@ describe AdministrativeProcessesHelper do
         expect(helper.build_licitation_process_link).to eq '<a href="url" class="button secondary">Editar processo licitatório</a>'
       end
 
+      it "should return a disabled link to edit or new licitation process when not allow licitation process" do
+        decorator.stub(:cant_build_licitation_process_message).and_return('não pode')
+        licitation_process.stub(:nil?).and_return(true)
 
-      it "should not return a link to edit neither new licitation process when not allow licitation process" do
-        resource.stub(:allow_licitation_process?).and_return(false)
+        helper.should_receive(:new_licitation_process_path).
+          with(:administrative_process_id => 1).
+          and_return('url')
 
-        expect(helper.build_licitation_process_link).to be_nil
+        expect(helper.build_licitation_process_link).
+          to eq '<a href="url" class="button primary" data-disabled="não pode">Novo processo licitatório</a>'
       end
     end
 
     context "neither persisted nor released" do
+      before do
+        resource.stub(:licitation_process).and_return(licitation_process)
+        resource.stub(:decorator).and_return(decorator)
+        resource.stub(:id).and_return(1)
+      end
+
       it "should not return a link to new neither edit licitation_process if not persisted" do
         resource.stub(:persisted?).and_return(false)
-        resource.stub(:released?).and_return(true)
 
         expect(helper.build_licitation_process_link).to be_nil
       end
 
-      it "should not return a link to new neither edit licitation_process if not released" do
+      it "should return a disabled link to new or edit licitation_process if not released" do
         resource.stub(:persisted?).and_return(true)
-        resource.stub(:released?).and_return(false)
+        decorator.stub(:cant_build_licitation_process_message).and_return('não pode')
+        licitation_process.stub(:nil?).and_return(true)
 
-        expect(helper.build_licitation_process_link).to be_nil
+        helper.should_receive(:new_licitation_process_path).
+          with(:administrative_process_id => 1).
+          and_return('url')
+
+        expect(helper.build_licitation_process_link).
+          to eq '<a href="url" class="button primary" data-disabled="não pode">Novo processo licitatório</a>'
       end
     end
   end

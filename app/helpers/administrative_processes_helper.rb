@@ -1,12 +1,18 @@
 # encoding: utf-8
 module AdministrativeProcessesHelper
   def build_licitation_process_link
-    return unless resource.persisted? && resource.released? && resource.allow_licitation_process?
+    return unless resource.persisted?
 
     if resource.licitation_process.nil?
-      link_to('Novo processo licitatório', new_licitation_process_path(:administrative_process_id => resource.id), :class => "button primary")
+      link_to('Novo processo licitatório',
+              new_licitation_process_path(:administrative_process_id => resource.id),
+              :class => "button primary",
+              'data-disabled' => resource.decorator.cant_build_licitation_process_message)
     else
-      link_to('Editar processo licitatório', edit_licitation_process_path(resource.licitation_process, :administrative_process_id => resource.id), :class => "button secondary")
+      link_to('Editar processo licitatório',
+              edit_licitation_process_path(resource.licitation_process, :administrative_process_id => resource.id),
+              :class => "button secondary",
+              'data-disabled' => resource.decorator.cant_build_licitation_process_message)
     end
   end
 

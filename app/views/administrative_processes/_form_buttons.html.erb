@@ -6,6 +6,9 @@
 
   <%= release_button %>
   <%= build_licitation_process_link %>
-  <%= link_to "Solicitação de abertura de processo licitatório", resource_path(resource), :class => 'clear button neutral' if f.object.released? %>
+  <%= link_to("Solicitação de abertura de processo licitatório",
+              resource_path(resource),
+              :class => 'clear button neutral',
+              'data-disabled' => f.object.decorator.cant_print_message) if f.object.persisted? %>
   <%= f.button :back %>
 </div>

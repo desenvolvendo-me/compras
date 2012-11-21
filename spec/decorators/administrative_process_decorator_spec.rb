@@ -69,4 +69,74 @@ describe AdministrativeProcessDecorator do
       end
     end
   end
+
+  context '#cant_print_message' do
+    it 'when is not released' do
+      I18n.backend.store_translations 'pt-BR', :administrative_process => {
+          :messages => {
+            :cant_print => 'não pode imprimir'
+        }
+      }
+
+      component.stub(:released? => false)
+
+      expect(subject.cant_print_message).to eq 'não pode imprimir'
+    end
+
+    it 'when released' do
+      component.stub(:released? => true)
+
+      expect(subject.cant_print_message).to be_nil
+    end
+  end
+
+  context '#cant_build_licitation_process' do
+    it 'when is not allowed and not released' do
+      I18n.backend.store_translations 'pt-BR', :administrative_process => {
+          :messages => {
+            :cant_build_licitation_process => {
+              :not_allowed => 'não permitido'
+            }
+        }
+      }
+
+      component.stub(:released? => false, :allow_licitation_process? => false)
+
+      expect(subject.cant_build_licitation_process_message).to eq 'não permitido'
+    end
+
+    it 'when is not allowed and not released' do
+      I18n.backend.store_translations 'pt-BR', :administrative_process => {
+          :messages => {
+            :cant_build_licitation_process => {
+              :not_allowed => 'não permitido'
+            }
+        }
+      }
+
+      component.stub(:released? => true, :allow_licitation_process? => false)
+
+      expect(subject.cant_build_licitation_process_message).to eq 'não permitido'
+    end
+
+    it 'when is allowed and not released' do
+      I18n.backend.store_translations 'pt-BR', :administrative_process => {
+          :messages => {
+            :cant_build_licitation_process => {
+              :not_released => 'não liberado'
+            }
+        }
+      }
+
+      component.stub(:released? => false, :allow_licitation_process? => true)
+
+      expect(subject.cant_build_licitation_process_message).to eq 'não liberado'
+    end
+
+    it 'when is allowed and released' do
+      component.stub(:released? => true, :allow_licitation_process? => true)
+
+      expect(subject.cant_build_licitation_process_message).to be_nil
+    end
+  end
 end

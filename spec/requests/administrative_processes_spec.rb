@@ -426,7 +426,7 @@ feature "AdministrativeProcesses" do
     end
   end
 
-  scenario 'should not have print button if status different from released' do
+  scenario 'should have disabled print button when status is different from released' do
     AdministrativeProcess.make!(:compra_aguardando)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -436,10 +436,10 @@ feature "AdministrativeProcesses" do
     end
 
     expect(page).to_not have_select 'Status do processo administrativo', :selected => 'Liberado'
-    expect(page).to_not have_link 'Solicitação de abertura de processo licitatório'
+    expect(page).to have_disabled_element 'Solicitação de abertura de processo licitatório', :reason => 'processo administrativo não liberado'
   end
 
-  scenario 'should have print button if status equals released' do
+  scenario 'should have print button when status is released' do
      AdministrativeProcess.make!(:compra_liberada)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -450,6 +450,58 @@ feature "AdministrativeProcesses" do
 
     expect(page).to have_select 'Status do processo administrativo', :selected => 'Liberado'
     expect(page).to have_link 'Solicitação de abertura de processo licitatório'
+  end
+
+  scenario 'should have disabled licitation process button when status is not released and is not allowed' do
+    AdministrativeProcess.make!(:maior_lance_por_itens).update_attribute :status, AdministrativeProcessStatus::WAITING
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo licitatório não permitido'
+  end
+
+  scenario 'should have disabled licitation process button when status is not released but is allowed' do
+    AdministrativeProcess.make!(:compra_aguardando)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_select 'Status do processo administrativo', :selected => 'Liberado'
+    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo administrativo não liberado'
+  end
+
+  scenario 'should have disabled licitation process button when status is released but not allowed' do
+    AdministrativeProcess.make!(:maior_lance_por_itens)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Status do processo administrativo', :selected => 'Liberado'
+    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo licitatório não permitido'
+  end
+
+  scenario 'should have licitation process button when status is released and allowed' do
+     AdministrativeProcess.make!(:compra_liberada)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_select 'Status do processo administrativo', :selected => 'Liberado'
+    expect(page).to have_link 'Novo processo licitatório'
   end
 
   scenario "should have a release button when editing an administrative process with status waiting" do
@@ -621,19 +673,6 @@ feature "AdministrativeProcesses" do
     expect(page).to have_link 'Editar processo licitatório'
   end
 
-  scenario "should not have new licitation process link if not released" do
-    AdministrativeProcess.make!(:compra_aguardando)
-
-    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
-
-    within_records do
-      page.find('a').click
-    end
-
-    expect(page).to_not have_link 'Novo processo licitatório'
-    expect(page).to_not have_link 'Editar processo licitatório'
-  end
-
   scenario "should not have a release and annull button at new" do
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -643,7 +682,7 @@ feature "AdministrativeProcesses" do
     expect(page).to_not have_button 'Liberar'
   end
 
-  scenario 'should not have licitation_process button if not allow licitation_process' do
+  scenario 'should have disabled licitation_process button if not allow licitation_process' do
     AdministrativeProcess.make!(:maior_lance_por_itens)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
@@ -652,7 +691,7 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    expect(page).to_not have_link 'Novo processo licitatório'
+    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo licitatório não permitido'
   end
 
   scenario 'should show only purchase_solicitation_item_group not annulled' do

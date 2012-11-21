@@ -22,3 +22,10 @@ pt-BR:
         delivery_date: "Data de liberação"
         total_allocations_value: "Valor total"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
+
+  administrative_process:
+    messages:
+      cant_print: "processo administrativo não liberado"
+      cant_build_licitation_process:
+        not_released: "processo administrativo não liberado"
+        not_allowed: "processo licitatório não permitido"
