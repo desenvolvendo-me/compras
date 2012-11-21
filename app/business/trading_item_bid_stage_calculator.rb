@@ -29,10 +29,10 @@ class TradingItemBidStageCalculator
   end
 
   def is_on_stage_of_negotiation?
-     left_only_one_bidder_at_round_of_bids? && lowest_proposal_amount
+     only_one_bidder_left_at_round_of_bids? && lowest_proposal_amount
   end
 
-  def left_only_one_bidder_at_round_of_bids?
+  def only_one_bidder_left_at_round_of_bids?
     trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == selected_bidders.size - 1
   end
 

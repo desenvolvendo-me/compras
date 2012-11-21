@@ -63,7 +63,7 @@ describe TradingItemBidStageCalculator do
 
     it 'returns \'negotiation\' when left only one bid with proposal' do
       subject.stub(:is_on_stage_of_proposal?).and_return(false)
-      subject.stub(:left_only_one_bidder_at_round_of_bids?).and_return(true)
+      subject.stub(:only_one_bidder_left_at_round_of_bids?).and_return(true)
       subject.stub(:lowest_proposal_amount).and_return(10)
 
       expect(subject.current_stage).to eq TradingItemBidStage::NEGOTIATION
