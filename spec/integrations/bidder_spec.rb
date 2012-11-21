@@ -124,6 +124,60 @@ describe Bidder do
     end
   end
 
+  describe '.at_trading_item_stage' do
+    before do
+      licitation_process = LicitationProcess.make!(
+        :pregao_presencial,
+        :bidders => [sobrinho, wenderson, nohup])
+
+      trading = Trading.make!(:pregao_presencial,
+        :trading_items =>[trading_item],
+        :licitation_process => licitation_process
+      )
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => sobrinho.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => wenderson.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => nohup.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::NEGOTIATION,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+    end
+
+    let(:trading_item) { TradingItem.make!(:item_pregao_presencial) }
+    let(:sobrinho) { Bidder.make!(:licitante_sobrinho) }
+    let(:wenderson) { Bidder.make!(:licitante) }
+    let(:nohup) { Bidder.make!(:licitante_com_proposta_3) }
+
+    it 'should return only bidders for the stage of proposals of the trading item' do
+      expect(described_class.at_trading_item_stage(trading_item.id, TradingItemBidStage::PROPOSALS)).to eq [sobrinho]
+    end
+
+    it 'should return only bidders for the stage of round_of_bids of the trading item' do
+      expect(described_class.at_trading_item_stage(trading_item.id, TradingItemBidStage::ROUND_OF_BIDS)).to eq [wenderson]
+    end
+
+    it 'should return only bidders for the stage of negotiation of the trading item' do
+      expect(described_class.at_trading_item_stage(trading_item.id, TradingItemBidStage::NEGOTIATION)).to eq [nohup]
+    end
+  end
+
   describe '#lower_trading_item_bid_amount' do
     it 'should return zero when bidder there is no proposal for item' do
       trading = Trading.make!(:pregao_presencial)

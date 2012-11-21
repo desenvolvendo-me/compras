@@ -203,4 +203,20 @@ describe TradingItem do
       expect(subject.first_bidder_available_for_current_round).to eq nil
     end
   end
+
+  describe '#selected_bidders_at_proposals' do
+    it 'should get all bidders with proposal at proposal stage' do
+      subject.stub(:id).and_return(1)
+      bidders_with_proposals = double(:bidders_with_proposals)
+
+      bidders_with_proposals.should_receive(:at_trading_item_stage).
+                             with(1, TradingItemBidStage::PROPOSALS).
+                             and_return(['bidder1', 'bidder2'])
+
+      subject.should_receive(:bidders_with_proposals).
+              and_return(bidders_with_proposals)
+
+      expect(subject.selected_bidders_at_proposals).to eq ['bidder1', 'bidder2']
+    end
+  end
 end

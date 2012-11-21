@@ -27,6 +27,12 @@ describe TradingItemBidStageCalculator do
 
       subject.lowest_proposal_amount
     end
+
+    it 'delegates selected_bidders_at_proposals to trading_item' do
+      trading_item.should_receive(:selected_bidders_at_proposals)
+
+      subject.selected_bidders_at_proposals
+    end
   end
 
   describe '#stage_of_proposals?' do
@@ -64,7 +70,7 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      subject.should_receive(:selected_bidders).
+      subject.should_receive(:selected_bidders_at_proposals).
               at_least(1).times.and_return(['bidder1', 'bidder2'])
 
 
@@ -94,7 +100,7 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      subject.should_receive(:selected_bidders).
+      subject.should_receive(:selected_bidders_at_proposals).
               at_least(1).times.and_return(['bidder1', 'bidder2'])
 
 
@@ -115,7 +121,7 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      subject.should_receive(:selected_bidders).
+      subject.should_receive(:selected_bidders_at_proposals).
               at_least(1).times.and_return(['bidder1', 'bidder2'])
 
 

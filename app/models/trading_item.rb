@@ -40,7 +40,7 @@ class TradingItem < Compras::Model
   end
 
   def bidders_by_lowest_proposal
-    bidders.with_proposal_for_trading_item(id).sort { |a,b|
+    bidders_with_proposals.sort { |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
     }
   end
@@ -55,7 +55,15 @@ class TradingItem < Compras::Model
     bidders_available_for_current_round.first
   end
 
+  def selected_bidders_at_proposals
+    bidders_with_proposals.at_trading_item_stage(id, TradingItemBidStage::PROPOSALS)
+  end
+
   private
+
+  def bidders_with_proposals
+    bidders.with_proposal_for_trading_item(id)
+  end
 
   def bidder_with_lowest_proposal
     bidders_by_lowest_proposal.first

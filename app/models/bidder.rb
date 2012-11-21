@@ -104,6 +104,14 @@ class Bidder < Compras::Model
     where { trading_item_bids.round.eq(round) }
   end
 
+  def self.at_trading_item_stage(trading_item, stage)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.trading_item_id.eq(trading_item_id) &
+      trading_item_bids.stage.eq(stage)
+    }
+  end
+
   def proposals_by_lot(lot)
     proposals.select { |proposal| proposal.licitation_process_lot == lot }
   end

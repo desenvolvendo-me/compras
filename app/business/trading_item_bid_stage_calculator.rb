@@ -2,7 +2,7 @@ class TradingItemBidStageCalculator
   attr_accessor :trading_item
 
   delegate :trading_item_bids, :bidders, :lowest_proposal_amount,
-           :to => :trading_item
+           :selected_bidders_at_proposals, :to => :trading_item
 
   def initialize(trading_item)
     self.trading_item = trading_item
@@ -27,10 +27,7 @@ class TradingItemBidStageCalculator
   end
 
   def only_one_bidder_left_at_round_of_bids?
-    trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == selected_bidders.size - 1
+    trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == selected_bidders_at_proposals.size - 1
   end
 
-  def selected_bidders
-    trading_item_bids.with_proposal.at_stage_of_proposals.map(&:bidder)
-  end
 end
