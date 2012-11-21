@@ -58,7 +58,7 @@ describe TradingItemBidsController do
       bidder2 = trading.bidders.second
       bidder3 = trading.bidders.last
 
-       TradingItemBid.create!(
+      TradingItemBid.create!(
         :round => 0,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder1.id,
@@ -66,7 +66,7 @@ describe TradingItemBidsController do
         :stage => TradingItemBidStage::PROPOSALS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-       TradingItemBid.create!(
+      TradingItemBid.create!(
         :round => 0,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder2.id,
@@ -74,7 +74,7 @@ describe TradingItemBidsController do
         :stage => TradingItemBidStage::PROPOSALS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-       TradingItemBid.create!(
+      TradingItemBid.create!(
         :round => 0,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder3.id,
@@ -82,7 +82,7 @@ describe TradingItemBidsController do
         :stage => TradingItemBidStage::PROPOSALS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-       TradingItemBid.create!(
+      TradingItemBid.create!(
         :round => 1,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder1.id,
@@ -90,7 +90,7 @@ describe TradingItemBidsController do
         :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-       TradingItemBid.create!(
+      TradingItemBid.create!(
         :round => 1,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder2.id,
