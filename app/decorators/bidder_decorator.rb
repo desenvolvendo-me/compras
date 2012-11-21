@@ -44,6 +44,10 @@ class BidderDecorator
     end
   end
 
+  def cant_save_or_destroy_message
+    t('bidder.messages.cant_save_or_destroy') unless allow_bidders?
+  end
+
   private
 
   def valid_benefited_percent?(trading_item, percent = 5.0)

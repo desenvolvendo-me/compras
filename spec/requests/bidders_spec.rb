@@ -818,9 +818,10 @@ feature "Bidders" do
     expect(page).to_not have_field 'Pontuação técnica'
   end
 
-  scenario "Save and destroy buttons should not be shown if licitation process envelope opening date is not today" do
-    licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
-    licitation_process.update_attributes(:envelope_opening_date => Date.tomorrow)
+  scenario "Save and destroy buttons should be disabled if licitation process envelope opening date is not today" do
+    licitation_process = LicitationProcess.make!(:apuracao_global)
+    licitation_process.update_attribute :envelope_opening_date, Date.tomorrow
+    bidder = licitation_process.bidders.first
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
 
@@ -832,12 +833,10 @@ feature "Bidders" do
 
     click_link 'Licitantes'
 
-    within_records do
-      page.find('a').click
-    end
+    click_link bidder.to_s
 
-    expect(page).to_not have_button 'Salvar'
-    expect(page).to_not have_link 'Apagar'
+    expect(page).to have_disabled_element 'Apagar', :reason => 'alterações somente no dia da abertura dos envelopes'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'alterações somente no dia da abertura dos envelopes'
   end
 
   scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do

@@ -170,4 +170,24 @@ describe BidderDecorator do
       expect(subject.benefited_by_law_of_proposals_class(trading_item)).to eq 'not-benefited'
     end
   end
+
+  describe '#cant_save_or_destroy_message' do
+    it 'when bidders are not allowed' do
+      I18n.backend.store_translations 'pt-BR', :bidder => {
+          :messages => {
+            :cant_save_or_destroy => 'não pode'
+        }
+      }
+
+      component.stub(:allow_bidders? => false)
+
+      expect(subject.cant_save_or_destroy_message).to eq 'não pode'
+    end
+
+    it 'when bidders are allowed' do
+      component.stub(:allow_bidders? => true)
+
+      expect(subject.cant_save_or_destroy_message).to be_nil
+    end
+  end
 end

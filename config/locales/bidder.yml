@@ -21,3 +21,7 @@ pt-BR:
         proposal_total_value_by_lot: "Preço total dos itens"
         people: "Representantes"
         will_submit_new_proposal_when_draw: "Apresentará nova proposta em caso de empate"
+
+  bidder:
+    messages:
+      cant_save_or_destroy: "alterações somente no dia da abertura dos envelopes"

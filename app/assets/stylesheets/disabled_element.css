@@ -1,0 +1,4 @@
+a[data-disabled], input[data-disabled], button[data-disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
