@@ -33,6 +33,7 @@ describe TradingItemBidsController do
            }
 
       expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITHOUT_PROPOSAL
+      expect(assigns(:trading_item_bid).stage).to eq TradingItemBidStage::PROPOSALS
       expect(assigns(:trading_item_bid).round).to eq 1
     end
 

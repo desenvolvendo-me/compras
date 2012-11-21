@@ -13,7 +13,7 @@ class TradingItemDecorator
   end
 
   def trading_item_bid_or_classification_path(stage_calculator = TradingItemBidStageCalculator)
-    if stage_calculator.new(component).current_stage == TradingItemBidStage::NEGOTIATION
+    if stage_calculator.new(component).stage_of_negotiation?
       routes.classification_trading_item_path(component)
     else
       routes.new_trading_item_bid_path(:trading_item_id => component.id)

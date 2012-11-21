@@ -18,7 +18,7 @@ class TradingItemBidsController < CrudController
 
   def create_resource(object)
     object.round  = TradingItemBidRoundCalculator.new(@parent).calculate
-    object.stage  = TradingItemBidStageCalculator.new(@parent).current_stage
+    object.stage  = TradingItemBidStage.current_stage(@parent)
     object.bidder = @parent.first_bidder_available_for_current_round
 
     super

@@ -55,8 +55,7 @@ describe TradingItemDecorator do
       stage_calculator.should_receive(:new).
                        with(component).and_return(stage_calculator)
 
-      stage_calculator.should_receive(:current_stage).
-                       and_return(TradingItemBidStage::NEGOTIATION)
+      stage_calculator.should_receive(:stage_of_negotiation?).and_return(true)
 
       component.stub(:id).and_return(1)
 
@@ -73,8 +72,7 @@ describe TradingItemDecorator do
       stage_calculator.should_receive(:new).
                        with(component).and_return(stage_calculator)
 
-      stage_calculator.should_receive(:current_stage).
-                       and_return(TradingItemBidStage::ROUND_OF_BIDS)
+      stage_calculator.should_receive(:stage_of_negotiation?).and_return(false)
       component.stub(:id).and_return(1)
 
       routes.should_receive(:new_trading_item_bid_path).
