@@ -21,12 +21,6 @@ describe TradingItemBidRoundCalculator do
 
       subject.bidders
     end
-
-    it 'delegates last_bid_round to trading_item' do
-      trading_item.should_receive(:last_bid_round)
-
-      subject.last_bid_round
-    end
   end
 
   describe '#calculate' do
@@ -37,8 +31,9 @@ describe TradingItemBidRoundCalculator do
     end
 
     it 'should return current_round when not all bidders have proposals' do
-      trading_item.stub(:last_bid_round).and_return(2)
+      last_bid = double(:last_bid, :round => 2)
 
+      subject.should_receive(:last_bid).twice.and_return(last_bid)
       subject.should_receive(:all_bidders_have_bid_for_last_round?).
               and_return(false)
 
@@ -46,8 +41,10 @@ describe TradingItemBidRoundCalculator do
     end
 
     it 'should return next_round when all bidders have proposals' do
-      trading_item.stub(:last_bid_round).and_return(2)
+      last_bid = double(:last_bid, :round => 2)
 
+      subject.should_receive(:last_bid).twice.and_return(last_bid)
+      subject.stub(:stage_of_round_of_bids?).and_return(true)
       subject.should_receive(:all_bidders_have_bid_for_last_round?).
               and_return(true)
 

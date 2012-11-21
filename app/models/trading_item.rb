@@ -29,10 +29,6 @@ class TradingItem < Compras::Model
     last_bid_with_proposal.try(:amount) || BigDecimal(0)
   end
 
-  def last_bid_round
-    last_bid.try(:round) || 0
-  end
-
   def bidders_available_for_current_round(round_calculator = TradingItemBidRoundCalculator)
     current_round = round_calculator.new(self).calculate
 
@@ -77,12 +73,8 @@ class TradingItem < Compras::Model
     end
   end
 
-  def last_bid
-    trading_item_bids.last
-  end
-
   def last_bid_with_proposal
-    trading_item_bids.with_proposal.last
+    trading_item_bids.at_stage_of_round_of_bids.with_proposal.last
   end
 
   def require_at_least_one_minimum_reduction

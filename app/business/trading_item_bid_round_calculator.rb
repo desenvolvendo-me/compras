@@ -25,5 +25,12 @@ class TradingItemBidRoundCalculator
 
   def all_bidders_have_bid_for_last_round?
     last_bid_round == 0 || bidders.count == count_bidders_with_bids
+
+  def last_bid
+    trading_item_bids_for_stage_of_round_of_bids.last
+  end
+
+  def last_bid_round
+    last_bid.nil? ? 0 : last_bid.round
   end
 end
