@@ -2,6 +2,7 @@
 require 'model_helper'
 require 'app/models/trading_item'
 require 'app/models/trading'
+require 'app/models/trading_configuration'
 
 describe Trading do
 
@@ -21,9 +22,14 @@ describe Trading do
   it { should validate_presence_of :year }
 
   describe "#to_s" do
-
     it "returns the code and year of the trading formatted as 1/2012" do
       expect(subject.to_s).to eq "1/2012"
+    end
+  end
+
+  describe "default values" do
+    it "should percentage_limit_to_participate_in_bids be 0" do
+      expect(subject.percentage_limit_to_participate_in_bids).to eq 0
     end
   end
 
@@ -69,6 +75,24 @@ describe Trading do
 
         expect(subject.errors[:licitation_commission]).to include "não pode estar exonerada"
       end
+    end
+  end
+
+  describe 'before_save' do
+    it 'should clear dates, protocol when is not invited' do
+      subject.run_callbacks(:create)
+
+      expect(subject.percentage_limit_to_participate_in_bids).to eq TradingConfiguration.percentage_limit_to_participate_in_bids
+    end
+
+    it 'should clear dates, protocol when is not invited' do
+      last_trading_configuration_instance = TradingConfiguration.new
+      last_trading_configuration_instance.stub(:percentage_limit_to_participate_in_bids).and_return(8.8)
+
+      TradingConfiguration.stub(:last).and_return(last_trading_configuration_instance)
+      subject.run_callbacks(:create)
+
+      expect(subject.percentage_limit_to_participate_in_bids).to eq 8.8
     end
   end
 end

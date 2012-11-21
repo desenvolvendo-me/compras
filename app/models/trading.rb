@@ -28,6 +28,8 @@ class Trading < Compras::Model
   delegate :administrative_process_summarized_object, :to => :licitation_process,
            :allow_nil => true
 
+  before_create :get_percentage_limit_to_participate_in_bids
+
   orderize :code
   filterize
 
@@ -67,5 +69,9 @@ class Trading < Compras::Model
     if licitation_commission.exonerated?
       errors.add(:licitation_commission, :should_not_be_exonerated)
     end
+  end
+
+  def get_percentage_limit_to_participate_in_bids
+    self.percentage_limit_to_participate_in_bids = TradingConfiguration.percentage_limit_to_participate_in_bids
   end
 end

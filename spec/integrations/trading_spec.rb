@@ -18,4 +18,15 @@ describe Trading do
       expect(trading.errors.full_messages).to include "Ano não pode ficar em branco"
     end
   end
+
+  describe 'after save' do
+    it 'should get percentage limit to participate in bids from Trading Configuration' do
+      trading = Trading.make(:pregao_presencial)
+      TradingConfiguration.make!(:pregao)
+
+      trading.save!
+
+      expect(trading.percentage_limit_to_participate_in_bids).to eq 10.00
+    end
+  end
 end
