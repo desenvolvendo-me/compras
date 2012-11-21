@@ -88,3 +88,4 @@ menu:
 
   - trading:
     - tradings
+    - trading_configuration

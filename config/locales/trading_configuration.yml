@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      trading_configuration:
+        one: "Configuração do Registro de Preço"
+        other: "Configuração do Registro de Preço"
+
+    attributes:
+      trading_configuration:
+        percentage_limit_to_participate_in_bids: "Porcentagem limite para participar das ofertas"

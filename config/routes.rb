@@ -749,6 +749,8 @@ Compras::Application.routes.draw do
 
   resources :trading_item_bids
 
+  resource :trading_configuration
+
   resources :users do
     collection do
       get :filter
