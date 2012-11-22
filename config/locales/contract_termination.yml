@@ -18,3 +18,6 @@ pt-BR:
         compensation_value: 'Valor da indenização'
         term_termination_file: 'Termo de rescisão'
 
+  contract_termination:
+    messages:
+      is_annulled: "não é permitido alterar rescisão anulada"

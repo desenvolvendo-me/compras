@@ -114,7 +114,7 @@ feature 'ContractTerminations' do
     expect(page).to have_disabled_field 'Valor da indenização'
 
     expect(page).to_not have_link 'Anular'
-    expect(page).to_not have_button 'Salvar'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'não é permitido alterar rescisão anulada'
 
     expect(page).to have_link 'Anulação'
   end
