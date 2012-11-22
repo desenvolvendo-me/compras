@@ -14,7 +14,7 @@ gem 'activerecord-connections', '0.0.3'
 gem 'inscriptio_cursualis', '0.2.0'
 gem 'persona', '0.1.1'
 gem 'unico', '2.0.1'
-gem 'unico-assets', '1.2.2'
+gem 'unico-assets', '1.2.3'
 gem 'devise', '2.1.2'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
