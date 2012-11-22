@@ -3,7 +3,7 @@ class TradingItemBidsController < CrudController
     object = build_resource
     object.trading_item = @parent
     object.round  = TradingItemBidRoundCalculator.new(@parent).calculate
-    object.bidder = @parent.first_bidder_available_for_current_round
+    object.bidder = TradingItemBidBidderChooser.new(@parent).choose
     object.status = TradingItemBidStatus::WITH_PROPOSAL
     object.amount = 0
 
@@ -19,7 +19,7 @@ class TradingItemBidsController < CrudController
   def create_resource(object)
     object.round  = TradingItemBidRoundCalculator.new(@parent).calculate
     object.stage  = TradingItemBidStage.current_stage(@parent)
-    object.bidder = @parent.first_bidder_available_for_current_round
+    object.bidder = TradingItemBidBidderChooser.new(@parent).choose
 
     super
   end

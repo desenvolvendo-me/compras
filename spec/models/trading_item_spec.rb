@@ -102,9 +102,10 @@ describe TradingItem do
       first_bid = double(:first_bid, :amount => 50.0)
       second_bid = double(:second_bid, :amount => 40.0)
       third_bid = double(:third_bid, :amount => 30.0)
-      trading_item_bids = double(:trading_item_bids)
-
-      trading_item_bids.should_receive(:with_proposal).and_return([first_bid, second_bid, third_bid])
+      at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
+        :with_proposal => [first_bid, second_bid, third_bid])
+      trading_item_bids = double(:trading_item_bids,
+        :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
@@ -113,29 +114,15 @@ describe TradingItem do
 
     it 'should return zero when there is no proposal for the item' do
       trading_item_bids = double(:trading_item_bids)
+      at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
+        :with_proposal => [])
 
-      trading_item_bids.should_receive(:with_proposal).and_return([])
+      trading_item_bids.should_receive(:at_stage_of_round_of_bids).
+                        and_return(at_stage_of_round_of_bids)
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
       expect(subject.last_proposal_value).to eq 0
-    end
-  end
-
-  describe '#last_bid_round' do
-    it 'should return the last bid round' do
-      first_bid = double(:first_bid, :id => 1, :round => 1)
-      second_bid = double(:second_bid, :id => 2, :round => 1)
-
-      subject.should_receive(:trading_item_bids).and_return([first_bid, second_bid])
-
-      expect(subject.last_bid_round).to eq 1
-    end
-
-    it 'should return zero when there are no rounds' do
-      subject.should_receive(:trading_item_bids).and_return([])
-
-      expect(subject.last_bid_round).to eq 0
     end
   end
 
@@ -185,38 +172,6 @@ describe TradingItem do
               at_least(1).times.and_return([])
 
       expect(subject.lowest_proposal_amount).to be_nil
-    end
-  end
-
-  describe '#first_bidder_available_for_current_round' do
-    it 'should return the first bidder available for the current round' do
-      subject.should_receive(:bidders_available_for_current_round).
-              and_return(['bidder1', 'bidder2', 'bidder3'])
-
-      expect(subject.first_bidder_available_for_current_round).to eq 'bidder1'
-    end
-
-    it 'should return nil when there is no bidder available for the current round' do
-      subject.should_receive(:bidders_available_for_current_round).
-              and_return([])
-
-      expect(subject.first_bidder_available_for_current_round).to eq nil
-    end
-  end
-
-  describe '#selected_bidders_at_proposals' do
-    it 'should get all bidders with proposal at proposal stage' do
-      subject.stub(:id).and_return(1)
-      bidders_with_proposals = double(:bidders_with_proposals)
-
-      bidders_with_proposals.should_receive(:at_trading_item_stage).
-                             with(1, TradingItemBidStage::PROPOSALS).
-                             and_return(['bidder1', 'bidder2'])
-
-      subject.should_receive(:bidders_with_proposals).
-              and_return(bidders_with_proposals)
-
-      expect(subject.selected_bidders_at_proposals).to eq ['bidder1', 'bidder2']
     end
   end
 end
