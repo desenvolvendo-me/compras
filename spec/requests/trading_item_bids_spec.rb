@@ -7,7 +7,9 @@ feature "TradingItemBids" do
   end
 
   scenario "Placing an offer to an item" do
-    Trading.make!(:pregao_presencial)
+    trading = Trading.make!(:pregao_presencial)
+
+    make_stage_of_proposals :trading => trading
 
     navigate "Pregão Presencial > Pregões Presenciais"
 
@@ -42,15 +44,10 @@ feature "TradingItemBids" do
     expect(page).to have_notice "Oferta criada com sucesso"
   end
 
-  scenario 'Increment bidder and round when all bidder have proposals' do
-    sobrinho = Bidder.make!(:licitante_sobrinho)
-    wenderson = Bidder.make!(:licitante)
+  scenario 'increment bidder and round when all bidder have proposals for the round' do
+    trading = Trading.make!(:pregao_presencial)
 
-    licitation_process = LicitationProcess.make!(:pregao_presencial,
-      :bidders => [sobrinho, wenderson])
-
-    trading = Trading.make!(:pregao_presencial,
-                            :licitation_process => licitation_process)
+    make_stage_of_proposals :trading => trading
 
     navigate "Pregão Presencial > Pregões Presenciais"
 
@@ -85,8 +82,26 @@ feature "TradingItemBids" do
     expect(page).to have_disabled_field "Licitante"
 
     fill_in "Valor da proposta", :with => "90,00"
+
     expect(page).to have_field 'Menor preço', :with => '100,00'
     expect(page).to have_field 'Valor limite', :with => '99,99'
+
+    click_button "Salvar"
+
+    expect(page).to have_content "Oferta criada com sucesso"
+
+    expect(page).to have_content "Criar Oferta"
+
+    expect(page).to have_field "Número da rodada", :with => "1"
+    expect(page).to have_disabled_field "Número da rodada"
+
+    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_disabled_field "Licitante"
+
+    fill_in "Valor da proposta", :with => "80,00"
+
+    expect(page).to have_field 'Menor preço', :with => '90,00'
+    expect(page).to have_field 'Valor limite', :with => '89,99'
 
     click_button "Salvar"
 
@@ -100,12 +115,14 @@ feature "TradingItemBids" do
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
     expect(page).to have_disabled_field "Licitante"
 
-    expect(page).to have_field 'Menor preço', :with => '90,00'
-    expect(page).to have_field 'Valor limite', :with => '89,99'
+    expect(page).to have_field 'Menor preço', :with => '80,00'
+    expect(page).to have_field 'Valor limite', :with => '79,99'
   end
 
   scenario 'when form is with errors back button should back to the trading_items index' do
-    Trading.make!(:pregao_presencial)
+    trading = Trading.make!(:pregao_presencial)
+
+    make_stage_of_proposals :trading => trading
 
     navigate 'Pregão Presencial > Pregões Presenciais'
 
@@ -131,7 +148,9 @@ feature "TradingItemBids" do
   end
 
   scenario 'without proposal' do
-    Trading.make!(:pregao_presencial)
+    trading = Trading.make!(:pregao_presencial)
+
+    make_stage_of_proposals :trading => trading
 
     navigate 'Pregão Presencial > Pregões Presenciais'
 
@@ -152,7 +171,9 @@ feature "TradingItemBids" do
   end
 
   scenario 'enable disclassification_reason when status is disqualified' do
-    Trading.make!(:pregao_presencial)
+    trading = Trading.make!(:pregao_presencial)
+
+    make_stage_of_proposals :trading => trading
 
     navigate 'Pregão Presencial > Pregões Presenciais'
 
@@ -174,7 +195,9 @@ feature "TradingItemBids" do
   end
 
   scenario 'disqualify a bib' do
-    Trading.make!(:pregao_presencial)
+    trading = Trading.make!(:pregao_presencial)
+
+    make_stage_of_proposals :trading => trading
 
     navigate 'Pregão Presencial > Pregões Presenciais'
 
@@ -194,7 +217,9 @@ feature "TradingItemBids" do
   end
 
   scenario 'classification' do
-    Trading.make!(:pregao_presencial)
+    trading = Trading.make!(:pregao_presencial)
+
+    make_stage_of_proposals :trading => trading
 
     navigate 'Pregão Presencial > Pregões Presenciais'
 
@@ -275,7 +300,9 @@ feature "TradingItemBids" do
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
 
-    Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+
+    make_stage_of_proposals :trading => trading
 
     navigate 'Pregão Presencial > Pregões Presenciais'
 
@@ -298,5 +325,21 @@ feature "TradingItemBids" do
     click_button 'Salvar'
 
     expect(page).to have_content 'Oferta criada com sucesso'
+  end
+
+  def make_stage_of_proposals(options = {})
+    trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}
+    trading_item = options.fetch(:trading_item) { trading.trading_items.first }
+    bidders = options.fetch(:bidders) { trading_item.bidders }
+
+    bidders.each do |bidder|
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+    end
   end
 end

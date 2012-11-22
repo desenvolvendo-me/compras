@@ -21,13 +21,29 @@ describe TradingItemBidRoundCalculator do
 
       subject.bidders
     end
+
+    it 'delegates selected_bidders_at_proposals to trading_item' do
+      trading_item.should_receive(:selected_bidders_at_proposals)
+
+      subject.selected_bidders_at_proposals
+    end
   end
 
   describe '#calculate' do
     it 'should return 1 when there are no bids' do
-      trading_item.stub(:last_bid_round).and_return(0)
+      subject.stub(:trading_item_bids_for_stage_of_round_of_bids).and_return([])
+
+      subject.stub(:stage_of_round_of_bids?).and_return(true)
 
       expect(subject.calculate).to eq 1
+    end
+
+    it 'should return 0 when is not on stage of round of bids' do
+      subject.stub(:trading_item_bids_for_stage_of_round_of_bids).and_return([])
+
+      subject.stub(:stage_of_round_of_bids?).and_return(false)
+
+      expect(subject.calculate).to eq 0
     end
 
     it 'should return current_round when not all bidders have proposals' do

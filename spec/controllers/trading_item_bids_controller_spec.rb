@@ -14,7 +14,7 @@ describe TradingItemBidsController do
       get :new, :trading_item_id => trading_item.id
 
       expect(assigns(:trading_item_bid).trading_item).to eq trading_item
-      expect(assigns(:trading_item_bid).round).to eq 1
+      expect(assigns(:trading_item_bid).round).to eq 0
       expect(assigns(:trading_item_bid).amount).to eq 0
       expect(assigns(:trading_item_bid).bidder).to eq trading_item.bidders.first
       expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITH_PROPOSAL
@@ -34,12 +34,41 @@ describe TradingItemBidsController do
 
       expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITHOUT_PROPOSAL
       expect(assigns(:trading_item_bid).stage).to eq TradingItemBidStage::PROPOSALS
-      expect(assigns(:trading_item_bid).round).to eq 1
+      expect(assigns(:trading_item_bid).round).to eq 0
     end
 
-    it 'should redirect to new trading item bid after create when have not finished_bid_stage' do
+    it 'should redirect to new trading item bid after create when is on stage of round of bids' do
       trading = Trading.make!(:pregao_presencial)
       trading_item = trading.trading_items.first
+
+      bidder1 = trading.bidders.first
+      bidder2 = trading.bidders.second
+      bidder3 = trading.bidders.last
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder1.id,
+        :amount => 120.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder2.id,
+        :amount => 120.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder3.id,
+        :amount => 120.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
 
       post :create, :trading_id => trading.id,
            :trading_item_bid => {
