@@ -1,0 +1,25 @@
+<table class="records">
+  <thead>
+    <tr>
+      <% resource_class.decorator.header_attributes.each do |field| %>
+        <th><%= resource_class.human_attribute_name field %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% collection.each do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <% resource_class.decorator.header_attributes.each do |field| %>
+          <td>
+            <% if resource_class.decorator.link?(field) %>
+              <%= link_to(formatted_attribute(resource, field), edit_resource_path(resource)) %>
+            <% else %>
+              <%= formatted_attribute(resource, field) %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

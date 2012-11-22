@@ -1,0 +1,17 @@
+table.records {
+  border: solid 1px #E8EAEE;
+}
+
+table.records td, table.records th {
+  border: 0;
+}
+
+table.records th {
+  background: #EEEEEE;
+  background: -o-linear-gradient(#FEFEFE, #EEEEEE);
+  background: -moz-linear-gradient(#FEFEFE, #EEEEEE);
+  background: -webkit-linear-gradient(#FEFEFE, #EEEEEE);
+  border-bottom: solid 1px #E8EAEE;
+  color: #555452;
+  text-align: left;
+}

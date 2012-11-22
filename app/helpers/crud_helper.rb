@@ -40,6 +40,8 @@ module CrudHelper
       I18n.t(att.to_s)
     elsif record.respond_to?("#{attribute}_humanize")
       record.send "#{attribute}_humanize"
+    elsif att.kind_of?(Date) || att.kind_of?(DateTime) || att.kind_of?(Time)
+      I18n.l(att)
     else
       att
     end
@@ -83,6 +85,14 @@ module CrudHelper
       link_to 'Anular', { :controller => annul_controller_name, :action => :new, param_name => resource }, :class => "button #{button_class}"
     elsif resource.send(annulled_method)
       link_to 'Anulação', { :controller => annul_controller_name, :action => :edit, :id => resource.annul }, :class => "button #{button_class}"
+    end
+  end
+
+  def index_list_partial
+    if resource_class.decorated? && resource_class.decorator.respond_to?(:headers?) && resource_class.decorator.headers?
+      'list_with_header'
+    else
+      'list'
     end
   end
 end
