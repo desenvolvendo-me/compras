@@ -9,3 +9,7 @@ pt-BR:
       licitation_process_lot:
         observations: "Observações"
         administrative_process_budget_allocation_items: "Itens"
+
+  licitation_process_lot:
+    messages:
+      licitation_process_not_updatable: "processo licitatório não pode ser alterado"

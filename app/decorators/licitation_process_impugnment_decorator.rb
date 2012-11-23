@@ -18,4 +18,8 @@ class LicitationProcessImpugnmentDecorator
   def licitation_process_envelope_opening_time
     localize(super, :format => :hour) if super
   end
+
+  def is_not_pending_message
+    t('licitation_process_impugnment.messages.is_not_pending') unless pending?
+  end
 end

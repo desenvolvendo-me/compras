@@ -105,7 +105,7 @@ feature "LicitationProcessImpugnments" do
     expect(page).to have_disabled_field 'Data da abertura dos envelopes'
     expect(page).to have_disabled_field 'Hora da abertura'
 
-    expect(page).to_not have_button 'Atualizar Impugnação do Processo Licitatório'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'permitido alterar somente em situação pendente'
   end
 
   scenario 'should not be able to destroy an existent licitation_process_impugnment' do

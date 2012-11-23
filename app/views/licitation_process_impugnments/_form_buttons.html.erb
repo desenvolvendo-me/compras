@@ -1,4 +1,4 @@
 <div class="buttons">
-  <%= f.button :submit if resource.pending? %>
+  <%= f.button :submit, 'data-disabled' => resource.decorator.is_not_pending_message %>
   <%= f.button :back %>
 </div>

@@ -24,3 +24,7 @@ pt-BR:
         new_envelope_delivery_time: "Nova hora da entrega"
         new_envelope_opening_date: "Nova data da abertura dos envelopes"
         new_envelope_opening_time: "Nova hora da abertura"
+
+  licitation_process_impugnment:
+    messages:
+      is_not_pending: "permitido alterar somente em situação pendente"
