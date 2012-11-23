@@ -28,6 +28,7 @@ describe DirectPurchasesController do
     it 'should assign the fulfill of purchase_solicitation_budget_allocation_item' do
       DirectPurchase.any_instance.stub(:transaction).and_yield
       DirectPurchase.any_instance.stub(:save).and_return(true)
+      DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
 
       PurchaseSolicitationBudgetAllocationItemFulfiller.any_instance.should_receive(:fulfill)
 
@@ -38,6 +39,7 @@ describe DirectPurchasesController do
       purchase_solicitation = PurchaseSolicitation.make!(:reparo)
 
       DirectPurchase.any_instance.stub(:save).and_return(true)
+      DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
       PurchaseSolicitationProcess.should_receive(:update_solicitations_status).with(purchase_solicitation)
 
       post :create, :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
@@ -47,6 +49,7 @@ describe DirectPurchasesController do
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
       DirectPurchase.any_instance.stub(:save).and_return(true)
+      DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
       PurchaseSolicitationItemGroupProcess.should_receive(:update_item_group_status).with(item_group)
 
       post :create, :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }

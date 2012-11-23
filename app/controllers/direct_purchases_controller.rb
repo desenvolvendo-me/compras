@@ -13,6 +13,13 @@ class DirectPurchasesController < CrudController
     super
   end
 
+  def create
+    create! do |success, failure|
+      success.html { redirect_to edit_resource_path(resource) }
+      failure.html { render 'new' }
+    end
+  end
+
   def update
     if params[:commit] == 'Gerar autorização de fornecimento'
       supply_authorization = SupplyAuthorizationGenerator.new(resource).generate!
@@ -27,7 +34,10 @@ class DirectPurchasesController < CrudController
       return
     end
 
-    super
+    update! do |success, failure|
+      success.html { redirect_to edit_resource_path(resource) }
+      failure.html { render 'edit' }
+    end
   end
 
   protected

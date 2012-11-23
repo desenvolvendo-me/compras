@@ -77,10 +77,6 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
-
     within_tab 'Principal' do
       expect(page).to have_field 'Compra', :with => '1'
       expect(page).to have_field 'Ano', :with => '2012'
@@ -207,10 +203,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
 
     within_tab 'Principal' do
       expect(page).to have_field 'Compra', :with => '1'
@@ -500,10 +492,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
 
     within_tab 'Principal' do
       expect(page).to have_field 'Compra', :with => '1'
@@ -888,10 +876,6 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
-
     within_tab 'Dotações' do
       expect(page).to_not have_content 'está acima do valor acumulado para este objeto (Ponte), está acima do limite permitido (10.000,00)'
     end
@@ -1102,10 +1086,6 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
 
-    within_records do
-      page.find('a').click
-    end
-
     expect(page).not_to have_content 'Estrutura orçamentária *'
   end
 
@@ -1190,10 +1170,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
 
     within_tab 'Principal' do
       expect(page).to have_field 'Compra', :with => '1'
@@ -1293,10 +1269,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
-
-    within_records do
-      page.find('a').click
-    end
 
     expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
   end
@@ -1512,10 +1484,6 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
-    within_records do
-      click_link '1/2012'
-    end
-
     within_tab 'Dotações' do
       expect(page).to have_field 'Valor total dos itens', :with => '3.000,00'
     end
@@ -1673,8 +1641,6 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
 
-    click_link '1/2012'
-
     within_tab 'Dotações' do
       expect(page).to have_field 'Valor total dos itens', :with => '0,00'
       expect(page).to have_button 'Adicionar Dotação'
@@ -1703,8 +1669,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
-
-    click_link '1/2012'
 
     within_tab 'Dotações' do
       expect(page).to have_field 'Valor total dos itens', :with => '0,00'
@@ -1758,8 +1722,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
-
-    click_link '1/2012'
 
     within_tab 'Dotações' do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
@@ -1826,8 +1788,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
-
-    click_link '1/2012'
 
     within_tab 'Dotações' do
       expect(page).to have_field 'Valor total dos itens', :with => '600,00'
@@ -1939,8 +1899,6 @@ feature "DirectPurchases" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
-
-    click_link '1/2012'
 
     click_button 'Salvar'
 
