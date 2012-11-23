@@ -7,7 +7,7 @@ describe TradingItemsController do
       controller.stub(:authorize_resource!)
     end
 
-    it 'should redirect to trading item list when editted' do
+    it 'should redirect to trading item list when edited' do
       trading = Trading.make!(:pregao_presencial)
       item = trading.trading_items.first
 
