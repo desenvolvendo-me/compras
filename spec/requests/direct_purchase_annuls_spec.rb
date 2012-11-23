@@ -81,7 +81,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Anulação de Recurso criada com sucesso.'
+    expect(page).to have_notice 'Compra direta 1/2012 anulada com sucesso'
 
     click_link 'Anulação'
 
@@ -114,7 +114,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Anulação de Recurso criada com sucesso.'
+    expect(page).to have_notice 'Compra direta 1/2012 anulada com sucesso'
 
     click_link 'Anulação'
 
@@ -177,7 +177,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Anulação de Recurso criada com sucesso.'
+    expect(page).to have_notice 'Compra direta 1/2012 anulada com sucesso'
 
     click_link 'Anulação'
 
@@ -242,7 +242,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Anulação de Recurso criada com sucesso.'
+    expect(page).to have_notice 'Compra direta 1/2012 anulada com sucesso'
 
     click_link 'Anulação'
 
@@ -307,7 +307,7 @@ feature 'DirectPurchaseAnnuls' do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Anulação de Recurso criada com sucesso.'
+    expect(page).to have_notice 'Compra direta 1/2012 anulada com sucesso'
 
     click_link 'Anulação'
 

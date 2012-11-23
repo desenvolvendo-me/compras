@@ -1,0 +1,4 @@
+<div class="buttons">
+  <%= f.button :submit, :confirm => "Confirma a anulação da Compra Direta?" if f.object.new_record? %>
+  <%= f.button :back, :href => edit_parent_path %>
+</div>

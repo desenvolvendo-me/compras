@@ -1,4 +1,10 @@
 class DirectPurchaseAnnulsController < ResourceAnnulsController
+
+  def create
+    object = build_resource
+    create!(:notice => "Compra direta #{object.annullable} anulada com sucesso") { edit_parent_path }
+  end
+
   protected
 
   def create_resource(object)
