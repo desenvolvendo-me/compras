@@ -27,3 +27,7 @@ pt-BR:
         name: "Nome"
         cpf: "CPF"
         cnpj: "CNPJ"
+
+  creditor:
+    messages:
+      cant_have_crc: "não disponível para pessoa física"

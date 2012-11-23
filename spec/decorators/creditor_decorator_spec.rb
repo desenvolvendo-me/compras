@@ -24,4 +24,24 @@ describe CreditorDecorator do
       end
     end
   end
+
+  context '#cant_have_crc_message' do
+    it 'when is individual' do
+      I18n.backend.store_translations 'pt-BR', :creditor => {
+        :messages => {
+          :cant_have_crc => 'não pode'
+        }
+      }
+
+      component.stub(:company?).and_return(false)
+
+      expect(subject.cant_have_crc_message).to eq 'não pode'
+    end
+
+    it 'when is company' do
+      component.stub(:company?).and_return(true)
+
+      expect(subject.cant_have_crc_message).to be_nil
+    end
+  end
 end

@@ -1,13 +1,13 @@
 <div class="buttons">
-  <%= f.button :submit unless f.object.annulled? %>
+  <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
   <%= annul_link %>
 
   <% if f.object.persisted? %>
     <% if resource.authorized? %>
       <%= link_to "Imprimir autorização de fornecimento", supply_authorization_path(resource.supply_authorization), :class => 'clear button neutral' %>
-      <%= f.button :submit, 'Enviar autorização de fornecimento por e-mail' unless f.object.annulled? %>
+      <%= f.button :submit, 'Enviar autorização de fornecimento por e-mail', 'data-disabled' => f.object.decorator.is_annulled_message %>
     <% else %>
-      <%= f.button :submit, 'Gerar autorização de fornecimento', :id => 'print' unless f.object.annulled? %>
+      <%= f.button :submit, 'Gerar autorização de fornecimento', :id => 'print', 'data-disabled' => f.object.decorator.is_annulled_message %>
     <% end %>
   <% end %>
 

@@ -39,8 +39,8 @@ feature 'DirectPurchaseAnnuls' do
     end
 
     expect(page).to_not have_link 'Anular'
-    expect(page).to_not have_link 'Salvar'
-    expect(page).to_not have_button 'Gerar autorização de fornecimento'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'não é permitido para compra anulada'
+    expect(page).to have_disabled_element 'Gerar autorização de fornecimento', :reason => 'não é permitido para compra anulada'
   end
 
   scenario 'should not be possible to send supply_authorizarion by email when annulled' do
@@ -58,8 +58,8 @@ feature 'DirectPurchaseAnnuls' do
     end
 
     expect(page).to_not have_link 'Anular'
-    expect(page).to_not have_link 'Salvar'
-    expect(page).to_not have_button 'Enviar autorização de fornecimento por e-mail'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'não é permitido para compra anulada'
+    expect(page).to have_disabled_element 'Enviar autorização de fornecimento por e-mail', :reason => 'não é permitido para compra anulada'
   end
 
   scenario 'annul an existent direct_purchase' do

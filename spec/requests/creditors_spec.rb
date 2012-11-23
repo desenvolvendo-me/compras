@@ -670,7 +670,7 @@ feature "Creditors" do
     expect(page).to have_field 'Número na junta comercial', :with => '123456789'
   end
 
-  scenario 'should not show CRC when creditor is company' do
+  scenario 'should show CRC when creditor is company' do
     Creditor.make!(:nohup)
 
     navigate 'Comum > Pessoas > Credores'
@@ -680,14 +680,14 @@ feature "Creditors" do
     expect(page).to have_link 'CRC'
   end
 
-  scenario 'should not show CRC when creditor is individual' do
+  scenario 'should disable CRC when creditor is individual' do
     Creditor.make!(:sobrinho)
 
     navigate 'Comum > Pessoas > Credores'
 
     click_link 'Gabriel Sobrinho'
 
-    expect(page).to_not have_link 'CRC'
+    expect(page).to have_disabled_element 'CRC', :reason => 'não disponível para pessoa física'
   end
 
   scenario 'update a creditor when people is special entry' do

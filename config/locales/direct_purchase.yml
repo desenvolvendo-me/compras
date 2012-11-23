@@ -31,3 +31,7 @@ pt-BR:
         code: "Compra"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
         purchase_solicitation: "Solicitação de compra"
+
+  direct_purchase:
+    messages:
+      is_annulled: "não é permitido para compra anulada"
