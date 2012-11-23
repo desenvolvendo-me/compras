@@ -26,7 +26,7 @@
         </td>
 
         <td class="bidder-position">
-          <%= 'Selecionada' %>
+          <%= resource.decorator.situation_for_next_stage(bidder) %>
         </td>
       </tr>
     <% end %>

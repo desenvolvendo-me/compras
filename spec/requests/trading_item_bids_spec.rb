@@ -39,6 +39,7 @@ feature "TradingItemBids" do
   end
 
   scenario "Placing an proposal to an item and showing the proposal report after make all proposals" do
+    TradingConfiguration.make!(:pregao)
     trading = Trading.make!(:pregao_presencial)
 
     navigate "Pregão Presencial > Pregões Presenciais"
@@ -83,7 +84,7 @@ feature "TradingItemBids" do
     expect(page).not_to have_field 'Menor preço'
     expect(page).not_to have_field 'Valor limite'
 
-    fill_in "Valor da proposta", :with => "110,00"
+    fill_in "Valor da proposta", :with => "140,00"
 
     click_button "Salvar"
 
@@ -108,27 +109,25 @@ feature "TradingItemBids" do
 
     expect(page).to have_content 'Propostas'
 
-    within_records do
-        within 'tbody tr:nth-child(1)' do
-          expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
-          expect(page.find('.bidder-amount')).to have_content '100,00'
-          expect(page.find('.bidder-percent')).to have_content '0,00'
-          expect(page.find('.bidder-position')).to have_content 'Selecionada'
-      end
+    within '.records tbody tr:nth-child(1)' do
+      expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
+      expect(page.find('.bidder-amount')).to have_content '100,00'
+      expect(page.find('.bidder-percent')).to have_content '0,00'
+      expect(page.find('.bidder-position')).to have_content 'Selecionado'
+    end
 
-      within 'tbody tr:nth-child(2)' do
-          expect(page.find('.bidder-name')).to have_content 'Nohup'
-          expect(page.find('.bidder-amount')).to have_content '101,00'
-          expect(page.find('.bidder-percent')).to have_content '1,00'
-          expect(page.find('.bidder-position')).to have_content 'Selecionada'
-      end
+    within '.records tbody tr:nth-child(2)' do
+      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-amount')).to have_content '101,00'
+      expect(page.find('.bidder-percent')).to have_content '1,00'
+      expect(page.find('.bidder-position')).to have_content 'Selecionado'
+    end
 
-      within 'tbody tr:nth-child(3)' do
-          expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
-          expect(page.find('.bidder-amount')).to have_content '110,00'
-          expect(page.find('.bidder-percent')).to have_content '10,00'
-          expect(page.find('.bidder-position')).to have_content 'Selecionada'
-      end
+    within '.records tbody tr:nth-child(3)' do
+      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+      expect(page.find('.bidder-amount')).to have_content '140,00'
+      expect(page.find('.bidder-percent')).to have_content '40,00'
+      expect(page.find('.bidder-position')).to have_content 'Não selecionado'
     end
 
     click_link 'Voltar'
@@ -163,11 +162,11 @@ feature "TradingItemBids" do
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
-    expect(page).to have_field 'Menor preço', :with => '0,00'
+    expect(page).to have_field 'Menor preço', :with => '100,00'
     expect(page).to have_disabled_field 'Valor limite'
-    expect(page).to have_field 'Valor limite', :with => '0,00'
+    expect(page).to have_field 'Valor limite', :with => '99,99'
 
-    fill_in "Valor da proposta", :with => "100,00"
+    fill_in "Valor da proposta", :with => "99,00"
 
     click_button "Salvar"
 
@@ -194,10 +193,10 @@ feature "TradingItemBids" do
 
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
     expect(page).to have_disabled_field "Licitante"
-    expect(page).to have_field 'Menor preço', :with => '0,00'
-    expect(page).to have_field 'Valor limite', :with => '0,00'
+    expect(page).to have_field 'Menor preço', :with => '100,00'
+    expect(page).to have_field 'Valor limite', :with => '99,99'
 
-    fill_in "Valor da proposta", :with => "100,00"
+    fill_in "Valor da proposta", :with => "99,00"
 
     click_button "Salvar"
 
@@ -213,8 +212,8 @@ feature "TradingItemBids" do
 
     fill_in "Valor da proposta", :with => "90,00"
 
-    expect(page).to have_field 'Menor preço', :with => '100,00'
-    expect(page).to have_field 'Valor limite', :with => '99,99'
+    expect(page).to have_field 'Menor preço', :with => '99,00'
+    expect(page).to have_field 'Valor limite', :with => '98,99'
 
     click_button "Salvar"
 
@@ -359,7 +358,7 @@ feature "TradingItemBids" do
 
     click_link 'Fazer oferta'
 
-    fill_in 'Valor da proposta', :with => '100,00'
+    fill_in 'Valor da proposta', :with => '99,00'
 
     click_button 'Salvar'
 
@@ -409,8 +408,8 @@ feature "TradingItemBids" do
 
     within '.records tbody tr:nth-child(3)' do
       expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
-      expect(page.find('.bidder-amount')).to have_content '100,00'
-      expect(page.find('.bidder-percent')).to have_content '25,00'
+      expect(page.find('.bidder-amount')).to have_content '99,00'
+      expect(page.find('.bidder-percent')).to have_content '23,75'
       expect(page.find('.bidder-position')).to have_content '3º lugar'
     end
 
@@ -442,15 +441,15 @@ feature "TradingItemBids" do
 
     click_link 'Fazer oferta'
 
-    fill_in 'Valor da proposta', :with => '99,63'
+    fill_in 'Valor da proposta', :with => '89,63'
 
     click_button 'Salvar'
 
     expect(page).to have_content 'Oferta criada com sucesso'
 
-    expect(page).to have_field 'Valor limite', :with => '89,67'
+    expect(page).to have_field 'Valor limite', :with => '80,67'
 
-    fill_in 'Valor da proposta', :with => '89,67'
+    fill_in 'Valor da proposta', :with => '80,67'
 
     click_button 'Salvar'
 
@@ -458,7 +457,10 @@ feature "TradingItemBids" do
   end
 
   def make_stage_of_proposals(options = {})
+    TradingConfiguration.make!(:pregao)
     trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}
+    trading.percentage_limit_to_participate_in_bids = TradingConfiguration.percentage_limit_to_participate_in_bids
+    trading.save!
     trading_item = options.fetch(:trading_item) { trading.trading_items.first }
     bidders = options.fetch(:bidders) { trading_item.bidders }
 

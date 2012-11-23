@@ -23,6 +23,7 @@ describe TradingItemBidBidderChooser do
 
   describe '#choose' do
     context 'when I have 3 bidders' do
+      let(:bidders) { [bidder1, bidder2, bidder3] }
       let(:bidder1) { double(:bidder1) }
       let(:bidder2) { double(:bidder2) }
       let(:bidder3) { double(:bidder3) }
@@ -32,7 +33,7 @@ describe TradingItemBidBidderChooser do
           subject.stub(:current_round).and_return(0)
 
           subject.should_receive(:bidders_available).and_return([bidder1, bidder2, bidder3])
-          subject.should_receive(:bidders_at_bid_round).with(0).and_return([])
+          subject.should_receive(:bidders_at_bid_round).and_return([])
 
           expect(subject.choose).to eq bidder1
         end
@@ -41,7 +42,7 @@ describe TradingItemBidBidderChooser do
           subject.stub(:current_round).and_return(0)
 
           subject.should_receive(:bidders_available).and_return([bidder1, bidder2, bidder3])
-          subject.should_receive(:bidders_at_bid_round).with(0).and_return([bidder1])
+          subject.should_receive(:bidders_at_bid_round).and_return([bidder1])
 
           expect(subject.choose).to eq bidder2
         end
@@ -50,18 +51,18 @@ describe TradingItemBidBidderChooser do
           subject.stub(:current_round).and_return(0)
 
           subject.should_receive(:bidders_available).and_return([bidder1, bidder2, bidder3])
-          subject.should_receive(:bidders_at_bid_round).with(0).and_return([bidder1, bidder2])
+          subject.should_receive(:bidders_at_bid_round).and_return([bidder1, bidder2])
 
           expect(subject.choose).to eq bidder3
         end
       end
 
-      context 'when round greater than 0' do
+      context 'when round is equal to 1' do
         it 'should choose first bidder when proposals have no one yet' do
           subject.stub(:current_round).and_return(1)
 
-          subject.should_receive(:bidders).and_return([bidder1, bidder2, bidder3])
-          subject.should_receive(:bidders_at_bid_round).with(1).and_return([])
+          subject.should_receive(:bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit).and_return(bidders)
+          subject.should_receive(:bidders_at_bid_round).and_return([])
 
           expect(subject.choose).to eq bidder1
         end
@@ -69,8 +70,8 @@ describe TradingItemBidBidderChooser do
         it 'should choose next bidder when proposals have one bidder' do
           subject.stub(:current_round).and_return(1)
 
-          subject.should_receive(:bidders).and_return([bidder1, bidder2, bidder3])
-          subject.should_receive(:bidders_at_bid_round).with(1).and_return([bidder1])
+          subject.should_receive(:bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit).and_return(bidders)
+          subject.should_receive(:bidders_at_bid_round).and_return([bidder1])
 
           expect(subject.choose).to eq bidder2
         end
@@ -78,8 +79,37 @@ describe TradingItemBidBidderChooser do
         it 'should choose next bidder when proposals have two bidder' do
           subject.stub(:current_round).and_return(1)
 
-          subject.should_receive(:bidders).and_return([bidder1, bidder2, bidder3])
-          subject.should_receive(:bidders_at_bid_round).with(1).and_return([bidder1, bidder2])
+          subject.should_receive(:bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit).and_return(bidders)
+          subject.should_receive(:bidders_at_bid_round).and_return([bidder1, bidder2])
+
+          expect(subject.choose).to eq bidder3
+        end
+      end
+
+      context 'when round greater than 1' do
+        it 'should choose first bidder when proposals have no one yet' do
+          subject.stub(:current_round).and_return(2)
+
+          subject.should_receive(:bidders_with_proposal_for_round).and_return(bidders)
+          subject.should_receive(:bidders_at_bid_round).and_return([])
+
+          expect(subject.choose).to eq bidder1
+        end
+
+        it 'should choose next bidder when proposals have one bidder' do
+          subject.stub(:current_round).and_return(2)
+
+          subject.should_receive(:bidders_with_proposal_for_round).and_return(bidders)
+          subject.should_receive(:bidders_at_bid_round).and_return([bidder1])
+
+          expect(subject.choose).to eq bidder2
+        end
+
+        it 'should choose next bidder when proposals have two bidder' do
+          subject.stub(:current_round).and_return(2)
+
+          subject.should_receive(:bidders_with_proposal_for_round).and_return(bidders)
+          subject.should_receive(:bidders_at_bid_round).and_return([bidder1, bidder2])
 
           expect(subject.choose).to eq bidder3
         end

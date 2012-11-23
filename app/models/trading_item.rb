@@ -21,7 +21,8 @@ class TradingItem < Compras::Model
            :quantity, :unit_price, :to_s,
            :to => :administrative_process_budget_allocation_item,
            :allow_nil => true
-  delegate :licitation_process_id, :to => :trading
+  delegate :licitation_process_id, :percentage_limit_to_participate_in_bids,
+           :to => :trading
 
   orderize :order
 
@@ -45,7 +46,15 @@ class TradingItem < Compras::Model
     bidders_with_proposals.at_trading_item_stage(id, TradingItemBidStage::PROPOSALS)
   end
 
+  def value_limit_to_participate_in_bids
+    (lowest_proposal_amount_at_stage_of_proposals * percentage_limit_to_participate_in_bids / 100) + lowest_proposal_amount_at_stage_of_proposals
+  end
+
   private
+
+  def lowest_proposal_amount_at_stage_of_proposals
+    trading_item_bids.with_proposal.at_stage_of_proposals.minimum(:amount)
+  end
 
   def bidders_with_proposals
     bidders.with_proposal_for_trading_item(id)
@@ -55,9 +64,8 @@ class TradingItem < Compras::Model
     bidders_by_lowest_proposal.first
   end
 
-
   def last_bid_with_proposal
-    trading_item_bids.at_stage_of_round_of_bids.with_proposal.last
+    trading_item_bids.with_proposal.last
   end
 
   def require_at_least_one_minimum_reduction

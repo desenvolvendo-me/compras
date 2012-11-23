@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'decorator_helper'
 require 'enumerate_it'
 require 'app/decorators/trading_item_decorator'
@@ -98,6 +99,42 @@ describe TradingItemDecorator do
              with(component).and_return('proposal_report_path')
 
       expect(subject.trading_item_bid_or_classification_or_report_classification_path(stage_calculator)).to eq 'proposal_report_path'
+    end
+  end
+
+  describe '#situation_for_next_stage' do
+    let(:bidder_one) { double(:bidder_one) }
+    let(:bidder_two) { double(:bidder_two) }
+    let(:bidders) { [bidder_one, bidder_two] }
+
+    it 'when the proposal is greater than the limit' do
+      I18n.backend.store_translations 'pt-BR', :trading_item => {
+          :messages => {
+            :not_selected => 'Não selecionado'
+        }
+      }
+
+      component.should_receive(:bidders).and_return(bidders)
+      component.should_receive(:value_limit_to_participate_in_bids).and_return(10)
+      bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).with(10).and_return([bidder_one])
+      component.stub(:bidder_selected?).with(bidder_two).and_return(false)
+
+      expect(subject.situation_for_next_stage(bidder_two)).to eq 'Não selecionado'
+    end
+
+    it 'when the proposal is greater than the limit' do
+      I18n.backend.store_translations 'pt-BR', :trading_item => {
+          :messages => {
+            :selected => 'Selecionado'
+        }
+      }
+
+      component.should_receive(:bidders).and_return(bidders)
+      component.should_receive(:value_limit_to_participate_in_bids).and_return(10)
+      bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).with(10).and_return([bidder_one])
+      component.stub(:bidder_selected?).with(bidder_one).and_return(true)
+
+      expect(subject.situation_for_next_stage(bidder_one)).to eq 'Selecionado'
     end
   end
 end

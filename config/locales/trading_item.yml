@@ -14,3 +14,8 @@ pt-BR:
         minimum_reduction_percent: "Redução mínima admissível entre os lances em %"
         minimum_reduction_value: "Redução mínima admissível entre os lances em valor"
         detailed_description: "Descrição detalhada"
+
+  trading_item:
+    messages:
+      selected: "Selecionado"
+      not_selected: "Não selecionado"

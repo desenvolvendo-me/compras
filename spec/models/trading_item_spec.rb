@@ -102,10 +102,8 @@ describe TradingItem do
       first_bid = double(:first_bid, :amount => 50.0)
       second_bid = double(:second_bid, :amount => 40.0)
       third_bid = double(:third_bid, :amount => 30.0)
-      at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
-        :with_proposal => [first_bid, second_bid, third_bid])
       trading_item_bids = double(:trading_item_bids,
-        :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
+        :with_proposal => [first_bid, second_bid, third_bid])
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
@@ -114,11 +112,8 @@ describe TradingItem do
 
     it 'should return zero when there is no proposal for the item' do
       trading_item_bids = double(:trading_item_bids)
-      at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
-        :with_proposal => [])
 
-      trading_item_bids.should_receive(:at_stage_of_round_of_bids).
-                        and_return(at_stage_of_round_of_bids)
+      trading_item_bids.should_receive(:with_proposal).and_return([])
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
@@ -172,6 +167,15 @@ describe TradingItem do
               at_least(1).times.and_return([])
 
       expect(subject.lowest_proposal_amount).to be_nil
+    end
+  end
+
+  describe '#value_limit_to_participate_in_bids' do
+    it 'should calculate the limit to participate in bids' do
+      subject.should_receive(:lowest_proposal_amount_at_stage_of_proposals).exactly(2).times.and_return(100)
+      subject.should_receive(:percentage_limit_to_participate_in_bids).and_return(10.0)
+
+      expect(subject.value_limit_to_participate_in_bids).to eq 110
     end
   end
 end

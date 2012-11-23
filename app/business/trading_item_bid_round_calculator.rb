@@ -2,6 +2,7 @@ class TradingItemBidRoundCalculator
   attr_accessor :trading_item, :stage_calculator
 
   delegate :trading_item_bids, :bidders, :selected_bidders_at_proposals,
+           :value_limit_to_participate_in_bids,
            :to => :trading_item
 
   def initialize(trading_item, stage_calculator = TradingItemBidStageCalculator)
@@ -26,7 +27,13 @@ class TradingItemBidRoundCalculator
   end
 
   def all_bidders_have_bid_for_last_round?
-    last_bid.nil? || selected_bidders_at_proposals.count == count_bidders_with_bids
+    return true if last_bid.nil?
+
+    if last_bid_round == 1
+      bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(value_limit_to_participate_in_bids).count == count_bidders_with_bids
+    else
+      selected_bidders_at_proposals.count == count_bidders_with_bids
+    end
   end
 
   def bidders_for_stage_of_round_of_bids

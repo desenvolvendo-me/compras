@@ -178,4 +178,41 @@ describe TradingItemBid do
       expect(described_class.at_stage_of_round_of_bids).to eq [bid_disqualified]
     end
   end
+
+  describe '#value_limit_to_participate_in_bids' do
+    it 'should calculate the limit to participate in bids' do
+      TradingConfiguration.make!(:pregao)
+      sobrinho = Bidder.make!(:licitante_sobrinho)
+      wenderson = Bidder.make!(:licitante)
+
+      licitation_process = LicitationProcess.make!(
+        :pregao_presencial,
+        :bidders => [sobrinho, wenderson])
+
+      trading_item = TradingItem.make!(:item_pregao_presencial)
+
+      Trading.make!(
+        :pregao_presencial,
+        :trading_items => [trading_item],
+        :licitation_process => licitation_process)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => sobrinho.id,
+        :amount => 100.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL,
+        :stage => TradingItemBidStage::PROPOSALS)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => wenderson.id,
+        :amount => 120.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL,
+        :stage => TradingItemBidStage::PROPOSALS)
+
+      expect(trading_item.value_limit_to_participate_in_bids).to eq 110.00
+    end
+  end
 end

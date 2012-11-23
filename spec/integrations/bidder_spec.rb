@@ -60,6 +60,42 @@ describe Bidder do
     end
   end
 
+  describe '.with_proposal_for_proposal_stage_with_amount_lower_than_limit' do
+    it 'should return only bidder with proposal lower than limit' do
+      sobrinho = Bidder.make!(:licitante_sobrinho)
+      wenderson = Bidder.make!(:licitante)
+
+      licitation_process = LicitationProcess.make!(
+        :pregao_presencial,
+        :bidders => [sobrinho, wenderson])
+
+      trading_item = TradingItem.make!(:item_pregao_presencial)
+
+      Trading.make!(
+        :pregao_presencial,
+        :trading_items => [trading_item],
+        :licitation_process => licitation_process)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => sobrinho.id,
+        :amount => 100.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL,
+        :stage => TradingItemBidStage::PROPOSALS)
+
+      TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => wenderson.id,
+        :amount => 120.0,
+        :status => TradingItemBidStatus::WITH_PROPOSAL,
+        :stage => TradingItemBidStage::PROPOSALS)
+
+      expect(Bidder.with_proposal_for_proposal_stage_with_amount_lower_than_limit(110)).to eq [sobrinho]
+    end
+  end
+
   describe '.at_bid_round' do
     it 'should return only bidders for that specific round' do
       sobrinho = Bidder.make!(:licitante_sobrinho)
