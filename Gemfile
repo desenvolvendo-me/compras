@@ -68,3 +68,7 @@ group :test do
   gem 'database_cleaner', '0.8.0'
   gem 'poltergeist', '0.7.0'
 end
+
+group :test, :development do
+  gem 'pry', '0.9.10'
+end
