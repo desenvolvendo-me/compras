@@ -1,6 +1,10 @@
 <table class="records">
   <thead>
     <tr>
+      <% if resource_class.decorator.to_s? %>
+        <th><%= singular %></th>
+      <% end %>
+
       <% resource_class.decorator.header_attributes.each do |field| %>
         <th><%= resource_class.human_attribute_name field %></th>
       <% end %>
@@ -10,6 +14,10 @@
   <tbody>
     <% collection.each do |resource| %>
       <tr id="<%= dom_id resource %>">
+        <% if resource_class.decorator.to_s? %>
+          <td><%= link_to resource.to_s, edit_resource_path(resource) %></td>
+        <% end %>
+
         <% resource_class.decorator.header_attributes.each do |field| %>
           <td>
             <% if resource_class.decorator.link?(field) %>

@@ -2,18 +2,14 @@
 # load unit helper
 require 'unit_helper'
 
-# load decore
-require 'decore'
-require 'decore/proxy'
-
-# load action view helpers
+# load active_support helpers
 require 'active_support/concern'
-
+require 'active_support/core_ext/class'
 require 'active_support/core_ext/hash/keys'
 require 'active_support/core_ext/hash/reverse_merge'
-
 require 'active_support/core_ext/string/access'
 
+# load action view helpers
 require 'action_view/helpers/capture_helper'
 require 'action_view/helpers/number_helper'
 require 'action_view/helpers/url_helper'
@@ -21,6 +17,11 @@ require 'action_view/helpers/translation_helper'
 
 # i18n
 require 'i18n'
+
+# load decore
+require 'decore'
+require 'decore/proxy'
+require 'decore/header'
 
 I18n.backend.store_translations 'pt-BR', :number => {
   :format => {
