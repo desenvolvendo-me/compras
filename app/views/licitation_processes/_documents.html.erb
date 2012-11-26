@@ -25,13 +25,22 @@
 
   <tbody class="<%= f.sanitized_object_name %>_document_types_records">
     <% f.object.document_types.each do |document_type| %>
-      <%= render 'document_types/list_form', :description => document_type.description, :id => document_type.id, :validity => document_type.validity, :f => f %>
+      <%= render 'document_types/list_form',
+                 :description => document_type.description,
+                 :id => document_type.id,
+                 :validity => document_type.validity,
+                 :f => f,
+                 :data_disabled => f.object.decorator.not_updatable_message %>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache "#{f.sanitized_object_name}_document_types_template" do %>
   <%= f.association :document_types, :collection => f.object.document_types.build do |p| %>
-    <%= render 'document_types/list_form', :validity => '{{validity}}', :description => '{{description}}', :id => '{{id}}', :f => f %>
+    <%= render 'document_types/list_form',
+               :description => '{{description}}',
+               :id => '{{id}}',
+               :validity => '{{validity}}',
+               :f => f, :data_disabled => nil %>
   <% end %>
 <% end %>

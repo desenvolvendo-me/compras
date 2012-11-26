@@ -1105,16 +1105,14 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    expect(page).to_not have_button 'Salvar'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'este processo licitatório não pode ser alterado'
 
-    within_tab 'Documentos' do
-      expect(page).to_not have_button 'Remover'
-    end
+    click_link 'Documentos'
+    expect(page).to have_disabled_element 'Remover', :reason => 'este processo licitatório não pode ser alterado'
 
-    within_tab 'Dotações orçamentarias' do
-      expect(page).to_not have_button 'Adicionar Item'
-      expect(page).to_not have_button 'Remover Item'
-    end
+    click_link 'Dotações orçamentarias'
+    expect(page).to have_disabled_element 'Adicionar Item', :reason => 'este processo licitatório não pode ser alterado'
+    expect(page).to have_disabled_element 'Remover Item', :reason => 'este processo licitatório não pode ser alterado'
   end
 
   scenario "should not have link to lots when creating a new licitation process" do

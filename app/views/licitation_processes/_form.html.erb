@@ -130,12 +130,11 @@
   });
 
   <% unless resource.updatable? %>
-    $('form.licitation_process .add-licitation-process-budget-allocation').hide();
-    $('form.licitation_process .remove-licitation-process-budget-allocation').hide();
-    $('form.licitation_process .document-type .modal-finder-remove').hide();
-    $('form.licitation_process .add-bidder').hide();
-    $('form.licitation_process .remove-bidder').hide();
-    $('form.licitation_process :input').attr('disabled', true);
+    $('form.licitation_process .add-licitation-process-budget-allocation').on('click', function(event){
+      event.stopImmediatePropagation();
+      return false;
+    });
+    $('form.licitation_process :input:not([data-disabled])').attr('disabled', true);
   <% end %>
 
   function filterTypesOfCalculation (judgmentKind, objectType, modality) {
@@ -160,7 +159,7 @@
       return;
     }
 
-    $("#licitation_process_type_of_calculation").html("<option></option>").closest("div.input").show();;
+    $("#licitation_process_type_of_calculation").html("<option></option>").closest("div.input").show();
 
     typesOfCalculationOptions.each(function (option) {
       if (modality == 'auction') {

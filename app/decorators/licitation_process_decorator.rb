@@ -41,4 +41,8 @@ class LicitationProcessDecorator
       'Voltar ao processo licitatório'
     end
   end
+
+  def not_updatable_message
+    t('licitation_process.messages.not_updatable') unless updatable?
+  end
 end

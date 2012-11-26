@@ -84,4 +84,10 @@ module ApplicationHelper
 
     signed_object.signatures.in_groups_of(grouped_by, false)
   end
+
+  def data_disabled_attribute(data_disabled = nil)
+    return unless data_disabled
+
+    " data-disabled=\"#{ data_disabled }\"".html_safe
+  end
 end

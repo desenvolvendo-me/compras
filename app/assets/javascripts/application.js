@@ -8,8 +8,9 @@ $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
 })
 
-$(".modal-finder-remove").live("click", function () {
+$(".records").on("click", '.modal-finder-remove', function () {
   $(this).closest("tr").remove();
+  return false;
 });
 
 $(".modal-finder .modal input.modal").live("change", function(event, record) {

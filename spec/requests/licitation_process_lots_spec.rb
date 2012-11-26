@@ -93,8 +93,8 @@ feature "LicitationProcessLots" do
       page.find('a').click
     end
 
-    expect(page).to have_disabled_element 'Salvar', :reason => "processo licitatório não pode ser alterado"
-    expect(page).to have_disabled_element 'Apagar', :reason => "processo licitatório não pode ser alterado"
+    expect(page).to have_disabled_element 'Salvar', :reason => "processo licitatório deste lote não pode ser alterado"
+    expect(page).to have_disabled_element 'Apagar', :reason => "processo licitatório deste lote não pode ser alterado"
     expect(page).to_not have_button 'Remover'
   end
 

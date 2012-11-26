@@ -52,4 +52,16 @@ describe ApplicationHelper do
       expect(helper.signatures_grouped(:grouped_by => 2)).to eq [[1, 2], [3, 4], [5]]
     end
   end
+
+  context '#data_disabled_attribute' do
+    it 'when data_disabled is nil' do
+      expect(helper.data_disabled_attribute(nil)).to be_nil
+    end
+
+    it 'when data_disabled is filled' do
+      data_disabled = "some message"
+
+      expect(helper.data_disabled_attribute(data_disabled)).to eq(' data-disabled="some message"')
+    end
+  end
 end

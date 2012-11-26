@@ -12,7 +12,7 @@
     <%= link_to('Pareceres da comissão julgadora', judgment_commission_advices_path(:licitation_process_id => resource.id), :class => "button primary") %>
   </p>
 
-  <%= f.button :submit if f.object.updatable? %>
+  <%= f.button :submit, 'data-disabled' => f.object.decorator.not_updatable_message %>
   <%= link_to('Processo Administrativo', edit_administrative_process_path(resource.administrative_process), :class => 'button primary') %>
   <%= link_to('Voltar à listagem', licitation_processes_path, :class => 'button primary') %>
 </div>

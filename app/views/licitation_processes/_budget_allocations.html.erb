@@ -2,7 +2,7 @@
   <%= f.association :administrative_process, :collection => (f.object.administrative_process || AdministrativeProcess.new) do |a| %>
     <%= a.input :id, :as => 'hidden' %>
     <%= a.association :administrative_process_budget_allocations, :collection => localized(a.object.administrative_process_budget_allocations) do |p| %>
-      <%= render 'licitation_process_budget_allocations/form', :f => p %>
+      <%= render 'licitation_process_budget_allocations/form', :f => p, :data_disabled => f.object.decorator.not_updatable_message %>
     <% end %>
   <% end %>
 </div>

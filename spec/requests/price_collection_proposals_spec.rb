@@ -11,7 +11,7 @@ feature "PriceCollectionProposals" do
     scenario 'should not have a button to create a proposal' do
       PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Processos de Compra > Coletas de Preços'
 
       click_link '1/2012'
 

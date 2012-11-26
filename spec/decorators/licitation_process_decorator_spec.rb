@@ -140,4 +140,24 @@ describe LicitationProcessDecorator do
     end
   end
 
+  context '#not_updatable_message' do
+    it 'when is not updatable' do
+      I18n.backend.store_translations 'pt-BR', :licitation_process => {
+          :messages => {
+            :not_updatable => 'não pode'
+        }
+      }
+
+      component.stub(:updatable? => false)
+
+      expect(subject.not_updatable_message).to eq 'não pode'
+    end
+
+    it 'when is updatable' do
+      component.stub(:updatable? => true)
+
+      expect(subject.not_updatable_message).to be_nil
+    end
+  end
+
 end
