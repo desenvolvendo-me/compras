@@ -30,9 +30,9 @@ class TradingItem < Compras::Model
   end
 
   def bidders_by_lowest_proposal
-    bidders_with_proposals.sort { |a,b|
+    bidders_with_proposals.sort do |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
-    }
+    end
   end
 
   def lowest_proposal_amount
