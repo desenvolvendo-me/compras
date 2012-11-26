@@ -274,4 +274,18 @@ describe DirectPurchase do
       expect(subject.fulfill_item_group).to be nil
     end
   end
+
+  describe '#status' do
+    it "should be 'active' when not annulled" do
+      subject.stub(:annulled?).and_return(false)
+
+      expect(subject.status).to eq Status::ACTIVE
+    end
+
+    it "should be 'inactive' when annulled" do
+      subject.stub(:annulled?).and_return(true)
+
+      expect(subject.status).to eq Status::INACTIVE
+    end
+  end
 end

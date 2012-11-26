@@ -16,6 +16,7 @@ class DirectPurchase < Compras::Model
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
   has_enumeration_for :delivery_term_period, :with => PeriodUnit
+  has_enumeration_for :status
 
   belongs_to :legal_reference
   belongs_to :creditor
@@ -105,6 +106,14 @@ class DirectPurchase < Compras::Model
 
   def remove_purchase_solicitation!
     update_column(:purchase_solicitation_id, nil)
+  end
+
+  def status
+    if annulled?
+      Status::INACTIVE
+    else
+      Status::ACTIVE
+    end
   end
 
   protected

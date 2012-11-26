@@ -1904,4 +1904,33 @@ feature "DirectPurchases" do
 
     expect(page).to have_notice 'Compra Direta editada com sucesso.'
   end
+
+  scenario 'index with columns at the index' do
+    DirectPurchase.make!(:compra)
+    DirectPurchase.make!(:compra_2011)
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      expect(page).to have_content 'Compra Direta'
+      expect(page).to have_content 'Estrutura orçamentária'
+      expect(page).to have_content 'Fornecedor'
+      expect(page).to have_content 'Status'
+      expect(page).to have_content 'Fornecedor'
+
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content '3/2011'
+        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Ativo'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content '1/2012'
+        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content 'Wenderson Malheiros'
+        expect(page).to have_content 'Ativo'
+      end
+    end
+  end
 end

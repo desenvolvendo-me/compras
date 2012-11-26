@@ -25,17 +25,6 @@ describe DirectPurchaseDecorator do
     end
   end
 
-  context '#summary' do
-    before do
-      subject.stub(:budget_structure).and_return('Secretaria de educação')
-      subject.stub(:creditor).and_return('Nohup')
-    end
-
-    it 'should uses budget_structure and creditor' do
-      expect(subject.summary).to eq "Estrutura orçamentaria: Secretaria de educação / Fornecedor: Nohup"
-    end
-  end
-
   context '#is_annulled_message' do
     it 'when is annulled' do
       I18n.backend.store_translations 'pt-BR', :direct_purchase => {
@@ -53,6 +42,18 @@ describe DirectPurchaseDecorator do
       component.stub(:annulled? => false)
 
       expect(subject.is_annulled_message).to be_nil
+    end
+  end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have budget_structure, creditor and status' do
+      expect(described_class.header_attributes).to include :budget_structure
+      expect(described_class.header_attributes).to include :creditor
+      expect(described_class.header_attributes).to include :status
     end
   end
 end
