@@ -920,6 +920,22 @@ feature "PriceCollections" do
     end
   end
 
+  scenario 'index with columns at the index' do
+    PriceCollection.make!(:coleta_de_precos)
+
+    navigate 'Processos de Compra > Coletas de Preços'
+
+    within_records do
+      expect(page).to have_content 'Coleta de Preços'
+      expect(page).to have_content 'Status'
+
+      within 'tbody tr' do
+        expect(page).to have_content '1/2012'
+        expect(page).to have_content 'Ativo'
+      end
+    end
+  end
+
   def make_proposals_dependencies!(price_collection)
     proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
     proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)
