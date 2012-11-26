@@ -2,7 +2,7 @@ class DirectPurchaseAnnulsController < ResourceAnnulsController
 
   def create
     object = build_resource
-    create!(:notice => "Compra direta #{object.annullable} anulada com sucesso") { edit_parent_path }
+    create!(:notice => success_notice(object) ) { edit_parent_path }
   end
 
   protected
@@ -28,5 +28,11 @@ class DirectPurchaseAnnulsController < ResourceAnnulsController
       :resource_annul => object,
       :context => self
     ).annul
+  end
+
+  private
+
+  def success_notice(object)
+    I18n.t('compras.messages.direct_purchase_annulled_successfully', :direct_purchase => object.annullable)
   end
 end
