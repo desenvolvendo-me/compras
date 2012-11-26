@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'decorator_helper'
 require 'app/decorators/price_collection_proposal_decorator'
 
@@ -47,6 +48,28 @@ describe PriceCollectionProposalDecorator do
       it 'should applies precision' do
         expect(subject.item_total_value_by_lot(1)).to eq "500,00"
       end
+    end
+  end
+
+  context '#only_creditor_is_authorized_message' do
+    let(:user) { double('User') }
+
+    it 'when user is not the creditor' do
+      I18n.backend.store_translations 'pt-BR', :price_collection_proposal => {
+          :messages => {
+            :only_creditor_is_authorized => 'não pode'
+        }
+      }
+
+      component.stub(:editable_by? => false)
+
+      expect(subject.only_creditor_is_authorized_message(user)).to eq 'não pode'
+    end
+
+    it 'when user is the creditor' do
+      component.stub(:editable_by? => true)
+
+      expect(subject.only_creditor_is_authorized_message(user)).to be_nil
     end
   end
 end

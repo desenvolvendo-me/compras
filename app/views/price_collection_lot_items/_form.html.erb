@@ -21,9 +21,9 @@
       <%= f.input :quantity, :disabled => f.object.annulled? %>
     </div>
   </div>
-  <% unless f.object.annulled? %>
-    <p class="yui3-u">
-      <input type="button" class="button negative remove-item" value="Remover Item">
-    </p>
-  <% end %>
+
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-item"<%= data_disabled_attribute(data_disabled) %> value="Remover Item">
+  </p>
+
 </div>

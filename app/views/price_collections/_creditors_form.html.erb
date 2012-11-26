@@ -14,9 +14,7 @@
       </div>
     <% end %>
   </div>
-  <% unless f.object.annulled? %>
-    <p class="yui3-u">
-      <input type="button" class="button negative remove-creditor" value="Remover Fornecedor">
-    </p>
-  <% end %>
+  <p class="yui3-u">
+    <input type="button" class="button negative remove-creditor"<%= data_disabled_attribute(data_disabled) %> value="Remover Fornecedor">
+  </p>
 </div>

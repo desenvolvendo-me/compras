@@ -1,5 +1,5 @@
 <div class="buttons">
   <%= annul_link %>
-  <%= f.button :submit if f.object.editable_by?(current_user) %>
+  <%= f.button :submit, 'data-disabled' => f.object.decorator.only_creditor_is_authorized_message(current_user) %>
   <%= proposal_back_button(f) %>
 </div>

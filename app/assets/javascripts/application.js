@@ -9,7 +9,9 @@ $(".clear").live('click', function() {
 })
 
 $(".records").on("click", '.modal-finder-remove', function () {
-  $(this).closest("tr").remove();
+  if (!$(this).data('disabled')) {
+    $(this).closest("tr").remove();
+  }
   return false;
 });
 

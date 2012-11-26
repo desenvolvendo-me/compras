@@ -12,4 +12,24 @@ describe PriceCollectionDecorator do
       expect(described_class.header_attributes).to include :status
     end
   end
+
+  describe '#is_annulled_message' do
+    it 'when is annulled' do
+      I18n.backend.store_translations 'pt-BR', :price_collection => {
+          :messages => {
+            :is_annulled => 'não pode'
+        }
+      }
+
+      component.stub(:annulled? => true)
+
+      expect(subject.is_annulled_message).to eq 'não pode'
+    end
+
+    it 'when is not annulled' do
+      component.stub(:annulled? => false)
+
+      expect(subject.is_annulled_message).to be_nil
+    end
+  end
 end

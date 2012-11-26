@@ -881,22 +881,20 @@ feature "PriceCollections" do
       expect(page).to have_disabled_field 'Marca'
       expect(page).to have_disabled_field 'Unidade'
       expect(page).to have_disabled_field 'Quantidade'
-
-      expect(page).to_not have_button 'Remover Item'
-      expect(page).to_not have_button 'Adicionar Item'
-      expect(page).to_not have_button 'Remover Lote'
-      expect(page).to_not have_button 'Adicionar Lote'
     end
+    expect(page).to have_disabled_element 'Remover Item', :reason => 'não é permitido alterar coleta anulada'
+    expect(page).to have_disabled_element 'Adicionar Item', :reason => 'não é permitido alterar coleta anulada'
+    expect(page).to have_disabled_element 'Remover Lote', :reason => 'não é permitido alterar coleta anulada'
+    expect(page).to have_disabled_element 'Adicionar Lote', :reason => 'não é permitido alterar coleta anulada'
 
     within_tab 'Fornecedores' do
       expect(page).to have_disabled_field 'Fornecedor'
       expect(page).to have_disabled_field 'E-mail'
-
-      expect(page).to_not have_button 'Adicionar Fornecedor'
-      expect(page).to_not have_button 'Remover Fornecedor'
     end
+    expect(page).to have_disabled_element 'Adicionar Fornecedor', :reason => 'não é permitido alterar coleta anulada'
+    expect(page).to have_disabled_element 'Remover Fornecedor', :reason => 'não é permitido alterar coleta anulada'
 
-    expect(page).to_not have_button 'Salvar'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'não é permitido alterar coleta anulada'
   end
 
   scenario 'opening the filter modal' do

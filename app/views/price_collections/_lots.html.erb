@@ -2,19 +2,17 @@
 
 <div id="price-collection-lots">
   <%= f.association :price_collection_lots, :collection => localized(f.object.price_collection_lots) do |p| %>
-    <%= render 'price_collection_lots/form', :f => p %>
+    <%= render 'price_collection_lots/form', :f => p, :data_disabled => f.object.decorator.is_annulled_message %>
   <% end %>
 
   <%= mustache 'price-collection-lots-template' do %>
     <%= f.association :price_collection_lots_attributes, :collection => f.object.price_collection_lots.build, :index => '{{uuid_price_collection_lot}}' do |p| %>
-      <%= render 'price_collection_lots/form', :f => p %>
+      <%= render 'price_collection_lots/form', :f => p, :data_disabled => nil %>
     <% end %>
   <% end %>
 </div>
 
-<% unless f.object.annulled? %>
-  <input type="button" class="button affirmative add-price-collection-lot" value="Adicionar Lote">
-<% end %>
+<input type="button" class="button affirmative add-price-collection-lot"<%= data_disabled_attribute(f.object.decorator.is_annulled_message) %> value="Adicionar Lote">
 
 <script>
   $("#price-collection-lots-template").nestedForm({
@@ -25,6 +23,13 @@
     uuid: 'uuid_price_collection_lot',
     appendItem: true
   });
+
+  <% if f.object.annulled? %>
+    $('form.price_collection').find('.add-price-collection-lot, .remove-price-collection-lot').on('click', function(event){
+      event.stopImmediatePropagation();
+      return false;
+    });
+  <% end %>
 
   function setItemLabels(lotDiv) {
     lotDiv.find('.item:visible').each(function(index, _){

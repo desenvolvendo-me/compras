@@ -22,3 +22,7 @@ pt-BR:
         expiration: "Vencimento"
         creditors: "Fornecedor"
         type_of_calculation: "Tipo de apuração"
+
+  price_collection:
+    messages:
+      is_annulled: "não é permitido alterar coleta anulada"

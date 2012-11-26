@@ -64,7 +64,7 @@ feature "PriceCollectionProposals" do
       expect(page).to have_disabled_field 'Valor total do lote'
       expect(page).to have_disabled_field 'Status'
 
-      expect(page).to_not have_button 'Salvar'
+      expect(page).to have_disabled_element 'Salvar', :reason => 'somente o fornecedor da proposta tem autorização para editar'
       expect(page).to have_link 'Anular'
 
       click_link 'Voltar'

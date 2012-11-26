@@ -3,6 +3,6 @@
   <%= proposals_link %>
   <%= f.button :submit, 'Apurar' if f.object.persisted? %>
   <%= annul_link(:param_name => 'price_collection_id') %>
-  <%= f.button :submit unless f.object.annulled? %>
+  <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
   <%= f.button :back %>
 </div>

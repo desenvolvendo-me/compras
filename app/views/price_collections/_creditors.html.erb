@@ -1,18 +1,16 @@
-<% unless f.object.annulled? %>
-  <p>
-    <input type="button" class="button affirmative add-creditor" value="Adicionar Fornecedor">
-  </p>
-<% end %>
+<p>
+  <input type="button" class="button affirmative add-creditor"<%= data_disabled_attribute(f.object.decorator.is_annulled_message) %> value="Adicionar Fornecedor">
+</p>
 
 <div id="creditors-list">
   <%= f.association :price_collection_proposals, :collection => localized(f.object.price_collection_proposals) do |p| %>
-    <%= render 'creditors_form', :f => p %>
+    <%= render 'creditors_form', :f => p, :data_disabled => f.object.decorator.is_annulled_message %>
   <% end %>
 </div>
 
 <%= mustache "#{f.sanitized_object_name}_creditors_template" do %>
   <%= f.association :price_collection_proposals_attributes, :collection => f.object.price_collection_proposals.build(:status => PriceCollectionStatus::ACTIVE), :index => '{{uuid_creditor}}' do |p| %>
-    <%= render 'creditors_form', :f => p %>
+    <%= render 'creditors_form', :f => p, :data_disabled => nil %>
   <% end %>
 <% end %>
 
@@ -25,6 +23,13 @@
     fieldsWrapper: '.creditor_collection_proposal',
     appendItem: false
   });
+
+  <% if f.object.annulled? %>
+    $('form.price_collection').find('.add-creditor, .remove-creditor').on('click', function(event){
+      event.stopImmediatePropagation();
+      return false;
+    });
+  <% end %>
 
   $('form.price_collection').on('change', '.creditor', function (event, creditor) {
     if(creditor){
