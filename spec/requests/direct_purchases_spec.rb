@@ -1916,7 +1916,6 @@ feature "DirectPurchases" do
       expect(page).to have_content 'Estrutura orçamentária'
       expect(page).to have_content 'Fornecedor'
       expect(page).to have_content 'Status'
-      expect(page).to have_content 'Fornecedor'
 
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '3/2011'
