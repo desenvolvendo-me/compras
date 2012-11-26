@@ -6,6 +6,8 @@ class ContractTermination < Compras::Model
 
   mount_uploader :term_termination_file, DocumentUploader
 
+  has_enumeration_for :status
+
   belongs_to :contract
   belongs_to :dissemination_source
 
@@ -29,6 +31,14 @@ class ContractTermination < Compras::Model
 
   def annulled?
     annul.present?
+  end
+
+  def status
+    if annulled?
+      Status::INACTIVE
+    else
+      Status::ACTIVE
+    end
   end
 
   protected

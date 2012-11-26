@@ -68,4 +68,18 @@ describe ContractTermination do
   it "should not be annulled when it does not have an annul" do
     expect(subject).not_to be_annulled
   end
+
+  describe '#status' do
+    it "should be 'active' when not annulled" do
+      subject.stub(:annulled?).and_return(false)
+
+      expect(subject.status).to eq Status::ACTIVE
+    end
+
+    it "should be 'inactive' when annulled" do
+      subject.stub(:annulled?).and_return(true)
+
+      expect(subject.status).to eq Status::INACTIVE
+    end
+  end
 end

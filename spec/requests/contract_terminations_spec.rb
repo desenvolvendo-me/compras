@@ -118,4 +118,24 @@ feature 'ContractTerminations' do
 
     expect(page).to have_link 'Anulação'
   end
+
+  scenario 'index with columns at the index' do
+    ContractTermination.make!(:contrato_rescindido)
+
+    navigate 'Comum > Cadastrais > Contratos'
+
+    click_link '001'
+
+    click_link 'Rescisões'
+
+    within_records do
+      expect(page).to have_content 'Rescisão Contratual'
+      expect(page).to have_content 'Status'
+
+      within 'tbody tr' do
+        expect(page).to have_content '1/2012'
+        expect(page).to have_content 'Ativo'
+      end
+    end
+  end
 end
