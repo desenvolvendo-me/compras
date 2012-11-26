@@ -4,10 +4,11 @@ require 'app/business/trading_item_bid_round_calculator'
 
 describe TradingItemBidRoundCalculator do
   subject do
-    described_class.new(trading_item)
+    described_class.new(trading_item, stage_calculator)
   end
 
   let(:trading_item) { double(:trading_item) }
+  let(:stage_calculator) { double(:stage_calculator) }
 
   describe 'delegates' do
     it 'delegates trading_item_bids to trading_item' do
@@ -33,7 +34,9 @@ describe TradingItemBidRoundCalculator do
     it 'should return 1 when there are no bids' do
       subject.stub(:trading_item_bids_for_stage_of_round_of_bids).and_return([])
 
-      subject.stub(:stage_of_round_of_bids?).and_return(true)
+      stage_calculator.should_receive(:new).with(trading_item).
+                                            and_return(stage_calculator)
+      stage_calculator.should_receive(:stage_of_round_of_bids?).and_return(true)
 
       expect(subject.calculate).to eq 1
     end
@@ -41,7 +44,9 @@ describe TradingItemBidRoundCalculator do
     it 'should return 0 when is not on stage of round of bids' do
       subject.stub(:trading_item_bids_for_stage_of_round_of_bids).and_return([])
 
-      subject.stub(:stage_of_round_of_bids?).and_return(false)
+      stage_calculator.should_receive(:new).with(trading_item).
+                                            and_return(stage_calculator)
+      stage_calculator.should_receive(:stage_of_round_of_bids?).and_return(false)
 
       expect(subject.calculate).to eq 0
     end
@@ -60,7 +65,9 @@ describe TradingItemBidRoundCalculator do
       last_bid = double(:last_bid, :round => 2)
 
       subject.should_receive(:last_bid).twice.and_return(last_bid)
-      subject.stub(:stage_of_round_of_bids?).and_return(true)
+      stage_calculator.should_receive(:new).with(trading_item).
+                                            and_return(stage_calculator)
+      stage_calculator.should_receive(:stage_of_round_of_bids?).and_return(true)
       subject.should_receive(:all_bidders_have_bid_for_last_round?).
               and_return(true)
 

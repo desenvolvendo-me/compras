@@ -1,11 +1,12 @@
 class TradingItemBidRoundCalculator
-  attr_accessor :trading_item
+  attr_accessor :trading_item, :stage_calculator
 
   delegate :trading_item_bids, :bidders, :selected_bidders_at_proposals,
            :to => :trading_item
 
-  def initialize(trading_item)
+  def initialize(trading_item, stage_calculator = TradingItemBidStageCalculator)
     self.trading_item = trading_item
+    self.stage_calculator = stage_calculator
   end
 
   def calculate
@@ -40,7 +41,7 @@ class TradingItemBidRoundCalculator
     all_bidders_have_bid_for_last_round? && stage_of_round_of_bids?
   end
 
-  def stage_of_round_of_bids?(stage_calculator = TradingItemBidStageCalculator)
+  def stage_of_round_of_bids?
     stage_calculator.new(trading_item).stage_of_round_of_bids?
   end
 
