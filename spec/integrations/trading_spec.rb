@@ -19,12 +19,10 @@ describe Trading do
     end
   end
 
-  describe 'after save' do
+  context 'after save' do
     it 'should get percentage limit to participate in bids from Trading Configuration' do
-      trading = Trading.make(:pregao_presencial)
       TradingConfiguration.make!(:pregao)
-
-      trading.save!
+      trading = Trading.make!(:pregao_presencial)
 
       expect(trading.percentage_limit_to_participate_in_bids).to eq 10.00
     end
