@@ -56,7 +56,7 @@ feature "PurchaseSolicitationItemGroups" do
 
     click_link 'Agrupamento de reparo 2013'
 
-    expect(page).should_not have_link 'Apagar'
+    expect(page).to_not have_link 'Apagar'
 
     expect(page).to have_disabled_field "Situação"
     expect(page).to have_select "Situação", :selected => "Pendente"
@@ -322,6 +322,28 @@ feature "PurchaseSolicitationItemGroups" do
       within '.records' do
         expect(page).not_to have_content '2012'
         expect(page).to have_content '2013'
+      end
+    end
+  end
+
+  scenario 'index with columns at the index' do
+    PurchaseSolicitationItemGroup.make!(:reparo_arame_farpado)
+    PurchaseSolicitationItemGroup.make!(:antivirus_desenvolvimento)
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      expect(page).to have_content 'Agrupamento de Item de Solicitação de Compra'
+      expect(page).to have_content 'Situação'
+
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Agrupamento de arame farpado'
+        expect(page).to have_content 'Pendente'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content 'Agrupamento de antivirus desenvolvimento'
+        expect(page).to have_content 'Pendente'
       end
     end
   end

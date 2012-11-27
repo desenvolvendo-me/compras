@@ -1,6 +1,9 @@
 class PurchaseSolicitationItemGroupDecorator
   include Decore
   include Decore::Proxy
+  include Decore::Header
+
+  attr_header :status
 
   def allow_submit_button?
     !component.annulled? && component.editable?
