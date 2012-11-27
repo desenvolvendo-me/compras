@@ -9,9 +9,7 @@ class TradingItemsController < CrudController
   protected
 
   def authorize_resource!
-    if action_name == 'classification'
-      authorize! :read, controller_name
-    elsif action_name == 'proposal_report'
+    if action_name == 'classification' || action_name == 'proposal_report'
       authorize! :read, controller_name
     else
       super
