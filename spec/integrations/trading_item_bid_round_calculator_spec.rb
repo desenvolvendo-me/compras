@@ -54,7 +54,7 @@ describe TradingItemBidRoundCalculator do
           :round => 1,
           :trading_item_id => trading_item.id,
           :bidder_id => sobrinho.id,
-          :amount => 100.0,
+          :amount => 99.99,
           :stage => TradingItemBidStage::ROUND_OF_BIDS,
           :status => TradingItemBidStatus::WITH_PROPOSAL)
 
@@ -74,7 +74,7 @@ describe TradingItemBidRoundCalculator do
           :round => 1,
           :trading_item_id => trading_item.id,
           :bidder_id => sobrinho.id,
-          :amount => 100.0,
+          :amount => 99.99,
           :stage => TradingItemBidStage::ROUND_OF_BIDS,
           :status => TradingItemBidStatus::WITH_PROPOSAL)
 
@@ -103,7 +103,7 @@ describe TradingItemBidRoundCalculator do
           :round => 1,
           :trading_item_id => trading_item.id,
           :bidder_id => nohup.id,
-          :amount => 100.0,
+          :amount => 99.99,
           :stage => TradingItemBidStage::ROUND_OF_BIDS,
           :status => TradingItemBidStatus::WITH_PROPOSAL)
 
