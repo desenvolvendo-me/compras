@@ -1,12 +1,5 @@
 require 'model_helper'
 require 'app/parsers/month_and_year_parser'
-require 'app/models/budget_allocation'
-require 'app/models/expense_nature'
-require 'app/models/government_action'
-require 'app/models/management_unit'
-require 'app/models/pledge'
-require 'app/models/reserve_fund'
-require 'app/models/subfunction'
 require 'app/models/descriptor'
 
 describe Descriptor do
@@ -17,20 +10,6 @@ describe Descriptor do
   end
 
   it { should belong_to :entity }
-
-  it { should have_many(:budget_allocations).dependent(:restrict) }
-  it { should have_many(:expense_natures).dependent(:restrict) }
-  it { should have_many(:government_actions).dependent(:restrict) }
-  it { should have_many(:management_units).dependent(:restrict) }
-  it { should have_many(:pledges).dependent(:restrict) }
-  it { should have_many(:reserve_funds).dependent(:restrict) }
-  it { should have_many(:subfunctions).dependent(:restrict) }
-
-  it { should validate_presence_of :entity }
-  it { should validate_presence_of :period }
-
-  it { subject.localized.should allow_value('12/2012').for(:period) }
-  it { should_not allow_value('13/2012').for(:period) }
 
   describe '#year' do
     it 'should be 2012' do

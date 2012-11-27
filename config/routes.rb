@@ -277,9 +277,8 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :descriptors do
+  resources :descriptors, :only => :modal do
     collection do
-      get :filter
       get :modal
     end
   end

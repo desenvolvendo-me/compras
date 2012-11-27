@@ -2,7 +2,6 @@ menu:
   - general:
     - parameters:
       - prefecture
-      - descriptors
       - entities
 
       - addresses:
