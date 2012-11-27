@@ -11,7 +11,7 @@ class TradingItemBidDecorator
     number_with_precision super if super
   end
 
-  def form(stage_calculator = TradingItemBidStageCalculator)
+  def form_partial(stage_calculator = TradingItemBidStageCalculator)
     if stage_calculator.new(component.trading_item).stage_of_proposals?
       'form_of_proposal'
     else

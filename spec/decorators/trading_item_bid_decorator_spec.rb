@@ -18,7 +18,7 @@ describe TradingItemBidDecorator do
     end
   end
 
-  describe '#form' do
+  describe '#form_partial' do
     it 'should return form when stage is not proposal' do
       trading_item = double(:trading_item)
       trading_item_bid_stage_calculator = double(:trading_item_bid_stage_calculator)
@@ -26,7 +26,7 @@ describe TradingItemBidDecorator do
       trading_item_bid_stage_calculator.should_receive(:new).and_return(trading_item)
       trading_item.stub(:stage_of_proposals?).and_return(false)
 
-      expect(subject.form(trading_item_bid_stage_calculator)).to eq 'form'
+      expect(subject.form_partial(trading_item_bid_stage_calculator)).to eq 'form'
     end
 
     it 'should return form_of_proposal when stage is not proposal' do
@@ -36,7 +36,7 @@ describe TradingItemBidDecorator do
       trading_item_bid_stage_calculator.should_receive(:new).and_return(trading_item)
       trading_item.stub(:stage_of_proposals?).and_return(true)
 
-      expect(subject.form(trading_item_bid_stage_calculator)).to eq 'form_of_proposal'
+      expect(subject.form_partial(trading_item_bid_stage_calculator)).to eq 'form_of_proposal'
     end
   end
 end
