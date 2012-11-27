@@ -131,7 +131,9 @@ feature "TradingItemBids" do
       end
     end
 
+    click_link 'Voltar'
 
+    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
   end
 
   scenario "Placing an offer to an item" do
