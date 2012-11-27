@@ -108,26 +108,30 @@ feature "TradingItemBids" do
 
     expect(page).to have_content 'Propostas'
 
-    within '.records tbody tr:nth-child(1)' do
-      expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
-      expect(page.find('.bidder-amount')).to have_content '100,00'
-      expect(page.find('.bidder-percent')).to have_content '0,00'
-      expect(page.find('.bidder-position')).to have_content 'Selecionada'
+    within_records do
+        within 'tbody tr:nth-child(1)' do
+          expect(page.find('.bidder-name')).to have_content 'Gabriel Sobrinho'
+          expect(page.find('.bidder-amount')).to have_content '100,00'
+          expect(page.find('.bidder-percent')).to have_content '0,00'
+          expect(page.find('.bidder-position')).to have_content 'Selecionada'
+      end
+
+      within 'tbody tr:nth-child(2)' do
+          expect(page.find('.bidder-name')).to have_content 'Nohup'
+          expect(page.find('.bidder-amount')).to have_content '101,00'
+          expect(page.find('.bidder-percent')).to have_content '1,00'
+          expect(page.find('.bidder-position')).to have_content 'Selecionada'
+      end
+
+      within 'tbody tr:nth-child(3)' do
+          expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
+          expect(page.find('.bidder-amount')).to have_content '110,00'
+          expect(page.find('.bidder-percent')).to have_content '10,00'
+          expect(page.find('.bidder-position')).to have_content 'Selecionada'
+      end
     end
 
-    within '.records tbody tr:nth-child(2)' do
-      expect(page.find('.bidder-name')).to have_content 'Nohup'
-      expect(page.find('.bidder-amount')).to have_content '101,00'
-      expect(page.find('.bidder-percent')).to have_content '1,00'
-      expect(page.find('.bidder-position')).to have_content 'Selecionada'
-    end
 
-    within '.records tbody tr:nth-child(3)' do
-      expect(page.find('.bidder-name')).to have_content 'Wenderson Malheiros'
-      expect(page.find('.bidder-amount')).to have_content '110,00'
-      expect(page.find('.bidder-percent')).to have_content '10,00'
-      expect(page.find('.bidder-position')).to have_content 'Selecionada'
-    end
   end
 
   scenario "Placing an offer to an item" do
