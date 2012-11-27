@@ -3,11 +3,10 @@ class PurchaseSolicitationDecorator
   include Decore
   include Decore::Routes
   include Decore::Proxy
+  include Decore::Header
   include ActionView::Helpers::NumberHelper
 
-  def summary
-    "Estrutura orçamentaria solicitante: #{budget_structure} / Responsável pela solicitação: #{responsible} / Status: #{service_status_humanize}"
-  end
+  attr_header :budget_structure, :responsible, :service_status
 
   def quantity_by_material(material_id)
     number_with_precision super if super

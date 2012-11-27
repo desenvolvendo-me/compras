@@ -523,4 +523,24 @@ feature "PurchaseSolicitations" do
 
     expect(page).to have_content 'Gabriel Sobrinho'
   end
+
+  scenario 'index with columns at the index' do
+    PurchaseSolicitation.make!(:reparo)
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      expect(page).to have_content 'Solicitação de Compra'
+      expect(page).to have_content 'Estrutura orçamentaria solicitante'
+      expect(page).to have_content 'Responsável pela solicitação'
+      expect(page).to have_content 'Status de atendimento'
+
+      within 'tbody tr' do
+        expect(page).to have_content '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+        expect(page).to have_content '1 - Secretaria de Educação'
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Pendente'
+      end
+    end
+  end
 end
