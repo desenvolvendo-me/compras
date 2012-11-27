@@ -40,13 +40,13 @@ describe PurchaseSolicitationItemGroup do
   end
 
   it 'should be annulled if has a related annul object' do
-    subject.stub(:annul).and_return(double(:annul))
+    subject.stub(:status).and_return(PurchaseSolicitationItemGroupStatus::ANNULLED)
 
     expect(subject).to be_annulled
   end
 
   it 'should not be annulled if does not have a related annul object' do
-    subject.stub(:annul).and_return(nil)
+    subject.stub(:status).and_return(PurchaseSolicitationItemGroupStatus::PENDING)
 
     expect(subject).not_to be_annulled
   end

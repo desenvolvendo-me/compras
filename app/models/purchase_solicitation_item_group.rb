@@ -54,10 +54,6 @@ class PurchaseSolicitationItemGroup < Compras::Model
     purchase_solicitation_items.map(&:id)
   end
 
-  def annulled?
-    annul.present?
-  end
-
   def editable?
     administrative_processes.empty? && direct_purchases.empty?
   end
