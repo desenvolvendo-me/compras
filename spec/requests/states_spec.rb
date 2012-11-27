@@ -6,12 +6,26 @@ feature "States" do
     sign_in
   end
 
-  scenario 'cannot create a new state' do
+  scenario 'create a new state' do
+    Country.make!(:brasil)
+
     navigate 'Geral > Parâmetros > Endereços > Estados'
 
-    within '.actions' do
-      expect(page).to_not have_link 'Criar Estado'
-    end
+    click_link 'Criar Estado'
+
+    fill_in 'Nome', :with => 'Minas Gerais'
+    fill_in 'Sigla', :with => 'MG'
+    fill_modal 'País', :with => 'Brasil'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Estado criado com sucesso.'
+
+    click_link 'Minas Gerais'
+
+    expect(page).to have_field 'Nome', :with => 'Minas Gerais'
+    expect(page).to have_field 'Sigla', :with => 'MG'
+    expect(page).to have_field 'País', :with => 'Brasil'
   end
 
   scenario 'update a state' do

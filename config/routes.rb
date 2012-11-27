@@ -681,7 +681,7 @@ Compras::Application.routes.draw do
     end
   end
 
-  resources :states, :except => [:new, :create] do
+  resources :states do
     collection do
       get :modal
       get :filter
