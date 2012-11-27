@@ -28,7 +28,7 @@ class Trading < Compras::Model
   delegate :administrative_process_summarized_object, :to => :licitation_process,
            :allow_nil => true
 
-  before_create :percentage_limit_to_participate_in_bids
+  before_create :set_percentage_limit_to_participate_in_bids
 
   orderize :code
   filterize
@@ -71,7 +71,7 @@ class Trading < Compras::Model
     end
   end
 
-  def percentage_limit_to_participate_in_bids
+  def set_percentage_limit_to_participate_in_bids
     self.percentage_limit_to_participate_in_bids = TradingConfiguration.percentage_limit_to_participate_in_bids
   end
 end
