@@ -5,6 +5,9 @@ class Descriptor < Compras::Model
 
   belongs_to :entity
 
+  orderize :period
+  filterize
+
   def to_s
     "#{year} - #{entity}"
   end
