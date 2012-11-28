@@ -60,4 +60,22 @@ feature "States" do
     expect(page).to_not have_content 'Rio Grande do Sul'
     expect(page).to_not have_content 'RS'
   end
+
+  scenario 'index with columns at the index' do
+    State.make!(:rs)
+
+    navigate 'Geral > Parâmetros > Endereços > Estados'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Sigla'
+      expect(page).to have_content 'País'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Rio Grande do Sul'
+        expect(page).to have_content 'RS'
+        expect(page).to have_content 'Brasil'
+      end
+    end
+  end
 end
