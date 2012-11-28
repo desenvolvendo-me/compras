@@ -17,10 +17,6 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
 
   validates :material, :quantity, :unit_price, :status, :presence => true
 
-  def estimated_total_price
-    (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
-  end
-
   def self.group!(ids)
     where { id.in(ids) }.update_all(
       :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED
@@ -36,6 +32,10 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   def self.by_material(material_ids)
     material_ids = [material_ids] unless material_ids.kind_of?(Array)
     where { |item| item.material_id.in material_ids }
+  end
+
+  def estimated_total_price
+    (quantity || BigDecimal(0)) * (unit_price || BigDecimal(0))
   end
 
   def fulfill(process)
