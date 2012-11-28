@@ -7,6 +7,6 @@
   </td>
   <td>
     <input id="<%= f.sanitized_object_name %>_purchase_solicitations_record_<%= id %>_id" type="hidden" name="<%= f.object_name %><%= "[purchase_solicitation_ids]" if f.object.persisted? || f.object.errors.any? %>[]" value="<%= id %>" />
-    <button class="button negative modal-finder-remove">Remover</button>
+    <button class="button negative modal-finder-remove"<%= data_disabled_attribute(data_disabled) %>>Remover</button>
   </td>
 </tr>

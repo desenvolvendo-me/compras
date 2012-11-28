@@ -11,3 +11,10 @@ pt-BR:
         material: "Material"
         purchase_solicitation: "Solicitação de compra"
         status: "Situação"
+
+  purchase_solicitation_item_group:
+    messages:
+      not_annullable: "este agrupamento já está em uso e não pode ser anulado"
+      not_allow_submit:
+        not_editable: "este agrupamento já está em uso e não pode ser editado"
+        annulled: "este agrupamento foi anulado e não pode ser editado"

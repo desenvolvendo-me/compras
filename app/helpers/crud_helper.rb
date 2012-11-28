@@ -82,9 +82,11 @@ module CrudHelper
     button_class = options[:button_class] || "negative"
 
     if resource.persisted? && !resource.send(annulled_method)
-      link_to 'Anular', { :controller => annul_controller_name, :action => :new, param_name => resource }, :class => "button #{button_class}"
+      link_to 'Anular', { :controller => annul_controller_name, :action => :new, param_name => resource },
+                        :class => "button #{button_class}", 'data-disabled' => options[:data_disabled]
     elsif resource.send(annulled_method)
-      link_to 'Anulação', { :controller => annul_controller_name, :action => :edit, :id => resource.annul }, :class => "button #{button_class}"
+      link_to 'Anulação', { :controller => annul_controller_name, :action => :edit, :id => resource.annul },
+                        :class => "button #{button_class}", 'data-disabled' => options[:data_disabled]
     end
   end
 

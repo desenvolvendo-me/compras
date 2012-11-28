@@ -55,7 +55,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     expect(page).to have_content 'Anulação de Recurso criada com sucesso.'
 
-    expect(page).to_not have_button 'Salvar'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'este agrupamento foi anulado e não pode ser editado'
     expect(page).to_not have_link 'Anular'
 
     expect(page).to have_select 'Situação', :selected => 'Anulado'
@@ -86,7 +86,7 @@ feature 'PurchaseSolicitationAnnul' do
     end
   end
 
-  scenario 'does not show destroy button if not annullable' do
+  scenario 'disable annul button if not annullable' do
     PurchaseSolicitationItemGroup.make!(:antivirus,
                                         :administrative_processes => [
                                           AdministrativeProcess.make!(:compra_de_cadeiras)
@@ -96,6 +96,6 @@ feature 'PurchaseSolicitationAnnul' do
 
     click_link 'Agrupamento de antivirus'
 
-    expect(page).to_not have_button 'Anular'
+    expect(page).to have_disabled_element 'Anular', :reason => 'este agrupamento já está em uso e não pode ser anulado'
   end
 end

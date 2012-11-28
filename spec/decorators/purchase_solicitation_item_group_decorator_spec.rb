@@ -62,4 +62,65 @@ describe PurchaseSolicitationItemGroupDecorator do
       expect(subject).to be_allow_annul_link
     end
   end
+
+  context '#not_allow_submit_message' do
+    it 'when is annulled' do
+      I18n.backend.store_translations 'pt-BR', :purchase_solicitation_item_group => {
+          :messages => {
+            :not_allow_submit => {
+              :annulled => 'não pode'
+            }
+        }
+      }
+      component.stub(:annulled? => true)
+
+      expect(subject.not_allow_submit_message).to eq 'não pode'
+    end
+
+    it 'when is not annulled nor editable' do
+      I18n.backend.store_translations 'pt-BR', :purchase_solicitation_item_group => {
+          :messages => {
+            :not_allow_submit => {
+              :not_editable => 'não pode'
+            }
+        }
+      }
+
+      component.stub(:annulled? => false, :editable? => false)
+
+      expect(subject.not_allow_submit_message).to eq 'não pode'
+    end
+
+    it 'when is not annulled but is editable' do
+      component.stub(:annulled? => false, :editable? => true)
+
+      expect(subject.not_allow_submit_message).to be_nil
+    end
+  end
+
+  context '#not_annullable_message' do
+    it 'when is annulled' do
+      component.stub(:annulled? => true)
+
+      expect(subject.not_annullable_message).to be_nil
+    end
+
+    it 'when is not annulled nor editable' do
+      I18n.backend.store_translations 'pt-BR', :purchase_solicitation_item_group => {
+          :messages => {
+            :not_annullable => 'não pode'
+        }
+      }
+
+      component.stub(:annulled? => false, :editable? => false)
+
+      expect(subject.not_annullable_message).to eq 'não pode'
+    end
+
+    it 'when is not annulled but is editable' do
+      component.stub(:annulled? => false, :editable? => true)
+
+      expect(subject.not_annullable_message).to be_nil
+    end
+  end
 end

@@ -30,7 +30,6 @@ feature "PurchaseSolicitationItemGroups" do
     click_link 'Agrupamento de antivirus'
 
     expect(page).to have_select "Situação", :selected => "Pendente"
-
     expect(page).to have_field 'Material', :with => '01.01.00001 - Antivirus'
 
     within '.records' do
@@ -62,7 +61,6 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to have_select "Situação", :selected => "Pendente"
 
     click_button 'Remover Material'
-
     click_button 'Adicionar Material'
 
     fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'
@@ -98,17 +96,14 @@ feature "PurchaseSolicitationItemGroups" do
     page.execute_script 'purchaseSolicitationModalUrl();'
 
     within_modal 'Solicitação de compra' do
-
       click_button 'Pesquisar'
 
       expect(page).to have_content '2012'
-
       expect(page).to have_css 'table.records tbody tr', :count => 2
 
       fill_in 'Ano', :with => '2012'
 
       click_button 'Pesquisar'
-
       click_record '2012'
     end
 
@@ -119,13 +114,11 @@ feature "PurchaseSolicitationItemGroups" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '2013'
-
       expect(page).to have_css 'table.records tbody tr', :count => 1
 
       fill_in 'Ano', :with => '2013'
 
       click_button 'Pesquisar'
-
       click_record '2013'
     end
 
@@ -141,7 +134,6 @@ feature "PurchaseSolicitationItemGroups" do
     end
 
     click_button 'Salvar'
-
     click_link '1'
 
     page.execute_script 'purchaseSolicitationModalUrl();'
@@ -166,13 +158,11 @@ feature "PurchaseSolicitationItemGroups" do
       click_button 'Pesquisar'
 
       expect(page).to have_content '2012'
-
       expect(page).to have_css 'table.records tbody tr', :count => 1
 
       fill_in 'Ano', :with => '2012'
 
       click_button 'Pesquisar'
-
       click_record '2012'
     end
 
@@ -185,7 +175,6 @@ feature "PurchaseSolicitationItemGroups" do
 
     # asserting that a removing all purchase solicitation, all can be seletect again
     within_modal 'Solicitação de compra' do
-
       click_button 'Pesquisar'
 
       expect(page).to have_css 'table.records tbody tr', :count => 2
@@ -247,10 +236,14 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to have_disabled_field 'Material'
     expect(page).to have_disabled_field 'Solicitações de compra'
 
-    expect(page).to_not have_button 'Adicionar Material'
-    expect(page).to_not have_button 'Remover Material'
-    expect(page).to_not have_button 'Remover'
-    expect(page).to_not have_button 'Salvar'
+    expect(page).to have_disabled_element 'Adicionar Material',
+                    :reason => 'este agrupamento já está em uso e não pode ser editado'
+    expect(page).to have_disabled_element 'Remover Material',
+                    :reason => 'este agrupamento já está em uso e não pode ser editado'
+    expect(page).to have_disabled_element 'Remover',
+                    :reason => 'este agrupamento já está em uso e não pode ser editado'
+    expect(page).to have_disabled_element 'Salvar',
+                    :reason => 'este agrupamento já está em uso e não pode ser editado'
   end
 
   scenario 'a purchase solicitation with a status other than "Liberated" may not compose a group' do
@@ -283,10 +276,7 @@ feature "PurchaseSolicitationItemGroups" do
 
       within '.records' do
         expect(page).to have_content 'Secretaria de Educação'
-      end
-
-      within '.records' do
-        expect(page).not_to have_content 'Secretaria de Desenvolvimento'
+        expect(page).to_not have_content 'Secretaria de Desenvolvimento'
       end
     end
   end
@@ -320,7 +310,7 @@ feature "PurchaseSolicitationItemGroups" do
       click_button 'Pesquisar'
 
       within '.records' do
-        expect(page).not_to have_content '2012'
+        expect(page).to_not have_content '2012'
         expect(page).to have_content '2013'
       end
     end

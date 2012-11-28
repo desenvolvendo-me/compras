@@ -29,3 +29,8 @@ pt-BR:
         code: "Código"
         quantity_by_material: 'Quantidade'
         purchase_solicitation: 'Solicitação de compra'
+
+  purchase_solicitation:
+    messages:
+      not_editable: "esta solicitação já está em uso ou anulada e não pode ser editada"
+      is_annulled: "esta solicitação foi anulada e não pode ser editada"

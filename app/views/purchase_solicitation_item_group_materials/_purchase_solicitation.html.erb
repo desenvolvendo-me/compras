@@ -26,13 +26,23 @@
 
   <tbody class="<%="#{'purchase_solicitation_item_group_purchase_solicitation_item_group_materials_attributes_' unless f.object.persisted? || f.object.errors.any?}#{f.nested_identifier}_purchase_solicitations_records" %>">
     <% f.object.purchase_solicitations.each do |p| %>
-      <%= render 'purchase_solicitations/list_form', :purchase_solicitation => p,  :id => p.id, :quantity_by_material => p.decorator.quantity_by_material(f.object.material_id), :f => f %>
+      <%= render 'purchase_solicitations/list_form',
+                 :purchase_solicitation => p,
+                 :id => p.id,
+                 :quantity_by_material => p.decorator.quantity_by_material(f.object.material_id),
+                 :f => f,
+                 :data_disabled => data_disabled %>
     <% end %>
   </tbody>
 </table>
 
 <%= mustache "#{'purchase_solicitation_item_group_purchase_solicitation_item_group_materials_attributes_' unless f.object.persisted? || f.object.errors.any?}#{f.nested_identifier}_purchase_solicitations_template" do %>
   <%= f.association :purchase_solicitation_ids, :collection => f.object.purchase_solicitations.build do |p| %>
-    <%= render 'purchase_solicitations/list_form', :purchase_solicitation => '{{purchase_solicitation}}', :id => '{{id}}', :quantity_by_material => "{{quantity_by_material}}", :f => p %>
+    <%= render 'purchase_solicitations/list_form',
+               :purchase_solicitation => '{{purchase_solicitation}}',
+               :id => '{{id}}',
+               :quantity_by_material => "{{quantity_by_material}}",
+               :f => p,
+               :data_disabled => nil %>
   <% end %>
 <% end %>

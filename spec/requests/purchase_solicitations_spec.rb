@@ -411,7 +411,8 @@ feature "PurchaseSolicitations" do
       page.find('a').click
     end
 
-    expect(page).to_not have_button 'Salvar'
+    expect(page).to have_disabled_element 'Salvar',
+                    :reason => 'esta solicitação já está em uso ou anulada e não pode ser editada'
   end
 
   scenario 'should show edit button when is returned' do

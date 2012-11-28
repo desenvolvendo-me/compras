@@ -28,4 +28,44 @@ describe PurchaseSolicitationDecorator do
       expect(described_class.header_attributes).to include :service_status
     end
   end
+
+  context '#not_editable_message' do
+    it 'when is not editable' do
+      I18n.backend.store_translations 'pt-BR', :purchase_solicitation => {
+          :messages => {
+            :not_editable => 'não pode'
+        }
+      }
+
+      component.stub(:editable? => false)
+
+      expect(subject.not_editable_message).to eq 'não pode'
+    end
+
+    it 'when is editable' do
+      component.stub(:editable? => true)
+
+      expect(subject.not_editable_message).to be_nil
+    end
+  end
+
+  context '#is_annulled_message' do
+    it 'when is annulled' do
+      I18n.backend.store_translations 'pt-BR', :purchase_solicitation => {
+          :messages => {
+            :is_annulled => 'não pode'
+        }
+      }
+
+      component.stub(:annulled? => true)
+
+      expect(subject.is_annulled_message).to eq 'não pode'
+    end
+
+    it 'when is not annulled' do
+      component.stub(:annulled? => false)
+
+      expect(subject.is_annulled_message).to be_nil
+    end
+  end
 end

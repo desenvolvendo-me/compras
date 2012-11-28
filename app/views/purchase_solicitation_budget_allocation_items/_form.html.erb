@@ -45,11 +45,9 @@
     </div>
   </div>
 
-  <% unless f.object.annulled? %>
-    <div class="yui3-g">
-      <p class="yui3-u">
-      <input type="button" class="button negative remove-item" value="Remover Item">
-      </p>
-    </div>
-  <% end %>
+  <div class="yui3-g">
+    <p class="yui3-u">
+    <input type="button" class="button negative remove-item"<%= data_disabled_attribute(data_disabled) %> value="Remover Item">
+    </p>
+  </div>
 </div>

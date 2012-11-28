@@ -134,7 +134,7 @@
       event.stopImmediatePropagation();
       return false;
     });
-    $('form.licitation_process :input:not([data-disabled])').attr('disabled', true);
+    $('form.licitation_process :input').not('[data-disabled])').attr('disabled', true);
   <% end %>
 
   function filterTypesOfCalculation (judgmentKind, objectType, modality) {
