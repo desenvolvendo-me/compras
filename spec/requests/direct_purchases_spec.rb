@@ -1332,7 +1332,8 @@ feature "DirectPurchases" do
 
   scenario 'generate supply authorization when direct_purchase has purchase_solicitation' do
     purchase_solicitation = PurchaseSolicitation.make!(:reparo,
-                                                       :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+
     DirectPurchase.make!(
       :compra_nao_autorizada,
       :purchase_solicitation => purchase_solicitation
@@ -1380,18 +1381,19 @@ feature "DirectPurchases" do
     within_tab 'Principal' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Atendida'
     end
-
-    within_tab 'Dotações orçamentarias' do
-      within '.purchase-solicitation-budget-allocation:first' do
-        within '.item:first' do
-          expect(page).to have_select 'Status', :selected => 'Atendido'
-        end
-      end
-    end
   end
 
   scenario "changing the status of a purchase solicitation" do
-    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
+    PurchaseSolicitation.make!(:reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+
+    PurchaseSolicitation.make!(:reparo,
+      :accounting_year => 2013,
+      :responsible => Employee.make!(:wenderson),
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_budget_allocations => [
+        PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)])
+
     LegalReference.make!(:referencia)
     Creditor.make!(:wenderson_sa)
     BudgetStructure.make!(:secretaria_de_educacao)
@@ -1411,7 +1413,7 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+      fill_modal 'Solicitação de compra', :with => '2012', :field => 'Ano'
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -1428,13 +1430,17 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     click_link '1/2012'
+
     expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
 
-    PurchaseSolicitation.make!(:reparo_desenvolvimento, :service_status => 'liberated')
 
     navigate 'Processos de Compra > Compra Direta'
+
     click_link '1/2012'
-    fill_modal 'Solicitação de compra', :with => '2', :field => 'Código'
+
+    within_tab 'Principal' do
+      fill_modal 'Solicitação de compra', :with => '2013', :field => 'Ano'
+    end
 
     click_button 'Salvar'
 
@@ -1442,11 +1448,14 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link '1/2012'
+    click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+
     expect(page).to have_select "Status de atendimento", :selected => 'Pendente'
 
     navigate 'Processos de Compra > Solicitações de Compra'
-    click_link '2/2012'
+
+    click_link '1/2013 1 - Secretaria de Educação - RESP: Wenderson Malheiros'
+
     expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
   end
 
@@ -1816,8 +1825,10 @@ feature "DirectPurchases" do
       :purchase_solicitation_budget_allocations => [
         PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria,
           :items => [
-            PurchaseSolicitationBudgetAllocationItem.make!(:item),
-            PurchaseSolicitationBudgetAllocationItem.make!(:office)
+            PurchaseSolicitationBudgetAllocationItem.make!(:item,
+              :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED),
+            PurchaseSolicitationBudgetAllocationItem.make!(:office,
+              :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
           ]
         )
       ]
@@ -1929,6 +1940,80 @@ feature "DirectPurchases" do
         expect(page).to have_content '1 - Secretaria de Educação'
         expect(page).to have_content 'Wenderson Malheiros'
         expect(page).to have_content 'Ativo'
+      end
+    end
+  end
+
+  scenario 'Filter purchase solicitations without pending item at modal' do
+    LegalReference.make!(:referencia)
+    Creditor.make!(:wenderson_sa)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    LicitationObject.make!(:ponte)
+    DeliveryLocation.make!(:education)
+    Employee.make!(:sobrinho)
+    PaymentMethod.make!(:dinheiro)
+    ModalityLimit.make!(:modalidade_de_compra_ponte)
+
+    budget_allocation = PurchaseSolicitationBudgetAllocation.make!(
+      :alocacao_primaria,
+      :items => [
+        PurchaseSolicitationBudgetAllocationItem.make!(:item),
+        PurchaseSolicitationBudgetAllocationItem.make!(:office,
+          :status => PurchaseSolicitationBudgetAllocationItemStatus::GROUPED)
+      ])
+
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_budget_allocations => [budget_allocation])
+
+    item_group_material = PurchaseSolicitationItemGroupMaterial.make(
+      :reparo_office,
+      :purchase_solicitations => [purchase_solicitation])
+
+    PurchaseSolicitationItemGroup.make!(:office,
+      :purchase_solicitation_item_group_materials => [item_group_material])
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data da compra', :with => '19/03/2012'
+      fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
+      select 'Material ou serviços', :from => 'Modalidade'
+      select 'Global', :from => 'Tipo do empenho'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+      fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
+      fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
+      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      fill_in 'Prazo de entrega', :with => '1'
+      select 'ano/anos',  :from => 'Período do prazo de entrega'
+      fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta criada com sucesso.'
+
+    click_link 'Voltar'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      within_modal 'Solicitação de compra' do
+        click_button 'Pesquisar'
+
+        within_records do
+          expect(page).to_not have_content '1'
+          expect(page).to_not have_content '2012'
+          expect(page).to_not have_content 'Bens'
+          expect(page).to_not have_content 'Secretaria de educação'
+          expect(page).to_not have_content 'Gabriel Sobrinho'
+        end
+
+        click_link 'Voltar'
       end
     end
   end

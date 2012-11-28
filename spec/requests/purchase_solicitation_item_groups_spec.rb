@@ -61,6 +61,13 @@ feature "PurchaseSolicitationItemGroups" do
     expect(page).to have_select "Situação", :selected => "Pendente"
 
     click_button 'Remover Material'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Agrupamento de Item de Solicitação de Compra editado com sucesso.'
+
+    click_link 'Agrupamento de reparo 2013'
+
     click_button 'Adicionar Material'
 
     fill_modal 'Material', :with => 'Arame farpado', :field => 'Descrição'

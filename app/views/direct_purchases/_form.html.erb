@@ -38,6 +38,7 @@
 
   $("#direct_purchase_purchase_solicitation_item_group_id").on("change", function (event, purchase_solicitation_item_group) {
     $("#budget-allocations").empty();
+    var allowedItemStatus = "<%= PurchaseSolicitationBudgetAllocationItemStatus::GROUPED %>";
 
     if (purchase_solicitation_item_group) {
       $("#direct_purchase_budget_structure").requiredField(false);
@@ -46,7 +47,7 @@
 
       $.each(purchase_solicitation_item_group.purchase_solicitations, function (i, purchase_solicitation) {
         $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
-          renderBudgetAllocation(budget_allocation);
+          renderBudgetAllocation(budget_allocation, allowedItemStatus);
         });
       });
 
@@ -62,12 +63,13 @@
 
   $("#direct_purchase_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
     $("#budget-allocations").empty();
+    var allowedItemStatus = "<%= PurchaseSolicitationBudgetAllocationItemStatus::PENDING %>";
 
     if (purchase_solicitation) {
       $('#direct_purchase_total_allocations_items_value').val(numberWithDelimiter(purchase_solicitation.total));
 
       $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
-        renderBudgetAllocation(budget_allocation);
+        renderBudgetAllocation(budget_allocation, allowedItemStatus);
       });
 
       disablePurchaseSolicitationItemGroup();
@@ -110,7 +112,7 @@
     $("#direct_purchase_budget_structure").removeAttr("disabled");
   }
 
-  function renderBudgetAllocation(budget_allocation) {
+  function renderBudgetAllocation(budget_allocation, allowedItemStatus) {
     var budgetAllocationBinds = [];
     var budgetAllocationUUID = _.uniqueId();
 
@@ -122,9 +124,10 @@
 
     fillBudgetAllocation(budgetAllocationUUID, budget_allocation);
 
-
     $.each(budget_allocation.items, function (i, budget_allocation_item) {
-      renderBudgetAllocationItem(budgetAllocationUUID, budget_allocation_item);
+      if (budget_allocation_item.status == allowedItemStatus ) {
+        renderBudgetAllocationItem(budgetAllocationUUID, budget_allocation_item);
+      }
     });
   }
 

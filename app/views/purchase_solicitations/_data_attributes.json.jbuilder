@@ -24,6 +24,7 @@ builder resource, json do
       json.quantity              item.quantity.to_f
       json.unit_price            item.unit_price.to_f
       json.estimated_total_price item.estimated_total_price.to_f
+      json.status                item.status
     end
   end
 end
