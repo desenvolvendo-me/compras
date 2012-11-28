@@ -120,7 +120,7 @@
   }
 
   <% if f.object.persisted? && !f.object.waiting? %>
-    $('form.administrative_process :input').attr('disabled', true);
+    $('form.administrative_process :input').not('[data-disabled]').attr('disabled', true);
     $('form.administrative_process .add-administrative-process-budget-allocation').hide();
     $('form.administrative_process .remove-administrative-process-budget-allocation').hide();
   <% end %>

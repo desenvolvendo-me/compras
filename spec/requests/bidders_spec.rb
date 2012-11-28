@@ -835,8 +835,10 @@ feature "Bidders" do
 
     click_link bidder.to_s
 
-    expect(page).to have_disabled_element 'Apagar', :reason => 'alterações somente no dia da abertura dos envelopes'
-    expect(page).to have_disabled_element 'Salvar', :reason => 'alterações somente no dia da abertura dos envelopes'
+    expect(page).to have_disabled_element 'Apagar',
+                    :reason => 'alterações permitidas somente no dia da abertura dos envelopes'
+    expect(page).to have_disabled_element 'Salvar',
+                    :reason => 'alterações permitidas somente no dia da abertura dos envelopes'
   end
 
   scenario "Save and destroy buttons should be shown if licitation process envelope opening date is today" do

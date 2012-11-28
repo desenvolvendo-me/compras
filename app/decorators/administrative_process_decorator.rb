@@ -17,13 +17,13 @@ class AdministrativeProcessDecorator
     localize super if super
   end
 
-  def cant_print_message
-    t('administrative_process.messages.cant_print') unless released?
+  def not_released_message
+    t('administrative_process.messages.not_released') unless released?
   end
 
   def cant_build_licitation_process_message
-    return t('administrative_process.messages.cant_build_licitation_process.not_allowed') unless allow_licitation_process?
+    return t('administrative_process.messages.licitation_process_not_allowed') unless allow_licitation_process?
 
-    t('administrative_process.messages.cant_build_licitation_process.not_released') unless released?
+    not_released_message
   end
 end

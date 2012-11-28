@@ -24,4 +24,4 @@ pt-BR:
 
   bidder:
     messages:
-      cant_save_or_destroy: "alterações somente no dia da abertura dos envelopes"
+      cant_save_or_destroy: "alterações permitidas somente no dia da abertura dos envelopes"

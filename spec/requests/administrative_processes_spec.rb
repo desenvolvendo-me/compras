@@ -436,7 +436,8 @@ feature "AdministrativeProcesses" do
     end
 
     expect(page).to_not have_select 'Status do processo administrativo', :selected => 'Liberado'
-    expect(page).to have_disabled_element 'Solicitação de abertura de processo licitatório', :reason => 'processo administrativo não liberado'
+    expect(page).to have_disabled_element 'Solicitação de abertura de processo licitatório',
+                    :reason => 'este processo administrativo ainda não foi liberado'
   end
 
   scenario 'should have print button when status is released' do
@@ -462,7 +463,8 @@ feature "AdministrativeProcesses" do
     end
 
     expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
-    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo licitatório não permitido'
+    expect(page).to have_disabled_element 'Novo processo licitatório',
+                    :reason => 'o tipo de objeto não permite processo licitatório'
   end
 
   scenario 'should have disabled licitation process button when status is not released but is allowed' do
@@ -475,7 +477,8 @@ feature "AdministrativeProcesses" do
     end
 
     expect(page).to_not have_select 'Status do processo administrativo', :selected => 'Liberado'
-    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo administrativo não liberado'
+    expect(page).to have_disabled_element 'Novo processo licitatório',
+                    :reason => 'este processo administrativo ainda não foi liberado'
   end
 
   scenario 'should have disabled licitation process button when status is released but not allowed' do
@@ -488,7 +491,8 @@ feature "AdministrativeProcesses" do
     end
 
     expect(page).to have_select 'Status do processo administrativo', :selected => 'Liberado'
-    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo licitatório não permitido'
+    expect(page).to have_disabled_element 'Novo processo licitatório',
+                    :reason => 'o tipo de objeto não permite processo licitatório'
   end
 
   scenario 'should have licitation process button when status is released and allowed' do
@@ -691,7 +695,8 @@ feature "AdministrativeProcesses" do
       page.find('a').click
     end
 
-    expect(page).to have_disabled_element 'Novo processo licitatório', :reason => 'processo licitatório não permitido'
+    expect(page).to have_disabled_element 'Novo processo licitatório',
+                    :reason => 'o tipo de objeto não permite processo licitatório'
   end
 
   scenario 'should show only purchase_solicitation_item_group not annulled' do

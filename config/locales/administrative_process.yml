@@ -25,7 +25,5 @@ pt-BR:
 
   administrative_process:
     messages:
-      cant_print: "processo administrativo não liberado"
-      cant_build_licitation_process:
-        not_released: "processo administrativo não liberado"
-        not_allowed: "processo licitatório não permitido"
+      not_released: "este processo administrativo ainda não foi liberado"
+      licitation_process_not_allowed: "o tipo de objeto não permite processo licitatório"

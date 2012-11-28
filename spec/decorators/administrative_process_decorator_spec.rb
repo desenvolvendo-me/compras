@@ -70,23 +70,23 @@ describe AdministrativeProcessDecorator do
     end
   end
 
-  context '#cant_print_message' do
+  context '#not_released_message' do
     it 'when is not released' do
       I18n.backend.store_translations 'pt-BR', :administrative_process => {
           :messages => {
-            :cant_print => 'não pode imprimir'
+            :not_released => 'não liberado'
         }
       }
 
       component.stub(:released? => false)
 
-      expect(subject.cant_print_message).to eq 'não pode imprimir'
+      expect(subject.not_released_message).to eq 'não liberado'
     end
 
     it 'when released' do
       component.stub(:released? => true)
 
-      expect(subject.cant_print_message).to be_nil
+      expect(subject.not_released_message).to be_nil
     end
   end
 
@@ -94,9 +94,7 @@ describe AdministrativeProcessDecorator do
     it 'when is not allowed and not released' do
       I18n.backend.store_translations 'pt-BR', :administrative_process => {
           :messages => {
-            :cant_build_licitation_process => {
-              :not_allowed => 'não permitido'
-            }
+            :licitation_process_not_allowed => 'não permitido'
         }
       }
 
@@ -108,9 +106,7 @@ describe AdministrativeProcessDecorator do
     it 'when is not allowed and not released' do
       I18n.backend.store_translations 'pt-BR', :administrative_process => {
           :messages => {
-            :cant_build_licitation_process => {
-              :not_allowed => 'não permitido'
-            }
+            :licitation_process_not_allowed => 'não permitido'
         }
       }
 
@@ -122,9 +118,7 @@ describe AdministrativeProcessDecorator do
     it 'when is allowed and not released' do
       I18n.backend.store_translations 'pt-BR', :administrative_process => {
           :messages => {
-            :cant_build_licitation_process => {
-              :not_released => 'não liberado'
-            }
+            :not_released => 'não liberado'
         }
       }
 

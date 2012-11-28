@@ -3,4 +3,3 @@
   <%= f.button :back, :href => bidders_path(:licitation_process_id => resource.licitation_process_id) %>
   <%= f.button :destroy, 'data-disabled' => resource.decorator.cant_save_or_destroy_message if f.object.persisted? %>
 </div>
-

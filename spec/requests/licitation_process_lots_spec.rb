@@ -76,7 +76,7 @@ feature "LicitationProcessLots" do
     expect(page).to_not have_link 'Criar Lote de itens'
   end
 
-  scenario 'should not have Salvar neither Apagar buttons when updating a lot if licitation process is not updatable' do
+  scenario 'should disable Salvar and Apagar buttons when updating a lot if licitation process is not updatable' do
     licitation_process = LicitationProcess.make!(:processo_licitatorio_nao_atualizavel)
 
     navigate 'Processo Administrativo/Licitatório > Processos Administrativos'

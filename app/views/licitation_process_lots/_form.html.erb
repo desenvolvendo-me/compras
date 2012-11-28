@@ -3,3 +3,15 @@
 <%= f.input :observations, :disabled => !f.object.licitation_process.updatable? %>
 
 <%= render 'items', :f => f %>
+
+<script>
+  <% unless f.object.licitation_process.updatable? %>
+    $(function(){
+      $('form.licitation_process_lot [data-disabled]').on('click', function(event){
+        event.stopImmediatePropagation();
+        return false;
+      });
+      $('form.licitation_process_lot :input').not('[data-disabled]').attr('disabled', true);
+    });
+  <% end %>
+</script>

@@ -8,7 +8,7 @@ $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
 })
 
-$(".records").on("click", '.modal-finder-remove', function () {
+$(".modal-finder-remove").live("click", function () {
   if (!$(this).data('disabled')) {
     $(this).closest("tr").remove();
   }

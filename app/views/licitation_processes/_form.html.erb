@@ -129,14 +129,6 @@
     calculateTotalOfItems(itemDiv.closest('.licitation-process-budget-allocation'));
   });
 
-  <% unless resource.updatable? %>
-    $('form.licitation_process .add-licitation-process-budget-allocation').on('click', function(event){
-      event.stopImmediatePropagation();
-      return false;
-    });
-    $('form.licitation_process :input').not('[data-disabled])').attr('disabled', true);
-  <% end %>
-
   function filterTypesOfCalculation (judgmentKind, objectType, modality) {
     var typesOfCalculationGroupsForJudgmentFormKind = <%= LicitationProcessTypesOfCalculationByJudgmentFormKind.new.types_of_calculation_groups.to_json.html_safe %>,
         typesOfCalculationGroupsForObjectType   = <%= LicitationProcessTypesOfCalculationByObjectType.new.types_of_calculation_groups.to_json.html_safe %>,
@@ -187,4 +179,14 @@
   });
 
   $("#licitation_process_type_of_calculation").val("<%= f.object.type_of_calculation %>");
+
+  <% unless resource.updatable? %>
+    $(function(){
+      $('form.licitation_process [data-disabled]').on('click', function(event){
+        event.stopImmediatePropagation();
+        return false;
+      });
+      $('form.licitation_process :input').not('[data-disabled]').attr('disabled', true);
+    });
+  <% end %>
 </script>
