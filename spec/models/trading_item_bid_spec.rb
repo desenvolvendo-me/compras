@@ -22,6 +22,42 @@ describe TradingItemBid do
   it { should delegate(:last_proposal_value).to(:trading_item).prefix(true) }
 
   describe "validations" do
+    context 'when on round of bids' do
+      before do
+        subject.stub(:stage).and_return(TradingItemBidStage::ROUND_OF_BIDS)
+      end
+
+      it 'should allow round greater then zero' do
+        should allow_value(1).for(:round)
+        should_not allow_value(0).for(:round)
+        should_not allow_value(-1).for(:round)
+      end
+    end
+
+    context 'when on proposals' do
+      before do
+        subject.stub(:stage).and_return(TradingItemBidStage::PROPOSALS)
+      end
+
+      it 'should not only allow round equals zero' do
+        should allow_value(0).for(:round)
+        should_not allow_value(1).for(:round)
+        should_not allow_value(-1).for(:round)
+      end
+    end
+
+    context 'when on negotiation' do
+      before do
+        subject.stub(:stage).and_return(TradingItemBidStage::NEGOTIATION)
+      end
+
+      it 'should not only allow round equals zero' do
+        should allow_value(0).for(:round)
+        should_not allow_value(1).for(:round)
+        should_not allow_value(-1).for(:round)
+      end
+    end
+
     it "validates if amount is greater than zero when status is with_proposal" do
       subject.stub(:with_proposal?).and_return(true)
       subject.stub(:trading_item_last_proposal_value).and_return(0)

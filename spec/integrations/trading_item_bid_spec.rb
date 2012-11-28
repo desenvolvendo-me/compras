@@ -2,69 +2,53 @@
 require 'spec_helper'
 
 describe TradingItemBid do
-  describe '.with_proposal' do
-    it 'should show bids with proposals and ordered by amount' do
-      trading = Trading.make!(:pregao_presencial)
+  context 'at round_of_bids with 3 rounds' do
+    let(:trading) { trading = Trading.make!(:pregao_presencial) }
+    let(:trading_item) { trading.trading_items.first }
+    let(:bidder) { trading.bidders.first }
 
-      trading_item = trading.trading_items.first
-      bidder = trading.bidders.first
-
-      bid_with_proposal = TradingItemBid.create!(
+    let :bid_with_proposal do
+      TradingItemBid.create!(
         :round => 1,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder.id,
         :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
-
-      bid_without_proposal = TradingItemBid.create!(
-        :round => 2,
-        :trading_item_id => trading_item.id,
-        :bidder_id => bidder.id,
-        :amount => 90.0,
-        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
-
-      bid_disqualified = TradingItemBid.create!(
-        :round => 3,
-        :trading_item_id => trading_item.id,
-        :bidder_id => bidder.id,
-        :amount => 80.0,
-        :status => TradingItemBidStatus::DISQUALIFIED,
-        :disqualification_reason => 'Disqualified')
-
-      expect(described_class.with_proposal).to eq [bid_with_proposal]
     end
-  end
 
-  describe '.with_no_proposal' do
-    it 'should show bids with no proposals' do
-      trading = Trading.make!(:pregao_presencial)
-
-      trading_item = trading.trading_items.first
-      bidder = trading.bidders.first
-
-      bid_with_proposal = TradingItemBid.create!(
-        :round => 1,
-        :trading_item_id => trading_item.id,
-        :bidder_id => bidder.id,
-        :amount => 100.0,
-        :status => TradingItemBidStatus::WITH_PROPOSAL)
-
-      bid_without_proposal = TradingItemBid.create!(
+    let :bid_without_proposal do
+      TradingItemBid.create!(
         :round => 2,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder.id,
         :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+    end
 
-      bid_disqualified = TradingItemBid.create!(
+    let :bid_disqualified do
+      TradingItemBid.create!(
         :round => 3,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder.id,
         :amount => 80.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::DISQUALIFIED,
         :disqualification_reason => 'Disqualified')
+    end
 
-      expect(described_class.with_no_proposal).to eq [bid_without_proposal, bid_disqualified]
+
+    describe '.with_proposal' do
+      it 'should show bids with proposals and ordered by amount' do
+        expect(described_class.with_proposal).to eq [bid_with_proposal]
+      end
+    end
+
+    describe '.with_no_proposal' do
+      it 'should show bids with no proposals' do
+        expect(described_class.with_no_proposal).to eq [bid_without_proposal, bid_disqualified]
+      end
     end
   end
 
@@ -85,6 +69,7 @@ describe TradingItemBid do
         :trading_item_id => trading_item_with_proposal.id,
         :bidder_id => bidder1.id,
         :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       bid2 = TradingItemBid.create!(
@@ -92,6 +77,7 @@ describe TradingItemBid do
         :trading_item_id => trading_item_with_proposal.id,
         :bidder_id => bidder3.id,
         :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
 
@@ -100,6 +86,7 @@ describe TradingItemBid do
         :trading_item_id => trading_item_without_proposal.id,
         :bidder_id => bidder2.id,
         :amount => 0.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
       expect(described_class.for_trading_item(trading_item_with_proposal)).to include(bid1, bid2)
@@ -123,7 +110,7 @@ describe TradingItemBid do
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       bid_without_proposal = TradingItemBid.create!(
-        :round => 1,
+        :round => 0,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder.id,
         :amount => 90.0,
@@ -159,7 +146,7 @@ describe TradingItemBid do
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       bid_without_proposal = TradingItemBid.create!(
-        :round => 1,
+        :round => 0,
         :trading_item_id => trading_item.id,
         :bidder_id => bidder.id,
         :amount => 90.0,

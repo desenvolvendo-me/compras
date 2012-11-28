@@ -29,6 +29,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => sobrinho.id,
         :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       TradingItemBid.create!(
@@ -36,6 +37,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => wenderson.id,
         :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
       expect(described_class.with_proposal_for_trading_item_round(1)).to eq [sobrinho]
@@ -117,6 +119,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => sobrinho.id,
         :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       expect(described_class.at_bid_round(1)).to eq [sobrinho]
@@ -140,6 +143,7 @@ describe Bidder do
         :trading_item_id => trading_item_with_proposal.id,
         :bidder_id => bidder1.id,
         :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       TradingItemBid.create!(
@@ -147,6 +151,7 @@ describe Bidder do
         :trading_item_id => trading_item_without_proposal.id,
         :bidder_id => bidder2.id,
         :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       TradingItemBid.create!(
@@ -154,6 +159,7 @@ describe Bidder do
         :trading_item_id => trading_item_with_proposal.id,
         :bidder_id => bidder3.id,
         :amount => 0.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
       expect(described_class.with_proposal_for_trading_item(trading_item_with_proposal.id)).to eq [bidder1]
@@ -188,7 +194,7 @@ describe Bidder do
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       TradingItemBid.create!(
-        :round => 1,
+        :round => 0,
         :trading_item_id => trading_item.id,
         :bidder_id => nohup.id,
         :amount => 100.0,
@@ -236,6 +242,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => bidder1.id,
         :amount => 100.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       TradingItemBid.create!(
@@ -243,6 +250,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => bidder2.id,
         :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       TradingItemBid.create!(
@@ -250,6 +258,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => bidder3.id,
         :amount => 0.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
       TradingItemBid.create!(
@@ -257,6 +266,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => bidder1.id,
         :amount => 80.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
       expect(bidder1.lower_trading_item_bid_amount(trading_item)).to eq 80.0
@@ -273,6 +283,7 @@ describe Bidder do
         :trading_item_id => trading_item.id,
         :bidder_id => bidder.id,
         :amount => 10.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
 
       expect(bidder.lower_trading_item_bid_amount(trading_item)).to eq 0.0
