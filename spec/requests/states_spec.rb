@@ -29,7 +29,7 @@ feature "States" do
   end
 
   scenario 'update a state' do
-    rs = State.make!(:rs)
+    State.make!(:rs)
 
     navigate 'Geral > Parâmetros > Endereços > Estados'
 
@@ -47,7 +47,7 @@ feature "States" do
   end
 
   scenario 'destroy a state' do
-    rs = State.make!(:rs)
+    State.make!(:rs)
 
     navigate 'Geral > Parâmetros > Endereços > Estados'
 
