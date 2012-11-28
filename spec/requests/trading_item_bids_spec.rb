@@ -40,7 +40,7 @@ feature "TradingItemBids" do
 
   scenario "Placing an proposal to an item and showing the proposal report after make all proposals" do
     TradingConfiguration.make!(:pregao)
-    trading = Trading.make!(:pregao_presencial)
+    Trading.make!(:pregao_presencial)
 
     navigate "Pregão Presencial > Pregões Presenciais"
 
