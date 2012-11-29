@@ -290,4 +290,12 @@ feature "Materials" do
     ServiceOrContractType.make!(:trainees)
     ExpenseNature.make!(:vencimento_e_salarios)
   end
+
+  scenario "provides a filter by characteristic" do
+    navigate 'Comum > Cadastrais > Materiais > Materiais'
+
+    click_link "Filtrar Materiais"
+
+    expect(page).to have_field "Característica"
+  end
 end

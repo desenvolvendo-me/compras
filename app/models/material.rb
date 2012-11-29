@@ -5,7 +5,7 @@ class Material < Compras::Model
   attr_accessible :service_or_contract_type_id, :expense_nature_id
   attr_accessible :combustible, :material_characteristic
 
-  attr_modal :description
+  attr_modal :description, :material_characteristic
 
   has_enumeration_for :material_characteristic, :create_helpers => true
   has_enumeration_for :material_type, :create_helpers => true
