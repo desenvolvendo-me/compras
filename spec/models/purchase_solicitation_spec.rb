@@ -149,16 +149,47 @@ describe PurchaseSolicitation do
 
   describe '#attend!' do
     it 'should change service_status to attended' do
+      subject.should_receive(:update_column).with(:service_status, 'attended')
+
+      subject.attend!
+    end
+  end
+
+  describe '#attend_items!' do
+    it "should change status of all pending items to 'attended'" do
       item1 = double(:item1)
       item2 = double(:item2)
+      items = double(:items)
+
+      items.should_receive(:with_status).
+        with(PurchaseSolicitationBudgetAllocationItemStatus::PENDING).
+        and_return([item1, item2])
 
       item1.should_receive(:attend!)
       item2.should_receive(:attend!)
 
-      subject.stub(:items).and_return([item1, item2])
-      subject.should_receive(:update_column).with(:service_status, 'attended')
+      subject.stub(:items).and_return(items)
 
-      subject.attend!
+      subject.attend_items!
+    end
+  end
+
+  describe '#rollback_attend_items!' do
+    it "should change status of all pending items to 'attended'" do
+      item1 = double(:item1)
+      item2 = double(:item2)
+      items = double(:items)
+
+      items.should_receive(:with_status).
+        with(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED).
+        and_return([item1, item2])
+
+      item1.should_receive(:pending!)
+      item2.should_receive(:pending!)
+
+      subject.stub(:items).and_return(items)
+
+      subject.rollback_attended_items!
     end
   end
 end

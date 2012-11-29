@@ -79,4 +79,12 @@ describe PurchaseSolicitationBudgetAllocationItem do
       subject.attend!
     end
   end
+
+  describe '#pending!' do
+    it "should update status to 'pending'" do
+      subject.should_receive(:update_column).with(:status, 'pending')
+
+      subject.pending!
+    end
+  end
 end

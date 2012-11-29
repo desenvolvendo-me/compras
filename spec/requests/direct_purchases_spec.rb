@@ -1973,6 +1973,13 @@ feature "DirectPurchases" do
     PurchaseSolicitationItemGroup.make!(:office,
       :purchase_solicitation_item_group_materials => [item_group_material])
 
+    PurchaseSolicitation.make!(:reparo,
+      :accounting_year => 2013,
+      :responsible => Employee.make!(:wenderson),
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED,
+      :purchase_solicitation_budget_allocations => [
+        PurchaseSolicitationBudgetAllocation.make!(:alocacao_primaria_office)])
+
     navigate 'Processos de Compra > Compra Direta'
 
     click_link 'Gerar Compra Direta'
@@ -1983,7 +1990,7 @@ feature "DirectPurchases" do
       fill_modal 'Referência legal', :with => 'Referencia legal', :field => 'Descrição'
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
-      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Ano'
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
       fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
@@ -2006,14 +2013,71 @@ feature "DirectPurchases" do
         click_button 'Pesquisar'
 
         within_records do
-          expect(page).to_not have_content '1'
+          expect(page).to have_css('tbody tr', :count => 1)
           expect(page).to_not have_content '2012'
-          expect(page).to_not have_content 'Bens'
-          expect(page).to_not have_content 'Secretaria de educação'
-          expect(page).to_not have_content 'Gabriel Sobrinho'
         end
 
         click_link 'Voltar'
+      end
+    end
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.item:nth-child(1)' do
+        expect(page).to have_select 'Status', :selected => 'Atendido'
+      end
+
+      within '.item:nth-child(2)' do
+        expect(page).to have_select 'Status', :selected => 'Agrupado'
+      end
+    end
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      fill_modal 'Solicitação de compra', :with => '2013', :field => 'Ano'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Compra Direta editada com sucesso.'
+
+    click_link 'Voltar'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.item:nth-child(1)' do
+        expect(page).to have_select 'Status', :selected => 'Pendente'
+      end
+
+      within '.item:nth-child(2)' do
+        expect(page).to have_select 'Status', :selected => 'Agrupado'
+      end
+    end
+
+    click_link 'Voltar'
+
+    within_records do
+      click_link '1/2013 1 - Secretaria de Educação - RESP: Wenderson Malheiros'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      within '.item:nth-child(1)' do
+        expect(page).to have_select 'Status', :selected => 'Atendido'
       end
     end
   end

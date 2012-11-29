@@ -35,16 +35,6 @@ describe DirectPurchasesController do
       post :create
     end
 
-    it 'updates the status of a purchase solicitation through PurchaseSoliciationProcess' do
-      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
-
-      DirectPurchase.any_instance.stub(:save).and_return(true)
-      DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
-      PurchaseSolicitationProcess.should_receive(:update_solicitations_status).with(purchase_solicitation)
-
-      post :create, :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
-    end
-
     it 'updates the status of the item group through PurchaseSoliciationItemGroupProcess' do
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
 
@@ -53,6 +43,50 @@ describe DirectPurchasesController do
       PurchaseSolicitationItemGroupProcess.should_receive(:update_item_group_status).with(item_group)
 
       post :create, :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
+    end
+
+    context 'without purchase_solicitation' do
+      it 'should not update status of purchase solicitation' do
+        item_status_changer = double(:item_status_changer)
+
+        DirectPurchase.any_instance.stub(:transaction).and_yield
+        DirectPurchase.any_instance.stub(:save).and_return(true)
+        DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
+
+        PurchaseSolicitationBudgetAllocationItemStatusChanger.should_receive(:new).
+          with(:new_purchase_solicitation => nil).and_return(item_status_changer)
+
+        item_status_changer.should_receive(:change)
+
+        post :create, :direct_purchase => {}
+      end
+    end
+
+    context 'with purchase_solicitation' do
+      let(:purchase_solicitation) { PurchaseSolicitation.make!(:reparo) }
+
+      it 'should update the status of pending items to attended' do
+        item_status_changer = double(:item_status_changer)
+
+        DirectPurchase.any_instance.stub(:transaction).and_yield
+        DirectPurchase.any_instance.stub(:save).and_return(true)
+        DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
+
+        PurchaseSolicitationBudgetAllocationItemStatusChanger.should_receive(:new).
+          with(:new_purchase_solicitation => purchase_solicitation).and_return(item_status_changer)
+
+        item_status_changer.should_receive(:change)
+
+        post :create, :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
+      end
+
+      it 'updates the status of a purchase solicitation through PurchaseSoliciationProcess' do
+        DirectPurchase.any_instance.stub(:save).and_return(true)
+        DirectPurchase.any_instance.stub_chain(:errors, :empty?).and_return(false)
+        PurchaseSolicitationProcess.should_receive(:update_solicitations_status).with(purchase_solicitation)
+
+        post :create, :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
+      end
     end
   end
 
@@ -103,6 +137,40 @@ describe DirectPurchasesController do
 
         put :update, :id => direct_purchase.id,
                      :direct_purchase => { :purchase_solicitation_item_group_id => item_group.id }
+      end
+
+      it 'should update the status of pending items to attended' do
+        purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+          :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+
+        item_status_changer = double(:item_status_changer)
+
+        DirectPurchaseBudgetAllocationCleaner.should_receive(:clear_old_records)
+
+        PurchaseSolicitationBudgetAllocationItemStatusChanger.should_receive(:new).
+          with(:new_purchase_solicitation => purchase_solicitation, :old_purchase_solicitation => nil).
+          and_return(item_status_changer)
+
+        item_status_changer.should_receive(:change)
+
+        put :update, :id => direct_purchase.id,
+            :direct_purchase => { :purchase_solicitation_id => purchase_solicitation.id }
+      end
+    end
+
+    context 'without purchase_solicitation' do
+      it 'should not update status of purchase solicitation' do
+        item_status_changer = double(:item_status_changer)
+
+        DirectPurchaseBudgetAllocationCleaner.should_receive(:clear_old_records)
+
+        PurchaseSolicitationBudgetAllocationItemStatusChanger.should_receive(:new).
+          with(:new_purchase_solicitation => nil, :old_purchase_solicitation => nil).
+          and_return(item_status_changer)
+
+        item_status_changer.should_receive(:change)
+
+        put :update, :id => direct_purchase.id, :direct_purchase => {}
       end
     end
   end

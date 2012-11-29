@@ -29,6 +29,10 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
     )
   end
 
+  def self.with_status(status)
+    where { |item| item.status.eq status }
+  end
+
   def self.by_material(material_ids)
     material_ids = [material_ids] unless material_ids.kind_of?(Array)
     where { |item| item.material_id.in material_ids }
@@ -54,6 +58,10 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
 
   def attend!
     update_column :status, PurchaseSolicitationServiceStatus::ATTENDED
+  end
+
+  def pending!
+    update_column :status, PurchaseSolicitationServiceStatus::PENDING
   end
 
   private

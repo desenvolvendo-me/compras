@@ -66,10 +66,6 @@ class PurchaseSolicitation < Compras::Model
     PurchaseSolicitationServiceStatus::PARTIALLY_FULFILLED ]
   }
 
-  scope :can_be_purchased, where {
-    service_status.eq(PurchaseSolicitationServiceStatus::LIBERATED)
-  }
-
   def self.by_material(material_ids)
     joins { items }.
       where { |purchase| purchase.items.material_id.in(material_ids) }
@@ -123,8 +119,14 @@ class PurchaseSolicitation < Compras::Model
 
   def attend!
     update_column :service_status, PurchaseSolicitationServiceStatus::ATTENDED
+  end
 
-    items.each(&:attend!)
+  def attend_items!
+    items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::PENDING).each(&:attend!)
+  end
+
+  def rollback_attended_items!
+    items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED).each(&:pending!)
   end
 
   protected
