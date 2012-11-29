@@ -53,4 +53,18 @@ feature "Positions" do
 
     expect(page).to_not have_content 'Gerente'
   end
+
+  scenario 'index with columns at the index' do
+    Position.make!(:gerente)
+
+    navigate 'Geral > Usuários > Cargos'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Gerente'
+      end
+    end
+  end
 end
