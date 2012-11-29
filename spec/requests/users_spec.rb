@@ -112,4 +112,20 @@ feature "Users" do
 
     expect(page).to have_alert 'Você já está autenticado.'
   end
+
+  scenario 'index with columns at the index' do
+    User.make!(:wenderson)
+
+    navigate 'Geral > Usuários > Usuários'
+
+    within_records do
+      expect(page).to have_content 'Funcionário'
+      expect(page).to have_content 'Login'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Wenderson'
+        expect(page).to have_content 'wenderson.malheiros'
+      end
+    end
+  end
 end
