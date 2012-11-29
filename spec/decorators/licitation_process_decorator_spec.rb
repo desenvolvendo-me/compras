@@ -160,4 +160,20 @@ describe LicitationProcessDecorator do
     end
   end
 
+  describe "#must_have_published_edital" do
+    it "returns nil if edital have been published" do
+      component.stub(:edital_published? => true)
+      expect(subject.must_have_published_edital).to be_nil
+    end
+
+    it "returns disabled_message if edital have not been published" do
+      I18n.backend.store_translations 'pt-BR', :licitation_process => {
+        :messages => {
+          :must_be_included_after_edital_publication => 'não pode'
+        }
+      }
+      component.stub(:edital_published? => false)
+      expect(subject.must_have_published_edital).to eq "não pode"
+    end
+  end
 end

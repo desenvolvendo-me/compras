@@ -68,6 +68,7 @@ class LicitationProcess < Compras::Model
   validate :validate_administrative_process_status
   validate :validate_administrative_process
   validate :validate_administrative_process_allow_licitation_process
+  validate :validate_bidders_before_edital_publication
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -169,6 +170,10 @@ class LicitationProcess < Compras::Model
     all_licitation_process_classifications.detect { |classification| classification.situation == SituationOfProposal::WON}
   end
 
+  def edital_published?
+    published_editals.any?
+  end
+
   protected
 
   def set_modality
@@ -258,5 +263,15 @@ class LicitationProcess < Compras::Model
     unless administrative_process.allow_licitation_process?
       errors.add(:administrative_process, :not_allow_licitation_process)
     end
+  end
+
+  def validate_bidders_before_edital_publication
+    if bidders.any? && !edital_published?
+      errors.add(:bidders, :inclusion_of_bidders_before_edital_publication)
+    end
+  end
+
+  def published_editals
+    licitation_process_publications.edital
   end
 end

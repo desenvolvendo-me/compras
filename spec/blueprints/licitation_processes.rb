@@ -58,7 +58,8 @@ LicitationProcess.blueprint(:processo_licitatorio_computador) do
   contract_expiration { 3 }
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
-  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao)] }
+  licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
+                                                                        :licitation_process => object)] }
   bidders { [Bidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
 end
@@ -119,7 +120,6 @@ LicitationProcess.blueprint(:processo_licitatorio_publicacao_cancelada) do
   observations { "observacoes" }
   document_types { [DocumentType.make!(:fiscal)] }
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao_de_cancelamento)] }
-  bidders { [Bidder.make!(:licitante)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::LOWEST_TOTAL_PRICE_BY_ITEM }
 end
 

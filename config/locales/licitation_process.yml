@@ -49,3 +49,4 @@ pt-BR:
   licitation_process:
     messages:
       not_updatable: "este processo licitatório não pode ser alterado"
+      must_be_included_after_edital_publication: "Licitantes só podem ser incluídos após publicação do edital"

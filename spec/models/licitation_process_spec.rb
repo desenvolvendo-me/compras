@@ -144,6 +144,14 @@ describe LicitationProcess do
     end
   end
 
+  it "validates if bidders where added before publication" do
+    subject.stub(:bidders => [double])
+
+    subject.valid?
+
+    expect(subject.errors[:bidders]).to include "não podem ser incluídos antes da publicação do edital"
+  end
+
   it { should allow_value('2012').for(:year) }
   it { should_not allow_value('201').for(:year) }
   it { should_not allow_value('a201').for(:year) }
@@ -467,6 +475,15 @@ describe LicitationProcess do
       subject.stub(:all_licitation_process_classifications => [classification_1, classification_2])
 
       expect(subject.winning_bid).to eq classification_2
+    end
+  end
+
+  describe "#edital_published?" do
+    it "returns true if there are any published editals" do
+      publications = double(:edital => [double])
+      subject.stub(:licitation_process_publications => publications)
+
+      expect(subject.edital_published?).to be_true
     end
   end
 end

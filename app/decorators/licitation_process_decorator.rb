@@ -45,4 +45,10 @@ class LicitationProcessDecorator
   def not_updatable_message
     t('licitation_process.messages.not_updatable') unless updatable?
   end
+
+  def must_have_published_edital
+    unless edital_published?
+      t("licitation_process.messages.must_be_included_after_edital_publication")
+    end
+  end
 end

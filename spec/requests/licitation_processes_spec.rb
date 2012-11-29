@@ -1286,4 +1286,37 @@ feature "LicitationProcesses" do
       end
     end
   end
+
+  scenario 'allowance of adding bidders and publication of the edital' do
+    LicitationProcess.make!(:processo_licitatorio,
+                            :licitation_process_publications => [])
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link "1/2012"
+    end
+
+    expect(page).to have_disabled_element "Licitantes", :reason => "Licitantes só podem ser incluídos após publicação do edital"
+
+    click_link "Publicações"
+
+    click_link "Criar Publicação"
+
+    fill_in "Nome do veículo de comunicação", :with => "website"
+
+    fill_in "Data da publicação", :with => "30/12/2012"
+
+    select "Edital", :on => "Publicação do(a)"
+
+    select "Internet", :on => "Tipo de circulação do veículo de comunicação"
+
+    click_button "Salvar"
+
+    click_link "Voltar ao processo licitatório"
+
+    click_link "Licitantes"
+
+    expect(page).to have_content "Licitantes do Processo Licitatório 1/2012"
+  end
 end

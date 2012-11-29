@@ -1,7 +1,8 @@
 <div class="buttons">
   <p>
     <% if f.object.persisted? %>
-      <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.id), :class => "button primary") %>
+      <%= link_to('Licitantes', bidders_path(:licitation_process_id => resource.id), :class => "button primary",
+                  'data-disabled' => f.object.decorator.must_have_published_edital) %>
       <%= link_to('Publicações', licitation_process_publications_path(:licitation_process_id => resource.id), :class => "button primary") %>
 
       <%= classification_link %>
