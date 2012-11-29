@@ -1,6 +1,6 @@
 # encoding: utf-8
 PurchaseSolicitation.blueprint(:reparo) do
-  accounting_year { "2012" }
+  accounting_year { 2012 }
   request_date { Date.new(2012, 1, 31) }
   responsible { Employee.make!(:sobrinho) }
   justification { "Reparo nas instalações" }
@@ -19,7 +19,7 @@ PurchaseSolicitation.blueprint(:reparo) do
 end
 
 PurchaseSolicitation.blueprint(:reparo_2013) do
-  accounting_year { "2013" }
+  accounting_year { 2013 }
   request_date { Date.new(2013, 1, 31) }
   responsible { Employee.make!(:sobrinho) }
   justification { "Reparo nas instalações" }
@@ -38,7 +38,7 @@ PurchaseSolicitation.blueprint(:reparo_2013) do
 end
 
 PurchaseSolicitation.blueprint(:reparo_desenvolvimento) do
-  accounting_year { "2012" }
+  accounting_year { 2012 }
   request_date { Date.new(2012, 1, 31) }
   responsible { Employee.make!(:sobrinho) }
   justification { "Reparo nas instalações" }
@@ -57,7 +57,7 @@ PurchaseSolicitation.blueprint(:reparo_desenvolvimento) do
 end
 
 PurchaseSolicitation.blueprint(:reparo_2013_anulado) do
-  accounting_year { "2013" }
+  accounting_year { 2013 }
   request_date { Date.new(2013, 1, 31) }
   responsible { Employee.make!(:sobrinho) }
   justification { "Reparo nas instalações" }
@@ -77,7 +77,7 @@ PurchaseSolicitation.blueprint(:reparo_2013_anulado) do
 end
 
 PurchaseSolicitation.blueprint(:reparo_office) do
-  accounting_year { "2012" }
+  accounting_year { 2012 }
   request_date { Date.new(2012, 1, 31) }
   responsible { Employee.make!(:sobrinho) }
   justification { "Reparo nas instalações" }
