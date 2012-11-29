@@ -115,4 +115,20 @@ feature "Neighborhoods" do
       expect(page).to_not have_content 'Centro'
     end
   end
+
+  scenario 'index with columns at the index' do
+    Neighborhood.make!(:centro)
+
+    navigate 'Geral > Parâmetros > Endereços > Bairros'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Cidade'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Centro'
+        expect(page).to have_content 'Belo Horizonte'
+      end
+    end
+  end
 end
