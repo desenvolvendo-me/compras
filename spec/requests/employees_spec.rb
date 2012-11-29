@@ -75,4 +75,22 @@ feature "Employees" do
       expect(page).to_not have_content '958473'
     end
   end
+
+  scenario 'index with columns at the index' do
+    Employee.make!(:sobrinho)
+
+    navigate 'Geral > Usuários > Funcionários'
+
+    within_records do
+      expect(page).to have_content 'Pessoa'
+      expect(page).to have_content 'Cargo'
+      expect(page).to have_content 'Matrícula'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Sobrinho'
+        expect(page).to have_content 'Gerente'
+        expect(page).to have_content '958473'
+      end
+    end
+  end
 end
