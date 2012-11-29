@@ -55,4 +55,18 @@ feature "Profiles" do
       expect(page).to_not have_content 'Gestor'
     end
   end
+
+  scenario 'index with columns at the index' do
+    Profile.make!(:manager)
+
+    navigate 'Geral > Usuários > Perfis'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Gestor'
+      end
+    end
+  end
 end
