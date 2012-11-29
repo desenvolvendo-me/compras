@@ -22,6 +22,7 @@ class Trading < Compras::Model
   validate :licitation_commission_type
   validate :licitation_commission_expiration_date
   validate :licitation_commission_exoneration_date
+  validate :licitation_process_with_published_edital
 
   delegate :auctioneer, :support_team, :licitation_commission_members,
            :to => :licitation_commission, :allow_nil => true
@@ -73,5 +74,13 @@ class Trading < Compras::Model
 
   def set_percentage_limit_to_participate_in_bids
     self.percentage_limit_to_participate_in_bids = TradingConfiguration.percentage_limit_to_participate_in_bids
+  end
+
+  def licitation_process_with_published_edital
+    return unless licitation_process.present?
+
+    unless licitation_process.edital_published?
+      errors.add(:licitation_process, :must_have_published_edital)
+    end
   end
 end

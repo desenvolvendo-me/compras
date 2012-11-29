@@ -115,6 +115,12 @@ class LicitationProcess < Compras::Model
       where { |licitation| licitation.trading.id.eq(nil) | licitation.id.eq(except_id) }
   end
 
+  def self.published_edital
+    joins { licitation_process_publications }.where {
+      licitation_process_publications.publication_of.eq PublicationOf::EDITAL
+    }
+  end
+
   def to_s
     "#{process}/#{year}"
   end

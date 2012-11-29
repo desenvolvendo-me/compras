@@ -4,6 +4,7 @@ class LicitationProcessesController < CrudController
   has_scope :with_price_registrations, :type => :boolean
   has_scope :by_modality_type
   has_scope :without_trading
+  has_scope :published_edital, :type => :boolean
 
   before_filter :block_administrative_process_not_allowed, :only => [:new, :create]
   before_filter :localize_administrative_process

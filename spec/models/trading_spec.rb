@@ -35,7 +35,8 @@ describe Trading do
 
   describe "validations" do
     it "validates if the licitation modality is of 'trading' type" do
-      licitation_process = double(:presence_trading? => false)
+      licitation_process = double(:presence_trading? => false,
+                                  :edital_published? => true)
       subject.stub(:licitation_process => licitation_process)
 
       subject.valid?
@@ -75,6 +76,16 @@ describe Trading do
 
         expect(subject.errors[:licitation_commission]).to include "não pode estar exonerada"
       end
+    end
+
+    it "validates if associated licitation process has a published edital" do
+      licitation_process = double(:edital_published? => false,
+                                  :presence_trading? => true)
+      subject.stub(:licitation_process => licitation_process)
+
+      subject.valid?
+
+      expect(subject.errors[:licitation_process]).to include "deve ter edital publicado"
     end
   end
 

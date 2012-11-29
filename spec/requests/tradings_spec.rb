@@ -52,9 +52,14 @@ feature "Tradings" do
     end
   end
 
-  scenario "filtering out licitation process with modalities other than 'Trading'" do
+  scenario "filtering out non-published licitation process with modalities other than 'Trading'" do
     LicitationProcess.make!(:pregao_presencial)
-    LicitationProcess.make!(:processo_licitatorio)
+    LicitationProcess.make!(:processo_licitatorio, :process => 2)
+    LicitationProcess.make!(:pregao_presencial,
+                            :bidders => [],
+                            :process => 120,
+                            :administrative_process => AdministrativeProcess.make!(:pregao_presencial, :process => 3),
+                            :licitation_process_publications => [])
 
     navigate "Pregão Presencial > Pregões Presenciais"
 
@@ -66,6 +71,7 @@ feature "Tradings" do
       within_records do
         expect(page).to have_content "1/2012"
         expect(page).not_to have_content "2/2012"
+        expect(page).not_to have_content "120/2012"
       end
     end
   end

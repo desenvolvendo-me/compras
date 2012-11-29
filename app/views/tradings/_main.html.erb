@@ -11,7 +11,8 @@
 
 <%= f.input :licitation_process,
   :modal_url => modal_licitation_processes_path(:by_modality_type => AbreviatedProcessModality::PRESENCE_TRADING,
-                                                :without_trading => f.object.decorator.licitation_process_id) %>
+                                                :without_trading => f.object.decorator.licitation_process_id,
+                                                :published_edital => true) %>
 
 <%= f.input :entity %>
 
