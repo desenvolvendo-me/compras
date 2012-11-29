@@ -53,4 +53,18 @@ feature "Countries" do
 
     expect(page).to_not have_content 'Argentina'
   end
+
+  scenario 'index with columns at the index' do
+    Country.make!(:argentina)
+
+    navigate 'Geral > Parâmetros > Endereços > Países'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Argentina'
+      end
+    end
+  end
 end
