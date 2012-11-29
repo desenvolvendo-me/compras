@@ -58,4 +58,20 @@ feature "Condominia" do
 
     expect(page).to_not have_content 'Tambuata'
   end
+
+  scenario 'index with columns at the index' do
+    Condominium.make!(:tambuata)
+
+    navigate 'Geral > Parâmetros > Endereços > Condomínios'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Tipo de condomínio'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Tambuata'
+        expect(page).to have_content 'Vertical'
+      end
+    end
+  end
 end
