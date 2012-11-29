@@ -94,4 +94,22 @@ feature "Streets" do
 
     expect(page).to have_css 'tr.record', :count => 1
   end
+
+  scenario 'index with columns at the index' do
+    Street.make!(:girassol)
+
+    navigate 'Geral > Parâmetros > Endereços > Logradouros'
+
+    within_records do
+      expect(page).to have_content 'Nome do logradouro'
+      expect(page).to have_content 'Tipo do logradouro'
+      expect(page).to have_content 'Cidade'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Girassol'
+        expect(page).to have_content 'Rua'
+        expect(page).to have_content 'Belo Horizonte'
+      end
+    end
+  end
 end
