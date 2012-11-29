@@ -57,4 +57,20 @@ feature "Districts" do
 
     expect(page).to_not have_content 'Sul'
   end
+
+  scenario 'index with columns at the index' do
+    District.make!(:sul)
+
+    navigate 'Geral > Parâmetros > Endereços > Distritos'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Cidade'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Sul'
+        expect(page).to have_content 'Belo Horizonte'
+      end
+    end
+  end
 end
