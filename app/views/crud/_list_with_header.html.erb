@@ -21,9 +21,9 @@
         <% resource_class.decorator.header_attributes.each do |field| %>
           <td>
             <% if resource_class.decorator.link?(field) %>
-              <%= link_to(formatted_attribute(resource, field), edit_resource_path(resource)) %>
+              <%= link_to(formatted_attribute(resource.decorator, field), edit_resource_path(resource)) %>
             <% else %>
-              <%= formatted_attribute(resource, field) %>
+              <%= formatted_attribute(resource.decorator, field) %>
             <% end %>
           </td>
         <% end %>
