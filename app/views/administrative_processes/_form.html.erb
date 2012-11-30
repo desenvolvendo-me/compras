@@ -61,9 +61,14 @@
   });
 
   (function () {
-    var purchaseSolicitationItemGroupId = $("#administrative_process_purchase_solicitation_item_group_id").val();
+    var purchaseSolicitationItemGroupId = $("#administrative_process_purchase_solicitation_item_group_id").val(),
+        purchaseSolicitationId = $("#administrative_process_purchase_solicitation_id").val();
 
     if (purchaseSolicitationItemGroupId) {
+      disablePurchaseSolicitation();
+      disableBudgetAllocations();
+    } else if (purchaseSolicitationId) {
+      disablePurchaseSolicitationItemGroup();
       disableBudgetAllocations();
     }
   })();
@@ -79,8 +84,28 @@
       });
 
       disableBudgetAllocations();
+      disablePurchaseSolicitation();
     } else {
       enableBudgetAllocations();
+      enablePurchaseSolicitationItemGroup();
+    }
+
+    calculateAllocationsTotalValue();
+  });
+
+  $("#administrative_process_purchase_solicitation_id").on("change", function (event, purchase_solicitation) {
+    $("#administrative-process-budget-allocation").empty();
+
+    if (purchase_solicitation) {
+      $.each(purchase_solicitation.budget_allocations, function (i, budget_allocation) {
+        renderBudgetAllocation(budget_allocation);
+      });
+
+      disableBudgetAllocations();
+      disablePurchaseSolicitationItemGroup();
+    } else {
+      enableBudgetAllocations();
+      enablePurchaseSolicitation();
     }
 
     calculateAllocationsTotalValue();
@@ -160,6 +185,22 @@
 
     $("#administrative_process_judgment_form").attr("data-modal-url",
                                                     modalUrl + licitationObject);
+  }
+
+  function disablePurchaseSolicitation() {
+    $("#administrative_process_purchase_solicitation").attr("disabled", "disabled");
+  }
+
+  function disablePurchaseSolicitationItemGroup() {
+    $("#administrative_process_purchase_solicitation_item_group").attr("disabled", "disabled");
+  }
+
+  function enablePurchaseSolicitation() {
+    $("#administrative_process_purchase_solicitation").removeAttr("disabled");
+  }
+
+  function enablePurchaseSolicitationItemGroup() {
+    $("#administrative_process_purchase_solicitation_item_group").removeAttr("disabled", "disabled");
   }
 
   $("#administrative_process_object_type").change(function() {

@@ -199,11 +199,15 @@ feature "AdministrativeProcesses" do
     end
 
     within_tab 'Principal' do
+      expect(page).to_not have_disabled_field 'Solicitação de compra'
+
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
         click_record 'Agrupamento de reparo 2013'
       end
+
+      expect(page).to have_disabled_field 'Solicitação de compra'
     end
 
     within_tab 'Dotações orçamentarias' do
@@ -1190,6 +1194,174 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Principal' do
       expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+    end
+  end
+
+  scenario 'clear budget allocations when purchase_solicititation is removed' do
+    PurchaseSolicitation.make!(:reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    Employee.make!(:sobrinho)
+    LicitationModality.make!(:pregao_presencial)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    expect(page).to be_on_tab 'Principal'
+
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Status do processo administrativo'
+      expect(page).to have_disabled_field 'Modalidade'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      expect(page).to_not have_disabled_field 'Solicitação de compra'
+      expect(page).to_not have_disabled_field 'Agrupamento de solicitações de compra'
+
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
+
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
+      select 'Alienação de bens', :from => 'Tipo de objeto'
+
+      expect(page).to have_field 'Modalidade', :with => ''
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
+      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      fill_in 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      select 'Aguardando', :from => 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      clear_modal 'Solicitação de compra'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_button 'Adicionar Dotação'
+      expect(page).to_not have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+
+      expect(page).to_not have_field 'Saldo da dotação', :with => '500,00'
+
+      expect(page).to have_field 'Valor total', :with => '0,00'
+    end
+  end
+
+  scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
+    PurchaseSolicitation.make!(:reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    BudgetStructure.make!(:secretaria_de_educacao)
+    JudgmentForm.make!(:por_item_com_melhor_tecnica)
+    Employee.make!(:sobrinho)
+    LicitationModality.make!(:pregao_presencial)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    expect(page).to be_on_tab 'Principal'
+
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Status do processo administrativo'
+      expect(page).to have_disabled_field 'Modalidade'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+      expect(page).to_not have_disabled_field 'Solicitação de compra'
+      expect(page).to_not have_disabled_field 'Agrupamento de solicitações de compra'
+
+      fill_in 'Ano', :with => '2012'
+      fill_in 'Data do processo', :with => '07/03/2012'
+      fill_in 'Número do protocolo', :with => '00099/2012'
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
+
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
+      select 'Alienação de bens', :from => 'Tipo de objeto'
+
+      expect(page).to have_field 'Modalidade', :with => ''
+
+      select 'Compras e serviços', :from => 'Tipo de objeto'
+      fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
+      fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
+      fill_in 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
+      fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+      select 'Aguardando', :from => 'Status do processo administrativo'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo criado com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_disabled_field 'Processo'
+      expect(page).to have_field 'Process', :with => '1'
+      expect(page).to have_disabled_field 'Ano'
+      expect(page).to have_field 'Ano', :with => '2012'
+      expect(page).to have_field 'Data do processo', :with => '07/03/2012'
+      expect(page).to have_field 'Número do protocolo', :with => '00099/2012'
+      expect(page).to have_select 'Tipo de objeto', :selected => 'Compras e serviços'
+      expect(page).to have_field 'Solicitação de compra', :with => '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      expect(page).to have_field 'Modalidade', :with => 'Pregão presencial'
+      expect(page).to have_field 'Forma de julgamento', :with => 'Por Item com Melhor Técnica'
+      expect(page).to have_field 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
+      expect(page).to have_field 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_select 'Status do processo administrativo', :selected => 'Aguardando'
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to_not have_button 'Adicionar Dotação'
+      expect(page).to have_field 'Dotação orçamentaria', :with => '1 - Alocação'
+      expect(page).to have_disabled_field 'Dotação orçamentaria'
+
+      expect(page).to have_field 'Saldo da dotação', :with => '500,00'
+      expect(page).to have_disabled_field 'Saldo da dotação'
+
+      expect(page).to have_field 'Valor previsto', :with => '20,00'
+      expect(page).to have_field 'Valor total', :with => '20,00'
     end
   end
 end

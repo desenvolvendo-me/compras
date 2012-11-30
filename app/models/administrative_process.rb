@@ -1,8 +1,8 @@
 class AdministrativeProcess < Compras::Model
   include Signable
 
-  attr_accessible :responsible_id, :process, :year, :date,
-                  :protocol, :object_type, :status, :description,
+  attr_accessible :responsible_id, :process, :purchase_solicitation_id,
+                  :date, :year, :protocol, :object_type, :status, :description,
                   :judgment_form_id, :purchase_solicitation_item_group_id,
                   :administrative_process_budget_allocations_attributes,
                   :licitation_modality_id, :summarized_object
@@ -20,6 +20,7 @@ class AdministrativeProcess < Compras::Model
   belongs_to :judgment_form
   belongs_to :purchase_solicitation_item_group
   belongs_to :licitation_modality
+  belongs_to :purchase_solicitation
 
   has_one :licitation_process, :dependent => :restrict
   has_one :administrative_process_liberation, :dependent => :destroy
@@ -43,6 +44,7 @@ class AdministrativeProcess < Compras::Model
   validate :validate_object_type_should_equal_modality_object_type
   validate :purchase_solicitation_item_group_annulled
   validate :validate_judgment_form_licitation_kind
+  validate :has_either_purchase_solicitation_or_item_group
 
   before_create :set_process
 
@@ -76,6 +78,12 @@ class AdministrativeProcess < Compras::Model
   end
 
   private
+
+  def has_either_purchase_solicitation_or_item_group
+    if purchase_solicitation.present? && purchase_solicitation_item_group.present?
+      errors.add(:purchase_solicitation, :should_be_blank_if_item_group_is_present)
+    end
+  end
 
   def set_process
     last = self.class.where(:year => year).last

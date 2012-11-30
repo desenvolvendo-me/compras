@@ -22,6 +22,7 @@ pt-BR:
         delivery_date: "Data de liberação"
         total_allocations_value: "Valor total"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
+        purchase_solicitation: "Solicitação de compra"
 
   administrative_process:
     messages:

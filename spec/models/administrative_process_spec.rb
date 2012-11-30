@@ -22,6 +22,7 @@ describe AdministrativeProcess do
   it { should belong_to :judgment_form }
   it { should belong_to :purchase_solicitation_item_group }
   it { should belong_to :licitation_modality }
+  it { should belong_to :purchase_solicitation }
 
   it { should have_one(:licitation_process).dependent(:restrict) }
   it { should have_one(:administrative_process_liberation).dependent(:destroy) }
@@ -194,5 +195,18 @@ describe AdministrativeProcess do
       subject.valid?
       expect(subject.errors[:purchase_solicitation_item_group]).to_not include(I18n.translate('errors.messages.is_annulled'))
     end
+  end
+
+  it 'should not allow purchase_solicitation and purchase_solicitation_item_group at same time' do
+    purchase_solicitation = double(:purchase_solicitation)
+    purchase_solicitation_item_group = double(:purchase_solicitation_item_group, :annulled? => false)
+
+    subject.stub(:purchase_solicitation).and_return(purchase_solicitation)
+    subject.stub(:purchase_solicitation_item_group).
+            and_return(purchase_solicitation_item_group)
+
+    subject.valid?
+
+    expect(subject.errors[:purchase_solicitation]).to include(I18n.translate('errors.messages.should_be_blank_if_item_group_is_present'))
   end
 end

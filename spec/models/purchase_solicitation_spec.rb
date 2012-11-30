@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'model_helper'
 require 'lib/annullable'
+require 'lib/signable'
 require 'app/models/budget_allocation'
 require 'app/models/purchase_solicitation'
 require 'app/models/purchase_solicitation_budget_allocation'
@@ -11,6 +12,7 @@ require 'app/models/purchase_solicitation_item_group_material_purchase_solicitat
 require 'app/models/material.rb'
 require 'app/models/direct_purchase'
 require 'app/models/budget_structure.rb'
+require 'app/models/administrative_process'
 
 describe PurchaseSolicitation do
   it 'should return the code/accounting_year in to_s method' do
@@ -29,6 +31,7 @@ describe PurchaseSolicitation do
   it { should have_many(:purchase_solicitation_item_group_material_purchase_solicitations).dependent(:destroy)}
   it { should have_one(:annul).dependent(:destroy) }
   it { should have_one(:direct_purchase) }
+  it { should have_one(:administrative_process) }
   it { should belong_to :responsible }
   it { should belong_to :delivery_location }
   it { should belong_to :liberator }
