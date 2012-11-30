@@ -62,7 +62,51 @@
 
   $('form.purchase_solicitation').on('nestedForm:afterAdd', function(){
     calcItemOrder();
+    setMaterialLabel();
+    setMaterialModalUrl();
   });
 
   calcItemOrder();
+
+  function setMaterialModalUrl(){
+    var url = "<%= modal_materials_path %>?",
+    params = {
+      locked_fields: ['material_characteristic'],
+      by_characteristic: materialCharacteristic()
+    };
+
+    url += jQuery.param(params);
+    $(".material").data('modal-url', url);
+  }
+
+  function setMaterialLabel(){
+    $(".material").prev("label").html(materialOrService());
+    $(".material").requiredField(true);
+  }
+
+  function materialOrService() {
+    var materialOrService,
+        purchaseSolicitationKind = $('#purchase_solicitation_kind').val();
+
+    if (purchaseSolicitationKind === "services") {
+      materialOrService = "Serviço";
+    } else {
+      materialOrService = "Material";
+    }
+
+    return materialOrService;
+  }
+
+  function materialCharacteristic() {
+    var characteristic,
+        purchaseSolicitationKind = $('#purchase_solicitation_kind').val();
+
+    if (purchaseSolicitationKind === "services") {
+      characteristic = "service";
+    } else {
+      characteristic = "material";
+    }
+
+    return characteristic;
+  }
 </script>

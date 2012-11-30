@@ -14,6 +14,19 @@ describe PurchaseSolicitationBudgetAllocationItem do
   it { should validate_presence_of :unit_price }
   it { should validate_presence_of :status }
 
+  it "should validate material_characteristic if purchase of services" do
+    material = double(:material, :service? => false)
+    subject.stub(:services? => true)
+    subject.stub(:material => material)
+
+    subject.valid?
+
+    expect(subject.errors[:material]).to include "deve ter a característica de Serviço"
+  end
+
+  it { should delegate(:services?).to(:purchase_solicitation_budget_allocation).allowing_nil(true) }
+  it { should delegate(:material_characteristic).to(:material).allowing_nil(true) }
+
   it 'should calculate total price' do
     expect(subject.estimated_total_price).to eq 0
 

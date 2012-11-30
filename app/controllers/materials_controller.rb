@@ -1,5 +1,6 @@
 class MaterialsController < CrudController
   has_scope :licitation_object_id
+  has_scope :by_characteristic
 
   def create
     object = build_resource

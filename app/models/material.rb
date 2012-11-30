@@ -51,6 +51,10 @@ class Material < Compras::Model
     record
   end
 
+  def self.by_characteristic(characteristic)
+    where { material_characteristic.eq characteristic }
+  end
+
   def to_s
     "#{code} - #{description}"
   end

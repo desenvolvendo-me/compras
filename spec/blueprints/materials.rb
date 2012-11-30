@@ -1,3 +1,4 @@
+#encoding: utf-8
 Material.blueprint(:antivirus) do
   materials_class { MaterialsClass.make!(:software) }
   code { "01.01.00001" }
@@ -59,6 +60,18 @@ Material.blueprint(:arame_comum) do
   storable { true }
   combustible { false }
   material_characteristic { "material" }
+  service_or_contract_type { ServiceOrContractType.make!(:reparos) }
+  material_type { 'consumption' }
+  expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }
+end
+
+Material.blueprint(:manutencao) do
+  materials_class { MaterialsClass.make!(:software) }
+  code { "01.05.00001" }
+  description { "Manutenção de Computadores" }
+  detailed_description { "Manutenção de Computadores" }
+  reference_unit { ReferenceUnit.make!(:unidade) }
+  material_characteristic { MaterialCharacteristic::SERVICE }
   service_or_contract_type { ServiceOrContractType.make!(:reparos) }
   material_type { 'consumption' }
   expense_nature { ExpenseNature.make!(:vencimento_e_salarios) }

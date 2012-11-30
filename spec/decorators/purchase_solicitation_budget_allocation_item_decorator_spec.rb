@@ -38,4 +38,32 @@ describe PurchaseSolicitationBudgetAllocationItemDecorator do
       expect(subject.fulfiller).to be_nil
     end
   end
+
+  context '#material_label' do
+    it 'returns "Serviço" if solicitation is for purchase of services' do
+      component.stub(:services? => true)
+
+      expect(subject.material_label).to eq 'Serviço'
+    end
+
+    it 'returns "Material" if solicitation is for purchase of products or goods' do
+      component.stub(:services? => false)
+
+      expect(subject.material_label).to eq 'Material'
+    end
+  end
+
+  context '#characteristic_filter' do
+    it 'returns "service" if solicitation is for purchase of services' do
+      component.stub(:services? => true)
+
+      expect(subject.characteristic_filter).to eq 'service'
+    end
+
+    it 'returns nil if solicitation is for purchase of products or goods' do
+      component.stub(:services? => false)
+
+      expect(subject.characteristic_filter).to be_nil
+    end
+  end
 end

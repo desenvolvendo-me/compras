@@ -299,6 +299,7 @@ pt-BR:
       extension_white_list_error: "tipo de arquivo inválido"
       inclusion_of_bidders_before_edital_publication: "não podem ser incluídos antes da publicação do edital"
       must_have_published_edital: "deve ter edital publicado"
+      should_be_service: "deve ter a característica de Serviço"
 
   activerecord:
     errors:

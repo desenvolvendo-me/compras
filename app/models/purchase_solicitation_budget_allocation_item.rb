@@ -12,10 +12,14 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   belongs_to :material
   belongs_to :fulfiller, :polymorphic => true
 
-  delegate :reference_unit, :to => :material, :allow_nil => true
-  delegate :annulled?, :to => :purchase_solicitation_budget_allocation, :allow_nil => true
+  delegate :reference_unit, :material_characteristic, :to => :material,
+           :allow_nil => true
+  delegate :annulled?, :services?,
+           :to => :purchase_solicitation_budget_allocation,
+           :allow_nil => true
 
   validates :material, :quantity, :unit_price, :status, :presence => true
+  validate :validate_material_characteristic, :if => :services?
 
   def self.group!(ids)
     where { id.in(ids) }.update_all(
@@ -69,5 +73,13 @@ class PurchaseSolicitationBudgetAllocationItem < Compras::Model
   def update_fulfiller(process_id, process_name)
     update_attributes :fulfiller_id => process_id,
                       :fulfiller_type => process_name
+  end
+
+  def validate_material_characteristic
+    return unless material
+
+    unless material.service?
+      errors.add(:material, :should_be_service)
+    end
   end
 end

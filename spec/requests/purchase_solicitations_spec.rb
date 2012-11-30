@@ -131,7 +131,7 @@ feature "PurchaseSolicitations" do
       fill_modal 'Estrutura orçamentaria solicitante', :with => 'Secretaria de Desenvolvimento', :field => 'Descrição'
       fill_in 'Justificativa da solicitação', :with => 'Novas mesas'
       fill_modal 'Local para entrega', :with => 'Secretaria da Saúde', :field => "Descrição"
-      select 'Serviços', :from => 'Tipo de solicitação'
+      select 'Produtos', :from => 'Tipo de solicitação'
       fill_in 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
@@ -181,7 +181,7 @@ feature "PurchaseSolicitations" do
       expect(page).to have_field 'Estrutura orçamentaria solicitante', :with => '1.29 - Secretaria de Desenvolvimento'
       expect(page).to have_field 'Justificativa da solicitação', :with => 'Novas mesas'
       expect(page).to have_field 'Local para entrega', :with => 'Secretaria da Saúde'
-      expect(page).to have_select 'Tipo de solicitação', :selected => 'Serviços'
+      expect(page).to have_select 'Tipo de solicitação', :selected => 'Produtos'
       expect(page).to have_field 'Observações gerais', :with => 'Muitas mesas estão quebrando no escritório'
     end
 
@@ -541,6 +541,62 @@ feature "PurchaseSolicitations" do
         expect(page).to have_content '1 - Secretaria de Educação'
         expect(page).to have_content 'Gabriel Sobrinho'
         expect(page).to have_content 'Pendente'
+      end
+    end
+  end
+
+  scenario "purchase of services" do
+    PurchaseSolicitation.make!(:reparo,
+                               :kind => PurchaseSolicitationKind::SERVICES)
+    ExpenseNature.make!(:vencimento_e_salarios)
+    budget_allocation = BudgetAllocation.make!(:alocacao)
+    Material.make!(:antivirus)
+    Material.make!(:manutencao)
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "Criar Solicitação de Compra"
+
+    select "Serviços", :on => "Tipo de solicitação"
+
+    within_tab "Dotações orçamentarias" do
+      click_button "Adicionar Dotação"
+
+      within '.purchase-solicitation-budget-allocation:last' do
+        fill_modal 'Dotação', :with => '1', :field => 'Código'
+        fill_modal 'Natureza da despesa', :with => 'Vencimentos e Salários', :field => 'Descrição'
+      end
+
+      click_button 'Adicionar Item'
+
+      within_modal "Serviço" do
+        click_button "Pesquisar"
+
+        within_records do
+          expect(page).to have_content "Manutenção de Computadores"
+          expect(page).not_to have_content "Antivirus"
+        end
+
+        click_link "Voltar"
+      end
+    end
+
+    click_link "Voltar"
+
+    within_records do
+      click_link "1/2012"
+    end
+
+    within_tab "Dotações orçamentarias" do
+      clear_modal "Serviço"
+
+      within_modal "Serviço" do
+        click_button "Pesquisar"
+
+        within_records do
+          expect(page).to have_content "Manutenção de Computadores"
+          expect(page).not_to have_content "Antivirus"
+        end
       end
     end
   end
