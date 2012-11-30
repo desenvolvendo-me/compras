@@ -1271,6 +1271,20 @@ feature "AdministrativeProcesses" do
 
       expect(page).to have_field 'Valor total', :with => '0,00'
     end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Pendente'
+    end
   end
 
   scenario 'budget allocations should be fulfilled automatically when fulfill purchase_solicitation' do
@@ -1362,6 +1376,16 @@ feature "AdministrativeProcesses" do
 
       expect(page).to have_field 'Valor previsto', :with => '20,00'
       expect(page).to have_field 'Valor total', :with => '20,00'
+    end
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
     end
   end
 end

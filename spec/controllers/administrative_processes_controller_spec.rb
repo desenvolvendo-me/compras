@@ -58,6 +58,20 @@ describe AdministrativeProcessesController do
       post :create, :administrative_process => {
         :purchase_solicitation_item_group_id => item_group.id }
     end
+
+    it 'should updates the status of purchase_solicitation to in_purchase_process' do
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      AdministrativeProcess.any_instance.should_receive(:transaction).and_yield
+      AdministrativeProcess.any_instance.should_receive(:save).and_return(true)
+
+      PurchaseSolicitationProcess.
+        should_receive(:update_solicitations_status).
+        with(purchase_solicitation)
+
+      post :create, :administrative_process => {
+        :purchase_solicitation_id => purchase_solicitation.id }
+    end
   end
 
   describe "PUT #update" do
@@ -134,6 +148,18 @@ describe AdministrativeProcessesController do
 
       put :update, :id => administrative_process.id,
                    :administrative_process => { :purchase_solicitation_item_group_id => item_group.id }
+    end
+
+    it 'should updates the status of purchase_solicitation to in_purchase_process' do
+      administrative_process = AdministrativeProcess.make!(:compra_aguardando)
+      purchase_solicitation = PurchaseSolicitation.make!(:reparo)
+
+      PurchaseSolicitationProcess.
+        should_receive(:update_solicitations_status).
+        with(purchase_solicitation, administrative_process.purchase_solicitation)
+
+      put :update, :id => administrative_process.id, :administrative_process => {
+        :purchase_solicitation_id => purchase_solicitation.id }
     end
   end
 end
