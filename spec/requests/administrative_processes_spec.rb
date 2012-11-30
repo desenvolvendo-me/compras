@@ -176,6 +176,16 @@ feature "AdministrativeProcesses" do
     end
 
     expect(page).to have_select 'Situação', :selected => 'Em processo de compra'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+    end
   end
 
   scenario 'when clear purchase solicitation item group budget allocations should clear too' do
@@ -1100,6 +1110,87 @@ feature "AdministrativeProcesses" do
 
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_field 'Atendido por', :with => 'Processo administrativo 1/2012'
+    end
+  end
+
+
+  scenario "changing the purchase_solicitation_item_group should change purchase solicitation status" do
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    PurchaseSolicitationItemGroup.make!(:office)
+    AdministrativeProcess.make!(:compra_aguardando)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      fill_in 'Valor previsto', :with => '20,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
+    end
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      click_link '1/2012'
+    end
+
+    within_tab 'Principal' do
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de office'
+      end
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      fill_in 'Valor previsto', :with => '50,00'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Processo Administrativo editado com sucesso.'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Liberada'
+    end
+
+    click_link 'Voltar'
+
+    within_records do
+      click_link '2/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    end
+
+    within_tab 'Principal' do
+      expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
     end
   end
 end

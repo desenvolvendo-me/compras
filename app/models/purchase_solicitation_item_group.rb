@@ -80,6 +80,14 @@ class PurchaseSolicitationItemGroup < Compras::Model
     change_status!(PurchaseSolicitationItemGroupStatus::FULFILLED)
   end
 
+  def liberate_purchase_solicitations!
+    purchase_solicitations.each(&:liberate!)
+  end
+
+  def buy_purchase_solicitations!
+    purchase_solicitations.each(&:buy_it!)
+  end
+
   private
 
   def purchase_solicitation_status

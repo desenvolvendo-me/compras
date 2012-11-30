@@ -47,7 +47,7 @@ class DirectPurchasesController < CrudController
       if super
         if params[:direct_purchase]
           PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation)
-          PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group)
+          PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
           PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
             :new_purchase_solicitation => new_purchase_solicitation).change
         end
@@ -66,7 +66,8 @@ class DirectPurchasesController < CrudController
 
       if super
         PurchaseSolicitationProcess.update_solicitations_status(new_purchase_solicitation, old_purchase_solicitation)
-        PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group, old_item_group)
+        PurchaseSolicitationItemGroupProcess.new(
+          :new_item_group => new_item_group, :old_item_group => old_item_group).update_status
           PurchaseSolicitationBudgetAllocationItemStatusChanger.new(
             :new_purchase_solicitation => new_purchase_solicitation,
             :old_purchase_solicitation => old_purchase_solicitation).change

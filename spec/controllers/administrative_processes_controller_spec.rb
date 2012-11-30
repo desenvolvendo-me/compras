@@ -37,6 +37,27 @@ describe AdministrativeProcessesController do
 
       expect(assigns(:administrative_process).status).to eq AdministrativeProcessStatus::WAITING
     end
+
+    it 'should update item_group status and fullfil the item' do
+      item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
+      item_group_process = double(:item_group_process)
+
+      AdministrativeProcess.any_instance.should_receive(:transaction).and_yield
+      AdministrativeProcess.any_instance.should_receive(:save).and_return(true)
+
+      PurchaseSolicitationItemGroupProcess.
+        should_receive(:new).
+        with(:new_item_group => item_group).
+        and_return(item_group_process)
+
+      item_group_process.should_receive(:update_status)
+
+      PurchaseSolicitationBudgetAllocationItemFulfiller.
+        any_instance.should_receive(:fulfill)
+
+      post :create, :administrative_process => {
+        :purchase_solicitation_item_group_id => item_group.id }
+    end
   end
 
   describe "PUT #update" do
@@ -87,6 +108,7 @@ describe AdministrativeProcessesController do
       administrative_process = AdministrativeProcess.make!(:compra_aguardando)
       item_group = PurchaseSolicitationItemGroup.make!(:antivirus)
       fulfiller_instance = double(:fulfiller_instance)
+      item_group_process = double(:item_group_process)
 
       fulfiller_instance.should_receive(:fulfill).twice
 
@@ -102,6 +124,13 @@ describe AdministrativeProcessesController do
 
       AdministrativeProcessBudgetAllocationCleaner.any_instance.
                                                    should_receive(:clear_old_records)
+
+      PurchaseSolicitationItemGroupProcess.
+        should_receive(:new).
+        with(:new_item_group => item_group, :old_item_group => administrative_process.purchase_solicitation_item_group).
+        and_return(item_group_process)
+
+      item_group_process.should_receive(:update_status)
 
       put :update, :id => administrative_process.id,
                    :administrative_process => { :purchase_solicitation_item_group_id => item_group.id }

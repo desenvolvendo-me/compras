@@ -48,7 +48,7 @@ class AdministrativeProcessesController < CrudController
     object.transaction do
       if super
         if params[:administrative_process]
-          PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group)
+          PurchaseSolicitationItemGroupProcess.new(:new_item_group => new_item_group).update_status
         end
 
         PurchaseSolicitationBudgetAllocationItemFulfiller.new(object.purchase_solicitation_item_group, object).fulfill
@@ -63,7 +63,8 @@ class AdministrativeProcessesController < CrudController
       AdministrativeProcessBudgetAllocationCleaner.new(object, new_item_group).clear_old_records
 
       if super
-        PurchaseSolicitationItemGroupProcess.update_item_group_status(new_item_group, old_item_group)
+        PurchaseSolicitationItemGroupProcess.new(
+          :new_item_group => new_item_group, :old_item_group => old_item_group).update_status
         PurchaseSolicitationBudgetAllocationItemFulfiller.new(old_item_group).fulfill
         PurchaseSolicitationBudgetAllocationItemFulfiller.new(new_item_group, object).fulfill
       end

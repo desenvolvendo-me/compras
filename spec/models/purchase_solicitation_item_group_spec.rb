@@ -226,4 +226,31 @@ describe PurchaseSolicitationItemGroup do
       subject.fulfill!
     end
   end
+
+  context 'with purchase solicitations' do
+    let(:purchase1) { double(:purchase1) }
+    let(:purchase2) { double(:purchase2) }
+
+    describe '#liberate_purchase_solicitations!' do
+      it "should the status_service for all purchase_solicitations to 'liberated'" do
+        subject.stub(:purchase_solicitations).and_return([purchase1, purchase2])
+
+        purchase1.should_receive(:liberate!)
+        purchase2.should_receive(:liberate!)
+
+        subject.liberate_purchase_solicitations!
+      end
+    end
+
+     describe '#buy_purchase_solicitations!' do
+      it "should the status_service for all purchase_solicitations to 'in_purchase_process'" do
+        subject.stub(:purchase_solicitations).and_return([purchase1, purchase2])
+
+        purchase1.should_receive(:buy_it!)
+        purchase2.should_receive(:buy_it!)
+
+        subject.buy_purchase_solicitations!
+      end
+    end
+  end
 end

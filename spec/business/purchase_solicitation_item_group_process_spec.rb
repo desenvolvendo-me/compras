@@ -4,40 +4,88 @@ require 'app/enumerations/purchase_solicitation_item_group_status'
 require 'app/business/purchase_solicitation_item_group_process'
 
 describe PurchaseSolicitationItemGroupProcess do
-  describe "#update_item_group_status" do
-    let :item_group do
-      double(:item_group, :change_status! => nil, :pending? => true)
-    end
+  let(:new_item_group) { double(:new_item_group, :pending? => true) }
+  let(:old_item_group) { double(:old_item_group) }
 
-    it "updates the item group status to 'in_purchase_process'" do
-      item_group.should_receive(:change_status!).with(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
+  describe '#update_status' do
+    context 'with new_item_group' do
+      subject do
+        described_class.new(:new_item_group => new_item_group)
+      end
 
-      described_class.update_item_group_status(item_group)
-    end
+      it "updates the item group status to 'in_purchase_process'" do
+        new_item_group.should_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
+        new_item_group.should_receive(:buy_purchase_solicitations!)
 
-    it "raises an error if the new item group status is not 'Pending'" do
-      item_group.stub(:pending?).and_return(false)
+        old_item_group.should_not_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::PENDING)
+        old_item_group.should_not_receive(:liberate_purchase_solicitations!)
 
-      expect {
-        described_class.update_item_group_status(item_group)
-      }.to raise_error(ArgumentError, "Item group status should be 'Pending'")
-    end
+        subject.update_status
+      end
 
-    context "process already has a item group" do
-      it "should change the status of the current item group back to 'pending'" do
-        old_group = double(:old_group)
+      it "raises an error if the new item group status is not 'Pending'" do
+        new_item_group.stub(:pending?).and_return(false)
 
-        old_group.should_receive(:change_status!).with(PurchaseSolicitationItemGroupStatus::PENDING)
-
-        described_class.update_item_group_status(item_group, old_group)
+        expect { subject.update_status }.to raise_error(
+          ArgumentError, "Item group status should be 'Pending'")
       end
     end
 
-    context "when old and new solicitation are the same" do
-      it "it should do nothing" do
-        item_group.should_not_receive(:change_status!)
+    context 'with old_item_group' do
+      subject do
+        described_class.new(:old_item_group => old_item_group)
+      end
 
-        described_class.update_item_group_status(item_group, item_group)
+      it "should update status of item group to 'pending'" do
+        new_item_group.should_not_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
+        new_item_group.should_not_receive(:buy_purchase_solicitations!)
+
+        old_item_group.should_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::PENDING)
+        old_item_group.should_receive(:liberate_purchase_solicitations!)
+
+        subject.update_status
+      end
+    end
+
+    context 'with different new_item_group and old_item_group' do
+      subject do
+        described_class.new(
+          :new_item_group => new_item_group, :old_item_group => old_item_group)
+      end
+
+      it "should update status of item group to 'pending'" do
+        new_item_group.should_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
+        new_item_group.should_receive(:buy_purchase_solicitations!)
+
+        old_item_group.should_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::PENDING)
+        old_item_group.should_receive(:liberate_purchase_solicitations!)
+
+        subject.update_status
+      end
+    end
+
+    context 'when old and new solicitation are the same' do
+      subject do
+        described_class.new(
+          :new_item_group => new_item_group, :old_item_group => new_item_group)
+      end
+
+      it 'should do noting' do
+        new_item_group.should_not_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::IN_PURCHASE_PROCESS)
+        new_item_group.should_not_receive(:buy_purchase_solicitations!)
+
+        old_item_group.should_not_receive(:change_status!).
+          with(PurchaseSolicitationItemGroupStatus::PENDING)
+        old_item_group.should_not_receive(:liberate_purchase_solicitations!)
+
+        subject.update_status
       end
     end
   end

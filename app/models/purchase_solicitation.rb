@@ -129,6 +129,10 @@ class PurchaseSolicitation < Compras::Model
     items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED).each(&:pending!)
   end
 
+  def buy_it!
+    update_column :service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS
+  end
+
   protected
 
   def must_have_at_least_one_budget_allocation

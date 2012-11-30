@@ -192,4 +192,13 @@ describe PurchaseSolicitation do
       subject.rollback_attended_items!
     end
   end
+
+  describe '#buy_it!' do
+    it "should update the service_status to 'in_purchase_process'" do
+      subject.should_receive(:update_column).
+        with(:service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
+
+      subject.buy_it!
+    end
+  end
 end
