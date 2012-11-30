@@ -26,8 +26,8 @@ class TradingItem < Compras::Model
 
   orderize :order
 
-  def last_proposal_value
-    last_bid_with_proposal.try(:amount) || BigDecimal(0)
+  def lowest_proposal_value
+    lowest_bid_with_proposal.try(:amount) || BigDecimal(0)
   end
 
   def bidders_by_lowest_proposal
@@ -43,7 +43,7 @@ class TradingItem < Compras::Model
   end
 
   def selected_bidders_at_proposals
-    bidders_with_proposals.at_trading_item_stage(id, TradingItemBidStage::PROPOSALS)
+    bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(value_limit_to_participate_in_bids)
   end
 
   def value_limit_to_participate_in_bids
@@ -64,8 +64,8 @@ class TradingItem < Compras::Model
     bidders_by_lowest_proposal.first
   end
 
-  def last_bid_with_proposal
-    trading_item_bids.with_proposal.last
+  def lowest_bid_with_proposal
+    trading_item_bids.with_proposal.unscoped.order { amount }.first
   end
 
   def require_at_least_one_minimum_reduction

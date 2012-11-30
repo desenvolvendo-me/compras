@@ -17,7 +17,7 @@ class TradingItemBid < Compras::Model
            :licitation_process_id,
            :to => :trading_item, :allow_nil => true
 
-  delegate :last_proposal_value,
+  delegate :lowest_proposal_value,
            :to => :trading_item, :allow_nil => true, :prefix => true
 
   validates :round, :trading_item, :bidder, :status, :presence => true
@@ -91,13 +91,13 @@ class TradingItemBid < Compras::Model
   end
 
   def validate_amount_limit?
-    amount && trading_item_last_proposal_value? && round_of_bids?
+    amount && trading_item_lowest_proposal_value? && round_of_bids?
   end
 
   def minimum_value
-    return BigDecimal(0) unless trading_item_last_proposal_value?
+    return BigDecimal(0) unless trading_item_lowest_proposal_value?
 
-    trading_item_last_proposal_value - minimum_reduction_value
+    trading_item_lowest_proposal_value - minimum_reduction_value
   end
 
   def minimum_percentage_value_rounded
@@ -105,14 +105,14 @@ class TradingItemBid < Compras::Model
   end
 
   def minimum_percentage_value
-    trading_item_last_proposal_value - (trading_item_last_proposal_value * minimum_reduction_percentage)
+    trading_item_lowest_proposal_value - (trading_item_lowest_proposal_value * minimum_reduction_percentage)
   end
 
   def minimum_reduction_percentage
     minimum_reduction_percent / BigDecimal(100)
   end
 
-  def trading_item_last_proposal_value?
-    trading_item_last_proposal_value > 0
+  def trading_item_lowest_proposal_value?
+    trading_item_lowest_proposal_value > 0
   end
 end

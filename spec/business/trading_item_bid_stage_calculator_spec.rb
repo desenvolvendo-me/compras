@@ -4,10 +4,11 @@ require 'app/business/trading_item_bid_stage_calculator'
 
 describe TradingItemBidStageCalculator do
   subject do
-    described_class.new(trading_item)
+    described_class.new(trading_item, trading_item_bidders)
   end
 
   let(:trading_item) { double(:trading_item) }
+  let(:trading_item_bidders) { double(:trading_item_bidders) }
 
   context 'delegates' do
     it 'delegates trading_item_bids to trading_item' do
@@ -65,13 +66,14 @@ describe TradingItemBidStageCalculator do
       trading_item_bids = double(:trading_item_bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
 
+
       subject.stub(:lowest_proposal_amount).and_return(10)
       subject.stub(:trading_item_bids).and_return(trading_item_bids)
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      subject.should_receive(:selected_bidders_at_proposals).
-              at_least(1).times.and_return(['bidder1', 'bidder2'])
+      trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit_size).
+              at_least(1).times.and_return(2)
 
 
       expect(subject).to_not be_stage_of_proposals
@@ -100,8 +102,8 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      subject.should_receive(:selected_bidders_at_proposals).
-              at_least(1).times.and_return(['bidder1', 'bidder2'])
+      trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit_size).
+              at_least(1).times.and_return(2)
 
 
       expect(subject).to_not be_stage_of_proposals
@@ -121,8 +123,8 @@ describe TradingItemBidStageCalculator do
 
       subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
               at_least(1).times.and_return(true)
-      subject.should_receive(:selected_bidders_at_proposals).
-              at_least(1).times.and_return(['bidder1', 'bidder2'])
+      trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit_size).
+              at_least(1).times.and_return(2)
 
 
       expect(subject).to_not be_stage_of_proposals

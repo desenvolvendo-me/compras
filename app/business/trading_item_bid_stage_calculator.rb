@@ -1,11 +1,11 @@
 class TradingItemBidStageCalculator
-  attr_accessor :trading_item
-
   delegate :trading_item_bids, :bidders, :lowest_proposal_amount,
-           :selected_bidders_at_proposals, :to => :trading_item
+           :selected_bidders_at_proposals, :value_limit_to_participate_in_bids,
+           :to => :trading_item
 
-  def initialize(trading_item)
-    self.trading_item = trading_item
+  def initialize(trading_item, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders))
+    @trading_item = trading_item
+    @trading_item_bidders = trading_item_bidders
   end
 
   def stage_of_proposals?
@@ -26,11 +26,13 @@ class TradingItemBidStageCalculator
 
   private
 
+  attr_reader :trading_item, :trading_item_bidders
+
   def all_bidders_have_proposal_for_proposals_stage?
     trading_item_bids.at_stage_of_proposals.count == bidders.count
   end
 
   def only_one_bidder_left_at_round_of_bids?
-    trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == selected_bidders_at_proposals.size - 1
+    trading_item_bids.at_stage_of_round_of_bids.with_no_proposal.count == trading_item_bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit_size - 1
   end
 end

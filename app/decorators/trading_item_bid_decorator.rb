@@ -3,7 +3,7 @@ class TradingItemBidDecorator
   include Decore::Proxy
   include ActionView::Helpers::NumberHelper
 
-  def trading_item_last_proposal_value
+  def trading_item_lowest_proposal_value
     number_with_precision super if super
   end
 

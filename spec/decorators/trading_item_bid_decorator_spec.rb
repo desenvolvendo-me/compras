@@ -2,11 +2,11 @@ require 'decorator_helper'
 require 'app/decorators/trading_item_bid_decorator'
 
 describe TradingItemBidDecorator do
-  describe '#trading_item_last_proposal_value' do
+  describe '#trading_item_lowest_proposal_value' do
     it 'should return number with precision' do
-      component.stub(:trading_item_last_proposal_value).and_return(12345.67)
+      component.stub(:trading_item_lowest_proposal_value).and_return(12345.67)
 
-      expect(subject.trading_item_last_proposal_value).to eq '12.345,67'
+      expect(subject.trading_item_lowest_proposal_value).to eq '12.345,67'
     end
   end
 

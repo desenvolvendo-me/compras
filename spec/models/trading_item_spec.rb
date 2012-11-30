@@ -102,22 +102,28 @@ describe TradingItem do
       first_bid = double(:first_bid, :amount => 50.0)
       second_bid = double(:second_bid, :amount => 40.0)
       third_bid = double(:third_bid, :amount => 30.0)
-      trading_item_bids = double(:trading_item_bids,
-        :with_proposal => [first_bid, second_bid, third_bid])
+
+      trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
+      trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:unscoped).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:order).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:first).and_return(third_bid)
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
-      expect(subject.last_proposal_value).to eq 30.0
+      expect(subject.lowest_proposal_value).to eq 30.0
     end
 
     it 'should return zero when there is no proposal for the item' do
       trading_item_bids = double(:trading_item_bids)
 
-      trading_item_bids.should_receive(:with_proposal).and_return([])
+      trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:unscoped).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:order).and_return([])
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
-      expect(subject.last_proposal_value).to eq 0
+      expect(subject.lowest_proposal_value).to eq 0
     end
   end
 

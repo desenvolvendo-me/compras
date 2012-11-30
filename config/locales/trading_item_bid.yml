@@ -12,5 +12,5 @@ pt-BR:
         bidder: "Licitante"
         amount: "Valor da proposta"
         disqualification_reason: "Motivo da desclassificação"
-        trading_item_last_proposal_value: "Menor preço"
+        trading_item_lowest_proposal_value: "Menor preço"
         minimum_limit: "Valor limite"
