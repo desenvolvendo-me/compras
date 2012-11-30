@@ -1113,7 +1113,6 @@ feature "AdministrativeProcesses" do
     end
   end
 
-
   scenario "changing the purchase_solicitation_item_group should change purchase solicitation status" do
     PurchaseSolicitationItemGroup.make!(:antivirus)
     PurchaseSolicitationItemGroup.make!(:office)
