@@ -1,7 +1,4 @@
 class PurchaseSolicitationBudgetAllocationItemStatusChanger
-  attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
-              :old_purchase_solicitation
-
   # Change the status of purchase solicitation budget allocation item.
   #
   #   The new purchase solicitation
@@ -31,6 +28,9 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
   end
 
   protected
+
+  attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
+              :old_purchase_solicitation
 
   def removed_item_ids
     old_item_ids - new_item_ids
