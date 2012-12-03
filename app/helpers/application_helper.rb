@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def numeric_position(value)
-    "#{value}º lugar"
+    I18n.t "number.placing", :count => value
   end
 
   def smart_report_url

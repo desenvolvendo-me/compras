@@ -146,6 +146,8 @@ pt-BR:
             one: quatrilhão
             other: quatrilhões
 
+    placing: "%{count}º lugar"
+
   # Usado no Array.to_sentence
   support:
     array:
