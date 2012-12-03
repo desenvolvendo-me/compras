@@ -3,5 +3,5 @@ class PositionDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name
+  attr_header :name, :to_s => false, :link => :name
 end
