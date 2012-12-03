@@ -85,7 +85,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def buy_purchase_solicitations!
-    purchase_solicitations.each(&:buy_it!)
+    purchase_solicitations.each(&:buy!)
   end
 
   private

@@ -130,7 +130,7 @@ class PurchaseSolicitation < Compras::Model
     items.with_status(PurchaseSolicitationBudgetAllocationItemStatus::ATTENDED).each(&:pending!)
   end
 
-  def buy_it!
+  def buy!
     update_column :service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS
   end
 

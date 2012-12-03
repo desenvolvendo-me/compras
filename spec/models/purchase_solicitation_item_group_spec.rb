@@ -246,8 +246,8 @@ describe PurchaseSolicitationItemGroup do
       it "should the status_service for all purchase_solicitations to 'in_purchase_process'" do
         subject.stub(:purchase_solicitations).and_return([purchase1, purchase2])
 
-        purchase1.should_receive(:buy_it!)
-        purchase2.should_receive(:buy_it!)
+        purchase1.should_receive(:buy!)
+        purchase2.should_receive(:buy!)
 
         subject.buy_purchase_solicitations!
       end

@@ -196,12 +196,12 @@ describe PurchaseSolicitation do
     end
   end
 
-  describe '#buy_it!' do
+  describe '#buy!' do
     it "should update the service_status to 'in_purchase_process'" do
       subject.should_receive(:update_column).
         with(:service_status, PurchaseSolicitationServiceStatus::IN_PURCHASE_PROCESS)
 
-      subject.buy_it!
+      subject.buy!
     end
   end
 end
