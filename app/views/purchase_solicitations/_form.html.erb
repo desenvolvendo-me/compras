@@ -79,9 +79,12 @@
     $(".material").data('modal-url', url);
   }
 
-  function setMaterialLabel(){
+  function setMaterialLabel() {
     $(".material").prev("label").html(materialOrService());
-    $(".material").requiredField(true);
+    $.each($(".material"), function(index, item) {
+      $(item).requiredField(false);
+      $(item).requiredField(true);
+    });
   }
 
   function materialOrService() {
