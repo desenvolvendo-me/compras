@@ -1388,4 +1388,34 @@ feature "AdministrativeProcesses" do
       expect(page).to have_select 'Status de atendimento', :selected => 'Em processo de compra'
     end
   end
+
+  scenario 'when clear purchase_solicitation should enable item_group' do
+    PurchaseSolicitation.make!(:reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    expect(page).to be_on_tab 'Principal'
+
+    within_tab 'Principal' do
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
+
+      clear_modal 'Solicitação de compra'
+
+      expect(page).to_not have_disabled_field 'Agrupamento de solicitações de compra'
+
+      within_modal 'Agrupamento de solicitações de compra' do
+        click_button 'Pesquisar'
+
+        click_record 'Agrupamento de antivirus'
+      end
+
+      expect(page).to have_disabled_field 'Solicitação de compra'
+    end
+  end
 end
