@@ -16,7 +16,6 @@ class DirectPurchasesController < CrudController
   def create
     create! do |success, failure|
       success.html { redirect_to edit_resource_path(resource) }
-      failure.html { render 'new' }
     end
   end
 
@@ -36,7 +35,6 @@ class DirectPurchasesController < CrudController
 
     update! do |success, failure|
       success.html { redirect_to edit_resource_path(resource) }
-      failure.html { render 'edit' }
     end
   end
 
