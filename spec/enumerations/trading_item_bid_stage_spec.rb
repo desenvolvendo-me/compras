@@ -4,7 +4,7 @@ require 'app/enumerations/trading_item_bid_stage'
 
 describe TradingItemBidStage do
   describe '.current_stage' do
-    it 'should returns \'proposals\' when trading item be on stage of proposals' do
+    it "should returns 'proposals' when trading item be on stage of proposals" do
       stage_calculator = double(:stage_calculator)
       trading_item = double(:trading_item)
 
@@ -17,7 +17,7 @@ describe TradingItemBidStage do
       expect(described_class.current_stage(trading_item, stage_calculator)).to eq described_class::PROPOSALS
     end
 
-    it 'should returns \'negotiation\' when trading item be on stage of negotiation' do
+    it "should returns 'negotiation' when trading item be on stage of negotiation" do
       stage_calculator = double(:stage_calculator)
       trading_item = double(:trading_item)
 
@@ -30,7 +30,7 @@ describe TradingItemBidStage do
       expect(described_class.current_stage(trading_item, stage_calculator)).to eq described_class::NEGOTIATION
     end
 
-    it 'should returns \'round_of_bids\' when trading item be on stage of round of bids' do
+    it "should returns 'round_of_bids' when trading item be on stage of round of bids" do
       stage_calculator = double(:stage_calculator)
       trading_item = double(:trading_item)
 

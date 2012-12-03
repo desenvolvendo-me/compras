@@ -50,7 +50,7 @@ describe TradingItemDecorator do
   end
 
   describe '#trading_item_bid_or_classification_path' do
-    it 'should return classification link when \'negotiation\' is the current stage' do
+    it "should return classification link when 'negotiation' is the current stage" do
       stage_calculator = double(:stage_calculator)
 
       stage_calculator.should_receive(:new).
@@ -85,7 +85,7 @@ describe TradingItemDecorator do
   end
 
   describe '#trading_item_bid_or_classification_or_report_classification_path' do
-    it 'should return proposal report when \'round of bids\' is the current stage and dont have any proposal' do
+    it "should return proposal report when 'round of bids' is the current stage and dont have any proposal" do
       stage_calculator = double(:stage_calculator)
 
       stage_calculator.should_receive(:new).
