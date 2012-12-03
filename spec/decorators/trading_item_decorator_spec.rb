@@ -50,28 +50,33 @@ describe TradingItemDecorator do
   end
 
   describe '#trading_item_bid_or_classification_path' do
-    it "should return classification link when 'negotiation' is the current stage" do
-      stage_calculator = double(:stage_calculator)
+    context "negotiation is the current stage" do
+      it "it returns the link to classdification if negociation is not started" do
+        stage_calculator = double(:stage_calculator,
+                                  :stage_of_negotiation? => true)
+        item_bids = double(:negotiation => [])
+        component.stub(:trading_item_bids => item_bids,
+                       :bidders_selected_for_negociation => [])
+        routes.stub(:classification_trading_item_path => '/foo')
 
-      stage_calculator.should_receive(:new).
-                       with(component).and_return(stage_calculator)
+        expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq '/foo'
+      end
 
-      stage_calculator.should_receive(:stage_of_negotiation?).and_return(true)
+      it "returns the path to new offer if negotiation is started and there are remaining bidders" do
+        stage_calculator = double(:stage_calculator,
+                                  :stage_of_negotiation? => true)
+        item_bids = double(:negotiation => [double])
+        component.stub(:trading_item_bids => item_bids,
+                       :bidders_selected_for_negociation => [double],
+                       :id => -1)
+        routes.stub(:new_trading_item_bid_path => '/foo')
 
-      component.stub(:id).and_return(1)
-
-      routes.should_receive(:classification_trading_item_path).
-             with(component).and_return('classification_path')
-
-
-      expect(subject.trading_item_bid_or_classification_path(stage_calculator)).to eq 'classification_path'
+        expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq '/foo'
+      end
     end
 
     it 'should return new_trading_item_bid_path link when it is not on stage of negotiation' do
       stage_calculator = double(:stage_calculator)
-
-      stage_calculator.should_receive(:new).
-                       with(component).and_return(stage_calculator)
 
       stage_calculator.should_receive(:stage_of_negotiation?).and_return(false)
       component.stub(:id).and_return(1)
@@ -80,7 +85,7 @@ describe TradingItemDecorator do
              with(:trading_item_id => 1).and_return('new_trading_item_bid_path')
 
 
-      expect(subject.trading_item_bid_or_classification_path(stage_calculator)).to eq 'new_trading_item_bid_path'
+      expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path'
     end
   end
 

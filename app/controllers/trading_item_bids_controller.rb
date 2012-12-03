@@ -2,8 +2,9 @@ class TradingItemBidsController < CrudController
   def new
     object = build_resource
     object.trading_item = @parent
-    object.round  = TradingItemBidRoundCalculator.new(@parent).calculate
-    object.bidder = TradingItemBidBidderChooser.new(@parent).choose
+    object.stage  = TradingItemBidStage.current_stage(@parent)
+    object.round  = TradingItemBidRoundCalculator.new(@parent).calculate(object.stage)
+    object.bidder = TradingItemBidBidderChooser.new(@parent, object.stage).choose
     object.status = TradingItemBidStatus::WITH_PROPOSAL
     object.amount = 0
 
@@ -17,9 +18,9 @@ class TradingItemBidsController < CrudController
   protected
 
   def create_resource(object)
-    object.round  = TradingItemBidRoundCalculator.new(@parent).calculate
     object.stage  = TradingItemBidStage.current_stage(@parent)
-    object.bidder = TradingItemBidBidderChooser.new(@parent).choose
+    object.round  = TradingItemBidRoundCalculator.new(@parent).calculate(object.stage)
+    object.bidder = TradingItemBidBidderChooser.new(@parent, object.stage).choose
 
     super
   end

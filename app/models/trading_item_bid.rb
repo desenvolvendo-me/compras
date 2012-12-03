@@ -3,7 +3,7 @@ class TradingItemBid < Compras::Model
                   :disqualification_reason, :status, :stage
 
   has_enumeration_for :stage, :with => TradingItemBidStage,
-                      :create_helpers => true
+                      :create_helpers => true, :create_scopes => true
   has_enumeration_for :status, :with => TradingItemBidStatus,
                       :create_helpers => true
 

@@ -78,6 +78,19 @@ Creditor.blueprint(:nohup) do
   representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
 end
 
+Creditor.blueprint(:nobe) do
+  accounts { [ CreditorBankAccount.make!(:conta, :creditor => object, :number => 2818) ] }
+  cnaes { [ Cnae.make!(:aluguel) ] }
+  creditor_balances { [ CreditorBalance.make!(:balanco_2012, :creditor => object) ] }
+  documents { [ CreditorDocument.make!(:documento) ] }
+  main_cnae { Cnae.make!(:varejo) }
+  materials { [ Material.make!(:antivirus), Material.make!(:arame_comum) ] }
+  creditable { Person.make!(:nobe) }
+  registration_cadastral_certificates { [ RegistrationCadastralCertificate.make!(:crc, :creditor => object) ]}
+  regularization_or_administrative_sanctions { [ RegularizationOrAdministrativeSanction.make!(:sancao_administrativa, :creditor => object) ] }
+  representatives { [ CreditorRepresentative.make!(:representante_sobrinho) ] }
+end
+
 Creditor.blueprint(:ibm) do
   accounts { [ CreditorBankAccount.make!(:conta, :creditor => object, :number => 12348) ] }
   cnaes { [ Cnae.make!(:aluguel) ] }

@@ -66,6 +66,22 @@ class Bidder < Compras::Model
     classifications.destroy_all
   end
 
+  def self.with_negociation_proposal_for(trading_item_id)
+    joins { trading_item_bids }.where {
+      trading_item_bids.stage.eq(TradingItemBidStage::NEGOTIATION) &
+      trading_item_bids.trading_item_id.eq(trading_item_id)
+    }
+  end
+
+  def self.eligible_for_negociation_stage(value)
+    joins { trading_item_bids }.
+    where {
+      trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
+      trading_item_bids.stage.eq(TradingItemBidStage::ROUND_OF_BIDS) &
+      trading_item_bids.amount.lteq(value)
+    }
+  end
+
   def self.classifications
     LicitationProcessClassification.joins { bidder }.readonly(false).
       where do |classification|

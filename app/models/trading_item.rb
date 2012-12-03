@@ -53,10 +53,32 @@ class TradingItem < Compras::Model
     (lowest_proposal_amount_at_stage_of_proposals * percentage_limit_to_participate_in_bids / 100) + lowest_proposal_amount_at_stage_of_proposals
   end
 
+  def bidders_for_negociation_by_lowest_proposal
+    bidders_selected_for_negociation.sort do |a,b|
+      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
+    end
+  end
+
   private
+
+  def bidders_selected_for_negociation
+    bidders_eligible_for_negociation.select { |bidder| bidder.benefited }
+  end
+
+  def bidders_eligible_for_negociation
+    bidders_with_proposals.eligible_for_negociation_stage(bid_limit_for_negociation_stage) - bidders.with_negociation_proposal_for(id)
+  end
+
+  def bid_limit_for_negociation_stage
+    lowest_proposal_amount_at_stage_of_round_of_bids * 1.05
+  end
 
   def lowest_proposal_amount_at_stage_of_proposals
     trading_item_bids.with_proposal.at_stage_of_proposals.minimum(:amount)
+  end
+
+  def lowest_proposal_amount_at_stage_of_round_of_bids
+    trading_item_bids.with_proposal.at_stage_of_round_of_bids.minimum(:amount)
   end
 
   def bidders_with_proposals

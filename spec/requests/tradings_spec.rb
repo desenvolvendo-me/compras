@@ -246,4 +246,107 @@ feature "Tradings" do
 
     expect(page).to have_content "Editar 1/2012"
   end
+
+  scenario "trading session with negociation stage" do
+    TradingConfiguration.make!(:pregao)
+    trading = Trading.make!(:pregao_presencial)
+    trading.licitation_process.bidders << Bidder.make!(:me_pregao)
+
+
+    navigate "Pregão Presencial > Pregões Presenciais"
+
+    click_link "1/2012"
+    click_link "Itens/Ofertas"
+    click_link "Fazer oferta"
+    
+    # Proposal stage
+    fill_in "Valor da proposta", :with => "100,00"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "101,00"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "102,00"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "103,00"
+    click_button "Salvar"
+
+    click_link "Voltar"
+
+    click_link "Fazer oferta"
+
+    # Bidding stage
+    fill_in "Valor da proposta", :with => "99,00"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "98,00"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "97,00"
+    click_button "Salvar"
+
+    choose "Declinou"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "96,00"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "95,00"
+    click_button "Salvar"
+
+    choose "Declinou"
+    click_button "Salvar"
+
+    choose "Declinou"
+    click_button "Salvar"
+
+    within("#preference-right") do
+      expect(page).to have_content "Nohup"
+      expect(page).to have_content "Nobe"
+      expect(page).not_to have_content "Wenderson Malheiros"
+      expect(page).not_to have_content "Gabriel Sobrinho"
+    end
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_disabled_field "Etapa"
+    expect(page).to have_field "Etapa", :with => "Negociação"
+    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Número da rodada", :with => "0"
+
+    fill_in "Valor da proposta", :with => "94,00"
+    click_button "Salvar"
+
+    expect(page).to have_notice "Oferta criada com sucesso"
+    expect(page).to have_field "Etapa", :with => "Negociação"
+    expect(page).to have_field "Licitante", :with => "Nobe"
+
+    fill_in "Valor da proposta", :with => "93,50"
+    click_button "Salvar"
+
+    expect(page).to have_notice "Oferta criada com sucesso"
+
+    within_records do
+      within("tbody tr:nth-child(1)") do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "1º lugar"
+      end
+
+      within("tbody tr:nth-child(2)") do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "2º lugar"
+      end
+
+      within("tbody tr:nth-child(3)") do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "3º lugar"
+      end
+
+      within("tbody tr:nth-child(4)") do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "4º lugar"
+      end
+    end
+  end
 end

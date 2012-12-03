@@ -1,7 +1,8 @@
 class TradingItemBidBidderChooser
-  def initialize(trading_item, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders) )
+  def initialize(trading_item, current_stage = nil, trading_item_bidders = TradingItemBidders.new(trading_item, trading_item.bidders) )
     @trading_item = trading_item
     @trading_item_bidders = trading_item_bidders
+    @current_stage = current_stage
   end
 
   def choose
@@ -14,7 +15,7 @@ class TradingItemBidBidderChooser
 
   private
 
-  attr_reader :trading_item, :trading_item_bidders
+  attr_reader :trading_item, :trading_item_bidders, :current_stage
 
   def bidders_available_ordered_for_current_round_by_value
     bidders_available_for_current_round.sort do |a,b|
@@ -23,11 +24,19 @@ class TradingItemBidBidderChooser
   end
 
   def bidders_available_for_current_round
-    bidders_available - trading_item_bidders.at_bid_round(current_round)
+    if current_stage == TradingItemBidStage::NEGOTIATION
+      trading_item.bidders_for_negociation_by_lowest_proposal
+    else
+      bidders_available - trading_item_bidders.at_bid_round(current_round)
+    end
   end
 
   def current_round(round_calculator = TradingItemBidRoundCalculator)
-    round_calculator.new(trading_item).calculate
+    if current_stage == TradingItemBidStage::NEGOTIATION
+      0
+    else
+      round_calculator.new(trading_item).calculate
+    end
   end
 
   def bidders_available

@@ -1,9 +1,4 @@
-<h2>
-  Classificação das Ofertas
-</h2>
-
-<%= check_box_tag 'filter_benefited', 'benefited', false %>
-<%= label_tag 'filter_benefited', 'Apenas beneficiados' %>
+<h2>Classificação das Ofertas</h2>
 
 <table class="records">
   <thead>
@@ -38,12 +33,38 @@
   </tbody>
 </table>
 
-<script>
-  $("#filter_benefited").change(function(){
-    if($(this).attr("checked") == "checked") {
-      $('.records .not-benefited').hide();
-    } else {
-      $('.records .not-benefited').show();
-    }
-  });
-</script>
+<h2>Direito de Preferência</h2>
+
+<table class="records" id="preference-right">
+  <thead>
+    <tr>
+      <th>Licitante</th>
+      <th>Valor</th>
+      <th>%</th>
+      <th>Ordem de Seleção ME-EPP</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.bidders_for_negociation_by_lowest_proposal.each_with_index do |bidder, index| %>
+      <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
+        <td class="bidder-name">
+          <%= bidder %>
+        </td>
+
+        <td class="bidder-amount">
+          <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
+        </td>
+
+        <td class="bidder-percent">
+          <%= bidder.decorator.trading_item_classification_percent(resource) %>
+        </td>
+
+        <td class="bidder-position">
+          <%= numeric_position(index.succ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Fazer oferta", new_trading_item_bid_path(:trading_item_id => resource.id), :class => "button primary" %>

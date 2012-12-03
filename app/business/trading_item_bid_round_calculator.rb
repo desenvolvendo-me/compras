@@ -9,7 +9,8 @@ class TradingItemBidRoundCalculator
     @trading_item_bidders = trading_item_bidders
   end
 
-  def calculate
+  def calculate(stage = nil)
+    return 0 if stage == TradingItemBidStage::NEGOTIATION
     return last_bid_round unless next_last_bid_round?
 
     last_bid_round.succ

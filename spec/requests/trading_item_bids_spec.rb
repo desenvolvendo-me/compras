@@ -537,17 +537,6 @@ feature "TradingItemBids" do
       expect(page.find('.bidder-percent')).to have_content '11,11'
       expect(page.find('.bidder-position')).to have_content '3º lugar'
     end
-
-    check 'Apenas beneficiados'
-
-    expect(page).to have_css '.records tbody tr', :count => 1
-
-    within '.records tbody tr:nth-child(1)' do
-      expect(page.find('.bidder-name')).to have_content 'Nohup'
-      expect(page.find('.bidder-amount')).to have_content '90,00'
-      expect(page.find('.bidder-percent')).to have_content '0,00'
-      expect(page.find('.bidder-position')).to have_content '1º lugar'
-    end
   end
 
   scenario 'should validates minimum_limit rounded' do

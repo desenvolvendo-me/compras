@@ -1,6 +1,8 @@
 require 'unit_helper'
+require 'enumerate_it'
 require 'active_support/core_ext/module/delegation'
 require 'app/business/trading_item_bid_round_calculator'
+require 'app/enumerations/trading_item_bid_stage'
 
 describe TradingItemBidRoundCalculator do
   subject do
@@ -28,7 +30,9 @@ describe TradingItemBidRoundCalculator do
   describe '#calculate' do
     context "when there are no bids" do
 
-      before { subject.stub(:trading_item_bids_for_stage_of_round_of_bids).and_return([]) }
+      before do
+        subject.stub(:trading_item_bids_for_stage_of_round_of_bids).and_return([])
+      end
 
       it 'should return 1' do
         stage_calculator.should_receive(:new).with(trading_item).
@@ -68,6 +72,10 @@ describe TradingItemBidRoundCalculator do
         and_return(true)
 
       expect(subject.calculate).to eq 3
+    end
+
+    it "always return 0 during the negociation stage" do
+      expect(subject.calculate(TradingItemBidStage::NEGOTIATION)).to eq 0
     end
   end
 end

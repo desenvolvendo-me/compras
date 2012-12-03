@@ -13,8 +13,10 @@ class TradingItemDecorator
     number_with_precision super if super
   end
 
-  def trading_item_bid_or_classification_path(stage_calculator = TradingItemBidStageCalculator)
-    if stage_calculator.new(component).stage_of_negotiation?
+  def trading_item_bid_or_classification_path(options={})
+    stage_calculator = options.fetch(:stage_calculator) { TradingItemBidStageCalculator.new(component) }
+
+    if stage_calculator.stage_of_negotiation? && (trading_item_bids.negotiation.empty? || bidders_selected_for_negociation.empty?)
       routes.classification_trading_item_path(component)
     else
       routes.new_trading_item_bid_path(:trading_item_id => component.id)
@@ -25,7 +27,7 @@ class TradingItemDecorator
     if stage_calculator.new(component).show_proposal_report?
       routes.proposal_report_trading_item_path(component)
     else
-      trading_item_bid_or_classification_path(stage_calculator)
+      trading_item_bid_or_classification_path
     end
   end
 
