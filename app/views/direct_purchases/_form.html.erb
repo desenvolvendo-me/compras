@@ -75,6 +75,16 @@
       disablePurchaseSolicitationItemGroup();
       disableBudgetAllocations();
       fillBudgetStructure(purchase_solicitation.budget_structure);
+
+      if (purchase_solicitation.responsible && $('#direct_purchase_employee_id').val() == '') {
+        $('#direct_purchase_employee').val(purchase_solicitation.responsible.to_s);
+        $('#direct_purchase_employee_id').val(purchase_solicitation.responsible.id);
+      }
+
+      if (purchase_solicitation.delivery_location && $('#direct_purchase_delivery_location_id').val() == '') {
+        $('#direct_purchase_delivery_location').val(purchase_solicitation.delivery_location.to_s);
+        $('#direct_purchase_delivery_location_id').val(purchase_solicitation.delivery_location.id);
+      }
     } else {
       $('#direct_purchase_total_allocations_items_value').val("0,00");
       $("#direct_purchase_purchase_solicitation_item_group").removeAttr("disabled");

@@ -1257,8 +1257,10 @@ feature "DirectPurchases" do
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
       fill_modal 'Objeto da licitação', :with => 'Ponte', :field => 'Descrição'
-      fill_modal 'Local de entrega', :with => 'Secretaria da Educação', :field => 'Descrição'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
+
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+
       fill_in 'Prazo de entrega', :with => '1'
       select 'ano/anos',  :from => 'Período do prazo de entrega'
       fill_modal 'Forma de pagamento', :with => 'Dinheiro', :field => 'Descrição'
@@ -1271,6 +1273,34 @@ feature "DirectPurchases" do
     expect(page).to have_notice 'Compra Direta criada com sucesso.'
 
     expect(page).to have_disabled_field 'Estrutura orçamentária', :with => '1 - Secretaria de Educação'
+  end
+
+  scenario 'fulfill the responsible and delivery_location only when they are not fulfilled' do
+    PurchaseSolicitation.make!(:reparo, :service_status => 'liberated')
+    Employee.make!(:wenderson)
+    DeliveryLocation.make!(:health)
+
+    navigate 'Processos de Compra > Compra Direta'
+
+    click_link 'Gerar Compra Direta'
+
+    within_tab 'Principal' do
+      fill_modal 'Local de entrega', :field => 'Descrição', :with => 'Secretaria da Saúde'
+      fill_modal 'Responsável', :field => 'Matrícula', :with => '12903412'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Saúde'
+
+      clear_modal 'Responsável'
+      clear_modal 'Local de entrega'
+      clear_modal 'Solicitação de compra'
+
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
+      expect(page).to have_field 'Local de entrega', :with => 'Secretaria da Educação'
+    end
   end
 
   scenario 'doesnt allow selection of purchase solicitations with "attended" status' do
