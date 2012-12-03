@@ -30,7 +30,7 @@ feature "Users" do
 
     expect(page).to have_notice 'Usuário criado com sucesso.'
 
-    click_link 'wenderson.malheiros'
+    click_link 'Wenderson Malheiros'
 
     expect(page).to have_field 'Funcionário', :with => 'Wenderson Malheiros'
     expect(page).to have_field 'Login', :with => 'wenderson.malheiros'
@@ -46,7 +46,7 @@ feature "Users" do
     navigate 'Geral > Usuários > Usuários'
 
     within_records do
-      click_link 'wenderson.malheiros'
+      click_link 'Wenderson Malheiros'
     end
 
     within_modal 'Funcionário' do
@@ -59,7 +59,7 @@ feature "Users" do
     expect(page).to have_notice 'Usuário editado com sucesso.'
 
     within_records do
-      click_link 'wenderson.malheiros'
+      click_link 'Gabriel Sobrinho'
     end
 
     expect(page).to have_field 'Funcionário', :with => 'Gabriel Sobrinho'
@@ -70,7 +70,7 @@ feature "Users" do
 
     navigate 'Geral > Usuários > Usuários'
 
-    click_link 'wenderson.malheiros'
+    click_link 'Wenderson Malheiros'
 
     click_link 'Apagar'
 
@@ -99,8 +99,8 @@ feature "Users" do
     navigate 'Geral > Usuários > Usuários'
 
     within_records do
-      expect(page).to have_link 'wenderson.malheiros'
-      expect(page).to_not have_link 'gabriel.sobrinho'
+      expect(page).to have_link 'Wenderson Malheiros'
+      expect(page).to_not have_link 'Gabriel Sobrinho'
       expect(page).to_not have_link 'sobrinhosa'
 
       expect(page).to have_css 'a', :count => 1
