@@ -3,5 +3,5 @@ class StreetDecorator
   include Decore::Proxy
   include Decore::Header
 
-  attr_header :name, :street_type, :city
+  attr_header :name, :street_type, :city, :to_s => false, :link => :name
 end
