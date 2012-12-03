@@ -1313,6 +1313,8 @@ feature "LicitationProcesses" do
 
     click_button "Salvar"
 
+    expect(page).to have_notice "Publicação criada com sucesso"
+
     click_link "Voltar ao processo licitatório"
 
     click_link "Licitantes"
