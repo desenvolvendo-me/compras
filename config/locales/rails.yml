@@ -302,6 +302,7 @@ pt-BR:
       inclusion_of_bidders_before_edital_publication: "não podem ser incluídos antes da publicação do edital"
       must_have_published_edital: "deve ter edital publicado"
       should_be_service: "deve ter a característica de Serviço"
+      should_be_prior_to_envelope_opening: "deve ser anterior à data de abertura dos envelopes"
 
   activerecord:
     errors:

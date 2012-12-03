@@ -8,6 +8,7 @@ class LicitationProcessPublication < Compras::Model
   belongs_to :licitation_process
 
   validates :name, :publication_date, :publication_of, :circulation_type, :presence => true
+  validate  :publication_before_envelope_opening, :if => :edital?
 
   orderize :publication_date
   filterize
@@ -26,5 +27,13 @@ class LicitationProcessPublication < Compras::Model
 
   def updatable?
     extension? || edital? || edital_rectification?
+  end
+
+  def publication_before_envelope_opening
+    return unless licitation_process
+
+    if publication_date >= licitation_process.envelope_opening_date
+      errors.add(:publication_date, :should_be_prior_to_envelope_opening)
+    end
   end
 end

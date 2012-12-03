@@ -1305,7 +1305,7 @@ feature "LicitationProcesses" do
 
     fill_in "Nome do veículo de comunicação", :with => "website"
 
-    fill_in "Data da publicação", :with => "30/12/2012"
+    fill_in "Data da publicação", :with => I18n.l(Date.current)
 
     select "Edital", :on => "Publicação do(a)"
 
