@@ -27,7 +27,7 @@ class PurchaseSolicitationBudgetAllocationItemStatusChanger
     old_purchase_solicitation.rollback_attended_items! if old_purchase_solicitation
   end
 
-  protected
+  private
 
   attr_reader :new_item_ids, :old_item_ids, :new_purchase_solicitation,
               :old_purchase_solicitation
