@@ -61,4 +61,22 @@ feature "Banks" do
 
     expect(page).to_not have_content 'Itaú'
   end
+
+  scenario 'index with columns at the index' do
+    Bank.make!(:santander)
+
+    navigate 'Comum > Cadastrais > Bancos > Bancos'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Código'
+      expect(page).to have_content 'Sigla'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Santander'
+        expect(page).to have_content '33'
+        expect(page).to have_content 'ST'
+      end
+    end
+  end
 end
