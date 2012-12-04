@@ -17,6 +17,10 @@ class PurchaseSolicitationDecorator
     t('purchase_solicitation.messages.not_editable') unless editable?
   end
 
+  def not_annullable_message
+    t('purchase_solicitation.messages.not_annullable') if direct_purchase.present?
+  end
+
   def is_annulled_message
     t('purchase_solicitation.messages.is_annulled') if annulled?
   end

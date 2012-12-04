@@ -33,4 +33,5 @@ pt-BR:
   purchase_solicitation:
     messages:
       not_editable: "esta solicitação já está em uso ou anulada e não pode ser editada"
+      not_annullable: "esta solicitação já está em uso e não pode ser anulada"
       is_annulled: "esta solicitação foi anulada e não pode ser editada"

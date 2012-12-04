@@ -37,6 +37,20 @@ feature 'PurchaseSolicitationAnnul' do
     expect(page).to_not have_link 'Apagar'
   end
 
+  scenario 'annul button should be disabled when there is a direct_purchase related' do
+    purchase_solicitation = PurchaseSolicitation.make!(:reparo,
+        :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    DirectPurchase.make!(:compra,
+        :purchase_solicitation => purchase_solicitation)
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    click_link "#{purchase_solicitation}"
+
+    expect(page).to have_disabled_element 'Anular',
+                                          :reason => 'esta solicitação já está em uso e não pode ser anulada'
+  end
+
   scenario 'annuling a purchase solicitation' do
     solicitation = PurchaseSolicitation.make!(:reparo)
 

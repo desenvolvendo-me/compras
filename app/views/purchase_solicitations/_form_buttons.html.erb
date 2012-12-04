@@ -1,5 +1,5 @@
 <div class="buttons">
-  <%= annul_link %>
+  <%= annul_link(:data_disabled => f.object.decorator.not_annullable_message) %>
   <%= f.button :submit, 'data-disabled' => f.object.decorator.not_editable_message %>
   <%= link_to 'Liberações', purchase_solicitation_liberations_path(:purchase_solicitation_id => resource.id), :class => 'button primary' %>
   <%= f.button :back %>
