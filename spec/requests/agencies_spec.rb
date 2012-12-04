@@ -70,4 +70,20 @@ feature "Agencies" do
 
     expect(page).to_not have_content 'Agência Santander'
   end
+
+  scenario 'index with columns at the index' do
+    Agency.make!(:santander)
+
+    navigate 'Comum > Cadastrais > Bancos > Agências'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Banco'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Agência Santander'
+        expect(page).to have_content 'Santander'
+      end
+    end
+  end
 end
