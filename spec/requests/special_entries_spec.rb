@@ -53,4 +53,18 @@ feature "SpecialEntries" do
 
     expect(page).to_not have_content 'Tal'
   end
+
+  scenario 'index with columns at the index' do
+    SpecialEntry.make!(:example)
+
+    navigate 'Comum > Pessoas > Inscrições Especiais'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Tal'
+      end
+    end
+  end
 end
