@@ -1293,4 +1293,20 @@ feature "Creditors" do
     expect(page).to_not have_link '2012'
     expect(page).to_not have_content '2012'
   end
+
+  scenario 'index with columns at the index' do
+    Creditor.make!(:special)
+
+    navigate 'Comum > Pessoas > Credores'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Tipo de credor'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Tal'
+        expect(page).to have_content 'Inscrição especial'
+      end
+    end
+  end
 end
