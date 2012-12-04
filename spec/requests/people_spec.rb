@@ -371,4 +371,20 @@ feature "People" do
       expect(page).to have_css('.partner', :count => 1)
     end
   end
+
+  scenario 'index with columns at the index' do
+    Person.make!(:pedro_dos_santos)
+
+    navigate 'Comum > Pessoas > Pessoas'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'CPF'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Pedro dos Santos'
+        expect(page).to have_content '270.565.341-47'
+      end
+    end
+  end
 end
