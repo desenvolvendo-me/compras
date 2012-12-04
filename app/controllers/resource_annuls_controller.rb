@@ -16,7 +16,6 @@ class ResourceAnnulsController < CrudController
   end
 
   def create
-    object = build_resource
     create! { edit_parent_path }
   end
 
