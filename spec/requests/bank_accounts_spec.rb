@@ -263,4 +263,20 @@ feature "BankAccounts" do
 
     expect(page).to_not have_content 'Itaú Tributos'
   end
+
+  scenario 'index with columns at the index' do
+    BankAccount.make!(:itau_tributos)
+
+    navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Status'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Itaú Tributos'
+        expect(page).to have_content 'Ativo'
+      end
+    end
+  end
 end
