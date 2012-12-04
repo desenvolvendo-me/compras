@@ -12,3 +12,9 @@ City.blueprint(:curitiba) do
   name  { 'Curitiba' }
   state { State.make!(:pr) }
 end
+
+City.blueprint(:maringa) do
+  name  { 'Maringa' }
+  state { State.make!(:pr) }
+  code  { 12 }
+end

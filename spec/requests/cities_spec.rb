@@ -62,4 +62,22 @@ feature "Cities" do
 
     expect(page).to_not have_content 'Porto Alegre'
   end
+
+  scenario 'index with columns at the index' do
+    City.make!(:maringa)
+
+    navigate 'Geral > Parâmetros > Endereços > Cidades'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Estado'
+      expect(page).to have_content 'Código'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Maringa'
+        expect(page).to have_content 'Parana'
+        expect(page).to have_content '12'
+      end
+    end
+  end
 end
