@@ -25,7 +25,7 @@ feature "RiskDegrees" do
   end
 
   scenario 'update an existent risk_degree' do
-    risk_degree = RiskDegree.make!(:leve)
+    RiskDegree.make!(:leve)
 
     navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
 
@@ -45,7 +45,7 @@ feature "RiskDegrees" do
   end
 
   scenario 'destroy an existent risk_degree' do
-    risk_degree = RiskDegree.make!(:grave)
+    RiskDegree.make!(:grave)
 
     navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
 
@@ -59,7 +59,7 @@ feature "RiskDegrees" do
   end
 
   scenario 'index with columns at the index' do
-    risk_degree = RiskDegree.make!(:grave)
+    RiskDegree.make!(:grave)
 
     navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
 
