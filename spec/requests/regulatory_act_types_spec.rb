@@ -60,4 +60,20 @@ feature "RegulatoryActTypes" do
 
     expect(page).to_not have_content 'Lei'
   end
+
+  scenario 'index with columns at the index' do
+    RegulatoryActType.make!(:lei)
+
+    navigate 'Comum > Legislação > Ato Regulamentador > Tipos de Ato Regulamentador'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Classificação do tipo de ato regulamentador'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Lei'
+        expect(page).to have_content 'Tipo 01'
+      end
+    end
+  end
 end
