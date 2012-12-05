@@ -26,3 +26,4 @@ pt-BR:
   price_collection:
     messages:
       is_annulled: "não é permitido alterar coleta anulada"
+      proposals_not_allowed: "para inserir uma proposta, deve-se cadastrar ao menos um fornecedor"

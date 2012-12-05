@@ -11,6 +11,12 @@ describe PriceCollectionsHelper do
   end
 
   context '#proposals_link' do
+    let(:decorator) { double(:decorator) }
+
+    before do
+      resource.stub(:decorator).and_return(decorator)
+    end
+
     context 'when not persisted' do
       before do
         resource.stub(:persisted?).and_return false
@@ -29,7 +35,13 @@ describe PriceCollectionsHelper do
       end
 
       it 'should return the link' do
+        decorator.stub(:proposals_not_allowed_message).and_return(nil)
         expect(helper.proposals_link).to eq '<a href="path" class="button primary">Propostas</a>'
+      end
+
+      it 'should return the link disabled' do
+        decorator.stub(:proposals_not_allowed_message).and_return("mensagem")
+        expect(helper.proposals_link).to eq '<a href="path" class="button primary" data-disabled="mensagem">Propostas</a>'
       end
     end
   end

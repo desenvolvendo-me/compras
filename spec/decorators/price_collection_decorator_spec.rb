@@ -32,4 +32,34 @@ describe PriceCollectionDecorator do
       expect(subject.is_annulled_message).to be_nil
     end
   end
+
+  describe '#proposals_not_allowed_message' do
+    let(:creditors) { double(:creditors) }
+
+    before do
+      component.stub(:creditors).and_return(creditors)
+    end
+
+    context 'with creditors' do
+      it 'should return nil' do
+        creditors.stub(:empty?).and_return(false)
+
+        expect(subject.proposals_not_allowed_message).to be_nil
+      end
+    end
+
+    context 'without creditors' do
+      it 'should return message' do
+        I18n.backend.store_translations 'pt-BR', :price_collection => {
+          :messages => {
+            :proposals_not_allowed => 'sem creditor'
+          }
+        }
+
+        creditors.stub(:empty?).and_return(true)
+
+        expect(subject.proposals_not_allowed_message).to eq 'sem creditor'
+      end
+    end
+  end
 end

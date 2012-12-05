@@ -15,4 +15,8 @@ class PriceCollectionDecorator
   def is_annulled_message
     t('price_collection.messages.is_annulled') if annulled?
   end
+
+  def proposals_not_allowed_message
+    t('price_collection.messages.proposals_not_allowed') if creditors.empty?
+  end
 end

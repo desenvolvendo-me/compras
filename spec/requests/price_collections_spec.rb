@@ -934,6 +934,34 @@ feature "PriceCollections" do
     end
   end
 
+  scenario 'disable proposals button when there is no one creditor' do
+    PriceCollection.make!(:coleta_de_precos)
+
+    navigate 'Processos de Compra > Coletas de Preços'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to_not have_disabled_element 'Propostas',
+                                              :reason => 'para inserir uma proposta, deve-se cadastrar ao menos um fornecedor'
+
+    within_tab 'Fornecedores' do
+      click_button 'Remover Fornecedor'
+    end
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Coleta de Preços editada com sucesso.'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_disabled_element 'Propostas',
+                                          :reason => 'para inserir uma proposta, deve-se cadastrar ao menos um fornecedor'
+  end
+
   def make_proposals_dependencies!(price_collection)
     proposal_1 = PriceCollectionProposal.make!(:proposta_de_coleta_de_precos, :price_collection => price_collection)
     proposal_2 = PriceCollectionProposal.make!(:sobrinho_sa_proposta, :price_collection => price_collection)

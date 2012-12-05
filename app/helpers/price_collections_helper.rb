@@ -3,7 +3,8 @@ module PriceCollectionsHelper
   def proposals_link
     return unless resource.persisted?
 
-    link_to('Propostas', price_collection_price_collection_proposals_path(resource), :class => "button primary")
+    link_to('Propostas', price_collection_price_collection_proposals_path(resource),
+            :class => "button primary", 'data-disabled' => resource.decorator.proposals_not_allowed_message)
   end
 
   def count_link
