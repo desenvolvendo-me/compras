@@ -53,4 +53,18 @@ feature "RegulatoryActTypeClassifications" do
 
     expect(page).to_not have_content 'description'
   end
+
+  scenario 'index with columns at the index' do
+    RegulatoryActTypeClassification.make!(:primeiro_tipo)
+
+    navigate 'Comum > Legislação > Ato Regulamentador > Classificações de Tipo de Ato Regulamentador'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Tipo 01'
+      end
+    end
+  end
 end
