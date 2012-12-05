@@ -57,4 +57,20 @@ feature "RiskDegrees" do
 
     expect(page).to_not have_content 'Grave'
   end
+
+  scenario 'index with columns at the index' do
+    risk_degree = RiskDegree.make!(:grave)
+
+    navigate 'Comum > Pessoas > Auxiliar > Grau de Riscos'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Nível'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Grave'
+        expect(page).to have_content '3'
+      end
+    end
+  end
 end
