@@ -276,16 +276,16 @@ describe DirectPurchase do
   end
 
   describe '#status' do
-    it "should be 'active' when not annulled" do
+    it "should be 'completed' when not annulled" do
       subject.stub(:annulled?).and_return(false)
 
-      expect(subject.status).to eq Status::ACTIVE
+      expect(subject.status).to eq DirectPurchaseStatus::COMPLETED
     end
 
-    it "should be 'inactive' when annulled" do
+    it "should be 'annulled' when annulled" do
       subject.stub(:annulled?).and_return(true)
 
-      expect(subject.status).to eq Status::INACTIVE
+      expect(subject.status).to eq DirectPurchaseStatus::ANNULLED
     end
   end
 end

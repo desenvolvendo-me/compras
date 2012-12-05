@@ -16,7 +16,7 @@ class DirectPurchase < Compras::Model
   has_enumeration_for :modality, :create_helpers => true, :with => DirectPurchaseModality
   has_enumeration_for :pledge_type, :with => DirectPurchasePledgeType
   has_enumeration_for :delivery_term_period, :with => PeriodUnit
-  has_enumeration_for :status
+  has_enumeration_for :status, :with => DirectPurchaseStatus
 
   belongs_to :legal_reference
   belongs_to :creditor
@@ -110,9 +110,9 @@ class DirectPurchase < Compras::Model
 
   def status
     if annulled?
-      Status::INACTIVE
+      DirectPurchaseStatus::ANNULLED
     else
-      Status::ACTIVE
+      DirectPurchaseStatus::COMPLETED
     end
   end
 
