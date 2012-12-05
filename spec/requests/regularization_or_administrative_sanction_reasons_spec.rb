@@ -57,4 +57,20 @@ feature "RegularizationOrAdministrativeSanctionReasons" do
 
     expect(page).to_not have_content 'Advertência por desistência parcial da proposta devidamente justificada'
   end
+
+  scenario 'index with columns at the index' do
+    RegularizationOrAdministrativeSanctionReason.make!(:sancao_administrativa)
+
+    navigate 'Comum > Pessoas > Auxiliar > Motivos de Sanções Administrativas ou Regularizações'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Tipo'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Advertência por desistência parcial da proposta devidamente justificada'
+        expect(page).to have_content 'Sanção administrativa'
+      end
+    end
+  end
 end
