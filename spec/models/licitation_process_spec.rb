@@ -9,6 +9,7 @@ require 'app/models/licitation_process_publication'
 require 'app/models/bidder'
 require 'app/models/licitation_process_impugnment'
 require 'app/models/licitation_process_appeal'
+require 'app/models/licitation_process_ratification'
 require 'app/models/budget_allocation'
 require 'app/models/pledge'
 require 'app/models/judgment_commission_advice'
@@ -48,6 +49,7 @@ describe LicitationProcess do
   it { should have_many(:licitation_process_lots).dependent(:destroy).order(:id) }
   it { should have_many(:reserve_funds).dependent(:restrict) }
   it { should have_many(:price_registrations).dependent(:restrict) }
+  it { should have_many(:licitation_process_ratifications).dependent(:restrict) }
 
   it { should have_one(:trading).dependent(:restrict) }
 
@@ -156,6 +158,15 @@ describe LicitationProcess do
   it { should_not allow_value('201').for(:year) }
   it { should_not allow_value('a201').for(:year) }
 
+  it "validate attribute changes if not updatable" do
+    subject.stub(:updatable? => false,
+                 :attributes_changed => [double])
+
+    subject.valid?
+
+    expect(subject.errors[:base]).to include "não pode ser editado"
+  end
+
   describe '#next_process' do
     context 'when the process of last licitation process is 4' do
       before do
@@ -198,37 +209,6 @@ describe LicitationProcess do
     subject.stub(:judgment_commission_advices).and_return([1, 2, 3])
 
     expect(subject.advice_number).to eq 3
-  end
-
-  describe 'publication' do
-    let :licitation_process_publications do
-      double :licitation_process_publications
-    end
-
-    it 'should can be updated when is a new record' do
-      expect(subject).to be_updatable
-    end
-
-    it 'should can be updated when is not a new record, but has not publication' do
-      subject.stub!(:new_record? => false)
-      expect(subject).to be_updatable
-    end
-
-    it 'should can be updated when is not a new record, has publication but licitation process publication is updatable' do
-      subject.stub!(:new_record? => false)
-      subject.stub(:licitation_process_publications => licitation_process_publications)
-      licitation_process_publications.should_receive(:empty?).and_return(false)
-      licitation_process_publications.stub(:current_updatable? => true)
-      expect(subject).to be_updatable
-    end
-
-    it 'should can not be updated when is not a new record, has publication and licitation process publication not updatable' do
-      subject.stub!(:new_record?, false)
-      licitation_process_publications.stub(:current_updatable? => false)
-      licitation_process_publications.should_receive(:empty?).and_return(false)
-      subject.stub(:licitation_process_publications => licitation_process_publications)
-      expect(subject).not_to be_updatable
-    end
   end
 
   context "when envelope_opening_date is not the current date" do
@@ -484,6 +464,54 @@ describe LicitationProcess do
       subject.stub(:licitation_process_publications => publications)
 
       expect(subject.edital_published?).to be_true
+    end
+  end
+
+  describe "#updatable" do
+
+    let(:ratifications) { double(:empty? => true) }
+
+    let(:publications) do
+      double(:empty? => true,
+             :current_updatable? => true)
+    end
+
+    before do
+      subject.stub(:licitation_process_publications => publications)
+      subject.stub(:licitation_process_ratifications => ratifications)
+      subject.stub(:new_record? => false)
+    end
+
+    it "returns true if it's a new record" do
+      subject.stub(:new_record? => true)
+
+      expect(subject).to be_updatable
+    end
+
+    it "returns true if there are no ratifications" do
+      ratifications.stub(:empty? => true)
+
+      expect(subject).to be_updatable
+    end
+
+    it "returns true if there are no publications" do
+      publications.stub(:empty? => true)
+
+      expect(subject).to be_updatable
+    end
+
+    it "returns true if publications are updatable" do
+      publications.stub(:current_updatable? => true)
+
+      expect(subject).to be_updatable
+    end
+
+    it "returns false otherwise" do
+      publications.stub(:current_updatable? => false,
+                        :empty? => false)
+      ratifications.stub(:empty? => false)
+
+      expect(subject).not_to be_updatable
     end
   end
 end

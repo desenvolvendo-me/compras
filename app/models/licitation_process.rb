@@ -41,6 +41,7 @@ class LicitationProcess < Compras::Model
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
   has_many :price_registrations, :dependent => :restrict
+  has_many :licitation_process_ratifications, :dependent => :restrict
 
   has_one :trading, :dependent => :restrict
 
@@ -69,6 +70,7 @@ class LicitationProcess < Compras::Model
   validate :validate_administrative_process
   validate :validate_administrative_process_allow_licitation_process
   validate :validate_bidders_before_edital_publication
+  validate :validate_updates, :unless => :updatable?
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :year, :mask => "9999"
@@ -147,7 +149,7 @@ class LicitationProcess < Compras::Model
   end
 
   def updatable?
-    new_record? || licitation_process_publications.empty? || licitation_process_publications.current_updatable?
+    new_record? || ((licitation_process_ratifications.empty? || licitation_process_publications.empty?) && licitation_process_publications.current_updatable?)
   end
 
   def filled_lots?
@@ -279,5 +281,11 @@ class LicitationProcess < Compras::Model
 
   def published_editals
     licitation_process_publications.edital
+  end
+
+  def validate_updates
+    if attributes_changed.any?
+      errors.add(:base, :cannot_be_edited)
+    end
   end
 end

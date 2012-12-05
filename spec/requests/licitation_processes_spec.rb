@@ -1321,4 +1321,26 @@ feature "LicitationProcesses" do
 
     expect(page).to have_content "Licitantes do Processo Licitatório 1/2012"
   end
+
+  scenario "allowing changes to licitation process after ratification" do
+    LicitationProcessRatification.make!(:processo_licitatorio_computador)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+
+    within_records do
+      click_link "1/2013"
+    end
+
+    within_tab "Principal" do
+      expect(page).to have_disabled_field "Forma de julgamento"
+      expect(page).to have_disabled_field "Data do processo"
+      expect(page).to have_disabled_field "Fonte de recurso"
+      expect(page).to have_disabled_field "Validade da proposta"
+      expect(page).to have_disabled_field "Índice de reajuste"
+      expect(page).to have_disabled_field "Observações gerais"
+    end
+
+    expect(page).to have_disabled_element 'Salvar',
+                    :reason => 'este processo licitatório não pode ser alterado'
+  end
 end

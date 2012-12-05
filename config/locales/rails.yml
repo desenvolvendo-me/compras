@@ -303,6 +303,7 @@ pt-BR:
       must_have_published_edital: "deve ter edital publicado"
       should_be_service: "deve ter a característica de Serviço"
       should_be_prior_to_envelope_opening: "deve ser anterior à data de abertura dos envelopes"
+      cannot_be_edited: "não pode ser editado"
 
   activerecord:
     errors:
