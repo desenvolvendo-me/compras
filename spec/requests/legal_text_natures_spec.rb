@@ -53,4 +53,18 @@ feature "LegalTextNatures" do
 
     expect(page).to_not have_content 'Natureza Cívica'
   end
+
+  scenario 'index with columns at the index' do
+    LegalTextNature.make!(:civica)
+
+    navigate 'Comum > Legislação > Naturezas de Textos Jurídicos'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Natureza Cívica'
+      end
+    end
+  end
 end
