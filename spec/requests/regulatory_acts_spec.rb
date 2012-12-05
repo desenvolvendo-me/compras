@@ -39,7 +39,7 @@ feature "RegulatoryActs" do
 
     expect(page).to have_notice 'Ato Regulamentador criado com sucesso.'
 
-    click_link '1234'
+    click_link 'Lei'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Número', :with => '1234'
@@ -73,7 +73,7 @@ feature "RegulatoryActs" do
 
     navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
-    click_link '1234'
+    click_link 'Lei'
 
     within_tab 'Principal' do
       fill_in 'Número', :with => '6789'
@@ -101,7 +101,7 @@ feature "RegulatoryActs" do
 
     expect(page).to have_notice 'Ato Regulamentador editado com sucesso.'
 
-    click_link '6789'
+    click_link 'Emenda'
 
     within_tab 'Principal' do
       expect(page).to have_field 'Número', :with => '6789'
@@ -131,13 +131,13 @@ feature "RegulatoryActs" do
 
     navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
-    click_link '1234'
+    click_link 'Lei'
 
     click_link 'Apagar'
 
     expect(page).to have_notice 'Ato Regulamentador apagado com sucesso.'
 
-    expect(page).to_not have_link '1234'
+    expect(page).to_not have_link 'Lei'
   end
 
   scenario 'remove dissemination source from an existent regulatory_act' do
@@ -145,7 +145,7 @@ feature "RegulatoryActs" do
 
     navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
 
-    click_link '1234'
+    click_link 'Lei'
 
     within_tab 'Fontes de divulgação' do
       click_button 'Remover'
@@ -155,10 +155,28 @@ feature "RegulatoryActs" do
 
     expect(page).to have_notice 'Ato Regulamentador editado com sucesso.'
 
-    click_link '1234'
+    click_link 'Lei'
 
     within_tab 'Fontes de divulgação' do
       expect(page).to_not have_content 'Jornal Oficial do Bairro'
+    end
+  end
+
+  scenario 'index with columns at the index' do
+    RegulatoryAct.make!(:sopa)
+
+    navigate 'Comum > Legislação > Ato Regulamentador > Atos Regulamentadores'
+
+    within_records do
+      expect(page).to have_content 'Tipo'
+      expect(page).to have_content 'Número'
+      expect(page).to have_content 'Data da criação'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Lei'
+        expect(page).to have_content '1234'
+        expect(page).to have_content '01/01/2012'
+      end
     end
   end
 
