@@ -103,6 +103,7 @@
 
       disableBudgetAllocations();
       disablePurchaseSolicitationItemGroup();
+      fulfillResponsible(purchase_solicitation.responsible);
     } else {
       enableBudgetAllocations();
       enablePurchaseSolicitationItemGroup();
@@ -110,6 +111,15 @@
 
     calculateAllocationsTotalValue();
   });
+
+  function fulfillResponsible(responsible) {
+    var old_responsible = $('#administrative_process_responsible_id').val();
+
+    if (responsible && old_responsible == "") {
+      $('#administrative_process_responsible').val(responsible.to_s);
+      $('#administrative_process_responsible_id').val(responsible.id);
+    }
+  }
 
   function renderBudgetAllocation(budget_allocation) {
     var budgetAllocationBinds = [];

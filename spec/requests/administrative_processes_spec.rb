@@ -1315,6 +1315,7 @@ feature "AdministrativeProcesses" do
       fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
 
       expect(page).to have_disabled_field 'Agrupamento de solicitações de compra'
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
 
       fill_modal 'Modalidade', :with => 'Pregão presencial', :field => 'Modalidade'
       select 'Alienação de bens', :from => 'Tipo de objeto'
@@ -1326,7 +1327,6 @@ feature "AdministrativeProcesses" do
       fill_modal 'Forma de julgamento', :with => 'Por Item com Melhor Técnica', :field => 'Descrição'
       fill_in 'Objeto resumido do processo licitatório', :with => 'Objeto resumido'
       fill_in 'Objeto do processo licitatório', :with => 'Licitação para compra de carteiras'
-      fill_modal 'Responsável', :with => '958473', :field => 'Matrícula'
       select 'Aguardando', :from => 'Status do processo administrativo'
     end
 
@@ -1416,6 +1416,31 @@ feature "AdministrativeProcesses" do
       end
 
       expect(page).to have_disabled_field 'Solicitação de compra'
+    end
+  end
+
+  scenario 'cannot overwrite reponsible when select a purchase_solicitation' do
+    PurchaseSolicitation.make!(:reparo,
+      :service_status => PurchaseSolicitationServiceStatus::LIBERATED)
+    PurchaseSolicitationItemGroup.make!(:antivirus)
+    Employee.make!(:wenderson)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    click_link 'Criar Processo Administrativo'
+
+    within_tab 'Principal' do
+      fill_modal 'Responsável', :field => 'Matrícula', :with => '12903412'
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_field 'Responsável', :with => 'Wenderson Malheiros'
+
+      clear_modal 'Responsável'
+      clear_modal 'Solicitação de compra'
+
+      fill_modal 'Solicitação de compra', :with => '1', :field => 'Código'
+
+      expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     end
   end
 end
