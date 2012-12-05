@@ -64,4 +64,22 @@ feature "Cnaes" do
 
     expect(page).to_not have_content 'Aluguel de outras máquinas'
   end
+
+  scenario 'index with columns at the index' do
+    Cnae.make!(:aluguel)
+
+    navigate 'Comum > Pessoas > Auxiliar > CNAES'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Código'
+      expect(page).to have_content 'Grau de risco'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Aluguel de outras máquinas'
+        expect(page).to have_content '7739099'
+        expect(page).to have_content 'Leve'
+      end
+    end
+  end
 end
