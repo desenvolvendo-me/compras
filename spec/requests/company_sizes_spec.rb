@@ -63,4 +63,20 @@ feature "CompanySizes" do
 
     expect(page).to_not have_content 'Empresa de grande porte'
   end
+
+  scenario 'index with columns at the index' do
+    CompanySize.make!(:empresa_de_grande_porte)
+
+    navigate 'Comum > Pessoas > Auxiliar > Portes das Empresas'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Sigla'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Empresa de grande porte'
+        expect(page).to have_content 'EGP'
+      end
+    end
+  end
 end
