@@ -22,7 +22,7 @@
  *
  */
 
-$(document).on("click", "a[data-disabled], input[data-disabled], button[data-disabled]", function() {
+$(document).on("click", "a[data-disabled], input[data-disabled], button[data-disabled]", function(event) {
   event.stopImmediatePropagation();
   return false;
 });
