@@ -3,6 +3,7 @@
 //= require compras/simple_form.toogle_required_input
 //= require compras/simple_form.numeric_input
 //= require compras/currency_manipulation
+//= require compras/modal_info_link_disabler
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");

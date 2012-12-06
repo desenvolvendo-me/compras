@@ -49,9 +49,12 @@ module CrudHelper
 
   def link_to_modal_info(options = {})
     options[:label] ||= I18n.translate("other.compras.messages.more_information")
+    options[:data_disabled_message] ||= I18n.translate('errors.messages.cannot_open_link_without_an_object')
 
     content_tag(:p, :class => :modal_info) do
-      link_to options[:label], options.fetch(:href, "#")
+      link_to options[:label], options.fetch(:href, "#"),
+           'data-disabled' => options[:data_disabled] ? options[:data_disabled_message] : nil,
+           'data-disabled-message' => options[:data_disabled_message]
     end
   end
 

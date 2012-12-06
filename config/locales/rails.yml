@@ -304,6 +304,7 @@ pt-BR:
       should_be_service: "deve ter a característica de Serviço"
       should_be_prior_to_envelope_opening: "deve ser anterior à data de abertura dos envelopes"
       cannot_be_edited: "não pode ser editado"
+      cannot_open_link_without_an_object: "não pode abrir o link sem um objeto"
 
   activerecord:
     errors:

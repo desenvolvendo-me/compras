@@ -136,11 +136,17 @@ feature "DirectPurchases" do
       select 'Material ou serviços', :from => 'Modalidade'
       select 'Global', :from => 'Tipo do empenho'
 
+      expect(page).to have_disabled_element 'Mais informações',
+                    :reason => 'não pode abrir o link sem um objeto'
+
       within_modal 'Agrupamento de solicitações de compra' do
         click_button 'Pesquisar'
 
         click_record 'Agrupamento de reparo 2013'
       end
+
+      expect(page).to_not have_disabled_element 'Mais informações',
+                    :reason => 'não pode abrir o link sem um objeto'
 
       fill_modal 'Fornecedor', :with => 'Wenderson Malheiros'
 
