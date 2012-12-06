@@ -70,4 +70,22 @@ feature "MaterialsClasses" do
     expect(page).to_not have_content 'Software'
     expect(page).to_not have_content 'Softwares de computador'
   end
+
+  scenario 'index with columns at the index' do
+    MaterialsClass.make!(:software)
+
+    navigate 'Comum > Cadastrais > Materiais > Classes de Materiais'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Código'
+      expect(page).to have_content 'Grupo'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Software'
+        expect(page).to have_content '01'
+        expect(page).to have_content 'Informática'
+      end
+    end
+  end
 end
