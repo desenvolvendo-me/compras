@@ -58,4 +58,20 @@ feature "MaterialsGroups" do
     expect(page).to_not have_content '01'
     expect(page).to_not have_content 'Informática'
   end
+
+  scenario 'index with columns at the index' do
+    MaterialsGroup.make!(:informatica)
+
+    navigate 'Comum > Cadastrais > Materiais > Grupos de Materiais'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Código'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Informática'
+        expect(page).to have_content '01'
+      end
+    end
+  end
 end
