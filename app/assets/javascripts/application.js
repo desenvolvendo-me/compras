@@ -6,7 +6,7 @@
 
 $(".clear").live('click', function() {
   $(this).closest(".modal-finder").find("input.modal").val("");
-})
+});
 
 $(".modal-finder-remove").live("click", function () {
   if (!$(this).data('disabled')) {
