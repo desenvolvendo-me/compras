@@ -77,4 +77,20 @@ feature "DisseminationSources" do
 
     expect(page).to have_alert 'Fonte de Divulgação não pode ser apagada.'
   end
+
+  scenario 'index with columns at the index' do
+    DisseminationSource.make!(:jornal_municipal)
+
+    navigate 'Comum > Legislação > Fontes de Divulgação'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Fonte de comunicação'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Jornal Oficial do Município'
+        expect(page).to have_content 'Jornal de Circulação Municipal'
+      end
+    end
+  end
 end
