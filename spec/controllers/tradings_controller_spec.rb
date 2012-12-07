@@ -11,4 +11,17 @@ describe TradingsController do
 
     expect(assigns(:trading).year).to eq Date.current.year
   end
+
+  describe 'POST #create' do
+    it 'should create items from licitation process' do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio)
+
+      Trading.should_receive(:transaction).and_yield
+      Trading.any_instance.should_receive(:save).and_return(true)
+
+      TradingItemGenerator.should_receive(:generate!)
+
+      post :create, :trading => { :licitation_process_id => licitation_process.id }
+    end
+  end
 end

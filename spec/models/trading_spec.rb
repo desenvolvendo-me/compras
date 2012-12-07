@@ -21,6 +21,14 @@ describe Trading do
   it { should validate_presence_of :licitation_process }
   it { should validate_presence_of :year }
 
+  describe 'delegates' do
+    it { should delegate(:auctioneer).to(:licitation_commission).allowing_nil(true) }
+    it { should delegate(:support_team).to(:licitation_commission).allowing_nil(true) }
+    it { should delegate(:licitation_commission_members).to(:licitation_commission).allowing_nil(true) }
+    it { should delegate(:administrative_process_summarized_object).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:items).to(:licitation_process).allowing_nil(true).prefix(true) }
+  end
+
   describe "#to_s" do
     it "returns the code and year of the trading formatted as 1/2012" do
       expect(subject.to_s).to eq "1/2012"

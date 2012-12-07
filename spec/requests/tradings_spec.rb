@@ -50,6 +50,14 @@ feature "Tradings" do
       expect(page).to have_content "Pregoeiro"
       expect(page).to have_content "Equipe de Apoio"
     end
+
+    click_link 'Itens/Ofertas'
+
+    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
+
+    within_records do
+      expect(page).to have_link '01.01.00001 - Antivirus'
+    end
   end
 
   scenario "filtering out non-published licitation process with modalities other than 'Trading'" do

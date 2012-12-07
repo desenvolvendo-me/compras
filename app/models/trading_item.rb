@@ -1,7 +1,9 @@
 class TradingItem < Compras::Model
   attr_accessible :detailed_description, :minimum_reduction_percent,
-                  :minimum_reduction_value, :order,
+                  :minimum_reduction_value, :order, :trading_id,
                   :administrative_process_budget_allocation_item_id
+
+  auto_increment :order, :by => :trading_id
 
   belongs_to :trading
   belongs_to :administrative_process_budget_allocation_item
@@ -10,12 +12,13 @@ class TradingItem < Compras::Model
   has_many :bidders, :through => :trading, :order => :id
 
   validates :minimum_reduction_percent, :numericality => { :equal_to  => 0.0 },
-            :if => :minimum_reduction_value?
+            :if => :minimum_reduction_value?, :on => :update
   validates :minimum_reduction_value, :numericality => { :equal_to  => 0.0 },
-            :if => :minimum_reduction_percent?
-  validates :minimum_reduction_percent, :numericality => { :less_than_or_equal_to => 100 }
+            :if => :minimum_reduction_percent?, :on => :update
+  validates :minimum_reduction_percent, :numericality => { :less_than_or_equal_to => 100 },
+            :on => :update
 
-  validate :require_at_least_one_minimum_reduction
+  validate :require_at_least_one_minimum_reduction, :on => :update
 
   delegate :material, :material_id, :reference_unit,
            :quantity, :unit_price, :to_s,

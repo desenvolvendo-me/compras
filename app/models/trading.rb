@@ -28,6 +28,8 @@ class Trading < Compras::Model
            :to => :licitation_commission, :allow_nil => true
   delegate :administrative_process_summarized_object, :to => :licitation_process,
            :allow_nil => true
+  delegate :items, :to => :licitation_process, :allow_nil => true,
+           :prefix => true
 
   before_create :set_percentage_limit_to_participate_in_bids
 
