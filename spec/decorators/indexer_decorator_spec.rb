@@ -11,4 +11,15 @@ describe IndexerDecorator do
       expect(subject.summary).to eq 'Real'
     end
   end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have name and currency' do
+      expect(described_class.header_attributes).to include :name
+      expect(described_class.header_attributes).to include :currency
+    end
+  end
 end

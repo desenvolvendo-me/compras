@@ -68,4 +68,20 @@ feature "Indexers" do
     expect(page).to_not have_content '01/05/2011'
     expect(page).to_not have_content '0,990000'
   end
+
+  scenario 'index with columns at the index' do
+    Indexer.make!(:selic)
+
+    navigate 'Comum > Cadastrais > Indexadores'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Moeda'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'SELIC'
+        expect(page).to have_content 'Real'
+      end
+    end
+  end
 end
