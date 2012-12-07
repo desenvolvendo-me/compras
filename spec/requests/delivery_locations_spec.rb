@@ -107,4 +107,22 @@ feature "DeliveryLocations" do
 
     expect(page).to_not have_content 'Secretaria da Educação'
   end
+
+  scenario 'index with columns at the index' do
+    DeliveryLocation.make!(:education)
+
+    navigate 'Comum > Locais de Entrega'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Logradouro'
+      expect(page).to have_content 'Número'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Secretaria da Educação'
+        expect(page).to have_content 'Avenida Amazonas'
+        expect(page).to have_content '3524'
+      end
+    end
+  end
 end

@@ -15,6 +15,8 @@ class DeliveryLocation < Compras::Model
 
   accepts_nested_attributes_for :address
 
+  delegate :street, :number, :to => :address
+
   orderize :description
   filterize
 
