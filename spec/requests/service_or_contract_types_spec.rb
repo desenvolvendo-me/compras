@@ -61,4 +61,18 @@ feature "ServiceOrContractType" do
     expect(page).to_not have_content 'Contratação de estagiários'
     expect(page).to_not have_content 'Estagiário'
   end
+
+  scenario 'index with columns at the index' do
+    ServiceOrContractType.make!(:trainees)
+
+    navigate 'Comum > Tipos de Serviço ou Contrato'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Contratação de estagiários'
+      end
+    end
+  end
 end
