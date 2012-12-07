@@ -15,4 +15,15 @@ describe SignatureDecorator do
       expect(subject.summary).to eq 'Gerente'
     end
   end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have person and position' do
+      expect(described_class.header_attributes).to include :person
+      expect(described_class.header_attributes).to include :position
+    end
+  end
 end

@@ -63,4 +63,20 @@ feature "Signatures" do
     expect(page).to_not have_content 'Gabriel Sobrinho'
     expect(page).to_not have_content 'Gerente'
   end
+
+  scenario 'index with columns at the index' do
+    Signature.make!(:gerente_sobrinho)
+
+    navigate 'Geral > Parâmetros > Assinaturas > Assinaturas'
+
+    within_records do
+      expect(page).to have_content 'Pessoa'
+      expect(page).to have_content 'Cargo'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content 'Gerente'
+      end
+    end
+  end
 end
