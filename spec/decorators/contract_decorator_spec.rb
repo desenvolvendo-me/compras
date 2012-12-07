@@ -24,4 +24,17 @@ describe ContractDecorator do
       end
     end
   end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have contract_number, year, publication_date and creditor' do
+      expect(described_class.header_attributes).to include :contract_number
+      expect(described_class.header_attributes).to include :year
+      expect(described_class.header_attributes).to include :publication_date
+      expect(described_class.header_attributes).to include :creditor
+    end
+  end
 end
