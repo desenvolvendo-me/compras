@@ -60,6 +60,7 @@ feature "DocumentTypes" do
 
   scenario 'destroy an existent document_type' do
     DocumentType.make!(:fiscal)
+
     navigate 'Comum > Tipos de Documento'
 
     click_link 'Fiscal'
@@ -70,5 +71,21 @@ feature "DocumentTypes" do
 
     expect(page).to_not have_content '10'
     expect(page).to_not have_content 'Fiscal'
+  end
+
+  scenario 'index with columns at the index' do
+    DocumentType.make!(:fiscal)
+
+    navigate 'Comum > Tipos de Documento'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Validade em dias'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Fiscal'
+        expect(page).to have_content '10'
+      end
+    end
   end
 end
