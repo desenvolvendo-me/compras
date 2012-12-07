@@ -53,4 +53,18 @@ feature "CommunicationSources" do
 
     expect(page).to_not have_content 'Jornal de Circulação Municipal'
   end
+
+  scenario 'index with columns at the index' do
+    CommunicationSource.make!(:jornal_municipal)
+
+    navigate 'Comum > Legislação > Fontes de Comunicação'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Jornal de Circulação Municipal'
+      end
+    end
+  end
 end
