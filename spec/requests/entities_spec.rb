@@ -53,4 +53,18 @@ feature "Entities" do
 
     expect(page).to_not have_content 'Detran'
   end
+
+  scenario 'index with columns at the index' do
+    Entity.make!(:detran)
+
+    navigate 'Geral > Parâmetros > Entidades'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Detran'
+      end
+    end
+  end
 end
