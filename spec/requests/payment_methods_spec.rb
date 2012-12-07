@@ -53,4 +53,18 @@ feature "PaymentMethods" do
 
     expect(page).to_not have_content 'Dinheiro'
   end
+
+  scenario 'index with columns at the index' do
+    PaymentMethod.make!(:dinheiro)
+
+    navigate 'Comum > Formas de Pagamento'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+
+      within 'tbody tr' do
+        expect(page).to have_content ''
+      end
+    end
+  end
 end
