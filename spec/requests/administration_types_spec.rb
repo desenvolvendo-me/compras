@@ -71,6 +71,24 @@ feature "AdministrationTypes" do
     expect(page).to_not have_content 'Pública'
   end
 
+  scenario 'index with columns at the index' do
+    AdministrationType.make!(:publica)
+
+    navigate 'Comum > Tipos de Administração'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Administração'
+      expect(page).to have_content 'Tipo do órgão'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Pública'
+        expect(page).to have_content 'Direta'
+        expect(page).to have_content 'Fundação pública'
+      end
+    end
+  end
+
   def make_dependencies!
     LegalNature.make!(:administracao_publica)
   end
