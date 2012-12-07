@@ -150,4 +150,18 @@ feature "SignatureConfigurations" do
       expect(page).to_not have_link 'Autorizações de Fornecimento'
     end
   end
+
+  scenario 'index with columns at the index' do
+    SignatureConfiguration.make!(:crc)
+
+    navigate 'Geral > Parâmetros > Assinaturas > Configurações de Assinatura'
+
+    within_records do
+      expect(page).to have_content 'Relatório'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Certificados de Registro Cadastral'
+      end
+    end
+  end
 end
