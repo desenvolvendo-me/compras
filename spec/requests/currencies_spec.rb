@@ -57,4 +57,20 @@ feature "Currencies" do
 
     expect(page).to_not have_content 'Real'
   end
+
+  scenario 'index with columns at the index' do
+    Currency.make!(:real)
+
+    navigate 'Comum > Cadastrais > Moedas'
+
+    within_records do
+      expect(page).to have_content 'Nome'
+      expect(page).to have_content 'Sigla'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Real'
+        expect(page).to have_content 'R$'
+      end
+    end
+  end
 end
