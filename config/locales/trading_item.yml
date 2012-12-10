@@ -19,3 +19,4 @@ pt-BR:
     messages:
       selected: "Selecionado"
       not_selected: "Não selecionado"
+      must_have_reduction: "O item não possui redução mínima cadastrada."

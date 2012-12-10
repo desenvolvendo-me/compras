@@ -60,7 +60,17 @@ feature "Tradings" do
 
     within_records do
       expect(page).to have_link '01.01.00001 - Antivirus'
+      expect(page).to have_disabled_element "Fazer oferta", :reason => "O item não possui redução mínima cadastrada."
     end
+
+    click_link 'Antivirus'
+    fill_in 'Redução mínima admissível entre os lances em %', :with => '9,90'
+    click_button 'Salvar'
+
+    click_link "Fazer oferta"
+    expect(page).to have_content "Criar Proposta"
+
+    click_link "Voltar"
 
     click_link "Voltar"
 

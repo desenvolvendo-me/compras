@@ -142,4 +142,33 @@ describe TradingItemDecorator do
       expect(subject.situation_for_next_stage(bidder_one)).to eq 'Selecionado'
     end
   end
+
+  describe "#must_have_minimum_reduction" do
+    before do
+      component.stub(:minimum_reduction_value => 0.0,
+                     :minimum_reduction_percent => 0.0)
+    end
+
+    it "returns nil if item has a minimum reduction value set" do
+      component.stub(:minimum_reduction_value => 1.0)
+
+      expect(subject.must_have_minimum_reduction).to be_nil
+    end
+
+    it "returns nil if item has a minimum reduction percent set" do
+      component.stub(:minimum_reduction_percent => 1.0)
+
+      expect(subject.must_have_minimum_reduction).to be_nil
+    end
+
+    it "returns disabled_message if both minimum reductions are nil" do
+      I18n.backend.store_translations 'pt-BR', :trading_item => {
+        :messages => {
+          :must_have_reduction => 'não pode'
+        }
+      }
+
+      expect(subject.must_have_minimum_reduction).to eq "não pode"
+    end
+  end
 end

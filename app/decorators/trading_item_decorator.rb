@@ -39,6 +39,12 @@ class TradingItemDecorator
     end
   end
 
+  def must_have_minimum_reduction
+    return if minimum_reduction_percent > 0 || minimum_reduction_value > 0
+
+    t('trading_item.messages.must_have_reduction')
+  end
+
   private
 
   def bidder_selected?(bidder)
