@@ -308,6 +308,9 @@ feature "Tradings" do
     choose "Declinou"
     click_button "Salvar"
 
+    expect(page).to have_field "Menor preço", :with => "97,00"
+    expect(page).to have_field "Valor limite", :with => "96,99"
+
     fill_in "Valor da proposta", :with => "96,00"
     click_button "Salvar"
 

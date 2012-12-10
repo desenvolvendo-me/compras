@@ -90,7 +90,7 @@ class TradingItem < Compras::Model
   end
 
   def lowest_bid_with_proposal
-    trading_item_bids.with_proposal.unscoped.order { amount }.first
+    trading_item_bids.with_proposal.reorder { amount }.first
   end
 
   def require_at_least_one_minimum_reduction
