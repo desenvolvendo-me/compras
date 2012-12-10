@@ -32,7 +32,7 @@ feature "Materials" do
 
     select 'Serviço', :from => 'Característica'
     expect(page).to have_disabled_field 'Tipo de material'
-    #end of javascript test
+    # end of javascript test
 
     fill_modal 'Tipo de serviço', :with => 'Contratação de estagiários', :field => 'Descrição'
     fill_modal 'Natureza da despesa', :with => '3.0.10.01.12', :field => 'Natureza da despesa'
@@ -283,19 +283,39 @@ feature "Materials" do
     expect(page).to_not have_disabled_field 'Natureza da despesa'
   end
 
-  def make_dependencies!
-    MaterialsGroup.make!(:informatica)
-    MaterialsClass.make!(:software)
-    ReferenceUnit.make!(:unidade)
-    ServiceOrContractType.make!(:trainees)
-    ExpenseNature.make!(:vencimento_e_salarios)
-  end
-
   scenario "provides a filter by characteristic" do
     navigate 'Comum > Cadastrais > Materiais > Materiais'
 
     click_link "Filtrar Materiais"
 
     expect(page).to have_field "Característica"
+  end
+
+  scenario 'index with columns at the index' do
+    Material.make!(:antivirus)
+
+    navigate 'Comum > Cadastrais > Materiais > Materiais'
+
+    within_records do
+      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Código'
+      expect(page).to have_content 'Grupo'
+      expect(page).to have_content 'Classe'
+
+      within 'tbody tr' do
+        expect(page).to have_content 'Antivirus'
+        expect(page).to have_content '01.01.00001'
+        expect(page).to have_content 'Informática'
+        expect(page).to have_content 'Software'
+      end
+    end
+  end
+
+  def make_dependencies!
+    MaterialsGroup.make!(:informatica)
+    MaterialsClass.make!(:software)
+    ReferenceUnit.make!(:unidade)
+    ServiceOrContractType.make!(:trainees)
+    ExpenseNature.make!(:vencimento_e_salarios)
   end
 end
