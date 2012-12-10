@@ -34,5 +34,5 @@
 </table>
 
 <div class="buttons right">
-  <%= link_to 'Voltar', trading_items_path(:trading_id => @parent.id), :class => 'button' %>
+  <%= link_to 'Registrar lances', new_trading_item_bid_path(:trading_item_id => resource.id), :class => 'button' %>
 </div>

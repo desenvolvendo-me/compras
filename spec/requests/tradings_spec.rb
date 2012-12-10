@@ -291,9 +291,7 @@ feature "Tradings" do
     fill_in "Valor da proposta", :with => "103,00"
     click_button "Salvar"
 
-    click_link "Voltar"
-
-    click_link "Fazer oferta"
+    click_link "Registrar lances"
 
     # Bidding stage
     fill_in "Valor da proposta", :with => "99,00"

@@ -130,14 +130,9 @@ feature "TradingItemBids" do
       expect(page.find('.bidder-position')).to have_content 'Não selecionado'
     end
 
-    click_link 'Voltar'
-
-    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
-
-    click_link "Fazer oferta"
+    click_link 'Registrar lances'
 
     expect(page).to have_content "Registrar Lance"
-
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
     expect(page).to_not have_checked_field 'Desclassificado'
