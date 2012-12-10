@@ -433,4 +433,26 @@ feature "Tradings" do
 
     expect(page).not_to have_content "Wenderson Malheiros"
   end
+
+  scenario 'columns for index with att_header' do
+    Trading.make!(:pregao_presencial)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    within_records do
+      within 'thead tr:nth-child(1)' do
+        expect(page).to have_content 'Pregão Presencial'
+        expect(page).to have_content 'Data'
+        expect(page).to have_content 'Processo licitatório'
+        expect(page).to have_content 'Unidade licitante'
+        expect(page).to have_content 'Objeto resumido'
+      end
+
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content '1/2012'
+        expect(page).to have_content '18/12/2012'
+        expect(page).to have_content 'Descrição resumida do objeto'
+      end
+    end
+  end
 end
