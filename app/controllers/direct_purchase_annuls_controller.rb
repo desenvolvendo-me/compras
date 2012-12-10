@@ -11,12 +11,13 @@ class DirectPurchaseAnnulsController < ResourceAnnulsController
     validate_parent!(object)
 
     object.transaction do
-      object.save
+      if object.save
 
-      annul(object)
+        annul(object)
 
-      direct_purchase = object.annullable
-      PurchaseSolicitationLiberate.new(direct_purchase.purchase_solicitation).liberate!
+        direct_purchase = object.annullable
+        PurchaseSolicitationLiberate.new(direct_purchase.purchase_solicitation).liberate!
+      end
     end
   end
 
