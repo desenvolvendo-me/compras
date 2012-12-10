@@ -19,7 +19,7 @@ class TradingItemDecorator
     if stage_calculator.stage_of_negotiation? && (trading_item_bids.negotiation.empty? || bidders_selected_for_negociation.empty?)
       routes.classification_trading_item_path(component)
     else
-      routes.new_trading_item_bid_path(:trading_item_id => component.id)
+      routes.new_trading_item_bid_path(:trading_item_id => component.id, :anchor => :title)
     end
   end
 

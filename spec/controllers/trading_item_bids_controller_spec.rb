@@ -76,7 +76,7 @@ describe TradingItemBidsController do
              :status => TradingItemBidStatus::WITHOUT_PROPOSAL
            }
 
-      expect(response).to redirect_to(new_trading_item_bid_path(:trading_item_id => trading_item.id))
+      expect(response).to redirect_to(new_trading_item_bid_path(:trading_item_id => trading_item.id, :anchor => :title))
     end
 
     it 'should redirect to the item bid classification when have finished_bid_stage' do

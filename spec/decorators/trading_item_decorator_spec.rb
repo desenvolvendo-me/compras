@@ -82,10 +82,10 @@ describe TradingItemDecorator do
       component.stub(:id).and_return(1)
 
       routes.should_receive(:new_trading_item_bid_path).
-             with(:trading_item_id => 1).and_return('new_trading_item_bid_path')
+             with(:trading_item_id => 1, :anchor => :title).and_return('new_trading_item_bid_path#title')
 
 
-      expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path'
+      expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path#title'
     end
   end
 
