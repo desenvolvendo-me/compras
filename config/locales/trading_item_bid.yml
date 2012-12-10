@@ -15,3 +15,9 @@ pt-BR:
         trading_item_lowest_proposal_value: "Menor preço"
         minimum_limit: "Valor limite"
         stage: "Etapa"
+
+  trading_item_bid:
+    new:
+      create_proposal: 'Criar Proposta'
+      negotiation: 'Negociação'
+      register_bid: 'Registrar Lance'

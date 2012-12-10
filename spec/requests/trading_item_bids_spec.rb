@@ -17,7 +17,7 @@ feature "TradingItemBids" do
 
     click_link "Fazer oferta"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Criar Proposta"
 
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
@@ -50,7 +50,7 @@ feature "TradingItemBids" do
 
     click_link "Fazer oferta"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Criar Proposta"
 
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
@@ -136,7 +136,7 @@ feature "TradingItemBids" do
 
     click_link "Fazer oferta"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
@@ -279,7 +279,7 @@ feature "TradingItemBids" do
 
     click_link "Fazer oferta"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     expect(page).to have_checked_field 'Com proposta'
     expect(page).to_not have_checked_field 'Sem proposta'
@@ -317,7 +317,7 @@ feature "TradingItemBids" do
 
     click_link "Fazer oferta"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
@@ -333,7 +333,7 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Oferta criada com sucesso"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
@@ -350,7 +350,7 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Oferta criada com sucesso"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
@@ -367,7 +367,7 @@ feature "TradingItemBids" do
 
     expect(page).to have_content "Oferta criada com sucesso"
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     expect(page).to have_field "Número da rodada", :with => "2"
     expect(page).to have_disabled_field "Número da rodada"
@@ -392,7 +392,7 @@ feature "TradingItemBids" do
 
     click_link 'Fazer oferta'
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     click_button 'Salvar'
 
@@ -420,7 +420,7 @@ feature "TradingItemBids" do
 
     click_link 'Fazer oferta'
 
-    expect(page).to have_content "Criar Oferta"
+    expect(page).to have_content "Registrar Lance"
 
     choose 'Sem proposta'
 

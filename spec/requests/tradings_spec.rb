@@ -258,7 +258,7 @@ feature "Tradings" do
     click_link "1/2012"
     click_link "Itens/Ofertas"
     click_link "Fazer oferta"
-    
+
     # Proposal stage
     fill_in "Valor da proposta", :with => "100,00"
     click_button "Salvar"
@@ -310,6 +310,7 @@ feature "Tradings" do
 
     click_link "Fazer oferta"
 
+    expect(page).to have_content 'Negociação'
     expect(page).to have_disabled_field "Etapa"
     expect(page).to have_field "Etapa", :with => "Negociação"
     expect(page).to have_field "Licitante", :with => "Nohup"
