@@ -12,10 +12,10 @@ describe ReferenceUnit do
     # FIXME: it not care about others attributes
     subject.name = 'Unidade'
 
-    subject.acronym = 'UN'
+    subject.acronym = 'UNIDADEUNI'
     expect(subject).to be_valid
 
-    subject.acronym = 'UNI'
+    subject.acronym = 'UNIDADEUNID'
     expect(subject).to be_invalid
 
     subject.acronym = 'U'
@@ -26,6 +26,6 @@ describe ReferenceUnit do
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :acronym }
-  it { should ensure_length_of(:acronym).is_at_most(2) }
+  it { should ensure_length_of(:acronym).is_at_most(10) }
 
 end
