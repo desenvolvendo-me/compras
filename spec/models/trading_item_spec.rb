@@ -51,8 +51,7 @@ describe TradingItem do
 
       trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
       trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:unscoped).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:order).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
       trading_item_bids.should_receive(:first).and_return(third_bid)
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
@@ -64,8 +63,7 @@ describe TradingItem do
       trading_item_bids = double(:trading_item_bids)
 
       trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:unscoped).and_return(trading_item_bids)
-      trading_item_bids.should_receive(:order).and_return([])
+      trading_item_bids.should_receive(:reorder).and_return([])
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
 
