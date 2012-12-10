@@ -1,6 +1,5 @@
 # encoding: utf-8
 ExpenseNature.blueprint(:sem_categoria) do
-  descriptor { Descriptor.make!(:detran_2012) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '3.0.10.01.10' }
   kind { ExpenseNatureKind::ANALYTICAL }
@@ -13,7 +12,6 @@ ExpenseNature.blueprint(:sem_categoria) do
 end
 
 ExpenseNature.blueprint(:vencimento_e_salario_2011) do
-  descriptor { Descriptor.make!(:secretaria_de_educacao_2011) }
   regulatory_act { RegulatoryAct.make!(:emenda) }
   expense_nature { '3.0.10.01.13' }
   kind { ExpenseNatureKind::BOTH }
@@ -27,7 +25,6 @@ ExpenseNature.blueprint(:vencimento_e_salario_2011) do
 end
 
 ExpenseNature.blueprint(:vencimento_e_salarios) do
-  descriptor { Descriptor.make!(:detran_2012) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '3.0.10.01.12' }
   kind { ExpenseNatureKind::ANALYTICAL }
@@ -41,7 +38,6 @@ ExpenseNature.blueprint(:vencimento_e_salarios) do
 end
 
 ExpenseNature.blueprint(:compra_de_material) do
-  descriptor { Descriptor.make!(:detran_2012) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '3.0.10.01.11' }
   kind { ExpenseNatureKind::ANALYTICAL }
@@ -55,7 +51,6 @@ ExpenseNature.blueprint(:compra_de_material) do
 end
 
 ExpenseNature.blueprint(:despesas_correntes) do
-  descriptor { Descriptor.make!(:detran_2012) }
   regulatory_act { RegulatoryAct.make!(:sopa) }
   expense_nature { '4.4.20.03.11' }
   kind { ExpenseNatureKind::ANALYTICAL }

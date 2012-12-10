@@ -14,7 +14,6 @@ describe ExpenseNature do
     expect(subject.to_s).to eq '4.4.20.03.11111111 - Descrição'
   end
 
-  it { should belong_to :descriptor }
   it { should belong_to :regulatory_act }
   it { should belong_to :expense_group }
   it { should belong_to :expense_modality }

@@ -1,11 +1,10 @@
 class ExpenseNature < Compras::Model
-  attr_modal :expense_nature, :description, :descriptor_id, :regulatory_act_id,
+  attr_modal :expense_nature, :description, :regulatory_act_id,
              :kind, :expense_category_id, :expense_group_id,
              :expense_modality_id, :expense_element_id
 
   has_enumeration_for :kind, :with => ExpenseNatureKind, :create_helpers => true
 
-  belongs_to :descriptor
   belongs_to :regulatory_act
   belongs_to :expense_category
   belongs_to :expense_group
@@ -18,7 +17,6 @@ class ExpenseNature < Compras::Model
     query = scoped
     query = query.where { expense_nature.eq(params[:expense_nature]) } if params[:expense_nature].present?
     query = query.where { description.eq(params[:description]) } if params[:description].present?
-    query = query.where { descriptor_id.eq(params[:descriptor_id]) } if params[:descriptor_id].present?
     query = query.where { regulatory_act_id.eq(params[:regulatory_act_id]) } if params[:regulatory_act_id].present?
     query = query.where { kind.eq(params[:kind]) } if params[:kind].present?
 
