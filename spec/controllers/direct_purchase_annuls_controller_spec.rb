@@ -4,6 +4,7 @@ require 'spec_helper'
 describe DirectPurchaseAnnulsController do
   before do
     sign_in User.make!(:sobrinho_as_admin_and_employee)
+    ActionMailer::Base.deliveries.clear
   end
 
   context 'POST #create' do
