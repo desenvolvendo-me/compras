@@ -5,6 +5,22 @@ class TradingsController < CrudController
     super
   end
 
+  def create
+    if params[:commit] == "Salvar e ir para Itens/Ofertas"
+      create! { trading_items_path(:trading_id => resource.id) }
+    else
+      super
+    end
+  end
+
+  def update
+    if params[:commit] == "Salvar e ir para Itens/Ofertas"
+      update! { trading_items_path(:trading_id => resource.id) }
+    else
+      super
+    end
+  end
+
   protected
 
   def create_resource(object)

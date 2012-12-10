@@ -13,7 +13,7 @@ feature "TradingItemBids" do
 
     click_link "1/2012"
 
-    click_link "Itens/Ofertas"
+    click_button "Salvar e ir para Itens/Ofertas"
 
     click_link "Fazer oferta"
 
@@ -46,7 +46,7 @@ feature "TradingItemBids" do
 
     click_link "1/2012"
 
-    click_link "Itens/Ofertas"
+    click_button "Salvar e ir para Itens/Ofertas"
 
     click_link "Fazer oferta"
 
@@ -275,7 +275,7 @@ feature "TradingItemBids" do
 
     click_link "1/2012"
 
-    click_link "Itens/Ofertas"
+    click_button "Salvar e ir para Itens/Ofertas"
 
     click_link "Fazer oferta"
 
@@ -313,7 +313,7 @@ feature "TradingItemBids" do
 
     click_link "1/2012"
 
-    click_link "Itens/Ofertas"
+    click_button "Salvar e ir para Itens/Ofertas"
 
     click_link "Fazer oferta"
 
@@ -388,7 +388,7 @@ feature "TradingItemBids" do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
 
@@ -416,7 +416,7 @@ feature "TradingItemBids" do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
 
@@ -439,7 +439,7 @@ feature "TradingItemBids" do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
 
@@ -463,7 +463,7 @@ feature "TradingItemBids" do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
 
@@ -485,7 +485,7 @@ feature "TradingItemBids" do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
 
@@ -551,7 +551,7 @@ feature "TradingItemBids" do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
 

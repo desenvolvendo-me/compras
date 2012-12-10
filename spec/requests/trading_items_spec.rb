@@ -13,7 +13,7 @@ feature TradingItem do
 
     click_link "1/2012"
 
-    click_link "Itens/Ofertas"
+    click_button "Salvar e ir para Itens/Ofertas"
 
     expect(page).to have_content "Itens do Pregão Presencial 1/2012"
     expect(page).to have_link "Antivirus"
@@ -30,7 +30,7 @@ feature TradingItem do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Antivirus'
 
@@ -44,7 +44,7 @@ feature TradingItem do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Antivirus'
 
@@ -61,7 +61,7 @@ feature TradingItem do
 
     click_link '1/2012'
 
-    click_link 'Itens/Ofertas'
+    click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Antivirus'
 

@@ -36,6 +36,34 @@ feature "Tradings" do
 
     click_link "1/2012"
 
+    click_link "Apagar"
+
+    click_link "Criar Pregão Presencial"
+
+    within_tab "Principal" do
+      fill_in "Ano", :with => "2012"
+      fill_modal "Processo licitatório", :with => "1", :field => "Processo"
+      fill_modal "Órgão/Entidade", :with => "Detran"
+      fill_modal "Unidade licitante", :with => "Secretaria de Educação"
+
+      expect(page).to have_disabled_field "Objeto resumido"
+      expect(page).to have_field "Objeto resumido", :with => "Descrição resumida do objeto"
+    end
+
+    within_tab "Pregoeiro e equipe" do
+      fill_modal "Comissão de licitação", :with => "Comissão para pregão presencial", :field => "Descrição"
+    end
+
+    click_button "Salvar e ir para Itens/Ofertas"
+
+    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
+
+    within_records do
+      expect(page).to have_link '01.01.00001 - Antivirus'
+    end
+
+    click_link "Voltar"
+
     within_tab "Principal" do
       expect(page).to have_field "Número", :with => "1"
       expect(page).to have_field "Ano", :with => "2012"
@@ -49,14 +77,6 @@ feature "Tradings" do
       expect(page).to have_field "Comissão de licitação", :with => "Comissão para pregão presencial - Tipo: Pregão - Data de Nomeação: 20/03/2012"
       expect(page).to have_content "Pregoeiro"
       expect(page).to have_content "Equipe de Apoio"
-    end
-
-    click_link 'Itens/Ofertas'
-
-    expect(page).to have_content 'Itens do Pregão Presencial 1/2012'
-
-    within_records do
-      expect(page).to have_link '01.01.00001 - Antivirus'
     end
   end
 
@@ -252,11 +272,10 @@ feature "Tradings" do
     trading = Trading.make!(:pregao_presencial)
     trading.licitation_process.bidders << Bidder.make!(:me_pregao)
 
-
     navigate "Pregão Presencial > Pregões Presenciais"
 
     click_link "1/2012"
-    click_link "Itens/Ofertas"
+    click_button "Salvar e ir para Itens/Ofertas"
     click_link "Fazer oferta"
 
     # Proposal stage
