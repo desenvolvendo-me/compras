@@ -3,9 +3,9 @@
 <table class="records">
   <thead>
     <tr>
-      <th>Licitante</th>
-      <th>Valor</th>
-      <th>%</th>
+      <th class="g-1-2">Licitante</th>
+      <th class="g-1-6">Valor</th>
+      <th class="g-1-10">%</th>
       <th>Classificação</th>
     </tr>
   </thead>
@@ -13,15 +13,15 @@
   <tbody>
     <% resource.bidders_by_lowest_proposal.each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
-        <td class="bidder-name">
+        <td class="bidder-name g-1-2">
           <%= bidder %>
         </td>
 
-        <td class="bidder-amount">
+        <td class="bidder-amount g-1-6">
           <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
         </td>
 
-        <td class="bidder-percent">
+        <td class="bidder-percent g-1-10">
           <%= bidder.decorator.trading_item_classification_percent(resource) %>
         </td>
 
@@ -38,9 +38,9 @@
 <table class="records" id="preference-right">
   <thead>
     <tr>
-      <th>Licitante</th>
-      <th>Valor</th>
-      <th>%</th>
+      <th class="g-1-2">Licitante</th>
+      <th class="g-1-6">Valor</th>
+      <th class="g-1-10">%</th>
       <th>Ordem de Seleção ME-EPP</th>
     </tr>
   </thead>
@@ -48,15 +48,15 @@
   <tbody>
     <% resource.bidders_for_negociation_by_lowest_proposal.each_with_index do |bidder, index| %>
       <tr id="<%= dom_id bidder %>" class="<%= bidder.decorator.benefited_by_law_of_proposals_class(resource) %>">
-        <td class="bidder-name">
+        <td class="bidder-name g-1-2">
           <%= bidder %>
         </td>
 
-        <td class="bidder-amount">
+        <td class="bidder-amount g-1-6">
           <%= bidder.decorator.lower_trading_item_bid_amount(resource) %>
         </td>
 
-        <td class="bidder-percent">
+        <td class="bidder-percent g-1-10">
           <%= bidder.decorator.trading_item_classification_percent(resource) %>
         </td>
 
