@@ -565,6 +565,37 @@ feature "TradingItemBids" do
     expect(page).to have_content 'Oferta criada com sucesso'
   end
 
+  scenario 'disqualification_reason is required only when status is disqualified' do
+    trading_item = TradingItem.make!(:item_pregao_presencial,
+      :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
+
+    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+
+    make_stage_of_proposals :trading => trading
+
+    navigate 'Pregão Presencial > Pregões Presenciais'
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to_not have_field 'Motivo da desclassificação *'
+
+    choose 'Declinou'
+
+    expect(page).to_not have_field 'Motivo da desclassificação *'
+
+    choose 'Desclassificado'
+
+    expect(page).to have_field 'Motivo da desclassificação'
+
+    choose 'Sem proposta'
+
+    expect(page).to_not have_field 'Motivo da desclassificação *'
+  end
+
   def make_stage_of_proposals(options = {})
     TradingConfiguration.make!(:pregao)
     trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}

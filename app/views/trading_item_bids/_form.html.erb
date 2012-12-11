@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<%= f.input :disqualification_reason, :required => true %>
+<%= f.input :disqualification_reason %>
 
 <script>
   $('input[name="trading_item_bid[status]"]').change(function(){
@@ -44,8 +44,10 @@
 
     if (currentStatus == '<%= TradingItemBidStatus::DISQUALIFIED %>') {
       $('#trading_item_bid_disqualification_reason').removeAttr('disabled');
+      $('#trading_item_bid_disqualification_reason').requiredField(true);
     } else {
       $('#trading_item_bid_disqualification_reason').attr('disabled', 'disabled');
+      $('#trading_item_bid_disqualification_reason').requiredField(false);
     }
   }
 
