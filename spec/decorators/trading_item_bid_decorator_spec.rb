@@ -24,8 +24,8 @@ describe TradingItemBidDecorator do
       trading_item = double(:trading_item)
       trading_item_bid_stage_calculator = double(:trading_item_bid_stage_calculator)
       component.should_receive(:trading_item).and_return(trading_item)
-      trading_item_bid_stage_calculator.should_receive(:new).and_return(trading_item)
-      trading_item.stub(:stage_of_proposals?).and_return(false)
+      trading_item_bid_stage_calculator.should_receive(:new).with(trading_item).and_return(trading_item_bid_stage_calculator)
+      trading_item_bid_stage_calculator.stub(:stage_of_proposals?).and_return(false)
 
       expect(subject.form_partial(trading_item_bid_stage_calculator)).to eq 'form'
     end
@@ -34,8 +34,8 @@ describe TradingItemBidDecorator do
       trading_item = double(:trading_item)
       trading_item_bid_stage_calculator = double(:trading_item_bid_stage_calculator)
       component.should_receive(:trading_item).and_return(trading_item)
-      trading_item_bid_stage_calculator.should_receive(:new).and_return(trading_item)
-      trading_item.stub(:stage_of_proposals?).and_return(true)
+      trading_item_bid_stage_calculator.should_receive(:new).with(trading_item).and_return(trading_item_bid_stage_calculator)
+      trading_item_bid_stage_calculator.stub(:stage_of_proposals?).and_return(true)
 
       expect(subject.form_partial(trading_item_bid_stage_calculator)).to eq 'form_of_proposal'
     end
