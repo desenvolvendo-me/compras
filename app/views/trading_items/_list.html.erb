@@ -8,7 +8,7 @@
         <td class="right">
           <%= link_to "Fazer oferta", resource.decorator.trading_item_bid_or_classification_path,
               :class => "button primary",
-              'data-disabled' => resource.decorator.must_have_minimum_reduction %>
+              'data-disabled' => resource.decorator.allows_offer_placing %>
         </td>
       </tr>
     <% end %>

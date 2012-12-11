@@ -59,6 +59,18 @@ class TradingItem < Compras::Model
     end
   end
 
+  def allow_closing?
+    bidder_with_lowest_proposal.benefited || bidders_selected_for_negociation.empty?
+  end
+
+  def close!(reference_date=Date.current)
+    update_attribute(:closing_date, reference_date)
+  end
+
+  def closed?
+    closing_date?
+  end
+
   private
 
   def bidders_selected_for_negociation

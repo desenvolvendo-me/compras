@@ -740,6 +740,7 @@ Compras::Application.routes.draw do
     member do
       get :classification
       get :proposal_report
+      get :close
     end
 
     collection do

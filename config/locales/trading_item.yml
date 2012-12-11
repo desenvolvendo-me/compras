@@ -20,3 +20,4 @@ pt-BR:
       selected: "Selecionado"
       not_selected: "Não selecionado"
       must_have_reduction: "O item não possui redução mínima cadastrada."
+      must_be_open: "O item já foi encerrado"

@@ -39,13 +39,23 @@ class TradingItemDecorator
     end
   end
 
+  def allows_offer_placing
+    must_have_minimum_reduction || must_be_open
+  end
+
+  private
+
   def must_have_minimum_reduction
     return if minimum_reduction_percent > 0 || minimum_reduction_value > 0
 
     t('trading_item.messages.must_have_reduction')
   end
 
-  private
+  def must_be_open
+    return unless closed?
+
+    t('trading_item.messages.must_be_open')
+  end
 
   def bidder_selected?(bidder)
     bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit.include? bidder

@@ -277,7 +277,7 @@ feature "Tradings" do
     expect(page).to have_content "Editar 1/2012"
   end
 
-  scenario "trading session with negociation stage" do
+  scenario "trading session with negociation and closing stage" do
     TradingConfiguration.make!(:pregao)
     trading = Trading.make!(:pregao_presencial)
     trading.licitation_process.bidders << Bidder.make!(:me_pregao)
@@ -379,5 +379,11 @@ feature "Tradings" do
         expect(page).to have_content "4º lugar"
       end
     end
+
+    expect(page).to have_link "Encerramento do item"
+
+    click_link "Encerramento do item"
+
+    expect(page).to have_disabled_element "Fazer oferta", :reason => "O item já foi encerrado"
   end
 end

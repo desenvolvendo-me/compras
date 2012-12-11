@@ -128,4 +128,46 @@ describe TradingItem do
       expect(subject.value_limit_to_participate_in_bids).to eq 110
     end
   end
+
+  describe "#allow_closing?" do
+    let(:winner) { double(:benefited => false) }
+
+    before do
+      subject.stub(:bidder_with_lowest_proposal => winner)
+    end
+
+    it "returns true if there are no bidders for negotiation" do
+      subject.stub(:bidders_selected_for_negociation => [])
+
+      expect(subject.allow_closing?).to be_true
+    end
+
+    it "returns true if the winning bidder is benefited" do
+      winner.stub(:benefited => true)
+
+      expect(subject.allow_closing?).to be_true
+    end
+  end
+
+  describe "#close!" do
+    it "fills the closing date" do
+      closing_date = Date.current
+
+      subject.close!(closing_date)
+
+      expect(subject.closing_date).to eq closing_date
+    end
+  end
+
+  describe "closed?" do
+    it "returns true if there is a closing date" do
+      subject.closing_date = Date.current
+
+      expect(subject).to be_closed
+    end
+
+    it "returns false otherwise" do
+      expect(subject).not_to be_closed
+    end
+  end
 end
