@@ -35,6 +35,10 @@
 <%= f.input :disqualification_reason %>
 
 <script>
+  $(document).ready(function(){
+    $("#trading_item_bid_amount").focus();
+  });
+
   $('input[name="trading_item_bid[status]"]').change(function(){
     disqualificationReasonEnabler();
   });

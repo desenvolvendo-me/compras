@@ -117,6 +117,20 @@ module Matchers
       "expected #{page.text.inspect} to not be on tab #{tab.inspect}"
     end
   end
+
+  matcher :have_focus_on do |field|
+    match do |page|
+      expect(page.evaluate_script("document.activeElement.id")).to eq page.find_field(field)[:id]
+    end
+
+    failure_message_for_should do |page|
+      "expected #{page.text.inspect} to have focus on #{field.inspect}"
+    end
+
+    failure_message_for_should_not do |page|
+      "expected #{page.text.inspect} to not have focus on #{field.inspect}"
+    end
+  end
 end
 
 RSpec.configure do |config|

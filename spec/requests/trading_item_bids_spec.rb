@@ -24,6 +24,7 @@ feature "TradingItemBids" do
     expect(page).to_not have_checked_field 'Desclassificado'
 
     expect(page).not_to have_field "Número da rodada"
+    expect(page).to have_focus_on 'Valor da proposta'
 
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
     expect(page).to have_disabled_field "Licitante"
@@ -280,6 +281,8 @@ feature "TradingItemBids" do
     expect(page).to_not have_checked_field 'Sem proposta'
     expect(page).to_not have_checked_field 'Desclassificado'
     expect(page).to_not have_checked_field 'Declinou'
+
+    expect(page).to have_focus_on 'Valor da proposta'
 
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
