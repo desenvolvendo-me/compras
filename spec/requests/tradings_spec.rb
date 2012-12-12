@@ -386,6 +386,7 @@ feature "Tradings" do
       end
     end
 
+    expect(page).not_to have_link "Fazer oferta"
     expect(page).to have_link "Encerramento do item"
 
     click_link "Encerramento do item"
