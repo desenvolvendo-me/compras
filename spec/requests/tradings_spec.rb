@@ -338,7 +338,7 @@ feature "Tradings" do
       expect(page).not_to have_content "Gabriel Sobrinho"
     end
 
-    click_link "Fazer oferta"
+    click_link "Iniciar Negociação"
 
     expect(page).to have_content 'Negociação'
     expect(page).to have_disabled_field "Etapa"
