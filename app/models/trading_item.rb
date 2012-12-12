@@ -71,6 +71,10 @@ class TradingItem < Compras::Model
     closing_date?
   end
 
+  def valid_negotiation_proposals
+    trading_item_bids.negotiation.with_proposal
+  end
+
   private
 
   def bidders_selected_for_negociation

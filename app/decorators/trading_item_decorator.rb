@@ -16,7 +16,7 @@ class TradingItemDecorator
   def trading_item_bid_or_classification_path(options={})
     stage_calculator = options.fetch(:stage_calculator) { TradingItemBidStageCalculator.new(component) }
 
-    if stage_calculator.stage_of_negotiation? && (trading_item_bids.negotiation.empty? || bidders_selected_for_negociation.empty?)
+    if stage_calculator.stage_of_negotiation? && (trading_item_bids.negotiation.empty? || valid_negotiation_proposals.any?)
       routes.classification_trading_item_path(component)
     else
       routes.new_trading_item_bid_path(:trading_item_id => component.id, :anchor => :title)

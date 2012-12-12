@@ -366,17 +366,17 @@ feature "Tradings" do
 
     within_records do
       within("tbody tr:nth-child(1)") do
-        expect(page).to have_content "Nobe"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "1º lugar"
       end
 
       within("tbody tr:nth-child(2)") do
-        expect(page).to have_content "Nohup"
+        expect(page).to have_content "Wenderson Malheiros"
         expect(page).to have_content "2º lugar"
       end
 
       within("tbody tr:nth-child(3)") do
-        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "Nobe"
         expect(page).to have_content "3º lugar"
       end
 

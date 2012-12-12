@@ -62,12 +62,12 @@ describe TradingItemDecorator do
         expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq '/foo'
       end
 
-      it "returns the path to new offer if negotiation is started and there are remaining bidders" do
+      it "returns the path to new offer if negotiation is started and there aren't any valid offers" do
         stage_calculator = double(:stage_calculator,
                                   :stage_of_negotiation? => true)
         item_bids = double(:negotiation => [double])
         component.stub(:trading_item_bids => item_bids,
-                       :bidders_selected_for_negociation => [double],
+                       :valid_negotiation_proposals => [],
                        :id => -1)
         routes.stub(:new_trading_item_bid_path => '/foo')
 
