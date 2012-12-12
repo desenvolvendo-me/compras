@@ -56,6 +56,15 @@ describe TradingItemBid do
         should_not allow_value(1).for(:round)
         should_not allow_value(-1).for(:round)
       end
+
+      it 'should not allow amount greater than minimum_limit_on_negotiation' do
+        subject.stub(:with_proposal?).and_return(true)
+        subject.stub(:trading_item_lowest_proposal_value).and_return(100.0)
+
+        should allow_value(99.99).for(:amount)
+        should_not allow_value(100.0).for(:amount)
+        should_not allow_value(101.00).for(:amount)
+      end
     end
 
     it "validates if amount is greater than zero when status is with_proposal" do
@@ -255,6 +264,7 @@ describe TradingItemBid do
 
   describe '#minimum_limit' do
     it 'should return the minimum limit calculating percentage when is minimum_reduction_percent' do
+      subject.stub(:negotiation?).and_return(false)
       subject.stub(:minimum_reduction_percent?).and_return(true)
       subject.stub(:minimum_reduction_percent).and_return(10.12345)
       subject.stub(:trading_item_lowest_proposal_value).and_return(100.00)
@@ -263,6 +273,7 @@ describe TradingItemBid do
     end
 
     it 'should return the minimum limit calculation minimum value when is minimum_reduction_value' do
+      subject.stub(:negotiation?).and_return(false)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:minimum_reduction_value).and_return(5.0)
       subject.stub(:trading_item_lowest_proposal_value).and_return(100.00)
@@ -271,11 +282,19 @@ describe TradingItemBid do
     end
 
     it 'should return 9 when is minimum_reduction_value and has no trading_item_lowest_proposal_value' do
+      subject.stub(:negotiation?).and_return(false)
       subject.stub(:minimum_reduction_value?).and_return(true)
       subject.stub(:minimum_reduction_value).and_return(5.0)
       subject.stub(:trading_item_lowest_proposal_value?).and_return(false)
 
       expect(subject.minimum_limit).to eq 0.0
+    end
+
+    it 'should returns 9.99 when in negotitation and the trading_item_lowest_proposal_value is 10' do
+      subject.stub(:negotiation?).and_return(true)
+      subject.stub(:trading_item_lowest_proposal_value).and_return(10.0)
+
+      expect(subject.minimum_limit).to eq 9.99
     end
   end
 end

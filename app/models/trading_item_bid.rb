@@ -30,6 +30,7 @@ class TradingItemBid < Compras::Model
   validate  :bidder_is_part_of_trading
   validate  :amount_limit_by_percentage, :if => :with_proposal?
   validate  :amount_limit_by_value, :if => :with_proposal?
+  validate  :amount_limit_on_negotiation, :if => :validate_amount_on_negotiation?
 
   scope :at_stage_of_proposals, lambda { where { stage.eq(TradingItemBidStage::PROPOSALS)} }
   scope :at_stage_of_round_of_bids, lambda { where { stage.eq(TradingItemBidStage::ROUND_OF_BIDS)} }
@@ -49,7 +50,9 @@ class TradingItemBid < Compras::Model
   end
 
   def minimum_limit
-    if minimum_reduction_percent?
+    if negotiation?
+      minimum_value_on_negotiation
+    elsif minimum_reduction_percent?
       minimum_percentage_value_rounded
     else
       minimum_value
@@ -57,6 +60,14 @@ class TradingItemBid < Compras::Model
   end
 
   private
+
+  def minimum_value_on_negotiation
+    trading_item_lowest_proposal_value - 0.01
+  end
+
+  def validate_amount_on_negotiation?
+    with_proposal? && negotiation?
+  end
 
   def bidder_is_part_of_trading
     return unless bidder.present?
@@ -83,6 +94,12 @@ class TradingItemBid < Compras::Model
 
     if amount > minimum_value
       errors.add(:amount, :less_than_or_equal_to, :count => numeric_parser.localize(minimum_value))
+    end
+  end
+
+  def amount_limit_on_negotiation(numeric_parser = ::I18n::Alchemy::NumericParser)
+    if amount > minimum_limit
+      errors.add(:amount, :less_than_or_equal_to, :count => numeric_parser.localize(minimum_limit))
     end
   end
 

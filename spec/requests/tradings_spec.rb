@@ -279,7 +279,9 @@ feature "Tradings" do
 
   scenario "trading session with negociation and closing stage" do
     TradingConfiguration.make!(:pregao)
-    trading = Trading.make!(:pregao_presencial)
+    trading_item = TradingItem.make!(:item_pregao_presencial,
+      :minimum_reduction_value => 2.0)
+    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
     trading.licitation_process.bidders << Bidder.make!(:me_pregao)
 
     navigate "Pregão Presencial > Pregões Presenciais"
@@ -304,25 +306,25 @@ feature "Tradings" do
     click_link "Registrar lances"
 
     # Bidding stage
-    fill_in "Valor da proposta", :with => "99,00"
-    click_button "Salvar"
-
     fill_in "Valor da proposta", :with => "98,00"
     click_button "Salvar"
 
-    fill_in "Valor da proposta", :with => "97,00"
+    fill_in "Valor da proposta", :with => "96,00"
+    click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "94,00"
     click_button "Salvar"
 
     choose "Declinou"
     click_button "Salvar"
 
-    expect(page).to have_field "Menor preço", :with => "97,00"
-    expect(page).to have_field "Valor limite", :with => "96,99"
+    expect(page).to have_field "Menor preço", :with => "94,00"
+    expect(page).to have_field "Valor limite", :with => "92,00"
 
-    fill_in "Valor da proposta", :with => "96,00"
+    fill_in "Valor da proposta", :with => "94,00"
     click_button "Salvar"
 
-    fill_in "Valor da proposta", :with => "95,00"
+    fill_in "Valor da proposta", :with => "92,00"
     click_button "Salvar"
 
     choose "Declinou"
@@ -345,15 +347,19 @@ feature "Tradings" do
     expect(page).to have_field "Etapa", :with => "Negociação"
     expect(page).to have_field "Licitante", :with => "Nohup"
     expect(page).to have_field "Número da rodada", :with => "0"
+    expect(page).to have_field "Menor preço", :with => "92,00"
+    expect(page).to have_field "Valor limite", :with => "91,99"
 
-    fill_in "Valor da proposta", :with => "94,00"
+    fill_in "Valor da proposta", :with => "91,50"
     click_button "Salvar"
 
     expect(page).to have_notice "Oferta criada com sucesso"
     expect(page).to have_field "Etapa", :with => "Negociação"
     expect(page).to have_field "Licitante", :with => "Nobe"
+    expect(page).to have_field "Menor preço", :with => "91,50"
+    expect(page).to have_field "Valor limite", :with => "91,49"
 
-    fill_in "Valor da proposta", :with => "93,50"
+    fill_in "Valor da proposta", :with => "91,25"
     click_button "Salvar"
 
     expect(page).to have_notice "Oferta criada com sucesso"
