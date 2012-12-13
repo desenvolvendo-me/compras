@@ -51,6 +51,7 @@ class BidderDecorator
   private
 
   def valid_benefited_percent?(trading_item, percent = 5.0)
+    return if component.trading_item_classification_percent(trading_item).nil?
     component.trading_item_classification_percent(trading_item) <= percent
   end
 end

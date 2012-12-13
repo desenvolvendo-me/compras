@@ -368,6 +368,7 @@ feature "Tradings" do
       within("tbody tr:nth-child(1)") do
         expect(page).to have_content "Nohup"
         expect(page).to have_content "1º lugar"
+        expect(page).to have_link "Inabilitar"
       end
 
       within("tbody tr:nth-child(2)") do
@@ -388,6 +389,38 @@ feature "Tradings" do
 
     expect(page).not_to have_link "Fazer oferta"
     expect(page).to have_link "Encerramento do item"
+
+    click_link "Inabilitar"
+
+    within_records do
+      within("tbody tr:nth-child(1)") do
+        expect(page).to have_content "Inabilitado"
+      end
+
+      within("tbody tr:nth-child(2)") do
+        expect(page).to have_link "Inabilitar"
+      end
+    end
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_content 'Negociação'
+    expect(page).to have_field "Etapa", :with => "Negociação"
+    expect(page).to have_field "Licitante", :with => "Nobe"
+    expect(page).to have_field "Número da rodada", :with => "0"
+    expect(page).to have_field "Menor preço", :with => "95,00"
+    expect(page).to have_field "Valor limite", :with => "94,99"
+
+    fill_in "Valor da proposta", :with => "94,00"
+    click_button "Salvar"
+
+    within_records do
+      within("tbody tr:nth-child(1)") do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "1º lugar"
+        expect(page).to have_link "Inabilitar"
+      end
+    end
 
     click_link "Encerramento do item"
 

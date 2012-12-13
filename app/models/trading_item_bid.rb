@@ -10,7 +10,7 @@ class TradingItemBid < Compras::Model
   belongs_to :trading_item
   belongs_to :bidder
 
-  has_one :trading, :through => :trading_item
+  has_one  :trading, :through => :trading_item
 
   delegate :minimum_reduction_percent, :minimum_reduction_percent?,
            :minimum_reduction_value, :minimum_reduction_value?,
@@ -39,6 +39,14 @@ class TradingItemBid < Compras::Model
 
   def self.with_proposal
     where { status.eq(TradingItemBidStatus::WITH_PROPOSAL) }.order { :id }
+  end
+
+  def self.with_valid_proposal
+    enabled.with_proposal
+  end
+
+  def self.enabled
+    joins { bidder }.where { bidder.disabled.eq(false) }
   end
 
   def self.with_no_proposal

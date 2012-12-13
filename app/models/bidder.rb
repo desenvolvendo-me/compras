@@ -19,6 +19,7 @@ class Bidder < Compras::Model
   has_many :licitation_process_classifications, :dependent => :destroy
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
   has_many :trading_item_bids, :dependent => :restrict
+  has_many :trading_item_bidders, :dependent => :restrict
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true
@@ -67,7 +68,9 @@ class Bidder < Compras::Model
   end
 
   def self.with_negociation_proposal_for(trading_item_id)
-    joins { trading_item_bids }.where {
+    enabled.
+    joins { trading_item_bids }.
+    where {
       trading_item_bids.stage.eq(TradingItemBidStage::NEGOTIATION) &
       trading_item_bids.trading_item_id.eq(trading_item_id)
     }
@@ -122,6 +125,10 @@ class Bidder < Compras::Model
       trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
       trading_item_bids.amount.lteq(value)
     }
+  end
+
+  def self.enabled
+    where { disabled.eq(false) }
   end
 
   def self.at_bid_round(round)
@@ -238,6 +245,11 @@ class Bidder < Compras::Model
     else
       classification_percent(trading_item.lowest_proposal_amount, lower_trading_item_bid_amount(trading_item))
     end
+  end
+
+  def disable!(reference_date = Date.current)
+    update_attribute :disabled, true
+    update_attribute :disabled_at, reference_date
   end
 
   protected

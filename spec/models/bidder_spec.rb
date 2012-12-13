@@ -12,6 +12,7 @@ require 'app/models/trading_item_bid'
 describe Bidder do
   describe 'default values' do
     it { expect(subject.invited).to be false }
+    it { expect(subject.disabled).to be false }
     it { expect(subject.will_submit_new_proposal_when_draw).to be true }
   end
 
@@ -378,6 +379,22 @@ describe Bidder do
               at_least(1).times.with(trading_item).and_return(lower_trading_item_bid)
 
       expect(subject.trading_item_classification_percent(trading_item)).to eq 20.0
+    end
+  end
+
+  describe "#disable!" do
+    let(:reference_date) { Date.new(2012, 1, 1) }
+
+    before do
+      subject.disable!(reference_date)
+    end
+
+    it "changes the disabled attribute to true" do
+      expect(subject).to be_disabled
+    end
+
+    it "sets the disabled_at attribute with the current date" do
+      expect(subject.disabled_at).to eq reference_date
     end
   end
 end

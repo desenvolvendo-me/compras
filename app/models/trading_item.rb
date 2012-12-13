@@ -33,6 +33,12 @@ class TradingItem < Compras::Model
     lowest_bid_with_proposal.try(:amount) || BigDecimal(0)
   end
 
+  def enabled_bidders_by_lowest_proposal
+    bidders_with_proposals.enabled.sort do |a,b|
+      a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
+    end
+  end
+
   def bidders_by_lowest_proposal
     bidders_with_proposals.sort do |a,b|
       a.lower_trading_item_bid_amount(self) <=> b.lower_trading_item_bid_amount(self)
@@ -75,6 +81,10 @@ class TradingItem < Compras::Model
     trading_item_bids.negotiation.with_proposal
   end
 
+  def can_be_disabled?(bidder)
+    bidder_with_lowest_proposal == bidder
+  end
+
   private
 
   def bidders_selected_for_negociation
@@ -82,7 +92,7 @@ class TradingItem < Compras::Model
   end
 
   def bidders_eligible_for_negociation
-    bidders_with_proposals.eligible_for_negociation_stage(bid_limit_for_negociation_stage) - bidders.with_negociation_proposal_for(id)
+    bidders_with_proposals.enabled.eligible_for_negociation_stage(bid_limit_for_negociation_stage) - bidders.with_negociation_proposal_for(id)
   end
 
   def bid_limit_for_negociation_stage
@@ -102,11 +112,11 @@ class TradingItem < Compras::Model
   end
 
   def bidder_with_lowest_proposal
-    bidders_by_lowest_proposal.first
+    enabled_bidders_by_lowest_proposal.first
   end
 
   def lowest_bid_with_proposal
-    trading_item_bids.with_proposal.reorder { amount }.first
+    trading_item_bids.with_valid_proposal.reorder { amount }.first
   end
 
   def require_at_least_one_minimum_reduction

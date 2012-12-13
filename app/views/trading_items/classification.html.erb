@@ -7,6 +7,7 @@
       <th class="g-1-6">Valor</th>
       <th class="g-1-10">%</th>
       <th>Classificação</th>
+      <th>Situação</th>
     </tr>
   </thead>
 
@@ -27,6 +28,17 @@
 
         <td class="bidder-position">
           <%= numeric_position(index.succ) %>
+        </td>
+
+        <td>
+          <% if bidder.disabled? %>
+            Inabilitado
+          <% elsif resource.can_be_disabled?(bidder) %>
+            <%= link_to "Inabilitar", new_disabled_bidder_path(:bidder_id => bidder.id, :trading_item_id => resource.id),
+              :class => "button primary" %>
+          <% else %>
+            &nbsp;
+          <% end %>
         </td>
       </tr>
     <% end %>

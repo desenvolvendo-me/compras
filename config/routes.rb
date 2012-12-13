@@ -292,6 +292,8 @@ Compras::Application.routes.draw do
     end
   end
 
+  resources :disabled_bidders, :only => [:new]
+
   resources :districts do
     collection do
       get :modal

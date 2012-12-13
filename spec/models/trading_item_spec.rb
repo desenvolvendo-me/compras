@@ -50,7 +50,7 @@ describe TradingItem do
       third_bid = double(:third_bid, :amount => 30.0)
 
       trading_item_bids = double(:trading_item_bids, :with_proposal => [first_bid, second_bid, third_bid])
-      trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
       trading_item_bids.should_receive(:reorder).and_return(trading_item_bids)
       trading_item_bids.should_receive(:first).and_return(third_bid)
 
@@ -62,7 +62,7 @@ describe TradingItem do
     it 'should return zero when there is no proposal for the item' do
       trading_item_bids = double(:trading_item_bids)
 
-      trading_item_bids.should_receive(:with_proposal).and_return(trading_item_bids)
+      trading_item_bids.should_receive(:with_valid_proposal).and_return(trading_item_bids)
       trading_item_bids.should_receive(:reorder).and_return([])
 
       subject.should_receive(:trading_item_bids).and_return(trading_item_bids)
@@ -100,11 +100,9 @@ describe TradingItem do
   describe '#lowest_proposal_amount' do
     it 'should return the lowest bid proposal for the item' do
       bidder1 = double(:bidder1)
-      bidder2 = double(:bidder2)
-      bidder3 = double(:bidder3)
 
-      subject.should_receive(:bidders_by_lowest_proposal).
-              at_least(1).times.and_return([bidder1, bidder2, bidder3])
+      subject.should_receive(:bidder_with_lowest_proposal).
+              at_least(1).times.and_return(bidder1)
 
       bidder1.should_receive(:lower_trading_item_bid_amount).
               with(subject).and_return(10)
@@ -113,8 +111,8 @@ describe TradingItem do
     end
 
     it 'should return nil when there are no proposals' do
-      subject.should_receive(:bidders_by_lowest_proposal).
-              at_least(1).times.and_return([])
+      subject.should_receive(:bidder_with_lowest_proposal).
+              at_least(1).times.and_return(nil)
 
       expect(subject.lowest_proposal_amount).to be_nil
     end
