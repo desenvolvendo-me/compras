@@ -168,4 +168,23 @@ describe TradingItem do
       expect(subject).not_to be_closed
     end
   end
+
+  describe "#can_be_disabled?" do
+
+    let(:bidder) { double(:benefited => false) }
+
+    before do
+      subject.stub(:bidder_with_lowest_proposal => bidder)
+    end
+
+    it "returns true if bidder has lowest bid" do
+      expect(subject.can_be_disabled?(bidder)).to be_true
+    end
+
+    it "returns false if bidder is benefited" do
+      bidder.stub(:benefited => true)
+
+      expect(subject.can_be_disabled?(bidder)).to be_false
+    end
+  end
 end

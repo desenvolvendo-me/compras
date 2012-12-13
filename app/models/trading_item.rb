@@ -82,7 +82,7 @@ class TradingItem < Compras::Model
   end
 
   def can_be_disabled?(bidder)
-    bidder_with_lowest_proposal == bidder
+    (bidder_with_lowest_proposal == bidder) && !bidder.benefited
   end
 
   private
@@ -104,7 +104,7 @@ class TradingItem < Compras::Model
   end
 
   def lowest_proposal_amount_at_stage_of_round_of_bids
-    trading_item_bids.with_proposal.at_stage_of_round_of_bids.minimum(:amount)
+    trading_item_bids.with_valid_proposal.at_stage_of_round_of_bids.minimum(:amount)
   end
 
   def bidders_with_proposals

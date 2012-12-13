@@ -315,11 +315,11 @@ feature "Tradings" do
     fill_in "Valor da proposta", :with => "94,00"
     click_button "Salvar"
 
-    choose "Declinou"
+    fill_in "Valor da proposta", :with => "92,00"
     click_button "Salvar"
 
-    expect(page).to have_field "Menor preço", :with => "94,00"
-    expect(page).to have_field "Valor limite", :with => "92,00"
+    expect(page).to have_field "Menor preço", :with => "92,00"
+    expect(page).to have_field "Valor limite", :with => "90,00"
 
     choose "Declinou"
     click_button "Salvar"
@@ -329,6 +329,37 @@ feature "Tradings" do
 
     choose "Declinou"
     click_button "Salvar"
+
+    fill_in "Valor da proposta", :with => "50,00"
+    click_button "Salvar"
+
+    choose "Declinou"
+    click_button "Salvar"
+
+    within_records do
+      within("tbody tr:nth-child(1)") do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "1º lugar"
+        expect(page).to have_link "Inabilitar"
+      end
+
+      within("tbody tr:nth-child(2)") do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "2º lugar"
+      end
+
+      within("tbody tr:nth-child(3)") do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "3º lugar"
+      end
+
+      within("tbody tr:nth-child(4)") do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "4º lugar"
+      end
+    end
+
+    click_link "Inabilitar"
 
     within("#preference-right") do
       expect(page).to have_content "Nohup"
@@ -352,61 +383,30 @@ feature "Tradings" do
 
     within_records do
       within("tbody tr:nth-child(1)") do
-        expect(page).to have_content "Nobe"
+        expect(page).to have_content "Wenderson Malheiros"
         expect(page).to have_content "1º lugar"
-        expect(page).to have_link "Inabilitar"
+        expect(page).to have_content "Inabilitado"
       end
 
       within("tbody tr:nth-child(2)") do
-        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "Nobe"
         expect(page).to have_content "2º lugar"
+        expect(page).not_to have_link "Inabilitar"
       end
 
       within("tbody tr:nth-child(3)") do
-        expect(page).to have_content "Nohup"
+        expect(page).to have_content "Gabriel Sobrinho"
         expect(page).to have_content "3º lugar"
       end
 
       within("tbody tr:nth-child(4)") do
-        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "4º lugar"
       end
     end
 
     expect(page).not_to have_link "Iniciar Negociação"
     expect(page).to have_link "Encerramento do item"
-
-    click_link "Inabilitar"
-
-    within_records do
-      within("tbody tr:nth-child(1)") do
-        expect(page).to have_content "Inabilitado"
-      end
-
-      within("tbody tr:nth-child(2)") do
-        expect(page).to have_link "Inabilitar"
-      end
-    end
-
-    click_link "Iniciar Negociação"
-
-    expect(page).to have_content 'Negociação'
-    expect(page).to have_field "Etapa", :with => "Negociação"
-    expect(page).to have_field "Licitante", :with => "Nohup"
-    expect(page).to have_field "Número da rodada", :with => "0"
-    expect(page).to have_field "Menor preço", :with => "92,00"
-    expect(page).to have_field "Valor limite", :with => "91,99"
-
-    fill_in "Valor da proposta", :with => "91,25"
-    click_button "Salvar"
-
-    within_records do
-      within("tbody tr:nth-child(1)") do
-        expect(page).to have_content "Nohup"
-        expect(page).to have_content "1º lugar"
-        expect(page).to have_link "Inabilitar"
-      end
-    end
 
     click_link "Encerramento do item"
 
