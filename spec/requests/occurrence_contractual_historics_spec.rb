@@ -15,9 +15,9 @@ feature "OccurrenceContractualHistorics" do
       page.find('a').click
     end
 
-    click_link 'Históricos de Ocorrências Contratuais'
+    click_link 'Ocorrências Contratuais'
 
-    click_link 'Criar Histórico de Ocorrências Contratuais'
+    click_link 'Criar Ocorrências Contratuais'
 
     fill_in 'Data da ocorrência', :with => '01/07/2012'
     select 'Outros', :from => 'Tipo de histórico'
@@ -26,7 +26,7 @@ feature "OccurrenceContractualHistorics" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Histórico de Ocorrências Contratuais criado com sucesso.'
+    expect(page).to have_notice 'Ocorrências Contratuais criado com sucesso.'
 
     click_link '1'
 
@@ -46,7 +46,7 @@ feature "OccurrenceContractualHistorics" do
       page.find('a').click
     end
 
-    click_link 'Históricos de Ocorrências Contratuais'
+    click_link 'Ocorrências Contratuais'
 
     click_link '1'
 
@@ -55,7 +55,7 @@ feature "OccurrenceContractualHistorics" do
 
     click_button 'Salvar'
 
-    expect(page).to have_notice 'Histórico de Ocorrências Contratuais editado com sucesso.'
+    expect(page).to have_notice 'Ocorrências Contratuais editado com sucesso.'
 
     click_link '1'
 
@@ -72,12 +72,12 @@ feature "OccurrenceContractualHistorics" do
       page.find('a').click
     end
 
-    click_link 'Históricos de Ocorrências Contratuais'
+    click_link 'Ocorrências Contratuais'
 
     click_link '1'
 
     click_link 'Apagar'
 
-    expect(page).to have_notice 'Histórico de Ocorrências Contratuais apagado com sucesso.'
+    expect(page).to have_notice 'Ocorrências Contratuais apagado com sucesso.'
   end
 end

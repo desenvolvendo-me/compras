@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       occurrence_contractual_historic:
-        one: "Histórico de Ocorrências Contratuais"
-        other: "Históricos de Ocorrências Contratuais"
+        one: "Ocorrências Contratuais"
+        other: "Ocorrências Contratuais"
 
     attributes:
       occurrence_contractual_historic:
