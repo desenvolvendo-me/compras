@@ -197,7 +197,7 @@ describe Bidder do
         :round => 0,
         :trading_item_id => trading_item.id,
         :bidder_id => nohup.id,
-        :amount => 100.0,
+        :amount => 98.0,
         :stage => TradingItemBidStage::NEGOTIATION,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
     end
