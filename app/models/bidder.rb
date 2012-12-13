@@ -19,7 +19,6 @@ class Bidder < Compras::Model
   has_many :licitation_process_classifications, :dependent => :destroy
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
   has_many :trading_item_bids, :dependent => :restrict
-  has_many :trading_item_bidders, :dependent => :restrict
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
   delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true
