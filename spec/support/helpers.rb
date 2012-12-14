@@ -25,6 +25,12 @@ module Helpers
     page.execute_script %{ $('##{field[:id]}').modal({autoClear: true}) }
   end
 
+  def create_roles(controllers)
+    controllers.each do |controller|
+      Role.make!(:general_role, :profile => current_user.profile, :controller => controller)
+    end
+  end
+
   # Open a modal dialog and search the record
   #
   # ==== Examples

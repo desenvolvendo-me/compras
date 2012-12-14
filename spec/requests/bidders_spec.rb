@@ -2,7 +2,15 @@
 require 'spec_helper'
 
 feature "Bidders" do
+  let(:current_user) { User.make!(:sobrinho) }
+
   background do
+    create_roles ['licitation_processes',
+                  'administrative_processes',
+                  'people',
+                  'creditors',
+                  'licitation_process_lots',
+                  'administrative_process_budget_allocation_items']
     sign_in
   end
 
