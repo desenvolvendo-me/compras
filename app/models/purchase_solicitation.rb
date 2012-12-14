@@ -76,6 +76,10 @@ class PurchaseSolicitation < Compras::Model
     "#{code}/#{accounting_year} #{budget_structure} - RESP: #{responsible}"
   end
 
+  def code_and_year
+    "#{code}/#{accounting_year}"
+  end
+
   def can_be_grouped?
     liberated? || partially_fulfilled?
   end

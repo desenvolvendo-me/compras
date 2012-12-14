@@ -29,6 +29,7 @@ pt-BR:
         code: "Código"
         quantity_by_material: 'Quantidade'
         purchase_solicitation: 'Solicitação de compra'
+        code_and_year: "Código/Ano"
 
   purchase_solicitation:
     messages:
