@@ -17,7 +17,7 @@ class TradingItemBidders
   end
 
   def at_bid_round(round)
-    bidders.at_bid_round(round)
+    bidders.at_bid_round(round, trading_item.id)
   end
 
   def for_stage_of_round_of_bids(round_of_bids = TradingItemBidStage::ROUND_OF_BIDS)

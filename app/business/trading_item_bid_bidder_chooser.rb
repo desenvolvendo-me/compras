@@ -45,7 +45,7 @@ class TradingItemBidBidderChooser
     elsif current_round > 1
       trading_item_bidders.with_proposal_for_round(current_round.pred)
     else
-      trading_item.bidders
+      trading_item.bidders.enabled
     end
   end
 

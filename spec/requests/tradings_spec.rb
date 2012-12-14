@@ -281,7 +281,8 @@ feature "Tradings" do
     TradingConfiguration.make!(:pregao)
     trading_item = TradingItem.make!(:item_pregao_presencial,
       :minimum_reduction_value => 2.0)
-    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+    trading_item2 = TradingItem.make!(:segundo_item_pregao_presencial)
+    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item, trading_item2])
     trading.licitation_process.bidders << Bidder.make!(:me_pregao)
 
     navigate "Pregão Presencial > Pregões Presenciais"
@@ -410,6 +411,26 @@ feature "Tradings" do
 
     click_link "Encerramento do item"
 
-    expect(page).to have_disabled_element "Fazer oferta", :reason => "O item já foi encerrado"
+    within("tbody tr:nth-child(1)") do
+      expect(page).to have_disabled_element "Fazer oferta", :reason => "O item já foi encerrado"
+    end
+
+    within("tbody tr:nth-child(2)") do
+      click_link "Fazer oferta"
+    end
+
+    expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
+    fill_in "Valor da proposta", :with => "100,00"
+    click_button "Salvar"
+
+    expect(page).to have_field "Licitante", :with => "Nohup"
+    fill_in "Valor da proposta", :with => "99,00"
+    click_button "Salvar"
+
+    expect(page).to have_field "Licitante", :with => "Nobe"
+    fill_in "Valor da proposta", :with => "98,00"
+    click_button "Salvar"
+
+    expect(page).not_to have_content "Wenderson Malheiros"
   end
 end

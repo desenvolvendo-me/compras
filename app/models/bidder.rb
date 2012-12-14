@@ -130,9 +130,12 @@ class Bidder < Compras::Model
     where { disabled.eq(false) }
   end
 
-  def self.at_bid_round(round)
+  def self.at_bid_round(round, trading_item_id)
     joins { trading_item_bids }.
-    where { trading_item_bids.round.eq(round) }
+    where {
+      trading_item_bids.round.eq(round) &
+      trading_item_bids.trading_item_id.eq(trading_item_id)
+    }
   end
 
   def self.at_trading_item_stage(trading_item, stage)
