@@ -26,7 +26,7 @@ describe TradingItemBidBidderChooser do
       context 'when round is equal 0' do
         before do
           subject.stub(:current_round).and_return(0)
-          trading_item.stub(:bidders).and_return(bidders)
+          trading_item.stub_chain(:bidders, :enabled).and_return(bidders)
         end
 
         context 'in negotiation stage' do

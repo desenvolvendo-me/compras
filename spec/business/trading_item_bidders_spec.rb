@@ -6,7 +6,7 @@ describe TradingItemBidders do
     described_class.new(trading_item, bidders)
   end
 
-  let(:trading_item) { double(:trading_item) }
+  let(:trading_item) { double(:trading_item, :id => -1) }
   let(:bidders) { double(:bidders) }
 
   it '#with_proposal_for_proposal_stage_with_amount_lower_than_limit' do
@@ -33,7 +33,7 @@ describe TradingItemBidders do
 
   it '#at_bid_round' do
     round = double(round)
-    bidders.should_receive(:at_bid_round).with(round)
+    bidders.should_receive(:at_bid_round).with(round, trading_item.id)
 
     subject.at_bid_round(round)
   end

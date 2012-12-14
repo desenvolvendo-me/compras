@@ -3,7 +3,6 @@ Trading.blueprint(:pregao_presencial) do
   code { 1 }
   licitation_process { LicitationProcess.make!(:pregao_presencial) }
   trading_items {
-    [TradingItem.make!(:item_pregao_presencial),
-     TradingItem.make!(:segundo_item_pregao_presencial)]
+    [TradingItem.make!(:item_pregao_presencial)]
   }
 end
