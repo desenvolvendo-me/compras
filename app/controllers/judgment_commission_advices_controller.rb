@@ -24,4 +24,10 @@ class JudgmentCommissionAdvicesController < CrudController
       @parent = LicitationProcess.find(params[:licitation_process_id])
     end
   end
+
+  protected
+
+  def authorize_resource!
+    authorize! action_name, 'licitation_processes'
+  end
 end
