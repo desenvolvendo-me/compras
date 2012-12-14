@@ -122,7 +122,7 @@ describe Bidder do
         :stage => TradingItemBidStage::ROUND_OF_BIDS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
 
-      expect(described_class.at_bid_round(1)).to eq [sobrinho]
+      expect(described_class.at_bid_round(1, trading_item.id)).to eq [sobrinho]
     end
   end
 
