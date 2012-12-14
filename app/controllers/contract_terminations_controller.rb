@@ -24,6 +24,10 @@ class ContractTerminationsController < CrudController
 
   protected
 
+  def authorize_resource!
+    authorize! action_name, 'contracts'
+  end
+
   def create_resource(object)
     object.year = Date.current.year
 

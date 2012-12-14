@@ -58,8 +58,12 @@ module CrudHelper
     end
   end
 
-  def create?
-    can?(:create, controller_name) && respond_to?("new_#{controller_name.singularize}_path")
+  def create?(custom_controller_name = nil)
+    if custom_controller_name.nil?
+      can?(:create, controller_name) && respond_to?("new_#{controller_name.singularize}_path")
+    else
+      can?(:create, custom_controller_name) && respond_to?("new_#{custom_controller_name.singularize}_path")
+    end
   end
 
   def create_link(optional_params = {})

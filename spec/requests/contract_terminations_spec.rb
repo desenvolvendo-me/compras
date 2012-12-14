@@ -2,7 +2,10 @@
 require 'spec_helper'
 
 feature 'ContractTerminations' do
+  let(:current_user) { User.make!(:sobrinho) }
+
   background do
+    create_roles ['dissemination_sources', 'contracts', 'contract_termination_annuls']
     sign_in
   end
 

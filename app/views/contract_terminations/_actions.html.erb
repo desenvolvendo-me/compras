@@ -4,7 +4,7 @@
       <%= link_to "Voltar para o Contrato #{@parent}", edit_contract_path(@parent) %>
      </li>
 
-    <% if create? %>
+    <% if create? 'contracts' %>
       <li>
         <%= create_link(:contract_id => @parent.id) %>
       </li>
