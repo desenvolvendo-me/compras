@@ -1,0 +1,13 @@
+.error_base .alert {
+  background: url("/assets/alert.gif") no-repeat scroll left center #FAEDED;
+  border: 1px solid #F9B4B4;
+  padding-left: 81px;
+  -moz-box-sizing: border-box;
+  border-radius: 5px 5px 5px 5px;
+  color: #746F6F;
+  font-size: 138.5%;
+  margin-bottom: 1em;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 1em 1em 1em 70px;
+}

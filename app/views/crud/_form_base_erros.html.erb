@@ -1,0 +1,10 @@
+<div class="error_base">
+  <div class="alert">
+    <p>Foram encontrados os seguintes erros no formulário:</p>
+    <ul>
+      <% f.object.errors[:base].each do |erro| %>
+        <li class="simple_form error"><%= erro %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

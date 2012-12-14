@@ -151,7 +151,7 @@ describe LicitationProcess do
 
     subject.valid?
 
-    expect(subject.errors[:bidders]).to include "não podem ser incluídos antes da publicação do edital"
+    expect(subject.errors[:base]).to include "Licitantes não podem ser incluídos antes da publicação do edital"
   end
 
   it { should allow_value('2012').for(:year) }

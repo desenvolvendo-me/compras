@@ -299,7 +299,7 @@ pt-BR:
       should_not_be_exonerated: "não pode estar exonerada"
       should_be_part_of_trading: "deve fazer parte do pregão presencial"
       extension_white_list_error: "tipo de arquivo inválido"
-      inclusion_of_bidders_before_edital_publication: "não podem ser incluídos antes da publicação do edital"
+      inclusion_of_bidders_before_edital_publication: "Licitantes não podem ser incluídos antes da publicação do edital"
       must_have_published_edital: "deve ter edital publicado"
       should_be_service: "deve ter a característica de Serviço"
       should_be_prior_to_envelope_opening: "deve ser anterior à data de abertura dos envelopes"
