@@ -1411,7 +1411,7 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link purchase_solicitation.to_s
+      click_link purchase_solicitation.code_and_year
     end
 
     within_tab 'Principal' do
@@ -1484,13 +1484,13 @@ feature "DirectPurchases" do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    click_link '1/2012'
 
     expect(page).to have_select "Status de atendimento", :selected => 'Pendente'
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link '1/2013 1 - Secretaria de Educação - RESP: Wenderson Malheiros'
+    click_link '1/2013'
 
     expect(page).to have_select "Status de atendimento", :selected => 'Em processo de compra'
   end
@@ -2060,7 +2060,7 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Dotações orçamentarias' do
@@ -2092,7 +2092,7 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Dotações orçamentarias' do
@@ -2108,7 +2108,7 @@ feature "DirectPurchases" do
     click_link 'Voltar'
 
     within_records do
-      click_link '1/2013 1 - Secretaria de Educação - RESP: Wenderson Malheiros'
+      click_link '1/2013'
     end
 
     within_tab 'Dotações orçamentarias' do

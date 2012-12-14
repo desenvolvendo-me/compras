@@ -1067,7 +1067,7 @@ feature "AdministrativeProcesses" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Dotações orçamentarias' do
@@ -1099,7 +1099,7 @@ feature "AdministrativeProcesses" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Dotações orçamentarias' do
@@ -1109,7 +1109,7 @@ feature "AdministrativeProcesses" do
     click_link 'Voltar'
 
     within_records do
-      click_link '2/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '2/2012'
     end
 
     within_tab 'Dotações orçamentarias' do
@@ -1147,7 +1147,7 @@ feature "AdministrativeProcesses" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Principal' do
@@ -1179,7 +1179,7 @@ feature "AdministrativeProcesses" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Principal' do
@@ -1189,7 +1189,7 @@ feature "AdministrativeProcesses" do
     click_link 'Voltar'
 
     within_records do
-      click_link '2/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '2/2012'
     end
 
     within_tab 'Principal' do
@@ -1279,7 +1279,7 @@ feature "AdministrativeProcesses" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Principal' do
@@ -1381,7 +1381,7 @@ feature "AdministrativeProcesses" do
     navigate 'Processos de Compra > Solicitações de Compra'
 
     within_records do
-      click_link '1/2012 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+      click_link '1/2012'
     end
 
     within_tab 'Principal' do
