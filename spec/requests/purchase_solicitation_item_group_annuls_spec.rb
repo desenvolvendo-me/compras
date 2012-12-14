@@ -75,7 +75,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link '1/2013 1 - Secretaria de Educação - RESP: Gabriel Sobrinho'
+    click_link '1/2013'
 
     within_tab 'Dotações orçamentarias' do
       within '.purchase-solicitation-budget-allocation:first' do

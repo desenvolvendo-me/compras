@@ -24,7 +24,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "#{solicitation}"
+    click_link "#{solicitation.code_and_year}"
 
     click_link 'Anular'
 
@@ -45,7 +45,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "#{purchase_solicitation}"
+    click_link "#{purchase_solicitation.code_and_year}"
 
     expect(page).to have_disabled_element 'Anular',
                                           :reason => 'esta solicitação já está em uso e não pode ser anulada'
@@ -56,7 +56,7 @@ feature 'PurchaseSolicitationAnnul' do
 
     navigate 'Processos de Compra > Solicitações de Compra'
 
-    click_link "#{solicitation}"
+    click_link "#{solicitation.code_and_year}"
 
     click_link 'Anular'
 
