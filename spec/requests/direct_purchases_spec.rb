@@ -1959,7 +1959,7 @@ feature "DirectPurchases" do
     navigate 'Processos de Compra > Compra Direta'
 
     within_records do
-      expect(page).to have_content 'Compra Direta'
+      expect(page).to have_content 'Código/Ano'
       expect(page).to have_content 'Estrutura orçamentária'
       expect(page).to have_content 'Fornecedor'
       expect(page).to have_content 'Status'
