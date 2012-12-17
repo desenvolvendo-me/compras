@@ -1295,17 +1295,23 @@ feature "Creditors" do
   end
 
   scenario 'index with columns at the index' do
-    Creditor.make!(:special)
+    Creditor.make!(:nohup)
 
     navigate 'Comum > Pessoas > Credores'
 
     within_records do
       expect(page).to have_content 'Nome'
-      expect(page).to have_content 'Tipo de credor'
+      expect(page).to have_content 'CPF / CNPJ'
+      expect(page).to have_content 'Porte da empresa'
+      expect(page).to have_content 'Natureza jurídica'
+      expect(page).to have_content 'Optante pelo simples'
 
       within 'tbody tr' do
-        expect(page).to have_content 'Tal'
-        expect(page).to have_content 'Inscrição especial'
+        expect(page).to have_content 'Nohup'
+        expect(page).to have_content '00.000.000/9999-62'
+        expect(page).to have_content 'Microempresa'
+        expect(page).to have_content 'Administração Pública'
+        expect(page).to have_content 'Não'
       end
     end
   end

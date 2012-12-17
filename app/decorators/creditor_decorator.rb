@@ -4,7 +4,7 @@ class CreditorDecorator
   include Decore::Header
   include ActionView::Helpers::TranslationHelper
 
-  attr_header :name, :creditable_type, :to_s => false, :link => :name
+  attr_header :name, :identity_document, :company_size, :legal_nature, :choose_simple, :to_s => false, :link => :name
 
   def commercial_registration_date
     localize super if super

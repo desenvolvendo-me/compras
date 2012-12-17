@@ -52,7 +52,10 @@ describe CreditorDecorator do
 
     it 'should have name and creditable_type' do
       expect(described_class.header_attributes).to include :name
-      expect(described_class.header_attributes).to include :creditable_type
+      expect(described_class.header_attributes).to include :identity_document
+      expect(described_class.header_attributes).to include :company_size
+      expect(described_class.header_attributes).to include :legal_nature
+      expect(described_class.header_attributes).to include :choose_simple
     end
   end
 end

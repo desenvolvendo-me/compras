@@ -27,6 +27,7 @@ pt-BR:
         name: "Nome"
         cpf: "CPF"
         cnpj: "CNPJ"
+        identity_document: "CPF / CNPJ"
 
   creditor:
     messages:
