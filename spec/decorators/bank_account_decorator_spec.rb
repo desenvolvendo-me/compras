@@ -9,7 +9,9 @@ describe BankAccountDecorator do
     end
 
     it 'should have description and status' do
-      expect(described_class.header_attributes).to include :description
+      expect(described_class.header_attributes).to include :bank
+      expect(described_class.header_attributes).to include :agency
+      expect(described_class.header_attributes).to include :account_number
       expect(described_class.header_attributes).to include :status
     end
   end

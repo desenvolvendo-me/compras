@@ -88,7 +88,7 @@ feature "BankAccounts" do
 
     expect(page).to have_notice 'Conta Bancária criada com sucesso.'
 
-    click_link 'IPTU'
+    click_link '1111113'
 
     within_tab 'Principal' do
       expect(page).to have_select 'Status', :selected => 'Ativo'
@@ -124,7 +124,7 @@ feature "BankAccounts" do
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
-    click_link 'Itaú Tributos'
+    click_link '1111'
 
     within_tab 'Principal' do
       fill_in 'Descrição', :with => 'IPTU'
@@ -146,7 +146,7 @@ feature "BankAccounts" do
 
     expect(page).to have_notice 'Conta Bancária editada com sucesso.'
 
-    click_link 'IPTU'
+    click_link '1111114'
 
     within_tab 'Principal' do
       expect(page).to have_select 'Status', :selected => 'Inativo'
@@ -255,7 +255,7 @@ feature "BankAccounts" do
 
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
-    click_link 'Itaú Tributos'
+    click_link '1111'
 
     click_link 'Apagar'
 
@@ -270,11 +270,11 @@ feature "BankAccounts" do
     navigate 'Comum > Cadastrais > Bancos > Contas Bancárias'
 
     within_records do
-      expect(page).to have_content 'Descrição'
+      expect(page).to have_content 'Número da conta corrente'
       expect(page).to have_content 'Status'
 
       within 'tbody tr' do
-        expect(page).to have_content 'Itaú Tributos'
+        expect(page).to have_content '1111'
         expect(page).to have_content 'Ativo'
       end
     end
