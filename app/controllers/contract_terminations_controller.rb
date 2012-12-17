@@ -24,8 +24,8 @@ class ContractTerminationsController < CrudController
 
   protected
 
-  def authorize_resource!
-    authorize! action_name, 'contracts'
+  def main_controller_name
+    'contracts'
   end
 
   def create_resource(object)

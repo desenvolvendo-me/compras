@@ -37,8 +37,8 @@ class BiddersController < CrudController
 
   protected
 
-  def authorize_resource!
-    authorize! action_name, 'licitation_processes'
+  def main_controller_name
+    'licitation_processes'
   end
 
   def create_resource(object)

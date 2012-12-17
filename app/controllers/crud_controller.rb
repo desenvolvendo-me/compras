@@ -11,6 +11,8 @@ class CrudController < ApplicationController
 
   custom_actions :collection => [:filter, :modal]
 
+  helper_method :main_controller_name
+
   def create
     create! { collection_path }
   end
@@ -70,5 +72,13 @@ class CrudController < ApplicationController
 
   def disable_pagination?
     params[:page] == 'all'
+  end
+
+  def main_controller_name
+    controller_name
+  end
+
+  def authorize_resource!
+    authorize! action_name, main_controller_name
   end
 end
