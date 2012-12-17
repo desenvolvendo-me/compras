@@ -1443,4 +1443,25 @@ feature "AdministrativeProcesses" do
       expect(page).to have_field 'Responsável', :with => 'Gabriel Sobrinho'
     end
   end
+
+  scenario 'index with columns at the index' do
+    AdministrativeProcess.make!(:compra_aguardando)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      expect(page).to have_content 'Código/Ano'
+      expect(page).to have_content 'Data do processo'
+      expect(page).to have_content 'Tipo de objeto'
+      expect(page).to have_content 'Objeto resumido do processo licitatório'
+      expect(page).to have_content 'Status do processo administrativo'
+
+      within 'tbody tr' do
+        expect(page).to have_content '1/2012'
+        expect(page).to have_content '07/03/2012'
+        expect(page).to have_content 'Compras e serviços'
+        expect(page).to have_content 'Aguardando'
+      end
+    end
+  end
 end

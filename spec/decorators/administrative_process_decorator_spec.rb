@@ -133,4 +133,17 @@ describe AdministrativeProcessDecorator do
       expect(subject.cant_build_licitation_process_message).to be_nil
     end
   end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have name and creditable_type' do
+      expect(described_class.header_attributes).to include :code_and_year
+      expect(described_class.header_attributes).to include :date
+      expect(described_class.header_attributes).to include :object_type
+      expect(described_class.header_attributes).to include :summarized_object
+    end
+  end
 end
