@@ -9,7 +9,7 @@ feature "TradingItemBids" do
   scenario "Placing an proposal to an item" do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link "1/2012"
 
@@ -43,7 +43,7 @@ feature "TradingItemBids" do
     TradingConfiguration.make!(:pregao)
     Trading.make!(:pregao_presencial)
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link "1/2012"
 
@@ -267,7 +267,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link "1/2012"
 
@@ -311,7 +311,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link "1/2012"
 
@@ -390,7 +390,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -422,7 +422,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -449,7 +449,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -477,7 +477,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -503,7 +503,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -573,7 +573,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -608,7 +608,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -643,7 +643,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -684,7 +684,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
@@ -711,7 +711,7 @@ feature "TradingItemBids" do
   scenario "back link at new should back to trading_item index" do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link "1/2012"
 
@@ -731,7 +731,7 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
-    navigate "Processos de Compra > Pregões Presenciais"
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
     click_link '1/2012'
 
