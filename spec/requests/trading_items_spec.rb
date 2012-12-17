@@ -9,7 +9,7 @@ feature TradingItem do
   scenario "listing trading items" do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processos de Compra > Pregão Presencial"
+    navigate "Processos de Compra > Pregões Presenciais"
 
     click_link "1/2012"
 
@@ -26,7 +26,7 @@ feature TradingItem do
   scenario 'should not have Apagar button' do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processos de Compra > Pregão Presencial"
+    navigate "Processos de Compra > Pregões Presenciais"
 
     click_link '1/2012'
 
@@ -40,7 +40,7 @@ feature TradingItem do
   scenario 'go back link on form_button' do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processos de Compra > Pregão Presencial"
+    navigate "Processos de Compra > Pregões Presenciais"
 
     click_link '1/2012'
 
@@ -57,7 +57,7 @@ feature TradingItem do
   scenario 'edit and existing item' do
     Trading.make!(:pregao_presencial)
 
-    navigate "Processos de Compra > Pregão Presencial"
+    navigate "Processos de Compra > Pregões Presenciais"
 
     click_link '1/2012'
 
