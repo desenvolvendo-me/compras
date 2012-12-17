@@ -10,6 +10,29 @@ describe BidderDocument do
 
   it { should validate_presence_of :document_type }
 
+  context "validations" do
+    context "with document_number filled" do
+      before { subject.stub(:document_number).and_return('1') }
+
+      it { should validate_presence_of :emission_date }
+      it { should validate_presence_of :validity }
+    end
+
+    context "with document_number filled" do
+      before { subject.stub(:emission_date).and_return(Date.current) }
+
+      it { should validate_presence_of :document_number }
+      it { should validate_presence_of :validity }
+    end
+
+    context "with document_number filled" do
+      before { subject.stub(:validity).and_return(Date.current) }
+
+      it { should validate_presence_of :document_number }
+      it { should validate_presence_of :emission_date }
+    end
+  end
+
   context 'validate emission_date based on Date.current' do
     context 'based on Date.current' do
       it { should allow_value(Date.current).for(:emission_date) }
@@ -18,7 +41,7 @@ describe BidderDocument do
 
       it 'should not allow date after today' do
         expect(subject).not_to allow_value(Date.tomorrow).for(:emission_date).
-                                                      with_message("deve ser igual ou anterior a data atual (#{I18n.l(Date.current)})")
+                                                          with_message("deve ser igual ou anterior a data atual (#{I18n.l(Date.current)})")
       end
     end
   end
@@ -42,7 +65,7 @@ describe BidderDocument do
 
     it 'should not allow validity date before emission_date' do
       expect(subject).not_to allow_value(Date.current).for(:validity).
-                                                   with_message("deve ser igual ou posterior a data de emissão (#{I18n.l emission_date})")
+                                                       with_message("deve ser igual ou posterior a data de emissão (#{I18n.l emission_date})")
     end
   end
 
