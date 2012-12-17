@@ -7,7 +7,7 @@ feature "TradingConfigurations" do
   end
 
   scenario 'create a new trading_configuration' do
-    navigate "Processo de Compra > Configuração do Pregão Presencial"
+    navigate "Processos de Compra > Configuração do Pregão Presencial"
 
     fill_in 'Porcentagem limite para participar das ofertas', :with => '10,00'
 
@@ -17,7 +17,7 @@ feature "TradingConfigurations" do
 
     expect(page).to have_notice 'Configuração do Registro de Preço criado com sucesso.'
 
-    navigate "Processo de Compra > Configuração do Pregão Presencial"
+    navigate "Processos de Compra > Configuração do Pregão Presencial"
 
     expect(page).to have_field 'Porcentagem limite para participar das ofertas', :with => '10,00'
   end
@@ -25,7 +25,7 @@ feature "TradingConfigurations" do
   scenario 'update an existent trading_configuration' do
     TradingConfiguration.make!(:pregao)
 
-    navigate "Processo de Compra > Configuração do Pregão Presencial"
+    navigate "Processos de Compra > Configuração do Pregão Presencial"
 
     expect(page).to have_field 'Porcentagem limite para participar das ofertas', :with => '10,00'
 
@@ -35,7 +35,7 @@ feature "TradingConfigurations" do
 
     expect(page).to have_notice 'Configuração do Registro de Preço editado com sucesso.'
 
-    navigate "Processo de Compra > Configuração do Pregão Presencial"
+    navigate "Processos de Compra > Configuração do Pregão Presencial"
 
     expect(page).to have_field 'Porcentagem limite para participar das ofertas', :with => '20,00'
   end
