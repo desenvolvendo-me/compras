@@ -379,10 +379,11 @@ feature "People" do
 
     within_records do
       expect(page).to have_content 'Nome'
-      expect(page).to have_content 'CPF'
+      expect(page).to have_content 'CPF / CNPJ'
 
       within 'tbody tr' do
         expect(page).to have_content 'Pedro dos Santos'
+        expect(page).to have_content '1'
         expect(page).to have_content '270.565.341-47'
       end
     end

@@ -30,9 +30,10 @@ describe PersonDecorator do
         expect(described_class.headers?).to be_true
       end
 
-      it 'should have name and cpf' do
+      it 'should have name, id and cpf or cnpj' do
         expect(described_class.header_attributes).to include :name
-        expect(described_class.header_attributes).to include :cpf
+        expect(described_class.header_attributes).to include :id
+        expect(described_class.header_attributes).to include :identity_document
       end
     end
 end

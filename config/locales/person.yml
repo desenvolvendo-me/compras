@@ -18,3 +18,4 @@ pt-BR:
         identity_document: "CPF / CNPJ"
         address: "Endereço"
         correspondence_address: "Endereço de correspondência"
+        id: "Código"
