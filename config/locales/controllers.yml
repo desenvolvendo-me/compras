@@ -109,7 +109,7 @@ pt-BR:
     revenue_rubrics: "Rúbricas de Reiceitas"
     revenue_sources: "Fontes de Receitas"
     revenue_subcategories: "Subcategorias de Receitas"
-    tradings: "Pregões Presenciais"
+    tradings: "Pregão Presencial"
 
   menu:
     <<: *controllers

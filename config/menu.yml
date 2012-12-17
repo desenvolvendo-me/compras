@@ -66,7 +66,9 @@ menu:
   - purchasing_processes:
     - purchase_solicitation_item_groups
     - price_collections
+    - trading_configuration
     - direct_purchases
+    - tradings
     - price_registrations
     - purchase_solicitations
 
@@ -84,7 +86,3 @@ menu:
     - licitation_process_impugnments
     - licitation_process_appeals
     - licitation_process_ratifications
-
-  - trading:
-    - tradings
-    - trading_configuration
