@@ -47,6 +47,13 @@ describe DirectPurchase do
     expect(subject.licitation_exemption).to eq 0
   end
 
+  it "return code/year to #code_and_year " do
+    subject.stub(:code).and_return(1)
+    subject.stub(:year).and_return(2012)
+
+    expect(subject.code_and_year).to eq "1/2012"
+  end
+
   it 'should propagate licitation_exemption method to licitation object passing modality' do
     licitation_object = double
     subject.stub(:licitation_object).and_return(licitation_object)

@@ -15,3 +15,11 @@ table.records th {
   color: #555452;
   text-align: left;
 }
+
+table.records td.annulled {
+  color: #FF0000;
+}
+
+table.records td.status {
+  font-weight: bold;
+}

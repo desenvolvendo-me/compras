@@ -1,0 +1,21 @@
+<table class="records">
+  <thead>
+    <tr>
+      <th><%= resource_class.human_attribute_name :code_and_year %></th>
+      <th><%= resource_class.human_attribute_name :budget_structure %></th>
+      <th><%= resource_class.human_attribute_name :creditor %></th>
+      <th><%= resource_class.human_attribute_name :status %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% collection.each do |resource| %>
+      <tr id="<%= dom_id resource %>">
+        <td><%= link_to(formatted_attribute(resource.decorator, :code_and_year), edit_resource_path(resource)) %></td>
+        <td><%= formatted_attribute(resource.decorator, :budget_structure) %></td>
+        <td><%= formatted_attribute(resource.decorator, :creditor) %></td>
+        <td class="status <%= "annulled" if resource.annulled? %>"><%= formatted_attribute(resource.decorator, :status) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
