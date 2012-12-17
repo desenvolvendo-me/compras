@@ -2,7 +2,11 @@
 require 'spec_helper'
 
 feature "LicitationProcessLots" do
+  let(:current_user) { User.make!(:sobrinho) }
+
   background do
+    create_roles ['licitation_processes', 'administrative_processes',
+                  'administrative_process_budget_allocation_items']
     sign_in
   end
 
