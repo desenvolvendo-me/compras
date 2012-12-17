@@ -7,7 +7,7 @@ class BidderDocument < Compras::Model
   delegate :description, :to => :document_type, :allow_nil => true
 
   validates :document_type, :presence => true
-  validates :emission_date, :validity, :presence => true, :if => :document_number
+  validates :emission_date, :validity, :presence => true, :unless => lambda { self.document_number.blank? }
   validates :document_number, :validity, :presence => true, :if => :emission_date
   validates :emission_date, :document_number, :presence => true, :if => :validity
   validates :emission_date,
