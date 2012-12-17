@@ -751,6 +751,7 @@ Compras::Application.routes.draw do
   end
 
   resources :trading_item_bids
+  resources :trading_item_bid_proposals, :only => [:new, :create, :edit, :update]
 
   resource :trading_configuration
 

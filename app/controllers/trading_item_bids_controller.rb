@@ -12,7 +12,7 @@ class TradingItemBidsController < CrudController
   end
 
   def create
-    create! { @parent.decorator.trading_item_bid_or_classification_or_report_classification_path }
+    create! { @parent.decorator.current_stage_path }
   end
 
   protected

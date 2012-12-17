@@ -61,7 +61,7 @@ describe TradingItemBidStageCalculator do
   describe '#stage_of_negotiation?' do
     it 'should be on stage of negotiation when only one bid left with proposal' do
       at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
-        :with_no_proposal => ['bidder1'])
+        :with_no_proposal => ['bidder1'], :any? => true)
 
       trading_item_bids = double(:trading_item_bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
@@ -92,7 +92,7 @@ describe TradingItemBidStageCalculator do
 
     it 'should be on stage of round of bids when there are more than 1 bidder available' do
       at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
-        :with_no_proposal => ['bidder1', 'bidder2'])
+        :with_no_proposal => ['bidder1', 'bidder2'], :any? => true)
 
       trading_item_bids = double(:trading_item_bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
@@ -113,7 +113,7 @@ describe TradingItemBidStageCalculator do
 
     it 'should be on stage of round of bids when there is only one bidder left at round of bids but it do not have a proposal' do
       at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
-        :with_no_proposal => ['bidder1'])
+        :with_no_proposal => ['bidder1'], :any? => true)
 
       trading_item_bids = double(:trading_item_bids, :empty? => false,
         :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
@@ -125,6 +125,25 @@ describe TradingItemBidStageCalculator do
               at_least(1).times.and_return(true)
       trading_item_bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit_size).
               at_least(1).times.and_return(2)
+
+
+      expect(subject).to_not be_stage_of_proposals
+      expect(subject).to_not be_stage_of_negotiation
+      expect(subject).to be_stage_of_round_of_bids
+    end
+
+    it 'should be on stage of round of bids when there is no one bidder at round of bids' do
+      at_stage_of_round_of_bids = double(:at_stage_of_round_of_bids,
+        :with_no_proposal => [], :any? => false)
+
+      trading_item_bids = double(:trading_item_bids, :empty? => false,
+        :at_stage_of_round_of_bids => at_stage_of_round_of_bids)
+
+      subject.stub(:lowest_proposal_amount).and_return(nil)
+      subject.stub(:trading_item_bids).and_return(trading_item_bids)
+
+      subject.should_receive(:all_bidders_have_proposal_for_proposals_stage?).
+              at_least(1).times.and_return(true)
 
 
       expect(subject).to_not be_stage_of_proposals

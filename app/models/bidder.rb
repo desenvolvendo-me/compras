@@ -254,14 +254,14 @@ class Bidder < Compras::Model
     update_attribute :disabled_at, reference_date
   end
 
+  def lower_trading_item_bid(trading_item)
+    trading_item_bids.for_trading_item(trading_item.id).with_proposal.last
+  end
+
   protected
 
   def classification_percent(first_place_amount, current_amount)
     ((current_amount - first_place_amount) / first_place_amount) * BigDecimal(100)
-  end
-
-  def lower_trading_item_bid(trading_item)
-    trading_item_bids.for_trading_item(trading_item.id).with_proposal.last
   end
 
   def validate_licitation_process_envelope_opening_date

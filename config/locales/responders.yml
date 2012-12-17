@@ -214,3 +214,6 @@ pt-BR:
 
     trading_item_bids:
       <<: *female
+
+    trading_item_bid_proposals:
+      <<: *female

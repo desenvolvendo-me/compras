@@ -49,64 +49,6 @@ describe TradingItemDecorator do
     end
   end
 
-  describe '#trading_item_bid_or_classification_path' do
-    context "negotiation is the current stage" do
-      it "it returns the link to classdification if negociation is not started" do
-        stage_calculator = double(:stage_calculator,
-                                  :stage_of_negotiation? => true)
-        item_bids = double(:negotiation => [])
-        component.stub(:trading_item_bids => item_bids,
-                       :bidders_selected_for_negociation => [])
-        routes.stub(:classification_trading_item_path => '/foo')
-
-        expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq '/foo'
-      end
-
-      it "returns the path to new offer if negotiation is started and there aren't any valid offers" do
-        stage_calculator = double(:stage_calculator,
-                                  :stage_of_negotiation? => true)
-        item_bids = double(:negotiation => [double])
-        component.stub(:trading_item_bids => item_bids,
-                       :valid_negotiation_proposals => [],
-                       :id => -1)
-        routes.stub(:new_trading_item_bid_path => '/foo')
-
-        expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq '/foo'
-      end
-    end
-
-    it 'should return new_trading_item_bid_path link when it is not on stage of negotiation' do
-      stage_calculator = double(:stage_calculator)
-
-      stage_calculator.should_receive(:stage_of_negotiation?).and_return(false)
-      component.stub(:id).and_return(1)
-
-      routes.should_receive(:new_trading_item_bid_path).
-             with(:trading_item_id => 1, :anchor => :title).and_return('new_trading_item_bid_path#title')
-
-
-      expect(subject.trading_item_bid_or_classification_path(:stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path#title'
-    end
-  end
-
-  describe '#trading_item_bid_or_classification_or_report_classification_path' do
-    it "should return proposal report when 'round of bids' is the current stage and dont have any proposal" do
-      stage_calculator = double(:stage_calculator)
-
-      stage_calculator.should_receive(:new).
-                       with(component).and_return(stage_calculator)
-
-      stage_calculator.should_receive(:show_proposal_report?).and_return(true)
-
-      component.stub(:id).and_return(1)
-
-      routes.should_receive(:proposal_report_trading_item_path).
-             with(component).and_return('proposal_report_path')
-
-      expect(subject.trading_item_bid_or_classification_or_report_classification_path(stage_calculator)).to eq 'proposal_report_path'
-    end
-  end
-
   describe '#situation_for_next_stage' do
     let(:bidder_one) { double(:bidder_one) }
     let(:bidder_two) { double(:bidder_two) }
@@ -185,6 +127,118 @@ describe TradingItemDecorator do
         }
 
         expect(subject.allows_offer_placing).to eq "deve estar aberto"
+      end
+    end
+  end
+
+  describe '#current_stage_path' do
+    let(:stage_calculator) { double(:stage_calculator) }
+
+    before do
+      component.stub(:id).and_return(1)
+    end
+
+    context 'when on stage of proposals' do
+      before do
+        stage_calculator.stub(:stage_of_proposals?).and_return(true)
+      end
+
+      it 'should return the path to proposals when at stage of proposals' do
+        routes.should_receive(:new_trading_item_bid_proposal_path).
+          with(:trading_item_id=>1, :anchor=>:title).and_return('new_proposal_path')
+
+        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_proposal_path'
+      end
+    end
+
+    context 'when on stage of round of bids' do
+      before do
+        stage_calculator.stub(:stage_of_proposals?).and_return(false)
+        stage_calculator.stub(:stage_of_round_of_bids?).and_return(true)
+      end
+
+      it 'should return the path to propsal_report when there is no bids yet' do
+        trading_item_bids = double(:trading_item_bids, :at_stage_of_round_of_bids => [])
+
+        component.stub(:trading_item_bids).and_return(trading_item_bids)
+
+        routes.should_receive(:proposal_report_trading_item_path).
+          with(component).
+          and_return('proposal_report_trading_item_path')
+
+        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'proposal_report_trading_item_path'
+      end
+
+      it 'should return the path to the new bid when there is at least one bid' do
+        trading_item_bids = double(:trading_item_bids, :at_stage_of_round_of_bids => ['bid'])
+
+        component.stub(:trading_item_bids).and_return(trading_item_bids)
+
+        routes.should_receive(:new_trading_item_bid_path).
+          with(:trading_item_id => 1, :anchor => :title).
+          and_return('new_trading_item_bid_path')
+
+        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path'
+      end
+    end
+
+    context 'when on stage of negotiation' do
+      before do
+        stage_calculator.stub(:stage_of_proposals?).and_return(false)
+        stage_calculator.stub(:stage_of_round_of_bids?).and_return(false)
+        stage_calculator.stub(:stage_of_negotiation?).and_return(true)
+      end
+
+      it 'should returns the classification if have no one negotiation or have no valid negotiation' do
+        trading_item_bids = double(:trading_item_bids, :negotiation => [])
+
+        component.stub(:trading_item_bids).and_return(trading_item_bids)
+        component.stub(:valid_negotiation_proposals).and_return([])
+
+        routes.should_receive(:classification_trading_item_path).
+          with(component).
+          and_return('classification_trading_item_path')
+
+        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'classification_trading_item_path'
+      end
+
+      it 'should returns the new negotiation if have one negotiation but have no valid negotiation' do
+        trading_item_bids = double(:trading_item_bids, :negotiation => ['negotiation'])
+
+        component.stub(:trading_item_bids).and_return(trading_item_bids)
+        component.stub(:valid_negotiation_proposals).and_return([])
+
+        routes.should_receive(:new_trading_item_bid_path).
+          with(:trading_item_id => 1, :anchor => :title).
+          and_return('new_negotiation_path')
+
+        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_negotiation_path'
+      end
+
+      it 'should returns the classification if have no one negotiation but have a valid negotiation' do
+        trading_item_bids = double(:trading_item_bids, :negotiation => [])
+
+        component.stub(:trading_item_bids).and_return(trading_item_bids)
+        component.stub(:valid_negotiation_proposals).and_return(['negotiation'])
+
+        routes.should_receive(:classification_trading_item_path).
+          with(component).
+          and_return('classification_trading_item_path')
+
+        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'classification_trading_item_path'
+      end
+
+      it 'should returns the classification if have one negotiation but have no valid negotiation' do
+        trading_item_bids = double(:trading_item_bids, :negotiation => ['negotiation'])
+
+        component.stub(:trading_item_bids).and_return(trading_item_bids)
+        component.stub(:valid_negotiation_proposals).and_return(['negotiation'])
+
+        routes.should_receive(:classification_trading_item_path).
+          with(component).
+          and_return('classification_trading_item_path')
+
+        expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'classification_trading_item_path'
       end
     end
   end

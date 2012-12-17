@@ -45,30 +45,9 @@ describe TradingItemBidDecorator do
     before do
       component.stub(:trading_item).and_return(double(:trading_item))
 
-       I18n.backend.store_translations 'pt-BR', :trading_item_bid => {
-          :new => {
-            :create_proposal => 'Criar Proposta',
-            :negotiation => 'Negociação',
-            :register_bid => 'Registrar Lance'
-        }
-      }
-    end
-
-    context 'when at stage of proposals' do
-      let :stage_calculator_instance do
-        double(:stage_calculator,
-               :stage_of_proposals? => true,
-               :stage_of_negotiation? => false,
-               :stage_of_round_of_bids? => false)
-      end
-
-      it 'should returns create_proposal' do
-        stage_calculator = double(:stage_calculator)
-
-        stage_calculator.should_receive(:new).and_return(stage_calculator_instance)
-
-        expect(subject.new_title(stage_calculator)).to eq 'Criar Proposta'
-      end
+       I18n.backend.store_translations 'pt-BR',
+         :trading_item_bid_negotiations  => { :new => 'Negociação' },
+         :trading_item_bid_round_of_bids => { :new => 'Registrar Lance'}
     end
 
     context 'when at stage of negotiation' do
@@ -82,7 +61,7 @@ describe TradingItemBidDecorator do
       it 'should returns create_proposal' do
         stage_calculator = double(:stage_calculator)
 
-        stage_calculator.should_receive(:new).twice.and_return(stage_calculator_instance)
+        stage_calculator.should_receive(:new).and_return(stage_calculator_instance)
 
         expect(subject.new_title(stage_calculator)).to eq 'Negociação'
       end
@@ -99,7 +78,7 @@ describe TradingItemBidDecorator do
       it 'should returns create_proposal' do
         stage_calculator = double(:stage_calculator)
 
-        stage_calculator.should_receive(:new).twice.and_return(stage_calculator_instance)
+        stage_calculator.should_receive(:new).and_return(stage_calculator_instance)
 
         expect(subject.new_title(stage_calculator)).to eq 'Registrar Lance'
       end

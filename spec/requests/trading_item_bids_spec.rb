@@ -275,6 +275,10 @@ feature "TradingItemBids" do
 
     click_link "Fazer oferta"
 
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
+
     expect(page).to have_content "Registrar Lance"
 
     expect(page).to have_checked_field 'Com proposta'
@@ -314,6 +318,10 @@ feature "TradingItemBids" do
     click_button "Salvar e ir para Itens/Ofertas"
 
     click_link "Fazer oferta"
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
 
     expect(page).to have_content "Registrar Lance"
 
@@ -390,6 +398,10 @@ feature "TradingItemBids" do
 
     click_link 'Fazer oferta'
 
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
+
     expect(page).to have_content "Registrar Lance"
 
     click_button 'Salvar'
@@ -410,12 +422,17 @@ feature "TradingItemBids" do
 
     make_stage_of_proposals :trading => trading
 
+    navigate "Processos de Compra > Pregões Presenciais"
 
     click_link '1/2012'
 
     click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
 
     expect(page).to have_content "Registrar Lance"
 
@@ -439,6 +456,10 @@ feature "TradingItemBids" do
     click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
 
     expect(page).to have_disabled_field 'Motivo da desclassificação'
 
@@ -464,6 +485,10 @@ feature "TradingItemBids" do
 
     click_link 'Fazer oferta'
 
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
+
     choose 'Desclassificado'
 
     fill_in 'Motivo da desclassificação', :with => 'Não compareceu ao pregão'
@@ -485,6 +510,10 @@ feature "TradingItemBids" do
     click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
 
     fill_in 'Valor da proposta', :with => '99,00'
 
@@ -552,6 +581,10 @@ feature "TradingItemBids" do
 
     click_link 'Fazer oferta'
 
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
+
     fill_in 'Valor da proposta', :with => '89,63'
 
     click_button 'Salvar'
@@ -582,6 +615,10 @@ feature "TradingItemBids" do
     click_button 'Salvar e ir para Itens/Ofertas'
 
     click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Registrar lances'
 
     expect(page).to_not have_field 'Motivo da desclassificação *'
 

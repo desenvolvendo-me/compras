@@ -21,12 +21,10 @@ class TradingItemBidDecorator
   end
 
   def new_title(stage_calculator = TradingItemBidStageCalculator)
-    if stage_calculator.new(trading_item).stage_of_proposals?
-      t('trading_item_bid.new.create_proposal')
-    elsif stage_calculator.new(trading_item).stage_of_negotiation?
-      t('trading_item_bid.new.negotiation')
+    if stage_calculator.new(trading_item).stage_of_negotiation?
+      t('trading_item_bid_negotiations.new')
     else
-      t('trading_item_bid.new.register_bid')
+      t('trading_item_bid_round_of_bids.new')
     end
   end
 end
