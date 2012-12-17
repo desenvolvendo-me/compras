@@ -7,6 +7,7 @@
       <th>Valor</th>
       <th>%</th>
       <th>Situação</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -27,6 +28,10 @@
 
         <td class="bidder-position">
           <%= resource.decorator.situation_for_next_stage(bidder) %>
+        </td>
+
+        <td class="right">
+          <%= link_to 'Corrigir proposta', edit_trading_item_bid_proposal(bidder), :class => 'button primary' %>
         </td>
       </tr>
     <% end %>

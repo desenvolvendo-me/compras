@@ -635,6 +635,97 @@ feature "TradingItemBids" do
     expect(page).to_not have_field 'Motivo da desclassificação *'
   end
 
+  scenario 'edit a proposal' do
+    trading_item = TradingItem.make!(:item_pregao_presencial,
+      :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
+
+    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+
+    make_stage_of_proposals :trading => trading
+
+    navigate "Processos de Compra > Pregões Presenciais"
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    within_records do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content '100,00'
+
+        click_link 'Corrigir proposta'
+      end
+    end
+
+    expect(page).to have_content 'Editar Proposta'
+
+    fill_in 'Valor da proposta', :with => '80,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_notice 'Oferta editada com sucesso.'
+
+    within 'tbody tr:nth-child(1)' do
+      expect(page).to have_content 'Gabriel Sobrinho'
+      expect(page).to have_content '80,00'
+    end
+  end
+
+  scenario 'when edit a proposal and click on back link should back to proposal report' do
+    trading_item = TradingItem.make!(:item_pregao_presencial,
+      :minimum_reduction_value => 0, :minimum_reduction_percent => 10.0)
+
+    trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item])
+
+    make_stage_of_proposals :trading => trading
+
+    navigate "Processos de Compra > Pregões Presenciais"
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    within_records do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content 'Gabriel Sobrinho'
+        expect(page).to have_content '100,00'
+
+        click_link 'Corrigir proposta'
+      end
+    end
+
+    click_link 'Voltar'
+
+    expect(page).to have_content 'Propostas'
+  end
+
+  scenario "back link at new should back to trading_item index" do
+    Trading.make!(:pregao_presencial)
+
+    navigate "Processos de Compra > Pregões Presenciais"
+
+    click_link "1/2012"
+
+    click_button "Salvar e ir para Itens/Ofertas"
+
+    click_link "Fazer oferta"
+
+    expect(page).to have_content "Criar Proposta"
+
+    click_link "Voltar"
+
+    expect(page).to have_content "Itens do Pregão Presencial 1/2012"
+  end
+
   def make_stage_of_proposals(options = {})
     TradingConfiguration.make!(:pregao)
     trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}

@@ -5,6 +5,7 @@ class TradingItemBidProposalsController < CrudController
   actions :new, :create, :edit, :update
 
   before_filter :deny_when_on_another_stage, :only => [:new, :create]
+  before_filter :deny_when_cannot_edit, :only => [:edit, :update]
 
   def new
     object = build_resource
@@ -19,6 +20,10 @@ class TradingItemBidProposalsController < CrudController
 
   def create
     create! { @parent.decorator.current_stage_path }
+  end
+
+  def update
+    update! { proposal_report_trading_item_path(@parent) }
   end
 
   protected
@@ -51,6 +56,14 @@ class TradingItemBidProposalsController < CrudController
     get_parent
 
     return if TradingItemBidStageCalculator.new(@parent).stage_of_proposals?
+
+    render 'public/404', :formats => [:html], :status => 404, :layout => false
+  end
+
+  def deny_when_cannot_edit
+    get_parent
+
+    return if TradingItemBidStageCalculator.new(@parent).show_proposal_report?
 
     render 'public/404', :formats => [:html], :status => 404, :layout => false
   end
