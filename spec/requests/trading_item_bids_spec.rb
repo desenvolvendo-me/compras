@@ -726,6 +726,26 @@ feature "TradingItemBids" do
     expect(page).to have_content "Itens do Pregão Presencial 1/2012"
   end
 
+  scenario 'proposal report should have a button to back to trading_items index' do
+    trading = Trading.make!(:pregao_presencial)
+
+    make_stage_of_proposals :trading => trading
+
+    navigate "Processos de Compra > Pregões Presenciais"
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    expect(page).to have_content 'Propostas'
+
+    click_link 'Voltar'
+
+    expect(page).to have_content "Itens do Pregão Presencial 1/2012"
+  end
+
   def make_stage_of_proposals(options = {})
     TradingConfiguration.make!(:pregao)
     trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}
