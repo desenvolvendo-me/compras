@@ -2,9 +2,15 @@
 class LicitationProcessDecorator
   include Decore
   include Decore::Proxy
+  include Decore::Header
   include Decore::Routes
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TranslationHelper
+
+  attr_header :code_and_year, :administrative_process_code_and_year,
+              :administrative_process_licitation_modality,
+              :administrative_process_object_type_humanize, :envelope_opening_date,
+              :to_s => false, :link => :code_and_year
 
   def envelope_delivery_time
     localize(super, :format => :hour) if super

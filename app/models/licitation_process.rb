@@ -54,6 +54,7 @@ class LicitationProcess < Compras::Model
            :allow_nil => true, :prefix => true
 
   delegate :administrative_process_budget_allocations, :items, :to => :administrative_process, :allow_nil => true
+  delegate :code_and_year, :to => :administrative_process, :allow_nil => true, :prefix => true
   delegate :is_available_for_licitation_process_classification?, :items, :to => :administrative_process, :allow_nil => true
 
   validates :process_date, :administrative_process, :capability, :presence => true
@@ -124,6 +125,10 @@ class LicitationProcess < Compras::Model
   end
 
   def to_s
+    code_and_year
+  end
+
+  def code_and_year
     "#{process}/#{year}"
   end
 

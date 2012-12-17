@@ -48,6 +48,14 @@ describe AdministrativeProcess do
 
   it { should have_db_index([:process, :year]).unique(true) }
 
+  describe "#code_and_year" do
+    before { subject.stub(:process => 1, :year => 2012) }
+
+    it "should return code/year" do
+      expect(subject.code_and_year).to eq "1/2012"
+    end
+  end
+
   it "should validate the modality depending on object_type" do
     object_type = AdministrativeProcessObjectType::CALL_NOTICE
     modality = double(:modality, :object_type => object_type)

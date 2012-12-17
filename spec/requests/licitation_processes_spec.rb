@@ -1343,4 +1343,26 @@ feature "LicitationProcesses" do
     expect(page).to have_disabled_element 'Salvar',
                     :reason => 'este processo licitatório não pode ser alterado'
   end
+
+  scenario 'index with columns at the index' do
+    LicitationProcess.make!(:processo_licitatorio)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
+    page.driver.render('lici.png')
+
+    within_records do
+      expect(page).to have_content 'Código/Ano'
+      expect(page).to have_content 'Processo administrativo'
+      expect(page).to have_content 'Modalidade'
+      expect(page).to have_content 'Tipo de objeto'
+      expect(page).to have_content 'Data da abertura dos envelopes'
+
+      within 'tbody tr' do
+        expect(page).to have_content '1/2012'
+        expect(page).to have_content 'Privada'
+        expect(page).to have_content 'Compras e serviços'
+        expect(page).to have_content I18n.l Date.tomorrow
+      end
+    end
+  end
 end

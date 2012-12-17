@@ -23,6 +23,7 @@ pt-BR:
         total_allocations_value: "Valor total"
         purchase_solicitation_item_group: "Agrupamento de solicitações de compra"
         purchase_solicitation: "Solicitação de compra"
+        code_and_year: "Código/Ano"
 
   administrative_process:
     messages:

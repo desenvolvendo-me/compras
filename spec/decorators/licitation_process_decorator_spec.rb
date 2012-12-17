@@ -176,4 +176,18 @@ describe LicitationProcessDecorator do
       expect(subject.must_have_published_edital).to eq "não pode"
     end
   end
+
+  context 'with attr_header' do
+    it 'should have headers' do
+      expect(described_class.headers?).to be_true
+    end
+
+    it 'should have code_and_year, administrative_process_code_and_year, administrative_process_licitation_modality, administrative_process_object_type_humanize and envelope_opening_date' do
+      expect(described_class.header_attributes).to include :code_and_year
+      expect(described_class.header_attributes).to include :administrative_process_code_and_year
+      expect(described_class.header_attributes).to include :administrative_process_licitation_modality
+      expect(described_class.header_attributes).to include :administrative_process_object_type_humanize
+      expect(described_class.header_attributes).to include :envelope_opening_date
+    end
+  end
 end
