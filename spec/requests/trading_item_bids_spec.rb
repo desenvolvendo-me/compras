@@ -2,7 +2,10 @@
 require 'spec_helper'
 
 feature "TradingItemBids" do
+  let(:current_user) { User.make!(:sobrinho) }
+
   background do
+    create_roles ['tradings']
     sign_in
   end
 

@@ -17,6 +17,10 @@ class TradingItemBidsController < CrudController
 
   protected
 
+  def main_controller_name
+    'tradings'
+  end
+
   def create_resource(object)
     object.stage  = TradingItemBidStage.current_stage(@parent)
     object.round  = TradingItemBidRoundCalculator.new(@parent).calculate(object.stage)
