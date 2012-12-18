@@ -29,6 +29,22 @@ describe Bidder do
 
   it { should validate_presence_of :creditor }
 
+  describe 'delegations' do
+    it { should delegate(:document_type_ids).to(:licitation_process).prefix(true) }
+    it { should delegate(:process_date).to(:licitation_process).prefix(true) }
+
+    it { should delegate(:administrative_process).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:envelope_opening?).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:items).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:allow_bidders?).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:consider_law_of_proposals).to(:licitation_process).allowing_nil(true) }
+    it { should delegate(:licitation_process_lots).to(:licitation_process).allowing_nil(true) }
+
+    it { should delegate(:administrative_process_budget_allocation_items).to(:licitation_process_lots) }
+    it { should delegate(:material).to(:administrative_process_budget_allocation_items) }
+    it { should delegate(:benefited).to(:creditor).allowing_nil(true) }
+  end
+
   context "licitation kind" do
     before do
       subject.stub(:administrative_process => administrative_process)
