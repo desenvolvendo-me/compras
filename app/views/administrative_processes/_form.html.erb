@@ -113,9 +113,9 @@
   });
 
   function fulfillResponsible(responsible) {
-    var old_responsible = $('#administrative_process_responsible_id').val();
+    var oldResponsible = $('#administrative_process_responsible_id').val();
 
-    if (responsible && old_responsible == "") {
+    if (responsible && oldResponsible == "") {
       $('#administrative_process_responsible').val(responsible.to_s);
       $('#administrative_process_responsible_id').val(responsible.id);
     }
