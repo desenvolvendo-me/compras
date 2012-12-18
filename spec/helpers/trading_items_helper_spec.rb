@@ -20,7 +20,7 @@ describe TradingItemsHelper do
     it 'should returns the path to edit the proposal of that bidder' do
       bidder.stub(:lower_trading_item_bid).and_return(trading_item_bid)
 
-      expect(helper.edit_trading_item_bid_proposal(bidder)).to eq '/trading_item_bid_proposals/15/edit?trading_item_id=1'
+      expect(helper.edit_trading_item_bid_proposal(bidder)).to eq '/trading_item_bid_proposals/15/edit?trading_item_id=1#title'
     end
   end
 end
