@@ -2,7 +2,10 @@
 require 'spec_helper'
 
 feature "RegistrationCadastralCertificates" do
+  let(:current_user) { User.make!(:sobrinho) }
+
   background do
+    create_roles ['creditors']
     sign_in
   end
 
