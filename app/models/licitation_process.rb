@@ -56,11 +56,11 @@ class LicitationProcess < Compras::Model
            :is_available_for_licitation_process_classification?,
            :to => :administrative_process, :allow_nil => true
 
-  validates :process_date, :administrative_process, :capability, :presence => true
-  validates :period, :period_unit, :expiration, :expiration_unit, :presence => true
-  validates :payment_method, :envelope_delivery_time, :year, :presence => true
-  validates :envelope_delivery_date, :envelope_opening_date, :envelope_opening_time, :pledge_type, :presence => true
-  validates :type_of_calculation, :presence => true
+  validates :process_date, :administrative_process, :capability, :period,
+            :period_unit, :expiration, :expiration_unit, :payment_method,
+            :envelope_delivery_time, :year, :envelope_delivery_date,
+            :envelope_opening_date, :envelope_opening_time, :pledge_type,
+            :type_of_calculation, :presence => true
   validate :total_of_administrative_process_budget_allocations_items_must_be_less_or_equal_to_value
   validate :administrative_process_must_not_belong_to_another_licitation_process
   validate :validate_type_of_calculation_by_judgment_form_kind
