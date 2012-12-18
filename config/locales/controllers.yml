@@ -111,6 +111,7 @@ pt-BR:
     revenue_subcategories: "Subcategorias de Receitas"
     tradings: "Pregão Presencial"
     trading_item_bid_proposals: "Propostas"
+    occurrence_contractual_historics: "Ocorrências Contratuais"
 
   menu:
     <<: *controllers
@@ -131,7 +132,6 @@ pt-BR:
     purchasing_and_licitations: "Compras e Licitações"
     reports: "Relatórios"
     budget_revenue: "Receita Orçamentária"
-    occurrence_contractual_historics: "Ocorrências Contratuais"
     licitation_process_ratifications: "Homologações e Adjudicações de Processos Licitatórios"
     purchase_solicitation_item_group_materials: "Materiais da Solicitação de Compra do Agrupamento de Item"
     special_entries: "Inscrições Especiais"
