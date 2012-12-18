@@ -2,9 +2,10 @@
 require 'spec_helper'
 
 feature "PurchaseSolicitationLiberations" do
-  let(:current_user) { User.make!(:sobrinho_as_admin_and_employee) }
+  let(:current_user) { User.make!(:sobrinho) }
 
   background do
+    create_roles ['purchase_solicitations', 'employees']
     sign_in
   end
 
