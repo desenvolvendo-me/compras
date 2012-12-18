@@ -29,7 +29,7 @@ class LicitationProcessLotsController < CrudController
   protected
 
   def main_controller_name
-    'licitation_processes'
+    'administrative_processes'
   end
 
   def updatable?
