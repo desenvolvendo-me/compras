@@ -23,4 +23,10 @@ class OccurrenceContractualHistoricsController < CrudController
       @parent = Contract.find(params[:contract_id])
     end
   end
+
+  protected
+
+  def main_controller_name
+    'contracts'
+  end
 end

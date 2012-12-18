@@ -2,7 +2,10 @@
 require 'spec_helper'
 
 feature "OccurrenceContractualHistorics" do
+  let(:current_user) { User.make!(:sobrinho) }
+
   background do
+    create_roles ['contracts']
     sign_in
   end
 
