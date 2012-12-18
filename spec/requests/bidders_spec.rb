@@ -5,8 +5,7 @@ feature "Bidders" do
   let(:current_user) { User.make!(:sobrinho) }
 
   background do
-    create_roles ['licitation_processes',
-                  'administrative_processes',
+    create_roles ['administrative_processes',
                   'people',
                   'creditors',
                   'licitation_process_lots',
