@@ -50,12 +50,11 @@ class LicitationProcess < Compras::Model
   delegate :modality, :licitation_modality, :object_type_humanize, :presence_trading?,
            :released?, :judgment_form, :description, :responsible,
            :item, :licitation_process, :date, :object_type, :judgment_form_kind,
-           :summarized_object, :to => :administrative_process,
-           :allow_nil => true, :prefix => true
-
-  delegate :administrative_process_budget_allocations, :items, :to => :administrative_process, :allow_nil => true
-  delegate :code_and_year, :to => :administrative_process, :allow_nil => true, :prefix => true
-  delegate :is_available_for_licitation_process_classification?, :items, :to => :administrative_process, :allow_nil => true
+           :summarized_object, :code_and_year,
+           :to => :administrative_process, :allow_nil => true, :prefix => true
+  delegate :administrative_process_budget_allocations, :items,
+           :is_available_for_licitation_process_classification?,
+           :to => :administrative_process, :allow_nil => true
 
   validates :process_date, :administrative_process, :capability, :presence => true
   validates :period, :period_unit, :expiration, :expiration_unit, :presence => true
