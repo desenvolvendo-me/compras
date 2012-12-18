@@ -21,12 +21,12 @@ class Bidder < Compras::Model
   has_many :trading_item_bids, :dependent => :restrict
 
   delegate :document_type_ids, :process_date, :to => :licitation_process, :prefix => true
-  delegate :administrative_process, :envelope_opening?, :to => :licitation_process, :allow_nil => true
+  delegate :administrative_process, :envelope_opening?, :items, :allow_bidders?,
+           :consider_law_of_proposals, :licitation_process_lots,
+           :to => :licitation_process, :allow_nil => true
   delegate :invited?, :to => :administrative_process, :prefix => true
-  delegate :licitation_process_lots, :to => :licitation_process
   delegate :administrative_process_budget_allocation_items, :to => :licitation_process_lots
   delegate :material, :to => :administrative_process_budget_allocation_items
-  delegate :items, :allow_bidders?, :consider_law_of_proposals, :to => :licitation_process, :allow_nil => true
   delegate :benefited, :to => :creditor, :allow_nil => true
 
   accepts_nested_attributes_for :documents, :allow_destroy => true
