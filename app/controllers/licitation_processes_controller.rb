@@ -46,6 +46,10 @@ class LicitationProcessesController < CrudController
 
   protected
 
+  def main_controller_name
+    'administrative_processes'
+  end
+
   def create_resource(object)
     BidderStatusChanger.new(object).change
 

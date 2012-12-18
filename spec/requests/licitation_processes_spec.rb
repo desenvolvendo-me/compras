@@ -2,7 +2,17 @@
 require 'spec_helper'
 
 feature "LicitationProcesses" do
+  let(:current_user) { User.make!(:sobrinho) }
+
   background do
+    create_roles ['administrative_processes',
+                  'judgment_forms',
+                  'payment_methods',
+                  'indexers',
+                  'capabilities',
+                  'document_types',
+                  'materials',
+                  'licitation_process_publications']
     sign_in
   end
 
