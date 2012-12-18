@@ -48,7 +48,7 @@ feature 'PurchaseSolicitationAnnul' do
     click_link "#{purchase_solicitation.code_and_year}"
 
     expect(page).to have_disabled_element 'Anular',
-                                          :reason => 'esta solicitação já está em uso e não pode ser anulada'
+                                          :reason => 'está sendo utilizada na compra direta (1/2012), não pode ser anulada.'
   end
 
   scenario 'annuling a purchase solicitation' do

@@ -18,7 +18,7 @@ class PurchaseSolicitationDecorator
   end
 
   def not_annullable_message
-    t('purchase_solicitation.messages.not_annullable') if direct_purchase.present?
+    t('purchase_solicitation.messages.not_annullable', :direct_purchase => direct_purchase) if direct_purchase.present?
   end
 
   def is_annulled_message
