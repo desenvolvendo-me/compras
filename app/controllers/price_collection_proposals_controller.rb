@@ -1,6 +1,11 @@
 class PriceCollectionProposalsController < CrudController
   before_filter :must_be_editable_by_current_user!, :only => [:update]
+
   protected
+
+  def main_controller_name
+    current_user && current_user.creditor? ? super : 'price_collections'
+  end
 
   def begin_of_association_chain
     if current_user && current_user.creditor?

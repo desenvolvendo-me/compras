@@ -3,8 +3,13 @@ require 'spec_helper'
 
 feature "PriceCollectionProposals" do
 
-  context 'admin logged in' do
+  context 'user logged in' do
+    let :current_user do
+      User.make!(:sobrinho)
+    end
+
     background do
+      create_roles ['price_collections', 'price_collection_proposal_annuls']
       sign_in
     end
 
@@ -24,7 +29,7 @@ feature "PriceCollectionProposals" do
     scenario 'the proposal should be created automatically when the price collection is created' do
       PriceCollection.make!(:coleta_de_precos)
 
-    navigate 'Processos de Compra > Coletas de Preços'
+      navigate 'Processos de Compra > Coletas de Preços'
 
       click_link '1/2012'
 
@@ -79,6 +84,7 @@ feature "PriceCollectionProposals" do
     end
 
     background do
+      create_roles ['price_collections', 'price_collection_proposal_annuls']
       sign_in
     end
 
