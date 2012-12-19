@@ -450,7 +450,7 @@ feature "Tradings" do
 
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content '1/2012'
-        expect(page).to have_content '#{Date.current}'
+        expect(page).to have_content "#{I18n.l Date.current}"
         expect(page).to have_content 'Descrição resumida do objeto'
       end
     end
