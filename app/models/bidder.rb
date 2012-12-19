@@ -119,17 +119,22 @@ class Bidder < Compras::Model
     }
   end
 
-  def self.with_proposal_for_proposal_stage_with_amount_lower_than_limit(value)
+  def self.with_proposal_for_proposal_stage_with_amount_lower_than_limit(item)
     joins { trading_item_bids }.
     where {
       trading_item_bids.status.eq(TradingItemBidStatus::WITH_PROPOSAL) &
       trading_item_bids.stage.eq(TradingItemBidStage::PROPOSALS) &
-      trading_item_bids.amount.lteq(value)
+      trading_item_bids.amount.lteq(item.value_limit_to_participate_in_bids) &
+      trading_item_bids.trading_item_id.eq(item.id)
     }
   end
 
   def self.enabled
     where { disabled.eq(false) }
+  end
+
+  def self.disabled
+    where { disabled.eq(true) }
   end
 
   def self.at_bid_round(round, trading_item_id)

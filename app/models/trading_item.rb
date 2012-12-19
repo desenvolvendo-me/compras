@@ -52,7 +52,7 @@ class TradingItem < Compras::Model
   end
 
   def selected_bidders_at_proposals
-    bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(value_limit_to_participate_in_bids)
+    bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(self)
   end
 
   def value_limit_to_participate_in_bids
@@ -96,15 +96,15 @@ class TradingItem < Compras::Model
   end
 
   def bid_limit_for_negociation_stage
-    lowest_proposal_amount_at_stage_of_round_of_bids * 1.05
+    lowest_proposal_amount_with_valid_proposal * BigDecimal("1.05")
   end
 
   def lowest_proposal_amount_at_stage_of_proposals
     trading_item_bids.with_proposal.at_stage_of_proposals.minimum(:amount)
   end
 
-  def lowest_proposal_amount_at_stage_of_round_of_bids
-    trading_item_bids.with_valid_proposal.at_stage_of_round_of_bids.minimum(:amount)
+  def lowest_proposal_amount_with_valid_proposal
+    trading_item_bids.with_valid_proposal.minimum(:amount)
   end
 
   def bidders_with_proposals

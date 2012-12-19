@@ -48,9 +48,10 @@ describe TradingItemBidStageCalculator do
     it 'should be on stage of proposals when there are bids but not all bidders give a positions about the bid' do
       trading_item_bids = double(:trading_item_bid, :empty? => false,
                                  :at_stage_of_proposals => ['bid1', 'bid2'])
+      bidders = double(:bidders, :enabled => ['bidder1', 'bidder2', 'bidder3'])
 
       subject.stub(:trading_item_bids).and_return(trading_item_bids)
-      subject.stub(:bidders).and_return(['bidder1', 'bidder2', 'bidder3'])
+      subject.stub(:bidders).and_return(bidders)
 
       expect(subject).to be_stage_of_proposals
       expect(subject).to_not be_stage_of_negotiation

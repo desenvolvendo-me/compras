@@ -27,7 +27,7 @@
         </td>
 
         <td class="bidder-position">
-          <%= numeric_position(index.succ) %>
+          <%= numeric_position(resource.decorator.bidder_position(index)) unless bidder.disabled %>
         </td>
 
         <td>

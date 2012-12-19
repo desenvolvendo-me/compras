@@ -29,10 +29,14 @@ class BidderDecorator
   end
 
   def lower_trading_item_bid_amount(*)
+    return if component.disabled
+
     number_with_precision super if super
   end
 
   def trading_item_classification_percent(*)
+    return if component.disabled
+
     number_with_precision super if super
   end
 

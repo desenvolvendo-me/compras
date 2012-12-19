@@ -10,7 +10,6 @@ describe TradingItemBidders do
   let(:bidders) { double(:bidders) }
 
   it '#with_proposal_for_proposal_stage_with_amount_lower_than_limit' do
-    trading_item.should_receive(:value_limit_to_participate_in_bids).and_return(trading_item)
     bidders.should_receive(:with_proposal_for_proposal_stage_with_amount_lower_than_limit).with(trading_item)
 
     subject.with_proposal_for_proposal_stage_with_amount_lower_than_limit

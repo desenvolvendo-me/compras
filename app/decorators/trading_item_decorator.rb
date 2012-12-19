@@ -35,6 +35,10 @@ class TradingItemDecorator
     must_have_minimum_reduction || must_be_open
   end
 
+  def bidder_position(index)
+    index.succ - component.bidders.disabled.count
+  end
+
   private
 
   def negotiation_or_classification_path(stage_calculator)
@@ -79,11 +83,7 @@ class TradingItemDecorator
     bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit.include? bidder
   end
 
-  def value_limit_to_participate_in_bids
-    component.value_limit_to_participate_in_bids
-  end
-
   def bidders_with_proposal_for_proposal_stage_with_amount_lower_than_limit
-    component.bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(value_limit_to_participate_in_bids)
+    component.bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(component)
   end
 end

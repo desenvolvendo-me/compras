@@ -94,7 +94,7 @@ describe Bidder do
         :status => TradingItemBidStatus::WITH_PROPOSAL,
         :stage => TradingItemBidStage::PROPOSALS)
 
-      expect(Bidder.with_proposal_for_proposal_stage_with_amount_lower_than_limit(110)).to eq [sobrinho]
+      expect(Bidder.with_proposal_for_proposal_stage_with_amount_lower_than_limit(trading_item)).to eq [sobrinho]
     end
   end
 

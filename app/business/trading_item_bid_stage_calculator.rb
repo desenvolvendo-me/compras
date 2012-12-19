@@ -29,7 +29,7 @@ class TradingItemBidStageCalculator
   attr_reader :trading_item, :trading_item_bidders
 
   def all_bidders_have_proposal_for_proposals_stage?
-    trading_item_bids.at_stage_of_proposals.count == bidders.count
+    trading_item_bids.at_stage_of_proposals.count >= bidders.enabled.count
   end
 
   def only_one_bidder_left_at_round_of_bids?

@@ -385,24 +385,23 @@ feature "Tradings" do
     within_records do
       within("tbody tr:nth-child(1)") do
         expect(page).to have_content "Wenderson Malheiros"
-        expect(page).to have_content "1º lugar"
         expect(page).to have_content "Inabilitado"
       end
 
       within("tbody tr:nth-child(2)") do
         expect(page).to have_content "Nobe"
-        expect(page).to have_content "2º lugar"
+        expect(page).to have_content "1º lugar"
         expect(page).not_to have_link "Inabilitar"
       end
 
       within("tbody tr:nth-child(3)") do
         expect(page).to have_content "Gabriel Sobrinho"
-        expect(page).to have_content "3º lugar"
+        expect(page).to have_content "2º lugar"
       end
 
       within("tbody tr:nth-child(4)") do
         expect(page).to have_content "Nohup"
-        expect(page).to have_content "4º lugar"
+        expect(page).to have_content "3º lugar"
       end
     end
 
@@ -420,18 +419,41 @@ feature "Tradings" do
     end
 
     expect(page).to have_field "Licitante", :with => "Gabriel Sobrinho"
-    fill_in "Valor da proposta", :with => "100,00"
+    fill_in "Valor da proposta", :with => "500,00"
     click_button "Salvar"
 
     expect(page).to have_field "Licitante", :with => "Nohup"
-    fill_in "Valor da proposta", :with => "99,00"
+    fill_in "Valor da proposta", :with => "510,00"
     click_button "Salvar"
 
     expect(page).to have_field "Licitante", :with => "Nobe"
-    fill_in "Valor da proposta", :with => "98,00"
+    fill_in "Valor da proposta", :with => "505,00"
     click_button "Salvar"
 
     expect(page).not_to have_content "Wenderson Malheiros"
+
+    within_records do
+      within("tbody tr:nth-child(1)") do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "500,00"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Selecionado"
+      end
+
+      within("tbody tr:nth-child(2)") do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "505,00"
+        expect(page).to have_content "1,00"
+        expect(page).to have_content "Selecionado"
+      end
+
+      within("tbody tr:nth-child(3)") do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "510,00"
+        expect(page).to have_content "2,00"
+        expect(page).to have_content "Selecionado"
+      end
+    end
   end
 
   scenario 'columns for index with att_header' do

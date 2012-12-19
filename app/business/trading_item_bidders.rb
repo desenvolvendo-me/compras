@@ -5,7 +5,7 @@ class TradingItemBidders
   end
 
   def with_proposal_for_proposal_stage_with_amount_lower_than_limit
-    bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(trading_item.value_limit_to_participate_in_bids)
+    bidders.with_proposal_for_proposal_stage_with_amount_lower_than_limit(trading_item)
   end
 
   def with_proposal_for_proposal_stage_with_amount_lower_than_limit_size
