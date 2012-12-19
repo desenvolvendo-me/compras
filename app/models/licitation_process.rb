@@ -186,6 +186,10 @@ class LicitationProcess < Compras::Model
     published_editals.any?
   end
 
+  def ratification?
+    licitation_process_ratifications.any?
+  end
+
   protected
 
   def set_modality

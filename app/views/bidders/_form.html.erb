@@ -150,4 +150,9 @@
       $('form.bidder :input').not('[data-disabled]').attr('disabled', true);
     });
   <% end %>
+
+  <% if f.object.licitation_process_ratification? %>
+    $("input").attr("disabled", "disabled")
+    $("select").attr("disabled", "disabled")
+  <% end %>
 </script>

@@ -172,22 +172,33 @@ describe BidderDecorator do
   end
 
   describe '#cant_save_or_destroy_message' do
-    it 'when bidders are not allowed' do
+    before do
       I18n.backend.store_translations 'pt-BR', :bidder => {
           :messages => {
-            :cant_save_or_destroy => 'não pode'
+            :cant_save_or_destroy => 'não pode',
+            :cant_be_changed_when_licitation_process_has_a_ratification => 'ratification'
         }
       }
+    end
 
+    it 'when bidders are not allowed' do
       component.stub(:allow_bidders? => false)
+      component.stub(:licitation_process_ratification?).and_return(false)
 
       expect(subject.cant_save_or_destroy_message).to eq 'não pode'
     end
 
     it 'when bidders are allowed' do
       component.stub(:allow_bidders? => true)
+      component.stub(:licitation_process_ratification?).and_return(false)
 
       expect(subject.cant_save_or_destroy_message).to be_nil
+    end
+
+    it 'should return the ratification message when licitation process has ratification' do
+      component.stub(:licitation_process_ratification?).and_return(true)
+
+      expect(subject.cant_save_or_destroy_message).to eq 'ratification'
     end
   end
 end

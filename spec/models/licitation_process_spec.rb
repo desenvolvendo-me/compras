@@ -522,4 +522,18 @@ describe LicitationProcess do
       expect(subject).not_to be_updatable
     end
   end
+
+  describe '#ratification?' do
+    it 'should be true when have any licitation_process_ratifications' do
+      subject.stub(:licitation_process_ratifications).and_return(['ratification'])
+
+      expect(subject.ratification?).to be_true
+    end
+
+    it 'should be false when have anyone licitation_process_ratifications' do
+      subject.stub(:licitation_process_ratifications).and_return([])
+
+      expect(subject.ratification?).to be_false
+    end
+  end
 end

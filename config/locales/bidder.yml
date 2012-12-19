@@ -25,3 +25,4 @@ pt-BR:
   bidder:
     messages:
       cant_save_or_destroy: "alterações permitidas somente no dia da abertura dos envelopes"
+      cant_be_changed_when_licitation_process_has_a_ratification: "não pode ser alterado pois o processo licitatório possui homologação"

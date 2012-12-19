@@ -861,4 +861,61 @@ feature "Bidders" do
     expect(page).to have_button 'Salvar'
     expect(page).to have_link 'Apagar'
   end
+
+  scenario 'Bidders cant be changed when the licitation process has a ratification' do
+    licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+    Creditor.make!(:sobrinho_sa)
+    Person.make!(:wenderson)
+    LicitationProcessRatification.make!(:processo_licitatorio_computador,
+      :licitation_process => licitation_process)
+
+    navigate 'Processo Administrativo/Licitatório > Processos Administrativos'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_link 'Editar processo licitatório'
+
+    click_link 'Licitantes'
+
+    within_records do
+      page.find('a').click
+    end
+
+    expect(page).to have_disabled_element 'Apagar',
+                    :reason => 'não pode ser alterado pois o processo licitatório possui homologação'
+    expect(page).to have_disabled_element 'Salvar',
+                    :reason => 'não pode ser alterado pois o processo licitatório possui homologação'
+
+    expect(page).to have_disabled_field 'Processo licitatório'
+    expect(page).to have_disabled_field 'Data do processo licitatório'
+    expect(page).to have_disabled_field 'Processo administrativo'
+    expect(page).to have_disabled_field 'Fornecedor'
+    expect(page).to have_disabled_field 'Status'
+    expect(page).to have_disabled_field 'Apresentará nova proposta em caso de empate'
+
+    within_tab 'Representantes credenciados' do
+      expect(page).to have_disabled_field 'Representantes'
+    end
+
+    within_tab 'Documentos' do
+      expect(page).to have_disabled_field 'Documento'
+      expect(page).to have_disabled_field 'Número/certidão'
+      expect(page).to have_disabled_field 'Data de emissão'
+      expect(page).to have_disabled_field 'Validade'
+    end
+
+    within_tab 'Propostas' do
+      expect(page).to have_disabled_field 'Preço total dos itens'
+      expect(page).to have_disabled_field 'Material'
+      expect(page).to have_disabled_field 'Marca'
+      expect(page).to have_disabled_field 'Situação'
+      expect(page).to have_disabled_field 'Classificação'
+      expect(page).to have_disabled_field 'Unidade'
+      expect(page).to have_disabled_field 'Quantidade'
+      expect(page).to have_disabled_field 'Preço unitário'
+      expect(page).to have_disabled_field 'Preço total'
+    end
+  end
 end

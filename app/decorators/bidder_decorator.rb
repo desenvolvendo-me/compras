@@ -45,7 +45,11 @@ class BidderDecorator
   end
 
   def cant_save_or_destroy_message
-    t('bidder.messages.cant_save_or_destroy') unless allow_bidders?
+    if licitation_process_ratification?
+      t('bidder.messages.cant_be_changed_when_licitation_process_has_a_ratification')
+    elsif !allow_bidders?
+      t('bidder.messages.cant_save_or_destroy')
+    end
   end
 
   private
