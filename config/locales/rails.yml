@@ -305,6 +305,7 @@ pt-BR:
       should_be_prior_to_envelope_opening: "deve ser anterior à data de abertura dos envelopes"
       cannot_be_edited: "não pode ser editado"
       cannot_open_link_without_an_object: "não pode abrir o link sem um objeto"
+      cannot_be_changed_when_the_licitation_process_has_a_ratification: "não pode ser alterado quando o processo licitatório (%{licitation_process}) vinculado estiver homologado"
 
   activerecord:
     errors:

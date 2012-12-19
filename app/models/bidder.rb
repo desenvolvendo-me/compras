@@ -20,7 +20,8 @@ class Bidder < Compras::Model
   has_many :licitation_process_classifications_by_classifiable, :as => :classifiable, :dependent => :destroy, :class_name => 'LicitationProcessClassification'
   has_many :trading_item_bids, :dependent => :restrict
 
-  delegate :document_type_ids, :process_date, :ratification?, :to => :licitation_process, :prefix => true
+  delegate :document_type_ids, :process_date, :ratification?,
+           :to => :licitation_process, :prefix => true, :allow_nil => true
   delegate :administrative_process, :envelope_opening?, :items, :allow_bidders?,
            :consider_law_of_proposals, :licitation_process_lots,
            :to => :licitation_process, :allow_nil => true
@@ -37,6 +38,7 @@ class Bidder < Compras::Model
   validates :creditor_id, :uniqueness => { :scope => :licitation_process_id, :allow_blank => true }
   validates :technical_score, :presence => true, :if => :validate_technical_score?
   validate :validate_licitation_process_envelope_opening_date, :on => :create
+  validate :block_licitation_process_with_ratification
 
   with_options :allow_blank => true do |allowing_blank|
     allowing_blank.validates :protocol_date,
@@ -259,6 +261,14 @@ class Bidder < Compras::Model
   end
 
   protected
+
+  def block_licitation_process_with_ratification
+    return unless licitation_process.present?
+
+    if licitation_process_ratification?
+      errors.add(:base, :cannot_be_changed_when_the_licitation_process_has_a_ratification, :licitation_process => licitation_process)
+    end
+  end
 
   def classification_percent(first_place_amount, current_amount)
     ((current_amount - first_place_amount) / first_place_amount) * BigDecimal(100)

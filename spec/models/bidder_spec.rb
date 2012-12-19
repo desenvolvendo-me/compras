@@ -112,6 +112,20 @@ describe Bidder do
     end
   end
 
+  context 'valitation licitatino_process_ratification' do
+    let(:licitation_process) { double(:licitation_process,
+      :administrative_process => nil, :allow_bidders? => true, :to_s => '1/2012') }
+
+    it 'should not allow save when licitation_process has ratification' do
+      subject.stub(:licitation_process).and_return(licitation_process)
+      subject.stub(:licitation_process_ratification?).and_return(true)
+
+      subject.valid?
+
+      expect(subject.errors[:base]).to include 'não pode ser alterado quando o processo licitatório (1/2012) vinculado estiver homologado'
+    end
+  end
+
   it "should validate presence of dates, protocol when it is not invite" do
     subject.invited = false
 
@@ -219,7 +233,7 @@ describe Bidder do
     end
 
     let :licitation_process do
-      double('licitation_process', :administrative_process => nil)
+      double('licitation_process', :administrative_process => nil, :ratification? => false)
     end
 
     it "should not allow changes if licitation_process does not allow_bidders" do
