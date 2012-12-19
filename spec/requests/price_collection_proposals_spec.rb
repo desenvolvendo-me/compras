@@ -78,7 +78,7 @@ feature "PriceCollectionProposals" do
     end
   end
 
-  describe 'creditor editing proposals' do
+  context 'creditor editing proposals' do
     let :current_user do
       User.make!(:creditor_with_password)
     end
@@ -91,9 +91,7 @@ feature "PriceCollectionProposals" do
     scenario 'I can see only my proposals' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 
-      click_link 'Compras e Licitações'
-
-      click_link 'Coletas de Preço'
+      navigate 'Compras e Licitações > Coletas de Preço'
 
       click_link 'Propostas'
 
@@ -105,9 +103,7 @@ feature "PriceCollectionProposals" do
     scenario 'I can see the information about the price collection' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 
-      click_link 'Compras e Licitações'
-
-      click_link 'Coletas de Preço'
+      navigate 'Compras e Licitações > Coletas de Preço'
 
       click_link 'Propostas'
 
@@ -142,9 +138,7 @@ feature "PriceCollectionProposals" do
     scenario 'I can update my own proposals' do
       PriceCollection.make!(:coleta_de_precos_com_2_propostas)
 
-      click_link 'Compras e Licitações'
-
-      click_link 'Coletas de Preço'
+      navigate 'Compras e Licitações > Coletas de Preço'
 
       click_link 'Propostas'
 
