@@ -1348,7 +1348,6 @@ feature "LicitationProcesses" do
     LicitationProcess.make!(:processo_licitatorio)
 
     navigate 'Processo Administrativo/Licitatório > Processos Licitatórios'
-    page.driver.render('lici.png')
 
     within_records do
       expect(page).to have_content 'Código/Ano'
