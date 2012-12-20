@@ -752,7 +752,7 @@ Compras::Application.routes.draw do
 
   resources :trading_item_bids
   resources :trading_item_bid_proposals, :only => [:new, :create, :edit, :update]
-  resources :trading_item_bid_round_of_bids, :only => [:new, :create, :edit, :update]
+  resources :trading_item_bid_round_of_bids, :only => [:new, :create, :destroy]
 
   resource :trading_configuration
 

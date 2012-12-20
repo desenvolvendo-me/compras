@@ -27,4 +27,8 @@ class TradingItemBidDecorator
       t('trading_item_bid_round_of_bids.new')
     end
   end
+
+  def show_undo_button?
+    trading_item.proposals_for_round_of_bids?
+  end
 end

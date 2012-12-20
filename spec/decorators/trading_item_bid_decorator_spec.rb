@@ -84,4 +84,22 @@ describe TradingItemBidDecorator do
       end
     end
   end
+
+  describe '#show_undo_button?' do
+    it 'should return true when there is at least one bid at round of proposals' do
+      trading_item = double(:trading_item, :proposals_for_round_of_bids? => true)
+
+      component.stub(:trading_item).and_return(trading_item)
+
+      expect(subject.show_undo_button?).to be_true
+    end
+
+    it 'should return false when there is no one bid at round of proposals' do
+      trading_item = double(:trading_item, :proposals_for_round_of_bids? => false)
+
+      component.stub(:trading_item).and_return(trading_item)
+
+      expect(subject.show_undo_button?).to be_false
+    end
+  end
 end

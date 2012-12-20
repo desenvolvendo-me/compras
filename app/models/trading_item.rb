@@ -85,6 +85,14 @@ class TradingItem < Compras::Model
     (bidder_with_lowest_proposal == bidder) && !bidder.benefited
   end
 
+  def last_bid
+    trading_item_bids.last
+  end
+
+  def proposals_for_round_of_bids?
+    trading_item_bids.at_stage_of_round_of_bids.any?
+  end
+
   private
 
   def bidders_selected_for_negociation

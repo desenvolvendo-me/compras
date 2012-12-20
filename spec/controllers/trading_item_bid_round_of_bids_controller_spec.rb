@@ -38,6 +38,11 @@ describe TradingItemBidRoundOfBidsController do
         :amount => 102.0,
         :stage => TradingItemBidStage::PROPOSALS,
         :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      # This is a workaround, because the before create callback is not
+      # storing the right value using machinist.
+      trading.percentage_limit_to_participate_in_bids = 10.0
+      trading.save!
     end
 
     describe 'GET new' do
@@ -47,7 +52,7 @@ describe TradingItemBidRoundOfBidsController do
         expect(assigns(:trading_item_bid).trading_item).to eq trading_item
         expect(assigns(:trading_item_bid).amount).to eq 0
         expect(assigns(:trading_item_bid).round).to eq 1
-        expect(assigns(:trading_item_bid).bidder).to eq bidder1
+        expect(assigns(:trading_item_bid).bidder).to eq bidder2
         expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITH_PROPOSAL
         expect(assigns(:trading_item_bid).stage).to eq TradingItemBidStage::ROUND_OF_BIDS
       end
@@ -64,6 +69,59 @@ describe TradingItemBidRoundOfBidsController do
         expect(assigns(:trading_item_bid).status).to eq TradingItemBidStatus::WITHOUT_PROPOSAL
         expect(assigns(:trading_item_bid).stage).to eq TradingItemBidStage::ROUND_OF_BIDS
         expect(assigns(:trading_item_bid).round).to eq 1
+      end
+    end
+
+    context 'with two bid at round of bids' do
+      describe 'delete #destroy' do
+        it 'should update the last bid' do
+          # I needed to use variables instead let blocks because for an
+          # unknow reason let was being created at random order
+          bid = TradingItemBid.create!(
+            :round => 1,
+            :trading_item_id => trading_item.id,
+            :bidder_id => bidder1.id,
+            :amount => 99.0,
+            :stage => TradingItemBidStage::ROUND_OF_BIDS,
+            :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+          last_bid = TradingItemBid.create!(
+            :round => 1,
+            :trading_item_id => trading_item.id,
+            :bidder_id => bidder2.id,
+            :amount => 98.0,
+            :stage => TradingItemBidStage::ROUND_OF_BIDS,
+            :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+          delete :destroy, :id => last_bid.id, :trading_item_id => trading_item.id
+
+          expect(response).to redirect_to(new_trading_item_bid_round_of_bid_path(:trading_item_id => trading_item.id, :anchor => :title))
+        end
+
+        it 'should return 404 if its not the last bid' do
+          # I needed to use variables instead let blocks because for an
+          # unknow reason let was being created at random order
+          bid = TradingItemBid.create!(
+            :round => 1,
+            :trading_item_id => trading_item.id,
+            :bidder_id => bidder1.id,
+            :amount => 99.0,
+            :stage => TradingItemBidStage::ROUND_OF_BIDS,
+            :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+          last_bid = TradingItemBid.create!(
+            :round => 1,
+            :trading_item_id => trading_item.id,
+            :bidder_id => bidder2.id,
+            :amount => 98.0,
+            :stage => TradingItemBidStage::ROUND_OF_BIDS,
+            :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+          delete :destroy, :id => bid.id, :trading_item_id => trading_item.id
+
+          expect(response.code).to eq "404"
+          expect(response.body).to match /A página que você procura não existe/
+        end
       end
     end
   end

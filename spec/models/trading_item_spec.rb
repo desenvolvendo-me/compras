@@ -187,4 +187,34 @@ describe TradingItem do
       expect(subject.can_be_disabled?(bidder)).to be_false
     end
   end
+
+  describe 'last_bid' do
+    it 'should return the last trading_item_bid' do
+      subject.stub(:trading_item_bids).and_return(['bid1', 'bid2'])
+
+      expect(subject.last_bid).to eq 'bid2'
+    end
+
+    it 'should return nil when there is no trading_item_bids' do
+      expect(subject.last_bid).to eq nil
+    end
+  end
+
+  describe '#proposals_for_round_of_bids?' do
+    it 'should return true when there are proposals at round of bid' do
+      bids = double(:bids, :at_stage_of_round_of_bids => ['proposal'])
+
+      subject.stub(:trading_item_bids).and_return(bids)
+
+      expect(subject.proposals_for_round_of_bids?).to be_true
+    end
+
+    it 'should return false when there are no proposals at round of bid' do
+      bids = double(:bids, :at_stage_of_round_of_bids => [])
+
+      subject.stub(:trading_item_bids).and_return(bids)
+
+      expect(subject.proposals_for_round_of_bids?).to be_false
+    end
+  end
 end

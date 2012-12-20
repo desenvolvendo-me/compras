@@ -749,6 +749,72 @@ feature "TradingItemBids" do
     expect(page).to have_content "Itens do Pregão Presencial 1/2012"
   end
 
+  scenario 'edit the last proposal at round_of_bids' do
+    make_stage_of_proposals
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link '1/2012'
+
+    click_button 'Salvar e ir para Itens/Ofertas'
+
+    click_link 'Fazer oferta'
+
+    click_link 'Registrar lances'
+
+    expect(page).to have_field 'Licitante', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Menor preço', :with => '100,00'
+    expect(page).to have_field 'Valor limite', :with => '99,99'
+
+    expect(page).to_not have_link 'Desfazer última oferta'
+
+    fill_in 'Valor da proposta', :with => '80,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_field 'Licitante', :with => 'Nohup'
+    expect(page).to have_field 'Menor preço', :with => '80,00'
+    expect(page).to have_field 'Valor limite', :with => '79,99'
+
+    click_link 'Desfazer última oferta'
+
+    click_link 'Registrar lances'
+
+    expect(page).to have_field 'Licitante', :with => 'Wenderson Malheiros'
+    expect(page).to have_field 'Menor preço', :with => '100,00'
+    expect(page).to have_field 'Valor limite', :with => '99,99'
+
+    expect(page).to_not have_link 'Desfazer última oferta'
+
+    fill_in 'Valor da proposta', :with => '80,00'
+
+    click_button 'Salvar'
+
+    expect(page).to have_field 'Licitante', :with => 'Nohup'
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_field 'Licitante', :with => 'Gabriel Sobrinho'
+    choose 'Sem proposta'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Classificação das Ofertas'
+
+    click_link 'Desfazer última oferta'
+
+    expect(page).to have_content 'Registrar Lance'
+    expect(page).to have_field 'Licitante', :with => 'Gabriel Sobrinho'
+
+    choose 'Desclassificado'
+    fill_in 'Motivo da desclassificação', :with => 'Desclassificado'
+
+    click_button 'Salvar'
+
+    expect(page).to have_content 'Classificação das Ofertas'
+  end
+
   def make_stage_of_proposals(options = {})
     TradingConfiguration.make!(:pregao)
     trading = options.fetch(:trading) { Trading.make!(:pregao_presencial)}
