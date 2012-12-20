@@ -5,7 +5,7 @@ feature "TradingItemBids" do
   let(:current_user) { User.make!(:sobrinho) }
 
   background do
-    create_roles ['tradings']
+    create_roles ['tradings', 'trading_item_bid_proposals']
     sign_in
   end
 

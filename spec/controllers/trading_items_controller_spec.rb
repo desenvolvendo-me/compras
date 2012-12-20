@@ -24,7 +24,7 @@ describe TradingItemsController do
       item = trading.trading_items.first
 
       controller.stub(:authenticate_user!)
-      controller.should_receive(:authorize!).with(:read, 'trading_items')
+      controller.should_receive(:authorize!).with(:read, 'tradings')
 
       get :classification, :id => item.id
     end
@@ -36,7 +36,7 @@ describe TradingItemsController do
       item = trading.trading_items.first
 
       controller.stub(:authenticate_user!)
-      controller.should_receive(:authorize!).with(:read, 'trading_items')
+      controller.should_receive(:authorize!).with(:read, 'tradings')
 
       get :proposal_report, :id => item.id
     end

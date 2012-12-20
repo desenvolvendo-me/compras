@@ -84,7 +84,6 @@ feature "PriceCollectionProposals" do
     end
 
     background do
-      create_roles ['price_collections', 'price_collection_proposal_annuls']
       sign_in
     end
 
