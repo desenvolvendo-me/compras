@@ -47,7 +47,7 @@ class PurchaseSolicitationItemGroup < Compras::Model
   end
 
   def purchase_solicitation_items
-    purchase_solicitation_item_group_materials.flat_map(&:purchase_solicitation_items)
+    purchase_solicitation_item_group_materials(true).flat_map(&:purchase_solicitation_items)
   end
 
   def purchase_solicitation_item_ids

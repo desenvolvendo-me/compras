@@ -46,6 +46,26 @@ feature "PurchaseSolicitationItemGroups" do
     within_tab 'Dotações orçamentarias' do
       expect(page).to have_select 'Status', :selected => 'Agrupado'
     end
+
+    navigate 'Processos de Compra > Agrupamentos de Itens de Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    click_button 'Remover'
+
+    click_button 'Salvar'
+
+    navigate 'Processos de Compra > Solicitações de Compra'
+
+    within_records do
+      page.find('a').click
+    end
+
+    within_tab 'Dotações orçamentarias' do
+      expect(page).to have_select 'Status', :selected => 'Pendente'
+    end
   end
 
   scenario 'update an existent purchase_solicitation_item_group' do
