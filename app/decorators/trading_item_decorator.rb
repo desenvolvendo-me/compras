@@ -56,7 +56,7 @@ class TradingItemDecorator
       if trading_item_bids.at_stage_of_round_of_bids.empty?
         routes.proposal_report_trading_item_path(component)
       else
-        routes.new_trading_item_bid_path(:trading_item_id => component.id, :anchor => :title)
+        routes.new_trading_item_bid_round_of_bid_path(:trading_item_id => component.id, :anchor => :title)
       end
     end
   end

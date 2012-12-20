@@ -1,0 +1,59 @@
+<%= f.input :trading_item, :as => :hidden %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-6">
+    <%= f.input :round, :disabled => true %>
+  </div>
+
+  <div class="yui3-u-1-6">
+    <%= f.input :stage, :as => :string, :disabled => true, :input_html => { :value => f.object.stage_humanize } %>
+  </div>
+
+  <div class="yui3-u-2-3">
+    <%= f.input :trading_item, :disabled => true %>
+  </div>
+</div>
+
+<%= f.input :bidder, :disabled => true %>
+
+<%= f.input :status, :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
+    <%= f.input :amount %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :trading_item_lowest_proposal_value, :disabled => true, :input_html => { :class => 'decimal', :value => f.object.decorator.trading_item_lowest_proposal_value } %>
+  </div>
+
+  <div class="yui3-u-1-4">
+    <%= f.input :minimum_limit, :disabled => true, :input_html => { :class => 'decimal', :value => f.object.decorator.minimum_limit } %>
+  </div>
+</div>
+
+<%= f.input :disqualification_reason %>
+
+<script>
+  $(document).ready(function(){
+    $("#trading_item_bid_amount").focus();
+  });
+
+  $('input[name="trading_item_bid[status]"]').change(function(){
+    disqualificationReasonEnabler();
+  });
+
+  function disqualificationReasonEnabler() {
+    var currentStatus = $('input[name="trading_item_bid[status]"]:checked').val();
+
+    if (currentStatus == '<%= TradingItemBidStatus::DISQUALIFIED %>') {
+      $('#trading_item_bid_disqualification_reason').removeAttr('disabled');
+      $('#trading_item_bid_disqualification_reason').requiredField(true);
+    } else {
+      $('#trading_item_bid_disqualification_reason').attr('disabled', 'disabled');
+      $('#trading_item_bid_disqualification_reason').requiredField(false);
+    }
+  }
+
+  disqualificationReasonEnabler();
+</script>
