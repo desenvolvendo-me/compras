@@ -137,7 +137,7 @@ feature 'ContractTerminations' do
 
       within 'tbody tr' do
         expect(page).to have_content '1/2012'
-        expect(page).to have_content 'Ativo'
+        expect(page).to have_content 'Em vigência'
       end
     end
   end
