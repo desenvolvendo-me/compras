@@ -23,6 +23,10 @@ class TradingItemBidNegotiationsController < CrudController
 
   protected
 
+  def main_controller_name
+    'tradings'
+  end
+
   def create_resource(object)
     object.transaction do
       object.stage  = TradingItemBidStage::NEGOTIATION
