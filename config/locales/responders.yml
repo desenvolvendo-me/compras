@@ -212,9 +212,6 @@ pt-BR:
     tce_specification_capabilities:
       <<: *female
 
-    trading_item_bids:
-      <<: *female
-
     trading_item_bid_proposals:
       <<: *female
 
@@ -222,3 +219,6 @@ pt-BR:
       <<: *female
       destroy:
         notice: ''
+
+    trading_item_bid_negotiations:
+      <<: *female

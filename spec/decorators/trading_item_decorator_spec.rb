@@ -206,7 +206,7 @@ describe TradingItemDecorator do
         component.stub(:trading_item_bids).and_return(trading_item_bids)
         component.stub(:valid_negotiation_proposals).and_return([])
 
-        routes.should_receive(:new_trading_item_bid_path).
+        routes.should_receive(:new_trading_item_bid_negotiation_path).
           with(:trading_item_id => 1, :anchor => :title).
           and_return('new_negotiation_path')
 

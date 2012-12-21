@@ -283,7 +283,7 @@ feature "Tradings" do
       :minimum_reduction_value => 2.0)
     trading_item2 = TradingItem.make!(:segundo_item_pregao_presencial)
     trading = Trading.make!(:pregao_presencial, :trading_items => [trading_item, trading_item2])
-    trading.licitation_process.bidders << Bidder.make!(:me_pregao)
+    trading.licitation_process.bidders << Bidder.make!(:licitante_com_proposta_3)
 
     navigate "Processo Administrativo/Licitatório > Pregão Presencial"
 
@@ -350,12 +350,12 @@ feature "Tradings" do
       end
 
       within("tbody tr:nth-child(3)") do
-        expect(page).to have_content "Nobe"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "3º lugar"
       end
 
       within("tbody tr:nth-child(4)") do
-        expect(page).to have_content "Nohup"
+        expect(page).to have_content "Nobe"
         expect(page).to have_content "4º lugar"
       end
     end
@@ -374,8 +374,7 @@ feature "Tradings" do
     expect(page).to have_content 'Negociação'
     expect(page).to have_disabled_field "Etapa"
     expect(page).to have_field "Etapa", :with => "Negociação"
-    expect(page).to have_field "Licitante", :with => "Nobe"
-    expect(page).to have_field "Número da rodada", :with => "0"
+    expect(page).to have_field "Licitante", :with => "Nohup"
     expect(page).to have_field "Menor preço", :with => "92,00"
     expect(page).to have_field "Valor limite", :with => "91,99"
 
@@ -389,7 +388,7 @@ feature "Tradings" do
       end
 
       within("tbody tr:nth-child(2)") do
-        expect(page).to have_content "Nobe"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "1º lugar"
         expect(page).not_to have_link "Inabilitar"
       end
@@ -400,7 +399,7 @@ feature "Tradings" do
       end
 
       within("tbody tr:nth-child(4)") do
-        expect(page).to have_content "Nohup"
+        expect(page).to have_content "Nobe"
         expect(page).to have_content "3º lugar"
       end
     end
@@ -422,11 +421,11 @@ feature "Tradings" do
     fill_in "Valor da proposta", :with => "500,00"
     click_button "Salvar"
 
-    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     fill_in "Valor da proposta", :with => "510,00"
     click_button "Salvar"
 
-    expect(page).to have_field "Licitante", :with => "Nobe"
+    expect(page).to have_field "Licitante", :with => "Nohup"
     fill_in "Valor da proposta", :with => "505,00"
     click_button "Salvar"
 
@@ -441,14 +440,14 @@ feature "Tradings" do
       end
 
       within("tbody tr:nth-child(2)") do
-        expect(page).to have_content "Nobe"
+        expect(page).to have_content "Nohup"
         expect(page).to have_content "505,00"
         expect(page).to have_content "1,00"
         expect(page).to have_content "Selecionado"
       end
 
       within("tbody tr:nth-child(3)") do
-        expect(page).to have_content "Nohup"
+        expect(page).to have_content "Nobe"
         expect(page).to have_content "510,00"
         expect(page).to have_content "2,00"
         expect(page).to have_content "Selecionado"

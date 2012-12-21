@@ -101,7 +101,7 @@ feature "TradingItemBids" do
 
     expect(page).not_to have_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).not_to have_field 'Menor preço'
@@ -121,7 +121,7 @@ feature "TradingItemBids" do
     end
 
     within '.records tbody tr:nth-child(2)' do
-      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-name')).to have_content 'Nobe'
       expect(page.find('.bidder-amount')).to have_content '101,00'
       expect(page.find('.bidder-percent')).to have_content '1,00'
       expect(page.find('.bidder-position')).to have_content 'Selecionado'
@@ -145,7 +145,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
@@ -185,7 +185,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "2"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
@@ -225,7 +225,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "3"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
     expect(page).to have_field 'Valor da proposta', :with => '0,00'
     expect(page).to have_disabled_field 'Menor preço'
@@ -251,7 +251,7 @@ feature "TradingItemBids" do
     end
 
     within '.records tbody tr:nth-child(2)' do
-      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-name')).to have_content 'Nobe'
       expect(page.find('.bidder-amount')).to have_content '79,00'
       expect(page.find('.bidder-percent')).to have_content '1,28'
       expect(page.find('.bidder-position')).to have_content '2º lugar'
@@ -347,7 +347,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "1"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
 
     fill_in "Valor da proposta", :with => "90,00"
@@ -381,7 +381,7 @@ feature "TradingItemBids" do
     expect(page).to have_field "Número da rodada", :with => "2"
     expect(page).to have_disabled_field "Número da rodada"
 
-    expect(page).to have_field "Licitante", :with => "Nohup"
+    expect(page).to have_field "Licitante", :with => "Nobe"
     expect(page).to have_disabled_field "Licitante"
 
     expect(page).to have_field 'Menor preço', :with => '80,00'
@@ -547,7 +547,7 @@ feature "TradingItemBids" do
     expect(page).to_not have_checked_field 'Apenas beneficiados'
 
     within '.records tbody tr:nth-child(1)' do
-      expect(page.find('.bidder-name')).to have_content 'Nohup'
+      expect(page.find('.bidder-name')).to have_content 'Nobe'
       expect(page.find('.bidder-amount')).to have_content '90,00'
       expect(page.find('.bidder-percent')).to have_content '0,00'
       expect(page.find('.bidder-position')).to have_content '1º lugar'
@@ -772,7 +772,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_field 'Licitante', :with => 'Nohup'
+    expect(page).to have_field 'Licitante', :with => 'Nobe'
     expect(page).to have_field 'Menor preço', :with => '80,00'
     expect(page).to have_field 'Valor limite', :with => '79,99'
 
@@ -790,7 +790,7 @@ feature "TradingItemBids" do
 
     click_button 'Salvar'
 
-    expect(page).to have_field 'Licitante', :with => 'Nohup'
+    expect(page).to have_field 'Licitante', :with => 'Nobe'
     choose 'Sem proposta'
 
     click_button 'Salvar'

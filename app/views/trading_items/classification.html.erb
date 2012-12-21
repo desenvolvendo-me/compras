@@ -86,7 +86,7 @@
     <%= link_to "Encerramento do item", close_trading_item_path(:id => resource.id),
       :class => "button primary" %>
   <% else %>
-    <%= link_to "Iniciar Negociação", new_trading_item_bid_with_anchor, :class => "button primary" %>
+    <%= link_to "Iniciar Negociação", new_trading_item_bid_negotiation_path(:trading_item_id => resource.id, :anchor => :title), :class => "button primary" %>
   <% end %>
 
   <%= link_to 'Desfazer última oferta', trading_item_bid_round_of_bid_path(resource.last_bid, :trading_item_id => resource.id), :method => 'delete',:class => 'button' %>

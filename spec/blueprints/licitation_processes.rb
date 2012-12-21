@@ -585,5 +585,5 @@ LicitationProcess.blueprint(:pregao_presencial) do
   licitation_process_publications { [LicitationProcessPublication.make!(:publicacao,
                                                                         :licitation_process => object)] }
   type_of_calculation { LicitationProcessTypeOfCalculation::SORT_PARTICIPANTS_BY_ITEM }
-  bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:licitante_com_proposta_3)] }
+  bidders { [Bidder.make!(:licitante_sobrinho), Bidder.make!(:licitante), Bidder.make!(:me_pregao)] }
 end
