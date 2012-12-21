@@ -1,0 +1,5 @@
+pt-BR:
+  enumerations:
+    contract_termination_status:
+      active: "Em vigência"
+      inactive: "Anulado"
