@@ -1,7 +1,7 @@
 class Trading < Compras::Model
   attr_accessible :code, :entity_id, :licitating_unit_id,
-                  :summarized_object, :year, :licitation_process_id,
-                  :trading_items_attributes, :licitation_commission_id
+                  :year, :licitation_process_id, :trading_items_attributes,
+                  :licitation_commission_id
 
   auto_increment :code, :by => :year
 
