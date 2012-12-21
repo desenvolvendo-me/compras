@@ -166,8 +166,80 @@ describe TradingItemBid do
     end
   end
 
-  describe '#value_limit_to_participate_in_bids' do
-    it 'should calculate the limit to participate in bids' do
+  describe '.at_stage_of_negotiation' do
+    it 'should returns bids at stage of negotiation' do
+      trading = Trading.make!(:pregao_presencial)
+
+      trading_item = trading.trading_items.first
+      bidder = trading.bidders.first
+
+      bid_with_proposal = TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      bid_without_proposal = TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      bid_disqualified = TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 80.0,
+        :stage => TradingItemBidStage::NEGOTIATION,
+        :status => TradingItemBidStatus::WITH_PROPOSAL,
+        :disqualification_reason => 'Disqualified')
+
+      expect(described_class.at_stage_of_negotiation).to eq [bid_disqualified]
+    end
+  end
+
+  describe '.at_stage_of_negotiation' do
+    it 'should returns bids at stage of negotiation' do
+      trading = Trading.make!(:pregao_presencial)
+
+      trading_item = trading.trading_items.first
+      bidder = trading.bidders.first
+
+      bid_with_proposal = TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 100.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+      bid_without_proposal = TradingItemBid.create!(
+        :round => 1,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 90.0,
+        :stage => TradingItemBidStage::ROUND_OF_BIDS,
+        :status => TradingItemBidStatus::WITHOUT_PROPOSAL)
+
+      bid_disqualified = TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => trading_item.id,
+        :bidder_id => bidder.id,
+        :amount => 80.0,
+        :stage => TradingItemBidStage::NEGOTIATION,
+        :status => TradingItemBidStatus::WITH_PROPOSAL,
+        :disqualification_reason => 'Disqualified')
+
+      expect(described_class.at_stage_of_negotiation).to eq [bid_disqualified]
+    end
+  end
+
+  describe '#last_valid_amount_by_bidder_and_item_and_round' do
+    it 'should return the last valid amount by bidder and item and round' do
       TradingConfiguration.make!(:pregao)
       sobrinho = Bidder.make!(:licitante_sobrinho)
       wenderson = Bidder.make!(:licitante)
@@ -184,22 +256,24 @@ describe TradingItemBid do
         :licitation_process => licitation_process)
 
       TradingItemBid.create!(
-        :round => 0,
+        :round => 1,
         :trading_item_id => trading_item.id,
         :bidder_id => sobrinho.id,
         :amount => 100.0,
         :status => TradingItemBidStatus::WITH_PROPOSAL,
-        :stage => TradingItemBidStage::PROPOSALS)
+        :stage => TradingItemBidStage::ROUND_OF_BIDS)
 
       TradingItemBid.create!(
-        :round => 0,
+        :round => 1,
         :trading_item_id => trading_item.id,
         :bidder_id => wenderson.id,
-        :amount => 120.0,
+        :amount => 99.0,
         :status => TradingItemBidStatus::WITH_PROPOSAL,
-        :stage => TradingItemBidStage::PROPOSALS)
+        :stage => TradingItemBidStage::ROUND_OF_BIDS)
 
-      expect(trading_item.value_limit_to_participate_in_bids).to eq 110.00
+      bid = TradingItemBid.first
+
+      expect(bid.last_valid_amount_by_bidder_and_item_and_round).to eq 100.00
     end
   end
 end

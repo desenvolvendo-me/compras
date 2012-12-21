@@ -15,3 +15,48 @@ pt-BR:
         administrative_process_summarized_object: "Objeto resumido"
         year: "Ano"
         created_at: "Data"
+        preamble: "Preâmbulo"
+        closing_of_accreditation: "Fechamento do credenciamento"
+        trading_registry: "Registro do pregão"
+
+  trading:
+    messages:
+      content_preamble: "No dia %{created_at_to_date}, às %{created_at_hour}
+      horas, reuniram-se na .... (sala), do .... andar, do prédio, sito na
+      (Rua..., Av...), número ..., bairro ..., o Pregoeiro, Senhor %{auctioneer}
+      e a Equipe de Apoio, Senhores %{support_team}, designados à fl.... dos
+      autos do Processo .... número ...., para a Sessão Pública do Pregão em
+      epígrafe.
+
+
+      Aberta a sessão, procedeu-se o exame dos documentos oferecidos pelos
+      interessados presentes, visando à comprovação da existência de poderes
+      para formulação de propostas e prática dos demais atos de atribuição do
+      Licitante, na seguinte conformidade:"
+      closing_of_accreditation: "O Pregoeiro comunicou o encerramento do
+      credenciamento.
+
+
+      Em seguida recebeu a(s) Declaração(ões) do(s) Licitante(s) de que
+      atende(m) plenamente os requisitos de Habilitação estabelecidos no Edial
+      e os dois Envelopes contendo Proposta e os Documentos de Habilitação,
+      respectivamente.
+
+
+      Foram excluídos do certame os licitantes abaixo nomeados, pelos motivos
+      específicados em sequência, relativos à declaração de atendimento dos
+      requisitos de habilitação:"
+      trading_registry: "Ato contínuo, foram abertos os Envelopes contendo as
+      Propostas e, com a colaboração dos membros da Equipe de Apoio, o Pregoeiro
+      examinou a compatibilidade do objeto, prazos e condições de fornecimento
+      ou de execução, com aqueles definidos do Edital, tendo desclassificado as
+      propostas desconformes e selecionados entre os Autores das demais, os
+      Licitantes que participarão da Fase de Lances em razão dos preços
+      propostos, nos termos dos incisos VIII e IX do artigo 4º da Lei federal nº
+      10.520, de 17/07/2002.
+
+
+      Em seguida o Pregoeiro convidou individualmente os autores das propostas
+      selecionadas a formular lances de forma sequencial, a partir do autor da
+      proposta de maior preço e os demais em ordem decrescente de valor. A
+      sequencia de ofertas de lances ocorreu da seguinte forma:"

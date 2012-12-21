@@ -1,7 +1,9 @@
 class Trading < Compras::Model
   attr_accessible :code, :entity_id, :licitating_unit_id,
                   :year, :licitation_process_id, :trading_items_attributes,
-                  :licitation_commission_id
+                  :licitation_commission_id, :preamble, :closing_of_accreditation,
+                  :trading_registry
+
 
   auto_increment :code, :by => :year
 
@@ -37,6 +39,10 @@ class Trading < Compras::Model
   filterize
 
   def to_s
+    code_and_year
+  end
+
+  def code_and_year
     "#{code}/#{year}"
   end
 

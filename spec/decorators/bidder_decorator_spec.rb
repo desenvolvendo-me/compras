@@ -126,6 +126,25 @@ describe BidderDecorator do
       end
     end
 
+    describe '#lower_trading_item_bid_amount_at_stage_of_proposals' do
+      it 'should return a number with precision' do
+        trading_item = double(:trading_item)
+
+        component.should_receive(:lower_trading_item_bid_amount_at_stage_of_proposals).
+          at_least(1).times.with(trading_item).and_return(123456.78)
+
+        expect(subject.lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)).to eq '123.456,78'
+      end
+
+      it 'should be nil' do
+        trading_item = double(:trading_item)
+
+        component.stub(:lower_trading_item_bid_amount_at_stage_of_proposals).and_return(nil)
+
+        expect(subject.lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)).to be_nil
+      end
+    end
+
     describe '#trading_item_classification_percent' do
       it 'should return a number with precision' do
         trading_item = double(:trading_item)

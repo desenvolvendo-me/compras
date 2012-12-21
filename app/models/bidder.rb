@@ -246,6 +246,10 @@ class Bidder < Compras::Model
     lower_trading_item_bid(trading_item).try(:amount) || BigDecimal(0)
   end
 
+  def lower_trading_item_bid_amount_at_stage_of_proposals(trading_item)
+    lower_trading_item_bid_at_stage_of_proposals(trading_item).try(:amount) || BigDecimal(0)
+  end
+
   def trading_item_classification_percent(trading_item)
     return unless lower_trading_item_bid(trading_item)
 
@@ -266,6 +270,10 @@ class Bidder < Compras::Model
   end
 
   protected
+
+  def lower_trading_item_bid_at_stage_of_proposals(trading_item)
+    trading_item_bids.at_stage_of_proposals.for_trading_item(trading_item.id).with_proposal.last
+  end
 
   def block_licitation_process_with_ratification
     return unless licitation_process.present?

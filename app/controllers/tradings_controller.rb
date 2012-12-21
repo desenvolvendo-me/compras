@@ -21,6 +21,10 @@ class TradingsController < CrudController
     end
   end
 
+  def show
+    render :layout => 'report'
+  end
+
   protected
 
   def create_resource(object)

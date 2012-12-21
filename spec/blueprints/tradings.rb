@@ -5,4 +5,5 @@ Trading.blueprint(:pregao_presencial) do
   trading_items {
     [TradingItem.make!(:item_pregao_presencial)]
   }
+  licitation_commission { LicitationCommission.make!(:comissao_pregao_presencial) }
 end

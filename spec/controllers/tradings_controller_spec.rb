@@ -24,4 +24,12 @@ describe TradingsController do
       post :create, :trading => { :licitation_process_id => licitation_process.id }
     end
   end
+
+  it 'should render report layout on #show' do
+    trading = double(:trading, :id => 1)
+
+    get :show, :id => trading.id
+
+    expect(response).to render_template('layout')
+  end
 end

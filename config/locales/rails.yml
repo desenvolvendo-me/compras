@@ -24,6 +24,7 @@ pt-BR:
       short: "%d/%m, %H:%M h"
       long: "%A, %d de %B de %Y, %H:%M h"
       hour: "%H:%M"
+      second: "%H:%M:%S"
     am: ""
     pm: ""
 

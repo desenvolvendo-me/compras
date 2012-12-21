@@ -7,4 +7,5 @@
  *= require compras/radio_button
  *= require compras/table_size
  *= require compras/error_base
+ *= require compras/simple_form
  */

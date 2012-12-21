@@ -1,0 +1,22 @@
+<a id="generate-preamble">Gerar Preâmbulo</a>
+<%= f.input :preamble, :input_html => { :class => 'text-190' } %>
+
+<a id="closing-of-accreditation">Gerar Fechamento do Credenciamento</a>
+<%= f.input :closing_of_accreditation, :input_html => { :class => 'text-190' } %>
+
+<a id="trading-registry">Gerar Registro do Pregão</a>
+<%= f.input :trading_registry, :input_html => { :class => 'text-190' } %>
+
+<script>
+  $("#generate-preamble").click(function(){
+    $("#trading_preamble").val("<%= content_preamble.gsub(/\n/, '\n') %>");
+  })
+
+  $("#closing-of-accreditation").click(function(){
+    $("#trading_closing_of_accreditation").val("<%= closing_of_accreditation.gsub(/\n/, '\n') %>");
+  })
+
+  $("#trading-registry").click(function(){
+    $("#trading_trading_registry").val("<%= trading_registry.gsub(/\n/, '\n') %>");
+  })
+</script>

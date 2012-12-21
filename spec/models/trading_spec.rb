@@ -35,6 +35,12 @@ describe Trading do
     end
   end
 
+  describe "#code_and_year" do
+    it "returns the code and year of the trading formatted as 1/2012" do
+      expect(subject.code_and_year).to eq "1/2012"
+    end
+  end
+
   describe "default values" do
     it "should percentage_limit_to_participate_in_bids be 0" do
       expect(subject.percentage_limit_to_participate_in_bids).to eq 0

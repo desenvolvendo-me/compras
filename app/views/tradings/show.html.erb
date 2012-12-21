@@ -1,0 +1,93 @@
+<h2 class="center">ATA DA SESSÃO PÚBLICA</h2>
+
+<p>Pregão Número: <%= resource.code_and_year %></p>
+<p>Processo: <%= resource.licitation_process %></p>
+<p>Objeto: <%= resource.administrative_process_summarized_object %></p>
+<hr>
+
+<h3 class="center">PREÂMBULO</h3>
+<p><%= resource.preamble %></p>
+
+<h3 class="center">CREDENCIAMENTO</h3>
+<table class="records">
+  <thead>
+    <tr>
+      <th>Representantes</th>
+      <th>Empresas</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.bidders.each do |bidder| %>
+      <tr>
+        <td><%= bidder.creditor.representatives.first %></td>
+        <td><%= bidder.creditor %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= resource.closing_of_accreditation %></p>
+
+<h3 class="center">REGISTO DO PREGÃO</h3>
+<p><%= resource.trading_registry %></p>
+
+<% resource.trading_items.each do |item| %>
+  <h3>Item: <%= item %></h3>
+  <h3>Fase: Propostas</h3>
+  <table class="records">
+    <thead>
+      <tr>
+        <th class="g-1-2">Empresa</th>
+        <th class="g-1-10">Valor</th>
+        <th class="g-1-10">%</th>
+        <th class="g-1-10">hora</th>
+        <th class="g-1-10">situação</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% item.trading_item_bids.at_stage_of_proposals.reorder('amount DESC').each do |bid| %>
+        <tr>
+          <td class="g-1-2"><%= bid.bidder %></td>
+          <td class="g-1-10"><%= bid.decorator.amount %></td>
+          <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+          <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
+          <td class="g-1-10"><%= item.decorator.situation_for_next_stage(bid.bidder) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% item.trading_item_bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round).each do |round| %>
+    <h3><%= "#{round.round}º Rodada de lances" %></h3>
+    <table class="records">
+      <tbody>
+        <% item.trading_item_bids.at_round(round.round).at_stage_of_round_of_bids.reorder('amount DESC').each do |bid| %>
+          <tr>
+            <td class="g-1-2"><%= bid.bidder %></td>
+            <td class="g-1-10"><%= bid.decorator.last_valid_amount_by_bidder_and_item_and_round %></td>
+            <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+            <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
+            <td class="g-1-10"><%= bid.status_humanize %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <h3>Negociação</h3>
+  <table class="records">
+    <tbody>
+      <% item.trading_item_bids.at_stage_of_negotiation.reorder('amount DESC').each do |bid| %>
+        <tr>
+          <td class="g-1-2"><%= bid.bidder %></td>
+          <td class="g-1-10"><%= bid.decorator.amount %></td>
+          <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+          <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
+          <td class="g-1-10"><%= bid.status_humanize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
