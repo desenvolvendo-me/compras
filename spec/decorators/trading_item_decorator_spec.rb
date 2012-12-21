@@ -84,47 +84,88 @@ describe TradingItemDecorator do
   end
 
   describe "#allows_offer_placing" do
+    let(:trading_item) { double(:trading_item, :started? => true, :closed? => true) }
+    let(:trading) { double(:trading, :trading_items => [trading_item, component]) }
+
     before do
       component.stub(:minimum_reduction_value => 0.0,
                      :minimum_reduction_percent => 0.0,
-                     :closed? => false)
+                     :closed? => false,
+                     :started? => true,
+                     :trading => trading)
     end
 
-    context "item is still open" do
-      it "returns nil if item has a minimum reduction value set" do
-        component.stub(:minimum_reduction_value => 1.0)
+    context 'with another item not started' do
+      describe "item is still open" do
+        it "returns nil if item has a minimum reduction value set" do
+          component.stub(:minimum_reduction_value => 1.0)
 
-        expect(subject.allows_offer_placing).to be_nil
-      end
+          expect(subject.allows_offer_placing).to be_nil
+        end
 
-      it "returns nil if item has a minimum reduction percent set" do
-        component.stub(:minimum_reduction_percent => 1.0)
+        it "returns nil if item has a minimum reduction percent set" do
+          component.stub(:minimum_reduction_percent => 1.0)
 
-        expect(subject.allows_offer_placing).to be_nil
-      end
+          expect(subject.allows_offer_placing).to be_nil
+        end
 
-      it "returns disabled_message if both minimum reductions are nil" do
-        I18n.backend.store_translations 'pt-BR', :trading_item => {
-          :messages => {
-            :must_have_reduction => 'não pode'
+        it "returns disabled_message if both minimum reductions are nil" do
+          I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :must_have_reduction => 'não pode'
+            }
           }
-        }
 
-        expect(subject.allows_offer_placing).to eq "não pode"
+          expect(subject.allows_offer_placing).to eq "não pode"
+        end
+      end
+
+      describe "item is closed" do
+        it "returns a disabling message" do
+          component.stub(:minimum_reduction_percent => 0.1,
+                         :closed? => true)
+          I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :must_be_open => 'deve estar aberto'
+            }
+          }
+
+          expect(subject.allows_offer_placing).to eq "deve estar aberto"
+        end
       end
     end
 
-    context "item is closed" do
-      it "returns a disabling message" do
-        component.stub(:minimum_reduction_percent => 0.1,
-                       :closed? => true)
-        I18n.backend.store_translations 'pt-BR', :trading_item => {
-          :messages => {
-            :must_be_open => 'deve estar aberto'
-          }
-        }
+    context 'with another item started but not closed' do
+      before do
+        trading_item.stub(:closed? => false)
+      end
 
-        expect(subject.allows_offer_placing).to eq "deve estar aberto"
+      describe "item is still open" do
+        it "returns there_is_an_pending_item" do
+          I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :there_is_an_pending_item => 'acabe o item aberto'
+            }
+          }
+
+          component.stub(:minimum_reduction_value => 1.0)
+
+          expect(subject.allows_offer_placing).to eq 'acabe o item aberto'
+        end
+      end
+
+      describe "item is closed" do
+        it "returns a disabling message" do
+          component.stub(:minimum_reduction_percent => 0.1,
+                         :closed? => true)
+          I18n.backend.store_translations 'pt-BR', :trading_item => {
+            :messages => {
+              :must_be_open => 'deve estar aberto'
+            }
+          }
+
+          expect(subject.allows_offer_placing).to eq "deve estar aberto"
+        end
       end
     end
   end

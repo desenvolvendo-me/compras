@@ -217,4 +217,18 @@ describe TradingItem do
       expect(subject.proposals_for_round_of_bids?).to be_false
     end
   end
+
+  describe '#started?' do
+    it 'should be true when have bids' do
+      subject.stub(:trading_item_bids).and_return(['bid'])
+
+      expect(subject.started?).to be_true
+    end
+
+    it 'should be false when have not bids' do
+      subject.stub(:trading_item_bids).and_return([])
+
+      expect(subject.started?).to be_false
+    end
+  end
 end

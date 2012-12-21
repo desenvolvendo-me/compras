@@ -26,6 +26,35 @@ feature TradingItem do
     expect(page).to have_content 'Editar 1/2012'
   end
 
+  scenario "listing trading items with one item started" do
+    TradingConfiguration.make!(:pregao)
+    item = TradingItem.make!(:item_pregao_presencial)
+    trading = Trading.make!(:pregao_presencial,
+      :trading_items => [
+        item,
+        TradingItem.make!(:segundo_item_pregao_presencial)
+      ])
+
+    TradingItemBid.create!(
+        :round => 0,
+        :trading_item_id => item.id,
+        :bidder_id => trading.bidders.first.id,
+        :amount => 120.0,
+        :stage => TradingItemBidStage::PROPOSALS,
+        :status => TradingItemBidStatus::WITH_PROPOSAL)
+
+    navigate "Processo Administrativo/Licitatório > Pregão Presencial"
+
+    click_link "1/2012"
+
+    click_button "Salvar e ir para Itens/Ofertas"
+
+    within 'table.records tbody tr:nth-child(2)' do
+      expect(page).to have_disabled_element 'Fazer oferta',
+                                            :reason => 'Encerre o item (01.01.00001 - Antivirus) antes de iniciar outro'
+    end
+  end
+
   scenario 'should not have Apagar button' do
     Trading.make!(:pregao_presencial)
 
