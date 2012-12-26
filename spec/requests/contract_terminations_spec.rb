@@ -26,6 +26,8 @@ feature 'ContractTerminations' do
 
     expect(page).to have_content 'Criar nova Rescisão Contratual para Contrato 001'
 
+    expect(page).to have_disabled_field 'Status'
+
     expect(page).to have_disabled_field 'Número da rescisão'
     expect(page).to have_field 'Número da rescisão', :with => '1'
 
@@ -83,6 +85,8 @@ feature 'ContractTerminations' do
     click_link 'Rescisões'
 
     click_link '1/2012'
+
+    expect(page).to have_disabled_field 'Status'
 
     fill_in 'Motivo da rescisão', :with => 'Motivo vai aqui'
 
