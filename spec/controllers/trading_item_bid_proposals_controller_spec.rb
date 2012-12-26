@@ -135,7 +135,7 @@ describe TradingItemBidProposalsController do
              :status => TradingItemBidStatus::WITHOUT_PROPOSAL
            }
 
-      expect(response).to redirect_to(new_trading_item_bid_proposal_path(:trading_item_id => trading_item.id, :anchor => :title))
+      expect(response).to redirect_to(new_trading_item_bid_proposal_path(:trading_item_id => trading_item.id))
     end
   end
 

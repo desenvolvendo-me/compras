@@ -46,7 +46,7 @@ class TradingItemDecorator
       if trading_item_bids.negotiation.empty? || valid_negotiation_proposals.any?
         routes.classification_trading_item_path(component)
       else
-        routes.new_trading_item_bid_negotiation_path(:trading_item_id => component.id, :anchor => :title)
+        routes.new_trading_item_bid_negotiation_path(:trading_item_id => component.id)
       end
     end
   end
@@ -56,14 +56,14 @@ class TradingItemDecorator
       if trading_item_bids.at_stage_of_round_of_bids.empty?
         routes.proposal_report_trading_item_path(component)
       else
-        routes.new_trading_item_bid_round_of_bid_path(:trading_item_id => component.id, :anchor => :title)
+        routes.new_trading_item_bid_round_of_bid_path(:trading_item_id => component.id)
       end
     end
   end
 
   def stage_of_proposals_path(stage_calculator)
     if stage_calculator.stage_of_proposals?
-      routes.new_trading_item_bid_proposal_path(:trading_item_id => component.id, :anchor => :title)
+      routes.new_trading_item_bid_proposal_path(:trading_item_id => component.id)
     end
   end
 

@@ -184,7 +184,7 @@ describe TradingItemDecorator do
 
       it 'should return the path to proposals when at stage of proposals' do
         routes.should_receive(:new_trading_item_bid_proposal_path).
-          with(:trading_item_id=>1, :anchor=>:title).and_return('new_proposal_path')
+          with(:trading_item_id=>1).and_return('new_proposal_path')
 
         expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_proposal_path'
       end
@@ -214,7 +214,7 @@ describe TradingItemDecorator do
         component.stub(:trading_item_bids).and_return(trading_item_bids)
 
         routes.should_receive(:new_trading_item_bid_round_of_bid_path).
-          with(:trading_item_id => 1, :anchor => :title).
+          with(:trading_item_id => 1).
           and_return('new_trading_item_bid_path')
 
         expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_trading_item_bid_path'
@@ -248,7 +248,7 @@ describe TradingItemDecorator do
         component.stub(:valid_negotiation_proposals).and_return([])
 
         routes.should_receive(:new_trading_item_bid_negotiation_path).
-          with(:trading_item_id => 1, :anchor => :title).
+          with(:trading_item_id => 1).
           and_return('new_negotiation_path')
 
         expect(subject.current_stage_path(:stage_calculator => stage_calculator)).to eq 'new_negotiation_path'

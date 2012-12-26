@@ -95,7 +95,7 @@ describe TradingItemBidRoundOfBidsController do
 
           delete :destroy, :id => last_bid.id, :trading_item_id => trading_item.id
 
-          expect(response).to redirect_to(new_trading_item_bid_round_of_bid_path(:trading_item_id => trading_item.id, :anchor => :title))
+          expect(response).to redirect_to(new_trading_item_bid_round_of_bid_path(:trading_item_id => trading_item.id))
         end
 
         it 'should return 404 if its not the last bid' do

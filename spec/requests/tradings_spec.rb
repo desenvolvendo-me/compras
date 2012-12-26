@@ -371,6 +371,8 @@ feature "Tradings" do
 
     click_link "Iniciar Negociação"
 
+    expect(page.current_url).to match(/#title/)
+
     expect(page).to have_content 'Negociação'
     expect(page).to have_disabled_field "Etapa"
     expect(page).to have_field "Etapa", :with => "Negociação"
