@@ -1,49 +1,49 @@
 <%= f.input :contract_id, :as => :hidden %>
 
-<div class='yui3-g'>
-  <div class='yui3-u-1-5'>
+<div class="yui3-g">
+  <div class="yui3-u-1-5">
     <%= f.input :number, :disabled => true %>
   </div>
 
-  <div class='yui3-u-1-8'>
+  <div class="yui3-u-1-8">
     <%= f.input :year, :disabled => true %>
   </div>
 </div>
 
 <%= f.input :reason, :disabled => f.object.annulled? %>
 
-<div class='yui3-g'>
-  <div class='yui3-u-1-6'>
+<div class="yui3-g">
+  <div class="yui3-u-1-6">
     <%= f.input :expiry_date, :disabled => f.object.annulled? %>
   </div>
 
-  <div class='yui3-u-1-6'>
+  <div class="yui3-u-1-6">
     <%= f.input :termination_date, :disabled => f.object.annulled? %>
   </div>
 
-  <div class='yui3-u-1-6'>
+  <div class="yui3-u-1-6">
     <%= f.input :publication_date, :disabled => f.object.annulled? %>
   </div>
 
-  <div class='yui3-u-1-3'>
+  <div class="yui3-u-1-3">
     <%= f.input :dissemination_source, :disabled => f.object.annulled? %>
   </div>
 </div>
 
-<div class='yui3-g'>
-  <div class='yui3-u-1-4'>
+<div class="yui3-g">
+  <div class="yui3-u-1-4">
     <%= f.input :fine_value, :disabled => f.object.annulled? %>
   </div>
 
-  <div class='yui3-u-1-4'>
+  <div class="yui3-u-1-4">
     <%= f.input :compensation_value, :disabled => f.object.annulled? %>
   </div>
 
-  <div class='yui3-u-1-4'>
+  <div class="yui3-u-1-4">
     <%= f.input :term_termination_file, :disabled => f.object.annulled? %>
   </div>
 
-  <div class='yui3-u-1-4'>
+  <div class="yui3-u-1-4">
     <%= link_to f.object.term_termination_file_identifier, f.object.term_termination_file_url if f.object.term_termination_file? %>
   </div>
 </div>
