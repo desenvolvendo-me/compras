@@ -13,7 +13,7 @@ module Matchers
   #
   matcher :have_disabled_element do |value, options|
     match do |page|
-      element = page.first(:xpath, %(//*[text()="#{value}"] | //*[@value="#{value}"]))
+      element = page.first(:xpath, %(.//*[text()="#{value}"] | .//*[@value="#{value}"]))
       element.trigger(:mouseover)
 
       expect(page.document).to have_content options[:reason]
