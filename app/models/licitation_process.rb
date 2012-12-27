@@ -42,7 +42,7 @@ class LicitationProcess < Compras::Model
   has_many :licitation_process_lots, :dependent => :destroy, :order => :id
   has_many :reserve_funds, :dependent => :restrict
   has_many :price_registrations, :dependent => :restrict
-  has_many :licitation_process_ratifications, :dependent => :restrict
+  has_many :licitation_process_ratifications, :dependent => :restrict, :order => :id
 
   has_one :trading, :dependent => :restrict
 
@@ -195,6 +195,18 @@ class LicitationProcess < Compras::Model
     licitation_process_ratifications.any?
   end
 
+  def adjudication_date
+    return unless first_ratification.present?
+
+    first_ratification.adjudication_date
+  end
+
+  def ratification_date
+    return unless first_ratification.present?
+
+    first_ratification.ratification_date
+  end
+
   protected
 
   def set_modality
@@ -300,5 +312,9 @@ class LicitationProcess < Compras::Model
     if attributes_changed.any?
       errors.add(:base, :cannot_be_edited)
     end
+  end
+
+  def first_ratification
+    licitation_process_ratifications.first
   end
 end

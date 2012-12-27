@@ -66,6 +66,14 @@ class LicitationProcessDecorator
     end
   end
 
+  def ratification_date
+    localize(super) if super
+  end
+
+  def adjudication_date
+    localize(super) if super
+  end
+
   private
 
   def current_publication_of

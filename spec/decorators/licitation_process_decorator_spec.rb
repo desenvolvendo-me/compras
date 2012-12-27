@@ -223,4 +223,20 @@ describe LicitationProcessDecorator do
       expect(described_class.header_attributes).to include :envelope_opening_date
     end
   end
+
+  describe '#adjudication_date' do
+    it 'should returns localized date' do
+      component.stub(:adjudication_date).and_return(Date.new(2012, 12, 27))
+
+      expect(subject.adjudication_date).to eq '27/12/2012'
+    end
+  end
+
+  describe '#ratification_date' do
+    it 'should returns localized date' do
+      component.stub(:ratification_date).and_return(Date.new(2012, 12, 27))
+
+      expect(subject.ratification_date).to eq '27/12/2012'
+    end
+  end
 end
