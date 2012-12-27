@@ -21,7 +21,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :period_unit, :with => PeriodUnit
-  has_enumeration_for :status, :with => LicitationProcessStatus
+  has_enumeration_for :status, :with => LicitationProcessStatus, :create_helpers => true
 
   belongs_to :administrative_process
   belongs_to :capability

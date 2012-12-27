@@ -47,8 +47,11 @@ describe BiddersController do
       post :create, :licitation_process_id => licitation_process.id
     end
 
-    it 'should save when envelope opening date is today' do
+    it "should update the licitation_process status to 'in_progress'" do
       licitation_process = LicitationProcess.make!(:processo_licitatorio_fornecedores)
+
+      Bidder.any_instance.should_receive(:save).and_return(true)
+      LicitationProcess.any_instance.should_receive(:update_status).with(LicitationProcessStatus::IN_PROGRESS)
 
       post :create, :licitation_process_id => licitation_process.id
     end
