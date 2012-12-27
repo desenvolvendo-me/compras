@@ -132,6 +132,10 @@ class LicitationProcess < Compras::Model
     "#{process}/#{year}"
   end
 
+  def update_status(status)
+    update_column :status, status
+  end
+
   def next_process
     last_process_of_self_year.succ
   end

@@ -23,4 +23,16 @@ describe LicitationProcessRatificationsController do
 
     expect(response).to render_template('layout')
   end
+
+  describe 'POST #create' do
+    it "should change the status of licitation_process to 'approved'" do
+      licitation_process = LicitationProcess.make!(:processo_licitatorio_computador)
+
+      LicitationProcessRatification.any_instance.should_receive(:save).and_return(true)
+      LicitationProcess.any_instance.should_receive(:update_status).with(LicitationProcessStatus::APPROVED)
+
+      post :create, :licitation_process_ratification => {
+        :licitation_process_id => licitation_process.id }
+    end
+  end
 end

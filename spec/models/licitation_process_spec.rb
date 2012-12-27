@@ -536,4 +536,12 @@ describe LicitationProcess do
       expect(subject.ratification?).to be_false
     end
   end
+
+  describe '#update_status' do
+    it 'should update status' do
+      subject.should_receive(:update_column).with(:status, LicitationProcessStatus::IN_PROGRESS)
+
+      subject.update_status(LicitationProcessStatus::IN_PROGRESS)
+    end
+  end
 end
