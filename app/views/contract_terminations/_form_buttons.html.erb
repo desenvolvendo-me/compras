@@ -1,5 +1,5 @@
 <div class="buttons">
   <%= f.button :submit, 'data-disabled' => f.object.decorator.is_annulled_message %>
   <%= annul_link %>
-  <%= f.button :back, :href => contract_terminations_path(:contract_id => resource.contract_id) %>
+  <%= f.button :back, :href => edit_contract_path(f.object.contract) %>
 </div>

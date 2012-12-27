@@ -1,25 +1,24 @@
 class ContractTerminationsController < CrudController
+  actions :all, :except => [:destroy, :index, :show]
+
+  before_filter :get_parent
+  before_filter :block_contract_not_allowed, :only => [:new, :create]
+
   def new
     object = build_resource
     object.year = Date.current.year
     object.number = object.next_number
-    object.contract = Contract.find(params[:contract_id])
+    object.contract = @parent
 
     super
   end
 
   def create
-    create!{ contract_terminations_path(:contract_id => resource.contract_id) }
+    create!{ edit_contract_path(@parent) }
   end
 
   def update
-    update!{ contract_terminations_path(:contract_id => resource.contract_id) }
-  end
-
-  def begin_of_association_chain
-    if params[:contract_id]
-      @parent = Contract.find(params[:contract_id])
-    end
+    update!{ edit_contract_path(@parent) }
   end
 
   protected
@@ -32,5 +31,22 @@ class ContractTerminationsController < CrudController
     object.year = Date.current.year
 
     super
+  end
+
+  def contract_id
+    return params[:contract_id] if params[:contract_id]
+    return params[:contract_termination][:contract_id] if params[:contract_termination]
+  end
+
+  def get_parent
+    if contract_id
+      @parent = Contract.find(contract_id)
+    else
+      @parent = ContractTermination.find(params[:id]).contract
+    end
+  end
+
+  def block_contract_not_allowed
+    raise Exceptions::Unauthorized unless @parent.allow_termination?
   end
 end

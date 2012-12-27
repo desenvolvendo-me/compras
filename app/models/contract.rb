@@ -28,7 +28,8 @@ class Contract < Compras::Model
   has_many :founded_debt_pledges, :class_name => 'Pledge', :dependent => :restrict, :foreign_key => 'founded_debt_contract_id'
   has_many :delivery_schedules, :dependent => :destroy, :order => :sequence
   has_many :occurrence_contractual_historics, :dependent => :restrict
-  has_many :contract_terminations, :dependent => :restrict
+
+  has_one :contract_termination, :dependent => :restrict
 
   accepts_nested_attributes_for :delivery_schedules, :allow_destroy => true
 
@@ -78,5 +79,9 @@ class Contract < Compras::Model
 
   def all_pledges_total_value
     all_pledges.sum(&:value)
+  end
+
+  def allow_termination?
+    !contract_termination.present?
   end
 end

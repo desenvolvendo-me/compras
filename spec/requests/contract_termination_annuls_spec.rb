@@ -13,9 +13,7 @@ feature 'ContractTerminationAnnuls' do
 
     click_link '001'
 
-    click_link 'Rescisões'
-
-    click_link '1/2012'
+    click_link 'Rescisão'
 
     click_link 'Anular'
 
@@ -45,9 +43,7 @@ feature 'ContractTerminationAnnuls' do
 
     click_link '001'
 
-    click_link 'Rescisões'
-
-    click_link '1/2012'
+    click_link 'Rescisão'
 
     click_link 'Anulação'
 
@@ -73,9 +69,7 @@ feature 'ContractTerminationAnnuls' do
 
     click_link '001'
 
-    click_link 'Rescisões'
-
-    click_link '1/2012'
+    click_link 'Rescisão'
 
     click_link 'Anulação'
 

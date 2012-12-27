@@ -3,7 +3,7 @@ Compras::Application.routes.draw do
 
   get 'agreement_kinds/modal', :as => :modal_agreement_kinds
 
-  resources :contract_terminations, :except => [:show, :destroy]
+  resources :contract_terminations, :except => [:show, :destroy, :index]
 
   resources :creditors do
     collection do

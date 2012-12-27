@@ -13,9 +13,10 @@ class ContractTermination < Compras::Model
 
   has_one :annul, :class_name => 'ResourceAnnul', :as => :annullable, :dependent => :destroy
 
-  validates :year, :contract, :reason, :expiry_date, :termination_date, :presence => true
+  validates :year, :contract,:reason, :expiry_date, :termination_date, :presence => true
   validates :publication_date, :dissemination_source, :presence => true
   validates :year, :mask => "9999", :allow_blank => true
+  validates :contract_id, :uniqueness => true, :allow_blank => true
 
   before_create :generate_number
 

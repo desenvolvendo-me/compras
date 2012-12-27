@@ -33,7 +33,7 @@ describe Contract do
   it { should have_many(:occurrence_contractual_historics).dependent(:restrict) }
   it { should have_many(:pledges).dependent(:restrict) }
   it { should have_many(:founded_debt_pledges).dependent(:restrict) }
-  it { should have_many(:contract_terminations).dependent(:restrict) }
+  it { should have_one(:contract_termination).dependent(:restrict) }
 
   it 'should return contract_number as to_s method' do
     subject.contract_number = '001'
@@ -190,6 +190,20 @@ describe Contract do
       subject.stub(:all_pledges => [double(:value => 100), double(:value => 50)])
 
       expect(subject.all_pledges_total_value).to eq 150
+    end
+  end
+
+  describe '#allow_termination?' do
+    it 'should return true when contract_termination is not present' do
+      expect(subject.allow_termination?).to be_true
+    end
+
+    it 'should return false when contract_termination is present' do
+      contract_termination = double(:contract_termination)
+
+      subject.stub(:contract_termination).and_return(contract_termination)
+
+      expect(subject.allow_termination?).to be_false
     end
   end
 end

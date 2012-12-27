@@ -17,12 +17,7 @@ feature 'ContractTerminations' do
 
     click_link '001'
 
-    click_link 'Rescisões'
-
-    expect(page).to have_content 'Rescisões do Contrato 001'
-    expect(page).to have_link 'Voltar para o Contrato 001'
-
-    click_link 'Criar Rescisão Contratual'
+    click_link 'Rescisão'
 
     expect(page).to have_content 'Criar nova Rescisão Contratual para Contrato 001'
 
@@ -47,7 +42,7 @@ feature 'ContractTerminations' do
 
     expect(page).to have_content 'Rescisão Contratual criada com sucesso.'
 
-    click_link "1/#{Date.current.year}"
+    click_link 'Rescisão'
 
     expect(page).to have_content "Editar Rescisão 1/#{Date.current.year} do Contrato 001"
 
@@ -72,7 +67,7 @@ feature 'ContractTerminations' do
 
     click_link 'Voltar'
 
-    expect(page).to have_content 'Rescisões do Contrato 001'
+    expect(page).to have_content 'Editar 001'
   end
 
   scenario 'editing a contract termination' do
@@ -82,9 +77,7 @@ feature 'ContractTerminations' do
 
     click_link '001'
 
-    click_link 'Rescisões'
-
-    click_link '1/2012'
+    click_link 'Rescisão'
 
     expect(page).to have_disabled_field 'Status'
 
@@ -92,9 +85,9 @@ feature 'ContractTerminations' do
 
     click_button 'Salvar'
 
-    expect(page).to have_content 'Rescisão Contratual editada com sucesso.'
+    expect(page).to have_notice 'Rescisão Contratual editada com sucesso.'
 
-    click_link '1/2012'
+    click_link 'Rescisão'
 
     expect(page).to have_field 'Motivo da rescisão', :with => 'Motivo vai aqui'
   end
@@ -106,9 +99,7 @@ feature 'ContractTerminations' do
 
     click_link '001'
 
-    click_link 'Rescisões'
-
-    click_link '1/2012'
+    click_link 'Rescisão'
 
     expect(page).to have_disabled_field 'Número da rescisão'
     expect(page).to have_disabled_field 'Ano'
@@ -124,25 +115,5 @@ feature 'ContractTerminations' do
     expect(page).to have_disabled_element 'Salvar', :reason => 'não é permitido alterar rescisão anulada'
 
     expect(page).to have_link 'Anulação'
-  end
-
-  scenario 'index with columns at the index' do
-    ContractTermination.make!(:contrato_rescindido)
-
-    navigate 'Comum > Cadastrais > Contratos'
-
-    click_link '001'
-
-    click_link 'Rescisões'
-
-    within_records do
-      expect(page).to have_content 'Rescisão Contratual'
-      expect(page).to have_content 'Status'
-
-      within 'tbody tr' do
-        expect(page).to have_content '1/2012'
-        expect(page).to have_content 'Em vigência'
-      end
-    end
   end
 end
