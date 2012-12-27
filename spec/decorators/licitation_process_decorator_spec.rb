@@ -141,16 +141,49 @@ describe LicitationProcessDecorator do
   end
 
   context '#not_updatable_message' do
-    it 'when is not updatable' do
+    let(:current_publication) { double(:current_publication, :publication_of_humanize => 'Edital')}
+    let(:publications) { double(:publications, :current => current_publication) }
+    let(:ratifications) { double(:ratifications) }
+
+    before do
       I18n.backend.store_translations 'pt-BR', :licitation_process => {
           :messages => {
-            :not_updatable => 'não pode'
+            :no_one_publication_with_valid_type => 'tipo invalido',
+            :has_already_a_ratification => 'homologado',
+            :has_already_a_publications => 'publicado'
         }
       }
+    end
 
+    it 'when is not updatable by invalid publication type' do
       component.stub(:updatable? => false)
+      component.stub(:licitation_process_publications).and_return(publications)
+      publications.stub(:current_updatable?).and_return(false)
 
-      expect(subject.not_updatable_message).to eq 'não pode'
+      expect(subject.not_updatable_message).to eq 'tipo invalido'
+    end
+
+    it 'when is not updatable by invalid ratification' do
+      component.stub(:updatable? => false)
+      component.stub(:licitation_process_publications).and_return(publications)
+      component.stub(:licitation_process_ratifications).and_return(ratifications)
+      publications.stub(:current_updatable?).and_return(true)
+      ratifications.stub(:empty?).and_return(false)
+
+
+      expect(subject.not_updatable_message).to eq 'homologado'
+    end
+
+    it 'when is not updatable by invalid publications' do
+      component.stub(:updatable? => false)
+      component.stub(:licitation_process_publications).and_return(publications)
+      component.stub(:licitation_process_ratifications).and_return(ratifications)
+      publications.stub(:current_updatable?).and_return(true)
+      publications.stub(:empty?).and_return(false)
+      ratifications.stub(:empty?).and_return(true)
+
+
+      expect(subject.not_updatable_message).to eq 'publicado'
     end
 
     it 'when is updatable' do

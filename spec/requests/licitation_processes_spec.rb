@@ -1117,14 +1117,14 @@ feature "LicitationProcesses" do
 
     click_link 'Editar processo licitatório'
 
-    expect(page).to have_disabled_element 'Salvar', :reason => 'este processo licitatório não pode ser alterado'
+    expect(page).to have_disabled_element 'Salvar', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
 
     click_link 'Documentos'
-    expect(page).to have_disabled_element 'Remover', :reason => 'este processo licitatório não pode ser alterado'
+    expect(page).to have_disabled_element 'Remover', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
 
     click_link 'Dotações orçamentarias'
-    expect(page).to have_disabled_element 'Adicionar Item', :reason => 'este processo licitatório não pode ser alterado'
-    expect(page).to have_disabled_element 'Remover Item', :reason => 'este processo licitatório não pode ser alterado'
+    expect(page).to have_disabled_element 'Adicionar Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
+    expect(page).to have_disabled_element 'Remover Item', :reason => 'a última publicação é do tipo (Cancelamento). Não pode ser alterado'
   end
 
   scenario "should not have link to lots when creating a new licitation process" do
@@ -1353,7 +1353,7 @@ feature "LicitationProcesses" do
     end
 
     expect(page).to have_disabled_element 'Salvar',
-                    :reason => 'este processo licitatório não pode ser alterado'
+                    :reason => 'já foi homologado. Não pode ser alterado'
   end
 
   scenario 'index with columns at the index' do

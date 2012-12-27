@@ -49,12 +49,26 @@ class LicitationProcessDecorator
   end
 
   def not_updatable_message
-    t('licitation_process.messages.not_updatable') unless updatable?
+    return if updatable?
+
+    if !licitation_process_publications.current_updatable?
+      t('licitation_process.messages.no_one_publication_with_valid_type', :publication_of => current_publication_of)
+    elsif !licitation_process_ratifications.empty?
+      t('licitation_process.messages.has_already_a_ratification')
+    elsif !licitation_process_publications.empty?
+      t('licitation_process.messages.has_already_a_publications')
+    end
   end
 
   def must_have_published_edital
     unless edital_published?
       t("licitation_process.messages.must_be_included_after_edital_publication")
     end
+  end
+
+  private
+
+  def current_publication_of
+    licitation_process_publications.current.publication_of_humanize
   end
 end

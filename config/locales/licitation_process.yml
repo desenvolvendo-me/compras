@@ -50,5 +50,7 @@ pt-BR:
 
   licitation_process:
     messages:
-      not_updatable: "este processo licitatório não pode ser alterado"
+      no_one_publication_with_valid_type: "a última publicação é do tipo (%{publication_of}). Não pode ser alterado"
+      has_already_a_ratification: "já foi homologado. Não pode ser alterado"
+      has_already_a_publications: "já possui publicações. Não pode ser alterado"
       must_be_included_after_edital_publication: "Licitantes só podem ser incluídos após publicação do edital"
