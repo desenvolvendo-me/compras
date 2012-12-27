@@ -16,6 +16,7 @@ class LicitationProcessesController < CrudController
     object.administrative_process = @administrative_process
     object.modality = @administrative_process.modality
     object.judgment_form = @administrative_process.judgment_form
+    object.status = LicitationProcessStatus::WAITING_FOR_OPEN
 
     super
   end
@@ -55,6 +56,7 @@ class LicitationProcessesController < CrudController
 
     object.process = object.next_process
     object.licitation_number = object.next_licitation_number
+    object.status = LicitationProcessStatus::WAITING_FOR_OPEN
 
     super
   end
