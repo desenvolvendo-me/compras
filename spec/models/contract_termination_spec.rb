@@ -20,8 +20,6 @@ describe ContractTermination do
   it { should validate_presence_of :publication_date }
   it { should validate_presence_of :dissemination_source }
 
-  it { should validate_uniqueness_of :contract_id }
-
   it { should_not allow_value('12').for(:year) }
   it { should allow_value('1234').for(:year) }
 
