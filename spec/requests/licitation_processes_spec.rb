@@ -612,6 +612,8 @@ feature "LicitationProcesses" do
 
     expect(page).to_not have_button 'Apurar'
 
+    expect(page).to have_disabled_field 'Status'
+
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Modalidade'

@@ -1,0 +1,7 @@
+pt-BR:
+  enumerations:
+    licitation_process_status:
+      annulled: "Anulado"
+      in_progress: "Em andamento"
+      waiting_for_open: "Aguardando Abertura"
+      approved: "Homologado/Encerrado"

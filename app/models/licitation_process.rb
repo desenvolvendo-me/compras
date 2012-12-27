@@ -9,7 +9,7 @@ class LicitationProcess < Compras::Model
                   :period, :period_unit, :expiration, :expiration_unit,
                   :judgment_form_id,
                   :disqualify_by_documentation_problem, :disqualify_by_maximum_value,
-                  :consider_law_of_proposals, :price_registration
+                  :consider_law_of_proposals, :price_registration, :status
 
   attr_readonly :process, :year, :licitation_number
 
@@ -21,6 +21,7 @@ class LicitationProcess < Compras::Model
   has_enumeration_for :type_of_calculation, :with => LicitationProcessTypeOfCalculation
   has_enumeration_for :expiration_unit, :with => PeriodUnit
   has_enumeration_for :period_unit, :with => PeriodUnit
+  has_enumeration_for :status, :with => LicitationProcessStatus
 
   belongs_to :administrative_process
   belongs_to :capability
