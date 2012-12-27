@@ -16,7 +16,7 @@ class ContractTermination < Compras::Model
   validates :year, :contract,:reason, :expiry_date, :termination_date, :presence => true
   validates :publication_date, :dissemination_source, :presence => true
   validates :year, :mask => "9999", :allow_blank => true
-  validates :contract_id, :uniqueness => true, :allow_blank => true
+  validates :contract_id, :uniqueness => { :allow_blank => true }
 
   before_create :generate_number
 
