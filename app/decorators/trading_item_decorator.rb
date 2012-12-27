@@ -32,7 +32,7 @@ class TradingItemDecorator
   end
 
   def allows_offer_placing
-    must_have_minimum_reduction || must_be_open || pending_bid?
+    must_have_minimum_reduction || must_be_open || must_have_only_one_item_started
   end
 
   def bidder_position(index)
@@ -79,7 +79,7 @@ class TradingItemDecorator
     t('trading_item.messages.must_be_open')
   end
 
-  def pending_bid?
+  def must_have_only_one_item_started
     trading.trading_items.each do |item|
       if item.started? && !item.closed?
         if component != item
