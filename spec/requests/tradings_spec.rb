@@ -325,7 +325,7 @@ feature "Tradings" do
     choose "Declinou"
     click_button "Salvar"
 
-    fill_in "Valor da proposta", :with => "92,00"
+    fill_in "Valor da proposta", :with => "0,00"
     click_button "Salvar"
 
     choose "Declinou"
@@ -414,6 +414,111 @@ feature "Tradings" do
     within("tbody tr:nth-child(1)") do
       expect(page).to have_disabled_element "Fazer oferta", :reason => "O item já foi encerrado"
     end
+
+    click_link 'Ver histórico'
+
+    expect(page).to have_content "Item: 01.01.00001 - Antivirus"
+
+    within '.table-proposals' do
+      within "tbody tr:nth-child(1)" do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "103,00"
+        expect(page).to have_content "3,00"
+        expect(page).to have_content "Selecionado"
+      end
+
+      within "tbody tr:nth-child(2)" do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "102,00"
+        expect(page).to have_content "2,00"
+        expect(page).to have_content "Selecionado"
+      end
+
+      within "tbody tr:nth-child(3)" do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "101,00"
+        expect(page).to have_content "1,00"
+        expect(page).to have_content "Selecionado"
+      end
+
+      within "tbody tr:nth-child(4)" do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "100,00"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Selecionado"
+      end
+    end
+
+    within '.round-of-bids table:nth-of-type(1)' do
+      within "tr:nth-child(1)" do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "98,00"
+        expect(page).to have_content "6,52"
+        expect(page).to have_content "Com proposta"
+      end
+
+      within "tr:nth-child(2)" do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "96,00"
+        expect(page).to have_content "4,35"
+        expect(page).to have_content "Com proposta"
+      end
+
+      within "tr:nth-child(3)" do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "94,00"
+        expect(page).to have_content "2,17"
+        expect(page).to have_content "Com proposta"
+      end
+
+      within "tr:nth-child(4)" do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "92,00"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Com proposta"
+      end
+    end
+
+    within '.round-of-bids table:nth-of-type(2)' do
+      within "tr:nth-child(1)" do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "50,00"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Com proposta"
+      end
+
+      within "tr:nth-child(2)" do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "94,00"
+        expect(page).to have_content "2,17"
+        expect(page).to have_content "Declinou"
+      end
+
+      within "tr:nth-child(3)" do
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "96,00"
+        expect(page).to have_content "4,35"
+        expect(page).to have_content "Declinou"
+      end
+
+      within "tr:nth-child(4)" do
+        expect(page).to have_content "Gabriel Sobrinho"
+        expect(page).to have_content "92,00"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Declinou"
+      end
+    end
+
+    within '.table-negotiations' do
+      within "tbody tr:nth-child(1)" do
+        expect(page).to have_content "Nohup"
+        expect(page).to have_content "91,50"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Com proposta"
+      end
+    end
+
+    click_link 'Voltar'
 
     within("tbody tr:nth-child(2)") do
       click_link "Fazer oferta"

@@ -10,6 +10,9 @@
               :class => "button primary",
               'data-disabled' => resource.decorator.allows_offer_placing %>
         </td>
+        <td class="right">
+          <%= link_to "Ver histórico", offers_trading_item_path(resource), :class => "button primary" %>
+        </td>
       </tr>
     <% end %>
   </tbody>

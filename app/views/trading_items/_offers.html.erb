@@ -1,0 +1,59 @@
+<h3>Item: <%= resource %></h3>
+<h3>Fase: Propostas</h3>
+<table class="records table-proposals">
+  <thead>
+    <tr>
+      <th class="g-1-2">Empresa</th>
+      <th class="g-1-10">Valor</th>
+      <th class="g-1-10">%</th>
+      <th class="g-1-10">hora</th>
+      <th>situação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% resource.trading_item_bids.at_stage_of_proposals.reorder('amount DESC').each do |bid| %>
+      <tr>
+        <td class="g-1-2"><%= bid.bidder %></td>
+        <td class="g-1-10"><%= bid.decorator.amount %></td>
+        <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+        <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
+        <td><%= resource.decorator.situation_for_next_stage(bid.bidder) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="round-of-bids">
+  <% resource.trading_item_bids.at_stage_of_round_of_bids.reorder(:round).uniq.select(:round).each do |round| %>
+    <h3><%= "#{round.round}º Rodada de lances" %></h3>
+    <table class="records">
+      <tbody>
+        <% resource.trading_item_bids.at_round(round.round).at_stage_of_round_of_bids.reorder('amount DESC').each do |bid| %>
+          <tr>
+            <td class="g-1-2"><%= bid.bidder %></td>
+            <td class="g-1-10"><%= bid.decorator.last_valid_amount_by_bidder_and_item_and_round %></td>
+            <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+            <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
+            <td><%= bid.status_humanize %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<h3>Negociação</h3>
+<table class="records table-negotiations">
+  <tbody>
+    <% resource.trading_item_bids.at_stage_of_negotiation.reorder('amount DESC').each do |bid| %>
+      <tr>
+        <td class="g-1-2"><%= bid.bidder %></td>
+        <td class="g-1-10"><%= bid.decorator.amount %></td>
+        <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
+        <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
+        <td><%= bid.status_humanize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
