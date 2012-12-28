@@ -55,7 +55,7 @@ describe LicitationProcessesController do
     end
 
     it 'should assign waiting_for_open default value for status' do
-      post :create, :licitation_process => { :administrative_process_id => administrative_process.id }
+      post :create, :licitation_process => { :id => 1, :administrative_process_id => administrative_process.id }
 
       expect(assigns(:licitation_process).status).to eq LicitationProcessStatus::WAITING_FOR_OPEN
     end
@@ -119,7 +119,7 @@ describe LicitationProcessesController do
       it 'should redirect to administrative process edit page after update' do
         put :update, :id => licitation_process.id
 
-        expect(response).to redirect_to(edit_administrative_process_path(licitation_process.administrative_process))
+        expect(response).to redirect_to(edit_licitation_process_path(licitation_process, :administrative_process_id => licitation_process.administrative_process_id))
       end
 
       it 'delete classifications and call classification generator' do

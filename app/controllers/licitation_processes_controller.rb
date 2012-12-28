@@ -22,7 +22,9 @@ class LicitationProcessesController < CrudController
   end
 
   def create
-    create!{ edit_administrative_process_path(resource.administrative_process) }
+    create! do |success, failure|
+      success.html { redirect_to edit_licitation_process_path(resource, :administrative_process_id => resource.administrative_process_id) }
+    end
   end
 
   def update
@@ -37,7 +39,9 @@ class LicitationProcessesController < CrudController
 
       redirect_to licitation_process_path(resource)
     else
-      update!{ edit_administrative_process_path(resource.administrative_process) }
+      update! do |success, failure|
+        success.html { redirect_to edit_licitation_process_path(resource, :administrative_process_id => resource.administrative_process_id) }
+      end
     end
   end
 

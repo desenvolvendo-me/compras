@@ -692,8 +692,6 @@ feature "LicitationProcesses" do
 
     expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
 
-    click_link 'Editar processo licitatório'
-
     within_tab 'Principal' do
       expect(page).to have_disabled_field 'Processo'
       expect(page).to have_disabled_field 'Ano'
@@ -874,8 +872,6 @@ feature "LicitationProcesses" do
 
     expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
 
-    click_link 'Editar processo licitatório'
-
     within_tab 'Principal' do
       expect(page).to have_field 'Data do processo', :with => '21/03/2013'
       expect(page).to have_field 'Processo administrativo', :with => '1/2012'
@@ -970,8 +966,6 @@ feature "LicitationProcesses" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo Licitatório criado com sucesso.'
-
-    click_link "Editar processo licitatório"
 
     within_tab 'Principal' do
       expect(page).to have_field 'Processo', :with => last_licitation_process.process.succ.to_s
@@ -1077,8 +1071,6 @@ feature "LicitationProcesses" do
     click_button 'Salvar'
 
     expect(page).to have_notice 'Processo Licitatório editado com sucesso.'
-
-    click_link 'Editar processo licitatório'
 
     click_link 'Licitantes'
 
