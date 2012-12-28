@@ -37,7 +37,7 @@ class AdministrativeProcess < Compras::Model
            :to => :licitation_modality, :allow_nil => true
 
   validates :year, :date, :object_type, :responsible, :status, :description,
-            :judgment_form, :presence => true
+            :judgment_form, :licitation_modality, :presence => true
   validates :year, :mask => '9999', :allow_blank => true
   validates :administrative_process_budget_allocations, :no_duplication => :budget_allocation_id
 
