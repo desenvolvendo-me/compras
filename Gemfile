@@ -61,7 +61,7 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', '1.4.1'
+  gem 'shoulda-matchers', '1.4.2'
   gem 'machinist', '2.0'
   gem 'machinist-caching', '0.0.1'
   gem 'capybara', '1.1.2'
