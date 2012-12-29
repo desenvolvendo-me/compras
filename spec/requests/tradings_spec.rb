@@ -481,10 +481,10 @@ feature "Tradings" do
 
     within '.round-of-bids table:nth-of-type(2)' do
       within "tr:nth-child(1)" do
-        expect(page).to have_content "Wenderson Malheiros"
-        expect(page).to have_content "50,00"
-        expect(page).to have_content "0,00"
-        expect(page).to have_content "Com proposta"
+        expect(page).to have_content "Nobe"
+        expect(page).to have_content "96,00"
+        expect(page).to have_content "4,35"
+        expect(page).to have_content "Declinou"
       end
 
       within "tr:nth-child(2)" do
@@ -495,17 +495,17 @@ feature "Tradings" do
       end
 
       within "tr:nth-child(3)" do
-        expect(page).to have_content "Nobe"
-        expect(page).to have_content "96,00"
-        expect(page).to have_content "4,35"
-        expect(page).to have_content "Declinou"
-      end
-
-      within "tr:nth-child(4)" do
         expect(page).to have_content "Gabriel Sobrinho"
         expect(page).to have_content "92,00"
         expect(page).to have_content "0,00"
         expect(page).to have_content "Declinou"
+      end
+
+      within "tr:nth-child(4)" do
+        expect(page).to have_content "Wenderson Malheiros"
+        expect(page).to have_content "50,00"
+        expect(page).to have_content "0,00"
+        expect(page).to have_content "Com proposta"
       end
     end
 

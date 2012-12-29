@@ -32,6 +32,8 @@ class TradingItemBid < Compras::Model
   validate  :amount_limit_by_value, :if => :with_proposal?
   validate  :amount_limit_on_negotiation, :if => :validate_amount_on_negotiation?
 
+  before_create :amount_when_without_proposal
+
   scope :at_stage_of_proposals, lambda { where { stage.eq(TradingItemBidStage::PROPOSALS)} }
   scope :at_stage_of_round_of_bids, lambda { where { stage.eq(TradingItemBidStage::ROUND_OF_BIDS)} }
   scope :at_stage_of_negotiation, lambda { where { stage.eq(TradingItemBidStage::NEGOTIATION)} }
@@ -148,5 +150,11 @@ class TradingItemBid < Compras::Model
 
   def trading_item_lowest_proposal_value?
     trading_item_lowest_proposal_value > 0
+  end
+
+  def amount_when_without_proposal
+    return if self.with_proposal?
+
+    self.amount = last_valid_amount_by_bidder_and_item_and_round
   end
 end

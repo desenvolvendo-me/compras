@@ -32,7 +32,7 @@
         <% resource.trading_item_bids.at_round(round.round).at_stage_of_round_of_bids.reorder('amount DESC').each do |bid| %>
           <tr>
             <td class="g-1-2"><%= bid.bidder %></td>
-            <td class="g-1-10"><%= bid.decorator.last_valid_amount_by_bidder_and_item_and_round %></td>
+            <td class="g-1-10"><%= bid.decorator.amount %></td>
             <td class="g-1-10"><%= bid.decorator.percent_by_item_and_round %></td>
             <td class="g-1-10"><%= bid.decorator.created_at_second %></td>
             <td><%= bid.status_humanize %></td>

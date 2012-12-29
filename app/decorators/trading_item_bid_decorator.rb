@@ -30,14 +30,4 @@ class TradingItemBidDecorator
   def amount
     number_with_precision super if super
   end
-
-  def last_valid_amount_by_bidder_and_item_and_round
-    if component.amount > 0
-      amount
-    elsif super
-      number_with_precision(super)
-    else
-      0
-    end
-  end
 end

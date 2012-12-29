@@ -297,4 +297,25 @@ describe TradingItemBid do
       expect(subject.minimum_limit).to eq 9.99
     end
   end
+
+  describe '#amount_when_without_proposal' do
+    it "should continue with amount if bid is with_proposal" do
+      subject.stub(:with_proposal?).and_return(true)
+      subject.amount = 100
+
+      subject.run_callbacks(:create)
+
+      expect(subject.amount).to eq 100
+    end
+
+    it "should return last_valid_amount_by_bidder_and_item_and_round to amount if bid is not with_proposal" do
+      subject.stub(:with_proposal?).and_return(false)
+      subject.stub(:last_valid_amount_by_bidder_and_item_and_round).and_return(200)
+      subject.amount = 100
+
+      subject.run_callbacks(:create)
+
+      expect(subject.amount).to eq 200
+    end
+  end
 end
