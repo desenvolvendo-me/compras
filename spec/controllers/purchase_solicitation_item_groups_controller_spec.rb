@@ -32,10 +32,11 @@ describe PurchaseSolicitationItemGroupsController do
     end
 
     it 'should not update an item group when not editable' do
-      pending "It isn't raising exception in test, but it is in real life"
-      item_group = PurchaseSolicitationItemGroup.make!(:antivirus, :administrative_processes => [AdministrativeProcess.make!(:compra_de_cadeiras)])
+      pending "It isn't raising exception in test, but it is in real life" do
+        item_group = PurchaseSolicitationItemGroup.make!(:antivirus, :administrative_processes => [AdministrativeProcess.make!(:compra_de_cadeiras)])
 
-      expect { put :update, :id => item_group.id }.to raise_exception(Exceptions::Unauthorized)
+        expect { put :update, :id => item_group.id }.to raise_exception(Exceptions::Unauthorized)
+      end
     end
   end
 
