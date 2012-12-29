@@ -56,10 +56,6 @@ group :development, :test do
   gem 'rspec-rails', '2.12.0'
 end
 
-group :development do
-  gem 'rails-footnotes', '>= 3.7.5.rc4'
-end
-
 group :test do
   gem 'shoulda-matchers', '1.4.2'
   gem 'machinist', '2.0'

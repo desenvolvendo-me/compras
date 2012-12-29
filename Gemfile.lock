@@ -215,8 +215,6 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
-    rails-footnotes (3.7.8)
-      rails (>= 3.0.0)
     railties (3.2.8)
       actionpack (= 3.2.8)
       activesupport (= 3.2.8)
@@ -327,7 +325,6 @@ DEPENDENCIES
   pry (= 0.9.10)
   puma (= 1.6.3)
   rails (= 3.2.8)
-  rails-footnotes (>= 3.7.5.rc4)
   responders (= 0.6.4)
   rspec-rails (= 2.12.0)
   sentry-raven!
